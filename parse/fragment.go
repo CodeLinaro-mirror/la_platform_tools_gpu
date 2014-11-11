@@ -53,3 +53,7 @@ func (n *fragment) WriteTo(w io.Writer) error {
 	_, err := io.WriteString(w, n.Token().String())
 	return err
 }
+
+func NewFragment(token Token) Fragment {
+    return &fragment{token}
+}

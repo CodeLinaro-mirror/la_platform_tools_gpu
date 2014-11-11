@@ -148,16 +148,12 @@ func b(nodes ...interface{}) *Branch {
 	return n
 }
 
-func space(tok string) *fragment {
-	s := &fragment{}
-	s.SetToken(newStringToken(tok))
-	return s
+func space(tok string) Fragment {
+	return NewFragment(newStringToken(tok))
 }
 
-func c(tok string) *fragment {
-	s := &fragment{}
-	s.SetToken(newStringToken(tok))
-	return s
+func c(tok string) Fragment {
+	return NewFragment(newStringToken(tok))
 }
 
 func s(list ...interface{}) Separator {
