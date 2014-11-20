@@ -1,0 +1,63 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.+'
+  }
+}
+
+def goPath = System.getenv('GOPATH')
+def temporaryDirectory = file(goPath+'/pkg/build').absolutePath
+def outputDirectory = file(goPath+'/bin')
+
+apply plugin: 'com.android.application'
+apply plugin: 'cpp'
+
+buildDir temporaryDirectory
+
+defaultTasks 'ndkBuild'
+
+android {
+  compileSdkVersion 20
+  buildToolsVersion '20.0.0'
+  defaultConfig.targetSdkVersion 20
+
+  buildTypes {
+    debug {
+      debuggable true
+      jniDebuggable true
+    }
+    release {
+      debuggable false
+      jniDebuggable false
+    }
+  }
+
+  task ndkBuild(type: Exec) {
+    def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+    commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+                'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/$(TARGET_ARCH_ABI)', '-s'
+  }
+
+  task ndkClean(type: Exec) {
+    def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+    commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+                'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/$(TARGET_ARCH_ABI)', '-s', 'clean'
+  }
+
+  tasks.withType(JavaCompile) { compileTask ->
+    compileTask.dependsOn ndkBuild
+  }
+
+  clean.dependsOn ndkClean
+}
+
+def osFamily() {
+  if (Os.isFamily(Os.FAMILY_MAC)) return 'mac'
+  if (Os.isFamily(Os.FAMILY_UNIX)) return 'linux'
+  if (Os.isFamily(Os.FAMILY_WINDOWS)) return 'windows'
+  return null
+}
