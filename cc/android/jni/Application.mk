@@ -1,6 +1,6 @@
 APP_ABI := armeabi-v7a
 APP_CPPFLAGS += -std=c++11
-APP_PLATFORM := android-19
+APP_PLATFORM := android-21
 APP_STL := stlport_static
 NDK_TOOLCHAIN_VERSION := clang
 APP_OPTIM := debug
