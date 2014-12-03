@@ -20,7 +20,8 @@ endif
 SRC_FILE_LIST          := \
     $(wildcard $(LOCAL_PATH)/../../src/gfxspy/libcutils/*.c) \
     $(wildcard $(LOCAL_PATH)/../../src/gfxspy/libutils/*.cpp) \
-    $(wildcard $(LOCAL_PATH)/../../src/gfxspy/gltrace.pb.cpp)
+    $(wildcard $(LOCAL_PATH)/../../src/gfxspy/EGL/*.cpp) \
+    $(wildcard $(LOCAL_PATH)/../../src/gfxspy/*.cpp)
 LOCAL_MODULE           := gfxspy
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 LOCAL_CXXFLAGS         := \

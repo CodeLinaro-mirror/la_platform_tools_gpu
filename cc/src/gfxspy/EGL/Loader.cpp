@@ -24,18 +24,61 @@
 #include <dirent.h>
 
 #include <cutils/log.h>
-#include <cutils/properties.h>
 
 #include <EGL/egl.h>
 
 #include "../glestrace.h"
 
-#include "egldefs.h"
-#include "Loader.h"
+#include "EGL/egldefs.h"
+#include "EGL/Loader.h"
 
 // ----------------------------------------------------------------------------
 namespace android {
 // ----------------------------------------------------------------------------
+
+static pthread_mutex_t sLogPrintMutex = PTHREAD_MUTEX_INITIALIZER;
+static nsecs_t sLogPrintTime = 0;
+#define NSECS_DURATION 1000000000
+
+void gl_unimplemented() {
+    bool printLog = false;
+    nsecs_t now = systemTime();
+    pthread_mutex_lock(&sLogPrintMutex);
+    if ((now - sLogPrintTime) > NSECS_DURATION) {
+        sLogPrintTime = now;
+        printLog = true;
+    }
+    pthread_mutex_unlock(&sLogPrintMutex);
+    if (printLog) {
+        ALOGE("called unimplemented OpenGL ES API");
+    }
+}
+
+void gl_noop() {
+}
+
+
+// ----------------------------------------------------------------------------
+// GL / EGL hooks
+// ----------------------------------------------------------------------------
+
+#undef GL_ENTRY
+#undef EGL_ENTRY
+#define GL_ENTRY(_r, _api, ...) #_api,
+#define EGL_ENTRY(_r, _api, ...) #_api,
+
+    char const * const gl_names[] = {
+#include "../entries.in"
+        NULL
+    };
+
+    char const * const egl_names[] = {
+#include "egl_entries.in"
+        NULL
+    };
+
+#undef GL_ENTRY
+#undef EGL_ENTRY
 
 
 /*
@@ -62,57 +105,6 @@ namespace android {
  */
 
 ANDROID_SINGLETON_STATIC_INSTANCE( Loader )
-
-/* This function is called to check whether we run inside the emulator,
- * and if this is the case whether GLES GPU emulation is supported.
- *
- * Returned values are:
- *  -1   -> not running inside the emulator
- *   0   -> running inside the emulator, but GPU emulation not supported
- *   1   -> running inside the emulator, GPU emulation is supported
- *          through the "emulation" config.
- */
-static int
-checkGlesEmulationStatus(void)
-{
-    /* We're going to check for the following kernel parameters:
-     *
-     *    qemu=1                      -> tells us that we run inside the emulator
-     *    android.qemu.gles=<number>  -> tells us the GLES GPU emulation status
-     *
-     * Note that we will return <number> if we find it. This let us support
-     * more additionnal emulation modes in the future.
-     */
-    char  prop[PROPERTY_VALUE_MAX];
-    int   result = -1;
-
-    /* First, check for qemu=1 */
-    property_get("ro.kernel.qemu",prop,"0");
-    if (atoi(prop) != 1)
-        return -1;
-
-    /* We are in the emulator, get GPU status value */
-    property_get("ro.kernel.qemu.gles",prop,"0");
-    return atoi(prop);
-}
-
-// ----------------------------------------------------------------------------
-
-static char const * getProcessCmdline() {
-    long pid = getpid();
-    char procPath[128];
-    snprintf(procPath, 128, "/proc/%ld/cmdline", pid);
-    FILE * file = fopen(procPath, "r");
-    if (file) {
-        static char cmdline[256];
-        char *str = fgets(cmdline, sizeof(cmdline) - 1, file);
-        fclose(file);
-        if (str) {
-            return cmdline;
-        }
-    }
-    return NULL;
-}
 
 // ----------------------------------------------------------------------------
 
@@ -158,7 +150,7 @@ Loader::Loader()
 }
 
 Loader::~Loader() {
-    GLTrace_stop();
+    gltrace::GLTrace_stop();
 }
 
 static void* load_wrapper(const char* path) {
@@ -171,21 +163,6 @@ void* Loader::open(egl_connection_t* cnx)
 {
     void* dso;
     driver_t* hnd = 0;
-
-    dso = load_driver("GLES", cnx, EGL | GLESv1_CM | GLESv2);
-    if (dso) {
-        hnd = new driver_t(dso);
-    } else {
-        // Always load EGL first
-        dso = load_driver("EGL", cnx, EGL);
-        if (dso) {
-            hnd = new driver_t(dso);
-            hnd->set( load_driver("GLESv1_CM", cnx, GLESv1_CM), GLESv1_CM );
-            hnd->set( load_driver("GLESv2",    cnx, GLESv2),    GLESv2 );
-        }
-    }
-
-    LOG_ALWAYS_FATAL_IF(!hnd, "couldn't find an OpenGL ES implementation");
 
 #if defined(__LP64__)
     cnx->libEgl   = load_wrapper("/system/lib64/libEGL.so");
@@ -201,6 +178,21 @@ void* Loader::open(egl_connection_t* cnx)
 
     LOG_ALWAYS_FATAL_IF(!cnx->libGles2 || !cnx->libGles1,
             "couldn't load system OpenGL ES wrapper libraries");
+
+    dso = load_driver("GLES", cnx, EGL | GLESv1_CM | GLESv2);
+    if (dso) {
+        hnd = new driver_t(dso);
+    } else {
+        // Always load EGL first
+        dso = load_driver("EGL", cnx, EGL);
+        if (dso) {
+            hnd = new driver_t(dso);
+            hnd->set( load_driver("GLESv1_CM", cnx, GLESv1_CM), GLESv1_CM );
+            hnd->set( load_driver("GLESv2",    cnx, GLESv2),    GLESv2 );
+        }
+    }
+
+    LOG_ALWAYS_FATAL_IF(!hnd, "couldn't find an OpenGL ES implementation");
 
     return (void*)hnd;
 }
@@ -320,19 +312,6 @@ void *Loader::load_driver(const char* kind,
         static bool find(String8& result,
                 const String8& pattern, const char* const search, bool exact) {
 
-            // in the emulator case, we just return the hardcoded name
-            // of the software renderer.
-            if (checkGlesEmulationStatus() == 0) {
-                ALOGD("Emulator without GPU support detected. "
-                      "Fallback to software renderer.");
-#if defined(__LP64__)
-                result.setTo("/system/lib64/egl/libGLES_android.so");
-#else
-                result.setTo("/system/lib/egl/libGLES_android.so");
-#endif
-                return true;
-            }
-
             if (exact) {
                 String8 absolutePath;
                 absolutePath.appendFormat("%s/%s.so", search, pattern.string());
@@ -378,6 +357,12 @@ void *Loader::load_driver(const char* kind,
     }
     const char* const driver_absolute_path = absolutePath.string();
 
+    // This loads the vender version of the GLES driver.
+    // TODO: Remove all the code associated with loading the vendor
+    // driver.  This version of gltrace (gfxspy) never uses the vendor
+    // version of the driver.  Deleting the vendor driver code
+    // requires some modifications to code that calls this function
+    // (and probably a few other places).
     void* dso = dlopen(driver_absolute_path, RTLD_NOW | RTLD_LOCAL);
     if (dso == 0) {
         const char* err = dlerror();
@@ -388,6 +373,8 @@ void *Loader::load_driver(const char* kind,
     ALOGD("loaded %s", driver_absolute_path);
 
     if (mask & EGL) {
+        // Use the system version of EGL, not the vendor version.
+        void* dso = cnx->libEgl;
         getProcAddress = (getProcAddressType)dlsym(dso, "eglGetProcAddress");
 
         ALOGE_IF(!getProcAddress,
@@ -414,6 +401,8 @@ void *Loader::load_driver(const char* kind,
     }
 
     if (mask & GLESv1_CM) {
+        // Use the system version of the .so, and not the vendor version.
+        void* dso = cnx->libGles1;
         init_api(dso, gl_names,
             (__eglMustCastToProperFunctionPointerType*)
                 &cnx->hooks[egl_connection_t::GLESv1_INDEX]->gl,
@@ -421,7 +410,9 @@ void *Loader::load_driver(const char* kind,
     }
 
     if (mask & GLESv2) {
-      init_api(dso, gl_names,
+        // Use the system version of the .so, and not the vendor version.
+        void* dso = cnx->libGles2;
+        init_api(dso, gl_names,
             (__eglMustCastToProperFunctionPointerType*)
                 &cnx->hooks[egl_connection_t::GLESv2_INDEX]->gl,
             getProcAddress);
@@ -431,5 +422,5 @@ void *Loader::load_driver(const char* kind,
 }
 
 // ----------------------------------------------------------------------------
-}; // namespace android
+} // namespace android
 // ----------------------------------------------------------------------------

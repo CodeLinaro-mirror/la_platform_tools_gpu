@@ -24,7 +24,16 @@ void GLTrace_eglCreateContext(int version, int contextId);
 void GLTrace_eglMakeCurrent(int contextId);
 void GLTrace_eglSwapBuffers(void *dpy, void *draw);
 
-};
-};
+// Forward declare the EGL tracing functions.
+#undef TRACE_EGL
+#define TRACE_EGL(_type, _api, _args, _argList, ...)                           \
+    EGLAPI _type EGLTrace_wrapper_ ## _api _args;
+
+#include "egl_trace.in"
+
+#undef TRACE_EGL
+
+}
+}
 
 #endif

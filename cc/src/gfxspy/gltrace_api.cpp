@@ -30959,5 +30959,5 @@ void GLTrace_glClipPlanexIMG(GLenum p, const GLfixed * eqn) {
 }
 
 
-}; // namespace gltrace
-}; // namespace android
+} // namespace gltrace
+} // namespace android

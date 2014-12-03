@@ -147,7 +147,10 @@ BufferedOutputStream::BufferedOutputStream(TCPStream *stream, size_t bufferSize)
 }
 
 int BufferedOutputStream::flush() {
-    if (mStringBuffer.size() == 0) {
+    if (mStringBuffer.size() == 0 || mStream == NULL) {
+        // Clear the data when we're not streaming it so the buffer
+        // doesn't continue to grow.
+        mStringBuffer.clear();
         return 0;
     }
 
@@ -173,5 +176,5 @@ int BufferedOutputStream::send(GLMessage *msg) {
     return 0;
 }
 
-};  // namespace gltrace
-};  // namespace android
+}  // namespace gltrace
+}  // namespace android

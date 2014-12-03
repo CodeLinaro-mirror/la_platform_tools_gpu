@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
+#include <cutils/log.h>
+
 #include "hooks.h"
 #include "gltrace_api.h"
+#include "gltrace_context.h"
 #include "gltrace_hooks.h"
+#include "glestrace.h"
+#include "gltrace_egl.h"
 
 namespace android {
 namespace gltrace {
 
 // Hook up all the GLTrace functions
 #define GL_ENTRY(_r, _api, ...) GLTrace_ ## _api,
-EGLAPI gl_hooks_t gHooksDebug = {
+gl_hooks_t gHooksDebug = {
     {
         #include "entries.in"
     },
@@ -37,5 +42,45 @@ gl_hooks_t *getGLHooks() {
     return &gHooksDebug;
 }
 
-};
-};
+}
+}
+
+///////////////////////////////////////////////////////////////////////////
+// GL impl
+///////////////////////////////////////////////////////////////////////////
+
+#undef TRACE_GL_VOID
+#undef TRACE_GL
+#undef TRACE_EGL
+
+// These macros generate wrapper functions with the same signatures as the
+// OpenGL and EGL API.  These wrappers simply call the tracing version
+// of the corresponding function.
+#define TRACE_GL_VOID(_api, _args, _argList, ...)                              \
+    EGLAPI void _api _args {                                                   \
+        /* ALOGD(#_api "() stub..."); */                                       \
+        android::gltrace::GLTrace_ ## _api _argList;                           \
+    }
+
+#define TRACE_GL(_type, _api, _args, _argList, ...)                            \
+    EGLAPI _type _api _args {                                                  \
+        /* ALOGD(#_api "() stub..."); */                                       \
+        return android::gltrace::GLTrace_ ## _api _argList;                    \
+    }
+
+#define TRACE_EGL(_type, _api, _args, _argList, ...)                           \
+    EGLAPI _type _api _args {                                                  \
+        /* ALOGD(#_api "() stub..."); */                                       \
+        return android::gltrace::EGLTrace_wrapper_ ## _api _argList;           \
+    }
+
+extern "C" {
+#ifdef GENERATE_API_WRAPPERS
+#include "trace.in"
+#include "egl_trace.in"
+#endif
+}
+
+#undef TRACE_GL_VOID
+#undef TRACE_GL
+#undef TRACE_EGL

@@ -110,4 +110,4 @@ int32_t SharedBuffer::release(uint32_t flags) const
 }
 
 
-}; // namespace android
+} // namespace android

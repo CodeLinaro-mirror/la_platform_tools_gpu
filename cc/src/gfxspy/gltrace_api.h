@@ -763,5 +763,5 @@ void GLTrace_glGetTexGenivOES(GLenum coord, GLenum pname, GLint * params);
 void GLTrace_glClipPlanefIMG(GLenum p, const GLfloat * eqn);
 void GLTrace_glClipPlanexIMG(GLenum p, const GLfixed * eqn);
 
-}; // namespace gltrace
-}; // namespace android
+} // namespace gltrace
+} // namespace android

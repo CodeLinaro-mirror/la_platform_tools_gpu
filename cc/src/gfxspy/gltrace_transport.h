@@ -85,7 +85,7 @@ public:
  */
 int acceptClientConnection(char *sockName);
 
-};
-};
+}
+}
 
 #endif

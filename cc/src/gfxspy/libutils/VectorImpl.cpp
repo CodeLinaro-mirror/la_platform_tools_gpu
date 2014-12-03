@@ -633,5 +633,5 @@ ssize_t SortedVectorImpl::remove(const void* item)
 
 /*****************************************************************************/
 
-}; // namespace android
+} // namespace android
 

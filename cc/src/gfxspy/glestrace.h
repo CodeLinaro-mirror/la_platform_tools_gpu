@@ -22,12 +22,13 @@
 #include "hooks.h"
 
 namespace android {
+namespace gltrace {
 
 /* Hooks to be called by "interesting" EGL functions. */
 void GLTrace_eglCreateContext(int version, EGLContext c);
 void GLTrace_eglMakeCurrent(unsigned version, gl_hooks_t *hooks, EGLContext c);
 void GLTrace_eglReleaseThread();
-void GLTrace_eglSwapBuffers(void*, void*);
+void GLTrace_eglSwapBuffers_internal(void*, void*);
 
 /* Start and stop GL Tracing. */
 int GLTrace_start();
@@ -36,6 +37,7 @@ void GLTrace_stop();
 /* Obtain the gl_hooks structure filled with the trace implementation for all GL functions. */
 gl_hooks_t *GLTrace_getGLHooks();
 
-};
+}  // namespace gltrace
+}  // namespace android
 
 #endif

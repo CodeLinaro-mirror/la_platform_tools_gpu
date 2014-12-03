@@ -416,4 +416,4 @@ status_t String16::remove(size_t len, size_t begin)
     return NO_MEMORY;
 }
 
-}; // namespace android
+} // namespace android

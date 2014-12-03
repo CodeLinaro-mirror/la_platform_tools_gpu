@@ -27,8 +27,6 @@
 namespace android {
 namespace gltrace {
 
-using ::android::gl_hooks_t;
-
 enum FBBinding {CURRENTLY_BOUND_FB, FB0};
 
 class GLTraceState;
@@ -56,10 +54,6 @@ class GLTraceContext {
     bool mVersionParsed;        /* True if major and minor versions have been parsed. */
     GLTraceState *mState;       /* parent GL Trace state (for per process GL Trace State Info) */
 
-    void *fbcontents;           /* memory area to read framebuffer contents */
-    void *fbcompressed;         /* destination for lzf compressed framebuffer */
-    unsigned fbcontentsSize;    /* size of fbcontents & fbcompressed buffers */
-
     BufferedOutputStream *mBufferedOutputStream; /* stream where trace info is sent */
 
     /* list of element array buffers in use. */
@@ -68,9 +62,8 @@ class GLTraceContext {
     /* Parses the GL version string returned from glGetString(GL_VERSION) to get find the major and
        minor versions of the GLES API. The context must be current before calling. */
     void parseGlesVersion();
-    void resizeFBMemory(unsigned minSize);
 public:
-    gl_hooks_t *hooks;
+    ::android::gl_hooks_t *hooks;
 
     GLTraceContext(int id, int version, GLTraceState *state, BufferedOutputStream *stream);
     int getId();
@@ -78,9 +71,6 @@ public:
     int getVersionMajor();
     int getVersionMinor();
     GLTraceState *getGlobalTraceState();
-    void getCompressedFB(void **fb, unsigned *fbsize,
-                            unsigned *fbwidth, unsigned *fbheight,
-                            FBBinding fbToRead);
 
     // Methods to work with element array buffers
     void bindBuffer(GLuint bufferId, GLvoid *data, GLsizeiptr size);
@@ -99,8 +89,6 @@ class GLTraceState {
 
     /* Options controlling additional data to be collected on
        certain trace calls. */
-    bool mCollectFbOnEglSwap;
-    bool mCollectFbOnGlDraw;
     bool mCollectTextureDataOnGlTexImage;
     pthread_rwlock_t mTraceOptionsRwLock;
 
@@ -117,13 +105,9 @@ public:
     TCPStream *getStream();
 
     /* Methods to set trace options. */
-    void setCollectFbOnEglSwap(bool en);
-    void setCollectFbOnGlDraw(bool en);
     void setCollectTextureDataOnGlTexImage(bool en);
 
     /* Methods to retrieve trace options. */
-    bool shouldCollectFbOnEglSwap();
-    bool shouldCollectFbOnGlDraw();
     bool shouldCollectTextureDataOnGlTexImage();
 };
 
@@ -131,7 +115,7 @@ void setupTraceContextThreadSpecific(GLTraceContext *context);
 GLTraceContext *getGLTraceContext();
 void releaseContext();
 
-};
-};
+}
+}
 
 #endif

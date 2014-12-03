@@ -170,18 +170,6 @@ void fixup_glGetString(GLMessage *glmsg, void *pointersToFixup[]) {
     }
 }
 
-/* Add the contents of the framebuffer to the protobuf message */
-void fixup_addFBContents(GLTraceContext *context, GLMessage *glmsg, FBBinding fbToRead) {
-    void *fbcontents;
-    unsigned fbsize, fbwidth, fbheight;
-    context->getCompressedFB(&fbcontents, &fbsize, &fbwidth, &fbheight, fbToRead);
-
-    GLMessage_FrameBuffer *fb = glmsg->mutable_fb();
-    fb->set_width(fbwidth);
-    fb->set_height(fbheight);
-    fb->add_contents(fbcontents, fbsize);
-}
-
 /** Common fixup routing for glTexImage2D & glTexSubImage2D. */
 void fixup_glTexImage(GLTraceContext *context, int widthIndex, int heightIndex, GLMessage *glmsg,
                         void *dataSrc) {
@@ -714,11 +702,6 @@ void trace_VertexAttribPointerDataForGlDrawElements(GLTraceContext *context, GLM
 void fixup_glDrawArrays(GLTraceContext *context, GLMessage *glmsg) {
     // Trace all vertex attribute data stored in client space.
     trace_VertexAttribPointerDataForGlDrawArrays(context, glmsg);
-
-    // Attach the FB if requested
-    if (context->getGlobalTraceState()->shouldCollectFbOnGlDraw()) {
-        fixup_addFBContents(context, glmsg, CURRENTLY_BOUND_FB);
-    }
 }
 
 void fixup_glDrawElements(GLTraceContext *context, GLMessage *glmsg, void *pointersToFixup[]) {
@@ -745,11 +728,6 @@ void fixup_glDrawElements(GLTraceContext *context, GLMessage *glmsg, void *point
             }
             arg_indices->add_intvalue(index);
         }
-    }
-
-    // Attach the FB if requested
-    if (context->getGlobalTraceState()->shouldCollectFbOnGlDraw()) {
-        fixup_addFBContents(context, glmsg, CURRENTLY_BOUND_FB);
     }
 }
 
@@ -916,5 +894,5 @@ void fixupGLMessage(GLTraceContext *context, nsecs_t wallStart, nsecs_t wallEnd,
     }
 }
 
-};
-};
+}
+}

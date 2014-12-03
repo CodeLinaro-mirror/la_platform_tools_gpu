@@ -22,11 +22,9 @@
 namespace android {
 namespace gltrace {
 
-using ::android::gl_hooks_t;
+::android::gl_hooks_t* getGLHooks();
 
-gl_hooks_t *getGLHooks();
-
-};
-};
+}
+}
 
 #endif

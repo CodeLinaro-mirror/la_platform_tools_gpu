@@ -669,4 +669,4 @@ String8& String8::convertToResPath()
     return *this;
 }
 
-}; // namespace android
+} // namespace android

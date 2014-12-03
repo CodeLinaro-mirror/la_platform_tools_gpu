@@ -17,16 +17,12 @@
 #include <pthread.h>
 #include <cutils/log.h>
 
-extern "C" {
-#include "liblzf/lzf.h"
-}
-
 #include "gltrace_context.h"
 
 namespace android {
 namespace gltrace {
 
-using ::android::gl_hooks_t;
+::android::gl_hooks_t *loadHooks();
 
 static pthread_key_t sTLSKey = -1;
 static pthread_once_t sPthreadOnceKey = PTHREAD_ONCE_INIT;
@@ -36,7 +32,17 @@ void createTLSKey() {
 }
 
 GLTraceContext *getGLTraceContext() {
-    return (GLTraceContext*) pthread_getspecific(sTLSKey);
+#if !defined(GLTRACE_LOAD_HOOKS_AT_STARTUP)
+    // Some EGL functions can be called before the context is
+    // created (e.g. eglGetProcAddress()), so we can't rely on
+    // the context constructor to load the hooks.
+    // TODO: Do something smarter to initialize the hooks
+    // so we don't pay this overhead for each function call
+    // (or force GLTRACE_LOAD_HOOKS_AT_STARTUP to always be on).
+    loadHooks();
+#endif
+    GLTraceContext* ctx = (GLTraceContext*) pthread_getspecific(sTLSKey);
+    return ctx;
 }
 
 void setGLTraceContext(GLTraceContext *c) {
@@ -60,8 +66,6 @@ GLTraceState::GLTraceState(TCPStream *stream) {
     mTraceContextIds = 0;
     mStream = stream;
 
-    mCollectFbOnEglSwap = false;
-    mCollectFbOnGlDraw = false;
     mCollectTextureDataOnGlTexImage = false;
     pthread_rwlock_init(&mTraceOptionsRwLock, NULL);
 }
@@ -90,24 +94,8 @@ bool GLTraceState::safeGetValue(bool *ptr, pthread_rwlock_t *lock) {
     return value;
 }
 
-void GLTraceState::setCollectFbOnEglSwap(bool en) {
-    safeSetValue(&mCollectFbOnEglSwap, en, &mTraceOptionsRwLock);
-}
-
-void GLTraceState::setCollectFbOnGlDraw(bool en) {
-    safeSetValue(&mCollectFbOnGlDraw, en, &mTraceOptionsRwLock);
-}
-
 void GLTraceState::setCollectTextureDataOnGlTexImage(bool en) {
     safeSetValue(&mCollectTextureDataOnGlTexImage, en, &mTraceOptionsRwLock);
-}
-
-bool GLTraceState::shouldCollectFbOnEglSwap() {
-    return safeGetValue(&mCollectFbOnEglSwap, &mTraceOptionsRwLock);
-}
-
-bool GLTraceState::shouldCollectFbOnGlDraw() {
-    return safeGetValue(&mCollectFbOnGlDraw, &mTraceOptionsRwLock);
 }
 
 bool GLTraceState::shouldCollectTextureDataOnGlTexImage() {
@@ -140,8 +128,7 @@ GLTraceContext::GLTraceContext(int id, int version, GLTraceState *state,
     mBufferedOutputStream(stream),
     mElementArrayBuffers(DefaultKeyedVector<GLuint, ElementArrayBuffer*>(NULL))
 {
-    fbcontents = fbcompressed = NULL;
-    fbcontentsSize = 0;
+    hooks = loadHooks();
 }
 
 int GLTraceContext::getId() {
@@ -184,57 +171,6 @@ void GLTraceContext::parseGlesVersion() {
     }
     mVersionMajor = major;
     mVersionMinor = minor;
-}
-
-void GLTraceContext::resizeFBMemory(unsigned minSize) {
-    if (fbcontentsSize >= minSize) {
-        return;
-    }
-
-    if (fbcontents != NULL) {
-        free(fbcontents);
-        free(fbcompressed);
-    }
-
-    fbcontents = malloc(minSize);
-    fbcompressed = malloc(minSize);
-
-    fbcontentsSize = minSize;
-}
-
-/** obtain a pointer to the compressed framebuffer image */
-void GLTraceContext::getCompressedFB(void **fb, unsigned *fbsize, unsigned *fbwidth, 
-                            unsigned *fbheight, FBBinding fbToRead) {
-    int viewport[4] = {};
-    hooks->gl.glGetIntegerv(GL_VIEWPORT, viewport);
-    unsigned fbContentsSize = viewport[2] * viewport[3] * 4;
-
-    resizeFBMemory(fbContentsSize);
-
-    // switch current framebuffer binding if necessary
-    GLint currentFb = -1;
-    bool fbSwitched = false;
-    if (fbToRead != CURRENTLY_BOUND_FB) {
-        hooks->gl.glGetIntegerv(GL_FRAMEBUFFER_BINDING, &currentFb);
-
-        if (currentFb != 0) {
-            hooks->gl.glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            fbSwitched = true;
-        }
-    }
-
-    hooks->gl.glReadPixels(viewport[0], viewport[1], viewport[2], viewport[3],
-                                        GL_RGBA, GL_UNSIGNED_BYTE, fbcontents);
-
-    // switch back to previously bound buffer if necessary
-    if (fbSwitched) {
-        hooks->gl.glBindFramebuffer(GL_FRAMEBUFFER, currentFb);
-    }
-
-    *fbsize = lzf_compress(fbcontents, fbContentsSize, fbcompressed, fbContentsSize);
-    *fb = fbcompressed;
-    *fbwidth = viewport[2];
-    *fbheight = viewport[3];
 }
 
 void GLTraceContext::traceGLMessage(GLMessage *msg) {
@@ -319,5 +255,5 @@ GLsizeiptr ElementArrayBuffer::getSize() {
     return mSize;
 }
 
-}; // namespace gltrace
-}; // namespace android
+} // namespace gltrace
+} // namespace android

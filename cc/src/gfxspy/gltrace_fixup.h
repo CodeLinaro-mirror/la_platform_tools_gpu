@@ -28,9 +28,8 @@ namespace gltrace {
 void fixupGLMessage(GLTraceContext *curContext, nsecs_t wallStart, nsecs_t wallEnd,
                                                 nsecs_t threadStart, nsecs_t threadEnd,
                                                 GLMessage *message, void *pointersToFixup[]);
-void fixup_addFBContents(GLTraceContext *curContext, GLMessage *message, FBBinding fbToRead);
 
-};
-};
+}
+}
 
 #endif
