@@ -202,6 +202,7 @@ func (r *Reader) AlphaNumeric() bool {
 	return true
 }
 
+// NewReader creates a new reader which reads from the supplied string.
 func NewReader(data string) *Reader {
 	r := &Reader{}
 	r.setData(data)
