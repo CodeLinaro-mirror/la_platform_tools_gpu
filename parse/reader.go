@@ -201,3 +201,9 @@ func (r *Reader) AlphaNumeric() bool {
 	r.cursor = i
 	return true
 }
+
+func NewReader(data string) *Reader {
+	r := &Reader{}
+	r.setData(data)
+	return r
+}
