@@ -63,7 +63,7 @@ func maybeValue(p *Parser, in *Branch) interface{} {
 		a := &arrayNode{}
 		p.ParseBranch(in, a.parse)
 		return a
-	case p.Numeric():
+	case p.Numeric() != NotNumeric:
 		var n numberNode
 		p.ParseLeaf(in, n.consume)
 		return &n
