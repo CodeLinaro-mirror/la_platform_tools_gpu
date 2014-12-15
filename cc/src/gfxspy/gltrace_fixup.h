@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-#ifndef __GLTRACE_FIXUP_H_
-#define __GLTRACE_FIXUP_H_
+#ifndef ANDROID_GLTRACE_FIXUP_H
+#define ANDROID_GLTRACE_FIXUP_H
 
-#include <utils/Timers.h>
-
-#include "gltrace.pb.h"
 #include "gltrace_context.h"
 
 namespace android {
 namespace gltrace {
 
 void fixupGLMessage(GLTraceContext *curContext, nsecs_t wallStart, nsecs_t wallEnd,
-                                                nsecs_t threadStart, nsecs_t threadEnd,
-                                                GLMessage *message, void *pointersToFixup[]);
+                    nsecs_t threadStart, nsecs_t threadEnd, GLMessage *message,
+                    void *pointersToFixup[]);
 
-}
-}
+} // end of namespace gltrace
+} // end of namespace android
 
-#endif
+#endif // ANDROID_GLTRACE_FIXUP_H

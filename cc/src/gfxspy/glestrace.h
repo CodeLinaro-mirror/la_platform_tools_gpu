@@ -16,8 +16,8 @@
  * This file declares the API provided by the glestrace library.
  */
 
-#ifndef _GLES_TRACE_H_
-#define _GLES_TRACE_H_
+#ifndef ANDROID_GLESTRACE_H
+#define ANDROID_GLESTRACE_H
 
 #include "hooks.h"
 
@@ -26,7 +26,7 @@ namespace gltrace {
 
 /* Hooks to be called by "interesting" EGL functions. */
 void GLTrace_eglCreateContext(int version, EGLContext c);
-void GLTrace_eglMakeCurrent(unsigned version, gl_hooks_t *hooks, EGLContext c);
+void GLTrace_eglMakeCurrent(EGLContext c);
 void GLTrace_eglReleaseThread();
 void GLTrace_eglSwapBuffers_internal(void*, void*);
 
@@ -37,7 +37,7 @@ void GLTrace_stop();
 /* Obtain the gl_hooks structure filled with the trace implementation for all GL functions. */
 gl_hooks_t *GLTrace_getGLHooks();
 
-}  // namespace gltrace
-}  // namespace android
+}  // end of namespace gltrace
+}  // end of namespace android
 
-#endif
+#endif // ANDROID_GLESTRACE_H

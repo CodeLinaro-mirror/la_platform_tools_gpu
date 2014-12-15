@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-#include <cutils/log.h>
-#include <utils/Timers.h>
-
 #include "gltrace.pb.h"
 #include "gltrace_context.h"
 #include "gltrace_fixup.h"
 #include "gltrace_transport.h"
+
+#include <cutils/log.h>
 
 namespace android {
 namespace gltrace {
@@ -45,7 +44,7 @@ void GLTrace_eglCreateContext(int version, int contextId) {
     arg_context->add_intvalue(contextId);
 
     // set start time and duration
-    glmessage.set_start_time(systemTime());
+    glmessage.set_start_time(glContext->getSystemTime(SYSTEM_TIME_MONOTONIC));
     glmessage.set_duration(0);
 
     glContext->traceGLMessage(&glmessage);
@@ -65,7 +64,7 @@ void GLTrace_eglMakeCurrent(int contextId) {
     arg_context->add_intvalue(contextId);
 
     // set start time and duration
-    glmessage.set_start_time(systemTime());
+    glmessage.set_start_time(glContext->getSystemTime(SYSTEM_TIME_MONOTONIC));
     glmessage.set_duration(0);
 
     glContext->traceGLMessage(&glmessage);
@@ -79,11 +78,11 @@ void GLTrace_eglSwapBuffers(void* /*dpy*/, void* /*draw*/) {
     glmessage.set_function(GLMessage::eglSwapBuffers);
 
     // set start time and duration
-    glmessage.set_start_time(systemTime());
+    glmessage.set_start_time(glContext->getSystemTime(SYSTEM_TIME_MONOTONIC));
     glmessage.set_duration(0);
 
     glContext->traceGLMessage(&glmessage);
 }
 
-}
-}
+} // end of namespace gltrace
+} // end of namespace android

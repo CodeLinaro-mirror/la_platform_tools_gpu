@@ -14,40 +14,13 @@
  * limitations under the License.
  */
 
-#include <cutils/log.h>
-
-#include "hooks.h"
+#include "glestrace.h"
 #include "gltrace_api.h"
 #include "gltrace_context.h"
-#include "gltrace_hooks.h"
-#include "glestrace.h"
 #include "gltrace_egl.h"
+#include "hooks.h"
 
-namespace android {
-namespace gltrace {
-
-// Hook up all the GLTrace functions
-#define GL_ENTRY(_r, _api, ...) GLTrace_ ## _api,
-gl_hooks_t gHooksDebug = {
-    {
-        #include "entries.in"
-    },
-    {
-        {0}
-    }
-};
-#undef GL_ENTRY
-
-gl_hooks_t *getGLHooks() {
-    return &gHooksDebug;
-}
-
-}
-}
-
-///////////////////////////////////////////////////////////////////////////
-// GL impl
-///////////////////////////////////////////////////////////////////////////
+#include <cutils/log.h>
 
 #undef TRACE_GL_VOID
 #undef TRACE_GL

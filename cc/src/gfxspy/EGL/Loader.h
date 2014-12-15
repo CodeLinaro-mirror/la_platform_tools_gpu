@@ -17,62 +17,30 @@
 #ifndef ANDROID_EGL_LOADER_H
 #define ANDROID_EGL_LOADER_H
 
-#include <ctype.h>
-#include <string.h>
-#include <errno.h>
-
-#include <utils/Errors.h>
-#include <utils/Singleton.h>
-#include <utils/String8.h>
-
 #include <EGL/egl.h>
+#include <utils/Singleton.h>
 
-// ----------------------------------------------------------------------------
 namespace android {
-// ----------------------------------------------------------------------------
 
 struct egl_connection_t;
 
-class Loader : public Singleton<Loader>
-{
+class Loader : public Singleton<Loader> {
+public:
     friend class Singleton<Loader>;
 
-    typedef __eglMustCastToProperFunctionPointerType (*getProcAddressType)(
-            const char*);
-
-    enum {
-        EGL         = 0x01,
-        GLESv1_CM   = 0x02,
-        GLESv2      = 0x04
-    };
-    struct driver_t {
-        driver_t(void* gles);
-        ~driver_t();
-        status_t set(void* hnd, int32_t api);
-        void* dso[3];
-    };
-
-    getProcAddressType getProcAddress;
-
-public:
     ~Loader();
-
-    void* open(egl_connection_t* cnx);
-    status_t close(void* driver);
+    void open(egl_connection_t* cnx);
+    void close(egl_connection_t* cnx);
 
 private:
-    Loader();
-    void *load_driver(const char* kind, egl_connection_t* cnx, uint32_t mask);
+    typedef __eglMustCastToProperFunctionPointerType(*getProcAddressType)(const char*);
 
-    static __attribute__((noinline))
-    void init_api(void* dso,
-            char const * const * api,
+    Loader();
+    void init_api(void *dso, char const *const *api,
             __eglMustCastToProperFunctionPointerType* curr,
             getProcAddressType getProcAddress);
 };
 
-// ----------------------------------------------------------------------------
-} // namespace android
-// ----------------------------------------------------------------------------
+} // end of namespace android
 
-#endif /* ANDROID_EGL_LOADER_H */
+#endif // ANDROID_EGL_LOADER_H

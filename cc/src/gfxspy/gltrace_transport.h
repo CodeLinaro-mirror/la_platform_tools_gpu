@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-#ifndef __GLTRACE_TRANSPORT_H_
-#define __GLTRACE_TRANSPORT_H_
+#ifndef ANDROID_GLTRACE_TRANSPORT_H
+#define ANDROID_GLTRACE_TRANSPORT_H
 
 #include <pthread.h>
-
-#include "gltrace.pb.h"
+#include <string>
 
 namespace android {
 namespace gltrace {
+
+class GLMessage;
 
 /**
  * TCPStream provides a TCP based communication channel from the device to
  * the host for transferring GLMessages.
  */
 class TCPStream {
-    int mSocket;
-    pthread_mutex_t mSocketWriteMutex;
 public:
     /** Create a TCP based communication channel over @socket */
     TCPStream(int socket);
@@ -39,7 +38,7 @@ public:
     /** Close the channel. */
     void closeStream();
 
-    /** Send @data of size @len to host. . Returns -1 on error, 0 on success. */
+    /** Send @data of size @len to host. Returns -1 on error, bytes written on success. */
     int send(void *data, size_t len);
 
     /**
@@ -47,6 +46,10 @@ public:
      * Returns -1 on failure, 0 on success.
      */
     int receive(void *buf, size_t len);
+
+private:
+    int mSocket;
+    pthread_mutex_t mSocketWriteMutex;
 };
 
 /**
@@ -54,13 +57,6 @@ public:
  * unbuffered channel.
  */
 class BufferedOutputStream {
-    TCPStream *mStream;
-
-    size_t mBufferSize;
-    std::string mStringBuffer;
-
-    /** Enqueue message into internal buffer. */
-    void enqueueMessage(GLMessage *msg);
 public:
     /**
      * Construct a Buffered stream of size @bufferSize, using @stream as
@@ -74,8 +70,16 @@ public:
      */
     int send(GLMessage *msg);
 
-    /** Send any buffered messages, returns -1 on error, 0 on success. */
+    /** Send any buffered messages. Returns -1 on error, bytes flushed on success. */
     int flush();
+
+private:
+    /** Enqueue message into internal buffer. */
+    void enqueueMessage(GLMessage *msg);
+
+    TCPStream *mStream;
+    size_t mBufferSize;
+    std::string mStringBuffer;
 };
 
 /**
@@ -85,7 +89,7 @@ public:
  */
 int acceptClientConnection(char *sockName);
 
-}
-}
+} // end of namespace gltrace
+} // end of namespace android
 
-#endif
+#endif // ANDROID_GLTRACE_TRANSPORT_H

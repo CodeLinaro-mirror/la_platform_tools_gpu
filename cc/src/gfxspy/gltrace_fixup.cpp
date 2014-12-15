@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-#include <cutils/log.h>
-#include <EGL/egldefs.h>
-#include <GLES/gl.h>
-#include <GLES/glext.h>
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-
 #include "gltrace.pb.h"
 #include "gltrace_api.h"
 #include "gltrace_context.h"
 #include "gltrace_fixup.h"
+
+#include <cutils/log.h>
+#include <GLES/gl.h>
+#include <GLES/glext.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 
 namespace android {
 namespace gltrace {
 
 GLint glGetInteger(GLTraceContext *context, GLenum param) {
     GLint x;
-    context->hooks->gl.glGetIntegerv(param, &x);
+    context->getHooks()->gl.glGetIntegerv(param, &x);
     return x;
 }
 
 GLint glGetVertexAttrib(GLTraceContext *context, GLuint index, GLenum pname) {
     GLint x;
-    context->hooks->gl.glGetVertexAttribiv(index, pname, &x);
+    context->getHooks()->gl.glGetVertexAttribiv(index, pname, &x);
     return x;
 }
 
@@ -423,9 +422,9 @@ GLint getShaderVariableLocation(GLTraceContext *context, GLMessage *glmsg, GLcha
     int program = glmsg->args(0).intvalue(0);
 
     if (func == GLMessage::glGetActiveAttrib) {
-        return context->hooks->gl.glGetAttribLocation(program, name);
+        return context->getHooks()->gl.glGetAttribLocation(program, name);
     } else {
-        return context->hooks->gl.glGetUniformLocation(program, name);
+        return context->getHooks()->gl.glGetUniformLocation(program, name);
     }
 }
 
@@ -637,7 +636,7 @@ void trace_VertexAttribPointerData(GLTraceContext *context,
         GLboolean norm = glGetVertexAttrib(context, index, GL_VERTEX_ATTRIB_ARRAY_NORMALIZED);
         GLsizei stride = glGetVertexAttrib(context, index, GL_VERTEX_ATTRIB_ARRAY_STRIDE);
         GLvoid* ptr;
-        context->hooks->gl.glGetVertexAttribPointerv(index, GL_VERTEX_ATTRIB_ARRAY_POINTER, &ptr);
+        context->getHooks()->gl.glGetVertexAttribPointerv(index, GL_VERTEX_ATTRIB_ARRAY_POINTER, &ptr);
 
         trace_glVertexAttribPointerData(context,
                     index, size, type, norm, stride, ptr,
@@ -646,7 +645,7 @@ void trace_VertexAttribPointerData(GLTraceContext *context,
 }
 
 void trace_VertexAttribPointerDataForGlDrawArrays(GLTraceContext *context, GLMessage *glmsg) {
-    if (context->getVersion() == egl_connection_t::GLESv1_INDEX) {
+    if (context->getVersionMajor() < 2) {
         // only supported for GLES2 and above
         return;
     }
@@ -663,7 +662,7 @@ void trace_VertexAttribPointerDataForGlDrawArrays(GLTraceContext *context, GLMes
 
 void trace_VertexAttribPointerDataForGlDrawElements(GLTraceContext *context, GLMessage *glmsg,
                             GLvoid *indices) {
-    if (context->getVersion() == egl_connection_t::GLESv1_INDEX) {
+    if (context->getVersionMajor() < 2) {
         // only supported for GLES2 and above
         return;
     }
@@ -796,24 +795,16 @@ void fixupGLMessage(GLTraceContext *context, nsecs_t wallStart, nsecs_t wallEnd,
         fixup_glGetString(glmsg, pointersToFixup);
         break;
     case GLMessage::glTexImage2D:
-        if (context->getGlobalTraceState()->shouldCollectTextureDataOnGlTexImage()) {
-            fixup_glTexImage2D(context, glmsg, pointersToFixup);
-        }
+        fixup_glTexImage2D(context, glmsg, pointersToFixup);
         break;
     case GLMessage::glTexSubImage2D:
-        if (context->getGlobalTraceState()->shouldCollectTextureDataOnGlTexImage()) {
-            fixup_glTexSubImage2D(context, glmsg, pointersToFixup);
-        }
+        fixup_glTexSubImage2D(context, glmsg, pointersToFixup);
         break;
     case GLMessage::glCompressedTexImage2D:
-        if (context->getGlobalTraceState()->shouldCollectTextureDataOnGlTexImage()) {
-            fixup_glCompressedTexImage2D(context, glmsg, pointersToFixup);
-        }
+        fixup_glCompressedTexImage2D(context, glmsg, pointersToFixup);
         break;
     case GLMessage::glCompressedTexSubImage2D:
-        if (context->getGlobalTraceState()->shouldCollectTextureDataOnGlTexImage()) {
-            fixup_glCompressedTexSubImage2D(context, glmsg, pointersToFixup);
-        }
+        fixup_glCompressedTexSubImage2D(context, glmsg, pointersToFixup);
         break;
     case GLMessage::glShaderSource:
         fixup_glShaderSource(glmsg, pointersToFixup);
