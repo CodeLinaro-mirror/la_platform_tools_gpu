@@ -49,9 +49,27 @@ func (n TypeNamespace) idOf(obj Object) (ObjectTypeID, bool) {
 
 // NewTypeNamespace constructs a new TypeNamespace containing the specified list of Types.
 func NewTypeNamespace(types ...Type) TypeNamespace {
-	ptrTypeToID := make(map[reflect.Type]ObjectTypeID, len(types))
-	idToNew := make(map[ObjectTypeID]func() Object, len(types))
+	return TypeNamespace{}.Merge(types...)
+}
 
+// Merge creates and returns a new TypeNamespace that combines the specified types to types in the
+// existing TypeNamespace.
+func (n TypeNamespace) Merge(types ...Type) TypeNamespace {
+	c := len(n.idToNew) + len(types)
+	ptrTypeToID := make(map[reflect.Type]ObjectTypeID, c)
+	idToNew := make(map[ObjectTypeID]func() Object, c)
+
+	// Copy existing
+	for ty, id := range n.ptrTypeToID {
+		ptrTypeToID[ty] = id
+	}
+
+	// Copy existing
+	for id, new := range n.idToNew {
+		idToNew[id] = new
+	}
+
+	// Add new
 	for _, e := range types {
 		id := e.ID
 		instance := e.New()
