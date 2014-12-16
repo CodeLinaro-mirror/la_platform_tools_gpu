@@ -69,7 +69,7 @@ func (r *Reader) GuessNextToken() Token {
 		r.Space()
 		switch {
 		case r.AlphaNumeric():
-		case r.Numeric():
+		case r.Numeric() != NotNumeric:
 		case r.NotSpace():
 		default:
 			r.Advance()
@@ -155,27 +155,139 @@ func (r *Reader) NotSpace() bool {
 	return true
 }
 
-// Numeric tries to move past the common number pattern, returning true if
-// found and false if not.
-func (r *Reader) Numeric() bool {
+// NumberKind is a type used by Reader.Numeric for identifying various kinds of numbers.
+type NumberKind uint8
+
+const (
+	// No number was found.
+	NotNumeric NumberKind = iota
+	// A decimal number.
+	Decimal
+	// An octal number, starting with "0". PS: A lone "0" is classified as octal.
+	Octal
+	// A hexadecimal number, starting with "0x".
+	Hexadecimal
+	// A floating point number: "123.456". Whole and the fractional parts are optional (but
+	// not both at the same time).
+	Floating
+	// A floating point number in scientific notation: "123.456e±789". The fractional part,
+	// the dot and the exponent sign are all optional.
+	Scientific
+
+	atDot   // Internally used to represent the state after reading ".".
+	atE     // Internally used to represent the state after reading "e".
+	atESign // Internally used to represent the state after reading "e±".
+)
+
+// Numeric tries to move past the common number pattern. It returns a constant of type NumberKind
+// describing the kind of number it found.
+func (r *Reader) Numeric() NumberKind {
+	state := NotNumeric
 	i := r.cursor
-	if i < len(r.runes) && (r.runes[i] == '+' || r.runes[i] == '-') {
+	for {
+		var next = '?'
+		if i < len(r.runes) {
+			next = unicode.ToLower(r.runes[i])
+		}
 		i++
-	}
-	if i < len(r.runes) && unicode.IsDigit(r.runes[i]) {
-		for i++; i < len(r.runes); i++ {
-			r := r.runes[i]
-			if r != '-' && r != '+' && r != '.' && !unicode.IsLetter(r) && !unicode.IsDigit(r) {
-				break
+		switch state {
+		case NotNumeric:
+			switch {
+			case next == '0':
+				state = Octal
+			case next >= '1' && next <= '9':
+				state = Decimal
+			case next == '.':
+				state = atDot
+			default:
+				return NotNumeric // We have read nothing
+			}
+		case Decimal:
+			switch {
+			case next >= '0' && next <= '9': // do nothing
+			case next == '.':
+				state = atDot
+			case next == 'e':
+				state = atE
+			case next == 'u':
+				r.cursor = i
+				return Decimal
+			default:
+				r.cursor = i - 1
+				return Decimal
+			}
+		case Octal:
+			switch {
+			case next >= '0' && next <= '7': // do nothing
+			case next == 'x':
+				state = Hexadecimal
+			case next == 'u':
+				r.cursor = i
+				return Octal
+			case next == '.' && i == r.cursor+2: // We have read "0."
+				state = atDot
+			default:
+				r.cursor = i - 1
+				return Octal
+			}
+		case Hexadecimal:
+			switch {
+			case (next >= '0' && next <= '9') || (next >= 'a' && next <= 'f'): // do nothing
+			case next == 'u':
+				r.cursor = i
+				return Hexadecimal
+			default:
+				r.cursor = i - 1
+				return Hexadecimal
+			}
+		case atDot:
+			switch {
+			case next >= '0' && next <= '9':
+				state = Floating
+			case i > r.cursor+2: // There is at least one digit before the dot.
+				if next == 'e' {
+					state = atE
+				} else {
+					r.cursor = i - 1
+					return Floating
+				}
+			default:
+				return NotNumeric // We have only read ".". This is bad.
+			}
+		case Floating:
+			switch {
+			case next >= '0' && next <= '9': // do nothing
+			case next == 'e':
+				state = atE
+			default:
+				r.cursor = i - 1
+				return Floating
+			}
+		case atE:
+			switch {
+			case next >= '0' && next <= '9':
+				state = Scientific
+			case next == '+' || next == '-':
+				state = atESign
+			default:
+				return NotNumeric // We need at least one digit after "e"
+			}
+		case atESign:
+			switch {
+			case next >= '0' && next <= '9':
+				state = Scientific
+			default:
+				return NotNumeric // We need at least one digit after "e±"
+			}
+		case Scientific:
+			switch {
+			case next >= '0' && next <= '9': // do nothing
+			default:
+				r.cursor = i - 1
+				return Scientific
 			}
 		}
 	}
-
-	if i == r.cursor {
-		return false
-	}
-	r.cursor = i
-	return true
 }
 
 // AlphaNumeric moves past anything that starts with a letter or underscore,
