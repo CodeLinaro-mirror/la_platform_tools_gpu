@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 # Use the pre-built protobuf library.
-SRC_FILE_LIST          := $(LOCAL_PATH)/../../../../../external/protobuf/prebuilts/$(TARGET_ARCH)/libprotobuf-cpp-2.3.0-lite.a
+SRC_FILE_LIST          := $(LOCAL_PATH)/../../../../../../external/protobuf/prebuilts/$(TARGET_ARCH)/libprotobuf-cpp-2.3.0-lite.a
 LOCAL_MODULE           := libprotobuf
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 include $(PREBUILT_STATIC_LIBRARY)
@@ -11,8 +11,8 @@ include $(PREBUILT_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 SRC_FILE_LIST          := \
-    $(wildcard $(LOCAL_PATH)/../../src/gfxspy/EGL/*.cpp) \
-    $(wildcard $(LOCAL_PATH)/../../src/gfxspy/*.cpp)
+    $(wildcard $(LOCAL_PATH)/../../src/EGL/*.cpp) \
+    $(wildcard $(LOCAL_PATH)/../../src/*.cpp)
 LOCAL_MODULE           := gfxspy
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 LOCAL_CXXFLAGS         := \
@@ -46,9 +46,9 @@ LOCAL_CXXFLAGS         := \
 #    -DGLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP \
 
 LOCAL_C_INCLUDES       := \
-    $(LOCAL_PATH)/../../src/gfxspy/ \
-    $(LOCAL_PATH)/../../../../../frameworks/native/opengl/include \
-    $(LOCAL_PATH)/../../../../../external/protobuf/src \
+    $(LOCAL_PATH)/../../src/ \
+    $(LOCAL_PATH)/../../../../../../frameworks/native/opengl/include \
+    $(LOCAL_PATH)/../../../../../../external/protobuf/src \
     /usr/local/include
 LOCAL_LDLIBS           := -lc -lm -llog
 LOCAL_STATIC_LIBRARIES := libprotobuf
