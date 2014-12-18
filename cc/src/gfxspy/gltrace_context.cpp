@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-#include <pthread.h>
-#include <cutils/log.h>
-
 #include "gltrace_context.h"
+#include "gltrace.pb.h"
+
+#include <cutils/log.h>
+#include <pthread.h>
+#include <time.h>
 
 namespace android {
 namespace gltrace {
-
-::android::gl_hooks_t *loadHooks();
 
 static pthread_key_t sTLSKey = -1;
 static pthread_once_t sPthreadOnceKey = PTHREAD_ONCE_INIT;
@@ -32,15 +32,6 @@ void createTLSKey() {
 }
 
 GLTraceContext *getGLTraceContext() {
-#if !defined(GLTRACE_LOAD_HOOKS_AT_STARTUP)
-    // Some EGL functions can be called before the context is
-    // created (e.g. eglGetProcAddress()), so we can't rely on
-    // the context constructor to load the hooks.
-    // TODO: Do something smarter to initialize the hooks
-    // so we don't pay this overhead for each function call
-    // (or force GLTRACE_LOAD_HOOKS_AT_STARTUP to always be on).
-    loadHooks();
-#endif
     GLTraceContext* ctx = (GLTraceContext*) pthread_getspecific(sTLSKey);
     return ctx;
 }
@@ -62,18 +53,16 @@ void releaseContext() {
     }
 }
 
-GLTraceState::GLTraceState(TCPStream *stream) {
-    mTraceContextIds = 0;
-    mStream = stream;
-
-    mCollectTextureDataOnGlTexImage = false;
-    pthread_rwlock_init(&mTraceOptionsRwLock, NULL);
+GLTraceState::GLTraceState(TCPStream *stream) : mTraceContextIds(0), mStream(stream) {
 }
 
 GLTraceState::~GLTraceState() {
-    if (mStream) {
-        mStream->closeStream();
-        mStream = NULL;
+    if (mStream) mStream->closeStream();
+
+    // Clean up state contexts.
+    pthread_setspecific(sTLSKey, NULL);
+    for (auto it : mPerContextState) {
+        delete it.second;
     }
 }
 
@@ -81,62 +70,45 @@ TCPStream *GLTraceState::getStream() {
     return mStream;
 }
 
-void GLTraceState::safeSetValue(bool *ptr, bool value, pthread_rwlock_t *lock) {
-    pthread_rwlock_wrlock(lock);
-    *ptr = value;
-    pthread_rwlock_unlock(lock);
-}
-
-bool GLTraceState::safeGetValue(bool *ptr, pthread_rwlock_t *lock) {
-    pthread_rwlock_rdlock(lock);
-    bool value = *ptr;
-    pthread_rwlock_unlock(lock);
-    return value;
-}
-
-void GLTraceState::setCollectTextureDataOnGlTexImage(bool en) {
-    safeSetValue(&mCollectTextureDataOnGlTexImage, en, &mTraceOptionsRwLock);
-}
-
-bool GLTraceState::shouldCollectTextureDataOnGlTexImage() {
-    return safeGetValue(&mCollectTextureDataOnGlTexImage, &mTraceOptionsRwLock);
-}
-
-GLTraceContext *GLTraceState::createTraceContext(int version, EGLContext eglContext) {
-    int id = __sync_fetch_and_add(&mTraceContextIds, 1);
-
+GLTraceContext *GLTraceState::createTraceContext(EGLContext eglContext, gl_hooks_t *hooks) {
+    const int id = __sync_fetch_and_add(&mTraceContextIds, 1);
     const size_t DEFAULT_BUFFER_SIZE = 8192;
     BufferedOutputStream *stream = new BufferedOutputStream(mStream, DEFAULT_BUFFER_SIZE);
-    GLTraceContext *traceContext = new GLTraceContext(id, version, this, stream);
-    mPerContextState[eglContext] = traceContext;
+    GLTraceContext *traceContext = new GLTraceContext(id, this, stream, hooks);
+
+    auto it = mPerContextState.find(eglContext);
+    if (it != mPerContextState.end()) {
+        delete it->second;
+        it->second = traceContext;
+    } else {
+        mPerContextState.insert({eglContext, traceContext});
+    }
 
     return traceContext;
 }
 
 GLTraceContext *GLTraceState::getTraceContext(EGLContext c) {
-    return mPerContextState[c];
+    auto it = mPerContextState.find(c);
+    if (it != mPerContextState.end()) {
+        return it->second;
+    }
+    return NULL;
 }
 
-GLTraceContext::GLTraceContext(int id, int version, GLTraceState *state,
-        BufferedOutputStream *stream) :
-    mId(id),
-    mVersion(version),
-    mVersionMajor(0),
-    mVersionMinor(0),
-    mVersionParsed(false),
-    mState(state),
-    mBufferedOutputStream(stream),
-    mElementArrayBuffers(DefaultKeyedVector<GLuint, ElementArrayBuffer*>(NULL))
-{
-    hooks = loadHooks();
+GLTraceContext::GLTraceContext(int id, GLTraceState *state, BufferedOutputStream *stream,
+                               gl_hooks_t *hooks) :
+        mId(id), mVersionMajor(0), mVersionMinor(0), mVersionParsed(false), mState(state),
+        mBufferedOutputStream(stream), mHooks(hooks) {
+}
+
+GLTraceContext::~GLTraceContext() {
+    for (auto it : mElementArrayBuffers) {
+        delete it.second;
+    }
 }
 
 int GLTraceContext::getId() {
     return mId;
-}
-
-int GLTraceContext::getVersion() {
-    return mVersion;
 }
 
 int GLTraceContext::getVersionMajor() {
@@ -159,8 +131,12 @@ GLTraceState *GLTraceContext::getGlobalTraceState() {
     return mState;
 }
 
+gl_hooks_t *GLTraceContext::getHooks() {
+    return mHooks;
+}
+
 void GLTraceContext::parseGlesVersion() {
-    const char* str = (const char*)hooks->gl.glGetString(GL_VERSION);
+    const char* str = (const char*)mHooks->gl.glGetString(GL_VERSION);
     int major, minor;
     if (sscanf(str, "OpenGL ES-CM %d.%d", &major, &minor) != 2) {
         if (sscanf(str, "OpenGL ES %d.%d", &major, &minor) != 2) {
@@ -176,57 +152,74 @@ void GLTraceContext::parseGlesVersion() {
 void GLTraceContext::traceGLMessage(GLMessage *msg) {
     mBufferedOutputStream->send(msg);
 
-    GLMessage_Function func = msg->function();
-    if (func == GLMessage::eglSwapBuffers
-        || func == GLMessage::eglCreateContext
-        || func == GLMessage::eglMakeCurrent
-        || func == GLMessage::glDrawArrays
-        || func == GLMessage::glDrawElements) {
-        mBufferedOutputStream->flush();
+    switch (msg->function()) {
+        case GLMessage::eglCreateContext:
+        case GLMessage::eglMakeCurrent:
+        case GLMessage::eglSwapBuffers:
+        case GLMessage::glDrawArrays:
+        case GLMessage::glDrawElements:
+            mBufferedOutputStream->flush();
+        default:
+            break;
     }
 }
 
 void GLTraceContext::bindBuffer(GLuint bufferId, GLvoid *data, GLsizeiptr size) {
-    // free previously bound buffer if any
-    ElementArrayBuffer *oldBuffer = mElementArrayBuffers.valueFor(bufferId);
-    if (oldBuffer != NULL) {
-        delete oldBuffer;
+    auto it = mElementArrayBuffers.find(bufferId);
+    if (it != mElementArrayBuffers.end()) {
+        delete it->second;
+        it->second = new ElementArrayBuffer(data, size);
+    } else {
+        mElementArrayBuffers.insert({bufferId, new ElementArrayBuffer(data, size)});
     }
-
-    mElementArrayBuffers.add(bufferId, new ElementArrayBuffer(data, size));
 }
 
 void GLTraceContext::getBuffer(GLuint bufferId, GLvoid **data, GLsizeiptr *size) {
-    ElementArrayBuffer *buffer = mElementArrayBuffers.valueFor(bufferId);
-    if (buffer == NULL) {
+    auto it = mElementArrayBuffers.find(bufferId);
+    if (it != mElementArrayBuffers.end()) {
+        *data = it->second->getBuffer();
+        *size = it->second->getSize();
+    } else {
         *data = NULL;
         *size = 0;
-    } else {
-        *data = buffer->getBuffer();
-        *size = buffer->getSize();
     }
 }
 
 void GLTraceContext::updateBufferSubData(GLuint bufferId, GLintptr offset, GLvoid *data,
-                                                            GLsizeiptr size) {
-    ElementArrayBuffer *buffer = mElementArrayBuffers.valueFor(bufferId);
-    if (buffer != NULL) {
-        buffer->updateSubBuffer(offset, data, size);
+                                         GLsizeiptr size) {
+    auto it = mElementArrayBuffers.find(bufferId);
+    if (it != mElementArrayBuffers.end()) {
+        it->second->updateSubBuffer(offset, data, size);
     }
 }
 
 void GLTraceContext::deleteBuffer(GLuint bufferId) {
-    ElementArrayBuffer *buffer = mElementArrayBuffers.valueFor(bufferId);
-    if (buffer != NULL) {
-        delete buffer;
-        mElementArrayBuffers.removeItem(bufferId);
+    auto it = mElementArrayBuffers.find(bufferId);
+    if (it != mElementArrayBuffers.end()) {
+        mElementArrayBuffers.erase(it);
+        delete it->second;
     }
 }
 
-ElementArrayBuffer::ElementArrayBuffer(GLvoid *buf, GLsizeiptr size) {
-    mBuf = malloc(size);
-    mSize = size;
+nsecs_t GLTraceContext::getSystemTime(int clock) {
+    static const clockid_t clocks[] = {
+            CLOCK_REALTIME,
+            CLOCK_MONOTONIC,
+            CLOCK_PROCESS_CPUTIME_ID,
+            CLOCK_THREAD_CPUTIME_ID,
+            CLOCK_BOOTTIME
+    };
+    struct timespec t;
+    t.tv_sec = t.tv_nsec = 0;
+    clock_gettime(clocks[clock], &t);
+    return nsecs_t(t.tv_sec)*1000000000LL + t.tv_nsec;
+}
 
+ElementArrayBuffer::ElementArrayBuffer() : mBuf(NULL), mSize(0) {
+}
+
+ElementArrayBuffer::ElementArrayBuffer(GLvoid *buf, GLsizeiptr size) :
+        mBuf(malloc(size)), mSize(size) {
     if (buf != NULL) {
         memcpy(mBuf, buf, size);
     }
@@ -235,10 +228,7 @@ ElementArrayBuffer::ElementArrayBuffer(GLvoid *buf, GLsizeiptr size) {
 ElementArrayBuffer::~ElementArrayBuffer() {
     if (mBuf != NULL) {
         free(mBuf);
-        mSize = 0;
     }
-
-    mBuf = NULL;
 }
 
 void ElementArrayBuffer::updateSubBuffer(GLintptr offset, const GLvoid* data, GLsizeiptr size) {
@@ -255,5 +245,5 @@ GLsizeiptr ElementArrayBuffer::getSize() {
     return mSize;
 }
 
-} // namespace gltrace
-} // namespace android
+} // end of namespace gltrace
+} // end of namespace android

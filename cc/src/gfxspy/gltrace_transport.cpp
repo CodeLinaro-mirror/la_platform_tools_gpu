@@ -14,28 +14,27 @@
  * limitations under the License.
  */
 
-#include <errno.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-#include <unistd.h>
-#include <sys/socket.h>
-#include <sys/un.h>
-#include <netinet/in.h>
+#include "gltrace_transport.h"
+#include "gltrace.pb.h"
 
 #include <cutils/log.h>
+#include <errno.h>
+#include <netinet/in.h>
 #include <private/android_filesystem_config.h>
-
-#include "gltrace_transport.h"
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
 
 namespace android {
 namespace gltrace {
 
+// Accepts one client connection on the UNIX socket sockname. Returns its socket, or -1 on failure.
 int acceptClientConnection(char *sockname) {
     int serverSocket = socket(AF_LOCAL, SOCK_STREAM, 0);
     if (serverSocket < 0) {
-        ALOGE("Error (%d) while creating socket. Check if app has network permissions.",
-                                                                            serverSocket);
+        ALOGE("Error while creating socket: %s. Check if app has network permissions.",
+              strerror(errno));
         return -1;
     }
 
@@ -49,30 +48,32 @@ int acceptClientConnection(char *sockname) {
     // note that sockaddr_len should be set to the exact size of the buffer that is used.
     socklen_t sockaddr_len = sizeof(server.sun_family) + strlen(sockname) + 1;
     if (bind(serverSocket, (struct sockaddr *) &server, sockaddr_len) < 0) {
+        ALOGE("Failed to bind the server socket: %s", strerror(errno));
         close(serverSocket);
-        ALOGE("Failed to bind the server socket");
         return -1;
     }
 
     if (listen(serverSocket, 1) < 0) {
+        ALOGE("Failed to listen on server socket: %s", strerror(errno));
         close(serverSocket);
-        ALOGE("Failed to listen on server socket");
         return -1;
     }
 
-    ALOGD("gltrace::waitForClientConnection: server listening @ path %s", sockname);
+    ALOGD("gltrace::acceptClientConnection: server listening @ path %s", sockname);
 
     int clientSocket = accept(serverSocket, (struct sockaddr *)&client, &sockaddr_len);
     if (clientSocket < 0) {
+        ALOGE("Failed to accept client connection: %s", strerror(errno));
         close(serverSocket);
-        ALOGE("Failed to accept client connection");
         return -1;
     }
 
     struct ucred cr;
     socklen_t cr_len = sizeof(cr);
     if (getsockopt(clientSocket, SOL_SOCKET, SO_PEERCRED, &cr, &cr_len) != 0) {
-        ALOGE("Error obtaining credentials of peer");
+        ALOGE("Error obtaining credentials of peer: %s", strerror(errno));
+        close(clientSocket);
+        close(serverSocket);
         return -1;
     }
 
@@ -80,10 +81,12 @@ int acceptClientConnection(char *sockname) {
     // or the root user.
     if (cr.uid != AID_SHELL && cr.uid != AID_ROOT) {
         ALOGE("Unknown peer type (%d), expected shell to be the peer", cr.uid);
+        close(clientSocket);
+        close(serverSocket);
         return -1;
     }
 
-    ALOGD("gltrace::waitForClientConnection: client connected.");
+    ALOGD("gltrace::acceptClientConnection: client connected.");
 
     // do not accept any more incoming connections
     close(serverSocket);
@@ -91,8 +94,7 @@ int acceptClientConnection(char *sockname) {
     return clientSocket;
 }
 
-TCPStream::TCPStream(int socket) {
-    mSocket = socket;
+TCPStream::TCPStream(int socket) : mSocket(socket) {
     pthread_mutex_init(&mSocketWriteMutex, NULL);
 }
 
@@ -101,34 +103,37 @@ TCPStream::~TCPStream() {
 }
 
 void TCPStream::closeStream() {
-    if (mSocket > 0) {
+    if (mSocket >= 0) {
         close(mSocket);
-        mSocket = 0;
+        mSocket = -1;
     }
 }
 
 int TCPStream::send(void *buf, size_t len) {
-    if (mSocket <= 0) {
+    if (mSocket < 0) {
         return -1;
     }
 
     pthread_mutex_lock(&mSocketWriteMutex);
-    int n = write(mSocket, buf, len);
+    const int n = write(mSocket, buf, len);
     pthread_mutex_unlock(&mSocketWriteMutex);
+    if (n < 0) {
+        ALOGE("Error sending data to stream: %s", strerror(errno));
+    }
 
     return n;
 }
 
 int TCPStream::receive(void *data, size_t len) {
-    if (mSocket <= 0) {
+    if (mSocket < 0) {
         return -1;
     }
 
     size_t totalRead = 0;
     while (totalRead < len) {
-        int n = read(mSocket, (uint8_t*)data + totalRead, len - totalRead);
+        const int n = read(mSocket, (uint8_t*)data + totalRead, len - totalRead);
         if (n < 0) {
-            ALOGE("Error receiving data from stream: %d", errno);
+            ALOGE("Error receiving data from stream: %s", strerror(errno));
             return -1;
         }
 
@@ -138,12 +143,9 @@ int TCPStream::receive(void *data, size_t len) {
     return 0;
 }
 
-BufferedOutputStream::BufferedOutputStream(TCPStream *stream, size_t bufferSize) {
-    mStream = stream;
-
-    mBufferSize = bufferSize;
-    mStringBuffer = "";
-    mStringBuffer.reserve(bufferSize);
+BufferedOutputStream::BufferedOutputStream(TCPStream *stream, size_t bufferSize) :
+        mStream(stream), mBufferSize(bufferSize) {
+    mStringBuffer.reserve(mBufferSize);
 }
 
 int BufferedOutputStream::flush() {
@@ -162,8 +164,9 @@ int BufferedOutputStream::flush() {
 void BufferedOutputStream::enqueueMessage(GLMessage *msg) {
     const uint32_t len = msg->ByteSize();
 
-    mStringBuffer.append((const char *)&len, sizeof(len));    // append header
-    msg->AppendToString(&mStringBuffer);                      // append message
+    // Send the message size, then the message.
+    mStringBuffer.append((const char *)&len, sizeof(len));
+    msg->AppendToString(&mStringBuffer);
 }
 
 int BufferedOutputStream::send(GLMessage *msg) {
@@ -176,5 +179,5 @@ int BufferedOutputStream::send(GLMessage *msg) {
     return 0;
 }
 
-}  // namespace gltrace
-}  // namespace android
+}  // end of namespace gltrace
+}  // end of namespace android

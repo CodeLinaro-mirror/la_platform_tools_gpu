@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef __GLTRACE_EGL_H_
-#define __GLTRACE_EGL_H_
+#ifndef ANDROID_GLTRACE_EGL_H
+#define ANDROID_GLTRACE_EGL_H
 
 namespace android {
 namespace gltrace {
@@ -26,14 +26,11 @@ void GLTrace_eglSwapBuffers(void *dpy, void *draw);
 
 // Forward declare the EGL tracing functions.
 #undef TRACE_EGL
-#define TRACE_EGL(_type, _api, _args, _argList, ...)                           \
-    EGLAPI _type EGLTrace_wrapper_ ## _api _args;
-
+#define TRACE_EGL(_type, _api, _args, _argList, ...) EGLAPI _type EGLTrace_wrapper_ ## _api _args;
 #include "egl_trace.in"
-
 #undef TRACE_EGL
 
-}
-}
+} // end of namespace gltrace
+} // end of namespace android
 
-#endif
+#endif // ANDROID_GLTRACE_EGL_H

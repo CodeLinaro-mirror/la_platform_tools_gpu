@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-#include <arpa/inet.h>
-#include <stdlib.h>
-#include <cutils/log.h>
-
-#include "hooks.h"
+#include "EGL/Loader.h"
 #include "glestrace.h"
-
 #include "gltrace_context.h"
 #include "gltrace_egl.h"
-#include "gltrace_hooks.h"
 #include "gltrace_transport.h"
+#include "hooks.h"
 
-#include "EGL/Loader.h"
-
-#include "EGL/egldefs.h"
-#include "EGL/egl_object.h"
+#include <EGL/egldefs.h>
+#include <arpa/inet.h>
+#include <cutils/log.h>
 
 namespace android {
 namespace gltrace {
 
+static pthread_once_t sGlTraceDriverInitOnce = PTHREAD_ONCE_INIT;
 static pthread_mutex_t sGlTraceStateLock = PTHREAD_MUTEX_INITIALIZER;
 
 static int sGlTraceInProgress = 0;
@@ -41,11 +36,23 @@ static GLTraceState *sGLTraceState;
 static pthread_t sReceiveThreadId;
 
 egl_connection_t gEGLImpl;
-::android::gl_hooks_t gHooks[2];
+
+// Driver initializer that should be called exactly once, hence the nested struct and pthread_once.
+static void initializeDrivers() {
+    struct DriverInitializer {
+        static void initialize() {
+            memset(&gEGLImpl, sizeof(gEGLImpl), 0);
+            Loader::getInstance().open(&gEGLImpl);
+            GLTrace_start();
+        }
+    };
+    pthread_once(&sGlTraceDriverInitOnce, &DriverInitializer::initialize);
+}
 
 /**
  * Task that monitors the control stream from the host and updates
  * the trace status according to commands received from the host.
+ * Note: this is now a no-op placeholder for future gfxspy commands.
  */
 static void *commandReceiveTask(void *arg) {
     GLTraceState *state = (GLTraceState *)arg;
@@ -59,44 +66,28 @@ static void *commandReceiveTask(void *arg) {
     void *cmdBuf = NULL;
     uint32_t cmdBufSize = 0;
 
-    enum TraceSettingsMasks {
-        READ_TEXTURE_DATA_ON_GLTEXIMAGE_MASK = 1 << 2,
-    };
-
     while (true) {
-        // read command size
+        // Read the command size, break if the connection is closed.
         if (stream->receive(&cmdSize, sizeof(uint32_t)) < 0) {
             break;
         }
         cmdSize = ntohl(cmdSize);
 
-        // ensure command buffer is of required size
+        // Grow the command buffer size if necessary.
         if (cmdBufSize < cmdSize) {
             free(cmdBuf);
-            cmdBufSize = cmdSize;
             cmdBuf = malloc(cmdSize);
-            if (cmdBuf == NULL)
-                break;
+            cmdBufSize = cmdSize;
+            if (cmdBuf == NULL) break;
         }
 
-        // receive the command
+        // Read the command, break if the connection is closed.
         if (stream->receive(cmdBuf, cmdSize) < 0) {
             break;
         }
+        const uint32_t cmd = ntohl(*(uint32_t*)cmdBuf);
 
-        if (cmdSize != sizeof(uint32_t)) {
-            // Currently, we only support commands that are a single integer,
-            // so we skip all other commands
-            continue;
-        }
-
-        uint32_t cmd = ntohl(*(uint32_t*)cmdBuf);
-
-        bool collectTextureData = (cmd & READ_TEXTURE_DATA_ON_GLTEXIMAGE_MASK) != 0;
-
-        state->setCollectTextureDataOnGlTexImage(collectTextureData);
-
-        ALOGD("trace options: texImage: %d", collectTextureData);
+        // Placeholder for gfxspy commands.
     }
 
     ALOGE("Stopping OpenGL Trace Command Receiver\n");
@@ -112,45 +103,30 @@ static void *commandReceiveTask(void *arg) {
 int GLTrace_start() {
     int status = 0;
     int clientSocket = -1;
-    TCPStream *stream = NULL;
 
     pthread_mutex_lock(&sGlTraceStateLock);
+    if (sGlTraceInProgress) goto done;
 
-    if (sGlTraceInProgress) {
-        goto done;
-    }
-
-    ALOGD("GLTrace_start().");
-    memset(&gEGLImpl, sizeof(gEGLImpl), 0);
-    memset(gHooks, sizeof(gHooks), 0);
-
-#if !defined(GLTRACE_DISABLE_SERVER)
-    // Disabling the server is handy for debugging the tracer
-    // because it lets you test loading/running the tracer
-    // without needint to connect with a server.
+#if defined(GLTRACE_DISABLE_SERVER)
+    // Must create a trace state when the server is disabled because the rest of the tracing code
+    // expects/needs a GLTraceState object.
+    sGLTraceState = new GLTraceState(NULL);
+    sGlTraceInProgress = 1;
+    goto done;
+#else
+    // Disabling the server is handy for debugging the tracer because it lets you test
+    // loading/running the tracer without needing to connect with a server.
     clientSocket = gltrace::acceptClientConnection(const_cast<char*>("gltrace"));
-#endif
-
     if (clientSocket < 0) {
         ALOGE("Error creating GLTrace server socket. Tracing disabled.");
         status = -1;
-#if defined(GLTRACE_DISABLE_SERVER)
-        // Must create a trace state when the server is disabled
-        // because the rest of the tracing code expects/needs
-        // a GLTraceState object.
-        sGLTraceState = new GLTraceState(NULL);
-        sGlTraceInProgress = 1;
-#endif
         goto done;
     }
+#endif
+
+    // Initialize the tracing state and create a communication channel to the host.
     sGlTraceInProgress = 1;
-
-    // create communication channel to the host
-    stream = new TCPStream(clientSocket);
-
-    // initialize tracing state
-    sGLTraceState = new GLTraceState(stream);
-
+    sGLTraceState = new GLTraceState(new TCPStream(clientSocket));
     pthread_create(&sReceiveThreadId, NULL, commandReceiveTask, sGLTraceState);
 
 done:
@@ -178,66 +154,15 @@ void GLTrace_eglCreateContext(int version, EGLContext c) {
     if (state == NULL) return;
 
     // update trace state for new EGL context
-    GLTraceContext *traceContext = state->createTraceContext(version, c);
+    initializeDrivers();
+    GLTraceContext *traceContext = state->createTraceContext(c, gEGLImpl.hooks[version]);
     gltrace::setupTraceContextThreadSpecific(traceContext);
 
     // trace command through to the host
     gltrace::GLTrace_eglCreateContext(version, traceContext->getId());
 }
 
-// egl_init_drivers_locked() and egl_init_drivers() were copied
-// (with minor modifications) from frameworks/native/opengl/libs/EGL/egl.cpp.
-static EGLBoolean egl_init_drivers_locked() {
-    //ALOGD("egl_init_drivers_locked()");
-    // get our driver loader
-    Loader& loader(Loader::getInstance());
-
-    // dynamically load our EGL implementation
-    egl_connection_t* cnx = &gEGLImpl;
-    if (cnx->dso == NULL) {
-        cnx->hooks[egl_connection_t::GLESv1_INDEX] = &gHooks[
-            egl_connection_t::GLESv1_INDEX];
-        cnx->hooks[egl_connection_t::GLESv2_INDEX] = &gHooks[
-            egl_connection_t::GLESv2_INDEX];
-        cnx->dso = loader.open(cnx);
-    }
-
-    return cnx->dso ? EGL_TRUE : EGL_FALSE;
-}
-
-// This mutex protects egl_init_drivers_locked().
-static pthread_mutex_t sInitDriverMutex = PTHREAD_MUTEX_INITIALIZER;
-
-EGLBoolean egl_init_drivers() {
-    GLTrace_start();
-    EGLBoolean res;
-    pthread_mutex_lock(&sInitDriverMutex);
-    res = egl_init_drivers_locked();
-    pthread_mutex_unlock(&sInitDriverMutex);
-    return res;
-}
-
-gl_hooks_t *loadHooks() {
-    egl_init_drivers();
-    return gEGLImpl.hooks[egl_connection_t::GLESv2_INDEX];
-}
-
-#if defined(GLTRACE_LOAD_HOOKS_AT_STARTUP)
-// This function will be called automatically when this
-// library (libgfxspy.so) is loaded.  This allows the hooks to
-// be inserted before other libraries are loaded, and is necessary
-// when tracing is done by pre-loading the gfxspy library using
-// LD_PRELOAD.
-__attribute__((constructor)) static void GLTrace_init() {
-    ALOGD("GLTrace_init() called.");
-    memset(&gEGLImpl, sizeof(gEGLImpl), 0);
-    memset(gHooks, sizeof(gHooks), 0);
-
-    egl_init_drivers();
-}
-#endif  // defined(GLTRACE_LOAD_HOOKS_AT_STARTUP)
-
-void GLTrace_eglMakeCurrent(const unsigned version, gl_hooks_t *hooks, EGLContext c) {
+void GLTrace_eglMakeCurrent(EGLContext c) {
     pthread_mutex_lock(&sGlTraceStateLock);
     GLTraceState *state = sGLTraceState;
     pthread_mutex_unlock(&sGlTraceStateLock);
@@ -247,15 +172,10 @@ void GLTrace_eglMakeCurrent(const unsigned version, gl_hooks_t *hooks, EGLContex
     // setup per context state
     GLTraceContext *traceContext = state->getTraceContext(c);
     if (traceContext == NULL) {
-        GLTrace_eglCreateContext(version, c);
+        ALOGD("<gfxspy> GLES version unspecified, defaulting to GLESv1.");
+        GLTrace_eglCreateContext(egl_connection_t::GLESv1_INDEX, c);
         traceContext = state->getTraceContext(c);
     }
-
-    if (hooks == NULL) {
-        hooks = loadHooks();
-    }
-
-    traceContext->hooks = hooks;
     gltrace::setupTraceContextThreadSpecific(traceContext);
 
     // trace command through to the host
@@ -270,9 +190,12 @@ void GLTrace_eglSwapBuffers_internal(void *dpy, void *draw) {
     gltrace::GLTrace_eglSwapBuffers(dpy, draw);
 }
 
-gl_hooks_t *GLTrace_getGLHooks() {
-    return gltrace::getGLHooks();
+#ifndef GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP
+__attribute__((constructor))
+static void GLTrace_init() {
+    initializeDrivers();
 }
+#endif // GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP
 
-}  // namespace gltrace
-}  // namespace android
+}  // end of namespace gltrace
+}  // end of namespace android
