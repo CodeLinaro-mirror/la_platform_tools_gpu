@@ -18,25 +18,22 @@
 #define ANDROID_EGL_LOADER_H
 
 #include <EGL/egl.h>
-#include <utils/Singleton.h>
 
 namespace android {
 
 struct egl_connection_t;
 
-class Loader : public Singleton<Loader> {
+class Loader {
 public:
-    friend class Singleton<Loader>;
-
-    ~Loader();
-    void open(egl_connection_t* cnx);
-    void close(egl_connection_t* cnx);
+    static void open(egl_connection_t* cnx);
+    static void close(egl_connection_t* cnx);
 
 private:
+    Loader();
+    ~Loader();
     typedef __eglMustCastToProperFunctionPointerType(*getProcAddressType)(const char*);
 
-    Loader();
-    void init_api(void *dso, char const *const *api,
+    static void init_api(void *dso, char const *const *api,
             __eglMustCastToProperFunctionPointerType* curr,
             getProcAddressType getProcAddress);
 };

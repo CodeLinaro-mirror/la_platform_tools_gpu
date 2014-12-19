@@ -16,8 +16,8 @@
 
 #include "gltrace_context.h"
 #include "gltrace.pb.h"
+#include "log/log.h"
 
-#include <cutils/log.h>
 #include <pthread.h>
 #include <time.h>
 

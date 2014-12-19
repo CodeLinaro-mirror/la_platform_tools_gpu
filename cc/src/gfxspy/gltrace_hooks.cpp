@@ -19,8 +19,7 @@
 #include "gltrace_context.h"
 #include "gltrace_egl.h"
 #include "hooks.h"
-
-#include <cutils/log.h>
+#include "log/log.h"
 
 #undef TRACE_GL_VOID
 #undef TRACE_GL
@@ -48,7 +47,7 @@
     }
 
 extern "C" {
-#ifdef GENERATE_API_WRAPPERS
+#ifdef GLTRACE_GENERATE_API_WRAPPERS
 #include "trace.in"
 #include "egl_trace.in"
 #endif

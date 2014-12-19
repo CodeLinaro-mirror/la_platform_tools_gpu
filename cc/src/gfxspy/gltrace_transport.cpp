@@ -16,11 +16,10 @@
 
 #include "gltrace_transport.h"
 #include "gltrace.pb.h"
+#include "log/log.h"
 
-#include <cutils/log.h>
 #include <errno.h>
 #include <netinet/in.h>
-#include <private/android_filesystem_config.h>
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -43,10 +42,10 @@ int acceptClientConnection(char *sockname) {
     memset(&server, 0, sizeof server);
     server.sun_family = AF_UNIX;
     // the first byte of sun_path should be '\0' for abstract namespace
-    strcpy(server.sun_path + 1, sockname);
+    strncpy(server.sun_path + 1, sockname, sizeof(server.sun_path) - 2);
 
     // note that sockaddr_len should be set to the exact size of the buffer that is used.
-    socklen_t sockaddr_len = sizeof(server.sun_family) + strlen(sockname) + 1;
+    socklen_t sockaddr_len = sizeof(server);
     if (bind(serverSocket, (struct sockaddr *) &server, sockaddr_len) < 0) {
         ALOGE("Failed to bind the server socket: %s", strerror(errno));
         close(serverSocket);
@@ -60,7 +59,8 @@ int acceptClientConnection(char *sockname) {
     }
 
     ALOGD("gltrace::acceptClientConnection: server listening @ path %s", sockname);
-
+    sockaddr_len = sizeof(client);
+    memset(&client, 0, sizeof(client));
     int clientSocket = accept(serverSocket, (struct sockaddr *)&client, &sockaddr_len);
     if (clientSocket < 0) {
         ALOGE("Failed to accept client connection: %s", strerror(errno));
@@ -77,6 +77,11 @@ int acceptClientConnection(char *sockname) {
         return -1;
     }
 
+    // Constants from system/core/include/private/android_filesystem_config.h.
+    // According to android_filesystem_config.h, these constants should never change.
+    static const int AID_ROOT = 0;      /* traditional unix root user */
+    static const int AID_SHELL = 2000;  /* adb and debug shell user */
+
     // Only accept connects from the shell (adb forward comes to us as shell user),
     // or the root user.
     if (cr.uid != AID_SHELL && cr.uid != AID_ROOT) {
@@ -85,7 +90,6 @@ int acceptClientConnection(char *sockname) {
         close(serverSocket);
         return -1;
     }
-
     ALOGD("gltrace::acceptClientConnection: client connected.");
 
     // do not accept any more incoming connections

@@ -35,15 +35,15 @@
 // EGLAPI \1 EGLTrace_wrapper_\2\3 {\n    LOG_EGL_CALL("EGLTrace_wrapper_\2\3...");\n    \1 return_value = gEGLImpl.egl.\2\4;\n    return return_value;\n}\n
 //////////////////////////////////////////////////////////////////////////
 
+#include "EGL/egldefs.h"
 #include "EGL/Loader.h"
 #include "glestrace.h"
 #include "gltrace_context.h"
 #include "gltrace_egl.h"
 #include "gltrace_transport.h"
 #include "hooks.h"
+#include "log/log.h"
 
-#include <EGL/egldefs.h>
-#include <cutils/log.h>
 
 namespace android {
 namespace gltrace {

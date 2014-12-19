@@ -18,8 +18,8 @@
 #include "gltrace_api.h"
 #include "gltrace_context.h"
 #include "gltrace_fixup.h"
+#include "log/log.h"
 
-#include <cutils/log.h>
 #include <GLES/gl.h>
 #include <GLES/glext.h>
 #include <GLES2/gl2.h>

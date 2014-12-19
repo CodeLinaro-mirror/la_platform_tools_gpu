@@ -20,8 +20,7 @@
 #include "gltrace_context.h"
 #include "gltrace_fixup.h"
 #include "gltrace_transport.h"
-
-#include <cutils/log.h>
+#include "log/log.h"
 
 namespace android {
 namespace gltrace {

@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+#include "EGL/egldefs.h"
 #include "EGL/Loader.h"
 #include "glestrace.h"
 #include "gltrace_context.h"
 #include "gltrace_egl.h"
 #include "gltrace_transport.h"
 #include "hooks.h"
+#include "log/log.h"
 
-#include <EGL/egldefs.h>
 #include <arpa/inet.h>
-#include <cutils/log.h>
 
 namespace android {
 namespace gltrace {
@@ -42,7 +42,7 @@ static void initializeDrivers() {
     struct DriverInitializer {
         static void initialize() {
             memset(&gEGLImpl, sizeof(gEGLImpl), 0);
-            Loader::getInstance().open(&gEGLImpl);
+            Loader::open(&gEGLImpl);
             GLTrace_start();
         }
     };
@@ -194,6 +194,10 @@ void GLTrace_eglSwapBuffers_internal(void *dpy, void *draw) {
 __attribute__((constructor))
 static void GLTrace_init() {
     initializeDrivers();
+}
+__attribute__((destructor))
+static void GLTrace_exit() {
+    GLTrace_stop();
 }
 #endif // GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP
 

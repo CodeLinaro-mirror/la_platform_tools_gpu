@@ -14,12 +14,12 @@
  ** limitations under the License.
  */
 
+#include "EGL/egldefs.h"
 #include "EGL/Loader.h"
 #include "glestrace.h"
+#include "log/log.h"
 
 #include <EGL/egl.h>
-#include <EGL/egldefs.h>
-#include <cutils/log.h>
 #include <dlfcn.h>
 
 #if defined(__LP64__)
@@ -57,7 +57,6 @@ char const * const egl_names[] = {
 };
 #undef EGL_ENTRY
 
-
 /*
  * Note: the loader will look for the following system drivers:
  *   /system/lib{,64}/egl/lib{EGL|GLESv1_CM|GLESv2}.so
@@ -66,17 +65,8 @@ char const * const egl_names[] = {
  *
  */
 
-ANDROID_SINGLETON_STATIC_INSTANCE(Loader);
-
 static const size_t G_HOOKS_SIZE = 2;
 ::android::gl_hooks_t gHooks[G_HOOKS_SIZE];  // Declared in EGL/egldefs.h
-
-Loader::Loader() {
-}
-
-Loader::~Loader() {
-    gltrace::GLTrace_stop();
-}
 
 void Loader::open(egl_connection_t* cnx) {
     if (cnx->libEgl) return; // Already loaded.
