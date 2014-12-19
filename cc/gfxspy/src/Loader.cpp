@@ -14,9 +14,9 @@
  ** limitations under the License.
  */
 
-#include "EGL/egldefs.h"
-#include "EGL/Loader.h"
+#include "egldefs.h"
 #include "glestrace.h"
+#include "Loader.h"
 #include "log/log.h"
 
 #include <EGL/egl.h>
@@ -29,6 +29,7 @@
 #endif
 
 namespace android {
+namespace gltrace {
 
 void gl_unimplemented() {
     ALOGE("called unimplemented OpenGL ES API");
@@ -66,7 +67,7 @@ char const * const egl_names[] = {
  */
 
 static const size_t G_HOOKS_SIZE = 2;
-::android::gl_hooks_t gHooks[G_HOOKS_SIZE];  // Declared in EGL/egldefs.h
+gl_hooks_t gHooks[G_HOOKS_SIZE];
 
 void Loader::open(egl_connection_t* cnx) {
     if (cnx->libEgl) return; // Already loaded.
@@ -157,6 +158,7 @@ void Loader::init_api(void* dso, char const *const *api,
     }
 }
 
+} // end of namespace gltrace
 } // end of namespace android
 
 #if defined(GLTRACE_DLOPEN_INTERCEPTION)

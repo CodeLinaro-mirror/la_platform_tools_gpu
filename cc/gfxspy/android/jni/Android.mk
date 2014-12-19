@@ -10,9 +10,7 @@ include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 
-SRC_FILE_LIST          := \
-    $(wildcard $(LOCAL_PATH)/../../src/EGL/*.cpp) \
-    $(wildcard $(LOCAL_PATH)/../../src/*.cpp)
+SRC_FILE_LIST          := $(wildcard $(LOCAL_PATH)/../../src/*.cpp)
 LOCAL_MODULE           := gfxspy
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 LOCAL_CXXFLAGS         := \

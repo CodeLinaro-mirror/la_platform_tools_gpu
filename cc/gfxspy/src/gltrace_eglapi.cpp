@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-#include "EGL/egldefs.h"
-#include "EGL/Loader.h"
+#include "egldefs.h"
 #include "glestrace.h"
 #include "gltrace_context.h"
 #include "gltrace_egl.h"
 #include "gltrace_transport.h"
 #include "hooks.h"
+#include "Loader.h"
 #include "log/log.h"
 
 #include <arpa/inet.h>
