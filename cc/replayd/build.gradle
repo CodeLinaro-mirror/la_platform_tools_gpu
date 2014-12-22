@@ -1,0 +1,257 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:0.+'
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'cpp'
+
+buildDir temporaryDirectory
+
+def gtestBasePath = '../../../../external/gtest/'
+def gmockBasePath = '../../../../external/gmock/'
+
+android {
+  compileSdkVersion 20
+  buildToolsVersion '20.0.0'
+  defaultConfig.targetSdkVersion 20
+
+  sourceSets.main {
+    manifest.srcFile 'android/AndroidManifest.xml'
+    jniLibs.srcDir temporaryDirectory+'/libs/replayd'
+    jni.srcDirs = []
+  }
+
+  buildTypes {
+    release {
+      debuggable false
+      jniDebuggable false
+      minifyEnabled false
+      zipAlignEnabled true
+    }
+    debug {
+      debuggable true
+      jniDebuggable true
+      zipAlignEnabled true
+    }
+  }
+}
+
+task ndkBuild(type: Exec) {
+  def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+  commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+              'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', '-j'
+}
+
+task ndkClean(type: Exec) {
+  def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+  commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+              'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', 'clean'
+}
+
+tasks.withType(JavaCompile) { compileTask ->
+  compileTask.dependsOn ndkBuild
+}
+
+clean.dependsOn ndkClean
+
+task runTests(type: Exec, dependsOn: nativePlatform()+'TestExecutable') {
+  workingDir goPath
+  commandLine temporaryDirectory+'/binaries/testExecutable/'+nativePlatform()+'/test'
+}
+
+model {
+  platforms {
+    linux64 {
+      operatingSystem 'linux'
+      architecture 'x86_64'
+    }
+    osx64 {
+      operatingSystem 'osx'
+      architecture 'x86_64'
+    }
+    windows64 {
+      operatingSystem 'windows'
+      architecture 'x86_64'
+    }
+  }
+  toolChains {
+    switch (osFamily()) {
+      case 'mac':
+        clang(Clang) {
+          target('osx64') {
+            cppCompiler.withArguments { it << '-DTARGET_OS_OSX' }
+          }
+        }
+        break
+
+      case 'linux':
+        gcc(Gcc) {
+          target('linux64') {
+            cppCompiler.withArguments { it << '-DTARGET_OS_LINUX' }
+          }
+          target('windows64') {
+            cppCompiler.withArguments { it << '-DTARGET_OS_WINDOWS' }
+            cppCompiler.withArguments { it << '-I'+mingwRoot()+'/include' }
+            cppCompiler.executable 'x86_64-w64-mingw32-g++'
+            cCompiler.executable 'x86_64-w64-mingw32-gcc'
+            linker.executable 'x86_64-w64-mingw32-g++'
+            assembler.executable 'x86_64-w64-mingw32-as'
+            staticLibArchiver.executable 'x86_64-w64-mingw32-ar'
+          }
+        }
+        break
+
+      case 'windows':
+        gcc(Gcc) {
+          target('windows64') {
+            cppCompiler.withArguments { it << '-DTARGET_OS_WINDOWS' }
+            cppCompiler.executable 'x86_64-w64-mingw32-g++'
+            cCompiler.executable 'x86_64-w64-mingw32-gcc'
+            linker.executable 'x86_64-w64-mingw32-g++'
+            assembler.executable 'x86_64-w64-mingw32-as'
+            staticLibArchiver.executable 'x86_64-w64-mingw32-ar'
+          }
+        }
+        break
+    }
+  }
+}
+
+libraries {
+  gtest {
+    binaries.all {
+      cppCompiler.args '-I', file(gtestBasePath).absolutePath, '-I', file(gtestBasePath+'include').absolutePath
+    }
+  }
+
+  gmock {
+    binaries.all {
+      cppCompiler.args '-I', file(gmockBasePath).absolutePath, '-I', file(gmockBasePath+'include').absolutePath, '-I', file(gtestBasePath+'include').absolutePath
+    }
+  }
+
+  caze {
+    binaries.all {
+      cppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
+    }
+  }
+}
+
+executables {
+  replayd {
+    binaries.all {
+      cppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
+      lib libraries.caze.static
+      linker.args(*cazeLinkerArgs(targetPlatform.name))
+    }
+  }
+
+  test {
+    binaries.all {
+      cppCompiler.args '-std=c++11', '-I', file(gtestBasePath+'include').absolutePath, '-I', file(gmockBasePath+'include').absolutePath, '-I', '/usr/local/include', '-g'
+      lib libraries.caze.static
+      lib libraries.gtest.static
+      lib libraries.gmock.static
+      linker.args(*cazeLinkerArgs(targetPlatform.name))
+    }
+  }
+}
+
+sources {
+  gtest {
+    cpp {
+      source {
+        srcDir gtestBasePath+'src'
+        include 'gtest-all.cc'
+        include 'gtest_main.cc'
+      }
+    }
+  }
+
+  gmock {
+    cpp {
+      source {
+        srcDir gmockBasePath+'src'
+        include 'gmock-all.cc'
+      }
+    }
+  }
+
+  caze {
+    cpp {
+      source {
+        srcDir 'src'
+        include '**/*.cpp'
+        exclude '**/Main.cpp'
+      }
+      exportedHeaders {
+        srcDirs 'src'
+      }
+    }
+  }
+
+  test {
+    cpp {
+      source {
+        srcDir 'test'
+        include '**/*.cpp'
+      }
+    }
+  }
+
+  replayd {
+    cpp {
+      source {
+        srcDir 'src'
+        include '**/Main.cpp'
+      }
+    }
+  }
+}
+
+task buildAndroid(dependsOn: ['assembleDebug', 'assembleRelease']) {
+}
+
+task buildLocal(dependsOn: [nativePlatform()+'TestExecutable', nativePlatform()+'ReplaydExecutable']) {
+}
+
+task installLocal(type: Copy, dependsOn: 'buildLocal') {
+  from (temporaryDirectory+'/binaries/replaydExecutable/'+nativePlatform()) {
+    include 'replayd*'
+  }
+  from (temporaryDirectory+'/binaries/testExecutable/'+nativePlatform()) {
+    include 'test*'
+    rename 'test(.*)', 'testReplayd$1'
+  }
+  into outputDirectory
+}
+
+task windows64installLocal(type: Copy, dependsOn: ['windows64TestExecutable', 'windows64ReplaydExecutable']) {
+  if (nativePlatform() != 'windows64') {
+    from (temporaryDirectory+'/binaries/replaydExecutable/windows64') {
+      include 'replayd*'
+    }
+    from (temporaryDirectory+'/binaries/testExecutable/windows64') {
+      include 'test*'
+      rename 'test(.*)', 'testReplayd$1'
+    }
+  }
+  into mingwRoot()+'/bin/'
+}
+
+def cazeLinkerArgs(targetPlatformName) {
+  switch (targetPlatformName) {
+    case 'linux64': return ['-lglfw', '-lGLEW', '-lGL', '-lstdc++', '-lm', '-lpthread']
+    case 'osx64': return ['-framework', 'OpenGL', '-lglfw', '-lstdc++', '-L/usr/local/lib', '-lpthread']
+    case 'windows64': return ['-static-libgcc', '-static-libstdc++', '-L/usr/local/lib', '-L'+mingwRoot()+'/lib', '-lws2_32', '-lglew32', '-lglfw3', '-lopengl32', '-lgdi32']
+  }
+}
+
+def mingwRoot() {
+  return System.getenv('MINGW_ROOT') ?: '/usr/local/mingw-root'
+}
