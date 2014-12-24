@@ -56,25 +56,23 @@ func checkEncoderGivesError(t *testing.T, e *Encoder, expectedError error) {
 }
 
 func TestEncoderNoError(t *testing.T) {
-	e, _ := BufferEncoder()
-	e = e.WithNamespace(testObjectNamespace)
-	checkEncoderGivesError(t, e.WithNamespace(testObjectNamespace), nil)
+	e := NewEncoder(ioutil.Discard)
+	checkEncoderGivesError(t, e, nil)
 }
 
 func TestEncoderShortWrite(t *testing.T) {
-	e := &Encoder{Writer: shortWriter{}}
-	e = e.WithNamespace(testObjectNamespace)
+	e := NewEncoder(shortWriter{})
 	checkEncoderGivesError(t, e, io.ErrShortWrite)
 }
 
 func TestEncoderTestError(t *testing.T) {
-	e := &Encoder{Writer: errorWriter{testError}}
-	e = e.WithNamespace(testObjectNamespace)
+	e := NewEncoder(errorWriter{testError})
 	checkEncoderGivesError(t, e, testError)
 }
 
 func TestEncoderBool(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Bool(false)
 	e.Bool(true)
 	expected, got := []byte{0, 1}, b.Bytes()
@@ -84,7 +82,8 @@ func TestEncoderBool(t *testing.T) {
 }
 
 func TestEncoderInt8(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Int8(0)
 	e.Int8(127)
 	e.Int8(-128)
@@ -96,7 +95,8 @@ func TestEncoderInt8(t *testing.T) {
 }
 
 func TestEncoderUint8(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Uint8(0x00)
 	e.Uint8(0x7f)
 	e.Uint8(0x80)
@@ -108,7 +108,8 @@ func TestEncoderUint8(t *testing.T) {
 }
 
 func TestEncoderInt16(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Int16(0)
 	e.Int16(32767)
 	e.Int16(-32768)
@@ -125,7 +126,8 @@ func TestEncoderInt16(t *testing.T) {
 }
 
 func TestEncoderUint16(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Uint16(0)
 	e.Uint16(0xbeef)
 	e.Uint16(0xc0de)
@@ -140,7 +142,8 @@ func TestEncoderUint16(t *testing.T) {
 }
 
 func TestEncoderInt32(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Int32(0)
 	e.Int32(2147483647)
 	e.Int32(-2147483648)
@@ -157,7 +160,8 @@ func TestEncoderInt32(t *testing.T) {
 }
 
 func TestEncoderUint32(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Uint32(0)
 	e.Uint32(0x01234567)
 	e.Uint32(0x10abcdef)
@@ -172,7 +176,8 @@ func TestEncoderUint32(t *testing.T) {
 }
 
 func TestEncoderFloat32(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Float32(0)
 	e.Float32(1)
 	e.Float32(64.5)
@@ -187,7 +192,8 @@ func TestEncoderFloat32(t *testing.T) {
 }
 
 func TestEncoderInt64(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Int64(0)
 	e.Int64(9223372036854775807)
 	e.Int64(-9223372036854775808)
@@ -204,7 +210,8 @@ func TestEncoderInt64(t *testing.T) {
 }
 
 func TestEncoderUint64(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Uint64(0)
 	e.Uint64(0x0123456789abcdef)
 	e.Uint64(0xfedcba9876543210)
@@ -219,7 +226,8 @@ func TestEncoderUint64(t *testing.T) {
 }
 
 func TestEncoderFloat64(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Float64(0)
 	e.Float64(1)
 	e.Float64(64.5)
@@ -235,7 +243,8 @@ func TestEncoderFloat64(t *testing.T) {
 }
 
 func TestEncoderString(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.String("Hello")
 	e.String("")
 	e.String("World")
@@ -256,7 +265,8 @@ func TestEncoderString(t *testing.T) {
 }
 
 func TestEncoderCString(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.CString("Hello")
 	e.CString("")
 	e.CString("World")
@@ -274,7 +284,8 @@ func TestEncoderCString(t *testing.T) {
 }
 
 func TestEncoderData(t *testing.T) {
-	e, b := BufferEncoder()
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	e.Data([]byte{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc})
 	expected, got := []byte{
 		0x06, 0x00, 0x00, 0x00,
@@ -286,8 +297,8 @@ func TestEncoderData(t *testing.T) {
 }
 
 func TestEncoderObject(t *testing.T) {
-	e, b := BufferEncoder()
-	e = e.WithNamespace(testObjectNamespace)
+	b := &bytes.Buffer{}
+	e := NewEncoder(b)
 	if err := e.Object(testObjA); err != nil {
 		t.Errorf("Encode gave unexpected error: %v", err)
 	}
@@ -302,12 +313,12 @@ func TestEncoderObject(t *testing.T) {
 	}
 	expected, got := []byte{
 		0x00, 0x00,
-		byte(testObjectIDA & 0xff), byte((testObjectIDA >> 8) & 0xff),
+		0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x07, 0x00, 0x00, 0x00,
 		'O', 'b', 'j', 'e', 'c', 't', 'A',
 
 		0x01, 0x00,
-		byte(testObjectIDB & 0xff), byte((testObjectIDB >> 8) & 0xff),
+		0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x07, 0x00, 0x00, 0x00,
 		'O', 'b', 'j', 'e', 'c', 't', 'B',
 
@@ -321,26 +332,25 @@ func TestEncoderObject(t *testing.T) {
 }
 
 func TestEncoderObjectUnknownTypeError(t *testing.T) {
-	e, _ := BufferEncoder()
-	expected := UnknownTypeError{testObjA}
-	if err := e.Object(testObjA); err != expected {
+	e := NewEncoder(ioutil.Discard)
+	expected := unknownType{testObjC}
+	if err := e.Object(testObjC); err != expected {
 		t.Errorf("Encode gave unexpected error. Expected: %v, got: %v", expected, err)
 	}
 }
 
 func TestUnknownTypeErrorError(t *testing.T) {
-	expected := "Encoder's TypeNamespace did not contain type *binary.testObjectA"
-	got := UnknownTypeError{&testObjectA{}}.Error()
+	expected := "Unknown type *binary.testObjectC encountered in binary.Encoder"
+	got := unknownType{&testObjectC{}}.Error()
 	if expected != got {
-		t.Errorf("UnknownTypeError.Error() did not return expected result. Expected: %v, got: %v", expected, got)
+		t.Errorf("Error() did not return expected result. Expected: %v, got: %v", expected, got)
 	}
 }
 
 func BenchmarkEncoderObject(b *testing.B) {
 	encoders := make([]*Encoder, b.N)
 	for i := range encoders {
-		e := &Encoder{Writer: ioutil.Discard}
-		encoders[i] = e.WithNamespace(testObjectNamespace)
+		encoders[i] = NewEncoder(ioutil.Discard)
 	}
 	b.ResetTimer()
 

@@ -15,52 +15,40 @@
 package binary
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"math"
+	"reflect"
 )
-
-// UnknownTypeIDError is returned by Decoder.Object when decoding an Object which has a type that
-// does not exist in the Decoder's TypeNamespace.
-type UnknownTypeIDError struct {
-	ID ObjectTypeID // The type id that is not in the Decoder's TypeNamespace
-}
-
-func (e UnknownTypeIDError) Error() string {
-	return fmt.Sprintf("Decoder's TypeNamespace did not contain decoded type id %v", e.ID)
-}
 
 // Decoder provides methods for decoding values to an io.Reader.
 type Decoder struct {
-	Reader    io.Reader
-	tmp       [8]byte
-	objects   map[uint16]Object
-	namespace TypeNamespace
+	reader  io.Reader
+	tmp     [8]byte
+	objects map[uint16]interface{}
 }
 
-// BufferDecoder creates a Decoder that reads from the provided byte slice.
-func BufferDecoder(buf []byte) *Decoder {
-	return &Decoder{Reader: bytes.NewBuffer(buf)}
+// NewDecoder creates a Decoder that reads from the provided io.Reader.
+func NewDecoder(reader io.Reader) *Decoder {
+	return &Decoder{reader: reader, objects: map[uint16]interface{}{}}
 }
 
-// WithNamespace returns a new Decoder that will use the specified TypeNamespace for constructing
-// encoded objects. Any previously assigned TypeNamespace will not be used by the returned Decoder.
-func (d *Decoder) WithNamespace(namespace TypeNamespace) *Decoder {
-	if d.objects == nil {
-		d.objects = make(map[uint16]Object)
-	}
-	return &Decoder{
-		Reader:    d.Reader,
-		objects:   d.objects,
-		namespace: namespace,
-	}
+// Read implements the io.Reader interface, delegating to the underlying reader.
+func (d *Decoder) Read(p []byte) (int, error) {
+	return d.reader.Read(p)
+}
+
+// TypeID decodes and returns a type id from the Decoder's io.Reader.
+func (d *Decoder) TypeID() (TypeID, error) {
+	var id TypeID
+	_, err := io.ReadFull(d.reader, id[:])
+	return id, err
 }
 
 // Bool decodes and returns a boolean value from the Decoder's io.Reader.
 func (d *Decoder) Bool() (bool, error) {
 	b := d.tmp[:1]
-	_, err := io.ReadFull(d.Reader, b[:1])
+	_, err := io.ReadFull(d.reader, b[:1])
 	return b[0] != 0, err
 }
 
@@ -73,7 +61,7 @@ func (d *Decoder) Int8() (int8, error) {
 // Uint8 decodes and returns an unsigned, 8 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint8() (uint8, error) {
 	b := d.tmp[:1]
-	_, err := io.ReadFull(d.Reader, b[:1])
+	_, err := io.ReadFull(d.reader, b[:1])
 	return b[0], err
 }
 
@@ -86,7 +74,7 @@ func (d *Decoder) Int16() (int16, error) {
 // Uint16 decodes and returns an unsigned, 16 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint16() (uint16, error) {
 	b := d.tmp[:2]
-	_, err := io.ReadFull(d.Reader, b)
+	_, err := io.ReadFull(d.reader, b)
 	return uint16(b[0]) | uint16(b[1])<<8, err
 }
 
@@ -99,7 +87,7 @@ func (d *Decoder) Int32() (int32, error) {
 // Uint32 decodes and returns an unsigned, 32 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint32() (uint32, error) {
 	b := d.tmp[:4]
-	_, err := io.ReadFull(d.Reader, b[:])
+	_, err := io.ReadFull(d.reader, b[:])
 	return uint32(b[0]) | uint32(b[1])<<8 | uint32(b[2])<<16 | uint32(b[3])<<24, err
 }
 
@@ -118,7 +106,7 @@ func (d *Decoder) Int64() (int64, error) {
 // Uint64 decodes and returns an unsigned, 64 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint64() (uint64, error) {
 	b := d.tmp[:8]
-	_, err := io.ReadFull(d.Reader, b[:])
+	_, err := io.ReadFull(d.reader, b[:])
 	return uint64(b[0]) |
 		uint64(b[1])<<8 |
 		uint64(b[2])<<16 |
@@ -143,7 +131,7 @@ func (d *Decoder) String() (string, error) {
 	}
 	if c > 0 {
 		s := make([]byte, c)
-		_, err := io.ReadFull(d.Reader, s)
+		_, err := io.ReadFull(d.reader, s)
 		return string(s), err
 	} else {
 		return "", nil
@@ -174,16 +162,21 @@ func (d *Decoder) Data() ([]byte, error) {
 	}
 
 	buf := make([]byte, c)
-	_, err = io.ReadFull(d.Reader, buf)
+	_, err = io.ReadFull(d.reader, buf)
 
 	return buf, err
 }
 
+type unknownTypeID TypeID
+
+func (e unknownTypeID) Error() string {
+	return fmt.Sprintf("Unknown type id %x encountered in binary.Decoder", TypeID(e))
+}
+
 // Object decodes and returns an Object from the Decoder's io.Reader. Object instances that were
 // encoded multiple times will be decoded and returned as a shared, single instance.
-// The Decoder must be bound to the same TypeNamespace used to encode the object, otherwise the
-// decoder may return an incorrectly decoded object, or may return an UnknownTypeIDError.
-func (d *Decoder) Object() (Object, error) {
+// The type id in the stream must have been previously registered with binary.Register.
+func (d *Decoder) Object() (interface{}, error) {
 	key, err := d.Uint16()
 	if err != nil {
 		return nil, err
@@ -193,20 +186,19 @@ func (d *Decoder) Object() (Object, error) {
 		return nil, nil
 	}
 
-	obj, alreadyDecoded := d.objects[key]
-	if alreadyDecoded {
+	if obj, alreadyDecoded := d.objects[key]; alreadyDecoded {
 		return obj, nil
 	}
 
-	ty, err := d.Uint16()
+	id, err := d.TypeID()
 	if err != nil {
 		return nil, err
 	}
-
-	if obj = d.namespace.new(ObjectTypeID(ty)); obj == nil {
-		return nil, UnknownTypeIDError{ObjectTypeID(ty)}
+	t, idFound := idToType[id]
+	if !idFound {
+		return nil, unknownTypeID(id)
 	}
-
+	obj := reflect.New(t).Interface().(Decodable)
 	if err = obj.Decode(d); err != nil {
 		return nil, err
 	}

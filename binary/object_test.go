@@ -16,9 +16,10 @@ package binary
 
 var testObjA = &testObjectA{testObjectBase{"ObjectA"}}
 var testObjB = &testObjectB{testObjectBase{"ObjectB"}}
+var testObjC = &testObjectC{testObjectBase{"ObjectC"}}
 
-const testObjectIDA ObjectTypeID = 0x100
-const testObjectIDB ObjectTypeID = 0x200
+var testObjectIDA = TypeID{0x0A}
+var testObjectIDB = TypeID{0x0B}
 
 type testObjectBase struct{ data string }
 
@@ -34,20 +35,9 @@ func (t *testObjectBase) Decode(d *Decoder) error {
 
 type testObjectA struct{ testObjectBase }
 type testObjectB struct{ testObjectBase }
+type testObjectC struct{ testObjectBase }
 
-func DecodeTestObjectA(d *Decoder) (Object, error) {
-	o := &testObjectA{}
-	err := o.Decode(d)
-	return o, err
+func init() {
+	Register(testObjectIDA, &testObjectA{})
+	Register(testObjectIDB, &testObjectB{})
 }
-
-func DecodeTestObjectB(d *Decoder) (Object, error) {
-	o := &testObjectB{}
-	err := o.Decode(d)
-	return o, err
-}
-
-var testObjectNamespace = NewTypeNamespace(
-	Type{ID: testObjectIDA, New: func() Object { return &testObjectA{} }},
-	Type{ID: testObjectIDB, New: func() Object { return &testObjectB{} }},
-)

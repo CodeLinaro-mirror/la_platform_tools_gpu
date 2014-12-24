@@ -15,38 +15,26 @@
 package binary
 
 import (
-	"bytes"
 	"fmt"
 	"io"
 	"math"
+	"reflect"
 )
-
-// UnknownTypeError is returned by Encoder.Object when attempting to encode an Object that is not
-// part of the Encoder's TypeNamespace.
-type UnknownTypeError struct {
-	Type Object // The Object whose type is not in the Encoder's TypeNamespace
-}
-
-func (e UnknownTypeError) Error() string {
-	return fmt.Sprintf("Encoder's TypeNamespace did not contain type %T", e.Type)
-}
 
 // Encoder provides methods for encoding values to an io.Writer.
 type Encoder struct {
-	Writer    io.Writer
-	objects   map[Object]uint16
-	tmp       [8]byte
-	namespace TypeNamespace
+	writer  io.Writer
+	objects map[interface{}]uint16
+	tmp     [8]byte
 }
 
-// BufferEncoder creates an Encoder that writes to the returned bytes.Buffer.
-func BufferEncoder() (*Encoder, *bytes.Buffer) {
-	buf := &bytes.Buffer{}
-	return &Encoder{Writer: buf}, buf
+// NewEncoder creates an Encoder that writes to the supplied stream.
+func NewEncoder(writer io.Writer) *Encoder {
+	return &Encoder{writer: writer, objects: map[interface{}]uint16{}}
 }
 
 func (e *Encoder) write(data []byte) error {
-	n, err := e.Writer.Write(data)
+	n, err := e.writer.Write(data)
 	if err != nil {
 		return err
 	}
@@ -56,17 +44,14 @@ func (e *Encoder) write(data []byte) error {
 	return nil
 }
 
-// WithNamespace returns a new Encoder that will use the specified TypeNamespace for encoding
-// Objects. Any previously assigned TypeNamespace will not be used by the returned Encoder.
-func (e *Encoder) WithNamespace(namespace TypeNamespace) *Encoder {
-	if e.objects == nil {
-		e.objects = make(map[Object]uint16)
-	}
-	return &Encoder{
-		Writer:    e.Writer,
-		objects:   e.objects,
-		namespace: namespace,
-	}
+// Write implements the io.Writer interface, delegating to the underlying writer.
+func (e *Encoder) Write(p []byte) (int, error) {
+	return e.writer.Write(p)
+}
+
+// TypeID encodes a type id to the Encoder's io.Writer.
+func (e *Encoder) TypeID(v TypeID) error {
+	return e.write(v[:])
 }
 
 // Bool encodes a boolean value to the Encoder's io.Writer.
@@ -168,13 +153,20 @@ func (e *Encoder) Data(data []byte) error {
 	return e.write(data)
 }
 
-// Object encodes an Object to the Encoder's io.Writer. If Object is called repeatedly with the
+type unknownType struct {
+	Object Encodable
+}
+
+func (e unknownType) Error() string {
+	return fmt.Sprintf("Unknown type %T encountered in binary.Encoder", e.Object)
+}
+
+// Object encodes an Encodable to the Encoder's io.Writer. If Object is called repeatedly with the
 // same argument (i.e. the argument has identical dynamic types and equal dynamic values), then the
 // argument will only be encoded with the first call, and later encodings will reference the first
 // encoding.
-// The Encoder must be bound to the same TypeNamespace used to encode the object, otherwise the
-// decoder may return an incorrectly decoded object, or may return an UnknownTypeIDError.
-func (e *Encoder) Object(obj Object) error {
+// The type of obj must have been previously registered with binary.Register.
+func (e *Encoder) Object(obj Encodable) error {
 	if obj == nil {
 		return e.Uint16(objectNil)
 	}
@@ -184,14 +176,14 @@ func (e *Encoder) Object(obj Object) error {
 		return e.Uint16(key)
 	}
 
-	id, idFound := e.namespace.idOf(obj)
+	id, idFound := typeToID[reflect.TypeOf(obj)]
 	if !idFound {
-		return UnknownTypeError{obj}
+		return unknownType{obj}
 	}
 
 	key = uint16(len(e.objects))
 	e.objects[obj] = key
 	e.Uint16(key)
-	e.Uint16(uint16(id))
+	e.TypeID(id)
 	return obj.Encode(e)
 }
