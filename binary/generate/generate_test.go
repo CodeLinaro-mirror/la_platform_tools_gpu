@@ -1,0 +1,159 @@
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package generate
+
+import (
+	"bytes"
+	"fmt"
+	"log"
+	"testing"
+
+	"golang.org/x/tools/go/loader"
+	"golang.org/x/tools/go/types"
+)
+
+func parseStructs(source string) []*Struct {
+	config := loader.Config{}
+	fakeFile := fmt.Sprintf("package fake\n%s", source)
+	file, err := config.ParseFile("", fakeFile)
+	if err != nil {
+		log.Fatalf("invalid source: %s", err)
+	}
+	config.CreateFromFiles("", file)
+	info, err := config.Load()
+	if err != nil {
+		log.Fatalf("load failed: %s", err)
+	}
+	result := []*Struct{}
+	for _, pkg := range info.Created {
+		for _, def := range pkg.Defs {
+			if n, ok := def.(*types.TypeName); ok {
+				if t, ok := n.Type().(*types.Named); ok {
+					if _, ok := t.Underlying().(*types.Struct); ok {
+						result = append(result, FromTypename(pkg.Pkg, n))
+					}
+				}
+			}
+		}
+	}
+	return result
+}
+
+func parseStruct(t *testing.T, name string, source string) *Struct {
+	s := parseStructs(source)
+	if len(s) != 1 {
+		log.Fatalf("Parsed %d structs, expected 1", len(s))
+	}
+	if s[0].Name != name {
+		t.Errorf("Got struct %s, expected %s", s[0].Name, name)
+	}
+	return s[0]
+}
+
+func TestEmpty(t *testing.T) {
+	s := parseStruct(t, "MyStruct", "type MyStruct struct {}")
+	if len(s.Fields) != 0 {
+		t.Errorf("Got %d fields, expected none", len(s.Fields))
+	}
+}
+
+func TestStableID(t *testing.T) {
+	source := "type MyStruct struct {}"
+	a := parseStruct(t, "MyStruct", source)
+	b := parseStruct(t, "MyStruct", source)
+	if a.ID != b.ID {
+		t.Errorf("ID was not stable")
+	}
+}
+
+func TestNameAffectsID(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {}")
+	b := parseStruct(t, "YourStruct", "type YourStruct struct {}")
+	if a.ID == b.ID {
+		t.Errorf("Name change did not change ID")
+	}
+}
+
+func TestFieldCountAffectsID(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct {}")
+	if a.ID == b.ID {
+		t.Errorf("Field count did not change ID")
+	}
+}
+
+func TestFieldNameAffectsID(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct { b int}")
+	if a.ID == b.ID {
+		t.Errorf("Field name did not change ID")
+	}
+}
+
+func TestFieldTypeAffectsID(t *testing.T) {
+	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct { a byte}")
+	if a.ID == b.ID {
+		t.Errorf("Field type did not change ID")
+	}
+}
+
+func TestTypes(t *testing.T) {
+	fields := []Field{
+		{"a", &Type{"uint8", "uint8", Basic, nil, "Uint8"}},
+		{"b", &Type{"uint16", "uint16", Basic, nil, "Uint16"}},
+		{"c", &Type{"uint32", "uint32", Basic, nil, "Uint32"}},
+		{"d", &Type{"uint64", "uint64", Basic, nil, "Uint64"}},
+		{"e", &Type{"int8", "int8", Basic, nil, "Int8"}},
+		{"f", &Type{"int16", "int16", Basic, nil, "Int16"}},
+		{"g", &Type{"int32", "int32", Basic, nil, "Int32"}},
+		{"h", &Type{"int64", "int64", Basic, nil, "Int64"}},
+		{"i", &Type{"float32", "float32", Basic, nil, "Float32"}},
+		{"j", &Type{"float64", "float64", Basic, nil, "Float64"}},
+		{"k", &Type{"byte", "uint8", Basic, nil, "Uint8"}},
+		{"l", &Type{"int", "int32", Basic, nil, "Int32"}},
+		{"m", &Type{"bool", "bool", Basic, nil, "Bool"}},
+		{"n", &Type{"string", "string", Basic, nil, "String"}},
+		{"o", &Type{"struct{}", "struct{}", Codeable, nil, ""}},
+		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, ""}},
+		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, ""}},
+		{"r", &Type{"interface{}", "interface{}", Interface, nil, ""}},
+	}
+	source := &bytes.Buffer{}
+	fmt.Fprint(source, "type MyStruct struct {\n")
+	for _, f := range fields {
+		fmt.Fprintf(source, "  %s %s\n", f.Name, f.Type.Name)
+	}
+	fmt.Fprint(source, "}\n")
+	s := parseStruct(t, "MyStruct", source.String())
+	if len(s.Fields) != len(fields) {
+		t.Errorf("Got %d fields, expected %d", len(s.Fields), len(fields))
+	}
+	for i, got := range s.Fields {
+		expected := fields[i]
+		if got.Name != expected.Name {
+			t.Errorf("Got field %s, expected %s", got.Name, expected.Name)
+		}
+		if got.Type.Kind != expected.Type.Kind {
+			t.Errorf("Got field kind %d, expected %d", got.Type.Kind, expected.Type.Kind)
+		}
+		if got.Type.Native != expected.Type.Native {
+			t.Errorf("Got field native type %s, expected %s", got.Type.Native, expected.Type.Native)
+		}
+		if got.Type.Method != expected.Type.Method {
+			t.Errorf("Got field native type %s, expected %s", got.Type.Method, expected.Type.Method)
+		}
+	}
+}
