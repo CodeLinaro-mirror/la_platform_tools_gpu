@@ -14,22 +14,13 @@
  ** limitations under the License.
  */
 
-#ifndef ANDROID_EGLDEFS_H
-#define ANDROID_EGLDEFS_H
+#ifndef ANDROID_GLTRACE_EGLDEFS_H
+#define ANDROID_GLTRACE_EGLDEFS_H
 
-#include "../hooks.h"
+#include "hooks.h"
 
-#define VERSION_MAJOR 1
-#define VERSION_MINOR 4
-
-// ----------------------------------------------------------------------------
 namespace android {
-// ----------------------------------------------------------------------------
-
-//  EGLDisplay are global, not attached to a given thread
-const unsigned int NUM_DISPLAYS = 1;
-
-// ----------------------------------------------------------------------------
+namespace gltrace {
 
 struct egl_connection_t {
     enum {
@@ -49,21 +40,9 @@ struct egl_connection_t {
     void*               libGles2;
 };
 
-// ----------------------------------------------------------------------------
-
-extern gl_hooks_t gHooks[2];
-extern gl_hooks_t gHooksNoContext;
-extern pthread_key_t gGLWrapperKey;
-extern "C" void gl_unimplemented();
-extern "C" void gl_noop();
-
-extern char const * const gl_names[];
-extern char const * const egl_names[];
-
 extern egl_connection_t gEGLImpl;
 
-// ----------------------------------------------------------------------------
-}; // namespace android
-// ----------------------------------------------------------------------------
+} // end of namespace gltrace
+} // end of namespace android
 
-#endif /* ANDROID_EGLDEFS_H */
+#endif /* ANDROID_GLTRACE_EGLDEFS_H */

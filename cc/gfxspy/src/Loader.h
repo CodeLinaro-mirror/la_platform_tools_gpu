@@ -14,12 +14,13 @@
  ** limitations under the License.
  */
 
-#ifndef ANDROID_EGL_LOADER_H
-#define ANDROID_EGL_LOADER_H
+#ifndef ANDROID_GLTRACE_LOADER_H
+#define ANDROID_GLTRACE_LOADER_H
 
 #include <EGL/egl.h>
 
 namespace android {
+namespace gltrace {
 
 struct egl_connection_t;
 
@@ -38,6 +39,7 @@ private:
             getProcAddressType getProcAddress);
 };
 
+} // end of namespace gltrace
 } // end of namespace android
 
-#endif // ANDROID_EGL_LOADER_H
+#endif // ANDROID_GLTRACE_LOADER_H

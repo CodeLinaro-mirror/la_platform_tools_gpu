@@ -14,14 +14,8 @@
  ** limitations under the License.
  */
 
-#ifndef ANDROID_GLES_CM_HOOKS_H
-#define ANDROID_GLES_CM_HOOKS_H
-
-#include <ctype.h>
-#include <string.h>
-#include <errno.h>
-
-#include <pthread.h>
+#ifndef ANDROID_GLTRACE_HOOKS_H
+#define ANDROID_GLTRACE_HOOKS_H
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
@@ -32,34 +26,24 @@
 #include <GLES3/gl3.h>
 #include <GLES3/gl31.h>
 
-// set to 1 for debugging
-#define USE_SLOW_BINDING    0
-
-#undef NELEM
-#define NELEM(x)            (sizeof(x)/sizeof(*(x)))
-
 // maximum number of GL extensions that can be used simultaneously in
 // a given process. this limitation exists because we need to have
 // a static function for each extension and currently these static functions
 // are generated at compile time.
 #define MAX_NUMBER_OF_GL_EXTENSIONS 256
 
-
-// ----------------------------------------------------------------------------
 namespace android {
-// ----------------------------------------------------------------------------
+namespace gltrace {
 
-// GL / EGL hooks
-
-#undef GL_ENTRY
 #undef EGL_ENTRY
-#define GL_ENTRY(_r, _api, ...) _r (*_api)(__VA_ARGS__);
 #define EGL_ENTRY(_r, _api, ...) _r (*_api)(__VA_ARGS__);
-
 struct egl_t {
     #include "egl_entries.in"
 };
+#undef EGL_ENTRY
 
+#undef GL_ENTRY
+#define GL_ENTRY(_r, _api, ...) _r (*_api)(__VA_ARGS__);
 struct gl_hooks_t {
     struct gl_t {
         #include "entries.in"
@@ -69,10 +53,8 @@ struct gl_hooks_t {
     } ext;
 };
 #undef GL_ENTRY
-#undef EGL_ENTRY
 
-// ----------------------------------------------------------------------------
-}; // namespace android
-// ----------------------------------------------------------------------------
+} // end of namespace gltrace
+} // end of namespace android
 
-#endif /* ANDROID_GLES_CM_HOOKS_H */
+#endif /* ANDROID_GLTRACE_HOOKS_H */
