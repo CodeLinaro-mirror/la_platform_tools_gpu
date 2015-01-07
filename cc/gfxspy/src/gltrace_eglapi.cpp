@@ -43,7 +43,6 @@ static void initializeDrivers() {
         static void initialize() {
             memset(&gEGLImpl, sizeof(gEGLImpl), 0);
             Loader::open(&gEGLImpl);
-            GLTrace_start();
         }
     };
     pthread_once(&sGlTraceDriverInitOnce, &DriverInitializer::initialize);
@@ -147,6 +146,8 @@ void GLTrace_stop() {
 }
 
 void GLTrace_eglCreateContext(int version, EGLContext c) {
+    GLTrace_start();
+
     pthread_mutex_lock(&sGlTraceStateLock);
     GLTraceState *state = sGLTraceState;
     pthread_mutex_unlock(&sGlTraceStateLock);
