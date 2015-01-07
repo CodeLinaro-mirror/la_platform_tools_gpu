@@ -30,7 +30,7 @@ namespace gltrace {
 
 // Accepts one client connection on the UNIX socket sockname. Returns its socket, or -1 on failure.
 int acceptClientConnection(char *sockname) {
-    int serverSocket = socket(AF_LOCAL, SOCK_STREAM, 0);
+    int serverSocket = socket(AF_UNIX, SOCK_STREAM, 0);
     if (serverSocket < 0) {
         ALOGE("Error while creating socket: %s. Check if app has network permissions.",
               strerror(errno));
@@ -39,13 +39,18 @@ int acceptClientConnection(char *sockname) {
 
     struct sockaddr_un server, client;
 
-    memset(&server, 0, sizeof server);
+    memset(&server, 0, sizeof(server));
     server.sun_family = AF_UNIX;
-    // the first byte of sun_path should be '\0' for abstract namespace
+    // Comments copied from:
+    // platform/external/chromium_org/net/socket/unix_domain_client_socket_posix.cc.
+    // Convert the path given into abstract socket name. It must start with
+    // the '\0' character, so we are adding it.
     strncpy(server.sun_path + 1, sockname, sizeof(server.sun_path) - 2);
 
-    // note that sockaddr_len should be set to the exact size of the buffer that is used.
-    socklen_t sockaddr_len = sizeof(server);
+    // For abstract paths, |addr_len| must specify the
+    // length of the structure exactly, as potentially the socket name may
+    // have '\0' characters embedded.
+    socklen_t sockaddr_len = offsetof(struct sockaddr_un, sun_path) + strlen(sockname) + 1;
     if (bind(serverSocket, (struct sockaddr *) &server, sockaddr_len) < 0) {
         ALOGE("Failed to bind the server socket: %s", strerror(errno));
         close(serverSocket);

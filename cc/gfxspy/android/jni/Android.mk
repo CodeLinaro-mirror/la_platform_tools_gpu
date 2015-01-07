@@ -39,6 +39,7 @@ LOCAL_CXXFLAGS         := \
 
 #############
 # Optional flags for debugging:
+#    -DGLTRACE_DISABLE_SERVER \
 #    -DGLTRACE_DLOPEN_INTERCEPTION \
 #    -DGLTRACE_PRINT_EGL_CALLS \
 #    -DGLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP \
