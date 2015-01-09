@@ -29,14 +29,29 @@ public:
     static void open(egl_connection_t* cnx);
     static void close(egl_connection_t* cnx);
 
+    static void* dlopen(const char *filename, int flag);
+
 private:
+    typedef void *(*DlopenFunctionPointerType)(const char *filename, int flag);
+    typedef __eglMustCastToProperFunctionPointerType(*GetProcAddressType)(const char*);
+
+    // Always points to the system version of dlopen (to bypass dlopen interception).
+    static DlopenFunctionPointerType sRealDlopenPointer;
+
+    // When true, dlopen calls for GLES and EGL will be redirected to this library.
+    // Must be false during bootstrapping to avoid redirecting dlopen calls from
+    // the system and vendor drivers.
+    static bool sEnableDlopenRetargeting;
+
+    static void initApi(void *dso, char const *const *api,
+            __eglMustCastToProperFunctionPointerType* curr,
+            GetProcAddressType getProcAddress);
+
+    static void initDlopen();
+    static void* realDlopen(const char *filename, int flag);
+
     Loader();
     ~Loader();
-    typedef __eglMustCastToProperFunctionPointerType(*getProcAddressType)(const char*);
-
-    static void init_api(void *dso, char const *const *api,
-            __eglMustCastToProperFunctionPointerType* curr,
-            getProcAddressType getProcAddress);
 };
 
 } // end of namespace gltrace

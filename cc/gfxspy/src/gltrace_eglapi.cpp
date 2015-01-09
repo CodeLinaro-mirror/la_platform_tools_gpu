@@ -41,6 +41,7 @@ egl_connection_t gEGLImpl;
 static void initializeDrivers() {
     struct DriverInitializer {
         static void initialize() {
+            ALOGD("initializeDrivers::initialize().");
             memset(&gEGLImpl, sizeof(gEGLImpl), 0);
             Loader::open(&gEGLImpl);
         }
@@ -103,6 +104,11 @@ int GLTrace_start() {
     int status = 0;
     int clientSocket = -1;
 
+#if defined(GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP)
+    // Make sure the function tables are loaded.
+    initializeDrivers();
+#endif // defined(GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP)
+
     pthread_mutex_lock(&sGlTraceStateLock);
     if (sGlTraceInProgress) goto done;
 
@@ -121,7 +127,7 @@ int GLTrace_start() {
         status = -1;
         goto done;
     }
-#endif
+#endif // defined(GLTRACE_DISABLE_SERVER)
 
     // Initialize the tracing state and create a communication channel to the host.
     sGlTraceInProgress = 1;
@@ -155,7 +161,6 @@ void GLTrace_eglCreateContext(int version, EGLContext c) {
     if (state == NULL) return;
 
     // update trace state for new EGL context
-    initializeDrivers();
     GLTraceContext *traceContext = state->createTraceContext(c, gEGLImpl.hooks[version]);
     gltrace::setupTraceContextThreadSpecific(traceContext);
 
@@ -191,7 +196,7 @@ void GLTrace_eglSwapBuffers_internal(void *dpy, void *draw) {
     gltrace::GLTrace_eglSwapBuffers(dpy, draw);
 }
 
-#ifndef GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP
+#if !defined(GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP)
 __attribute__((constructor))
 static void GLTrace_init() {
     initializeDrivers();
@@ -200,7 +205,7 @@ __attribute__((destructor))
 static void GLTrace_exit() {
     GLTrace_stop();
 }
-#endif // GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP
+#endif // !defined(GLTRACE_SHOULDNT_LOAD_HOOKS_AT_STARTUP)
 
 }  // end of namespace gltrace
 }  // end of namespace android

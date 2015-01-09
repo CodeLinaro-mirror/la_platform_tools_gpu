@@ -64,7 +64,7 @@ extern "C" {
  * before using the other macros to change the tag.
  */
 #ifndef LOG_TAG
-#define LOG_TAG NULL
+#define LOG_TAG "gfxspy"
 #endif
 
 // ---------------------------------------------------------------------

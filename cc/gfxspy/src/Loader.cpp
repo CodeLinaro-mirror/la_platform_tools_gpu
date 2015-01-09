@@ -28,6 +28,12 @@
 #define SYSTEM_LIB_PATH "/system/lib/"
 #endif
 
+#if defined(GLTRACE_DLOPEN_INTERCEPTION)
+void* dlopen(const char *filename, int flag) {
+    return android::gltrace::Loader::dlopen(filename, flag);
+}
+#endif // defined(GLTRACE_DLOPEN_INTERCEPTION)
+
 namespace android {
 namespace gltrace {
 
@@ -69,18 +75,26 @@ char const * const egl_names[] = {
 static const size_t G_HOOKS_SIZE = 2;
 gl_hooks_t gHooks[G_HOOKS_SIZE];
 
+Loader::DlopenFunctionPointerType Loader::sRealDlopenPointer = NULL;
+bool Loader::sEnableDlopenRetargeting = false;
+
 void Loader::open(egl_connection_t* cnx) {
     if (cnx->libEgl) return; // Already loaded.
 
-    cnx->libEgl = dlopen(SYSTEM_LIB_PATH "libEGL.so", RTLD_NOW | RTLD_LOCAL);
+    initDlopen();
+
+    // Don't want retargeting while loading our function tables.
+    sEnableDlopenRetargeting = false;
+
+    cnx->libEgl = realDlopen(SYSTEM_LIB_PATH "libEGL.so", RTLD_NOW | RTLD_LOCAL);
     LOG_ALWAYS_FATAL_IF(!cnx->libEgl, "can't load system EGL library: %s", dlerror());
 
-    cnx->libGles1 = dlopen(SYSTEM_LIB_PATH "libGLESv1_CM.so", RTLD_NOW | RTLD_LOCAL);
-    cnx->libGles2 = dlopen(SYSTEM_LIB_PATH "libGLESv2.so", RTLD_NOW | RTLD_LOCAL);
+    cnx->libGles1 = realDlopen(SYSTEM_LIB_PATH "libGLESv1_CM.so", RTLD_NOW | RTLD_LOCAL);
+    cnx->libGles2 = realDlopen(SYSTEM_LIB_PATH "libGLESv2.so", RTLD_NOW | RTLD_LOCAL);
     LOG_ALWAYS_FATAL_IF(!cnx->libGles2 || !cnx->libGles1,
                         "can't load system GLES library: %s", dlerror());
 
-    getProcAddressType getProcAddress = (getProcAddressType)dlsym(cnx->libEgl, "eglGetProcAddress");
+    GetProcAddressType getProcAddress = (GetProcAddressType)dlsym(cnx->libEgl, "eglGetProcAddress");
     LOG_ALWAYS_FATAL_IF(!getProcAddress, "can't find eglGetProcAddress(): %s", dlerror());
 
     egl_t *egl = &cnx->egl;
@@ -99,18 +113,20 @@ void Loader::open(egl_connection_t* cnx) {
     memset(gHooks, sizeof(gHooks), 0);
 
     if (cnx->libGles1) {
-        init_api(cnx->libGles1, gl_names,
+        initApi(cnx->libGles1, gl_names,
             (__eglMustCastToProperFunctionPointerType*)&gHooks[egl_connection_t::GLESv1_INDEX].gl,
             getProcAddress);
         cnx->hooks[egl_connection_t::GLESv1_INDEX] = &gHooks[egl_connection_t::GLESv1_INDEX];
     }
 
     if (cnx->libGles2) {
-        init_api(cnx->libGles2, gl_names,
+        initApi(cnx->libGles2, gl_names,
             (__eglMustCastToProperFunctionPointerType*)&gHooks[egl_connection_t::GLESv2_INDEX].gl,
             getProcAddress);
         cnx->hooks[egl_connection_t::GLESv2_INDEX] = &gHooks[egl_connection_t::GLESv2_INDEX];
     }
+    // Now that we've initialized our function tables, enable the retargeting.
+    sEnableDlopenRetargeting = true;
 }
 
 void Loader::close(egl_connection_t* cnx) {
@@ -130,9 +146,44 @@ void Loader::close(egl_connection_t* cnx) {
     }
 }
 
-void Loader::init_api(void* dso, char const *const *api,
+void* Loader::dlopen(const char *filename, int flag) {
+    if (sRealDlopenPointer == NULL) {
+        ALOGW("dlopen() called before initializing sRealDlopenPointer.");
+        Loader::initDlopen();
+    }
+#if defined(GLTRACE_DLOPEN_INTERCEPTION)
+    // We won't make any attempt to intercept calls without a file name
+    // (e.g. when using RTLD_DEFAULT or RTLD_NEXT).
+    if (sEnableDlopenRetargeting && filename != NULL) {
+        const char* glesLibnamePrefix = "libGLESv";
+        const char* eglLibnamePrefix = "libEGL";
+        // See if the .so being opened is the GLES or EGL library.
+        const char* matchedString = strstr(filename, glesLibnamePrefix);
+        if (matchedString == NULL) {
+            matchedString = strstr(filename, eglLibnamePrefix);
+        }
+        if (matchedString != NULL) {
+            // We don't want to intercept calls that could match similarly named libraries
+            // (e.g.  "foolibEGL.so"), but we do want to intercept calls that begin
+            // with a path (e.g. "/system/lib/libEGL.so").
+            if (matchedString == filename || (*(matchedString - 1)) == '/') {
+                ALOGI("Changing dlopen(\"%s\", %d) to sRealDlopenPointer(\"libgfxspy.so\", %d).",
+                        filename, flag, flag);
+                filename = "libgfxspy.so";
+            }
+        }
+    }
+#endif // defined(GLTRACE_DLOPEN_INTERCEPTION)
+    void *handle = realDlopen(filename, flag);
+    if (sEnableDlopenRetargeting && handle == NULL) {
+        ALOGD("realDlopen(%s, %d) returned <NULL>.", filename ? filename : "<NULL>", flag);
+    }
+    return handle;
+}
+
+void Loader::initApi(void* dso, char const *const *api,
                       __eglMustCastToProperFunctionPointerType* curr,
-                      getProcAddressType getProcAddress) {
+                      GetProcAddressType getProcAddress) {
     while (*api) {
         const char *name = *api;
         __eglMustCastToProperFunctionPointerType fptr =
@@ -158,30 +209,33 @@ void Loader::init_api(void* dso, char const *const *api,
     }
 }
 
+void Loader::initDlopen() {
+    if (sRealDlopenPointer == NULL) {
+#if defined(GLTRACE_DLOPEN_INTERCEPTION)
+        ALOGD("Setting up dlopen() interception...");
+        sRealDlopenPointer = reinterpret_cast<DlopenFunctionPointerType>(dlsym(
+                RTLD_NEXT, "dlopen"));
+        if (sRealDlopenPointer == NULL) {
+            sRealDlopenPointer = reinterpret_cast<DlopenFunctionPointerType>(dlsym(
+                    RTLD_DEFAULT, "dlopen"));
+        }
+        ALOGD("sRealDlopenPointer = %p.", sRealDlopenPointer);
+        LOG_ALWAYS_FATAL_IF(sRealDlopenPointer == NULL,
+                "Couldn't find system version of dlopen().");
+#else
+        ALOGD("dlopen interception is disabled.");
+        sRealDlopenPointer = &dlopen;
+#endif // defined(GLTRACE_DLOPEN_INTERCEPTION)
+    } else {
+        ALOGD("Redundant call to initDlopen().");
+    }
+}
+
+void* Loader::realDlopen(const char *filename, int flag) {
+    LOG_ALWAYS_FATAL_IF(sRealDlopenPointer == NULL,
+            "dlopen() interception has not been initialized.");
+    return (*sRealDlopenPointer)(filename, flag);
+}
+
 } // end of namespace gltrace
 } // end of namespace android
-
-#if defined(GLTRACE_DLOPEN_INTERCEPTION)
-
-static void *(*_dlopen)(const char *filename, int flag) = NULL;
-typedef void *(*dlopen_function_pointer)(const char *filename, int flag);
-
-__attribute__((constructor))
-static void init_dlopen() {
-    ALOGD("<gfxspy> setting up dlopen interception...");
-    if (_dlopen == NULL) _dlopen = (dlopen_function_pointer)dlsym(RTLD_NEXT, "dlopen");
-    if (_dlopen == NULL) _dlopen = (dlopen_function_pointer)dlsym(RTLD_DEFAULT, "dlopen");
-    ALOGD("<gfxspy> _dlopen = %p", _dlopen);
-}
-
-void *dlopen(const char *filename, int flag) {
-    if (_dlopen == NULL) init_dlopen();
-    ALOGD("<gfxspy> intercepting dlopen(\"%s\", %x)", filename, flag);
-    void *handle = (*_dlopen)(filename, flag);
-    if (handle == NULL) {
-        ALOGD("<gfxspy> got a NULL handle from dlopen!\n");
-    }
-    return handle;
-}
-
-#endif // defined(GLTRACE_DLOPEN_INTERCEPTION)
