@@ -62,3 +62,37 @@ func Register(id TypeID, instance Object) {
 	}
 	idToType[id] = t.Elem()
 }
+
+type unknownType struct {
+	Object Encodable
+}
+
+func (e unknownType) Error() string {
+	return fmt.Sprintf("Unknown type %T encountered in binary.TypeOf", e.Object)
+}
+
+// Given an encodable object return the TypeID for that type of object.
+// If there is no TypeID for this type of object, return a non-nil error.
+func TypeOf(obj Encodable) (TypeID, error) {
+	id, idFound := typeToID[reflect.TypeOf(obj)]
+	if !idFound {
+		return TypeID{}, unknownType{obj}
+	}
+	return id, nil
+}
+
+type unknownTypeID TypeID
+
+func (e unknownTypeID) Error() string {
+	return fmt.Sprintf("Unknown type id %x encountered in binary.MakeObject", TypeID(e))
+}
+
+// Given a TypeID return a zero value instance of the object type.
+// If this TypeID is not for a registered type, return a non-nil error.
+func MakeObject(typeId TypeID) (Decodable, error) {
+	t, idFound := idToType[typeId]
+	if !idFound {
+		return nil, unknownTypeID(typeId)
+	}
+	return reflect.New(t).Interface().(Decodable), nil
+}
