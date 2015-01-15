@@ -15,10 +15,8 @@
 package binary
 
 import (
-	"fmt"
 	"io"
 	"math"
-	"reflect"
 )
 
 // Decoder provides methods for decoding values to an io.Reader.
@@ -167,12 +165,6 @@ func (d *Decoder) Data() ([]byte, error) {
 	return buf, err
 }
 
-type unknownTypeID TypeID
-
-func (e unknownTypeID) Error() string {
-	return fmt.Sprintf("Unknown type id %x encountered in binary.Decoder", TypeID(e))
-}
-
 // Object decodes and returns an Object from the Decoder's io.Reader. Object instances that were
 // encoded multiple times will be decoded and returned as a shared, single instance.
 // The type id in the stream must have been previously registered with binary.Register.
@@ -194,11 +186,12 @@ func (d *Decoder) Object() (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	t, idFound := idToType[id]
-	if !idFound {
-		return nil, unknownTypeID(id)
+
+	obj, err := MakeObject(id)
+	if err != nil {
+		return nil, err
 	}
-	obj := reflect.New(t).Interface().(Decodable)
+
 	if err = obj.Decode(d); err != nil {
 		return nil, err
 	}

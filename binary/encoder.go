@@ -15,10 +15,8 @@
 package binary
 
 import (
-	"fmt"
 	"io"
 	"math"
-	"reflect"
 )
 
 // Encoder provides methods for encoding values to an io.Writer.
@@ -153,14 +151,6 @@ func (e *Encoder) Data(data []byte) error {
 	return e.write(data)
 }
 
-type unknownType struct {
-	Object Encodable
-}
-
-func (e unknownType) Error() string {
-	return fmt.Sprintf("Unknown type %T encountered in binary.Encoder", e.Object)
-}
-
 // Object encodes an Encodable to the Encoder's io.Writer. If Object is called repeatedly with the
 // same argument (i.e. the argument has identical dynamic types and equal dynamic values), then the
 // argument will only be encoded with the first call, and later encodings will reference the first
@@ -176,9 +166,9 @@ func (e *Encoder) Object(obj Encodable) error {
 		return e.Uint16(key)
 	}
 
-	id, idFound := typeToID[reflect.TypeOf(obj)]
-	if !idFound {
-		return unknownType{obj}
+	id, err := TypeOf(obj)
+	if err != nil {
+		return err
 	}
 
 	key = uint16(len(e.objects))
