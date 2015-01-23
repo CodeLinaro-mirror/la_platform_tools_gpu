@@ -171,7 +171,7 @@ int BufferedOutputStream::flush() {
 }
 
 void BufferedOutputStream::enqueueMessage(GLMessage *msg) {
-    const uint32_t len = msg->ByteSize();
+    const uint32_t len = htonl(msg->ByteSize());
 
     // Send the message size, then the message.
     mStringBuffer.append((const char *)&len, sizeof(len));
