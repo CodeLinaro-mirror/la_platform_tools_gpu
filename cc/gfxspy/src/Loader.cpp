@@ -167,7 +167,7 @@ void* Loader::dlopen(const char *filename, int flag) {
             // (e.g.  "foolibEGL.so"), but we do want to intercept calls that begin
             // with a path (e.g. "/system/lib/libEGL.so").
             if (matchedString == filename || (*(matchedString - 1)) == '/') {
-                ALOGI("Changing dlopen(\"%s\", %d) to sRealDlopenPointer(\"libgfxspy.so\", %d).",
+                ALOGI("Changing dlopen(\"%s\", %d) to realDlopen(\"libgfxspy.so\", %d).",
                         filename, flag, flag);
                 filename = "libgfxspy.so";
             }
