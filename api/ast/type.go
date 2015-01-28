@@ -60,8 +60,8 @@ type FieldInitializer struct {
 	Value interface{}   // the value the field should be given
 }
 
-// As represents a type coercion expression, of the form «expression "as" type»
-type As struct {
+// Cast represents a type coercion expression, of the form «expression "as" type»
+type Cast struct {
 	CST    *parse.Branch // underlying parse structure for this node
 	Object interface{}   // the value to force the type of
 	Type   interface{}   // the type it should be coerced to

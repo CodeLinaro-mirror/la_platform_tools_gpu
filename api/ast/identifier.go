@@ -48,7 +48,6 @@ const (
 	KeywordNew       = "new"
 	KeywordOut       = "out"
 	KeywordPseudonym = "type"
-	KeywordPtr       = "ptr"
 	KeywordSwitch    = "switch"
 	KeywordThis      = "this"
 	KeywordTrue      = "true"

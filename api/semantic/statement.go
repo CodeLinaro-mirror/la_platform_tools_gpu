@@ -1,0 +1,78 @@
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package semantic
+
+import "android.googlesource.com/platform/tools/gpu/api/ast"
+
+// Block represents a collection of statements, used as the body of other
+// nodes.
+type Block struct {
+	AST        *ast.Block    // the underlying syntax node this was built from
+	Statements []interface{} // the set of statements this block represents
+}
+
+// Assert represents a runtime assertion.
+// Assertions are also used to infer required behavior from the expressions.
+type Assert struct {
+	AST       *ast.Assert // the underlying syntax node this was built from
+	Condition Expression  // the condition is being asserted must be true
+}
+
+// Branch represents the basic conditional execution statement.
+// If Condition is true we use the True block, otherwise the False block.
+type Branch struct {
+	AST       *ast.Branch // the underlying syntax node this was built from
+	Condition Expression  // the condition to select on
+	True      *Block      // use if Condition is true
+	False     *Block      // used if Condition is false
+}
+
+// Switch represents a resolved ast.Switch statement.
+type Switch struct {
+	AST   *ast.Switch // the underlying syntax node this was built from
+	Value Expression  // the value to match the cases against
+	Cases []*Case     // the set of case statements to choose from
+}
+
+// Case represents a possible choice in a switch.
+type Case struct {
+	AST        *ast.Case    // the underlying syntax node this was built from
+	Conditions []Expression // the set of expressions to match the switch value against
+	Block      *Block       // the block to use if a condition matches
+}
+
+// Iteration is the basic looping construct.
+// It will set Iterator to each value from Iterable in turn, and run Block for each one.
+type Iteration struct {
+	AST      *ast.Iteration // the underlying syntax node this was built from
+	Iterator *Local         // the iteration control variable
+	Iterable Expression     // the expression to iterate over
+	Block    *Block         // the block to run for each entry from Iterable
+}
+
+// Assign is the only "mutating" construct.
+// It assigns the value from the rhs into the slot described by the lhs.
+type Assign struct {
+	AST *ast.Assign // the underlying syntax node this was built from
+	LHS Expression  // the expression that gives the location to store into
+	RHS Expression  // the value to store
+}
+
+// DeclareLocal represents a local variable declaration statement.
+// Variables cannot be modified after declaration.
+type DeclareLocal struct {
+	AST   *ast.DeclareLocal // the underlying syntax node this was built from
+	Local *Local            // the local variable that was declared by this statement
+}

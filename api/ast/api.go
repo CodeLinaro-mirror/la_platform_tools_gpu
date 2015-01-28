@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// package ast holds the set of types used in the abstract syntax tree
+// Package ast holds the set of types used in the abstract syntax tree
 // representation of the api language.
 package ast
 

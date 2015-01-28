@@ -24,8 +24,8 @@ type Block struct {
 	Statements []interface{} // The set of statements that make up the block
 }
 
-// If represents an «"if" condition { trueblock } "else" { falseblock }» structure.
-type If struct {
+// Branch represents an «"if" condition { trueblock } "else" { falseblock }» structure.
+type Branch struct {
 	CST       *parse.Branch // underlying parse structure for this node
 	Condition interface{}   // the condition to use to select which block is active
 	True      *Block        // the block to use if condition is true
