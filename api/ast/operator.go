@@ -37,7 +37,6 @@ const (
 	OpListEnd       = ")"
 	OpMetaStart     = "<"
 	OpMetaEnd       = ">"
-	OpEndStatement  = ";"
 	OpAssign        = "="
 	OpDeclare       = ":="
 	OpMember        = "."
@@ -95,7 +94,6 @@ func init() {
 		OpListEnd,
 		OpMetaStart,
 		OpMetaEnd,
-		OpEndStatement,
 		OpAssign,
 		OpDeclare,
 		OpMember,
