@@ -1,0 +1,74 @@
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package parser
+
+import (
+	"android.googlesource.com/platform/tools/gpu/api/ast"
+	"android.googlesource.com/platform/tools/gpu/parse"
+)
+
+func identifier(p *parse.Parser, cst *parse.Branch) *ast.Identifier {
+	if !p.AlphaNumeric() {
+		return nil
+	}
+	n := &ast.Identifier{}
+	p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
+		n.CST = l
+		l.SetToken(p.Consume())
+		n.Value = l.Token().String()
+	})
+	return n
+}
+
+func requireIdentifier(p *parse.Parser, cst *parse.Branch) *ast.Identifier {
+	n := identifier(p, cst)
+	if n == nil {
+		p.Expected("Identifier")
+	}
+	return n
+}
+
+func peekKeyword(k string, p *parse.Parser) bool {
+	if !p.AlphaNumeric() {
+		return false
+	}
+	if p.Token().String() != string(k) {
+		p.Rollback()
+		return false
+	}
+	p.Rollback()
+	return true
+}
+
+func keyword(k string, p *parse.Parser, cst *parse.Branch) *parse.Leaf {
+	if !p.AlphaNumeric() {
+		return nil
+	}
+	if p.Token().String() != string(k) {
+		p.Rollback()
+		return nil
+	}
+	var result *parse.Leaf
+	p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
+		result = l
+	})
+	return result
+}
+
+func requireKeyword(k string, p *parse.Parser, cst *parse.Branch) {
+	if keyword(k, p, cst) == nil {
+		p.Expected(string(k))
+	}
+}
