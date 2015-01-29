@@ -137,50 +137,50 @@ func (l Length) ExpressionType() Type {
 	return l.Type
 }
 
-// Int32 is an int32 that implements Expression so it can be in the semantic graph
-type Int32 int32
+// Int32Value is an int32 that implements Expression so it can be in the semantic graph
+type Int32Value int32
 
 // ExpressionType implements Expression with a type of Int32Type
-func (v Int32) ExpressionType() Type { return Int32Type }
+func (v Int32Value) ExpressionType() Type { return Int32Type }
 
-// Uint32 is a uint32 that implements Expression so it can be in the semantic graph
-type Uint32 uint32
+// Uint32Value is a uint32 that implements Expression so it can be in the semantic graph
+type Uint32Value uint32
 
 // ExpressionType implements Expression with a type of Uint32Type
-func (v Uint32) ExpressionType() Type { return Uint32Type }
+func (v Uint32Value) ExpressionType() Type { return Uint32Type }
 
-// Int64 is an int64 that implements Expression so it can be in the semantic graph
-type Int64 int64
+// Int64Value is an int64 that implements Expression so it can be in the semantic graph
+type Int64Value int64
 
 // ExpressionType implements Expression with a type of Int64Type
-func (v Int64) ExpressionType() Type { return Int64Type }
+func (v Int64Value) ExpressionType() Type { return Int64Type }
 
-// Uint64 is a uint64 that implements Expression so it can be in the semantic graph
-type Uint64 uint64
+// Uint64Value is a uint64 that implements Expression so it can be in the semantic graph
+type Uint64Value uint64
 
 // ExpressionType implements Expression with a type of Uint64Type
-func (v Uint64) ExpressionType() Type { return Uint64Type }
+func (v Uint64Value) ExpressionType() Type { return Uint64Type }
 
-// Bool is a bool that implements Expression so it can be in the semantic graph
-type Bool bool
+// BoolValue is a bool that implements Expression so it can be in the semantic graph
+type BoolValue bool
 
 // ExpressionType implements Expression with a type of BoolType
-func (v Bool) ExpressionType() Type { return BoolType }
+func (v BoolValue) ExpressionType() Type { return BoolType }
 
-// String is a string that implements Expression so it can be in the semantic graph
-type String string
+// StringValue is a string that implements Expression so it can be in the semantic graph
+type StringValue string
 
 // ExpressionType implements Expression with a type of StringType
-func (v String) ExpressionType() Type { return StringType }
+func (v StringValue) ExpressionType() Type { return StringType }
 
-// Float64 is a float64 that implements Expression so it can be in the semantic graph
-type Float64 float64
+// Float64Value is a float64 that implements Expression so it can be in the semantic graph
+type Float64Value float64
 
 // ExpressionType implements Expression with a type of Float64Type
-func (v Float64) ExpressionType() Type { return Float64Type }
+func (v Float64Value) ExpressionType() Type { return Float64Type }
 
-// Float32 is a float32 that implements Expression so it can be in the semantic graph
-type Float32 float32
+// Float32Value is a float32 that implements Expression so it can be in the semantic graph
+type Float32Value float32
 
 // ExpressionType implements Expression with a type of Float32Type
-func (v Float32) ExpressionType() Type { return Float32Type }
+func (v Float32Value) ExpressionType() Type { return Float32Type }
