@@ -259,33 +259,55 @@ TEST_F(InterpreterTest, ExtendDouble) {
     EXPECT_TRUE(res);
 }
 
-TEST_F(InterpreterTest, TypeUint32) {
-    mInterpreter->registerFunction(
-            0, CheckTopOfStack<uint8_t>{static_cast<uint8_t>(BaseType::Uint32)});
-
-    std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 0),
-            instruction(Interpreter::InstructionCode::TYPE),
-            instruction(Interpreter::InstructionCode::CALL, 0)};
-    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
-    EXPECT_TRUE(res);
-}
-
-TEST_F(InterpreterTest, Strlen) {
+TEST_F(InterpreterTest, Strcpy) {
     mMemoryManager->setReplayDataSize(20);
-    const char* constantMemory = "abcd";
-    uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress()) + 2;
-    memcpy(constantBaseAddress, constantMemory, 5);
-    mMemoryManager->setConstantMemory({constantBaseAddress, 5});
+    const char* constantMemory = "abc";
+    uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress());
+    memcpy(constantBaseAddress, constantMemory, 4);
+    mMemoryManager->setConstantMemory({constantBaseAddress, 4});
 
-    mInterpreter->registerFunction(0, CheckTopOfStack<uint32_t>{4});
+    uint8_t* volatileMemory = static_cast<uint8_t*>(mMemoryManager->volatileToAbsolute(100));
+
+    memset(volatileMemory, 'x', 5);
 
     std::vector<uint32_t> instructions{
             instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 0),
-            instruction(Interpreter::InstructionCode::STRLEN),
-            instruction(Interpreter::InstructionCode::CALL, 0)};
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 100),
+            instruction(Interpreter::InstructionCode::STRCPY, 10)};
     bool res = mInterpreter->run({&instructions.front(), instructions.size()});
     EXPECT_TRUE(res);
+
+    EXPECT_EQ('a', volatileMemory[0]);
+    EXPECT_EQ('b', volatileMemory[1]);
+    EXPECT_EQ('c', volatileMemory[2]);
+    EXPECT_EQ(0x0, volatileMemory[3]);
+    EXPECT_EQ(0x0, volatileMemory[4]);
+}
+
+TEST_F(InterpreterTest, StrcpyShortBuffer) {
+    mMemoryManager->setReplayDataSize(20);
+    const char* constantMemory = "abcdef";
+    uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress());
+    memcpy(constantBaseAddress, constantMemory, 7);
+    mMemoryManager->setConstantMemory({constantBaseAddress, 7});
+
+    uint8_t* volatileMemory = static_cast<uint8_t*>(mMemoryManager->volatileToAbsolute(100));
+
+    memset(volatileMemory, 'x', 8);
+
+    std::vector<uint32_t> instructions{
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 0),
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 100),
+            instruction(Interpreter::InstructionCode::STRCPY, 5)};
+    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
+    EXPECT_TRUE(res);
+
+    EXPECT_EQ('a', volatileMemory[0]);
+    EXPECT_EQ('b', volatileMemory[1]);
+    EXPECT_EQ('c', volatileMemory[2]);
+    EXPECT_EQ('d', volatileMemory[3]);
+    EXPECT_EQ(0x0, volatileMemory[4]);
+    EXPECT_EQ('x', volatileMemory[5]);
 }
 
 TEST_F(InterpreterTest, Post) {
@@ -330,80 +352,6 @@ TEST_F(InterpreterTest, InvalidFunctionId) {
     std::vector<uint32_t> instructions{instruction(Interpreter::InstructionCode::CALL, 0xffff)};
     bool res = mInterpreter->run({&instructions.front(), instructions.size()});
     EXPECT_FALSE(res);
-}
-
-TEST_F(InterpreterTest, AbsAddress) {
-    mInterpreter->registerFunction(0,
-                                   CheckTopOfStack<void*>{mMemoryManager->volatileToAbsolute(784)});
-
-    std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 784),
-            instruction(Interpreter::InstructionCode::ABS_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::CALL, 0)};
-    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
-    EXPECT_TRUE(res);
-}
-
-TEST_F(InterpreterTest, RelAddressVolatile) {
-    mInterpreter->registerFunction(
-            0, CheckTopOfStack<const void*>{mMemoryManager->volatileToAbsolute(7)});
-    mInterpreter->registerFunction(
-            1, CheckTopOfStack<uint8_t>{static_cast<uint8_t>(BaseType::VolatilePointer)});
-
-    std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 7),
-            instruction(Interpreter::InstructionCode::ABS_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::REL_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::CLONE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 0),
-            instruction(Interpreter::InstructionCode::TYPE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 1)};
-    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
-    EXPECT_TRUE(res);
-}
-
-TEST_F(InterpreterTest, RelAddressConstant) {
-    mMemoryManager->setReplayDataSize(10);
-    uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress()) + 2;
-    mMemoryManager->setConstantMemory({constantBaseAddress, 7});
-
-    mInterpreter->registerFunction(
-            0, CheckTopOfStack<const void*>{mMemoryManager->constantToAbsolute(5)});
-    mInterpreter->registerFunction(
-            1, CheckTopOfStack<uint8_t>{static_cast<uint8_t>(BaseType::ConstantPointer)});
-
-    std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 5),
-            instruction(Interpreter::InstructionCode::ABS_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::REL_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::CLONE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 0),
-            instruction(Interpreter::InstructionCode::TYPE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 1)};
-    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
-    EXPECT_TRUE(res);
-}
-
-TEST_F(InterpreterTest, RelAddressAbsolute) {
-    mMemoryManager->setReplayDataSize(10);
-    uint8_t* constantBaseAddress = static_cast<uint8_t*>(mMemoryManager->getReplayAddress()) + 2;
-    mMemoryManager->setConstantMemory({constantBaseAddress, 7});
-
-    mInterpreter->registerFunction(
-            0, CheckTopOfStack<const void*>{mMemoryManager->constantToAbsolute(100)});
-    mInterpreter->registerFunction(
-            1, CheckTopOfStack<uint8_t>{static_cast<uint8_t>(BaseType::AbsolutePointer)});
-
-    std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 100),
-            instruction(Interpreter::InstructionCode::ABS_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::REL_ADDRESS, 0),
-            instruction(Interpreter::InstructionCode::CLONE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 0),
-            instruction(Interpreter::InstructionCode::TYPE, 0),
-            instruction(Interpreter::InstructionCode::CALL, 1)};
-    bool res = mInterpreter->run({&instructions.front(), instructions.size()});
-    EXPECT_TRUE(res);
 }
 
 }  // end of namespace test

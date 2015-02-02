@@ -88,9 +88,11 @@ public:
     void pushFrom(BaseType type, const void* data);
 
     // Pop the item from the top of the stack to the given memory address. The number of bytes
-    // written to the address is determined by the type of the element at the top of the stack. Put
-    // the stack into invalid state if called on an empty stack.
-    void popTo(void* address);
+    // written to the address is determined by the type of the element at the top of the stack.
+    // If convertPtrToAbsolute is true and the top of the stack is a pointer, then the pointer is
+    // converted to an absolute address before writing to address.
+    // The stack will enter an invalid state if called on an empty stack.
+    void popTo(void* address, bool convertPtrToAbsolute);
 
     // Discards count amount of elements from the top of the stack. Put the stack into invalid state
     // if the stack contains fewer element then the given count.

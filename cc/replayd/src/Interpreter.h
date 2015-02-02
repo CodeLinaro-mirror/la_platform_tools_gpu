@@ -62,11 +62,8 @@ public:
         POST        = 9,
         COPY        = 10,
         CLONE       = 11,
-        EXTEND      = 12,
-        TYPE        = 13,
-        STRLEN      = 14,
-        REL_ADDRESS = 15,
-        ABS_ADDRESS = 16,
+        STRCPY      = 12,
+        EXTEND      = 13,
     };
 
     // General signature for functions callable by the interpreter with a function call instruction.
@@ -120,11 +117,8 @@ private:
     bool post();
     bool copy(uint32_t opcode);
     bool clone(uint32_t opcode);
+    bool strcpy(uint32_t opcode);
     bool extend(uint32_t opcode);
-    bool type();
-    bool strlen();
-    bool relAddress();
-    bool absAddress();
 
     // Interpret one specific opcode. Returns true if it was successful false otherwise
     bool interpret(uint32_t opcode);

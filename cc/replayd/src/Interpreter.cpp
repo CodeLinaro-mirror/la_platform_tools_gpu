@@ -123,13 +123,13 @@ bool Interpreter::pop(uint32_t opcode) {
 
 bool Interpreter::storeV(uint32_t opcode) {
     void* address = mMemoryManager->volatileToAbsolute(extract26bitData(opcode));
-    mStack.popTo(address);
+    mStack.popTo(address, true);
     return mStack.isValid();
 }
 
 bool Interpreter::store() {
     void* address = mStack.pop<void*>();
-    mStack.popTo(address);
+    mStack.popTo(address, true);
     return mStack.isValid();
 }
 
@@ -146,6 +146,14 @@ bool Interpreter::copy(uint32_t opcode) {
     uint32_t count = extract26bitData(opcode);
     const void* source = mStack.pop<const void*>();
     void* target = mStack.pop<void*>();
+    if (source == nullptr) {
+        CAZE_WARNING("Error: copy source address is null\n");
+        return false;
+    }
+    if (target == nullptr) {
+        CAZE_WARNING("Error: copy destination address is null\n");
+        return false;
+    }
     memcpy(target, source, count);
     return mStack.isValid();
 }
@@ -155,11 +163,37 @@ bool Interpreter::clone(uint32_t opcode) {
     return mStack.isValid();
 }
 
+bool Interpreter::strcpy(uint32_t opcode) {
+    uint32_t count = opcode & DATA_MASK26;
+    char* target = mStack.pop<char*>();
+    const char* source = mStack.pop<const char*>();
+    if (source == nullptr) {
+        CAZE_WARNING("Error: strcpy source address is null\n");
+        return false;
+    }
+    if (target == nullptr) {
+        CAZE_WARNING("Error: strcpy destination address is null\n");
+        return false;
+    }
+    uint32_t i;
+    for (i = 0; i < count - 1; i++) {
+        char c = source[i];
+        if (c == 0) {
+            break;
+        }
+        target[i] = c;
+    }
+    for (; i < count; i++) {
+        target[i] = 0;
+    }
+    return mStack.isValid();
+}
+
 bool Interpreter::extend(uint32_t opcode) {
     BaseType type = mStack.getTopType();
     uint32_t data = extract26bitData(opcode);
     uint64_t value;
-    mStack.popTo(&value);
+    mStack.popTo(&value, false);
     switch (type) {
         // Masking out the mantissa end extending it with the new bits for floating point types
         case BaseType::Float: {
@@ -184,95 +218,55 @@ bool Interpreter::extend(uint32_t opcode) {
     return mStack.isValid();
 }
 
-bool Interpreter::type() {
-    BaseType type = mStack.getTopType();
-    mStack.discard(1);
-    mStack.push<uint8_t>(static_cast<uint8_t>(type));
-    return mStack.isValid();
-}
-
-bool Interpreter::strlen() {
-    const char* address = mStack.pop<const char*>();
-    mStack.push<uint32_t>(::strlen(address));
-    return mStack.isValid();
-}
-
-bool Interpreter::relAddress() {
-    void* address = mStack.pop<void*>();
-    if (mMemoryManager->isConstantAddress(address)) {
-        uint32_t offset = mMemoryManager->absoluteToConstant(address);
-        mStack.pushFrom(BaseType::ConstantPointer, &offset);
-    } else if (mMemoryManager->isVolatileAddress(address)) {
-        uint32_t offset = mMemoryManager->absoluteToVolatile(address);
-        mStack.pushFrom(BaseType::VolatilePointer, &offset);
-    } else {
-        mStack.pushFrom(BaseType::AbsolutePointer, &address);
-    }
-    return mStack.isValid();
-}
-
-bool Interpreter::absAddress() {
-    void* address = mStack.pop<void*>();
-    mStack.pushFrom(BaseType::AbsolutePointer, &address);
-    return mStack.isValid();
-}
-
-#define DEBUG_OPCODE(name, value) CAZE_DEBUG(name ":\t%#010x\n", value)
+#define DEBUG_OPCODE(name, value) CAZE_DEBUG(name "\n")
+#define DEBUG_OPCODE_26(name, value) CAZE_DEBUG(name "(%#010x)\n", value & DATA_MASK26)
+#define DEBUG_OPCODE_TY_20(name, value) CAZE_DEBUG(name "(%#010x, %s)\n", value & DATA_MASK20, baseTypeName(extractType(value)))
 
 bool Interpreter::interpret(uint32_t opcode) {
     InstructionCode code = static_cast<InstructionCode>(opcode >> OPCODE_BIT_SHIFT);
     switch (code) {
         case InstructionCode::CALL:
-            DEBUG_OPCODE("CALL", opcode);
+            DEBUG_OPCODE_26("CALL", opcode);
             return this->call(opcode);
         case InstructionCode::PUSH_I:
-            DEBUG_OPCODE("PUSH_I", opcode);
+            DEBUG_OPCODE_TY_20("PUSH_I", opcode);
             return this->pushI(opcode);
         case InstructionCode::LOAD_C:
-            DEBUG_OPCODE("LOAD_C", opcode);
+            DEBUG_OPCODE_TY_20("LOAD_C", opcode);
             return this->loadC(opcode);
         case InstructionCode::LOAD_V:
-            DEBUG_OPCODE("LOAD_V", opcode);
+            DEBUG_OPCODE_TY_20("LOAD_V", opcode);
             return this->loadV(opcode);
         case InstructionCode::LOAD:
-            DEBUG_OPCODE("LOAD", opcode);
+            DEBUG_OPCODE_TY_20("LOAD", opcode);
             return this->load(opcode);
         case InstructionCode::POP:
-            DEBUG_OPCODE("POP", opcode);
+            DEBUG_OPCODE_26("POP", opcode);
             return this->pop(opcode);
         case InstructionCode::STORE_V:
-            DEBUG_OPCODE("STORE_V", opcode);
+            DEBUG_OPCODE_26("STORE_V", opcode);
             return this->storeV(opcode);
         case InstructionCode::STORE:
             DEBUG_OPCODE("STORE", opcode);
             return this->store();
         case InstructionCode::RESOURCE:
-            DEBUG_OPCODE("RESOURCE", opcode);
+            DEBUG_OPCODE_26("RESOURCE", opcode);
             return this->resource(opcode);
         case InstructionCode::POST:
             DEBUG_OPCODE("POST", opcode);
             return this->post();
         case InstructionCode::COPY:
-            DEBUG_OPCODE("COPY", opcode);
+            DEBUG_OPCODE_26("COPY", opcode);
             return this->copy(opcode);
         case InstructionCode::CLONE:
-            DEBUG_OPCODE("CLONE", opcode);
+            DEBUG_OPCODE_26("CLONE", opcode);
             return this->clone(opcode);
+        case InstructionCode::STRCPY:
+            DEBUG_OPCODE_26("STRCPY", opcode);
+            return this->strcpy(opcode);
         case InstructionCode::EXTEND:
-            DEBUG_OPCODE("EXTEND", opcode);
+            DEBUG_OPCODE_26("EXTEND", opcode);
             return this->extend(opcode);
-        case InstructionCode::TYPE:
-            DEBUG_OPCODE("TYPE", opcode);
-            return this->type();
-        case InstructionCode::STRLEN:
-            DEBUG_OPCODE("STRLEN", opcode);
-            return this->strlen();
-        case InstructionCode::REL_ADDRESS:
-            DEBUG_OPCODE("REL_ADDRESS", opcode);
-            return this->relAddress();
-        case InstructionCode::ABS_ADDRESS:
-            DEBUG_OPCODE("ABS_ADDRESS", opcode);
-            return this->absAddress();
         default:
             CAZE_WARNING("Unknown opcode! %#010x\n", opcode);
             return false;

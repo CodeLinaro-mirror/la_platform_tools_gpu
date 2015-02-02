@@ -126,7 +126,7 @@ void Stack::pushFrom(BaseType type, const void* data) {
     mTop++;
 }
 
-void Stack::popTo(void* address) {
+void Stack::popTo(void* address, bool castPtrsToAbsolute) {
     if (!mValid) {
         CAZE_WARNING("PopTo on invalid stack\n");
         return;
@@ -140,6 +140,27 @@ void Stack::popTo(void* address) {
     }
 
     mTop--;
+    CAZE_DEBUG("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
+
+    if (castPtrsToAbsolute) {
+        switch (mStack[mTop].type()) {
+            case BaseType::ConstantPointer: {
+                uint32_t offset = mStack[mTop].value<uint32_t>();
+                void* pointer = const_cast<void*>(mMemoryManager->constantToAbsolute(offset));
+                *reinterpret_cast<void**>(address) = pointer;
+                return;
+            }
+            case BaseType::VolatilePointer: {
+                uint32_t offset = mStack[mTop].value<uint32_t>();
+                void* pointer = mMemoryManager->volatileToAbsolute(offset);
+                *reinterpret_cast<void**>(address) = pointer;
+                return;
+            }
+            default:
+                break;
+        }
+    }
+
     memcpy(address, mStack[mTop].valuePtr(), baseTypeSize(mStack[mTop].type()));
 }
 

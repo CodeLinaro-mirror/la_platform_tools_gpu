@@ -82,11 +82,15 @@ Opcodes
             * Pop and discard count values from the top of the stack
         <code:6> <volatile-address:26>
             * STORE_V(volatile-address) [-1 (any type)]
-            * Pop the top value from the the stack and save it to the given volatile memory address
+            * Pop the top value from the the stack and save it to the given volatile memory address.
+              All pointer values, regardless of the pointer type on the stack, will be stored as an
+              absolute pointer address.
         <code:6> <padding:26>
             * STORE() [-2 (pointer, any type)]
-            * Pop the address from the top of the stack and save and pop the next value from the
-              stack to that address
+            * Pop the target address and then the value from the top of the stack, and then store
+              the value to the target address.
+              All pointer values, regardless of the pointer type on the stack, will be stored as an
+              absolute pointer address.
 
     Load resource
         <code:6> <resource-id:26>
@@ -97,17 +101,23 @@ Opcodes
     Post data
         <code:6> <padding:26>
             * POST() [-2 (uint32_t, pointer)]
-            * Pop size and a pointer from the top of the stack and post “size” bytes of data from
+            * Pop size and a pointer from the top of the stack and post size bytes of data from
               the address to the server
 
     Copy
         <code:6> <count:26>
             * COPY(count) [-2 (pointer, pointer)]
-            * Pop source address and target address from the stack and copy count bytes from source
-              to target (the source address is on the top of the stack)
+            * Pop the source address then the target address from the top of the stack, and then
+              copy count bytes from source to target.
         <code:6> <n:26>
             * CLONE(n) [+1 (any type)]
             * Copy the n-th element from the stack to the top of the stack
+        <code:6> <max-count:26>
+            STRCPY() [-2 (pointer, pointer)]
+                * Pop the source address then the target address from the top of the stack, and
+                  then copy at most max-count minus one bytes from source to target. If the
+                  max-count is greater than the source string length, then the target will be padded
+                  with 0s. The destination buffer will always be 0-terminated.
 
     Calculation
         <code:6> <value:26>
@@ -120,25 +130,3 @@ Opcodes
                   point value on the stack is left-shifted by 26 bits and is bitwise-OR’ed with the
                   specified value. Bits shifted beyond the fractional part of the floating point
                   number are discarded.
-        <code:6> <padding:26>
-            TYPE() [-1 (any type) / +1 (uint8_t)]
-                * Pop an element from the stack and push its type to the stack as uint8_t
-        <code:6> <padding:26>
-            STRLEN() [-1 (any address type) / +1 (uint32_t)]
-                * Pop a pointer to a string from the stack and push the length of the string to the
-                  stack as a uint32_t
-
-    Address resolution
-        <code:6> <padding:26>
-            * REL_ADDRESS() [-1 (any address type) / +1 (any address type)]
-            * Pop and convert the address at the top of the stack to volatile or constant address
-              and push it onto the top of the stack
-            * If the address at the top of the stack is neither pointing to the constant memory nor
-              to the volatile memory then leave the same address at the top of the stack (as an
-              absolute address)
-            * It is required to report back addresses to the server who don't know anything about
-              absolute addresses
-        <code:6> <padding:26>
-            * ABS_ADDRESS() [-1 (any address type) / +1 (absolute address)]
-            * Pop and convert the address at the top of the stack to an absolute address and push it
-              onto the top of the stack
