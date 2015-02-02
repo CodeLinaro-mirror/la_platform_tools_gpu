@@ -19,6 +19,7 @@ import (
 	"errors"
 	"io"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -364,9 +365,9 @@ func TestDecoderObjectEOFError(t *testing.T) {
 }
 
 func TestUnknownTypeIDErrorError(t *testing.T) {
-	expected := "Unknown type id 0100000000000000000000000000000000000000 encountered in binary.Decoder"
+	expected := "Unknown type id 0100000000000000000000000000000000000000"
 	got := unknownTypeID(invalidTypeId).Error()
-	if expected != got {
+	if !strings.Contains(got, expected) {
 		t.Errorf("Error() did not return expected result. Expected: %v, got: %v", expected, got)
 	}
 }
