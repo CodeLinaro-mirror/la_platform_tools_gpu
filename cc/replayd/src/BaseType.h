@@ -44,6 +44,9 @@ enum class BaseType : uint8_t {
 // Return the size of the underlying type for the given BaseType
 uint32_t baseTypeSize(BaseType type);
 
+// Return the name of the given BaseType
+const char* baseTypeName(BaseType type);
+
 // Provide the BaseType value corresponding to the type specified in T. For pointers the
 // corresponding base type is AbsolutePointer
 template<typename T> struct TypeToBaseType;

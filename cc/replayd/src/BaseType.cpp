@@ -15,6 +15,7 @@
  */
 
 #include "BaseType.h"
+#include "Log.h"
 
 namespace android {
 namespace caze {
@@ -49,6 +50,45 @@ uint32_t baseTypeSize(BaseType type) {
         case BaseType::ConstantPointer:
         case BaseType::VolatilePointer:
             return sizeof(uint32_t);
+        default:
+            CAZE_FATAL("Invalid BaseType: %d", int(type));
+            return 0;
+    }
+}
+
+const char* baseTypeName(BaseType type) {
+    switch (type) {
+        case BaseType::Bool:
+            return "bool";
+        case BaseType::Int8:
+            return "int8";
+        case BaseType::Int16:
+            return "int16";
+        case BaseType::Int32:
+            return "int32";
+        case BaseType::Int64:
+            return "int64";
+        case BaseType::Uint8:
+            return "uint8";
+        case BaseType::Uint16:
+            return "uint16";
+        case BaseType::Uint32:
+            return "uint32";
+        case BaseType::Uint64:
+            return "uint64";
+        case BaseType::Float:
+            return "float";
+        case BaseType::Double:
+            return "double";
+        case BaseType::AbsolutePointer:
+            return "absolute pointer";
+        case BaseType::ConstantPointer:
+            return "constant pointer";
+        case BaseType::VolatilePointer:
+            return "volatile pointer";
+        default:
+            CAZE_FATAL("Invalid BaseType: %d", int(type));
+            return "unknown";
     }
 }
 
