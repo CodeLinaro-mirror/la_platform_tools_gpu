@@ -137,6 +137,30 @@ func (l Length) ExpressionType() Type {
 	return l.Type
 }
 
+// Int8Value is an int8 that implements Expression so it can be in the semantic graph
+type Int8Value int8
+
+// ExpressionType implements Expression with a type of Int8Type
+func (v Int8Value) ExpressionType() Type { return Int8Type }
+
+// Uint8Value is a uint8 that implements Expression so it can be in the semantic graph
+type Uint8Value uint8
+
+// ExpressionType implements Expression with a type of Uint8Type
+func (v Uint8Value) ExpressionType() Type { return Uint8Type }
+
+// Int16Value is an int16 that implements Expression so it can be in the semantic graph
+type Int16Value int16
+
+// ExpressionType implements Expression with a type of Int16Type
+func (v Int16Value) ExpressionType() Type { return Int16Type }
+
+// Uint16Value is a uint16 that implements Expression so it can be in the semantic graph
+type Uint16Value uint16
+
+// ExpressionType implements Expression with a type of Uint16Type
+func (v Uint16Value) ExpressionType() Type { return Uint16Type }
+
 // Int32Value is an int32 that implements Expression so it can be in the semantic graph
 type Int32Value int32
 

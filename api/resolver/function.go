@@ -34,6 +34,8 @@ func functionSignature(ctx *context, out *semantic.Function) {
 	out.Return = out.FullParameters[len(out.FullParameters)-1]
 	if out.Return.Type == semantic.VoidType {
 		out.FullParameters = out.FullParameters[0 : len(out.FullParameters)-1]
+	} else {
+		out.Return.Name = "result"
 	}
 	for _, p := range out.FullParameters {
 		if p.Output {
@@ -45,10 +47,12 @@ func functionSignature(ctx *context, out *semantic.Function) {
 func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *semantic.Parameter {
 	out := &semantic.Parameter{
 		AST:      in,
-		Name:     in.Name.Value,
 		Input:    in.Input,
 		Output:   in.Output,
 		Function: owner,
+	}
+	if in.Name != nil {
+		out.Name = in.Name.Value
 	}
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
@@ -64,13 +68,15 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 		}
 		ctx.with(semantic.VoidType, func() {
 			for _, p := range out.FullParameters {
-				ctx.add(p.Name, p)
+				if p != out.Return {
+					ctx.add(p.Name, p)
+				}
 			}
 			if out.This != nil {
 				ctx.add(string(ast.KeywordThis), out.This)
 			}
 			out.Annotations = annotations(ctx, in.Annotations)
-			out.Block = block(ctx, in.Block)
+			out.Block = block(ctx, in.Block, out)
 		})
 	}
 }

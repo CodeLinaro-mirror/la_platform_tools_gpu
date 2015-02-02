@@ -23,6 +23,22 @@ import (
 
 func inferNumber(ctx *context, in *ast.Number, infer semantic.Type) semantic.Expression {
 	switch infer {
+	case semantic.Int8Type:
+		if v, err := strconv.ParseInt(in.Value, 0, 8); err == nil {
+			return semantic.Int8Value(v)
+		}
+	case semantic.Uint8Type:
+		if v, err := strconv.ParseUint(in.Value, 0, 8); err == nil {
+			return semantic.Uint8Value(v)
+		}
+	case semantic.Int16Type:
+		if v, err := strconv.ParseInt(in.Value, 0, 16); err == nil {
+			return semantic.Int16Value(v)
+		}
+	case semantic.Uint16Type:
+		if v, err := strconv.ParseUint(in.Value, 0, 16); err == nil {
+			return semantic.Uint16Value(v)
+		}
 	case semantic.Int32Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 32); err == nil {
 			return semantic.Int32Value(v)
@@ -33,7 +49,7 @@ func inferNumber(ctx *context, in *ast.Number, infer semantic.Type) semantic.Exp
 		}
 	case semantic.Int64Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 64); err == nil {
-			return semantic.Uint64Value(v)
+			return semantic.Int64Value(v)
 		}
 	case semantic.Uint64Type:
 		if v, err := strconv.ParseUint(in.Value, 0, 64); err == nil {

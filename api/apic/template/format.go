@@ -2,10 +2,11 @@ package template
 
 import (
 	"bytes"
-	"golang.org/x/tools/imports"
 	"io/ioutil"
 	"os/exec"
 	"strings"
+
+	"golang.org/x/tools/imports"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 )
@@ -26,7 +27,7 @@ func (*Functions) SetIndentSize(i int) string {
 }
 
 func reformat(outputPath string, in string) []byte {
-	commands.Log("Reflowing output for %s", outputPath)
+	commands.Log("Reflowing output for %s\n", outputPath)
 	result, err := reflow(in)
 	commands.MaybeError(outputPath, err)
 	if *formatEnable {
@@ -38,15 +39,17 @@ func reformat(outputPath string, in string) []byte {
 				Fragment:  true,
 			}
 			formatted, err := imports.Process(outputPath, result, opt)
-			commands.MaybeError(outputPath, err)
 			if err == nil {
 				result = formatted
+			} else {
+				commands.Log("Reflow failed with %s for %s\n", err, outputPath)
 			}
 		} else if strings.HasSuffix(outputPath, ".h") || strings.HasSuffix(outputPath, ".cpp") {
 			formatted, err := clangFormat(result)
-			commands.MaybeError(outputPath, err)
 			if err == nil {
 				result = formatted
+			} else {
+				commands.Log("Reflow failed with %s for %s\n", err, outputPath)
 			}
 		}
 	}

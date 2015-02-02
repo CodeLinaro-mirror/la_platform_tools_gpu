@@ -36,7 +36,7 @@ func requireBlock(p *parse.Parser, cst *parse.Branch) *ast.Block {
 	return block
 }
 
-// ( assert | branch | iteration | expression ) [ declare_local | assign ]
+// ( assert | branch | iteration | return | expression ) [ declare_local | assign ]
 func requireStatement(p *parse.Parser, cst *parse.Branch) interface{} {
 	if g := assert(p, cst); g != nil {
 		return g
@@ -45,6 +45,9 @@ func requireStatement(p *parse.Parser, cst *parse.Branch) interface{} {
 		return g
 	}
 	if g := iteration(p, cst); g != nil {
+		return g
+	}
+	if g := return_(p, cst); g != nil {
 		return g
 	}
 	e := requireExpression(p, cst)
@@ -121,16 +124,43 @@ func declareLocal(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Decl
 	return s
 }
 
+var assignments = []string{
+	ast.OpAssign,
+	ast.OpAssignPlus,
+	ast.OpAssignMinus,
+}
+
 // lhs '=' expression
 func assign(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Assign {
-	if !peekOperator(ast.OpAssign, p) {
+	op := ""
+	for _, test := range assignments {
+		if peekOperator(test, p) {
+			op = test
+			break
+		}
+	}
+	if op == "" {
 		return nil
 	}
 	s := &ast.Assign{LHS: lhs}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		s.CST = cst
-		requireOperator(ast.OpAssign, p, cst)
+		requireOperator(op, p, cst)
 		s.RHS = requireExpression(p, cst)
+	})
+	return s
+}
+
+// 'return' expresssion
+func return_(p *parse.Parser, cst *parse.Branch) *ast.Return {
+	if !peekKeyword(ast.KeywordReturn, p) {
+		return nil
+	}
+	s := &ast.Return{}
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		s.CST = cst
+		requireKeyword(ast.KeywordReturn, p, cst)
+		s.Value = requireExpression(p, cst)
 	})
 	return s
 }

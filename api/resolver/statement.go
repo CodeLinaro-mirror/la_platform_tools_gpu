@@ -19,14 +19,33 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
-func block(ctx *context, in *ast.Block) *semantic.Block {
+func block(ctx *context, in *ast.Block, owner interface{}) *semantic.Block {
 	out := &semantic.Block{AST: in}
 	if in == nil {
 		return out
 	}
 	ctx.with(semantic.VoidType, func() {
-		for _, s := range in.Statements {
+		f, isFunction := owner.(*semantic.Function)
+		var returnStatement *ast.Return
+		statements := in.Statements
+		// we need to check and strip the "return" if the function is supposed to have one
+		if isFunction && f.Return.Type != semantic.VoidType {
+			if len(statements) == 0 {
+				ctx.errorf(in, "Missing return statement")
+			} else if r, ok := statements[len(statements)-1].(*ast.Return); !ok {
+				ctx.errorf(in, "Last statement must be a return")
+			} else {
+				statements = statements[0 : len(statements)-1]
+				returnStatement = r
+			}
+		}
+		// now process the non return statements
+		for _, s := range statements {
 			out.Statements = append(out.Statements, statement(ctx, s))
+		}
+		// and special case the return statement allowing access to the return parameter
+		if returnStatement != nil {
+			out.Statements = append(out.Statements, return_(ctx, returnStatement, f))
 		}
 	})
 	return out
@@ -46,6 +65,9 @@ func statement(ctx *context, in interface{}) interface{} {
 		return switch_(ctx, in)
 	case *ast.Iteration:
 		return iteration(ctx, in)
+	case *ast.Return:
+		ctx.errorf(in, "unexpected return")
+		return invalid{}
 	default:
 		return expression(ctx, in)
 	}
@@ -99,8 +121,8 @@ func branch(ctx *context, in *ast.Branch) *semantic.Branch {
 	if !equal(ct, semantic.BoolType) {
 		ctx.errorf(in, "if condition must be boolean (got %s)", typename(ct))
 	}
-	out.True = block(ctx, in.True)
-	out.False = block(ctx, in.False)
+	out.True = block(ctx, in.True, out)
+	out.False = block(ctx, in.False, out)
 	return out
 }
 
@@ -129,7 +151,7 @@ func case_(ctx *context, in *ast.Case, vt semantic.Type) *semantic.Case {
 			}
 		}
 	})
-	out.Block = block(ctx, in.Block)
+	out.Block = block(ctx, in.Block, out)
 	return out
 }
 
@@ -145,7 +167,21 @@ func iteration(ctx *context, in *ast.Iteration) *semantic.Iteration {
 	v.Type = out.Iterable.ExpressionType()
 	ctx.with(semantic.VoidType, func() {
 		ctx.add(v.Name, v)
-		out.Block = block(ctx, in.Block)
+		out.Block = block(ctx, in.Block, out)
 	})
+	return out
+}
+
+func return_(ctx *context, in *ast.Return, f *semantic.Function) *semantic.Return {
+	out := &semantic.Return{AST: in}
+	out.Function = f
+	ctx.with(f.Return.Type, func() {
+		out.Value = expression(ctx, in.Value)
+	})
+	inferUnknown(ctx, f.Return, out.Value)
+	rt := out.Value.ExpressionType()
+	if !assignable(f.Return.Type, rt) {
+		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(f.Return.Type))
+	}
 	return out
 }

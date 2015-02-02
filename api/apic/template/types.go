@@ -56,6 +56,7 @@ var (
 		semantic.Parameter{},
 		semantic.Pointer{},
 		semantic.Pseudonym{},
+		semantic.Return{},
 		semantic.Select{},
 		semantic.StaticArray{},
 		semantic.Switch{},
@@ -110,6 +111,25 @@ func (*Functions) TypeOf(v interface{}) (semantic.Type, error) {
 		return e.ExpressionType(), nil
 	default:
 		return nil, fmt.Errorf("Type \"%T\" is not an expression", v)
+	}
+}
+
+// Returns true if v is one of the primitive numeric types.
+func (*Functions) IsNumericValue(v interface{}) bool {
+	switch v.(type) {
+	case semantic.Int8Value,
+		semantic.Uint8Value,
+		semantic.Int16Value,
+		semantic.Uint16Value,
+		semantic.Int32Value,
+		semantic.Uint32Value,
+		semantic.Int64Value,
+		semantic.Uint64Value,
+		semantic.Float32Value,
+		semantic.Float64Value:
+		return true
+	default:
+		return false
 	}
 }
 

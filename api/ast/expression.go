@@ -95,3 +95,10 @@ type Length struct {
 	CST    *parse.Branch // underlying parse structure for this node.
 	Object interface{}   // the object to query the length of
 }
+
+// Return represents the «"return" value» construct, that assigns the value to
+// the result slot of the function.
+type Return struct {
+	CST   *parse.Branch // underlying parse structure for this node.
+	Value interface{}   // the value to return
+}

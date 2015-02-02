@@ -19,15 +19,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-const functionResult = "result"
-
 // type name '(' [ param { ',' param } } ')' [ block ]
 func function(f *ast.Function, p *parse.Parser, cst *parse.Branch, withBlock bool) *ast.Function {
 	f.CST = cst
 	result := &ast.Parameter{
 		Type:   requireTypeRef(p, cst),
 		Output: true,
-		Name:   &ast.Identifier{Value: functionResult},
 	}
 	f.Name = requireIdentifier(p, cst)
 	requireOperator(ast.OpListStart, p, cst)
