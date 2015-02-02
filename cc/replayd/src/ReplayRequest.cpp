@@ -59,7 +59,7 @@ uint32_t ReplayRequest::getVolatileMemorySize() const {
     return mVolatileMemorySize;
 }
 
-const std::vector<std::pair<std::string, size_t>>& ReplayRequest::getResources() const {
+const std::vector<std::pair<std::string, uint32_t>>& ReplayRequest::getResources() const {
     return mResources;
 }
 
@@ -67,7 +67,7 @@ const std::pair<const void*, uint32_t>& ReplayRequest::getConstantMemory() const
     return mConstantMemory;
 }
 
-const std::pair<std::string, size_t>& ReplayRequest::getResourceData(uint32_t resourceId) const {
+const std::pair<std::string, uint32_t>& ReplayRequest::getResourceData(uint32_t resourceId) const {
     return mResources[resourceId];
 }
 

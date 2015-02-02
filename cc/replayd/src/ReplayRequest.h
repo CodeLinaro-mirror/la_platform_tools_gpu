@@ -51,10 +51,10 @@ public:
     const std::pair<const void*, uint32_t>& getConstantMemory() const;
 
     // Get the list of the resources with their size required by this replay
-    const std::vector<std::pair<std::string, size_t>>& getResources() const;
+    const std::vector<std::pair<std::string, uint32_t>>& getResources() const;
 
     // Get the name and the size of a resource identified by the given index
-    const std::pair<std::string, size_t>& getResourceData(uint32_t resourceId) const;
+    const std::pair<std::string, uint32_t>& getResourceData(uint32_t resourceId) const;
 
     // Get the base address and the size (count of instructions) of the instruction list
     const std::pair<const uint32_t*, uint32_t>& getInstructionList() const;
@@ -86,7 +86,7 @@ private:
     std::pair<const uint32_t*, uint32_t> mInstructionList;
 
     // The list of resources (resource id, resource size) used by the replay
-    std::vector<std::pair<std::string, size_t>> mResources;
+    std::vector<std::pair<std::string, uint32_t>> mResources;
 };
 
 }  // end of namespace caze

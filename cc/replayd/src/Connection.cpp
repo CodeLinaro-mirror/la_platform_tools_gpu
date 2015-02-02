@@ -22,7 +22,7 @@ namespace android {
 namespace caze {
 
 bool Connection::sendString(const std::string& s) {
-    uint32_t length = s.size();
+    uint32_t length = static_cast<uint32_t>(s.size());
     if (this->send(&length, sizeof(length)) != sizeof(length)) {
         return false;
     }

@@ -18,10 +18,10 @@
 #include "MemoryManager.h"
 #include "MockResourceProvider.h"
 #include "ResourceInMemoryCache.h"
+#include "ResourceProvider.h"
 #include "TestUtilities.h"
 
 #include <memory>
-#include <utility>
 #include <vector>
 
 #include <gmock/gmock.h>
@@ -69,7 +69,7 @@ protected:
 }  // end of anonymous namespace
 
 TEST_F(ResourceInMemoryCacheTest, Prefetch) {
-    std::vector<std::pair<ResourceId, size_t>> expected{{"A", 64}, {"D", 1024}, {"E", 2048}};
+    ResourceProvider::ResourceList expected{{"A", 64}, {"D", 1024}, {"E", 2048}};
 
     EXPECT_CALL(*mFallbackProvider, get(_, _, _, _)).WillRepeatedly(Return(true));
     EXPECT_CALL(*mFallbackProvider, prefetch(ContainerEq(expected), _, _, _))

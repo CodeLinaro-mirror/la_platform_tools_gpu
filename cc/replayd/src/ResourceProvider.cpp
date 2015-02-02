@@ -18,16 +18,16 @@
 #include "ResourceProvider.h"
 #include "Target.h"
 
+#include <stdint.h>
 #include <utility>
-#include <vector>
 
 namespace android {
 namespace caze {
 
-bool ResourceProvider::get(const std::vector<std::pair<ResourceId, size_t>>& id,
+bool ResourceProvider::get(const ResourceList& resources,
                            const GazerConnection& gazer, void* target) {
     size_t offset = 0;
-    for (const auto& it : id) {
+    for (const auto& it : resources) {
         if (!get(it.first, gazer, static_cast<uint8_t*>(target) + offset, it.second)) {
             return false;
         }

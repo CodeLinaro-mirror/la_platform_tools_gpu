@@ -23,8 +23,6 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <utility>
-#include <vector>
 
 namespace android {
 namespace caze {
@@ -49,15 +47,15 @@ public:
     // isn't in the cache then requests it from the fallback provider and saves it into the cache
     // if it fits (smaller than or equal to the size of the full cache).
     bool get(const ResourceId& id, const GazerConnection& gazer, void* target,
-             size_t size) override;
+             uint32_t size) override;
 
     // No prefetching is done for this provider because of the limited size of the in memory cache
     // and because there is no performance gain if we fetch multiple resources at the same time
     // compared to the case when we fetch them one by one. The prefetch request is forwarded to the
     // fallback provider for possible prefetching after filtering out resources already present in
     // the cache.
-    bool prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                  const GazerConnection& gazer, void* buffer, size_t size) override;
+    bool prefetch(const ResourceList& resources,
+                  const GazerConnection& gazer, void* buffer, uint32_t size) override;
 
     // Resizes the memory region used by the cache, modifying the end of its memory region.
     // Resources falling outside of the new memory region will be evicted from the cache.

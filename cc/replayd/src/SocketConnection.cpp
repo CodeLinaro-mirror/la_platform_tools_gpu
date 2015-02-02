@@ -49,17 +49,17 @@ void close(int fd) {
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
 }
 
-ssize_t recv(int sockfd, void *buf, size_t len, int flags) {
+size_t recv(int sockfd, void *buf, size_t len, int flags) {
 #if TARGET_OS == CAZE_OS_WINDOWS
-    return ::recv(sockfd, static_cast<char*>(buf), len, flags);
+    return ::recv(sockfd, static_cast<char*>(buf), static_cast<int>(len), flags);
 #else  // TARGET_OS == CAZE_OS_WINDOWS
     return ::recv(sockfd, buf, len, flags);
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
 }
 
-ssize_t send(int sockfd, const void *buf, size_t len, int flags) {
+size_t send(int sockfd, const void *buf, size_t len, int flags) {
 #if TARGET_OS == CAZE_OS_WINDOWS
-    return ::send(sockfd, static_cast<const char*>(buf), len, flags);
+    return ::send(sockfd, static_cast<const char*>(buf), static_cast<int>(len), flags);
 #else  // TARGET_OS == CAZE_OS_WINDOWS
     return ::send(sockfd, buf, len, flags);
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
@@ -67,16 +67,16 @@ ssize_t send(int sockfd, const void *buf, size_t len, int flags) {
 
 int accept(int sockfd, struct sockaddr *addr, size_t *addrlen) {
     if (addrlen == nullptr) {
-        return ::accept(sockfd, addr, nullptr);
+        return static_cast<int>(::accept(sockfd, addr, nullptr));
     }
 
 #if TARGET_OS == CAZE_OS_WINDOWS
-    int addrlenTmp = *addrlen;
+    int addrlenTmp = static_cast<int>(*addrlen);
 #else  // TARGET_OS == CAZE_OS_WINDOWS
     socklen_t addrlenTmp = *addrlen;
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
 
-    int ret = ::accept(sockfd, addr, &addrlenTmp);
+    int ret = static_cast<int>(::accept(sockfd, addr, &addrlenTmp));
     *addrlen = addrlenTmp;
     return ret;
 }
@@ -92,14 +92,15 @@ void freeaddrinfo(struct addrinfo *res) {
 
 int setsockopt(int sockfd, int level, int optname, const void *optval, size_t optlen) {
 #if TARGET_OS == CAZE_OS_WINDOWS
-    return ::setsockopt(sockfd, level, optname, static_cast<const char*>(optval), optlen);
+    return ::setsockopt(sockfd, level, optname, static_cast<const char*>(optval), 
+            static_cast<int>(optlen));
 #else  // TARGET_OS == CAZE_OS_WINDOWS
     return ::setsockopt(sockfd, level, optname, optval, optlen);
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
 }
 
 int socket(int domain, int type, int protocol) {
-    return ::socket(domain, type, protocol);
+    return static_cast<int>(::socket(domain, type, protocol));
 }
 
 int listen(int sockfd, int backlog) {
@@ -107,7 +108,11 @@ int listen(int sockfd, int backlog) {
 }
 
 int bind(int sockfd, const struct sockaddr *addr, size_t addrlen) {
+#if TARGET_OS == CAZE_OS_WINDOWS
+    return ::bind(sockfd, addr, static_cast<int>(addrlen));
+#else  // TARGET_OS == CAZE_OS_WINDOWS
     return ::bind(sockfd, addr, addrlen);
+#endif  // TARGET_OS == CAZE_OS_WINDOWS
 }
 
 int error() {
@@ -118,7 +123,7 @@ int error() {
 #endif  // TARGET_OS == CAZE_OS_WINDOWS
 }
 
-}  // end of anonymus namespace
+}  // end of anonymous namespace
 
 SocketConnection::SocketConnection(int socket) : mSocket(socket) {
 }

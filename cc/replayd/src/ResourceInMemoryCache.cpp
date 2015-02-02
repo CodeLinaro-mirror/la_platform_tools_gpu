@@ -45,7 +45,7 @@ ResourceInMemoryCache::Entry::Entry(const ResourceId& id, size_t begin, size_t e
 }
 
 bool ResourceInMemoryCache::get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                                size_t size) {
+                                uint32_t size) {
     const auto& iter = mCache.find(id);
     if (iter != mCache.end()) {
         // Requested resource is in the cache. Do a memory copy only
@@ -70,13 +70,13 @@ bool ResourceInMemoryCache::get(const ResourceId& id, const GazerConnection& gaz
     }
 }
 
-bool ResourceInMemoryCache::prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                                     const GazerConnection& gazer, void* buffer, size_t size) {
+bool ResourceInMemoryCache::prefetch(const ResourceList& resources,
+                                     const GazerConnection& gazer, void* buffer, uint32_t size) {
     // Filter out the resources from the prefetch request which are already in cache before
     // forwarding the request to the fall back provider
-    std::vector<std::pair<ResourceId, size_t>> missingResources;
+    ResourceList missingResources;
     std::copy_if(resources.begin(), resources.end(), std::back_inserter(missingResources),
-            [this](const std::pair<ResourceId, size_t>& r) {
+            [this](const std::pair<ResourceId, uint32_t>& r) {
                 return this->mCache.count(r.first) == 0;
             });
     return mFallbackProvider->prefetch(missingResources, gazer, buffer, size);

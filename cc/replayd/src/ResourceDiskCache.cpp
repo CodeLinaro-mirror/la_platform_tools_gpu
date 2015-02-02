@@ -81,7 +81,7 @@ ResourceDiskCache::ResourceDiskCache(std::unique_ptr<ResourceProvider> fallbackP
 }
 
 bool ResourceDiskCache::get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                            size_t size) {
+                            uint32_t size) {
     const std::string filepath(mPath + id);
     if (FILE* fi = fopen(filepath.c_str(), "rb")) {
         // Resource already in the disk cache. Load it from disk
@@ -107,10 +107,10 @@ bool ResourceDiskCache::get(const ResourceId& id, const GazerConnection& gazer, 
     }
 }
 
-bool ResourceDiskCache::prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                                 const GazerConnection& gazer, void* buffer, size_t size) {
+bool ResourceDiskCache::prefetch(const ResourceList& resources,
+                                 const GazerConnection& gazer, void* buffer, uint32_t size) {
     size_t querySumSize = 0;
-    std::vector<std::pair<ResourceId, size_t>> query;
+    ResourceList query;
 
     // Batch the resource requests into batches where the sum size of each batch fit into the size
     // of the buffer available for prefetching
@@ -124,7 +124,7 @@ bool ResourceDiskCache::prefetch(const std::vector<std::pair<ResourceId, size_t>
         } else {
             // If next resource not fit into this batch then fetch the current batch
             if (querySumSize + res.second > size) {
-                if (!fetch(gazer, buffer, query, querySumSize)) {
+                if (!fetch(gazer, buffer, query)) {
                     return false;
                 }
 
@@ -139,15 +139,14 @@ bool ResourceDiskCache::prefetch(const std::vector<std::pair<ResourceId, size_t>
 
     // Fetch the last batch if it isn't empty
     if (query.size() > 0) {
-        return fetch(gazer, buffer, query, querySumSize);
+        return fetch(gazer, buffer, query);
     }
 
     return true;
 }
 
 bool ResourceDiskCache::fetch(const GazerConnection& gazer, void* buffer,
-                              const std::vector<std::pair<ResourceId, size_t>>& query,
-                              size_t querySumSize) {
+                              const ResourceList& query) {
     // Request the resources from the fall back provider
     if (!mFallbackProvider->get(query, gazer, buffer)) {
         return false;

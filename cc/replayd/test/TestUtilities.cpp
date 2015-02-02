@@ -23,7 +23,6 @@
 
 #include <memory>
 #include <string>
-#include <utility>
 #include <vector>
 
 #include <gmock/gmock.h>
@@ -87,7 +86,7 @@ std::vector<uint8_t> toByteVector<std::vector<uint32_t>>(const std::vector<uint3
 
 std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemorySize,
                                       const std::vector<uint8_t>& constantMemory,
-                                      const std::vector<std::pair<ResourceId, size_t>>& resources,
+                                      const ResourceProvider::ResourceList& resources,
                                       const std::vector<uint32_t>& instructions) {
     std::vector<uint8_t> replayData;
     addUint32ToUint8Vector(&replayData, stackSize);

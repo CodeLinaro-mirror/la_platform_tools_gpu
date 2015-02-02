@@ -74,7 +74,7 @@ std::vector<uint8_t> toByteVector(const T& x);
 
 std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemorySize,
                                       const std::vector<uint8_t>& constantMemory,
-                                      const std::vector<std::pair<ResourceId, size_t>>& resources,
+                                      const ResourceProvider::ResourceList& resources,
                                       const std::vector<uint32_t>& instructions);
 
 std::unique_ptr<GazerConnection> createGazerConnection(MockConnection* connection,

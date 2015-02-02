@@ -17,6 +17,7 @@
 #ifndef ANDROID_CAZE_RESOURCE_PROVIDER_H
 #define ANDROID_CAZE_RESOURCE_PROVIDER_H
 
+#include <stdint.h>
 #include <string>
 #include <utility>
 #include <vector>
@@ -29,6 +30,8 @@ typedef std::string ResourceId;
 
 class ResourceProvider {
 public:
+    typedef std::vector<std::pair<ResourceId, uint32_t>> ResourceList;
+
     // List of possible arguments can be set on the different resource providers
     enum class Argument {
         IN_MEMORY_CACHE_SIZE,
@@ -41,17 +44,16 @@ public:
     // are written. Returns true if the resource was successfully loaded and all <size> bytes were
     // written, otherwise false.
     virtual bool get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                     size_t size) = 0;
-    virtual bool get(const std::vector<std::pair<ResourceId, size_t>>& id,
-                     const GazerConnection& gazer, void* target);
+                     uint32_t size) = 0;
+    virtual bool get(const ResourceList& resources, const GazerConnection& gazer, void* target);
 
     // Prefetches the resources for resource providers where prefetching is available.
     // The resources vector have to contain (resource id, resource size) pairs and buffer should
     // point to a buffer at least as big as the largest resource. The buffer will be used for
     // temporary objects only with no guarantee about its final content. Returns true if prefetching
     // was successful, otherwise false.
-    virtual bool prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                          const GazerConnection& gazer, void* buffer, size_t size) = 0;
+    virtual bool prefetch(const ResourceList& resources,
+                          const GazerConnection& gazer, void* buffer, uint32_t size) = 0;
 };
 
 }  // end of namespace caze
