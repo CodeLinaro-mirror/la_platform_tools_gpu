@@ -140,6 +140,10 @@ size_t SocketConnection::recv(void* data, size_t size) {
     return caze::recv(mSocket, data, size, MSG_WAITALL);
 }
 
+const char* SocketConnection::error() {
+    return strerror(caze::error());
+}
+
 std::unique_ptr<Connection> SocketConnection::accept() {
     int clientSocket = caze::accept(mSocket, nullptr, nullptr);
     if (-1 == clientSocket) {

@@ -66,7 +66,7 @@ bool Interpreter::call(uint32_t opcode) {
         CAZE_WARNING("Invalid function id: %u\n", opcode & FUNCTION_ID_MASK);
         return false;
     } else {
-        return func->second(&mStack, opcode & PUSH_RETURN_MASK);
+        return func->second(&mStack, (opcode & PUSH_RETURN_MASK) != 0);
     }
 }
 

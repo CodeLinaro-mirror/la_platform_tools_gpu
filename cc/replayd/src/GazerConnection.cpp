@@ -28,13 +28,13 @@ namespace caze {
 std::unique_ptr<GazerConnection> GazerConnection::create(std::unique_ptr<Connection> conn) {
     std::string replayId;
     if (!conn->readString(&replayId)) {
-        CAZE_WARNING("Failed to read replay id\n");
+        CAZE_WARNING("Failed to read replay id. Error: %s\n", conn->error());
         return nullptr;
     }
 
     uint32_t replayLen;
     if (conn->recv(&replayLen, sizeof(replayLen)) != sizeof(replayLen)) {
-        CAZE_WARNING("Failed to read replay length\n");
+        CAZE_WARNING("Failed to read replay length. Error: %s\n", conn->error());
         return nullptr;
     }
 
@@ -67,27 +67,28 @@ bool GazerConnection::getResources(const std::vector<std::string>& resourceIds, 
 
     MessageType type = MESSAGE_TYPE_GET;
     if (mConn->send(&type, sizeof(type)) != sizeof(type)) {
-        CAZE_WARNING("Failed to send GET messageType to the server\n");
+        CAZE_WARNING("Failed to send GET messageType to the server. Error: %s\n", mConn->error());
         return false;
     }
 
     uint32_t count = static_cast<uint32_t>(resourceIds.size());
     if (mConn->send(&count, sizeof(count)) != sizeof(count)) {
-        CAZE_WARNING("Failed to send GET count to the server\n");
+        CAZE_WARNING("Failed to send GET count to the server. Error: %s\n", mConn->error());
         return false;
     }
 
     for (const auto& res : resourceIds) {
         if (!mConn->sendString(res)) {
-            CAZE_WARNING("Failed to send GET resource id to the server\n");
+            CAZE_WARNING("Failed to send GET resource id to the server. Error: %s\n",
+                mConn->error());
             return false;
         }
     }
 
     size_t received = mConn->recv(target, size);
     if (received != size) {
-        CAZE_WARNING("GET resource returned unexpected size. Expected: 0x%x, Got: 0x%x",
-            int(size), int(received));
+        CAZE_WARNING("GET resource returned unexpected size. "
+            "Expected: 0x%x, Got: 0x%x. Error: %s\n", int(size), int(received), mConn->error());
         return false;
     }
 
@@ -99,17 +100,17 @@ bool GazerConnection::post(const void* postData, uint32_t postSize) const {
 
     MessageType type = MESSAGE_TYPE_POST;
     if (mConn->send(&type, sizeof(type)) != sizeof(type)) {
-        CAZE_WARNING("Failed to send POST messageType to the server\n");
+        CAZE_WARNING("Failed to send POST messageType to the server. Error: %s\n", mConn->error());
         return false;
     }
 
     if (mConn->send(&postSize, sizeof(postSize)) != sizeof(postSize)) {
-        CAZE_WARNING("Failed to send POST length to the server\n");
+        CAZE_WARNING("Failed to send POST length to the server. Error: %s\n", mConn->error());
         return false;
     }
 
     if (mConn->send(postData, postSize) != postSize) {
-        CAZE_WARNING("Failed to send POST content to the server\n");
+        CAZE_WARNING("Failed to send POST content to the server. Error: %s\n", mConn->error());
         return false;
     }
 

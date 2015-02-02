@@ -33,6 +33,8 @@ public:
     MOCK_METHOD2(recv, size_t(void* data, size_t size));
     MOCK_METHOD0(acceptProxy, Connection*());
 
+    const char* error() override { return ""; }
+
     std::unique_ptr<Connection> accept() override {
         return std::unique_ptr<Connection>(this->acceptProxy());
     }
