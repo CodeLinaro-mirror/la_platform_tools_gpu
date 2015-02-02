@@ -19,9 +19,6 @@
 
 #include "ResourceProvider.h"
 
-#include <utility>
-#include <vector>
-
 namespace android {
 namespace caze {
 
@@ -34,15 +31,14 @@ public:
 
     // Request the resource from the GazerConnection with a GET request
     bool get(const ResourceId& id, const GazerConnection& gazer, void* target,
-             size_t size) override;
+             uint32_t size) override;
 
     // Request all of the requested resources from the GazerConnection with a single GET request
-    bool get(const std::vector<std::pair<ResourceId, size_t>>& id, const GazerConnection& gazer,
-             void* target) override;
+    bool get(const ResourceList& resources, const GazerConnection& gazer, void* target) override;
 
     // No prefetching is supported because there is no storage layer in this resource provider
-    bool prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                  const GazerConnection& gazer, void* buffer, size_t size) override;
+    bool prefetch(const ResourceList& resources,
+                  const GazerConnection& gazer, void* buffer, uint32_t size) override;
 
 private:
     ResourceRequester() = default;

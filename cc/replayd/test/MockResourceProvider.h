@@ -20,7 +20,6 @@
 #include "GazerConnection.h"
 #include "ResourceProvider.h"
 
-#include <utility>
 #include <vector>
 
 #include <gmock/gmock.h>
@@ -32,13 +31,13 @@ namespace test {
 class MockResourceProvider : public ResourceProvider {
 public:
     MOCK_METHOD4(get, bool(const ResourceId& id, const GazerConnection& gazer, void* target,
-                           size_t size));
+                           uint32_t size));
 
-    MOCK_METHOD3(get, bool(const std::vector<std::pair<ResourceId, size_t>>& id,
+    MOCK_METHOD3(get, bool(const ResourceList& resources,
                            const GazerConnection& gazer, void* target));
 
-    MOCK_METHOD4(prefetch, bool(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                                const GazerConnection& gazer, void* buffer, size_t size));
+    MOCK_METHOD4(prefetch, bool(const ResourceList& resources,
+                                const GazerConnection& gazer, void* buffer, uint32_t size));
 };
 
 }  // end of namespace test

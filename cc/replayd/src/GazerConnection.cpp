@@ -62,7 +62,8 @@ uint32_t GazerConnection::replayLength() const {
 
 bool GazerConnection::getResources(const std::vector<std::string>& resourceIds, void* target,
                           uint32_t size) const {
-    CAZE_INFO("GET resources (count: %zu, size: %d)\n", resourceIds.size(), size);
+    CAZE_INFO("GET resources (count: %lu, size: %d, target: %p)\n",
+              static_cast<unsigned long>(resourceIds.size()), size, target);
 
     MessageType type = MESSAGE_TYPE_GET;
     if (mConn->send(&type, sizeof(type)) != sizeof(type)) {
@@ -70,7 +71,7 @@ bool GazerConnection::getResources(const std::vector<std::string>& resourceIds, 
         return false;
     }
 
-    uint32_t count = resourceIds.size();
+    uint32_t count = static_cast<uint32_t>(resourceIds.size());
     if (mConn->send(&count, sizeof(count)) != sizeof(count)) {
         CAZE_WARNING("Failed to send GET count to the server\n");
         return false;
@@ -83,8 +84,10 @@ bool GazerConnection::getResources(const std::vector<std::string>& resourceIds, 
         }
     }
 
-    if (mConn->recv(target, size) != (ssize_t)size) {
-        CAZE_WARNING("Failed to read GET data from the server\n");
+    size_t received = mConn->recv(target, size);
+    if (received != size) {
+        CAZE_WARNING("GET resource returned unexpected size. Expected: 0x%x, Got: 0x%x",
+            int(size), int(received));
         return false;
     }
 

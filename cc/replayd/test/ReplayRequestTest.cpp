@@ -24,7 +24,6 @@
 
 #include <memory>
 #include <string>
-#include <utility>
 #include <vector>
 
 #include <gmock/gmock.h>
@@ -53,7 +52,7 @@ TEST(ReplayRequestTestStatic, Create) {
     uint32_t stackSize = 128;
     uint32_t volatileMemorySize = 1024;
     auto constantMemory = toByteVector<std::string>("ABCDEFGH");
-    std::vector<std::pair<std::string, size_t>> resources{{"ZYX", 16}, {"1234", 32}};
+    ResourceProvider::ResourceList resources{{"ZYX", 16}, {"1234", 32}};
     std::vector<uint32_t> instructionList{0, 1, 2};
 
     auto replayData = createReplayData(stackSize, volatileMemorySize, constantMemory, resources,

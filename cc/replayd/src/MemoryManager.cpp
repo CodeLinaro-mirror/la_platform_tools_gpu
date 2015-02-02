@@ -80,11 +80,11 @@ void* MemoryManager::volatileToAbsolute(uint32_t offset) const {
 }
 
 uint32_t MemoryManager::absoluteToConstant(const void* address) const {
-    return static_cast<const uint8_t*>(address) - mConstantMemory.base;
+    return static_cast<uint32_t>(static_cast<const uint8_t*>(address) - mConstantMemory.base);
 }
 
 uint32_t MemoryManager::absoluteToVolatile(const void* address) const {
-    return static_cast<const uint8_t*>(address) - mVolatileMemory.base;
+    return static_cast<uint32_t>(static_cast<const uint8_t*>(address) - mVolatileMemory.base);
 }
 
 bool MemoryManager::isConstantAddress(const void* address) const {

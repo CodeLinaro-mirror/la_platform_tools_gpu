@@ -17,7 +17,6 @@
 #include "GazerConnection.h"
 #include "ResourceRequester.h"
 
-#include <utility>
 #include <vector>
 
 namespace android {
@@ -28,23 +27,23 @@ std::unique_ptr<ResourceRequester> ResourceRequester::create() {
 }
 
 bool ResourceRequester::get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                            size_t size) {
+                            uint32_t size) {
     return gazer.getResources({id}, target, size);
 }
 
-bool ResourceRequester::get(const std::vector<std::pair<ResourceId, size_t>>& id,
+bool ResourceRequester::get(const ResourceList& resources,
                             const GazerConnection& gazer, void* target) {
-    size_t querySize = 0;
+    uint32_t querySize = 0;
     std::vector<ResourceId> query;
-    for (const auto& r : id) {
+    for (const auto& r : resources) {
         query.push_back(r.first);
         querySize += r.second;
     }
     return gazer.getResources(query, target, querySize);
 }
 
-bool ResourceRequester::prefetch(const std::vector<std::pair<ResourceId, size_t>>& resources,
-                                 const GazerConnection& gazer, void* buffer, size_t size) {
+bool ResourceRequester::prefetch(const ResourceList& resources,
+                                 const GazerConnection& gazer, void* buffer, uint32_t size) {
     return true;
 }
 
