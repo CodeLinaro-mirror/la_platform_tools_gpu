@@ -112,20 +112,20 @@ func TestFieldTypeAffectsID(t *testing.T) {
 
 func TestTypes(t *testing.T) {
 	fields := []Field{
-		{"a", &Type{"uint8", "uint8", Basic, nil, "Uint8"}},
-		{"b", &Type{"uint16", "uint16", Basic, nil, "Uint16"}},
-		{"c", &Type{"uint32", "uint32", Basic, nil, "Uint32"}},
-		{"d", &Type{"uint64", "uint64", Basic, nil, "Uint64"}},
-		{"e", &Type{"int8", "int8", Basic, nil, "Int8"}},
-		{"f", &Type{"int16", "int16", Basic, nil, "Int16"}},
-		{"g", &Type{"int32", "int32", Basic, nil, "Int32"}},
-		{"h", &Type{"int64", "int64", Basic, nil, "Int64"}},
-		{"i", &Type{"float32", "float32", Basic, nil, "Float32"}},
-		{"j", &Type{"float64", "float64", Basic, nil, "Float64"}},
-		{"k", &Type{"byte", "uint8", Basic, nil, "Uint8"}},
-		{"l", &Type{"int", "int32", Basic, nil, "Int32"}},
-		{"m", &Type{"bool", "bool", Basic, nil, "Bool"}},
-		{"n", &Type{"string", "string", Basic, nil, "String"}},
+		{"a", &Type{"uint8", "uint8", Native, nil, "Uint8"}},
+		{"b", &Type{"uint16", "uint16", Native, nil, "Uint16"}},
+		{"c", &Type{"uint32", "uint32", Native, nil, "Uint32"}},
+		{"d", &Type{"uint64", "uint64", Native, nil, "Uint64"}},
+		{"e", &Type{"int8", "int8", Native, nil, "Int8"}},
+		{"f", &Type{"int16", "int16", Native, nil, "Int16"}},
+		{"g", &Type{"int32", "int32", Native, nil, "Int32"}},
+		{"h", &Type{"int64", "int64", Native, nil, "Int64"}},
+		{"i", &Type{"float32", "float32", Native, nil, "Float32"}},
+		{"j", &Type{"float64", "float64", Native, nil, "Float64"}},
+		{"k", &Type{"byte", "uint8", Remap, nil, "Uint8"}},
+		{"l", &Type{"int", "int32", Remap, nil, "Int32"}},
+		{"m", &Type{"bool", "bool", Native, nil, "Bool"}},
+		{"n", &Type{"string", "string", Native, nil, "String"}},
 		{"o", &Type{"struct{}", "struct{}", Codeable, nil, ""}},
 		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, ""}},
 		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, ""}},
@@ -147,13 +147,16 @@ func TestTypes(t *testing.T) {
 			t.Errorf("Got field %s, expected %s", got.Name, expected.Name)
 		}
 		if got.Type.Kind != expected.Type.Kind {
-			t.Errorf("Got field kind %d, expected %d", got.Type.Kind, expected.Type.Kind)
+			t.Errorf("Got field kind %d, expected %d for %s %s",
+				got.Type.Kind, expected.Type.Kind, expected.Name, expected.Type.Name)
 		}
 		if got.Type.Native != expected.Type.Native {
-			t.Errorf("Got field native type %s, expected %s", got.Type.Native, expected.Type.Native)
+			t.Errorf("Got field native type %s, expected %s for %s %s",
+				got.Type.Native, expected.Type.Native, expected.Name, expected.Type.Name)
 		}
 		if got.Type.Method != expected.Type.Method {
-			t.Errorf("Got field native type %s, expected %s", got.Type.Method, expected.Type.Method)
+			t.Errorf("Got encoder method %s, expected %s for %s %s",
+				got.Type.Method, expected.Type.Method, expected.Name, expected.Type.Name)
 		}
 	}
 }

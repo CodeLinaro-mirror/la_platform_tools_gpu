@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"io"
 	"io/ioutil"
+	"strings"
 	"testing"
 )
 
@@ -340,9 +341,9 @@ func TestEncoderObjectUnknownTypeError(t *testing.T) {
 }
 
 func TestUnknownTypeErrorError(t *testing.T) {
-	expected := "Unknown type *binary.testObjectC encountered in binary.Encoder"
+	expected := "Unknown type *binary.testObjectC"
 	got := unknownType{&testObjectC{}}.Error()
-	if expected != got {
+	if !strings.Contains(got, expected) {
 		t.Errorf("Error() did not return expected result. Expected: %v, got: %v", expected, got)
 	}
 }
