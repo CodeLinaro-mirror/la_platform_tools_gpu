@@ -31,22 +31,24 @@
 #if TARGET_OS == CAZE_OS_WINDOWS
 #include <direct.h>
 #define mkdir(path, mode) _mkdir(path)
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#else
+static const mode_t MKDIR_MODE = 0755;
+#endif
 
 namespace android {
 namespace caze {
 namespace {
 
-int mkdirAll(const std::string& path, mode_t mode) {
-    if (0 != mkdir(path.c_str(), mode)) {
+int mkdirAll(const std::string& path) {
+    if (0 != mkdir(path.c_str(), MKDIR_MODE)) {
         switch (errno) {
             case ENOENT: {  // Non-existent parent(s).
                 size_t pos = path.find_last_of("/\\");
                 if (pos == std::string::npos) {
                     return -1;
                 }
-                mkdirAll(path.substr(0, pos), mode);
-                return mkdir(path.c_str(), mode);  // Retry.
+                mkdirAll(path.substr(0, pos));
+                return mkdir(path.c_str(), MKDIR_MODE);  // Retry.
             }
             case EEXIST:  // Already exists, return success.
                 return 0;
@@ -61,13 +63,13 @@ int mkdirAll(const std::string& path, mode_t mode) {
 
 std::unique_ptr<ResourceProvider> ResourceDiskCache::create(
         std::unique_ptr<ResourceProvider> fallbackProvider, const std::string& path) {
-    if (0 != mkdirAll(path, 0755)) {
+    if (0 != mkdirAll(path)) {
         CAZE_WARNING("Couldn't access/create cache directory; disabling disk cache.");
         return fallbackProvider;  // Disk path was inaccessible.
     } else {
         std::string diskPath = path;
-        if (diskPath.back() != '/') {
-            diskPath.push_back('/');
+        if (diskPath.back() != PATH_DELIMITER) {
+            diskPath.push_back(PATH_DELIMITER);
         }
 
         return std::unique_ptr<ResourceProvider>(
