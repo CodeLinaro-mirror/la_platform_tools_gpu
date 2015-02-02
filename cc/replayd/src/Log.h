@@ -1,0 +1,134 @@
+/*
+ * Copyright 2014, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef ANDROID_CAZE_LOG_H
+#define ANDROID_CAZE_LOG_H
+
+// General logging functions for the replay system. All logging should be done through these macros.
+// On android the log is written to the general log output with tag name "Caze". On PCs it is
+// written to "logs/replay.log" if possible or to the stderr otherwise.
+//
+// The replay system supports the following log levels with the specified meanings:
+// * LOG_LEVEL_FATAL:   Fatal error, no recovery is possible, the system will die immediately
+//                      (always should be enabled)
+// * LOG_LEVEL_WARNING: Issue with the current replay. It have to be terminated (it is the callers
+//                      task) but the replay system can accept further replay requests
+// * LOG_LEVEL_INFO:    General purpose logging, the amount of them shouldn't effect the performance
+//                      of the application. This is the default log level.
+// * LOG_LEVEL_DEBUG    Verbose logs used only for debugging. They can have significant effect on
+//                      the performance of the application
+
+#include "Target.h"
+
+// If no log level specified then use the default one
+#ifndef LOG_LEVEL
+#   define LOG_LEVEL LOG_LEVEL_INFO
+#endif
+
+#define CAZE_STR(S) CAZE_STR2(S)
+#define CAZE_STR2(S) #S
+
+#if TARGET_OS == CAZE_OS_ANDROID
+
+#include <android/log.h>
+#define CAZE_FATAL_IMPL(...) \
+    __android_log_assert(nullptr, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
+#define CAZE_WARNING_IMPL(...) \
+    __android_log_print(ANDROID_LOG_WARN, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
+#define CAZE_INFO_IMPL(...) \
+    __android_log_print(ANDROID_LOG_INFO, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
+#define CAZE_DEBUG_IMPL(...)                       \
+    __android_log_print(ANDROID_LOG_DEBUG, "Caze", \
+                        __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
+
+#else  // TARGET_OS == CAZE_OS_ANDROID
+
+#include <stdio.h>
+#include <stdlib.h>
+
+namespace android {
+namespace caze {
+
+enum {
+    LOG_LEVEL_FATAL   = 0,
+    LOG_LEVEL_WARNING = 1,
+    LOG_LEVEL_INFO    = 2,
+    LOG_LEVEL_DEBUG   = 3,
+};
+
+// Singleton logger implementation for PCs to write formatted log messages.
+class Logger {
+public:
+    // Write a log message to the log output with the specific log level. The location should
+    // contain the place where the log is written from and the format is a standard C format string
+    // The log message build up in the following way:
+    // <Time stamp (ms precision)> #Caze <log level>: <location> -> <message>
+    static void log(unsigned level, const char* location, const char* format, ...);
+
+private:
+    // The single logger instance
+    static Logger instance;
+
+    explicit Logger(const char* fileName);
+    ~Logger();
+    void logImpl(unsigned level, const char* location, const char* format, va_list args);
+
+    FILE* mFile;
+};
+
+}  // end of namespace caze
+}  // end of namespace android
+
+#define CAZE_FATAL_IMPL(...)                                                           \
+    do {                                                                               \
+        ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" CAZE_STR(__LINE__), \
+                                     __VA_ARGS__);                                     \
+        exit(EXIT_FAILURE);                                                            \
+    } while (0)
+
+#define CAZE_WARNING_IMPL(...)                                                           \
+        ::android::caze::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" CAZE_STR(__LINE__), \
+                                     __VA_ARGS__)
+#define CAZE_INFO_IMPL(...) \
+        ::android::caze::Logger::log(LOG_LEVEL_INFO, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
+#define CAZE_DEBUG_IMPL(...) \
+        ::android::caze::Logger::log(LOG_LEVEL_DEBUG, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
+
+#endif  // TARGET_OS == CAZE_OS_ANDROID
+
+// Define the required log macros based on the specified log level
+
+#define CAZE_FATAL(...) CAZE_FATAL_IMPL(__VA_ARGS__)
+
+#if LOG_LEVEL >= LOG_LEVEL_WARNING
+#   define CAZE_WARNING(...) CAZE_WARNING_IMPL(__VA_ARGS__)
+#else
+#   define CAZE_WARNING(...)
+#endif
+
+#if LOG_LEVEL >= LOG_LEVEL_INFO
+#   define CAZE_INFO(...) CAZE_INFO_IMPL(__VA_ARGS__)
+#else
+#   define CAZE_INFO(...)
+#endif
+
+#if LOG_LEVEL >= LOG_LEVEL_DEBUG
+#   define CAZE_DEBUG(...) CAZE_DEBUG_IMPL(__VA_ARGS__)
+#else
+#   define CAZE_DEBUG(...)
+#endif
+
+#endif  // ANDROID_CAZE_LOG_H
