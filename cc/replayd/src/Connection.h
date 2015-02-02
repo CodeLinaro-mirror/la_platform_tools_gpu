@@ -40,6 +40,9 @@ public:
     // (possibly less then size if an error occurred).
     virtual size_t recv(void* data, size_t size) = 0;
 
+    // Returns the last error message raised by the connection.
+    virtual const char* error() = 0;
+
     // Accept an incoming connection request on the underlying connection and returns the new
     // connection corresponding to it. The returned connection is ready to use.
     virtual std::unique_ptr<Connection> accept() = 0;
