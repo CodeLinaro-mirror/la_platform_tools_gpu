@@ -55,6 +55,7 @@ public:
             return T();
         }
 
+        CAZE_DEBUG("-%s pop()\n", mStack[mTop-1].debugInfo(mMemoryManager));
         return PopImpl<T>::pop(this);
     }
 
@@ -73,8 +74,8 @@ public:
             return;
         }
 
-        mStack[mTop].value<typename std::remove_cv<T>::type>() = value;
-        mStack[mTop].type() = TypeToBaseType<typename std::remove_cv<T>::type>::type;
+        mStack[mTop].set(TypeToBaseType<typename std::remove_cv<T>::type>::type, &value);
+        CAZE_DEBUG("+%s push()\n", mStack[mTop].debugInfo(mMemoryManager));
         mTop++;
     }
 
@@ -119,9 +120,9 @@ private:
             if (stack->mStack[stack->mTop].type() != baseType) {
                 stack->mValid = false;
                 CAZE_WARNING(
-                        "Pop type (%d) doesn't match with the type at the top of the stack (%d)\n",
-                        static_cast<uint32_t>(stack->mStack[stack->mTop].type()),
-                        static_cast<uint32_t>(baseType));
+                        "Pop type (%s) doesn't match with the type at the top of the stack (%s)\n",
+                        baseTypeName(baseType),
+                        baseTypeName(stack->mStack[stack->mTop].type()));
                 return T();
             }
             return stack->mStack[stack->mTop].value<T>();
@@ -146,8 +147,8 @@ private:
                     return static_cast<T*>(stack->mMemoryManager->volatileToAbsolute(offset));
                 }
                 default:
-                    CAZE_WARNING("Pop pointer from non pointer type (%u) is not allowed!\n",
-                                 static_cast<uint32_t>(stack->mStack[stack->mTop].type()));
+                    CAZE_WARNING("Pop pointer from non pointer type (%s) is not allowed!\n",
+                                 baseTypeName(stack->mStack[stack->mTop].type()));
                     stack->mValid = false;
                     return nullptr;
             }
@@ -156,9 +157,8 @@ private:
 
     class Entry {
     public:
-        template <typename T>
-        T& value() {
-            return *reinterpret_cast<T*>(&mValue);
+        const void* valuePtr() const {
+            return &mValue;
         }
 
         template <typename T>
@@ -166,14 +166,20 @@ private:
             return *reinterpret_cast<const T*>(&mValue);
         }
 
-        BaseType& type() {
-            return mType;
-        }
-
         const BaseType& type() const {
             return mType;
         }
 
+        void set(BaseType type, const void* data) {
+            memcpy(&mValue, data, baseTypeSize(type));
+            mType = type;
+        }
+
+        // Return a string describing the stack entry.
+        // The pointer returned is only valid until the next call to debugInfo, regardless of the
+        // Entry instance.
+        // This function is not thread safe.
+        const char* debugInfo(const MemoryManager* memoryManager) const;
     private:
         // Type of the element stored by this entry
         BaseType mType;

@@ -23,6 +23,65 @@
 namespace android {
 namespace caze {
 
+const char* Stack::Entry::debugInfo(const MemoryManager* memoryManager) const {
+    static const size_t size = 256;
+    static char buf[size];
+    switch (mType) {
+    case BaseType::Bool:
+        snprintf(buf, size, "bool<%d>", value<bool>());
+        break;
+    case BaseType::Int8:
+        snprintf(buf, size, "int8<%" PRId8 ">", value<int8_t>());
+        break;
+    case BaseType::Int16:
+        snprintf(buf, size, "int16<%" PRId16 ">", value<int16_t>());
+        break;
+    case BaseType::Int32:
+        snprintf(buf, size, "int32<%" PRId32 ">", value<int32_t>());
+        break;
+    case BaseType::Int64:
+        snprintf(buf, size, "int64<%" PRId64 ">", value<int64_t>());
+        break;
+    case BaseType::Uint8:
+        snprintf(buf, size, "uint8<%" PRIu8 ">", value<uint8_t>());
+        break;
+    case BaseType::Uint16:
+        snprintf(buf, size, "uint16<%" PRIu16 ">", value<uint16_t>());
+        break;
+    case BaseType::Uint32:
+        snprintf(buf, size, "uint32<%" PRIu32 ">", value<uint32_t>());
+        break;
+    case BaseType::Uint64:
+        snprintf(buf, size, "uint64<%" PRIu64 ">", value<uint64_t>());
+        break;
+    case BaseType::Float:
+        snprintf(buf, size, "float<%f>", value<float>());
+        break;
+    case BaseType::Double:
+        snprintf(buf, size, "double<%f>", value<double>());
+        break;
+    case BaseType::AbsolutePointer:
+        snprintf(buf, size, "absolute-ptr<%p>", value<void*>());
+        break;
+    case BaseType::ConstantPointer: {
+        uint32_t offset = value<uint32_t>();
+        const void* pointer = memoryManager->constantToAbsolute(offset);
+        snprintf(buf, size, "constant-ptr<0x%x> (%p)", offset, pointer);
+        break;
+    }
+    case BaseType::VolatilePointer: {
+        uint32_t offset = value<uint32_t>();
+        const void* pointer = memoryManager->volatileToAbsolute(offset);
+        snprintf(buf, size, "volatile-ptr<0x%x> (%p)", offset, pointer);
+        break;
+    }
+    default:
+        snprintf(buf, size, "unknown type<%d>", int(mType));
+        break;
+    }
+    return buf;
+}
+
 Stack::Stack(uint32_t size, const MemoryManager* memoryManager) :
         mValid(true), mTop(0), mStack(size), mMemoryManager(memoryManager) {
 }
@@ -30,50 +89,7 @@ Stack::Stack(uint32_t size, const MemoryManager* memoryManager) :
 void Stack::printStack() const {
     CAZE_DEBUG("Stack size: %u\n", mTop);
     for (uint32_t i = 0; i < mTop; ++i) {
-        switch (mStack[mTop - i - 1].type()) {
-            case BaseType::Bool:
-                CAZE_DEBUG("Bool\t%d\n", mStack[mTop - i - 1].value<bool>());
-                break;
-            case BaseType::Int8:
-                CAZE_DEBUG("Int8\t%" PRId8 "\n", mStack[mTop - i - 1].value<int8_t>());
-                break;
-            case BaseType::Int16:
-                CAZE_DEBUG("Int16\t%" PRId16 "\n", mStack[mTop - i - 1].value<int16_t>());
-                break;
-            case BaseType::Int32:
-                CAZE_DEBUG("Int32\t%" PRId32 "\n", mStack[mTop - i - 1].value<int32_t>());
-                break;
-            case BaseType::Int64:
-                CAZE_DEBUG("Int64\t%" PRId64 "\n", mStack[mTop - i - 1].value<int64_t>());
-                break;
-            case BaseType::Uint8:
-                CAZE_DEBUG("Uint8\t%" PRIu8 "\n", mStack[mTop - i - 1].value<uint8_t>());
-                break;
-            case BaseType::Uint16:
-                CAZE_DEBUG("Uint16\t%" PRIu16 "\n", mStack[mTop - i - 1].value<uint16_t>());
-                break;
-            case BaseType::Uint32:
-                CAZE_DEBUG("Uint32\t%" PRIu32 "\n", mStack[mTop - i - 1].value<uint32_t>());
-                break;
-            case BaseType::Uint64:
-                CAZE_DEBUG("Uint64\t%" PRIu64 "\n", mStack[mTop - i - 1].value<uint64_t>());
-                break;
-            case BaseType::Float:
-                CAZE_DEBUG("Float\t%f\n", mStack[mTop - i - 1].value<float>());
-                break;
-            case BaseType::Double:
-                CAZE_DEBUG("Double\t%f\n", mStack[mTop - i - 1].value<double>());
-                break;
-            case BaseType::AbsolutePointer:
-                CAZE_DEBUG("AbsPtr\t%p\n", mStack[mTop - i - 1].value<void*>());
-                break;
-            case BaseType::ConstantPointer:
-                CAZE_DEBUG("ConPtr\t%" PRIu32 "\n", mStack[mTop - i - 1].value<uint32_t>());
-                break;
-            case BaseType::VolatilePointer:
-                CAZE_DEBUG("VolPtr\t%" PRIu32 "\n", mStack[mTop - i - 1].value<uint32_t>());
-                break;
-        }
+        CAZE_DEBUG("(%d) %s\n", i, mStack[i].debugInfo(mMemoryManager));
     }
 }
 
@@ -100,13 +116,13 @@ void Stack::pushFrom(BaseType type, const void* data) {
 
     if (mTop > mStack.size() - 1) {
         mValid = false;
-        CAZE_WARNING("PushFrom with invalid stack head: %u (size: %zu)\n", mTop, mStack.size());
+        CAZE_WARNING("PushFrom with invalid stack head: %u (size: %lu)\n", mTop,
+                     static_cast<unsigned long>(mStack.size()));
         return;
     }
 
-    memset(&mStack[mTop].value<uint32_t>(), 0, sizeof(Entry));
-    memcpy(&mStack[mTop].value<uint32_t>(), data, baseTypeSize(type));
-    mStack[mTop].type() = type;
+    mStack[mTop].set(type, data);
+    CAZE_DEBUG("+%s pushFrom(%p)\n", mStack[mTop].debugInfo(mMemoryManager), data);
     mTop++;
 }
 
@@ -118,12 +134,13 @@ void Stack::popTo(void* address) {
 
     if (mTop == 0 || mTop > mStack.size()) {
         mValid = false;
-        CAZE_WARNING("PopTo with invalid stack head: %u (size: %zu)\n", mTop, mStack.size());
+        CAZE_WARNING("PopTo with invalid stack head: %u (size: %lu)\n", mTop,
+                     static_cast<unsigned long>(mStack.size()));
         return;
     }
 
     mTop--;
-    memcpy(address, &mStack[mTop].value<uint32_t>(), baseTypeSize(mStack[mTop].type()));
+    memcpy(address, mStack[mTop].valuePtr(), baseTypeSize(mStack[mTop].type()));
 }
 
 void Stack::discard(uint32_t count) {
@@ -136,6 +153,10 @@ void Stack::discard(uint32_t count) {
         mValid = false;
         CAZE_WARNING("Discarding more element (%u) then in the stack (%u)\n", count, mTop);
         return;
+    }
+
+    for (uint32_t i = 0; i < count; i++) {
+        CAZE_DEBUG("-%s discard()\n", mStack[mTop - i - 1].debugInfo(mMemoryManager));
     }
 
     mTop -= count;
@@ -160,6 +181,7 @@ void Stack::clone(uint32_t n) {
     }
 
     mStack[mTop] = mStack[mTop - n - 1];
+    CAZE_DEBUG("+%s clone(%d)\n", mStack[mTop].debugInfo(mMemoryManager), n);
     mTop++;
 }
 
