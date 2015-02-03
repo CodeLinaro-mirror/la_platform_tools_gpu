@@ -44,6 +44,8 @@ func expression(ctx *context, in interface{}) semantic.Expression {
 		return identifier(ctx, in)
 	case *ast.ClassInitializer:
 		return classInitializer(ctx, in)
+	case *ast.New:
+		return new(ctx, in)
 	case *ast.Group:
 		return expression(ctx, in.Expression)
 	case *ast.Cast:
@@ -66,6 +68,7 @@ func expression(ctx *context, in interface{}) semantic.Expression {
 
 func call(ctx *context, in *ast.Call) *semantic.Call {
 	out := &semantic.Call{AST: in}
+	out.Type = semantic.VoidType
 	target, ok := expression(ctx, in.Target).(*semantic.Callable)
 	if !ok {
 		ctx.errorf(in, "Invalid method call target %T found", target)
@@ -100,6 +103,7 @@ func call(ctx *context, in *ast.Call) *semantic.Call {
 			}
 		})
 	}
+	out.Type = out.Target.Function.Return.Type
 	return out
 }
 
@@ -249,6 +253,13 @@ func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitiali
 	if !assignable(ft, vt) {
 		ctx.errorf(in, "field %s cannot assign %s to %s", out.Field.Name, typename(vt), typename(ft))
 	}
+	return out
+}
+
+func new(ctx *context, in *ast.New) *semantic.New {
+	out := &semantic.New{AST: in}
+	out.Initializer = classInitializer(ctx, in.ClassInitializer)
+	out.Type = getPointerType(ctx, in, out.Initializer.Class)
 	return out
 }
 

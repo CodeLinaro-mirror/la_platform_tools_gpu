@@ -52,6 +52,7 @@ var (
 		semantic.MapIndex{},
 		semantic.Map{},
 		semantic.Member{},
+		semantic.New{},
 		semantic.Observed{},
 		semantic.Parameter{},
 		semantic.Pointer{},

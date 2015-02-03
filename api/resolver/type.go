@@ -185,23 +185,27 @@ func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArra
 	return out
 }
 
-func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
-	vt := type_(ctx, in.To)
-	name := strings.Title(vt.Typename()) + "Ref"
+func getPointerType(ctx *context, at interface{}, to semantic.Type) *semantic.Pointer {
+	name := strings.Title(to.Typename()) + "Ref"
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {
-			if !equal(vt, p.To) {
-				ctx.icef(in, "Pointer %s found with non matching value, got %s expected %s", name, typename(p.To), typename(vt))
+			if !equal(to, p.To) {
+				ctx.icef(at, "Pointer %s found with non matching value, got %s expected %s", name, typename(p.To), typename(to))
 			}
 			return p
 		}
 	}
 	out := &semantic.Pointer{
 		Name: name,
-		To:   vt,
+		To:   to,
 	}
 	ctx.api.Pointers = append(ctx.api.Pointers, out)
 	return out
+}
+
+func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
+	vt := type_(ctx, in.To)
+	return getPointerType(ctx, in, vt)
 }
 
 func enum(ctx *context, out *semantic.Enum) {
