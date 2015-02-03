@@ -24,16 +24,40 @@
 
 #if defined(TARGET_OS_LINUX)
 #   define TARGET_OS CAZE_OS_LINUX
-#elif defined(TARGET_OS_OSX)
-#   define TARGET_OS CAZE_OS_OSX
-#elif defined(TARGET_OS_WINDOWS)
-#   define TARGET_OS CAZE_OS_WINDOWS
-#elif defined(TARGET_OS_ANDROID)
-#   define TARGET_OS CAZE_OS_ANDROID
-#else
-#   error "OS not defined correctly."
-#   error "Exactly one of the following macros must be defined:" \
-          "TARGET_OS_LINUX, TARGET_OS_OSX, TARGET_OS_WINDOWS, TARGET_OS_ANDROID"
+#   define STDCALL
+#   define PATH_DELIMITER '/'
+#   define PATH_DELIMITER_STR "/"
 #endif
+
+#if defined(TARGET_OS_OSX)
+#   define TARGET_OS CAZE_OS_OSX
+#   define STDCALL
+#   define PATH_DELIMITER '/'
+#   define PATH_DELIMITER_STR "/"
+#endif
+
+#if defined(TARGET_OS_ANDROID)
+#   define TARGET_OS CAZE_OS_ANDROID
+#   define STDCALL
+#   define PATH_DELIMITER '/'
+#   define PATH_DELIMITER_STR "/"
+#endif
+
+#if defined(TARGET_OS_WINDOWS)
+#   define TARGET_OS CAZE_OS_WINDOWS
+#   define STDCALL __stdcall
+#   define PATH_DELIMITER '\\'
+#   define PATH_DELIMITER_STR "\\"
+#endif
+
+#ifndef TARGET_OS
+#   error "OS not defined correctly."
+#   error "Exactly one of the following macro have to be defined:" \
+           "TARGET_OS_LINUX, TARGET_OS_OSX, TARGET_OS_WINDOWS, TARGET_OS_ANDROID"
+#endif
+
+#ifdef _MSC_VER // MSVC
+#   define snprintf _snprintf
+#endif // _MSC_VER
 
 #endif  // ANDROID_CAZE_TARGET_H

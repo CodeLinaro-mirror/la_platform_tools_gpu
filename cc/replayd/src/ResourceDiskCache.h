@@ -43,7 +43,6 @@ public:
     bool prefetch(const ResourceList& resources,
                   const GazerConnection& gazer, void* buffer, uint32_t size) override;
 
-
 private:
     ResourceDiskCache(std::unique_ptr<ResourceProvider> fallbackProvider, const std::string& path);
 
