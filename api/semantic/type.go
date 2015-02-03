@@ -89,6 +89,16 @@ type FieldInitializer struct {
 	Value Expression            // the value to assign
 }
 
+// New represents an expression that allocates a new class instance.
+type New struct {
+	AST         *ast.New          // the underlying syntax node this was built from
+	Initializer *ClassInitializer // The initialization for the new instance
+	Type        Type              // The pointer type returned from the new
+}
+
+// ExpressionType implements Expression returning a pointer to the class type being initialized.
+func (n *New) ExpressionType() Type { return n.Type }
+
 // Cast represents a type coercion expression.
 // It reports it's type as the one specified, rather than the expression it
 // wraps.

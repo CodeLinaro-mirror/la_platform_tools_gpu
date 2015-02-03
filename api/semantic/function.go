@@ -92,7 +92,8 @@ type Call struct {
 	AST       *ast.Call    // the underlying syntax node this was built from
 	Target    *Callable    // the function expression this invokes
 	Arguments []Expression // the arguments to pass to the function
+	Type      Type         // the return type of the call
 }
 
 // ExpressionType implements Expression returning the underlying function return type.
-func (c *Call) ExpressionType() Type { return c.Target.Function.Return.Type }
+func (c *Call) ExpressionType() Type { return c.Type }
