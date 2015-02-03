@@ -33,7 +33,13 @@
 
 #include "Target.h"
 
-// If no log level specified then use the default one
+// Levels of logging from least verbose to most verbose.
+#define LOG_LEVEL_FATAL   0
+#define LOG_LEVEL_WARNING 1
+#define LOG_LEVEL_INFO    2
+#define LOG_LEVEL_DEBUG   3
+
+// If no log level specified then use the default one.
 #ifndef LOG_LEVEL
 #   define LOG_LEVEL LOG_LEVEL_WARNING
 #endif
@@ -61,13 +67,6 @@
 namespace android {
 namespace caze {
 
-enum {
-    LOG_LEVEL_FATAL   = 0,
-    LOG_LEVEL_WARNING = 1,
-    LOG_LEVEL_INFO    = 2,
-    LOG_LEVEL_DEBUG   = 3,
-};
-
 // Singleton logger implementation for PCs to write formatted log messages.
 class Logger {
 public:
@@ -93,7 +92,7 @@ private:
 }  // end of namespace caze
 }  // end of namespace android
 
-#define CAZE_FATAL_IMPL(...)                                                           \
+#define CAZE_FATAL_IMPL(...) \
         ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
 #define CAZE_WARNING_IMPL(...)                                                           \
         ::android::caze::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" CAZE_STR(__LINE__), \
