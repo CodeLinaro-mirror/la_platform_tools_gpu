@@ -19,6 +19,7 @@
 
 #include "GlInclude.h"
 #include "Target.h"
+#include "Timer.h"
 
 #include <memory>
 #include <string>
@@ -59,6 +60,10 @@ public:
     uint32_t getInMemoryCacheSize() const;
 
 private:
+    enum {
+        MAX_TIMERS = 256,
+    };
+
     Context(const GazerConnection& gazer, ResourceProvider* resourceProvider,
             MemoryManager* memoryManager);
 
@@ -83,6 +88,12 @@ private:
     // the stack (uint32_t) and the target address is at the second element of the stack (void*)
     bool loadResource(Stack* stack);
 
+    // Starts the timer identified by u8 index.
+    bool startTimer(Stack* stack);
+
+    // Stops the timer identified by u8 index and returns u64 elapsed nanoseconds since its start.
+    bool stopTimer(Stack* stack, bool pushReturn);
+
     // Gazer connection object to fetch and post resources back to the server
     const GazerConnection& mGazer;
 
@@ -100,6 +111,9 @@ private:
 
     // The data of the request for this context belongs to
     std::unique_ptr<ReplayRequest> mReplayRequest;
+
+    // An array of timers.
+    Timer mTimers[MAX_TIMERS];
 
     // The device information object containing the basic info about the current replay device and
     // the details about the Gl version
