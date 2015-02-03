@@ -85,29 +85,6 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 				{Type: vt},
 			},
 		},
-		&semantic.Function{Name: "GetOrError",
-			FullParameters: []*semantic.Parameter{{},
-				{Name: "key", Type: kt},
-				{Type: vt},
-			},
-		},
-		&semantic.Function{Name: "Set",
-			FullParameters: []*semantic.Parameter{{},
-				{Name: "key", Type: kt},
-				{Name: "value", Type: vt},
-			},
-		},
-		&semantic.Function{Name: "Contains",
-			FullParameters: []*semantic.Parameter{{},
-				{Name: "key", Type: kt},
-				{Type: semantic.BoolType},
-			},
-		},
-		&semantic.Function{Name: "Count",
-			FullParameters: []*semantic.Parameter{{},
-				{Type: semantic.Int32Type},
-			},
-		},
 		&semantic.Function{Name: "Delete",
 			FullParameters: []*semantic.Parameter{{},
 				{Name: "key", Type: kt},
@@ -234,7 +211,7 @@ func enum(ctx *context, out *semantic.Enum) {
 	for _, extends := range in.Extends {
 		t := ctx.findType(extends, extends.Value)
 		if e, ok := t.(*semantic.Enum); !ok {
-			ctx.errorf(extends, "non enum entry %s in extension list", t.Typename())
+			ctx.errorf(extends, "non enum entry %s in extension list", typename(t))
 		} else {
 			out.Extends = append(out.Extends, e)
 			enum(ctx, e)
@@ -256,7 +233,7 @@ func class(ctx *context, out *semantic.Class) {
 	for _, extends := range in.Extends {
 		t := ctx.findType(extends, extends.Value)
 		if c, ok := t.(*semantic.Class); !ok {
-			ctx.errorf(extends, "non class entry %s in extension list", t.Typename())
+			ctx.errorf(extends, "non class entry %s in extension list", typename(t))
 		} else {
 			out.Extends = append(out.Extends, c)
 			c.ExtendedBy = append(c.ExtendedBy, out)

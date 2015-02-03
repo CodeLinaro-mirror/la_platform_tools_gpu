@@ -98,7 +98,7 @@ func call(ctx *context, in *ast.Call) *semantic.Call {
 			at := arg.ExpressionType()
 			out.Arguments = append(out.Arguments, arg)
 			if !assignable(p.Type, at) {
-				ctx.errorf(in, "argument %d to %s is wrong type, expected %s got %s", i, f.Name, p.Type.Typename(), at.Typename())
+				ctx.errorf(in, "argument %d to %s is wrong type, expected %s got %s", i, f.Name, typename(p.Type), typename(at))
 				return
 			}
 		})
@@ -291,13 +291,15 @@ func length(ctx *context, in *ast.Length) *semantic.Length {
 	switch at.(type) {
 	case *semantic.Array:
 		ok = true
+	case *semantic.Map:
+		ok = true
 	case *semantic.Builtin:
 		if at == semantic.StringType || at == semantic.PointerType {
 			ok = true
 		}
 	}
 	if !ok {
-		ctx.errorf(in, "len cannot work out length of type %s", at.Typename())
+		ctx.errorf(in, "len cannot work out length of type %s", typename(at))
 		return out
 	}
 	infer := baseType(ctx.scope.inferType)
@@ -325,6 +327,6 @@ func number(ctx *context, in *ast.Number) semantic.Expression {
 	if v, err := strconv.ParseFloat(in.Value, 64); err == nil {
 		return semantic.Float64Value(v)
 	}
-	ctx.errorf(in, "could not parse %s as a number (%s)", in.Value, infer.Typename())
+	ctx.errorf(in, "could not parse %s as a number (%s)", in.Value, typename(infer))
 	return invalid{}
 }
