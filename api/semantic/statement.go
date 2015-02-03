@@ -76,3 +76,10 @@ type DeclareLocal struct {
 	AST   *ast.DeclareLocal // the underlying syntax node this was built from
 	Local *Local            // the local variable that was declared by this statement
 }
+
+// Return represents return statement for a function or macro.
+type Return struct {
+	AST      *ast.Return // the underlying syntax node this was built from
+	Function *Function   // the function this statement returns from
+	Value    Expression  // the value to be returned
+}

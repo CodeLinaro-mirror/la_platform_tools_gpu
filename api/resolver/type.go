@@ -56,8 +56,6 @@ func simpleType(ctx *context, in *ast.Identifier) semantic.Type {
 	return out
 }
 
-const functionResult = "result"
-
 func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 	kt := type_(ctx, in.KeyType)
 	vt := type_(ctx, in.ValueType)
@@ -84,13 +82,13 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 			FullParameters: []*semantic.Parameter{{},
 				{Name: "key", Type: kt},
 				{Name: "value", Type: vt},
-				{Name: functionResult, Type: vt},
+				{Type: vt},
 			},
 		},
 		&semantic.Function{Name: "GetOrError",
 			FullParameters: []*semantic.Parameter{{},
 				{Name: "key", Type: kt},
-				{Name: functionResult, Type: vt},
+				{Type: vt},
 			},
 		},
 		&semantic.Function{Name: "Set",
@@ -102,12 +100,12 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 		&semantic.Function{Name: "Contains",
 			FullParameters: []*semantic.Parameter{{},
 				{Name: "key", Type: kt},
-				{Name: functionResult, Type: semantic.BoolType},
+				{Type: semantic.BoolType},
 			},
 		},
 		&semantic.Function{Name: "Count",
 			FullParameters: []*semantic.Parameter{{},
-				{Name: functionResult, Type: semantic.Int32Type},
+				{Type: semantic.Int32Type},
 			},
 		},
 		&semantic.Function{Name: "Delete",
@@ -117,7 +115,7 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 		},
 		&semantic.Function{Name: "Range",
 			FullParameters: []*semantic.Parameter{{},
-				{Name: functionResult, Type: semantic.AnyType},
+				{Type: semantic.AnyType},
 			},
 		},
 	} {
@@ -126,12 +124,12 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 		f.This.Name = "self"
 		f.This.Type = out
 		last := f.FullParameters[len(f.FullParameters)-1]
-		if last.Name == functionResult {
+		if last.Name == "" {
 			f.Return = f.FullParameters[len(f.FullParameters)-1]
 			f.Return.Output = true
 			f.Outputs = append(f.Outputs, f.Return)
 		} else {
-			f.Return = &semantic.Parameter{Name: functionResult, Type: semantic.VoidType}
+			f.Return = &semantic.Parameter{Type: semantic.VoidType}
 		}
 		out.Members[f.Name] = f
 	}

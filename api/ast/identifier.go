@@ -47,6 +47,7 @@ const (
 	KeywordMap       = "map"
 	KeywordNew       = "new"
 	KeywordOut       = "out"
+	KeywordReturn    = "return"
 	KeywordPseudonym = "type"
 	KeywordSwitch    = "switch"
 	KeywordThis      = "this"
