@@ -20,6 +20,7 @@
 #include "GlFunctions.h"
 #include "Interpreter.h"
 #include "MemoryManager.h"
+#include "PostBuffer.h"
 #include "ReplayRequest.h"
 #include "ResourceProvider.h"
 #include "Stack.h"
@@ -51,9 +52,13 @@ std::unique_ptr<Context> Context::create(const GazerConnection& gazer,
     }
 }
 
+// TODO: Make the PostBuffer size dynamic? It currently holds 2MB of data.
 Context::Context(const GazerConnection& gazer, ResourceProvider* resourceProvider,
                  MemoryManager* memoryManager) :
-        mGazer(gazer), mResourceProvider(resourceProvider), mMemoryManager(memoryManager)
+        mGazer(gazer), mResourceProvider(resourceProvider), mMemoryManager(memoryManager),
+        mPostBuffer(new PostBuffer(POST_BUFFER_SIZE, [this](const void* address, uint32_t count) {
+            return this->mGazer.post(address, count);
+        }))
 #if TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
         , mGlfwWindow(nullptr)
 #endif  // TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
@@ -91,7 +96,7 @@ bool Context::initialize() {
 bool Context::interpret() {
     Interpreter interpreter(mMemoryManager, mReplayRequest->getStackSize());
     registerCallbacks(&interpreter);
-    return interpreter.run(mReplayRequest->getInstructionList());
+    return interpreter.run(mReplayRequest->getInstructionList()) && mPostBuffer->flush();
 }
 
 uint32_t Context::getInMemoryCacheSize() const {
@@ -297,6 +302,27 @@ void Context::destroyGl() {
 #endif  // GLFW_VERSION_MAJOR
 }
 
+bool Context::postData(Stack* stack) {
+    const uint32_t count = stack->pop<uint32_t>();
+    const void* address = stack->pop<const void*>();
+
+    if (!stack->isValid()) {
+        CAZE_WARNING("Error during postData\n");
+        return false;
+    }
+
+    return mPostBuffer->push(address, count);
+}
+
+bool Context::flushPostBuffer(Stack* stack) {
+    if (!stack->isValid()) {
+        CAZE_WARNING("Error during flushPostBuffer\n");
+        return false;
+    }
+
+    return mPostBuffer->flush();
+}
+
 const DeviceInfo& Context::getDeviceInfo() const {
     return mDeviceInfo;
 }
@@ -313,23 +339,6 @@ bool Context::loadResource(Stack* stack) {
     const auto& resourceData = mReplayRequest->getResourceData(resourceId);
     if (!mResourceProvider->get(resourceData.first, mGazer, address, resourceData.second)) {
         CAZE_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
-        return false;
-    }
-
-    return true;
-}
-
-bool Context::postData(Stack* stack) {
-    const uint32_t count = stack->pop<uint32_t>();
-    const void* address = stack->pop<const void*>();
-
-    if (!stack->isValid()) {
-        CAZE_WARNING("Error during postData\n");
-        return false;
-    }
-
-    if (!mGazer.post(address, count)) {
-        CAZE_WARNING("Failed to post data to the server\n");
         return false;
     }
 

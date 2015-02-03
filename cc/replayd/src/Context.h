@@ -31,6 +31,7 @@ namespace caze {
 class GazerConnection;
 class Interpreter;
 class MemoryManager;
+class PostBuffer;
 class ReplayRequest;
 class ResourceProvider;
 class Stack;
@@ -61,7 +62,8 @@ public:
 
 private:
     enum {
-        MAX_TIMERS = 256,
+        MAX_TIMERS       = 256,
+        POST_BUFFER_SIZE = 2*1024*1024,
     };
 
     Context(const GazerConnection& gazer, ResourceProvider* resourceProvider,
@@ -94,6 +96,9 @@ private:
     // Stops the timer identified by u8 index and returns u64 elapsed nanoseconds since its start.
     bool stopTimer(Stack* stack, bool pushReturn);
 
+    // Flushes any pending post data buffered from calling postData.
+    bool flushPostBuffer(Stack *stack);
+
     // Gazer connection object to fetch and post resources back to the server
     const GazerConnection& mGazer;
 
@@ -114,6 +119,9 @@ private:
 
     // An array of timers.
     Timer mTimers[MAX_TIMERS];
+
+    // A buffer for data to be sent back to the server.
+    std::unique_ptr<PostBuffer> mPostBuffer;
 
     // The device information object containing the basic info about the current replay device and
     // the details about the Gl version
