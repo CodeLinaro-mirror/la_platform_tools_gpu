@@ -35,7 +35,7 @@
 
 // If no log level specified then use the default one
 #ifndef LOG_LEVEL
-#   define LOG_LEVEL LOG_LEVEL_INFO
+#   define LOG_LEVEL LOG_LEVEL_WARNING
 #endif
 
 #define CAZE_STR(S) CAZE_STR2(S)
@@ -57,7 +57,6 @@
 #else  // TARGET_OS == CAZE_OS_ANDROID
 
 #include <stdio.h>
-#include <stdlib.h>
 
 namespace android {
 namespace caze {
@@ -74,8 +73,10 @@ class Logger {
 public:
     // Write a log message to the log output with the specific log level. The location should
     // contain the place where the log is written from and the format is a standard C format string
-    // The log message build up in the following way:
-    // <Time stamp (ms precision)> #Caze <log level>: <location> -> <message>
+    // If a message is logged with level LOG_LEVEL_FATAL, the program will terminate after the
+    // message is printed.
+    // Log messages take the form:
+    // <Time stamp> #Caze <log level>: <location> -> <message>
     static void log(unsigned level, const char* location, const char* format, ...);
 
 private:
@@ -93,12 +94,7 @@ private:
 }  // end of namespace android
 
 #define CAZE_FATAL_IMPL(...)                                                           \
-    do {                                                                               \
-        ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" CAZE_STR(__LINE__), \
-                                     __VA_ARGS__);                                     \
-        exit(EXIT_FAILURE);                                                            \
-    } while (0)
-
+        ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
 #define CAZE_WARNING_IMPL(...)                                                           \
         ::android::caze::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" CAZE_STR(__LINE__), \
                                      __VA_ARGS__)

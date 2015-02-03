@@ -22,9 +22,11 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <chrono>
+#include <ctime> // Required for MSVC.
 
 namespace android {
 namespace caze {
@@ -36,6 +38,10 @@ void Logger::log(unsigned level, const char* location, const char* format, ...) 
     va_start(args, format);
     instance.logImpl(level, location, format, args);
     va_end(args);
+
+    if (level == LOG_LEVEL_FATAL) {
+        exit(EXIT_FAILURE);
+    }
 }
 
 Logger::Logger(const char* fileName) {

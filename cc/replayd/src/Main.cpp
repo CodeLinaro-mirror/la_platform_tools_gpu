@@ -27,6 +27,7 @@
 #include "Target.h"
 
 #include <memory>
+#include <stdlib.h>
 
 #if TARGET_OS == CAZE_OS_ANDROID
 #include <android_native_app_glue.h>
