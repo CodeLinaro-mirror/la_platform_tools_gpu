@@ -83,19 +83,24 @@ func assert(ctx *context, in *ast.Assert) *semantic.Assert {
 	return out
 }
 
-func assign(ctx *context, in *ast.Assign) *semantic.Assign {
-	out := &semantic.Assign{AST: in}
-	out.LHS = expression(ctx, in.LHS)
-	ctx.with(out.LHS.ExpressionType(), func() {
-		out.RHS = expression(ctx, in.RHS)
+func assign(ctx *context, in *ast.Assign) interface{} {
+	lhs := expression(ctx, in.LHS)
+	var rhs semantic.Expression
+	ctx.with(lhs.ExpressionType(), func() {
+		rhs = expression(ctx, in.RHS)
 	})
-	inferUnknown(ctx, out.LHS, out.RHS)
-	rt := out.RHS.ExpressionType()
-	lt := out.LHS.ExpressionType()
+	inferUnknown(ctx, lhs, rhs)
+	lt := lhs.ExpressionType()
+	rt := rhs.ExpressionType()
 	if !assignable(lt, rt) {
 		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
 	}
-	return out
+	switch lhs := lhs.(type) {
+	case *semantic.MapIndex:
+		return &semantic.MapAssign{AST: in, To: lhs, Value: rhs}
+	default:
+		return &semantic.Assign{AST: in, LHS: lhs, RHS: rhs}
+	}
 }
 
 func declareLocal(ctx *context, in *ast.DeclareLocal) *semantic.DeclareLocal {

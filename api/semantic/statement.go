@@ -70,6 +70,13 @@ type Assign struct {
 	RHS Expression  // the value to store
 }
 
+// MapAssign represents assigning to a map index expression.
+type MapAssign struct {
+	AST   *ast.Assign // the underlying syntax node this was built from
+	To    *MapIndex   // the map index to assign to
+	Value Expression  // the value to set in the map
+}
+
 // DeclareLocal represents a local variable declaration statement.
 // Variables cannot be modified after declaration.
 type DeclareLocal struct {

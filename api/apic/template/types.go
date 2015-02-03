@@ -49,6 +49,7 @@ var (
 		semantic.Global{},
 		semantic.Iteration{},
 		semantic.Local{},
+		semantic.MapAssign{},
 		semantic.MapIndex{},
 		semantic.Map{},
 		semantic.Member{},

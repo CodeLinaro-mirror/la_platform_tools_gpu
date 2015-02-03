@@ -94,7 +94,7 @@ type ArrayIndex struct {
 // ExpressionType implements Expression returning the value type of the array.
 func (i *ArrayIndex) ExpressionType() Type { return i.ValueType }
 
-// MapIndex represents using the indexing operator on an array type.
+// MapIndex represents using the indexing operator on a map type.
 type MapIndex struct {
 	AST       *ast.Index // the underlying syntax node this was built from
 	ValueType Type       // the value type of the array being indexed
