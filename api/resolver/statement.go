@@ -78,7 +78,7 @@ func assert(ctx *context, in *ast.Assert) *semantic.Assert {
 	out.Condition = expression(ctx, in.Condition)
 	t := out.Condition.ExpressionType()
 	if !equal(t, semantic.BoolType) {
-		ctx.errorf(in, "assert expression must be a bool, got %s", t.Typename())
+		ctx.errorf(in, "assert expression must be a bool, got %s", typename(t))
 	}
 	return out
 }

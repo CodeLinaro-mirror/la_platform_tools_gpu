@@ -73,6 +73,26 @@ type BinaryOp struct {
 // ExpressionType implements Expression
 func (b *BinaryOp) ExpressionType() Type { return b.Type }
 
+// BitTest is the "in" operator applied to a bitfield.
+type BitTest struct {
+	AST      *ast.BinaryOp // the underlying syntax node this was built from
+	Bitfield Expression    // the bitfield being tested
+	Bits     Expression    // the bits to test for
+}
+
+// ExpressionType implements Expression
+func (BitTest) ExpressionType() Type { return BoolType }
+
+// MapContains is the "in" operator applied to a map.
+type MapContains struct {
+	AST *ast.BinaryOp // the underlying syntax node this was built from
+	Map Expression    // the map being tested
+	Key Expression    // the key to test for
+}
+
+// ExpressionType implements Expression
+func (MapContains) ExpressionType() Type { return BoolType }
+
 // Member is an expression that looks up a field by name from an object.
 type Member struct {
 	AST    *ast.Member // the underlying syntax node this was built from

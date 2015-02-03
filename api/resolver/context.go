@@ -157,12 +157,12 @@ func (ctx *context) get(at interface{}, name string) interface{} {
 			case *semantic.Parameter:
 				possibilities += fmt.Sprintf("parameter %q", t.Name)
 			case semantic.Type:
-				possibilities += fmt.Sprintf("type %q [%T]", t.Typename(), t)
+				possibilities += fmt.Sprintf("type %q [%T]", typename(t), t)
 			default:
 				possibilities += fmt.Sprintf("[%T]%v", t, t)
 			}
 		}
-		ctx.errorf(at, "Ambiguous identifier %q [using %s].\n Could be: %s", name, ctx.scope.inferType.Typename(), possibilities)
+		ctx.errorf(at, "Ambiguous identifier %q [using %s].\n Could be: %s", name, typename(ctx.scope.inferType), possibilities)
 		return nil
 	}
 }

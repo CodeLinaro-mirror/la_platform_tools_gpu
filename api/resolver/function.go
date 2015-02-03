@@ -88,7 +88,7 @@ func method(ctx *context, in *ast.Function) {
 	switch t := t.(type) {
 	case *semantic.Pointer:
 		if class, ok := t.To.(*semantic.Class); !ok {
-			ctx.errorf(in, "expected this as a reference to a class, got %s[%T]", t.To.Typename(), t.To)
+			ctx.errorf(in, "expected this as a reference to a class, got %s[%T]", typename(t.To), t.To)
 		} else {
 			class.Methods = append(class.Methods, out)
 			class.Members[out.Name] = out
@@ -103,6 +103,6 @@ func method(ctx *context, in *ast.Function) {
 		t.Members[out.Name] = out
 		functionBody(ctx, t, out)
 	default:
-		ctx.errorf(in, "invalid type for this , got %s[%T]", t.Typename(), t)
+		ctx.errorf(in, "invalid type for this , got %s[%T]", typename(t), t)
 	}
 }
