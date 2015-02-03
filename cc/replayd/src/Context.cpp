@@ -336,5 +336,40 @@ bool Context::postData(Stack* stack) {
     return true;
 }
 
+bool Context::startTimer(Stack* stack) {
+    uint8_t index = stack->pop<uint8_t>();
+    if (stack->isValid()) {
+        if (index < MAX_TIMERS) {
+            CAZE_DEBUG("StartTimer(%d)\n", index);
+            mTimers[index].Start();
+            return true;
+        } else {
+            CAZE_WARNING("StartTimer called with invalid index %d", index);
+        }
+    } else {
+        CAZE_WARNING("Error while calling function StartTimer\n");
+    }
+    return false;
+}
+
+bool Context::stopTimer(Stack* stack, bool pushReturn) {
+    uint8_t index = stack->pop<uint8_t>();
+    if (stack->isValid()) {
+        if (index < MAX_TIMERS) {
+            CAZE_DEBUG("StopTimer(%d)\n", index);
+            uint64_t ns = mTimers[index].Stop();
+            if (pushReturn) {
+                stack->push(ns);
+            }
+            return true;
+        } else {
+            CAZE_WARNING("StopTimer called with invalid index %d", index);
+        }
+    } else {
+        CAZE_WARNING("Error while calling function StopTimer\n");
+    }
+    return false;
+}
+
 }  // end of namespace caze
 }  // end of namespace android
