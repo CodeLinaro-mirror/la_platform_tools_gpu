@@ -17,7 +17,6 @@
 #ifndef ANDROID_CAZE_CONTEXT_H
 #define ANDROID_CAZE_CONTEXT_H
 
-#include "GlInclude.h"
 #include "Target.h"
 #include "Timer.h"
 
@@ -32,12 +31,10 @@ class GazerConnection;
 class Interpreter;
 class MemoryManager;
 class PostBuffer;
+class Renderer;
 class ReplayRequest;
 class ResourceProvider;
 class Stack;
-
-// Type for storing the device info (key: value)
-typedef std::unordered_map<std::string, std::string> DeviceInfo;
 
 // Context object for the replay containing the Gl context, the memory manager and the replay
 // specific functions to handle network communication of the interpreter
@@ -54,9 +51,6 @@ public:
     // Run the interpreter over the opcode stream of the replay request and returns true if the
     // interpretation was successful false otherwise
     bool interpret();
-
-    // Get the device info belongs to the current device
-    const DeviceInfo& getDeviceInfo() const;
 
     uint32_t getInMemoryCacheSize() const;
 
@@ -76,11 +70,8 @@ private:
     // Register the callbacks for the interpreter (Gl functions, load resource, post resource)
     void registerCallbacks(Interpreter* interpreter);
 
-    // Initialize the Gl context
-    bool initGl(int width, int height);
-
-    // Destroy the Gl context
-    void destroyGl();
+    // Initialize the context for replay
+    bool init(int width, int height);
 
     // Post a chunk of data where the number of bytes is on the top of the stack (uint32_t) and the
     // address for the data is the second element on the stack (void*)
@@ -95,6 +86,12 @@ private:
 
     // Stops the timer identified by u8 index and returns u64 elapsed nanoseconds since its start.
     bool stopTimer(Stack* stack, bool pushReturn);
+
+    // Implementation of the synthetic function driverGetPropertyUint in the gl api file.
+    bool driverGetPropertyUint(Stack* stack);
+
+    // Implementation of the synthetic function driverGetPropertyString in the gl api file.
+    bool driverGetPropertyString(Stack* stack);
 
     // Flushes any pending post data buffered from calling postData.
     bool flushPostBuffer(Stack *stack);
@@ -120,24 +117,11 @@ private:
     // An array of timers.
     Timer mTimers[MAX_TIMERS];
 
+    // The renderer for the given platform.
+    std::unique_ptr<Renderer> mRenderer;
+
     // A buffer for data to be sent back to the server.
     std::unique_ptr<PostBuffer> mPostBuffer;
-
-    // The device information object containing the basic info about the current replay device and
-    // the details about the Gl version
-    DeviceInfo mDeviceInfo;
-
-#ifdef EGL_VERSION_1_0
-    // EGL context variables
-    EGLContext mEglContext;
-    EGLSurface mEglSurface;
-    EGLDisplay mEglDisplay;
-#endif
-
-#if TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
-    // GLFW window on PCs
-    GLFWwindow* mGlfwWindow;
-#endif  // TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
 };
 
 }  // end of namespace caze

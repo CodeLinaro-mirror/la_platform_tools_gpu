@@ -3098,6 +3098,323 @@ bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlGenQueries(Stack* stack, bool pushReturn) {
+    QueryId* queries = stack->pop<QueryId*>();
+    int32_t count = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGenQueries(%d, %p)\n", count, queries);
+        if (glGenQueries != nullptr) {
+            glGenQueries(count, queries);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGenQueries\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGenQueries\n");
+        return false;
+    }
+}
+
+bool callGlBeginQuery(Stack* stack, bool pushReturn) {
+    QueryId query = stack->pop<QueryId>();
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glBeginQuery(%u, %u)\n", target, query);
+        if (glBeginQuery != nullptr) {
+            glBeginQuery(target, query);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glBeginQuery\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glBeginQuery\n");
+        return false;
+    }
+}
+
+bool callGlEndQuery(Stack* stack, bool pushReturn) {
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glEndQuery(%u)\n", target);
+        if (glEndQuery != nullptr) {
+            glEndQuery(target);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glEndQuery\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glEndQuery\n");
+        return false;
+    }
+}
+
+bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
+    QueryId* queries = stack->pop<QueryId*>();
+    int32_t count = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glDeleteQueries(%d, %p)\n", count, queries);
+        if (glDeleteQueries != nullptr) {
+            glDeleteQueries(count, queries);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glDeleteQueries\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glDeleteQueries\n");
+        return false;
+    }
+}
+
+bool callGlIsQuery(Stack* stack, bool pushReturn) {
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glIsQuery(%u)\n", query);
+        if (glIsQuery != nullptr) {
+            bool* return_value = glIsQuery(query);
+            CAZE_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<bool*>(return_value);
+            }
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glIsQuery\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glIsQuery\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
+    int32_t* value = stack->pop<int32_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
+        if (glGetQueryiv != nullptr) {
+            glGetQueryiv(target, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryiv\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryiv\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
+    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjectuiv != nullptr) {
+            glGetQueryObjectuiv(query, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectuiv\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryObjectuiv\n");
+        return false;
+    }
+}
+
+bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
+    QueryId* queries = stack->pop<QueryId*>();
+    int32_t count = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGenQueriesEXT(%d, %p)\n", count, queries);
+        if (glGenQueriesEXT != nullptr) {
+            glGenQueriesEXT(count, queries);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGenQueriesEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGenQueriesEXT\n");
+        return false;
+    }
+}
+
+bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
+    QueryId query = stack->pop<QueryId>();
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
+        if (glBeginQueryEXT != nullptr) {
+            glBeginQueryEXT(target, query);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glBeginQueryEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glBeginQueryEXT\n");
+        return false;
+    }
+}
+
+bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glEndQueryEXT(%u)\n", target);
+        if (glEndQueryEXT != nullptr) {
+            glEndQueryEXT(target);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glEndQueryEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glEndQueryEXT\n");
+        return false;
+    }
+}
+
+bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
+    QueryId* queries = stack->pop<QueryId*>();
+    int32_t count = stack->pop<int32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glDeleteQueriesEXT(%d, %p)\n", count, queries);
+        if (glDeleteQueriesEXT != nullptr) {
+            glDeleteQueriesEXT(count, queries);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glDeleteQueriesEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glDeleteQueriesEXT\n");
+        return false;
+    }
+}
+
+bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glIsQueryEXT(%u)\n", query);
+        if (glIsQueryEXT != nullptr) {
+            bool* return_value = glIsQueryEXT(query);
+            CAZE_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<bool*>(return_value);
+            }
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glIsQueryEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glIsQueryEXT\n");
+        return false;
+    }
+}
+
+bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
+    uint32_t target = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
+        if (glQueryCounterEXT != nullptr) {
+            glQueryCounterEXT(query, target);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glQueryCounterEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glQueryCounterEXT\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
+    int32_t* value = stack->pop<int32_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    uint32_t target = stack->pop<uint32_t>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
+        if (glGetQueryivEXT != nullptr) {
+            glGetQueryivEXT(target, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryivEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryivEXT\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
+    int32_t* value = stack->pop<int32_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjectivEXT != nullptr) {
+            glGetQueryObjectivEXT(query, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectivEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryObjectivEXT\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
+    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjectuivEXT != nullptr) {
+            glGetQueryObjectuivEXT(query, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectuivEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryObjectuivEXT\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
+    int64_t* value = stack->pop<int64_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjecti64vEXT != nullptr) {
+            glGetQueryObjecti64vEXT(query, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjecti64vEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryObjecti64vEXT\n");
+        return false;
+    }
+}
+
+bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
+    uint64_t* value = stack->pop<uint64_t*>();
+    uint32_t parameter = stack->pop<uint32_t>();
+    QueryId query = stack->pop<QueryId>();
+    if (stack->isValid()) {
+        CAZE_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
+        if (glGetQueryObjectui64vEXT != nullptr) {
+            glGetQueryObjectui64vEXT(query, parameter, value);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectui64vEXT\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function glGetQueryObjectui64vEXT\n");
+        return false;
+    }
+}
+
 }  // end of anonymous namespace
 
 PFNEGLCREATECONTEXT eglCreateContext = nullptr;
@@ -3266,6 +3583,24 @@ PFNGLUNMAPBUFFER glUnmapBuffer = nullptr;
 PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer = nullptr;
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample = nullptr;
 PFNGLBLITFRAMEBUFFER glBlitFramebuffer = nullptr;
+PFNGLGENQUERIES glGenQueries = nullptr;
+PFNGLBEGINQUERY glBeginQuery = nullptr;
+PFNGLENDQUERY glEndQuery = nullptr;
+PFNGLDELETEQUERIES glDeleteQueries = nullptr;
+PFNGLISQUERY glIsQuery = nullptr;
+PFNGLGETQUERYIV glGetQueryiv = nullptr;
+PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv = nullptr;
+PFNGLGENQUERIESEXT glGenQueriesEXT = nullptr;
+PFNGLBEGINQUERYEXT glBeginQueryEXT = nullptr;
+PFNGLENDQUERYEXT glEndQueryEXT = nullptr;
+PFNGLDELETEQUERIESEXT glDeleteQueriesEXT = nullptr;
+PFNGLISQUERYEXT glIsQueryEXT = nullptr;
+PFNGLQUERYCOUNTEREXT glQueryCounterEXT = nullptr;
+PFNGLGETQUERYIVEXT glGetQueryivEXT = nullptr;
+PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT = nullptr;
+PFNGLGETQUERYOBJECTUIVEXT glGetQueryObjectuivEXT = nullptr;
+PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT = nullptr;
+PFNGLGETQUERYOBJECTUI64VEXT glGetQueryObjectui64vEXT = nullptr;
 
 void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::EglCreateContext, callEglCreateContext);
@@ -3440,6 +3775,24 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlRenderbufferStorageMultisample,
                                   callGlRenderbufferStorageMultisample);
     interpreter->registerFunction(Ids::GlBlitFramebuffer, callGlBlitFramebuffer);
+    interpreter->registerFunction(Ids::GlGenQueries, callGlGenQueries);
+    interpreter->registerFunction(Ids::GlBeginQuery, callGlBeginQuery);
+    interpreter->registerFunction(Ids::GlEndQuery, callGlEndQuery);
+    interpreter->registerFunction(Ids::GlDeleteQueries, callGlDeleteQueries);
+    interpreter->registerFunction(Ids::GlIsQuery, callGlIsQuery);
+    interpreter->registerFunction(Ids::GlGetQueryiv, callGlGetQueryiv);
+    interpreter->registerFunction(Ids::GlGetQueryObjectuiv, callGlGetQueryObjectuiv);
+    interpreter->registerFunction(Ids::GlGenQueriesEXT, callGlGenQueriesEXT);
+    interpreter->registerFunction(Ids::GlBeginQueryEXT, callGlBeginQueryEXT);
+    interpreter->registerFunction(Ids::GlEndQueryEXT, callGlEndQueryEXT);
+    interpreter->registerFunction(Ids::GlDeleteQueriesEXT, callGlDeleteQueriesEXT);
+    interpreter->registerFunction(Ids::GlIsQueryEXT, callGlIsQueryEXT);
+    interpreter->registerFunction(Ids::GlQueryCounterEXT, callGlQueryCounterEXT);
+    interpreter->registerFunction(Ids::GlGetQueryivEXT, callGlGetQueryivEXT);
+    interpreter->registerFunction(Ids::GlGetQueryObjectivEXT, callGlGetQueryObjectivEXT);
+    interpreter->registerFunction(Ids::GlGetQueryObjectuivEXT, callGlGetQueryObjectuivEXT);
+    interpreter->registerFunction(Ids::GlGetQueryObjecti64vEXT, callGlGetQueryObjecti64vEXT);
+    interpreter->registerFunction(Ids::GlGetQueryObjectui64vEXT, callGlGetQueryObjectui64vEXT);
 }
 void Initialize() {
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
@@ -3680,6 +4033,31 @@ void Initialize() {
             GetGfxProcAddress("glRenderbufferStorageMultisample"));
     glBlitFramebuffer =
             reinterpret_cast<PFNGLBLITFRAMEBUFFER>(GetGfxProcAddress("glBlitFramebuffer"));
+    glGenQueries = reinterpret_cast<PFNGLGENQUERIES>(GetGfxProcAddress("glGenQueries"));
+    glBeginQuery = reinterpret_cast<PFNGLBEGINQUERY>(GetGfxProcAddress("glBeginQuery"));
+    glEndQuery = reinterpret_cast<PFNGLENDQUERY>(GetGfxProcAddress("glEndQuery"));
+    glDeleteQueries = reinterpret_cast<PFNGLDELETEQUERIES>(GetGfxProcAddress("glDeleteQueries"));
+    glIsQuery = reinterpret_cast<PFNGLISQUERY>(GetGfxProcAddress("glIsQuery"));
+    glGetQueryiv = reinterpret_cast<PFNGLGETQUERYIV>(GetGfxProcAddress("glGetQueryiv"));
+    glGetQueryObjectuiv =
+            reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(GetGfxProcAddress("glGetQueryObjectuiv"));
+    glGenQueriesEXT = reinterpret_cast<PFNGLGENQUERIESEXT>(GetGfxProcAddress("glGenQueriesEXT"));
+    glBeginQueryEXT = reinterpret_cast<PFNGLBEGINQUERYEXT>(GetGfxProcAddress("glBeginQueryEXT"));
+    glEndQueryEXT = reinterpret_cast<PFNGLENDQUERYEXT>(GetGfxProcAddress("glEndQueryEXT"));
+    glDeleteQueriesEXT =
+            reinterpret_cast<PFNGLDELETEQUERIESEXT>(GetGfxProcAddress("glDeleteQueriesEXT"));
+    glIsQueryEXT = reinterpret_cast<PFNGLISQUERYEXT>(GetGfxProcAddress("glIsQueryEXT"));
+    glQueryCounterEXT =
+            reinterpret_cast<PFNGLQUERYCOUNTEREXT>(GetGfxProcAddress("glQueryCounterEXT"));
+    glGetQueryivEXT = reinterpret_cast<PFNGLGETQUERYIVEXT>(GetGfxProcAddress("glGetQueryivEXT"));
+    glGetQueryObjectivEXT =
+            reinterpret_cast<PFNGLGETQUERYOBJECTIVEXT>(GetGfxProcAddress("glGetQueryObjectivEXT"));
+    glGetQueryObjectuivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUIVEXT>(
+            GetGfxProcAddress("glGetQueryObjectuivEXT"));
+    glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
+            GetGfxProcAddress("glGetQueryObjecti64vEXT"));
+    glGetQueryObjectui64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUI64VEXT>(
+            GetGfxProcAddress("glGetQueryObjectui64vEXT"));
 }
 
 }  // end of namespace gfxapi

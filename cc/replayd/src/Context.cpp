@@ -17,10 +17,11 @@
 #include "Context.h"
 #include "Log.h"
 #include "GazerConnection.h"
-#include "GlFunctions.h"
+#include "GfxApi.h"
 #include "Interpreter.h"
 #include "MemoryManager.h"
 #include "PostBuffer.h"
+#include "Renderer.h"
 #include "ReplayRequest.h"
 #include "ResourceProvider.h"
 #include "Stack.h"
@@ -32,13 +33,6 @@
 
 namespace android {
 namespace caze {
-namespace {
-
-void glfwErrorCallback(int error, const char* description) {
-    CAZE_WARNING("Glfw error occurred (error code: %d): %s\n", error, description);
-}
-
-}  // end of anonymous namespace
 
 std::unique_ptr<Context> Context::create(const GazerConnection& gazer,
                                          ResourceProvider* resourceProvider,
@@ -58,14 +52,10 @@ Context::Context(const GazerConnection& gazer, ResourceProvider* resourceProvide
         mGazer(gazer), mResourceProvider(resourceProvider), mMemoryManager(memoryManager),
         mPostBuffer(new PostBuffer(POST_BUFFER_SIZE, [this](const void* address, uint32_t count) {
             return this->mGazer.post(address, count);
-        }))
-#if TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
-        , mGlfwWindow(nullptr)
-#endif  // TARGET_OS == CAZE_OS_LINUX || TARGET_OS == CAZE_OS_OSX || TARGET_OS == CAZE_OS_WINDOWS
-{}
+        })) {
+}
 
 Context::~Context() {
-    destroyGl();
 }
 
 bool Context::initialize() {
@@ -104,7 +94,7 @@ uint32_t Context::getInMemoryCacheSize() const {
 }
 
 void Context::registerCallbacks(Interpreter* interpreter) {
-    GlFunctions::Register(interpreter);
+    gfxapi::Register(interpreter);
 
     // Custom function for posting and fetching resources to and from the server
     interpreter->registerFunction(Interpreter::POST_FUNCTION_ID,
@@ -112,16 +102,32 @@ void Context::registerCallbacks(Interpreter* interpreter) {
     interpreter->registerFunction(Interpreter::RESOURCE_FUNCTION_ID,
                                   [this](Stack* stack, bool) { return this->loadResource(stack); });
 
-    // Function for initializing the Gl context. The first three values from the stack (last three
-    // arguments) are not used.
-    interpreter->registerFunction(GlFunctions::Init, [this](Stack* stack, bool) {
+    // Registering custom synthetic functions
+    interpreter->registerFunction(gfxapi::Ids::StartTimer,
+                                  [this](Stack* stack, bool) { return this->startTimer(stack); });
+    interpreter->registerFunction(gfxapi::Ids::StopTimer,
+                                  [this](Stack* stack, bool pushReturn) {
+        return this->stopTimer(stack, pushReturn);
+    });
+    interpreter->registerFunction(gfxapi::Ids::DriverGetPropertyUint, [this](Stack* stack, bool) {
+        return this->driverGetPropertyUint(stack);
+    });
+    interpreter->registerFunction(gfxapi::Ids::DriverGetPropertyString, [this](Stack* stack, bool) {
+        return this->driverGetPropertyString(stack);
+    });
+    interpreter->registerFunction(gfxapi::Ids::FlushPostBuffer, [this](Stack* stack, bool) {
+        return this->flushPostBuffer(stack);
+    });
+
+    // Function for initializing the API context. The first three argument are not currently used.
+    interpreter->registerFunction(gfxapi::Ids::Init, [this](Stack* stack, bool) {
         stack->discard(3);
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
 
         if (stack->isValid()) {
-            CAZE_DEBUG("initGl(%d, %d)\n", height, width);
-            return this->initGl(width, height);
+            CAZE_INFO("init(%d, %d)\n", height, width);
+            return this->init(width, height);
         } else {
             CAZE_WARNING("Error during calling function initGl\n");
             return false;
@@ -129,177 +135,27 @@ void Context::registerCallbacks(Interpreter* interpreter) {
     });
 }
 
-bool Context::initGl(int width, int height) {
-#ifdef EGL_VERSION_1_0
-    EGLint error;
-
-    mEglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to get EGL display: %d\n", error);
-        return false;
-    }
-
-    eglInitialize(mEglDisplay, nullptr, nullptr);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to initialize EGL: %d\n", error);
-        return false;
-    }
-
-    eglBindAPI(EGL_OPENGL_ES_API);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to bind EGL API: %d\n", error);
-        return false;
-    }
-
-    // Find a supported EGL context config.
-    const int configAttribList[] = {
-        // RGBA8 buffer
-        EGL_RED_SIZE, 8,
-        EGL_GREEN_SIZE, 8,
-        EGL_BLUE_SIZE, 8,
-        EGL_ALPHA_SIZE, 8,
-        EGL_BUFFER_SIZE, 32,
-
-        // D8S8 buffer
-        EGL_DEPTH_SIZE, 8,
-        EGL_STENCIL_SIZE, 8,
-
-        // GL|ES API version
-        // Note: EGL_OPENGL_ES3_BIT_KHR is undefined on Android NDK.
-        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-
-        EGL_NONE
-    };
-    int one = 1;
-    EGLConfig eglConfig;
-    eglChooseConfig(mEglDisplay, configAttribList, &eglConfig, 1, &one);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to choose EGL config: %d\n", error);
-        return false;
-    }
-
-    // Create an EGL context.
-    const int contextAttribList[] = {
-        EGL_CONTEXT_CLIENT_VERSION, 2,
-        EGL_NONE
-    };
-    mEglContext = eglCreateContext(mEglDisplay, eglConfig, EGL_NO_CONTEXT, contextAttribList);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to create EGL context: %d\n", error);
-        return false;
-    }
-
-    // Create an EGL surface for the read/draw framebuffer.
-    const int surfaceAttribList[] = {
-        EGL_WIDTH, width,
-        EGL_HEIGHT, height,
-        EGL_NONE
-    };
-    mEglSurface = eglCreatePbufferSurface(mEglDisplay, eglConfig, surfaceAttribList);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to create EGL pbuffer surface: %d\n", error);
-        return false;
-    }
-
-    eglMakeCurrent(mEglDisplay, mEglSurface, mEglSurface, mEglContext);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to make EGL current: %d\n", error);
-        return false;
-    }
-
-    mDeviceInfo["egl.vendor"] = eglQueryString(mEglDisplay, EGL_VENDOR);
-    mDeviceInfo["egl.version"] = eglQueryString(mEglDisplay, EGL_VERSION);
-    mDeviceInfo["egl.extensions"] = eglQueryString(mEglDisplay, EGL_EXTENSIONS);
-    mDeviceInfo["egl.client_apis"] = eglQueryString(mEglDisplay, EGL_CLIENT_APIS);
-#endif  // EGL_VERSION_1_0
-
-#ifdef GLFW_VERSION_MAJOR
-    glfwSetErrorCallback(glfwErrorCallback);
-
-    if (!glfwInit()) {
-        CAZE_WARNING("Failed to init glfw\n");
-        return false;
-    }
-
-    glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-    mGlfwWindow = glfwCreateWindow(width, height, "Replay", nullptr, nullptr);
-    if (nullptr == mGlfwWindow) {
-        CAZE_WARNING("Failed to create glfw window\n");
-        return false;
-    }
-
-    glfwMakeContextCurrent(mGlfwWindow);
-    glfwSwapInterval(0);  // disable vsync
-    mDeviceInfo["glfw.version"] = glfwGetVersionString();
-#endif  // GLFW_VERSION_MAJOR
-
-#if GLEW_VERSION
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        CAZE_WARNING("Failed to init glew\n");
-        return false;
-    }
-
-    mDeviceInfo["glew.version"] = reinterpret_cast<char const*>(glewGetString(GLEW_VERSION));
-#endif  // GLEW_VERSION
-
-    mDeviceInfo["gl.vendor"] = reinterpret_cast<char const*>(glGetString(GL_VENDOR));
-    mDeviceInfo["gl.version"] = reinterpret_cast<char const*>(glGetString(GL_VERSION));
-    mDeviceInfo["gl.renderer"] = reinterpret_cast<char const*>(glGetString(GL_RENDERER));
-    mDeviceInfo["gl.extensions"] = reinterpret_cast<char const*>(glGetString(GL_EXTENSIONS));
-
+bool Context::init(int width, int height) {
+    mRenderer = Renderer::create(width, height);
     return true;
 }
 
-void Context::destroyGl() {
-#ifdef EGL_VERSION_1_0
-    EGLint error;
+bool Context::loadResource(Stack* stack) {
+    uint32_t resourceId = stack->pop<uint32_t>();
+    void* address = stack->pop<void*>();
 
-    eglMakeCurrent(mEglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to make EGL current during destroy: %d\n", error);
+    if (!stack->isValid()) {
+        CAZE_WARNING("Error during loadResource\n");
+        return false;
     }
 
-    eglDestroySurface(mEglDisplay, mEglSurface);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to destroy EGL surface: %d\n", error);
+    const auto& resourceData = mReplayRequest->getResourceData(resourceId);
+    if (!mResourceProvider->get(resourceData.first, mGazer, address, resourceData.second)) {
+        CAZE_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
+        return false;
     }
 
-    eglDestroyContext(mEglDisplay, mEglContext);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to destroy EGL context: %d\n", error);
-    }
-
-    eglTerminate(mEglDisplay);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to terminate EGL: %d\n", error);
-    }
-
-    eglReleaseThread();
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to release EGL thread: %d\n", error);
-    }
-#endif  // EGL_VERSION_1_0
-
-#ifdef GLFW_VERSION_MAJOR
-    if (mGlfwWindow) {
-        glfwDestroyWindow(mGlfwWindow);
-        mGlfwWindow = nullptr;
-        glfwTerminate();
-    }
-#endif  // GLFW_VERSION_MAJOR
+    return true;
 }
 
 bool Context::postData(Stack* stack) {
@@ -323,33 +179,11 @@ bool Context::flushPostBuffer(Stack* stack) {
     return mPostBuffer->flush();
 }
 
-const DeviceInfo& Context::getDeviceInfo() const {
-    return mDeviceInfo;
-}
-
-bool Context::loadResource(Stack* stack) {
-    uint32_t resourceId = stack->pop<uint32_t>();
-    void* address = stack->pop<void*>();
-
-    if (!stack->isValid()) {
-        CAZE_WARNING("Error during loadResource\n");
-        return false;
-    }
-
-    const auto& resourceData = mReplayRequest->getResourceData(resourceId);
-    if (!mResourceProvider->get(resourceData.first, mGazer, address, resourceData.second)) {
-        CAZE_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
-        return false;
-    }
-
-    return true;
-}
-
 bool Context::startTimer(Stack* stack) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            CAZE_DEBUG("StartTimer(%d)\n", index);
+            CAZE_INFO("startTimer(%d)\n", index);
             mTimers[index].Start();
             return true;
         } else {
@@ -365,7 +199,7 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            CAZE_DEBUG("StopTimer(%d)\n", index);
+            CAZE_INFO("stopTimer(%d)\n", index);
             uint64_t ns = mTimers[index].Stop();
             if (pushReturn) {
                 stack->push(ns);
@@ -378,6 +212,70 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
         CAZE_WARNING("Error while calling function StopTimer\n");
     }
     return false;
+}
+
+bool Context::driverGetPropertyUint(Stack* stack) {
+    uint32_t* value = stack->pop<uint32_t*>();
+    uint32_t propertyId = stack->pop<uint32_t>();
+
+    if (stack->isValid()) {
+        CAZE_INFO("driverGetPropertyUint(%u, %p)\n", propertyId, value);
+        switch (propertyId) {
+            case gfxapi::DriverPropertyUint::MAX_MEMORY_SIZE:
+                *value = mMemoryManager->getSize();
+                return true;
+            case gfxapi::DriverPropertyUint::REQUIRE_SHADER_PATCHING:
+                *value = (TARGET_OS != CAZE_OS_ANDROID);
+                return true;
+            default:
+                CAZE_WARNING("Unsupported id for DriverGetPropertyUint: %u\n", propertyId);
+                return false;
+        }
+    } else {
+        CAZE_WARNING("Error while calling function DriverGetPropertyUint\n");
+        return false;
+    }
+}
+
+bool Context::driverGetPropertyString(Stack* stack) {
+    char* value = stack->pop<char*>();
+    uint32_t bufferLen = stack->pop<uint32_t>();
+    uint32_t propertyId = stack->pop<uint32_t>();
+
+    if (stack->isValid()) {
+        CAZE_INFO("driverGetPropertyString(%u, %u, %p)\n", propertyId, bufferLen, value);
+
+        if (bufferLen == 0) {
+            return true;
+        }
+
+        const char* retValue = "";
+
+        switch (propertyId) {
+            case gfxapi::DriverPropertyString::GL_EXTENSIONS:
+                retValue = mRenderer->extensions();
+                break;
+            case gfxapi::DriverPropertyString::GL_RENDERER:
+                retValue = mRenderer->name();
+                break;
+            case gfxapi::DriverPropertyString::GL_VENDOR:
+                retValue = mRenderer->vendor();
+                break;
+            case gfxapi::DriverPropertyString::GL_VERSION:
+                retValue = mRenderer->version();
+                break;
+            default:
+                CAZE_WARNING("Unsupported id for driverGetPropertyString: %u\n", propertyId);
+                return false;
+        }
+
+        strncpy(value, retValue, bufferLen - 1);
+        value[bufferLen - 1] = 0;
+        return true;
+    } else {
+        CAZE_WARNING("Error while calling function driverGetPropertyString\n");
+        return false;
+    }
 }
 
 }  // end of namespace caze

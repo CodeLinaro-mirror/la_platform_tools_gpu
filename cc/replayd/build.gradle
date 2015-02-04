@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'cpp'
+apply plugin: 'objective-cpp'
 
 buildDir temporaryDirectory
 
@@ -85,6 +86,7 @@ model {
         clang(Clang) {
           target('osx64') {
             cppCompiler.withArguments { it << '-DTARGET_OS_OSX' }
+            objcppCompiler.withArguments { it << '-DTARGET_OS_OSX' }
           }
         }
         break
@@ -193,6 +195,15 @@ sources {
         srcDirs 'src'
       }
     }
+    objcpp {
+      switch (osFamily()) {
+      case 'mac':
+        source {
+          srcDir 'src'
+          include '**/*.mm'
+        }
+      }
+    }
   }
 
   test {
@@ -246,9 +257,30 @@ task windows64installLocal(type: Copy, dependsOn: ['windows64TestExecutable', 'w
 
 def cazeLinkerArgs(targetPlatformName) {
   switch (targetPlatformName) {
-    case 'linux64': return ['-lglfw', '-lGLEW', '-lGL', '-lstdc++', '-lm', '-lpthread']
-    case 'osx64': return ['-framework', 'OpenGL', '-lglfw', '-lstdc++', '-L/usr/local/lib', '-lpthread']
-    case 'windows64': return ['-static-libgcc', '-static-libstdc++', '-L/usr/local/lib', '-L'+mingwRoot()+'/lib', '-lws2_32', '-lglew32', '-lglfw3', '-lopengl32', '-lgdi32']
+    case 'linux64': return [
+      '-ldl',
+      '-lGL',
+      '-lstdc++',
+      '-lm',
+      '-lpthread',
+      '-lX11',
+    ]
+    case 'osx64': return [
+      '-framework', 'Cocoa',
+      '-framework', 'OpenGL',
+      '-lstdc++',
+      '-lpthread',
+      '-L/usr/local/lib'
+    ]
+    case 'windows64': return [
+      '-static-libgcc',
+      '-static-libstdc++',
+      '-L/usr/local/lib',
+      '-L'+mingwRoot()+'/lib',
+      '-lws2_32',
+      '-lopengl32',
+      '-lgdi32'
+    ]
   }
 }
 

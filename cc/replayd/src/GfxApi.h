@@ -213,6 +213,24 @@ static const uint16_t GlUnmapBuffer = 168;
 static const uint16_t GlInvalidateFramebuffer = 169;
 static const uint16_t GlRenderbufferStorageMultisample = 170;
 static const uint16_t GlBlitFramebuffer = 171;
+static const uint16_t GlGenQueries = 172;
+static const uint16_t GlBeginQuery = 173;
+static const uint16_t GlEndQuery = 174;
+static const uint16_t GlDeleteQueries = 175;
+static const uint16_t GlIsQuery = 176;
+static const uint16_t GlGetQueryiv = 177;
+static const uint16_t GlGetQueryObjectuiv = 178;
+static const uint16_t GlGenQueriesEXT = 179;
+static const uint16_t GlBeginQueryEXT = 180;
+static const uint16_t GlEndQueryEXT = 181;
+static const uint16_t GlDeleteQueriesEXT = 182;
+static const uint16_t GlIsQueryEXT = 183;
+static const uint16_t GlQueryCounterEXT = 184;
+static const uint16_t GlGetQueryivEXT = 185;
+static const uint16_t GlGetQueryObjectivEXT = 186;
+static const uint16_t GlGetQueryObjectuivEXT = 187;
+static const uint16_t GlGetQueryObjecti64vEXT = 188;
+static const uint16_t GlGetQueryObjectui64vEXT = 189;
 }  // end of namespace FunctionIds
 
 namespace DrawMode {
@@ -526,6 +544,10 @@ namespace StateVariable_EXT_texture_filter_anisotropic {
 static const uint32_t GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047;
 };  // end of namespace StateVariable_EXT_texture_filter_anisotropic
 
+namespace StateVariable_EXT_disjoint_timer_query {
+static const uint32_t GL_GPU_DISJOINT_EXT = 36795;
+};  // end of namespace StateVariable_EXT_disjoint_timer_query
+
 namespace StateVariable {};  // end of namespace StateVariable
 
 namespace FaceMode {
@@ -805,6 +827,39 @@ static const uint32_t SIZE_3 = 3;
 static const uint32_t SIZE_4 = 4;
 };  // end of namespace VertexAttribSize
 
+namespace QueryParameter_GLES_3 {
+static const uint32_t GL_CURRENT_QUERY = 34917;
+};  // end of namespace QueryParameter_GLES_3
+
+namespace QueryParameter_EXT_disjoint_timer_query {
+static const uint32_t GL_QUERY_COUNTER_BITS_EXT = 34916;
+};  // end of namespace QueryParameter_EXT_disjoint_timer_query
+
+namespace QueryParameter {};  // end of namespace QueryParameter
+
+namespace QueryObjectParameter_GLES_3 {
+static const uint32_t GL_QUERY_RESULT = 34918;
+static const uint32_t GL_QUERY_RESULT_AVAILABLE = 34919;
+};  // end of namespace QueryObjectParameter_GLES_3
+
+namespace QueryObjectParameter_EXT_disjoint_timer_query {
+};  // end of namespace QueryObjectParameter_EXT_disjoint_timer_query
+
+namespace QueryObjectParameter {};  // end of namespace QueryObjectParameter
+
+namespace QueryTarget_GLES_3 {
+static const uint32_t GL_ANY_SAMPLES_PASSED = 35887;
+static const uint32_t GL_ANY_SAMPLES_PASSED_CONSERVATIVE = 36202;
+static const uint32_t GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = 35976;
+};  // end of namespace QueryTarget_GLES_3
+
+namespace QueryTarget_EXT_disjoint_timer_query {
+static const uint32_t GL_TIME_ELAPSED_EXT = 35007;
+static const uint32_t GL_TIMESTAMP_EXT = 36392;
+};  // end of namespace QueryTarget_EXT_disjoint_timer_query
+
+namespace QueryTarget {};  // end of namespace QueryTarget
+
 namespace DriverPropertyUint {
 static const uint32_t MAX_MEMORY_SIZE = 0;
 static const uint32_t REQUIRE_SHADER_PATCHING = 1;
@@ -891,6 +946,7 @@ typedef uint32_t BufferId;
 typedef uint32_t ShaderId;
 typedef uint32_t ProgramId;
 typedef uint32_t VertexArrayId;
+typedef uint32_t QueryId;
 typedef uint32_t SyncObjectId;
 typedef int32_t UniformLocation;
 typedef int32_t AttributeLocation;
@@ -1148,6 +1204,27 @@ typedef void*(STDCALL* PFNGLBLITFRAMEBUFFER)(int32_t srcX0, int32_t srcY0, int32
                                              int32_t srcY1, int32_t dstX0, int32_t dstY0,
                                              int32_t dstX1, int32_t dstY1, uint32_t mask,
                                              uint32_t filter);
+typedef void*(STDCALL* PFNGLGENQUERIES)(int32_t count, QueryId* queries);
+typedef void*(STDCALL* PFNGLBEGINQUERY)(uint32_t target, QueryId query);
+typedef void*(STDCALL* PFNGLENDQUERY)(uint32_t target);
+typedef void*(STDCALL* PFNGLDELETEQUERIES)(int32_t count, QueryId* queries);
+typedef bool*(STDCALL* PFNGLISQUERY)(QueryId query);
+typedef void*(STDCALL* PFNGLGETQUERYIV)(uint32_t target, uint32_t parameter, int32_t* value);
+typedef void*(STDCALL* PFNGLGETQUERYOBJECTUIV)(QueryId query, uint32_t parameter, uint32_t* value);
+typedef void*(STDCALL* PFNGLGENQUERIESEXT)(int32_t count, QueryId* queries);
+typedef void*(STDCALL* PFNGLBEGINQUERYEXT)(uint32_t target, QueryId query);
+typedef void*(STDCALL* PFNGLENDQUERYEXT)(uint32_t target);
+typedef void*(STDCALL* PFNGLDELETEQUERIESEXT)(int32_t count, QueryId* queries);
+typedef bool*(STDCALL* PFNGLISQUERYEXT)(QueryId query);
+typedef void*(STDCALL* PFNGLQUERYCOUNTEREXT)(QueryId query, uint32_t target);
+typedef void*(STDCALL* PFNGLGETQUERYIVEXT)(uint32_t target, uint32_t parameter, int32_t* value);
+typedef void*(STDCALL* PFNGLGETQUERYOBJECTIVEXT)(QueryId query, uint32_t parameter, int32_t* value);
+typedef void*(STDCALL* PFNGLGETQUERYOBJECTUIVEXT)(QueryId query, uint32_t parameter,
+                                                  uint32_t* value);
+typedef void*(STDCALL* PFNGLGETQUERYOBJECTI64VEXT)(QueryId query, uint32_t parameter,
+                                                   int64_t* value);
+typedef void*(STDCALL* PFNGLGETQUERYOBJECTUI64VEXT)(QueryId query, uint32_t parameter,
+                                                    uint64_t* value);
 
 extern PFNEGLCREATECONTEXT eglCreateContext;
 extern PFNEGLMAKECURRENT eglMakeCurrent;
@@ -1315,6 +1392,24 @@ extern PFNGLUNMAPBUFFER glUnmapBuffer;
 extern PFNGLINVALIDATEFRAMEBUFFER glInvalidateFramebuffer;
 extern PFNGLRENDERBUFFERSTORAGEMULTISAMPLE glRenderbufferStorageMultisample;
 extern PFNGLBLITFRAMEBUFFER glBlitFramebuffer;
+extern PFNGLGENQUERIES glGenQueries;
+extern PFNGLBEGINQUERY glBeginQuery;
+extern PFNGLENDQUERY glEndQuery;
+extern PFNGLDELETEQUERIES glDeleteQueries;
+extern PFNGLISQUERY glIsQuery;
+extern PFNGLGETQUERYIV glGetQueryiv;
+extern PFNGLGETQUERYOBJECTUIV glGetQueryObjectuiv;
+extern PFNGLGENQUERIESEXT glGenQueriesEXT;
+extern PFNGLBEGINQUERYEXT glBeginQueryEXT;
+extern PFNGLENDQUERYEXT glEndQueryEXT;
+extern PFNGLDELETEQUERIESEXT glDeleteQueriesEXT;
+extern PFNGLISQUERYEXT glIsQueryEXT;
+extern PFNGLQUERYCOUNTEREXT glQueryCounterEXT;
+extern PFNGLGETQUERYIVEXT glGetQueryivEXT;
+extern PFNGLGETQUERYOBJECTIVEXT glGetQueryObjectivEXT;
+extern PFNGLGETQUERYOBJECTUIVEXT glGetQueryObjectuivEXT;
+extern PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT;
+extern PFNGLGETQUERYOBJECTUI64VEXT glGetQueryObjectui64vEXT;
 
 }  // end of namespace gfxapi
 }  // end of namespace caze
