@@ -1,0 +1,87 @@
+{{/*
+ * Copyright 2015, The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Android Open Source Project copyright header.
+-------------------------------------------------------------------------------
+*/}}
+{{define "AOSPCopyright"}}
+/*
+•* Copyright 2015, The Android Open Source Project
+•*
+•* Licensed under the Apache License, Version 2.0 (the "License");
+•* you may not use this file except in compliance with the License.
+•* You may obtain a copy of the License at
+•*
+•*     http://www.apache.org/licenses/LICENSE-2.0
+•*
+•* Unless required by applicable law or agreed to in writing, software
+•* distributed under the License is distributed on an "AS IS" BASIS,
+•* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+•* See the License for the specific language governing permissions and
+•* limitations under the License.
+•*/
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the typedef function-pointer name for a given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "FunctionPtrType"}}
+  {{AssertType $ "Function"}}
+
+  PFN{{Upper $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to call the specified command
+-------------------------------------------------------------------------------
+*/}}
+{{define "Call"}}
+  {{AssertType $ "Function"}}
+
+  {{$.Name}}(§
+    {{range $i, $p := $.CallParameters}}
+      {{if $i}}, {{end}}{{$p.Name}}§
+    {{end}})
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the printf format code for the specified type
+-------------------------------------------------------------------------------
+*/}}
+{{define "PrintfFormatCode"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym     $}}{{Macro "PrintfFormatCode" $.To}}
+  {{else if IsArray         $}}%p
+  {{else if IsPointerType   $}}%p
+  {{else if IsString        $}}%s
+  {{else if IsBool          $}}%d
+  {{else if IsS32           $}}%d
+  {{else if IsU32           $}}%u
+  {{else if IsF32           $}}%f
+  {{else if IsEnum          $}}%u
+  {{else}}{{Error "PrintfFormatCode passed unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
