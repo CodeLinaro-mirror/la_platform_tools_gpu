@@ -39,11 +39,37 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
             return nullptr;
         }
 
-        std::unique_ptr<GazerConnection> conn = GazerConnection::create(std::move(client));
-        if (conn != nullptr) {
-            return conn;
-        } else {
-            CAZE_WARNING("Loading GazerConnection failed!\n");
+        uint8_t connectionType;
+        if (client->recv(&connectionType, sizeof(connectionType)) != sizeof(connectionType)) {
+            CAZE_WARNING("Failed to read connection type\n");
+            return nullptr;
+        }
+
+        switch (connectionType) {
+            case DEVICE_INFO:
+                CAZE_INFO("Sending device info\n");
+                uint8_t data;
+
+                data = sizeof(void*);
+                if (client->send(&data, sizeof(data)) != sizeof(data)) {
+                    CAZE_WARNING("Failed to send pointer size\n");
+                    break;
+                }
+
+                data = std::alignment_of<double>::value;
+                if (client->send(&data, sizeof(data)) != sizeof(data)) {
+                    CAZE_WARNING("Failed to send alignment\n");
+                    break;
+                }
+                break;
+            case REPLAY_REQUEST:
+                std::unique_ptr<GazerConnection> conn = GazerConnection::create(std::move(client));
+                if (conn != nullptr) {
+                    return conn;
+                } else {
+                    CAZE_WARNING("Loading GazerConnection failed!\n");
+                }
+                break;
         }
     }
 }

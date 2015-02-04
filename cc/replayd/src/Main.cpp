@@ -37,15 +37,16 @@ namespace android {
 namespace caze {
 namespace {
 
-#if TARGET_OS == CAZE_OS_ANDROID
-const char* listenerPort = "9285";  // Hard coded port for communication with the server
-const char* cachePath = "/sdcard/caze_cache";
-#else  // TARGET_OS == CAZE_OS_ANDROID
-const char* listenerPort = "9284";  // Hard coded port for communication with the server
-const char* cachePath = "data/cache";
-#endif  // TARGET_OS == CAZE_OS_ANDROID
+std::vector<uint32_t> memorySizes{
+    2 * 1024 * 1024 * 1024U,  // 2GB
+    1 * 1024 * 1024 * 1024U,  // 1GB
+         512 * 1024 * 1024U,  // 512MB
+         256 * 1024 * 1024U,  // 256MB
+         128 * 1024 * 1024U,  // 128MB
+};
 
-void listenConnections(MemoryManager* memoryManager) {
+void listenConnections(const char* listenerPort, const char* cachePath,
+                       MemoryManager* memoryManager) {
     std::unique_ptr<Connection> listenConn = SocketConnection::create("127.0.0.1", listenerPort);
     if (listenConn == nullptr) {
         CAZE_FATAL("Failed to create listening socket\n");
@@ -82,15 +83,15 @@ void listenConnections(MemoryManager* memoryManager) {
 // Main function for android
 void android_main(struct android_app*) {
     app_dummy();
-    ::android::caze::MemoryManager memoryManager({256U * 1024 * 1024});  // 256MB
-    ::android::caze::listenConnections(&memoryManager);
+    ::android::caze::MemoryManager memoryManager(::android::caze::memorySizes);
+    ::android::caze::listenConnections("9285", "/sdcard/caze_cache", &memoryManager);
 }
 
 #else  // TARGET_OS == CAZE_OS_ANDROID
 // Main function for PC
 int main(int, char* []) {
-    ::android::caze::MemoryManager memoryManager({2U * 1024 * 1024 * 1024});  // 2GB
-    ::android::caze::listenConnections(&memoryManager);
+    ::android::caze::MemoryManager memoryManager(::android::caze::memorySizes);
+    ::android::caze::listenConnections("9284", "data" PATH_DELIMITER_STR "ccache", &memoryManager);
     return EXIT_SUCCESS;
 }
 

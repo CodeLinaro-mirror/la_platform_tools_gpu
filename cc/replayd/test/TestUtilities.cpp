@@ -61,6 +61,11 @@ void addUint32ToUint8Vector(std::vector<uint8_t>* v, uint32_t x) {
 }
 
 template <>
+std::vector<uint8_t> toByteVector<uint8_t>(const uint8_t& x) {
+    return {x};
+}
+
+template <>
 std::vector<uint8_t> toByteVector<uint32_t>(const uint32_t& x) {
     std::vector<uint8_t> v;
     addUint32ToUint8Vector(&v, x);

@@ -36,6 +36,11 @@ public:
     std::unique_ptr<GazerConnection> acceptConnection();
 
 private:
+    enum ConnectionType {
+        DEVICE_INFO    = 0,
+        REPLAY_REQUEST = 1,
+    };
+
     // The underlying server socket for the listener
     std::unique_ptr<Connection> mConn;
 };
