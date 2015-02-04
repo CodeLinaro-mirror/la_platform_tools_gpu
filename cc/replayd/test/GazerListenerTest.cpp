@@ -53,6 +53,10 @@ protected:
 };
 
 void registerMocksForCreateGazerConnection(MockConnection* connection) {
+    // Connection type
+    EXPECT_CALL(*connection, recv(_, 1))
+            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint8_t>(1))), ReturnArg<1>()));
+
     EXPECT_CALL(*connection, recv(_, 4))
             // Replay id length
             .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(0))), ReturnArg<1>()))
@@ -88,6 +92,10 @@ TEST_F(GazerListenerTest, AcceptConnectionErrorGazerConnection) {
     EXPECT_CALL(*mConnection, acceptProxy())
             .WillOnce(Return(clientConnection1))
             .WillOnce(Return(clientConnection2));
+
+    // Connection type
+    EXPECT_CALL(*clientConnection1, recv(_, 1))
+            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint8_t>(1))), ReturnArg<1>()));
 
     // Replay id length failed
     EXPECT_CALL(*clientConnection1, recv(_, 4)).WillOnce(Return(2));

@@ -17,6 +17,7 @@
 #include "Log.h"
 #include "MemoryManager.h"
 
+#include <new>
 #include <utility>
 #include <vector>
 
@@ -32,11 +33,11 @@ MemoryManager::MemoryRange::MemoryRange(uint8_t* base, uint32_t size) : base(bas
 MemoryManager::MemoryManager(const std::vector<uint32_t>& sizeList) : mConstantMemory(nullptr, 0) {
     for (auto size : sizeList) {
         mSize = size;
-        mMemory.reset(new uint8_t[mSize]);
+        mMemory.reset(new(std::nothrow) uint8_t[mSize]);
         if (mMemory) {
             break;
         }
-        CAZE_INFO("Failed to allocate %d of volatile memory, continuing...\n", size);
+        CAZE_INFO("Failed to allocate %u bytes of volatile memory, continuing...\n", size);
     }
 
     if (!mMemory) {
@@ -54,6 +55,8 @@ bool MemoryManager::setReplayDataSize(uint32_t size) {
     }
 
     mReplayData = {align(mMemory.get() + mSize - size), size};
+    CAZE_INFO("Replay range: [%p,%p]\n",
+        mReplayData.base, mReplayData.base + mReplayData.size - 1);
     return true;
 }
 
@@ -63,12 +66,16 @@ bool MemoryManager::setVolatileMemory(uint32_t size) {
     }
 
     mVolatileMemory = {align(mReplayData.base - size), size};
+    CAZE_INFO("Volatile range: [%p,%p]\n",
+        mVolatileMemory.base, mVolatileMemory.base + mVolatileMemory.size - 1);
     return true;
 }
 
 void MemoryManager::setConstantMemory(const std::pair<const void*, uint32_t>& constantMemory) {
     mConstantMemory.base = const_cast<uint8_t*>(static_cast<const uint8_t*>(constantMemory.first));
     mConstantMemory.size = constantMemory.second;
+    CAZE_INFO("Constant range: [%p,%p]\n",
+        mConstantMemory.base, mConstantMemory.base + mConstantMemory.size - 1);
 }
 
 const void* MemoryManager::constantToAbsolute(uint32_t offset) const {

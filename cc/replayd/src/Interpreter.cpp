@@ -164,7 +164,7 @@ bool Interpreter::clone(uint32_t opcode) {
 }
 
 bool Interpreter::strcpy(uint32_t opcode) {
-    uint32_t count = opcode & DATA_MASK26;
+    uint32_t count = extract26bitData(opcode);
     char* target = mStack.pop<char*>();
     const char* source = mStack.pop<const char*>();
     if (source == nullptr) {
