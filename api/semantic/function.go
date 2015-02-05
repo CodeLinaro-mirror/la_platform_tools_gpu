@@ -37,6 +37,7 @@ type Function struct {
 	FullParameters []*Parameter  // all the parameters, including This at the start if valid, and Return at the end if not void
 	Outputs        []*Parameter  // only the output parameters
 	Block          *Block        // the body of the function, missing for externs
+	Signature      *Signature    // the type signature of the function
 }
 
 // CallParameters returns the full set of parameters with the return value
@@ -82,9 +83,8 @@ type Callable struct {
 	Function *Function  // the function this expression represents
 }
 
-// ExpressionType implements Expression but there is no concept of a function type,
-// so it returns a VoidType instead.
-func (i *Callable) ExpressionType() Type { return VoidType } // TODO: function types
+// ExpressionType implements Expression returning the function type signature.
+func (c *Callable) ExpressionType() Type { return c.Function.Signature }
 
 // Call represents a function call. It binds an Callable to the arguments it
 // will be passed.
@@ -97,3 +97,13 @@ type Call struct {
 
 // ExpressionType implements Expression returning the underlying function return type.
 func (c *Call) ExpressionType() Type { return c.Type }
+
+// Signature represents a callable type signature
+type Signature struct {
+	Name      string // the full type name
+	Return    Type   // the return type of the callable
+	Arguments []Type // the required callable arguments
+}
+
+func (t Signature) Typename() string             { return t.Name }
+func (Signature) Member(name string) interface{} { return nil }

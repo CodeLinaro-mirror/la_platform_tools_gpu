@@ -15,6 +15,8 @@
 package resolver
 
 import (
+	"bytes"
+
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
@@ -24,7 +26,7 @@ type macroStub struct {
 	function *semantic.Function
 }
 
-func (macroStub) ExpressionType() semantic.Type { return semantic.VoidType }
+func (m *macroStub) ExpressionType() semantic.Type { return m.function.Signature }
 
 func functionSignature(ctx *context, out *semantic.Function) {
 	in := out.AST
@@ -44,11 +46,16 @@ func functionSignature(ctx *context, out *semantic.Function) {
 	} else {
 		out.Return.Name = "result"
 	}
+	args := []semantic.Type{}
 	for _, p := range out.FullParameters {
 		if p.Output {
 			out.Outputs = append(out.Outputs, p)
 		}
+		if p != out.Return && p != out.This {
+			args = append(args, p.Type)
+		}
 	}
+	out.Signature = getSignature(ctx, in, out.Return.Type, args)
 }
 
 func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *semantic.Parameter {
@@ -112,4 +119,39 @@ func method(ctx *context, in *ast.Function) {
 	default:
 		ctx.errorf(in, "invalid type for this , got %s[%T]", typename(t), t)
 	}
+}
+
+func getSignature(ctx *context, at interface{}, r semantic.Type, args []semantic.Type) *semantic.Signature {
+	buffer := bytes.Buffer{}
+	buffer.WriteString("fun_")
+	buffer.WriteString(r.Typename())
+	buffer.WriteString("_")
+	for _, a := range args {
+		buffer.WriteString("_")
+		buffer.WriteString(a.Typename())
+	}
+	name := buffer.String()
+	for _, s := range ctx.api.Signatures {
+		if s.Name == name {
+			if !equal(r, s.Return) {
+				ctx.icef(at, "Signature %s found with non matching return type, got %s expected %s", name, typename(s.Return), typename(r))
+			}
+			if len(args) != len(s.Arguments) {
+				ctx.icef(at, "Signature %s found with %d arguments, expected %s", name, len(s.Arguments), len(args))
+			}
+			for i, a := range args {
+				if !equal(a, s.Arguments[i]) {
+					ctx.icef(at, "Signature %s found with non matching arg at %d, got %s expected %s", name, i, typename(s.Arguments[i]), typename(a))
+				}
+			}
+			return s
+		}
+	}
+	out := &semantic.Signature{
+		Name:      name,
+		Return:    r,
+		Arguments: args,
+	}
+	ctx.api.Signatures = append(ctx.api.Signatures, out)
+	return out
 }
