@@ -78,8 +78,9 @@ bool Context::initialize() {
                                 mReplayRequest->getVolatileMemorySize());
     CAZE_INFO("Prefetching ready\n");
 
-    mInMemoryCacheSize = static_cast<uint8_t*>(mMemoryManager->getVolatileAddress()) -
-                         static_cast<uint8_t*>(mMemoryManager->getBaseAddress());
+    mInMemoryCacheSize = static_cast<uint32_t>(
+            static_cast<uint8_t*>(mMemoryManager->getVolatileAddress()) -
+            static_cast<uint8_t*>(mMemoryManager->getBaseAddress()));
     return true;
 }
 
