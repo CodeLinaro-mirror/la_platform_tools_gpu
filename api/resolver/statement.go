@@ -25,30 +25,43 @@ func block(ctx *context, in *ast.Block, owner interface{}) *semantic.Block {
 		return out
 	}
 	ctx.with(semantic.VoidType, func() {
-		f, isFunction := owner.(*semantic.Function)
-		var returnStatement *ast.Return
-		statements := in.Statements
-		// we need to check and strip the "return" if the function is supposed to have one
-		if isFunction && f.Return.Type != semantic.VoidType {
-			if len(statements) == 0 {
-				ctx.errorf(in, "Missing return statement")
-			} else if r, ok := statements[len(statements)-1].(*ast.Return); !ok {
-				ctx.errorf(in, "Last statement must be a return")
-			} else {
-				statements = statements[0 : len(statements)-1]
-				returnStatement = r
-			}
-		}
-		// now process the non return statements
-		for _, s := range statements {
-			out.Statements = append(out.Statements, statement(ctx, s))
-		}
-		// and special case the return statement allowing access to the return parameter
-		if returnStatement != nil {
-			out.Statements = append(out.Statements, return_(ctx, returnStatement, f))
+		ctx.scope.block = &out.Statements
+		r := body(ctx, in.Statements, owner)
+		if r != nil {
+			ctx.addStatement(r)
 		}
 	})
 	return out
+}
+
+// body is a resolve function that processes a list of statements and injects them
+// into the context's current block.
+// the final return statement, if present, is not injected, but returned from the
+// function, as it often needs special handling depending on the owner of the
+// statements
+func body(ctx *context, in []interface{}, owner interface{}) *semantic.Return {
+	f, isFunction := owner.(*semantic.Function)
+	var returnStatement *ast.Return
+	// we need to check and strip the "return" if the function is supposed to have one
+	if isFunction && f.Return.Type != semantic.VoidType {
+		if len(in) == 0 {
+			ctx.errorf(owner, "Missing return statement")
+		} else if r, ok := in[len(in)-1].(*ast.Return); !ok {
+			ctx.errorf(owner, "Last statement must be a return")
+		} else {
+			in = in[0 : len(in)-1]
+			returnStatement = r
+		}
+	}
+	// now process the non return statements
+	for _, s := range in {
+		ctx.addStatement(statement(ctx, s))
+	}
+	// and special case the return statement allowing access to the return parameter
+	if returnStatement != nil {
+		return return_(ctx, returnStatement, f)
+	}
+	return nil
 }
 
 func statement(ctx *context, in interface{}) interface{} {
@@ -65,11 +78,19 @@ func statement(ctx *context, in interface{}) interface{} {
 		return switch_(ctx, in)
 	case *ast.Iteration:
 		return iteration(ctx, in)
+	case *ast.Call:
+		e := call(ctx, in)
+		if e.ExpressionType() != semantic.VoidType {
+			ctx.errorf(in, "function with return type as statement not allowed")
+			return invalid{}
+		}
+		return e
 	case *ast.Return:
 		ctx.errorf(in, "unexpected return")
 		return invalid{}
 	default:
-		return expression(ctx, in)
+		ctx.errorf(in, "not a statement")
+		return invalid{}
 	}
 }
 
@@ -103,16 +124,23 @@ func assign(ctx *context, in *ast.Assign) interface{} {
 	}
 }
 
-func declareLocal(ctx *context, in *ast.DeclareLocal) *semantic.DeclareLocal {
+func addLocal(ctx *context, in *ast.DeclareLocal, name string, value semantic.Expression) *semantic.DeclareLocal {
 	out := &semantic.DeclareLocal{AST: in}
-	out.Local = &semantic.Local{Declaration: out, Name: in.Name.Value}
-	out.Local.Value = expression(ctx, in.RHS)
-	out.Local.Type = out.Local.Value.ExpressionType()
+	out.Local = &semantic.Local{
+		Declaration: out,
+		Name:        name,
+		Value:       value,
+		Type:        value.ExpressionType(),
+	}
 	if equal(out.Local.Type, semantic.VoidType) {
 		ctx.errorf(in, "void in local declaration")
 	}
 	ctx.add(out.Local.Name, out.Local)
 	return out
+}
+
+func declareLocal(ctx *context, in *ast.DeclareLocal) *semantic.DeclareLocal {
+	return addLocal(ctx, in, in.Name.Value, expression(ctx, in.RHS))
 }
 
 func branch(ctx *context, in *ast.Branch) *semantic.Branch {

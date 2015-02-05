@@ -15,6 +15,7 @@
 package resolver
 
 import (
+	"fmt"
 	"strconv"
 
 	"android.googlesource.com/platform/tools/gpu/api/ast"
@@ -66,45 +67,95 @@ func expression(ctx *context, in interface{}) semantic.Expression {
 	}
 }
 
-func call(ctx *context, in *ast.Call) *semantic.Call {
-	out := &semantic.Call{AST: in}
-	out.Type = semantic.VoidType
-	target, ok := expression(ctx, in.Target).(*semantic.Callable)
-	if !ok {
+func call(ctx *context, in *ast.Call) semantic.Expression {
+	target := expression(ctx, in.Target)
+	switch target := target.(type) {
+	case *macroStub:
+		return macroCall(ctx, in, target)
+	case *semantic.Callable:
+		return functionCall(ctx, in, target)
+	default:
 		ctx.errorf(in, "Invalid method call target %T found", target)
+		return invalid{}
+	}
+}
+
+func callArguments(ctx *context, in []interface{}, params []*semantic.Parameter, name string) []semantic.Expression {
+	out := []semantic.Expression{}
+	if len(params) != len(in) {
+		ctx.errorf(in, "wrong number of arguments to %s, expected %v got %v", name, len(params), len(in))
 		return out
 	}
-	out.Target = target
-	f := target.Function
-	params := f.FullParameters
-	if target.Object != nil {
-		if f.This == nil {
-			ctx.errorf(in, "method call on non method %s of %T", f.Name, target.Object)
-			return out
-		}
-		params = params[1:len(params)]
-	}
-	if f.Return.Type != semantic.VoidType {
-		params = params[0 : len(params)-1]
-	}
-	if len(params) != len(in.Arguments) {
-		ctx.errorf(in, "wrong number of arguments to %s, expected %v got %v", f.Name, len(params), len(in.Arguments))
-		return out
-	}
-	for i, a := range in.Arguments {
+	for i, a := range in {
 		p := params[i]
 		ctx.with(p.Type, func() {
 			arg := expression(ctx, a)
 			at := arg.ExpressionType()
-			out.Arguments = append(out.Arguments, arg)
+			out = append(out, arg)
 			if !assignable(p.Type, at) {
-				ctx.errorf(in, "argument %d to %s is wrong type, expected %s got %s", i, f.Name, typename(p.Type), typename(at))
-				return
+				ctx.errorf(a, "argument %d to %s is wrong type, expected %s got %s", i, name, typename(p.Type), typename(at))
 			}
 		})
 	}
+	return out
+}
+
+func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semantic.Call {
+	out := &semantic.Call{AST: in, Target: target, Type: semantic.VoidType}
+	params := target.Function.FullParameters
+	if target.Object != nil {
+		if target.Function.This == nil {
+			ctx.errorf(in, "method call on non method %s of %T", target.Function.Name, target.Object)
+			return out
+		}
+		params = params[1:len(params)]
+	}
+	if target.Function.Return.Type != semantic.VoidType {
+		params = params[0 : len(params)-1]
+	}
+	out.Arguments = callArguments(ctx, in.Arguments, params, target.Function.Name)
 	out.Type = out.Target.Function.Return.Type
 	return out
+}
+
+func macroCall(ctx *context, in *ast.Call, stub *macroStub) semantic.Expression {
+	if ctx.scope.block == nil {
+		ctx.errorf(in, "macro call outside of block scope")
+		return invalid{}
+	}
+	// generate a globally unique naming prefix to prevent symbol collisions
+	prefix := fmt.Sprintf("%s_%v_", stub.function.Name, ctx.uid())
+	params := stub.function.CallParameters()
+	var result *semantic.DeclareLocal
+	args := callArguments(ctx, in.Arguments, params, stub.function.Name)
+	// switch scopes back to the one the macro was declared in to prevent symbol leak
+	callScope := ctx.scope
+	ctx.scope = stub.scope
+	defer func() { ctx.scope = callScope }()
+	ctx.with(semantic.VoidType, func() {
+		// put the block back so we inject directly in to it
+		ctx.scope.block = callScope.block
+		// replace parameters with a new uniquely named local variable
+		for i, p := range params {
+			l := addLocal(ctx, nil, p.Name, args[i])
+			// set the unique name after symbol table injection
+			// this means that the lookups inside the macro match the local correctly
+			// but the semantic graph as a globally unique name
+			l.Local.Name = prefix + l.Local.Name
+			ctx.addStatement(l)
+		}
+		// evaluate the macro body in place
+		r := body(ctx, stub.function.AST.Block.Statements, stub.function)
+		// substitute the return statement for a local assignment
+		if r != nil {
+			result = addLocal(ctx, nil, prefix+"result", r.Value)
+			ctx.addStatement(result)
+		}
+	})
+	if result == nil {
+		return invalid{}
+	}
+	return result.Local
 }
 
 func select_(ctx *context, in *ast.Switch) *semantic.Select {

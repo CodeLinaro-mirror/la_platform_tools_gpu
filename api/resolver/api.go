@@ -23,6 +23,7 @@ import (
 
 func api(ctx *context, out *semantic.API) {
 	in := out.AST
+	macros := []*macroStub{}
 	ctx.with(semantic.VoidType, func() {
 		// Build and register the high level semantic objects
 		out.Enums = make([]*semantic.Enum, len(in.Enums))
@@ -40,10 +41,12 @@ func api(ctx *context, out *semantic.API) {
 			out.Pseudonyms[i] = &semantic.Pseudonym{AST: p, Name: p.Name.Value, Members: semantic.Members{}}
 			ctx.addType(out.Pseudonyms[i])
 		}
-		out.Macros = make([]*semantic.Function, len(in.Macros))
+		macros = make([]*macroStub, len(in.Macros))
 		for i, m := range in.Macros {
-			out.Macros[i] = &semantic.Function{AST: m, Name: m.Name.Value}
-			out.Members[out.Macros[i].Name] = out.Macros[i]
+			stub := &macroStub{}
+			macros[i] = stub
+			stub.function = &semantic.Function{AST: m, Name: m.Name.Value}
+			ctx.add(stub.function.Name, stub)
 		}
 		out.Externs = make([]*semantic.Function, len(in.Externs))
 		for i, e := range in.Externs {
@@ -79,9 +82,9 @@ func api(ctx *context, out *semantic.API) {
 		for _, p := range out.Pseudonyms {
 			pseudonym(ctx, p)
 		}
-		for _, m := range out.Macros {
-			functionSignature(ctx, m)
-			functionBody(ctx, nil, m)
+		for _, m := range macros {
+			functionSignature(ctx, m.function)
+			m.scope = ctx.scope
 		}
 		for _, e := range out.Externs {
 			functionSignature(ctx, e)

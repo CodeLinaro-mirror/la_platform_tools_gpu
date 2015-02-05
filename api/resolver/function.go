@@ -19,6 +19,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
+type macroStub struct {
+	scope    *scope
+	function *semantic.Function
+}
+
+func (macroStub) ExpressionType() semantic.Type { return semantic.VoidType }
+
 func functionSignature(ctx *context, out *semantic.Function) {
 	in := out.AST
 	out.FullParameters = make([]*semantic.Parameter, len(in.Parameters))

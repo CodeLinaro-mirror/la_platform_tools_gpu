@@ -27,12 +27,14 @@ type context struct {
 	api    *semantic.API
 	types  map[string]semantic.Type
 	scope  *scope
+	nextId uint64
 }
 
 type scope struct {
 	outer     *scope
 	entries   map[string][]interface{}
 	inferType semantic.Type
+	block     *[]interface{}
 }
 
 func (ctx *context) errorf(at interface{}, message string, args ...interface{}) {
@@ -66,6 +68,7 @@ func (ctx *context) with(t semantic.Type, action func()) {
 	original := ctx.scope
 	ctx.scope = &scope{
 		outer:     ctx.scope,
+		block:     ctx.scope.block,
 		entries:   map[string][]interface{}{},
 		inferType: t,
 	}
@@ -182,4 +185,17 @@ func (ctx *context) findType(at interface{}, name string) semantic.Type {
 		return nil
 	}
 	return t
+}
+
+func (ctx *context) addStatement(s interface{}) {
+	if _, isInvalid := s.(invalid); isInvalid {
+		return
+	}
+	*ctx.scope.block = append(*ctx.scope.block, s)
+}
+
+func (ctx *context) uid() uint64 {
+	id := ctx.nextId
+	ctx.nextId++
+	return id
 }

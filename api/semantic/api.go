@@ -24,7 +24,6 @@ type API struct {
 	Enums        []*Enum        // the set of enums
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
-	Macros       []*Function    // the set of macros
 	Externs      []*Function    // the external function references
 	Functions    []*Function    // the global functions
 	Globals      []*Global      // the global variables
