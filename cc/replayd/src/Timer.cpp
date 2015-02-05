@@ -64,7 +64,7 @@ inline uint64_t platformGetTime() {
 // See platformGetTime().
 inline uint64_t platformDurationToNanosecods(uint64_t duration) {
 #if TARGET_OS == CAZE_OS_WINDOWS
-    static LARGE_INTEGER sFreq = 0;
+    static LARGE_INTEGER sFreq;
     if (sFreq.QuadPart == 0) {
         QueryPerformanceFrequency(&sFreq);
         if (sFreq.QuadPart == 0) {
