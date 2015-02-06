@@ -76,7 +76,7 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 		}
 	case ast.OpEQ, ast.OpGT, ast.OpLT, ast.OpGE, ast.OpLE, ast.OpNE:
 		if !comparable(lt, rt) {
-			ctx.errorf(in, "comparison %s of %s against %s not allowed", in.Operator, typename(lt), typename(rt))
+			ctx.errorf(in, "comparison %s %s %s not allowed", typename(lt), in.Operator, typename(rt))
 		}
 		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
 	case ast.OpOr, ast.OpAnd:
@@ -89,12 +89,12 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
 	case ast.OpPlus, ast.OpMinus, ast.OpMultiply, ast.OpDivide:
 		if !equal(lt, rt) {
-			ctx.errorf(in, "operator %s on %s and %s not allowed", in.Operator, typename(lt), typename(rt))
+			ctx.errorf(in, "incompatible types for maths %s %s %s", typename(lt), in.Operator, typename(rt))
 		}
 		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	case ast.OpRange:
 		if !equal(lt, rt) {
-			ctx.errorf(in, "operator %s on %s and %s not allowed", in.Operator, typename(lt), typename(rt))
+			ctx.errorf(in, "range %s %s %s not allowed", typename(lt), in.Operator, typename(rt))
 		}
 		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	default:
