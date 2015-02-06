@@ -1,3 +1,17 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package template
 
 import (
@@ -149,9 +163,9 @@ func TestContains(t *testing.T) {
 
 func TestReplace(t *testing.T) {
 	for _, v := range []struct {
-		in          stringList
-		old string
-		new string
+		in       stringList
+		old      string
+		new      string
 		expected stringList
 	}{
 		{
@@ -160,7 +174,7 @@ func TestReplace(t *testing.T) {
 			stringList{"abc", "def", "123", "jkl", "mno"},
 		}, {
 			stringList{"abc", "def", "ghi", "jkl", "mno"},
-		 "jkl", "456",
+			"jkl", "456",
 			stringList{"abc", "def", "ghi", "456", "mno"},
 		}, {
 			stringList{"aba", "bab", "aaa", "bbb", "abb"},

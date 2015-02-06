@@ -1,11 +1,25 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package template
 
 import (
 	"bytes"
 	"fmt"
+	"reflect"
 	"strings"
 	"unicode"
-	"reflect"
 )
 
 type stringList []string
@@ -14,7 +28,6 @@ type stringList []string
 func (l stringList) String() string {
 	return strings.Join([]string(l), "")
 }
-
 
 // stringify transforms the input parameters into a string list. Arrays and
 // slices are flattened into a sequential list of strings.
@@ -42,8 +55,6 @@ func stringify(v ...interface{}) stringList {
 	}
 	return out
 }
-
-
 
 // Join returns the concatenation of all the string segments with the specified separator.
 func (Functions) JoinWith(sep string, v ...interface{}) string {
