@@ -78,3 +78,12 @@ func (s *Splitter) Fork() Logger {
 	}
 	return &n
 }
+
+// Flush will call Flush on all logs passed to Add.
+func (s *Splitter) Flush() {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	for _, l := range s.listeners {
+		l.Flush()
+	}
+}

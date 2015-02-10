@@ -29,12 +29,15 @@ type Logger interface {
 	// critical error events. Arguments are handled in the manner of fmt.Printf.
 	Error(msg string, args ...interface{})
 
-	// Enter creates a new Logger scoped within the existing Logger. This can be used to produce
+	// Enter creates a new logger scoped within the existing logger. This can be used to produce
 	// hierarchical log messages.
 	Enter(name string) Logger
 
-	// Fork creates a new Logger with the same scope as the existing Logger, but with a new context
+	// Fork creates a new logger with the same scope as the existing logger, but with a new context
 	// identifier. It is good practice to fork logs before passing to another goroutine so that
 	// messages can be associated with their goroutine of execution.
 	Fork() Logger
+
+	// Flush ensures that any pending messages are written by the logger.
+	Flush()
 }

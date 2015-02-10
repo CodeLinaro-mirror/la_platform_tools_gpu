@@ -14,8 +14,8 @@
 
 package log
 
-// Nop is an implementation of Logger interface that does nothing for Info, Warning or Error. Enter
-// and Fork both return Nops.
+// Nop is an implementation of Logger interface that does nothing for Info, Warning, Error and Flush.
+// Enter and Fork both return Nops.
 type Nop struct{}
 
 // Info does nothing
@@ -32,3 +32,6 @@ func (Nop) Enter(name string) Logger { return Nop{} }
 
 // Fork returns the same Nop implementation of Logger
 func (Nop) Fork() Logger { return Nop{} }
+
+// Flush does nothing
+func (Nop) Flush() {}

@@ -20,9 +20,14 @@ import (
 	"time"
 )
 
+// FlushRequest is a signal to flush the Logger and is written to the output channel passed
+// to Channel whenever Flush() is called. On receiving a FlushRequest, any pending messages
+// should be flushed and the FlushRequest should be closed.
+type FlushRequest chan struct{}
+
 // Channel is an implementation of Logger interface that writes out an Entry to the specified chan
-// for every message.
-func Channel(out chan<- Entry) Logger {
+// for every message, and a FlushRequest when Flush is called.
+func Channel(out chan<- interface{}) Logger {
 	nextUid := uint32(1)
 	return &channel{
 		uid:     0,
@@ -36,7 +41,7 @@ type channel struct {
 	uid     uint32
 	nextUid *uint32
 	scope   string
-	out     chan<- Entry
+	out     chan<- interface{}
 }
 
 func (c *channel) Info(msg string, args ...interface{}) {
@@ -85,4 +90,10 @@ func (c *channel) Fork() Logger {
 		scope:   c.scope,
 		out:     c.out,
 	}
+}
+
+func (c *channel) Flush() {
+	flush := make(FlushRequest)
+	c.out <- flush
+	<-flush
 }

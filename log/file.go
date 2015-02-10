@@ -22,6 +22,7 @@ import (
 // File implements the Logger interface, writing all messages out to a text file.
 type File struct {
 	channel
+	flushed chan struct{}
 }
 
 // NewFile creates a new File that will write messages to the specified file path.
@@ -32,11 +33,17 @@ func NewFile(path string) (*File, error) {
 	if err != nil {
 		return nil, err
 	}
-	out := make(chan Entry, 64)
+	out := make(chan interface{}, 64)
 	go func() {
 		defer file.Close()
-		for entry := range out {
-			file.WriteString(entry.String())
+		for t := range out {
+			switch t := t.(type) {
+			case Entry:
+				file.WriteString(t.String())
+			case FlushRequest:
+				file.Sync()
+				close(t)
+			}
 		}
 	}()
 	nextUid := uint32(1)
@@ -53,5 +60,6 @@ func NewFile(path string) (*File, error) {
 // Close closes the file. Writing messages to the File after it has been closed may deadlock the
 // program.
 func (f *File) Close() {
+	f.Flush()
 	close(f.out)
 }
