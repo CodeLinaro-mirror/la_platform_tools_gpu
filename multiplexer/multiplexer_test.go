@@ -24,6 +24,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/ringbuffer"
 )
 
+const mtu = 1024
+
 var testDataPtoQ = []byte("p->q")
 var testDataQtoP = []byte("q->p")
 var testDataRtoS = []byte("r->s")
@@ -96,7 +98,7 @@ func checkAllChannelsClosed(t *testing.T, m *Multiplexer) {
 
 func TestSendOpenCloseChannel(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel0, err := multiplexer.OpenChannel()
@@ -142,7 +144,7 @@ func TestRecvOpenCloseChannel(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
 
 	channelChan := make(chan io.ReadWriteCloser, 1)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, func(s io.ReadWriteCloser) { channelChan <- s })
+	multiplexer := New(inBuf, outBuf, mtu, func(s io.ReadWriteCloser) { channelChan <- s })
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	inBuf.Write([]byte{
@@ -175,7 +177,7 @@ func TestRecvOpenCloseChannel(t *testing.T) {
 
 func TestWriteChannel(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -198,7 +200,7 @@ func TestWriteChannel(t *testing.T) {
 
 func TestOpenChannelError(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), &errWriter{nil}
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	outBuf.err = testErr
@@ -209,7 +211,7 @@ func TestOpenChannelError(t *testing.T) {
 
 func TestCloseChannelError(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), &errWriter{nil}
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -222,7 +224,7 @@ func TestCloseChannelError(t *testing.T) {
 
 func TestCloseChannelTwice(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -235,7 +237,7 @@ func TestCloseChannelTwice(t *testing.T) {
 
 func TestWriteChannelError(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), &errWriter{nil}
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -289,7 +291,7 @@ func TestRecvChannel(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
 
 	channelChan := make(chan io.ReadWriteCloser, 1)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, func(s io.ReadWriteCloser) { channelChan <- s })
+	multiplexer := New(inBuf, outBuf, mtu, func(s io.ReadWriteCloser) { channelChan <- s })
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	inBuf.Write([]byte{
@@ -314,7 +316,7 @@ func TestRecvOnClosedChannel(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
 
 	channelChan := make(chan io.ReadWriteCloser, 1)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, func(s io.ReadWriteCloser) { channelChan <- s })
+	multiplexer := New(inBuf, outBuf, mtu, func(s io.ReadWriteCloser) { channelChan <- s })
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	// Remote opens two channels
@@ -375,7 +377,7 @@ func TestRecvOnClosedChannel(t *testing.T) {
 
 func TestLocalClosedChannelReadGivesEOF(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -389,7 +391,7 @@ func TestLocalClosedChannelReadGivesEOF(t *testing.T) {
 
 func TestLocalClosedChannelWriteGivesErrChannelClosed(t *testing.T) {
 	inBuf, outBuf := ringbuffer.New(1024), ringbuffer.New(1024)
-	multiplexer := New(inBuf, outBuf, DefaultMTU, nil)
+	multiplexer := New(inBuf, outBuf, mtu, nil)
 	defer checkAllChannelsClosed(t, multiplexer)
 
 	channel, _ := multiplexer.OpenChannel()
@@ -401,8 +403,8 @@ func TestChannelStreamReusingWriteBuffer(t *testing.T) {
 	bufA, bufB := ringbuffer.New(256), ringbuffer.New(256)
 
 	channelChan := make(chan io.ReadWriteCloser, 1)
-	m0 := New(bufA, bufB, DefaultMTU, nil)
-	m1 := New(bufB, bufA, DefaultMTU, func(s io.ReadWriteCloser) { channelChan <- s })
+	m0 := New(bufA, bufB, mtu, nil)
+	m1 := New(bufB, bufA, mtu, func(s io.ReadWriteCloser) { channelChan <- s })
 	defer checkAllChannelsClosed(t, m0)
 	defer checkAllChannelsClosed(t, m1)
 
@@ -453,8 +455,8 @@ func openTwoChannelPairs(t *testing.T) (ma, mb *Multiplexer, p, q, r, s io.ReadW
 	bufAtoB, bufBtoA := ringbuffer.New(1024), ringbuffer.New(1024)
 
 	qChan, rChan := make(chan io.ReadWriteCloser, 1), make(chan io.ReadWriteCloser, 1)
-	multiplexerA := New(bufBtoA, bufAtoB, DefaultMTU, func(s io.ReadWriteCloser) { rChan <- s })
-	multiplexerB := New(bufAtoB, bufBtoA, DefaultMTU, func(s io.ReadWriteCloser) { qChan <- s })
+	multiplexerA := New(bufBtoA, bufAtoB, mtu, func(s io.ReadWriteCloser) { rChan <- s })
+	multiplexerB := New(bufAtoB, bufBtoA, mtu, func(s io.ReadWriteCloser) { qChan <- s })
 
 	p, err = multiplexerA.OpenChannel()
 	if err != nil {

@@ -27,9 +27,6 @@ import (
 
 var ErrChannelClosed = errors.New("Channel closed")
 
-// The default maximum transission unit for a single chunk of data in bytes.
-const DefaultMTU = 1024
-
 const sendChanSize = 256
 
 // Multiplexer provides multiple data-stream multiplexing over a single binary data-stream.
@@ -158,6 +155,9 @@ func (m *Multiplexer) OpenChannel() (io.ReadWriteCloser, error) {
 		return nil, err
 	}
 }
+
+// MTU returns the maximum transmission unit size the multiplexer was created with.
+func (m *Multiplexer) MTU() int { return m.mtu }
 
 // New creates and returns a new Multiplexer using the specified reader and writer for
 // communication. mtu defines the maximum size of each packet of data. channelOpenedCallback will be
