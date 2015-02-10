@@ -26,10 +26,10 @@ func sayHelloTo(l log.Logger, name string) {
 }
 
 func Example_Channel() {
-	c := make(chan log.Entry, 1)
+	c := make(chan interface{}, 1)
 	l := log.Channel(c)
 	sayHelloTo(l, "Bob")
-	e := <-c
+	e := (<-c).(log.Entry)
 	fmt.Printf(e.StringNoTimestamp())
 	// Output:
 	// #0000 Info: sayHello → Hello Bob!
