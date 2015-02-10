@@ -1,0 +1,40 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//go:generate $GOPATH/bin/codergen -go=rpc_binary.go  -java=$GOPATH/src/gaze/java/src/com/android/tools/idea/gfx/rpccore rpc.go
+
+// package rpc implements a remote procedure call system using the binary
+// pacakge for serialization and the multiplexer package to merge in-flight
+// requests onto a single stream.
+package rpc
+
+import "fmt"
+
+const header = uint32('r') | (uint32('p') << 8) | (uint32('c') << 16) | (uint32('0') << 24)
+
+// ErrInvalidHeader is returned when either client or server detects an
+// incorrectly formed rpc header.
+var ErrInvalidHeader = NewError("Invalid RPC header")
+
+// NewError is used to create new rpc error objects with the specified human readable message.
+func NewError(msg string, args ...interface{}) *Error {
+	return &Error{fmt.Sprintf(msg, args...)}
+}
+
+// Error is an implementation of error that can be sent over the wire.
+type Error struct {
+	msg string
+}
+
+func (e *Error) Error() string { return e.msg }
