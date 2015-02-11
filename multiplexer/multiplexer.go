@@ -81,7 +81,7 @@ func (m *Multiplexer) closeChannel(id channelId, sendMsg bool) error {
 func (m *Multiplexer) writeChannel(id channelId, data []byte) (n int, err error) {
 	m.channelLock.Lock()
 	_, found := m.channels[id]
-	m.channelLock.Unlock()
+	defer m.channelLock.Unlock()
 
 	if found {
 		return m.sender.sendData(id, data)
