@@ -16,6 +16,7 @@ package preprocessor
 
 import (
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/parse"
 	"bytes"
 )
 
@@ -352,7 +353,11 @@ func (p *preprocessorImpl) evaluateDefined(arg TokenInfo) tokenExpansion {
 }
 
 func (p *preprocessorImpl) evaluateIf(args []TokenInfo) bool {
-	args = append(args, TokenInfo{Token: nil}) // append fake EOF
+	// append fake EOF
+	lastToken := args[len(args)-1].Cst.Token()
+	eof := &parse.Leaf{}
+	eof.SetToken(parse.Token{Runes: lastToken.Runes, Start: lastToken.End, End: lastToken.End})
+	args = append(args, TokenInfo{Token: nil, Cst: eof})
 
 	var list []tokenExpansion
 	// convert args to tokenExpansions and evaluate defined(X)

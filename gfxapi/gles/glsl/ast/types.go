@@ -145,6 +145,9 @@ var matrixTypes = map[uint8]map[uint8]BareType{
 // columns is 1, returns a vector type. In case both are 1, returns TFloat.
 func GetMatrixType(col, row uint8) BareType { return matrixTypes[col][row] }
 
+// IsMatrixType returns true if t is a matrix type.
+func IsMatrixType(t BareType) bool { col, _ := TypeDimensions(t); return col > 1 }
+
 var fundMap = map[BareType]BareType{
 	TBool:   TBool,
 	TFloat:  TFloat,
@@ -195,11 +198,18 @@ var vectorTypes = map[BareType]map[uint8]BareType{
 	TBool:  {1: TBool, 2: TBvec2, 3: TBvec3, 4: TBvec4},
 }
 
+// HasVectorExpansions returns true if the type t has corresponding vector counterparts. This is
+// currently true only for TBool, TFloat, TInt and TUint.
+func HasVectorExpansions(t BareType) bool { return vectorTypes[t] != nil }
+
 // GetVectorType returns the builtin vector type with the given fundamental type (TFloat, TInt,
 // TUint and TBool) and the given size. E.g., GetVectorType(TBool, 4) == TBvec4. In case size is
 // 1 it returns the corresponding scalar type. It is illegal to call this function with any other
 // type except the four types mentioned.
 func GetVectorType(fund BareType, size uint8) BareType { return vectorTypes[fund][size] }
+
+// IsVectorType returns true if the given type is a vector type.
+func IsVectorType(t BareType) bool { col, row := TypeDimensions(t); return col == 1 && row > 1 }
 
 // A map used for default precision inheritance.
 var precisionTypeMap = map[BareType]BareType{

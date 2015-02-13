@@ -144,6 +144,7 @@ func (b *builder) parseLogicalOrExpression() ast.Expression {
 
 func (b *builder) parseUnaryExpression() ast.Expression {
 	if b.peekToken() == nil {
+		b.unexpectedTokenError("primary expression")
 		return nil
 	}
 	if op, present := ast.GetPrefixOp(b.peekToken().String()); present {

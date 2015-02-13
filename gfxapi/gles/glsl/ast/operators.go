@@ -116,6 +116,44 @@ var (
 	UoPostinc = appendUnaryOperator("++")
 )
 
+// VectorComponentKind is a type representing various ways of addressing vector components.
+type VectorComponentKind uint8
+
+// Constants representing ways of adressing vector components.
+const (
+	ComponentKindNone VectorComponentKind = iota
+	ComponentKindXYZW
+	ComponentKindRGBA
+	ComponentKindSTPQ
+)
+
+var componentMap = map[rune]struct {
+	pos  uint8
+	kind VectorComponentKind
+}{
+	'x': {0, ComponentKindXYZW},
+	'y': {1, ComponentKindXYZW},
+	'z': {2, ComponentKindXYZW},
+	'w': {3, ComponentKindXYZW},
+	'r': {0, ComponentKindRGBA},
+	'g': {1, ComponentKindRGBA},
+	'b': {2, ComponentKindRGBA},
+	'a': {3, ComponentKindRGBA},
+	's': {0, ComponentKindSTPQ},
+	't': {1, ComponentKindSTPQ},
+	'p': {2, ComponentKindSTPQ},
+	'q': {3, ComponentKindSTPQ},
+}
+
+// GetVectorComponentInfo returns information about a rune, when used as a vector swizzle
+// character. It returns the VectorComponentKind this rune belongs to (or ComponentKindNone if it
+// is an invalid rune) and the vector position this rune refers to. The position indexes are
+// 0-based.
+func GetVectorComponentInfo(r rune) (position uint8, kind VectorComponentKind) {
+	info := componentMap[r]
+	return info.pos, info.kind
+}
+
 type sortOperators []fmt.Stringer
 
 func (s sortOperators) Len() int           { return len(s) }

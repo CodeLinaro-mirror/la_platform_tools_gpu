@@ -267,6 +267,7 @@ var preprocessorBuilderTests = []testInfo{
 	{"1+A", ""},
 	{"(2-5)", ""},
 	{"4.7", `Unexpected token \(4.7\)`},
+	{"1+", `Unexpected token \(<nil>\), was expecting one of: \[primary expression\]`},
 }
 
 func TestBuilderPreprocessor(t *testing.T) {
