@@ -91,6 +91,8 @@ func (w errWriter) Write(p []byte) (int, error) {
 }
 
 func checkAllChannelsClosed(t *testing.T, m *Multiplexer) {
+	m.channelLock.Lock()
+	defer m.channelLock.Unlock()
 	if len(m.channels) > 0 {
 		t.Errorf("Multiplexer test ended with %d unclosed channels!", len(m.channels))
 	}
@@ -324,12 +326,12 @@ func TestRecvOnClosedChannel(t *testing.T) {
 		byte(msgTypeOpenChannel),
 		0, 0, 0, 0, // channel id
 	})
+	channel0 := <-channelChan
+
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
 		1, 0, 0, 0, // channel id
 	})
-
-	channel0 := <-channelChan
 	channel1 := <-channelChan
 
 	// Remote endlessly sends data on both channels
@@ -410,21 +412,23 @@ func TestChannelStreamReusingWriteBuffer(t *testing.T) {
 
 	c0, _ := m0.OpenChannel()
 	defer c0.Close()
-
 	c1 := <-channelChan
 	defer c1.Close()
 
+	done := make(chan struct{})
+
+	// Emit small chunks of incrementing bytes until there's a write error
 	go func() {
 		arr := [7]byte{}
-		for i := 0; true; i += 7 {
+		for i := 0; true; i += len(arr) {
 			for j := range arr {
 				arr[j] = byte(j + i)
 			}
-			_, err := c0.Write(arr[:])
-			if err != nil {
-				t.Errorf("Unexpected error writing to channel: %v", err)
+			if _, err := c0.Write(arr[:]); err != nil {
+				break
 			}
 		}
+		close(done) // Flag that this goroutine has stopped sending
 	}()
 
 	for i := 0; i < 10000; i += 5 {
@@ -433,6 +437,10 @@ func TestChannelStreamReusingWriteBuffer(t *testing.T) {
 			5, nil,
 		})
 	}
+	// Close the communication buffers to stop the sending of data
+	bufA.Close()
+	bufB.Close()
+	<-done
 }
 
 func openTwoChannelPairs(t *testing.T) (ma, mb *Multiplexer, p, q, r, s io.ReadWriteCloser) {
