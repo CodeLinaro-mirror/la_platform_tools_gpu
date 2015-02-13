@@ -34,13 +34,22 @@ type Functions struct {
 	templates *template.Template
 	funcs     template.FuncMap
 	globals   globalMap
+	active    *template.Template
+	basePath  string
+	apiFile   string
+	api       *semantic.API
 }
 
-func newFunctions() *Functions {
+func newFunctions(apiFile string, api *semantic.API) *Functions {
+	basePath, err := filepath.Abs(*dir)
+	commands.MaybeError("", err)
 	f := &Functions{
 		templates: template.New("FunctionHolder"),
 		funcs:     template.FuncMap{},
 		globals:   globalMap{},
+		basePath:  basePath,
+		apiFile:   apiFile,
+		api:       api,
 	}
 	v := reflect.ValueOf(f)
 	t := v.Type()
@@ -112,20 +121,6 @@ func (f *Functions) Error(s string, args ...interface{}) (string, error) {
 func (f *Functions) Log(s string, args ...interface{}) string {
 	fmt.Printf(s+"\n", args...)
 	return ""
-}
-
-// File calls the macro templateName with the arguments values and writes the
-// output to the file fileName, overwriting the file if it already exists. The
-// file name is relative to the master output file and adopts the same file
-// extension.
-// See Macro for more information about argument passing.
-// Example:
-//  {{File "methods" "EmitMethods" $class}}
-func (f *Functions) File(fileName, templateName string, arguments ...interface{}) (string, error) {
-	result, err := f.Macro(templateName, arguments...)
-	filePath := filepath.Join(filepath.Dir(*outputFilename), fileName+filepath.Ext(*outputFilename))
-	commands.MaybeError(filePath, err)
-	return "", write(f.templates.Name(), filePath, result)
 }
 
 func (*Functions) buildArgs(base map[string]interface{}, values ...interface{}) (map[string]interface{}, error) {

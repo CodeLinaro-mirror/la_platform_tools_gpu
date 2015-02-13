@@ -16,9 +16,9 @@ package template
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"os/exec"
-	"strings"
 
 	"golang.org/x/tools/imports"
 
@@ -33,41 +33,88 @@ const (
 	whitespace = '•'
 )
 
-// SetIndentSize sets the number of whitespace characters used for a single
-// indentation. The default is 2.
-func (*Functions) SetIndentSize(i int) string {
-	*indentSize = i
-	return ""
+// Reflow does the primitive reflow, but no language specific handling.
+func (f *Functions) Reflow(indentSize int, value string) string {
+	commands.Log("Reflowing string\n")
+	result, err := reflow(value, indentSize)
+	commands.MaybeError(f.active.Name(), err)
+	return string(result)
 }
 
-func reformat(outputPath string, in string) []byte {
-	commands.Log("Reflowing output for %s\n", outputPath)
-	result, err := reflow(in)
-	commands.MaybeError(outputPath, err)
-	if *formatEnable {
-		if strings.HasSuffix(outputPath, ".go") {
-			opt := &imports.Options{
-				TabWidth:  2,
-				TabIndent: true,
-				Comments:  true,
-				Fragment:  true,
-			}
-			formatted, err := imports.Process(outputPath, result, opt)
-			if err == nil {
-				result = formatted
-			} else {
-				commands.Log("Reflow failed with %s for %s\n", err, outputPath)
-			}
-		} else if strings.HasSuffix(outputPath, ".h") || strings.HasSuffix(outputPath, ".cpp") {
-			formatted, err := clangFormat(result)
-			if err == nil {
-				result = formatted
-			} else {
-				commands.Log("Reflow failed with %s for %s\n", err, outputPath)
-			}
-		}
+const goIndent = 2 // Required by go style guide
+
+// GoFmt reflows the string as if it were go code using the standard go fmt library.
+func (f *Functions) GoFmt(value string) string {
+	commands.Log("Reflowing go code\n")
+	result, err := reflow(value, goIndent)
+	commands.MaybeError(f.active.Name(), err)
+	opt := &imports.Options{
+		TabWidth:  goIndent,
+		TabIndent: true,
+		Comments:  true,
+		Fragment:  true,
 	}
-	return result
+	formatted, err := imports.Process(f.active.Name(), result, opt)
+	if err != nil {
+		commands.Log("GoFmt failed with %s\n", err)
+		return string(result)
+	}
+	return string(formatted)
+}
+
+// Format reflows the string using an external command.
+func (f *Functions) Format(command stringList, value string) string {
+	if len(command) == 0 {
+		commands.MaybeError(f.active.Name(), fmt.Errorf("Invalid Format command"))
+	}
+	binary := command[0]
+	commands.Log("Reflowing code with %s\n", binary)
+	// indent level is arbitrary, because we expect the external formatter to redo it anyway
+	result, err := reflow(value, 4)
+	commands.MaybeError(f.active.Name(), err)
+
+	_, err = exec.LookPath(binary)
+	if err != nil {
+		commands.Log("Could not find external formatter %s\n", binary)
+		return string(result)
+	}
+	cmd := exec.Command(binary, command[1:]...)
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		commands.Log("Reformat out pipe failed: %s\n", err)
+		return string(result)
+	}
+	stdin, err := cmd.StdinPipe()
+	if err != nil {
+		commands.Log("Reformat in pipe failed: %s\n", err)
+		return string(result)
+	}
+	err = cmd.Start()
+	if err != nil {
+		commands.Log("Reformat start failed: %s\n", err)
+		return string(result)
+	}
+	_, err = stdin.Write(result)
+	if err != nil {
+		commands.Log("Reformat write failed: %s\n", err)
+		return string(result)
+	}
+	err = stdin.Close()
+	if err != nil {
+		commands.Log("Reformat close failed: %s\n", err)
+		return string(result)
+	}
+	formatted, err := ioutil.ReadAll(stdout)
+	if err != nil {
+		commands.Log("Reformat read: %s\n", err)
+		return string(result)
+	}
+	err = cmd.Wait()
+	if err != nil {
+		commands.Log("Reformat wait failed: %s\n", err)
+		return string(result)
+	}
+	return string(formatted)
 }
 
 func panicWrite(buf *bytes.Buffer, r rune) {
@@ -77,7 +124,7 @@ func panicWrite(buf *bytes.Buffer, r rune) {
 	}
 }
 
-func reflow(in string) ([]byte, error) {
+func reflow(in string, indentSize int) ([]byte, error) {
 	depth := 0
 	wasNewline := false
 	suppressing := true
@@ -87,7 +134,7 @@ func reflow(in string) ([]byte, error) {
 		if wasNewline && !suppressing {
 			// write the indent
 			panicWrite(buf, '\n')
-			for i := 0; i < depth*(*indentSize); i++ {
+			for i := 0; i < depth*indentSize; i++ {
 				panicWrite(buf, ' ')
 			}
 		}
@@ -133,52 +180,4 @@ func reflow(in string) ([]byte, error) {
 		}
 	}
 	return buf.Bytes(), nil
-}
-
-func clangFormat(data []byte) ([]byte, error) {
-	_, err := exec.LookPath("clang-format")
-	if err != nil {
-		return data, nil
-	}
-
-	// Style specifier to mostly match Android style
-	style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"
-	cmd := exec.Command("clang-format", "-style", style)
-
-	stdout, err := cmd.StdoutPipe()
-	if err != nil {
-		return nil, err
-	}
-
-	stdin, err := cmd.StdinPipe()
-	if err != nil {
-		return nil, err
-	}
-
-	err = cmd.Start()
-	if err != nil {
-		return nil, err
-	}
-
-	_, err = stdin.Write(data)
-	if err != nil {
-		return nil, err
-	}
-
-	err = stdin.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	formatted, err := ioutil.ReadAll(stdout)
-	if err != nil {
-		return nil, err
-	}
-
-	err = cmd.Wait()
-	if err != nil {
-		return nil, err
-	}
-
-	return formatted, nil
 }
