@@ -144,11 +144,11 @@ class ObjectFactory {
 	javaFile      *template.Template
 	javaTypeMap   = map[string]string{
 		"int8":    "byte",
-		"uint8":   "short",
+		"uint8":   "byte",
 		"int16":   "short",
-		"uint16":  "int",
+		"uint16":  "short",
 		"int32":   "int",
-		"uint32":  "long",
+		"uint32":  "int",
 		"int64":   "long",
 		"uint64":  "long",
 		"float32": "float",
