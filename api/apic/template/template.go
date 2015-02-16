@@ -18,7 +18,7 @@ import (
 	"bytes"
 	"flag"
 	"io/ioutil"
-	"text/template"
+	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
@@ -30,11 +30,8 @@ var (
 		Name:      "template",
 		ShortHelp: "Passes the ast to a template for code generation",
 	}
-	mainTemplate   = command.Flags.String("m", "Main", "The main template name to execute")
-	outputFilename = command.Flags.String("o", "out", "The output file path")
-	tracer         = command.Flags.String("t", "", "The template function trace expression")
-	formatEnable   = command.Flags.Bool("f", true, "Reformat output")
-	indentSize     = command.Flags.Int("i", 2, "Indentation size")
+	dir    = command.Flags.String("dir", "", "The output directory")
+	tracer = command.Flags.String("t", "", "The template function trace expression")
 )
 
 func init() {
@@ -43,10 +40,40 @@ func init() {
 	commands.Register(command)
 }
 
-func write(templateName, outputPath, data string) error {
-	result := reformat(outputPath, data)
+// Include loads each of the templates and executes their main bodies.
+// The filenames are relative to the template doing the include.
+func (f *Functions) Include(templates ...string) error {
+	original := f.active
+	dir := ""
+	if original != nil {
+		dir = filepath.Dir(original.Name())
+	}
+	for _, t := range templates {
+		if dir != "" {
+			t = filepath.Join(dir, t)
+		}
+		if f.templates.Lookup(t) == nil {
+			commands.Log("Reading template %q\n", t)
+			tmplData, err := ioutil.ReadFile(t)
+			commands.MaybeError(t, err)
+			tmpl, err := f.templates.New(t).Parse(string(tmplData))
+			commands.MaybeError(t, err)
+			f.active = tmpl
+			commands.Log("Executing template %q\n", f.active.Name())
+			var buf bytes.Buffer
+			commands.MaybeError(f.active.Name(), f.active.Execute(&buf, f.api))
+		}
+	}
+	f.active = original
+	return nil
+}
+
+// Write takes a string and writes it into the specified file.
+// The filename is relative to the output directory.
+func (f *Functions) Write(fileName string, value string) error {
+	outputPath := filepath.Join(f.basePath, fileName)
 	commands.Log("Writing output to %q\n", outputPath)
-	return ioutil.WriteFile(outputPath, []byte(result), 0666)
+	return ioutil.WriteFile(outputPath, []byte(value), 0666)
 }
 
 func doTemplate(flags flag.FlagSet) {
@@ -55,7 +82,10 @@ func doTemplate(flags flag.FlagSet) {
 		commands.Usage("Missing api file\n")
 	}
 	apiName := args[0]
-	templateNames := args[1:]
+	if len(args) < 2 {
+		commands.Usage("Missing template file\n")
+	}
+	mainTemplate := args[1]
 	commands.Log("Reading api file %q\n", apiName)
 	info, err := ioutil.ReadFile(apiName)
 	commands.MaybeError(apiName, err)
@@ -64,18 +94,6 @@ func doTemplate(flags flag.FlagSet) {
 	commands.CheckErrors(apiName, errs)
 	compiled, errs := resolver.Resolve(parsed)
 	commands.CheckErrors(apiName, errs)
-
-	f := newFunctions()
-	for _, templateName := range templateNames {
-		commands.Log("Reading template %q\n", templateName)
-		tmplData, err := ioutil.ReadFile(templateName)
-		commands.MaybeError(templateName, err)
-		template.Must(f.templates.New(templateName).Parse(string(tmplData)))
-	}
-	commands.Log("Executing template %q\n", *mainTemplate)
-	var buf bytes.Buffer
-	err = f.templates.ExecuteTemplate(&buf, *mainTemplate, compiled)
-	commands.MaybeError("", err)
-	err = write(templateNames[0], *outputFilename, buf.String())
-	commands.MaybeError(*outputFilename, err)
+	f := newFunctions(apiName, compiled)
+	commands.MaybeError(mainTemplate, f.Include(mainTemplate))
 }

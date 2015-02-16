@@ -14,7 +14,10 @@
 
 package template
 
-import "strings"
+import (
+	"path/filepath"
+	"strings"
+)
 
 var (
 	globalList stringSetFlag
@@ -33,6 +36,10 @@ func (f *stringSetFlag) Set(value string) error {
 }
 
 func initGlobals(f *Functions) {
+	apiBase := filepath.Base(f.apiFile)
+	f.globals["API"] = strings.TrimSuffix(apiBase, filepath.Ext(apiBase))
+	f.globals["OutputDir"] = filepath.Base(f.basePath)
+	f.globals["OutputPath"] = f.basePath
 	for _, g := range globalList.Strings() {
 		v := strings.SplitN(g, "=", 2)
 		f.globals[v[0]] = v[1]

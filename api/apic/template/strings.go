@@ -56,6 +56,11 @@ func stringify(v ...interface{}) stringList {
 	return out
 }
 
+// Strings returns the arguments as a string list.
+func (Functions) Strings(v ...interface{}) stringList {
+	return stringify(v...)
+}
+
 // Join returns the concatenation of all the string segments with the specified separator.
 func (Functions) JoinWith(sep string, v ...interface{}) string {
 	l := stringify(v...)
