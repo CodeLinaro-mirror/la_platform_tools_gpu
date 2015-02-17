@@ -29,7 +29,7 @@ func (e errorReader) Read([]byte) (int, error) { return 0, e.e }
 
 var testError = errors.New("test error")
 
-var invalidTypeId = TypeID{0x01}
+var invalidTypeId = ID{0x01}
 
 var testDecodeObjectsBuffer = []byte{
 	0x00, 0x00,
@@ -275,32 +275,6 @@ func TestDecoderCStringError(t *testing.T) {
 	d := NewDecoder(errorReader{testError})
 	if _, err := d.CString(); err != testError {
 		t.Errorf("Decode gave unexpected error: %v", err)
-	}
-}
-
-func TestDecoderData(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x06, 0x00, 0x00, 0x00,
-		0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc,
-	}))
-	expected := []byte{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc}
-	got, err := d.Data()
-	if err != nil {
-		t.Errorf("Decode gave unexpected error: %v", err)
-	}
-	if !bytes.Equal(expected, got) {
-		t.Errorf("Decode gave unexpected value. Expected: %v, got: %v", expected, got)
-	}
-}
-
-func TestDecoderDataError(t *testing.T) {
-	d := NewDecoder(errorReader{testError})
-	data, err := d.Data()
-	if err != testError {
-		t.Errorf("Decode gave unexpected error. Expected: %v, got: %v", testError, err)
-	}
-	if data != nil {
-		t.Errorf("Decode gave unexpected value. Expected: %v, got: %v", nil, data)
 	}
 }
 

@@ -18,7 +18,6 @@ package generate
 
 import (
 	"bytes"
-	"crypto/sha1"
 	"fmt"
 	"path"
 	"sort"
@@ -39,11 +38,11 @@ type File struct {
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	Name      string        // The simple name of the type.
-	Package   string        // The package name the struct belongs to.
-	Fields    []Field       // Descriptions of the fields of the struct.
-	Signature string        // The full string type signature of the Struct.
-	ID        binary.TypeID // The unique type identifier for the Struct.
+	Name      string    // The simple name of the type.
+	Package   string    // The package name the struct belongs to.
+	Fields    []Field   // Descriptions of the fields of the struct.
+	Signature string    // The full string type signature of the Struct.
+	ID        binary.ID // The unique type identifier for the Struct.
 }
 
 // Kind describes the basic nature of a type.
@@ -116,7 +115,7 @@ func (s *Struct) updateID() {
 	}
 	fmt.Fprint(b, " }")
 	s.Signature = b.String()
-	s.ID = sha1.Sum([]byte(s.Signature))
+	s.ID = binary.NewID([]byte(s.Signature))
 }
 
 // FromType creates a appropriate Type object from a types.Type.

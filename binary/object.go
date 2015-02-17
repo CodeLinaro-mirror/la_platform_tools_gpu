@@ -22,12 +22,6 @@ import (
 // Used as an object key to define a nil pointer
 const objectNil uint16 = ^uint16(0)
 
-// TypeID is a unique type identifier used to identify a type.
-// It is expected these will be SHA1 hashes of a types signature, such that
-// no two types generate the same TypeId, and any change to a types name or
-// fields causes it's signature to change.
-type TypeID [20]byte
-
 type Encodable interface {
 	// Encode the object's data to the Encoder.
 	// The implementation must be symmetrical to Decode.
@@ -46,12 +40,15 @@ type Object interface {
 }
 
 var (
-	typeToID = map[reflect.Type]TypeID{}
-	idToType = map[TypeID]reflect.Type{}
+	typeToID = map[reflect.Type]ID{}
+	idToType = map[ID]reflect.Type{}
 )
 
 // Register adds a new type to the binary encoding system.
-func Register(id TypeID, instance Object) {
+// The id should be a sha1 has of the types signature, such that
+// no two types generate the same ID, and any change to a types name or
+// fields causes it's signature to change.
+func Register(id ID, instance Object) {
 	t := reflect.TypeOf(instance)
 	if oldId, found := typeToID[t]; found {
 		panic(fmt.Errorf("Type %s as %x already has id %x", t, id, oldId))
@@ -71,25 +68,25 @@ func (e unknownType) Error() string {
 	return fmt.Sprintf("Unknown type %T encountered in binary.TypeOf", e.Object)
 }
 
-// Given an encodable object return the TypeID for that type of object.
-// If there is no TypeID for this type of object, return a non-nil error.
-func TypeOf(obj Encodable) (TypeID, error) {
+// Given an encodable object return the ID for that type of object.
+// If there is no ID for this type of object, return a non-nil error.
+func TypeOf(obj Encodable) (ID, error) {
 	id, idFound := typeToID[reflect.TypeOf(obj)]
 	if !idFound {
-		return TypeID{}, unknownType{obj}
+		return ID{}, unknownType{obj}
 	}
 	return id, nil
 }
 
-type unknownTypeID TypeID
+type unknownTypeID ID
 
 func (e unknownTypeID) Error() string {
-	return fmt.Sprintf("Unknown type id %x encountered in binary.MakeObject", TypeID(e))
+	return fmt.Sprintf("Unknown type id %v encountered in binary.MakeObject", ID(e))
 }
 
-// Given a TypeID return a zero value instance of the object type.
-// If this TypeID is not for a registered type, return a non-nil error.
-func MakeObject(typeId TypeID) (Decodable, error) {
+// Given an ID return a zero value instance of the object type.
+// If this ID is not for a registered type, return a non-nil error.
+func MakeObject(typeId ID) (Decodable, error) {
 	t, idFound := idToType[typeId]
 	if !idFound {
 		return nil, unknownTypeID(typeId)

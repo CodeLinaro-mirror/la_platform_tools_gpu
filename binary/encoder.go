@@ -31,7 +31,13 @@ func NewEncoder(writer io.Writer) *Encoder {
 	return &Encoder{writer: writer, objects: map[interface{}]uint16{}}
 }
 
-func (e *Encoder) write(data []byte) error {
+// Write implements the io.Writer interface, delegating to the underlying writer.
+func (e *Encoder) Write(p []byte) (int, error) {
+	return e.writer.Write(p)
+}
+
+// WriteFull writes the data bytes in their entirety.
+func (e *Encoder) WriteFull(data []byte) error {
 	n, err := e.writer.Write(data)
 	if err != nil {
 		return err
@@ -42,16 +48,6 @@ func (e *Encoder) write(data []byte) error {
 	return nil
 }
 
-// Write implements the io.Writer interface, delegating to the underlying writer.
-func (e *Encoder) Write(p []byte) (int, error) {
-	return e.writer.Write(p)
-}
-
-// TypeID encodes a type id to the Encoder's io.Writer.
-func (e *Encoder) TypeID(v TypeID) error {
-	return e.write(v[:])
-}
-
 // Bool encodes a boolean value to the Encoder's io.Writer.
 func (e *Encoder) Bool(v bool) error {
 	if v {
@@ -59,7 +55,7 @@ func (e *Encoder) Bool(v bool) error {
 	} else {
 		e.tmp[0] = 0
 	}
-	return e.write(e.tmp[:1])
+	return e.WriteFull(e.tmp[:1])
 }
 
 // Int8 encodes a signed, 8 bit integer value to the Encoder's io.Writer.
@@ -70,7 +66,7 @@ func (e *Encoder) Int8(v int8) error {
 // Uint8 encodes an unsigned, 8 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Uint8(v uint8) error {
 	e.tmp[0] = v
-	return e.write(e.tmp[:1])
+	return e.WriteFull(e.tmp[:1])
 }
 
 // Int16 encodes a signed, 16 bit integer value to the Encoder's io.Writer.
@@ -82,7 +78,7 @@ func (e *Encoder) Int16(v int16) error {
 func (e *Encoder) Uint16(v uint16) error {
 	e.tmp[0] = byte(v)
 	e.tmp[1] = byte(v >> 8)
-	return e.write(e.tmp[:2])
+	return e.WriteFull(e.tmp[:2])
 }
 
 // Int32 encodes a signed, 32 bit integer value to the Encoder's io.Writer.
@@ -96,7 +92,7 @@ func (e *Encoder) Uint32(v uint32) error {
 	e.tmp[1] = byte(v >> 8)
 	e.tmp[2] = byte(v >> 16)
 	e.tmp[3] = byte(v >> 24)
-	return e.write(e.tmp[:4])
+	return e.WriteFull(e.tmp[:4])
 }
 
 // Float32 encodes a 32 bit floating-point value to the Encoder's io.Writer.
@@ -119,7 +115,7 @@ func (e *Encoder) Uint64(v uint64) error {
 	e.tmp[5] = byte(v >> 40)
 	e.tmp[6] = byte(v >> 48)
 	e.tmp[7] = byte(v >> 56)
-	return e.write(e.tmp[:8])
+	return e.WriteFull(e.tmp[:8])
 }
 
 // Float64 encodes a 64 bit floating-point value to the Encoder's io.Writer.
@@ -132,23 +128,15 @@ func (e *Encoder) String(v string) error {
 	if err := e.Uint32(uint32(len(v))); err != nil {
 		return err
 	}
-	return e.write([]byte(v))
+	return e.WriteFull([]byte(v))
 }
 
 // String encodes a string (c-style) to the Encoder's io.Writer.
 func (e *Encoder) CString(v string) error {
-	if err := e.write([]byte(v)); err != nil {
+	if err := e.WriteFull([]byte(v)); err != nil {
 		return err
 	}
 	return e.Uint8(0)
-}
-
-// Data encodes a sequence of bytes to the Encoder's io.Writer.
-func (e *Encoder) Data(data []byte) error {
-	if err := e.Uint32(uint32(len(data))); err != nil {
-		return err
-	}
-	return e.write(data)
 }
 
 // Object encodes an Encodable to the Encoder's io.Writer. If Object is called repeatedly with the
@@ -173,7 +161,11 @@ func (e *Encoder) Object(obj Encodable) error {
 
 	key = uint16(len(e.objects))
 	e.objects[obj] = key
-	e.Uint16(key)
-	e.TypeID(id)
+	if err := e.Uint16(key); err != nil {
+		return err
+	}
+	if err := id.Encode(e); err != nil {
+		return err
+	}
 	return obj.Encode(e)
 }

@@ -25,7 +25,7 @@ import (
 var (
 	goTemplates = template.Must(template.New("").Funcs(goFuncs).Parse(`
 {{define "Register"}} //{{.Signature}}
-	binary.Register(binary.TypeID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{})
+	binary.Register(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{})
 {{end}}
 
 {{define "Encoder"}}

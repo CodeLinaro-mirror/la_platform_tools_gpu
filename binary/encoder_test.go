@@ -46,7 +46,6 @@ func checkEncoderGivesError(t *testing.T, e *Encoder, expectedError error) {
 		{"Uint64", e.Uint64(42)},
 		{"String", e.String("string")},
 		{"CString", e.CString("string")},
-		{"Data", e.Data([]byte{1, 2, 3, 4})},
 		{"Object", e.Object(testObjA)},
 	}
 	for _, e := range errs {
@@ -278,19 +277,6 @@ func TestEncoderCString(t *testing.T) {
 		0x00,
 		'W', 'o', 'r', 'l', 'd', 0x00,
 		0xe3, 0x81, 0x93, 0xe3, 0x82, 0x93, 0xe3, 0x81, 0xab, 0xe3, 0x81, 0xa1, 0xe3, 0x81, 0xaf, 0xe4, 0xb8, 0x96, 0xe7, 0x95, 0x8c, 0x00,
-	}, b.Bytes()
-	if !bytes.Equal(expected, got) {
-		t.Errorf("Encode gave unexpected bytes. Expected: %v, got: %v", expected, got)
-	}
-}
-
-func TestEncoderData(t *testing.T) {
-	b := &bytes.Buffer{}
-	e := NewEncoder(b)
-	e.Data([]byte{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc})
-	expected, got := []byte{
-		0x06, 0x00, 0x00, 0x00,
-		0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc,
 	}, b.Bytes()
 	if !bytes.Equal(expected, got) {
 		t.Errorf("Encode gave unexpected bytes. Expected: %v, got: %v", expected, got)

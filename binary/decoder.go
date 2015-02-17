@@ -36,11 +36,10 @@ func (d *Decoder) Read(p []byte) (int, error) {
 	return d.reader.Read(p)
 }
 
-// TypeID decodes and returns a type id from the Decoder's io.Reader.
-func (d *Decoder) TypeID() (TypeID, error) {
-	var id TypeID
-	_, err := io.ReadFull(d.reader, id[:])
-	return id, err
+// Read a byte array in its entirety.
+func (d *Decoder) ReadFull(p []byte) error {
+	_, err := io.ReadFull(d.reader, p)
+	return err
 }
 
 // Bool decodes and returns a boolean value from the Decoder's io.Reader.
@@ -152,19 +151,6 @@ func (d *Decoder) CString() (string, error) {
 	return string(s), nil
 }
 
-// Data decodes and returns a sequence of bytes from the Decoder's io.Reader.
-func (d *Decoder) Data() ([]byte, error) {
-	c, err := d.Uint32()
-	if err != nil {
-		return nil, err
-	}
-
-	buf := make([]byte, c)
-	_, err = io.ReadFull(d.reader, buf)
-
-	return buf, err
-}
-
 // Object decodes and returns an Object from the Decoder's io.Reader. Object instances that were
 // encoded multiple times will be decoded and returned as a shared, single instance.
 // The type id in the stream must have been previously registered with binary.Register.
@@ -182,8 +168,8 @@ func (d *Decoder) Object() (interface{}, error) {
 		return obj, nil
 	}
 
-	id, err := d.TypeID()
-	if err != nil {
+	var id ID
+	if err := id.Decode(d); err != nil {
 		return nil, err
 	}
 
