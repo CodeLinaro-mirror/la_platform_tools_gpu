@@ -16,7 +16,6 @@ package binary_test
 
 import (
 	"bytes"
-	"crypto/sha1"
 	"fmt"
 	"io"
 	"log"
@@ -24,7 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-var ExampleObjectID = sha1.Sum([]byte("ExampleObjectId"))
+var ExampleObjectID = binary.NewID([]byte("ExampleObjectId"))
 
 type ExampleObject struct{ Data string }
 

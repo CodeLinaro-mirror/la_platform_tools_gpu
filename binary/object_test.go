@@ -18,8 +18,8 @@ var testObjA = &testObjectA{testObjectBase{"ObjectA"}}
 var testObjB = &testObjectB{testObjectBase{"ObjectB"}}
 var testObjC = &testObjectC{testObjectBase{"ObjectC"}}
 
-var testObjectIDA = TypeID{0x0A}
-var testObjectIDB = TypeID{0x0B}
+var testObjectIDA = ID{0x0A}
+var testObjectIDB = ID{0x0B}
 
 type testObjectBase struct{ data string }
 
