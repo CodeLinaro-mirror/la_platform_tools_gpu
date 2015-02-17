@@ -42,24 +42,19 @@ type msgCloseChannel struct {
 
 type msgData struct {
 	c channelId
-	d []byte
+	d binary.Data
 }
 
 func (m msgData) encode(e *binary.Encoder) error {
 	if err := m.c.encode(e); err != nil {
 		return err
 	}
-	return e.Data(m.d)
+	return m.d.Encode(e)
 }
 
 func (m *msgData) decode(d *binary.Decoder) error {
 	if err := m.c.decode(d); err != nil {
 		return err
 	}
-	if val, err := d.Data(); err == nil {
-		m.d = val
-	} else {
-		return err
-	}
-	return nil
+	return m.d.Decode(d)
 }
