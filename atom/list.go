@@ -23,12 +23,25 @@ import (
 // List is a list of atoms.
 type List []Atom
 
-// WriteTo writes all atoms in the list and then an EOS atom to w.
+// WriteTo writes all atoms in the list to w, inserting EOS atoms after the last
+// atom of each context.
 func (l *List) WriteTo(w Writer) {
+	// Find the last atom index for each context
+	last := make(map[ContextId]int)
+	for i, a := range *l {
+		last[a.ContextId()] = i
+	}
+
+	// Write out the atoms, injecting EOS markers for each context.
+	nextEosId := Id(len(*l))
 	for i, a := range *l {
 		w.Write(Id(i), a)
+		ctx := a.ContextId()
+		if last[ctx] == i {
+			w.Write(nextEosId, &EOS{Context: ctx})
+			nextEosId++
+		}
 	}
-	w.Write(Id(len(*l)), &EOS{})
 }
 
 // Clone makes and returns a shallow copy of the atom list.

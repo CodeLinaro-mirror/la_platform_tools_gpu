@@ -16,44 +16,78 @@ package atom
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
-type testAtomBase struct {
-	Context ContextId
-}
-
-func (a testAtomBase) ContextId() ContextId { return a.Context }
-func (a testAtomBase) Info() string         { return "" }
-func (a testAtomBase) Flags() Flags         { return 0 }
-
 const testAtomIdA = TypeId(10)
 const testAtomIdB = TypeId(20)
 const testAtomIdC = TypeId(30)
 
 type testAtomA struct {
-	testAtomBase
-	Int32 int32
+	Context ContextId
+	Int32   int32
 }
 
-func (testAtomA) TypeId() TypeId                          { return testAtomIdA }
-func (a *testAtomA) Encode(e *binary.Encoder) error       { return e.Int32(a.Int32) }
-func (a *testAtomA) Decode(d *binary.Decoder) (err error) { a.Int32, err = d.Int32(); return }
+func (testAtomA) TypeId() TypeId          { return testAtomIdA }
+func (a *testAtomA) ContextId() ContextId { return a.Context }
+func (a *testAtomA) Info() string         { return "" }
+func (a *testAtomA) Flags() Flags         { return 0 }
+func (a *testAtomA) Encode(e *binary.Encoder) error {
+	if err := a.Context.Encode(e); err != nil {
+		return err
+	}
+	return e.Int32(a.Int32)
+}
+func (a *testAtomA) Decode(d *binary.Decoder) (err error) {
+	if err := a.Context.Decode(d); err != nil {
+		return err
+	}
+	a.Int32, err = d.Int32()
+	return
+}
 
 type testAtomB struct {
-	testAtomBase
-	Bool bool
+	Context ContextId
+	Bool    bool
 }
 
-func (testAtomB) TypeId() TypeId                          { return testAtomIdB }
-func (a *testAtomB) Encode(e *binary.Encoder) error       { return e.Bool(a.Bool) }
-func (a *testAtomB) Decode(d *binary.Decoder) (err error) { a.Bool, err = d.Bool(); return }
+func (testAtomB) TypeId() TypeId          { return testAtomIdB }
+func (a *testAtomB) ContextId() ContextId { return a.Context }
+func (a *testAtomB) Info() string         { return "" }
+func (a *testAtomB) Flags() Flags         { return 0 }
+func (a *testAtomB) Encode(e *binary.Encoder) error {
+	if err := a.Context.Encode(e); err != nil {
+		return err
+	}
+	return e.Bool(a.Bool)
+}
+func (a *testAtomB) Decode(d *binary.Decoder) (err error) {
+	if err := a.Context.Decode(d); err != nil {
+		return err
+	}
+	a.Bool, err = d.Bool()
+	return
+}
 
 type testAtomC struct {
-	testAtomBase
-	String string
+	Context ContextId
+	String  string
 }
 
-func (testAtomC) TypeId() TypeId                          { return testAtomIdC }
-func (a *testAtomC) Encode(e *binary.Encoder) error       { return e.String(a.String) }
-func (a *testAtomC) Decode(d *binary.Decoder) (err error) { a.String, err = d.String(); return }
+func (testAtomC) TypeId() TypeId          { return testAtomIdC }
+func (a *testAtomC) ContextId() ContextId { return a.Context }
+func (a *testAtomC) Info() string         { return "" }
+func (a *testAtomC) Flags() Flags         { return 0 }
+func (a *testAtomC) Encode(e *binary.Encoder) error {
+	if err := a.Context.Encode(e); err != nil {
+		return err
+	}
+	return e.String(a.String)
+}
+func (a *testAtomC) Decode(d *binary.Decoder) (err error) {
+	if err := a.Context.Decode(d); err != nil {
+		return err
+	}
+	a.String, err = d.String()
+	return
+}
 
 func init() {
 	Register(TypeInfo{Id: testAtomIdA, New: func() Atom { return &testAtomA{} }})

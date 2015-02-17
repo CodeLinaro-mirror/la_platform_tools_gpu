@@ -22,18 +22,25 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
-var expectedList = List{&testAtomA{Int32: 100}, &testAtomB{Bool: true}, &testAtomC{String: "Pizza"}}
-var expectedData = []byte{
-	0x08, 0x00, // Atom 0: Size (+2 for type)
+var testList = List{
+	&testAtomA{Context: 0x10, Int32: 100},
+	&testAtomB{Context: 0x20, Bool: true},
+	&testAtomC{Context: 0x10, String: "Pizza"},
+}
+var testData = []byte{
+	0x0c, 0x00, // Atom 0: Size (+2 for type)
 	byte(testAtomIdA & 0xff), byte(testAtomIdA >> 8), // Atom 0: Type
+	0x10, 0x00, 0x00, 0x00, // Atom 0: Context
 	0x64, 0x00, 0x00, 0x00, // Atom 0: Data
 
-	0x05, 0x00, // Atom 1: Size (+2 for type)
+	0x09, 0x00, // Atom 1: Size (+2 for type)
 	byte(testAtomIdB & 0xff), byte(testAtomIdB >> 8), // Atom 1: Type
+	0x20, 0x00, 0x00, 0x00, // Atom 1: Context
 	0x01, // Atom 1: Data
 
-	0x0d, 0x00, // Atom 2: Size (+2 for type)
+	0x11, 0x00, // Atom 2: Size (+2 for type)
 	byte(testAtomIdC & 0xff), byte(testAtomIdC >> 8), // Atom 2: Type
+	0x10, 0x00, 0x00, 0x00, // Atom 2: Context
 	0x05, 0x00, 0x00, 0x00, 'P', 'i', 'z', 'z', 'a', // Atom 2: Data
 
 	0x00, 0x00, // EOS 0
@@ -42,23 +49,79 @@ var expectedData = []byte{
 func TestAtomListEncode(t *testing.T) {
 	buf := &bytes.Buffer{}
 	enc := binary.NewEncoder(buf)
-	err := expectedList.Encode(enc)
+	err := testList.Encode(enc)
 	if err != nil {
 		t.Errorf("Encode returned unexpected error: %v", err)
 	}
 	got := buf.Bytes()
-	if !bytes.Equal(expectedData, got) {
-		t.Errorf("Encoded data was not as expected.\nExpected: %v\nGot:      %v", expectedData, got)
+	if !bytes.Equal(testData, got) {
+		t.Errorf("Encoded data was not as expected.\nExpected: % x\nGot:      % x", testData, got)
 	}
 }
 
 func TestAtomListDecode(t *testing.T) {
 	list := List{}
-	err := list.Decode(binary.NewDecoder(bytes.NewBuffer(expectedData)))
+	err := list.Decode(binary.NewDecoder(bytes.NewBuffer(testData)))
 	if err != nil {
 		t.Errorf("Decode returned unexpected error: %v", err)
 	}
-	if !reflect.DeepEqual(expectedList, list) {
-		t.Errorf("Decoded list was not as expected.\nExpected: %#v\nGot:      %#v", expectedList, list)
+	if !reflect.DeepEqual(testList, list) {
+		t.Errorf("Decoded list was not as expected.\nExpected: %#v\nGot:      %#v", testList, list)
+	}
+}
+
+type writeRecord struct {
+	id   Id
+	atom Atom
+}
+type writeRecordList []writeRecord
+
+func (t *writeRecordList) Write(id Id, atom Atom) { *t = append(*t, writeRecord{id, atom}) }
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
+
+func TestAtomListWriteTo(t *testing.T) {
+	expected := writeRecordList{
+		writeRecord{0, &testAtomA{Context: 0x10, Int32: 100}},
+		writeRecord{1, &testAtomB{Context: 0x20, Bool: true}},
+		writeRecord{3, &EOS{Context: 0x20}},
+		writeRecord{2, &testAtomC{Context: 0x10, String: "Pizza"}},
+		writeRecord{4, &EOS{Context: 0x10}},
+	}
+	got := writeRecordList{}
+	testList.WriteTo(&got)
+
+	matched := len(expected) == len(got)
+
+	if matched {
+		for i := range expected {
+			e, g := expected[i], got[i]
+			if e.id != g.id || !reflect.DeepEqual(g.atom, e.atom) {
+				matched = false
+				break
+			}
+		}
+	}
+
+	if !matched {
+		c := max(len(expected), len(got))
+		for i := 0; i < c; i++ {
+			if i > len(got) {
+				t.Errorf("(%d) Expected: %#v Got: <nothing>", i, expected[i])
+				continue
+			}
+			e, g := expected[i], got[i]
+			if e.id != g.id || !reflect.DeepEqual(g.atom, e.atom) {
+				t.Errorf("(%d) Expected: %#v Got: %#v", i, e, g)
+				continue
+			}
+			t.Logf("(%d) Matched: %#v", i, g)
+		}
 	}
 }
