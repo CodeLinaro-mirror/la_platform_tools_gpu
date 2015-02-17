@@ -35,6 +35,25 @@ var (
 	java   = flag.String("java", "", "the java file to generate")
 )
 
+func filterStructs(pkg *loader.PackageInfo) []*types.TypeName {
+	result := []*types.TypeName{}
+	for _, def := range pkg.Defs {
+		name, ok := def.(*types.TypeName)
+		if !ok {
+			continue
+		}
+		t, ok := name.Type().(*types.Named)
+		if !ok {
+			continue
+		}
+		if _, ok := t.Underlying().(*types.Struct); !ok {
+			continue
+		}
+		result = append(result, name)
+	}
+	return result
+}
+
 func run() error {
 	flag.Parse()
 	config := loader.Config{SourceImports: true}
@@ -50,13 +69,10 @@ func run() error {
 	file := generate.File{}
 	for _, pkg := range info.Created {
 		file.Package = pkg.Pkg.Name()
-		for _, def := range pkg.Defs {
-			if n, ok := def.(*types.TypeName); ok {
-				if t, ok := n.Type().(*types.Named); ok {
-					if _, ok := t.Underlying().(*types.Struct); ok {
-						file.Structs = append(file.Structs, generate.FromTypename(pkg.Pkg, n))
-					}
-				}
+		for _, name := range filterStructs(pkg) {
+			s := generate.FromTypename(pkg.Pkg, name)
+			if !s.Delegating {
+				file.Structs = append(file.Structs, s)
 			}
 		}
 	}

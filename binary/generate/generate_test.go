@@ -111,27 +111,30 @@ func TestFieldTypeAffectsID(t *testing.T) {
 }
 
 func TestTypes(t *testing.T) {
+	prefix := "type Other [20]byte\n"
 	fields := []Field{
-		{"a", &Type{"uint8", "uint8", Native, nil, "Uint8"}},
-		{"b", &Type{"uint16", "uint16", Native, nil, "Uint16"}},
-		{"c", &Type{"uint32", "uint32", Native, nil, "Uint32"}},
-		{"d", &Type{"uint64", "uint64", Native, nil, "Uint64"}},
-		{"e", &Type{"int8", "int8", Native, nil, "Int8"}},
-		{"f", &Type{"int16", "int16", Native, nil, "Int16"}},
-		{"g", &Type{"int32", "int32", Native, nil, "Int32"}},
-		{"h", &Type{"int64", "int64", Native, nil, "Int64"}},
-		{"i", &Type{"float32", "float32", Native, nil, "Float32"}},
-		{"j", &Type{"float64", "float64", Native, nil, "Float64"}},
-		{"k", &Type{"byte", "uint8", Remap, nil, "Uint8"}},
-		{"l", &Type{"int", "int32", Remap, nil, "Int32"}},
-		{"m", &Type{"bool", "bool", Native, nil, "Bool"}},
-		{"n", &Type{"string", "string", Native, nil, "String"}},
-		{"o", &Type{"struct{}", "struct{}", Codeable, nil, ""}},
-		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, ""}},
-		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, ""}},
-		{"r", &Type{"interface{}", "interface{}", Interface, nil, ""}},
+		{"a", &Type{"uint8", "uint8", Native, nil, "Uint8"}, false},
+		{"b", &Type{"uint16", "uint16", Native, nil, "Uint16"}, false},
+		{"c", &Type{"uint32", "uint32", Native, nil, "Uint32"}, false},
+		{"d", &Type{"uint64", "uint64", Native, nil, "Uint64"}, false},
+		{"e", &Type{"int8", "int8", Native, nil, "Int8"}, false},
+		{"f", &Type{"int16", "int16", Native, nil, "Int16"}, false},
+		{"g", &Type{"int32", "int32", Native, nil, "Int32"}, false},
+		{"h", &Type{"int64", "int64", Native, nil, "Int64"}, false},
+		{"i", &Type{"float32", "float32", Native, nil, "Float32"}, false},
+		{"j", &Type{"float64", "float64", Native, nil, "Float64"}, false},
+		{"k", &Type{"byte", "uint8", Remap, nil, "Uint8"}, false},
+		{"l", &Type{"int", "int32", Remap, nil, "Int32"}, false},
+		{"m", &Type{"bool", "bool", Native, nil, "Bool"}, false},
+		{"n", &Type{"string", "string", Native, nil, "String"}, false},
+		{"o", &Type{"struct{}", "struct{}", Codeable, nil, ""}, false},
+		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, ""}, false},
+		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, ""}, false},
+		{"r", &Type{"interface{}", "interface{}", Interface, nil, ""}, false},
+		{"", &Type{"Other", "[20]byte", Codeable, nil, ""}, true},
 	}
 	source := &bytes.Buffer{}
+	fmt.Fprintln(source, prefix)
 	fmt.Fprint(source, "type MyStruct struct {\n")
 	for _, f := range fields {
 		fmt.Fprintf(source, "  %s %s\n", f.Name, f.Type.Name)
@@ -143,6 +146,9 @@ func TestTypes(t *testing.T) {
 	}
 	for i, got := range s.Fields {
 		expected := fields[i]
+		if expected.Name == "" {
+			expected.Name = expected.Type.Name
+		}
 		if got.Name != expected.Name {
 			t.Errorf("Got field %s, expected %s", got.Name, expected.Name)
 		}
@@ -157,6 +163,9 @@ func TestTypes(t *testing.T) {
 		if got.Type.Method != expected.Type.Method {
 			t.Errorf("Got encoder method %s, expected %s for %s %s",
 				got.Type.Method, expected.Type.Method, expected.Name, expected.Type.Name)
+		}
+		if got.Anonymous != expected.Anonymous {
+			t.Errorf("Got anonymous %v, expected %v for %s %s", got.Anonymous, expected.Anonymous, expected.Name, expected.Type.Name)
 		}
 	}
 }

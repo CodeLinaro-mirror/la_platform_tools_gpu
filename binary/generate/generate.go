@@ -38,11 +38,12 @@ type File struct {
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	Name      string    // The simple name of the type.
-	Package   string    // The package name the struct belongs to.
-	Fields    []Field   // Descriptions of the fields of the struct.
-	Signature string    // The full string type signature of the Struct.
-	ID        binary.ID // The unique type identifier for the Struct.
+	Name       string    // The simple name of the type.
+	Package    string    // The package name the struct belongs to.
+	Fields     []Field   // Descriptions of the fields of the struct.
+	Signature  string    // The full string type signature of the Struct.
+	ID         binary.ID // The unique type identifier for the Struct.
+	Delegating bool      // True if the struct is a pure delegating type.
 }
 
 // Kind describes the basic nature of a type.
@@ -73,8 +74,9 @@ const (
 // Field holds a description of a single Struct member.
 type Field struct {
 	// Name is the true field name.
-	Name string // The name the field was given.
-	Type *Type  // A description of the type of the field.
+	Name      string // The name the field was given.
+	Type      *Type  // A description of the type of the field.
+	Anonymous bool   // Whether the field was anonymous.
 }
 
 // Type is used to describe fields of a struct.
@@ -99,8 +101,10 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 		f := &s.Fields[i]
 		f.Name = decl.Name()
 		f.Type = FromType(pkg, decl.Type())
+		f.Anonymous = decl.Anonymous()
 	}
 	s.updateID()
+	s.Delegating = len(s.Fields) == 1 && s.Fields[0].Anonymous
 	return s
 }
 
@@ -141,15 +145,13 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 	case *types.Pointer:
 		t.Kind = Pointer
 		t.SubType = FromType(pkg, from.Elem())
-	case *types.Struct:
-		t.Kind = Codeable
 	case *types.Interface:
 		t.Kind = Interface
 	case *types.Slice:
 		t.Kind = Array
 		t.SubType = FromType(pkg, from.Elem())
 	default:
-		panic(fmt.Errorf("Unhandled type %T for field %s", from, t.Name))
+		t.Kind = Codeable
 	}
 	return t
 }
@@ -179,7 +181,7 @@ type kindToTemplate map[Kind]*template.Template
 
 func kindDispatch(table kindToTemplate, name string, t *Type) string {
 	b := &bytes.Buffer{}
-	if err := table[t.Kind].Execute(b, Field{name, t}); err != nil {
+	if err := table[t.Kind].Execute(b, Field{name, t, false}); err != nil {
 		panic(err)
 	}
 	return b.String()

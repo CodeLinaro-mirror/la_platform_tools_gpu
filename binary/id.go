@@ -23,6 +23,11 @@ import (
 // ID is a codeable unique identifier.
 type ID [20]byte
 
+// Valid returns true if the id is not the default value.
+func (id ID) Valid() bool {
+	return id != ID{}
+}
+
 func (id ID) Encode(e *Encoder) error {
 	return e.WriteFull(id[:])
 }
