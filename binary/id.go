@@ -16,6 +16,7 @@ package binary
 
 import (
 	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 )
 
@@ -32,6 +33,24 @@ func (id *ID) Decode(d *Decoder) error {
 
 func (id ID) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "%x", id[:])
+}
+
+func (id ID) String() string {
+	return hex.EncodeToString(id[:])
+}
+
+// ParseID parses lowercase string s as a 20 byte hex-encoded ID.
+func ParseID(s string) (id ID, err error) {
+	bytes, err := hex.DecodeString(s)
+	if err != nil {
+		return
+	}
+	if len(bytes) != len(id) {
+		err = fmt.Errorf("Invalid ID size: got %d, expected %d", len(bytes), len(id))
+		return
+	}
+	copy(id[:], bytes)
+	return
 }
 
 // Create a new ID that is the sha1 hash of the supplied data.
