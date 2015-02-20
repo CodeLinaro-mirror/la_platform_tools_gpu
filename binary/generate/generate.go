@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate embed
+
 // Package generate has support for generating encode and decode methods
 // for the binary package automatically.
 package generate
