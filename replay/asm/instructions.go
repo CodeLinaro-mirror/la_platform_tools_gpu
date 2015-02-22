@@ -18,9 +18,9 @@ package asm
 
 import (
 	"fmt"
-	"gaze/memory"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 	"android.googlesource.com/platform/tools/gpu/replay/vm"
