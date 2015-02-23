@@ -38,9 +38,16 @@ type Functions struct {
 	basePath  string
 	apiFile   string
 	api       *semantic.API
+	loader    func(filename string) ([]byte, error)
 }
 
-func newFunctions(apiFile string, api *semantic.API) *Functions {
+// NewFunctions builds a new template management object that can be used to run templates over an API file.
+// The apiFile name is used in error messages, and should be the name of the file the api was loaded from.
+// loader can be used to intercept file system access from within the templates, specifically used when
+// including other templates.
+// The functions in funcs are made available to the templates, and can override the functions from this
+// package if needed.
+func NewFunctions(apiFile string, api *semantic.API, loader func(filename string) ([]byte, error), funcs template.FuncMap) *Functions {
 	basePath, err := filepath.Abs(*dir)
 	commands.MaybeError("", err)
 	f := &Functions{
@@ -50,6 +57,7 @@ func newFunctions(apiFile string, api *semantic.API) *Functions {
 		basePath:  basePath,
 		apiFile:   apiFile,
 		api:       api,
+		loader:    loader,
 	}
 	v := reflect.ValueOf(f)
 	t := v.Type()
@@ -63,6 +71,9 @@ func newFunctions(apiFile string, api *semantic.API) *Functions {
 	}
 	initNodeTypes(f)
 	initGlobals(f)
+	for k, v := range funcs {
+		f.funcs[k] = v
+	}
 	if *tracer != "" {
 		pattern := regexp.MustCompile(*tracer)
 		for n, c := range f.funcs {
