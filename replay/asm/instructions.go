@@ -153,7 +153,7 @@ func (Nop) Encode(r value.PointerResolver, e *binary.Encoder) error {
 }
 
 // Call is an Instruction to call a VM registered function.
-// This instruction will pop the parameters from the  VM stack starting with the
+// This instruction will pop the parameters from the VM stack starting with the
 // first parameter. If PushReturn is true, then the return value of the function
 // call will be pushed to the top of the VM stack.
 type Call struct {
@@ -198,8 +198,8 @@ func (a Copy) Encode(r value.PointerResolver, e *binary.Encoder) error {
 	return opcode.Copy{Count: uint32(a.Count)}.Encode(e)
 }
 
-// Clone is an Instruction that pushes a copy of the the n-th element from the
-// top of the VM stack to the top of the VM stack.
+// Clone is an Instruction that makes a copy of the the n-th element from the
+// top of the VM stack and pushes the copy to the top of the VM stack.
 type Clone struct {
 	Index int
 }
