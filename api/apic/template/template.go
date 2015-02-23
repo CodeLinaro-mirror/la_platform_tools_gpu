@@ -54,7 +54,7 @@ func (f *Functions) Include(templates ...string) error {
 		}
 		if f.templates.Lookup(t) == nil {
 			commands.Log("Reading template %q\n", t)
-			tmplData, err := ioutil.ReadFile(t)
+			tmplData, err := f.loader(t)
 			commands.MaybeError(t, err)
 			tmpl, err := f.templates.New(t).Parse(string(tmplData))
 			commands.MaybeError(t, err)
@@ -94,6 +94,6 @@ func doTemplate(flags flag.FlagSet) {
 	commands.CheckErrors(apiName, errs)
 	compiled, errs := resolver.Resolve(parsed)
 	commands.CheckErrors(apiName, errs)
-	f := newFunctions(apiName, compiled)
+	f := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
 	commands.MaybeError(mainTemplate, f.Include(mainTemplate))
 }
