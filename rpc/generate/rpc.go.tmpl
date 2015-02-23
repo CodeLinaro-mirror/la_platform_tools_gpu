@@ -1,0 +1,573 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+{{Global "module" ""}}
+{{Include "rpc_common_go.tmpl"}}
+{{$ | Macro "Rpc" "role" "" "api" | GoFmt | Write "rpc.go"}}
+{{$ | Macro "Rpc" "role" "Extra" "api" | GoFmt | Write "rpc_extra.go"}}
+{{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write "rpc_helpers.go"}}
+{{$ | Macro "Client" | GoFmt | Write "rpc_client.go"}}
+{{$ | Macro "Server" | GoFmt | Write "rpc_server.go"}}
+{{$ | Macro "Binary" | GoFmt | Write "rpc_binary.go"}}
+
+
+{{define "Rpc"}}
+  {{template "GeneratedHeader"}}
+  {{Macro (print "Imports" $.role) $.api}}
+¶
+  {{range $i, $c := $.api.Functions}}
+    {{Macro (print "Call" $.role)   $c}}
+    {{Macro (print "Result" $.role) $c}}
+  {{end}}
+¶
+  {{range $_, $h := $.api.Pseudonyms}}
+    {{if GetAnnotation $h "handle"}}
+      {{Macro (print "Handle" $.role) $h}}
+    {{end}}
+  {{end}}
+¶
+  {{range $_, $a := $.api.Arrays}}
+    {{Macro (print "Array" $.role) $a}}
+  {{end}}
+¶
+  {{range $_, $e := $.api.Enums}}
+    {{Macro (print "Enum" $.role) $e}}
+  {{end}}
+¶
+  {{range $i, $c := $.api.Classes}}
+    {{if GetAnnotation $c "Interface"}}
+      {{Macro (print "Interface" $.role) $c}}¶
+    {{end}}
+  {{end}}
+¶
+  {{range $i, $c := $.api.Classes}}
+    {{if not (GetAnnotation $c "Interface")}}
+      {{Macro (print "Class" $.role) $c}}¶
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{define "Imports"}}
+  package {{Global "OutputDir"}};
+
+  import (
+    "android.googlesource.com/platform/tools/gpu/binary"
+    "android.googlesource.com/platform/tools/gpu/log"
+  )
+
+  type RPC interface {
+    {{range $_, $c := $.Functions}}
+      {{Macro "RpcInterfaceMethod" $c}}
+    {{end}}
+  }
+{{end}}
+
+{{define "ImportsExtra"}}
+  package {{Global "OutputDir"}};
+{{end}}
+
+{{define "ImportsHelpers"}}
+  package {{Global "OutputDir"}};
+
+  import (
+    "fmt"
+    "android.googlesource.com/platform/tools/gpu/binary"
+  )
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the interface method declaration for a single RPC command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "RpcInterfaceMethod"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "VerifyInterfaceReturnTypeIsRef" $}}
+  {{$.Name}}(l log.Logger, {{Macro "Parameters" $}})§
+    ({{if not (IsVoid $.Return.Type)}}{{Macro "Type" $.Return.Type}}, {{end}}error)
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comma-separated list of command parameters (name followed by type).
+-------------------------------------------------------------------------------
+*/}}
+{{define "Parameters"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}},{{end}}§
+    {{Macro "Parameter" "Parameter" $p "Command" $}}§
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comma-separated list of command arguments (names).
+-------------------------------------------------------------------------------
+*/}}
+{{define "Arguments"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}{{if $i}}, {{end}}§{{$p.Name}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a single command parameter (name followed by type).
+-------------------------------------------------------------------------------
+*/}}
+{{define "Parameter"}}
+  {{AssertType $.Parameter "Parameter"}}
+  {{AssertType $.Command "Function"}}
+  {{Macro "VerifyInterfaceParameterIsRef" "Parameter" $.Parameter "Command" $.Command}}
+
+  {{$.Parameter.Name}} {{Macro "Type" (TypeOf $.Parameter)}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Walks a class hierarchy to visit all the fields, calling the specified macro
+  for each field.
+-------------------------------------------------------------------------------
+*/}}
+{{define "AllFields"}}
+  {{AssertType $.Class "Class"}}
+  {{AssertType $.Macro "string"}}
+
+  {{Macro "TraverseFields" "Impl" $.Class "Class" $.Class "Macro" $.Macro}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Walks a class hierarchy to visit all the fields, calling the specified macro
+  for each field.
+-------------------------------------------------------------------------------
+*/}}
+{{define "TraverseFields"}}
+  {{AssertType $.Impl  "Class"}}
+  {{AssertType $.Class "Class"}}
+  {{AssertType $.Macro "string"}}
+
+  {{range $_, $e := $.Class.Extends}}
+    {{Macro "TraverseFields" "Impl" $.Impl "Class" $e "Macro" $.Macro}}
+  {{end}}
+  {{range $_, $f := $.Class.Fields}}
+    {{Macro $.Macro "Impl" $.Impl "Class" $.Class "Field" $f}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares a single field accessor (getter) of an interface.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareInterfaceFieldAccessor"}}
+  {{AssertType $.Field "Field"}}
+
+  Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares a single class field.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareClassField"}}
+  {{AssertType $.Field "Field"}}
+
+  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a single field parameter name-type pair for the constructor of a class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "CreateClassParameter"}}
+  {{AssertType $.Field "Field"}}
+
+  {{$.Field.Name}} {{Macro "Type" (TypeOf $.Field)}},
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a the initializer for a single class field.
+-------------------------------------------------------------------------------
+*/}}
+{{define "AssignClassParameter"}}
+  {{AssertType $.Field "Field"}}
+
+  {{$.Field.Name}}: {{$.Field.Name}},
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a single field accessor (getter) for a concrete class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DefineClassFieldAccessor"}}
+  {{AssertType $.Field "Field"}}
+  {{AssertType $.Impl  "Class"}}
+
+  func (c *{{$.Impl.Name}}) Get{{$.Field.Name}}() {{Macro "Type" (TypeOf $.Field)}} { return c.{{$.Field.Name}} }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the interface of a class annotated with @Interface.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Interface"}}
+  {{AssertType $ "Class"}}
+
+  {{$iname := $.Name}}
+  // Interface {{$.Name}}
+  type {{$iname}} interface {
+    {{if eq (len $.Extends) 0}}
+      binary.Object
+    {{end}}
+    {{Macro "AllFields" "Class" $ "Macro" "DeclareInterfaceFieldAccessor"}}
+  }
+{{end}}
+{{define "InterfaceExtra"}}{{end}}
+{{define "InterfaceHelpers"}}{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the implementation of a class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Class"}}
+  {{AssertType $ "Class"}}
+
+  {{Macro "AllFields" "Class" $ "Macro" "VerifyInterfaceFieldIsRef"}}
+
+  // Class {{$.Name}}
+  type {{$.Name}} struct {
+    {{Macro "AllFields" "Class" $ "Macro" "DeclareClassField"}}
+  }
+{{end}}
+
+{{define "ClassExtra"}}{{end}}
+
+{{define "ClassHelpers"}}
+  func Create{{$.Name}}(
+    {{Macro "AllFields" "Class" $ "Macro" "CreateClassParameter"}}
+  ) *{{$.Name}} {
+    return &{{$.Name}} {
+      {{Macro "AllFields" "Class" $ "Macro" "AssignClassParameter"}}
+    }
+  }
+¶
+  {{Macro "AllFields" "Class" $ "Macro" "DefineClassFieldAccessor"}}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the encoder of a handle.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Handle"}}
+  {{AssertType $ "Pseudonym"}}
+
+  // Handle {{$.Name}}
+  type {{$.Name}} struct { binary.ID }
+{{end}}
+
+{{define "HandleExtra"}}{{end}}
+{{define "HandleHelpers"}}
+func (h {{$.Name}}) Valid() bool {
+  return h.ID.Valid()
+}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the definition of an array.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Array"}}
+  {{AssertType $ "Array"}}
+
+  // Array {{$.Name}}
+  type {{Macro "Type" $}} []{{Macro "Type" $.ValueType}}
+{{end}}
+
+{{define "ArrayExtra"}}
+  {{AssertType $ "Array"}}
+{{end}}
+
+{{define "ArrayHelpers"}}
+  {{AssertType $ "Array"}}
+
+  func (a {{Macro "Type" $}}) Format(f fmt.State, c rune) {
+    fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
+  }
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the definition of an enum.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Enum"}}
+  {{AssertType $ "Enum"}}
+
+  // Enum {{$.Name}}
+  type {{$.Name}} int
+¶
+  const (
+    {{range $_, $e := $.Entries}}
+      {{$.Name}}{{$e.Name}} {{$.Name}}= {{$e.Value}}
+    {{end}}
+  )
+{{end}}
+
+{{define "EnumExtra"}}
+  {{AssertType $ "Enum"}}
+{{end}}
+
+{{define "EnumHelpers"}}
+  {{AssertType $ "Enum"}}
+
+  func (i {{$.Name}}) String() string {
+    switch i {
+      {{range $_, $e := $.Entries}}
+        case {{$.Name}}{{$e.Name}}: return "{{$.Name}}.{{$e.Name}}"
+      {{end}}
+      default: return fmt.Sprintf("{{$.Name}}: Unknown value %d", i)
+    }
+  }
+  {{range $_, $e := $.Entries}}
+    func (i {{$.Name}}) Is{{$e.Name}}() bool { return i == {{$.Name}}{{$e.Name}} }
+  {{end}}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the name of the call type for a single command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "CallName"}}
+  {{AssertType $ "Function"}}
+
+  {{print "call" $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the name of the result type for a single command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ResultName"}}
+  {{AssertType $ "Function"}}
+
+  {{print "result" $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the call structure for a single command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Call"}}
+  {{AssertType $ "Function"}}
+{{end}}
+
+{{define "CallExtra"}}
+  {{AssertType $ "Function"}}
+
+  // Call {{$.Name}}
+  type {{Macro "CallName" $}} struct {
+    {{range $i, $p := $.CallParameters}}
+      {{$p.Name}} {{Macro "Type" (TypeOf $p)}}
+    {{end}}
+  }
+{{end}}
+
+{{define "CallHelpers"}}
+  {{AssertType $ "Function"}}
+
+  func (c {{Macro "CallName" $}}) Format(f fmt.State, r rune) {
+    fmt.Fprintf(f, "{{$.Name}}(§
+      {{range $i, $p := $.CallParameters}}{{if $i}}, {{end}}{{$p.Name}}: %v{{end}})",
+      {{range $i, $p := $.CallParameters}}c.{{$p.Name}},{{end}}
+    )
+  }
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the result structure for a single command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Result"}}
+  {{AssertType $ "Function"}}
+{{end}}
+
+{{define "ResultExtra"}}
+  {{AssertType $ "Function"}}
+
+  // Result {{$.Name}}
+  type {{Macro "ResultName" $}} struct {
+    {{if not (IsVoid $.Return.Type)}}
+      value {{Macro "Type" $.Return.Type}}
+    {{end}}
+  }
+{{end}}
+
+{{define "ResultHelpers"}}
+  {{AssertType $ "Function"}}
+
+  func (r {{Macro "ResultName" $}}) Format(f fmt.State, c rune) {
+    {{if not (IsVoid $.Return.Type)}}
+      fmt.Fprintf(f, "res: %#v", r.value)
+    {{else}}
+      fmt.Fprintf(f, "void")
+    {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the RPC client implementation
+-------------------------------------------------------------------------------
+*/}}
+{{define "Client"}}
+  {{AssertType $ "API"}}
+
+  {{template "GeneratedHeader"}}
+  package {{Global "OutputDir"}};
+
+  import (
+    "io"
+
+    "android.googlesource.com/platform/tools/gpu/log"
+    "android.googlesource.com/platform/tools/gpu/rpc"
+  )
+
+  type client struct {
+    rpc.Client
+  }
+
+  func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
+    return client{rpc.NewClient(r, w, mtu)}
+  }
+
+  // Client compliance
+  {{range $_, $c := $.Functions}}
+    {{if not (IsVoid $c.Return.Type)}}
+      func (c client) {{$c.Name}}(l log.Logger, {{Macro "Parameters" $c}}) (res {{Macro "Type" $c.Return.Type}}, err error) {
+        var val interface{}
+        if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
+          res = val.(*{{Macro "ResultName" $c}}).value
+        } else {
+          l.Error("RPC {{$c.Name}} failed with error: %v", err)
+        }
+        return
+      }
+    {{else}}
+      func (c client) {{$c.Name}}(l log.Logger, {{Macro "Parameters" $c}}) error {
+        _, err := c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} })
+        return err
+      }
+    {{end}}
+    ¶
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the RPC server implementation
+-------------------------------------------------------------------------------
+*/}}
+{{define "Server"}}
+  {{AssertType $ "API"}}
+
+  {{template "GeneratedHeader"}}
+  package {{Global "OutputDir"}};
+
+  import (
+    "fmt"
+    "io"
+    "runtime/debug"
+
+    "android.googlesource.com/platform/tools/gpu/log"
+    "android.googlesource.com/platform/tools/gpu/rpc"
+  )
+
+  func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
+    rpc.Serve(l, r, w, mtu, func(in interface{}) (res binary.Encodable) {
+      l := l.Fork().Enter(fmt.Sprintf("%v", in))
+      defer func() {
+        if err := recover(); err == nil {
+          l.Info("↪ %v", res)
+        } else {
+          msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
+          l.Error(msg)
+          res = rpc.NewError(msg)
+        }
+      }()
+
+      switch call := in.(type) {
+        {{range $i, $c := $.Functions}}
+          case *{{Macro "CallName" $c}}:
+            {{if not (IsVoid $c.Return.Type)}}
+              if res, err := server.{{$c.Name}}(l{{range $p := $c.CallParameters}}, call.{{$p.Name}}{{end}}); err == nil {
+                return &{{Macro "ResultName" $c}}{ res }
+              } else {
+                return rpc.NewError(err.Error())
+              }
+            {{else}}
+              if err := server.{{$c.Name}}(l{{range $p := $c.CallParameters}}, call.{{$p.Name}}{{end}}); err == nil {
+                return &{{Macro "ResultName" $c}}{}
+              } else {
+                return rpc.NewError(err.Error())
+              }
+            {{end}}
+        {{end}}
+          default:
+            return rpc.NewError("Unexpected RPC function: %T", call)
+      }
+    })
+  }
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the RPC binary coder implementation
+-------------------------------------------------------------------------------
+*/}}
+{{define "Binary"}}
+  {{AssertType $ "API"}}
+  {{GoFile (ConvertAPI $)}}
+{{end}}
