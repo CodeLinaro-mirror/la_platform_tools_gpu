@@ -19,7 +19,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"gaze/transport"
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -30,6 +29,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 	"android.googlesource.com/platform/tools/gpu/replay/vm"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type stackItem struct {
@@ -71,7 +71,7 @@ type Builder struct {
 	instructions    []asm.Instruction
 	decoders        []idPostDecoder
 	stack           []stackItem
-	device          *transport.Device
+	device          *service.Device
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -82,7 +82,7 @@ type Builder struct {
 }
 
 // New returns a newly constructed Builder configured to replay on device.
-func New(device *transport.Device) *Builder {
+func New(device *service.Device) *Builder {
 	ptrAlignment := device.PointerAlignment
 	return &Builder{
 		constantMemory:  newConstantEncoder(int(ptrAlignment)),

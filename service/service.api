@@ -1,0 +1,352 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+@handle type string AtomStreamId
+@handle type string BinaryId
+@handle type string CaptureId
+@handle type string DeviceId
+@handle type string HierarchyId
+@handle type string ImageInfoId
+@handle type string MemoryInfoId
+@handle type string SchemaId
+@handle type string TimingInfoId
+
+// GetCaptures returns the full list of capture identifiers avaliable on the
+// server.
+cmd array<CaptureId> GetCaptures() { return ? }
+
+// GetDevices returns the full list of replay devices avaliable to the server.
+// These include local replay devices and any connected Android devices.
+// This list may change over time, as devices are connected and disconnected.
+cmd array<DeviceId> GetDevices() { return ? }
+
+// GetState returns an identifier to a binary blob containing the graphics state
+// for the given context immediately following the atom after.
+// The binary blob can be fetched with a call to ResolveBinary, and decoded
+// using the capture's schema.
+cmd BinaryId GetState(CaptureId capture,
+                      u32       contextId,
+                      u64       after)
+{ return ? }
+
+// GetHierarchy returns the atom hierarchy identifier for the given capture and
+// context. Currently there is only one hierarchy per capture context, but
+// this is likely to change in the future.
+cmd HierarchyId GetHierarchy(CaptureId capture,
+                             u32       contextId)
+{ return ? }
+
+// GetMemoryInfo returns the MemoryInfo identifier describing the memory state
+// for the given capture, context and range, immediately following the atom
+// after.
+cmd MemoryInfoId GetMemoryInfo(CaptureId   capture,
+                               u32         contextId,
+                               u64         after,
+                               MemoryRange rng)
+{ return ? }
+
+// GetFramebufferColor returns the ImageInfo identifier describing the bound
+// color buffer for the given device, capture and context immediately following
+// the atom after. The provided RenderSettings structure can be used to adjust
+// maximum desired dimensions of the image, as well as applying debug
+// visualizations.
+cmd ImageInfoId GetFramebufferColor(DeviceId       device,
+                                    CaptureId      capture,
+                                    u32            contextId,
+                                    u64            after,
+                                    RenderSettings settings)
+{ return ? }
+
+// GetFramebufferDepth returns the ImageInfo identifier describing the bound
+// depth buffer for the given device, capture and context immediately following
+// the atom after.
+cmd ImageInfoId GetFramebufferDepth(DeviceId  device,
+                                    CaptureId capture,
+                                    u32       contextId,
+                                    u64       after)
+{ return ? }
+
+// GetGlErrorCodes returns an identifier to a binary blob holding the results of
+// glGetError after every atom in the given capture and context for the given
+// device. This function is experimental and will change signature or be removed.
+cmd BinaryId GetGlErrorCodes(DeviceId  device,
+                             CaptureId capture,
+                             u32       contextId)
+{ return ? }
+
+// ReplaceAtom creates and new capture based on an existing capture, but with
+// a single atom replaced.
+cmd CaptureId ReplaceAtom(CaptureId capture,
+                          u64       atomId,
+                          u16       atomType,
+                          Binary    data)
+{ return ? }
+
+// GetTimingInfo performs timings of the given capture, context on the given
+// device, returning an identifier to the results. This function is experimental
+// and will change signature.
+cmd TimingInfoId GetTimingInfo(DeviceId   device,
+                               CaptureId  capture,
+                               u32        contextId,
+                               TimingMask mask)
+{ return ? }
+
+// PrerenderFramebuffers renders the framebuffer contents after each of the
+// given atoms of interest in the given capture on the given device, resized to
+// fit within the given dimensions while keeping the respective framebuffers
+// original aspect ratio. This function doesn't return any data, as it is used
+// to pre-populate the cache of framebuffer thumbnails that later get queried by
+// the client. This function is experimental and may change signature.
+cmd BinaryId PrerenderFramebuffers(DeviceId   device,
+                                   CaptureId  capture,
+                                   u32        width,
+                                   u32        height,
+                                   array<u64> atomIds)
+{ return ? }
+
+cmd AtomStream ResolveAtomStream(AtomStreamId id) { return ? }
+cmd Binary     ResolveBinary(BinaryId id) { return ? }
+cmd Capture    ResolveCapture(CaptureId id) { return ? }
+cmd Device     ResolveDevice(DeviceId id) { return ? }
+cmd Hierarchy  ResolveHierarchy(HierarchyId id) { return ? }
+cmd ImageInfo  ResolveImageInfo(ImageInfoId id) { return ? }
+cmd MemoryInfo ResolveMemoryInfo(MemoryInfoId id) { return ? }
+cmd Schema     ResolveSchema(SchemaId id) { return ? }
+cmd TimingInfo ResolveTimingInfo(TimingInfoId id) { return ? }
+
+// Device describes replay target avaliable to the server.
+class Device {
+  string Name             // The name of the device. i.e. "Bob's phone"
+  string Model            // The model of the device. i.e. "Nexus 5"
+  string OS               // The operating system of the device. i.e. "Android 5.0"
+  u8     PointerSize      // Size in bytes of a pointer on the device's architecture.
+  u8     PointerAlignment // Alignment in bytes of a pointer on the device's architecture.
+  u64    MaxMemorySize    // The total amount of contiguous memory pre-allocated for replay.
+  bool   RequiresShaderPatching // HACK. Will be removed.
+}
+
+// Capture describes single capture file held by the server.
+class Capture {
+  string        Name       // Name given to the capture. i.e. "KittyWorld"
+  string        API        // The name of the API used in the capture. Will be removed.
+  AtomStreamId  Atoms      // The identifier to the stream of atoms in this capture.
+  array<u32>    ContextIds // All context identifiers used by all atoms in the capture.
+}
+
+// Binary holds a blob of data.
+class Binary {
+  array<u8> Data
+}
+
+// AtomStream holds a stream of atoms in binary form. The atoms can be unpacked
+// using the schema.
+class AtomStream {
+  array<u8> Data   // Encoded atom stream.
+  SchemaId  Schema // Schema used to unpack the atom stream.
+}
+
+// Hierarchy holds the root to an AtomGroup hierarchy.
+class Hierarchy {
+  AtomGroup Root
+}
+
+// AtomGroup represents a named, contiguous span of atoms with support for
+// sparse sub-groups. AtomGroups are used for expressing nested hierarchies of
+// atoms formed from frame boundaries, draw call boundaries and user markers.
+class AtomGroup {
+  string            Name      // Name of this group.
+  AtomRange         Range     // The span of atoms this group covers.
+  array<AtomGroup>  SubGroups // The list of sub-groups within this group.
+}
+
+// AtomRange describes a span of atoms in an AtomStream.
+class AtomRange {
+  u64 First // The index of the first atom in the range.
+  u64 Count // The number of atoms in the range.
+}
+
+// MemoryInfo describes the state of a range of memory at a specific point in
+// the atom stream. This structure is likely to change in the future.
+class MemoryInfo {
+  array<u8>           Data    // The memory values for the span.
+  array<MemoryRange>  Stale   // The data ranges that have been observed but not current.
+  array<MemoryRange>  Current // The data ranges that were written to just before the observation.
+  array<MemoryRange>  Unknown // The data ranges that have never been observed.
+}
+
+// MemoryRange describes a range of memory.
+class MemoryRange {
+  u64 Base // The pointer to the first byte in the memory range.
+  u64 Size // The size in bytes of the memory range.
+}
+
+// ImageInfo describes an image, such as a texture or framebuffer at a specific
+// point in the atom stream.
+class ImageInfo {
+  ImageFormat Format // The format of the image.
+  u32         Width  // The width of the image in pixels.
+  u32         Height // The height of the image in pixels.
+  BinaryId    Data   // The pixel data of the image.
+}
+
+// The enumerator of image formats. Will expand.
+enum ImageFormat {
+  RGBA8   = 0,
+  Float32 = 1,
+}
+
+// TimingMask is a bitfield describing what should be timed.
+// This is experimental and will change in the near future.
+bitfield TimingMask {
+  TimingPerCommand  = 0x1, // Time individual commands.
+  TimingPerDrawCall = 0x2, // Time each draw call.
+  TimingPerFrame    = 0x4, // Time each frame.
+}
+
+// TimingInfo holds the results of a resolved GetTimingInfo request.
+// This is experimental and will change in the near future.
+class TimingInfo {
+  array<AtomTimer>      PerCommand  // The timing results of each command.
+  array<AtomRangeTimer> PerDrawCall // The timing results of each draw call.
+  array<AtomRangeTimer> PerFrame    // The timing results of each frame.
+}
+
+// AtomTimer holds the timing information for a single atom.
+// This is experimental and will change in the near future.
+class AtomTimer {
+  u64 AtomId      // The atom that was timed.
+  u64 Nanoseconds // The time taken for that atom.
+}
+
+// AtomRangeTimer holds the timing information for a range of contiguous atoms.
+// This is experimental and will change in the near future.
+class AtomRangeTimer {
+  u64 FromAtomId  // The first atom in the range that was timed.
+  u64 ToAtomId    // The last atom in the range that was timed.
+  u64 Nanoseconds // The time taken for all atoms in the range.
+}
+
+// RenderSettings contains settings and flags to be used in replaying and
+// returning a bound render target's color buffer.
+class RenderSettings {
+  u32  MaxWidth  // The desired maximum width of the image. The returned image may be larger than this.
+  u32  MaxHeight // The desired minimum height of the image. The returned image may be larger than this.
+  bool Wireframe // True if the all geometry should be rendered as wireframe.
+}
+
+// The Schema describes all the array, map, enum, struct, class, atom and state
+// types stored within the AtomStream and state. Clients use the Schema to know
+// how to interpret these types.
+class Schema {
+  array<ArrayInfo*>   Arrays
+  array<MapInfo*>     Maps
+  array<EnumInfo*>    Enums
+  array<StructInfo*>  Structs
+  array<ClassInfo*>   Classes
+  array<AtomInfo>     Atoms
+  StructInfo*         State
+}
+
+// TypeKind is the exhaustive list of all types supported by the schema.
+enum TypeKind {
+  // Primative types
+  Bool               =  0,
+  S8                 =  1,
+  U8                 =  2,
+  S16                =  3,
+  U16                =  4,
+  S32                =  5,
+  U32                =  6,
+  F32                =  7,
+  S64                =  8,
+  U64                =  9,
+  F64                = 10,
+  String             = 11,
+  Enum               = 12,
+  // Complex types
+  Struct             = 14,
+  Class              = 15,
+  Array              = 16,
+  Map                = 17,
+  Pointer            = 18,
+  Memory             = 19, // Currently unimplemented.
+  Any                = 20, // Will be removed.
+}
+
+// TypeInfo is the base of all schema defined types.
+@Interface class TypeInfo {
+  string   Name // The name of the type.
+  TypeKind Kind // The kind of the type.
+}
+
+// ArrayInfo describes an array instantiation.
+class ArrayInfo : TypeInfo {
+  TypeInfo* ElementType // The array's element type.
+}
+
+// MapInfo describes a map instantiation.
+class MapInfo : TypeInfo {
+  TypeInfo* KeyType   // The map's key type.
+  TypeInfo* ValueType // The map's value type.
+}
+
+// EnumInfo describes an enum type.
+class EnumInfo : TypeInfo {
+  array<EnumEntry>  Entries // The list of enum entries.
+  array<EnumInfo*>  Extends // The list of enums this enum extends from. Will be removed.
+}
+
+// EnumEntry describes a single name-value entry in an enum.
+class EnumEntry {
+  string Name  // The name of the enum entry.
+  u32    Value // The value of the enum entry. May be extended to u64.
+}
+
+// StructInfo describes the body of a single struct type.
+class StructInfo : TypeInfo {
+  array<FieldInfo*> Fields // The list of fields in the struct.
+}
+
+// ClassInfo describes the body of a single class type.
+class ClassInfo : TypeInfo {
+  array<FieldInfo*> Fields  // The list of fields in the class.
+  array<ClassInfo*> Extends // The list of classes this enum classes from. Likely to be removed.
+}
+
+// FieldInfo describes a single field entry in a class or struct.
+class FieldInfo {
+  string    Name // The name of the field.
+  TypeInfo* Type // The type of the field.
+}
+
+// AtomInfo describes a single Atom type.
+class AtomInfo {
+  u16                   Type              // The atom's unique type identifier.
+  string                Name              // The name of the atom.
+  array<ParameterInfo>  Parameters        // The list of atom parameters.
+  bool                  IsCommand         // True if the atom represents an API command.
+  bool                  IsDrawCall        // True if the atom represents a draw call.
+  bool                  IsEndOfFrame      // True if the atom represents the end of a frame.
+  string                DocumentationUrl  // The URL to the atom's documentation.
+}
+
+// ParameterInfo describes a single Atom parameter.
+class ParameterInfo {
+  string        Name // Name of the parameter.
+  TypeInfo*     Type // Type of the parameter.
+  bool          Out  // True if the parameter is an output.
+}
+
+// SimpleInfo is used for all primative types.
+class SimpleInfo : TypeInfo {}
