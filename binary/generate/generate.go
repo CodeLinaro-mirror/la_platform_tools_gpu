@@ -105,12 +105,14 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 		f.Type = FromType(pkg, decl.Type())
 		f.Anonymous = decl.Anonymous()
 	}
-	s.updateID()
+	s.UpdateID()
 	s.Delegating = len(s.Fields) == 1 && s.Fields[0].Anonymous
 	return s
 }
 
-func (s *Struct) updateID() {
+
+// UpdateID recalculates the struct ID from the current signature.
+func (s *Struct) UpdateID() {
 	b := &bytes.Buffer{}
 	fmt.Fprintf(b, "struct %s.%s {", s.Package, s.Name)
 	for i, f := range s.Fields {

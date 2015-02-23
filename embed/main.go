@@ -16,11 +16,14 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/tools/imports"
 )
 
 const header = `
@@ -42,22 +45,22 @@ package %s
 
 `
 
+type embed struct {
+	filename string
+	name     string
+	contents []byte
+}
+
 func run() error {
 	pwd, err := filepath.Abs(".")
 	if err != nil {
 		return err
 	}
-	_, pkg := filepath.Split(pwd)
-	output, err := os.Create("embed.go")
-	if err != nil {
-		return err
-	}
-	defer func() { output.Close() }()
-	fmt.Fprintf(output, header, pkg)
 	files, err := ioutil.ReadDir(".")
 	if err != nil {
 		return err
 	}
+	entries := []embed{}
 	for _, info := range files {
 		if info.IsDir() {
 			continue
@@ -71,11 +74,32 @@ func run() error {
 		if err != nil {
 			return err
 		}
-		fmt.Fprintf(output, "const %s = \"", name)
-		for _, b := range data {
-			fmt.Fprintf(output, "\\x%02x", b)
-		}
-		fmt.Fprintf(output, "\"\n")
+		entries = append(entries, embed{info.Name(), name, data})
+	}
+	// write the header
+	_, pkg := filepath.Split(pwd)
+	b := &bytes.Buffer{}
+	fmt.Fprintf(b, header, pkg)
+	// write the map
+	fmt.Fprint(b, "var embedded = map[string]string{\n")
+	for _, entry := range entries {
+		fmt.Fprintf(b, "%s_file:\n%s,\n", entry.name, entry.name)
+	}
+	fmt.Fprint(b, "}\n")
+	// write the data lumps
+	for _, entry := range entries {
+		fmt.Fprintf(b, "const %s_file = `%s`\n", entry.name, entry.filename)
+		fmt.Fprintf(b, "const %s = `", entry.name)
+		fmt.Fprint(b, strings.Replace(string(entry.contents), "`", "` + \"`\" + `", -1))
+		fmt.Fprint(b, "`\n")
+	}
+	// reformat the output
+	result, err := imports.Process("", b.Bytes(), nil)
+	if err != nil {
+		result = b.Bytes()
+	}
+	if err := ioutil.WriteFile("embed.go", result, 0666); err != nil {
+		return err
 	}
 	return nil
 }
