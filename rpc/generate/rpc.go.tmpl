@@ -12,12 +12,13 @@ limitations under the License.
 */}}
 {{Global "module" ""}}
 {{Include "rpc_common_go.tmpl"}}
-{{$ | Macro "Rpc" "role" "" "api" | GoFmt | Write "rpc.go"}}
-{{$ | Macro "Rpc" "role" "Extra" "api" | GoFmt | Write "rpc_extra.go"}}
-{{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write "rpc_helpers.go"}}
-{{$ | Macro "Client" | GoFmt | Write "rpc_client.go"}}
-{{$ | Macro "Server" | GoFmt | Write "rpc_server.go"}}
-{{$ | Macro "Binary" | GoFmt | Write "rpc_binary.go"}}
+{{$api := Global "API"}}
+{{$ | Macro "Rpc" "role" "" "api" | GoFmt | Write (print $api "_rpc.go")}}
+{{$ | Macro "Rpc" "role" "Extra" "api" | GoFmt | Write (print $api "_extra.go")}}
+{{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write (print $api "_helpers.go")}}
+{{$ | Macro "Client" | GoFmt | Write (print $api "_client.go")}}
+{{$ | Macro "Server" | GoFmt | Write (print $api "_server.go")}}
+{{$ | Macro "Binary" | GoFmt | Write (print $api "_binary.go")}}
 
 
 {{define "Rpc"}}
