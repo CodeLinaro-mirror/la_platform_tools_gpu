@@ -20,10 +20,10 @@
   Entry point.
 -------------------------------------------------------------------------------
 */}}
-{{define "Main"}}
+{{define "Api"}}
 {{template "AOSPCopyright"}}
 ¶
-{{template "Go.GeneratedHeader"}}
+{{template "C++.GeneratedHeader"}}
 ¶
 #include "GetGfxProcAddress.h"
 #include "GfxApi.h"
@@ -82,7 +82,7 @@ namespace {
 void Register(Interpreter* interpreter) {
   {{range $i, $c := $.Functions}}
     {{if not (GetAnnotation $c "synthetic")}}
-      interpreter->registerFunction(Ids::{{Macro "Go.Public" $c.Name}}, call{{Macro "Go.Public" $c.Name}});
+      interpreter->registerFunction(Ids::{{Macro "C++.Public" $c.Name}}, call{{Macro "C++.Public" $c.Name}});
     {{end}}
   {{end}}
 }
@@ -107,7 +107,7 @@ void Initialize() {
 
 
 {{define "CommandHandler"}}
-bool call{{Macro "Go.Public" $.Name}}(Stack* stack, bool pushReturn) {
+bool call{{Macro "C++.Public" $.Name}}(Stack* stack, bool pushReturn) {
   {{range $i, $p := (Reverse $.CallParameters)}}
     {{Macro "C++.ParameterType" $p}} {{$p.Name}} = stack->pop<{{Macro "C++.ParameterType" $p}}>();
   {{end}}
@@ -154,3 +154,6 @@ bool call{{Macro "Go.Public" $.Name}}(Stack* stack, bool pushReturn) {
 }
 ¶
 {{end}}
+
+{{Include "GfxApiCommon.tmpl" "../../../gfxapi/cpp_common.tmpl"}}
+{{$ | Macro "Api" | Format (Global "clang-format") | Write "GfxApi.cpp"}}

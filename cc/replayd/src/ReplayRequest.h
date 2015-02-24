@@ -54,7 +54,7 @@ public:
     const std::vector<std::pair<std::string, uint32_t>>& getResources() const;
 
     // Get the name and the size of a resource identified by the given index
-    const std::pair<std::string, uint32_t>& getResourceData(uint32_t resourceId) const;
+    const std::pair<std::string, uint32_t>& getResourceData(uint32_t resourceIdx) const;
 
     // Get the base address and the size (count of instructions) of the instruction list
     const std::pair<const uint32_t*, uint32_t>& getInstructionList() const;

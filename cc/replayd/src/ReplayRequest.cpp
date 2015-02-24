@@ -67,8 +67,8 @@ const std::pair<const void*, uint32_t>& ReplayRequest::getConstantMemory() const
     return mConstantMemory;
 }
 
-const std::pair<std::string, uint32_t>& ReplayRequest::getResourceData(uint32_t resourceId) const {
-    return mResources[resourceId];
+const std::pair<std::string, uint32_t>& ReplayRequest::getResourceData(uint32_t resourceIdx) const {
+    return mResources[resourceIdx];
 }
 
 const std::pair<const uint32_t*, uint32_t>& ReplayRequest::getInstructionList() const {

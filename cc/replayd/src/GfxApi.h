@@ -926,19 +926,6 @@ static const uint32_t GL_MAP_FLUSH_EXPLICIT_BIT = 16;
 static const uint32_t GL_MAP_UNSYNCHRONIZED_BIT = 32;
 };  // end of namespace MapBufferRangeAccess
 
-namespace SyncCondition {
-static const uint32_t GL_SYNC_GPU_COMMANDS_COMPLETE = 37143;
-};  // end of namespace SyncCondition
-
-namespace ClientWaitSyncSignal {
-static const uint32_t GL_ALREADY_SIGNALED = 37146;
-static const uint32_t GL_TIMEOUT_EXPIRED = 37147;
-static const uint32_t GL_CONDITION_SATISFIED = 37148;
-static const uint32_t GL_WAIT_FAILED = 37149;
-};  // end of namespace ClientWaitSyncSignal
-
-namespace SyncFlags {};  // end of namespace SyncFlags
-
 typedef uint32_t RenderbufferId;
 typedef uint32_t TextureId;
 typedef uint32_t FramebufferId;
@@ -947,7 +934,6 @@ typedef uint32_t ShaderId;
 typedef uint32_t ProgramId;
 typedef uint32_t VertexArrayId;
 typedef uint32_t QueryId;
-typedef uint32_t SyncObjectId;
 typedef int32_t UniformLocation;
 typedef int32_t AttributeLocation;
 typedef void* IndicesPointer;

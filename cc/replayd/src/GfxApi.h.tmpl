@@ -20,10 +20,10 @@
   Entry point.
 -------------------------------------------------------------------------------
 */}}
-{{define "Main"}}
+{{define "Api"}}
 {{template "AOSPCopyright"}}
 ¶
-{{template "Go.GeneratedHeader"}}
+{{template "C++.GeneratedHeader"}}
 ¶
 #ifndef ANDROID_CAZE_GFXAPI_FUNCTIONS_H
 #define ANDROID_CAZE_GFXAPI_FUNCTIONS_H
@@ -49,7 +49,7 @@ namespace Ids {
   // List of the function ids for the API functions. This list have to be consistent with the
   // function ids on the server side because they are part of the communication protocol
   {{range $i, $c := $.Functions}}
-    static const uint16_t {{Macro "Go.Public" $c.Name}} = {{$i}};
+    static const uint16_t {{Macro "C++.Public" $c.Name}} = {{$i}};
   {{end}}
 } // end of namespace FunctionIds
 ¶
@@ -108,3 +108,6 @@ namespace Ids {
 
   extern {{Macro "FunctionPtrType" $}} {{$.Name}};
 {{end}}
+
+{{Include "GfxApiCommon.tmpl" "../../../gfxapi/cpp_common.tmpl"}}
+{{$ | Macro "Api" | Format (Global "clang-format") | Write "GfxApi.h"}}
