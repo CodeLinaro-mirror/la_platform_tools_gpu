@@ -56,7 +56,7 @@ func filterStructs(pkg *loader.PackageInfo) []*types.TypeName {
 
 func run() error {
 	flag.Parse()
-	config := loader.Config{SourceImports: true}
+	config := loader.Config{}
 	_, err := config.FromArgs(flag.Args(), false)
 	if err != nil {
 		return err
