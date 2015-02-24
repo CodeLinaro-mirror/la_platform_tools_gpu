@@ -19,17 +19,11 @@ func (l *Transforms) Add(t ...Transformer) {
 	*l = append(*l, t...)
 }
 
-// Add is a convenience function for appending the list of Transformer functions
-// f to the end of the Transforms list.
-func (l *Transforms) AddFunc(f ...func(id Id, atom Atom, output Writer)) {
-	for _, f := range f {
-		*l = append(*l, transformerFunc(f))
-	}
-}
+// Transform is an atom transform function conforming to the Transformer
+// interface. It can be used to simplify the creation of simple Transformers.
+type Transform func(id Id, atom Atom, output Writer)
 
-type transformerFunc func(id Id, atom Atom, output Writer)
-
-func (f transformerFunc) Transform(id Id, atom Atom, output Writer) {
+func (f Transform) Transform(id Id, atom Atom, output Writer) {
 	f(id, atom, output)
 }
 

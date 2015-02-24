@@ -77,14 +77,6 @@ cmd ImageInfoId GetFramebufferDepth(DeviceId  device,
                                     u64       after)
 { return ? }
 
-// GetGlErrorCodes returns an identifier to a binary blob holding the results of
-// glGetError after every atom in the given capture and context for the given
-// device. This function is experimental and will change signature or be removed.
-cmd BinaryId GetGlErrorCodes(DeviceId  device,
-                             CaptureId capture,
-                             u32       contextId)
-{ return ? }
-
 // ReplaceAtom creates and new capture based on an existing capture, but with
 // a single atom replaced.
 cmd CaptureId ReplaceAtom(CaptureId capture,

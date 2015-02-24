@@ -16,14 +16,12 @@ package transform
 
 import "android.googlesource.com/platform/tools/gpu/atom"
 
-// ContextFilter is an implementation of Transformer that only outputs atoms
-// matching the specified context id.
-type ContextFilter struct {
-	Context atom.ContextId // The context to filter to.
-}
-
-func (t *ContextFilter) Transform(id atom.Id, a atom.Atom, output atom.Writer) {
-	if a.ContextId() == t.Context {
-		output.Write(id, a)
+// ContextFilter returns a Transformer that only outputs atoms matching the
+// specified context id.
+func ContextFilter(context atom.ContextId) atom.Transform {
+	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+		if a.ContextId() == context {
+			out.Write(id, a)
+		}
 	}
 }

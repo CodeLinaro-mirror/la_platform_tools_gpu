@@ -29,7 +29,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 	"android.googlesource.com/platform/tools/gpu/replay/vm"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type stackItem struct {
@@ -71,7 +70,8 @@ type Builder struct {
 	instructions    []asm.Instruction
 	decoders        []idPostDecoder
 	stack           []stackItem
-	device          *service.Device
+	ptrSize         int
+	ptrAlignment    int
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -81,18 +81,20 @@ type Builder struct {
 	Remappings map[interface{}]value.Pointer
 }
 
-// New returns a newly constructed Builder configured to replay on device.
-func New(device *service.Device) *Builder {
-	ptrAlignment := device.PointerAlignment
+// New returns a newly constructed Builder configured to replay on a target
+// architecture that has a pointer size of ptrSize bytes and and alignment of
+// ptrAlignment bytes.
+func New(ptrSize, ptrAlignment int) *Builder {
 	return &Builder{
-		constantMemory:  newConstantEncoder(int(ptrAlignment)),
+		constantMemory:  newConstantEncoder(ptrAlignment),
 		heap:            allocator{alignment: uint64(ptrAlignment)},
 		temp:            allocator{alignment: uint64(ptrAlignment)},
 		resourceIdToIdx: map[binary.ID]uint32{},
 		resources:       []vm.ResourceInfo{},
 		observedRanges:  memory.RangeList{},
 		instructions:    []asm.Instruction{},
-		device:          device,
+		ptrSize:         ptrSize,
+		ptrAlignment:    ptrAlignment,
 		Remappings:      make(map[interface{}]value.Pointer),
 	}
 }
@@ -116,13 +118,13 @@ func (b *Builder) removeInstruction(at int) {
 // PointerSize returns the size of a pointer in bytes for the target replay
 // architecture.
 func (b *Builder) PointerSize() int {
-	return int(b.device.PointerSize)
+	return b.ptrSize
 }
 
 // PointerAlignment returns the required alignment of a pointer in bytes for the
 // replay target architecture.
 func (b *Builder) PointerAlignment() int {
-	return int(b.device.PointerAlignment)
+	return b.ptrAlignment
 }
 
 // AllocateMemory allocates and returns a pointer to a block of memory in the
