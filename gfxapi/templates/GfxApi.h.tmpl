@@ -14,15 +14,15 @@
  * limitations under the License.
  */}}
 
+{{Include "GfxApiCommon.tmpl" "cpp_common.tmpl"}}
+{{$ | Macro "GfxApi.h" | Format (Global "clang-format") | Write "GfxApi.h"}}
 
 {{/*
 -------------------------------------------------------------------------------
   Entry point.
 -------------------------------------------------------------------------------
 */}}
-{{define "Api"}}
-{{template "AOSPCopyright"}}
-¶
+{{define "GfxApi.h"}}
 {{template "C++.GeneratedHeader"}}
 ¶
 #ifndef ANDROID_CAZE_GFXAPI_FUNCTIONS_H
@@ -108,6 +108,3 @@ namespace Ids {
 
   extern {{Macro "FunctionPtrType" $}} {{$.Name}};
 {{end}}
-
-{{Include "GfxApiCommon.tmpl" "../../../gfxapi/templates/cpp_common.tmpl"}}
-{{$ | Macro "Api" | Format (Global "clang-format") | Write "GfxApi.h"}}

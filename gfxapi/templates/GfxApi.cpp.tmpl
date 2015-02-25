@@ -15,14 +15,15 @@
  */}}
 
 
+{{Include "GfxApiCommon.tmpl" "cpp_common.tmpl"}}
+{{$ | Macro "GfxApi.cpp" | Format (Global "clang-format") | Write "GfxApi.cpp"}}
+
 {{/*
 -------------------------------------------------------------------------------
   Entry point.
 -------------------------------------------------------------------------------
 */}}
-{{define "Api"}}
-{{template "AOSPCopyright"}}
-¶
+{{define "GfxApi.cpp"}}
 {{template "C++.GeneratedHeader"}}
 ¶
 #include "GetGfxProcAddress.h"
@@ -154,6 +155,3 @@ bool call{{Macro "C++.Public" $.Name}}(Stack* stack, bool pushReturn) {
 }
 ¶
 {{end}}
-
-{{Include "GfxApiCommon.tmpl" "../../../gfxapi/templates/cpp_common.tmpl"}}
-{{$ | Macro "Api" | Format (Global "clang-format") | Write "GfxApi.cpp"}}
