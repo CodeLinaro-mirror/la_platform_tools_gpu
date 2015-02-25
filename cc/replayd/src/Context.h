@@ -87,12 +87,6 @@ private:
     // Stops the timer identified by u8 index and returns u64 elapsed nanoseconds since its start.
     bool stopTimer(Stack* stack, bool pushReturn);
 
-    // Implementation of the synthetic function driverGetPropertyUint in the gl api file.
-    bool driverGetPropertyUint(Stack* stack);
-
-    // Implementation of the synthetic function driverGetPropertyString in the gl api file.
-    bool driverGetPropertyString(Stack* stack);
-
     // Flushes any pending post data buffered from calling postData.
     bool flushPostBuffer(Stack *stack);
 

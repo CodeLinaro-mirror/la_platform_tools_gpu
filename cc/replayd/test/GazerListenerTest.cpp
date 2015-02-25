@@ -39,13 +39,14 @@ namespace caze {
 namespace test {
 namespace {
 
-const size_t BUFFER_SIZE = 4096;
+const uint64_t MAX_MEMORY_SIZE = 1024;
 
 class GazerListenerTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
         mConnection = new StrictMock<MockConnection>();
-        mGazerListener.reset(new GazerListener(std::unique_ptr<Connection>(mConnection)));
+        mGazerListener.reset(
+            new GazerListener(std::unique_ptr<Connection>(mConnection), MAX_MEMORY_SIZE));
     }
 
     StrictMock<MockConnection>* mConnection;

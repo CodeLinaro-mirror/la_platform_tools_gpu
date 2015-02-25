@@ -155,5 +155,5 @@ bool call{{Macro "C++.Public" $.Name}}(Stack* stack, bool pushReturn) {
 ¶
 {{end}}
 
-{{Include "GfxApiCommon.tmpl" "../../../gfxapi/cpp_common.tmpl"}}
+{{Include "GfxApiCommon.tmpl" "../../../gfxapi/templates/cpp_common.tmpl"}}
 {{$ | Macro "Api" | Format (Global "clang-format") | Write "GfxApi.cpp"}}

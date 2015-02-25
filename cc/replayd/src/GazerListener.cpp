@@ -28,7 +28,11 @@
 namespace android {
 namespace caze {
 
-GazerListener::GazerListener(std::unique_ptr<Connection> conn) : mConn(std::move(conn)) {
+static const uint32_t PROTOCOL_VERSION = 1;
+
+GazerListener::GazerListener(std::unique_ptr<Connection> conn, uint64_t maxMemorySize) :
+        mConn(std::move(conn)),
+        mMaxMemorySize(maxMemorySize) {
 }
 
 std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
@@ -46,23 +50,21 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
         }
 
         switch (connectionType) {
-            case DEVICE_INFO:
+            case DEVICE_INFO: {
                 CAZE_INFO("Sending device info\n");
-                uint8_t data;
+                uint8_t ptrSize = sizeof(void*);
+                uint8_t ptrAlign = std::alignment_of<void*>::value;
 
-                data = sizeof(void*);
-                if (client->send(&data, sizeof(data)) != sizeof(data)) {
-                    CAZE_WARNING("Failed to send pointer size\n");
-                    break;
-                }
-
-                data = std::alignment_of<double>::value;
-                if (client->send(&data, sizeof(data)) != sizeof(data)) {
-                    CAZE_WARNING("Failed to send alignment\n");
-                    break;
+                if (!client->send(PROTOCOL_VERSION) ||
+                    !client->send(ptrSize) ||
+                    !client->send(ptrAlign) ||
+                    !client->send(mMaxMemorySize)) {
+                    CAZE_WARNING("Failed to send connection header\n");
+                    return nullptr;
                 }
                 break;
-            case REPLAY_REQUEST:
+            }
+            case REPLAY_REQUEST: {
                 std::unique_ptr<GazerConnection> conn = GazerConnection::create(std::move(client));
                 if (conn != nullptr) {
                     return conn;
@@ -70,6 +72,7 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
                     CAZE_WARNING("Loading GazerConnection failed!\n");
                 }
                 break;
+            }
         }
     }
 }

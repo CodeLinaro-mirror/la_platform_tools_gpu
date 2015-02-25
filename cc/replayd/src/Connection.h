@@ -50,7 +50,16 @@ public:
     // Helper methods for sending and receiving strings
     bool sendString(const std::string& s);
     bool readString(std::string* s);
+
+    // Helper method for sending plain-old-data values.
+    // Returns true if the send was successful, otherwise false.
+    template<typename T> inline bool send(const T& data);
 };
+
+template<typename T>
+inline bool Connection::send(const T& data) {
+    return send(&data, sizeof(T)) == sizeof(T);
+}
 
 }  // end of namespace caze
 }  // end of namespace android

@@ -110,12 +110,6 @@ void Context::registerCallbacks(Interpreter* interpreter) {
                                   [this](Stack* stack, bool pushReturn) {
         return this->stopTimer(stack, pushReturn);
     });
-    interpreter->registerFunction(gfxapi::Ids::DriverGetPropertyUint, [this](Stack* stack, bool) {
-        return this->driverGetPropertyUint(stack);
-    });
-    interpreter->registerFunction(gfxapi::Ids::DriverGetPropertyString, [this](Stack* stack, bool) {
-        return this->driverGetPropertyString(stack);
-    });
     interpreter->registerFunction(gfxapi::Ids::FlushPostBuffer, [this](Stack* stack, bool) {
         return this->flushPostBuffer(stack);
     });
@@ -213,70 +207,6 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
         CAZE_WARNING("Error while calling function StopTimer\n");
     }
     return false;
-}
-
-bool Context::driverGetPropertyUint(Stack* stack) {
-    uint32_t* value = stack->pop<uint32_t*>();
-    uint32_t propertyId = stack->pop<uint32_t>();
-
-    if (stack->isValid()) {
-        CAZE_INFO("driverGetPropertyUint(%u, %p)\n", propertyId, value);
-        switch (propertyId) {
-            case gfxapi::DriverPropertyUint::MAX_MEMORY_SIZE:
-                *value = mMemoryManager->getSize();
-                return true;
-            case gfxapi::DriverPropertyUint::REQUIRE_SHADER_PATCHING:
-                *value = (TARGET_OS != CAZE_OS_ANDROID);
-                return true;
-            default:
-                CAZE_WARNING("Unsupported id for DriverGetPropertyUint: %u\n", propertyId);
-                return false;
-        }
-    } else {
-        CAZE_WARNING("Error while calling function DriverGetPropertyUint\n");
-        return false;
-    }
-}
-
-bool Context::driverGetPropertyString(Stack* stack) {
-    char* value = stack->pop<char*>();
-    uint32_t bufferLen = stack->pop<uint32_t>();
-    uint32_t propertyId = stack->pop<uint32_t>();
-
-    if (stack->isValid()) {
-        CAZE_INFO("driverGetPropertyString(%u, %u, %p)\n", propertyId, bufferLen, value);
-
-        if (bufferLen == 0) {
-            return true;
-        }
-
-        const char* retValue = "";
-
-        switch (propertyId) {
-            case gfxapi::DriverPropertyString::GL_EXTENSIONS:
-                retValue = mRenderer->extensions();
-                break;
-            case gfxapi::DriverPropertyString::GL_RENDERER:
-                retValue = mRenderer->name();
-                break;
-            case gfxapi::DriverPropertyString::GL_VENDOR:
-                retValue = mRenderer->vendor();
-                break;
-            case gfxapi::DriverPropertyString::GL_VERSION:
-                retValue = mRenderer->version();
-                break;
-            default:
-                CAZE_WARNING("Unsupported id for driverGetPropertyString: %u\n", propertyId);
-                return false;
-        }
-
-        strncpy(value, retValue, bufferLen - 1);
-        value[bufferLen - 1] = 0;
-        return true;
-    } else {
-        CAZE_WARNING("Error while calling function driverGetPropertyString\n");
-        return false;
-    }
 }
 
 }  // end of namespace caze

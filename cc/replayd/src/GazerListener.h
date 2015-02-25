@@ -28,8 +28,10 @@ class GazerConnection;
 // Class for listening to incoming connections from the server (gazer)
 class GazerListener {
 public:
-    // Opens a new socket for listening to incoming connections on the specific host and port.
-    explicit GazerListener(std::unique_ptr<Connection> conn);
+    // Construct a GazerListener using the specified connection.
+    // maxMemorySize is the maximum memory size that can be reported as
+    // supported by this device.
+    explicit GazerListener(std::unique_ptr<Connection> conn, uint64_t maxMemorySize);
 
     // Accept a new incoming connection on the underlying socket and creates a GazerConnection over
     // the newly created socket object.
@@ -43,6 +45,8 @@ private:
 
     // The underlying server socket for the listener
     std::unique_ptr<Connection> mConn;
+    // The maximum memory size that can be reported as supported by this device.
+    uint64_t mMaxMemorySize;
 };
 
 }  // end of namespace caze

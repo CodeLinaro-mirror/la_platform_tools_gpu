@@ -51,7 +51,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
     if (listenConn == nullptr) {
         CAZE_FATAL("Failed to create listening socket\n");
     }
-    GazerListener listener(std::move(listenConn));
+    GazerListener listener(std::move(listenConn), memoryManager->getSize());
 
     std::unique_ptr<ResourceInMemoryCache> resourceProvider(ResourceInMemoryCache::create(
             ResourceDiskCache::create(ResourceRequester::create(), cachePath),
