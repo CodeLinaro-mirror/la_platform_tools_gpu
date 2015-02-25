@@ -54,11 +54,13 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
                 CAZE_INFO("Sending device info\n");
                 uint8_t ptrSize = sizeof(void*);
                 uint8_t ptrAlign = std::alignment_of<void*>::value;
+                uint8_t targetOs = TARGET_OS;
 
                 if (!client->send(PROTOCOL_VERSION) ||
                     !client->send(ptrSize) ||
                     !client->send(ptrAlign) ||
-                    !client->send(mMaxMemorySize)) {
+                    !client->send(mMaxMemorySize) ||
+                    !client->send(targetOs)) {
                     CAZE_WARNING("Failed to send connection header\n");
                     return nullptr;
                 }

@@ -17,6 +17,8 @@
 #ifndef ANDROID_CAZE_TARGET_H
 #define ANDROID_CAZE_TARGET_H
 
+// These values are used for target differentiation on session initialization.
+// Do not change them without also updating the server-side replay code.
 #define CAZE_OS_LINUX   1
 #define CAZE_OS_OSX     2
 #define CAZE_OS_WINDOWS 3
