@@ -16,7 +16,6 @@ package replay
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -66,12 +65,9 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 	d := &androidDevice{deviceBase{device: &service.Device{
 		Name:  "Android device",
 		Model: "Unknown",
-		OS:    "Unknown",
 	}}}
 
 	if loadDeviceConfig(d, db, m.logger) == nil {
-		d.transportDevice().RequiresShaderPatching = false // HACK FIXME
-
 		id, err := db.Store(d.device, log.Nop{})
 		if err != nil {
 			panic(err)
@@ -87,13 +83,10 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 func (m *discovery) discoverLocalDevices(db database.Database) {
 	d := &localDevice{deviceBase{device: &service.Device{
 		Name:  "Local machine",
-		Model: runtime.GOARCH,
-		OS:    runtime.GOOS,
+		Model: "Unknown",
 	}}}
 
 	if err := loadDeviceConfig(d, db, m.logger); err == nil {
-		d.transportDevice().RequiresShaderPatching = true // HACK FIXME
-
 		id, err := db.Store(d.device, log.Nop{})
 		if err != nil {
 			panic(err)
@@ -150,9 +143,20 @@ func loadDeviceConfig(d device, db database.Database, logger log.Logger) (err er
 			return err
 		}
 
+		var os deviceOS
+		if val, err := dec.Uint8(); err == nil {
+			os = deviceOS(val)
+		} else {
+			return err
+		}
+
+		td.OS = os.String()
+		// TODO: RequiresShaderPatching should be replaced with explicit tests made
+		// by each of the gfxapis for extensions they require.
+		td.RequiresShaderPatching = !os.IsAndroid()
+
 	default:
 		return fmt.Errorf("Unsupported device protocol version: %d", protocolVersion)
 	}
-
 	return nil
 }

@@ -15,6 +15,7 @@
 package replay
 
 import (
+	"fmt"
 	"io"
 	"net"
 	"os"
@@ -24,6 +25,38 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
+
+// deviceOS is an enumerator of operating systems that the replay target may be
+// running on.
+type deviceOS uint8
+
+// These must be kept in sync with TARGET_OS in cc/replayd/src/Target.h
+const (
+	osLinux   deviceOS = 1
+	osOSX     deviceOS = 2
+	osWindows deviceOS = 3
+	osAndroid deviceOS = 4
+)
+
+func (os deviceOS) IsLinux() bool   { return os == osLinux }
+func (os deviceOS) IsOSX() bool     { return os == osOSX }
+func (os deviceOS) IsWindows() bool { return os == osWindows }
+func (os deviceOS) IsAndroid() bool { return os == osAndroid }
+
+func (os deviceOS) String() string {
+	switch os {
+	case osLinux:
+		return "linux"
+	case osOSX:
+		return "darwin"
+	case osWindows:
+		return "windows"
+	case osAndroid:
+		return "android"
+	default:
+		return fmt.Sprintf("Unknown<%d>", os)
+	}
+}
 
 type device interface {
 	transportId() service.DeviceId
