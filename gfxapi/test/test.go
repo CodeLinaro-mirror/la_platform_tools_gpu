@@ -38,6 +38,10 @@ func (s *state) Memory() *memory.Memory {
 	return &s.Mem
 }
 
+func (s *state) GetFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (uint32, uint32, error) {
+	return 0, 0, nil
+}
+
 func initialState() *state {
 	return &state{}
 }
