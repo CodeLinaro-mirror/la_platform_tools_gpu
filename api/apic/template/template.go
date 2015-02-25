@@ -70,10 +70,10 @@ func (f *Functions) Include(templates ...string) error {
 
 // Write takes a string and writes it into the specified file.
 // The filename is relative to the output directory.
-func (f *Functions) Write(fileName string, value string) error {
+func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
 	commands.Log("Writing output to %q\n", outputPath)
-	return ioutil.WriteFile(outputPath, []byte(value), 0666)
+	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
 }
 
 func doTemplate(flags flag.FlagSet) {
