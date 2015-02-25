@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go=rpc_binary.go -java=$GOPATH/src/gaze/java/src/com/android/tools/rpclib/rpccore rpc.go
+//go:generate codergen -go=rpc_binary.go rpc.go
 
 // package rpc implements a remote procedure call system using the binary
 // pacakge for serialization and the multiplexer package to merge in-flight
