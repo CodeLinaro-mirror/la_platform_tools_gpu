@@ -22,10 +22,10 @@ package test
 
 import (
 	"gaze/gfxapi"
-	"gaze/replay"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
