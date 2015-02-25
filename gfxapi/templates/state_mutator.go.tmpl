@@ -1,0 +1,61 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+{{Global "module" ""}}
+{{Include "go_common.tmpl" "expression_evaluator.go.tmpl"}}
+{{$ | Macro "state_mutator.go" | GoFmt | Write "state_mutator.go"}}
+
+{{define "state_mutator.go"}}
+  {{template "Go.GeneratedHeader" (Global "OutputDir")}}
+
+  import (
+    "log"
+    "reflect"
+
+    "android.googlesource.com/platform/tools/gpu/atom"
+    "android.googlesource.com/platform/tools/gpu/memory"
+  )
+
+  type StateMutator struct {
+    State          *state
+    ValidateOutput bool
+  }
+
+  var _ atom.Writer = StateMutator{} // Interface compliance test
+
+  func (m StateMutator) Write(ψ atom.Id, Θ atom.Atom) {
+    switch ω := Θ.(type) {
+    {{range $n, $c := $.Functions}}
+      case *{{Macro "Go.CmdName" $c}}:
+        Σ := {{Macro "Go.CmdOutsName" $c}}{}
+        {{/* Construct slices large enough to hold all simulated output */}}
+        {{range $p := $c.FullParameters}}
+          {{$count := GetArrayParamCount $p}}
+          {{if and ($count) ($p.Output) (IsArray $p.Type)}}
+            Σ.{{Macro "Go.Public" $p.Name}} = make({{$p.Type.Typename}}, {{Macro "Read" $count}})
+          {{end}}
+        {{end}}
+        {{if $limit := GetAnnotation $c "ReturnSize"}}
+          {{if IsArray $c.Return.Type}}
+            Σ.{{Macro "Go.Public" $c.Return.Name}} = make({{$c.Return.Type.Typename}}, {{Macro "Read" (index $limit.Arguments 0)}})
+          {{end}}
+        {{end}}
+        {{Macro "Block" $c.Block}}
+        if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
+          log.Printf("Applying {{$c.Name}} expected %v got %v", ω.Out, Σ)
+        }
+    {{end}}
+    case *memory.Observation:
+      m.State.Mem.Slice(ω.Range).Write(memory.ResourceData(ω.ResourceId, ω.Range.Size))
+    }
+  }
+{{end}}

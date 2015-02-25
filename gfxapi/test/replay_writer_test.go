@@ -1,0 +1,599 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package test
+
+import (
+	"bytes"
+	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	"android.googlesource.com/platform/tools/gpu/replay/opcode"
+	"android.googlesource.com/platform/tools/gpu/replay/vm"
+)
+
+func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []atom.Atom, opcodes []interface{}, constants []byte) {
+	b := builder.New(ptrSize, ptrAlignment)
+	r := newReplayWriter(b)
+	for _, atom := range atoms {
+		r.Write(0, atom, wantOutput)
+	}
+
+	payload, _ := b.Build(log.Nop{})
+
+	ops := bytes.NewBuffer(payload.Opcodes.Data)
+	gotOpcodes, err := opcode.Disassemble(ops)
+	if err != nil {
+		t.Errorf("Failed to disassemble opcodes: %v", err)
+	}
+	opcode.CheckDisassembly(t, gotOpcodes, opcodes...)
+
+	gotConstants := payload.Constants
+	if !bytes.Equal(gotConstants.Data, constants) {
+		t.Errorf("Constant buffer was not as expected.\nGot:      % .2x\nExpected: % .2x", gotConstants, constants)
+	}
+}
+
+func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoid(),
+	}, []interface{}{
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid.Id},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_SingleInputArg(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidU8(20),
+		NewCmdVoidS8(-20),
+		NewCmdVoidU16(200),
+		NewCmdVoidS16(-200),
+		NewCmdVoidF32(1.0),
+		NewCmdVoidU32(2000),
+		NewCmdVoidS32(-2000),
+		NewCmdVoidF64(1.0),
+		NewCmdVoidU64(20000),
+		NewCmdVoidS64(-20000),
+		NewCmdVoidBool(true),
+		NewCmdVoidString("hello"),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeUint8, Value: 20},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU8.Id},
+
+		opcode.PushI{DataType: vm.TypeInt8, Value: 0xfffec},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS8.Id},
+
+		opcode.PushI{DataType: vm.TypeUint16, Value: 200},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU16.Id},
+
+		opcode.PushI{DataType: vm.TypeInt16, Value: 0xfff38},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS16.Id},
+
+		opcode.PushI{DataType: vm.TypeFloat, Value: 0x7f},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidF32.Id},
+
+		opcode.PushI{DataType: vm.TypeUint32, Value: 2000},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU32.Id},
+
+		opcode.PushI{DataType: vm.TypeInt32, Value: 0xff830},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS32.Id},
+
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3ff},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidF64.Id},
+
+		opcode.PushI{DataType: vm.TypeUint64, Value: 20000},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU64.Id},
+
+		opcode.PushI{DataType: vm.TypeInt64, Value: 0xfb1e0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS64.Id},
+
+		opcode.PushI{DataType: vm.TypeBool, Value: 1},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidBool.Id},
+
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidString.Id},
+	}, []byte{'h', 'e', 'l', 'l', 'o', 0})
+}
+
+func TestOperationsOpCall_3_Strings(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoid3Strings("hello", "world", "hello"),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x08},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Strings.Id},
+	}, []byte{
+		/* 0x00 */ 'h', 'e', 'l', 'l', 'o', 0x00, 0x00, 0x00,
+		/* 0x08 */ 'w', 'o', 'r', 'l', 'd', 0x00,
+	})
+}
+
+func TestOperationsOpCall_3_Arrays(t *testing.T) {
+	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoid3Arrays(S8Array{1, 2, 3}, StringArray{"hello", "world", ":D"}, BoolArray{true, false, true}),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00}, // a
+
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x08},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x10},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x18},
+		opcode.StoreV{Address: 0x10},
+		opcode.StoreV{Address: 0x08},
+		opcode.StoreV{Address: 0x00},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
+
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x20},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Arrays.Id},
+	}, []byte{
+		/* 0x00 */ 0x01, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
+		/* 0x08 */ 'h', 'e', 'l', 'l', 'o', 0x00, 0x00, 0x00,
+		/* 0x10 */ 'w', 'o', 'r', 'l', 'd', 0x00, 0x00, 0x00,
+		/* 0x18 */ ':', 'D', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		/* 0x20 */ 0x01, 0x00, 0x01,
+	})
+}
+
+func TestOperationsOpCall_ArrayOfStrings_32bitOS(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidArrayOfStrings(StringArray{"an", "array", "of", "strings"}),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x04},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x0c},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x10},
+		opcode.StoreV{Address: 0x0c},
+		opcode.StoreV{Address: 0x08},
+		opcode.StoreV{Address: 0x04},
+		opcode.StoreV{Address: 0x00},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidArrayOfStrings.Id},
+	}, []byte{
+		/* 0x00 */ 'a', 'n', 0x00, 0x00,
+		/* 0x04 */ 'a', 'r', 'r', 'a', 'y', 0x00, 0x00, 0x00,
+		/* 0x0c */ 'o', 'f', 0x00, 0x00,
+		/* 0x10 */ 's', 't', 'r', 'i', 'n', 'g', 's', 0x00,
+	})
+}
+
+func TestOperationsOpCall_ArrayOfStrings_64bitOS(t *testing.T) {
+	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidArrayOfStrings(StringArray{"an", "array", "of", "strings"}),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x08},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x10},
+		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x18},
+		opcode.StoreV{Address: 0x18},
+		opcode.StoreV{Address: 0x10},
+		opcode.StoreV{Address: 0x08},
+		opcode.StoreV{Address: 0x00},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidArrayOfStrings.Id},
+	}, []byte{
+		/* 0x00 */ 'a', 'n', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		/* 0x08 */ 'a', 'r', 'r', 'a', 'y', 0x00, 0x00, 0x00,
+		/* 0x10 */ 'o', 'f', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		/* 0x18 */ 's', 't', 'r', 'i', 'n', 'g', 's', 0x00,
+	})
+}
+
+func TestOperationsOpCall_ReturnValue_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdU8(20),
+		NewCmdS8(-20),
+		NewCmdU16(200),
+		NewCmdS16(-200),
+		NewCmdF32(1.0),
+		NewCmdU32(2000),
+		NewCmdS32(-2000),
+		NewCmdF64(1.0),
+		NewCmdU64(20000),
+		NewCmdS64(-20000),
+		NewCmdBool(true),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU8.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS8.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU16.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS16.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdBool.Id}, opcode.StoreV{Address: 0},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValue_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdU8(20),
+		NewCmdS8(-20),
+		NewCmdU16(200),
+		NewCmdS16(-200),
+		NewCmdF32(1.0),
+		NewCmdU32(2000),
+		NewCmdS32(-2000),
+		NewCmdF64(1.0),
+		NewCmdU64(20000),
+		NewCmdS64(-20000),
+		NewCmdBool(true),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU8.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS8.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU16.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS16.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF32.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU32.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS32.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF64.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU64.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS64.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdBool.Id}, opcode.StoreV{Address: 0},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValueString_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdString("hello"),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdString.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Strcpy{MaxSize: 10},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValueString_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdString("hello"),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdString.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Strcpy{MaxSize: 10},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValueArray_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdArrayOfFloat.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Copy{Count: 40},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValueArray_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdArrayOfFloat.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Copy{Count: 40},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 40},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValuePointer_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdPointer(0x100),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdPointer.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Copy{Count: 10},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_ReturnValuePointer_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdPointer(0x100),
+	}, []interface{}{
+		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdPointer.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
+		opcode.Copy{Count: 10},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_SingleOutputArg_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidOutU8(20),
+		NewCmdVoidOutS8(-20),
+		NewCmdVoidOutU16(200),
+		NewCmdVoidOutS16(-200),
+		NewCmdVoidOutF32(1.0),
+		NewCmdVoidOutU32(2000),
+		NewCmdVoidOutS32(-2000),
+		NewCmdVoidOutF64(1.0),
+		NewCmdVoidOutU64(20000),
+		NewCmdVoidOutS64(-20000),
+		NewCmdVoidOutBool(true),
+		NewCmdVoidOutString("hello"),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU8.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS8.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU16.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS16.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF32.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU32.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS32.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF64.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU64.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS64.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutBool.Id},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutString.Id},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_SingleOutputArg_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdVoidOutU8(20),
+		NewCmdVoidOutS8(-20),
+		NewCmdVoidOutU16(200),
+		NewCmdVoidOutS16(-200),
+		NewCmdVoidOutF32(1.0),
+		NewCmdVoidOutU32(2000),
+		NewCmdVoidOutS32(-2000),
+		NewCmdVoidOutF64(1.0),
+		NewCmdVoidOutU64(20000),
+		NewCmdVoidOutS64(-20000),
+		NewCmdVoidOutBool(true),
+		NewCmdVoidOutString("hello"),
+		NewCmdVoidOutFixedSizeBuffer(0xdeadbeef),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU8.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS8.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU16.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS16.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF32.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU32.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS32.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF64.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU64.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS64.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutBool.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutString.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
+		opcode.Post{},
+
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutFixedSizeBuffer.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_3OutputStrings_DontWantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidOut3Strings("hello", "world", "hello"),
+	}, []interface{}{
+		// 0x00: a (byte[0x0f])
+		// 0x10: b (byte[0x1f])
+		// 0x30: c (byte[0x2f])
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x30},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Strings.Id},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_3OutputStrings_WantOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
+		NewCmdVoidOut3Strings("hello", "world", "hello"),
+	}, []interface{}{
+		// 0x00: a (byte[0x0f])
+		// 0x10: b (byte[0x1f])
+		// 0x30: c (byte[0x2f])
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x30},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Strings.Id},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 0x5f},
+		opcode.Post{},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_RemappedInputs(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoid3Remapped(0x10, 0x20, 0x10),
+	}, []interface{}{
+		opcode.PushI{DataType: vm.TypeUint32, Value: 0x10},
+		opcode.Clone{Index: 0},
+		opcode.StoreV{Address: 0x0},
+		opcode.PushI{DataType: vm.TypeUint32, Value: 0x20},
+		opcode.Clone{Index: 0},
+		opcode.StoreV{Address: 0x4},
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x00},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Remapped.Id},
+	}, []byte{})
+}
+
+func TestOperationsOpCall_RemappedOutputs(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidOut3Remapped(0x10, 0x20, 0x10),
+	}, []interface{}{
+		// TODO: Sub-optimal output - these could be written straight to the remapped slots.
+		// 0x00: id<0x10>
+		// 0x04: id<0x20>
+		// 0x08: a
+		// 0x0c: b
+		// 0x10: c
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x08},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0c},
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Remapped.Id},
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x08}, // a
+		opcode.StoreV{Address: 0x00},                         // id<0x10>
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x0c}, // b
+		opcode.StoreV{Address: 0x04},                         // id<0x20>
+	}, []byte{})
+}
+
+func TestOperationsOpCall_RemappedArrayOutput(t *testing.T) {
+	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
+		NewCmdVoidOutArrayOfRemapped(RemappedArray{0x10, 0x20, 0x10, 0x30, 0x10}),
+	}, []interface{}{
+		// 0x00: id<0x10>
+		// 0x04: id<0x20>
+		// 0x08: id<0x30>
+		// 0x0c: a[0]
+		// 0x10: a[1]
+		// 0x14: a[2]
+		// 0x18: a[3]
+		// 0x1c: a[4]
+		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0c},
+		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutArrayOfRemapped.Id},
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x0c}, // a[0]
+		opcode.StoreV{Address: 0x00},                         // id<0x10>
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x10}, // a[1]
+		opcode.StoreV{Address: 0x04},                         // id<0x20>
+		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x18}, // a[3]
+		opcode.StoreV{Address: 0x08},                         // id<0x30>
+	}, []byte{})
+}

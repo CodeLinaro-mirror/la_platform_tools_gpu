@@ -1,0 +1,174 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ type for the specified AST type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Type"}}
+  {{if not (IsType $)}}{{Macro "C++.Type" (TypeOf $)}}
+  {{else if IsPseudonym   $}}{{$.Name}}
+  {{else if IsVoid        $}}void
+  {{else if IsBool        $}}bool
+  {{else if IsInt         $}}int
+  {{else if IsUint        $}}uint
+  {{else if IsU8          $}}uint8_t
+  {{else if IsS8          $}}int8_t
+  {{else if IsU16         $}}uint16_t
+  {{else if IsS16         $}}int16_t
+  {{else if IsF32         $}}float
+  {{else if IsU32         $}}uint32_t
+  {{else if IsS32         $}}int32_t
+  {{else if IsF64         $}}double
+  {{else if IsU64         $}}uint64_t
+  {{else if IsS64         $}}int64_t
+  {{else if IsPointerType $}}void*
+  {{else if IsString      $}}const char*
+  {{else if IsEnum        $}}uint32_t
+  {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
+  {{else}}{{Error "C++.Type passed unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of type-name paired parameters for given
+  function, including the return type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.FullParameters"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.FullParameters}}
+    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} {{$p.Name}}§
+  {{end}}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of type-name paired parameters for given
+  function, excluding the return type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CallParameters"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} {{$p.Name}}§
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ type for the given parameter.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ParameterType"}}
+  {{AssertType $ "Parameter"}}
+
+  {{$ty := TypeOf $}}
+  {{if $.Output}}
+    {{     if IsPointerType $ty}}{{Macro "C++.Type" $ty}}
+    {{else if IsArray       $ty}}{{Macro "C++.Type" $ty}}
+    {{else if IsString      $ty}}{{Macro "C++.Type" $ty}}
+    {{else                     }}{{Macro "C++.Type" $ty}}*
+    {{end}}
+  {{else}}{{Macro "C++.Type" $ty}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ return type for the given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ReturnType"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "C++.ParameterType" $.Return}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to read the given expression.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Read"}}
+  {{     if IsBoolValue    $}}{{$}}
+  {{else if IsInt32Value   $}}{{$}}
+  {{else if IsUint32Value  $}}{{$}}
+  {{else if IsFloat64Value $}}{{$}}
+  {{else if IsStringValue  $}}{{$}}
+  {{else if IsParameter    $}}{{Macro "C++.ReadParameter" $}}
+  {{else if IsBinaryOp     $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
+  {{else if IsCall         $}}{{$.Target.Function.Name}}()
+  {{else}}{{Error "macro C++.Read called with unsupported type: %T" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to read the given parameter, de-referencing if the
+  parameter is an output and its type is not a pointer, array or string.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ReadParameter"}}
+  {{AssertType $ "Parameter"}}
+
+  {{$ty := TypeOf $}}
+  {{$deref := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty))}}
+  {{if and $.Output $deref}}*{{end}}{{$.Name}}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Transforms the given string or identifier into a format used for a public
+  type or field. Example:
+    this_is_public -> ThisIsPublic
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Public"}}
+  {{AssertType $ "string"}}
+
+  {{$ | SplitOn "_" | Title}}
+{{end}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comment stating that the file is automatically generated.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.GeneratedHeader"}}
+  {{template "C++.CommentHeader" "Automatically generated file. Do not modify!"}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comment block containing the specified text.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CommentHeader"}}
+  {{AssertType $ "string"}} {{/* The comment block body text */}}
+  ////////////////////////////////////////////////////////////////////////////////
+  // {{.}}
+  ////////////////////////////////////////////////////////////////////////////////
+{{end}}
+
+{{$clang_style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"}}
+{{Global "clang-format" (Strings "clang-format" "-style" $clang_style)}}

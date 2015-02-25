@@ -1,0 +1,595 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+{{Global "module" ""}}
+{{Include "go_common.tmpl" "expression_evaluator.go.tmpl"}}
+{{$ | Macro "replay_writer.go" | GoFmt | Write "replay_writer.go"}}
+
+{{define "replay_writer.go"}}
+  {{template "Go.GeneratedHeader" (Global "OutputDir")}}
+
+  import (
+    "fmt"
+    "io"
+    "io/ioutil"
+
+    "android.googlesource.com/platform/tools/gpu/atom"
+    "android.googlesource.com/platform/tools/gpu/binary"
+    "android.googlesource.com/platform/tools/gpu/memory"
+    "android.googlesource.com/platform/tools/gpu/replay/builder"
+    "android.googlesource.com/platform/tools/gpu/replay/value"
+    "android.googlesource.com/platform/tools/gpu/replay/vm"
+  )
+
+  type replayer interface {
+    replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool)
+  }
+
+  func readBytes(r io.Reader, c uint64) ([]byte, error) {
+    b := make([]byte, c)
+    _, err := io.ReadFull(r, b)
+    return b, err
+  }
+
+  func readString(r io.Reader, c uint64) (string, error) {
+    if buf, err := readBytes(r, c); err == nil {
+      str := string(buf)
+      for i, c := range str {
+        if c == 0 {
+          return str[:i], nil
+        }
+      }
+      return str, nil
+    } else {
+      return "", err
+    }
+  }
+
+  {{template "DeclareBuilderFunctionInfos" $}}
+
+  {{template "DeclarePseudonymsValue" $}}
+
+  {{template "DeclareArraysValue" $}}
+
+  {{template "DeclarePostbacks" $}}
+
+  type replayWriter struct {
+    builder    *builder.Builder
+    state      *state
+  }
+
+  func newReplayWriter(b *builder.Builder) *replayWriter {
+    return &replayWriter{
+      builder:    b,
+      state:      initialState(),
+    }
+  }
+
+  func loadRemap(b *builder.Builder, key interface{}, val value.Value) {
+    ptr, found := b.Remappings[key]
+    if found {
+      b.Load(val.Type(), ptr)
+    } else {
+      ptr = b.AllocateMemory(uint64(val.Type().Size(b.PointerSize())))
+      b.Push(val) // We have an input to an unknown id, use the unmapped value.
+      b.Clone(0)
+      b.Store(ptr)
+      b.Remappings[key] = ptr
+    }
+  }
+
+  func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty vm.Type) {
+    ptr, found := b.Remappings[key]
+    if !found {
+      ptr = b.AllocateMemory(uint64(ty.Size(b.PointerSize())))
+      b.Load(ty, val)
+      b.Store(ptr)
+      b.Remappings[key] = ptr
+    }
+  }
+
+  {{template "Process" $}}
+
+  {{range $c := $.Functions}}
+    {{Macro "DeclareCommandReplay" $c}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a function info definition for each of the commands.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareBuilderFunctionInfos"}}
+  {{AssertType $ "API"}}
+
+  {{range $i, $c := $.Functions}}
+    var {{Macro "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
+      Id: {{$i}},§
+      ReturnType: {{Macro "BuilderType" $c.Return.Type}},§
+      Parameters: {{len $c.CallParameters}},§
+    }
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares the value method for each pseudonym type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclarePseudonymsValue"}}
+  {{AssertType $ "API"}}
+
+  {{range $p := $.Pseudonyms}}
+    {{if not (GetAnnotation $p "replay_custom_value")}}
+      {{$v := print (Macro "Go.Type" $p.To) "(c)"}}
+      func (c {{$p.Name}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value { return {{Macro "Value" "Type" $p.To "Name" $v}} }
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares the value method for each array type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareArraysValue"}}
+  {{AssertType $ "API"}}
+
+  {{range $a := $.Arrays}}
+    {{if not (IsAny $a.ValueType)}}
+      func (arr {{Macro "Go.Type" $a}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+        if len(arr) > 0 {
+          for _, e := range arr {
+            {{Macro "PushInput" "Type" $a.ValueType "Name" "e"}}
+          }
+          return b.Buffer(len(arr))
+        } else {
+          return value.AbsolutePointer(0)
+        }
+      }
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares the postback structs for each command's outputs.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclarePostbacks"}}
+  {{AssertType $ "API"}}
+
+  {{range $c := $.Functions}}
+    {{if len $c.Outputs}} {{/* Skip commands with no output */}}
+      {{$name := Macro "CmdPostbacksName" $c}}
+      type {{$name}} struct {
+        {{range $p := $c.Outputs}}
+          {{Macro "Go.Public" $p.Name}} {{Macro "PostbackType" (TypeOf $p)}}
+        {{end}}
+      }
+
+      {{$array_counts := Macro "ArrayCountsList" "Command" $c "Postfix" "uint64, "}}
+      func (o *{{$name}}) Decode({{$array_counts}}d *binary.Decoder) error {
+        {{/* Decode each of the output parameters */}}
+        {{range $p := $c.Outputs}}
+          {{$name := print "o." (Macro "Go.Public" $p.Name)}}
+          {{$count := Macro "ArrayCount" $p.Name}}
+          {{Macro "DecodePostback" "Type" (TypeOf $p) "Name" $name "Count" $count}}
+        {{end}}
+        return nil
+      }
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the name of the specified command's postback structure
+-------------------------------------------------------------------------------
+*/}}
+{{define "CmdPostbacksName"}}{{AssertType $ "Function"}}{{Macro "Go.Public" $.Name}}_Postback{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Returns the go type used to store the postback value of the specified type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "PostbackType"}}
+  {{AssertType $ "Type"}}
+
+  {{if IsPointerType $}}[]byte
+  {{else          }}{{Macro "Go.Type" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Decode the specified value that was returned through a post-back.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DecodePostback"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+  {{AssertType $.Count "string"}}
+
+
+  {{     if IsString      $.Type}}if val, err := readString(d, {{$.Count}}); err == nil { {{$.Name}} = val } else { return err }
+  {{else if IsPointerType $.Type}}if val, err := readBytes(d, {{$.Count}});  err == nil { {{$.Name}} = val } else { return err }
+  {{else if IsPseudonym   $.Type}}
+    {{$underlying := $.Type.To}}
+    {
+      var x {{Macro "Go.Type" $underlying}}
+      {{Macro "DecodePostback" "Type" $underlying "Name" "x" "Count" $.Count}}
+      {{$.Name}} = {{$.Type.Name}}(x)
+    }
+  {{else if IsArray       $.Type}}
+    {{$.Name}} = make({{Macro "PostbackType" $.Type}}, {{$.Count}})
+    for i := range {{$.Name}} {
+      {{$el := print $.Name "[i]"}}
+      {{Macro "DecodePostback" "Type" $.Type.ValueType "Name" $el "Count" "<array-element>"}}
+    }
+  {{else}}{{Macro "Go.Decode" "Type" $.Type "Name" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Process function
+-------------------------------------------------------------------------------
+*/}}
+{{define "Process"}}
+  {{AssertType $ "API"}}
+
+  func (r *replayWriter) Write(id atom.Id, a atom.Atom, wantOutput bool) {
+    b := r.builder
+    switch ω := a.(type) {
+      case *memory.Observation:
+        b.Observation(ω.Range, ω.ResourceId)
+      case replayer:
+        ω.replay(id, r.state, b, wantOutput)
+      case *atom.EOS:
+      default:
+        panic(fmt.Errorf("Unsupported atom type %T for Write", ω))
+    }
+    b.EndAtom()
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the replay function for the specified command
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareCommandReplay"}}
+  {{AssertType $ "Function"}}
+
+  {{$name := Macro "Go.Public" $.Name}}
+
+  var _ = replayer(&{{$name}}{}) // interface compliance check
+  {{if GetAnnotation $ "replay_custom"}}
+    func (ω *{{$name}}) defaultReplay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+  {{else}}
+    func (ω *{{$name}}) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+  {{end}}
+    {{/* Declare all the of local variables describing the array counts */}}
+    {{template "DefineArrayCounts" $}}
+
+    {{if len $.Outputs}}
+      {{/* Create a temporary buffer to hold all the output parameters */}}
+      outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{§
+        {{range $i, $p := $.Outputs}}
+          {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
+        {{end}}
+      })
+    {{end}}
+
+    {{/* Push all the parameters on the stack */}}
+    {{range $p := $.CallParameters}}
+      {{$type := TypeOf $p}}
+      {{$name := print "ω." (Macro "Go.Parameter" $p)}}
+      {{if $p.Output}} b.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
+      {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
+      {{end}}
+    {{end}}
+
+    {{/* Call the function */}}
+    {{if not (IsVoid $.Return.Type)}}
+      b.CallPush({{Macro "BuilderFunctionInfo" $}})
+      {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
+      {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
+    {{else}}
+      b.CallNoPush({{Macro "BuilderFunctionInfo" $}})
+    {{end}}
+
+    {{/* Simulate the call */}}
+    StateMutator{State: s}.Write(id, ω)
+
+    {{/* Remap outputs */}}
+    {{range $i, $p := $.Outputs}}
+      {{$type    := TypeOf $p}}
+      {{$name    := print "ω." (Macro "Go.Parameter" $p)}}
+      {{$pointer := print "outputs[" $i "]"}}
+      {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
+    {{end}}
+
+    {{if len $.Outputs}}
+      {{/* Post back the data, if it is wanted */}}
+      if wantOutput {
+        b.Post(outputs[0], size, id, func(d *binary.Decoder) (interface{}, error) {
+          postback := {{Macro "CmdPostbacksName" $}}{}
+          {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
+          if err := postback.Decode({{$array_counts}}d); err != nil {
+            return nil, err
+          }
+          return postback, nil
+        })
+      }
+    {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits logic to store the pushed return value to the specified address.
+-------------------------------------------------------------------------------
+*/}}
+{{define "StoreReturn"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Destination "string"}}
+
+  {{$name := "result"}}
+
+  {{     if IsPseudonym $.Type}}{{Macro "StoreReturn" "Type" $.Type.To "Destination" $.Destination}}
+  {{else if IsArray     $.Type}}
+    b.Push({{$.Destination}})
+    b.Copy({{Macro "ArrayCount" $name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}})
+  {{else if IsString $.Type}}
+    b.Push({{$.Destination}})
+    b.Strcpy({{Macro "ArrayCount" $name}})
+  {{else if IsPointerType $.Type}}
+    b.Push({{$.Destination}})
+    b.Copy({{Macro "ArrayCount" $name}})
+  {{else}}b.Store({{$.Destination}})
+  {{end}}
+
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits logic to push the specified input variable to the VM's stack.
+-------------------------------------------------------------------------------
+*/}}
+{{define "PushInput"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+
+  {{if (GetAnnotation $.Type "replay_remap")}}
+    if key, remap := {{$.Name}}.remap(ω, s); remap {
+      loadRemap(b, key, {{Macro "Value" "Type" $.Type "Name" $.Name}})
+    } else {
+      b.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+    }
+  {{else}}
+    b.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits logic to call the output remapping for the specified variable, if
+  annotated with the 'remap' annotation.
+-------------------------------------------------------------------------------
+*/}}
+{{define "RemapOutput"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+  {{AssertType $.Pointer "string"}}
+
+  {{if (GetAnnotation $.Type "replay_remap")}}
+    if key, remap := {{$.Name}}.remap(ω, s); remap {
+      storeRemap(b, key, {{$.Pointer}}, {{Macro "BuilderType" $.Type}})
+    }
+  {{else if IsArray $.Type}}
+    {{$type    := $.Type.ValueType}}
+    {{$name    := "e"}}
+    {{$pointer := print $.Pointer ".Offset(uint64(i * " (Macro "SizeOf" "Type" $type) "))"}}
+    {{$remap_el := Macro "RemapOutput" "Type" $type "Name" $name "Pointer" "ptr"}}
+    {{if $remap_el}}
+      for i, e := range {{$.Name}} {
+        ptr := {{$pointer}}
+        {{$remap_el}}
+      }
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the name of the variable holding the specified command's function id.
+-------------------------------------------------------------------------------
+*/}}
+{{define "BuilderFunctionInfo"}}{{AssertType $ "Function"}}funcInfo{{Macro "Go.Public" $.Name}}{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the size in bytes of the specified parameter.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ParameterSize"}}
+  {{AssertType $ "Parameter"}}
+
+  {{Macro "SizeOf" "Type" (TypeOf $) "Name" $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the variable name holding the count of elements in the specified array.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ArrayCount"}}{{AssertType $ "string"}}{{$}}_cnt{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the size in bytes of the specified variable by type and name.
+-------------------------------------------------------------------------------
+*/}}
+{{define "SizeOf"}}
+  {{AssertType $.Type "Type"}}
+
+  {{     if IsPseudonym     $.Type}}{{Macro "SizeOf" "Type" $.Type.To "Name" $.Name}}
+  {{else if IsArray         $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}}
+  {{else if IsString        $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}}
+  {{else if IsPointerType   $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}}
+  {{else if IsBool          $.Type}}1
+  {{else if IsS8            $.Type}}1
+  {{else if IsU8            $.Type}}1
+  {{else if IsS16           $.Type}}2
+  {{else if IsU16           $.Type}}2
+  {{else if IsS32           $.Type}}4
+  {{else if IsU32           $.Type}}4
+  {{else if IsF32           $.Type}}4
+  {{else if IsS64           $.Type}}8
+  {{else if IsU64           $.Type}}8
+  {{else if IsF64           $.Type}}8
+  {{else if IsEnum          $.Type}}4
+  {{else                          }}{{Error "macro SizeOf '%s' called with unsupported type: %v" $.Name $.Type}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  For each output array parameter, declare a local variable assigned to the
+  number of elements in the array.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DefineArrayCounts"}}
+  {{AssertType $ "Function"}}
+
+  {{range $p := $.FullParameters}}
+    {{if $p.Output}}
+      {{$count := GetArrayParamCount $p}}
+      {{if $count}}
+        {{Macro "ArrayCount" $p.Name}} := uint64({{Macro "Read" $count}})
+      {{end}}
+    {{end}}
+  {{end}}
+  {{if $limit := GetAnnotation $ "ReturnSize"}}
+    {{Macro "ArrayCount" $.Return.Name}} := uint64({{Macro "Read" (index $limit.Arguments 0)}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comma-separated list of array count variable names used by the
+  specified command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ArrayCountsList" }}
+  {{AssertType $.Command "Function"}}
+  {{AssertType $.Postfix "string"}}
+
+  {{range $p := $.Command.FullParameters}}
+    {{if $p.Output}}
+      {{$count := GetArrayParamCount $p}}
+      {{if $count}}
+        {{Macro "ArrayCount" $p.Name}} {{$.Postfix}}
+      {{end}}
+    {{end}}
+  {{end}}
+  {{if GetAnnotation $.Command "ReturnSize"}}
+      {{Macro "ArrayCount" $.Command.Return.Name}} {{$.Postfix}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Returns the builder.Value holding the specified variable.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Value"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+
+  {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(b, ω, s)
+  {{else if IsBool          $.Type}}value.Bool({{$.Name}})
+  {{else if IsS8            $.Type}}value.S8({{$.Name}})
+  {{else if IsU8            $.Type}}value.U8({{$.Name}})
+  {{else if IsS16           $.Type}}value.S16({{$.Name}})
+  {{else if IsU16           $.Type}}value.U16({{$.Name}})
+  {{else if IsF32           $.Type}}value.F32({{$.Name}})
+  {{else if IsU32           $.Type}}value.U32({{$.Name}})
+  {{else if IsS32           $.Type}}value.S32({{$.Name}})
+  {{else if IsF64           $.Type}}value.F64({{$.Name}})
+  {{else if IsU64           $.Type}}value.U64({{$.Name}})
+  {{else if IsS64           $.Type}}value.S64({{$.Name}})
+  {{else if IsString        $.Type}}b.String({{$.Name}})
+  {{else if IsPointerType   $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
+  {{else if IsEnum          $.Type}}value.U32({{$.Name}})
+  {{else if IsArray         $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsPseudonym     $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else                          }}{{Error "macro Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the replay builder type for the given command return type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "BuilderType"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym     $}}{{Macro "BuilderType" $.To}}
+  {{else if IsPointerType   $}}vm.TypeAbsolutePointer
+  {{else if IsMemory        $}}vm.TypeAbsolutePointer
+  {{else if IsString        $}}vm.TypeAbsolutePointer
+  {{else if IsArray         $}}vm.TypeAbsolutePointer
+  {{else if IsPointer       $}}vm.TypeAbsolutePointer
+  {{else if IsEnum          $}}vm.TypeUint32
+  {{else if IsBool          $}}vm.TypeBool
+  {{else if IsInt           $}}vm.TypeInt32
+  {{else if IsUint          $}}vm.TypeUint32
+  {{else if IsS8            $}}vm.TypeInt8
+  {{else if IsU8            $}}vm.TypeUint8
+  {{else if IsS16           $}}vm.TypeInt16
+  {{else if IsU16           $}}vm.TypeUint16
+  {{else if IsS32           $}}vm.TypeInt32
+  {{else if IsU32           $}}vm.TypeUint32
+  {{else if IsF32           $}}vm.TypeFloat
+  {{else if IsS64           $}}vm.TypeInt64
+  {{else if IsU64           $}}vm.TypeUint64
+  {{else if IsF64           $}}vm.TypeDouble
+  {{else if IsVoid          $}}vm.TypeVoid
+  {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
