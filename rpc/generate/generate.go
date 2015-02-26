@@ -215,18 +215,18 @@ func converter(pkgName string) func(api *semantic.API) *binary.File {
 	}
 }
 
-func wrapStructWriter(f func(io.Writer, *binary.Struct) error) func(s *binary.Struct) string {
-	return func(s *binary.Struct) string {
+func wrapStructWriter(f func(io.Writer, *binary.Struct) error) func(s *binary.Struct) (string, error) {
+	return func(s *binary.Struct) (string, error) {
 		b := &bytes.Buffer{}
-		f(b, s)
-		return b.String()
+		err := f(b, s)
+		return b.String(), err
 	}
 }
 
-func wrapFileWriter(f func(*binary.File) ([]byte, error)) func(s *binary.File) string {
-	return func(s *binary.File) string {
-		result, _ := f(s)
-		return string(result)
+func wrapFileWriter(f func(*binary.File) ([]byte, error)) func(s *binary.File) (string, error) {
+	return func(s *binary.File) (string, error) {
+		result, err := f(s)
+		return string(result), err
 	}
 }
 

@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"flag"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
@@ -30,7 +31,7 @@ var (
 		Name:      "template",
 		ShortHelp: "Passes the ast to a template for code generation",
 	}
-	dir    = command.Flags.String("dir", "", "The output directory")
+	dir    = command.Flags.String("dir", cwd(), "The output directory")
 	tracer = command.Flags.String("t", "", "The template function trace expression")
 )
 
@@ -38,6 +39,11 @@ func init() {
 	command.Flags.Var(&globalList, "G", "A global value setting for the template")
 	command.Run = doTemplate
 	commands.Register(command)
+}
+
+func cwd() string {
+	p, _ := os.Getwd()
+	return p
 }
 
 // Include loads each of the templates and executes their main bodies.

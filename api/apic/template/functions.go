@@ -49,7 +49,10 @@ type Functions struct {
 // package if needed.
 func NewFunctions(apiFile string, api *semantic.API, loader func(filename string) ([]byte, error), funcs template.FuncMap) *Functions {
 	basePath, err := filepath.Abs(*dir)
-	commands.MaybeError("", err)
+	if err != nil {
+		err := fmt.Errorf("Could not get absolute path to directory: '%s'. %v", *dir, err)
+		commands.MaybeError("", err)
+	}
 	f := &Functions{
 		templates: template.New("FunctionHolder"),
 		funcs:     template.FuncMap{},
