@@ -17,6 +17,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -43,11 +44,12 @@ type embed struct {
 }
 
 func run() error {
+	flag.Parse()
 	pwd, err := filepath.Abs(".")
 	if err != nil {
 		return err
 	}
-	files, err := ioutil.ReadDir(".")
+	files, err := ioutil.ReadDir(pwd)
 	if err != nil {
 		return err
 	}

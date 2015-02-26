@@ -18,7 +18,7 @@ limitations under the License.
 {{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write (print $api "_helpers.go")}}
 {{$ | Macro "Client" | GoFmt | Write (print $api "_client.go")}}
 {{$ | Macro "Server" | GoFmt | Write (print $api "_server.go")}}
-{{$ | Macro "Binary" | GoFmt | Write (print $api "_binary.go")}}
+{{$ | Macro "Binary" | Write (print $api "_binary.go")}}
 
 
 {{define "Rpc"}}

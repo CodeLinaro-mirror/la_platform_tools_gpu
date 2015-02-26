@@ -9,18 +9,5 @@
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
+// See the License for the specific language governing permissions ands
 // limitations under the License.
-
-package main
-
-func init() {
-	copyrights[".api"] = copyright{
-		current: go_aosp_2015,
-		old: []string{
-			go_aosp_old,
-		},
-		invalid: []string{},
-		skip:    []string{},
-	}
-}

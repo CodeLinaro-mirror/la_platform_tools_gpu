@@ -24,6 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
 var (
@@ -80,6 +81,11 @@ func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
 	commands.Log("Writing output to %q\n", outputPath)
 	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
+}
+
+// Copyright emits the copyright header specified by name with the «Tool» set to tool.
+func (f *Functions) Copyright(name string, tool string) (string, error) {
+	return copyright.Build(name, copyright.Info{Year: "2015", Tool: tool}), nil
 }
 
 func doTemplate(flags flag.FlagSet) {
