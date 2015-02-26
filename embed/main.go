@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// embed is a tool to embed text files as resource.
+// The embed command is used to embed text files into Go executables as strings.
 package main
 
 import (

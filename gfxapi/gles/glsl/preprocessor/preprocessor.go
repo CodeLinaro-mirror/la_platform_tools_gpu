@@ -12,9 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package preprocessor defines the preprocessor for the GLES Shading Language. It can be used in
-// two ways. The function Preprocess takes an input strings and returns the sequence of
-// preprocessed tokens as a result. The function PreprocessStream returns a Preprocessor object,
+// Package preprocessor defines the preprocessor for the OpenGL ES Shading Language.
+//
+// It can be used in two ways. The function Preprocess takes an input strings and returns the sequence
+// of preprocessed tokens as a result. The function PreprocessStream returns a Preprocessor object,
 // which can be used to access the result in a streaming fashion, using the Next() and Peek()
 // methods, returning TokenInfo objects. The end of input is signalled by a nil Token field of
 // the object.

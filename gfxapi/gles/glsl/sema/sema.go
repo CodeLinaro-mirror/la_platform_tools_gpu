@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package sema performs semantic checking of GLES Shading Language programs
+// Package sema performs semantic checking of OpenGL ES Shading Language programs.
 package sema
 
 import (

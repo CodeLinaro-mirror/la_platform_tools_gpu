@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package evaluator is responsible for evaluating expressions in GLES Shading Language programs.
+// Package evaluator is responsible for evaluating expressions in OpenGL ES Shading Language programs.
 package evaluator
 
 import (

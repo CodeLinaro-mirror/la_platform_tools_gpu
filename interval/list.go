@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// package interval implements algorithms that operate on lists of intervals
 package interval
 
 // List is the interface to an object that can be used as an interval list by

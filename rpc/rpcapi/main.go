@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// RPCAPI is a tool to parse generate the rpc client server and transport
-// code automatically from an api description.
+// The rpcapi command generates RPC client, server and transport code
+// automatically from an API description.
 package main
 
 import (

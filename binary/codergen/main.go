@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Codergen is a tool to parse go code and automatically generate encoders and
+// The codergen command parses go code to automatically generate encoders and
 // decoders for the structs it finds.
 package main
 

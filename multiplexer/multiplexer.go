@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-// package multiplexer provides multiple data-stream multiplexing over a single binary data-stream.
+// Package multiplexer provides multiple data-stream multiplexing over a single binary data-stream.
 package multiplexer
 
 import (

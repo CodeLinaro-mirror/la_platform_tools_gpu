@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-// Package asm contains high-level instructions to control the replay VM.
+// Package asm contains high-level instructions to control the replay virtual machine.
 package asm

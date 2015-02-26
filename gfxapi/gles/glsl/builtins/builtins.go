@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package builtins contains the definitions of all GLES Shading Language builtin functions
+// Package builtins contains the definitions of all OpenGL ES Shading Language builtin functions.
 //
 // It is not expected to be used directly by the user, it just provides the other packages with
 // the list of builtin functions, their signatures and implementations.

@@ -14,9 +14,10 @@
 
 //go:generate codergen -go=rpc_binary.go rpc.go
 
-// package rpc implements a remote procedure call system using the binary
-// pacakge for serialization and the multiplexer package to merge in-flight
-// requests onto a single stream.
+// Package rpc implements a remote procedure call system.
+//
+// RPC uses the binary package for serialization and the multiplexer package to
+// merge in-flight requests onto a single stream.
 package rpc
 
 import "fmt"

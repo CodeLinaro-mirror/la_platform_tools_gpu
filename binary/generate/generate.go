@@ -110,7 +110,6 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 	return s
 }
 
-
 // UpdateID recalculates the struct ID from the current signature.
 func (s *Struct) UpdateID() {
 	b := &bytes.Buffer{}
