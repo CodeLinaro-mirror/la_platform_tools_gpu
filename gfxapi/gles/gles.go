@@ -12,7 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package all is used to import all known gfxapi APIs for their side effects.
-package all
+//go:generate apic template gles.api ../templates/api.go.tmpl
+//go:generate apic template gles.api ../templates/replay_writer.go.tmpl
+//go:generate apic template gles.api ../templates/schema.go.tmpl
+//go:generate apic template gles.api ../templates/state_mutator.go.tmpl
 
-import _ "android.googlesource.com/platform/tools/gpu/gfxapi/gles"
+//go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.cpp.tmpl
+//go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.h.tmpl
+
+// Package gles implementes the API interface for the OpenGL ES graphics library.
+package gles
