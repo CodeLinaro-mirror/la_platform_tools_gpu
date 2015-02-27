@@ -23,14 +23,14 @@ import (
 )
 
 type testAtom struct {
-	ID        atom.Id
-	Type      atom.TypeId
-	Context   atom.ContextId
+	ID        atom.ID
+	Type      atom.TypeID
+	Context   atom.ContextID
 	AtomFlags atom.Flags
 }
 
-func (a testAtom) TypeId() atom.TypeId          { return a.Type }
-func (a testAtom) ContextId() atom.ContextId    { return a.Context }
+func (a testAtom) TypeID() atom.TypeID          { return a.Type }
+func (a testAtom) ContextID() atom.ContextID    { return a.Context }
 func (a testAtom) Flags() atom.Flags            { return a.AtomFlags }
 func (a testAtom) Encode(*binary.Encoder) error { return nil }
 func (a testAtom) Decode(*binary.Decoder) error { return nil }
@@ -49,13 +49,13 @@ func list(atoms ...interface{}) atomAtomIDList {
 		case atomAtomID:
 			l = append(l, a)
 		default:
-			panic("list only accepts types testAtom or atomAtomId")
+			panic("list only accepts types testAtom or atomAtomID")
 		}
 	}
 	return l
 }
 
-func (l *atomAtomIDList) Write(id atom.Id, a atom.Atom) {
+func (l *atomAtomIDList) Write(id atom.ID, a atom.Atom) {
 	*l = append(*l, atomAtomID{a, id})
 }
 

@@ -238,7 +238,7 @@ limitations under the License.
 
 {{define "FixedAtoms"}}
   service.AtomInfo{
-    Type:       uint16(memory.TypeIdObservation),
+    Type:       uint16(memory.TypeIDObservation),
     Name:       "MemoryObservation",
     Parameters: service.ParameterInfoArray{
       service.ParameterInfo{
@@ -252,7 +252,7 @@ limitations under the License.
     },
   },
   service.AtomInfo{
-    Type: uint16(atom.TypeIdEos),
+    Type: uint16(atom.TypeIDEos),
     Name: "EndOfStream",
   },
 {{end}}

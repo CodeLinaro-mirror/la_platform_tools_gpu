@@ -22,17 +22,17 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // application's call to a graphics API function or provide meta-data describing
 // observed memory or state at the time of capture.
 //
-// Each Atom instance is assigned a ContextId. The meaning of this identifier
+// Each Atom instance is assigned a ContextID. The meaning of this identifier
 // is API dependent, but is typically used to identify which thread or rendering
-// context the atom belongs to. For example the ContextId is used to associate
+// context the atom belongs to. For example the ContextID is used to associate
 // atoms of the same GLES context together.
 //
-// Each implementation of Atom should have a unique and stable TypeId to ensure
+// Each implementation of Atom should have a unique and stable TypeID to ensure
 // binary compatibility with old capture formats. Any change to the Atom's
-// binary format should also result in a new TypeId.
+// binary format should also result in a new TypeID.
 type Atom interface {
-	TypeId() TypeId
-	ContextId() ContextId
+	TypeID() TypeID
+	ContextID() ContextID
 	Flags() Flags
 	Encode(*binary.Encoder) error
 	Decode(*binary.Decoder) error

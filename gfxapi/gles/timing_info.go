@@ -7,7 +7,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-const transientID = atom.Id(0xffffffffffffffff)
+const transientID = atom.ID(0xffffffffffffffff)
 
 const (
 	commandThreadTimer uint8 = iota
@@ -24,15 +24,15 @@ type timingInfoTransform struct {
 	perCommand   bool
 	perDrawCall  bool
 	perFrame     bool
-	timerStartId map[uint8]atom.Id
+	timerStartId map[uint8]atom.ID
 }
 
-func (t *timingInfoTransform) startTimer(fromId atom.Id, index uint8, out atom.Writer) {
+func (t *timingInfoTransform) startTimer(fromId atom.ID, index uint8, out atom.Writer) {
 	out.Write(transientID, NewStartTimer(index))
 	t.timerStartId[index] = fromId
 }
 
-func (t *timingInfoTransform) stopTimer(toID atom.Id, index uint8, mask service.TimingMask, out atom.Writer) {
+func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.TimingMask, out atom.Writer) {
 	fromID := t.timerStartId[index]
 	stopTimerId := t.postback(func(data interface{}, err error) {
 		if err != nil {
@@ -72,7 +72,7 @@ func (t *timingInfoTransform) stopTimer(toID atom.Id, index uint8, mask service.
 	}
 }
 
-func (t *timingInfoTransform) Transform(id atom.Id, a atom.Atom, out atom.Writer) {
+func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	switch a := a.(type) {
 	case *atom.EOS:
 		if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {

@@ -17,7 +17,7 @@ func wireframe(db database.Database, logger log.Logger) atom.Transform {
 	logger = logger.Enter("Wireframe")
 	mutator := StateMutator{State: initialState()}
 
-	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+	return func(id atom.ID, a atom.Atom, out atom.Writer) {
 		mutator.Write(id, a)
 		if a.Flags().IsDrawCall() {
 			indices, drawMode, err := getIndices(id, a, db, mutator, logger)
@@ -35,18 +35,18 @@ func wireframe(db database.Database, logger log.Logger) atom.Transform {
 			address := memory.Pointer(0x5746000000000000)
 			wireframeData, wireframeDataType := encodeIndices(indices)
 			res := binary.Data(wireframeData)
-			resId, err := db.Store(&res, logger)
+			resID, err := db.Store(&res, logger)
 			if err != nil {
 				panic(err)
 			}
 			out.Write(id, &memory.Observation{
 				Range:      memory.Range{Base: address, Size: uint64(len(wireframeData))},
-				ResourceId: resId,
-				Context:    a.ContextId(),
+				ResourceID: resID,
+				Context:    a.ContextID(),
 			})
 
 			// Unbind the index buffer
-			oldIndexBufferId := mutator.State.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0)
+			oldIndexBufferID := mutator.State.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0)
 			out.Write(id, NewGlBindBuffer(
 				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0))
 
@@ -57,7 +57,7 @@ func wireframe(db database.Database, logger log.Logger) atom.Transform {
 			// Rebind the old index buffer
 			out.Write(id, NewGlBindBuffer(
 				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER),
-				oldIndexBufferId))
+				oldIndexBufferID))
 			return
 		}
 
@@ -131,7 +131,7 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 }
 
 // Get the effective index buffer and primitive type for draw call
-func getIndices(id atom.Id, a atom.Atom, db database.Database, mutator StateMutator, logger log.Logger) ([]index, DrawMode, error) {
+func getIndices(id atom.ID, a atom.Atom, db database.Database, mutator StateMutator, logger log.Logger) ([]index, DrawMode, error) {
 	switch a := a.(type) {
 	case *GlDrawArrays:
 		indices := make([]index, a.In.IndexCount)
@@ -145,8 +145,8 @@ func getIndices(id atom.Id, a atom.Atom, db database.Database, mutator StateMuta
 			IndicesType_GL_UNSIGNED_SHORT: 2,
 			IndicesType_GL_UNSIGNED_INT:   4,
 		}[a.In.IndicesType]
-		indexBufferId := mutator.State.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0)
-		if indexBufferId == 0 {
+		indexBufferID := mutator.State.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0)
+		if indexBufferID == 0 {
 			// Get the index buffer data from pointer
 			size := uint64(a.In.ElementCount) * indexSize
 			mem := mutator.State.Mem.Slice(memory.Range{Base: memory.Pointer(a.In.Indices), Size: size})
@@ -158,9 +158,9 @@ func getIndices(id atom.Id, a atom.Atom, db database.Database, mutator StateMuta
 			return indices, a.In.DrawMode, err
 		} else {
 			// Get the index buffer data from buffer
-			indexBuffer := mutator.State.Instances.Buffers.Get(indexBufferId, nil)
+			indexBuffer := mutator.State.Instances.Buffers.Get(indexBufferID, nil)
 			if indexBuffer == nil {
-				return nil, 0, fmt.Errorf("Can not find buffer %v", indexBufferId)
+				return nil, 0, fmt.Errorf("Can not find buffer %v", indexBufferID)
 			}
 			offset := memory.Pointer(a.In.Indices)
 			size := uint64(a.In.ElementCount) * indexSize

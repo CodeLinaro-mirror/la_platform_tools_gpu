@@ -19,5 +19,5 @@ package atom
 // Write writes or processes the given atom and identifier. Write must not
 // modify the atom in any way.
 type Writer interface {
-	Write(id Id, atom Atom)
+	Write(id ID, atom Atom)
 }

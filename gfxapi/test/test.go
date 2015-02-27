@@ -47,10 +47,10 @@ func initialState() *state {
 
 func (i remapped) remap(a atom.Atom, s *state) (interface{}, bool) { return i, true }
 
-func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id, width, height uint32, wireframe bool) <-chan gfxapi.Image {
+func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan gfxapi.Image {
 	return nil
 }
-func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id) <-chan gfxapi.Image {
+func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan gfxapi.Image {
 	return nil
 }
 func (a api) TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan gfxapi.CallTiming {

@@ -31,7 +31,7 @@ limitations under the License.
   )
 
   type replayer interface {
-    replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool)
+    replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)
   }
 
   func readBytes(r io.Reader, c uint64) ([]byte, error) {
@@ -115,7 +115,7 @@ limitations under the License.
 
   {{range $i, $c := $.Functions}}
     var {{Macro "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
-      Id: {{$i}},§
+      ID: {{$i}},§
       ReturnType: {{Macro "BuilderType" $c.Return.Type}},§
       Parameters: {{len $c.CallParameters}},§
     }
@@ -258,11 +258,11 @@ limitations under the License.
 {{define "Process"}}
   {{AssertType $ "API"}}
 
-  func (r *replayWriter) Write(id atom.Id, a atom.Atom, wantOutput bool) {
+  func (r *replayWriter) Write(id atom.ID, a atom.Atom, wantOutput bool) {
     b := r.builder
     switch ω := a.(type) {
       case *memory.Observation:
-        b.Observation(ω.Range, ω.ResourceId)
+        b.Observation(ω.Range, ω.ResourceID)
       case replayer:
         ω.replay(id, r.state, b, wantOutput)
       case *atom.EOS:
@@ -286,9 +286,9 @@ limitations under the License.
 
   var _ = replayer(&{{$name}}{}) // interface compliance check
   {{if GetAnnotation $ "replay_custom"}}
-    func (ω *{{$name}}) defaultReplay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+    func (ω *{{$name}}) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
   {{else}}
-    func (ω *{{$name}}) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+    func (ω *{{$name}}) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
   {{end}}
     {{/* Declare all the of local variables describing the array counts */}}
     {{template "DefineArrayCounts" $}}

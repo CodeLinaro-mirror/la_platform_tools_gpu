@@ -46,14 +46,14 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 	}
 
 	captureName := req.URL.Query().Get(captureParamName)
-	captureId, found := captures[captureName]
+	captureID, found := captures[captureName]
 	if !found {
 		http.NotFound(res, req)
 		return
 	}
 
 	var c service.Capture
-	if err := h.Load(captureId, log.Nop{}, &c); err != nil {
+	if err := h.Load(captureID, log.Nop{}, &c); err != nil {
 		panic(err)
 	}
 
@@ -67,15 +67,15 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	var contextId atom.ContextId
+	var contextID atom.ContextID
 	if ctx, err := strconv.ParseInt(req.URL.Query().Get(contextParamName), 10, 32); err == nil {
-		contextId = atom.ContextId(int(ctx))
+		contextID = atom.ContextID(int(ctx))
 	}
 
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
 	for i, a := range atoms {
-		if a.ContextId() == contextId {
+		if a.ContextID() == contextID {
 			fmt.Fprintf(res, "%.6d %s\n", i, a)
 		}
 	}

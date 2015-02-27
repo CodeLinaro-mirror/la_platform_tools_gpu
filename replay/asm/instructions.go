@@ -161,13 +161,13 @@ func (Nop) Encode(r value.PointerResolver, e *binary.Encoder) error {
 // call will be pushed to the top of the VM stack.
 type Call struct {
 	PushReturn bool   // If true, the return value is pushed to the VM stack.
-	FunctionId uint16 // The function id registered with the VM to invoke.
+	FunctionID uint16 // The function id registered with the VM to invoke.
 }
 
 func (a Call) Encode(r value.PointerResolver, e *binary.Encoder) error {
 	return opcode.Call{
 		PushReturn: a.PushReturn,
-		FunctionId: a.FunctionId,
+		FunctionID: a.FunctionID,
 	}.Encode(e)
 }
 
@@ -290,7 +290,7 @@ func (a Resource) Encode(r value.PointerResolver, e *binary.Encoder) error {
 		return err
 	}
 	return opcode.Resource{
-		Id: a.Index,
+		ID: a.Index,
 	}.Encode(e)
 }
 

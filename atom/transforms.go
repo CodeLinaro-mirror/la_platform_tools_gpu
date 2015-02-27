@@ -21,9 +21,9 @@ func (l *Transforms) Add(t ...Transformer) {
 
 // Transform is an atom transform function conforming to the Transformer
 // interface. It can be used to simplify the creation of simple Transformers.
-type Transform func(id Id, atom Atom, output Writer)
+type Transform func(id ID, atom Atom, output Writer)
 
-func (f Transform) Transform(id Id, atom Atom, output Writer) {
+func (f Transform) Transform(id ID, atom Atom, output Writer) {
 	f(id, atom, output)
 }
 
@@ -32,4 +32,4 @@ type processWriter struct {
 	o Writer
 }
 
-func (p processWriter) Write(id Id, a Atom) { p.t.Transform(id, a, p.o) }
+func (p processWriter) Write(id ID, a Atom) { p.t.Transform(id, a, p.o) }

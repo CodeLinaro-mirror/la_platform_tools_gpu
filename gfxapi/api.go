@@ -46,9 +46,9 @@ type API interface {
 	// StateMutator returns an object that can be used to emulate the state changes caused by api commands.
 	StateMutator(State) atom.Writer
 	// ColorBuffer is used to request the color buffer at a particular point in a capture.
-	ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id, width, height uint32, wireframe bool) <-chan Image
+	ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan Image
 	// DepthBuffer is used to request the depth buffer at a particular point in a capture.
-	DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id) <-chan Image
+	DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan Image
 	// TimeCalls requests the timing information for a capture.
 	TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan CallTiming
 }

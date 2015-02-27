@@ -84,8 +84,8 @@ func (b *batcher) send(requests []Request) {
 	}
 
 	postbackHandlers := make(postbackHandlerMap)
-	nextId := atom.Id(0x10000000)
-	postback := func(handler PostbackHandler) atom.Id {
+	nextId := atom.ID(0x10000000)
+	postback := func(handler PostbackHandler) atom.ID {
 		id := nextId
 		nextId++
 		postbackHandlers[id] = handler
@@ -132,7 +132,7 @@ type adapter struct {
 	handlers postbackHandlerMap
 }
 
-func (w adapter) Write(id atom.Id, a atom.Atom) {
+func (w adapter) Write(id atom.ID, a atom.Atom) {
 	_, postback := w.handlers[id]
 	w.writer.Write(id, a, postback)
 }

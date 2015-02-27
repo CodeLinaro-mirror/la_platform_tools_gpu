@@ -6,5 +6,5 @@ package atom
 // identifier to the output atom Writer. Transform must not modify the atom in
 // any way.
 type Transformer interface {
-	Transform(id Id, atom Atom, output Writer)
+	Transform(id ID, atom Atom, output Writer)
 }

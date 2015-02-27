@@ -136,7 +136,7 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *state) value.Value {
 // TODO: This implementation currently calls glLinkProgram for every call to glGetAttribLocation!
 //       This is obviously not ideal, and we should be doing this once at glLinkProgram once the
 //       spy emits location hinting information.
-func (ω *GlGetAttribLocation) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+func (ω *GlGetAttribLocation) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
 	if ω.Out.Result >= 0 {
 		NewGlBindAttribLocation(ω.In.Program, ω.Out.Result, ω.In.Name).replay(id, s, b, false)
 		NewGlLinkProgram(ω.In.Program).replay(id, s, b, false)
@@ -144,6 +144,6 @@ func (ω *GlGetAttribLocation) replay(id atom.Id, s *state, b *builder.Builder, 
 }
 
 // These are not called in replay
-func (ω *EglCreateContext) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {}
-func (ω *EglMakeCurrent) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool)   {}
-func (ω *EglSwapBuffers) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool)   {}
+func (ω *EglCreateContext) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {}
+func (ω *EglMakeCurrent) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)   {}
+func (ω *EglSwapBuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)   {}

@@ -32,7 +32,7 @@ limitations under the License.
 
   var _ atom.Writer = StateMutator{} // Interface compliance test
 
-  func (m StateMutator) Write(ψ atom.Id, Θ atom.Atom) {
+  func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
     switch ω := Θ.(type) {
     {{range $n, $c := $.Functions}}
       case *{{Macro "Go.CmdName" $c}}:
@@ -55,7 +55,7 @@ limitations under the License.
         }
     {{end}}
     case *memory.Observation:
-      m.State.Mem.Slice(ω.Range).Write(memory.ResourceData(ω.ResourceId, ω.Range.Size))
+      m.State.Mem.Slice(ω.Range).Write(memory.ResourceData(ω.ResourceID, ω.Range.Size))
     }
   }
 {{end}}

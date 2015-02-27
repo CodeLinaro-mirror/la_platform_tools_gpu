@@ -73,5 +73,5 @@ func (r *AtomRange) Pack(o atom.Range) {
 
 // Unpack unpacks the RPC-friendly AtomRange structure into the atom Range o.
 func (r AtomRange) Unpack(o *atom.Range) {
-	(*o) = atom.Range{Start: atom.Id(r.First), End: atom.Id(r.First + r.Count)}
+	(*o) = atom.Range{Start: atom.ID(r.First), End: atom.ID(r.First + r.Count)}
 }

@@ -32,7 +32,7 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 	if err != nil {
 		return err
 	}
-	if request.Atom >= atom.Id(len(atoms)) {
+	if request.Atom >= atom.ID(len(atoms)) {
 		return fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
 	}
 

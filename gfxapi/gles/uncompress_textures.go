@@ -22,26 +22,26 @@ import (
 func uncompressTextures(capture service.CaptureId, db database.Database, logger log.Logger) atom.Transform {
 	mutator := StateMutator{State: initialState()}
 
-	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+	return func(id atom.ID, a atom.Atom, out atom.Writer) {
 		mutator.Write(id, a)
 		switch a := a.(type) {
 		default:
 			out.Write(id, a)
 		case *GlCompressedTexImage2D:
-			resourceId := calcTextureId(capture, id, a)
+			resourceID := calcTextureID(capture, id, a)
 			var uncompressed binary.Data
-			if db.Load(resourceId, logger, &uncompressed) != nil {
+			if db.Load(resourceID, logger, &uncompressed) != nil {
 				var err error
 				uncompressed, err = decompress(db, logger, a, mutator.State.Mem)
 				if err != nil {
 					panic(err)
 				}
 				data := binary.Data(uncompressed)
-				uncompressedId, err := db.Store(&data, logger)
+				uncompressedID, err := db.Store(&data, logger)
 				if err != nil {
 					panic(err)
 				}
-				err = db.StoreLink(uncompressedId, resourceId, logger)
+				err = db.StoreLink(uncompressedID, resourceID, logger)
 				if err != nil {
 					panic(err)
 				}
@@ -50,8 +50,8 @@ func uncompressTextures(capture service.CaptureId, db database.Database, logger 
 			address := memory.Pointer(0xF000000000000000)
 			out.Write(id, &memory.Observation{
 				Range:      memory.Range{Base: address, Size: uint64(len(uncompressed))},
-				ResourceId: resourceId,
-				Context:    a.ContextId(),
+				ResourceID: resourceID,
+				Context:    a.ContextID(),
 			})
 
 			out.Write(id, NewGlTexImage2D(
@@ -69,7 +69,7 @@ func uncompressTextures(capture service.CaptureId, db database.Database, logger 
 	}
 }
 
-func calcTextureId(capture service.CaptureId, id atom.Id, a atom.Atom) binary.ID {
+func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID {
 	buf := &bytes.Buffer{}
 	e := binary.NewEncoder(buf)
 	capture.Encode(e)

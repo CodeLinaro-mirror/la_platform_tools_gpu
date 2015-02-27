@@ -89,11 +89,11 @@ func unpackZ(i uint32) uint32 { return i & 0xfffff }
 // Call represents the CALL virtual machine opcode.
 type Call struct {
 	PushReturn bool   // Should the return value be pushed onto the stack?
-	FunctionId uint16 // The function identifier to call.
+	FunctionID uint16 // The function identifier to call.
 }
 
 func (c Call) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpCall, setBit(uint32(c.FunctionId), 24, c.PushReturn)))
+	return e.Uint32(packCX(vm.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
 }
 
 // PushI represents the PUSH_I virtual machine opcode.
@@ -162,11 +162,11 @@ func (c Store) Encode(e *binary.Encoder) error {
 
 // Resource represents the RESOURCE virtual machine opcode.
 type Resource struct {
-	Id uint32 // The index of the resource identifier.
+	ID uint32 // The index of the resource identifier.
 }
 
 func (c Resource) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpResource, c.Id))
+	return e.Uint32(packCX(vm.OpResource, c.ID))
 }
 
 // Post represents the POST virtual machine opcode.
@@ -221,7 +221,7 @@ func Decode(d *binary.Decoder) (interface{}, error) {
 	code := unpackC(i)
 	switch code {
 	case vm.OpCall:
-		return Call{PushReturn: bit(i, 24), FunctionId: uint16(unpackX(i))}, nil
+		return Call{PushReturn: bit(i, 24), FunctionID: uint16(unpackX(i))}, nil
 	case vm.OpPushI:
 		return PushI{DataType: vm.Type(unpackY(i)), Value: unpackZ(i)}, nil
 	case vm.OpLoadC:
@@ -237,7 +237,7 @@ func Decode(d *binary.Decoder) (interface{}, error) {
 	case vm.OpStore:
 		return Store{}, nil
 	case vm.OpResource:
-		return Resource{Id: unpackX(i)}, nil
+		return Resource{ID: unpackX(i)}, nil
 	case vm.OpPost:
 		return Post{}, nil
 	case vm.OpCopy:

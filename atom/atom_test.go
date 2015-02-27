@@ -16,17 +16,17 @@ package atom
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
-const testAtomIdA = TypeId(10)
-const testAtomIdB = TypeId(20)
-const testAtomIdC = TypeId(30)
+const testAtomIDA = TypeID(10)
+const testAtomIDB = TypeID(20)
+const testAtomIDC = TypeID(30)
 
 type testAtomA struct {
-	Context ContextId
+	Context ContextID
 	Int32   int32
 }
 
-func (testAtomA) TypeId() TypeId          { return testAtomIdA }
-func (a *testAtomA) ContextId() ContextId { return a.Context }
+func (testAtomA) TypeID() TypeID          { return testAtomIDA }
+func (a *testAtomA) ContextID() ContextID { return a.Context }
 func (a *testAtomA) Info() string         { return "" }
 func (a *testAtomA) Flags() Flags         { return 0 }
 func (a *testAtomA) Encode(e *binary.Encoder) error {
@@ -44,12 +44,12 @@ func (a *testAtomA) Decode(d *binary.Decoder) (err error) {
 }
 
 type testAtomB struct {
-	Context ContextId
+	Context ContextID
 	Bool    bool
 }
 
-func (testAtomB) TypeId() TypeId          { return testAtomIdB }
-func (a *testAtomB) ContextId() ContextId { return a.Context }
+func (testAtomB) TypeID() TypeID          { return testAtomIDB }
+func (a *testAtomB) ContextID() ContextID { return a.Context }
 func (a *testAtomB) Info() string         { return "" }
 func (a *testAtomB) Flags() Flags         { return 0 }
 func (a *testAtomB) Encode(e *binary.Encoder) error {
@@ -67,12 +67,12 @@ func (a *testAtomB) Decode(d *binary.Decoder) (err error) {
 }
 
 type testAtomC struct {
-	Context ContextId
+	Context ContextID
 	String  string
 }
 
-func (testAtomC) TypeId() TypeId          { return testAtomIdC }
-func (a *testAtomC) ContextId() ContextId { return a.Context }
+func (testAtomC) TypeID() TypeID          { return testAtomIDC }
+func (a *testAtomC) ContextID() ContextID { return a.Context }
 func (a *testAtomC) Info() string         { return "" }
 func (a *testAtomC) Flags() Flags         { return 0 }
 func (a *testAtomC) Encode(e *binary.Encoder) error {
@@ -90,7 +90,7 @@ func (a *testAtomC) Decode(d *binary.Decoder) (err error) {
 }
 
 func init() {
-	Register(TypeInfo{Id: testAtomIdA, New: func() Atom { return &testAtomA{} }})
-	Register(TypeInfo{Id: testAtomIdB, New: func() Atom { return &testAtomB{} }})
-	Register(TypeInfo{Id: testAtomIdC, New: func() Atom { return &testAtomC{} }})
+	Register(TypeInfo{ID: testAtomIDA, New: func() Atom { return &testAtomA{} }})
+	Register(TypeInfo{ID: testAtomIDB, New: func() Atom { return &testAtomB{} }})
+	Register(TypeInfo{ID: testAtomIDC, New: func() Atom { return &testAtomC{} }})
 }
