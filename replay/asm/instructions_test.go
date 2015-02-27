@@ -200,6 +200,57 @@ func TestPush_FloatOneExpand(t *testing.T) {
 	)
 }
 
+func TestPush_DoubleNoExpand(t *testing.T) {
+	check(t,
+		[]Instruction{
+			Push{value.F64(-2.0)},
+			Push{value.F64(-1.0)},
+			Push{value.F64(-0.5)},
+			Push{value.F64(0)},
+			Push{value.F64(0.5)},
+			Push{value.F64(1.0)},
+			Push{value.F64(2.0)},
+		},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0xc00},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0xbff},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0xbfe},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x000},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3fe},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3ff},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x400},
+	)
+}
+
+func TestPush_DoubleExpand(t *testing.T) {
+	check(t,
+		[]Instruction{
+			Push{value.F64(-3)},
+			Push{value.F64(-1.75)},
+			Push{value.F64(1) / 3},
+			Push{value.F64(1.75)},
+			Push{value.F64(3)},
+		},
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0xc00},
+		opcode.Extend{Value: 0x2000000},
+		opcode.Extend{Value: 0x0},
+
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0xbff},
+		opcode.Extend{Value: 0x3000000},
+		opcode.Extend{Value: 0x0},
+
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3fd},
+		opcode.Extend{Value: 0x1555555},
+		opcode.Extend{Value: 0x1555555},
+
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3ff},
+		opcode.Extend{Value: 0x3000000},
+		opcode.Extend{Value: 0x0},
+
+		opcode.PushI{DataType: vm.TypeDouble, Value: 0x400},
+		opcode.Extend{Value: 0x2000000},
+		opcode.Extend{Value: 0x0},
+	)
+}
 func TestPop(t *testing.T) {
 	check(t,
 		[]Instruction{

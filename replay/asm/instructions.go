@@ -41,6 +41,7 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 	mask26 := uint64(0x3ffffff)
 	mask45 := uint64(0x1fffffffffff)
 	mask46 := uint64(0x3fffffffffff)
+	mask52 := uint64(0xfffffffffffff)
 
 	//     ▏60       ▏50       ▏40       ▏30       ▏20       ▏10
 	// ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●● mask19
@@ -48,6 +49,7 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 	// ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●●●●●●●●● mask26
 	// ○○○○○○○○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● mask45
 	// ○○○○○○○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● mask46
+	// ○○○○○○○○○○○○●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● mask52
 	//                                            ▕      PUSHI 20     ▕
 	//                                      ▕         EXTEND 26       ▕
 
@@ -65,12 +67,13 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 		if err := push.Encode(e); err != nil {
 			return err
 		}
-		if v&0xfffffffffffff != 0 {
+		v &= mask52
+		if v != 0 {
 			ext := opcode.Extend{Value: uint32(v >> 26)}
 			if err := ext.Encode(e); err != nil {
 				return err
 			}
-			return opcode.Extend{Value: uint32(v)}.Encode(e)
+			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		}
 	case vm.TypeInt8, vm.TypeInt16, vm.TypeInt32, vm.TypeInt64:
 		// Signed PUSHI types are sign-extended
