@@ -27,7 +27,7 @@ type invalid struct{}
 func (invalid) ExpressionType() semantic.Type { return semantic.VoidType }
 
 // expression translates the ast expression to a semantic expression.
-func expression(ctx *context, in interface{}) semantic.Expression {
+func expression(ctx *context, in ast.Node) semantic.Expression {
 	switch in := in.(type) {
 	case *ast.UnaryOp:
 		return unaryOp(ctx, in)
@@ -80,10 +80,10 @@ func call(ctx *context, in *ast.Call) semantic.Expression {
 	}
 }
 
-func callArguments(ctx *context, in []interface{}, params []*semantic.Parameter, name string) []semantic.Expression {
+func callArguments(ctx *context, at ast.Node, in []ast.Node, params []*semantic.Parameter, name string) []semantic.Expression {
 	out := []semantic.Expression{}
 	if len(params) != len(in) {
-		ctx.errorf(in, "wrong number of arguments to %s, expected %v got %v", name, len(params), len(in))
+		ctx.errorf(at, "wrong number of arguments to %s, expected %v got %v", name, len(params), len(in))
 		return out
 	}
 	for i, a := range in {
@@ -113,7 +113,7 @@ func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semant
 	if !isVoid(target.Function.Return.Type) {
 		params = params[0 : len(params)-1]
 	}
-	out.Arguments = callArguments(ctx, in.Arguments, params, target.Function.Name)
+	out.Arguments = callArguments(ctx, in, in.Arguments, params, target.Function.Name)
 	out.Type = out.Target.Function.Return.Type
 	return out
 }
@@ -127,7 +127,7 @@ func macroCall(ctx *context, in *ast.Call, stub *macroStub) semantic.Expression 
 	prefix := fmt.Sprintf("%s_%v_", stub.function.Name, ctx.uid())
 	params := stub.function.CallParameters()
 	var result *semantic.DeclareLocal
-	args := callArguments(ctx, in.Arguments, params, stub.function.Name)
+	args := callArguments(ctx, in, in.Arguments, params, stub.function.Name)
 	// switch scopes back to the one the macro was declared in to prevent symbol leak
 	callScope := ctx.scope
 	ctx.scope = stub.scope

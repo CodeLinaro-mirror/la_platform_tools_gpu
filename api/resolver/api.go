@@ -148,8 +148,8 @@ type alias struct {
 	To   semantic.Type
 }
 
-func (t alias) Typename() string               { return t.Name }
-func (t alias) Member(name string) interface{} { return nil }
+func (t alias) Typename() string                 { return t.Name }
+func (t alias) Member(name string) semantic.Node { return nil }
 
 // arraysByName is used to sort the array list by name for generated code stability
 type arraysByName []*semantic.Array

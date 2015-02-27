@@ -136,7 +136,7 @@ func pseudonym(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Pseu
 }
 
 // lhs_type { extend_type }
-func typeRef(p *parse.Parser, cst *parse.Branch) interface{} {
+func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	ref := typeRefLHS(p, cst)
 	if ref == nil {
 		return nil
@@ -152,7 +152,7 @@ func typeRef(p *parse.Parser, cst *parse.Branch) interface{} {
 }
 
 // array_type | map_type | identifier
-func typeRefLHS(p *parse.Parser, cst *parse.Branch) interface{} {
+func typeRefLHS(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if a := arrayType(p, cst); a != nil {
 		return a
 	}
@@ -166,7 +166,7 @@ func typeRefLHS(p *parse.Parser, cst *parse.Branch) interface{} {
 }
 
 // lhs_type ( pointer_type | static_array_type )
-func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref interface{}) interface{} {
+func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref ast.Node) ast.Node {
 	if e := pointerType(p, cst, ref); e != nil {
 		return e
 	}
@@ -176,7 +176,7 @@ func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref interface{}) interfac
 	return nil
 }
 
-func requireTypeRef(p *parse.Parser, cst *parse.Branch) interface{} {
+func requireTypeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	t := typeRef(p, cst)
 	if t == nil {
 		p.Expected("type reference")
@@ -219,7 +219,7 @@ func mapType(p *parse.Parser, cst *parse.Branch) *ast.MapType {
 }
 
 // lhs_type '*'
-func pointerType(p *parse.Parser, cst *parse.Branch, ref interface{}) *ast.PointerType {
+func pointerType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.PointerType {
 	if !peekOperator(ast.OpPointer, p) {
 		return nil
 	}
@@ -233,7 +233,7 @@ func pointerType(p *parse.Parser, cst *parse.Branch, ref interface{}) *ast.Point
 }
 
 // lhs_type '[' expression { ',' expression } ']'
-func staticArrayType(p *parse.Parser, cst *parse.Branch, ref interface{}) *ast.StaticArrayType {
+func staticArrayType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.StaticArrayType {
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
 	}

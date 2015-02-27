@@ -105,5 +105,5 @@ type Signature struct {
 	Arguments []Type // the required callable arguments
 }
 
-func (t Signature) Typename() string             { return t.Name }
-func (Signature) Member(name string) interface{} { return nil }
+func (t Signature) Typename() string      { return t.Name }
+func (Signature) Member(name string) Node { return nil }

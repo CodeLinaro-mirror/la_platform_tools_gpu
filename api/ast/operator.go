@@ -73,15 +73,15 @@ var (
 type UnaryOp struct {
 	CST        *parse.Branch // underlying parse structure for this node
 	Operator   string        // the operator being applied
-	Expression interface{}   // the expression the operator is being applied to
+	Expression Node          // the expression the operator is being applied to
 }
 
 // BinaryOp represents any binary operation applied to two expressions.
 type BinaryOp struct {
 	CST      *parse.Branch // underlying parse structure for this node
-	LHS      interface{}   // the expression on the left of the operator
+	LHS      Node          // the expression on the left of the operator
 	Operator string        // the operator being applied
-	RHS      interface{}   // the expression on the right of the operator
+	RHS      Node          // the expression on the right of the operator
 }
 
 func init() {

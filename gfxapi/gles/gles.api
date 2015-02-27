@@ -13,8 +13,7 @@ extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType typ
 extern TextureUnitMap createTextureUnits(InternalState internal)
 extern string substr(string s, s32 start, s32 end)
 extern u32    stateVariableSize(StateVariable v)
-extern void memcpy(any dest, any src, s32 size)
-
+extern void   memcpy(any dest, any src, s32 size)
 
 /////////////////////////////////////////////////////////////////
 // Macros

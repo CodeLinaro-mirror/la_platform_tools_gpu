@@ -21,13 +21,13 @@ import "android.googlesource.com/platform/tools/gpu/parse"
 type Block struct {
 	CST        *parse.Branch // underlying parse structure for this node
 	Docs       *URL          // the url to the documentation for this block
-	Statements []interface{} // The set of statements that make up the block
+	Statements []Node        // The set of statements that make up the block
 }
 
 // Branch represents an «"if" condition { trueblock } "else" { falseblock }» structure.
 type Branch struct {
 	CST       *parse.Branch // underlying parse structure for this node
-	Condition interface{}   // the condition to use to select which block is active
+	Condition Node          // the condition to use to select which block is active
 	True      *Block        // the block to use if condition is true
 	False     *Block        // the block to use if condition is false
 }
@@ -36,7 +36,7 @@ type Branch struct {
 type Iteration struct {
 	CST      *parse.Branch // underlying parse structure for this node
 	Variable *Identifier   // the variable to use for the iteration value
-	Iterable interface{}   // the expression that produces the iterable to loop over
+	Iterable Node          // the expression that produces the iterable to loop over
 	Block    *Block        // the block to run once per item in the iterable
 }
 
@@ -46,7 +46,7 @@ type Iteration struct {
 // expression.
 type Switch struct {
 	CST   *parse.Branch // underlying parse structure for this node
-	Value interface{}   // the value to match against
+	Value Node          // the value to match against
 	Cases []*Case       // the set of cases to match the value with
 }
 
@@ -55,14 +55,14 @@ type Switch struct {
 // value will be compared against.
 type Case struct {
 	CST        *parse.Branch // underlying parse structure for this node.
-	Conditions []interface{} // the set of conditions that would select this case
+	Conditions []Node        // the set of conditions that would select this case
 	Block      *Block        // the block to run if this case is selected
 }
 
 // Group represents the «(expression)» construct, a single parenthesized expression.
 type Group struct {
 	CST        *parse.Branch // underlying parse structure for this node
-	Expression interface{}   // the expression within the parentheses
+	Expression Node          // the expression within the parentheses
 }
 
 // DeclareLocal represents a «name := value» statement that declares a new
@@ -70,16 +70,16 @@ type Group struct {
 type DeclareLocal struct {
 	CST  *parse.Branch // underlying parse structure for this node
 	Name *Identifier   // the name to give the new local
-	RHS  interface{}   // the value to store in that local
+	RHS  Node          // the value to store in that local
 }
 
 // Assign represents a «location {,+,-}= value» statement that assigns a value to
 // an existing mutable location.
 type Assign struct {
 	CST      *parse.Branch // underlying parse structure for this node
-	LHS      interface{}   // the location to store the value into
+	LHS      Node          // the location to store the value into
 	Operator string        // the assignment operator being applied
-	RHS      interface{}   // the value to store
+	RHS      Node          // the value to store
 }
 
 // Assert represents the «"assert" condition» statement.
@@ -87,19 +87,19 @@ type Assign struct {
 // values for parameters that cannot be expressed in the type system.
 type Assert struct {
 	CST       *parse.Branch // underlying parse structure for this node.
-	Condition interface{}   // the condition to check, should be true
+	Condition Node          // the condition to check, should be true
 }
 
 // Length represents the «"len"(value)» construct, were value should be an
 // expresssion that returns an object of array, string or map type.
 type Length struct {
 	CST    *parse.Branch // underlying parse structure for this node.
-	Object interface{}   // the object to query the length of
+	Object Node          // the object to query the length of
 }
 
 // Return represents the «"return" value» construct, that assigns the value to
 // the result slot of the function.
 type Return struct {
 	CST   *parse.Branch // underlying parse structure for this node.
-	Value interface{}   // the value to return
+	Value Node          // the value to return
 }

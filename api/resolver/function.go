@@ -128,7 +128,7 @@ func method(ctx *context, in *ast.Function) {
 	}
 }
 
-func getSignature(ctx *context, at interface{}, r semantic.Type, args []semantic.Type) *semantic.Signature {
+func getSignature(ctx *context, at ast.Node, r semantic.Type, args []semantic.Type) *semantic.Signature {
 	buffer := bytes.Buffer{}
 	buffer.WriteString("fun_")
 	buffer.WriteString(r.Typename())

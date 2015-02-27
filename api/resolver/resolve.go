@@ -36,7 +36,7 @@ func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList) {
 			Members: semantic.Members{},
 		},
 		types: map[string]semantic.Type{},
-		scope: &scope{entries: map[string][]interface{}{}},
+		scope: &scope{entries: map[string][]semantic.Node{}},
 	}
 	func() {
 		defer func() {

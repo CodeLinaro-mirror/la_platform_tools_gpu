@@ -37,7 +37,7 @@ func requireBlock(p *parse.Parser, cst *parse.Branch) *ast.Block {
 }
 
 // ( assert | branch | iteration | return | expression ) [ declare_local | assign ]
-func requireStatement(p *parse.Parser, cst *parse.Branch) interface{} {
+func requireStatement(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if g := assert(p, cst); g != nil {
 		return g
 	}
@@ -110,7 +110,7 @@ func iteration(p *parse.Parser, cst *parse.Branch) *ast.Iteration {
 }
 
 // lhs ':=' expression
-func declareLocal(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.DeclareLocal {
+func declareLocal(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.DeclareLocal {
 	l, ok := lhs.(*ast.Identifier)
 	if !ok || !peekOperator(ast.OpDeclare, p) {
 		return nil
@@ -131,7 +131,7 @@ var assignments = []string{
 }
 
 // lhs ( '=' | '+=' | '-=' )  expression
-func assign(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Assign {
+func assign(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Assign {
 	op := ""
 	for _, test := range assignments {
 		if peekOperator(test, p) {

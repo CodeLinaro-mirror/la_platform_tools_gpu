@@ -35,7 +35,7 @@ type Parameter struct {
 	Input       bool          // true if the parameter is an input
 	Output      bool          // true if the parameters is an output
 	This        bool          // true if the parameter is the this pointer of a method
-	Type        interface{}   // the type of the parameter
+	Type        Node          // the type of the parameter
 	Name        *Identifier   // the name the parameter as exposed to the body
 }
 
@@ -44,6 +44,6 @@ type Parameter struct {
 // arguments is a comma separated list of expressions.
 type Call struct {
 	CST       *parse.Branch // underlying parse structure for this node
-	Target    interface{}   // the function to invoke
-	Arguments []interface{} // the arguments to the function
+	Target    Node          // the function to invoke
+	Arguments []Node        // the arguments to the function
 }

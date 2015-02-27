@@ -67,14 +67,14 @@ func inferNumber(ctx *context, in *ast.Number, infer semantic.Type) semantic.Exp
 	return nil
 }
 
-func inferUnknown(ctx *context, lhs interface{}, rhs interface{}) {
+func inferUnknown(ctx *context, lhs semantic.Node, rhs semantic.Node) {
 	u := findUnknown(ctx, rhs)
 	if u != nil {
 		u.Inferred = lhsToObserved(ctx, lhs)
 	}
 }
 
-func findUnknown(ctx *context, rhs interface{}) *semantic.Unknown {
+func findUnknown(ctx *context, rhs semantic.Node) *semantic.Unknown {
 	switch rhs := rhs.(type) {
 	case *semantic.Unknown:
 		return rhs
@@ -91,7 +91,7 @@ func findUnknown(ctx *context, rhs interface{}) *semantic.Unknown {
 // creates a new expression that would read the observed output.
 // This is used when attempting to infer the value an Unknown had from the
 // observed outputs.
-func lhsToObserved(ctx *context, lhs interface{}) semantic.Expression {
+func lhsToObserved(ctx *context, lhs semantic.Node) semantic.Expression {
 	switch lhs := lhs.(type) {
 	case *semantic.ArrayIndex:
 		o := lhsToObserved(ctx, lhs.Array)
