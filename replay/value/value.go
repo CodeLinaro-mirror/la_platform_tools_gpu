@@ -20,13 +20,13 @@
 // 64 bit architectures, are all backed by uint64.
 package value
 
-import "android.googlesource.com/platform/tools/gpu/replay/vm"
+import "android.googlesource.com/platform/tools/gpu/replay/protocol"
 
 // Value is the interface for all values to be passed either in opcodes or
 // constant memory to the replay virtual machine.
 type Value interface {
 	// Type returns the virtual-machine type of the Value.
-	Type() vm.Type
+	Type() protocol.Type
 
 	// Get returns the bit-representation of the value. For example a boolean
 	// value would either be 0 or 1, a uint32 value would be zero-extended, a

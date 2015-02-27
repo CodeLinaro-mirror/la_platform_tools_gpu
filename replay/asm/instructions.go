@@ -22,8 +22,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
-	"android.googlesource.com/platform/tools/gpu/replay/vm"
 )
 
 // Instruction is the interface of all instruction types.
@@ -35,7 +35,7 @@ type Instruction interface {
 	Encode(r value.PointerResolver, e *binary.Encoder) error
 }
 
-func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
+func encodePush(t protocol.Type, v uint64, e *binary.Encoder) error {
 	mask19 := uint64(0x7ffff)
 	mask20 := uint64(0xfffff)
 	mask26 := uint64(0x3ffffff)
@@ -54,7 +54,7 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 	//                                      ▕         EXTEND 26       ▕
 
 	switch t {
-	case vm.TypeFloat:
+	case protocol.TypeFloat:
 		push := opcode.PushI{DataType: t, Value: uint32(v >> 23)}
 		if err := push.Encode(e); err != nil {
 			return err
@@ -62,7 +62,7 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 		if v&0x7fffff != 0 {
 			return opcode.Extend{Value: uint32(v & 0x7fffff)}.Encode(e)
 		}
-	case vm.TypeDouble:
+	case protocol.TypeDouble:
 		push := opcode.PushI{DataType: t, Value: uint32(v >> 52)}
 		if err := push.Encode(e); err != nil {
 			return err
@@ -75,7 +75,7 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 			}
 			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		}
-	case vm.TypeInt8, vm.TypeInt16, vm.TypeInt32, vm.TypeInt64:
+	case protocol.TypeInt8, protocol.TypeInt16, protocol.TypeInt32, protocol.TypeInt64:
 		// Signed PUSHI types are sign-extended
 		switch {
 		case v&^mask19 == 0:
@@ -115,9 +115,9 @@ func encodePush(t vm.Type, v uint64, e *binary.Encoder) error {
 			}
 			return opcode.Extend{uint32(v & mask26)}.Encode(e)
 		}
-	case vm.TypeBool,
-		vm.TypeUint8, vm.TypeUint16, vm.TypeUint32, vm.TypeUint64,
-		vm.TypeAbsolutePointer, vm.TypeConstantPointer, vm.TypeVolatilePointer:
+	case protocol.TypeBool,
+		protocol.TypeUint8, protocol.TypeUint16, protocol.TypeUint32, protocol.TypeUint64,
+		protocol.TypeAbsolutePointer, protocol.TypeConstantPointer, protocol.TypeVolatilePointer:
 		switch {
 		case v&^mask20 == 0:
 			// ○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒◒
@@ -214,7 +214,7 @@ func (a Clone) Encode(r value.PointerResolver, e *binary.Encoder) error {
 // Load is an Instruction that loads the value of type DataType from pointer
 // Source and pushes the loaded value to the top of the VM stack.
 type Load struct {
-	DataType vm.Type
+	DataType protocol.Type
 	Source   value.Pointer
 }
 
@@ -304,7 +304,7 @@ func (a Post) Encode(r value.PointerResolver, e *binary.Encoder) error {
 	if err := encodePush(a.Source.Type(), a.Source.Get(r), e); err != nil {
 		return err
 	}
-	if err := encodePush(vm.TypeUint32, a.Size, e); err != nil {
+	if err := encodePush(protocol.TypeUint32, a.Size, e); err != nil {
 		return err
 	}
 	return opcode.Post{}.Encode(e)

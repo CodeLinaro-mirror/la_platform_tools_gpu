@@ -15,12 +15,14 @@
 package replay
 
 import (
+	"fmt"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	"android.googlesource.com/platform/tools/gpu/replay/executor"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -37,7 +39,7 @@ type batcher struct {
 	context      batcherContext
 	persistentDb database.Database
 	transientDb  database.Database
-	device       device
+	device       Device
 	logger       log.Logger
 }
 
@@ -83,16 +85,16 @@ func (b *batcher) send(requests []Request) {
 		panic(err)
 	}
 
-	postbackHandlers := make(postbackHandlerMap)
-	nextId := atom.ID(0x10000000)
+	postbackHandlers := make(executor.PostbackHandlerMap)
+	nextID := atom.ID(0x10000000)
 	postback := func(handler PostbackHandler) atom.ID {
-		id := nextId
-		nextId++
+		id := nextID
+		nextID++
 		postbackHandlers[id] = handler
 		return id
 	}
 
-	td := b.device.transportDevice()
+	td := b.device.Info()
 
 	transforms := b.context.Generator.ReplayTransforms(
 		b.context.Context,
@@ -115,21 +117,32 @@ func (b *batcher) send(requests []Request) {
 
 	payload, decoder := builder.Build(b.logger)
 
-	executor{
-		payload:  payload,
-		decoder:  decoder,
-		device:   b.device,
-		database: b.persistentDb,
-		logger:   b.logger,
-		handlers: postbackHandlers,
-	}.execute()
+	connection, err := b.device.Connect()
+	if err != nil {
+		err := fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
+		b.logger.Error("%v", err)
+		for _, h := range postbackHandlers {
+			h(nil, err)
+		}
+		return
+	}
+	defer connection.Close()
+
+	executor.Execute(
+		payload,
+		decoder,
+		connection,
+		b.persistentDb,
+		b.logger,
+		postbackHandlers,
+	)
 }
 
 // adapter conforms to the the atom Writer interface, forwarding writes to a
 // replay Writer.
 type adapter struct {
 	writer   Writer
-	handlers postbackHandlerMap
+	handlers executor.PostbackHandlerMap
 }
 
 func (w adapter) Write(id atom.ID, a atom.Atom) {

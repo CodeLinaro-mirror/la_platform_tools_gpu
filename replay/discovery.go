@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -28,13 +29,13 @@ import (
 // Android devices.
 type discovery struct {
 	sync.Mutex
-	devices map[service.DeviceId]device
+	devices map[service.DeviceId]Device
 	logger  log.Logger
 }
 
 func newDiscovery(db database.Database, logger log.Logger) *discovery {
 	m := &discovery{
-		devices: make(map[service.DeviceId]device),
+		devices: make(map[service.DeviceId]Device),
 		logger:  logger,
 	}
 
@@ -44,21 +45,22 @@ func newDiscovery(db database.Database, logger log.Logger) *discovery {
 	return m
 }
 
-func (d *discovery) device(id service.DeviceId) device {
+func (d *discovery) device(id service.DeviceId) Device {
 	d.Lock()
 	defer d.Unlock()
 
 	return d.devices[id]
 }
 
-func (d *discovery) deviceIDs() (ids service.DeviceIdArray) {
+func (d *discovery) getDevices() []Device {
 	d.Lock()
 	defer d.Unlock()
 
-	for d := range d.devices {
-		ids = append(ids, d)
+	out := make([]Device, 0, len(d.devices))
+	for _, d := range d.devices {
+		out = append(out, d)
 	}
-	return
+	return out
 }
 
 func (m *discovery) discoverAndroidDevices(db database.Database) {
@@ -99,14 +101,14 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 	}
 }
 
-func loadDeviceConfig(d device, db database.Database, logger log.Logger) (err error) {
+func loadDeviceConfig(d Device, db database.Database, logger log.Logger) (err error) {
 	defer func() {
 		if err != nil {
-			logger.Error("Failed to load device '%s' config: %v", d.transportDevice().Name, err)
+			logger.Error("Failed to load device '%s' config: %v", d.Info().Name, err)
 		}
 	}()
 
-	connection, err := d.connect()
+	connection, err := d.Connect()
 	if err != nil {
 		return err
 	}
@@ -115,7 +117,7 @@ func loadDeviceConfig(d device, db database.Database, logger log.Logger) (err er
 	enc := binary.NewEncoder(connection)
 	dec := binary.NewDecoder(connection)
 
-	if err := enc.Uint8(connectionTypeDeviceInfo); err != nil {
+	if err := enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); err != nil {
 		return err
 	}
 
@@ -124,7 +126,7 @@ func loadDeviceConfig(d device, db database.Database, logger log.Logger) (err er
 		return err
 	}
 
-	td := d.transportDevice()
+	td := d.Info()
 
 	switch protocolVersion {
 	case 1:

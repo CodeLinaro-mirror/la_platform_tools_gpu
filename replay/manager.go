@@ -19,7 +19,6 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // Manager is used discover replay devices and to send replay requests to those
@@ -79,7 +78,7 @@ func (m *Manager) Replay(ctx *Context, cfg Config, req Request, generator Genera
 	}) <- req
 }
 
-// DeviceIDs returns replay devices that have been discovered.
-func (m *Manager) DeviceIDs() service.DeviceIdArray {
-	return m.discovery.deviceIDs()
+// DeviceIDs returns the list of devices that have been discovered.
+func (m *Manager) Devices() []Device {
+	return m.discovery.getDevices()
 }

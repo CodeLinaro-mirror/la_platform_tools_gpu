@@ -14,12 +14,12 @@
 
 package builder
 
-import "android.googlesource.com/platform/tools/gpu/replay/vm"
+import "android.googlesource.com/platform/tools/gpu/replay/protocol"
 
 // FunctionInfo holds the information about a function that can be called by
 // the replay virtual-machine.
 type FunctionInfo struct {
-	ID         uint16  // The unique identifier for the function.
-	ReturnType vm.Type // The returns type of the function.
-	Parameters int     // The number of parameters for the function.
+	ID         uint16        // The unique identifier for the function.
+	ReturnType protocol.Type // The returns type of the function.
+	Parameters int           // The number of parameters for the function.
 }

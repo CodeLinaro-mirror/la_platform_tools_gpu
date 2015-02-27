@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/replay/vm"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
 func bit(bits, idx uint32) bool {
@@ -93,46 +93,46 @@ type Call struct {
 }
 
 func (c Call) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
+	return e.Uint32(packCX(protocol.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
 }
 
 // PushI represents the PUSH_I virtual machine opcode.
 type PushI struct {
-	DataType vm.Type // The value type to push.
-	Value    uint32  // The value to push packed into the low 20 bits.
+	DataType protocol.Type // The value type to push.
+	Value    uint32        // The value to push packed into the low 20 bits.
 }
 
 func (c PushI) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCYZ(vm.OpPushI, uint32(c.DataType), c.Value))
+	return e.Uint32(packCYZ(protocol.OpPushI, uint32(c.DataType), c.Value))
 }
 
 // LoadC represents the LOAD_C virtual machine opcode.
 type LoadC struct {
-	DataType vm.Type // The value type to load.
-	Address  uint32  // The pointer to the value in constant address-space.
+	DataType protocol.Type // The value type to load.
+	Address  uint32        // The pointer to the value in constant address-space.
 }
 
 func (c LoadC) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCYZ(vm.OpLoadC, uint32(c.DataType), c.Address))
+	return e.Uint32(packCYZ(protocol.OpLoadC, uint32(c.DataType), c.Address))
 }
 
 // LoadV represents the LOAD_V virtual machine opcode.
 type LoadV struct {
-	DataType vm.Type // The value type to load.
-	Address  uint32  // The pointer to the value in volatile address-space.
+	DataType protocol.Type // The value type to load.
+	Address  uint32        // The pointer to the value in volatile address-space.
 }
 
 func (c LoadV) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCYZ(vm.OpLoadV, uint32(c.DataType), c.Address))
+	return e.Uint32(packCYZ(protocol.OpLoadV, uint32(c.DataType), c.Address))
 }
 
 // Load represents the LOAD virtual machine opcode.
 type Load struct {
-	DataType vm.Type // The value types to load.
+	DataType protocol.Type // The value types to load.
 }
 
 func (c Load) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCYZ(vm.OpLoad, uint32(c.DataType), 0))
+	return e.Uint32(packCYZ(protocol.OpLoad, uint32(c.DataType), 0))
 }
 
 // Pop represents the POP virtual machine opcode.
@@ -141,7 +141,7 @@ type Pop struct {
 }
 
 func (c Pop) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpPop, c.Count))
+	return e.Uint32(packCX(protocol.OpPop, c.Count))
 }
 
 // StoreV represents the STORE_V virtual machine opcode.
@@ -150,14 +150,14 @@ type StoreV struct {
 }
 
 func (c StoreV) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpStoreV, c.Address))
+	return e.Uint32(packCX(protocol.OpStoreV, c.Address))
 }
 
 // Store represents the STORE virtual machine opcode.
 type Store struct{}
 
 func (c Store) Encode(e *binary.Encoder) error {
-	return e.Uint32(packC(vm.OpStore))
+	return e.Uint32(packC(protocol.OpStore))
 }
 
 // Resource represents the RESOURCE virtual machine opcode.
@@ -166,14 +166,14 @@ type Resource struct {
 }
 
 func (c Resource) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpResource, c.ID))
+	return e.Uint32(packCX(protocol.OpResource, c.ID))
 }
 
 // Post represents the POST virtual machine opcode.
 type Post struct{}
 
 func (c Post) Encode(e *binary.Encoder) error {
-	return e.Uint32(packC(vm.OpPost))
+	return e.Uint32(packC(protocol.OpPost))
 }
 
 // Copy represents the COPY virtual machine opcode.
@@ -182,7 +182,7 @@ type Copy struct {
 }
 
 func (c Copy) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpCopy, c.Count))
+	return e.Uint32(packCX(protocol.OpCopy, c.Count))
 }
 
 // Clone represents the CLONE virtual machine opcode.
@@ -191,7 +191,7 @@ type Clone struct {
 }
 
 func (c Clone) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpClone, c.Index))
+	return e.Uint32(packCX(protocol.OpClone, c.Index))
 }
 
 // Strcpy represents the STRCPY virtual machine opcode.
@@ -200,7 +200,7 @@ type Strcpy struct {
 }
 
 func (c Strcpy) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpStrcpy, c.MaxSize))
+	return e.Uint32(packCX(protocol.OpStrcpy, c.MaxSize))
 }
 
 // Extend represents the EXTEND virtual machine opcode.
@@ -209,7 +209,7 @@ type Extend struct {
 }
 
 func (c Extend) Encode(e *binary.Encoder) error {
-	return e.Uint32(packCX(vm.OpExtend, c.Value))
+	return e.Uint32(packCX(protocol.OpExtend, c.Value))
 }
 
 // Decode returns the opcode decoded from decoder d.
@@ -220,33 +220,33 @@ func Decode(d *binary.Decoder) (interface{}, error) {
 	}
 	code := unpackC(i)
 	switch code {
-	case vm.OpCall:
+	case protocol.OpCall:
 		return Call{PushReturn: bit(i, 24), FunctionID: uint16(unpackX(i))}, nil
-	case vm.OpPushI:
-		return PushI{DataType: vm.Type(unpackY(i)), Value: unpackZ(i)}, nil
-	case vm.OpLoadC:
-		return LoadC{DataType: vm.Type(unpackY(i)), Address: unpackZ(i)}, nil
-	case vm.OpLoadV:
-		return LoadV{DataType: vm.Type(unpackY(i)), Address: unpackZ(i)}, nil
-	case vm.OpLoad:
-		return Load{DataType: vm.Type(unpackY(i))}, nil
-	case vm.OpPop:
+	case protocol.OpPushI:
+		return PushI{DataType: protocol.Type(unpackY(i)), Value: unpackZ(i)}, nil
+	case protocol.OpLoadC:
+		return LoadC{DataType: protocol.Type(unpackY(i)), Address: unpackZ(i)}, nil
+	case protocol.OpLoadV:
+		return LoadV{DataType: protocol.Type(unpackY(i)), Address: unpackZ(i)}, nil
+	case protocol.OpLoad:
+		return Load{DataType: protocol.Type(unpackY(i))}, nil
+	case protocol.OpPop:
 		return Pop{Count: unpackX(i)}, nil
-	case vm.OpStoreV:
+	case protocol.OpStoreV:
 		return StoreV{Address: unpackX(i)}, nil
-	case vm.OpStore:
+	case protocol.OpStore:
 		return Store{}, nil
-	case vm.OpResource:
+	case protocol.OpResource:
 		return Resource{ID: unpackX(i)}, nil
-	case vm.OpPost:
+	case protocol.OpPost:
 		return Post{}, nil
-	case vm.OpCopy:
+	case protocol.OpCopy:
 		return Copy{Count: unpackX(i)}, nil
-	case vm.OpClone:
+	case protocol.OpClone:
 		return Clone{Index: unpackX(i)}, nil
-	case vm.OpStrcpy:
+	case protocol.OpStrcpy:
 		return Strcpy{MaxSize: unpackX(i)}, nil
-	case vm.OpExtend:
+	case protocol.OpExtend:
 		return Extend{Value: unpackX(i)}, nil
 	default:
 		return nil, fmt.Errorf("Unknown opcode with code %v", code)
