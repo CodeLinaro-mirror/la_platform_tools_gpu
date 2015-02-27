@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package semantic holds the set of types used in the abstract semantic graph
-// representation of the api language.
+// Package atexit enables registration of cleanup goroutines to be run at
+// program exit or when the process receives an interruption or kill signal.
 package atexit
 
 import (
@@ -34,13 +34,14 @@ func init() {
 	go func() {
 		// Wait for incoming signals to intercept, before calling Exit.
 		<-sigchan
-		Exit()
+		Exit(0)
 	}()
 }
 
 // Exit calls all registered callbacks once in separate goroutines, waiting for them to complete
-// for a duration of at least the maximum timeout value given to Register.
-func Exit() {
+// for a duration of at least the maximum timeout value given to Register, then calls os.Exit with
+// the given return code.
+func Exit(code int) {
 	// Disable signal interception.
 	signal.Stop(sigchan)
 
@@ -72,6 +73,9 @@ func Exit() {
 	case <-c:
 	case <-timeout:
 	}
+
+	// Explicitly terminate the current process.
+	os.Exit(code)
 }
 
 // Register adds the given function f to a list of callbacks that will get called when the current
@@ -90,5 +94,6 @@ func Register(f func(), timeout time.Duration) {
 	mutex.Unlock()
 
 	// Enable signal interception, no-op if already enabled.
+	// Note: for Unix, these signals translate to SIGINT and SIGKILL.
 	signal.Notify(sigchan, os.Interrupt, os.Kill)
 }
