@@ -19,7 +19,6 @@ import (
 	"io"
 	"net"
 	"os"
-	"path/filepath"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
@@ -58,10 +57,14 @@ func (os deviceOS) String() string {
 	}
 }
 
-type device interface {
-	transportId() service.DeviceId
-	transportDevice() *service.Device
-	connect() (io.ReadWriteCloser, error)
+// Device is the interface for a discovered replay device.
+type Device interface {
+	// ID returns the identifier for the replay device.
+	ID() service.DeviceId
+	// Info returns the service Device describing the replay device.
+	Info() *service.Device
+	// Connect opens a connection to the replay device.
+	Connect() (io.ReadWriteCloser, error)
 }
 
 type deviceBase struct {
@@ -69,11 +72,11 @@ type deviceBase struct {
 	device *service.Device
 }
 
-func (d deviceBase) transportId() service.DeviceId {
+func (d deviceBase) ID() service.DeviceId {
 	return d.id
 }
 
-func (d deviceBase) transportDevice() *service.Device {
+func (d deviceBase) Info() *service.Device {
 	return d.device
 }
 
@@ -85,15 +88,15 @@ type localDevice struct {
 	deviceBase
 }
 
-func (androidDevice) connect() (io.ReadWriteCloser, error) {
+func (androidDevice) Connect() (io.ReadWriteCloser, error) {
 	return net.Dial("tcp", "localhost:9285") // TODO: Remove the hardcoded port number.
 }
 
-func (localDevice) connect() (io.ReadWriteCloser, error) {
+func (localDevice) Connect() (io.ReadWriteCloser, error) {
 	endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
 	conn, err := net.Dial("tcp", endpoint)
 	if err != nil {
-		if err := spawnChild(filepath.Join("bin", replaydName)); err != nil {
+		if err := spawnChild(replaydPath); err != nil {
 			return nil, err
 		}
 		for i := 0; i < 10; i++ {
@@ -107,12 +110,12 @@ func (localDevice) connect() (io.ReadWriteCloser, error) {
 	return conn, err
 }
 
-func spawnChild(binFile string) error {
+func spawnChild(path string) error {
 	null, err := os.OpenFile(os.DevNull, os.O_RDWR, 0)
 	if err != nil {
 		return err
 	}
-	proc, err := os.StartProcess(binFile, []string{binFile}, &os.ProcAttr{
+	proc, err := os.StartProcess(path, []string{path}, &os.ProcAttr{
 		Files: []*os.File{null, null, null},
 	})
 	if err != nil {

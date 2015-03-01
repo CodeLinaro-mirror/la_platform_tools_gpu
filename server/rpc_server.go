@@ -65,7 +65,12 @@ func (s rpcServer) GetCaptures(logger log.Logger) (service.CaptureIdArray, error
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
 func (s rpcServer) GetDevices(logger log.Logger) (service.DeviceIdArray, error) {
-	return s.ReplayManager.DeviceIDs(), nil
+	devices := s.ReplayManager.Devices()
+	ids := make(service.DeviceIdArray, len(devices))
+	for i, d := range devices {
+		ids[i] = d.ID()
+	}
+	return ids, nil
 }
 
 // GetState returns an identifier to a binary blob containing the graphics state

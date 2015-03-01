@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package replay
+// Package executor contains the Execute function for sending a replay to a device.
+package executor
 
 import (
 	"bytes"
@@ -25,52 +26,68 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
-	"android.googlesource.com/platform/tools/gpu/replay/vm"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
-
-const (
-	connectionTypeDeviceInfo = 0
-	connectionTypeReplay     = 1
-)
-
-const (
-	messageTypeGet  = 0
-	messageTypePost = 1
-)
-
-type postbackHandlerMap map[atom.ID]PostbackHandler
 
 // ErrNoPostback is returned when a data for a postback could not be retrieved.
 // This can be due to a connection problem or a decode error.
 var ErrNoPostback = errors.New("No postback received")
 
+type PostbackHandlerMap map[atom.ID]func(data interface{}, err error)
+
 type executor struct {
-	payload  vm.Payload
-	decoder  builder.ResponseDecoder
-	device   device
-	database database.Database
-	logger   log.Logger
-	handlers postbackHandlerMap
+	payload    protocol.Payload
+	decoder    builder.ResponseDecoder
+	connection io.ReadWriteCloser
+	database   database.Database
+	logger     log.Logger
+	handlers   PostbackHandlerMap
 }
 
-func (r executor) execute() {
+// Execute sends the replay payload for execution on the target replay device
+// communicating on connection.
+// decoder will be used for decoding all postback reponses. Once a postback
+// response is decoded, the corresponding handler in the handlers map will be
+// called.
+func Execute(
+	payload protocol.Payload,
+	decoder builder.ResponseDecoder,
+	connection io.ReadWriteCloser,
+	database database.Database,
+	logger log.Logger,
+	handlers PostbackHandlerMap) error {
+
+	return executor{
+		payload:    payload,
+		decoder:    decoder,
+		connection: connection,
+		database:   database,
+		logger:     logger,
+		handlers:   handlers,
+	}.execute()
+}
+
+func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
 	e := binary.NewEncoder(buf)
 	if err := r.payload.Encode(e); err != nil {
-		panic(err)
+		return err
 	}
 
 	// Store the payload to the database
 	data := binary.Data(buf.Bytes())
 	id, err := r.database.Store(&data, r.logger)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	// Kick the communication handler
 	responseR, responseW := io.Pipe()
-	go r.handleReplayCommunication(id, uint32(len(data)), responseW)
+	comErr := make(chan error)
+	go func() {
+		comErr <- r.handleReplayCommunication(id, uint32(len(data)), responseW)
+	}()
 
 	// Decode and handle postbacks as they are received
 	for postback := range r.decoder(responseR) {
@@ -87,95 +104,100 @@ func (r executor) execute() {
 	for _, handler := range r.handlers {
 		handler(nil, ErrNoPostback)
 	}
+
+	return <-comErr
 }
 
-func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) {
-	logger := r.logger.Enter("handleReplayCommunication")
-
-	connection, err := r.device.connect()
-	if err != nil {
-		logger.Error("Failed to connect to device %v (%v)", r.device.transportDevice().GetName(), err)
-		postbacks.Close()
-		return
-	}
+func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) error {
+	connection := r.connection
 	defer connection.Close()
 
 	e := binary.NewEncoder(connection)
 	d := binary.NewDecoder(connection)
 
-	if err = e.Uint8(connectionTypeReplay); err != nil {
-		panic(err)
+	if err := e.Uint8(uint8(protocol.ConnectionTypeReplay)); err != nil {
+		return err
 	}
 
-	if err = e.String(replayID.String()); err != nil {
-		panic(err)
+	if err := e.String(replayID.String()); err != nil {
+		return err
 	}
 
-	if err = e.Uint32(replaySize); err != nil {
-		panic(err)
+	if err := e.Uint32(replaySize); err != nil {
+		return err
 	}
 
 	for {
-		dir, err := d.Uint8()
-		if err != nil {
-			break
+		msg, err := d.Uint8()
+		switch {
+		case err == io.EOF:
+			return nil
+		case err != nil:
+			return err
 		}
 
-		switch dir {
-		case messageTypeGet:
-			r.handleGetData(connection)
-		case messageTypePost:
-			r.handleDataResponse(connection, postbacks)
+		switch protocol.MessageType(msg) {
+		case protocol.MessageTypeGet:
+			if err := r.handleGetData(); err != nil {
+				return err
+			}
+		case protocol.MessageTypePost:
+			if err := r.handleDataResponse(postbacks); err != nil {
+				return err
+			}
 		default:
-			panic(fmt.Sprintf("Unknown request direction: %v\n", dir))
+			return fmt.Errorf("Unknown message type: %v\n", msg)
 		}
 	}
 }
 
-func (r executor) handleDataResponse(reader io.Reader, postbacks io.Writer) {
-	d := binary.NewDecoder(reader)
+func (r executor) handleDataResponse(postbacks io.Writer) error {
+	d := binary.NewDecoder(r.connection)
 
 	n, err := d.Uint32()
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	_, err = io.CopyN(postbacks, reader, int64(n))
-	if err != nil {
-		panic(err)
+	c, err := io.CopyN(postbacks, r.connection, int64(n))
+	if c != int64(n) {
+		return err
 	}
+
+	return nil
 }
 
-func (r executor) handleGetData(rw io.ReadWriter) {
+func (r executor) handleGetData() error {
 	logger := r.logger.Enter("handleGetData")
-	d := binary.NewDecoder(rw)
+	d := binary.NewDecoder(r.connection)
 
 	resourceCount, err := d.Uint32()
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	resourceIDs := make([]binary.ID, resourceCount)
 	for i := range resourceIDs {
 		idString, err := d.String()
 		if err != nil {
-			panic(err)
+			return err
 		}
 		resourceIDs[i], err = binary.ParseID(idString)
 		if err != nil {
-			panic(err)
+			return err
 		}
-		logger.Info("Replay requested resource '%v'", resourceIDs[i])
 	}
 
 	for _, rid := range resourceIDs {
 		data := binary.Data{}
 		err = r.database.Load(rid, logger, &data)
 		if err != nil {
-			panic(err)
+			return err
 		}
-		if _, err := rw.Write(data); err != nil {
-			panic(err)
+		if _, err := r.connection.Write(data); err != nil {
+			return err
 		}
 	}
+
+	return nil
 }

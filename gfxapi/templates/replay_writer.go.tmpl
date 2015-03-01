@@ -26,8 +26,8 @@ limitations under the License.
     "android.googlesource.com/platform/tools/gpu/binary"
     "android.googlesource.com/platform/tools/gpu/memory"
     "android.googlesource.com/platform/tools/gpu/replay/builder"
+    "android.googlesource.com/platform/tools/gpu/replay/protocol"
     "android.googlesource.com/platform/tools/gpu/replay/value"
-    "android.googlesource.com/platform/tools/gpu/replay/vm"
   )
 
   type replayer interface {
@@ -87,7 +87,7 @@ limitations under the License.
     }
   }
 
-  func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty vm.Type) {
+  func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty protocol.Type) {
     ptr, found := b.Remappings[key]
     if !found {
       ptr = b.AllocateMemory(uint64(ty.Size(b.PointerSize())))
@@ -570,26 +570,26 @@ limitations under the License.
   {{AssertType $ "Type"}}
 
   {{     if IsPseudonym     $}}{{Macro "BuilderType" $.To}}
-  {{else if IsPointerType   $}}vm.TypeAbsolutePointer
-  {{else if IsMemory        $}}vm.TypeAbsolutePointer
-  {{else if IsString        $}}vm.TypeAbsolutePointer
-  {{else if IsArray         $}}vm.TypeAbsolutePointer
-  {{else if IsPointer       $}}vm.TypeAbsolutePointer
-  {{else if IsEnum          $}}vm.TypeUint32
-  {{else if IsBool          $}}vm.TypeBool
-  {{else if IsInt           $}}vm.TypeInt32
-  {{else if IsUint          $}}vm.TypeUint32
-  {{else if IsS8            $}}vm.TypeInt8
-  {{else if IsU8            $}}vm.TypeUint8
-  {{else if IsS16           $}}vm.TypeInt16
-  {{else if IsU16           $}}vm.TypeUint16
-  {{else if IsS32           $}}vm.TypeInt32
-  {{else if IsU32           $}}vm.TypeUint32
-  {{else if IsF32           $}}vm.TypeFloat
-  {{else if IsS64           $}}vm.TypeInt64
-  {{else if IsU64           $}}vm.TypeUint64
-  {{else if IsF64           $}}vm.TypeDouble
-  {{else if IsVoid          $}}vm.TypeVoid
+  {{else if IsPointerType   $}}protocol.TypeAbsolutePointer
+  {{else if IsMemory        $}}protocol.TypeAbsolutePointer
+  {{else if IsString        $}}protocol.TypeAbsolutePointer
+  {{else if IsArray         $}}protocol.TypeAbsolutePointer
+  {{else if IsPointer       $}}protocol.TypeAbsolutePointer
+  {{else if IsEnum          $}}protocol.TypeUint32
+  {{else if IsBool          $}}protocol.TypeBool
+  {{else if IsInt           $}}protocol.TypeInt32
+  {{else if IsUint          $}}protocol.TypeUint32
+  {{else if IsS8            $}}protocol.TypeInt8
+  {{else if IsU8            $}}protocol.TypeUint8
+  {{else if IsS16           $}}protocol.TypeInt16
+  {{else if IsU16           $}}protocol.TypeUint16
+  {{else if IsS32           $}}protocol.TypeInt32
+  {{else if IsU32           $}}protocol.TypeUint32
+  {{else if IsF32           $}}protocol.TypeFloat
+  {{else if IsS64           $}}protocol.TypeInt64
+  {{else if IsU64           $}}protocol.TypeUint64
+  {{else if IsF64           $}}protocol.TypeDouble
+  {{else if IsVoid          $}}protocol.TypeVoid
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}

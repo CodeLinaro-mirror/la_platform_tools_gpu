@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package vm
+package protocol
 
 import "fmt"
 

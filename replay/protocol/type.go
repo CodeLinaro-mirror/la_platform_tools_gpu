@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package vm
+package protocol
 
 import "fmt"
 
@@ -31,11 +31,11 @@ const (
 	TypeUint64          Type = 8  // An unsigned 64-bit integer type.
 	TypeFloat           Type = 9  // A 32-bit floating-point number type.
 	TypeDouble          Type = 10 // A 64-bit floating-point number type.
-	TypeAbsolutePointer Type = 11 // A pointer type that is not remapped by the VM.
+	TypeAbsolutePointer Type = 11 // A pointer type that is not remapped by the protocol.
 	TypeConstantPointer Type = 12 // A pointer into the constant buffer space.
 	TypeVolatilePointer Type = 13 // A pointer into the volatile buffer space.
 
-	TypeVoid Type = 0xffffffff // A non-existant type. Not handled by the VM.
+	TypeVoid Type = 0xffffffff // A non-existant type. Not handled by the protocol.
 )
 
 // Size returns the size in bytes of the type. pointerSize is the size in bytes

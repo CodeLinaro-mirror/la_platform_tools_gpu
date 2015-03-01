@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-// Package vm contains the constants and types used by the replay system and its
-// virtual-machine interpreter.
-//
-// Any changes to the values in this package must also be made to the replay
-// source.
-package vm
+package protocol
+
+// ConnectionType is sent from the server to the replay system to define the
+// type of connection.
+type ConnectionType uint8
+
+const (
+	// ConnectionTypeDeviceInfo is the type of connection used to query device information.
+	ConnectionTypeDeviceInfo = ConnectionType(0)
+	// ConnectionTypeReplay is the type of connection used to issue a replay.
+	ConnectionTypeReplay = ConnectionType(1)
+)

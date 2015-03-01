@@ -17,14 +17,14 @@ package value
 import (
 	"math"
 
-	"android.googlesource.com/platform/tools/gpu/replay/vm"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
 // Bool is a Value of type TypeBool.
 type Bool bool
 
 // Type returns TypeBool.
-func (v Bool) Type() vm.Type { return vm.TypeBool }
+func (v Bool) Type() protocol.Type { return protocol.TypeBool }
 
 // Get returns 1 if the Bool is true, otherwise 0.
 func (v Bool) Get(PointerResolver) uint64 {
@@ -39,7 +39,7 @@ func (v Bool) Get(PointerResolver) uint64 {
 type U8 uint8
 
 // Type returns TypeUint8.
-func (v U8) Type() vm.Type { return vm.TypeUint8 }
+func (v U8) Type() protocol.Type { return protocol.TypeUint8 }
 
 // Get returns the value zero-extended to a uint64.
 func (v U8) Get(PointerResolver) uint64 { return uint64(v) }
@@ -48,7 +48,7 @@ func (v U8) Get(PointerResolver) uint64 { return uint64(v) }
 type S8 int8
 
 // Type returns TypeInt8.
-func (v S8) Type() vm.Type { return vm.TypeInt8 }
+func (v S8) Type() protocol.Type { return protocol.TypeInt8 }
 
 // Get returns the value sign-extended to a uint64.
 func (v S8) Get(PointerResolver) uint64 { return uint64(v) }
@@ -57,7 +57,7 @@ func (v S8) Get(PointerResolver) uint64 { return uint64(v) }
 type U16 uint16
 
 // Type returns TypeUint16.
-func (v U16) Type() vm.Type { return vm.TypeUint16 }
+func (v U16) Type() protocol.Type { return protocol.TypeUint16 }
 
 // Get returns the value zero-extended to a uint64.
 func (v U16) Get(PointerResolver) uint64 { return uint64(v) }
@@ -66,7 +66,7 @@ func (v U16) Get(PointerResolver) uint64 { return uint64(v) }
 type S16 int16
 
 // Type returns TypeInt16.
-func (v S16) Type() vm.Type { return vm.TypeInt16 }
+func (v S16) Type() protocol.Type { return protocol.TypeInt16 }
 
 // Get returns the value sign-extended to a uint64.
 func (v S16) Get(PointerResolver) uint64 { return uint64(v) }
@@ -75,7 +75,7 @@ func (v S16) Get(PointerResolver) uint64 { return uint64(v) }
 type F32 float32
 
 // Type returns TypeFloat.
-func (v F32) Type() vm.Type { return vm.TypeFloat }
+func (v F32) Type() protocol.Type { return protocol.TypeFloat }
 
 // Get returns the IEEE 754 representation of the value packed into the low part of a uint64.
 func (v F32) Get(PointerResolver) uint64 { return uint64(math.Float32bits(float32(v))) }
@@ -84,7 +84,7 @@ func (v F32) Get(PointerResolver) uint64 { return uint64(math.Float32bits(float3
 type U32 uint32
 
 // Type returns TypeUint32.
-func (v U32) Type() vm.Type { return vm.TypeUint32 }
+func (v U32) Type() protocol.Type { return protocol.TypeUint32 }
 
 // Get returns the value zero-extended to a uint64.
 func (v U32) Get(PointerResolver) uint64 { return uint64(v) }
@@ -93,7 +93,7 @@ func (v U32) Get(PointerResolver) uint64 { return uint64(v) }
 type S32 int32
 
 // Type returns TypeInt32.
-func (v S32) Type() vm.Type { return vm.TypeInt32 }
+func (v S32) Type() protocol.Type { return protocol.TypeInt32 }
 
 // Get returns the value sign-extended to a uint64.
 func (v S32) Get(PointerResolver) uint64 { return uint64(v) }
@@ -102,16 +102,16 @@ func (v S32) Get(PointerResolver) uint64 { return uint64(v) }
 type F64 float64
 
 // Type returns TypeDouble.
-func (v F64) Type() vm.Type { return vm.TypeDouble }
+func (v F64) Type() protocol.Type { return protocol.TypeDouble }
 
 // Get returns the IEEE 754 representation of the value packed into a uint64.
-func (v F64) Get(PointerResolver) uint64 { return uint64(math.Float64bits(float64(v))) }
+func (v F64) Get(PointerResolver) uint64 { return math.Float64bits(float64(v)) }
 
 // U64 is a Value of type TypeUint64.
 type U64 uint64
 
 // Type returns TypeUint64.
-func (v U64) Type() vm.Type { return vm.TypeUint64 }
+func (v U64) Type() protocol.Type { return protocol.TypeUint64 }
 
 // Get returns the value zero-extended to a uint64.
 func (v U64) Get(PointerResolver) uint64 { return uint64(v) }
@@ -120,17 +120,17 @@ func (v U64) Get(PointerResolver) uint64 { return uint64(v) }
 type S64 int64
 
 // Type returns TypeInt64.
-func (v S64) Type() vm.Type { return vm.TypeInt64 }
+func (v S64) Type() protocol.Type { return protocol.TypeInt64 }
 
 // Get returns the value reinterpreted as a uint64.
 func (v S64) Get(PointerResolver) uint64 { return uint64(v) }
 
 // AbsolutePointer is a pointer in the absolute address-space that will not be
-// altered before being passed to the VM.
+// altered before being passed to the protocol.
 type AbsolutePointer uint64
 
 // Type returns TypeAbsolutePointer.
-func (p AbsolutePointer) Type() vm.Type { return vm.TypeAbsolutePointer }
+func (p AbsolutePointer) Type() protocol.Type { return protocol.TypeAbsolutePointer }
 
 // Get returns the uint64 value of the absolute pointer.
 func (p AbsolutePointer) Get(PointerResolver) uint64 { return uint64(p) }
@@ -145,11 +145,11 @@ func (p AbsolutePointer) IsValid() bool { return true }
 
 // VolatileCapturePointer is a pointer that was observed at capture time.
 // Pointers of this type are remapped to an equivalent volatile address-space
-// pointer before being passed to the VM.
+// pointer before being passed to the protocol.
 type VolatileCapturePointer uint64
 
 // Type returns TypeVolatilePointer.
-func (p VolatileCapturePointer) Type() vm.Type { return vm.TypeVolatilePointer }
+func (p VolatileCapturePointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
 
 // Get returns the observed pointer translated to an equivalent volatile
 // address-space pointer.
@@ -176,7 +176,7 @@ func (p VolatileCapturePointer) IsValid() bool {
 type VolatilePointer uint64
 
 // Type returns TypeVolatilePointer.
-func (p VolatilePointer) Type() vm.Type { return vm.TypeVolatilePointer }
+func (p VolatilePointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
 
 // Get returns the uint64 value of the pointer in volatile address-space.
 func (p VolatilePointer) Get(PointerResolver) uint64 { return uint64(p) }
@@ -195,7 +195,7 @@ func (p VolatilePointer) IsValid() bool { return true }
 type VolatileTemporaryPointer uint64
 
 // Type returns TypeVolatilePointer.
-func (p VolatileTemporaryPointer) Type() vm.Type { return vm.TypeVolatilePointer }
+func (p VolatileTemporaryPointer) Type() protocol.Type { return protocol.TypeVolatilePointer }
 
 // Get returns the dynamically calculated offset of the temporary pointer within
 // volatile address-space.
@@ -212,11 +212,11 @@ func (p VolatileTemporaryPointer) Offset(offset uint64) Pointer {
 func (p VolatileTemporaryPointer) IsValid() bool { return true }
 
 // ConstantPointer is a pointer in the constant address-space that will not be
-// altered before being passed to the VM.
+// altered before being passed to the protocol.
 type ConstantPointer uint64
 
 // Type returns TypeConstantPointer.
-func (p ConstantPointer) Type() vm.Type { return vm.TypeConstantPointer }
+func (p ConstantPointer) Type() protocol.Type { return protocol.TypeConstantPointer }
 
 // Get returns the uint64 value of the pointer in constant address-space.
 func (p ConstantPointer) Get(PointerResolver) uint64 { return uint64(p) }

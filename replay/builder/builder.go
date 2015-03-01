@@ -27,13 +27,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/asm"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
-	"android.googlesource.com/platform/tools/gpu/replay/vm"
 )
 
 type stackItem struct {
-	ty  vm.Type // Type of the item.
-	idx int     // Index of the op that generated this.
+	ty  protocol.Type // Type of the item.
+	idx int           // Index of the op that generated this.
 }
 
 type idPostDecoder struct {
@@ -65,7 +65,7 @@ type Builder struct {
 	constantMemory  *constantEncoder
 	heap, temp      allocator
 	resourceIDToIdx map[binary.ID]uint32
-	resources       []vm.ResourceInfo
+	resources       []protocol.ResourceInfo
 	observedRanges  memory.RangeList
 	instructions    []asm.Instruction
 	decoders        []idPostDecoder
@@ -90,7 +90,7 @@ func New(ptrSize, ptrAlignment int) *Builder {
 		heap:            allocator{alignment: uint64(ptrAlignment)},
 		temp:            allocator{alignment: uint64(ptrAlignment)},
 		resourceIDToIdx: map[binary.ID]uint32{},
-		resources:       []vm.ResourceInfo{},
+		resources:       []protocol.ResourceInfo{},
 		observedRanges:  memory.RangeList{},
 		instructions:    []asm.Instruction{},
 		ptrSize:         ptrSize,
@@ -99,7 +99,7 @@ func New(ptrSize, ptrAlignment int) *Builder {
 	}
 }
 
-func (b *Builder) pushStack(t vm.Type) {
+func (b *Builder) pushStack(t protocol.Type) {
 	b.stack = append(b.stack, stackItem{t, len(b.instructions)})
 }
 
@@ -197,7 +197,7 @@ func (b *Builder) Buffer(count int) value.Pointer {
 			dynamic = true
 		}
 		switch ty {
-		case vm.TypeConstantPointer, vm.TypeVolatilePointer:
+		case protocol.TypeConstantPointer, protocol.TypeVolatilePointer:
 			// Pointers cannot be put into the constant buffer as they are remapped
 			// by the VM
 			dynamic = true
@@ -242,7 +242,7 @@ func (b *Builder) String(s string) value.Pointer {
 // invoking the function the return value of the function will be pushed on to
 // the stack. If f has a void return type then CallPush will panic.
 func (b *Builder) CallPush(f FunctionInfo) {
-	if f.ReturnType == vm.TypeVoid {
+	if f.ReturnType == protocol.TypeVoid {
 		panic("CallPush called with a void returning function")
 	}
 	for i := 0; i < f.Parameters; i++ {
@@ -290,7 +290,7 @@ func (b *Builder) Clone(index int) {
 
 // Load loads the value of type ty from addr and then pushes the loaded value to
 // the top of the stack.
-func (b *Builder) Load(ty vm.Type, addr value.Pointer) {
+func (b *Builder) Load(ty protocol.Type, addr value.Pointer) {
 	if !addr.IsValid() {
 		panic(fmt.Errorf("Pointer address %v is not valid", addr))
 	}
@@ -366,7 +366,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 	if !found {
 		idx = uint32(len(b.resources))
 		b.resourceIDToIdx[resourceID] = idx
-		b.resources = append(b.resources, vm.ResourceInfo{
+		b.resources = append(b.resources, protocol.ResourceInfo{
 			ID:   resourceID.String(),
 			Size: uint32(rng.Size),
 		})
@@ -381,7 +381,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 // Build compiles the replay instructions, returning a Payload that can be
 // sent to the replay virtual-machine and a ResponseDecoder for interpreting
 // the responses.
-func (b *Builder) Build(logger log.Logger) (vm.Payload, ResponseDecoder) {
+func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	logger = logger.Enter("Build")
 	vml := b.layoutVolatileMemory(logger)
 
@@ -391,12 +391,12 @@ func (b *Builder) Build(logger log.Logger) (vm.Payload, ResponseDecoder) {
 		i.Encode(vml, e)
 	}
 
-	payload := vm.Payload{
+	payload := protocol.Payload{
 		StackSize:          uint32(512), // TODO: Calculate stack size
 		VolatileMemorySize: uint32(vml.size),
-		Constants:          vm.Data{b.constantMemory.data},
+		Constants:          protocol.Data{b.constantMemory.data},
 		Resources:          b.resources,
-		Opcodes:            vm.Data{opcodes.Bytes()},
+		Opcodes:            protocol.Data{opcodes.Bytes()},
 	}
 
 	logger.Info("Stack size:           0x%x", payload.StackSize)

@@ -14,7 +14,7 @@
 
 //go:generate codergen -go=payload_code.go payload.go
 
-package vm
+package protocol
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
