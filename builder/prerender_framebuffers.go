@@ -32,11 +32,11 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 		return err
 	}
 
-	atomIdsByContext := make(map[atom.ContextId][]atom.Id)
-	for _, id := range request.AtomIds {
+	atomIDsByContext := make(map[atom.ContextID][]atom.ID)
+	for _, id := range request.AtomIDs {
 		if id < uint64(len(atoms)) {
-			ctx := atoms[id].ContextId()
-			atomIdsByContext[ctx] = append(atomIdsByContext[ctx], atom.Id(id))
+			ctx := atoms[id].ContextID()
+			atomIDsByContext[ctx] = append(atomIDsByContext[ctx], atom.ID(id))
 		}
 	}
 
@@ -47,30 +47,30 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 	}
 
 	var wg sync.WaitGroup
-	for contextId, atomIds := range atomIdsByContext {
-		var binaryIds []binary.ID
-		for _, atomId := range atomIds {
-			if imageInfoId, err := db.StoreRequest(&GetFramebufferColor{
+	for contextID, atomIDs := range atomIDsByContext {
+		var binaryIDs []binary.ID
+		for _, atomID := range atomIDs {
+			if imageInfoID, err := db.StoreRequest(&GetFramebufferColor{
 				Capture:  request.Capture,
-				Context:  contextId,
+				Context:  contextID,
 				Device:   request.Device,
-				After:    atomId,
+				After:    atomID,
 				Settings: renderSettings,
 			}, logger); err == nil {
 				var imageInfo service.ImageInfo
-				if err = db.Load(imageInfoId, logger, &imageInfo); err == nil {
-					binaryIds = append(binaryIds, imageInfo.Data.ID)
+				if err = db.Load(imageInfoID, logger, &imageInfo); err == nil {
+					binaryIDs = append(binaryIDs, imageInfo.Data.ID)
 				}
 			}
 		}
 
-		wg.Add(len(binaryIds))
-		for _, binaryId := range binaryIds {
+		wg.Add(len(binaryIDs))
+		for _, binaryID := range binaryIDs {
 			go func(id binary.ID) {
 				defer wg.Done()
 				var dummy service.Binary
 				db.Load(id, logger, &dummy)
-			}(binaryId)
+			}(binaryID)
 		}
 		wg.Wait()
 	}

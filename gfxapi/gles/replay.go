@@ -26,14 +26,14 @@ func uniqueConfig() replay.Config {
 
 // colorBufferRequest requests a postback of the framebuffer's color attachment.
 type colorBufferRequest struct {
-	after         atom.Id
+	after         atom.ID
 	width, height uint32
 	out           chan gfxapi.Image
 }
 
 // colorBufferRequest requests a postback of the framebuffer's depth attachment.
 type depthBufferRequest struct {
-	after atom.Id
+	after atom.ID
 	out   chan gfxapi.Image
 }
 
@@ -113,7 +113,7 @@ func (a api) ReplayTransforms(
 				perCommand:   (req.mask & service.TimingMaskTimingPerCommand) != 0,
 				perDrawCall:  (req.mask & service.TimingMaskTimingPerDrawCall) != 0,
 				perFrame:     (req.mask & service.TimingMaskTimingPerFrame) != 0,
-				timerStartId: make(map[uint8]atom.Id),
+				timerStartId: make(map[uint8]atom.ID),
 			})
 		}
 	}
@@ -144,7 +144,7 @@ func (a api) ReplayTransforms(
 	return transforms
 }
 
-func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id, width, height uint32, wireframe bool) <-chan gfxapi.Image {
+func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan gfxapi.Image {
 	out := make(chan gfxapi.Image, 1)
 	c := drawConfig{wireframe: wireframe}
 	r := colorBufferRequest{after: after, width: width, height: height, out: out}
@@ -152,7 +152,7 @@ func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id
 	return out
 }
 
-func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.Id) <-chan gfxapi.Image {
+func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan gfxapi.Image {
 	out := make(chan gfxapi.Image, 1)
 	c := drawConfig{}
 	r := depthBufferRequest{after: after, out: out}
@@ -174,7 +174,7 @@ func halfFloatOESToHalfFloatARB() atom.Transform {
 	// https://www.opengl.org/registry/specs/ARB/half_float_pixel.txt
 	const GL_HALF_FLOAT_ARB = 0x140B
 
-	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+	return func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
 			cmd.In.Type == VertexAttribType_GL_HALF_FLOAT_OES {
 			out.Write(id, &GlVertexAttribPointer{
@@ -199,7 +199,7 @@ func halfFloatOESToHalfFloatARB() atom.Transform {
 func destroyResourcesAtEOS() atom.Transform {
 	mutator := &StateMutator{State: initialState()}
 
-	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+	return func(id atom.ID, a atom.Atom, out atom.Writer) {
 		switch a.(type) {
 		default:
 			mutator.Write(id, a)

@@ -20,19 +20,19 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 // atoms (except for the EOS atom) once all the atoms passed to Add have passed
 // through the transformer.
 type EarlyTerminator struct {
-	requests atom.IdSet
+	requests atom.IDSet
 }
 
 // Add adds the atom with identifier id to the set of atoms that must be seen
 // before the EarlyTerminator will consume all atoms (excluding the EOS atom).
-func (t *EarlyTerminator) Add(id atom.Id) {
+func (t *EarlyTerminator) Add(id atom.ID) {
 	if t.requests == nil {
-		t.requests = make(atom.IdSet)
+		t.requests = make(atom.IDSet)
 	}
 	t.requests.Add(id)
 }
 
-func (t *EarlyTerminator) Transform(id atom.Id, a atom.Atom, out atom.Writer) {
+func (t *EarlyTerminator) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	if len(t.requests) > 0 {
 		out.Write(id, a)
 		t.requests.Remove(id)

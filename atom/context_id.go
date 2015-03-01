@@ -16,19 +16,19 @@ package atom
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
-// ContextIds are used to identify which thread or rendering context each atom
+// ContextIDs are used to identify which thread or rendering context each atom
 // belongs to. The numerical value is meaningless aside from equality testing.
-type ContextId uint32
+type ContextID uint32
 
-// Encode encodes the ContextId using the specified encoder.
-func (c *ContextId) Encode(e *binary.Encoder) error {
+// Encode encodes the ContextID using the specified encoder.
+func (c *ContextID) Encode(e *binary.Encoder) error {
 	return e.Uint32(uint32(*c))
 }
 
-// Decode decodes the ContextId using the specified decoder.
-func (c *ContextId) Decode(d *binary.Decoder) error {
+// Decode decodes the ContextID using the specified decoder.
+func (c *ContextID) Decode(d *binary.Decoder) error {
 	if val, err := d.Uint32(); err == nil {
-		*c = ContextId(val)
+		*c = ContextID(val)
 		return nil
 	} else {
 		return err

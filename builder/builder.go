@@ -75,17 +75,17 @@ func (b *builder) Version() uint32 {
 	return 0
 }
 
-func getAPI(captureId service.CaptureId, db database.Database, logger log.Logger) (gfxapi.API, error) {
+func getAPI(captureID service.CaptureId, db database.Database, logger log.Logger) (gfxapi.API, error) {
 	var capture service.Capture
-	if err := db.Load(captureId.ID, logger, &capture); err != nil {
+	if err := db.Load(captureID.ID, logger, &capture); err != nil {
 		return nil, err
 	}
 	return gfxapi.Find(capture.API), nil
 }
 
-func getAtoms(captureId service.CaptureId, db database.Database, logger log.Logger) (atom.List, service.SchemaId, error) {
+func getAtoms(captureID service.CaptureId, db database.Database, logger log.Logger) (atom.List, service.SchemaId, error) {
 	var capture service.Capture
-	if err := db.Load(captureId.ID, logger, &capture); err != nil {
+	if err := db.Load(captureID.ID, logger, &capture); err != nil {
 		return atom.List{}, service.SchemaId{}, err
 	}
 	var stream service.AtomStream
@@ -102,11 +102,11 @@ func getAtoms(captureId service.CaptureId, db database.Database, logger log.Logg
 // getAtomFramebufferDimensions returns the framebuffer dimensions after a given atom in the given capture and context.
 // The first call to getAtomFramebufferDimensions for a given capture/context will trigger a computation of the dimensions for
 // all atoms of this capture/context, which will be cached to the database for subsequent calls, regardless of the given atom.
-func getAtomFramebufferDimensions(captureId service.CaptureId, contextId atom.ContextId, after atom.Id,
+func getAtomFramebufferDimensions(captureID service.CaptureId, contextID atom.ContextID, after atom.ID,
 	db database.Database, logger log.Logger) (width, height uint32, err error) {
 	id, err := db.StoreRequest(&getCaptureFramebufferDimensions{
-		Capture: captureId,
-		Context: contextId,
+		Capture: captureID,
+		Context: contextID,
 	}, logger)
 	if err != nil {
 		return 0, 0, err
@@ -156,17 +156,17 @@ func (request *getCaptureFramebufferDimensions) build(db database.Database, logg
 	var currentDims *atomFramebufferDimensions
 
 	for i, a := range atoms {
-		if a.ContextId() != request.Context {
+		if a.ContextID() != request.Context {
 			continue
 		}
-		mutator.Write(atom.Id(i), a)
+		mutator.Write(atom.ID(i), a)
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
 			width, height, err := state.GetFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
 			if err != nil {
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {
-				currentDims = &atomFramebufferDimensions{atom.Id(i), width, height}
+				currentDims = &atomFramebufferDimensions{atom.ID(i), width, height}
 				captureFbDims.Dimensions = append(captureFbDims.Dimensions, *currentDims)
 			}
 		}

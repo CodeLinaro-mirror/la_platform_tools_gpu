@@ -16,7 +16,7 @@ package atom
 
 // TypeInfo is the type information for a single Atom implementation.
 type TypeInfo struct {
-	Id   TypeId      // The type identifier for the atom.
+	ID   TypeID      // The type identifier for the atom.
 	New  func() Atom // The function for creating new instances of the atom type.
 	Name string      // The name of the atom.
 	Docs string      // The URL to the atom's documentation.

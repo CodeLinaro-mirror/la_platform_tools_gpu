@@ -29,17 +29,17 @@ var testList = List{
 }
 var testData = []byte{
 	0x0c, 0x00, // Atom 0: Size (+2 for type)
-	byte(testAtomIdA & 0xff), byte(testAtomIdA >> 8), // Atom 0: Type
+	byte(testAtomIDA & 0xff), byte(testAtomIDA >> 8), // Atom 0: Type
 	0x10, 0x00, 0x00, 0x00, // Atom 0: Context
 	0x64, 0x00, 0x00, 0x00, // Atom 0: Data
 
 	0x09, 0x00, // Atom 1: Size (+2 for type)
-	byte(testAtomIdB & 0xff), byte(testAtomIdB >> 8), // Atom 1: Type
+	byte(testAtomIDB & 0xff), byte(testAtomIDB >> 8), // Atom 1: Type
 	0x20, 0x00, 0x00, 0x00, // Atom 1: Context
 	0x01, // Atom 1: Data
 
 	0x11, 0x00, // Atom 2: Size (+2 for type)
-	byte(testAtomIdC & 0xff), byte(testAtomIdC >> 8), // Atom 2: Type
+	byte(testAtomIDC & 0xff), byte(testAtomIDC >> 8), // Atom 2: Type
 	0x10, 0x00, 0x00, 0x00, // Atom 2: Context
 	0x05, 0x00, 0x00, 0x00, 'P', 'i', 'z', 'z', 'a', // Atom 2: Data
 
@@ -71,12 +71,12 @@ func TestAtomListDecode(t *testing.T) {
 }
 
 type writeRecord struct {
-	id   Id
+	id   ID
 	atom Atom
 }
 type writeRecordList []writeRecord
 
-func (t *writeRecordList) Write(id Id, atom Atom) { *t = append(*t, writeRecord{id, atom}) }
+func (t *writeRecordList) Write(id ID, atom Atom) { *t = append(*t, writeRecord{id, atom}) }
 
 func max(a, b int) int {
 	if a > b {

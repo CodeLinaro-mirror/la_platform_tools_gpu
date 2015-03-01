@@ -51,7 +51,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoid(),
 	}, []interface{}{
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid.ID},
 	}, []byte{})
 }
 
@@ -71,40 +71,40 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 		NewCmdVoidString("hello"),
 	}, []interface{}{
 		opcode.PushI{DataType: vm.TypeUint8, Value: 20},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU8.ID},
 
 		opcode.PushI{DataType: vm.TypeInt8, Value: 0xfffec},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS8.ID},
 
 		opcode.PushI{DataType: vm.TypeUint16, Value: 200},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU16.ID},
 
 		opcode.PushI{DataType: vm.TypeInt16, Value: 0xfff38},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS16.ID},
 
 		opcode.PushI{DataType: vm.TypeFloat, Value: 0x7f},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidF32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidF32.ID},
 
 		opcode.PushI{DataType: vm.TypeUint32, Value: 2000},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU32.ID},
 
 		opcode.PushI{DataType: vm.TypeInt32, Value: 0xff830},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS32.ID},
 
 		opcode.PushI{DataType: vm.TypeDouble, Value: 0x3ff},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidF64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidF64.ID},
 
 		opcode.PushI{DataType: vm.TypeUint64, Value: 20000},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidU64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU64.ID},
 
 		opcode.PushI{DataType: vm.TypeInt64, Value: 0xfb1e0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidS64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS64.ID},
 
 		opcode.PushI{DataType: vm.TypeBool, Value: 1},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidBool.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidBool.ID},
 
 		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidString.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidString.ID},
 	}, []byte{'h', 'e', 'l', 'l', 'o', 0})
 }
 
@@ -115,7 +115,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
 		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x08},
 		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x00},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Strings.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3Strings.ID},
 	}, []byte{
 		/* 0x00 */ 'h', 'e', 'l', 'l', 'o', 0x00, 0x00, 0x00,
 		/* 0x08 */ 'w', 'o', 'r', 'l', 'd', 0x00,
@@ -137,7 +137,7 @@ func TestOperationsOpCall_3_Arrays(t *testing.T) {
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
 
 		opcode.PushI{DataType: vm.TypeConstantPointer, Value: 0x20},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Arrays.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3Arrays.ID},
 	}, []byte{
 		/* 0x00 */ 0x01, 0x02, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
 		/* 0x08 */ 'h', 'e', 'l', 'l', 'o', 0x00, 0x00, 0x00,
@@ -160,7 +160,7 @@ func TestOperationsOpCall_ArrayOfStrings_32bitOS(t *testing.T) {
 		opcode.StoreV{Address: 0x04},
 		opcode.StoreV{Address: 0x00},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidArrayOfStrings.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidArrayOfStrings.ID},
 	}, []byte{
 		/* 0x00 */ 'a', 'n', 0x00, 0x00,
 		/* 0x04 */ 'a', 'r', 'r', 'a', 'y', 0x00, 0x00, 0x00,
@@ -182,7 +182,7 @@ func TestOperationsOpCall_ArrayOfStrings_64bitOS(t *testing.T) {
 		opcode.StoreV{Address: 0x08},
 		opcode.StoreV{Address: 0x00},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidArrayOfStrings.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidArrayOfStrings.ID},
 	}, []byte{
 		/* 0x00 */ 'a', 'n', 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		/* 0x08 */ 'a', 'r', 'r', 'a', 'y', 0x00, 0x00, 0x00,
@@ -205,17 +205,17 @@ func TestOperationsOpCall_ReturnValue_DontWantOutput(t *testing.T) {
 		NewCmdS64(-20000),
 		NewCmdBool(true),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU8.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS8.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU16.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS16.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF32.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU32.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS32.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF64.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU64.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS64.Id}, opcode.StoreV{Address: 0},
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdBool.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS8.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU16.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS16.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF32.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU32.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS32.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF64.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU64.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS64.ID}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdBool.ID}, opcode.StoreV{Address: 0},
 	}, []byte{})
 }
 
@@ -233,57 +233,57 @@ func TestOperationsOpCall_ReturnValue_WantOutput(t *testing.T) {
 		NewCmdS64(-20000),
 		NewCmdBool(true),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU8.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS8.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS8.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU16.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU16.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS16.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS16.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS32.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdF64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdU64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdS64.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdBool.Id}, opcode.StoreV{Address: 0},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdBool.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
@@ -294,7 +294,7 @@ func TestOperationsOpCall_ReturnValueString_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdString("hello"),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdString.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Strcpy{MaxSize: 10},
 	}, []byte{})
@@ -304,7 +304,7 @@ func TestOperationsOpCall_ReturnValueString_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdString("hello"),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdString.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Strcpy{MaxSize: 10},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
@@ -317,7 +317,7 @@ func TestOperationsOpCall_ReturnValueArray_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdArrayOfFloat.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 40},
 	}, []byte{})
@@ -327,7 +327,7 @@ func TestOperationsOpCall_ReturnValueArray_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdArrayOfFloat.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 40},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
@@ -340,7 +340,7 @@ func TestOperationsOpCall_ReturnValuePointer_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdPointer(0x100),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdPointer.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 10},
 	}, []byte{})
@@ -350,7 +350,7 @@ func TestOperationsOpCall_ReturnValuePointer_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdPointer(0x100),
 	}, []interface{}{
-		opcode.Call{PushReturn: true, FunctionId: funcInfoCmdPointer.Id},
+		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 10},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
@@ -375,40 +375,40 @@ func TestOperationsOpCall_SingleOutputArg_DontWantOutput(t *testing.T) {
 		NewCmdVoidOutString("hello"),
 	}, []interface{}{
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU8.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS8.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU16.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS16.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF32.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU32.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS32.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF64.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU64.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS64.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutBool.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutBool.ID},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutString.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutString.ID},
 	}, []byte{})
 }
 
@@ -429,79 +429,79 @@ func TestOperationsOpCall_SingleOutputArg_WantOutput(t *testing.T) {
 		NewCmdVoidOutFixedSizeBuffer(0xdeadbeef),
 	}, []interface{}{
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU8.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS8.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS8.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU16.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS16.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS16.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 2},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF32.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU32.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS32.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS32.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 4},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutF64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF64.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutU64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU64.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutS64.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS64.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 8},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutBool.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutBool.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 1},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutString.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutString.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
 		opcode.Post{},
 
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutFixedSizeBuffer.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutFixedSizeBuffer.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 10},
 		opcode.Post{},
@@ -518,7 +518,7 @@ func TestOperationsOpCall_3OutputStrings_DontWantOutput(t *testing.T) {
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x30},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Strings.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOut3Strings.ID},
 	}, []byte{})
 }
 
@@ -532,7 +532,7 @@ func TestOperationsOpCall_3OutputStrings_WantOutput(t *testing.T) {
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x00},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x30},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Strings.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOut3Strings.ID},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: vm.TypeUint32, Value: 0x5f},
 		opcode.Post{},
@@ -550,7 +550,7 @@ func TestOperationsOpCall_RemappedInputs(t *testing.T) {
 		opcode.Clone{Index: 0},
 		opcode.StoreV{Address: 0x4},
 		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x00},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoid3Remapped.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3Remapped.ID},
 	}, []byte{})
 }
 
@@ -567,7 +567,7 @@ func TestOperationsOpCall_RemappedOutputs(t *testing.T) {
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x08},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0c},
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x10},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOut3Remapped.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOut3Remapped.ID},
 		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x08}, // a
 		opcode.StoreV{Address: 0x00},                         // id<0x10>
 		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x0c}, // b
@@ -588,7 +588,7 @@ func TestOperationsOpCall_RemappedArrayOutput(t *testing.T) {
 		// 0x18: a[3]
 		// 0x1c: a[4]
 		opcode.PushI{DataType: vm.TypeVolatilePointer, Value: 0x0c},
-		opcode.Call{PushReturn: false, FunctionId: funcInfoCmdVoidOutArrayOfRemapped.Id},
+		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutArrayOfRemapped.ID},
 		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x0c}, // a[0]
 		opcode.StoreV{Address: 0x00},                         // id<0x10>
 		opcode.LoadV{DataType: vm.TypeUint32, Address: 0x10}, // a[1]

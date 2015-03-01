@@ -37,13 +37,13 @@ type stackItem struct {
 }
 
 type idPostDecoder struct {
-	id atom.Id
+	id atom.ID
 	pd PostDecoder
 }
 
 // Postback holds the information for a single atom's postback data.
 type Postback struct {
-	Id    atom.Id     // The associated atom for this Postback.
+	ID    atom.ID     // The associated atom for this Postback.
 	Data  interface{} // The postback data. Nil if Error is non-nil.
 	Error error       // Error raised decoding the postback, or nil if there was no error.
 }
@@ -64,7 +64,7 @@ type PostDecoder func(*binary.Decoder) (interface{}, error)
 type Builder struct {
 	constantMemory  *constantEncoder
 	heap, temp      allocator
-	resourceIdToIdx map[binary.ID]uint32
+	resourceIDToIdx map[binary.ID]uint32
 	resources       []vm.ResourceInfo
 	observedRanges  memory.RangeList
 	instructions    []asm.Instruction
@@ -89,7 +89,7 @@ func New(ptrSize, ptrAlignment int) *Builder {
 		constantMemory:  newConstantEncoder(ptrAlignment),
 		heap:            allocator{alignment: uint64(ptrAlignment)},
 		temp:            allocator{alignment: uint64(ptrAlignment)},
-		resourceIdToIdx: map[binary.ID]uint32{},
+		resourceIDToIdx: map[binary.ID]uint32{},
 		resources:       []vm.ResourceInfo{},
 		observedRanges:  memory.RangeList{},
 		instructions:    []asm.Instruction{},
@@ -251,7 +251,7 @@ func (b *Builder) CallPush(f FunctionInfo) {
 	b.pushStack(f.ReturnType)
 	b.instructions = append(b.instructions, asm.Call{
 		PushReturn: true,
-		FunctionId: f.Id,
+		FunctionID: f.ID,
 	})
 }
 
@@ -265,7 +265,7 @@ func (b *Builder) CallNoPush(f FunctionInfo) {
 	}
 	b.instructions = append(b.instructions, asm.Call{
 		PushReturn: false,
-		FunctionId: f.Id,
+		FunctionID: f.ID,
 	})
 }
 
@@ -327,7 +327,7 @@ func (b *Builder) Strcpy(maxCount uint64) {
 // Post posts size bytes from addr to the decoder d. The decoder d must consume
 // all size bytes before returning; failure to do this will corrupt all
 // subsequent postbacks.
-func (b *Builder) Post(addr value.Pointer, size uint64, id atom.Id, d PostDecoder) {
+func (b *Builder) Post(addr value.Pointer, size uint64, id atom.ID, d PostDecoder) {
 	if !addr.IsValid() {
 		panic(fmt.Errorf("Pointer address %v is not valid", addr))
 	}
@@ -360,14 +360,14 @@ func (b *Builder) Pop(count uint32) {
 }
 
 // Observation fills the memory range in capture address-space rng with the data
-// of resourceId.
-func (b *Builder) Observation(rng memory.Range, resourceId binary.ID) {
-	idx, found := b.resourceIdToIdx[resourceId]
+// of resourceID.
+func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
+	idx, found := b.resourceIDToIdx[resourceID]
 	if !found {
 		idx = uint32(len(b.resources))
-		b.resourceIdToIdx[resourceId] = idx
+		b.resourceIDToIdx[resourceID] = idx
 		b.resources = append(b.resources, vm.ResourceInfo{
-			Id:   resourceId.String(),
+			ID:   resourceID.String(),
 			Size: uint32(rng.Size),
 		})
 	}
@@ -412,7 +412,7 @@ func (b *Builder) Build(logger log.Logger) (vm.Payload, ResponseDecoder) {
 			for _, p := range b.decoders {
 				data, err := p.pd(d)
 				c <- Postback{
-					Id:    p.id,
+					ID:    p.id,
 					Data:  data,
 					Error: err,
 				}

@@ -38,7 +38,7 @@ const (
 	messageTypePost = 1
 )
 
-type postbackHandlerMap map[atom.Id]PostbackHandler
+type postbackHandlerMap map[atom.ID]PostbackHandler
 
 // ErrNoPostback is returned when a data for a postback could not be retrieved.
 // This can be due to a connection problem or a decode error.
@@ -74,12 +74,12 @@ func (r executor) execute() {
 
 	// Decode and handle postbacks as they are received
 	for postback := range r.decoder(responseR) {
-		if handler, found := r.handlers[postback.Id]; found {
+		if handler, found := r.handlers[postback.ID]; found {
 			handler(postback.Data, postback.Error)
-			delete(r.handlers, postback.Id)
+			delete(r.handlers, postback.ID)
 		} else {
 			r.logger.Warning("No handler registered for postback id 0x%x (%T)",
-				postback.Id, postback.Data)
+				postback.ID, postback.Data)
 		}
 	}
 
@@ -89,7 +89,7 @@ func (r executor) execute() {
 	}
 }
 
-func (r executor) handleReplayCommunication(replayId binary.ID, replaySize uint32, postbacks io.WriteCloser) {
+func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) {
 	logger := r.logger.Enter("handleReplayCommunication")
 
 	connection, err := r.device.connect()
@@ -107,7 +107,7 @@ func (r executor) handleReplayCommunication(replayId binary.ID, replaySize uint3
 		panic(err)
 	}
 
-	if err = e.String(replayId.String()); err != nil {
+	if err = e.String(replayID.String()); err != nil {
 		panic(err)
 	}
 
@@ -155,20 +155,20 @@ func (r executor) handleGetData(rw io.ReadWriter) {
 		panic(err)
 	}
 
-	resourceIds := make([]binary.ID, resourceCount)
-	for i := range resourceIds {
+	resourceIDs := make([]binary.ID, resourceCount)
+	for i := range resourceIDs {
 		idString, err := d.String()
 		if err != nil {
 			panic(err)
 		}
-		resourceIds[i], err = binary.ParseID(idString)
+		resourceIDs[i], err = binary.ParseID(idString)
 		if err != nil {
 			panic(err)
 		}
-		logger.Info("Replay requested resource '%v'", resourceIds[i])
+		logger.Info("Replay requested resource '%v'", resourceIDs[i])
 	}
 
-	for _, rid := range resourceIds {
+	for _, rid := range resourceIDs {
 		data := binary.Data{}
 		err = r.database.Load(rid, logger, &data)
 		if err != nil {

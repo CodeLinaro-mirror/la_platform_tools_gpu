@@ -25,53 +25,53 @@ import (
 // GetState records the parameters of a service.GetState RPC request.
 type GetState struct {
 	Capture service.CaptureId
-	Context atom.ContextId
-	After   atom.Id
+	Context atom.ContextID
+	After   atom.ID
 }
 
 // GetHierarchy records the parameters of a service.GetHierarchy RPC request.
 type GetHierarchy struct {
 	Capture service.CaptureId
-	Context atom.ContextId
+	Context atom.ContextID
 }
 
 // GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.
 type GetMemoryInfo struct {
 	Capture service.CaptureId
-	Context atom.ContextId
-	After   atom.Id
+	Context atom.ContextID
+	After   atom.ID
 	Range   memory.Range
 }
 
 // GetFramebufferColor records the parameters of a service.GetFramebufferColor RPC request.
 type GetFramebufferColor struct {
 	Capture  service.CaptureId
-	Context  atom.ContextId
+	Context  atom.ContextID
 	Device   service.DeviceId
-	After    atom.Id
+	After    atom.ID
 	Settings service.RenderSettings
 }
 
 // GetFramebufferDepth records the parameters of a service.GetFramebufferDepth RPC request.
 type GetFramebufferDepth struct {
 	Capture service.CaptureId
-	Context atom.ContextId
+	Context atom.ContextID
 	Device  service.DeviceId
-	After   atom.Id
+	After   atom.ID
 }
 
 // ReplaceAtom records the parameters of a service.ReplaceAtom RPC request.
 type ReplaceAtom struct {
 	Capture service.CaptureId
-	Atom    atom.Id
-	Type    atom.TypeId
+	Atom    atom.ID
+	Type    atom.TypeID
 	Data    service.Binary
 }
 
 // GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
 type GetTimingInfo struct {
 	Capture    service.CaptureId
-	Context    atom.ContextId
+	Context    atom.ContextID
 	Device     service.DeviceId
 	TimingMask service.TimingMask
 }
@@ -80,7 +80,7 @@ type GetTimingInfo struct {
 type PrerenderFramebuffers struct {
 	Device  service.DeviceId
 	Capture service.CaptureId
-	AtomIds []uint64
+	AtomIDs []uint64
 	Width   uint32
 	Height  uint32
 }
@@ -88,9 +88,9 @@ type PrerenderFramebuffers struct {
 // RenderFramebufferDepth records the parameters of an internal RenderFramebufferDepth request.
 type RenderFramebufferDepth struct {
 	Capture           service.CaptureId
-	Context           atom.ContextId
+	Context           atom.ContextID
 	Device            service.DeviceId
-	After             atom.Id
+	After             atom.ID
 	FramebufferWidth  uint32
 	FramebufferHeight uint32
 }
@@ -98,9 +98,9 @@ type RenderFramebufferDepth struct {
 // RenderFramebufferColor records the parameters of an internal RenderFramebufferColor request.
 type RenderFramebufferColor struct {
 	Capture   service.CaptureId
-	Context   atom.ContextId
+	Context   atom.ContextID
 	Device    service.DeviceId
-	After     atom.Id
+	After     atom.ID
 	Width     uint32
 	Height    uint32
 	Wireframe bool
@@ -109,12 +109,12 @@ type RenderFramebufferColor struct {
 // getCaptureFramebufferDimensions records the parameters of an internal request.
 type getCaptureFramebufferDimensions struct {
 	Capture service.CaptureId
-	Context atom.ContextId
+	Context atom.ContextID
 }
 
 // atomFramebufferDimensions records the parameters of an internal resource for getCaptureFramebufferDimensions.
 type atomFramebufferDimensions struct {
-	From   atom.Id
+	From   atom.ID
 	Width  uint32
 	Height uint32
 }

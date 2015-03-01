@@ -16,18 +16,18 @@ package atom
 
 import "android.googlesource.com/platform/tools/gpu/binary"
 
-// Id is the index of an atom in an atom stream.
-type Id uint64
+// ID is the index of an atom in an atom stream.
+type ID uint64
 
 // Encode encodes the Id using the specified encoder.
-func (i Id) Encode(e *binary.Encoder) error {
+func (i ID) Encode(e *binary.Encoder) error {
 	return e.Uint64(uint64(i))
 }
 
 // Decode encodes the Id using the specified decoder.
-func (i *Id) Decode(d *binary.Decoder) error {
+func (i *ID) Decode(d *binary.Decoder) error {
 	if val, err := d.Uint64(); err == nil {
-		*i = Id(val)
+		*i = ID(val)
 		return nil
 	} else {
 		return err

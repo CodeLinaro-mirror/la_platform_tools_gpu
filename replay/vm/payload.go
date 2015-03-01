@@ -27,7 +27,7 @@ type Data struct {
 
 // ResourceInfo describes a resource used by a Payload.
 type ResourceInfo struct {
-	Id   string // The resource identifier as a string.
+	ID   string // The resource identifier as a string.
 	Size uint32 // The size in bytes of the resource.
 }
 

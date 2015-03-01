@@ -28,7 +28,7 @@ type Writer interface {
 	// Write emits the replay instructions for the atom a with identifier id using
 	// the replay Builder passed to NewEncoder. If postOutput is true then postback
 	// logic should be emitted for this atom.
-	Write(id atom.Id, a atom.Atom, postOutput bool)
+	Write(id atom.ID, a atom.Atom, postOutput bool)
 }
 
 // Generator is the interface for types that support replay generation.
@@ -57,7 +57,7 @@ type Generator interface {
 type Context struct {
 	DeviceID  service.DeviceId  // The identifier of the device being used for replay.
 	CaptureID service.CaptureId // The identifier of the capture that is being replayed.
-	ContextID atom.ContextId    // The identifier of the context that is being replayed.
+	ContextID atom.ContextID    // The identifier of the context that is being replayed.
 }
 
 // Config is a user-defined type used to describe the type of replay being
@@ -77,7 +77,7 @@ type Request interface{}
 // Postback registers handler to be called with the postback data for the atom
 // with the returned identifier. The returned atom identifier is unique,
 // enforcing at most one postback handler per atom.
-type Postback func(handler PostbackHandler) atom.Id
+type Postback func(handler PostbackHandler) atom.ID
 
 // PostbackHandler is a callback for an atom's postback data.
 // If the postback was successful then data holds the postback data, and err is

@@ -13,7 +13,7 @@ type mockWriter struct {
 	atoms []atom.Atom
 }
 
-func (m *mockWriter) Write(id atom.Id, a atom.Atom) {
+func (m *mockWriter) Write(id atom.ID, a atom.Atom) {
 	m.atoms = append(m.atoms, a)
 }
 

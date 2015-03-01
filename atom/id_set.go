@@ -14,23 +14,23 @@
 
 package atom
 
-// IdSet is a set of Ids.
-type IdSet map[Id]struct{}
+// IDSet is a set of IDs.
+type IDSet map[ID]struct{}
 
 // Remove removes id from the set. If the id was not in the set then the call
 // does nothing.
-func (s *IdSet) Remove(id Id) {
+func (s *IDSet) Remove(id ID) {
 	delete(*s, id)
 }
 
 // Add adds id to the set. If the id was already in the set then the call does
 // nothing.
-func (s *IdSet) Add(id Id) {
+func (s *IDSet) Add(id ID) {
 	(*s)[id] = struct{}{}
 }
 
 // Contains returns true if id is in the set, otherwise false.
-func (s IdSet) Contains(id Id) bool {
+func (s IDSet) Contains(id ID) bool {
 	_, ok := s[id]
 	return ok
 }

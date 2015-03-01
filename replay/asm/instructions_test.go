@@ -50,8 +50,8 @@ func TestCall(t *testing.T) {
 			Call{false, 0x1234},
 			Call{true, 0x5678},
 		},
-		opcode.Call{PushReturn: false, FunctionId: 0x1234},
-		opcode.Call{PushReturn: true, FunctionId: 0x5678},
+		opcode.Call{PushReturn: false, FunctionID: 0x1234},
+		opcode.Call{PushReturn: true, FunctionID: 0x5678},
 	)
 }
 

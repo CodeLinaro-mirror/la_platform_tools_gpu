@@ -32,11 +32,11 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 	if err != nil {
 		return err
 	}
-	if request.After >= atom.Id(len(atoms)) {
+	if request.After >= atom.ID(len(atoms)) {
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	contextId := atoms[request.After].ContextId()
+	contextID := atoms[request.After].ContextID()
 	api, err := getAPI(request.Capture, db, logger)
 	if err != nil {
 		return err
@@ -45,10 +45,10 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 	state := api.InitialState()
 	stateMutator := api.StateMutator(state)
 	for i, a := range atoms {
-		if a.ContextId() == contextId {
-			stateMutator.Write(atom.Id(i), a)
+		if a.ContextID() == contextID {
+			stateMutator.Write(atom.ID(i), a)
 		}
-		if atom.Id(i) == request.After {
+		if atom.ID(i) == request.After {
 			break
 		}
 	}

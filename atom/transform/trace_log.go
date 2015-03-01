@@ -26,7 +26,7 @@ type Trace struct {
 	Logger log.Logger
 }
 
-func (t *Trace) Process(id atom.Id, a atom.Atom, out atom.Writer) {
+func (t *Trace) Process(id atom.ID, a atom.Atom, out atom.Writer) {
 	t.Logger.Info("%v %#v", id, a, a)
 	out.Write(id, a)
 }

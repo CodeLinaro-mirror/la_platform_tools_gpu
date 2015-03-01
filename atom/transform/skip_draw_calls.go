@@ -18,26 +18,26 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 
 type atomAtomID struct {
 	atom atom.Atom
-	id   atom.Id
+	id   atom.ID
 }
 
 // SkipDrawCalls is an implementation of Transformer that skips all draw calls
 // that have not been explicitly requested.
 type SkipDrawCalls struct {
-	requests atom.IdSet
+	requests atom.IDSet
 	buffer   []atomAtomID
 }
 
 // Draw adds an exception to allow all draw calls up to and including the atom
 // with identifier id for the frame holding the atom.
-func (t *SkipDrawCalls) Draw(id atom.Id) {
+func (t *SkipDrawCalls) Draw(id atom.ID) {
 	if t.requests == nil {
-		t.requests = make(atom.IdSet)
+		t.requests = make(atom.IDSet)
 	}
 	t.requests.Add(id)
 }
 
-func (t *SkipDrawCalls) Transform(id atom.Id, a atom.Atom, out atom.Writer) {
+func (t *SkipDrawCalls) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	t.buffer = append(t.buffer, atomAtomID{a, id})
 
 	if t.requests.Contains(id) {

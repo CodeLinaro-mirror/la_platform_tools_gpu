@@ -64,7 +64,7 @@ limitations under the License.
       atom.Register(atom.TypeInfo{
         Name: "{{$c.Name}}",
         Docs: "{{$c.Docs}}",
-        Id: {{$i}},
+        ID: {{$i}},
         New: func() atom.Atom { return &{{Macro "Go.Public" $c.Name}}{} },
       })
     {{end}}
@@ -209,7 +209,7 @@ limitations under the License.
   {{else}}
 
     type {{$.Name}} struct {
-      CreatedAt atom.Id
+      CreatedAt atom.ID
       {{Macro "ClassFields" $}}
     }
 
@@ -233,52 +233,52 @@ limitations under the License.
       return nil
     }
 
-    func (c *{{$.Name}}) GetCreatedAt() atom.Id {return c.CreatedAt}
+    func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
     {{range $i,$c := $.Extends}}
       {{Macro "ClassImpl" "Class" $c "Impl" $.Name}}
     {{end}}
   {{end}}
 {{end}}
 
-{{define "ClassIdInterface"}}
+{{define "ClassIDInterface"}}
   {{AssertType $ "Class"}}
   {{$.Name}}()
   {{range $i,$c := $.Extends}}
-    {{Macro "ClassIdInterface" $c}}
+    {{Macro "ClassIDInterface" $c}}
   {{end}}
 {{end}}
 
-{{define "ClassIdImpl"}}
+{{define "ClassIDImpl"}}
   {{AssertType $.Class "Class"}}
   {{AssertType $.Impl "Class"}}
   func (id {{$.Impl}}) {{$.Class.Name}}() {}
   {{range $i, $c := $.Class.Extends}}
-    {{Macro "ClassIdImpl" "Class" $c "Impl" $.Impl}}
+    {{Macro "ClassIDImpl" "Class" $c "Impl" $.Impl}}
   {{end}}
 {{end}}
 
-{{define "ClassId"}}
+{{define "ClassID"}}
   {{AssertType $ "Class"}}
-  {{$IdImplType := print "i" $.Type.Name}}
+  {{$IDImplType := print "i" $.Type.Name}}
   type {{$.Type.Name}} interface {
     String() string
-    Id() int32
-    {{Macro "ClassIdInterface" $.To.Detail}}
+    ID() int32
+    {{Macro "ClassIDInterface" $.To.Detail}}
   }
 
-  type {{$IdImplType}} int32
+  type {{$IDImplType}} int32
 
-  func As{{$.Type.Name}}(id int32) {{$IdImplType}} { return {{$IdImplType}}(id) }
+  func As{{$.Type.Name}}(id int32) {{$IDImplType}} { return {{$IDImplType}}(id) }
 
-  func (id {{$IdImplType}}) String() string {
+  func (id {{$IDImplType}}) String() string {
     return fmt.Sprintf("{{$.Type.Name}}<%d>", int32(id))
   }
 
-  func (id {{$IdImplType}}) Id() int32 {
+  func (id {{$IDImplType}}) ID() int32 {
     return int32(id)
   }
 
-  {{Macro "ClassIdImpl" "Class" $.To.Detail "Impl" $IdImplType}}
+  {{Macro "ClassIDImpl" "Class" $.To.Detail "Impl" $IDImplType}}
 
 {{end}}
 
@@ -320,7 +320,7 @@ limitations under the License.
   }
 
   type {{$name}} struct {
-    Context atom.ContextId
+    Context atom.ContextID
     In  {{Macro "Go.CmdInsName" $.Command}}
     Out {{Macro "Go.CmdOutsName" $.Command}}
   }
@@ -346,11 +346,11 @@ limitations under the License.
     return strings.Join(parts, "")
   }
 
-  func (c *{{$name}}) ContextId() atom.ContextId {
+  func (c *{{$name}}) ContextID() atom.ContextID {
     return c.Context
   }
 
-  func (c *{{$name}}) TypeId() atom.TypeId {
+  func (c *{{$name}}) TypeID() atom.TypeID {
     return {{$.Index}}
   }
 

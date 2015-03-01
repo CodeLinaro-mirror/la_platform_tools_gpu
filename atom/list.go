@@ -27,19 +27,19 @@ type List []Atom
 // atom of each context.
 func (l *List) WriteTo(w Writer) {
 	// Find the last atom index for each context
-	last := make(map[ContextId]int)
+	last := make(map[ContextID]int)
 	for i, a := range *l {
-		last[a.ContextId()] = i
+		last[a.ContextID()] = i
 	}
 
 	// Write out the atoms, injecting EOS markers for each context.
-	nextEosId := Id(len(*l))
+	nextEosID := ID(len(*l))
 	for i, a := range *l {
-		w.Write(Id(i), a)
-		ctx := a.ContextId()
+		w.Write(ID(i), a)
+		ctx := a.ContextID()
 		if last[ctx] == i {
-			w.Write(nextEosId, &EOS{Context: ctx})
-			nextEosId++
+			w.Write(nextEosID, &EOS{Context: ctx})
+			nextEosID++
 		}
 	}
 }
@@ -57,7 +57,7 @@ func (l *List) Add(a Atom) {
 }
 
 // Add adds a to the list before the atom at id.
-func (l *List) AddAt(a Atom, id Id) {
+func (l *List) AddAt(a Atom, id ID) {
 	*l = append(*l, nil)
 	copy((*l)[id+1:], (*l)[id:])
 	(*l)[id] = a
@@ -68,7 +68,7 @@ func (l *List) Encode(e *binary.Encoder) error {
 	atomBuf := &bytes.Buffer{}
 	atomEnc := binary.NewEncoder(atomBuf)
 	for _, atom := range *l {
-		if err := atom.TypeId().Encode(atomEnc); err != nil {
+		if err := atom.TypeID().Encode(atomEnc); err != nil {
 			return err
 		}
 
@@ -105,12 +105,12 @@ func (l *List) Decode(d *binary.Decoder) error {
 			break
 		}
 
-		var typeId TypeId
-		if err := typeId.Decode(d); err != nil {
+		var typeID TypeID
+		if err := typeID.Decode(d); err != nil {
 			return err
 		}
 
-		atom, err := New(TypeId(typeId))
+		atom, err := New(TypeID(typeID))
 		if err != nil {
 			return err
 		}

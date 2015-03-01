@@ -90,16 +90,16 @@ func (g Group) Count() uint64 {
 }
 
 // Index returns the item with the specified index. If the item refers directly
-// to an atom identifier then the atom identifier is returned in baseAtomId and
+// to an atom identifier then the atom identifier is returned in baseAtomID and
 // subgroup is assigned nil.
-// If the item is a sub-group then baseAtomId is returned as the lowest atom
+// If the item is a sub-group then baseAtomID is returned as the lowest atom
 // identifier found in the sub-group and subgroup is assigned the sub-group
 // pointer.
-func (g Group) Index(index uint64) (baseAtomId Id, subgroup *Group) {
+func (g Group) Index(index uint64) (baseAtomID ID, subgroup *Group) {
 	base := g.Range.First()
 	for i := range g.SubGroups {
 		sg := &g.SubGroups[i]
-		if base+Id(index) < sg.Range.First() {
+		if base+ID(index) < sg.Range.First() {
 			break
 		}
 		index -= uint64(sg.Range.First() - base)
@@ -109,45 +109,45 @@ func (g Group) Index(index uint64) (baseAtomId Id, subgroup *Group) {
 		index--
 		base = sg.Range.Last() + 1
 	}
-	return base + Id(index), nil
+	return base + ID(index), nil
 }
 
 // IndexOf returns the item index that refers directly to, or contains the given
 // atom identifer.
-func (g Group) IndexOf(atomId Id) uint64 {
+func (g Group) IndexOf(atomID ID) uint64 {
 	index := uint64(0)
 	base := g.Range.First()
 	for _, sg := range g.SubGroups {
-		if atomId < sg.Range.First() {
+		if atomID < sg.Range.First() {
 			break
 		}
 		index += uint64(sg.Range.First() - base)
 		base = sg.Range.Last() + 1
-		if atomId <= sg.Range.Last() {
+		if atomID <= sg.Range.Last() {
 			return index
 		}
 		index++
 	}
-	return index + uint64(atomId-base)
+	return index + uint64(atomID-base)
 }
 
 // Insert adjusts the spans of this group and all subgroups for an insertion
-// of count elements at atomId.
-func (g *Group) Insert(atomId Id, count int) {
+// of count elements at atomID.
+func (g *Group) Insert(atomID ID, count int) {
 	s, e := g.Range.Range()
-	if s >= atomId {
-		s += Id(count)
+	if s >= atomID {
+		s += ID(count)
 	}
-	if e > atomId {
-		e += Id(count)
+	if e > atomID {
+		e += ID(count)
 	}
 	g.Range = Range{s, e}
 	i := interval.Search(&g.SubGroups, func(test interval.U64Span) bool {
-		return uint64(atomId) < test.End
+		return uint64(atomID) < test.End
 	})
 	for i < len(g.SubGroups) {
 		sg := g.SubGroups[i]
-		sg.Insert(atomId, count)
+		sg.Insert(atomID, count)
 		g.SubGroups[i] = sg
 		i++
 	}

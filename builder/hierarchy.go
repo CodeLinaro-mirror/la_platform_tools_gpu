@@ -33,25 +33,25 @@ func (request *GetHierarchy) build(db database.Database, logger log.Logger, out 
 	}
 
 	root := atom.Group{
-		Range: atom.Range{Start: 0, End: atom.Id(len(atoms))},
+		Range: atom.Range{Start: 0, End: atom.ID(len(atoms))},
 	}
 	var frameIndex, drawIndex int
-	var frameStartId, drawStartId atom.Id
+	var frameStartID, drawStartID atom.ID
 	for i, a := range atoms {
-		if a.ContextId() != request.Context {
+		if a.ContextID() != request.Context {
 			continue
 		}
-		endId := atom.Id(i + 1) // Increment by one, since atom.Range's end is non-inclusive.
+		endID := atom.ID(i + 1) // Increment by one, since atom.Range's end is non-inclusive.
 		if a.Flags().IsEndOfFrame() {
-			root.SubGroups.Add(frameStartId, endId, fmt.Sprintf("Frame %d", frameIndex))
-			frameStartId = endId
+			root.SubGroups.Add(frameStartID, endID, fmt.Sprintf("Frame %d", frameIndex))
+			frameStartID = endID
 			frameIndex++
-			drawStartId = endId
+			drawStartID = endID
 			drawIndex = 0 // Reset the draw index, it is relative to the new frame index.
 		}
 		if a.Flags().IsDrawCall() {
-			root.SubGroups.Add(drawStartId, endId, fmt.Sprintf("Draw %d", drawIndex))
-			drawStartId = endId
+			root.SubGroups.Add(drawStartID, endID, fmt.Sprintf("Draw %d", drawIndex))
+			drawStartID = endID
 			drawIndex++
 		}
 	}

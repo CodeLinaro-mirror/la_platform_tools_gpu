@@ -11,7 +11,7 @@ import (
 // precisionStrip returns a transform that removes all precision specifiers from
 // shader programs.
 func precisionStrip() atom.Transform {
-	return func(id atom.Id, a atom.Atom, out atom.Writer) {
+	return func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlShaderSource); ok {
 			var src string
 

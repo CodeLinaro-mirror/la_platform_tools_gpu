@@ -32,7 +32,7 @@ func (request *GetMemoryInfo) build(db database.Database, logger log.Logger, out
 	if err != nil {
 		return err
 	}
-	if request.After >= atom.Id(len(atoms)) {
+	if request.After >= atom.ID(len(atoms)) {
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
@@ -44,7 +44,7 @@ func (request *GetMemoryInfo) build(db database.Database, logger log.Logger, out
 	state := api.InitialState()
 	mutator := api.StateMutator(state)
 	for i, a := range atoms[:request.After] {
-		mutator.Write(atom.Id(i), a)
+		mutator.Write(atom.ID(i), a)
 	}
 
 	// TODO: Stale, Unknown

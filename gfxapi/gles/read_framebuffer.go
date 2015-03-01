@@ -15,8 +15,8 @@ import (
 // base for atoms that require custom replay handling.
 type transientAtom struct{}
 
-func (transientAtom) TypeId() atom.TypeId          { return 0 }
-func (transientAtom) ContextId() atom.ContextId    { return 0 }
+func (transientAtom) TypeID() atom.TypeID          { return 0 }
+func (transientAtom) ContextID() atom.ContextID    { return 0 }
 func (transientAtom) Flags() atom.Flags            { return 0 }
 func (transientAtom) Encode(*binary.Encoder) error { return nil }
 func (transientAtom) Decode(*binary.Decoder) error { return nil }
@@ -30,7 +30,7 @@ var _ = replayer(readFramebufferColor{})
 // bound framebuffer's depth attachment.
 type readFramebufferDepth struct{ transientAtom }
 
-func (c readFramebufferDepth) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+func (c readFramebufferDepth) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
 	fbW, fbH, err := s.GetFramebufferAttachmentSize(gfxapi.FramebufferAttachmentDepth)
 	if err != nil {
 		b.EndAtom()
@@ -60,7 +60,7 @@ type readFramebufferColor struct {
 	width, height uint32
 }
 
-func (c readFramebufferColor) replay(id atom.Id, s *state, b *builder.Builder, wantOutput bool) {
+func (c readFramebufferColor) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
 	imageSize := uint64(c.height * c.width * 4)
 	addr := b.AllocateTemporaryMemory(imageSize)
 
@@ -73,38 +73,38 @@ func (c readFramebufferColor) replay(id atom.Id, s *state, b *builder.Builder, w
 	if c.width == fbW && c.height == fbH {
 		captureImageData(b, int32(c.width), int32(c.height), uint32(TexelFormat_GL_RGBA), uint32(IndicesType_GL_UNSIGNED_BYTE), addr)
 	} else {
-		origReadFramebufferId := b.AllocateTemporaryMemory(4)
-		origDrawFramebufferId := b.AllocateTemporaryMemory(4)
-		origRenderbufferId := b.AllocateTemporaryMemory(4)
-		frameBufferId := b.AllocateTemporaryMemory(4)
-		renderBufferId := b.AllocateTemporaryMemory(4)
+		origReadFramebufferID := b.AllocateTemporaryMemory(4)
+		origDrawFramebufferID := b.AllocateTemporaryMemory(4)
+		origRenderbufferID := b.AllocateTemporaryMemory(4)
+		frameBufferID := b.AllocateTemporaryMemory(4)
+		renderBufferID := b.AllocateTemporaryMemory(4)
 
 		b.Push(value.U32(StateVariable_GL_READ_FRAMEBUFFER_BINDING))
-		b.Push(origReadFramebufferId)
+		b.Push(origReadFramebufferID)
 		b.CallNoPush(funcInfoGlGetIntegerv)
 
 		b.Push(value.U32(StateVariable_GL_FRAMEBUFFER_BINDING))
-		b.Push(origDrawFramebufferId)
+		b.Push(origDrawFramebufferID)
 		b.CallNoPush(funcInfoGlGetIntegerv)
 
 		b.Push(value.U32(StateVariable_GL_RENDERBUFFER_BINDING))
-		b.Push(origRenderbufferId)
+		b.Push(origRenderbufferID)
 		b.CallNoPush(funcInfoGlGetIntegerv)
 
 		b.Push(value.S32(1))
-		b.Push(frameBufferId)
+		b.Push(frameBufferID)
 		b.CallNoPush(funcInfoGlGenFramebuffers)
 
 		b.Push(value.U32(FramebufferTarget_GL_DRAW_FRAMEBUFFER))
-		b.Load(vm.TypeUint32, frameBufferId)
+		b.Load(vm.TypeUint32, frameBufferID)
 		b.CallNoPush(funcInfoGlBindFramebuffer)
 
 		b.Push(value.S32(1))
-		b.Push(renderBufferId)
+		b.Push(renderBufferID)
 		b.CallNoPush(funcInfoGlGenRenderbuffers)
 
 		b.Push(value.U32(RenderbufferTarget_GL_RENDERBUFFER))
-		b.Load(vm.TypeUint32, renderBufferId)
+		b.Load(vm.TypeUint32, renderBufferID)
 		b.CallNoPush(funcInfoGlBindRenderbuffer)
 
 		b.Push(value.U32(RenderbufferTarget_GL_RENDERBUFFER))
@@ -116,7 +116,7 @@ func (c readFramebufferColor) replay(id atom.Id, s *state, b *builder.Builder, w
 		b.Push(value.U32(FramebufferTarget_GL_DRAW_FRAMEBUFFER))
 		b.Push(value.U32(FramebufferAttachment_GL_COLOR_ATTACHMENT0))
 		b.Push(value.U32(RenderbufferTarget_GL_RENDERBUFFER))
-		b.Load(vm.TypeUint32, renderBufferId)
+		b.Load(vm.TypeUint32, renderBufferID)
 		b.CallNoPush(funcInfoGlFramebufferRenderbuffer)
 
 		b.Push(value.S32(0))
@@ -132,29 +132,29 @@ func (c readFramebufferColor) replay(id atom.Id, s *state, b *builder.Builder, w
 		b.CallNoPush(funcInfoGlBlitFramebuffer)
 
 		b.Push(value.U32(FramebufferTarget_GL_READ_FRAMEBUFFER))
-		b.Load(vm.TypeUint32, frameBufferId)
+		b.Load(vm.TypeUint32, frameBufferID)
 		b.CallNoPush(funcInfoGlBindFramebuffer)
 
 		captureImageData(b, int32(c.width), int32(c.height), uint32(TexelFormat_GL_RGBA), uint32(TexelType_GL_UNSIGNED_BYTE), addr)
 
 		b.Push(value.U32(RenderbufferTarget_GL_RENDERBUFFER))
-		b.Load(vm.TypeUint32, origRenderbufferId)
+		b.Load(vm.TypeUint32, origRenderbufferID)
 		b.CallNoPush(funcInfoGlBindRenderbuffer)
 
 		b.Push(value.U32(FramebufferTarget_GL_READ_FRAMEBUFFER))
-		b.Load(vm.TypeUint32, origReadFramebufferId)
+		b.Load(vm.TypeUint32, origReadFramebufferID)
 		b.CallNoPush(funcInfoGlBindFramebuffer)
 
 		b.Push(value.U32(FramebufferTarget_GL_DRAW_FRAMEBUFFER))
-		b.Load(vm.TypeUint32, origDrawFramebufferId)
+		b.Load(vm.TypeUint32, origDrawFramebufferID)
 		b.CallNoPush(funcInfoGlBindFramebuffer)
 
 		b.Push(value.S32(1))
-		b.Push(renderBufferId)
+		b.Push(renderBufferID)
 		b.CallNoPush(funcInfoGlDeleteRenderbuffers)
 
 		b.Push(value.S32(1))
-		b.Push(frameBufferId)
+		b.Push(frameBufferID)
 		b.CallNoPush(funcInfoGlDeleteFramebuffers)
 	}
 

@@ -43,8 +43,8 @@ func (l GroupList) String() string {
 
 // IndexOf returns the index of the group that contains the atom identifier or
 // -1 if not found.
-func (l *GroupList) IndexOf(atomId Id) int {
-	return interval.IndexOf(l, uint64(atomId))
+func (l *GroupList) IndexOf(atomID ID) int {
+	return interval.IndexOf(l, uint64(atomID))
 }
 
 // Add inserts a new atom group into the list with the specified range and name.
@@ -57,7 +57,7 @@ func (l *GroupList) IndexOf(atomId Id) int {
 // the new group is added to the list, keeping ascending atom-identifier order.
 // If the new group partially overlaps any existing group then the function will
 // panic.
-func (l *GroupList) Add(start, end Id, name string) {
+func (l *GroupList) Add(start, end ID, name string) {
 	r := Range{start, end}
 	g := Group{Name: name, Range: r}
 	s, c := interval.Intersect(l, r.Span())
