@@ -30,31 +30,36 @@ const (
 func TestCallbackCalledOnExit(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(3)
-	Register(func() { wg.Done() }, callbackTimeout)
-	Register(func() { wg.Done() }, callbackTimeout)
-	Register(func() { wg.Done() }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
 
-	Exit()
+	go Exit(0)
 
-	// Check that all callbacks have been called, or timeout after a second.
+	// Close the done channel after all callbacks have been called.
 	done := make(chan bool, 1)
 	go func() {
 		wg.Wait()
 		close(done)
 	}()
+
+	// Note: we're only waiting for half the timeout time, otherwise os.Exit()
+	// will kick in and our test won't have a chance to complete. This is
+	// shorter than the worst-case expected behavior but our registered callbacks
+	// aren't doing anything before closing their WaitGroup item.
 	select {
 	case <-done:
-	case <-time.After(callbackTimeout):
-		t.Errorf("Expected all callbacks to have been called, but timed out.")
+	case <-time.After(callbackTimeout / 2):
+		t.Errorf("Unexpected callbacks timeout.")
 	}
 }
 
 func TestCallbackCalledOnInterruption(t *testing.T) {
 	var wg sync.WaitGroup
 	wg.Add(3)
-	Register(func() { wg.Done() }, callbackTimeout)
-	Register(func() { wg.Done() }, callbackTimeout)
-	Register(func() { wg.Done() }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
+	Register(func() { wg.Done(); select {} }, callbackTimeout)
 
 	// Setup interruption signal interception.
 	interrupted := make(chan bool, 1)
@@ -72,22 +77,27 @@ func TestCallbackCalledOnInterruption(t *testing.T) {
 	}
 	proc.Signal(os.Interrupt)
 
-	// Wait for signal interception, or timeout after a second.
+	// Wait for signal interception, or timeout after interruptTimeout.
 	select {
 	case <-interrupted:
 	case <-time.After(interruptTimeout):
-		t.Errorf("Unexpected signal interception timeout after one second.")
+		t.Errorf("Unexpected signal timeout.")
 	}
 
-	// Check that all callbacks have been called, or timeout after a second.
+	// Close the done channel after all callbacks have been called.
 	done := make(chan bool, 1)
 	go func() {
 		wg.Wait()
 		close(done)
 	}()
+
+	// Note: we're only waiting for half the timeout time, otherwise os.Exit()
+	// will kick in and our test won't have a chance to complete. This is
+	// shorter than the worst-case expected behavior but our registered callbacks
+	// aren't doing anything before closing their WaitGroup item.
 	select {
 	case <-done:
-	case <-time.After(callbackTimeout):
-		t.Errorf("Expected all callbacks to have been called, but timed out.")
+	case <-time.After(callbackTimeout / 2):
+		t.Errorf("Unexpected callbacks timeout.")
 	}
 }
