@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package semantic holds the set of types used in the abstract semantic graph
-// representation of the api language.
 package atexit
 
 import (

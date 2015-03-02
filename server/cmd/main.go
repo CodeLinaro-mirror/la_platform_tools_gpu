@@ -35,7 +35,7 @@ var (
 )
 
 func main() {
-	defer atexit.Exit()
+	defer atexit.Exit(0)
 
 	flag.Parse()
 
