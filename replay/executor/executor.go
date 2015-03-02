@@ -101,8 +101,9 @@ func (r executor) execute() error {
 	}
 
 	// Report missing postbacks as errors
-	for _, handler := range r.handlers {
+	for id, handler := range r.handlers {
 		handler(nil, ErrNoPostback)
+		delete(r.handlers, id)
 	}
 
 	return <-comErr

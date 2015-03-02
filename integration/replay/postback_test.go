@@ -19,6 +19,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -27,10 +28,10 @@ import (
 )
 
 func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.PostbackHandlerMap) {
-	db, logger := newInMemoryDatabase(), log.Testing(t)
+	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
 
 	mgr := replay.New(db, logger)
-	device := findLocalDevice(t, mgr)
+	device := utils.FindLocalDevice(t, mgr)
 
 	connection, err := device.Connect()
 	if err != nil {
