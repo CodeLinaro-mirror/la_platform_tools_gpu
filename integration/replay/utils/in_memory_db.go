@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package replay
+package utils
 
 import (
 	"bytes"
@@ -29,9 +29,9 @@ type inMemoryDatabase struct {
 	entries map[binary.ID]binary.Object
 }
 
-// newInMemoryDatabase returns a partial implementation of Database, keeping
+// NewInMemoryDatabase returns a partial implementation of Database, keeping
 // all entries in-memory.
-func newInMemoryDatabase() database.Database {
+func NewInMemoryDatabase() database.Database {
 	return &inMemoryDatabase{
 		links:   make(map[binary.ID]binary.ID),
 		entries: make(map[binary.ID]binary.Object),

@@ -69,7 +69,7 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 		Model: "Unknown",
 	}}}
 
-	if loadDeviceConfig(d, db, m.logger) == nil {
+	if err := loadDeviceConfig(d, db, m.logger); err == nil {
 		id, err := db.Store(d.device, log.Nop{})
 		if err != nil {
 			panic(err)
@@ -79,6 +79,8 @@ func (m *discovery) discoverAndroidDevices(db database.Database) {
 		m.Lock()
 		defer m.Unlock()
 		m.devices[d.id] = d
+	} else {
+		m.logger.Info("Failed to communicate with Android device '%s': %v", d.Info().Name, err)
 	}
 }
 
@@ -98,16 +100,12 @@ func (m *discovery) discoverLocalDevices(db database.Database) {
 		m.Lock()
 		defer m.Unlock()
 		m.devices[d.id] = d
+	} else {
+		m.logger.Warning("Failed to communicate with local device '%s': %v", d.Info().Name, err)
 	}
 }
 
-func loadDeviceConfig(d Device, db database.Database, logger log.Logger) (err error) {
-	defer func() {
-		if err != nil {
-			logger.Error("Failed to load device '%s' config: %v", d.Info().Name, err)
-		}
-	}()
-
+func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 	connection, err := d.Connect()
 	if err != nil {
 		return err

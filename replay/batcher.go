@@ -63,29 +63,42 @@ func (b *batcher) run() {
 			}
 		}
 		// Batch formed. Trigger the replay.
-		b.send(requests)
+		if err := b.send(requests); err != nil {
+			b.logger.Error("%v", err)
+		}
 	}
 }
 
-func (b *batcher) send(requests []Request) {
+func (b *batcher) send(requests []Request) (err error) {
+	postbackHandlers := make(executor.PostbackHandlerMap)
+
+	defer func() {
+		if r := recover(); r != nil {
+			err = fmt.Errorf("Failed to send replay: %v", r)
+		}
+		if err != nil {
+			// Report errors to all postback handlers.
+			for _, h := range postbackHandlers {
+				h(nil, err)
+			}
+		}
+	}()
+
 	var c service.Capture
-	if err := b.transientDb.Load(b.context.CaptureID.ID, log.Nop{}, &c); err != nil {
-		b.logger.Warning("Failed to load capture (%s): %v", b.context.CaptureID, err)
-		return
+	if err := b.transientDb.Load(b.context.CaptureID.ID, b.logger, &c); err != nil {
+		return fmt.Errorf("Failed to load capture (%s): %v", b.context.CaptureID, err)
 	}
 
 	var stream service.AtomStream
-	if err := b.transientDb.Load(c.Atoms.ID, log.Nop{}, &stream); err != nil {
-		b.logger.Warning("Failed to load atom stream (%s): %v", c.Atoms, err)
-		return
+	if err := b.transientDb.Load(c.Atoms.ID, b.logger, &stream); err != nil {
+		return fmt.Errorf("Failed to load atom stream (%s): %v", c.Atoms, err)
 	}
 
 	atoms, err := stream.List()
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	postbackHandlers := make(executor.PostbackHandlerMap)
 	nextID := atom.ID(0x10000000)
 	postback := func(handler PostbackHandler) atom.ID {
 		id := nextID
@@ -105,7 +118,7 @@ func (b *batcher) send(requests []Request) {
 		b.persistentDb,
 		b.logger)
 
-	b.logger.Info("Replaying using transform chain: ")
+	b.logger.Info("Replaying %d atoms using transform chain:", len(atoms))
 	for i, t := range transforms {
 		b.logger.Info("(%d) %#v", i, t)
 	}
@@ -119,16 +132,11 @@ func (b *batcher) send(requests []Request) {
 
 	connection, err := b.device.Connect()
 	if err != nil {
-		err := fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
-		b.logger.Error("%v", err)
-		for _, h := range postbackHandlers {
-			h(nil, err)
-		}
-		return
+		return fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
 	}
 	defer connection.Close()
 
-	executor.Execute(
+	return executor.Execute(
 		payload,
 		decoder,
 		connection,
