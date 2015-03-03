@@ -15,14 +15,41 @@
 package binary
 
 import (
-	"bytes"
 	"reflect"
 
 	"math/rand"
 	"testing"
 )
 
-func prepare(a interface{}) (*Encoder, *Decoder) {
+const count = 100000
+
+type buffer struct {
+	data []byte
+	at   int
+}
+
+func (b *buffer) Write(p []byte) (int, error) {
+	n := len(b.data)
+	b.data = b.data[:n+len(p)]
+	return copy(b.data[n:], p), nil
+}
+
+func (b *buffer) Read(p []byte) (int, error) {
+	n := copy(p, b.data[b.at:])
+	b.at += n
+	return n, nil
+}
+
+func (b *buffer) Reset() {
+	b.at = 0
+	b.data = b.data[0:0]
+}
+
+func (b *buffer) Rewind() {
+	b.at = 0
+}
+
+func prepare(a interface{}) (*Encoder, *Decoder, *buffer) {
 	rand.Seed(1)
 	s := reflect.ValueOf(a)
 	maxSize := 0
@@ -56,131 +83,168 @@ func prepare(a interface{}) (*Encoder, *Decoder) {
 		}
 	}
 	// build a big enough buffer, and wrap it in coders
-	buf := &bytes.Buffer{}
-	buf.Grow(s.Len() * maxSize)
-	return NewEncoder(buf), NewDecoder(buf)
+	buf := &buffer{data: make([]byte, 0, s.Len()*maxSize)}
+	return NewEncoder(buf), NewDecoder(buf), buf
 }
 
 func TestRoundTripInt8(t *testing.T) {
-	values := make([]int8, 1000)
-	e, d := prepare(values)
+	values := make([]int8, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Int8(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Int8()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripUint8(t *testing.T) {
-	values := make([]uint8, 1000)
-	e, d := prepare(values)
+	values := make([]uint8, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Uint8(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Uint8()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripInt16(t *testing.T) {
-	values := make([]int16, 1000)
-	e, d := prepare(values)
+	values := make([]int16, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Int16(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Int16()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripUint16i(t *testing.T) {
-	values := make([]uint16, 1000)
-	e, d := prepare(values)
+	values := make([]uint16, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Uint16(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Uint16()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripInt32(t *testing.T) {
-	values := make([]int32, 1000)
-	e, d := prepare(values)
+	values := make([]int32, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Int32(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Int32()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripUint32(t *testing.T) {
-	values := make([]uint32, 1000)
-	e, d := prepare(values)
+	values := make([]uint32, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Uint32(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Uint32()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripInt64(t *testing.T) {
-	values := make([]int64, 1000)
-	e, d := prepare(values)
+	values := make([]int64, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Int64(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Int64()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
 func TestRoundTripUint64(t *testing.T) {
-	values := make([]uint64, 1000)
-	e, d := prepare(values)
+	values := make([]uint64, count)
+	e, d, _ := prepare(values)
 	for _, v := range values {
 		e.Uint64(v)
 	}
-	for _, v := range values {
+	for i, v := range values {
 		got, _ := d.Uint64()
 		if v != got {
-			t.Errorf("Round trip gave wrong value. Expected: %x, got: %x", v, got)
+			t.Errorf("Bad value at %d. Expected: %x, got: %x", i, v, got)
+			break
 		}
 	}
 }
 
-func BenchmarkInt8(b *testing.B) {
-	values := make([]int8, 1000000)
-	e, d := prepare(values)
+func BenchmarkEncodeUint64(b *testing.B) {
+	values := make([]uint64, count)
+	e, _, buf := prepare(values)
 	b.ResetTimer()
-	for _, v := range values {
-		e.Int8(v)
+	for n := 0; n < b.N; n++ {
+		buf.Reset()
+		for _, v := range values {
+			e.Uint64(v)
+		}
 	}
-	for _ = range values {
-		d.Int8()
+}
+
+func BenchmarkDecodeUint64(b *testing.B) {
+	values := make([]uint64, count)
+	e, d, buf := prepare(values)
+	for _, v := range values {
+		e.Uint64(v)
+	}
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		buf.Rewind()
+		for _ = range values {
+			d.Uint64()
+		}
+	}
+}
+
+func BenchmarkUint64(b *testing.B) {
+	values := make([]uint64, count)
+	e, d, buf := prepare(values)
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		buf.Reset()
+		for _, v := range values {
+			e.Uint64(v)
+		}
+		for _ = range values {
+			d.Uint64()
+		}
 	}
 }
