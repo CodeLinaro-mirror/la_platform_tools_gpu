@@ -419,10 +419,10 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsVertexArrayOES(%u)\n", array);
         if (glIsVertexArrayOES != nullptr) {
-            bool* return_value = glIsVertexArrayOES(array);
+            bool return_value = glIsVertexArrayOES(array);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsVertexArrayOES\n");
@@ -474,10 +474,10 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetGraphicsResetStatusEXT()\n");
         if (glGetGraphicsResetStatusEXT != nullptr) {
-            uint32_t* return_value = glGetGraphicsResetStatusEXT();
+            uint32_t return_value = glGetGraphicsResetStatusEXT();
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t*>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT\n");
@@ -702,10 +702,10 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetError()\n");
         if (glGetError != nullptr) {
-            uint32_t* return_value = glGetError();
+            uint32_t return_value = glGetError();
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t*>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetError\n");
@@ -759,10 +759,10 @@ bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetUniformLocation(%u, %s)\n", program, name);
         if (glGetUniformLocation != nullptr) {
-            UniformLocation* return_value = glGetUniformLocation(program, name);
+            UniformLocation return_value = glGetUniformLocation(program, name);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<UniformLocation*>(return_value);
+                stack->push<UniformLocation>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetUniformLocation\n");
@@ -780,10 +780,10 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetAttribLocation(%u, %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
-            AttributeLocation* return_value = glGetAttribLocation(program, name);
+            AttributeLocation return_value = glGetAttribLocation(program, name);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<AttributeLocation*>(return_value);
+                stack->push<AttributeLocation>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetAttribLocation\n");
@@ -1682,10 +1682,10 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsTexture(%u)\n", texture);
         if (glIsTexture != nullptr) {
-            bool* return_value = glIsTexture(texture);
+            bool return_value = glIsTexture(texture);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsTexture\n");
@@ -1940,10 +1940,10 @@ bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glCheckFramebufferStatus(%u)\n", target);
         if (glCheckFramebufferStatus != nullptr) {
-            uint32_t* return_value = glCheckFramebufferStatus(target);
+            uint32_t return_value = glCheckFramebufferStatus(target);
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t*>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glCheckFramebufferStatus\n");
@@ -1977,10 +1977,10 @@ bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsFramebuffer(%u)\n", framebuffer);
         if (glIsFramebuffer != nullptr) {
-            bool* return_value = glIsFramebuffer(framebuffer);
+            bool return_value = glIsFramebuffer(framebuffer);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsFramebuffer\n");
@@ -2067,10 +2067,10 @@ bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsRenderbuffer(%u)\n", renderbuffer);
         if (glIsRenderbuffer != nullptr) {
-            bool* return_value = glIsRenderbuffer(renderbuffer);
+            bool return_value = glIsRenderbuffer(renderbuffer);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsRenderbuffer\n");
@@ -2194,10 +2194,10 @@ bool callGlIsBuffer(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsBuffer(%u)\n", buffer);
         if (glIsBuffer != nullptr) {
-            bool* return_value = glIsBuffer(buffer);
+            bool return_value = glIsBuffer(buffer);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsBuffer\n");
@@ -2232,10 +2232,10 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
-            ShaderId* return_value = glCreateShader(type);
+            ShaderId return_value = glCreateShader(type);
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<ShaderId*>(return_value);
+                stack->push<ShaderId>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glCreateShader\n");
@@ -2379,10 +2379,10 @@ bool callGlIsShader(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsShader(%u)\n", shader);
         if (glIsShader != nullptr) {
-            bool* return_value = glIsShader(shader);
+            bool return_value = glIsShader(shader);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsShader\n");
@@ -2398,10 +2398,10 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glCreateProgram()\n");
         if (glCreateProgram != nullptr) {
-            ProgramId* return_value = glCreateProgram();
+            ProgramId return_value = glCreateProgram();
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<ProgramId*>(return_value);
+                stack->push<ProgramId>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glCreateProgram\n");
@@ -2540,10 +2540,10 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsProgram(%u)\n", program);
         if (glIsProgram != nullptr) {
-            bool* return_value = glIsProgram(program);
+            bool return_value = glIsProgram(program);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsProgram\n");
@@ -2962,10 +2962,10 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsEnabled(%u)\n", capability);
         if (glIsEnabled != nullptr) {
-            bool* return_value = glIsEnabled(capability);
+            bool return_value = glIsEnabled(capability);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsEnabled\n");
@@ -3154,10 +3154,10 @@ bool callGlIsQuery(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsQuery(%u)\n", query);
         if (glIsQuery != nullptr) {
-            bool* return_value = glIsQuery(query);
+            bool return_value = glIsQuery(query);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsQuery\n");
@@ -3277,10 +3277,10 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glIsQueryEXT(%u)\n", query);
         if (glIsQueryEXT != nullptr) {
-            bool* return_value = glIsQueryEXT(query);
+            bool return_value = glIsQueryEXT(query);
             CAZE_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<bool*>(return_value);
+                stack->push<bool>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glIsQueryEXT\n");

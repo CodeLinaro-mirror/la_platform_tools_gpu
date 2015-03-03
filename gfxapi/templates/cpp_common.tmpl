@@ -55,6 +55,7 @@ limitations under the License.
   {{end}}
 {{end}}
 
+
 {{/*
 -------------------------------------------------------------------------------
   Emits the comma-separated list of type-name paired parameters for given
@@ -66,6 +67,21 @@ limitations under the License.
 
   {{range $i, $p := $.CallParameters}}
     {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} {{$p.Name}}§
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of function parameter types without the
+  parameter names.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CallParameterTypes"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} §
   {{end}}
 {{end}}
 
@@ -98,7 +114,22 @@ limitations under the License.
 {{define "C++.ReturnType"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "C++.ParameterType" $.Return}}
+  {{$ty := TypeOf $.Return}}
+  {{Macro "C++.Type" $ty}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of function parameter names.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CallArguments"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}}, {{end}}{{$p.Name}} §
+  {{end}}
 {{end}}
 
 
@@ -131,9 +162,10 @@ limitations under the License.
   {{AssertType $ "Parameter"}}
 
   {{$ty := TypeOf $}}
-  {{$deref := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty))}}
+  {{$deref := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty) (eq $.Name $.Function.Return.Name))}}
   {{if and $.Output $deref}}*{{end}}{{$.Name}}
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
@@ -147,6 +179,7 @@ limitations under the License.
 
   {{$ | SplitOn "_" | Title}}
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
