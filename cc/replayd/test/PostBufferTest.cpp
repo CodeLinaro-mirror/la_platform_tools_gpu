@@ -32,16 +32,16 @@ const std::vector<uint8_t> input = { 0, 1, 2, 3, 4, 5 };
 class PostBufferTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mPostBuffer.reset(nullptr);
+        mPostBuffer.reset();
         mOutput.clear();
         mPostsCounter = 0;
     }
 
     void setupPostBuffer(uint32_t bufferSize, bool callbackShouldSucceed) {
-        mPostBuffer.reset(
-            new PostBuffer(bufferSize, [&](const void* ptr, uint32_t size) {
+        mPostBuffer.reset(new PostBuffer(bufferSize,
+                [&, callbackShouldSucceed](const void* ptr, uint32_t size) {
                 mPostsCounter++;
-                mOutput.resize(mOutput.size() + size);
+                mOutput.resize(mOutput.size()+size);
                 memcpy(&mOutput[mOutput.size()-size], ptr, size);
                 return callbackShouldSucceed;
             }));
@@ -122,7 +122,7 @@ TEST_F(PostBufferTest, FlushOnDestruction) {
     EXPECT_EQ(0, mPostsCounter);
 
     // Check that the packets gets posted on PostBuffer destruction.
-    mPostBuffer.reset(nullptr);
+    mPostBuffer.reset();
     EXPECT_EQ(input, mOutput);
 }
 
