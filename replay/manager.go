@@ -15,6 +15,7 @@
 package replay
 
 import (
+	"fmt"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/database"
@@ -32,7 +33,7 @@ type Manager struct {
 	logger       log.Logger
 }
 
-func (m *Manager) getBatchStream(ctx batcherContext) chan<- Request {
+func (m *Manager) getBatchStream(ctx batcherContext) (chan<- Request, error) {
 	m.mutex.Lock()
 	defer m.mutex.Unlock()
 
@@ -40,18 +41,22 @@ func (m *Manager) getBatchStream(ctx batcherContext) chan<- Request {
 	// Rework to free the batcher after execution.
 	b, found := m.batchers[ctx]
 	if !found {
+		device := m.discovery.device(ctx.DeviceID)
+		if device == nil {
+			return nil, fmt.Errorf("Unknown device %v", ctx.DeviceID)
+		}
 		b = &batcher{
 			context:      ctx,
 			feed:         make(chan Request, 8),
 			persistentDb: m.persistentDb,
 			transientDb:  m.transientDb,
-			device:       m.discovery.device(ctx.DeviceID),
+			device:       device,
 			logger:       m.logger,
 		}
 		m.batchers[ctx] = b
 		go b.run()
 	}
-	return b.feed
+	return b.feed, nil
 }
 
 // New returns a new Manager instance using the database db and logger l.
@@ -66,16 +71,20 @@ func New(db database.Database, l log.Logger) *Manager {
 }
 
 // Replay requests that req is to be performed on the device described by ctx,
-// using the capture described by ctx. Replay is asynchronious, and the replay
+// using the capture described by ctx. Replay is asynchronous, and the replay
 // may take some considerable time before it is executed. Replay requests made
 // with configs that have equality (==) will likely be batched into the same
 // replay pass.
-func (m *Manager) Replay(ctx *Context, cfg Config, req Request, generator Generator) {
-	m.getBatchStream(batcherContext{
+func (m *Manager) Replay(ctx *Context, cfg Config, req Request, generator Generator) error {
+	batch, err := m.getBatchStream(batcherContext{
 		Context:   *ctx,
 		Generator: generator,
 		Config:    cfg,
-	}) <- req
+	})
+	if err == nil {
+		batch <- req
+	}
+	return err
 }
 
 // DeviceIDs returns the list of devices that have been discovered.

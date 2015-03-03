@@ -148,7 +148,9 @@ func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID
 	out := make(chan gfxapi.Image, 1)
 	c := drawConfig{wireframe: wireframe}
 	r := colorBufferRequest{after: after, width: width, height: height, out: out}
-	mgr.Replay(ctx, c, r, a)
+	if err := mgr.Replay(ctx, c, r, a); err != nil {
+		out <- gfxapi.Image{Error: err}
+	}
 	return out
 }
 
@@ -156,7 +158,9 @@ func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID
 	out := make(chan gfxapi.Image, 1)
 	c := drawConfig{}
 	r := depthBufferRequest{after: after, out: out}
-	mgr.Replay(ctx, c, r, a)
+	if err := mgr.Replay(ctx, c, r, a); err != nil {
+		out <- gfxapi.Image{Error: err}
+	}
 	return out
 }
 
@@ -164,7 +168,9 @@ func (a api) TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.Ti
 	out := make(chan gfxapi.CallTiming, 1)
 	c := uniqueConfig()
 	r := timeCallsRequest{mask: mask, out: out}
-	mgr.Replay(ctx, c, r, a)
+	if err := mgr.Replay(ctx, c, r, a); err != nil {
+		out <- gfxapi.CallTiming{Error: err}
+	}
 	return out
 }
 
