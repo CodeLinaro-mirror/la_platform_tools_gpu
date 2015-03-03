@@ -14,10 +14,125 @@ extern TextureUnitMap createTextureUnits(InternalState internal)
 extern string substr(string s, s32 start, s32 end)
 extern u32    stateVariableSize(StateVariable v)
 extern void memcpy(any dest, any src, s32 size)
+
+
+/////////////////////////////////////////////////////////////////
+// Macros
+/////////////////////////////////////////////////////////////////
+/* Not ready for primetime yet...
+macro s32 imageSize(s32 width, s32 height, TexelFormat format, TexelType type) {
+    return switch (format) { // TODO: Consider ty
+        case GL_ALPHA:            width * height
+        case GL_LUMINANCE:        width * height
+        case GL_LUMINANCE_ALPHA:  2 * width * height
+        case GL_RGB:              3 * width * height
+        case GL_RGBA:             4 * width * height
+        case GL_RED:              width * height
+        case GL_RED_INTEGER:      width * height
+        case GL_RG:               width * height * 2
+        case GL_RG_INTEGER:       width * height * 2
+        case GL_RGB_INTEGER:      width * height * 3
+        case GL_RGBA_INTEGER:     width * height * 3
+        case GL_DEPTH_COMPONENT:  width * height
+        case GL_DEPTH_STENCIL:    width * height
+    }
+}
+
+macro u32 stateVariableSize(StateVariable v) {
+    return switch (v) {
+        case GL_ACTIVE_TEXTURE:                   1
+        case GL_ALIASED_LINE_WIDTH_RANGE:         2
+        case GL_ALIASED_POINT_SIZE_RANGE:         2
+        case GL_ALPHA_BITS:                       1
+        case GL_ARRAY_BUFFER_BINDING:             1
+        case GL_BLEND:                            1
+        case GL_BLEND_COLOR:                      4
+        case GL_BLEND_DST_ALPHA:                  1
+        case GL_BLEND_DST_RGB:                    1
+        case GL_BLEND_EQUATION_ALPHA:             1
+        case GL_BLEND_EQUATION_RGB:               1
+        case GL_BLEND_SRC_ALPHA:                  1
+        case GL_BLEND_SRC_RGB:                    1
+        case GL_BLUE_BITS:                        1
+        case GL_COLOR_CLEAR_VALUE:                4
+        case GL_COLOR_WRITEMASK:                  4
+        case GL_CULL_FACE:                        1
+        case GL_CULL_FACE_MODE:                   1
+        case GL_CURRENT_PROGRAM:                  1
+        case GL_DEPTH_BITS:                       1
+        case GL_DEPTH_CLEAR_VALUE:                1
+        case GL_DEPTH_FUNC:                       1
+        case GL_DEPTH_RANGE:                      2
+        case GL_DEPTH_TEST:                       1
+        case GL_DEPTH_WRITEMASK:                  1
+        case GL_DITHER:                           1
+        case GL_ELEMENT_ARRAY_BUFFER_BINDING:     1
+        case GL_FRAMEBUFFER_BINDING:              1
+        case GL_FRONT_FACE:                       1
+        case GL_GENERATE_MIPMAP_HINT:             1
+        case GL_GREEN_BITS:                       1
+        case GL_IMPLEMENTATION_COLOR_READ_FORMAT: 1
+        case GL_IMPLEMENTATION_COLOR_READ_TYPE:   1
+        case GL_LINE_WIDTH:                       1
+        case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: 1
+        case GL_MAX_CUBE_MAP_TEXTURE_SIZE:        1
+        case GL_MAX_FRAGMENT_UNIFORM_VECTORS:     1
+        case GL_MAX_RENDERBUFFER_SIZE:            1
+        case GL_MAX_TEXTURE_IMAGE_UNITS:          1
+        case GL_MAX_TEXTURE_SIZE:                 1
+        case GL_MAX_VARYING_VECTORS:              1
+        case GL_MAX_VERTEX_ATTRIBS:               1
+        case GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:   1
+        case GL_MAX_VERTEX_UNIFORM_VECTORS:       1
+        case GL_MAX_VIEWPORT_DIMS:                2
+        case GL_NUM_COMPRESSED_TEXTURE_FORMATS:   1
+        case GL_NUM_SHADER_BINARY_FORMATS:        1
+        case GL_PACK_ALIGNMENT:                   1
+        case GL_POLYGON_OFFSET_FACTOR:            1
+        case GL_POLYGON_OFFSET_FILL:              1
+        case GL_POLYGON_OFFSET_UNITS:             1
+        case GL_RED_BITS:                         1
+        case GL_RENDERBUFFER_BINDING:             1
+        case GL_SAMPLE_ALPHA_TO_COVERAGE:         1
+        case GL_SAMPLE_BUFFERS:                   1
+        case GL_SAMPLE_COVERAGE:                  1
+        case GL_SAMPLE_COVERAGE_INVERT:           1
+        case GL_SAMPLE_COVERAGE_VALUE:            1
+        case GL_SAMPLES:                          1
+        case GL_SCISSOR_BOX:                      4
+        case GL_SCISSOR_TEST:                     1
+        case GL_SHADER_COMPILER:                  1
+        case GL_STENCIL_BACK_FAIL:                1
+        case GL_STENCIL_BACK_FUNC:                1
+        case GL_STENCIL_BACK_PASS_DEPTH_FAIL:     1
+        case GL_STENCIL_BACK_PASS_DEPTH_PASS:     1
+        case GL_STENCIL_BACK_REF:                 1
+        case GL_STENCIL_BACK_VALUE_MASK:          1
+        case GL_STENCIL_BACK_WRITEMASK:           1
+        case GL_STENCIL_BITS:                     1
+        case GL_STENCIL_CLEAR_VALUE:              1
+        case GL_STENCIL_FAIL:                     1
+        case GL_STENCIL_FUNC:                     1
+        case GL_STENCIL_PASS_DEPTH_FAIL:          1
+        case GL_STENCIL_PASS_DEPTH_PASS:          1
+        case GL_STENCIL_REF:                      1
+        case GL_STENCIL_TEST:                     1
+        case GL_STENCIL_VALUE_MASK:               1
+        case GL_STENCIL_WRITEMASK:                1
+        case GL_SUBPIXEL_BITS:                    1
+        case GL_TEXTURE_BINDING_2D:               1
+        case GL_TEXTURE_BINDING_CUBE_MAP:         1
+        case GL_UNPACK_ALIGNMENT:                 1
+        case GL_VIEWPORT:                         4
+        case GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:   1
+        case GL_GPU_DISJOINT_EXT:                 1
+    }
+}
+*/
+
 /////////////////////////////////////////////////////////////////
 // Enums
 /////////////////////////////////////////////////////////////////
-
 enum DrawMode {
     GL_LINE_LOOP                                    = 0x0002,
     GL_LINE_STRIP                                   = 0x0003,
@@ -1124,6 +1239,7 @@ cmd void glProgramBinaryOES(ProgramId program,
                             pointer   binary,
                             s32       binary_size) {
     http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
+    assert len(binary) >= binary_size
 }
 
 // QCOM_tiled_rendering
@@ -2160,6 +2276,7 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
 
 cmd void glBufferSubData(BufferTarget target, s32 offset, s32 size, pointer data) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml
+    assert len(data) >= size
     // TODO: Assignment to subset
 }
 
@@ -2220,6 +2337,7 @@ cmd void glShaderBinary(s32             count,
                         s32             binary_size) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml
     assert len(shaders) >= count
+    assert len(binary) >= binary_size
     for i in (0 .. count) {
         // TODO: shaders[i].Binary = ?
     }
