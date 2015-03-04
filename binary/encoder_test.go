@@ -81,207 +81,129 @@ Got:      %# x`, expected, got)
 func TestEncoderBool(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Bool(false)
-	e.Bool(true)
-	compareBytes(t, b.Bytes(), []byte{0, 1})
+	for _, v := range boolValues {
+		e.Bool(v)
+	}
+	compareBytes(t, b.Bytes(), boolBytes)
 }
 
 func TestEncoderInt8(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Int8(0)
-	e.Int8(127)
-	e.Int8(-128)
-	e.Int8(-1)
-	compareBytes(t, b.Bytes(), []byte{0x00, 0x7f, 0x80, 0xff})
+	for _, v := range int8Values {
+		e.Int8(v)
+	}
+	compareBytes(t, b.Bytes(), int8Bytes)
 }
 
 func TestEncoderUint8(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Uint8(0x00)
-	e.Uint8(0x7f)
-	e.Uint8(0x80)
-	e.Uint8(0xff)
-	compareBytes(t, b.Bytes(), []byte{0x00, 0x7f, 0x80, 0xff})
+	for _, v := range uint8Values {
+		e.Uint8(v)
+	}
+	compareBytes(t, b.Bytes(), uint8Bytes)
 }
 
 func TestEncoderInt16(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Int16(0)
-	e.Int16(32767)
-	e.Int16(-32768)
-	e.Int16(-1)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00,
-		0xff, 0x7f,
-		0x00, 0x80,
-		0xff, 0xff,
-	})
+	for _, v := range int16Values {
+		e.Int16(v)
+	}
+	compareBytes(t, b.Bytes(), int16Bytes)
 }
 
 func TestEncoderUint16(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Uint16(0)
-	e.Uint16(0xbeef)
-	e.Uint16(0xc0de)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00,
-		0xef, 0xbe,
-		0xde, 0xc0,
-	})
+	for _, v := range uint16Values {
+		e.Uint16(v)
+	}
+	compareBytes(t, b.Bytes(), uint16Bytes)
 }
 
 func TestEncoderInt32(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Int32(0)
-	e.Int32(2147483647)
-	e.Int32(-2147483648)
-	e.Int32(-1)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00,
-		0xff, 0xff, 0xff, 0x7f,
-		0x00, 0x00, 0x00, 0x80,
-		0xff, 0xff, 0xff, 0xff,
-	})
+	for _, v := range int32Values {
+		e.Int32(v)
+	}
+	compareBytes(t, b.Bytes(), int32Bytes)
 }
 
 func TestEncoderUint32(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Uint32(0)
-	e.Uint32(0x01234567)
-	e.Uint32(0x10abcdef)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00,
-		0x67, 0x45, 0x23, 0x01,
-		0xef, 0xcd, 0xab, 0x10,
-	})
+	for _, v := range uint32Values {
+		e.Uint32(v)
+	}
+	compareBytes(t, b.Bytes(), uint32Bytes)
 }
 
 func TestEncoderFloat32(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Float32(0)
-	e.Float32(1)
-	e.Float32(64.5)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x80, 0x3f,
-		0x00, 0x00, 0x81, 0x42,
-	})
+	for _, v := range float32Values {
+		e.Float32(v)
+	}
+	compareBytes(t, b.Bytes(), float32Bytes)
 }
 
 func TestEncoderInt64(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Int64(0)
-	e.Int64(9223372036854775807)
-	e.Int64(-9223372036854775808)
-	e.Int64(-1)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	})
+	for _, v := range int64Values {
+		e.Int64(v)
+	}
+	compareBytes(t, b.Bytes(), int64Bytes)
 }
 
 func TestEncoderUint64(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Uint64(0)
-	e.Uint64(0x0123456789abcdef)
-	e.Uint64(0xfedcba9876543210)
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01,
-		0x10, 0x32, 0x54, 0x76, 0x98, 0xba, 0xdc, 0xfe,
-	})
+	for _, v := range uint64Values {
+		e.Uint64(v)
+	}
+	compareBytes(t, b.Bytes(), uint64Bytes)
 }
 
 func TestEncoderFloat64(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.Float64(0)
-	e.Float64(1)
-	e.Float64(64.5)
-
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x3f,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x50, 0x40,
-	})
+	for _, v := range float64Values {
+		e.Float64(v)
+	}
+	compareBytes(t, b.Bytes(), float64Bytes)
 }
 
 func TestEncoderString(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.String("Hello")
-	e.String("")
-	e.String("World")
-	e.String("こんにちは世界")
-
-	compareBytes(t, b.Bytes(), []byte{
-		0x05, 0x00, 0x00, 0x00,
-		'H', 'e', 'l', 'l', 'o',
-		0x00, 0x00, 0x00, 0x00,
-		0x05, 0x00, 0x00, 0x00,
-		'W', 'o', 'r', 'l', 'd',
-		0x15, 0x00, 0x00, 0x00,
-		0xe3, 0x81, 0x93, 0xe3, 0x82, 0x93, 0xe3, 0x81, 0xab, 0xe3, 0x81, 0xa1, 0xe3, 0x81, 0xaf, 0xe4, 0xb8, 0x96, 0xe7, 0x95, 0x8c,
-	})
+	for _, s := range stringValues {
+		e.String(s)
+	}
+	compareBytes(t, b.Bytes(), stringBytes)
 }
 
 func TestEncoderCString(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	e.CString("Hello")
-	e.CString("")
-	e.CString("World")
-	e.CString("こんにちは世界")
-
-	compareBytes(t, b.Bytes(), []byte{
-		'H', 'e', 'l', 'l', 'o', 0x00,
-		0x00,
-		'W', 'o', 'r', 'l', 'd', 0x00,
-		0xe3, 0x81, 0x93, 0xe3, 0x82, 0x93, 0xe3, 0x81, 0xab, 0xe3, 0x81, 0xa1, 0xe3, 0x81, 0xaf, 0xe4, 0xb8, 0x96, 0xe7, 0x95, 0x8c, 0x00,
-	})
+	for _, s := range stringValues {
+		e.CString(s)
+	}
+	compareBytes(t, b.Bytes(), cStringBytes)
 }
 
 func TestEncoderObject(t *testing.T) {
 	b := &bytes.Buffer{}
 	e := NewEncoder(b)
-	if err := e.Object(testObjA); err != nil {
-		t.Errorf("Encode gave unexpected error: %v", err)
+	for _, o := range objectValues {
+		if err := e.Object(o); err != nil {
+			t.Errorf("Encode gave unexpected error: %v", err)
+		}
 	}
-	if err := e.Object(testObjB); err != nil {
-		t.Errorf("Encode gave unexpected error: %v", err)
-	}
-	if err := e.Object(testObjA); err != nil {
-		t.Errorf("Encode gave unexpected error: %v", err)
-	}
-	if err := e.Object(nil); err != nil {
-		t.Errorf("Encode gave unexpected error: %v", err)
-	}
-	compareBytes(t, b.Bytes(), []byte{
-		0x00, 0x00,
-		0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x07, 0x00, 0x00, 0x00,
-		'O', 'b', 'j', 'e', 'c', 't', 'A',
-
-		0x01, 0x00,
-		0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x07, 0x00, 0x00, 0x00,
-		'O', 'b', 'j', 'e', 'c', 't', 'B',
-
-		0x00, 0x00,
-
-		byte(objectNil & 0xff), byte((objectNil >> 8) & 0xff),
-	})
+	compareBytes(t, b.Bytes(), objectBytes)
 }
 
 func TestEncoderObjectUnknownTypeError(t *testing.T) {
