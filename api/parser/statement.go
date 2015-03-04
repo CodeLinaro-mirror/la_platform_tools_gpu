@@ -130,7 +130,7 @@ var assignments = []string{
 	ast.OpAssignMinus,
 }
 
-// lhs '=' expression
+// lhs ( '=' | '+=' | '-=' )  expression
 func assign(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Assign {
 	op := ""
 	for _, test := range assignments {
@@ -142,7 +142,7 @@ func assign(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Assign {
 	if op == "" {
 		return nil
 	}
-	s := &ast.Assign{LHS: lhs}
+	s := &ast.Assign{LHS: lhs, Operator: op}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		s.CST = cst
 		requireOperator(op, p, cst)

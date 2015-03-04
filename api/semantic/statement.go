@@ -63,18 +63,21 @@ type Iteration struct {
 }
 
 // Assign is the only "mutating" construct.
-// It assigns the value from the rhs into the slot described by the lhs.
+// It assigns the value from the rhs into the slot described by the lhs, as defined
+// by the operator.
 type Assign struct {
-	AST *ast.Assign // the underlying syntax node this was built from
-	LHS Expression  // the expression that gives the location to store into
-	RHS Expression  // the value to store
+	AST      *ast.Assign // the underlying syntax node this was built from
+	LHS      Expression  // the expression that gives the location to store into
+	Operator string      // the assignment operator being applied
+	RHS      Expression  // the value to store
 }
 
 // MapAssign represents assigning to a map index expression.
 type MapAssign struct {
-	AST   *ast.Assign // the underlying syntax node this was built from
-	To    *MapIndex   // the map index to assign to
-	Value Expression  // the value to set in the map
+	AST      *ast.Assign // the underlying syntax node this was built from
+	To       *MapIndex   // the map index to assign to
+	Operator string      // the assignment operator being applied
+	Value    Expression  // the value to set in the map
 }
 
 // DeclareLocal represents a local variable declaration statement.
