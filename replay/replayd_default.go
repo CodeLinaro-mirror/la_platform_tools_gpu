@@ -16,12 +16,4 @@
 
 package replay
 
-import (
-	"os"
-	"path/filepath"
-)
-
-// TEMP: We need to be able to specify this elsewhere.
-func gopath() string { return os.Getenv("GOPATH") }
-
-var replaydPath = filepath.Join(gopath(), "bin", "replayd")
+const replayd = "replayd"

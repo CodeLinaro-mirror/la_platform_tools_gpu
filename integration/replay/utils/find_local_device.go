@@ -28,6 +28,7 @@ const localDeviceName = "Local machine" // TODO: Remove hard-coded string.
 // FindLocalDevice returns the replay Device for the local host. If the local
 // host cannot be found then the test fails and nil is returned.
 func FindLocalDevice(t *testing.T, mgr *replay.Manager) replay.Device {
+	replay.DisableLocalDeviceCache = true // disable disk-cache
 	for i := 0; i < findLocalDeviceAttempts; i++ {
 		for _, d := range mgr.Devices() {
 			info := d.Info()

@@ -45,6 +45,23 @@ std::vector<uint32_t> memorySizes{
          128 * 1024 * 1024U,  // 128MB
 };
 
+// createResourceProvider constructs and returns a ResourceInMemoryCache.
+// If cachePath is non-null then the ResourceInMemoryCache will be backed by a
+// disk-cache.
+std::unique_ptr<ResourceInMemoryCache> createResourceProvider(
+        const char* cachePath, MemoryManager* memoryManager) {
+    if (cachePath != nullptr) {
+        return std::unique_ptr<ResourceInMemoryCache>(
+            ResourceInMemoryCache::create(
+                ResourceDiskCache::create(ResourceRequester::create(), cachePath),
+                memoryManager->getBaseAddress()));
+    } else {
+        return std::unique_ptr<ResourceInMemoryCache>(
+            ResourceInMemoryCache::create(
+                ResourceRequester::create(), memoryManager->getBaseAddress()));
+    }
+}
+
 void listenConnections(const char* listenerPort, const char* cachePath,
                        MemoryManager* memoryManager) {
     std::unique_ptr<Connection> listenConn = SocketConnection::create("127.0.0.1", listenerPort);
@@ -53,9 +70,8 @@ void listenConnections(const char* listenerPort, const char* cachePath,
     }
     GazerListener listener(std::move(listenConn), memoryManager->getSize());
 
-    std::unique_ptr<ResourceInMemoryCache> resourceProvider(ResourceInMemoryCache::create(
-            ResourceDiskCache::create(ResourceRequester::create(), cachePath),
-            memoryManager->getBaseAddress()));
+    std::unique_ptr<ResourceInMemoryCache> resourceProvider(
+            createResourceProvider(cachePath, memoryManager));
 
     while (true) {
         std::unique_ptr<GazerConnection> gazer(listener.acceptConnection());
@@ -89,9 +105,17 @@ void android_main(struct android_app*) {
 
 #else  // TARGET_OS == CAZE_OS_ANDROID
 // Main function for PC
-int main(int, char* []) {
+int main(int argc, char* argv[]) {
+    bool useCache = true;
+    for (int i = 1; i < argc; i++) {
+        if (strstr(argv[i], "--nocache") == argv[i]) {
+            printf("Disabling cache\n");
+            useCache = false;
+        }
+    }
+    const char* cachePath = useCache ? ("data" PATH_DELIMITER_STR "ccache") : nullptr;
     ::android::caze::MemoryManager memoryManager(::android::caze::memorySizes);
-    ::android::caze::listenConnections("9284", "data" PATH_DELIMITER_STR "ccache", &memoryManager);
+    ::android::caze::listenConnections("9284", cachePath, &memoryManager);
     return EXIT_SUCCESS;
 }
 
