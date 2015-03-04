@@ -1,4 +1,4 @@
-// Copyright (C) 2014 The Android Open Source Project
+// Copyright (C) 2015 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,55 +20,44 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
 var (
-	usage_header = `clean_generated finds and deletes generated source files
+	usage_header = `copyright finds and fixes bad copyright headers
 
-usage: clean_generated [options]
+usage: copyright [options]
 options:`
 	noactions = flag.Bool("n", false,
 		"don't perform any actions, just print information")
 	usage_footer = `
 The search is rooted at the current working directory.
-It finds files with a known extension and a known generated file header comment.
-If they are checked in to git, the tool complains and moves on.
-If they are not git ignored, the tool adds them to a local git ignore rule.
-If the -n flag is not specified, the file will then be removed.
+It will attempt to fix incorrect copyright headers unless you specify the
+-n flag, and will only replace copyright headers patterns that it knows about.
+For unknown comments it will just prepend the correct copyright header.
+It will not touch file extensions that it does not know the header type for.
 `
 )
 
-func check(path string) error {
-	err := exec.Command("git", "ls-files", "--error-unmatch", path).Run()
-	if err == nil {
-		fmt.Printf("Generated file %s is checked in! Skipping.\n", path)
+func update(path string, reason string, header string, body []byte) error {
+	fmt.Printf("Copyright on %s was %s\n", path, reason)
+	if *noactions {
 		return nil
 	}
-	err = exec.Command("git", "check-ignore", path).Run()
+	file, err := os.Create(path)
 	if err != nil {
-		dir := filepath.Dir(path)
-		name := filepath.Base(path)
-		ignore := filepath.Join(dir, ".gitignore")
-		fmt.Printf("git ignore %s in %s\n", name, ignore)
-		if !*noactions {
-			f, err := os.OpenFile(ignore, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-			if err != nil {
-				return err
-			}
-			_, err = f.WriteString(name + "\n")
-			f.Close()
-			if err != nil {
-				return err
-			}
-		}
+		return err
 	}
-	fmt.Printf("rm %s \n", path)
-	if !*noactions {
-		os.Remove(path)
+	defer file.Close()
+	_, err = file.WriteString(header)
+	if err != nil {
+		return err
+	}
+	_, err = file.Write(body)
+	if err != nil {
+		return err
 	}
 	return nil
 }
@@ -87,23 +76,34 @@ func run() error {
 		if info.IsDir() {
 			return nil
 		}
-		if copyright.FindExtension(filepath.Ext(path)) == nil {
+		extension := filepath.Ext(path)
+		l := copyright.FindExtension(extension)
+		if l == nil {
 			return nil
 		}
 		file, err := ioutil.ReadFile(path)
 		if err != nil {
 			return err
 		}
-		if copyright.MatchGenerated(file) == 0 {
+		if i := l.MatchCurrent(file); i > 0 {
 			return nil
 		}
-		return check(path)
+		if i := copyright.MatchGenerated(file); i > 0 {
+			return nil
+		}
+		if i := l.MatchOld(file); i > 0 {
+			return update(path, "out of date", l.Emit, file[i:])
+		}
+		if i := copyright.MatchNormal(file); i > 0 {
+			return update(path, "invalid", l.Emit, file[i:])
+		}
+		return update(path, "missing", l.Emit, file)
 	})
 }
 
 func main() {
 	if err := run(); err != nil {
-		fmt.Fprintf(os.Stderr, "generated failed: %v\n", err)
+		fmt.Fprintf(os.Stderr, "copyright failed: %v\n", err)
 		os.Exit(1)
 	}
 }

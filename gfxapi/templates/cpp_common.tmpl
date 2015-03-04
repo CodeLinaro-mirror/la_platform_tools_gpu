@@ -186,9 +186,7 @@ limitations under the License.
   Emits a comment stating that the file is automatically generated.
 -------------------------------------------------------------------------------
 */}}
-{{define "C++.GeneratedHeader"}}
-  {{template "C++.CommentHeader" "Automatically generated file. Do not modify!"}}
-{{end}}
+{{define "C++.GeneratedHeader"}}{{Copyright "generated" "apic"}}{{end}}
 
 
 {{/*

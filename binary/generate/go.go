@@ -19,6 +19,8 @@ import (
 	"io"
 	"text/template"
 
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
+
 	"golang.org/x/tools/imports"
 )
 
@@ -30,6 +32,9 @@ var (
 		},
 		"decode": func(name string, t *Type) string {
 			return kindDispatch(goDecodeMap, name, t)
+		},
+		"header": func(tool string) string {
+			return copyright.Build("generated_by", copyright.Info{Tool: tool})
 		},
 	}
 	goEncodeMap kindToTemplate
