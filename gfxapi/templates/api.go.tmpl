@@ -147,15 +147,21 @@ limitations under the License.
   {{end}}
 {{end}}
 
+{{define "Init"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
+
+  {{     if IsMap   $.Type}}{{$.Name}} = make({{Macro "Go.Type" $.Type}})
+  {{else if IsClass $.Type}}{{$.Name}}.Init()
+  {{end}}
+{{end}}
+
 {{define "FieldInit"}}
   {{AssertType $.Field "Field"  "Global"}}
   {{AssertType $.Name "string"}}
-  {{$type := TypeOf $.Field}}
-  {{$FType := Macro "Go.Type" $type}}
-  {{     if IsMap    $type}} {{$.Name}}.Init()
-  {{else if IsClass  $type}} {{$.Name}}.Init()
-  {{else if IsVoid (TypeOf $.Field.Default)}} // {{$.Name}} of type {{$FType}}
-  {{else}}{{$.Name}} = {{Macro "Default" $.Field.Default}}
+
+  {{if $.Field.Default}}{{$.Name}} = {{Macro "Default" $.Field.Default}}
+  {{else              }}{{Macro "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
   {{end}}
 {{end}}
 
@@ -238,48 +244,6 @@ limitations under the License.
       {{Macro "ClassImpl" "Class" $c "Impl" $.Name}}
     {{end}}
   {{end}}
-{{end}}
-
-{{define "ClassIDInterface"}}
-  {{AssertType $ "Class"}}
-  {{$.Name}}()
-  {{range $i,$c := $.Extends}}
-    {{Macro "ClassIDInterface" $c}}
-  {{end}}
-{{end}}
-
-{{define "ClassIDImpl"}}
-  {{AssertType $.Class "Class"}}
-  {{AssertType $.Impl "Class"}}
-  func (id {{$.Impl}}) {{$.Class.Name}}() {}
-  {{range $i, $c := $.Class.Extends}}
-    {{Macro "ClassIDImpl" "Class" $c "Impl" $.Impl}}
-  {{end}}
-{{end}}
-
-{{define "ClassID"}}
-  {{AssertType $ "Class"}}
-  {{$IDImplType := print "i" $.Type.Name}}
-  type {{$.Type.Name}} interface {
-    String() string
-    ID() int32
-    {{Macro "ClassIDInterface" $.To.Detail}}
-  }
-
-  type {{$IDImplType}} int32
-
-  func As{{$.Type.Name}}(id int32) {{$IDImplType}} { return {{$IDImplType}}(id) }
-
-  func (id {{$IDImplType}}) String() string {
-    return fmt.Sprintf("{{$.Type.Name}}<%d>", int32(id))
-  }
-
-  func (id {{$IDImplType}}) ID() int32 {
-    return int32(id)
-  }
-
-  {{Macro "ClassIDImpl" "Class" $.To.Detail "Impl" $IDImplType}}
-
 {{end}}
 
 {{define "Enum"}}
@@ -569,68 +533,47 @@ limitations under the License.
   }
 {{end}}
 
-{{define "MapValueType"}}
-  {{if IsPointer $}}*{{Macro "Go.Type" $.To}}
-  {{else}}{{Macro "Go.Type" $}}
-  {{end}}
-{{end}}
 
 {{define "Map"}}
   {{$name  := $.Name}}
-  {{$type  := Macro "MapValueType" $.ValueType}}
   {{$key   := Macro "Go.Type" $.KeyType}}
+  {{$value := Macro "Go.Type" $.ValueType}}
 
-  type {{$name}} struct {
-    Items map[{{$key}}]{{$type}}
-  }
+  type {{$name}} map[{{$key}}]{{$value}}
 
-  func (m *{{$name}}) Init() {
-    m.Items = make(map[{{$key}}]{{$type}})
-  }
-
-  func (m {{$name}}) Count() int32 {
-    return int32(len(m.Items))
+  func (m {{$name}}) Get(key {{$key}}) {{$value}} {
+    {{$init := Macro "Init" "Name" "v" "Type" $.ValueType}}
+    {{if $init}}
+      v, ok := m[key]
+      if !ok {
+        {{$init}}
+      }
+      return v
+    {{else}}
+      return m[key]
+    {{end}}
   }
 
   func (m {{$name}}) Contains(key {{$key}}) bool {
-    _, ok := m.Items[key]
+    _, ok := m[key]
     return ok
   }
 
-  func (m {{$name}}) Get(key {{$key}}, def {{$type}}) {{$type}} {
-    if value, ok := m.Items[key]; ok {
-      return value
-    }
-    return def
-  }
-
-  func (m {{$name}}) GetOrError(key {{$key}}) {{$type}} {
-    if value, ok := m.Items[key]; ok {
-      return value
-    }
-    // TODO: Non-explosive error handling
-    panic(fmt.Errorf("Key %v not found in {{$name}} map", key))
-  }
-
-  func (m {{$name}}) Set(key {{$key}}, value {{$type}}) {
-    m.Items[key] = value
-  }
-
   func (m {{$name}}) Delete(key {{$key}}) {
-    delete(m.Items, key)
+    delete(m, key)
   }
 
-  func (m {{$name}}) Range() []{{$type}} {
-    values := make([]{{$type}}, 0, len(m.Items))
-    for _, value := range m.Items {
+  func (m {{$name}}) Range() []{{$value}} {
+    values := make([]{{$value}}, 0, len(m))
+    for _, value := range m {
       values = append(values, value)
     }
     return values
   }
 
   func (m {{$name}}) Encode(e *binary.Encoder) error {
-    e.Uint32(uint32(len(m.Items)))
-    for key, value := range m.Items {
+    e.Uint32(uint32(len(m)))
+    for key, value := range m {
       {{Macro "Go.Encode" "Type" $.KeyType "Name" "key"}}
       {{Macro "Go.Encode" "Type" $.ValueType "Name" "value"}}
     }
@@ -638,15 +581,14 @@ limitations under the License.
   }
 
   func (m *{{$name}}) Decode(d *binary.Decoder) error {
-    m.Init()
     c, err := d.Uint32()
     if err != nil { return err }
     for i := uint32(0); i < c; i++ {
       var key {{$key}}
-      var value {{$type}}
+      var value {{$value}}
       {{Macro "Go.Decode" "Type" $.KeyType "Name" "key"}}
       {{Macro "Go.Decode" "Type" $.ValueType "Name" "value"}}
-      m.Items[key] = value
+      (*m)[key] = value
     }
     return nil
   }

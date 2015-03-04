@@ -7,75 +7,59 @@ import (
 )
 
 func (i BufferId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Buffers.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Buffers[i]
 	}
+	return
 }
 
 func (i FramebufferId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Framebuffers.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Framebuffers[i]
 	}
+	return
 }
 
 func (i RenderbufferId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Renderbuffers.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Renderbuffers[i]
 	}
+	return
 }
 
 func (i ProgramId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Programs.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Programs[i]
 	}
+	return
 }
 
 func (i ShaderId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Shaders.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Shaders[i]
 	}
+	return
 }
 
 func (i TextureId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Textures.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Textures[i]
 	}
+	return
 }
 
 func (i VertexArrayId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.VertexArrays.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.VertexArrays[i]
 	}
+	return
 }
 
 func (i QueryId) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
-	if i == 0 {
-		return nil, false
-	} else {
-		v := s.Instances.Queries.Get(i, nil)
-		return v, v != nil
+	if i != 0 {
+		key, remap = s.Instances.Queries[i]
 	}
+	return
 }
 
 func (i UniformLocation) remap(a atom.Atom, s *state) (key interface{}, remap bool) {
@@ -90,12 +74,12 @@ func (i UniformLocation) remap(a atom.Atom, s *state) (key interface{}, remap bo
 		p *Program
 		l UniformLocation
 	}{
-		s.Instances.Programs.Get(program, nil), i,
+		s.Instances.Programs[program], i,
 	}, true
 }
 
 func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *state) value.Value {
-	if s.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0) != 0 {
+	if s.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i)
 	} else {
 		return value.VolatileCapturePointer(i)
@@ -103,7 +87,7 @@ func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *state) value.V
 }
 
 func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *state) value.Value {
-	if s.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER, 0) != 0 {
+	if s.BoundBuffers[BufferTarget_GL_ARRAY_BUFFER] != 0 {
 		return value.AbsolutePointer(i)
 	} else {
 		return value.VolatileCapturePointer(i)

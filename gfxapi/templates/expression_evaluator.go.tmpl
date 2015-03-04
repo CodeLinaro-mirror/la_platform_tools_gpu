@@ -29,11 +29,11 @@ limitations under the License.
 */}}
 {{define "Statement"}}
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Read" $.Local.Value}} {{Macro "TypeComment" (TypeOf $.Local)}}
-  {{else if IsAssert $}}
-  {{else if IsAssign $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
+  {{else if IsAssert    $}}
+  {{else if IsAssign    $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
   {{else if IsMapAssign $}}{{Macro "MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
-  {{else if IsReturn $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
-  {{else if IsBranch $}}if {{Macro "Read" $.Condition}} {
+  {{else if IsReturn    $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
+  {{else if IsBranch    $}}if {{Macro "Read" $.Condition}} {
     {{Macro "Block" $.True}}
     {{if len $.False.Statements}}
     } else {
@@ -130,7 +130,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "MapAssign"}}
-  {{if eq $.Operator "="}}{{Macro "Read" $.To.Map}}.Set({{Macro "Read" $.To.Index}}, {{Macro "Read" $.Value}})
+  {{if eq $.Operator "="}}{{Macro "Read" $.To.Map}}[{{Macro "Read" $.To.Index}}] = {{Macro "Read" $.Value}}
   {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
@@ -156,12 +156,9 @@ limitations under the License.
   {{else if IsGlobal       $}}m.State.{{$.Name}}
   {{else if IsParameter    $}}{{if $.Output}}Σ{{else}}ω.In{{end}}.{{Macro "Go.Public" $.Name}}
   {{else if IsArrayIndex   $}}{{Macro "Read" $.Array}}[{{Macro "Read" $.Index}}]
-  {{else if IsMapIndex     $}}{{Macro "Read" $.Map}}.GetOrError({{Macro "Read" $.Index}})
+  {{else if IsMapIndex     $}}{{Macro "Read" $.Map}}.Get({{Macro "Read" $.Index}})
   {{else if IsMapContains  $}}{{Macro "Read" $.Map}}.Contains({{Macro "Read" $.Key}})
-  {{else if IsLength       $}}
-    {{if IsMap (TypeOf $.Object)}}{{Macro "Read" $.Object}}.Count()
-    {{else}}len({{Macro "Read" $.Object}})
-    {{end}}
+  {{else if IsLength       $}}int32(len({{Macro "Read" $.Object}}))
   {{else if IsSelect       $}}
     func() (result {{Macro "Go.Type" $}}) {
       switch {{Macro "Read" $.Value}} {
@@ -185,8 +182,8 @@ limitations under the License.
     {{end}}
     return s
   }()
-  {{else if IsNew $}}func()*{{Macro "Go.Type" $}}{
-    s := &{{Macro "Go.Type" $}}{}
+  {{else if IsNew $}}func(){{Macro "Go.Type" $}}{
+    s := &{{Macro "Go.Type" (Unpack $.Type).To}}{}
     s.Init()
     {{range $i, $f := $.Initializer.Fields}}
       s.{{$f.Field.Name}} = {{Macro "Read" $f.Value}}

@@ -54,11 +54,11 @@ namespace Ids {
 } // end of namespace FunctionIds
 ¶
 {{range $_, $e := $.Enums}}
-  namespace {{$e.Name}} {
-    {{range $_, $en := $e.Entries}}
-      static const uint32_t {{$en.Name}} = {{$en.Value}};
+  enum class {{$e.Name}} : uint32_t {
+    {{range $e := $e.Entries}}
+      {{$e.Name}} = {{$e.Value}},
     {{end}}
-  }; // end of namespace {{$e.Name}}¶
+  };¶
 {{end}}
 
 {{range $p := $.Pseudonyms}}

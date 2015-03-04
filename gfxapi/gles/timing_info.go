@@ -37,6 +37,7 @@ func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.
 	stopTimerId := t.postback(func(data interface{}, err error) {
 		if err != nil {
 			t.out <- gfxapi.CallTiming{Error: err}
+			return
 		}
 		val := data.(StopTimer_Postback)
 		switch mask {

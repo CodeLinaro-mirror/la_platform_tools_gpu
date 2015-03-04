@@ -1082,7 +1082,7 @@ class Objects {
     map<BufferTarget, BufferId>                       BoundBuffers
     ProgramId                                         BoundProgram
     VertexArrayId                                     BoundVertexArray
-    map<AttributeLocation, VertexAttributeArray*> VertexAttributeArrays
+    map<AttributeLocation, VertexAttributeArray*>     VertexAttributeArrays
     TextureUnitMap                                    TextureUnits
     TextureUnit                                       ActiveTextureUnit = GL_TEXTURE0
     map<Capability, bool>                             Capabilities
@@ -1148,25 +1148,25 @@ cmd void init(s32                width,
         CubeMapFace: GL_TEXTURE_CUBE_MAP_POSITIVE_X,
     }
 
-    Instances.Framebuffers[Internals.Backbuffer] =  backbuffer
+    Instances.Framebuffers[Internals.Backbuffer] = backbuffer
 
-    BoundFramebuffers[GL_FRAMEBUFFER] =  Internals.Backbuffer
+    BoundFramebuffers[GL_FRAMEBUFFER] = Internals.Backbuffer
 
     TextureUnits = createTextureUnits(Internals)
 
     Rasterizing.Scissor.Width       = width
     Rasterizing.Scissor.Height      = height
     // TODO: Stencil function
-    Rasterizing.StencilMask[GL_FRONT] =  0xFFFFFFFF
-    Rasterizing.StencilMask[GL_BACK] =   0xFFFFFFFF
-    Rasterizing.Viewport.Width      = width
-    Rasterizing.Viewport.Height     = height
+    Rasterizing.StencilMask[GL_FRONT] = 0xFFFFFFFF
+    Rasterizing.StencilMask[GL_BACK]  = 0xFFFFFFFF
+    Rasterizing.Viewport.Width        = width
+    Rasterizing.Viewport.Height       = height
 
-    PixelStorage[GL_PACK_ALIGNMENT] =  4
-    PixelStorage[GL_UNPACK_ALIGNMENT] =  4
+    PixelStorage[GL_PACK_ALIGNMENT] = 4
+    PixelStorage[GL_UNPACK_ALIGNMENT] = 4
 
     for i in (0 .. 64) { // TODO: Count
-        VertexAttributeArrays[i as AttributeLocation] =  new VertexAttributeArray{}
+        VertexAttributeArrays[i as AttributeLocation] = new VertexAttributeArray{}
     }
 }
 
@@ -1209,12 +1209,12 @@ cmd void eglSwapBuffers() {  // HACK: Hacked to match the spy's output
 
 cmd void glEnableClientState(ArrayType type) {
     http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
-    Capabilities[type as Capability] =  true
+    Capabilities[type as Capability] = true
 }
 
 cmd void glDisableClientState(ArrayType type) {
     http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
-    Capabilities[type as Capability] =  false
+    Capabilities[type as Capability] = false
 }
 
 /////////////////////////////////////////////////////////////////
@@ -1382,7 +1382,7 @@ cmd void glGetnUniformivEXT(u32             program,
 cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, string name) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml
     p := Instances.Programs[program]
-    p.AttributeBindings[name] =  location
+    p.AttributeBindings[name] = location
 }
 
 cmd void glBlendFunc(BlendFactor src_factor, BlendFactor dst_factor) {
@@ -1526,7 +1526,7 @@ cmd AttributeLocation glGetAttribLocation(ProgramId program, string name) {
 cmd void glPixelStorei(PixelStoreParameter parameter, s32 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml
     assert((value == 1) || (value == 2) || (value == 4) || (value == 8))
-    PixelStorage[parameter] =  value
+    PixelStorage[parameter] = value
 }
 
 cmd void glTexParameteri(TextureTarget    target,
@@ -1610,128 +1610,128 @@ cmd void glGetTexParameterfv(TextureTarget    target,
 cmd void glUniform1i(UniformLocation location, s32 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = value
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec2i{X: value0, Y: value1}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value2) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec3i{X: value0, Y: value1, Z: value2}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value2, s32 value3) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4i{X: value0, Y: value1, Z: value2, W: value3}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = value[0]
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4i{X: value[0], Y: value[1]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4i{X: value[0], Y: value[1], Z: value[2]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*4)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4i{X: value[0], Y: value[1], Z: value[2], W: value[3]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform1f(UniformLocation location, f32 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = value
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec2f{X: value0, Y: value1}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value2) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec3f{X: value0, Y: value1, Z: value2}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value2, f32 value3) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4f{X: value0, Y: value1, Z: value2, W: value3}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = value[0]
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec2f{X: value[0], Y: value[1]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec3f{X: value[0], Y: value[1], Z: value[2]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
@@ -1739,9 +1739,9 @@ cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
     assert len(value) >= (count*4)
     // for i in (0 .. count) { // TODO
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Vec4f{X: value[0], Y: value[1], Z: value[2], W: value[3]}
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
     // }
 }
 
@@ -1749,46 +1749,46 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*4)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Mat2f{
         Col0: Vec2f{X: values[0], Y: values[1]},
         Col1: Vec2f{X: values[0], Y: values[1]},
     }
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*9)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Mat3f{
         Col0: Vec3f{X: values[0], Y: values[1], Z: values[2]},
         Col1: Vec3f{X: values[3], Y: values[4], Z: values[5]},
         Col2: Vec3f{X: values[6], Y: values[7], Z: values[8]},
     }
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*16)
     program := Instances.Programs[BoundProgram]
-    uniform := program.Uniforms.Get(location, Uniform{})
+    uniform := program.Uniforms[location]
     uniform.Value = Mat4f{
         Col0: Vec4f{X: values[0],  Y: values[1],  Z: values[2],  W: values[3]},
         Col1: Vec4f{X: values[4],  Y: values[5],  Z: values[6],  W: values[7]},
         Col2: Vec4f{X: values[8],  Y: values[9],  Z: values[10], W: values[11]},
         Col3: Vec4f{X: values[12], Y: values[13], Z: values[14], W: values[15]},
     }
-    program.Uniforms[location] =  uniform
+    program.Uniforms[location] = uniform
 }
 
 cmd void glGetUniformfv(ProgramId program, UniformLocation location, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
     assert len(values) >= 1
     // p := Instances.Programs[program]
-    // uniform := p.Uniforms.Get(location, Uniform{})
+    // uniform := p.Uniforms[location]
     // values = uniform.Value as array<f32>
 }
 
@@ -1796,7 +1796,7 @@ cmd void glGetUniformiv(ProgramId program, UniformLocation location, array<s32> 
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
     assert len(values) >= 1
     // p := Instances.Programs[program]
-    // uniform := p.Uniforms.Get(location, Uniform{})
+    // uniform := p.Uniforms[location]
     // values = uniform.Value as array<s32>
 }
 
@@ -1867,18 +1867,18 @@ cmd void glColorMask(bool red, bool green, bool blue, bool alpha) {
 
 cmd void glStencilMask(u32 mask) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml
-    Rasterizing.StencilMask[GL_FRONT] =  mask
-    Rasterizing.StencilMask[GL_BACK] =  mask
+    Rasterizing.StencilMask[GL_FRONT] = mask
+    Rasterizing.StencilMask[GL_BACK] = mask
 }
 
 cmd void glStencilMaskSeparate(FaceMode face, u32 mask) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml
     switch (face) {
-        case GL_FRONT: Rasterizing.StencilMask[GL_FRONT] =  mask
-        case GL_BACK:  Rasterizing.StencilMask[GL_BACK] =  mask
+        case GL_FRONT: Rasterizing.StencilMask[GL_FRONT] = mask
+        case GL_BACK:  Rasterizing.StencilMask[GL_BACK] = mask
         case GL_FRONT_AND_BACK: {
-            Rasterizing.StencilMask[GL_FRONT] =  mask
-            Rasterizing.StencilMask[GL_BACK] =  mask
+            Rasterizing.StencilMask[GL_FRONT] = mask
+            Rasterizing.StencilMask[GL_BACK] = mask
         }
     }
 }
@@ -1932,7 +1932,7 @@ cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
     assert len(textures) >= count
     for i in (0 .. count) {
       textures[i] = ? as TextureId
-      Instances.Textures[textures[i]] =  new Texture{}
+      Instances.Textures[textures[i]] = new Texture{}
     }
 }
 
@@ -1952,9 +1952,9 @@ cmd bool glIsTexture(TextureId texture) {
 cmd void glBindTexture(TextureTarget target, TextureId texture) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
     if ((texture in Instances.Textures) == false) {
-      Instances.Textures[texture] =  new Texture{}
+      Instances.Textures[texture] = new Texture{}
     }
-    TextureUnits[ActiveTextureUnit][target] =  texture
+    TextureUnits[ActiveTextureUnit][target] = texture
 }
 
 cmd void glTexImage2D(TextureImageTarget target,
@@ -1980,7 +1980,7 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             memcpy(l.Data, data, l.Size)
-            t.Texture2D[level] =  l
+            t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -1995,9 +1995,9 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            cube := t.Cubemap.Get(level, CubemapLevel{})
-            cube.Faces[target as CubeMapImageTarget] =  l
-            t.Cubemap[level] =  cube
+            cube := t.Cubemap[level]
+            cube.Faces[target as CubeMapImageTarget] = l
+            t.Cubemap[level] = cube
             t.Kind = CUBEMAP // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -2028,7 +2028,7 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             memcpy(l.Data, data, l.Size)
-            t.Texture2D[level] =  l
+            t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -2044,9 +2044,9 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             memcpy(l.Data, data, l.Size)
-            cube := t.Cubemap.Get(level, CubemapLevel{})
-            cube.Faces[target as CubeMapImageTarget] =  l
-            t.Cubemap[level] =  cube
+            cube := t.Cubemap[level]
+            cube.Faces[target as CubeMapImageTarget] = l
+            t.Cubemap[level] = cube
             t.Kind = CUBEMAP  // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -2097,7 +2097,7 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             memcpy(l.Data, data, l.Size)
-            t.Texture2D[level] =  l
+            t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -2113,9 +2113,9 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             memcpy(l.Data, data, l.Size)
-            cube := t.Cubemap.Get(level, CubemapLevel{})
-            cube.Faces[target as CubeMapImageTarget] =  l
-            t.Cubemap[level] =  cube
+            cube := t.Cubemap[level]
+            cube.Faces[target as CubeMapImageTarget] = l
+            t.Cubemap[level] = cube
             t.Kind = CUBEMAP  // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
             t.Format = format as ImageTexelFormat // TODO: Implicit cast?
@@ -2155,16 +2155,16 @@ cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
     assert len(framebuffers) >= count
     for i in (0 .. count) {
         framebuffers[i] = ? as FramebufferId
-        Instances.Framebuffers[framebuffers[i]] =  new Framebuffer{}
+        Instances.Framebuffers[framebuffers[i]] = new Framebuffer{}
     }
 }
 
 cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml
     if ((framebuffer in Instances.Framebuffers) == false) {
-        Instances.Framebuffers[framebuffer] =  new Framebuffer{}
+        Instances.Framebuffers[framebuffer] = new Framebuffer{}
     }
-    BoundFramebuffers[target] =  framebuffer
+    BoundFramebuffers[target] = framebuffer
 }
 
 cmd FramebufferStatus glCheckFramebufferStatus(FramebufferTarget target) {
@@ -2190,16 +2190,16 @@ cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers
     assert len(renderbuffers) >= count
     for i in (0 .. count) {
         renderbuffers[i] = ? as RenderbufferId
-        Instances.Renderbuffers[renderbuffers[i]] =  new Renderbuffer{}
+        Instances.Renderbuffers[renderbuffers[i]] = new Renderbuffer{}
     }
 }
 
 cmd void glBindRenderbuffer(RenderbufferTarget target, RenderbufferId renderbuffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml
     if ((renderbuffer in Instances.Renderbuffers) == false) {
-      Instances.Renderbuffers[renderbuffer] =  new Renderbuffer{}
+      Instances.Renderbuffers[renderbuffer] = new Renderbuffer{}
     }
-    BoundRenderbuffers[target] =  renderbuffer
+    BoundRenderbuffers[target] = renderbuffer
 }
 
 cmd void glRenderbufferStorage(RenderbufferTarget target,
@@ -2253,16 +2253,16 @@ cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
     assert len(buffers) >= count
     for i in (0 .. count) {
         buffers[i] = ? as BufferId
-        Instances.Buffers[buffers[i]] =  new Buffer{}
+        Instances.Buffers[buffers[i]] = new Buffer{}
     }
 }
 
 cmd void glBindBuffer(BufferTarget target, BufferId buffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml
     if ((buffer in Instances.Buffers) == false) {
-        Instances.Buffers[buffer] =  new Buffer{}
+        Instances.Buffers[buffer] = new Buffer{}
     }
-    BoundBuffers[target] =  buffer
+    BoundBuffers[target] = buffer
 }
 
 cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, BufferUsage usage) {
@@ -2308,7 +2308,7 @@ cmd void glGetBufferParameteriv(BufferTarget    target,
 cmd ShaderId glCreateShader(ShaderType type) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml
     id := ? as ShaderId
-    Instances.Shaders[id] =  new Shader{}
+    Instances.Shaders[id] = new Shader{}
     s := Instances.Shaders[id]
     s.Type = type
     return id
@@ -2396,7 +2396,7 @@ cmd void glAttachShader(ProgramId program, ShaderId shader) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml
     p := Instances.Programs[program]
     s := Instances.Shaders[shader]
-    p.Shaders[s.Type] =  shader
+    p.Shaders[s.Type] = shader
 }
 
 cmd void glDetachShader(ProgramId program, ShaderId shader) {
@@ -2514,17 +2514,16 @@ cmd void glFramebufferRenderbuffer(FramebufferTarget     framebuffer_target,
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml
     framebufferId := BoundFramebuffers[framebuffer_target]
     framebuffer   := Instances.Framebuffers[framebufferId]
-    attachment  := framebuffer.Attachments.Get(framebuffer_attachment, FramebufferAttachmentInfo{})
+    attachment  := framebuffer.Attachments[framebuffer_attachment]
     if (renderbuffer == Internals.NilRenderbuffer) {
       attachment.Type = GL_NONE
-    }
-    if (renderbuffer != Internals.NilRenderbuffer) { // TODO: ELSE
+    } else {
       attachment.Type = GL_RENDERBUFFER
     }
     attachment.Object       = renderbuffer as u32
     attachment.TextureLevel = 0
     attachment.CubeMapFace  = GL_TEXTURE_CUBE_MAP_POSITIVE_X
-    framebuffer.Attachments[framebuffer_attachment] =  attachment
+    framebuffer.Attachments[framebuffer_attachment] = attachment
 }
 
 cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
@@ -2535,7 +2534,7 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml
     framebufferId := BoundFramebuffers[framebuffer_target]
     framebuffer   := Instances.Framebuffers[framebufferId]
-    attachment  := framebuffer.Attachments.Get(framebuffer_attachment, FramebufferAttachmentInfo{})
+    attachment    := framebuffer.Attachments[framebuffer_attachment]
     if (texture == Internals.NilTexture) {
       attachment.Type         = GL_NONE
       attachment.Object       = Internals.NilTexture as u32
@@ -2556,7 +2555,7 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
         case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
       }
     }
-    framebuffer.Attachments[framebuffer_attachment] =  attachment
+    framebuffer.Attachments[framebuffer_attachment] = attachment
 }
 
 cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              target,
@@ -2894,12 +2893,12 @@ cmd string glGetString(StringConstant param) {
 
 cmd void glEnable(Capability capability) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml
-    Capabilities[capability] =  true
+    Capabilities[capability] = true
 }
 
 cmd void glDisable(Capability capability) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml
-    Capabilities[capability] =  false
+    Capabilities[capability] = false
 }
 
 cmd bool glIsEnabled(Capability capability) {
