@@ -19,11 +19,17 @@ import (
 	"io"
 	"net"
 	"os"
+	"os/exec"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
+
+// DisableLocalDeviceCache can be used to disable the disk-cache for the local
+// device. If true, it is passed as a flag to replayd on spawning. This can be
+// used for disabling the cache for tests.
+var DisableLocalDeviceCache = false
 
 // deviceOS is an enumerator of operating systems that the replay target may be
 // running on.
@@ -96,7 +102,7 @@ func (localDevice) Connect() (io.ReadWriteCloser, error) {
 	endpoint := "localhost:9284" // TODO: Remove the hardcoded port number.
 	conn, err := net.Dial("tcp", endpoint)
 	if err != nil {
-		if err := spawnChild(replaydPath); err != nil {
+		if err := spawnChild(replayd); err != nil {
 			return nil, err
 		}
 		for i := 0; i < 10; i++ {
@@ -115,7 +121,15 @@ func spawnChild(path string) error {
 	if err != nil {
 		return err
 	}
-	proc, err := os.StartProcess(path, []string{path}, &os.ProcAttr{
+	path, err = exec.LookPath(path)
+	if err != nil {
+		return err
+	}
+	args := []string{path}
+	if DisableLocalDeviceCache {
+		args = append(args, "--nocache")
+	}
+	proc, err := os.StartProcess(path, args, &os.ProcAttr{
 		Files: []*os.File{null, null, null},
 	})
 	if err != nil {
