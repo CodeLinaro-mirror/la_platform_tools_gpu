@@ -28,6 +28,7 @@
 
 #include <memory>
 #include <stdlib.h>
+#include <string.h>
 
 #if TARGET_OS == CAZE_OS_ANDROID
 #include <android_native_app_glue.h>
@@ -108,7 +109,7 @@ void android_main(struct android_app*) {
 int main(int argc, char* argv[]) {
     bool useCache = true;
     for (int i = 1; i < argc; i++) {
-        if (strstr(argv[i], "--nocache") == argv[i]) {
+        if (strcmp(argv[i], "--nocache") == 0) {
             printf("Disabling cache\n");
             useCache = false;
         }
