@@ -13,8 +13,8 @@ apply plugin: 'objective-cpp'
 
 buildDir temporaryDirectory
 
-def gtestBasePath = '../../../../external/gtest/'
-def gmockBasePath = '../../../../external/gmock/'
+def gtestBasePath = '../../../../../../../../../external/gtest/'
+def gmockBasePath = '../../../../../../../../../external/gmock/'
 
 android {
   compileSdkVersion 20
