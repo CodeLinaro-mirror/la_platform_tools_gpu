@@ -65,11 +65,11 @@ func TestClear(t *testing.T) {
 			gles.RenderbufferFormat_GL_DEPTH_COMPONENT16, // Unused
 			gles.RenderbufferFormat_GL_STENCIL_INDEX8,    // Unused
 		),
-		/* 1 */ gles.NewGlClearColor(1.0, 0.0, 0.0, 0.0),
+		/* 1 */ gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
 		/* 2 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 3 */ gles.NewGlClearColor(0.0, 1.0, 0.0, 0.0),
+		/* 3 */ gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		/* 4 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 5 */ gles.NewGlClearColor(0.0, 0.0, 1.0, 0.0),
+		/* 5 */ gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		/* 6 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 		/* 7 */ gles.NewGlClearColor(0.0, 0.0, 0.0, 1.0),
 		/* 8 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
