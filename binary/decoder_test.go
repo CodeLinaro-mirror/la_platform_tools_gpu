@@ -48,8 +48,8 @@ var testDecodeObjectsBuffer = []byte{
 }
 
 func TestDecoderBool(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{0, 1}))
-	for i, expected := range []bool{false, true} {
+	d := NewDecoder(bytes.NewBuffer(boolBytes))
+	for i, expected := range boolValues {
 		got, err := d.Bool()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -61,8 +61,8 @@ func TestDecoderBool(t *testing.T) {
 }
 
 func TestDecoderInt8(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{0x00, 0x7f, 0x80, 0xff}))
-	for i, expected := range []int8{0, 127, -128, -1} {
+	d := NewDecoder(bytes.NewBuffer(int8Bytes))
+	for i, expected := range int8Values {
 		got, err := d.Int8()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -74,8 +74,8 @@ func TestDecoderInt8(t *testing.T) {
 }
 
 func TestDecoderUint8(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{0x00, 0x7f, 0x80, 0xff}))
-	for i, expected := range []uint8{0x00, 0x7f, 0x80, 0xff} {
+	d := NewDecoder(bytes.NewBuffer(uint8Bytes))
+	for i, expected := range uint8Values {
 		got, err := d.Uint8()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -87,13 +87,8 @@ func TestDecoderUint8(t *testing.T) {
 }
 
 func TestDecoderInt16(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00,
-		0xff, 0x7f,
-		0x00, 0x80,
-		0xff, 0xff,
-	}))
-	for i, expected := range []int16{0, 32767, -32768, -1} {
+	d := NewDecoder(bytes.NewBuffer(int16Bytes))
+	for i, expected := range int16Values {
 		got, err := d.Int16()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -105,12 +100,8 @@ func TestDecoderInt16(t *testing.T) {
 }
 
 func TestDecoderUint16(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00,
-		0xef, 0xbe,
-		0xde, 0xc0,
-	}))
-	for i, expected := range []uint16{0, 0xbeef, 0xc0de} {
+	d := NewDecoder(bytes.NewBuffer(uint16Bytes))
+	for i, expected := range uint16Values {
 		got, err := d.Uint16()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -122,13 +113,8 @@ func TestDecoderUint16(t *testing.T) {
 }
 
 func TestDecoderInt32(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00,
-		0xff, 0xff, 0xff, 0x7f,
-		0x00, 0x00, 0x00, 0x80,
-		0xff, 0xff, 0xff, 0xff,
-	}))
-	for i, expected := range []int32{0, 2147483647, -2147483648, -1} {
+	d := NewDecoder(bytes.NewBuffer(int32Bytes))
+	for i, expected := range int32Values {
 		got, err := d.Int32()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -140,12 +126,8 @@ func TestDecoderInt32(t *testing.T) {
 }
 
 func TestDecoderUint32(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00,
-		0x67, 0x45, 0x23, 0x01,
-		0xef, 0xcd, 0xab, 0x10,
-	}))
-	for i, expected := range []uint32{0, 0x01234567, 0x10abcdef} {
+	d := NewDecoder(bytes.NewBuffer(uint32Bytes))
+	for i, expected := range uint32Values {
 		got, err := d.Uint32()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -157,12 +139,8 @@ func TestDecoderUint32(t *testing.T) {
 }
 
 func TestDecoderFloat32(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x80, 0x3f,
-		0x00, 0x00, 0x81, 0x42,
-	}))
-	for i, expected := range []float32{0, 1, 64.5} {
+	d := NewDecoder(bytes.NewBuffer(float32Bytes))
+	for i, expected := range float32Values {
 		got, err := d.Float32()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -174,12 +152,8 @@ func TestDecoderFloat32(t *testing.T) {
 }
 
 func TestDecoderFloat64(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0x3f,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x50, 0x40,
-	}))
-	for i, expected := range []float64{0, 1, 64.5} {
+	d := NewDecoder(bytes.NewBuffer(float64Bytes))
+	for i, expected := range float64Values {
 		got, err := d.Float64()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -191,13 +165,8 @@ func TestDecoderFloat64(t *testing.T) {
 }
 
 func TestDecoderInt64(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7f,
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
-		0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	}))
-	for i, expected := range []int64{0, 9223372036854775807, -9223372036854775808, -1} {
+	d := NewDecoder(bytes.NewBuffer(int64Bytes))
+	for i, expected := range int64Values {
 		got, err := d.Int64()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -209,12 +178,8 @@ func TestDecoderInt64(t *testing.T) {
 }
 
 func TestDecoderUint64(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01,
-		0x10, 0x32, 0x54, 0x76, 0x98, 0xba, 0xdc, 0xfe,
-	}))
-	for i, expected := range []uint64{0, 0x0123456789abcdef, 0xfedcba9876543210} {
+	d := NewDecoder(bytes.NewBuffer(uint64Bytes))
+	for i, expected := range uint64Values {
 		got, err := d.Uint64()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -226,16 +191,8 @@ func TestDecoderUint64(t *testing.T) {
 }
 
 func TestDecoderString(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x05, 0x00, 0x00, 0x00,
-		'H', 'e', 'l', 'l', 'o',
-		0x00, 0x00, 0x00, 0x00,
-		0x05, 0x00, 0x00, 0x00,
-		'W', 'o', 'r', 'l', 'd',
-		0x15, 0x00, 0x00, 0x00,
-		0xe3, 0x81, 0x93, 0xe3, 0x82, 0x93, 0xe3, 0x81, 0xab, 0xe3, 0x81, 0xa1, 0xe3, 0x81, 0xaf, 0xe4, 0xb8, 0x96, 0xe7, 0x95, 0x8c,
-	}))
-	for i, expected := range []string{"Hello", "", "World", "こんにちは世界"} {
+	d := NewDecoder(bytes.NewBuffer(stringBytes))
+	for i, expected := range stringValues {
 		got, err := d.String()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -254,13 +211,8 @@ func TestDecoderStringError(t *testing.T) {
 }
 
 func TestDecoderCString(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		'H', 'e', 'l', 'l', 'o', 0x00,
-		0x00,
-		'W', 'o', 'r', 'l', 'd', 0x00,
-		0xe3, 0x81, 0x93, 0xe3, 0x82, 0x93, 0xe3, 0x81, 0xab, 0xe3, 0x81, 0xa1, 0xe3, 0x81, 0xaf, 0xe4, 0xb8, 0x96, 0xe7, 0x95, 0x8c, 0x00,
-	}))
-	for i, expected := range []string{"Hello", "", "World", "こんにちは世界"} {
+	d := NewDecoder(bytes.NewBuffer(cStringBytes))
+	for i, expected := range stringValues {
 		got, err := d.CString()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
@@ -281,20 +233,20 @@ func TestDecoderCStringError(t *testing.T) {
 func checkObjectDecode(t *testing.T, d *Decoder, expectedObj interface{}, expectedErr error) {
 	obj, err := d.Object()
 	if err != expectedErr {
-		t.Errorf("Decode gave unexpected error. Expected, %v, got: %v", expectedErr, err)
+		t.Errorf("Decode gave unexpected error. Expected: %v, got: %v", expectedErr, err)
 	}
 	if obj != expectedObj {
-		t.Errorf("Decode gave unexpected object. Expected, %v, got: %v", expectedObj, obj)
+		t.Errorf("Decode gave unexpected object. Expected: %v, got: %v", expectedObj, obj)
 	}
 }
 
 func TestDecoderObject(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer(testDecodeObjectsBuffer))
+	d := NewDecoder(bytes.NewBuffer(objectBytes))
 
 	var got [4]interface{}
 	var err error
 
-	for i, expected := range []interface{}{testObjA, testObjB, testObjA, nil} {
+	for i, expected := range objectValues {
 		got[i], err = d.Object()
 		if err != nil {
 			t.Errorf("Decode %d gave unexpected error: %v", i, err)
