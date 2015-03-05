@@ -30,17 +30,6 @@ go build -i -o $GPU_BUILD_ROOT/bin/protoc-gen-go github.com/golang/protobuf/prot
 # TODO: Enable this once the checked in gcc tool chain is working.
 #src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle
 
-# The following two go actions have a mutual dependency because we are using
-# an outdated version of golang.org/x/tools/go/loader.
-# As a temporary work around, run the actions twice and ignore the errors
-# during the first build action.
-# TODO: Update golang.org/x/tools/go/loader and remove this work around.
-go generate -x $GPU_RELATIVE_SOURCE_PATH/builder
-set +e
-go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
-set -e
-
-# Now repeat the actions.
 go generate -x $GPU_RELATIVE_SOURCE_PATH/builder
 go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
