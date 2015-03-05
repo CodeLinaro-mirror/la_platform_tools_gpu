@@ -30,9 +30,9 @@ limitations under the License.
 {{define "Statement"}}
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Read" $.Local.Value}} {{Macro "TypeComment" (TypeOf $.Local)}}
   {{else if IsAssert $}}
-  {{else if IsAssign $}}{{Macro "Assign" "LHS" $.LHS "RHS" $.RHS}}
-  {{else if IsMapAssign $}}{{Macro "Read" $.To.Map}}.Set({{Macro "Read" $.To.Index}}, {{Macro "Read" $.Value}})
-  {{else if IsReturn $}}{{Macro "Assign" "LHS" $.Function.Return "RHS" $.Value}}
+  {{else if IsAssign $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
+  {{else if IsMapAssign $}}{{Macro "MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
+  {{else if IsReturn $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsBranch $}}if {{Macro "Read" $.Condition}} {
     {{Macro "Block" $.True}}
     {{if len $.False.Statements}}
@@ -113,13 +113,25 @@ limitations under the License.
   {{range $i, $a := $}}{{if $i}}, {{end}}{{Macro "Read" $a}}{{end}}
 {{end}}
 
+
 {{/*
 -------------------------------------------------------------------------------
   Emits the logic to assign the RHS to the LHS
 -------------------------------------------------------------------------------
 */}}
 {{define "Assign"}}
-  {{Macro "Read" $.LHS}} = {{Macro "Read" $.RHS}}
+  {{Macro "Read" $.LHS}} {{$.Operator}} {{Macro "Read" $.RHS}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to assign a value to a map index
+-------------------------------------------------------------------------------
+*/}}
+{{define "MapAssign"}}
+  {{if eq $.Operator "="}}{{Macro "Read" $.To.Map}}.Set({{Macro "Read" $.To.Index}}, {{Macro "Read" $.Value}})
+  {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
 

@@ -73,12 +73,13 @@ type DeclareLocal struct {
 	RHS  interface{}   // the value to store in that local
 }
 
-// Assign represents a «location = value» statement that assigns a value to an
-// existing mutable location.
+// Assign represents a «location {,+,-}= value» statement that assigns a value to
+// an existing mutable location.
 type Assign struct {
-	CST *parse.Branch // underlying parse structure for this node
-	LHS interface{}   // the location to store the value into
-	RHS interface{}   // the value to store
+	CST      *parse.Branch // underlying parse structure for this node
+	LHS      interface{}   // the location to store the value into
+	Operator string        // the assignment operator being applied
+	RHS      interface{}   // the value to store
 }
 
 // Assert represents the «"assert" condition» statement.
