@@ -19,7 +19,6 @@ package asm
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -32,10 +31,10 @@ import (
 // any pointers to their final, resolved addresses using the PointerResolver r.
 // An instruction can produce zero, one or many opcodes.
 type Instruction interface {
-	Encode(r value.PointerResolver, e *binary.Encoder) error
+	Encode(r value.PointerResolver, e *protocol.Encoder) error
 }
 
-func encodePush(t protocol.Type, v uint64, e *binary.Encoder) error {
+func encodePush(t protocol.Type, v uint64, e *protocol.Encoder) error {
 	mask19 := uint64(0x7ffff)
 	mask20 := uint64(0xfffff)
 	mask26 := uint64(0x3ffffff)
@@ -151,7 +150,7 @@ func encodePush(t protocol.Type, v uint64, e *binary.Encoder) error {
 // Nop is a no-operation Instruction. Instructions of this type do nothing.
 type Nop struct{}
 
-func (Nop) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (Nop) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return nil
 }
 
@@ -164,7 +163,7 @@ type Call struct {
 	FunctionID uint16 // The function id registered with the VM to invoke.
 }
 
-func (a Call) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Call) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return opcode.Call{
 		PushReturn: a.PushReturn,
 		FunctionID: a.FunctionID,
@@ -176,7 +175,7 @@ type Push struct {
 	Value value.Value // The value to push on to the VM stack.
 }
 
-func (a Push) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Push) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return encodePush(a.Value.Type(), a.Value.Get(r), e)
 }
 
@@ -186,7 +185,7 @@ type Pop struct {
 	Count uint32 // Number of values to discard from the top of the VM stack.
 }
 
-func (a Pop) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Pop) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return opcode.Pop{Count: a.Count}.Encode(e)
 }
 
@@ -197,7 +196,7 @@ type Copy struct {
 	Count uint64 // Number of bytes to copy.
 }
 
-func (a Copy) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Copy) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return opcode.Copy{Count: uint32(a.Count)}.Encode(e)
 }
 
@@ -207,7 +206,7 @@ type Clone struct {
 	Index int
 }
 
-func (a Clone) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Clone) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return opcode.Clone{Index: uint32(a.Index)}.Encode(e)
 }
 
@@ -218,7 +217,7 @@ type Load struct {
 	Source   value.Pointer
 }
 
-func (a Load) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Load) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	addr := a.Source.Get(r)
 	switch a.Source.(type) {
 	case value.ConstantPointer:
@@ -250,7 +249,7 @@ type Store struct {
 	Destination value.Pointer
 }
 
-func (a Store) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Store) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	addr := a.Destination.Get(r)
 	if addr < 0x3ffffff {
 		return opcode.StoreV{Address: uint32(addr)}.Encode(e)
@@ -271,7 +270,7 @@ type Strcpy struct {
 	MaxCount uint64
 }
 
-func (a Strcpy) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Strcpy) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	return opcode.Strcpy{
 		MaxSize: uint32(a.MaxCount),
 	}.Encode(e)
@@ -284,7 +283,7 @@ type Resource struct {
 	Destination memory.Pointer
 }
 
-func (a Resource) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Resource) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	ptr := value.VolatileCapturePointer(a.Destination)
 	if err := encodePush(ptr.Type(), ptr.Get(r), e); err != nil {
 		return err
@@ -300,7 +299,7 @@ type Post struct {
 	Size   uint64
 }
 
-func (a Post) Encode(r value.PointerResolver, e *binary.Encoder) error {
+func (a Post) Encode(r value.PointerResolver, e *protocol.Encoder) error {
 	if err := encodePush(a.Source.Type(), a.Source.Get(r), e); err != nil {
 		return err
 	}

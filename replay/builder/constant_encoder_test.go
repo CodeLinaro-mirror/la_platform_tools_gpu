@@ -15,6 +15,7 @@
 package builder
 
 import (
+	"encoding/binary"
 	"reflect"
 	"testing"
 
@@ -22,7 +23,7 @@ import (
 )
 
 func TestConstantEncoderCache(t *testing.T) {
-	c := newConstantEncoder(4)
+	c := newConstantEncoder(4, binary.LittleEndian)
 
 	addr1 := c.writeValues(value.U32(0x1234), value.S16(-1))
 	addr2 := c.writeValues(value.U32(0x1234), value.S16(-1))
@@ -33,7 +34,7 @@ func TestConstantEncoderCache(t *testing.T) {
 }
 
 func TestConstantEncoderAlignment(t *testing.T) {
-	c := newConstantEncoder(8)
+	c := newConstantEncoder(8, binary.LittleEndian)
 
 	c.writeValues(value.U32(0x1234))
 	c.writeValues(value.S16(-1))

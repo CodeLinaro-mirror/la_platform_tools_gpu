@@ -23,7 +23,6 @@ limitations under the License.
     "io/ioutil"
 
     "android.googlesource.com/platform/tools/gpu/atom"
-    "android.googlesource.com/platform/tools/gpu/binary"
     "android.googlesource.com/platform/tools/gpu/memory"
     "android.googlesource.com/platform/tools/gpu/replay/builder"
     "android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -183,7 +182,7 @@ limitations under the License.
       }
 
       {{$array_counts := Macro "ArrayCountsList" "Command" $c "Postfix" "uint64, "}}
-      func (o *{{$name}}) Decode({{$array_counts}}d *binary.Decoder) error {
+      func (o *{{$name}}) Decode({{$array_counts}}d *protocol.Decoder) error {
         {{/* Decode each of the output parameters */}}
         {{range $p := $c.Outputs}}
           {{$name := print "o." (Macro "Go.Public" $p.Name)}}
@@ -334,7 +333,7 @@ limitations under the License.
     {{if len $.Outputs}}
       {{/* Post back the data, if it is wanted */}}
       if wantOutput {
-        b.Post(outputs[0], size, id, func(d *binary.Decoder) (interface{}, error) {
+        b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
           postback := {{Macro "CmdPostbacksName" $}}{}
           {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
           if err := postback.Decode({{$array_counts}}d); err != nil {

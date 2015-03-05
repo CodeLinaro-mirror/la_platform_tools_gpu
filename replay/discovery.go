@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"sync"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -112,8 +111,8 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 	}
 	defer connection.Close()
 
-	enc := binary.NewEncoder(connection)
-	dec := binary.NewDecoder(connection)
+	enc := protocol.NewEncoder(connection, d.ByteOrder())
+	dec := protocol.NewDecoder(connection, d.ByteOrder())
 
 	if err := enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); err != nil {
 		return err
