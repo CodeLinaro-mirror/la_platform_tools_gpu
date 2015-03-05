@@ -13,8 +13,8 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-GTEST_PATH := $(LOCAL_PATH)/../../../../../../external/gtest
-GMOCK_PATH := $(LOCAL_PATH)/../../../../../../external/gmock
+GTEST_PATH := $(LOCAL_PATH)/../../../../../../../../../../../external/gtest
+GMOCK_PATH := $(LOCAL_PATH)/../../../../../../../../../../../external/gmock
 
 # Compile the replay daemon into a static library
 include $(CLEAR_VARS)
