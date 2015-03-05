@@ -140,6 +140,7 @@ libraries {
   caze {
     binaries.all {
       cppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
+      objcppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
     }
   }
 }

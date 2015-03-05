@@ -18,6 +18,7 @@
 #define ANDROID_CAZE_BASE_TYPE_H
 
 #include <stdint.h>
+#include <type_traits>
 
 namespace android {
 namespace caze {
@@ -47,9 +48,10 @@ uint32_t baseTypeSize(BaseType type);
 // Return the name of the given BaseType
 const char* baseTypeName(BaseType type);
 
-// Provide the BaseType value corresponding to the type specified in T. For pointers the
-// corresponding base type is AbsolutePointer
-template<typename T> struct TypeToBaseType;
+// Provide the BaseType value corresponding to the type specified in T.
+// For pointers the corresponding base type is AbsolutePointer
+// For enums the corresponding base type is uint32_t
+template<typename T, typename = void> struct TypeToBaseType;
 
 template<typename T> struct TypeToBaseType<T*> {
     static const BaseType type = BaseType::AbsolutePointer;
@@ -66,6 +68,11 @@ template<> struct TypeToBaseType<uint32_t> { static const BaseType type = BaseTy
 template<> struct TypeToBaseType<uint64_t> { static const BaseType type = BaseType::Uint64; };
 template<> struct TypeToBaseType<float>    { static const BaseType type = BaseType::Float; };
 template<> struct TypeToBaseType<double>   { static const BaseType type = BaseType::Double; };
+
+template<typename T>
+struct TypeToBaseType<T, typename std::enable_if<std::is_enum<T>::value>::type> {
+    static const BaseType type = BaseType::Uint32;
+};
 
 }  // end of namespace caze
 }  // end of namespace android

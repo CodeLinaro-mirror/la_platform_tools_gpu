@@ -62,7 +62,7 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnableClientState(Stack* stack, bool pushReturn) {
-    uint32_t type = stack->pop<uint32_t>();
+    ArrayType type = stack->pop<ArrayType>();
     if (stack->isValid()) {
         CAZE_INFO("glEnableClientState(%u)\n", type);
         if (glEnableClientState != nullptr) {
@@ -78,7 +78,7 @@ bool callGlEnableClientState(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisableClientState(Stack* stack, bool pushReturn) {
-    uint32_t type = stack->pop<uint32_t>();
+    ArrayType type = stack->pop<ArrayType>();
     if (stack->isValid()) {
         CAZE_INFO("glDisableClientState(%u)\n", type);
         if (glDisableClientState != nullptr) {
@@ -135,7 +135,7 @@ bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
-    uint32_t preserveMask = stack->pop<uint32_t>();
+    TilePreserveMaskQCOM preserveMask = stack->pop<TilePreserveMaskQCOM>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
@@ -155,7 +155,7 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
-    uint32_t preserve_mask = stack->pop<uint32_t>();
+    TilePreserveMaskQCOM preserve_mask = stack->pop<TilePreserveMaskQCOM>();
     if (stack->isValid()) {
         CAZE_INFO("glEndTilingQCOM(%u)\n", preserve_mask);
         if (glEndTilingQCOM != nullptr) {
@@ -171,9 +171,9 @@ bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
-    uint32_t* attachments = stack->pop<uint32_t*>();
+    DiscardFramebufferAttachment* attachments = stack->pop<DiscardFramebufferAttachment*>();
     int32_t numAttachments = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glDiscardFramebufferEXT(%u, %d, %p)\n", target, numAttachments, attachments);
         if (glDiscardFramebufferEXT != nullptr) {
@@ -239,9 +239,9 @@ bool callGlPopGroupMarkerEXT(Stack* stack, bool pushReturn) {
 
 bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexStorage1DEXT(%u, %d, %u, %d)\n", target, levels, format, width);
         if (glTexStorage1DEXT != nullptr) {
@@ -259,9 +259,9 @@ bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
 bool callGlTexStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexStorage2DEXT(%u, %d, %u, %d, %d)\n", target, levels, format, width, height);
         if (glTexStorage2DEXT != nullptr) {
@@ -280,9 +280,9 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexStorage3DEXT(%u, %d, %u, %d, %d, %d)\n", target, levels, format, width,
                   height, depth);
@@ -300,9 +300,9 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
 
 bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
         CAZE_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
@@ -322,9 +322,9 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
 bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
         CAZE_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
@@ -345,9 +345,9 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t depth = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
         CAZE_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
@@ -436,7 +436,7 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
 
 bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
     ImageOES image = stack->pop<ImageOES>();
-    uint32_t target = stack->pop<uint32_t>();
+    ImageTargetTexture target = stack->pop<ImageTargetTexture>();
     if (stack->isValid()) {
         CAZE_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
         if (glEGLImageTargetTexture2DOES != nullptr) {
@@ -453,7 +453,7 @@ bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
 
 bool callGlEGLImageTargetRenderbufferStorageOES(Stack* stack, bool pushReturn) {
     TexturePointer image = stack->pop<TexturePointer>();
-    uint32_t target = stack->pop<uint32_t>();
+    ImageTargetRenderbufferStorage target = stack->pop<ImageTargetRenderbufferStorage>();
     if (stack->isValid()) {
         CAZE_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
         if (glEGLImageTargetRenderbufferStorageOES != nullptr) {
@@ -474,10 +474,10 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetGraphicsResetStatusEXT()\n");
         if (glGetGraphicsResetStatusEXT != nullptr) {
-            uint32_t return_value = glGetGraphicsResetStatusEXT();
+            ResetStatus return_value = glGetGraphicsResetStatusEXT();
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t>(return_value);
+                stack->push<ResetStatus>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT\n");
@@ -508,8 +508,8 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendFunc(Stack* stack, bool pushReturn) {
-    uint32_t dst_factor = stack->pop<uint32_t>();
-    uint32_t src_factor = stack->pop<uint32_t>();
+    BlendFactor dst_factor = stack->pop<BlendFactor>();
+    BlendFactor src_factor = stack->pop<BlendFactor>();
     if (stack->isValid()) {
         CAZE_INFO("glBlendFunc(%u, %u)\n", src_factor, dst_factor);
         if (glBlendFunc != nullptr) {
@@ -525,10 +525,10 @@ bool callGlBlendFunc(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
-    uint32_t dst_factor_alpha = stack->pop<uint32_t>();
-    uint32_t src_factor_alpha = stack->pop<uint32_t>();
-    uint32_t dst_factor_rgb = stack->pop<uint32_t>();
-    uint32_t src_factor_rgb = stack->pop<uint32_t>();
+    BlendFactor dst_factor_alpha = stack->pop<BlendFactor>();
+    BlendFactor src_factor_alpha = stack->pop<BlendFactor>();
+    BlendFactor dst_factor_rgb = stack->pop<BlendFactor>();
+    BlendFactor src_factor_rgb = stack->pop<BlendFactor>();
     if (stack->isValid()) {
         CAZE_INFO("glBlendFuncSeparate(%u, %u, %u, %u)\n", src_factor_rgb, dst_factor_rgb,
                   src_factor_alpha, dst_factor_alpha);
@@ -545,7 +545,7 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendEquation(Stack* stack, bool pushReturn) {
-    uint32_t equation = stack->pop<uint32_t>();
+    BlendEquation equation = stack->pop<BlendEquation>();
     if (stack->isValid()) {
         CAZE_INFO("glBlendEquation(%u)\n", equation);
         if (glBlendEquation != nullptr) {
@@ -561,8 +561,8 @@ bool callGlBlendEquation(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlendEquationSeparate(Stack* stack, bool pushReturn) {
-    uint32_t alpha = stack->pop<uint32_t>();
-    uint32_t rgb = stack->pop<uint32_t>();
+    BlendEquation alpha = stack->pop<BlendEquation>();
+    BlendEquation rgb = stack->pop<BlendEquation>();
     if (stack->isValid()) {
         CAZE_INFO("glBlendEquationSeparate(%u, %u)\n", rgb, alpha);
         if (glBlendEquationSeparate != nullptr) {
@@ -632,8 +632,8 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     VertexPointer data = stack->pop<VertexPointer>();
     int32_t stride = stack->pop<int32_t>();
     bool normalized = stack->pop<bool>();
-    uint32_t type = stack->pop<uint32_t>();
-    uint32_t size = stack->pop<uint32_t>();
+    VertexAttribType type = stack->pop<VertexAttribType>();
+    VertexAttribSize size = stack->pop<VertexAttribSize>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
         CAZE_INFO("glVertexAttribPointer(%d, %u, %u, %d, %d, %p)\n", location, size, type,
@@ -652,7 +652,7 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     const char* name = stack->pop<const char*>();
-    uint32_t* type = stack->pop<uint32_t*>();
+    ShaderAttribType* type = stack->pop<ShaderAttribType*>();
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
@@ -676,7 +676,7 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
 
 bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     const char* name = stack->pop<const char*>();
-    uint32_t* type = stack->pop<uint32_t*>();
+    ShaderUniformType* type = stack->pop<ShaderUniformType*>();
     int32_t* size = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
@@ -702,10 +702,10 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         CAZE_INFO("glGetError()\n");
         if (glGetError != nullptr) {
-            uint32_t return_value = glGetError();
+            Error return_value = glGetError();
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t>(return_value);
+                stack->push<Error>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glGetError\n");
@@ -719,7 +719,7 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
 
 bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    ProgramParameter parameter = stack->pop<ProgramParameter>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
@@ -737,7 +737,7 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
 
 bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    ShaderParameter parameter = stack->pop<ShaderParameter>();
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
@@ -797,7 +797,7 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
 
 bool callGlPixelStorei(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    PixelStoreParameter parameter = stack->pop<PixelStoreParameter>();
     if (stack->isValid()) {
         CAZE_INFO("glPixelStorei(%u, %d)\n", parameter, value);
         if (glPixelStorei != nullptr) {
@@ -814,8 +814,8 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
 
 bool callGlTexParameteri(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureParameter parameter = stack->pop<TextureParameter>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexParameteri(%u, %u, %d)\n", target, parameter, value);
         if (glTexParameteri != nullptr) {
@@ -832,8 +832,8 @@ bool callGlTexParameteri(Stack* stack, bool pushReturn) {
 
 bool callGlTexParameterf(Stack* stack, bool pushReturn) {
     float value = stack->pop<float>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureParameter parameter = stack->pop<TextureParameter>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexParameterf(%u, %u, %f)\n", target, parameter, value);
         if (glTexParameterf != nullptr) {
@@ -850,8 +850,8 @@ bool callGlTexParameterf(Stack* stack, bool pushReturn) {
 
 bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureParameter parameter = stack->pop<TextureParameter>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetTexParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameteriv != nullptr) {
@@ -868,8 +868,8 @@ bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
 
 bool callGlGetTexParameterfv(Stack* stack, bool pushReturn) {
     float* values = stack->pop<float*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureParameter parameter = stack->pop<TextureParameter>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetTexParameterfv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameterfv != nullptr) {
@@ -1415,8 +1415,8 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
 bool callGlGetShaderPrecisionFormat(Stack* stack, bool pushReturn) {
     int32_t* precision = stack->pop<int32_t*>();
     int32_t* range = stack->pop<int32_t*>();
-    uint32_t precision_type = stack->pop<uint32_t>();
-    uint32_t shader_type = stack->pop<uint32_t>();
+    PrecisionType precision_type = stack->pop<PrecisionType>();
+    ShaderType shader_type = stack->pop<ShaderType>();
     if (stack->isValid()) {
         CAZE_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)\n", shader_type, precision_type,
                   range, precision);
@@ -1449,7 +1449,7 @@ bool callGlDepthMask(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDepthFunc(Stack* stack, bool pushReturn) {
-    uint32_t function = stack->pop<uint32_t>();
+    TestFunction function = stack->pop<TestFunction>();
     if (stack->isValid()) {
         CAZE_INFO("glDepthFunc(%u)\n", function);
         if (glDepthFunc != nullptr) {
@@ -1518,7 +1518,7 @@ bool callGlStencilMask(Stack* stack, bool pushReturn) {
 
 bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
-    uint32_t face = stack->pop<uint32_t>();
+    FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
         CAZE_INFO("glStencilMaskSeparate(%u, %u)\n", face, mask);
         if (glStencilMaskSeparate != nullptr) {
@@ -1536,8 +1536,8 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
 bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
     int32_t mask = stack->pop<int32_t>();
     int32_t reference_value = stack->pop<int32_t>();
-    uint32_t function = stack->pop<uint32_t>();
-    uint32_t face = stack->pop<uint32_t>();
+    TestFunction function = stack->pop<TestFunction>();
+    FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
         CAZE_INFO("glStencilFuncSeparate(%u, %u, %d, %d)\n", face, function, reference_value, mask);
         if (glStencilFuncSeparate != nullptr) {
@@ -1553,10 +1553,10 @@ bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
-    uint32_t stencil_pass_depth_pass = stack->pop<uint32_t>();
-    uint32_t stencil_pass_depth_fail = stack->pop<uint32_t>();
-    uint32_t stencil_fail = stack->pop<uint32_t>();
-    uint32_t face = stack->pop<uint32_t>();
+    StencilAction stencil_pass_depth_pass = stack->pop<StencilAction>();
+    StencilAction stencil_pass_depth_fail = stack->pop<StencilAction>();
+    StencilAction stencil_fail = stack->pop<StencilAction>();
+    FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
         CAZE_INFO("glStencilOpSeparate(%u, %u, %u, %u)\n", face, stencil_fail,
                   stencil_pass_depth_fail, stencil_pass_depth_pass);
@@ -1574,7 +1574,7 @@ bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
 }
 
 bool callGlFrontFace(Stack* stack, bool pushReturn) {
-    uint32_t orientation = stack->pop<uint32_t>();
+    FaceOrientation orientation = stack->pop<FaceOrientation>();
     if (stack->isValid()) {
         CAZE_INFO("glFrontFace(%u)\n", orientation);
         if (glFrontFace != nullptr) {
@@ -1628,7 +1628,7 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
 }
 
 bool callGlActiveTexture(Stack* stack, bool pushReturn) {
-    uint32_t unit = stack->pop<uint32_t>();
+    TextureUnit unit = stack->pop<TextureUnit>();
     if (stack->isValid()) {
         CAZE_INFO("glActiveTexture(%u)\n", unit);
         if (glActiveTexture != nullptr) {
@@ -1699,7 +1699,7 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
 
 bool callGlBindTexture(Stack* stack, bool pushReturn) {
     TextureId texture = stack->pop<TextureId>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBindTexture(%u, %u)\n", target, texture);
         if (glBindTexture != nullptr) {
@@ -1716,14 +1716,14 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
 
 bool callGlTexImage2D(Stack* stack, bool pushReturn) {
     TexturePointer data = stack->pop<TexturePointer>();
-    uint32_t type = stack->pop<uint32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelType type = stack->pop<TexelType>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t internal_format = stack->pop<uint32_t>();
+    TexelFormat internal_format = stack->pop<TexelFormat>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexImage2D(%u, %d, %u, %d, %d, %d, %u, %u, %p)\n", target, level,
                   internal_format, width, height, border, format, type, data);
@@ -1741,14 +1741,14 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
 
 bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
     TexturePointer data = stack->pop<TexturePointer>();
-    uint32_t type = stack->pop<uint32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelType type = stack->pop<TexelType>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %u, %p)\n", target, level, xoffset,
                   yoffset, width, height, format, type, data);
@@ -1770,9 +1770,9 @@ bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelFormat format = stack->pop<TexelFormat>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glCopyTexImage2D(%u, %d, %u, %d, %d, %d, %d, %d)\n", target, level, format, x, y,
                   width, height, border);
@@ -1796,7 +1796,7 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glCopyTexSubImage2D(%u, %d, %d, %d, %d, %d, %d, %d)\n", target, level, xoffset,
                   yoffset, x, y, width, height);
@@ -1818,9 +1818,9 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    CompressedTexelFormat format = stack->pop<CompressedTexelFormat>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glCompressedTexImage2D(%u, %d, %u, %d, %d, %d, %d, %p)\n", target, level, format,
                   width, height, border, image_size, data);
@@ -1839,13 +1839,13 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
 bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
     TexturePointer data = stack->pop<TexturePointer>();
     int32_t image_size = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    CompressedTexelFormat format = stack->pop<CompressedTexelFormat>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t yoffset = stack->pop<int32_t>();
     int32_t xoffset = stack->pop<int32_t>();
     int32_t level = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glCompressedTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %d, %p)\n", target, level,
                   xoffset, yoffset, width, height, format, image_size, data);
@@ -1863,7 +1863,7 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGenerateMipmap(%u)\n", target);
         if (glGenerateMipmap != nullptr) {
@@ -1880,8 +1880,8 @@ bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
 
 bool callGlReadPixels(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
-    uint32_t type = stack->pop<uint32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    TexelType type = stack->pop<TexelType>();
+    BaseTexelFormat format = stack->pop<BaseTexelFormat>();
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
     int32_t y = stack->pop<int32_t>();
@@ -1920,7 +1920,7 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
     FramebufferId framebuffer = stack->pop<FramebufferId>();
-    uint32_t target = stack->pop<uint32_t>();
+    FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
         if (glBindFramebuffer != nullptr) {
@@ -1936,14 +1936,14 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glCheckFramebufferStatus(%u)\n", target);
         if (glCheckFramebufferStatus != nullptr) {
-            uint32_t return_value = glCheckFramebufferStatus(target);
+            FramebufferStatus return_value = glCheckFramebufferStatus(target);
             CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<uint32_t>(return_value);
+                stack->push<FramebufferStatus>(return_value);
             }
         } else {
             CAZE_WARNING("Attempted to call unsupported function glCheckFramebufferStatus\n");
@@ -2011,7 +2011,7 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
     RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
-    uint32_t target = stack->pop<uint32_t>();
+    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
         if (glBindRenderbuffer != nullptr) {
@@ -2029,8 +2029,8 @@ bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
 bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    RenderbufferFormat format = stack->pop<RenderbufferFormat>();
+    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glRenderbufferStorage(%u, %u, %d, %d)\n", target, format, width, height);
         if (glRenderbufferStorage != nullptr) {
@@ -2084,8 +2084,8 @@ bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
 
 bool callGlGetRenderbufferParameteriv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    RenderbufferParameter parameter = stack->pop<RenderbufferParameter>();
+    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetRenderbufferParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetRenderbufferParameteriv != nullptr) {
@@ -2119,7 +2119,7 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
 
 bool callGlBindBuffer(Stack* stack, bool pushReturn) {
     BufferId buffer = stack->pop<BufferId>();
-    uint32_t target = stack->pop<uint32_t>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBindBuffer(%u, %u)\n", target, buffer);
         if (glBindBuffer != nullptr) {
@@ -2135,10 +2135,10 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBufferData(Stack* stack, bool pushReturn) {
-    uint32_t usage = stack->pop<uint32_t>();
+    BufferUsage usage = stack->pop<BufferUsage>();
     BufferDataPointer data = stack->pop<BufferDataPointer>();
     int32_t size = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBufferData(%u, %d, %p, %u)\n", target, size, data, usage);
         if (glBufferData != nullptr) {
@@ -2157,7 +2157,7 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
     void* data = stack->pop<void*>();
     int32_t size = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBufferSubData(%u, %d, %d, %p)\n", target, offset, size, data);
         if (glBufferSubData != nullptr) {
@@ -2211,8 +2211,8 @@ bool callGlIsBuffer(Stack* stack, bool pushReturn) {
 
 bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    BufferParameter parameter = stack->pop<BufferParameter>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetBufferParameteriv(%u, %u, %p)\n", target, parameter, value);
         if (glGetBufferParameteriv != nullptr) {
@@ -2228,7 +2228,7 @@ bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCreateShader(Stack* stack, bool pushReturn) {
-    uint32_t type = stack->pop<uint32_t>();
+    ShaderType type = stack->pop<ShaderType>();
     if (stack->isValid()) {
         CAZE_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
@@ -2623,7 +2623,7 @@ bool callGlClearStencil(Stack* stack, bool pushReturn) {
 }
 
 bool callGlClear(Stack* stack, bool pushReturn) {
-    uint32_t mask = stack->pop<uint32_t>();
+    ClearMask mask = stack->pop<ClearMask>();
     if (stack->isValid()) {
         CAZE_INFO("glClear(%u)\n", mask);
         if (glClear != nullptr) {
@@ -2639,7 +2639,7 @@ bool callGlClear(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCullFace(Stack* stack, bool pushReturn) {
-    uint32_t mode = stack->pop<uint32_t>();
+    FaceMode mode = stack->pop<FaceMode>();
     if (stack->isValid()) {
         CAZE_INFO("glCullFace(%u)\n", mode);
         if (glCullFace != nullptr) {
@@ -2705,8 +2705,8 @@ bool callGlSampleCoverage(Stack* stack, bool pushReturn) {
 }
 
 bool callGlHint(Stack* stack, bool pushReturn) {
-    uint32_t mode = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    HintMode mode = stack->pop<HintMode>();
+    HintTarget target = stack->pop<HintTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glHint(%u, %u)\n", target, mode);
         if (glHint != nullptr) {
@@ -2723,9 +2723,9 @@ bool callGlHint(Stack* stack, bool pushReturn) {
 
 bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
     RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
-    uint32_t renderbuffer_target = stack->pop<uint32_t>();
-    uint32_t framebuffer_attachment = stack->pop<uint32_t>();
-    uint32_t framebuffer_target = stack->pop<uint32_t>();
+    RenderbufferTarget renderbuffer_target = stack->pop<RenderbufferTarget>();
+    FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
+    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glFramebufferRenderbuffer(%u, %u, %u, %u)\n", framebuffer_target,
                   framebuffer_attachment, renderbuffer_target, renderbuffer);
@@ -2745,9 +2745,9 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
 bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureId texture = stack->pop<TextureId>();
-    uint32_t texture_target = stack->pop<uint32_t>();
-    uint32_t framebuffer_attachment = stack->pop<uint32_t>();
-    uint32_t framebuffer_target = stack->pop<uint32_t>();
+    TextureImageTarget texture_target = stack->pop<TextureImageTarget>();
+    FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
+    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glFramebufferTexture2D(%u, %u, %u, %u, %d)\n", framebuffer_target,
                   framebuffer_attachment, texture_target, texture, level);
@@ -2766,9 +2766,9 @@ bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
 
 bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t attachment = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    FramebufferAttachmentParameter parameter = stack->pop<FramebufferAttachmentParameter>();
+    FramebufferAttachment attachment = stack->pop<FramebufferAttachment>();
+    FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", target, attachment,
                   parameter, value);
@@ -2788,9 +2788,9 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
 
 bool callGlDrawElements(Stack* stack, bool pushReturn) {
     IndicesPointer indices = stack->pop<IndicesPointer>();
-    uint32_t indices_type = stack->pop<uint32_t>();
+    IndicesType indices_type = stack->pop<IndicesType>();
     int32_t element_count = stack->pop<int32_t>();
-    uint32_t draw_mode = stack->pop<uint32_t>();
+    DrawMode draw_mode = stack->pop<DrawMode>();
     if (stack->isValid()) {
         CAZE_INFO("glDrawElements(%u, %d, %u, %p)\n", draw_mode, element_count, indices_type,
                   indices);
@@ -2809,7 +2809,7 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
 bool callGlDrawArrays(Stack* stack, bool pushReturn) {
     int32_t index_count = stack->pop<int32_t>();
     int32_t first_index = stack->pop<int32_t>();
-    uint32_t draw_mode = stack->pop<uint32_t>();
+    DrawMode draw_mode = stack->pop<DrawMode>();
     if (stack->isValid()) {
         CAZE_INFO("glDrawArrays(%u, %d, %d)\n", draw_mode, first_index, index_count);
         if (glDrawArrays != nullptr) {
@@ -2856,7 +2856,7 @@ bool callGlFinish(Stack* stack, bool pushReturn) {
 
 bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
     bool* values = stack->pop<bool*>();
-    uint32_t param = stack->pop<uint32_t>();
+    StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
         CAZE_INFO("glGetBooleanv(%u, %p)\n", param, values);
         if (glGetBooleanv != nullptr) {
@@ -2873,7 +2873,7 @@ bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
 
 bool callGlGetFloatv(Stack* stack, bool pushReturn) {
     float* values = stack->pop<float*>();
-    uint32_t param = stack->pop<uint32_t>();
+    StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
         CAZE_INFO("glGetFloatv(%u, %p)\n", param, values);
         if (glGetFloatv != nullptr) {
@@ -2890,7 +2890,7 @@ bool callGlGetFloatv(Stack* stack, bool pushReturn) {
 
 bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
-    uint32_t param = stack->pop<uint32_t>();
+    StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
         CAZE_INFO("glGetIntegerv(%u, %p)\n", param, values);
         if (glGetIntegerv != nullptr) {
@@ -2906,7 +2906,7 @@ bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetString(Stack* stack, bool pushReturn) {
-    uint32_t param = stack->pop<uint32_t>();
+    StringConstant param = stack->pop<StringConstant>();
     if (stack->isValid()) {
         CAZE_INFO("glGetString(%u)\n", param);
         if (glGetString != nullptr) {
@@ -2926,7 +2926,7 @@ bool callGlGetString(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnable(Stack* stack, bool pushReturn) {
-    uint32_t capability = stack->pop<uint32_t>();
+    Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
         CAZE_INFO("glEnable(%u)\n", capability);
         if (glEnable != nullptr) {
@@ -2942,7 +2942,7 @@ bool callGlEnable(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisable(Stack* stack, bool pushReturn) {
-    uint32_t capability = stack->pop<uint32_t>();
+    Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
         CAZE_INFO("glDisable(%u)\n", capability);
         if (glDisable != nullptr) {
@@ -2958,7 +2958,7 @@ bool callGlDisable(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsEnabled(Stack* stack, bool pushReturn) {
-    uint32_t capability = stack->pop<uint32_t>();
+    Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
         CAZE_INFO("glIsEnabled(%u)\n", capability);
         if (glIsEnabled != nullptr) {
@@ -2978,10 +2978,10 @@ bool callGlIsEnabled(Stack* stack, bool pushReturn) {
 }
 
 bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
-    uint32_t access = stack->pop<uint32_t>();
+    MapBufferRangeAccess access = stack->pop<MapBufferRangeAccess>();
     int32_t length = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    MapBufferTarget target = stack->pop<MapBufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
         if (glMapBufferRange != nullptr) {
@@ -3001,7 +3001,7 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    MapBufferTarget target = stack->pop<MapBufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glUnmapBuffer(%u)\n", target);
         if (glUnmapBuffer != nullptr) {
@@ -3017,9 +3017,9 @@ bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
-    uint32_t* attachments = stack->pop<uint32_t*>();
+    FramebufferAttachment* attachments = stack->pop<FramebufferAttachment*>();
     int32_t count = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glInvalidateFramebuffer(%u, %d, %p)\n", target, count, attachments);
         if (glInvalidateFramebuffer != nullptr) {
@@ -3037,9 +3037,9 @@ bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
 bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
     int32_t height = stack->pop<int32_t>();
     int32_t width = stack->pop<int32_t>();
-    uint32_t format = stack->pop<uint32_t>();
+    RenderbufferFormat format = stack->pop<RenderbufferFormat>();
     int32_t samples = stack->pop<int32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glRenderbufferStorageMultisample(%u, %d, %u, %d, %d)\n", target, samples, format,
                   width, height);
@@ -3057,8 +3057,8 @@ bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
-    uint32_t filter = stack->pop<uint32_t>();
-    uint32_t mask = stack->pop<uint32_t>();
+    TextureFilterMode filter = stack->pop<TextureFilterMode>();
+    ClearMask mask = stack->pop<ClearMask>();
     int32_t dstY1 = stack->pop<int32_t>();
     int32_t dstX1 = stack->pop<int32_t>();
     int32_t dstY0 = stack->pop<int32_t>();
@@ -3101,7 +3101,7 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
 
 bool callGlBeginQuery(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
-    uint32_t target = stack->pop<uint32_t>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBeginQuery(%u, %u)\n", target, query);
         if (glBeginQuery != nullptr) {
@@ -3117,7 +3117,7 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndQuery(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glEndQuery(%u)\n", target);
         if (glEndQuery != nullptr) {
@@ -3171,8 +3171,8 @@ bool callGlIsQuery(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    QueryParameter parameter = stack->pop<QueryParameter>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryiv != nullptr) {
@@ -3189,7 +3189,7 @@ bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
@@ -3224,7 +3224,7 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
 
 bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
-    uint32_t target = stack->pop<uint32_t>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
         if (glBeginQueryEXT != nullptr) {
@@ -3240,7 +3240,7 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glEndQueryEXT(%u)\n", target);
         if (glEndQueryEXT != nullptr) {
@@ -3293,7 +3293,7 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
-    uint32_t target = stack->pop<uint32_t>();
+    QueryTarget target = stack->pop<QueryTarget>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
@@ -3311,8 +3311,8 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
-    uint32_t target = stack->pop<uint32_t>();
+    QueryParameter parameter = stack->pop<QueryParameter>();
+    QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryivEXT != nullptr) {
@@ -3329,7 +3329,7 @@ bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
@@ -3347,7 +3347,7 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
@@ -3365,7 +3365,7 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
     int64_t* value = stack->pop<int64_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
@@ -3383,7 +3383,7 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
 
 bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
     uint64_t* value = stack->pop<uint64_t*>();
-    uint32_t parameter = stack->pop<uint32_t>();
+    QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
         CAZE_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
