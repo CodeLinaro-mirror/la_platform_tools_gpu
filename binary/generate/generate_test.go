@@ -25,7 +25,7 @@ import (
 )
 
 func parseStructs(source string) []*Struct {
-	config := loader.Config{}
+	config := loader.Config{SourceImports: true}
 	fakeFile := fmt.Sprintf("package fake\n%s", source)
 	file, err := config.ParseFile("", fakeFile)
 	if err != nil {
