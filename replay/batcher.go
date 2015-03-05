@@ -143,6 +143,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.persistentDb,
 		b.logger,
 		postbackHandlers,
+		b.device.ByteOrder(),
 	)
 }
 

@@ -17,6 +17,7 @@ package executor
 
 import (
 	"bytes"
+	eb "encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -42,6 +43,7 @@ type executor struct {
 	database   database.Database
 	logger     log.Logger
 	handlers   PostbackHandlerMap
+	byteOrder  eb.ByteOrder
 }
 
 // Execute sends the replay payload for execution on the target replay device
@@ -55,7 +57,8 @@ func Execute(
 	connection io.ReadWriteCloser,
 	database database.Database,
 	logger log.Logger,
-	handlers PostbackHandlerMap) error {
+	handlers PostbackHandlerMap,
+	byteOrder eb.ByteOrder) error {
 
 	return executor{
 		payload:    payload,
@@ -64,13 +67,14 @@ func Execute(
 		database:   database,
 		logger:     logger,
 		handlers:   handlers,
+		byteOrder:  byteOrder,
 	}.execute()
 }
 
 func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
-	e := binary.NewEncoder(buf)
+	e := protocol.NewEncoder(buf, r.byteOrder)
 	if err := r.payload.Encode(e); err != nil {
 		return err
 	}
@@ -112,9 +116,8 @@ func (r executor) execute() error {
 func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) error {
 	connection := r.connection
 	defer connection.Close()
-
-	e := binary.NewEncoder(connection)
-	d := binary.NewDecoder(connection)
+	e := protocol.NewEncoder(connection, r.byteOrder)
+	d := protocol.NewDecoder(connection, r.byteOrder)
 
 	if err := e.Uint8(uint8(protocol.ConnectionTypeReplay)); err != nil {
 		return err
