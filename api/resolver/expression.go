@@ -110,7 +110,7 @@ func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semant
 		}
 		params = params[1:len(params)]
 	}
-	if target.Function.Return.Type != semantic.VoidType {
+	if !isVoid(target.Function.Return.Type) {
 		params = params[0 : len(params)-1]
 	}
 	out.Arguments = callArguments(ctx, in.Arguments, params, target.Function.Name)

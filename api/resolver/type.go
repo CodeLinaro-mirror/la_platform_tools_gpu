@@ -251,6 +251,9 @@ func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
 	out := &semantic.Field{AST: in, Name: in.Name.Value, Class: class}
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
+	if isVoid(out.Type) {
+		ctx.errorf(in, "void typed field %s on class %s", out.Name, out.Class.Name)
+	}
 	if in.Default != nil {
 		ctx.with(out.Type, func() {
 			out.Default = expression(ctx, in.Default)

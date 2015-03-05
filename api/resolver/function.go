@@ -30,29 +30,36 @@ func (m *macroStub) ExpressionType() semantic.Type { return m.function.Signature
 
 func functionSignature(ctx *context, out *semantic.Function) {
 	in := out.AST
-	out.FullParameters = make([]*semantic.Parameter, len(in.Parameters))
-	for i, p := range in.Parameters {
-		if i > 0 && p.This {
-			ctx.errorf(p, "this only allowed on arg 0")
+	args := make([]semantic.Type, 0, len(in.Parameters)-1)
+	out.Outputs = make([]*semantic.Parameter, 0, len(in.Parameters))
+	out.FullParameters = make([]*semantic.Parameter, 0, len(in.Parameters))
+	for i, inp := range in.Parameters {
+		outp := parameter(ctx, out, inp)
+		if inp.This {
+			if i == 0 {
+				out.This = outp
+			} else {
+				ctx.errorf(inp, "this only allowed on arg 0")
+			}
 		}
-		out.FullParameters[i] = parameter(ctx, out, p)
-	}
-	if in.Parameters[0].This {
-		out.This = out.FullParameters[0]
-	}
-	out.Return = out.FullParameters[len(out.FullParameters)-1]
-	if out.Return.Type == semantic.VoidType {
-		out.FullParameters = out.FullParameters[0 : len(out.FullParameters)-1]
-	} else {
-		out.Return.Name = "result"
-	}
-	args := []semantic.Type{}
-	for _, p := range out.FullParameters {
-		if p.Output {
-			out.Outputs = append(out.Outputs, p)
-		}
-		if p != out.Return && p != out.This {
-			args = append(args, p.Type)
+		if i < len(in.Parameters)-1 {
+			if isVoid(outp.Type) {
+				ctx.errorf(in, "void typed parameter %s on function %s", outp.Name, out.Name)
+			}
+			if !inp.This {
+				args = append(args, outp.Type)
+			}
+			if inp.Output {
+				out.Outputs = append(out.Outputs, outp)
+			}
+			out.FullParameters = append(out.FullParameters, outp)
+		} else {
+			out.Return = outp
+			if !isVoid(outp.ExpressionType()) {
+				out.Return.Name = "result"
+				out.Outputs = append(out.Outputs, outp)
+				out.FullParameters = append(out.FullParameters, outp)
+			}
 		}
 	}
 	out.Signature = getSignature(ctx, in, out.Return.Type, args)
