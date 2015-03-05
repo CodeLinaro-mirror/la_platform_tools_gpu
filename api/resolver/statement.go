@@ -118,9 +118,9 @@ func assign(ctx *context, in *ast.Assign) interface{} {
 	}
 	switch lhs := lhs.(type) {
 	case *semantic.MapIndex:
-		return &semantic.MapAssign{AST: in, To: lhs, Value: rhs}
+		return &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
 	default:
-		return &semantic.Assign{AST: in, LHS: lhs, RHS: rhs}
+		return &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
 	}
 }
 
