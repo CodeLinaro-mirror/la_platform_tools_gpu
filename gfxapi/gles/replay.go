@@ -214,7 +214,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Renderbuffers.
 			renderbuffers := RenderbufferIdArray{}
-			for renderbufferId := range state.Instances.Renderbuffers.Items {
+			for renderbufferId := range state.Instances.Renderbuffers {
 				// Skip virtual renderbuffers: backbuffer_color(-1), backbuffer_depth(-2), backbuffer_stencil(-3).
 				if renderbufferId < 0xf0000000 {
 					renderbuffers = append(renderbuffers, renderbufferId)
@@ -226,7 +226,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Textures.
 			textures := TextureIdArray{}
-			for textureId := range state.Instances.Textures.Items {
+			for textureId := range state.Instances.Textures {
 				textures = append(textures, textureId)
 			}
 			if len(textures) > 0 {
@@ -235,7 +235,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Framebuffers.
 			framebuffers := FramebufferIdArray{}
-			for framebufferId := range state.Instances.Framebuffers.Items {
+			for framebufferId := range state.Instances.Framebuffers {
 				framebuffers = append(framebuffers, framebufferId)
 			}
 			if len(framebuffers) > 0 {
@@ -244,7 +244,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Buffers.
 			buffers := BufferIdArray{}
-			for bufferId := range state.Instances.Buffers.Items {
+			for bufferId := range state.Instances.Buffers {
 				buffers = append(buffers, bufferId)
 			}
 			if len(buffers) > 0 {
@@ -252,18 +252,18 @@ func destroyResourcesAtEOS() atom.Transform {
 			}
 
 			// Delete all Shaders.
-			for shaderId := range state.Instances.Shaders.Items {
+			for shaderId := range state.Instances.Shaders {
 				out.Write(id, NewGlDeleteShader(shaderId))
 			}
 
 			// Delete all Programs.
-			for programId := range state.Instances.Programs.Items {
+			for programId := range state.Instances.Programs {
 				out.Write(id, NewGlDeleteProgram(programId))
 			}
 
 			// Delete all VertexArrays.
 			vertexArrays := VertexArrayIdArray{}
-			for vertexArrayId := range state.Instances.VertexArrays.Items {
+			for vertexArrayId := range state.Instances.VertexArrays {
 				vertexArrays = append(vertexArrays, vertexArrayId)
 			}
 			if len(vertexArrays) > 0 {
@@ -271,7 +271,7 @@ func destroyResourcesAtEOS() atom.Transform {
 			}
 
 			// Delete all SyncObjects. TODO: Uncomment when added to API file.
-			// for syncObjectId := range state.Instances.SyncObjects.Items {
+			// for syncObjectId := range state.Instances.SyncObjects {
 			// 	out.Write(id, NewGlDeleteSync(syncObjectId))
 			// }
 		}

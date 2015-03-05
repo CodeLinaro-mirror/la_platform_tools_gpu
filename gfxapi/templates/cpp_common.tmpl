@@ -32,11 +32,32 @@ limitations under the License.
   {{else if IsF64         $}}double
   {{else if IsU64         $}}uint64_t
   {{else if IsS64         $}}int64_t
+  {{else if IsMap         $}}{{$.Name}}
+  {{else if IsClass       $}}{{$.Name}}
+  {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsPointerType $}}void*
   {{else if IsString      $}}const char*
-  {{else if IsEnum        $}}uint32_t
+  {{else if IsEnum        $}}{{$.Name}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
-  {{else}}{{Error "C++.Type passed unsupported type: %s" $.Name}}
+  {{else if IsMemory      $}}Memory
+  {{else if IsAny         $}}Any
+  {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ type for use in a state block or class for the specified AST
+  type.
+  For pointers this emits a shared-pointer type.
+  For other types this is the same as "C++.Type"
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.StateType"}}
+  {{if not (IsType $)}}{{Macro "C++.StateType" (TypeOf $)}}
+  {{else if IsPointer $}}std::shared_ptr<{{Macro "C++.StateType" $.To}}>
+  {{else               }}{{Macro "C++.Type" $}}
   {{end}}
 {{end}}
 
@@ -121,14 +142,66 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the comma-separated list of function parameter names.
+  Emits the C++ logic for all the statements in the given block.
 -------------------------------------------------------------------------------
 */}}
-{{define "C++.CallArguments"}}
-  {{AssertType $ "Function"}}
+{{define "C++.Block"}}
+  {{range $s := $.Statements}}
+    {{$v := Macro "C++.Statement" $s}}
+    {{$v}}
+  {{end}}
+{{end}}
 
-  {{range $i, $p := $.CallParameters}}
-    {{if $i}}, {{end}}{{$p.Name}} §
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute the given statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Statement"}}
+  {{     if IsDeclareLocal $}}{{Macro "C++.StateType" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
+  {{else if IsAssign       $}}{{Macro "C++.Read" $.LHS}} = {{Macro "C++.Read" $.RHS}};
+  {{else if IsMapAssign    $}}{{Macro "C++.Read" $.To.Map}}[{{Macro "C++.Read" $.To.Index}}] = {{Macro "C++.Read" $.Value}};
+  {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
+  {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
+    {{Macro "C++.Block" $.True}}
+    {{if len $.False.Statements}}
+    } else {
+      {{Macro "C++.Block" $.False}}
+    {{end}}
+    }
+  {{else if IsSwitch $}}
+    switch ({{Macro "C++.Read" $.Value}}) {
+      {{range $i, $c := $.Cases}}
+        «case {{range $j, $cond := $c.Conditions}}{{if $j}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}:»
+            {{Macro "C++.Block" $c.Block}}
+            break;¶
+      {{end}}
+    }
+  {{else if IsIteration $}}{{Macro "C++.Iteration" $}}
+  {{else if IsCall      $}}{{Macro "C++.Call" $}};
+  {{else if IsAssert    $}}
+  {{else                 }}{{Error "unsupported statement %T: %v" $ $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform an iteration statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Iteration"}}
+  {{AssertType $ "Iteration"}}
+
+  {{if IsBinaryOp $.Iterable}}
+    {{Macro "C++.Range" "Name" $.Iterator.Name "Range" $.Iterable}} {
+      {{Macro "C++.Block" $.Block}}
+    }
+  {{else}}
+    for ({{Macro "C++.StateType" $.Iterable}}::iterator {{$.Iterator.Name}} = {{Macro "C++.Read" $.Iterable}}; {{$.Iterator.Name}} != {{Macro "C++.Read" $.Iterable}}.end(); ++{{$.Iterator.Name}}) {
+      {{Macro "C++.Block" $.Block}}
+    }
   {{end}}
 {{end}}
 
@@ -139,15 +212,88 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Read"}}
-  {{     if IsBoolValue    $}}{{$}}
-  {{else if IsInt32Value   $}}{{$}}
-  {{else if IsUint32Value  $}}{{$}}
-  {{else if IsFloat64Value $}}{{$}}
-  {{else if IsStringValue  $}}{{$}}
-  {{else if IsParameter    $}}{{Macro "C++.ReadParameter" $}}
-  {{else if IsBinaryOp     $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
-  {{else if IsCall         $}}{{$.Target.Function.Name}}()
+  {{     if IsBoolValue        $}}{{$}}
+  {{else if IsNumericValue     $}}{{$}}
+  {{else if IsStringValue      $}}{{printf "%q" $}}
+  {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
+  {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
+  {{else if IsCall             $}}{{if $.Target.Object}}{{Macro "C++.Read" $.Target.Object}}.{{end}}{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
+  {{else if IsEnumEntry        $}}{{$.Enum.Name}}.{{$.Name}}
+  {{else if IsLocal            $}}{{$.Name}}
+  {{else if IsBitTest          $}}(({{Macro "C++.Read" $.Bits}}) & ({{Macro "C++.Read" $.Bitfield}}) != 0)
+  {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
+  {{else if IsCast             $}}static_cast<{{Macro "C++.StateType" $.Type}}>({{Macro "C++.Read" $.Object}})
+  {{else if IsCall             $}}{{Macro "C++.Call" $}}
+  {{else if IsUnknown          $}}{{Macro "C++.Read" $.Inferred}}
+  {{else if IsObserved         $}}{{$.Parameter.Name}}
+  {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}{{$.Field.Name}}
+  {{else if IsGlobal           $}}this->{{$.Name}}
+  {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
+  {{else if IsArrayIndex       $}}{{Macro "C++.Read" $.Array}}[{{Macro "C++.Read" $.Index}}]
+  {{else if IsMapIndex         $}}{{Macro "C++.Read" $.Map}}[{{Macro "C++.Read" $.Index}}]
+  {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
+  {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
+  {{else if IsClassInitializer $}}{{Macro "C++.StateType" $}}()
+  {{else if IsNew              $}}new {{Macro "C++.StateType" (Unpack $.Type).To}}()
+  {{else if IsSelect           $}}
+    /* switch({{Macro "C++.Read" $.Value}}) */»
+    {{range $i, $c := $.Choices}}
+      /* case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}{{end}}: */§
+      ({{range $j, $cond := $c.Conditions}}§
+          {{if $j}} || {{end}}({{Macro "C++.Read" $.Value}} == {{Macro "C++.Read" $cond}})§
+      {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
+    {{end}}
+    /* default: */ {{Macro "C++.StateType" $}}()«
   {{else}}{{Error "macro C++.Read called with unsupported type: %T" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a C++ dereference (-> or .) for the given value.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Dereference"}}
+  {{Macro "C++.Read" $}}{{if IsPointer (TypeOf $)}}->{{else}}.{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comma-separated list of reads.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ReadList"}}
+  {{range $i, $v := $}}
+    {{if $i}}, {{end}}{{Macro "C++.Read" $v}}§
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute an iteration statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Range"}}
+  {{AssertType $.Name "string"}}
+  {{AssertType $.Range "BinaryOp"}}
+
+  for ({{Macro "C++.StateType" $.Range.RHS}} {{$.Name}} = {{Macro "C++.Read" $.Range.LHS}}; {{$.Name}} < {{Macro "C++.Read" $.Range.RHS}}; ++{{$.Name}})
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute a call statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Call"}}
+  {{AssertType $ "Call"}}
+
+  {{if $.Target.Object}}{{Macro "C++.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
+  {{else              }}{{$.Target.Function.Name}}(§{{Macro "C++.ReadList" $.Arguments}})
   {{end}}
 {{end}}
 

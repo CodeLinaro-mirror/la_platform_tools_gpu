@@ -19,17 +19,13 @@ func substr(str string, start, end int32) string {
 }
 
 func createTextureUnits(internals InternalState) TextureId_TextureTargetMap_TextureUnitMap {
-	units := TextureId_TextureTargetMap_TextureUnitMap{}
-	units.Init()
+	units := make(TextureId_TextureTargetMap_TextureUnitMap)
 
 	for i := TextureUnit_GL_TEXTURE0; i <= TextureUnit_GL_TEXTURE0+256; i++ {
-		unit := TextureId_TextureTargetMap{}
-		unit.Init()
-
-		unit.Set(TextureTarget_GL_TEXTURE_2D, internals.NilTexture)
-		unit.Set(TextureTarget_GL_TEXTURE_CUBE_MAP, internals.NilTexture)
-
-		units.Set(i, unit)
+		units[i] = TextureId_TextureTargetMap{
+			TextureTarget_GL_TEXTURE_2D:       internals.NilTexture,
+			TextureTarget_GL_TEXTURE_CUBE_MAP: internals.NilTexture,
+		}
 	}
 
 	return units
