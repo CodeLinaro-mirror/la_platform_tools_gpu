@@ -69,3 +69,28 @@ func (*Functions) GetArrayParamCount(param *semantic.Parameter) interface{} {
 	}
 	return nil
 }
+
+// AllCommands returns a list of all cmd entries for a given API, regardless
+// of whether they are free functions, class methods or pseudonym methods.
+func (f *Functions) AllCommands(api interface{}) ([]interface{}, error) {
+	switch api := api.(type) {
+	case *semantic.API:
+		var commands []interface{}
+		for _, function := range api.Functions {
+			commands = append(commands, function)
+		}
+		for _, class := range api.Classes {
+			for _, method := range class.Methods {
+				commands = append(commands, method)
+			}
+		}
+		for _, pseudonym := range api.Pseudonyms {
+			for _, method := range pseudonym.Methods {
+				commands = append(commands, method)
+			}
+		}
+		return commands, nil
+	default:
+		return nil, fmt.Errorf("first argument must be of type *semantic.API, was %T", api)
+	}
+}
