@@ -841,17 +841,6 @@ enum class QueryTarget_EXT_disjoint_timer_query : uint32_t {
 
 enum class QueryTarget : uint32_t {};
 
-enum class DriverPropertyString : uint32_t {
-    EGL_CLIENT_APIS = 0,
-    EGL_EXTENSIONS = 1,
-    EGL_VENDOR = 2,
-    EGL_VERSION = 3,
-    GL_EXTENSIONS = 4,
-    GL_RENDERER = 5,
-    GL_VENDOR = 6,
-    GL_VERSION = 7,
-};
-
 enum class TilePreserveMaskQCOM : uint32_t {
     GL_COLOR_BUFFER_BIT0_QCOM = 1,
     GL_COLOR_BUFFER_BIT1_QCOM = 2,
