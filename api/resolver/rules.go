@@ -17,7 +17,7 @@ package resolver
 import "android.googlesource.com/platform/tools/gpu/api/semantic"
 
 func assignable(lhs semantic.Type, rhs semantic.Type) bool {
-	if lhs == semantic.VoidType || rhs == semantic.VoidType {
+	if isVoid(lhs) || isVoid(rhs) {
 		return false
 	}
 	if lhs == semantic.AnyType || rhs == semantic.AnyType {
@@ -27,7 +27,7 @@ func assignable(lhs semantic.Type, rhs semantic.Type) bool {
 }
 
 func comparable(lhs semantic.Type, rhs semantic.Type) bool {
-	if lhs == semantic.VoidType || rhs == semantic.VoidType {
+	if isVoid(lhs) || isVoid(rhs) {
 		return false
 	}
 	if lhs == semantic.AnyType || rhs == semantic.AnyType {
@@ -96,4 +96,8 @@ func baseType(t semantic.Type) semantic.Type {
 		t = p.To
 	}
 	return t
+}
+
+func isVoid(t semantic.Type) bool {
+	return baseType(t) == semantic.VoidType
 }

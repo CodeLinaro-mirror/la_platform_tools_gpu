@@ -43,7 +43,7 @@ func body(ctx *context, in []interface{}, owner interface{}) *semantic.Return {
 	f, isFunction := owner.(*semantic.Function)
 	var returnStatement *ast.Return
 	// we need to check and strip the "return" if the function is supposed to have one
-	if isFunction && f.Return.Type != semantic.VoidType {
+	if isFunction && !isVoid(f.Return.Type) {
 		if len(in) == 0 {
 			ctx.errorf(owner, "Missing return statement")
 		} else if r, ok := in[len(in)-1].(*ast.Return); !ok {
@@ -80,7 +80,7 @@ func statement(ctx *context, in interface{}) interface{} {
 		return iteration(ctx, in)
 	case *ast.Call:
 		e := call(ctx, in)
-		if e.ExpressionType() != semantic.VoidType {
+		if !isVoid(e.ExpressionType()) {
 			ctx.errorf(in, "function with return type as statement not allowed")
 			return invalid{}
 		}
@@ -132,7 +132,7 @@ func addLocal(ctx *context, in *ast.DeclareLocal, name string, value semantic.Ex
 		Value:       value,
 		Type:        value.ExpressionType(),
 	}
-	if equal(out.Local.Type, semantic.VoidType) {
+	if isVoid(out.Local.Type) {
 		ctx.errorf(in, "void in local declaration")
 	}
 	ctx.add(out.Local.Name, out.Local)

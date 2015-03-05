@@ -126,6 +126,9 @@ func global(ctx *context, out *semantic.Global) {
 	in := out.AST
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
+	if isVoid(out.Type) {
+		ctx.errorf(in, "void typed global variable %s", out.Name)
+	}
 	if in.Default != nil {
 		ctx.with(out.Type, func() {
 			out.Default = expression(ctx, in.Default)
