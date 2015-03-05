@@ -22,13 +22,13 @@ import (
 // Encoder provides methods for encoding values to an io.Writer.
 type Encoder struct {
 	writer  io.Writer
-	objects map[interface{}]uint16
-	tmp     [8]byte
+	objects map[interface{}]uint32
+	tmp     [9]byte
 }
 
 // NewEncoder creates an Encoder that writes to the supplied stream.
 func NewEncoder(writer io.Writer) *Encoder {
-	return &Encoder{writer: writer, objects: map[interface{}]uint16{}}
+	return &Encoder{writer: writer, objects: map[interface{}]uint32{}}
 }
 
 // Write implements the io.Writer interface, delegating to the underlying writer.
@@ -71,56 +71,106 @@ func (e *Encoder) Uint8(v uint8) error {
 
 // Int16 encodes a signed, 16 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Int16(v int16) error {
-	return e.Uint16(uint16(v))
+	uv := uint16(v) << 1
+	if v < 0 {
+		uv = ^uv
+	}
+	return e.Uint16(uv)
 }
 
 // Uint16 encodes an unsigned, 16 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Uint16(v uint16) error {
-	e.tmp[0] = byte(v)
-	e.tmp[1] = byte(v >> 8)
-	return e.WriteFull(e.tmp[:2])
+	space := uint16(0x7f)
+	tag := byte(0)
+	for o := 8; true; o-- {
+		if v <= space {
+			e.tmp[o] = byte(v) | byte(tag)
+			return e.WriteFull(e.tmp[o:])
+		}
+		e.tmp[o] = byte(v)
+		v = v >> 8
+		space >>= 1
+		tag = (tag >> 1) | 0x80
+	}
+	panic("Cannot get here")
 }
 
 // Int32 encodes a signed, 32 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Int32(v int32) error {
-	return e.Uint32(uint32(v))
+	uv := uint32(v) << 1
+	if v < 0 {
+		uv = ^uv
+	}
+	return e.Uint32(uv)
 }
 
 // Uint32 encodes an usigned, 32 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Uint32(v uint32) error {
-	e.tmp[0] = byte(v)
-	e.tmp[1] = byte(v >> 8)
-	e.tmp[2] = byte(v >> 16)
-	e.tmp[3] = byte(v >> 24)
-	return e.WriteFull(e.tmp[:4])
+	space := uint32(0x7f)
+	tag := byte(0)
+	for o := 8; true; o-- {
+		if v <= space {
+			e.tmp[o] = byte(v) | byte(tag)
+			return e.WriteFull(e.tmp[o:])
+		}
+		e.tmp[o] = byte(v)
+		v = v >> 8
+		space >>= 1
+		tag = (tag >> 1) | 0x80
+	}
+	panic("Cannot get here")
 }
 
 // Float32 encodes a 32 bit floating-point value to the Encoder's io.Writer.
 func (e *Encoder) Float32(v float32) error {
-	return e.Uint32(math.Float32bits(v))
+	bits := math.Float32bits(v)
+	shuffled := 0 |
+		((bits & 0x000000ff) << 24) |
+		((bits & 0x0000ff00) << 8) |
+		((bits & 0x00ff0000) >> 8) |
+		((bits & 0xff000000) >> 24)
+	return e.Uint32(shuffled)
 }
 
 // Int64 encodes a signed, 64 bit integer value to the Encoder's io.Writer.
 func (e *Encoder) Int64(v int64) error {
-	return e.Uint64(uint64(v))
+	uv := uint64(v) << 1
+	if v < 0 {
+		uv = ^uv
+	}
+	return e.Uint64(uv)
 }
 
 // Uint64 encodes an unsigned, 64 bit integer value to the Encoders's io.Writer.
 func (e *Encoder) Uint64(v uint64) error {
-	e.tmp[0] = byte(v)
-	e.tmp[1] = byte(v >> 8)
-	e.tmp[2] = byte(v >> 16)
-	e.tmp[3] = byte(v >> 24)
-	e.tmp[4] = byte(v >> 32)
-	e.tmp[5] = byte(v >> 40)
-	e.tmp[6] = byte(v >> 48)
-	e.tmp[7] = byte(v >> 56)
-	return e.WriteFull(e.tmp[:8])
+	space := uint64(0x7f)
+	tag := byte(0)
+	for o := 8; true; o-- {
+		if v <= space {
+			e.tmp[o] = byte(v) | byte(tag)
+			return e.WriteFull(e.tmp[o:])
+		}
+		e.tmp[o] = byte(v)
+		v = v >> 8
+		space >>= 1
+		tag = (tag >> 1) | 0x80
+	}
+	panic("Cannot get here")
 }
 
 // Float64 encodes a 64 bit floating-point value to the Encoder's io.Writer.
 func (e *Encoder) Float64(v float64) error {
-	return e.Uint64(math.Float64bits(v))
+	bits := math.Float64bits(v)
+	shuffled := 0 |
+		((bits & 0x00000000000000ff) << 56) |
+		((bits & 0x000000000000ff00) << 40) |
+		((bits & 0x0000000000ff0000) << 24) |
+		((bits & 0x00000000ff000000) << 8) |
+		((bits & 0x000000ff00000000) >> 8) |
+		((bits & 0x0000ff0000000000) >> 24) |
+		((bits & 0x00ff000000000000) >> 40) |
+		((bits & 0xff00000000000000) >> 56)
+	return e.Uint64(shuffled)
 }
 
 // String encodes a string to the Encoder's io.Writer.
@@ -138,12 +188,12 @@ func (e *Encoder) String(v string) error {
 // The type of obj must have been previously registered with binary.Register.
 func (e *Encoder) Object(obj Encodable) error {
 	if obj == nil {
-		return e.Uint16(objectNil)
+		return e.Uint32(0)
 	}
 
 	key, alreadyEncoded := e.objects[obj]
 	if alreadyEncoded {
-		return e.Uint16(key)
+		return e.Uint32(key)
 	}
 
 	id, err := TypeOf(obj)
@@ -151,9 +201,9 @@ func (e *Encoder) Object(obj Encodable) error {
 		return err
 	}
 
-	key = uint16(len(e.objects))
+	key = uint32(len(e.objects) + 1)
 	e.objects[obj] = key
-	if err := e.Uint16(key); err != nil {
+	if err := e.Uint32(key); err != nil {
 		return err
 	}
 	if err := id.Encode(e); err != nil {

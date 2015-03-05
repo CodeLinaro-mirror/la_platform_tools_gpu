@@ -110,8 +110,8 @@ func TestSendOpenCloseChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
-	}, 5, nil})
+		0, // channel id
+	}, 2, nil})
 
 	if err := channel0.Close(); err != nil {
 		t.Errorf("Error closing channel p: %v", err)
@@ -119,8 +119,8 @@ func TestSendOpenCloseChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeCloseChannel),
-		0, 0, 0, 0, // channel id
-	}, 5, nil})
+		0, // channel id
+	}, 2, nil})
 
 	channel1, err := multiplexer.OpenChannel()
 	if err != nil {
@@ -129,8 +129,8 @@ func TestSendOpenCloseChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeOpenChannel),
-		1, 0, 0, 0, // channel id
-	}, 5, nil})
+		1, // channel id
+	}, 2, nil})
 
 	if err := channel1.Close(); err != nil {
 		t.Errorf("Error closing channel p: %v", err)
@@ -138,8 +138,8 @@ func TestSendOpenCloseChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeCloseChannel),
-		1, 0, 0, 0, // channel id
-	}, 5, nil})
+		1, // channel id
+	}, 2, nil})
 }
 
 func TestRecvOpenCloseChannel(t *testing.T) {
@@ -151,26 +151,26 @@ func TestRecvOpenCloseChannel(t *testing.T) {
 
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
+		0, // channel id
 	})
 
 	channel0 := <-channelChan
 
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
-		1, 0, 0, 0, // channel id
+		1, // channel id
 	})
 
 	channel1 := <-channelChan
 
 	inBuf.Write([]byte{
 		byte(msgTypeCloseChannel),
-		0, 0, 0, 0, // channel id
+		0, // channel id
 	})
 
 	inBuf.Write([]byte{
 		byte(msgTypeCloseChannel),
-		1, 0, 0, 0, // channel id
+		1, // channel id
 	})
 
 	checkRead(t, channel0, readCheck{[]byte{0}, 0, io.EOF})
@@ -187,17 +187,17 @@ func TestWriteChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
-	}, 5, nil})
+		0, // channel id
+	}, 2, nil})
 
 	checkWrite(t, channel, writeCheck{[]byte{'h', 'e', 'l', 'l', 'o'}, 5, nil})
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		5, 0, 0, 0, // data length
+		0,                       // channel id
+		5,                       // data length
 		'h', 'e', 'l', 'l', 'o', // data
-	}, 14, nil})
+	}, 8, nil})
 }
 
 func TestOpenChannelError(t *testing.T) {
@@ -259,8 +259,8 @@ func TestMultiPacketWriteChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
-	}, 5, nil})
+		0, // channel id
+	}, 2, nil})
 
 	checkWrite(t, channel, writeCheck{[]byte{
 		'h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd',
@@ -268,25 +268,25 @@ func TestMultiPacketWriteChannel(t *testing.T) {
 
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		3, 0, 0, 0, // data length
+		0,             // channel id
+		3,             // data length
 		'h', 'e', 'l', // data
 
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		3, 0, 0, 0, // data length
+		0,             // channel id
+		3,             // data length
 		'l', 'o', ' ', // data
 
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		3, 0, 0, 0, // data length
+		0,             // channel id
+		3,             // data length
 		'w', 'o', 'r', // data
 
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		2, 0, 0, 0, // data length
+		0,        // channel id
+		2,        // data length
 		'l', 'd', // data
-	}, 47, nil})
+	}, 23, nil})
 }
 
 func TestRecvChannel(t *testing.T) {
@@ -298,7 +298,7 @@ func TestRecvChannel(t *testing.T) {
 
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
+		0, // channel id
 	})
 
 	channel0 := <-channelChan
@@ -306,8 +306,8 @@ func TestRecvChannel(t *testing.T) {
 
 	inBuf.Write([]byte{
 		byte(msgTypeData),
-		0, 0, 0, 0, // channel id
-		5, 0, 0, 0, // data length
+		0,                       // channel id
+		5,                       // data length
 		'h', 'e', 'l', 'l', 'o', // data
 	})
 
@@ -324,13 +324,13 @@ func TestRecvOnClosedChannel(t *testing.T) {
 	// Remote opens two channels
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
-		0, 0, 0, 0, // channel id
+		0, // channel id
 	})
 	channel0 := <-channelChan
 
 	inBuf.Write([]byte{
 		byte(msgTypeOpenChannel),
-		1, 0, 0, 0, // channel id
+		1, // channel id
 	})
 	channel1 := <-channelChan
 
@@ -341,14 +341,14 @@ func TestRecvOnClosedChannel(t *testing.T) {
 			<-sendData
 			inBuf.Write([]byte{
 				byte(msgTypeData),
-				0, 0, 0, 0, // channel id
-				4, 0, 0, 0, // data length
+				0,                  // channel id
+				4,                  // data length
 				'd', 'a', 't', 'a', // data
 			})
 			inBuf.Write([]byte{
 				byte(msgTypeData),
-				1, 0, 0, 0, // channel id
-				4, 0, 0, 0, // data length
+				1,                  // channel id
+				4,                  // data length
 				'd', 'a', 't', 'a', // data
 			})
 		}

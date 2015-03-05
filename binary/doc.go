@@ -12,60 +12,82 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package binary implements encoding and decoding of various primitive
-// data types to and from a binary stream. The package holds BitStream for packing and unpacking
-// sequences of bits, Float16 for dealing with 16 bit floating-point values and Encoder/Decoder for
-// encoding and decoding various value types to a binary stream.
+// Package binary implements encoding and decoding of various primitive data
+// types to and from a binary stream. The package holds BitStream for packing
+// and unpacking sequences of bits, Float16 for dealing with 16 bit floating-
+// point values and Encoder/Decoder for encoding and decoding various value
+// types to a binary stream.
 //
 // Encoding details
 //
-// binary.Encoder and binary.Decoder provide a symmetrical pair of methods for encoding and decoding
-// various data types to a binary stream. For performance reasons, each data type has a separate
-// method for encoding and decoding rather than having a single pair of methods encoding and
-// decoding boxed values in an interface{}. The binary format has been intentionally kept simple,
-// with a preference for simplicity over compactness.
+// binary.Encoder and binary.Decoder provide a symmetrical pair of methods for
+// encoding and decoding various data types to a binary stream. For performance
+// reasons, each data type has a separate method for encoding and decoding
+// rather than having a single pair of methods encoding and decoding boxed
+// values in an interface{}.
 //
-// Boolean values are encoded as single bytes, where 0 represents false and non-zero represents
-// true.
+// Boolean values are encoded as single bytes, where 0 represents false and non-
+// zero represents true.
 //
-// Integer values are encoded as little-endian words, with no compression or alignment. For example
-// a 16 bit unsigned integer would be encoded as two bytes, the first containing the
-// least-significant portion of the word.
+// 8 bit values are encoded as single bytes.
+// 16, 32 and 64 bit unsigned integers are encoded into a one or more bytes.
+// The number of sequential ones starting from the most-significant bit of the
+// first encoded byte describe the number of additional bytes that make up the
+// unsigned integer. If the run of ones does not fill the byte, then the run is
+// terminated with a zero bit. The unsigned integer value is then big-endian
+// encoded into the remainder of the bits from the first byte and any
+// additional bytes.
 //
-// 32 bit floating-point numbers are first converted to a 32 bit unsigned integer using
-// math.Float32bits before being encoded as described above.
+// For example, the 16-bit number 0xABC would be encoded as follows:
 //
-// 64 bit floating-point numbers are first converted to a 64 bit unsigned integer using
-// math.Float64bits before being encoded as described above.
+//   MSB                         LSB   MSB                          LSB
+//  ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗ ╔═══╤═══╤═══╤═══╤═══╤═══╤═══╤═══╗
+//  ║C₀ │C₁ │D₁₃│D₁₂│D₁₁│D₁₀│D₉ │D₈ ║ ║D₇ │D₆ │D₅ │D₄ │D₃ │D₂ │D₁ │D₀ ║
+//  ║   │   │   │   │   │   │   │   ║ ║   │   │   │   │   │   │   │   ║
+//  ║ 1 │ 0 │ 0 │ 0 │ 1 │ 0 │ 1 │ 0 ║ ║ 1 │ 0 │ 1 │ 1 │ 1 │ 1 │ 0 │ 0 ║
+//  ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝ ╚═══╧═══╧═══╧═══╧═══╧═══╧═══╧═══╝
+//                Byte₀                             Byte₁
 //
-// Strings values can be encoded in two different formats, either with String or CString.
+// C has a run of 1, meaning there is one extra byte of data.
+// D holds the unsigned integer value 0xABC with bits 0000 1010 1011 1100.
 //
-// String encodes a 32 bit unsigned integer representing the length of the string in bytes followed
-// by the string data encoded in UTF-8:
+// Signed integers are converted to unsigned integers by interleaving negative
+// then positive numbers before being encoded as unsigned integers (as described
+// above). For example the signed numbers [±0, -1, +1, -2, +2] are first
+// transformed to the unsigned integers [0, 1, 2, 3, 4] before being encoded.
+// This is done so that small negative and small positive numbers are encoded
+// with fewer bytes.
+//
+// 32 bit floating-point numbers are first converted to a 32 bit unsigned
+// integer using math.Float32bits and then byte-reversed before being encoded
+// as a unsigned integer.
+//
+// 64 bit floating-point numbers are first converted to a 64 bit unsigned
+// integer using math.Float64bits and then byte-reversed before being encoded
+// as a unsigned integer.
+//
+// The bytes of floating-point numbers are reversed so that floating pointer
+// numbers with simple fractional parts are encoded with fewer bytes, as
+// these are considered the common case.
+//
+// String encodes a 32 bit unsigned integer representing the length of the
+// string in bytes followed by the string data encoded in UTF-8:
 //   count                  uint32 // in bytes
 //   data0, data1, data2... byte   // string in UTF-8
 //
-// CString encodes the UTF-8 encoded string data terminated with a single 0 byte:
-//   data0, data1, data2... byte // string in UTF-8
-//   term                   byte // 0x00
+// Objects are encoded in three different forms, depending on whether the object
+// was nil, or was already encoded to the stream. If the object is non-nil and
+// is encoded for the first time for a given Encoder then the object is encoded
+// as:
+//   key  uint32   // A unique identifier for the object instance
+//   type [20]byte // A unique identifier for the type of the object
+//   ...data...    // The object's data (length dependent on the object type)
 //
-// Binary blobs are encoded using the Data method as a 32 bit unsigned integers representing the
-// number of bytes followed by the sequence of data bytes:
-//   count                  uint32 // in bytes
-//   data0, data1, data2... byte   // blob data
-//
-// Objects are encoded in three different forms, depending on whether the object was nil, or was
-// already encoded to the stream. If the object is non-nil and is encoded for the first time for a
-// given Encoder then the object is encoded as:
-//   key  uint16 // A unique identifier for the object instance. Valid range: [0x0000, 0xfffe]
-//   type uint16 // A unique identifier for the type of the object
-//   ...data...  // The object's data (length dependent on the object type)
-//
-// All subsequent encodings of the object are encoded as the 16 bit key identifier without any
-// additional data:
+// All subsequent encodings of the object are encoded as the 16 bit key
+// identifier without any additional data:
 //   key uint16 // An identifier of a previously encoded object instance
 //
-// If the object is nil, then the object is encoded as the 16 bit unsigned integer 0xffff without
-// any additional data.
+// If the object is nil, then the object is encoded as the 16 bit unsigned
+// integer 0xffff without any additional data.
 //
 package binary
