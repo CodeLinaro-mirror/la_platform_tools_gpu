@@ -11,7 +11,7 @@ source $PROGDIR/setup_env_linux.txt
 
 cd $GPU_BUILD_ROOT
 
-go build -i -o $GPU_BUILD_ROOT/bin/embed $GPU_RELATIVE_SOURCE_PATH/embed
+go build -i -o $GPU_BUILD_ROOT/bin/embed $GPU_RELATIVE_SOURCE_PATH/tools/embed
 go generate -x $GPU_RELATIVE_SOURCE_PATH/binary/generate
 go generate -x $GPU_RELATIVE_SOURCE_PATH/rpc/generate
 go build -i -o $GPU_BUILD_ROOT/bin/codergen $GPU_RELATIVE_SOURCE_PATH/binary/codergen
