@@ -123,7 +123,7 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.logger.Info("(%d) %#v", i, t)
 	}
 
-	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment))
+	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment), b.device.ByteOrder())
 	writer := b.context.Generator.ReplayWriter(builder)
 
 	transforms.Transform(atoms, adapter{writer, postbackHandlers})

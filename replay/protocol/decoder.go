@@ -12,23 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package protocol
 
 import (
+	"encoding/binary"
 	"io"
 	"math"
 )
 
-// Decoder provides methods for decoding values to an io.Reader.
+// Decoder provides methods for decoding values from an io.Reader.
 type Decoder struct {
-	reader  io.Reader
-	tmp     [8]byte
-	objects map[uint16]interface{}
+	reader    io.Reader
+	tmp       [8]byte
+	byteOrder binary.ByteOrder
 }
 
-// NewDecoder creates a Decoder that reads from the provided io.Reader.
-func NewDecoder(reader io.Reader) *Decoder {
-	return &Decoder{reader: reader, objects: map[uint16]interface{}{}}
+// NewDecoder creates a Decoder that reads from the provided io.Reader, with the
+// specified endianness.
+func NewDecoder(reader io.Reader, byteOrder binary.ByteOrder) *Decoder {
+	return &Decoder{reader: reader, byteOrder: byteOrder}
 }
 
 // Read implements the io.Reader interface, delegating to the underlying reader.
@@ -36,91 +38,73 @@ func (d *Decoder) Read(p []byte) (int, error) {
 	return d.reader.Read(p)
 }
 
-// Read a byte array in its entirety.
-func (d *Decoder) ReadFull(p []byte) error {
-	_, err := io.ReadFull(d.reader, p)
-	return err
-}
-
 // Bool decodes and returns a boolean value from the Decoder's io.Reader.
 func (d *Decoder) Bool() (bool, error) {
-	b := d.tmp[:1]
-	_, err := io.ReadFull(d.reader, b[:1])
-	return b[0] != 0, err
+	_, err := io.ReadFull(d.reader, d.tmp[:1])
+	return d.tmp[0] != 0, err
 }
 
 // Int8 decodes and returns a signed, 8 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Int8() (int8, error) {
-	i, err := d.Uint8()
-	return int8(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:1])
+	return int8(d.tmp[0]), err
 }
 
 // Uint8 decodes and returns an unsigned, 8 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint8() (uint8, error) {
-	b := d.tmp[:1]
-	_, err := io.ReadFull(d.reader, b[:1])
-	return b[0], err
+	_, err := io.ReadFull(d.reader, d.tmp[:1])
+	return d.tmp[0], err
 }
 
 // Int16 decodes and returns a signed, 16 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Int16() (int16, error) {
-	i, err := d.Uint16()
-	return int16(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:2])
+	return int16(d.byteOrder.Uint16(d.tmp[:])), err
 }
 
 // Uint16 decodes and returns an unsigned, 16 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint16() (uint16, error) {
-	b := d.tmp[:2]
-	_, err := io.ReadFull(d.reader, b)
-	return uint16(b[0]) | uint16(b[1])<<8, err
+	_, err := io.ReadFull(d.reader, d.tmp[:2])
+	return d.byteOrder.Uint16(d.tmp[:]), err
 }
 
 // Int32 decodes and returns a signed, 32 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Int32() (int32, error) {
-	i, err := d.Uint32()
-	return int32(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:4])
+	return int32(d.byteOrder.Uint32(d.tmp[:])), err
 }
 
 // Uint32 decodes and returns an unsigned, 32 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint32() (uint32, error) {
-	b := d.tmp[:4]
-	_, err := io.ReadFull(d.reader, b[:])
-	return uint32(b[0]) | uint32(b[1])<<8 | uint32(b[2])<<16 | uint32(b[3])<<24, err
+	_, err := io.ReadFull(d.reader, d.tmp[:4])
+	return d.byteOrder.Uint32(d.tmp[:]), err
 }
 
 // Float32 decodes and returns a 32 bit floating-point value from the Decoder's io.Reader.
 func (d *Decoder) Float32() (float32, error) {
-	i, err := d.Uint32()
-	return math.Float32frombits(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:4])
+	return math.Float32frombits(d.byteOrder.Uint32(d.tmp[:])), err
 }
 
 // Int64 decodes and returns a signed, 64 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Int64() (int64, error) {
-	i, err := d.Uint64()
-	return int64(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:8])
+	return int64(d.byteOrder.Uint64(d.tmp[:])), err
 }
 
 // Uint64 decodes and returns an unsigned, 64 bit integer value from the Decoder's io.Reader.
 func (d *Decoder) Uint64() (uint64, error) {
-	b := d.tmp[:8]
-	_, err := io.ReadFull(d.reader, b[:])
-	return uint64(b[0]) |
-		uint64(b[1])<<8 |
-		uint64(b[2])<<16 |
-		uint64(b[3])<<24 |
-		uint64(b[4])<<32 |
-		uint64(b[5])<<40 |
-		uint64(b[6])<<48 |
-		uint64(b[7])<<56, err
+	_, err := io.ReadFull(d.reader, d.tmp[:8])
+	return d.byteOrder.Uint64(d.tmp[:]), err
 }
 
 // Float64 decodes and returns a 64 bit floating-point value from the Decoder's io.Reader.
 func (d *Decoder) Float64() (float64, error) {
-	i, err := d.Uint64()
-	return math.Float64frombits(i), err
+	_, err := io.ReadFull(d.reader, d.tmp[:8])
+	return math.Float64frombits(d.byteOrder.Uint64(d.tmp[:])), err
 }
 
-// String decodes and returns a string from the Decoder's io.Reader.
+// String decodes and returns a string (pascal-style) from the Decoder's io.Reader.
 func (d *Decoder) String() (string, error) {
 	c, err := d.Uint32()
 	if err != nil {
@@ -135,37 +119,18 @@ func (d *Decoder) String() (string, error) {
 	}
 }
 
-// Object decodes and returns an Object from the Decoder's io.Reader. Object instances that were
-// encoded multiple times will be decoded and returned as a shared, single instance.
-// The type id in the stream must have been previously registered with binary.Register.
-func (d *Decoder) Object() (interface{}, error) {
-	key, err := d.Uint16()
-	if err != nil {
-		return nil, err
+// String decodes and returns a string (c-style) from the Decoder's io.Reader.
+func (d *Decoder) CString() (string, error) {
+	s := []byte{}
+	for {
+		c, err := d.Uint8()
+		if err != nil {
+			return "", err
+		}
+		if c == 0 {
+			break
+		}
+		s = append(s, c)
 	}
-
-	if key == objectNil {
-		return nil, nil
-	}
-
-	if obj, alreadyDecoded := d.objects[key]; alreadyDecoded {
-		return obj, nil
-	}
-
-	var id ID
-	if err := id.Decode(d); err != nil {
-		return nil, err
-	}
-
-	obj, err := MakeObject(id)
-	if err != nil {
-		return nil, err
-	}
-
-	if err = obj.Decode(d); err != nil {
-		return nil, err
-	}
-
-	d.objects[key] = obj
-	return obj, nil
+	return string(s), nil
 }

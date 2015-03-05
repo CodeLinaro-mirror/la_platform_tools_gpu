@@ -15,6 +15,7 @@
 package replay
 
 import (
+	"encoding/binary"
 	"fmt"
 	"io"
 	"net"
@@ -71,6 +72,8 @@ type Device interface {
 	Info() *service.Device
 	// Connect opens a connection to the replay device.
 	Connect() (io.ReadWriteCloser, error)
+	// ByteOrder returns a byte ordering object for the replay device.
+	ByteOrder() binary.ByteOrder
 }
 
 type deviceBase struct {
@@ -84,6 +87,11 @@ func (d deviceBase) ID() service.DeviceId {
 
 func (d deviceBase) Info() *service.Device {
 	return d.device
+}
+
+func (d deviceBase) ByteOrder() binary.ByteOrder {
+	// TODO: vary the endian based on the device info
+	return binary.LittleEndian
 }
 
 type androidDevice struct {

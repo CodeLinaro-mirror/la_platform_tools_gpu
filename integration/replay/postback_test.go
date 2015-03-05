@@ -15,15 +15,16 @@
 package replay
 
 import (
+	"io"
 	"reflect"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/executor"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
@@ -40,7 +41,7 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 	}
 
 	info := device.Info()
-	b := builder.New(int(info.PointerSize), int(info.PointerAlignment))
+	b := builder.New(int(info.PointerSize), int(info.PointerAlignment), device.ByteOrder())
 
 	f(b)
 
@@ -67,9 +68,9 @@ func TestPostbackString(t *testing.T) {
 
 	doReplay(t, func(b *builder.Builder) {
 		ptr := b.String(expected)
-		b.Post(ptr, uint64(len(expected)), 0, func(d *binary.Decoder) (interface{}, error) {
+		b.Post(ptr, uint64(len(expected)), 0, func(d *protocol.Decoder) (interface{}, error) {
 			buf := make([]byte, len(expected))
-			err := d.ReadFull(buf)
+			_, err := io.ReadFull(d, buf)
 			return buf, err
 		})
 	}, executor.PostbackHandlerMap{
@@ -89,15 +90,15 @@ func TestMultiPostback(t *testing.T) {
 		ptr := b.AllocateTemporaryMemory(8)
 		b.Push(value.Bool(false))
 		b.Store(ptr)
-		b.Post(ptr, 1, 100, func(d *binary.Decoder) (interface{}, error) { return d.Bool() })
+		b.Post(ptr, 1, 100, func(d *protocol.Decoder) (interface{}, error) { return d.Bool() })
 
 		b.Push(value.Bool(true))
 		b.Store(ptr)
-		b.Post(ptr, 1, 200, func(d *binary.Decoder) (interface{}, error) { return d.Bool() })
+		b.Post(ptr, 1, 200, func(d *protocol.Decoder) (interface{}, error) { return d.Bool() })
 
 		b.Push(value.F64(123.456))
 		b.Store(ptr)
-		b.Post(ptr, 8, 300, func(d *binary.Decoder) (interface{}, error) { return d.Float64() })
+		b.Post(ptr, 8, 300, func(d *protocol.Decoder) (interface{}, error) { return d.Float64() })
 	}, executor.PostbackHandlerMap{
 		100: func(data interface{}, err error) { checkPostback(t, false, data, err) },
 		200: func(data interface{}, err error) { checkPostback(t, true, data, err) },
