@@ -15,6 +15,8 @@
 package template
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
