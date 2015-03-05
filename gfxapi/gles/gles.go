@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate apic validate gles.api
+
 //go:generate apic template gles.api ../templates/api.go.tmpl
 //go:generate apic template gles.api ../templates/replay_writer.go.tmpl
 //go:generate apic template gles.api ../templates/schema.go.tmpl

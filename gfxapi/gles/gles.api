@@ -789,18 +789,6 @@ enum QueryTarget
     : QueryTarget_GLES_3
     , QueryTarget_EXT_disjoint_timer_query {}
 
-@synthetic
-enum DriverPropertyString {
-    EGL_CLIENT_APIS                                 = 0,
-    EGL_EXTENSIONS                                  = 1,
-    EGL_VENDOR                                      = 2,
-    EGL_VERSION                                     = 3,
-    GL_EXTENSIONS                                   = 4,
-    GL_RENDERER                                     = 5,
-    GL_VENDOR                                       = 6,
-    GL_VERSION                                      = 7,
-}
-
 /////////////////////////////////////////////////////////////////
 // Bitfields
 /////////////////////////////////////////////////////////////////
