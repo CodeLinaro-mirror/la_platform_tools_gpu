@@ -18,9 +18,9 @@ package asm
 
 import (
 	"bytes"
+	"encoding/binary"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -33,11 +33,11 @@ func (testPtrResolver) TranslateCapturePointer(ptr uint64) uint64   { return ptr
 
 func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}
-	b := binary.NewEncoder(buf)
+	b := protocol.NewEncoder(buf, binary.LittleEndian)
 	for _, Instruction := range Instructions {
 		Instruction.Encode(testPtrResolver{}, b)
 	}
-	gotOpcodes, err := opcode.Disassemble(buf)
+	gotOpcodes, err := opcode.Disassemble(buf, binary.LittleEndian)
 	if err != nil {
 		panic(err)
 	}

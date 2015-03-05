@@ -43,7 +43,7 @@ func (c readFramebufferDepth) replay(id atom.ID, s *state, b *builder.Builder, w
 	captureImageData(b, int32(fbW), int32(fbH), uint32(TexelFormat_GL_DEPTH_COMPONENT), uint32(TexelType_GL_FLOAT), addr)
 
 	b.Post(addr, imageSize, id,
-		func(d *binary.Decoder) (interface{}, error) {
+		func(d *protocol.Decoder) (interface{}, error) {
 			buf := make([]byte, imageSize)
 			_, err := io.ReadFull(d, buf)
 			return buf, err
@@ -159,7 +159,7 @@ func (c readFramebufferColor) replay(id atom.ID, s *state, b *builder.Builder, w
 	}
 
 	b.Post(addr, imageSize, id,
-		func(d *binary.Decoder) (interface{}, error) {
+		func(d *protocol.Decoder) (interface{}, error) {
 			buf := make([]byte, imageSize)
 			_, err := io.ReadFull(d, buf)
 			return buf, err

@@ -16,23 +16,25 @@ package builder
 
 import (
 	"bytes"
+	eb "encoding/binary"
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
 type constantEncoder struct {
-	encoder     *binary.Encoder
+	encoder     *protocol.Encoder
 	buffer      *bytes.Buffer
 	constantMap map[binary.ID]uint64
 	data        []byte
 	alignment   uint64
 }
 
-func newConstantEncoder(alignment int) *constantEncoder {
+func newConstantEncoder(alignment int, byteOrder eb.ByteOrder) *constantEncoder {
 	buffer := &bytes.Buffer{}
-	encoder := binary.NewEncoder(buffer)
+	encoder := protocol.NewEncoder(buffer, byteOrder)
 	return &constantEncoder{
 		encoder:     encoder,
 		buffer:      buffer,

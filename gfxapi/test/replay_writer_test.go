@@ -16,6 +16,7 @@ package test
 
 import (
 	"bytes"
+	"encoding/binary"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -26,7 +27,7 @@ import (
 )
 
 func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []atom.Atom, opcodes []interface{}, constants []byte) {
-	b := builder.New(ptrSize, ptrAlignment)
+	b := builder.New(ptrSize, ptrAlignment, binary.LittleEndian)
 	r := newReplayWriter(b)
 	for _, atom := range atoms {
 		r.Write(0, atom, wantOutput)
@@ -35,7 +36,7 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 	payload, _ := b.Build(log.Nop{})
 
 	ops := bytes.NewBuffer(payload.Opcodes.Data)
-	gotOpcodes, err := opcode.Disassemble(ops)
+	gotOpcodes, err := opcode.Disassemble(ops, binary.LittleEndian)
 	if err != nil {
 		t.Errorf("Failed to disassemble opcodes: %v", err)
 	}

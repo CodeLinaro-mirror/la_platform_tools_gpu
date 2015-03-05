@@ -12,23 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package protocol
 
 import (
 	"bytes"
-	"io"
+	"encoding/binary"
 	"io/ioutil"
-	"strings"
 	"testing"
 )
 
 type errorWriter struct{ e error }
 
 func (e errorWriter) Write([]byte) (int, error) { return 0, e.e }
-
-type shortWriter struct{}
-
-func (e shortWriter) Write([]byte) (int, error) { return 0, nil }
 
 func checkEncoderGivesError(t *testing.T, e *Encoder, expectedError error) {
 	errs := []struct {
@@ -45,7 +40,6 @@ func checkEncoderGivesError(t *testing.T, e *Encoder, expectedError error) {
 		{"Int64", e.Int64(42)},
 		{"Uint64", e.Uint64(42)},
 		{"String", e.String("string")},
-		{"Object", e.Object(testObjA)},
 	}
 	for _, e := range errs {
 		if e.err != expectedError {
@@ -55,17 +49,12 @@ func checkEncoderGivesError(t *testing.T, e *Encoder, expectedError error) {
 }
 
 func TestEncoderNoError(t *testing.T) {
-	e := NewEncoder(ioutil.Discard)
+	e := NewEncoder(ioutil.Discard, binary.LittleEndian)
 	checkEncoderGivesError(t, e, nil)
 }
 
-func TestEncoderShortWrite(t *testing.T) {
-	e := NewEncoder(shortWriter{})
-	checkEncoderGivesError(t, e, io.ErrShortWrite)
-}
-
 func TestEncoderTestError(t *testing.T) {
-	e := NewEncoder(errorWriter{testError})
+	e := NewEncoder(errorWriter{testError}, binary.LittleEndian)
 	checkEncoderGivesError(t, e, testError)
 }
 
@@ -79,7 +68,7 @@ Got:      %# x`, expected, got)
 
 func TestEncoderBool(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range boolValues {
 		e.Bool(v)
 	}
@@ -88,7 +77,7 @@ func TestEncoderBool(t *testing.T) {
 
 func TestEncoderInt8(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range int8Values {
 		e.Int8(v)
 	}
@@ -97,7 +86,7 @@ func TestEncoderInt8(t *testing.T) {
 
 func TestEncoderUint8(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range uint8Values {
 		e.Uint8(v)
 	}
@@ -106,7 +95,7 @@ func TestEncoderUint8(t *testing.T) {
 
 func TestEncoderInt16(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range int16Values {
 		e.Int16(v)
 	}
@@ -115,7 +104,7 @@ func TestEncoderInt16(t *testing.T) {
 
 func TestEncoderUint16(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range uint16Values {
 		e.Uint16(v)
 	}
@@ -124,7 +113,7 @@ func TestEncoderUint16(t *testing.T) {
 
 func TestEncoderInt32(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range int32Values {
 		e.Int32(v)
 	}
@@ -133,7 +122,7 @@ func TestEncoderInt32(t *testing.T) {
 
 func TestEncoderUint32(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range uint32Values {
 		e.Uint32(v)
 	}
@@ -142,7 +131,7 @@ func TestEncoderUint32(t *testing.T) {
 
 func TestEncoderFloat32(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range float32Values {
 		e.Float32(v)
 	}
@@ -151,7 +140,7 @@ func TestEncoderFloat32(t *testing.T) {
 
 func TestEncoderInt64(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range int64Values {
 		e.Int64(v)
 	}
@@ -160,7 +149,7 @@ func TestEncoderInt64(t *testing.T) {
 
 func TestEncoderUint64(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range uint64Values {
 		e.Uint64(v)
 	}
@@ -169,7 +158,7 @@ func TestEncoderUint64(t *testing.T) {
 
 func TestEncoderFloat64(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, v := range float64Values {
 		e.Float64(v)
 	}
@@ -178,51 +167,18 @@ func TestEncoderFloat64(t *testing.T) {
 
 func TestEncoderString(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
+	e := NewEncoder(b, binary.LittleEndian)
 	for _, s := range stringValues {
 		e.String(s)
 	}
 	compareBytes(t, b.Bytes(), stringBytes)
 }
 
-func TestEncoderObject(t *testing.T) {
+func TestEncoderCString(t *testing.T) {
 	b := &bytes.Buffer{}
-	e := NewEncoder(b)
-	for _, o := range objectValues {
-		if err := e.Object(o); err != nil {
-			t.Errorf("Encode gave unexpected error: %v", err)
-		}
+	e := NewEncoder(b, binary.LittleEndian)
+	for _, s := range stringValues {
+		e.CString(s)
 	}
-	compareBytes(t, b.Bytes(), objectBytes)
-}
-
-func TestEncoderObjectUnknownTypeError(t *testing.T) {
-	e := NewEncoder(ioutil.Discard)
-	expected := unknownType{testObjC}
-	if err := e.Object(testObjC); err != expected {
-		t.Errorf("Encode gave unexpected error. Expected: %v, got: %v", expected, err)
-	}
-}
-
-func TestUnknownTypeErrorError(t *testing.T) {
-	expected := "Unknown type *binary.testObjectC"
-	got := unknownType{&testObjectC{}}.Error()
-	if !strings.Contains(got, expected) {
-		t.Errorf("Error() did not return expected result. Expected: %v, got: %v", expected, got)
-	}
-}
-
-func BenchmarkEncoderObject(b *testing.B) {
-	encoders := make([]*Encoder, b.N)
-	for i := range encoders {
-		encoders[i] = NewEncoder(ioutil.Discard)
-	}
-	b.ResetTimer()
-
-	for _, e := range encoders {
-		e.Object(testObjA)
-		e.Object(testObjB)
-		e.Object(testObjA)
-		e.Object(testObjB)
-	}
+	compareBytes(t, b.Bytes(), cStringBytes)
 }

@@ -17,6 +17,7 @@ package builder
 
 import (
 	"bytes"
+	eb "encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -56,7 +57,7 @@ type ResponseDecoder func(r io.Reader) <-chan Postback
 // PostDecoder decodes a single atom's postback, returning the postback data or
 // an error. The PostDecoder must decode all the data that was issued in the
 // Post call before returning.
-type PostDecoder func(*binary.Decoder) (interface{}, error)
+type PostDecoder func(*protocol.Decoder) (interface{}, error)
 
 // Builder is used to build the Payload to send to the replay virtual machine.
 // The builder has a number of methods for mutating the virtual machine stack,
@@ -72,6 +73,7 @@ type Builder struct {
 	stack           []stackItem
 	ptrSize         int
 	ptrAlignment    int
+	byteOrder       eb.ByteOrder
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -83,10 +85,10 @@ type Builder struct {
 
 // New returns a newly constructed Builder configured to replay on a target
 // architecture that has a pointer size of ptrSize bytes and and alignment of
-// ptrAlignment bytes.
-func New(ptrSize, ptrAlignment int) *Builder {
+// ptrAlignment bytes, with byte ordering that matches byteOrder.
+func New(ptrSize, ptrAlignment int, byteOrder eb.ByteOrder) *Builder {
 	return &Builder{
-		constantMemory:  newConstantEncoder(ptrAlignment),
+		constantMemory:  newConstantEncoder(ptrAlignment, byteOrder),
 		heap:            allocator{alignment: uint64(ptrAlignment)},
 		temp:            allocator{alignment: uint64(ptrAlignment)},
 		resourceIDToIdx: map[binary.ID]uint32{},
@@ -95,6 +97,7 @@ func New(ptrSize, ptrAlignment int) *Builder {
 		instructions:    []asm.Instruction{},
 		ptrSize:         ptrSize,
 		ptrAlignment:    ptrAlignment,
+		byteOrder:       byteOrder,
 		Remappings:      make(map[interface{}]value.Pointer),
 	}
 }
@@ -386,7 +389,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	vml := b.layoutVolatileMemory(logger)
 
 	opcodes := &bytes.Buffer{}
-	e := binary.NewEncoder(opcodes)
+	e := protocol.NewEncoder(opcodes, b.byteOrder)
 	for _, i := range b.instructions {
 		i.Encode(vml, e)
 	}
@@ -406,7 +409,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	logger.Info("Resource count:         %d", len(payload.Resources))
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
-		d := binary.NewDecoder(r)
+		d := protocol.NewDecoder(r, b.byteOrder)
 		c := make(chan Postback, 8)
 		go func() {
 			for _, p := range b.decoders {
