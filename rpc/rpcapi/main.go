@@ -49,7 +49,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	compiled, errs := resolver.Resolve(parsed)
+	compiled, errs, _ := resolver.Resolve(parsed)
 	if len(errs) > 0 {
 		return errs[0]
 	}

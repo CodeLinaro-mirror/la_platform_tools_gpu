@@ -33,6 +33,7 @@ func unaryOp(ctx *context, in *ast.UnaryOp) *semantic.UnaryOp {
 	default:
 		ctx.icef(in, "unhandled unary operator %s", out.Operator)
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -57,6 +58,7 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 	}
 	lt := lhs.ExpressionType()
 	rt := rhs.ExpressionType()
+	var out semantic.Expression
 	switch in.Operator {
 	case ast.OpIn:
 		switch rt := rt.(type) {
@@ -64,12 +66,12 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 			if !comparable(lt, rt.KeyType) {
 				ctx.errorf(in, "%s with type %s, but map key type is %s", in.Operator, typename(lt), typename(rt.KeyType))
 			}
-			return &semantic.MapContains{AST: in, Map: rhs, Key: lhs}
+			out = &semantic.MapContains{AST: in, Map: rhs, Key: lhs}
 		case *semantic.Enum:
 			if !equal(lt, rt) {
 				ctx.errorf(in, "enum bittest on %s with %s is not allowed", typename(lt), typename(rt))
 			}
-			return &semantic.BitTest{AST: in, Bitfield: rhs, Bits: lhs}
+			out = &semantic.BitTest{AST: in, Bitfield: rhs, Bits: lhs}
 		default:
 			ctx.errorf(in, "%s only allowed on maps, not %s", in.Operator, typename(rt))
 			return invalid{}
@@ -78,7 +80,7 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 		if !comparable(lt, rt) {
 			ctx.errorf(in, "comparison %s %s %s not allowed", typename(lt), in.Operator, typename(rt))
 		}
-		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
 	case ast.OpOr, ast.OpAnd:
 		if !equal(lt, semantic.BoolType) {
 			ctx.errorf(in, "lhs of %s is %s not boolean", in.Operator, typename(lt))
@@ -86,19 +88,21 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 		if !equal(rt, semantic.BoolType) {
 			ctx.errorf(in, "rhs of %s is %s not boolean", in.Operator, typename(rt))
 		}
-		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: semantic.BoolType, Operator: in.Operator}
 	case ast.OpPlus, ast.OpMinus, ast.OpMultiply, ast.OpDivide:
 		if !equal(lt, rt) {
 			ctx.errorf(in, "incompatible types for maths %s %s %s", typename(lt), in.Operator, typename(rt))
 		}
-		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	case ast.OpRange:
 		if !equal(lt, rt) {
 			ctx.errorf(in, "range %s %s %s not allowed", typename(lt), in.Operator, typename(rt))
 		}
-		return &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	default:
 		ctx.icef(in, "unknown binary operator %s", in.Operator)
 		return invalid{}
 	}
+	ctx.mappings[in] = out
+	return out
 }

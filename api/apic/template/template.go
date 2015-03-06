@@ -104,7 +104,7 @@ func doTemplate(flags flag.FlagSet) {
 	commands.Log("Compiling api file %q\n", apiName)
 	parsed, errs := parser.Parse(string(info[:]))
 	commands.CheckErrors(apiName, errs)
-	compiled, errs := resolver.Resolve(parsed)
+	compiled, errs, _ := resolver.Resolve(parsed)
 	commands.CheckErrors(apiName, errs)
 	f := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
 	commands.MaybeError(mainTemplate, f.Include(mainTemplate))

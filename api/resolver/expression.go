@@ -115,6 +115,7 @@ func functionCall(ctx *context, in *ast.Call, target *semantic.Callable) *semant
 	}
 	out.Arguments = callArguments(ctx, in, in.Arguments, params, target.Function.Name)
 	out.Type = out.Target.Function.Return.Type
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -177,6 +178,7 @@ func select_(ctx *context, in *ast.Switch) *semantic.Select {
 		ctx.errorf(in, "could not determine type of switch")
 		out.Type = semantic.VoidType
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -201,6 +203,7 @@ func choice(ctx *context, in *ast.Case, vt semantic.Type) *semantic.Choice {
 		return out
 	}
 	out.Expression = expression(ctx, in.Block.Statements[0])
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -212,15 +215,18 @@ func member(ctx *context, in *ast.Member) semantic.Expression {
 		ctx.errorf(in, "%s is not a member of %s", in.Name.Value, typename(ot))
 		return invalid{}
 	}
+	var out semantic.Expression
 	switch entry := entry.(type) {
 	case *semantic.Field:
-		return &semantic.Member{AST: in, Object: obj, Field: entry}
+		out = &semantic.Member{AST: in, Object: obj, Field: entry}
 	case *semantic.Function:
-		return &semantic.Callable{Object: obj, Function: entry}
+		out = &semantic.Callable{Object: obj, Function: entry}
 	default:
 		ctx.errorf(in, "Invalid member lookup type %T found", entry)
 		return invalid{}
 	}
+	ctx.mappings[in] = out
+	return out
 }
 
 func index(ctx *context, in *ast.Index) semantic.Expression {
@@ -237,6 +243,7 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 			ctx.errorf(in, "type %s not valid indexing array", typename(it))
 		}
 		out.ValueType = at.ValueType
+		ctx.mappings[in] = out
 		return out
 	case *semantic.Map:
 		out := &semantic.MapIndex{AST: in, Map: object}
@@ -248,6 +255,7 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 			ctx.errorf(in, "type %s not valid indexing map", typename(it))
 		}
 		out.ValueType = at.ValueType
+		ctx.mappings[in] = out
 		return out
 	default:
 		ctx.errorf(in, "index operation on non indexable type %s", typename(at))
@@ -259,8 +267,11 @@ func identifier(ctx *context, in *ast.Identifier) semantic.Expression {
 	out := ctx.get(in, in.Value)
 	switch out := out.(type) {
 	case *semantic.Function:
-		return &semantic.Callable{Function: out}
+		s := &semantic.Callable{Function: out}
+		ctx.mappings[in] = s
+		return s
 	case semantic.Expression:
+		ctx.mappings[in] = out
 		return out
 	default:
 		ctx.errorf(in, "Symbol %s was non expression %T", in.Value, out)
@@ -280,6 +291,7 @@ func classInitializer(ctx *context, in *ast.ClassInitializer) *semantic.ClassIni
 	for _, f := range in.Fields {
 		out.Fields = append(out.Fields, fieldInitializer(ctx, out.Class, f))
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -295,6 +307,7 @@ func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitiali
 		ctx.errorf(in.Name, "member %s of class %s is not a field [%T]", in.Name.Value, class.Name, m)
 		return out
 	}
+	ctx.mappings[in.Name] = field
 	out.Field = field
 	ctx.with(field.Type, func() {
 		out.Value = expression(ctx, in.Value)
@@ -304,6 +317,7 @@ func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitiali
 	if !assignable(ft, vt) {
 		ctx.errorf(in, "field %s cannot assign %s to %s", out.Field.Name, typename(vt), typename(ft))
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -311,6 +325,7 @@ func new(ctx *context, in *ast.New) *semantic.New {
 	out := &semantic.New{AST: in}
 	out.Initializer = classInitializer(ctx, in.ClassInitializer)
 	out.Type = getPointerType(ctx, in, out.Initializer.Class)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -321,12 +336,14 @@ func cast(ctx *context, in *ast.Cast) semantic.Expression {
 		obj = expression(ctx, in.Object)
 	})
 	if equal(t, obj.ExpressionType()) {
+		ctx.mappings[in] = obj
 		return obj
 	}
 	out := &semantic.Cast{AST: in, Object: obj, Type: t}
 	if !castable(obj.ExpressionType(), out.Type) {
 		ctx.errorf(in, "cannot cast from %s to %s", typename(obj.ExpressionType()), typename(out.Type))
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -360,6 +377,7 @@ func length(ctx *context, in *ast.Length) *semantic.Length {
 	default:
 		out.Type = semantic.Int32Type
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -368,15 +386,20 @@ func number(ctx *context, in *ast.Number) semantic.Expression {
 	out := inferNumber(ctx, in, infer)
 	if out != nil {
 		if infer == ctx.scope.inferType {
+			ctx.mappings[in] = out
 			return out
 		}
 		return &semantic.Cast{Type: ctx.scope.inferType, Object: out}
 	}
 	if v, err := strconv.ParseInt(in.Value, 0, 32); err == nil {
-		return semantic.Int32Value(v)
+		s := semantic.Int32Value(v)
+		ctx.mappings[in] = s
+		return s
 	}
 	if v, err := strconv.ParseFloat(in.Value, 64); err == nil {
-		return semantic.Float64Value(v)
+		s := semantic.Float64Value(v)
+		ctx.mappings[in] = s
+		return s
 	}
 	ctx.errorf(in, "could not parse %s as a number (%s)", in.Value, typename(infer))
 	return invalid{}

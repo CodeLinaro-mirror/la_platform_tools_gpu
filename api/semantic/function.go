@@ -84,7 +84,13 @@ type Callable struct {
 }
 
 // ExpressionType implements Expression returning the function type signature.
-func (c *Callable) ExpressionType() Type { return c.Function.Signature }
+func (c *Callable) ExpressionType() Type {
+	if c.Function.Signature != nil {
+		return c.Function.Signature
+	} else {
+		return nil
+	}
+}
 
 // Call represents a function call. It binds an Callable to the arguments it
 // will be passed.
