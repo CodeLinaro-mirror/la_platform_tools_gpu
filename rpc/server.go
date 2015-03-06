@@ -44,7 +44,8 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		e := binary.NewEncoder(w)
 
 		// Check the RPC header
-		if val, err := d.Uint32(); val != header || err != nil {
+		var h [4]byte
+		if _, err := d.Read(h[:]); err != nil || h != header {
 			logger.Error("%v", ErrInvalidHeader)
 			e.Object(ErrInvalidHeader)
 			return

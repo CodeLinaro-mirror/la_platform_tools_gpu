@@ -22,7 +22,7 @@ package rpc
 
 import "fmt"
 
-const header = uint32('r') | (uint32('p') << 8) | (uint32('c') << 16) | (uint32('0') << 24)
+var header = [4]byte{'r', 'p', 'c', '0'}
 
 // ErrInvalidHeader is returned when either client or server detects an
 // incorrectly formed rpc header.
