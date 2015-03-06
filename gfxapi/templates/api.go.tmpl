@@ -28,27 +28,31 @@ limitations under the License.
     "android.googlesource.com/platform/tools/gpu/replay/builder"
   )
 
-  {{range $_, $p := $.Pseudonyms}}
+  {{range $p := $.Pseudonyms}}
     {{template "Pseudonym" $p}}
   {{end}}
 
-  {{range $_, $a := $.Arrays}}
+  {{range $a := $.Arrays}}
     {{template "Array" $a}}
   {{end}}
 
-  {{range $_, $m := $.Maps}}
+  {{range $sa := $.StaticArrays}}
+    {{template "StaticArray" $sa}}
+  {{end}}
+
+  {{range $m := $.Maps}}
     {{template "Map" $m}}
   {{end}}
 
-  {{range $i, $c := $.Functions}}
+  {{range $i, $c := AllCommands $}}
     {{Macro "CommandEntry" "Command" $c "Index" $i}}
   {{end}}
 
-  {{range $_, $c := $.Classes}}
+  {{range $c := $.Classes}}
     {{template "Class" $c}}
   {{end}}
 
-  {{range $_, $e := $.Enums}}
+  {{range $e := $.Enums}}
     {{template "Enum" $e}}
   {{end}}
 
@@ -60,12 +64,13 @@ limitations under the License.
 
   func init() {
     gfxapi.Register(API())
-    {{range $i, $c := $.Functions}}
+    {{range $i, $c := AllCommands $}}
+      {{$name := Macro "Go.CmdName" $c}}
       atom.Register(atom.TypeInfo{
-        Name: "{{$c.Name}}",
+        Name: "{{$name}}",
         Docs: "{{$c.Docs}}",
         ID: {{$i}},
-        New: func() atom.Atom { return &{{Macro "Go.Public" $c.Name}}{} },
+        New: func() atom.Atom { return &{{$name}}{} },
       })
     {{end}}
   }
@@ -104,420 +109,21 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a type declaration for the specified array.
+  Emits a type declaration and implementation for the specified array.
 -------------------------------------------------------------------------------
 */}}
 {{define "Array"}}
   {{AssertType $ "Array"}}
-  {{$type := $.ValueType}}
-  {{Macro "ArrayImpl" "Name" $.Name "Type" (Macro "Go.Type" $type)}}
-  {{if not (IsAny $type)}}
-    {{Macro "ArrayEncodeDecode" "Name" $.Name "Type" $type}}
-  {{end}}
-  {{if or (IsEnum $type)}}
-    func (s {{$.Name}}) Less(i, j int) bool { return {{Macro "Less" "Type" $type "LHS" "s[i]" "RHS" "s[j]"}} }
-  {{end}}
-{{end}}
 
+  type {{$.Name}} []{{Macro "Go.Type" $.ValueType}}
+  func (s {{$.Name}}) Len() int { return len(s) }
+  func (s {{$.Name}}) Range() []{{Macro "Go.Type" $.ValueType}} { return s}
 
-{{define "ClassInterface"}}
-  {{AssertType $ "Class"}}
-  {{range $_, $v := $.Fields}}
-    {{$type := TypeOf $v}}
-    {{if IsMemory $type}}
-      Get{{Title $v.Name}}() *{{Macro "Go.Type" $type}}
-    {{else}}
-      Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
-      Set{{Title $v.Name}}({{Macro "Go.Type" $type}})
-    {{end}}
-  {{end}}
-  {{range $i,$c := $.Extends}}
-    {{Macro "ClassInterface" $c}}
-  {{end}}
-{{end}}
-
-{{define "ClassFields"}}
-  {{AssertType $ "Class"}}
-  {{range $_, $v := $.Fields}}
-    {{Title $v.Name}} {{Macro "Go.Type" $v}}
-  {{end}}
-  {{range $i,$c := $.Extends}}
-    // {{$c.Name}}
-    {{Macro "ClassFields" $c}}
-  {{end}}
-{{end}}
-
-{{define "Init"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
-
-  {{     if IsMap   $.Type}}{{$.Name}} = make({{Macro "Go.Type" $.Type}})
-  {{else if IsClass $.Type}}{{$.Name}}.Init()
-  {{end}}
-{{end}}
-
-{{define "FieldInit"}}
-  {{AssertType $.Field "Field"  "Global"}}
-  {{AssertType $.Name "string"}}
-
-  {{if $.Field.Default}}{{$.Name}} = {{Macro "Default" $.Field.Default}}
-  {{else              }}{{Macro "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
-  {{end}}
-{{end}}
-
-{{define "FieldsInit"}}
-  {{AssertType $.Type "Class"  "API"}}
-  {{AssertType $.Name "string"}}
-  {{range $_, $v := $.Type.Fields}}
-    {{Macro "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
-  {{end}}
-  {{range $i,$c := $.Extends}}
-    // {{$c.Name}}
-    {{Macro "FieldsInit" "Type" $c "Name" $.Name}}
-  {{end}}
-{{end}}
-
-{{define "Default"}}
-  {{     if IsBoolValue $}}{{$}}
-  {{else if IsNumericValue $}}{{$}}
-  {{else if IsStringValue $}}{{$}}
-  {{else if IsEnumEntry $}}{{$.Enum.Name}}_{{$.Name}}
-  {{else if IsCast $}}{{Macro "Default" $.Object}}
-  {{else}}{{Error "macro Default called with unsupported type: %T" $}}
-  {{end}}
-{{end}}
-
-{{define "ClassImpl"}}
-  {{AssertType $.Class "Class"}}
-  {{AssertType $.Impl "string"}}
-  {{range $_, $v := $.Class.Fields}}
-    {{$type := TypeOf $v}}
-    {{$FType := Macro "Go.Type" $type}}
-    {{if IsMemory $type}}
-      func (i *{{$.Impl}}) Get{{$v.Name}}() *{{$FType}} { return &i.{{$v.Name}} }
-    {{else}}
-      func (i *{{$.Impl}}) Get{{$v.Name}}() {{$FType}} { return i.{{$v.Name}} }
-      func (i *{{$.Impl}}) Set{{$v.Name}}(v {{$FType}}) { i.{{$v.Name}} = v }
-    {{end}}
-  {{end}}
-  {{range $i,$c := $.Class.Extends}}
-    {{Macro "ClassImpl" "Class" $c "Impl" $.Impl}}
-  {{end}}
-{{end}}
-
-{{define "Class"}}
-  {{AssertType $ "Class"}}
-  {{template "Go.CommentHeader" print "class " $.Name }}
-  {{if GetAnnotation $ "Interface"}}
-    type {{$.Name}} interface {
-      {{Macro "ClassInterface" $}}
-    }
-  {{else}}
-
-    type {{$.Name}} struct {
-      CreatedAt atom.ID
-      {{Macro "ClassFields" $}}
-    }
-
-    func (c *{{$.Name}}) Init() {
-      {{Macro "FieldsInit" "Type" $ "Name" "c"}}
-    }
-
-    func (c *{{$.Name}}) Encode(e *binary.Encoder) error {
-      {{range $_, $f := $.Fields}}
-        {{$name := print "c." (Title $f.Name)}}
-        {{Macro "Go.Encode" "Type" (TypeOf $f) "Name" $name}}
-      {{end}}
-      return nil
-    }
-
-    func (c *{{$.Name}}) Decode(d *binary.Decoder) error {
-      {{range $_, $f := $.Fields}}
-        {{$name := print "c." (Title $f.Name)}}
-        {{Macro "Go.Decode" "Type" (TypeOf $f) "Name" $name}}
-      {{end}}
-      return nil
-    }
-
-    func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
-    {{range $i,$c := $.Extends}}
-      {{Macro "ClassImpl" "Class" $c "Impl" $.Name}}
-    {{end}}
-  {{end}}
-{{end}}
-
-{{define "Enum"}}
-  {{AssertType $ "Enum"}}
-  {{template "Go.CommentHeader" print "enum " $.Name }}
-  type {{$.Name}} uint32
-
-  {{Macro "EnumConstants" "Enum" $ "Name" $.Name}}
-
-  func (v {{$.Name}}) String() string {
-    switch v {
-    {{Macro "EnumNameEntries" "Enum" $ "Name" $.Name}}
-    default: return fmt.Sprintf("{{$.Name}}<0x%.4x>", uint32(v))
-    }
-  }
-{{end}}
-
-
-{{define "CommandEntry"}}
-  {{AssertType $.Command "Function"}}
-  {{template "Go.CommentHeader" $.Command.Name}}
-  {{$name := Macro "Go.Public" $.Command.Name}}
-
-  type {{Macro "Go.CmdInsName" $.Command}} struct {
-    {{range $_, $p := $.Command.FullParameters}}
-      {{if not $p.Output}}
-        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
-      {{end}}
-    {{end}}
-  }
-
-  type {{Macro "Go.CmdOutsName" $.Command}} struct {
-    {{range $_, $p := $.Command.FullParameters}}
-      {{if $p.Output}}
-        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
-      {{end}}
-    {{end}}
-  }
-
-  type {{$name}} struct {
-    Context atom.ContextID
-    In  {{Macro "Go.CmdInsName" $.Command}}
-    Out {{Macro "Go.CmdOutsName" $.Command}}
-  }
-
-  func (c *{{$name}}) String() string {
-    parts := make([]string, 0, 32)
-    parts = append(parts, "{{$.Command.Name}}(",
-    {{range $i, $p := $.Command.CallParameters}}
-      {{$type := TypeOf $p}}
-      {{$field := Macro "Go.Parameter" $p}}
-      {{if $i}}", ",{{end}}
-      {{if      IsArray       $type}}fmt.Sprintf("%v", c.{{$field}}),
-      {{else if IsPointerType $type}}fmt.Sprintf("0x%x", c.{{$field}}),
-      {{else if IsEnum        $type}}c.{{$field}}.String(),
-      {{else                       }}fmt.Sprintf("{{$p.Name}}:%v", c.{{$field}}),
-      {{end}}
-    {{end}}
-    )
-    parts = append(parts, ")")
-    {{if not (IsVoid $.Command.Return.Type)}}
-      parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
-    {{end}}
-    return strings.Join(parts, "")
-  }
-
-  func (c *{{$name}}) ContextID() atom.ContextID {
-    return c.Context
-  }
-
-  func (c *{{$name}}) TypeID() atom.TypeID {
-    return {{$.Index}}
-  }
-
-  func (c *{{$name}}) Flags() atom.Flags {
-    return 0
-      {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
-      {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
-  }
-
-  func (c *{{$name}}) Encode(e *binary.Encoder) error {
-    if err := c.Context.Encode(e); err != nil {
-      return err
-    }
-    {{range $_, $p := $.Command.FullParameters}}
-      {{$name := print "c." (Macro "Go.Parameter" $p)}}
-      {{Macro "Go.Encode" "Type" (TypeOf $p) "Name" $name}}
-    {{end}}
-    return nil
-  }
-
-  func (c *{{$name}}) Decode(d *binary.Decoder) error {
-    if err := c.Context.Decode(d); err != nil {
-      return err
-    }
-    {{range $_, $p := $.Command.FullParameters}}
-      {{$name := print "c." (Macro "Go.Parameter" $p)}}
-      {{Macro "Go.Decode" "Type" (TypeOf $p) "Name" $name}}
-    {{end}}
-    return nil
-  }
-{{end}}
-
-{{define "Globals"}}
-  {{template "Go.CommentHeader" "Globals"}}
-  type Globals struct {
-    {{range $_, $f := $.Globals}}
-      {{Title $f.Name}} {{Macro "Go.Type" $f}}
-    {{end}}
-  }
-
-  func (g *Globals) Init() {
-    {{range $_, $g := $.Globals}}
-      {{Macro "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
-    {{end}}
-  }
-
-  func (g *Globals) Encode(e *binary.Encoder) error {
-    {{range $_, $g := $.Globals}}
-      {{$name := print "g." (Title $g.Name)}}
-      {{Macro "Go.Encode" "Type" (TypeOf $g) "Name" $name}}
-    {{end}}
-    return nil
-  }
-
-  func (g *Globals) Decode(d *binary.Decoder) error {
-    {{range $_, $g := $.Globals}}
-      {{$name := print "g." (Title $g.Name)}}
-      {{Macro "Go.Decode" "Type" (TypeOf $g) "Name" $name}}
-    {{end}}
-    return nil
-  }
-{{end}}
-
-{{define "API"}}
-
-  {{template "Go.CommentHeader" "API"}}
-  type api struct {}
-
-  func (a api) Name() string {
-    return "{{Global "API"}}"
-  }
-
-  func (a api) InitialState() gfxapi.State {
-    return initialState()
-  }
-
-  func (a api) StateMutator(s gfxapi.State) atom.Writer {
-    return &StateMutator{State: s.(*state)}
-  }
-
-  func API() gfxapi.API {
-    return api{}
-  }
-{{end}}
-
-{{define "EnumConstants"}}
-  {{AssertType $.Enum "Enum"}}
-  {{AssertType $.Name "string"}}
-   const (
-     {{range $i,$e := $.Enum.Entries}}
-        {{$.Name}}_{{$e.Name}} = {{$.Name}}({{$e.Value}})
-     {{end}}
-   )
-   {{range $i,$e := $.Enum.Extends}}
-     // {{$e.Name}}
-     {{Macro "EnumConstants" "Enum" $e "Name" $.Name}}
-   {{end}}
-{{end}}
-
-{{define "EnumNameEntries"}}
-  {{AssertType $.Enum "Enum"}}
-  {{AssertType $.Name "string"}}
-   {{range $i,$e := $.Enum.Entries}}
-      case {{$e.Value}}: return "{{$e.Name}}"
-   {{end}}
-   {{range $i,$e := $.Enum.Extends}}
-     // {{$e.Name}}
-     {{Macro "EnumNameEntries" "Enum" $e "Name" $.Name}}
-   {{end}}
-{{end}}
-
-{{define "EnumValueEntries"}}
-  {{AssertType $.Enum "Enum"}}
-  {{AssertType $.Name "string"}}
-   {{range $i,$e := $.Enum.Entries}}
-      {{$.Name}}_{{$e.Name}},
-   {{end}}
-   {{range $i,$e := $.Enum.Extends}}
-     // {{$e.Name}}
-     {{Macro "EnumValueEntries" "Enum" $e "Name" $.Name}}
-   {{end}}
-{{end}}
-
-{{define "Value"}}
-  {{$type := TypeOf $}}
-  {{$name := $type.Name}}§
-  {{     if IsArray    $type}} c.Get{{$.Name}}()
-  {{else if IsMap      $type}} c.Get{{$.Name}}()
-  {{else if IsEnum     $type}} c.Get{{$.Name}}()
-  {{else                    }} c.Get{{$.Name}}()
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the boolean expression testing for equality between LHS and RHS.
--------------------------------------------------------------------------------
-*/}}
-{{define "Equal"}}
-  {{AssertType $.Type "Type"}}
-
-  {{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "==" "Name" "Equal"}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the boolean expression that is true if LHS < RHS, otherwise false.
--------------------------------------------------------------------------------
-*/}}
-{{define "Less"}}
-  {{AssertType $.Type "Type"}}
-
-  {{if IsBool $.Type}}false
-  {{else            }}{{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "<" "Name" "Less"}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the binary expression for the given LHS and RHS types
--------------------------------------------------------------------------------
-*/}}
-{{define "BinaryOp"}}
-  {{AssertType $.Name     "string"}}
-  {{AssertType $.Operator "string"}}
-  {{AssertType $.Type     "Type"}}
-
-  {{     if IsS8       $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsU8       $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsU16      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsS16      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsF32      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsU32      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsS32      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsF64      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsU64      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsS64      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsString   $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsEnum     $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsPointerType  $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else                     }}{{$.LHS}}.{{$.Name}}({{$.RHS}})
-  {{end}}
-{{end}}
-
-{{define "ArrayImpl"}}
-  {{$name := $.Name}}
-  {{$type := $.Type}}
-  type {{$name}} []{{$type}}
-  func (s {{$name}}) Len() int                      { return len(s) }
-  func (s {{$name}}) Range() []{{$type}}            { return s}
-  func (s {{$name}}) Swap(i, j int)                 { s[i], s[j] = s[j], s[i] }
-  func (s {{$name}}) ValueCount() int               { return len(s) }
-  func (s {{$name}}) ValueAt(index int) interface{} { return s[index] }
-{{end}}
-
-{{define "ArrayEncodeDecode"}}
+  {{if not (IsAny $.ValueType)}}{{/* TODO: remove when the Any type goes away. */}}
   func (s {{$.Name}}) Encode(e *binary.Encoder) error {
     e.Uint32(uint32(len(s)))
     for _, v := range s {
-      {{Macro "Go.Encode" "Type" $.Type "Name" "v"}}
+      {{Macro "Go.Encode" "Type" $.ValueType "Name" "v"}}
     }
     return nil
   }
@@ -527,14 +133,58 @@ limitations under the License.
     if err != nil { return err }
     *s = make({{$.Name}}, c)
     for i := range *s {
-      {{Macro "Go.Decode" "Type" $.Type "Name" "(*s)[i]"}}
+      {{Macro "Go.Decode" "Type" $.ValueType "Name" "(*s)[i]"}}
     }
     return nil
   }
+  {{end}}
 {{end}}
 
 
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration and implementation for the specified static array.
+-------------------------------------------------------------------------------
+*/}}
+{{define "StaticArray"}}
+  {{AssertType $ "StaticArray"}}
+
+  {{range $i, $length := $.Dimensions}}
+    {{if gt 0 $i}}
+      {{Error "Multi-dimensional StaticArrays not supported."}}
+    {{else}}
+      type {{$.Name}} [{{$length}}]{{Macro "Go.Type" $.ValueType}}
+      func (s {{$.Name}}) Len() int { return {{$length}} }
+      func (s {{$.Name}}) Range() [{{$length}}]{{Macro "Go.Type" $.ValueType}} { return s}
+
+      {{if not (IsAny $.ValueType)}}{{/* TODO: remove when the Any type goes away. */}}
+      func (s {{$.Name}}) Encode(e *binary.Encoder) error {
+        for _, v := range {{$length}} {
+          {{Macro "Go.Encode" "Type" $.ValueType "Name" "v"}}
+        }
+        return nil
+      }
+
+      func (s *{{$.Name}}) Decode(d *binary.Decoder) error {
+        *s = make({{$.Name}}, {{$length}})
+        for i := range *s {
+          {{Macro "Go.Decode" "Type" $.ValueType "Name" "(*s)[i]"}}
+        }
+        return nil
+      }
+      {{end}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration and implementation for the specified map.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Map"}}
+  {{AssertType $ "Map"}}
   {{$name  := $.Name}}
   {{$key   := Macro "Go.Type" $.KeyType}}
   {{$value := Macro "Go.Type" $.ValueType}}
@@ -597,16 +247,472 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  NewAtoms
+  Emits initialization code for the specified type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Init"}}
+  {{AssertType $.Type "Type"}}
+  {{AssertType $.Name "string"}}
 
-  Emits a atom constructor for each command
+  {{     if IsMap   $.Type}}{{$.Name}} = make({{Macro "Go.Type" $.Type}})
+  {{else if IsClass $.Type}}{{$.Name}}.Init()
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration and implementation for the specified command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "CommandEntry"}}
+  {{AssertType $.Command "Function"}}
+  {{$name := Macro "Go.CmdName" $.Command}}
+  {{template "Go.CommentHeader" $name}}
+
+  type {{Macro "Go.CmdInsName" $.Command}} struct {
+    {{range $p := $.Command.FullParameters}}
+      {{if not $p.Output}}
+        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
+      {{end}}
+    {{end}}
+  }
+
+  type {{Macro "Go.CmdOutsName" $.Command}} struct {
+    {{range $p := $.Command.FullParameters}}
+      {{if $p.Output}}
+        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
+      {{end}}
+    {{end}}
+  }
+
+  type {{$name}} struct {
+    Context atom.ContextID
+    In  {{Macro "Go.CmdInsName" $.Command}}
+    Out {{Macro "Go.CmdOutsName" $.Command}}
+  }
+
+  func (c *{{$name}}) String() string {
+    parts := make([]string, 0, 32)
+    parts = append(parts, "{{$.Command.Name}}(",
+    {{range $i, $p := $.Command.CallParameters}}
+      {{$type := TypeOf $p}}
+      {{$field := Macro "Go.Parameter" $p}}
+      {{if $i}}", ",{{end}}
+      {{if      IsArray       $type}}fmt.Sprintf("%v", c.{{$field}}),
+      {{else if IsPointerType $type}}fmt.Sprintf("0x%x", c.{{$field}}),
+      {{else if IsEnum        $type}}c.{{$field}}.String(),
+      {{else                       }}fmt.Sprintf("{{$p.Name}}:%v", c.{{$field}}),
+      {{end}}
+    {{end}}
+    )
+    parts = append(parts, ")")
+    {{if not (IsVoid $.Command.Return.Type)}}
+      parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+    {{end}}
+    return strings.Join(parts, "")
+  }
+
+  func (c *{{$name}}) ContextID() atom.ContextID {
+    return c.Context
+  }
+
+  func (c *{{$name}}) TypeID() atom.TypeID {
+    return {{$.Index}}
+  }
+
+  func (c *{{$name}}) Flags() atom.Flags {
+    return 0
+      {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
+      {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
+  }
+
+  func (c *{{$name}}) Encode(e *binary.Encoder) error {
+    if err := c.Context.Encode(e); err != nil {
+      return err
+    }
+    {{range $p := $.Command.FullParameters}}
+      {{$name := print "c." (Macro "Go.Parameter" $p)}}
+      {{Macro "Go.Encode" "Type" (TypeOf $p) "Name" $name}}
+    {{end}}
+    return nil
+  }
+
+  func (c *{{$name}}) Decode(d *binary.Decoder) error {
+    if err := c.Context.Decode(d); err != nil {
+      return err
+    }
+    {{range $p := $.Command.FullParameters}}
+      {{$name := print "c." (Macro "Go.Parameter" $p)}}
+      {{Macro "Go.Decode" "Type" (TypeOf $p) "Name" $name}}
+    {{end}}
+    return nil
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration and implementation for the specified class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Class"}}
+  {{AssertType $ "Class"}}
+  {{template "Go.CommentHeader" print "class " $.Name }}
+  {{if GetAnnotation $ "Interface"}}
+    type {{$.Name}} interface {
+      {{Macro "ClassInterface" $}}
+    }
+  {{else}}
+
+    type {{$.Name}} struct {
+      CreatedAt atom.ID
+      {{Macro "ClassFields" $}}
+    }
+
+    func (c *{{$.Name}}) Init() {
+      {{Macro "FieldsInit" "Type" $ "Name" "c"}}
+    }
+
+    func (c *{{$.Name}}) Encode(e *binary.Encoder) error {
+      {{range $f := $.Fields}}
+        {{$name := print "c." (Title $f.Name)}}
+        {{Macro "Go.Encode" "Type" (TypeOf $f) "Name" $name}}
+      {{end}}
+      return nil
+    }
+
+    func (c *{{$.Name}}) Decode(d *binary.Decoder) error {
+      {{range $f := $.Fields}}
+        {{$name := print "c." (Title $f.Name)}}
+        {{Macro "Go.Decode" "Type" (TypeOf $f) "Name" $name}}
+      {{end}}
+      return nil
+    }
+
+    func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
+    {{range $c := $.Extends}}
+      {{Macro "ClassImpl" "Class" $c "Impl" $.Name}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits an interface declaration for the specified @interface class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ClassInterface"}}
+  {{AssertType $ "Class"}}
+  {{range $v := $.Fields}}
+    {{$type := TypeOf $v}}
+    {{if IsMemory $type}}
+      Get{{Title $v.Name}}() *{{Macro "Go.Type" $type}}
+    {{else}}
+      Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
+      Set{{Title $v.Name}}({{Macro "Go.Type" $type}})
+    {{end}}
+  {{end}}
+  {{range $c := $.Extends}}
+    {{Macro "ClassInterface" $c}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a list of fields of the specified class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ClassFields"}}
+  {{AssertType $ "Class"}}
+  {{range $v := $.Fields}}
+    {{Title $v.Name}} {{Macro "Go.Type" $v}}
+  {{end}}
+  {{range $c := $.Extends}}
+    // {{$c.Name}}
+    {{Macro "ClassFields" $c}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits initialization code for all fields of the specified class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "FieldsInit"}}
+  {{AssertType $.Type "Class"  "API"}}
+  {{AssertType $.Name "string"}}
+  {{range $v := $.Type.Fields}}
+    {{Macro "FieldInit" "Field" $v "Name" (print $.Name "." $v.Name)}}
+  {{end}}
+  {{range $c := $.Extends}}
+    // {{$c.Name}}
+    {{Macro "FieldsInit" "Type" $c "Name" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits initialization code for the specified class field.
+-------------------------------------------------------------------------------
+*/}}
+{{define "FieldInit"}}
+  {{AssertType $.Field "Field"  "Global"}}
+  {{AssertType $.Name "string"}}
+
+  {{if $.Field.Default}}{{$.Name}} = {{Macro "Default" $.Field.Default}}
+  {{else              }}{{Macro "Init" "Type" (TypeOf $.Field) "Name" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the default value for the specified type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Default"}}
+  {{     if IsBoolValue    $}}{{$}}
+  {{else if IsNumericValue $}}{{$}}
+  {{else if IsStringValue  $}}{{$}}
+  {{else if IsEnumEntry    $}}{{$.Enum.Name}}_{{$.Name}}
+  {{else if IsCast         $}}{{Macro "Default" $.Object}}
+  {{else}}{{Error "macro Default called with unsupported type: %T" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the implementation code for the specified class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ClassImpl"}}
+  {{AssertType $.Class "Class"}}
+  {{AssertType $.Impl "string"}}
+  {{range $v := $.Class.Fields}}
+    {{$type := TypeOf $v}}
+    {{$FType := Macro "Go.Type" $type}}
+    {{if IsMemory $type}}
+      func (i *{{$.Impl}}) Get{{$v.Name}}() *{{$FType}} { return &i.{{$v.Name}} }
+    {{else}}
+      func (i *{{$.Impl}}) Get{{$v.Name}}() {{$FType}} { return i.{{$v.Name}} }
+      func (i *{{$.Impl}}) Set{{$v.Name}}(v {{$FType}}) { i.{{$v.Name}} = v }
+    {{end}}
+  {{end}}
+  {{range $c := $.Class.Extends}}
+    {{Macro "ClassImpl" "Class" $c "Impl" $.Impl}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration and implementation for the specified enum.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Enum"}}
+  {{AssertType $ "Enum"}}
+  {{template "Go.CommentHeader" print "enum " $.Name }}
+  type {{$.Name}} uint32
+
+  {{Macro "EnumConstants" "Enum" $ "Name" $.Name}}
+
+  func (v {{$.Name}}) String() string {
+    switch v {
+    {{Macro "EnumStringCases" $}}
+    default: return fmt.Sprintf("{{$.Name}}<0x%.4x>", uint32(v))
+    }
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a list of entries for the specified enum.
+-------------------------------------------------------------------------------
+*/}}
+{{define "EnumConstants"}}
+  {{AssertType $.Enum "Enum"}}
+  {{AssertType $.Name "string"}}
+   const (
+     {{range $e := $.Enum.Entries}}
+        {{$.Name}}_{{$e.Name}} = {{$.Name}}({{$e.Value}})
+     {{end}}
+   )
+   {{range $e := $.Enum.Extends}}
+     // {{$e.Name}}
+     {{Macro "EnumConstants" "Enum" $e "Name" $.Name}}
+   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits cases matching a string representation for each entry of the specified enum.
+-------------------------------------------------------------------------------
+*/}}
+{{define "EnumStringCases"}}
+  {{AssertType $ "Enum"}}
+   {{range $e := $.Entries}}
+      case {{$e.Value}}: return "{{$e.Name}}"
+   {{end}}
+   {{range $e := $.Extends}}
+     // {{$e.Name}}
+     {{Macro "EnumStringCases" $e}}
+   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a type declaration for holding global variables.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Globals"}}
+  {{template "Go.CommentHeader" "Globals"}}
+  type Globals struct {
+    {{range $g := $.Globals}}
+      {{Title $g.Name}} {{Macro "Go.Type" $g}}
+    {{end}}
+  }
+
+  func (g *Globals) Init() {
+    {{range $g := $.Globals}}
+      {{Macro "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
+    {{end}}
+  }
+
+  func (g *Globals) Encode(e *binary.Encoder) error {
+    {{range $g := $.Globals}}
+      {{$name := print "g." (Title $g.Name)}}
+      {{Macro "Go.Encode" "Type" (TypeOf $g) "Name" $name}}
+    {{end}}
+    return nil
+  }
+
+  func (g *Globals) Decode(d *binary.Decoder) error {
+    {{range $g := $.Globals}}
+      {{$name := print "g." (Title $g.Name)}}
+      {{Macro "Go.Decode" "Type" (TypeOf $g) "Name" $name}}
+    {{end}}
+    return nil
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a top-level type declaration for the specified API.
+-------------------------------------------------------------------------------
+*/}}
+{{define "API"}}
+
+  {{template "Go.CommentHeader" "API"}}
+  type api struct {}
+
+  func (a api) Name() string {
+    return "{{Global "API"}}"
+  }
+
+  func (a api) InitialState() gfxapi.State {
+    return initialState()
+  }
+
+  func (a api) StateMutator(s gfxapi.State) atom.Writer {
+    return &StateMutator{State: s.(*state)}
+  }
+
+  func API() gfxapi.API {
+    return api{}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to retrieve the specified value.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Value"}}
+  {{$type := TypeOf $}}
+  {{$name := $type.Name}}§
+  {{     if IsArray $type}} c.Get{{$.Name}}()
+  {{else if IsMap   $type}} c.Get{{$.Name}}()
+  {{else if IsEnum  $type}} c.Get{{$.Name}}()
+  {{else                 }} c.Get{{$.Name}}()
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the boolean expression testing for equality between LHS and RHS.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Equal"}}
+  {{AssertType $.Type "Type"}}
+
+  {{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "==" "Name" "Equal"}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the boolean expression that is true if LHS < RHS, otherwise false.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Less"}}
+  {{AssertType $.Type "Type"}}
+
+  {{if IsBool $.Type}}false
+  {{else            }}{{Macro "BinaryOp" "Type" $.Type "LHS" $.LHS "RHS" $.RHS "Operator" "<" "Name" "Less"}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the binary expression for the given LHS and RHS types.
+-------------------------------------------------------------------------------
+*/}}
+{{define "BinaryOp"}}
+  {{AssertType $.Name     "string"}}
+  {{AssertType $.Operator "string"}}
+  {{AssertType $.Type     "Type"}}
+
+  {{     if IsS8          $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsU8          $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsU16         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsS16         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsF32         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsU32         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsS32         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsF64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsU64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsS64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsString      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsEnum        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsPointerType $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else                        }}{{$.LHS}}.{{$.Name}}({{$.RHS}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits an Atom constructor for each command.
 -------------------------------------------------------------------------------
 */}}
 {{define "NewAtoms"}}
   {{AssertType $ "API"}}
 
-  {{range $c := $.Functions}}
-    {{$name       := Macro "Go.Public" $c.Name}}
+  {{range $c := AllCommands $}}
+    {{$name       := Macro "Go.CmdName" $c}}
     func New{{$name}}(
         {{range $p := $c.FullParameters}}
           p{{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}},

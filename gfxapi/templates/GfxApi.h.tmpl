@@ -48,12 +48,12 @@ extern void Initialize();
 namespace Ids {
   // List of the function ids for the API functions. This list have to be consistent with the
   // function ids on the server side because they are part of the communication protocol
-  {{range $i, $c := $.Functions}}
+  {{range $i, $c := AllCommands $}}
     static const uint16_t {{Macro "C++.Public" $c.Name}} = {{$i}};
   {{end}}
 } // end of namespace FunctionIds
 ¶
-{{range $_, $e := $.Enums}}
+{{range $e := $.Enums}}
   enum class {{$e.Name}} : uint32_t {
     {{range $e := $e.Entries}}
       {{$e.Name}} = {{$e.Value}},
@@ -65,13 +65,13 @@ namespace Ids {
   typedef {{Macro "C++.Type" $p.To}} {{$p.Name}};
 {{end}}
 ¶
-{{range $c := $.Functions}}
+{{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
     {{Macro "TypedefFunctionPtr" $c}}
   {{end}}
 {{end}}
 ¶
-{{range $c := $.Functions}}
+{{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
     {{Macro "FunctionPtrExtern" $c}}
   {{end}}

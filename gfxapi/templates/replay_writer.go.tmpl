@@ -98,7 +98,7 @@ limitations under the License.
 
   {{template "Process" $}}
 
-  {{range $c := $.Functions}}
+  {{range $c := AllCommands $}}
     {{Macro "DeclareCommandReplay" $c}}
   {{end}}
 {{end}}
@@ -112,7 +112,7 @@ limitations under the License.
 {{define "DeclareBuilderFunctionInfos"}}
   {{AssertType $ "API"}}
 
-  {{range $i, $c := $.Functions}}
+  {{range $i, $c := AllCommands $}}
     var {{Macro "BuilderFunctionInfo" $c}} = builder.FunctionInfo{§
       ID: {{$i}},§
       ReturnType: {{Macro "BuilderType" $c.Return.Type}},§
@@ -172,7 +172,7 @@ limitations under the License.
 {{define "DeclarePostbacks"}}
   {{AssertType $ "API"}}
 
-  {{range $c := $.Functions}}
+  {{range $c := AllCommands $}}
     {{if len $c.Outputs}} {{/* Skip commands with no output */}}
       {{$name := Macro "CmdPostbacksName" $c}}
       type {{$name}} struct {
@@ -201,7 +201,7 @@ limitations under the License.
   Emits the name of the specified command's postback structure
 -------------------------------------------------------------------------------
 */}}
-{{define "CmdPostbacksName"}}{{AssertType $ "Function"}}{{Macro "Go.Public" $.Name}}_Postback{{end}}
+{{define "CmdPostbacksName"}}{{Macro "Go.CmdName" $}}_Postback{{end}}
 
 
 {{/*
@@ -281,8 +281,7 @@ limitations under the License.
 {{define "DeclareCommandReplay"}}
   {{AssertType $ "Function"}}
 
-  {{$name := Macro "Go.Public" $.Name}}
-
+  {{$name := Macro "Go.CmdName" $}}
   var _ = replayer(&{{$name}}{}) // interface compliance check
   {{if GetAnnotation $ "replay_custom"}}
     func (ω *{{$name}}) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
@@ -430,7 +429,7 @@ limitations under the License.
   Emits the name of the variable holding the specified command's function id.
 -------------------------------------------------------------------------------
 */}}
-{{define "BuilderFunctionInfo"}}{{AssertType $ "Function"}}funcInfo{{Macro "Go.Public" $.Name}}{{end}}
+{{define "BuilderFunctionInfo"}}{{AssertType $ "Function"}}funcInfo{{Macro "Go.CmdName" $}}{{end}}
 
 
 {{/*
@@ -477,6 +476,7 @@ limitations under the License.
   {{else if IsU64           $.Type}}8
   {{else if IsF64           $.Type}}8
   {{else if IsEnum          $.Type}}4
+  {{else if IsPointer       $.Type}}PointerSize
   {{else                          }}{{Error "macro SizeOf '%s' called with unsupported type: %v" $.Name $.Type}}
   {{end}}
 {{end}}
@@ -539,22 +539,23 @@ limitations under the License.
   {{AssertType $.Name "string"}}
 
   {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(b, ω, s)
-  {{else if IsBool          $.Type}}value.Bool({{$.Name}})
-  {{else if IsS8            $.Type}}value.S8({{$.Name}})
-  {{else if IsU8            $.Type}}value.U8({{$.Name}})
-  {{else if IsS16           $.Type}}value.S16({{$.Name}})
-  {{else if IsU16           $.Type}}value.U16({{$.Name}})
-  {{else if IsF32           $.Type}}value.F32({{$.Name}})
-  {{else if IsU32           $.Type}}value.U32({{$.Name}})
-  {{else if IsS32           $.Type}}value.S32({{$.Name}})
-  {{else if IsF64           $.Type}}value.F64({{$.Name}})
-  {{else if IsU64           $.Type}}value.U64({{$.Name}})
-  {{else if IsS64           $.Type}}value.S64({{$.Name}})
-  {{else if IsString        $.Type}}b.String({{$.Name}})
-  {{else if IsPointerType   $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
-  {{else if IsEnum          $.Type}}value.U32({{$.Name}})
-  {{else if IsArray         $.Type}}{{$.Name}}.value(b, ω, s)
-  {{else if IsPseudonym     $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsBool        $.Type}}value.Bool({{$.Name}})
+  {{else if IsS8          $.Type}}value.S8({{$.Name}})
+  {{else if IsU8          $.Type}}value.U8({{$.Name}})
+  {{else if IsS16         $.Type}}value.S16({{$.Name}})
+  {{else if IsU16         $.Type}}value.U16({{$.Name}})
+  {{else if IsF32         $.Type}}value.F32({{$.Name}})
+  {{else if IsU32         $.Type}}value.U32({{$.Name}})
+  {{else if IsS32         $.Type}}value.S32({{$.Name}})
+  {{else if IsF64         $.Type}}value.F64({{$.Name}})
+  {{else if IsU64         $.Type}}value.U64({{$.Name}})
+  {{else if IsS64         $.Type}}value.S64({{$.Name}})
+  {{else if IsString      $.Type}}b.String({{$.Name}})
+  {{else if IsPointerType $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
+  {{else if IsEnum        $.Type}}value.U32({{$.Name}})
+  {{else if IsArray       $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsPseudonym   $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsClass       $.Type}}{{$.Name}}.value(b, ω, s)
   {{else                          }}{{Error "macro Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
   {{end}}
 {{end}}
@@ -568,27 +569,27 @@ limitations under the License.
 {{define "BuilderType"}}
   {{AssertType $ "Type"}}
 
-  {{     if IsPseudonym     $}}{{Macro "BuilderType" $.To}}
-  {{else if IsPointerType   $}}protocol.TypeAbsolutePointer
-  {{else if IsMemory        $}}protocol.TypeAbsolutePointer
-  {{else if IsString        $}}protocol.TypeAbsolutePointer
-  {{else if IsArray         $}}protocol.TypeAbsolutePointer
-  {{else if IsPointer       $}}protocol.TypeAbsolutePointer
-  {{else if IsEnum          $}}protocol.TypeUint32
-  {{else if IsBool          $}}protocol.TypeBool
-  {{else if IsInt           $}}protocol.TypeInt32
-  {{else if IsUint          $}}protocol.TypeUint32
-  {{else if IsS8            $}}protocol.TypeInt8
-  {{else if IsU8            $}}protocol.TypeUint8
-  {{else if IsS16           $}}protocol.TypeInt16
-  {{else if IsU16           $}}protocol.TypeUint16
-  {{else if IsS32           $}}protocol.TypeInt32
-  {{else if IsU32           $}}protocol.TypeUint32
-  {{else if IsF32           $}}protocol.TypeFloat
-  {{else if IsS64           $}}protocol.TypeInt64
-  {{else if IsU64           $}}protocol.TypeUint64
-  {{else if IsF64           $}}protocol.TypeDouble
-  {{else if IsVoid          $}}protocol.TypeVoid
+  {{     if IsPseudonym   $}}{{Macro "BuilderType" $.To}}
+  {{else if IsPointerType $}}protocol.TypeAbsolutePointer
+  {{else if IsMemory      $}}protocol.TypeAbsolutePointer
+  {{else if IsString      $}}protocol.TypeAbsolutePointer
+  {{else if IsArray       $}}protocol.TypeAbsolutePointer
+  {{else if IsPointer     $}}protocol.TypeAbsolutePointer
+  {{else if IsEnum        $}}protocol.TypeUint32
+  {{else if IsBool        $}}protocol.TypeBool
+  {{else if IsInt         $}}protocol.TypeInt32
+  {{else if IsUint        $}}protocol.TypeUint32
+  {{else if IsS8          $}}protocol.TypeInt8
+  {{else if IsU8          $}}protocol.TypeUint8
+  {{else if IsS16         $}}protocol.TypeInt16
+  {{else if IsU16         $}}protocol.TypeUint16
+  {{else if IsS32         $}}protocol.TypeInt32
+  {{else if IsU32         $}}protocol.TypeUint32
+  {{else if IsF32         $}}protocol.TypeFloat
+  {{else if IsS64         $}}protocol.TypeInt64
+  {{else if IsU64         $}}protocol.TypeUint64
+  {{else if IsF64         $}}protocol.TypeDouble
+  {{else if IsVoid        $}}protocol.TypeVoid
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
