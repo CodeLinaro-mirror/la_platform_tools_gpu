@@ -22,10 +22,14 @@ import (
 // type name '(' [ param { ',' param } } ')' [ block ]
 func function(f *ast.Function, p *parse.Parser, cst *parse.Branch, withBlock bool) *ast.Function {
 	f.CST = cst
-	result := &ast.Parameter{
-		Type:   requireTypeRef(p, cst),
-		Output: true,
-	}
+	var result *ast.Parameter
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		result = &ast.Parameter{
+			CST:    cst,
+			Type:   requireTypeRef(p, cst),
+			Output: true,
+		}
+	})
 	f.Name = requireIdentifier(p, cst)
 	requireOperator(ast.OpListStart, p, cst)
 	for !operator(ast.OpListEnd, p, cst) {

@@ -57,7 +57,7 @@ func scanOperator(p *parse.Parser) string {
 }
 
 // lhs operator simple_expression
-func binaryOp(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.BinaryOp {
+func binaryOp(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.BinaryOp {
 	op := scanOperator(p)
 	if _, found := ast.BinaryOperators[op]; !found {
 		p.Rollback()

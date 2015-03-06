@@ -34,8 +34,11 @@ func type_(ctx *context, in interface{}) semantic.Type {
 		return staticArrayType(ctx, in)
 	case *ast.PointerType:
 		return pointerType(ctx, in)
-	default:
+	case ast.Node:
 		ctx.errorf(in, "Unhandled typeref %T found", in)
+		return semantic.VoidType
+	default:
+		ctx.icef(nil, "Non-node (%T) typeref found", in)
 		return semantic.VoidType
 	}
 }
@@ -162,7 +165,7 @@ func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArra
 	return out
 }
 
-func getPointerType(ctx *context, at interface{}, to semantic.Type) *semantic.Pointer {
+func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Pointer {
 	name := strings.Title(to.Typename()) + "Ref"
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {

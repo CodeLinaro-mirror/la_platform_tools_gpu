@@ -47,9 +47,9 @@ type New struct {
 type Field struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to the field
-	Type        interface{}   // the type the field holds
+	Type        Node          // the type the field holds
 	Name        *Identifier   // the name of the field
-	Default     interface{}   // the default value expression for the field
+	Default     Node          // the default value expression for the field
 }
 
 // FieldInitializer is used as part of a ClassInitializer to specify the value a
@@ -57,14 +57,14 @@ type Field struct {
 type FieldInitializer struct {
 	CST   *parse.Branch // underlying parse structure for this node
 	Name  *Identifier   // the name of the field
-	Value interface{}   // the value the field should be given
+	Value Node          // the value the field should be given
 }
 
 // Cast represents a type coercion expression, of the form «expression "as" type»
 type Cast struct {
 	CST    *parse.Branch // underlying parse structure for this node
-	Object interface{}   // the value to force the type of
-	Type   interface{}   // the type it should be coerced to
+	Object Node          // the value to force the type of
+	Type   Node          // the type it should be coerced to
 }
 
 // EnumEntry represents a single value in an enumerated type.
@@ -90,7 +90,7 @@ type Enum struct {
 // Always of the form «object.name» where object is an expression.
 type Member struct {
 	CST    *parse.Branch // underlying parse structure for this node
-	Object interface{}   // the object to get a member of
+	Object Node          // the object to get a member of
 	Name   *Identifier   // the name of the member to get
 }
 
@@ -98,15 +98,15 @@ type Member struct {
 // Used for arrays, maps and bitfields.
 type Index struct {
 	CST    *parse.Branch // underlying parse structure for this node
-	Object interface{}   // the object to index
-	Index  interface{}   // the index to lookup
+	Object Node          // the object to index
+	Index  Node          // the index to lookup
 }
 
 // ArrayType represents a type declaration for an array, which looks
 // like «"array"<value_type>»
 type ArrayType struct {
 	CST       *parse.Branch // underlying parse structure for this node
-	ValueType interface{}   // the type stored as elements of the array
+	ValueType Node          // the type stored as elements of the array
 }
 
 // StaticArrayType represents a type declaration for a constant size array,
@@ -115,22 +115,22 @@ type ArrayType struct {
 // multidimensional arrays, for instance f32[4,4] for a matrix.
 type StaticArrayType struct {
 	CST        *parse.Branch // underlying parse structure for this node
-	ValueType  interface{}   // The type to store in the array
-	Dimensions []interface{} // the dimensions of the array
+	ValueType  Node          // The type to store in the array
+	Dimensions []Node        // the dimensions of the array
 }
 
 // MapType represents a type declaration of a map, of the form
 // «map<key_type, value_type>»
 type MapType struct {
 	CST       *parse.Branch // underlying parse structure for this node
-	KeyType   interface{}   // the type used to index the map
-	ValueType interface{}   // the type stored against the index in the map
+	KeyType   Node          // the type used to index the map
+	ValueType Node          // the type stored against the index in the map
 }
 
 // PointerType represents a pointer type declaration, of the form «type*»
 type PointerType struct {
 	CST *parse.Branch // underlying parse structure for this node
-	To  interface{}   // the underlying type this pointer points to
+	To  Node          // the underlying type this pointer points to
 }
 
 // Alias represents a weak type alias, with structure «"alias" type name».
@@ -139,7 +139,7 @@ type Alias struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to the alias
 	Name        *Identifier   // the name of the alias
-	To          interface{}   // the type it is an alias for
+	To          Node          // the type it is an alias for
 }
 
 // Pseudonym declares a new type in terms of another type.
@@ -149,5 +149,5 @@ type Pseudonym struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to the type
 	Name        *Identifier   // the name of the type
-	To          interface{}   // the underlying type
+	To          Node          // the underlying type
 }

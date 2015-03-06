@@ -22,7 +22,7 @@ import (
 )
 
 // lhs { extend } [class_initializer]
-func requireExpression(p *parse.Parser, cst *parse.Branch) interface{} {
+func requireExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	lhs := requireLHSExpression(p, cst)
 	for {
 		if e := extendExpression(p, cst, lhs); e != nil {
@@ -38,7 +38,7 @@ func requireExpression(p *parse.Parser, cst *parse.Branch) interface{} {
 }
 
 // lhs { extend }
-func requireSimpleExpression(p *parse.Parser, cst *parse.Branch) interface{} {
+func requireSimpleExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	lhs := requireLHSExpression(p, cst)
 	for {
 		if e := extendExpression(p, cst, lhs); e != nil {
@@ -51,7 +51,7 @@ func requireSimpleExpression(p *parse.Parser, cst *parse.Branch) interface{} {
 }
 
 // ( group | switch | new | length | literal | unary_op | identifier)
-func requireLHSExpression(p *parse.Parser, cst *parse.Branch) interface{} {
+func requireLHSExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if g := group(p, cst); g != nil {
 		return g
 	}
@@ -78,7 +78,7 @@ func requireLHSExpression(p *parse.Parser, cst *parse.Branch) interface{} {
 }
 
 // lhs (index | call | cast | binary_op | member)
-func extendExpression(p *parse.Parser, cst *parse.Branch, lhs interface{}) interface{} {
+func extendExpression(p *parse.Parser, cst *parse.Branch, lhs ast.Node) ast.Node {
 	if i := index(p, cst, lhs); i != nil {
 		return i
 	}
@@ -119,7 +119,7 @@ func requireClassInitializer(p *parse.Parser, cst *parse.Branch, class *ast.Iden
 }
 
 // 'true' | 'false' | '"' string '"' | '?' | number
-func literal(p *parse.Parser, cst *parse.Branch) interface{} {
+func literal(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if l := keyword(ast.KeywordTrue, p, cst); l != nil {
 		return &ast.Bool{CST: l, Value: true}
 	}
@@ -270,7 +270,7 @@ func length(p *parse.Parser, cst *parse.Branch) *ast.Length {
 }
 
 // lhs '[' expression ']'
-func index(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Index {
+func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
 	}
@@ -285,7 +285,7 @@ func index(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Index {
 }
 
 // lhs '(' [ expression { ',' expression } ] ')'
-func call(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Call {
+func call(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Call {
 	if !peekOperator(ast.OpListStart, p) {
 		return nil
 	}
@@ -304,7 +304,7 @@ func call(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Call {
 }
 
 // lhs 'as' type
-func cast(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Cast {
+func cast(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Cast {
 	if !peekKeyword(ast.KeywordAs, p) {
 		return nil
 	}
@@ -318,7 +318,7 @@ func cast(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Cast {
 }
 
 // lhs '.' identifier
-func member(p *parse.Parser, cst *parse.Branch, lhs interface{}) *ast.Member {
+func member(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Member {
 	if !peekOperator(ast.OpMember, p) {
 		return nil
 	}

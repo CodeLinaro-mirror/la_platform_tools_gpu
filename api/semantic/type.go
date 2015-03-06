@@ -19,23 +19,25 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 // Type is the interface to any object that can act as a type to the api
 // langauge.
 type Type interface {
-	Typename() string               // returns the full name of the type, must be unique
-	Member(Name string) interface{} // looks up a member by name from a type
+	Node
+	Typename() string        // returns the full name of the type, must be unique
+	Member(Name string) Node // looks up a member by name from a type
 }
 
 // Expression represents anything that can act as an expression in the api
 // language, it must be able to correctly report the type of value it would
 // return if executed.
 type Expression interface {
+	Node
 	ExpressionType() Type // returns the expression value type.
 }
 
 // Members wraps a map and implements part of the Type interface.
 // It is used as a mixin helper.
-type Members map[string]interface{}
+type Members map[string]Node
 
 // Member returns the entry in the map that matches name, or nil if none does.
-func (t Members) Member(name string) interface{} {
+func (t Members) Member(name string) Node {
 	m, ok := t[name]
 	if !ok {
 		return nil
@@ -126,7 +128,7 @@ type Enum struct {
 func (t Enum) Typename() string { return t.Name }
 
 // Implements Type returning the matching enum entry if there is one.
-func (t Enum) Member(name string) interface{} {
+func (t Enum) Member(name string) Node {
 	for _, e := range t.AllEntries {
 		if e.Name == name {
 			return e
@@ -163,7 +165,7 @@ func (t Pseudonym) Typename() string { return t.Name }
 
 // Implements Type returning the direct member if it has it, otherwise
 // delegating the lookup to the underlying type.
-func (t Pseudonym) Member(name string) interface{} {
+func (t Pseudonym) Member(name string) Node {
 	m := t.Members.Member(name)
 	if m == nil {
 		m = t.To.Member(name)
@@ -177,8 +179,8 @@ type Array struct {
 	ValueType Type   // the value type stored in the array
 }
 
-func (t Array) Typename() string               { return t.Name }
-func (t Array) Member(name string) interface{} { return nil }
+func (t Array) Typename() string        { return t.Name }
+func (t Array) Member(name string) Node { return nil }
 
 // StaticArray represents a multi-dimensional fixed size array type.
 type StaticArray struct {
@@ -187,8 +189,8 @@ type StaticArray struct {
 	Dimensions []Uint32Value // the dimensions of the array in outer->inner order
 }
 
-func (t StaticArray) Typename() string               { return t.Name }
-func (t StaticArray) Member(name string) interface{} { return nil }
+func (t StaticArray) Typename() string        { return t.Name }
+func (t StaticArray) Member(name string) Node { return nil }
 
 // Map represents an api map type declaration.
 type Map struct {
@@ -206,16 +208,16 @@ type Pointer struct {
 	To   Type   // the type this is a pointer to
 }
 
-func (t Pointer) Typename() string               { return t.Name }
-func (t Pointer) Member(name string) interface{} { return t.To.Member(name) }
+func (t Pointer) Typename() string        { return t.Name }
+func (t Pointer) Member(name string) Node { return t.To.Member(name) }
 
 // Builtin represents one of the primitive types.
 type Builtin struct {
 	Name string // the primitive type name
 }
 
-func (t Builtin) Typename() string               { return t.Name }
-func (t Builtin) Member(name string) interface{} { return nil }
+func (t Builtin) Typename() string        { return t.Name }
+func (t Builtin) Member(name string) Node { return nil }
 
 var (
 	// These are all the fundamental primitive types of the api language

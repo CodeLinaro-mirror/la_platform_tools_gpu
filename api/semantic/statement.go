@@ -19,8 +19,8 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 // Block represents a collection of statements, used as the body of other
 // nodes.
 type Block struct {
-	AST        *ast.Block    // the underlying syntax node this was built from
-	Statements []interface{} // the set of statements this block represents
+	AST        *ast.Block // the underlying syntax node this was built from
+	Statements []Node     // the set of statements this block represents
 }
 
 // Assert represents a runtime assertion.

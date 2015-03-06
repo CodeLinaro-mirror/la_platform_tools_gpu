@@ -36,7 +36,7 @@ type API struct {
 type Annotation struct {
 	CST       *parse.Branch // underlying parse structure for this node
 	Name      *Identifier   // the name part (between the @ and the brackets)
-	Arguments []interface{} // the list of arguments (the bit in brackets)
+	Arguments []Node        // the list of arguments (the bit in brackets)
 }
 
 // Annotations represents the set of Annotation objects that apply to another

@@ -19,7 +19,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
-func block(ctx *context, in *ast.Block, owner interface{}) *semantic.Block {
+func block(ctx *context, in *ast.Block, owner semantic.Node) *semantic.Block {
 	out := &semantic.Block{AST: in}
 	if in == nil {
 		return out
@@ -39,15 +39,15 @@ func block(ctx *context, in *ast.Block, owner interface{}) *semantic.Block {
 // the final return statement, if present, is not injected, but returned from the
 // function, as it often needs special handling depending on the owner of the
 // statements
-func body(ctx *context, in []interface{}, owner interface{}) *semantic.Return {
+func body(ctx *context, in []ast.Node, owner semantic.Node) *semantic.Return {
 	f, isFunction := owner.(*semantic.Function)
 	var returnStatement *ast.Return
 	// we need to check and strip the "return" if the function is supposed to have one
 	if isFunction && !isVoid(f.Return.Type) {
 		if len(in) == 0 {
-			ctx.errorf(owner, "Missing return statement")
+			ctx.errorf(f.AST, "Missing return statement")
 		} else if r, ok := in[len(in)-1].(*ast.Return); !ok {
-			ctx.errorf(owner, "Last statement must be a return")
+			ctx.errorf(f.AST, "Last statement must be a return")
 		} else {
 			in = in[0 : len(in)-1]
 			returnStatement = r
@@ -64,7 +64,7 @@ func body(ctx *context, in []interface{}, owner interface{}) *semantic.Return {
 	return nil
 }
 
-func statement(ctx *context, in interface{}) interface{} {
+func statement(ctx *context, in ast.Node) semantic.Node {
 	switch in := in.(type) {
 	case *ast.Assert:
 		return assert(ctx, in)
@@ -104,7 +104,7 @@ func assert(ctx *context, in *ast.Assert) *semantic.Assert {
 	return out
 }
 
-func assign(ctx *context, in *ast.Assign) interface{} {
+func assign(ctx *context, in *ast.Assign) semantic.Node {
 	lhs := expression(ctx, in.LHS)
 	var rhs semantic.Expression
 	ctx.with(lhs.ExpressionType(), func() {

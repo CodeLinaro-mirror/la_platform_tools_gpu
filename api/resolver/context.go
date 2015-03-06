@@ -16,8 +16,8 @@ package resolver
 
 import (
 	"fmt"
-	"reflect"
 
+	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
@@ -32,30 +32,23 @@ type context struct {
 
 type scope struct {
 	outer     *scope
-	entries   map[string][]interface{}
+	entries   map[string][]semantic.Node
 	inferType semantic.Type
-	block     *[]interface{}
+	block     *[]semantic.Node
 }
 
 func (ctx *context) errorf(at interface{}, message string, args ...interface{}) {
-	var n parse.Fragment
-	if at != nil {
-		v := reflect.ValueOf(at)
-		v = reflect.Indirect(v)
-		if v.IsValid() {
-			if fv := v.FieldByName("CST"); fv.IsValid() {
-				if !fv.IsNil() {
-					n = fv.Interface().(parse.Fragment)
-				} else {
-					ctx.errors.Add(nil, nil, "Error at node with nil CST field in %T", at)
-				}
-			}
+	if at, ok := at.(ast.Node); ok {
+		if n := at.Fragment(); n != nil {
+			ctx.errors.Add(nil, n, message, args...)
+			return
 		}
 	}
-	ctx.errors.Add(nil, n, message, args...)
+	ctx.errors.Add(nil, nil, "Error at node with nil CST field in %T", at)
+
 }
 
-func (ctx *context) icef(at interface{}, message string, args ...interface{}) {
+func (ctx *context) icef(at ast.Node, message string, args ...interface{}) {
 	ctx.errorf(at, "INTERNAL ERROR: "+message, args...)
 }
 
@@ -69,7 +62,7 @@ func (ctx *context) with(t semantic.Type, action func()) {
 	ctx.scope = &scope{
 		outer:     ctx.scope,
 		block:     ctx.scope.block,
-		entries:   map[string][]interface{}{},
+		entries:   map[string][]semantic.Node{},
 		inferType: t,
 	}
 	defer func() { ctx.scope = original }()
@@ -77,13 +70,13 @@ func (ctx *context) with(t semantic.Type, action func()) {
 }
 
 // add binds a name to a specific value within the current and nested scopes.
-func (ctx *context) add(name string, value interface{}) {
+func (ctx *context) add(name string, value semantic.Node) {
 	list, _ := ctx.scope.entries[name]
 	ctx.scope.entries[name] = append(list, value)
 }
 
 // find searches the scope stack for a bindings that matches the name.
-func (ctx *context) find(name string) []interface{} {
+func (ctx *context) find(name string) []semantic.Node {
 	if ctx.scope == nil {
 		return nil
 	}
@@ -101,7 +94,7 @@ func (ctx *context) find(name string) []interface{} {
 // one of them is unambiguously the right choice in the current context.
 // For instance, if the values are all enum entries but only one of them
 // matches the current enum inference.
-func (ctx *context) disambiguate(matches []interface{}) []interface{} {
+func (ctx *context) disambiguate(matches []semantic.Node) []semantic.Node {
 	if len(matches) <= 1 {
 		return matches
 	}
@@ -134,13 +127,13 @@ func (ctx *context) disambiguate(matches []interface{}) []interface{} {
 		return matches
 	}
 	// Matched exactly once
-	return []interface{}{res}
+	return []semantic.Node{res}
 }
 
 // get searches the scope stack for a bindings that matches the name.
 // If it cannot find exactly 1 unambiguous match, it reports an error, and
 // nil is returned.
-func (ctx *context) get(at interface{}, name string) interface{} {
+func (ctx *context) get(at ast.Node, name string) semantic.Node {
 	matches := ctx.disambiguate(ctx.find(name))
 	switch len(matches) {
 	case 0:
@@ -172,14 +165,13 @@ func (ctx *context) get(at interface{}, name string) interface{} {
 
 func (ctx *context) addType(t semantic.Type) {
 	name := t.Typename()
-	_, present := ctx.types[name]
-	if present {
+	if _, present := ctx.types[name]; present {
 		ctx.errorf(t, "Duplicate type %s", name)
 	}
 	ctx.types[name] = t
 }
 
-func (ctx *context) findType(at interface{}, name string) semantic.Type {
+func (ctx *context) findType(at ast.Node, name string) semantic.Type {
 	t, found := ctx.types[name]
 	if !found {
 		return nil
@@ -187,7 +179,7 @@ func (ctx *context) findType(at interface{}, name string) semantic.Type {
 	return t
 }
 
-func (ctx *context) addStatement(s interface{}) {
+func (ctx *context) addStatement(s semantic.Node) {
 	if _, isInvalid := s.(invalid); isInvalid {
 		return
 	}
