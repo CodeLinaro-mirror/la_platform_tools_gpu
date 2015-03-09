@@ -21,13 +21,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/rpc/generate"
 )
 
 var (
+	dir    = flag.String("dir", "", "The output directory")
 	golang = flag.Bool("go", false, "enable go generation")
 	java   = flag.Bool("java", false, "enable java generation")
 )
@@ -39,6 +42,11 @@ func run() error {
 	}
 	if !(*golang || *java) {
 		return fmt.Errorf("Specify languages to build")
+	}
+	if c := commands.Filter("template"); len(c) != 1 {
+		return fmt.Errorf("Could not find template command")
+	} else {
+		c[0].Flags.Set("dir", *dir)
 	}
 	apiName := flag.Args()[0]
 	info, err := ioutil.ReadFile(apiName)
@@ -61,6 +69,12 @@ func run() error {
 		generate.Go(f)
 	}
 	if *java {
+		pkg := "unknown"
+		i := strings.LastIndex(*dir, "/com/")
+		if i >= 0 {
+			pkg = strings.Replace((*dir)[i+1:], "/", ".", -1)
+		}
+		f.Global("package", pkg)
 		generate.Java(f)
 	}
 	return nil

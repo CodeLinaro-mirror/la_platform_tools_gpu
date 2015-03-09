@@ -13,13 +13,13 @@
 // limitations under the License.
 
 {{define "Enum"}}{{.Name}}Enum{{end}}
-{{define "ID"}}{{.Name}}ID{{end}}
-{{define "IDBytes"}}{{.Name}}IDBytes{{end}}
+{{define "ID"}}{{class .Name}}ID{{end}}
+{{define "IDBytes"}}{{class .Name}}IDBytes{{end}}
 
 {{define "Encoder"}}
-  public static void encode(Encoder e, {{class .Name}} o) throws IOException {
-{{range .Fields}}    {{encode (print "o." (fieldname .Name)) .Type}}
-{{end}}  }{{end}}
+»public static void encode(Encoder e, {{class .Name}} o) throws IOException {
+{{range .Fields}}»»{{encode (print "o." (fieldname .Name)) .Type}}
+{{end}}»}{{end}}
 
 {{define "EncodeNative"}}e.{{lower .Type.Method}}({{.Name}});{{end}}
 {{define "EncodeRemap"}}{{.Name}}.encode(e);{{end}}
@@ -27,14 +27,14 @@
 {{define "EncodeObject"}}e.object({{.Name}});{{end}}
 
 {{define "EncodeArray"}}e.int32({{.Name}}.length);
-    for (int i = 0; i < {{.Name}}.length; i++) {
-      {{encode (print .Name "[i]") .Type.SubType}}
-    }{{end}}
+»»for (int i = 0; i < {{.Name}}.length; i++) {
+»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»}{{end}}
 
 {{define "Decoder"}}
-  public static void decode(Decoder d, {{class .Name}} o) throws IOException {
-{{range .Fields}}    {{decode (print "o." (fieldname .Name)) .Type}}
-{{end}}  }{{end}}
+»public static void decode(Decoder d, {{class .Name}} o) throws IOException {
+{{range .Fields}}»»{{decode (print "o." (fieldname .Name)) .Type}}
+{{end}}»}{{end}}
 
 {{define "DecodeNative"}}{{.Name}} = d.{{lower .Type.Method}}();{{end}}
 {{define "DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
@@ -42,9 +42,9 @@
 {{define "DecodeObject"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
 
 {{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
-    for (int i = 0; i < {{.Name}}.length; i++) {
-      {{decode (print .Name "[i]") .Type.SubType}}
-    }{{end}}
+»»for (int i = 0; i < {{.Name}}.length; i++) {
+»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»}{{end}}
 
 {{define "File"}}/*
  * Copyright (C) 2015 The Android Open Source Project
@@ -73,21 +73,21 @@ import com.android.tools.rpclib.binary.ObjectTypeID;
 import java.io.IOException;
 
 class ObjectFactory {
-  public enum Entries implements BinaryObjectCreator {{"{"}}{{range .Structs}}
-    {{template "Enum" .}} {
-      @Override public BinaryObject create() {
-        return new {{class .Name}}();
-      }
-    },{{end}}
-  }
+»public enum Entries implements BinaryObjectCreator {{"{"}}{{range .Structs}}
+»»{{template "Enum" .}} {
+»»»@Override public BinaryObject create() {
+»»»»return new {{class .Name}}();
+»»»}
+»»},{{end}}
+»}
 {{range .Structs}}
-  public static byte[] {{template "IDBytes" .}} = { {{range .ID}}{{toS8 .}}, {{end}}{{"}"}};{{end}}
+»public static byte[] {{template "IDBytes" .}} = { {{range .ID}}{{toS8 .}}, {{end}}{{"}"}};{{end}}
 {{range .Structs}}
-  public static ObjectTypeID {{template "ID" .}} = new ObjectTypeID({{template "IDBytes" .}});{{end}}
+»public static ObjectTypeID {{template "ID" .}} = new ObjectTypeID({{template "IDBytes" .}});{{end}}
 
-  static {{"{"}}{{range .Structs}}
-    ObjectTypeID.register({{template "ID" .}}, Entries.{{template "Enum" .}});{{end}}
-  }{{range .Structs}}
+»static {{"{"}}{{range .Structs}}
+»»ObjectTypeID.register({{template "ID" .}}, Entries.{{template "Enum" .}});{{end}}
+»}{{range .Structs}}
 {{template "Encoder" .}}
 {{template "Decoder" .}}{{end}}
 }

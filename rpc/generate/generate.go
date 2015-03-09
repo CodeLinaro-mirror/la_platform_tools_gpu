@@ -223,13 +223,6 @@ func wrapStructWriter(f func(io.Writer, *binary.Struct) error) func(s *binary.St
 	}
 }
 
-func wrapFileWriter(f func(*binary.File) ([]byte, error)) func(s *binary.File) (string, error) {
-	return func(s *binary.File) (string, error) {
-		result, err := f(s)
-		return string(result), err
-	}
-}
-
 // Init prepares a new template processor that layers the apic one with
 // the functions from the binary codec generate package.
 func Init(apiFile string, api *semantic.API) *template.Functions {
@@ -240,8 +233,26 @@ func Init(apiFile string, api *semantic.API) *template.Functions {
 		"GoRegister": wrapStructWriter(binary.GoRegister),
 		"GoEncoder":  wrapStructWriter(binary.GoEncoder),
 		"GoDecoder":  wrapStructWriter(binary.GoDecoder),
-		"GoFile":     wrapFileWriter(binary.GoFile),
-		"JavaFile":   wrapFileWriter(binary.JavaFile),
+		"GoFile": func(s *binary.File) (string, error) {
+			result, err := binary.GoFile(s)
+			return string(result), err
+		},
+		"JavaFile": func(f *template.Functions) interface{} {
+			return func(s *binary.File) (string, error) {
+				javaFile := *s
+				if g, err := f.Global("package"); err == nil && g != nil {
+					javaFile.Package = fmt.Sprint(g)
+				}
+				if g, err := f.Global("indent"); err == nil && g != nil {
+					javaFile.Indent = fmt.Sprint(g)
+				}
+				if g, err := f.Global("member"); err == nil && g != nil {
+					javaFile.MemberPrefix = fmt.Sprint(g)
+				}
+				result, err := binary.JavaFile(&javaFile)
+				return string(result), err
+			}
+		},
 	})
 }
 

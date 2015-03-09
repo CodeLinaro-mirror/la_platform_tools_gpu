@@ -92,9 +92,11 @@ func run() error {
 	if *java != "" {
 		file := file
 		file.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
-		// pick off the package part
-		smashed := strings.Split(*java, "/com/")
-		file.Package = "com." + strings.Replace(smashed[len(smashed)-1], "/", ".", -1)
+		file.ClassPrefix = strings.Title(file.Package)
+		i := strings.LastIndex(*java, "/com/")
+		if i >= 0 {
+			file.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
+		}
 		filename := filepath.Join(*java, "ObjectFactory.java")
 		result, err := generate.JavaFile(&file)
 		if err != nil {
