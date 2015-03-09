@@ -26,34 +26,40 @@ limitations under the License.
 
   func (a api) Schema() service.Schema {
     s := schemaBuilder{
-      arrays:      make(map[int]*service.ArrayInfo),
-      maps:        make(map[int]*service.MapInfo),
-      enums:       make(map[int]*service.EnumInfo),
-      structs:     make(map[int]*service.StructInfo),
-      classes:     make(map[int]*service.ClassInfo),
-      boolInfo:    service.CreateSimpleInfo("bool",    service.TypeKindBool),
-      floatInfo:   service.CreateSimpleInfo("float",   service.TypeKindF32),
-      doubleInfo:  service.CreateSimpleInfo("double",  service.TypeKindF64),
-      intInfo:     service.CreateSimpleInfo("int",     service.TypeKindS8),
-      uintInfo:    service.CreateSimpleInfo("uint",    service.TypeKindU8),
-      s8Info:      service.CreateSimpleInfo("s8",      service.TypeKindS8),
-      u8Info:      service.CreateSimpleInfo("u8",      service.TypeKindU8),
-      s16Info:     service.CreateSimpleInfo("s16",     service.TypeKindS16),
-      u16Info:     service.CreateSimpleInfo("u16",     service.TypeKindU16),
-      s32Info:     service.CreateSimpleInfo("s32",     service.TypeKindS32),
-      u32Info:     service.CreateSimpleInfo("u32",     service.TypeKindU32),
-      s64Info:     service.CreateSimpleInfo("s64",     service.TypeKindS64),
-      u64Info:     service.CreateSimpleInfo("u64",     service.TypeKindU64),
-      pointerInfo: service.CreateSimpleInfo("pointer", service.TypeKindPointer),
-      memoryInfo:  service.CreateSimpleInfo("memory",  service.TypeKindMemory),
-      stringInfo:  service.CreateSimpleInfo("string",  service.TypeKindString),
-      anyInfo:     service.CreateSimpleInfo("any",     service.TypeKindAny),
+      arrays:       make(map[int]*service.ArrayInfo),
+      staticArrays: make(map[int]*service.StaticArrayInfo),
+      maps:         make(map[int]*service.MapInfo),
+      enums:        make(map[int]*service.EnumInfo),
+      structs:      make(map[int]*service.StructInfo),
+      classes:      make(map[int]*service.ClassInfo),
+      boolInfo:     service.CreateSimpleInfo("bool",    service.TypeKindBool),
+      floatInfo:    service.CreateSimpleInfo("float",   service.TypeKindF32),
+      doubleInfo:   service.CreateSimpleInfo("double",  service.TypeKindF64),
+      intInfo:      service.CreateSimpleInfo("int",     service.TypeKindS8),
+      uintInfo:     service.CreateSimpleInfo("uint",    service.TypeKindU8),
+      s8Info:       service.CreateSimpleInfo("s8",      service.TypeKindS8),
+      u8Info:       service.CreateSimpleInfo("u8",      service.TypeKindU8),
+      s16Info:      service.CreateSimpleInfo("s16",     service.TypeKindS16),
+      u16Info:      service.CreateSimpleInfo("u16",     service.TypeKindU16),
+      s32Info:      service.CreateSimpleInfo("s32",     service.TypeKindS32),
+      u32Info:      service.CreateSimpleInfo("u32",     service.TypeKindU32),
+      s64Info:      service.CreateSimpleInfo("s64",     service.TypeKindS64),
+      u64Info:      service.CreateSimpleInfo("u64",     service.TypeKindU64),
+      pointerInfo:  service.CreateSimpleInfo("pointer", service.TypeKindPointer),
+      memoryInfo:   service.CreateSimpleInfo("memory",  service.TypeKindMemory),
+      stringInfo:   service.CreateSimpleInfo("string",  service.TypeKindString),
+      anyInfo:      service.CreateSimpleInfo("any",     service.TypeKindAny),
     }
 
     return service.Schema{
       Arrays: service.ArrayInfoArray{
         {{range $id, $_ := $.Arrays}}
           s.getArrayInfo({{$id}}),
+        {{end}}
+      },
+      StaticArrays: service.StaticArrayInfoArray{
+        {{range $id, $_ := $.StaticArrays}}
+          s.getStaticArrayInfo({{$id}}),
         {{end}}
       },
       Maps: service.MapInfoArray{
@@ -72,7 +78,7 @@ limitations under the License.
         {{end}}
       },
       Atoms: service.AtomInfoArray{
-        {{range $i, $c := $.Functions}}{{Macro "Command" "Command" $c "Type" $i}}{{end}}
+        {{range $i, $c := AllCommands $}}{{Macro "Command" "Command" $c "Index" $i}}{{end}}
         {{Macro "FixedAtoms"}}
       },
       State: service.CreateStructInfo(
@@ -86,38 +92,46 @@ limitations under the License.
   }
 
   type schemaBuilder struct {
-    arrays      map[int]*service.ArrayInfo
-    maps        map[int]*service.MapInfo
-    enums       map[int]*service.EnumInfo
-    structs     map[int]*service.StructInfo
-    classes     map[int]*service.ClassInfo
-    boolInfo    service.TypeInfo
-    intInfo     service.TypeInfo
-    uintInfo    service.TypeInfo
-    floatInfo   service.TypeInfo
-    doubleInfo  service.TypeInfo
-    s8Info      service.TypeInfo
-    u8Info      service.TypeInfo
-    s16Info     service.TypeInfo
-    u16Info     service.TypeInfo
-    s32Info     service.TypeInfo
-    u32Info     service.TypeInfo
-    s64Info     service.TypeInfo
-    u64Info     service.TypeInfo
-    pointerInfo service.TypeInfo
-    memoryInfo  service.TypeInfo
-    stringInfo  service.TypeInfo
-    anyInfo     service.TypeInfo
+    arrays       map[int]*service.ArrayInfo
+    staticArrays map[int]*service.StaticArrayInfo
+    maps         map[int]*service.MapInfo
+    enums        map[int]*service.EnumInfo
+    structs      map[int]*service.StructInfo
+    classes      map[int]*service.ClassInfo
+    boolInfo     service.TypeInfo
+    intInfo      service.TypeInfo
+    uintInfo     service.TypeInfo
+    floatInfo    service.TypeInfo
+    doubleInfo   service.TypeInfo
+    s8Info       service.TypeInfo
+    u8Info       service.TypeInfo
+    s16Info      service.TypeInfo
+    u16Info      service.TypeInfo
+    s32Info      service.TypeInfo
+    u32Info      service.TypeInfo
+    s64Info      service.TypeInfo
+    u64Info      service.TypeInfo
+    pointerInfo  service.TypeInfo
+    memoryInfo   service.TypeInfo
+    stringInfo   service.TypeInfo
+    anyInfo      service.TypeInfo
   }
-  {{Macro "GetInfo" "Type" "Array"    "Map" "arrays"    "List" $.Arrays   }}
-  {{Macro "GetInfo" "Type" "Map"      "Map" "maps"      "List" $.Maps     }}
-  {{Macro "GetInfo" "Type" "Enum"     "Map" "enums"     "List" $.Enums    }}
-  {{Macro "GetInfo" "Type" "Class"    "Map" "classes"   "List" $.Classes  }}
+  {{Macro "GetInfo" "Type" "Array"       "Map" "arrays"       "List" $.Arrays      }}
+  {{Macro "GetInfo" "Type" "StaticArray" "Map" "staticArrays" "List" $.StaticArrays}}
+  {{Macro "GetInfo" "Type" "Map"         "Map" "maps"         "List" $.Maps        }}
+  {{Macro "GetInfo" "Type" "Enum"        "Map" "enums"        "List" $.Enums       }}
+  {{Macro "GetInfo" "Type" "Class"       "Map" "classes"      "List" $.Classes     }}
 
 {{end}}
 
-
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic for retrieving information for the specified items list.
+-------------------------------------------------------------------------------
+*/}}
 {{define "GetInfo"}}
+  {{AssertType $.Type "string"}}
+
   func (s schemaBuilder) get{{$.Type}}Info(id int) *service.{{$.Type}}Info {
     e, f := s.{{$.Map}}[id]
     if f {
@@ -134,7 +148,15 @@ limitations under the License.
   }
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified array.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Array"}}
+  {{AssertType $ "Array"}}
+
   service.CreateArrayInfo(
     "{{$.Name}}",
     service.TypeKindArray,
@@ -142,7 +164,32 @@ limitations under the License.
   )
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified static array.
+-------------------------------------------------------------------------------
+*/}}
+{{define "StaticArray"}}
+  {{AssertType $ "StaticArray"}}
+
+  service.CreateStaticArrayInfo(
+    "{{$.Name}}",
+    service.TypeKindStaticArray,
+    []uint32{ {{range $d := $.Dimensions}}{{$d}}, {{end}} },
+    {{Macro "TypeInfo" $.ValueType}},
+  )
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified map.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Map"}}
+  {{AssertType $ "Map"}}
+
   service.CreateMapInfo(
     "{{$.Name}}",
     service.TypeKindMap,
@@ -151,13 +198,21 @@ limitations under the License.
   )
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified enum.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Enum"}}
+  {{AssertType $ "Enum"}}
+
   {{$api := Global "api"}}
   service.CreateEnumInfo(
     "{{$.Name}}",
     service.TypeKindEnum,
     []service.EnumEntry{
-      {{range $_, $v := $.Entries}}
+      {{range $v := $.Entries}}
         service.EnumEntry{
           Name:  "{{$v.Name}}",
           Value: {{$v.Value}},
@@ -172,17 +227,15 @@ limitations under the License.
   )
 {{end}}
 
-{{define "Struct"}}
-  service.CreateStructInfo(
-    "{{$.Name}}",
-    service.TypeKindStruct,
-    service.FieldInfoArray{
-      {{Macro "Fields" $}}
-    },
-  )
-{{end}}
 
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified class.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Class"}}
+  {{AssertType $ "Class"}}
+
   {{$api := Global "api"}}
   service.CreateClassInfo(
     "{{$.Name}}",
@@ -198,8 +251,16 @@ limitations under the License.
   )
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for all global variables of the specified API.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Globals"}}
-  {{range $_, $g := $.Globals}}
+  {{AssertType $ "API"}}
+
+  {{range $g := $.Globals}}
     &service.FieldInfo{
       Name: "{{$g.Name}}",
       Type: {{Macro "TypeInfo" (TypeOf $g)}},
@@ -207,21 +268,37 @@ limitations under the License.
   {{end}}
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for all fields of the specified class.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Fields"}}
-  {{range $_, $v := $.Fields}}
+  {{AssertType $ "Class"}}
+
+  {{range $f := $.Fields}}
     &service.FieldInfo{
-      Name: "{{$v.Name}}",
-      Type: {{Macro "TypeInfo" (TypeOf $v)}},
+      Name: "{{$f.Name}}",
+      Type: {{Macro "TypeInfo" (TypeOf $f)}},
     },
   {{end}}
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for the specified command.
+-------------------------------------------------------------------------------
+*/}}
 {{define "Command"}}
+  {{AssertType $.Command "Function"}}
+
   service.AtomInfo{
-    Type:       {{$.Type}},
+    Type:       {{$.Index}},
     Name:       "{{$.Command.Name}}",
     Parameters: []service.ParameterInfo{
-      {{range $_, $p := $.Command.CallParameters}}
+      {{range $p := $.Command.CallParameters}}
         service.ParameterInfo{
           Name: "{{$p.Name}}",
           Type: {{Macro "TypeInfo" (TypeOf $p)}},
@@ -236,6 +313,12 @@ limitations under the License.
   },
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits information for manually declared atoms.
+-------------------------------------------------------------------------------
+*/}}
 {{define "FixedAtoms"}}
   service.AtomInfo{
     Type:       uint16(memory.TypeIDObservation),
@@ -257,10 +340,17 @@ limitations under the License.
   },
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits logic to get the information for the given item.
+-------------------------------------------------------------------------------
+*/}}
 {{define "TypeInfo"}}§
   {{$api := Global "api"}}
   {{     if IsPseudonym     $}}{{Macro "TypeInfo" $.To}}
   {{else if IsArray         $}}s.getArrayInfo({{IndexOf $api.Arrays $}})
+  {{else if IsStaticArray   $}}s.getStaticArrayInfo({{IndexOf $api.StaticArrays $}})
   {{else if IsMap           $}}s.getMapInfo({{IndexOf $api.Maps $}})
   {{else if IsEnum          $}}s.getEnumInfo({{IndexOf $api.Enums $}})
   {{else if IsClass         $}}s.getClassInfo({{IndexOf $api.Classes $}})

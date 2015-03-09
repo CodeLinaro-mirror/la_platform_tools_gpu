@@ -16,7 +16,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Block"}}
-  {{range $_, $s := $.Statements}}
+  {{range $s := $.Statements}}
     {{Macro "Statement" $s}}
   {{end}}
 {{end}}
@@ -42,9 +42,9 @@ limitations under the License.
     }
   {{else if IsSwitch $}}
     switch {{Macro "Read" $.Value}} {
-      {{range $i, $c := $.Cases}}
-        case {{range $j, $cond := $c.Conditions}}§
-          {{if $j}}, {{end}}{{Macro "Read" $cond}}§
+      {{range $c := $.Cases}}
+        case {{range $i, $cond := $c.Conditions}}§
+          {{if $i}}, {{end}}{{Macro "Read" $cond}}§
           {{end}}:
             {{Macro "Block" $c.Block}}
       {{end}}
@@ -162,9 +162,9 @@ limitations under the License.
   {{else if IsSelect       $}}
     func() (result {{Macro "Go.Type" $}}) {
       switch {{Macro "Read" $.Value}} {
-        {{range $i, $c := $.Choices}}
-          case {{range $j, $cond := $c.Conditions}}§
-            {{if $j}}, {{end}}{{Macro "Read" $cond}}§
+        {{range $c := $.Choices}}
+          case {{range $i, $cond := $c.Conditions}}§
+            {{if $i}}, {{end}}{{Macro "Read" $cond}}§
             {{end}}:
               return {{Macro "Read" $c.Expression}}
         {{end}}
@@ -177,7 +177,7 @@ limitations under the License.
   {{else if IsClassInitializer $}}func(){{Macro "Go.Type" $}}{
     s := {{Macro "Go.Type" $}}{}
     s.Init()
-    {{range $i, $f := $.Fields}}
+    {{range $f := $.Fields}}
       s.{{$f.Field.Name}} = {{Macro "Read" $f.Value}}
     {{end}}
     return s
@@ -185,7 +185,7 @@ limitations under the License.
   {{else if IsNew $}}func(){{Macro "Go.Type" $}}{
     s := &{{Macro "Go.Type" (Unpack $.Type).To}}{}
     s.Init()
-    {{range $i, $f := $.Initializer.Fields}}
+    {{range $f := $.Initializer.Fields}}
       s.{{$f.Field.Name}} = {{Macro "Read" $f.Value}}
     {{end}}
     return s

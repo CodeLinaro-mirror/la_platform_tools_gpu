@@ -29,6 +29,7 @@ limitations under the License.
   {{else if IsAny           $}}interface{}
   {{else if IsPseudonym     $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsArray         $}}{{Macro "Go.QualifiedName" $}}
+  {{else if IsStaticArray   $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsMap           $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsPointer       $}}*{{Macro "Go.QualifiedName" $.To}}
   {{else if IsClass         $}}{{Macro "Go.QualifiedName" $}}
@@ -66,6 +67,7 @@ limitations under the License.
 
   {{     if IsPseudonym     $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
   {{else if IsArray         $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
+  {{else if IsStaticArray   $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
   {{else if IsMap           $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
   {{else if IsClass         $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
   {{else if IsPointer       $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
@@ -104,6 +106,7 @@ limitations under the License.
 
   {{     if IsPseudonym     $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsArray         $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
+  {{else if IsStaticArray   $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsMap           $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsClass         $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsPointer       $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
@@ -172,21 +175,21 @@ limitations under the License.
   Emits the name of the specified command's structure.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.CmdName"}}{{AssertType $ "Function"}}{{Macro "Go.Public" $.Name}}{{end}}
+{{define "Go.CmdName"}}{{AssertType $ "Function"}}{{if $.Owner}}{{Macro "Go.Type" $.Owner}}{{end}}{{Macro "Go.Public" $.Name}}{{end}}
 
 {{/*
 -------------------------------------------------------------------------------
   Emits the name of the specified command's input parameter structure.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.CmdInsName"}}{{AssertType $ "Function"}}{{Macro "Go.Public" $.Name}}_In{{end}}
+{{define "Go.CmdInsName"}}{{Macro "Go.CmdName" $}}_In{{end}}
 
 {{/*
 -------------------------------------------------------------------------------
   Emits the name of the specified command's output parameter structure.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.CmdOutsName"}}{{AssertType $ "Function"}}{{Macro "Go.Public" $.Name}}_Out{{end}}
+{{define "Go.CmdOutsName"}}{{Macro "Go.CmdName" $}}_Out{{end}}
 
 
 {{/*
