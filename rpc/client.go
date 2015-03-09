@@ -54,7 +54,7 @@ func (b Client) Send(call binary.Encodable) (interface{}, error) {
 	e := binary.NewEncoder(w)
 
 	// Write the RPC header
-	if err := e.Uint32(header); err != nil {
+	if err := e.WriteFull(header[:]); err != nil {
 		return nil, err
 	}
 
