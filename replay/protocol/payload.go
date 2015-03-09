@@ -12,23 +12,16 @@
 // See the License for the specific language governing permissions ands
 // limitations under the License.
 
-//go:generate codergen -go=payload_code.go payload.go
-
 package protocol
 
-import "android.googlesource.com/platform/tools/gpu/binary"
-
-// Hack to make codergen use the binary.Data Encode/Decode methods
-// rather than encoding and decoding a byte at a time.
-// BUG: b/19474821
-type Data struct {
-	binary.Data
-}
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 // ResourceInfo describes a resource used by a Payload.
 type ResourceInfo struct {
-	ID   string // The resource identifier as a string.
-	Size uint32 // The size in bytes of the resource.
+	ID   binary.ID // The resource identifier as a string.
+	Size uint32    // The size in bytes of the resource.
 }
 
 // Payload contains all the information to perform a replay. The encoded form
@@ -36,7 +29,82 @@ type ResourceInfo struct {
 type Payload struct {
 	StackSize          uint32         // Maximum number of values.
 	VolatileMemorySize uint32         // In bytes.
-	Constants          Data           // The constant buffer.
+	Constants          []byte         // The constant buffer.
 	Resources          []ResourceInfo // Resources used by this replay payload.
-	Opcodes            Data           // The encoded list of opcodes.
+	Opcodes            []byte         // The encoded list of opcodes.
+}
+
+func (p *Payload) Encode(e *Encoder) error {
+	if err := e.Uint32(p.StackSize); err != nil {
+		return err
+	}
+	if err := e.Uint32(p.VolatileMemorySize); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(p.Constants))); err != nil {
+		return err
+	}
+	if _, err := e.Write(p.Constants); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(p.Resources))); err != nil {
+		return err
+	}
+	for _, r := range p.Resources {
+		if err := e.String(r.ID.String()); err != nil {
+			return err
+		}
+		if err := e.Uint32(r.Size); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(p.Opcodes))); err != nil {
+		return err
+	}
+	if _, err := e.Write(p.Opcodes); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p *Payload) Decode(d *Decoder) (err error) {
+	if p.StackSize, err = d.Uint32(); err != nil {
+		return err
+	}
+	if p.VolatileMemorySize, err = d.Uint32(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		p.Constants = make([]byte, count)
+		if _, err = d.Read(p.Constants); err != nil {
+			return err
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		p.Resources = make([]ResourceInfo, count)
+		for i := range p.Resources {
+			r := &p.Resources[i]
+			if s, err := d.String(); err != nil {
+				return err
+			} else if r.ID, err = binary.ParseID(s); err != nil {
+				return err
+			}
+			if r.Size, err = d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		p.Opcodes = make([]byte, count)
+		if _, err = d.Read(p.Opcodes); err != nil {
+			return err
+		}
+	}
+	return nil
 }

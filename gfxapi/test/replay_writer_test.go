@@ -35,7 +35,7 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 
 	payload, _ := b.Build(log.Nop{})
 
-	ops := bytes.NewBuffer(payload.Opcodes.Data)
+	ops := bytes.NewBuffer(payload.Opcodes)
 	gotOpcodes, err := opcode.Disassemble(ops, binary.LittleEndian)
 	if err != nil {
 		t.Errorf("Failed to disassemble opcodes: %v", err)
@@ -43,7 +43,7 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 	opcode.CheckDisassembly(t, gotOpcodes, opcodes...)
 
 	gotConstants := payload.Constants
-	if !bytes.Equal(gotConstants.Data, constants) {
+	if !bytes.Equal(gotConstants, constants) {
 		t.Errorf("Constant buffer was not as expected.\nGot:      % .2x\nExpected: % .2x", gotConstants, constants)
 	}
 }

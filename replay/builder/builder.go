@@ -370,7 +370,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 		idx = uint32(len(b.resources))
 		b.resourceIDToIdx[resourceID] = idx
 		b.resources = append(b.resources, protocol.ResourceInfo{
-			ID:   resourceID.String(),
+			ID:   resourceID,
 			Size: uint32(rng.Size),
 		})
 	}
@@ -397,15 +397,15 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	payload := protocol.Payload{
 		StackSize:          uint32(512), // TODO: Calculate stack size
 		VolatileMemorySize: uint32(vml.size),
-		Constants:          protocol.Data{b.constantMemory.data},
+		Constants:          b.constantMemory.data,
 		Resources:          b.resources,
-		Opcodes:            protocol.Data{opcodes.Bytes()},
+		Opcodes:            opcodes.Bytes(),
 	}
 
 	logger.Info("Stack size:           0x%x", payload.StackSize)
 	logger.Info("Volatile memory size: 0x%x", payload.VolatileMemorySize)
-	logger.Info("Constant memory size: 0x%x", len(payload.Constants.Data))
-	logger.Info("Opcodes size:         0x%x", len(payload.Opcodes.Data))
+	logger.Info("Constant memory size: 0x%x", len(payload.Constants))
+	logger.Info("Opcodes size:         0x%x", len(payload.Opcodes))
 	logger.Info("Resource count:         %d", len(payload.Resources))
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
