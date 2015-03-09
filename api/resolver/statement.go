@@ -31,6 +31,7 @@ func block(ctx *context, in *ast.Block, owner semantic.Node) *semantic.Block {
 			ctx.addStatement(r)
 		}
 	})
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -101,6 +102,7 @@ func assert(ctx *context, in *ast.Assert) *semantic.Assert {
 	if !equal(t, semantic.BoolType) {
 		ctx.errorf(in, "assert expression must be a bool, got %s", typename(t))
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -116,12 +118,15 @@ func assign(ctx *context, in *ast.Assign) semantic.Node {
 	if !assignable(lt, rt) {
 		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
 	}
+	var out semantic.Node
 	switch lhs := lhs.(type) {
 	case *semantic.MapIndex:
-		return &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
+		out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
 	default:
-		return &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
+		out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
 	}
+	ctx.mappings[in] = out
+	return out
 }
 
 func addLocal(ctx *context, in *ast.DeclareLocal, name string, value semantic.Expression) *semantic.DeclareLocal {
@@ -136,11 +141,14 @@ func addLocal(ctx *context, in *ast.DeclareLocal, name string, value semantic.Ex
 		ctx.errorf(in, "void in local declaration")
 	}
 	ctx.add(out.Local.Name, out.Local)
+	ctx.mappings[in] = out
 	return out
 }
 
 func declareLocal(ctx *context, in *ast.DeclareLocal) *semantic.DeclareLocal {
-	return addLocal(ctx, in, in.Name.Value, expression(ctx, in.RHS))
+	out := addLocal(ctx, in, in.Name.Value, expression(ctx, in.RHS))
+	ctx.mappings[in] = out
+	return out
 }
 
 func branch(ctx *context, in *ast.Branch) *semantic.Branch {
@@ -156,6 +164,7 @@ func branch(ctx *context, in *ast.Branch) *semantic.Branch {
 	}
 	out.True = block(ctx, in.True, out)
 	out.False = block(ctx, in.False, out)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -166,6 +175,7 @@ func switch_(ctx *context, in *ast.Switch) *semantic.Switch {
 	for _, c := range in.Cases {
 		out.Cases = append(out.Cases, case_(ctx, c, vt))
 	}
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -185,11 +195,13 @@ func case_(ctx *context, in *ast.Case, vt semantic.Type) *semantic.Case {
 		}
 	})
 	out.Block = block(ctx, in.Block, out)
+	ctx.mappings[in] = out
 	return out
 }
 
 func iteration(ctx *context, in *ast.Iteration) *semantic.Iteration {
 	v := &semantic.Local{Name: in.Variable.Value}
+	ctx.mappings[in.Variable] = v
 	out := &semantic.Iteration{AST: in, Iterator: v}
 	out.Iterable = expression(ctx, in.Iterable)
 	if b, ok := out.Iterable.(*semantic.BinaryOp); !ok {
@@ -202,6 +214,7 @@ func iteration(ctx *context, in *ast.Iteration) *semantic.Iteration {
 		ctx.add(v.Name, v)
 		out.Block = block(ctx, in.Block, out)
 	})
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -216,5 +229,6 @@ func return_(ctx *context, in *ast.Return, f *semantic.Function) *semantic.Retur
 	if !assignable(f.Return.Type, rt) {
 		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(f.Return.Type))
 	}
+	ctx.mappings[in] = out
 	return out
 }

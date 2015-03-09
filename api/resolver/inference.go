@@ -22,49 +22,53 @@ import (
 )
 
 func inferNumber(ctx *context, in *ast.Number, infer semantic.Type) semantic.Expression {
+	var out semantic.Expression
 	switch infer {
 	case semantic.Int8Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 8); err == nil {
-			return semantic.Int8Value(v)
+			out = semantic.Int8Value(v)
 		}
 	case semantic.Uint8Type:
 		if v, err := strconv.ParseUint(in.Value, 0, 8); err == nil {
-			return semantic.Uint8Value(v)
+			out = semantic.Uint8Value(v)
 		}
 	case semantic.Int16Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 16); err == nil {
-			return semantic.Int16Value(v)
+			out = semantic.Int16Value(v)
 		}
 	case semantic.Uint16Type:
 		if v, err := strconv.ParseUint(in.Value, 0, 16); err == nil {
-			return semantic.Uint16Value(v)
+			out = semantic.Uint16Value(v)
 		}
 	case semantic.Int32Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 32); err == nil {
-			return semantic.Int32Value(v)
+			out = semantic.Int32Value(v)
 		}
 	case semantic.Uint32Type:
 		if v, err := strconv.ParseUint(in.Value, 0, 32); err == nil {
-			return semantic.Uint32Value(v)
+			out = semantic.Uint32Value(v)
 		}
 	case semantic.Int64Type:
 		if v, err := strconv.ParseInt(in.Value, 0, 64); err == nil {
-			return semantic.Int64Value(v)
+			out = semantic.Int64Value(v)
 		}
 	case semantic.Uint64Type:
 		if v, err := strconv.ParseUint(in.Value, 0, 64); err == nil {
-			return semantic.Uint64Value(v)
+			out = semantic.Uint64Value(v)
 		}
 	case semantic.Float32Type:
 		if v, err := strconv.ParseFloat(in.Value, 32); err == nil {
-			return semantic.Float32Value(v)
+			out = semantic.Float32Value(v)
 		}
 	case semantic.Float64Type:
 		if v, err := strconv.ParseFloat(in.Value, 64); err == nil {
-			return semantic.Float64Value(v)
+			out = semantic.Float64Value(v)
 		}
+	default:
+		return nil
 	}
-	return nil
+	ctx.mappings[in] = out
+	return out
 }
 
 func inferUnknown(ctx *context, lhs semantic.Node, rhs semantic.Node) {

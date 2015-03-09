@@ -50,7 +50,8 @@ func simpleType(ctx *context, in *ast.Identifier) semantic.Type {
 		ctx.errorf(in, "Type %s not found", name)
 		return semantic.VoidType
 	}
-	if a, ok := out.(*alias); ok {
+	ctx.mappings[in] = out
+	if a, ok := out.(*Alias); ok {
 		if a.To == nil {
 			a.To = type_(ctx, a.AST.To)
 		}
@@ -71,6 +72,7 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 			if !equal(vt, m.ValueType) {
 				ctx.icef(in, "Map %s found with non matching value, got %s expected %s", name, typename(m.ValueType), typename(vt))
 			}
+			ctx.mappings[in] = m
 			return m
 		}
 	}
@@ -114,6 +116,7 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 		out.Members[f.Name] = f
 	}
 	ctx.api.Maps = append(ctx.api.Maps, out)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -125,6 +128,7 @@ func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
 			if !equal(vt, a.ValueType) {
 				ctx.icef(in, "Array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(vt))
 			}
+			ctx.mappings[in] = a
 			return a
 		}
 	}
@@ -133,6 +137,7 @@ func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
 		ValueType: vt,
 	}
 	ctx.api.Arrays = append(ctx.api.Arrays, out)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -144,6 +149,7 @@ func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArra
 			if !equal(vt, a.ValueType) {
 				ctx.icef(in, "Static array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(vt))
 			}
+			ctx.mappings[in] = a
 			return a
 		}
 	}
@@ -162,6 +168,7 @@ func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArra
 		}
 	})
 	ctx.api.StaticArrays = append(ctx.api.StaticArrays, out)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -185,7 +192,9 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 
 func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
 	vt := type_(ctx, in.To)
-	return getPointerType(ctx, in, vt)
+	out := getPointerType(ctx, in, vt)
+	ctx.mappings[in] = out
+	return out
 }
 
 func enum(ctx *context, out *semantic.Enum) {
@@ -210,6 +219,7 @@ func enum(ctx *context, out *semantic.Enum) {
 		}
 		out.Entries = append(out.Entries, entry)
 		out.AllEntries = append(out.AllEntries, entry)
+		ctx.mappings[e] = entry
 	}
 	for _, extends := range in.Extends {
 		t := ctx.findType(extends, extends.Value)
@@ -223,11 +233,13 @@ func enum(ctx *context, out *semantic.Enum) {
 				copy.Enum = out
 				out.AllEntries = append(out.AllEntries, &copy)
 			}
+			ctx.mappings[extends] = e
 		}
 	}
 	for _, entry := range out.AllEntries {
 		ctx.add(entry.Name, entry)
 	}
+	ctx.mappings[in] = out
 }
 
 func class(ctx *context, out *semantic.Class) {
@@ -240,6 +252,7 @@ func class(ctx *context, out *semantic.Class) {
 		} else {
 			out.Extends = append(out.Extends, c)
 			c.ExtendedBy = append(c.ExtendedBy, out)
+			ctx.mappings[extends] = c
 		}
 	}
 	out.Fields = make([]*semantic.Field, len(in.Fields))
@@ -248,6 +261,7 @@ func class(ctx *context, out *semantic.Class) {
 		out.Fields[i] = field
 		out.Members[field.Name] = field
 	}
+	ctx.mappings[in] = out
 }
 
 func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
@@ -266,6 +280,7 @@ func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
 			ctx.errorf(in, "cannot assign %s to %s", typename(dt), typename(out.Type))
 		}
 	}
+	ctx.mappings[in] = out
 	return out
 }
 

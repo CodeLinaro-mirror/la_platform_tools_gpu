@@ -70,7 +70,7 @@ func api(ctx *context, out *semantic.API) {
 		}
 		// Add all the alias remaps
 		for _, a := range in.Aliases {
-			ctx.addType(&alias{AST: a, Name: a.Name.Value})
+			ctx.addType(&Alias{AST: a, Name: a.Name.Value})
 		}
 		// Now resolve all the references
 		for _, e := range out.Enums {
@@ -118,6 +118,7 @@ func annotations(ctx *context, in ast.Annotations) semantic.Annotations {
 			entry.Arguments = append(entry.Arguments, expression(ctx, arg))
 		}
 		out = append(out, entry)
+		ctx.mappings[a] = entry
 	}
 	return out
 }
@@ -138,18 +139,20 @@ func global(ctx *context, out *semantic.Global) {
 			ctx.errorf(in, "cannot assign %s to %s", typename(dt), typename(out.Type))
 		}
 	}
+	ctx.mappings[in] = out
 }
 
-// alias is used as a temporary type holder during type resolution,
-// it is not present in the final tree returned.
-type alias struct {
+// Alias is used as a temporary type holder during type resolution.
+// It is not present in the final semantic tree returned, but may be present
+// in the AST -> semantic map.
+type Alias struct {
 	AST  *ast.Alias
 	Name string
 	To   semantic.Type
 }
 
-func (t alias) Typename() string                 { return t.Name }
-func (t alias) Member(name string) semantic.Node { return nil }
+func (t Alias) Typename() string                 { return t.Name }
+func (t Alias) Member(name string) semantic.Node { return nil }
 
 // arraysByName is used to sort the array list by name for generated code stability
 type arraysByName []*semantic.Array

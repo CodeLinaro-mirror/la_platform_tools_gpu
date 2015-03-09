@@ -63,6 +63,7 @@ func functionSignature(ctx *context, out *semantic.Function) {
 		}
 	}
 	out.Signature = getSignature(ctx, in, out.Return.Type, args)
+	ctx.mappings[in] = out
 }
 
 func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *semantic.Parameter {
@@ -77,6 +78,7 @@ func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *seman
 	}
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
+	ctx.mappings[in] = out
 	return out
 }
 
@@ -100,6 +102,7 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 			out.Block = block(ctx, in.Block, out)
 		})
 	}
+	ctx.mappings[in] = out
 }
 
 func method(ctx *context, in *ast.Function) {
@@ -126,6 +129,7 @@ func method(ctx *context, in *ast.Function) {
 	default:
 		ctx.errorf(in, "invalid type for this , got %s[%T]", typename(t), t)
 	}
+	ctx.mappings[in] = out
 }
 
 func getSignature(ctx *context, at ast.Node, r semantic.Type, args []semantic.Type) *semantic.Signature {

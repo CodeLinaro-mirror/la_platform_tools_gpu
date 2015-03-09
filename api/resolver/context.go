@@ -23,11 +23,12 @@ import (
 )
 
 type context struct {
-	errors parse.ErrorList
-	api    *semantic.API
-	types  map[string]semantic.Type
-	scope  *scope
-	nextId uint64
+	errors   parse.ErrorList
+	api      *semantic.API
+	types    map[string]semantic.Type
+	scope    *scope
+	nextId   uint64
+	mappings ASTToSemantic
 }
 
 type scope struct {

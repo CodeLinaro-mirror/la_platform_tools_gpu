@@ -23,20 +23,24 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
+// ASTToSemantic is a relational map of AST nodes to semantic nodes.
+type ASTToSemantic map[ast.Node]semantic.Node
+
 // Resolve takes a valid ast as produced by the parser and converts it to the
 // semantic graph form.
 // If the ast is not fully valid (ie there were parse errors) then the results
 // are undefined, and may include null pointer access.
 // If there are semantic problems with the ast, Resolve will return the set of
 // errors it finds, and the returned graph may be incomplete/invalid.
-func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList) {
+func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList, ASTToSemantic) {
 	ctx := &context{
 		api: &semantic.API{
 			AST:     compiled,
 			Members: semantic.Members{},
 		},
-		types: map[string]semantic.Type{},
-		scope: &scope{entries: map[string][]semantic.Node{}},
+		types:    map[string]semantic.Type{},
+		scope:    &scope{entries: map[string][]semantic.Node{}},
+		mappings: make(ASTToSemantic),
 	}
 	func() {
 		defer func() {
@@ -51,5 +55,5 @@ func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList) {
 		}
 		api(ctx, ctx.api)
 	}()
-	return ctx.api, ctx.errors
+	return ctx.api, ctx.errors, ctx.mappings
 }
