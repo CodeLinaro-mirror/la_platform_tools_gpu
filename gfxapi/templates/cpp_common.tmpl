@@ -65,22 +65,7 @@ limitations under the License.
 {{/*
 -------------------------------------------------------------------------------
   Emits the comma-separated list of type-name paired parameters for given
-  function, including the return type.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.FullParameters"}}
-  {{AssertType $ "Function"}}
-
-  {{range $i, $p := $.FullParameters}}
-    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} {{$p.Name}}§
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the comma-separated list of type-name paired parameters for given
-  function, excluding the return type.
+  function.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.CallParameters"}}
@@ -103,6 +88,20 @@ limitations under the License.
 
   {{range $i, $p := $.CallParameters}}
     {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} §
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the comma-separated list of argument names for the given function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.CallArguments"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}}, {{end}}{{$p.Name}}§
   {{end}}
 {{end}}
 
@@ -160,12 +159,12 @@ limitations under the License.
 */}}
 {{define "C++.Statement"}}
   {{     if IsDeclareLocal $}}{{Macro "C++.StateType" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
-  {{else if IsAssign       $}}{{Macro "C++.Read" $.LHS}} = {{Macro "C++.Read" $.RHS}};
-  {{else if IsMapAssign    $}}{{Macro "C++.Read" $.To.Map}}[{{Macro "C++.Read" $.To.Index}}] = {{Macro "C++.Read" $.Value}};
+  {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
+  {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
   {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
   {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
-    {{Macro "C++.Block" $.True}}
-    {{if len $.False.Statements}}
+      {{Macro "C++.Block" $.True}}
+      {{if len $.False.Statements}}
     } else {
       {{Macro "C++.Block" $.False}}
     {{end}}
@@ -173,9 +172,10 @@ limitations under the License.
   {{else if IsSwitch $}}
     switch ({{Macro "C++.Read" $.Value}}) {
       {{range $c := $.Cases}}
-        «case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}:»
+        case {{range $j, $cond := $c.Conditions}}{{if $j}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}: {
             {{Macro "C++.Block" $c.Block}}
-            break;¶
+            break;
+        }
       {{end}}
     }
   {{else if IsIteration $}}{{Macro "C++.Iteration" $}}
@@ -183,6 +183,30 @@ limitations under the License.
   {{else if IsAssert    $}}
   {{else                 }}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform an assign statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Assign"}}
+  {{AssertType $ "Assign"}}
+
+  {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform a map assign statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.MapAssign"}}
+  {{AssertType $ "MapAssign"}}
+
+  {{Macro "C++.Read" $.To.Map}}[{{Macro "C++.Read" $.To.Index}}] {{$.Operator}} {{Macro "C++.Read" $.Value}};
 {{end}}
 
 
@@ -217,7 +241,7 @@ limitations under the License.
   {{else if IsStringValue      $}}{{printf "%q" $}}
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
-  {{else if IsEnumEntry        $}}{{$.Enum.Name}}.{{$.Name}}
+  {{else if IsEnumEntry        $}}{{$.Enum.Name}}::{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
   {{else if IsBitTest          $}}(({{Macro "C++.Read" $.Bits}}) & ({{Macro "C++.Read" $.Bitfield}}) != 0)
   {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
@@ -233,7 +257,7 @@ limitations under the License.
   {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
   {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
   {{else if IsClassInitializer $}}{{Macro "C++.StateType" $}}()
-  {{else if IsNew              $}}new {{Macro "C++.StateType" (Unpack $.Type).To}}()
+  {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.StateType" $ty.To}}>(new {{Macro "C++.StateType" $ty.To}}())
   {{else if IsSelect           $}}
     /* switch({{Macro "C++.Read" $.Value}}) */»
     {{range $c := $.Choices}}
