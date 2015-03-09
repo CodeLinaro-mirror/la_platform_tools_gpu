@@ -95,6 +95,14 @@ model {
         gcc(Gcc) {
           target('linux64') {
             cppCompiler.withArguments { it << '-DTARGET_OS_LINUX' }
+            cppCompiler.withArguments { it << '-I'+gccIncludePath() }
+            if (System.getenv('GCC_TOOLCHAIN_ROOT')) {
+              cppCompiler.executable 'x86_64-linux-g++'
+              cCompiler.executable 'x86_64-linux-gcc'
+              linker.executable 'x86_64-linux-g++'
+              assembler.executable 'x86_64-linux-as'
+              staticLibArchiver.executable 'x86_64-linux-ar'
+            }
           }
           target('windows64') {
             cppCompiler.withArguments { it << '-DTARGET_OS_WINDOWS' }
@@ -139,8 +147,8 @@ libraries {
 
   caze {
     binaries.all {
-      cppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
-      objcppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
+      cppCompiler.args '-std=c++11', '-I'+gccIncludePath(), '-O3'
+      objcppCompiler.args '-std=c++11', '-I'+gccIncludePath(), '-O3'
     }
   }
 }
@@ -148,7 +156,7 @@ libraries {
 executables {
   replayd {
     binaries.all {
-      cppCompiler.args '-std=c++11', '-I/usr/local/include', '-O3'
+      cppCompiler.args '-std=c++11', '-I'+gccIncludePath(), '-O3'
       lib libraries.caze.static
       linker.args(*cazeLinkerArgs(targetPlatform.name))
     }
@@ -156,7 +164,7 @@ executables {
 
   test {
     binaries.all {
-      cppCompiler.args '-std=c++11', '-I', file(gtestBasePath+'include').absolutePath, '-I', file(gmockBasePath+'include').absolutePath, '-I', '/usr/local/include', '-g'
+      cppCompiler.args '-std=c++11', '-I', file(gtestBasePath+'include').absolutePath, '-I', file(gmockBasePath+'include').absolutePath, '-I', gccIncludePath(), '-g'
       lib libraries.caze.static
       lib libraries.gtest.static
       lib libraries.gmock.static
@@ -265,6 +273,7 @@ def cazeLinkerArgs(targetPlatformName) {
       '-lm',
       '-lpthread',
       '-lX11',
+      '-lrt'
     ]
     case 'osx64': return [
       '-framework', 'Cocoa',
@@ -287,4 +296,11 @@ def cazeLinkerArgs(targetPlatformName) {
 
 def mingwRoot() {
   return System.getenv('MINGW_ROOT') ?: '/usr/local/mingw-root'
+}
+
+def gccIncludePath() {
+  if (System.getenv('GCC_TOOLCHAIN_ROOT')) {
+    return System.getenv('GCC_TOOLCHAIN_ROOT') + '/sysroot/usr/include'
+  }
+  return '/usr/local/include'
 }
