@@ -952,9 +952,25 @@ class Mat4f {
   Vec4f Col3
 }
 
+@union
+class UniformValue {
+    f32               F32
+    Vec2f             Vec2f
+    Vec3f             Vec3f
+    Vec4f             Vec4f
+    s32               S32
+    Vec2i             Vec2i
+    Vec3i             Vec3i
+    Vec4i             Vec4i
+    Mat2f             Mat2f
+    Mat3f             Mat3f
+    Mat4f             Mat4f
+}
+
 class Uniform {
-    string Name
-    any    Value
+    string            Name
+    ShaderUniformType Type
+    UniformValue      Value
 }
 
 class Program{
@@ -1598,7 +1614,8 @@ cmd void glUniform1i(UniformLocation location, s32 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = value
+    uniform.Type = GL_INT
+    uniform.Value.S32 = value
     program.Uniforms[location] = uniform
 }
 
@@ -1606,7 +1623,8 @@ cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec2i{X: value0, Y: value1}
+    uniform.Type = GL_INT_VEC2
+    uniform.Value.Vec2i = Vec2i{X: value0, Y: value1}
     program.Uniforms[location] = uniform
 }
 
@@ -1614,7 +1632,8 @@ cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec3i{X: value0, Y: value1, Z: value2}
+    uniform.Type = GL_INT_VEC3
+    uniform.Value.Vec3i = Vec3i{X: value0, Y: value1, Z: value2}
     program.Uniforms[location] = uniform
 }
 
@@ -1622,7 +1641,8 @@ cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4i{X: value0, Y: value1, Z: value2, W: value3}
+    uniform.Type = GL_INT_VEC4
+    uniform.Value.Vec4i = Vec4i{X: value0, Y: value1, Z: value2, W: value3}
     program.Uniforms[location] = uniform
 }
 
@@ -1630,8 +1650,10 @@ cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = value[0]
+    uniform.Type = GL_INT
+    uniform.Value.S32 = value[0]
     program.Uniforms[location] = uniform
 }
 
@@ -1639,8 +1661,10 @@ cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4i{X: value[0], Y: value[1]}
+    uniform.Type = GL_INT_VEC2
+    uniform.Value.Vec2i = Vec2i{X: value[0], Y: value[1]}
     program.Uniforms[location] = uniform
 }
 
@@ -1648,8 +1672,10 @@ cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4i{X: value[0], Y: value[1], Z: value[2]}
+    uniform.Type = GL_INT_VEC3
+    uniform.Value.Vec3i = Vec3i{X: value[0], Y: value[1], Z: value[2]}
     program.Uniforms[location] = uniform
 }
 
@@ -1657,8 +1683,10 @@ cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*4)
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4i{X: value[0], Y: value[1], Z: value[2], W: value[3]}
+    uniform.Type = GL_INT_VEC4
+    uniform.Value.Vec4i = Vec4i{X: value[0], Y: value[1], Z: value[2], W: value[3]}
     program.Uniforms[location] = uniform
 }
 
@@ -1666,7 +1694,8 @@ cmd void glUniform1f(UniformLocation location, f32 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = value
+    uniform.Type = GL_FLOAT
+    uniform.Value.F32 = value
     program.Uniforms[location] = uniform
 }
 
@@ -1674,7 +1703,8 @@ cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec2f{X: value0, Y: value1}
+    uniform.Type = GL_FLOAT_VEC2
+    uniform.Value.Vec2f = Vec2f{X: value0, Y: value1}
     program.Uniforms[location] = uniform
 }
 
@@ -1682,7 +1712,8 @@ cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec3f{X: value0, Y: value1, Z: value2}
+    uniform.Type = GL_FLOAT_VEC3
+    uniform.Value.Vec3f = Vec3f{X: value0, Y: value1, Z: value2}
     program.Uniforms[location] = uniform
 }
 
@@ -1690,7 +1721,8 @@ cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4f{X: value0, Y: value1, Z: value2, W: value3}
+    uniform.Type = GL_FLOAT_VEC4
+    uniform.Value.Vec4f = Vec4f{X: value0, Y: value1, Z: value2, W: value3}
     program.Uniforms[location] = uniform
 }
 
@@ -1698,8 +1730,10 @@ cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = value[0]
+    uniform.Type = GL_FLOAT
+    uniform.Value.F32 = value[0]
     program.Uniforms[location] = uniform
 }
 
@@ -1707,37 +1741,43 @@ cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
+    // TODO: Use count
     uniform := program.Uniforms[location]
-    uniform.Value = Vec2f{X: value[0], Y: value[1]}
+    uniform.Type = GL_FLOAT_VEC2
+    uniform.Value.Vec2f = Vec2f{X: value[0], Y: value[1]}
     program.Uniforms[location] = uniform
 }
 
 cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
+    // TODO: Use count
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec3f{X: value[0], Y: value[1], Z: value[2]}
+    uniform.Type = GL_FLOAT_VEC3
+    uniform.Value.Vec3f = Vec3f{X: value[0], Y: value[1], Z: value[2]}
     program.Uniforms[location] = uniform
 }
 
 cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*4)
-    // for i in (0 .. count) { // TODO
+    // TODO: Use count
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Vec4f{X: value[0], Y: value[1], Z: value[2], W: value[3]}
+    uniform.Type = GL_FLOAT_VEC4
+    uniform.Value.Vec4f = Vec4f{X: value[0], Y: value[1], Z: value[2], W: value[3]}
     program.Uniforms[location] = uniform
-    // }
 }
 
 cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*4)
+    // TODO: Use count
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Mat2f{
+    uniform.Type = GL_FLOAT_MAT2
+    uniform.Value.Mat2f = Mat2f{
         Col0: Vec2f{X: values[0], Y: values[1]},
         Col1: Vec2f{X: values[0], Y: values[1]},
     }
@@ -1747,9 +1787,11 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*9)
+    // TODO: Use count
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Mat3f{
+    uniform.Type = GL_FLOAT_MAT3
+    uniform.Value.Mat3f = Mat3f{
         Col0: Vec3f{X: values[0], Y: values[1], Z: values[2]},
         Col1: Vec3f{X: values[3], Y: values[4], Z: values[5]},
         Col2: Vec3f{X: values[6], Y: values[7], Z: values[8]},
@@ -1760,9 +1802,10 @@ cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose,
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*16)
+    // TODO: Use count
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
-    uniform.Value = Mat4f{
+    uniform.Value.Mat4f = Mat4f{
         Col0: Vec4f{X: values[0],  Y: values[1],  Z: values[2],  W: values[3]},
         Col1: Vec4f{X: values[4],  Y: values[5],  Z: values[6],  W: values[7]},
         Col2: Vec4f{X: values[8],  Y: values[9],  Z: values[10], W: values[11]},
