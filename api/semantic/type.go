@@ -82,7 +82,13 @@ type ClassInitializer struct {
 }
 
 // ExpressionType implements Expression returning the class type being initialized.
-func (c *ClassInitializer) ExpressionType() Type { return c.Class }
+func (c *ClassInitializer) ExpressionType() Type {
+	if c.Class != nil {
+		return c.Class
+	} else {
+		return nil
+	}
+}
 
 // FieldInitializer
 type FieldInitializer struct {
@@ -146,7 +152,13 @@ type EnumEntry struct {
 }
 
 // ExpressionType implements Expression returning the enum type.
-func (e *EnumEntry) ExpressionType() Type { return e.Enum }
+func (e *EnumEntry) ExpressionType() Type {
+	if e.Enum != nil {
+		return e.Enum
+	} else {
+		return nil
+	}
+}
 
 // Pseudonym represents the type construct.
 // It acts as a type in it's own right that can carry methods, but is defined
