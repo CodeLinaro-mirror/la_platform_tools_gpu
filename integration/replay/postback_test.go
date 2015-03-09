@@ -15,6 +15,7 @@
 package replay
 
 import (
+	"encoding/binary"
 	"io"
 	"reflect"
 	"testing"
@@ -46,7 +47,7 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 	f(b)
 
 	payload, decoder := b.Build(logger)
-	err = executor.Execute(payload, decoder, connection, db, logger, handlers)
+	err = executor.Execute(payload, decoder, connection, db, logger, handlers, binary.LittleEndian)
 	if err != nil {
 		t.Errorf("Executor failed with error: %v", err)
 	}
