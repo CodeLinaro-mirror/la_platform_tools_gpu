@@ -34,7 +34,7 @@ limitations under the License.
 
   func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
     switch ω := Θ.(type) {
-    {{range $n, $c := $.Functions}}
+    {{range $c := AllCommands $}}
       case *{{Macro "Go.CmdName" $c}}:
         Σ := {{Macro "Go.CmdOutsName" $c}}{}
         {{/* Construct slices large enough to hold all simulated output */}}

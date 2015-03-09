@@ -241,13 +241,14 @@ class RenderSettings {
 // types stored within the AtomStream and state. Clients use the Schema to know
 // how to interpret these types.
 class Schema {
-  array<ArrayInfo*>   Arrays
-  array<MapInfo*>     Maps
-  array<EnumInfo*>    Enums
-  array<StructInfo*>  Structs
-  array<ClassInfo*>   Classes
-  array<AtomInfo>     Atoms
-  StructInfo*         State
+  array<ArrayInfo*>       Arrays
+  array<StaticArrayInfo*> StaticArrays
+  array<MapInfo*>         Maps
+  array<EnumInfo*>        Enums
+  array<StructInfo*>      Structs
+  array<ClassInfo*>       Classes
+  array<AtomInfo>         Atoms
+  StructInfo*             State
 }
 
 // TypeKind is the exhaustive list of all types supported by the schema.
@@ -270,10 +271,11 @@ enum TypeKind {
   Struct             = 14,
   Class              = 15,
   Array              = 16,
-  Map                = 17,
-  Pointer            = 18,
-  Memory             = 19, // Currently unimplemented.
-  Any                = 20, // Will be removed.
+  StaticArray        = 17,
+  Map                = 18,
+  Pointer            = 19,
+  Memory             = 20, // Currently unimplemented.
+  Any                = 21, // Will be removed.
 }
 
 // TypeInfo is the base of all schema defined types.
@@ -285,6 +287,12 @@ enum TypeKind {
 // ArrayInfo describes an array instantiation.
 class ArrayInfo : TypeInfo {
   TypeInfo* ElementType // The array's element type.
+}
+
+// StaticArrayInfo describes a static array instantiation.
+class StaticArrayInfo : TypeInfo {
+  TypeInfo*  ElementType // The array's element type.
+  array<u32> Dimensions  // The array's dimensions in outer->inner order.
 }
 
 // MapInfo describes a map instantiation.

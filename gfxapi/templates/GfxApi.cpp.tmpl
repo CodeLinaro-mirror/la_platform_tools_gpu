@@ -37,7 +37,7 @@ namespace caze {
 namespace gfxapi {
 namespace {
 ¶
-{{range $i, $c := $.Functions}}
+{{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
     {{template "CommandHandler" $c}}
   {{end}}
@@ -45,7 +45,7 @@ namespace {
 ¶
 }  // end of anonymous namespace
 ¶
-{{range $i, $c := $.Functions}}
+{{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
     {{template "FunctionPtrDecl" $c}}
   {{end}}
@@ -81,7 +81,7 @@ namespace {
 */}}
 {{define "Register"}}
 void Register(Interpreter* interpreter) {
-  {{range $i, $c := $.Functions}}
+  {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       interpreter->registerFunction(Ids::{{Macro "C++.Public" $c.Name}}, call{{Macro "C++.Public" $c.Name}});
     {{end}}
@@ -98,7 +98,7 @@ void Register(Interpreter* interpreter) {
 */}}
 {{define "Initialize"}}
 void Initialize() {
-  {{range $i, $c := $.Functions}}
+  {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       {{$c.Name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$c.Name}}"));
     {{end}}
@@ -109,7 +109,7 @@ void Initialize() {
 
 {{define "CommandHandler"}}
 bool call{{Macro "C++.Public" $.Name}}(Stack* stack, bool pushReturn) {
-  {{range $i, $p := (Reverse $.CallParameters)}}
+  {{range $p := (Reverse $.CallParameters)}}
     {{Macro "C++.ParameterType" $p}} {{$p.Name}} = stack->pop<{{Macro "C++.ParameterType" $p}}>();
   {{end}}
 
@@ -122,7 +122,7 @@ bool call{{Macro "C++.Public" $.Name}}(Stack* stack, bool pushReturn) {
         {{end}}
       {{end}}
       )\n"§
-      {{range $i, $p := $.CallParameters}}
+      {{range $p := $.CallParameters}}
         , {{$p.Name}}§
       {{end}}
     );

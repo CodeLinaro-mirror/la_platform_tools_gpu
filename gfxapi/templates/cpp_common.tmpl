@@ -172,8 +172,8 @@ limitations under the License.
     }
   {{else if IsSwitch $}}
     switch ({{Macro "C++.Read" $.Value}}) {
-      {{range $i, $c := $.Cases}}
-        «case {{range $j, $cond := $c.Conditions}}{{if $j}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}:»
+      {{range $c := $.Cases}}
+        «case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}:»
             {{Macro "C++.Block" $c.Block}}
             break;¶
       {{end}}
@@ -217,7 +217,6 @@ limitations under the License.
   {{else if IsStringValue      $}}{{printf "%q" $}}
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
-  {{else if IsCall             $}}{{if $.Target.Object}}{{Macro "C++.Read" $.Target.Object}}.{{end}}{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
   {{else if IsEnumEntry        $}}{{$.Enum.Name}}.{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
   {{else if IsBitTest          $}}(({{Macro "C++.Read" $.Bits}}) & ({{Macro "C++.Read" $.Bitfield}}) != 0)
@@ -237,10 +236,10 @@ limitations under the License.
   {{else if IsNew              $}}new {{Macro "C++.StateType" (Unpack $.Type).To}}()
   {{else if IsSelect           $}}
     /* switch({{Macro "C++.Read" $.Value}}) */»
-    {{range $i, $c := $.Choices}}
+    {{range $c := $.Choices}}
       /* case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}{{end}}: */§
-      ({{range $j, $cond := $c.Conditions}}§
-          {{if $j}} || {{end}}({{Macro "C++.Read" $.Value}} == {{Macro "C++.Read" $cond}})§
+      ({{range $i, $cond := $c.Conditions}}§
+          {{if $i}} || {{end}}({{Macro "C++.Read" $.Value}} == {{Macro "C++.Read" $cond}})§
       {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
     {{end}}
     /* default: */ {{Macro "C++.StateType" $}}()«
