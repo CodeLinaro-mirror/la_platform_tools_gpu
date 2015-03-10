@@ -15,6 +15,7 @@
 package resolver
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -142,31 +143,32 @@ func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
 }
 
 func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArray {
-	vt := type_(ctx, in.ValueType)
-	name := strings.Title(vt.Typename()) + "StaticArray"
-	for _, a := range ctx.api.StaticArrays {
-		if a.Name == name {
-			if !equal(vt, a.ValueType) {
-				ctx.icef(in, "Static array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(vt))
-			}
-			ctx.mappings[in] = a
-			return a
-		}
-	}
-	out := &semantic.StaticArray{
-		Name:      name,
-		ValueType: vt,
-	}
+	out := &semantic.StaticArray{}
+	dims := make([]string, len(in.Dimensions))
 	ctx.with(semantic.Uint32Type, func() {
-		for _, d := range in.Dimensions {
+		for i, d := range in.Dimensions {
 			e := expression(ctx, d)
 			if n, ok := e.(semantic.Uint32Value); ok {
 				out.Dimensions = append(out.Dimensions, n)
+				dims[i] = fmt.Sprintf("%d", uint32(n))
 			} else {
 				ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
 			}
 		}
 	})
+	out.ValueType = type_(ctx, in.ValueType)
+	out.Name = strings.Title(out.ValueType.Typename()) + "[" + strings.Join(dims, ", ") + "]"
+	for _, a := range ctx.api.StaticArrays {
+		if a.Name == out.Name {
+			if !equal(out.ValueType, a.ValueType) {
+				ctx.icef(in, "Static array %s found with non matching value, got %s expected %s",
+					out.Name, typename(a.ValueType), typename(out.ValueType))
+			}
+			ctx.mappings[in] = a
+			return a
+		}
+	}
+
 	ctx.api.StaticArrays = append(ctx.api.StaticArrays, out)
 	ctx.mappings[in] = out
 	return out
