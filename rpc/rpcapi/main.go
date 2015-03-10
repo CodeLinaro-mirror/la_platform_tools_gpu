@@ -30,10 +30,15 @@ import (
 )
 
 var (
-	dir    = flag.String("dir", "", "The output directory")
+	dir    = flag.String("dir", cwd(), "The output directory")
 	golang = flag.Bool("go", false, "enable go generation")
 	java   = flag.Bool("java", false, "enable java generation")
 )
+
+func cwd() string {
+	p, _ := os.Getwd()
+	return p
+}
 
 func run() error {
 	flag.Parse()
