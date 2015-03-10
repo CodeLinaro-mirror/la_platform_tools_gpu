@@ -7,10 +7,8 @@
 alias map<TextureUnit, map<TextureTarget, TextureId>> TextureUnitMap
 
 extern void   error(string message, array<any> values)
-extern s32    min(s32 a, s32 b)
 extern s32    strlen(string s)
 extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType type)
-extern TextureUnitMap createTextureUnits(InternalState internal)
 extern string substr(string s, s32 start, s32 end)
 extern u32    stateVariableSize(StateVariable v)
 extern void   memcpy(any dest, any src, s32 size)
@@ -18,6 +16,13 @@ extern void   memcpy(any dest, any src, s32 size)
 /////////////////////////////////////////////////////////////////
 // Macros
 /////////////////////////////////////////////////////////////////
+macro s32 min(s32 a, s32 b) {
+  return switch(a < b) {
+    case true:  a
+    case false: b
+  }
+}
+
 /* Not ready for primetime yet...
 macro s32 imageSize(s32 width, s32 height, TexelFormat format, TexelType type) {
     return switch (format) { // TODO: Consider ty
@@ -875,19 +880,19 @@ class Renderbuffer : FramebufferAttachable {
 }
 
 class Texture : FramebufferAttachable {
-    TextureKind       Kind
-    ImageTexelFormat  Format
+    TextureKind            Kind
+    ImageTexelFormat       Format
     map<s32, Image>        Texture2D
     map<s32, CubemapLevel> Cubemap
-    TextureFilterMode MagFilter = GL_LINEAR
-    TextureFilterMode MinFilter = GL_NEAREST_MIPMAP_LINEAR
-    TextureWrapMode   WrapS = GL_REPEAT
-    TextureWrapMode   WrapT = GL_REPEAT
-    TexelComponent    SwizzleR = GL_RED
-    TexelComponent    SwizzleG = GL_GREEN
-    TexelComponent    SwizzleB = GL_BLUE
-    TexelComponent    SwizzleA = GL_ALPHA
-    f32             MaxAnisotropy = 1.0  // EXT/texture_filter_anisotropic
+    TextureFilterMode      MagFilter     = GL_LINEAR
+    TextureFilterMode      MinFilter     = GL_NEAREST_MIPMAP_LINEAR
+    TextureWrapMode        WrapS         = GL_REPEAT
+    TextureWrapMode        WrapT         = GL_REPEAT
+    TexelComponent         SwizzleR      = GL_RED
+    TexelComponent         SwizzleG      = GL_GREEN
+    TexelComponent         SwizzleB      = GL_BLUE
+    TexelComponent         SwizzleA      = GL_ALPHA
+    f32                    MaxAnisotropy = 1.0  // EXT/texture_filter_anisotropic
 }
 
 class CubemapLevel {
@@ -1155,10 +1160,9 @@ cmd void init(s32                width,
 
     BoundFramebuffers[GL_FRAMEBUFFER] = Internals.Backbuffer
 
-    TextureUnits = createTextureUnits(Internals)
+    Rasterizing.Scissor.Width  = width
+    Rasterizing.Scissor.Height = height
 
-    Rasterizing.Scissor.Width       = width
-    Rasterizing.Scissor.Height      = height
     // TODO: Stencil function
     Rasterizing.StencilMask[GL_FRONT] = 0xFFFFFFFF
     Rasterizing.StencilMask[GL_BACK]  = 0xFFFFFFFF
