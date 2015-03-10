@@ -53,12 +53,17 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 	}
 }
 
-func checkPostback(t *testing.T, expected, got interface{}, err error) {
-	if err != nil {
-		t.Errorf("Postback returned error: %v", err)
-	}
-	if !reflect.DeepEqual(expected, got) {
-		t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, got)
+func checkPostback(t *testing.T, expected interface{}, then ...func()) func(data interface{}, err error) {
+	return func(data interface{}, err error) {
+		if err != nil {
+			t.Errorf("Postback returned error: %v", err)
+		}
+		if !reflect.DeepEqual(expected, data) {
+			t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
+		}
+		for _, f := range then {
+			f()
+		}
 	}
 }
 
@@ -75,10 +80,7 @@ func TestPostbackString(t *testing.T) {
 			return buf, err
 		})
 	}, executor.PostbackHandlerMap{
-		0: func(data interface{}, err error) {
-			checkPostback(t, []byte(expected), data, err)
-			close(done)
-		},
+		0: checkPostback(t, []byte(expected), func() { close(done) }),
 	})
 
 	<-done
@@ -101,9 +103,9 @@ func TestMultiPostback(t *testing.T) {
 		b.Store(ptr)
 		b.Post(ptr, 8, 300, func(d *protocol.Decoder) (interface{}, error) { return d.Float64() })
 	}, executor.PostbackHandlerMap{
-		100: func(data interface{}, err error) { checkPostback(t, false, data, err) },
-		200: func(data interface{}, err error) { checkPostback(t, true, data, err) },
-		300: func(data interface{}, err error) { checkPostback(t, 123.456, data, err); close(done) },
+		100: checkPostback(t, false),
+		200: checkPostback(t, true),
+		300: checkPostback(t, 123.456, func() { close(done) }),
 	})
 
 	<-done
