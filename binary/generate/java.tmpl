@@ -13,8 +13,8 @@
 // limitations under the License.
 
 {{define "Enum"}}{{.Name}}Enum{{end}}
-{{define "ID"}}{{class .Name}}ID{{end}}
-{{define "IDBytes"}}{{class .Name}}IDBytes{{end}}
+{{define "ID"}}{{id .Name}}ID{{end}}
+{{define "IDBytes"}}{{id .Name}}IDBytes{{end}}
 
 {{define "Encoder"}}
 »public static void encode(Encoder e, {{class .Name}} o) throws IOException {

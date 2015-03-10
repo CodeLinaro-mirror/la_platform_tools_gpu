@@ -54,6 +54,9 @@ var (
 			}
 			return name
 		},
+		"id": func(name string) string {
+			return fmt.Sprintf(classPrefix+"%s", name)
+		},
 		"class": func(name string) string {
 			if strings.HasPrefix(name, "call") {
 				return fmt.Sprintf("Commands."+classPrefix+"%s.Call", name[4:])
