@@ -6,7 +6,6 @@
 
 alias map<TextureUnit, map<TextureTarget, TextureId>> TextureUnitMap
 
-extern void   error(string message, array<any> values)
 extern s32    strlen(string s)
 extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType type)
 extern string substr(string s, s32 start, s32 end)
@@ -1312,8 +1311,9 @@ cmd void glGenVertexArraysOES(s32 count, inout array<VertexArrayId> arrays) {
     http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
     assert len(arrays) >= count
     for i in (0 .. count) {
-        arrays[i] = ? as VertexArrayId
-        Instances.VertexArrays[arrays[i]] = new VertexArray{}
+        id := ? as VertexArrayId
+        Instances.VertexArrays[id] = new VertexArray{}
+        arrays[i] = id
     }
 }
 
@@ -1965,8 +1965,9 @@ cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml
     assert len(textures) >= count
     for i in (0 .. count) {
-      textures[i] = ? as TextureId
-      Instances.Textures[textures[i]] = new Texture{}
+      id := ? as TextureId
+      Instances.Textures[id] = new Texture{}
+      textures[i] = id
     }
 }
 
@@ -2188,8 +2189,9 @@ cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
     assert len(framebuffers) >= count
     for i in (0 .. count) {
-        framebuffers[i] = ? as FramebufferId
-        Instances.Framebuffers[framebuffers[i]] = new Framebuffer{}
+        id := ? as FramebufferId
+        Instances.Framebuffers[id] = new Framebuffer{}
+        framebuffers[i] = id
     }
 }
 
@@ -2223,8 +2225,9 @@ cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml
     assert len(renderbuffers) >= count
     for i in (0 .. count) {
-        renderbuffers[i] = ? as RenderbufferId
-        Instances.Renderbuffers[renderbuffers[i]] = new Renderbuffer{}
+        id := ? as RenderbufferId
+        Instances.Renderbuffers[id] = new Renderbuffer{}
+        renderbuffers[i] = id
     }
 }
 
@@ -2286,8 +2289,9 @@ cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml
     assert len(buffers) >= count
     for i in (0 .. count) {
-        buffers[i] = ? as BufferId
-        Instances.Buffers[buffers[i]] = new Buffer{}
+        id := ? as BufferId
+        Instances.Buffers[id] = new Buffer{}
+        buffers[i] = id
     }
 }
 
@@ -3018,8 +3022,9 @@ cmd void glGenQueries(s32 count, inout array<QueryId> queries) {
     http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml
     assert len(queries) >= count
     for i in (0 .. count) {
-      queries[i] = ? as QueryId
-      Instances.Queries[queries[i]] = new Query{}
+      id := ? as QueryId
+      Instances.Queries[id] = new Query{}
+      queries[i] = id
     }
 }
 
@@ -3060,8 +3065,9 @@ cmd void glGenQueriesEXT(s32 count, inout array<QueryId> queries) {
     http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     assert len(queries) >= count
     for i in (0 .. count) {
-        queries[i] = ? as QueryId
-        Instances.Queries[queries[i]] = new Query{}
+        id := ? as QueryId
+        Instances.Queries[id] = new Query{}
+        queries[i] = id
     }
 }
 

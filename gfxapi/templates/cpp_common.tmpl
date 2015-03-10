@@ -40,7 +40,7 @@ limitations under the License.
   {{else if IsEnum        $}}{{$.Name}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsMemory      $}}Memory
-  {{else if IsAny         $}}Any
+  {{else if IsAny         $}}auto
   {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
 {{end}}
@@ -119,9 +119,30 @@ limitations under the License.
     {{     if IsPointerType $ty}}{{Macro "C++.Type" $ty}}
     {{else if IsArray       $ty}}{{Macro "C++.Type" $ty}}
     {{else if IsString      $ty}}{{Macro "C++.Type" $ty}}
+    {{else if IsAny         $ty}}{{Macro "C++.ParameterTypeAny" $}}*
     {{else                     }}{{Macro "C++.Type" $ty}}*
     {{end}}
-  {{else}}{{Macro "C++.Type" $ty}}
+  {{else}}
+    {{if IsAny $ty}}{{Macro "C++.ParameterTypeAny" $}}
+    {{else        }}{{Macro "C++.Type" $ty}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  If the specified parameter is of type 'any' then this macro emits the
+  corresponding template parameter name. If the parameter is not of type 'any'
+  then nothing is emitted.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ParameterTypeAny"}}
+  {{AssertType $ "Parameter"}}
+
+  {{if IsAny (TypeOf $)}}
+    {{$index := IndexOf $.Function.FullParameters $}}
+    ARG{{$index}}
   {{end}}
 {{end}}
 
@@ -136,6 +157,36 @@ limitations under the License.
 
   {{$ty := TypeOf $.Return}}
   {{Macro "C++.Type" $ty}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  If the specified function has any parameters of type 'any', then this macro
+  emits a function template specifier listing each of the 'any' parameters
+  for the given function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "TemplateParameters"}}
+  {{AssertType $ "Function"}}
+
+  {{$params := ForEach $.FullParameters "C++.ParameterTypenameAny"}}
+  {{if $params}}template<{{$params | JoinWith ", "}}>{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  If the specified parameter is of type 'any' then this macro emits the
+  corresponding template typename declaration. If the parameter is not of type
+  'any' then nothing is emitted.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ParameterTypenameAny"}}
+  {{AssertType $ "Parameter"}}
+
+  {{$name := Macro "C++.ParameterTypeAny" $}}
+  {{if $name}}typename {{Macro "C++.ParameterTypeAny" $}}{{end}}
 {{end}}
 
 
@@ -171,10 +222,12 @@ limitations under the License.
     }
   {{else if IsSwitch $}}
     switch ({{Macro "C++.Read" $.Value}}) {
-      {{range $c := $.Cases}}
-        case {{range $j, $cond := $c.Conditions}}{{if $j}}, {{end}}{{Macro "C++.Read" $cond}}§{{end}}: {
-            {{Macro "C++.Block" $c.Block}}
-            break;
+      {{range $i, $c := $.Cases}}
+        {{range $j, $cond := $c.Conditions}}
+          case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} { {{end}}
+        {{end}}
+          {{Macro "C++.Block" $c.Block}}
+          break;
         }
       {{end}}
     }
@@ -243,9 +296,9 @@ limitations under the License.
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
   {{else if IsEnumEntry        $}}{{$.Enum.Name}}::{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
-  {{else if IsBitTest          $}}(({{Macro "C++.Read" $.Bits}}) & ({{Macro "C++.Read" $.Bitfield}}) != 0)
+  {{else if IsBitTest          $}}({{Macro "C++.Read" $.Bitfield}} & {{Macro "C++.Read" $.Bits}}) != 0
   {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
-  {{else if IsCast             $}}static_cast<{{Macro "C++.StateType" $.Type}}>({{Macro "C++.Read" $.Object}})
+  {{else if IsCast             $}}{{Macro "C++.Cast" $}}
   {{else if IsCall             $}}{{Macro "C++.Call" $}}
   {{else if IsUnknown          $}}{{Macro "C++.Read" $.Inferred}}
   {{else if IsObserved         $}}{{$.Parameter.Name}}
@@ -309,14 +362,49 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the C++ logic to execute a call statement.
+  Emits the C++ logic to execute a cast expression.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Cast"}}
+  {{AssertType $ "Cast"}}
+  {{$src_ty := TypeOf $.Object}}
+  {{$src_fp := or (IsF32 $src_ty) (IsF64 $src_ty)}}
+
+  {{if and ($src_fp) (IsEnum $.Type)}}
+    {{/* static_cast from a floating point number to an enum is an error with MSVC.
+         Go via uint32_t. */}}
+    static_cast<{{Macro "C++.StateType" $.Type}}>(static_cast<uint32_t>({{Macro "C++.Read" $.Object}} + 0.5f))
+  {{else}}
+    static_cast<{{Macro "C++.StateType" $.Type}}>({{Macro "C++.Read" $.Object}})
+  {{end}}
+
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute a call expression.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Call"}}
   {{AssertType $ "Call"}}
 
-  {{if $.Target.Object}}{{Macro "C++.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
+  {{if $.Target.Object}}{{Macro "C++.MethodCall" $}}
   {{else              }}{{$.Target.Function.Name}}(§{{Macro "C++.ReadList" $.Arguments}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute a method call expression.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.MethodCall"}}
+  {{$is_map_delete := and (IsMap (TypeOf $.Target.Object)) (eq $.Target.Function.Name "Delete")}}
+
+  {{if $is_map_delete}}{{Macro "C++.Read" $.Target.Object}}.erase({{Macro "C++.ReadList" $.Arguments}})
+  {{else             }}{{Macro "C++.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
   {{end}}
 {{end}}
 

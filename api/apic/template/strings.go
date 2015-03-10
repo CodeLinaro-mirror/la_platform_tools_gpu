@@ -200,7 +200,7 @@ func (Functions) Contains(substr string, v ...interface{}) bool {
 	return false
 }
 
-// Replace any occurance of old with new in tbe string segments.
+// Replace any occurance of old with new in the string segments.
 func (Functions) Replace(old string, new string, v ...interface{}) stringList {
 	l := stringify(v...)
 	out := stringList{}
