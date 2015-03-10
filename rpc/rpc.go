@@ -35,7 +35,7 @@ func NewError(msg string, args ...interface{}) *Error {
 
 // Error is an implementation of error that can be sent over the wire.
 type Error struct {
-	msg string
+	message string
 }
 
-func (e *Error) Error() string { return e.msg }
+func (e *Error) Error() string { return e.message }

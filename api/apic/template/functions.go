@@ -75,7 +75,11 @@ func NewFunctions(apiFile string, api *semantic.API, loader func(filename string
 	initNodeTypes(f)
 	initGlobals(f)
 	for k, v := range funcs {
-		f.funcs[k] = v
+		if gen, ok := v.(func(*Functions) interface{}); ok {
+			f.funcs[k] = gen(f)
+		} else {
+			f.funcs[k] = v
+		}
 	}
 	if *tracer != "" {
 		pattern := regexp.MustCompile(*tracer)

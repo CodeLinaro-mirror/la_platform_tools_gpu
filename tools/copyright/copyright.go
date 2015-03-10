@@ -37,7 +37,7 @@ var (
 		{
 			Name:       "c",
 			License:    "aosp_c",
-			Extensions: []string{".c", ".cpp", ".h", ".mm"},
+			Extensions: []string{".c", ".cpp", ".h", ".mm", "*.java"},
 		},
 		{
 			Name:       "api",

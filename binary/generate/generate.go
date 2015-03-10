@@ -30,10 +30,17 @@ import (
 	"golang.org/x/tools/go/types"
 )
 
+type Style struct {
+	ClassPrefix  string
+	MemberPrefix string
+	Indent       string
+}
+
 type File struct {
 	Generated string
 	Package   string
 	Structs   []*Struct
+	Style
 }
 
 // Struct is a description of an encodable struct.

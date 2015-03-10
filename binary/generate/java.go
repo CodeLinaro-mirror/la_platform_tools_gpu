@@ -23,6 +23,12 @@ import (
 	"unicode/utf8"
 )
 
+const (
+	indent       = "»"
+	classPrefix  = "⊹"
+	memberPrefix = "∍"
+)
+
 var (
 	javaTemplates = template.Must(template.New("java.tmpl").Funcs(javaFuncs).Parse(java_tmpl))
 	javaFuncs     = template.FuncMap{
@@ -35,7 +41,7 @@ var (
 		"lower": strings.ToLower,
 		"fieldname": func(s string) string {
 			r, n := utf8.DecodeRuneInString(s)
-			return fmt.Sprintf("my%s%s", string(unicode.ToUpper(r)), s[n:])
+			return fmt.Sprintf(memberPrefix+"%s%s", string(unicode.ToUpper(r)), s[n:])
 		},
 		"toS8": func(val byte) string { return fmt.Sprint(int8(val)) },
 		"storage": func(t *Type) string {
@@ -50,12 +56,12 @@ var (
 		},
 		"class": func(name string) string {
 			if strings.HasPrefix(name, "call") {
-				return fmt.Sprintf("Commands.%s.Call", name[4:])
+				return fmt.Sprintf("Commands."+classPrefix+"%s.Call", name[4:])
 			}
 			if strings.HasPrefix(name, "result") {
-				return fmt.Sprintf("Commands.%s.Result", name[6:])
+				return fmt.Sprintf("Commands."+classPrefix+"%s.Result", name[6:])
 			}
-			return name
+			return fmt.Sprintf(classPrefix+"%s", name)
 		},
 	}
 	javaEncodeMap kindToTemplate
@@ -97,7 +103,18 @@ func init() {
 
 // JavaFile generates the all the java code for a file with a set of structs.
 func JavaFile(file *File) ([]byte, error) {
+	f := *file
+	if f.MemberPrefix == "" {
+		f.MemberPrefix = "m"
+	}
+	if f.Indent == "" {
+		f.Indent = "    "
+	}
 	b := &bytes.Buffer{}
-	err := javaFile.Execute(b, file)
-	return b.Bytes(), err
+	err := javaFile.Execute(b, &f)
+	s := b.String()
+	s = strings.Replace(s, indent, f.Indent, -1)
+	s = strings.Replace(s, memberPrefix, f.MemberPrefix, -1)
+	s = strings.Replace(s, classPrefix, f.ClassPrefix, -1)
+	return []byte(s), err
 }
