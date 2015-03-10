@@ -2,33 +2,12 @@ package gles
 
 import "fmt"
 
-func min(a, b int32) int32 {
-	if a < b {
-		return a
-	} else {
-		return b
-	}
-}
-
 func strlen(str string) int32 {
 	return int32(len(str))
 }
 
 func substr(str string, start, end int32) string {
 	return str[start:end]
-}
-
-func createTextureUnits(internals InternalState) TextureId_TextureTargetMap_TextureUnitMap {
-	units := make(TextureId_TextureTargetMap_TextureUnitMap)
-
-	for i := TextureUnit_GL_TEXTURE0; i <= TextureUnit_GL_TEXTURE0+256; i++ {
-		units[i] = TextureId_TextureTargetMap{
-			TextureTarget_GL_TEXTURE_2D:       internals.NilTexture,
-			TextureTarget_GL_TEXTURE_CUBE_MAP: internals.NilTexture,
-		}
-	}
-
-	return units
 }
 
 func stateVariableSize(v StateVariable) uint32 {
