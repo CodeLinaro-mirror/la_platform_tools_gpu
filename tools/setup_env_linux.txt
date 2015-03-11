@@ -17,9 +17,10 @@ GPU_RELATIVE_SOURCE_PATH=android.googlesource.com/platform/tools/gpu
 export GOROOT=$REPO_ROOT/prebuilts/go/linux-x86
 export GOPATH=$GPU_BUILD_ROOT
 
-# Point to pre-built version of gcc.
+# Point to pre-built version of gcc and libraries.
 export GCC_TOOLCHAIN_ROOT=$REPO_ROOT/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.11-4.8
 export PATH=$GCC_TOOLCHAIN_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$GCC_TOOLCHAIN_ROOT/x86_64-linux/lib64:$GCC_TOOLCHAIN_ROOT/sysroot/usr/lib:$LD_LIBRARY_PATH
 # CC and CXX are used by go to find the c & c++ compilers.
 export CC=x86_64-linux-gcc
 export CXX=x86_64-linux-g++
