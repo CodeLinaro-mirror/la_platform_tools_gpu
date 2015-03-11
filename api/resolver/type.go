@@ -15,6 +15,7 @@
 package resolver
 
 import (
+	"bytes"
 	"fmt"
 	"strconv"
 	"strings"
@@ -143,21 +144,21 @@ func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
 }
 
 func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArray {
-	out := &semantic.StaticArray{}
-	dims := make([]string, len(in.Dimensions))
+	out := &semantic.StaticArray{ValueType: type_(ctx, in.ValueType)}
+	name := bytes.NewBufferString(strings.Title(out.ValueType.Typename()))
+	name.WriteString("StaticArray")
 	ctx.with(semantic.Uint32Type, func() {
-		for i, d := range in.Dimensions {
+		for _, d := range in.Dimensions {
 			e := expression(ctx, d)
 			if n, ok := e.(semantic.Uint32Value); ok {
 				out.Dimensions = append(out.Dimensions, n)
-				dims[i] = fmt.Sprintf("%d", uint32(n))
+				fmt.Fprintf(name, "_%d", uint32(n))
 			} else {
 				ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
 			}
 		}
 	})
-	out.ValueType = type_(ctx, in.ValueType)
-	out.Name = strings.Title(out.ValueType.Typename()) + "[" + strings.Join(dims, ", ") + "]"
+	out.Name = name.String()
 	for _, a := range ctx.api.StaticArrays {
 		if a.Name == out.Name {
 			if !equal(out.ValueType, a.ValueType) {
