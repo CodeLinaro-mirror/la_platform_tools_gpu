@@ -34,7 +34,15 @@ go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
 # Kill any existing replay daemon before running integration tests.
 killall replayd || true
 
+# Try starting a headless X server on display :4259 for integration tests.
+if [ -x "$(which Xvfb)" ]; then
+  Xfvb :4259 &
+  XVFB_PID=$!
+  DISPLAY=:4259
+fi
+
 go test $GPU_RELATIVE_SOURCE_PATH/...
 
-# Kill the integration tests' replay daemon.
+# Kill the integration tests' replay daemon and Xvfb.
 killall replayd || true
+if [ ! -z $XVFB_PID ]; then kill $XVFB_PID; fi
