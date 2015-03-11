@@ -28,22 +28,19 @@ var testList = List{
 	&testAtomC{Context: 0x10, String: "Pizza"},
 }
 var testData = []byte{
-	0x06,       // Atom 0: Size (+2 for type)
+	0x03, // Atom count
+
 	0x0a,       // Atom 0: Type
 	0x10,       // Atom 0: Context
 	0x80, 0xc8, // Atom 0: Data
 
-	0x05, // Atom 1: Size (+2 for type)
 	0x14, // Atom 1: Type
 	0x20, // Atom 1: Context
 	0x01, // Atom 1: Data
 
-	0x0a,                          // Atom 2: Size (+2 for type)
 	0x1e,                          // Atom 2: Type
 	0x10,                          // Atom 2: Context
 	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: Data
-
-	0x00, // EOS 0
 }
 
 func TestAtomListEncode(t *testing.T) {

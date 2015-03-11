@@ -276,6 +276,7 @@ enum TypeKind {
   Pointer            = 19,
   Memory             = 20, // Currently unimplemented.
   Any                = 21, // Will be removed.
+  ID                 = 22,
 }
 
 // TypeInfo is the base of all schema defined types.
