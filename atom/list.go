@@ -14,11 +14,7 @@
 
 package atom
 
-import (
-	"bytes"
-
-	"android.googlesource.com/platform/tools/gpu/binary"
-)
+import "android.googlesource.com/platform/tools/gpu/binary"
 
 // List is a list of atoms.
 type List []Atom
@@ -65,62 +61,41 @@ func (l *List) AddAt(a Atom, id ID) {
 
 // Encode encodes the atom list using the specified encoder.
 func (l *List) Encode(e *binary.Encoder) error {
-	atomBuf := &bytes.Buffer{}
-	atomEnc := binary.NewEncoder(atomBuf)
-	for _, atom := range *l {
-		if err := atom.TypeID().Encode(atomEnc); err != nil {
-			return err
-		}
-
-		if err := atom.Encode(atomEnc); err != nil {
-			return err
-		}
-
-		atomData := atomBuf.Bytes()
-		if err := e.Uint16(uint16(len(atomData) + 2)); err != nil {
-			return err
-		}
-
-		if _, err := e.Write(atomData); err != nil {
-			return err
-		}
-		atomBuf.Reset()
+	if err := e.Uint32(uint32(len(*l))); err != nil {
+		return err
 	}
-
-	e.Uint16(0)
+	for _, atom := range *l {
+		if err := atom.TypeID().Encode(e); err != nil {
+			return err
+		}
+		if err := atom.Encode(e); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
 // Encode decodes the atom list using the specified encoder.
 func (l *List) Decode(d *binary.Decoder) error {
-	*l = List{} // Clear the list
-
-	for {
-		size, err := d.Uint16()
-		if err != nil {
-			return err
-		}
-
-		if size == 0 {
-			break
-		}
-
+	count, err := d.Uint32()
+	if err != nil {
+		*l = List{} // Clear the list
+		return err
+	}
+	*l = make(List, count)
+	for i := range *l {
 		var typeID TypeID
 		if err := typeID.Decode(d); err != nil {
 			return err
 		}
-
 		atom, err := New(TypeID(typeID))
 		if err != nil {
 			return err
 		}
-
 		if err := atom.Decode(d); err != nil {
 			return err
 		}
-
-		*l = append(*l, atom)
+		(*l)[i] = atom
 	}
-
 	return nil
 }

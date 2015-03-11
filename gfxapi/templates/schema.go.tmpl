@@ -49,6 +49,7 @@ limitations under the License.
       memoryInfo:   service.CreateSimpleInfo("memory",  service.TypeKindMemory),
       stringInfo:   service.CreateSimpleInfo("string",  service.TypeKindString),
       anyInfo:      service.CreateSimpleInfo("any",     service.TypeKindAny),
+      idInfo:       service.CreateSimpleInfo("id",      service.TypeKindID),
     }
 
     return service.Schema{
@@ -115,6 +116,7 @@ limitations under the License.
     memoryInfo   service.TypeInfo
     stringInfo   service.TypeInfo
     anyInfo      service.TypeInfo
+    idInfo       service.TypeInfo
   }
   {{Macro "GetInfo" "Type" "Array"       "Map" "arrays"       "List" $.Arrays      }}
   {{Macro "GetInfo" "Type" "StaticArray" "Map" "staticArrays" "List" $.StaticArrays}}
@@ -298,7 +300,7 @@ limitations under the License.
     Type:       {{$.Index}},
     Name:       "{{$.Command.Name}}",
     Parameters: []service.ParameterInfo{
-      {{range $p := $.Command.CallParameters}}
+      {{range $p := $.Command.FullParameters}}
         service.ParameterInfo{
           Name: "{{$p.Name}}",
           Type: {{Macro "TypeInfo" (TypeOf $p)}},
@@ -331,6 +333,10 @@ limitations under the License.
       service.ParameterInfo{
         Name: "Size",
         Type: s.u64Info,
+      },
+      service.ParameterInfo{
+        Name: "ResourceID",
+        Type: s.idInfo,
       },
     },
   },
