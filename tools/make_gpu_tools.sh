@@ -32,9 +32,9 @@ go generate -x $GPU_RELATIVE_SOURCE_PATH/builder
 go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
 # Kill any existing replay daemon before running integration tests.
-killall -q replayd
+killall replayd || true
 
 go test $GPU_RELATIVE_SOURCE_PATH/...
 
 # Kill the integration tests' replay daemon.
-killall -q replayd
+killall replayd || true
