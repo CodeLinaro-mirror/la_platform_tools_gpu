@@ -3,11 +3,12 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:1.1.3'
+  if (System.getenv('ANDROID_HOME')) {
+      classpath 'com.android.tools.build:gradle:1.1.3'
+    }
   }
 }
 
-apply plugin: 'com.android.application'
 apply plugin: 'cpp'
 apply plugin: 'objective-cpp'
 
@@ -16,49 +17,57 @@ buildDir temporaryDirectory
 def gtestBasePath = '../../../../../../../../../external/gtest/'
 def gmockBasePath = '../../../../../../../../../external/gmock/'
 
-android {
-  compileSdkVersion 20
-  buildToolsVersion '20.0.0'
-  defaultConfig.targetSdkVersion 20
+if (System.getenv('ANDROID_HOME')) {
+  apply plugin: 'com.android.application'
 
-  sourceSets.main {
-    manifest.srcFile 'android/AndroidManifest.xml'
-    jniLibs.srcDir temporaryDirectory+'/libs/replayd'
-    jni.srcDirs = []
+  android {
+    compileSdkVersion 20
+    buildToolsVersion '20.0.0'
+    defaultConfig.targetSdkVersion 20
+
+    sourceSets.main {
+      manifest.srcFile 'android/AndroidManifest.xml'
+      jniLibs.srcDir temporaryDirectory+'/libs/replayd'
+      jni.srcDirs = []
+    }
+
+    buildTypes {
+      release {
+        debuggable false
+        jniDebuggable false
+        minifyEnabled false
+        zipAlignEnabled true
+      }
+      debug {
+        debuggable true
+        jniDebuggable true
+        zipAlignEnabled true
+      }
+    }
   }
 
-  buildTypes {
-    release {
-      debuggable false
-      jniDebuggable false
-      minifyEnabled false
-      zipAlignEnabled true
-    }
-    debug {
-      debuggable true
-      jniDebuggable true
-      zipAlignEnabled true
-    }
+  task ndkBuild(type: Exec) {
+    def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+    commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+                'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', '-j'
   }
-}
 
-task ndkBuild(type: Exec) {
-  def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
-  commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
-              'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', '-j'
-}
+  task ndkClean(type: Exec) {
+    def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
+    commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
+                'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', 'clean'
+  }
 
-task ndkClean(type: Exec) {
-  def cmd = 'ndk-build' + (osFamily() == 'windows' ? '.cmd' : '')
-  commandLine cmd, '-C', file('android').absolutePath, 'NDK_OUT='+temporaryDirectory+'/obj',
-              'NDK_APP_DST_DIR='+temporaryDirectory+'/libs/replayd/$(TARGET_ARCH_ABI)', '-s', 'clean'
-}
+  tasks.withType(JavaCompile) { compileTask ->
+    compileTask.dependsOn ndkBuild
+  }
 
-tasks.withType(JavaCompile) { compileTask ->
-  compileTask.dependsOn ndkBuild
-}
+  clean.dependsOn ndkClean
 
-clean.dependsOn ndkClean
+  task buildAndroid(dependsOn: ['assembleDebug', 'assembleRelease'])
+} else {
+  println 'ANDROID_HOME environment variable not defined, disabling Android build targets.'
+}
 
 task runTests(type: Exec, dependsOn: nativePlatform()+'TestExecutable') {
   workingDir goPath
@@ -224,9 +233,6 @@ sources {
       }
     }
   }
-}
-
-task buildAndroid(dependsOn: ['assembleDebug', 'assembleRelease']) {
 }
 
 task buildLocal(dependsOn: [nativePlatform()+'TestExecutable', nativePlatform()+'ReplaydExecutable']) {
