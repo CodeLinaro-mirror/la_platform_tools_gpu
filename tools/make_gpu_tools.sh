@@ -26,9 +26,7 @@ go generate -x $GPU_RELATIVE_SOURCE_PATH/gfxapi/test
 go generate -x $GPU_RELATIVE_SOURCE_PATH/gfxapi/gles
 go build -i -o $GPU_BUILD_ROOT/bin/protoc-gen-go github.com/golang/protobuf/protoc-gen-go
 
-# Skip the gradle build for now.
-# TODO: Enable this once the checked in gcc tool chain is working.
-#src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle
+src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle
 
 go generate -x $GPU_RELATIVE_SOURCE_PATH/builder
 go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
