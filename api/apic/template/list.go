@@ -60,6 +60,26 @@ func (*Functions) IndexOf(array interface{}, value interface{}) int {
 	return -1
 }
 
+// ForEach returns a string list containing the strings emitted by calling the
+// macro m for each sequential item in the array arr. 0 length strings will
+// be ommitted from the returned list.
+func (f *Functions) ForEach(arr interface{}, m string) (stringList, error) {
+	v := reflect.ValueOf(arr)
+	c := v.Len()
+	l := make(stringList, 0, c)
+	for i := 0; i < c; i++ {
+		e := v.Index(i).Interface()
+		str, err := f.Macro(m, e)
+		if err != nil {
+			return nil, err
+		}
+		if len(str) > 0 {
+			l = append(l, str)
+		}
+	}
+	return l, nil
+}
+
 type sortElem struct {
 	key string
 	idx int
