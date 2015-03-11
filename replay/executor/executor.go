@@ -156,7 +156,7 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 }
 
 func (r executor) handleDataResponse(postbacks io.Writer) error {
-	d := binary.NewDecoder(r.connection)
+	d := protocol.NewDecoder(r.connection, r.byteOrder)
 
 	n, err := d.Uint32()
 	if err != nil {
@@ -173,7 +173,7 @@ func (r executor) handleDataResponse(postbacks io.Writer) error {
 
 func (r executor) handleGetData() error {
 	logger := r.logger.Enter("handleGetData")
-	d := binary.NewDecoder(r.connection)
+	d := protocol.NewDecoder(r.connection, r.byteOrder)
 
 	resourceCount, err := d.Uint32()
 	if err != nil {

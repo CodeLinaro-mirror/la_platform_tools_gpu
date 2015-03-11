@@ -19,9 +19,6 @@ import (
 	"reflect"
 )
 
-// Used as an object key to define a nil pointer
-const objectNil uint16 = ^uint16(0)
-
 type Encodable interface {
 	// Encode the object's data to the Encoder.
 	// The implementation must be symmetrical to Decode.
