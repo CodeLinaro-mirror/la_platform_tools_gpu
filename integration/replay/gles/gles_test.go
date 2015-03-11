@@ -27,7 +27,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 )
 
-const replayTimeout = time.Minute
+const replayTimeout = time.Second * 10
 
 var generateReferenceImages = flag.Bool("generate", false, "generate reference images")
 
