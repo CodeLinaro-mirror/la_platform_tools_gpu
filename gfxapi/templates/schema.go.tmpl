@@ -178,8 +178,8 @@ limitations under the License.
   service.CreateStaticArrayInfo(
     "{{$.Name}}",
     service.TypeKindStaticArray,
-    []uint32{ {{range $d := $.Dimensions}}{{$d}}, {{end}} },
     {{Macro "TypeInfo" $.ValueType}},
+    []uint32{ {{range $d := $.Dimensions}}{{$d}}, {{end}} },
   )
 {{end}}
 

@@ -159,14 +159,13 @@ limitations under the License.
 
       {{if not (IsAny $.ValueType)}}{{/* TODO: remove when the Any type goes away. */}}
       func (s {{$.Name}}) Encode(e *binary.Encoder) error {
-        for _, v := range {{$length}} {
+        for _, v := range s {
           {{Macro "Go.Encode" "Type" $.ValueType "Name" "v"}}
         }
         return nil
       }
 
       func (s *{{$.Name}}) Decode(d *binary.Decoder) error {
-        *s = make({{$.Name}}, {{$length}})
         for i := range *s {
           {{Macro "Go.Decode" "Type" $.ValueType "Name" "(*s)[i]"}}
         }
