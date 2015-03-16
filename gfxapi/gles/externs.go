@@ -10,7 +10,7 @@ func substr(str string, start, end int32) string {
 	return str[start:end]
 }
 
-func stateVariableSize(v StateVariable) uint32 {
+func stateVariableSize(v StateVariable) int32 {
 	switch v {
 	case StateVariable_GL_ACTIVE_TEXTURE:
 		return 1
