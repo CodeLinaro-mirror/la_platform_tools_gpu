@@ -9,7 +9,7 @@ alias map<TextureUnit, map<TextureTarget, TextureId>> TextureUnitMap
 extern s32    strlen(string s)
 extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType type)
 extern string substr(string s, s32 start, s32 end)
-extern u32    stateVariableSize(StateVariable v)
+extern s32    stateVariableSize(StateVariable v)
 extern void   memcpy(any dest, any src, s32 size)
 
 /////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ macro s32 imageSize(s32 width, s32 height, TexelFormat format, TexelType type) {
     }
 }
 
-macro u32 stateVariableSize(StateVariable v) {
+macro s32 stateVariableSize(StateVariable v) {
     return switch (v) {
         case GL_ACTIVE_TEXTURE:                   1
         case GL_ALIASED_LINE_WIDTH_RANGE:         2
@@ -847,6 +847,7 @@ bitfield MapBufferRangeAccess {
     GL_MAP_UNSYNCHRONIZED_BIT                       = 0x0020,
 }
 
+@internal
 class Color {
     f32 Red
     f32 Green
@@ -854,6 +855,7 @@ class Color {
     f32 Alpha
 }
 
+@internal
 class Rect {
   s32 X
   s32 Y
@@ -861,6 +863,7 @@ class Rect {
   s32 Height
 }
 
+@internal
 class Image {
     s32              Width
     s32              Height
@@ -871,6 +874,7 @@ class Image {
 
 @Interface class FramebufferAttachable{}
 
+@internal
 class Renderbuffer : FramebufferAttachable {
     s32                Width
     s32                Height
@@ -878,6 +882,7 @@ class Renderbuffer : FramebufferAttachable {
     RenderbufferFormat Format
 }
 
+@internal
 class Texture : FramebufferAttachable {
     TextureKind            Kind
     ImageTexelFormat       Format
@@ -894,10 +899,12 @@ class Texture : FramebufferAttachable {
     f32                    MaxAnisotropy = 1.0  // EXT/texture_filter_anisotropic
 }
 
+@internal
 class CubemapLevel {
     map<CubeMapImageTarget, Image> Faces
 }
 
+@internal
 class FramebufferAttachmentInfo {
     u32                       Object
     FramebufferAttachmentType Type
@@ -905,16 +912,19 @@ class FramebufferAttachmentInfo {
     CubeMapImageTarget        CubeMapFace
 }
 
-class Framebuffer{
+@internal
+class Framebuffer {
     map<FramebufferAttachment, FramebufferAttachmentInfo> Attachments
 }
 
+@internal
 class Buffer {
     memory      Data
     s32         Size = 0
     BufferUsage Usage = GL_STATIC_DRAW
 }
 
+@internal
 class Shader {
     memory        Binary
     bool          Compiled = false
@@ -924,31 +934,45 @@ class Shader {
     ShaderType    Type
 }
 
+@internal
 class VertexAttribute {
     string           Name
     s32              VectorCount
     ShaderAttribType Type
 }
 
+@internal
 class Vec2i { s32 X, s32 Y }
+
+@internal
 class Vec3i { s32 X, s32 Y, s32 Z }
+
+@internal
 class Vec4i { s32 X, s32 Y, s32 Z, s32 W }
 
+@internal
 class Vec2f { f32 X, f32 Y }
+
+@internal
 class Vec3f { f32 X, f32 Y, f32 Z }
+
+@internal
 class Vec4f { f32 X, f32 Y, f32 Z, f32 W }
 
+@internal
 class Mat2f {
   Vec2f Col0
   Vec2f Col1
 }
 
+@internal
 class Mat3f {
   Vec3f Col0
   Vec3f Col1
   Vec3f Col2
 }
 
+@internal
 class Mat4f {
   Vec4f Col0
   Vec4f Col1
@@ -956,6 +980,7 @@ class Mat4f {
   Vec4f Col3
 }
 
+@internal
 @union
 class UniformValue {
     f32               F32
@@ -971,13 +996,15 @@ class UniformValue {
     Mat4f             Mat4f
 }
 
+@internal
 class Uniform {
     string            Name
     ShaderUniformType Type
     UniformValue      Value
 }
 
-class Program{
+@internal
+class Program {
     map<ShaderType, ShaderId>       Shaders
     bool                            Linked
     memory                          Binary
@@ -987,8 +1014,10 @@ class Program{
     string                          InfoLog
 }
 
+@internal
 class VertexArray {}
 
+@internal
 class VertexAttributeArray {
     bool             Enabled = false
     VertexAttribSize Size = SIZE_4
@@ -998,13 +1027,14 @@ class VertexAttributeArray {
     pointer          Data
 }
 
-class Query {
-}
+@internal
+class Query {}
 
 /////////////////////////////////////////////////////////////////
 // State
 /////////////////////////////////////////////////////////////////
 
+@internal
 class BlendState {
     BlendFactor                     SrcRgbBlendFactor = GL_ONE
     BlendFactor                     SrcAlphaBlendFactor = GL_ZERO
@@ -1015,6 +1045,7 @@ class BlendState {
     Color                           BlendColor
 }
 
+@internal
 class RasterizerState {
     bool                            DepthMask = true
     TestFunction                    DepthTestFunction = GL_LESS
@@ -1036,12 +1067,14 @@ class RasterizerState {
     bool                            SampleCoverageInvert
 }
 
+@internal
 class ClearState {
     Color                           ClearColor
     f32                             ClearDepth = 1.0
     s32                             ClearStencil
 }
 
+@internal
 class InternalState {
     BufferId                        NilBuffer = 0
     TextureId                       NilTexture = 0
@@ -1067,6 +1100,7 @@ type s32 AttributeLocation
 @replay_custom_value type pointer TexturePointer
 @replay_custom_value type pointer BufferDataPointer
 
+@internal
 class Objects {
     map<RenderbufferId, Renderbuffer*>    Renderbuffers
     map<TextureId, Texture*>              Textures
