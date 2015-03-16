@@ -79,6 +79,7 @@ var (
 		semantic.Select{},
 		semantic.StaticArray{},
 		semantic.Switch{},
+		semantic.UnaryOp{},
 		semantic.Unknown{},
 		// node interface types
 		(*semantic.Annotated)(nil),
