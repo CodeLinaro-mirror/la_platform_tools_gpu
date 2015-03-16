@@ -9,7 +9,43 @@ PROGDIR=`cd $PROGDIR && pwd`
 
 source $PROGDIR/setup_env_linux.txt
 
+run_integration_tests=0
+use_xvfb=0
+
+function show_help {
+  # Turn off command echoing so the help message is readable.
+  set +x
+  echo "USAGE: "`basename $0`" [-h] [-x] [-i]"
+  echo "  -h    Show this message."
+  echo "  -i    Run integration tests."
+  echo "  -x    Start an Xvfb-randr server for running integration tests"
+  echo "        without an X server."
+}
+
+while getopts "h?ix" opt; do
+    case "$opt" in
+    h|\?)  show_help
+        exit 0
+        ;;
+    i)  run_integration_tests=1
+        ;;
+    x)  use_xvfb=1
+        ;;
+    esac
+done
+
 cd $GPU_BUILD_ROOT
+
+if [ $use_xvfb -eq 1 ]; then
+  # Start a headless X server on display :42 for integration tests.
+  # Xvfb is not able to run the integration tests (the cause is not entirely
+  # understood, but it doesn't appear to expose GLX to the X client).
+  # Instead, run Xvfb-randr, which appears to be installed as part of
+  # Chrome remote desktop.
+  Xvfb-randr :42 +extension GLX -screen 0 1280x1024x24 -noreset &
+  export XVFB_PID=$!
+  export DISPLAY=:42
+fi
 
 go build -i -o $GPU_BUILD_ROOT/bin/embed $GPU_RELATIVE_SOURCE_PATH/tools/embed
 go generate -x $GPU_RELATIVE_SOURCE_PATH/tools/copyright
@@ -32,36 +68,15 @@ src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/bui
 # Kill any existing replay daemon before running tests.
 killall replayd || true
 
-# Try starting a headless X server on display :42 for integration tests.
-if [ -x "$(which Xvfb-randr)" ]; then
-  Xvfb-randr :42  +extension GLX -screen 0 1280x1024x24 -noreset &
-  export XVFB_PID=$!
-  export DISPLAY=:42
+# Run non-integration tests.
+go list android.googlesource.com/platform/tools/gpu/... | egrep -v '/integration/?' | xargs go test
+
+if [ $run_integration_tests -eq 1 ]; then
+  # Run the integration tests.
+  go list android.googlesource.com/platform/tools/gpu/... | egrep '/integration/?' | xargs go test
 fi
 
-go test $GPU_RELATIVE_SOURCE_PATH/api/...
-go test $GPU_RELATIVE_SOURCE_PATH/atexit/...
-go test $GPU_RELATIVE_SOURCE_PATH/atom/...
-go test $GPU_RELATIVE_SOURCE_PATH/binary/...
-go test $GPU_RELATIVE_SOURCE_PATH/builder/...
-go test $GPU_RELATIVE_SOURCE_PATH/database/...
-go test $GPU_RELATIVE_SOURCE_PATH/gfxapi/...
-go test $GPU_RELATIVE_SOURCE_PATH/image/...
-go test $GPU_RELATIVE_SOURCE_PATH/interval/...
-go test $GPU_RELATIVE_SOURCE_PATH/log/...
-go test $GPU_RELATIVE_SOURCE_PATH/memory/...
-go test $GPU_RELATIVE_SOURCE_PATH/multiplexer/...
-go test $GPU_RELATIVE_SOURCE_PATH/parse/...
-go test $GPU_RELATIVE_SOURCE_PATH/replay/...
-go test $GPU_RELATIVE_SOURCE_PATH/ringbuffer/...
-go test $GPU_RELATIVE_SOURCE_PATH/rpc/...
-go test $GPU_RELATIVE_SOURCE_PATH/server/...
-go test $GPU_RELATIVE_SOURCE_PATH/service/...
-go test $GPU_RELATIVE_SOURCE_PATH/tools/...
-
 if [ ! -z $XVFB_PID ]; then
-  # Only run the integration tests if we were able to start the virtual X display.
-  go test $GPU_RELATIVE_SOURCE_PATH/integration...
   kill $XVFB_PID
 fi
 
