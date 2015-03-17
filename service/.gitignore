@@ -1,6 +1,0 @@
-service_rpc.go
-service_binary.go
-service_client.go
-service_extra.go
-service_helpers.go
-service_server.go
