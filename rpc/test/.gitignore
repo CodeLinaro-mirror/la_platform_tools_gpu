@@ -1,6 +1,0 @@
-rpc_test_rpc.go
-rpc_test_binary.go
-rpc_test_client.go
-rpc_test_extra.go
-rpc_test_helpers.go
-rpc_test_server.go
