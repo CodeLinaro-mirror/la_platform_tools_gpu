@@ -22,5 +22,9 @@
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.cpp.tmpl
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.h.tmpl
 
+//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/spy.h.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/state.h.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/types.h.tmpl
+
 // Package gles implementes the API interface for the OpenGL ES graphics library.
 package gles

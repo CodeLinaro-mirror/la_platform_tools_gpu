@@ -87,7 +87,7 @@ limitations under the License.
   {{AssertType $ "Function"}}
 
   {{range $i, $p := $.CallParameters}}
-    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} §
+    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}}§
   {{end}}
 {{end}}
 
@@ -224,7 +224,7 @@ limitations under the License.
     switch ({{Macro "C++.Read" $.Value}}) {
       {{range $i, $c := $.Cases}}
         {{range $j, $cond := $c.Conditions}}
-          case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} { {{end}}
+          case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} {{"{"}}{{end}}
         {{end}}
           {{Macro "C++.Block" $c.Block}}
           break;
@@ -448,6 +448,14 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the Android Open Source Project copyright header.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.AOSP.Copyright"}}{{Copyright "generated_aosp_c" "apic"}}{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits a comment block containing the specified text.
 -------------------------------------------------------------------------------
 */}}
@@ -457,6 +465,7 @@ limitations under the License.
   // {{.}}
   ////////////////////////////////////////////////////////////////////////////////
 {{end}}
+
 
 {{$clang_style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"}}
 {{Global "clang-format" (Strings "clang-format" "-style" $clang_style)}}

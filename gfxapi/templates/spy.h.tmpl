@@ -1,0 +1,258 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{Include "cpp_common.tmpl"}}
+{{$ | Macro "Spy" | Reflow 4 | Write "spy.h"}}
+
+{{define "Spy"}}
+  {{AssertType $ "API"}}
+  {{Macro "C++.AOSP.Copyright"}}
+¶
+  #ifndef ANDROID_GFXSPY_SPY_H
+  #define ANDROID_GFXSPY_SPY_H
+¶
+  #include "encoder.h"
+  #include "types.h"
+  #include "state.h"
+¶
+  #include <stdint.h>
+¶
+  namespace gfxspy {«
+¶
+  class Spy {
+  «public:»
+    inline Spy(uint32_t contextId, Encoder* encoder);
+
+    {{range $f := $.Functions}}
+      {{Macro "MethodDefinitions" $f}}
+    {{end}}
+¶
+  «private:»
+    static const Id RESOURCE_ID;
+    static const Id OBSERVATION_ID;
+    {{range $f := $.Functions}}
+      static const Id {{Macro "ID" $f}};
+    {{end}}
+¶
+    enum order {
+      PRE_OBSERVE,
+      POST_OBSERVE,
+    };
+¶
+    bool observed(const Id& id) const;
+    template <typename T> inline void observe(const T* ptr, uint64_t cnt, order order);
+    uint32_t mContextId;
+    Encoder* mEncoder;
+    State mState;
+  };
+¶
+  // Inline methods
+  inline Spy::Spy(uint32_t contextId, Encoder* encoder) :
+      mContextId(contextId), mEncoder(encoder) {}
+¶
+  template <typename T>
+  inline void Spy::observe(const T* ptr, uint64_t cnt, order order) {
+      const uint64_t size = cnt * sizeof(T);
+      Id id(ptr, size);
+      if (!observed(id)) {
+        mEncoder->Id(RESOURCE_ID);
+        mEncoder->Id(id);
+        mEncoder->Data(ptr, size);
+      }
+      mEncoder->Id(OBSERVATION_ID);
+      mEncoder->Bool(order == PRE_OBSERVE);
+      mEncoder->U64(reinterpret_cast<uint64_t>(ptr));
+      mEncoder->U64(size);
+  }
+¶
+  template <>
+  inline void Spy::observe(const void *ptr, uint64_t cnt, order order) {
+      observe<uint8_t>(reinterpret_cast<const uint8_t*>(ptr), cnt, order);
+  }
+¶
+  {{range $i, $f := $.Functions}}
+    {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
+    {{Macro "MethodImplementation" $f}}¶
+  {{end}}
+¶
+  »} // namespace gfxspy
+  #endif // ANDROID_GFXSPY_SPY_H
+¶
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the static variable name holding the ID of the given function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ID"}}
+  {{AssertType $ "Function"}}
+
+  {{SplitPascalCase $.Name | Upper | JoinWith "_"}}_ID
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the function pointer parameter for the spy Call function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "FunctionPointer"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "C++.ReturnType" $}} (__stdcall *F)({{Macro "C++.CallParameterTypes" $}})
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a single C++ method definition for the given atom.
+-------------------------------------------------------------------------------
+*/}}
+{{define "MethodDefinitions"}}
+  {{AssertType $ "Function"}}
+
+  {{$cp := Macro "C++.CallParameters" $}}
+  inline {{Macro "C++.ReturnType" $}} {{$.Name}}({{Macro "FunctionPointer" $}}{{if $cp}}, {{$cp}}{{end}});
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the inline method body for the given atom.
+-------------------------------------------------------------------------------
+*/}}
+{{define "MethodImplementation"}}
+  {{AssertType $ "Function"}}
+
+  {{$cp  := Macro "C++.CallParameters" $}}
+  {{$ret := not (IsVoid $.Return.Type)}}
+  inline {{Macro "C++.ReturnType" $}} Spy::{{$.Name}}({{Macro "FunctionPointer" $}}{{if $cp}}, {{$cp}}{{end}}) {
+    {{$pre_obs  := Macro "PreCallObservations"  $}}
+    {{$post_obs := Macro "PostCallObservations" $}}
+
+    {{if $pre_obs}}{{$pre_obs}}¶{{end}}
+
+    {{if $ret}}{{Macro "C++.ReturnType" $}} result = F({{Macro "C++.CallArguments" $}});
+    {{else}}F({{Macro "C++.CallArguments" $}});
+    {{end}}
+    mState.{{$.Name}}({{Macro "C++.ReadList" $.FullParameters}});
+¶
+    {{/*{{if $post_obs}}{{$post_obs}}¶{{end}}*/}}
+
+    mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
+    mEncoder->U32(mContextId);
+    {{range $i, $p := $.FullParameters}}
+      {{$name := Macro "C++.ReadParameter" $p}}
+      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $name}};
+    {{end}}
+
+    {{if $ret}}¶
+      return result;
+    {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ pre-call observations.
+-------------------------------------------------------------------------------
+*/}}
+{{define "PreCallObservations"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.FullParameters}}
+    {{if $p.Input}}
+      {{$ty := TypeOf $p}}
+      {{if IsPointerType $ty}}
+        observe({{Macro "C++.ReadParameter" $p}}, {{Macro "ArrayParamCount" $p}}, PRE_OBSERVE);
+      {{end}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ post-call observations.
+-------------------------------------------------------------------------------
+*/}}
+{{define "PostCallObservations"}}
+  {{AssertType $ "Function"}}
+
+  {{range $i, $p := $.FullParameters}}
+    {{if $p.Output}}
+      {{$ty := TypeOf $p}}
+      {{if IsPointerType $ty}}
+        observe({{Macro "C++.ReadParameter" $p}}, {{Macro "ArrayParamCount" $p}}, POST_OBSERVE);
+      {{end}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ expression for the number of elements in the provided array
+  parameter.
+-------------------------------------------------------------------------------
+*/}}
+{{define "ArrayParamCount"}}
+  {{AssertType $ "Parameter"}}
+
+  {{if eq $.Function.Return.Name $.Name}}
+    {{$cnt_expr := GetAnnotation $.Function "ReturnSize"}}
+    {{if not $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
+    {{Macro "C++.Read" (index $cnt_expr.Arguments 0)}}
+  {{else}}
+    {{$cnt_expr := GetArrayParamCount $}}
+    {{if not $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
+    {{Macro "C++.Read" $cnt_expr}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ encode logic for the specified parameter.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Encode"}}
+  {{AssertType $.Type      "Type"}}
+  {{AssertType $.Name      "string"}}
+  {{AssertType $.Parameter "Parameter"}}
+
+  {{     if IsPseudonym   $.Type}}{{Macro "Encode" "Type" $.Type.To "Name" $.Name "Parameter" $.Parameter}}
+  {{else if IsBool        $.Type}}mEncoder->Bool({{$.Name}})
+  {{else if IsInt         $.Type}}mEncoder->Int({{$.Name}})
+  {{else if IsUint        $.Type}}mEncoder->Uint({{$.Name}})
+  {{else if IsU8          $.Type}}mEncoder->U8({{$.Name}})
+  {{else if IsS8          $.Type}}mEncoder->S8({{$.Name}})
+  {{else if IsU16         $.Type}}mEncoder->U16({{$.Name}})
+  {{else if IsS16         $.Type}}mEncoder->S16({{$.Name}})
+  {{else if IsF32         $.Type}}mEncoder->F32({{$.Name}})
+  {{else if IsU32         $.Type}}mEncoder->U32({{$.Name}})
+  {{else if IsS32         $.Type}}mEncoder->S32({{$.Name}})
+  {{else if IsF64         $.Type}}mEncoder->F64({{$.Name}})
+  {{else if IsU64         $.Type}}mEncoder->U64({{$.Name}})
+  {{else if IsS64         $.Type}}mEncoder->S64({{$.Name}})
+  {{else if IsPointerType $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
+  {{else if IsString      $.Type}}mEncoder->String({{$.Name}})
+  {{else if IsEnum        $.Type}}mEncoder->U32(static_cast<uint32_t>({{$.Name}}))
+  {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
+  {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
+  {{end}}
+{{end}}
+
