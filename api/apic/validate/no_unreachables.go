@@ -20,8 +20,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// validateNoUnreachables checks there are no unreachable blocks.
-func validateNoUnreachables(api *semantic.API) []parse.Error {
+// noUnreachables checks there are no unreachable blocks.
+func noUnreachables(api *semantic.API) []parse.Error {
 	ctx := context{
 		locals:     make(map[*semantic.Local]limits.Limits),
 		parameters: make(map[*semantic.Parameter]limits.Limits),
