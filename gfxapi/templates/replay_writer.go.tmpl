@@ -55,11 +55,15 @@ limitations under the License.
 
   {{template "DeclareBuilderFunctionInfos" $}}
 
-  {{template "DeclarePseudonymsValue" $}}
+  {{ForEach $.Classes "DeclareClassValue" | JoinWith "\n"}}
 
-  {{template "DeclareArraysValue" $}}
+  {{ForEach $.Pseudonyms "DeclarePseudonymValue" | JoinWith "\n"}}
 
-  {{template "DeclarePostbacks" $}}
+  {{ForEach $.Arrays "DeclareArrayValue" | JoinWith "\n"}}
+
+  {{ForEach $.StaticArrays "DeclareArrayValue" | JoinWith "\n"}}
+
+  {{ForEach (AllCommands $) "DeclarePostbacks" | JoinWith "\n"}}
 
   type replayWriter struct {
     builder    *builder.Builder
@@ -96,11 +100,9 @@ limitations under the License.
     }
   }
 
-  {{template "Process" $}}
+  {{template "WriteFunction" $}}
 
-  {{range $c := AllCommands $}}
-    {{Macro "DeclareCommandReplay" $c}}
-  {{end}}
+  {{ForEach (AllCommands $) "DeclareCommandReplay" | JoinWith "\n"}}
 {{end}}
 
 
@@ -124,74 +126,95 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Declares the value method for each pseudonym type.
+  Emits a function info definition for the given class, if non-internal.
 -------------------------------------------------------------------------------
 */}}
-{{define "DeclarePseudonymsValue"}}
-  {{AssertType $ "API"}}
+{{define "DeclareClassValue"}}
+  {{AssertType $ "Class"}}
 
-  {{range $p := $.Pseudonyms}}
-    {{if not (GetAnnotation $p "replay_custom_value")}}
-      {{$v := print (Macro "Go.Type" $p.To) "(c)"}}
-      func (c {{$p.Name}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value { return {{Macro "Value" "Type" $p.To "Name" $v}} }
-    {{end}}
+  {{if not (or (GetAnnotation $ "internal") (GetAnnotation $ "Interface"))}}
+    func (c {{Macro "Go.Type" $}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+      {{$union := GetAnnotation $ "union"}}
+      {{range $i, $f := $.Fields}}
+        {{/* TODO: Figure out proper handling of unions. */}}
+        {{if not (and $i $union)}}
+          {{$fname := (print "c." (Macro "Go.Public" $f.Name))}}
+          b.Push({{Macro "Value" "Type" $f.Type "Name" $fname}})
+        {{end}}
+      {{end}}
+      return b.Buffer(§
+        {{if $union}}1
+        {{else}}{{range $i, $_ := $.Fields}}{{if not (HasMore $i $.Fields)}}{{$i}}+1{{end}}{{end}}
+        {{end}}§)
+    }
   {{end}}
 {{end}}
 
 
 {{/*
 -------------------------------------------------------------------------------
-  Declares the value method for each array type.
+  Declares the value method for a given pseudonym type.
 -------------------------------------------------------------------------------
 */}}
-{{define "DeclareArraysValue"}}
-  {{AssertType $ "API"}}
+{{define "DeclarePseudonymValue"}}
+  {{AssertType $ "Pseudonym"}}
 
-  {{range $a := $.Arrays}}
-    {{if not (IsAny $a.ValueType)}}
-      func (arr {{Macro "Go.Type" $a}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
-        if len(arr) > 0 {
-          for _, e := range arr {
-            {{Macro "PushInput" "Type" $a.ValueType "Name" "e"}}
-          }
-          return b.Buffer(len(arr))
-        } else {
-          return value.AbsolutePointer(0)
+  {{if not (GetAnnotation $ "replay_custom_value")}}
+    {{$v := print (Macro "Go.Type" $.To) "(c)"}}
+    func (c {{$.Name}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Declares the value method for the given array or static array type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareArrayValue"}}
+  {{AssertType $ "Array" "StaticArray"}}
+
+  {{if not (or (GetAnnotation $.ValueType "internal") (IsAny $.ValueType))}}
+    func (arr {{Macro "Go.Type" $}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+      if len(arr) > 0 {
+        for _, e := range arr {
+          {{Macro "PushInput" "Type" $.ValueType "Name" "e"}}
         }
+        return b.Buffer(len(arr))
+      } else {
+        return value.AbsolutePointer(0)
       }
-    {{end}}
+    }
   {{end}}
 {{end}}
 
 
 {{/*
 -------------------------------------------------------------------------------
-  Declares the postback structs for each command's outputs.
+  Declares the postback structs for the given command's outputs.
 -------------------------------------------------------------------------------
 */}}
 {{define "DeclarePostbacks"}}
-  {{AssertType $ "API"}}
+  {{AssertType $ "Function"}}
 
-  {{range $c := AllCommands $}}
-    {{if len $c.Outputs}} {{/* Skip commands with no output */}}
-      {{$name := Macro "CmdPostbacksName" $c}}
-      type {{$name}} struct {
-        {{range $p := $c.Outputs}}
-          {{Macro "Go.Public" $p.Name}} {{Macro "PostbackType" (TypeOf $p)}}
-        {{end}}
-      }
+  {{if len $.Outputs}} {{/* Skip commands with no output */}}
+    {{$name := Macro "CmdPostbacksName" $}}
+    type {{$name}} struct {
+      {{range $p := $.Outputs}}
+        {{Macro "Go.Public" $p.Name}} {{Macro "PostbackType" (TypeOf $p)}}
+      {{end}}
+    }
 
-      {{$array_counts := Macro "ArrayCountsList" "Command" $c "Postfix" "uint64, "}}
-      func (o *{{$name}}) Decode({{$array_counts}}d *protocol.Decoder) error {
-        {{/* Decode each of the output parameters */}}
-        {{range $p := $c.Outputs}}
-          {{$name := print "o." (Macro "Go.Public" $p.Name)}}
-          {{$count := Macro "ArrayCount" $p.Name}}
-          {{Macro "DecodePostback" "Type" (TypeOf $p) "Name" $name "Count" $count}}
-        {{end}}
-        return nil
-      }
-    {{end}}
+    {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" "uint64, "}}
+    func (o *{{$name}}) Decode({{$array_counts}}d *protocol.Decoder) error {
+      {{/* Decode each of the output parameters */}}
+      {{range $p := $.Outputs}}
+        {{$name := print "o." (Macro "Go.Public" $p.Name)}}
+        {{$count := Macro "ArrayCount" $p.Name}}
+        {{Macro "DecodePostback" "Type" (TypeOf $p) "Name" $name "Count" $count}}
+      {{end}}
+      return nil
+    }
   {{end}}
 {{end}}
 
@@ -213,7 +236,7 @@ limitations under the License.
   {{AssertType $ "Type"}}
 
   {{if IsPointerType $}}[]byte
-  {{else          }}{{Macro "Go.Type" $}}
+  {{else              }}{{Macro "Go.Type" $}}
   {{end}}
 {{end}}
 
@@ -227,7 +250,6 @@ limitations under the License.
   {{AssertType $.Type "Type"}}
   {{AssertType $.Name "string"}}
   {{AssertType $.Count "string"}}
-
 
   {{     if IsString      $.Type}}if val, err := readString(d, {{$.Count}}); err == nil { {{$.Name}} = val } else { return err }
   {{else if IsPointerType $.Type}}if val, err := readBytes(d, {{$.Count}});  err == nil { {{$.Name}} = val } else { return err }
@@ -251,10 +273,10 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the Process function
+  Emits the Write function
 -------------------------------------------------------------------------------
 */}}
-{{define "Process"}}
+{{define "WriteFunction"}}
   {{AssertType $ "API"}}
 
   func (r *replayWriter) Write(id atom.ID, a atom.Atom, wantOutput bool) {
@@ -357,7 +379,8 @@ limitations under the License.
 
   {{$name := "result"}}
 
-  {{     if IsPseudonym $.Type}}{{Macro "StoreReturn" "Type" $.Type.To "Destination" $.Destination}}
+  {{     if IsPseudonym $.Type}}
+    {{Macro "StoreReturn" "Type" $.Type.To "Destination" $.Destination}}
   {{else if IsArray     $.Type}}
     b.Push({{$.Destination}})
     b.Copy({{Macro "ArrayCount" $name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}})
@@ -367,7 +390,8 @@ limitations under the License.
   {{else if IsPointerType $.Type}}
     b.Push({{$.Destination}})
     b.Copy({{Macro "ArrayCount" $name}})
-  {{else}}b.Store({{$.Destination}})
+  {{else}}
+    b.Store({{$.Destination}})
   {{end}}
 
 {{end}}
@@ -462,6 +486,7 @@ limitations under the License.
 
   {{     if IsPseudonym     $.Type}}{{Macro "SizeOf" "Type" $.Type.To "Name" $.Name}}
   {{else if IsArray         $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}}
+  {{else if IsStaticArray   $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}}
   {{else if IsString        $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}}
   {{else if IsPointerType   $.Type}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}}
   {{else if IsBool          $.Type}}1
@@ -476,7 +501,7 @@ limitations under the License.
   {{else if IsU64           $.Type}}8
   {{else if IsF64           $.Type}}8
   {{else if IsEnum          $.Type}}4
-  {{else if IsPointer       $.Type}}PointerSize
+  {{else if IsPointer       $.Type}}uint64(b.PointerSize())
   {{else                          }}{{Error "macro SizeOf '%s' called with unsupported type: %v" $.Name $.Type}}
   {{end}}
 {{end}}
@@ -554,6 +579,7 @@ limitations under the License.
   {{else if IsPointerType $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsEnum        $.Type}}value.U32({{$.Name}})
   {{else if IsArray       $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsStaticArray $.Type}}{{$.Name}}.value(b, ω, s)
   {{else if IsPseudonym   $.Type}}{{$.Name}}.value(b, ω, s)
   {{else if IsClass       $.Type}}{{$.Name}}.value(b, ω, s)
   {{else                          }}{{Error "macro Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
