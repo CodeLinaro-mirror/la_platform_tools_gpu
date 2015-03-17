@@ -19,8 +19,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// validateNoUnusedTypes verifies that all declared types are used.
-func validateNoUnusedTypes(apiName string, api *semantic.API) []error {
+// noUnusedTypes verifies that all declared types are used.
+func noUnusedTypes(apiName string, api *semantic.API) []error {
 	used := map[semantic.Type]bool{}
 	tokens := map[semantic.Type]parse.Token{}
 

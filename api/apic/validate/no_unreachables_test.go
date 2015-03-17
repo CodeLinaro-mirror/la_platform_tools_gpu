@@ -218,7 +218,7 @@ func TestSimpleUnreachable(t *testing.T) {
 		)},
 	} {
 		if api := compile(t, test.source); api != nil {
-			got := validateNoUnreachables(api)
+			got := noUnreachables(api)
 			ok := true
 			if len(got) == len(test.expected) {
 				for i := range got {
