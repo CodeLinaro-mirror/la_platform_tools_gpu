@@ -71,7 +71,10 @@ func doValidate(flags flag.FlagSet) {
 // If any problems are found then they are returned as errors.
 func Validate(apiName string, api *semantic.API) []error {
 	errs := []error{}
-	errs = append(errs, validateNoUnusedTypes(apiName, api)...)
+	errs = append(errs, noUnusedTypes(apiName, api)...)
+	for _, e := range noUnreachables(api) {
+		errs = append(errs, err(apiName, e.At.Token(), e.Message))
+	}
 	return errs
 }
 
