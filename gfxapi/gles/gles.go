@@ -18,6 +18,7 @@
 //go:generate apic template gles.api ../templates/replay_writer.go.tmpl
 //go:generate apic template gles.api ../templates/schema.go.tmpl
 //go:generate apic template gles.api ../templates/state_mutator.go.tmpl
+//go:generate codergen -go
 
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.cpp.tmpl
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.h.tmpl

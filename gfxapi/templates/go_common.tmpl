@@ -58,43 +58,6 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the logic to encode the specified variable.
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.Encode"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
-
-  {{     if IsPseudonym     $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsArray         $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsStaticArray   $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsMap           $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsClass         $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsPointer       $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsMemory        $.Type}}if err := {{$.Name}}.Encode(e);         err != nil { return err }
-  {{else if IsEnum          $.Type}}if err := e.Uint32(uint32({{$.Name}})); err != nil { return err }
-  {{else if IsPointerType   $.Type}}if err := e.Uint64(uint64({{$.Name}})); err != nil { return err }
-  {{else if IsBool          $.Type}}if err := e.Bool({{$.Name}});           err != nil { return err }
-  {{else if IsInt           $.Type}}if err := e.Int64({{$.Name}});          err != nil { return err }
-  {{else if IsUint          $.Type}}if err := e.Uint64({{$.Name}});         err != nil { return err }
-  {{else if IsS8            $.Type}}if err := e.Int8({{$.Name}});           err != nil { return err }
-  {{else if IsU8            $.Type}}if err := e.Uint8({{$.Name}});          err != nil { return err }
-  {{else if IsS16           $.Type}}if err := e.Int16({{$.Name}});          err != nil { return err }
-  {{else if IsU16           $.Type}}if err := e.Uint16({{$.Name}});         err != nil { return err }
-  {{else if IsS32           $.Type}}if err := e.Int32({{$.Name}});          err != nil { return err }
-  {{else if IsU32           $.Type}}if err := e.Uint32({{$.Name}});         err != nil { return err }
-  {{else if IsF32           $.Type}}if err := e.Float32({{$.Name}});        err != nil { return err }
-  {{else if IsS64           $.Type}}if err := e.Int64({{$.Name}});          err != nil { return err }
-  {{else if IsU64           $.Type}}if err := e.Uint64({{$.Name}});         err != nil { return err }
-  {{else if IsF64           $.Type}}if err := e.Float64({{$.Name}});        err != nil { return err }
-  {{else if IsString        $.Type}}if err := e.String({{$.Name}});         err != nil { return err }
-  {{else if IsAny           $.Type}}/* TODO */
-  {{else if IsVoid          $.Type}}
-  {{else}}{{Error "macro Encode '%v' called with unsupported type: %v" $.Name $.Type.Name}}
-  {{end}}
-{{end}}
-
-
 {{/*
 -------------------------------------------------------------------------------
   Emits the logic to decode the specified variable.

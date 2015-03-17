@@ -55,16 +55,16 @@ func check(t *testing.T, name string, expected, got uint64) {
 //
 func buildTestGroup() Group {
 	return Group{
-		Range: Range{0, 10000},
+		Range: Range{Start: 0, End: 10000},
 		SubGroups: GroupList{
-			Group{Range: Range{100, 200}},
+			Group{Range: Range{Start: 100, End: 200}},
 			Group{
-				Range: Range{300, 400},
+				Range: Range{Start: 300, End: 400},
 				SubGroups: GroupList{
-					Group{Range: Range{340, 360}},
+					Group{Range: Range{Start: 340, End: 360}},
 				},
 			},
-			Group{Range: Range{500, 600}},
+			Group{Range: Range{Start: 500, End: 600}},
 		},
 	}
 }
@@ -161,7 +161,7 @@ func TestGroupIndexOf(t *testing.T) {
 
 func TestGroupAddTopDown(t *testing.T) {
 	root := Group{}
-	root.Range = Range{0, 1000}
+	root.Range = Range{Start: 0, End: 1000}
 
 	root.SubGroups.Add(0, 1000, "R")
 
@@ -178,22 +178,22 @@ func TestGroupAddTopDown(t *testing.T) {
 	root.SubGroups.Add(500, 600, "C2")
 
 	expected := Group{
-		Range: Range{0, 1000},
+		Range: Range{Start: 0, End: 1000},
 		SubGroups: GroupList{
 			Group{
-				Range: Range{0, 1000},
+				Range: Range{Start: 0, End: 1000},
 				Name:  "R",
 				SubGroups: GroupList{
 					Group{
-						Range: Range{100, 200},
+						Range: Range{Start: 100, End: 200},
 						Name:  "A0",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{120, 180},
+								Range: Range{Start: 120, End: 180},
 								Name:  "A1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{140, 160},
+										Range: Range{Start: 140, End: 160},
 										Name:  "A2",
 									},
 								},
@@ -201,15 +201,15 @@ func TestGroupAddTopDown(t *testing.T) {
 						},
 					},
 					Group{
-						Range: Range{300, 400},
+						Range: Range{Start: 300, End: 400},
 						Name:  "B0",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{310, 390},
+								Range: Range{Start: 310, End: 390},
 								Name:  "B1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{320, 380},
+										Range: Range{Start: 320, End: 380},
 										Name:  "B2",
 									},
 								},
@@ -217,15 +217,15 @@ func TestGroupAddTopDown(t *testing.T) {
 						},
 					},
 					Group{
-						Range: Range{500, 600},
+						Range: Range{Start: 500, End: 600},
 						Name:  "C0",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{500, 600},
+								Range: Range{Start: 500, End: 600},
 								Name:  "C1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{500, 600},
+										Range: Range{Start: 500, End: 600},
 										Name:  "C2",
 									},
 								},
@@ -245,7 +245,7 @@ func TestGroupAddTopDown(t *testing.T) {
 
 func TestGroupAddBottomUp(t *testing.T) {
 	root := Group{}
-	root.Range = Range{0, 1000}
+	root.Range = Range{Start: 0, End: 1000}
 
 	root.SubGroups.Add(140, 160, "A2")
 	root.SubGroups.Add(320, 380, "B2")
@@ -262,22 +262,22 @@ func TestGroupAddBottomUp(t *testing.T) {
 	root.SubGroups.Add(0, 1000, "R")
 
 	expected := Group{
-		Range: Range{0, 1000},
+		Range: Range{Start: 0, End: 1000},
 		SubGroups: GroupList{
 			Group{
-				Range: Range{0, 1000},
+				Range: Range{Start: 0, End: 1000},
 				Name:  "R",
 				SubGroups: GroupList{
 					Group{
-						Range: Range{100, 200},
+						Range: Range{Start: 100, End: 200},
 						Name:  "A0",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{120, 180},
+								Range: Range{Start: 120, End: 180},
 								Name:  "A1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{140, 160},
+										Range: Range{Start: 140, End: 160},
 										Name:  "A2",
 									},
 								},
@@ -285,15 +285,15 @@ func TestGroupAddBottomUp(t *testing.T) {
 						},
 					},
 					Group{
-						Range: Range{300, 400},
+						Range: Range{Start: 300, End: 400},
 						Name:  "B0",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{310, 390},
+								Range: Range{Start: 310, End: 390},
 								Name:  "B1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{320, 380},
+										Range: Range{Start: 320, End: 380},
 										Name:  "B2",
 									},
 								},
@@ -301,15 +301,15 @@ func TestGroupAddBottomUp(t *testing.T) {
 						},
 					},
 					Group{
-						Range: Range{500, 600},
+						Range: Range{Start: 500, End: 600},
 						Name:  "C2",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{500, 600},
+								Range: Range{Start: 500, End: 600},
 								Name:  "C1",
 								SubGroups: GroupList{
 									Group{
-										Range: Range{500, 600},
+										Range: Range{Start: 500, End: 600},
 										Name:  "C0",
 									},
 								},
@@ -329,25 +329,25 @@ func TestGroupAddBottomUp(t *testing.T) {
 
 func TestGroupAddMixed(t *testing.T) {
 	root := Group{}
-	root.Range = Range{0, 1000}
+	root.Range = Range{Start: 0, End: 1000}
 
 	root.SubGroups.Add(100, 500, "A")
 	root.SubGroups.Add(400, 500, "C")
 	root.SubGroups.Add(200, 500, "B")
 
 	expected := Group{
-		Range: Range{0, 1000},
+		Range: Range{Start: 0, End: 1000},
 		SubGroups: GroupList{
 			Group{
-				Range: Range{100, 500},
+				Range: Range{Start: 100, End: 500},
 				Name:  "A",
 				SubGroups: GroupList{
 					Group{
-						Range: Range{200, 500},
+						Range: Range{Start: 200, End: 500},
 						Name:  "B",
 						SubGroups: GroupList{
 							Group{
-								Range: Range{400, 500},
+								Range: Range{Start: 400, End: 500},
 								Name:  "C",
 							},
 						},

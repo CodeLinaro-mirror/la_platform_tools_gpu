@@ -19,7 +19,6 @@ import (
 	"log"
 	"strings"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/interval"
 )
 
@@ -58,7 +57,7 @@ func (l *GroupList) IndexOf(atomID ID) int {
 // If the new group partially overlaps any existing group then the function will
 // panic.
 func (l *GroupList) Add(start, end ID, name string) {
-	r := Range{start, end}
+	r := Range{Start: start, End: end}
 	g := Group{Name: name, Range: r}
 	s, c := interval.Intersect(l, r.Span())
 	if c == 0 {
@@ -124,32 +123,4 @@ func (l *GroupList) Resize(length int) {
 		*l = make(GroupList, length, capacity)
 		copy(*l, old)
 	}
-}
-
-// Encode encodes the Group using the specified encoder.
-func (l GroupList) Encode(e *binary.Encoder) error {
-	if err := e.Uint32(uint32(l.Length())); err != nil {
-		return err
-	}
-	for _, s := range l {
-		if err := s.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-// Decode decodes the Group using the specified encoder.
-func (l *GroupList) Decode(d *binary.Decoder) error {
-	if count, err := d.Uint32(); err == nil {
-		*l = make(GroupList, count)
-		for i := range *l {
-			if err := (*l)[i].Decode(d); err != nil {
-				return err
-			}
-		}
-	} else {
-		return err
-	}
-	return nil
 }

@@ -43,9 +43,9 @@ func TestSlice(t *testing.T) {
 		rng      Range
 		expected []byte
 	}{
-		{Range{0, 10}, []byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}},
-		{Range{3, 3}, []byte{3, 4, 5}},
-		{Range{6, 3}, []byte{6, 7, 8}},
+		{Range{Base: 0, Size: 10}, []byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}},
+		{Range{Base: 3, Size: 3}, []byte{3, 4, 5}},
+		{Range{Base: 6, Size: 3}, []byte{6, 7, 8}},
 	} {
 		got, err := slice(data, test.rng).Get(nil, nil)
 		if err != nil {

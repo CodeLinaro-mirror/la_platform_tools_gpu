@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate codergen -go
+
 // Package atom provides the fundamental types used to describe a capture stream.
 package atom
 
@@ -31,9 +33,15 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // binary compatibility with old capture formats. Any change to the Atom's
 // binary format should also result in a new TypeID.
 type Atom interface {
+	binary.Object
 	TypeID() TypeID
 	ContextID() ContextID
 	Flags() Flags
-	Encode(*binary.Encoder) error
-	Decode(*binary.Decoder) error
 }
+
+// ID is the index of an atom in an atom stream.
+type ID uint64
+
+// ContextIDs are used to identify which thread or rendering context each atom
+// belongs to. The numerical value is meaningless aside from equality testing.
+type ContextID uint32

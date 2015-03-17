@@ -48,37 +48,8 @@ func (t metaType) String() string {
 }
 
 type metadata struct {
+	binary.Generate
 	Type    metaType
 	LinkTo  binary.ID
 	Request binary.Object
-}
-
-func (m *metadata) Encode(e *binary.Encoder) error {
-	if err := e.Uint8(uint8(m.Type)); err != nil {
-		return err
-	}
-	if err := m.LinkTo.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Object(m.Request); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *metadata) Decode(d *binary.Decoder) error {
-	ty, err := d.Uint8()
-	if err != nil {
-		return err
-	}
-	m.Type = metaType(ty)
-	if err := m.LinkTo.Decode(d); err != nil {
-		return err
-	}
-	if req, err := d.Object(); req != nil && err == nil {
-		m.Request = req.(binary.Object)
-	} else {
-		return err
-	}
-	return nil
 }

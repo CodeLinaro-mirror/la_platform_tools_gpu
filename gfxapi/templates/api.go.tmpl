@@ -87,19 +87,6 @@ limitations under the License.
 
   type {{$.Name}} {{Macro "Go.Type" $.To}}
 
-  func (c *{{$.Name}}) Encode(e *binary.Encoder) error {
-    x := {{Macro "Go.Type" $.To}}(*c)
-    {{Macro "Go.Encode" "Type" $.To "Name" "x"}}
-    return nil
-  }
-
-  func (c *{{$.Name}}) Decode(d *binary.Decoder) error {
-    var x {{Macro "Go.Type" $.To}}
-    {{Macro "Go.Decode" "Type" $.To "Name" "x"}}
-    *c = {{$.Name}}(x)
-    return nil
-  }
-
   {{$lhs := print (Macro "Go.Type" $.To) "(*c)"}}
   {{$rhs := print (Macro "Go.Type" $.To) "(rhs)"}}
   func (c *{{$.Name}}) Less(rhs {{$.Name}})  bool { return {{Macro "Less"  "Type" $.To "LHS" $lhs "RHS" $rhs}} }
@@ -118,26 +105,6 @@ limitations under the License.
   type {{$.Name}} []{{Macro "Go.Type" $.ValueType}}
   func (s {{$.Name}}) Len() int { return len(s) }
   func (s {{$.Name}}) Range() []{{Macro "Go.Type" $.ValueType}} { return s}
-
-  {{if not (IsAny $.ValueType)}}{{/* TODO: remove when the Any type goes away. */}}
-  func (s {{$.Name}}) Encode(e *binary.Encoder) error {
-    e.Uint32(uint32(len(s)))
-    for _, v := range s {
-      {{Macro "Go.Encode" "Type" $.ValueType "Name" "v"}}
-    }
-    return nil
-  }
-
-  func (s *{{$.Name}}) Decode(d *binary.Decoder) error {
-    c, err := d.Uint32()
-    if err != nil { return err }
-    *s = make({{$.Name}}, c)
-    for i := range *s {
-      {{Macro "Go.Decode" "Type" $.ValueType "Name" "(*s)[i]"}}
-    }
-    return nil
-  }
-  {{end}}
 {{end}}
 
 
@@ -156,22 +123,6 @@ limitations under the License.
       type {{$.Name}} [{{$length}}]{{Macro "Go.Type" $.ValueType}}
       func (s {{$.Name}}) Len() int { return {{$length}} }
       func (s {{$.Name}}) Range() [{{$length}}]{{Macro "Go.Type" $.ValueType}} { return s}
-
-      {{if not (IsAny $.ValueType)}}{{/* TODO: remove when the Any type goes away. */}}
-      func (s {{$.Name}}) Encode(e *binary.Encoder) error {
-        for _, v := range s {
-          {{Macro "Go.Encode" "Type" $.ValueType "Name" "v"}}
-        }
-        return nil
-      }
-
-      func (s *{{$.Name}}) Decode(d *binary.Decoder) error {
-        for i := range *s {
-          {{Macro "Go.Decode" "Type" $.ValueType "Name" "(*s)[i]"}}
-        }
-        return nil
-      }
-      {{end}}
     {{end}}
   {{end}}
 {{end}}
@@ -219,28 +170,6 @@ limitations under the License.
     }
     return values
   }
-
-  func (m {{$name}}) Encode(e *binary.Encoder) error {
-    e.Uint32(uint32(len(m)))
-    for key, value := range m {
-      {{Macro "Go.Encode" "Type" $.KeyType "Name" "key"}}
-      {{Macro "Go.Encode" "Type" $.ValueType "Name" "value"}}
-    }
-    return nil
-  }
-
-  func (m *{{$name}}) Decode(d *binary.Decoder) error {
-    c, err := d.Uint32()
-    if err != nil { return err }
-    for i := uint32(0); i < c; i++ {
-      var key {{$key}}
-      var value {{$value}}
-      {{Macro "Go.Decode" "Type" $.KeyType "Name" "key"}}
-      {{Macro "Go.Decode" "Type" $.ValueType "Name" "value"}}
-      (*m)[key] = value
-    }
-    return nil
-  }
 {{end}}
 
 
@@ -270,6 +199,7 @@ limitations under the License.
   {{template "Go.CommentHeader" $name}}
 
   type {{Macro "Go.CmdInsName" $.Command}} struct {
+    binary.Generate
     {{range $p := $.Command.FullParameters}}
       {{if not $p.Output}}
         {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
@@ -278,6 +208,7 @@ limitations under the License.
   }
 
   type {{Macro "Go.CmdOutsName" $.Command}} struct {
+    binary.Generate
     {{range $p := $.Command.FullParameters}}
       {{if $p.Output}}
         {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
@@ -286,6 +217,7 @@ limitations under the License.
   }
 
   type {{$name}} struct {
+    binary.Generate
     Context atom.ContextID
     In  {{Macro "Go.CmdInsName" $.Command}}
     Out {{Macro "Go.CmdOutsName" $.Command}}
@@ -325,28 +257,6 @@ limitations under the License.
       {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
   }
-
-  func (c *{{$name}}) Encode(e *binary.Encoder) error {
-    if err := c.Context.Encode(e); err != nil {
-      return err
-    }
-    {{range $p := $.Command.FullParameters}}
-      {{$name := print "c." (Macro "Go.Parameter" $p)}}
-      {{Macro "Go.Encode" "Type" (TypeOf $p) "Name" $name}}
-    {{end}}
-    return nil
-  }
-
-  func (c *{{$name}}) Decode(d *binary.Decoder) error {
-    if err := c.Context.Decode(d); err != nil {
-      return err
-    }
-    {{range $p := $.Command.FullParameters}}
-      {{$name := print "c." (Macro "Go.Parameter" $p)}}
-      {{Macro "Go.Decode" "Type" (TypeOf $p) "Name" $name}}
-    {{end}}
-    return nil
-  }
 {{end}}
 
 
@@ -365,28 +275,13 @@ limitations under the License.
   {{else}}
 
     type {{$.Name}} struct {
+      binary.Generate
       CreatedAt atom.ID
       {{Macro "ClassFields" $}}
     }
 
     func (c *{{$.Name}}) Init() {
       {{Macro "FieldsInit" "Type" $ "Name" "c"}}
-    }
-
-    func (c *{{$.Name}}) Encode(e *binary.Encoder) error {
-      {{range $f := $.Fields}}
-        {{$name := print "c." (Title $f.Name)}}
-        {{Macro "Go.Encode" "Type" (TypeOf $f) "Name" $name}}
-      {{end}}
-      return nil
-    }
-
-    func (c *{{$.Name}}) Decode(d *binary.Decoder) error {
-      {{range $f := $.Fields}}
-        {{$name := print "c." (Title $f.Name)}}
-        {{Macro "Go.Decode" "Type" (TypeOf $f) "Name" $name}}
-      {{end}}
-      return nil
     }
 
     func (c *{{$.Name}}) GetCreatedAt() atom.ID {return c.CreatedAt}
@@ -575,6 +470,7 @@ limitations under the License.
 {{define "Globals"}}
   {{template "Go.CommentHeader" "Globals"}}
   type Globals struct {
+    binary.Generate
     {{range $g := $.Globals}}
       {{Title $g.Name}} {{Macro "Go.Type" $g}}
     {{end}}
@@ -584,22 +480,6 @@ limitations under the License.
     {{range $g := $.Globals}}
       {{Macro "FieldInit" "Field" $g "Name" (print "g." $g.Name)}}
     {{end}}
-  }
-
-  func (g *Globals) Encode(e *binary.Encoder) error {
-    {{range $g := $.Globals}}
-      {{$name := print "g." (Title $g.Name)}}
-      {{Macro "Go.Encode" "Type" (TypeOf $g) "Name" $name}}
-    {{end}}
-    return nil
-  }
-
-  func (g *Globals) Decode(d *binary.Decoder) error {
-    {{range $g := $.Globals}}
-      {{$name := print "g." (Title $g.Name)}}
-      {{Macro "Go.Decode" "Type" (TypeOf $g) "Name" $name}}
-    {{end}}
-    return nil
   }
 {{end}}
 
@@ -721,14 +601,14 @@ limitations under the License.
         In: {{Macro "Go.CmdInsName" $c}}{§
           {{range $p := $c.FullParameters}}
             {{if not $p.Output}}
-              p{{Macro "Go.Public" $p.Name}},§
+              {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
             {{end}}
           {{end}}
         },
         Out: {{Macro "Go.CmdOutsName" $c}}{§
           {{range $p := $c.FullParameters}}
             {{if $p.Output}}
-              p{{Macro "Go.Public" $p.Name}},§
+              {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
             {{end}}
           {{end}}
         },

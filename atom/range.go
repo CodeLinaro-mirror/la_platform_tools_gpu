@@ -23,6 +23,7 @@ import (
 
 // Range describes an interval of atoms in a stream.
 type Range struct {
+	binary.Generate
 	Start ID // The first atom within the range.
 	End   ID // One past the last atom within the range.
 }
@@ -66,26 +67,4 @@ func (i Range) Span() interval.U64Span {
 func (i *Range) SetSpan(span interval.U64Span) {
 	i.Start = ID(span.Start)
 	i.End = ID(span.End)
-}
-
-// Encode encodes the Range using the specified encoder.
-func (i Range) Encode(e *binary.Encoder) error {
-	if err := i.Start.Encode(e); err != nil {
-		return err
-	}
-	if err := i.End.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Decode decodes the Range using the specified decoder.
-func (i *Range) Decode(d *binary.Decoder) error {
-	if err := i.Start.Decode(d); err != nil {
-		return err
-	}
-	if err := i.End.Decode(d); err != nil {
-		return err
-	}
-	return nil
 }

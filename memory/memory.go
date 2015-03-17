@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate codergen -go
+
 // Package memory contains types used for representing and simulating memory
 // observed in the capture.
 package memory
@@ -68,7 +70,7 @@ type dataSlice struct {
 
 func slice(src Data, rng Range) DataSlicer {
 	if rng.Base < 0 || uint64(rng.Last()) > src.Size() {
-		panic(fmt.Errorf("Slice range (%s) out of bounds (%s)", rng, Range{0, src.Size()}))
+		panic(fmt.Errorf("Slice range (%s) out of bounds (%s)", rng, Range{Base: 0, Size: src.Size()}))
 	}
 	return dataSlice{src, rng}
 }
@@ -116,7 +118,7 @@ func (m memorySlice) Get(db database.Database, logger log.Logger) ([]byte, error
 
 func (m memorySlice) Slice(rng Range) DataSliceWriter {
 	if rng.Base < 0 || uint64(rng.Last()) > m.rng.Size {
-		panic(fmt.Errorf("Slice range (%s) out of bounds (%s)", rng, Range{0, m.rng.Size}))
+		panic(fmt.Errorf("Slice range (%s) out of bounds (%s)", rng, Range{Base: 0, Size: m.rng.Size}))
 	}
 	rng.Base += m.rng.Base
 	return memorySlice{m.mem, rng}
@@ -154,7 +156,7 @@ func (m *Memory) Slice(rng Range) DataSliceWriter {
 
 // Write copies d to the Memory slice [0, d.Size()-1].
 func (m *Memory) Write(d Data) {
-	m.writes = append(m.writes, memoryWrite{Range{0, d.Size()}, d})
+	m.writes = append(m.writes, memoryWrite{Range{Base: 0, Size: d.Size()}, d})
 }
 
 func (m *Memory) Encode(e *binary.Encoder) error { return nil /* Currently not persisted */ }

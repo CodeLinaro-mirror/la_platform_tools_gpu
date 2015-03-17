@@ -16,243 +16,56 @@ import (
 
 type RenderbufferId uint32
 
-func (c *RenderbufferId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *RenderbufferId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = RenderbufferId(x)
-	return nil
-}
 func (c *RenderbufferId) Less(rhs RenderbufferId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *RenderbufferId) Equal(rhs RenderbufferId) bool { return uint32(*c) == uint32(rhs) }
 
 type TextureId uint32
 
-func (c *TextureId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *TextureId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = TextureId(x)
-	return nil
-}
 func (c *TextureId) Less(rhs TextureId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *TextureId) Equal(rhs TextureId) bool { return uint32(*c) == uint32(rhs) }
 
 type FramebufferId uint32
 
-func (c *FramebufferId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *FramebufferId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = FramebufferId(x)
-	return nil
-}
 func (c *FramebufferId) Less(rhs FramebufferId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *FramebufferId) Equal(rhs FramebufferId) bool { return uint32(*c) == uint32(rhs) }
 
 type BufferId uint32
 
-func (c *BufferId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *BufferId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = BufferId(x)
-	return nil
-}
 func (c *BufferId) Less(rhs BufferId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *BufferId) Equal(rhs BufferId) bool { return uint32(*c) == uint32(rhs) }
 
 type ShaderId uint32
 
-func (c *ShaderId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *ShaderId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = ShaderId(x)
-	return nil
-}
 func (c *ShaderId) Less(rhs ShaderId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *ShaderId) Equal(rhs ShaderId) bool { return uint32(*c) == uint32(rhs) }
 
 type ProgramId uint32
 
-func (c *ProgramId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *ProgramId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = ProgramId(x)
-	return nil
-}
 func (c *ProgramId) Less(rhs ProgramId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *ProgramId) Equal(rhs ProgramId) bool { return uint32(*c) == uint32(rhs) }
 
 type VertexArrayId uint32
 
-func (c *VertexArrayId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *VertexArrayId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = VertexArrayId(x)
-	return nil
-}
 func (c *VertexArrayId) Less(rhs VertexArrayId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *VertexArrayId) Equal(rhs VertexArrayId) bool { return uint32(*c) == uint32(rhs) }
 
 type QueryId uint32
 
-func (c *QueryId) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *QueryId) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = QueryId(x)
-	return nil
-}
 func (c *QueryId) Less(rhs QueryId) bool  { return uint32(*c) < uint32(rhs) }
 func (c *QueryId) Equal(rhs QueryId) bool { return uint32(*c) == uint32(rhs) }
 
 type UniformLocation int32
 
-func (c *UniformLocation) Encode(e *binary.Encoder) error {
-	x := int32(*c)
-	if err := e.Int32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *UniformLocation) Decode(d *binary.Decoder) error {
-	var x int32
-	if v, err := d.Int32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = UniformLocation(x)
-	return nil
-}
 func (c *UniformLocation) Less(rhs UniformLocation) bool  { return int32(*c) < int32(rhs) }
 func (c *UniformLocation) Equal(rhs UniformLocation) bool { return int32(*c) == int32(rhs) }
 
 type AttributeLocation int32
 
-func (c *AttributeLocation) Encode(e *binary.Encoder) error {
-	x := int32(*c)
-	if err := e.Int32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *AttributeLocation) Decode(d *binary.Decoder) error {
-	var x int32
-	if v, err := d.Int32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = AttributeLocation(x)
-	return nil
-}
 func (c *AttributeLocation) Less(rhs AttributeLocation) bool  { return int32(*c) < int32(rhs) }
 func (c *AttributeLocation) Equal(rhs AttributeLocation) bool { return int32(*c) == int32(rhs) }
 
 type IndicesPointer memory.Pointer
 
-func (c *IndicesPointer) Encode(e *binary.Encoder) error {
-	x := memory.Pointer(*c)
-	if err := e.Uint64(uint64(x)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *IndicesPointer) Decode(d *binary.Decoder) error {
-	var x memory.Pointer
-	if v, err := d.Uint64(); err == nil {
-		x = memory.Pointer(v)
-	} else {
-		return err
-	}
-	*c = IndicesPointer(x)
-	return nil
-}
 func (c *IndicesPointer) Less(rhs IndicesPointer) bool {
 	return memory.Pointer(*c) < memory.Pointer(rhs)
 }
@@ -262,23 +75,6 @@ func (c *IndicesPointer) Equal(rhs IndicesPointer) bool {
 
 type VertexPointer memory.Pointer
 
-func (c *VertexPointer) Encode(e *binary.Encoder) error {
-	x := memory.Pointer(*c)
-	if err := e.Uint64(uint64(x)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *VertexPointer) Decode(d *binary.Decoder) error {
-	var x memory.Pointer
-	if v, err := d.Uint64(); err == nil {
-		x = memory.Pointer(v)
-	} else {
-		return err
-	}
-	*c = VertexPointer(x)
-	return nil
-}
 func (c *VertexPointer) Less(rhs VertexPointer) bool { return memory.Pointer(*c) < memory.Pointer(rhs) }
 func (c *VertexPointer) Equal(rhs VertexPointer) bool {
 	return memory.Pointer(*c) == memory.Pointer(rhs)
@@ -286,23 +82,6 @@ func (c *VertexPointer) Equal(rhs VertexPointer) bool {
 
 type TexturePointer memory.Pointer
 
-func (c *TexturePointer) Encode(e *binary.Encoder) error {
-	x := memory.Pointer(*c)
-	if err := e.Uint64(uint64(x)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *TexturePointer) Decode(d *binary.Decoder) error {
-	var x memory.Pointer
-	if v, err := d.Uint64(); err == nil {
-		x = memory.Pointer(v)
-	} else {
-		return err
-	}
-	*c = TexturePointer(x)
-	return nil
-}
 func (c *TexturePointer) Less(rhs TexturePointer) bool {
 	return memory.Pointer(*c) < memory.Pointer(rhs)
 }
@@ -312,23 +91,6 @@ func (c *TexturePointer) Equal(rhs TexturePointer) bool {
 
 type BufferDataPointer memory.Pointer
 
-func (c *BufferDataPointer) Encode(e *binary.Encoder) error {
-	x := memory.Pointer(*c)
-	if err := e.Uint64(uint64(x)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *BufferDataPointer) Decode(d *binary.Decoder) error {
-	var x memory.Pointer
-	if v, err := d.Uint64(); err == nil {
-		x = memory.Pointer(v)
-	} else {
-		return err
-	}
-	*c = BufferDataPointer(x)
-	return nil
-}
 func (c *BufferDataPointer) Less(rhs BufferDataPointer) bool {
 	return memory.Pointer(*c) < memory.Pointer(rhs)
 }
@@ -338,23 +100,6 @@ func (c *BufferDataPointer) Equal(rhs BufferDataPointer) bool {
 
 type ImageOES memory.Pointer
 
-func (c *ImageOES) Encode(e *binary.Encoder) error {
-	x := memory.Pointer(*c)
-	if err := e.Uint64(uint64(x)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *ImageOES) Decode(d *binary.Decoder) error {
-	var x memory.Pointer
-	if v, err := d.Uint64(); err == nil {
-		x = memory.Pointer(v)
-	} else {
-		return err
-	}
-	*c = ImageOES(x)
-	return nil
-}
 func (c *ImageOES) Less(rhs ImageOES) bool  { return memory.Pointer(*c) < memory.Pointer(rhs) }
 func (c *ImageOES) Equal(rhs ImageOES) bool { return memory.Pointer(*c) == memory.Pointer(rhs) }
 
@@ -362,364 +107,66 @@ type BoolArray []bool
 
 func (s BoolArray) Len() int      { return len(s) }
 func (s BoolArray) Range() []bool { return s }
-func (s BoolArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Bool(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *BoolArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(BoolArray, c)
-	for i := range *s {
-		if v, err := d.Bool(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type BufferIdArray []BufferId
 
 func (s BufferIdArray) Len() int          { return len(s) }
 func (s BufferIdArray) Range() []BufferId { return s }
-func (s BufferIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *BufferIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(BufferIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type DiscardFramebufferAttachmentArray []DiscardFramebufferAttachment
 
 func (s DiscardFramebufferAttachmentArray) Len() int                              { return len(s) }
 func (s DiscardFramebufferAttachmentArray) Range() []DiscardFramebufferAttachment { return s }
-func (s DiscardFramebufferAttachmentArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Uint32(uint32(v)); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *DiscardFramebufferAttachmentArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(DiscardFramebufferAttachmentArray, c)
-	for i := range *s {
-		if v, err := d.Uint32(); err == nil {
-			(*s)[i] = DiscardFramebufferAttachment(v)
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type F32Array []float32
 
 func (s F32Array) Len() int         { return len(s) }
 func (s F32Array) Range() []float32 { return s }
-func (s F32Array) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Float32(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *F32Array) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(F32Array, c)
-	for i := range *s {
-		if v, err := d.Float32(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type FramebufferAttachmentArray []FramebufferAttachment
 
 func (s FramebufferAttachmentArray) Len() int                       { return len(s) }
 func (s FramebufferAttachmentArray) Range() []FramebufferAttachment { return s }
-func (s FramebufferAttachmentArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Uint32(uint32(v)); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *FramebufferAttachmentArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(FramebufferAttachmentArray, c)
-	for i := range *s {
-		if v, err := d.Uint32(); err == nil {
-			(*s)[i] = FramebufferAttachment(v)
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type FramebufferIdArray []FramebufferId
 
 func (s FramebufferIdArray) Len() int               { return len(s) }
 func (s FramebufferIdArray) Range() []FramebufferId { return s }
-func (s FramebufferIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *FramebufferIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(FramebufferIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type QueryIdArray []QueryId
 
 func (s QueryIdArray) Len() int         { return len(s) }
 func (s QueryIdArray) Range() []QueryId { return s }
-func (s QueryIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *QueryIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(QueryIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type RenderbufferIdArray []RenderbufferId
 
 func (s RenderbufferIdArray) Len() int                { return len(s) }
 func (s RenderbufferIdArray) Range() []RenderbufferId { return s }
-func (s RenderbufferIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *RenderbufferIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(RenderbufferIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type S32Array []int32
 
 func (s S32Array) Len() int       { return len(s) }
 func (s S32Array) Range() []int32 { return s }
-func (s S32Array) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Int32(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *S32Array) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(S32Array, c)
-	for i := range *s {
-		if v, err := d.Int32(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type ShaderIdArray []ShaderId
 
 func (s ShaderIdArray) Len() int          { return len(s) }
 func (s ShaderIdArray) Range() []ShaderId { return s }
-func (s ShaderIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *ShaderIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(ShaderIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type StringArray []string
 
 func (s StringArray) Len() int        { return len(s) }
 func (s StringArray) Range() []string { return s }
-func (s StringArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.String(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *StringArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(StringArray, c)
-	for i := range *s {
-		if v, err := d.String(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type TextureIdArray []TextureId
 
 func (s TextureIdArray) Len() int           { return len(s) }
 func (s TextureIdArray) Range() []TextureId { return s }
-func (s TextureIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *TextureIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(TextureIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type VertexArrayIdArray []VertexArrayId
 
 func (s VertexArrayIdArray) Len() int               { return len(s) }
 func (s VertexArrayIdArray) Range() []VertexArrayId { return s }
-func (s VertexArrayIdArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *VertexArrayIdArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(VertexArrayIdArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type AttributeLocation_stringMap map[string]AttributeLocation
 
@@ -739,38 +186,6 @@ func (m AttributeLocation_stringMap) Range() []AttributeLocation {
 		values = append(values, value)
 	}
 	return values
-}
-func (m AttributeLocation_stringMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.String(key); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *AttributeLocation_stringMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key string
-		var value AttributeLocation
-		if v, err := d.String(); err == nil {
-			key = v
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type Bool_CapabilityMap map[Capability]bool
@@ -792,40 +207,6 @@ func (m Bool_CapabilityMap) Range() []bool {
 	}
 	return values
 }
-func (m Bool_CapabilityMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := e.Bool(value); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *Bool_CapabilityMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key Capability
-		var value bool
-		if v, err := d.Uint32(); err == nil {
-			key = Capability(v)
-		} else {
-			return err
-		}
-		if v, err := d.Bool(); err == nil {
-			value = v
-		} else {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type BufferId_BufferTargetMap map[BufferTarget]BufferId
 
@@ -846,38 +227,6 @@ func (m BufferId_BufferTargetMap) Range() []BufferId {
 	}
 	return values
 }
-func (m BufferId_BufferTargetMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *BufferId_BufferTargetMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key BufferTarget
-		var value BufferId
-		if v, err := d.Uint32(); err == nil {
-			key = BufferTarget(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type BufferRef_BufferIdMap map[BufferId]*Buffer
 
@@ -897,36 +246,6 @@ func (m BufferRef_BufferIdMap) Range() []*Buffer {
 		values = append(values, value)
 	}
 	return values
-}
-func (m BufferRef_BufferIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *BufferRef_BufferIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key BufferId
-		var value *Buffer
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type CubemapLevel_s32Map map[int32]CubemapLevel
@@ -952,38 +271,6 @@ func (m CubemapLevel_s32Map) Range() []CubemapLevel {
 	}
 	return values
 }
-func (m CubemapLevel_s32Map) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Int32(key); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *CubemapLevel_s32Map) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key int32
-		var value CubemapLevel
-		if v, err := d.Int32(); err == nil {
-			key = v
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type FramebufferAttachmentInfo_FramebufferAttachmentMap map[FramebufferAttachment]FramebufferAttachmentInfo
 
@@ -1008,38 +295,6 @@ func (m FramebufferAttachmentInfo_FramebufferAttachmentMap) Range() []Framebuffe
 	}
 	return values
 }
-func (m FramebufferAttachmentInfo_FramebufferAttachmentMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *FramebufferAttachmentInfo_FramebufferAttachmentMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key FramebufferAttachment
-		var value FramebufferAttachmentInfo
-		if v, err := d.Uint32(); err == nil {
-			key = FramebufferAttachment(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type FramebufferId_FramebufferTargetMap map[FramebufferTarget]FramebufferId
 
@@ -1060,38 +315,6 @@ func (m FramebufferId_FramebufferTargetMap) Range() []FramebufferId {
 	}
 	return values
 }
-func (m FramebufferId_FramebufferTargetMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *FramebufferId_FramebufferTargetMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key FramebufferTarget
-		var value FramebufferId
-		if v, err := d.Uint32(); err == nil {
-			key = FramebufferTarget(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type FramebufferRef_FramebufferIdMap map[FramebufferId]*Framebuffer
 
@@ -1111,36 +334,6 @@ func (m FramebufferRef_FramebufferIdMap) Range() []*Framebuffer {
 		values = append(values, value)
 	}
 	return values
-}
-func (m FramebufferRef_FramebufferIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *FramebufferRef_FramebufferIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key FramebufferId
-		var value *Framebuffer
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type Image_CubeMapImageTargetMap map[CubeMapImageTarget]Image
@@ -1166,38 +359,6 @@ func (m Image_CubeMapImageTargetMap) Range() []Image {
 	}
 	return values
 }
-func (m Image_CubeMapImageTargetMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *Image_CubeMapImageTargetMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key CubeMapImageTarget
-		var value Image
-		if v, err := d.Uint32(); err == nil {
-			key = CubeMapImageTarget(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type Image_s32Map map[int32]Image
 
@@ -1222,38 +383,6 @@ func (m Image_s32Map) Range() []Image {
 	}
 	return values
 }
-func (m Image_s32Map) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Int32(key); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *Image_s32Map) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key int32
-		var value Image
-		if v, err := d.Int32(); err == nil {
-			key = v
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type ProgramRef_ProgramIdMap map[ProgramId]*Program
 
@@ -1273,36 +402,6 @@ func (m ProgramRef_ProgramIdMap) Range() []*Program {
 		values = append(values, value)
 	}
 	return values
-}
-func (m ProgramRef_ProgramIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *ProgramRef_ProgramIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key ProgramId
-		var value *Program
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type QueryRef_QueryIdMap map[QueryId]*Query
@@ -1324,36 +423,6 @@ func (m QueryRef_QueryIdMap) Range() []*Query {
 	}
 	return values
 }
-func (m QueryRef_QueryIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *QueryRef_QueryIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key QueryId
-		var value *Query
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type RenderbufferId_RenderbufferTargetMap map[RenderbufferTarget]RenderbufferId
 
@@ -1373,38 +442,6 @@ func (m RenderbufferId_RenderbufferTargetMap) Range() []RenderbufferId {
 		values = append(values, value)
 	}
 	return values
-}
-func (m RenderbufferId_RenderbufferTargetMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *RenderbufferId_RenderbufferTargetMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key RenderbufferTarget
-		var value RenderbufferId
-		if v, err := d.Uint32(); err == nil {
-			key = RenderbufferTarget(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type RenderbufferRef_RenderbufferIdMap map[RenderbufferId]*Renderbuffer
@@ -1426,36 +463,6 @@ func (m RenderbufferRef_RenderbufferIdMap) Range() []*Renderbuffer {
 	}
 	return values
 }
-func (m RenderbufferRef_RenderbufferIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *RenderbufferRef_RenderbufferIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key RenderbufferId
-		var value *Renderbuffer
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type S32_PixelStoreParameterMap map[PixelStoreParameter]int32
 
@@ -1475,40 +482,6 @@ func (m S32_PixelStoreParameterMap) Range() []int32 {
 		values = append(values, value)
 	}
 	return values
-}
-func (m S32_PixelStoreParameterMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := e.Int32(value); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *S32_PixelStoreParameterMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key PixelStoreParameter
-		var value int32
-		if v, err := d.Uint32(); err == nil {
-			key = PixelStoreParameter(v)
-		} else {
-			return err
-		}
-		if v, err := d.Int32(); err == nil {
-			value = v
-		} else {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type ShaderId_ShaderTypeMap map[ShaderType]ShaderId
@@ -1530,38 +503,6 @@ func (m ShaderId_ShaderTypeMap) Range() []ShaderId {
 	}
 	return values
 }
-func (m ShaderId_ShaderTypeMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *ShaderId_ShaderTypeMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key ShaderType
-		var value ShaderId
-		if v, err := d.Uint32(); err == nil {
-			key = ShaderType(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type ShaderRef_ShaderIdMap map[ShaderId]*Shader
 
@@ -1582,36 +523,6 @@ func (m ShaderRef_ShaderIdMap) Range() []*Shader {
 	}
 	return values
 }
-func (m ShaderRef_ShaderIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *ShaderRef_ShaderIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key ShaderId
-		var value *Shader
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type TextureId_TextureTargetMap map[TextureTarget]TextureId
 
@@ -1631,38 +542,6 @@ func (m TextureId_TextureTargetMap) Range() []TextureId {
 		values = append(values, value)
 	}
 	return values
-}
-func (m TextureId_TextureTargetMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *TextureId_TextureTargetMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key TextureTarget
-		var value TextureId
-		if v, err := d.Uint32(); err == nil {
-			key = TextureTarget(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type TextureId_TextureTargetMap_TextureUnitMap map[TextureUnit]TextureId_TextureTargetMap
@@ -1688,38 +567,6 @@ func (m TextureId_TextureTargetMap_TextureUnitMap) Range() []TextureId_TextureTa
 	}
 	return values
 }
-func (m TextureId_TextureTargetMap_TextureUnitMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *TextureId_TextureTargetMap_TextureUnitMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key TextureUnit
-		var value TextureId_TextureTargetMap
-		if v, err := d.Uint32(); err == nil {
-			key = TextureUnit(v)
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type TextureRef_TextureIdMap map[TextureId]*Texture
 
@@ -1740,36 +587,6 @@ func (m TextureRef_TextureIdMap) Range() []*Texture {
 	}
 	return values
 }
-func (m TextureRef_TextureIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *TextureRef_TextureIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key TextureId
-		var value *Texture
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type U32_FaceModeMap map[FaceMode]uint32
 
@@ -1789,40 +606,6 @@ func (m U32_FaceModeMap) Range() []uint32 {
 		values = append(values, value)
 	}
 	return values
-}
-func (m U32_FaceModeMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Uint32(uint32(key)); err != nil {
-			return err
-		}
-		if err := e.Uint32(value); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *U32_FaceModeMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key FaceMode
-		var value uint32
-		if v, err := d.Uint32(); err == nil {
-			key = FaceMode(v)
-		} else {
-			return err
-		}
-		if v, err := d.Uint32(); err == nil {
-			value = v
-		} else {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type Uniform_UniformLocationMap map[UniformLocation]Uniform
@@ -1848,36 +631,6 @@ func (m Uniform_UniformLocationMap) Range() []Uniform {
 	}
 	return values
 }
-func (m Uniform_UniformLocationMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *Uniform_UniformLocationMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key UniformLocation
-		var value Uniform
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type VertexArrayRef_VertexArrayIdMap map[VertexArrayId]*VertexArray
 
@@ -1898,36 +651,6 @@ func (m VertexArrayRef_VertexArrayIdMap) Range() []*VertexArray {
 	}
 	return values
 }
-func (m VertexArrayRef_VertexArrayIdMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *VertexArrayRef_VertexArrayIdMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key VertexArrayId
-		var value *VertexArray
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 type VertexAttributeArrayRef_AttributeLocationMap map[AttributeLocation]*VertexAttributeArray
 
@@ -1947,36 +670,6 @@ func (m VertexAttributeArrayRef_AttributeLocationMap) Range() []*VertexAttribute
 		values = append(values, value)
 	}
 	return values
-}
-func (m VertexAttributeArrayRef_AttributeLocationMap) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := key.Encode(e); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *VertexAttributeArrayRef_AttributeLocationMap) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key AttributeLocation
-		var value *VertexAttributeArray
-		if err := key.Decode(d); err != nil {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
 }
 
 type VertexAttribute_s32Map map[int32]VertexAttribute
@@ -2002,43 +695,12 @@ func (m VertexAttribute_s32Map) Range() []VertexAttribute {
 	}
 	return values
 }
-func (m VertexAttribute_s32Map) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(m)))
-	for key, value := range m {
-		if err := e.Int32(key); err != nil {
-			return err
-		}
-		if err := value.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (m *VertexAttribute_s32Map) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	for i := uint32(0); i < c; i++ {
-		var key int32
-		var value VertexAttribute
-		if v, err := d.Int32(); err == nil {
-			key = v
-		} else {
-			return err
-		}
-		if err := value.Decode(d); err != nil {
-			return err
-		}
-		(*m)[key] = value
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////////////////////////
 type Init_In struct {
+	binary.Generate
 	Width      int32
 	Height     int32
 	ColorFmt   RenderbufferFormat
@@ -2046,8 +708,10 @@ type Init_In struct {
 	StencilFmt RenderbufferFormat
 }
 type Init_Out struct {
+	binary.Generate
 }
 type Init struct {
+	binary.Generate
 	Context atom.ContextID
 	In      Init_In
 	Out     Init_Out
@@ -2078,68 +742,19 @@ func (c *Init) TypeID() atom.TypeID {
 func (c *Init) Flags() atom.Flags {
 	return 0
 }
-func (c *Init) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.ColorFmt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DepthFmt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.StencilFmt)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Init) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.ColorFmt = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DepthFmt = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.StencilFmt = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // StartTimer
 ////////////////////////////////////////////////////////////////////////////////
 type StartTimer_In struct {
+	binary.Generate
 	Index uint8
 }
 type StartTimer_Out struct {
+	binary.Generate
 }
 type StartTimer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      StartTimer_In
 	Out     StartTimer_Out
@@ -2162,37 +777,20 @@ func (c *StartTimer) TypeID() atom.TypeID {
 func (c *StartTimer) Flags() atom.Flags {
 	return 0
 }
-func (c *StartTimer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint8(c.In.Index); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *StartTimer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint8(); err == nil {
-		c.In.Index = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // StopTimer
 ////////////////////////////////////////////////////////////////////////////////
 type StopTimer_In struct {
+	binary.Generate
 	Index uint8
 }
 type StopTimer_Out struct {
+	binary.Generate
 	Result uint64
 }
 type StopTimer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      StopTimer_In
 	Out     StopTimer_Out
@@ -2216,43 +814,18 @@ func (c *StopTimer) TypeID() atom.TypeID {
 func (c *StopTimer) Flags() atom.Flags {
 	return 0
 }
-func (c *StopTimer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint8(c.In.Index); err != nil {
-		return err
-	}
-	if err := e.Uint64(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *StopTimer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint8(); err == nil {
-		c.In.Index = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // FlushPostBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type FlushPostBuffer_In struct {
+	binary.Generate
 }
 type FlushPostBuffer_Out struct {
+	binary.Generate
 }
 type FlushPostBuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      FlushPostBuffer_In
 	Out     FlushPostBuffer_Out
@@ -2273,29 +846,20 @@ func (c *FlushPostBuffer) TypeID() atom.TypeID {
 func (c *FlushPostBuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *FlushPostBuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *FlushPostBuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglCreateContext
 ////////////////////////////////////////////////////////////////////////////////
 type EglCreateContext_In struct {
+	binary.Generate
 }
 type EglCreateContext_Out struct {
+	binary.Generate
 	Version int32
 	Context int32
 }
 type EglCreateContext struct {
+	binary.Generate
 	Context atom.ContextID
 	In      EglCreateContext_In
 	Out     EglCreateContext_Out
@@ -2320,44 +884,19 @@ func (c *EglCreateContext) TypeID() atom.TypeID {
 func (c *EglCreateContext) Flags() atom.Flags {
 	return 0
 }
-func (c *EglCreateContext) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Version); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Context); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *EglCreateContext) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Version = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Context = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
 type EglMakeCurrent_In struct {
+	binary.Generate
 	Context int32
 }
 type EglMakeCurrent_Out struct {
+	binary.Generate
 }
 type EglMakeCurrent struct {
+	binary.Generate
 	Context atom.ContextID
 	In      EglMakeCurrent_In
 	Out     EglMakeCurrent_Out
@@ -2380,35 +919,18 @@ func (c *EglMakeCurrent) TypeID() atom.TypeID {
 func (c *EglMakeCurrent) Flags() atom.Flags {
 	return 0
 }
-func (c *EglMakeCurrent) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Context); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *EglMakeCurrent) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Context = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type EglSwapBuffers_In struct {
+	binary.Generate
 }
 type EglSwapBuffers_Out struct {
+	binary.Generate
 }
 type EglSwapBuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      EglSwapBuffers_In
 	Out     EglSwapBuffers_Out
@@ -2429,28 +951,19 @@ func (c *EglSwapBuffers) TypeID() atom.TypeID {
 func (c *EglSwapBuffers) Flags() atom.Flags {
 	return 0 | atom.EndOfFrame
 }
-func (c *EglSwapBuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *EglSwapBuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableClientState
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnableClientState_In struct {
+	binary.Generate
 	Type ArrayType
 }
 type GlEnableClientState_Out struct {
+	binary.Generate
 }
 type GlEnableClientState struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEnableClientState_In
 	Out     GlEnableClientState_Out
@@ -2473,36 +986,19 @@ func (c *GlEnableClientState) TypeID() atom.TypeID {
 func (c *GlEnableClientState) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEnableClientState) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEnableClientState) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = ArrayType(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableClientState
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisableClientState_In struct {
+	binary.Generate
 	Type ArrayType
 }
 type GlDisableClientState_Out struct {
+	binary.Generate
 }
 type GlDisableClientState struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDisableClientState_In
 	Out     GlDisableClientState_Out
@@ -2525,40 +1021,23 @@ func (c *GlDisableClientState) TypeID() atom.TypeID {
 func (c *GlDisableClientState) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDisableClientState) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDisableClientState) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = ArrayType(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramBinaryOES_In struct {
+	binary.Generate
 	Program    ProgramId
 	BufferSize int32
 }
 type GlGetProgramBinaryOES_Out struct {
+	binary.Generate
 	BytesWritten int32
 	BinaryFormat uint32
 	Binary       memory.Pointer
 }
 type GlGetProgramBinaryOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetProgramBinaryOES_In
 	Out     GlGetProgramBinaryOES_Out
@@ -2589,69 +1068,22 @@ func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID {
 func (c *GlGetProgramBinaryOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetProgramBinaryOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferSize); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.BytesWritten); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.Out.BinaryFormat); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Out.Binary)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetProgramBinaryOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferSize = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.BytesWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.BinaryFormat = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Binary = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlProgramBinaryOES_In struct {
+	binary.Generate
 	Program      ProgramId
 	BinaryFormat uint32
 	Binary       memory.Pointer
 	BinarySize   int32
 }
 type GlProgramBinaryOES_Out struct {
+	binary.Generate
 }
 type GlProgramBinaryOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlProgramBinaryOES_In
 	Out     GlProgramBinaryOES_Out
@@ -2680,53 +1112,12 @@ func (c *GlProgramBinaryOES) TypeID() atom.TypeID {
 func (c *GlProgramBinaryOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlProgramBinaryOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.In.BinaryFormat); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.In.Binary)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BinarySize); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlProgramBinaryOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.BinaryFormat = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.In.Binary = memory.Pointer(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BinarySize = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStartTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
 type GlStartTilingQCOM_In struct {
+	binary.Generate
 	X            int32
 	Y            int32
 	Width        int32
@@ -2734,8 +1125,10 @@ type GlStartTilingQCOM_In struct {
 	PreserveMask TilePreserveMaskQCOM
 }
 type GlStartTilingQCOM_Out struct {
+	binary.Generate
 }
 type GlStartTilingQCOM struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlStartTilingQCOM_In
 	Out     GlStartTilingQCOM_Out
@@ -2766,68 +1159,19 @@ func (c *GlStartTilingQCOM) TypeID() atom.TypeID {
 func (c *GlStartTilingQCOM) Flags() atom.Flags {
 	return 0
 }
-func (c *GlStartTilingQCOM) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.PreserveMask)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlStartTilingQCOM) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.PreserveMask = TilePreserveMaskQCOM(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndTilingQCOM_In struct {
+	binary.Generate
 	PreserveMask TilePreserveMaskQCOM
 }
 type GlEndTilingQCOM_Out struct {
+	binary.Generate
 }
 type GlEndTilingQCOM struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEndTilingQCOM_In
 	Out     GlEndTilingQCOM_Out
@@ -2850,38 +1194,21 @@ func (c *GlEndTilingQCOM) TypeID() atom.TypeID {
 func (c *GlEndTilingQCOM) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEndTilingQCOM) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.PreserveMask)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEndTilingQCOM) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.PreserveMask = TilePreserveMaskQCOM(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDiscardFramebufferEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlDiscardFramebufferEXT_In struct {
+	binary.Generate
 	Target         FramebufferTarget
 	NumAttachments int32
 	Attachments    DiscardFramebufferAttachmentArray
 }
 type GlDiscardFramebufferEXT_Out struct {
+	binary.Generate
 }
 type GlDiscardFramebufferEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDiscardFramebufferEXT_In
 	Out     GlDiscardFramebufferEXT_Out
@@ -2908,51 +1235,20 @@ func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID {
 func (c *GlDiscardFramebufferEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDiscardFramebufferEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.NumAttachments); err != nil {
-		return err
-	}
-	if err := c.In.Attachments.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDiscardFramebufferEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.NumAttachments = v
-	} else {
-		return err
-	}
-	if err := c.In.Attachments.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInsertEventMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlInsertEventMarkerEXT_In struct {
+	binary.Generate
 	Length int32
 	Marker string
 }
 type GlInsertEventMarkerEXT_Out struct {
+	binary.Generate
 }
 type GlInsertEventMarkerEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlInsertEventMarkerEXT_In
 	Out     GlInsertEventMarkerEXT_Out
@@ -2977,45 +1273,20 @@ func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID {
 func (c *GlInsertEventMarkerEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlInsertEventMarkerEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Length); err != nil {
-		return err
-	}
-	if err := e.String(c.In.Marker); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlInsertEventMarkerEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Length = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.Marker = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPushGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlPushGroupMarkerEXT_In struct {
+	binary.Generate
 	Length int32
 	Marker string
 }
 type GlPushGroupMarkerEXT_Out struct {
+	binary.Generate
 }
 type GlPushGroupMarkerEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlPushGroupMarkerEXT_In
 	Out     GlPushGroupMarkerEXT_Out
@@ -3040,43 +1311,18 @@ func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID {
 func (c *GlPushGroupMarkerEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlPushGroupMarkerEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Length); err != nil {
-		return err
-	}
-	if err := e.String(c.In.Marker); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlPushGroupMarkerEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Length = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.Marker = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPopGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlPopGroupMarkerEXT_In struct {
+	binary.Generate
 }
 type GlPopGroupMarkerEXT_Out struct {
+	binary.Generate
 }
 type GlPopGroupMarkerEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlPopGroupMarkerEXT_In
 	Out     GlPopGroupMarkerEXT_Out
@@ -3097,31 +1343,22 @@ func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID {
 func (c *GlPopGroupMarkerEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlPopGroupMarkerEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlPopGroupMarkerEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage1DEXT_In struct {
+	binary.Generate
 	Target TextureTarget
 	Levels int32
 	Format TexelFormat
 	Width  int32
 }
 type GlTexStorage1DEXT_Out struct {
+	binary.Generate
 }
 type GlTexStorage1DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexStorage1DEXT_In
 	Out     GlTexStorage1DEXT_Out
@@ -3150,55 +1387,12 @@ func (c *GlTexStorage1DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage1DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexStorage1DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexStorage1DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage2DEXT_In struct {
+	binary.Generate
 	Target TextureTarget
 	Levels int32
 	Format TexelFormat
@@ -3206,8 +1400,10 @@ type GlTexStorage2DEXT_In struct {
 	Height int32
 }
 type GlTexStorage2DEXT_Out struct {
+	binary.Generate
 }
 type GlTexStorage2DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexStorage2DEXT_In
 	Out     GlTexStorage2DEXT_Out
@@ -3238,63 +1434,12 @@ func (c *GlTexStorage2DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage2DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexStorage2DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexStorage2DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexStorage3DEXT_In struct {
+	binary.Generate
 	Target TextureTarget
 	Levels int32
 	Format TexelFormat
@@ -3303,8 +1448,10 @@ type GlTexStorage3DEXT_In struct {
 	Depth  int32
 }
 type GlTexStorage3DEXT_Out struct {
+	binary.Generate
 }
 type GlTexStorage3DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexStorage3DEXT_In
 	Out     GlTexStorage3DEXT_Out
@@ -3337,71 +1484,12 @@ func (c *GlTexStorage3DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage3DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexStorage3DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Depth); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexStorage3DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Depth = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage1DEXT_In struct {
+	binary.Generate
 	Texture TextureId
 	Target  TextureTarget
 	Levels  int32
@@ -3409,8 +1497,10 @@ type GlTextureStorage1DEXT_In struct {
 	Width   int32
 }
 type GlTextureStorage1DEXT_Out struct {
+	binary.Generate
 }
 type GlTextureStorage1DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTextureStorage1DEXT_In
 	Out     GlTextureStorage1DEXT_Out
@@ -3441,61 +1531,12 @@ func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage1DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTextureStorage1DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTextureStorage1DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage2DEXT_In struct {
+	binary.Generate
 	Texture TextureId
 	Target  TextureTarget
 	Levels  int32
@@ -3504,8 +1545,10 @@ type GlTextureStorage2DEXT_In struct {
 	Height  int32
 }
 type GlTextureStorage2DEXT_Out struct {
+	binary.Generate
 }
 type GlTextureStorage2DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTextureStorage2DEXT_In
 	Out     GlTextureStorage2DEXT_Out
@@ -3538,69 +1581,12 @@ func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage2DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTextureStorage2DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTextureStorage2DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlTextureStorage3DEXT_In struct {
+	binary.Generate
 	Texture TextureId
 	Target  TextureTarget
 	Levels  int32
@@ -3610,8 +1596,10 @@ type GlTextureStorage3DEXT_In struct {
 	Depth   int32
 }
 type GlTextureStorage3DEXT_Out struct {
+	binary.Generate
 }
 type GlTextureStorage3DEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTextureStorage3DEXT_In
 	Out     GlTextureStorage3DEXT_Out
@@ -3646,83 +1634,20 @@ func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage3DEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTextureStorage3DEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Levels); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Depth); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTextureStorage3DEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Levels = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Depth = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenVertexArraysOES_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenVertexArraysOES_Out struct {
+	binary.Generate
 	Arrays VertexArrayIdArray
 }
 type GlGenVertexArraysOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenVertexArraysOES_In
 	Out     GlGenVertexArraysOES_Out
@@ -3747,42 +1672,19 @@ func (c *GlGenVertexArraysOES) TypeID() atom.TypeID {
 func (c *GlGenVertexArraysOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenVertexArraysOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Arrays.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenVertexArraysOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Arrays.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindVertexArrayOES_In struct {
+	binary.Generate
 	Array VertexArrayId
 }
 type GlBindVertexArrayOES_Out struct {
+	binary.Generate
 }
 type GlBindVertexArrayOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindVertexArrayOES_In
 	Out     GlBindVertexArrayOES_Out
@@ -3805,35 +1707,20 @@ func (c *GlBindVertexArrayOES) TypeID() atom.TypeID {
 func (c *GlBindVertexArrayOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindVertexArrayOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Array.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindVertexArrayOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Array.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteVertexArraysOES_In struct {
+	binary.Generate
 	Count  int32
 	Arrays VertexArrayIdArray
 }
 type GlDeleteVertexArraysOES_Out struct {
+	binary.Generate
 }
 type GlDeleteVertexArraysOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteVertexArraysOES_In
 	Out     GlDeleteVertexArraysOES_Out
@@ -3858,43 +1745,20 @@ func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID {
 func (c *GlDeleteVertexArraysOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteVertexArraysOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Arrays.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteVertexArraysOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Arrays.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsVertexArrayOES_In struct {
+	binary.Generate
 	Array VertexArrayId
 }
 type GlIsVertexArrayOES_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsVertexArrayOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsVertexArrayOES_In
 	Out     GlIsVertexArrayOES_Out
@@ -3918,43 +1782,20 @@ func (c *GlIsVertexArrayOES) TypeID() atom.TypeID {
 func (c *GlIsVertexArrayOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsVertexArrayOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Array.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsVertexArrayOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Array.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetTexture2DOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlEGLImageTargetTexture2DOES_In struct {
+	binary.Generate
 	Target ImageTargetTexture
 	Image  ImageOES
 }
 type GlEGLImageTargetTexture2DOES_Out struct {
+	binary.Generate
 }
 type GlEGLImageTargetTexture2DOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEGLImageTargetTexture2DOES_In
 	Out     GlEGLImageTargetTexture2DOES_Out
@@ -3979,43 +1820,20 @@ func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID {
 func (c *GlEGLImageTargetTexture2DOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEGLImageTargetTexture2DOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Image.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEGLImageTargetTexture2DOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = ImageTargetTexture(v)
-	} else {
-		return err
-	}
-	if err := c.In.Image.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetRenderbufferStorageOES
 ////////////////////////////////////////////////////////////////////////////////
 type GlEGLImageTargetRenderbufferStorageOES_In struct {
+	binary.Generate
 	Target ImageTargetRenderbufferStorage
 	Image  TexturePointer
 }
 type GlEGLImageTargetRenderbufferStorageOES_Out struct {
+	binary.Generate
 }
 type GlEGLImageTargetRenderbufferStorageOES struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEGLImageTargetRenderbufferStorageOES_In
 	Out     GlEGLImageTargetRenderbufferStorageOES_Out
@@ -4040,42 +1858,19 @@ func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID {
 func (c *GlEGLImageTargetRenderbufferStorageOES) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEGLImageTargetRenderbufferStorageOES) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Image.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEGLImageTargetRenderbufferStorageOES) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = ImageTargetRenderbufferStorage(v)
-	} else {
-		return err
-	}
-	if err := c.In.Image.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetGraphicsResetStatusEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetGraphicsResetStatusEXT_In struct {
+	binary.Generate
 }
 type GlGetGraphicsResetStatusEXT_Out struct {
+	binary.Generate
 	Result ResetStatus
 }
 type GlGetGraphicsResetStatusEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetGraphicsResetStatusEXT_In
 	Out     GlGetGraphicsResetStatusEXT_Out
@@ -4097,38 +1892,21 @@ func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID {
 func (c *GlGetGraphicsResetStatusEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetGraphicsResetStatusEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Out.Result)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetGraphicsResetStatusEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Result = ResetStatus(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindAttribLocation_In struct {
+	binary.Generate
 	Program  ProgramId
 	Location AttributeLocation
 	Name     string
 }
 type GlBindAttribLocation_Out struct {
+	binary.Generate
 }
 type GlBindAttribLocation struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindAttribLocation_In
 	Out     GlBindAttribLocation_Out
@@ -4155,49 +1933,20 @@ func (c *GlBindAttribLocation) TypeID() atom.TypeID {
 func (c *GlBindAttribLocation) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindAttribLocation) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.In.Name); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindAttribLocation) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.Name = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFunc
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendFunc_In struct {
+	binary.Generate
 	SrcFactor BlendFactor
 	DstFactor BlendFactor
 }
 type GlBlendFunc_Out struct {
+	binary.Generate
 }
 type GlBlendFunc struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlendFunc_In
 	Out     GlBlendFunc_Out
@@ -4222,47 +1971,22 @@ func (c *GlBlendFunc) TypeID() atom.TypeID {
 func (c *GlBlendFunc) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlendFunc) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.SrcFactor)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DstFactor)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlendFunc) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.SrcFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DstFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendFuncSeparate_In struct {
+	binary.Generate
 	SrcFactorRgb   BlendFactor
 	DstFactorRgb   BlendFactor
 	SrcFactorAlpha BlendFactor
 	DstFactorAlpha BlendFactor
 }
 type GlBlendFuncSeparate_Out struct {
+	binary.Generate
 }
 type GlBlendFuncSeparate struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlendFuncSeparate_In
 	Out     GlBlendFuncSeparate_Out
@@ -4291,60 +2015,19 @@ func (c *GlBlendFuncSeparate) TypeID() atom.TypeID {
 func (c *GlBlendFuncSeparate) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlendFuncSeparate) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.SrcFactorRgb)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DstFactorRgb)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.SrcFactorAlpha)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DstFactorAlpha)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlendFuncSeparate) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.SrcFactorRgb = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DstFactorRgb = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.SrcFactorAlpha = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DstFactorAlpha = BlendFactor(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquation
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendEquation_In struct {
+	binary.Generate
 	Equation BlendEquation
 }
 type GlBlendEquation_Out struct {
+	binary.Generate
 }
 type GlBlendEquation struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlendEquation_In
 	Out     GlBlendEquation_Out
@@ -4367,37 +2050,20 @@ func (c *GlBlendEquation) TypeID() atom.TypeID {
 func (c *GlBlendEquation) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlendEquation) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Equation)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlendEquation) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Equation = BlendEquation(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquationSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendEquationSeparate_In struct {
+	binary.Generate
 	Rgb   BlendEquation
 	Alpha BlendEquation
 }
 type GlBlendEquationSeparate_Out struct {
+	binary.Generate
 }
 type GlBlendEquationSeparate struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlendEquationSeparate_In
 	Out     GlBlendEquationSeparate_Out
@@ -4422,47 +2088,22 @@ func (c *GlBlendEquationSeparate) TypeID() atom.TypeID {
 func (c *GlBlendEquationSeparate) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlendEquationSeparate) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Rgb)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Alpha)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlendEquationSeparate) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Rgb = BlendEquation(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Alpha = BlendEquation(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendColor
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlendColor_In struct {
+	binary.Generate
 	Red   float32
 	Green float32
 	Blue  float32
 	Alpha float32
 }
 type GlBlendColor_Out struct {
+	binary.Generate
 }
 type GlBlendColor struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlendColor_In
 	Out     GlBlendColor_Out
@@ -4491,60 +2132,19 @@ func (c *GlBlendColor) TypeID() atom.TypeID {
 func (c *GlBlendColor) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlendColor) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Red); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Green); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Blue); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Alpha); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlendColor) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Red = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Green = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Blue = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Alpha = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnableVertexAttribArray_In struct {
+	binary.Generate
 	Location AttributeLocation
 }
 type GlEnableVertexAttribArray_Out struct {
+	binary.Generate
 }
 type GlEnableVertexAttribArray struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEnableVertexAttribArray_In
 	Out     GlEnableVertexAttribArray_Out
@@ -4567,34 +2167,19 @@ func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID {
 func (c *GlEnableVertexAttribArray) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEnableVertexAttribArray) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEnableVertexAttribArray) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisableVertexAttribArray_In struct {
+	binary.Generate
 	Location AttributeLocation
 }
 type GlDisableVertexAttribArray_Out struct {
+	binary.Generate
 }
 type GlDisableVertexAttribArray struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDisableVertexAttribArray_In
 	Out     GlDisableVertexAttribArray_Out
@@ -4617,29 +2202,12 @@ func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID {
 func (c *GlDisableVertexAttribArray) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDisableVertexAttribArray) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDisableVertexAttribArray) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttribPointer
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttribPointer_In struct {
+	binary.Generate
 	Location   AttributeLocation
 	Size       VertexAttribSize
 	Type       VertexAttribType
@@ -4648,8 +2216,10 @@ type GlVertexAttribPointer_In struct {
 	Data       VertexPointer
 }
 type GlVertexAttribPointer_Out struct {
+	binary.Generate
 }
 type GlVertexAttribPointer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttribPointer_In
 	Out     GlVertexAttribPointer_Out
@@ -4682,78 +2252,25 @@ func (c *GlVertexAttribPointer) TypeID() atom.TypeID {
 func (c *GlVertexAttribPointer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttribPointer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Size)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Normalized); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Stride); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttribPointer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Size = VertexAttribSize(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = VertexAttribType(v)
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Normalized = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Stride = v
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveAttrib
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveAttrib_In struct {
+	binary.Generate
 	Program    ProgramId
 	Location   AttributeLocation
 	BufferSize int32
 }
 type GlGetActiveAttrib_Out struct {
+	binary.Generate
 	BufferBytesWritten int32
 	VectorCount        int32
 	Type               ShaderAttribType
 	Name               string
 }
 type GlGetActiveAttrib struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetActiveAttrib_In
 	Out     GlGetActiveAttrib_Out
@@ -4788,86 +2305,25 @@ func (c *GlGetActiveAttrib) TypeID() atom.TypeID {
 func (c *GlGetActiveAttrib) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetActiveAttrib) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferSize); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.BufferBytesWritten); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.VectorCount); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Out.Type)); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Name); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetActiveAttrib) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferSize = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.BufferBytesWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.VectorCount = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Type = ShaderAttribType(v)
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Name = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveUniform
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetActiveUniform_In struct {
+	binary.Generate
 	Program    ProgramId
 	Location   int32
 	BufferSize int32
 }
 type GlGetActiveUniform_Out struct {
+	binary.Generate
 	BufferBytesWritten int32
 	Size               int32
 	Type               ShaderUniformType
 	Name               string
 }
 type GlGetActiveUniform struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetActiveUniform_In
 	Out     GlGetActiveUniform_Out
@@ -4902,82 +2358,19 @@ func (c *GlGetActiveUniform) TypeID() atom.TypeID {
 func (c *GlGetActiveUniform) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetActiveUniform) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Location); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferSize); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.BufferBytesWritten); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Size); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Out.Type)); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Name); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetActiveUniform) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Location = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferSize = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.BufferBytesWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Size = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Type = ShaderUniformType(v)
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Name = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetError
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetError_In struct {
+	binary.Generate
 }
 type GlGetError_Out struct {
+	binary.Generate
 	Result Error
 }
 type GlGetError struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetError_In
 	Out     GlGetError_Out
@@ -4999,38 +2392,21 @@ func (c *GlGetError) TypeID() atom.TypeID {
 func (c *GlGetError) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetError) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Out.Result)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetError) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Result = Error(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramiv_In struct {
+	binary.Generate
 	Program   ProgramId
 	Parameter ProgramParameter
 }
 type GlGetProgramiv_Out struct {
+	binary.Generate
 	Value S32Array
 }
 type GlGetProgramiv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetProgramiv_In
 	Out     GlGetProgramiv_Out
@@ -5057,50 +2433,21 @@ func (c *GlGetProgramiv) TypeID() atom.TypeID {
 func (c *GlGetProgramiv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetProgramiv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetProgramiv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = ProgramParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderiv_In struct {
+	binary.Generate
 	Shader    ShaderId
 	Parameter ShaderParameter
 }
 type GlGetShaderiv_Out struct {
+	binary.Generate
 	Value S32Array
 }
 type GlGetShaderiv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetShaderiv_In
 	Out     GlGetShaderiv_Out
@@ -5127,50 +2474,21 @@ func (c *GlGetShaderiv) TypeID() atom.TypeID {
 func (c *GlGetShaderiv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetShaderiv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetShaderiv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = ShaderParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformLocation_In struct {
+	binary.Generate
 	Program ProgramId
 	Name    string
 }
 type GlGetUniformLocation_Out struct {
+	binary.Generate
 	Result UniformLocation
 }
 type GlGetUniformLocation struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetUniformLocation_In
 	Out     GlGetUniformLocation_Out
@@ -5196,50 +2514,21 @@ func (c *GlGetUniformLocation) TypeID() atom.TypeID {
 func (c *GlGetUniformLocation) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetUniformLocation) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.In.Name); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetUniformLocation) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.Name = v
-	} else {
-		return err
-	}
-	if err := c.Out.Result.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetAttribLocation_In struct {
+	binary.Generate
 	Program ProgramId
 	Name    string
 }
 type GlGetAttribLocation_Out struct {
+	binary.Generate
 	Result AttributeLocation
 }
 type GlGetAttribLocation struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetAttribLocation_In
 	Out     GlGetAttribLocation_Out
@@ -5265,49 +2554,20 @@ func (c *GlGetAttribLocation) TypeID() atom.TypeID {
 func (c *GlGetAttribLocation) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetAttribLocation) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.In.Name); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetAttribLocation) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.Name = v
-	} else {
-		return err
-	}
-	if err := c.Out.Result.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPixelStorei
 ////////////////////////////////////////////////////////////////////////////////
 type GlPixelStorei_In struct {
+	binary.Generate
 	Parameter PixelStoreParameter
 	Value     int32
 }
 type GlPixelStorei_Out struct {
+	binary.Generate
 }
 type GlPixelStorei struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlPixelStorei_In
 	Out     GlPixelStorei_Out
@@ -5332,46 +2592,21 @@ func (c *GlPixelStorei) TypeID() atom.TypeID {
 func (c *GlPixelStorei) Flags() atom.Flags {
 	return 0
 }
-func (c *GlPixelStorei) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlPixelStorei) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = PixelStoreParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameteri
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexParameteri_In struct {
+	binary.Generate
 	Target    TextureTarget
 	Parameter TextureParameter
 	Value     int32
 }
 type GlTexParameteri_Out struct {
+	binary.Generate
 }
 type GlTexParameteri struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexParameteri_In
 	Out     GlTexParameteri_Out
@@ -5398,54 +2633,21 @@ func (c *GlTexParameteri) TypeID() atom.TypeID {
 func (c *GlTexParameteri) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexParameteri) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexParameteri) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = TextureParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameterf
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexParameterf_In struct {
+	binary.Generate
 	Target    TextureTarget
 	Parameter TextureParameter
 	Value     float32
 }
 type GlTexParameterf_Out struct {
+	binary.Generate
 }
 type GlTexParameterf struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexParameterf_In
 	Out     GlTexParameterf_Out
@@ -5472,54 +2674,21 @@ func (c *GlTexParameterf) TypeID() atom.TypeID {
 func (c *GlTexParameterf) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexParameterf) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexParameterf) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = TextureParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetTexParameteriv_In struct {
+	binary.Generate
 	Target    TextureTarget
 	Parameter TextureParameter
 }
 type GlGetTexParameteriv_Out struct {
+	binary.Generate
 	Values S32Array
 }
 type GlGetTexParameteriv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetTexParameteriv_In
 	Out     GlGetTexParameteriv_Out
@@ -5546,52 +2715,21 @@ func (c *GlGetTexParameteriv) TypeID() atom.TypeID {
 func (c *GlGetTexParameteriv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetTexParameteriv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetTexParameteriv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = TextureParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameterfv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetTexParameterfv_In struct {
+	binary.Generate
 	Target    TextureTarget
 	Parameter TextureParameter
 }
 type GlGetTexParameterfv_Out struct {
+	binary.Generate
 	Values F32Array
 }
 type GlGetTexParameterfv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetTexParameterfv_In
 	Out     GlGetTexParameterfv_Out
@@ -5618,51 +2756,20 @@ func (c *GlGetTexParameterfv) TypeID() atom.TypeID {
 func (c *GlGetTexParameterfv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetTexParameterfv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetTexParameterfv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = TextureParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1i_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value    int32
 }
 type GlUniform1i_Out struct {
+	binary.Generate
 }
 type GlUniform1i struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform1i_In
 	Out     GlUniform1i_Out
@@ -5687,44 +2794,21 @@ func (c *GlUniform1i) TypeID() atom.TypeID {
 func (c *GlUniform1i) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform1i) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform1i) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2i_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   int32
 	Value1   int32
 }
 type GlUniform2i_Out struct {
+	binary.Generate
 }
 type GlUniform2i struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform2i_In
 	Out     GlUniform2i_Out
@@ -5751,53 +2835,22 @@ func (c *GlUniform2i) TypeID() atom.TypeID {
 func (c *GlUniform2i) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform2i) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value1); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform2i) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3i_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   int32
 	Value1   int32
 	Value2   int32
 }
 type GlUniform3i_Out struct {
+	binary.Generate
 }
 type GlUniform3i struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform3i_In
 	Out     GlUniform3i_Out
@@ -5826,53 +2879,12 @@ func (c *GlUniform3i) TypeID() atom.TypeID {
 func (c *GlUniform3i) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform3i) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value2); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform3i) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4i
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4i_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   int32
 	Value1   int32
@@ -5880,8 +2892,10 @@ type GlUniform4i_In struct {
 	Value3   int32
 }
 type GlUniform4i_Out struct {
+	binary.Generate
 }
 type GlUniform4i struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform4i_In
 	Out     GlUniform4i_Out
@@ -5912,68 +2926,21 @@ func (c *GlUniform4i) TypeID() atom.TypeID {
 func (c *GlUniform4i) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform4i) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value2); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Value3); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform4i) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Value3 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1iv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    S32Array
 }
 type GlUniform1iv_Out struct {
+	binary.Generate
 }
 type GlUniform1iv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform1iv_In
 	Out     GlUniform1iv_Out
@@ -6000,50 +2967,21 @@ func (c *GlUniform1iv) TypeID() atom.TypeID {
 func (c *GlUniform1iv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform1iv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform1iv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2iv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    S32Array
 }
 type GlUniform2iv_Out struct {
+	binary.Generate
 }
 type GlUniform2iv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform2iv_In
 	Out     GlUniform2iv_Out
@@ -6070,50 +3008,21 @@ func (c *GlUniform2iv) TypeID() atom.TypeID {
 func (c *GlUniform2iv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform2iv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform2iv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3iv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    S32Array
 }
 type GlUniform3iv_Out struct {
+	binary.Generate
 }
 type GlUniform3iv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform3iv_In
 	Out     GlUniform3iv_Out
@@ -6140,50 +3049,21 @@ func (c *GlUniform3iv) TypeID() atom.TypeID {
 func (c *GlUniform3iv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform3iv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform3iv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4iv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4iv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    S32Array
 }
 type GlUniform4iv_Out struct {
+	binary.Generate
 }
 type GlUniform4iv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform4iv_In
 	Out     GlUniform4iv_Out
@@ -6210,49 +3090,20 @@ func (c *GlUniform4iv) TypeID() atom.TypeID {
 func (c *GlUniform4iv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform4iv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform4iv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1f_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value    float32
 }
 type GlUniform1f_Out struct {
+	binary.Generate
 }
 type GlUniform1f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform1f_In
 	Out     GlUniform1f_Out
@@ -6277,44 +3128,21 @@ func (c *GlUniform1f) TypeID() atom.TypeID {
 func (c *GlUniform1f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform1f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform1f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2f_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   float32
 	Value1   float32
 }
 type GlUniform2f_Out struct {
+	binary.Generate
 }
 type GlUniform2f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform2f_In
 	Out     GlUniform2f_Out
@@ -6341,53 +3169,22 @@ func (c *GlUniform2f) TypeID() atom.TypeID {
 func (c *GlUniform2f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform2f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform2f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3f_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   float32
 	Value1   float32
 	Value2   float32
 }
 type GlUniform3f_Out struct {
+	binary.Generate
 }
 type GlUniform3f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform3f_In
 	Out     GlUniform3f_Out
@@ -6416,53 +3213,12 @@ func (c *GlUniform3f) TypeID() atom.TypeID {
 func (c *GlUniform3f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform3f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value2); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform3f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4f
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4f_In struct {
+	binary.Generate
 	Location UniformLocation
 	Value0   float32
 	Value1   float32
@@ -6470,8 +3226,10 @@ type GlUniform4f_In struct {
 	Value3   float32
 }
 type GlUniform4f_Out struct {
+	binary.Generate
 }
 type GlUniform4f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform4f_In
 	Out     GlUniform4f_Out
@@ -6502,68 +3260,21 @@ func (c *GlUniform4f) TypeID() atom.TypeID {
 func (c *GlUniform4f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform4f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value2); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value3); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform4f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value3 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform1fv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    F32Array
 }
 type GlUniform1fv_Out struct {
+	binary.Generate
 }
 type GlUniform1fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform1fv_In
 	Out     GlUniform1fv_Out
@@ -6590,50 +3301,21 @@ func (c *GlUniform1fv) TypeID() atom.TypeID {
 func (c *GlUniform1fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform1fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform1fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform2fv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    F32Array
 }
 type GlUniform2fv_Out struct {
+	binary.Generate
 }
 type GlUniform2fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform2fv_In
 	Out     GlUniform2fv_Out
@@ -6660,50 +3342,21 @@ func (c *GlUniform2fv) TypeID() atom.TypeID {
 func (c *GlUniform2fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform2fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform2fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform3fv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    F32Array
 }
 type GlUniform3fv_Out struct {
+	binary.Generate
 }
 type GlUniform3fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform3fv_In
 	Out     GlUniform3fv_Out
@@ -6730,50 +3383,21 @@ func (c *GlUniform3fv) TypeID() atom.TypeID {
 func (c *GlUniform3fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform3fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform3fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniform4fv_In struct {
+	binary.Generate
 	Location UniformLocation
 	Count    int32
 	Value    F32Array
 }
 type GlUniform4fv_Out struct {
+	binary.Generate
 }
 type GlUniform4fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniform4fv_In
 	Out     GlUniform4fv_Out
@@ -6800,51 +3424,22 @@ func (c *GlUniform4fv) TypeID() atom.TypeID {
 func (c *GlUniform4fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniform4fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniform4fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix2fv_In struct {
+	binary.Generate
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
 type GlUniformMatrix2fv_Out struct {
+	binary.Generate
 }
 type GlUniformMatrix2fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniformMatrix2fv_In
 	Out     GlUniformMatrix2fv_Out
@@ -6873,59 +3468,22 @@ func (c *GlUniformMatrix2fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix2fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniformMatrix2fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Transpose); err != nil {
-		return err
-	}
-	if err := c.In.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniformMatrix2fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Transpose = v
-	} else {
-		return err
-	}
-	if err := c.In.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix3fv_In struct {
+	binary.Generate
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
 type GlUniformMatrix3fv_Out struct {
+	binary.Generate
 }
 type GlUniformMatrix3fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniformMatrix3fv_In
 	Out     GlUniformMatrix3fv_Out
@@ -6954,59 +3512,22 @@ func (c *GlUniformMatrix3fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix3fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniformMatrix3fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Transpose); err != nil {
-		return err
-	}
-	if err := c.In.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniformMatrix3fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Transpose = v
-	} else {
-		return err
-	}
-	if err := c.In.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlUniformMatrix4fv_In struct {
+	binary.Generate
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
 type GlUniformMatrix4fv_Out struct {
+	binary.Generate
 }
 type GlUniformMatrix4fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUniformMatrix4fv_In
 	Out     GlUniformMatrix4fv_Out
@@ -7035,58 +3556,21 @@ func (c *GlUniformMatrix4fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix4fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUniformMatrix4fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Transpose); err != nil {
-		return err
-	}
-	if err := c.In.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUniformMatrix4fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Transpose = v
-	} else {
-		return err
-	}
-	if err := c.In.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformfv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformfv_In struct {
+	binary.Generate
 	Program  ProgramId
 	Location UniformLocation
 	Values   F32Array
 }
 type GlGetUniformfv_Out struct {
+	binary.Generate
 }
 type GlGetUniformfv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetUniformfv_In
 	Out     GlGetUniformfv_Out
@@ -7113,48 +3597,21 @@ func (c *GlGetUniformfv) TypeID() atom.TypeID {
 func (c *GlGetUniformfv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetUniformfv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetUniformfv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetUniformiv_In struct {
+	binary.Generate
 	Program  ProgramId
 	Location UniformLocation
 	Values   S32Array
 }
 type GlGetUniformiv_Out struct {
+	binary.Generate
 }
 type GlGetUniformiv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetUniformiv_In
 	Out     GlGetUniformiv_Out
@@ -7181,47 +3638,20 @@ func (c *GlGetUniformiv) TypeID() atom.TypeID {
 func (c *GlGetUniformiv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetUniformiv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetUniformiv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib1f_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value0   float32
 }
 type GlVertexAttrib1f_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib1f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib1f_In
 	Out     GlVertexAttrib1f_Out
@@ -7246,44 +3676,21 @@ func (c *GlVertexAttrib1f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib1f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib1f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib1f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib2f_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value0   float32
 	Value1   float32
 }
 type GlVertexAttrib2f_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib2f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib2f_In
 	Out     GlVertexAttrib2f_Out
@@ -7310,53 +3717,22 @@ func (c *GlVertexAttrib2f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib2f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib2f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib2f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib3f_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value0   float32
 	Value1   float32
 	Value2   float32
 }
 type GlVertexAttrib3f_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib3f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib3f_In
 	Out     GlVertexAttrib3f_Out
@@ -7385,53 +3761,12 @@ func (c *GlVertexAttrib3f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib3f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib3f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value2); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib3f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4f
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib4f_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value0   float32
 	Value1   float32
@@ -7439,8 +3774,10 @@ type GlVertexAttrib4f_In struct {
 	Value3   float32
 }
 type GlVertexAttrib4f_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib4f struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib4f_In
 	Out     GlVertexAttrib4f_Out
@@ -7471,67 +3808,20 @@ func (c *GlVertexAttrib4f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib4f) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib4f) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value0); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value1); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value2); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value3); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib4f) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value2 = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value3 = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib1fv_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value    F32Array
 }
 type GlVertexAttrib1fv_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib1fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib1fv_In
 	Out     GlVertexAttrib1fv_Out
@@ -7556,41 +3846,20 @@ func (c *GlVertexAttrib1fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib1fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib1fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib1fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib2fv_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value    F32Array
 }
 type GlVertexAttrib2fv_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib2fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib2fv_In
 	Out     GlVertexAttrib2fv_Out
@@ -7615,41 +3884,20 @@ func (c *GlVertexAttrib2fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib2fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib2fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib2fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib3fv_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value    F32Array
 }
 type GlVertexAttrib3fv_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib3fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib3fv_In
 	Out     GlVertexAttrib3fv_Out
@@ -7674,41 +3922,20 @@ func (c *GlVertexAttrib3fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib3fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib3fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib3fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4fv
 ////////////////////////////////////////////////////////////////////////////////
 type GlVertexAttrib4fv_In struct {
+	binary.Generate
 	Location AttributeLocation
 	Value    F32Array
 }
 type GlVertexAttrib4fv_Out struct {
+	binary.Generate
 }
 type GlVertexAttrib4fv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlVertexAttrib4fv_In
 	Out     GlVertexAttrib4fv_Out
@@ -7733,43 +3960,22 @@ func (c *GlVertexAttrib4fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib4fv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlVertexAttrib4fv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Location.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlVertexAttrib4fv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Location.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderPrecisionFormat
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderPrecisionFormat_In struct {
+	binary.Generate
 	ShaderType    ShaderType
 	PrecisionType PrecisionType
 }
 type GlGetShaderPrecisionFormat_Out struct {
+	binary.Generate
 	Range     S32Array
 	Precision int32
 }
 type GlGetShaderPrecisionFormat struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetShaderPrecisionFormat_In
 	Out     GlGetShaderPrecisionFormat_Out
@@ -7798,58 +4004,19 @@ func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID {
 func (c *GlGetShaderPrecisionFormat) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetShaderPrecisionFormat) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.ShaderType)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.PrecisionType)); err != nil {
-		return err
-	}
-	if err := c.Out.Range.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Precision); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetShaderPrecisionFormat) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.ShaderType = ShaderType(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.PrecisionType = PrecisionType(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Range.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Precision = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthMask_In struct {
+	binary.Generate
 	Enabled bool
 }
 type GlDepthMask_Out struct {
+	binary.Generate
 }
 type GlDepthMask struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDepthMask_In
 	Out     GlDepthMask_Out
@@ -7872,36 +4039,19 @@ func (c *GlDepthMask) TypeID() atom.TypeID {
 func (c *GlDepthMask) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDepthMask) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Enabled); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDepthMask) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Enabled = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthFunc
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthFunc_In struct {
+	binary.Generate
 	Function TestFunction
 }
 type GlDepthFunc_Out struct {
+	binary.Generate
 }
 type GlDepthFunc struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDepthFunc_In
 	Out     GlDepthFunc_Out
@@ -7924,37 +4074,20 @@ func (c *GlDepthFunc) TypeID() atom.TypeID {
 func (c *GlDepthFunc) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDepthFunc) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Function)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDepthFunc) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Function = TestFunction(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthRangef
 ////////////////////////////////////////////////////////////////////////////////
 type GlDepthRangef_In struct {
+	binary.Generate
 	Near float32
 	Far  float32
 }
 type GlDepthRangef_Out struct {
+	binary.Generate
 }
 type GlDepthRangef struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDepthRangef_In
 	Out     GlDepthRangef_Out
@@ -7979,47 +4112,22 @@ func (c *GlDepthRangef) TypeID() atom.TypeID {
 func (c *GlDepthRangef) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDepthRangef) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Near); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Far); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDepthRangef) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Near = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Far = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlColorMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlColorMask_In struct {
+	binary.Generate
 	Red   bool
 	Green bool
 	Blue  bool
 	Alpha bool
 }
 type GlColorMask_Out struct {
+	binary.Generate
 }
 type GlColorMask struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlColorMask_In
 	Out     GlColorMask_Out
@@ -8048,60 +4156,19 @@ func (c *GlColorMask) TypeID() atom.TypeID {
 func (c *GlColorMask) Flags() atom.Flags {
 	return 0
 }
-func (c *GlColorMask) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Red); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Green); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Blue); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Alpha); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlColorMask) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Red = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Green = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Blue = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Alpha = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMask
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilMask_In struct {
+	binary.Generate
 	Mask uint32
 }
 type GlStencilMask_Out struct {
+	binary.Generate
 }
 type GlStencilMask struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlStencilMask_In
 	Out     GlStencilMask_Out
@@ -8124,37 +4191,20 @@ func (c *GlStencilMask) TypeID() atom.TypeID {
 func (c *GlStencilMask) Flags() atom.Flags {
 	return 0
 }
-func (c *GlStencilMask) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.In.Mask); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlStencilMask) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mask = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMaskSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilMaskSeparate_In struct {
+	binary.Generate
 	Face FaceMode
 	Mask uint32
 }
 type GlStencilMaskSeparate_Out struct {
+	binary.Generate
 }
 type GlStencilMaskSeparate struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlStencilMaskSeparate_In
 	Out     GlStencilMaskSeparate_Out
@@ -8179,47 +4229,22 @@ func (c *GlStencilMaskSeparate) TypeID() atom.TypeID {
 func (c *GlStencilMaskSeparate) Flags() atom.Flags {
 	return 0
 }
-func (c *GlStencilMaskSeparate) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Face)); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.In.Mask); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlStencilMaskSeparate) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Face = FaceMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mask = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilFuncSeparate_In struct {
+	binary.Generate
 	Face           FaceMode
 	Function       TestFunction
 	ReferenceValue int32
 	Mask           int32
 }
 type GlStencilFuncSeparate_Out struct {
+	binary.Generate
 }
 type GlStencilFuncSeparate struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlStencilFuncSeparate_In
 	Out     GlStencilFuncSeparate_Out
@@ -8248,63 +4273,22 @@ func (c *GlStencilFuncSeparate) TypeID() atom.TypeID {
 func (c *GlStencilFuncSeparate) Flags() atom.Flags {
 	return 0
 }
-func (c *GlStencilFuncSeparate) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Face)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Function)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.ReferenceValue); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Mask); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlStencilFuncSeparate) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Face = FaceMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Function = TestFunction(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.ReferenceValue = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Mask = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilOpSeparate
 ////////////////////////////////////////////////////////////////////////////////
 type GlStencilOpSeparate_In struct {
+	binary.Generate
 	Face                 FaceMode
 	StencilFail          StencilAction
 	StencilPassDepthFail StencilAction
 	StencilPassDepthPass StencilAction
 }
 type GlStencilOpSeparate_Out struct {
+	binary.Generate
 }
 type GlStencilOpSeparate struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlStencilOpSeparate_In
 	Out     GlStencilOpSeparate_Out
@@ -8333,60 +4317,19 @@ func (c *GlStencilOpSeparate) TypeID() atom.TypeID {
 func (c *GlStencilOpSeparate) Flags() atom.Flags {
 	return 0
 }
-func (c *GlStencilOpSeparate) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Face)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.StencilFail)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.StencilPassDepthFail)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.StencilPassDepthPass)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlStencilOpSeparate) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Face = FaceMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.StencilFail = StencilAction(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.StencilPassDepthFail = StencilAction(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.StencilPassDepthPass = StencilAction(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFrontFace
 ////////////////////////////////////////////////////////////////////////////////
 type GlFrontFace_In struct {
+	binary.Generate
 	Orientation FaceOrientation
 }
 type GlFrontFace_Out struct {
+	binary.Generate
 }
 type GlFrontFace struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlFrontFace_In
 	Out     GlFrontFace_Out
@@ -8409,39 +4352,22 @@ func (c *GlFrontFace) TypeID() atom.TypeID {
 func (c *GlFrontFace) Flags() atom.Flags {
 	return 0
 }
-func (c *GlFrontFace) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Orientation)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlFrontFace) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Orientation = FaceOrientation(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlViewport
 ////////////////////////////////////////////////////////////////////////////////
 type GlViewport_In struct {
+	binary.Generate
 	X      int32
 	Y      int32
 	Width  int32
 	Height int32
 }
 type GlViewport_Out struct {
+	binary.Generate
 }
 type GlViewport struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlViewport_In
 	Out     GlViewport_Out
@@ -8470,63 +4396,22 @@ func (c *GlViewport) TypeID() atom.TypeID {
 func (c *GlViewport) Flags() atom.Flags {
 	return 0
 }
-func (c *GlViewport) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlViewport) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlScissor
 ////////////////////////////////////////////////////////////////////////////////
 type GlScissor_In struct {
+	binary.Generate
 	X      int32
 	Y      int32
 	Width  int32
 	Height int32
 }
 type GlScissor_Out struct {
+	binary.Generate
 }
 type GlScissor struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlScissor_In
 	Out     GlScissor_Out
@@ -8555,60 +4440,19 @@ func (c *GlScissor) TypeID() atom.TypeID {
 func (c *GlScissor) Flags() atom.Flags {
 	return 0
 }
-func (c *GlScissor) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlScissor) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlActiveTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlActiveTexture_In struct {
+	binary.Generate
 	Unit TextureUnit
 }
 type GlActiveTexture_Out struct {
+	binary.Generate
 }
 type GlActiveTexture struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlActiveTexture_In
 	Out     GlActiveTexture_Out
@@ -8631,37 +4475,20 @@ func (c *GlActiveTexture) TypeID() atom.TypeID {
 func (c *GlActiveTexture) Flags() atom.Flags {
 	return 0
 }
-func (c *GlActiveTexture) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Unit)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlActiveTexture) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Unit = TextureUnit(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenTextures
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenTextures_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenTextures_Out struct {
+	binary.Generate
 	Textures TextureIdArray
 }
 type GlGenTextures struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenTextures_In
 	Out     GlGenTextures_Out
@@ -8686,43 +4513,20 @@ func (c *GlGenTextures) TypeID() atom.TypeID {
 func (c *GlGenTextures) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenTextures) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Textures.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenTextures) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Textures.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteTextures
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteTextures_In struct {
+	binary.Generate
 	Count    int32
 	Textures TextureIdArray
 }
 type GlDeleteTextures_Out struct {
+	binary.Generate
 }
 type GlDeleteTextures struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteTextures_In
 	Out     GlDeleteTextures_Out
@@ -8747,43 +4551,20 @@ func (c *GlDeleteTextures) TypeID() atom.TypeID {
 func (c *GlDeleteTextures) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteTextures) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Textures.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteTextures) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Textures.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsTexture_In struct {
+	binary.Generate
 	Texture TextureId
 }
 type GlIsTexture_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsTexture struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsTexture_In
 	Out     GlIsTexture_Out
@@ -8807,43 +4588,20 @@ func (c *GlIsTexture) TypeID() atom.TypeID {
 func (c *GlIsTexture) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsTexture) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsTexture) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindTexture
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindTexture_In struct {
+	binary.Generate
 	Target  TextureTarget
 	Texture TextureId
 }
 type GlBindTexture_Out struct {
+	binary.Generate
 }
 type GlBindTexture struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindTexture_In
 	Out     GlBindTexture_Out
@@ -8868,37 +4626,12 @@ func (c *GlBindTexture) TypeID() atom.TypeID {
 func (c *GlBindTexture) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindTexture) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindTexture) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexImage2D_In struct {
+	binary.Generate
 	Target         TextureImageTarget
 	Level          int32
 	InternalFormat TexelFormat
@@ -8910,8 +4643,10 @@ type GlTexImage2D_In struct {
 	Data           TexturePointer
 }
 type GlTexImage2D_Out struct {
+	binary.Generate
 }
 type GlTexImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexImage2D_In
 	Out     GlTexImage2D_Out
@@ -8950,93 +4685,12 @@ func (c *GlTexImage2D) TypeID() atom.TypeID {
 func (c *GlTexImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.InternalFormat)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Border); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.InternalFormat = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Border = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = TexelType(v)
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlTexSubImage2D_In struct {
+	binary.Generate
 	Target  TextureImageTarget
 	Level   int32
 	Xoffset int32
@@ -9048,8 +4702,10 @@ type GlTexSubImage2D_In struct {
 	Data    TexturePointer
 }
 type GlTexSubImage2D_Out struct {
+	binary.Generate
 }
 type GlTexSubImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlTexSubImage2D_In
 	Out     GlTexSubImage2D_Out
@@ -9088,93 +4744,12 @@ func (c *GlTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlTexSubImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Xoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Yoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlTexSubImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Xoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Yoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = TexelType(v)
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCopyTexImage2D_In struct {
+	binary.Generate
 	Target TextureImageTarget
 	Level  int32
 	Format TexelFormat
@@ -9185,8 +4760,10 @@ type GlCopyTexImage2D_In struct {
 	Border int32
 }
 type GlCopyTexImage2D_Out struct {
+	binary.Generate
 }
 type GlCopyTexImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCopyTexImage2D_In
 	Out     GlCopyTexImage2D_Out
@@ -9223,87 +4800,12 @@ func (c *GlCopyTexImage2D) TypeID() atom.TypeID {
 func (c *GlCopyTexImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCopyTexImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Border); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCopyTexImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = TexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Border = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCopyTexSubImage2D_In struct {
+	binary.Generate
 	Target  TextureImageTarget
 	Level   int32
 	Xoffset int32
@@ -9314,8 +4816,10 @@ type GlCopyTexSubImage2D_In struct {
 	Height  int32
 }
 type GlCopyTexSubImage2D_Out struct {
+	binary.Generate
 }
 type GlCopyTexSubImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCopyTexSubImage2D_In
 	Out     GlCopyTexSubImage2D_Out
@@ -9352,87 +4856,12 @@ func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlCopyTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCopyTexSubImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Xoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Yoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCopyTexSubImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Xoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Yoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompressedTexImage2D_In struct {
+	binary.Generate
 	Target    TextureImageTarget
 	Level     int32
 	Format    CompressedTexelFormat
@@ -9443,8 +4872,10 @@ type GlCompressedTexImage2D_In struct {
 	Data      TexturePointer
 }
 type GlCompressedTexImage2D_Out struct {
+	binary.Generate
 }
 type GlCompressedTexImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCompressedTexImage2D_In
 	Out     GlCompressedTexImage2D_Out
@@ -9481,85 +4912,12 @@ func (c *GlCompressedTexImage2D) TypeID() atom.TypeID {
 func (c *GlCompressedTexImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCompressedTexImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Border); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.ImageSize); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCompressedTexImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = CompressedTexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Border = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.ImageSize = v
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompressedTexSubImage2D_In struct {
+	binary.Generate
 	Target    TextureImageTarget
 	Level     int32
 	Xoffset   int32
@@ -9571,8 +4929,10 @@ type GlCompressedTexSubImage2D_In struct {
 	Data      TexturePointer
 }
 type GlCompressedTexSubImage2D_Out struct {
+	binary.Generate
 }
 type GlCompressedTexSubImage2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCompressedTexSubImage2D_In
 	Out     GlCompressedTexSubImage2D_Out
@@ -9611,98 +4971,19 @@ func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlCompressedTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCompressedTexSubImage2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Xoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Yoffset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.ImageSize); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCompressedTexSubImage2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Xoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Yoffset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = CompressedTexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.ImageSize = v
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenerateMipmap
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenerateMipmap_In struct {
+	binary.Generate
 	Target TextureImageTarget
 }
 type GlGenerateMipmap_Out struct {
+	binary.Generate
 }
 type GlGenerateMipmap struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenerateMipmap_In
 	Out     GlGenerateMipmap_Out
@@ -9725,31 +5006,12 @@ func (c *GlGenerateMipmap) TypeID() atom.TypeID {
 func (c *GlGenerateMipmap) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenerateMipmap) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenerateMipmap) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReadPixels
 ////////////////////////////////////////////////////////////////////////////////
 type GlReadPixels_In struct {
+	binary.Generate
 	X      int32
 	Y      int32
 	Width  int32
@@ -9758,9 +5020,11 @@ type GlReadPixels_In struct {
 	Type   TexelType
 }
 type GlReadPixels_Out struct {
+	binary.Generate
 	Data memory.Pointer
 }
 type GlReadPixels struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlReadPixels_In
 	Out     GlReadPixels_Out
@@ -9795,85 +5059,20 @@ func (c *GlReadPixels) TypeID() atom.TypeID {
 func (c *GlReadPixels) Flags() atom.Flags {
 	return 0
 }
-func (c *GlReadPixels) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Out.Data)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlReadPixels) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = BaseTexelFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = TexelType(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Data = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenFramebuffers_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenFramebuffers_Out struct {
+	binary.Generate
 	Framebuffers FramebufferIdArray
 }
 type GlGenFramebuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenFramebuffers_In
 	Out     GlGenFramebuffers_Out
@@ -9898,43 +5097,20 @@ func (c *GlGenFramebuffers) TypeID() atom.TypeID {
 func (c *GlGenFramebuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenFramebuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Framebuffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenFramebuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Framebuffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindFramebuffer_In struct {
+	binary.Generate
 	Target      FramebufferTarget
 	Framebuffer FramebufferId
 }
 type GlBindFramebuffer_Out struct {
+	binary.Generate
 }
 type GlBindFramebuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindFramebuffer_In
 	Out     GlBindFramebuffer_Out
@@ -9959,43 +5135,20 @@ func (c *GlBindFramebuffer) TypeID() atom.TypeID {
 func (c *GlBindFramebuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindFramebuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Framebuffer.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindFramebuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Framebuffer.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCheckFramebufferStatus
 ////////////////////////////////////////////////////////////////////////////////
 type GlCheckFramebufferStatus_In struct {
+	binary.Generate
 	Target FramebufferTarget
 }
 type GlCheckFramebufferStatus_Out struct {
+	binary.Generate
 	Result FramebufferStatus
 }
 type GlCheckFramebufferStatus struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCheckFramebufferStatus_In
 	Out     GlCheckFramebufferStatus_Out
@@ -10019,45 +5172,20 @@ func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID {
 func (c *GlCheckFramebufferStatus) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCheckFramebufferStatus) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Out.Result)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCheckFramebufferStatus) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Result = FramebufferStatus(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteFramebuffers_In struct {
+	binary.Generate
 	Count        int32
 	Framebuffers FramebufferIdArray
 }
 type GlDeleteFramebuffers_Out struct {
+	binary.Generate
 }
 type GlDeleteFramebuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteFramebuffers_In
 	Out     GlDeleteFramebuffers_Out
@@ -10082,43 +5210,20 @@ func (c *GlDeleteFramebuffers) TypeID() atom.TypeID {
 func (c *GlDeleteFramebuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteFramebuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Framebuffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteFramebuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Framebuffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsFramebuffer_In struct {
+	binary.Generate
 	Framebuffer FramebufferId
 }
 type GlIsFramebuffer_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsFramebuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsFramebuffer_In
 	Out     GlIsFramebuffer_Out
@@ -10142,43 +5247,20 @@ func (c *GlIsFramebuffer) TypeID() atom.TypeID {
 func (c *GlIsFramebuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsFramebuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Framebuffer.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsFramebuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Framebuffer.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenRenderbuffers_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenRenderbuffers_Out struct {
+	binary.Generate
 	Renderbuffers RenderbufferIdArray
 }
 type GlGenRenderbuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenRenderbuffers_In
 	Out     GlGenRenderbuffers_Out
@@ -10203,43 +5285,20 @@ func (c *GlGenRenderbuffers) TypeID() atom.TypeID {
 func (c *GlGenRenderbuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenRenderbuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Renderbuffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenRenderbuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Renderbuffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindRenderbuffer_In struct {
+	binary.Generate
 	Target       RenderbufferTarget
 	Renderbuffer RenderbufferId
 }
 type GlBindRenderbuffer_Out struct {
+	binary.Generate
 }
 type GlBindRenderbuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindRenderbuffer_In
 	Out     GlBindRenderbuffer_Out
@@ -10264,45 +5323,22 @@ func (c *GlBindRenderbuffer) TypeID() atom.TypeID {
 func (c *GlBindRenderbuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindRenderbuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Renderbuffer.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindRenderbuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = RenderbufferTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Renderbuffer.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorage
 ////////////////////////////////////////////////////////////////////////////////
 type GlRenderbufferStorage_In struct {
+	binary.Generate
 	Target RenderbufferTarget
 	Format RenderbufferFormat
 	Width  int32
 	Height int32
 }
 type GlRenderbufferStorage_Out struct {
+	binary.Generate
 }
 type GlRenderbufferStorage struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlRenderbufferStorage_In
 	Out     GlRenderbufferStorage_Out
@@ -10331,61 +5367,20 @@ func (c *GlRenderbufferStorage) TypeID() atom.TypeID {
 func (c *GlRenderbufferStorage) Flags() atom.Flags {
 	return 0
 }
-func (c *GlRenderbufferStorage) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlRenderbufferStorage) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = RenderbufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteRenderbuffers_In struct {
+	binary.Generate
 	Count         int32
 	Renderbuffers RenderbufferIdArray
 }
 type GlDeleteRenderbuffers_Out struct {
+	binary.Generate
 }
 type GlDeleteRenderbuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteRenderbuffers_In
 	Out     GlDeleteRenderbuffers_Out
@@ -10410,43 +5405,20 @@ func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID {
 func (c *GlDeleteRenderbuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteRenderbuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Renderbuffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteRenderbuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Renderbuffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsRenderbuffer_In struct {
+	binary.Generate
 	Renderbuffer RenderbufferId
 }
 type GlIsRenderbuffer_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsRenderbuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsRenderbuffer_In
 	Out     GlIsRenderbuffer_Out
@@ -10470,44 +5442,21 @@ func (c *GlIsRenderbuffer) TypeID() atom.TypeID {
 func (c *GlIsRenderbuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsRenderbuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Renderbuffer.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsRenderbuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Renderbuffer.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetRenderbufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetRenderbufferParameteriv_In struct {
+	binary.Generate
 	Target    RenderbufferTarget
 	Parameter RenderbufferParameter
 }
 type GlGetRenderbufferParameteriv_Out struct {
+	binary.Generate
 	Values S32Array
 }
 type GlGetRenderbufferParameteriv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetRenderbufferParameteriv_In
 	Out     GlGetRenderbufferParameteriv_Out
@@ -10534,51 +5483,20 @@ func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID {
 func (c *GlGetRenderbufferParameteriv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetRenderbufferParameteriv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetRenderbufferParameteriv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = RenderbufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = RenderbufferParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenBuffers_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenBuffers_Out struct {
+	binary.Generate
 	Buffers BufferIdArray
 }
 type GlGenBuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenBuffers_In
 	Out     GlGenBuffers_Out
@@ -10603,43 +5521,20 @@ func (c *GlGenBuffers) TypeID() atom.TypeID {
 func (c *GlGenBuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenBuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Buffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenBuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Buffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBindBuffer_In struct {
+	binary.Generate
 	Target BufferTarget
 	Buffer BufferId
 }
 type GlBindBuffer_Out struct {
+	binary.Generate
 }
 type GlBindBuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBindBuffer_In
 	Out     GlBindBuffer_Out
@@ -10664,45 +5559,22 @@ func (c *GlBindBuffer) TypeID() atom.TypeID {
 func (c *GlBindBuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBindBuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Buffer.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBindBuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = BufferTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Buffer.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferData
 ////////////////////////////////////////////////////////////////////////////////
 type GlBufferData_In struct {
+	binary.Generate
 	Target BufferTarget
 	Size   int32
 	Data   BufferDataPointer
 	Usage  BufferUsage
 }
 type GlBufferData_Out struct {
+	binary.Generate
 }
 type GlBufferData struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBufferData_In
 	Out     GlBufferData_Out
@@ -10731,61 +5603,22 @@ func (c *GlBufferData) TypeID() atom.TypeID {
 func (c *GlBufferData) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBufferData) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Size); err != nil {
-		return err
-	}
-	if err := c.In.Data.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Usage)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBufferData) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = BufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Size = v
-	} else {
-		return err
-	}
-	if err := c.In.Data.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Usage = BufferUsage(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferSubData
 ////////////////////////////////////////////////////////////////////////////////
 type GlBufferSubData_In struct {
+	binary.Generate
 	Target BufferTarget
 	Offset int32
 	Size   int32
 	Data   memory.Pointer
 }
 type GlBufferSubData_Out struct {
+	binary.Generate
 }
 type GlBufferSubData struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBufferSubData_In
 	Out     GlBufferSubData_Out
@@ -10814,61 +5647,20 @@ func (c *GlBufferSubData) TypeID() atom.TypeID {
 func (c *GlBufferSubData) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBufferSubData) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Offset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Size); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.In.Data)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBufferSubData) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = BufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Offset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Size = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.In.Data = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteBuffers
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteBuffers_In struct {
+	binary.Generate
 	Count   int32
 	Buffers BufferIdArray
 }
 type GlDeleteBuffers_Out struct {
+	binary.Generate
 }
 type GlDeleteBuffers struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteBuffers_In
 	Out     GlDeleteBuffers_Out
@@ -10893,43 +5685,20 @@ func (c *GlDeleteBuffers) TypeID() atom.TypeID {
 func (c *GlDeleteBuffers) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteBuffers) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Buffers.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteBuffers) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Buffers.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsBuffer_In struct {
+	binary.Generate
 	Buffer BufferId
 }
 type GlIsBuffer_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsBuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsBuffer_In
 	Out     GlIsBuffer_Out
@@ -10953,44 +5722,21 @@ func (c *GlIsBuffer) TypeID() atom.TypeID {
 func (c *GlIsBuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsBuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Buffer.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsBuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Buffer.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetBufferParameteriv_In struct {
+	binary.Generate
 	Target    BufferTarget
 	Parameter BufferParameter
 }
 type GlGetBufferParameteriv_Out struct {
+	binary.Generate
 	Value int32
 }
 type GlGetBufferParameteriv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetBufferParameteriv_In
 	Out     GlGetBufferParameteriv_Out
@@ -11017,53 +5763,20 @@ func (c *GlGetBufferParameteriv) TypeID() atom.TypeID {
 func (c *GlGetBufferParameteriv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetBufferParameteriv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetBufferParameteriv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = BufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = BufferParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlCreateShader_In struct {
+	binary.Generate
 	Type ShaderType
 }
 type GlCreateShader_Out struct {
+	binary.Generate
 	Result ShaderId
 }
 type GlCreateShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCreateShader_In
 	Out     GlCreateShader_Out
@@ -11087,42 +5800,19 @@ func (c *GlCreateShader) TypeID() atom.TypeID {
 func (c *GlCreateShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCreateShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Type)); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCreateShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Type = ShaderType(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Result.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteShader_In struct {
+	binary.Generate
 	Shader ShaderId
 }
 type GlDeleteShader_Out struct {
+	binary.Generate
 }
 type GlDeleteShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteShader_In
 	Out     GlDeleteShader_Out
@@ -11145,37 +5835,22 @@ func (c *GlDeleteShader) TypeID() atom.TypeID {
 func (c *GlDeleteShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderSource
 ////////////////////////////////////////////////////////////////////////////////
 type GlShaderSource_In struct {
+	binary.Generate
 	Shader ShaderId
 	Count  int32
 	Source StringArray
 	Length S32Array
 }
 type GlShaderSource_Out struct {
+	binary.Generate
 }
 type GlShaderSource struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlShaderSource_In
 	Out     GlShaderSource_Out
@@ -11204,49 +5879,12 @@ func (c *GlShaderSource) TypeID() atom.TypeID {
 func (c *GlShaderSource) Flags() atom.Flags {
 	return 0
 }
-func (c *GlShaderSource) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Source.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Length.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlShaderSource) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Source.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Length.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderBinary
 ////////////////////////////////////////////////////////////////////////////////
 type GlShaderBinary_In struct {
+	binary.Generate
 	Count        int32
 	Shaders      ShaderIdArray
 	BinaryFormat uint32
@@ -11254,8 +5892,10 @@ type GlShaderBinary_In struct {
 	BinarySize   int32
 }
 type GlShaderBinary_Out struct {
+	binary.Generate
 }
 type GlShaderBinary struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlShaderBinary_In
 	Out     GlShaderBinary_Out
@@ -11286,69 +5926,22 @@ func (c *GlShaderBinary) TypeID() atom.TypeID {
 func (c *GlShaderBinary) Flags() atom.Flags {
 	return 0
 }
-func (c *GlShaderBinary) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Shaders.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.In.BinaryFormat); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.In.Binary)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BinarySize); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlShaderBinary) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Shaders.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.BinaryFormat = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.In.Binary = memory.Pointer(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BinarySize = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderInfoLog
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderInfoLog_In struct {
+	binary.Generate
 	Shader       ShaderId
 	BufferLength int32
 }
 type GlGetShaderInfoLog_Out struct {
+	binary.Generate
 	StringLengthWritten int32
 	Info                string
 }
 type GlGetShaderInfoLog struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetShaderInfoLog_In
 	Out     GlGetShaderInfoLog_Out
@@ -11377,61 +5970,22 @@ func (c *GlGetShaderInfoLog) TypeID() atom.TypeID {
 func (c *GlGetShaderInfoLog) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetShaderInfoLog) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferLength); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.StringLengthWritten); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Info); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetShaderInfoLog) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferLength = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.StringLengthWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Info = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderSource
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetShaderSource_In struct {
+	binary.Generate
 	Shader       ShaderId
 	BufferLength int32
 }
 type GlGetShaderSource_Out struct {
+	binary.Generate
 	StringLengthWritten int32
 	Source              string
 }
 type GlGetShaderSource struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetShaderSource_In
 	Out     GlGetShaderSource_Out
@@ -11460,57 +6014,18 @@ func (c *GlGetShaderSource) TypeID() atom.TypeID {
 func (c *GlGetShaderSource) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetShaderSource) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferLength); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.StringLengthWritten); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Source); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetShaderSource) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferLength = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.StringLengthWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Source = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReleaseShaderCompiler
 ////////////////////////////////////////////////////////////////////////////////
 type GlReleaseShaderCompiler_In struct {
+	binary.Generate
 }
 type GlReleaseShaderCompiler_Out struct {
+	binary.Generate
 }
 type GlReleaseShaderCompiler struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlReleaseShaderCompiler_In
 	Out     GlReleaseShaderCompiler_Out
@@ -11531,28 +6046,19 @@ func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID {
 func (c *GlReleaseShaderCompiler) Flags() atom.Flags {
 	return 0
 }
-func (c *GlReleaseShaderCompiler) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlReleaseShaderCompiler) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompileShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlCompileShader_In struct {
+	binary.Generate
 	Shader ShaderId
 }
 type GlCompileShader_Out struct {
+	binary.Generate
 }
 type GlCompileShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCompileShader_In
 	Out     GlCompileShader_Out
@@ -11575,35 +6081,20 @@ func (c *GlCompileShader) TypeID() atom.TypeID {
 func (c *GlCompileShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCompileShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCompileShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsShader_In struct {
+	binary.Generate
 	Shader ShaderId
 }
 type GlIsShader_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsShader_In
 	Out     GlIsShader_Out
@@ -11627,42 +6118,19 @@ func (c *GlIsShader) TypeID() atom.TypeID {
 func (c *GlIsShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlCreateProgram_In struct {
+	binary.Generate
 }
 type GlCreateProgram_Out struct {
+	binary.Generate
 	Result ProgramId
 }
 type GlCreateProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCreateProgram_In
 	Out     GlCreateProgram_Out
@@ -11684,34 +6152,19 @@ func (c *GlCreateProgram) TypeID() atom.TypeID {
 func (c *GlCreateProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCreateProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCreateProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteProgram_In struct {
+	binary.Generate
 	Program ProgramId
 }
 type GlDeleteProgram_Out struct {
+	binary.Generate
 }
 type GlDeleteProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteProgram_In
 	Out     GlDeleteProgram_Out
@@ -11734,35 +6187,20 @@ func (c *GlDeleteProgram) TypeID() atom.TypeID {
 func (c *GlDeleteProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlAttachShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlAttachShader_In struct {
+	binary.Generate
 	Program ProgramId
 	Shader  ShaderId
 }
 type GlAttachShader_Out struct {
+	binary.Generate
 }
 type GlAttachShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlAttachShader_In
 	Out     GlAttachShader_Out
@@ -11787,41 +6225,20 @@ func (c *GlAttachShader) TypeID() atom.TypeID {
 func (c *GlAttachShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlAttachShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlAttachShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDetachShader
 ////////////////////////////////////////////////////////////////////////////////
 type GlDetachShader_In struct {
+	binary.Generate
 	Program ProgramId
 	Shader  ShaderId
 }
 type GlDetachShader_Out struct {
+	binary.Generate
 }
 type GlDetachShader struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDetachShader_In
 	Out     GlDetachShader_Out
@@ -11846,43 +6263,22 @@ func (c *GlDetachShader) TypeID() atom.TypeID {
 func (c *GlDetachShader) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDetachShader) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDetachShader) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Shader.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttachedShaders
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetAttachedShaders_In struct {
+	binary.Generate
 	Program      ProgramId
 	BufferLength int32
 }
 type GlGetAttachedShaders_Out struct {
+	binary.Generate
 	ShadersLengthWritten int32
 	Shaders              ShaderIdArray
 }
 type GlGetAttachedShaders struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetAttachedShaders_In
 	Out     GlGetAttachedShaders_Out
@@ -11911,56 +6307,19 @@ func (c *GlGetAttachedShaders) TypeID() atom.TypeID {
 func (c *GlGetAttachedShaders) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetAttachedShaders) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferLength); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.ShadersLengthWritten); err != nil {
-		return err
-	}
-	if err := c.Out.Shaders.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetAttachedShaders) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferLength = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.ShadersLengthWritten = v
-	} else {
-		return err
-	}
-	if err := c.Out.Shaders.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLinkProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlLinkProgram_In struct {
+	binary.Generate
 	Program ProgramId
 }
 type GlLinkProgram_Out struct {
+	binary.Generate
 }
 type GlLinkProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlLinkProgram_In
 	Out     GlLinkProgram_Out
@@ -11983,37 +6342,22 @@ func (c *GlLinkProgram) TypeID() atom.TypeID {
 func (c *GlLinkProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlLinkProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlLinkProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramInfoLog
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetProgramInfoLog_In struct {
+	binary.Generate
 	Program      ProgramId
 	BufferLength int32
 }
 type GlGetProgramInfoLog_Out struct {
+	binary.Generate
 	StringLengthWritten int32
 	Info                string
 }
 type GlGetProgramInfoLog struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetProgramInfoLog_In
 	Out     GlGetProgramInfoLog_Out
@@ -12042,58 +6386,19 @@ func (c *GlGetProgramInfoLog) TypeID() atom.TypeID {
 func (c *GlGetProgramInfoLog) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetProgramInfoLog) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.BufferLength); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.StringLengthWritten); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Info); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetProgramInfoLog) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.BufferLength = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.StringLengthWritten = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Info = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUseProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlUseProgram_In struct {
+	binary.Generate
 	Program ProgramId
 }
 type GlUseProgram_Out struct {
+	binary.Generate
 }
 type GlUseProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUseProgram_In
 	Out     GlUseProgram_Out
@@ -12116,35 +6421,20 @@ func (c *GlUseProgram) TypeID() atom.TypeID {
 func (c *GlUseProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUseProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUseProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsProgram_In struct {
+	binary.Generate
 	Program ProgramId
 }
 type GlIsProgram_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsProgram_In
 	Out     GlIsProgram_Out
@@ -12168,42 +6458,19 @@ func (c *GlIsProgram) TypeID() atom.TypeID {
 func (c *GlIsProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlValidateProgram
 ////////////////////////////////////////////////////////////////////////////////
 type GlValidateProgram_In struct {
+	binary.Generate
 	Program ProgramId
 }
 type GlValidateProgram_Out struct {
+	binary.Generate
 }
 type GlValidateProgram struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlValidateProgram_In
 	Out     GlValidateProgram_Out
@@ -12226,37 +6493,22 @@ func (c *GlValidateProgram) TypeID() atom.TypeID {
 func (c *GlValidateProgram) Flags() atom.Flags {
 	return 0
 }
-func (c *GlValidateProgram) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Program.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlValidateProgram) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Program.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearColor
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearColor_In struct {
+	binary.Generate
 	R float32
 	G float32
 	B float32
 	A float32
 }
 type GlClearColor_Out struct {
+	binary.Generate
 }
 type GlClearColor struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlClearColor_In
 	Out     GlClearColor_Out
@@ -12285,60 +6537,19 @@ func (c *GlClearColor) TypeID() atom.TypeID {
 func (c *GlClearColor) Flags() atom.Flags {
 	return 0
 }
-func (c *GlClearColor) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.R); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.G); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.B); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlClearColor) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.R = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.G = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.B = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearDepthf
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearDepthf_In struct {
+	binary.Generate
 	Depth float32
 }
 type GlClearDepthf_Out struct {
+	binary.Generate
 }
 type GlClearDepthf struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlClearDepthf_In
 	Out     GlClearDepthf_Out
@@ -12361,36 +6572,19 @@ func (c *GlClearDepthf) TypeID() atom.TypeID {
 func (c *GlClearDepthf) Flags() atom.Flags {
 	return 0
 }
-func (c *GlClearDepthf) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Depth); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlClearDepthf) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Depth = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearStencil
 ////////////////////////////////////////////////////////////////////////////////
 type GlClearStencil_In struct {
+	binary.Generate
 	Stencil int32
 }
 type GlClearStencil_Out struct {
+	binary.Generate
 }
 type GlClearStencil struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlClearStencil_In
 	Out     GlClearStencil_Out
@@ -12413,36 +6607,19 @@ func (c *GlClearStencil) TypeID() atom.TypeID {
 func (c *GlClearStencil) Flags() atom.Flags {
 	return 0
 }
-func (c *GlClearStencil) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Stencil); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlClearStencil) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Stencil = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClear
 ////////////////////////////////////////////////////////////////////////////////
 type GlClear_In struct {
+	binary.Generate
 	Mask ClearMask
 }
 type GlClear_Out struct {
+	binary.Generate
 }
 type GlClear struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlClear_In
 	Out     GlClear_Out
@@ -12465,36 +6642,19 @@ func (c *GlClear) TypeID() atom.TypeID {
 func (c *GlClear) Flags() atom.Flags {
 	return 0
 }
-func (c *GlClear) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Mask)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlClear) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mask = ClearMask(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCullFace
 ////////////////////////////////////////////////////////////////////////////////
 type GlCullFace_In struct {
+	binary.Generate
 	Mode FaceMode
 }
 type GlCullFace_Out struct {
+	binary.Generate
 }
 type GlCullFace struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlCullFace_In
 	Out     GlCullFace_Out
@@ -12517,37 +6677,20 @@ func (c *GlCullFace) TypeID() atom.TypeID {
 func (c *GlCullFace) Flags() atom.Flags {
 	return 0
 }
-func (c *GlCullFace) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Mode)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlCullFace) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mode = FaceMode(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPolygonOffset
 ////////////////////////////////////////////////////////////////////////////////
 type GlPolygonOffset_In struct {
+	binary.Generate
 	ScaleFactor float32
 	Units       float32
 }
 type GlPolygonOffset_Out struct {
+	binary.Generate
 }
 type GlPolygonOffset struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlPolygonOffset_In
 	Out     GlPolygonOffset_Out
@@ -12572,44 +6715,19 @@ func (c *GlPolygonOffset) TypeID() atom.TypeID {
 func (c *GlPolygonOffset) Flags() atom.Flags {
 	return 0
 }
-func (c *GlPolygonOffset) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.ScaleFactor); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Units); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlPolygonOffset) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.ScaleFactor = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Units = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLineWidth
 ////////////////////////////////////////////////////////////////////////////////
 type GlLineWidth_In struct {
+	binary.Generate
 	Width float32
 }
 type GlLineWidth_Out struct {
+	binary.Generate
 }
 type GlLineWidth struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlLineWidth_In
 	Out     GlLineWidth_Out
@@ -12632,37 +6750,20 @@ func (c *GlLineWidth) TypeID() atom.TypeID {
 func (c *GlLineWidth) Flags() atom.Flags {
 	return 0
 }
-func (c *GlLineWidth) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Width); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlLineWidth) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlSampleCoverage
 ////////////////////////////////////////////////////////////////////////////////
 type GlSampleCoverage_In struct {
+	binary.Generate
 	Value  float32
 	Invert bool
 }
 type GlSampleCoverage_Out struct {
+	binary.Generate
 }
 type GlSampleCoverage struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlSampleCoverage_In
 	Out     GlSampleCoverage_Out
@@ -12687,45 +6788,20 @@ func (c *GlSampleCoverage) TypeID() atom.TypeID {
 func (c *GlSampleCoverage) Flags() atom.Flags {
 	return 0
 }
-func (c *GlSampleCoverage) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.Value); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.Invert); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlSampleCoverage) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.Value = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.Invert = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlHint
 ////////////////////////////////////////////////////////////////////////////////
 type GlHint_In struct {
+	binary.Generate
 	Target HintTarget
 	Mode   HintMode
 }
 type GlHint_Out struct {
+	binary.Generate
 }
 type GlHint struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlHint_In
 	Out     GlHint_Out
@@ -12750,47 +6826,22 @@ func (c *GlHint) TypeID() atom.TypeID {
 func (c *GlHint) Flags() atom.Flags {
 	return 0
 }
-func (c *GlHint) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Mode)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlHint) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = HintTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mode = HintMode(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlFramebufferRenderbuffer_In struct {
+	binary.Generate
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
 	RenderbufferTarget    RenderbufferTarget
 	Renderbuffer          RenderbufferId
 }
 type GlFramebufferRenderbuffer_Out struct {
+	binary.Generate
 }
 type GlFramebufferRenderbuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlFramebufferRenderbuffer_In
 	Out     GlFramebufferRenderbuffer_Out
@@ -12819,53 +6870,12 @@ func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID {
 func (c *GlFramebufferRenderbuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlFramebufferRenderbuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.FramebufferTarget)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.FramebufferAttachment)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.RenderbufferTarget)); err != nil {
-		return err
-	}
-	if err := c.In.Renderbuffer.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlFramebufferRenderbuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.FramebufferTarget = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.FramebufferAttachment = FramebufferAttachment(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.RenderbufferTarget = RenderbufferTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Renderbuffer.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferTexture2D
 ////////////////////////////////////////////////////////////////////////////////
 type GlFramebufferTexture2D_In struct {
+	binary.Generate
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
 	TextureTarget         TextureImageTarget
@@ -12873,8 +6883,10 @@ type GlFramebufferTexture2D_In struct {
 	Level                 int32
 }
 type GlFramebufferTexture2D_Out struct {
+	binary.Generate
 }
 type GlFramebufferTexture2D struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlFramebufferTexture2D_In
 	Out     GlFramebufferTexture2D_Out
@@ -12905,69 +6917,22 @@ func (c *GlFramebufferTexture2D) TypeID() atom.TypeID {
 func (c *GlFramebufferTexture2D) Flags() atom.Flags {
 	return 0
 }
-func (c *GlFramebufferTexture2D) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.FramebufferTarget)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.FramebufferAttachment)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.TextureTarget)); err != nil {
-		return err
-	}
-	if err := c.In.Texture.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Level); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlFramebufferTexture2D) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.FramebufferTarget = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.FramebufferAttachment = FramebufferAttachment(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.TextureTarget = TextureImageTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Texture.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Level = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFramebufferAttachmentParameteriv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetFramebufferAttachmentParameteriv_In struct {
+	binary.Generate
 	Target     FramebufferTarget
 	Attachment FramebufferAttachment
 	Parameter  FramebufferAttachmentParameter
 }
 type GlGetFramebufferAttachmentParameteriv_Out struct {
+	binary.Generate
 	Value S32Array
 }
 type GlGetFramebufferAttachmentParameteriv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetFramebufferAttachmentParameteriv_In
 	Out     GlGetFramebufferAttachmentParameteriv_Out
@@ -12996,61 +6961,22 @@ func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID {
 func (c *GlGetFramebufferAttachmentParameteriv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetFramebufferAttachmentParameteriv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Attachment)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := c.Out.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetFramebufferAttachmentParameteriv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Attachment = FramebufferAttachment(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = FramebufferAttachmentParameter(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawElements
 ////////////////////////////////////////////////////////////////////////////////
 type GlDrawElements_In struct {
+	binary.Generate
 	DrawMode     DrawMode
 	ElementCount int32
 	IndicesType  IndicesType
 	Indices      IndicesPointer
 }
 type GlDrawElements_Out struct {
+	binary.Generate
 }
 type GlDrawElements struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDrawElements_In
 	Out     GlDrawElements_Out
@@ -13079,60 +7005,21 @@ func (c *GlDrawElements) TypeID() atom.TypeID {
 func (c *GlDrawElements) Flags() atom.Flags {
 	return 0 | atom.DrawCall
 }
-func (c *GlDrawElements) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DrawMode)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.ElementCount); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.IndicesType)); err != nil {
-		return err
-	}
-	if err := c.In.Indices.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDrawElements) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DrawMode = DrawMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.ElementCount = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.IndicesType = IndicesType(v)
-	} else {
-		return err
-	}
-	if err := c.In.Indices.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawArrays
 ////////////////////////////////////////////////////////////////////////////////
 type GlDrawArrays_In struct {
+	binary.Generate
 	DrawMode   DrawMode
 	FirstIndex int32
 	IndexCount int32
 }
 type GlDrawArrays_Out struct {
+	binary.Generate
 }
 type GlDrawArrays struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDrawArrays_In
 	Out     GlDrawArrays_Out
@@ -13159,51 +7046,18 @@ func (c *GlDrawArrays) TypeID() atom.TypeID {
 func (c *GlDrawArrays) Flags() atom.Flags {
 	return 0 | atom.DrawCall
 }
-func (c *GlDrawArrays) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.DrawMode)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.FirstIndex); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.IndexCount); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDrawArrays) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.DrawMode = DrawMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.FirstIndex = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.IndexCount = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFlush
 ////////////////////////////////////////////////////////////////////////////////
 type GlFlush_In struct {
+	binary.Generate
 }
 type GlFlush_Out struct {
+	binary.Generate
 }
 type GlFlush struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlFlush_In
 	Out     GlFlush_Out
@@ -13224,27 +7078,18 @@ func (c *GlFlush) TypeID() atom.TypeID {
 func (c *GlFlush) Flags() atom.Flags {
 	return 0
 }
-func (c *GlFlush) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlFlush) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFinish
 ////////////////////////////////////////////////////////////////////////////////
 type GlFinish_In struct {
+	binary.Generate
 }
 type GlFinish_Out struct {
+	binary.Generate
 }
 type GlFinish struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlFinish_In
 	Out     GlFinish_Out
@@ -13265,29 +7110,20 @@ func (c *GlFinish) TypeID() atom.TypeID {
 func (c *GlFinish) Flags() atom.Flags {
 	return 0
 }
-func (c *GlFinish) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlFinish) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBooleanv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetBooleanv_In struct {
+	binary.Generate
 	Param StateVariable
 }
 type GlGetBooleanv_Out struct {
+	binary.Generate
 	Values BoolArray
 }
 type GlGetBooleanv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetBooleanv_In
 	Out     GlGetBooleanv_Out
@@ -13312,43 +7148,20 @@ func (c *GlGetBooleanv) TypeID() atom.TypeID {
 func (c *GlGetBooleanv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetBooleanv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Param)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetBooleanv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Param = StateVariable(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFloatv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetFloatv_In struct {
+	binary.Generate
 	Param StateVariable
 }
 type GlGetFloatv_Out struct {
+	binary.Generate
 	Values F32Array
 }
 type GlGetFloatv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetFloatv_In
 	Out     GlGetFloatv_Out
@@ -13373,43 +7186,20 @@ func (c *GlGetFloatv) TypeID() atom.TypeID {
 func (c *GlGetFloatv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetFloatv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Param)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetFloatv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Param = StateVariable(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetIntegerv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetIntegerv_In struct {
+	binary.Generate
 	Param StateVariable
 }
 type GlGetIntegerv_Out struct {
+	binary.Generate
 	Values S32Array
 }
 type GlGetIntegerv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetIntegerv_In
 	Out     GlGetIntegerv_Out
@@ -13434,43 +7224,20 @@ func (c *GlGetIntegerv) TypeID() atom.TypeID {
 func (c *GlGetIntegerv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetIntegerv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Param)); err != nil {
-		return err
-	}
-	if err := c.Out.Values.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetIntegerv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Param = StateVariable(v)
-	} else {
-		return err
-	}
-	if err := c.Out.Values.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetString
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetString_In struct {
+	binary.Generate
 	Param StringConstant
 }
 type GlGetString_Out struct {
+	binary.Generate
 	Result string
 }
 type GlGetString struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetString_In
 	Out     GlGetString_Out
@@ -13494,44 +7261,19 @@ func (c *GlGetString) TypeID() atom.TypeID {
 func (c *GlGetString) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetString) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Param)); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetString) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Param = StringConstant(v)
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnable
 ////////////////////////////////////////////////////////////////////////////////
 type GlEnable_In struct {
+	binary.Generate
 	Capability Capability
 }
 type GlEnable_Out struct {
+	binary.Generate
 }
 type GlEnable struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEnable_In
 	Out     GlEnable_Out
@@ -13554,36 +7296,19 @@ func (c *GlEnable) TypeID() atom.TypeID {
 func (c *GlEnable) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEnable) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Capability)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEnable) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Capability = Capability(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisable
 ////////////////////////////////////////////////////////////////////////////////
 type GlDisable_In struct {
+	binary.Generate
 	Capability Capability
 }
 type GlDisable_Out struct {
+	binary.Generate
 }
 type GlDisable struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDisable_In
 	Out     GlDisable_Out
@@ -13606,37 +7331,20 @@ func (c *GlDisable) TypeID() atom.TypeID {
 func (c *GlDisable) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDisable) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Capability)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDisable) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Capability = Capability(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsEnabled
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsEnabled_In struct {
+	binary.Generate
 	Capability Capability
 }
 type GlIsEnabled_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsEnabled struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsEnabled_In
 	Out     GlIsEnabled_Out
@@ -13660,48 +7368,23 @@ func (c *GlIsEnabled) TypeID() atom.TypeID {
 func (c *GlIsEnabled) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsEnabled) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Capability)); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsEnabled) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Capability = Capability(v)
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlMapBufferRange
 ////////////////////////////////////////////////////////////////////////////////
 type GlMapBufferRange_In struct {
+	binary.Generate
 	Target MapBufferTarget
 	Offset int32
 	Length int32
 	Access MapBufferRangeAccess
 }
 type GlMapBufferRange_Out struct {
+	binary.Generate
 	Result memory.Pointer
 }
 type GlMapBufferRange struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlMapBufferRange_In
 	Out     GlMapBufferRange_Out
@@ -13731,68 +7414,19 @@ func (c *GlMapBufferRange) TypeID() atom.TypeID {
 func (c *GlMapBufferRange) Flags() atom.Flags {
 	return 0
 }
-func (c *GlMapBufferRange) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Offset); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Length); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Access)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Out.Result)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlMapBufferRange) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = MapBufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Offset = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Length = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Access = MapBufferRangeAccess(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Result = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUnmapBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlUnmapBuffer_In struct {
+	binary.Generate
 	Target MapBufferTarget
 }
 type GlUnmapBuffer_Out struct {
+	binary.Generate
 }
 type GlUnmapBuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlUnmapBuffer_In
 	Out     GlUnmapBuffer_Out
@@ -13815,38 +7449,21 @@ func (c *GlUnmapBuffer) TypeID() atom.TypeID {
 func (c *GlUnmapBuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlUnmapBuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlUnmapBuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = MapBufferTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInvalidateFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlInvalidateFramebuffer_In struct {
+	binary.Generate
 	Target      FramebufferTarget
 	Count       int32
 	Attachments FramebufferAttachmentArray
 }
 type GlInvalidateFramebuffer_Out struct {
+	binary.Generate
 }
 type GlInvalidateFramebuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlInvalidateFramebuffer_In
 	Out     GlInvalidateFramebuffer_Out
@@ -13873,45 +7490,12 @@ func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID {
 func (c *GlInvalidateFramebuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlInvalidateFramebuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Attachments.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlInvalidateFramebuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = FramebufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Attachments.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorageMultisample
 ////////////////////////////////////////////////////////////////////////////////
 type GlRenderbufferStorageMultisample_In struct {
+	binary.Generate
 	Target  RenderbufferTarget
 	Samples int32
 	Format  RenderbufferFormat
@@ -13919,8 +7503,10 @@ type GlRenderbufferStorageMultisample_In struct {
 	Height  int32
 }
 type GlRenderbufferStorageMultisample_Out struct {
+	binary.Generate
 }
 type GlRenderbufferStorageMultisample struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlRenderbufferStorageMultisample_In
 	Out     GlRenderbufferStorageMultisample_Out
@@ -13951,63 +7537,12 @@ func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID {
 func (c *GlRenderbufferStorageMultisample) Flags() atom.Flags {
 	return 0
 }
-func (c *GlRenderbufferStorageMultisample) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Samples); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Format)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlRenderbufferStorageMultisample) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = RenderbufferTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Samples = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Format = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlitFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type GlBlitFramebuffer_In struct {
+	binary.Generate
 	SrcX0  int32
 	SrcY0  int32
 	SrcX1  int32
@@ -14020,8 +7555,10 @@ type GlBlitFramebuffer_In struct {
 	Filter TextureFilterMode
 }
 type GlBlitFramebuffer_Out struct {
+	binary.Generate
 }
 type GlBlitFramebuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBlitFramebuffer_In
 	Out     GlBlitFramebuffer_Out
@@ -14062,109 +7599,20 @@ func (c *GlBlitFramebuffer) TypeID() atom.TypeID {
 func (c *GlBlitFramebuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBlitFramebuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.SrcX0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.SrcY0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.SrcX1); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.SrcY1); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.DstX0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.DstY0); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.DstX1); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.DstY1); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Mask)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Filter)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBlitFramebuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.SrcX0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.SrcY0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.SrcX1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.SrcY1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.DstX0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.DstY0 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.DstX1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.DstY1 = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Mask = ClearMask(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Filter = TextureFilterMode(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueries
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenQueries_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenQueries_Out struct {
+	binary.Generate
 	Queries QueryIdArray
 }
 type GlGenQueries struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenQueries_In
 	Out     GlGenQueries_Out
@@ -14189,43 +7637,20 @@ func (c *GlGenQueries) TypeID() atom.TypeID {
 func (c *GlGenQueries) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenQueries) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Queries.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenQueries) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Queries.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlBeginQuery_In struct {
+	binary.Generate
 	Target QueryTarget
 	Query  QueryId
 }
 type GlBeginQuery_Out struct {
+	binary.Generate
 }
 type GlBeginQuery struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBeginQuery_In
 	Out     GlBeginQuery_Out
@@ -14250,42 +7675,19 @@ func (c *GlBeginQuery) TypeID() atom.TypeID {
 func (c *GlBeginQuery) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBeginQuery) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBeginQuery) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndQuery_In struct {
+	binary.Generate
 	Target QueryTarget
 }
 type GlEndQuery_Out struct {
+	binary.Generate
 }
 type GlEndQuery struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEndQuery_In
 	Out     GlEndQuery_Out
@@ -14308,37 +7710,20 @@ func (c *GlEndQuery) TypeID() atom.TypeID {
 func (c *GlEndQuery) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEndQuery) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEndQuery) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueries
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteQueries_In struct {
+	binary.Generate
 	Count   int32
 	Queries QueryIdArray
 }
 type GlDeleteQueries_Out struct {
+	binary.Generate
 }
 type GlDeleteQueries struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteQueries_In
 	Out     GlDeleteQueries_Out
@@ -14363,43 +7748,20 @@ func (c *GlDeleteQueries) TypeID() atom.TypeID {
 func (c *GlDeleteQueries) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteQueries) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Queries.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteQueries) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Queries.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQuery
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsQuery_In struct {
+	binary.Generate
 	Query QueryId
 }
 type GlIsQuery_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsQuery struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsQuery_In
 	Out     GlIsQuery_Out
@@ -14423,44 +7785,21 @@ func (c *GlIsQuery) TypeID() atom.TypeID {
 func (c *GlIsQuery) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsQuery) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsQuery) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryiv_In struct {
+	binary.Generate
 	Target    QueryTarget
 	Parameter QueryParameter
 }
 type GlGetQueryiv_Out struct {
+	binary.Generate
 	Value int32
 }
 type GlGetQueryiv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryiv_In
 	Out     GlGetQueryiv_Out
@@ -14487,54 +7826,21 @@ func (c *GlGetQueryiv) TypeID() atom.TypeID {
 func (c *GlGetQueryiv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryiv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryiv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuiv
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectuiv_In struct {
+	binary.Generate
 	Query     QueryId
 	Parameter QueryObjectParameter
 }
 type GlGetQueryObjectuiv_Out struct {
+	binary.Generate
 	Value uint32
 }
 type GlGetQueryObjectuiv struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryObjectuiv_In
 	Out     GlGetQueryObjectuiv_Out
@@ -14561,51 +7867,20 @@ func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectuiv) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryObjectuiv) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryObjectuiv) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryObjectParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGenQueriesEXT_In struct {
+	binary.Generate
 	Count int32
 }
 type GlGenQueriesEXT_Out struct {
+	binary.Generate
 	Queries QueryIdArray
 }
 type GlGenQueriesEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGenQueriesEXT_In
 	Out     GlGenQueriesEXT_Out
@@ -14630,43 +7905,20 @@ func (c *GlGenQueriesEXT) TypeID() atom.TypeID {
 func (c *GlGenQueriesEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGenQueriesEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.Out.Queries.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGenQueriesEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.Out.Queries.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlBeginQueryEXT_In struct {
+	binary.Generate
 	Target QueryTarget
 	Query  QueryId
 }
 type GlBeginQueryEXT_Out struct {
+	binary.Generate
 }
 type GlBeginQueryEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlBeginQueryEXT_In
 	Out     GlBeginQueryEXT_Out
@@ -14691,42 +7943,19 @@ func (c *GlBeginQueryEXT) TypeID() atom.TypeID {
 func (c *GlBeginQueryEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlBeginQueryEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlBeginQueryEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlEndQueryEXT_In struct {
+	binary.Generate
 	Target QueryTarget
 }
 type GlEndQueryEXT_Out struct {
+	binary.Generate
 }
 type GlEndQueryEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlEndQueryEXT_In
 	Out     GlEndQueryEXT_Out
@@ -14749,37 +7978,20 @@ func (c *GlEndQueryEXT) TypeID() atom.TypeID {
 func (c *GlEndQueryEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlEndQueryEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlEndQueryEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlDeleteQueriesEXT_In struct {
+	binary.Generate
 	Count   int32
 	Queries QueryIdArray
 }
 type GlDeleteQueriesEXT_Out struct {
+	binary.Generate
 }
 type GlDeleteQueriesEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlDeleteQueriesEXT_In
 	Out     GlDeleteQueriesEXT_Out
@@ -14804,43 +8016,20 @@ func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID {
 func (c *GlDeleteQueriesEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlDeleteQueriesEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.Count); err != nil {
-		return err
-	}
-	if err := c.In.Queries.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlDeleteQueriesEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.Count = v
-	} else {
-		return err
-	}
-	if err := c.In.Queries.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlIsQueryEXT_In struct {
+	binary.Generate
 	Query QueryId
 }
 type GlIsQueryEXT_Out struct {
+	binary.Generate
 	Result bool
 }
 type GlIsQueryEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlIsQueryEXT_In
 	Out     GlIsQueryEXT_Out
@@ -14864,43 +8053,20 @@ func (c *GlIsQueryEXT) TypeID() atom.TypeID {
 func (c *GlIsQueryEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlIsQueryEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlIsQueryEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlQueryCounterEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlQueryCounterEXT_In struct {
+	binary.Generate
 	Query  QueryId
 	Target QueryTarget
 }
 type GlQueryCounterEXT_Out struct {
+	binary.Generate
 }
 type GlQueryCounterEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlQueryCounterEXT_In
 	Out     GlQueryCounterEXT_Out
@@ -14925,44 +8091,21 @@ func (c *GlQueryCounterEXT) TypeID() atom.TypeID {
 func (c *GlQueryCounterEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlQueryCounterEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlQueryCounterEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryivEXT_In struct {
+	binary.Generate
 	Target    QueryTarget
 	Parameter QueryParameter
 }
 type GlGetQueryivEXT_Out struct {
+	binary.Generate
 	Value int32
 }
 type GlGetQueryivEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryivEXT_In
 	Out     GlGetQueryivEXT_Out
@@ -14989,54 +8132,21 @@ func (c *GlGetQueryivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryivEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryivEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Target)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryivEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Target = QueryTarget(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectivEXT_In struct {
+	binary.Generate
 	Query     QueryId
 	Parameter QueryObjectParameter
 }
 type GlGetQueryObjectivEXT_Out struct {
+	binary.Generate
 	Value int32
 }
 type GlGetQueryObjectivEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryObjectivEXT_In
 	Out     GlGetQueryObjectivEXT_Out
@@ -15063,52 +8173,21 @@ func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectivEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryObjectivEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryObjectivEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryObjectParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuivEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectuivEXT_In struct {
+	binary.Generate
 	Query     QueryId
 	Parameter QueryObjectParameter
 }
 type GlGetQueryObjectuivEXT_Out struct {
+	binary.Generate
 	Value uint32
 }
 type GlGetQueryObjectuivEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryObjectuivEXT_In
 	Out     GlGetQueryObjectuivEXT_Out
@@ -15135,52 +8214,21 @@ func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryObjectuivEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryObjectuivEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryObjectParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjecti64vEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjecti64vEXT_In struct {
+	binary.Generate
 	Query     QueryId
 	Parameter QueryObjectParameter
 }
 type GlGetQueryObjecti64vEXT_Out struct {
+	binary.Generate
 	Value int64
 }
 type GlGetQueryObjecti64vEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryObjecti64vEXT_In
 	Out     GlGetQueryObjecti64vEXT_Out
@@ -15207,52 +8255,21 @@ func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryObjecti64vEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Int64(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryObjecti64vEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryObjectParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int64(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectui64vEXT
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetQueryObjectui64vEXT_In struct {
+	binary.Generate
 	Query     QueryId
 	Parameter QueryObjectParameter
 }
 type GlGetQueryObjectui64vEXT_Out struct {
+	binary.Generate
 	Value uint64
 }
 type GlGetQueryObjectui64vEXT struct {
+	binary.Generate
 	Context atom.ContextID
 	In      GlGetQueryObjectui64vEXT_In
 	Out     GlGetQueryObjectui64vEXT_Out
@@ -15279,45 +8296,12 @@ func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags {
 	return 0
 }
-func (c *GlGetQueryObjectui64vEXT) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.Query.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.In.Parameter)); err != nil {
-		return err
-	}
-	if err := e.Uint64(c.Out.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *GlGetQueryObjectui64vEXT) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.Query.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.Parameter = QueryObjectParameter(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Value = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Color
 ////////////////////////////////////////////////////////////////////////////////
 type Color struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Red       float32
 	Green     float32
@@ -15327,50 +8311,13 @@ type Color struct {
 
 func (c *Color) Init() {
 }
-func (c *Color) Encode(e *binary.Encoder) error {
-	if err := e.Float32(c.Red); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Green); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Blue); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Alpha); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Color) Decode(d *binary.Decoder) error {
-	if v, err := d.Float32(); err == nil {
-		c.Red = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Green = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Blue = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Alpha = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Color) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Rect
 ////////////////////////////////////////////////////////////////////////////////
 type Rect struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         int32
 	Y         int32
@@ -15380,50 +8327,13 @@ type Rect struct {
 
 func (c *Rect) Init() {
 }
-func (c *Rect) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Height); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Rect) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Height = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Rect) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Image
 ////////////////////////////////////////////////////////////////////////////////
 type Image struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Width     int32
 	Height    int32
@@ -15433,50 +8343,6 @@ type Image struct {
 }
 
 func (c *Image) Init() {
-}
-func (c *Image) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Height); err != nil {
-		return err
-	}
-	if err := c.Data.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Size); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Format)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Image) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Height = v
-	} else {
-		return err
-	}
-	if err := c.Data.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Size = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Format = ImageTexelFormat(v)
-	} else {
-		return err
-	}
-	return nil
 }
 func (c *Image) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -15490,6 +8356,7 @@ type FramebufferAttachable interface {
 // class Renderbuffer
 ////////////////////////////////////////////////////////////////////////////////
 type Renderbuffer struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Width     int32
 	Height    int32
@@ -15500,48 +8367,13 @@ type Renderbuffer struct {
 
 func (c *Renderbuffer) Init() {
 }
-func (c *Renderbuffer) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Height); err != nil {
-		return err
-	}
-	if err := c.Data.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Format)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Renderbuffer) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.Width = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Height = v
-	} else {
-		return err
-	}
-	if err := c.Data.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Format = RenderbufferFormat(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Renderbuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Texture
 ////////////////////////////////////////////////////////////////////////////////
 type Texture struct {
+	binary.Generate
 	CreatedAt     atom.ID
 	Kind          TextureKind
 	Format        ImageTexelFormat
@@ -15572,118 +8404,13 @@ func (c *Texture) Init() {
 	c.SwizzleA = TexelComponent_GL_ALPHA
 	c.MaxAnisotropy = 1
 }
-func (c *Texture) Encode(e *binary.Encoder) error {
-	if err := e.Uint32(uint32(c.Kind)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Format)); err != nil {
-		return err
-	}
-	if err := c.Texture2D.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Cubemap.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.MagFilter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.MinFilter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.WrapS)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.WrapT)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.SwizzleR)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.SwizzleG)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.SwizzleB)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.SwizzleA)); err != nil {
-		return err
-	}
-	if err := e.Float32(c.MaxAnisotropy); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Texture) Decode(d *binary.Decoder) error {
-	if v, err := d.Uint32(); err == nil {
-		c.Kind = TextureKind(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Format = ImageTexelFormat(v)
-	} else {
-		return err
-	}
-	if err := c.Texture2D.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Cubemap.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.MagFilter = TextureFilterMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.MinFilter = TextureFilterMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.WrapS = TextureWrapMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.WrapT = TextureWrapMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.SwizzleR = TexelComponent(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.SwizzleG = TexelComponent(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.SwizzleB = TexelComponent(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.SwizzleA = TexelComponent(v)
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.MaxAnisotropy = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Texture) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class CubemapLevel
 ////////////////////////////////////////////////////////////////////////////////
 type CubemapLevel struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Faces     Image_CubeMapImageTargetMap
 }
@@ -15691,24 +8418,13 @@ type CubemapLevel struct {
 func (c *CubemapLevel) Init() {
 	c.Faces = make(Image_CubeMapImageTargetMap)
 }
-func (c *CubemapLevel) Encode(e *binary.Encoder) error {
-	if err := c.Faces.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CubemapLevel) Decode(d *binary.Decoder) error {
-	if err := c.Faces.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *CubemapLevel) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class FramebufferAttachmentInfo
 ////////////////////////////////////////////////////////////////////////////////
 type FramebufferAttachmentInfo struct {
+	binary.Generate
 	CreatedAt    atom.ID
 	Object       uint32
 	Type         FramebufferAttachmentType
@@ -15718,50 +8434,13 @@ type FramebufferAttachmentInfo struct {
 
 func (c *FramebufferAttachmentInfo) Init() {
 }
-func (c *FramebufferAttachmentInfo) Encode(e *binary.Encoder) error {
-	if err := e.Uint32(c.Object); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Type)); err != nil {
-		return err
-	}
-	if err := e.Int32(c.TextureLevel); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.CubeMapFace)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *FramebufferAttachmentInfo) Decode(d *binary.Decoder) error {
-	if v, err := d.Uint32(); err == nil {
-		c.Object = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Type = FramebufferAttachmentType(v)
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.TextureLevel = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.CubeMapFace = CubeMapImageTarget(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *FramebufferAttachmentInfo) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Framebuffer
 ////////////////////////////////////////////////////////////////////////////////
 type Framebuffer struct {
+	binary.Generate
 	CreatedAt   atom.ID
 	Attachments FramebufferAttachmentInfo_FramebufferAttachmentMap
 }
@@ -15769,24 +8448,13 @@ type Framebuffer struct {
 func (c *Framebuffer) Init() {
 	c.Attachments = make(FramebufferAttachmentInfo_FramebufferAttachmentMap)
 }
-func (c *Framebuffer) Encode(e *binary.Encoder) error {
-	if err := c.Attachments.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Framebuffer) Decode(d *binary.Decoder) error {
-	if err := c.Attachments.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *Framebuffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Buffer
 ////////////////////////////////////////////////////////////////////////////////
 type Buffer struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Data      memory.Memory
 	Size      int32
@@ -15797,40 +8465,13 @@ func (c *Buffer) Init() {
 	c.Size = 0
 	c.Usage = BufferUsage_GL_STATIC_DRAW
 }
-func (c *Buffer) Encode(e *binary.Encoder) error {
-	if err := c.Data.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Size); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Usage)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Buffer) Decode(d *binary.Decoder) error {
-	if err := c.Data.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Size = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Usage = BufferUsage(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Buffer) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Shader
 ////////////////////////////////////////////////////////////////////////////////
 type Shader struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Binary    memory.Memory
 	Compiled  bool
@@ -15844,62 +8485,13 @@ func (c *Shader) Init() {
 	c.Compiled = false
 	c.Deletable = false
 }
-func (c *Shader) Encode(e *binary.Encoder) error {
-	if err := c.Binary.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Compiled); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Deletable); err != nil {
-		return err
-	}
-	if err := e.String(c.InfoLog); err != nil {
-		return err
-	}
-	if err := c.Source.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Shader) Decode(d *binary.Decoder) error {
-	if err := c.Binary.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Compiled = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Deletable = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.InfoLog = v
-	} else {
-		return err
-	}
-	if err := c.Source.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Type = ShaderType(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Shader) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexAttribute
 ////////////////////////////////////////////////////////////////////////////////
 type VertexAttribute struct {
+	binary.Generate
 	CreatedAt   atom.ID
 	Name        string
 	VectorCount int32
@@ -15908,42 +8500,13 @@ type VertexAttribute struct {
 
 func (c *VertexAttribute) Init() {
 }
-func (c *VertexAttribute) Encode(e *binary.Encoder) error {
-	if err := e.String(c.Name); err != nil {
-		return err
-	}
-	if err := e.Int32(c.VectorCount); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *VertexAttribute) Decode(d *binary.Decoder) error {
-	if v, err := d.String(); err == nil {
-		c.Name = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.VectorCount = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Type = ShaderAttribType(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *VertexAttribute) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec2i
 ////////////////////////////////////////////////////////////////////////////////
 type Vec2i struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         int32
 	Y         int32
@@ -15951,34 +8514,13 @@ type Vec2i struct {
 
 func (c *Vec2i) Init() {
 }
-func (c *Vec2i) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec2i) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec2i) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec3i
 ////////////////////////////////////////////////////////////////////////////////
 type Vec3i struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         int32
 	Y         int32
@@ -15987,42 +8529,13 @@ type Vec3i struct {
 
 func (c *Vec3i) Init() {
 }
-func (c *Vec3i) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec3i) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Z = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec3i) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec4i
 ////////////////////////////////////////////////////////////////////////////////
 type Vec4i struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         int32
 	Y         int32
@@ -16032,50 +8545,13 @@ type Vec4i struct {
 
 func (c *Vec4i) Init() {
 }
-func (c *Vec4i) Encode(e *binary.Encoder) error {
-	if err := e.Int32(c.X); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Z); err != nil {
-		return err
-	}
-	if err := e.Int32(c.W); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec4i) Decode(d *binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Z = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.W = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec4i) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec2f
 ////////////////////////////////////////////////////////////////////////////////
 type Vec2f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         float32
 	Y         float32
@@ -16083,34 +8559,13 @@ type Vec2f struct {
 
 func (c *Vec2f) Init() {
 }
-func (c *Vec2f) Encode(e *binary.Encoder) error {
-	if err := e.Float32(c.X); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec2f) Decode(d *binary.Decoder) error {
-	if v, err := d.Float32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec2f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec3f
 ////////////////////////////////////////////////////////////////////////////////
 type Vec3f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         float32
 	Y         float32
@@ -16119,42 +8574,13 @@ type Vec3f struct {
 
 func (c *Vec3f) Init() {
 }
-func (c *Vec3f) Encode(e *binary.Encoder) error {
-	if err := e.Float32(c.X); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec3f) Decode(d *binary.Decoder) error {
-	if v, err := d.Float32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Z = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec3f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Vec4f
 ////////////////////////////////////////////////////////////////////////////////
 type Vec4f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	X         float32
 	Y         float32
@@ -16164,50 +8590,13 @@ type Vec4f struct {
 
 func (c *Vec4f) Init() {
 }
-func (c *Vec4f) Encode(e *binary.Encoder) error {
-	if err := e.Float32(c.X); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Z); err != nil {
-		return err
-	}
-	if err := e.Float32(c.W); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Vec4f) Decode(d *binary.Decoder) error {
-	if v, err := d.Float32(); err == nil {
-		c.X = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Y = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Z = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.W = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Vec4f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Mat2f
 ////////////////////////////////////////////////////////////////////////////////
 type Mat2f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Col0      Vec2f
 	Col1      Vec2f
@@ -16217,30 +8606,13 @@ func (c *Mat2f) Init() {
 	c.Col0.Init()
 	c.Col1.Init()
 }
-func (c *Mat2f) Encode(e *binary.Encoder) error {
-	if err := c.Col0.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col1.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Mat2f) Decode(d *binary.Decoder) error {
-	if err := c.Col0.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col1.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *Mat2f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Mat3f
 ////////////////////////////////////////////////////////////////////////////////
 type Mat3f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Col0      Vec3f
 	Col1      Vec3f
@@ -16252,36 +8624,13 @@ func (c *Mat3f) Init() {
 	c.Col1.Init()
 	c.Col2.Init()
 }
-func (c *Mat3f) Encode(e *binary.Encoder) error {
-	if err := c.Col0.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col1.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col2.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Mat3f) Decode(d *binary.Decoder) error {
-	if err := c.Col0.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col1.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col2.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *Mat3f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Mat4f
 ////////////////////////////////////////////////////////////////////////////////
 type Mat4f struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Col0      Vec4f
 	Col1      Vec4f
@@ -16295,42 +8644,13 @@ func (c *Mat4f) Init() {
 	c.Col2.Init()
 	c.Col3.Init()
 }
-func (c *Mat4f) Encode(e *binary.Encoder) error {
-	if err := c.Col0.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col1.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col2.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Col3.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Mat4f) Decode(d *binary.Decoder) error {
-	if err := c.Col0.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col1.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col2.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Col3.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *Mat4f) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class UniformValue
 ////////////////////////////////////////////////////////////////////////////////
 type UniformValue struct {
+	binary.Generate
 	CreatedAt atom.ID
 	F32       float32
 	Vec2f     Vec2f
@@ -16356,88 +8676,13 @@ func (c *UniformValue) Init() {
 	c.Mat3f.Init()
 	c.Mat4f.Init()
 }
-func (c *UniformValue) Encode(e *binary.Encoder) error {
-	if err := e.Float32(c.F32); err != nil {
-		return err
-	}
-	if err := c.Vec2f.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Vec3f.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Vec4f.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.S32); err != nil {
-		return err
-	}
-	if err := c.Vec2i.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Vec3i.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Vec4i.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Mat2f.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Mat3f.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Mat4f.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *UniformValue) Decode(d *binary.Decoder) error {
-	if v, err := d.Float32(); err == nil {
-		c.F32 = v
-	} else {
-		return err
-	}
-	if err := c.Vec2f.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Vec3f.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Vec4f.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.S32 = v
-	} else {
-		return err
-	}
-	if err := c.Vec2i.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Vec3i.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Vec4i.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Mat2f.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Mat3f.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Mat4f.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *UniformValue) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Uniform
 ////////////////////////////////////////////////////////////////////////////////
 type Uniform struct {
+	binary.Generate
 	CreatedAt atom.ID
 	Name      string
 	Type      ShaderUniformType
@@ -16447,40 +8692,13 @@ type Uniform struct {
 func (c *Uniform) Init() {
 	c.Value.Init()
 }
-func (c *Uniform) Encode(e *binary.Encoder) error {
-	if err := e.String(c.Name); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Type)); err != nil {
-		return err
-	}
-	if err := c.Value.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Uniform) Decode(d *binary.Decoder) error {
-	if v, err := d.String(); err == nil {
-		c.Name = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Type = ShaderUniformType(v)
-	} else {
-		return err
-	}
-	if err := c.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *Uniform) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Program
 ////////////////////////////////////////////////////////////////////////////////
 type Program struct {
+	binary.Generate
 	CreatedAt         atom.ID
 	Shaders           ShaderId_ShaderTypeMap
 	Linked            bool
@@ -16497,74 +8715,17 @@ func (c *Program) Init() {
 	c.Attributes = make(VertexAttribute_s32Map)
 	c.Uniforms = make(Uniform_UniformLocationMap)
 }
-func (c *Program) Encode(e *binary.Encoder) error {
-	if err := c.Shaders.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Linked); err != nil {
-		return err
-	}
-	if err := c.Binary.Encode(e); err != nil {
-		return err
-	}
-	if err := c.AttributeBindings.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Attributes.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Uniforms.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.InfoLog); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Program) Decode(d *binary.Decoder) error {
-	if err := c.Shaders.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Linked = v
-	} else {
-		return err
-	}
-	if err := c.Binary.Decode(d); err != nil {
-		return err
-	}
-	if err := c.AttributeBindings.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Attributes.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Uniforms.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.InfoLog = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *Program) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class VertexArray
 ////////////////////////////////////////////////////////////////////////////////
 type VertexArray struct {
+	binary.Generate
 	CreatedAt atom.ID
 }
 
 func (c *VertexArray) Init() {
-}
-func (c *VertexArray) Encode(e *binary.Encoder) error {
-	return nil
-}
-func (c *VertexArray) Decode(d *binary.Decoder) error {
-	return nil
 }
 func (c *VertexArray) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -16572,6 +8733,7 @@ func (c *VertexArray) GetCreatedAt() atom.ID { return c.CreatedAt }
 // class VertexAttributeArray
 ////////////////////////////////////////////////////////////////////////////////
 type VertexAttributeArray struct {
+	binary.Generate
 	CreatedAt  atom.ID
 	Enabled    bool
 	Size       VertexAttribSize
@@ -16588,76 +8750,17 @@ func (c *VertexAttributeArray) Init() {
 	c.Normalized = false
 	c.Stride = 0
 }
-func (c *VertexAttributeArray) Encode(e *binary.Encoder) error {
-	if err := e.Bool(c.Enabled); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Size)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.Type)); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Normalized); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Stride); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Data)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *VertexAttributeArray) Decode(d *binary.Decoder) error {
-	if v, err := d.Bool(); err == nil {
-		c.Enabled = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Size = VertexAttribSize(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Type = VertexAttribType(v)
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Normalized = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Stride = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Data = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *VertexAttributeArray) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Query
 ////////////////////////////////////////////////////////////////////////////////
 type Query struct {
+	binary.Generate
 	CreatedAt atom.ID
 }
 
 func (c *Query) Init() {
-}
-func (c *Query) Encode(e *binary.Encoder) error {
-	return nil
-}
-func (c *Query) Decode(d *binary.Decoder) error {
-	return nil
 }
 func (c *Query) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -16665,6 +8768,7 @@ func (c *Query) GetCreatedAt() atom.ID { return c.CreatedAt }
 // class BlendState
 ////////////////////////////////////////////////////////////////////////////////
 type BlendState struct {
+	binary.Generate
 	CreatedAt           atom.ID
 	SrcRgbBlendFactor   BlendFactor
 	SrcAlphaBlendFactor BlendFactor
@@ -16684,72 +8788,13 @@ func (c *BlendState) Init() {
 	c.BlendEquationAlpha = BlendEquation_GL_FUNC_ADD
 	c.BlendColor.Init()
 }
-func (c *BlendState) Encode(e *binary.Encoder) error {
-	if err := e.Uint32(uint32(c.SrcRgbBlendFactor)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.SrcAlphaBlendFactor)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.DstRgbBlendFactor)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.DstAlphaBlendFactor)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.BlendEquationRgb)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.BlendEquationAlpha)); err != nil {
-		return err
-	}
-	if err := c.BlendColor.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *BlendState) Decode(d *binary.Decoder) error {
-	if v, err := d.Uint32(); err == nil {
-		c.SrcRgbBlendFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.SrcAlphaBlendFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.DstRgbBlendFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.DstAlphaBlendFactor = BlendFactor(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.BlendEquationRgb = BlendEquation(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.BlendEquationAlpha = BlendEquation(v)
-	} else {
-		return err
-	}
-	if err := c.BlendColor.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *BlendState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class RasterizerState
 ////////////////////////////////////////////////////////////////////////////////
 type RasterizerState struct {
+	binary.Generate
 	CreatedAt            atom.ID
 	DepthMask            bool
 	DepthTestFunction    TestFunction
@@ -16788,156 +8833,13 @@ func (c *RasterizerState) Init() {
 	c.LineWidth = 1
 	c.SampleCoverageValue = 1
 }
-func (c *RasterizerState) Encode(e *binary.Encoder) error {
-	if err := e.Bool(c.DepthMask); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.DepthTestFunction)); err != nil {
-		return err
-	}
-	if err := e.Float32(c.DepthNear); err != nil {
-		return err
-	}
-	if err := e.Float32(c.DepthFar); err != nil {
-		return err
-	}
-	if err := e.Bool(c.ColorMaskRed); err != nil {
-		return err
-	}
-	if err := e.Bool(c.ColorMaskGreen); err != nil {
-		return err
-	}
-	if err := e.Bool(c.ColorMaskBlue); err != nil {
-		return err
-	}
-	if err := e.Bool(c.ColorMaskAlpha); err != nil {
-		return err
-	}
-	if err := c.StencilMask.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Viewport.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Scissor.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.FrontFace)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(c.CullFace)); err != nil {
-		return err
-	}
-	if err := e.Float32(c.LineWidth); err != nil {
-		return err
-	}
-	if err := e.Float32(c.PolygonOffsetFactor); err != nil {
-		return err
-	}
-	if err := e.Float32(c.PolygonOffsetUnits); err != nil {
-		return err
-	}
-	if err := e.Float32(c.SampleCoverageValue); err != nil {
-		return err
-	}
-	if err := e.Bool(c.SampleCoverageInvert); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *RasterizerState) Decode(d *binary.Decoder) error {
-	if v, err := d.Bool(); err == nil {
-		c.DepthMask = v
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.DepthTestFunction = TestFunction(v)
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.DepthNear = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.DepthFar = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.ColorMaskRed = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.ColorMaskGreen = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.ColorMaskBlue = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.ColorMaskAlpha = v
-	} else {
-		return err
-	}
-	if err := c.StencilMask.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Viewport.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Scissor.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.FrontFace = FaceOrientation(v)
-	} else {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.CullFace = FaceMode(v)
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.LineWidth = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.PolygonOffsetFactor = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.PolygonOffsetUnits = v
-	} else {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.SampleCoverageValue = v
-	} else {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.SampleCoverageInvert = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *RasterizerState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class ClearState
 ////////////////////////////////////////////////////////////////////////////////
 type ClearState struct {
+	binary.Generate
 	CreatedAt    atom.ID
 	ClearColor   Color
 	ClearDepth   float32
@@ -16948,40 +8850,13 @@ func (c *ClearState) Init() {
 	c.ClearColor.Init()
 	c.ClearDepth = 1
 }
-func (c *ClearState) Encode(e *binary.Encoder) error {
-	if err := c.ClearColor.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.ClearDepth); err != nil {
-		return err
-	}
-	if err := e.Int32(c.ClearStencil); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *ClearState) Decode(d *binary.Decoder) error {
-	if err := c.ClearColor.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.ClearDepth = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.ClearStencil = v
-	} else {
-		return err
-	}
-	return nil
-}
 func (c *ClearState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class InternalState
 ////////////////////////////////////////////////////////////////////////////////
 type InternalState struct {
+	binary.Generate
 	CreatedAt       atom.ID
 	NilBuffer       BufferId
 	NilTexture      TextureId
@@ -16995,42 +8870,13 @@ func (c *InternalState) Init() {
 	c.NilRenderbuffer = 0
 	c.Backbuffer = 0
 }
-func (c *InternalState) Encode(e *binary.Encoder) error {
-	if err := c.NilBuffer.Encode(e); err != nil {
-		return err
-	}
-	if err := c.NilTexture.Encode(e); err != nil {
-		return err
-	}
-	if err := c.NilRenderbuffer.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Backbuffer.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *InternalState) Decode(d *binary.Decoder) error {
-	if err := c.NilBuffer.Decode(d); err != nil {
-		return err
-	}
-	if err := c.NilTexture.Decode(d); err != nil {
-		return err
-	}
-	if err := c.NilRenderbuffer.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Backbuffer.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func (c *InternalState) GetCreatedAt() atom.ID { return c.CreatedAt }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Objects
 ////////////////////////////////////////////////////////////////////////////////
 type Objects struct {
+	binary.Generate
 	CreatedAt     atom.ID
 	Renderbuffers RenderbufferRef_RenderbufferIdMap
 	Textures      TextureRef_TextureIdMap
@@ -17051,60 +8897,6 @@ func (c *Objects) Init() {
 	c.Programs = make(ProgramRef_ProgramIdMap)
 	c.VertexArrays = make(VertexArrayRef_VertexArrayIdMap)
 	c.Queries = make(QueryRef_QueryIdMap)
-}
-func (c *Objects) Encode(e *binary.Encoder) error {
-	if err := c.Renderbuffers.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Textures.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Framebuffers.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Buffers.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Shaders.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Programs.Encode(e); err != nil {
-		return err
-	}
-	if err := c.VertexArrays.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Queries.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *Objects) Decode(d *binary.Decoder) error {
-	if err := c.Renderbuffers.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Textures.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Framebuffers.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Buffers.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Shaders.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Programs.Decode(d); err != nil {
-		return err
-	}
-	if err := c.VertexArrays.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Queries.Decode(d); err != nil {
-		return err
-	}
-	return nil
 }
 func (c *Objects) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -20418,6 +12210,7 @@ func (v MapBufferRangeAccess) String() string {
 // Globals
 ////////////////////////////////////////////////////////////////////////////////
 type Globals struct {
+	binary.Generate
 	Blending              BlendState
 	Rasterizing           RasterizerState
 	Clearing              ClearState
@@ -20452,112 +12245,6 @@ func (g *Globals) Init() {
 	g.PixelStorage = make(S32_PixelStoreParameterMap)
 	g.Instances.Init()
 }
-func (g *Globals) Encode(e *binary.Encoder) error {
-	if err := g.Blending.Encode(e); err != nil {
-		return err
-	}
-	if err := g.Rasterizing.Encode(e); err != nil {
-		return err
-	}
-	if err := g.Clearing.Encode(e); err != nil {
-		return err
-	}
-	if err := g.BoundFramebuffers.Encode(e); err != nil {
-		return err
-	}
-	if err := g.BoundRenderbuffers.Encode(e); err != nil {
-		return err
-	}
-	if err := g.BoundBuffers.Encode(e); err != nil {
-		return err
-	}
-	if err := g.BoundProgram.Encode(e); err != nil {
-		return err
-	}
-	if err := g.BoundVertexArray.Encode(e); err != nil {
-		return err
-	}
-	if err := g.VertexAttributeArrays.Encode(e); err != nil {
-		return err
-	}
-	if err := g.TextureUnits.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(g.ActiveTextureUnit)); err != nil {
-		return err
-	}
-	if err := g.Capabilities.Encode(e); err != nil {
-		return err
-	}
-	if err := g.Internals.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(g.GenerateMipmapHint)); err != nil {
-		return err
-	}
-	if err := g.PixelStorage.Encode(e); err != nil {
-		return err
-	}
-	if err := g.Instances.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (g *Globals) Decode(d *binary.Decoder) error {
-	if err := g.Blending.Decode(d); err != nil {
-		return err
-	}
-	if err := g.Rasterizing.Decode(d); err != nil {
-		return err
-	}
-	if err := g.Clearing.Decode(d); err != nil {
-		return err
-	}
-	if err := g.BoundFramebuffers.Decode(d); err != nil {
-		return err
-	}
-	if err := g.BoundRenderbuffers.Decode(d); err != nil {
-		return err
-	}
-	if err := g.BoundBuffers.Decode(d); err != nil {
-		return err
-	}
-	if err := g.BoundProgram.Decode(d); err != nil {
-		return err
-	}
-	if err := g.BoundVertexArray.Decode(d); err != nil {
-		return err
-	}
-	if err := g.VertexAttributeArrays.Decode(d); err != nil {
-		return err
-	}
-	if err := g.TextureUnits.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		g.ActiveTextureUnit = TextureUnit(v)
-	} else {
-		return err
-	}
-	if err := g.Capabilities.Decode(d); err != nil {
-		return err
-	}
-	if err := g.Internals.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		g.GenerateMipmapHint = HintMode(v)
-	} else {
-		return err
-	}
-	if err := g.PixelStorage.Decode(d); err != nil {
-		return err
-	}
-	if err := g.Instances.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 func NewInit(
 	pWidth int32,
 	pHeight int32,
@@ -20566,7 +12253,7 @@ func NewInit(
 	pStencilFmt RenderbufferFormat,
 ) *Init {
 	return &Init{
-		In:  Init_In{pWidth, pHeight, pColorFmt, pDepthFmt, pStencilFmt},
+		In:  Init_In{Width: pWidth, Height: pHeight, ColorFmt: pColorFmt, DepthFmt: pDepthFmt, StencilFmt: pStencilFmt},
 		Out: Init_Out{},
 	}
 }
@@ -20574,7 +12261,7 @@ func NewStartTimer(
 	pIndex uint8,
 ) *StartTimer {
 	return &StartTimer{
-		In:  StartTimer_In{pIndex},
+		In:  StartTimer_In{Index: pIndex},
 		Out: StartTimer_Out{},
 	}
 }
@@ -20583,8 +12270,8 @@ func NewStopTimer(
 	pResult uint64,
 ) *StopTimer {
 	return &StopTimer{
-		In:  StopTimer_In{pIndex},
-		Out: StopTimer_Out{pResult},
+		In:  StopTimer_In{Index: pIndex},
+		Out: StopTimer_Out{Result: pResult},
 	}
 }
 func NewFlushPostBuffer() *FlushPostBuffer {
@@ -20599,14 +12286,14 @@ func NewEglCreateContext(
 ) *EglCreateContext {
 	return &EglCreateContext{
 		In:  EglCreateContext_In{},
-		Out: EglCreateContext_Out{pVersion, pContext},
+		Out: EglCreateContext_Out{Version: pVersion, Context: pContext},
 	}
 }
 func NewEglMakeCurrent(
 	pContext int32,
 ) *EglMakeCurrent {
 	return &EglMakeCurrent{
-		In:  EglMakeCurrent_In{pContext},
+		In:  EglMakeCurrent_In{Context: pContext},
 		Out: EglMakeCurrent_Out{},
 	}
 }
@@ -20620,7 +12307,7 @@ func NewGlEnableClientState(
 	pType ArrayType,
 ) *GlEnableClientState {
 	return &GlEnableClientState{
-		In:  GlEnableClientState_In{pType},
+		In:  GlEnableClientState_In{Type: pType},
 		Out: GlEnableClientState_Out{},
 	}
 }
@@ -20628,7 +12315,7 @@ func NewGlDisableClientState(
 	pType ArrayType,
 ) *GlDisableClientState {
 	return &GlDisableClientState{
-		In:  GlDisableClientState_In{pType},
+		In:  GlDisableClientState_In{Type: pType},
 		Out: GlDisableClientState_Out{},
 	}
 }
@@ -20640,8 +12327,8 @@ func NewGlGetProgramBinaryOES(
 	pBinary memory.Pointer,
 ) *GlGetProgramBinaryOES {
 	return &GlGetProgramBinaryOES{
-		In:  GlGetProgramBinaryOES_In{pProgram, pBufferSize},
-		Out: GlGetProgramBinaryOES_Out{pBytesWritten, pBinaryFormat, pBinary},
+		In:  GlGetProgramBinaryOES_In{Program: pProgram, BufferSize: pBufferSize},
+		Out: GlGetProgramBinaryOES_Out{BytesWritten: pBytesWritten, BinaryFormat: pBinaryFormat, Binary: pBinary},
 	}
 }
 func NewGlProgramBinaryOES(
@@ -20651,7 +12338,7 @@ func NewGlProgramBinaryOES(
 	pBinarySize int32,
 ) *GlProgramBinaryOES {
 	return &GlProgramBinaryOES{
-		In:  GlProgramBinaryOES_In{pProgram, pBinaryFormat, pBinary, pBinarySize},
+		In:  GlProgramBinaryOES_In{Program: pProgram, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
 		Out: GlProgramBinaryOES_Out{},
 	}
 }
@@ -20663,7 +12350,7 @@ func NewGlStartTilingQCOM(
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlStartTilingQCOM {
 	return &GlStartTilingQCOM{
-		In:  GlStartTilingQCOM_In{pX, pY, pWidth, pHeight, pPreserveMask},
+		In:  GlStartTilingQCOM_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, PreserveMask: pPreserveMask},
 		Out: GlStartTilingQCOM_Out{},
 	}
 }
@@ -20671,7 +12358,7 @@ func NewGlEndTilingQCOM(
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlEndTilingQCOM {
 	return &GlEndTilingQCOM{
-		In:  GlEndTilingQCOM_In{pPreserveMask},
+		In:  GlEndTilingQCOM_In{PreserveMask: pPreserveMask},
 		Out: GlEndTilingQCOM_Out{},
 	}
 }
@@ -20681,7 +12368,7 @@ func NewGlDiscardFramebufferEXT(
 	pAttachments DiscardFramebufferAttachmentArray,
 ) *GlDiscardFramebufferEXT {
 	return &GlDiscardFramebufferEXT{
-		In:  GlDiscardFramebufferEXT_In{pTarget, pNumAttachments, pAttachments},
+		In:  GlDiscardFramebufferEXT_In{Target: pTarget, NumAttachments: pNumAttachments, Attachments: pAttachments},
 		Out: GlDiscardFramebufferEXT_Out{},
 	}
 }
@@ -20690,7 +12377,7 @@ func NewGlInsertEventMarkerEXT(
 	pMarker string,
 ) *GlInsertEventMarkerEXT {
 	return &GlInsertEventMarkerEXT{
-		In:  GlInsertEventMarkerEXT_In{pLength, pMarker},
+		In:  GlInsertEventMarkerEXT_In{Length: pLength, Marker: pMarker},
 		Out: GlInsertEventMarkerEXT_Out{},
 	}
 }
@@ -20699,7 +12386,7 @@ func NewGlPushGroupMarkerEXT(
 	pMarker string,
 ) *GlPushGroupMarkerEXT {
 	return &GlPushGroupMarkerEXT{
-		In:  GlPushGroupMarkerEXT_In{pLength, pMarker},
+		In:  GlPushGroupMarkerEXT_In{Length: pLength, Marker: pMarker},
 		Out: GlPushGroupMarkerEXT_Out{},
 	}
 }
@@ -20716,7 +12403,7 @@ func NewGlTexStorage1DEXT(
 	pWidth int32,
 ) *GlTexStorage1DEXT {
 	return &GlTexStorage1DEXT{
-		In:  GlTexStorage1DEXT_In{pTarget, pLevels, pFormat, pWidth},
+		In:  GlTexStorage1DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
 		Out: GlTexStorage1DEXT_Out{},
 	}
 }
@@ -20728,7 +12415,7 @@ func NewGlTexStorage2DEXT(
 	pHeight int32,
 ) *GlTexStorage2DEXT {
 	return &GlTexStorage2DEXT{
-		In:  GlTexStorage2DEXT_In{pTarget, pLevels, pFormat, pWidth, pHeight},
+		In:  GlTexStorage2DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
 		Out: GlTexStorage2DEXT_Out{},
 	}
 }
@@ -20741,7 +12428,7 @@ func NewGlTexStorage3DEXT(
 	pDepth int32,
 ) *GlTexStorage3DEXT {
 	return &GlTexStorage3DEXT{
-		In:  GlTexStorage3DEXT_In{pTarget, pLevels, pFormat, pWidth, pHeight, pDepth},
+		In:  GlTexStorage3DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
 		Out: GlTexStorage3DEXT_Out{},
 	}
 }
@@ -20753,7 +12440,7 @@ func NewGlTextureStorage1DEXT(
 	pWidth int32,
 ) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{
-		In:  GlTextureStorage1DEXT_In{pTexture, pTarget, pLevels, pFormat, pWidth},
+		In:  GlTextureStorage1DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
 		Out: GlTextureStorage1DEXT_Out{},
 	}
 }
@@ -20766,7 +12453,7 @@ func NewGlTextureStorage2DEXT(
 	pHeight int32,
 ) *GlTextureStorage2DEXT {
 	return &GlTextureStorage2DEXT{
-		In:  GlTextureStorage2DEXT_In{pTexture, pTarget, pLevels, pFormat, pWidth, pHeight},
+		In:  GlTextureStorage2DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
 		Out: GlTextureStorage2DEXT_Out{},
 	}
 }
@@ -20780,7 +12467,7 @@ func NewGlTextureStorage3DEXT(
 	pDepth int32,
 ) *GlTextureStorage3DEXT {
 	return &GlTextureStorage3DEXT{
-		In:  GlTextureStorage3DEXT_In{pTexture, pTarget, pLevels, pFormat, pWidth, pHeight, pDepth},
+		In:  GlTextureStorage3DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
 		Out: GlTextureStorage3DEXT_Out{},
 	}
 }
@@ -20789,15 +12476,15 @@ func NewGlGenVertexArraysOES(
 	pArrays VertexArrayIdArray,
 ) *GlGenVertexArraysOES {
 	return &GlGenVertexArraysOES{
-		In:  GlGenVertexArraysOES_In{pCount},
-		Out: GlGenVertexArraysOES_Out{pArrays},
+		In:  GlGenVertexArraysOES_In{Count: pCount},
+		Out: GlGenVertexArraysOES_Out{Arrays: pArrays},
 	}
 }
 func NewGlBindVertexArrayOES(
 	pArray VertexArrayId,
 ) *GlBindVertexArrayOES {
 	return &GlBindVertexArrayOES{
-		In:  GlBindVertexArrayOES_In{pArray},
+		In:  GlBindVertexArrayOES_In{Array: pArray},
 		Out: GlBindVertexArrayOES_Out{},
 	}
 }
@@ -20806,7 +12493,7 @@ func NewGlDeleteVertexArraysOES(
 	pArrays VertexArrayIdArray,
 ) *GlDeleteVertexArraysOES {
 	return &GlDeleteVertexArraysOES{
-		In:  GlDeleteVertexArraysOES_In{pCount, pArrays},
+		In:  GlDeleteVertexArraysOES_In{Count: pCount, Arrays: pArrays},
 		Out: GlDeleteVertexArraysOES_Out{},
 	}
 }
@@ -20815,8 +12502,8 @@ func NewGlIsVertexArrayOES(
 	pResult bool,
 ) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{
-		In:  GlIsVertexArrayOES_In{pArray},
-		Out: GlIsVertexArrayOES_Out{pResult},
+		In:  GlIsVertexArrayOES_In{Array: pArray},
+		Out: GlIsVertexArrayOES_Out{Result: pResult},
 	}
 }
 func NewGlEGLImageTargetTexture2DOES(
@@ -20824,7 +12511,7 @@ func NewGlEGLImageTargetTexture2DOES(
 	pImage ImageOES,
 ) *GlEGLImageTargetTexture2DOES {
 	return &GlEGLImageTargetTexture2DOES{
-		In:  GlEGLImageTargetTexture2DOES_In{pTarget, pImage},
+		In:  GlEGLImageTargetTexture2DOES_In{Target: pTarget, Image: pImage},
 		Out: GlEGLImageTargetTexture2DOES_Out{},
 	}
 }
@@ -20833,7 +12520,7 @@ func NewGlEGLImageTargetRenderbufferStorageOES(
 	pImage TexturePointer,
 ) *GlEGLImageTargetRenderbufferStorageOES {
 	return &GlEGLImageTargetRenderbufferStorageOES{
-		In:  GlEGLImageTargetRenderbufferStorageOES_In{pTarget, pImage},
+		In:  GlEGLImageTargetRenderbufferStorageOES_In{Target: pTarget, Image: pImage},
 		Out: GlEGLImageTargetRenderbufferStorageOES_Out{},
 	}
 }
@@ -20842,7 +12529,7 @@ func NewGlGetGraphicsResetStatusEXT(
 ) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{
 		In:  GlGetGraphicsResetStatusEXT_In{},
-		Out: GlGetGraphicsResetStatusEXT_Out{pResult},
+		Out: GlGetGraphicsResetStatusEXT_Out{Result: pResult},
 	}
 }
 func NewGlBindAttribLocation(
@@ -20851,7 +12538,7 @@ func NewGlBindAttribLocation(
 	pName string,
 ) *GlBindAttribLocation {
 	return &GlBindAttribLocation{
-		In:  GlBindAttribLocation_In{pProgram, pLocation, pName},
+		In:  GlBindAttribLocation_In{Program: pProgram, Location: pLocation, Name: pName},
 		Out: GlBindAttribLocation_Out{},
 	}
 }
@@ -20860,7 +12547,7 @@ func NewGlBlendFunc(
 	pDstFactor BlendFactor,
 ) *GlBlendFunc {
 	return &GlBlendFunc{
-		In:  GlBlendFunc_In{pSrcFactor, pDstFactor},
+		In:  GlBlendFunc_In{SrcFactor: pSrcFactor, DstFactor: pDstFactor},
 		Out: GlBlendFunc_Out{},
 	}
 }
@@ -20871,7 +12558,7 @@ func NewGlBlendFuncSeparate(
 	pDstFactorAlpha BlendFactor,
 ) *GlBlendFuncSeparate {
 	return &GlBlendFuncSeparate{
-		In:  GlBlendFuncSeparate_In{pSrcFactorRgb, pDstFactorRgb, pSrcFactorAlpha, pDstFactorAlpha},
+		In:  GlBlendFuncSeparate_In{SrcFactorRgb: pSrcFactorRgb, DstFactorRgb: pDstFactorRgb, SrcFactorAlpha: pSrcFactorAlpha, DstFactorAlpha: pDstFactorAlpha},
 		Out: GlBlendFuncSeparate_Out{},
 	}
 }
@@ -20879,7 +12566,7 @@ func NewGlBlendEquation(
 	pEquation BlendEquation,
 ) *GlBlendEquation {
 	return &GlBlendEquation{
-		In:  GlBlendEquation_In{pEquation},
+		In:  GlBlendEquation_In{Equation: pEquation},
 		Out: GlBlendEquation_Out{},
 	}
 }
@@ -20888,7 +12575,7 @@ func NewGlBlendEquationSeparate(
 	pAlpha BlendEquation,
 ) *GlBlendEquationSeparate {
 	return &GlBlendEquationSeparate{
-		In:  GlBlendEquationSeparate_In{pRgb, pAlpha},
+		In:  GlBlendEquationSeparate_In{Rgb: pRgb, Alpha: pAlpha},
 		Out: GlBlendEquationSeparate_Out{},
 	}
 }
@@ -20899,7 +12586,7 @@ func NewGlBlendColor(
 	pAlpha float32,
 ) *GlBlendColor {
 	return &GlBlendColor{
-		In:  GlBlendColor_In{pRed, pGreen, pBlue, pAlpha},
+		In:  GlBlendColor_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
 		Out: GlBlendColor_Out{},
 	}
 }
@@ -20907,7 +12594,7 @@ func NewGlEnableVertexAttribArray(
 	pLocation AttributeLocation,
 ) *GlEnableVertexAttribArray {
 	return &GlEnableVertexAttribArray{
-		In:  GlEnableVertexAttribArray_In{pLocation},
+		In:  GlEnableVertexAttribArray_In{Location: pLocation},
 		Out: GlEnableVertexAttribArray_Out{},
 	}
 }
@@ -20915,7 +12602,7 @@ func NewGlDisableVertexAttribArray(
 	pLocation AttributeLocation,
 ) *GlDisableVertexAttribArray {
 	return &GlDisableVertexAttribArray{
-		In:  GlDisableVertexAttribArray_In{pLocation},
+		In:  GlDisableVertexAttribArray_In{Location: pLocation},
 		Out: GlDisableVertexAttribArray_Out{},
 	}
 }
@@ -20928,7 +12615,7 @@ func NewGlVertexAttribPointer(
 	pData VertexPointer,
 ) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{
-		In:  GlVertexAttribPointer_In{pLocation, pSize, pType, pNormalized, pStride, pData},
+		In:  GlVertexAttribPointer_In{Location: pLocation, Size: pSize, Type: pType, Normalized: pNormalized, Stride: pStride, Data: pData},
 		Out: GlVertexAttribPointer_Out{},
 	}
 }
@@ -20942,8 +12629,8 @@ func NewGlGetActiveAttrib(
 	pName string,
 ) *GlGetActiveAttrib {
 	return &GlGetActiveAttrib{
-		In:  GlGetActiveAttrib_In{pProgram, pLocation, pBufferSize},
-		Out: GlGetActiveAttrib_Out{pBufferBytesWritten, pVectorCount, pType, pName},
+		In:  GlGetActiveAttrib_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
+		Out: GlGetActiveAttrib_Out{BufferBytesWritten: pBufferBytesWritten, VectorCount: pVectorCount, Type: pType, Name: pName},
 	}
 }
 func NewGlGetActiveUniform(
@@ -20956,8 +12643,8 @@ func NewGlGetActiveUniform(
 	pName string,
 ) *GlGetActiveUniform {
 	return &GlGetActiveUniform{
-		In:  GlGetActiveUniform_In{pProgram, pLocation, pBufferSize},
-		Out: GlGetActiveUniform_Out{pBufferBytesWritten, pSize, pType, pName},
+		In:  GlGetActiveUniform_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
+		Out: GlGetActiveUniform_Out{BufferBytesWritten: pBufferBytesWritten, Size: pSize, Type: pType, Name: pName},
 	}
 }
 func NewGlGetError(
@@ -20965,7 +12652,7 @@ func NewGlGetError(
 ) *GlGetError {
 	return &GlGetError{
 		In:  GlGetError_In{},
-		Out: GlGetError_Out{pResult},
+		Out: GlGetError_Out{Result: pResult},
 	}
 }
 func NewGlGetProgramiv(
@@ -20974,8 +12661,8 @@ func NewGlGetProgramiv(
 	pValue S32Array,
 ) *GlGetProgramiv {
 	return &GlGetProgramiv{
-		In:  GlGetProgramiv_In{pProgram, pParameter},
-		Out: GlGetProgramiv_Out{pValue},
+		In:  GlGetProgramiv_In{Program: pProgram, Parameter: pParameter},
+		Out: GlGetProgramiv_Out{Value: pValue},
 	}
 }
 func NewGlGetShaderiv(
@@ -20984,8 +12671,8 @@ func NewGlGetShaderiv(
 	pValue S32Array,
 ) *GlGetShaderiv {
 	return &GlGetShaderiv{
-		In:  GlGetShaderiv_In{pShader, pParameter},
-		Out: GlGetShaderiv_Out{pValue},
+		In:  GlGetShaderiv_In{Shader: pShader, Parameter: pParameter},
+		Out: GlGetShaderiv_Out{Value: pValue},
 	}
 }
 func NewGlGetUniformLocation(
@@ -20994,8 +12681,8 @@ func NewGlGetUniformLocation(
 	pResult UniformLocation,
 ) *GlGetUniformLocation {
 	return &GlGetUniformLocation{
-		In:  GlGetUniformLocation_In{pProgram, pName},
-		Out: GlGetUniformLocation_Out{pResult},
+		In:  GlGetUniformLocation_In{Program: pProgram, Name: pName},
+		Out: GlGetUniformLocation_Out{Result: pResult},
 	}
 }
 func NewGlGetAttribLocation(
@@ -21004,8 +12691,8 @@ func NewGlGetAttribLocation(
 	pResult AttributeLocation,
 ) *GlGetAttribLocation {
 	return &GlGetAttribLocation{
-		In:  GlGetAttribLocation_In{pProgram, pName},
-		Out: GlGetAttribLocation_Out{pResult},
+		In:  GlGetAttribLocation_In{Program: pProgram, Name: pName},
+		Out: GlGetAttribLocation_Out{Result: pResult},
 	}
 }
 func NewGlPixelStorei(
@@ -21013,7 +12700,7 @@ func NewGlPixelStorei(
 	pValue int32,
 ) *GlPixelStorei {
 	return &GlPixelStorei{
-		In:  GlPixelStorei_In{pParameter, pValue},
+		In:  GlPixelStorei_In{Parameter: pParameter, Value: pValue},
 		Out: GlPixelStorei_Out{},
 	}
 }
@@ -21023,7 +12710,7 @@ func NewGlTexParameteri(
 	pValue int32,
 ) *GlTexParameteri {
 	return &GlTexParameteri{
-		In:  GlTexParameteri_In{pTarget, pParameter, pValue},
+		In:  GlTexParameteri_In{Target: pTarget, Parameter: pParameter, Value: pValue},
 		Out: GlTexParameteri_Out{},
 	}
 }
@@ -21033,7 +12720,7 @@ func NewGlTexParameterf(
 	pValue float32,
 ) *GlTexParameterf {
 	return &GlTexParameterf{
-		In:  GlTexParameterf_In{pTarget, pParameter, pValue},
+		In:  GlTexParameterf_In{Target: pTarget, Parameter: pParameter, Value: pValue},
 		Out: GlTexParameterf_Out{},
 	}
 }
@@ -21043,8 +12730,8 @@ func NewGlGetTexParameteriv(
 	pValues S32Array,
 ) *GlGetTexParameteriv {
 	return &GlGetTexParameteriv{
-		In:  GlGetTexParameteriv_In{pTarget, pParameter},
-		Out: GlGetTexParameteriv_Out{pValues},
+		In:  GlGetTexParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetTexParameteriv_Out{Values: pValues},
 	}
 }
 func NewGlGetTexParameterfv(
@@ -21053,8 +12740,8 @@ func NewGlGetTexParameterfv(
 	pValues F32Array,
 ) *GlGetTexParameterfv {
 	return &GlGetTexParameterfv{
-		In:  GlGetTexParameterfv_In{pTarget, pParameter},
-		Out: GlGetTexParameterfv_Out{pValues},
+		In:  GlGetTexParameterfv_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetTexParameterfv_Out{Values: pValues},
 	}
 }
 func NewGlUniform1i(
@@ -21062,7 +12749,7 @@ func NewGlUniform1i(
 	pValue int32,
 ) *GlUniform1i {
 	return &GlUniform1i{
-		In:  GlUniform1i_In{pLocation, pValue},
+		In:  GlUniform1i_In{Location: pLocation, Value: pValue},
 		Out: GlUniform1i_Out{},
 	}
 }
@@ -21072,7 +12759,7 @@ func NewGlUniform2i(
 	pValue1 int32,
 ) *GlUniform2i {
 	return &GlUniform2i{
-		In:  GlUniform2i_In{pLocation, pValue0, pValue1},
+		In:  GlUniform2i_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
 		Out: GlUniform2i_Out{},
 	}
 }
@@ -21083,7 +12770,7 @@ func NewGlUniform3i(
 	pValue2 int32,
 ) *GlUniform3i {
 	return &GlUniform3i{
-		In:  GlUniform3i_In{pLocation, pValue0, pValue1, pValue2},
+		In:  GlUniform3i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
 		Out: GlUniform3i_Out{},
 	}
 }
@@ -21095,7 +12782,7 @@ func NewGlUniform4i(
 	pValue3 int32,
 ) *GlUniform4i {
 	return &GlUniform4i{
-		In:  GlUniform4i_In{pLocation, pValue0, pValue1, pValue2, pValue3},
+		In:  GlUniform4i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
 		Out: GlUniform4i_Out{},
 	}
 }
@@ -21105,7 +12792,7 @@ func NewGlUniform1iv(
 	pValue S32Array,
 ) *GlUniform1iv {
 	return &GlUniform1iv{
-		In:  GlUniform1iv_In{pLocation, pCount, pValue},
+		In:  GlUniform1iv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform1iv_Out{},
 	}
 }
@@ -21115,7 +12802,7 @@ func NewGlUniform2iv(
 	pValue S32Array,
 ) *GlUniform2iv {
 	return &GlUniform2iv{
-		In:  GlUniform2iv_In{pLocation, pCount, pValue},
+		In:  GlUniform2iv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform2iv_Out{},
 	}
 }
@@ -21125,7 +12812,7 @@ func NewGlUniform3iv(
 	pValue S32Array,
 ) *GlUniform3iv {
 	return &GlUniform3iv{
-		In:  GlUniform3iv_In{pLocation, pCount, pValue},
+		In:  GlUniform3iv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform3iv_Out{},
 	}
 }
@@ -21135,7 +12822,7 @@ func NewGlUniform4iv(
 	pValue S32Array,
 ) *GlUniform4iv {
 	return &GlUniform4iv{
-		In:  GlUniform4iv_In{pLocation, pCount, pValue},
+		In:  GlUniform4iv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform4iv_Out{},
 	}
 }
@@ -21144,7 +12831,7 @@ func NewGlUniform1f(
 	pValue float32,
 ) *GlUniform1f {
 	return &GlUniform1f{
-		In:  GlUniform1f_In{pLocation, pValue},
+		In:  GlUniform1f_In{Location: pLocation, Value: pValue},
 		Out: GlUniform1f_Out{},
 	}
 }
@@ -21154,7 +12841,7 @@ func NewGlUniform2f(
 	pValue1 float32,
 ) *GlUniform2f {
 	return &GlUniform2f{
-		In:  GlUniform2f_In{pLocation, pValue0, pValue1},
+		In:  GlUniform2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
 		Out: GlUniform2f_Out{},
 	}
 }
@@ -21165,7 +12852,7 @@ func NewGlUniform3f(
 	pValue2 float32,
 ) *GlUniform3f {
 	return &GlUniform3f{
-		In:  GlUniform3f_In{pLocation, pValue0, pValue1, pValue2},
+		In:  GlUniform3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
 		Out: GlUniform3f_Out{},
 	}
 }
@@ -21177,7 +12864,7 @@ func NewGlUniform4f(
 	pValue3 float32,
 ) *GlUniform4f {
 	return &GlUniform4f{
-		In:  GlUniform4f_In{pLocation, pValue0, pValue1, pValue2, pValue3},
+		In:  GlUniform4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
 		Out: GlUniform4f_Out{},
 	}
 }
@@ -21187,7 +12874,7 @@ func NewGlUniform1fv(
 	pValue F32Array,
 ) *GlUniform1fv {
 	return &GlUniform1fv{
-		In:  GlUniform1fv_In{pLocation, pCount, pValue},
+		In:  GlUniform1fv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform1fv_Out{},
 	}
 }
@@ -21197,7 +12884,7 @@ func NewGlUniform2fv(
 	pValue F32Array,
 ) *GlUniform2fv {
 	return &GlUniform2fv{
-		In:  GlUniform2fv_In{pLocation, pCount, pValue},
+		In:  GlUniform2fv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform2fv_Out{},
 	}
 }
@@ -21207,7 +12894,7 @@ func NewGlUniform3fv(
 	pValue F32Array,
 ) *GlUniform3fv {
 	return &GlUniform3fv{
-		In:  GlUniform3fv_In{pLocation, pCount, pValue},
+		In:  GlUniform3fv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform3fv_Out{},
 	}
 }
@@ -21217,7 +12904,7 @@ func NewGlUniform4fv(
 	pValue F32Array,
 ) *GlUniform4fv {
 	return &GlUniform4fv{
-		In:  GlUniform4fv_In{pLocation, pCount, pValue},
+		In:  GlUniform4fv_In{Location: pLocation, Count: pCount, Value: pValue},
 		Out: GlUniform4fv_Out{},
 	}
 }
@@ -21228,7 +12915,7 @@ func NewGlUniformMatrix2fv(
 	pValues F32Array,
 ) *GlUniformMatrix2fv {
 	return &GlUniformMatrix2fv{
-		In:  GlUniformMatrix2fv_In{pLocation, pCount, pTranspose, pValues},
+		In:  GlUniformMatrix2fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
 		Out: GlUniformMatrix2fv_Out{},
 	}
 }
@@ -21239,7 +12926,7 @@ func NewGlUniformMatrix3fv(
 	pValues F32Array,
 ) *GlUniformMatrix3fv {
 	return &GlUniformMatrix3fv{
-		In:  GlUniformMatrix3fv_In{pLocation, pCount, pTranspose, pValues},
+		In:  GlUniformMatrix3fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
 		Out: GlUniformMatrix3fv_Out{},
 	}
 }
@@ -21250,7 +12937,7 @@ func NewGlUniformMatrix4fv(
 	pValues F32Array,
 ) *GlUniformMatrix4fv {
 	return &GlUniformMatrix4fv{
-		In:  GlUniformMatrix4fv_In{pLocation, pCount, pTranspose, pValues},
+		In:  GlUniformMatrix4fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
 		Out: GlUniformMatrix4fv_Out{},
 	}
 }
@@ -21260,7 +12947,7 @@ func NewGlGetUniformfv(
 	pValues F32Array,
 ) *GlGetUniformfv {
 	return &GlGetUniformfv{
-		In:  GlGetUniformfv_In{pProgram, pLocation, pValues},
+		In:  GlGetUniformfv_In{Program: pProgram, Location: pLocation, Values: pValues},
 		Out: GlGetUniformfv_Out{},
 	}
 }
@@ -21270,7 +12957,7 @@ func NewGlGetUniformiv(
 	pValues S32Array,
 ) *GlGetUniformiv {
 	return &GlGetUniformiv{
-		In:  GlGetUniformiv_In{pProgram, pLocation, pValues},
+		In:  GlGetUniformiv_In{Program: pProgram, Location: pLocation, Values: pValues},
 		Out: GlGetUniformiv_Out{},
 	}
 }
@@ -21279,7 +12966,7 @@ func NewGlVertexAttrib1f(
 	pValue0 float32,
 ) *GlVertexAttrib1f {
 	return &GlVertexAttrib1f{
-		In:  GlVertexAttrib1f_In{pLocation, pValue0},
+		In:  GlVertexAttrib1f_In{Location: pLocation, Value0: pValue0},
 		Out: GlVertexAttrib1f_Out{},
 	}
 }
@@ -21289,7 +12976,7 @@ func NewGlVertexAttrib2f(
 	pValue1 float32,
 ) *GlVertexAttrib2f {
 	return &GlVertexAttrib2f{
-		In:  GlVertexAttrib2f_In{pLocation, pValue0, pValue1},
+		In:  GlVertexAttrib2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
 		Out: GlVertexAttrib2f_Out{},
 	}
 }
@@ -21300,7 +12987,7 @@ func NewGlVertexAttrib3f(
 	pValue2 float32,
 ) *GlVertexAttrib3f {
 	return &GlVertexAttrib3f{
-		In:  GlVertexAttrib3f_In{pLocation, pValue0, pValue1, pValue2},
+		In:  GlVertexAttrib3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
 		Out: GlVertexAttrib3f_Out{},
 	}
 }
@@ -21312,7 +12999,7 @@ func NewGlVertexAttrib4f(
 	pValue3 float32,
 ) *GlVertexAttrib4f {
 	return &GlVertexAttrib4f{
-		In:  GlVertexAttrib4f_In{pLocation, pValue0, pValue1, pValue2, pValue3},
+		In:  GlVertexAttrib4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
 		Out: GlVertexAttrib4f_Out{},
 	}
 }
@@ -21321,7 +13008,7 @@ func NewGlVertexAttrib1fv(
 	pValue F32Array,
 ) *GlVertexAttrib1fv {
 	return &GlVertexAttrib1fv{
-		In:  GlVertexAttrib1fv_In{pLocation, pValue},
+		In:  GlVertexAttrib1fv_In{Location: pLocation, Value: pValue},
 		Out: GlVertexAttrib1fv_Out{},
 	}
 }
@@ -21330,7 +13017,7 @@ func NewGlVertexAttrib2fv(
 	pValue F32Array,
 ) *GlVertexAttrib2fv {
 	return &GlVertexAttrib2fv{
-		In:  GlVertexAttrib2fv_In{pLocation, pValue},
+		In:  GlVertexAttrib2fv_In{Location: pLocation, Value: pValue},
 		Out: GlVertexAttrib2fv_Out{},
 	}
 }
@@ -21339,7 +13026,7 @@ func NewGlVertexAttrib3fv(
 	pValue F32Array,
 ) *GlVertexAttrib3fv {
 	return &GlVertexAttrib3fv{
-		In:  GlVertexAttrib3fv_In{pLocation, pValue},
+		In:  GlVertexAttrib3fv_In{Location: pLocation, Value: pValue},
 		Out: GlVertexAttrib3fv_Out{},
 	}
 }
@@ -21348,7 +13035,7 @@ func NewGlVertexAttrib4fv(
 	pValue F32Array,
 ) *GlVertexAttrib4fv {
 	return &GlVertexAttrib4fv{
-		In:  GlVertexAttrib4fv_In{pLocation, pValue},
+		In:  GlVertexAttrib4fv_In{Location: pLocation, Value: pValue},
 		Out: GlVertexAttrib4fv_Out{},
 	}
 }
@@ -21359,15 +13046,15 @@ func NewGlGetShaderPrecisionFormat(
 	pPrecision int32,
 ) *GlGetShaderPrecisionFormat {
 	return &GlGetShaderPrecisionFormat{
-		In:  GlGetShaderPrecisionFormat_In{pShaderType, pPrecisionType},
-		Out: GlGetShaderPrecisionFormat_Out{pRange, pPrecision},
+		In:  GlGetShaderPrecisionFormat_In{ShaderType: pShaderType, PrecisionType: pPrecisionType},
+		Out: GlGetShaderPrecisionFormat_Out{Range: pRange, Precision: pPrecision},
 	}
 }
 func NewGlDepthMask(
 	pEnabled bool,
 ) *GlDepthMask {
 	return &GlDepthMask{
-		In:  GlDepthMask_In{pEnabled},
+		In:  GlDepthMask_In{Enabled: pEnabled},
 		Out: GlDepthMask_Out{},
 	}
 }
@@ -21375,7 +13062,7 @@ func NewGlDepthFunc(
 	pFunction TestFunction,
 ) *GlDepthFunc {
 	return &GlDepthFunc{
-		In:  GlDepthFunc_In{pFunction},
+		In:  GlDepthFunc_In{Function: pFunction},
 		Out: GlDepthFunc_Out{},
 	}
 }
@@ -21384,7 +13071,7 @@ func NewGlDepthRangef(
 	pFar float32,
 ) *GlDepthRangef {
 	return &GlDepthRangef{
-		In:  GlDepthRangef_In{pNear, pFar},
+		In:  GlDepthRangef_In{Near: pNear, Far: pFar},
 		Out: GlDepthRangef_Out{},
 	}
 }
@@ -21395,7 +13082,7 @@ func NewGlColorMask(
 	pAlpha bool,
 ) *GlColorMask {
 	return &GlColorMask{
-		In:  GlColorMask_In{pRed, pGreen, pBlue, pAlpha},
+		In:  GlColorMask_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
 		Out: GlColorMask_Out{},
 	}
 }
@@ -21403,7 +13090,7 @@ func NewGlStencilMask(
 	pMask uint32,
 ) *GlStencilMask {
 	return &GlStencilMask{
-		In:  GlStencilMask_In{pMask},
+		In:  GlStencilMask_In{Mask: pMask},
 		Out: GlStencilMask_Out{},
 	}
 }
@@ -21412,7 +13099,7 @@ func NewGlStencilMaskSeparate(
 	pMask uint32,
 ) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{
-		In:  GlStencilMaskSeparate_In{pFace, pMask},
+		In:  GlStencilMaskSeparate_In{Face: pFace, Mask: pMask},
 		Out: GlStencilMaskSeparate_Out{},
 	}
 }
@@ -21423,7 +13110,7 @@ func NewGlStencilFuncSeparate(
 	pMask int32,
 ) *GlStencilFuncSeparate {
 	return &GlStencilFuncSeparate{
-		In:  GlStencilFuncSeparate_In{pFace, pFunction, pReferenceValue, pMask},
+		In:  GlStencilFuncSeparate_In{Face: pFace, Function: pFunction, ReferenceValue: pReferenceValue, Mask: pMask},
 		Out: GlStencilFuncSeparate_Out{},
 	}
 }
@@ -21434,7 +13121,7 @@ func NewGlStencilOpSeparate(
 	pStencilPassDepthPass StencilAction,
 ) *GlStencilOpSeparate {
 	return &GlStencilOpSeparate{
-		In:  GlStencilOpSeparate_In{pFace, pStencilFail, pStencilPassDepthFail, pStencilPassDepthPass},
+		In:  GlStencilOpSeparate_In{Face: pFace, StencilFail: pStencilFail, StencilPassDepthFail: pStencilPassDepthFail, StencilPassDepthPass: pStencilPassDepthPass},
 		Out: GlStencilOpSeparate_Out{},
 	}
 }
@@ -21442,7 +13129,7 @@ func NewGlFrontFace(
 	pOrientation FaceOrientation,
 ) *GlFrontFace {
 	return &GlFrontFace{
-		In:  GlFrontFace_In{pOrientation},
+		In:  GlFrontFace_In{Orientation: pOrientation},
 		Out: GlFrontFace_Out{},
 	}
 }
@@ -21453,7 +13140,7 @@ func NewGlViewport(
 	pHeight int32,
 ) *GlViewport {
 	return &GlViewport{
-		In:  GlViewport_In{pX, pY, pWidth, pHeight},
+		In:  GlViewport_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
 		Out: GlViewport_Out{},
 	}
 }
@@ -21464,7 +13151,7 @@ func NewGlScissor(
 	pHeight int32,
 ) *GlScissor {
 	return &GlScissor{
-		In:  GlScissor_In{pX, pY, pWidth, pHeight},
+		In:  GlScissor_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
 		Out: GlScissor_Out{},
 	}
 }
@@ -21472,7 +13159,7 @@ func NewGlActiveTexture(
 	pUnit TextureUnit,
 ) *GlActiveTexture {
 	return &GlActiveTexture{
-		In:  GlActiveTexture_In{pUnit},
+		In:  GlActiveTexture_In{Unit: pUnit},
 		Out: GlActiveTexture_Out{},
 	}
 }
@@ -21481,8 +13168,8 @@ func NewGlGenTextures(
 	pTextures TextureIdArray,
 ) *GlGenTextures {
 	return &GlGenTextures{
-		In:  GlGenTextures_In{pCount},
-		Out: GlGenTextures_Out{pTextures},
+		In:  GlGenTextures_In{Count: pCount},
+		Out: GlGenTextures_Out{Textures: pTextures},
 	}
 }
 func NewGlDeleteTextures(
@@ -21490,7 +13177,7 @@ func NewGlDeleteTextures(
 	pTextures TextureIdArray,
 ) *GlDeleteTextures {
 	return &GlDeleteTextures{
-		In:  GlDeleteTextures_In{pCount, pTextures},
+		In:  GlDeleteTextures_In{Count: pCount, Textures: pTextures},
 		Out: GlDeleteTextures_Out{},
 	}
 }
@@ -21499,8 +13186,8 @@ func NewGlIsTexture(
 	pResult bool,
 ) *GlIsTexture {
 	return &GlIsTexture{
-		In:  GlIsTexture_In{pTexture},
-		Out: GlIsTexture_Out{pResult},
+		In:  GlIsTexture_In{Texture: pTexture},
+		Out: GlIsTexture_Out{Result: pResult},
 	}
 }
 func NewGlBindTexture(
@@ -21508,7 +13195,7 @@ func NewGlBindTexture(
 	pTexture TextureId,
 ) *GlBindTexture {
 	return &GlBindTexture{
-		In:  GlBindTexture_In{pTarget, pTexture},
+		In:  GlBindTexture_In{Target: pTarget, Texture: pTexture},
 		Out: GlBindTexture_Out{},
 	}
 }
@@ -21524,7 +13211,7 @@ func NewGlTexImage2D(
 	pData TexturePointer,
 ) *GlTexImage2D {
 	return &GlTexImage2D{
-		In:  GlTexImage2D_In{pTarget, pLevel, pInternalFormat, pWidth, pHeight, pBorder, pFormat, pType, pData},
+		In:  GlTexImage2D_In{Target: pTarget, Level: pLevel, InternalFormat: pInternalFormat, Width: pWidth, Height: pHeight, Border: pBorder, Format: pFormat, Type: pType, Data: pData},
 		Out: GlTexImage2D_Out{},
 	}
 }
@@ -21540,7 +13227,7 @@ func NewGlTexSubImage2D(
 	pData TexturePointer,
 ) *GlTexSubImage2D {
 	return &GlTexSubImage2D{
-		In:  GlTexSubImage2D_In{pTarget, pLevel, pXoffset, pYoffset, pWidth, pHeight, pFormat, pType, pData},
+		In:  GlTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData},
 		Out: GlTexSubImage2D_Out{},
 	}
 }
@@ -21555,7 +13242,7 @@ func NewGlCopyTexImage2D(
 	pBorder int32,
 ) *GlCopyTexImage2D {
 	return &GlCopyTexImage2D{
-		In:  GlCopyTexImage2D_In{pTarget, pLevel, pFormat, pX, pY, pWidth, pHeight, pBorder},
+		In:  GlCopyTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, X: pX, Y: pY, Width: pWidth, Height: pHeight, Border: pBorder},
 		Out: GlCopyTexImage2D_Out{},
 	}
 }
@@ -21570,7 +13257,7 @@ func NewGlCopyTexSubImage2D(
 	pHeight int32,
 ) *GlCopyTexSubImage2D {
 	return &GlCopyTexSubImage2D{
-		In:  GlCopyTexSubImage2D_In{pTarget, pLevel, pXoffset, pYoffset, pX, pY, pWidth, pHeight},
+		In:  GlCopyTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, X: pX, Y: pY, Width: pWidth, Height: pHeight},
 		Out: GlCopyTexSubImage2D_Out{},
 	}
 }
@@ -21585,7 +13272,7 @@ func NewGlCompressedTexImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexImage2D {
 	return &GlCompressedTexImage2D{
-		In:  GlCompressedTexImage2D_In{pTarget, pLevel, pFormat, pWidth, pHeight, pBorder, pImageSize, pData},
+		In:  GlCompressedTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, Width: pWidth, Height: pHeight, Border: pBorder, ImageSize: pImageSize, Data: pData},
 		Out: GlCompressedTexImage2D_Out{},
 	}
 }
@@ -21601,7 +13288,7 @@ func NewGlCompressedTexSubImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexSubImage2D {
 	return &GlCompressedTexSubImage2D{
-		In:  GlCompressedTexSubImage2D_In{pTarget, pLevel, pXoffset, pYoffset, pWidth, pHeight, pFormat, pImageSize, pData},
+		In:  GlCompressedTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, ImageSize: pImageSize, Data: pData},
 		Out: GlCompressedTexSubImage2D_Out{},
 	}
 }
@@ -21609,7 +13296,7 @@ func NewGlGenerateMipmap(
 	pTarget TextureImageTarget,
 ) *GlGenerateMipmap {
 	return &GlGenerateMipmap{
-		In:  GlGenerateMipmap_In{pTarget},
+		In:  GlGenerateMipmap_In{Target: pTarget},
 		Out: GlGenerateMipmap_Out{},
 	}
 }
@@ -21623,8 +13310,8 @@ func NewGlReadPixels(
 	pData memory.Pointer,
 ) *GlReadPixels {
 	return &GlReadPixels{
-		In:  GlReadPixels_In{pX, pY, pWidth, pHeight, pFormat, pType},
-		Out: GlReadPixels_Out{pData},
+		In:  GlReadPixels_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType},
+		Out: GlReadPixels_Out{Data: pData},
 	}
 }
 func NewGlGenFramebuffers(
@@ -21632,8 +13319,8 @@ func NewGlGenFramebuffers(
 	pFramebuffers FramebufferIdArray,
 ) *GlGenFramebuffers {
 	return &GlGenFramebuffers{
-		In:  GlGenFramebuffers_In{pCount},
-		Out: GlGenFramebuffers_Out{pFramebuffers},
+		In:  GlGenFramebuffers_In{Count: pCount},
+		Out: GlGenFramebuffers_Out{Framebuffers: pFramebuffers},
 	}
 }
 func NewGlBindFramebuffer(
@@ -21641,7 +13328,7 @@ func NewGlBindFramebuffer(
 	pFramebuffer FramebufferId,
 ) *GlBindFramebuffer {
 	return &GlBindFramebuffer{
-		In:  GlBindFramebuffer_In{pTarget, pFramebuffer},
+		In:  GlBindFramebuffer_In{Target: pTarget, Framebuffer: pFramebuffer},
 		Out: GlBindFramebuffer_Out{},
 	}
 }
@@ -21650,8 +13337,8 @@ func NewGlCheckFramebufferStatus(
 	pResult FramebufferStatus,
 ) *GlCheckFramebufferStatus {
 	return &GlCheckFramebufferStatus{
-		In:  GlCheckFramebufferStatus_In{pTarget},
-		Out: GlCheckFramebufferStatus_Out{pResult},
+		In:  GlCheckFramebufferStatus_In{Target: pTarget},
+		Out: GlCheckFramebufferStatus_Out{Result: pResult},
 	}
 }
 func NewGlDeleteFramebuffers(
@@ -21659,7 +13346,7 @@ func NewGlDeleteFramebuffers(
 	pFramebuffers FramebufferIdArray,
 ) *GlDeleteFramebuffers {
 	return &GlDeleteFramebuffers{
-		In:  GlDeleteFramebuffers_In{pCount, pFramebuffers},
+		In:  GlDeleteFramebuffers_In{Count: pCount, Framebuffers: pFramebuffers},
 		Out: GlDeleteFramebuffers_Out{},
 	}
 }
@@ -21668,8 +13355,8 @@ func NewGlIsFramebuffer(
 	pResult bool,
 ) *GlIsFramebuffer {
 	return &GlIsFramebuffer{
-		In:  GlIsFramebuffer_In{pFramebuffer},
-		Out: GlIsFramebuffer_Out{pResult},
+		In:  GlIsFramebuffer_In{Framebuffer: pFramebuffer},
+		Out: GlIsFramebuffer_Out{Result: pResult},
 	}
 }
 func NewGlGenRenderbuffers(
@@ -21677,8 +13364,8 @@ func NewGlGenRenderbuffers(
 	pRenderbuffers RenderbufferIdArray,
 ) *GlGenRenderbuffers {
 	return &GlGenRenderbuffers{
-		In:  GlGenRenderbuffers_In{pCount},
-		Out: GlGenRenderbuffers_Out{pRenderbuffers},
+		In:  GlGenRenderbuffers_In{Count: pCount},
+		Out: GlGenRenderbuffers_Out{Renderbuffers: pRenderbuffers},
 	}
 }
 func NewGlBindRenderbuffer(
@@ -21686,7 +13373,7 @@ func NewGlBindRenderbuffer(
 	pRenderbuffer RenderbufferId,
 ) *GlBindRenderbuffer {
 	return &GlBindRenderbuffer{
-		In:  GlBindRenderbuffer_In{pTarget, pRenderbuffer},
+		In:  GlBindRenderbuffer_In{Target: pTarget, Renderbuffer: pRenderbuffer},
 		Out: GlBindRenderbuffer_Out{},
 	}
 }
@@ -21697,7 +13384,7 @@ func NewGlRenderbufferStorage(
 	pHeight int32,
 ) *GlRenderbufferStorage {
 	return &GlRenderbufferStorage{
-		In:  GlRenderbufferStorage_In{pTarget, pFormat, pWidth, pHeight},
+		In:  GlRenderbufferStorage_In{Target: pTarget, Format: pFormat, Width: pWidth, Height: pHeight},
 		Out: GlRenderbufferStorage_Out{},
 	}
 }
@@ -21706,7 +13393,7 @@ func NewGlDeleteRenderbuffers(
 	pRenderbuffers RenderbufferIdArray,
 ) *GlDeleteRenderbuffers {
 	return &GlDeleteRenderbuffers{
-		In:  GlDeleteRenderbuffers_In{pCount, pRenderbuffers},
+		In:  GlDeleteRenderbuffers_In{Count: pCount, Renderbuffers: pRenderbuffers},
 		Out: GlDeleteRenderbuffers_Out{},
 	}
 }
@@ -21715,8 +13402,8 @@ func NewGlIsRenderbuffer(
 	pResult bool,
 ) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{
-		In:  GlIsRenderbuffer_In{pRenderbuffer},
-		Out: GlIsRenderbuffer_Out{pResult},
+		In:  GlIsRenderbuffer_In{Renderbuffer: pRenderbuffer},
+		Out: GlIsRenderbuffer_Out{Result: pResult},
 	}
 }
 func NewGlGetRenderbufferParameteriv(
@@ -21725,8 +13412,8 @@ func NewGlGetRenderbufferParameteriv(
 	pValues S32Array,
 ) *GlGetRenderbufferParameteriv {
 	return &GlGetRenderbufferParameteriv{
-		In:  GlGetRenderbufferParameteriv_In{pTarget, pParameter},
-		Out: GlGetRenderbufferParameteriv_Out{pValues},
+		In:  GlGetRenderbufferParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetRenderbufferParameteriv_Out{Values: pValues},
 	}
 }
 func NewGlGenBuffers(
@@ -21734,8 +13421,8 @@ func NewGlGenBuffers(
 	pBuffers BufferIdArray,
 ) *GlGenBuffers {
 	return &GlGenBuffers{
-		In:  GlGenBuffers_In{pCount},
-		Out: GlGenBuffers_Out{pBuffers},
+		In:  GlGenBuffers_In{Count: pCount},
+		Out: GlGenBuffers_Out{Buffers: pBuffers},
 	}
 }
 func NewGlBindBuffer(
@@ -21743,7 +13430,7 @@ func NewGlBindBuffer(
 	pBuffer BufferId,
 ) *GlBindBuffer {
 	return &GlBindBuffer{
-		In:  GlBindBuffer_In{pTarget, pBuffer},
+		In:  GlBindBuffer_In{Target: pTarget, Buffer: pBuffer},
 		Out: GlBindBuffer_Out{},
 	}
 }
@@ -21754,7 +13441,7 @@ func NewGlBufferData(
 	pUsage BufferUsage,
 ) *GlBufferData {
 	return &GlBufferData{
-		In:  GlBufferData_In{pTarget, pSize, pData, pUsage},
+		In:  GlBufferData_In{Target: pTarget, Size: pSize, Data: pData, Usage: pUsage},
 		Out: GlBufferData_Out{},
 	}
 }
@@ -21765,7 +13452,7 @@ func NewGlBufferSubData(
 	pData memory.Pointer,
 ) *GlBufferSubData {
 	return &GlBufferSubData{
-		In:  GlBufferSubData_In{pTarget, pOffset, pSize, pData},
+		In:  GlBufferSubData_In{Target: pTarget, Offset: pOffset, Size: pSize, Data: pData},
 		Out: GlBufferSubData_Out{},
 	}
 }
@@ -21774,7 +13461,7 @@ func NewGlDeleteBuffers(
 	pBuffers BufferIdArray,
 ) *GlDeleteBuffers {
 	return &GlDeleteBuffers{
-		In:  GlDeleteBuffers_In{pCount, pBuffers},
+		In:  GlDeleteBuffers_In{Count: pCount, Buffers: pBuffers},
 		Out: GlDeleteBuffers_Out{},
 	}
 }
@@ -21783,8 +13470,8 @@ func NewGlIsBuffer(
 	pResult bool,
 ) *GlIsBuffer {
 	return &GlIsBuffer{
-		In:  GlIsBuffer_In{pBuffer},
-		Out: GlIsBuffer_Out{pResult},
+		In:  GlIsBuffer_In{Buffer: pBuffer},
+		Out: GlIsBuffer_Out{Result: pResult},
 	}
 }
 func NewGlGetBufferParameteriv(
@@ -21793,8 +13480,8 @@ func NewGlGetBufferParameteriv(
 	pValue int32,
 ) *GlGetBufferParameteriv {
 	return &GlGetBufferParameteriv{
-		In:  GlGetBufferParameteriv_In{pTarget, pParameter},
-		Out: GlGetBufferParameteriv_Out{pValue},
+		In:  GlGetBufferParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetBufferParameteriv_Out{Value: pValue},
 	}
 }
 func NewGlCreateShader(
@@ -21802,15 +13489,15 @@ func NewGlCreateShader(
 	pResult ShaderId,
 ) *GlCreateShader {
 	return &GlCreateShader{
-		In:  GlCreateShader_In{pType},
-		Out: GlCreateShader_Out{pResult},
+		In:  GlCreateShader_In{Type: pType},
+		Out: GlCreateShader_Out{Result: pResult},
 	}
 }
 func NewGlDeleteShader(
 	pShader ShaderId,
 ) *GlDeleteShader {
 	return &GlDeleteShader{
-		In:  GlDeleteShader_In{pShader},
+		In:  GlDeleteShader_In{Shader: pShader},
 		Out: GlDeleteShader_Out{},
 	}
 }
@@ -21821,7 +13508,7 @@ func NewGlShaderSource(
 	pLength S32Array,
 ) *GlShaderSource {
 	return &GlShaderSource{
-		In:  GlShaderSource_In{pShader, pCount, pSource, pLength},
+		In:  GlShaderSource_In{Shader: pShader, Count: pCount, Source: pSource, Length: pLength},
 		Out: GlShaderSource_Out{},
 	}
 }
@@ -21833,7 +13520,7 @@ func NewGlShaderBinary(
 	pBinarySize int32,
 ) *GlShaderBinary {
 	return &GlShaderBinary{
-		In:  GlShaderBinary_In{pCount, pShaders, pBinaryFormat, pBinary, pBinarySize},
+		In:  GlShaderBinary_In{Count: pCount, Shaders: pShaders, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
 		Out: GlShaderBinary_Out{},
 	}
 }
@@ -21844,8 +13531,8 @@ func NewGlGetShaderInfoLog(
 	pInfo string,
 ) *GlGetShaderInfoLog {
 	return &GlGetShaderInfoLog{
-		In:  GlGetShaderInfoLog_In{pShader, pBufferLength},
-		Out: GlGetShaderInfoLog_Out{pStringLengthWritten, pInfo},
+		In:  GlGetShaderInfoLog_In{Shader: pShader, BufferLength: pBufferLength},
+		Out: GlGetShaderInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
 	}
 }
 func NewGlGetShaderSource(
@@ -21855,8 +13542,8 @@ func NewGlGetShaderSource(
 	pSource string,
 ) *GlGetShaderSource {
 	return &GlGetShaderSource{
-		In:  GlGetShaderSource_In{pShader, pBufferLength},
-		Out: GlGetShaderSource_Out{pStringLengthWritten, pSource},
+		In:  GlGetShaderSource_In{Shader: pShader, BufferLength: pBufferLength},
+		Out: GlGetShaderSource_Out{StringLengthWritten: pStringLengthWritten, Source: pSource},
 	}
 }
 func NewGlReleaseShaderCompiler() *GlReleaseShaderCompiler {
@@ -21869,7 +13556,7 @@ func NewGlCompileShader(
 	pShader ShaderId,
 ) *GlCompileShader {
 	return &GlCompileShader{
-		In:  GlCompileShader_In{pShader},
+		In:  GlCompileShader_In{Shader: pShader},
 		Out: GlCompileShader_Out{},
 	}
 }
@@ -21878,8 +13565,8 @@ func NewGlIsShader(
 	pResult bool,
 ) *GlIsShader {
 	return &GlIsShader{
-		In:  GlIsShader_In{pShader},
-		Out: GlIsShader_Out{pResult},
+		In:  GlIsShader_In{Shader: pShader},
+		Out: GlIsShader_Out{Result: pResult},
 	}
 }
 func NewGlCreateProgram(
@@ -21887,14 +13574,14 @@ func NewGlCreateProgram(
 ) *GlCreateProgram {
 	return &GlCreateProgram{
 		In:  GlCreateProgram_In{},
-		Out: GlCreateProgram_Out{pResult},
+		Out: GlCreateProgram_Out{Result: pResult},
 	}
 }
 func NewGlDeleteProgram(
 	pProgram ProgramId,
 ) *GlDeleteProgram {
 	return &GlDeleteProgram{
-		In:  GlDeleteProgram_In{pProgram},
+		In:  GlDeleteProgram_In{Program: pProgram},
 		Out: GlDeleteProgram_Out{},
 	}
 }
@@ -21903,7 +13590,7 @@ func NewGlAttachShader(
 	pShader ShaderId,
 ) *GlAttachShader {
 	return &GlAttachShader{
-		In:  GlAttachShader_In{pProgram, pShader},
+		In:  GlAttachShader_In{Program: pProgram, Shader: pShader},
 		Out: GlAttachShader_Out{},
 	}
 }
@@ -21912,7 +13599,7 @@ func NewGlDetachShader(
 	pShader ShaderId,
 ) *GlDetachShader {
 	return &GlDetachShader{
-		In:  GlDetachShader_In{pProgram, pShader},
+		In:  GlDetachShader_In{Program: pProgram, Shader: pShader},
 		Out: GlDetachShader_Out{},
 	}
 }
@@ -21923,15 +13610,15 @@ func NewGlGetAttachedShaders(
 	pShaders ShaderIdArray,
 ) *GlGetAttachedShaders {
 	return &GlGetAttachedShaders{
-		In:  GlGetAttachedShaders_In{pProgram, pBufferLength},
-		Out: GlGetAttachedShaders_Out{pShadersLengthWritten, pShaders},
+		In:  GlGetAttachedShaders_In{Program: pProgram, BufferLength: pBufferLength},
+		Out: GlGetAttachedShaders_Out{ShadersLengthWritten: pShadersLengthWritten, Shaders: pShaders},
 	}
 }
 func NewGlLinkProgram(
 	pProgram ProgramId,
 ) *GlLinkProgram {
 	return &GlLinkProgram{
-		In:  GlLinkProgram_In{pProgram},
+		In:  GlLinkProgram_In{Program: pProgram},
 		Out: GlLinkProgram_Out{},
 	}
 }
@@ -21942,15 +13629,15 @@ func NewGlGetProgramInfoLog(
 	pInfo string,
 ) *GlGetProgramInfoLog {
 	return &GlGetProgramInfoLog{
-		In:  GlGetProgramInfoLog_In{pProgram, pBufferLength},
-		Out: GlGetProgramInfoLog_Out{pStringLengthWritten, pInfo},
+		In:  GlGetProgramInfoLog_In{Program: pProgram, BufferLength: pBufferLength},
+		Out: GlGetProgramInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
 	}
 }
 func NewGlUseProgram(
 	pProgram ProgramId,
 ) *GlUseProgram {
 	return &GlUseProgram{
-		In:  GlUseProgram_In{pProgram},
+		In:  GlUseProgram_In{Program: pProgram},
 		Out: GlUseProgram_Out{},
 	}
 }
@@ -21959,15 +13646,15 @@ func NewGlIsProgram(
 	pResult bool,
 ) *GlIsProgram {
 	return &GlIsProgram{
-		In:  GlIsProgram_In{pProgram},
-		Out: GlIsProgram_Out{pResult},
+		In:  GlIsProgram_In{Program: pProgram},
+		Out: GlIsProgram_Out{Result: pResult},
 	}
 }
 func NewGlValidateProgram(
 	pProgram ProgramId,
 ) *GlValidateProgram {
 	return &GlValidateProgram{
-		In:  GlValidateProgram_In{pProgram},
+		In:  GlValidateProgram_In{Program: pProgram},
 		Out: GlValidateProgram_Out{},
 	}
 }
@@ -21978,7 +13665,7 @@ func NewGlClearColor(
 	pA float32,
 ) *GlClearColor {
 	return &GlClearColor{
-		In:  GlClearColor_In{pR, pG, pB, pA},
+		In:  GlClearColor_In{R: pR, G: pG, B: pB, A: pA},
 		Out: GlClearColor_Out{},
 	}
 }
@@ -21986,7 +13673,7 @@ func NewGlClearDepthf(
 	pDepth float32,
 ) *GlClearDepthf {
 	return &GlClearDepthf{
-		In:  GlClearDepthf_In{pDepth},
+		In:  GlClearDepthf_In{Depth: pDepth},
 		Out: GlClearDepthf_Out{},
 	}
 }
@@ -21994,7 +13681,7 @@ func NewGlClearStencil(
 	pStencil int32,
 ) *GlClearStencil {
 	return &GlClearStencil{
-		In:  GlClearStencil_In{pStencil},
+		In:  GlClearStencil_In{Stencil: pStencil},
 		Out: GlClearStencil_Out{},
 	}
 }
@@ -22002,7 +13689,7 @@ func NewGlClear(
 	pMask ClearMask,
 ) *GlClear {
 	return &GlClear{
-		In:  GlClear_In{pMask},
+		In:  GlClear_In{Mask: pMask},
 		Out: GlClear_Out{},
 	}
 }
@@ -22010,7 +13697,7 @@ func NewGlCullFace(
 	pMode FaceMode,
 ) *GlCullFace {
 	return &GlCullFace{
-		In:  GlCullFace_In{pMode},
+		In:  GlCullFace_In{Mode: pMode},
 		Out: GlCullFace_Out{},
 	}
 }
@@ -22019,7 +13706,7 @@ func NewGlPolygonOffset(
 	pUnits float32,
 ) *GlPolygonOffset {
 	return &GlPolygonOffset{
-		In:  GlPolygonOffset_In{pScaleFactor, pUnits},
+		In:  GlPolygonOffset_In{ScaleFactor: pScaleFactor, Units: pUnits},
 		Out: GlPolygonOffset_Out{},
 	}
 }
@@ -22027,7 +13714,7 @@ func NewGlLineWidth(
 	pWidth float32,
 ) *GlLineWidth {
 	return &GlLineWidth{
-		In:  GlLineWidth_In{pWidth},
+		In:  GlLineWidth_In{Width: pWidth},
 		Out: GlLineWidth_Out{},
 	}
 }
@@ -22036,7 +13723,7 @@ func NewGlSampleCoverage(
 	pInvert bool,
 ) *GlSampleCoverage {
 	return &GlSampleCoverage{
-		In:  GlSampleCoverage_In{pValue, pInvert},
+		In:  GlSampleCoverage_In{Value: pValue, Invert: pInvert},
 		Out: GlSampleCoverage_Out{},
 	}
 }
@@ -22045,7 +13732,7 @@ func NewGlHint(
 	pMode HintMode,
 ) *GlHint {
 	return &GlHint{
-		In:  GlHint_In{pTarget, pMode},
+		In:  GlHint_In{Target: pTarget, Mode: pMode},
 		Out: GlHint_Out{},
 	}
 }
@@ -22056,7 +13743,7 @@ func NewGlFramebufferRenderbuffer(
 	pRenderbuffer RenderbufferId,
 ) *GlFramebufferRenderbuffer {
 	return &GlFramebufferRenderbuffer{
-		In:  GlFramebufferRenderbuffer_In{pFramebufferTarget, pFramebufferAttachment, pRenderbufferTarget, pRenderbuffer},
+		In:  GlFramebufferRenderbuffer_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, RenderbufferTarget: pRenderbufferTarget, Renderbuffer: pRenderbuffer},
 		Out: GlFramebufferRenderbuffer_Out{},
 	}
 }
@@ -22068,7 +13755,7 @@ func NewGlFramebufferTexture2D(
 	pLevel int32,
 ) *GlFramebufferTexture2D {
 	return &GlFramebufferTexture2D{
-		In:  GlFramebufferTexture2D_In{pFramebufferTarget, pFramebufferAttachment, pTextureTarget, pTexture, pLevel},
+		In:  GlFramebufferTexture2D_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, TextureTarget: pTextureTarget, Texture: pTexture, Level: pLevel},
 		Out: GlFramebufferTexture2D_Out{},
 	}
 }
@@ -22079,8 +13766,8 @@ func NewGlGetFramebufferAttachmentParameteriv(
 	pValue S32Array,
 ) *GlGetFramebufferAttachmentParameteriv {
 	return &GlGetFramebufferAttachmentParameteriv{
-		In:  GlGetFramebufferAttachmentParameteriv_In{pTarget, pAttachment, pParameter},
-		Out: GlGetFramebufferAttachmentParameteriv_Out{pValue},
+		In:  GlGetFramebufferAttachmentParameteriv_In{Target: pTarget, Attachment: pAttachment, Parameter: pParameter},
+		Out: GlGetFramebufferAttachmentParameteriv_Out{Value: pValue},
 	}
 }
 func NewGlDrawElements(
@@ -22090,7 +13777,7 @@ func NewGlDrawElements(
 	pIndices IndicesPointer,
 ) *GlDrawElements {
 	return &GlDrawElements{
-		In:  GlDrawElements_In{pDrawMode, pElementCount, pIndicesType, pIndices},
+		In:  GlDrawElements_In{DrawMode: pDrawMode, ElementCount: pElementCount, IndicesType: pIndicesType, Indices: pIndices},
 		Out: GlDrawElements_Out{},
 	}
 }
@@ -22100,7 +13787,7 @@ func NewGlDrawArrays(
 	pIndexCount int32,
 ) *GlDrawArrays {
 	return &GlDrawArrays{
-		In:  GlDrawArrays_In{pDrawMode, pFirstIndex, pIndexCount},
+		In:  GlDrawArrays_In{DrawMode: pDrawMode, FirstIndex: pFirstIndex, IndexCount: pIndexCount},
 		Out: GlDrawArrays_Out{},
 	}
 }
@@ -22121,8 +13808,8 @@ func NewGlGetBooleanv(
 	pValues BoolArray,
 ) *GlGetBooleanv {
 	return &GlGetBooleanv{
-		In:  GlGetBooleanv_In{pParam},
-		Out: GlGetBooleanv_Out{pValues},
+		In:  GlGetBooleanv_In{Param: pParam},
+		Out: GlGetBooleanv_Out{Values: pValues},
 	}
 }
 func NewGlGetFloatv(
@@ -22130,8 +13817,8 @@ func NewGlGetFloatv(
 	pValues F32Array,
 ) *GlGetFloatv {
 	return &GlGetFloatv{
-		In:  GlGetFloatv_In{pParam},
-		Out: GlGetFloatv_Out{pValues},
+		In:  GlGetFloatv_In{Param: pParam},
+		Out: GlGetFloatv_Out{Values: pValues},
 	}
 }
 func NewGlGetIntegerv(
@@ -22139,8 +13826,8 @@ func NewGlGetIntegerv(
 	pValues S32Array,
 ) *GlGetIntegerv {
 	return &GlGetIntegerv{
-		In:  GlGetIntegerv_In{pParam},
-		Out: GlGetIntegerv_Out{pValues},
+		In:  GlGetIntegerv_In{Param: pParam},
+		Out: GlGetIntegerv_Out{Values: pValues},
 	}
 }
 func NewGlGetString(
@@ -22148,15 +13835,15 @@ func NewGlGetString(
 	pResult string,
 ) *GlGetString {
 	return &GlGetString{
-		In:  GlGetString_In{pParam},
-		Out: GlGetString_Out{pResult},
+		In:  GlGetString_In{Param: pParam},
+		Out: GlGetString_Out{Result: pResult},
 	}
 }
 func NewGlEnable(
 	pCapability Capability,
 ) *GlEnable {
 	return &GlEnable{
-		In:  GlEnable_In{pCapability},
+		In:  GlEnable_In{Capability: pCapability},
 		Out: GlEnable_Out{},
 	}
 }
@@ -22164,7 +13851,7 @@ func NewGlDisable(
 	pCapability Capability,
 ) *GlDisable {
 	return &GlDisable{
-		In:  GlDisable_In{pCapability},
+		In:  GlDisable_In{Capability: pCapability},
 		Out: GlDisable_Out{},
 	}
 }
@@ -22173,8 +13860,8 @@ func NewGlIsEnabled(
 	pResult bool,
 ) *GlIsEnabled {
 	return &GlIsEnabled{
-		In:  GlIsEnabled_In{pCapability},
-		Out: GlIsEnabled_Out{pResult},
+		In:  GlIsEnabled_In{Capability: pCapability},
+		Out: GlIsEnabled_Out{Result: pResult},
 	}
 }
 func NewGlMapBufferRange(
@@ -22185,15 +13872,15 @@ func NewGlMapBufferRange(
 	pResult memory.Pointer,
 ) *GlMapBufferRange {
 	return &GlMapBufferRange{
-		In:  GlMapBufferRange_In{pTarget, pOffset, pLength, pAccess},
-		Out: GlMapBufferRange_Out{pResult},
+		In:  GlMapBufferRange_In{Target: pTarget, Offset: pOffset, Length: pLength, Access: pAccess},
+		Out: GlMapBufferRange_Out{Result: pResult},
 	}
 }
 func NewGlUnmapBuffer(
 	pTarget MapBufferTarget,
 ) *GlUnmapBuffer {
 	return &GlUnmapBuffer{
-		In:  GlUnmapBuffer_In{pTarget},
+		In:  GlUnmapBuffer_In{Target: pTarget},
 		Out: GlUnmapBuffer_Out{},
 	}
 }
@@ -22203,7 +13890,7 @@ func NewGlInvalidateFramebuffer(
 	pAttachments FramebufferAttachmentArray,
 ) *GlInvalidateFramebuffer {
 	return &GlInvalidateFramebuffer{
-		In:  GlInvalidateFramebuffer_In{pTarget, pCount, pAttachments},
+		In:  GlInvalidateFramebuffer_In{Target: pTarget, Count: pCount, Attachments: pAttachments},
 		Out: GlInvalidateFramebuffer_Out{},
 	}
 }
@@ -22215,7 +13902,7 @@ func NewGlRenderbufferStorageMultisample(
 	pHeight int32,
 ) *GlRenderbufferStorageMultisample {
 	return &GlRenderbufferStorageMultisample{
-		In:  GlRenderbufferStorageMultisample_In{pTarget, pSamples, pFormat, pWidth, pHeight},
+		In:  GlRenderbufferStorageMultisample_In{Target: pTarget, Samples: pSamples, Format: pFormat, Width: pWidth, Height: pHeight},
 		Out: GlRenderbufferStorageMultisample_Out{},
 	}
 }
@@ -22232,7 +13919,7 @@ func NewGlBlitFramebuffer(
 	pFilter TextureFilterMode,
 ) *GlBlitFramebuffer {
 	return &GlBlitFramebuffer{
-		In:  GlBlitFramebuffer_In{pSrcX0, pSrcY0, pSrcX1, pSrcY1, pDstX0, pDstY0, pDstX1, pDstY1, pMask, pFilter},
+		In:  GlBlitFramebuffer_In{SrcX0: pSrcX0, SrcY0: pSrcY0, SrcX1: pSrcX1, SrcY1: pSrcY1, DstX0: pDstX0, DstY0: pDstY0, DstX1: pDstX1, DstY1: pDstY1, Mask: pMask, Filter: pFilter},
 		Out: GlBlitFramebuffer_Out{},
 	}
 }
@@ -22241,8 +13928,8 @@ func NewGlGenQueries(
 	pQueries QueryIdArray,
 ) *GlGenQueries {
 	return &GlGenQueries{
-		In:  GlGenQueries_In{pCount},
-		Out: GlGenQueries_Out{pQueries},
+		In:  GlGenQueries_In{Count: pCount},
+		Out: GlGenQueries_Out{Queries: pQueries},
 	}
 }
 func NewGlBeginQuery(
@@ -22250,7 +13937,7 @@ func NewGlBeginQuery(
 	pQuery QueryId,
 ) *GlBeginQuery {
 	return &GlBeginQuery{
-		In:  GlBeginQuery_In{pTarget, pQuery},
+		In:  GlBeginQuery_In{Target: pTarget, Query: pQuery},
 		Out: GlBeginQuery_Out{},
 	}
 }
@@ -22258,7 +13945,7 @@ func NewGlEndQuery(
 	pTarget QueryTarget,
 ) *GlEndQuery {
 	return &GlEndQuery{
-		In:  GlEndQuery_In{pTarget},
+		In:  GlEndQuery_In{Target: pTarget},
 		Out: GlEndQuery_Out{},
 	}
 }
@@ -22267,7 +13954,7 @@ func NewGlDeleteQueries(
 	pQueries QueryIdArray,
 ) *GlDeleteQueries {
 	return &GlDeleteQueries{
-		In:  GlDeleteQueries_In{pCount, pQueries},
+		In:  GlDeleteQueries_In{Count: pCount, Queries: pQueries},
 		Out: GlDeleteQueries_Out{},
 	}
 }
@@ -22276,8 +13963,8 @@ func NewGlIsQuery(
 	pResult bool,
 ) *GlIsQuery {
 	return &GlIsQuery{
-		In:  GlIsQuery_In{pQuery},
-		Out: GlIsQuery_Out{pResult},
+		In:  GlIsQuery_In{Query: pQuery},
+		Out: GlIsQuery_Out{Result: pResult},
 	}
 }
 func NewGlGetQueryiv(
@@ -22286,8 +13973,8 @@ func NewGlGetQueryiv(
 	pValue int32,
 ) *GlGetQueryiv {
 	return &GlGetQueryiv{
-		In:  GlGetQueryiv_In{pTarget, pParameter},
-		Out: GlGetQueryiv_Out{pValue},
+		In:  GlGetQueryiv_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetQueryiv_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectuiv(
@@ -22296,8 +13983,8 @@ func NewGlGetQueryObjectuiv(
 	pValue uint32,
 ) *GlGetQueryObjectuiv {
 	return &GlGetQueryObjectuiv{
-		In:  GlGetQueryObjectuiv_In{pQuery, pParameter},
-		Out: GlGetQueryObjectuiv_Out{pValue},
+		In:  GlGetQueryObjectuiv_In{Query: pQuery, Parameter: pParameter},
+		Out: GlGetQueryObjectuiv_Out{Value: pValue},
 	}
 }
 func NewGlGenQueriesEXT(
@@ -22305,8 +13992,8 @@ func NewGlGenQueriesEXT(
 	pQueries QueryIdArray,
 ) *GlGenQueriesEXT {
 	return &GlGenQueriesEXT{
-		In:  GlGenQueriesEXT_In{pCount},
-		Out: GlGenQueriesEXT_Out{pQueries},
+		In:  GlGenQueriesEXT_In{Count: pCount},
+		Out: GlGenQueriesEXT_Out{Queries: pQueries},
 	}
 }
 func NewGlBeginQueryEXT(
@@ -22314,7 +14001,7 @@ func NewGlBeginQueryEXT(
 	pQuery QueryId,
 ) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{
-		In:  GlBeginQueryEXT_In{pTarget, pQuery},
+		In:  GlBeginQueryEXT_In{Target: pTarget, Query: pQuery},
 		Out: GlBeginQueryEXT_Out{},
 	}
 }
@@ -22322,7 +14009,7 @@ func NewGlEndQueryEXT(
 	pTarget QueryTarget,
 ) *GlEndQueryEXT {
 	return &GlEndQueryEXT{
-		In:  GlEndQueryEXT_In{pTarget},
+		In:  GlEndQueryEXT_In{Target: pTarget},
 		Out: GlEndQueryEXT_Out{},
 	}
 }
@@ -22331,7 +14018,7 @@ func NewGlDeleteQueriesEXT(
 	pQueries QueryIdArray,
 ) *GlDeleteQueriesEXT {
 	return &GlDeleteQueriesEXT{
-		In:  GlDeleteQueriesEXT_In{pCount, pQueries},
+		In:  GlDeleteQueriesEXT_In{Count: pCount, Queries: pQueries},
 		Out: GlDeleteQueriesEXT_Out{},
 	}
 }
@@ -22340,8 +14027,8 @@ func NewGlIsQueryEXT(
 	pResult bool,
 ) *GlIsQueryEXT {
 	return &GlIsQueryEXT{
-		In:  GlIsQueryEXT_In{pQuery},
-		Out: GlIsQueryEXT_Out{pResult},
+		In:  GlIsQueryEXT_In{Query: pQuery},
+		Out: GlIsQueryEXT_Out{Result: pResult},
 	}
 }
 func NewGlQueryCounterEXT(
@@ -22349,7 +14036,7 @@ func NewGlQueryCounterEXT(
 	pTarget QueryTarget,
 ) *GlQueryCounterEXT {
 	return &GlQueryCounterEXT{
-		In:  GlQueryCounterEXT_In{pQuery, pTarget},
+		In:  GlQueryCounterEXT_In{Query: pQuery, Target: pTarget},
 		Out: GlQueryCounterEXT_Out{},
 	}
 }
@@ -22359,8 +14046,8 @@ func NewGlGetQueryivEXT(
 	pValue int32,
 ) *GlGetQueryivEXT {
 	return &GlGetQueryivEXT{
-		In:  GlGetQueryivEXT_In{pTarget, pParameter},
-		Out: GlGetQueryivEXT_Out{pValue},
+		In:  GlGetQueryivEXT_In{Target: pTarget, Parameter: pParameter},
+		Out: GlGetQueryivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectivEXT(
@@ -22369,8 +14056,8 @@ func NewGlGetQueryObjectivEXT(
 	pValue int32,
 ) *GlGetQueryObjectivEXT {
 	return &GlGetQueryObjectivEXT{
-		In:  GlGetQueryObjectivEXT_In{pQuery, pParameter},
-		Out: GlGetQueryObjectivEXT_Out{pValue},
+		In:  GlGetQueryObjectivEXT_In{Query: pQuery, Parameter: pParameter},
+		Out: GlGetQueryObjectivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectuivEXT(
@@ -22379,8 +14066,8 @@ func NewGlGetQueryObjectuivEXT(
 	pValue uint32,
 ) *GlGetQueryObjectuivEXT {
 	return &GlGetQueryObjectuivEXT{
-		In:  GlGetQueryObjectuivEXT_In{pQuery, pParameter},
-		Out: GlGetQueryObjectuivEXT_Out{pValue},
+		In:  GlGetQueryObjectuivEXT_In{Query: pQuery, Parameter: pParameter},
+		Out: GlGetQueryObjectuivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjecti64vEXT(
@@ -22389,8 +14076,8 @@ func NewGlGetQueryObjecti64vEXT(
 	pValue int64,
 ) *GlGetQueryObjecti64vEXT {
 	return &GlGetQueryObjecti64vEXT{
-		In:  GlGetQueryObjecti64vEXT_In{pQuery, pParameter},
-		Out: GlGetQueryObjecti64vEXT_Out{pValue},
+		In:  GlGetQueryObjecti64vEXT_In{Query: pQuery, Parameter: pParameter},
+		Out: GlGetQueryObjecti64vEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectui64vEXT(
@@ -22399,8 +14086,8 @@ func NewGlGetQueryObjectui64vEXT(
 	pValue uint64,
 ) *GlGetQueryObjectui64vEXT {
 	return &GlGetQueryObjectui64vEXT{
-		In:  GlGetQueryObjectui64vEXT_In{pQuery, pParameter},
-		Out: GlGetQueryObjectui64vEXT_Out{pValue},
+		In:  GlGetQueryObjectui64vEXT_In{Query: pQuery, Parameter: pParameter},
+		Out: GlGetQueryObjectui64vEXT_Out{Value: pValue},
 	}
 }
 

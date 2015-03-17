@@ -14,8 +14,6 @@
 
 package atom
 
-import "android.googlesource.com/platform/tools/gpu/binary"
-
 // TypeID is an atom type identifier. Each implementation of the Atom interface
 // must have a unique type idenitifier. Any changes to the binary format of an
 // atom must result in a new type identifier to maintain binary compatability.
@@ -23,19 +21,4 @@ type TypeID uint16
 
 func init() {
 	Register(TypeInfo{ID: TypeIDEos, New: func() Atom { return &EOS{} }})
-}
-
-// Encode encodes the TypeID using the specified encoder.
-func (i TypeID) Encode(e *binary.Encoder) error {
-	return e.Uint16(uint16(i))
-}
-
-// Decode decodes the TypeID using the specified decoder.
-func (i *TypeID) Decode(d *binary.Decoder) error {
-	if val, err := d.Uint16(); err == nil {
-		*i = TypeID(val)
-		return nil
-	} else {
-		return err
-	}
 }
