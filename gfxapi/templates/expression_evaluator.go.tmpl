@@ -16,8 +16,10 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Block"}}
-  {{range $s := $.Statements}}
-    {{Macro "Statement" $s}}
+  {{ForEach $.Statements "Statement" | JoinWith "\n"}}
+  {{/* Assign each local variable of the block to a blank identifier, in case it hasn't been used. */}}
+  {{if $locals := ForEach $.Statements "LocalNames"}}
+    {{ForEach $locals "Blank" | JoinWith ", "}} = {{$locals | JoinWith ", "}}
   {{end}}
 {{end}}
 
@@ -29,18 +31,18 @@ limitations under the License.
 */}}
 {{define "Statement"}}
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Read" $.Local.Value}} {{Macro "TypeComment" (TypeOf $.Local)}}
-  {{else if IsAssert    $}}
-  {{else if IsAssign    $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
-  {{else if IsMapAssign $}}{{Macro "MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
-  {{else if IsReturn    $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
-  {{else if IsBranch    $}}if {{Macro "Read" $.Condition}} {
+  {{else if IsAssert       $}}
+  {{else if IsAssign       $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
+  {{else if IsMapAssign    $}}{{Macro "MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
+  {{else if IsReturn       $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
+  {{else if IsBranch       $}}if {{Macro "Read" $.Condition}} {
     {{Macro "Block" $.True}}
     {{if len $.False.Statements}}
     } else {
       {{Macro "Block" $.False}}
     {{end}}
     }
-  {{else if IsSwitch $}}
+  {{else if IsSwitch       $}}
     switch {{Macro "Read" $.Value}} {
       {{range $c := $.Cases}}
         case {{range $i, $cond := $c.Conditions}}§
@@ -53,8 +55,8 @@ limitations under the License.
         v := {{Macro "Read" $.Value}}
         log.Printf("Error: Missing switch case handler for value %T %v", v, v)
     }
-  {{else if IsIteration $}}{{Macro "Iteration" $}}
-  {{else if IsCall      $}}{{Macro "Call" $}}
+  {{else if IsIteration    $}}{{Macro "Iteration" $}}
+  {{else if IsCall         $}}{{Macro "Call" $}}
   {{else                     }}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
 {{end}}
@@ -92,25 +94,16 @@ limitations under the License.
 */}}
 {{define "Call"}}
   {{AssertType $ "Call"}}
-  {{if $.Target.Object}}{{Macro "Read" $.Target.Object}}.{{$.Target.Function.Name}}(§{{Macro "Args" $.Arguments}})
+  {{if $.Target.Object}}
+    {{Macro "Read" $.Target.Object}}.{{$.Target.Function.Name}}({{ForEach $.Arguments "Read" | JoinWith ", "}})
   {{else if eq $.Target.Function.Name "memcpy"}}
     {{Macro "Read" (index $.Arguments 0)}}.Write(m.State.Mem.Slice(memory.Range{
       Base: memory.Pointer({{Macro "Read" (index $.Arguments 1)}}),
       Size: uint64({{Macro "Read" (index $.Arguments 2)}}),
     }))
   {{else}}
-    {{$.Target.Function.Name}}(§{{Macro "Args" $.Arguments}})
+    {{$.Target.Function.Name}}({{ForEach $.Arguments "Read" | JoinWith ", "}})
   {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits a comma-separated list of argument reads
--------------------------------------------------------------------------------
-*/}}
-{{define "Args"}}
-  {{range $i, $a := $}}{{if $i}}, {{end}}{{Macro "Read" $a}}{{end}}
 {{end}}
 
 
@@ -143,6 +136,7 @@ limitations under the License.
 {{define "Read"}}
   {{     if IsBoolValue    $}}{{$}}
   {{else if IsNumericValue $}}{{$}}
+  {{else if IsUnaryOp      $}}{{$.Operator}}({{Macro "Read" $.Expression}})
   {{else if IsStringValue  $}}{{printf "%q" $}}
   {{else if IsEnumEntry    $}}{{$.Enum.Name}}_{{$.Name}}
   {{else if IsLocal        $}}{{$.Name}}
@@ -158,7 +152,7 @@ limitations under the License.
   {{else if IsArrayIndex   $}}{{Macro "Read" $.Array}}[{{Macro "Read" $.Index}}]
   {{else if IsMapIndex     $}}{{Macro "Read" $.Map}}.Get({{Macro "Read" $.Index}})
   {{else if IsMapContains  $}}{{Macro "Read" $.Map}}.Contains({{Macro "Read" $.Key}})
-  {{else if IsLength       $}}int32(len({{Macro "Read" $.Object}}))
+  {{else if IsLength       $}}{{Macro "Go.Type" $.Type}}({{Macro "ReadLength" $.Object}})
   {{else if IsSelect       $}}
     func() (result {{Macro "Go.Type" $}}) {
       switch {{Macro "Read" $.Value}} {
@@ -205,3 +199,33 @@ limitations under the License.
 
   // {{$.Name}}
 {{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to read the length of the specified expression
+-------------------------------------------------------------------------------
+*/}}
+{{define "ReadLength"}}
+  {{if IsParameter $}}{{Macro "Read" (GetArrayParamCount $)}}
+  {{else            }}len({{Macro "Read" $}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  If the given statement is a local variable declaration, return its name.
+-------------------------------------------------------------------------------
+*/}}
+{{define "LocalNames"}}
+  {{if IsDeclareLocal $}}{{$.Local.Name}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a Go blank identifier, _.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Blank"}}_{{end}}
