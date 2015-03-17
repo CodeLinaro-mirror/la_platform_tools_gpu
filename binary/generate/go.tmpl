@@ -13,84 +13,81 @@
 // limitations under the License.
 
 {{define "Register"}} //{{.Signature}}
-	binary.Register(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{})
-{{end}}
+	binary.Register(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
 
-{{define "Encoder"}}
-	func (o {{.Name}}) Encode(e *binary.Encoder) error {
-		{{range .Fields}}{{encode (print "o." .Name) .Type}}{{end}}
-		return nil
-	}
-{{end}}
+{{define "Encoder"}}func (o {{.Name}}) Encode(e *binary.Encoder) error {
+	{{range .Fields}}{{encode (print "o." .Name) .Type}}
+	{{end}} return nil
+} {{end}}
 
-{{define "EncodeNative"}}
-		if err := e.{{.Type.Method}}({{.Name}}); err != nil {
-			return err
-}{{end}}
+{{define "EncodeNative"}} if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{end}}
 
-{{define "EncodeRemap"}}
-		if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil {
-				return err
-}{{end}}
+{{define "EncodeRemap"}} if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{end}}
 
-{{define "EncodeCodeable"}}
-		if err := {{.Name}}.Encode(e); err != nil {
-			return err
-}{{end}}
+{{define "EncodeCodeable"}} if err := {{.Name}}.Encode(e); err != nil { return err } {{end}}
 
-{{define "EncodeObject"}}
-		if {{.Name}} != nil {
+{{define "EncodePointer"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
 				return err
 			}
 		} else if err := e.Object(nil); err != nil {
 			return err
-}{{end}}
+		} {{end}}
 
-{{define "EncodeArray"}}
-		if err := e.Int32(int32(len({{.Name}}))); err != nil {
+{{define "EncodeInterface"}} if {{.Name}} != nil {
+			if err := e.Object({{.Name}}); err != nil {
+				return err
+			}
+		} else if err := e.Object(nil); err != nil {
+			return err
+		} {{end}}
+
+{{define "EncodeArray"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
 			return err
 		}
 		for i := range {{.Name}} {
 			{{encode (print .Name "[i]") .Type.SubType}}
-}{{end}}
+		} {{end}}
 
-{{define "Decoder"}}
-		func (o *{{.Name}}) Decode(d *binary.Decoder) error {
-			{{range .Fields}}{{decode (print "o." .Name) .Type}}{{end}}
-			return nil
-}{{end}}
+{{define "Decoder"}}func (o *{{.Name}}) Decode(d *binary.Decoder) error {
+	{{range .Fields}}{{decode (print "o." .Name) .Type}}
+	{{end}} return nil
+} {{end}}
 
-{{define "DecodeNative"}}
-		if obj, err := d.{{.Type.Method}}(); err != nil {
+{{define "DecodeNative"}} if obj, err := d.{{.Type.Method}}(); err != nil {
 			return err
 		} else {
 			{{.Name}} = {{.Type.Name}}(obj)
-}{{end}}
+		} {{end}}
 
-{{define "DecodeCodeable"}}
-		if err := {{.Name}}.Decode(d); err != nil {
-			return err
-}{{end}}
+{{define "DecodeRemap"}}{{template "DecodeNative" .}}{{end}}
 
-{{define "DecodeObject"}}
-		if obj, err := d.Object(); err != nil {
+{{define "DecodeCodeable"}} if err := {{.Name}}.Decode(d); err != nil { return err } {{end}}
+
+{{define "DecodePointer"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
 			{{.Name}} = obj.({{.Type.Name}})
 		} else {
 			{{.Name}} = nil
-}{{end}}
+		} {{end}}
 
-{{define "DecodeArray"}}
-		if count, err := d.Int32(); err != nil {
+{{define "DecodeInterface"}} if obj, err := d.Object(); err != nil {
+			return err
+		} else if obj != nil {
+			{{.Name}} = obj.({{.Type.Name}})
+		} else {
+			{{.Name}} = nil
+		} {{end}}
+
+{{define "DecodeArray"}} if count, err := d.Int32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
 			for i := range {{.Name}} {
 				{{decode (print .Name "[i]") .Type.SubType}}
 			}
-}{{end}}
+		} {{end}}
 
 {{define "File"}}
 {{header $.Generated}}
@@ -102,11 +99,12 @@ import (
 )
 
 func init() {
-	{{range .Structs}}{{template "Register" .}}{{end}}
-}
+	{{range .Structs}}{{template "Register" .}}
+	{{end}} }
 
 {{range .Structs}}
 	{{template "Encoder" .}}
+
 	{{template "Decoder" .}}
 {{end}}
 

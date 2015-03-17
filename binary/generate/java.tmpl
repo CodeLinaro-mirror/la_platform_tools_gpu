@@ -24,7 +24,8 @@
 {{define "EncodeNative"}}e.{{lower .Type.Method}}({{.Name}});{{end}}
 {{define "EncodeRemap"}}{{.Name}}.encode(e);{{end}}
 {{define "EncodeCodeable"}}{{.Name}}.encode(e);{{end}}
-{{define "EncodeObject"}}e.object({{.Name}});{{end}}
+{{define "EncodePointer"}}e.object({{.Name}});{{end}}
+{{define "EncodeInterface"}}e.object({{.Name}});{{end}}
 
 {{define "EncodeArray"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
@@ -39,7 +40,8 @@
 {{define "DecodeNative"}}{{.Name}} = d.{{lower .Type.Method}}();{{end}}
 {{define "DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
 {{define "DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "DecodeObject"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
+{{define "DecodePointer"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
+{{define "DecodeInterface"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
 
 {{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {

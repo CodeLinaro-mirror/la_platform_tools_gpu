@@ -138,11 +138,9 @@ func init() {
 	binary.Register(binary.ID{0xe1, 0x27, 0x52, 0x76, 0x82, 0xcc, 0x3e, 0x6c, 0xb8, 0x6a, 0x10, 0xcb, 0x51, 0xc0, 0xcb, 0xf8, 0xa3, 0x32, 0xc7, 0xaa}, &resultResolveSchema{})
 	//struct service.resultResolveTimingInfo { value:TimingInfo }
 	binary.Register(binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}, &resultResolveTimingInfo{})
-
 }
 
 func (o ArrayInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -160,7 +158,6 @@ func (o ArrayInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *ArrayInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -182,7 +179,6 @@ func (o *ArrayInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomGroup) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -193,7 +189,6 @@ func (o AtomGroup) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.SubGroups {
-
 		if err := o.SubGroups[i].Encode(e); err != nil {
 			return err
 		}
@@ -202,7 +197,6 @@ func (o AtomGroup) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomGroup) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -216,7 +210,6 @@ func (o *AtomGroup) Decode(d *binary.Decoder) error {
 	} else {
 		o.SubGroups = make(AtomGroupArray, count)
 		for i := range o.SubGroups {
-
 			if err := o.SubGroups[i].Decode(d); err != nil {
 				return err
 			}
@@ -226,7 +219,6 @@ func (o *AtomGroup) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint16(o.Type); err != nil {
 		return err
 	}
@@ -237,7 +229,6 @@ func (o AtomInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Parameters {
-
 		if err := o.Parameters[i].Encode(e); err != nil {
 			return err
 		}
@@ -258,7 +249,6 @@ func (o AtomInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -274,7 +264,6 @@ func (o *AtomInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Parameters = make(ParameterInfoArray, count)
 		for i := range o.Parameters {
-
 			if err := o.Parameters[i].Decode(d); err != nil {
 				return err
 			}
@@ -304,7 +293,6 @@ func (o *AtomInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomRange) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint64(o.First); err != nil {
 		return err
 	}
@@ -315,7 +303,6 @@ func (o AtomRange) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomRange) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -330,7 +317,6 @@ func (o *AtomRange) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomRangeTimer) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint64(o.FromAtomId); err != nil {
 		return err
 	}
@@ -344,7 +330,6 @@ func (o AtomRangeTimer) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomRangeTimer) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -364,12 +349,10 @@ func (o *AtomRangeTimer) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomStream) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
 	for i := range o.Data {
-
 		if err := e.Uint8(o.Data[i]); err != nil {
 			return err
 		}
@@ -381,13 +364,11 @@ func (o AtomStream) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomStream) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
 		for i := range o.Data {
-
 			if obj, err := d.Uint8(); err != nil {
 				return err
 			} else {
@@ -402,7 +383,6 @@ func (o *AtomStream) Decode(d *binary.Decoder) error {
 }
 
 func (o AtomTimer) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint64(o.AtomId); err != nil {
 		return err
 	}
@@ -413,7 +393,6 @@ func (o AtomTimer) Encode(e *binary.Encoder) error {
 }
 
 func (o *AtomTimer) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -428,12 +407,10 @@ func (o *AtomTimer) Decode(d *binary.Decoder) error {
 }
 
 func (o Binary) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
 	for i := range o.Data {
-
 		if err := e.Uint8(o.Data[i]); err != nil {
 			return err
 		}
@@ -442,13 +419,11 @@ func (o Binary) Encode(e *binary.Encoder) error {
 }
 
 func (o *Binary) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
 		for i := range o.Data {
-
 			if obj, err := d.Uint8(); err != nil {
 				return err
 			} else {
@@ -460,7 +435,6 @@ func (o *Binary) Decode(d *binary.Decoder) error {
 }
 
 func (o Capture) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -474,7 +448,6 @@ func (o Capture) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.ContextIds {
-
 		if err := e.Uint32(o.ContextIds[i]); err != nil {
 			return err
 		}
@@ -483,7 +456,6 @@ func (o Capture) Encode(e *binary.Encoder) error {
 }
 
 func (o *Capture) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -502,7 +474,6 @@ func (o *Capture) Decode(d *binary.Decoder) error {
 	} else {
 		o.ContextIds = make(U32Array, count)
 		for i := range o.ContextIds {
-
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
@@ -514,7 +485,6 @@ func (o *Capture) Decode(d *binary.Decoder) error {
 }
 
 func (o ClassInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -525,7 +495,6 @@ func (o ClassInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Fields {
-
 		if o.Fields[i] != nil {
 			if err := e.Object(o.Fields[i]); err != nil {
 				return err
@@ -538,7 +507,6 @@ func (o ClassInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Extends {
-
 		if o.Extends[i] != nil {
 			if err := e.Object(o.Extends[i]); err != nil {
 				return err
@@ -551,7 +519,6 @@ func (o ClassInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *ClassInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -567,7 +534,6 @@ func (o *ClassInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Fields = make(FieldInfoArray, count)
 		for i := range o.Fields {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -582,7 +548,6 @@ func (o *ClassInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Extends = make(ClassInfoArray, count)
 		for i := range o.Extends {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -596,7 +561,6 @@ func (o *ClassInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o Device) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -622,7 +586,6 @@ func (o Device) Encode(e *binary.Encoder) error {
 }
 
 func (o *Device) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -662,7 +625,6 @@ func (o *Device) Decode(d *binary.Decoder) error {
 }
 
 func (o EnumEntry) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -673,7 +635,6 @@ func (o EnumEntry) Encode(e *binary.Encoder) error {
 }
 
 func (o *EnumEntry) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -688,7 +649,6 @@ func (o *EnumEntry) Decode(d *binary.Decoder) error {
 }
 
 func (o EnumInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -699,7 +659,6 @@ func (o EnumInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Entries {
-
 		if err := o.Entries[i].Encode(e); err != nil {
 			return err
 		}
@@ -708,7 +667,6 @@ func (o EnumInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Extends {
-
 		if o.Extends[i] != nil {
 			if err := e.Object(o.Extends[i]); err != nil {
 				return err
@@ -721,7 +679,6 @@ func (o EnumInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *EnumInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -737,7 +694,6 @@ func (o *EnumInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Entries = make(EnumEntryArray, count)
 		for i := range o.Entries {
-
 			if err := o.Entries[i].Decode(d); err != nil {
 				return err
 			}
@@ -748,7 +704,6 @@ func (o *EnumInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Extends = make(EnumInfoArray, count)
 		for i := range o.Extends {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -762,7 +717,6 @@ func (o *EnumInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o FieldInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -777,7 +731,6 @@ func (o FieldInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *FieldInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -794,7 +747,6 @@ func (o *FieldInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o Hierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.Root.Encode(e); err != nil {
 		return err
 	}
@@ -802,7 +754,6 @@ func (o Hierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *Hierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.Root.Decode(d); err != nil {
 		return err
 	}
@@ -810,7 +761,6 @@ func (o *Hierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o ImageInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(o.Format)); err != nil {
 		return err
 	}
@@ -827,7 +777,6 @@ func (o ImageInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *ImageInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -850,7 +799,6 @@ func (o *ImageInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o MapInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -875,7 +823,6 @@ func (o MapInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *MapInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -904,12 +851,10 @@ func (o *MapInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o MemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
 	for i := range o.Data {
-
 		if err := e.Uint8(o.Data[i]); err != nil {
 			return err
 		}
@@ -918,7 +863,6 @@ func (o MemoryInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Stale {
-
 		if err := o.Stale[i].Encode(e); err != nil {
 			return err
 		}
@@ -927,7 +871,6 @@ func (o MemoryInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Current {
-
 		if err := o.Current[i].Encode(e); err != nil {
 			return err
 		}
@@ -936,7 +879,6 @@ func (o MemoryInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Unknown {
-
 		if err := o.Unknown[i].Encode(e); err != nil {
 			return err
 		}
@@ -945,13 +887,11 @@ func (o MemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *MemoryInfo) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
 		for i := range o.Data {
-
 			if obj, err := d.Uint8(); err != nil {
 				return err
 			} else {
@@ -964,7 +904,6 @@ func (o *MemoryInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Stale = make(MemoryRangeArray, count)
 		for i := range o.Stale {
-
 			if err := o.Stale[i].Decode(d); err != nil {
 				return err
 			}
@@ -975,7 +914,6 @@ func (o *MemoryInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Current = make(MemoryRangeArray, count)
 		for i := range o.Current {
-
 			if err := o.Current[i].Decode(d); err != nil {
 				return err
 			}
@@ -986,7 +924,6 @@ func (o *MemoryInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Unknown = make(MemoryRangeArray, count)
 		for i := range o.Unknown {
-
 			if err := o.Unknown[i].Decode(d); err != nil {
 				return err
 			}
@@ -996,7 +933,6 @@ func (o *MemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o MemoryRange) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint64(o.Base); err != nil {
 		return err
 	}
@@ -1007,7 +943,6 @@ func (o MemoryRange) Encode(e *binary.Encoder) error {
 }
 
 func (o *MemoryRange) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1022,7 +957,6 @@ func (o *MemoryRange) Decode(d *binary.Decoder) error {
 }
 
 func (o ParameterInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1040,7 +974,6 @@ func (o ParameterInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *ParameterInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1062,7 +995,6 @@ func (o *ParameterInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o RenderSettings) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint32(o.MaxWidth); err != nil {
 		return err
 	}
@@ -1076,7 +1008,6 @@ func (o RenderSettings) Encode(e *binary.Encoder) error {
 }
 
 func (o *RenderSettings) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1096,12 +1027,10 @@ func (o *RenderSettings) Decode(d *binary.Decoder) error {
 }
 
 func (o Schema) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.Arrays))); err != nil {
 		return err
 	}
 	for i := range o.Arrays {
-
 		if o.Arrays[i] != nil {
 			if err := e.Object(o.Arrays[i]); err != nil {
 				return err
@@ -1114,7 +1043,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.StaticArrays {
-
 		if o.StaticArrays[i] != nil {
 			if err := e.Object(o.StaticArrays[i]); err != nil {
 				return err
@@ -1127,7 +1055,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Maps {
-
 		if o.Maps[i] != nil {
 			if err := e.Object(o.Maps[i]); err != nil {
 				return err
@@ -1140,7 +1067,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Enums {
-
 		if o.Enums[i] != nil {
 			if err := e.Object(o.Enums[i]); err != nil {
 				return err
@@ -1153,7 +1079,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Structs {
-
 		if o.Structs[i] != nil {
 			if err := e.Object(o.Structs[i]); err != nil {
 				return err
@@ -1166,7 +1091,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Classes {
-
 		if o.Classes[i] != nil {
 			if err := e.Object(o.Classes[i]); err != nil {
 				return err
@@ -1179,7 +1103,6 @@ func (o Schema) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Atoms {
-
 		if err := o.Atoms[i].Encode(e); err != nil {
 			return err
 		}
@@ -1195,13 +1118,11 @@ func (o Schema) Encode(e *binary.Encoder) error {
 }
 
 func (o *Schema) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Arrays = make(ArrayInfoArray, count)
 		for i := range o.Arrays {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1216,7 +1137,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.StaticArrays = make(StaticArrayInfoArray, count)
 		for i := range o.StaticArrays {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1231,7 +1151,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.Maps = make(MapInfoArray, count)
 		for i := range o.Maps {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1246,7 +1165,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.Enums = make(EnumInfoArray, count)
 		for i := range o.Enums {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1261,7 +1179,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.Structs = make(StructInfoArray, count)
 		for i := range o.Structs {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1276,7 +1193,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.Classes = make(ClassInfoArray, count)
 		for i := range o.Classes {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1291,7 +1207,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	} else {
 		o.Atoms = make(AtomInfoArray, count)
 		for i := range o.Atoms {
-
 			if err := o.Atoms[i].Decode(d); err != nil {
 				return err
 			}
@@ -1308,7 +1223,6 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 }
 
 func (o SimpleInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1319,7 +1233,6 @@ func (o SimpleInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *SimpleInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1334,7 +1247,6 @@ func (o *SimpleInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o StaticArrayInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1352,7 +1264,6 @@ func (o StaticArrayInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Dimensions {
-
 		if err := e.Uint32(o.Dimensions[i]); err != nil {
 			return err
 		}
@@ -1361,7 +1272,6 @@ func (o StaticArrayInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *StaticArrayInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1384,7 +1294,6 @@ func (o *StaticArrayInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Dimensions = make(U32Array, count)
 		for i := range o.Dimensions {
-
 			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
@@ -1396,7 +1305,6 @@ func (o *StaticArrayInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o StructInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1407,7 +1315,6 @@ func (o StructInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.Fields {
-
 		if o.Fields[i] != nil {
 			if err := e.Object(o.Fields[i]); err != nil {
 				return err
@@ -1420,7 +1327,6 @@ func (o StructInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *StructInfo) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1436,7 +1342,6 @@ func (o *StructInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.Fields = make(FieldInfoArray, count)
 		for i := range o.Fields {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -1450,12 +1355,10 @@ func (o *StructInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o TimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.PerCommand))); err != nil {
 		return err
 	}
 	for i := range o.PerCommand {
-
 		if err := o.PerCommand[i].Encode(e); err != nil {
 			return err
 		}
@@ -1464,7 +1367,6 @@ func (o TimingInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.PerDrawCall {
-
 		if err := o.PerDrawCall[i].Encode(e); err != nil {
 			return err
 		}
@@ -1473,7 +1375,6 @@ func (o TimingInfo) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.PerFrame {
-
 		if err := o.PerFrame[i].Encode(e); err != nil {
 			return err
 		}
@@ -1482,13 +1383,11 @@ func (o TimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *TimingInfo) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.PerCommand = make(AtomTimerArray, count)
 		for i := range o.PerCommand {
-
 			if err := o.PerCommand[i].Decode(d); err != nil {
 				return err
 			}
@@ -1499,7 +1398,6 @@ func (o *TimingInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.PerDrawCall = make(AtomRangeTimerArray, count)
 		for i := range o.PerDrawCall {
-
 			if err := o.PerDrawCall[i].Decode(d); err != nil {
 				return err
 			}
@@ -1510,7 +1408,6 @@ func (o *TimingInfo) Decode(d *binary.Decoder) error {
 	} else {
 		o.PerFrame = make(AtomRangeTimerArray, count)
 		for i := range o.PerFrame {
-
 			if err := o.PerFrame[i].Decode(d); err != nil {
 				return err
 			}
@@ -1520,27 +1417,22 @@ func (o *TimingInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetCaptures) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetCaptures) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetDevices) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetDevices) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetFramebufferColor) Encode(e *binary.Encoder) error {
-
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1560,7 +1452,6 @@ func (o callGetFramebufferColor) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetFramebufferColor) Decode(d *binary.Decoder) error {
-
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1584,7 +1475,6 @@ func (o *callGetFramebufferColor) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetFramebufferDepth) Encode(e *binary.Encoder) error {
-
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1601,7 +1491,6 @@ func (o callGetFramebufferDepth) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetFramebufferDepth) Decode(d *binary.Decoder) error {
-
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1622,7 +1511,6 @@ func (o *callGetFramebufferDepth) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetHierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1633,7 +1521,6 @@ func (o callGetHierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetHierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1646,7 +1533,6 @@ func (o *callGetHierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetMemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1663,7 +1549,6 @@ func (o callGetMemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetMemoryInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1684,7 +1569,6 @@ func (o *callGetMemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetState) Encode(e *binary.Encoder) error {
-
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1698,7 +1582,6 @@ func (o callGetState) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetState) Decode(d *binary.Decoder) error {
-
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1716,7 +1599,6 @@ func (o *callGetState) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetTimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1733,7 +1615,6 @@ func (o callGetTimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *callGetTimingInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1754,7 +1635,6 @@ func (o *callGetTimingInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o callPrerenderFramebuffers) Encode(e *binary.Encoder) error {
-
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1771,7 +1651,6 @@ func (o callPrerenderFramebuffers) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.atomIds {
-
 		if err := e.Uint64(o.atomIds[i]); err != nil {
 			return err
 		}
@@ -1780,7 +1659,6 @@ func (o callPrerenderFramebuffers) Encode(e *binary.Encoder) error {
 }
 
 func (o *callPrerenderFramebuffers) Decode(d *binary.Decoder) error {
-
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1802,7 +1680,6 @@ func (o *callPrerenderFramebuffers) Decode(d *binary.Decoder) error {
 	} else {
 		o.atomIds = make(U64Array, count)
 		for i := range o.atomIds {
-
 			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
@@ -1814,7 +1691,6 @@ func (o *callPrerenderFramebuffers) Decode(d *binary.Decoder) error {
 }
 
 func (o callReplaceAtom) Encode(e *binary.Encoder) error {
-
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1831,7 +1707,6 @@ func (o callReplaceAtom) Encode(e *binary.Encoder) error {
 }
 
 func (o *callReplaceAtom) Decode(d *binary.Decoder) error {
-
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1852,7 +1727,6 @@ func (o *callReplaceAtom) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveAtomStream) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1860,7 +1734,6 @@ func (o callResolveAtomStream) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveAtomStream) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1868,7 +1741,6 @@ func (o *callResolveAtomStream) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveBinary) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1876,7 +1748,6 @@ func (o callResolveBinary) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveBinary) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1884,7 +1755,6 @@ func (o *callResolveBinary) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveCapture) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1892,7 +1762,6 @@ func (o callResolveCapture) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveCapture) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1900,7 +1769,6 @@ func (o *callResolveCapture) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveDevice) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1908,7 +1776,6 @@ func (o callResolveDevice) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveDevice) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1916,7 +1783,6 @@ func (o *callResolveDevice) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveHierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1924,7 +1790,6 @@ func (o callResolveHierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveHierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1932,7 +1797,6 @@ func (o *callResolveHierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveImageInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1940,7 +1804,6 @@ func (o callResolveImageInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveImageInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1948,7 +1811,6 @@ func (o *callResolveImageInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveMemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1956,7 +1818,6 @@ func (o callResolveMemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveMemoryInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1964,7 +1825,6 @@ func (o *callResolveMemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveSchema) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1972,7 +1832,6 @@ func (o callResolveSchema) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveSchema) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1980,7 +1839,6 @@ func (o *callResolveSchema) Decode(d *binary.Decoder) error {
 }
 
 func (o callResolveTimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
@@ -1988,7 +1846,6 @@ func (o callResolveTimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveTimingInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
@@ -1996,12 +1853,10 @@ func (o *callResolveTimingInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetCaptures) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
 	for i := range o.value {
-
 		if err := o.value[i].Encode(e); err != nil {
 			return err
 		}
@@ -2010,13 +1865,11 @@ func (o resultGetCaptures) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetCaptures) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.value = make(CaptureIdArray, count)
 		for i := range o.value {
-
 			if err := o.value[i].Decode(d); err != nil {
 				return err
 			}
@@ -2026,12 +1879,10 @@ func (o *resultGetCaptures) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetDevices) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
 	for i := range o.value {
-
 		if err := o.value[i].Encode(e); err != nil {
 			return err
 		}
@@ -2040,13 +1891,11 @@ func (o resultGetDevices) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetDevices) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.value = make(DeviceIdArray, count)
 		for i := range o.value {
-
 			if err := o.value[i].Decode(d); err != nil {
 				return err
 			}
@@ -2056,7 +1905,6 @@ func (o *resultGetDevices) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetFramebufferColor) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2064,7 +1912,6 @@ func (o resultGetFramebufferColor) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetFramebufferColor) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2072,7 +1919,6 @@ func (o *resultGetFramebufferColor) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetFramebufferDepth) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2080,7 +1926,6 @@ func (o resultGetFramebufferDepth) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetFramebufferDepth) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2088,7 +1933,6 @@ func (o *resultGetFramebufferDepth) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetHierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2096,7 +1940,6 @@ func (o resultGetHierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetHierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2104,7 +1947,6 @@ func (o *resultGetHierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetMemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2112,7 +1954,6 @@ func (o resultGetMemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetMemoryInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2120,7 +1961,6 @@ func (o *resultGetMemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetState) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2128,7 +1968,6 @@ func (o resultGetState) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetState) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2136,7 +1975,6 @@ func (o *resultGetState) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetTimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2144,7 +1982,6 @@ func (o resultGetTimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetTimingInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2152,7 +1989,6 @@ func (o *resultGetTimingInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o resultPrerenderFramebuffers) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2160,7 +1996,6 @@ func (o resultPrerenderFramebuffers) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultPrerenderFramebuffers) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2168,7 +2003,6 @@ func (o *resultPrerenderFramebuffers) Decode(d *binary.Decoder) error {
 }
 
 func (o resultReplaceAtom) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2176,7 +2010,6 @@ func (o resultReplaceAtom) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultReplaceAtom) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2184,7 +2017,6 @@ func (o *resultReplaceAtom) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveAtomStream) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2192,7 +2024,6 @@ func (o resultResolveAtomStream) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveAtomStream) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2200,7 +2031,6 @@ func (o *resultResolveAtomStream) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveBinary) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2208,7 +2038,6 @@ func (o resultResolveBinary) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveBinary) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2216,7 +2045,6 @@ func (o *resultResolveBinary) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveCapture) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2224,7 +2052,6 @@ func (o resultResolveCapture) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveCapture) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2232,7 +2059,6 @@ func (o *resultResolveCapture) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveDevice) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2240,7 +2066,6 @@ func (o resultResolveDevice) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveDevice) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2248,7 +2073,6 @@ func (o *resultResolveDevice) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveHierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2256,7 +2080,6 @@ func (o resultResolveHierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveHierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2264,7 +2087,6 @@ func (o *resultResolveHierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveImageInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2272,7 +2094,6 @@ func (o resultResolveImageInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveImageInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2280,7 +2101,6 @@ func (o *resultResolveImageInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveMemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2288,7 +2108,6 @@ func (o resultResolveMemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveMemoryInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2296,7 +2115,6 @@ func (o *resultResolveMemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveSchema) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2304,7 +2122,6 @@ func (o resultResolveSchema) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveSchema) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -2312,7 +2129,6 @@ func (o *resultResolveSchema) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveTimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -2320,7 +2136,6 @@ func (o resultResolveTimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveTimingInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
