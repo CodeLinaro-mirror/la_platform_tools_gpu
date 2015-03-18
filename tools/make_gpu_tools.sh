@@ -60,7 +60,10 @@ go generate -x $GPU_RELATIVE_SOURCE_PATH/service
 go build -i -o $GPU_BUILD_ROOT/bin/apic $GPU_RELATIVE_SOURCE_PATH/api/apic
 go generate -x $GPU_RELATIVE_SOURCE_PATH/gfxapi/test
 go generate -x $GPU_RELATIVE_SOURCE_PATH/gfxapi/gles
+go generate -x $GPU_RELATIVE_SOURCE_PATH/atom
 go generate -x $GPU_RELATIVE_SOURCE_PATH/builder
+go generate -x $GPU_RELATIVE_SOURCE_PATH/database
+go generate -x $GPU_RELATIVE_SOURCE_PATH/memory
 go build -i -o $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
 src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle
