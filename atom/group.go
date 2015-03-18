@@ -60,6 +60,7 @@ import (
 //    └─── Item[6] ─── Atom[9]
 //
 type Group struct {
+	binary.Generate
 	Name      string    // Name of this group.
 	Range     Range     // The range of atoms this group (and sub-groups) represents.
 	SubGroups GroupList // All sub-groups of this group.
@@ -141,7 +142,7 @@ func (g *Group) Insert(atomID ID, count int) {
 	if e > atomID {
 		e += ID(count)
 	}
-	g.Range = Range{s, e}
+	g.Range = Range{Start: s, End: e}
 	i := interval.Search(&g.SubGroups, func(test interval.U64Span) bool {
 		return uint64(atomID) < test.End
 	})
@@ -151,34 +152,4 @@ func (g *Group) Insert(atomID ID, count int) {
 		g.SubGroups[i] = sg
 		i++
 	}
-}
-
-// Encode encodes the Group using the specified encoder.
-func (g *Group) Encode(e *binary.Encoder) error {
-	if err := e.String(g.Name); err != nil {
-		return err
-	}
-	if err := g.Range.Encode(e); err != nil {
-		return err
-	}
-	if err := g.SubGroups.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-
-// Decode decodes the Group using the specified decoder.
-func (g *Group) Decode(d *binary.Decoder) error {
-	if name, err := d.String(); err == nil {
-		g.Name = name
-	} else {
-		return err
-	}
-	if err := g.Range.Decode(d); err != nil {
-		return err
-	}
-	if err := g.SubGroups.Decode(d); err != nil {
-		return err
-	}
-	return nil
 }

@@ -73,7 +73,7 @@ func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID
 	buf := &bytes.Buffer{}
 	e := binary.NewEncoder(buf)
 	capture.Encode(e)
-	id.Encode(e)
+	e.Uint64(uint64(id))
 	a.Encode(e)
 	return binary.NewID(buf.Bytes())
 }

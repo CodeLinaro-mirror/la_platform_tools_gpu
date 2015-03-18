@@ -30,9 +30,10 @@ func init() {
 // Observation is an Atom describing a region of application space memory that
 // was observed at capture time.
 type Observation struct {
+	binary.Generate
+	Context    atom.ContextID // The context on which the observation was made.
 	Range      Range          // The memory range that was observed.
 	ResourceID binary.ID      // The resource identifier holding the memory that was observed.
-	Context    atom.ContextID // The context on which the observation was made.
 }
 
 func (a *Observation) String() string {
@@ -45,29 +46,3 @@ func (a *Observation) String() string {
 func (a *Observation) TypeID() atom.TypeID       { return TypeIDObservation }
 func (a *Observation) ContextID() atom.ContextID { return a.Context }
 func (a *Observation) Flags() atom.Flags         { return 0 }
-
-func (a *Observation) Encode(e *binary.Encoder) error {
-	if err := a.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := a.Range.Encode(e); err != nil {
-		return err
-	}
-	if err := a.ResourceID.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (a *Observation) Decode(d *binary.Decoder) error {
-	if err := a.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := a.Range.Decode(d); err != nil {
-		return err
-	}
-	if err := a.ResourceID.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}

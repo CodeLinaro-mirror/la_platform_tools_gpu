@@ -30,14 +30,16 @@ func (a *testAtomA) ContextID() ContextID { return a.Context }
 func (a *testAtomA) Info() string         { return "" }
 func (a *testAtomA) Flags() Flags         { return 0 }
 func (a *testAtomA) Encode(e *binary.Encoder) error {
-	if err := a.Context.Encode(e); err != nil {
+	if err := e.Uint32(uint32(a.Context)); err != nil {
 		return err
 	}
 	return e.Int32(a.Int32)
 }
 func (a *testAtomA) Decode(d *binary.Decoder) (err error) {
-	if err := a.Context.Decode(d); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
+	} else {
+		a.Context = ContextID(obj)
 	}
 	a.Int32, err = d.Int32()
 	return
@@ -53,14 +55,16 @@ func (a *testAtomB) ContextID() ContextID { return a.Context }
 func (a *testAtomB) Info() string         { return "" }
 func (a *testAtomB) Flags() Flags         { return 0 }
 func (a *testAtomB) Encode(e *binary.Encoder) error {
-	if err := a.Context.Encode(e); err != nil {
+	if err := e.Uint32(uint32(a.Context)); err != nil {
 		return err
 	}
 	return e.Bool(a.Bool)
 }
 func (a *testAtomB) Decode(d *binary.Decoder) (err error) {
-	if err := a.Context.Decode(d); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
+	} else {
+		a.Context = ContextID(obj)
 	}
 	a.Bool, err = d.Bool()
 	return
@@ -76,14 +80,16 @@ func (a *testAtomC) ContextID() ContextID { return a.Context }
 func (a *testAtomC) Info() string         { return "" }
 func (a *testAtomC) Flags() Flags         { return 0 }
 func (a *testAtomC) Encode(e *binary.Encoder) error {
-	if err := a.Context.Encode(e); err != nil {
+	if err := e.Uint32(uint32(a.Context)); err != nil {
 		return err
 	}
 	return e.String(a.String)
 }
 func (a *testAtomC) Decode(d *binary.Decoder) (err error) {
-	if err := a.Context.Decode(d); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
+	} else {
+		a.Context = ContextID(obj)
 	}
 	a.String, err = d.String()
 	return

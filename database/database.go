@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate codergen -go
+
 // Package database implements the persistence layer for the gpu debugger tools.
 package database
 

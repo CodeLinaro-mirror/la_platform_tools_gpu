@@ -65,7 +65,7 @@ func (l *List) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for _, atom := range *l {
-		if err := atom.TypeID().Encode(e); err != nil {
+		if err := e.Uint16(uint16(atom.TypeID())); err != nil {
 			return err
 		}
 		if err := atom.Encode(e); err != nil {
@@ -84,8 +84,8 @@ func (l *List) Decode(d *binary.Decoder) error {
 	}
 	*l = make(List, count)
 	for i := range *l {
-		var typeID TypeID
-		if err := typeID.Decode(d); err != nil {
+		var typeID uint16
+		if typeID, err = d.Uint16(); err != nil {
 			return err
 		}
 		atom, err := New(TypeID(typeID))

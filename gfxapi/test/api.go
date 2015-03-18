@@ -16,23 +16,6 @@ import (
 
 type remapped uint32
 
-func (c *remapped) Encode(e *binary.Encoder) error {
-	x := uint32(*c)
-	if err := e.Uint32(x); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *remapped) Decode(d *binary.Decoder) error {
-	var x uint32
-	if v, err := d.Uint32(); err == nil {
-		x = v
-	} else {
-		return err
-	}
-	*c = remapped(x)
-	return nil
-}
 func (c *remapped) Less(rhs remapped) bool  { return uint32(*c) < uint32(rhs) }
 func (c *remapped) Equal(rhs remapped) bool { return uint32(*c) == uint32(rhs) }
 
@@ -40,153 +23,38 @@ type BoolArray []bool
 
 func (s BoolArray) Len() int      { return len(s) }
 func (s BoolArray) Range() []bool { return s }
-func (s BoolArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Bool(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *BoolArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(BoolArray, c)
-	for i := range *s {
-		if v, err := d.Bool(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type F32Array []float32
 
 func (s F32Array) Len() int         { return len(s) }
 func (s F32Array) Range() []float32 { return s }
-func (s F32Array) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Float32(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *F32Array) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(F32Array, c)
-	for i := range *s {
-		if v, err := d.Float32(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type RemappedArray []remapped
 
 func (s RemappedArray) Len() int          { return len(s) }
 func (s RemappedArray) Range() []remapped { return s }
-func (s RemappedArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := v.Encode(e); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *RemappedArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(RemappedArray, c)
-	for i := range *s {
-		if err := (*s)[i].Decode(d); err != nil {
-			return err
-		}
-	}
-	return nil
-}
 
 type S8Array []int8
 
 func (s S8Array) Len() int      { return len(s) }
 func (s S8Array) Range() []int8 { return s }
-func (s S8Array) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.Int8(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *S8Array) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(S8Array, c)
-	for i := range *s {
-		if v, err := d.Int8(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 type StringArray []string
 
 func (s StringArray) Len() int        { return len(s) }
 func (s StringArray) Range() []string { return s }
-func (s StringArray) Encode(e *binary.Encoder) error {
-	e.Uint32(uint32(len(s)))
-	for _, v := range s {
-		if err := e.String(v); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func (s *StringArray) Decode(d *binary.Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
-		return err
-	}
-	*s = make(StringArray, c)
-	for i := range *s {
-		if v, err := d.String(); err == nil {
-			(*s)[i] = v
-		} else {
-			return err
-		}
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid_In struct {
+	binary.Generate
 }
 type CmdVoid_Out struct {
+	binary.Generate
 }
 type CmdVoid struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoid_In
 	Out     CmdVoid_Out
@@ -207,28 +75,19 @@ func (c *CmdVoid) TypeID() atom.TypeID {
 func (c *CmdVoid) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoid) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoid) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU8_In struct {
+	binary.Generate
 	A uint8
 }
 type CmdVoidU8_Out struct {
+	binary.Generate
 }
 type CmdVoidU8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidU8_In
 	Out     CmdVoidU8_Out
@@ -251,36 +110,19 @@ func (c *CmdVoidU8) TypeID() atom.TypeID {
 func (c *CmdVoidU8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidU8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint8(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidU8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint8(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS8_In struct {
+	binary.Generate
 	A int8
 }
 type CmdVoidS8_Out struct {
+	binary.Generate
 }
 type CmdVoidS8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidS8_In
 	Out     CmdVoidS8_Out
@@ -303,36 +145,19 @@ func (c *CmdVoidS8) TypeID() atom.TypeID {
 func (c *CmdVoidS8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidS8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int8(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidS8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int8(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU16_In struct {
+	binary.Generate
 	A uint16
 }
 type CmdVoidU16_Out struct {
+	binary.Generate
 }
 type CmdVoidU16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidU16_In
 	Out     CmdVoidU16_Out
@@ -355,36 +180,19 @@ func (c *CmdVoidU16) TypeID() atom.TypeID {
 func (c *CmdVoidU16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidU16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint16(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidU16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint16(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS16_In struct {
+	binary.Generate
 	A int16
 }
 type CmdVoidS16_Out struct {
+	binary.Generate
 }
 type CmdVoidS16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidS16_In
 	Out     CmdVoidS16_Out
@@ -407,36 +215,19 @@ func (c *CmdVoidS16) TypeID() atom.TypeID {
 func (c *CmdVoidS16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidS16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int16(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidS16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int16(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF32_In struct {
+	binary.Generate
 	A float32
 }
 type CmdVoidF32_Out struct {
+	binary.Generate
 }
 type CmdVoidF32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidF32_In
 	Out     CmdVoidF32_Out
@@ -459,36 +250,19 @@ func (c *CmdVoidF32) TypeID() atom.TypeID {
 func (c *CmdVoidF32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidF32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidF32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU32_In struct {
+	binary.Generate
 	A uint32
 }
 type CmdVoidU32_Out struct {
+	binary.Generate
 }
 type CmdVoidU32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidU32_In
 	Out     CmdVoidU32_Out
@@ -511,36 +285,19 @@ func (c *CmdVoidU32) TypeID() atom.TypeID {
 func (c *CmdVoidU32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidU32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidU32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS32_In struct {
+	binary.Generate
 	A int32
 }
 type CmdVoidS32_Out struct {
+	binary.Generate
 }
 type CmdVoidS32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidS32_In
 	Out     CmdVoidS32_Out
@@ -563,36 +320,19 @@ func (c *CmdVoidS32) TypeID() atom.TypeID {
 func (c *CmdVoidS32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidS32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidS32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidF64_In struct {
+	binary.Generate
 	A float64
 }
 type CmdVoidF64_Out struct {
+	binary.Generate
 }
 type CmdVoidF64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidF64_In
 	Out     CmdVoidF64_Out
@@ -615,36 +355,19 @@ func (c *CmdVoidF64) TypeID() atom.TypeID {
 func (c *CmdVoidF64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidF64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float64(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidF64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float64(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidU64_In struct {
+	binary.Generate
 	A uint64
 }
 type CmdVoidU64_Out struct {
+	binary.Generate
 }
 type CmdVoidU64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidU64_In
 	Out     CmdVoidU64_Out
@@ -667,36 +390,19 @@ func (c *CmdVoidU64) TypeID() atom.TypeID {
 func (c *CmdVoidU64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidU64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidU64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidS64_In struct {
+	binary.Generate
 	A int64
 }
 type CmdVoidS64_Out struct {
+	binary.Generate
 }
 type CmdVoidS64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidS64_In
 	Out     CmdVoidS64_Out
@@ -719,36 +425,19 @@ func (c *CmdVoidS64) TypeID() atom.TypeID {
 func (c *CmdVoidS64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidS64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int64(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidS64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int64(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidBool_In struct {
+	binary.Generate
 	A bool
 }
 type CmdVoidBool_Out struct {
+	binary.Generate
 }
 type CmdVoidBool struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidBool_In
 	Out     CmdVoidBool_Out
@@ -771,36 +460,19 @@ func (c *CmdVoidBool) TypeID() atom.TypeID {
 func (c *CmdVoidBool) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidBool) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidBool) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidString_In struct {
+	binary.Generate
 	A string
 }
 type CmdVoidString_Out struct {
+	binary.Generate
 }
 type CmdVoidString struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidString_In
 	Out     CmdVoidString_Out
@@ -823,38 +495,21 @@ func (c *CmdVoidString) TypeID() atom.TypeID {
 func (c *CmdVoidString) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidString) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.In.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidString) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Strings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Strings_In struct {
+	binary.Generate
 	A string
 	B string
 	C string
 }
 type CmdVoid3Strings_Out struct {
+	binary.Generate
 }
 type CmdVoid3Strings struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoid3Strings_In
 	Out     CmdVoid3Strings_Out
@@ -881,54 +536,21 @@ func (c *CmdVoid3Strings) TypeID() atom.TypeID {
 func (c *CmdVoid3Strings) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoid3Strings) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.In.A); err != nil {
-		return err
-	}
-	if err := e.String(c.In.B); err != nil {
-		return err
-	}
-	if err := e.String(c.In.C); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoid3Strings) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.A = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.B = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.In.C = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Arrays
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Arrays_In struct {
+	binary.Generate
 	A S8Array
 	B StringArray
 	C BoolArray
 }
 type CmdVoid3Arrays_Out struct {
+	binary.Generate
 }
 type CmdVoid3Arrays struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoid3Arrays_In
 	Out     CmdVoid3Arrays_Out
@@ -955,46 +577,19 @@ func (c *CmdVoid3Arrays) TypeID() atom.TypeID {
 func (c *CmdVoid3Arrays) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoid3Arrays) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.A.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.B.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.C.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoid3Arrays) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.A.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.B.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.C.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidArrayOfStrings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidArrayOfStrings_In struct {
+	binary.Generate
 	A StringArray
 }
 type CmdVoidArrayOfStrings_Out struct {
+	binary.Generate
 }
 type CmdVoidArrayOfStrings struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidArrayOfStrings_In
 	Out     CmdVoidArrayOfStrings_Out
@@ -1017,34 +612,19 @@ func (c *CmdVoidArrayOfStrings) TypeID() atom.TypeID {
 func (c *CmdVoidArrayOfStrings) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidArrayOfStrings) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.A.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidArrayOfStrings) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.A.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU8_In struct {
+	binary.Generate
 }
 type CmdU8_Out struct {
+	binary.Generate
 	Result uint8
 }
 type CmdU8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdU8_In
 	Out     CmdU8_Out
@@ -1066,36 +646,19 @@ func (c *CmdU8) TypeID() atom.TypeID {
 func (c *CmdU8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdU8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint8(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdU8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint8(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS8_In struct {
+	binary.Generate
 }
 type CmdS8_Out struct {
+	binary.Generate
 	Result int8
 }
 type CmdS8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdS8_In
 	Out     CmdS8_Out
@@ -1117,36 +680,19 @@ func (c *CmdS8) TypeID() atom.TypeID {
 func (c *CmdS8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdS8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int8(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdS8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int8(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU16_In struct {
+	binary.Generate
 }
 type CmdU16_Out struct {
+	binary.Generate
 	Result uint16
 }
 type CmdU16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdU16_In
 	Out     CmdU16_Out
@@ -1168,36 +714,19 @@ func (c *CmdU16) TypeID() atom.TypeID {
 func (c *CmdU16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdU16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint16(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdU16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint16(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS16_In struct {
+	binary.Generate
 }
 type CmdS16_Out struct {
+	binary.Generate
 	Result int16
 }
 type CmdS16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdS16_In
 	Out     CmdS16_Out
@@ -1219,36 +748,19 @@ func (c *CmdS16) TypeID() atom.TypeID {
 func (c *CmdS16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdS16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int16(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdS16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int16(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF32_In struct {
+	binary.Generate
 }
 type CmdF32_Out struct {
+	binary.Generate
 	Result float32
 }
 type CmdF32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdF32_In
 	Out     CmdF32_Out
@@ -1270,36 +782,19 @@ func (c *CmdF32) TypeID() atom.TypeID {
 func (c *CmdF32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdF32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdF32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU32_In struct {
+	binary.Generate
 }
 type CmdU32_Out struct {
+	binary.Generate
 	Result uint32
 }
 type CmdU32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdU32_In
 	Out     CmdU32_Out
@@ -1321,36 +816,19 @@ func (c *CmdU32) TypeID() atom.TypeID {
 func (c *CmdU32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdU32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdU32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS32_In struct {
+	binary.Generate
 }
 type CmdS32_Out struct {
+	binary.Generate
 	Result int32
 }
 type CmdS32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdS32_In
 	Out     CmdS32_Out
@@ -1372,36 +850,19 @@ func (c *CmdS32) TypeID() atom.TypeID {
 func (c *CmdS32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdS32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdS32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdF64_In struct {
+	binary.Generate
 }
 type CmdF64_Out struct {
+	binary.Generate
 	Result float64
 }
 type CmdF64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdF64_In
 	Out     CmdF64_Out
@@ -1423,36 +884,19 @@ func (c *CmdF64) TypeID() atom.TypeID {
 func (c *CmdF64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdF64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float64(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdF64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float64(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdU64_In struct {
+	binary.Generate
 }
 type CmdU64_Out struct {
+	binary.Generate
 	Result uint64
 }
 type CmdU64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdU64_In
 	Out     CmdU64_Out
@@ -1474,36 +918,19 @@ func (c *CmdU64) TypeID() atom.TypeID {
 func (c *CmdU64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdU64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdU64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdS64_In struct {
+	binary.Generate
 }
 type CmdS64_Out struct {
+	binary.Generate
 	Result int64
 }
 type CmdS64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdS64_In
 	Out     CmdS64_Out
@@ -1525,36 +952,19 @@ func (c *CmdS64) TypeID() atom.TypeID {
 func (c *CmdS64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdS64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int64(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdS64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int64(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdBool_In struct {
+	binary.Generate
 }
 type CmdBool_Out struct {
+	binary.Generate
 	Result bool
 }
 type CmdBool struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdBool_In
 	Out     CmdBool_Out
@@ -1576,36 +986,19 @@ func (c *CmdBool) TypeID() atom.TypeID {
 func (c *CmdBool) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdBool) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdBool) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdString_In struct {
+	binary.Generate
 }
 type CmdString_Out struct {
+	binary.Generate
 	Result string
 }
 type CmdString struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdString_In
 	Out     CmdString_Out
@@ -1627,36 +1020,19 @@ func (c *CmdString) TypeID() atom.TypeID {
 func (c *CmdString) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdString) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.Result); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdString) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.Result = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdArrayOfFloat
 ////////////////////////////////////////////////////////////////////////////////
 type CmdArrayOfFloat_In struct {
+	binary.Generate
 }
 type CmdArrayOfFloat_Out struct {
+	binary.Generate
 	Result F32Array
 }
 type CmdArrayOfFloat struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdArrayOfFloat_In
 	Out     CmdArrayOfFloat_Out
@@ -1678,34 +1054,19 @@ func (c *CmdArrayOfFloat) TypeID() atom.TypeID {
 func (c *CmdArrayOfFloat) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdArrayOfFloat) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdArrayOfFloat) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.Result.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdPointer
 ////////////////////////////////////////////////////////////////////////////////
 type CmdPointer_In struct {
+	binary.Generate
 }
 type CmdPointer_Out struct {
+	binary.Generate
 	Result memory.Pointer
 }
 type CmdPointer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdPointer_In
 	Out     CmdPointer_Out
@@ -1727,36 +1088,19 @@ func (c *CmdPointer) TypeID() atom.TypeID {
 func (c *CmdPointer) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdPointer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Out.Result)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdPointer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.Result = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutU8_In struct {
+	binary.Generate
 }
 type CmdVoidOutU8_Out struct {
+	binary.Generate
 	A uint8
 }
 type CmdVoidOutU8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutU8_In
 	Out     CmdVoidOutU8_Out
@@ -1779,36 +1123,19 @@ func (c *CmdVoidOutU8) TypeID() atom.TypeID {
 func (c *CmdVoidOutU8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutU8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint8(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutU8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint8(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS8
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutS8_In struct {
+	binary.Generate
 }
 type CmdVoidOutS8_Out struct {
+	binary.Generate
 	A int8
 }
 type CmdVoidOutS8 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutS8_In
 	Out     CmdVoidOutS8_Out
@@ -1831,36 +1158,19 @@ func (c *CmdVoidOutS8) TypeID() atom.TypeID {
 func (c *CmdVoidOutS8) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutS8) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int8(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutS8) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int8(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutU16_In struct {
+	binary.Generate
 }
 type CmdVoidOutU16_Out struct {
+	binary.Generate
 	A uint16
 }
 type CmdVoidOutU16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutU16_In
 	Out     CmdVoidOutU16_Out
@@ -1883,36 +1193,19 @@ func (c *CmdVoidOutU16) TypeID() atom.TypeID {
 func (c *CmdVoidOutU16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutU16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint16(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutU16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint16(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS16
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutS16_In struct {
+	binary.Generate
 }
 type CmdVoidOutS16_Out struct {
+	binary.Generate
 	A int16
 }
 type CmdVoidOutS16 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutS16_In
 	Out     CmdVoidOutS16_Out
@@ -1935,36 +1228,19 @@ func (c *CmdVoidOutS16) TypeID() atom.TypeID {
 func (c *CmdVoidOutS16) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutS16) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int16(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutS16) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int16(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutF32_In struct {
+	binary.Generate
 }
 type CmdVoidOutF32_Out struct {
+	binary.Generate
 	A float32
 }
 type CmdVoidOutF32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutF32_In
 	Out     CmdVoidOutF32_Out
@@ -1987,36 +1263,19 @@ func (c *CmdVoidOutF32) TypeID() atom.TypeID {
 func (c *CmdVoidOutF32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutF32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float32(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutF32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float32(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutU32_In struct {
+	binary.Generate
 }
 type CmdVoidOutU32_Out struct {
+	binary.Generate
 	A uint32
 }
 type CmdVoidOutU32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutU32_In
 	Out     CmdVoidOutU32_Out
@@ -2039,36 +1298,19 @@ func (c *CmdVoidOutU32) TypeID() atom.TypeID {
 func (c *CmdVoidOutU32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutU32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint32(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutU32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint32(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS32
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutS32_In struct {
+	binary.Generate
 }
 type CmdVoidOutS32_Out struct {
+	binary.Generate
 	A int32
 }
 type CmdVoidOutS32 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutS32_In
 	Out     CmdVoidOutS32_Out
@@ -2091,36 +1333,19 @@ func (c *CmdVoidOutS32) TypeID() atom.TypeID {
 func (c *CmdVoidOutS32) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutS32) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int32(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutS32) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutF64_In struct {
+	binary.Generate
 }
 type CmdVoidOutF64_Out struct {
+	binary.Generate
 	A float64
 }
 type CmdVoidOutF64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutF64_In
 	Out     CmdVoidOutF64_Out
@@ -2143,36 +1368,19 @@ func (c *CmdVoidOutF64) TypeID() atom.TypeID {
 func (c *CmdVoidOutF64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutF64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Float64(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutF64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Float64(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutU64_In struct {
+	binary.Generate
 }
 type CmdVoidOutU64_Out struct {
+	binary.Generate
 	A uint64
 }
 type CmdVoidOutU64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutU64_In
 	Out     CmdVoidOutU64_Out
@@ -2195,36 +1403,19 @@ func (c *CmdVoidOutU64) TypeID() atom.TypeID {
 func (c *CmdVoidOutU64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutU64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutU64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS64
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutS64_In struct {
+	binary.Generate
 }
 type CmdVoidOutS64_Out struct {
+	binary.Generate
 	A int64
 }
 type CmdVoidOutS64 struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutS64_In
 	Out     CmdVoidOutS64_Out
@@ -2247,36 +1438,19 @@ func (c *CmdVoidOutS64) TypeID() atom.TypeID {
 func (c *CmdVoidOutS64) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutS64) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Int64(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutS64) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Int64(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutBool
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutBool_In struct {
+	binary.Generate
 }
 type CmdVoidOutBool_Out struct {
+	binary.Generate
 	A bool
 }
 type CmdVoidOutBool struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutBool_In
 	Out     CmdVoidOutBool_Out
@@ -2299,36 +1473,19 @@ func (c *CmdVoidOutBool) TypeID() atom.TypeID {
 func (c *CmdVoidOutBool) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutBool) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Bool(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutBool) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Bool(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutString
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutString_In struct {
+	binary.Generate
 }
 type CmdVoidOutString_Out struct {
+	binary.Generate
 	A string
 }
 type CmdVoidOutString struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutString_In
 	Out     CmdVoidOutString_Out
@@ -2351,36 +1508,19 @@ func (c *CmdVoidOutString) TypeID() atom.TypeID {
 func (c *CmdVoidOutString) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutString) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.A); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutString) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutFixedSizeBuffer
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutFixedSizeBuffer_In struct {
+	binary.Generate
 }
 type CmdVoidOutFixedSizeBuffer_Out struct {
+	binary.Generate
 	A memory.Pointer
 }
 type CmdVoidOutFixedSizeBuffer struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutFixedSizeBuffer_In
 	Out     CmdVoidOutFixedSizeBuffer_Out
@@ -2403,38 +1543,21 @@ func (c *CmdVoidOutFixedSizeBuffer) TypeID() atom.TypeID {
 func (c *CmdVoidOutFixedSizeBuffer) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutFixedSizeBuffer) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(c.Out.A)); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutFixedSizeBuffer) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.Uint64(); err == nil {
-		c.Out.A = memory.Pointer(v)
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Strings
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOut3Strings_In struct {
+	binary.Generate
 }
 type CmdVoidOut3Strings_Out struct {
+	binary.Generate
 	A string
 	B string
 	C string
 }
 type CmdVoidOut3Strings struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOut3Strings_In
 	Out     CmdVoidOut3Strings_Out
@@ -2461,54 +1584,21 @@ func (c *CmdVoidOut3Strings) TypeID() atom.TypeID {
 func (c *CmdVoidOut3Strings) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOut3Strings) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.A); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.B); err != nil {
-		return err
-	}
-	if err := e.String(c.Out.C); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOut3Strings) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.A = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.B = v
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		c.Out.C = v
-	} else {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Remapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoid3Remapped_In struct {
+	binary.Generate
 	A remapped
 	B remapped
 	C remapped
 }
 type CmdVoid3Remapped_Out struct {
+	binary.Generate
 }
 type CmdVoid3Remapped struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoid3Remapped_In
 	Out     CmdVoid3Remapped_Out
@@ -2535,48 +1625,21 @@ func (c *CmdVoid3Remapped) TypeID() atom.TypeID {
 func (c *CmdVoid3Remapped) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoid3Remapped) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.A.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.B.Encode(e); err != nil {
-		return err
-	}
-	if err := c.In.C.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoid3Remapped) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.A.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.B.Decode(d); err != nil {
-		return err
-	}
-	if err := c.In.C.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Remapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOut3Remapped_In struct {
+	binary.Generate
 }
 type CmdVoidOut3Remapped_Out struct {
+	binary.Generate
 	A remapped
 	B remapped
 	C remapped
 }
 type CmdVoidOut3Remapped struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOut3Remapped_In
 	Out     CmdVoidOut3Remapped_Out
@@ -2603,46 +1666,19 @@ func (c *CmdVoidOut3Remapped) TypeID() atom.TypeID {
 func (c *CmdVoidOut3Remapped) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOut3Remapped) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.A.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.B.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.C.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOut3Remapped) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.A.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.B.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.C.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutArrayOfRemapped
 ////////////////////////////////////////////////////////////////////////////////
 type CmdVoidOutArrayOfRemapped_In struct {
+	binary.Generate
 }
 type CmdVoidOutArrayOfRemapped_Out struct {
+	binary.Generate
 	A RemappedArray
 }
 type CmdVoidOutArrayOfRemapped struct {
+	binary.Generate
 	Context atom.ContextID
 	In      CmdVoidOutArrayOfRemapped_In
 	Out     CmdVoidOutArrayOfRemapped_Out
@@ -2665,38 +1701,15 @@ func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID {
 func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags {
 	return 0
 }
-func (c *CmdVoidOutArrayOfRemapped) Encode(e *binary.Encoder) error {
-	if err := c.Context.Encode(e); err != nil {
-		return err
-	}
-	if err := c.Out.A.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-func (c *CmdVoidOutArrayOfRemapped) Decode(d *binary.Decoder) error {
-	if err := c.Context.Decode(d); err != nil {
-		return err
-	}
-	if err := c.Out.A.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
 ////////////////////////////////////////////////////////////////////////////////
 type Globals struct {
+	binary.Generate
 }
 
 func (g *Globals) Init() {
-}
-func (g *Globals) Encode(e *binary.Encoder) error {
-	return nil
-}
-func (g *Globals) Decode(d *binary.Decoder) error {
-	return nil
 }
 func NewCmdVoid() *CmdVoid {
 	return &CmdVoid{
@@ -2708,7 +1721,7 @@ func NewCmdVoidU8(
 	pA uint8,
 ) *CmdVoidU8 {
 	return &CmdVoidU8{
-		In:  CmdVoidU8_In{pA},
+		In:  CmdVoidU8_In{A: pA},
 		Out: CmdVoidU8_Out{},
 	}
 }
@@ -2716,7 +1729,7 @@ func NewCmdVoidS8(
 	pA int8,
 ) *CmdVoidS8 {
 	return &CmdVoidS8{
-		In:  CmdVoidS8_In{pA},
+		In:  CmdVoidS8_In{A: pA},
 		Out: CmdVoidS8_Out{},
 	}
 }
@@ -2724,7 +1737,7 @@ func NewCmdVoidU16(
 	pA uint16,
 ) *CmdVoidU16 {
 	return &CmdVoidU16{
-		In:  CmdVoidU16_In{pA},
+		In:  CmdVoidU16_In{A: pA},
 		Out: CmdVoidU16_Out{},
 	}
 }
@@ -2732,7 +1745,7 @@ func NewCmdVoidS16(
 	pA int16,
 ) *CmdVoidS16 {
 	return &CmdVoidS16{
-		In:  CmdVoidS16_In{pA},
+		In:  CmdVoidS16_In{A: pA},
 		Out: CmdVoidS16_Out{},
 	}
 }
@@ -2740,7 +1753,7 @@ func NewCmdVoidF32(
 	pA float32,
 ) *CmdVoidF32 {
 	return &CmdVoidF32{
-		In:  CmdVoidF32_In{pA},
+		In:  CmdVoidF32_In{A: pA},
 		Out: CmdVoidF32_Out{},
 	}
 }
@@ -2748,7 +1761,7 @@ func NewCmdVoidU32(
 	pA uint32,
 ) *CmdVoidU32 {
 	return &CmdVoidU32{
-		In:  CmdVoidU32_In{pA},
+		In:  CmdVoidU32_In{A: pA},
 		Out: CmdVoidU32_Out{},
 	}
 }
@@ -2756,7 +1769,7 @@ func NewCmdVoidS32(
 	pA int32,
 ) *CmdVoidS32 {
 	return &CmdVoidS32{
-		In:  CmdVoidS32_In{pA},
+		In:  CmdVoidS32_In{A: pA},
 		Out: CmdVoidS32_Out{},
 	}
 }
@@ -2764,7 +1777,7 @@ func NewCmdVoidF64(
 	pA float64,
 ) *CmdVoidF64 {
 	return &CmdVoidF64{
-		In:  CmdVoidF64_In{pA},
+		In:  CmdVoidF64_In{A: pA},
 		Out: CmdVoidF64_Out{},
 	}
 }
@@ -2772,7 +1785,7 @@ func NewCmdVoidU64(
 	pA uint64,
 ) *CmdVoidU64 {
 	return &CmdVoidU64{
-		In:  CmdVoidU64_In{pA},
+		In:  CmdVoidU64_In{A: pA},
 		Out: CmdVoidU64_Out{},
 	}
 }
@@ -2780,7 +1793,7 @@ func NewCmdVoidS64(
 	pA int64,
 ) *CmdVoidS64 {
 	return &CmdVoidS64{
-		In:  CmdVoidS64_In{pA},
+		In:  CmdVoidS64_In{A: pA},
 		Out: CmdVoidS64_Out{},
 	}
 }
@@ -2788,7 +1801,7 @@ func NewCmdVoidBool(
 	pA bool,
 ) *CmdVoidBool {
 	return &CmdVoidBool{
-		In:  CmdVoidBool_In{pA},
+		In:  CmdVoidBool_In{A: pA},
 		Out: CmdVoidBool_Out{},
 	}
 }
@@ -2796,7 +1809,7 @@ func NewCmdVoidString(
 	pA string,
 ) *CmdVoidString {
 	return &CmdVoidString{
-		In:  CmdVoidString_In{pA},
+		In:  CmdVoidString_In{A: pA},
 		Out: CmdVoidString_Out{},
 	}
 }
@@ -2806,7 +1819,7 @@ func NewCmdVoid3Strings(
 	pC string,
 ) *CmdVoid3Strings {
 	return &CmdVoid3Strings{
-		In:  CmdVoid3Strings_In{pA, pB, pC},
+		In:  CmdVoid3Strings_In{A: pA, B: pB, C: pC},
 		Out: CmdVoid3Strings_Out{},
 	}
 }
@@ -2816,7 +1829,7 @@ func NewCmdVoid3Arrays(
 	pC BoolArray,
 ) *CmdVoid3Arrays {
 	return &CmdVoid3Arrays{
-		In:  CmdVoid3Arrays_In{pA, pB, pC},
+		In:  CmdVoid3Arrays_In{A: pA, B: pB, C: pC},
 		Out: CmdVoid3Arrays_Out{},
 	}
 }
@@ -2824,7 +1837,7 @@ func NewCmdVoidArrayOfStrings(
 	pA StringArray,
 ) *CmdVoidArrayOfStrings {
 	return &CmdVoidArrayOfStrings{
-		In:  CmdVoidArrayOfStrings_In{pA},
+		In:  CmdVoidArrayOfStrings_In{A: pA},
 		Out: CmdVoidArrayOfStrings_Out{},
 	}
 }
@@ -2833,7 +1846,7 @@ func NewCmdU8(
 ) *CmdU8 {
 	return &CmdU8{
 		In:  CmdU8_In{},
-		Out: CmdU8_Out{pResult},
+		Out: CmdU8_Out{Result: pResult},
 	}
 }
 func NewCmdS8(
@@ -2841,7 +1854,7 @@ func NewCmdS8(
 ) *CmdS8 {
 	return &CmdS8{
 		In:  CmdS8_In{},
-		Out: CmdS8_Out{pResult},
+		Out: CmdS8_Out{Result: pResult},
 	}
 }
 func NewCmdU16(
@@ -2849,7 +1862,7 @@ func NewCmdU16(
 ) *CmdU16 {
 	return &CmdU16{
 		In:  CmdU16_In{},
-		Out: CmdU16_Out{pResult},
+		Out: CmdU16_Out{Result: pResult},
 	}
 }
 func NewCmdS16(
@@ -2857,7 +1870,7 @@ func NewCmdS16(
 ) *CmdS16 {
 	return &CmdS16{
 		In:  CmdS16_In{},
-		Out: CmdS16_Out{pResult},
+		Out: CmdS16_Out{Result: pResult},
 	}
 }
 func NewCmdF32(
@@ -2865,7 +1878,7 @@ func NewCmdF32(
 ) *CmdF32 {
 	return &CmdF32{
 		In:  CmdF32_In{},
-		Out: CmdF32_Out{pResult},
+		Out: CmdF32_Out{Result: pResult},
 	}
 }
 func NewCmdU32(
@@ -2873,7 +1886,7 @@ func NewCmdU32(
 ) *CmdU32 {
 	return &CmdU32{
 		In:  CmdU32_In{},
-		Out: CmdU32_Out{pResult},
+		Out: CmdU32_Out{Result: pResult},
 	}
 }
 func NewCmdS32(
@@ -2881,7 +1894,7 @@ func NewCmdS32(
 ) *CmdS32 {
 	return &CmdS32{
 		In:  CmdS32_In{},
-		Out: CmdS32_Out{pResult},
+		Out: CmdS32_Out{Result: pResult},
 	}
 }
 func NewCmdF64(
@@ -2889,7 +1902,7 @@ func NewCmdF64(
 ) *CmdF64 {
 	return &CmdF64{
 		In:  CmdF64_In{},
-		Out: CmdF64_Out{pResult},
+		Out: CmdF64_Out{Result: pResult},
 	}
 }
 func NewCmdU64(
@@ -2897,7 +1910,7 @@ func NewCmdU64(
 ) *CmdU64 {
 	return &CmdU64{
 		In:  CmdU64_In{},
-		Out: CmdU64_Out{pResult},
+		Out: CmdU64_Out{Result: pResult},
 	}
 }
 func NewCmdS64(
@@ -2905,7 +1918,7 @@ func NewCmdS64(
 ) *CmdS64 {
 	return &CmdS64{
 		In:  CmdS64_In{},
-		Out: CmdS64_Out{pResult},
+		Out: CmdS64_Out{Result: pResult},
 	}
 }
 func NewCmdBool(
@@ -2913,7 +1926,7 @@ func NewCmdBool(
 ) *CmdBool {
 	return &CmdBool{
 		In:  CmdBool_In{},
-		Out: CmdBool_Out{pResult},
+		Out: CmdBool_Out{Result: pResult},
 	}
 }
 func NewCmdString(
@@ -2921,7 +1934,7 @@ func NewCmdString(
 ) *CmdString {
 	return &CmdString{
 		In:  CmdString_In{},
-		Out: CmdString_Out{pResult},
+		Out: CmdString_Out{Result: pResult},
 	}
 }
 func NewCmdArrayOfFloat(
@@ -2929,7 +1942,7 @@ func NewCmdArrayOfFloat(
 ) *CmdArrayOfFloat {
 	return &CmdArrayOfFloat{
 		In:  CmdArrayOfFloat_In{},
-		Out: CmdArrayOfFloat_Out{pResult},
+		Out: CmdArrayOfFloat_Out{Result: pResult},
 	}
 }
 func NewCmdPointer(
@@ -2937,7 +1950,7 @@ func NewCmdPointer(
 ) *CmdPointer {
 	return &CmdPointer{
 		In:  CmdPointer_In{},
-		Out: CmdPointer_Out{pResult},
+		Out: CmdPointer_Out{Result: pResult},
 	}
 }
 func NewCmdVoidOutU8(
@@ -2945,7 +1958,7 @@ func NewCmdVoidOutU8(
 ) *CmdVoidOutU8 {
 	return &CmdVoidOutU8{
 		In:  CmdVoidOutU8_In{},
-		Out: CmdVoidOutU8_Out{pA},
+		Out: CmdVoidOutU8_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS8(
@@ -2953,7 +1966,7 @@ func NewCmdVoidOutS8(
 ) *CmdVoidOutS8 {
 	return &CmdVoidOutS8{
 		In:  CmdVoidOutS8_In{},
-		Out: CmdVoidOutS8_Out{pA},
+		Out: CmdVoidOutS8_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU16(
@@ -2961,7 +1974,7 @@ func NewCmdVoidOutU16(
 ) *CmdVoidOutU16 {
 	return &CmdVoidOutU16{
 		In:  CmdVoidOutU16_In{},
-		Out: CmdVoidOutU16_Out{pA},
+		Out: CmdVoidOutU16_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS16(
@@ -2969,7 +1982,7 @@ func NewCmdVoidOutS16(
 ) *CmdVoidOutS16 {
 	return &CmdVoidOutS16{
 		In:  CmdVoidOutS16_In{},
-		Out: CmdVoidOutS16_Out{pA},
+		Out: CmdVoidOutS16_Out{A: pA},
 	}
 }
 func NewCmdVoidOutF32(
@@ -2977,7 +1990,7 @@ func NewCmdVoidOutF32(
 ) *CmdVoidOutF32 {
 	return &CmdVoidOutF32{
 		In:  CmdVoidOutF32_In{},
-		Out: CmdVoidOutF32_Out{pA},
+		Out: CmdVoidOutF32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU32(
@@ -2985,7 +1998,7 @@ func NewCmdVoidOutU32(
 ) *CmdVoidOutU32 {
 	return &CmdVoidOutU32{
 		In:  CmdVoidOutU32_In{},
-		Out: CmdVoidOutU32_Out{pA},
+		Out: CmdVoidOutU32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS32(
@@ -2993,7 +2006,7 @@ func NewCmdVoidOutS32(
 ) *CmdVoidOutS32 {
 	return &CmdVoidOutS32{
 		In:  CmdVoidOutS32_In{},
-		Out: CmdVoidOutS32_Out{pA},
+		Out: CmdVoidOutS32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutF64(
@@ -3001,7 +2014,7 @@ func NewCmdVoidOutF64(
 ) *CmdVoidOutF64 {
 	return &CmdVoidOutF64{
 		In:  CmdVoidOutF64_In{},
-		Out: CmdVoidOutF64_Out{pA},
+		Out: CmdVoidOutF64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU64(
@@ -3009,7 +2022,7 @@ func NewCmdVoidOutU64(
 ) *CmdVoidOutU64 {
 	return &CmdVoidOutU64{
 		In:  CmdVoidOutU64_In{},
-		Out: CmdVoidOutU64_Out{pA},
+		Out: CmdVoidOutU64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS64(
@@ -3017,7 +2030,7 @@ func NewCmdVoidOutS64(
 ) *CmdVoidOutS64 {
 	return &CmdVoidOutS64{
 		In:  CmdVoidOutS64_In{},
-		Out: CmdVoidOutS64_Out{pA},
+		Out: CmdVoidOutS64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutBool(
@@ -3025,7 +2038,7 @@ func NewCmdVoidOutBool(
 ) *CmdVoidOutBool {
 	return &CmdVoidOutBool{
 		In:  CmdVoidOutBool_In{},
-		Out: CmdVoidOutBool_Out{pA},
+		Out: CmdVoidOutBool_Out{A: pA},
 	}
 }
 func NewCmdVoidOutString(
@@ -3033,7 +2046,7 @@ func NewCmdVoidOutString(
 ) *CmdVoidOutString {
 	return &CmdVoidOutString{
 		In:  CmdVoidOutString_In{},
-		Out: CmdVoidOutString_Out{pA},
+		Out: CmdVoidOutString_Out{A: pA},
 	}
 }
 func NewCmdVoidOutFixedSizeBuffer(
@@ -3041,7 +2054,7 @@ func NewCmdVoidOutFixedSizeBuffer(
 ) *CmdVoidOutFixedSizeBuffer {
 	return &CmdVoidOutFixedSizeBuffer{
 		In:  CmdVoidOutFixedSizeBuffer_In{},
-		Out: CmdVoidOutFixedSizeBuffer_Out{pA},
+		Out: CmdVoidOutFixedSizeBuffer_Out{A: pA},
 	}
 }
 func NewCmdVoidOut3Strings(
@@ -3051,7 +2064,7 @@ func NewCmdVoidOut3Strings(
 ) *CmdVoidOut3Strings {
 	return &CmdVoidOut3Strings{
 		In:  CmdVoidOut3Strings_In{},
-		Out: CmdVoidOut3Strings_Out{pA, pB, pC},
+		Out: CmdVoidOut3Strings_Out{A: pA, B: pB, C: pC},
 	}
 }
 func NewCmdVoid3Remapped(
@@ -3060,7 +2073,7 @@ func NewCmdVoid3Remapped(
 	pC remapped,
 ) *CmdVoid3Remapped {
 	return &CmdVoid3Remapped{
-		In:  CmdVoid3Remapped_In{pA, pB, pC},
+		In:  CmdVoid3Remapped_In{A: pA, B: pB, C: pC},
 		Out: CmdVoid3Remapped_Out{},
 	}
 }
@@ -3071,7 +2084,7 @@ func NewCmdVoidOut3Remapped(
 ) *CmdVoidOut3Remapped {
 	return &CmdVoidOut3Remapped{
 		In:  CmdVoidOut3Remapped_In{},
-		Out: CmdVoidOut3Remapped_Out{pA, pB, pC},
+		Out: CmdVoidOut3Remapped_Out{A: pA, B: pB, C: pC},
 	}
 }
 func NewCmdVoidOutArrayOfRemapped(
@@ -3079,7 +2092,7 @@ func NewCmdVoidOutArrayOfRemapped(
 ) *CmdVoidOutArrayOfRemapped {
 	return &CmdVoidOutArrayOfRemapped{
 		In:  CmdVoidOutArrayOfRemapped_In{},
-		Out: CmdVoidOutArrayOfRemapped_Out{pA},
+		Out: CmdVoidOutArrayOfRemapped_Out{A: pA},
 	}
 }
 

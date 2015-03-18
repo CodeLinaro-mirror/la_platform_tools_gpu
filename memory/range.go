@@ -37,8 +37,12 @@ func max(a, b uint64) uint64 {
 	}
 }
 
+// Pointer is the type representing a memory pointer.
+type Pointer uint64
+
 // Range represents a region of memory.
 type Range struct {
+	binary.Generate
 	Base Pointer // A pointer to the first byte in the memory range.
 	Size uint64  // The size in bytes of the memory range.
 }
@@ -67,7 +71,7 @@ func (i Range) Intersect(other Range) Range {
 	if e < s {
 		panic(fmt.Errorf("Intervals %v and %v do not intersect", i, other))
 	}
-	return Range{Pointer(s), e - s}
+	return Range{Base: Pointer(s), Size: e - s}
 }
 
 // First returns a Pointer to the first byte in the Range.
@@ -90,26 +94,4 @@ func (i Range) Span() interval.U64Span {
 
 func (i Range) String() string {
 	return fmt.Sprintf("[0x%.16x-0x%.16x]", i.First(), i.Last())
-}
-
-func (i Range) Encode(e *binary.Encoder) error {
-	if err := i.Base.Encode(e); err != nil {
-		return err
-	}
-	if err := e.Uint64(i.Size); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (i *Range) Decode(d *binary.Decoder) error {
-	if err := i.Base.Decode(d); err != nil {
-		return err
-	}
-	if val, err := d.Uint64(); err == nil {
-		i.Size = val
-	} else {
-		return err
-	}
-	return nil
 }

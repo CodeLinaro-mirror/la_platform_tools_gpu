@@ -22,14 +22,13 @@ const TypeIDEos TypeID = 0xffff
 // EOS is used to indicate that there will be no more atoms in the stream with
 // the EOS's context identifier after the EOS atom.
 type EOS struct {
+	binary.Generate
 	Context ContextID
 }
 
-func (c *EOS) Name() string                 { return "EOS" }
-func (c *EOS) Docs() string                 { return "" }
-func (c *EOS) TypeID() TypeID               { return TypeIDEos }
-func (c *EOS) ContextID() ContextID         { return c.Context }
-func (c *EOS) String() string               { return "EOS" }
-func (c *EOS) Flags() Flags                 { return 0 }
-func (c *EOS) Encode(*binary.Encoder) error { return nil }
-func (c *EOS) Decode(*binary.Decoder) error { return nil }
+func (c *EOS) Name() string         { return "EOS" }
+func (c *EOS) Docs() string         { return "" }
+func (c *EOS) TypeID() TypeID       { return TypeIDEos }
+func (c *EOS) ContextID() ContextID { return c.Context }
+func (c *EOS) String() string       { return "EOS" }
+func (c *EOS) Flags() Flags         { return 0 }
