@@ -47,11 +47,11 @@ type File struct {
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	Name       string    // The simple name of the type.
-	Package    string    // The package name the struct belongs to.
-	Fields     []Field   // Descriptions of the fields of the struct.
-	Signature  string    // The full string type signature of the Struct.
-	ID         binary.ID // The unique type identifier for the Struct.
+	Name      string    // The simple name of the type.
+	Package   string    // The package name the struct belongs to.
+	Fields    []Field   // Descriptions of the fields of the struct.
+	Signature string    // The full string type signature of the Struct.
+	ID        binary.ID // The unique type identifier for the Struct.
 }
 
 // Kind describes the basic nature of a type.
@@ -77,6 +77,8 @@ const (
 	// encoded object, then this object will be encoded as a reference to the
 	// first encoded object.
 	Interface
+	// Map is the kind for a key value map.
+	Map
 )
 
 // Field holds a description of a single Struct member.
@@ -92,7 +94,8 @@ type Type struct {
 	Name    string // The name of the type.
 	Native  string // The go native name of the type.
 	Kind    Kind   // The types basic Kind.
-	SubType *Type  // If the type is an Array, holds the element type.
+	KeyType *Type  // If the type is a Map, holds the key type.
+	SubType *Type  // If the type is an Array, Map or Pointer, holds the element type.
 	Method  string // The encode/decode method to use.
 }
 
@@ -166,6 +169,10 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 	case *types.Slice:
 		t.Kind = Array
 		t.SubType = FromType(pkg, from.Elem())
+	case *types.Map:
+		t.Kind = Map
+		t.KeyType = FromType(pkg, from.Key())
+		t.SubType = FromType(pkg, from.Elem())
 	default:
 		t.Kind = Codeable
 	}
@@ -203,6 +210,7 @@ func getTemplateMap(t *template.Template, prefix string) kindToTemplate {
 		Pointer:   getTemplate(t, prefix+"Pointer"),
 		Interface: getTemplate(t, prefix+"Interface"),
 		Array:     getTemplate(t, prefix+"Array"),
+		Map:       getTemplate(t, prefix+"Map"),
 	}
 }
 

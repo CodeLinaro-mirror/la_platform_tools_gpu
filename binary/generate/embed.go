@@ -62,6 +62,14 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			{{encode (print .Name "[i]") .Type.SubType}}
 		} {{end}}
 
+{{define "EncodeMap"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
+			return err
+		}
+		for k, v := range {{.Name}} {
+			{{encode "k" .Type.KeyType}}
+			{{encode "v" .Type.SubType}}
+		} {{end}}
+
 {{define "Decoder"}}func (o *{{.Name}}) Decode(d *binary.Decoder) error {
 	{{range .Fields}}{{decode (print "o." .Name) .Type}}
 	{{end}} return nil
@@ -99,6 +107,19 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			{{.Name}} = make({{.Type.Name}}, count)
 			for i := range {{.Name}} {
 				{{decode (print .Name "[i]") .Type.SubType}}
+			}
+		} {{end}}
+
+{{define "DecodeMap"}} if count, err := d.Int32(); err != nil {
+			return err
+		} else {
+			{{.Name}} = make({{.Type.Name}}, count)
+			for i := int32(0); i < count; i++ {
+				var k {{.Type.KeyType.Name}}
+				var v {{.Type.SubType.Name}}
+				{{decode "k" .Type.KeyType}}
+				{{decode "v" .Type.SubType}}
+				{{.Name}}[k] = v
 			}
 		} {{end}}
 
@@ -157,6 +178,7 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»for (int i = 0; i < {{.Name}}.length; i++) {
 »»»{{encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
+{{define "EncodeMap"}}TODO: Java map handling{{end}}
 
 {{define "Decoder"}}
 »public static void decode(Decoder d, {{class .Name}} o) throws IOException {
@@ -168,6 +190,7 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
 {{define "DecodePointer"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
 {{define "DecodeInterface"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
+{{define "DecodeMap"}}TODO: Java map handling{{end}}
 
 {{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
