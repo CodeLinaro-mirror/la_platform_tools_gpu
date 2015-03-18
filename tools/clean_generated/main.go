@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
@@ -36,42 +35,9 @@ options:`
 	usage_footer = `
 The search is rooted at the current working directory.
 It finds files with a known extension and a known generated file header comment.
-If they are checked in to git, the tool complains and moves on.
-If they are not git ignored, the tool adds them to a local git ignore rule.
 If the -n flag is not specified, the file will then be removed.
 `
 )
-
-func check(path string) error {
-	err := exec.Command("git", "ls-files", "--error-unmatch", path).Run()
-	if err == nil {
-		fmt.Printf("Generated file %s is checked in! Skipping.\n", path)
-		return nil
-	}
-	err = exec.Command("git", "check-ignore", path).Run()
-	if err != nil {
-		dir := filepath.Dir(path)
-		name := filepath.Base(path)
-		ignore := filepath.Join(dir, ".gitignore")
-		fmt.Printf("git ignore %s in %s\n", name, ignore)
-		if !*noactions {
-			f, err := os.OpenFile(ignore, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
-			if err != nil {
-				return err
-			}
-			_, err = f.WriteString(name + "\n")
-			f.Close()
-			if err != nil {
-				return err
-			}
-		}
-	}
-	fmt.Printf("rm %s \n", path)
-	if !*noactions {
-		os.Remove(path)
-	}
-	return nil
-}
 
 func run() error {
 	flag.Usage = func() {
@@ -97,7 +63,11 @@ func run() error {
 		if copyright.MatchGenerated(file) == 0 {
 			return nil
 		}
-		return check(path)
+		fmt.Printf("rm %s\n", path)
+		if !*noactions {
+			os.Remove(path)
+		}
+		return nil
 	})
 }
 
