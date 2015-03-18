@@ -38,11 +38,9 @@ func init() {
 	binary.Register(binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}, &captureFramebufferDimensions{})
 	//struct builder.getCaptureFramebufferDimensions { Capture:service.CaptureId, Context:atom.ContextID }
 	binary.Register(binary.ID{0xb7, 0xfe, 0xcb, 0x4d, 0x92, 0xa9, 0x4f, 0x3e, 0xf2, 0xf3, 0x1a, 0xd4, 0x72, 0x7a, 0x76, 0xa5, 0xb5, 0xde, 0x99, 0x3c}, &getCaptureFramebufferDimensions{})
-
 }
 
 func (o GetFramebufferColor) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -62,7 +60,6 @@ func (o GetFramebufferColor) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetFramebufferColor) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -86,7 +83,6 @@ func (o *GetFramebufferColor) Decode(d *binary.Decoder) error {
 }
 
 func (o GetFramebufferDepth) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -103,7 +99,6 @@ func (o GetFramebufferDepth) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetFramebufferDepth) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -124,7 +119,6 @@ func (o *GetFramebufferDepth) Decode(d *binary.Decoder) error {
 }
 
 func (o GetHierarchy) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -135,7 +129,6 @@ func (o GetHierarchy) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetHierarchy) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -148,7 +141,6 @@ func (o *GetHierarchy) Decode(d *binary.Decoder) error {
 }
 
 func (o GetMemoryInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -165,7 +157,6 @@ func (o GetMemoryInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetMemoryInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -186,7 +177,6 @@ func (o *GetMemoryInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o GetState) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -200,7 +190,6 @@ func (o GetState) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetState) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -218,7 +207,6 @@ func (o *GetState) Decode(d *binary.Decoder) error {
 }
 
 func (o GetTimingInfo) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -235,7 +223,6 @@ func (o GetTimingInfo) Encode(e *binary.Encoder) error {
 }
 
 func (o *GetTimingInfo) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -256,7 +243,6 @@ func (o *GetTimingInfo) Decode(d *binary.Decoder) error {
 }
 
 func (o PrerenderFramebuffers) Encode(e *binary.Encoder) error {
-
 	if err := o.Device.Encode(e); err != nil {
 		return err
 	}
@@ -267,7 +253,6 @@ func (o PrerenderFramebuffers) Encode(e *binary.Encoder) error {
 		return err
 	}
 	for i := range o.AtomIDs {
-
 		if err := e.Uint64(o.AtomIDs[i]); err != nil {
 			return err
 		}
@@ -282,7 +267,6 @@ func (o PrerenderFramebuffers) Encode(e *binary.Encoder) error {
 }
 
 func (o *PrerenderFramebuffers) Decode(d *binary.Decoder) error {
-
 	if err := o.Device.Decode(d); err != nil {
 		return err
 	}
@@ -294,7 +278,6 @@ func (o *PrerenderFramebuffers) Decode(d *binary.Decoder) error {
 	} else {
 		o.AtomIDs = make([]uint64, count)
 		for i := range o.AtomIDs {
-
 			if obj, err := d.Uint64(); err != nil {
 				return err
 			} else {
@@ -316,7 +299,6 @@ func (o *PrerenderFramebuffers) Decode(d *binary.Decoder) error {
 }
 
 func (o RenderFramebufferColor) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -342,7 +324,6 @@ func (o RenderFramebufferColor) Encode(e *binary.Encoder) error {
 }
 
 func (o *RenderFramebufferColor) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -378,7 +359,6 @@ func (o *RenderFramebufferColor) Decode(d *binary.Decoder) error {
 }
 
 func (o RenderFramebufferDepth) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -401,7 +381,6 @@ func (o RenderFramebufferDepth) Encode(e *binary.Encoder) error {
 }
 
 func (o *RenderFramebufferDepth) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -432,7 +411,6 @@ func (o *RenderFramebufferDepth) Decode(d *binary.Decoder) error {
 }
 
 func (o ReplaceAtom) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -449,7 +427,6 @@ func (o ReplaceAtom) Encode(e *binary.Encoder) error {
 }
 
 func (o *ReplaceAtom) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}
@@ -470,7 +447,6 @@ func (o *ReplaceAtom) Decode(d *binary.Decoder) error {
 }
 
 func (o atomFramebufferDimensions) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint64(uint64(o.From)); err != nil {
 		return err
 	}
@@ -484,7 +460,6 @@ func (o atomFramebufferDimensions) Encode(e *binary.Encoder) error {
 }
 
 func (o *atomFramebufferDimensions) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -504,12 +479,10 @@ func (o *atomFramebufferDimensions) Decode(d *binary.Decoder) error {
 }
 
 func (o captureFramebufferDimensions) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.Dimensions))); err != nil {
 		return err
 	}
 	for i := range o.Dimensions {
-
 		if err := o.Dimensions[i].Encode(e); err != nil {
 			return err
 		}
@@ -518,13 +491,11 @@ func (o captureFramebufferDimensions) Encode(e *binary.Encoder) error {
 }
 
 func (o *captureFramebufferDimensions) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.Dimensions = make([]atomFramebufferDimensions, count)
 		for i := range o.Dimensions {
-
 			if err := o.Dimensions[i].Decode(d); err != nil {
 				return err
 			}
@@ -534,7 +505,6 @@ func (o *captureFramebufferDimensions) Decode(d *binary.Decoder) error {
 }
 
 func (o getCaptureFramebufferDimensions) Encode(e *binary.Encoder) error {
-
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
@@ -545,7 +515,6 @@ func (o getCaptureFramebufferDimensions) Encode(e *binary.Encoder) error {
 }
 
 func (o *getCaptureFramebufferDimensions) Decode(d *binary.Decoder) error {
-
 	if err := o.Capture.Decode(d); err != nil {
 		return err
 	}

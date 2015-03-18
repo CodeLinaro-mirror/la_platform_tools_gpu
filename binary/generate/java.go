@@ -86,22 +86,8 @@ var (
 
 func init() {
 	javaFile = getTemplate(javaTemplates, "File")
-	javaEncodeMap = kindToTemplate{
-		Native:    getTemplate(javaTemplates, "EncodeNative"),
-		Remap:     getTemplate(javaTemplates, "EncodeRemap"),
-		Codeable:  getTemplate(javaTemplates, "EncodeCodeable"),
-		Pointer:   getTemplate(javaTemplates, "EncodeObject"),
-		Interface: getTemplate(javaTemplates, "EncodeObject"),
-		Array:     getTemplate(javaTemplates, "EncodeArray"),
-	}
-	javaDecodeMap = kindToTemplate{
-		Native:    getTemplate(javaTemplates, "DecodeNative"),
-		Remap:     getTemplate(javaTemplates, "DecodeRemap"),
-		Codeable:  getTemplate(javaTemplates, "DecodeCodeable"),
-		Pointer:   getTemplate(javaTemplates, "DecodeObject"),
-		Interface: getTemplate(javaTemplates, "DecodeObject"),
-		Array:     getTemplate(javaTemplates, "DecodeArray"),
-	}
+	javaEncodeMap = getTemplateMap(javaTemplates, "Encode")
+	javaDecodeMap = getTemplateMap(javaTemplates, "Decode")
 }
 
 // JavaFile generates the all the java code for a file with a set of structs.

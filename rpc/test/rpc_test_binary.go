@@ -66,11 +66,9 @@ func init() {
 	binary.Register(binary.ID{0x3d, 0xec, 0x2e, 0x5f, 0x2b, 0x8d, 0xd4, 0x91, 0xfe, 0x57, 0x57, 0x33, 0x8c, 0x50, 0x56, 0x14, 0xa8, 0xa0, 0x85, 0x2a}, &resultSetStruct{})
 	//struct test.resultUseResource { }
 	binary.Register(binary.ID{0x81, 0x83, 0x0d, 0xf2, 0xfa, 0x0d, 0x75, 0x4c, 0xfa, 0xee, 0x14, 0x0e, 0xe5, 0x89, 0xa4, 0x27, 0x06, 0xdb, 0xf9, 0x2e}, &resultUseResource{})
-
 }
 
 func (o Derived) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -81,7 +79,6 @@ func (o Derived) Encode(e *binary.Encoder) error {
 }
 
 func (o *Derived) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -96,7 +93,6 @@ func (o *Derived) Decode(d *binary.Decoder) error {
 }
 
 func (o ListNode) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -111,7 +107,6 @@ func (o ListNode) Encode(e *binary.Encoder) error {
 }
 
 func (o *ListNode) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -128,7 +123,6 @@ func (o *ListNode) Decode(d *binary.Decoder) error {
 }
 
 func (o Resource) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint32(o.Int); err != nil {
 		return err
 	}
@@ -142,7 +136,6 @@ func (o Resource) Encode(e *binary.Encoder) error {
 }
 
 func (o *Resource) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -162,7 +155,6 @@ func (o *Resource) Decode(d *binary.Decoder) error {
 }
 
 func (o Struct) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.String); err != nil {
 		return err
 	}
@@ -176,7 +168,6 @@ func (o Struct) Encode(e *binary.Encoder) error {
 }
 
 func (o *Struct) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -196,7 +187,6 @@ func (o *Struct) Decode(d *binary.Decoder) error {
 }
 
 func (o callAdd) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint32(o.a); err != nil {
 		return err
 	}
@@ -207,7 +197,6 @@ func (o callAdd) Encode(e *binary.Encoder) error {
 }
 
 func (o *callAdd) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -222,7 +211,6 @@ func (o *callAdd) Decode(d *binary.Decoder) error {
 }
 
 func (o callEnumToString) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(o.e)); err != nil {
 		return err
 	}
@@ -230,7 +218,6 @@ func (o callEnumToString) Encode(e *binary.Encoder) error {
 }
 
 func (o *callEnumToString) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -240,77 +227,62 @@ func (o *callEnumToString) Decode(d *binary.Decoder) error {
 }
 
 func (o callGetBase) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetBase) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetDerived) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetDerived) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetListNodeChain) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetListNodeChain) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetListNodeChainArray) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetListNodeChainArray) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetResource) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetResource) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetSingleListNode) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetSingleListNode) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callGetStruct) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *callGetStruct) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o callResolveResource) Encode(e *binary.Encoder) error {
-
 	if err := o.r.Encode(e); err != nil {
 		return err
 	}
@@ -318,7 +290,6 @@ func (o callResolveResource) Encode(e *binary.Encoder) error {
 }
 
 func (o *callResolveResource) Decode(d *binary.Decoder) error {
-
 	if err := o.r.Decode(d); err != nil {
 		return err
 	}
@@ -326,7 +297,6 @@ func (o *callResolveResource) Decode(d *binary.Decoder) error {
 }
 
 func (o callSetStruct) Encode(e *binary.Encoder) error {
-
 	if err := o.s.Encode(e); err != nil {
 		return err
 	}
@@ -334,7 +304,6 @@ func (o callSetStruct) Encode(e *binary.Encoder) error {
 }
 
 func (o *callSetStruct) Decode(d *binary.Decoder) error {
-
 	if err := o.s.Decode(d); err != nil {
 		return err
 	}
@@ -342,7 +311,6 @@ func (o *callSetStruct) Decode(d *binary.Decoder) error {
 }
 
 func (o callUseResource) Encode(e *binary.Encoder) error {
-
 	if err := o.r.Encode(e); err != nil {
 		return err
 	}
@@ -350,7 +318,6 @@ func (o callUseResource) Encode(e *binary.Encoder) error {
 }
 
 func (o *callUseResource) Decode(d *binary.Decoder) error {
-
 	if err := o.r.Decode(d); err != nil {
 		return err
 	}
@@ -358,7 +325,6 @@ func (o *callUseResource) Decode(d *binary.Decoder) error {
 }
 
 func (o resultAdd) Encode(e *binary.Encoder) error {
-
 	if err := e.Uint32(o.value); err != nil {
 		return err
 	}
@@ -366,7 +332,6 @@ func (o resultAdd) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultAdd) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -376,7 +341,6 @@ func (o *resultAdd) Decode(d *binary.Decoder) error {
 }
 
 func (o resultEnumToString) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.value); err != nil {
 		return err
 	}
@@ -384,7 +348,6 @@ func (o resultEnumToString) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultEnumToString) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -394,7 +357,6 @@ func (o *resultEnumToString) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetBase) Encode(e *binary.Encoder) error {
-
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -406,7 +368,6 @@ func (o resultGetBase) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetBase) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -418,7 +379,6 @@ func (o *resultGetBase) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetDerived) Encode(e *binary.Encoder) error {
-
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -430,7 +390,6 @@ func (o resultGetDerived) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetDerived) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -442,7 +401,6 @@ func (o *resultGetDerived) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetListNodeChain) Encode(e *binary.Encoder) error {
-
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -454,7 +412,6 @@ func (o resultGetListNodeChain) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetListNodeChain) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -466,12 +423,10 @@ func (o *resultGetListNodeChain) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetListNodeChainArray) Encode(e *binary.Encoder) error {
-
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
 	for i := range o.value {
-
 		if o.value[i] != nil {
 			if err := e.Object(o.value[i]); err != nil {
 				return err
@@ -484,13 +439,11 @@ func (o resultGetListNodeChainArray) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetListNodeChainArray) Decode(d *binary.Decoder) error {
-
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
 		o.value = make(ListNodeArray, count)
 		for i := range o.value {
-
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if obj != nil {
@@ -504,7 +457,6 @@ func (o *resultGetListNodeChainArray) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetResource) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -512,7 +464,6 @@ func (o resultGetResource) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetResource) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -520,7 +471,6 @@ func (o *resultGetResource) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetSingleListNode) Encode(e *binary.Encoder) error {
-
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -532,7 +482,6 @@ func (o resultGetSingleListNode) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetSingleListNode) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -544,7 +493,6 @@ func (o *resultGetSingleListNode) Decode(d *binary.Decoder) error {
 }
 
 func (o resultGetStruct) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -552,7 +500,6 @@ func (o resultGetStruct) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultGetStruct) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -560,7 +507,6 @@ func (o *resultGetStruct) Decode(d *binary.Decoder) error {
 }
 
 func (o resultResolveResource) Encode(e *binary.Encoder) error {
-
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
@@ -568,7 +514,6 @@ func (o resultResolveResource) Encode(e *binary.Encoder) error {
 }
 
 func (o *resultResolveResource) Decode(d *binary.Decoder) error {
-
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
@@ -576,21 +521,17 @@ func (o *resultResolveResource) Decode(d *binary.Decoder) error {
 }
 
 func (o resultSetStruct) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *resultSetStruct) Decode(d *binary.Decoder) error {
-
 	return nil
 }
 
 func (o resultUseResource) Encode(e *binary.Encoder) error {
-
 	return nil
 }
 
 func (o *resultUseResource) Decode(d *binary.Decoder) error {
-
 	return nil
 }

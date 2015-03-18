@@ -50,22 +50,8 @@ func init() {
 	goRegister = getTemplate(goTemplates, "Register")
 	goEncoder = getTemplate(goTemplates, "Encoder")
 	goDecoder = getTemplate(goTemplates, "Decoder")
-	goEncodeMap = kindToTemplate{
-		Native:    getTemplate(goTemplates, "EncodeNative"),
-		Remap:     getTemplate(goTemplates, "EncodeRemap"),
-		Codeable:  getTemplate(goTemplates, "EncodeCodeable"),
-		Pointer:   getTemplate(goTemplates, "EncodeObject"),
-		Interface: getTemplate(goTemplates, "EncodeObject"),
-		Array:     getTemplate(goTemplates, "EncodeArray"),
-	}
-	goDecodeMap = kindToTemplate{
-		Native:    getTemplate(goTemplates, "DecodeNative"),
-		Remap:     getTemplate(goTemplates, "DecodeNative"),
-		Codeable:  getTemplate(goTemplates, "DecodeCodeable"),
-		Pointer:   getTemplate(goTemplates, "DecodeObject"),
-		Interface: getTemplate(goTemplates, "DecodeObject"),
-		Array:     getTemplate(goTemplates, "DecodeArray"),
-	}
+	goEncodeMap = getTemplateMap(goTemplates, "Encode")
+	goDecodeMap = getTemplateMap(goTemplates, "Decode")
 }
 
 // GoFile generates the all the go code for a file with a set of structs.

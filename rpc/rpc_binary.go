@@ -12,11 +12,9 @@ import (
 func init() {
 	//struct rpc.Error { message:string }
 	binary.Register(binary.ID{0xfe, 0x76, 0xe0, 0x3a, 0x44, 0xa3, 0xc0, 0x38, 0xdb, 0x62, 0x2e, 0xe3, 0xf3, 0xe4, 0xf9, 0x87, 0xf9, 0x19, 0xbe, 0xfd}, &Error{})
-
 }
 
 func (o Error) Encode(e *binary.Encoder) error {
-
 	if err := e.String(o.message); err != nil {
 		return err
 	}
@@ -24,7 +22,6 @@ func (o Error) Encode(e *binary.Encoder) error {
 }
 
 func (o *Error) Decode(d *binary.Decoder) error {
-
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {

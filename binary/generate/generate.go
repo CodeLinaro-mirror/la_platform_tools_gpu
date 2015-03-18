@@ -189,6 +189,17 @@ func getTemplate(t *template.Template, name string) *template.Template {
 
 type kindToTemplate map[Kind]*template.Template
 
+func getTemplateMap(t *template.Template, prefix string) kindToTemplate {
+	return kindToTemplate{
+		Native:    getTemplate(t, prefix+"Native"),
+		Remap:     getTemplate(t, prefix+"Remap"),
+		Codeable:  getTemplate(t, prefix+"Codeable"),
+		Pointer:   getTemplate(t, prefix+"Pointer"),
+		Interface: getTemplate(t, prefix+"Interface"),
+		Array:     getTemplate(t, prefix+"Array"),
+	}
+}
+
 func kindDispatch(table kindToTemplate, name string, t *Type) string {
 	b := &bytes.Buffer{}
 	if err := table[t.Kind].Execute(b, Field{name, t, false}); err != nil {
