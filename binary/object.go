@@ -36,6 +36,29 @@ type Object interface {
 	Decodable
 }
 
+// Generate is used to tag structures that need auto generated Encode and Decode
+// methods.
+// The codergen function searches packages for structs that have this type as an
+// anonymous field, and then automatically generates the encoding and decoding
+// functionality for those structures. For example, the following struct would
+// create the methods needed to encode and decode the Name and Value fields, as
+// well as registering a type identifier.
+// The embedding will also fully implement the binary.Object interface, but with
+// methods that panic. This will get overridden with the generated Encode and
+// Decode methods. This is important because it means the package is resolvable
+// without the generated code, which means the types can be correctly evaluated
+// during the generation process.
+//
+// type MyNamedValue struct {
+//    binary.Generate
+//    Name  string
+//    Value []byte
+// }
+type Generate struct{}
+
+func Encode(Generate) error { panic(fmt.Errorf("Missing encode function")) }
+func Decode(Generate) error { panic(fmt.Errorf("Missing encode function")) }
+
 var (
 	typeToID = map[reflect.Type]ID{}
 	idToType = map[ID]reflect.Type{}

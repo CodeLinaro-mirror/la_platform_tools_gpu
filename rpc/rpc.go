@@ -20,7 +20,10 @@
 // merge in-flight requests onto a single stream.
 package rpc
 
-import "fmt"
+import (
+	"fmt"
+	"android.googlesource.com/platform/tools/gpu/binary"
+)
 
 var header = [4]byte{'r', 'p', 'c', '0'}
 
@@ -30,11 +33,12 @@ var ErrInvalidHeader = NewError("Invalid RPC header")
 
 // NewError is used to create new rpc error objects with the specified human readable message.
 func NewError(msg string, args ...interface{}) *Error {
-	return &Error{fmt.Sprintf(msg, args...)}
+	return &Error{message:fmt.Sprintf(msg, args...)}
 }
 
 // Error is an implementation of error that can be sent over the wire.
 type Error struct {
+	binary.Generate
 	message string
 }
 

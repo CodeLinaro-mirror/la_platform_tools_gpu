@@ -166,7 +166,7 @@ func (request *getCaptureFramebufferDimensions) build(db database.Database, logg
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {
-				currentDims = &atomFramebufferDimensions{atom.ID(i), width, height}
+				currentDims = &atomFramebufferDimensions{From:atom.ID(i), Width:width, Height: height}
 				captureFbDims.Dimensions = append(captureFbDims.Dimensions, *currentDims)
 			}
 		}

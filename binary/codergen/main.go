@@ -71,7 +71,7 @@ func run() error {
 		file.Package = pkg.Pkg.Name()
 		for _, name := range filterStructs(pkg) {
 			s := generate.FromTypename(pkg.Pkg, name)
-			if !s.Delegating {
+			if s != nil {
 				file.Structs = append(file.Structs, s)
 			}
 		}
