@@ -6,6 +6,8 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -71,7 +73,7 @@ func uncompressTextures(capture service.CaptureId, db database.Database, logger 
 
 func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID {
 	buf := &bytes.Buffer{}
-	e := binary.NewEncoder(buf)
+	e := cyclic.Encoder(vle.Writer(buf))
 	capture.Encode(e)
 	e.Uint64(uint64(id))
 	a.Encode(e)

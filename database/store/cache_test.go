@@ -20,6 +20,8 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -73,7 +75,7 @@ func validateLoad(t *testing.T, cache *cache, id binary.ID, expectedSize int, ex
 
 func encode(r binary.Object) []byte {
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := r.Encode(enc); err != nil {
 		panic(err)
 	}

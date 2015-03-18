@@ -18,14 +18,15 @@ import (
 	"bytes"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 // NewAtomStream creates a fully-encoded AtomStream from the atom list and
 // schema.
 func NewAtomStream(list atom.List, schema SchemaId) (AtomStream, error) {
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := list.Encode(enc); err != nil {
 		return AtomStream{}, err
 	}
@@ -39,7 +40,7 @@ func NewAtomStream(list atom.List, schema SchemaId) (AtomStream, error) {
 // List decodes and returns the AtomStream decoded to an atom list.
 func (s AtomStream) List() (atom.List, error) {
 	list := atom.List{}
-	if err := list.Decode(binary.NewDecoder(bytes.NewBuffer(s.Data))); err != nil {
+	if err := list.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(s.Data)))); err != nil {
 		return atom.List{}, err
 	}
 	return list, nil

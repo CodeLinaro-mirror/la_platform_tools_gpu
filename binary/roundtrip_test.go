@@ -12,10 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package binary_test
 
 import (
 	"reflect"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 
 	"math/rand"
 	"testing"
@@ -49,7 +53,7 @@ func (b *buffer) Rewind() {
 	b.at = 0
 }
 
-func prepare(a interface{}) (*Encoder, *Decoder, *buffer) {
+func prepare(a interface{}) (binary.Encoder, binary.Decoder, *buffer) {
 	rand.Seed(1)
 	s := reflect.ValueOf(a)
 	maxSize := 0
@@ -84,7 +88,9 @@ func prepare(a interface{}) (*Encoder, *Decoder, *buffer) {
 	}
 	// build a big enough buffer, and wrap it in coders
 	buf := &buffer{data: make([]byte, 0, s.Len()*maxSize)}
-	return NewEncoder(buf), NewDecoder(buf), buf
+	e := cyclic.Encoder(vle.Writer(buf))
+	d := cyclic.Decoder(vle.Reader(buf))
+	return e, d, buf
 }
 
 func TestRoundTripInt8(t *testing.T) {

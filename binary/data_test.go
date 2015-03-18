@@ -12,47 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package binary_test
 
 import (
 	"bytes"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
-func TestDataEncode(t *testing.T) {
-	b := &bytes.Buffer{}
-	e := NewEncoder(b)
-	Data{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc}.Encode(e)
-	expected, got := []byte{
-		0x06,
-		0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc,
-	}, b.Bytes()
-	if !bytes.Equal(expected, got) {
-		t.Errorf("Encode gave unexpected bytes. Expected: %v, got: %v", expected, got)
-	}
-}
-
-func TestDataDecode(t *testing.T) {
-	d := NewDecoder(bytes.NewBuffer([]byte{
-		0x06,
-		0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc,
-	}))
-	expected := []byte{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc}
-	got := Data{}
-	err := got.Decode(d)
-	if err != nil {
-		t.Errorf("Decode gave unexpected error: %v", err)
-	}
-	if !bytes.Equal(expected, got) {
-		t.Errorf("Decode gave unexpected value. Expected: %v, got: %v", expected, got)
-	}
-}
-
-func TestDataDecodeError(t *testing.T) {
-	d := NewDecoder(errorReader{testError})
-	data := Data{}
-	err := data.Decode(d)
-	if err != testError {
-		t.Errorf("Decode gave unexpected error. Expected: %v, got: %v", testError, err)
+func TestDataEncodeDecode(t *testing.T) {
+	for _, v := range []struct {
+		name string
+		data binary.Data
+	}{
+		{"Basic",
+			binary.Data{0x10, 0x20, 0x30, 0xaa, 0xbb, 0xcc},
+		},
+	} {
+		b := &bytes.Buffer{}
+		e := cyclic.Encoder(vle.Writer(b))
+		d := cyclic.Decoder(vle.Reader(b))
+		if err := v.data.Encode(e); err != nil {
+			t.Errorf("%v encode gave unexpected error: %v", v.name, err)
+		}
+		got := binary.Data{}
+		if err := got.Decode(d); err != nil {
+			t.Errorf("%v decode gave unexpected error: %v", v.name, err)
+		}
+		if !bytes.Equal(v.data, got) {
+			t.Errorf("%v gave unexpected value. Expected: %v, got: %v", v.name, v.data, got)
+		}
 	}
 }

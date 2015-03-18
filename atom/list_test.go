@@ -19,7 +19,8 @@ import (
 	"reflect"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 var testList = List{
@@ -45,7 +46,7 @@ var testData = []byte{
 
 func TestAtomListEncode(t *testing.T) {
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	err := testList.Encode(enc)
 	if err != nil {
 		t.Errorf("Encode returned unexpected error: %v", err)
@@ -58,7 +59,7 @@ func TestAtomListEncode(t *testing.T) {
 
 func TestAtomListDecode(t *testing.T) {
 	list := List{}
-	err := list.Decode(binary.NewDecoder(bytes.NewBuffer(testData)))
+	err := list.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(testData))))
 	if err != nil {
 		t.Errorf("Decode returned unexpected error: %v", err)
 	}

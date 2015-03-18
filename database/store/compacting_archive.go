@@ -24,6 +24,8 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -32,7 +34,7 @@ type span struct {
 	size   int64
 }
 
-func (s *span) decode(d *binary.Decoder) (err error) {
+func (s *span) decode(d binary.Decoder) (err error) {
 	s.offset, err = d.Int64()
 	if err != nil {
 		return err
@@ -44,7 +46,7 @@ func (s *span) decode(d *binary.Decoder) (err error) {
 	return nil
 }
 
-func (s span) encode(e *binary.Encoder) error {
+func (s span) encode(e binary.Encoder) error {
 	if err := e.Int64(s.offset); err != nil {
 		return err
 	}
@@ -56,14 +58,14 @@ type record struct {
 	span span
 }
 
-func (s *record) decode(d *binary.Decoder) (err error) {
+func (s *record) decode(d binary.Decoder) (err error) {
 	if err := s.id.Decode(d); err != nil {
 		return err
 	}
 	return s.span.decode(d)
 }
 
-func (r record) encode(e *binary.Encoder) error {
+func (r record) encode(e binary.Encoder) error {
 	if err := r.id.Encode(e); err != nil {
 		return err
 	}
@@ -219,7 +221,7 @@ func CreateCompactingArchive(path string) Store {
 	records := make(map[binary.ID]span)
 
 	// Use a buffered reader to quickly read the archive records
-	d := binary.NewDecoder(bufio.NewReaderSize(index, 256<<10))
+	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(index, 256<<10)))
 	for {
 		var r record
 		if err := r.decode(d); err != io.EOF {
@@ -307,7 +309,7 @@ func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, lo
 			},
 		}
 
-		e := binary.NewEncoder(s.index)
+		e := cyclic.Encoder(vle.Writer(s.index))
 		record.encode(e)
 
 		s.records[id] = record.span
@@ -361,7 +363,7 @@ func (s *compactingArchive) Load(id binary.ID, logger log.Logger, out binary.Obj
 			return
 		}
 
-		d := binary.NewDecoder(bytes.NewBuffer(data))
+		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 		size, err = len(data), out.Decode(d)
 		return
 	}
@@ -407,7 +409,7 @@ func (s *compactingArchive) Delete(id binary.ID, logger log.Logger) {
 			}
 			s.waste += int64(prev.size)
 
-			e := binary.NewEncoder(s.index)
+			e := cyclic.Encoder(vle.Writer(s.index))
 			record.encode(e)
 
 			// If compaction is in-flight send the record to the compaction goroutine.
@@ -490,7 +492,7 @@ func (s *compactingArchive) compaction(l log.Logger) error {
 		iwriter := bufio.NewWriterSize(icompacting, 256<<10)
 		dwriter := bufio.NewWriterSize(dcompacting, 256<<10)
 
-		ie := binary.NewEncoder(iwriter)
+		ie := cyclic.Encoder(vle.Writer(iwriter))
 
 		size := int64(0)
 		waste := int64(0)

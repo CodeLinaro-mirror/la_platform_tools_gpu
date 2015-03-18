@@ -15,11 +15,11 @@ import (
 // base for atoms that require custom replay handling.
 type transientAtom struct{}
 
-func (transientAtom) TypeID() atom.TypeID          { return 0 }
-func (transientAtom) ContextID() atom.ContextID    { return 0 }
-func (transientAtom) Flags() atom.Flags            { return 0 }
-func (transientAtom) Encode(*binary.Encoder) error { return nil }
-func (transientAtom) Decode(*binary.Decoder) error { return nil }
+func (transientAtom) TypeID() atom.TypeID         { return 0 }
+func (transientAtom) ContextID() atom.ContextID   { return 0 }
+func (transientAtom) Flags() atom.Flags           { return 0 }
+func (transientAtom) Encode(binary.Encoder) error { return nil }
+func (transientAtom) Decode(binary.Decoder) error { return nil }
 
 // These must conform to the replayer interface in order to be used by
 // replayWriter.Write:

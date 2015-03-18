@@ -7,14 +7,15 @@ package database
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
 	//struct database.metadata { Type:metaType, LinkTo:binary.ID, Request:binary.Object }
-	binary.Register(binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}, &metadata{})
+	registry.Add(binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}, &metadata{})
 }
 
-func (o metadata) Encode(e *binary.Encoder) error {
+func (o metadata) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Type)); err != nil {
 		return err
 	}
@@ -31,7 +32,7 @@ func (o metadata) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *metadata) Decode(d *binary.Decoder) error {
+func (o *metadata) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {

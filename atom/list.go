@@ -60,7 +60,7 @@ func (l *List) AddAt(a Atom, id ID) {
 }
 
 // Encode encodes the atom list using the specified encoder.
-func (l *List) Encode(e *binary.Encoder) error {
+func (l *List) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(len(*l))); err != nil {
 		return err
 	}
@@ -76,7 +76,7 @@ func (l *List) Encode(e *binary.Encoder) error {
 }
 
 // Encode decodes the atom list using the specified encoder.
-func (l *List) Decode(d *binary.Decoder) error {
+func (l *List) Decode(d binary.Decoder) error {
 	count, err := d.Uint32()
 	if err != nil {
 		*l = List{} // Clear the list

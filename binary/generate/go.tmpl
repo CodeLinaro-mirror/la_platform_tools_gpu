@@ -13,9 +13,9 @@
 // limitations under the License.
 
 {{define "Register"}} //{{.Signature}}
-	binary.Register(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
+	registry.Add(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
 
-{{define "Encoder"}}func (o {{.Name}}) Encode(e *binary.Encoder) error {
+{{define "Encoder"}}func (o {{.Name}}) Encode(e binary.Encoder) error {
 	{{range .Fields}}{{encode (print "o." .Name) .Type}}
 	{{end}} return nil
 } {{end}}
@@ -57,7 +57,7 @@
 			{{encode "v" .Type.SubType}}
 		} {{end}}
 
-{{define "Decoder"}}func (o *{{.Name}}) Decode(d *binary.Decoder) error {
+{{define "Decoder"}}func (o *{{.Name}}) Decode(d binary.Decoder) error {
 	{{range .Fields}}{{decode (print "o." .Name) .Type}}
 	{{end}} return nil
 } {{end}}
@@ -118,6 +118,7 @@ package {{.Package}}
 
 import (
        "android.googlesource.com/platform/tools/gpu/binary"
+       "android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {

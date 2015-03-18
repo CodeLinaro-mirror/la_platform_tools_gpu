@@ -12,15 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package binary_test
 
 import (
 	"bytes"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 var (
-	sampleId = ID{
+	sampleId = binary.ID{
 		0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0x00,
 		0x00, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0x00,
 	}
@@ -35,7 +37,7 @@ func TestIDToString(t *testing.T) {
 }
 
 func TestParseID(t *testing.T) {
-	id, err := ParseID(sampleIdString)
+	id, err := binary.ParseID(sampleIdString)
 	if !bytes.Equal(id[:], sampleId[:]) {
 		t.Errorf("Expected ID: %+v, got: %+v.", sampleId, id)
 	}
@@ -45,21 +47,21 @@ func TestParseID(t *testing.T) {
 }
 
 func TestParseTooLongID(t *testing.T) {
-	_, err := ParseID(sampleIdString + "00")
+	_, err := binary.ParseID(sampleIdString + "00")
 	if err == nil {
 		t.Errorf("Expected an error when parsing a too long ID.")
 	}
 }
 
 func TestParseTruncatedID(t *testing.T) {
-	_, err := ParseID(sampleIdString[:len(sampleIdString)-2])
+	_, err := binary.ParseID(sampleIdString[:len(sampleIdString)-2])
 	if err == nil {
 		t.Errorf("Expected an error when parsing a truncated ID.")
 	}
 }
 
 func TestParseInvalidID(t *testing.T) {
-	_, err := ParseID("abcdefghijklmnopqrst")
+	_, err := binary.ParseID("abcdefghijklmnopqrst")
 	if err == nil {
 		t.Errorf("Expected an error when parsing an invalid ID.")
 	}
