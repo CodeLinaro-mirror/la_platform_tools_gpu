@@ -49,6 +49,14 @@
 			{{encode (print .Name "[i]") .Type.SubType}}
 		} {{end}}
 
+{{define "EncodeMap"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
+			return err
+		}
+		for k, v := range {{.Name}} {
+			{{encode "k" .Type.KeyType}}
+			{{encode "v" .Type.SubType}}
+		} {{end}}
+
 {{define "Decoder"}}func (o *{{.Name}}) Decode(d *binary.Decoder) error {
 	{{range .Fields}}{{decode (print "o." .Name) .Type}}
 	{{end}} return nil
@@ -86,6 +94,20 @@
 			{{.Name}} = make({{.Type.Name}}, count)
 			for i := range {{.Name}} {
 				{{decode (print .Name "[i]") .Type.SubType}}
+			}
+		} {{end}}
+
+{{define "DecodeMap"}} if count, err := d.Int32(); err != nil {
+			return err
+		} else {
+			{{.Name}} = make({{.Type.Name}}, count)
+			m := {{.Name}}
+			for i := int32(0); i < count; i++ {
+				var k {{.Type.KeyType.Name}}
+				var v {{.Type.SubType.Name}}
+				{{decode "k" .Type.KeyType}}
+				{{decode "v" .Type.SubType}}
+				m[k] = v
 			}
 		} {{end}}
 
