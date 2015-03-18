@@ -26,7 +26,10 @@ import (
 
 func parseStructs(source string) []*Struct {
 	config := loader.Config{}
-	fakeFile := fmt.Sprintf("package fake\n%s", source)
+	fakeFile := fmt.Sprintf(`
+	package fake
+	import "android.googlesource.com/platform/tools/gpu/binary"
+	%s`, source)
 	file, err := config.ParseFile("", fakeFile)
 	if err != nil {
 		log.Fatalf("invalid source: %s", err)
@@ -63,14 +66,14 @@ func parseStruct(t *testing.T, name string, source string) *Struct {
 }
 
 func TestEmpty(t *testing.T) {
-	s := parseStruct(t, "MyStruct", "type MyStruct struct {}")
+	s := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	if len(s.Fields) != 0 {
 		t.Errorf("Got %d fields, expected none", len(s.Fields))
 	}
 }
 
 func TestStableID(t *testing.T) {
-	source := "type MyStruct struct {}"
+	source := "type MyStruct struct {binary.Generate}"
 	a := parseStruct(t, "MyStruct", source)
 	b := parseStruct(t, "MyStruct", source)
 	if a.ID != b.ID {
@@ -79,32 +82,32 @@ func TestStableID(t *testing.T) {
 }
 
 func TestNameAffectsID(t *testing.T) {
-	a := parseStruct(t, "MyStruct", "type MyStruct struct {}")
-	b := parseStruct(t, "YourStruct", "type YourStruct struct {}")
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
+	b := parseStruct(t, "YourStruct", "type YourStruct struct {binary.Generate}")
 	if a.ID == b.ID {
 		t.Errorf("Name change did not change ID")
 	}
 }
 
 func TestFieldCountAffectsID(t *testing.T) {
-	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
-	b := parseStruct(t, "MyStruct", "type MyStruct struct {}")
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	if a.ID == b.ID {
 		t.Errorf("Field count did not change ID")
 	}
 }
 
 func TestFieldNameAffectsID(t *testing.T) {
-	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
-	b := parseStruct(t, "MyStruct", "type MyStruct struct { b int}")
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; b int}")
 	if a.ID == b.ID {
 		t.Errorf("Field name did not change ID")
 	}
 }
 
 func TestFieldTypeAffectsID(t *testing.T) {
-	a := parseStruct(t, "MyStruct", "type MyStruct struct { a int}")
-	b := parseStruct(t, "MyStruct", "type MyStruct struct { a byte}")
+	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
+	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a byte}")
 	if a.ID == b.ID {
 		t.Errorf("Field type did not change ID")
 	}
@@ -135,7 +138,7 @@ func TestTypes(t *testing.T) {
 	}
 	source := &bytes.Buffer{}
 	fmt.Fprintln(source, prefix)
-	fmt.Fprint(source, "type MyStruct struct {\n")
+	fmt.Fprint(source, "type MyStruct struct {binary.Generate;\n")
 	for _, f := range fields {
 		fmt.Fprintf(source, "  %s %s\n", f.Name, f.Type.Name)
 	}
