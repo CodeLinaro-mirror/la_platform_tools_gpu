@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go=rpc_binary.go rpc.go
+//go:generate codergen -go
 
 // Package rpc implements a remote procedure call system.
 //
@@ -22,6 +22,7 @@ package rpc
 
 import (
 	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
@@ -33,7 +34,7 @@ var ErrInvalidHeader = NewError("Invalid RPC header")
 
 // NewError is used to create new rpc error objects with the specified human readable message.
 func NewError(msg string, args ...interface{}) *Error {
-	return &Error{message:fmt.Sprintf(msg, args...)}
+	return &Error{message: fmt.Sprintf(msg, args...)}
 }
 
 // Error is an implementation of error that can be sent over the wire.

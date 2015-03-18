@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -31,7 +32,7 @@ import (
 )
 
 var (
-	golang = flag.String("go", "", "the go file to generate")
+	golang = flag.Bool("go", false, "generate go code")
 	java   = flag.String("java", "", "the java file to generate")
 )
 
@@ -57,11 +58,20 @@ func filterStructs(pkg *loader.PackageInfo) []*types.TypeName {
 func run() error {
 	flag.Parse()
 	config := loader.Config{}
-	_, err := config.FromArgs(flag.Args(), false)
+	wd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
 	config.AllowErrors = true
+	if len(flag.Args()) == 0 {
+		if filenames, err := filepath.Glob(path.Join(wd, "*.go")); err != nil {
+			return err
+		} else {
+			config.CreateFromFilenames(wd, filenames...)
+		}
+	} else if _, err := config.FromArgs(flag.Args(), false); err != nil {
+		return err
+	}
 	info, err := config.Load()
 	if err != nil {
 		return err
@@ -77,14 +87,14 @@ func run() error {
 		}
 	}
 	generate.Sort(file.Structs)
-	if *golang != "" {
+	if *golang {
 		file := file
-		file.Generated = fmt.Sprintf("codergen -go=%s", *golang)
+		file.Generated = fmt.Sprintf("codergen -go")
 		result, err := generate.GoFile(&file)
 		if err != nil {
 			return err
 		}
-		err = ioutil.WriteFile(*golang, result, os.ModePerm)
+		err = ioutil.WriteFile(path.Join(wd, file.Package+"_binary.go"), result, os.ModePerm)
 		if err != nil {
 			return err
 		}
