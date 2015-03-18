@@ -113,6 +113,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 		}
+		_, _, _, _, _, _, _ = backbufferColorId, backbufferDepthId, backbufferStencilId, backbufferColor, backbufferDepth, backbufferStencil, backbuffer
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying init expected %v got %v", ω.Out, Σ)
 		}
@@ -245,6 +246,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Arrays[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenVertexArraysOES expected %v got %v", ω.Out, Σ)
@@ -296,6 +298,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		Σ := GlBindAttribLocation_Out{}
 		p := m.State.Instances.Programs.Get(ω.In.Program) // ProgramRef
 		p.AttributeBindings[ω.In.Name] = ω.In.Location
+		_ = p
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glBindAttribLocation expected %v got %v", ω.Out, Σ)
 		}
@@ -349,6 +352,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		Σ := GlEnableVertexAttribArray_Out{}
 		a := m.State.VertexAttributeArrays.Get(ω.In.Location) // VertexAttributeArrayRef
 		a.Enabled = true
+		_ = a
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glEnableVertexAttribArray expected %v got %v", ω.Out, Σ)
 		}
@@ -356,6 +360,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		Σ := GlDisableVertexAttribArray_Out{}
 		a := m.State.VertexAttributeArrays.Get(ω.In.Location) // VertexAttributeArrayRef
 		a.Enabled = false
+		_ = a
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glDisableVertexAttribArray expected %v got %v", ω.Out, Σ)
 		}
@@ -367,6 +372,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		a.Normalized = ω.In.Normalized
 		a.Stride = ω.In.Stride
 		a.Data = memory.Pointer(ω.In.Data)
+		_ = a
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glVertexAttribPointer expected %v got %v", ω.Out, Σ)
 		}
@@ -445,6 +451,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_ = s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetShaderiv expected %v got %v", ω.Out, Σ)
 		}
@@ -494,6 +501,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			v := ω.In.Parameter
 			log.Printf("Error: Missing switch case handler for value %T %v", v, v)
 		}
+		_, _ = id, t
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glTexParameteri expected %v got %v", ω.Out, Σ)
 		}
@@ -525,6 +533,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			v := ω.In.Parameter
 			log.Printf("Error: Missing switch case handler for value %T %v", v, v)
 		}
+		_, _ = id, t
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glTexParameterf expected %v got %v", ω.Out, Σ)
 		}
@@ -559,6 +568,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_, _ = id, t
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetTexParameteriv expected %v got %v", ω.Out, Σ)
 		}
@@ -593,6 +603,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_, _ = id, t
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetTexParameterfv expected %v got %v", ω.Out, Σ)
 		}
@@ -603,6 +614,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		uniform.Type = ShaderUniformType_GL_INT
 		uniform.Value.S32 = ω.In.Value
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform1i expected %v got %v", ω.Out, Σ)
 		}
@@ -619,6 +631,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform2i expected %v got %v", ω.Out, Σ)
 		}
@@ -636,6 +649,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform3i expected %v got %v", ω.Out, Σ)
 		}
@@ -654,6 +668,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform4i expected %v got %v", ω.Out, Σ)
 		}
@@ -664,6 +679,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		uniform.Type = ShaderUniformType_GL_INT
 		uniform.Value.S32 = ω.In.Value[0]
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform1iv expected %v got %v", ω.Out, Σ)
 		}
@@ -680,6 +696,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform2iv expected %v got %v", ω.Out, Σ)
 		}
@@ -697,6 +714,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform3iv expected %v got %v", ω.Out, Σ)
 		}
@@ -715,6 +733,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform4iv expected %v got %v", ω.Out, Σ)
 		}
@@ -725,6 +744,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		uniform.Type = ShaderUniformType_GL_FLOAT
 		uniform.Value.F32 = ω.In.Value
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform1f expected %v got %v", ω.Out, Σ)
 		}
@@ -741,6 +761,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform2f expected %v got %v", ω.Out, Σ)
 		}
@@ -758,6 +779,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform3f expected %v got %v", ω.Out, Σ)
 		}
@@ -776,6 +798,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform4f expected %v got %v", ω.Out, Σ)
 		}
@@ -786,6 +809,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		uniform.Type = ShaderUniformType_GL_FLOAT
 		uniform.Value.F32 = ω.In.Value[0]
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform1fv expected %v got %v", ω.Out, Σ)
 		}
@@ -802,6 +826,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform2fv expected %v got %v", ω.Out, Σ)
 		}
@@ -819,6 +844,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform3fv expected %v got %v", ω.Out, Σ)
 		}
@@ -837,6 +863,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniform4fv expected %v got %v", ω.Out, Σ)
 		}
@@ -865,6 +892,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniformMatrix2fv expected %v got %v", ω.Out, Σ)
 		}
@@ -903,6 +931,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniformMatrix3fv expected %v got %v", ω.Out, Σ)
 		}
@@ -952,6 +981,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		program.Uniforms[ω.In.Location] = uniform
+		_, _ = program, uniform
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glUniformMatrix4fv expected %v got %v", ω.Out, Σ)
 		}
@@ -1125,6 +1155,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Textures[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenTextures expected %v got %v", ω.Out, Σ)
@@ -1178,6 +1209,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Texture2D[ω.In.Level] = l
 			t.Kind = TextureKind_TEXTURE2D
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _ = id, t, l
 		case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 			id := m.State.TextureUnits.Get(m.State.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
 			t := m.State.Instances.Textures.Get(id)                                                          // TextureRef
@@ -1195,6 +1227,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Cubemap[ω.In.Level] = cube
 			t.Kind = TextureKind_CUBEMAP
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _, _ = id, t, l, cube
 		default:
 			// TODO: better unmatched handling
 			v := ω.In.Target
@@ -1225,6 +1258,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Texture2D[ω.In.Level] = l
 			t.Kind = TextureKind_TEXTURE2D
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _ = id, t, l
 		case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 			id := m.State.TextureUnits.Get(m.State.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
 			t := m.State.Instances.Textures.Get(id)                                                          // TextureRef
@@ -1246,6 +1280,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Cubemap[ω.In.Level] = cube
 			t.Kind = TextureKind_CUBEMAP
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _, _ = id, t, l, cube
 		default:
 			// TODO: better unmatched handling
 			v := ω.In.Target
@@ -1286,6 +1321,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Texture2D[ω.In.Level] = l
 			t.Kind = TextureKind_TEXTURE2D
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _ = id, t, l
 		case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 			id := m.State.TextureUnits.Get(m.State.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
 			t := m.State.Instances.Textures.Get(id)                                                          // TextureRef
@@ -1307,6 +1343,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			t.Cubemap[ω.In.Level] = cube
 			t.Kind = TextureKind_CUBEMAP
 			t.Format = ImageTexelFormat(ω.In.Format)
+			_, _, _, _ = id, t, l, cube
 		default:
 			// TODO: better unmatched handling
 			v := ω.In.Target
@@ -1341,6 +1378,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Framebuffers[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenFramebuffers expected %v got %v", ω.Out, Σ)
@@ -1389,6 +1427,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Renderbuffers[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenRenderbuffers expected %v got %v", ω.Out, Σ)
@@ -1413,6 +1452,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		rb.Format = ω.In.Format
 		rb.Width = ω.In.Width
 		rb.Height = ω.In.Height
+		_, _ = id, rb
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glRenderbufferStorage expected %v got %v", ω.Out, Σ)
 		}
@@ -1449,6 +1489,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_, _ = id, rb
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetRenderbufferParameteriv expected %v got %v", ω.Out, Σ)
 		}
@@ -1463,6 +1504,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Buffers[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenBuffers expected %v got %v", ω.Out, Σ)
@@ -1490,6 +1532,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		}))
 		b.Size = ω.In.Size
 		b.Usage = ω.In.Usage
+		_, _ = id, b
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glBufferData expected %v got %v", ω.Out, Σ)
 		}
@@ -1528,6 +1571,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_, _ = id, b
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetBufferParameteriv expected %v got %v", ω.Out, Σ)
 		}
@@ -1542,6 +1586,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		s := m.State.Instances.Shaders.Get(id) // ShaderRef
 		s.Type = ω.In.Type
 		Σ.Result = id
+		_, _ = id, s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glCreateShader expected %v got %v", ω.Out, Σ)
 		}
@@ -1550,6 +1595,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		s := m.State.Instances.Shaders.Get(ω.In.Shader) // ShaderRef
 		s.Deletable = true
 		m.State.Instances.Shaders.Delete(ω.In.Shader)
+		_ = s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glDeleteShader expected %v got %v", ω.Out, Σ)
 		}
@@ -1557,6 +1603,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		Σ := GlShaderSource_Out{}
 		s := m.State.Instances.Shaders.Get(ω.In.Shader) // ShaderRef
 		s.Source = ω.In.Source
+		_ = s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glShaderSource expected %v got %v", ω.Out, Σ)
 		}
@@ -1586,6 +1633,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		}() // s32
 		Σ.StringLengthWritten = min_0_result
 		Σ.Info = substr(s.InfoLog, 0, Σ.StringLengthWritten)
+		_, _, _, _ = s, min_0_a, min_0_b, min_0_result
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetShaderInfoLog expected %v got %v", ω.Out, Σ)
 		}
@@ -1608,6 +1656,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		}() // s32
 		Σ.StringLengthWritten = min_1_result
 		Σ.Source = substr(s.Source[0], 0, Σ.StringLengthWritten)
+		_, _, _, _ = s, min_1_a, min_1_b, min_1_result
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetShaderSource expected %v got %v", ω.Out, Σ)
 		}
@@ -1636,6 +1685,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			return s
 		}()
 		Σ.Result = id
+		_ = id
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glCreateProgram expected %v got %v", ω.Out, Σ)
 		}
@@ -1650,6 +1700,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		p := m.State.Instances.Programs.Get(ω.In.Program) // ProgramRef
 		s := m.State.Instances.Shaders.Get(ω.In.Shader)   // ShaderRef
 		p.Shaders[s.Type] = ω.In.Shader
+		_, _ = p, s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glAttachShader expected %v got %v", ω.Out, Σ)
 		}
@@ -1658,6 +1709,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		p := m.State.Instances.Programs.Get(ω.In.Program) // ProgramRef
 		s := m.State.Instances.Shaders.Get(ω.In.Shader)   // ShaderRef
 		p.Shaders.Delete(s.Type)
+		_, _ = p, s
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glDetachShader expected %v got %v", ω.Out, Σ)
 		}
@@ -1681,6 +1733,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		}() // s32
 		Σ.ShadersLengthWritten = min_2_result
 		Σ.Shaders = p.Shaders.Range()
+		_, _, _, _ = p, min_2_a, min_2_b, min_2_result
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetAttachedShaders expected %v got %v", ω.Out, Σ)
 		}
@@ -1708,6 +1761,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		}() // s32
 		Σ.StringLengthWritten = min_3_result
 		Σ.Info = substr(p.InfoLog, 0, Σ.StringLengthWritten)
+		_, _, _, _ = p, min_3_a, min_3_b, min_3_result
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetProgramInfoLog expected %v got %v", ω.Out, Σ)
 		}
@@ -1807,6 +1861,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 		attachment.TextureLevel = 0
 		attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 		framebuffer.Attachments[ω.In.FramebufferAttachment] = attachment
+		_, _, _ = framebufferId, framebuffer, attachment
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glFramebufferRenderbuffer expected %v got %v", ω.Out, Σ)
 		}
@@ -1849,6 +1904,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 			}()
 		}
 		framebuffer.Attachments[ω.In.FramebufferAttachment] = attachment
+		_, _, _ = framebufferId, framebuffer, attachment
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glFramebufferTexture2D expected %v got %v", ω.Out, Σ)
 		}
@@ -1874,6 +1930,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return result
 			}
 		}()
+		_, _, _ = framebufferId, framebuffer, a
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGetFramebufferAttachmentParameteriv expected %v got %v", ω.Out, Σ)
 		}
@@ -2173,6 +2230,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Queries[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenQueries expected %v got %v", ω.Out, Σ)
@@ -2224,6 +2282,7 @@ func (m StateMutator) Write(ψ atom.ID, Θ atom.Atom) {
 				return s
 			}()
 			Σ.Queries[i] = id
+			_ = id
 		}
 		if m.ValidateOutput && !reflect.DeepEqual(ω.Out, Σ) {
 			log.Printf("Applying glGenQueriesEXT expected %v got %v", ω.Out, Σ)
