@@ -52,7 +52,6 @@ type Struct struct {
 	Fields     []Field   // Descriptions of the fields of the struct.
 	Signature  string    // The full string type signature of the Struct.
 	ID         binary.ID // The unique type identifier for the Struct.
-	Delegating bool      // True if the struct is a pure delegating type.
 }
 
 // Kind describes the basic nature of a type.
@@ -103,17 +102,24 @@ type Type struct {
 func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Name: n.Name()}
-	s.Fields = make([]Field, t.NumFields())
 	s.Package = pkg.Name()
-	for i := range s.Fields {
+	tagged := false
+	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
-		f := &s.Fields[i]
+		if decl.Anonymous() && decl.Type().String() == "android.googlesource.com/platform/tools/gpu/binary.Generate" {
+			tagged = true
+			continue
+		}
+		f := Field{}
 		f.Name = decl.Name()
 		f.Type = FromType(pkg, decl.Type())
 		f.Anonymous = decl.Anonymous()
+		s.Fields = append(s.Fields, f)
+	}
+	if !tagged {
+		return nil
 	}
 	s.UpdateID()
-	s.Delegating = len(s.Fields) == 1 && s.Fields[0].Anonymous
 	return s
 }
 

@@ -17,6 +17,7 @@
 package builder
 
 import (
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -24,6 +25,7 @@ import (
 
 // GetState records the parameters of a service.GetState RPC request.
 type GetState struct {
+	binary.Generate
 	Capture service.CaptureId
 	Context atom.ContextID
 	After   atom.ID
@@ -31,12 +33,14 @@ type GetState struct {
 
 // GetHierarchy records the parameters of a service.GetHierarchy RPC request.
 type GetHierarchy struct {
+	binary.Generate
 	Capture service.CaptureId
 	Context atom.ContextID
 }
 
 // GetMemoryInfo records the parameters of a service.GetMemoryInfo RPC request.
 type GetMemoryInfo struct {
+	binary.Generate
 	Capture service.CaptureId
 	Context atom.ContextID
 	After   atom.ID
@@ -45,6 +49,7 @@ type GetMemoryInfo struct {
 
 // GetFramebufferColor records the parameters of a service.GetFramebufferColor RPC request.
 type GetFramebufferColor struct {
+	binary.Generate
 	Capture  service.CaptureId
 	Context  atom.ContextID
 	Device   service.DeviceId
@@ -54,6 +59,7 @@ type GetFramebufferColor struct {
 
 // GetFramebufferDepth records the parameters of a service.GetFramebufferDepth RPC request.
 type GetFramebufferDepth struct {
+	binary.Generate
 	Capture service.CaptureId
 	Context atom.ContextID
 	Device  service.DeviceId
@@ -62,6 +68,7 @@ type GetFramebufferDepth struct {
 
 // ReplaceAtom records the parameters of a service.ReplaceAtom RPC request.
 type ReplaceAtom struct {
+	binary.Generate
 	Capture service.CaptureId
 	Atom    atom.ID
 	Type    atom.TypeID
@@ -70,6 +77,7 @@ type ReplaceAtom struct {
 
 // GetTimingInfo records the parameters of a service.GetTimingInfo RPC request.
 type GetTimingInfo struct {
+	binary.Generate
 	Capture    service.CaptureId
 	Context    atom.ContextID
 	Device     service.DeviceId
@@ -78,6 +86,7 @@ type GetTimingInfo struct {
 
 // PrerenderFramebuffers records the parameters of a service.PrerenderFramebuffers RPC request.
 type PrerenderFramebuffers struct {
+	binary.Generate
 	Device  service.DeviceId
 	Capture service.CaptureId
 	AtomIDs []uint64
@@ -87,6 +96,7 @@ type PrerenderFramebuffers struct {
 
 // RenderFramebufferDepth records the parameters of an internal RenderFramebufferDepth request.
 type RenderFramebufferDepth struct {
+	binary.Generate
 	Capture           service.CaptureId
 	Context           atom.ContextID
 	Device            service.DeviceId
@@ -97,6 +107,7 @@ type RenderFramebufferDepth struct {
 
 // RenderFramebufferColor records the parameters of an internal RenderFramebufferColor request.
 type RenderFramebufferColor struct {
+	binary.Generate
 	Capture   service.CaptureId
 	Context   atom.ContextID
 	Device    service.DeviceId
@@ -108,12 +119,14 @@ type RenderFramebufferColor struct {
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.
 type getCaptureFramebufferDimensions struct {
+	binary.Generate
 	Capture service.CaptureId
 	Context atom.ContextID
 }
 
 // atomFramebufferDimensions records the parameters of an internal resource for getCaptureFramebufferDimensions.
 type atomFramebufferDimensions struct {
+	binary.Generate
 	From   atom.ID
 	Width  uint32
 	Height uint32
@@ -121,5 +134,6 @@ type atomFramebufferDimensions struct {
 
 // captureFramebufferDimensions records the parameters of an internal resource for getCaptureFramebufferDimensions.
 type captureFramebufferDimensions struct {
+	binary.Generate
 	Dimensions []atomFramebufferDimensions
 }
