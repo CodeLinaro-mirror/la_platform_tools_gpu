@@ -60,6 +60,17 @@ func (*Functions) IndexOf(array interface{}, value interface{}) int {
 	return -1
 }
 
+// Tail returns a slice of the list from start to len(array).
+func (*Functions) Tail(start int, array interface{}) interface{} {
+	v := reflect.ValueOf(array)
+	c := v.Len() - start
+	out := reflect.MakeSlice(v.Type(), c, c)
+	for i := 0; i < c; i++ {
+		out.Index(i).Set(v.Index(start + i))
+	}
+	return out.Interface()
+}
+
 // ForEach returns a string list containing the strings emitted by calling the
 // macro m for each sequential item in the array arr. 0 length strings will
 // be ommitted from the returned list.

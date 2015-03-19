@@ -14,23 +14,14 @@
 
 package semantic
 
-import (
-	"net/url"
-
-	"android.googlesource.com/platform/tools/gpu/api/ast"
-)
-
-// Docs represents a documentation link
-type Docs url.URL
-
-func (d *Docs) String() string { return (*url.URL)(d).String() }
+import "android.googlesource.com/platform/tools/gpu/api/ast"
 
 // Function represents function like objects in the semantic graph.
 type Function struct {
 	AST            *ast.Function // the underlying syntax node this was built from
 	Annotations                  // the annotations applied to the function
 	Name           string        // the name of the function
-	Docs           Docs          // the documentation link for the function
+	Docs           []string      // the documentation for the function
 	Owner          Type          // the owner of the function
 	Return         *Parameter    // the return parameter
 	This           *Parameter    // the this parameter, missing for non method functions
@@ -55,6 +46,7 @@ type Parameter struct {
 	Annotations                // the annotations applied to the parameter
 	Function    *Function      // the function this parameter belongs to
 	Name        string         // the name of the parameter
+	Docs        []string       // the documentation for the parameter
 	Input       bool           // true if the parameter is an input
 	Output      bool           // true if the parameter is an output
 	Type        Type           // the type of the parameter

@@ -34,7 +34,7 @@ func function(f *ast.Function, p *parse.Parser, cst *parse.Branch, withBlock boo
 	requireOperator(ast.OpListStart, p, cst)
 	for !operator(ast.OpListEnd, p, cst) {
 		if len(f.Parameters) > 0 {
-			requireOperator(ast.OpListSeparator, p, cst)
+			operator(ast.OpListSeparator, p, cst)
 		}
 		p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 			f.Parameters = append(f.Parameters, parameter(p, cst))

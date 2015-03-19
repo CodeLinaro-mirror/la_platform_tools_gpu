@@ -50,6 +50,7 @@ type Class struct {
 	AST         *ast.Class  // the underlying syntax node this was built from
 	Annotations             // the annotations applied to this class
 	Name        string      // the name of the class
+	Docs        []string    // the documentation for the class
 	Extends     []*Class    // the classes this extends
 	ExtendedBy  []*Class    // the classes that declared they extended this class
 	Fields      []*Field    // the set of fields the class declares
@@ -67,6 +68,7 @@ type Field struct {
 	Class       *Class     // the class this field belongs to
 	Type        Type       // the type the field stores
 	Name        string     // the name of the field
+	Docs        []string   // the documentation for the field
 	Default     Expression // the default value of the field
 }
 
@@ -124,6 +126,7 @@ type Enum struct {
 	AST         *ast.Enum    // the underlying syntax node this was built from
 	Annotations              // the annotations applied to this enum
 	Name        string       // the type name of the enum
+	Docs        []string     // the documentation for the enum
 	IsBitfield  bool         // whether this enum is actually a bitfield
 	Extends     []*Enum      // the enums this enum extends
 	Entries     []*EnumEntry // the entries of this enum
@@ -148,6 +151,7 @@ type EnumEntry struct {
 	AST   *ast.EnumEntry // the underlying syntax node this was built from
 	Enum  *Enum          // the enum this entry belongs to
 	Name  string         // the name of this entry
+	Docs  []string       // the documentation for the enum entry
 	Value uint32         // the value this entry represents
 }
 
@@ -167,6 +171,7 @@ type Pseudonym struct {
 	AST         *ast.Pseudonym // the underlying syntax node this was built from
 	Annotations                // the annotations applied to this pseudonym
 	Name        string         // the type name
+	Docs        []string       // the documentation for the pseudonym
 	To          Type           // the underlying type
 	Methods     []*Function    // the methods added directly to the pseudonym
 	Members                    // the direct members
