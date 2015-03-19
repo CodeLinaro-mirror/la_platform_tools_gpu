@@ -266,8 +266,10 @@ task windows64installLocal(type: Copy, dependsOn: ['windows64TestExecutable', 'w
       include 'test*'
       rename 'test(.*)', 'testReplayd$1'
     }
+    into outputDirectory+'/windows_amd64/'
+  } else {
+    into mingwRoot()+'/bin/'
   }
-  into mingwRoot()+'/bin/'
 }
 
 def cazeLinkerArgs(targetPlatformName) {
@@ -291,8 +293,8 @@ def cazeLinkerArgs(targetPlatformName) {
     case 'windows64': return [
       '-static-libgcc',
       '-static-libstdc++',
-      '-L/usr/local/lib',
       '-L'+mingwRoot()+'/lib',
+      '-L/usr/local/lib',
       '-lws2_32',
       '-lopengl32',
       '-lgdi32'

@@ -18,7 +18,7 @@
 #if TARGET_OS == CAZE_OS_WINDOWS
 
 #include <windows.h>
-#include <Wingdi.h>
+#include <wingdi.h>
 
 namespace android {
 namespace caze {
