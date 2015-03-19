@@ -1136,6 +1136,7 @@ class Objects {
 // Synthetic APIs
 /////////////////////////////////////////////////////////////////
 
+@initializer
 @synthetic
 cmd void init(s32                width,
               s32                height,

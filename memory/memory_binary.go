@@ -6,44 +6,13 @@
 package memory
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
-	//struct memory.Observation { Context:atom.ContextID, Range:Range, ResourceID:binary.ID }
-	registry.Add(binary.ID{0x50, 0x86, 0x69, 0x52, 0x83, 0xb3, 0xa4, 0x09, 0x9c, 0xe7, 0x86, 0x7c, 0x31, 0x92, 0x66, 0x82, 0xb1, 0x05, 0x99, 0x67}, &Observation{})
 	//struct memory.Range { Base:Pointer, Size:uint64 }
 	registry.Add(binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}, &Range{})
-}
-
-func (o Observation) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(o.Context)); err != nil {
-		return err
-	}
-	if err := o.Range.Encode(e); err != nil {
-		return err
-	}
-	if err := o.ResourceID.Encode(e); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *Observation) Decode(d binary.Decoder) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Context = atom.ContextID(obj)
-	}
-	if err := o.Range.Decode(d); err != nil {
-		return err
-	}
-	if err := o.ResourceID.Decode(d); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o Range) Encode(e binary.Encoder) error {

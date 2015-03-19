@@ -7,6 +7,14 @@ package service
 
 import "fmt"
 
+func (c callImport) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "Import(name: %v, Data: %v)",
+		c.name, c.Data,
+	)
+}
+func (r resultImport) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
 func (c callGetCaptures) Format(f fmt.State, r rune) {
 	fmt.Fprintf(f, "GetCaptures()")
 }
@@ -20,8 +28,8 @@ func (r resultGetDevices) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetState) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetState(capture: %v, contextId: %v, after: %v)",
-		c.capture, c.contextId, c.after,
+	fmt.Fprintf(f, "GetState(capture: %v, after: %v)",
+		c.capture, c.after,
 	)
 }
 func (r resultGetState) Format(f fmt.State, c rune) {
@@ -36,8 +44,8 @@ func (r resultGetHierarchy) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetMemoryInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetMemoryInfo(capture: %v, contextId: %v, after: %v, rng: %v)",
-		c.capture, c.contextId, c.after, c.rng,
+	fmt.Fprintf(f, "GetMemoryInfo(capture: %v, after: %v, rng: %v)",
+		c.capture, c.after, c.rng,
 	)
 }
 func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
@@ -156,6 +164,9 @@ func (r resultResolveTimingInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 
+func (h ApiId) Valid() bool {
+	return h.ID.Valid()
+}
 func (h AtomStreamId) Valid() bool {
 	return h.ID.Valid()
 }
@@ -184,8 +195,11 @@ func (h TimingInfoId) Valid() bool {
 	return h.ID.Valid()
 }
 
-func (a ArrayInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ArrayInfoRefArray", len(a))
+func (a ApiSchemaArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]ApiSchemaArray", len(a))
+}
+func (a AtomContextArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]AtomContextArray", len(a))
 }
 func (a AtomGroupArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]AtomGroupArray", len(a))
@@ -217,20 +231,11 @@ func (a EnumInfoArray) Format(f fmt.State, c rune) {
 func (a FieldInfoArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]FieldInfoRefArray", len(a))
 }
-func (a MapInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]MapInfoRefArray", len(a))
-}
 func (a MemoryRangeArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]MemoryRangeArray", len(a))
 }
 func (a ParameterInfoArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ParameterInfoArray", len(a))
-}
-func (a StaticArrayInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]StaticArrayInfoRefArray", len(a))
-}
-func (a StructInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]StructInfoRefArray", len(a))
 }
 func (a U32Array) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]U32Array", len(a))
@@ -372,22 +377,22 @@ func (c *Device) GetRequiresShaderPatching() bool { return c.RequiresShaderPatch
 
 func CreateCapture(
 	Name string,
-	API string,
 	Atoms AtomStreamId,
-	ContextIds U32Array,
+	Schema SchemaId,
+	Contexts AtomContextArray,
 ) *Capture {
 	return &Capture{
-		Name:       Name,
-		API:        API,
-		Atoms:      Atoms,
-		ContextIds: ContextIds,
+		Name:     Name,
+		Atoms:    Atoms,
+		Schema:   Schema,
+		Contexts: Contexts,
 	}
 }
 
-func (c *Capture) GetName() string         { return c.Name }
-func (c *Capture) GetAPI() string          { return c.API }
-func (c *Capture) GetAtoms() AtomStreamId  { return c.Atoms }
-func (c *Capture) GetContextIds() U32Array { return c.ContextIds }
+func (c *Capture) GetName() string               { return c.Name }
+func (c *Capture) GetAtoms() AtomStreamId        { return c.Atoms }
+func (c *Capture) GetSchema() SchemaId           { return c.Schema }
+func (c *Capture) GetContexts() AtomContextArray { return c.Contexts }
 
 func CreateBinary(
 	Data U8Array,
@@ -401,16 +406,26 @@ func (c *Binary) GetData() U8Array { return c.Data }
 
 func CreateAtomStream(
 	Data U8Array,
-	Schema SchemaId,
 ) *AtomStream {
 	return &AtomStream{
-		Data:   Data,
-		Schema: Schema,
+		Data: Data,
 	}
 }
 
-func (c *AtomStream) GetData() U8Array    { return c.Data }
-func (c *AtomStream) GetSchema() SchemaId { return c.Schema }
+func (c *AtomStream) GetData() U8Array { return c.Data }
+
+func CreateAtomContext(
+	Id uint32,
+	Api ApiId,
+) *AtomContext {
+	return &AtomContext{
+		Id:  Id,
+		Api: Api,
+	}
+}
+
+func (c *AtomContext) GetId() uint32 { return c.Id }
+func (c *AtomContext) GetApi() ApiId { return c.Api }
 
 func CreateHierarchy(
 	Root AtomGroup,
@@ -564,35 +579,30 @@ func (c *RenderSettings) GetMaxHeight() uint32 { return c.MaxHeight }
 func (c *RenderSettings) GetWireframe() bool   { return c.Wireframe }
 
 func CreateSchema(
-	Arrays ArrayInfoArray,
-	StaticArrays StaticArrayInfoArray,
-	Maps MapInfoArray,
-	Enums EnumInfoArray,
-	Structs StructInfoArray,
-	Classes ClassInfoArray,
 	Atoms AtomInfoArray,
-	State *StructInfo,
+	Apis ApiSchemaArray,
 ) *Schema {
 	return &Schema{
-		Arrays:       Arrays,
-		StaticArrays: StaticArrays,
-		Maps:         Maps,
-		Enums:        Enums,
-		Structs:      Structs,
-		Classes:      Classes,
-		Atoms:        Atoms,
-		State:        State,
+		Atoms: Atoms,
+		Apis:  Apis,
 	}
 }
 
-func (c *Schema) GetArrays() ArrayInfoArray             { return c.Arrays }
-func (c *Schema) GetStaticArrays() StaticArrayInfoArray { return c.StaticArrays }
-func (c *Schema) GetMaps() MapInfoArray                 { return c.Maps }
-func (c *Schema) GetEnums() EnumInfoArray               { return c.Enums }
-func (c *Schema) GetStructs() StructInfoArray           { return c.Structs }
-func (c *Schema) GetClasses() ClassInfoArray            { return c.Classes }
-func (c *Schema) GetAtoms() AtomInfoArray               { return c.Atoms }
-func (c *Schema) GetState() *StructInfo                 { return c.State }
+func (c *Schema) GetAtoms() AtomInfoArray { return c.Atoms }
+func (c *Schema) GetApis() ApiSchemaArray { return c.Apis }
+
+func CreateApiSchema(
+	Api ApiId,
+	State StructInfo,
+) *ApiSchema {
+	return &ApiSchema{
+		Api:   Api,
+		State: State,
+	}
+}
+
+func (c *ApiSchema) GetApi() ApiId        { return c.Api }
+func (c *ApiSchema) GetState() StructInfo { return c.State }
 
 func CreateArrayInfo(
 	Name string,

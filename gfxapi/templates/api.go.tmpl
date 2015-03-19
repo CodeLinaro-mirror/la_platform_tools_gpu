@@ -26,6 +26,7 @@ limitations under the License.
     "android.googlesource.com/platform/tools/gpu/gfxapi"
     "android.googlesource.com/platform/tools/gpu/memory"
     "android.googlesource.com/platform/tools/gpu/replay/builder"
+    "android.googlesource.com/platform/tools/gpu/service"
   )
 
   {{range $p := $.Pseudonyms}}
@@ -257,6 +258,8 @@ limitations under the License.
       {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
   }
+
+  func ({{$name}}) API() gfxapi.API { return API() }
 {{end}}
 
 
@@ -494,16 +497,12 @@ limitations under the License.
   {{template "Go.CommentHeader" "API"}}
   type api struct {}
 
-  func (a api) Name() string {
+  func (api) Name() string {
     return "{{Global "API"}}"
   }
 
-  func (a api) InitialState() gfxapi.State {
-    return initialState()
-  }
-
-  func (a api) StateMutator(s gfxapi.State) atom.Writer {
-    return &StateMutator{State: s.(*state)}
+  func (api) ID() service.ApiId {
+    return service.ApiId{ binary.NewID([]byte("{{Global "API"}}")) }
   }
 
   func API() gfxapi.API {

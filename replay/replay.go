@@ -19,17 +19,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
-	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
-
-// Writer is the interface that wraps the basic Write method.
-type Writer interface {
-	// Write emits the replay instructions for the atom a with identifier id using
-	// the replay Builder passed to NewEncoder. If postOutput is true then postback
-	// logic should be emitted for this atom.
-	Write(id atom.ID, a atom.Atom, postOutput bool)
-}
 
 // Generator is the interface for types that support replay generation.
 type Generator interface {
@@ -46,10 +37,6 @@ type Generator interface {
 		device *service.Device,
 		db database.Database,
 		logger log.Logger) atom.Transforms
-
-	// ReplayWriter returns a Writer that can be used to emit replay instructions
-	// to the Builder b.
-	ReplayWriter(b *builder.Builder) Writer
 }
 
 // Context describes the source capture and replay target information used for

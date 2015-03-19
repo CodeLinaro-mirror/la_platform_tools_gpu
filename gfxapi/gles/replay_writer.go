@@ -5,19 +5,15 @@
 package gles
 
 import (
-	"fmt"
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
-
-type replayer interface {
-	replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)
-}
 
 func readBytes(r io.Reader, c uint64) ([]byte, error) {
 	b := make([]byte, c)
@@ -227,190 +223,190 @@ var funcInfoGlGetQueryObjectuivEXT = builder.FunctionInfo{ID: 185, ReturnType: p
 var funcInfoGlGetQueryObjecti64vEXT = builder.FunctionInfo{ID: 186, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetQueryObjectui64vEXT = builder.FunctionInfo{ID: 187, ReturnType: protocol.TypeVoid, Parameters: 3}
 
-func (c RenderbufferId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c TextureId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c TextureId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c FramebufferId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c FramebufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c BufferId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c BufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c ShaderId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c ShaderId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c ProgramId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c ProgramId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c VertexArrayId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c VertexArrayId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c QueryId) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c QueryId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (c UniformLocation) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c UniformLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.S32(int32(c))
 }
-func (c AttributeLocation) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.S32(int32(c))
 }
-func (arr BoolArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.Bool(e))
+			ϟb.Push(value.Bool(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr BufferIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr BufferIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr DiscardFramebufferAttachmentArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr DiscardFramebufferAttachmentArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.U32(e))
+			ϟb.Push(value.U32(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr F32Array) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr F32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.F32(e))
+			ϟb.Push(value.F32(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr FramebufferAttachmentArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr FramebufferAttachmentArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.U32(e))
+			ϟb.Push(value.U32(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr FramebufferIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr FramebufferIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr QueryIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr QueryIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr RenderbufferIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr RenderbufferIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr S32Array) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr S32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.S32(e))
+			ϟb.Push(value.S32(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr ShaderIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr ShaderIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr StringArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr StringArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(b.String(e))
+			ϟb.Push(ϟb.String(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr TextureIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr TextureIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr VertexArrayIdArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr VertexArrayIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -1303,18 +1299,6 @@ func (o *GlGetQueryObjectui64vEXT_Postback) Decode(d *protocol.Decoder) error {
 	}
 	return nil
 }
-
-type replayWriter struct {
-	builder *builder.Builder
-	state   *state
-}
-
-func newReplayWriter(b *builder.Builder) *replayWriter {
-	return &replayWriter{
-		builder: b,
-		state:   initialState(),
-	}
-}
 func loadRemap(b *builder.Builder, key interface{}, val value.Value) {
 	ptr, found := b.Remappings[key]
 	if found {
@@ -1336,47 +1320,36 @@ func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty proto
 		b.Remappings[key] = ptr
 	}
 }
-func (r *replayWriter) Write(id atom.ID, a atom.Atom, wantOutput bool) {
-	b := r.builder
-	switch ω := a.(type) {
-	case *memory.Observation:
-		b.Observation(ω.Range, ω.ResourceID)
-	case replayer:
-		ω.replay(id, r.state, b, wantOutput)
-	case *atom.EOS:
-	default:
-		panic(fmt.Errorf("Unsupported atom type %T for Write", ω))
-	}
-	b.EndAtom()
+
+var _ = replay.Replayer(&Init{}) // interface compliance check
+func (ϟa *Init) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.In.ColorFmt))
+	ϟb.Push(value.U32(ϟa.In.DepthFmt))
+	ϟb.Push(value.U32(ϟa.In.StencilFmt))
+	ϟb.CallNoPush(funcInfoInit)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&Init{}) // interface compliance check
-func (ω *Init) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.U32(ω.In.ColorFmt))
-	b.Push(value.U32(ω.In.DepthFmt))
-	b.Push(value.U32(ω.In.StencilFmt))
-	b.CallNoPush(funcInfoInit)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&StartTimer{}) // interface compliance check
+func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U8(ϟa.In.Index))
+	ϟb.CallNoPush(funcInfoStartTimer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&StartTimer{}) // interface compliance check
-func (ω *StartTimer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U8(ω.In.Index))
-	b.CallNoPush(funcInfoStartTimer)
-	StateMutator{State: s}.Write(id, ω)
-}
-
-var _ = replayer(&StopTimer{}) // interface compliance check
-func (ω *StopTimer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
-	b.Push(value.U8(ω.In.Index))
-	b.CallPush(funcInfoStopTimer)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&StopTimer{}) // interface compliance check
+func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
+	ϟb.Push(value.U8(ϟa.In.Index))
+	ϟb.CallPush(funcInfoStopTimer)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := StopTimer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1384,23 +1357,25 @@ func (ω *StopTimer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&FlushPostBuffer{}) // interface compliance check
-func (ω *FlushPostBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoFlushPostBuffer)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&FlushPostBuffer{}) // interface compliance check
+func (ϟa *FlushPostBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoFlushPostBuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&EglCreateContext{}) // interface compliance check
-func (ω *EglCreateContext) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* version */, 4 /* context */})
-	b.Push(outputs[0]) // version
-	b.Push(outputs[1]) // context
-	b.CallNoPush(funcInfoEglCreateContext)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&EglCreateContext{}) // interface compliance check
+func (ϟa *EglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* version */, 4 /* context */})
+	ϟb.Push(outputs[0]) // version
+	ϟb.Push(outputs[1]) // context
+	ϟb.CallNoPush(funcInfoEglCreateContext)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := EglCreateContext_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1408,52 +1383,57 @@ func (ω *EglCreateContext) defaultReplay(id atom.ID, s *state, b *builder.Build
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&EglMakeCurrent{}) // interface compliance check
-func (ω *EglMakeCurrent) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Context))
-	b.CallNoPush(funcInfoEglMakeCurrent)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&EglMakeCurrent{}) // interface compliance check
+func (ϟa *EglMakeCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Context))
+	ϟb.CallNoPush(funcInfoEglMakeCurrent)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&EglSwapBuffers{}) // interface compliance check
-func (ω *EglSwapBuffers) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoEglSwapBuffers)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&EglSwapBuffers{}) // interface compliance check
+func (ϟa *EglSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoEglSwapBuffers)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEnableClientState{}) // interface compliance check
-func (ω *GlEnableClientState) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Type))
-	b.CallNoPush(funcInfoGlEnableClientState)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEnableClientState{}) // interface compliance check
+func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.CallNoPush(funcInfoGlEnableClientState)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDisableClientState{}) // interface compliance check
-func (ω *GlDisableClientState) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Type))
-	b.CallNoPush(funcInfoGlDisableClientState)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDisableClientState{}) // interface compliance check
+func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.CallNoPush(funcInfoGlDisableClientState)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetProgramBinaryOES{}) // interface compliance check
-func (ω *GlGetProgramBinaryOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	binary_cnt := uint64(ω.In.BufferSize)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* bytes_written */, 4 /* binary_format */, binary_cnt /* binary */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetProgramBinaryOES{}) // interface compliance check
+func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	binary_cnt := uint64(ϟa.In.BufferSize)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* bytes_written */, 4 /* binary_format */, binary_cnt /* binary */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.BufferSize))
-	b.Push(outputs[0]) // bytes_written
-	b.Push(outputs[1]) // binary_format
-	b.Push(outputs[2]) // binary
-	b.CallNoPush(funcInfoGlGetProgramBinaryOES)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(outputs[0]) // bytes_written
+	ϟb.Push(outputs[1]) // binary_format
+	ϟb.Push(outputs[2]) // binary
+	ϟb.CallNoPush(funcInfoGlGetProgramBinaryOES)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetProgramBinaryOES_Postback{}
 			if err := postback.Decode(binary_cnt, d); err != nil {
 				return nil, err
@@ -1461,168 +1441,182 @@ func (ω *GlGetProgramBinaryOES) replay(id atom.ID, s *state, b *builder.Builder
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlProgramBinaryOES{}) // interface compliance check
-func (ω *GlProgramBinaryOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlProgramBinaryOES{}) // interface compliance check
+func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.BinaryFormat))
-	b.Push(value.VolatileCapturePointer(uint64(ω.In.Binary)))
-	b.Push(value.S32(ω.In.BinarySize))
-	b.CallNoPush(funcInfoGlProgramBinaryOES)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.U32(ϟa.In.BinaryFormat))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Binary)))
+	ϟb.Push(value.S32(ϟa.In.BinarySize))
+	ϟb.CallNoPush(funcInfoGlProgramBinaryOES)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlStartTilingQCOM{}) // interface compliance check
-func (ω *GlStartTilingQCOM) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.U32(ω.In.PreserveMask))
-	b.CallNoPush(funcInfoGlStartTilingQCOM)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlStartTilingQCOM{}) // interface compliance check
+func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.In.PreserveMask))
+	ϟb.CallNoPush(funcInfoGlStartTilingQCOM)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEndTilingQCOM{}) // interface compliance check
-func (ω *GlEndTilingQCOM) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.PreserveMask))
-	b.CallNoPush(funcInfoGlEndTilingQCOM)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEndTilingQCOM{}) // interface compliance check
+func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.PreserveMask))
+	ϟb.CallNoPush(funcInfoGlEndTilingQCOM)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDiscardFramebufferEXT{}) // interface compliance check
-func (ω *GlDiscardFramebufferEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.NumAttachments))
-	b.Push(ω.In.Attachments.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDiscardFramebufferEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDiscardFramebufferEXT{}) // interface compliance check
+func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.NumAttachments))
+	ϟb.Push(ϟa.In.Attachments.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDiscardFramebufferEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlInsertEventMarkerEXT{}) // interface compliance check
-func (ω *GlInsertEventMarkerEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Length))
-	b.Push(b.String(ω.In.Marker))
-	b.CallNoPush(funcInfoGlInsertEventMarkerEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlInsertEventMarkerEXT{}) // interface compliance check
+func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Length))
+	ϟb.Push(ϟb.String(ϟa.In.Marker))
+	ϟb.CallNoPush(funcInfoGlInsertEventMarkerEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlPushGroupMarkerEXT{}) // interface compliance check
-func (ω *GlPushGroupMarkerEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Length))
-	b.Push(b.String(ω.In.Marker))
-	b.CallNoPush(funcInfoGlPushGroupMarkerEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlPushGroupMarkerEXT{}) // interface compliance check
+func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Length))
+	ϟb.Push(ϟb.String(ϟa.In.Marker))
+	ϟb.CallNoPush(funcInfoGlPushGroupMarkerEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlPopGroupMarkerEXT{}) // interface compliance check
-func (ω *GlPopGroupMarkerEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoGlPopGroupMarkerEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlPopGroupMarkerEXT{}) // interface compliance check
+func (ϟa *GlPopGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoGlPopGroupMarkerEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexStorage1DEXT{}) // interface compliance check
-func (ω *GlTexStorage1DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.CallNoPush(funcInfoGlTexStorage1DEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexStorage1DEXT{}) // interface compliance check
+func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.CallNoPush(funcInfoGlTexStorage1DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexStorage2DEXT{}) // interface compliance check
-func (ω *GlTexStorage2DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlTexStorage2DEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexStorage2DEXT{}) // interface compliance check
+func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlTexStorage2DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexStorage3DEXT{}) // interface compliance check
-func (ω *GlTexStorage3DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.S32(ω.In.Depth))
-	b.CallNoPush(funcInfoGlTexStorage3DEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexStorage3DEXT{}) // interface compliance check
+func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.In.Depth))
+	ϟb.CallNoPush(funcInfoGlTexStorage3DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTextureStorage1DEXT{}) // interface compliance check
-func (ω *GlTextureStorage1DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlTextureStorage1DEXT{}) // interface compliance check
+func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.CallNoPush(funcInfoGlTextureStorage1DEXT)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.CallNoPush(funcInfoGlTextureStorage1DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTextureStorage2DEXT{}) // interface compliance check
-func (ω *GlTextureStorage2DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlTextureStorage2DEXT{}) // interface compliance check
+func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlTextureStorage2DEXT)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlTextureStorage2DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTextureStorage3DEXT{}) // interface compliance check
-func (ω *GlTextureStorage3DEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlTextureStorage3DEXT{}) // interface compliance check
+func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Levels))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.S32(ω.In.Depth))
-	b.CallNoPush(funcInfoGlTextureStorage3DEXT)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Levels))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.In.Depth))
+	ϟb.CallNoPush(funcInfoGlTextureStorage3DEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenVertexArraysOES{}) // interface compliance check
-func (ω *GlGenVertexArraysOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	arrays_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{arrays_cnt * 4 /* arrays */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // arrays
-	b.CallNoPush(funcInfoGlGenVertexArraysOES)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Arrays {
+var _ = replay.Replayer(&GlGenVertexArraysOES{}) // interface compliance check
+func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	arrays_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{arrays_cnt * 4 /* arrays */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // arrays
+	ϟb.CallNoPush(funcInfoGlGenVertexArraysOES)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Arrays {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenVertexArraysOES_Postback{}
 			if err := postback.Decode(arrays_cnt, d); err != nil {
 				return nil, err
@@ -1630,40 +1624,43 @@ func (ω *GlGenVertexArraysOES) replay(id atom.ID, s *state, b *builder.Builder,
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindVertexArrayOES{}) // interface compliance check
-func (ω *GlBindVertexArrayOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Array.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Array.value(b, ω, s))
+var _ = replay.Replayer(&GlBindVertexArrayOES{}) // interface compliance check
+func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Array.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Array.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Array.value(b, ω, s))
+		ϟb.Push(ϟa.In.Array.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBindVertexArrayOES)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBindVertexArrayOES)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteVertexArraysOES{}) // interface compliance check
-func (ω *GlDeleteVertexArraysOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Arrays.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteVertexArraysOES)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteVertexArraysOES{}) // interface compliance check
+func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Arrays.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteVertexArraysOES)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsVertexArrayOES{}) // interface compliance check
-func (ω *GlIsVertexArrayOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Array.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Array.value(b, ω, s))
+var _ = replay.Replayer(&GlIsVertexArrayOES{}) // interface compliance check
+func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Array.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Array.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Array.value(b, ω, s))
+		ϟb.Push(ϟa.In.Array.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsVertexArrayOES)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsVertexArrayOES)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsVertexArrayOES_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1671,32 +1668,35 @@ func (ω *GlIsVertexArrayOES) replay(id atom.ID, s *state, b *builder.Builder, w
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEGLImageTargetTexture2DOES{}) // interface compliance check
-func (ω *GlEGLImageTargetTexture2DOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(ω.In.Image.value(b, ω, s))
-	b.CallNoPush(funcInfoGlEGLImageTargetTexture2DOES)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEGLImageTargetTexture2DOES{}) // interface compliance check
+func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(ϟa.In.Image.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlEGLImageTargetTexture2DOES)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEGLImageTargetRenderbufferStorageOES{}) // interface compliance check
-func (ω *GlEGLImageTargetRenderbufferStorageOES) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(ω.In.Image.value(b, ω, s))
-	b.CallNoPush(funcInfoGlEGLImageTargetRenderbufferStorageOES)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEGLImageTargetRenderbufferStorageOES{}) // interface compliance check
+func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(ϟa.In.Image.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlEGLImageTargetRenderbufferStorageOES)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetGraphicsResetStatusEXT{}) // interface compliance check
-func (ω *GlGetGraphicsResetStatusEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoGlGetGraphicsResetStatusEXT)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetGraphicsResetStatusEXT{}) // interface compliance check
+func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoGlGetGraphicsResetStatusEXT)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetGraphicsResetStatusEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1704,109 +1704,119 @@ func (ω *GlGetGraphicsResetStatusEXT) replay(id atom.ID, s *state, b *builder.B
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindAttribLocation{}) // interface compliance check
-func (ω *GlBindAttribLocation) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlBindAttribLocation{}) // interface compliance check
+func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(b.String(ω.In.Name))
-	b.CallNoPush(funcInfoGlBindAttribLocation)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.CallNoPush(funcInfoGlBindAttribLocation)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlendFunc{}) // interface compliance check
-func (ω *GlBlendFunc) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.SrcFactor))
-	b.Push(value.U32(ω.In.DstFactor))
-	b.CallNoPush(funcInfoGlBlendFunc)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlendFunc{}) // interface compliance check
+func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.SrcFactor))
+	ϟb.Push(value.U32(ϟa.In.DstFactor))
+	ϟb.CallNoPush(funcInfoGlBlendFunc)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlendFuncSeparate{}) // interface compliance check
-func (ω *GlBlendFuncSeparate) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.SrcFactorRgb))
-	b.Push(value.U32(ω.In.DstFactorRgb))
-	b.Push(value.U32(ω.In.SrcFactorAlpha))
-	b.Push(value.U32(ω.In.DstFactorAlpha))
-	b.CallNoPush(funcInfoGlBlendFuncSeparate)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlendFuncSeparate{}) // interface compliance check
+func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.SrcFactorRgb))
+	ϟb.Push(value.U32(ϟa.In.DstFactorRgb))
+	ϟb.Push(value.U32(ϟa.In.SrcFactorAlpha))
+	ϟb.Push(value.U32(ϟa.In.DstFactorAlpha))
+	ϟb.CallNoPush(funcInfoGlBlendFuncSeparate)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlendEquation{}) // interface compliance check
-func (ω *GlBlendEquation) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Equation))
-	b.CallNoPush(funcInfoGlBlendEquation)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlendEquation{}) // interface compliance check
+func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Equation))
+	ϟb.CallNoPush(funcInfoGlBlendEquation)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlendEquationSeparate{}) // interface compliance check
-func (ω *GlBlendEquationSeparate) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Rgb))
-	b.Push(value.U32(ω.In.Alpha))
-	b.CallNoPush(funcInfoGlBlendEquationSeparate)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlendEquationSeparate{}) // interface compliance check
+func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Rgb))
+	ϟb.Push(value.U32(ϟa.In.Alpha))
+	ϟb.CallNoPush(funcInfoGlBlendEquationSeparate)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlendColor{}) // interface compliance check
-func (ω *GlBlendColor) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.Red))
-	b.Push(value.F32(ω.In.Green))
-	b.Push(value.F32(ω.In.Blue))
-	b.Push(value.F32(ω.In.Alpha))
-	b.CallNoPush(funcInfoGlBlendColor)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlendColor{}) // interface compliance check
+func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.Red))
+	ϟb.Push(value.F32(ϟa.In.Green))
+	ϟb.Push(value.F32(ϟa.In.Blue))
+	ϟb.Push(value.F32(ϟa.In.Alpha))
+	ϟb.CallNoPush(funcInfoGlBlendColor)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEnableVertexAttribArray{}) // interface compliance check
-func (ω *GlEnableVertexAttribArray) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.CallNoPush(funcInfoGlEnableVertexAttribArray)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEnableVertexAttribArray{}) // interface compliance check
+func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlEnableVertexAttribArray)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDisableVertexAttribArray{}) // interface compliance check
-func (ω *GlDisableVertexAttribArray) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDisableVertexAttribArray)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDisableVertexAttribArray{}) // interface compliance check
+func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDisableVertexAttribArray)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttribPointer{}) // interface compliance check
-func (ω *GlVertexAttribPointer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.U32(ω.In.Size))
-	b.Push(value.U32(ω.In.Type))
-	b.Push(value.Bool(ω.In.Normalized))
-	b.Push(value.S32(ω.In.Stride))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.CallNoPush(funcInfoGlVertexAttribPointer)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttribPointer{}) // interface compliance check
+func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.In.Size))
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(value.Bool(ϟa.In.Normalized))
+	ϟb.Push(value.S32(ϟa.In.Stride))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlVertexAttribPointer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetActiveAttrib{}) // interface compliance check
-func (ω *GlGetActiveAttrib) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	name_cnt := uint64(ω.In.BufferSize)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* vector_count */, 4 /* type */, name_cnt /* name */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetActiveAttrib{}) // interface compliance check
+func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	name_cnt := uint64(ϟa.In.BufferSize)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* vector_count */, 4 /* type */, name_cnt /* name */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.S32(ω.In.BufferSize))
-	b.Push(outputs[0]) // buffer_bytes_written
-	b.Push(outputs[1]) // vector_count
-	b.Push(outputs[2]) // type
-	b.Push(outputs[3]) // name
-	b.CallNoPush(funcInfoGlGetActiveAttrib)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(outputs[0]) // buffer_bytes_written
+	ϟb.Push(outputs[1]) // vector_count
+	ϟb.Push(outputs[2]) // type
+	ϟb.Push(outputs[3]) // name
+	ϟb.CallNoPush(funcInfoGlGetActiveAttrib)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetActiveAttrib_Postback{}
 			if err := postback.Decode(name_cnt, d); err != nil {
 				return nil, err
@@ -1814,27 +1824,28 @@ func (ω *GlGetActiveAttrib) replay(id atom.ID, s *state, b *builder.Builder, wa
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetActiveUniform{}) // interface compliance check
-func (ω *GlGetActiveUniform) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	name_cnt := uint64(ω.In.BufferSize)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* size */, 4 /* type */, name_cnt /* name */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetActiveUniform{}) // interface compliance check
+func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	name_cnt := uint64(ϟa.In.BufferSize)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* size */, 4 /* type */, name_cnt /* name */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Location))
-	b.Push(value.S32(ω.In.BufferSize))
-	b.Push(outputs[0]) // buffer_bytes_written
-	b.Push(outputs[1]) // size
-	b.Push(outputs[2]) // type
-	b.Push(outputs[3]) // name
-	b.CallNoPush(funcInfoGlGetActiveUniform)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.S32(ϟa.In.Location))
+	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(outputs[0]) // buffer_bytes_written
+	ϟb.Push(outputs[1]) // size
+	ϟb.Push(outputs[2]) // type
+	ϟb.Push(outputs[3]) // name
+	ϟb.CallNoPush(funcInfoGlGetActiveUniform)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetActiveUniform_Postback{}
 			if err := postback.Decode(name_cnt, d); err != nil {
 				return nil, err
@@ -1842,16 +1853,17 @@ func (ω *GlGetActiveUniform) replay(id atom.ID, s *state, b *builder.Builder, w
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetError{}) // interface compliance check
-func (ω *GlGetError) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoGlGetError)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetError{}) // interface compliance check
+func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoGlGetError)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetError_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1859,23 +1871,24 @@ func (ω *GlGetError) replay(id atom.ID, s *state, b *builder.Builder, wantOutpu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetProgramiv{}) // interface compliance check
-func (ω *GlGetProgramiv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetProgramiv{}) // interface compliance check
+func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	value_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetProgramiv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetProgramiv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetProgramiv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -1883,23 +1896,24 @@ func (ω *GlGetProgramiv) replay(id atom.ID, s *state, b *builder.Builder, wantO
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetShaderiv{}) // interface compliance check
-func (ω *GlGetShaderiv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetShaderiv{}) // interface compliance check
+func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	value_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetShaderiv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetShaderiv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetShaderiv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -1907,25 +1921,26 @@ func (ω *GlGetShaderiv) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetUniformLocation{}) // interface compliance check
-func (ω *GlGetUniformLocation) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetUniformLocation{}) // interface compliance check
+func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(b.String(ω.In.Name))
-	b.CallPush(funcInfoGlGetUniformLocation)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if key, remap := ω.Out.Result.remap(ω, s); remap {
-		storeRemap(b, key, outputs[0], protocol.TypeInt32)
+	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.CallPush(funcInfoGlGetUniformLocation)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[0], protocol.TypeInt32)
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetUniformLocation_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1933,22 +1948,23 @@ func (ω *GlGetUniformLocation) replay(id atom.ID, s *state, b *builder.Builder,
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetAttribLocation{}) // interface compliance check
-func (ω *GlGetAttribLocation) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetAttribLocation{}) // interface compliance check
+func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(b.String(ω.In.Name))
-	b.CallPush(funcInfoGlGetAttribLocation)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.CallPush(funcInfoGlGetAttribLocation)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetAttribLocation_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1956,45 +1972,49 @@ func (ω *GlGetAttribLocation) defaultReplay(id atom.ID, s *state, b *builder.Bu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlPixelStorei{}) // interface compliance check
-func (ω *GlPixelStorei) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(value.S32(ω.In.Value))
-	b.CallNoPush(funcInfoGlPixelStorei)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlPixelStorei{}) // interface compliance check
+func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.CallNoPush(funcInfoGlPixelStorei)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexParameteri{}) // interface compliance check
-func (ω *GlTexParameteri) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(value.S32(ω.In.Value))
-	b.CallNoPush(funcInfoGlTexParameteri)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexParameteri{}) // interface compliance check
+func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.CallNoPush(funcInfoGlTexParameteri)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexParameterf{}) // interface compliance check
-func (ω *GlTexParameterf) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(value.F32(ω.In.Value))
-	b.CallNoPush(funcInfoGlTexParameterf)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexParameterf{}) // interface compliance check
+func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.F32(ϟa.In.Value))
+	ϟb.CallNoPush(funcInfoGlTexParameterf)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetTexParameteriv{}) // interface compliance check
-func (ω *GlGetTexParameteriv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetTexParameteriv{}) // interface compliance check
+func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	values_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetTexParameteriv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetTexParameteriv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetTexParameteriv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2002,19 +2022,20 @@ func (ω *GlGetTexParameteriv) replay(id atom.ID, s *state, b *builder.Builder, 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetTexParameterfv{}) // interface compliance check
-func (ω *GlGetTexParameterfv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetTexParameterfv{}) // interface compliance check
+func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	values_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetTexParameterfv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetTexParameterfv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetTexParameterfv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2022,378 +2043,408 @@ func (ω *GlGetTexParameterfv) replay(id atom.ID, s *state, b *builder.Builder, 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform1i{}) // interface compliance check
-func (ω *GlUniform1i) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform1i{}) // interface compliance check
+func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Value))
-	b.CallNoPush(funcInfoGlUniform1i)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.CallNoPush(funcInfoGlUniform1i)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform2i{}) // interface compliance check
-func (ω *GlUniform2i) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform2i{}) // interface compliance check
+func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Value0))
-	b.Push(value.S32(ω.In.Value1))
-	b.CallNoPush(funcInfoGlUniform2i)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Value0))
+	ϟb.Push(value.S32(ϟa.In.Value1))
+	ϟb.CallNoPush(funcInfoGlUniform2i)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform3i{}) // interface compliance check
-func (ω *GlUniform3i) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform3i{}) // interface compliance check
+func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Value0))
-	b.Push(value.S32(ω.In.Value1))
-	b.Push(value.S32(ω.In.Value2))
-	b.CallNoPush(funcInfoGlUniform3i)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Value0))
+	ϟb.Push(value.S32(ϟa.In.Value1))
+	ϟb.Push(value.S32(ϟa.In.Value2))
+	ϟb.CallNoPush(funcInfoGlUniform3i)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform4i{}) // interface compliance check
-func (ω *GlUniform4i) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform4i{}) // interface compliance check
+func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Value0))
-	b.Push(value.S32(ω.In.Value1))
-	b.Push(value.S32(ω.In.Value2))
-	b.Push(value.S32(ω.In.Value3))
-	b.CallNoPush(funcInfoGlUniform4i)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Value0))
+	ϟb.Push(value.S32(ϟa.In.Value1))
+	ϟb.Push(value.S32(ϟa.In.Value2))
+	ϟb.Push(value.S32(ϟa.In.Value3))
+	ϟb.CallNoPush(funcInfoGlUniform4i)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform1iv{}) // interface compliance check
-func (ω *GlUniform1iv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform1iv{}) // interface compliance check
+func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform1iv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform1iv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform2iv{}) // interface compliance check
-func (ω *GlUniform2iv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform2iv{}) // interface compliance check
+func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform2iv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform2iv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform3iv{}) // interface compliance check
-func (ω *GlUniform3iv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform3iv{}) // interface compliance check
+func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform3iv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform3iv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform4iv{}) // interface compliance check
-func (ω *GlUniform4iv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform4iv{}) // interface compliance check
+func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform4iv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform4iv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform1f{}) // interface compliance check
-func (ω *GlUniform1f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform1f{}) // interface compliance check
+func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.F32(ω.In.Value))
-	b.CallNoPush(funcInfoGlUniform1f)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.F32(ϟa.In.Value))
+	ϟb.CallNoPush(funcInfoGlUniform1f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform2f{}) // interface compliance check
-func (ω *GlUniform2f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform2f{}) // interface compliance check
+func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.CallNoPush(funcInfoGlUniform2f)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.CallNoPush(funcInfoGlUniform2f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform3f{}) // interface compliance check
-func (ω *GlUniform3f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform3f{}) // interface compliance check
+func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.Push(value.F32(ω.In.Value2))
-	b.CallNoPush(funcInfoGlUniform3f)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.CallNoPush(funcInfoGlUniform3f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform4f{}) // interface compliance check
-func (ω *GlUniform4f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform4f{}) // interface compliance check
+func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.Push(value.F32(ω.In.Value2))
-	b.Push(value.F32(ω.In.Value3))
-	b.CallNoPush(funcInfoGlUniform4f)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.Push(value.F32(ϟa.In.Value3))
+	ϟb.CallNoPush(funcInfoGlUniform4f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform1fv{}) // interface compliance check
-func (ω *GlUniform1fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform1fv{}) // interface compliance check
+func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform1fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform1fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform2fv{}) // interface compliance check
-func (ω *GlUniform2fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform2fv{}) // interface compliance check
+func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform2fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform2fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform3fv{}) // interface compliance check
-func (ω *GlUniform3fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform3fv{}) // interface compliance check
+func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform3fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform3fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniform4fv{}) // interface compliance check
-func (ω *GlUniform4fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniform4fv{}) // interface compliance check
+func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniform4fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniform4fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniformMatrix2fv{}) // interface compliance check
-func (ω *GlUniformMatrix2fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniformMatrix2fv{}) // interface compliance check
+func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(value.Bool(ω.In.Transpose))
-	b.Push(ω.In.Values.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniformMatrix2fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.Bool(ϟa.In.Transpose))
+	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniformMatrix2fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniformMatrix3fv{}) // interface compliance check
-func (ω *GlUniformMatrix3fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniformMatrix3fv{}) // interface compliance check
+func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(value.Bool(ω.In.Transpose))
-	b.Push(ω.In.Values.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniformMatrix3fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.Bool(ϟa.In.Transpose))
+	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniformMatrix3fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUniformMatrix4fv{}) // interface compliance check
-func (ω *GlUniformMatrix4fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+var _ = replay.Replayer(&GlUniformMatrix4fv{}) // interface compliance check
+func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(value.Bool(ω.In.Transpose))
-	b.Push(ω.In.Values.value(b, ω, s))
-	b.CallNoPush(funcInfoGlUniformMatrix4fv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.Bool(ϟa.In.Transpose))
+	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlUniformMatrix4fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetUniformfv{}) // interface compliance check
-func (ω *GlGetUniformfv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetUniformfv{}) // interface compliance check
+func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(ω.In.Values.value(b, ω, s))
-	b.CallNoPush(funcInfoGlGetUniformfv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlGetUniformfv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetUniformiv{}) // interface compliance check
-func (ω *GlGetUniformiv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetUniformiv{}) // interface compliance check
+func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.Location.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Location.value(b, ω, s))
+	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Location.value(b, ω, s))
+		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(ω.In.Values.value(b, ω, s))
-	b.CallNoPush(funcInfoGlGetUniformiv)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlGetUniformiv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib1f{}) // interface compliance check
-func (ω *GlVertexAttrib1f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.F32(ω.In.Value0))
-	b.CallNoPush(funcInfoGlVertexAttrib1f)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib1f{}) // interface compliance check
+func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib1f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib2f{}) // interface compliance check
-func (ω *GlVertexAttrib2f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.CallNoPush(funcInfoGlVertexAttrib2f)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib2f{}) // interface compliance check
+func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib2f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib3f{}) // interface compliance check
-func (ω *GlVertexAttrib3f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.Push(value.F32(ω.In.Value2))
-	b.CallNoPush(funcInfoGlVertexAttrib3f)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib3f{}) // interface compliance check
+func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib3f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib4f{}) // interface compliance check
-func (ω *GlVertexAttrib4f) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(value.F32(ω.In.Value0))
-	b.Push(value.F32(ω.In.Value1))
-	b.Push(value.F32(ω.In.Value2))
-	b.Push(value.F32(ω.In.Value3))
-	b.CallNoPush(funcInfoGlVertexAttrib4f)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib4f{}) // interface compliance check
+func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.Push(value.F32(ϟa.In.Value3))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib4f)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib1fv{}) // interface compliance check
-func (ω *GlVertexAttrib1fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlVertexAttrib1fv)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib1fv{}) // interface compliance check
+func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib1fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib2fv{}) // interface compliance check
-func (ω *GlVertexAttrib2fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlVertexAttrib2fv)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib2fv{}) // interface compliance check
+func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib2fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib3fv{}) // interface compliance check
-func (ω *GlVertexAttrib3fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlVertexAttrib3fv)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib3fv{}) // interface compliance check
+func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib3fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlVertexAttrib4fv{}) // interface compliance check
-func (ω *GlVertexAttrib4fv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.Location.value(b, ω, s))
-	b.Push(ω.In.Value.value(b, ω, s))
-	b.CallNoPush(funcInfoGlVertexAttrib4fv)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlVertexAttrib4fv{}) // interface compliance check
+func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlVertexAttrib4fv)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetShaderPrecisionFormat{}) // interface compliance check
-func (ω *GlGetShaderPrecisionFormat) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetShaderPrecisionFormat{}) // interface compliance check
+func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	range_cnt := uint64(2)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{range_cnt * 4 /* range */, 4 /* precision */})
-	b.Push(value.U32(ω.In.ShaderType))
-	b.Push(value.U32(ω.In.PrecisionType))
-	b.Push(outputs[0]) // range
-	b.Push(outputs[1]) // precision
-	b.CallNoPush(funcInfoGlGetShaderPrecisionFormat)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{range_cnt * 4 /* range */, 4 /* precision */})
+	ϟb.Push(value.U32(ϟa.In.ShaderType))
+	ϟb.Push(value.U32(ϟa.In.PrecisionType))
+	ϟb.Push(outputs[0]) // range
+	ϟb.Push(outputs[1]) // precision
+	ϟb.CallNoPush(funcInfoGlGetShaderPrecisionFormat)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetShaderPrecisionFormat_Postback{}
 			if err := postback.Decode(range_cnt, d); err != nil {
 				return nil, err
@@ -2401,125 +2452,138 @@ func (ω *GlGetShaderPrecisionFormat) replay(id atom.ID, s *state, b *builder.Bu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDepthMask{}) // interface compliance check
-func (ω *GlDepthMask) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.Bool(ω.In.Enabled))
-	b.CallNoPush(funcInfoGlDepthMask)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDepthMask{}) // interface compliance check
+func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.Bool(ϟa.In.Enabled))
+	ϟb.CallNoPush(funcInfoGlDepthMask)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDepthFunc{}) // interface compliance check
-func (ω *GlDepthFunc) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Function))
-	b.CallNoPush(funcInfoGlDepthFunc)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDepthFunc{}) // interface compliance check
+func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Function))
+	ϟb.CallNoPush(funcInfoGlDepthFunc)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDepthRangef{}) // interface compliance check
-func (ω *GlDepthRangef) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.Near))
-	b.Push(value.F32(ω.In.Far))
-	b.CallNoPush(funcInfoGlDepthRangef)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDepthRangef{}) // interface compliance check
+func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.Near))
+	ϟb.Push(value.F32(ϟa.In.Far))
+	ϟb.CallNoPush(funcInfoGlDepthRangef)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlColorMask{}) // interface compliance check
-func (ω *GlColorMask) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.Bool(ω.In.Red))
-	b.Push(value.Bool(ω.In.Green))
-	b.Push(value.Bool(ω.In.Blue))
-	b.Push(value.Bool(ω.In.Alpha))
-	b.CallNoPush(funcInfoGlColorMask)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlColorMask{}) // interface compliance check
+func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.Bool(ϟa.In.Red))
+	ϟb.Push(value.Bool(ϟa.In.Green))
+	ϟb.Push(value.Bool(ϟa.In.Blue))
+	ϟb.Push(value.Bool(ϟa.In.Alpha))
+	ϟb.CallNoPush(funcInfoGlColorMask)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlStencilMask{}) // interface compliance check
-func (ω *GlStencilMask) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Mask))
-	b.CallNoPush(funcInfoGlStencilMask)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlStencilMask{}) // interface compliance check
+func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.CallNoPush(funcInfoGlStencilMask)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlStencilMaskSeparate{}) // interface compliance check
-func (ω *GlStencilMaskSeparate) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Face))
-	b.Push(value.U32(ω.In.Mask))
-	b.CallNoPush(funcInfoGlStencilMaskSeparate)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlStencilMaskSeparate{}) // interface compliance check
+func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Face))
+	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.CallNoPush(funcInfoGlStencilMaskSeparate)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlStencilFuncSeparate{}) // interface compliance check
-func (ω *GlStencilFuncSeparate) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Face))
-	b.Push(value.U32(ω.In.Function))
-	b.Push(value.S32(ω.In.ReferenceValue))
-	b.Push(value.S32(ω.In.Mask))
-	b.CallNoPush(funcInfoGlStencilFuncSeparate)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlStencilFuncSeparate{}) // interface compliance check
+func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Face))
+	ϟb.Push(value.U32(ϟa.In.Function))
+	ϟb.Push(value.S32(ϟa.In.ReferenceValue))
+	ϟb.Push(value.S32(ϟa.In.Mask))
+	ϟb.CallNoPush(funcInfoGlStencilFuncSeparate)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlStencilOpSeparate{}) // interface compliance check
-func (ω *GlStencilOpSeparate) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Face))
-	b.Push(value.U32(ω.In.StencilFail))
-	b.Push(value.U32(ω.In.StencilPassDepthFail))
-	b.Push(value.U32(ω.In.StencilPassDepthPass))
-	b.CallNoPush(funcInfoGlStencilOpSeparate)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlStencilOpSeparate{}) // interface compliance check
+func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Face))
+	ϟb.Push(value.U32(ϟa.In.StencilFail))
+	ϟb.Push(value.U32(ϟa.In.StencilPassDepthFail))
+	ϟb.Push(value.U32(ϟa.In.StencilPassDepthPass))
+	ϟb.CallNoPush(funcInfoGlStencilOpSeparate)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlFrontFace{}) // interface compliance check
-func (ω *GlFrontFace) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Orientation))
-	b.CallNoPush(funcInfoGlFrontFace)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlFrontFace{}) // interface compliance check
+func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Orientation))
+	ϟb.CallNoPush(funcInfoGlFrontFace)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlViewport{}) // interface compliance check
-func (ω *GlViewport) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlViewport)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlViewport{}) // interface compliance check
+func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlViewport)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlScissor{}) // interface compliance check
-func (ω *GlScissor) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlScissor)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlScissor{}) // interface compliance check
+func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlScissor)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlActiveTexture{}) // interface compliance check
-func (ω *GlActiveTexture) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Unit))
-	b.CallNoPush(funcInfoGlActiveTexture)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlActiveTexture{}) // interface compliance check
+func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Unit))
+	ϟb.CallNoPush(funcInfoGlActiveTexture)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenTextures{}) // interface compliance check
-func (ω *GlGenTextures) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	textures_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{textures_cnt * 4 /* textures */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // textures
-	b.CallNoPush(funcInfoGlGenTextures)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Textures {
+var _ = replay.Replayer(&GlGenTextures{}) // interface compliance check
+func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	textures_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{textures_cnt * 4 /* textures */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // textures
+	ϟb.CallNoPush(funcInfoGlGenTextures)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Textures {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenTextures_Postback{}
 			if err := postback.Decode(textures_cnt, d); err != nil {
 				return nil, err
@@ -2527,29 +2591,31 @@ func (ω *GlGenTextures) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteTextures{}) // interface compliance check
-func (ω *GlDeleteTextures) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Textures.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteTextures)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteTextures{}) // interface compliance check
+func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Textures.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteTextures)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsTexture{}) // interface compliance check
-func (ω *GlIsTexture) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlIsTexture{}) // interface compliance check
+func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsTexture)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsTexture)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsTexture_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2557,129 +2623,138 @@ func (ω *GlIsTexture) replay(id atom.ID, s *state, b *builder.Builder, wantOutp
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindTexture{}) // interface compliance check
-func (ω *GlBindTexture) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlBindTexture{}) // interface compliance check
+func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBindTexture)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBindTexture)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexImage2D{}) // interface compliance check
-func (ω *GlTexImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.U32(ω.In.InternalFormat))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.S32(ω.In.Border))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.U32(ω.In.Type))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.CallNoPush(funcInfoGlTexImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexImage2D{}) // interface compliance check
+func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.U32(ϟa.In.InternalFormat))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.In.Border))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlTexImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlTexSubImage2D{}) // interface compliance check
-func (ω *GlTexSubImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.S32(ω.In.Xoffset))
-	b.Push(value.S32(ω.In.Yoffset))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.U32(ω.In.Type))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.CallNoPush(funcInfoGlTexSubImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlTexSubImage2D{}) // interface compliance check
+func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.S32(ϟa.In.Xoffset))
+	ϟb.Push(value.S32(ϟa.In.Yoffset))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlTexSubImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCopyTexImage2D{}) // interface compliance check
-func (ω *GlCopyTexImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.S32(ω.In.Border))
-	b.CallNoPush(funcInfoGlCopyTexImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlCopyTexImage2D{}) // interface compliance check
+func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.In.Border))
+	ϟb.CallNoPush(funcInfoGlCopyTexImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCopyTexSubImage2D{}) // interface compliance check
-func (ω *GlCopyTexSubImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.S32(ω.In.Xoffset))
-	b.Push(value.S32(ω.In.Yoffset))
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlCopyTexSubImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlCopyTexSubImage2D{}) // interface compliance check
+func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.S32(ϟa.In.Xoffset))
+	ϟb.Push(value.S32(ϟa.In.Yoffset))
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlCopyTexSubImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCompressedTexImage2D{}) // interface compliance check
-func (ω *GlCompressedTexImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.S32(ω.In.Border))
-	b.Push(value.S32(ω.In.ImageSize))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.CallNoPush(funcInfoGlCompressedTexImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlCompressedTexImage2D{}) // interface compliance check
+func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.In.Border))
+	ϟb.Push(value.S32(ϟa.In.ImageSize))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlCompressedTexImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCompressedTexSubImage2D{}) // interface compliance check
-func (ω *GlCompressedTexSubImage2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Level))
-	b.Push(value.S32(ω.In.Xoffset))
-	b.Push(value.S32(ω.In.Yoffset))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.ImageSize))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.CallNoPush(funcInfoGlCompressedTexSubImage2D)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlCompressedTexSubImage2D{}) // interface compliance check
+func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.S32(ϟa.In.Xoffset))
+	ϟb.Push(value.S32(ϟa.In.Yoffset))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.ImageSize))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlCompressedTexSubImage2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenerateMipmap{}) // interface compliance check
-func (ω *GlGenerateMipmap) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.CallNoPush(funcInfoGlGenerateMipmap)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlGenerateMipmap{}) // interface compliance check
+func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallNoPush(funcInfoGlGenerateMipmap)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlReadPixels{}) // interface compliance check
-func (ω *GlReadPixels) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	data_cnt := uint64(imageSize(ω.In.Width, ω.In.Height, TexelFormat(ω.In.Format), ω.In.Type))
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{data_cnt /* data */})
-	b.Push(value.S32(ω.In.X))
-	b.Push(value.S32(ω.In.Y))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.U32(ω.In.Type))
-	b.Push(outputs[0]) // data
-	b.CallNoPush(funcInfoGlReadPixels)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlReadPixels{}) // interface compliance check
+func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	data_cnt := uint64(imageSize(ϟa.In.Width, ϟa.In.Height, TexelFormat(ϟa.In.Format), ϟa.In.Type))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{data_cnt /* data */})
+	ϟb.Push(value.S32(ϟa.In.X))
+	ϟb.Push(value.S32(ϟa.In.Y))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(outputs[0]) // data
+	ϟb.CallNoPush(funcInfoGlReadPixels)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlReadPixels_Postback{}
 			if err := postback.Decode(data_cnt, d); err != nil {
 				return nil, err
@@ -2687,24 +2762,25 @@ func (ω *GlReadPixels) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenFramebuffers{}) // interface compliance check
-func (ω *GlGenFramebuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	framebuffers_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{framebuffers_cnt * 4 /* framebuffers */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // framebuffers
-	b.CallNoPush(funcInfoGlGenFramebuffers)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Framebuffers {
+var _ = replay.Replayer(&GlGenFramebuffers{}) // interface compliance check
+func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	framebuffers_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{framebuffers_cnt * 4 /* framebuffers */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // framebuffers
+	ϟb.CallNoPush(funcInfoGlGenFramebuffers)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Framebuffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenFramebuffers_Postback{}
 			if err := postback.Decode(framebuffers_cnt, d); err != nil {
 				return nil, err
@@ -2712,29 +2788,31 @@ func (ω *GlGenFramebuffers) replay(id atom.ID, s *state, b *builder.Builder, wa
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindFramebuffer{}) // interface compliance check
-func (ω *GlBindFramebuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Framebuffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Framebuffer.value(b, ω, s))
+var _ = replay.Replayer(&GlBindFramebuffer{}) // interface compliance check
+func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Framebuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Framebuffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBindFramebuffer)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBindFramebuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCheckFramebufferStatus{}) // interface compliance check
-func (ω *GlCheckFramebufferStatus) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.Push(value.U32(ω.In.Target))
-	b.CallPush(funcInfoGlCheckFramebufferStatus)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlCheckFramebufferStatus{}) // interface compliance check
+func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallPush(funcInfoGlCheckFramebufferStatus)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlCheckFramebufferStatus_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2742,29 +2820,31 @@ func (ω *GlCheckFramebufferStatus) replay(id atom.ID, s *state, b *builder.Buil
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteFramebuffers{}) // interface compliance check
-func (ω *GlDeleteFramebuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Framebuffers.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteFramebuffers)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteFramebuffers{}) // interface compliance check
+func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Framebuffers.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteFramebuffers)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsFramebuffer{}) // interface compliance check
-func (ω *GlIsFramebuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Framebuffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Framebuffer.value(b, ω, s))
+var _ = replay.Replayer(&GlIsFramebuffer{}) // interface compliance check
+func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Framebuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Framebuffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsFramebuffer)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsFramebuffer)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsFramebuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2772,24 +2852,25 @@ func (ω *GlIsFramebuffer) replay(id atom.ID, s *state, b *builder.Builder, want
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenRenderbuffers{}) // interface compliance check
-func (ω *GlGenRenderbuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	renderbuffers_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{renderbuffers_cnt * 4 /* renderbuffers */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // renderbuffers
-	b.CallNoPush(funcInfoGlGenRenderbuffers)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Renderbuffers {
+var _ = replay.Replayer(&GlGenRenderbuffers{}) // interface compliance check
+func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	renderbuffers_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{renderbuffers_cnt * 4 /* renderbuffers */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // renderbuffers
+	ϟb.CallNoPush(funcInfoGlGenRenderbuffers)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Renderbuffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenRenderbuffers_Postback{}
 			if err := postback.Decode(renderbuffers_cnt, d); err != nil {
 				return nil, err
@@ -2797,51 +2878,55 @@ func (ω *GlGenRenderbuffers) replay(id atom.ID, s *state, b *builder.Builder, w
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindRenderbuffer{}) // interface compliance check
-func (ω *GlBindRenderbuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Renderbuffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Renderbuffer.value(b, ω, s))
+var _ = replay.Replayer(&GlBindRenderbuffer{}) // interface compliance check
+func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Renderbuffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBindRenderbuffer)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBindRenderbuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlRenderbufferStorage{}) // interface compliance check
-func (ω *GlRenderbufferStorage) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlRenderbufferStorage)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlRenderbufferStorage{}) // interface compliance check
+func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlRenderbufferStorage)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteRenderbuffers{}) // interface compliance check
-func (ω *GlDeleteRenderbuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Renderbuffers.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteRenderbuffers)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteRenderbuffers{}) // interface compliance check
+func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Renderbuffers.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteRenderbuffers)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsRenderbuffer{}) // interface compliance check
-func (ω *GlIsRenderbuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Renderbuffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Renderbuffer.value(b, ω, s))
+var _ = replay.Replayer(&GlIsRenderbuffer{}) // interface compliance check
+func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Renderbuffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsRenderbuffer)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsRenderbuffer)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsRenderbuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2849,19 +2934,20 @@ func (ω *GlIsRenderbuffer) replay(id atom.ID, s *state, b *builder.Builder, wan
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetRenderbufferParameteriv{}) // interface compliance check
-func (ω *GlGetRenderbufferParameteriv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetRenderbufferParameteriv{}) // interface compliance check
+func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	values_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetRenderbufferParameteriv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetRenderbufferParameteriv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetRenderbufferParameteriv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2869,24 +2955,25 @@ func (ω *GlGetRenderbufferParameteriv) replay(id atom.ID, s *state, b *builder.
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenBuffers{}) // interface compliance check
-func (ω *GlGenBuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	buffers_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{buffers_cnt * 4 /* buffers */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // buffers
-	b.CallNoPush(funcInfoGlGenBuffers)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Buffers {
+var _ = replay.Replayer(&GlGenBuffers{}) // interface compliance check
+func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	buffers_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{buffers_cnt * 4 /* buffers */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // buffers
+	ϟb.CallNoPush(funcInfoGlGenBuffers)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Buffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenBuffers_Postback{}
 			if err := postback.Decode(buffers_cnt, d); err != nil {
 				return nil, err
@@ -2894,61 +2981,66 @@ func (ω *GlGenBuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBindBuffer{}) // interface compliance check
-func (ω *GlBindBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Buffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Buffer.value(b, ω, s))
+var _ = replay.Replayer(&GlBindBuffer{}) // interface compliance check
+func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Buffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Buffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBindBuffer)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBindBuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBufferData{}) // interface compliance check
-func (ω *GlBufferData) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Size))
-	b.Push(ω.In.Data.value(b, ω, s))
-	b.Push(value.U32(ω.In.Usage))
-	b.CallNoPush(funcInfoGlBufferData)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBufferData{}) // interface compliance check
+func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Size))
+	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.In.Usage))
+	ϟb.CallNoPush(funcInfoGlBufferData)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBufferSubData{}) // interface compliance check
-func (ω *GlBufferSubData) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Offset))
-	b.Push(value.S32(ω.In.Size))
-	b.Push(value.VolatileCapturePointer(uint64(ω.In.Data)))
-	b.CallNoPush(funcInfoGlBufferSubData)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBufferSubData{}) // interface compliance check
+func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Offset))
+	ϟb.Push(value.S32(ϟa.In.Size))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Data)))
+	ϟb.CallNoPush(funcInfoGlBufferSubData)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteBuffers{}) // interface compliance check
-func (ω *GlDeleteBuffers) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Buffers.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteBuffers)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteBuffers{}) // interface compliance check
+func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Buffers.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteBuffers)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsBuffer{}) // interface compliance check
-func (ω *GlIsBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Buffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Buffer.value(b, ω, s))
+var _ = replay.Replayer(&GlIsBuffer{}) // interface compliance check
+func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Buffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Buffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsBuffer)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsBuffer)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsBuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2956,18 +3048,19 @@ func (ω *GlIsBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutpu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetBufferParameteriv{}) // interface compliance check
-func (ω *GlGetBufferParameteriv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetBufferParameteriv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetBufferParameteriv{}) // interface compliance check
+func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetBufferParameteriv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetBufferParameteriv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2975,20 +3068,21 @@ func (ω *GlGetBufferParameteriv) replay(id atom.ID, s *state, b *builder.Builde
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCreateShader{}) // interface compliance check
-func (ω *GlCreateShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.Push(value.U32(ω.In.Type))
-	b.CallPush(funcInfoGlCreateShader)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if key, remap := ω.Out.Result.remap(ω, s); remap {
-		storeRemap(b, key, outputs[0], protocol.TypeUint32)
+var _ = replay.Replayer(&GlCreateShader{}) // interface compliance check
+func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.CallPush(funcInfoGlCreateShader)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlCreateShader_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2996,60 +3090,64 @@ func (ω *GlCreateShader) replay(id atom.ID, s *state, b *builder.Builder, wantO
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteShader{}) // interface compliance check
-func (ω *GlDeleteShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlDeleteShader{}) // interface compliance check
+func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlDeleteShader)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlDeleteShader)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlShaderSource{}) // interface compliance check
-func (ω *GlShaderSource) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlShaderSource{}) // interface compliance check
+func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Source.value(b, ω, s))
-	b.Push(ω.In.Length.value(b, ω, s))
-	b.CallNoPush(funcInfoGlShaderSource)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Source.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Length.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlShaderSource)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlShaderBinary{}) // interface compliance check
-func (ω *GlShaderBinary) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Shaders.value(b, ω, s))
-	b.Push(value.U32(ω.In.BinaryFormat))
-	b.Push(value.VolatileCapturePointer(uint64(ω.In.Binary)))
-	b.Push(value.S32(ω.In.BinarySize))
-	b.CallNoPush(funcInfoGlShaderBinary)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlShaderBinary{}) // interface compliance check
+func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Shaders.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.In.BinaryFormat))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Binary)))
+	ϟb.Push(value.S32(ϟa.In.BinarySize))
+	ϟb.CallNoPush(funcInfoGlShaderBinary)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetShaderInfoLog{}) // interface compliance check
-func (ω *GlGetShaderInfoLog) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	info_cnt := uint64(ω.In.BufferLength)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlGetShaderInfoLog{}) // interface compliance check
+func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	info_cnt := uint64(ϟa.In.BufferLength)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.BufferLength))
-	b.Push(outputs[0]) // string_length_written
-	b.Push(outputs[1]) // info
-	b.CallNoPush(funcInfoGlGetShaderInfoLog)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(outputs[0]) // string_length_written
+	ϟb.Push(outputs[1]) // info
+	ϟb.CallNoPush(funcInfoGlGetShaderInfoLog)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetShaderInfoLog_Postback{}
 			if err := postback.Decode(info_cnt, d); err != nil {
 				return nil, err
@@ -3057,24 +3155,25 @@ func (ω *GlGetShaderInfoLog) replay(id atom.ID, s *state, b *builder.Builder, w
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetShaderSource{}) // interface compliance check
-func (ω *GlGetShaderSource) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	source_cnt := uint64(ω.In.BufferLength)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, source_cnt /* source */})
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlGetShaderSource{}) // interface compliance check
+func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	source_cnt := uint64(ϟa.In.BufferLength)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, source_cnt /* source */})
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.BufferLength))
-	b.Push(outputs[0]) // string_length_written
-	b.Push(outputs[1]) // source
-	b.CallNoPush(funcInfoGlGetShaderSource)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(outputs[0]) // string_length_written
+	ϟb.Push(outputs[1]) // source
+	ϟb.CallNoPush(funcInfoGlGetShaderSource)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetShaderSource_Postback{}
 			if err := postback.Decode(source_cnt, d); err != nil {
 				return nil, err
@@ -3082,38 +3181,41 @@ func (ω *GlGetShaderSource) replay(id atom.ID, s *state, b *builder.Builder, wa
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlReleaseShaderCompiler{}) // interface compliance check
-func (ω *GlReleaseShaderCompiler) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoGlReleaseShaderCompiler)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlReleaseShaderCompiler{}) // interface compliance check
+func (ϟa *GlReleaseShaderCompiler) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoGlReleaseShaderCompiler)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCompileShader{}) // interface compliance check
-func (ω *GlCompileShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlCompileShader{}) // interface compliance check
+func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlCompileShader)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlCompileShader)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsShader{}) // interface compliance check
-func (ω *GlIsShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+var _ = replay.Replayer(&GlIsShader{}) // interface compliance check
+func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsShader)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsShader)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsShader_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3121,19 +3223,20 @@ func (ω *GlIsShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutpu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCreateProgram{}) // interface compliance check
-func (ω *GlCreateProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoGlCreateProgram)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if key, remap := ω.Out.Result.remap(ω, s); remap {
-		storeRemap(b, key, outputs[0], protocol.TypeUint32)
+var _ = replay.Replayer(&GlCreateProgram{}) // interface compliance check
+func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoGlCreateProgram)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlCreateProgram_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3141,73 +3244,77 @@ func (ω *GlCreateProgram) replay(id atom.ID, s *state, b *builder.Builder, want
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteProgram{}) // interface compliance check
-func (ω *GlDeleteProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlDeleteProgram{}) // interface compliance check
+func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlDeleteProgram)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlDeleteProgram)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlAttachShader{}) // interface compliance check
-func (ω *GlAttachShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlAttachShader{}) // interface compliance check
+func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlAttachShader)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlAttachShader)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDetachShader{}) // interface compliance check
-func (ω *GlDetachShader) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlDetachShader{}) // interface compliance check
+func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.Shader.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Shader.value(b, ω, s))
+	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Shader.value(b, ω, s))
+		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlDetachShader)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlDetachShader)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetAttachedShaders{}) // interface compliance check
-func (ω *GlGetAttachedShaders) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	shaders_cnt := uint64(ω.In.BufferLength)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* shaders_length_written */, shaders_cnt * 4 /* shaders */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetAttachedShaders{}) // interface compliance check
+func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	shaders_cnt := uint64(ϟa.In.BufferLength)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* shaders_length_written */, shaders_cnt * 4 /* shaders */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.BufferLength))
-	b.Push(outputs[0]) // shaders_length_written
-	b.Push(outputs[1]) // shaders
-	b.CallNoPush(funcInfoGlGetAttachedShaders)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Shaders {
+	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(outputs[0]) // shaders_length_written
+	ϟb.Push(outputs[1]) // shaders
+	ϟb.CallNoPush(funcInfoGlGetAttachedShaders)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Shaders {
 		ptr := outputs[1].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetAttachedShaders_Postback{}
 			if err := postback.Decode(shaders_cnt, d); err != nil {
 				return nil, err
@@ -3215,35 +3322,37 @@ func (ω *GlGetAttachedShaders) replay(id atom.ID, s *state, b *builder.Builder,
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlLinkProgram{}) // interface compliance check
-func (ω *GlLinkProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlLinkProgram{}) // interface compliance check
+func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlLinkProgram)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlLinkProgram)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetProgramInfoLog{}) // interface compliance check
-func (ω *GlGetProgramInfoLog) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	info_cnt := uint64(ω.In.BufferLength)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlGetProgramInfoLog{}) // interface compliance check
+func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	info_cnt := uint64(ϟa.In.BufferLength)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.BufferLength))
-	b.Push(outputs[0]) // string_length_written
-	b.Push(outputs[1]) // info
-	b.CallNoPush(funcInfoGlGetProgramInfoLog)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(outputs[0]) // string_length_written
+	ϟb.Push(outputs[1]) // info
+	ϟb.CallNoPush(funcInfoGlGetProgramInfoLog)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetProgramInfoLog_Postback{}
 			if err := postback.Decode(info_cnt, d); err != nil {
 				return nil, err
@@ -3251,32 +3360,34 @@ func (ω *GlGetProgramInfoLog) replay(id atom.ID, s *state, b *builder.Builder, 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUseProgram{}) // interface compliance check
-func (ω *GlUseProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlUseProgram{}) // interface compliance check
+func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlUseProgram)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlUseProgram)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsProgram{}) // interface compliance check
-func (ω *GlIsProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlIsProgram{}) // interface compliance check
+func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsProgram)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsProgram)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsProgram_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3284,129 +3395,142 @@ func (ω *GlIsProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutp
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlValidateProgram{}) // interface compliance check
-func (ω *GlValidateProgram) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Program.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Program.value(b, ω, s))
+var _ = replay.Replayer(&GlValidateProgram{}) // interface compliance check
+func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Program.value(b, ω, s))
+		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlValidateProgram)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlValidateProgram)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlClearColor{}) // interface compliance check
-func (ω *GlClearColor) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.R))
-	b.Push(value.F32(ω.In.G))
-	b.Push(value.F32(ω.In.B))
-	b.Push(value.F32(ω.In.A))
-	b.CallNoPush(funcInfoGlClearColor)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlClearColor{}) // interface compliance check
+func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.R))
+	ϟb.Push(value.F32(ϟa.In.G))
+	ϟb.Push(value.F32(ϟa.In.B))
+	ϟb.Push(value.F32(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoGlClearColor)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlClearDepthf{}) // interface compliance check
-func (ω *GlClearDepthf) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.Depth))
-	b.CallNoPush(funcInfoGlClearDepthf)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlClearDepthf{}) // interface compliance check
+func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.Depth))
+	ϟb.CallNoPush(funcInfoGlClearDepthf)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlClearStencil{}) // interface compliance check
-func (ω *GlClearStencil) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Stencil))
-	b.CallNoPush(funcInfoGlClearStencil)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlClearStencil{}) // interface compliance check
+func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Stencil))
+	ϟb.CallNoPush(funcInfoGlClearStencil)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlClear{}) // interface compliance check
-func (ω *GlClear) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Mask))
-	b.CallNoPush(funcInfoGlClear)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlClear{}) // interface compliance check
+func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.CallNoPush(funcInfoGlClear)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlCullFace{}) // interface compliance check
-func (ω *GlCullFace) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Mode))
-	b.CallNoPush(funcInfoGlCullFace)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlCullFace{}) // interface compliance check
+func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Mode))
+	ϟb.CallNoPush(funcInfoGlCullFace)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlPolygonOffset{}) // interface compliance check
-func (ω *GlPolygonOffset) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.ScaleFactor))
-	b.Push(value.F32(ω.In.Units))
-	b.CallNoPush(funcInfoGlPolygonOffset)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlPolygonOffset{}) // interface compliance check
+func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.ScaleFactor))
+	ϟb.Push(value.F32(ϟa.In.Units))
+	ϟb.CallNoPush(funcInfoGlPolygonOffset)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlLineWidth{}) // interface compliance check
-func (ω *GlLineWidth) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.Width))
-	b.CallNoPush(funcInfoGlLineWidth)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlLineWidth{}) // interface compliance check
+func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.Width))
+	ϟb.CallNoPush(funcInfoGlLineWidth)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlSampleCoverage{}) // interface compliance check
-func (ω *GlSampleCoverage) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.Value))
-	b.Push(value.Bool(ω.In.Invert))
-	b.CallNoPush(funcInfoGlSampleCoverage)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlSampleCoverage{}) // interface compliance check
+func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.Value))
+	ϟb.Push(value.Bool(ϟa.In.Invert))
+	ϟb.CallNoPush(funcInfoGlSampleCoverage)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlHint{}) // interface compliance check
-func (ω *GlHint) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Mode))
-	b.CallNoPush(funcInfoGlHint)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlHint{}) // interface compliance check
+func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Mode))
+	ϟb.CallNoPush(funcInfoGlHint)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlFramebufferRenderbuffer{}) // interface compliance check
-func (ω *GlFramebufferRenderbuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.FramebufferTarget))
-	b.Push(value.U32(ω.In.FramebufferAttachment))
-	b.Push(value.U32(ω.In.RenderbufferTarget))
-	if key, remap := ω.In.Renderbuffer.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Renderbuffer.value(b, ω, s))
+var _ = replay.Replayer(&GlFramebufferRenderbuffer{}) // interface compliance check
+func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
+	ϟb.Push(value.U32(ϟa.In.FramebufferAttachment))
+	ϟb.Push(value.U32(ϟa.In.RenderbufferTarget))
+	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Renderbuffer.value(b, ω, s))
+		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlFramebufferRenderbuffer)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlFramebufferRenderbuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlFramebufferTexture2D{}) // interface compliance check
-func (ω *GlFramebufferTexture2D) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.FramebufferTarget))
-	b.Push(value.U32(ω.In.FramebufferAttachment))
-	b.Push(value.U32(ω.In.TextureTarget))
-	if key, remap := ω.In.Texture.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Texture.value(b, ω, s))
+var _ = replay.Replayer(&GlFramebufferTexture2D{}) // interface compliance check
+func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
+	ϟb.Push(value.U32(ϟa.In.FramebufferAttachment))
+	ϟb.Push(value.U32(ϟa.In.TextureTarget))
+	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Texture.value(b, ω, s))
+		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.S32(ω.In.Level))
-	b.CallNoPush(funcInfoGlFramebufferTexture2D)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.CallNoPush(funcInfoGlFramebufferTexture2D)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetFramebufferAttachmentParameteriv{}) // interface compliance check
-func (ω *GlGetFramebufferAttachmentParameteriv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetFramebufferAttachmentParameteriv{}) // interface compliance check
+func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	value_cnt := uint64(1)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Attachment))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetFramebufferAttachmentParameteriv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Attachment))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetFramebufferAttachmentParameteriv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetFramebufferAttachmentParameteriv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -3414,49 +3538,54 @@ func (ω *GlGetFramebufferAttachmentParameteriv) replay(id atom.ID, s *state, b 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDrawElements{}) // interface compliance check
-func (ω *GlDrawElements) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.DrawMode))
-	b.Push(value.S32(ω.In.ElementCount))
-	b.Push(value.U32(ω.In.IndicesType))
-	b.Push(ω.In.Indices.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDrawElements)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDrawElements{}) // interface compliance check
+func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.DrawMode))
+	ϟb.Push(value.S32(ϟa.In.ElementCount))
+	ϟb.Push(value.U32(ϟa.In.IndicesType))
+	ϟb.Push(ϟa.In.Indices.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDrawElements)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDrawArrays{}) // interface compliance check
-func (ω *GlDrawArrays) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.DrawMode))
-	b.Push(value.S32(ω.In.FirstIndex))
-	b.Push(value.S32(ω.In.IndexCount))
-	b.CallNoPush(funcInfoGlDrawArrays)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDrawArrays{}) // interface compliance check
+func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.DrawMode))
+	ϟb.Push(value.S32(ϟa.In.FirstIndex))
+	ϟb.Push(value.S32(ϟa.In.IndexCount))
+	ϟb.CallNoPush(funcInfoGlDrawArrays)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlFlush{}) // interface compliance check
-func (ω *GlFlush) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoGlFlush)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlFlush{}) // interface compliance check
+func (ϟa *GlFlush) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoGlFlush)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlFinish{}) // interface compliance check
-func (ω *GlFinish) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoGlFinish)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlFinish{}) // interface compliance check
+func (ϟa *GlFinish) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoGlFinish)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetBooleanv{}) // interface compliance check
-func (ω *GlGetBooleanv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	values_cnt := uint64(stateVariableSize(ω.In.Param))
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 1 /* values */})
-	b.Push(value.U32(ω.In.Param))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetBooleanv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetBooleanv{}) // interface compliance check
+func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 1 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetBooleanv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetBooleanv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3464,18 +3593,19 @@ func (ω *GlGetBooleanv) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetFloatv{}) // interface compliance check
-func (ω *GlGetFloatv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	values_cnt := uint64(stateVariableSize(ω.In.Param))
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	b.Push(value.U32(ω.In.Param))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetFloatv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetFloatv{}) // interface compliance check
+func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetFloatv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetFloatv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3483,18 +3613,19 @@ func (ω *GlGetFloatv) replay(id atom.ID, s *state, b *builder.Builder, wantOutp
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetIntegerv{}) // interface compliance check
-func (ω *GlGetIntegerv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	values_cnt := uint64(stateVariableSize(ω.In.Param))
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	b.Push(value.U32(ω.In.Param))
-	b.Push(outputs[0]) // values
-	b.CallNoPush(funcInfoGlGetIntegerv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetIntegerv{}) // interface compliance check
+func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
+	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(outputs[0]) // values
+	ϟb.CallNoPush(funcInfoGlGetIntegerv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetIntegerv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3502,19 +3633,20 @@ func (ω *GlGetIntegerv) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetString{}) // interface compliance check
-func (ω *GlGetString) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&GlGetString{}) // interface compliance check
+func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	result_cnt := uint64(256)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	b.Push(value.U32(ω.In.Param))
-	b.CallPush(funcInfoGlGetString)
-	b.Push(outputs[0])
-	b.Strcpy(result_cnt)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.CallPush(funcInfoGlGetString)
+	ϟb.Push(outputs[0])
+	ϟb.Strcpy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetString_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -3522,31 +3654,34 @@ func (ω *GlGetString) replay(id atom.ID, s *state, b *builder.Builder, wantOutp
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEnable{}) // interface compliance check
-func (ω *GlEnable) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Capability))
-	b.CallNoPush(funcInfoGlEnable)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEnable{}) // interface compliance check
+func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.CallNoPush(funcInfoGlEnable)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDisable{}) // interface compliance check
-func (ω *GlDisable) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Capability))
-	b.CallNoPush(funcInfoGlDisable)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDisable{}) // interface compliance check
+func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.CallNoPush(funcInfoGlDisable)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsEnabled{}) // interface compliance check
-func (ω *GlIsEnabled) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	b.Push(value.U32(ω.In.Capability))
-	b.CallPush(funcInfoGlIsEnabled)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlIsEnabled{}) // interface compliance check
+func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.CallPush(funcInfoGlIsEnabled)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsEnabled_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3554,22 +3689,23 @@ func (ω *GlIsEnabled) replay(id atom.ID, s *state, b *builder.Builder, wantOutp
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlMapBufferRange{}) // interface compliance check
-func (ω *GlMapBufferRange) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	result_cnt := uint64(ω.In.Length)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Offset))
-	b.Push(value.S32(ω.In.Length))
-	b.Push(value.U32(ω.In.Access))
-	b.CallPush(funcInfoGlMapBufferRange)
-	b.Push(outputs[0])
-	b.Copy(result_cnt)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlMapBufferRange{}) // interface compliance check
+func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	result_cnt := uint64(ϟa.In.Length)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Offset))
+	ϟb.Push(value.S32(ϟa.In.Length))
+	ϟb.Push(value.U32(ϟa.In.Access))
+	ϟb.CallPush(funcInfoGlMapBufferRange)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlMapBufferRange_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -3577,67 +3713,72 @@ func (ω *GlMapBufferRange) replay(id atom.ID, s *state, b *builder.Builder, wan
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlUnmapBuffer{}) // interface compliance check
-func (ω *GlUnmapBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.CallNoPush(funcInfoGlUnmapBuffer)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlUnmapBuffer{}) // interface compliance check
+func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallNoPush(funcInfoGlUnmapBuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlInvalidateFramebuffer{}) // interface compliance check
-func (ω *GlInvalidateFramebuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Attachments.value(b, ω, s))
-	b.CallNoPush(funcInfoGlInvalidateFramebuffer)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlInvalidateFramebuffer{}) // interface compliance check
+func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Attachments.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlInvalidateFramebuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlRenderbufferStorageMultisample{}) // interface compliance check
-func (ω *GlRenderbufferStorageMultisample) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.S32(ω.In.Samples))
-	b.Push(value.U32(ω.In.Format))
-	b.Push(value.S32(ω.In.Width))
-	b.Push(value.S32(ω.In.Height))
-	b.CallNoPush(funcInfoGlRenderbufferStorageMultisample)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlRenderbufferStorageMultisample{}) // interface compliance check
+func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.S32(ϟa.In.Samples))
+	ϟb.Push(value.U32(ϟa.In.Format))
+	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.CallNoPush(funcInfoGlRenderbufferStorageMultisample)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBlitFramebuffer{}) // interface compliance check
-func (ω *GlBlitFramebuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.SrcX0))
-	b.Push(value.S32(ω.In.SrcY0))
-	b.Push(value.S32(ω.In.SrcX1))
-	b.Push(value.S32(ω.In.SrcY1))
-	b.Push(value.S32(ω.In.DstX0))
-	b.Push(value.S32(ω.In.DstY0))
-	b.Push(value.S32(ω.In.DstX1))
-	b.Push(value.S32(ω.In.DstY1))
-	b.Push(value.U32(ω.In.Mask))
-	b.Push(value.U32(ω.In.Filter))
-	b.CallNoPush(funcInfoGlBlitFramebuffer)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlBlitFramebuffer{}) // interface compliance check
+func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.SrcX0))
+	ϟb.Push(value.S32(ϟa.In.SrcY0))
+	ϟb.Push(value.S32(ϟa.In.SrcX1))
+	ϟb.Push(value.S32(ϟa.In.SrcY1))
+	ϟb.Push(value.S32(ϟa.In.DstX0))
+	ϟb.Push(value.S32(ϟa.In.DstY0))
+	ϟb.Push(value.S32(ϟa.In.DstX1))
+	ϟb.Push(value.S32(ϟa.In.DstY1))
+	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.Push(value.U32(ϟa.In.Filter))
+	ϟb.CallNoPush(funcInfoGlBlitFramebuffer)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenQueries{}) // interface compliance check
-func (ω *GlGenQueries) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	queries_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // queries
-	b.CallNoPush(funcInfoGlGenQueries)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Queries {
+var _ = replay.Replayer(&GlGenQueries{}) // interface compliance check
+func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	queries_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // queries
+	ϟb.CallNoPush(funcInfoGlGenQueries)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Queries {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenQueries_Postback{}
 			if err := postback.Decode(queries_cnt, d); err != nil {
 				return nil, err
@@ -3645,48 +3786,52 @@ func (ω *GlGenQueries) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBeginQuery{}) // interface compliance check
-func (ω *GlBeginQuery) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlBeginQuery{}) // interface compliance check
+func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBeginQuery)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBeginQuery)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEndQuery{}) // interface compliance check
-func (ω *GlEndQuery) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.CallNoPush(funcInfoGlEndQuery)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEndQuery{}) // interface compliance check
+func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallNoPush(funcInfoGlEndQuery)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteQueries{}) // interface compliance check
-func (ω *GlDeleteQueries) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Queries.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteQueries)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteQueries{}) // interface compliance check
+func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Queries.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteQueries)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsQuery{}) // interface compliance check
-func (ω *GlIsQuery) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlIsQuery{}) // interface compliance check
+func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsQuery)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsQuery)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsQuery_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3694,18 +3839,19 @@ func (ω *GlIsQuery) replay(id atom.ID, s *state, b *builder.Builder, wantOutput
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryiv{}) // interface compliance check
-func (ω *GlGetQueryiv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryiv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetQueryiv{}) // interface compliance check
+func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryiv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryiv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3713,22 +3859,23 @@ func (ω *GlGetQueryiv) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryObjectuiv{}) // interface compliance check
-func (ω *GlGetQueryObjectuiv) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlGetQueryObjectuiv{}) // interface compliance check
+func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryObjectuiv)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryObjectuiv)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectuiv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3736,24 +3883,25 @@ func (ω *GlGetQueryObjectuiv) replay(id atom.ID, s *state, b *builder.Builder, 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGenQueriesEXT{}) // interface compliance check
-func (ω *GlGenQueriesEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	queries_cnt := uint64(ω.In.Count)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
-	b.Push(value.S32(ω.In.Count))
-	b.Push(outputs[0]) // queries
-	b.CallNoPush(funcInfoGlGenQueriesEXT)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.Queries {
+var _ = replay.Replayer(&GlGenQueriesEXT{}) // interface compliance check
+func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	queries_cnt := uint64(ϟa.In.Count)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(outputs[0]) // queries
+	ϟb.CallNoPush(funcInfoGlGenQueriesEXT)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.Queries {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGenQueriesEXT_Postback{}
 			if err := postback.Decode(queries_cnt, d); err != nil {
 				return nil, err
@@ -3761,48 +3909,52 @@ func (ω *GlGenQueriesEXT) replay(id atom.ID, s *state, b *builder.Builder, want
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlBeginQueryEXT{}) // interface compliance check
-func (ω *GlBeginQueryEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlBeginQueryEXT{}) // interface compliance check
+func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoGlBeginQueryEXT)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoGlBeginQueryEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlEndQueryEXT{}) // interface compliance check
-func (ω *GlEndQueryEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.Target))
-	b.CallNoPush(funcInfoGlEndQueryEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlEndQueryEXT{}) // interface compliance check
+func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallNoPush(funcInfoGlEndQueryEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlDeleteQueriesEXT{}) // interface compliance check
-func (ω *GlDeleteQueriesEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.Count))
-	b.Push(ω.In.Queries.value(b, ω, s))
-	b.CallNoPush(funcInfoGlDeleteQueriesEXT)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&GlDeleteQueriesEXT{}) // interface compliance check
+func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(ϟa.In.Queries.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlDeleteQueriesEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlIsQueryEXT{}) // interface compliance check
-func (ω *GlIsQueryEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlIsQueryEXT{}) // interface compliance check
+func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.CallPush(funcInfoGlIsQueryEXT)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.CallPush(funcInfoGlIsQueryEXT)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlIsQueryEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3810,30 +3962,32 @@ func (ω *GlIsQueryEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlQueryCounterEXT{}) // interface compliance check
-func (ω *GlQueryCounterEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlQueryCounterEXT{}) // interface compliance check
+func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Target))
-	b.CallNoPush(funcInfoGlQueryCounterEXT)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.CallNoPush(funcInfoGlQueryCounterEXT)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryivEXT{}) // interface compliance check
-func (ω *GlGetQueryivEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	b.Push(value.U32(ω.In.Target))
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryivEXT)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&GlGetQueryivEXT{}) // interface compliance check
+func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryivEXT)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3841,22 +3995,23 @@ func (ω *GlGetQueryivEXT) replay(id atom.ID, s *state, b *builder.Builder, want
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryObjectivEXT{}) // interface compliance check
-func (ω *GlGetQueryObjectivEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlGetQueryObjectivEXT{}) // interface compliance check
+func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryObjectivEXT)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryObjectivEXT)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3864,22 +4019,23 @@ func (ω *GlGetQueryObjectivEXT) replay(id atom.ID, s *state, b *builder.Builder
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryObjectuivEXT{}) // interface compliance check
-func (ω *GlGetQueryObjectuivEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlGetQueryObjectuivEXT{}) // interface compliance check
+func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryObjectuivEXT)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryObjectuivEXT)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectuivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3887,22 +4043,23 @@ func (ω *GlGetQueryObjectuivEXT) replay(id atom.ID, s *state, b *builder.Builde
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryObjecti64vEXT{}) // interface compliance check
-func (ω *GlGetQueryObjecti64vEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlGetQueryObjecti64vEXT{}) // interface compliance check
+func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryObjecti64vEXT)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryObjecti64vEXT)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjecti64vEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3910,22 +4067,23 @@ func (ω *GlGetQueryObjecti64vEXT) replay(id atom.ID, s *state, b *builder.Build
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&GlGetQueryObjectui64vEXT{}) // interface compliance check
-func (ω *GlGetQueryObjectui64vEXT) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
-	if key, remap := ω.In.Query.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.Query.value(b, ω, s))
+var _ = replay.Replayer(&GlGetQueryObjectui64vEXT{}) // interface compliance check
+func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
+	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.Query.value(b, ω, s))
+		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
 	}
-	b.Push(value.U32(ω.In.Parameter))
-	b.Push(outputs[0]) // value
-	b.CallNoPush(funcInfoGlGetQueryObjectui64vEXT)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(outputs[0]) // value
+	ϟb.CallNoPush(funcInfoGlGetQueryObjectui64vEXT)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectui64vEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3933,4 +4091,5 @@ func (ω *GlGetQueryObjectui64vEXT) replay(id atom.ID, s *state, b *builder.Buil
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }

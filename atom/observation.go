@@ -12,28 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package memory
+package atom
 
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-const TypeIDObservation atom.TypeID = 0xfffe
+const TypeIDObservation TypeID = 0xfffe
 
 func init() {
-	atom.Register(atom.TypeInfo{ID: TypeIDObservation, New: func() atom.Atom { return &Observation{} }})
+	Register(TypeInfo{ID: TypeIDObservation, New: func() Atom { return &Observation{} }})
 }
 
 // Observation is an Atom describing a region of application space memory that
 // was observed at capture time.
 type Observation struct {
 	binary.Generate
-	Context    atom.ContextID // The context on which the observation was made.
-	Range      Range          // The memory range that was observed.
-	ResourceID binary.ID      // The resource identifier holding the memory that was observed.
+	Context    ContextID    // The context on which the observation was made.
+	Range      memory.Range // The memory range that was observed.
+	ResourceID binary.ID    // The resource identifier holding the memory that was observed.
 }
 
 func (a *Observation) String() string {
@@ -43,6 +43,6 @@ func (a *Observation) String() string {
 }
 
 // Atom compliance
-func (a *Observation) TypeID() atom.TypeID       { return TypeIDObservation }
-func (a *Observation) ContextID() atom.ContextID { return a.Context }
-func (a *Observation) Flags() atom.Flags         { return 0 }
+func (a *Observation) TypeID() TypeID       { return TypeIDObservation }
+func (a *Observation) ContextID() ContextID { return a.Context }
+func (a *Observation) Flags() Flags         { return 0 }

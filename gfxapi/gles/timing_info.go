@@ -75,6 +75,9 @@ func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.
 
 func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	switch a := a.(type) {
+	case *Init:
+		out.Write(id, a)
+
 	case *atom.EOS:
 		if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {
 			t.stopTimer(id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
@@ -89,6 +92,7 @@ func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer
 		})
 
 		out.Write(id, a)
+
 	default:
 		if _, frameStarted := t.timerStartId[frameThreadTimer]; t.perFrame && !frameStarted {
 			t.startTimer(id, frameThreadTimer, out)

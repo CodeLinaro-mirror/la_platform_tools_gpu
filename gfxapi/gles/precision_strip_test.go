@@ -27,7 +27,7 @@ func runTest(t *testing.T, src string, expected string) {
 
 	mw := &mockWriter{}
 
-	s(0, NewGlShaderSource(0, 1, []string{src}, nil), mw)
+	s.Transform(0, NewGlShaderSource(0, 1, []string{src}, nil), mw)
 
 	if len(mw.atoms) != 1 {
 		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
@@ -99,7 +99,7 @@ func TestStripPassthrough(t *testing.T) {
 	mw := &mockWriter{}
 	init := &Init{}
 
-	s(0, init, mw)
+	s.Transform(0, init, mw)
 
 	if len(mw.atoms) != 1 {
 		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))

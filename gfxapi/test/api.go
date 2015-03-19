@@ -12,6 +12,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type remapped uint32
@@ -75,6 +76,7 @@ func (c *CmdVoid) TypeID() atom.TypeID {
 func (c *CmdVoid) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoid) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU8
@@ -110,6 +112,7 @@ func (c *CmdVoidU8) TypeID() atom.TypeID {
 func (c *CmdVoidU8) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidU8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS8
@@ -145,6 +148,7 @@ func (c *CmdVoidS8) TypeID() atom.TypeID {
 func (c *CmdVoidS8) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidS8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU16
@@ -180,6 +184,7 @@ func (c *CmdVoidU16) TypeID() atom.TypeID {
 func (c *CmdVoidU16) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidU16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS16
@@ -215,6 +220,7 @@ func (c *CmdVoidS16) TypeID() atom.TypeID {
 func (c *CmdVoidS16) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidS16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF32
@@ -250,6 +256,7 @@ func (c *CmdVoidF32) TypeID() atom.TypeID {
 func (c *CmdVoidF32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidF32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU32
@@ -285,6 +292,7 @@ func (c *CmdVoidU32) TypeID() atom.TypeID {
 func (c *CmdVoidU32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidU32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS32
@@ -320,6 +328,7 @@ func (c *CmdVoidS32) TypeID() atom.TypeID {
 func (c *CmdVoidS32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidS32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF64
@@ -355,6 +364,7 @@ func (c *CmdVoidF64) TypeID() atom.TypeID {
 func (c *CmdVoidF64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidF64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU64
@@ -390,6 +400,7 @@ func (c *CmdVoidU64) TypeID() atom.TypeID {
 func (c *CmdVoidU64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidU64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS64
@@ -425,6 +436,7 @@ func (c *CmdVoidS64) TypeID() atom.TypeID {
 func (c *CmdVoidS64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidS64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidBool
@@ -460,6 +472,7 @@ func (c *CmdVoidBool) TypeID() atom.TypeID {
 func (c *CmdVoidBool) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidBool) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidString
@@ -495,6 +508,7 @@ func (c *CmdVoidString) TypeID() atom.TypeID {
 func (c *CmdVoidString) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidString) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Strings
@@ -536,6 +550,7 @@ func (c *CmdVoid3Strings) TypeID() atom.TypeID {
 func (c *CmdVoid3Strings) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoid3Strings) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Arrays
@@ -577,6 +592,7 @@ func (c *CmdVoid3Arrays) TypeID() atom.TypeID {
 func (c *CmdVoid3Arrays) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoid3Arrays) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidArrayOfStrings
@@ -612,6 +628,7 @@ func (c *CmdVoidArrayOfStrings) TypeID() atom.TypeID {
 func (c *CmdVoidArrayOfStrings) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidArrayOfStrings) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU8
@@ -646,6 +663,7 @@ func (c *CmdU8) TypeID() atom.TypeID {
 func (c *CmdU8) Flags() atom.Flags {
 	return 0
 }
+func (CmdU8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS8
@@ -680,6 +698,7 @@ func (c *CmdS8) TypeID() atom.TypeID {
 func (c *CmdS8) Flags() atom.Flags {
 	return 0
 }
+func (CmdS8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU16
@@ -714,6 +733,7 @@ func (c *CmdU16) TypeID() atom.TypeID {
 func (c *CmdU16) Flags() atom.Flags {
 	return 0
 }
+func (CmdU16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS16
@@ -748,6 +768,7 @@ func (c *CmdS16) TypeID() atom.TypeID {
 func (c *CmdS16) Flags() atom.Flags {
 	return 0
 }
+func (CmdS16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF32
@@ -782,6 +803,7 @@ func (c *CmdF32) TypeID() atom.TypeID {
 func (c *CmdF32) Flags() atom.Flags {
 	return 0
 }
+func (CmdF32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU32
@@ -816,6 +838,7 @@ func (c *CmdU32) TypeID() atom.TypeID {
 func (c *CmdU32) Flags() atom.Flags {
 	return 0
 }
+func (CmdU32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS32
@@ -850,6 +873,7 @@ func (c *CmdS32) TypeID() atom.TypeID {
 func (c *CmdS32) Flags() atom.Flags {
 	return 0
 }
+func (CmdS32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF64
@@ -884,6 +908,7 @@ func (c *CmdF64) TypeID() atom.TypeID {
 func (c *CmdF64) Flags() atom.Flags {
 	return 0
 }
+func (CmdF64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU64
@@ -918,6 +943,7 @@ func (c *CmdU64) TypeID() atom.TypeID {
 func (c *CmdU64) Flags() atom.Flags {
 	return 0
 }
+func (CmdU64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS64
@@ -952,6 +978,7 @@ func (c *CmdS64) TypeID() atom.TypeID {
 func (c *CmdS64) Flags() atom.Flags {
 	return 0
 }
+func (CmdS64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdBool
@@ -986,6 +1013,7 @@ func (c *CmdBool) TypeID() atom.TypeID {
 func (c *CmdBool) Flags() atom.Flags {
 	return 0
 }
+func (CmdBool) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdString
@@ -1020,6 +1048,7 @@ func (c *CmdString) TypeID() atom.TypeID {
 func (c *CmdString) Flags() atom.Flags {
 	return 0
 }
+func (CmdString) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdArrayOfFloat
@@ -1054,6 +1083,7 @@ func (c *CmdArrayOfFloat) TypeID() atom.TypeID {
 func (c *CmdArrayOfFloat) Flags() atom.Flags {
 	return 0
 }
+func (CmdArrayOfFloat) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdPointer
@@ -1088,6 +1118,7 @@ func (c *CmdPointer) TypeID() atom.TypeID {
 func (c *CmdPointer) Flags() atom.Flags {
 	return 0
 }
+func (CmdPointer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU8
@@ -1123,6 +1154,7 @@ func (c *CmdVoidOutU8) TypeID() atom.TypeID {
 func (c *CmdVoidOutU8) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutU8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS8
@@ -1158,6 +1190,7 @@ func (c *CmdVoidOutS8) TypeID() atom.TypeID {
 func (c *CmdVoidOutS8) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutS8) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU16
@@ -1193,6 +1226,7 @@ func (c *CmdVoidOutU16) TypeID() atom.TypeID {
 func (c *CmdVoidOutU16) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutU16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS16
@@ -1228,6 +1262,7 @@ func (c *CmdVoidOutS16) TypeID() atom.TypeID {
 func (c *CmdVoidOutS16) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutS16) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF32
@@ -1263,6 +1298,7 @@ func (c *CmdVoidOutF32) TypeID() atom.TypeID {
 func (c *CmdVoidOutF32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutF32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU32
@@ -1298,6 +1334,7 @@ func (c *CmdVoidOutU32) TypeID() atom.TypeID {
 func (c *CmdVoidOutU32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutU32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS32
@@ -1333,6 +1370,7 @@ func (c *CmdVoidOutS32) TypeID() atom.TypeID {
 func (c *CmdVoidOutS32) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutS32) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF64
@@ -1368,6 +1406,7 @@ func (c *CmdVoidOutF64) TypeID() atom.TypeID {
 func (c *CmdVoidOutF64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutF64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU64
@@ -1403,6 +1442,7 @@ func (c *CmdVoidOutU64) TypeID() atom.TypeID {
 func (c *CmdVoidOutU64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutU64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS64
@@ -1438,6 +1478,7 @@ func (c *CmdVoidOutS64) TypeID() atom.TypeID {
 func (c *CmdVoidOutS64) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutS64) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutBool
@@ -1473,6 +1514,7 @@ func (c *CmdVoidOutBool) TypeID() atom.TypeID {
 func (c *CmdVoidOutBool) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutBool) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutString
@@ -1508,6 +1550,7 @@ func (c *CmdVoidOutString) TypeID() atom.TypeID {
 func (c *CmdVoidOutString) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutString) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutFixedSizeBuffer
@@ -1543,6 +1586,7 @@ func (c *CmdVoidOutFixedSizeBuffer) TypeID() atom.TypeID {
 func (c *CmdVoidOutFixedSizeBuffer) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutFixedSizeBuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Strings
@@ -1584,6 +1628,7 @@ func (c *CmdVoidOut3Strings) TypeID() atom.TypeID {
 func (c *CmdVoidOut3Strings) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOut3Strings) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Remapped
@@ -1625,6 +1670,7 @@ func (c *CmdVoid3Remapped) TypeID() atom.TypeID {
 func (c *CmdVoid3Remapped) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoid3Remapped) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Remapped
@@ -1666,6 +1712,7 @@ func (c *CmdVoidOut3Remapped) TypeID() atom.TypeID {
 func (c *CmdVoidOut3Remapped) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOut3Remapped) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutArrayOfRemapped
@@ -1701,6 +1748,7 @@ func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID {
 func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags {
 	return 0
 }
+func (CmdVoidOutArrayOfRemapped) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
@@ -2101,14 +2149,11 @@ func NewCmdVoidOutArrayOfRemapped(
 ////////////////////////////////////////////////////////////////////////////////
 type api struct{}
 
-func (a api) Name() string {
+func (api) Name() string {
 	return "gfxapi_test"
 }
-func (a api) InitialState() gfxapi.State {
-	return initialState()
-}
-func (a api) StateMutator(s gfxapi.State) atom.Writer {
-	return &StateMutator{State: s.(*state)}
+func (api) ID() service.ApiId {
+	return service.ApiId{binary.NewID([]byte("gfxapi_test"))}
 }
 func API() gfxapi.API {
 	return api{}
@@ -2117,283 +2162,283 @@ func init() {
 	gfxapi.Register(API())
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid",
-		Docs: "",
+		Docs: "[]",
 		ID:   0,
 		New:  func() atom.Atom { return &CmdVoid{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidU8",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   1,
 		New:  func() atom.Atom { return &CmdVoidU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidS8",
-		Docs: "",
+		Docs: "[]",
 		ID:   2,
 		New:  func() atom.Atom { return &CmdVoidS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidU16",
-		Docs: "",
+		Docs: "[]",
 		ID:   3,
 		New:  func() atom.Atom { return &CmdVoidU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidS16",
-		Docs: "",
+		Docs: "[]",
 		ID:   4,
 		New:  func() atom.Atom { return &CmdVoidS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidF32",
-		Docs: "",
+		Docs: "[]",
 		ID:   5,
 		New:  func() atom.Atom { return &CmdVoidF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidU32",
-		Docs: "",
+		Docs: "[]",
 		ID:   6,
 		New:  func() atom.Atom { return &CmdVoidU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidS32",
-		Docs: "",
+		Docs: "[]",
 		ID:   7,
 		New:  func() atom.Atom { return &CmdVoidS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidF64",
-		Docs: "",
+		Docs: "[]",
 		ID:   8,
 		New:  func() atom.Atom { return &CmdVoidF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidU64",
-		Docs: "",
+		Docs: "[]",
 		ID:   9,
 		New:  func() atom.Atom { return &CmdVoidU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidS64",
-		Docs: "",
+		Docs: "[]",
 		ID:   10,
 		New:  func() atom.Atom { return &CmdVoidS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidBool",
-		Docs: "",
+		Docs: "[]",
 		ID:   11,
 		New:  func() atom.Atom { return &CmdVoidBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidString",
-		Docs: "",
+		Docs: "[]",
 		ID:   12,
 		New:  func() atom.Atom { return &CmdVoidString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Strings",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   13,
 		New:  func() atom.Atom { return &CmdVoid3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Arrays",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   14,
 		New:  func() atom.Atom { return &CmdVoid3Arrays{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidArrayOfStrings",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   15,
 		New:  func() atom.Atom { return &CmdVoidArrayOfStrings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdU8",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   16,
 		New:  func() atom.Atom { return &CmdU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdS8",
-		Docs: "",
+		Docs: "[]",
 		ID:   17,
 		New:  func() atom.Atom { return &CmdS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdU16",
-		Docs: "",
+		Docs: "[]",
 		ID:   18,
 		New:  func() atom.Atom { return &CmdU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdS16",
-		Docs: "",
+		Docs: "[]",
 		ID:   19,
 		New:  func() atom.Atom { return &CmdS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdF32",
-		Docs: "",
+		Docs: "[]",
 		ID:   20,
 		New:  func() atom.Atom { return &CmdF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdU32",
-		Docs: "",
+		Docs: "[]",
 		ID:   21,
 		New:  func() atom.Atom { return &CmdU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdS32",
-		Docs: "",
+		Docs: "[]",
 		ID:   22,
 		New:  func() atom.Atom { return &CmdS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdF64",
-		Docs: "",
+		Docs: "[]",
 		ID:   23,
 		New:  func() atom.Atom { return &CmdF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdU64",
-		Docs: "",
+		Docs: "[]",
 		ID:   24,
 		New:  func() atom.Atom { return &CmdU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdS64",
-		Docs: "",
+		Docs: "[]",
 		ID:   25,
 		New:  func() atom.Atom { return &CmdS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdBool",
-		Docs: "",
+		Docs: "[]",
 		ID:   26,
 		New:  func() atom.Atom { return &CmdBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdString",
-		Docs: "",
+		Docs: "[]",
 		ID:   27,
 		New:  func() atom.Atom { return &CmdString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdArrayOfFloat",
-		Docs: "",
+		Docs: "[]",
 		ID:   28,
 		New:  func() atom.Atom { return &CmdArrayOfFloat{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdPointer",
-		Docs: "",
+		Docs: "[]",
 		ID:   29,
 		New:  func() atom.Atom { return &CmdPointer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutU8",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   30,
 		New:  func() atom.Atom { return &CmdVoidOutU8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutS8",
-		Docs: "",
+		Docs: "[]",
 		ID:   31,
 		New:  func() atom.Atom { return &CmdVoidOutS8{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutU16",
-		Docs: "",
+		Docs: "[]",
 		ID:   32,
 		New:  func() atom.Atom { return &CmdVoidOutU16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutS16",
-		Docs: "",
+		Docs: "[]",
 		ID:   33,
 		New:  func() atom.Atom { return &CmdVoidOutS16{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutF32",
-		Docs: "",
+		Docs: "[]",
 		ID:   34,
 		New:  func() atom.Atom { return &CmdVoidOutF32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutU32",
-		Docs: "",
+		Docs: "[]",
 		ID:   35,
 		New:  func() atom.Atom { return &CmdVoidOutU32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutS32",
-		Docs: "",
+		Docs: "[]",
 		ID:   36,
 		New:  func() atom.Atom { return &CmdVoidOutS32{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutF64",
-		Docs: "",
+		Docs: "[]",
 		ID:   37,
 		New:  func() atom.Atom { return &CmdVoidOutF64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutU64",
-		Docs: "",
+		Docs: "[]",
 		ID:   38,
 		New:  func() atom.Atom { return &CmdVoidOutU64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutS64",
-		Docs: "",
+		Docs: "[]",
 		ID:   39,
 		New:  func() atom.Atom { return &CmdVoidOutS64{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutBool",
-		Docs: "",
+		Docs: "[]",
 		ID:   40,
 		New:  func() atom.Atom { return &CmdVoidOutBool{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutString",
-		Docs: "",
+		Docs: "[]",
 		ID:   41,
 		New:  func() atom.Atom { return &CmdVoidOutString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutFixedSizeBuffer",
-		Docs: "",
+		Docs: "[]",
 		ID:   42,
 		New:  func() atom.Atom { return &CmdVoidOutFixedSizeBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOut3Strings",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   43,
 		New:  func() atom.Atom { return &CmdVoidOut3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Remapped",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   44,
 		New:  func() atom.Atom { return &CmdVoid3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOut3Remapped",
-		Docs: "",
+		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
 		ID:   45,
 		New:  func() atom.Atom { return &CmdVoidOut3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutArrayOfRemapped",
-		Docs: "",
+		Docs: "[]",
 		ID:   46,
 		New:  func() atom.Atom { return &CmdVoidOutArrayOfRemapped{} },
 	})

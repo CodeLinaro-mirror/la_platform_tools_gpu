@@ -28,6 +28,12 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		}()
 		switch call := in.(type) {
+		case *callImport:
+			if res, err := server.Import(l, call.name, call.Data); err == nil {
+				return &resultImport{res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
 		case *callGetCaptures:
 			if res, err := server.GetCaptures(l); err == nil {
 				return &resultGetCaptures{res}
@@ -41,7 +47,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetState:
-			if res, err := server.GetState(l, call.capture, call.contextId, call.after); err == nil {
+			if res, err := server.GetState(l, call.capture, call.after); err == nil {
 				return &resultGetState{res}
 			} else {
 				return rpc.NewError(err.Error())
@@ -53,7 +59,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetMemoryInfo:
-			if res, err := server.GetMemoryInfo(l, call.capture, call.contextId, call.after, call.rng); err == nil {
+			if res, err := server.GetMemoryInfo(l, call.capture, call.after, call.rng); err == nil {
 				return &resultGetMemoryInfo{res}
 			} else {
 				return rpc.NewError(err.Error())

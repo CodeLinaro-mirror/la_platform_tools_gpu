@@ -19,22 +19,12 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func storeSchema(t *testing.T, api gfxapi.API, db database.Database, l log.Logger) service.SchemaId {
-	schema := api.Schema()
-	id, err := db.Store(&schema, l)
-	if err != nil {
-		t.Fatalf("Failed to store schema: %v", err)
-	}
-	return service.SchemaId{id}
-}
-
-func storeAtoms(t *testing.T, atoms atom.List, api gfxapi.API, db database.Database, l log.Logger) service.AtomStreamId {
-	stream, err := service.NewAtomStream(atoms, storeSchema(t, api, db, l))
+func storeAtoms(t *testing.T, atoms atom.List, db database.Database, l log.Logger) service.AtomStreamId {
+	stream, err := service.NewAtomStream(atoms)
 	if err != nil {
 		t.Fatalf("Failed to build atom stream: %v", err)
 	}
@@ -47,11 +37,10 @@ func storeAtoms(t *testing.T, atoms atom.List, api gfxapi.API, db database.Datab
 
 // StoreCapture encodes and writes the atom list to the database, returning an
 // identifier to the newly constructed and stored Capture.
-func StoreCapture(t *testing.T, atoms atom.List, api gfxapi.API, db database.Database, l log.Logger) service.CaptureId {
+func StoreCapture(t *testing.T, atoms atom.List, db database.Database, l log.Logger) service.CaptureId {
 	capture := service.Capture{
 		Name:  "test-capture",
-		API:   api.Name(),
-		Atoms: storeAtoms(t, atoms, api, db, l),
+		Atoms: storeAtoms(t, atoms, db, l),
 	}
 	id, err := db.Store(&capture, l)
 	if err != nil {

@@ -5,9 +5,9 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom/transform"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
-	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -41,10 +41,6 @@ type depthBufferRequest struct {
 type timeCallsRequest struct {
 	out  chan gfxapi.CallTiming
 	mask service.TimingMask
-}
-
-func (a api) ReplayWriter(b *builder.Builder) replay.Writer {
-	return newReplayWriter(b)
 }
 
 func (a api) ReplayTransforms(
@@ -130,7 +126,7 @@ func (a api) ReplayTransforms(
 		transforms.Add(
 			precisionStrip(),
 			halfFloatOESToHalfFloatARB(),
-			uncompressTextures(ctx.CaptureID, db, logger),
+			decompressTextures(ctx.CaptureID, db, logger),
 		)
 	}
 
@@ -176,11 +172,11 @@ func (a api) TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.Ti
 
 // halfFloatOESToHalfFloatARB returns a transform that converts all
 // vertex streams declared of type GL_HALF_FLOAT_OES to GL_HALF_FLOAT_ARB.
-func halfFloatOESToHalfFloatARB() atom.Transform {
+func halfFloatOESToHalfFloatARB() atom.Transformer {
 	// https://www.opengl.org/registry/specs/ARB/half_float_pixel.txt
 	const GL_HALF_FLOAT_ARB = 0x140B
 
-	return func(id atom.ID, a atom.Atom, out atom.Writer) {
+	return atom.Transform("HalfFloatOESToHalfFloatARB", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
 			cmd.In.Type == VertexAttribType_GL_HALF_FLOAT_OES {
 			out.Write(id, &GlVertexAttribPointer{
@@ -196,25 +192,26 @@ func halfFloatOESToHalfFloatARB() atom.Transform {
 		} else {
 			out.Write(id, a)
 		}
-	}
+	})
 }
 
 // destroyResourcesAtEOS returns a transform that destroys all textures,
 // framebuffers, buffers, shaders, programs and vertex-arrays that were not
 // destroyed by EOS.
-func destroyResourcesAtEOS() atom.Transform {
-	mutator := &StateMutator{State: initialState()}
-
-	return func(id atom.ID, a atom.Atom, out atom.Writer) {
-		switch a.(type) {
+func destroyResourcesAtEOS() atom.Transformer {
+	s := state.New()
+	return atom.Transform("DestroyResourcesAtEOS", func(id atom.ID, a atom.Atom, out atom.Writer) {
+		switch a := a.(type) {
 		default:
-			mutator.Write(id, a)
+		case state.Mutator:
+			a.Mutate(s)
+
 		case *atom.EOS:
-			state := mutator.State
+			s := getState(a, s)
 
 			// Delete all Renderbuffers.
 			renderbuffers := RenderbufferIdArray{}
-			for renderbufferId := range state.Instances.Renderbuffers {
+			for renderbufferId := range s.Instances.Renderbuffers {
 				// Skip virtual renderbuffers: backbuffer_color(-1), backbuffer_depth(-2), backbuffer_stencil(-3).
 				if renderbufferId < 0xf0000000 {
 					renderbuffers = append(renderbuffers, renderbufferId)
@@ -226,7 +223,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Textures.
 			textures := TextureIdArray{}
-			for textureId := range state.Instances.Textures {
+			for textureId := range s.Instances.Textures {
 				textures = append(textures, textureId)
 			}
 			if len(textures) > 0 {
@@ -235,7 +232,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Framebuffers.
 			framebuffers := FramebufferIdArray{}
-			for framebufferId := range state.Instances.Framebuffers {
+			for framebufferId := range s.Instances.Framebuffers {
 				framebuffers = append(framebuffers, framebufferId)
 			}
 			if len(framebuffers) > 0 {
@@ -244,7 +241,7 @@ func destroyResourcesAtEOS() atom.Transform {
 
 			// Delete all Buffers.
 			buffers := BufferIdArray{}
-			for bufferId := range state.Instances.Buffers {
+			for bufferId := range s.Instances.Buffers {
 				buffers = append(buffers, bufferId)
 			}
 			if len(buffers) > 0 {
@@ -252,18 +249,18 @@ func destroyResourcesAtEOS() atom.Transform {
 			}
 
 			// Delete all Shaders.
-			for shaderId := range state.Instances.Shaders {
+			for shaderId := range s.Instances.Shaders {
 				out.Write(id, NewGlDeleteShader(shaderId))
 			}
 
 			// Delete all Programs.
-			for programId := range state.Instances.Programs {
+			for programId := range s.Instances.Programs {
 				out.Write(id, NewGlDeleteProgram(programId))
 			}
 
 			// Delete all VertexArrays.
 			vertexArrays := VertexArrayIdArray{}
-			for vertexArrayId := range state.Instances.VertexArrays {
+			for vertexArrayId := range s.Instances.VertexArrays {
 				vertexArrays = append(vertexArrays, vertexArrayId)
 			}
 			if len(vertexArrays) > 0 {
@@ -271,10 +268,10 @@ func destroyResourcesAtEOS() atom.Transform {
 			}
 
 			// Delete all SyncObjects. TODO: Uncomment when added to API file.
-			// for syncObjectId := range state.Instances.SyncObjects {
+			// for syncObjectId := range s.Instances.SyncObjects {
 			// 	out.Write(id, NewGlDeleteSync(syncObjectId))
 			// }
 		}
 		out.Write(id, a)
-	}
+	})
 }

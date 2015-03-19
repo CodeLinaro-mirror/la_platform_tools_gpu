@@ -25,6 +25,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -75,28 +77,95 @@ func (b *builder) Version() uint32 {
 	return 0
 }
 
-func getAPI(captureID service.CaptureId, db database.Database, logger log.Logger) (gfxapi.API, error) {
-	var capture service.Capture
-	if err := db.Load(captureID.ID, logger, &capture); err != nil {
-		return nil, err
+// calcContexts scans the atom list for all contexts used, and returns a
+// AtomContextArray.
+func calcContexts(atoms atom.List) service.AtomContextArray {
+	contexts := map[atom.ContextID]service.AtomContext{}
+	for _, a := range atoms {
+		id := a.ContextID()
+		if _, found := contexts[id]; !found {
+			if a, ok := a.(gfxapi.APIer); ok {
+				contexts[id] = service.AtomContext{
+					Api: a.API().ID(),
+					Id:  uint32(id),
+				}
+			}
+		}
 	}
-	return gfxapi.Find(capture.API), nil
+
+	a := make(service.AtomContextArray, 0, len(contexts))
+	for _, ctx := range contexts {
+		a = append(a, ctx)
+	}
+	return a
 }
 
-func getAtoms(captureID service.CaptureId, db database.Database, logger log.Logger) (atom.List, service.SchemaId, error) {
+// NewCapture builds a new capture containing atoms, stores it into db and
+// returns the new capture identifier.
+func NewCapture(name string, atoms atom.List, db database.Database, logger log.Logger) (service.CaptureId, error) {
+	stream, err := service.NewAtomStream(atoms)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+
+	streamID, err := db.Store(&stream, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+
+	schema := schema.Schema()
+	schemaID, err := db.Store(&schema, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+
+	capture := service.Capture{
+		Name:     name,
+		Atoms:    service.AtomStreamId{streamID},
+		Schema:   service.SchemaId{schemaID},
+		Contexts: calcContexts(atoms),
+	}
+
+	id, err := db.Store(&capture, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+
+	return service.CaptureId{id}, nil
+}
+
+func loadCapture(captureID service.CaptureId, db database.Database, logger log.Logger) (service.Capture, error) {
 	var capture service.Capture
 	if err := db.Load(captureID.ID, logger, &capture); err != nil {
-		return atom.List{}, service.SchemaId{}, err
+		return service.Capture{}, err
 	}
+	return capture, nil
+}
+
+func loadAtoms(streamID service.AtomStreamId, db database.Database, logger log.Logger) (atom.List, error) {
 	var stream service.AtomStream
-	if err := db.Load(capture.Atoms.ID, logger, &stream); err != nil {
-		return atom.List{}, service.SchemaId{}, err
+	if err := db.Load(streamID.ID, logger, &stream); err != nil {
+		return atom.List{}, err
 	}
 	atomList, err := stream.List()
 	if err != nil {
-		return atom.List{}, service.SchemaId{}, err
+		return atom.List{}, err
 	}
-	return atomList, stream.Schema, nil
+	return atomList, nil
+}
+
+// getAPI returns the graphics API that the context with identifier id uses.
+func getAPI(ctxs service.AtomContextArray, id atom.ContextID) (gfxapi.API, error) {
+	for _, c := range ctxs {
+		if atom.ContextID(c.Id) == id {
+			if api := gfxapi.Find(c.Api); api != nil {
+				return api, nil
+			} else {
+				return nil, fmt.Errorf("Unknown API '%s' for context %d", c.Api, id)
+			}
+		}
+	}
+	return nil, fmt.Errorf("Context %d was not found", id)
 }
 
 // getAtomFramebufferDimensions returns the framebuffer dimensions after a given atom in the given capture and context.
@@ -139,34 +208,34 @@ func uniformScale(width, height, maxWidth, maxHeight uint32) (w, h uint32) {
 
 // build writes to out the captureFramebufferDimensions resource resulting from the given getCaptureFramebufferDimensions request.
 func (request *getCaptureFramebufferDimensions) build(db database.Database, logger log.Logger, out binary.Object) error {
-	atoms, _, err := getAtoms(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}
 
-	api, err := getAPI(request.Capture, db, logger)
+	atoms, err := loadAtoms(capture.Atoms, db, logger)
 	if err != nil {
 		return err
 	}
-
-	state := api.InitialState()
-	mutator := api.StateMutator(state)
 
 	var captureFbDims captureFramebufferDimensions
 	var currentDims *atomFramebufferDimensions
 
+	s := state.New()
 	for i, a := range atoms {
 		if a.ContextID() != request.Context {
 			continue
 		}
-		mutator.Write(atom.ID(i), a)
+		if err := s.Mutate(a); err != nil {
+			return err
+		}
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
-			width, height, err := state.GetFramebufferAttachmentSize(gfxapi.FramebufferAttachmentColor)
+			width, height, err := s.Contexts[request.Context].GetFramebufferAttachmentSize(state.FramebufferAttachmentColor)
 			if err != nil {
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {
-				currentDims = &atomFramebufferDimensions{From:atom.ID(i), Width:width, Height: height}
+				currentDims = &atomFramebufferDimensions{From: atom.ID(i), Width: width, Height: height}
 				captureFbDims.Dimensions = append(captureFbDims.Dimensions, *currentDims)
 			}
 		}

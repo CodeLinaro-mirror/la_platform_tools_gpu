@@ -5,6 +5,17 @@
 
 package service
 
+// Call Import
+type callImport struct {
+	name string
+	Data U8Array
+}
+
+// Result Import
+type resultImport struct {
+	value CaptureId
+}
+
 // Call GetCaptures
 type callGetCaptures struct {
 }
@@ -25,9 +36,8 @@ type resultGetDevices struct {
 
 // Call GetState
 type callGetState struct {
-	capture   CaptureId
-	contextId uint32
-	after     uint64
+	capture CaptureId
+	after   uint64
 }
 
 // Result GetState
@@ -48,10 +58,9 @@ type resultGetHierarchy struct {
 
 // Call GetMemoryInfo
 type callGetMemoryInfo struct {
-	capture   CaptureId
-	contextId uint32
-	after     uint64
-	rng       MemoryRange
+	capture CaptureId
+	after   uint64
+	rng     MemoryRange
 }
 
 // Result GetMemoryInfo

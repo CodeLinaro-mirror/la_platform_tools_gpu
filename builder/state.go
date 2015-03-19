@@ -24,40 +24,38 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 // build writes to out the Binary resource resulting from the given GetState request.
 func (request *GetState) build(db database.Database, logger log.Logger, out binary.Object) error {
-	atoms, _, err := getAtoms(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}
+
+	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	if err != nil {
+		return err
+	}
+
 	if request.After >= atom.ID(len(atoms)) {
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	contextID := atoms[request.After].ContextID()
-	api, err := getAPI(request.Capture, db, logger)
-	if err != nil {
-		return err
-	}
-
-	state := api.InitialState()
-	stateMutator := api.StateMutator(state)
-	for i, a := range atoms {
-		if a.ContextID() == contextID {
-			stateMutator.Write(atom.ID(i), a)
-		}
-		if atom.ID(i) == request.After {
-			break
+	s := state.New()
+	for _, a := range atoms[:request.After] {
+		if err := s.Mutate(a); err != nil {
+			return err
 		}
 	}
 
 	buf := &bytes.Buffer{}
-	enc := cyclic.Encoder(vle.Writer(buf))
-	state.Encode(enc)
+	if err := s.Encode(cyclic.Encoder(vle.Writer(buf))); err != nil {
+		return err
+	}
 
 	store.CopyResource(out, &service.Binary{buf.Bytes()})
 	return nil

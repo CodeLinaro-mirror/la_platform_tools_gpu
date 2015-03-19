@@ -5,12 +5,11 @@
 package gles
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-func (a api) Schema() service.Schema {
+func init() {
 	s := schemaBuilder{
 		arrays:       make(map[int]*service.ArrayInfo),
 		staticArrays: make(map[int]*service.StaticArrayInfo),
@@ -18,4651 +17,4626 @@ func (a api) Schema() service.Schema {
 		enums:        make(map[int]*service.EnumInfo),
 		structs:      make(map[int]*service.StructInfo),
 		classes:      make(map[int]*service.ClassInfo),
-		boolInfo:     service.CreateSimpleInfo("bool", service.TypeKindBool),
-		floatInfo:    service.CreateSimpleInfo("float", service.TypeKindF32),
-		doubleInfo:   service.CreateSimpleInfo("double", service.TypeKindF64),
-		intInfo:      service.CreateSimpleInfo("int", service.TypeKindS8),
-		uintInfo:     service.CreateSimpleInfo("uint", service.TypeKindU8),
-		s8Info:       service.CreateSimpleInfo("s8", service.TypeKindS8),
-		u8Info:       service.CreateSimpleInfo("u8", service.TypeKindU8),
-		s16Info:      service.CreateSimpleInfo("s16", service.TypeKindS16),
-		u16Info:      service.CreateSimpleInfo("u16", service.TypeKindU16),
-		s32Info:      service.CreateSimpleInfo("s32", service.TypeKindS32),
-		u32Info:      service.CreateSimpleInfo("u32", service.TypeKindU32),
-		s64Info:      service.CreateSimpleInfo("s64", service.TypeKindS64),
-		u64Info:      service.CreateSimpleInfo("u64", service.TypeKindU64),
-		pointerInfo:  service.CreateSimpleInfo("pointer", service.TypeKindPointer),
-		memoryInfo:   service.CreateSimpleInfo("memory", service.TypeKindMemory),
-		stringInfo:   service.CreateSimpleInfo("string", service.TypeKindString),
-		anyInfo:      service.CreateSimpleInfo("any", service.TypeKindAny),
-		idInfo:       service.CreateSimpleInfo("id", service.TypeKindID),
 	}
-	return service.Schema{
-		Arrays: service.ArrayInfoArray{
-			s.getArrayInfo(0),
-			s.getArrayInfo(1),
-			s.getArrayInfo(2),
-			s.getArrayInfo(3),
-			s.getArrayInfo(4),
-			s.getArrayInfo(5),
-			s.getArrayInfo(6),
-			s.getArrayInfo(7),
-			s.getArrayInfo(8),
-			s.getArrayInfo(9),
-			s.getArrayInfo(10),
-			s.getArrayInfo(11),
-			s.getArrayInfo(12),
-		},
-		StaticArrays: service.StaticArrayInfoArray{},
-		Maps: service.MapInfoArray{
-			s.getMapInfo(0),
-			s.getMapInfo(1),
-			s.getMapInfo(2),
-			s.getMapInfo(3),
-			s.getMapInfo(4),
-			s.getMapInfo(5),
-			s.getMapInfo(6),
-			s.getMapInfo(7),
-			s.getMapInfo(8),
-			s.getMapInfo(9),
-			s.getMapInfo(10),
-			s.getMapInfo(11),
-			s.getMapInfo(12),
-			s.getMapInfo(13),
-			s.getMapInfo(14),
-			s.getMapInfo(15),
-			s.getMapInfo(16),
-			s.getMapInfo(17),
-			s.getMapInfo(18),
-			s.getMapInfo(19),
-			s.getMapInfo(20),
-			s.getMapInfo(21),
-			s.getMapInfo(22),
-			s.getMapInfo(23),
-			s.getMapInfo(24),
-		},
-		Enums: service.EnumInfoArray{
-			s.getEnumInfo(0),
-			s.getEnumInfo(1),
-			s.getEnumInfo(2),
-			s.getEnumInfo(3),
-			s.getEnumInfo(4),
-			s.getEnumInfo(5),
-			s.getEnumInfo(6),
-			s.getEnumInfo(7),
-			s.getEnumInfo(8),
-			s.getEnumInfo(9),
-			s.getEnumInfo(10),
-			s.getEnumInfo(11),
-			s.getEnumInfo(12),
-			s.getEnumInfo(13),
-			s.getEnumInfo(14),
-			s.getEnumInfo(15),
-			s.getEnumInfo(16),
-			s.getEnumInfo(17),
-			s.getEnumInfo(18),
-			s.getEnumInfo(19),
-			s.getEnumInfo(20),
-			s.getEnumInfo(21),
-			s.getEnumInfo(22),
-			s.getEnumInfo(23),
-			s.getEnumInfo(24),
-			s.getEnumInfo(25),
-			s.getEnumInfo(26),
-			s.getEnumInfo(27),
-			s.getEnumInfo(28),
-			s.getEnumInfo(29),
-			s.getEnumInfo(30),
-			s.getEnumInfo(31),
-			s.getEnumInfo(32),
-			s.getEnumInfo(33),
-			s.getEnumInfo(34),
-			s.getEnumInfo(35),
-			s.getEnumInfo(36),
-			s.getEnumInfo(37),
-			s.getEnumInfo(38),
-			s.getEnumInfo(39),
-			s.getEnumInfo(40),
-			s.getEnumInfo(41),
-			s.getEnumInfo(42),
-			s.getEnumInfo(43),
-			s.getEnumInfo(44),
-			s.getEnumInfo(45),
-			s.getEnumInfo(46),
-			s.getEnumInfo(47),
-			s.getEnumInfo(48),
-			s.getEnumInfo(49),
-			s.getEnumInfo(50),
-			s.getEnumInfo(51),
-			s.getEnumInfo(52),
-			s.getEnumInfo(53),
-			s.getEnumInfo(54),
-			s.getEnumInfo(55),
-			s.getEnumInfo(56),
-			s.getEnumInfo(57),
-			s.getEnumInfo(58),
-			s.getEnumInfo(59),
-			s.getEnumInfo(60),
-			s.getEnumInfo(61),
-			s.getEnumInfo(62),
-			s.getEnumInfo(63),
-			s.getEnumInfo(64),
-			s.getEnumInfo(65),
-			s.getEnumInfo(66),
-			s.getEnumInfo(67),
-			s.getEnumInfo(68),
-			s.getEnumInfo(69),
-			s.getEnumInfo(70),
-			s.getEnumInfo(71),
-			s.getEnumInfo(72),
-			s.getEnumInfo(73),
-			s.getEnumInfo(74),
-			s.getEnumInfo(75),
-			s.getEnumInfo(76),
-			s.getEnumInfo(77),
-			s.getEnumInfo(78),
-			s.getEnumInfo(79),
-			s.getEnumInfo(80),
-			s.getEnumInfo(81),
-			s.getEnumInfo(82),
-			s.getEnumInfo(83),
-			s.getEnumInfo(84),
-			s.getEnumInfo(85),
-			s.getEnumInfo(86),
-			s.getEnumInfo(87),
-			s.getEnumInfo(88),
-		},
-		Classes: service.ClassInfoArray{
-			s.getClassInfo(0),
-			s.getClassInfo(1),
-			s.getClassInfo(2),
-			s.getClassInfo(3),
-			s.getClassInfo(4),
-			s.getClassInfo(5),
-			s.getClassInfo(6),
-			s.getClassInfo(7),
-			s.getClassInfo(8),
-			s.getClassInfo(9),
-			s.getClassInfo(10),
-			s.getClassInfo(11),
-			s.getClassInfo(12),
-			s.getClassInfo(13),
-			s.getClassInfo(14),
-			s.getClassInfo(15),
-			s.getClassInfo(16),
-			s.getClassInfo(17),
-			s.getClassInfo(18),
-			s.getClassInfo(19),
-			s.getClassInfo(20),
-			s.getClassInfo(21),
-			s.getClassInfo(22),
-			s.getClassInfo(23),
-			s.getClassInfo(24),
-			s.getClassInfo(25),
-			s.getClassInfo(26),
-			s.getClassInfo(27),
-			s.getClassInfo(28),
-			s.getClassInfo(29),
-			s.getClassInfo(30),
-			s.getClassInfo(31),
-		},
-		Atoms: service.AtomInfoArray{
-			service.AtomInfo{
-				Type: 0,
-				Name: "init",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "color_fmt",
-						Type: s.getEnumInfo(13),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "depth_fmt",
-						Type: s.getEnumInfo(13),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "stencil_fmt",
-						Type: s.getEnumInfo(13),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/1.1/docs/man",
-			}, service.AtomInfo{
-				Type: 1,
-				Name: "startTimer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "index",
-						Type: s.u8Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "",
-			}, service.AtomInfo{
-				Type: 2,
-				Name: "stopTimer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "index",
-						Type: s.u8Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.u64Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "",
-			}, service.AtomInfo{
-				Type:             3,
-				Name:             "flushPostBuffer",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "",
-			}, service.AtomInfo{
-				Type: 4,
-				Name: "eglCreateContext",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "version",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "context",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml",
-			}, service.AtomInfo{
-				Type: 5,
-				Name: "eglMakeCurrent",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "context",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml",
-			}, service.AtomInfo{
-				Type:             6,
-				Name:             "eglSwapBuffers",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     true,
-				DocumentationUrl: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml",
-			}, service.AtomInfo{
-				Type: 7,
-				Name: "glEnableClientState",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(42),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml",
-			}, service.AtomInfo{
-				Type: 8,
-				Name: "glDisableClientState",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(42),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml",
-			}, service.AtomInfo{
-				Type: 9,
-				Name: "glGetProgramBinaryOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "bytes_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "binary_format",
-						Type: s.u32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "binary",
-						Type: s.pointerInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt",
-			}, service.AtomInfo{
-				Type: 10,
-				Name: "glProgramBinaryOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary_format",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt",
-			}, service.AtomInfo{
-				Type: 11,
-				Name: "glStartTilingQCOM",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "preserveMask",
-						Type: s.getEnumInfo(86),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt",
-			}, service.AtomInfo{
-				Type: 12,
-				Name: "glEndTilingQCOM",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "preserve_mask",
-						Type: s.getEnumInfo(86),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt",
-			}, service.AtomInfo{
-				Type: 13,
-				Name: "glDiscardFramebufferEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "numAttachments",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "attachments",
-						Type: s.getArrayInfo(2),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt",
-			}, service.AtomInfo{
-				Type: 14,
-				Name: "glInsertEventMarkerEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "marker",
-						Type: s.stringInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
-			}, service.AtomInfo{
-				Type: 15,
-				Name: "glPushGroupMarkerEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "marker",
-						Type: s.stringInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
-			}, service.AtomInfo{
-				Type:             16,
-				Name:             "glPopGroupMarkerEXT",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
-			}, service.AtomInfo{
-				Type: 17,
-				Name: "glTexStorage1DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 18,
-				Name: "glTexStorage2DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 19,
-				Name: "glTexStorage3DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "depth",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 20,
-				Name: "glTextureStorage1DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 21,
-				Name: "glTextureStorage2DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 22,
-				Name: "glTextureStorage3DEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "levels",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "depth",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
-			}, service.AtomInfo{
-				Type: 23,
-				Name: "glGenVertexArraysOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "arrays",
-						Type: s.getArrayInfo(12),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
-			}, service.AtomInfo{
-				Type: 24,
-				Name: "glBindVertexArrayOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "array",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
-			}, service.AtomInfo{
-				Type: 25,
-				Name: "glDeleteVertexArraysOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "arrays",
-						Type: s.getArrayInfo(12),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
-			}, service.AtomInfo{
-				Type: 26,
-				Name: "glIsVertexArrayOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "array",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
-			}, service.AtomInfo{
-				Type: 27,
-				Name: "glEGLImageTargetTexture2DOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(72),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "image",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt",
-			}, service.AtomInfo{
-				Type: 28,
-				Name: "glEGLImageTargetRenderbufferStorageOES",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(73),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "image",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt",
-			}, service.AtomInfo{
-				Type: 29,
-				Name: "glGetGraphicsResetStatusEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.getEnumInfo(74),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt",
-			}, service.AtomInfo{
-				Type: 30,
-				Name: "glBindAttribLocation",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "name",
-						Type: s.stringInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml",
-			}, service.AtomInfo{
-				Type: 31,
-				Name: "glBlendFunc",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "src_factor",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dst_factor",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml",
-			}, service.AtomInfo{
-				Type: 32,
-				Name: "glBlendFuncSeparate",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "src_factor_rgb",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dst_factor_rgb",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "src_factor_alpha",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dst_factor_alpha",
-						Type: s.getEnumInfo(63),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml",
-			}, service.AtomInfo{
-				Type: 33,
-				Name: "glBlendEquation",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "equation",
-						Type: s.getEnumInfo(68),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml",
-			}, service.AtomInfo{
-				Type: 34,
-				Name: "glBlendEquationSeparate",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "rgb",
-						Type: s.getEnumInfo(68),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "alpha",
-						Type: s.getEnumInfo(68),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml",
-			}, service.AtomInfo{
-				Type: 35,
-				Name: "glBlendColor",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "red",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "green",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "blue",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "alpha",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml",
-			}, service.AtomInfo{
-				Type: 36,
-				Name: "glEnableVertexAttribArray",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml",
-			}, service.AtomInfo{
-				Type: 37,
-				Name: "glDisableVertexAttribArray",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml",
-			}, service.AtomInfo{
-				Type: 38,
-				Name: "glVertexAttribPointer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "size",
-						Type: s.getEnumInfo(76),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(45),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "normalized",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "stride",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml",
-			}, service.AtomInfo{
-				Type: 39,
-				Name: "glGetActiveAttrib",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_bytes_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "vector_count",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(46),
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "name",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml",
-			}, service.AtomInfo{
-				Type: 40,
-				Name: "glGetActiveUniform",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_bytes_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "size",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(47),
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "name",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml",
-			}, service.AtomInfo{
-				Type: 41,
-				Name: "glGetError",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.getEnumInfo(48),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml",
-			}, service.AtomInfo{
-				Type: 42,
-				Name: "glGetProgramiv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(52),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml",
-			}, service.AtomInfo{
-				Type: 43,
-				Name: "glGetShaderiv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(53),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml",
-			}, service.AtomInfo{
-				Type: 44,
-				Name: "glGetUniformLocation",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "name",
-						Type: s.stringInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml",
-			}, service.AtomInfo{
-				Type: 45,
-				Name: "glGetAttribLocation",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "name",
-						Type: s.stringInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml",
-			}, service.AtomInfo{
-				Type: 46,
-				Name: "glPixelStorei",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(54),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml",
-			}, service.AtomInfo{
-				Type: 47,
-				Name: "glTexParameteri",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(59),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml",
-			}, service.AtomInfo{
-				Type: 48,
-				Name: "glTexParameterf",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(59),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml",
-			}, service.AtomInfo{
-				Type: 49,
-				Name: "glGetTexParameteriv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(59),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml",
-			}, service.AtomInfo{
-				Type: 50,
-				Name: "glGetTexParameterfv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(59),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml",
-			}, service.AtomInfo{
-				Type: 51,
-				Name: "glUniform1i",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 52,
-				Name: "glUniform2i",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 53,
-				Name: "glUniform3i",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 54,
-				Name: "glUniform4i",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value3",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 55,
-				Name: "glUniform1iv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 56,
-				Name: "glUniform2iv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 57,
-				Name: "glUniform3iv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 58,
-				Name: "glUniform4iv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 59,
-				Name: "glUniform1f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 60,
-				Name: "glUniform2f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 61,
-				Name: "glUniform3f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 62,
-				Name: "glUniform4f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value3",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 63,
-				Name: "glUniform1fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 64,
-				Name: "glUniform2fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 65,
-				Name: "glUniform3fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 66,
-				Name: "glUniform4fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 67,
-				Name: "glUniformMatrix2fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "transpose",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 68,
-				Name: "glUniformMatrix3fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "transpose",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 69,
-				Name: "glUniformMatrix4fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "transpose",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
-			}, service.AtomInfo{
-				Type: 70,
-				Name: "glGetUniformfv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml",
-			}, service.AtomInfo{
-				Type: 71,
-				Name: "glGetUniformiv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml",
-			}, service.AtomInfo{
-				Type: 72,
-				Name: "glVertexAttrib1f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 73,
-				Name: "glVertexAttrib2f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 74,
-				Name: "glVertexAttrib3f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 75,
-				Name: "glVertexAttrib4f",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value0",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value1",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value2",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value3",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 76,
-				Name: "glVertexAttrib1fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 77,
-				Name: "glVertexAttrib2fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 78,
-				Name: "glVertexAttrib3fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 79,
-				Name: "glVertexAttrib4fv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "location",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(3),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
-			}, service.AtomInfo{
-				Type: 80,
-				Name: "glGetShaderPrecisionFormat",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader_type",
-						Type: s.getEnumInfo(33),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "precision_type",
-						Type: s.getEnumInfo(64),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "range",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "precision",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml",
-			}, service.AtomInfo{
-				Type: 81,
-				Name: "glDepthMask",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "enabled",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml",
-			}, service.AtomInfo{
-				Type: 82,
-				Name: "glDepthFunc",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "function",
-						Type: s.getEnumInfo(65),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml",
-			}, service.AtomInfo{
-				Type: 83,
-				Name: "glDepthRangef",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "near",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "far",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml",
-			}, service.AtomInfo{
-				Type: 84,
-				Name: "glColorMask",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "red",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "green",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "blue",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "alpha",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml",
-			}, service.AtomInfo{
-				Type: 85,
-				Name: "glStencilMask",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "mask",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml",
-			}, service.AtomInfo{
-				Type: 86,
-				Name: "glStencilMaskSeparate",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "face",
-						Type: s.getEnumInfo(39),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "mask",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml",
-			}, service.AtomInfo{
-				Type: 87,
-				Name: "glStencilFuncSeparate",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "face",
-						Type: s.getEnumInfo(39),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "function",
-						Type: s.getEnumInfo(65),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "reference_value",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "mask",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml",
-			}, service.AtomInfo{
-				Type: 88,
-				Name: "glStencilOpSeparate",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "face",
-						Type: s.getEnumInfo(39),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "stencil_fail",
-						Type: s.getEnumInfo(66),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "stencil_pass_depth_fail",
-						Type: s.getEnumInfo(66),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "stencil_pass_depth_pass",
-						Type: s.getEnumInfo(66),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml",
-			}, service.AtomInfo{
-				Type: 89,
-				Name: "glFrontFace",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "orientation",
-						Type: s.getEnumInfo(67),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml",
-			}, service.AtomInfo{
-				Type: 90,
-				Name: "glViewport",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml",
-			}, service.AtomInfo{
-				Type: 91,
-				Name: "glScissor",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml",
-			}, service.AtomInfo{
-				Type: 92,
-				Name: "glActiveTexture",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "unit",
-						Type: s.getEnumInfo(31),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml",
-			}, service.AtomInfo{
-				Type: 93,
-				Name: "glGenTextures",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "textures",
-						Type: s.getArrayInfo(11),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml",
-			}, service.AtomInfo{
-				Type: 94,
-				Name: "glDeleteTextures",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "textures",
-						Type: s.getArrayInfo(11),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml",
-			}, service.AtomInfo{
-				Type: 95,
-				Name: "glIsTexture",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml",
-			}, service.AtomInfo{
-				Type: 96,
-				Name: "glBindTexture",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(5),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml",
-			}, service.AtomInfo{
-				Type: 97,
-				Name: "glTexImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "internal_format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "border",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(19),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml",
-			}, service.AtomInfo{
-				Type: 98,
-				Name: "glTexSubImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "xoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "yoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(19),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml",
-			}, service.AtomInfo{
-				Type: 99,
-				Name: "glCopyTexImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(12),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "border",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml",
-			}, service.AtomInfo{
-				Type: 100,
-				Name: "glCopyTexSubImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "xoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "yoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml",
-			}, service.AtomInfo{
-				Type: 101,
-				Name: "glCompressedTexImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(17),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "border",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "image_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml",
-			}, service.AtomInfo{
-				Type: 102,
-				Name: "glCompressedTexSubImage2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "xoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "yoffset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(17),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "image_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml",
-			}, service.AtomInfo{
-				Type: 103,
-				Name: "glGenerateMipmap",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml",
-			}, service.AtomInfo{
-				Type: 104,
-				Name: "glReadPixels",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "x",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "y",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(9),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(19),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml",
-			}, service.AtomInfo{
-				Type: 105,
-				Name: "glGenFramebuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "framebuffers",
-						Type: s.getArrayInfo(5),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml",
-			}, service.AtomInfo{
-				Type: 106,
-				Name: "glBindFramebuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "framebuffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml",
-			}, service.AtomInfo{
-				Type: 107,
-				Name: "glCheckFramebufferStatus",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.getEnumInfo(26),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml",
-			}, service.AtomInfo{
-				Type: 108,
-				Name: "glDeleteFramebuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "framebuffers",
-						Type: s.getArrayInfo(5),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml",
-			}, service.AtomInfo{
-				Type: 109,
-				Name: "glIsFramebuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "framebuffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml",
-			}, service.AtomInfo{
-				Type: 110,
-				Name: "glGenRenderbuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "renderbuffers",
-						Type: s.getArrayInfo(7),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml",
-			}, service.AtomInfo{
-				Type: 111,
-				Name: "glBindRenderbuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(27),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "renderbuffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml",
-			}, service.AtomInfo{
-				Type: 112,
-				Name: "glRenderbufferStorage",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(27),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(13),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml",
-			}, service.AtomInfo{
-				Type: 113,
-				Name: "glDeleteRenderbuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "renderbuffers",
-						Type: s.getArrayInfo(7),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml",
-			}, service.AtomInfo{
-				Type: 114,
-				Name: "glIsRenderbuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "renderbuffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml",
-			}, service.AtomInfo{
-				Type: 115,
-				Name: "glGetRenderbufferParameteriv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(27),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(28),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml",
-			}, service.AtomInfo{
-				Type: 116,
-				Name: "glGenBuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffers",
-						Type: s.getArrayInfo(1),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml",
-			}, service.AtomInfo{
-				Type: 117,
-				Name: "glBindBuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(29),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml",
-			}, service.AtomInfo{
-				Type: 118,
-				Name: "glBufferData",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(29),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "usage",
-						Type: s.getEnumInfo(32),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml",
-			}, service.AtomInfo{
-				Type: 119,
-				Name: "glBufferSubData",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(29),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "offset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "data",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml",
-			}, service.AtomInfo{
-				Type: 120,
-				Name: "glDeleteBuffers",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffers",
-						Type: s.getArrayInfo(1),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml",
-			}, service.AtomInfo{
-				Type: 121,
-				Name: "glIsBuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "buffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml",
-			}, service.AtomInfo{
-				Type: 122,
-				Name: "glGetBufferParameteriv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(29),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(30),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml",
-			}, service.AtomInfo{
-				Type: 123,
-				Name: "glCreateShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "type",
-						Type: s.getEnumInfo(33),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.u32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml",
-			}, service.AtomInfo{
-				Type: 124,
-				Name: "glDeleteShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml",
-			}, service.AtomInfo{
-				Type: 125,
-				Name: "glShaderSource",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "source",
-						Type: s.getArrayInfo(10),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "length",
-						Type: s.getArrayInfo(8),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml",
-			}, service.AtomInfo{
-				Type: 126,
-				Name: "glShaderBinary",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "shaders",
-						Type: s.getArrayInfo(9),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary_format",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "binary_size",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml",
-			}, service.AtomInfo{
-				Type: 127,
-				Name: "glGetShaderInfoLog",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "string_length_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "info",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml",
-			}, service.AtomInfo{
-				Type: 128,
-				Name: "glGetShaderSource",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "string_length_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "source",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml",
-			}, service.AtomInfo{
-				Type:             129,
-				Name:             "glReleaseShaderCompiler",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml",
-			}, service.AtomInfo{
-				Type: 130,
-				Name: "glCompileShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml",
-			}, service.AtomInfo{
-				Type: 131,
-				Name: "glIsShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml",
-			}, service.AtomInfo{
-				Type: 132,
-				Name: "glCreateProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.u32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml",
-			}, service.AtomInfo{
-				Type: 133,
-				Name: "glDeleteProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml",
-			}, service.AtomInfo{
-				Type: 134,
-				Name: "glAttachShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml",
-			}, service.AtomInfo{
-				Type: 135,
-				Name: "glDetachShader",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "shader",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml",
-			}, service.AtomInfo{
-				Type: 136,
-				Name: "glGetAttachedShaders",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "shaders_length_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "shaders",
-						Type: s.getArrayInfo(9),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml",
-			}, service.AtomInfo{
-				Type: 137,
-				Name: "glLinkProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml",
-			}, service.AtomInfo{
-				Type: 138,
-				Name: "glGetProgramInfoLog",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "buffer_length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "string_length_written",
-						Type: s.s32Info,
-						Out:  true,
-					},
-					service.ParameterInfo{
-						Name: "info",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml",
-			}, service.AtomInfo{
-				Type: 139,
-				Name: "glUseProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml",
-			}, service.AtomInfo{
-				Type: 140,
-				Name: "glIsProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml",
-			}, service.AtomInfo{
-				Type: 141,
-				Name: "glValidateProgram",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "program",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml",
-			}, service.AtomInfo{
-				Type: 142,
-				Name: "glClearColor",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "r",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "g",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "b",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "a",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml",
-			}, service.AtomInfo{
-				Type: 143,
-				Name: "glClearDepthf",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "depth",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml",
-			}, service.AtomInfo{
-				Type: 144,
-				Name: "glClearStencil",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "stencil",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml",
-			}, service.AtomInfo{
-				Type: 145,
-				Name: "glClear",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "mask",
-						Type: s.getEnumInfo(87),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml",
-			}, service.AtomInfo{
-				Type: 146,
-				Name: "glCullFace",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "mode",
-						Type: s.getEnumInfo(39),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml",
-			}, service.AtomInfo{
-				Type: 147,
-				Name: "glPolygonOffset",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "scale_factor",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "units",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml",
-			}, service.AtomInfo{
-				Type: 148,
-				Name: "glLineWidth",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml",
-			}, service.AtomInfo{
-				Type: 149,
-				Name: "glSampleCoverage",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.floatInfo,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "invert",
-						Type: s.boolInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml",
-			}, service.AtomInfo{
-				Type: 150,
-				Name: "glHint",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(49),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "mode",
-						Type: s.getEnumInfo(50),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml",
-			}, service.AtomInfo{
-				Type: 151,
-				Name: "glFramebufferRenderbuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "framebuffer_target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "framebuffer_attachment",
-						Type: s.getEnumInfo(20),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "renderbuffer_target",
-						Type: s.getEnumInfo(27),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "renderbuffer",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml",
-			}, service.AtomInfo{
-				Type: 152,
-				Name: "glFramebufferTexture2D",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "framebuffer_target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "framebuffer_attachment",
-						Type: s.getEnumInfo(20),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "texture_target",
-						Type: s.getEnumInfo(8),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "texture",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "level",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml",
-			}, service.AtomInfo{
-				Type: 153,
-				Name: "glGetFramebufferAttachmentParameteriv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "attachment",
-						Type: s.getEnumInfo(20),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(25),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml",
-			}, service.AtomInfo{
-				Type: 154,
-				Name: "glDrawElements",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "draw_mode",
-						Type: s.getEnumInfo(0),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "element_count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "indices_type",
-						Type: s.getEnumInfo(1),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "indices",
-						Type: s.pointerInfo,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       true,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml",
-			}, service.AtomInfo{
-				Type: 155,
-				Name: "glDrawArrays",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "draw_mode",
-						Type: s.getEnumInfo(0),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "first_index",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "index_count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       true,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml",
-			}, service.AtomInfo{
-				Type:             156,
-				Name:             "glFlush",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml",
-			}, service.AtomInfo{
-				Type:             157,
-				Name:             "glFinish",
-				Parameters:       []service.ParameterInfo{},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml",
-			}, service.AtomInfo{
-				Type: 158,
-				Name: "glGetBooleanv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "param",
-						Type: s.getEnumInfo(38),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(0),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
-			}, service.AtomInfo{
-				Type: 159,
-				Name: "glGetFloatv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "param",
-						Type: s.getEnumInfo(38),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(3),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
-			}, service.AtomInfo{
-				Type: 160,
-				Name: "glGetIntegerv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "param",
-						Type: s.getEnumInfo(38),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "values",
-						Type: s.getArrayInfo(8),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
-			}, service.AtomInfo{
-				Type: 161,
-				Name: "glGetString",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "param",
-						Type: s.getEnumInfo(44),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.stringInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml",
-			}, service.AtomInfo{
-				Type: 162,
-				Name: "glEnable",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "capability",
-						Type: s.getEnumInfo(43),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml",
-			}, service.AtomInfo{
-				Type: 163,
-				Name: "glDisable",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "capability",
-						Type: s.getEnumInfo(43),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml",
-			}, service.AtomInfo{
-				Type: 164,
-				Name: "glIsEnabled",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "capability",
-						Type: s.getEnumInfo(43),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml",
-			}, service.AtomInfo{
-				Type: 165,
-				Name: "glMapBufferRange",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(69),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "offset",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "length",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "access",
-						Type: s.getEnumInfo(88),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.pointerInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml",
-			}, service.AtomInfo{
-				Type: 166,
-				Name: "glUnmapBuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(69),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml",
-			}, service.AtomInfo{
-				Type: 167,
-				Name: "glInvalidateFramebuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(24),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "attachments",
-						Type: s.getArrayInfo(4),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml",
-			}, service.AtomInfo{
-				Type: 168,
-				Name: "glRenderbufferStorageMultisample",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(27),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "samples",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "format",
-						Type: s.getEnumInfo(13),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "width",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "height",
-						Type: s.s32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt",
-			}, service.AtomInfo{
-				Type: 169,
-				Name: "glBlitFramebuffer",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "srcX0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "srcY0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "srcX1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "srcY1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dstX0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dstY0",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dstX1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "dstY1",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "mask",
-						Type: s.getEnumInfo(87),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "filter",
-						Type: s.getEnumInfo(60),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml",
-			}, service.AtomInfo{
-				Type: 170,
-				Name: "glGenQueries",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "queries",
-						Type: s.getArrayInfo(6),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml",
-			}, service.AtomInfo{
-				Type: 171,
-				Name: "glBeginQuery",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml",
-			}, service.AtomInfo{
-				Type: 172,
-				Name: "glEndQuery",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml",
-			}, service.AtomInfo{
-				Type: 173,
-				Name: "glDeleteQueries",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "queries",
-						Type: s.getArrayInfo(6),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml",
-			}, service.AtomInfo{
-				Type: 174,
-				Name: "glIsQuery",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml",
-			}, service.AtomInfo{
-				Type: 175,
-				Name: "glGetQueryiv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(79),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml",
-			}, service.AtomInfo{
-				Type: 176,
-				Name: "glGetQueryObjectuiv",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(82),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.u32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml",
-			}, service.AtomInfo{
-				Type: 177,
-				Name: "glGenQueriesEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "queries",
-						Type: s.getArrayInfo(6),
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 178,
-				Name: "glBeginQueryEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 179,
-				Name: "glEndQueryEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 180,
-				Name: "glDeleteQueriesEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "count",
-						Type: s.s32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "queries",
-						Type: s.getArrayInfo(6),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 181,
-				Name: "glIsQueryEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "result",
-						Type: s.boolInfo,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 182,
-				Name: "glQueryCounterEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 183,
-				Name: "glGetQueryivEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "target",
-						Type: s.getEnumInfo(85),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(79),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 184,
-				Name: "glGetQueryObjectivEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(82),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 185,
-				Name: "glGetQueryObjectuivEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(82),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.u32Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 186,
-				Name: "glGetQueryObjecti64vEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(82),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.s64Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
-			}, service.AtomInfo{
-				Type: 187,
-				Name: "glGetQueryObjectui64vEXT",
-				Parameters: []service.ParameterInfo{
-					service.ParameterInfo{
-						Name: "query",
-						Type: s.u32Info,
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "parameter",
-						Type: s.getEnumInfo(82),
-						Out:  false,
-					},
-					service.ParameterInfo{
-						Name: "value",
-						Type: s.u64Info,
-						Out:  true,
-					},
-				},
-				IsCommand:        true,
-				IsDrawCall:       false,
-				IsEndOfFrame:     false,
-				DocumentationUrl: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 0,
+		Name: "init",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
 			},
-			service.AtomInfo{
-				Type: uint16(memory.TypeIDObservation),
-				Name: "MemoryObservation",
-				Parameters: service.ParameterInfoArray{
-					service.ParameterInfo{
-						Name: "Pointer",
-						Type: s.pointerInfo,
-					},
-					service.ParameterInfo{
-						Name: "Size",
-						Type: s.u64Info,
-					},
-					service.ParameterInfo{
-						Name: "ResourceID",
-						Type: s.idInfo,
-					},
-				},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
 			},
-			service.AtomInfo{
-				Type: uint16(atom.TypeIDEos),
-				Name: "EndOfStream",
+			service.ParameterInfo{
+				Name: "color_fmt",
+				Type: s.getEnumInfo(13),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "depth_fmt",
+				Type: s.getEnumInfo(13),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "stencil_fmt",
+				Type: s.getEnumInfo(13),
+				Out:  false,
 			},
 		},
-		State: service.CreateStructInfo(
-			"globals",
-			service.TypeKindStruct,
-			service.FieldInfoArray{
-				&service.FieldInfo{
-					Name: "Blending",
-					Type: s.getClassInfo(27),
-				},
-				&service.FieldInfo{
-					Name: "Rasterizing",
-					Type: s.getClassInfo(28),
-				},
-				&service.FieldInfo{
-					Name: "Clearing",
-					Type: s.getClassInfo(29),
-				},
-				&service.FieldInfo{
-					Name: "BoundFramebuffers",
-					Type: s.getMapInfo(6),
-				},
-				&service.FieldInfo{
-					Name: "BoundRenderbuffers",
-					Type: s.getMapInfo(12),
-				},
-				&service.FieldInfo{
-					Name: "BoundBuffers",
-					Type: s.getMapInfo(2),
-				},
-				&service.FieldInfo{
-					Name: "BoundProgram",
-					Type: s.u32Info,
-				},
-				&service.FieldInfo{
-					Name: "BoundVertexArray",
-					Type: s.u32Info,
-				},
-				&service.FieldInfo{
-					Name: "VertexAttributeArrays",
-					Type: s.getMapInfo(23),
-				},
-				&service.FieldInfo{
-					Name: "TextureUnits",
-					Type: s.getMapInfo(18),
-				},
-				&service.FieldInfo{
-					Name: "ActiveTextureUnit",
-					Type: s.getEnumInfo(31),
-				},
-				&service.FieldInfo{
-					Name: "Capabilities",
-					Type: s.getMapInfo(1),
-				},
-				&service.FieldInfo{
-					Name: "Internals",
-					Type: s.getClassInfo(30),
-				},
-				&service.FieldInfo{
-					Name: "GenerateMipmapHint",
-					Type: s.getEnumInfo(50),
-				},
-				&service.FieldInfo{
-					Name: "PixelStorage",
-					Type: s.getMapInfo(14),
-				},
-				&service.FieldInfo{
-					Name: "Instances",
-					Type: s.getClassInfo(31),
-				},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 1,
+		Name: "startTimer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "index",
+				Type: schema.U8,
+				Out:  false,
 			},
-		),
-	}
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 2,
+		Name: "stopTimer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "index",
+				Type: schema.U8,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.U64,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             3,
+		Name:             "flushPostBuffer",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 4,
+		Name: "eglCreateContext",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "version",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "context",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 5,
+		Name: "eglMakeCurrent",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "context",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             6,
+		Name:             "eglSwapBuffers",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     true,
+		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 7,
+		Name: "glEnableClientState",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(42),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 8,
+		Name: "glDisableClientState",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(42),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 9,
+		Name: "glGetProgramBinaryOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "bytes_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "binary_format",
+				Type: schema.U32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "binary",
+				Type: schema.Pointer,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 10,
+		Name: "glProgramBinaryOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary_format",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 11,
+		Name: "glStartTilingQCOM",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "preserveMask",
+				Type: s.getEnumInfo(86),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 12,
+		Name: "glEndTilingQCOM",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "preserve_mask",
+				Type: s.getEnumInfo(86),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 13,
+		Name: "glDiscardFramebufferEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "numAttachments",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "attachments",
+				Type: s.getArrayInfo(2),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 14,
+		Name: "glInsertEventMarkerEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "marker",
+				Type: schema.String,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 15,
+		Name: "glPushGroupMarkerEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "marker",
+				Type: schema.String,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             16,
+		Name:             "glPopGroupMarkerEXT",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 17,
+		Name: "glTexStorage1DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 18,
+		Name: "glTexStorage2DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 19,
+		Name: "glTexStorage3DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "depth",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 20,
+		Name: "glTextureStorage1DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 21,
+		Name: "glTextureStorage2DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 22,
+		Name: "glTextureStorage3DEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "levels",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "depth",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 23,
+		Name: "glGenVertexArraysOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "arrays",
+				Type: s.getArrayInfo(12),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 24,
+		Name: "glBindVertexArrayOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "array",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 25,
+		Name: "glDeleteVertexArraysOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "arrays",
+				Type: s.getArrayInfo(12),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 26,
+		Name: "glIsVertexArrayOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "array",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 27,
+		Name: "glEGLImageTargetTexture2DOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(72),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "image",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 28,
+		Name: "glEGLImageTargetRenderbufferStorageOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(73),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "image",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 29,
+		Name: "glGetGraphicsResetStatusEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "result",
+				Type: s.getEnumInfo(74),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 30,
+		Name: "glBindAttribLocation",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "name",
+				Type: schema.String,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 31,
+		Name: "glBlendFunc",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "src_factor",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dst_factor",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 32,
+		Name: "glBlendFuncSeparate",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "src_factor_rgb",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dst_factor_rgb",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "src_factor_alpha",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dst_factor_alpha",
+				Type: s.getEnumInfo(63),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 33,
+		Name: "glBlendEquation",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "equation",
+				Type: s.getEnumInfo(68),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 34,
+		Name: "glBlendEquationSeparate",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "rgb",
+				Type: s.getEnumInfo(68),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "alpha",
+				Type: s.getEnumInfo(68),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 35,
+		Name: "glBlendColor",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "red",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "green",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "blue",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "alpha",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 36,
+		Name: "glEnableVertexAttribArray",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 37,
+		Name: "glDisableVertexAttribArray",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 38,
+		Name: "glVertexAttribPointer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "size",
+				Type: s.getEnumInfo(76),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(45),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "normalized",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "stride",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 39,
+		Name: "glGetActiveAttrib",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_bytes_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "vector_count",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(46),
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "name",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 40,
+		Name: "glGetActiveUniform",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_bytes_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "size",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(47),
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "name",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 41,
+		Name: "glGetError",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "result",
+				Type: s.getEnumInfo(48),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 42,
+		Name: "glGetProgramiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(52),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 43,
+		Name: "glGetShaderiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(53),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 44,
+		Name: "glGetUniformLocation",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "name",
+				Type: schema.String,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 45,
+		Name: "glGetAttribLocation",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "name",
+				Type: schema.String,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 46,
+		Name: "glPixelStorei",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(54),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 47,
+		Name: "glTexParameteri",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(59),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 48,
+		Name: "glTexParameterf",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(59),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 49,
+		Name: "glGetTexParameteriv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(59),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 50,
+		Name: "glGetTexParameterfv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(59),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 51,
+		Name: "glUniform1i",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 52,
+		Name: "glUniform2i",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 53,
+		Name: "glUniform3i",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 54,
+		Name: "glUniform4i",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value3",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 55,
+		Name: "glUniform1iv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 56,
+		Name: "glUniform2iv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 57,
+		Name: "glUniform3iv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 58,
+		Name: "glUniform4iv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 59,
+		Name: "glUniform1f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 60,
+		Name: "glUniform2f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 61,
+		Name: "glUniform3f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 62,
+		Name: "glUniform4f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value3",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 63,
+		Name: "glUniform1fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 64,
+		Name: "glUniform2fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 65,
+		Name: "glUniform3fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 66,
+		Name: "glUniform4fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 67,
+		Name: "glUniformMatrix2fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "transpose",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 68,
+		Name: "glUniformMatrix3fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "transpose",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 69,
+		Name: "glUniformMatrix4fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "transpose",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 70,
+		Name: "glGetUniformfv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 71,
+		Name: "glGetUniformiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 72,
+		Name: "glVertexAttrib1f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 73,
+		Name: "glVertexAttrib2f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 74,
+		Name: "glVertexAttrib3f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 75,
+		Name: "glVertexAttrib4f",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value0",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value1",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value2",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value3",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 76,
+		Name: "glVertexAttrib1fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 77,
+		Name: "glVertexAttrib2fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 78,
+		Name: "glVertexAttrib3fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 79,
+		Name: "glVertexAttrib4fv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "location",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 80,
+		Name: "glGetShaderPrecisionFormat",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader_type",
+				Type: s.getEnumInfo(33),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "precision_type",
+				Type: s.getEnumInfo(64),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "range",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "precision",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 81,
+		Name: "glDepthMask",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "enabled",
+				Type: schema.Bool,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 82,
+		Name: "glDepthFunc",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "function",
+				Type: s.getEnumInfo(65),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 83,
+		Name: "glDepthRangef",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "near",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "far",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 84,
+		Name: "glColorMask",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "red",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "green",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "blue",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "alpha",
+				Type: schema.Bool,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 85,
+		Name: "glStencilMask",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "mask",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 86,
+		Name: "glStencilMaskSeparate",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "face",
+				Type: s.getEnumInfo(39),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "mask",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 87,
+		Name: "glStencilFuncSeparate",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "face",
+				Type: s.getEnumInfo(39),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "function",
+				Type: s.getEnumInfo(65),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "reference_value",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "mask",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 88,
+		Name: "glStencilOpSeparate",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "face",
+				Type: s.getEnumInfo(39),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "stencil_fail",
+				Type: s.getEnumInfo(66),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "stencil_pass_depth_fail",
+				Type: s.getEnumInfo(66),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "stencil_pass_depth_pass",
+				Type: s.getEnumInfo(66),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 89,
+		Name: "glFrontFace",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "orientation",
+				Type: s.getEnumInfo(67),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 90,
+		Name: "glViewport",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 91,
+		Name: "glScissor",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 92,
+		Name: "glActiveTexture",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "unit",
+				Type: s.getEnumInfo(31),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 93,
+		Name: "glGenTextures",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "textures",
+				Type: s.getArrayInfo(11),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 94,
+		Name: "glDeleteTextures",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "textures",
+				Type: s.getArrayInfo(11),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 95,
+		Name: "glIsTexture",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 96,
+		Name: "glBindTexture",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(5),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 97,
+		Name: "glTexImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "internal_format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "border",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(19),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 98,
+		Name: "glTexSubImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "xoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "yoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(19),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 99,
+		Name: "glCopyTexImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(12),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "border",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 100,
+		Name: "glCopyTexSubImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "xoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "yoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 101,
+		Name: "glCompressedTexImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(17),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "border",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "image_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 102,
+		Name: "glCompressedTexSubImage2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "xoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "yoffset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(17),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "image_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 103,
+		Name: "glGenerateMipmap",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 104,
+		Name: "glReadPixels",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "x",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "y",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(9),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(19),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 105,
+		Name: "glGenFramebuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "framebuffers",
+				Type: s.getArrayInfo(5),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 106,
+		Name: "glBindFramebuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "framebuffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 107,
+		Name: "glCheckFramebufferStatus",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: s.getEnumInfo(26),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 108,
+		Name: "glDeleteFramebuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "framebuffers",
+				Type: s.getArrayInfo(5),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 109,
+		Name: "glIsFramebuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "framebuffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 110,
+		Name: "glGenRenderbuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "renderbuffers",
+				Type: s.getArrayInfo(7),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 111,
+		Name: "glBindRenderbuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(27),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "renderbuffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 112,
+		Name: "glRenderbufferStorage",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(27),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(13),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 113,
+		Name: "glDeleteRenderbuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "renderbuffers",
+				Type: s.getArrayInfo(7),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 114,
+		Name: "glIsRenderbuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "renderbuffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 115,
+		Name: "glGetRenderbufferParameteriv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(27),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(28),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 116,
+		Name: "glGenBuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffers",
+				Type: s.getArrayInfo(1),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 117,
+		Name: "glBindBuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(29),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 118,
+		Name: "glBufferData",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(29),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "usage",
+				Type: s.getEnumInfo(32),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 119,
+		Name: "glBufferSubData",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(29),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "offset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "size",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "data",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 120,
+		Name: "glDeleteBuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffers",
+				Type: s.getArrayInfo(1),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 121,
+		Name: "glIsBuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "buffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 122,
+		Name: "glGetBufferParameteriv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(29),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(30),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 123,
+		Name: "glCreateShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "type",
+				Type: s.getEnumInfo(33),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.U32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 124,
+		Name: "glDeleteShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 125,
+		Name: "glShaderSource",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "source",
+				Type: s.getArrayInfo(10),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "length",
+				Type: s.getArrayInfo(8),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 126,
+		Name: "glShaderBinary",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shaders",
+				Type: s.getArrayInfo(9),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary_format",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "binary_size",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 127,
+		Name: "glGetShaderInfoLog",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "string_length_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "info",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 128,
+		Name: "glGetShaderSource",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "string_length_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "source",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             129,
+		Name:             "glReleaseShaderCompiler",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 130,
+		Name: "glCompileShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 131,
+		Name: "glIsShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 132,
+		Name: "glCreateProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.U32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 133,
+		Name: "glDeleteProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 134,
+		Name: "glAttachShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 135,
+		Name: "glDetachShader",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shader",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 136,
+		Name: "glGetAttachedShaders",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shaders_length_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "shaders",
+				Type: s.getArrayInfo(9),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 137,
+		Name: "glLinkProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 138,
+		Name: "glGetProgramInfoLog",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "buffer_length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "string_length_written",
+				Type: schema.S32,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "info",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 139,
+		Name: "glUseProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 140,
+		Name: "glIsProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 141,
+		Name: "glValidateProgram",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 142,
+		Name: "glClearColor",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "r",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "g",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "b",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 143,
+		Name: "glClearDepthf",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "depth",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 144,
+		Name: "glClearStencil",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "stencil",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 145,
+		Name: "glClear",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "mask",
+				Type: s.getEnumInfo(87),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 146,
+		Name: "glCullFace",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "mode",
+				Type: s.getEnumInfo(39),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 147,
+		Name: "glPolygonOffset",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "scale_factor",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "units",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 148,
+		Name: "glLineWidth",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.Float,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 149,
+		Name: "glSampleCoverage",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.Float,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "invert",
+				Type: schema.Bool,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 150,
+		Name: "glHint",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(49),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "mode",
+				Type: s.getEnumInfo(50),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 151,
+		Name: "glFramebufferRenderbuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "framebuffer_target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "framebuffer_attachment",
+				Type: s.getEnumInfo(20),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "renderbuffer_target",
+				Type: s.getEnumInfo(27),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "renderbuffer",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 152,
+		Name: "glFramebufferTexture2D",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "framebuffer_target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "framebuffer_attachment",
+				Type: s.getEnumInfo(20),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "texture_target",
+				Type: s.getEnumInfo(8),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "texture",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "level",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 153,
+		Name: "glGetFramebufferAttachmentParameteriv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "attachment",
+				Type: s.getEnumInfo(20),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(25),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 154,
+		Name: "glDrawElements",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "draw_mode",
+				Type: s.getEnumInfo(0),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "element_count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "indices_type",
+				Type: s.getEnumInfo(1),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "indices",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       true,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 155,
+		Name: "glDrawArrays",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "draw_mode",
+				Type: s.getEnumInfo(0),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "first_index",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "index_count",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       true,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             156,
+		Name:             "glFlush",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type:             157,
+		Name:             "glFinish",
+		Parameters:       []service.ParameterInfo{},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 158,
+		Name: "glGetBooleanv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "param",
+				Type: s.getEnumInfo(38),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(0),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 159,
+		Name: "glGetFloatv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "param",
+				Type: s.getEnumInfo(38),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(3),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 160,
+		Name: "glGetIntegerv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "param",
+				Type: s.getEnumInfo(38),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "values",
+				Type: s.getArrayInfo(8),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 161,
+		Name: "glGetString",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "param",
+				Type: s.getEnumInfo(44),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.String,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 162,
+		Name: "glEnable",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "capability",
+				Type: s.getEnumInfo(43),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 163,
+		Name: "glDisable",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "capability",
+				Type: s.getEnumInfo(43),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 164,
+		Name: "glIsEnabled",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "capability",
+				Type: s.getEnumInfo(43),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 165,
+		Name: "glMapBufferRange",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(69),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "offset",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "length",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "access",
+				Type: s.getEnumInfo(88),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Pointer,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 166,
+		Name: "glUnmapBuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(69),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 167,
+		Name: "glInvalidateFramebuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(24),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "attachments",
+				Type: s.getArrayInfo(4),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 168,
+		Name: "glRenderbufferStorageMultisample",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(27),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "samples",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "format",
+				Type: s.getEnumInfo(13),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "width",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "height",
+				Type: schema.S32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 169,
+		Name: "glBlitFramebuffer",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "srcX0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "srcY0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "srcX1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "srcY1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dstX0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dstY0",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dstX1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "dstY1",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "mask",
+				Type: s.getEnumInfo(87),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "filter",
+				Type: s.getEnumInfo(60),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 170,
+		Name: "glGenQueries",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "queries",
+				Type: s.getArrayInfo(6),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 171,
+		Name: "glBeginQuery",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 172,
+		Name: "glEndQuery",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 173,
+		Name: "glDeleteQueries",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "queries",
+				Type: s.getArrayInfo(6),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 174,
+		Name: "glIsQuery",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 175,
+		Name: "glGetQueryiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(79),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 176,
+		Name: "glGetQueryObjectuiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(82),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.U32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 177,
+		Name: "glGenQueriesEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "queries",
+				Type: s.getArrayInfo(6),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 178,
+		Name: "glBeginQueryEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 179,
+		Name: "glEndQueryEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 180,
+		Name: "glDeleteQueriesEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "count",
+				Type: schema.S32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "queries",
+				Type: s.getArrayInfo(6),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 181,
+		Name: "glIsQueryEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Bool,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 182,
+		Name: "glQueryCounterEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 183,
+		Name: "glGetQueryivEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(85),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(79),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 184,
+		Name: "glGetQueryObjectivEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(82),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 185,
+		Name: "glGetQueryObjectuivEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(82),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.U32,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 186,
+		Name: "glGetQueryObjecti64vEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(82),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.S64,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 187,
+		Name: "glGetQueryObjectui64vEXT",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "query",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(82),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: schema.U64,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
+	})
+	schema.RegisterAPI(api{}, service.StructInfo{
+		Name: "state",
+		Kind: service.TypeKindStruct,
+		Fields: service.FieldInfoArray{
+			&service.FieldInfo{
+				Name: "Blending",
+				Type: s.getClassInfo(27),
+			},
+			&service.FieldInfo{
+				Name: "Rasterizing",
+				Type: s.getClassInfo(28),
+			},
+			&service.FieldInfo{
+				Name: "Clearing",
+				Type: s.getClassInfo(29),
+			},
+			&service.FieldInfo{
+				Name: "BoundFramebuffers",
+				Type: s.getMapInfo(6),
+			},
+			&service.FieldInfo{
+				Name: "BoundRenderbuffers",
+				Type: s.getMapInfo(12),
+			},
+			&service.FieldInfo{
+				Name: "BoundBuffers",
+				Type: s.getMapInfo(2),
+			},
+			&service.FieldInfo{
+				Name: "BoundProgram",
+				Type: schema.U32,
+			},
+			&service.FieldInfo{
+				Name: "BoundVertexArray",
+				Type: schema.U32,
+			},
+			&service.FieldInfo{
+				Name: "VertexAttributeArrays",
+				Type: s.getMapInfo(23),
+			},
+			&service.FieldInfo{
+				Name: "TextureUnits",
+				Type: s.getMapInfo(18),
+			},
+			&service.FieldInfo{
+				Name: "ActiveTextureUnit",
+				Type: s.getEnumInfo(31),
+			},
+			&service.FieldInfo{
+				Name: "Capabilities",
+				Type: s.getMapInfo(1),
+			},
+			&service.FieldInfo{
+				Name: "Internals",
+				Type: s.getClassInfo(30),
+			},
+			&service.FieldInfo{
+				Name: "GenerateMipmapHint",
+				Type: s.getEnumInfo(50),
+			},
+			&service.FieldInfo{
+				Name: "PixelStorage",
+				Type: s.getMapInfo(14),
+			},
+			&service.FieldInfo{
+				Name: "Instances",
+				Type: s.getClassInfo(31),
+			},
+		},
+	})
 }
 
 type schemaBuilder struct {
@@ -4672,24 +4646,6 @@ type schemaBuilder struct {
 	enums        map[int]*service.EnumInfo
 	structs      map[int]*service.StructInfo
 	classes      map[int]*service.ClassInfo
-	boolInfo     service.TypeInfo
-	intInfo      service.TypeInfo
-	uintInfo     service.TypeInfo
-	floatInfo    service.TypeInfo
-	doubleInfo   service.TypeInfo
-	s8Info       service.TypeInfo
-	u8Info       service.TypeInfo
-	s16Info      service.TypeInfo
-	u16Info      service.TypeInfo
-	s32Info      service.TypeInfo
-	u32Info      service.TypeInfo
-	s64Info      service.TypeInfo
-	u64Info      service.TypeInfo
-	pointerInfo  service.TypeInfo
-	memoryInfo   service.TypeInfo
-	stringInfo   service.TypeInfo
-	anyInfo      service.TypeInfo
-	idInfo       service.TypeInfo
 }
 
 func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
@@ -4699,70 +4655,31 @@ func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateArrayInfo(
-			"BoolArray",
-			service.TypeKindArray, s.boolInfo,
-		)
+		e = service.CreateArrayInfo("BoolArray", service.TypeKindArray, schema.Bool)
 	case 1:
-		e = service.CreateArrayInfo(
-			"BufferIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("BufferIdArray", service.TypeKindArray, schema.U32)
 	case 2:
-		e = service.CreateArrayInfo(
-			"DiscardFramebufferAttachmentArray",
-			service.TypeKindArray, s.getEnumInfo(51),
-		)
+		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(51))
 	case 3:
-		e = service.CreateArrayInfo(
-			"F32Array",
-			service.TypeKindArray, s.floatInfo,
-		)
+		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
 	case 4:
-		e = service.CreateArrayInfo(
-			"FramebufferAttachmentArray",
-			service.TypeKindArray, s.getEnumInfo(20),
-		)
+		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(20))
 	case 5:
-		e = service.CreateArrayInfo(
-			"FramebufferIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
 	case 6:
-		e = service.CreateArrayInfo(
-			"QueryIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
 	case 7:
-		e = service.CreateArrayInfo(
-			"RenderbufferIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
 	case 8:
-		e = service.CreateArrayInfo(
-			"S32Array",
-			service.TypeKindArray, s.s32Info,
-		)
+		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
 	case 9:
-		e = service.CreateArrayInfo(
-			"ShaderIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
 	case 10:
-		e = service.CreateArrayInfo(
-			"StringArray",
-			service.TypeKindArray, s.stringInfo,
-		)
+		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
 	case 11:
-		e = service.CreateArrayInfo(
-			"TextureIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
 	case 12:
-		e = service.CreateArrayInfo(
-			"VertexArrayIdArray",
-			service.TypeKindArray, s.u32Info,
-		)
+		e = service.CreateArrayInfo("VertexArrayIdArray", service.TypeKindArray, schema.U32)
 	}
 	s.arrays[id] = e
 	return e
@@ -4784,130 +4701,55 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateMapInfo(
-			"AttributeLocation_stringMap",
-			service.TypeKindMap, s.stringInfo, s.s32Info,
-		)
+		e = service.CreateMapInfo("AttributeLocation_stringMap", service.TypeKindMap, schema.String, schema.S32)
 	case 1:
-		e = service.CreateMapInfo(
-			"Bool_CapabilityMap",
-			service.TypeKindMap, s.getEnumInfo(43), s.boolInfo,
-		)
+		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
 	case 2:
-		e = service.CreateMapInfo(
-			"BufferId_BufferTargetMap",
-			service.TypeKindMap, s.getEnumInfo(29), s.u32Info,
-		)
+		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(29), schema.U32)
 	case 3:
-		e = service.CreateMapInfo(
-			"BufferRef_BufferIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(9),
-		)
+		e = service.CreateMapInfo("BufferRef_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
 	case 4:
-		e = service.CreateMapInfo(
-			"CubemapLevel_s32Map",
-			service.TypeKindMap, s.s32Info, s.getClassInfo(6),
-		)
+		e = service.CreateMapInfo("CubemapLevel_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(6))
 	case 5:
-		e = service.CreateMapInfo(
-			"FramebufferAttachmentInfo_FramebufferAttachmentMap",
-			service.TypeKindMap, s.getEnumInfo(20), s.getClassInfo(7),
-		)
+		e = service.CreateMapInfo("FramebufferAttachmentInfo_FramebufferAttachmentMap", service.TypeKindMap, s.getEnumInfo(20), s.getClassInfo(7))
 	case 6:
-		e = service.CreateMapInfo(
-			"FramebufferId_FramebufferTargetMap",
-			service.TypeKindMap, s.getEnumInfo(24), s.u32Info,
-		)
+		e = service.CreateMapInfo("FramebufferId_FramebufferTargetMap", service.TypeKindMap, s.getEnumInfo(24), schema.U32)
 	case 7:
-		e = service.CreateMapInfo(
-			"FramebufferRef_FramebufferIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(8),
-		)
+		e = service.CreateMapInfo("FramebufferRef_FramebufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(8))
 	case 8:
-		e = service.CreateMapInfo(
-			"Image_CubeMapImageTargetMap",
-			service.TypeKindMap, s.getEnumInfo(6), s.getClassInfo(2),
-		)
+		e = service.CreateMapInfo("Image_CubeMapImageTargetMap", service.TypeKindMap, s.getEnumInfo(6), s.getClassInfo(2))
 	case 9:
-		e = service.CreateMapInfo(
-			"Image_s32Map",
-			service.TypeKindMap, s.s32Info, s.getClassInfo(2),
-		)
+		e = service.CreateMapInfo("Image_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(2))
 	case 10:
-		e = service.CreateMapInfo(
-			"ProgramRef_ProgramIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(23),
-		)
+		e = service.CreateMapInfo("ProgramRef_ProgramIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(23))
 	case 11:
-		e = service.CreateMapInfo(
-			"QueryRef_QueryIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(26),
-		)
+		e = service.CreateMapInfo("QueryRef_QueryIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(26))
 	case 12:
-		e = service.CreateMapInfo(
-			"RenderbufferId_RenderbufferTargetMap",
-			service.TypeKindMap, s.getEnumInfo(27), s.u32Info,
-		)
+		e = service.CreateMapInfo("RenderbufferId_RenderbufferTargetMap", service.TypeKindMap, s.getEnumInfo(27), schema.U32)
 	case 13:
-		e = service.CreateMapInfo(
-			"RenderbufferRef_RenderbufferIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(4),
-		)
+		e = service.CreateMapInfo("RenderbufferRef_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
 	case 14:
-		e = service.CreateMapInfo(
-			"S32_PixelStoreParameterMap",
-			service.TypeKindMap, s.getEnumInfo(54), s.s32Info,
-		)
+		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(54), schema.S32)
 	case 15:
-		e = service.CreateMapInfo(
-			"ShaderId_ShaderTypeMap",
-			service.TypeKindMap, s.getEnumInfo(33), s.u32Info,
-		)
+		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
 	case 16:
-		e = service.CreateMapInfo(
-			"ShaderRef_ShaderIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(10),
-		)
+		e = service.CreateMapInfo("ShaderRef_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
 	case 17:
-		e = service.CreateMapInfo(
-			"TextureId_TextureTargetMap",
-			service.TypeKindMap, s.getEnumInfo(5), s.u32Info,
-		)
+		e = service.CreateMapInfo("TextureId_TextureTargetMap", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
 	case 18:
-		e = service.CreateMapInfo(
-			"TextureId_TextureTargetMap_TextureUnitMap",
-			service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(17),
-		)
+		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(17))
 	case 19:
-		e = service.CreateMapInfo(
-			"TextureRef_TextureIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(5),
-		)
+		e = service.CreateMapInfo("TextureRef_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
 	case 20:
-		e = service.CreateMapInfo(
-			"U32_FaceModeMap",
-			service.TypeKindMap, s.getEnumInfo(39), s.u32Info,
-		)
+		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(39), schema.U32)
 	case 21:
-		e = service.CreateMapInfo(
-			"Uniform_UniformLocationMap",
-			service.TypeKindMap, s.s32Info, s.getClassInfo(22),
-		)
+		e = service.CreateMapInfo("Uniform_UniformLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(22))
 	case 22:
-		e = service.CreateMapInfo(
-			"VertexArrayRef_VertexArrayIdMap",
-			service.TypeKindMap, s.u32Info, s.getClassInfo(24),
-		)
+		e = service.CreateMapInfo("VertexArrayRef_VertexArrayIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(24))
 	case 23:
-		e = service.CreateMapInfo(
-			"VertexAttributeArrayRef_AttributeLocationMap",
-			service.TypeKindMap, s.s32Info, s.getClassInfo(25),
-		)
+		e = service.CreateMapInfo("VertexAttributeArrayRef_AttributeLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(25))
 	case 24:
-		e = service.CreateMapInfo(
-			"VertexAttribute_s32Map",
-			service.TypeKindMap, s.s32Info, s.getClassInfo(11),
-		)
+		e = service.CreateMapInfo("VertexAttribute_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(11))
 	}
 	s.maps[id] = e
 	return e
@@ -7375,19 +7217,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Red",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Green",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Blue",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Alpha",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7399,19 +7241,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Width",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Height",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7423,19 +7265,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Width",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Height",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Data",
-					Type: s.memoryInfo,
+					Type: schema.Memory,
 				},
 				&service.FieldInfo{
 					Name: "Size",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Format",
@@ -7458,15 +7300,15 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Width",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Height",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Data",
-					Type: s.memoryInfo,
+					Type: schema.Memory,
 				},
 				&service.FieldInfo{
 					Name: "Format",
@@ -7532,7 +7374,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "MaxAnisotropy",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 			},
 			service.ClassInfoArray{
@@ -7558,7 +7400,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Object",
-					Type: s.u32Info,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "Type",
@@ -7566,7 +7408,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "TextureLevel",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "CubeMapFace",
@@ -7594,11 +7436,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Data",
-					Type: s.memoryInfo,
+					Type: schema.Memory,
 				},
 				&service.FieldInfo{
 					Name: "Size",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Usage",
@@ -7614,19 +7456,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Binary",
-					Type: s.memoryInfo,
+					Type: schema.Memory,
 				},
 				&service.FieldInfo{
 					Name: "Compiled",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "Deletable",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "InfoLog",
-					Type: s.stringInfo,
+					Type: schema.String,
 				},
 				&service.FieldInfo{
 					Name: "Source",
@@ -7646,11 +7488,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Name",
-					Type: s.stringInfo,
+					Type: schema.String,
 				},
 				&service.FieldInfo{
 					Name: "VectorCount",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Type",
@@ -7666,11 +7508,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7682,15 +7524,15 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Z",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7702,19 +7544,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Z",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "W",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7726,11 +7568,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7742,15 +7584,15 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Z",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7762,19 +7604,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "X",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Y",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Z",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "W",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7846,7 +7688,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "F32",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Vec2f",
@@ -7862,7 +7704,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "S32",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Vec2i",
@@ -7898,7 +7740,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Name",
-					Type: s.stringInfo,
+					Type: schema.String,
 				},
 				&service.FieldInfo{
 					Name: "Type",
@@ -7922,11 +7764,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Linked",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "Binary",
-					Type: s.memoryInfo,
+					Type: schema.Memory,
 				},
 				&service.FieldInfo{
 					Name: "AttributeBindings",
@@ -7942,7 +7784,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "InfoLog",
-					Type: s.stringInfo,
+					Type: schema.String,
 				},
 			},
 			service.ClassInfoArray{},
@@ -7961,7 +7803,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Enabled",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "Size",
@@ -7973,15 +7815,15 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Normalized",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "Stride",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Data",
-					Type: s.pointerInfo,
+					Type: schema.Pointer,
 				},
 			},
 			service.ClassInfoArray{},
@@ -8036,7 +7878,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "DepthMask",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "DepthTestFunction",
@@ -8044,27 +7886,27 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "DepthNear",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "DepthFar",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "ColorMaskRed",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "ColorMaskGreen",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "ColorMaskBlue",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "ColorMaskAlpha",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 				&service.FieldInfo{
 					Name: "StencilMask",
@@ -8088,23 +7930,23 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "LineWidth",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "PolygonOffsetFactor",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "PolygonOffsetUnits",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "SampleCoverageValue",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "SampleCoverageInvert",
-					Type: s.boolInfo,
+					Type: schema.Bool,
 				},
 			},
 			service.ClassInfoArray{},
@@ -8120,11 +7962,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "ClearDepth",
-					Type: s.floatInfo,
+					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "ClearStencil",
-					Type: s.s32Info,
+					Type: schema.S32,
 				},
 			},
 			service.ClassInfoArray{},
@@ -8136,19 +7978,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "NilBuffer",
-					Type: s.u32Info,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "NilTexture",
-					Type: s.u32Info,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "NilRenderbuffer",
-					Type: s.u32Info,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "Backbuffer",
-					Type: s.u32Info,
+					Type: schema.U32,
 				},
 			},
 			service.ClassInfoArray{},

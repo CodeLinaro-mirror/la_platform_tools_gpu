@@ -30,10 +30,16 @@ import (
 
 // build writes to out the Capture resource resulting from the given ReplaceAtom request.
 func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out binary.Object) error {
-	atoms, schemaId, err := getAtoms(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}
+
+	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	if err != nil {
+		return err
+	}
+
 	if request.Atom >= atom.ID(len(atoms)) {
 		return fmt.Errorf("Atom (%d) parameter is out of bounds. [0-%d]", request.Atom, len(atoms))
 	}
@@ -49,7 +55,7 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 
 	atoms = atoms.Clone()
 	atoms[request.Atom] = atom
-	newStream, err := service.NewAtomStream(atoms, schemaId)
+	newStream, err := service.NewAtomStream(atoms)
 	if err != nil {
 		return err
 	}
@@ -59,10 +65,6 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 		return err
 	}
 
-	var capture service.Capture
-	if err := db.Load(request.Capture.ID, logger, &capture); err != nil {
-		return err
-	}
 	capture.Atoms = service.AtomStreamId{newStreamId}
 
 	store.CopyResource(out, &capture)

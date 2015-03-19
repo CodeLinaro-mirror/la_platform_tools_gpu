@@ -24,36 +24,32 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
-	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-type state struct {
+type State struct {
 	Globals
-	Mem memory.Memory
+	ValidateOutput bool
 }
 
-func (s *state) Memory() *memory.Memory {
-	return &s.Mem
-}
-
-func (s *state) GetFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (uint32, uint32, error) {
+func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (uint32, uint32, error) {
 	return 0, 0, nil
 }
 
-func initialState() *state {
-	return &state{}
+func (i remapped) remap(a atom.Atom, s *state.State) (interface{}, bool) {
+	return i, true
 }
-
-func (i remapped) remap(a atom.Atom, s *state) (interface{}, bool) { return i, true }
 
 func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan gfxapi.Image {
 	return nil
 }
+
 func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan gfxapi.Image {
 	return nil
 }
+
 func (a api) TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan gfxapi.CallTiming {
 	return nil
 }

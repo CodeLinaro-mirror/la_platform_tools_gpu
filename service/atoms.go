@@ -22,9 +22,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
-// NewAtomStream creates a fully-encoded AtomStream from the atom list and
-// schema.
-func NewAtomStream(list atom.List, schema SchemaId) (AtomStream, error) {
+// NewAtomStream creates a fully-encoded AtomStream from the atom list.
+func NewAtomStream(list atom.List) (AtomStream, error) {
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := list.Encode(enc); err != nil {
@@ -32,8 +31,7 @@ func NewAtomStream(list atom.List, schema SchemaId) (AtomStream, error) {
 	}
 
 	return AtomStream{
-		Data:   U8Array(buf.Bytes()),
-		Schema: schema,
+		Data: U8Array(buf.Bytes()),
 	}, nil
 }
 

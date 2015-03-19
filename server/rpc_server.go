@@ -15,9 +15,12 @@
 package server
 
 import (
+	"bytes"
 	"net"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -48,6 +51,20 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 
 // Compliance with the service.RPC interface.
 
+// Import imports capture data emitted by the graphics spy, returning the new
+// capture identifier.
+func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) (service.CaptureId, error) {
+	atoms := atom.List{}
+	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
+		return service.CaptureId{}, err
+	}
+	id, err := builder.NewCapture(name, atoms, s.Database, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+	return id, nil
+}
+
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
 func (s rpcServer) GetCaptures(logger log.Logger) (service.CaptureIdArray, error) {
 	captures, err := s.Database.Captures()
@@ -74,13 +91,12 @@ func (s rpcServer) GetDevices(logger log.Logger) (service.DeviceIdArray, error) 
 }
 
 // GetState returns an identifier to a binary blob containing the graphics state
-// for the given context immediately following the atom after.
+// immediately following the atom after.
 // The binary blob can be fetched with a call to ResolveBinary, and decoded
 // using the capture's schema.
-func (s rpcServer) GetState(logger log.Logger, captureID service.CaptureId, ctxID uint32, at uint64) (service.BinaryId, error) {
+func (s rpcServer) GetState(logger log.Logger, captureID service.CaptureId, at uint64) (service.BinaryId, error) {
 	id, err := s.Database.StoreRequest(&builder.GetState{
 		Capture: captureID,
-		Context: atom.ContextID(ctxID),
 		After:   atom.ID(at),
 	}, logger)
 	return service.BinaryId{id}, err
@@ -98,10 +114,9 @@ func (s rpcServer) GetHierarchy(logger log.Logger, captureID service.CaptureId, 
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
 // for the given capture, context and range, immediately following the atom after.
-func (s rpcServer) GetMemoryInfo(logger log.Logger, captureID service.CaptureId, ctxID uint32, after uint64, rng service.MemoryRange) (service.MemoryInfoId, error) {
+func (s rpcServer) GetMemoryInfo(logger log.Logger, captureID service.CaptureId, after uint64, rng service.MemoryRange) (service.MemoryInfoId, error) {
 	id, err := s.Database.StoreRequest(&builder.GetMemoryInfo{
 		Capture: captureID,
-		Context: atom.ContextID(ctxID),
 		After:   atom.ID(after),
 		Range:   memory.Range{Base: memory.Pointer(rng.Base), Size: rng.Size},
 	}, logger)

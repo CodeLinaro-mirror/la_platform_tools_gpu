@@ -21,6 +21,16 @@ func CreateClient(r io.Reader, w io.Writer, mtu int) RPC {
 }
 
 // Client compliance
+func (c client) Import(l log.Logger, name string, Data U8Array) (res CaptureId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callImport{name, Data}); err == nil {
+		res = val.(*resultImport).value
+	} else {
+		l.Error("RPC Import failed with error: %v", err)
+	}
+	return
+}
+
 func (c client) GetCaptures(l log.Logger) (res CaptureIdArray, err error) {
 	var val interface{}
 	if val, err = c.Send(&callGetCaptures{}); err == nil {
@@ -41,9 +51,9 @@ func (c client) GetDevices(l log.Logger) (res DeviceIdArray, err error) {
 	return
 }
 
-func (c client) GetState(l log.Logger, capture CaptureId, contextId uint32, after uint64) (res BinaryId, err error) {
+func (c client) GetState(l log.Logger, capture CaptureId, after uint64) (res BinaryId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetState{capture, contextId, after}); err == nil {
+	if val, err = c.Send(&callGetState{capture, after}); err == nil {
 		res = val.(*resultGetState).value
 	} else {
 		l.Error("RPC GetState failed with error: %v", err)
@@ -61,9 +71,9 @@ func (c client) GetHierarchy(l log.Logger, capture CaptureId, contextId uint32) 
 	return
 }
 
-func (c client) GetMemoryInfo(l log.Logger, capture CaptureId, contextId uint32, after uint64, rng MemoryRange) (res MemoryInfoId, err error) {
+func (c client) GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng MemoryRange) (res MemoryInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetMemoryInfo{capture, contextId, after, rng}); err == nil {
+	if val, err = c.Send(&callGetMemoryInfo{capture, after, rng}); err == nil {
 		res = val.(*resultGetMemoryInfo).value
 	} else {
 		l.Error("RPC GetMemoryInfo failed with error: %v", err)

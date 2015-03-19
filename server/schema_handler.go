@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/schema"
 )
 
 const (
@@ -28,46 +28,14 @@ const (
 // ServeHTTP writes to res a human-readable plain text description of the schema for
 // the api parameters parsed from the given req query string.
 func schemaHandler(res http.ResponseWriter, req *http.Request) {
-	apiName := req.URL.Query().Get("api")
-	api := gfxapi.Find(apiName)
-	if api == nil {
-		http.NotFound(res, req)
-		return
-	}
-
-	schema := api.Schema()
+	s := schema.Schema()
 
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
-	fmt.Fprintln(res, "Arrays:")
-	for i, e := range schema.Arrays {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
-	}
-
-	fmt.Fprintln(res, "Maps:")
-	for i, e := range schema.Maps {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
-	}
-
-	fmt.Fprintln(res, "Enums:")
-	for i, e := range schema.Enums {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
-	}
-
-	fmt.Fprintln(res, "Structs:")
-	for i, e := range schema.Structs {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
-	}
-
-	fmt.Fprintln(res, "Classes:")
-	for i, e := range schema.Classes {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
-	}
-
 	fmt.Fprintln(res, "Atoms:")
-	for i, e := range schema.Atoms {
-		fmt.Fprintf(res, "(%v) %#v\n", i, e)
+	for i, e := range s.Atoms {
+		fmt.Fprintf(res, "(%v) %+v\n", i, e)
 	}
 
-	fmt.Fprintf(res, "State: %#v\n", schema.State)
+	fmt.Fprintf(res, "Apis: %+v\n", s.Apis)
 }

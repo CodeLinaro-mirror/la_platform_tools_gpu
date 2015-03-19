@@ -79,7 +79,7 @@ func TestClear(t *testing.T) {
 	device := utils.FindLocalDevice(t, mgr)
 
 	ctx := &replay.Context{
-		CaptureID: utils.StoreCapture(t, atoms, gles.API(), db, logger),
+		CaptureID: utils.StoreCapture(t, atoms, db, logger),
 		DeviceID:  device.ID(),
 	}
 
