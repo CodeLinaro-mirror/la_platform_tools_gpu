@@ -2,7 +2,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 def goPath = System.getenv('GOPATH')
 def temporaryDirectory = file(goPath+'/pkg/build').absolutePath
-def outputDirectory = file(goPath+'/bin')
+def outputDirectory = file(goPath+'/bin').absolutePath
 
 def osFamily() {
   if (Os.isFamily(Os.FAMILY_MAC)) return 'mac'
