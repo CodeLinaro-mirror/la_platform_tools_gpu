@@ -76,6 +76,7 @@ func parameter(ctx *context, owner *semantic.Function, in *ast.Parameter) *seman
 	if in.Name != nil {
 		out.Name = in.Name.Value
 	}
+	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
 	ctx.mappings[in] = out
@@ -87,7 +88,7 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 	out.Owner = owner
 	if in.Block != nil {
 		if in.Block.Docs != nil {
-			out.Docs = semantic.Docs(in.Block.Docs.URL)
+			out.Docs = []string{in.Block.Docs.URL.String()}
 		}
 		ctx.with(semantic.VoidType, func() {
 			for _, p := range out.FullParameters {
@@ -101,6 +102,9 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 			out.Annotations = annotations(ctx, in.Annotations)
 			out.Block = block(ctx, in.Block, out)
 		})
+	}
+	if len(out.Docs) == 0 {
+		out.Docs = findDocumentation(out.AST.CST)
 	}
 	ctx.mappings[in] = out
 }

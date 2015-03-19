@@ -206,6 +206,7 @@ func enum(ctx *context, out *semantic.Enum) {
 		return
 	}
 	in := out.AST
+	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.IsBitfield = in.IsBitfield
 	for _, e := range in.Entries {
@@ -218,6 +219,7 @@ func enum(ctx *context, out *semantic.Enum) {
 			AST:   e,
 			Enum:  out,
 			Name:  e.Name.Value,
+			Docs:  findDocumentation(e.CST),
 			Value: uint32(v),
 		}
 		out.Entries = append(out.Entries, entry)
@@ -247,6 +249,7 @@ func enum(ctx *context, out *semantic.Enum) {
 
 func class(ctx *context, out *semantic.Class) {
 	in := out.AST
+	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	for _, extends := range in.Extends {
 		t := ctx.findType(extends, extends.Value)
@@ -269,6 +272,7 @@ func class(ctx *context, out *semantic.Class) {
 
 func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
 	out := &semantic.Field{AST: in, Name: in.Name.Value, Class: class}
+	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.Type = type_(ctx, in.Type)
 	if isVoid(out.Type) {
@@ -289,6 +293,7 @@ func field(ctx *context, in *ast.Field, class *semantic.Class) *semantic.Field {
 
 func pseudonym(ctx *context, out *semantic.Pseudonym) {
 	in := out.AST
+	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.To = type_(ctx, in.To)
 }
