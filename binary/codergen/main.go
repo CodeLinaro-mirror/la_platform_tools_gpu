@@ -66,8 +66,8 @@ func run() error {
 	if len(flag.Args()) == 0 {
 		if filenames, err := filepath.Glob(path.Join(wd, "*.go")); err != nil {
 			return err
-		} else if err := config.CreateFromFilenames(wd, filenames...); err != nil {
-			return err
+		} else {
+			config.CreateFromFilenames(wd, filenames...)
 		}
 	} else if _, err := config.FromArgs(flag.Args(), false); err != nil {
 		return err
