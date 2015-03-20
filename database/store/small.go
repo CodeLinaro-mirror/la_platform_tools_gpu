@@ -24,6 +24,8 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -33,14 +35,14 @@ type keyValue struct {
 	buffer binary.Data
 }
 
-func (s *keyValue) decode(d *binary.Decoder) (err error) {
+func (s *keyValue) decode(d binary.Decoder) (err error) {
 	if err := s.id.Decode(d); err != nil {
 		return err
 	}
 	return s.buffer.Decode(d)
 }
 
-func (r keyValue) encode(e *binary.Encoder) error {
+func (r keyValue) encode(e binary.Encoder) error {
 	if err := r.id.Encode(e); err != nil {
 		return err
 	}
@@ -90,7 +92,7 @@ func CreateSmallArchive(path string, compactionSize int) Store {
 	records := make(map[binary.ID]binary.Data)
 
 	// Use a buffered reader to quickly read the archive records
-	d := binary.NewDecoder(bufio.NewReaderSize(data, 256<<10))
+	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(data, 256<<10)))
 	for {
 		var r keyValue
 		if err := r.decode(d); err != io.EOF {
@@ -192,7 +194,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 	go func() {
 		// Output records using buffered IO.
 		writer := bufio.NewWriterSize(compacting, 256<<10)
-		e := binary.NewEncoder(writer)
+		e := cyclic.Encoder(vle.Writer(writer))
 
 		size := 0
 		waste := 0
@@ -394,7 +396,7 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 			buffer: data,
 		}
 
-		e := binary.NewEncoder(s.data)
+		e := cyclic.Encoder(vle.Writer(s.data))
 		err := record.encode(e)
 		if err != nil {
 			panic(err)
@@ -443,7 +445,7 @@ func (s *smallArchive) Load(id binary.ID, logger log.Logger, out binary.Object) 
 			return
 		}
 
-		d := binary.NewDecoder(bytes.NewBuffer(rec))
+		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(rec)))
 		size, err = len(rec), out.Decode(d)
 		return
 	}

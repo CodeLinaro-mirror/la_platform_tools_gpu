@@ -20,6 +20,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -27,11 +28,11 @@ const mtu = 1024
 
 type base string
 
-func (o *base) Encode(e *binary.Encoder) error {
+func (o *base) Encode(e binary.Encoder) error {
 	return e.String(string(*o))
 }
 
-func (o *base) Decode(d *binary.Decoder) error {
+func (o *base) Decode(d binary.Decoder) error {
 	s, err := d.String()
 	*o = base(s)
 	return err
@@ -46,9 +47,9 @@ var delayID = sha1.Sum([]byte("delayID"))
 var responseID = sha1.Sum([]byte("responseID"))
 
 func init() {
-	binary.Register(requestID, &request{})
-	binary.Register(delayID, &delay{})
-	binary.Register(responseID, &response{})
+	registry.Add(requestID, &request{})
+	registry.Add(delayID, &delay{})
+	registry.Add(responseID, &response{})
 }
 
 func create() Client {

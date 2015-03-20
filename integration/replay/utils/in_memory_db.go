@@ -19,6 +19,8 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -83,7 +85,7 @@ func (d *inMemoryDatabase) Close() {}
 
 func hash(o binary.Encodable) binary.ID {
 	b := bytes.Buffer{}
-	e := binary.NewEncoder(&b)
+	e := cyclic.Encoder(vle.Writer(&b))
 	if err := o.Encode(e); err != nil {
 		panic(err)
 	}

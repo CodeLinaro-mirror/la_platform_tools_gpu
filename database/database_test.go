@@ -21,6 +21,9 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -34,10 +37,10 @@ type testResource struct {
 }
 
 func init() {
-	binary.Register(testRequestTypeId, &testRequest{})
+	registry.Add(testRequestTypeId, &testRequest{})
 }
 
-func (r *testResource) Encode(e *binary.Encoder) error {
+func (r *testResource) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(r.Int)); err != nil {
 		return err
 	}
@@ -55,7 +58,7 @@ func (r *testResource) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (r *testResource) Decode(d *binary.Decoder) error {
+func (r *testResource) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		r.Int = int(v)
 	} else {
@@ -91,17 +94,17 @@ type testRequest struct {
 	Id int
 }
 
-func (t *testRequest) Encode(e *binary.Encoder) error {
+func (t *testRequest) Encode(e binary.Encoder) error {
 	return e.Int32(int32(t.Id))
 }
 
-func (t *testRequest) Decode(d *binary.Decoder) error {
+func (t *testRequest) Decode(d binary.Decoder) error {
 	id, err := d.Int32()
 	t.Id = int(id)
 	return err
 }
 
-func decodeTestRequest(d *binary.Decoder) (binary.Object, error) {
+func decodeTestRequest(d binary.Decoder) (binary.Object, error) {
 	o := &testRequest{}
 	e := o.Decode(d)
 	return o, e
@@ -232,7 +235,7 @@ func TestStore(t *testing.T) {
 	verifyResource(t, testResourceA, data)
 	// Assert the single data entry binary data is as expected
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	testResourceA.Encode(enc)
 	if !reflect.DeepEqual(buf.Bytes(), ds.entries[id].data) {
 		t.Fatalf("encoded data did not match")

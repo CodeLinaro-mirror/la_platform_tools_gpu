@@ -21,24 +21,27 @@ import (
 	"log"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 var ExampleObjectID = binary.NewID([]byte("ExampleObjectId"))
 
 type ExampleObject struct{ Data string }
 
-func (t *ExampleObject) Encode(e *binary.Encoder) error {
+func (t *ExampleObject) Encode(e binary.Encoder) error {
 	return e.String(t.Data)
 }
 
-func (t *ExampleObject) Decode(d *binary.Decoder) error {
+func (t *ExampleObject) Decode(d binary.Decoder) error {
 	var err error
 	t.Data, err = d.String()
 	return err
 }
 
 func init() {
-	binary.Register(ExampleObjectID, &ExampleObject{})
+	registry.Add(ExampleObjectID, &ExampleObject{})
 }
 
 // This example shows how to write a type with custom encode and decode
@@ -49,8 +52,8 @@ func Example_object() {
 	out := in.(io.Writer)
 
 	// Build an encoder and decoder on top of the stream
-	e := binary.NewEncoder(out)
-	d := binary.NewDecoder(in)
+	e := cyclic.Encoder(vle.Writer(out))
+	d := cyclic.Decoder(vle.Reader(in))
 
 	// Encode an object onto the stream
 	if err := e.Object(&ExampleObject{"MyObject"}); err != nil {

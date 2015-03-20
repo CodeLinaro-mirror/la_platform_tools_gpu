@@ -20,6 +20,8 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -41,7 +43,7 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 		return err
 	}
 
-	if err := atom.Decode(binary.NewDecoder(bytes.NewBuffer(request.Data.Data))); err != nil {
+	if err := atom.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(request.Data.Data)))); err != nil {
 		return err
 	}
 

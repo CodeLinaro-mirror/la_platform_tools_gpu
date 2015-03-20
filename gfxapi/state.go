@@ -32,7 +32,7 @@ type State interface {
 	// Memory returns the memory mapping for the current state.
 	Memory() *memory.Memory
 	// Encode writes the state to a binary stream.
-	Encode(*binary.Encoder) error
+	Encode(binary.Encoder) error
 	// GetFramebufferAttachmentSize returns the width and height of the framebuffer at the given attachment.
 	GetFramebufferAttachmentSize(attachment FramebufferAttachment) (uint32, uint32, error)
 }

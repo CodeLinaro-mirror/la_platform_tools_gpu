@@ -14,24 +14,21 @@
 
 package binary
 
-import "io"
-
 // Data is an codable byte buffer.
 type Data []byte
 
-func (data Data) Encode(e *Encoder) error {
+func (data Data) Encode(e Encoder) error {
 	if err := e.Uint32(uint32(len(data))); err != nil {
 		return err
 	}
-	return e.WriteFull(data)
+	return e.Data(data)
 }
 
-func (data *Data) Decode(d *Decoder) error {
-	c, err := d.Uint32()
-	if err != nil {
+func (data *Data) Decode(d Decoder) error {
+	if c, err := d.Uint32(); err != nil || c == 0 {
 		return err
+	} else {
+		*data = make([]byte, c)
+		return d.Data(*data)
 	}
-	*data = make([]byte, c)
-	_, err = io.ReadFull(d.reader, *data)
-	return err
 }

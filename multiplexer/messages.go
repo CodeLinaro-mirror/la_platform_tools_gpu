@@ -28,8 +28,8 @@ const (
 
 type msg interface {
 	channel() channelId
-	encode(e *binary.Encoder) error
-	decode(d *binary.Decoder) error
+	encode(e binary.Encoder) error
+	decode(d binary.Decoder) error
 }
 
 type msgOpenChannel struct {
@@ -45,14 +45,14 @@ type msgData struct {
 	d binary.Data
 }
 
-func (m msgData) encode(e *binary.Encoder) error {
+func (m msgData) encode(e binary.Encoder) error {
 	if err := m.c.encode(e); err != nil {
 		return err
 	}
 	return m.d.Encode(e)
 }
 
-func (m *msgData) decode(d *binary.Decoder) error {
+func (m *msgData) decode(d binary.Decoder) error {
 	if err := m.c.decode(d); err != nil {
 		return err
 	}

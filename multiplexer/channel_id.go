@@ -17,8 +17,9 @@
 package multiplexer
 
 import (
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"sync/atomic"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
 type channelId uint32
@@ -31,11 +32,11 @@ func (i *channelId) increment() (old channelId) {
 	return channelId(atomic.AddUint32((*uint32)(i), 1) - 1)
 }
 
-func (i channelId) encode(e *binary.Encoder) error {
+func (i channelId) encode(e binary.Encoder) error {
 	return e.Uint32(uint32(i))
 }
 
-func (i *channelId) decode(d *binary.Decoder) error {
+func (i *channelId) decode(d binary.Decoder) error {
 	if val, err := d.Uint32(); err == nil {
 		*i = channelId(val)
 		return nil

@@ -7,25 +7,26 @@ package atom
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
 	//struct atom.EOS { Context:ContextID }
-	binary.Register(binary.ID{0xb5, 0x85, 0xac, 0x22, 0x71, 0xd1, 0x84, 0x5c, 0xc0, 0x70, 0x37, 0x53, 0x35, 0x88, 0x2e, 0x3e, 0x5a, 0x27, 0xa3, 0xcd}, &EOS{})
+	registry.Add(binary.ID{0xb5, 0x85, 0xac, 0x22, 0x71, 0xd1, 0x84, 0x5c, 0xc0, 0x70, 0x37, 0x53, 0x35, 0x88, 0x2e, 0x3e, 0x5a, 0x27, 0xa3, 0xcd}, &EOS{})
 	//struct atom.Group { Name:string, Range:Range, SubGroups:GroupList }
-	binary.Register(binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}, &Group{})
+	registry.Add(binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}, &Group{})
 	//struct atom.Range { Start:ID, End:ID }
-	binary.Register(binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}, &Range{})
+	registry.Add(binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}, &Range{})
 }
 
-func (o EOS) Encode(e *binary.Encoder) error {
+func (o EOS) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *EOS) Decode(d *binary.Decoder) error {
+func (o *EOS) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -34,7 +35,7 @@ func (o *EOS) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Group) Encode(e *binary.Encoder) error {
+func (o Group) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -52,7 +53,7 @@ func (o Group) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Group) Decode(d *binary.Decoder) error {
+func (o *Group) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -74,7 +75,7 @@ func (o *Group) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Range) Encode(e *binary.Encoder) error {
+func (o Range) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.Start)); err != nil {
 		return err
 	}
@@ -84,7 +85,7 @@ func (o Range) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Range) Decode(d *binary.Decoder) error {
+func (o *Range) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {

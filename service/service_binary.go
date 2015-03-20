@@ -7,140 +7,141 @@ package service
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
 	//struct service.ArrayInfo { Name:string, Kind:TypeKind, ElementType:TypeInfo }
-	binary.Register(binary.ID{0xf1, 0x0b, 0xb1, 0xbf, 0x10, 0xf9, 0x53, 0x4a, 0xf6, 0x5a, 0x6f, 0xc7, 0xcb, 0xa9, 0x47, 0xfd, 0xb1, 0x23, 0x5b, 0x1d}, &ArrayInfo{})
+	registry.Add(binary.ID{0xf1, 0x0b, 0xb1, 0xbf, 0x10, 0xf9, 0x53, 0x4a, 0xf6, 0x5a, 0x6f, 0xc7, 0xcb, 0xa9, 0x47, 0xfd, 0xb1, 0x23, 0x5b, 0x1d}, &ArrayInfo{})
 	//struct service.AtomGroup { Name:string, Range:AtomRange, SubGroups:AtomGroupArray }
-	binary.Register(binary.ID{0x31, 0x4b, 0xc3, 0x9a, 0x0e, 0xb2, 0x00, 0x94, 0x68, 0xc7, 0xcd, 0xbe, 0x0b, 0x1a, 0x23, 0xf0, 0xf3, 0x75, 0x56, 0x1c}, &AtomGroup{})
+	registry.Add(binary.ID{0x31, 0x4b, 0xc3, 0x9a, 0x0e, 0xb2, 0x00, 0x94, 0x68, 0xc7, 0xcd, 0xbe, 0x0b, 0x1a, 0x23, 0xf0, 0xf3, 0x75, 0x56, 0x1c}, &AtomGroup{})
 	//struct service.AtomInfo { Type:uint16, Name:string, Parameters:ParameterInfoArray, IsCommand:bool, IsDrawCall:bool, IsEndOfFrame:bool, DocumentationUrl:string }
-	binary.Register(binary.ID{0x7e, 0x4e, 0xe9, 0xa8, 0x1f, 0x66, 0x5d, 0x79, 0x0a, 0x5a, 0xcc, 0xd1, 0xd7, 0x1e, 0x39, 0x89, 0xf5, 0x23, 0xeb, 0x69}, &AtomInfo{})
+	registry.Add(binary.ID{0x7e, 0x4e, 0xe9, 0xa8, 0x1f, 0x66, 0x5d, 0x79, 0x0a, 0x5a, 0xcc, 0xd1, 0xd7, 0x1e, 0x39, 0x89, 0xf5, 0x23, 0xeb, 0x69}, &AtomInfo{})
 	//struct service.AtomRange { First:uint64, Count:uint64 }
-	binary.Register(binary.ID{0xfa, 0xb9, 0x1d, 0x40, 0x16, 0xc4, 0x26, 0x4d, 0x40, 0x03, 0xb1, 0x72, 0xc9, 0x2f, 0x2f, 0x77, 0xde, 0xa7, 0x96, 0x4a}, &AtomRange{})
+	registry.Add(binary.ID{0xfa, 0xb9, 0x1d, 0x40, 0x16, 0xc4, 0x26, 0x4d, 0x40, 0x03, 0xb1, 0x72, 0xc9, 0x2f, 0x2f, 0x77, 0xde, 0xa7, 0x96, 0x4a}, &AtomRange{})
 	//struct service.AtomRangeTimer { FromAtomId:uint64, ToAtomId:uint64, Nanoseconds:uint64 }
-	binary.Register(binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}, &AtomRangeTimer{})
+	registry.Add(binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}, &AtomRangeTimer{})
 	//struct service.AtomStream { Data:U8Array, Schema:SchemaId }
-	binary.Register(binary.ID{0xce, 0xe1, 0xb3, 0xc2, 0x88, 0x6e, 0x4e, 0x75, 0x11, 0xe7, 0x8a, 0xe8, 0x2a, 0xc7, 0x15, 0xfa, 0xa0, 0x58, 0x28, 0x20}, &AtomStream{})
+	registry.Add(binary.ID{0xce, 0xe1, 0xb3, 0xc2, 0x88, 0x6e, 0x4e, 0x75, 0x11, 0xe7, 0x8a, 0xe8, 0x2a, 0xc7, 0x15, 0xfa, 0xa0, 0x58, 0x28, 0x20}, &AtomStream{})
 	//struct service.AtomTimer { AtomId:uint64, Nanoseconds:uint64 }
-	binary.Register(binary.ID{0x7b, 0x64, 0x0c, 0x00, 0x25, 0xee, 0x98, 0xa3, 0x51, 0x7b, 0x1b, 0x0d, 0x98, 0x73, 0x20, 0x93, 0x12, 0x9a, 0x7d, 0xc4}, &AtomTimer{})
+	registry.Add(binary.ID{0x7b, 0x64, 0x0c, 0x00, 0x25, 0xee, 0x98, 0xa3, 0x51, 0x7b, 0x1b, 0x0d, 0x98, 0x73, 0x20, 0x93, 0x12, 0x9a, 0x7d, 0xc4}, &AtomTimer{})
 	//struct service.Binary { Data:U8Array }
-	binary.Register(binary.ID{0x9c, 0x60, 0xfa, 0x7c, 0xe1, 0x13, 0x87, 0x3d, 0x95, 0xc1, 0x76, 0xb8, 0x60, 0x56, 0xf7, 0x35, 0x5f, 0x98, 0x27, 0x8b}, &Binary{})
+	registry.Add(binary.ID{0x9c, 0x60, 0xfa, 0x7c, 0xe1, 0x13, 0x87, 0x3d, 0x95, 0xc1, 0x76, 0xb8, 0x60, 0x56, 0xf7, 0x35, 0x5f, 0x98, 0x27, 0x8b}, &Binary{})
 	//struct service.Capture { Name:string, API:string, Atoms:AtomStreamId, ContextIds:U32Array }
-	binary.Register(binary.ID{0x55, 0x80, 0x3d, 0xcd, 0xb8, 0xdb, 0x19, 0xc6, 0x9a, 0x12, 0xe3, 0x59, 0xf8, 0x03, 0x4e, 0x07, 0x78, 0xca, 0xab, 0x5c}, &Capture{})
+	registry.Add(binary.ID{0x55, 0x80, 0x3d, 0xcd, 0xb8, 0xdb, 0x19, 0xc6, 0x9a, 0x12, 0xe3, 0x59, 0xf8, 0x03, 0x4e, 0x07, 0x78, 0xca, 0xab, 0x5c}, &Capture{})
 	//struct service.ClassInfo { Name:string, Kind:TypeKind, Fields:FieldInfoArray, Extends:ClassInfoArray }
-	binary.Register(binary.ID{0xaf, 0x0d, 0x4c, 0x82, 0x03, 0x62, 0x6f, 0x43, 0x78, 0x0f, 0x75, 0xbe, 0xbd, 0x6e, 0x90, 0x0b, 0x79, 0x50, 0xaf, 0x4f}, &ClassInfo{})
+	registry.Add(binary.ID{0xaf, 0x0d, 0x4c, 0x82, 0x03, 0x62, 0x6f, 0x43, 0x78, 0x0f, 0x75, 0xbe, 0xbd, 0x6e, 0x90, 0x0b, 0x79, 0x50, 0xaf, 0x4f}, &ClassInfo{})
 	//struct service.Device { Name:string, Model:string, OS:string, PointerSize:uint8, PointerAlignment:uint8, MaxMemorySize:uint64, RequiresShaderPatching:bool }
-	binary.Register(binary.ID{0x7f, 0xa5, 0x70, 0xd9, 0x93, 0xfc, 0x70, 0x27, 0x32, 0xd9, 0xb8, 0x6e, 0x2a, 0x9b, 0xf3, 0x84, 0x55, 0x4f, 0x26, 0x50}, &Device{})
+	registry.Add(binary.ID{0x7f, 0xa5, 0x70, 0xd9, 0x93, 0xfc, 0x70, 0x27, 0x32, 0xd9, 0xb8, 0x6e, 0x2a, 0x9b, 0xf3, 0x84, 0x55, 0x4f, 0x26, 0x50}, &Device{})
 	//struct service.EnumEntry { Name:string, Value:uint32 }
-	binary.Register(binary.ID{0xea, 0x7f, 0xa3, 0xef, 0xb6, 0x4c, 0x5a, 0x85, 0xc9, 0x5f, 0xb5, 0xa1, 0x28, 0xfe, 0xb3, 0xa7, 0x53, 0xae, 0xb7, 0xd0}, &EnumEntry{})
+	registry.Add(binary.ID{0xea, 0x7f, 0xa3, 0xef, 0xb6, 0x4c, 0x5a, 0x85, 0xc9, 0x5f, 0xb5, 0xa1, 0x28, 0xfe, 0xb3, 0xa7, 0x53, 0xae, 0xb7, 0xd0}, &EnumEntry{})
 	//struct service.EnumInfo { Name:string, Kind:TypeKind, Entries:EnumEntryArray, Extends:EnumInfoArray }
-	binary.Register(binary.ID{0x70, 0x04, 0x71, 0x0b, 0x05, 0x2b, 0xf9, 0xd9, 0x95, 0x26, 0xe3, 0x68, 0x08, 0x97, 0x32, 0x6d, 0xb5, 0xd4, 0xfa, 0x9e}, &EnumInfo{})
+	registry.Add(binary.ID{0x70, 0x04, 0x71, 0x0b, 0x05, 0x2b, 0xf9, 0xd9, 0x95, 0x26, 0xe3, 0x68, 0x08, 0x97, 0x32, 0x6d, 0xb5, 0xd4, 0xfa, 0x9e}, &EnumInfo{})
 	//struct service.FieldInfo { Name:string, Type:TypeInfo }
-	binary.Register(binary.ID{0x16, 0xdb, 0x4c, 0x57, 0x0a, 0x1f, 0xf9, 0x33, 0x7c, 0x1f, 0x03, 0x0d, 0x2a, 0xce, 0x96, 0x7e, 0xba, 0xa8, 0x22, 0xa5}, &FieldInfo{})
+	registry.Add(binary.ID{0x16, 0xdb, 0x4c, 0x57, 0x0a, 0x1f, 0xf9, 0x33, 0x7c, 0x1f, 0x03, 0x0d, 0x2a, 0xce, 0x96, 0x7e, 0xba, 0xa8, 0x22, 0xa5}, &FieldInfo{})
 	//struct service.Hierarchy { Root:AtomGroup }
-	binary.Register(binary.ID{0x4a, 0x29, 0x6b, 0x6f, 0x37, 0xca, 0x76, 0x25, 0xbc, 0x89, 0x1a, 0xea, 0x80, 0x56, 0xa9, 0x66, 0x0e, 0x1a, 0x1a, 0x97}, &Hierarchy{})
+	registry.Add(binary.ID{0x4a, 0x29, 0x6b, 0x6f, 0x37, 0xca, 0x76, 0x25, 0xbc, 0x89, 0x1a, 0xea, 0x80, 0x56, 0xa9, 0x66, 0x0e, 0x1a, 0x1a, 0x97}, &Hierarchy{})
 	//struct service.ImageInfo { Format:ImageFormat, Width:uint32, Height:uint32, Data:BinaryId }
-	binary.Register(binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}, &ImageInfo{})
+	registry.Add(binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}, &ImageInfo{})
 	//struct service.MapInfo { Name:string, Kind:TypeKind, KeyType:TypeInfo, ValueType:TypeInfo }
-	binary.Register(binary.ID{0xf3, 0x40, 0x60, 0x02, 0x47, 0x89, 0x04, 0x5e, 0x0c, 0x8f, 0xd3, 0x9d, 0xa9, 0xd7, 0x19, 0x8b, 0xd0, 0x88, 0xd8, 0xdf}, &MapInfo{})
+	registry.Add(binary.ID{0xf3, 0x40, 0x60, 0x02, 0x47, 0x89, 0x04, 0x5e, 0x0c, 0x8f, 0xd3, 0x9d, 0xa9, 0xd7, 0x19, 0x8b, 0xd0, 0x88, 0xd8, 0xdf}, &MapInfo{})
 	//struct service.MemoryInfo { Data:U8Array, Stale:MemoryRangeArray, Current:MemoryRangeArray, Unknown:MemoryRangeArray }
-	binary.Register(binary.ID{0xfa, 0x6e, 0x9e, 0xc9, 0xe4, 0x44, 0x62, 0x53, 0xa0, 0x69, 0xe7, 0x64, 0x3b, 0x30, 0xc1, 0xaa, 0xfd, 0x73, 0xb1, 0x93}, &MemoryInfo{})
+	registry.Add(binary.ID{0xfa, 0x6e, 0x9e, 0xc9, 0xe4, 0x44, 0x62, 0x53, 0xa0, 0x69, 0xe7, 0x64, 0x3b, 0x30, 0xc1, 0xaa, 0xfd, 0x73, 0xb1, 0x93}, &MemoryInfo{})
 	//struct service.MemoryRange { Base:uint64, Size:uint64 }
-	binary.Register(binary.ID{0xfa, 0xc5, 0x84, 0x24, 0x6c, 0x1b, 0x47, 0x0e, 0xe5, 0xdb, 0x67, 0x29, 0xd8, 0xb1, 0x81, 0x3b, 0xfe, 0x53, 0x3a, 0x9d}, &MemoryRange{})
+	registry.Add(binary.ID{0xfa, 0xc5, 0x84, 0x24, 0x6c, 0x1b, 0x47, 0x0e, 0xe5, 0xdb, 0x67, 0x29, 0xd8, 0xb1, 0x81, 0x3b, 0xfe, 0x53, 0x3a, 0x9d}, &MemoryRange{})
 	//struct service.ParameterInfo { Name:string, Type:TypeInfo, Out:bool }
-	binary.Register(binary.ID{0x46, 0x0a, 0xd9, 0x73, 0x17, 0xbd, 0x7d, 0x02, 0x14, 0xed, 0x06, 0xa8, 0x09, 0x15, 0xa4, 0xc3, 0xd0, 0xc3, 0xe0, 0xff}, &ParameterInfo{})
+	registry.Add(binary.ID{0x46, 0x0a, 0xd9, 0x73, 0x17, 0xbd, 0x7d, 0x02, 0x14, 0xed, 0x06, 0xa8, 0x09, 0x15, 0xa4, 0xc3, 0xd0, 0xc3, 0xe0, 0xff}, &ParameterInfo{})
 	//struct service.RenderSettings { MaxWidth:uint32, MaxHeight:uint32, Wireframe:bool }
-	binary.Register(binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}, &RenderSettings{})
+	registry.Add(binary.ID{0x18, 0x23, 0x35, 0xef, 0xd0, 0x3a, 0xe4, 0x25, 0x17, 0xc4, 0x7a, 0x2b, 0xab, 0x32, 0x10, 0x9c, 0x22, 0x86, 0x23, 0x00}, &RenderSettings{})
 	//struct service.Schema { Arrays:ArrayInfoArray, StaticArrays:StaticArrayInfoArray, Maps:MapInfoArray, Enums:EnumInfoArray, Structs:StructInfoArray, Classes:ClassInfoArray, Atoms:AtomInfoArray, State:*StructInfo }
-	binary.Register(binary.ID{0x37, 0x4c, 0xd8, 0xac, 0x1f, 0xc8, 0x4d, 0x10, 0xb4, 0xe7, 0xa8, 0x3c, 0x72, 0x49, 0x7a, 0x62, 0x61, 0x78, 0xe0, 0xcd}, &Schema{})
+	registry.Add(binary.ID{0x37, 0x4c, 0xd8, 0xac, 0x1f, 0xc8, 0x4d, 0x10, 0xb4, 0xe7, 0xa8, 0x3c, 0x72, 0x49, 0x7a, 0x62, 0x61, 0x78, 0xe0, 0xcd}, &Schema{})
 	//struct service.SimpleInfo { Name:string, Kind:TypeKind }
-	binary.Register(binary.ID{0xcd, 0x73, 0xc4, 0xe7, 0x48, 0x3f, 0x0b, 0xd8, 0x9c, 0x6d, 0xa8, 0x4e, 0x51, 0x6b, 0x4c, 0xcc, 0xa5, 0x94, 0x3a, 0x25}, &SimpleInfo{})
+	registry.Add(binary.ID{0xcd, 0x73, 0xc4, 0xe7, 0x48, 0x3f, 0x0b, 0xd8, 0x9c, 0x6d, 0xa8, 0x4e, 0x51, 0x6b, 0x4c, 0xcc, 0xa5, 0x94, 0x3a, 0x25}, &SimpleInfo{})
 	//struct service.StaticArrayInfo { Name:string, Kind:TypeKind, ElementType:TypeInfo, Dimensions:U32Array }
-	binary.Register(binary.ID{0x5b, 0xa0, 0x27, 0x40, 0x66, 0x41, 0x35, 0x6f, 0x4a, 0xdd, 0x3b, 0xa0, 0xe4, 0x26, 0x4a, 0x92, 0x72, 0x68, 0xc3, 0x3b}, &StaticArrayInfo{})
+	registry.Add(binary.ID{0x5b, 0xa0, 0x27, 0x40, 0x66, 0x41, 0x35, 0x6f, 0x4a, 0xdd, 0x3b, 0xa0, 0xe4, 0x26, 0x4a, 0x92, 0x72, 0x68, 0xc3, 0x3b}, &StaticArrayInfo{})
 	//struct service.StructInfo { Name:string, Kind:TypeKind, Fields:FieldInfoArray }
-	binary.Register(binary.ID{0xf1, 0xc3, 0x58, 0x5f, 0x37, 0xfd, 0xb2, 0x84, 0xef, 0x1a, 0xf5, 0x82, 0x3d, 0xc5, 0x5a, 0x34, 0x49, 0x12, 0xd4, 0xa8}, &StructInfo{})
+	registry.Add(binary.ID{0xf1, 0xc3, 0x58, 0x5f, 0x37, 0xfd, 0xb2, 0x84, 0xef, 0x1a, 0xf5, 0x82, 0x3d, 0xc5, 0x5a, 0x34, 0x49, 0x12, 0xd4, 0xa8}, &StructInfo{})
 	//struct service.TimingInfo { PerCommand:AtomTimerArray, PerDrawCall:AtomRangeTimerArray, PerFrame:AtomRangeTimerArray }
-	binary.Register(binary.ID{0x19, 0xd8, 0xe7, 0xdb, 0xe7, 0xb2, 0xdc, 0x2e, 0x73, 0x08, 0xc2, 0x97, 0x2e, 0x68, 0xb9, 0x92, 0x52, 0x4a, 0x0a, 0xd7}, &TimingInfo{})
+	registry.Add(binary.ID{0x19, 0xd8, 0xe7, 0xdb, 0xe7, 0xb2, 0xdc, 0x2e, 0x73, 0x08, 0xc2, 0x97, 0x2e, 0x68, 0xb9, 0x92, 0x52, 0x4a, 0x0a, 0xd7}, &TimingInfo{})
 	//struct service.callGetCaptures { }
-	binary.Register(binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}, &callGetCaptures{})
+	registry.Add(binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}, &callGetCaptures{})
 	//struct service.callGetDevices { }
-	binary.Register(binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}, &callGetDevices{})
+	registry.Add(binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}, &callGetDevices{})
 	//struct service.callGetFramebufferColor { device:DeviceId, capture:CaptureId, contextId:uint32, after:uint64, settings:RenderSettings }
-	binary.Register(binary.ID{0x29, 0x32, 0x5d, 0x90, 0x23, 0xb8, 0x2e, 0x4d, 0x1a, 0x05, 0x0b, 0xf1, 0x01, 0xf6, 0xa1, 0x31, 0x3d, 0xaa, 0x99, 0xa2}, &callGetFramebufferColor{})
+	registry.Add(binary.ID{0x29, 0x32, 0x5d, 0x90, 0x23, 0xb8, 0x2e, 0x4d, 0x1a, 0x05, 0x0b, 0xf1, 0x01, 0xf6, 0xa1, 0x31, 0x3d, 0xaa, 0x99, 0xa2}, &callGetFramebufferColor{})
 	//struct service.callGetFramebufferDepth { device:DeviceId, capture:CaptureId, contextId:uint32, after:uint64 }
-	binary.Register(binary.ID{0x5e, 0xaa, 0xb8, 0x9f, 0x94, 0xa9, 0xe2, 0x7d, 0x69, 0xdd, 0x26, 0xc3, 0xdb, 0x50, 0x74, 0xac, 0x8b, 0x41, 0x68, 0xf7}, &callGetFramebufferDepth{})
+	registry.Add(binary.ID{0x5e, 0xaa, 0xb8, 0x9f, 0x94, 0xa9, 0xe2, 0x7d, 0x69, 0xdd, 0x26, 0xc3, 0xdb, 0x50, 0x74, 0xac, 0x8b, 0x41, 0x68, 0xf7}, &callGetFramebufferDepth{})
 	//struct service.callGetHierarchy { capture:CaptureId, contextId:uint32 }
-	binary.Register(binary.ID{0xf5, 0x4a, 0x93, 0x05, 0x2b, 0x23, 0x12, 0xac, 0xee, 0x44, 0x05, 0x4a, 0x2e, 0x96, 0xf8, 0xbb, 0xf5, 0x4c, 0xab, 0x95}, &callGetHierarchy{})
+	registry.Add(binary.ID{0xf5, 0x4a, 0x93, 0x05, 0x2b, 0x23, 0x12, 0xac, 0xee, 0x44, 0x05, 0x4a, 0x2e, 0x96, 0xf8, 0xbb, 0xf5, 0x4c, 0xab, 0x95}, &callGetHierarchy{})
 	//struct service.callGetMemoryInfo { capture:CaptureId, contextId:uint32, after:uint64, rng:MemoryRange }
-	binary.Register(binary.ID{0x57, 0x5e, 0x03, 0xd9, 0xb4, 0x10, 0x1e, 0x94, 0x17, 0xd4, 0x5f, 0xfb, 0x9c, 0xd8, 0x0a, 0x17, 0x25, 0x9c, 0x6f, 0xa8}, &callGetMemoryInfo{})
+	registry.Add(binary.ID{0x57, 0x5e, 0x03, 0xd9, 0xb4, 0x10, 0x1e, 0x94, 0x17, 0xd4, 0x5f, 0xfb, 0x9c, 0xd8, 0x0a, 0x17, 0x25, 0x9c, 0x6f, 0xa8}, &callGetMemoryInfo{})
 	//struct service.callGetState { capture:CaptureId, contextId:uint32, after:uint64 }
-	binary.Register(binary.ID{0xf5, 0xb7, 0xb5, 0x74, 0xa9, 0x22, 0x77, 0x38, 0xcd, 0x74, 0xa1, 0x8c, 0x90, 0x98, 0xbc, 0x38, 0x84, 0x17, 0x75, 0x44}, &callGetState{})
+	registry.Add(binary.ID{0xf5, 0xb7, 0xb5, 0x74, 0xa9, 0x22, 0x77, 0x38, 0xcd, 0x74, 0xa1, 0x8c, 0x90, 0x98, 0xbc, 0x38, 0x84, 0x17, 0x75, 0x44}, &callGetState{})
 	//struct service.callGetTimingInfo { device:DeviceId, capture:CaptureId, contextId:uint32, mask:TimingMask }
-	binary.Register(binary.ID{0xc4, 0xd2, 0x02, 0x76, 0x5f, 0x3d, 0x98, 0x8b, 0x06, 0x01, 0x68, 0x41, 0x3c, 0xc9, 0x67, 0x80, 0x88, 0x3b, 0x95, 0x8c}, &callGetTimingInfo{})
+	registry.Add(binary.ID{0xc4, 0xd2, 0x02, 0x76, 0x5f, 0x3d, 0x98, 0x8b, 0x06, 0x01, 0x68, 0x41, 0x3c, 0xc9, 0x67, 0x80, 0x88, 0x3b, 0x95, 0x8c}, &callGetTimingInfo{})
 	//struct service.callPrerenderFramebuffers { device:DeviceId, capture:CaptureId, width:uint32, height:uint32, atomIds:U64Array }
-	binary.Register(binary.ID{0x15, 0x34, 0x91, 0x8d, 0xee, 0x95, 0x3e, 0x52, 0x8a, 0xb0, 0x42, 0xeb, 0x8a, 0xcf, 0xda, 0xf1, 0xc0, 0x25, 0xb2, 0xeb}, &callPrerenderFramebuffers{})
+	registry.Add(binary.ID{0x15, 0x34, 0x91, 0x8d, 0xee, 0x95, 0x3e, 0x52, 0x8a, 0xb0, 0x42, 0xeb, 0x8a, 0xcf, 0xda, 0xf1, 0xc0, 0x25, 0xb2, 0xeb}, &callPrerenderFramebuffers{})
 	//struct service.callReplaceAtom { capture:CaptureId, atomId:uint64, atomType:uint16, data:Binary }
-	binary.Register(binary.ID{0x3b, 0x6a, 0x9a, 0x30, 0x3a, 0x32, 0xc0, 0x3a, 0x50, 0x5c, 0xed, 0xa9, 0xd4, 0x6a, 0x05, 0x54, 0xb3, 0xe2, 0x95, 0x3d}, &callReplaceAtom{})
+	registry.Add(binary.ID{0x3b, 0x6a, 0x9a, 0x30, 0x3a, 0x32, 0xc0, 0x3a, 0x50, 0x5c, 0xed, 0xa9, 0xd4, 0x6a, 0x05, 0x54, 0xb3, 0xe2, 0x95, 0x3d}, &callReplaceAtom{})
 	//struct service.callResolveAtomStream { id:AtomStreamId }
-	binary.Register(binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}, &callResolveAtomStream{})
+	registry.Add(binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}, &callResolveAtomStream{})
 	//struct service.callResolveBinary { id:BinaryId }
-	binary.Register(binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}, &callResolveBinary{})
+	registry.Add(binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}, &callResolveBinary{})
 	//struct service.callResolveCapture { id:CaptureId }
-	binary.Register(binary.ID{0x4e, 0x6e, 0x5b, 0x49, 0x61, 0xef, 0xfc, 0x3c, 0x4a, 0xf8, 0xf6, 0xae, 0xc0, 0xca, 0xa1, 0x67, 0x17, 0x73, 0xff, 0xf8}, &callResolveCapture{})
+	registry.Add(binary.ID{0x4e, 0x6e, 0x5b, 0x49, 0x61, 0xef, 0xfc, 0x3c, 0x4a, 0xf8, 0xf6, 0xae, 0xc0, 0xca, 0xa1, 0x67, 0x17, 0x73, 0xff, 0xf8}, &callResolveCapture{})
 	//struct service.callResolveDevice { id:DeviceId }
-	binary.Register(binary.ID{0x86, 0x54, 0x88, 0xf5, 0x8f, 0x3e, 0x97, 0x57, 0xe2, 0x98, 0x19, 0x7e, 0x67, 0x25, 0xfb, 0xa2, 0x75, 0xeb, 0x30, 0x0a}, &callResolveDevice{})
+	registry.Add(binary.ID{0x86, 0x54, 0x88, 0xf5, 0x8f, 0x3e, 0x97, 0x57, 0xe2, 0x98, 0x19, 0x7e, 0x67, 0x25, 0xfb, 0xa2, 0x75, 0xeb, 0x30, 0x0a}, &callResolveDevice{})
 	//struct service.callResolveHierarchy { id:HierarchyId }
-	binary.Register(binary.ID{0x39, 0x2a, 0x9f, 0x44, 0xfe, 0x2c, 0x0f, 0xd8, 0xc5, 0x44, 0x58, 0x51, 0x94, 0x6a, 0x95, 0xa4, 0x22, 0x90, 0x34, 0x36}, &callResolveHierarchy{})
+	registry.Add(binary.ID{0x39, 0x2a, 0x9f, 0x44, 0xfe, 0x2c, 0x0f, 0xd8, 0xc5, 0x44, 0x58, 0x51, 0x94, 0x6a, 0x95, 0xa4, 0x22, 0x90, 0x34, 0x36}, &callResolveHierarchy{})
 	//struct service.callResolveImageInfo { id:ImageInfoId }
-	binary.Register(binary.ID{0x4e, 0x51, 0x41, 0x13, 0x68, 0x6f, 0x58, 0x5a, 0xed, 0xe0, 0x0a, 0x05, 0x0d, 0x01, 0x9d, 0x28, 0x9c, 0x21, 0x8c, 0xbb}, &callResolveImageInfo{})
+	registry.Add(binary.ID{0x4e, 0x51, 0x41, 0x13, 0x68, 0x6f, 0x58, 0x5a, 0xed, 0xe0, 0x0a, 0x05, 0x0d, 0x01, 0x9d, 0x28, 0x9c, 0x21, 0x8c, 0xbb}, &callResolveImageInfo{})
 	//struct service.callResolveMemoryInfo { id:MemoryInfoId }
-	binary.Register(binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}, &callResolveMemoryInfo{})
+	registry.Add(binary.ID{0xdf, 0x26, 0x6c, 0x3b, 0x06, 0x05, 0x08, 0xc5, 0xc1, 0xd1, 0x86, 0x64, 0x21, 0xf1, 0x58, 0x45, 0x0f, 0x3e, 0x2f, 0x0e}, &callResolveMemoryInfo{})
 	//struct service.callResolveSchema { id:SchemaId }
-	binary.Register(binary.ID{0x45, 0xca, 0x16, 0xe5, 0x5d, 0x24, 0x69, 0x78, 0xa1, 0x23, 0x32, 0x77, 0x97, 0x13, 0xe2, 0xaf, 0x30, 0x3b, 0x70, 0x21}, &callResolveSchema{})
+	registry.Add(binary.ID{0x45, 0xca, 0x16, 0xe5, 0x5d, 0x24, 0x69, 0x78, 0xa1, 0x23, 0x32, 0x77, 0x97, 0x13, 0xe2, 0xaf, 0x30, 0x3b, 0x70, 0x21}, &callResolveSchema{})
 	//struct service.callResolveTimingInfo { id:TimingInfoId }
-	binary.Register(binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}, &callResolveTimingInfo{})
+	registry.Add(binary.ID{0xf9, 0x99, 0xeb, 0x43, 0x27, 0x9c, 0x38, 0x16, 0xa6, 0xb5, 0x6a, 0x0e, 0xa0, 0xdf, 0x79, 0xa1, 0x26, 0x2e, 0xe3, 0xe4}, &callResolveTimingInfo{})
 	//struct service.resultGetCaptures { value:CaptureIdArray }
-	binary.Register(binary.ID{0xb0, 0x3e, 0x04, 0x4d, 0x32, 0xfd, 0x8f, 0x93, 0x5a, 0xfa, 0x30, 0x09, 0x9e, 0xb6, 0x9b, 0x5d, 0x02, 0x93, 0xe4, 0x7b}, &resultGetCaptures{})
+	registry.Add(binary.ID{0xb0, 0x3e, 0x04, 0x4d, 0x32, 0xfd, 0x8f, 0x93, 0x5a, 0xfa, 0x30, 0x09, 0x9e, 0xb6, 0x9b, 0x5d, 0x02, 0x93, 0xe4, 0x7b}, &resultGetCaptures{})
 	//struct service.resultGetDevices { value:DeviceIdArray }
-	binary.Register(binary.ID{0x7e, 0xc1, 0x80, 0xe3, 0x79, 0x1d, 0xea, 0x0d, 0x62, 0x02, 0x58, 0x6a, 0xeb, 0xa5, 0x24, 0x98, 0x30, 0x8e, 0x46, 0xe8}, &resultGetDevices{})
+	registry.Add(binary.ID{0x7e, 0xc1, 0x80, 0xe3, 0x79, 0x1d, 0xea, 0x0d, 0x62, 0x02, 0x58, 0x6a, 0xeb, 0xa5, 0x24, 0x98, 0x30, 0x8e, 0x46, 0xe8}, &resultGetDevices{})
 	//struct service.resultGetFramebufferColor { value:ImageInfoId }
-	binary.Register(binary.ID{0xd1, 0xf2, 0x9c, 0x48, 0xeb, 0xb0, 0x4e, 0x4e, 0x82, 0xcf, 0xac, 0xe9, 0xc6, 0x71, 0x27, 0x04, 0x57, 0x7e, 0xe4, 0x25}, &resultGetFramebufferColor{})
+	registry.Add(binary.ID{0xd1, 0xf2, 0x9c, 0x48, 0xeb, 0xb0, 0x4e, 0x4e, 0x82, 0xcf, 0xac, 0xe9, 0xc6, 0x71, 0x27, 0x04, 0x57, 0x7e, 0xe4, 0x25}, &resultGetFramebufferColor{})
 	//struct service.resultGetFramebufferDepth { value:ImageInfoId }
-	binary.Register(binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}, &resultGetFramebufferDepth{})
+	registry.Add(binary.ID{0x08, 0xd8, 0x4e, 0xd2, 0xe4, 0x2f, 0xc3, 0xb6, 0x10, 0x47, 0xeb, 0xae, 0xa2, 0x56, 0x99, 0x91, 0x31, 0x83, 0xb7, 0x27}, &resultGetFramebufferDepth{})
 	//struct service.resultGetHierarchy { value:HierarchyId }
-	binary.Register(binary.ID{0xff, 0x28, 0xe0, 0x58, 0x97, 0xa9, 0x5e, 0x1b, 0x62, 0xe1, 0xa0, 0xef, 0x05, 0xea, 0x3e, 0x62, 0x5d, 0x17, 0xaa, 0x47}, &resultGetHierarchy{})
+	registry.Add(binary.ID{0xff, 0x28, 0xe0, 0x58, 0x97, 0xa9, 0x5e, 0x1b, 0x62, 0xe1, 0xa0, 0xef, 0x05, 0xea, 0x3e, 0x62, 0x5d, 0x17, 0xaa, 0x47}, &resultGetHierarchy{})
 	//struct service.resultGetMemoryInfo { value:MemoryInfoId }
-	binary.Register(binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}, &resultGetMemoryInfo{})
+	registry.Add(binary.ID{0x54, 0xdc, 0x10, 0xcf, 0x6d, 0x96, 0x70, 0xd9, 0x00, 0x7d, 0xd7, 0x1f, 0x08, 0x4a, 0xa3, 0xaf, 0x57, 0xda, 0x09, 0xee}, &resultGetMemoryInfo{})
 	//struct service.resultGetState { value:BinaryId }
-	binary.Register(binary.ID{0xa0, 0x1e, 0x40, 0x20, 0xd1, 0x4d, 0xc6, 0x19, 0xf4, 0xcb, 0x10, 0xce, 0x81, 0x09, 0x89, 0xdf, 0xad, 0x63, 0xf6, 0xee}, &resultGetState{})
+	registry.Add(binary.ID{0xa0, 0x1e, 0x40, 0x20, 0xd1, 0x4d, 0xc6, 0x19, 0xf4, 0xcb, 0x10, 0xce, 0x81, 0x09, 0x89, 0xdf, 0xad, 0x63, 0xf6, 0xee}, &resultGetState{})
 	//struct service.resultGetTimingInfo { value:TimingInfoId }
-	binary.Register(binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}, &resultGetTimingInfo{})
+	registry.Add(binary.ID{0x1d, 0x17, 0x32, 0x54, 0xb3, 0xbd, 0xbe, 0x57, 0xda, 0xef, 0xb2, 0xb0, 0x4b, 0x5f, 0xc2, 0x85, 0x85, 0xcb, 0x8f, 0xf3}, &resultGetTimingInfo{})
 	//struct service.resultPrerenderFramebuffers { value:BinaryId }
-	binary.Register(binary.ID{0xc2, 0x9e, 0x11, 0x61, 0x22, 0xcb, 0xd8, 0xfc, 0x6c, 0x5c, 0xb9, 0x0f, 0x07, 0x81, 0x67, 0xc9, 0x2e, 0x1f, 0x2f, 0xf8}, &resultPrerenderFramebuffers{})
+	registry.Add(binary.ID{0xc2, 0x9e, 0x11, 0x61, 0x22, 0xcb, 0xd8, 0xfc, 0x6c, 0x5c, 0xb9, 0x0f, 0x07, 0x81, 0x67, 0xc9, 0x2e, 0x1f, 0x2f, 0xf8}, &resultPrerenderFramebuffers{})
 	//struct service.resultReplaceAtom { value:CaptureId }
-	binary.Register(binary.ID{0x52, 0x62, 0xe6, 0x27, 0x54, 0x4e, 0x8e, 0x8f, 0x1e, 0x9f, 0x5e, 0xf5, 0x8d, 0x64, 0x38, 0x99, 0xb4, 0x57, 0xef, 0xff}, &resultReplaceAtom{})
+	registry.Add(binary.ID{0x52, 0x62, 0xe6, 0x27, 0x54, 0x4e, 0x8e, 0x8f, 0x1e, 0x9f, 0x5e, 0xf5, 0x8d, 0x64, 0x38, 0x99, 0xb4, 0x57, 0xef, 0xff}, &resultReplaceAtom{})
 	//struct service.resultResolveAtomStream { value:AtomStream }
-	binary.Register(binary.ID{0x05, 0xb9, 0x98, 0x3d, 0x6f, 0x5f, 0xc0, 0x23, 0xb2, 0xe1, 0x2e, 0x55, 0xf4, 0x37, 0x71, 0xe6, 0xd3, 0x98, 0xbf, 0x52}, &resultResolveAtomStream{})
+	registry.Add(binary.ID{0x05, 0xb9, 0x98, 0x3d, 0x6f, 0x5f, 0xc0, 0x23, 0xb2, 0xe1, 0x2e, 0x55, 0xf4, 0x37, 0x71, 0xe6, 0xd3, 0x98, 0xbf, 0x52}, &resultResolveAtomStream{})
 	//struct service.resultResolveBinary { value:Binary }
-	binary.Register(binary.ID{0xbf, 0xbd, 0x77, 0xf6, 0xc1, 0x13, 0x8c, 0xfe, 0x38, 0xd5, 0x30, 0x3c, 0x58, 0xc8, 0x67, 0xbf, 0x17, 0xce, 0x71, 0xe9}, &resultResolveBinary{})
+	registry.Add(binary.ID{0xbf, 0xbd, 0x77, 0xf6, 0xc1, 0x13, 0x8c, 0xfe, 0x38, 0xd5, 0x30, 0x3c, 0x58, 0xc8, 0x67, 0xbf, 0x17, 0xce, 0x71, 0xe9}, &resultResolveBinary{})
 	//struct service.resultResolveCapture { value:Capture }
-	binary.Register(binary.ID{0xb3, 0x47, 0xd0, 0x3f, 0x28, 0x63, 0xfe, 0xa4, 0x32, 0xc6, 0xf0, 0x2c, 0xec, 0x6d, 0x33, 0x8a, 0xb2, 0x38, 0xf7, 0x37}, &resultResolveCapture{})
+	registry.Add(binary.ID{0xb3, 0x47, 0xd0, 0x3f, 0x28, 0x63, 0xfe, 0xa4, 0x32, 0xc6, 0xf0, 0x2c, 0xec, 0x6d, 0x33, 0x8a, 0xb2, 0x38, 0xf7, 0x37}, &resultResolveCapture{})
 	//struct service.resultResolveDevice { value:Device }
-	binary.Register(binary.ID{0x7f, 0xd2, 0x9f, 0x67, 0xe3, 0xbe, 0x0e, 0x46, 0x07, 0xdf, 0x8f, 0x6e, 0x6e, 0x85, 0x6d, 0x26, 0xcf, 0xd1, 0xa6, 0xa3}, &resultResolveDevice{})
+	registry.Add(binary.ID{0x7f, 0xd2, 0x9f, 0x67, 0xe3, 0xbe, 0x0e, 0x46, 0x07, 0xdf, 0x8f, 0x6e, 0x6e, 0x85, 0x6d, 0x26, 0xcf, 0xd1, 0xa6, 0xa3}, &resultResolveDevice{})
 	//struct service.resultResolveHierarchy { value:Hierarchy }
-	binary.Register(binary.ID{0x60, 0xf3, 0x21, 0x98, 0x1b, 0x86, 0x98, 0x38, 0x8c, 0x1e, 0x33, 0x3c, 0x06, 0x9d, 0x67, 0x2a, 0x05, 0x50, 0xef, 0xfc}, &resultResolveHierarchy{})
+	registry.Add(binary.ID{0x60, 0xf3, 0x21, 0x98, 0x1b, 0x86, 0x98, 0x38, 0x8c, 0x1e, 0x33, 0x3c, 0x06, 0x9d, 0x67, 0x2a, 0x05, 0x50, 0xef, 0xfc}, &resultResolveHierarchy{})
 	//struct service.resultResolveImageInfo { value:ImageInfo }
-	binary.Register(binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}, &resultResolveImageInfo{})
+	registry.Add(binary.ID{0xdf, 0x45, 0x26, 0xc3, 0xec, 0x36, 0x2c, 0x5a, 0x08, 0xe3, 0x0f, 0x8e, 0x58, 0x52, 0xbd, 0xb2, 0xf3, 0x26, 0x69, 0x9f}, &resultResolveImageInfo{})
 	//struct service.resultResolveMemoryInfo { value:MemoryInfo }
-	binary.Register(binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}, &resultResolveMemoryInfo{})
+	registry.Add(binary.ID{0x1f, 0xcf, 0x9a, 0x85, 0x99, 0x82, 0x5f, 0xa8, 0x46, 0x93, 0x60, 0xa5, 0x17, 0xda, 0x9e, 0x11, 0x34, 0xe8, 0x3d, 0x22}, &resultResolveMemoryInfo{})
 	//struct service.resultResolveSchema { value:Schema }
-	binary.Register(binary.ID{0xe1, 0x27, 0x52, 0x76, 0x82, 0xcc, 0x3e, 0x6c, 0xb8, 0x6a, 0x10, 0xcb, 0x51, 0xc0, 0xcb, 0xf8, 0xa3, 0x32, 0xc7, 0xaa}, &resultResolveSchema{})
+	registry.Add(binary.ID{0xe1, 0x27, 0x52, 0x76, 0x82, 0xcc, 0x3e, 0x6c, 0xb8, 0x6a, 0x10, 0xcb, 0x51, 0xc0, 0xcb, 0xf8, 0xa3, 0x32, 0xc7, 0xaa}, &resultResolveSchema{})
 	//struct service.resultResolveTimingInfo { value:TimingInfo }
-	binary.Register(binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}, &resultResolveTimingInfo{})
+	registry.Add(binary.ID{0xc9, 0x37, 0xfb, 0xd4, 0x2d, 0x45, 0xcb, 0x15, 0x56, 0x1d, 0x08, 0xa2, 0xcc, 0xe9, 0xf8, 0x43, 0x68, 0x83, 0x3d, 0xa7}, &resultResolveTimingInfo{})
 }
 
-func (o ArrayInfo) Encode(e *binary.Encoder) error {
+func (o ArrayInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -157,7 +158,7 @@ func (o ArrayInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ArrayInfo) Decode(d *binary.Decoder) error {
+func (o *ArrayInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -178,7 +179,7 @@ func (o *ArrayInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomGroup) Encode(e *binary.Encoder) error {
+func (o AtomGroup) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -196,7 +197,7 @@ func (o AtomGroup) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomGroup) Decode(d *binary.Decoder) error {
+func (o *AtomGroup) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -218,7 +219,7 @@ func (o *AtomGroup) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomInfo) Encode(e *binary.Encoder) error {
+func (o AtomInfo) Encode(e binary.Encoder) error {
 	if err := e.Uint16(o.Type); err != nil {
 		return err
 	}
@@ -248,7 +249,7 @@ func (o AtomInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomInfo) Decode(d *binary.Decoder) error {
+func (o *AtomInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -292,7 +293,7 @@ func (o *AtomInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomRange) Encode(e *binary.Encoder) error {
+func (o AtomRange) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.First); err != nil {
 		return err
 	}
@@ -302,7 +303,7 @@ func (o AtomRange) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomRange) Decode(d *binary.Decoder) error {
+func (o *AtomRange) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -316,7 +317,7 @@ func (o *AtomRange) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomRangeTimer) Encode(e *binary.Encoder) error {
+func (o AtomRangeTimer) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.FromAtomId); err != nil {
 		return err
 	}
@@ -329,7 +330,7 @@ func (o AtomRangeTimer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomRangeTimer) Decode(d *binary.Decoder) error {
+func (o *AtomRangeTimer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -348,7 +349,7 @@ func (o *AtomRangeTimer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomStream) Encode(e *binary.Encoder) error {
+func (o AtomStream) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
@@ -363,7 +364,7 @@ func (o AtomStream) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomStream) Decode(d *binary.Decoder) error {
+func (o *AtomStream) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -382,7 +383,7 @@ func (o *AtomStream) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o AtomTimer) Encode(e *binary.Encoder) error {
+func (o AtomTimer) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.AtomId); err != nil {
 		return err
 	}
@@ -392,7 +393,7 @@ func (o AtomTimer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *AtomTimer) Decode(d *binary.Decoder) error {
+func (o *AtomTimer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -406,7 +407,7 @@ func (o *AtomTimer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Binary) Encode(e *binary.Encoder) error {
+func (o Binary) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
@@ -418,7 +419,7 @@ func (o Binary) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Binary) Decode(d *binary.Decoder) error {
+func (o *Binary) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -434,7 +435,7 @@ func (o *Binary) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Capture) Encode(e *binary.Encoder) error {
+func (o Capture) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -455,7 +456,7 @@ func (o Capture) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Capture) Decode(d *binary.Decoder) error {
+func (o *Capture) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -484,7 +485,7 @@ func (o *Capture) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o ClassInfo) Encode(e *binary.Encoder) error {
+func (o ClassInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -518,7 +519,7 @@ func (o ClassInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ClassInfo) Decode(d *binary.Decoder) error {
+func (o *ClassInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -560,7 +561,7 @@ func (o *ClassInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Device) Encode(e *binary.Encoder) error {
+func (o Device) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -585,7 +586,7 @@ func (o Device) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Device) Decode(d *binary.Decoder) error {
+func (o *Device) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -624,7 +625,7 @@ func (o *Device) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EnumEntry) Encode(e *binary.Encoder) error {
+func (o EnumEntry) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -634,7 +635,7 @@ func (o EnumEntry) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EnumEntry) Decode(d *binary.Decoder) error {
+func (o *EnumEntry) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -648,7 +649,7 @@ func (o *EnumEntry) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EnumInfo) Encode(e *binary.Encoder) error {
+func (o EnumInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -678,7 +679,7 @@ func (o EnumInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EnumInfo) Decode(d *binary.Decoder) error {
+func (o *EnumInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -716,7 +717,7 @@ func (o *EnumInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o FieldInfo) Encode(e *binary.Encoder) error {
+func (o FieldInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -730,7 +731,7 @@ func (o FieldInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *FieldInfo) Decode(d *binary.Decoder) error {
+func (o *FieldInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -746,21 +747,21 @@ func (o *FieldInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Hierarchy) Encode(e *binary.Encoder) error {
+func (o Hierarchy) Encode(e binary.Encoder) error {
 	if err := o.Root.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Hierarchy) Decode(d *binary.Decoder) error {
+func (o *Hierarchy) Decode(d binary.Decoder) error {
 	if err := o.Root.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o ImageInfo) Encode(e *binary.Encoder) error {
+func (o ImageInfo) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Format)); err != nil {
 		return err
 	}
@@ -776,7 +777,7 @@ func (o ImageInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ImageInfo) Decode(d *binary.Decoder) error {
+func (o *ImageInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -798,7 +799,7 @@ func (o *ImageInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o MapInfo) Encode(e *binary.Encoder) error {
+func (o MapInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -822,7 +823,7 @@ func (o MapInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *MapInfo) Decode(d *binary.Decoder) error {
+func (o *MapInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -850,7 +851,7 @@ func (o *MapInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o MemoryInfo) Encode(e *binary.Encoder) error {
+func (o MemoryInfo) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
@@ -886,7 +887,7 @@ func (o MemoryInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *MemoryInfo) Decode(d *binary.Decoder) error {
+func (o *MemoryInfo) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -932,7 +933,7 @@ func (o *MemoryInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o MemoryRange) Encode(e *binary.Encoder) error {
+func (o MemoryRange) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.Base); err != nil {
 		return err
 	}
@@ -942,7 +943,7 @@ func (o MemoryRange) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *MemoryRange) Decode(d *binary.Decoder) error {
+func (o *MemoryRange) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -956,7 +957,7 @@ func (o *MemoryRange) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o ParameterInfo) Encode(e *binary.Encoder) error {
+func (o ParameterInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -973,7 +974,7 @@ func (o ParameterInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ParameterInfo) Decode(d *binary.Decoder) error {
+func (o *ParameterInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -994,7 +995,7 @@ func (o *ParameterInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o RenderSettings) Encode(e *binary.Encoder) error {
+func (o RenderSettings) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.MaxWidth); err != nil {
 		return err
 	}
@@ -1007,7 +1008,7 @@ func (o RenderSettings) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *RenderSettings) Decode(d *binary.Decoder) error {
+func (o *RenderSettings) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1026,7 +1027,7 @@ func (o *RenderSettings) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Schema) Encode(e *binary.Encoder) error {
+func (o Schema) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Arrays))); err != nil {
 		return err
 	}
@@ -1117,7 +1118,7 @@ func (o Schema) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Schema) Decode(d *binary.Decoder) error {
+func (o *Schema) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1222,7 +1223,7 @@ func (o *Schema) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o SimpleInfo) Encode(e *binary.Encoder) error {
+func (o SimpleInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1232,7 +1233,7 @@ func (o SimpleInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *SimpleInfo) Decode(d *binary.Decoder) error {
+func (o *SimpleInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1246,7 +1247,7 @@ func (o *SimpleInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StaticArrayInfo) Encode(e *binary.Encoder) error {
+func (o StaticArrayInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1271,7 +1272,7 @@ func (o StaticArrayInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *StaticArrayInfo) Decode(d *binary.Decoder) error {
+func (o *StaticArrayInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1304,7 +1305,7 @@ func (o *StaticArrayInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StructInfo) Encode(e *binary.Encoder) error {
+func (o StructInfo) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -1326,7 +1327,7 @@ func (o StructInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *StructInfo) Decode(d *binary.Decoder) error {
+func (o *StructInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1354,7 +1355,7 @@ func (o *StructInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o TimingInfo) Encode(e *binary.Encoder) error {
+func (o TimingInfo) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.PerCommand))); err != nil {
 		return err
 	}
@@ -1382,7 +1383,7 @@ func (o TimingInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *TimingInfo) Decode(d *binary.Decoder) error {
+func (o *TimingInfo) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1416,23 +1417,23 @@ func (o *TimingInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetCaptures) Encode(e *binary.Encoder) error {
+func (o callGetCaptures) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetCaptures) Decode(d *binary.Decoder) error {
+func (o *callGetCaptures) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetDevices) Encode(e *binary.Encoder) error {
+func (o callGetDevices) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetDevices) Decode(d *binary.Decoder) error {
+func (o *callGetDevices) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetFramebufferColor) Encode(e *binary.Encoder) error {
+func (o callGetFramebufferColor) Encode(e binary.Encoder) error {
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1451,7 +1452,7 @@ func (o callGetFramebufferColor) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetFramebufferColor) Decode(d *binary.Decoder) error {
+func (o *callGetFramebufferColor) Decode(d binary.Decoder) error {
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1474,7 +1475,7 @@ func (o *callGetFramebufferColor) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetFramebufferDepth) Encode(e *binary.Encoder) error {
+func (o callGetFramebufferDepth) Encode(e binary.Encoder) error {
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1490,7 +1491,7 @@ func (o callGetFramebufferDepth) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetFramebufferDepth) Decode(d *binary.Decoder) error {
+func (o *callGetFramebufferDepth) Decode(d binary.Decoder) error {
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1510,7 +1511,7 @@ func (o *callGetFramebufferDepth) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetHierarchy) Encode(e *binary.Encoder) error {
+func (o callGetHierarchy) Encode(e binary.Encoder) error {
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1520,7 +1521,7 @@ func (o callGetHierarchy) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetHierarchy) Decode(d *binary.Decoder) error {
+func (o *callGetHierarchy) Decode(d binary.Decoder) error {
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1532,7 +1533,7 @@ func (o *callGetHierarchy) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetMemoryInfo) Encode(e *binary.Encoder) error {
+func (o callGetMemoryInfo) Encode(e binary.Encoder) error {
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1548,7 +1549,7 @@ func (o callGetMemoryInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetMemoryInfo) Decode(d *binary.Decoder) error {
+func (o *callGetMemoryInfo) Decode(d binary.Decoder) error {
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1568,7 +1569,7 @@ func (o *callGetMemoryInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetState) Encode(e *binary.Encoder) error {
+func (o callGetState) Encode(e binary.Encoder) error {
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1581,7 +1582,7 @@ func (o callGetState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetState) Decode(d *binary.Decoder) error {
+func (o *callGetState) Decode(d binary.Decoder) error {
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1598,7 +1599,7 @@ func (o *callGetState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetTimingInfo) Encode(e *binary.Encoder) error {
+func (o callGetTimingInfo) Encode(e binary.Encoder) error {
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1614,7 +1615,7 @@ func (o callGetTimingInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetTimingInfo) Decode(d *binary.Decoder) error {
+func (o *callGetTimingInfo) Decode(d binary.Decoder) error {
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1634,7 +1635,7 @@ func (o *callGetTimingInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callPrerenderFramebuffers) Encode(e *binary.Encoder) error {
+func (o callPrerenderFramebuffers) Encode(e binary.Encoder) error {
 	if err := o.device.Encode(e); err != nil {
 		return err
 	}
@@ -1658,7 +1659,7 @@ func (o callPrerenderFramebuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callPrerenderFramebuffers) Decode(d *binary.Decoder) error {
+func (o *callPrerenderFramebuffers) Decode(d binary.Decoder) error {
 	if err := o.device.Decode(d); err != nil {
 		return err
 	}
@@ -1690,7 +1691,7 @@ func (o *callPrerenderFramebuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callReplaceAtom) Encode(e *binary.Encoder) error {
+func (o callReplaceAtom) Encode(e binary.Encoder) error {
 	if err := o.capture.Encode(e); err != nil {
 		return err
 	}
@@ -1706,7 +1707,7 @@ func (o callReplaceAtom) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callReplaceAtom) Decode(d *binary.Decoder) error {
+func (o *callReplaceAtom) Decode(d binary.Decoder) error {
 	if err := o.capture.Decode(d); err != nil {
 		return err
 	}
@@ -1726,133 +1727,133 @@ func (o *callReplaceAtom) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callResolveAtomStream) Encode(e *binary.Encoder) error {
+func (o callResolveAtomStream) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveAtomStream) Decode(d *binary.Decoder) error {
+func (o *callResolveAtomStream) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveBinary) Encode(e *binary.Encoder) error {
+func (o callResolveBinary) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveBinary) Decode(d *binary.Decoder) error {
+func (o *callResolveBinary) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveCapture) Encode(e *binary.Encoder) error {
+func (o callResolveCapture) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveCapture) Decode(d *binary.Decoder) error {
+func (o *callResolveCapture) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveDevice) Encode(e *binary.Encoder) error {
+func (o callResolveDevice) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveDevice) Decode(d *binary.Decoder) error {
+func (o *callResolveDevice) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveHierarchy) Encode(e *binary.Encoder) error {
+func (o callResolveHierarchy) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveHierarchy) Decode(d *binary.Decoder) error {
+func (o *callResolveHierarchy) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveImageInfo) Encode(e *binary.Encoder) error {
+func (o callResolveImageInfo) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveImageInfo) Decode(d *binary.Decoder) error {
+func (o *callResolveImageInfo) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveMemoryInfo) Encode(e *binary.Encoder) error {
+func (o callResolveMemoryInfo) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveMemoryInfo) Decode(d *binary.Decoder) error {
+func (o *callResolveMemoryInfo) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveSchema) Encode(e *binary.Encoder) error {
+func (o callResolveSchema) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveSchema) Decode(d *binary.Decoder) error {
+func (o *callResolveSchema) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callResolveTimingInfo) Encode(e *binary.Encoder) error {
+func (o callResolveTimingInfo) Encode(e binary.Encoder) error {
 	if err := o.id.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveTimingInfo) Decode(d *binary.Decoder) error {
+func (o *callResolveTimingInfo) Decode(d binary.Decoder) error {
 	if err := o.id.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetCaptures) Encode(e *binary.Encoder) error {
+func (o resultGetCaptures) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
@@ -1864,7 +1865,7 @@ func (o resultGetCaptures) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetCaptures) Decode(d *binary.Decoder) error {
+func (o *resultGetCaptures) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1878,7 +1879,7 @@ func (o *resultGetCaptures) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetDevices) Encode(e *binary.Encoder) error {
+func (o resultGetDevices) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
@@ -1890,7 +1891,7 @@ func (o resultGetDevices) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetDevices) Decode(d *binary.Decoder) error {
+func (o *resultGetDevices) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1904,238 +1905,238 @@ func (o *resultGetDevices) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetFramebufferColor) Encode(e *binary.Encoder) error {
+func (o resultGetFramebufferColor) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetFramebufferColor) Decode(d *binary.Decoder) error {
+func (o *resultGetFramebufferColor) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetFramebufferDepth) Encode(e *binary.Encoder) error {
+func (o resultGetFramebufferDepth) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetFramebufferDepth) Decode(d *binary.Decoder) error {
+func (o *resultGetFramebufferDepth) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetHierarchy) Encode(e *binary.Encoder) error {
+func (o resultGetHierarchy) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetHierarchy) Decode(d *binary.Decoder) error {
+func (o *resultGetHierarchy) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetMemoryInfo) Encode(e *binary.Encoder) error {
+func (o resultGetMemoryInfo) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetMemoryInfo) Decode(d *binary.Decoder) error {
+func (o *resultGetMemoryInfo) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetState) Encode(e *binary.Encoder) error {
+func (o resultGetState) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetState) Decode(d *binary.Decoder) error {
+func (o *resultGetState) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetTimingInfo) Encode(e *binary.Encoder) error {
+func (o resultGetTimingInfo) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetTimingInfo) Decode(d *binary.Decoder) error {
+func (o *resultGetTimingInfo) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultPrerenderFramebuffers) Encode(e *binary.Encoder) error {
+func (o resultPrerenderFramebuffers) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultPrerenderFramebuffers) Decode(d *binary.Decoder) error {
+func (o *resultPrerenderFramebuffers) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultReplaceAtom) Encode(e *binary.Encoder) error {
+func (o resultReplaceAtom) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultReplaceAtom) Decode(d *binary.Decoder) error {
+func (o *resultReplaceAtom) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveAtomStream) Encode(e *binary.Encoder) error {
+func (o resultResolveAtomStream) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveAtomStream) Decode(d *binary.Decoder) error {
+func (o *resultResolveAtomStream) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveBinary) Encode(e *binary.Encoder) error {
+func (o resultResolveBinary) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveBinary) Decode(d *binary.Decoder) error {
+func (o *resultResolveBinary) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveCapture) Encode(e *binary.Encoder) error {
+func (o resultResolveCapture) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveCapture) Decode(d *binary.Decoder) error {
+func (o *resultResolveCapture) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveDevice) Encode(e *binary.Encoder) error {
+func (o resultResolveDevice) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveDevice) Decode(d *binary.Decoder) error {
+func (o *resultResolveDevice) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveHierarchy) Encode(e *binary.Encoder) error {
+func (o resultResolveHierarchy) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveHierarchy) Decode(d *binary.Decoder) error {
+func (o *resultResolveHierarchy) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveImageInfo) Encode(e *binary.Encoder) error {
+func (o resultResolveImageInfo) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveImageInfo) Decode(d *binary.Decoder) error {
+func (o *resultResolveImageInfo) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveMemoryInfo) Encode(e *binary.Encoder) error {
+func (o resultResolveMemoryInfo) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveMemoryInfo) Decode(d *binary.Decoder) error {
+func (o *resultResolveMemoryInfo) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveSchema) Encode(e *binary.Encoder) error {
+func (o resultResolveSchema) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveSchema) Decode(d *binary.Decoder) error {
+func (o *resultResolveSchema) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveTimingInfo) Encode(e *binary.Encoder) error {
+func (o resultResolveTimingInfo) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveTimingInfo) Decode(d *binary.Decoder) error {
+func (o *resultResolveTimingInfo) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}

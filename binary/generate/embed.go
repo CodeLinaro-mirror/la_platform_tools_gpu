@@ -26,9 +26,9 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // limitations under the License.
 
 {{define "Register"}} //{{.Signature}}
-	binary.Register(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
+	registry.Add(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
 
-{{define "Encoder"}}func (o {{.Name}}) Encode(e *binary.Encoder) error {
+{{define "Encoder"}}func (o {{.Name}}) Encode(e binary.Encoder) error {
 	{{range .Fields}}{{encode (print "o." .Name) .Type}}
 	{{end}} return nil
 } {{end}}
@@ -70,7 +70,7 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			{{encode "v" .Type.SubType}}
 		} {{end}}
 
-{{define "Decoder"}}func (o *{{.Name}}) Decode(d *binary.Decoder) error {
+{{define "Decoder"}}func (o *{{.Name}}) Decode(d binary.Decoder) error {
 	{{range .Fields}}{{decode (print "o." .Name) .Type}}
 	{{end}} return nil
 } {{end}}
@@ -114,12 +114,13 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
+			m := {{.Name}}
 			for i := int32(0); i < count; i++ {
 				var k {{.Type.KeyType.Name}}
 				var v {{.Type.SubType.Name}}
 				{{decode "k" .Type.KeyType}}
 				{{decode "v" .Type.SubType}}
-				{{.Name}}[k] = v
+				m[k] = v
 			}
 		} {{end}}
 
@@ -130,6 +131,7 @@ package {{.Package}}
 
 import (
        "android.googlesource.com/platform/tools/gpu/binary"
+       "android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
