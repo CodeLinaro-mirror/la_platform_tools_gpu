@@ -21,6 +21,8 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -83,7 +85,7 @@ func (t *transient) Store(r binary.Object, logger log.Logger) (id binary.ID, err
 	defer func() { logger.Info("↪ id: %v, err: %v total_size: %v", id, err, t.size) }()
 
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := r.Encode(enc); err != nil {
 		return binary.ID{}, err
 	}
@@ -136,7 +138,7 @@ func (t *transient) Load(id binary.ID, logger log.Logger, out binary.Object) (er
 	t.mutex.Lock()
 	if entry, ok := t.entries[id]; ok {
 		t.mutex.Unlock()
-		d := binary.NewDecoder(bytes.NewBuffer(entry))
+		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(entry)))
 		err := out.Decode(d)
 		t.mutex.Lock()
 		t.dropLocked(id, logger)

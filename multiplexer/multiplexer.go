@@ -22,7 +22,8 @@ import (
 	"io"
 	"sync"
 
-	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 var ErrChannelClosed = errors.New("Channel closed")
@@ -92,7 +93,7 @@ func (m *Multiplexer) writeChannel(id channelId, data []byte) (n int, err error)
 
 func (m *Multiplexer) recv() {
 	defer m.closeAllChannels()
-	d := binary.NewDecoder(m.in)
+	d := cyclic.Decoder(vle.Reader(m.in))
 	for {
 		var ty msgType
 		if err := ty.decode(d); err != nil {

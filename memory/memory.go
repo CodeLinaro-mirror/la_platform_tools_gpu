@@ -159,5 +159,5 @@ func (m *Memory) Write(d Data) {
 	m.writes = append(m.writes, memoryWrite{Range{Base: 0, Size: d.Size()}, d})
 }
 
-func (m *Memory) Encode(e *binary.Encoder) error { return nil /* Currently not persisted */ }
-func (m *Memory) Decode(d *binary.Decoder) error { return nil /* Currently not persisted */ }
+func (m *Memory) Encode(e binary.Encoder) error { return nil /* Currently not persisted */ }
+func (m *Memory) Decode(d binary.Decoder) error { return nil /* Currently not persisted */ }

@@ -20,11 +20,11 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 
 type msgType uint8
 
-func (i msgType) encode(e *binary.Encoder) error {
+func (i msgType) encode(e binary.Encoder) error {
 	return e.Uint8(uint8(i))
 }
 
-func (i *msgType) decode(d *binary.Decoder) error {
+func (i *msgType) decode(d binary.Decoder) error {
 	if val, err := d.Uint8(); err == nil {
 		*i = msgType(val)
 		return nil

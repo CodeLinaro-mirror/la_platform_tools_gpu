@@ -7,68 +7,69 @@ package test
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
 	//struct test.Derived { Name:string, Enum:Enum }
-	binary.Register(binary.ID{0x0d, 0x9c, 0x9a, 0x15, 0x97, 0x4d, 0xf4, 0xcf, 0x34, 0x4a, 0x26, 0x1b, 0xde, 0x0b, 0x5e, 0x1e, 0x08, 0x36, 0x95, 0x0a}, &Derived{})
+	registry.Add(binary.ID{0x0d, 0x9c, 0x9a, 0x15, 0x97, 0x4d, 0xf4, 0xcf, 0x34, 0x4a, 0x26, 0x1b, 0xde, 0x0b, 0x5e, 0x1e, 0x08, 0x36, 0x95, 0x0a}, &Derived{})
 	//struct test.ListNode { Name:string, Next:*ListNode }
-	binary.Register(binary.ID{0xd4, 0x62, 0x72, 0x4c, 0xa0, 0x8b, 0xae, 0x1b, 0xad, 0x98, 0x12, 0x6d, 0x2f, 0x95, 0x38, 0xe7, 0x74, 0x4f, 0xb7, 0x6e}, &ListNode{})
+	registry.Add(binary.ID{0xd4, 0x62, 0x72, 0x4c, 0xa0, 0x8b, 0xae, 0x1b, 0xad, 0x98, 0x12, 0x6d, 0x2f, 0x95, 0x38, 0xe7, 0x74, 0x4f, 0xb7, 0x6e}, &ListNode{})
 	//struct test.Resource { Int:uint32, Float:float32, String:string }
-	binary.Register(binary.ID{0x28, 0x69, 0x24, 0xfd, 0x18, 0x32, 0x76, 0xf6, 0x52, 0x91, 0xd4, 0xf3, 0x70, 0x6e, 0xc9, 0x55, 0x30, 0x59, 0x55, 0x1a}, &Resource{})
+	registry.Add(binary.ID{0x28, 0x69, 0x24, 0xfd, 0x18, 0x32, 0x76, 0xf6, 0x52, 0x91, 0xd4, 0xf3, 0x70, 0x6e, 0xc9, 0x55, 0x30, 0x59, 0x55, 0x1a}, &Resource{})
 	//struct test.Struct { String:string, U32:uint32, Enum:Enum }
-	binary.Register(binary.ID{0x1b, 0x23, 0x6b, 0xfa, 0x68, 0x0a, 0x1a, 0x1a, 0xa6, 0x15, 0xfe, 0x89, 0x8c, 0x05, 0x91, 0xa2, 0x92, 0x56, 0x1d, 0x58}, &Struct{})
+	registry.Add(binary.ID{0x1b, 0x23, 0x6b, 0xfa, 0x68, 0x0a, 0x1a, 0x1a, 0xa6, 0x15, 0xfe, 0x89, 0x8c, 0x05, 0x91, 0xa2, 0x92, 0x56, 0x1d, 0x58}, &Struct{})
 	//struct test.callAdd { a:uint32, b:uint32 }
-	binary.Register(binary.ID{0x9c, 0xb8, 0x89, 0x5a, 0x48, 0xc9, 0x85, 0x6e, 0x1d, 0x35, 0x40, 0x50, 0xa1, 0x38, 0x3b, 0x6f, 0xcb, 0xa0, 0x6c, 0xb8}, &callAdd{})
+	registry.Add(binary.ID{0x9c, 0xb8, 0x89, 0x5a, 0x48, 0xc9, 0x85, 0x6e, 0x1d, 0x35, 0x40, 0x50, 0xa1, 0x38, 0x3b, 0x6f, 0xcb, 0xa0, 0x6c, 0xb8}, &callAdd{})
 	//struct test.callEnumToString { e:Enum }
-	binary.Register(binary.ID{0x58, 0x2d, 0x2b, 0xe3, 0x41, 0xac, 0xce, 0x57, 0x0c, 0x0e, 0x45, 0x50, 0xfd, 0xab, 0xae, 0x64, 0x1b, 0xca, 0x46, 0xca}, &callEnumToString{})
+	registry.Add(binary.ID{0x58, 0x2d, 0x2b, 0xe3, 0x41, 0xac, 0xce, 0x57, 0x0c, 0x0e, 0x45, 0x50, 0xfd, 0xab, 0xae, 0x64, 0x1b, 0xca, 0x46, 0xca}, &callEnumToString{})
 	//struct test.callGetBase { }
-	binary.Register(binary.ID{0x28, 0xb4, 0x5a, 0x5f, 0xcd, 0xa2, 0xd9, 0x93, 0x1e, 0x4b, 0x49, 0x3a, 0x9b, 0x6a, 0xec, 0x7a, 0xb7, 0xb5, 0xc7, 0xf6}, &callGetBase{})
+	registry.Add(binary.ID{0x28, 0xb4, 0x5a, 0x5f, 0xcd, 0xa2, 0xd9, 0x93, 0x1e, 0x4b, 0x49, 0x3a, 0x9b, 0x6a, 0xec, 0x7a, 0xb7, 0xb5, 0xc7, 0xf6}, &callGetBase{})
 	//struct test.callGetDerived { }
-	binary.Register(binary.ID{0x72, 0x71, 0x8e, 0x2b, 0x3f, 0xa3, 0xe7, 0x7d, 0x76, 0xe3, 0x33, 0x9b, 0x63, 0xa4, 0xfc, 0x2f, 0x5b, 0xc4, 0x6b, 0x0e}, &callGetDerived{})
+	registry.Add(binary.ID{0x72, 0x71, 0x8e, 0x2b, 0x3f, 0xa3, 0xe7, 0x7d, 0x76, 0xe3, 0x33, 0x9b, 0x63, 0xa4, 0xfc, 0x2f, 0x5b, 0xc4, 0x6b, 0x0e}, &callGetDerived{})
 	//struct test.callGetListNodeChain { }
-	binary.Register(binary.ID{0xe4, 0x4b, 0x9d, 0xdf, 0xeb, 0x01, 0x49, 0x16, 0x20, 0x05, 0xcc, 0x24, 0x3f, 0x13, 0xb3, 0x4d, 0x50, 0x44, 0x78, 0x51}, &callGetListNodeChain{})
+	registry.Add(binary.ID{0xe4, 0x4b, 0x9d, 0xdf, 0xeb, 0x01, 0x49, 0x16, 0x20, 0x05, 0xcc, 0x24, 0x3f, 0x13, 0xb3, 0x4d, 0x50, 0x44, 0x78, 0x51}, &callGetListNodeChain{})
 	//struct test.callGetListNodeChainArray { }
-	binary.Register(binary.ID{0x6c, 0xbf, 0x17, 0x6a, 0xd0, 0x21, 0x13, 0x21, 0x81, 0xd0, 0x9c, 0x51, 0x14, 0xea, 0x88, 0x4a, 0x57, 0x7a, 0x00, 0x2a}, &callGetListNodeChainArray{})
+	registry.Add(binary.ID{0x6c, 0xbf, 0x17, 0x6a, 0xd0, 0x21, 0x13, 0x21, 0x81, 0xd0, 0x9c, 0x51, 0x14, 0xea, 0x88, 0x4a, 0x57, 0x7a, 0x00, 0x2a}, &callGetListNodeChainArray{})
 	//struct test.callGetResource { }
-	binary.Register(binary.ID{0x77, 0x3f, 0xbc, 0xe2, 0x64, 0xc6, 0x25, 0xb9, 0xd3, 0x1e, 0x82, 0xa5, 0x29, 0x94, 0x99, 0x60, 0x63, 0x66, 0xde, 0x5f}, &callGetResource{})
+	registry.Add(binary.ID{0x77, 0x3f, 0xbc, 0xe2, 0x64, 0xc6, 0x25, 0xb9, 0xd3, 0x1e, 0x82, 0xa5, 0x29, 0x94, 0x99, 0x60, 0x63, 0x66, 0xde, 0x5f}, &callGetResource{})
 	//struct test.callGetSingleListNode { }
-	binary.Register(binary.ID{0x6d, 0x63, 0x54, 0xb7, 0x28, 0xf3, 0x2c, 0x5f, 0xcf, 0xc5, 0x61, 0xef, 0xa6, 0xd8, 0x89, 0x67, 0x46, 0xb1, 0x87, 0x34}, &callGetSingleListNode{})
+	registry.Add(binary.ID{0x6d, 0x63, 0x54, 0xb7, 0x28, 0xf3, 0x2c, 0x5f, 0xcf, 0xc5, 0x61, 0xef, 0xa6, 0xd8, 0x89, 0x67, 0x46, 0xb1, 0x87, 0x34}, &callGetSingleListNode{})
 	//struct test.callGetStruct { }
-	binary.Register(binary.ID{0xf1, 0xb4, 0x06, 0x21, 0xfa, 0x76, 0x1d, 0x55, 0x86, 0x0a, 0x96, 0x85, 0x34, 0x26, 0x05, 0x30, 0xd6, 0xb2, 0x97, 0xeb}, &callGetStruct{})
+	registry.Add(binary.ID{0xf1, 0xb4, 0x06, 0x21, 0xfa, 0x76, 0x1d, 0x55, 0x86, 0x0a, 0x96, 0x85, 0x34, 0x26, 0x05, 0x30, 0xd6, 0xb2, 0x97, 0xeb}, &callGetStruct{})
 	//struct test.callResolveResource { r:ResourceId }
-	binary.Register(binary.ID{0xdc, 0x4e, 0xa1, 0x9f, 0xfb, 0x65, 0x5f, 0xed, 0x37, 0x13, 0x5f, 0x21, 0xe4, 0x57, 0x5d, 0xe5, 0xef, 0xbf, 0x87, 0xc2}, &callResolveResource{})
+	registry.Add(binary.ID{0xdc, 0x4e, 0xa1, 0x9f, 0xfb, 0x65, 0x5f, 0xed, 0x37, 0x13, 0x5f, 0x21, 0xe4, 0x57, 0x5d, 0xe5, 0xef, 0xbf, 0x87, 0xc2}, &callResolveResource{})
 	//struct test.callSetStruct { s:Struct }
-	binary.Register(binary.ID{0x63, 0x7e, 0x8e, 0x85, 0x9d, 0x23, 0x3f, 0x28, 0xd8, 0x3d, 0x81, 0x27, 0x0e, 0x8d, 0xe2, 0x11, 0x75, 0xbf, 0x73, 0x76}, &callSetStruct{})
+	registry.Add(binary.ID{0x63, 0x7e, 0x8e, 0x85, 0x9d, 0x23, 0x3f, 0x28, 0xd8, 0x3d, 0x81, 0x27, 0x0e, 0x8d, 0xe2, 0x11, 0x75, 0xbf, 0x73, 0x76}, &callSetStruct{})
 	//struct test.callUseResource { r:ResourceId }
-	binary.Register(binary.ID{0x96, 0x12, 0x10, 0xa9, 0x67, 0xea, 0xf9, 0x3b, 0x5f, 0x44, 0xa0, 0xfe, 0xbe, 0xf9, 0x0a, 0xb6, 0xc9, 0x6c, 0x27, 0x21}, &callUseResource{})
+	registry.Add(binary.ID{0x96, 0x12, 0x10, 0xa9, 0x67, 0xea, 0xf9, 0x3b, 0x5f, 0x44, 0xa0, 0xfe, 0xbe, 0xf9, 0x0a, 0xb6, 0xc9, 0x6c, 0x27, 0x21}, &callUseResource{})
 	//struct test.resultAdd { value:uint32 }
-	binary.Register(binary.ID{0x1c, 0x34, 0x05, 0xbf, 0x9a, 0x3c, 0xe5, 0xce, 0x1f, 0x5c, 0x2d, 0xf9, 0xdd, 0xab, 0x33, 0xb6, 0xfa, 0xa1, 0xd5, 0x2b}, &resultAdd{})
+	registry.Add(binary.ID{0x1c, 0x34, 0x05, 0xbf, 0x9a, 0x3c, 0xe5, 0xce, 0x1f, 0x5c, 0x2d, 0xf9, 0xdd, 0xab, 0x33, 0xb6, 0xfa, 0xa1, 0xd5, 0x2b}, &resultAdd{})
 	//struct test.resultEnumToString { value:string }
-	binary.Register(binary.ID{0x82, 0xf6, 0xd5, 0x1a, 0x4d, 0xec, 0x38, 0xa6, 0x47, 0xa2, 0x1f, 0x6c, 0xc6, 0xa8, 0x69, 0x7f, 0x28, 0x5b, 0x21, 0x2e}, &resultEnumToString{})
+	registry.Add(binary.ID{0x82, 0xf6, 0xd5, 0x1a, 0x4d, 0xec, 0x38, 0xa6, 0x47, 0xa2, 0x1f, 0x6c, 0xc6, 0xa8, 0x69, 0x7f, 0x28, 0x5b, 0x21, 0x2e}, &resultEnumToString{})
 	//struct test.resultGetBase { value:Base }
-	binary.Register(binary.ID{0xae, 0x6d, 0xce, 0x4d, 0xba, 0x99, 0xa9, 0xa0, 0xd6, 0x69, 0xde, 0xec, 0x6d, 0xcc, 0x10, 0xbe, 0xe0, 0x0a, 0x0d, 0x53}, &resultGetBase{})
+	registry.Add(binary.ID{0xae, 0x6d, 0xce, 0x4d, 0xba, 0x99, 0xa9, 0xa0, 0xd6, 0x69, 0xde, 0xec, 0x6d, 0xcc, 0x10, 0xbe, 0xe0, 0x0a, 0x0d, 0x53}, &resultGetBase{})
 	//struct test.resultGetDerived { value:Base }
-	binary.Register(binary.ID{0x33, 0x7b, 0x5c, 0xf9, 0x0e, 0x8f, 0xfd, 0x58, 0x64, 0x31, 0x0d, 0xc0, 0x32, 0x51, 0xa6, 0x82, 0xee, 0xd3, 0xfc, 0x16}, &resultGetDerived{})
+	registry.Add(binary.ID{0x33, 0x7b, 0x5c, 0xf9, 0x0e, 0x8f, 0xfd, 0x58, 0x64, 0x31, 0x0d, 0xc0, 0x32, 0x51, 0xa6, 0x82, 0xee, 0xd3, 0xfc, 0x16}, &resultGetDerived{})
 	//struct test.resultGetListNodeChain { value:*ListNode }
-	binary.Register(binary.ID{0x8f, 0x0f, 0xb2, 0x7b, 0xbe, 0x33, 0x17, 0x99, 0x39, 0x6b, 0x64, 0x9b, 0xe5, 0x6a, 0x99, 0x14, 0x59, 0xc3, 0x6b, 0x94}, &resultGetListNodeChain{})
+	registry.Add(binary.ID{0x8f, 0x0f, 0xb2, 0x7b, 0xbe, 0x33, 0x17, 0x99, 0x39, 0x6b, 0x64, 0x9b, 0xe5, 0x6a, 0x99, 0x14, 0x59, 0xc3, 0x6b, 0x94}, &resultGetListNodeChain{})
 	//struct test.resultGetListNodeChainArray { value:ListNodeArray }
-	binary.Register(binary.ID{0x60, 0x25, 0xec, 0x11, 0x7d, 0xdc, 0xa9, 0x26, 0xc1, 0x49, 0x2a, 0x62, 0x26, 0xe1, 0x88, 0x86, 0x77, 0xdb, 0x4a, 0x55}, &resultGetListNodeChainArray{})
+	registry.Add(binary.ID{0x60, 0x25, 0xec, 0x11, 0x7d, 0xdc, 0xa9, 0x26, 0xc1, 0x49, 0x2a, 0x62, 0x26, 0xe1, 0x88, 0x86, 0x77, 0xdb, 0x4a, 0x55}, &resultGetListNodeChainArray{})
 	//struct test.resultGetResource { value:ResourceId }
-	binary.Register(binary.ID{0xc1, 0x36, 0x88, 0xd8, 0x61, 0xde, 0xe9, 0xe6, 0x82, 0x5b, 0xb1, 0xfb, 0x67, 0xd1, 0x11, 0x30, 0xb9, 0xcf, 0x72, 0x23}, &resultGetResource{})
+	registry.Add(binary.ID{0xc1, 0x36, 0x88, 0xd8, 0x61, 0xde, 0xe9, 0xe6, 0x82, 0x5b, 0xb1, 0xfb, 0x67, 0xd1, 0x11, 0x30, 0xb9, 0xcf, 0x72, 0x23}, &resultGetResource{})
 	//struct test.resultGetSingleListNode { value:*ListNode }
-	binary.Register(binary.ID{0x53, 0x57, 0x00, 0x9c, 0xea, 0x9d, 0x01, 0x7e, 0xbb, 0x14, 0x01, 0x8e, 0x15, 0xe5, 0x12, 0xbd, 0x50, 0xd3, 0x82, 0x13}, &resultGetSingleListNode{})
+	registry.Add(binary.ID{0x53, 0x57, 0x00, 0x9c, 0xea, 0x9d, 0x01, 0x7e, 0xbb, 0x14, 0x01, 0x8e, 0x15, 0xe5, 0x12, 0xbd, 0x50, 0xd3, 0x82, 0x13}, &resultGetSingleListNode{})
 	//struct test.resultGetStruct { value:Struct }
-	binary.Register(binary.ID{0xd5, 0x07, 0x0f, 0x6d, 0xf2, 0x2d, 0xdf, 0x7b, 0x43, 0xaf, 0x9e, 0x3d, 0x5b, 0x82, 0xb1, 0xa2, 0x26, 0xc1, 0x9b, 0x35}, &resultGetStruct{})
+	registry.Add(binary.ID{0xd5, 0x07, 0x0f, 0x6d, 0xf2, 0x2d, 0xdf, 0x7b, 0x43, 0xaf, 0x9e, 0x3d, 0x5b, 0x82, 0xb1, 0xa2, 0x26, 0xc1, 0x9b, 0x35}, &resultGetStruct{})
 	//struct test.resultResolveResource { value:Resource }
-	binary.Register(binary.ID{0x04, 0xe4, 0x8a, 0xdd, 0x2c, 0xf1, 0x1b, 0xf4, 0xeb, 0x48, 0xf1, 0xd3, 0x69, 0xe0, 0x2d, 0x75, 0xdd, 0x76, 0xa7, 0x5f}, &resultResolveResource{})
+	registry.Add(binary.ID{0x04, 0xe4, 0x8a, 0xdd, 0x2c, 0xf1, 0x1b, 0xf4, 0xeb, 0x48, 0xf1, 0xd3, 0x69, 0xe0, 0x2d, 0x75, 0xdd, 0x76, 0xa7, 0x5f}, &resultResolveResource{})
 	//struct test.resultSetStruct { }
-	binary.Register(binary.ID{0x3d, 0xec, 0x2e, 0x5f, 0x2b, 0x8d, 0xd4, 0x91, 0xfe, 0x57, 0x57, 0x33, 0x8c, 0x50, 0x56, 0x14, 0xa8, 0xa0, 0x85, 0x2a}, &resultSetStruct{})
+	registry.Add(binary.ID{0x3d, 0xec, 0x2e, 0x5f, 0x2b, 0x8d, 0xd4, 0x91, 0xfe, 0x57, 0x57, 0x33, 0x8c, 0x50, 0x56, 0x14, 0xa8, 0xa0, 0x85, 0x2a}, &resultSetStruct{})
 	//struct test.resultUseResource { }
-	binary.Register(binary.ID{0x81, 0x83, 0x0d, 0xf2, 0xfa, 0x0d, 0x75, 0x4c, 0xfa, 0xee, 0x14, 0x0e, 0xe5, 0x89, 0xa4, 0x27, 0x06, 0xdb, 0xf9, 0x2e}, &resultUseResource{})
+	registry.Add(binary.ID{0x81, 0x83, 0x0d, 0xf2, 0xfa, 0x0d, 0x75, 0x4c, 0xfa, 0xee, 0x14, 0x0e, 0xe5, 0x89, 0xa4, 0x27, 0x06, 0xdb, 0xf9, 0x2e}, &resultUseResource{})
 }
 
-func (o Derived) Encode(e *binary.Encoder) error {
+func (o Derived) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -78,7 +79,7 @@ func (o Derived) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Derived) Decode(d *binary.Decoder) error {
+func (o *Derived) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -92,7 +93,7 @@ func (o *Derived) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o ListNode) Encode(e *binary.Encoder) error {
+func (o ListNode) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -106,7 +107,7 @@ func (o ListNode) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ListNode) Decode(d *binary.Decoder) error {
+func (o *ListNode) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -122,7 +123,7 @@ func (o *ListNode) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Resource) Encode(e *binary.Encoder) error {
+func (o Resource) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.Int); err != nil {
 		return err
 	}
@@ -135,7 +136,7 @@ func (o Resource) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Resource) Decode(d *binary.Decoder) error {
+func (o *Resource) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -154,7 +155,7 @@ func (o *Resource) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Struct) Encode(e *binary.Encoder) error {
+func (o Struct) Encode(e binary.Encoder) error {
 	if err := e.String(o.String); err != nil {
 		return err
 	}
@@ -167,7 +168,7 @@ func (o Struct) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Struct) Decode(d *binary.Decoder) error {
+func (o *Struct) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -186,7 +187,7 @@ func (o *Struct) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callAdd) Encode(e *binary.Encoder) error {
+func (o callAdd) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.a); err != nil {
 		return err
 	}
@@ -196,7 +197,7 @@ func (o callAdd) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *callAdd) Decode(d *binary.Decoder) error {
+func (o *callAdd) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -210,14 +211,14 @@ func (o *callAdd) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callEnumToString) Encode(e *binary.Encoder) error {
+func (o callEnumToString) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.e)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callEnumToString) Decode(d *binary.Decoder) error {
+func (o *callEnumToString) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -226,112 +227,112 @@ func (o *callEnumToString) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o callGetBase) Encode(e *binary.Encoder) error {
+func (o callGetBase) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetBase) Decode(d *binary.Decoder) error {
+func (o *callGetBase) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetDerived) Encode(e *binary.Encoder) error {
+func (o callGetDerived) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetDerived) Decode(d *binary.Decoder) error {
+func (o *callGetDerived) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetListNodeChain) Encode(e *binary.Encoder) error {
+func (o callGetListNodeChain) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetListNodeChain) Decode(d *binary.Decoder) error {
+func (o *callGetListNodeChain) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetListNodeChainArray) Encode(e *binary.Encoder) error {
+func (o callGetListNodeChainArray) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetListNodeChainArray) Decode(d *binary.Decoder) error {
+func (o *callGetListNodeChainArray) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetResource) Encode(e *binary.Encoder) error {
+func (o callGetResource) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetResource) Decode(d *binary.Decoder) error {
+func (o *callGetResource) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetSingleListNode) Encode(e *binary.Encoder) error {
+func (o callGetSingleListNode) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetSingleListNode) Decode(d *binary.Decoder) error {
+func (o *callGetSingleListNode) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callGetStruct) Encode(e *binary.Encoder) error {
+func (o callGetStruct) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *callGetStruct) Decode(d *binary.Decoder) error {
+func (o *callGetStruct) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o callResolveResource) Encode(e *binary.Encoder) error {
+func (o callResolveResource) Encode(e binary.Encoder) error {
 	if err := o.r.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callResolveResource) Decode(d *binary.Decoder) error {
+func (o *callResolveResource) Decode(d binary.Decoder) error {
 	if err := o.r.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callSetStruct) Encode(e *binary.Encoder) error {
+func (o callSetStruct) Encode(e binary.Encoder) error {
 	if err := o.s.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callSetStruct) Decode(d *binary.Decoder) error {
+func (o *callSetStruct) Decode(d binary.Decoder) error {
 	if err := o.s.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o callUseResource) Encode(e *binary.Encoder) error {
+func (o callUseResource) Encode(e binary.Encoder) error {
 	if err := o.r.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *callUseResource) Decode(d *binary.Decoder) error {
+func (o *callUseResource) Decode(d binary.Decoder) error {
 	if err := o.r.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultAdd) Encode(e *binary.Encoder) error {
+func (o resultAdd) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultAdd) Decode(d *binary.Decoder) error {
+func (o *resultAdd) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -340,14 +341,14 @@ func (o *resultAdd) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultEnumToString) Encode(e *binary.Encoder) error {
+func (o resultEnumToString) Encode(e binary.Encoder) error {
 	if err := e.String(o.value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultEnumToString) Decode(d *binary.Decoder) error {
+func (o *resultEnumToString) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -356,7 +357,7 @@ func (o *resultEnumToString) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetBase) Encode(e *binary.Encoder) error {
+func (o resultGetBase) Encode(e binary.Encoder) error {
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -367,7 +368,7 @@ func (o resultGetBase) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetBase) Decode(d *binary.Decoder) error {
+func (o *resultGetBase) Decode(d binary.Decoder) error {
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -378,7 +379,7 @@ func (o *resultGetBase) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetDerived) Encode(e *binary.Encoder) error {
+func (o resultGetDerived) Encode(e binary.Encoder) error {
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -389,7 +390,7 @@ func (o resultGetDerived) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetDerived) Decode(d *binary.Decoder) error {
+func (o *resultGetDerived) Decode(d binary.Decoder) error {
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -400,7 +401,7 @@ func (o *resultGetDerived) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetListNodeChain) Encode(e *binary.Encoder) error {
+func (o resultGetListNodeChain) Encode(e binary.Encoder) error {
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -411,7 +412,7 @@ func (o resultGetListNodeChain) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetListNodeChain) Decode(d *binary.Decoder) error {
+func (o *resultGetListNodeChain) Decode(d binary.Decoder) error {
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -422,7 +423,7 @@ func (o *resultGetListNodeChain) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetListNodeChainArray) Encode(e *binary.Encoder) error {
+func (o resultGetListNodeChainArray) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.value))); err != nil {
 		return err
 	}
@@ -438,7 +439,7 @@ func (o resultGetListNodeChainArray) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetListNodeChainArray) Decode(d *binary.Decoder) error {
+func (o *resultGetListNodeChainArray) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -456,21 +457,21 @@ func (o *resultGetListNodeChainArray) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetResource) Encode(e *binary.Encoder) error {
+func (o resultGetResource) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetResource) Decode(d *binary.Decoder) error {
+func (o *resultGetResource) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultGetSingleListNode) Encode(e *binary.Encoder) error {
+func (o resultGetSingleListNode) Encode(e binary.Encoder) error {
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
 			return err
@@ -481,7 +482,7 @@ func (o resultGetSingleListNode) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *resultGetSingleListNode) Decode(d *binary.Decoder) error {
+func (o *resultGetSingleListNode) Decode(d binary.Decoder) error {
 	if obj, err := d.Object(); err != nil {
 		return err
 	} else if obj != nil {
@@ -492,46 +493,46 @@ func (o *resultGetSingleListNode) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o resultGetStruct) Encode(e *binary.Encoder) error {
+func (o resultGetStruct) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultGetStruct) Decode(d *binary.Decoder) error {
+func (o *resultGetStruct) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultResolveResource) Encode(e *binary.Encoder) error {
+func (o resultResolveResource) Encode(e binary.Encoder) error {
 	if err := o.value.Encode(e); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *resultResolveResource) Decode(d *binary.Decoder) error {
+func (o *resultResolveResource) Decode(d binary.Decoder) error {
 	if err := o.value.Decode(d); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o resultSetStruct) Encode(e *binary.Encoder) error {
+func (o resultSetStruct) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *resultSetStruct) Decode(d *binary.Decoder) error {
+func (o *resultSetStruct) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o resultUseResource) Encode(e *binary.Encoder) error {
+func (o resultUseResource) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *resultUseResource) Decode(d *binary.Decoder) error {
+func (o *resultUseResource) Decode(d binary.Decoder) error {
 	return nil
 }

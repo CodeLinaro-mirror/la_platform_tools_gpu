@@ -20,6 +20,8 @@ import (
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
 type sender struct {
@@ -65,21 +67,21 @@ type sendItem interface {
 	channel() channelId
 }
 
-func encodeOpenChannel(e *binary.Encoder, s channelId) error {
+func encodeOpenChannel(e binary.Encoder, s channelId) error {
 	if err := msgTypeOpenChannel.encode(e); err != nil {
 		return err
 	}
 	return msgOpenChannel{s}.encode(e)
 }
 
-func encodeCloseChannel(e *binary.Encoder, s channelId) error {
+func encodeCloseChannel(e binary.Encoder, s channelId) error {
 	if err := msgTypeCloseChannel.encode(e); err != nil {
 		return err
 	}
 	return msgCloseChannel{s}.encode(e)
 }
 
-func encodeData(e *binary.Encoder, s channelId, d []byte) error {
+func encodeData(e binary.Encoder, s channelId, d []byte) error {
 	if err := msgTypeData.encode(e); err != nil {
 		return err
 	}
@@ -113,7 +115,7 @@ func (s *sender) begin(bufSize, mtu int, out io.Writer) {
 		close(done)
 		// We get away with using a single encoder between multiple channels because we
 		// do not use Encoder.Object() which is the only method that has state.
-		e := binary.NewEncoder(out)
+		e := cyclic.Encoder(vle.Writer(out))
 		m := sendMap{}
 		for {
 			if len(m) == 0 {

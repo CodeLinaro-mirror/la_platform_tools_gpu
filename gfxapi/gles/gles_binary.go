@@ -8,1205 +8,1206 @@ package gles
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 func init() {
 	//struct gles.BlendState { CreatedAt:atom.ID, SrcRgbBlendFactor:BlendFactor, SrcAlphaBlendFactor:BlendFactor, DstRgbBlendFactor:BlendFactor, DstAlphaBlendFactor:BlendFactor, BlendEquationRgb:BlendEquation, BlendEquationAlpha:BlendEquation, BlendColor:Color }
-	binary.Register(binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}, &BlendState{})
+	registry.Add(binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}, &BlendState{})
 	//struct gles.Buffer { CreatedAt:atom.ID, Data:memory.Memory, Size:int32, Usage:BufferUsage }
-	binary.Register(binary.ID{0x80, 0x34, 0x59, 0xc1, 0x81, 0x15, 0x42, 0x19, 0x83, 0x1d, 0x6e, 0xd6, 0xc7, 0x4d, 0xd9, 0x0f, 0xc8, 0x3e, 0xdb, 0x6f}, &Buffer{})
+	registry.Add(binary.ID{0x80, 0x34, 0x59, 0xc1, 0x81, 0x15, 0x42, 0x19, 0x83, 0x1d, 0x6e, 0xd6, 0xc7, 0x4d, 0xd9, 0x0f, 0xc8, 0x3e, 0xdb, 0x6f}, &Buffer{})
 	//struct gles.ClearState { CreatedAt:atom.ID, ClearColor:Color, ClearDepth:float32, ClearStencil:int32 }
-	binary.Register(binary.ID{0xd3, 0xbe, 0x8f, 0x85, 0x49, 0x55, 0xe3, 0x17, 0x03, 0xb1, 0x02, 0x1c, 0xe0, 0x2d, 0x25, 0x8c, 0x17, 0x53, 0xc5, 0x62}, &ClearState{})
+	registry.Add(binary.ID{0xd3, 0xbe, 0x8f, 0x85, 0x49, 0x55, 0xe3, 0x17, 0x03, 0xb1, 0x02, 0x1c, 0xe0, 0x2d, 0x25, 0x8c, 0x17, 0x53, 0xc5, 0x62}, &ClearState{})
 	//struct gles.Color { CreatedAt:atom.ID, Red:float32, Green:float32, Blue:float32, Alpha:float32 }
-	binary.Register(binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}, &Color{})
+	registry.Add(binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}, &Color{})
 	//struct gles.CubemapLevel { CreatedAt:atom.ID, Faces:Image_CubeMapImageTargetMap }
-	binary.Register(binary.ID{0xac, 0x36, 0x1f, 0x38, 0xdc, 0xa2, 0x33, 0xa9, 0xce, 0xce, 0xfe, 0x64, 0x9f, 0x30, 0x8d, 0xaf, 0xb2, 0xd6, 0xde, 0x94}, &CubemapLevel{})
+	registry.Add(binary.ID{0xac, 0x36, 0x1f, 0x38, 0xdc, 0xa2, 0x33, 0xa9, 0xce, 0xce, 0xfe, 0x64, 0x9f, 0x30, 0x8d, 0xaf, 0xb2, 0xd6, 0xde, 0x94}, &CubemapLevel{})
 	//struct gles.EglCreateContext { Context:atom.ContextID, In:EglCreateContext_In, Out:EglCreateContext_Out }
-	binary.Register(binary.ID{0x6a, 0x6f, 0x72, 0x49, 0x9c, 0xa2, 0xef, 0x18, 0x62, 0x1b, 0x6d, 0x7b, 0xf5, 0x5a, 0xa1, 0x79, 0x7d, 0x80, 0x4c, 0x88}, &EglCreateContext{})
+	registry.Add(binary.ID{0x6a, 0x6f, 0x72, 0x49, 0x9c, 0xa2, 0xef, 0x18, 0x62, 0x1b, 0x6d, 0x7b, 0xf5, 0x5a, 0xa1, 0x79, 0x7d, 0x80, 0x4c, 0x88}, &EglCreateContext{})
 	//struct gles.EglCreateContext_In { }
-	binary.Register(binary.ID{0x5d, 0x10, 0xa8, 0x36, 0xed, 0xf3, 0x46, 0xd1, 0xb0, 0x34, 0x0e, 0x4f, 0x90, 0x8b, 0x0c, 0xa8, 0x74, 0x14, 0xf4, 0xea}, &EglCreateContext_In{})
+	registry.Add(binary.ID{0x5d, 0x10, 0xa8, 0x36, 0xed, 0xf3, 0x46, 0xd1, 0xb0, 0x34, 0x0e, 0x4f, 0x90, 0x8b, 0x0c, 0xa8, 0x74, 0x14, 0xf4, 0xea}, &EglCreateContext_In{})
 	//struct gles.EglCreateContext_Out { Version:int32, Context:int32 }
-	binary.Register(binary.ID{0x39, 0x85, 0x84, 0x32, 0x42, 0xdb, 0x66, 0x4e, 0x3f, 0xdd, 0x57, 0x93, 0x3e, 0x3f, 0x31, 0x04, 0x2a, 0xb8, 0x82, 0x99}, &EglCreateContext_Out{})
+	registry.Add(binary.ID{0x39, 0x85, 0x84, 0x32, 0x42, 0xdb, 0x66, 0x4e, 0x3f, 0xdd, 0x57, 0x93, 0x3e, 0x3f, 0x31, 0x04, 0x2a, 0xb8, 0x82, 0x99}, &EglCreateContext_Out{})
 	//struct gles.EglMakeCurrent { Context:atom.ContextID, In:EglMakeCurrent_In, Out:EglMakeCurrent_Out }
-	binary.Register(binary.ID{0x65, 0xee, 0xe8, 0x53, 0x54, 0xe9, 0x38, 0xaf, 0xa6, 0x9c, 0xa0, 0x0e, 0x52, 0x24, 0x49, 0xb5, 0x9e, 0xb6, 0x9f, 0xdb}, &EglMakeCurrent{})
+	registry.Add(binary.ID{0x65, 0xee, 0xe8, 0x53, 0x54, 0xe9, 0x38, 0xaf, 0xa6, 0x9c, 0xa0, 0x0e, 0x52, 0x24, 0x49, 0xb5, 0x9e, 0xb6, 0x9f, 0xdb}, &EglMakeCurrent{})
 	//struct gles.EglMakeCurrent_In { Context:int32 }
-	binary.Register(binary.ID{0x50, 0xfd, 0xde, 0x0d, 0x0b, 0xbb, 0x7c, 0xaa, 0x14, 0xd0, 0x2b, 0x42, 0x8a, 0x68, 0x47, 0xb8, 0x77, 0xa6, 0x1f, 0xcc}, &EglMakeCurrent_In{})
+	registry.Add(binary.ID{0x50, 0xfd, 0xde, 0x0d, 0x0b, 0xbb, 0x7c, 0xaa, 0x14, 0xd0, 0x2b, 0x42, 0x8a, 0x68, 0x47, 0xb8, 0x77, 0xa6, 0x1f, 0xcc}, &EglMakeCurrent_In{})
 	//struct gles.EglMakeCurrent_Out { }
-	binary.Register(binary.ID{0xf9, 0x96, 0x86, 0xfb, 0x25, 0x31, 0x36, 0x39, 0x5b, 0x94, 0x02, 0x30, 0x97, 0x36, 0x1c, 0xca, 0x70, 0xb1, 0xf5, 0x0e}, &EglMakeCurrent_Out{})
+	registry.Add(binary.ID{0xf9, 0x96, 0x86, 0xfb, 0x25, 0x31, 0x36, 0x39, 0x5b, 0x94, 0x02, 0x30, 0x97, 0x36, 0x1c, 0xca, 0x70, 0xb1, 0xf5, 0x0e}, &EglMakeCurrent_Out{})
 	//struct gles.EglSwapBuffers { Context:atom.ContextID, In:EglSwapBuffers_In, Out:EglSwapBuffers_Out }
-	binary.Register(binary.ID{0xeb, 0xc7, 0x78, 0xbf, 0xd3, 0x0f, 0x07, 0x2d, 0xfb, 0xee, 0x73, 0x2d, 0xf3, 0x3d, 0xf3, 0xb7, 0x59, 0xb9, 0xaf, 0x2f}, &EglSwapBuffers{})
+	registry.Add(binary.ID{0xeb, 0xc7, 0x78, 0xbf, 0xd3, 0x0f, 0x07, 0x2d, 0xfb, 0xee, 0x73, 0x2d, 0xf3, 0x3d, 0xf3, 0xb7, 0x59, 0xb9, 0xaf, 0x2f}, &EglSwapBuffers{})
 	//struct gles.EglSwapBuffers_In { }
-	binary.Register(binary.ID{0xf7, 0x30, 0x1c, 0xc6, 0xd7, 0x10, 0xca, 0x48, 0xd8, 0x24, 0x69, 0xb5, 0x52, 0xa7, 0x0c, 0x39, 0x06, 0xc7, 0xf3, 0xbf}, &EglSwapBuffers_In{})
+	registry.Add(binary.ID{0xf7, 0x30, 0x1c, 0xc6, 0xd7, 0x10, 0xca, 0x48, 0xd8, 0x24, 0x69, 0xb5, 0x52, 0xa7, 0x0c, 0x39, 0x06, 0xc7, 0xf3, 0xbf}, &EglSwapBuffers_In{})
 	//struct gles.EglSwapBuffers_Out { }
-	binary.Register(binary.ID{0xeb, 0xbf, 0xeb, 0x76, 0xd7, 0xf0, 0x68, 0x0f, 0x64, 0x9b, 0xe0, 0x46, 0x5f, 0xa3, 0x91, 0x36, 0x95, 0xda, 0xa6, 0x24}, &EglSwapBuffers_Out{})
+	registry.Add(binary.ID{0xeb, 0xbf, 0xeb, 0x76, 0xd7, 0xf0, 0x68, 0x0f, 0x64, 0x9b, 0xe0, 0x46, 0x5f, 0xa3, 0x91, 0x36, 0x95, 0xda, 0xa6, 0x24}, &EglSwapBuffers_Out{})
 	//struct gles.FlushPostBuffer { Context:atom.ContextID, In:FlushPostBuffer_In, Out:FlushPostBuffer_Out }
-	binary.Register(binary.ID{0x98, 0xef, 0xbe, 0x78, 0xb2, 0x49, 0xb8, 0x9f, 0x06, 0x10, 0xd6, 0x89, 0xc0, 0x1d, 0xe7, 0x6d, 0x74, 0x5d, 0x61, 0x04}, &FlushPostBuffer{})
+	registry.Add(binary.ID{0x98, 0xef, 0xbe, 0x78, 0xb2, 0x49, 0xb8, 0x9f, 0x06, 0x10, 0xd6, 0x89, 0xc0, 0x1d, 0xe7, 0x6d, 0x74, 0x5d, 0x61, 0x04}, &FlushPostBuffer{})
 	//struct gles.FlushPostBuffer_In { }
-	binary.Register(binary.ID{0xe5, 0x6e, 0xeb, 0x42, 0x94, 0xcd, 0x5e, 0xee, 0xd1, 0x14, 0xd4, 0xe9, 0x2a, 0x23, 0x4f, 0x51, 0x7e, 0x52, 0xe0, 0x44}, &FlushPostBuffer_In{})
+	registry.Add(binary.ID{0xe5, 0x6e, 0xeb, 0x42, 0x94, 0xcd, 0x5e, 0xee, 0xd1, 0x14, 0xd4, 0xe9, 0x2a, 0x23, 0x4f, 0x51, 0x7e, 0x52, 0xe0, 0x44}, &FlushPostBuffer_In{})
 	//struct gles.FlushPostBuffer_Out { }
-	binary.Register(binary.ID{0x91, 0xb7, 0xe5, 0x33, 0xe2, 0x4d, 0xb8, 0x8a, 0x4a, 0x52, 0x1b, 0x91, 0xb3, 0xad, 0x32, 0x0a, 0x0a, 0xf5, 0x0c, 0xd6}, &FlushPostBuffer_Out{})
+	registry.Add(binary.ID{0x91, 0xb7, 0xe5, 0x33, 0xe2, 0x4d, 0xb8, 0x8a, 0x4a, 0x52, 0x1b, 0x91, 0xb3, 0xad, 0x32, 0x0a, 0x0a, 0xf5, 0x0c, 0xd6}, &FlushPostBuffer_Out{})
 	//struct gles.Framebuffer { CreatedAt:atom.ID, Attachments:FramebufferAttachmentInfo_FramebufferAttachmentMap }
-	binary.Register(binary.ID{0x07, 0x89, 0x97, 0x54, 0x07, 0x59, 0xd2, 0x8e, 0x3a, 0xcc, 0x69, 0x09, 0x79, 0xa0, 0xfa, 0xc5, 0x38, 0x24, 0xad, 0xc9}, &Framebuffer{})
+	registry.Add(binary.ID{0x07, 0x89, 0x97, 0x54, 0x07, 0x59, 0xd2, 0x8e, 0x3a, 0xcc, 0x69, 0x09, 0x79, 0xa0, 0xfa, 0xc5, 0x38, 0x24, 0xad, 0xc9}, &Framebuffer{})
 	//struct gles.FramebufferAttachmentInfo { CreatedAt:atom.ID, Object:uint32, Type:FramebufferAttachmentType, TextureLevel:int32, CubeMapFace:CubeMapImageTarget }
-	binary.Register(binary.ID{0x28, 0x1b, 0x2d, 0xbd, 0x74, 0xc0, 0x84, 0xc8, 0xe5, 0xe1, 0x3e, 0xe3, 0x46, 0x08, 0xc7, 0xd0, 0x61, 0xb9, 0xa0, 0xb5}, &FramebufferAttachmentInfo{})
+	registry.Add(binary.ID{0x28, 0x1b, 0x2d, 0xbd, 0x74, 0xc0, 0x84, 0xc8, 0xe5, 0xe1, 0x3e, 0xe3, 0x46, 0x08, 0xc7, 0xd0, 0x61, 0xb9, 0xa0, 0xb5}, &FramebufferAttachmentInfo{})
 	//struct gles.GlActiveTexture { Context:atom.ContextID, In:GlActiveTexture_In, Out:GlActiveTexture_Out }
-	binary.Register(binary.ID{0x12, 0x2f, 0x21, 0x84, 0x30, 0x39, 0x2d, 0x06, 0xec, 0xde, 0x48, 0x51, 0x8b, 0xd6, 0x12, 0x83, 0xef, 0x1d, 0x53, 0xcc}, &GlActiveTexture{})
+	registry.Add(binary.ID{0x12, 0x2f, 0x21, 0x84, 0x30, 0x39, 0x2d, 0x06, 0xec, 0xde, 0x48, 0x51, 0x8b, 0xd6, 0x12, 0x83, 0xef, 0x1d, 0x53, 0xcc}, &GlActiveTexture{})
 	//struct gles.GlActiveTexture_In { Unit:TextureUnit }
-	binary.Register(binary.ID{0x00, 0x50, 0x40, 0xd0, 0xc1, 0xa9, 0x9d, 0x27, 0xd2, 0x64, 0xb8, 0x30, 0xd5, 0x87, 0x22, 0xa1, 0x66, 0x03, 0xc4, 0x19}, &GlActiveTexture_In{})
+	registry.Add(binary.ID{0x00, 0x50, 0x40, 0xd0, 0xc1, 0xa9, 0x9d, 0x27, 0xd2, 0x64, 0xb8, 0x30, 0xd5, 0x87, 0x22, 0xa1, 0x66, 0x03, 0xc4, 0x19}, &GlActiveTexture_In{})
 	//struct gles.GlActiveTexture_Out { }
-	binary.Register(binary.ID{0x68, 0x79, 0x15, 0x81, 0x63, 0x60, 0x78, 0x8a, 0xdc, 0x2a, 0x1d, 0xf6, 0xc8, 0xbc, 0x75, 0x15, 0x85, 0x2d, 0xe1, 0x45}, &GlActiveTexture_Out{})
+	registry.Add(binary.ID{0x68, 0x79, 0x15, 0x81, 0x63, 0x60, 0x78, 0x8a, 0xdc, 0x2a, 0x1d, 0xf6, 0xc8, 0xbc, 0x75, 0x15, 0x85, 0x2d, 0xe1, 0x45}, &GlActiveTexture_Out{})
 	//struct gles.GlAttachShader { Context:atom.ContextID, In:GlAttachShader_In, Out:GlAttachShader_Out }
-	binary.Register(binary.ID{0xa5, 0x8a, 0x14, 0x3a, 0xd0, 0x33, 0xca, 0xcc, 0x94, 0xd3, 0x6d, 0x91, 0xa2, 0xf4, 0xde, 0xa9, 0x0c, 0xd0, 0x4e, 0x63}, &GlAttachShader{})
+	registry.Add(binary.ID{0xa5, 0x8a, 0x14, 0x3a, 0xd0, 0x33, 0xca, 0xcc, 0x94, 0xd3, 0x6d, 0x91, 0xa2, 0xf4, 0xde, 0xa9, 0x0c, 0xd0, 0x4e, 0x63}, &GlAttachShader{})
 	//struct gles.GlAttachShader_In { Program:ProgramId, Shader:ShaderId }
-	binary.Register(binary.ID{0x49, 0x63, 0x0f, 0xee, 0x77, 0xd2, 0xd4, 0xeb, 0x3e, 0x57, 0xb7, 0x8f, 0xfd, 0xec, 0xea, 0x7b, 0xe6, 0x9c, 0xe5, 0x5f}, &GlAttachShader_In{})
+	registry.Add(binary.ID{0x49, 0x63, 0x0f, 0xee, 0x77, 0xd2, 0xd4, 0xeb, 0x3e, 0x57, 0xb7, 0x8f, 0xfd, 0xec, 0xea, 0x7b, 0xe6, 0x9c, 0xe5, 0x5f}, &GlAttachShader_In{})
 	//struct gles.GlAttachShader_Out { }
-	binary.Register(binary.ID{0xf1, 0xf8, 0xcc, 0xc7, 0x14, 0xb1, 0x41, 0x3e, 0x3a, 0x14, 0x36, 0xad, 0x54, 0xcd, 0x83, 0x5e, 0xb9, 0xc9, 0x59, 0x9a}, &GlAttachShader_Out{})
+	registry.Add(binary.ID{0xf1, 0xf8, 0xcc, 0xc7, 0x14, 0xb1, 0x41, 0x3e, 0x3a, 0x14, 0x36, 0xad, 0x54, 0xcd, 0x83, 0x5e, 0xb9, 0xc9, 0x59, 0x9a}, &GlAttachShader_Out{})
 	//struct gles.GlBeginQuery { Context:atom.ContextID, In:GlBeginQuery_In, Out:GlBeginQuery_Out }
-	binary.Register(binary.ID{0xdc, 0xf8, 0x3f, 0x3b, 0x15, 0x0e, 0x2b, 0x66, 0xd1, 0x67, 0x6d, 0x43, 0x07, 0xad, 0x33, 0x71, 0x5e, 0x93, 0x21, 0x6f}, &GlBeginQuery{})
+	registry.Add(binary.ID{0xdc, 0xf8, 0x3f, 0x3b, 0x15, 0x0e, 0x2b, 0x66, 0xd1, 0x67, 0x6d, 0x43, 0x07, 0xad, 0x33, 0x71, 0x5e, 0x93, 0x21, 0x6f}, &GlBeginQuery{})
 	//struct gles.GlBeginQueryEXT { Context:atom.ContextID, In:GlBeginQueryEXT_In, Out:GlBeginQueryEXT_Out }
-	binary.Register(binary.ID{0xe1, 0x7a, 0x7d, 0x7d, 0xc3, 0x6f, 0xb2, 0x3e, 0x33, 0xc0, 0xa4, 0xd7, 0x8f, 0x32, 0x9a, 0x3b, 0x6e, 0x59, 0x76, 0xf1}, &GlBeginQueryEXT{})
+	registry.Add(binary.ID{0xe1, 0x7a, 0x7d, 0x7d, 0xc3, 0x6f, 0xb2, 0x3e, 0x33, 0xc0, 0xa4, 0xd7, 0x8f, 0x32, 0x9a, 0x3b, 0x6e, 0x59, 0x76, 0xf1}, &GlBeginQueryEXT{})
 	//struct gles.GlBeginQueryEXT_In { Target:QueryTarget, Query:QueryId }
-	binary.Register(binary.ID{0xb5, 0x11, 0x92, 0x4b, 0x01, 0x06, 0xdd, 0x29, 0x51, 0x25, 0x45, 0x40, 0x60, 0x7c, 0xa6, 0x24, 0x16, 0xda, 0xeb, 0xd1}, &GlBeginQueryEXT_In{})
+	registry.Add(binary.ID{0xb5, 0x11, 0x92, 0x4b, 0x01, 0x06, 0xdd, 0x29, 0x51, 0x25, 0x45, 0x40, 0x60, 0x7c, 0xa6, 0x24, 0x16, 0xda, 0xeb, 0xd1}, &GlBeginQueryEXT_In{})
 	//struct gles.GlBeginQueryEXT_Out { }
-	binary.Register(binary.ID{0xe9, 0x4a, 0xfc, 0x21, 0x43, 0xa7, 0xf3, 0x03, 0x8a, 0x79, 0xba, 0x1c, 0xfc, 0x87, 0x73, 0x03, 0x80, 0x3f, 0x33, 0x7e}, &GlBeginQueryEXT_Out{})
+	registry.Add(binary.ID{0xe9, 0x4a, 0xfc, 0x21, 0x43, 0xa7, 0xf3, 0x03, 0x8a, 0x79, 0xba, 0x1c, 0xfc, 0x87, 0x73, 0x03, 0x80, 0x3f, 0x33, 0x7e}, &GlBeginQueryEXT_Out{})
 	//struct gles.GlBeginQuery_In { Target:QueryTarget, Query:QueryId }
-	binary.Register(binary.ID{0xf4, 0x19, 0x86, 0x57, 0xd9, 0xf9, 0xd9, 0xed, 0xf4, 0x03, 0xca, 0x6c, 0x40, 0xbc, 0x43, 0x37, 0x4e, 0xd4, 0xaf, 0xab}, &GlBeginQuery_In{})
+	registry.Add(binary.ID{0xf4, 0x19, 0x86, 0x57, 0xd9, 0xf9, 0xd9, 0xed, 0xf4, 0x03, 0xca, 0x6c, 0x40, 0xbc, 0x43, 0x37, 0x4e, 0xd4, 0xaf, 0xab}, &GlBeginQuery_In{})
 	//struct gles.GlBeginQuery_Out { }
-	binary.Register(binary.ID{0x08, 0x40, 0xfd, 0x3f, 0x04, 0xaf, 0xf3, 0xcb, 0x5e, 0x6b, 0x2b, 0x4e, 0x52, 0x85, 0x7a, 0x11, 0x3b, 0xad, 0xf3, 0x03}, &GlBeginQuery_Out{})
+	registry.Add(binary.ID{0x08, 0x40, 0xfd, 0x3f, 0x04, 0xaf, 0xf3, 0xcb, 0x5e, 0x6b, 0x2b, 0x4e, 0x52, 0x85, 0x7a, 0x11, 0x3b, 0xad, 0xf3, 0x03}, &GlBeginQuery_Out{})
 	//struct gles.GlBindAttribLocation { Context:atom.ContextID, In:GlBindAttribLocation_In, Out:GlBindAttribLocation_Out }
-	binary.Register(binary.ID{0x4d, 0x4d, 0xcc, 0xc0, 0xf3, 0x72, 0x18, 0x65, 0x35, 0x4a, 0x3d, 0x81, 0x0f, 0x14, 0xc5, 0x57, 0x19, 0x6b, 0xd6, 0x32}, &GlBindAttribLocation{})
+	registry.Add(binary.ID{0x4d, 0x4d, 0xcc, 0xc0, 0xf3, 0x72, 0x18, 0x65, 0x35, 0x4a, 0x3d, 0x81, 0x0f, 0x14, 0xc5, 0x57, 0x19, 0x6b, 0xd6, 0x32}, &GlBindAttribLocation{})
 	//struct gles.GlBindAttribLocation_In { Program:ProgramId, Location:AttributeLocation, Name:string }
-	binary.Register(binary.ID{0xb0, 0xeb, 0x46, 0xe1, 0x34, 0x2a, 0x20, 0x91, 0x08, 0x7d, 0x98, 0xdc, 0xdc, 0x10, 0xe7, 0x80, 0x73, 0x90, 0x50, 0x0d}, &GlBindAttribLocation_In{})
+	registry.Add(binary.ID{0xb0, 0xeb, 0x46, 0xe1, 0x34, 0x2a, 0x20, 0x91, 0x08, 0x7d, 0x98, 0xdc, 0xdc, 0x10, 0xe7, 0x80, 0x73, 0x90, 0x50, 0x0d}, &GlBindAttribLocation_In{})
 	//struct gles.GlBindAttribLocation_Out { }
-	binary.Register(binary.ID{0xf4, 0xb2, 0xb9, 0xb5, 0xaa, 0x83, 0x38, 0x9f, 0x1d, 0x81, 0x3f, 0xef, 0x6f, 0xb3, 0x54, 0x65, 0x2d, 0x4e, 0x2b, 0x40}, &GlBindAttribLocation_Out{})
+	registry.Add(binary.ID{0xf4, 0xb2, 0xb9, 0xb5, 0xaa, 0x83, 0x38, 0x9f, 0x1d, 0x81, 0x3f, 0xef, 0x6f, 0xb3, 0x54, 0x65, 0x2d, 0x4e, 0x2b, 0x40}, &GlBindAttribLocation_Out{})
 	//struct gles.GlBindBuffer { Context:atom.ContextID, In:GlBindBuffer_In, Out:GlBindBuffer_Out }
-	binary.Register(binary.ID{0x04, 0xf9, 0xa3, 0x6a, 0x38, 0xfe, 0x1f, 0xbf, 0x55, 0x18, 0xb0, 0xba, 0xf8, 0x69, 0x6b, 0x49, 0xa8, 0x22, 0x1a, 0x47}, &GlBindBuffer{})
+	registry.Add(binary.ID{0x04, 0xf9, 0xa3, 0x6a, 0x38, 0xfe, 0x1f, 0xbf, 0x55, 0x18, 0xb0, 0xba, 0xf8, 0x69, 0x6b, 0x49, 0xa8, 0x22, 0x1a, 0x47}, &GlBindBuffer{})
 	//struct gles.GlBindBuffer_In { Target:BufferTarget, Buffer:BufferId }
-	binary.Register(binary.ID{0xa4, 0x3d, 0x66, 0x8d, 0xfc, 0xfd, 0xf7, 0xd9, 0xe8, 0x79, 0x2a, 0xd8, 0x17, 0xab, 0x14, 0x8c, 0xba, 0xe0, 0xef, 0xbc}, &GlBindBuffer_In{})
+	registry.Add(binary.ID{0xa4, 0x3d, 0x66, 0x8d, 0xfc, 0xfd, 0xf7, 0xd9, 0xe8, 0x79, 0x2a, 0xd8, 0x17, 0xab, 0x14, 0x8c, 0xba, 0xe0, 0xef, 0xbc}, &GlBindBuffer_In{})
 	//struct gles.GlBindBuffer_Out { }
-	binary.Register(binary.ID{0x54, 0x5a, 0xd4, 0x6a, 0x91, 0xd3, 0xeb, 0xb3, 0x39, 0x4f, 0x4c, 0xa4, 0xfb, 0x4b, 0x16, 0xd3, 0x67, 0xe9, 0x26, 0x80}, &GlBindBuffer_Out{})
+	registry.Add(binary.ID{0x54, 0x5a, 0xd4, 0x6a, 0x91, 0xd3, 0xeb, 0xb3, 0x39, 0x4f, 0x4c, 0xa4, 0xfb, 0x4b, 0x16, 0xd3, 0x67, 0xe9, 0x26, 0x80}, &GlBindBuffer_Out{})
 	//struct gles.GlBindFramebuffer { Context:atom.ContextID, In:GlBindFramebuffer_In, Out:GlBindFramebuffer_Out }
-	binary.Register(binary.ID{0x45, 0x5e, 0x0d, 0x0a, 0xd7, 0x9b, 0x62, 0x9a, 0x3e, 0x74, 0x15, 0x97, 0xeb, 0x4a, 0x64, 0xe8, 0x40, 0x01, 0x93, 0xa6}, &GlBindFramebuffer{})
+	registry.Add(binary.ID{0x45, 0x5e, 0x0d, 0x0a, 0xd7, 0x9b, 0x62, 0x9a, 0x3e, 0x74, 0x15, 0x97, 0xeb, 0x4a, 0x64, 0xe8, 0x40, 0x01, 0x93, 0xa6}, &GlBindFramebuffer{})
 	//struct gles.GlBindFramebuffer_In { Target:FramebufferTarget, Framebuffer:FramebufferId }
-	binary.Register(binary.ID{0x16, 0x40, 0xcb, 0x37, 0xcf, 0xab, 0x57, 0x07, 0x3f, 0x27, 0x29, 0xbb, 0x87, 0x33, 0x8e, 0xa6, 0xc5, 0x38, 0x5c, 0x8c}, &GlBindFramebuffer_In{})
+	registry.Add(binary.ID{0x16, 0x40, 0xcb, 0x37, 0xcf, 0xab, 0x57, 0x07, 0x3f, 0x27, 0x29, 0xbb, 0x87, 0x33, 0x8e, 0xa6, 0xc5, 0x38, 0x5c, 0x8c}, &GlBindFramebuffer_In{})
 	//struct gles.GlBindFramebuffer_Out { }
-	binary.Register(binary.ID{0x02, 0x0b, 0x94, 0x35, 0xaa, 0x7c, 0xc1, 0x6d, 0xe2, 0xb0, 0xc6, 0xd0, 0xfc, 0x95, 0xdb, 0x7a, 0x1d, 0x1e, 0x3b, 0xfe}, &GlBindFramebuffer_Out{})
+	registry.Add(binary.ID{0x02, 0x0b, 0x94, 0x35, 0xaa, 0x7c, 0xc1, 0x6d, 0xe2, 0xb0, 0xc6, 0xd0, 0xfc, 0x95, 0xdb, 0x7a, 0x1d, 0x1e, 0x3b, 0xfe}, &GlBindFramebuffer_Out{})
 	//struct gles.GlBindRenderbuffer { Context:atom.ContextID, In:GlBindRenderbuffer_In, Out:GlBindRenderbuffer_Out }
-	binary.Register(binary.ID{0x6a, 0x49, 0x21, 0x28, 0x00, 0xb1, 0x82, 0x19, 0x9c, 0x48, 0x1d, 0x42, 0xfc, 0x21, 0x0a, 0x13, 0x2d, 0x0a, 0x43, 0x78}, &GlBindRenderbuffer{})
+	registry.Add(binary.ID{0x6a, 0x49, 0x21, 0x28, 0x00, 0xb1, 0x82, 0x19, 0x9c, 0x48, 0x1d, 0x42, 0xfc, 0x21, 0x0a, 0x13, 0x2d, 0x0a, 0x43, 0x78}, &GlBindRenderbuffer{})
 	//struct gles.GlBindRenderbuffer_In { Target:RenderbufferTarget, Renderbuffer:RenderbufferId }
-	binary.Register(binary.ID{0x28, 0x9f, 0x4d, 0x29, 0x63, 0x95, 0xd6, 0x17, 0xe4, 0xa4, 0x8c, 0x85, 0x85, 0x35, 0x1c, 0x95, 0xe0, 0xc7, 0xcc, 0x4e}, &GlBindRenderbuffer_In{})
+	registry.Add(binary.ID{0x28, 0x9f, 0x4d, 0x29, 0x63, 0x95, 0xd6, 0x17, 0xe4, 0xa4, 0x8c, 0x85, 0x85, 0x35, 0x1c, 0x95, 0xe0, 0xc7, 0xcc, 0x4e}, &GlBindRenderbuffer_In{})
 	//struct gles.GlBindRenderbuffer_Out { }
-	binary.Register(binary.ID{0x40, 0xe7, 0xf3, 0x18, 0x84, 0x4b, 0xd8, 0x23, 0x0b, 0xf1, 0xc8, 0x13, 0x30, 0x61, 0xc9, 0x5c, 0xa5, 0xdd, 0x68, 0xa3}, &GlBindRenderbuffer_Out{})
+	registry.Add(binary.ID{0x40, 0xe7, 0xf3, 0x18, 0x84, 0x4b, 0xd8, 0x23, 0x0b, 0xf1, 0xc8, 0x13, 0x30, 0x61, 0xc9, 0x5c, 0xa5, 0xdd, 0x68, 0xa3}, &GlBindRenderbuffer_Out{})
 	//struct gles.GlBindTexture { Context:atom.ContextID, In:GlBindTexture_In, Out:GlBindTexture_Out }
-	binary.Register(binary.ID{0x4f, 0x7e, 0x50, 0x0c, 0x00, 0xe2, 0x1a, 0x6b, 0x9b, 0x23, 0xdb, 0x7f, 0x9d, 0x66, 0x20, 0x51, 0xb5, 0x0d, 0xd9, 0x4c}, &GlBindTexture{})
+	registry.Add(binary.ID{0x4f, 0x7e, 0x50, 0x0c, 0x00, 0xe2, 0x1a, 0x6b, 0x9b, 0x23, 0xdb, 0x7f, 0x9d, 0x66, 0x20, 0x51, 0xb5, 0x0d, 0xd9, 0x4c}, &GlBindTexture{})
 	//struct gles.GlBindTexture_In { Target:TextureTarget, Texture:TextureId }
-	binary.Register(binary.ID{0x15, 0xf9, 0xb4, 0xe1, 0x29, 0x60, 0x6f, 0xae, 0x94, 0xcd, 0xaf, 0xd2, 0x8d, 0x15, 0x23, 0x9b, 0x5a, 0x62, 0xbf, 0xdd}, &GlBindTexture_In{})
+	registry.Add(binary.ID{0x15, 0xf9, 0xb4, 0xe1, 0x29, 0x60, 0x6f, 0xae, 0x94, 0xcd, 0xaf, 0xd2, 0x8d, 0x15, 0x23, 0x9b, 0x5a, 0x62, 0xbf, 0xdd}, &GlBindTexture_In{})
 	//struct gles.GlBindTexture_Out { }
-	binary.Register(binary.ID{0x2f, 0xc1, 0x37, 0x08, 0xa5, 0x52, 0x3c, 0xab, 0x80, 0x15, 0x19, 0x5e, 0x13, 0x91, 0x7b, 0x34, 0x08, 0xce, 0xed, 0xe2}, &GlBindTexture_Out{})
+	registry.Add(binary.ID{0x2f, 0xc1, 0x37, 0x08, 0xa5, 0x52, 0x3c, 0xab, 0x80, 0x15, 0x19, 0x5e, 0x13, 0x91, 0x7b, 0x34, 0x08, 0xce, 0xed, 0xe2}, &GlBindTexture_Out{})
 	//struct gles.GlBindVertexArrayOES { Context:atom.ContextID, In:GlBindVertexArrayOES_In, Out:GlBindVertexArrayOES_Out }
-	binary.Register(binary.ID{0x6c, 0xe3, 0x2a, 0x80, 0x5f, 0xee, 0x9e, 0x4c, 0xd6, 0xc4, 0x99, 0x26, 0x45, 0xad, 0x81, 0xe6, 0x5d, 0x0f, 0x4f, 0x16}, &GlBindVertexArrayOES{})
+	registry.Add(binary.ID{0x6c, 0xe3, 0x2a, 0x80, 0x5f, 0xee, 0x9e, 0x4c, 0xd6, 0xc4, 0x99, 0x26, 0x45, 0xad, 0x81, 0xe6, 0x5d, 0x0f, 0x4f, 0x16}, &GlBindVertexArrayOES{})
 	//struct gles.GlBindVertexArrayOES_In { Array:VertexArrayId }
-	binary.Register(binary.ID{0xf5, 0x59, 0xda, 0x93, 0xd0, 0x6e, 0x6e, 0xd1, 0x9b, 0x25, 0xb8, 0xc1, 0x57, 0x4d, 0xde, 0x29, 0x07, 0xf8, 0x07, 0xf5}, &GlBindVertexArrayOES_In{})
+	registry.Add(binary.ID{0xf5, 0x59, 0xda, 0x93, 0xd0, 0x6e, 0x6e, 0xd1, 0x9b, 0x25, 0xb8, 0xc1, 0x57, 0x4d, 0xde, 0x29, 0x07, 0xf8, 0x07, 0xf5}, &GlBindVertexArrayOES_In{})
 	//struct gles.GlBindVertexArrayOES_Out { }
-	binary.Register(binary.ID{0x37, 0xc9, 0x28, 0x8a, 0x82, 0x62, 0x34, 0x64, 0x1c, 0x63, 0x11, 0x0d, 0x1a, 0x4b, 0xe6, 0xee, 0xa8, 0xb8, 0x91, 0x4a}, &GlBindVertexArrayOES_Out{})
+	registry.Add(binary.ID{0x37, 0xc9, 0x28, 0x8a, 0x82, 0x62, 0x34, 0x64, 0x1c, 0x63, 0x11, 0x0d, 0x1a, 0x4b, 0xe6, 0xee, 0xa8, 0xb8, 0x91, 0x4a}, &GlBindVertexArrayOES_Out{})
 	//struct gles.GlBlendColor { Context:atom.ContextID, In:GlBlendColor_In, Out:GlBlendColor_Out }
-	binary.Register(binary.ID{0xff, 0x8e, 0x4c, 0x0a, 0xac, 0x2d, 0x4d, 0x7d, 0x95, 0x84, 0xda, 0xc5, 0xbf, 0xed, 0x7d, 0x4c, 0x36, 0xbc, 0xec, 0xda}, &GlBlendColor{})
+	registry.Add(binary.ID{0xff, 0x8e, 0x4c, 0x0a, 0xac, 0x2d, 0x4d, 0x7d, 0x95, 0x84, 0xda, 0xc5, 0xbf, 0xed, 0x7d, 0x4c, 0x36, 0xbc, 0xec, 0xda}, &GlBlendColor{})
 	//struct gles.GlBlendColor_In { Red:float32, Green:float32, Blue:float32, Alpha:float32 }
-	binary.Register(binary.ID{0x55, 0x44, 0xb2, 0xfe, 0x52, 0xf9, 0xd9, 0xa4, 0xbd, 0xee, 0x00, 0xe5, 0x11, 0x17, 0xc4, 0x84, 0xd9, 0xfc, 0x2a, 0xf3}, &GlBlendColor_In{})
+	registry.Add(binary.ID{0x55, 0x44, 0xb2, 0xfe, 0x52, 0xf9, 0xd9, 0xa4, 0xbd, 0xee, 0x00, 0xe5, 0x11, 0x17, 0xc4, 0x84, 0xd9, 0xfc, 0x2a, 0xf3}, &GlBlendColor_In{})
 	//struct gles.GlBlendColor_Out { }
-	binary.Register(binary.ID{0x73, 0xcf, 0xc0, 0x77, 0x0d, 0x4b, 0xc6, 0xa5, 0xc9, 0x94, 0xa2, 0x50, 0x6e, 0x12, 0xb6, 0xa6, 0x71, 0x10, 0x2f, 0xf1}, &GlBlendColor_Out{})
+	registry.Add(binary.ID{0x73, 0xcf, 0xc0, 0x77, 0x0d, 0x4b, 0xc6, 0xa5, 0xc9, 0x94, 0xa2, 0x50, 0x6e, 0x12, 0xb6, 0xa6, 0x71, 0x10, 0x2f, 0xf1}, &GlBlendColor_Out{})
 	//struct gles.GlBlendEquation { Context:atom.ContextID, In:GlBlendEquation_In, Out:GlBlendEquation_Out }
-	binary.Register(binary.ID{0x5c, 0xe3, 0x4d, 0x49, 0xe0, 0xcd, 0x71, 0x94, 0x85, 0x3f, 0x12, 0x99, 0xb3, 0x29, 0x63, 0x67, 0x6b, 0x37, 0x0c, 0x18}, &GlBlendEquation{})
+	registry.Add(binary.ID{0x5c, 0xe3, 0x4d, 0x49, 0xe0, 0xcd, 0x71, 0x94, 0x85, 0x3f, 0x12, 0x99, 0xb3, 0x29, 0x63, 0x67, 0x6b, 0x37, 0x0c, 0x18}, &GlBlendEquation{})
 	//struct gles.GlBlendEquationSeparate { Context:atom.ContextID, In:GlBlendEquationSeparate_In, Out:GlBlendEquationSeparate_Out }
-	binary.Register(binary.ID{0x99, 0xed, 0xd3, 0x73, 0xd0, 0x24, 0xfa, 0x7b, 0xae, 0x1e, 0x40, 0x2d, 0x7d, 0x84, 0xb3, 0xa6, 0xe1, 0x6d, 0x45, 0x4b}, &GlBlendEquationSeparate{})
+	registry.Add(binary.ID{0x99, 0xed, 0xd3, 0x73, 0xd0, 0x24, 0xfa, 0x7b, 0xae, 0x1e, 0x40, 0x2d, 0x7d, 0x84, 0xb3, 0xa6, 0xe1, 0x6d, 0x45, 0x4b}, &GlBlendEquationSeparate{})
 	//struct gles.GlBlendEquationSeparate_In { Rgb:BlendEquation, Alpha:BlendEquation }
-	binary.Register(binary.ID{0xea, 0x65, 0x0d, 0x57, 0x7d, 0xda, 0xc5, 0x33, 0xed, 0x59, 0x0e, 0x67, 0x39, 0x02, 0x6d, 0xfc, 0x05, 0xb8, 0x88, 0x3d}, &GlBlendEquationSeparate_In{})
+	registry.Add(binary.ID{0xea, 0x65, 0x0d, 0x57, 0x7d, 0xda, 0xc5, 0x33, 0xed, 0x59, 0x0e, 0x67, 0x39, 0x02, 0x6d, 0xfc, 0x05, 0xb8, 0x88, 0x3d}, &GlBlendEquationSeparate_In{})
 	//struct gles.GlBlendEquationSeparate_Out { }
-	binary.Register(binary.ID{0x3e, 0xed, 0xb0, 0xdd, 0xb8, 0x74, 0x41, 0x2d, 0xe6, 0x23, 0x27, 0x10, 0x5c, 0x58, 0x79, 0x9a, 0xc1, 0xbc, 0x90, 0x0c}, &GlBlendEquationSeparate_Out{})
+	registry.Add(binary.ID{0x3e, 0xed, 0xb0, 0xdd, 0xb8, 0x74, 0x41, 0x2d, 0xe6, 0x23, 0x27, 0x10, 0x5c, 0x58, 0x79, 0x9a, 0xc1, 0xbc, 0x90, 0x0c}, &GlBlendEquationSeparate_Out{})
 	//struct gles.GlBlendEquation_In { Equation:BlendEquation }
-	binary.Register(binary.ID{0xc4, 0xce, 0x1c, 0x6f, 0xf1, 0x32, 0x71, 0xc9, 0xf4, 0xde, 0xe9, 0x64, 0xc2, 0x45, 0x17, 0x93, 0xe8, 0x1d, 0x24, 0x39}, &GlBlendEquation_In{})
+	registry.Add(binary.ID{0xc4, 0xce, 0x1c, 0x6f, 0xf1, 0x32, 0x71, 0xc9, 0xf4, 0xde, 0xe9, 0x64, 0xc2, 0x45, 0x17, 0x93, 0xe8, 0x1d, 0x24, 0x39}, &GlBlendEquation_In{})
 	//struct gles.GlBlendEquation_Out { }
-	binary.Register(binary.ID{0xb6, 0x11, 0x6d, 0xdb, 0x3b, 0xde, 0x06, 0x25, 0xfc, 0x0a, 0x50, 0x7c, 0xdf, 0xb6, 0xe0, 0xdb, 0x2a, 0x40, 0xf8, 0x24}, &GlBlendEquation_Out{})
+	registry.Add(binary.ID{0xb6, 0x11, 0x6d, 0xdb, 0x3b, 0xde, 0x06, 0x25, 0xfc, 0x0a, 0x50, 0x7c, 0xdf, 0xb6, 0xe0, 0xdb, 0x2a, 0x40, 0xf8, 0x24}, &GlBlendEquation_Out{})
 	//struct gles.GlBlendFunc { Context:atom.ContextID, In:GlBlendFunc_In, Out:GlBlendFunc_Out }
-	binary.Register(binary.ID{0x30, 0x5a, 0x09, 0x0d, 0x29, 0x93, 0xf0, 0xfe, 0x0a, 0x46, 0x56, 0x97, 0x2d, 0x01, 0xd1, 0xa2, 0x9d, 0x39, 0x6a, 0x0c}, &GlBlendFunc{})
+	registry.Add(binary.ID{0x30, 0x5a, 0x09, 0x0d, 0x29, 0x93, 0xf0, 0xfe, 0x0a, 0x46, 0x56, 0x97, 0x2d, 0x01, 0xd1, 0xa2, 0x9d, 0x39, 0x6a, 0x0c}, &GlBlendFunc{})
 	//struct gles.GlBlendFuncSeparate { Context:atom.ContextID, In:GlBlendFuncSeparate_In, Out:GlBlendFuncSeparate_Out }
-	binary.Register(binary.ID{0xf2, 0xa3, 0xbe, 0xe7, 0x4d, 0x35, 0xb7, 0x4f, 0x96, 0x8d, 0x9b, 0x39, 0xc9, 0xa8, 0x0d, 0x4d, 0x45, 0x13, 0xdc, 0xfd}, &GlBlendFuncSeparate{})
+	registry.Add(binary.ID{0xf2, 0xa3, 0xbe, 0xe7, 0x4d, 0x35, 0xb7, 0x4f, 0x96, 0x8d, 0x9b, 0x39, 0xc9, 0xa8, 0x0d, 0x4d, 0x45, 0x13, 0xdc, 0xfd}, &GlBlendFuncSeparate{})
 	//struct gles.GlBlendFuncSeparate_In { SrcFactorRgb:BlendFactor, DstFactorRgb:BlendFactor, SrcFactorAlpha:BlendFactor, DstFactorAlpha:BlendFactor }
-	binary.Register(binary.ID{0x93, 0xe5, 0xba, 0x8d, 0xb3, 0xdc, 0x52, 0x57, 0x85, 0x05, 0x4e, 0x88, 0x5b, 0x85, 0x12, 0xd3, 0x8e, 0x77, 0x6f, 0x8e}, &GlBlendFuncSeparate_In{})
+	registry.Add(binary.ID{0x93, 0xe5, 0xba, 0x8d, 0xb3, 0xdc, 0x52, 0x57, 0x85, 0x05, 0x4e, 0x88, 0x5b, 0x85, 0x12, 0xd3, 0x8e, 0x77, 0x6f, 0x8e}, &GlBlendFuncSeparate_In{})
 	//struct gles.GlBlendFuncSeparate_Out { }
-	binary.Register(binary.ID{0x6b, 0x33, 0xe3, 0x2c, 0x30, 0xed, 0xba, 0xb6, 0xdf, 0x22, 0x52, 0x3f, 0xd9, 0xeb, 0xd5, 0x52, 0x9f, 0x98, 0x14, 0x3a}, &GlBlendFuncSeparate_Out{})
+	registry.Add(binary.ID{0x6b, 0x33, 0xe3, 0x2c, 0x30, 0xed, 0xba, 0xb6, 0xdf, 0x22, 0x52, 0x3f, 0xd9, 0xeb, 0xd5, 0x52, 0x9f, 0x98, 0x14, 0x3a}, &GlBlendFuncSeparate_Out{})
 	//struct gles.GlBlendFunc_In { SrcFactor:BlendFactor, DstFactor:BlendFactor }
-	binary.Register(binary.ID{0x1b, 0x2a, 0x1e, 0xf5, 0x9e, 0xc3, 0x31, 0x59, 0x0c, 0x92, 0x4f, 0x6d, 0xde, 0xa0, 0xbc, 0xec, 0x3a, 0x6e, 0xcc, 0x59}, &GlBlendFunc_In{})
+	registry.Add(binary.ID{0x1b, 0x2a, 0x1e, 0xf5, 0x9e, 0xc3, 0x31, 0x59, 0x0c, 0x92, 0x4f, 0x6d, 0xde, 0xa0, 0xbc, 0xec, 0x3a, 0x6e, 0xcc, 0x59}, &GlBlendFunc_In{})
 	//struct gles.GlBlendFunc_Out { }
-	binary.Register(binary.ID{0x3c, 0x60, 0xab, 0xf6, 0x86, 0xd5, 0xd6, 0xa6, 0x26, 0xd0, 0x5b, 0xe3, 0x1e, 0x9c, 0xa5, 0x35, 0x20, 0x77, 0x3e, 0xb6}, &GlBlendFunc_Out{})
+	registry.Add(binary.ID{0x3c, 0x60, 0xab, 0xf6, 0x86, 0xd5, 0xd6, 0xa6, 0x26, 0xd0, 0x5b, 0xe3, 0x1e, 0x9c, 0xa5, 0x35, 0x20, 0x77, 0x3e, 0xb6}, &GlBlendFunc_Out{})
 	//struct gles.GlBlitFramebuffer { Context:atom.ContextID, In:GlBlitFramebuffer_In, Out:GlBlitFramebuffer_Out }
-	binary.Register(binary.ID{0x60, 0x62, 0x3a, 0x7b, 0x9c, 0xef, 0x48, 0x65, 0x93, 0xa9, 0x41, 0x54, 0x5c, 0x52, 0x01, 0x20, 0x5e, 0x78, 0x51, 0x28}, &GlBlitFramebuffer{})
+	registry.Add(binary.ID{0x60, 0x62, 0x3a, 0x7b, 0x9c, 0xef, 0x48, 0x65, 0x93, 0xa9, 0x41, 0x54, 0x5c, 0x52, 0x01, 0x20, 0x5e, 0x78, 0x51, 0x28}, &GlBlitFramebuffer{})
 	//struct gles.GlBlitFramebuffer_In { SrcX0:int32, SrcY0:int32, SrcX1:int32, SrcY1:int32, DstX0:int32, DstY0:int32, DstX1:int32, DstY1:int32, Mask:ClearMask, Filter:TextureFilterMode }
-	binary.Register(binary.ID{0x94, 0xd1, 0x01, 0x00, 0x39, 0x91, 0x1c, 0xab, 0x1e, 0x2b, 0x0c, 0x68, 0xa2, 0x25, 0x62, 0x1d, 0x84, 0xdc, 0xf6, 0x34}, &GlBlitFramebuffer_In{})
+	registry.Add(binary.ID{0x94, 0xd1, 0x01, 0x00, 0x39, 0x91, 0x1c, 0xab, 0x1e, 0x2b, 0x0c, 0x68, 0xa2, 0x25, 0x62, 0x1d, 0x84, 0xdc, 0xf6, 0x34}, &GlBlitFramebuffer_In{})
 	//struct gles.GlBlitFramebuffer_Out { }
-	binary.Register(binary.ID{0xd0, 0x97, 0x78, 0x16, 0x0e, 0x88, 0x26, 0xe4, 0x37, 0xae, 0xcd, 0x89, 0x0a, 0x5c, 0xf0, 0xae, 0xb5, 0x47, 0x81, 0x3a}, &GlBlitFramebuffer_Out{})
+	registry.Add(binary.ID{0xd0, 0x97, 0x78, 0x16, 0x0e, 0x88, 0x26, 0xe4, 0x37, 0xae, 0xcd, 0x89, 0x0a, 0x5c, 0xf0, 0xae, 0xb5, 0x47, 0x81, 0x3a}, &GlBlitFramebuffer_Out{})
 	//struct gles.GlBufferData { Context:atom.ContextID, In:GlBufferData_In, Out:GlBufferData_Out }
-	binary.Register(binary.ID{0x37, 0x6c, 0xd2, 0x81, 0x3d, 0x38, 0xd9, 0xb7, 0xbd, 0xf5, 0x06, 0xe3, 0xc5, 0x11, 0x1b, 0x09, 0x58, 0xe4, 0x78, 0x06}, &GlBufferData{})
+	registry.Add(binary.ID{0x37, 0x6c, 0xd2, 0x81, 0x3d, 0x38, 0xd9, 0xb7, 0xbd, 0xf5, 0x06, 0xe3, 0xc5, 0x11, 0x1b, 0x09, 0x58, 0xe4, 0x78, 0x06}, &GlBufferData{})
 	//struct gles.GlBufferData_In { Target:BufferTarget, Size:int32, Data:BufferDataPointer, Usage:BufferUsage }
-	binary.Register(binary.ID{0x22, 0x84, 0x15, 0x68, 0x11, 0x6b, 0x6a, 0x37, 0x72, 0xca, 0x38, 0xe1, 0x96, 0x33, 0x29, 0x4e, 0x32, 0xcb, 0x0d, 0x09}, &GlBufferData_In{})
+	registry.Add(binary.ID{0x22, 0x84, 0x15, 0x68, 0x11, 0x6b, 0x6a, 0x37, 0x72, 0xca, 0x38, 0xe1, 0x96, 0x33, 0x29, 0x4e, 0x32, 0xcb, 0x0d, 0x09}, &GlBufferData_In{})
 	//struct gles.GlBufferData_Out { }
-	binary.Register(binary.ID{0xdd, 0xa0, 0x15, 0x18, 0x04, 0x81, 0xda, 0x77, 0x64, 0xdc, 0x92, 0x13, 0x30, 0xa6, 0xff, 0xa9, 0x58, 0x4b, 0xdc, 0x32}, &GlBufferData_Out{})
+	registry.Add(binary.ID{0xdd, 0xa0, 0x15, 0x18, 0x04, 0x81, 0xda, 0x77, 0x64, 0xdc, 0x92, 0x13, 0x30, 0xa6, 0xff, 0xa9, 0x58, 0x4b, 0xdc, 0x32}, &GlBufferData_Out{})
 	//struct gles.GlBufferSubData { Context:atom.ContextID, In:GlBufferSubData_In, Out:GlBufferSubData_Out }
-	binary.Register(binary.ID{0xb1, 0xd6, 0xb4, 0x8d, 0xd9, 0xb6, 0x4f, 0x7d, 0x7d, 0x71, 0x5b, 0x64, 0x23, 0x50, 0xc2, 0x82, 0x96, 0x2a, 0xd8, 0x80}, &GlBufferSubData{})
+	registry.Add(binary.ID{0xb1, 0xd6, 0xb4, 0x8d, 0xd9, 0xb6, 0x4f, 0x7d, 0x7d, 0x71, 0x5b, 0x64, 0x23, 0x50, 0xc2, 0x82, 0x96, 0x2a, 0xd8, 0x80}, &GlBufferSubData{})
 	//struct gles.GlBufferSubData_In { Target:BufferTarget, Offset:int32, Size:int32, Data:memory.Pointer }
-	binary.Register(binary.ID{0xdf, 0xc7, 0x09, 0xdf, 0x87, 0x92, 0xa2, 0xa2, 0x77, 0x46, 0xb5, 0xb0, 0xa7, 0xa0, 0xd0, 0x39, 0xf5, 0x6a, 0x35, 0x98}, &GlBufferSubData_In{})
+	registry.Add(binary.ID{0xdf, 0xc7, 0x09, 0xdf, 0x87, 0x92, 0xa2, 0xa2, 0x77, 0x46, 0xb5, 0xb0, 0xa7, 0xa0, 0xd0, 0x39, 0xf5, 0x6a, 0x35, 0x98}, &GlBufferSubData_In{})
 	//struct gles.GlBufferSubData_Out { }
-	binary.Register(binary.ID{0x70, 0x57, 0x9b, 0x5a, 0xe1, 0xf1, 0x08, 0x1f, 0xa0, 0xf1, 0xed, 0x6b, 0x6a, 0x38, 0xbd, 0x5a, 0x2c, 0xd9, 0x76, 0xe6}, &GlBufferSubData_Out{})
+	registry.Add(binary.ID{0x70, 0x57, 0x9b, 0x5a, 0xe1, 0xf1, 0x08, 0x1f, 0xa0, 0xf1, 0xed, 0x6b, 0x6a, 0x38, 0xbd, 0x5a, 0x2c, 0xd9, 0x76, 0xe6}, &GlBufferSubData_Out{})
 	//struct gles.GlCheckFramebufferStatus { Context:atom.ContextID, In:GlCheckFramebufferStatus_In, Out:GlCheckFramebufferStatus_Out }
-	binary.Register(binary.ID{0xcf, 0x74, 0xb8, 0x1a, 0x0e, 0xf1, 0x0e, 0xfc, 0x62, 0x60, 0x9c, 0x92, 0x93, 0xe9, 0x51, 0x50, 0xa9, 0xa7, 0x2b, 0x17}, &GlCheckFramebufferStatus{})
+	registry.Add(binary.ID{0xcf, 0x74, 0xb8, 0x1a, 0x0e, 0xf1, 0x0e, 0xfc, 0x62, 0x60, 0x9c, 0x92, 0x93, 0xe9, 0x51, 0x50, 0xa9, 0xa7, 0x2b, 0x17}, &GlCheckFramebufferStatus{})
 	//struct gles.GlCheckFramebufferStatus_In { Target:FramebufferTarget }
-	binary.Register(binary.ID{0x6d, 0xb4, 0xce, 0x16, 0x32, 0xce, 0x6a, 0x9c, 0x5a, 0xab, 0xd1, 0x47, 0xc7, 0x01, 0xd8, 0x07, 0xec, 0x64, 0x0d, 0x80}, &GlCheckFramebufferStatus_In{})
+	registry.Add(binary.ID{0x6d, 0xb4, 0xce, 0x16, 0x32, 0xce, 0x6a, 0x9c, 0x5a, 0xab, 0xd1, 0x47, 0xc7, 0x01, 0xd8, 0x07, 0xec, 0x64, 0x0d, 0x80}, &GlCheckFramebufferStatus_In{})
 	//struct gles.GlCheckFramebufferStatus_Out { Result:FramebufferStatus }
-	binary.Register(binary.ID{0x51, 0x3a, 0x70, 0x25, 0x9d, 0x84, 0xeb, 0x34, 0xd2, 0x65, 0xd9, 0xd9, 0xad, 0x72, 0x68, 0xa2, 0x04, 0xbf, 0x34, 0x4a}, &GlCheckFramebufferStatus_Out{})
+	registry.Add(binary.ID{0x51, 0x3a, 0x70, 0x25, 0x9d, 0x84, 0xeb, 0x34, 0xd2, 0x65, 0xd9, 0xd9, 0xad, 0x72, 0x68, 0xa2, 0x04, 0xbf, 0x34, 0x4a}, &GlCheckFramebufferStatus_Out{})
 	//struct gles.GlClear { Context:atom.ContextID, In:GlClear_In, Out:GlClear_Out }
-	binary.Register(binary.ID{0x1c, 0x2c, 0xd9, 0x74, 0x8a, 0x49, 0xbd, 0xf7, 0x6a, 0xbd, 0x76, 0x05, 0xa7, 0x84, 0x5b, 0xf1, 0x0a, 0x0b, 0x31, 0xdb}, &GlClear{})
+	registry.Add(binary.ID{0x1c, 0x2c, 0xd9, 0x74, 0x8a, 0x49, 0xbd, 0xf7, 0x6a, 0xbd, 0x76, 0x05, 0xa7, 0x84, 0x5b, 0xf1, 0x0a, 0x0b, 0x31, 0xdb}, &GlClear{})
 	//struct gles.GlClearColor { Context:atom.ContextID, In:GlClearColor_In, Out:GlClearColor_Out }
-	binary.Register(binary.ID{0x1c, 0xdc, 0x34, 0xa2, 0xd2, 0x3f, 0x17, 0xa8, 0xb9, 0xac, 0xe0, 0x2c, 0xb8, 0x23, 0x01, 0x5c, 0xd1, 0xc6, 0xa2, 0xe3}, &GlClearColor{})
+	registry.Add(binary.ID{0x1c, 0xdc, 0x34, 0xa2, 0xd2, 0x3f, 0x17, 0xa8, 0xb9, 0xac, 0xe0, 0x2c, 0xb8, 0x23, 0x01, 0x5c, 0xd1, 0xc6, 0xa2, 0xe3}, &GlClearColor{})
 	//struct gles.GlClearColor_In { R:float32, G:float32, B:float32, A:float32 }
-	binary.Register(binary.ID{0x28, 0x7d, 0xcf, 0xd7, 0xf5, 0xef, 0x08, 0xcc, 0x12, 0xb5, 0xe1, 0xf9, 0xc7, 0x44, 0x27, 0x99, 0xe0, 0x01, 0x2a, 0xee}, &GlClearColor_In{})
+	registry.Add(binary.ID{0x28, 0x7d, 0xcf, 0xd7, 0xf5, 0xef, 0x08, 0xcc, 0x12, 0xb5, 0xe1, 0xf9, 0xc7, 0x44, 0x27, 0x99, 0xe0, 0x01, 0x2a, 0xee}, &GlClearColor_In{})
 	//struct gles.GlClearColor_Out { }
-	binary.Register(binary.ID{0xb2, 0xc4, 0xc2, 0x40, 0x92, 0x44, 0x7e, 0xcf, 0x15, 0x57, 0xe4, 0xc8, 0x38, 0xdb, 0xa2, 0xbd, 0x11, 0x69, 0x73, 0xfa}, &GlClearColor_Out{})
+	registry.Add(binary.ID{0xb2, 0xc4, 0xc2, 0x40, 0x92, 0x44, 0x7e, 0xcf, 0x15, 0x57, 0xe4, 0xc8, 0x38, 0xdb, 0xa2, 0xbd, 0x11, 0x69, 0x73, 0xfa}, &GlClearColor_Out{})
 	//struct gles.GlClearDepthf { Context:atom.ContextID, In:GlClearDepthf_In, Out:GlClearDepthf_Out }
-	binary.Register(binary.ID{0x59, 0xd3, 0xbb, 0x0f, 0x52, 0xc2, 0x9e, 0xa1, 0x20, 0x09, 0xa0, 0x1e, 0x8a, 0x7f, 0x36, 0x1b, 0xeb, 0xc1, 0x51, 0xef}, &GlClearDepthf{})
+	registry.Add(binary.ID{0x59, 0xd3, 0xbb, 0x0f, 0x52, 0xc2, 0x9e, 0xa1, 0x20, 0x09, 0xa0, 0x1e, 0x8a, 0x7f, 0x36, 0x1b, 0xeb, 0xc1, 0x51, 0xef}, &GlClearDepthf{})
 	//struct gles.GlClearDepthf_In { Depth:float32 }
-	binary.Register(binary.ID{0x45, 0xe3, 0x7d, 0x9f, 0x3c, 0x23, 0x47, 0xb5, 0x97, 0x61, 0x61, 0x0b, 0xb6, 0x4d, 0x3a, 0x0f, 0xdc, 0x06, 0xb2, 0x02}, &GlClearDepthf_In{})
+	registry.Add(binary.ID{0x45, 0xe3, 0x7d, 0x9f, 0x3c, 0x23, 0x47, 0xb5, 0x97, 0x61, 0x61, 0x0b, 0xb6, 0x4d, 0x3a, 0x0f, 0xdc, 0x06, 0xb2, 0x02}, &GlClearDepthf_In{})
 	//struct gles.GlClearDepthf_Out { }
-	binary.Register(binary.ID{0xe0, 0x69, 0xcf, 0xec, 0xc2, 0xf4, 0x8a, 0x4b, 0x80, 0xc0, 0x3b, 0x25, 0x14, 0x02, 0x80, 0xa3, 0x6c, 0x70, 0xae, 0xdf}, &GlClearDepthf_Out{})
+	registry.Add(binary.ID{0xe0, 0x69, 0xcf, 0xec, 0xc2, 0xf4, 0x8a, 0x4b, 0x80, 0xc0, 0x3b, 0x25, 0x14, 0x02, 0x80, 0xa3, 0x6c, 0x70, 0xae, 0xdf}, &GlClearDepthf_Out{})
 	//struct gles.GlClearStencil { Context:atom.ContextID, In:GlClearStencil_In, Out:GlClearStencil_Out }
-	binary.Register(binary.ID{0xc0, 0xa9, 0x89, 0x1c, 0x3c, 0xfc, 0x04, 0x5e, 0x42, 0xea, 0xc4, 0x18, 0xae, 0x58, 0x49, 0x21, 0x6c, 0x17, 0x7d, 0xec}, &GlClearStencil{})
+	registry.Add(binary.ID{0xc0, 0xa9, 0x89, 0x1c, 0x3c, 0xfc, 0x04, 0x5e, 0x42, 0xea, 0xc4, 0x18, 0xae, 0x58, 0x49, 0x21, 0x6c, 0x17, 0x7d, 0xec}, &GlClearStencil{})
 	//struct gles.GlClearStencil_In { Stencil:int32 }
-	binary.Register(binary.ID{0x85, 0x11, 0x44, 0x32, 0x62, 0xe2, 0x42, 0xc6, 0x51, 0xb5, 0x16, 0xd0, 0xc8, 0xfb, 0x17, 0xe8, 0xe6, 0x6a, 0xfd, 0xff}, &GlClearStencil_In{})
+	registry.Add(binary.ID{0x85, 0x11, 0x44, 0x32, 0x62, 0xe2, 0x42, 0xc6, 0x51, 0xb5, 0x16, 0xd0, 0xc8, 0xfb, 0x17, 0xe8, 0xe6, 0x6a, 0xfd, 0xff}, &GlClearStencil_In{})
 	//struct gles.GlClearStencil_Out { }
-	binary.Register(binary.ID{0xc1, 0x52, 0xb7, 0x2c, 0x33, 0x61, 0x2d, 0xfe, 0xcb, 0x8c, 0xb7, 0x1d, 0x49, 0x8e, 0x3e, 0xe0, 0xcc, 0x8d, 0x49, 0x59}, &GlClearStencil_Out{})
+	registry.Add(binary.ID{0xc1, 0x52, 0xb7, 0x2c, 0x33, 0x61, 0x2d, 0xfe, 0xcb, 0x8c, 0xb7, 0x1d, 0x49, 0x8e, 0x3e, 0xe0, 0xcc, 0x8d, 0x49, 0x59}, &GlClearStencil_Out{})
 	//struct gles.GlClear_In { Mask:ClearMask }
-	binary.Register(binary.ID{0x69, 0x33, 0xf7, 0x15, 0xa2, 0x71, 0xb7, 0xf9, 0xac, 0x95, 0x60, 0x76, 0xf4, 0x69, 0xb3, 0x36, 0xf8, 0x95, 0x38, 0xf7}, &GlClear_In{})
+	registry.Add(binary.ID{0x69, 0x33, 0xf7, 0x15, 0xa2, 0x71, 0xb7, 0xf9, 0xac, 0x95, 0x60, 0x76, 0xf4, 0x69, 0xb3, 0x36, 0xf8, 0x95, 0x38, 0xf7}, &GlClear_In{})
 	//struct gles.GlClear_Out { }
-	binary.Register(binary.ID{0x8f, 0x74, 0xb9, 0x4e, 0xd6, 0x06, 0xdd, 0xda, 0x6d, 0xd5, 0x97, 0x08, 0x7b, 0xde, 0x2a, 0x16, 0x36, 0xb7, 0x7c, 0xde}, &GlClear_Out{})
+	registry.Add(binary.ID{0x8f, 0x74, 0xb9, 0x4e, 0xd6, 0x06, 0xdd, 0xda, 0x6d, 0xd5, 0x97, 0x08, 0x7b, 0xde, 0x2a, 0x16, 0x36, 0xb7, 0x7c, 0xde}, &GlClear_Out{})
 	//struct gles.GlColorMask { Context:atom.ContextID, In:GlColorMask_In, Out:GlColorMask_Out }
-	binary.Register(binary.ID{0xa2, 0xe1, 0xcc, 0x21, 0xa0, 0xb0, 0x53, 0x2e, 0xf4, 0xc7, 0xa5, 0x5c, 0x08, 0x28, 0x1a, 0x7d, 0x34, 0xd5, 0x06, 0x14}, &GlColorMask{})
+	registry.Add(binary.ID{0xa2, 0xe1, 0xcc, 0x21, 0xa0, 0xb0, 0x53, 0x2e, 0xf4, 0xc7, 0xa5, 0x5c, 0x08, 0x28, 0x1a, 0x7d, 0x34, 0xd5, 0x06, 0x14}, &GlColorMask{})
 	//struct gles.GlColorMask_In { Red:bool, Green:bool, Blue:bool, Alpha:bool }
-	binary.Register(binary.ID{0xba, 0x9f, 0xdb, 0xed, 0xc0, 0xfc, 0xfe, 0xd7, 0x97, 0xc0, 0xb1, 0x51, 0xe4, 0xfe, 0x08, 0x81, 0x82, 0xbc, 0xa3, 0x5b}, &GlColorMask_In{})
+	registry.Add(binary.ID{0xba, 0x9f, 0xdb, 0xed, 0xc0, 0xfc, 0xfe, 0xd7, 0x97, 0xc0, 0xb1, 0x51, 0xe4, 0xfe, 0x08, 0x81, 0x82, 0xbc, 0xa3, 0x5b}, &GlColorMask_In{})
 	//struct gles.GlColorMask_Out { }
-	binary.Register(binary.ID{0x87, 0xfb, 0xe2, 0x7e, 0x9f, 0x74, 0x6a, 0xad, 0x7d, 0x9f, 0x60, 0x6f, 0x59, 0x77, 0x16, 0x50, 0xb8, 0xe0, 0x64, 0xc3}, &GlColorMask_Out{})
+	registry.Add(binary.ID{0x87, 0xfb, 0xe2, 0x7e, 0x9f, 0x74, 0x6a, 0xad, 0x7d, 0x9f, 0x60, 0x6f, 0x59, 0x77, 0x16, 0x50, 0xb8, 0xe0, 0x64, 0xc3}, &GlColorMask_Out{})
 	//struct gles.GlCompileShader { Context:atom.ContextID, In:GlCompileShader_In, Out:GlCompileShader_Out }
-	binary.Register(binary.ID{0x61, 0xde, 0x1e, 0xa8, 0xcf, 0x20, 0xf6, 0xfa, 0x33, 0x10, 0x68, 0xdd, 0x20, 0x1f, 0x90, 0x00, 0x77, 0x8d, 0x32, 0x06}, &GlCompileShader{})
+	registry.Add(binary.ID{0x61, 0xde, 0x1e, 0xa8, 0xcf, 0x20, 0xf6, 0xfa, 0x33, 0x10, 0x68, 0xdd, 0x20, 0x1f, 0x90, 0x00, 0x77, 0x8d, 0x32, 0x06}, &GlCompileShader{})
 	//struct gles.GlCompileShader_In { Shader:ShaderId }
-	binary.Register(binary.ID{0x94, 0x56, 0x07, 0x9d, 0x9e, 0x4d, 0x6e, 0x24, 0x88, 0x09, 0x4c, 0xef, 0xd8, 0x91, 0x53, 0x5b, 0x34, 0x6d, 0x33, 0xfb}, &GlCompileShader_In{})
+	registry.Add(binary.ID{0x94, 0x56, 0x07, 0x9d, 0x9e, 0x4d, 0x6e, 0x24, 0x88, 0x09, 0x4c, 0xef, 0xd8, 0x91, 0x53, 0x5b, 0x34, 0x6d, 0x33, 0xfb}, &GlCompileShader_In{})
 	//struct gles.GlCompileShader_Out { }
-	binary.Register(binary.ID{0xf1, 0x34, 0xca, 0xca, 0x47, 0xbe, 0xb8, 0xdc, 0x42, 0x9d, 0x1a, 0xbb, 0xfd, 0x0f, 0x15, 0xc7, 0xa9, 0x4c, 0xa8, 0xb2}, &GlCompileShader_Out{})
+	registry.Add(binary.ID{0xf1, 0x34, 0xca, 0xca, 0x47, 0xbe, 0xb8, 0xdc, 0x42, 0x9d, 0x1a, 0xbb, 0xfd, 0x0f, 0x15, 0xc7, 0xa9, 0x4c, 0xa8, 0xb2}, &GlCompileShader_Out{})
 	//struct gles.GlCompressedTexImage2D { Context:atom.ContextID, In:GlCompressedTexImage2D_In, Out:GlCompressedTexImage2D_Out }
-	binary.Register(binary.ID{0x20, 0xcf, 0xa4, 0xb1, 0x30, 0x52, 0xee, 0x3f, 0xfd, 0xef, 0xb8, 0x5f, 0x80, 0xa6, 0xcc, 0x6d, 0x2b, 0xd0, 0x13, 0xd9}, &GlCompressedTexImage2D{})
+	registry.Add(binary.ID{0x20, 0xcf, 0xa4, 0xb1, 0x30, 0x52, 0xee, 0x3f, 0xfd, 0xef, 0xb8, 0x5f, 0x80, 0xa6, 0xcc, 0x6d, 0x2b, 0xd0, 0x13, 0xd9}, &GlCompressedTexImage2D{})
 	//struct gles.GlCompressedTexImage2D_In { Target:TextureImageTarget, Level:int32, Format:CompressedTexelFormat, Width:int32, Height:int32, Border:int32, ImageSize:int32, Data:TexturePointer }
-	binary.Register(binary.ID{0x5d, 0xdb, 0xef, 0x96, 0x0d, 0x23, 0x30, 0x4b, 0x62, 0x9a, 0x3c, 0xeb, 0x71, 0x0f, 0xc5, 0xba, 0x98, 0x85, 0xf9, 0x27}, &GlCompressedTexImage2D_In{})
+	registry.Add(binary.ID{0x5d, 0xdb, 0xef, 0x96, 0x0d, 0x23, 0x30, 0x4b, 0x62, 0x9a, 0x3c, 0xeb, 0x71, 0x0f, 0xc5, 0xba, 0x98, 0x85, 0xf9, 0x27}, &GlCompressedTexImage2D_In{})
 	//struct gles.GlCompressedTexImage2D_Out { }
-	binary.Register(binary.ID{0x30, 0x68, 0xe5, 0xf7, 0x79, 0xd3, 0x6e, 0x02, 0x40, 0xf4, 0xf5, 0x5f, 0xe0, 0x0b, 0x31, 0xb5, 0x1a, 0x77, 0x7e, 0x3f}, &GlCompressedTexImage2D_Out{})
+	registry.Add(binary.ID{0x30, 0x68, 0xe5, 0xf7, 0x79, 0xd3, 0x6e, 0x02, 0x40, 0xf4, 0xf5, 0x5f, 0xe0, 0x0b, 0x31, 0xb5, 0x1a, 0x77, 0x7e, 0x3f}, &GlCompressedTexImage2D_Out{})
 	//struct gles.GlCompressedTexSubImage2D { Context:atom.ContextID, In:GlCompressedTexSubImage2D_In, Out:GlCompressedTexSubImage2D_Out }
-	binary.Register(binary.ID{0x7c, 0xb0, 0xba, 0xe1, 0xa8, 0x34, 0x4c, 0xbc, 0xae, 0xa8, 0x43, 0x8f, 0x0c, 0x5a, 0x42, 0x06, 0x57, 0xcd, 0xfa, 0x34}, &GlCompressedTexSubImage2D{})
+	registry.Add(binary.ID{0x7c, 0xb0, 0xba, 0xe1, 0xa8, 0x34, 0x4c, 0xbc, 0xae, 0xa8, 0x43, 0x8f, 0x0c, 0x5a, 0x42, 0x06, 0x57, 0xcd, 0xfa, 0x34}, &GlCompressedTexSubImage2D{})
 	//struct gles.GlCompressedTexSubImage2D_In { Target:TextureImageTarget, Level:int32, Xoffset:int32, Yoffset:int32, Width:int32, Height:int32, Format:CompressedTexelFormat, ImageSize:int32, Data:TexturePointer }
-	binary.Register(binary.ID{0xb8, 0x49, 0x01, 0xe6, 0xf9, 0x08, 0x57, 0x75, 0x20, 0xf3, 0x62, 0x2d, 0x0c, 0xc4, 0x19, 0xb8, 0x20, 0xe2, 0xdf, 0x79}, &GlCompressedTexSubImage2D_In{})
+	registry.Add(binary.ID{0xb8, 0x49, 0x01, 0xe6, 0xf9, 0x08, 0x57, 0x75, 0x20, 0xf3, 0x62, 0x2d, 0x0c, 0xc4, 0x19, 0xb8, 0x20, 0xe2, 0xdf, 0x79}, &GlCompressedTexSubImage2D_In{})
 	//struct gles.GlCompressedTexSubImage2D_Out { }
-	binary.Register(binary.ID{0xfe, 0x05, 0xe3, 0x2d, 0x63, 0x60, 0x1b, 0x81, 0xa1, 0xea, 0x6c, 0x10, 0x5f, 0x96, 0xde, 0x00, 0x6d, 0x48, 0x53, 0x87}, &GlCompressedTexSubImage2D_Out{})
+	registry.Add(binary.ID{0xfe, 0x05, 0xe3, 0x2d, 0x63, 0x60, 0x1b, 0x81, 0xa1, 0xea, 0x6c, 0x10, 0x5f, 0x96, 0xde, 0x00, 0x6d, 0x48, 0x53, 0x87}, &GlCompressedTexSubImage2D_Out{})
 	//struct gles.GlCopyTexImage2D { Context:atom.ContextID, In:GlCopyTexImage2D_In, Out:GlCopyTexImage2D_Out }
-	binary.Register(binary.ID{0x85, 0x1a, 0x8a, 0x52, 0xe1, 0x58, 0x27, 0x75, 0x6b, 0x54, 0x10, 0x10, 0x0c, 0x76, 0xbc, 0xe4, 0x7a, 0x35, 0x01, 0x0b}, &GlCopyTexImage2D{})
+	registry.Add(binary.ID{0x85, 0x1a, 0x8a, 0x52, 0xe1, 0x58, 0x27, 0x75, 0x6b, 0x54, 0x10, 0x10, 0x0c, 0x76, 0xbc, 0xe4, 0x7a, 0x35, 0x01, 0x0b}, &GlCopyTexImage2D{})
 	//struct gles.GlCopyTexImage2D_In { Target:TextureImageTarget, Level:int32, Format:TexelFormat, X:int32, Y:int32, Width:int32, Height:int32, Border:int32 }
-	binary.Register(binary.ID{0x2b, 0x4a, 0xed, 0xbd, 0xbd, 0xf7, 0x6c, 0xb7, 0x3d, 0x8b, 0xac, 0x87, 0x9a, 0x94, 0xc5, 0xe5, 0x14, 0x59, 0xf9, 0xd6}, &GlCopyTexImage2D_In{})
+	registry.Add(binary.ID{0x2b, 0x4a, 0xed, 0xbd, 0xbd, 0xf7, 0x6c, 0xb7, 0x3d, 0x8b, 0xac, 0x87, 0x9a, 0x94, 0xc5, 0xe5, 0x14, 0x59, 0xf9, 0xd6}, &GlCopyTexImage2D_In{})
 	//struct gles.GlCopyTexImage2D_Out { }
-	binary.Register(binary.ID{0x95, 0xd4, 0xb9, 0x88, 0x50, 0xa7, 0x37, 0x48, 0x94, 0xcb, 0x8f, 0xb1, 0x8c, 0xc5, 0x35, 0x45, 0xcb, 0x11, 0x91, 0xb9}, &GlCopyTexImage2D_Out{})
+	registry.Add(binary.ID{0x95, 0xd4, 0xb9, 0x88, 0x50, 0xa7, 0x37, 0x48, 0x94, 0xcb, 0x8f, 0xb1, 0x8c, 0xc5, 0x35, 0x45, 0xcb, 0x11, 0x91, 0xb9}, &GlCopyTexImage2D_Out{})
 	//struct gles.GlCopyTexSubImage2D { Context:atom.ContextID, In:GlCopyTexSubImage2D_In, Out:GlCopyTexSubImage2D_Out }
-	binary.Register(binary.ID{0x7b, 0x5e, 0x9f, 0xe0, 0x10, 0x48, 0x6c, 0x62, 0xb2, 0x72, 0xfb, 0xf1, 0x64, 0x4b, 0x83, 0x92, 0xb0, 0x18, 0x0c, 0x7c}, &GlCopyTexSubImage2D{})
+	registry.Add(binary.ID{0x7b, 0x5e, 0x9f, 0xe0, 0x10, 0x48, 0x6c, 0x62, 0xb2, 0x72, 0xfb, 0xf1, 0x64, 0x4b, 0x83, 0x92, 0xb0, 0x18, 0x0c, 0x7c}, &GlCopyTexSubImage2D{})
 	//struct gles.GlCopyTexSubImage2D_In { Target:TextureImageTarget, Level:int32, Xoffset:int32, Yoffset:int32, X:int32, Y:int32, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x6d, 0xc2, 0x64, 0x29, 0x26, 0x63, 0x69, 0x07, 0xd9, 0x27, 0x59, 0xab, 0xcb, 0x63, 0x54, 0x56, 0x8f, 0x0b, 0xa8, 0xb8}, &GlCopyTexSubImage2D_In{})
+	registry.Add(binary.ID{0x6d, 0xc2, 0x64, 0x29, 0x26, 0x63, 0x69, 0x07, 0xd9, 0x27, 0x59, 0xab, 0xcb, 0x63, 0x54, 0x56, 0x8f, 0x0b, 0xa8, 0xb8}, &GlCopyTexSubImage2D_In{})
 	//struct gles.GlCopyTexSubImage2D_Out { }
-	binary.Register(binary.ID{0xb0, 0x65, 0x6f, 0xd0, 0xf4, 0x4f, 0xbe, 0x99, 0xd6, 0xd9, 0xee, 0xcf, 0x07, 0x9d, 0xa4, 0x6d, 0x9f, 0xa1, 0xcc, 0xce}, &GlCopyTexSubImage2D_Out{})
+	registry.Add(binary.ID{0xb0, 0x65, 0x6f, 0xd0, 0xf4, 0x4f, 0xbe, 0x99, 0xd6, 0xd9, 0xee, 0xcf, 0x07, 0x9d, 0xa4, 0x6d, 0x9f, 0xa1, 0xcc, 0xce}, &GlCopyTexSubImage2D_Out{})
 	//struct gles.GlCreateProgram { Context:atom.ContextID, In:GlCreateProgram_In, Out:GlCreateProgram_Out }
-	binary.Register(binary.ID{0xad, 0xc7, 0x94, 0x47, 0x68, 0xf2, 0x9c, 0x94, 0x6e, 0x92, 0x17, 0x72, 0xef, 0x5a, 0x9d, 0x37, 0x8f, 0x15, 0x7c, 0x6c}, &GlCreateProgram{})
+	registry.Add(binary.ID{0xad, 0xc7, 0x94, 0x47, 0x68, 0xf2, 0x9c, 0x94, 0x6e, 0x92, 0x17, 0x72, 0xef, 0x5a, 0x9d, 0x37, 0x8f, 0x15, 0x7c, 0x6c}, &GlCreateProgram{})
 	//struct gles.GlCreateProgram_In { }
-	binary.Register(binary.ID{0x6a, 0xa9, 0x0e, 0x81, 0x11, 0x5d, 0x2c, 0x61, 0xb0, 0x4e, 0xe8, 0xa6, 0x0a, 0x38, 0xa5, 0x84, 0x51, 0x26, 0x9b, 0xa3}, &GlCreateProgram_In{})
+	registry.Add(binary.ID{0x6a, 0xa9, 0x0e, 0x81, 0x11, 0x5d, 0x2c, 0x61, 0xb0, 0x4e, 0xe8, 0xa6, 0x0a, 0x38, 0xa5, 0x84, 0x51, 0x26, 0x9b, 0xa3}, &GlCreateProgram_In{})
 	//struct gles.GlCreateProgram_Out { Result:ProgramId }
-	binary.Register(binary.ID{0x10, 0x53, 0x85, 0x53, 0x68, 0x22, 0x89, 0x53, 0x1a, 0xb5, 0x5f, 0x72, 0xcd, 0x53, 0xfe, 0x2b, 0x2f, 0xa7, 0x24, 0xf0}, &GlCreateProgram_Out{})
+	registry.Add(binary.ID{0x10, 0x53, 0x85, 0x53, 0x68, 0x22, 0x89, 0x53, 0x1a, 0xb5, 0x5f, 0x72, 0xcd, 0x53, 0xfe, 0x2b, 0x2f, 0xa7, 0x24, 0xf0}, &GlCreateProgram_Out{})
 	//struct gles.GlCreateShader { Context:atom.ContextID, In:GlCreateShader_In, Out:GlCreateShader_Out }
-	binary.Register(binary.ID{0xda, 0x09, 0x04, 0x9d, 0x39, 0x32, 0x4a, 0x2b, 0x4f, 0xc5, 0x8c, 0xf4, 0xc6, 0xea, 0xb4, 0xc4, 0x6a, 0xc5, 0x5d, 0x68}, &GlCreateShader{})
+	registry.Add(binary.ID{0xda, 0x09, 0x04, 0x9d, 0x39, 0x32, 0x4a, 0x2b, 0x4f, 0xc5, 0x8c, 0xf4, 0xc6, 0xea, 0xb4, 0xc4, 0x6a, 0xc5, 0x5d, 0x68}, &GlCreateShader{})
 	//struct gles.GlCreateShader_In { Type:ShaderType }
-	binary.Register(binary.ID{0x16, 0x51, 0xa0, 0xe5, 0x45, 0xae, 0x70, 0x7f, 0xdb, 0xb9, 0x55, 0xb0, 0x11, 0x90, 0x42, 0x27, 0x9a, 0x8e, 0x29, 0xd5}, &GlCreateShader_In{})
+	registry.Add(binary.ID{0x16, 0x51, 0xa0, 0xe5, 0x45, 0xae, 0x70, 0x7f, 0xdb, 0xb9, 0x55, 0xb0, 0x11, 0x90, 0x42, 0x27, 0x9a, 0x8e, 0x29, 0xd5}, &GlCreateShader_In{})
 	//struct gles.GlCreateShader_Out { Result:ShaderId }
-	binary.Register(binary.ID{0x07, 0x5d, 0xeb, 0xbc, 0xce, 0xae, 0x57, 0x15, 0xf5, 0x82, 0xf0, 0x42, 0x7a, 0x79, 0xd8, 0x0e, 0xb0, 0xa7, 0xd7, 0x67}, &GlCreateShader_Out{})
+	registry.Add(binary.ID{0x07, 0x5d, 0xeb, 0xbc, 0xce, 0xae, 0x57, 0x15, 0xf5, 0x82, 0xf0, 0x42, 0x7a, 0x79, 0xd8, 0x0e, 0xb0, 0xa7, 0xd7, 0x67}, &GlCreateShader_Out{})
 	//struct gles.GlCullFace { Context:atom.ContextID, In:GlCullFace_In, Out:GlCullFace_Out }
-	binary.Register(binary.ID{0xab, 0x5d, 0xf7, 0x0b, 0xfd, 0x92, 0x30, 0x6f, 0x47, 0x46, 0xbc, 0x53, 0x18, 0x89, 0x88, 0x6d, 0x8c, 0x0a, 0xf2, 0xae}, &GlCullFace{})
+	registry.Add(binary.ID{0xab, 0x5d, 0xf7, 0x0b, 0xfd, 0x92, 0x30, 0x6f, 0x47, 0x46, 0xbc, 0x53, 0x18, 0x89, 0x88, 0x6d, 0x8c, 0x0a, 0xf2, 0xae}, &GlCullFace{})
 	//struct gles.GlCullFace_In { Mode:FaceMode }
-	binary.Register(binary.ID{0x59, 0x84, 0x2e, 0x24, 0x30, 0x10, 0x17, 0x07, 0x35, 0x4b, 0xf6, 0xd8, 0x95, 0x20, 0x0e, 0xa4, 0x45, 0xba, 0x00, 0x34}, &GlCullFace_In{})
+	registry.Add(binary.ID{0x59, 0x84, 0x2e, 0x24, 0x30, 0x10, 0x17, 0x07, 0x35, 0x4b, 0xf6, 0xd8, 0x95, 0x20, 0x0e, 0xa4, 0x45, 0xba, 0x00, 0x34}, &GlCullFace_In{})
 	//struct gles.GlCullFace_Out { }
-	binary.Register(binary.ID{0x7e, 0xfd, 0x26, 0xab, 0xe7, 0x1a, 0x18, 0x6f, 0x66, 0x7d, 0xa3, 0x9e, 0x1e, 0x10, 0xc7, 0x3f, 0x91, 0xa3, 0xb0, 0x8a}, &GlCullFace_Out{})
+	registry.Add(binary.ID{0x7e, 0xfd, 0x26, 0xab, 0xe7, 0x1a, 0x18, 0x6f, 0x66, 0x7d, 0xa3, 0x9e, 0x1e, 0x10, 0xc7, 0x3f, 0x91, 0xa3, 0xb0, 0x8a}, &GlCullFace_Out{})
 	//struct gles.GlDeleteBuffers { Context:atom.ContextID, In:GlDeleteBuffers_In, Out:GlDeleteBuffers_Out }
-	binary.Register(binary.ID{0xf7, 0xdc, 0x41, 0xd9, 0x89, 0xef, 0x28, 0x89, 0x93, 0x14, 0xf6, 0xd9, 0x39, 0x8b, 0x30, 0xb1, 0xbe, 0x97, 0x41, 0xd2}, &GlDeleteBuffers{})
+	registry.Add(binary.ID{0xf7, 0xdc, 0x41, 0xd9, 0x89, 0xef, 0x28, 0x89, 0x93, 0x14, 0xf6, 0xd9, 0x39, 0x8b, 0x30, 0xb1, 0xbe, 0x97, 0x41, 0xd2}, &GlDeleteBuffers{})
 	//struct gles.GlDeleteBuffers_In { Count:int32, Buffers:BufferIdArray }
-	binary.Register(binary.ID{0x12, 0x92, 0xc3, 0x23, 0xfd, 0xf9, 0xc3, 0x46, 0xbf, 0x11, 0x43, 0xbf, 0x65, 0x16, 0xb1, 0x1a, 0x3b, 0x7a, 0xff, 0x24}, &GlDeleteBuffers_In{})
+	registry.Add(binary.ID{0x12, 0x92, 0xc3, 0x23, 0xfd, 0xf9, 0xc3, 0x46, 0xbf, 0x11, 0x43, 0xbf, 0x65, 0x16, 0xb1, 0x1a, 0x3b, 0x7a, 0xff, 0x24}, &GlDeleteBuffers_In{})
 	//struct gles.GlDeleteBuffers_Out { }
-	binary.Register(binary.ID{0xc7, 0x75, 0xb8, 0x3b, 0x22, 0x26, 0x7e, 0xd9, 0x52, 0x25, 0x38, 0x7b, 0xd6, 0xf5, 0x58, 0x8f, 0x07, 0x8b, 0x98, 0x1a}, &GlDeleteBuffers_Out{})
+	registry.Add(binary.ID{0xc7, 0x75, 0xb8, 0x3b, 0x22, 0x26, 0x7e, 0xd9, 0x52, 0x25, 0x38, 0x7b, 0xd6, 0xf5, 0x58, 0x8f, 0x07, 0x8b, 0x98, 0x1a}, &GlDeleteBuffers_Out{})
 	//struct gles.GlDeleteFramebuffers { Context:atom.ContextID, In:GlDeleteFramebuffers_In, Out:GlDeleteFramebuffers_Out }
-	binary.Register(binary.ID{0x7a, 0x9a, 0x5a, 0x31, 0x3a, 0x0b, 0x21, 0xba, 0xc9, 0x3f, 0x13, 0x87, 0x98, 0xdc, 0xc6, 0x11, 0x67, 0x72, 0x5b, 0xcd}, &GlDeleteFramebuffers{})
+	registry.Add(binary.ID{0x7a, 0x9a, 0x5a, 0x31, 0x3a, 0x0b, 0x21, 0xba, 0xc9, 0x3f, 0x13, 0x87, 0x98, 0xdc, 0xc6, 0x11, 0x67, 0x72, 0x5b, 0xcd}, &GlDeleteFramebuffers{})
 	//struct gles.GlDeleteFramebuffers_In { Count:int32, Framebuffers:FramebufferIdArray }
-	binary.Register(binary.ID{0x1c, 0x0d, 0x9d, 0xfc, 0xd3, 0x7f, 0xa8, 0xfe, 0x80, 0x0e, 0x1c, 0x6d, 0xef, 0x68, 0x3c, 0xd1, 0xe2, 0xfc, 0x46, 0x1b}, &GlDeleteFramebuffers_In{})
+	registry.Add(binary.ID{0x1c, 0x0d, 0x9d, 0xfc, 0xd3, 0x7f, 0xa8, 0xfe, 0x80, 0x0e, 0x1c, 0x6d, 0xef, 0x68, 0x3c, 0xd1, 0xe2, 0xfc, 0x46, 0x1b}, &GlDeleteFramebuffers_In{})
 	//struct gles.GlDeleteFramebuffers_Out { }
-	binary.Register(binary.ID{0x3f, 0xd5, 0x06, 0xf4, 0x4e, 0x3a, 0xd7, 0x26, 0x9b, 0x09, 0xd1, 0xbf, 0xc6, 0x20, 0xfa, 0xe4, 0xa3, 0x30, 0xda, 0xb8}, &GlDeleteFramebuffers_Out{})
+	registry.Add(binary.ID{0x3f, 0xd5, 0x06, 0xf4, 0x4e, 0x3a, 0xd7, 0x26, 0x9b, 0x09, 0xd1, 0xbf, 0xc6, 0x20, 0xfa, 0xe4, 0xa3, 0x30, 0xda, 0xb8}, &GlDeleteFramebuffers_Out{})
 	//struct gles.GlDeleteProgram { Context:atom.ContextID, In:GlDeleteProgram_In, Out:GlDeleteProgram_Out }
-	binary.Register(binary.ID{0x5c, 0x87, 0xe7, 0x1b, 0xb1, 0x80, 0x1c, 0x24, 0x19, 0xe2, 0xb4, 0x0a, 0x83, 0x0e, 0x19, 0x15, 0x8f, 0x15, 0xb8, 0xe9}, &GlDeleteProgram{})
+	registry.Add(binary.ID{0x5c, 0x87, 0xe7, 0x1b, 0xb1, 0x80, 0x1c, 0x24, 0x19, 0xe2, 0xb4, 0x0a, 0x83, 0x0e, 0x19, 0x15, 0x8f, 0x15, 0xb8, 0xe9}, &GlDeleteProgram{})
 	//struct gles.GlDeleteProgram_In { Program:ProgramId }
-	binary.Register(binary.ID{0x59, 0x9a, 0x3d, 0xac, 0x53, 0x7a, 0x86, 0x3e, 0x8a, 0xbd, 0x6a, 0x84, 0xfd, 0x33, 0xe4, 0xde, 0xcc, 0x57, 0x19, 0x4a}, &GlDeleteProgram_In{})
+	registry.Add(binary.ID{0x59, 0x9a, 0x3d, 0xac, 0x53, 0x7a, 0x86, 0x3e, 0x8a, 0xbd, 0x6a, 0x84, 0xfd, 0x33, 0xe4, 0xde, 0xcc, 0x57, 0x19, 0x4a}, &GlDeleteProgram_In{})
 	//struct gles.GlDeleteProgram_Out { }
-	binary.Register(binary.ID{0xa6, 0xf3, 0xdb, 0x65, 0x6c, 0x56, 0xce, 0x1f, 0xee, 0xeb, 0xb6, 0x32, 0xb8, 0x99, 0x4b, 0x7b, 0x69, 0x08, 0x3d, 0xd8}, &GlDeleteProgram_Out{})
+	registry.Add(binary.ID{0xa6, 0xf3, 0xdb, 0x65, 0x6c, 0x56, 0xce, 0x1f, 0xee, 0xeb, 0xb6, 0x32, 0xb8, 0x99, 0x4b, 0x7b, 0x69, 0x08, 0x3d, 0xd8}, &GlDeleteProgram_Out{})
 	//struct gles.GlDeleteQueries { Context:atom.ContextID, In:GlDeleteQueries_In, Out:GlDeleteQueries_Out }
-	binary.Register(binary.ID{0xf7, 0xb7, 0x78, 0x31, 0x95, 0x74, 0x5a, 0xf4, 0x7c, 0xdc, 0x6c, 0xa6, 0xb6, 0x7a, 0xd5, 0x5a, 0xfa, 0x94, 0x95, 0x3f}, &GlDeleteQueries{})
+	registry.Add(binary.ID{0xf7, 0xb7, 0x78, 0x31, 0x95, 0x74, 0x5a, 0xf4, 0x7c, 0xdc, 0x6c, 0xa6, 0xb6, 0x7a, 0xd5, 0x5a, 0xfa, 0x94, 0x95, 0x3f}, &GlDeleteQueries{})
 	//struct gles.GlDeleteQueriesEXT { Context:atom.ContextID, In:GlDeleteQueriesEXT_In, Out:GlDeleteQueriesEXT_Out }
-	binary.Register(binary.ID{0xda, 0x65, 0x6a, 0x9f, 0x71, 0x13, 0xa3, 0xd7, 0x6b, 0xc7, 0x38, 0x1d, 0x0b, 0xe0, 0x48, 0x7f, 0x6c, 0x24, 0xb7, 0x7d}, &GlDeleteQueriesEXT{})
+	registry.Add(binary.ID{0xda, 0x65, 0x6a, 0x9f, 0x71, 0x13, 0xa3, 0xd7, 0x6b, 0xc7, 0x38, 0x1d, 0x0b, 0xe0, 0x48, 0x7f, 0x6c, 0x24, 0xb7, 0x7d}, &GlDeleteQueriesEXT{})
 	//struct gles.GlDeleteQueriesEXT_In { Count:int32, Queries:QueryIdArray }
-	binary.Register(binary.ID{0x6f, 0x2b, 0x08, 0x06, 0x5b, 0x71, 0x1d, 0x00, 0x27, 0x45, 0x26, 0x65, 0xdc, 0x23, 0x4e, 0x0d, 0xcd, 0x69, 0xa8, 0x36}, &GlDeleteQueriesEXT_In{})
+	registry.Add(binary.ID{0x6f, 0x2b, 0x08, 0x06, 0x5b, 0x71, 0x1d, 0x00, 0x27, 0x45, 0x26, 0x65, 0xdc, 0x23, 0x4e, 0x0d, 0xcd, 0x69, 0xa8, 0x36}, &GlDeleteQueriesEXT_In{})
 	//struct gles.GlDeleteQueriesEXT_Out { }
-	binary.Register(binary.ID{0xe7, 0x79, 0x8b, 0x4a, 0xe6, 0xac, 0xec, 0x6a, 0x6f, 0x57, 0x68, 0xe4, 0x77, 0x67, 0xfc, 0x9e, 0x89, 0x0f, 0x52, 0xe7}, &GlDeleteQueriesEXT_Out{})
+	registry.Add(binary.ID{0xe7, 0x79, 0x8b, 0x4a, 0xe6, 0xac, 0xec, 0x6a, 0x6f, 0x57, 0x68, 0xe4, 0x77, 0x67, 0xfc, 0x9e, 0x89, 0x0f, 0x52, 0xe7}, &GlDeleteQueriesEXT_Out{})
 	//struct gles.GlDeleteQueries_In { Count:int32, Queries:QueryIdArray }
-	binary.Register(binary.ID{0x53, 0xb0, 0xae, 0x3b, 0x06, 0x40, 0x70, 0xfd, 0x5b, 0xa4, 0xde, 0x74, 0x77, 0x63, 0x43, 0x59, 0x93, 0x21, 0xbe, 0x92}, &GlDeleteQueries_In{})
+	registry.Add(binary.ID{0x53, 0xb0, 0xae, 0x3b, 0x06, 0x40, 0x70, 0xfd, 0x5b, 0xa4, 0xde, 0x74, 0x77, 0x63, 0x43, 0x59, 0x93, 0x21, 0xbe, 0x92}, &GlDeleteQueries_In{})
 	//struct gles.GlDeleteQueries_Out { }
-	binary.Register(binary.ID{0x31, 0x79, 0xe1, 0xc0, 0x92, 0x82, 0x00, 0x7f, 0xd6, 0x64, 0xca, 0x75, 0xbe, 0x7c, 0x6a, 0x20, 0x97, 0x9f, 0xb5, 0x9c}, &GlDeleteQueries_Out{})
+	registry.Add(binary.ID{0x31, 0x79, 0xe1, 0xc0, 0x92, 0x82, 0x00, 0x7f, 0xd6, 0x64, 0xca, 0x75, 0xbe, 0x7c, 0x6a, 0x20, 0x97, 0x9f, 0xb5, 0x9c}, &GlDeleteQueries_Out{})
 	//struct gles.GlDeleteRenderbuffers { Context:atom.ContextID, In:GlDeleteRenderbuffers_In, Out:GlDeleteRenderbuffers_Out }
-	binary.Register(binary.ID{0x8d, 0xa4, 0x22, 0x52, 0x72, 0x54, 0xa9, 0xbd, 0x73, 0xb5, 0x28, 0x88, 0x91, 0x7c, 0xe5, 0xc2, 0x04, 0x58, 0xc0, 0x44}, &GlDeleteRenderbuffers{})
+	registry.Add(binary.ID{0x8d, 0xa4, 0x22, 0x52, 0x72, 0x54, 0xa9, 0xbd, 0x73, 0xb5, 0x28, 0x88, 0x91, 0x7c, 0xe5, 0xc2, 0x04, 0x58, 0xc0, 0x44}, &GlDeleteRenderbuffers{})
 	//struct gles.GlDeleteRenderbuffers_In { Count:int32, Renderbuffers:RenderbufferIdArray }
-	binary.Register(binary.ID{0x92, 0x0c, 0x17, 0xf1, 0x8b, 0x02, 0xd9, 0x49, 0x29, 0x21, 0x92, 0x63, 0xb1, 0x7f, 0xb8, 0xb5, 0xba, 0xb1, 0xa5, 0x41}, &GlDeleteRenderbuffers_In{})
+	registry.Add(binary.ID{0x92, 0x0c, 0x17, 0xf1, 0x8b, 0x02, 0xd9, 0x49, 0x29, 0x21, 0x92, 0x63, 0xb1, 0x7f, 0xb8, 0xb5, 0xba, 0xb1, 0xa5, 0x41}, &GlDeleteRenderbuffers_In{})
 	//struct gles.GlDeleteRenderbuffers_Out { }
-	binary.Register(binary.ID{0xcf, 0xa7, 0x60, 0xf9, 0x63, 0xb1, 0xc6, 0xd1, 0xa2, 0x1e, 0x92, 0x3c, 0xed, 0x20, 0x18, 0x77, 0xd4, 0x46, 0x7f, 0xb2}, &GlDeleteRenderbuffers_Out{})
+	registry.Add(binary.ID{0xcf, 0xa7, 0x60, 0xf9, 0x63, 0xb1, 0xc6, 0xd1, 0xa2, 0x1e, 0x92, 0x3c, 0xed, 0x20, 0x18, 0x77, 0xd4, 0x46, 0x7f, 0xb2}, &GlDeleteRenderbuffers_Out{})
 	//struct gles.GlDeleteShader { Context:atom.ContextID, In:GlDeleteShader_In, Out:GlDeleteShader_Out }
-	binary.Register(binary.ID{0x42, 0x36, 0x53, 0xfc, 0xe4, 0xcf, 0x86, 0xd2, 0x6f, 0xf0, 0xad, 0xd3, 0x65, 0x4c, 0x2d, 0xd2, 0x3e, 0x17, 0xc0, 0xa1}, &GlDeleteShader{})
+	registry.Add(binary.ID{0x42, 0x36, 0x53, 0xfc, 0xe4, 0xcf, 0x86, 0xd2, 0x6f, 0xf0, 0xad, 0xd3, 0x65, 0x4c, 0x2d, 0xd2, 0x3e, 0x17, 0xc0, 0xa1}, &GlDeleteShader{})
 	//struct gles.GlDeleteShader_In { Shader:ShaderId }
-	binary.Register(binary.ID{0x6c, 0x63, 0x3b, 0xb0, 0x79, 0xb5, 0x80, 0x50, 0x8b, 0x2e, 0x1a, 0xcb, 0xfa, 0xea, 0x0a, 0xc6, 0x44, 0xb6, 0x09, 0x8f}, &GlDeleteShader_In{})
+	registry.Add(binary.ID{0x6c, 0x63, 0x3b, 0xb0, 0x79, 0xb5, 0x80, 0x50, 0x8b, 0x2e, 0x1a, 0xcb, 0xfa, 0xea, 0x0a, 0xc6, 0x44, 0xb6, 0x09, 0x8f}, &GlDeleteShader_In{})
 	//struct gles.GlDeleteShader_Out { }
-	binary.Register(binary.ID{0x17, 0xdb, 0x31, 0xad, 0xaa, 0xb8, 0x60, 0x29, 0xa4, 0x67, 0x4a, 0x7a, 0x87, 0xe8, 0x57, 0xf3, 0xdc, 0x32, 0xca, 0x02}, &GlDeleteShader_Out{})
+	registry.Add(binary.ID{0x17, 0xdb, 0x31, 0xad, 0xaa, 0xb8, 0x60, 0x29, 0xa4, 0x67, 0x4a, 0x7a, 0x87, 0xe8, 0x57, 0xf3, 0xdc, 0x32, 0xca, 0x02}, &GlDeleteShader_Out{})
 	//struct gles.GlDeleteTextures { Context:atom.ContextID, In:GlDeleteTextures_In, Out:GlDeleteTextures_Out }
-	binary.Register(binary.ID{0xdc, 0xc8, 0x5b, 0x4f, 0x7a, 0x5f, 0xe0, 0x61, 0xc0, 0x5a, 0x5e, 0x2c, 0x70, 0x73, 0x54, 0x23, 0xf8, 0x6a, 0xe0, 0x3e}, &GlDeleteTextures{})
+	registry.Add(binary.ID{0xdc, 0xc8, 0x5b, 0x4f, 0x7a, 0x5f, 0xe0, 0x61, 0xc0, 0x5a, 0x5e, 0x2c, 0x70, 0x73, 0x54, 0x23, 0xf8, 0x6a, 0xe0, 0x3e}, &GlDeleteTextures{})
 	//struct gles.GlDeleteTextures_In { Count:int32, Textures:TextureIdArray }
-	binary.Register(binary.ID{0x33, 0x2d, 0xf9, 0x80, 0xeb, 0xd1, 0x30, 0xd0, 0x91, 0x70, 0x31, 0x9b, 0x4e, 0x33, 0x05, 0x16, 0x39, 0x80, 0xae, 0x4b}, &GlDeleteTextures_In{})
+	registry.Add(binary.ID{0x33, 0x2d, 0xf9, 0x80, 0xeb, 0xd1, 0x30, 0xd0, 0x91, 0x70, 0x31, 0x9b, 0x4e, 0x33, 0x05, 0x16, 0x39, 0x80, 0xae, 0x4b}, &GlDeleteTextures_In{})
 	//struct gles.GlDeleteTextures_Out { }
-	binary.Register(binary.ID{0x2f, 0xb7, 0x42, 0x64, 0xe3, 0x4b, 0x20, 0x21, 0x87, 0x91, 0x73, 0xcb, 0xf9, 0x5a, 0xbb, 0xad, 0x39, 0x5d, 0x23, 0xf3}, &GlDeleteTextures_Out{})
+	registry.Add(binary.ID{0x2f, 0xb7, 0x42, 0x64, 0xe3, 0x4b, 0x20, 0x21, 0x87, 0x91, 0x73, 0xcb, 0xf9, 0x5a, 0xbb, 0xad, 0x39, 0x5d, 0x23, 0xf3}, &GlDeleteTextures_Out{})
 	//struct gles.GlDeleteVertexArraysOES { Context:atom.ContextID, In:GlDeleteVertexArraysOES_In, Out:GlDeleteVertexArraysOES_Out }
-	binary.Register(binary.ID{0x4e, 0xbf, 0x67, 0x44, 0x69, 0xb5, 0x7e, 0x30, 0x0c, 0xca, 0xe9, 0xa1, 0xad, 0x68, 0xc8, 0xe5, 0xba, 0x09, 0x4b, 0x9b}, &GlDeleteVertexArraysOES{})
+	registry.Add(binary.ID{0x4e, 0xbf, 0x67, 0x44, 0x69, 0xb5, 0x7e, 0x30, 0x0c, 0xca, 0xe9, 0xa1, 0xad, 0x68, 0xc8, 0xe5, 0xba, 0x09, 0x4b, 0x9b}, &GlDeleteVertexArraysOES{})
 	//struct gles.GlDeleteVertexArraysOES_In { Count:int32, Arrays:VertexArrayIdArray }
-	binary.Register(binary.ID{0x2e, 0x6d, 0x19, 0xb9, 0xda, 0x09, 0x3a, 0x88, 0x1b, 0x09, 0xbb, 0xd6, 0x9f, 0x1e, 0x3a, 0x40, 0x10, 0x58, 0xac, 0x96}, &GlDeleteVertexArraysOES_In{})
+	registry.Add(binary.ID{0x2e, 0x6d, 0x19, 0xb9, 0xda, 0x09, 0x3a, 0x88, 0x1b, 0x09, 0xbb, 0xd6, 0x9f, 0x1e, 0x3a, 0x40, 0x10, 0x58, 0xac, 0x96}, &GlDeleteVertexArraysOES_In{})
 	//struct gles.GlDeleteVertexArraysOES_Out { }
-	binary.Register(binary.ID{0x5b, 0xf9, 0xfa, 0x77, 0x69, 0xc0, 0x53, 0x20, 0x9a, 0xdf, 0x53, 0xa5, 0x98, 0x61, 0xb6, 0x31, 0xc1, 0x68, 0x27, 0x54}, &GlDeleteVertexArraysOES_Out{})
+	registry.Add(binary.ID{0x5b, 0xf9, 0xfa, 0x77, 0x69, 0xc0, 0x53, 0x20, 0x9a, 0xdf, 0x53, 0xa5, 0x98, 0x61, 0xb6, 0x31, 0xc1, 0x68, 0x27, 0x54}, &GlDeleteVertexArraysOES_Out{})
 	//struct gles.GlDepthFunc { Context:atom.ContextID, In:GlDepthFunc_In, Out:GlDepthFunc_Out }
-	binary.Register(binary.ID{0xb1, 0xb2, 0x82, 0x18, 0x58, 0x7d, 0x75, 0x5e, 0xc2, 0x7a, 0x0b, 0x63, 0x1c, 0x23, 0x4e, 0x60, 0x2b, 0xf0, 0x8f, 0x7d}, &GlDepthFunc{})
+	registry.Add(binary.ID{0xb1, 0xb2, 0x82, 0x18, 0x58, 0x7d, 0x75, 0x5e, 0xc2, 0x7a, 0x0b, 0x63, 0x1c, 0x23, 0x4e, 0x60, 0x2b, 0xf0, 0x8f, 0x7d}, &GlDepthFunc{})
 	//struct gles.GlDepthFunc_In { Function:TestFunction }
-	binary.Register(binary.ID{0x98, 0x32, 0xec, 0x05, 0xa2, 0x41, 0x41, 0xdb, 0x16, 0xe5, 0x97, 0x61, 0x96, 0x5e, 0x8c, 0x54, 0xe9, 0x2f, 0xf9, 0x88}, &GlDepthFunc_In{})
+	registry.Add(binary.ID{0x98, 0x32, 0xec, 0x05, 0xa2, 0x41, 0x41, 0xdb, 0x16, 0xe5, 0x97, 0x61, 0x96, 0x5e, 0x8c, 0x54, 0xe9, 0x2f, 0xf9, 0x88}, &GlDepthFunc_In{})
 	//struct gles.GlDepthFunc_Out { }
-	binary.Register(binary.ID{0x60, 0xf1, 0x05, 0x3b, 0xdd, 0xc7, 0xb4, 0x20, 0x79, 0xca, 0x4e, 0x66, 0x0d, 0x25, 0x8b, 0x86, 0x05, 0xf0, 0xaf, 0x04}, &GlDepthFunc_Out{})
+	registry.Add(binary.ID{0x60, 0xf1, 0x05, 0x3b, 0xdd, 0xc7, 0xb4, 0x20, 0x79, 0xca, 0x4e, 0x66, 0x0d, 0x25, 0x8b, 0x86, 0x05, 0xf0, 0xaf, 0x04}, &GlDepthFunc_Out{})
 	//struct gles.GlDepthMask { Context:atom.ContextID, In:GlDepthMask_In, Out:GlDepthMask_Out }
-	binary.Register(binary.ID{0xa8, 0xb8, 0x3f, 0x59, 0x85, 0xc1, 0x8c, 0x38, 0x2b, 0x91, 0x2d, 0x9c, 0x52, 0xbc, 0x48, 0x0b, 0x8d, 0x15, 0xeb, 0x7e}, &GlDepthMask{})
+	registry.Add(binary.ID{0xa8, 0xb8, 0x3f, 0x59, 0x85, 0xc1, 0x8c, 0x38, 0x2b, 0x91, 0x2d, 0x9c, 0x52, 0xbc, 0x48, 0x0b, 0x8d, 0x15, 0xeb, 0x7e}, &GlDepthMask{})
 	//struct gles.GlDepthMask_In { Enabled:bool }
-	binary.Register(binary.ID{0xc8, 0x47, 0x6e, 0x18, 0x0e, 0xdc, 0xce, 0xa2, 0x45, 0x46, 0xf2, 0x3e, 0x21, 0xd1, 0xe3, 0xa7, 0xee, 0x5f, 0xe7, 0x3f}, &GlDepthMask_In{})
+	registry.Add(binary.ID{0xc8, 0x47, 0x6e, 0x18, 0x0e, 0xdc, 0xce, 0xa2, 0x45, 0x46, 0xf2, 0x3e, 0x21, 0xd1, 0xe3, 0xa7, 0xee, 0x5f, 0xe7, 0x3f}, &GlDepthMask_In{})
 	//struct gles.GlDepthMask_Out { }
-	binary.Register(binary.ID{0x2e, 0x23, 0x1e, 0x5a, 0x7d, 0x09, 0xf0, 0xcc, 0xf4, 0x90, 0xda, 0xb5, 0xfe, 0x8b, 0x40, 0x2b, 0xb4, 0x58, 0x19, 0x4d}, &GlDepthMask_Out{})
+	registry.Add(binary.ID{0x2e, 0x23, 0x1e, 0x5a, 0x7d, 0x09, 0xf0, 0xcc, 0xf4, 0x90, 0xda, 0xb5, 0xfe, 0x8b, 0x40, 0x2b, 0xb4, 0x58, 0x19, 0x4d}, &GlDepthMask_Out{})
 	//struct gles.GlDepthRangef { Context:atom.ContextID, In:GlDepthRangef_In, Out:GlDepthRangef_Out }
-	binary.Register(binary.ID{0x36, 0xe2, 0x19, 0x18, 0xeb, 0xff, 0x4b, 0x1f, 0x52, 0x56, 0x34, 0xa9, 0x23, 0x34, 0x66, 0x81, 0x45, 0x78, 0xf8, 0xf2}, &GlDepthRangef{})
+	registry.Add(binary.ID{0x36, 0xe2, 0x19, 0x18, 0xeb, 0xff, 0x4b, 0x1f, 0x52, 0x56, 0x34, 0xa9, 0x23, 0x34, 0x66, 0x81, 0x45, 0x78, 0xf8, 0xf2}, &GlDepthRangef{})
 	//struct gles.GlDepthRangef_In { Near:float32, Far:float32 }
-	binary.Register(binary.ID{0x0b, 0xe0, 0x20, 0xde, 0xc4, 0xa5, 0xca, 0x07, 0xcc, 0x49, 0x87, 0xdc, 0xba, 0x4f, 0x92, 0x00, 0xc8, 0x00, 0x54, 0x49}, &GlDepthRangef_In{})
+	registry.Add(binary.ID{0x0b, 0xe0, 0x20, 0xde, 0xc4, 0xa5, 0xca, 0x07, 0xcc, 0x49, 0x87, 0xdc, 0xba, 0x4f, 0x92, 0x00, 0xc8, 0x00, 0x54, 0x49}, &GlDepthRangef_In{})
 	//struct gles.GlDepthRangef_Out { }
-	binary.Register(binary.ID{0xf8, 0xe7, 0xcf, 0xed, 0x16, 0x71, 0xff, 0xd1, 0xd2, 0x12, 0xeb, 0x57, 0x43, 0xf6, 0x24, 0x57, 0x15, 0xb7, 0xf0, 0xc9}, &GlDepthRangef_Out{})
+	registry.Add(binary.ID{0xf8, 0xe7, 0xcf, 0xed, 0x16, 0x71, 0xff, 0xd1, 0xd2, 0x12, 0xeb, 0x57, 0x43, 0xf6, 0x24, 0x57, 0x15, 0xb7, 0xf0, 0xc9}, &GlDepthRangef_Out{})
 	//struct gles.GlDetachShader { Context:atom.ContextID, In:GlDetachShader_In, Out:GlDetachShader_Out }
-	binary.Register(binary.ID{0xc2, 0x14, 0xc7, 0x3f, 0x00, 0x1e, 0x9e, 0x12, 0xed, 0xf3, 0x75, 0x48, 0x0c, 0xe1, 0xce, 0x5b, 0x74, 0xd9, 0x54, 0x9a}, &GlDetachShader{})
+	registry.Add(binary.ID{0xc2, 0x14, 0xc7, 0x3f, 0x00, 0x1e, 0x9e, 0x12, 0xed, 0xf3, 0x75, 0x48, 0x0c, 0xe1, 0xce, 0x5b, 0x74, 0xd9, 0x54, 0x9a}, &GlDetachShader{})
 	//struct gles.GlDetachShader_In { Program:ProgramId, Shader:ShaderId }
-	binary.Register(binary.ID{0x9d, 0x63, 0x0e, 0x0c, 0x9f, 0xed, 0x5b, 0xcd, 0xa3, 0x13, 0x9f, 0x3d, 0x64, 0x02, 0x5f, 0x39, 0x6f, 0x66, 0xf1, 0xbb}, &GlDetachShader_In{})
+	registry.Add(binary.ID{0x9d, 0x63, 0x0e, 0x0c, 0x9f, 0xed, 0x5b, 0xcd, 0xa3, 0x13, 0x9f, 0x3d, 0x64, 0x02, 0x5f, 0x39, 0x6f, 0x66, 0xf1, 0xbb}, &GlDetachShader_In{})
 	//struct gles.GlDetachShader_Out { }
-	binary.Register(binary.ID{0x75, 0x65, 0x2c, 0x3b, 0xeb, 0xa2, 0xbb, 0x38, 0xde, 0x88, 0x5d, 0x3f, 0x14, 0x00, 0x83, 0xe7, 0xd4, 0xed, 0x9b, 0x10}, &GlDetachShader_Out{})
+	registry.Add(binary.ID{0x75, 0x65, 0x2c, 0x3b, 0xeb, 0xa2, 0xbb, 0x38, 0xde, 0x88, 0x5d, 0x3f, 0x14, 0x00, 0x83, 0xe7, 0xd4, 0xed, 0x9b, 0x10}, &GlDetachShader_Out{})
 	//struct gles.GlDisable { Context:atom.ContextID, In:GlDisable_In, Out:GlDisable_Out }
-	binary.Register(binary.ID{0xca, 0x10, 0x86, 0x38, 0x76, 0x80, 0xf6, 0x68, 0x5a, 0xdd, 0x33, 0x0a, 0xce, 0xae, 0x00, 0xd9, 0xfa, 0xdf, 0x53, 0x35}, &GlDisable{})
+	registry.Add(binary.ID{0xca, 0x10, 0x86, 0x38, 0x76, 0x80, 0xf6, 0x68, 0x5a, 0xdd, 0x33, 0x0a, 0xce, 0xae, 0x00, 0xd9, 0xfa, 0xdf, 0x53, 0x35}, &GlDisable{})
 	//struct gles.GlDisableClientState { Context:atom.ContextID, In:GlDisableClientState_In, Out:GlDisableClientState_Out }
-	binary.Register(binary.ID{0x16, 0xad, 0x1f, 0xd0, 0x0f, 0x90, 0x76, 0xa5, 0x59, 0x33, 0x12, 0xb0, 0x78, 0x1e, 0xa4, 0x6d, 0xd2, 0xee, 0x20, 0xaa}, &GlDisableClientState{})
+	registry.Add(binary.ID{0x16, 0xad, 0x1f, 0xd0, 0x0f, 0x90, 0x76, 0xa5, 0x59, 0x33, 0x12, 0xb0, 0x78, 0x1e, 0xa4, 0x6d, 0xd2, 0xee, 0x20, 0xaa}, &GlDisableClientState{})
 	//struct gles.GlDisableClientState_In { Type:ArrayType }
-	binary.Register(binary.ID{0xfc, 0xd8, 0x47, 0xe9, 0x82, 0x00, 0xd7, 0x75, 0xc3, 0x1b, 0xcb, 0xd4, 0x23, 0xda, 0xb1, 0x95, 0x1f, 0x1b, 0x17, 0x07}, &GlDisableClientState_In{})
+	registry.Add(binary.ID{0xfc, 0xd8, 0x47, 0xe9, 0x82, 0x00, 0xd7, 0x75, 0xc3, 0x1b, 0xcb, 0xd4, 0x23, 0xda, 0xb1, 0x95, 0x1f, 0x1b, 0x17, 0x07}, &GlDisableClientState_In{})
 	//struct gles.GlDisableClientState_Out { }
-	binary.Register(binary.ID{0xc2, 0x1f, 0x94, 0x90, 0x5c, 0x73, 0x0a, 0x17, 0xe2, 0x61, 0xe2, 0xc9, 0x6e, 0x05, 0x21, 0xd6, 0x6a, 0xb3, 0xac, 0x8c}, &GlDisableClientState_Out{})
+	registry.Add(binary.ID{0xc2, 0x1f, 0x94, 0x90, 0x5c, 0x73, 0x0a, 0x17, 0xe2, 0x61, 0xe2, 0xc9, 0x6e, 0x05, 0x21, 0xd6, 0x6a, 0xb3, 0xac, 0x8c}, &GlDisableClientState_Out{})
 	//struct gles.GlDisableVertexAttribArray { Context:atom.ContextID, In:GlDisableVertexAttribArray_In, Out:GlDisableVertexAttribArray_Out }
-	binary.Register(binary.ID{0x6b, 0x5e, 0x93, 0x0e, 0x2a, 0x23, 0xd0, 0xea, 0xb7, 0x2c, 0x81, 0x9c, 0xf8, 0xb1, 0xe3, 0xf1, 0xa5, 0xd2, 0xee, 0xe7}, &GlDisableVertexAttribArray{})
+	registry.Add(binary.ID{0x6b, 0x5e, 0x93, 0x0e, 0x2a, 0x23, 0xd0, 0xea, 0xb7, 0x2c, 0x81, 0x9c, 0xf8, 0xb1, 0xe3, 0xf1, 0xa5, 0xd2, 0xee, 0xe7}, &GlDisableVertexAttribArray{})
 	//struct gles.GlDisableVertexAttribArray_In { Location:AttributeLocation }
-	binary.Register(binary.ID{0xd2, 0xcc, 0xb4, 0xa9, 0x56, 0x86, 0x91, 0x2f, 0xcb, 0x46, 0x13, 0x2d, 0x07, 0xc3, 0x28, 0xda, 0x45, 0xf9, 0xda, 0x28}, &GlDisableVertexAttribArray_In{})
+	registry.Add(binary.ID{0xd2, 0xcc, 0xb4, 0xa9, 0x56, 0x86, 0x91, 0x2f, 0xcb, 0x46, 0x13, 0x2d, 0x07, 0xc3, 0x28, 0xda, 0x45, 0xf9, 0xda, 0x28}, &GlDisableVertexAttribArray_In{})
 	//struct gles.GlDisableVertexAttribArray_Out { }
-	binary.Register(binary.ID{0x10, 0x01, 0x3a, 0x07, 0x89, 0x49, 0xf0, 0x74, 0x56, 0x4b, 0x3e, 0x7f, 0x8c, 0x5d, 0x66, 0xbc, 0x55, 0x35, 0x5c, 0x82}, &GlDisableVertexAttribArray_Out{})
+	registry.Add(binary.ID{0x10, 0x01, 0x3a, 0x07, 0x89, 0x49, 0xf0, 0x74, 0x56, 0x4b, 0x3e, 0x7f, 0x8c, 0x5d, 0x66, 0xbc, 0x55, 0x35, 0x5c, 0x82}, &GlDisableVertexAttribArray_Out{})
 	//struct gles.GlDisable_In { Capability:Capability }
-	binary.Register(binary.ID{0x1c, 0x01, 0x59, 0xb6, 0x85, 0x4d, 0xc6, 0x80, 0x74, 0xe2, 0xc6, 0x94, 0x62, 0xe0, 0x8e, 0x60, 0xb8, 0x85, 0x90, 0xab}, &GlDisable_In{})
+	registry.Add(binary.ID{0x1c, 0x01, 0x59, 0xb6, 0x85, 0x4d, 0xc6, 0x80, 0x74, 0xe2, 0xc6, 0x94, 0x62, 0xe0, 0x8e, 0x60, 0xb8, 0x85, 0x90, 0xab}, &GlDisable_In{})
 	//struct gles.GlDisable_Out { }
-	binary.Register(binary.ID{0xea, 0x34, 0xb2, 0x4a, 0xbb, 0x31, 0xc1, 0x65, 0x07, 0x6c, 0x58, 0x53, 0x4f, 0x81, 0x5c, 0x5f, 0xad, 0x71, 0xcb, 0xcb}, &GlDisable_Out{})
+	registry.Add(binary.ID{0xea, 0x34, 0xb2, 0x4a, 0xbb, 0x31, 0xc1, 0x65, 0x07, 0x6c, 0x58, 0x53, 0x4f, 0x81, 0x5c, 0x5f, 0xad, 0x71, 0xcb, 0xcb}, &GlDisable_Out{})
 	//struct gles.GlDiscardFramebufferEXT { Context:atom.ContextID, In:GlDiscardFramebufferEXT_In, Out:GlDiscardFramebufferEXT_Out }
-	binary.Register(binary.ID{0xaf, 0xa2, 0xd3, 0x1c, 0x0b, 0x7b, 0x18, 0xcc, 0xa5, 0x7e, 0x22, 0xb2, 0xe1, 0x5a, 0xc0, 0x3a, 0xba, 0x75, 0x16, 0x1e}, &GlDiscardFramebufferEXT{})
+	registry.Add(binary.ID{0xaf, 0xa2, 0xd3, 0x1c, 0x0b, 0x7b, 0x18, 0xcc, 0xa5, 0x7e, 0x22, 0xb2, 0xe1, 0x5a, 0xc0, 0x3a, 0xba, 0x75, 0x16, 0x1e}, &GlDiscardFramebufferEXT{})
 	//struct gles.GlDiscardFramebufferEXT_In { Target:FramebufferTarget, NumAttachments:int32, Attachments:DiscardFramebufferAttachmentArray }
-	binary.Register(binary.ID{0x69, 0xe0, 0x30, 0x22, 0xb7, 0x8c, 0x46, 0x70, 0xb5, 0xe5, 0xce, 0x41, 0xfd, 0x65, 0x88, 0xf9, 0xdc, 0xf2, 0xfd, 0x33}, &GlDiscardFramebufferEXT_In{})
+	registry.Add(binary.ID{0x69, 0xe0, 0x30, 0x22, 0xb7, 0x8c, 0x46, 0x70, 0xb5, 0xe5, 0xce, 0x41, 0xfd, 0x65, 0x88, 0xf9, 0xdc, 0xf2, 0xfd, 0x33}, &GlDiscardFramebufferEXT_In{})
 	//struct gles.GlDiscardFramebufferEXT_Out { }
-	binary.Register(binary.ID{0x72, 0x05, 0x07, 0x54, 0x4a, 0x6e, 0xc8, 0x46, 0x47, 0xb6, 0x1c, 0x46, 0xcf, 0xb8, 0x75, 0x8a, 0x2a, 0xbc, 0xfe, 0x61}, &GlDiscardFramebufferEXT_Out{})
+	registry.Add(binary.ID{0x72, 0x05, 0x07, 0x54, 0x4a, 0x6e, 0xc8, 0x46, 0x47, 0xb6, 0x1c, 0x46, 0xcf, 0xb8, 0x75, 0x8a, 0x2a, 0xbc, 0xfe, 0x61}, &GlDiscardFramebufferEXT_Out{})
 	//struct gles.GlDrawArrays { Context:atom.ContextID, In:GlDrawArrays_In, Out:GlDrawArrays_Out }
-	binary.Register(binary.ID{0x3a, 0x01, 0x01, 0x5f, 0xd6, 0x2f, 0x20, 0x35, 0xbe, 0x53, 0xa3, 0x24, 0x75, 0x95, 0x10, 0xa1, 0x31, 0x1c, 0x46, 0x10}, &GlDrawArrays{})
+	registry.Add(binary.ID{0x3a, 0x01, 0x01, 0x5f, 0xd6, 0x2f, 0x20, 0x35, 0xbe, 0x53, 0xa3, 0x24, 0x75, 0x95, 0x10, 0xa1, 0x31, 0x1c, 0x46, 0x10}, &GlDrawArrays{})
 	//struct gles.GlDrawArrays_In { DrawMode:DrawMode, FirstIndex:int32, IndexCount:int32 }
-	binary.Register(binary.ID{0xc2, 0xe8, 0xb9, 0xa2, 0x4f, 0x95, 0x1c, 0xcc, 0xb2, 0xbb, 0x7c, 0xda, 0x6b, 0x95, 0x52, 0x19, 0xc6, 0x35, 0x5e, 0xbd}, &GlDrawArrays_In{})
+	registry.Add(binary.ID{0xc2, 0xe8, 0xb9, 0xa2, 0x4f, 0x95, 0x1c, 0xcc, 0xb2, 0xbb, 0x7c, 0xda, 0x6b, 0x95, 0x52, 0x19, 0xc6, 0x35, 0x5e, 0xbd}, &GlDrawArrays_In{})
 	//struct gles.GlDrawArrays_Out { }
-	binary.Register(binary.ID{0x01, 0x42, 0x72, 0x8c, 0xcc, 0x30, 0xfc, 0x6f, 0x79, 0x1f, 0xdd, 0x55, 0x1d, 0x20, 0x2e, 0x24, 0x65, 0xbb, 0xc9, 0x6d}, &GlDrawArrays_Out{})
+	registry.Add(binary.ID{0x01, 0x42, 0x72, 0x8c, 0xcc, 0x30, 0xfc, 0x6f, 0x79, 0x1f, 0xdd, 0x55, 0x1d, 0x20, 0x2e, 0x24, 0x65, 0xbb, 0xc9, 0x6d}, &GlDrawArrays_Out{})
 	//struct gles.GlDrawElements { Context:atom.ContextID, In:GlDrawElements_In, Out:GlDrawElements_Out }
-	binary.Register(binary.ID{0xda, 0xe8, 0x2f, 0xb2, 0x32, 0x5a, 0xe2, 0xb0, 0x42, 0xa2, 0xc2, 0x0a, 0x61, 0x6d, 0x30, 0xc0, 0x4d, 0x7f, 0x35, 0x41}, &GlDrawElements{})
+	registry.Add(binary.ID{0xda, 0xe8, 0x2f, 0xb2, 0x32, 0x5a, 0xe2, 0xb0, 0x42, 0xa2, 0xc2, 0x0a, 0x61, 0x6d, 0x30, 0xc0, 0x4d, 0x7f, 0x35, 0x41}, &GlDrawElements{})
 	//struct gles.GlDrawElements_In { DrawMode:DrawMode, ElementCount:int32, IndicesType:IndicesType, Indices:IndicesPointer }
-	binary.Register(binary.ID{0x02, 0x93, 0x34, 0xc7, 0xbd, 0x36, 0x1c, 0x91, 0x21, 0x2e, 0x75, 0xd8, 0x92, 0x1c, 0xb0, 0xf2, 0x5e, 0x83, 0x18, 0x17}, &GlDrawElements_In{})
+	registry.Add(binary.ID{0x02, 0x93, 0x34, 0xc7, 0xbd, 0x36, 0x1c, 0x91, 0x21, 0x2e, 0x75, 0xd8, 0x92, 0x1c, 0xb0, 0xf2, 0x5e, 0x83, 0x18, 0x17}, &GlDrawElements_In{})
 	//struct gles.GlDrawElements_Out { }
-	binary.Register(binary.ID{0x7a, 0xa6, 0xff, 0xe0, 0xd1, 0x2c, 0x3f, 0xfb, 0xcd, 0x4f, 0xcd, 0xd0, 0x1e, 0x26, 0x08, 0xc3, 0x26, 0x69, 0xee, 0x37}, &GlDrawElements_Out{})
+	registry.Add(binary.ID{0x7a, 0xa6, 0xff, 0xe0, 0xd1, 0x2c, 0x3f, 0xfb, 0xcd, 0x4f, 0xcd, 0xd0, 0x1e, 0x26, 0x08, 0xc3, 0x26, 0x69, 0xee, 0x37}, &GlDrawElements_Out{})
 	//struct gles.GlEGLImageTargetRenderbufferStorageOES { Context:atom.ContextID, In:GlEGLImageTargetRenderbufferStorageOES_In, Out:GlEGLImageTargetRenderbufferStorageOES_Out }
-	binary.Register(binary.ID{0xc4, 0x52, 0x10, 0x73, 0x32, 0x5b, 0xe7, 0x06, 0xdf, 0xd8, 0xe5, 0x8e, 0x25, 0xbd, 0x5b, 0xc9, 0xed, 0xa7, 0x27, 0x8a}, &GlEGLImageTargetRenderbufferStorageOES{})
+	registry.Add(binary.ID{0xc4, 0x52, 0x10, 0x73, 0x32, 0x5b, 0xe7, 0x06, 0xdf, 0xd8, 0xe5, 0x8e, 0x25, 0xbd, 0x5b, 0xc9, 0xed, 0xa7, 0x27, 0x8a}, &GlEGLImageTargetRenderbufferStorageOES{})
 	//struct gles.GlEGLImageTargetRenderbufferStorageOES_In { Target:ImageTargetRenderbufferStorage, Image:TexturePointer }
-	binary.Register(binary.ID{0xc7, 0x09, 0x44, 0xe5, 0x8b, 0x85, 0xf8, 0x36, 0xf9, 0x1a, 0x77, 0x74, 0xd0, 0x4f, 0xa4, 0xd8, 0x6a, 0x01, 0x52, 0x5f}, &GlEGLImageTargetRenderbufferStorageOES_In{})
+	registry.Add(binary.ID{0xc7, 0x09, 0x44, 0xe5, 0x8b, 0x85, 0xf8, 0x36, 0xf9, 0x1a, 0x77, 0x74, 0xd0, 0x4f, 0xa4, 0xd8, 0x6a, 0x01, 0x52, 0x5f}, &GlEGLImageTargetRenderbufferStorageOES_In{})
 	//struct gles.GlEGLImageTargetRenderbufferStorageOES_Out { }
-	binary.Register(binary.ID{0x70, 0x3c, 0xc0, 0x40, 0xd4, 0x37, 0x14, 0x5a, 0x4b, 0xcc, 0x9a, 0x3e, 0xe0, 0xec, 0xa1, 0x3f, 0x53, 0xc0, 0x3a, 0xbc}, &GlEGLImageTargetRenderbufferStorageOES_Out{})
+	registry.Add(binary.ID{0x70, 0x3c, 0xc0, 0x40, 0xd4, 0x37, 0x14, 0x5a, 0x4b, 0xcc, 0x9a, 0x3e, 0xe0, 0xec, 0xa1, 0x3f, 0x53, 0xc0, 0x3a, 0xbc}, &GlEGLImageTargetRenderbufferStorageOES_Out{})
 	//struct gles.GlEGLImageTargetTexture2DOES { Context:atom.ContextID, In:GlEGLImageTargetTexture2DOES_In, Out:GlEGLImageTargetTexture2DOES_Out }
-	binary.Register(binary.ID{0x17, 0xf7, 0x7c, 0xd9, 0x96, 0xe7, 0xe2, 0x23, 0xd2, 0xff, 0x39, 0xcb, 0xe8, 0x7b, 0x1f, 0xa5, 0x5f, 0xe9, 0x88, 0x82}, &GlEGLImageTargetTexture2DOES{})
+	registry.Add(binary.ID{0x17, 0xf7, 0x7c, 0xd9, 0x96, 0xe7, 0xe2, 0x23, 0xd2, 0xff, 0x39, 0xcb, 0xe8, 0x7b, 0x1f, 0xa5, 0x5f, 0xe9, 0x88, 0x82}, &GlEGLImageTargetTexture2DOES{})
 	//struct gles.GlEGLImageTargetTexture2DOES_In { Target:ImageTargetTexture, Image:ImageOES }
-	binary.Register(binary.ID{0x68, 0x12, 0x39, 0x3b, 0x55, 0x3a, 0xe9, 0x7e, 0xbb, 0x98, 0xfa, 0x6c, 0xe5, 0x27, 0xe1, 0xc5, 0xb3, 0x7b, 0xec, 0x63}, &GlEGLImageTargetTexture2DOES_In{})
+	registry.Add(binary.ID{0x68, 0x12, 0x39, 0x3b, 0x55, 0x3a, 0xe9, 0x7e, 0xbb, 0x98, 0xfa, 0x6c, 0xe5, 0x27, 0xe1, 0xc5, 0xb3, 0x7b, 0xec, 0x63}, &GlEGLImageTargetTexture2DOES_In{})
 	//struct gles.GlEGLImageTargetTexture2DOES_Out { }
-	binary.Register(binary.ID{0x19, 0xa6, 0xd8, 0xe6, 0xe4, 0xce, 0xf0, 0x95, 0x81, 0xa5, 0x15, 0x8e, 0x5a, 0x2e, 0x06, 0x84, 0x0a, 0xbc, 0xa5, 0xbe}, &GlEGLImageTargetTexture2DOES_Out{})
+	registry.Add(binary.ID{0x19, 0xa6, 0xd8, 0xe6, 0xe4, 0xce, 0xf0, 0x95, 0x81, 0xa5, 0x15, 0x8e, 0x5a, 0x2e, 0x06, 0x84, 0x0a, 0xbc, 0xa5, 0xbe}, &GlEGLImageTargetTexture2DOES_Out{})
 	//struct gles.GlEnable { Context:atom.ContextID, In:GlEnable_In, Out:GlEnable_Out }
-	binary.Register(binary.ID{0xb1, 0x09, 0xe9, 0xb4, 0x01, 0xff, 0x68, 0xbc, 0x86, 0x0f, 0x45, 0x63, 0x7e, 0x4c, 0xba, 0xb9, 0xf5, 0x9b, 0x08, 0xdc}, &GlEnable{})
+	registry.Add(binary.ID{0xb1, 0x09, 0xe9, 0xb4, 0x01, 0xff, 0x68, 0xbc, 0x86, 0x0f, 0x45, 0x63, 0x7e, 0x4c, 0xba, 0xb9, 0xf5, 0x9b, 0x08, 0xdc}, &GlEnable{})
 	//struct gles.GlEnableClientState { Context:atom.ContextID, In:GlEnableClientState_In, Out:GlEnableClientState_Out }
-	binary.Register(binary.ID{0xe3, 0x39, 0x26, 0xd6, 0x1b, 0xbd, 0xc0, 0xc2, 0x1d, 0xc9, 0xa1, 0x99, 0x87, 0xf6, 0xc6, 0x36, 0xb5, 0xd2, 0x1a, 0x9c}, &GlEnableClientState{})
+	registry.Add(binary.ID{0xe3, 0x39, 0x26, 0xd6, 0x1b, 0xbd, 0xc0, 0xc2, 0x1d, 0xc9, 0xa1, 0x99, 0x87, 0xf6, 0xc6, 0x36, 0xb5, 0xd2, 0x1a, 0x9c}, &GlEnableClientState{})
 	//struct gles.GlEnableClientState_In { Type:ArrayType }
-	binary.Register(binary.ID{0xfc, 0xcc, 0xd2, 0xe0, 0xe1, 0xea, 0xde, 0xe3, 0x04, 0xd4, 0x8c, 0xe2, 0x72, 0xaa, 0x9e, 0xe7, 0x66, 0x61, 0x70, 0x4a}, &GlEnableClientState_In{})
+	registry.Add(binary.ID{0xfc, 0xcc, 0xd2, 0xe0, 0xe1, 0xea, 0xde, 0xe3, 0x04, 0xd4, 0x8c, 0xe2, 0x72, 0xaa, 0x9e, 0xe7, 0x66, 0x61, 0x70, 0x4a}, &GlEnableClientState_In{})
 	//struct gles.GlEnableClientState_Out { }
-	binary.Register(binary.ID{0x24, 0x7b, 0x67, 0x6f, 0xf0, 0x01, 0x1f, 0x8f, 0x8a, 0x81, 0xa0, 0xd7, 0x70, 0x07, 0x82, 0x65, 0x2b, 0x7e, 0xa4, 0x87}, &GlEnableClientState_Out{})
+	registry.Add(binary.ID{0x24, 0x7b, 0x67, 0x6f, 0xf0, 0x01, 0x1f, 0x8f, 0x8a, 0x81, 0xa0, 0xd7, 0x70, 0x07, 0x82, 0x65, 0x2b, 0x7e, 0xa4, 0x87}, &GlEnableClientState_Out{})
 	//struct gles.GlEnableVertexAttribArray { Context:atom.ContextID, In:GlEnableVertexAttribArray_In, Out:GlEnableVertexAttribArray_Out }
-	binary.Register(binary.ID{0x54, 0x6b, 0x58, 0x8b, 0xe6, 0x6d, 0x4e, 0xd3, 0x26, 0x69, 0xab, 0xa9, 0x02, 0x13, 0x94, 0x6c, 0x69, 0xfc, 0x71, 0x09}, &GlEnableVertexAttribArray{})
+	registry.Add(binary.ID{0x54, 0x6b, 0x58, 0x8b, 0xe6, 0x6d, 0x4e, 0xd3, 0x26, 0x69, 0xab, 0xa9, 0x02, 0x13, 0x94, 0x6c, 0x69, 0xfc, 0x71, 0x09}, &GlEnableVertexAttribArray{})
 	//struct gles.GlEnableVertexAttribArray_In { Location:AttributeLocation }
-	binary.Register(binary.ID{0xa3, 0x0a, 0xca, 0x0e, 0x17, 0xe2, 0x50, 0xd0, 0xa9, 0x29, 0x26, 0x17, 0x9c, 0x2d, 0x1c, 0x36, 0xea, 0x87, 0x41, 0x88}, &GlEnableVertexAttribArray_In{})
+	registry.Add(binary.ID{0xa3, 0x0a, 0xca, 0x0e, 0x17, 0xe2, 0x50, 0xd0, 0xa9, 0x29, 0x26, 0x17, 0x9c, 0x2d, 0x1c, 0x36, 0xea, 0x87, 0x41, 0x88}, &GlEnableVertexAttribArray_In{})
 	//struct gles.GlEnableVertexAttribArray_Out { }
-	binary.Register(binary.ID{0x56, 0x52, 0x5a, 0xc1, 0x6f, 0xa8, 0x92, 0xb4, 0x7b, 0xda, 0x74, 0xaf, 0x92, 0x0d, 0x9f, 0x14, 0xa7, 0xd2, 0xeb, 0xa6}, &GlEnableVertexAttribArray_Out{})
+	registry.Add(binary.ID{0x56, 0x52, 0x5a, 0xc1, 0x6f, 0xa8, 0x92, 0xb4, 0x7b, 0xda, 0x74, 0xaf, 0x92, 0x0d, 0x9f, 0x14, 0xa7, 0xd2, 0xeb, 0xa6}, &GlEnableVertexAttribArray_Out{})
 	//struct gles.GlEnable_In { Capability:Capability }
-	binary.Register(binary.ID{0x9b, 0xf4, 0xac, 0x46, 0xfa, 0xcf, 0x42, 0x9e, 0x90, 0x20, 0x3f, 0x1d, 0xda, 0xd7, 0x83, 0x7a, 0x59, 0x55, 0x7b, 0x42}, &GlEnable_In{})
+	registry.Add(binary.ID{0x9b, 0xf4, 0xac, 0x46, 0xfa, 0xcf, 0x42, 0x9e, 0x90, 0x20, 0x3f, 0x1d, 0xda, 0xd7, 0x83, 0x7a, 0x59, 0x55, 0x7b, 0x42}, &GlEnable_In{})
 	//struct gles.GlEnable_Out { }
-	binary.Register(binary.ID{0xd0, 0x07, 0x84, 0xd3, 0x0f, 0xb6, 0x16, 0xc2, 0x2c, 0x39, 0x3a, 0x40, 0xe4, 0x31, 0x65, 0xbf, 0xb1, 0x09, 0x01, 0xba}, &GlEnable_Out{})
+	registry.Add(binary.ID{0xd0, 0x07, 0x84, 0xd3, 0x0f, 0xb6, 0x16, 0xc2, 0x2c, 0x39, 0x3a, 0x40, 0xe4, 0x31, 0x65, 0xbf, 0xb1, 0x09, 0x01, 0xba}, &GlEnable_Out{})
 	//struct gles.GlEndQuery { Context:atom.ContextID, In:GlEndQuery_In, Out:GlEndQuery_Out }
-	binary.Register(binary.ID{0x2a, 0xfd, 0x11, 0x30, 0x29, 0x14, 0xed, 0x51, 0x7a, 0x02, 0xa5, 0x18, 0xf3, 0x48, 0x19, 0xc5, 0x7a, 0xa1, 0xa6, 0x9f}, &GlEndQuery{})
+	registry.Add(binary.ID{0x2a, 0xfd, 0x11, 0x30, 0x29, 0x14, 0xed, 0x51, 0x7a, 0x02, 0xa5, 0x18, 0xf3, 0x48, 0x19, 0xc5, 0x7a, 0xa1, 0xa6, 0x9f}, &GlEndQuery{})
 	//struct gles.GlEndQueryEXT { Context:atom.ContextID, In:GlEndQueryEXT_In, Out:GlEndQueryEXT_Out }
-	binary.Register(binary.ID{0xf7, 0x6d, 0x15, 0x71, 0x9b, 0xab, 0xb1, 0x1b, 0x85, 0x68, 0x87, 0x4a, 0x74, 0x28, 0x89, 0x1f, 0xc4, 0x7c, 0x6e, 0x10}, &GlEndQueryEXT{})
+	registry.Add(binary.ID{0xf7, 0x6d, 0x15, 0x71, 0x9b, 0xab, 0xb1, 0x1b, 0x85, 0x68, 0x87, 0x4a, 0x74, 0x28, 0x89, 0x1f, 0xc4, 0x7c, 0x6e, 0x10}, &GlEndQueryEXT{})
 	//struct gles.GlEndQueryEXT_In { Target:QueryTarget }
-	binary.Register(binary.ID{0xae, 0x08, 0x6a, 0xdf, 0xca, 0x77, 0x96, 0x49, 0x79, 0x85, 0xf2, 0x1f, 0x9f, 0xb3, 0x75, 0x97, 0x80, 0xda, 0xea, 0x6f}, &GlEndQueryEXT_In{})
+	registry.Add(binary.ID{0xae, 0x08, 0x6a, 0xdf, 0xca, 0x77, 0x96, 0x49, 0x79, 0x85, 0xf2, 0x1f, 0x9f, 0xb3, 0x75, 0x97, 0x80, 0xda, 0xea, 0x6f}, &GlEndQueryEXT_In{})
 	//struct gles.GlEndQueryEXT_Out { }
-	binary.Register(binary.ID{0x82, 0x28, 0xa3, 0x98, 0xd3, 0x56, 0x3a, 0x73, 0xfb, 0xd8, 0x71, 0x1a, 0xad, 0x7d, 0x0d, 0x2f, 0xe7, 0x3a, 0x12, 0x55}, &GlEndQueryEXT_Out{})
+	registry.Add(binary.ID{0x82, 0x28, 0xa3, 0x98, 0xd3, 0x56, 0x3a, 0x73, 0xfb, 0xd8, 0x71, 0x1a, 0xad, 0x7d, 0x0d, 0x2f, 0xe7, 0x3a, 0x12, 0x55}, &GlEndQueryEXT_Out{})
 	//struct gles.GlEndQuery_In { Target:QueryTarget }
-	binary.Register(binary.ID{0x8d, 0xa8, 0xa9, 0x85, 0xaa, 0xe0, 0x00, 0x74, 0x7f, 0x7b, 0x22, 0xfb, 0x73, 0x77, 0xbd, 0x9f, 0xa9, 0x4a, 0xd2, 0x90}, &GlEndQuery_In{})
+	registry.Add(binary.ID{0x8d, 0xa8, 0xa9, 0x85, 0xaa, 0xe0, 0x00, 0x74, 0x7f, 0x7b, 0x22, 0xfb, 0x73, 0x77, 0xbd, 0x9f, 0xa9, 0x4a, 0xd2, 0x90}, &GlEndQuery_In{})
 	//struct gles.GlEndQuery_Out { }
-	binary.Register(binary.ID{0xea, 0x94, 0xd2, 0xf6, 0x6b, 0x67, 0x77, 0x60, 0x91, 0x66, 0xfc, 0x75, 0x41, 0x48, 0x39, 0x6e, 0x34, 0x96, 0x1d, 0x24}, &GlEndQuery_Out{})
+	registry.Add(binary.ID{0xea, 0x94, 0xd2, 0xf6, 0x6b, 0x67, 0x77, 0x60, 0x91, 0x66, 0xfc, 0x75, 0x41, 0x48, 0x39, 0x6e, 0x34, 0x96, 0x1d, 0x24}, &GlEndQuery_Out{})
 	//struct gles.GlEndTilingQCOM { Context:atom.ContextID, In:GlEndTilingQCOM_In, Out:GlEndTilingQCOM_Out }
-	binary.Register(binary.ID{0x5a, 0x85, 0x20, 0x9b, 0x2a, 0x8e, 0x44, 0xca, 0xc5, 0xcf, 0x55, 0x01, 0x61, 0x2f, 0x72, 0xdd, 0x4d, 0x22, 0x9a, 0x20}, &GlEndTilingQCOM{})
+	registry.Add(binary.ID{0x5a, 0x85, 0x20, 0x9b, 0x2a, 0x8e, 0x44, 0xca, 0xc5, 0xcf, 0x55, 0x01, 0x61, 0x2f, 0x72, 0xdd, 0x4d, 0x22, 0x9a, 0x20}, &GlEndTilingQCOM{})
 	//struct gles.GlEndTilingQCOM_In { PreserveMask:TilePreserveMaskQCOM }
-	binary.Register(binary.ID{0x1f, 0x3b, 0xa4, 0x55, 0x18, 0x86, 0xe9, 0x3b, 0x02, 0x28, 0x8f, 0x83, 0x61, 0xec, 0x59, 0x25, 0xa6, 0x84, 0xf4, 0x7a}, &GlEndTilingQCOM_In{})
+	registry.Add(binary.ID{0x1f, 0x3b, 0xa4, 0x55, 0x18, 0x86, 0xe9, 0x3b, 0x02, 0x28, 0x8f, 0x83, 0x61, 0xec, 0x59, 0x25, 0xa6, 0x84, 0xf4, 0x7a}, &GlEndTilingQCOM_In{})
 	//struct gles.GlEndTilingQCOM_Out { }
-	binary.Register(binary.ID{0x12, 0x04, 0xcc, 0xb2, 0xd7, 0xf3, 0x58, 0xdf, 0x3e, 0x81, 0xbd, 0xc5, 0x80, 0xa8, 0x47, 0x28, 0x07, 0x1d, 0xd5, 0x78}, &GlEndTilingQCOM_Out{})
+	registry.Add(binary.ID{0x12, 0x04, 0xcc, 0xb2, 0xd7, 0xf3, 0x58, 0xdf, 0x3e, 0x81, 0xbd, 0xc5, 0x80, 0xa8, 0x47, 0x28, 0x07, 0x1d, 0xd5, 0x78}, &GlEndTilingQCOM_Out{})
 	//struct gles.GlFinish { Context:atom.ContextID, In:GlFinish_In, Out:GlFinish_Out }
-	binary.Register(binary.ID{0xec, 0xeb, 0x59, 0x28, 0xca, 0x08, 0x15, 0x5f, 0x94, 0x62, 0x65, 0x1a, 0xe6, 0x88, 0xc1, 0x6e, 0x10, 0x2a, 0xc0, 0xc3}, &GlFinish{})
+	registry.Add(binary.ID{0xec, 0xeb, 0x59, 0x28, 0xca, 0x08, 0x15, 0x5f, 0x94, 0x62, 0x65, 0x1a, 0xe6, 0x88, 0xc1, 0x6e, 0x10, 0x2a, 0xc0, 0xc3}, &GlFinish{})
 	//struct gles.GlFinish_In { }
-	binary.Register(binary.ID{0x3a, 0x3d, 0x2e, 0xf6, 0x2d, 0x54, 0xd6, 0x36, 0xaa, 0x30, 0x17, 0x41, 0x53, 0x8f, 0xa5, 0xfb, 0x23, 0x89, 0x47, 0x2e}, &GlFinish_In{})
+	registry.Add(binary.ID{0x3a, 0x3d, 0x2e, 0xf6, 0x2d, 0x54, 0xd6, 0x36, 0xaa, 0x30, 0x17, 0x41, 0x53, 0x8f, 0xa5, 0xfb, 0x23, 0x89, 0x47, 0x2e}, &GlFinish_In{})
 	//struct gles.GlFinish_Out { }
-	binary.Register(binary.ID{0x1c, 0x87, 0xc8, 0x8d, 0xb6, 0xa7, 0x95, 0x2c, 0x9c, 0xa9, 0x00, 0x7f, 0x5a, 0x69, 0x0f, 0x4e, 0xeb, 0xd6, 0x18, 0x5f}, &GlFinish_Out{})
+	registry.Add(binary.ID{0x1c, 0x87, 0xc8, 0x8d, 0xb6, 0xa7, 0x95, 0x2c, 0x9c, 0xa9, 0x00, 0x7f, 0x5a, 0x69, 0x0f, 0x4e, 0xeb, 0xd6, 0x18, 0x5f}, &GlFinish_Out{})
 	//struct gles.GlFlush { Context:atom.ContextID, In:GlFlush_In, Out:GlFlush_Out }
-	binary.Register(binary.ID{0xa2, 0x06, 0xaa, 0x4a, 0x8a, 0x34, 0xf3, 0x8d, 0x57, 0xb1, 0x58, 0x27, 0xb2, 0x20, 0xe4, 0x18, 0x18, 0x51, 0x17, 0x7d}, &GlFlush{})
+	registry.Add(binary.ID{0xa2, 0x06, 0xaa, 0x4a, 0x8a, 0x34, 0xf3, 0x8d, 0x57, 0xb1, 0x58, 0x27, 0xb2, 0x20, 0xe4, 0x18, 0x18, 0x51, 0x17, 0x7d}, &GlFlush{})
 	//struct gles.GlFlush_In { }
-	binary.Register(binary.ID{0x86, 0x50, 0x39, 0xc8, 0xa3, 0xa4, 0xef, 0xee, 0x6e, 0x03, 0x8e, 0x63, 0xea, 0x21, 0x93, 0x15, 0xe5, 0x8c, 0x06, 0x17}, &GlFlush_In{})
+	registry.Add(binary.ID{0x86, 0x50, 0x39, 0xc8, 0xa3, 0xa4, 0xef, 0xee, 0x6e, 0x03, 0x8e, 0x63, 0xea, 0x21, 0x93, 0x15, 0xe5, 0x8c, 0x06, 0x17}, &GlFlush_In{})
 	//struct gles.GlFlush_Out { }
-	binary.Register(binary.ID{0x4e, 0xaf, 0xde, 0x4b, 0x86, 0x35, 0x94, 0xcd, 0x63, 0xac, 0x5e, 0x4c, 0xdf, 0x8b, 0x23, 0xeb, 0xef, 0x4e, 0x61, 0xc7}, &GlFlush_Out{})
+	registry.Add(binary.ID{0x4e, 0xaf, 0xde, 0x4b, 0x86, 0x35, 0x94, 0xcd, 0x63, 0xac, 0x5e, 0x4c, 0xdf, 0x8b, 0x23, 0xeb, 0xef, 0x4e, 0x61, 0xc7}, &GlFlush_Out{})
 	//struct gles.GlFramebufferRenderbuffer { Context:atom.ContextID, In:GlFramebufferRenderbuffer_In, Out:GlFramebufferRenderbuffer_Out }
-	binary.Register(binary.ID{0x58, 0xd6, 0x44, 0x5f, 0x67, 0xaa, 0xb9, 0xfb, 0xb5, 0xd9, 0xb3, 0x78, 0xd9, 0x5c, 0x3e, 0xda, 0x51, 0xd6, 0xe8, 0x5a}, &GlFramebufferRenderbuffer{})
+	registry.Add(binary.ID{0x58, 0xd6, 0x44, 0x5f, 0x67, 0xaa, 0xb9, 0xfb, 0xb5, 0xd9, 0xb3, 0x78, 0xd9, 0x5c, 0x3e, 0xda, 0x51, 0xd6, 0xe8, 0x5a}, &GlFramebufferRenderbuffer{})
 	//struct gles.GlFramebufferRenderbuffer_In { FramebufferTarget:FramebufferTarget, FramebufferAttachment:FramebufferAttachment, RenderbufferTarget:RenderbufferTarget, Renderbuffer:RenderbufferId }
-	binary.Register(binary.ID{0x32, 0x9c, 0x4d, 0xe1, 0xd6, 0x5c, 0x79, 0x7d, 0xb6, 0x9c, 0x08, 0x5f, 0x7c, 0x8d, 0xdc, 0xf0, 0xdc, 0x0e, 0xf1, 0xf4}, &GlFramebufferRenderbuffer_In{})
+	registry.Add(binary.ID{0x32, 0x9c, 0x4d, 0xe1, 0xd6, 0x5c, 0x79, 0x7d, 0xb6, 0x9c, 0x08, 0x5f, 0x7c, 0x8d, 0xdc, 0xf0, 0xdc, 0x0e, 0xf1, 0xf4}, &GlFramebufferRenderbuffer_In{})
 	//struct gles.GlFramebufferRenderbuffer_Out { }
-	binary.Register(binary.ID{0xb9, 0x0f, 0x67, 0x55, 0x3c, 0x8e, 0x6d, 0xe6, 0x09, 0xf6, 0x44, 0xbd, 0x12, 0x02, 0xbc, 0xed, 0x8d, 0xa7, 0x88, 0x15}, &GlFramebufferRenderbuffer_Out{})
+	registry.Add(binary.ID{0xb9, 0x0f, 0x67, 0x55, 0x3c, 0x8e, 0x6d, 0xe6, 0x09, 0xf6, 0x44, 0xbd, 0x12, 0x02, 0xbc, 0xed, 0x8d, 0xa7, 0x88, 0x15}, &GlFramebufferRenderbuffer_Out{})
 	//struct gles.GlFramebufferTexture2D { Context:atom.ContextID, In:GlFramebufferTexture2D_In, Out:GlFramebufferTexture2D_Out }
-	binary.Register(binary.ID{0xd2, 0x40, 0x7a, 0x95, 0x87, 0x6b, 0xf1, 0xbd, 0x88, 0x60, 0x45, 0xe3, 0xfc, 0xad, 0x86, 0x21, 0xaa, 0x1f, 0x7c, 0x65}, &GlFramebufferTexture2D{})
+	registry.Add(binary.ID{0xd2, 0x40, 0x7a, 0x95, 0x87, 0x6b, 0xf1, 0xbd, 0x88, 0x60, 0x45, 0xe3, 0xfc, 0xad, 0x86, 0x21, 0xaa, 0x1f, 0x7c, 0x65}, &GlFramebufferTexture2D{})
 	//struct gles.GlFramebufferTexture2D_In { FramebufferTarget:FramebufferTarget, FramebufferAttachment:FramebufferAttachment, TextureTarget:TextureImageTarget, Texture:TextureId, Level:int32 }
-	binary.Register(binary.ID{0xf1, 0x77, 0x1c, 0x43, 0xad, 0xcb, 0xdc, 0xb5, 0x30, 0x5d, 0x78, 0xb8, 0x02, 0x93, 0x4e, 0x73, 0x0c, 0x38, 0x90, 0x4e}, &GlFramebufferTexture2D_In{})
+	registry.Add(binary.ID{0xf1, 0x77, 0x1c, 0x43, 0xad, 0xcb, 0xdc, 0xb5, 0x30, 0x5d, 0x78, 0xb8, 0x02, 0x93, 0x4e, 0x73, 0x0c, 0x38, 0x90, 0x4e}, &GlFramebufferTexture2D_In{})
 	//struct gles.GlFramebufferTexture2D_Out { }
-	binary.Register(binary.ID{0x89, 0xb9, 0xf8, 0x74, 0x28, 0x2e, 0x46, 0x9a, 0xd2, 0x7f, 0x74, 0xe8, 0x4d, 0x14, 0xb7, 0xc9, 0x93, 0x20, 0xd3, 0xe8}, &GlFramebufferTexture2D_Out{})
+	registry.Add(binary.ID{0x89, 0xb9, 0xf8, 0x74, 0x28, 0x2e, 0x46, 0x9a, 0xd2, 0x7f, 0x74, 0xe8, 0x4d, 0x14, 0xb7, 0xc9, 0x93, 0x20, 0xd3, 0xe8}, &GlFramebufferTexture2D_Out{})
 	//struct gles.GlFrontFace { Context:atom.ContextID, In:GlFrontFace_In, Out:GlFrontFace_Out }
-	binary.Register(binary.ID{0x32, 0x2b, 0xcc, 0xdc, 0x44, 0x74, 0x86, 0xd2, 0x52, 0x5d, 0x3b, 0x67, 0x1d, 0x45, 0xa4, 0x22, 0xbc, 0x16, 0x2a, 0xd2}, &GlFrontFace{})
+	registry.Add(binary.ID{0x32, 0x2b, 0xcc, 0xdc, 0x44, 0x74, 0x86, 0xd2, 0x52, 0x5d, 0x3b, 0x67, 0x1d, 0x45, 0xa4, 0x22, 0xbc, 0x16, 0x2a, 0xd2}, &GlFrontFace{})
 	//struct gles.GlFrontFace_In { Orientation:FaceOrientation }
-	binary.Register(binary.ID{0x95, 0x77, 0x6c, 0x73, 0xaf, 0xc0, 0xf7, 0x09, 0x1c, 0xb2, 0x41, 0xe3, 0x25, 0xbe, 0x02, 0x9a, 0xb6, 0x7e, 0x4c, 0x6d}, &GlFrontFace_In{})
+	registry.Add(binary.ID{0x95, 0x77, 0x6c, 0x73, 0xaf, 0xc0, 0xf7, 0x09, 0x1c, 0xb2, 0x41, 0xe3, 0x25, 0xbe, 0x02, 0x9a, 0xb6, 0x7e, 0x4c, 0x6d}, &GlFrontFace_In{})
 	//struct gles.GlFrontFace_Out { }
-	binary.Register(binary.ID{0x90, 0xf3, 0x0e, 0x2e, 0xd3, 0x84, 0x2b, 0xce, 0x34, 0x9d, 0xd8, 0x8f, 0x27, 0x10, 0xe9, 0x0b, 0x20, 0x0b, 0x93, 0x98}, &GlFrontFace_Out{})
+	registry.Add(binary.ID{0x90, 0xf3, 0x0e, 0x2e, 0xd3, 0x84, 0x2b, 0xce, 0x34, 0x9d, 0xd8, 0x8f, 0x27, 0x10, 0xe9, 0x0b, 0x20, 0x0b, 0x93, 0x98}, &GlFrontFace_Out{})
 	//struct gles.GlGenBuffers { Context:atom.ContextID, In:GlGenBuffers_In, Out:GlGenBuffers_Out }
-	binary.Register(binary.ID{0x69, 0xbe, 0x0f, 0xb3, 0x07, 0xbc, 0x0b, 0xf8, 0xfe, 0x49, 0x12, 0xd6, 0xa9, 0xf6, 0xc7, 0x2d, 0xa9, 0x46, 0x49, 0x19}, &GlGenBuffers{})
+	registry.Add(binary.ID{0x69, 0xbe, 0x0f, 0xb3, 0x07, 0xbc, 0x0b, 0xf8, 0xfe, 0x49, 0x12, 0xd6, 0xa9, 0xf6, 0xc7, 0x2d, 0xa9, 0x46, 0x49, 0x19}, &GlGenBuffers{})
 	//struct gles.GlGenBuffers_In { Count:int32 }
-	binary.Register(binary.ID{0xdc, 0x31, 0xcc, 0xb3, 0xa3, 0x9e, 0x42, 0x21, 0x03, 0xa0, 0x5e, 0x94, 0x45, 0x16, 0x69, 0x77, 0x92, 0x2f, 0xb4, 0x95}, &GlGenBuffers_In{})
+	registry.Add(binary.ID{0xdc, 0x31, 0xcc, 0xb3, 0xa3, 0x9e, 0x42, 0x21, 0x03, 0xa0, 0x5e, 0x94, 0x45, 0x16, 0x69, 0x77, 0x92, 0x2f, 0xb4, 0x95}, &GlGenBuffers_In{})
 	//struct gles.GlGenBuffers_Out { Buffers:BufferIdArray }
-	binary.Register(binary.ID{0xb8, 0xa1, 0x34, 0xfe, 0xa1, 0x16, 0x5c, 0x52, 0xc1, 0x00, 0xff, 0xb7, 0x7f, 0x35, 0x2d, 0xd0, 0x25, 0xaa, 0xf8, 0x22}, &GlGenBuffers_Out{})
+	registry.Add(binary.ID{0xb8, 0xa1, 0x34, 0xfe, 0xa1, 0x16, 0x5c, 0x52, 0xc1, 0x00, 0xff, 0xb7, 0x7f, 0x35, 0x2d, 0xd0, 0x25, 0xaa, 0xf8, 0x22}, &GlGenBuffers_Out{})
 	//struct gles.GlGenFramebuffers { Context:atom.ContextID, In:GlGenFramebuffers_In, Out:GlGenFramebuffers_Out }
-	binary.Register(binary.ID{0x49, 0xf3, 0xc2, 0x21, 0xb5, 0x18, 0x20, 0x83, 0x40, 0xae, 0x8e, 0x58, 0x4e, 0x1f, 0xcf, 0xfa, 0xd6, 0xba, 0x2f, 0x72}, &GlGenFramebuffers{})
+	registry.Add(binary.ID{0x49, 0xf3, 0xc2, 0x21, 0xb5, 0x18, 0x20, 0x83, 0x40, 0xae, 0x8e, 0x58, 0x4e, 0x1f, 0xcf, 0xfa, 0xd6, 0xba, 0x2f, 0x72}, &GlGenFramebuffers{})
 	//struct gles.GlGenFramebuffers_In { Count:int32 }
-	binary.Register(binary.ID{0xdb, 0x70, 0x46, 0xf8, 0xb1, 0x49, 0x3c, 0xa2, 0x2a, 0x76, 0x8e, 0x18, 0xe5, 0x3c, 0x14, 0x08, 0xf5, 0x52, 0x24, 0x1a}, &GlGenFramebuffers_In{})
+	registry.Add(binary.ID{0xdb, 0x70, 0x46, 0xf8, 0xb1, 0x49, 0x3c, 0xa2, 0x2a, 0x76, 0x8e, 0x18, 0xe5, 0x3c, 0x14, 0x08, 0xf5, 0x52, 0x24, 0x1a}, &GlGenFramebuffers_In{})
 	//struct gles.GlGenFramebuffers_Out { Framebuffers:FramebufferIdArray }
-	binary.Register(binary.ID{0x0b, 0x70, 0x76, 0xfc, 0xf5, 0x98, 0x74, 0xd2, 0xb2, 0xfb, 0xd1, 0x6e, 0xca, 0xaa, 0x92, 0x50, 0xab, 0x48, 0xf6, 0x43}, &GlGenFramebuffers_Out{})
+	registry.Add(binary.ID{0x0b, 0x70, 0x76, 0xfc, 0xf5, 0x98, 0x74, 0xd2, 0xb2, 0xfb, 0xd1, 0x6e, 0xca, 0xaa, 0x92, 0x50, 0xab, 0x48, 0xf6, 0x43}, &GlGenFramebuffers_Out{})
 	//struct gles.GlGenQueries { Context:atom.ContextID, In:GlGenQueries_In, Out:GlGenQueries_Out }
-	binary.Register(binary.ID{0x56, 0xe9, 0xeb, 0x00, 0xcc, 0xf5, 0x4e, 0x0e, 0xe5, 0x42, 0x8b, 0x81, 0x37, 0xc4, 0xe2, 0x59, 0x00, 0x43, 0xb2, 0x05}, &GlGenQueries{})
+	registry.Add(binary.ID{0x56, 0xe9, 0xeb, 0x00, 0xcc, 0xf5, 0x4e, 0x0e, 0xe5, 0x42, 0x8b, 0x81, 0x37, 0xc4, 0xe2, 0x59, 0x00, 0x43, 0xb2, 0x05}, &GlGenQueries{})
 	//struct gles.GlGenQueriesEXT { Context:atom.ContextID, In:GlGenQueriesEXT_In, Out:GlGenQueriesEXT_Out }
-	binary.Register(binary.ID{0xfc, 0x93, 0x85, 0x78, 0x87, 0x4c, 0xb3, 0xec, 0x11, 0xfe, 0x57, 0x36, 0xc2, 0x98, 0x51, 0x0d, 0x66, 0x2c, 0xf9, 0x84}, &GlGenQueriesEXT{})
+	registry.Add(binary.ID{0xfc, 0x93, 0x85, 0x78, 0x87, 0x4c, 0xb3, 0xec, 0x11, 0xfe, 0x57, 0x36, 0xc2, 0x98, 0x51, 0x0d, 0x66, 0x2c, 0xf9, 0x84}, &GlGenQueriesEXT{})
 	//struct gles.GlGenQueriesEXT_In { Count:int32 }
-	binary.Register(binary.ID{0xe6, 0x77, 0x64, 0x37, 0xe8, 0xdd, 0x07, 0x46, 0xbf, 0x12, 0x1e, 0xc5, 0x56, 0xef, 0x5a, 0x2f, 0x42, 0xa3, 0xe0, 0x62}, &GlGenQueriesEXT_In{})
+	registry.Add(binary.ID{0xe6, 0x77, 0x64, 0x37, 0xe8, 0xdd, 0x07, 0x46, 0xbf, 0x12, 0x1e, 0xc5, 0x56, 0xef, 0x5a, 0x2f, 0x42, 0xa3, 0xe0, 0x62}, &GlGenQueriesEXT_In{})
 	//struct gles.GlGenQueriesEXT_Out { Queries:QueryIdArray }
-	binary.Register(binary.ID{0x26, 0x35, 0xf8, 0x55, 0xb8, 0xa9, 0x5b, 0x9a, 0xba, 0x29, 0xf6, 0xcc, 0x1f, 0x42, 0xe4, 0xbc, 0xca, 0x38, 0x7f, 0x34}, &GlGenQueriesEXT_Out{})
+	registry.Add(binary.ID{0x26, 0x35, 0xf8, 0x55, 0xb8, 0xa9, 0x5b, 0x9a, 0xba, 0x29, 0xf6, 0xcc, 0x1f, 0x42, 0xe4, 0xbc, 0xca, 0x38, 0x7f, 0x34}, &GlGenQueriesEXT_Out{})
 	//struct gles.GlGenQueries_In { Count:int32 }
-	binary.Register(binary.ID{0xc6, 0x0f, 0x7f, 0xe8, 0x61, 0x85, 0x49, 0x77, 0xba, 0x77, 0x6f, 0x69, 0xd3, 0xcd, 0x24, 0x98, 0x39, 0xed, 0x21, 0xac}, &GlGenQueries_In{})
+	registry.Add(binary.ID{0xc6, 0x0f, 0x7f, 0xe8, 0x61, 0x85, 0x49, 0x77, 0xba, 0x77, 0x6f, 0x69, 0xd3, 0xcd, 0x24, 0x98, 0x39, 0xed, 0x21, 0xac}, &GlGenQueries_In{})
 	//struct gles.GlGenQueries_Out { Queries:QueryIdArray }
-	binary.Register(binary.ID{0x02, 0x46, 0x6d, 0xf5, 0x1c, 0xba, 0x10, 0xea, 0x43, 0xee, 0xeb, 0x24, 0xbc, 0x7e, 0x70, 0x98, 0xc6, 0xd2, 0x56, 0x31}, &GlGenQueries_Out{})
+	registry.Add(binary.ID{0x02, 0x46, 0x6d, 0xf5, 0x1c, 0xba, 0x10, 0xea, 0x43, 0xee, 0xeb, 0x24, 0xbc, 0x7e, 0x70, 0x98, 0xc6, 0xd2, 0x56, 0x31}, &GlGenQueries_Out{})
 	//struct gles.GlGenRenderbuffers { Context:atom.ContextID, In:GlGenRenderbuffers_In, Out:GlGenRenderbuffers_Out }
-	binary.Register(binary.ID{0x1e, 0xce, 0xc4, 0x9c, 0x74, 0x1a, 0xc7, 0x5a, 0x15, 0x7e, 0x0f, 0x33, 0xf9, 0xa6, 0x5d, 0x02, 0xed, 0xd8, 0xdd, 0x25}, &GlGenRenderbuffers{})
+	registry.Add(binary.ID{0x1e, 0xce, 0xc4, 0x9c, 0x74, 0x1a, 0xc7, 0x5a, 0x15, 0x7e, 0x0f, 0x33, 0xf9, 0xa6, 0x5d, 0x02, 0xed, 0xd8, 0xdd, 0x25}, &GlGenRenderbuffers{})
 	//struct gles.GlGenRenderbuffers_In { Count:int32 }
-	binary.Register(binary.ID{0xa2, 0x67, 0x9f, 0x95, 0xd0, 0x8b, 0x92, 0x28, 0x78, 0xc0, 0xdd, 0xab, 0x4a, 0xbd, 0x8a, 0x3e, 0xea, 0xa9, 0xac, 0xf8}, &GlGenRenderbuffers_In{})
+	registry.Add(binary.ID{0xa2, 0x67, 0x9f, 0x95, 0xd0, 0x8b, 0x92, 0x28, 0x78, 0xc0, 0xdd, 0xab, 0x4a, 0xbd, 0x8a, 0x3e, 0xea, 0xa9, 0xac, 0xf8}, &GlGenRenderbuffers_In{})
 	//struct gles.GlGenRenderbuffers_Out { Renderbuffers:RenderbufferIdArray }
-	binary.Register(binary.ID{0x0f, 0x3b, 0xdc, 0xf1, 0x9b, 0x5e, 0x5e, 0x98, 0xd6, 0x6c, 0xa3, 0xb9, 0x3e, 0x8f, 0x0d, 0xeb, 0x36, 0x6d, 0x5f, 0x96}, &GlGenRenderbuffers_Out{})
+	registry.Add(binary.ID{0x0f, 0x3b, 0xdc, 0xf1, 0x9b, 0x5e, 0x5e, 0x98, 0xd6, 0x6c, 0xa3, 0xb9, 0x3e, 0x8f, 0x0d, 0xeb, 0x36, 0x6d, 0x5f, 0x96}, &GlGenRenderbuffers_Out{})
 	//struct gles.GlGenTextures { Context:atom.ContextID, In:GlGenTextures_In, Out:GlGenTextures_Out }
-	binary.Register(binary.ID{0x93, 0x96, 0xb6, 0xc8, 0xe4, 0x02, 0x0f, 0x76, 0xd9, 0xcc, 0xb1, 0x9b, 0xe2, 0xfd, 0xe4, 0x6f, 0x9f, 0x58, 0x67, 0x18}, &GlGenTextures{})
+	registry.Add(binary.ID{0x93, 0x96, 0xb6, 0xc8, 0xe4, 0x02, 0x0f, 0x76, 0xd9, 0xcc, 0xb1, 0x9b, 0xe2, 0xfd, 0xe4, 0x6f, 0x9f, 0x58, 0x67, 0x18}, &GlGenTextures{})
 	//struct gles.GlGenTextures_In { Count:int32 }
-	binary.Register(binary.ID{0xb8, 0xf9, 0xe3, 0x66, 0xd0, 0x56, 0x8d, 0xf5, 0xb9, 0x69, 0x7d, 0xd2, 0x3e, 0xcc, 0x57, 0xc3, 0x84, 0x35, 0xed, 0x71}, &GlGenTextures_In{})
+	registry.Add(binary.ID{0xb8, 0xf9, 0xe3, 0x66, 0xd0, 0x56, 0x8d, 0xf5, 0xb9, 0x69, 0x7d, 0xd2, 0x3e, 0xcc, 0x57, 0xc3, 0x84, 0x35, 0xed, 0x71}, &GlGenTextures_In{})
 	//struct gles.GlGenTextures_Out { Textures:TextureIdArray }
-	binary.Register(binary.ID{0x85, 0x82, 0x35, 0x7f, 0x9a, 0x4f, 0xd8, 0x57, 0xae, 0xda, 0x12, 0xaf, 0x3c, 0xfb, 0x23, 0x79, 0xab, 0x12, 0x29, 0xeb}, &GlGenTextures_Out{})
+	registry.Add(binary.ID{0x85, 0x82, 0x35, 0x7f, 0x9a, 0x4f, 0xd8, 0x57, 0xae, 0xda, 0x12, 0xaf, 0x3c, 0xfb, 0x23, 0x79, 0xab, 0x12, 0x29, 0xeb}, &GlGenTextures_Out{})
 	//struct gles.GlGenVertexArraysOES { Context:atom.ContextID, In:GlGenVertexArraysOES_In, Out:GlGenVertexArraysOES_Out }
-	binary.Register(binary.ID{0x52, 0xab, 0xff, 0xfd, 0x28, 0x2c, 0xb1, 0x46, 0xc1, 0x6a, 0xef, 0x15, 0xc0, 0x71, 0xe3, 0x4a, 0x1a, 0x99, 0x69, 0xc1}, &GlGenVertexArraysOES{})
+	registry.Add(binary.ID{0x52, 0xab, 0xff, 0xfd, 0x28, 0x2c, 0xb1, 0x46, 0xc1, 0x6a, 0xef, 0x15, 0xc0, 0x71, 0xe3, 0x4a, 0x1a, 0x99, 0x69, 0xc1}, &GlGenVertexArraysOES{})
 	//struct gles.GlGenVertexArraysOES_In { Count:int32 }
-	binary.Register(binary.ID{0x5a, 0x69, 0x80, 0x71, 0xbf, 0x88, 0x5d, 0xb0, 0xc6, 0x71, 0xdb, 0x36, 0x08, 0x71, 0x9e, 0xed, 0xee, 0xd8, 0xd3, 0x0b}, &GlGenVertexArraysOES_In{})
+	registry.Add(binary.ID{0x5a, 0x69, 0x80, 0x71, 0xbf, 0x88, 0x5d, 0xb0, 0xc6, 0x71, 0xdb, 0x36, 0x08, 0x71, 0x9e, 0xed, 0xee, 0xd8, 0xd3, 0x0b}, &GlGenVertexArraysOES_In{})
 	//struct gles.GlGenVertexArraysOES_Out { Arrays:VertexArrayIdArray }
-	binary.Register(binary.ID{0xe3, 0xe2, 0x51, 0x3c, 0xd5, 0x32, 0x24, 0x24, 0xcf, 0xf7, 0x0f, 0xe8, 0x2f, 0x25, 0x2a, 0xa4, 0xc3, 0x42, 0x09, 0xf4}, &GlGenVertexArraysOES_Out{})
+	registry.Add(binary.ID{0xe3, 0xe2, 0x51, 0x3c, 0xd5, 0x32, 0x24, 0x24, 0xcf, 0xf7, 0x0f, 0xe8, 0x2f, 0x25, 0x2a, 0xa4, 0xc3, 0x42, 0x09, 0xf4}, &GlGenVertexArraysOES_Out{})
 	//struct gles.GlGenerateMipmap { Context:atom.ContextID, In:GlGenerateMipmap_In, Out:GlGenerateMipmap_Out }
-	binary.Register(binary.ID{0x9c, 0xca, 0xfb, 0x68, 0x4c, 0x08, 0x52, 0x80, 0x0b, 0x5c, 0x08, 0xf9, 0x95, 0xb1, 0xc5, 0xaf, 0x5f, 0x77, 0x1b, 0xd2}, &GlGenerateMipmap{})
+	registry.Add(binary.ID{0x9c, 0xca, 0xfb, 0x68, 0x4c, 0x08, 0x52, 0x80, 0x0b, 0x5c, 0x08, 0xf9, 0x95, 0xb1, 0xc5, 0xaf, 0x5f, 0x77, 0x1b, 0xd2}, &GlGenerateMipmap{})
 	//struct gles.GlGenerateMipmap_In { Target:TextureImageTarget }
-	binary.Register(binary.ID{0x31, 0xf9, 0x36, 0x18, 0x87, 0xfe, 0x31, 0x6c, 0xab, 0x5c, 0xbe, 0x0d, 0x39, 0x91, 0x85, 0x4a, 0xcd, 0x95, 0xcd, 0x2b}, &GlGenerateMipmap_In{})
+	registry.Add(binary.ID{0x31, 0xf9, 0x36, 0x18, 0x87, 0xfe, 0x31, 0x6c, 0xab, 0x5c, 0xbe, 0x0d, 0x39, 0x91, 0x85, 0x4a, 0xcd, 0x95, 0xcd, 0x2b}, &GlGenerateMipmap_In{})
 	//struct gles.GlGenerateMipmap_Out { }
-	binary.Register(binary.ID{0xfb, 0x4e, 0x75, 0x25, 0xc6, 0x45, 0xf3, 0x36, 0x6d, 0x8e, 0x07, 0x90, 0x22, 0x28, 0x9d, 0x23, 0x28, 0xc0, 0xe2, 0x29}, &GlGenerateMipmap_Out{})
+	registry.Add(binary.ID{0xfb, 0x4e, 0x75, 0x25, 0xc6, 0x45, 0xf3, 0x36, 0x6d, 0x8e, 0x07, 0x90, 0x22, 0x28, 0x9d, 0x23, 0x28, 0xc0, 0xe2, 0x29}, &GlGenerateMipmap_Out{})
 	//struct gles.GlGetActiveAttrib { Context:atom.ContextID, In:GlGetActiveAttrib_In, Out:GlGetActiveAttrib_Out }
-	binary.Register(binary.ID{0x0f, 0x75, 0x61, 0x0d, 0xea, 0xa0, 0xd7, 0x07, 0x33, 0xfa, 0xb7, 0x82, 0x84, 0x8d, 0xc0, 0xf8, 0x83, 0x69, 0x73, 0x8f}, &GlGetActiveAttrib{})
+	registry.Add(binary.ID{0x0f, 0x75, 0x61, 0x0d, 0xea, 0xa0, 0xd7, 0x07, 0x33, 0xfa, 0xb7, 0x82, 0x84, 0x8d, 0xc0, 0xf8, 0x83, 0x69, 0x73, 0x8f}, &GlGetActiveAttrib{})
 	//struct gles.GlGetActiveAttrib_In { Program:ProgramId, Location:AttributeLocation, BufferSize:int32 }
-	binary.Register(binary.ID{0xe9, 0xe6, 0xda, 0x4b, 0x51, 0x9d, 0x6d, 0xb4, 0x64, 0x9c, 0x2d, 0x9f, 0x71, 0xd6, 0x7a, 0x64, 0x35, 0xa1, 0x0b, 0x21}, &GlGetActiveAttrib_In{})
+	registry.Add(binary.ID{0xe9, 0xe6, 0xda, 0x4b, 0x51, 0x9d, 0x6d, 0xb4, 0x64, 0x9c, 0x2d, 0x9f, 0x71, 0xd6, 0x7a, 0x64, 0x35, 0xa1, 0x0b, 0x21}, &GlGetActiveAttrib_In{})
 	//struct gles.GlGetActiveAttrib_Out { BufferBytesWritten:int32, VectorCount:int32, Type:ShaderAttribType, Name:string }
-	binary.Register(binary.ID{0xef, 0xf8, 0x3c, 0x37, 0x1d, 0x8c, 0xb2, 0xeb, 0x7d, 0x6c, 0x76, 0x8e, 0x8b, 0xd0, 0x77, 0x30, 0x18, 0x56, 0xf4, 0x9e}, &GlGetActiveAttrib_Out{})
+	registry.Add(binary.ID{0xef, 0xf8, 0x3c, 0x37, 0x1d, 0x8c, 0xb2, 0xeb, 0x7d, 0x6c, 0x76, 0x8e, 0x8b, 0xd0, 0x77, 0x30, 0x18, 0x56, 0xf4, 0x9e}, &GlGetActiveAttrib_Out{})
 	//struct gles.GlGetActiveUniform { Context:atom.ContextID, In:GlGetActiveUniform_In, Out:GlGetActiveUniform_Out }
-	binary.Register(binary.ID{0xe7, 0xaa, 0x78, 0x4e, 0xbd, 0x44, 0x35, 0x26, 0xa7, 0x57, 0xd1, 0x84, 0xc5, 0x0b, 0x84, 0x7d, 0xc2, 0x1a, 0xc1, 0x25}, &GlGetActiveUniform{})
+	registry.Add(binary.ID{0xe7, 0xaa, 0x78, 0x4e, 0xbd, 0x44, 0x35, 0x26, 0xa7, 0x57, 0xd1, 0x84, 0xc5, 0x0b, 0x84, 0x7d, 0xc2, 0x1a, 0xc1, 0x25}, &GlGetActiveUniform{})
 	//struct gles.GlGetActiveUniform_In { Program:ProgramId, Location:int32, BufferSize:int32 }
-	binary.Register(binary.ID{0x1b, 0xf4, 0x50, 0xbb, 0xf7, 0x7b, 0xea, 0x9d, 0x46, 0x13, 0xcc, 0xef, 0x9b, 0xb2, 0x6e, 0x97, 0x52, 0xb5, 0x6b, 0xc9}, &GlGetActiveUniform_In{})
+	registry.Add(binary.ID{0x1b, 0xf4, 0x50, 0xbb, 0xf7, 0x7b, 0xea, 0x9d, 0x46, 0x13, 0xcc, 0xef, 0x9b, 0xb2, 0x6e, 0x97, 0x52, 0xb5, 0x6b, 0xc9}, &GlGetActiveUniform_In{})
 	//struct gles.GlGetActiveUniform_Out { BufferBytesWritten:int32, Size:int32, Type:ShaderUniformType, Name:string }
-	binary.Register(binary.ID{0xc6, 0x40, 0x14, 0xc6, 0xf0, 0x85, 0xae, 0xcf, 0x66, 0x36, 0x4e, 0x6f, 0x64, 0xef, 0x63, 0x99, 0x1c, 0xf4, 0xde, 0xdf}, &GlGetActiveUniform_Out{})
+	registry.Add(binary.ID{0xc6, 0x40, 0x14, 0xc6, 0xf0, 0x85, 0xae, 0xcf, 0x66, 0x36, 0x4e, 0x6f, 0x64, 0xef, 0x63, 0x99, 0x1c, 0xf4, 0xde, 0xdf}, &GlGetActiveUniform_Out{})
 	//struct gles.GlGetAttachedShaders { Context:atom.ContextID, In:GlGetAttachedShaders_In, Out:GlGetAttachedShaders_Out }
-	binary.Register(binary.ID{0x30, 0xf4, 0x8c, 0x42, 0x4a, 0x8d, 0x6c, 0x86, 0xb4, 0xa9, 0xb7, 0x98, 0x32, 0x83, 0xd3, 0x2d, 0xb8, 0xd6, 0xb1, 0x28}, &GlGetAttachedShaders{})
+	registry.Add(binary.ID{0x30, 0xf4, 0x8c, 0x42, 0x4a, 0x8d, 0x6c, 0x86, 0xb4, 0xa9, 0xb7, 0x98, 0x32, 0x83, 0xd3, 0x2d, 0xb8, 0xd6, 0xb1, 0x28}, &GlGetAttachedShaders{})
 	//struct gles.GlGetAttachedShaders_In { Program:ProgramId, BufferLength:int32 }
-	binary.Register(binary.ID{0x7f, 0x25, 0x5c, 0x85, 0x0d, 0x18, 0x1f, 0xd1, 0xac, 0x19, 0x54, 0x65, 0xd7, 0xe5, 0xe2, 0x16, 0x7e, 0x9c, 0x0d, 0x12}, &GlGetAttachedShaders_In{})
+	registry.Add(binary.ID{0x7f, 0x25, 0x5c, 0x85, 0x0d, 0x18, 0x1f, 0xd1, 0xac, 0x19, 0x54, 0x65, 0xd7, 0xe5, 0xe2, 0x16, 0x7e, 0x9c, 0x0d, 0x12}, &GlGetAttachedShaders_In{})
 	//struct gles.GlGetAttachedShaders_Out { ShadersLengthWritten:int32, Shaders:ShaderIdArray }
-	binary.Register(binary.ID{0x9e, 0x10, 0xf5, 0x82, 0x79, 0xe8, 0xba, 0x86, 0x3c, 0x9b, 0x0f, 0x79, 0x5f, 0x98, 0x87, 0xa7, 0x0b, 0x23, 0x01, 0xb4}, &GlGetAttachedShaders_Out{})
+	registry.Add(binary.ID{0x9e, 0x10, 0xf5, 0x82, 0x79, 0xe8, 0xba, 0x86, 0x3c, 0x9b, 0x0f, 0x79, 0x5f, 0x98, 0x87, 0xa7, 0x0b, 0x23, 0x01, 0xb4}, &GlGetAttachedShaders_Out{})
 	//struct gles.GlGetAttribLocation { Context:atom.ContextID, In:GlGetAttribLocation_In, Out:GlGetAttribLocation_Out }
-	binary.Register(binary.ID{0x09, 0xa7, 0xbb, 0x66, 0xa1, 0x6a, 0xe3, 0xce, 0xdf, 0x4d, 0xad, 0x69, 0xdc, 0xa6, 0xf6, 0x8e, 0x82, 0xd9, 0xf6, 0x67}, &GlGetAttribLocation{})
+	registry.Add(binary.ID{0x09, 0xa7, 0xbb, 0x66, 0xa1, 0x6a, 0xe3, 0xce, 0xdf, 0x4d, 0xad, 0x69, 0xdc, 0xa6, 0xf6, 0x8e, 0x82, 0xd9, 0xf6, 0x67}, &GlGetAttribLocation{})
 	//struct gles.GlGetAttribLocation_In { Program:ProgramId, Name:string }
-	binary.Register(binary.ID{0xcf, 0x9e, 0x71, 0x32, 0x01, 0x6b, 0xf5, 0x4e, 0x54, 0x5f, 0x42, 0x2e, 0xc0, 0x76, 0x69, 0x63, 0xda, 0x1f, 0x3b, 0xf4}, &GlGetAttribLocation_In{})
+	registry.Add(binary.ID{0xcf, 0x9e, 0x71, 0x32, 0x01, 0x6b, 0xf5, 0x4e, 0x54, 0x5f, 0x42, 0x2e, 0xc0, 0x76, 0x69, 0x63, 0xda, 0x1f, 0x3b, 0xf4}, &GlGetAttribLocation_In{})
 	//struct gles.GlGetAttribLocation_Out { Result:AttributeLocation }
-	binary.Register(binary.ID{0x1a, 0xa5, 0x74, 0xf3, 0x59, 0x6b, 0xf8, 0xd5, 0x47, 0xa4, 0x03, 0x98, 0xca, 0x47, 0x16, 0xe2, 0x28, 0xdc, 0xfd, 0xe3}, &GlGetAttribLocation_Out{})
+	registry.Add(binary.ID{0x1a, 0xa5, 0x74, 0xf3, 0x59, 0x6b, 0xf8, 0xd5, 0x47, 0xa4, 0x03, 0x98, 0xca, 0x47, 0x16, 0xe2, 0x28, 0xdc, 0xfd, 0xe3}, &GlGetAttribLocation_Out{})
 	//struct gles.GlGetBooleanv { Context:atom.ContextID, In:GlGetBooleanv_In, Out:GlGetBooleanv_Out }
-	binary.Register(binary.ID{0x50, 0xe5, 0x24, 0xf3, 0x6d, 0x1c, 0xd9, 0x0d, 0x25, 0x72, 0x7f, 0x41, 0xb8, 0xc1, 0x33, 0x13, 0x71, 0x84, 0xf4, 0x86}, &GlGetBooleanv{})
+	registry.Add(binary.ID{0x50, 0xe5, 0x24, 0xf3, 0x6d, 0x1c, 0xd9, 0x0d, 0x25, 0x72, 0x7f, 0x41, 0xb8, 0xc1, 0x33, 0x13, 0x71, 0x84, 0xf4, 0x86}, &GlGetBooleanv{})
 	//struct gles.GlGetBooleanv_In { Param:StateVariable }
-	binary.Register(binary.ID{0xa2, 0xd5, 0x65, 0xb7, 0x8e, 0x66, 0x18, 0xf8, 0x74, 0xa4, 0x49, 0xce, 0x82, 0x94, 0x4f, 0xe6, 0xc2, 0xa1, 0x17, 0xbd}, &GlGetBooleanv_In{})
+	registry.Add(binary.ID{0xa2, 0xd5, 0x65, 0xb7, 0x8e, 0x66, 0x18, 0xf8, 0x74, 0xa4, 0x49, 0xce, 0x82, 0x94, 0x4f, 0xe6, 0xc2, 0xa1, 0x17, 0xbd}, &GlGetBooleanv_In{})
 	//struct gles.GlGetBooleanv_Out { Values:BoolArray }
-	binary.Register(binary.ID{0x14, 0x4b, 0x38, 0xc8, 0x33, 0xd0, 0x77, 0x90, 0xff, 0x82, 0xdc, 0xea, 0xa3, 0x7a, 0x75, 0x4b, 0xcc, 0xa3, 0x96, 0x98}, &GlGetBooleanv_Out{})
+	registry.Add(binary.ID{0x14, 0x4b, 0x38, 0xc8, 0x33, 0xd0, 0x77, 0x90, 0xff, 0x82, 0xdc, 0xea, 0xa3, 0x7a, 0x75, 0x4b, 0xcc, 0xa3, 0x96, 0x98}, &GlGetBooleanv_Out{})
 	//struct gles.GlGetBufferParameteriv { Context:atom.ContextID, In:GlGetBufferParameteriv_In, Out:GlGetBufferParameteriv_Out }
-	binary.Register(binary.ID{0x64, 0xe4, 0xcb, 0xee, 0x17, 0xc7, 0x78, 0x74, 0xd1, 0x03, 0x38, 0x8d, 0xda, 0x91, 0x18, 0x49, 0x4e, 0x1b, 0xa7, 0x49}, &GlGetBufferParameteriv{})
+	registry.Add(binary.ID{0x64, 0xe4, 0xcb, 0xee, 0x17, 0xc7, 0x78, 0x74, 0xd1, 0x03, 0x38, 0x8d, 0xda, 0x91, 0x18, 0x49, 0x4e, 0x1b, 0xa7, 0x49}, &GlGetBufferParameteriv{})
 	//struct gles.GlGetBufferParameteriv_In { Target:BufferTarget, Parameter:BufferParameter }
-	binary.Register(binary.ID{0xe8, 0x88, 0x2e, 0x6c, 0xb7, 0x77, 0x17, 0xa2, 0x37, 0xe0, 0x02, 0x74, 0x2c, 0xb3, 0xb3, 0x2e, 0x18, 0x8d, 0x50, 0x9c}, &GlGetBufferParameteriv_In{})
+	registry.Add(binary.ID{0xe8, 0x88, 0x2e, 0x6c, 0xb7, 0x77, 0x17, 0xa2, 0x37, 0xe0, 0x02, 0x74, 0x2c, 0xb3, 0xb3, 0x2e, 0x18, 0x8d, 0x50, 0x9c}, &GlGetBufferParameteriv_In{})
 	//struct gles.GlGetBufferParameteriv_Out { Value:int32 }
-	binary.Register(binary.ID{0xb9, 0x3e, 0x03, 0x3d, 0x58, 0x66, 0xfd, 0xbd, 0xd5, 0xef, 0x4f, 0xd4, 0x25, 0x4f, 0xeb, 0xd0, 0x22, 0x3e, 0x49, 0x1e}, &GlGetBufferParameteriv_Out{})
+	registry.Add(binary.ID{0xb9, 0x3e, 0x03, 0x3d, 0x58, 0x66, 0xfd, 0xbd, 0xd5, 0xef, 0x4f, 0xd4, 0x25, 0x4f, 0xeb, 0xd0, 0x22, 0x3e, 0x49, 0x1e}, &GlGetBufferParameteriv_Out{})
 	//struct gles.GlGetError { Context:atom.ContextID, In:GlGetError_In, Out:GlGetError_Out }
-	binary.Register(binary.ID{0xd0, 0xc8, 0x5a, 0xd4, 0x0a, 0x07, 0x25, 0xc3, 0xfb, 0xd6, 0x64, 0xc3, 0xf3, 0x29, 0xaa, 0x29, 0xa4, 0x93, 0x76, 0x16}, &GlGetError{})
+	registry.Add(binary.ID{0xd0, 0xc8, 0x5a, 0xd4, 0x0a, 0x07, 0x25, 0xc3, 0xfb, 0xd6, 0x64, 0xc3, 0xf3, 0x29, 0xaa, 0x29, 0xa4, 0x93, 0x76, 0x16}, &GlGetError{})
 	//struct gles.GlGetError_In { }
-	binary.Register(binary.ID{0x0a, 0x71, 0xa5, 0xb1, 0x15, 0x75, 0x95, 0x90, 0x54, 0x7b, 0x4c, 0xe7, 0xc4, 0x2e, 0x99, 0xfb, 0x42, 0xb3, 0x7c, 0x6f}, &GlGetError_In{})
+	registry.Add(binary.ID{0x0a, 0x71, 0xa5, 0xb1, 0x15, 0x75, 0x95, 0x90, 0x54, 0x7b, 0x4c, 0xe7, 0xc4, 0x2e, 0x99, 0xfb, 0x42, 0xb3, 0x7c, 0x6f}, &GlGetError_In{})
 	//struct gles.GlGetError_Out { Result:Error }
-	binary.Register(binary.ID{0x21, 0x89, 0x4e, 0x91, 0x7f, 0xf6, 0xfd, 0x28, 0x41, 0x30, 0xca, 0x16, 0x9e, 0x7a, 0xae, 0x47, 0xa4, 0xc5, 0xf3, 0x89}, &GlGetError_Out{})
+	registry.Add(binary.ID{0x21, 0x89, 0x4e, 0x91, 0x7f, 0xf6, 0xfd, 0x28, 0x41, 0x30, 0xca, 0x16, 0x9e, 0x7a, 0xae, 0x47, 0xa4, 0xc5, 0xf3, 0x89}, &GlGetError_Out{})
 	//struct gles.GlGetFloatv { Context:atom.ContextID, In:GlGetFloatv_In, Out:GlGetFloatv_Out }
-	binary.Register(binary.ID{0x45, 0xb5, 0xea, 0xeb, 0x45, 0x47, 0xa3, 0x04, 0x9f, 0x9f, 0xc0, 0x7f, 0xb8, 0x8b, 0xd9, 0x20, 0xf7, 0x2e, 0x7a, 0x6a}, &GlGetFloatv{})
+	registry.Add(binary.ID{0x45, 0xb5, 0xea, 0xeb, 0x45, 0x47, 0xa3, 0x04, 0x9f, 0x9f, 0xc0, 0x7f, 0xb8, 0x8b, 0xd9, 0x20, 0xf7, 0x2e, 0x7a, 0x6a}, &GlGetFloatv{})
 	//struct gles.GlGetFloatv_In { Param:StateVariable }
-	binary.Register(binary.ID{0x4f, 0x46, 0xa7, 0xfc, 0x36, 0xe2, 0xa0, 0x96, 0x4e, 0x43, 0x87, 0x51, 0x02, 0xb1, 0x30, 0xbe, 0x01, 0x91, 0x93, 0x0c}, &GlGetFloatv_In{})
+	registry.Add(binary.ID{0x4f, 0x46, 0xa7, 0xfc, 0x36, 0xe2, 0xa0, 0x96, 0x4e, 0x43, 0x87, 0x51, 0x02, 0xb1, 0x30, 0xbe, 0x01, 0x91, 0x93, 0x0c}, &GlGetFloatv_In{})
 	//struct gles.GlGetFloatv_Out { Values:F32Array }
-	binary.Register(binary.ID{0x78, 0x80, 0xbd, 0xa7, 0x8b, 0x1f, 0xed, 0x26, 0x98, 0xfa, 0x0f, 0xeb, 0x76, 0x1f, 0x0f, 0x6c, 0x76, 0x0e, 0xc7, 0x71}, &GlGetFloatv_Out{})
+	registry.Add(binary.ID{0x78, 0x80, 0xbd, 0xa7, 0x8b, 0x1f, 0xed, 0x26, 0x98, 0xfa, 0x0f, 0xeb, 0x76, 0x1f, 0x0f, 0x6c, 0x76, 0x0e, 0xc7, 0x71}, &GlGetFloatv_Out{})
 	//struct gles.GlGetFramebufferAttachmentParameteriv { Context:atom.ContextID, In:GlGetFramebufferAttachmentParameteriv_In, Out:GlGetFramebufferAttachmentParameteriv_Out }
-	binary.Register(binary.ID{0x37, 0x03, 0xc3, 0x52, 0x2c, 0xb6, 0x81, 0x30, 0x36, 0xe1, 0x7d, 0x5c, 0x53, 0x01, 0xcb, 0x8a, 0x84, 0x55, 0x62, 0x3a}, &GlGetFramebufferAttachmentParameteriv{})
+	registry.Add(binary.ID{0x37, 0x03, 0xc3, 0x52, 0x2c, 0xb6, 0x81, 0x30, 0x36, 0xe1, 0x7d, 0x5c, 0x53, 0x01, 0xcb, 0x8a, 0x84, 0x55, 0x62, 0x3a}, &GlGetFramebufferAttachmentParameteriv{})
 	//struct gles.GlGetFramebufferAttachmentParameteriv_In { Target:FramebufferTarget, Attachment:FramebufferAttachment, Parameter:FramebufferAttachmentParameter }
-	binary.Register(binary.ID{0xc0, 0xe0, 0x7a, 0x20, 0x55, 0xe0, 0x43, 0xb8, 0xbb, 0x26, 0xaa, 0xdb, 0x40, 0x24, 0x69, 0xb5, 0x6c, 0xf9, 0x25, 0xea}, &GlGetFramebufferAttachmentParameteriv_In{})
+	registry.Add(binary.ID{0xc0, 0xe0, 0x7a, 0x20, 0x55, 0xe0, 0x43, 0xb8, 0xbb, 0x26, 0xaa, 0xdb, 0x40, 0x24, 0x69, 0xb5, 0x6c, 0xf9, 0x25, 0xea}, &GlGetFramebufferAttachmentParameteriv_In{})
 	//struct gles.GlGetFramebufferAttachmentParameteriv_Out { Value:S32Array }
-	binary.Register(binary.ID{0xa3, 0xed, 0x99, 0xa9, 0x58, 0xa1, 0x04, 0xd2, 0xca, 0x19, 0x6a, 0x6f, 0xaf, 0x71, 0xc2, 0x5a, 0x1a, 0x58, 0x91, 0x2f}, &GlGetFramebufferAttachmentParameteriv_Out{})
+	registry.Add(binary.ID{0xa3, 0xed, 0x99, 0xa9, 0x58, 0xa1, 0x04, 0xd2, 0xca, 0x19, 0x6a, 0x6f, 0xaf, 0x71, 0xc2, 0x5a, 0x1a, 0x58, 0x91, 0x2f}, &GlGetFramebufferAttachmentParameteriv_Out{})
 	//struct gles.GlGetGraphicsResetStatusEXT { Context:atom.ContextID, In:GlGetGraphicsResetStatusEXT_In, Out:GlGetGraphicsResetStatusEXT_Out }
-	binary.Register(binary.ID{0x58, 0xcc, 0xeb, 0x3d, 0xdf, 0x85, 0x33, 0xc1, 0xde, 0x98, 0x0a, 0x58, 0x64, 0x78, 0xd6, 0x41, 0x68, 0xb7, 0xee, 0xcc}, &GlGetGraphicsResetStatusEXT{})
+	registry.Add(binary.ID{0x58, 0xcc, 0xeb, 0x3d, 0xdf, 0x85, 0x33, 0xc1, 0xde, 0x98, 0x0a, 0x58, 0x64, 0x78, 0xd6, 0x41, 0x68, 0xb7, 0xee, 0xcc}, &GlGetGraphicsResetStatusEXT{})
 	//struct gles.GlGetGraphicsResetStatusEXT_In { }
-	binary.Register(binary.ID{0xb1, 0x4e, 0xa0, 0xcb, 0xdf, 0x92, 0xe5, 0x2c, 0x59, 0x88, 0xfa, 0x18, 0x20, 0x53, 0xca, 0x81, 0xec, 0x71, 0xaa, 0x7f}, &GlGetGraphicsResetStatusEXT_In{})
+	registry.Add(binary.ID{0xb1, 0x4e, 0xa0, 0xcb, 0xdf, 0x92, 0xe5, 0x2c, 0x59, 0x88, 0xfa, 0x18, 0x20, 0x53, 0xca, 0x81, 0xec, 0x71, 0xaa, 0x7f}, &GlGetGraphicsResetStatusEXT_In{})
 	//struct gles.GlGetGraphicsResetStatusEXT_Out { Result:ResetStatus }
-	binary.Register(binary.ID{0xd6, 0xee, 0xc2, 0x17, 0xf6, 0x54, 0xdb, 0xab, 0x39, 0xd4, 0x3b, 0x7e, 0xfe, 0xc6, 0x0c, 0xe4, 0xa1, 0xe2, 0x3c, 0x6c}, &GlGetGraphicsResetStatusEXT_Out{})
+	registry.Add(binary.ID{0xd6, 0xee, 0xc2, 0x17, 0xf6, 0x54, 0xdb, 0xab, 0x39, 0xd4, 0x3b, 0x7e, 0xfe, 0xc6, 0x0c, 0xe4, 0xa1, 0xe2, 0x3c, 0x6c}, &GlGetGraphicsResetStatusEXT_Out{})
 	//struct gles.GlGetIntegerv { Context:atom.ContextID, In:GlGetIntegerv_In, Out:GlGetIntegerv_Out }
-	binary.Register(binary.ID{0xbf, 0xb1, 0x43, 0x55, 0xf0, 0xb7, 0x8f, 0xb2, 0xbe, 0x6b, 0x04, 0xd5, 0xae, 0xbc, 0x57, 0xcf, 0x18, 0x8c, 0x3b, 0xce}, &GlGetIntegerv{})
+	registry.Add(binary.ID{0xbf, 0xb1, 0x43, 0x55, 0xf0, 0xb7, 0x8f, 0xb2, 0xbe, 0x6b, 0x04, 0xd5, 0xae, 0xbc, 0x57, 0xcf, 0x18, 0x8c, 0x3b, 0xce}, &GlGetIntegerv{})
 	//struct gles.GlGetIntegerv_In { Param:StateVariable }
-	binary.Register(binary.ID{0x7b, 0xc8, 0x29, 0x75, 0xbc, 0x9b, 0x35, 0x3c, 0xe6, 0xbf, 0xff, 0x2d, 0x95, 0xed, 0xb2, 0x6e, 0xef, 0x31, 0x12, 0x00}, &GlGetIntegerv_In{})
+	registry.Add(binary.ID{0x7b, 0xc8, 0x29, 0x75, 0xbc, 0x9b, 0x35, 0x3c, 0xe6, 0xbf, 0xff, 0x2d, 0x95, 0xed, 0xb2, 0x6e, 0xef, 0x31, 0x12, 0x00}, &GlGetIntegerv_In{})
 	//struct gles.GlGetIntegerv_Out { Values:S32Array }
-	binary.Register(binary.ID{0xb7, 0x3e, 0xe0, 0x32, 0x76, 0x0c, 0xa6, 0xbb, 0x37, 0xea, 0x47, 0x56, 0xbe, 0x38, 0x97, 0x12, 0x8e, 0x4c, 0x82, 0x51}, &GlGetIntegerv_Out{})
+	registry.Add(binary.ID{0xb7, 0x3e, 0xe0, 0x32, 0x76, 0x0c, 0xa6, 0xbb, 0x37, 0xea, 0x47, 0x56, 0xbe, 0x38, 0x97, 0x12, 0x8e, 0x4c, 0x82, 0x51}, &GlGetIntegerv_Out{})
 	//struct gles.GlGetProgramBinaryOES { Context:atom.ContextID, In:GlGetProgramBinaryOES_In, Out:GlGetProgramBinaryOES_Out }
-	binary.Register(binary.ID{0xc7, 0x1f, 0xc8, 0x71, 0x04, 0x5f, 0x91, 0xe0, 0x5b, 0x12, 0x6d, 0x88, 0x6c, 0x26, 0x8c, 0x1e, 0x6e, 0x93, 0x66, 0x88}, &GlGetProgramBinaryOES{})
+	registry.Add(binary.ID{0xc7, 0x1f, 0xc8, 0x71, 0x04, 0x5f, 0x91, 0xe0, 0x5b, 0x12, 0x6d, 0x88, 0x6c, 0x26, 0x8c, 0x1e, 0x6e, 0x93, 0x66, 0x88}, &GlGetProgramBinaryOES{})
 	//struct gles.GlGetProgramBinaryOES_In { Program:ProgramId, BufferSize:int32 }
-	binary.Register(binary.ID{0xb7, 0x56, 0x6f, 0x02, 0x6b, 0xec, 0xa9, 0xcd, 0xb2, 0xe5, 0x5a, 0xe0, 0x7d, 0x65, 0xd9, 0x73, 0xcf, 0x78, 0x52, 0x31}, &GlGetProgramBinaryOES_In{})
+	registry.Add(binary.ID{0xb7, 0x56, 0x6f, 0x02, 0x6b, 0xec, 0xa9, 0xcd, 0xb2, 0xe5, 0x5a, 0xe0, 0x7d, 0x65, 0xd9, 0x73, 0xcf, 0x78, 0x52, 0x31}, &GlGetProgramBinaryOES_In{})
 	//struct gles.GlGetProgramBinaryOES_Out { BytesWritten:int32, BinaryFormat:uint32, Binary:memory.Pointer }
-	binary.Register(binary.ID{0xad, 0xa6, 0xaf, 0xc4, 0x00, 0x50, 0xd7, 0x1c, 0x14, 0x5d, 0xc1, 0xea, 0x0c, 0x24, 0x80, 0xb5, 0xad, 0xb4, 0xa1, 0xba}, &GlGetProgramBinaryOES_Out{})
+	registry.Add(binary.ID{0xad, 0xa6, 0xaf, 0xc4, 0x00, 0x50, 0xd7, 0x1c, 0x14, 0x5d, 0xc1, 0xea, 0x0c, 0x24, 0x80, 0xb5, 0xad, 0xb4, 0xa1, 0xba}, &GlGetProgramBinaryOES_Out{})
 	//struct gles.GlGetProgramInfoLog { Context:atom.ContextID, In:GlGetProgramInfoLog_In, Out:GlGetProgramInfoLog_Out }
-	binary.Register(binary.ID{0x02, 0xa9, 0x0d, 0x94, 0x1a, 0xee, 0x22, 0xed, 0x29, 0x79, 0xd1, 0x74, 0x18, 0x59, 0x5b, 0x00, 0x06, 0xc4, 0xc8, 0xca}, &GlGetProgramInfoLog{})
+	registry.Add(binary.ID{0x02, 0xa9, 0x0d, 0x94, 0x1a, 0xee, 0x22, 0xed, 0x29, 0x79, 0xd1, 0x74, 0x18, 0x59, 0x5b, 0x00, 0x06, 0xc4, 0xc8, 0xca}, &GlGetProgramInfoLog{})
 	//struct gles.GlGetProgramInfoLog_In { Program:ProgramId, BufferLength:int32 }
-	binary.Register(binary.ID{0x6b, 0xd5, 0x48, 0xca, 0x71, 0x95, 0x84, 0x6e, 0xd1, 0x06, 0x6e, 0x86, 0xbc, 0xc7, 0xa2, 0xe0, 0xc9, 0xfc, 0x59, 0xa7}, &GlGetProgramInfoLog_In{})
+	registry.Add(binary.ID{0x6b, 0xd5, 0x48, 0xca, 0x71, 0x95, 0x84, 0x6e, 0xd1, 0x06, 0x6e, 0x86, 0xbc, 0xc7, 0xa2, 0xe0, 0xc9, 0xfc, 0x59, 0xa7}, &GlGetProgramInfoLog_In{})
 	//struct gles.GlGetProgramInfoLog_Out { StringLengthWritten:int32, Info:string }
-	binary.Register(binary.ID{0x5a, 0xc9, 0x31, 0x20, 0x1d, 0x65, 0x1b, 0x3d, 0xf7, 0xb6, 0x2e, 0xf8, 0x6e, 0x1b, 0x97, 0x0b, 0x02, 0x10, 0xfe, 0xd7}, &GlGetProgramInfoLog_Out{})
+	registry.Add(binary.ID{0x5a, 0xc9, 0x31, 0x20, 0x1d, 0x65, 0x1b, 0x3d, 0xf7, 0xb6, 0x2e, 0xf8, 0x6e, 0x1b, 0x97, 0x0b, 0x02, 0x10, 0xfe, 0xd7}, &GlGetProgramInfoLog_Out{})
 	//struct gles.GlGetProgramiv { Context:atom.ContextID, In:GlGetProgramiv_In, Out:GlGetProgramiv_Out }
-	binary.Register(binary.ID{0xc9, 0x86, 0x59, 0x9a, 0x3d, 0x7c, 0xc1, 0x70, 0x6a, 0x0b, 0x9d, 0x32, 0x95, 0xac, 0xdc, 0x7c, 0xe1, 0x34, 0x0d, 0x64}, &GlGetProgramiv{})
+	registry.Add(binary.ID{0xc9, 0x86, 0x59, 0x9a, 0x3d, 0x7c, 0xc1, 0x70, 0x6a, 0x0b, 0x9d, 0x32, 0x95, 0xac, 0xdc, 0x7c, 0xe1, 0x34, 0x0d, 0x64}, &GlGetProgramiv{})
 	//struct gles.GlGetProgramiv_In { Program:ProgramId, Parameter:ProgramParameter }
-	binary.Register(binary.ID{0x59, 0xee, 0x0d, 0x3a, 0x1a, 0xb2, 0x92, 0x39, 0xec, 0xd7, 0x43, 0xd9, 0x62, 0x1e, 0x11, 0x4a, 0x9c, 0x16, 0x2f, 0x3e}, &GlGetProgramiv_In{})
+	registry.Add(binary.ID{0x59, 0xee, 0x0d, 0x3a, 0x1a, 0xb2, 0x92, 0x39, 0xec, 0xd7, 0x43, 0xd9, 0x62, 0x1e, 0x11, 0x4a, 0x9c, 0x16, 0x2f, 0x3e}, &GlGetProgramiv_In{})
 	//struct gles.GlGetProgramiv_Out { Value:S32Array }
-	binary.Register(binary.ID{0xe1, 0x1d, 0x63, 0x07, 0xa8, 0x96, 0xcb, 0xfa, 0xf6, 0x6f, 0x0f, 0x6f, 0x04, 0x54, 0x09, 0x3e, 0x03, 0x21, 0xc0, 0x65}, &GlGetProgramiv_Out{})
+	registry.Add(binary.ID{0xe1, 0x1d, 0x63, 0x07, 0xa8, 0x96, 0xcb, 0xfa, 0xf6, 0x6f, 0x0f, 0x6f, 0x04, 0x54, 0x09, 0x3e, 0x03, 0x21, 0xc0, 0x65}, &GlGetProgramiv_Out{})
 	//struct gles.GlGetQueryObjecti64vEXT { Context:atom.ContextID, In:GlGetQueryObjecti64vEXT_In, Out:GlGetQueryObjecti64vEXT_Out }
-	binary.Register(binary.ID{0xb7, 0x22, 0xaa, 0x47, 0x81, 0xa3, 0x1b, 0xa3, 0xa4, 0x64, 0x1f, 0x44, 0xe7, 0x1a, 0x16, 0x8f, 0xc4, 0x45, 0x1a, 0x29}, &GlGetQueryObjecti64vEXT{})
+	registry.Add(binary.ID{0xb7, 0x22, 0xaa, 0x47, 0x81, 0xa3, 0x1b, 0xa3, 0xa4, 0x64, 0x1f, 0x44, 0xe7, 0x1a, 0x16, 0x8f, 0xc4, 0x45, 0x1a, 0x29}, &GlGetQueryObjecti64vEXT{})
 	//struct gles.GlGetQueryObjecti64vEXT_In { Query:QueryId, Parameter:QueryObjectParameter }
-	binary.Register(binary.ID{0x3f, 0xdc, 0x53, 0x69, 0x99, 0xa0, 0x97, 0x85, 0x68, 0xef, 0xaf, 0xed, 0x6f, 0xe0, 0x3f, 0xe2, 0x7f, 0x76, 0x38, 0xc1}, &GlGetQueryObjecti64vEXT_In{})
+	registry.Add(binary.ID{0x3f, 0xdc, 0x53, 0x69, 0x99, 0xa0, 0x97, 0x85, 0x68, 0xef, 0xaf, 0xed, 0x6f, 0xe0, 0x3f, 0xe2, 0x7f, 0x76, 0x38, 0xc1}, &GlGetQueryObjecti64vEXT_In{})
 	//struct gles.GlGetQueryObjecti64vEXT_Out { Value:int64 }
-	binary.Register(binary.ID{0xf4, 0xfd, 0x4f, 0xad, 0xc4, 0xcd, 0xa9, 0x81, 0x6b, 0x92, 0x9a, 0x53, 0xbe, 0xba, 0xae, 0x33, 0xf4, 0x24, 0xd5, 0x87}, &GlGetQueryObjecti64vEXT_Out{})
+	registry.Add(binary.ID{0xf4, 0xfd, 0x4f, 0xad, 0xc4, 0xcd, 0xa9, 0x81, 0x6b, 0x92, 0x9a, 0x53, 0xbe, 0xba, 0xae, 0x33, 0xf4, 0x24, 0xd5, 0x87}, &GlGetQueryObjecti64vEXT_Out{})
 	//struct gles.GlGetQueryObjectivEXT { Context:atom.ContextID, In:GlGetQueryObjectivEXT_In, Out:GlGetQueryObjectivEXT_Out }
-	binary.Register(binary.ID{0x63, 0xb9, 0x0f, 0xf4, 0x9d, 0xfb, 0x03, 0x74, 0xd0, 0x5c, 0x9b, 0xb3, 0x28, 0x3c, 0x49, 0xfb, 0xda, 0x6f, 0x12, 0xdc}, &GlGetQueryObjectivEXT{})
+	registry.Add(binary.ID{0x63, 0xb9, 0x0f, 0xf4, 0x9d, 0xfb, 0x03, 0x74, 0xd0, 0x5c, 0x9b, 0xb3, 0x28, 0x3c, 0x49, 0xfb, 0xda, 0x6f, 0x12, 0xdc}, &GlGetQueryObjectivEXT{})
 	//struct gles.GlGetQueryObjectivEXT_In { Query:QueryId, Parameter:QueryObjectParameter }
-	binary.Register(binary.ID{0x48, 0x36, 0xe1, 0xcc, 0x4c, 0x1c, 0xd0, 0x84, 0xe0, 0x38, 0xed, 0xe8, 0xb0, 0xa9, 0xe3, 0x7e, 0x5f, 0x7b, 0xfb, 0x62}, &GlGetQueryObjectivEXT_In{})
+	registry.Add(binary.ID{0x48, 0x36, 0xe1, 0xcc, 0x4c, 0x1c, 0xd0, 0x84, 0xe0, 0x38, 0xed, 0xe8, 0xb0, 0xa9, 0xe3, 0x7e, 0x5f, 0x7b, 0xfb, 0x62}, &GlGetQueryObjectivEXT_In{})
 	//struct gles.GlGetQueryObjectivEXT_Out { Value:int32 }
-	binary.Register(binary.ID{0xf7, 0xa9, 0x5e, 0x46, 0x67, 0x40, 0x05, 0x2b, 0x92, 0x5b, 0x9a, 0x08, 0xe3, 0xdf, 0xae, 0x41, 0xf6, 0xca, 0x17, 0x12}, &GlGetQueryObjectivEXT_Out{})
+	registry.Add(binary.ID{0xf7, 0xa9, 0x5e, 0x46, 0x67, 0x40, 0x05, 0x2b, 0x92, 0x5b, 0x9a, 0x08, 0xe3, 0xdf, 0xae, 0x41, 0xf6, 0xca, 0x17, 0x12}, &GlGetQueryObjectivEXT_Out{})
 	//struct gles.GlGetQueryObjectui64vEXT { Context:atom.ContextID, In:GlGetQueryObjectui64vEXT_In, Out:GlGetQueryObjectui64vEXT_Out }
-	binary.Register(binary.ID{0x09, 0x9b, 0xb0, 0xbc, 0xd3, 0x09, 0x0f, 0x92, 0x08, 0xf2, 0xc3, 0x32, 0x85, 0x72, 0x8b, 0x06, 0x46, 0x46, 0x6a, 0x3e}, &GlGetQueryObjectui64vEXT{})
+	registry.Add(binary.ID{0x09, 0x9b, 0xb0, 0xbc, 0xd3, 0x09, 0x0f, 0x92, 0x08, 0xf2, 0xc3, 0x32, 0x85, 0x72, 0x8b, 0x06, 0x46, 0x46, 0x6a, 0x3e}, &GlGetQueryObjectui64vEXT{})
 	//struct gles.GlGetQueryObjectui64vEXT_In { Query:QueryId, Parameter:QueryObjectParameter }
-	binary.Register(binary.ID{0x9b, 0x93, 0xcd, 0xe9, 0x76, 0x93, 0x77, 0xc6, 0x54, 0x9e, 0x67, 0x32, 0x04, 0x7b, 0xc4, 0xe6, 0x69, 0x1a, 0x43, 0x8f}, &GlGetQueryObjectui64vEXT_In{})
+	registry.Add(binary.ID{0x9b, 0x93, 0xcd, 0xe9, 0x76, 0x93, 0x77, 0xc6, 0x54, 0x9e, 0x67, 0x32, 0x04, 0x7b, 0xc4, 0xe6, 0x69, 0x1a, 0x43, 0x8f}, &GlGetQueryObjectui64vEXT_In{})
 	//struct gles.GlGetQueryObjectui64vEXT_Out { Value:uint64 }
-	binary.Register(binary.ID{0x86, 0xd5, 0x35, 0x7e, 0x8c, 0x23, 0xb4, 0x96, 0x1c, 0x0c, 0x76, 0x81, 0x9d, 0x5a, 0x58, 0x5d, 0xd7, 0xf3, 0xb5, 0x24}, &GlGetQueryObjectui64vEXT_Out{})
+	registry.Add(binary.ID{0x86, 0xd5, 0x35, 0x7e, 0x8c, 0x23, 0xb4, 0x96, 0x1c, 0x0c, 0x76, 0x81, 0x9d, 0x5a, 0x58, 0x5d, 0xd7, 0xf3, 0xb5, 0x24}, &GlGetQueryObjectui64vEXT_Out{})
 	//struct gles.GlGetQueryObjectuiv { Context:atom.ContextID, In:GlGetQueryObjectuiv_In, Out:GlGetQueryObjectuiv_Out }
-	binary.Register(binary.ID{0x77, 0x84, 0xe3, 0xdb, 0x5c, 0xe3, 0x75, 0xb0, 0xea, 0x4e, 0x5b, 0xab, 0x2d, 0x3c, 0xd1, 0x9a, 0xfa, 0x27, 0x16, 0x64}, &GlGetQueryObjectuiv{})
+	registry.Add(binary.ID{0x77, 0x84, 0xe3, 0xdb, 0x5c, 0xe3, 0x75, 0xb0, 0xea, 0x4e, 0x5b, 0xab, 0x2d, 0x3c, 0xd1, 0x9a, 0xfa, 0x27, 0x16, 0x64}, &GlGetQueryObjectuiv{})
 	//struct gles.GlGetQueryObjectuivEXT { Context:atom.ContextID, In:GlGetQueryObjectuivEXT_In, Out:GlGetQueryObjectuivEXT_Out }
-	binary.Register(binary.ID{0x97, 0x2b, 0x53, 0x4b, 0xa3, 0xa3, 0x82, 0x7a, 0xfe, 0xcd, 0x2f, 0x10, 0x9b, 0x24, 0x52, 0xdf, 0x12, 0x94, 0x21, 0x54}, &GlGetQueryObjectuivEXT{})
+	registry.Add(binary.ID{0x97, 0x2b, 0x53, 0x4b, 0xa3, 0xa3, 0x82, 0x7a, 0xfe, 0xcd, 0x2f, 0x10, 0x9b, 0x24, 0x52, 0xdf, 0x12, 0x94, 0x21, 0x54}, &GlGetQueryObjectuivEXT{})
 	//struct gles.GlGetQueryObjectuivEXT_In { Query:QueryId, Parameter:QueryObjectParameter }
-	binary.Register(binary.ID{0xcb, 0x13, 0x2d, 0xa0, 0x5c, 0xc6, 0x86, 0x70, 0x40, 0x36, 0x6b, 0x81, 0xfb, 0x77, 0x53, 0x0a, 0xb8, 0x0b, 0x9d, 0x9b}, &GlGetQueryObjectuivEXT_In{})
+	registry.Add(binary.ID{0xcb, 0x13, 0x2d, 0xa0, 0x5c, 0xc6, 0x86, 0x70, 0x40, 0x36, 0x6b, 0x81, 0xfb, 0x77, 0x53, 0x0a, 0xb8, 0x0b, 0x9d, 0x9b}, &GlGetQueryObjectuivEXT_In{})
 	//struct gles.GlGetQueryObjectuivEXT_Out { Value:uint32 }
-	binary.Register(binary.ID{0x50, 0x9f, 0x4a, 0x9e, 0xe2, 0x1e, 0xb1, 0xd2, 0x68, 0xfd, 0x0c, 0x82, 0x4a, 0x01, 0x5e, 0xbd, 0xad, 0xcd, 0x97, 0x2f}, &GlGetQueryObjectuivEXT_Out{})
+	registry.Add(binary.ID{0x50, 0x9f, 0x4a, 0x9e, 0xe2, 0x1e, 0xb1, 0xd2, 0x68, 0xfd, 0x0c, 0x82, 0x4a, 0x01, 0x5e, 0xbd, 0xad, 0xcd, 0x97, 0x2f}, &GlGetQueryObjectuivEXT_Out{})
 	//struct gles.GlGetQueryObjectuiv_In { Query:QueryId, Parameter:QueryObjectParameter }
-	binary.Register(binary.ID{0x0d, 0x76, 0x53, 0x4a, 0x31, 0xdf, 0x2f, 0xb8, 0x46, 0x79, 0xe0, 0x51, 0xeb, 0x1d, 0x36, 0xfd, 0x52, 0xaf, 0x73, 0xd4}, &GlGetQueryObjectuiv_In{})
+	registry.Add(binary.ID{0x0d, 0x76, 0x53, 0x4a, 0x31, 0xdf, 0x2f, 0xb8, 0x46, 0x79, 0xe0, 0x51, 0xeb, 0x1d, 0x36, 0xfd, 0x52, 0xaf, 0x73, 0xd4}, &GlGetQueryObjectuiv_In{})
 	//struct gles.GlGetQueryObjectuiv_Out { Value:uint32 }
-	binary.Register(binary.ID{0x71, 0x49, 0x93, 0x23, 0xfc, 0x19, 0x90, 0xb6, 0xb9, 0x52, 0xe2, 0x7a, 0xec, 0xd7, 0x0c, 0xca, 0x9b, 0x67, 0x5b, 0x93}, &GlGetQueryObjectuiv_Out{})
+	registry.Add(binary.ID{0x71, 0x49, 0x93, 0x23, 0xfc, 0x19, 0x90, 0xb6, 0xb9, 0x52, 0xe2, 0x7a, 0xec, 0xd7, 0x0c, 0xca, 0x9b, 0x67, 0x5b, 0x93}, &GlGetQueryObjectuiv_Out{})
 	//struct gles.GlGetQueryiv { Context:atom.ContextID, In:GlGetQueryiv_In, Out:GlGetQueryiv_Out }
-	binary.Register(binary.ID{0x97, 0x9a, 0x54, 0x76, 0xbf, 0x97, 0xef, 0x72, 0x85, 0xab, 0x29, 0xfe, 0x17, 0x6f, 0x75, 0x84, 0xee, 0x28, 0xb4, 0x54}, &GlGetQueryiv{})
+	registry.Add(binary.ID{0x97, 0x9a, 0x54, 0x76, 0xbf, 0x97, 0xef, 0x72, 0x85, 0xab, 0x29, 0xfe, 0x17, 0x6f, 0x75, 0x84, 0xee, 0x28, 0xb4, 0x54}, &GlGetQueryiv{})
 	//struct gles.GlGetQueryivEXT { Context:atom.ContextID, In:GlGetQueryivEXT_In, Out:GlGetQueryivEXT_Out }
-	binary.Register(binary.ID{0xf2, 0x29, 0xdc, 0xce, 0x0e, 0xc4, 0x34, 0x51, 0x76, 0xd5, 0x03, 0x53, 0xa2, 0x05, 0xa9, 0x50, 0x31, 0xad, 0x02, 0x30}, &GlGetQueryivEXT{})
+	registry.Add(binary.ID{0xf2, 0x29, 0xdc, 0xce, 0x0e, 0xc4, 0x34, 0x51, 0x76, 0xd5, 0x03, 0x53, 0xa2, 0x05, 0xa9, 0x50, 0x31, 0xad, 0x02, 0x30}, &GlGetQueryivEXT{})
 	//struct gles.GlGetQueryivEXT_In { Target:QueryTarget, Parameter:QueryParameter }
-	binary.Register(binary.ID{0xc5, 0xe2, 0x60, 0x18, 0x79, 0xc5, 0x59, 0xfb, 0xd2, 0x04, 0x30, 0x5f, 0x36, 0x48, 0x5e, 0x37, 0x4d, 0x4d, 0xa3, 0xe8}, &GlGetQueryivEXT_In{})
+	registry.Add(binary.ID{0xc5, 0xe2, 0x60, 0x18, 0x79, 0xc5, 0x59, 0xfb, 0xd2, 0x04, 0x30, 0x5f, 0x36, 0x48, 0x5e, 0x37, 0x4d, 0x4d, 0xa3, 0xe8}, &GlGetQueryivEXT_In{})
 	//struct gles.GlGetQueryivEXT_Out { Value:int32 }
-	binary.Register(binary.ID{0x60, 0x7e, 0x2d, 0x3c, 0x38, 0xb8, 0x20, 0xe2, 0x3d, 0xec, 0x28, 0xd1, 0xd1, 0x63, 0x9b, 0x8f, 0xab, 0xba, 0x62, 0xe5}, &GlGetQueryivEXT_Out{})
+	registry.Add(binary.ID{0x60, 0x7e, 0x2d, 0x3c, 0x38, 0xb8, 0x20, 0xe2, 0x3d, 0xec, 0x28, 0xd1, 0xd1, 0x63, 0x9b, 0x8f, 0xab, 0xba, 0x62, 0xe5}, &GlGetQueryivEXT_Out{})
 	//struct gles.GlGetQueryiv_In { Target:QueryTarget, Parameter:QueryParameter }
-	binary.Register(binary.ID{0x30, 0xe6, 0x2d, 0x3f, 0x3f, 0x31, 0xbf, 0xc0, 0x1d, 0x7d, 0x8d, 0x7e, 0x8d, 0xec, 0xe3, 0xd1, 0xb3, 0x9f, 0x2b, 0x58}, &GlGetQueryiv_In{})
+	registry.Add(binary.ID{0x30, 0xe6, 0x2d, 0x3f, 0x3f, 0x31, 0xbf, 0xc0, 0x1d, 0x7d, 0x8d, 0x7e, 0x8d, 0xec, 0xe3, 0xd1, 0xb3, 0x9f, 0x2b, 0x58}, &GlGetQueryiv_In{})
 	//struct gles.GlGetQueryiv_Out { Value:int32 }
-	binary.Register(binary.ID{0xc7, 0x60, 0xd8, 0xd6, 0x09, 0xa7, 0x52, 0xcd, 0x8b, 0x27, 0xd7, 0x49, 0x29, 0xb0, 0x0c, 0xff, 0x00, 0x11, 0x94, 0x47}, &GlGetQueryiv_Out{})
+	registry.Add(binary.ID{0xc7, 0x60, 0xd8, 0xd6, 0x09, 0xa7, 0x52, 0xcd, 0x8b, 0x27, 0xd7, 0x49, 0x29, 0xb0, 0x0c, 0xff, 0x00, 0x11, 0x94, 0x47}, &GlGetQueryiv_Out{})
 	//struct gles.GlGetRenderbufferParameteriv { Context:atom.ContextID, In:GlGetRenderbufferParameteriv_In, Out:GlGetRenderbufferParameteriv_Out }
-	binary.Register(binary.ID{0x27, 0xfc, 0x35, 0x24, 0xde, 0x18, 0x75, 0x13, 0x4b, 0x4b, 0x7e, 0x6a, 0x49, 0xf3, 0xb9, 0x23, 0xfd, 0xcf, 0x0c, 0x1b}, &GlGetRenderbufferParameteriv{})
+	registry.Add(binary.ID{0x27, 0xfc, 0x35, 0x24, 0xde, 0x18, 0x75, 0x13, 0x4b, 0x4b, 0x7e, 0x6a, 0x49, 0xf3, 0xb9, 0x23, 0xfd, 0xcf, 0x0c, 0x1b}, &GlGetRenderbufferParameteriv{})
 	//struct gles.GlGetRenderbufferParameteriv_In { Target:RenderbufferTarget, Parameter:RenderbufferParameter }
-	binary.Register(binary.ID{0xca, 0x47, 0x77, 0xd0, 0x5c, 0x00, 0xfe, 0x29, 0x24, 0xb6, 0x49, 0x1f, 0x7e, 0x93, 0x38, 0xca, 0xcf, 0x11, 0x21, 0xc1}, &GlGetRenderbufferParameteriv_In{})
+	registry.Add(binary.ID{0xca, 0x47, 0x77, 0xd0, 0x5c, 0x00, 0xfe, 0x29, 0x24, 0xb6, 0x49, 0x1f, 0x7e, 0x93, 0x38, 0xca, 0xcf, 0x11, 0x21, 0xc1}, &GlGetRenderbufferParameteriv_In{})
 	//struct gles.GlGetRenderbufferParameteriv_Out { Values:S32Array }
-	binary.Register(binary.ID{0xb8, 0x81, 0x73, 0x9c, 0xbc, 0x80, 0xf1, 0x92, 0x27, 0x79, 0x39, 0x77, 0xe1, 0x7b, 0xce, 0x8f, 0x6c, 0xf6, 0x73, 0x39}, &GlGetRenderbufferParameteriv_Out{})
+	registry.Add(binary.ID{0xb8, 0x81, 0x73, 0x9c, 0xbc, 0x80, 0xf1, 0x92, 0x27, 0x79, 0x39, 0x77, 0xe1, 0x7b, 0xce, 0x8f, 0x6c, 0xf6, 0x73, 0x39}, &GlGetRenderbufferParameteriv_Out{})
 	//struct gles.GlGetShaderInfoLog { Context:atom.ContextID, In:GlGetShaderInfoLog_In, Out:GlGetShaderInfoLog_Out }
-	binary.Register(binary.ID{0x0d, 0x1d, 0x97, 0x6b, 0xd3, 0x1b, 0x6d, 0xa7, 0x58, 0x00, 0xd6, 0x19, 0x6d, 0x11, 0xfe, 0x19, 0xb7, 0x43, 0x27, 0xeb}, &GlGetShaderInfoLog{})
+	registry.Add(binary.ID{0x0d, 0x1d, 0x97, 0x6b, 0xd3, 0x1b, 0x6d, 0xa7, 0x58, 0x00, 0xd6, 0x19, 0x6d, 0x11, 0xfe, 0x19, 0xb7, 0x43, 0x27, 0xeb}, &GlGetShaderInfoLog{})
 	//struct gles.GlGetShaderInfoLog_In { Shader:ShaderId, BufferLength:int32 }
-	binary.Register(binary.ID{0x67, 0x9b, 0xa0, 0xad, 0x97, 0xbf, 0x33, 0xd2, 0xe5, 0x75, 0xe8, 0x43, 0x3e, 0xaa, 0x1e, 0x92, 0xaa, 0x89, 0xff, 0x91}, &GlGetShaderInfoLog_In{})
+	registry.Add(binary.ID{0x67, 0x9b, 0xa0, 0xad, 0x97, 0xbf, 0x33, 0xd2, 0xe5, 0x75, 0xe8, 0x43, 0x3e, 0xaa, 0x1e, 0x92, 0xaa, 0x89, 0xff, 0x91}, &GlGetShaderInfoLog_In{})
 	//struct gles.GlGetShaderInfoLog_Out { StringLengthWritten:int32, Info:string }
-	binary.Register(binary.ID{0xeb, 0x30, 0xd8, 0x6e, 0xca, 0x8c, 0x41, 0x44, 0x0d, 0x2a, 0x91, 0x32, 0x24, 0x7f, 0xa6, 0xf3, 0x70, 0xdd, 0x90, 0xa7}, &GlGetShaderInfoLog_Out{})
+	registry.Add(binary.ID{0xeb, 0x30, 0xd8, 0x6e, 0xca, 0x8c, 0x41, 0x44, 0x0d, 0x2a, 0x91, 0x32, 0x24, 0x7f, 0xa6, 0xf3, 0x70, 0xdd, 0x90, 0xa7}, &GlGetShaderInfoLog_Out{})
 	//struct gles.GlGetShaderPrecisionFormat { Context:atom.ContextID, In:GlGetShaderPrecisionFormat_In, Out:GlGetShaderPrecisionFormat_Out }
-	binary.Register(binary.ID{0xa1, 0x8b, 0x22, 0x89, 0x31, 0xd5, 0xe7, 0x44, 0xf3, 0x42, 0xb8, 0x42, 0xc3, 0xe8, 0xd7, 0x50, 0x34, 0x11, 0x31, 0xcc}, &GlGetShaderPrecisionFormat{})
+	registry.Add(binary.ID{0xa1, 0x8b, 0x22, 0x89, 0x31, 0xd5, 0xe7, 0x44, 0xf3, 0x42, 0xb8, 0x42, 0xc3, 0xe8, 0xd7, 0x50, 0x34, 0x11, 0x31, 0xcc}, &GlGetShaderPrecisionFormat{})
 	//struct gles.GlGetShaderPrecisionFormat_In { ShaderType:ShaderType, PrecisionType:PrecisionType }
-	binary.Register(binary.ID{0x7d, 0x6a, 0x56, 0x06, 0x00, 0x1e, 0x89, 0xc3, 0x53, 0x25, 0x76, 0xb2, 0xff, 0xc7, 0xc3, 0x9c, 0x66, 0x0b, 0x3f, 0xd8}, &GlGetShaderPrecisionFormat_In{})
+	registry.Add(binary.ID{0x7d, 0x6a, 0x56, 0x06, 0x00, 0x1e, 0x89, 0xc3, 0x53, 0x25, 0x76, 0xb2, 0xff, 0xc7, 0xc3, 0x9c, 0x66, 0x0b, 0x3f, 0xd8}, &GlGetShaderPrecisionFormat_In{})
 	//struct gles.GlGetShaderPrecisionFormat_Out { Range:S32Array, Precision:int32 }
-	binary.Register(binary.ID{0xeb, 0x1a, 0xac, 0xe9, 0x5a, 0x76, 0x72, 0x20, 0xf4, 0x1c, 0xc8, 0xcb, 0xb7, 0xf5, 0x44, 0xf3, 0xfa, 0xff, 0xc1, 0xa4}, &GlGetShaderPrecisionFormat_Out{})
+	registry.Add(binary.ID{0xeb, 0x1a, 0xac, 0xe9, 0x5a, 0x76, 0x72, 0x20, 0xf4, 0x1c, 0xc8, 0xcb, 0xb7, 0xf5, 0x44, 0xf3, 0xfa, 0xff, 0xc1, 0xa4}, &GlGetShaderPrecisionFormat_Out{})
 	//struct gles.GlGetShaderSource { Context:atom.ContextID, In:GlGetShaderSource_In, Out:GlGetShaderSource_Out }
-	binary.Register(binary.ID{0x95, 0x3a, 0x21, 0xce, 0xa0, 0xe9, 0xb5, 0x7c, 0xf5, 0xe3, 0x52, 0xd0, 0x9d, 0xed, 0x58, 0xab, 0x38, 0x01, 0xce, 0x7c}, &GlGetShaderSource{})
+	registry.Add(binary.ID{0x95, 0x3a, 0x21, 0xce, 0xa0, 0xe9, 0xb5, 0x7c, 0xf5, 0xe3, 0x52, 0xd0, 0x9d, 0xed, 0x58, 0xab, 0x38, 0x01, 0xce, 0x7c}, &GlGetShaderSource{})
 	//struct gles.GlGetShaderSource_In { Shader:ShaderId, BufferLength:int32 }
-	binary.Register(binary.ID{0x84, 0xa1, 0x24, 0xf9, 0x82, 0x0f, 0x4f, 0x60, 0xfc, 0xfb, 0x4f, 0x6f, 0x63, 0x58, 0x9a, 0x1c, 0xff, 0xb1, 0xdc, 0x75}, &GlGetShaderSource_In{})
+	registry.Add(binary.ID{0x84, 0xa1, 0x24, 0xf9, 0x82, 0x0f, 0x4f, 0x60, 0xfc, 0xfb, 0x4f, 0x6f, 0x63, 0x58, 0x9a, 0x1c, 0xff, 0xb1, 0xdc, 0x75}, &GlGetShaderSource_In{})
 	//struct gles.GlGetShaderSource_Out { StringLengthWritten:int32, Source:string }
-	binary.Register(binary.ID{0x77, 0xde, 0xc5, 0xec, 0x86, 0x08, 0xa1, 0x62, 0x52, 0x73, 0x79, 0x59, 0x1a, 0xdd, 0x38, 0x18, 0x5f, 0xa4, 0x33, 0x35}, &GlGetShaderSource_Out{})
+	registry.Add(binary.ID{0x77, 0xde, 0xc5, 0xec, 0x86, 0x08, 0xa1, 0x62, 0x52, 0x73, 0x79, 0x59, 0x1a, 0xdd, 0x38, 0x18, 0x5f, 0xa4, 0x33, 0x35}, &GlGetShaderSource_Out{})
 	//struct gles.GlGetShaderiv { Context:atom.ContextID, In:GlGetShaderiv_In, Out:GlGetShaderiv_Out }
-	binary.Register(binary.ID{0x8c, 0xd4, 0x7c, 0xcb, 0xe9, 0xec, 0x43, 0x47, 0xcf, 0x6a, 0x95, 0xc6, 0x26, 0xf4, 0xeb, 0x2a, 0x39, 0x37, 0x91, 0x76}, &GlGetShaderiv{})
+	registry.Add(binary.ID{0x8c, 0xd4, 0x7c, 0xcb, 0xe9, 0xec, 0x43, 0x47, 0xcf, 0x6a, 0x95, 0xc6, 0x26, 0xf4, 0xeb, 0x2a, 0x39, 0x37, 0x91, 0x76}, &GlGetShaderiv{})
 	//struct gles.GlGetShaderiv_In { Shader:ShaderId, Parameter:ShaderParameter }
-	binary.Register(binary.ID{0x59, 0x16, 0x57, 0x64, 0x36, 0x3c, 0xec, 0x23, 0x32, 0xab, 0xbd, 0xce, 0x35, 0xce, 0x9f, 0xbc, 0x7b, 0x53, 0x92, 0x2b}, &GlGetShaderiv_In{})
+	registry.Add(binary.ID{0x59, 0x16, 0x57, 0x64, 0x36, 0x3c, 0xec, 0x23, 0x32, 0xab, 0xbd, 0xce, 0x35, 0xce, 0x9f, 0xbc, 0x7b, 0x53, 0x92, 0x2b}, &GlGetShaderiv_In{})
 	//struct gles.GlGetShaderiv_Out { Value:S32Array }
-	binary.Register(binary.ID{0x39, 0xea, 0xae, 0xf0, 0x5c, 0x52, 0x20, 0xd7, 0x06, 0x1e, 0xd2, 0x74, 0x75, 0x8f, 0xab, 0xae, 0xa9, 0x5c, 0x7f, 0xe1}, &GlGetShaderiv_Out{})
+	registry.Add(binary.ID{0x39, 0xea, 0xae, 0xf0, 0x5c, 0x52, 0x20, 0xd7, 0x06, 0x1e, 0xd2, 0x74, 0x75, 0x8f, 0xab, 0xae, 0xa9, 0x5c, 0x7f, 0xe1}, &GlGetShaderiv_Out{})
 	//struct gles.GlGetString { Context:atom.ContextID, In:GlGetString_In, Out:GlGetString_Out }
-	binary.Register(binary.ID{0xb3, 0x7d, 0x0b, 0xe1, 0xb4, 0x08, 0x14, 0xa4, 0xab, 0xd3, 0x1a, 0xec, 0x3b, 0xe8, 0xf0, 0x07, 0x5e, 0x1b, 0x1f, 0xaf}, &GlGetString{})
+	registry.Add(binary.ID{0xb3, 0x7d, 0x0b, 0xe1, 0xb4, 0x08, 0x14, 0xa4, 0xab, 0xd3, 0x1a, 0xec, 0x3b, 0xe8, 0xf0, 0x07, 0x5e, 0x1b, 0x1f, 0xaf}, &GlGetString{})
 	//struct gles.GlGetString_In { Param:StringConstant }
-	binary.Register(binary.ID{0x83, 0x51, 0x46, 0x4e, 0x0c, 0x4a, 0x67, 0xf6, 0xdd, 0x31, 0x14, 0xe3, 0x0d, 0x62, 0xc2, 0xd9, 0x16, 0x53, 0xf1, 0xcb}, &GlGetString_In{})
+	registry.Add(binary.ID{0x83, 0x51, 0x46, 0x4e, 0x0c, 0x4a, 0x67, 0xf6, 0xdd, 0x31, 0x14, 0xe3, 0x0d, 0x62, 0xc2, 0xd9, 0x16, 0x53, 0xf1, 0xcb}, &GlGetString_In{})
 	//struct gles.GlGetString_Out { Result:string }
-	binary.Register(binary.ID{0xb0, 0x23, 0xf5, 0x8b, 0xa3, 0xfe, 0xdb, 0x51, 0x44, 0x00, 0x6e, 0xf5, 0x1e, 0xfb, 0x98, 0x37, 0xfc, 0x31, 0x63, 0xe2}, &GlGetString_Out{})
+	registry.Add(binary.ID{0xb0, 0x23, 0xf5, 0x8b, 0xa3, 0xfe, 0xdb, 0x51, 0x44, 0x00, 0x6e, 0xf5, 0x1e, 0xfb, 0x98, 0x37, 0xfc, 0x31, 0x63, 0xe2}, &GlGetString_Out{})
 	//struct gles.GlGetTexParameterfv { Context:atom.ContextID, In:GlGetTexParameterfv_In, Out:GlGetTexParameterfv_Out }
-	binary.Register(binary.ID{0x1c, 0x55, 0x1d, 0xf5, 0x28, 0x1c, 0x47, 0x97, 0x42, 0x28, 0xc1, 0xa1, 0xe8, 0xc5, 0xa5, 0x6a, 0xd6, 0x9c, 0xad, 0xcb}, &GlGetTexParameterfv{})
+	registry.Add(binary.ID{0x1c, 0x55, 0x1d, 0xf5, 0x28, 0x1c, 0x47, 0x97, 0x42, 0x28, 0xc1, 0xa1, 0xe8, 0xc5, 0xa5, 0x6a, 0xd6, 0x9c, 0xad, 0xcb}, &GlGetTexParameterfv{})
 	//struct gles.GlGetTexParameterfv_In { Target:TextureTarget, Parameter:TextureParameter }
-	binary.Register(binary.ID{0x00, 0x87, 0x1a, 0x16, 0xee, 0xc0, 0x31, 0xff, 0x02, 0x84, 0xdc, 0xee, 0x76, 0x99, 0x60, 0xb7, 0x1a, 0x8c, 0xa7, 0x67}, &GlGetTexParameterfv_In{})
+	registry.Add(binary.ID{0x00, 0x87, 0x1a, 0x16, 0xee, 0xc0, 0x31, 0xff, 0x02, 0x84, 0xdc, 0xee, 0x76, 0x99, 0x60, 0xb7, 0x1a, 0x8c, 0xa7, 0x67}, &GlGetTexParameterfv_In{})
 	//struct gles.GlGetTexParameterfv_Out { Values:F32Array }
-	binary.Register(binary.ID{0x44, 0x2e, 0xb7, 0x84, 0xa7, 0x1b, 0x65, 0xa2, 0x64, 0x17, 0xc6, 0xf2, 0x01, 0x8b, 0xa4, 0x76, 0x59, 0x04, 0x41, 0xd7}, &GlGetTexParameterfv_Out{})
+	registry.Add(binary.ID{0x44, 0x2e, 0xb7, 0x84, 0xa7, 0x1b, 0x65, 0xa2, 0x64, 0x17, 0xc6, 0xf2, 0x01, 0x8b, 0xa4, 0x76, 0x59, 0x04, 0x41, 0xd7}, &GlGetTexParameterfv_Out{})
 	//struct gles.GlGetTexParameteriv { Context:atom.ContextID, In:GlGetTexParameteriv_In, Out:GlGetTexParameteriv_Out }
-	binary.Register(binary.ID{0xc5, 0xaa, 0xe5, 0xa0, 0x98, 0x06, 0xdc, 0x0b, 0x47, 0x69, 0x29, 0xac, 0xc6, 0xef, 0x5e, 0xda, 0x2b, 0x2f, 0xb8, 0x1c}, &GlGetTexParameteriv{})
+	registry.Add(binary.ID{0xc5, 0xaa, 0xe5, 0xa0, 0x98, 0x06, 0xdc, 0x0b, 0x47, 0x69, 0x29, 0xac, 0xc6, 0xef, 0x5e, 0xda, 0x2b, 0x2f, 0xb8, 0x1c}, &GlGetTexParameteriv{})
 	//struct gles.GlGetTexParameteriv_In { Target:TextureTarget, Parameter:TextureParameter }
-	binary.Register(binary.ID{0xec, 0x64, 0xe9, 0x90, 0x00, 0xfe, 0xa7, 0xff, 0xa9, 0x27, 0xaa, 0xa4, 0x5f, 0xb8, 0xbd, 0x75, 0x06, 0x72, 0xb0, 0x0a}, &GlGetTexParameteriv_In{})
+	registry.Add(binary.ID{0xec, 0x64, 0xe9, 0x90, 0x00, 0xfe, 0xa7, 0xff, 0xa9, 0x27, 0xaa, 0xa4, 0x5f, 0xb8, 0xbd, 0x75, 0x06, 0x72, 0xb0, 0x0a}, &GlGetTexParameteriv_In{})
 	//struct gles.GlGetTexParameteriv_Out { Values:S32Array }
-	binary.Register(binary.ID{0xd9, 0xfc, 0x43, 0xc9, 0x16, 0xd6, 0x1f, 0xda, 0xc2, 0x22, 0x35, 0x8f, 0x43, 0x5d, 0xf9, 0xad, 0x2b, 0x95, 0x61, 0x26}, &GlGetTexParameteriv_Out{})
+	registry.Add(binary.ID{0xd9, 0xfc, 0x43, 0xc9, 0x16, 0xd6, 0x1f, 0xda, 0xc2, 0x22, 0x35, 0x8f, 0x43, 0x5d, 0xf9, 0xad, 0x2b, 0x95, 0x61, 0x26}, &GlGetTexParameteriv_Out{})
 	//struct gles.GlGetUniformLocation { Context:atom.ContextID, In:GlGetUniformLocation_In, Out:GlGetUniformLocation_Out }
-	binary.Register(binary.ID{0xd1, 0x6d, 0x32, 0xd7, 0x63, 0x63, 0x2a, 0x3d, 0xaf, 0x41, 0x5b, 0x6d, 0xaa, 0x33, 0x44, 0x02, 0x68, 0x97, 0xdd, 0x98}, &GlGetUniformLocation{})
+	registry.Add(binary.ID{0xd1, 0x6d, 0x32, 0xd7, 0x63, 0x63, 0x2a, 0x3d, 0xaf, 0x41, 0x5b, 0x6d, 0xaa, 0x33, 0x44, 0x02, 0x68, 0x97, 0xdd, 0x98}, &GlGetUniformLocation{})
 	//struct gles.GlGetUniformLocation_In { Program:ProgramId, Name:string }
-	binary.Register(binary.ID{0x26, 0xd7, 0x53, 0x0d, 0x41, 0x5e, 0xbc, 0x99, 0xa9, 0xc6, 0xd4, 0x2f, 0xbe, 0x19, 0x61, 0x64, 0xa5, 0x5c, 0x2e, 0xef}, &GlGetUniformLocation_In{})
+	registry.Add(binary.ID{0x26, 0xd7, 0x53, 0x0d, 0x41, 0x5e, 0xbc, 0x99, 0xa9, 0xc6, 0xd4, 0x2f, 0xbe, 0x19, 0x61, 0x64, 0xa5, 0x5c, 0x2e, 0xef}, &GlGetUniformLocation_In{})
 	//struct gles.GlGetUniformLocation_Out { Result:UniformLocation }
-	binary.Register(binary.ID{0xff, 0x8b, 0xbd, 0xa6, 0xac, 0xeb, 0xc3, 0xdc, 0x2f, 0x9f, 0xfd, 0x2e, 0x87, 0x47, 0xbf, 0x2e, 0x8b, 0xac, 0xe4, 0x66}, &GlGetUniformLocation_Out{})
+	registry.Add(binary.ID{0xff, 0x8b, 0xbd, 0xa6, 0xac, 0xeb, 0xc3, 0xdc, 0x2f, 0x9f, 0xfd, 0x2e, 0x87, 0x47, 0xbf, 0x2e, 0x8b, 0xac, 0xe4, 0x66}, &GlGetUniformLocation_Out{})
 	//struct gles.GlGetUniformfv { Context:atom.ContextID, In:GlGetUniformfv_In, Out:GlGetUniformfv_Out }
-	binary.Register(binary.ID{0xb0, 0xfc, 0x1f, 0x2a, 0x2b, 0x19, 0x2e, 0x47, 0xd0, 0x80, 0xc8, 0x40, 0x80, 0x99, 0xd8, 0xeb, 0x35, 0x72, 0xf8, 0x4c}, &GlGetUniformfv{})
+	registry.Add(binary.ID{0xb0, 0xfc, 0x1f, 0x2a, 0x2b, 0x19, 0x2e, 0x47, 0xd0, 0x80, 0xc8, 0x40, 0x80, 0x99, 0xd8, 0xeb, 0x35, 0x72, 0xf8, 0x4c}, &GlGetUniformfv{})
 	//struct gles.GlGetUniformfv_In { Program:ProgramId, Location:UniformLocation, Values:F32Array }
-	binary.Register(binary.ID{0xa3, 0xa3, 0x3e, 0x5b, 0x7b, 0x53, 0x67, 0xbc, 0x77, 0x30, 0x5c, 0x13, 0x07, 0x59, 0xb1, 0x1d, 0x42, 0xaa, 0x7c, 0x9c}, &GlGetUniformfv_In{})
+	registry.Add(binary.ID{0xa3, 0xa3, 0x3e, 0x5b, 0x7b, 0x53, 0x67, 0xbc, 0x77, 0x30, 0x5c, 0x13, 0x07, 0x59, 0xb1, 0x1d, 0x42, 0xaa, 0x7c, 0x9c}, &GlGetUniformfv_In{})
 	//struct gles.GlGetUniformfv_Out { }
-	binary.Register(binary.ID{0x7e, 0x42, 0x82, 0x14, 0x1d, 0x27, 0xc9, 0xb2, 0xb3, 0x3a, 0xa6, 0xd8, 0x67, 0xdb, 0x0b, 0x01, 0x92, 0x45, 0x81, 0xd7}, &GlGetUniformfv_Out{})
+	registry.Add(binary.ID{0x7e, 0x42, 0x82, 0x14, 0x1d, 0x27, 0xc9, 0xb2, 0xb3, 0x3a, 0xa6, 0xd8, 0x67, 0xdb, 0x0b, 0x01, 0x92, 0x45, 0x81, 0xd7}, &GlGetUniformfv_Out{})
 	//struct gles.GlGetUniformiv { Context:atom.ContextID, In:GlGetUniformiv_In, Out:GlGetUniformiv_Out }
-	binary.Register(binary.ID{0x33, 0x01, 0xd2, 0xe6, 0xe5, 0x29, 0x3d, 0x76, 0xa7, 0xcc, 0xa6, 0xce, 0x3b, 0x56, 0xcf, 0xb2, 0xe3, 0xfa, 0xe1, 0x3c}, &GlGetUniformiv{})
+	registry.Add(binary.ID{0x33, 0x01, 0xd2, 0xe6, 0xe5, 0x29, 0x3d, 0x76, 0xa7, 0xcc, 0xa6, 0xce, 0x3b, 0x56, 0xcf, 0xb2, 0xe3, 0xfa, 0xe1, 0x3c}, &GlGetUniformiv{})
 	//struct gles.GlGetUniformiv_In { Program:ProgramId, Location:UniformLocation, Values:S32Array }
-	binary.Register(binary.ID{0xba, 0xa3, 0xeb, 0xc7, 0x1d, 0xdb, 0x93, 0xeb, 0x0b, 0x71, 0xce, 0xb8, 0x61, 0xf9, 0xfd, 0x4c, 0xf2, 0x51, 0xcb, 0xbb}, &GlGetUniformiv_In{})
+	registry.Add(binary.ID{0xba, 0xa3, 0xeb, 0xc7, 0x1d, 0xdb, 0x93, 0xeb, 0x0b, 0x71, 0xce, 0xb8, 0x61, 0xf9, 0xfd, 0x4c, 0xf2, 0x51, 0xcb, 0xbb}, &GlGetUniformiv_In{})
 	//struct gles.GlGetUniformiv_Out { }
-	binary.Register(binary.ID{0x42, 0xe0, 0x94, 0x72, 0x98, 0x38, 0x81, 0xde, 0x50, 0xe0, 0xf2, 0x88, 0x6b, 0x3a, 0xe2, 0xeb, 0x4e, 0x75, 0x8e, 0x9c}, &GlGetUniformiv_Out{})
+	registry.Add(binary.ID{0x42, 0xe0, 0x94, 0x72, 0x98, 0x38, 0x81, 0xde, 0x50, 0xe0, 0xf2, 0x88, 0x6b, 0x3a, 0xe2, 0xeb, 0x4e, 0x75, 0x8e, 0x9c}, &GlGetUniformiv_Out{})
 	//struct gles.GlHint { Context:atom.ContextID, In:GlHint_In, Out:GlHint_Out }
-	binary.Register(binary.ID{0xc2, 0x00, 0xd1, 0x45, 0x36, 0x24, 0x7c, 0x01, 0x4c, 0x83, 0xbe, 0x82, 0x3f, 0x12, 0x8c, 0x80, 0x5c, 0x10, 0x51, 0xbc}, &GlHint{})
+	registry.Add(binary.ID{0xc2, 0x00, 0xd1, 0x45, 0x36, 0x24, 0x7c, 0x01, 0x4c, 0x83, 0xbe, 0x82, 0x3f, 0x12, 0x8c, 0x80, 0x5c, 0x10, 0x51, 0xbc}, &GlHint{})
 	//struct gles.GlHint_In { Target:HintTarget, Mode:HintMode }
-	binary.Register(binary.ID{0xda, 0xab, 0x27, 0x7e, 0x45, 0x39, 0x7d, 0x3a, 0x33, 0xad, 0xdf, 0xdb, 0x2e, 0x0b, 0x63, 0xe1, 0x36, 0xc2, 0xa5, 0x59}, &GlHint_In{})
+	registry.Add(binary.ID{0xda, 0xab, 0x27, 0x7e, 0x45, 0x39, 0x7d, 0x3a, 0x33, 0xad, 0xdf, 0xdb, 0x2e, 0x0b, 0x63, 0xe1, 0x36, 0xc2, 0xa5, 0x59}, &GlHint_In{})
 	//struct gles.GlHint_Out { }
-	binary.Register(binary.ID{0xf6, 0x3a, 0xb4, 0x4c, 0xd7, 0xd7, 0xdb, 0x19, 0xa3, 0x6e, 0x34, 0x49, 0x59, 0xd4, 0x81, 0x3d, 0x8f, 0x2f, 0x4a, 0x63}, &GlHint_Out{})
+	registry.Add(binary.ID{0xf6, 0x3a, 0xb4, 0x4c, 0xd7, 0xd7, 0xdb, 0x19, 0xa3, 0x6e, 0x34, 0x49, 0x59, 0xd4, 0x81, 0x3d, 0x8f, 0x2f, 0x4a, 0x63}, &GlHint_Out{})
 	//struct gles.GlInsertEventMarkerEXT { Context:atom.ContextID, In:GlInsertEventMarkerEXT_In, Out:GlInsertEventMarkerEXT_Out }
-	binary.Register(binary.ID{0x16, 0x63, 0x54, 0x9c, 0xee, 0x7e, 0xf7, 0xfb, 0x74, 0x94, 0x8b, 0xdb, 0xc6, 0x28, 0xb2, 0x6b, 0xa8, 0x81, 0x31, 0xc5}, &GlInsertEventMarkerEXT{})
+	registry.Add(binary.ID{0x16, 0x63, 0x54, 0x9c, 0xee, 0x7e, 0xf7, 0xfb, 0x74, 0x94, 0x8b, 0xdb, 0xc6, 0x28, 0xb2, 0x6b, 0xa8, 0x81, 0x31, 0xc5}, &GlInsertEventMarkerEXT{})
 	//struct gles.GlInsertEventMarkerEXT_In { Length:int32, Marker:string }
-	binary.Register(binary.ID{0x51, 0x85, 0x51, 0xd5, 0xf2, 0xa4, 0x25, 0xe3, 0xf2, 0x06, 0xf2, 0xf2, 0x35, 0xdc, 0xcd, 0xb6, 0x8d, 0x3a, 0x62, 0x1c}, &GlInsertEventMarkerEXT_In{})
+	registry.Add(binary.ID{0x51, 0x85, 0x51, 0xd5, 0xf2, 0xa4, 0x25, 0xe3, 0xf2, 0x06, 0xf2, 0xf2, 0x35, 0xdc, 0xcd, 0xb6, 0x8d, 0x3a, 0x62, 0x1c}, &GlInsertEventMarkerEXT_In{})
 	//struct gles.GlInsertEventMarkerEXT_Out { }
-	binary.Register(binary.ID{0xab, 0x65, 0xf0, 0x18, 0x50, 0xa1, 0xb5, 0xb2, 0x68, 0x8a, 0x59, 0x87, 0x76, 0xc9, 0x54, 0xa3, 0x4b, 0x0d, 0x5e, 0x65}, &GlInsertEventMarkerEXT_Out{})
+	registry.Add(binary.ID{0xab, 0x65, 0xf0, 0x18, 0x50, 0xa1, 0xb5, 0xb2, 0x68, 0x8a, 0x59, 0x87, 0x76, 0xc9, 0x54, 0xa3, 0x4b, 0x0d, 0x5e, 0x65}, &GlInsertEventMarkerEXT_Out{})
 	//struct gles.GlInvalidateFramebuffer { Context:atom.ContextID, In:GlInvalidateFramebuffer_In, Out:GlInvalidateFramebuffer_Out }
-	binary.Register(binary.ID{0x98, 0x3a, 0x30, 0xe9, 0x6a, 0x7f, 0xdf, 0x8e, 0x7d, 0x3b, 0xe8, 0xd4, 0xfc, 0x32, 0xce, 0x0b, 0x01, 0x30, 0x31, 0xe1}, &GlInvalidateFramebuffer{})
+	registry.Add(binary.ID{0x98, 0x3a, 0x30, 0xe9, 0x6a, 0x7f, 0xdf, 0x8e, 0x7d, 0x3b, 0xe8, 0xd4, 0xfc, 0x32, 0xce, 0x0b, 0x01, 0x30, 0x31, 0xe1}, &GlInvalidateFramebuffer{})
 	//struct gles.GlInvalidateFramebuffer_In { Target:FramebufferTarget, Count:int32, Attachments:FramebufferAttachmentArray }
-	binary.Register(binary.ID{0x5a, 0xc2, 0xe7, 0xc7, 0x2f, 0xbf, 0xe8, 0xc0, 0x7d, 0x9a, 0x3d, 0x18, 0x48, 0xd3, 0x5b, 0x83, 0xa2, 0xf8, 0x35, 0xeb}, &GlInvalidateFramebuffer_In{})
+	registry.Add(binary.ID{0x5a, 0xc2, 0xe7, 0xc7, 0x2f, 0xbf, 0xe8, 0xc0, 0x7d, 0x9a, 0x3d, 0x18, 0x48, 0xd3, 0x5b, 0x83, 0xa2, 0xf8, 0x35, 0xeb}, &GlInvalidateFramebuffer_In{})
 	//struct gles.GlInvalidateFramebuffer_Out { }
-	binary.Register(binary.ID{0x5d, 0x7f, 0xf3, 0xd4, 0xf1, 0xa0, 0x72, 0xb3, 0x8a, 0x2c, 0x1d, 0x03, 0xfb, 0x6d, 0xd5, 0xd7, 0xfd, 0xb6, 0x5e, 0x59}, &GlInvalidateFramebuffer_Out{})
+	registry.Add(binary.ID{0x5d, 0x7f, 0xf3, 0xd4, 0xf1, 0xa0, 0x72, 0xb3, 0x8a, 0x2c, 0x1d, 0x03, 0xfb, 0x6d, 0xd5, 0xd7, 0xfd, 0xb6, 0x5e, 0x59}, &GlInvalidateFramebuffer_Out{})
 	//struct gles.GlIsBuffer { Context:atom.ContextID, In:GlIsBuffer_In, Out:GlIsBuffer_Out }
-	binary.Register(binary.ID{0xfe, 0xe0, 0xa6, 0x14, 0xc9, 0x09, 0x0a, 0x9b, 0xb7, 0x8c, 0x06, 0x95, 0x22, 0x7e, 0xd1, 0x84, 0xdf, 0x37, 0x8c, 0x90}, &GlIsBuffer{})
+	registry.Add(binary.ID{0xfe, 0xe0, 0xa6, 0x14, 0xc9, 0x09, 0x0a, 0x9b, 0xb7, 0x8c, 0x06, 0x95, 0x22, 0x7e, 0xd1, 0x84, 0xdf, 0x37, 0x8c, 0x90}, &GlIsBuffer{})
 	//struct gles.GlIsBuffer_In { Buffer:BufferId }
-	binary.Register(binary.ID{0x47, 0x5b, 0x1a, 0x79, 0x4e, 0xe6, 0xbf, 0x9f, 0x62, 0xf9, 0x67, 0x9b, 0x1b, 0x58, 0x60, 0x46, 0x08, 0x1a, 0x04, 0xae}, &GlIsBuffer_In{})
+	registry.Add(binary.ID{0x47, 0x5b, 0x1a, 0x79, 0x4e, 0xe6, 0xbf, 0x9f, 0x62, 0xf9, 0x67, 0x9b, 0x1b, 0x58, 0x60, 0x46, 0x08, 0x1a, 0x04, 0xae}, &GlIsBuffer_In{})
 	//struct gles.GlIsBuffer_Out { Result:bool }
-	binary.Register(binary.ID{0xa1, 0x3c, 0xed, 0xa6, 0x24, 0xf3, 0x7a, 0x6c, 0x75, 0xe7, 0x9e, 0xf7, 0x20, 0x94, 0x4e, 0xd5, 0x18, 0xef, 0xed, 0x58}, &GlIsBuffer_Out{})
+	registry.Add(binary.ID{0xa1, 0x3c, 0xed, 0xa6, 0x24, 0xf3, 0x7a, 0x6c, 0x75, 0xe7, 0x9e, 0xf7, 0x20, 0x94, 0x4e, 0xd5, 0x18, 0xef, 0xed, 0x58}, &GlIsBuffer_Out{})
 	//struct gles.GlIsEnabled { Context:atom.ContextID, In:GlIsEnabled_In, Out:GlIsEnabled_Out }
-	binary.Register(binary.ID{0x24, 0xff, 0x8a, 0xa6, 0xb5, 0x11, 0xa1, 0x95, 0xbf, 0xfd, 0xe3, 0x73, 0xc9, 0x65, 0x2e, 0x05, 0x6b, 0x60, 0xa5, 0x38}, &GlIsEnabled{})
+	registry.Add(binary.ID{0x24, 0xff, 0x8a, 0xa6, 0xb5, 0x11, 0xa1, 0x95, 0xbf, 0xfd, 0xe3, 0x73, 0xc9, 0x65, 0x2e, 0x05, 0x6b, 0x60, 0xa5, 0x38}, &GlIsEnabled{})
 	//struct gles.GlIsEnabled_In { Capability:Capability }
-	binary.Register(binary.ID{0x73, 0x76, 0x6c, 0xc3, 0x6b, 0xda, 0xb9, 0x27, 0x51, 0x35, 0xfd, 0x5a, 0xbd, 0x7e, 0xbe, 0x92, 0x08, 0x21, 0xed, 0xbf}, &GlIsEnabled_In{})
+	registry.Add(binary.ID{0x73, 0x76, 0x6c, 0xc3, 0x6b, 0xda, 0xb9, 0x27, 0x51, 0x35, 0xfd, 0x5a, 0xbd, 0x7e, 0xbe, 0x92, 0x08, 0x21, 0xed, 0xbf}, &GlIsEnabled_In{})
 	//struct gles.GlIsEnabled_Out { Result:bool }
-	binary.Register(binary.ID{0xcd, 0x36, 0x3f, 0x23, 0x30, 0x00, 0x44, 0xd3, 0x50, 0x9f, 0x7e, 0xd3, 0xa1, 0xaa, 0xbd, 0xda, 0x75, 0x75, 0xbe, 0x3c}, &GlIsEnabled_Out{})
+	registry.Add(binary.ID{0xcd, 0x36, 0x3f, 0x23, 0x30, 0x00, 0x44, 0xd3, 0x50, 0x9f, 0x7e, 0xd3, 0xa1, 0xaa, 0xbd, 0xda, 0x75, 0x75, 0xbe, 0x3c}, &GlIsEnabled_Out{})
 	//struct gles.GlIsFramebuffer { Context:atom.ContextID, In:GlIsFramebuffer_In, Out:GlIsFramebuffer_Out }
-	binary.Register(binary.ID{0x87, 0xb7, 0xb2, 0x48, 0xcb, 0xed, 0x4a, 0x94, 0x37, 0xfb, 0xc2, 0x0e, 0x2e, 0x14, 0xd1, 0x93, 0xbf, 0x79, 0xf4, 0x79}, &GlIsFramebuffer{})
+	registry.Add(binary.ID{0x87, 0xb7, 0xb2, 0x48, 0xcb, 0xed, 0x4a, 0x94, 0x37, 0xfb, 0xc2, 0x0e, 0x2e, 0x14, 0xd1, 0x93, 0xbf, 0x79, 0xf4, 0x79}, &GlIsFramebuffer{})
 	//struct gles.GlIsFramebuffer_In { Framebuffer:FramebufferId }
-	binary.Register(binary.ID{0xde, 0x76, 0x04, 0xe4, 0x67, 0xc6, 0x84, 0x85, 0xd9, 0xb7, 0x50, 0xf7, 0xbc, 0x66, 0x1a, 0x7f, 0x93, 0xba, 0xc1, 0x96}, &GlIsFramebuffer_In{})
+	registry.Add(binary.ID{0xde, 0x76, 0x04, 0xe4, 0x67, 0xc6, 0x84, 0x85, 0xd9, 0xb7, 0x50, 0xf7, 0xbc, 0x66, 0x1a, 0x7f, 0x93, 0xba, 0xc1, 0x96}, &GlIsFramebuffer_In{})
 	//struct gles.GlIsFramebuffer_Out { Result:bool }
-	binary.Register(binary.ID{0xb3, 0x89, 0x83, 0x5c, 0x89, 0xb7, 0xb0, 0x18, 0x37, 0xf2, 0x49, 0x69, 0x82, 0xad, 0x90, 0xdb, 0x83, 0x2f, 0xcf, 0x83}, &GlIsFramebuffer_Out{})
+	registry.Add(binary.ID{0xb3, 0x89, 0x83, 0x5c, 0x89, 0xb7, 0xb0, 0x18, 0x37, 0xf2, 0x49, 0x69, 0x82, 0xad, 0x90, 0xdb, 0x83, 0x2f, 0xcf, 0x83}, &GlIsFramebuffer_Out{})
 	//struct gles.GlIsProgram { Context:atom.ContextID, In:GlIsProgram_In, Out:GlIsProgram_Out }
-	binary.Register(binary.ID{0xa4, 0x29, 0xa5, 0x8b, 0x15, 0x0e, 0x28, 0x98, 0x9f, 0xbc, 0x7d, 0xfa, 0x66, 0xd7, 0xa4, 0x6d, 0x0d, 0xc7, 0xe6, 0xf0}, &GlIsProgram{})
+	registry.Add(binary.ID{0xa4, 0x29, 0xa5, 0x8b, 0x15, 0x0e, 0x28, 0x98, 0x9f, 0xbc, 0x7d, 0xfa, 0x66, 0xd7, 0xa4, 0x6d, 0x0d, 0xc7, 0xe6, 0xf0}, &GlIsProgram{})
 	//struct gles.GlIsProgram_In { Program:ProgramId }
-	binary.Register(binary.ID{0x9c, 0x72, 0xdd, 0x0c, 0xf1, 0xa2, 0x1c, 0xd9, 0x5e, 0x23, 0xcc, 0xcf, 0x2f, 0x43, 0xb8, 0xdf, 0x51, 0x11, 0x63, 0x59}, &GlIsProgram_In{})
+	registry.Add(binary.ID{0x9c, 0x72, 0xdd, 0x0c, 0xf1, 0xa2, 0x1c, 0xd9, 0x5e, 0x23, 0xcc, 0xcf, 0x2f, 0x43, 0xb8, 0xdf, 0x51, 0x11, 0x63, 0x59}, &GlIsProgram_In{})
 	//struct gles.GlIsProgram_Out { Result:bool }
-	binary.Register(binary.ID{0x97, 0xb7, 0x50, 0xf9, 0x5c, 0xdb, 0xf5, 0xae, 0x4a, 0xaf, 0x08, 0x15, 0x0f, 0x28, 0x82, 0xbf, 0x04, 0xf4, 0x75, 0x43}, &GlIsProgram_Out{})
+	registry.Add(binary.ID{0x97, 0xb7, 0x50, 0xf9, 0x5c, 0xdb, 0xf5, 0xae, 0x4a, 0xaf, 0x08, 0x15, 0x0f, 0x28, 0x82, 0xbf, 0x04, 0xf4, 0x75, 0x43}, &GlIsProgram_Out{})
 	//struct gles.GlIsQuery { Context:atom.ContextID, In:GlIsQuery_In, Out:GlIsQuery_Out }
-	binary.Register(binary.ID{0xfa, 0xf9, 0x09, 0xba, 0xb4, 0xf1, 0x18, 0x3d, 0xfc, 0x4d, 0x3a, 0x8f, 0x34, 0x57, 0x8b, 0x1d, 0x8b, 0x97, 0xab, 0xc8}, &GlIsQuery{})
+	registry.Add(binary.ID{0xfa, 0xf9, 0x09, 0xba, 0xb4, 0xf1, 0x18, 0x3d, 0xfc, 0x4d, 0x3a, 0x8f, 0x34, 0x57, 0x8b, 0x1d, 0x8b, 0x97, 0xab, 0xc8}, &GlIsQuery{})
 	//struct gles.GlIsQueryEXT { Context:atom.ContextID, In:GlIsQueryEXT_In, Out:GlIsQueryEXT_Out }
-	binary.Register(binary.ID{0x83, 0xb2, 0x5c, 0xed, 0x6c, 0xa3, 0xfe, 0x05, 0xad, 0x28, 0xf1, 0x7d, 0x7c, 0x14, 0x41, 0x22, 0xe0, 0x68, 0x71, 0xf9}, &GlIsQueryEXT{})
+	registry.Add(binary.ID{0x83, 0xb2, 0x5c, 0xed, 0x6c, 0xa3, 0xfe, 0x05, 0xad, 0x28, 0xf1, 0x7d, 0x7c, 0x14, 0x41, 0x22, 0xe0, 0x68, 0x71, 0xf9}, &GlIsQueryEXT{})
 	//struct gles.GlIsQueryEXT_In { Query:QueryId }
-	binary.Register(binary.ID{0xad, 0x8d, 0x64, 0x5b, 0x1b, 0x17, 0xb3, 0xc9, 0x8f, 0x37, 0x1a, 0x1d, 0xa3, 0x40, 0x20, 0xc7, 0x2b, 0xa6, 0x08, 0x5a}, &GlIsQueryEXT_In{})
+	registry.Add(binary.ID{0xad, 0x8d, 0x64, 0x5b, 0x1b, 0x17, 0xb3, 0xc9, 0x8f, 0x37, 0x1a, 0x1d, 0xa3, 0x40, 0x20, 0xc7, 0x2b, 0xa6, 0x08, 0x5a}, &GlIsQueryEXT_In{})
 	//struct gles.GlIsQueryEXT_Out { Result:bool }
-	binary.Register(binary.ID{0x86, 0x68, 0x39, 0x96, 0x78, 0x6d, 0x22, 0x25, 0x67, 0x87, 0x43, 0x05, 0x3a, 0xec, 0x5d, 0x90, 0x29, 0xc4, 0xc6, 0x17}, &GlIsQueryEXT_Out{})
+	registry.Add(binary.ID{0x86, 0x68, 0x39, 0x96, 0x78, 0x6d, 0x22, 0x25, 0x67, 0x87, 0x43, 0x05, 0x3a, 0xec, 0x5d, 0x90, 0x29, 0xc4, 0xc6, 0x17}, &GlIsQueryEXT_Out{})
 	//struct gles.GlIsQuery_In { Query:QueryId }
-	binary.Register(binary.ID{0xed, 0xfe, 0x17, 0xca, 0xca, 0x1b, 0xa9, 0x9f, 0xe4, 0xdf, 0xe7, 0x4b, 0xd4, 0x4f, 0xf8, 0x18, 0xe1, 0xd2, 0x70, 0xc4}, &GlIsQuery_In{})
+	registry.Add(binary.ID{0xed, 0xfe, 0x17, 0xca, 0xca, 0x1b, 0xa9, 0x9f, 0xe4, 0xdf, 0xe7, 0x4b, 0xd4, 0x4f, 0xf8, 0x18, 0xe1, 0xd2, 0x70, 0xc4}, &GlIsQuery_In{})
 	//struct gles.GlIsQuery_Out { Result:bool }
-	binary.Register(binary.ID{0x13, 0x9f, 0x14, 0x41, 0xe5, 0xcd, 0x1f, 0xe5, 0x6d, 0xa5, 0x39, 0x96, 0xb4, 0xae, 0x34, 0x57, 0xc5, 0xe4, 0xa0, 0xf7}, &GlIsQuery_Out{})
+	registry.Add(binary.ID{0x13, 0x9f, 0x14, 0x41, 0xe5, 0xcd, 0x1f, 0xe5, 0x6d, 0xa5, 0x39, 0x96, 0xb4, 0xae, 0x34, 0x57, 0xc5, 0xe4, 0xa0, 0xf7}, &GlIsQuery_Out{})
 	//struct gles.GlIsRenderbuffer { Context:atom.ContextID, In:GlIsRenderbuffer_In, Out:GlIsRenderbuffer_Out }
-	binary.Register(binary.ID{0xbc, 0xfb, 0xf1, 0xa3, 0x44, 0xd6, 0xdc, 0x31, 0xdd, 0x59, 0xed, 0x7b, 0x46, 0xaa, 0x0f, 0x20, 0xb7, 0x67, 0x2f, 0x51}, &GlIsRenderbuffer{})
+	registry.Add(binary.ID{0xbc, 0xfb, 0xf1, 0xa3, 0x44, 0xd6, 0xdc, 0x31, 0xdd, 0x59, 0xed, 0x7b, 0x46, 0xaa, 0x0f, 0x20, 0xb7, 0x67, 0x2f, 0x51}, &GlIsRenderbuffer{})
 	//struct gles.GlIsRenderbuffer_In { Renderbuffer:RenderbufferId }
-	binary.Register(binary.ID{0x3f, 0x17, 0x9b, 0x60, 0x2e, 0x68, 0x9a, 0x24, 0x71, 0x44, 0x5a, 0xbe, 0x9d, 0x07, 0x48, 0x0b, 0x82, 0x28, 0x68, 0x2f}, &GlIsRenderbuffer_In{})
+	registry.Add(binary.ID{0x3f, 0x17, 0x9b, 0x60, 0x2e, 0x68, 0x9a, 0x24, 0x71, 0x44, 0x5a, 0xbe, 0x9d, 0x07, 0x48, 0x0b, 0x82, 0x28, 0x68, 0x2f}, &GlIsRenderbuffer_In{})
 	//struct gles.GlIsRenderbuffer_Out { Result:bool }
-	binary.Register(binary.ID{0x43, 0x7c, 0xb0, 0x38, 0x7f, 0xcb, 0xdb, 0x8d, 0xcb, 0x78, 0x87, 0x0d, 0xdb, 0x3d, 0x6b, 0xcb, 0x96, 0xbe, 0x2c, 0xe5}, &GlIsRenderbuffer_Out{})
+	registry.Add(binary.ID{0x43, 0x7c, 0xb0, 0x38, 0x7f, 0xcb, 0xdb, 0x8d, 0xcb, 0x78, 0x87, 0x0d, 0xdb, 0x3d, 0x6b, 0xcb, 0x96, 0xbe, 0x2c, 0xe5}, &GlIsRenderbuffer_Out{})
 	//struct gles.GlIsShader { Context:atom.ContextID, In:GlIsShader_In, Out:GlIsShader_Out }
-	binary.Register(binary.ID{0xf7, 0xb6, 0x17, 0xa8, 0x2c, 0xe3, 0xc7, 0x63, 0xd8, 0x0c, 0xbd, 0xd1, 0x80, 0xf4, 0x05, 0x9e, 0x97, 0x3b, 0x02, 0xe3}, &GlIsShader{})
+	registry.Add(binary.ID{0xf7, 0xb6, 0x17, 0xa8, 0x2c, 0xe3, 0xc7, 0x63, 0xd8, 0x0c, 0xbd, 0xd1, 0x80, 0xf4, 0x05, 0x9e, 0x97, 0x3b, 0x02, 0xe3}, &GlIsShader{})
 	//struct gles.GlIsShader_In { Shader:ShaderId }
-	binary.Register(binary.ID{0xfd, 0x47, 0x1f, 0x60, 0x12, 0xb5, 0x82, 0x4b, 0x2f, 0x77, 0xd7, 0xd9, 0x3e, 0xbd, 0x0c, 0x16, 0xed, 0xe2, 0x47, 0x68}, &GlIsShader_In{})
+	registry.Add(binary.ID{0xfd, 0x47, 0x1f, 0x60, 0x12, 0xb5, 0x82, 0x4b, 0x2f, 0x77, 0xd7, 0xd9, 0x3e, 0xbd, 0x0c, 0x16, 0xed, 0xe2, 0x47, 0x68}, &GlIsShader_In{})
 	//struct gles.GlIsShader_Out { Result:bool }
-	binary.Register(binary.ID{0x1c, 0xc6, 0xef, 0xc5, 0xa1, 0x4d, 0x5d, 0xfa, 0xa4, 0xab, 0x68, 0x34, 0x67, 0x9a, 0x09, 0x5f, 0x0f, 0x7b, 0xba, 0x2f}, &GlIsShader_Out{})
+	registry.Add(binary.ID{0x1c, 0xc6, 0xef, 0xc5, 0xa1, 0x4d, 0x5d, 0xfa, 0xa4, 0xab, 0x68, 0x34, 0x67, 0x9a, 0x09, 0x5f, 0x0f, 0x7b, 0xba, 0x2f}, &GlIsShader_Out{})
 	//struct gles.GlIsTexture { Context:atom.ContextID, In:GlIsTexture_In, Out:GlIsTexture_Out }
-	binary.Register(binary.ID{0xc8, 0xfb, 0x09, 0x3f, 0x55, 0x4a, 0xd5, 0x43, 0x28, 0x38, 0x50, 0xaf, 0x3a, 0x8e, 0xaa, 0x8e, 0xa3, 0x85, 0xb1, 0x96}, &GlIsTexture{})
+	registry.Add(binary.ID{0xc8, 0xfb, 0x09, 0x3f, 0x55, 0x4a, 0xd5, 0x43, 0x28, 0x38, 0x50, 0xaf, 0x3a, 0x8e, 0xaa, 0x8e, 0xa3, 0x85, 0xb1, 0x96}, &GlIsTexture{})
 	//struct gles.GlIsTexture_In { Texture:TextureId }
-	binary.Register(binary.ID{0xa2, 0x9d, 0x01, 0x08, 0x5e, 0xbe, 0x69, 0x15, 0xff, 0x8e, 0x74, 0xf9, 0x47, 0x95, 0xb6, 0x2f, 0xe7, 0x0b, 0x67, 0x7f}, &GlIsTexture_In{})
+	registry.Add(binary.ID{0xa2, 0x9d, 0x01, 0x08, 0x5e, 0xbe, 0x69, 0x15, 0xff, 0x8e, 0x74, 0xf9, 0x47, 0x95, 0xb6, 0x2f, 0xe7, 0x0b, 0x67, 0x7f}, &GlIsTexture_In{})
 	//struct gles.GlIsTexture_Out { Result:bool }
-	binary.Register(binary.ID{0x64, 0xf6, 0xee, 0x83, 0xd7, 0xa5, 0x40, 0x49, 0x1c, 0x02, 0xbe, 0xaa, 0x5c, 0x87, 0xc8, 0xc2, 0x40, 0x79, 0x01, 0x5d}, &GlIsTexture_Out{})
+	registry.Add(binary.ID{0x64, 0xf6, 0xee, 0x83, 0xd7, 0xa5, 0x40, 0x49, 0x1c, 0x02, 0xbe, 0xaa, 0x5c, 0x87, 0xc8, 0xc2, 0x40, 0x79, 0x01, 0x5d}, &GlIsTexture_Out{})
 	//struct gles.GlIsVertexArrayOES { Context:atom.ContextID, In:GlIsVertexArrayOES_In, Out:GlIsVertexArrayOES_Out }
-	binary.Register(binary.ID{0x5d, 0x05, 0x6b, 0x6c, 0xf6, 0x3c, 0x65, 0xa5, 0x40, 0x54, 0x4b, 0x3b, 0x05, 0xbe, 0x45, 0x58, 0x1b, 0x25, 0x48, 0xd1}, &GlIsVertexArrayOES{})
+	registry.Add(binary.ID{0x5d, 0x05, 0x6b, 0x6c, 0xf6, 0x3c, 0x65, 0xa5, 0x40, 0x54, 0x4b, 0x3b, 0x05, 0xbe, 0x45, 0x58, 0x1b, 0x25, 0x48, 0xd1}, &GlIsVertexArrayOES{})
 	//struct gles.GlIsVertexArrayOES_In { Array:VertexArrayId }
-	binary.Register(binary.ID{0xa0, 0xe8, 0xbc, 0xb4, 0x51, 0xe3, 0xf5, 0xfd, 0xdd, 0x63, 0x27, 0xa9, 0x0d, 0x7b, 0xa1, 0xbe, 0x4b, 0xb3, 0x46, 0x7a}, &GlIsVertexArrayOES_In{})
+	registry.Add(binary.ID{0xa0, 0xe8, 0xbc, 0xb4, 0x51, 0xe3, 0xf5, 0xfd, 0xdd, 0x63, 0x27, 0xa9, 0x0d, 0x7b, 0xa1, 0xbe, 0x4b, 0xb3, 0x46, 0x7a}, &GlIsVertexArrayOES_In{})
 	//struct gles.GlIsVertexArrayOES_Out { Result:bool }
-	binary.Register(binary.ID{0x4b, 0x55, 0x23, 0x13, 0x68, 0x3d, 0x3f, 0xbf, 0xda, 0x51, 0xe2, 0xf2, 0xf0, 0xdb, 0x23, 0xa2, 0x3a, 0xec, 0x0a, 0xf1}, &GlIsVertexArrayOES_Out{})
+	registry.Add(binary.ID{0x4b, 0x55, 0x23, 0x13, 0x68, 0x3d, 0x3f, 0xbf, 0xda, 0x51, 0xe2, 0xf2, 0xf0, 0xdb, 0x23, 0xa2, 0x3a, 0xec, 0x0a, 0xf1}, &GlIsVertexArrayOES_Out{})
 	//struct gles.GlLineWidth { Context:atom.ContextID, In:GlLineWidth_In, Out:GlLineWidth_Out }
-	binary.Register(binary.ID{0x7a, 0xc0, 0x1a, 0xed, 0xf7, 0x5f, 0xf7, 0x2c, 0x06, 0x3d, 0x22, 0x4a, 0x6e, 0xd6, 0x33, 0xf9, 0xa1, 0xcb, 0xca, 0x57}, &GlLineWidth{})
+	registry.Add(binary.ID{0x7a, 0xc0, 0x1a, 0xed, 0xf7, 0x5f, 0xf7, 0x2c, 0x06, 0x3d, 0x22, 0x4a, 0x6e, 0xd6, 0x33, 0xf9, 0xa1, 0xcb, 0xca, 0x57}, &GlLineWidth{})
 	//struct gles.GlLineWidth_In { Width:float32 }
-	binary.Register(binary.ID{0xfd, 0xde, 0x8e, 0x70, 0x4b, 0x94, 0x1f, 0x2f, 0x0c, 0x08, 0xc4, 0x0b, 0x04, 0x29, 0x71, 0xb5, 0x35, 0xda, 0x6a, 0x81}, &GlLineWidth_In{})
+	registry.Add(binary.ID{0xfd, 0xde, 0x8e, 0x70, 0x4b, 0x94, 0x1f, 0x2f, 0x0c, 0x08, 0xc4, 0x0b, 0x04, 0x29, 0x71, 0xb5, 0x35, 0xda, 0x6a, 0x81}, &GlLineWidth_In{})
 	//struct gles.GlLineWidth_Out { }
-	binary.Register(binary.ID{0x1e, 0x2e, 0x13, 0x88, 0x93, 0x9f, 0xc1, 0x52, 0xe2, 0xed, 0x46, 0xdf, 0xb7, 0xc9, 0x8c, 0xf0, 0x62, 0x81, 0x81, 0x72}, &GlLineWidth_Out{})
+	registry.Add(binary.ID{0x1e, 0x2e, 0x13, 0x88, 0x93, 0x9f, 0xc1, 0x52, 0xe2, 0xed, 0x46, 0xdf, 0xb7, 0xc9, 0x8c, 0xf0, 0x62, 0x81, 0x81, 0x72}, &GlLineWidth_Out{})
 	//struct gles.GlLinkProgram { Context:atom.ContextID, In:GlLinkProgram_In, Out:GlLinkProgram_Out }
-	binary.Register(binary.ID{0xe3, 0x8d, 0xa1, 0x1d, 0xa7, 0xc1, 0xe7, 0x40, 0x48, 0xde, 0x5d, 0x67, 0x4f, 0x1e, 0x2b, 0x0f, 0xc7, 0xa4, 0x53, 0xe5}, &GlLinkProgram{})
+	registry.Add(binary.ID{0xe3, 0x8d, 0xa1, 0x1d, 0xa7, 0xc1, 0xe7, 0x40, 0x48, 0xde, 0x5d, 0x67, 0x4f, 0x1e, 0x2b, 0x0f, 0xc7, 0xa4, 0x53, 0xe5}, &GlLinkProgram{})
 	//struct gles.GlLinkProgram_In { Program:ProgramId }
-	binary.Register(binary.ID{0xa3, 0x8d, 0xbc, 0x4a, 0x07, 0x55, 0x00, 0xe7, 0x2e, 0x80, 0xb9, 0x3f, 0x36, 0x09, 0x40, 0xf3, 0xb6, 0x34, 0x73, 0x34}, &GlLinkProgram_In{})
+	registry.Add(binary.ID{0xa3, 0x8d, 0xbc, 0x4a, 0x07, 0x55, 0x00, 0xe7, 0x2e, 0x80, 0xb9, 0x3f, 0x36, 0x09, 0x40, 0xf3, 0xb6, 0x34, 0x73, 0x34}, &GlLinkProgram_In{})
 	//struct gles.GlLinkProgram_Out { }
-	binary.Register(binary.ID{0xda, 0x31, 0xc6, 0x1e, 0x35, 0x1e, 0xad, 0xad, 0x64, 0xd7, 0x21, 0x48, 0xaf, 0xcd, 0x81, 0xb7, 0x54, 0x66, 0x37, 0x5a}, &GlLinkProgram_Out{})
+	registry.Add(binary.ID{0xda, 0x31, 0xc6, 0x1e, 0x35, 0x1e, 0xad, 0xad, 0x64, 0xd7, 0x21, 0x48, 0xaf, 0xcd, 0x81, 0xb7, 0x54, 0x66, 0x37, 0x5a}, &GlLinkProgram_Out{})
 	//struct gles.GlMapBufferRange { Context:atom.ContextID, In:GlMapBufferRange_In, Out:GlMapBufferRange_Out }
-	binary.Register(binary.ID{0xa6, 0xf0, 0xef, 0xd2, 0x6b, 0x6c, 0x38, 0xf2, 0x73, 0x21, 0xcd, 0x4e, 0xde, 0x1b, 0x56, 0xfe, 0x75, 0xa4, 0x90, 0x41}, &GlMapBufferRange{})
+	registry.Add(binary.ID{0xa6, 0xf0, 0xef, 0xd2, 0x6b, 0x6c, 0x38, 0xf2, 0x73, 0x21, 0xcd, 0x4e, 0xde, 0x1b, 0x56, 0xfe, 0x75, 0xa4, 0x90, 0x41}, &GlMapBufferRange{})
 	//struct gles.GlMapBufferRange_In { Target:MapBufferTarget, Offset:int32, Length:int32, Access:MapBufferRangeAccess }
-	binary.Register(binary.ID{0x13, 0xe2, 0xd8, 0x6b, 0xaa, 0x57, 0x43, 0xf7, 0x71, 0x69, 0x00, 0xef, 0x09, 0xda, 0x2a, 0x1e, 0xc0, 0xe6, 0x0f, 0x33}, &GlMapBufferRange_In{})
+	registry.Add(binary.ID{0x13, 0xe2, 0xd8, 0x6b, 0xaa, 0x57, 0x43, 0xf7, 0x71, 0x69, 0x00, 0xef, 0x09, 0xda, 0x2a, 0x1e, 0xc0, 0xe6, 0x0f, 0x33}, &GlMapBufferRange_In{})
 	//struct gles.GlMapBufferRange_Out { Result:memory.Pointer }
-	binary.Register(binary.ID{0x12, 0xb7, 0xc9, 0x7b, 0x65, 0xbb, 0x11, 0x7a, 0x2a, 0x90, 0xe7, 0x2d, 0x72, 0x0a, 0x1b, 0x84, 0x73, 0x25, 0x91, 0x16}, &GlMapBufferRange_Out{})
+	registry.Add(binary.ID{0x12, 0xb7, 0xc9, 0x7b, 0x65, 0xbb, 0x11, 0x7a, 0x2a, 0x90, 0xe7, 0x2d, 0x72, 0x0a, 0x1b, 0x84, 0x73, 0x25, 0x91, 0x16}, &GlMapBufferRange_Out{})
 	//struct gles.GlPixelStorei { Context:atom.ContextID, In:GlPixelStorei_In, Out:GlPixelStorei_Out }
-	binary.Register(binary.ID{0xd8, 0x09, 0x4a, 0x19, 0xb4, 0xb4, 0x72, 0x95, 0x77, 0x52, 0x76, 0xfa, 0xea, 0xf4, 0x9c, 0x72, 0x98, 0x42, 0xba, 0x75}, &GlPixelStorei{})
+	registry.Add(binary.ID{0xd8, 0x09, 0x4a, 0x19, 0xb4, 0xb4, 0x72, 0x95, 0x77, 0x52, 0x76, 0xfa, 0xea, 0xf4, 0x9c, 0x72, 0x98, 0x42, 0xba, 0x75}, &GlPixelStorei{})
 	//struct gles.GlPixelStorei_In { Parameter:PixelStoreParameter, Value:int32 }
-	binary.Register(binary.ID{0x28, 0x95, 0xd6, 0x12, 0x48, 0xa4, 0x2b, 0xdb, 0x55, 0x4f, 0x7f, 0x19, 0x1b, 0xa1, 0x8a, 0x78, 0x06, 0xd2, 0x9d, 0x28}, &GlPixelStorei_In{})
+	registry.Add(binary.ID{0x28, 0x95, 0xd6, 0x12, 0x48, 0xa4, 0x2b, 0xdb, 0x55, 0x4f, 0x7f, 0x19, 0x1b, 0xa1, 0x8a, 0x78, 0x06, 0xd2, 0x9d, 0x28}, &GlPixelStorei_In{})
 	//struct gles.GlPixelStorei_Out { }
-	binary.Register(binary.ID{0x36, 0x48, 0xd9, 0x54, 0x18, 0x4d, 0x1f, 0x77, 0xf2, 0x3e, 0x0e, 0xc0, 0x3d, 0xd8, 0x89, 0xaf, 0xd2, 0x9f, 0x9b, 0x43}, &GlPixelStorei_Out{})
+	registry.Add(binary.ID{0x36, 0x48, 0xd9, 0x54, 0x18, 0x4d, 0x1f, 0x77, 0xf2, 0x3e, 0x0e, 0xc0, 0x3d, 0xd8, 0x89, 0xaf, 0xd2, 0x9f, 0x9b, 0x43}, &GlPixelStorei_Out{})
 	//struct gles.GlPolygonOffset { Context:atom.ContextID, In:GlPolygonOffset_In, Out:GlPolygonOffset_Out }
-	binary.Register(binary.ID{0xe6, 0x82, 0x3f, 0xba, 0x0b, 0x5e, 0xe7, 0x22, 0x32, 0x14, 0x61, 0xc0, 0x36, 0x86, 0xf4, 0xcd, 0xe8, 0x65, 0xcb, 0x8a}, &GlPolygonOffset{})
+	registry.Add(binary.ID{0xe6, 0x82, 0x3f, 0xba, 0x0b, 0x5e, 0xe7, 0x22, 0x32, 0x14, 0x61, 0xc0, 0x36, 0x86, 0xf4, 0xcd, 0xe8, 0x65, 0xcb, 0x8a}, &GlPolygonOffset{})
 	//struct gles.GlPolygonOffset_In { ScaleFactor:float32, Units:float32 }
-	binary.Register(binary.ID{0xae, 0x35, 0x12, 0x84, 0x6a, 0x3f, 0xf9, 0xb5, 0x41, 0xbc, 0x8f, 0x11, 0xe6, 0xcc, 0xa6, 0x7d, 0x03, 0xdd, 0xa8, 0x7d}, &GlPolygonOffset_In{})
+	registry.Add(binary.ID{0xae, 0x35, 0x12, 0x84, 0x6a, 0x3f, 0xf9, 0xb5, 0x41, 0xbc, 0x8f, 0x11, 0xe6, 0xcc, 0xa6, 0x7d, 0x03, 0xdd, 0xa8, 0x7d}, &GlPolygonOffset_In{})
 	//struct gles.GlPolygonOffset_Out { }
-	binary.Register(binary.ID{0x66, 0x71, 0x98, 0x1a, 0x11, 0x4e, 0x7b, 0x69, 0xcc, 0x1d, 0xd2, 0xdc, 0x52, 0xe5, 0x48, 0xfd, 0x54, 0xd9, 0x01, 0xca}, &GlPolygonOffset_Out{})
+	registry.Add(binary.ID{0x66, 0x71, 0x98, 0x1a, 0x11, 0x4e, 0x7b, 0x69, 0xcc, 0x1d, 0xd2, 0xdc, 0x52, 0xe5, 0x48, 0xfd, 0x54, 0xd9, 0x01, 0xca}, &GlPolygonOffset_Out{})
 	//struct gles.GlPopGroupMarkerEXT { Context:atom.ContextID, In:GlPopGroupMarkerEXT_In, Out:GlPopGroupMarkerEXT_Out }
-	binary.Register(binary.ID{0x38, 0xb0, 0x43, 0x5b, 0xd6, 0x39, 0x8e, 0x92, 0xb8, 0xec, 0xa2, 0x2d, 0xfc, 0xf5, 0x05, 0x06, 0xf7, 0xaf, 0x75, 0x47}, &GlPopGroupMarkerEXT{})
+	registry.Add(binary.ID{0x38, 0xb0, 0x43, 0x5b, 0xd6, 0x39, 0x8e, 0x92, 0xb8, 0xec, 0xa2, 0x2d, 0xfc, 0xf5, 0x05, 0x06, 0xf7, 0xaf, 0x75, 0x47}, &GlPopGroupMarkerEXT{})
 	//struct gles.GlPopGroupMarkerEXT_In { }
-	binary.Register(binary.ID{0xc7, 0xf0, 0xcd, 0xc5, 0xed, 0xa6, 0x91, 0x75, 0x9c, 0xdc, 0xa8, 0x96, 0xd4, 0x4b, 0xef, 0xba, 0x67, 0x27, 0x71, 0xef}, &GlPopGroupMarkerEXT_In{})
+	registry.Add(binary.ID{0xc7, 0xf0, 0xcd, 0xc5, 0xed, 0xa6, 0x91, 0x75, 0x9c, 0xdc, 0xa8, 0x96, 0xd4, 0x4b, 0xef, 0xba, 0x67, 0x27, 0x71, 0xef}, &GlPopGroupMarkerEXT_In{})
 	//struct gles.GlPopGroupMarkerEXT_Out { }
-	binary.Register(binary.ID{0x9d, 0x03, 0xaf, 0xd6, 0x0d, 0x5f, 0xaa, 0x08, 0xa3, 0x89, 0x56, 0xe0, 0x6f, 0xaa, 0xf2, 0xd4, 0x13, 0x35, 0x7c, 0x6a}, &GlPopGroupMarkerEXT_Out{})
+	registry.Add(binary.ID{0x9d, 0x03, 0xaf, 0xd6, 0x0d, 0x5f, 0xaa, 0x08, 0xa3, 0x89, 0x56, 0xe0, 0x6f, 0xaa, 0xf2, 0xd4, 0x13, 0x35, 0x7c, 0x6a}, &GlPopGroupMarkerEXT_Out{})
 	//struct gles.GlProgramBinaryOES { Context:atom.ContextID, In:GlProgramBinaryOES_In, Out:GlProgramBinaryOES_Out }
-	binary.Register(binary.ID{0x5e, 0x2e, 0x8a, 0x46, 0xc6, 0x50, 0x62, 0x2b, 0x97, 0xa2, 0x32, 0x11, 0xbc, 0x46, 0x02, 0xa6, 0x24, 0xc9, 0xb5, 0x39}, &GlProgramBinaryOES{})
+	registry.Add(binary.ID{0x5e, 0x2e, 0x8a, 0x46, 0xc6, 0x50, 0x62, 0x2b, 0x97, 0xa2, 0x32, 0x11, 0xbc, 0x46, 0x02, 0xa6, 0x24, 0xc9, 0xb5, 0x39}, &GlProgramBinaryOES{})
 	//struct gles.GlProgramBinaryOES_In { Program:ProgramId, BinaryFormat:uint32, Binary:memory.Pointer, BinarySize:int32 }
-	binary.Register(binary.ID{0xd0, 0x7a, 0xae, 0xad, 0x2a, 0xc5, 0xe3, 0x80, 0x1a, 0xb2, 0x6a, 0x7b, 0xd5, 0x24, 0x11, 0x48, 0x60, 0x3c, 0xd5, 0xb4}, &GlProgramBinaryOES_In{})
+	registry.Add(binary.ID{0xd0, 0x7a, 0xae, 0xad, 0x2a, 0xc5, 0xe3, 0x80, 0x1a, 0xb2, 0x6a, 0x7b, 0xd5, 0x24, 0x11, 0x48, 0x60, 0x3c, 0xd5, 0xb4}, &GlProgramBinaryOES_In{})
 	//struct gles.GlProgramBinaryOES_Out { }
-	binary.Register(binary.ID{0x3e, 0xcf, 0x5b, 0xbe, 0xf2, 0x1e, 0x18, 0xb2, 0x7a, 0x65, 0xbc, 0xcf, 0x3e, 0x0a, 0xde, 0xbe, 0xdf, 0x45, 0x6b, 0xfe}, &GlProgramBinaryOES_Out{})
+	registry.Add(binary.ID{0x3e, 0xcf, 0x5b, 0xbe, 0xf2, 0x1e, 0x18, 0xb2, 0x7a, 0x65, 0xbc, 0xcf, 0x3e, 0x0a, 0xde, 0xbe, 0xdf, 0x45, 0x6b, 0xfe}, &GlProgramBinaryOES_Out{})
 	//struct gles.GlPushGroupMarkerEXT { Context:atom.ContextID, In:GlPushGroupMarkerEXT_In, Out:GlPushGroupMarkerEXT_Out }
-	binary.Register(binary.ID{0x20, 0xa9, 0x5a, 0x03, 0xc9, 0x07, 0x4a, 0x07, 0xc6, 0xc8, 0x7a, 0xe5, 0xca, 0x60, 0x8b, 0xc3, 0x24, 0x5d, 0x9e, 0x6b}, &GlPushGroupMarkerEXT{})
+	registry.Add(binary.ID{0x20, 0xa9, 0x5a, 0x03, 0xc9, 0x07, 0x4a, 0x07, 0xc6, 0xc8, 0x7a, 0xe5, 0xca, 0x60, 0x8b, 0xc3, 0x24, 0x5d, 0x9e, 0x6b}, &GlPushGroupMarkerEXT{})
 	//struct gles.GlPushGroupMarkerEXT_In { Length:int32, Marker:string }
-	binary.Register(binary.ID{0x93, 0xa0, 0xa0, 0x2b, 0xaf, 0x0f, 0x65, 0xbb, 0xd4, 0x91, 0x4a, 0x25, 0x4a, 0xe1, 0x5f, 0x97, 0x53, 0x37, 0x33, 0xce}, &GlPushGroupMarkerEXT_In{})
+	registry.Add(binary.ID{0x93, 0xa0, 0xa0, 0x2b, 0xaf, 0x0f, 0x65, 0xbb, 0xd4, 0x91, 0x4a, 0x25, 0x4a, 0xe1, 0x5f, 0x97, 0x53, 0x37, 0x33, 0xce}, &GlPushGroupMarkerEXT_In{})
 	//struct gles.GlPushGroupMarkerEXT_Out { }
-	binary.Register(binary.ID{0x2b, 0xbc, 0xc0, 0xc0, 0x63, 0x1e, 0x7a, 0x4b, 0xca, 0xf8, 0x7b, 0xd8, 0x0d, 0x8c, 0x15, 0xac, 0x2f, 0xde, 0x0d, 0xa2}, &GlPushGroupMarkerEXT_Out{})
+	registry.Add(binary.ID{0x2b, 0xbc, 0xc0, 0xc0, 0x63, 0x1e, 0x7a, 0x4b, 0xca, 0xf8, 0x7b, 0xd8, 0x0d, 0x8c, 0x15, 0xac, 0x2f, 0xde, 0x0d, 0xa2}, &GlPushGroupMarkerEXT_Out{})
 	//struct gles.GlQueryCounterEXT { Context:atom.ContextID, In:GlQueryCounterEXT_In, Out:GlQueryCounterEXT_Out }
-	binary.Register(binary.ID{0xc1, 0x77, 0xd0, 0xde, 0x44, 0xad, 0xf2, 0x2c, 0xe8, 0x1b, 0x18, 0xc4, 0x52, 0x92, 0x2f, 0x59, 0x36, 0x8a, 0xbf, 0x28}, &GlQueryCounterEXT{})
+	registry.Add(binary.ID{0xc1, 0x77, 0xd0, 0xde, 0x44, 0xad, 0xf2, 0x2c, 0xe8, 0x1b, 0x18, 0xc4, 0x52, 0x92, 0x2f, 0x59, 0x36, 0x8a, 0xbf, 0x28}, &GlQueryCounterEXT{})
 	//struct gles.GlQueryCounterEXT_In { Query:QueryId, Target:QueryTarget }
-	binary.Register(binary.ID{0x98, 0x00, 0x60, 0xb0, 0xd3, 0x04, 0xb5, 0xd2, 0x90, 0x75, 0x42, 0xb9, 0xe4, 0x03, 0xd2, 0x01, 0xb4, 0x42, 0x49, 0xd2}, &GlQueryCounterEXT_In{})
+	registry.Add(binary.ID{0x98, 0x00, 0x60, 0xb0, 0xd3, 0x04, 0xb5, 0xd2, 0x90, 0x75, 0x42, 0xb9, 0xe4, 0x03, 0xd2, 0x01, 0xb4, 0x42, 0x49, 0xd2}, &GlQueryCounterEXT_In{})
 	//struct gles.GlQueryCounterEXT_Out { }
-	binary.Register(binary.ID{0xd8, 0xd2, 0x62, 0x7d, 0xcb, 0x55, 0x64, 0xe4, 0x63, 0x5b, 0x31, 0x35, 0x80, 0xeb, 0xa8, 0xaf, 0xdf, 0x9f, 0x19, 0x11}, &GlQueryCounterEXT_Out{})
+	registry.Add(binary.ID{0xd8, 0xd2, 0x62, 0x7d, 0xcb, 0x55, 0x64, 0xe4, 0x63, 0x5b, 0x31, 0x35, 0x80, 0xeb, 0xa8, 0xaf, 0xdf, 0x9f, 0x19, 0x11}, &GlQueryCounterEXT_Out{})
 	//struct gles.GlReadPixels { Context:atom.ContextID, In:GlReadPixels_In, Out:GlReadPixels_Out }
-	binary.Register(binary.ID{0x16, 0x68, 0xd6, 0x9a, 0x05, 0xcc, 0x78, 0x61, 0x95, 0xee, 0x29, 0xd0, 0xa8, 0xf5, 0xa2, 0xa2, 0x7e, 0x80, 0xf7, 0x1a}, &GlReadPixels{})
+	registry.Add(binary.ID{0x16, 0x68, 0xd6, 0x9a, 0x05, 0xcc, 0x78, 0x61, 0x95, 0xee, 0x29, 0xd0, 0xa8, 0xf5, 0xa2, 0xa2, 0x7e, 0x80, 0xf7, 0x1a}, &GlReadPixels{})
 	//struct gles.GlReadPixels_In { X:int32, Y:int32, Width:int32, Height:int32, Format:BaseTexelFormat, Type:TexelType }
-	binary.Register(binary.ID{0x69, 0xdd, 0x23, 0xbe, 0x88, 0x3c, 0x37, 0xca, 0xe6, 0x94, 0xe0, 0x8d, 0x59, 0xbf, 0x30, 0xc4, 0x18, 0x54, 0xd1, 0xe5}, &GlReadPixels_In{})
+	registry.Add(binary.ID{0x69, 0xdd, 0x23, 0xbe, 0x88, 0x3c, 0x37, 0xca, 0xe6, 0x94, 0xe0, 0x8d, 0x59, 0xbf, 0x30, 0xc4, 0x18, 0x54, 0xd1, 0xe5}, &GlReadPixels_In{})
 	//struct gles.GlReadPixels_Out { Data:memory.Pointer }
-	binary.Register(binary.ID{0x2d, 0x64, 0x9d, 0x5d, 0x54, 0x7b, 0xc8, 0x53, 0xc9, 0xdb, 0xa9, 0xe6, 0x02, 0xf2, 0x3c, 0x6f, 0xc4, 0x44, 0x7e, 0x50}, &GlReadPixels_Out{})
+	registry.Add(binary.ID{0x2d, 0x64, 0x9d, 0x5d, 0x54, 0x7b, 0xc8, 0x53, 0xc9, 0xdb, 0xa9, 0xe6, 0x02, 0xf2, 0x3c, 0x6f, 0xc4, 0x44, 0x7e, 0x50}, &GlReadPixels_Out{})
 	//struct gles.GlReleaseShaderCompiler { Context:atom.ContextID, In:GlReleaseShaderCompiler_In, Out:GlReleaseShaderCompiler_Out }
-	binary.Register(binary.ID{0x5e, 0xae, 0xbc, 0xc5, 0xac, 0x39, 0x63, 0xb6, 0x78, 0x74, 0x22, 0xaf, 0xe9, 0xb7, 0x36, 0xe5, 0xfa, 0x9a, 0xcb, 0x79}, &GlReleaseShaderCompiler{})
+	registry.Add(binary.ID{0x5e, 0xae, 0xbc, 0xc5, 0xac, 0x39, 0x63, 0xb6, 0x78, 0x74, 0x22, 0xaf, 0xe9, 0xb7, 0x36, 0xe5, 0xfa, 0x9a, 0xcb, 0x79}, &GlReleaseShaderCompiler{})
 	//struct gles.GlReleaseShaderCompiler_In { }
-	binary.Register(binary.ID{0xc5, 0xf4, 0x97, 0xda, 0x52, 0xdf, 0x23, 0x07, 0x4d, 0xa0, 0x03, 0xc0, 0x81, 0xcd, 0xdc, 0x7c, 0x74, 0xa2, 0xd3, 0xf6}, &GlReleaseShaderCompiler_In{})
+	registry.Add(binary.ID{0xc5, 0xf4, 0x97, 0xda, 0x52, 0xdf, 0x23, 0x07, 0x4d, 0xa0, 0x03, 0xc0, 0x81, 0xcd, 0xdc, 0x7c, 0x74, 0xa2, 0xd3, 0xf6}, &GlReleaseShaderCompiler_In{})
 	//struct gles.GlReleaseShaderCompiler_Out { }
-	binary.Register(binary.ID{0x07, 0x31, 0x46, 0x5e, 0x7b, 0x72, 0x14, 0xf0, 0x2a, 0x07, 0x97, 0x01, 0x98, 0xbb, 0x0c, 0x35, 0xf1, 0x03, 0x6e, 0x9c}, &GlReleaseShaderCompiler_Out{})
+	registry.Add(binary.ID{0x07, 0x31, 0x46, 0x5e, 0x7b, 0x72, 0x14, 0xf0, 0x2a, 0x07, 0x97, 0x01, 0x98, 0xbb, 0x0c, 0x35, 0xf1, 0x03, 0x6e, 0x9c}, &GlReleaseShaderCompiler_Out{})
 	//struct gles.GlRenderbufferStorage { Context:atom.ContextID, In:GlRenderbufferStorage_In, Out:GlRenderbufferStorage_Out }
-	binary.Register(binary.ID{0x57, 0xa5, 0x52, 0x85, 0x74, 0x5f, 0x08, 0x5a, 0x58, 0xe9, 0xe0, 0xf7, 0x7e, 0x29, 0x88, 0x2c, 0x78, 0x9b, 0x61, 0xd3}, &GlRenderbufferStorage{})
+	registry.Add(binary.ID{0x57, 0xa5, 0x52, 0x85, 0x74, 0x5f, 0x08, 0x5a, 0x58, 0xe9, 0xe0, 0xf7, 0x7e, 0x29, 0x88, 0x2c, 0x78, 0x9b, 0x61, 0xd3}, &GlRenderbufferStorage{})
 	//struct gles.GlRenderbufferStorageMultisample { Context:atom.ContextID, In:GlRenderbufferStorageMultisample_In, Out:GlRenderbufferStorageMultisample_Out }
-	binary.Register(binary.ID{0x5c, 0x39, 0x6e, 0x20, 0xd8, 0x06, 0xfa, 0x3f, 0x0f, 0x9e, 0xbb, 0xf5, 0x90, 0x9a, 0x07, 0x47, 0x2e, 0x51, 0x0e, 0x87}, &GlRenderbufferStorageMultisample{})
+	registry.Add(binary.ID{0x5c, 0x39, 0x6e, 0x20, 0xd8, 0x06, 0xfa, 0x3f, 0x0f, 0x9e, 0xbb, 0xf5, 0x90, 0x9a, 0x07, 0x47, 0x2e, 0x51, 0x0e, 0x87}, &GlRenderbufferStorageMultisample{})
 	//struct gles.GlRenderbufferStorageMultisample_In { Target:RenderbufferTarget, Samples:int32, Format:RenderbufferFormat, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x9b, 0x03, 0x06, 0xf9, 0xd3, 0x92, 0x33, 0x19, 0x20, 0x92, 0xba, 0x8c, 0xbf, 0x7f, 0x92, 0xee, 0xe6, 0xeb, 0x50, 0x8d}, &GlRenderbufferStorageMultisample_In{})
+	registry.Add(binary.ID{0x9b, 0x03, 0x06, 0xf9, 0xd3, 0x92, 0x33, 0x19, 0x20, 0x92, 0xba, 0x8c, 0xbf, 0x7f, 0x92, 0xee, 0xe6, 0xeb, 0x50, 0x8d}, &GlRenderbufferStorageMultisample_In{})
 	//struct gles.GlRenderbufferStorageMultisample_Out { }
-	binary.Register(binary.ID{0x38, 0xe7, 0xa4, 0x11, 0xb0, 0xb6, 0xbb, 0x0a, 0xaa, 0x42, 0xdf, 0xc5, 0x16, 0x1a, 0xb0, 0xa8, 0x93, 0x9e, 0xb2, 0x94}, &GlRenderbufferStorageMultisample_Out{})
+	registry.Add(binary.ID{0x38, 0xe7, 0xa4, 0x11, 0xb0, 0xb6, 0xbb, 0x0a, 0xaa, 0x42, 0xdf, 0xc5, 0x16, 0x1a, 0xb0, 0xa8, 0x93, 0x9e, 0xb2, 0x94}, &GlRenderbufferStorageMultisample_Out{})
 	//struct gles.GlRenderbufferStorage_In { Target:RenderbufferTarget, Format:RenderbufferFormat, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x27, 0x0d, 0xd3, 0x7e, 0x74, 0x09, 0x8f, 0x63, 0x98, 0xd1, 0xa0, 0x20, 0x85, 0x76, 0x8f, 0x35, 0xc4, 0x6c, 0x51, 0x2f}, &GlRenderbufferStorage_In{})
+	registry.Add(binary.ID{0x27, 0x0d, 0xd3, 0x7e, 0x74, 0x09, 0x8f, 0x63, 0x98, 0xd1, 0xa0, 0x20, 0x85, 0x76, 0x8f, 0x35, 0xc4, 0x6c, 0x51, 0x2f}, &GlRenderbufferStorage_In{})
 	//struct gles.GlRenderbufferStorage_Out { }
-	binary.Register(binary.ID{0x86, 0x58, 0xf7, 0xb0, 0x74, 0x7c, 0x36, 0x03, 0xf2, 0x6e, 0x78, 0x17, 0x84, 0x3e, 0xb2, 0x8b, 0xa7, 0xa3, 0x04, 0xf5}, &GlRenderbufferStorage_Out{})
+	registry.Add(binary.ID{0x86, 0x58, 0xf7, 0xb0, 0x74, 0x7c, 0x36, 0x03, 0xf2, 0x6e, 0x78, 0x17, 0x84, 0x3e, 0xb2, 0x8b, 0xa7, 0xa3, 0x04, 0xf5}, &GlRenderbufferStorage_Out{})
 	//struct gles.GlSampleCoverage { Context:atom.ContextID, In:GlSampleCoverage_In, Out:GlSampleCoverage_Out }
-	binary.Register(binary.ID{0xf0, 0x2f, 0xcd, 0x47, 0x42, 0xf5, 0x4d, 0x03, 0x4d, 0x3a, 0x7c, 0x07, 0x36, 0x1c, 0xcf, 0x6b, 0x37, 0xdc, 0x9d, 0x9e}, &GlSampleCoverage{})
+	registry.Add(binary.ID{0xf0, 0x2f, 0xcd, 0x47, 0x42, 0xf5, 0x4d, 0x03, 0x4d, 0x3a, 0x7c, 0x07, 0x36, 0x1c, 0xcf, 0x6b, 0x37, 0xdc, 0x9d, 0x9e}, &GlSampleCoverage{})
 	//struct gles.GlSampleCoverage_In { Value:float32, Invert:bool }
-	binary.Register(binary.ID{0x2d, 0xc6, 0x4d, 0x98, 0x15, 0xe2, 0x3d, 0x00, 0xdf, 0x80, 0x73, 0x23, 0x86, 0x87, 0x5f, 0xca, 0xbc, 0x6c, 0xb0, 0xe8}, &GlSampleCoverage_In{})
+	registry.Add(binary.ID{0x2d, 0xc6, 0x4d, 0x98, 0x15, 0xe2, 0x3d, 0x00, 0xdf, 0x80, 0x73, 0x23, 0x86, 0x87, 0x5f, 0xca, 0xbc, 0x6c, 0xb0, 0xe8}, &GlSampleCoverage_In{})
 	//struct gles.GlSampleCoverage_Out { }
-	binary.Register(binary.ID{0x9a, 0x63, 0x05, 0x5e, 0x0d, 0x98, 0x27, 0x01, 0xbb, 0xbc, 0x18, 0x03, 0x1b, 0x69, 0x28, 0x0f, 0xd2, 0x41, 0xb2, 0x9e}, &GlSampleCoverage_Out{})
+	registry.Add(binary.ID{0x9a, 0x63, 0x05, 0x5e, 0x0d, 0x98, 0x27, 0x01, 0xbb, 0xbc, 0x18, 0x03, 0x1b, 0x69, 0x28, 0x0f, 0xd2, 0x41, 0xb2, 0x9e}, &GlSampleCoverage_Out{})
 	//struct gles.GlScissor { Context:atom.ContextID, In:GlScissor_In, Out:GlScissor_Out }
-	binary.Register(binary.ID{0x99, 0xae, 0x85, 0x71, 0x3e, 0x3f, 0xda, 0xe0, 0x3b, 0x1b, 0x0b, 0x94, 0x61, 0x0f, 0xa1, 0xc1, 0x76, 0xb9, 0x32, 0x9d}, &GlScissor{})
+	registry.Add(binary.ID{0x99, 0xae, 0x85, 0x71, 0x3e, 0x3f, 0xda, 0xe0, 0x3b, 0x1b, 0x0b, 0x94, 0x61, 0x0f, 0xa1, 0xc1, 0x76, 0xb9, 0x32, 0x9d}, &GlScissor{})
 	//struct gles.GlScissor_In { X:int32, Y:int32, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0xb8, 0xf1, 0xdf, 0x6d, 0x52, 0x6a, 0xc3, 0xea, 0xa0, 0xd4, 0x82, 0xdd, 0x66, 0x60, 0x08, 0x11, 0xb2, 0xba, 0xbe, 0xfc}, &GlScissor_In{})
+	registry.Add(binary.ID{0xb8, 0xf1, 0xdf, 0x6d, 0x52, 0x6a, 0xc3, 0xea, 0xa0, 0xd4, 0x82, 0xdd, 0x66, 0x60, 0x08, 0x11, 0xb2, 0xba, 0xbe, 0xfc}, &GlScissor_In{})
 	//struct gles.GlScissor_Out { }
-	binary.Register(binary.ID{0xc0, 0x82, 0x49, 0xfb, 0xf6, 0xbc, 0x7a, 0xc9, 0xc1, 0x9c, 0xdc, 0x91, 0x73, 0x84, 0xd9, 0xb0, 0x02, 0xf8, 0xf5, 0xda}, &GlScissor_Out{})
+	registry.Add(binary.ID{0xc0, 0x82, 0x49, 0xfb, 0xf6, 0xbc, 0x7a, 0xc9, 0xc1, 0x9c, 0xdc, 0x91, 0x73, 0x84, 0xd9, 0xb0, 0x02, 0xf8, 0xf5, 0xda}, &GlScissor_Out{})
 	//struct gles.GlShaderBinary { Context:atom.ContextID, In:GlShaderBinary_In, Out:GlShaderBinary_Out }
-	binary.Register(binary.ID{0x9b, 0xf4, 0x14, 0x55, 0x91, 0x37, 0x59, 0xa8, 0xfc, 0xd9, 0x95, 0xfe, 0xce, 0x8c, 0x01, 0xb7, 0xf9, 0x7a, 0x7e, 0x31}, &GlShaderBinary{})
+	registry.Add(binary.ID{0x9b, 0xf4, 0x14, 0x55, 0x91, 0x37, 0x59, 0xa8, 0xfc, 0xd9, 0x95, 0xfe, 0xce, 0x8c, 0x01, 0xb7, 0xf9, 0x7a, 0x7e, 0x31}, &GlShaderBinary{})
 	//struct gles.GlShaderBinary_In { Count:int32, Shaders:ShaderIdArray, BinaryFormat:uint32, Binary:memory.Pointer, BinarySize:int32 }
-	binary.Register(binary.ID{0x0c, 0xf5, 0x7c, 0xf5, 0x60, 0xc9, 0x6a, 0x25, 0xda, 0xb6, 0x98, 0x26, 0xe0, 0x1f, 0x2c, 0xef, 0x8e, 0xc3, 0xc4, 0xd7}, &GlShaderBinary_In{})
+	registry.Add(binary.ID{0x0c, 0xf5, 0x7c, 0xf5, 0x60, 0xc9, 0x6a, 0x25, 0xda, 0xb6, 0x98, 0x26, 0xe0, 0x1f, 0x2c, 0xef, 0x8e, 0xc3, 0xc4, 0xd7}, &GlShaderBinary_In{})
 	//struct gles.GlShaderBinary_Out { }
-	binary.Register(binary.ID{0xd9, 0xb5, 0xa5, 0x78, 0x6e, 0xd9, 0xb8, 0x72, 0x15, 0x8c, 0xd5, 0x37, 0x09, 0x6c, 0x13, 0x6b, 0x3d, 0x13, 0x65, 0x84}, &GlShaderBinary_Out{})
+	registry.Add(binary.ID{0xd9, 0xb5, 0xa5, 0x78, 0x6e, 0xd9, 0xb8, 0x72, 0x15, 0x8c, 0xd5, 0x37, 0x09, 0x6c, 0x13, 0x6b, 0x3d, 0x13, 0x65, 0x84}, &GlShaderBinary_Out{})
 	//struct gles.GlShaderSource { Context:atom.ContextID, In:GlShaderSource_In, Out:GlShaderSource_Out }
-	binary.Register(binary.ID{0x3a, 0xf9, 0x74, 0xcb, 0xce, 0xf7, 0x3c, 0x32, 0xc6, 0xbe, 0xe5, 0x35, 0x20, 0x54, 0x39, 0x63, 0xf0, 0x9c, 0x56, 0x4e}, &GlShaderSource{})
+	registry.Add(binary.ID{0x3a, 0xf9, 0x74, 0xcb, 0xce, 0xf7, 0x3c, 0x32, 0xc6, 0xbe, 0xe5, 0x35, 0x20, 0x54, 0x39, 0x63, 0xf0, 0x9c, 0x56, 0x4e}, &GlShaderSource{})
 	//struct gles.GlShaderSource_In { Shader:ShaderId, Count:int32, Source:StringArray, Length:S32Array }
-	binary.Register(binary.ID{0x8b, 0x18, 0x25, 0x33, 0x04, 0xe7, 0xf2, 0xbb, 0xaa, 0x84, 0x13, 0xda, 0x52, 0xcd, 0xe1, 0x16, 0x9b, 0xcb, 0xe9, 0xd9}, &GlShaderSource_In{})
+	registry.Add(binary.ID{0x8b, 0x18, 0x25, 0x33, 0x04, 0xe7, 0xf2, 0xbb, 0xaa, 0x84, 0x13, 0xda, 0x52, 0xcd, 0xe1, 0x16, 0x9b, 0xcb, 0xe9, 0xd9}, &GlShaderSource_In{})
 	//struct gles.GlShaderSource_Out { }
-	binary.Register(binary.ID{0x47, 0x36, 0x96, 0xc1, 0x7e, 0x05, 0x7e, 0xb9, 0x4b, 0xcf, 0x8e, 0xf4, 0x39, 0xb6, 0xed, 0x02, 0x41, 0x70, 0x85, 0xe7}, &GlShaderSource_Out{})
+	registry.Add(binary.ID{0x47, 0x36, 0x96, 0xc1, 0x7e, 0x05, 0x7e, 0xb9, 0x4b, 0xcf, 0x8e, 0xf4, 0x39, 0xb6, 0xed, 0x02, 0x41, 0x70, 0x85, 0xe7}, &GlShaderSource_Out{})
 	//struct gles.GlStartTilingQCOM { Context:atom.ContextID, In:GlStartTilingQCOM_In, Out:GlStartTilingQCOM_Out }
-	binary.Register(binary.ID{0xc1, 0x06, 0xdb, 0x1d, 0x6a, 0x1f, 0x85, 0x35, 0xfe, 0xe7, 0xec, 0xea, 0x9b, 0xc7, 0x3b, 0xe7, 0x14, 0x7a, 0xc3, 0x7f}, &GlStartTilingQCOM{})
+	registry.Add(binary.ID{0xc1, 0x06, 0xdb, 0x1d, 0x6a, 0x1f, 0x85, 0x35, 0xfe, 0xe7, 0xec, 0xea, 0x9b, 0xc7, 0x3b, 0xe7, 0x14, 0x7a, 0xc3, 0x7f}, &GlStartTilingQCOM{})
 	//struct gles.GlStartTilingQCOM_In { X:int32, Y:int32, Width:int32, Height:int32, PreserveMask:TilePreserveMaskQCOM }
-	binary.Register(binary.ID{0x32, 0x84, 0x92, 0xba, 0xee, 0x90, 0x2c, 0x8d, 0xbf, 0xac, 0x6f, 0x44, 0xc0, 0xfc, 0x0e, 0xa1, 0x54, 0x78, 0x73, 0xc0}, &GlStartTilingQCOM_In{})
+	registry.Add(binary.ID{0x32, 0x84, 0x92, 0xba, 0xee, 0x90, 0x2c, 0x8d, 0xbf, 0xac, 0x6f, 0x44, 0xc0, 0xfc, 0x0e, 0xa1, 0x54, 0x78, 0x73, 0xc0}, &GlStartTilingQCOM_In{})
 	//struct gles.GlStartTilingQCOM_Out { }
-	binary.Register(binary.ID{0xae, 0xf3, 0x2c, 0xab, 0x3f, 0x8a, 0xcf, 0x82, 0x9f, 0xce, 0x71, 0x17, 0x87, 0xfa, 0x89, 0x25, 0x0e, 0x78, 0x83, 0x49}, &GlStartTilingQCOM_Out{})
+	registry.Add(binary.ID{0xae, 0xf3, 0x2c, 0xab, 0x3f, 0x8a, 0xcf, 0x82, 0x9f, 0xce, 0x71, 0x17, 0x87, 0xfa, 0x89, 0x25, 0x0e, 0x78, 0x83, 0x49}, &GlStartTilingQCOM_Out{})
 	//struct gles.GlStencilFuncSeparate { Context:atom.ContextID, In:GlStencilFuncSeparate_In, Out:GlStencilFuncSeparate_Out }
-	binary.Register(binary.ID{0x67, 0x5a, 0x2b, 0x6e, 0xfe, 0x13, 0x49, 0xbd, 0x24, 0x40, 0x80, 0xe7, 0x29, 0x9c, 0x7f, 0xbf, 0x11, 0x17, 0x42, 0xf3}, &GlStencilFuncSeparate{})
+	registry.Add(binary.ID{0x67, 0x5a, 0x2b, 0x6e, 0xfe, 0x13, 0x49, 0xbd, 0x24, 0x40, 0x80, 0xe7, 0x29, 0x9c, 0x7f, 0xbf, 0x11, 0x17, 0x42, 0xf3}, &GlStencilFuncSeparate{})
 	//struct gles.GlStencilFuncSeparate_In { Face:FaceMode, Function:TestFunction, ReferenceValue:int32, Mask:int32 }
-	binary.Register(binary.ID{0x50, 0xd5, 0xa9, 0x2a, 0x05, 0x59, 0x3f, 0x08, 0x3a, 0x45, 0x64, 0x88, 0xfe, 0x61, 0x31, 0xf0, 0x8f, 0xc3, 0xfb, 0x24}, &GlStencilFuncSeparate_In{})
+	registry.Add(binary.ID{0x50, 0xd5, 0xa9, 0x2a, 0x05, 0x59, 0x3f, 0x08, 0x3a, 0x45, 0x64, 0x88, 0xfe, 0x61, 0x31, 0xf0, 0x8f, 0xc3, 0xfb, 0x24}, &GlStencilFuncSeparate_In{})
 	//struct gles.GlStencilFuncSeparate_Out { }
-	binary.Register(binary.ID{0x92, 0xfc, 0xf1, 0x09, 0x44, 0x9b, 0x1c, 0xc4, 0x9f, 0x97, 0x88, 0xa3, 0xf3, 0x46, 0xa4, 0x7f, 0x50, 0x34, 0xe5, 0xc3}, &GlStencilFuncSeparate_Out{})
+	registry.Add(binary.ID{0x92, 0xfc, 0xf1, 0x09, 0x44, 0x9b, 0x1c, 0xc4, 0x9f, 0x97, 0x88, 0xa3, 0xf3, 0x46, 0xa4, 0x7f, 0x50, 0x34, 0xe5, 0xc3}, &GlStencilFuncSeparate_Out{})
 	//struct gles.GlStencilMask { Context:atom.ContextID, In:GlStencilMask_In, Out:GlStencilMask_Out }
-	binary.Register(binary.ID{0x3b, 0xfa, 0xd6, 0x5b, 0x69, 0xbc, 0x75, 0x05, 0x60, 0xf4, 0xdc, 0xb6, 0x43, 0x93, 0xb3, 0x0c, 0x45, 0xde, 0x7a, 0x5e}, &GlStencilMask{})
+	registry.Add(binary.ID{0x3b, 0xfa, 0xd6, 0x5b, 0x69, 0xbc, 0x75, 0x05, 0x60, 0xf4, 0xdc, 0xb6, 0x43, 0x93, 0xb3, 0x0c, 0x45, 0xde, 0x7a, 0x5e}, &GlStencilMask{})
 	//struct gles.GlStencilMaskSeparate { Context:atom.ContextID, In:GlStencilMaskSeparate_In, Out:GlStencilMaskSeparate_Out }
-	binary.Register(binary.ID{0x9c, 0xd6, 0x8b, 0x6c, 0x75, 0x2c, 0x09, 0x08, 0xcb, 0xf4, 0x98, 0xbb, 0x3e, 0x09, 0xfc, 0x48, 0xf2, 0xea, 0x31, 0x22}, &GlStencilMaskSeparate{})
+	registry.Add(binary.ID{0x9c, 0xd6, 0x8b, 0x6c, 0x75, 0x2c, 0x09, 0x08, 0xcb, 0xf4, 0x98, 0xbb, 0x3e, 0x09, 0xfc, 0x48, 0xf2, 0xea, 0x31, 0x22}, &GlStencilMaskSeparate{})
 	//struct gles.GlStencilMaskSeparate_In { Face:FaceMode, Mask:uint32 }
-	binary.Register(binary.ID{0xa5, 0xb6, 0x52, 0x41, 0x3f, 0x6e, 0xea, 0xf7, 0x45, 0xa4, 0x5a, 0xf4, 0x67, 0x0e, 0xa9, 0x60, 0xb0, 0x2c, 0xcc, 0x01}, &GlStencilMaskSeparate_In{})
+	registry.Add(binary.ID{0xa5, 0xb6, 0x52, 0x41, 0x3f, 0x6e, 0xea, 0xf7, 0x45, 0xa4, 0x5a, 0xf4, 0x67, 0x0e, 0xa9, 0x60, 0xb0, 0x2c, 0xcc, 0x01}, &GlStencilMaskSeparate_In{})
 	//struct gles.GlStencilMaskSeparate_Out { }
-	binary.Register(binary.ID{0x0d, 0x6c, 0x1e, 0xcd, 0x06, 0x40, 0x68, 0x18, 0x2d, 0x0c, 0xdf, 0xc5, 0xfd, 0xeb, 0x8a, 0x4f, 0xc3, 0xf7, 0xf4, 0xd0}, &GlStencilMaskSeparate_Out{})
+	registry.Add(binary.ID{0x0d, 0x6c, 0x1e, 0xcd, 0x06, 0x40, 0x68, 0x18, 0x2d, 0x0c, 0xdf, 0xc5, 0xfd, 0xeb, 0x8a, 0x4f, 0xc3, 0xf7, 0xf4, 0xd0}, &GlStencilMaskSeparate_Out{})
 	//struct gles.GlStencilMask_In { Mask:uint32 }
-	binary.Register(binary.ID{0x41, 0x3e, 0xd2, 0x93, 0x79, 0xb2, 0x1e, 0x7a, 0xdb, 0x71, 0xd2, 0x05, 0x21, 0x94, 0xf3, 0xa4, 0xf6, 0x26, 0xdd, 0xe7}, &GlStencilMask_In{})
+	registry.Add(binary.ID{0x41, 0x3e, 0xd2, 0x93, 0x79, 0xb2, 0x1e, 0x7a, 0xdb, 0x71, 0xd2, 0x05, 0x21, 0x94, 0xf3, 0xa4, 0xf6, 0x26, 0xdd, 0xe7}, &GlStencilMask_In{})
 	//struct gles.GlStencilMask_Out { }
-	binary.Register(binary.ID{0xc5, 0x0a, 0x52, 0xa0, 0x9a, 0x33, 0xa6, 0x01, 0x7c, 0x14, 0x0e, 0xc9, 0xf6, 0x56, 0x93, 0xca, 0xb3, 0x6e, 0x6f, 0xbf}, &GlStencilMask_Out{})
+	registry.Add(binary.ID{0xc5, 0x0a, 0x52, 0xa0, 0x9a, 0x33, 0xa6, 0x01, 0x7c, 0x14, 0x0e, 0xc9, 0xf6, 0x56, 0x93, 0xca, 0xb3, 0x6e, 0x6f, 0xbf}, &GlStencilMask_Out{})
 	//struct gles.GlStencilOpSeparate { Context:atom.ContextID, In:GlStencilOpSeparate_In, Out:GlStencilOpSeparate_Out }
-	binary.Register(binary.ID{0xe9, 0x7b, 0xe6, 0xbd, 0xd5, 0x9d, 0x80, 0x60, 0xbf, 0xf5, 0x7c, 0xbf, 0x9d, 0x16, 0x0f, 0xa1, 0x1b, 0xd0, 0x93, 0xb5}, &GlStencilOpSeparate{})
+	registry.Add(binary.ID{0xe9, 0x7b, 0xe6, 0xbd, 0xd5, 0x9d, 0x80, 0x60, 0xbf, 0xf5, 0x7c, 0xbf, 0x9d, 0x16, 0x0f, 0xa1, 0x1b, 0xd0, 0x93, 0xb5}, &GlStencilOpSeparate{})
 	//struct gles.GlStencilOpSeparate_In { Face:FaceMode, StencilFail:StencilAction, StencilPassDepthFail:StencilAction, StencilPassDepthPass:StencilAction }
-	binary.Register(binary.ID{0x15, 0x0a, 0xf8, 0xff, 0xa5, 0x5c, 0x86, 0xa7, 0x0f, 0x90, 0x0f, 0xd3, 0xfd, 0x03, 0x25, 0x29, 0x3d, 0x61, 0x6e, 0xe3}, &GlStencilOpSeparate_In{})
+	registry.Add(binary.ID{0x15, 0x0a, 0xf8, 0xff, 0xa5, 0x5c, 0x86, 0xa7, 0x0f, 0x90, 0x0f, 0xd3, 0xfd, 0x03, 0x25, 0x29, 0x3d, 0x61, 0x6e, 0xe3}, &GlStencilOpSeparate_In{})
 	//struct gles.GlStencilOpSeparate_Out { }
-	binary.Register(binary.ID{0x21, 0x0f, 0x31, 0x59, 0x3c, 0x52, 0x4c, 0x54, 0xe9, 0xce, 0x57, 0xf7, 0x12, 0xaa, 0x1f, 0xc8, 0xf7, 0x01, 0x20, 0x2a}, &GlStencilOpSeparate_Out{})
+	registry.Add(binary.ID{0x21, 0x0f, 0x31, 0x59, 0x3c, 0x52, 0x4c, 0x54, 0xe9, 0xce, 0x57, 0xf7, 0x12, 0xaa, 0x1f, 0xc8, 0xf7, 0x01, 0x20, 0x2a}, &GlStencilOpSeparate_Out{})
 	//struct gles.GlTexImage2D { Context:atom.ContextID, In:GlTexImage2D_In, Out:GlTexImage2D_Out }
-	binary.Register(binary.ID{0x54, 0x51, 0x73, 0xbe, 0x68, 0xad, 0x0f, 0xf7, 0x06, 0x74, 0xf5, 0x8f, 0x88, 0x72, 0x06, 0x56, 0x73, 0x84, 0xbb, 0x1a}, &GlTexImage2D{})
+	registry.Add(binary.ID{0x54, 0x51, 0x73, 0xbe, 0x68, 0xad, 0x0f, 0xf7, 0x06, 0x74, 0xf5, 0x8f, 0x88, 0x72, 0x06, 0x56, 0x73, 0x84, 0xbb, 0x1a}, &GlTexImage2D{})
 	//struct gles.GlTexImage2D_In { Target:TextureImageTarget, Level:int32, InternalFormat:TexelFormat, Width:int32, Height:int32, Border:int32, Format:TexelFormat, Type:TexelType, Data:TexturePointer }
-	binary.Register(binary.ID{0x2f, 0x97, 0xe0, 0xfe, 0x0a, 0xcd, 0x9b, 0x37, 0x72, 0x84, 0x40, 0x3d, 0x8a, 0x69, 0x4f, 0xb4, 0xe5, 0x2f, 0x00, 0x5c}, &GlTexImage2D_In{})
+	registry.Add(binary.ID{0x2f, 0x97, 0xe0, 0xfe, 0x0a, 0xcd, 0x9b, 0x37, 0x72, 0x84, 0x40, 0x3d, 0x8a, 0x69, 0x4f, 0xb4, 0xe5, 0x2f, 0x00, 0x5c}, &GlTexImage2D_In{})
 	//struct gles.GlTexImage2D_Out { }
-	binary.Register(binary.ID{0xed, 0xef, 0x06, 0x3a, 0x53, 0x05, 0xe8, 0xcc, 0xe3, 0x2a, 0x00, 0x71, 0x87, 0xb6, 0x06, 0xf5, 0xce, 0x22, 0x4e, 0xb3}, &GlTexImage2D_Out{})
+	registry.Add(binary.ID{0xed, 0xef, 0x06, 0x3a, 0x53, 0x05, 0xe8, 0xcc, 0xe3, 0x2a, 0x00, 0x71, 0x87, 0xb6, 0x06, 0xf5, 0xce, 0x22, 0x4e, 0xb3}, &GlTexImage2D_Out{})
 	//struct gles.GlTexParameterf { Context:atom.ContextID, In:GlTexParameterf_In, Out:GlTexParameterf_Out }
-	binary.Register(binary.ID{0x96, 0x8d, 0x85, 0x21, 0x79, 0x91, 0x11, 0x83, 0xd8, 0x47, 0x12, 0x35, 0x4f, 0xc2, 0x5e, 0x6d, 0x73, 0x5d, 0x2f, 0x3a}, &GlTexParameterf{})
+	registry.Add(binary.ID{0x96, 0x8d, 0x85, 0x21, 0x79, 0x91, 0x11, 0x83, 0xd8, 0x47, 0x12, 0x35, 0x4f, 0xc2, 0x5e, 0x6d, 0x73, 0x5d, 0x2f, 0x3a}, &GlTexParameterf{})
 	//struct gles.GlTexParameterf_In { Target:TextureTarget, Parameter:TextureParameter, Value:float32 }
-	binary.Register(binary.ID{0x06, 0x90, 0xb9, 0x4b, 0x65, 0xf6, 0xeb, 0x0e, 0x42, 0x76, 0xe1, 0x01, 0x24, 0xc7, 0xd9, 0x58, 0x58, 0x0d, 0xbf, 0xbe}, &GlTexParameterf_In{})
+	registry.Add(binary.ID{0x06, 0x90, 0xb9, 0x4b, 0x65, 0xf6, 0xeb, 0x0e, 0x42, 0x76, 0xe1, 0x01, 0x24, 0xc7, 0xd9, 0x58, 0x58, 0x0d, 0xbf, 0xbe}, &GlTexParameterf_In{})
 	//struct gles.GlTexParameterf_Out { }
-	binary.Register(binary.ID{0x46, 0xe4, 0x5c, 0x66, 0xdf, 0x15, 0x73, 0xf8, 0xd3, 0xcc, 0x52, 0xb4, 0x76, 0x23, 0x0a, 0xf5, 0xad, 0x2a, 0x71, 0x41}, &GlTexParameterf_Out{})
+	registry.Add(binary.ID{0x46, 0xe4, 0x5c, 0x66, 0xdf, 0x15, 0x73, 0xf8, 0xd3, 0xcc, 0x52, 0xb4, 0x76, 0x23, 0x0a, 0xf5, 0xad, 0x2a, 0x71, 0x41}, &GlTexParameterf_Out{})
 	//struct gles.GlTexParameteri { Context:atom.ContextID, In:GlTexParameteri_In, Out:GlTexParameteri_Out }
-	binary.Register(binary.ID{0x3a, 0xac, 0x0c, 0xfc, 0x6d, 0x9e, 0xf0, 0x51, 0xdb, 0xde, 0x5f, 0x03, 0xbf, 0x17, 0x6a, 0x7a, 0x7a, 0xba, 0xcf, 0xa1}, &GlTexParameteri{})
+	registry.Add(binary.ID{0x3a, 0xac, 0x0c, 0xfc, 0x6d, 0x9e, 0xf0, 0x51, 0xdb, 0xde, 0x5f, 0x03, 0xbf, 0x17, 0x6a, 0x7a, 0x7a, 0xba, 0xcf, 0xa1}, &GlTexParameteri{})
 	//struct gles.GlTexParameteri_In { Target:TextureTarget, Parameter:TextureParameter, Value:int32 }
-	binary.Register(binary.ID{0x9b, 0x40, 0x3e, 0x95, 0x12, 0xa3, 0x11, 0x32, 0x39, 0xf9, 0xbe, 0x6d, 0x56, 0x51, 0x5a, 0x8e, 0xb4, 0xbd, 0xea, 0xd4}, &GlTexParameteri_In{})
+	registry.Add(binary.ID{0x9b, 0x40, 0x3e, 0x95, 0x12, 0xa3, 0x11, 0x32, 0x39, 0xf9, 0xbe, 0x6d, 0x56, 0x51, 0x5a, 0x8e, 0xb4, 0xbd, 0xea, 0xd4}, &GlTexParameteri_In{})
 	//struct gles.GlTexParameteri_Out { }
-	binary.Register(binary.ID{0x60, 0x4e, 0x1c, 0x8c, 0xbb, 0x05, 0x7e, 0x03, 0x29, 0xf5, 0x98, 0x68, 0xca, 0x58, 0x17, 0x71, 0x61, 0xb6, 0xe1, 0x0f}, &GlTexParameteri_Out{})
+	registry.Add(binary.ID{0x60, 0x4e, 0x1c, 0x8c, 0xbb, 0x05, 0x7e, 0x03, 0x29, 0xf5, 0x98, 0x68, 0xca, 0x58, 0x17, 0x71, 0x61, 0xb6, 0xe1, 0x0f}, &GlTexParameteri_Out{})
 	//struct gles.GlTexStorage1DEXT { Context:atom.ContextID, In:GlTexStorage1DEXT_In, Out:GlTexStorage1DEXT_Out }
-	binary.Register(binary.ID{0xc7, 0x26, 0x92, 0x51, 0xe7, 0xb1, 0x0e, 0x8c, 0x35, 0x3d, 0x81, 0x3a, 0xb3, 0x7e, 0xf1, 0x3e, 0x24, 0xee, 0x79, 0x56}, &GlTexStorage1DEXT{})
+	registry.Add(binary.ID{0xc7, 0x26, 0x92, 0x51, 0xe7, 0xb1, 0x0e, 0x8c, 0x35, 0x3d, 0x81, 0x3a, 0xb3, 0x7e, 0xf1, 0x3e, 0x24, 0xee, 0x79, 0x56}, &GlTexStorage1DEXT{})
 	//struct gles.GlTexStorage1DEXT_In { Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32 }
-	binary.Register(binary.ID{0xf2, 0x27, 0xec, 0x7e, 0xf0, 0x26, 0xff, 0xc4, 0x7a, 0xf9, 0xdb, 0xfc, 0xbd, 0xbf, 0xc2, 0x87, 0xf9, 0x65, 0xe6, 0x6e}, &GlTexStorage1DEXT_In{})
+	registry.Add(binary.ID{0xf2, 0x27, 0xec, 0x7e, 0xf0, 0x26, 0xff, 0xc4, 0x7a, 0xf9, 0xdb, 0xfc, 0xbd, 0xbf, 0xc2, 0x87, 0xf9, 0x65, 0xe6, 0x6e}, &GlTexStorage1DEXT_In{})
 	//struct gles.GlTexStorage1DEXT_Out { }
-	binary.Register(binary.ID{0xc9, 0x3c, 0x54, 0x34, 0x94, 0xc7, 0x3d, 0xb4, 0xdb, 0x78, 0x61, 0xc7, 0x88, 0x8c, 0xf3, 0xf9, 0xef, 0x8b, 0x70, 0x73}, &GlTexStorage1DEXT_Out{})
+	registry.Add(binary.ID{0xc9, 0x3c, 0x54, 0x34, 0x94, 0xc7, 0x3d, 0xb4, 0xdb, 0x78, 0x61, 0xc7, 0x88, 0x8c, 0xf3, 0xf9, 0xef, 0x8b, 0x70, 0x73}, &GlTexStorage1DEXT_Out{})
 	//struct gles.GlTexStorage2DEXT { Context:atom.ContextID, In:GlTexStorage2DEXT_In, Out:GlTexStorage2DEXT_Out }
-	binary.Register(binary.ID{0x99, 0xcb, 0x19, 0x78, 0x3b, 0xf6, 0x32, 0x7f, 0x1e, 0xc3, 0xc4, 0x41, 0x56, 0x9e, 0xbe, 0x35, 0xc4, 0x6d, 0xa0, 0xe7}, &GlTexStorage2DEXT{})
+	registry.Add(binary.ID{0x99, 0xcb, 0x19, 0x78, 0x3b, 0xf6, 0x32, 0x7f, 0x1e, 0xc3, 0xc4, 0x41, 0x56, 0x9e, 0xbe, 0x35, 0xc4, 0x6d, 0xa0, 0xe7}, &GlTexStorage2DEXT{})
 	//struct gles.GlTexStorage2DEXT_In { Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0xd8, 0xb2, 0x77, 0xf3, 0x72, 0xc0, 0x8b, 0xf0, 0x38, 0xf6, 0x89, 0x61, 0x71, 0x52, 0x1e, 0xfc, 0x07, 0xed, 0x2d, 0x16}, &GlTexStorage2DEXT_In{})
+	registry.Add(binary.ID{0xd8, 0xb2, 0x77, 0xf3, 0x72, 0xc0, 0x8b, 0xf0, 0x38, 0xf6, 0x89, 0x61, 0x71, 0x52, 0x1e, 0xfc, 0x07, 0xed, 0x2d, 0x16}, &GlTexStorage2DEXT_In{})
 	//struct gles.GlTexStorage2DEXT_Out { }
-	binary.Register(binary.ID{0x1d, 0xea, 0x3f, 0xf8, 0x39, 0x04, 0x26, 0x01, 0xac, 0x64, 0x27, 0x20, 0x45, 0x93, 0xd0, 0xe2, 0x6b, 0xb5, 0x5e, 0x69}, &GlTexStorage2DEXT_Out{})
+	registry.Add(binary.ID{0x1d, 0xea, 0x3f, 0xf8, 0x39, 0x04, 0x26, 0x01, 0xac, 0x64, 0x27, 0x20, 0x45, 0x93, 0xd0, 0xe2, 0x6b, 0xb5, 0x5e, 0x69}, &GlTexStorage2DEXT_Out{})
 	//struct gles.GlTexStorage3DEXT { Context:atom.ContextID, In:GlTexStorage3DEXT_In, Out:GlTexStorage3DEXT_Out }
-	binary.Register(binary.ID{0x67, 0x9a, 0x8f, 0xbd, 0x22, 0xe4, 0x9f, 0x84, 0x94, 0x8b, 0x66, 0x60, 0xf8, 0x65, 0x60, 0xa7, 0x3b, 0x04, 0x3d, 0xab}, &GlTexStorage3DEXT{})
+	registry.Add(binary.ID{0x67, 0x9a, 0x8f, 0xbd, 0x22, 0xe4, 0x9f, 0x84, 0x94, 0x8b, 0x66, 0x60, 0xf8, 0x65, 0x60, 0xa7, 0x3b, 0x04, 0x3d, 0xab}, &GlTexStorage3DEXT{})
 	//struct gles.GlTexStorage3DEXT_In { Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32, Height:int32, Depth:int32 }
-	binary.Register(binary.ID{0x0b, 0x89, 0x71, 0xf1, 0x93, 0xb4, 0x46, 0xeb, 0x30, 0xaf, 0x2f, 0x03, 0xc8, 0xad, 0x76, 0x48, 0xd6, 0xf2, 0x39, 0x4a}, &GlTexStorage3DEXT_In{})
+	registry.Add(binary.ID{0x0b, 0x89, 0x71, 0xf1, 0x93, 0xb4, 0x46, 0xeb, 0x30, 0xaf, 0x2f, 0x03, 0xc8, 0xad, 0x76, 0x48, 0xd6, 0xf2, 0x39, 0x4a}, &GlTexStorage3DEXT_In{})
 	//struct gles.GlTexStorage3DEXT_Out { }
-	binary.Register(binary.ID{0xe9, 0xa9, 0x94, 0xac, 0x2f, 0xd8, 0x9f, 0x9e, 0x01, 0x41, 0xcc, 0xdd, 0xd6, 0xdb, 0x47, 0xad, 0x0b, 0x2b, 0x8c, 0x28}, &GlTexStorage3DEXT_Out{})
+	registry.Add(binary.ID{0xe9, 0xa9, 0x94, 0xac, 0x2f, 0xd8, 0x9f, 0x9e, 0x01, 0x41, 0xcc, 0xdd, 0xd6, 0xdb, 0x47, 0xad, 0x0b, 0x2b, 0x8c, 0x28}, &GlTexStorage3DEXT_Out{})
 	//struct gles.GlTexSubImage2D { Context:atom.ContextID, In:GlTexSubImage2D_In, Out:GlTexSubImage2D_Out }
-	binary.Register(binary.ID{0x36, 0xad, 0x9e, 0xae, 0xd3, 0x01, 0x1c, 0xd9, 0x45, 0xd4, 0x79, 0x2c, 0x01, 0xf5, 0x5e, 0x12, 0x53, 0x7b, 0xc0, 0xa6}, &GlTexSubImage2D{})
+	registry.Add(binary.ID{0x36, 0xad, 0x9e, 0xae, 0xd3, 0x01, 0x1c, 0xd9, 0x45, 0xd4, 0x79, 0x2c, 0x01, 0xf5, 0x5e, 0x12, 0x53, 0x7b, 0xc0, 0xa6}, &GlTexSubImage2D{})
 	//struct gles.GlTexSubImage2D_In { Target:TextureImageTarget, Level:int32, Xoffset:int32, Yoffset:int32, Width:int32, Height:int32, Format:TexelFormat, Type:TexelType, Data:TexturePointer }
-	binary.Register(binary.ID{0x0f, 0x1f, 0x5d, 0x6c, 0xe8, 0xbc, 0x73, 0x8b, 0x52, 0x4c, 0xa9, 0x40, 0x49, 0x87, 0xc2, 0x74, 0xc1, 0xd4, 0x5d, 0x32}, &GlTexSubImage2D_In{})
+	registry.Add(binary.ID{0x0f, 0x1f, 0x5d, 0x6c, 0xe8, 0xbc, 0x73, 0x8b, 0x52, 0x4c, 0xa9, 0x40, 0x49, 0x87, 0xc2, 0x74, 0xc1, 0xd4, 0x5d, 0x32}, &GlTexSubImage2D_In{})
 	//struct gles.GlTexSubImage2D_Out { }
-	binary.Register(binary.ID{0x41, 0xb4, 0x0e, 0x0b, 0x7f, 0x1d, 0xdb, 0x5a, 0x36, 0x5c, 0xdb, 0xe5, 0xbe, 0x7e, 0xf5, 0x9d, 0xac, 0x17, 0x79, 0x3f}, &GlTexSubImage2D_Out{})
+	registry.Add(binary.ID{0x41, 0xb4, 0x0e, 0x0b, 0x7f, 0x1d, 0xdb, 0x5a, 0x36, 0x5c, 0xdb, 0xe5, 0xbe, 0x7e, 0xf5, 0x9d, 0xac, 0x17, 0x79, 0x3f}, &GlTexSubImage2D_Out{})
 	//struct gles.GlTextureStorage1DEXT { Context:atom.ContextID, In:GlTextureStorage1DEXT_In, Out:GlTextureStorage1DEXT_Out }
-	binary.Register(binary.ID{0xd4, 0x6a, 0x6b, 0x81, 0x8e, 0x26, 0x3f, 0x29, 0x6b, 0x3a, 0xec, 0xd2, 0xdf, 0x18, 0xa5, 0xb1, 0x15, 0x14, 0xd3, 0xa6}, &GlTextureStorage1DEXT{})
+	registry.Add(binary.ID{0xd4, 0x6a, 0x6b, 0x81, 0x8e, 0x26, 0x3f, 0x29, 0x6b, 0x3a, 0xec, 0xd2, 0xdf, 0x18, 0xa5, 0xb1, 0x15, 0x14, 0xd3, 0xa6}, &GlTextureStorage1DEXT{})
 	//struct gles.GlTextureStorage1DEXT_In { Texture:TextureId, Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32 }
-	binary.Register(binary.ID{0xde, 0x07, 0x1d, 0x5e, 0xe9, 0x8c, 0x89, 0x4e, 0xcc, 0x32, 0xb0, 0x66, 0xd7, 0x02, 0x3f, 0x36, 0x24, 0x49, 0x9b, 0xaf}, &GlTextureStorage1DEXT_In{})
+	registry.Add(binary.ID{0xde, 0x07, 0x1d, 0x5e, 0xe9, 0x8c, 0x89, 0x4e, 0xcc, 0x32, 0xb0, 0x66, 0xd7, 0x02, 0x3f, 0x36, 0x24, 0x49, 0x9b, 0xaf}, &GlTextureStorage1DEXT_In{})
 	//struct gles.GlTextureStorage1DEXT_Out { }
-	binary.Register(binary.ID{0x73, 0xb6, 0x5b, 0xb2, 0x05, 0xf0, 0x1a, 0xe5, 0x70, 0xdb, 0x5c, 0xb4, 0x55, 0x9a, 0x1f, 0x1a, 0x67, 0x23, 0x4b, 0x73}, &GlTextureStorage1DEXT_Out{})
+	registry.Add(binary.ID{0x73, 0xb6, 0x5b, 0xb2, 0x05, 0xf0, 0x1a, 0xe5, 0x70, 0xdb, 0x5c, 0xb4, 0x55, 0x9a, 0x1f, 0x1a, 0x67, 0x23, 0x4b, 0x73}, &GlTextureStorage1DEXT_Out{})
 	//struct gles.GlTextureStorage2DEXT { Context:atom.ContextID, In:GlTextureStorage2DEXT_In, Out:GlTextureStorage2DEXT_Out }
-	binary.Register(binary.ID{0xf0, 0xf2, 0xd9, 0x0e, 0x9f, 0x52, 0x21, 0xf5, 0x85, 0xe8, 0x53, 0x58, 0x1e, 0xa4, 0x97, 0x48, 0xd8, 0x2e, 0x7b, 0xff}, &GlTextureStorage2DEXT{})
+	registry.Add(binary.ID{0xf0, 0xf2, 0xd9, 0x0e, 0x9f, 0x52, 0x21, 0xf5, 0x85, 0xe8, 0x53, 0x58, 0x1e, 0xa4, 0x97, 0x48, 0xd8, 0x2e, 0x7b, 0xff}, &GlTextureStorage2DEXT{})
 	//struct gles.GlTextureStorage2DEXT_In { Texture:TextureId, Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x85, 0xde, 0x8e, 0x35, 0x52, 0x74, 0x6f, 0x49, 0x6e, 0x1c, 0x52, 0xbd, 0xab, 0xdf, 0x2b, 0x65, 0x58, 0xee, 0xf8, 0x3e}, &GlTextureStorage2DEXT_In{})
+	registry.Add(binary.ID{0x85, 0xde, 0x8e, 0x35, 0x52, 0x74, 0x6f, 0x49, 0x6e, 0x1c, 0x52, 0xbd, 0xab, 0xdf, 0x2b, 0x65, 0x58, 0xee, 0xf8, 0x3e}, &GlTextureStorage2DEXT_In{})
 	//struct gles.GlTextureStorage2DEXT_Out { }
-	binary.Register(binary.ID{0xb4, 0xf3, 0x1b, 0xf7, 0xb9, 0x7a, 0x95, 0x23, 0x48, 0xfd, 0x7d, 0xd4, 0xc8, 0xd4, 0xab, 0xfb, 0xb5, 0x1c, 0x98, 0xed}, &GlTextureStorage2DEXT_Out{})
+	registry.Add(binary.ID{0xb4, 0xf3, 0x1b, 0xf7, 0xb9, 0x7a, 0x95, 0x23, 0x48, 0xfd, 0x7d, 0xd4, 0xc8, 0xd4, 0xab, 0xfb, 0xb5, 0x1c, 0x98, 0xed}, &GlTextureStorage2DEXT_Out{})
 	//struct gles.GlTextureStorage3DEXT { Context:atom.ContextID, In:GlTextureStorage3DEXT_In, Out:GlTextureStorage3DEXT_Out }
-	binary.Register(binary.ID{0xf6, 0x3d, 0x6b, 0x9d, 0xb0, 0xde, 0x29, 0x7c, 0x83, 0xf2, 0xb1, 0xe3, 0x5c, 0x04, 0x00, 0x36, 0xe9, 0x0c, 0x4f, 0x2b}, &GlTextureStorage3DEXT{})
+	registry.Add(binary.ID{0xf6, 0x3d, 0x6b, 0x9d, 0xb0, 0xde, 0x29, 0x7c, 0x83, 0xf2, 0xb1, 0xe3, 0x5c, 0x04, 0x00, 0x36, 0xe9, 0x0c, 0x4f, 0x2b}, &GlTextureStorage3DEXT{})
 	//struct gles.GlTextureStorage3DEXT_In { Texture:TextureId, Target:TextureTarget, Levels:int32, Format:TexelFormat, Width:int32, Height:int32, Depth:int32 }
-	binary.Register(binary.ID{0xe1, 0xa0, 0xcd, 0x97, 0xec, 0x7a, 0xee, 0x00, 0x86, 0x20, 0x7a, 0xa5, 0xc3, 0xe2, 0xb6, 0x95, 0xd2, 0x7d, 0x6f, 0xaf}, &GlTextureStorage3DEXT_In{})
+	registry.Add(binary.ID{0xe1, 0xa0, 0xcd, 0x97, 0xec, 0x7a, 0xee, 0x00, 0x86, 0x20, 0x7a, 0xa5, 0xc3, 0xe2, 0xb6, 0x95, 0xd2, 0x7d, 0x6f, 0xaf}, &GlTextureStorage3DEXT_In{})
 	//struct gles.GlTextureStorage3DEXT_Out { }
-	binary.Register(binary.ID{0x60, 0x3e, 0x8c, 0xd2, 0xea, 0xd1, 0x36, 0xde, 0x01, 0x13, 0xd2, 0x05, 0xed, 0x04, 0xe6, 0x5d, 0xd6, 0xc1, 0x7f, 0x52}, &GlTextureStorage3DEXT_Out{})
+	registry.Add(binary.ID{0x60, 0x3e, 0x8c, 0xd2, 0xea, 0xd1, 0x36, 0xde, 0x01, 0x13, 0xd2, 0x05, 0xed, 0x04, 0xe6, 0x5d, 0xd6, 0xc1, 0x7f, 0x52}, &GlTextureStorage3DEXT_Out{})
 	//struct gles.GlUniform1f { Context:atom.ContextID, In:GlUniform1f_In, Out:GlUniform1f_Out }
-	binary.Register(binary.ID{0x82, 0xc3, 0xb5, 0x2a, 0xe0, 0x37, 0x23, 0x34, 0xce, 0x53, 0x58, 0x62, 0x33, 0xcb, 0xca, 0x03, 0xb1, 0x46, 0xdc, 0x2a}, &GlUniform1f{})
+	registry.Add(binary.ID{0x82, 0xc3, 0xb5, 0x2a, 0xe0, 0x37, 0x23, 0x34, 0xce, 0x53, 0x58, 0x62, 0x33, 0xcb, 0xca, 0x03, 0xb1, 0x46, 0xdc, 0x2a}, &GlUniform1f{})
 	//struct gles.GlUniform1f_In { Location:UniformLocation, Value:float32 }
-	binary.Register(binary.ID{0x7d, 0x9d, 0xcf, 0xbc, 0x4b, 0xda, 0x8c, 0x5e, 0xb1, 0x5e, 0x97, 0xb4, 0x3f, 0x8a, 0x0b, 0x3c, 0x05, 0x68, 0x02, 0xbe}, &GlUniform1f_In{})
+	registry.Add(binary.ID{0x7d, 0x9d, 0xcf, 0xbc, 0x4b, 0xda, 0x8c, 0x5e, 0xb1, 0x5e, 0x97, 0xb4, 0x3f, 0x8a, 0x0b, 0x3c, 0x05, 0x68, 0x02, 0xbe}, &GlUniform1f_In{})
 	//struct gles.GlUniform1f_Out { }
-	binary.Register(binary.ID{0xf2, 0x20, 0x08, 0x7e, 0x31, 0x55, 0x5b, 0x48, 0xef, 0x3d, 0xd2, 0x54, 0xc8, 0xef, 0x79, 0x70, 0x6a, 0x25, 0x65, 0x0e}, &GlUniform1f_Out{})
+	registry.Add(binary.ID{0xf2, 0x20, 0x08, 0x7e, 0x31, 0x55, 0x5b, 0x48, 0xef, 0x3d, 0xd2, 0x54, 0xc8, 0xef, 0x79, 0x70, 0x6a, 0x25, 0x65, 0x0e}, &GlUniform1f_Out{})
 	//struct gles.GlUniform1fv { Context:atom.ContextID, In:GlUniform1fv_In, Out:GlUniform1fv_Out }
-	binary.Register(binary.ID{0x88, 0xed, 0x28, 0x1b, 0x89, 0xee, 0x6f, 0x81, 0x40, 0xbb, 0xdf, 0x1a, 0x5c, 0xa5, 0x40, 0x77, 0x34, 0x6e, 0x73, 0xb4}, &GlUniform1fv{})
+	registry.Add(binary.ID{0x88, 0xed, 0x28, 0x1b, 0x89, 0xee, 0x6f, 0x81, 0x40, 0xbb, 0xdf, 0x1a, 0x5c, 0xa5, 0x40, 0x77, 0x34, 0x6e, 0x73, 0xb4}, &GlUniform1fv{})
 	//struct gles.GlUniform1fv_In { Location:UniformLocation, Count:int32, Value:F32Array }
-	binary.Register(binary.ID{0x80, 0xdf, 0xf0, 0xc0, 0xfb, 0xf2, 0x31, 0xb7, 0x8a, 0x98, 0x98, 0xe9, 0x79, 0xa7, 0xa1, 0x1d, 0x32, 0xb4, 0x0a, 0xf8}, &GlUniform1fv_In{})
+	registry.Add(binary.ID{0x80, 0xdf, 0xf0, 0xc0, 0xfb, 0xf2, 0x31, 0xb7, 0x8a, 0x98, 0x98, 0xe9, 0x79, 0xa7, 0xa1, 0x1d, 0x32, 0xb4, 0x0a, 0xf8}, &GlUniform1fv_In{})
 	//struct gles.GlUniform1fv_Out { }
-	binary.Register(binary.ID{0xc9, 0xf2, 0x0d, 0x27, 0x67, 0xd8, 0x7d, 0xb6, 0x5f, 0x3e, 0x8d, 0x3a, 0xa7, 0x04, 0xfb, 0x71, 0x54, 0x55, 0x1d, 0xfa}, &GlUniform1fv_Out{})
+	registry.Add(binary.ID{0xc9, 0xf2, 0x0d, 0x27, 0x67, 0xd8, 0x7d, 0xb6, 0x5f, 0x3e, 0x8d, 0x3a, 0xa7, 0x04, 0xfb, 0x71, 0x54, 0x55, 0x1d, 0xfa}, &GlUniform1fv_Out{})
 	//struct gles.GlUniform1i { Context:atom.ContextID, In:GlUniform1i_In, Out:GlUniform1i_Out }
-	binary.Register(binary.ID{0xc9, 0x08, 0x1d, 0xef, 0xa9, 0x5a, 0x73, 0x77, 0xd9, 0x27, 0xc6, 0x4f, 0xa6, 0x4a, 0xf9, 0x3b, 0x4c, 0x83, 0x3d, 0x1d}, &GlUniform1i{})
+	registry.Add(binary.ID{0xc9, 0x08, 0x1d, 0xef, 0xa9, 0x5a, 0x73, 0x77, 0xd9, 0x27, 0xc6, 0x4f, 0xa6, 0x4a, 0xf9, 0x3b, 0x4c, 0x83, 0x3d, 0x1d}, &GlUniform1i{})
 	//struct gles.GlUniform1i_In { Location:UniformLocation, Value:int32 }
-	binary.Register(binary.ID{0x9a, 0x8d, 0xd2, 0xeb, 0x3b, 0x92, 0xf8, 0xf8, 0xea, 0x05, 0x0e, 0x14, 0x96, 0x1d, 0x57, 0x4d, 0x45, 0x3f, 0xed, 0x85}, &GlUniform1i_In{})
+	registry.Add(binary.ID{0x9a, 0x8d, 0xd2, 0xeb, 0x3b, 0x92, 0xf8, 0xf8, 0xea, 0x05, 0x0e, 0x14, 0x96, 0x1d, 0x57, 0x4d, 0x45, 0x3f, 0xed, 0x85}, &GlUniform1i_In{})
 	//struct gles.GlUniform1i_Out { }
-	binary.Register(binary.ID{0x9a, 0x22, 0xf0, 0x4a, 0x93, 0xf8, 0x83, 0xec, 0x37, 0x78, 0xca, 0x00, 0x6d, 0x43, 0xd3, 0x6c, 0x5a, 0xa3, 0x89, 0x03}, &GlUniform1i_Out{})
+	registry.Add(binary.ID{0x9a, 0x22, 0xf0, 0x4a, 0x93, 0xf8, 0x83, 0xec, 0x37, 0x78, 0xca, 0x00, 0x6d, 0x43, 0xd3, 0x6c, 0x5a, 0xa3, 0x89, 0x03}, &GlUniform1i_Out{})
 	//struct gles.GlUniform1iv { Context:atom.ContextID, In:GlUniform1iv_In, Out:GlUniform1iv_Out }
-	binary.Register(binary.ID{0xb5, 0x70, 0x31, 0x6c, 0xb8, 0xe8, 0x15, 0x3b, 0xfa, 0x01, 0x32, 0x59, 0x3e, 0x66, 0xed, 0xda, 0x5b, 0x89, 0x95, 0x4a}, &GlUniform1iv{})
+	registry.Add(binary.ID{0xb5, 0x70, 0x31, 0x6c, 0xb8, 0xe8, 0x15, 0x3b, 0xfa, 0x01, 0x32, 0x59, 0x3e, 0x66, 0xed, 0xda, 0x5b, 0x89, 0x95, 0x4a}, &GlUniform1iv{})
 	//struct gles.GlUniform1iv_In { Location:UniformLocation, Count:int32, Value:S32Array }
-	binary.Register(binary.ID{0x26, 0x1b, 0x02, 0x50, 0xbc, 0x3e, 0x8b, 0x27, 0xfd, 0x8d, 0xcb, 0x4a, 0x3c, 0x84, 0xab, 0x6c, 0x68, 0x68, 0x87, 0x65}, &GlUniform1iv_In{})
+	registry.Add(binary.ID{0x26, 0x1b, 0x02, 0x50, 0xbc, 0x3e, 0x8b, 0x27, 0xfd, 0x8d, 0xcb, 0x4a, 0x3c, 0x84, 0xab, 0x6c, 0x68, 0x68, 0x87, 0x65}, &GlUniform1iv_In{})
 	//struct gles.GlUniform1iv_Out { }
-	binary.Register(binary.ID{0x38, 0x10, 0x11, 0xff, 0x67, 0xfe, 0x09, 0x7b, 0x3c, 0x82, 0x90, 0xc6, 0x89, 0xfd, 0x3c, 0x49, 0x9e, 0xbf, 0x81, 0x2b}, &GlUniform1iv_Out{})
+	registry.Add(binary.ID{0x38, 0x10, 0x11, 0xff, 0x67, 0xfe, 0x09, 0x7b, 0x3c, 0x82, 0x90, 0xc6, 0x89, 0xfd, 0x3c, 0x49, 0x9e, 0xbf, 0x81, 0x2b}, &GlUniform1iv_Out{})
 	//struct gles.GlUniform2f { Context:atom.ContextID, In:GlUniform2f_In, Out:GlUniform2f_Out }
-	binary.Register(binary.ID{0xcf, 0x9b, 0x4f, 0x39, 0x47, 0xc7, 0x38, 0xc7, 0xdf, 0xd0, 0x8b, 0x07, 0x38, 0x93, 0x4c, 0x1e, 0xe7, 0xb9, 0xaa, 0x7c}, &GlUniform2f{})
+	registry.Add(binary.ID{0xcf, 0x9b, 0x4f, 0x39, 0x47, 0xc7, 0x38, 0xc7, 0xdf, 0xd0, 0x8b, 0x07, 0x38, 0x93, 0x4c, 0x1e, 0xe7, 0xb9, 0xaa, 0x7c}, &GlUniform2f{})
 	//struct gles.GlUniform2f_In { Location:UniformLocation, Value0:float32, Value1:float32 }
-	binary.Register(binary.ID{0x67, 0x94, 0x7c, 0xab, 0xd9, 0x88, 0x25, 0x2a, 0x7b, 0x90, 0x04, 0x5d, 0x46, 0x33, 0x68, 0x34, 0xfa, 0x6a, 0x2c, 0xea}, &GlUniform2f_In{})
+	registry.Add(binary.ID{0x67, 0x94, 0x7c, 0xab, 0xd9, 0x88, 0x25, 0x2a, 0x7b, 0x90, 0x04, 0x5d, 0x46, 0x33, 0x68, 0x34, 0xfa, 0x6a, 0x2c, 0xea}, &GlUniform2f_In{})
 	//struct gles.GlUniform2f_Out { }
-	binary.Register(binary.ID{0x04, 0xe5, 0x0f, 0x7c, 0xfb, 0x32, 0x7f, 0xce, 0x56, 0x82, 0xb2, 0xad, 0x67, 0x8a, 0xae, 0x8b, 0x3e, 0xc2, 0xf4, 0x1d}, &GlUniform2f_Out{})
+	registry.Add(binary.ID{0x04, 0xe5, 0x0f, 0x7c, 0xfb, 0x32, 0x7f, 0xce, 0x56, 0x82, 0xb2, 0xad, 0x67, 0x8a, 0xae, 0x8b, 0x3e, 0xc2, 0xf4, 0x1d}, &GlUniform2f_Out{})
 	//struct gles.GlUniform2fv { Context:atom.ContextID, In:GlUniform2fv_In, Out:GlUniform2fv_Out }
-	binary.Register(binary.ID{0xcb, 0x9b, 0x90, 0x22, 0x90, 0x06, 0x57, 0x53, 0x49, 0xf8, 0x68, 0xb3, 0x8c, 0x8b, 0x4a, 0x7d, 0x4f, 0xa6, 0x16, 0xfb}, &GlUniform2fv{})
+	registry.Add(binary.ID{0xcb, 0x9b, 0x90, 0x22, 0x90, 0x06, 0x57, 0x53, 0x49, 0xf8, 0x68, 0xb3, 0x8c, 0x8b, 0x4a, 0x7d, 0x4f, 0xa6, 0x16, 0xfb}, &GlUniform2fv{})
 	//struct gles.GlUniform2fv_In { Location:UniformLocation, Count:int32, Value:F32Array }
-	binary.Register(binary.ID{0x97, 0xff, 0x92, 0x86, 0xf5, 0x20, 0xae, 0x1a, 0xb0, 0x4e, 0x2f, 0xb1, 0xc7, 0xa2, 0xc8, 0x2f, 0x8c, 0x7b, 0x14, 0x2b}, &GlUniform2fv_In{})
+	registry.Add(binary.ID{0x97, 0xff, 0x92, 0x86, 0xf5, 0x20, 0xae, 0x1a, 0xb0, 0x4e, 0x2f, 0xb1, 0xc7, 0xa2, 0xc8, 0x2f, 0x8c, 0x7b, 0x14, 0x2b}, &GlUniform2fv_In{})
 	//struct gles.GlUniform2fv_Out { }
-	binary.Register(binary.ID{0xf7, 0xbc, 0x29, 0xd9, 0x95, 0xb6, 0x2f, 0xcd, 0x99, 0x5f, 0x75, 0x88, 0x04, 0xdb, 0xa6, 0xfc, 0xf9, 0xc2, 0x5e, 0xdb}, &GlUniform2fv_Out{})
+	registry.Add(binary.ID{0xf7, 0xbc, 0x29, 0xd9, 0x95, 0xb6, 0x2f, 0xcd, 0x99, 0x5f, 0x75, 0x88, 0x04, 0xdb, 0xa6, 0xfc, 0xf9, 0xc2, 0x5e, 0xdb}, &GlUniform2fv_Out{})
 	//struct gles.GlUniform2i { Context:atom.ContextID, In:GlUniform2i_In, Out:GlUniform2i_Out }
-	binary.Register(binary.ID{0x50, 0x97, 0xf4, 0xe7, 0xbf, 0xa1, 0x2d, 0xd9, 0x8f, 0x19, 0x41, 0x91, 0xc1, 0x81, 0xc2, 0x3f, 0xdd, 0x8c, 0x89, 0x1d}, &GlUniform2i{})
+	registry.Add(binary.ID{0x50, 0x97, 0xf4, 0xe7, 0xbf, 0xa1, 0x2d, 0xd9, 0x8f, 0x19, 0x41, 0x91, 0xc1, 0x81, 0xc2, 0x3f, 0xdd, 0x8c, 0x89, 0x1d}, &GlUniform2i{})
 	//struct gles.GlUniform2i_In { Location:UniformLocation, Value0:int32, Value1:int32 }
-	binary.Register(binary.ID{0xb3, 0xbc, 0x95, 0x4e, 0x82, 0x1b, 0x96, 0xd4, 0x4f, 0x38, 0xe4, 0x3c, 0x55, 0xf2, 0x4d, 0xfd, 0x4c, 0xc6, 0xde, 0x43}, &GlUniform2i_In{})
+	registry.Add(binary.ID{0xb3, 0xbc, 0x95, 0x4e, 0x82, 0x1b, 0x96, 0xd4, 0x4f, 0x38, 0xe4, 0x3c, 0x55, 0xf2, 0x4d, 0xfd, 0x4c, 0xc6, 0xde, 0x43}, &GlUniform2i_In{})
 	//struct gles.GlUniform2i_Out { }
-	binary.Register(binary.ID{0x29, 0xab, 0x0b, 0x30, 0xf4, 0x6c, 0x83, 0xf3, 0xd4, 0x43, 0x70, 0xbd, 0x09, 0x87, 0x58, 0xe4, 0x4c, 0x85, 0xa9, 0x9b}, &GlUniform2i_Out{})
+	registry.Add(binary.ID{0x29, 0xab, 0x0b, 0x30, 0xf4, 0x6c, 0x83, 0xf3, 0xd4, 0x43, 0x70, 0xbd, 0x09, 0x87, 0x58, 0xe4, 0x4c, 0x85, 0xa9, 0x9b}, &GlUniform2i_Out{})
 	//struct gles.GlUniform2iv { Context:atom.ContextID, In:GlUniform2iv_In, Out:GlUniform2iv_Out }
-	binary.Register(binary.ID{0xb1, 0xd9, 0x04, 0x84, 0x57, 0x54, 0x75, 0x37, 0x19, 0x89, 0xfd, 0x11, 0xa4, 0x7f, 0xe9, 0x1e, 0x60, 0x73, 0xd5, 0xd6}, &GlUniform2iv{})
+	registry.Add(binary.ID{0xb1, 0xd9, 0x04, 0x84, 0x57, 0x54, 0x75, 0x37, 0x19, 0x89, 0xfd, 0x11, 0xa4, 0x7f, 0xe9, 0x1e, 0x60, 0x73, 0xd5, 0xd6}, &GlUniform2iv{})
 	//struct gles.GlUniform2iv_In { Location:UniformLocation, Count:int32, Value:S32Array }
-	binary.Register(binary.ID{0x2f, 0x76, 0x86, 0xfc, 0xa1, 0x16, 0xa5, 0xca, 0xdc, 0x44, 0x5f, 0xb3, 0xb6, 0x54, 0x79, 0xa0, 0xaa, 0x48, 0x27, 0x97}, &GlUniform2iv_In{})
+	registry.Add(binary.ID{0x2f, 0x76, 0x86, 0xfc, 0xa1, 0x16, 0xa5, 0xca, 0xdc, 0x44, 0x5f, 0xb3, 0xb6, 0x54, 0x79, 0xa0, 0xaa, 0x48, 0x27, 0x97}, &GlUniform2iv_In{})
 	//struct gles.GlUniform2iv_Out { }
-	binary.Register(binary.ID{0x55, 0x2e, 0x47, 0x78, 0x30, 0x17, 0x62, 0x69, 0x3e, 0x17, 0xa9, 0xad, 0xa9, 0xb1, 0x78, 0x95, 0x50, 0xd4, 0x97, 0x36}, &GlUniform2iv_Out{})
+	registry.Add(binary.ID{0x55, 0x2e, 0x47, 0x78, 0x30, 0x17, 0x62, 0x69, 0x3e, 0x17, 0xa9, 0xad, 0xa9, 0xb1, 0x78, 0x95, 0x50, 0xd4, 0x97, 0x36}, &GlUniform2iv_Out{})
 	//struct gles.GlUniform3f { Context:atom.ContextID, In:GlUniform3f_In, Out:GlUniform3f_Out }
-	binary.Register(binary.ID{0x7c, 0x36, 0xd8, 0x3b, 0x86, 0xad, 0xe4, 0x4d, 0x9e, 0xaf, 0xf1, 0xba, 0x5b, 0x07, 0xf5, 0xcd, 0x33, 0xe4, 0xda, 0xcb}, &GlUniform3f{})
+	registry.Add(binary.ID{0x7c, 0x36, 0xd8, 0x3b, 0x86, 0xad, 0xe4, 0x4d, 0x9e, 0xaf, 0xf1, 0xba, 0x5b, 0x07, 0xf5, 0xcd, 0x33, 0xe4, 0xda, 0xcb}, &GlUniform3f{})
 	//struct gles.GlUniform3f_In { Location:UniformLocation, Value0:float32, Value1:float32, Value2:float32 }
-	binary.Register(binary.ID{0x3b, 0xe6, 0xb2, 0x9e, 0xcc, 0x2d, 0x17, 0x79, 0x7b, 0x26, 0x74, 0x99, 0x45, 0xd1, 0x9b, 0x9e, 0x55, 0xea, 0xb3, 0xf1}, &GlUniform3f_In{})
+	registry.Add(binary.ID{0x3b, 0xe6, 0xb2, 0x9e, 0xcc, 0x2d, 0x17, 0x79, 0x7b, 0x26, 0x74, 0x99, 0x45, 0xd1, 0x9b, 0x9e, 0x55, 0xea, 0xb3, 0xf1}, &GlUniform3f_In{})
 	//struct gles.GlUniform3f_Out { }
-	binary.Register(binary.ID{0xec, 0x1c, 0x63, 0xaf, 0x14, 0x02, 0xe3, 0x9b, 0x1f, 0x4e, 0x6e, 0xc1, 0x3e, 0x1e, 0x4e, 0x45, 0xa6, 0x0d, 0x6d, 0x5c}, &GlUniform3f_Out{})
+	registry.Add(binary.ID{0xec, 0x1c, 0x63, 0xaf, 0x14, 0x02, 0xe3, 0x9b, 0x1f, 0x4e, 0x6e, 0xc1, 0x3e, 0x1e, 0x4e, 0x45, 0xa6, 0x0d, 0x6d, 0x5c}, &GlUniform3f_Out{})
 	//struct gles.GlUniform3fv { Context:atom.ContextID, In:GlUniform3fv_In, Out:GlUniform3fv_Out }
-	binary.Register(binary.ID{0x77, 0x4b, 0x68, 0xed, 0xf6, 0x04, 0x9b, 0xb8, 0xad, 0x8a, 0x7a, 0x2f, 0x25, 0xe6, 0x0b, 0x6f, 0xf4, 0x86, 0xcf, 0xc8}, &GlUniform3fv{})
+	registry.Add(binary.ID{0x77, 0x4b, 0x68, 0xed, 0xf6, 0x04, 0x9b, 0xb8, 0xad, 0x8a, 0x7a, 0x2f, 0x25, 0xe6, 0x0b, 0x6f, 0xf4, 0x86, 0xcf, 0xc8}, &GlUniform3fv{})
 	//struct gles.GlUniform3fv_In { Location:UniformLocation, Count:int32, Value:F32Array }
-	binary.Register(binary.ID{0x3c, 0x42, 0xa8, 0xb4, 0xd5, 0x6b, 0x4d, 0x54, 0x47, 0xfe, 0x99, 0xf3, 0x11, 0x44, 0xb8, 0x78, 0x24, 0x39, 0xa7, 0x94}, &GlUniform3fv_In{})
+	registry.Add(binary.ID{0x3c, 0x42, 0xa8, 0xb4, 0xd5, 0x6b, 0x4d, 0x54, 0x47, 0xfe, 0x99, 0xf3, 0x11, 0x44, 0xb8, 0x78, 0x24, 0x39, 0xa7, 0x94}, &GlUniform3fv_In{})
 	//struct gles.GlUniform3fv_Out { }
-	binary.Register(binary.ID{0x4d, 0x47, 0xc4, 0x90, 0xb9, 0x82, 0x49, 0x29, 0xc5, 0x37, 0xf4, 0x94, 0x84, 0xa7, 0xaa, 0x9c, 0xd7, 0xc6, 0x30, 0x30}, &GlUniform3fv_Out{})
+	registry.Add(binary.ID{0x4d, 0x47, 0xc4, 0x90, 0xb9, 0x82, 0x49, 0x29, 0xc5, 0x37, 0xf4, 0x94, 0x84, 0xa7, 0xaa, 0x9c, 0xd7, 0xc6, 0x30, 0x30}, &GlUniform3fv_Out{})
 	//struct gles.GlUniform3i { Context:atom.ContextID, In:GlUniform3i_In, Out:GlUniform3i_Out }
-	binary.Register(binary.ID{0x05, 0x92, 0x89, 0x3f, 0x16, 0x4a, 0x38, 0xc8, 0x43, 0xef, 0x31, 0x1d, 0x07, 0xdf, 0xbf, 0x40, 0x32, 0x94, 0xbd, 0xfd}, &GlUniform3i{})
+	registry.Add(binary.ID{0x05, 0x92, 0x89, 0x3f, 0x16, 0x4a, 0x38, 0xc8, 0x43, 0xef, 0x31, 0x1d, 0x07, 0xdf, 0xbf, 0x40, 0x32, 0x94, 0xbd, 0xfd}, &GlUniform3i{})
 	//struct gles.GlUniform3i_In { Location:UniformLocation, Value0:int32, Value1:int32, Value2:int32 }
-	binary.Register(binary.ID{0xcc, 0x27, 0x2e, 0xb8, 0x07, 0xe3, 0x18, 0x5e, 0x23, 0x8b, 0x46, 0x87, 0xf8, 0x58, 0x43, 0x41, 0x70, 0x8a, 0xe0, 0xf5}, &GlUniform3i_In{})
+	registry.Add(binary.ID{0xcc, 0x27, 0x2e, 0xb8, 0x07, 0xe3, 0x18, 0x5e, 0x23, 0x8b, 0x46, 0x87, 0xf8, 0x58, 0x43, 0x41, 0x70, 0x8a, 0xe0, 0xf5}, &GlUniform3i_In{})
 	//struct gles.GlUniform3i_Out { }
-	binary.Register(binary.ID{0x93, 0x49, 0x8c, 0x95, 0x09, 0xc7, 0x63, 0xfe, 0x82, 0xf3, 0xd4, 0x91, 0x05, 0xd2, 0x08, 0x13, 0xd4, 0x2a, 0x39, 0x9d}, &GlUniform3i_Out{})
+	registry.Add(binary.ID{0x93, 0x49, 0x8c, 0x95, 0x09, 0xc7, 0x63, 0xfe, 0x82, 0xf3, 0xd4, 0x91, 0x05, 0xd2, 0x08, 0x13, 0xd4, 0x2a, 0x39, 0x9d}, &GlUniform3i_Out{})
 	//struct gles.GlUniform3iv { Context:atom.ContextID, In:GlUniform3iv_In, Out:GlUniform3iv_Out }
-	binary.Register(binary.ID{0xcf, 0xe1, 0xa9, 0xa3, 0x6f, 0xce, 0x7c, 0x92, 0xf9, 0x7f, 0x1f, 0x56, 0xb8, 0x5d, 0xf4, 0x8c, 0x5d, 0xcc, 0x9a, 0x8b}, &GlUniform3iv{})
+	registry.Add(binary.ID{0xcf, 0xe1, 0xa9, 0xa3, 0x6f, 0xce, 0x7c, 0x92, 0xf9, 0x7f, 0x1f, 0x56, 0xb8, 0x5d, 0xf4, 0x8c, 0x5d, 0xcc, 0x9a, 0x8b}, &GlUniform3iv{})
 	//struct gles.GlUniform3iv_In { Location:UniformLocation, Count:int32, Value:S32Array }
-	binary.Register(binary.ID{0x59, 0x25, 0x75, 0x8f, 0xc4, 0xd4, 0x8d, 0x3f, 0xef, 0xee, 0x6f, 0x56, 0xa8, 0x38, 0x65, 0x02, 0x37, 0x8a, 0x05, 0xdb}, &GlUniform3iv_In{})
+	registry.Add(binary.ID{0x59, 0x25, 0x75, 0x8f, 0xc4, 0xd4, 0x8d, 0x3f, 0xef, 0xee, 0x6f, 0x56, 0xa8, 0x38, 0x65, 0x02, 0x37, 0x8a, 0x05, 0xdb}, &GlUniform3iv_In{})
 	//struct gles.GlUniform3iv_Out { }
-	binary.Register(binary.ID{0xd6, 0x5a, 0xf5, 0x32, 0x2d, 0x02, 0x9c, 0x65, 0xca, 0xd7, 0xd3, 0x99, 0xad, 0x3a, 0x4e, 0xed, 0xc5, 0xc2, 0x75, 0x62}, &GlUniform3iv_Out{})
+	registry.Add(binary.ID{0xd6, 0x5a, 0xf5, 0x32, 0x2d, 0x02, 0x9c, 0x65, 0xca, 0xd7, 0xd3, 0x99, 0xad, 0x3a, 0x4e, 0xed, 0xc5, 0xc2, 0x75, 0x62}, &GlUniform3iv_Out{})
 	//struct gles.GlUniform4f { Context:atom.ContextID, In:GlUniform4f_In, Out:GlUniform4f_Out }
-	binary.Register(binary.ID{0x2c, 0xf3, 0x0d, 0x45, 0x75, 0x54, 0x87, 0xdd, 0x69, 0x98, 0xef, 0xa8, 0xd9, 0x95, 0x2d, 0xf5, 0x32, 0xe6, 0x87, 0x4e}, &GlUniform4f{})
+	registry.Add(binary.ID{0x2c, 0xf3, 0x0d, 0x45, 0x75, 0x54, 0x87, 0xdd, 0x69, 0x98, 0xef, 0xa8, 0xd9, 0x95, 0x2d, 0xf5, 0x32, 0xe6, 0x87, 0x4e}, &GlUniform4f{})
 	//struct gles.GlUniform4f_In { Location:UniformLocation, Value0:float32, Value1:float32, Value2:float32, Value3:float32 }
-	binary.Register(binary.ID{0xb0, 0x63, 0x94, 0xd0, 0x8e, 0x24, 0xab, 0x9d, 0x0f, 0x90, 0xf2, 0x7f, 0x9a, 0x32, 0x93, 0xf0, 0x3c, 0x95, 0x21, 0x95}, &GlUniform4f_In{})
+	registry.Add(binary.ID{0xb0, 0x63, 0x94, 0xd0, 0x8e, 0x24, 0xab, 0x9d, 0x0f, 0x90, 0xf2, 0x7f, 0x9a, 0x32, 0x93, 0xf0, 0x3c, 0x95, 0x21, 0x95}, &GlUniform4f_In{})
 	//struct gles.GlUniform4f_Out { }
-	binary.Register(binary.ID{0x47, 0xfe, 0x20, 0xf4, 0xd4, 0xbb, 0x05, 0x74, 0x81, 0x9a, 0x8e, 0xcd, 0x0b, 0x91, 0xb1, 0x99, 0x32, 0xe8, 0x12, 0x78}, &GlUniform4f_Out{})
+	registry.Add(binary.ID{0x47, 0xfe, 0x20, 0xf4, 0xd4, 0xbb, 0x05, 0x74, 0x81, 0x9a, 0x8e, 0xcd, 0x0b, 0x91, 0xb1, 0x99, 0x32, 0xe8, 0x12, 0x78}, &GlUniform4f_Out{})
 	//struct gles.GlUniform4fv { Context:atom.ContextID, In:GlUniform4fv_In, Out:GlUniform4fv_Out }
-	binary.Register(binary.ID{0xf0, 0xc1, 0x49, 0x65, 0x25, 0xcd, 0x64, 0x7e, 0x19, 0x26, 0x24, 0xb6, 0xa6, 0x79, 0x87, 0x10, 0xe7, 0x68, 0x72, 0xdd}, &GlUniform4fv{})
+	registry.Add(binary.ID{0xf0, 0xc1, 0x49, 0x65, 0x25, 0xcd, 0x64, 0x7e, 0x19, 0x26, 0x24, 0xb6, 0xa6, 0x79, 0x87, 0x10, 0xe7, 0x68, 0x72, 0xdd}, &GlUniform4fv{})
 	//struct gles.GlUniform4fv_In { Location:UniformLocation, Count:int32, Value:F32Array }
-	binary.Register(binary.ID{0xc3, 0xfb, 0x17, 0xe7, 0x32, 0xb5, 0x5e, 0x8e, 0x55, 0xf0, 0x42, 0x6d, 0xd5, 0xf3, 0x3a, 0x96, 0x09, 0x9e, 0x00, 0xa9}, &GlUniform4fv_In{})
+	registry.Add(binary.ID{0xc3, 0xfb, 0x17, 0xe7, 0x32, 0xb5, 0x5e, 0x8e, 0x55, 0xf0, 0x42, 0x6d, 0xd5, 0xf3, 0x3a, 0x96, 0x09, 0x9e, 0x00, 0xa9}, &GlUniform4fv_In{})
 	//struct gles.GlUniform4fv_Out { }
-	binary.Register(binary.ID{0x06, 0x7f, 0xcb, 0x7c, 0x62, 0xb3, 0x58, 0x1f, 0x37, 0x20, 0xe8, 0x6d, 0xe1, 0x23, 0xf0, 0x61, 0x6b, 0x9c, 0x3c, 0x9d}, &GlUniform4fv_Out{})
+	registry.Add(binary.ID{0x06, 0x7f, 0xcb, 0x7c, 0x62, 0xb3, 0x58, 0x1f, 0x37, 0x20, 0xe8, 0x6d, 0xe1, 0x23, 0xf0, 0x61, 0x6b, 0x9c, 0x3c, 0x9d}, &GlUniform4fv_Out{})
 	//struct gles.GlUniform4i { Context:atom.ContextID, In:GlUniform4i_In, Out:GlUniform4i_Out }
-	binary.Register(binary.ID{0xda, 0x44, 0x1f, 0x81, 0x78, 0xa1, 0x37, 0x8a, 0xe6, 0x7e, 0xa0, 0x19, 0xff, 0x4b, 0xdc, 0x25, 0x00, 0x05, 0x4a, 0x5c}, &GlUniform4i{})
+	registry.Add(binary.ID{0xda, 0x44, 0x1f, 0x81, 0x78, 0xa1, 0x37, 0x8a, 0xe6, 0x7e, 0xa0, 0x19, 0xff, 0x4b, 0xdc, 0x25, 0x00, 0x05, 0x4a, 0x5c}, &GlUniform4i{})
 	//struct gles.GlUniform4i_In { Location:UniformLocation, Value0:int32, Value1:int32, Value2:int32, Value3:int32 }
-	binary.Register(binary.ID{0x6b, 0x4a, 0x35, 0xc6, 0xc5, 0x9c, 0x41, 0xf0, 0xd9, 0x39, 0x58, 0xf1, 0xca, 0xbf, 0x5c, 0x70, 0x20, 0xf6, 0x7b, 0x59}, &GlUniform4i_In{})
+	registry.Add(binary.ID{0x6b, 0x4a, 0x35, 0xc6, 0xc5, 0x9c, 0x41, 0xf0, 0xd9, 0x39, 0x58, 0xf1, 0xca, 0xbf, 0x5c, 0x70, 0x20, 0xf6, 0x7b, 0x59}, &GlUniform4i_In{})
 	//struct gles.GlUniform4i_Out { }
-	binary.Register(binary.ID{0xaf, 0x0e, 0x78, 0xa9, 0x80, 0x6f, 0xfa, 0x4c, 0x49, 0x12, 0x96, 0x65, 0x5c, 0xb7, 0x83, 0x01, 0x34, 0x94, 0xa7, 0xbd}, &GlUniform4i_Out{})
+	registry.Add(binary.ID{0xaf, 0x0e, 0x78, 0xa9, 0x80, 0x6f, 0xfa, 0x4c, 0x49, 0x12, 0x96, 0x65, 0x5c, 0xb7, 0x83, 0x01, 0x34, 0x94, 0xa7, 0xbd}, &GlUniform4i_Out{})
 	//struct gles.GlUniform4iv { Context:atom.ContextID, In:GlUniform4iv_In, Out:GlUniform4iv_Out }
-	binary.Register(binary.ID{0x69, 0x64, 0xcc, 0x0f, 0xbb, 0x3a, 0x52, 0x72, 0xdd, 0x73, 0x0b, 0x7b, 0x36, 0xc7, 0xe4, 0x3b, 0x5f, 0x14, 0x3c, 0x93}, &GlUniform4iv{})
+	registry.Add(binary.ID{0x69, 0x64, 0xcc, 0x0f, 0xbb, 0x3a, 0x52, 0x72, 0xdd, 0x73, 0x0b, 0x7b, 0x36, 0xc7, 0xe4, 0x3b, 0x5f, 0x14, 0x3c, 0x93}, &GlUniform4iv{})
 	//struct gles.GlUniform4iv_In { Location:UniformLocation, Count:int32, Value:S32Array }
-	binary.Register(binary.ID{0xa1, 0xe7, 0xea, 0xa6, 0x1c, 0x01, 0xe6, 0xcd, 0xb6, 0x77, 0x8f, 0x08, 0xaf, 0xbd, 0x4d, 0xd8, 0xb9, 0xa5, 0xc5, 0x9d}, &GlUniform4iv_In{})
+	registry.Add(binary.ID{0xa1, 0xe7, 0xea, 0xa6, 0x1c, 0x01, 0xe6, 0xcd, 0xb6, 0x77, 0x8f, 0x08, 0xaf, 0xbd, 0x4d, 0xd8, 0xb9, 0xa5, 0xc5, 0x9d}, &GlUniform4iv_In{})
 	//struct gles.GlUniform4iv_Out { }
-	binary.Register(binary.ID{0x02, 0x5c, 0x97, 0xa2, 0xd7, 0x8e, 0x3f, 0x99, 0xef, 0x4e, 0x67, 0xa2, 0xf3, 0x81, 0xcb, 0xd9, 0x98, 0xb4, 0x6e, 0xe2}, &GlUniform4iv_Out{})
+	registry.Add(binary.ID{0x02, 0x5c, 0x97, 0xa2, 0xd7, 0x8e, 0x3f, 0x99, 0xef, 0x4e, 0x67, 0xa2, 0xf3, 0x81, 0xcb, 0xd9, 0x98, 0xb4, 0x6e, 0xe2}, &GlUniform4iv_Out{})
 	//struct gles.GlUniformMatrix2fv { Context:atom.ContextID, In:GlUniformMatrix2fv_In, Out:GlUniformMatrix2fv_Out }
-	binary.Register(binary.ID{0xa9, 0x2a, 0xd8, 0xea, 0x44, 0x1b, 0x3c, 0x3d, 0x1a, 0xbc, 0x93, 0xa0, 0x49, 0xae, 0xf4, 0xb2, 0xaa, 0xb3, 0x92, 0xe0}, &GlUniformMatrix2fv{})
+	registry.Add(binary.ID{0xa9, 0x2a, 0xd8, 0xea, 0x44, 0x1b, 0x3c, 0x3d, 0x1a, 0xbc, 0x93, 0xa0, 0x49, 0xae, 0xf4, 0xb2, 0xaa, 0xb3, 0x92, 0xe0}, &GlUniformMatrix2fv{})
 	//struct gles.GlUniformMatrix2fv_In { Location:UniformLocation, Count:int32, Transpose:bool, Values:F32Array }
-	binary.Register(binary.ID{0x61, 0x64, 0x64, 0x8e, 0x97, 0x51, 0xee, 0xfa, 0x69, 0x8d, 0x97, 0xdb, 0x12, 0x2b, 0x5a, 0x39, 0x7c, 0x28, 0xf1, 0x64}, &GlUniformMatrix2fv_In{})
+	registry.Add(binary.ID{0x61, 0x64, 0x64, 0x8e, 0x97, 0x51, 0xee, 0xfa, 0x69, 0x8d, 0x97, 0xdb, 0x12, 0x2b, 0x5a, 0x39, 0x7c, 0x28, 0xf1, 0x64}, &GlUniformMatrix2fv_In{})
 	//struct gles.GlUniformMatrix2fv_Out { }
-	binary.Register(binary.ID{0x9a, 0xe7, 0x68, 0xde, 0x67, 0x31, 0x47, 0x1d, 0xff, 0xe3, 0xec, 0x8e, 0xfd, 0xf1, 0x46, 0x56, 0xbc, 0xda, 0x63, 0xb6}, &GlUniformMatrix2fv_Out{})
+	registry.Add(binary.ID{0x9a, 0xe7, 0x68, 0xde, 0x67, 0x31, 0x47, 0x1d, 0xff, 0xe3, 0xec, 0x8e, 0xfd, 0xf1, 0x46, 0x56, 0xbc, 0xda, 0x63, 0xb6}, &GlUniformMatrix2fv_Out{})
 	//struct gles.GlUniformMatrix3fv { Context:atom.ContextID, In:GlUniformMatrix3fv_In, Out:GlUniformMatrix3fv_Out }
-	binary.Register(binary.ID{0x56, 0x3c, 0x59, 0xe3, 0x48, 0xa1, 0xf4, 0x37, 0xc1, 0x84, 0x2e, 0x4c, 0x13, 0x74, 0x94, 0x1c, 0xeb, 0xc0, 0x37, 0x22}, &GlUniformMatrix3fv{})
+	registry.Add(binary.ID{0x56, 0x3c, 0x59, 0xe3, 0x48, 0xa1, 0xf4, 0x37, 0xc1, 0x84, 0x2e, 0x4c, 0x13, 0x74, 0x94, 0x1c, 0xeb, 0xc0, 0x37, 0x22}, &GlUniformMatrix3fv{})
 	//struct gles.GlUniformMatrix3fv_In { Location:UniformLocation, Count:int32, Transpose:bool, Values:F32Array }
-	binary.Register(binary.ID{0x5e, 0x05, 0x36, 0x01, 0x64, 0x0f, 0x50, 0x10, 0xa0, 0x17, 0xf4, 0xb8, 0x35, 0x9f, 0x8e, 0xea, 0x75, 0x42, 0xee, 0x30}, &GlUniformMatrix3fv_In{})
+	registry.Add(binary.ID{0x5e, 0x05, 0x36, 0x01, 0x64, 0x0f, 0x50, 0x10, 0xa0, 0x17, 0xf4, 0xb8, 0x35, 0x9f, 0x8e, 0xea, 0x75, 0x42, 0xee, 0x30}, &GlUniformMatrix3fv_In{})
 	//struct gles.GlUniformMatrix3fv_Out { }
-	binary.Register(binary.ID{0x6f, 0x9f, 0x79, 0x16, 0xe2, 0xd5, 0xd0, 0x4e, 0x63, 0x86, 0xd9, 0x22, 0xf2, 0x69, 0xf1, 0xcb, 0xd7, 0x01, 0x12, 0x30}, &GlUniformMatrix3fv_Out{})
+	registry.Add(binary.ID{0x6f, 0x9f, 0x79, 0x16, 0xe2, 0xd5, 0xd0, 0x4e, 0x63, 0x86, 0xd9, 0x22, 0xf2, 0x69, 0xf1, 0xcb, 0xd7, 0x01, 0x12, 0x30}, &GlUniformMatrix3fv_Out{})
 	//struct gles.GlUniformMatrix4fv { Context:atom.ContextID, In:GlUniformMatrix4fv_In, Out:GlUniformMatrix4fv_Out }
-	binary.Register(binary.ID{0xa3, 0x15, 0x18, 0x3f, 0x41, 0xe9, 0x8c, 0x37, 0xae, 0xbf, 0x47, 0x79, 0x7b, 0x71, 0xf1, 0xf0, 0xe4, 0x2e, 0x0a, 0xe3}, &GlUniformMatrix4fv{})
+	registry.Add(binary.ID{0xa3, 0x15, 0x18, 0x3f, 0x41, 0xe9, 0x8c, 0x37, 0xae, 0xbf, 0x47, 0x79, 0x7b, 0x71, 0xf1, 0xf0, 0xe4, 0x2e, 0x0a, 0xe3}, &GlUniformMatrix4fv{})
 	//struct gles.GlUniformMatrix4fv_In { Location:UniformLocation, Count:int32, Transpose:bool, Values:F32Array }
-	binary.Register(binary.ID{0x21, 0xf8, 0x2c, 0x3b, 0x2e, 0xd2, 0x60, 0xb4, 0xcc, 0x40, 0xb2, 0x32, 0x46, 0x99, 0xec, 0xdd, 0xa6, 0xdb, 0x4f, 0xe4}, &GlUniformMatrix4fv_In{})
+	registry.Add(binary.ID{0x21, 0xf8, 0x2c, 0x3b, 0x2e, 0xd2, 0x60, 0xb4, 0xcc, 0x40, 0xb2, 0x32, 0x46, 0x99, 0xec, 0xdd, 0xa6, 0xdb, 0x4f, 0xe4}, &GlUniformMatrix4fv_In{})
 	//struct gles.GlUniformMatrix4fv_Out { }
-	binary.Register(binary.ID{0x77, 0x16, 0x87, 0xa5, 0x23, 0xc4, 0xbf, 0x41, 0x43, 0x63, 0x43, 0x2f, 0x59, 0x23, 0x0a, 0xc4, 0x56, 0x82, 0x3a, 0x5c}, &GlUniformMatrix4fv_Out{})
+	registry.Add(binary.ID{0x77, 0x16, 0x87, 0xa5, 0x23, 0xc4, 0xbf, 0x41, 0x43, 0x63, 0x43, 0x2f, 0x59, 0x23, 0x0a, 0xc4, 0x56, 0x82, 0x3a, 0x5c}, &GlUniformMatrix4fv_Out{})
 	//struct gles.GlUnmapBuffer { Context:atom.ContextID, In:GlUnmapBuffer_In, Out:GlUnmapBuffer_Out }
-	binary.Register(binary.ID{0xee, 0xed, 0xef, 0x81, 0xe9, 0xe9, 0x64, 0x04, 0x90, 0x4b, 0xf7, 0xb9, 0xe7, 0xa3, 0x3e, 0x40, 0xe1, 0xa4, 0xa2, 0x90}, &GlUnmapBuffer{})
+	registry.Add(binary.ID{0xee, 0xed, 0xef, 0x81, 0xe9, 0xe9, 0x64, 0x04, 0x90, 0x4b, 0xf7, 0xb9, 0xe7, 0xa3, 0x3e, 0x40, 0xe1, 0xa4, 0xa2, 0x90}, &GlUnmapBuffer{})
 	//struct gles.GlUnmapBuffer_In { Target:MapBufferTarget }
-	binary.Register(binary.ID{0x04, 0x61, 0x89, 0x17, 0x52, 0x9f, 0xd1, 0x68, 0xec, 0xc2, 0xd4, 0x4f, 0x63, 0x08, 0x87, 0x5b, 0x0a, 0x3f, 0x0e, 0x23}, &GlUnmapBuffer_In{})
+	registry.Add(binary.ID{0x04, 0x61, 0x89, 0x17, 0x52, 0x9f, 0xd1, 0x68, 0xec, 0xc2, 0xd4, 0x4f, 0x63, 0x08, 0x87, 0x5b, 0x0a, 0x3f, 0x0e, 0x23}, &GlUnmapBuffer_In{})
 	//struct gles.GlUnmapBuffer_Out { }
-	binary.Register(binary.ID{0xe3, 0x0f, 0x16, 0x80, 0x49, 0x8b, 0x73, 0x18, 0x66, 0x49, 0xc4, 0x32, 0xdb, 0x05, 0x65, 0x47, 0xe3, 0x2d, 0xe5, 0xb5}, &GlUnmapBuffer_Out{})
+	registry.Add(binary.ID{0xe3, 0x0f, 0x16, 0x80, 0x49, 0x8b, 0x73, 0x18, 0x66, 0x49, 0xc4, 0x32, 0xdb, 0x05, 0x65, 0x47, 0xe3, 0x2d, 0xe5, 0xb5}, &GlUnmapBuffer_Out{})
 	//struct gles.GlUseProgram { Context:atom.ContextID, In:GlUseProgram_In, Out:GlUseProgram_Out }
-	binary.Register(binary.ID{0xb8, 0x7b, 0xb2, 0x77, 0x8e, 0x30, 0xf9, 0xd6, 0x23, 0xf1, 0xc9, 0x1c, 0x4e, 0xcc, 0x2c, 0x08, 0xeb, 0x14, 0x7c, 0x82}, &GlUseProgram{})
+	registry.Add(binary.ID{0xb8, 0x7b, 0xb2, 0x77, 0x8e, 0x30, 0xf9, 0xd6, 0x23, 0xf1, 0xc9, 0x1c, 0x4e, 0xcc, 0x2c, 0x08, 0xeb, 0x14, 0x7c, 0x82}, &GlUseProgram{})
 	//struct gles.GlUseProgram_In { Program:ProgramId }
-	binary.Register(binary.ID{0x8d, 0x0b, 0x5b, 0x32, 0xa7, 0x57, 0x2e, 0x3a, 0x94, 0x35, 0x4f, 0xac, 0x46, 0x2e, 0x9e, 0xa3, 0x08, 0xc3, 0x1a, 0x71}, &GlUseProgram_In{})
+	registry.Add(binary.ID{0x8d, 0x0b, 0x5b, 0x32, 0xa7, 0x57, 0x2e, 0x3a, 0x94, 0x35, 0x4f, 0xac, 0x46, 0x2e, 0x9e, 0xa3, 0x08, 0xc3, 0x1a, 0x71}, &GlUseProgram_In{})
 	//struct gles.GlUseProgram_Out { }
-	binary.Register(binary.ID{0x7b, 0x58, 0x53, 0xda, 0x22, 0xcf, 0xa5, 0xca, 0xb6, 0x13, 0x14, 0x4e, 0x88, 0xe6, 0x4c, 0xc3, 0x50, 0x20, 0x88, 0x5a}, &GlUseProgram_Out{})
+	registry.Add(binary.ID{0x7b, 0x58, 0x53, 0xda, 0x22, 0xcf, 0xa5, 0xca, 0xb6, 0x13, 0x14, 0x4e, 0x88, 0xe6, 0x4c, 0xc3, 0x50, 0x20, 0x88, 0x5a}, &GlUseProgram_Out{})
 	//struct gles.GlValidateProgram { Context:atom.ContextID, In:GlValidateProgram_In, Out:GlValidateProgram_Out }
-	binary.Register(binary.ID{0x08, 0x56, 0x18, 0x5b, 0x55, 0x5d, 0xfa, 0xd7, 0x16, 0x84, 0xb8, 0xe5, 0x73, 0x9b, 0x47, 0x87, 0x37, 0xa9, 0xf2, 0xf0}, &GlValidateProgram{})
+	registry.Add(binary.ID{0x08, 0x56, 0x18, 0x5b, 0x55, 0x5d, 0xfa, 0xd7, 0x16, 0x84, 0xb8, 0xe5, 0x73, 0x9b, 0x47, 0x87, 0x37, 0xa9, 0xf2, 0xf0}, &GlValidateProgram{})
 	//struct gles.GlValidateProgram_In { Program:ProgramId }
-	binary.Register(binary.ID{0xaa, 0x5a, 0xb2, 0xf1, 0xfb, 0x39, 0x33, 0xfa, 0x5b, 0xa7, 0x79, 0x2f, 0x8f, 0x45, 0x6b, 0xad, 0x1a, 0xd5, 0xac, 0xc5}, &GlValidateProgram_In{})
+	registry.Add(binary.ID{0xaa, 0x5a, 0xb2, 0xf1, 0xfb, 0x39, 0x33, 0xfa, 0x5b, 0xa7, 0x79, 0x2f, 0x8f, 0x45, 0x6b, 0xad, 0x1a, 0xd5, 0xac, 0xc5}, &GlValidateProgram_In{})
 	//struct gles.GlValidateProgram_Out { }
-	binary.Register(binary.ID{0xa1, 0xd8, 0xa4, 0xd2, 0xdb, 0xd7, 0x1c, 0xc0, 0x1a, 0x18, 0xa3, 0xdd, 0x30, 0x39, 0xa5, 0xc8, 0x9a, 0x7e, 0x85, 0x52}, &GlValidateProgram_Out{})
+	registry.Add(binary.ID{0xa1, 0xd8, 0xa4, 0xd2, 0xdb, 0xd7, 0x1c, 0xc0, 0x1a, 0x18, 0xa3, 0xdd, 0x30, 0x39, 0xa5, 0xc8, 0x9a, 0x7e, 0x85, 0x52}, &GlValidateProgram_Out{})
 	//struct gles.GlVertexAttrib1f { Context:atom.ContextID, In:GlVertexAttrib1f_In, Out:GlVertexAttrib1f_Out }
-	binary.Register(binary.ID{0xa8, 0xd5, 0xc8, 0xba, 0xf3, 0xee, 0x3e, 0x2b, 0x89, 0xae, 0x56, 0xc1, 0x6f, 0x64, 0xdf, 0xaa, 0x3c, 0xd5, 0x3f, 0x90}, &GlVertexAttrib1f{})
+	registry.Add(binary.ID{0xa8, 0xd5, 0xc8, 0xba, 0xf3, 0xee, 0x3e, 0x2b, 0x89, 0xae, 0x56, 0xc1, 0x6f, 0x64, 0xdf, 0xaa, 0x3c, 0xd5, 0x3f, 0x90}, &GlVertexAttrib1f{})
 	//struct gles.GlVertexAttrib1f_In { Location:AttributeLocation, Value0:float32 }
-	binary.Register(binary.ID{0xe1, 0x48, 0x40, 0x50, 0x5d, 0x06, 0x61, 0x38, 0x8d, 0x32, 0xbd, 0xe8, 0x1a, 0xb1, 0x87, 0xfd, 0x59, 0xc6, 0x0e, 0xa3}, &GlVertexAttrib1f_In{})
+	registry.Add(binary.ID{0xe1, 0x48, 0x40, 0x50, 0x5d, 0x06, 0x61, 0x38, 0x8d, 0x32, 0xbd, 0xe8, 0x1a, 0xb1, 0x87, 0xfd, 0x59, 0xc6, 0x0e, 0xa3}, &GlVertexAttrib1f_In{})
 	//struct gles.GlVertexAttrib1f_Out { }
-	binary.Register(binary.ID{0x20, 0x8b, 0x96, 0x91, 0x3f, 0x19, 0x58, 0x1a, 0x23, 0xda, 0x14, 0x92, 0xba, 0x4c, 0x41, 0x3f, 0xe1, 0x6e, 0xbd, 0xd7}, &GlVertexAttrib1f_Out{})
+	registry.Add(binary.ID{0x20, 0x8b, 0x96, 0x91, 0x3f, 0x19, 0x58, 0x1a, 0x23, 0xda, 0x14, 0x92, 0xba, 0x4c, 0x41, 0x3f, 0xe1, 0x6e, 0xbd, 0xd7}, &GlVertexAttrib1f_Out{})
 	//struct gles.GlVertexAttrib1fv { Context:atom.ContextID, In:GlVertexAttrib1fv_In, Out:GlVertexAttrib1fv_Out }
-	binary.Register(binary.ID{0x04, 0x51, 0x63, 0xc2, 0xf8, 0x93, 0x0e, 0x74, 0x69, 0x82, 0x59, 0x24, 0x4d, 0xf7, 0xaa, 0x1d, 0xbf, 0x0f, 0xd4, 0xc6}, &GlVertexAttrib1fv{})
+	registry.Add(binary.ID{0x04, 0x51, 0x63, 0xc2, 0xf8, 0x93, 0x0e, 0x74, 0x69, 0x82, 0x59, 0x24, 0x4d, 0xf7, 0xaa, 0x1d, 0xbf, 0x0f, 0xd4, 0xc6}, &GlVertexAttrib1fv{})
 	//struct gles.GlVertexAttrib1fv_In { Location:AttributeLocation, Value:F32Array }
-	binary.Register(binary.ID{0x88, 0xad, 0x4d, 0xe6, 0xd2, 0x2e, 0xf2, 0x67, 0x4c, 0xde, 0xd0, 0x8d, 0x8e, 0x7e, 0xda, 0xb4, 0x91, 0x17, 0x02, 0xff}, &GlVertexAttrib1fv_In{})
+	registry.Add(binary.ID{0x88, 0xad, 0x4d, 0xe6, 0xd2, 0x2e, 0xf2, 0x67, 0x4c, 0xde, 0xd0, 0x8d, 0x8e, 0x7e, 0xda, 0xb4, 0x91, 0x17, 0x02, 0xff}, &GlVertexAttrib1fv_In{})
 	//struct gles.GlVertexAttrib1fv_Out { }
-	binary.Register(binary.ID{0x55, 0x01, 0x89, 0xc6, 0xb0, 0x55, 0xb8, 0x94, 0x1a, 0x04, 0x3b, 0x63, 0x6f, 0x30, 0x5c, 0x0c, 0x42, 0xe4, 0xf0, 0x80}, &GlVertexAttrib1fv_Out{})
+	registry.Add(binary.ID{0x55, 0x01, 0x89, 0xc6, 0xb0, 0x55, 0xb8, 0x94, 0x1a, 0x04, 0x3b, 0x63, 0x6f, 0x30, 0x5c, 0x0c, 0x42, 0xe4, 0xf0, 0x80}, &GlVertexAttrib1fv_Out{})
 	//struct gles.GlVertexAttrib2f { Context:atom.ContextID, In:GlVertexAttrib2f_In, Out:GlVertexAttrib2f_Out }
-	binary.Register(binary.ID{0xc3, 0xf3, 0xfc, 0xbb, 0x72, 0xf4, 0x58, 0xb4, 0x56, 0x0f, 0x2e, 0x76, 0x18, 0xbc, 0x14, 0x22, 0x3a, 0x06, 0x83, 0x2b}, &GlVertexAttrib2f{})
+	registry.Add(binary.ID{0xc3, 0xf3, 0xfc, 0xbb, 0x72, 0xf4, 0x58, 0xb4, 0x56, 0x0f, 0x2e, 0x76, 0x18, 0xbc, 0x14, 0x22, 0x3a, 0x06, 0x83, 0x2b}, &GlVertexAttrib2f{})
 	//struct gles.GlVertexAttrib2f_In { Location:AttributeLocation, Value0:float32, Value1:float32 }
-	binary.Register(binary.ID{0x3f, 0x6c, 0xc4, 0x73, 0x43, 0x90, 0x09, 0x7e, 0x0a, 0x5d, 0xc0, 0xa5, 0x94, 0x20, 0x65, 0xf6, 0xd2, 0x77, 0x61, 0xff}, &GlVertexAttrib2f_In{})
+	registry.Add(binary.ID{0x3f, 0x6c, 0xc4, 0x73, 0x43, 0x90, 0x09, 0x7e, 0x0a, 0x5d, 0xc0, 0xa5, 0x94, 0x20, 0x65, 0xf6, 0xd2, 0x77, 0x61, 0xff}, &GlVertexAttrib2f_In{})
 	//struct gles.GlVertexAttrib2f_Out { }
-	binary.Register(binary.ID{0x71, 0xdc, 0x6e, 0x23, 0xcb, 0x43, 0xe6, 0x68, 0x0f, 0x20, 0x5c, 0x0b, 0x4f, 0x3b, 0x9c, 0xc5, 0xef, 0x5e, 0x66, 0xba}, &GlVertexAttrib2f_Out{})
+	registry.Add(binary.ID{0x71, 0xdc, 0x6e, 0x23, 0xcb, 0x43, 0xe6, 0x68, 0x0f, 0x20, 0x5c, 0x0b, 0x4f, 0x3b, 0x9c, 0xc5, 0xef, 0x5e, 0x66, 0xba}, &GlVertexAttrib2f_Out{})
 	//struct gles.GlVertexAttrib2fv { Context:atom.ContextID, In:GlVertexAttrib2fv_In, Out:GlVertexAttrib2fv_Out }
-	binary.Register(binary.ID{0x78, 0x5e, 0x06, 0x2d, 0x89, 0x99, 0xc4, 0xa9, 0x98, 0xe8, 0xf1, 0xab, 0x92, 0x3c, 0x10, 0x2c, 0x9c, 0x07, 0xdf, 0xdf}, &GlVertexAttrib2fv{})
+	registry.Add(binary.ID{0x78, 0x5e, 0x06, 0x2d, 0x89, 0x99, 0xc4, 0xa9, 0x98, 0xe8, 0xf1, 0xab, 0x92, 0x3c, 0x10, 0x2c, 0x9c, 0x07, 0xdf, 0xdf}, &GlVertexAttrib2fv{})
 	//struct gles.GlVertexAttrib2fv_In { Location:AttributeLocation, Value:F32Array }
-	binary.Register(binary.ID{0x4c, 0x60, 0x24, 0x24, 0xea, 0x47, 0x61, 0x49, 0xbb, 0x56, 0x18, 0x6f, 0x3a, 0x5b, 0x17, 0x7f, 0x00, 0xa0, 0x0f, 0x33}, &GlVertexAttrib2fv_In{})
+	registry.Add(binary.ID{0x4c, 0x60, 0x24, 0x24, 0xea, 0x47, 0x61, 0x49, 0xbb, 0x56, 0x18, 0x6f, 0x3a, 0x5b, 0x17, 0x7f, 0x00, 0xa0, 0x0f, 0x33}, &GlVertexAttrib2fv_In{})
 	//struct gles.GlVertexAttrib2fv_Out { }
-	binary.Register(binary.ID{0x2c, 0xc1, 0x2e, 0xc1, 0xaa, 0x90, 0xa8, 0x50, 0x75, 0x5c, 0xf7, 0x83, 0x23, 0x2d, 0xb0, 0x67, 0x6b, 0x4f, 0x06, 0xa0}, &GlVertexAttrib2fv_Out{})
+	registry.Add(binary.ID{0x2c, 0xc1, 0x2e, 0xc1, 0xaa, 0x90, 0xa8, 0x50, 0x75, 0x5c, 0xf7, 0x83, 0x23, 0x2d, 0xb0, 0x67, 0x6b, 0x4f, 0x06, 0xa0}, &GlVertexAttrib2fv_Out{})
 	//struct gles.GlVertexAttrib3f { Context:atom.ContextID, In:GlVertexAttrib3f_In, Out:GlVertexAttrib3f_Out }
-	binary.Register(binary.ID{0xff, 0xa5, 0x92, 0x84, 0xe2, 0x69, 0xbc, 0xc8, 0x37, 0xd9, 0xbb, 0x2a, 0xb3, 0x80, 0x98, 0x0f, 0x3d, 0x92, 0x59, 0x21}, &GlVertexAttrib3f{})
+	registry.Add(binary.ID{0xff, 0xa5, 0x92, 0x84, 0xe2, 0x69, 0xbc, 0xc8, 0x37, 0xd9, 0xbb, 0x2a, 0xb3, 0x80, 0x98, 0x0f, 0x3d, 0x92, 0x59, 0x21}, &GlVertexAttrib3f{})
 	//struct gles.GlVertexAttrib3f_In { Location:AttributeLocation, Value0:float32, Value1:float32, Value2:float32 }
-	binary.Register(binary.ID{0x35, 0xac, 0x51, 0xb2, 0xe6, 0x05, 0xde, 0xf1, 0x7d, 0xcf, 0xbd, 0x26, 0xc9, 0x3b, 0xfd, 0x0f, 0x85, 0xd1, 0x20, 0x5b}, &GlVertexAttrib3f_In{})
+	registry.Add(binary.ID{0x35, 0xac, 0x51, 0xb2, 0xe6, 0x05, 0xde, 0xf1, 0x7d, 0xcf, 0xbd, 0x26, 0xc9, 0x3b, 0xfd, 0x0f, 0x85, 0xd1, 0x20, 0x5b}, &GlVertexAttrib3f_In{})
 	//struct gles.GlVertexAttrib3f_Out { }
-	binary.Register(binary.ID{0x45, 0x75, 0x44, 0x7f, 0x03, 0x27, 0x64, 0xf4, 0x7b, 0xda, 0x3f, 0xb5, 0xf5, 0xf7, 0x3d, 0x1f, 0xfd, 0xf1, 0x70, 0xf3}, &GlVertexAttrib3f_Out{})
+	registry.Add(binary.ID{0x45, 0x75, 0x44, 0x7f, 0x03, 0x27, 0x64, 0xf4, 0x7b, 0xda, 0x3f, 0xb5, 0xf5, 0xf7, 0x3d, 0x1f, 0xfd, 0xf1, 0x70, 0xf3}, &GlVertexAttrib3f_Out{})
 	//struct gles.GlVertexAttrib3fv { Context:atom.ContextID, In:GlVertexAttrib3fv_In, Out:GlVertexAttrib3fv_Out }
-	binary.Register(binary.ID{0xbb, 0x29, 0xae, 0x75, 0x84, 0x06, 0x34, 0x18, 0x74, 0x0e, 0x35, 0x73, 0xcd, 0x9d, 0xb2, 0x55, 0xb0, 0x55, 0x23, 0x73}, &GlVertexAttrib3fv{})
+	registry.Add(binary.ID{0xbb, 0x29, 0xae, 0x75, 0x84, 0x06, 0x34, 0x18, 0x74, 0x0e, 0x35, 0x73, 0xcd, 0x9d, 0xb2, 0x55, 0xb0, 0x55, 0x23, 0x73}, &GlVertexAttrib3fv{})
 	//struct gles.GlVertexAttrib3fv_In { Location:AttributeLocation, Value:F32Array }
-	binary.Register(binary.ID{0xf6, 0x14, 0x6d, 0x0c, 0x87, 0x68, 0xe9, 0x04, 0xe4, 0x96, 0xcf, 0xf0, 0x13, 0x64, 0xfe, 0x24, 0xb4, 0x14, 0x0a, 0x71}, &GlVertexAttrib3fv_In{})
+	registry.Add(binary.ID{0xf6, 0x14, 0x6d, 0x0c, 0x87, 0x68, 0xe9, 0x04, 0xe4, 0x96, 0xcf, 0xf0, 0x13, 0x64, 0xfe, 0x24, 0xb4, 0x14, 0x0a, 0x71}, &GlVertexAttrib3fv_In{})
 	//struct gles.GlVertexAttrib3fv_Out { }
-	binary.Register(binary.ID{0xc5, 0x14, 0x1b, 0x63, 0x28, 0xef, 0xea, 0x95, 0xc4, 0x64, 0x36, 0xba, 0xe5, 0xe1, 0x76, 0xad, 0x56, 0x4e, 0x06, 0x71}, &GlVertexAttrib3fv_Out{})
+	registry.Add(binary.ID{0xc5, 0x14, 0x1b, 0x63, 0x28, 0xef, 0xea, 0x95, 0xc4, 0x64, 0x36, 0xba, 0xe5, 0xe1, 0x76, 0xad, 0x56, 0x4e, 0x06, 0x71}, &GlVertexAttrib3fv_Out{})
 	//struct gles.GlVertexAttrib4f { Context:atom.ContextID, In:GlVertexAttrib4f_In, Out:GlVertexAttrib4f_Out }
-	binary.Register(binary.ID{0x49, 0x97, 0xf6, 0xeb, 0x08, 0x41, 0x9c, 0x45, 0xb5, 0x95, 0xec, 0xf7, 0x25, 0xab, 0xe0, 0xb4, 0x45, 0x38, 0xbf, 0x9f}, &GlVertexAttrib4f{})
+	registry.Add(binary.ID{0x49, 0x97, 0xf6, 0xeb, 0x08, 0x41, 0x9c, 0x45, 0xb5, 0x95, 0xec, 0xf7, 0x25, 0xab, 0xe0, 0xb4, 0x45, 0x38, 0xbf, 0x9f}, &GlVertexAttrib4f{})
 	//struct gles.GlVertexAttrib4f_In { Location:AttributeLocation, Value0:float32, Value1:float32, Value2:float32, Value3:float32 }
-	binary.Register(binary.ID{0x6c, 0xda, 0xe0, 0xb6, 0x13, 0x68, 0x54, 0x8d, 0x36, 0xbf, 0x75, 0xfd, 0xbd, 0x87, 0xcf, 0xda, 0x35, 0xb2, 0x7a, 0x29}, &GlVertexAttrib4f_In{})
+	registry.Add(binary.ID{0x6c, 0xda, 0xe0, 0xb6, 0x13, 0x68, 0x54, 0x8d, 0x36, 0xbf, 0x75, 0xfd, 0xbd, 0x87, 0xcf, 0xda, 0x35, 0xb2, 0x7a, 0x29}, &GlVertexAttrib4f_In{})
 	//struct gles.GlVertexAttrib4f_Out { }
-	binary.Register(binary.ID{0x62, 0xeb, 0x38, 0x4e, 0xec, 0x88, 0x8a, 0xd5, 0xe1, 0x26, 0xb1, 0xa4, 0x61, 0x75, 0xac, 0x0e, 0xc2, 0x52, 0x63, 0xb4}, &GlVertexAttrib4f_Out{})
+	registry.Add(binary.ID{0x62, 0xeb, 0x38, 0x4e, 0xec, 0x88, 0x8a, 0xd5, 0xe1, 0x26, 0xb1, 0xa4, 0x61, 0x75, 0xac, 0x0e, 0xc2, 0x52, 0x63, 0xb4}, &GlVertexAttrib4f_Out{})
 	//struct gles.GlVertexAttrib4fv { Context:atom.ContextID, In:GlVertexAttrib4fv_In, Out:GlVertexAttrib4fv_Out }
-	binary.Register(binary.ID{0xb3, 0xf5, 0xfe, 0x68, 0x2c, 0x3d, 0x0c, 0x47, 0x1e, 0xc3, 0x50, 0xfc, 0xf6, 0x76, 0x89, 0xfd, 0x78, 0x07, 0x03, 0xe8}, &GlVertexAttrib4fv{})
+	registry.Add(binary.ID{0xb3, 0xf5, 0xfe, 0x68, 0x2c, 0x3d, 0x0c, 0x47, 0x1e, 0xc3, 0x50, 0xfc, 0xf6, 0x76, 0x89, 0xfd, 0x78, 0x07, 0x03, 0xe8}, &GlVertexAttrib4fv{})
 	//struct gles.GlVertexAttrib4fv_In { Location:AttributeLocation, Value:F32Array }
-	binary.Register(binary.ID{0x71, 0x67, 0xde, 0xe7, 0xdd, 0x46, 0x63, 0xd8, 0xdb, 0x48, 0x3f, 0xac, 0xd6, 0x96, 0x2a, 0xac, 0xd6, 0x68, 0x84, 0x74}, &GlVertexAttrib4fv_In{})
+	registry.Add(binary.ID{0x71, 0x67, 0xde, 0xe7, 0xdd, 0x46, 0x63, 0xd8, 0xdb, 0x48, 0x3f, 0xac, 0xd6, 0x96, 0x2a, 0xac, 0xd6, 0x68, 0x84, 0x74}, &GlVertexAttrib4fv_In{})
 	//struct gles.GlVertexAttrib4fv_Out { }
-	binary.Register(binary.ID{0x15, 0x79, 0x27, 0x7e, 0xf1, 0x46, 0x91, 0x84, 0x9f, 0x37, 0x06, 0x40, 0x16, 0x6b, 0xc0, 0x91, 0x0d, 0x6d, 0x98, 0x61}, &GlVertexAttrib4fv_Out{})
+	registry.Add(binary.ID{0x15, 0x79, 0x27, 0x7e, 0xf1, 0x46, 0x91, 0x84, 0x9f, 0x37, 0x06, 0x40, 0x16, 0x6b, 0xc0, 0x91, 0x0d, 0x6d, 0x98, 0x61}, &GlVertexAttrib4fv_Out{})
 	//struct gles.GlVertexAttribPointer { Context:atom.ContextID, In:GlVertexAttribPointer_In, Out:GlVertexAttribPointer_Out }
-	binary.Register(binary.ID{0x96, 0x59, 0xc0, 0xe4, 0xa1, 0x19, 0x7e, 0x40, 0x67, 0x2e, 0x56, 0xa5, 0xc4, 0x9d, 0xac, 0xbf, 0xa2, 0x05, 0x07, 0x17}, &GlVertexAttribPointer{})
+	registry.Add(binary.ID{0x96, 0x59, 0xc0, 0xe4, 0xa1, 0x19, 0x7e, 0x40, 0x67, 0x2e, 0x56, 0xa5, 0xc4, 0x9d, 0xac, 0xbf, 0xa2, 0x05, 0x07, 0x17}, &GlVertexAttribPointer{})
 	//struct gles.GlVertexAttribPointer_In { Location:AttributeLocation, Size:VertexAttribSize, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:VertexPointer }
-	binary.Register(binary.ID{0x48, 0x33, 0xf8, 0x52, 0x50, 0x06, 0xf0, 0xfc, 0xa4, 0x7e, 0x73, 0x37, 0x29, 0x1f, 0x40, 0x61, 0x3c, 0x14, 0x20, 0xca}, &GlVertexAttribPointer_In{})
+	registry.Add(binary.ID{0x48, 0x33, 0xf8, 0x52, 0x50, 0x06, 0xf0, 0xfc, 0xa4, 0x7e, 0x73, 0x37, 0x29, 0x1f, 0x40, 0x61, 0x3c, 0x14, 0x20, 0xca}, &GlVertexAttribPointer_In{})
 	//struct gles.GlVertexAttribPointer_Out { }
-	binary.Register(binary.ID{0x9c, 0x5e, 0xd0, 0x73, 0xcf, 0x2d, 0x7a, 0xe1, 0x5e, 0x9a, 0x37, 0x64, 0x8e, 0x56, 0x08, 0x43, 0xde, 0x0e, 0x07, 0x7d}, &GlVertexAttribPointer_Out{})
+	registry.Add(binary.ID{0x9c, 0x5e, 0xd0, 0x73, 0xcf, 0x2d, 0x7a, 0xe1, 0x5e, 0x9a, 0x37, 0x64, 0x8e, 0x56, 0x08, 0x43, 0xde, 0x0e, 0x07, 0x7d}, &GlVertexAttribPointer_Out{})
 	//struct gles.GlViewport { Context:atom.ContextID, In:GlViewport_In, Out:GlViewport_Out }
-	binary.Register(binary.ID{0xf1, 0xd5, 0x40, 0xd1, 0x92, 0xd3, 0xf9, 0x0b, 0x6e, 0x37, 0xb4, 0xff, 0x9e, 0x65, 0xd5, 0xaf, 0x81, 0x0e, 0x94, 0x7f}, &GlViewport{})
+	registry.Add(binary.ID{0xf1, 0xd5, 0x40, 0xd1, 0x92, 0xd3, 0xf9, 0x0b, 0x6e, 0x37, 0xb4, 0xff, 0x9e, 0x65, 0xd5, 0xaf, 0x81, 0x0e, 0x94, 0x7f}, &GlViewport{})
 	//struct gles.GlViewport_In { X:int32, Y:int32, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x7e, 0x49, 0x10, 0xf4, 0x3e, 0xd9, 0xc0, 0xb8, 0x35, 0xb5, 0xf7, 0x5f, 0xca, 0xb0, 0x54, 0xeb, 0x9f, 0x49, 0xaa, 0xe9}, &GlViewport_In{})
+	registry.Add(binary.ID{0x7e, 0x49, 0x10, 0xf4, 0x3e, 0xd9, 0xc0, 0xb8, 0x35, 0xb5, 0xf7, 0x5f, 0xca, 0xb0, 0x54, 0xeb, 0x9f, 0x49, 0xaa, 0xe9}, &GlViewport_In{})
 	//struct gles.GlViewport_Out { }
-	binary.Register(binary.ID{0x9d, 0xb3, 0xe9, 0xfb, 0x9a, 0xe7, 0xe9, 0x91, 0xfb, 0xdb, 0xf8, 0xbf, 0x8d, 0x61, 0x90, 0x63, 0xde, 0xc4, 0xde, 0xb4}, &GlViewport_Out{})
+	registry.Add(binary.ID{0x9d, 0xb3, 0xe9, 0xfb, 0x9a, 0xe7, 0xe9, 0x91, 0xfb, 0xdb, 0xf8, 0xbf, 0x8d, 0x61, 0x90, 0x63, 0xde, 0xc4, 0xde, 0xb4}, &GlViewport_Out{})
 	//struct gles.Globals { Blending:BlendState, Rasterizing:RasterizerState, Clearing:ClearState, BoundFramebuffers:FramebufferId_FramebufferTargetMap, BoundRenderbuffers:RenderbufferId_RenderbufferTargetMap, BoundBuffers:BufferId_BufferTargetMap, BoundProgram:ProgramId, BoundVertexArray:VertexArrayId, VertexAttributeArrays:VertexAttributeArrayRef_AttributeLocationMap, TextureUnits:TextureId_TextureTargetMap_TextureUnitMap, ActiveTextureUnit:TextureUnit, Capabilities:Bool_CapabilityMap, Internals:InternalState, GenerateMipmapHint:HintMode, PixelStorage:S32_PixelStoreParameterMap, Instances:Objects }
-	binary.Register(binary.ID{0x88, 0x47, 0x03, 0x26, 0x87, 0xd9, 0xff, 0x51, 0xec, 0x45, 0x4c, 0x52, 0xb2, 0x35, 0x00, 0x8a, 0x9e, 0x51, 0x96, 0x01}, &Globals{})
+	registry.Add(binary.ID{0x88, 0x47, 0x03, 0x26, 0x87, 0xd9, 0xff, 0x51, 0xec, 0x45, 0x4c, 0x52, 0xb2, 0x35, 0x00, 0x8a, 0x9e, 0x51, 0x96, 0x01}, &Globals{})
 	//struct gles.Image { CreatedAt:atom.ID, Width:int32, Height:int32, Data:memory.Memory, Size:int32, Format:ImageTexelFormat }
-	binary.Register(binary.ID{0x0e, 0x0b, 0x0e, 0x63, 0xfb, 0x8c, 0x5e, 0xd9, 0x54, 0x8e, 0xe0, 0x29, 0x6f, 0xdd, 0x2f, 0xc3, 0x41, 0xde, 0xce, 0xbc}, &Image{})
+	registry.Add(binary.ID{0x0e, 0x0b, 0x0e, 0x63, 0xfb, 0x8c, 0x5e, 0xd9, 0x54, 0x8e, 0xe0, 0x29, 0x6f, 0xdd, 0x2f, 0xc3, 0x41, 0xde, 0xce, 0xbc}, &Image{})
 	//struct gles.Init { Context:atom.ContextID, In:Init_In, Out:Init_Out }
-	binary.Register(binary.ID{0x01, 0xb4, 0x25, 0x6a, 0x7c, 0x98, 0x71, 0x55, 0x60, 0x6d, 0x55, 0x68, 0x66, 0x1f, 0x55, 0xe9, 0x12, 0x8e, 0x77, 0x2f}, &Init{})
+	registry.Add(binary.ID{0x01, 0xb4, 0x25, 0x6a, 0x7c, 0x98, 0x71, 0x55, 0x60, 0x6d, 0x55, 0x68, 0x66, 0x1f, 0x55, 0xe9, 0x12, 0x8e, 0x77, 0x2f}, &Init{})
 	//struct gles.Init_In { Width:int32, Height:int32, ColorFmt:RenderbufferFormat, DepthFmt:RenderbufferFormat, StencilFmt:RenderbufferFormat }
-	binary.Register(binary.ID{0xe8, 0x6b, 0xda, 0xfd, 0xc8, 0x96, 0xfa, 0xda, 0x12, 0xa7, 0xf3, 0x19, 0x54, 0xc3, 0xc5, 0xb2, 0x70, 0x44, 0x89, 0x1f}, &Init_In{})
+	registry.Add(binary.ID{0xe8, 0x6b, 0xda, 0xfd, 0xc8, 0x96, 0xfa, 0xda, 0x12, 0xa7, 0xf3, 0x19, 0x54, 0xc3, 0xc5, 0xb2, 0x70, 0x44, 0x89, 0x1f}, &Init_In{})
 	//struct gles.Init_Out { }
-	binary.Register(binary.ID{0x1c, 0x59, 0x3e, 0x50, 0x2c, 0xf5, 0xc0, 0x1a, 0x0a, 0x83, 0xa9, 0xae, 0x4e, 0xd6, 0x35, 0xe6, 0x14, 0xce, 0xd0, 0x67}, &Init_Out{})
+	registry.Add(binary.ID{0x1c, 0x59, 0x3e, 0x50, 0x2c, 0xf5, 0xc0, 0x1a, 0x0a, 0x83, 0xa9, 0xae, 0x4e, 0xd6, 0x35, 0xe6, 0x14, 0xce, 0xd0, 0x67}, &Init_Out{})
 	//struct gles.InternalState { CreatedAt:atom.ID, NilBuffer:BufferId, NilTexture:TextureId, NilRenderbuffer:RenderbufferId, Backbuffer:FramebufferId }
-	binary.Register(binary.ID{0xc7, 0x77, 0xff, 0x0d, 0x4e, 0x44, 0xe9, 0x19, 0x10, 0xde, 0x48, 0x30, 0xfa, 0xf3, 0x5b, 0xf0, 0x93, 0x71, 0x49, 0x9e}, &InternalState{})
+	registry.Add(binary.ID{0xc7, 0x77, 0xff, 0x0d, 0x4e, 0x44, 0xe9, 0x19, 0x10, 0xde, 0x48, 0x30, 0xfa, 0xf3, 0x5b, 0xf0, 0x93, 0x71, 0x49, 0x9e}, &InternalState{})
 	//struct gles.Mat2f { CreatedAt:atom.ID, Col0:Vec2f, Col1:Vec2f }
-	binary.Register(binary.ID{0x8a, 0xda, 0xb2, 0x20, 0xfa, 0xe4, 0xf7, 0x80, 0x3a, 0x25, 0xf4, 0xbf, 0xbc, 0x97, 0xea, 0x48, 0x14, 0xed, 0xcb, 0x98}, &Mat2f{})
+	registry.Add(binary.ID{0x8a, 0xda, 0xb2, 0x20, 0xfa, 0xe4, 0xf7, 0x80, 0x3a, 0x25, 0xf4, 0xbf, 0xbc, 0x97, 0xea, 0x48, 0x14, 0xed, 0xcb, 0x98}, &Mat2f{})
 	//struct gles.Mat3f { CreatedAt:atom.ID, Col0:Vec3f, Col1:Vec3f, Col2:Vec3f }
-	binary.Register(binary.ID{0x2c, 0xe7, 0xc3, 0x90, 0x92, 0x9b, 0xa6, 0xc1, 0x86, 0x6e, 0x89, 0xc7, 0x16, 0x6d, 0x9f, 0x83, 0x54, 0x64, 0x40, 0x3a}, &Mat3f{})
+	registry.Add(binary.ID{0x2c, 0xe7, 0xc3, 0x90, 0x92, 0x9b, 0xa6, 0xc1, 0x86, 0x6e, 0x89, 0xc7, 0x16, 0x6d, 0x9f, 0x83, 0x54, 0x64, 0x40, 0x3a}, &Mat3f{})
 	//struct gles.Mat4f { CreatedAt:atom.ID, Col0:Vec4f, Col1:Vec4f, Col2:Vec4f, Col3:Vec4f }
-	binary.Register(binary.ID{0x5c, 0x2f, 0x64, 0xb8, 0x4e, 0xf0, 0xa8, 0x30, 0x10, 0x31, 0x81, 0x75, 0xb7, 0x82, 0xf3, 0x8f, 0x70, 0x68, 0x83, 0xdc}, &Mat4f{})
+	registry.Add(binary.ID{0x5c, 0x2f, 0x64, 0xb8, 0x4e, 0xf0, 0xa8, 0x30, 0x10, 0x31, 0x81, 0x75, 0xb7, 0x82, 0xf3, 0x8f, 0x70, 0x68, 0x83, 0xdc}, &Mat4f{})
 	//struct gles.Objects { CreatedAt:atom.ID, Renderbuffers:RenderbufferRef_RenderbufferIdMap, Textures:TextureRef_TextureIdMap, Framebuffers:FramebufferRef_FramebufferIdMap, Buffers:BufferRef_BufferIdMap, Shaders:ShaderRef_ShaderIdMap, Programs:ProgramRef_ProgramIdMap, VertexArrays:VertexArrayRef_VertexArrayIdMap, Queries:QueryRef_QueryIdMap }
-	binary.Register(binary.ID{0xa0, 0x1f, 0x0b, 0x4e, 0x99, 0x6a, 0x5a, 0xfc, 0x8d, 0xc0, 0x1d, 0x01, 0xea, 0x67, 0x5f, 0x86, 0x0d, 0x79, 0x47, 0xe4}, &Objects{})
+	registry.Add(binary.ID{0xa0, 0x1f, 0x0b, 0x4e, 0x99, 0x6a, 0x5a, 0xfc, 0x8d, 0xc0, 0x1d, 0x01, 0xea, 0x67, 0x5f, 0x86, 0x0d, 0x79, 0x47, 0xe4}, &Objects{})
 	//struct gles.Program { CreatedAt:atom.ID, Shaders:ShaderId_ShaderTypeMap, Linked:bool, Binary:memory.Memory, AttributeBindings:AttributeLocation_stringMap, Attributes:VertexAttribute_s32Map, Uniforms:Uniform_UniformLocationMap, InfoLog:string }
-	binary.Register(binary.ID{0x75, 0xc1, 0x45, 0x72, 0x4a, 0x8b, 0x39, 0xea, 0x23, 0xf7, 0x9e, 0xc2, 0xa4, 0x0d, 0xb5, 0xf3, 0xfd, 0x51, 0x5d, 0x67}, &Program{})
+	registry.Add(binary.ID{0x75, 0xc1, 0x45, 0x72, 0x4a, 0x8b, 0x39, 0xea, 0x23, 0xf7, 0x9e, 0xc2, 0xa4, 0x0d, 0xb5, 0xf3, 0xfd, 0x51, 0x5d, 0x67}, &Program{})
 	//struct gles.Query { CreatedAt:atom.ID }
-	binary.Register(binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}, &Query{})
+	registry.Add(binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}, &Query{})
 	//struct gles.RasterizerState { CreatedAt:atom.ID, DepthMask:bool, DepthTestFunction:TestFunction, DepthNear:float32, DepthFar:float32, ColorMaskRed:bool, ColorMaskGreen:bool, ColorMaskBlue:bool, ColorMaskAlpha:bool, StencilMask:U32_FaceModeMap, Viewport:Rect, Scissor:Rect, FrontFace:FaceOrientation, CullFace:FaceMode, LineWidth:float32, PolygonOffsetFactor:float32, PolygonOffsetUnits:float32, SampleCoverageValue:float32, SampleCoverageInvert:bool }
-	binary.Register(binary.ID{0x83, 0xef, 0x5b, 0xb5, 0xd4, 0xd5, 0x55, 0x96, 0x28, 0xf8, 0x5b, 0x5b, 0x40, 0xfe, 0x1e, 0xf9, 0x9a, 0x50, 0x8c, 0xcf}, &RasterizerState{})
+	registry.Add(binary.ID{0x83, 0xef, 0x5b, 0xb5, 0xd4, 0xd5, 0x55, 0x96, 0x28, 0xf8, 0x5b, 0x5b, 0x40, 0xfe, 0x1e, 0xf9, 0x9a, 0x50, 0x8c, 0xcf}, &RasterizerState{})
 	//struct gles.Rect { CreatedAt:atom.ID, X:int32, Y:int32, Width:int32, Height:int32 }
-	binary.Register(binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}, &Rect{})
+	registry.Add(binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}, &Rect{})
 	//struct gles.Renderbuffer { CreatedAt:atom.ID, Width:int32, Height:int32, Data:memory.Memory, Format:RenderbufferFormat }
-	binary.Register(binary.ID{0xea, 0xc8, 0x26, 0xcf, 0x71, 0xc6, 0x70, 0x46, 0x65, 0x8a, 0x99, 0x41, 0x86, 0xee, 0xbe, 0xc5, 0xd3, 0x9e, 0xcc, 0xf4}, &Renderbuffer{})
+	registry.Add(binary.ID{0xea, 0xc8, 0x26, 0xcf, 0x71, 0xc6, 0x70, 0x46, 0x65, 0x8a, 0x99, 0x41, 0x86, 0xee, 0xbe, 0xc5, 0xd3, 0x9e, 0xcc, 0xf4}, &Renderbuffer{})
 	//struct gles.Shader { CreatedAt:atom.ID, Binary:memory.Memory, Compiled:bool, Deletable:bool, InfoLog:string, Source:StringArray, Type:ShaderType }
-	binary.Register(binary.ID{0x37, 0xbc, 0x5f, 0x3b, 0x2f, 0x8e, 0x9f, 0xf1, 0x9d, 0x91, 0x57, 0xe5, 0xfc, 0xac, 0x87, 0x89, 0xa0, 0x31, 0x0d, 0xad}, &Shader{})
+	registry.Add(binary.ID{0x37, 0xbc, 0x5f, 0x3b, 0x2f, 0x8e, 0x9f, 0xf1, 0x9d, 0x91, 0x57, 0xe5, 0xfc, 0xac, 0x87, 0x89, 0xa0, 0x31, 0x0d, 0xad}, &Shader{})
 	//struct gles.StartTimer { Context:atom.ContextID, In:StartTimer_In, Out:StartTimer_Out }
-	binary.Register(binary.ID{0xaf, 0x4a, 0xdd, 0x9d, 0xb8, 0x9f, 0x81, 0xbe, 0x3d, 0x17, 0x91, 0x79, 0xaa, 0x3c, 0xc5, 0xf7, 0x41, 0x68, 0x8d, 0x1f}, &StartTimer{})
+	registry.Add(binary.ID{0xaf, 0x4a, 0xdd, 0x9d, 0xb8, 0x9f, 0x81, 0xbe, 0x3d, 0x17, 0x91, 0x79, 0xaa, 0x3c, 0xc5, 0xf7, 0x41, 0x68, 0x8d, 0x1f}, &StartTimer{})
 	//struct gles.StartTimer_In { Index:uint8 }
-	binary.Register(binary.ID{0xbe, 0xaa, 0x1d, 0x4c, 0xd4, 0x92, 0xf8, 0x96, 0x61, 0x2c, 0x32, 0x9d, 0x43, 0xd5, 0x6d, 0x02, 0x15, 0xb0, 0xf5, 0xdd}, &StartTimer_In{})
+	registry.Add(binary.ID{0xbe, 0xaa, 0x1d, 0x4c, 0xd4, 0x92, 0xf8, 0x96, 0x61, 0x2c, 0x32, 0x9d, 0x43, 0xd5, 0x6d, 0x02, 0x15, 0xb0, 0xf5, 0xdd}, &StartTimer_In{})
 	//struct gles.StartTimer_Out { }
-	binary.Register(binary.ID{0xcb, 0x42, 0x86, 0xbc, 0xef, 0xc2, 0x17, 0xa3, 0xe1, 0x3e, 0xfa, 0x6a, 0x36, 0xc2, 0xfb, 0x35, 0xe8, 0x9f, 0x7b, 0xa0}, &StartTimer_Out{})
+	registry.Add(binary.ID{0xcb, 0x42, 0x86, 0xbc, 0xef, 0xc2, 0x17, 0xa3, 0xe1, 0x3e, 0xfa, 0x6a, 0x36, 0xc2, 0xfb, 0x35, 0xe8, 0x9f, 0x7b, 0xa0}, &StartTimer_Out{})
 	//struct gles.StopTimer { Context:atom.ContextID, In:StopTimer_In, Out:StopTimer_Out }
-	binary.Register(binary.ID{0xd8, 0x6e, 0x7c, 0x71, 0xb6, 0x47, 0xae, 0x24, 0x19, 0xf5, 0x71, 0xce, 0x87, 0x9d, 0xfb, 0x01, 0xc5, 0xc5, 0x47, 0xed}, &StopTimer{})
+	registry.Add(binary.ID{0xd8, 0x6e, 0x7c, 0x71, 0xb6, 0x47, 0xae, 0x24, 0x19, 0xf5, 0x71, 0xce, 0x87, 0x9d, 0xfb, 0x01, 0xc5, 0xc5, 0x47, 0xed}, &StopTimer{})
 	//struct gles.StopTimer_In { Index:uint8 }
-	binary.Register(binary.ID{0xec, 0x5e, 0x80, 0xdc, 0xdd, 0xa5, 0x71, 0x24, 0x30, 0x0d, 0xce, 0x26, 0xee, 0x68, 0x86, 0x1c, 0x43, 0xc9, 0x18, 0x46}, &StopTimer_In{})
+	registry.Add(binary.ID{0xec, 0x5e, 0x80, 0xdc, 0xdd, 0xa5, 0x71, 0x24, 0x30, 0x0d, 0xce, 0x26, 0xee, 0x68, 0x86, 0x1c, 0x43, 0xc9, 0x18, 0x46}, &StopTimer_In{})
 	//struct gles.StopTimer_Out { Result:uint64 }
-	binary.Register(binary.ID{0xc2, 0x42, 0xca, 0x99, 0x47, 0x65, 0x2a, 0x10, 0x41, 0xe1, 0x45, 0xc3, 0xad, 0xbd, 0x2e, 0xaf, 0x60, 0x20, 0x61, 0x66}, &StopTimer_Out{})
+	registry.Add(binary.ID{0xc2, 0x42, 0xca, 0x99, 0x47, 0x65, 0x2a, 0x10, 0x41, 0xe1, 0x45, 0xc3, 0xad, 0xbd, 0x2e, 0xaf, 0x60, 0x20, 0x61, 0x66}, &StopTimer_Out{})
 	//struct gles.Texture { CreatedAt:atom.ID, Kind:TextureKind, Format:ImageTexelFormat, Texture2D:Image_s32Map, Cubemap:CubemapLevel_s32Map, MagFilter:TextureFilterMode, MinFilter:TextureFilterMode, WrapS:TextureWrapMode, WrapT:TextureWrapMode, SwizzleR:TexelComponent, SwizzleG:TexelComponent, SwizzleB:TexelComponent, SwizzleA:TexelComponent, MaxAnisotropy:float32 }
-	binary.Register(binary.ID{0xf4, 0x91, 0x73, 0x6b, 0x19, 0x3d, 0x03, 0x96, 0xaa, 0x7a, 0x57, 0xbd, 0x1b, 0x71, 0x3d, 0xab, 0x3f, 0x43, 0x07, 0x7e}, &Texture{})
+	registry.Add(binary.ID{0xf4, 0x91, 0x73, 0x6b, 0x19, 0x3d, 0x03, 0x96, 0xaa, 0x7a, 0x57, 0xbd, 0x1b, 0x71, 0x3d, 0xab, 0x3f, 0x43, 0x07, 0x7e}, &Texture{})
 	//struct gles.Uniform { CreatedAt:atom.ID, Name:string, Type:ShaderUniformType, Value:UniformValue }
-	binary.Register(binary.ID{0x92, 0x24, 0x45, 0xb8, 0x0b, 0xfa, 0x86, 0x62, 0xac, 0x08, 0xfd, 0xbc, 0xbc, 0x95, 0x50, 0x12, 0x22, 0x6e, 0xa5, 0x1d}, &Uniform{})
+	registry.Add(binary.ID{0x92, 0x24, 0x45, 0xb8, 0x0b, 0xfa, 0x86, 0x62, 0xac, 0x08, 0xfd, 0xbc, 0xbc, 0x95, 0x50, 0x12, 0x22, 0x6e, 0xa5, 0x1d}, &Uniform{})
 	//struct gles.UniformValue { CreatedAt:atom.ID, F32:float32, Vec2f:Vec2f, Vec3f:Vec3f, Vec4f:Vec4f, S32:int32, Vec2i:Vec2i, Vec3i:Vec3i, Vec4i:Vec4i, Mat2f:Mat2f, Mat3f:Mat3f, Mat4f:Mat4f }
-	binary.Register(binary.ID{0xab, 0x2c, 0x54, 0x24, 0xdf, 0x48, 0x16, 0xcb, 0x4a, 0x5d, 0x7f, 0x47, 0x42, 0x4b, 0x4e, 0x3e, 0x5d, 0x0e, 0x54, 0x0c}, &UniformValue{})
+	registry.Add(binary.ID{0xab, 0x2c, 0x54, 0x24, 0xdf, 0x48, 0x16, 0xcb, 0x4a, 0x5d, 0x7f, 0x47, 0x42, 0x4b, 0x4e, 0x3e, 0x5d, 0x0e, 0x54, 0x0c}, &UniformValue{})
 	//struct gles.Vec2f { CreatedAt:atom.ID, X:float32, Y:float32 }
-	binary.Register(binary.ID{0x9a, 0x80, 0x74, 0xe4, 0x78, 0x9c, 0x6c, 0x16, 0xc7, 0xc6, 0x4e, 0x4c, 0x66, 0x6a, 0x86, 0x52, 0x06, 0x24, 0x41, 0x5d}, &Vec2f{})
+	registry.Add(binary.ID{0x9a, 0x80, 0x74, 0xe4, 0x78, 0x9c, 0x6c, 0x16, 0xc7, 0xc6, 0x4e, 0x4c, 0x66, 0x6a, 0x86, 0x52, 0x06, 0x24, 0x41, 0x5d}, &Vec2f{})
 	//struct gles.Vec2i { CreatedAt:atom.ID, X:int32, Y:int32 }
-	binary.Register(binary.ID{0x76, 0x85, 0xad, 0x18, 0xef, 0x9b, 0x0e, 0xea, 0x49, 0x44, 0xf7, 0x89, 0x4e, 0xdb, 0x0d, 0x34, 0xbb, 0x27, 0xb8, 0x43}, &Vec2i{})
+	registry.Add(binary.ID{0x76, 0x85, 0xad, 0x18, 0xef, 0x9b, 0x0e, 0xea, 0x49, 0x44, 0xf7, 0x89, 0x4e, 0xdb, 0x0d, 0x34, 0xbb, 0x27, 0xb8, 0x43}, &Vec2i{})
 	//struct gles.Vec3f { CreatedAt:atom.ID, X:float32, Y:float32, Z:float32 }
-	binary.Register(binary.ID{0x09, 0x06, 0xf7, 0xa9, 0xb3, 0xbf, 0x8f, 0x42, 0x96, 0xf4, 0xd6, 0xff, 0x4f, 0x93, 0x98, 0x44, 0x2e, 0xaf, 0x7b, 0x07}, &Vec3f{})
+	registry.Add(binary.ID{0x09, 0x06, 0xf7, 0xa9, 0xb3, 0xbf, 0x8f, 0x42, 0x96, 0xf4, 0xd6, 0xff, 0x4f, 0x93, 0x98, 0x44, 0x2e, 0xaf, 0x7b, 0x07}, &Vec3f{})
 	//struct gles.Vec3i { CreatedAt:atom.ID, X:int32, Y:int32, Z:int32 }
-	binary.Register(binary.ID{0xc5, 0x31, 0xeb, 0x05, 0xd1, 0xdf, 0x5c, 0xf7, 0xc0, 0x7a, 0x20, 0xc9, 0x91, 0xb0, 0xf0, 0x2e, 0x1e, 0x9d, 0x94, 0xd5}, &Vec3i{})
+	registry.Add(binary.ID{0xc5, 0x31, 0xeb, 0x05, 0xd1, 0xdf, 0x5c, 0xf7, 0xc0, 0x7a, 0x20, 0xc9, 0x91, 0xb0, 0xf0, 0x2e, 0x1e, 0x9d, 0x94, 0xd5}, &Vec3i{})
 	//struct gles.Vec4f { CreatedAt:atom.ID, X:float32, Y:float32, Z:float32, W:float32 }
-	binary.Register(binary.ID{0x94, 0x20, 0x1e, 0xeb, 0xde, 0x5b, 0xa9, 0xe1, 0xd7, 0x73, 0xcd, 0x9e, 0x3b, 0x09, 0x01, 0x8a, 0x9a, 0x41, 0xe7, 0x4b}, &Vec4f{})
+	registry.Add(binary.ID{0x94, 0x20, 0x1e, 0xeb, 0xde, 0x5b, 0xa9, 0xe1, 0xd7, 0x73, 0xcd, 0x9e, 0x3b, 0x09, 0x01, 0x8a, 0x9a, 0x41, 0xe7, 0x4b}, &Vec4f{})
 	//struct gles.Vec4i { CreatedAt:atom.ID, X:int32, Y:int32, Z:int32, W:int32 }
-	binary.Register(binary.ID{0x61, 0x00, 0x31, 0xa3, 0x7a, 0x91, 0x14, 0x17, 0x6e, 0xd2, 0xe2, 0x62, 0x30, 0x92, 0xce, 0x4e, 0x0c, 0x72, 0xd1, 0x9c}, &Vec4i{})
+	registry.Add(binary.ID{0x61, 0x00, 0x31, 0xa3, 0x7a, 0x91, 0x14, 0x17, 0x6e, 0xd2, 0xe2, 0x62, 0x30, 0x92, 0xce, 0x4e, 0x0c, 0x72, 0xd1, 0x9c}, &Vec4i{})
 	//struct gles.VertexArray { CreatedAt:atom.ID }
-	binary.Register(binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}, &VertexArray{})
+	registry.Add(binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}, &VertexArray{})
 	//struct gles.VertexAttribute { CreatedAt:atom.ID, Name:string, VectorCount:int32, Type:ShaderAttribType }
-	binary.Register(binary.ID{0xfd, 0x98, 0xd6, 0x90, 0x60, 0x52, 0x6f, 0xa2, 0x9c, 0x21, 0xde, 0xa1, 0x72, 0xe6, 0x53, 0x6b, 0x3e, 0x76, 0x01, 0xd4}, &VertexAttribute{})
+	registry.Add(binary.ID{0xfd, 0x98, 0xd6, 0x90, 0x60, 0x52, 0x6f, 0xa2, 0x9c, 0x21, 0xde, 0xa1, 0x72, 0xe6, 0x53, 0x6b, 0x3e, 0x76, 0x01, 0xd4}, &VertexAttribute{})
 	//struct gles.VertexAttributeArray { CreatedAt:atom.ID, Enabled:bool, Size:VertexAttribSize, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:memory.Pointer }
-	binary.Register(binary.ID{0x7f, 0x9b, 0xc8, 0x0b, 0xa0, 0x98, 0xaa, 0x09, 0xa2, 0xff, 0x40, 0x0d, 0xc4, 0x89, 0x6c, 0x89, 0x77, 0x5b, 0x66, 0x31}, &VertexAttributeArray{})
+	registry.Add(binary.ID{0x7f, 0x9b, 0xc8, 0x0b, 0xa0, 0x98, 0xaa, 0x09, 0xa2, 0xff, 0x40, 0x0d, 0xc4, 0x89, 0x6c, 0x89, 0x77, 0x5b, 0x66, 0x31}, &VertexAttributeArray{})
 }
 
-func (o BlendState) Encode(e *binary.Encoder) error {
+func (o BlendState) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1234,7 +1235,7 @@ func (o BlendState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *BlendState) Decode(d *binary.Decoder) error {
+func (o *BlendState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1276,7 +1277,7 @@ func (o *BlendState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Buffer) Encode(e *binary.Encoder) error {
+func (o Buffer) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1292,7 +1293,7 @@ func (o Buffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Buffer) Decode(d *binary.Decoder) error {
+func (o *Buffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1314,7 +1315,7 @@ func (o *Buffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o ClearState) Encode(e *binary.Encoder) error {
+func (o ClearState) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1330,7 +1331,7 @@ func (o ClearState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *ClearState) Decode(d *binary.Decoder) error {
+func (o *ClearState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1352,7 +1353,7 @@ func (o *ClearState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Color) Encode(e *binary.Encoder) error {
+func (o Color) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1371,7 +1372,7 @@ func (o Color) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Color) Decode(d *binary.Decoder) error {
+func (o *Color) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1400,7 +1401,7 @@ func (o *Color) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o CubemapLevel) Encode(e *binary.Encoder) error {
+func (o CubemapLevel) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1418,7 +1419,7 @@ func (o CubemapLevel) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *CubemapLevel) Decode(d *binary.Decoder) error {
+func (o *CubemapLevel) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1446,7 +1447,7 @@ func (o *CubemapLevel) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglCreateContext) Encode(e *binary.Encoder) error {
+func (o EglCreateContext) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1459,7 +1460,7 @@ func (o EglCreateContext) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EglCreateContext) Decode(d *binary.Decoder) error {
+func (o *EglCreateContext) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1474,15 +1475,15 @@ func (o *EglCreateContext) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglCreateContext_In) Encode(e *binary.Encoder) error {
+func (o EglCreateContext_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *EglCreateContext_In) Decode(d *binary.Decoder) error {
+func (o *EglCreateContext_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o EglCreateContext_Out) Encode(e *binary.Encoder) error {
+func (o EglCreateContext_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Version); err != nil {
 		return err
 	}
@@ -1492,7 +1493,7 @@ func (o EglCreateContext_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EglCreateContext_Out) Decode(d *binary.Decoder) error {
+func (o *EglCreateContext_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1506,7 +1507,7 @@ func (o *EglCreateContext_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglMakeCurrent) Encode(e *binary.Encoder) error {
+func (o EglMakeCurrent) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1519,7 +1520,7 @@ func (o EglMakeCurrent) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EglMakeCurrent) Decode(d *binary.Decoder) error {
+func (o *EglMakeCurrent) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1534,14 +1535,14 @@ func (o *EglMakeCurrent) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglMakeCurrent_In) Encode(e *binary.Encoder) error {
+func (o EglMakeCurrent_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Context); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *EglMakeCurrent_In) Decode(d *binary.Decoder) error {
+func (o *EglMakeCurrent_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1550,15 +1551,15 @@ func (o *EglMakeCurrent_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglMakeCurrent_Out) Encode(e *binary.Encoder) error {
+func (o EglMakeCurrent_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *EglMakeCurrent_Out) Decode(d *binary.Decoder) error {
+func (o *EglMakeCurrent_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o EglSwapBuffers) Encode(e *binary.Encoder) error {
+func (o EglSwapBuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1571,7 +1572,7 @@ func (o EglSwapBuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *EglSwapBuffers) Decode(d *binary.Decoder) error {
+func (o *EglSwapBuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1586,23 +1587,23 @@ func (o *EglSwapBuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o EglSwapBuffers_In) Encode(e *binary.Encoder) error {
+func (o EglSwapBuffers_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *EglSwapBuffers_In) Decode(d *binary.Decoder) error {
+func (o *EglSwapBuffers_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o EglSwapBuffers_Out) Encode(e *binary.Encoder) error {
+func (o EglSwapBuffers_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *EglSwapBuffers_Out) Decode(d *binary.Decoder) error {
+func (o *EglSwapBuffers_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o FlushPostBuffer) Encode(e *binary.Encoder) error {
+func (o FlushPostBuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1615,7 +1616,7 @@ func (o FlushPostBuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *FlushPostBuffer) Decode(d *binary.Decoder) error {
+func (o *FlushPostBuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1630,23 +1631,23 @@ func (o *FlushPostBuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o FlushPostBuffer_In) Encode(e *binary.Encoder) error {
+func (o FlushPostBuffer_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *FlushPostBuffer_In) Decode(d *binary.Decoder) error {
+func (o *FlushPostBuffer_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o FlushPostBuffer_Out) Encode(e *binary.Encoder) error {
+func (o FlushPostBuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *FlushPostBuffer_Out) Decode(d *binary.Decoder) error {
+func (o *FlushPostBuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o Framebuffer) Encode(e *binary.Encoder) error {
+func (o Framebuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1664,7 +1665,7 @@ func (o Framebuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Framebuffer) Decode(d *binary.Decoder) error {
+func (o *Framebuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1692,7 +1693,7 @@ func (o *Framebuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o FramebufferAttachmentInfo) Encode(e *binary.Encoder) error {
+func (o FramebufferAttachmentInfo) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -1711,7 +1712,7 @@ func (o FramebufferAttachmentInfo) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *FramebufferAttachmentInfo) Decode(d *binary.Decoder) error {
+func (o *FramebufferAttachmentInfo) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1740,7 +1741,7 @@ func (o *FramebufferAttachmentInfo) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlActiveTexture) Encode(e *binary.Encoder) error {
+func (o GlActiveTexture) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1753,7 +1754,7 @@ func (o GlActiveTexture) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlActiveTexture) Decode(d *binary.Decoder) error {
+func (o *GlActiveTexture) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1768,14 +1769,14 @@ func (o *GlActiveTexture) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlActiveTexture_In) Encode(e *binary.Encoder) error {
+func (o GlActiveTexture_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Unit)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlActiveTexture_In) Decode(d *binary.Decoder) error {
+func (o *GlActiveTexture_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1784,15 +1785,15 @@ func (o *GlActiveTexture_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlActiveTexture_Out) Encode(e *binary.Encoder) error {
+func (o GlActiveTexture_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlActiveTexture_Out) Decode(d *binary.Decoder) error {
+func (o *GlActiveTexture_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlAttachShader) Encode(e *binary.Encoder) error {
+func (o GlAttachShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1805,7 +1806,7 @@ func (o GlAttachShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlAttachShader) Decode(d *binary.Decoder) error {
+func (o *GlAttachShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1820,7 +1821,7 @@ func (o *GlAttachShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlAttachShader_In) Encode(e *binary.Encoder) error {
+func (o GlAttachShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -1830,7 +1831,7 @@ func (o GlAttachShader_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlAttachShader_In) Decode(d *binary.Decoder) error {
+func (o *GlAttachShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1844,15 +1845,15 @@ func (o *GlAttachShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlAttachShader_Out) Encode(e *binary.Encoder) error {
+func (o GlAttachShader_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlAttachShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlAttachShader_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQuery) Encode(e *binary.Encoder) error {
+func (o GlBeginQuery) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1865,7 +1866,7 @@ func (o GlBeginQuery) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQuery) Decode(d *binary.Decoder) error {
+func (o *GlBeginQuery) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1880,7 +1881,7 @@ func (o *GlBeginQuery) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQueryEXT) Encode(e *binary.Encoder) error {
+func (o GlBeginQueryEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1893,7 +1894,7 @@ func (o GlBeginQueryEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQueryEXT) Decode(d *binary.Decoder) error {
+func (o *GlBeginQueryEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1908,7 +1909,7 @@ func (o *GlBeginQueryEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQueryEXT_In) Encode(e *binary.Encoder) error {
+func (o GlBeginQueryEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -1918,7 +1919,7 @@ func (o GlBeginQueryEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQueryEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlBeginQueryEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1932,15 +1933,15 @@ func (o *GlBeginQueryEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQueryEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlBeginQueryEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQueryEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlBeginQueryEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQuery_In) Encode(e *binary.Encoder) error {
+func (o GlBeginQuery_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -1950,7 +1951,7 @@ func (o GlBeginQuery_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQuery_In) Decode(d *binary.Decoder) error {
+func (o *GlBeginQuery_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1964,15 +1965,15 @@ func (o *GlBeginQuery_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBeginQuery_Out) Encode(e *binary.Encoder) error {
+func (o GlBeginQuery_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBeginQuery_Out) Decode(d *binary.Decoder) error {
+func (o *GlBeginQuery_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindAttribLocation) Encode(e *binary.Encoder) error {
+func (o GlBindAttribLocation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1985,7 +1986,7 @@ func (o GlBindAttribLocation) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindAttribLocation) Decode(d *binary.Decoder) error {
+func (o *GlBindAttribLocation) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2000,7 +2001,7 @@ func (o *GlBindAttribLocation) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindAttribLocation_In) Encode(e *binary.Encoder) error {
+func (o GlBindAttribLocation_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -2013,7 +2014,7 @@ func (o GlBindAttribLocation_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindAttribLocation_In) Decode(d *binary.Decoder) error {
+func (o *GlBindAttribLocation_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2032,15 +2033,15 @@ func (o *GlBindAttribLocation_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindAttribLocation_Out) Encode(e *binary.Encoder) error {
+func (o GlBindAttribLocation_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindAttribLocation_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindAttribLocation_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindBuffer) Encode(e *binary.Encoder) error {
+func (o GlBindBuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2053,7 +2054,7 @@ func (o GlBindBuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindBuffer) Decode(d *binary.Decoder) error {
+func (o *GlBindBuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2068,7 +2069,7 @@ func (o *GlBindBuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindBuffer_In) Encode(e *binary.Encoder) error {
+func (o GlBindBuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2078,7 +2079,7 @@ func (o GlBindBuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindBuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlBindBuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2092,15 +2093,15 @@ func (o *GlBindBuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindBuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlBindBuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindBuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindBuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindFramebuffer) Encode(e *binary.Encoder) error {
+func (o GlBindFramebuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2113,7 +2114,7 @@ func (o GlBindFramebuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindFramebuffer) Decode(d *binary.Decoder) error {
+func (o *GlBindFramebuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2128,7 +2129,7 @@ func (o *GlBindFramebuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindFramebuffer_In) Encode(e *binary.Encoder) error {
+func (o GlBindFramebuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2138,7 +2139,7 @@ func (o GlBindFramebuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindFramebuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlBindFramebuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2152,15 +2153,15 @@ func (o *GlBindFramebuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindFramebuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlBindFramebuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindFramebuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindFramebuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindRenderbuffer) Encode(e *binary.Encoder) error {
+func (o GlBindRenderbuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2173,7 +2174,7 @@ func (o GlBindRenderbuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindRenderbuffer) Decode(d *binary.Decoder) error {
+func (o *GlBindRenderbuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2188,7 +2189,7 @@ func (o *GlBindRenderbuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindRenderbuffer_In) Encode(e *binary.Encoder) error {
+func (o GlBindRenderbuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2198,7 +2199,7 @@ func (o GlBindRenderbuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindRenderbuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlBindRenderbuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2212,15 +2213,15 @@ func (o *GlBindRenderbuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindRenderbuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlBindRenderbuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindRenderbuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindRenderbuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindTexture) Encode(e *binary.Encoder) error {
+func (o GlBindTexture) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2233,7 +2234,7 @@ func (o GlBindTexture) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindTexture) Decode(d *binary.Decoder) error {
+func (o *GlBindTexture) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2248,7 +2249,7 @@ func (o *GlBindTexture) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindTexture_In) Encode(e *binary.Encoder) error {
+func (o GlBindTexture_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2258,7 +2259,7 @@ func (o GlBindTexture_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindTexture_In) Decode(d *binary.Decoder) error {
+func (o *GlBindTexture_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2272,15 +2273,15 @@ func (o *GlBindTexture_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindTexture_Out) Encode(e *binary.Encoder) error {
+func (o GlBindTexture_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindTexture_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindTexture_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindVertexArrayOES) Encode(e *binary.Encoder) error {
+func (o GlBindVertexArrayOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2293,7 +2294,7 @@ func (o GlBindVertexArrayOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindVertexArrayOES) Decode(d *binary.Decoder) error {
+func (o *GlBindVertexArrayOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2308,14 +2309,14 @@ func (o *GlBindVertexArrayOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindVertexArrayOES_In) Encode(e *binary.Encoder) error {
+func (o GlBindVertexArrayOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Array)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlBindVertexArrayOES_In) Decode(d *binary.Decoder) error {
+func (o *GlBindVertexArrayOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2324,15 +2325,15 @@ func (o *GlBindVertexArrayOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBindVertexArrayOES_Out) Encode(e *binary.Encoder) error {
+func (o GlBindVertexArrayOES_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBindVertexArrayOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlBindVertexArrayOES_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendColor) Encode(e *binary.Encoder) error {
+func (o GlBlendColor) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2345,7 +2346,7 @@ func (o GlBlendColor) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendColor) Decode(d *binary.Decoder) error {
+func (o *GlBlendColor) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2360,7 +2361,7 @@ func (o *GlBlendColor) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendColor_In) Encode(e *binary.Encoder) error {
+func (o GlBlendColor_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.Red); err != nil {
 		return err
 	}
@@ -2376,7 +2377,7 @@ func (o GlBlendColor_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendColor_In) Decode(d *binary.Decoder) error {
+func (o *GlBlendColor_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -2400,15 +2401,15 @@ func (o *GlBlendColor_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendColor_Out) Encode(e *binary.Encoder) error {
+func (o GlBlendColor_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendColor_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlendColor_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquation) Encode(e *binary.Encoder) error {
+func (o GlBlendEquation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2421,7 +2422,7 @@ func (o GlBlendEquation) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendEquation) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquation) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2436,7 +2437,7 @@ func (o *GlBlendEquation) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquationSeparate) Encode(e *binary.Encoder) error {
+func (o GlBlendEquationSeparate) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2449,7 +2450,7 @@ func (o GlBlendEquationSeparate) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendEquationSeparate) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquationSeparate) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2464,7 +2465,7 @@ func (o *GlBlendEquationSeparate) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquationSeparate_In) Encode(e *binary.Encoder) error {
+func (o GlBlendEquationSeparate_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Rgb)); err != nil {
 		return err
 	}
@@ -2474,7 +2475,7 @@ func (o GlBlendEquationSeparate_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendEquationSeparate_In) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquationSeparate_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2488,22 +2489,22 @@ func (o *GlBlendEquationSeparate_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquationSeparate_Out) Encode(e *binary.Encoder) error {
+func (o GlBlendEquationSeparate_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendEquationSeparate_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquationSeparate_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquation_In) Encode(e *binary.Encoder) error {
+func (o GlBlendEquation_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Equation)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlBlendEquation_In) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquation_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2512,15 +2513,15 @@ func (o *GlBlendEquation_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendEquation_Out) Encode(e *binary.Encoder) error {
+func (o GlBlendEquation_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendEquation_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlendEquation_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFunc) Encode(e *binary.Encoder) error {
+func (o GlBlendFunc) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2533,7 +2534,7 @@ func (o GlBlendFunc) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFunc) Decode(d *binary.Decoder) error {
+func (o *GlBlendFunc) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2548,7 +2549,7 @@ func (o *GlBlendFunc) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFuncSeparate) Encode(e *binary.Encoder) error {
+func (o GlBlendFuncSeparate) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2561,7 +2562,7 @@ func (o GlBlendFuncSeparate) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFuncSeparate) Decode(d *binary.Decoder) error {
+func (o *GlBlendFuncSeparate) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2576,7 +2577,7 @@ func (o *GlBlendFuncSeparate) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFuncSeparate_In) Encode(e *binary.Encoder) error {
+func (o GlBlendFuncSeparate_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.SrcFactorRgb)); err != nil {
 		return err
 	}
@@ -2592,7 +2593,7 @@ func (o GlBlendFuncSeparate_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFuncSeparate_In) Decode(d *binary.Decoder) error {
+func (o *GlBlendFuncSeparate_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2616,15 +2617,15 @@ func (o *GlBlendFuncSeparate_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFuncSeparate_Out) Encode(e *binary.Encoder) error {
+func (o GlBlendFuncSeparate_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFuncSeparate_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlendFuncSeparate_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFunc_In) Encode(e *binary.Encoder) error {
+func (o GlBlendFunc_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.SrcFactor)); err != nil {
 		return err
 	}
@@ -2634,7 +2635,7 @@ func (o GlBlendFunc_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFunc_In) Decode(d *binary.Decoder) error {
+func (o *GlBlendFunc_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2648,15 +2649,15 @@ func (o *GlBlendFunc_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlendFunc_Out) Encode(e *binary.Encoder) error {
+func (o GlBlendFunc_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlendFunc_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlendFunc_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlitFramebuffer) Encode(e *binary.Encoder) error {
+func (o GlBlitFramebuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2669,7 +2670,7 @@ func (o GlBlitFramebuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlitFramebuffer) Decode(d *binary.Decoder) error {
+func (o *GlBlitFramebuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2684,7 +2685,7 @@ func (o *GlBlitFramebuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlitFramebuffer_In) Encode(e *binary.Encoder) error {
+func (o GlBlitFramebuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.SrcX0); err != nil {
 		return err
 	}
@@ -2718,7 +2719,7 @@ func (o GlBlitFramebuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlitFramebuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlBlitFramebuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -2772,15 +2773,15 @@ func (o *GlBlitFramebuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBlitFramebuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlBlitFramebuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBlitFramebuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlBlitFramebuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferData) Encode(e *binary.Encoder) error {
+func (o GlBufferData) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2793,7 +2794,7 @@ func (o GlBufferData) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferData) Decode(d *binary.Decoder) error {
+func (o *GlBufferData) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2808,7 +2809,7 @@ func (o *GlBufferData) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferData_In) Encode(e *binary.Encoder) error {
+func (o GlBufferData_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2824,7 +2825,7 @@ func (o GlBufferData_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferData_In) Decode(d *binary.Decoder) error {
+func (o *GlBufferData_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2848,15 +2849,15 @@ func (o *GlBufferData_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferData_Out) Encode(e *binary.Encoder) error {
+func (o GlBufferData_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferData_Out) Decode(d *binary.Decoder) error {
+func (o *GlBufferData_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferSubData) Encode(e *binary.Encoder) error {
+func (o GlBufferSubData) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2869,7 +2870,7 @@ func (o GlBufferSubData) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferSubData) Decode(d *binary.Decoder) error {
+func (o *GlBufferSubData) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2884,7 +2885,7 @@ func (o *GlBufferSubData) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferSubData_In) Encode(e *binary.Encoder) error {
+func (o GlBufferSubData_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -2900,7 +2901,7 @@ func (o GlBufferSubData_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferSubData_In) Decode(d *binary.Decoder) error {
+func (o *GlBufferSubData_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2924,15 +2925,15 @@ func (o *GlBufferSubData_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlBufferSubData_Out) Encode(e *binary.Encoder) error {
+func (o GlBufferSubData_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlBufferSubData_Out) Decode(d *binary.Decoder) error {
+func (o *GlBufferSubData_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCheckFramebufferStatus) Encode(e *binary.Encoder) error {
+func (o GlCheckFramebufferStatus) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2945,7 +2946,7 @@ func (o GlCheckFramebufferStatus) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCheckFramebufferStatus) Decode(d *binary.Decoder) error {
+func (o *GlCheckFramebufferStatus) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2960,14 +2961,14 @@ func (o *GlCheckFramebufferStatus) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCheckFramebufferStatus_In) Encode(e *binary.Encoder) error {
+func (o GlCheckFramebufferStatus_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCheckFramebufferStatus_In) Decode(d *binary.Decoder) error {
+func (o *GlCheckFramebufferStatus_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2976,14 +2977,14 @@ func (o *GlCheckFramebufferStatus_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCheckFramebufferStatus_Out) Encode(e *binary.Encoder) error {
+func (o GlCheckFramebufferStatus_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCheckFramebufferStatus_Out) Decode(d *binary.Decoder) error {
+func (o *GlCheckFramebufferStatus_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2992,7 +2993,7 @@ func (o *GlCheckFramebufferStatus_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClear) Encode(e *binary.Encoder) error {
+func (o GlClear) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3005,7 +3006,7 @@ func (o GlClear) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClear) Decode(d *binary.Decoder) error {
+func (o *GlClear) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3020,7 +3021,7 @@ func (o *GlClear) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearColor) Encode(e *binary.Encoder) error {
+func (o GlClearColor) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3033,7 +3034,7 @@ func (o GlClearColor) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearColor) Decode(d *binary.Decoder) error {
+func (o *GlClearColor) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3048,7 +3049,7 @@ func (o *GlClearColor) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearColor_In) Encode(e *binary.Encoder) error {
+func (o GlClearColor_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.R); err != nil {
 		return err
 	}
@@ -3064,7 +3065,7 @@ func (o GlClearColor_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearColor_In) Decode(d *binary.Decoder) error {
+func (o *GlClearColor_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -3088,15 +3089,15 @@ func (o *GlClearColor_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearColor_Out) Encode(e *binary.Encoder) error {
+func (o GlClearColor_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearColor_Out) Decode(d *binary.Decoder) error {
+func (o *GlClearColor_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearDepthf) Encode(e *binary.Encoder) error {
+func (o GlClearDepthf) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3109,7 +3110,7 @@ func (o GlClearDepthf) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearDepthf) Decode(d *binary.Decoder) error {
+func (o *GlClearDepthf) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3124,14 +3125,14 @@ func (o *GlClearDepthf) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearDepthf_In) Encode(e *binary.Encoder) error {
+func (o GlClearDepthf_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.Depth); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlClearDepthf_In) Decode(d *binary.Decoder) error {
+func (o *GlClearDepthf_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -3140,15 +3141,15 @@ func (o *GlClearDepthf_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearDepthf_Out) Encode(e *binary.Encoder) error {
+func (o GlClearDepthf_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearDepthf_Out) Decode(d *binary.Decoder) error {
+func (o *GlClearDepthf_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearStencil) Encode(e *binary.Encoder) error {
+func (o GlClearStencil) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3161,7 +3162,7 @@ func (o GlClearStencil) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearStencil) Decode(d *binary.Decoder) error {
+func (o *GlClearStencil) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3176,14 +3177,14 @@ func (o *GlClearStencil) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearStencil_In) Encode(e *binary.Encoder) error {
+func (o GlClearStencil_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Stencil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlClearStencil_In) Decode(d *binary.Decoder) error {
+func (o *GlClearStencil_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -3192,22 +3193,22 @@ func (o *GlClearStencil_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClearStencil_Out) Encode(e *binary.Encoder) error {
+func (o GlClearStencil_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClearStencil_Out) Decode(d *binary.Decoder) error {
+func (o *GlClearStencil_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlClear_In) Encode(e *binary.Encoder) error {
+func (o GlClear_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Mask)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlClear_In) Decode(d *binary.Decoder) error {
+func (o *GlClear_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3216,15 +3217,15 @@ func (o *GlClear_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlClear_Out) Encode(e *binary.Encoder) error {
+func (o GlClear_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlClear_Out) Decode(d *binary.Decoder) error {
+func (o *GlClear_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlColorMask) Encode(e *binary.Encoder) error {
+func (o GlColorMask) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3237,7 +3238,7 @@ func (o GlColorMask) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlColorMask) Decode(d *binary.Decoder) error {
+func (o *GlColorMask) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3252,7 +3253,7 @@ func (o *GlColorMask) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlColorMask_In) Encode(e *binary.Encoder) error {
+func (o GlColorMask_In) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Red); err != nil {
 		return err
 	}
@@ -3268,7 +3269,7 @@ func (o GlColorMask_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlColorMask_In) Decode(d *binary.Decoder) error {
+func (o *GlColorMask_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -3292,15 +3293,15 @@ func (o *GlColorMask_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlColorMask_Out) Encode(e *binary.Encoder) error {
+func (o GlColorMask_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlColorMask_Out) Decode(d *binary.Decoder) error {
+func (o *GlColorMask_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompileShader) Encode(e *binary.Encoder) error {
+func (o GlCompileShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3313,7 +3314,7 @@ func (o GlCompileShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompileShader) Decode(d *binary.Decoder) error {
+func (o *GlCompileShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3328,14 +3329,14 @@ func (o *GlCompileShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompileShader_In) Encode(e *binary.Encoder) error {
+func (o GlCompileShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCompileShader_In) Decode(d *binary.Decoder) error {
+func (o *GlCompileShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3344,15 +3345,15 @@ func (o *GlCompileShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompileShader_Out) Encode(e *binary.Encoder) error {
+func (o GlCompileShader_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompileShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlCompileShader_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexImage2D) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3365,7 +3366,7 @@ func (o GlCompressedTexImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexImage2D) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3380,7 +3381,7 @@ func (o *GlCompressedTexImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -3408,7 +3409,7 @@ func (o GlCompressedTexImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3452,15 +3453,15 @@ func (o *GlCompressedTexImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexSubImage2D) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexSubImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3473,7 +3474,7 @@ func (o GlCompressedTexSubImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexSubImage2D) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexSubImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3488,7 +3489,7 @@ func (o *GlCompressedTexSubImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexSubImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexSubImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -3519,7 +3520,7 @@ func (o GlCompressedTexSubImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexSubImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexSubImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3568,15 +3569,15 @@ func (o *GlCompressedTexSubImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCompressedTexSubImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlCompressedTexSubImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCompressedTexSubImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlCompressedTexSubImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexImage2D) Encode(e *binary.Encoder) error {
+func (o GlCopyTexImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3589,7 +3590,7 @@ func (o GlCopyTexImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexImage2D) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3604,7 +3605,7 @@ func (o *GlCopyTexImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlCopyTexImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -3632,7 +3633,7 @@ func (o GlCopyTexImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3676,15 +3677,15 @@ func (o *GlCopyTexImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlCopyTexImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexSubImage2D) Encode(e *binary.Encoder) error {
+func (o GlCopyTexSubImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3697,7 +3698,7 @@ func (o GlCopyTexSubImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexSubImage2D) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexSubImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3712,7 +3713,7 @@ func (o *GlCopyTexSubImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexSubImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlCopyTexSubImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -3740,7 +3741,7 @@ func (o GlCopyTexSubImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexSubImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexSubImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3784,15 +3785,15 @@ func (o *GlCopyTexSubImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCopyTexSubImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlCopyTexSubImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCopyTexSubImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlCopyTexSubImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateProgram) Encode(e *binary.Encoder) error {
+func (o GlCreateProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3805,7 +3806,7 @@ func (o GlCreateProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCreateProgram) Decode(d *binary.Decoder) error {
+func (o *GlCreateProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3820,22 +3821,22 @@ func (o *GlCreateProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateProgram_In) Encode(e *binary.Encoder) error {
+func (o GlCreateProgram_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCreateProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlCreateProgram_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlCreateProgram_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCreateProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlCreateProgram_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3844,7 +3845,7 @@ func (o *GlCreateProgram_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateShader) Encode(e *binary.Encoder) error {
+func (o GlCreateShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3857,7 +3858,7 @@ func (o GlCreateShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCreateShader) Decode(d *binary.Decoder) error {
+func (o *GlCreateShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3872,14 +3873,14 @@ func (o *GlCreateShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateShader_In) Encode(e *binary.Encoder) error {
+func (o GlCreateShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCreateShader_In) Decode(d *binary.Decoder) error {
+func (o *GlCreateShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3888,14 +3889,14 @@ func (o *GlCreateShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCreateShader_Out) Encode(e *binary.Encoder) error {
+func (o GlCreateShader_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCreateShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlCreateShader_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3904,7 +3905,7 @@ func (o *GlCreateShader_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCullFace) Encode(e *binary.Encoder) error {
+func (o GlCullFace) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3917,7 +3918,7 @@ func (o GlCullFace) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCullFace) Decode(d *binary.Decoder) error {
+func (o *GlCullFace) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3932,14 +3933,14 @@ func (o *GlCullFace) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCullFace_In) Encode(e *binary.Encoder) error {
+func (o GlCullFace_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Mode)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlCullFace_In) Decode(d *binary.Decoder) error {
+func (o *GlCullFace_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3948,15 +3949,15 @@ func (o *GlCullFace_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlCullFace_Out) Encode(e *binary.Encoder) error {
+func (o GlCullFace_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlCullFace_Out) Decode(d *binary.Decoder) error {
+func (o *GlCullFace_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteBuffers) Encode(e *binary.Encoder) error {
+func (o GlDeleteBuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3969,7 +3970,7 @@ func (o GlDeleteBuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteBuffers) Decode(d *binary.Decoder) error {
+func (o *GlDeleteBuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3984,7 +3985,7 @@ func (o *GlDeleteBuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteBuffers_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteBuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -3999,7 +4000,7 @@ func (o GlDeleteBuffers_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteBuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteBuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4020,15 +4021,15 @@ func (o *GlDeleteBuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteBuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteBuffers_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteBuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteBuffers_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteFramebuffers) Encode(e *binary.Encoder) error {
+func (o GlDeleteFramebuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4041,7 +4042,7 @@ func (o GlDeleteFramebuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteFramebuffers) Decode(d *binary.Decoder) error {
+func (o *GlDeleteFramebuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4056,7 +4057,7 @@ func (o *GlDeleteFramebuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteFramebuffers_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteFramebuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4071,7 +4072,7 @@ func (o GlDeleteFramebuffers_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteFramebuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteFramebuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4092,15 +4093,15 @@ func (o *GlDeleteFramebuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteFramebuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteFramebuffers_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteFramebuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteFramebuffers_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteProgram) Encode(e *binary.Encoder) error {
+func (o GlDeleteProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4113,7 +4114,7 @@ func (o GlDeleteProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteProgram) Decode(d *binary.Decoder) error {
+func (o *GlDeleteProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4128,14 +4129,14 @@ func (o *GlDeleteProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteProgram_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteProgram_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDeleteProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteProgram_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4144,15 +4145,15 @@ func (o *GlDeleteProgram_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteProgram_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteProgram_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueries) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueries) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4165,7 +4166,7 @@ func (o GlDeleteQueries) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueries) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueries) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4180,7 +4181,7 @@ func (o *GlDeleteQueries) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueriesEXT) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueriesEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4193,7 +4194,7 @@ func (o GlDeleteQueriesEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueriesEXT) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueriesEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4208,7 +4209,7 @@ func (o *GlDeleteQueriesEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueriesEXT_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueriesEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4223,7 +4224,7 @@ func (o GlDeleteQueriesEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueriesEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueriesEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4244,15 +4245,15 @@ func (o *GlDeleteQueriesEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueriesEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueriesEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueriesEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueriesEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueries_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueries_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4267,7 +4268,7 @@ func (o GlDeleteQueries_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueries_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueries_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4288,15 +4289,15 @@ func (o *GlDeleteQueries_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteQueries_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteQueries_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteQueries_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteQueries_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteRenderbuffers) Encode(e *binary.Encoder) error {
+func (o GlDeleteRenderbuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4309,7 +4310,7 @@ func (o GlDeleteRenderbuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteRenderbuffers) Decode(d *binary.Decoder) error {
+func (o *GlDeleteRenderbuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4324,7 +4325,7 @@ func (o *GlDeleteRenderbuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteRenderbuffers_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteRenderbuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4339,7 +4340,7 @@ func (o GlDeleteRenderbuffers_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteRenderbuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteRenderbuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4360,15 +4361,15 @@ func (o *GlDeleteRenderbuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteRenderbuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteRenderbuffers_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteRenderbuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteRenderbuffers_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteShader) Encode(e *binary.Encoder) error {
+func (o GlDeleteShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4381,7 +4382,7 @@ func (o GlDeleteShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteShader) Decode(d *binary.Decoder) error {
+func (o *GlDeleteShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4396,14 +4397,14 @@ func (o *GlDeleteShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteShader_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDeleteShader_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4412,15 +4413,15 @@ func (o *GlDeleteShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteShader_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteShader_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteShader_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteTextures) Encode(e *binary.Encoder) error {
+func (o GlDeleteTextures) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4433,7 +4434,7 @@ func (o GlDeleteTextures) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteTextures) Decode(d *binary.Decoder) error {
+func (o *GlDeleteTextures) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4448,7 +4449,7 @@ func (o *GlDeleteTextures) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteTextures_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteTextures_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4463,7 +4464,7 @@ func (o GlDeleteTextures_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteTextures_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteTextures_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4484,15 +4485,15 @@ func (o *GlDeleteTextures_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteTextures_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteTextures_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteTextures_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteTextures_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteVertexArraysOES) Encode(e *binary.Encoder) error {
+func (o GlDeleteVertexArraysOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4505,7 +4506,7 @@ func (o GlDeleteVertexArraysOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteVertexArraysOES) Decode(d *binary.Decoder) error {
+func (o *GlDeleteVertexArraysOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4520,7 +4521,7 @@ func (o *GlDeleteVertexArraysOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteVertexArraysOES_In) Encode(e *binary.Encoder) error {
+func (o GlDeleteVertexArraysOES_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -4535,7 +4536,7 @@ func (o GlDeleteVertexArraysOES_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteVertexArraysOES_In) Decode(d *binary.Decoder) error {
+func (o *GlDeleteVertexArraysOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4556,15 +4557,15 @@ func (o *GlDeleteVertexArraysOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDeleteVertexArraysOES_Out) Encode(e *binary.Encoder) error {
+func (o GlDeleteVertexArraysOES_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDeleteVertexArraysOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlDeleteVertexArraysOES_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthFunc) Encode(e *binary.Encoder) error {
+func (o GlDepthFunc) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4577,7 +4578,7 @@ func (o GlDepthFunc) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthFunc) Decode(d *binary.Decoder) error {
+func (o *GlDepthFunc) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4592,14 +4593,14 @@ func (o *GlDepthFunc) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthFunc_In) Encode(e *binary.Encoder) error {
+func (o GlDepthFunc_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Function)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDepthFunc_In) Decode(d *binary.Decoder) error {
+func (o *GlDepthFunc_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4608,15 +4609,15 @@ func (o *GlDepthFunc_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthFunc_Out) Encode(e *binary.Encoder) error {
+func (o GlDepthFunc_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthFunc_Out) Decode(d *binary.Decoder) error {
+func (o *GlDepthFunc_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthMask) Encode(e *binary.Encoder) error {
+func (o GlDepthMask) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4629,7 +4630,7 @@ func (o GlDepthMask) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthMask) Decode(d *binary.Decoder) error {
+func (o *GlDepthMask) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4644,14 +4645,14 @@ func (o *GlDepthMask) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthMask_In) Encode(e *binary.Encoder) error {
+func (o GlDepthMask_In) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Enabled); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDepthMask_In) Decode(d *binary.Decoder) error {
+func (o *GlDepthMask_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -4660,15 +4661,15 @@ func (o *GlDepthMask_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthMask_Out) Encode(e *binary.Encoder) error {
+func (o GlDepthMask_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthMask_Out) Decode(d *binary.Decoder) error {
+func (o *GlDepthMask_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthRangef) Encode(e *binary.Encoder) error {
+func (o GlDepthRangef) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4681,7 +4682,7 @@ func (o GlDepthRangef) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthRangef) Decode(d *binary.Decoder) error {
+func (o *GlDepthRangef) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4696,7 +4697,7 @@ func (o *GlDepthRangef) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthRangef_In) Encode(e *binary.Encoder) error {
+func (o GlDepthRangef_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.Near); err != nil {
 		return err
 	}
@@ -4706,7 +4707,7 @@ func (o GlDepthRangef_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthRangef_In) Decode(d *binary.Decoder) error {
+func (o *GlDepthRangef_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -4720,15 +4721,15 @@ func (o *GlDepthRangef_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDepthRangef_Out) Encode(e *binary.Encoder) error {
+func (o GlDepthRangef_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDepthRangef_Out) Decode(d *binary.Decoder) error {
+func (o *GlDepthRangef_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDetachShader) Encode(e *binary.Encoder) error {
+func (o GlDetachShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4741,7 +4742,7 @@ func (o GlDetachShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDetachShader) Decode(d *binary.Decoder) error {
+func (o *GlDetachShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4756,7 +4757,7 @@ func (o *GlDetachShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDetachShader_In) Encode(e *binary.Encoder) error {
+func (o GlDetachShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -4766,7 +4767,7 @@ func (o GlDetachShader_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDetachShader_In) Decode(d *binary.Decoder) error {
+func (o *GlDetachShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4780,15 +4781,15 @@ func (o *GlDetachShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDetachShader_Out) Encode(e *binary.Encoder) error {
+func (o GlDetachShader_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDetachShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlDetachShader_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisable) Encode(e *binary.Encoder) error {
+func (o GlDisable) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4801,7 +4802,7 @@ func (o GlDisable) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisable) Decode(d *binary.Decoder) error {
+func (o *GlDisable) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4816,7 +4817,7 @@ func (o *GlDisable) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableClientState) Encode(e *binary.Encoder) error {
+func (o GlDisableClientState) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4829,7 +4830,7 @@ func (o GlDisableClientState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisableClientState) Decode(d *binary.Decoder) error {
+func (o *GlDisableClientState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4844,14 +4845,14 @@ func (o *GlDisableClientState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableClientState_In) Encode(e *binary.Encoder) error {
+func (o GlDisableClientState_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDisableClientState_In) Decode(d *binary.Decoder) error {
+func (o *GlDisableClientState_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4860,15 +4861,15 @@ func (o *GlDisableClientState_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableClientState_Out) Encode(e *binary.Encoder) error {
+func (o GlDisableClientState_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisableClientState_Out) Decode(d *binary.Decoder) error {
+func (o *GlDisableClientState_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableVertexAttribArray) Encode(e *binary.Encoder) error {
+func (o GlDisableVertexAttribArray) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4881,7 +4882,7 @@ func (o GlDisableVertexAttribArray) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisableVertexAttribArray) Decode(d *binary.Decoder) error {
+func (o *GlDisableVertexAttribArray) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4896,14 +4897,14 @@ func (o *GlDisableVertexAttribArray) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableVertexAttribArray_In) Encode(e *binary.Encoder) error {
+func (o GlDisableVertexAttribArray_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDisableVertexAttribArray_In) Decode(d *binary.Decoder) error {
+func (o *GlDisableVertexAttribArray_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -4912,22 +4913,22 @@ func (o *GlDisableVertexAttribArray_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisableVertexAttribArray_Out) Encode(e *binary.Encoder) error {
+func (o GlDisableVertexAttribArray_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisableVertexAttribArray_Out) Decode(d *binary.Decoder) error {
+func (o *GlDisableVertexAttribArray_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisable_In) Encode(e *binary.Encoder) error {
+func (o GlDisable_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Capability)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlDisable_In) Decode(d *binary.Decoder) error {
+func (o *GlDisable_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4936,15 +4937,15 @@ func (o *GlDisable_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDisable_Out) Encode(e *binary.Encoder) error {
+func (o GlDisable_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDisable_Out) Decode(d *binary.Decoder) error {
+func (o *GlDisable_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDiscardFramebufferEXT) Encode(e *binary.Encoder) error {
+func (o GlDiscardFramebufferEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4957,7 +4958,7 @@ func (o GlDiscardFramebufferEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDiscardFramebufferEXT) Decode(d *binary.Decoder) error {
+func (o *GlDiscardFramebufferEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4972,7 +4973,7 @@ func (o *GlDiscardFramebufferEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDiscardFramebufferEXT_In) Encode(e *binary.Encoder) error {
+func (o GlDiscardFramebufferEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -4990,7 +4991,7 @@ func (o GlDiscardFramebufferEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDiscardFramebufferEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlDiscardFramebufferEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5016,15 +5017,15 @@ func (o *GlDiscardFramebufferEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDiscardFramebufferEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlDiscardFramebufferEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDiscardFramebufferEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlDiscardFramebufferEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawArrays) Encode(e *binary.Encoder) error {
+func (o GlDrawArrays) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5037,7 +5038,7 @@ func (o GlDrawArrays) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawArrays) Decode(d *binary.Decoder) error {
+func (o *GlDrawArrays) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5052,7 +5053,7 @@ func (o *GlDrawArrays) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawArrays_In) Encode(e *binary.Encoder) error {
+func (o GlDrawArrays_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.DrawMode)); err != nil {
 		return err
 	}
@@ -5065,7 +5066,7 @@ func (o GlDrawArrays_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawArrays_In) Decode(d *binary.Decoder) error {
+func (o *GlDrawArrays_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5084,15 +5085,15 @@ func (o *GlDrawArrays_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawArrays_Out) Encode(e *binary.Encoder) error {
+func (o GlDrawArrays_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawArrays_Out) Decode(d *binary.Decoder) error {
+func (o *GlDrawArrays_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawElements) Encode(e *binary.Encoder) error {
+func (o GlDrawElements) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5105,7 +5106,7 @@ func (o GlDrawElements) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawElements) Decode(d *binary.Decoder) error {
+func (o *GlDrawElements) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5120,7 +5121,7 @@ func (o *GlDrawElements) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawElements_In) Encode(e *binary.Encoder) error {
+func (o GlDrawElements_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.DrawMode)); err != nil {
 		return err
 	}
@@ -5136,7 +5137,7 @@ func (o GlDrawElements_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawElements_In) Decode(d *binary.Decoder) error {
+func (o *GlDrawElements_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5160,15 +5161,15 @@ func (o *GlDrawElements_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlDrawElements_Out) Encode(e *binary.Encoder) error {
+func (o GlDrawElements_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlDrawElements_Out) Decode(d *binary.Decoder) error {
+func (o *GlDrawElements_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEGLImageTargetRenderbufferStorageOES) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetRenderbufferStorageOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5181,7 +5182,7 @@ func (o GlEGLImageTargetRenderbufferStorageOES) Encode(e *binary.Encoder) error 
 	return nil
 }
 
-func (o *GlEGLImageTargetRenderbufferStorageOES) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetRenderbufferStorageOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5196,7 +5197,7 @@ func (o *GlEGLImageTargetRenderbufferStorageOES) Decode(d *binary.Decoder) error
 	return nil
 }
 
-func (o GlEGLImageTargetRenderbufferStorageOES_In) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetRenderbufferStorageOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -5206,7 +5207,7 @@ func (o GlEGLImageTargetRenderbufferStorageOES_In) Encode(e *binary.Encoder) err
 	return nil
 }
 
-func (o *GlEGLImageTargetRenderbufferStorageOES_In) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetRenderbufferStorageOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5220,15 +5221,15 @@ func (o *GlEGLImageTargetRenderbufferStorageOES_In) Decode(d *binary.Decoder) er
 	return nil
 }
 
-func (o GlEGLImageTargetRenderbufferStorageOES_Out) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetRenderbufferStorageOES_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEGLImageTargetRenderbufferStorageOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetRenderbufferStorageOES_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEGLImageTargetTexture2DOES) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetTexture2DOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5241,7 +5242,7 @@ func (o GlEGLImageTargetTexture2DOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEGLImageTargetTexture2DOES) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetTexture2DOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5256,7 +5257,7 @@ func (o *GlEGLImageTargetTexture2DOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEGLImageTargetTexture2DOES_In) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetTexture2DOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -5266,7 +5267,7 @@ func (o GlEGLImageTargetTexture2DOES_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEGLImageTargetTexture2DOES_In) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetTexture2DOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5280,15 +5281,15 @@ func (o *GlEGLImageTargetTexture2DOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEGLImageTargetTexture2DOES_Out) Encode(e *binary.Encoder) error {
+func (o GlEGLImageTargetTexture2DOES_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEGLImageTargetTexture2DOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlEGLImageTargetTexture2DOES_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnable) Encode(e *binary.Encoder) error {
+func (o GlEnable) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5301,7 +5302,7 @@ func (o GlEnable) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnable) Decode(d *binary.Decoder) error {
+func (o *GlEnable) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5316,7 +5317,7 @@ func (o *GlEnable) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableClientState) Encode(e *binary.Encoder) error {
+func (o GlEnableClientState) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5329,7 +5330,7 @@ func (o GlEnableClientState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnableClientState) Decode(d *binary.Decoder) error {
+func (o *GlEnableClientState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5344,14 +5345,14 @@ func (o *GlEnableClientState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableClientState_In) Encode(e *binary.Encoder) error {
+func (o GlEnableClientState_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Type)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEnableClientState_In) Decode(d *binary.Decoder) error {
+func (o *GlEnableClientState_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5360,15 +5361,15 @@ func (o *GlEnableClientState_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableClientState_Out) Encode(e *binary.Encoder) error {
+func (o GlEnableClientState_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnableClientState_Out) Decode(d *binary.Decoder) error {
+func (o *GlEnableClientState_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableVertexAttribArray) Encode(e *binary.Encoder) error {
+func (o GlEnableVertexAttribArray) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5381,7 +5382,7 @@ func (o GlEnableVertexAttribArray) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnableVertexAttribArray) Decode(d *binary.Decoder) error {
+func (o *GlEnableVertexAttribArray) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5396,14 +5397,14 @@ func (o *GlEnableVertexAttribArray) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableVertexAttribArray_In) Encode(e *binary.Encoder) error {
+func (o GlEnableVertexAttribArray_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEnableVertexAttribArray_In) Decode(d *binary.Decoder) error {
+func (o *GlEnableVertexAttribArray_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -5412,22 +5413,22 @@ func (o *GlEnableVertexAttribArray_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnableVertexAttribArray_Out) Encode(e *binary.Encoder) error {
+func (o GlEnableVertexAttribArray_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnableVertexAttribArray_Out) Decode(d *binary.Decoder) error {
+func (o *GlEnableVertexAttribArray_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnable_In) Encode(e *binary.Encoder) error {
+func (o GlEnable_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Capability)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEnable_In) Decode(d *binary.Decoder) error {
+func (o *GlEnable_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5436,15 +5437,15 @@ func (o *GlEnable_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEnable_Out) Encode(e *binary.Encoder) error {
+func (o GlEnable_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEnable_Out) Decode(d *binary.Decoder) error {
+func (o *GlEnable_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQuery) Encode(e *binary.Encoder) error {
+func (o GlEndQuery) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5457,7 +5458,7 @@ func (o GlEndQuery) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndQuery) Decode(d *binary.Decoder) error {
+func (o *GlEndQuery) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5472,7 +5473,7 @@ func (o *GlEndQuery) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQueryEXT) Encode(e *binary.Encoder) error {
+func (o GlEndQueryEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5485,7 +5486,7 @@ func (o GlEndQueryEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndQueryEXT) Decode(d *binary.Decoder) error {
+func (o *GlEndQueryEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5500,14 +5501,14 @@ func (o *GlEndQueryEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQueryEXT_In) Encode(e *binary.Encoder) error {
+func (o GlEndQueryEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEndQueryEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlEndQueryEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5516,22 +5517,22 @@ func (o *GlEndQueryEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQueryEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlEndQueryEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndQueryEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlEndQueryEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQuery_In) Encode(e *binary.Encoder) error {
+func (o GlEndQuery_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEndQuery_In) Decode(d *binary.Decoder) error {
+func (o *GlEndQuery_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5540,15 +5541,15 @@ func (o *GlEndQuery_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndQuery_Out) Encode(e *binary.Encoder) error {
+func (o GlEndQuery_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndQuery_Out) Decode(d *binary.Decoder) error {
+func (o *GlEndQuery_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndTilingQCOM) Encode(e *binary.Encoder) error {
+func (o GlEndTilingQCOM) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5561,7 +5562,7 @@ func (o GlEndTilingQCOM) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndTilingQCOM) Decode(d *binary.Decoder) error {
+func (o *GlEndTilingQCOM) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5576,14 +5577,14 @@ func (o *GlEndTilingQCOM) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndTilingQCOM_In) Encode(e *binary.Encoder) error {
+func (o GlEndTilingQCOM_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.PreserveMask)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlEndTilingQCOM_In) Decode(d *binary.Decoder) error {
+func (o *GlEndTilingQCOM_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5592,15 +5593,15 @@ func (o *GlEndTilingQCOM_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlEndTilingQCOM_Out) Encode(e *binary.Encoder) error {
+func (o GlEndTilingQCOM_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlEndTilingQCOM_Out) Decode(d *binary.Decoder) error {
+func (o *GlEndTilingQCOM_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFinish) Encode(e *binary.Encoder) error {
+func (o GlFinish) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5613,7 +5614,7 @@ func (o GlFinish) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFinish) Decode(d *binary.Decoder) error {
+func (o *GlFinish) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5628,23 +5629,23 @@ func (o *GlFinish) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFinish_In) Encode(e *binary.Encoder) error {
+func (o GlFinish_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFinish_In) Decode(d *binary.Decoder) error {
+func (o *GlFinish_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFinish_Out) Encode(e *binary.Encoder) error {
+func (o GlFinish_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFinish_Out) Decode(d *binary.Decoder) error {
+func (o *GlFinish_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFlush) Encode(e *binary.Encoder) error {
+func (o GlFlush) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5657,7 +5658,7 @@ func (o GlFlush) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFlush) Decode(d *binary.Decoder) error {
+func (o *GlFlush) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5672,23 +5673,23 @@ func (o *GlFlush) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFlush_In) Encode(e *binary.Encoder) error {
+func (o GlFlush_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFlush_In) Decode(d *binary.Decoder) error {
+func (o *GlFlush_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFlush_Out) Encode(e *binary.Encoder) error {
+func (o GlFlush_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFlush_Out) Decode(d *binary.Decoder) error {
+func (o *GlFlush_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferRenderbuffer) Encode(e *binary.Encoder) error {
+func (o GlFramebufferRenderbuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5701,7 +5702,7 @@ func (o GlFramebufferRenderbuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferRenderbuffer) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferRenderbuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5716,7 +5717,7 @@ func (o *GlFramebufferRenderbuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferRenderbuffer_In) Encode(e *binary.Encoder) error {
+func (o GlFramebufferRenderbuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.FramebufferTarget)); err != nil {
 		return err
 	}
@@ -5732,7 +5733,7 @@ func (o GlFramebufferRenderbuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferRenderbuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferRenderbuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5756,15 +5757,15 @@ func (o *GlFramebufferRenderbuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferRenderbuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlFramebufferRenderbuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferRenderbuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferRenderbuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferTexture2D) Encode(e *binary.Encoder) error {
+func (o GlFramebufferTexture2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5777,7 +5778,7 @@ func (o GlFramebufferTexture2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferTexture2D) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferTexture2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5792,7 +5793,7 @@ func (o *GlFramebufferTexture2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferTexture2D_In) Encode(e *binary.Encoder) error {
+func (o GlFramebufferTexture2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.FramebufferTarget)); err != nil {
 		return err
 	}
@@ -5811,7 +5812,7 @@ func (o GlFramebufferTexture2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferTexture2D_In) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferTexture2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5840,15 +5841,15 @@ func (o *GlFramebufferTexture2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFramebufferTexture2D_Out) Encode(e *binary.Encoder) error {
+func (o GlFramebufferTexture2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFramebufferTexture2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlFramebufferTexture2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlFrontFace) Encode(e *binary.Encoder) error {
+func (o GlFrontFace) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5861,7 +5862,7 @@ func (o GlFrontFace) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFrontFace) Decode(d *binary.Decoder) error {
+func (o *GlFrontFace) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5876,14 +5877,14 @@ func (o *GlFrontFace) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFrontFace_In) Encode(e *binary.Encoder) error {
+func (o GlFrontFace_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Orientation)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlFrontFace_In) Decode(d *binary.Decoder) error {
+func (o *GlFrontFace_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5892,15 +5893,15 @@ func (o *GlFrontFace_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlFrontFace_Out) Encode(e *binary.Encoder) error {
+func (o GlFrontFace_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlFrontFace_Out) Decode(d *binary.Decoder) error {
+func (o *GlFrontFace_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenBuffers) Encode(e *binary.Encoder) error {
+func (o GlGenBuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5913,7 +5914,7 @@ func (o GlGenBuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenBuffers) Decode(d *binary.Decoder) error {
+func (o *GlGenBuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -5928,14 +5929,14 @@ func (o *GlGenBuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenBuffers_In) Encode(e *binary.Encoder) error {
+func (o GlGenBuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenBuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlGenBuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -5944,7 +5945,7 @@ func (o *GlGenBuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenBuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlGenBuffers_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Buffers))); err != nil {
 		return err
 	}
@@ -5956,7 +5957,7 @@ func (o GlGenBuffers_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenBuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenBuffers_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -5972,7 +5973,7 @@ func (o *GlGenBuffers_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenFramebuffers) Encode(e *binary.Encoder) error {
+func (o GlGenFramebuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -5985,7 +5986,7 @@ func (o GlGenFramebuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenFramebuffers) Decode(d *binary.Decoder) error {
+func (o *GlGenFramebuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6000,14 +6001,14 @@ func (o *GlGenFramebuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenFramebuffers_In) Encode(e *binary.Encoder) error {
+func (o GlGenFramebuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenFramebuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlGenFramebuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6016,7 +6017,7 @@ func (o *GlGenFramebuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenFramebuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlGenFramebuffers_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Framebuffers))); err != nil {
 		return err
 	}
@@ -6028,7 +6029,7 @@ func (o GlGenFramebuffers_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenFramebuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenFramebuffers_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6044,7 +6045,7 @@ func (o *GlGenFramebuffers_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueries) Encode(e *binary.Encoder) error {
+func (o GlGenQueries) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6057,7 +6058,7 @@ func (o GlGenQueries) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenQueries) Decode(d *binary.Decoder) error {
+func (o *GlGenQueries) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6072,7 +6073,7 @@ func (o *GlGenQueries) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueriesEXT) Encode(e *binary.Encoder) error {
+func (o GlGenQueriesEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6085,7 +6086,7 @@ func (o GlGenQueriesEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenQueriesEXT) Decode(d *binary.Decoder) error {
+func (o *GlGenQueriesEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6100,14 +6101,14 @@ func (o *GlGenQueriesEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueriesEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGenQueriesEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenQueriesEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGenQueriesEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6116,7 +6117,7 @@ func (o *GlGenQueriesEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueriesEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGenQueriesEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Queries))); err != nil {
 		return err
 	}
@@ -6128,7 +6129,7 @@ func (o GlGenQueriesEXT_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenQueriesEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenQueriesEXT_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6144,14 +6145,14 @@ func (o *GlGenQueriesEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueries_In) Encode(e *binary.Encoder) error {
+func (o GlGenQueries_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenQueries_In) Decode(d *binary.Decoder) error {
+func (o *GlGenQueries_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6160,7 +6161,7 @@ func (o *GlGenQueries_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenQueries_Out) Encode(e *binary.Encoder) error {
+func (o GlGenQueries_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Queries))); err != nil {
 		return err
 	}
@@ -6172,7 +6173,7 @@ func (o GlGenQueries_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenQueries_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenQueries_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6188,7 +6189,7 @@ func (o *GlGenQueries_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenRenderbuffers) Encode(e *binary.Encoder) error {
+func (o GlGenRenderbuffers) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6201,7 +6202,7 @@ func (o GlGenRenderbuffers) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenRenderbuffers) Decode(d *binary.Decoder) error {
+func (o *GlGenRenderbuffers) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6216,14 +6217,14 @@ func (o *GlGenRenderbuffers) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenRenderbuffers_In) Encode(e *binary.Encoder) error {
+func (o GlGenRenderbuffers_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenRenderbuffers_In) Decode(d *binary.Decoder) error {
+func (o *GlGenRenderbuffers_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6232,7 +6233,7 @@ func (o *GlGenRenderbuffers_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenRenderbuffers_Out) Encode(e *binary.Encoder) error {
+func (o GlGenRenderbuffers_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Renderbuffers))); err != nil {
 		return err
 	}
@@ -6244,7 +6245,7 @@ func (o GlGenRenderbuffers_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenRenderbuffers_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenRenderbuffers_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6260,7 +6261,7 @@ func (o *GlGenRenderbuffers_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenTextures) Encode(e *binary.Encoder) error {
+func (o GlGenTextures) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6273,7 +6274,7 @@ func (o GlGenTextures) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenTextures) Decode(d *binary.Decoder) error {
+func (o *GlGenTextures) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6288,14 +6289,14 @@ func (o *GlGenTextures) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenTextures_In) Encode(e *binary.Encoder) error {
+func (o GlGenTextures_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenTextures_In) Decode(d *binary.Decoder) error {
+func (o *GlGenTextures_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6304,7 +6305,7 @@ func (o *GlGenTextures_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenTextures_Out) Encode(e *binary.Encoder) error {
+func (o GlGenTextures_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Textures))); err != nil {
 		return err
 	}
@@ -6316,7 +6317,7 @@ func (o GlGenTextures_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenTextures_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenTextures_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6332,7 +6333,7 @@ func (o *GlGenTextures_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenVertexArraysOES) Encode(e *binary.Encoder) error {
+func (o GlGenVertexArraysOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6345,7 +6346,7 @@ func (o GlGenVertexArraysOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenVertexArraysOES) Decode(d *binary.Decoder) error {
+func (o *GlGenVertexArraysOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6360,14 +6361,14 @@ func (o *GlGenVertexArraysOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenVertexArraysOES_In) Encode(e *binary.Encoder) error {
+func (o GlGenVertexArraysOES_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenVertexArraysOES_In) Decode(d *binary.Decoder) error {
+func (o *GlGenVertexArraysOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6376,7 +6377,7 @@ func (o *GlGenVertexArraysOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenVertexArraysOES_Out) Encode(e *binary.Encoder) error {
+func (o GlGenVertexArraysOES_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Arrays))); err != nil {
 		return err
 	}
@@ -6388,7 +6389,7 @@ func (o GlGenVertexArraysOES_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenVertexArraysOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenVertexArraysOES_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6404,7 +6405,7 @@ func (o *GlGenVertexArraysOES_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenerateMipmap) Encode(e *binary.Encoder) error {
+func (o GlGenerateMipmap) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6417,7 +6418,7 @@ func (o GlGenerateMipmap) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenerateMipmap) Decode(d *binary.Decoder) error {
+func (o *GlGenerateMipmap) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6432,14 +6433,14 @@ func (o *GlGenerateMipmap) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenerateMipmap_In) Encode(e *binary.Encoder) error {
+func (o GlGenerateMipmap_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGenerateMipmap_In) Decode(d *binary.Decoder) error {
+func (o *GlGenerateMipmap_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6448,15 +6449,15 @@ func (o *GlGenerateMipmap_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGenerateMipmap_Out) Encode(e *binary.Encoder) error {
+func (o GlGenerateMipmap_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGenerateMipmap_Out) Decode(d *binary.Decoder) error {
+func (o *GlGenerateMipmap_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveAttrib) Encode(e *binary.Encoder) error {
+func (o GlGetActiveAttrib) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6469,7 +6470,7 @@ func (o GlGetActiveAttrib) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveAttrib) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveAttrib) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6484,7 +6485,7 @@ func (o *GlGetActiveAttrib) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveAttrib_In) Encode(e *binary.Encoder) error {
+func (o GlGetActiveAttrib_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -6497,7 +6498,7 @@ func (o GlGetActiveAttrib_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveAttrib_In) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveAttrib_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6516,7 +6517,7 @@ func (o *GlGetActiveAttrib_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveAttrib_Out) Encode(e *binary.Encoder) error {
+func (o GlGetActiveAttrib_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.BufferBytesWritten); err != nil {
 		return err
 	}
@@ -6532,7 +6533,7 @@ func (o GlGetActiveAttrib_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveAttrib_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveAttrib_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6556,7 +6557,7 @@ func (o *GlGetActiveAttrib_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveUniform) Encode(e *binary.Encoder) error {
+func (o GlGetActiveUniform) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6569,7 +6570,7 @@ func (o GlGetActiveUniform) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveUniform) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveUniform) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6584,7 +6585,7 @@ func (o *GlGetActiveUniform) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveUniform_In) Encode(e *binary.Encoder) error {
+func (o GlGetActiveUniform_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -6597,7 +6598,7 @@ func (o GlGetActiveUniform_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveUniform_In) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveUniform_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6616,7 +6617,7 @@ func (o *GlGetActiveUniform_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetActiveUniform_Out) Encode(e *binary.Encoder) error {
+func (o GlGetActiveUniform_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.BufferBytesWritten); err != nil {
 		return err
 	}
@@ -6632,7 +6633,7 @@ func (o GlGetActiveUniform_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetActiveUniform_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetActiveUniform_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6656,7 +6657,7 @@ func (o *GlGetActiveUniform_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttachedShaders) Encode(e *binary.Encoder) error {
+func (o GlGetAttachedShaders) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6669,7 +6670,7 @@ func (o GlGetAttachedShaders) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetAttachedShaders) Decode(d *binary.Decoder) error {
+func (o *GlGetAttachedShaders) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6684,7 +6685,7 @@ func (o *GlGetAttachedShaders) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttachedShaders_In) Encode(e *binary.Encoder) error {
+func (o GlGetAttachedShaders_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -6694,7 +6695,7 @@ func (o GlGetAttachedShaders_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetAttachedShaders_In) Decode(d *binary.Decoder) error {
+func (o *GlGetAttachedShaders_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6708,7 +6709,7 @@ func (o *GlGetAttachedShaders_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttachedShaders_Out) Encode(e *binary.Encoder) error {
+func (o GlGetAttachedShaders_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.ShadersLengthWritten); err != nil {
 		return err
 	}
@@ -6723,7 +6724,7 @@ func (o GlGetAttachedShaders_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetAttachedShaders_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetAttachedShaders_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6744,7 +6745,7 @@ func (o *GlGetAttachedShaders_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttribLocation) Encode(e *binary.Encoder) error {
+func (o GlGetAttribLocation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6757,7 +6758,7 @@ func (o GlGetAttribLocation) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetAttribLocation) Decode(d *binary.Decoder) error {
+func (o *GlGetAttribLocation) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6772,7 +6773,7 @@ func (o *GlGetAttribLocation) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttribLocation_In) Encode(e *binary.Encoder) error {
+func (o GlGetAttribLocation_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -6782,7 +6783,7 @@ func (o GlGetAttribLocation_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetAttribLocation_In) Decode(d *binary.Decoder) error {
+func (o *GlGetAttribLocation_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6796,14 +6797,14 @@ func (o *GlGetAttribLocation_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetAttribLocation_Out) Encode(e *binary.Encoder) error {
+func (o GlGetAttribLocation_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetAttribLocation_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetAttribLocation_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6812,7 +6813,7 @@ func (o *GlGetAttribLocation_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBooleanv) Encode(e *binary.Encoder) error {
+func (o GlGetBooleanv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6825,7 +6826,7 @@ func (o GlGetBooleanv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetBooleanv) Decode(d *binary.Decoder) error {
+func (o *GlGetBooleanv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6840,14 +6841,14 @@ func (o *GlGetBooleanv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBooleanv_In) Encode(e *binary.Encoder) error {
+func (o GlGetBooleanv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetBooleanv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetBooleanv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6856,7 +6857,7 @@ func (o *GlGetBooleanv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBooleanv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetBooleanv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -6868,7 +6869,7 @@ func (o GlGetBooleanv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetBooleanv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetBooleanv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6884,7 +6885,7 @@ func (o *GlGetBooleanv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBufferParameteriv) Encode(e *binary.Encoder) error {
+func (o GlGetBufferParameteriv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6897,7 +6898,7 @@ func (o GlGetBufferParameteriv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetBufferParameteriv) Decode(d *binary.Decoder) error {
+func (o *GlGetBufferParameteriv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6912,7 +6913,7 @@ func (o *GlGetBufferParameteriv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBufferParameteriv_In) Encode(e *binary.Encoder) error {
+func (o GlGetBufferParameteriv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -6922,7 +6923,7 @@ func (o GlGetBufferParameteriv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetBufferParameteriv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetBufferParameteriv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6936,14 +6937,14 @@ func (o *GlGetBufferParameteriv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetBufferParameteriv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetBufferParameteriv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetBufferParameteriv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetBufferParameteriv_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -6952,7 +6953,7 @@ func (o *GlGetBufferParameteriv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetError) Encode(e *binary.Encoder) error {
+func (o GlGetError) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -6965,7 +6966,7 @@ func (o GlGetError) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetError) Decode(d *binary.Decoder) error {
+func (o *GlGetError) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -6980,22 +6981,22 @@ func (o *GlGetError) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetError_In) Encode(e *binary.Encoder) error {
+func (o GlGetError_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetError_In) Decode(d *binary.Decoder) error {
+func (o *GlGetError_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetError_Out) Encode(e *binary.Encoder) error {
+func (o GlGetError_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetError_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetError_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7004,7 +7005,7 @@ func (o *GlGetError_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetFloatv) Encode(e *binary.Encoder) error {
+func (o GlGetFloatv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7017,7 +7018,7 @@ func (o GlGetFloatv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetFloatv) Decode(d *binary.Decoder) error {
+func (o *GlGetFloatv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7032,14 +7033,14 @@ func (o *GlGetFloatv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetFloatv_In) Encode(e *binary.Encoder) error {
+func (o GlGetFloatv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetFloatv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetFloatv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7048,7 +7049,7 @@ func (o *GlGetFloatv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetFloatv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetFloatv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -7060,7 +7061,7 @@ func (o GlGetFloatv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetFloatv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetFloatv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7076,7 +7077,7 @@ func (o *GlGetFloatv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetFramebufferAttachmentParameteriv) Encode(e *binary.Encoder) error {
+func (o GlGetFramebufferAttachmentParameteriv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7089,7 +7090,7 @@ func (o GlGetFramebufferAttachmentParameteriv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetFramebufferAttachmentParameteriv) Decode(d *binary.Decoder) error {
+func (o *GlGetFramebufferAttachmentParameteriv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7104,7 +7105,7 @@ func (o *GlGetFramebufferAttachmentParameteriv) Decode(d *binary.Decoder) error 
 	return nil
 }
 
-func (o GlGetFramebufferAttachmentParameteriv_In) Encode(e *binary.Encoder) error {
+func (o GlGetFramebufferAttachmentParameteriv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -7117,7 +7118,7 @@ func (o GlGetFramebufferAttachmentParameteriv_In) Encode(e *binary.Encoder) erro
 	return nil
 }
 
-func (o *GlGetFramebufferAttachmentParameteriv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetFramebufferAttachmentParameteriv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7136,7 +7137,7 @@ func (o *GlGetFramebufferAttachmentParameteriv_In) Decode(d *binary.Decoder) err
 	return nil
 }
 
-func (o GlGetFramebufferAttachmentParameteriv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetFramebufferAttachmentParameteriv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Value))); err != nil {
 		return err
 	}
@@ -7148,7 +7149,7 @@ func (o GlGetFramebufferAttachmentParameteriv_Out) Encode(e *binary.Encoder) err
 	return nil
 }
 
-func (o *GlGetFramebufferAttachmentParameteriv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetFramebufferAttachmentParameteriv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7164,7 +7165,7 @@ func (o *GlGetFramebufferAttachmentParameteriv_Out) Decode(d *binary.Decoder) er
 	return nil
 }
 
-func (o GlGetGraphicsResetStatusEXT) Encode(e *binary.Encoder) error {
+func (o GlGetGraphicsResetStatusEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7177,7 +7178,7 @@ func (o GlGetGraphicsResetStatusEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetGraphicsResetStatusEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetGraphicsResetStatusEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7192,22 +7193,22 @@ func (o *GlGetGraphicsResetStatusEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetGraphicsResetStatusEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetGraphicsResetStatusEXT_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetGraphicsResetStatusEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetGraphicsResetStatusEXT_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetGraphicsResetStatusEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetGraphicsResetStatusEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetGraphicsResetStatusEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetGraphicsResetStatusEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7216,7 +7217,7 @@ func (o *GlGetGraphicsResetStatusEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetIntegerv) Encode(e *binary.Encoder) error {
+func (o GlGetIntegerv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7229,7 +7230,7 @@ func (o GlGetIntegerv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetIntegerv) Decode(d *binary.Decoder) error {
+func (o *GlGetIntegerv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7244,14 +7245,14 @@ func (o *GlGetIntegerv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetIntegerv_In) Encode(e *binary.Encoder) error {
+func (o GlGetIntegerv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetIntegerv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetIntegerv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7260,7 +7261,7 @@ func (o *GlGetIntegerv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetIntegerv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetIntegerv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -7272,7 +7273,7 @@ func (o GlGetIntegerv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetIntegerv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetIntegerv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7288,7 +7289,7 @@ func (o *GlGetIntegerv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramBinaryOES) Encode(e *binary.Encoder) error {
+func (o GlGetProgramBinaryOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7301,7 +7302,7 @@ func (o GlGetProgramBinaryOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramBinaryOES) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramBinaryOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7316,7 +7317,7 @@ func (o *GlGetProgramBinaryOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramBinaryOES_In) Encode(e *binary.Encoder) error {
+func (o GlGetProgramBinaryOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -7326,7 +7327,7 @@ func (o GlGetProgramBinaryOES_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramBinaryOES_In) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramBinaryOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7340,7 +7341,7 @@ func (o *GlGetProgramBinaryOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramBinaryOES_Out) Encode(e *binary.Encoder) error {
+func (o GlGetProgramBinaryOES_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.BytesWritten); err != nil {
 		return err
 	}
@@ -7353,7 +7354,7 @@ func (o GlGetProgramBinaryOES_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramBinaryOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramBinaryOES_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7372,7 +7373,7 @@ func (o *GlGetProgramBinaryOES_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramInfoLog) Encode(e *binary.Encoder) error {
+func (o GlGetProgramInfoLog) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7385,7 +7386,7 @@ func (o GlGetProgramInfoLog) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramInfoLog) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramInfoLog) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7400,7 +7401,7 @@ func (o *GlGetProgramInfoLog) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramInfoLog_In) Encode(e *binary.Encoder) error {
+func (o GlGetProgramInfoLog_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -7410,7 +7411,7 @@ func (o GlGetProgramInfoLog_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramInfoLog_In) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramInfoLog_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7424,7 +7425,7 @@ func (o *GlGetProgramInfoLog_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramInfoLog_Out) Encode(e *binary.Encoder) error {
+func (o GlGetProgramInfoLog_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.StringLengthWritten); err != nil {
 		return err
 	}
@@ -7434,7 +7435,7 @@ func (o GlGetProgramInfoLog_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramInfoLog_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramInfoLog_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7448,7 +7449,7 @@ func (o *GlGetProgramInfoLog_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramiv) Encode(e *binary.Encoder) error {
+func (o GlGetProgramiv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7461,7 +7462,7 @@ func (o GlGetProgramiv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramiv) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramiv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7476,7 +7477,7 @@ func (o *GlGetProgramiv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramiv_In) Encode(e *binary.Encoder) error {
+func (o GlGetProgramiv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -7486,7 +7487,7 @@ func (o GlGetProgramiv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramiv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramiv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7500,7 +7501,7 @@ func (o *GlGetProgramiv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetProgramiv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetProgramiv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Value))); err != nil {
 		return err
 	}
@@ -7512,7 +7513,7 @@ func (o GlGetProgramiv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetProgramiv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetProgramiv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7528,7 +7529,7 @@ func (o *GlGetProgramiv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjecti64vEXT) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjecti64vEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7541,7 +7542,7 @@ func (o GlGetQueryObjecti64vEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjecti64vEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjecti64vEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7556,7 +7557,7 @@ func (o *GlGetQueryObjecti64vEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjecti64vEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjecti64vEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -7566,7 +7567,7 @@ func (o GlGetQueryObjecti64vEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjecti64vEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjecti64vEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7580,14 +7581,14 @@ func (o *GlGetQueryObjecti64vEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjecti64vEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjecti64vEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Int64(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryObjecti64vEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjecti64vEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -7596,7 +7597,7 @@ func (o *GlGetQueryObjecti64vEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectivEXT) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectivEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7609,7 +7610,7 @@ func (o GlGetQueryObjectivEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectivEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectivEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7624,7 +7625,7 @@ func (o *GlGetQueryObjectivEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectivEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectivEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -7634,7 +7635,7 @@ func (o GlGetQueryObjectivEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectivEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectivEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7648,14 +7649,14 @@ func (o *GlGetQueryObjectivEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectivEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectivEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryObjectivEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectivEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7664,7 +7665,7 @@ func (o *GlGetQueryObjectivEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectui64vEXT) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectui64vEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7677,7 +7678,7 @@ func (o GlGetQueryObjectui64vEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectui64vEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectui64vEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7692,7 +7693,7 @@ func (o *GlGetQueryObjectui64vEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectui64vEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectui64vEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -7702,7 +7703,7 @@ func (o GlGetQueryObjectui64vEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectui64vEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectui64vEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7716,14 +7717,14 @@ func (o *GlGetQueryObjectui64vEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectui64vEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectui64vEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryObjectui64vEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectui64vEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -7732,7 +7733,7 @@ func (o *GlGetQueryObjectui64vEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuiv) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuiv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7745,7 +7746,7 @@ func (o GlGetQueryObjectuiv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectuiv) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuiv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7760,7 +7761,7 @@ func (o *GlGetQueryObjectuiv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuivEXT) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuivEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7773,7 +7774,7 @@ func (o GlGetQueryObjectuivEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectuivEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuivEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7788,7 +7789,7 @@ func (o *GlGetQueryObjectuivEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuivEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuivEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -7798,7 +7799,7 @@ func (o GlGetQueryObjectuivEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectuivEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuivEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7812,14 +7813,14 @@ func (o *GlGetQueryObjectuivEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuivEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuivEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryObjectuivEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuivEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7828,7 +7829,7 @@ func (o *GlGetQueryObjectuivEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuiv_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuiv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -7838,7 +7839,7 @@ func (o GlGetQueryObjectuiv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryObjectuiv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuiv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7852,14 +7853,14 @@ func (o *GlGetQueryObjectuiv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryObjectuiv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryObjectuiv_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryObjectuiv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryObjectuiv_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7868,7 +7869,7 @@ func (o *GlGetQueryObjectuiv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryiv) Encode(e *binary.Encoder) error {
+func (o GlGetQueryiv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7881,7 +7882,7 @@ func (o GlGetQueryiv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryiv) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryiv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7896,7 +7897,7 @@ func (o *GlGetQueryiv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryivEXT) Encode(e *binary.Encoder) error {
+func (o GlGetQueryivEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -7909,7 +7910,7 @@ func (o GlGetQueryivEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryivEXT) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryivEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7924,7 +7925,7 @@ func (o *GlGetQueryivEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryivEXT_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryivEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -7934,7 +7935,7 @@ func (o GlGetQueryivEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryivEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryivEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7948,14 +7949,14 @@ func (o *GlGetQueryivEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryivEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryivEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryivEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryivEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -7964,7 +7965,7 @@ func (o *GlGetQueryivEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryiv_In) Encode(e *binary.Encoder) error {
+func (o GlGetQueryiv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -7974,7 +7975,7 @@ func (o GlGetQueryiv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetQueryiv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryiv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -7988,14 +7989,14 @@ func (o *GlGetQueryiv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetQueryiv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetQueryiv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Value); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetQueryiv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetQueryiv_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8004,7 +8005,7 @@ func (o *GlGetQueryiv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetRenderbufferParameteriv) Encode(e *binary.Encoder) error {
+func (o GlGetRenderbufferParameteriv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8017,7 +8018,7 @@ func (o GlGetRenderbufferParameteriv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetRenderbufferParameteriv) Decode(d *binary.Decoder) error {
+func (o *GlGetRenderbufferParameteriv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8032,7 +8033,7 @@ func (o *GlGetRenderbufferParameteriv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetRenderbufferParameteriv_In) Encode(e *binary.Encoder) error {
+func (o GlGetRenderbufferParameteriv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -8042,7 +8043,7 @@ func (o GlGetRenderbufferParameteriv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetRenderbufferParameteriv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetRenderbufferParameteriv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8056,7 +8057,7 @@ func (o *GlGetRenderbufferParameteriv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetRenderbufferParameteriv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetRenderbufferParameteriv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -8068,7 +8069,7 @@ func (o GlGetRenderbufferParameteriv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetRenderbufferParameteriv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetRenderbufferParameteriv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8084,7 +8085,7 @@ func (o *GlGetRenderbufferParameteriv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderInfoLog) Encode(e *binary.Encoder) error {
+func (o GlGetShaderInfoLog) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8097,7 +8098,7 @@ func (o GlGetShaderInfoLog) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderInfoLog) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderInfoLog) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8112,7 +8113,7 @@ func (o *GlGetShaderInfoLog) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderInfoLog_In) Encode(e *binary.Encoder) error {
+func (o GlGetShaderInfoLog_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
@@ -8122,7 +8123,7 @@ func (o GlGetShaderInfoLog_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderInfoLog_In) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderInfoLog_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8136,7 +8137,7 @@ func (o *GlGetShaderInfoLog_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderInfoLog_Out) Encode(e *binary.Encoder) error {
+func (o GlGetShaderInfoLog_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.StringLengthWritten); err != nil {
 		return err
 	}
@@ -8146,7 +8147,7 @@ func (o GlGetShaderInfoLog_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderInfoLog_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderInfoLog_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8160,7 +8161,7 @@ func (o *GlGetShaderInfoLog_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderPrecisionFormat) Encode(e *binary.Encoder) error {
+func (o GlGetShaderPrecisionFormat) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8173,7 +8174,7 @@ func (o GlGetShaderPrecisionFormat) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderPrecisionFormat) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderPrecisionFormat) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8188,7 +8189,7 @@ func (o *GlGetShaderPrecisionFormat) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderPrecisionFormat_In) Encode(e *binary.Encoder) error {
+func (o GlGetShaderPrecisionFormat_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.ShaderType)); err != nil {
 		return err
 	}
@@ -8198,7 +8199,7 @@ func (o GlGetShaderPrecisionFormat_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderPrecisionFormat_In) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderPrecisionFormat_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8212,7 +8213,7 @@ func (o *GlGetShaderPrecisionFormat_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderPrecisionFormat_Out) Encode(e *binary.Encoder) error {
+func (o GlGetShaderPrecisionFormat_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Range))); err != nil {
 		return err
 	}
@@ -8227,7 +8228,7 @@ func (o GlGetShaderPrecisionFormat_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderPrecisionFormat_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderPrecisionFormat_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8248,7 +8249,7 @@ func (o *GlGetShaderPrecisionFormat_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderSource) Encode(e *binary.Encoder) error {
+func (o GlGetShaderSource) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8261,7 +8262,7 @@ func (o GlGetShaderSource) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderSource) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderSource) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8276,7 +8277,7 @@ func (o *GlGetShaderSource) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderSource_In) Encode(e *binary.Encoder) error {
+func (o GlGetShaderSource_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
@@ -8286,7 +8287,7 @@ func (o GlGetShaderSource_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderSource_In) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderSource_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8300,7 +8301,7 @@ func (o *GlGetShaderSource_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderSource_Out) Encode(e *binary.Encoder) error {
+func (o GlGetShaderSource_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.StringLengthWritten); err != nil {
 		return err
 	}
@@ -8310,7 +8311,7 @@ func (o GlGetShaderSource_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderSource_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderSource_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8324,7 +8325,7 @@ func (o *GlGetShaderSource_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderiv) Encode(e *binary.Encoder) error {
+func (o GlGetShaderiv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8337,7 +8338,7 @@ func (o GlGetShaderiv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderiv) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderiv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8352,7 +8353,7 @@ func (o *GlGetShaderiv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderiv_In) Encode(e *binary.Encoder) error {
+func (o GlGetShaderiv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
@@ -8362,7 +8363,7 @@ func (o GlGetShaderiv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderiv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderiv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8376,7 +8377,7 @@ func (o *GlGetShaderiv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetShaderiv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetShaderiv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Value))); err != nil {
 		return err
 	}
@@ -8388,7 +8389,7 @@ func (o GlGetShaderiv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetShaderiv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetShaderiv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8404,7 +8405,7 @@ func (o *GlGetShaderiv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetString) Encode(e *binary.Encoder) error {
+func (o GlGetString) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8417,7 +8418,7 @@ func (o GlGetString) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetString) Decode(d *binary.Decoder) error {
+func (o *GlGetString) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8432,14 +8433,14 @@ func (o *GlGetString) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetString_In) Encode(e *binary.Encoder) error {
+func (o GlGetString_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Param)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetString_In) Decode(d *binary.Decoder) error {
+func (o *GlGetString_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8448,14 +8449,14 @@ func (o *GlGetString_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetString_Out) Encode(e *binary.Encoder) error {
+func (o GlGetString_Out) Encode(e binary.Encoder) error {
 	if err := e.String(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetString_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetString_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -8464,7 +8465,7 @@ func (o *GlGetString_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameterfv) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameterfv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8477,7 +8478,7 @@ func (o GlGetTexParameterfv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameterfv) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameterfv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8492,7 +8493,7 @@ func (o *GlGetTexParameterfv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameterfv_In) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameterfv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -8502,7 +8503,7 @@ func (o GlGetTexParameterfv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameterfv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameterfv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8516,7 +8517,7 @@ func (o *GlGetTexParameterfv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameterfv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameterfv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -8528,7 +8529,7 @@ func (o GlGetTexParameterfv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameterfv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameterfv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8544,7 +8545,7 @@ func (o *GlGetTexParameterfv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameteriv) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameteriv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8557,7 +8558,7 @@ func (o GlGetTexParameteriv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameteriv) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameteriv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8572,7 +8573,7 @@ func (o *GlGetTexParameteriv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameteriv_In) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameteriv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -8582,7 +8583,7 @@ func (o GlGetTexParameteriv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameteriv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameteriv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8596,7 +8597,7 @@ func (o *GlGetTexParameteriv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetTexParameteriv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetTexParameteriv_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Values))); err != nil {
 		return err
 	}
@@ -8608,7 +8609,7 @@ func (o GlGetTexParameteriv_Out) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetTexParameteriv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetTexParameteriv_Out) Decode(d binary.Decoder) error {
 	if count, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8624,7 +8625,7 @@ func (o *GlGetTexParameteriv_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformLocation) Encode(e *binary.Encoder) error {
+func (o GlGetUniformLocation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8637,7 +8638,7 @@ func (o GlGetUniformLocation) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformLocation) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformLocation) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8652,7 +8653,7 @@ func (o *GlGetUniformLocation) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformLocation_In) Encode(e *binary.Encoder) error {
+func (o GlGetUniformLocation_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -8662,7 +8663,7 @@ func (o GlGetUniformLocation_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformLocation_In) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformLocation_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8676,14 +8677,14 @@ func (o *GlGetUniformLocation_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformLocation_Out) Encode(e *binary.Encoder) error {
+func (o GlGetUniformLocation_Out) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlGetUniformLocation_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformLocation_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8692,7 +8693,7 @@ func (o *GlGetUniformLocation_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformfv) Encode(e *binary.Encoder) error {
+func (o GlGetUniformfv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8705,7 +8706,7 @@ func (o GlGetUniformfv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformfv) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformfv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8720,7 +8721,7 @@ func (o *GlGetUniformfv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformfv_In) Encode(e *binary.Encoder) error {
+func (o GlGetUniformfv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -8738,7 +8739,7 @@ func (o GlGetUniformfv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformfv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformfv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8764,15 +8765,15 @@ func (o *GlGetUniformfv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformfv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetUniformfv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformfv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformfv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformiv) Encode(e *binary.Encoder) error {
+func (o GlGetUniformiv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8785,7 +8786,7 @@ func (o GlGetUniformiv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformiv) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformiv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8800,7 +8801,7 @@ func (o *GlGetUniformiv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformiv_In) Encode(e *binary.Encoder) error {
+func (o GlGetUniformiv_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -8818,7 +8819,7 @@ func (o GlGetUniformiv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformiv_In) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformiv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8844,15 +8845,15 @@ func (o *GlGetUniformiv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlGetUniformiv_Out) Encode(e *binary.Encoder) error {
+func (o GlGetUniformiv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlGetUniformiv_Out) Decode(d *binary.Decoder) error {
+func (o *GlGetUniformiv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlHint) Encode(e *binary.Encoder) error {
+func (o GlHint) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8865,7 +8866,7 @@ func (o GlHint) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlHint) Decode(d *binary.Decoder) error {
+func (o *GlHint) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8880,7 +8881,7 @@ func (o *GlHint) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlHint_In) Encode(e *binary.Encoder) error {
+func (o GlHint_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -8890,7 +8891,7 @@ func (o GlHint_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlHint_In) Decode(d *binary.Decoder) error {
+func (o *GlHint_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8904,15 +8905,15 @@ func (o *GlHint_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlHint_Out) Encode(e *binary.Encoder) error {
+func (o GlHint_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlHint_Out) Decode(d *binary.Decoder) error {
+func (o *GlHint_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlInsertEventMarkerEXT) Encode(e *binary.Encoder) error {
+func (o GlInsertEventMarkerEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8925,7 +8926,7 @@ func (o GlInsertEventMarkerEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInsertEventMarkerEXT) Decode(d *binary.Decoder) error {
+func (o *GlInsertEventMarkerEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -8940,7 +8941,7 @@ func (o *GlInsertEventMarkerEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlInsertEventMarkerEXT_In) Encode(e *binary.Encoder) error {
+func (o GlInsertEventMarkerEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Length); err != nil {
 		return err
 	}
@@ -8950,7 +8951,7 @@ func (o GlInsertEventMarkerEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInsertEventMarkerEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlInsertEventMarkerEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -8964,15 +8965,15 @@ func (o *GlInsertEventMarkerEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlInsertEventMarkerEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlInsertEventMarkerEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInsertEventMarkerEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlInsertEventMarkerEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlInvalidateFramebuffer) Encode(e *binary.Encoder) error {
+func (o GlInvalidateFramebuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -8985,7 +8986,7 @@ func (o GlInvalidateFramebuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInvalidateFramebuffer) Decode(d *binary.Decoder) error {
+func (o *GlInvalidateFramebuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9000,7 +9001,7 @@ func (o *GlInvalidateFramebuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlInvalidateFramebuffer_In) Encode(e *binary.Encoder) error {
+func (o GlInvalidateFramebuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -9018,7 +9019,7 @@ func (o GlInvalidateFramebuffer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInvalidateFramebuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlInvalidateFramebuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9044,15 +9045,15 @@ func (o *GlInvalidateFramebuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlInvalidateFramebuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlInvalidateFramebuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlInvalidateFramebuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlInvalidateFramebuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsBuffer) Encode(e *binary.Encoder) error {
+func (o GlIsBuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9065,7 +9066,7 @@ func (o GlIsBuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsBuffer) Decode(d *binary.Decoder) error {
+func (o *GlIsBuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9080,14 +9081,14 @@ func (o *GlIsBuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsBuffer_In) Encode(e *binary.Encoder) error {
+func (o GlIsBuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Buffer)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsBuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlIsBuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9096,14 +9097,14 @@ func (o *GlIsBuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsBuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlIsBuffer_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsBuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsBuffer_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9112,7 +9113,7 @@ func (o *GlIsBuffer_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsEnabled) Encode(e *binary.Encoder) error {
+func (o GlIsEnabled) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9125,7 +9126,7 @@ func (o GlIsEnabled) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsEnabled) Decode(d *binary.Decoder) error {
+func (o *GlIsEnabled) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9140,14 +9141,14 @@ func (o *GlIsEnabled) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsEnabled_In) Encode(e *binary.Encoder) error {
+func (o GlIsEnabled_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Capability)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsEnabled_In) Decode(d *binary.Decoder) error {
+func (o *GlIsEnabled_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9156,14 +9157,14 @@ func (o *GlIsEnabled_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsEnabled_Out) Encode(e *binary.Encoder) error {
+func (o GlIsEnabled_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsEnabled_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsEnabled_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9172,7 +9173,7 @@ func (o *GlIsEnabled_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsFramebuffer) Encode(e *binary.Encoder) error {
+func (o GlIsFramebuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9185,7 +9186,7 @@ func (o GlIsFramebuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsFramebuffer) Decode(d *binary.Decoder) error {
+func (o *GlIsFramebuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9200,14 +9201,14 @@ func (o *GlIsFramebuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsFramebuffer_In) Encode(e *binary.Encoder) error {
+func (o GlIsFramebuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Framebuffer)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsFramebuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlIsFramebuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9216,14 +9217,14 @@ func (o *GlIsFramebuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsFramebuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlIsFramebuffer_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsFramebuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsFramebuffer_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9232,7 +9233,7 @@ func (o *GlIsFramebuffer_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsProgram) Encode(e *binary.Encoder) error {
+func (o GlIsProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9245,7 +9246,7 @@ func (o GlIsProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsProgram) Decode(d *binary.Decoder) error {
+func (o *GlIsProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9260,14 +9261,14 @@ func (o *GlIsProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsProgram_In) Encode(e *binary.Encoder) error {
+func (o GlIsProgram_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlIsProgram_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9276,14 +9277,14 @@ func (o *GlIsProgram_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlIsProgram_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsProgram_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9292,7 +9293,7 @@ func (o *GlIsProgram_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQuery) Encode(e *binary.Encoder) error {
+func (o GlIsQuery) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9305,7 +9306,7 @@ func (o GlIsQuery) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsQuery) Decode(d *binary.Decoder) error {
+func (o *GlIsQuery) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9320,7 +9321,7 @@ func (o *GlIsQuery) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQueryEXT) Encode(e *binary.Encoder) error {
+func (o GlIsQueryEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9333,7 +9334,7 @@ func (o GlIsQueryEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsQueryEXT) Decode(d *binary.Decoder) error {
+func (o *GlIsQueryEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9348,14 +9349,14 @@ func (o *GlIsQueryEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQueryEXT_In) Encode(e *binary.Encoder) error {
+func (o GlIsQueryEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsQueryEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlIsQueryEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9364,14 +9365,14 @@ func (o *GlIsQueryEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQueryEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlIsQueryEXT_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsQueryEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsQueryEXT_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9380,14 +9381,14 @@ func (o *GlIsQueryEXT_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQuery_In) Encode(e *binary.Encoder) error {
+func (o GlIsQuery_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsQuery_In) Decode(d *binary.Decoder) error {
+func (o *GlIsQuery_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9396,14 +9397,14 @@ func (o *GlIsQuery_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsQuery_Out) Encode(e *binary.Encoder) error {
+func (o GlIsQuery_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsQuery_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsQuery_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9412,7 +9413,7 @@ func (o *GlIsQuery_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsRenderbuffer) Encode(e *binary.Encoder) error {
+func (o GlIsRenderbuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9425,7 +9426,7 @@ func (o GlIsRenderbuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsRenderbuffer) Decode(d *binary.Decoder) error {
+func (o *GlIsRenderbuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9440,14 +9441,14 @@ func (o *GlIsRenderbuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsRenderbuffer_In) Encode(e *binary.Encoder) error {
+func (o GlIsRenderbuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Renderbuffer)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsRenderbuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlIsRenderbuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9456,14 +9457,14 @@ func (o *GlIsRenderbuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsRenderbuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlIsRenderbuffer_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsRenderbuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsRenderbuffer_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9472,7 +9473,7 @@ func (o *GlIsRenderbuffer_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsShader) Encode(e *binary.Encoder) error {
+func (o GlIsShader) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9485,7 +9486,7 @@ func (o GlIsShader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsShader) Decode(d *binary.Decoder) error {
+func (o *GlIsShader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9500,14 +9501,14 @@ func (o *GlIsShader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsShader_In) Encode(e *binary.Encoder) error {
+func (o GlIsShader_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsShader_In) Decode(d *binary.Decoder) error {
+func (o *GlIsShader_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9516,14 +9517,14 @@ func (o *GlIsShader_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsShader_Out) Encode(e *binary.Encoder) error {
+func (o GlIsShader_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsShader_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsShader_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9532,7 +9533,7 @@ func (o *GlIsShader_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsTexture) Encode(e *binary.Encoder) error {
+func (o GlIsTexture) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9545,7 +9546,7 @@ func (o GlIsTexture) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsTexture) Decode(d *binary.Decoder) error {
+func (o *GlIsTexture) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9560,14 +9561,14 @@ func (o *GlIsTexture) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsTexture_In) Encode(e *binary.Encoder) error {
+func (o GlIsTexture_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Texture)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsTexture_In) Decode(d *binary.Decoder) error {
+func (o *GlIsTexture_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9576,14 +9577,14 @@ func (o *GlIsTexture_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsTexture_Out) Encode(e *binary.Encoder) error {
+func (o GlIsTexture_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsTexture_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsTexture_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9592,7 +9593,7 @@ func (o *GlIsTexture_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsVertexArrayOES) Encode(e *binary.Encoder) error {
+func (o GlIsVertexArrayOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9605,7 +9606,7 @@ func (o GlIsVertexArrayOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlIsVertexArrayOES) Decode(d *binary.Decoder) error {
+func (o *GlIsVertexArrayOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9620,14 +9621,14 @@ func (o *GlIsVertexArrayOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsVertexArrayOES_In) Encode(e *binary.Encoder) error {
+func (o GlIsVertexArrayOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Array)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsVertexArrayOES_In) Decode(d *binary.Decoder) error {
+func (o *GlIsVertexArrayOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9636,14 +9637,14 @@ func (o *GlIsVertexArrayOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlIsVertexArrayOES_Out) Encode(e *binary.Encoder) error {
+func (o GlIsVertexArrayOES_Out) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlIsVertexArrayOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlIsVertexArrayOES_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -9652,7 +9653,7 @@ func (o *GlIsVertexArrayOES_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlLineWidth) Encode(e *binary.Encoder) error {
+func (o GlLineWidth) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9665,7 +9666,7 @@ func (o GlLineWidth) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlLineWidth) Decode(d *binary.Decoder) error {
+func (o *GlLineWidth) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9680,14 +9681,14 @@ func (o *GlLineWidth) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlLineWidth_In) Encode(e *binary.Encoder) error {
+func (o GlLineWidth_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.Width); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlLineWidth_In) Decode(d *binary.Decoder) error {
+func (o *GlLineWidth_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -9696,15 +9697,15 @@ func (o *GlLineWidth_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlLineWidth_Out) Encode(e *binary.Encoder) error {
+func (o GlLineWidth_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlLineWidth_Out) Decode(d *binary.Decoder) error {
+func (o *GlLineWidth_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlLinkProgram) Encode(e *binary.Encoder) error {
+func (o GlLinkProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9717,7 +9718,7 @@ func (o GlLinkProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlLinkProgram) Decode(d *binary.Decoder) error {
+func (o *GlLinkProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9732,14 +9733,14 @@ func (o *GlLinkProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlLinkProgram_In) Encode(e *binary.Encoder) error {
+func (o GlLinkProgram_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlLinkProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlLinkProgram_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9748,15 +9749,15 @@ func (o *GlLinkProgram_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlLinkProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlLinkProgram_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlLinkProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlLinkProgram_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlMapBufferRange) Encode(e *binary.Encoder) error {
+func (o GlMapBufferRange) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9769,7 +9770,7 @@ func (o GlMapBufferRange) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlMapBufferRange) Decode(d *binary.Decoder) error {
+func (o *GlMapBufferRange) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9784,7 +9785,7 @@ func (o *GlMapBufferRange) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlMapBufferRange_In) Encode(e *binary.Encoder) error {
+func (o GlMapBufferRange_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -9800,7 +9801,7 @@ func (o GlMapBufferRange_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlMapBufferRange_In) Decode(d *binary.Decoder) error {
+func (o *GlMapBufferRange_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9824,14 +9825,14 @@ func (o *GlMapBufferRange_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlMapBufferRange_Out) Encode(e *binary.Encoder) error {
+func (o GlMapBufferRange_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlMapBufferRange_Out) Decode(d *binary.Decoder) error {
+func (o *GlMapBufferRange_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -9840,7 +9841,7 @@ func (o *GlMapBufferRange_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPixelStorei) Encode(e *binary.Encoder) error {
+func (o GlPixelStorei) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9853,7 +9854,7 @@ func (o GlPixelStorei) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPixelStorei) Decode(d *binary.Decoder) error {
+func (o *GlPixelStorei) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9868,7 +9869,7 @@ func (o *GlPixelStorei) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPixelStorei_In) Encode(e *binary.Encoder) error {
+func (o GlPixelStorei_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Parameter)); err != nil {
 		return err
 	}
@@ -9878,7 +9879,7 @@ func (o GlPixelStorei_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPixelStorei_In) Decode(d *binary.Decoder) error {
+func (o *GlPixelStorei_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9892,15 +9893,15 @@ func (o *GlPixelStorei_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPixelStorei_Out) Encode(e *binary.Encoder) error {
+func (o GlPixelStorei_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPixelStorei_Out) Decode(d *binary.Decoder) error {
+func (o *GlPixelStorei_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlPolygonOffset) Encode(e *binary.Encoder) error {
+func (o GlPolygonOffset) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9913,7 +9914,7 @@ func (o GlPolygonOffset) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPolygonOffset) Decode(d *binary.Decoder) error {
+func (o *GlPolygonOffset) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9928,7 +9929,7 @@ func (o *GlPolygonOffset) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPolygonOffset_In) Encode(e *binary.Encoder) error {
+func (o GlPolygonOffset_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.ScaleFactor); err != nil {
 		return err
 	}
@@ -9938,7 +9939,7 @@ func (o GlPolygonOffset_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPolygonOffset_In) Decode(d *binary.Decoder) error {
+func (o *GlPolygonOffset_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -9952,15 +9953,15 @@ func (o *GlPolygonOffset_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPolygonOffset_Out) Encode(e *binary.Encoder) error {
+func (o GlPolygonOffset_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPolygonOffset_Out) Decode(d *binary.Decoder) error {
+func (o *GlPolygonOffset_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlPopGroupMarkerEXT) Encode(e *binary.Encoder) error {
+func (o GlPopGroupMarkerEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -9973,7 +9974,7 @@ func (o GlPopGroupMarkerEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPopGroupMarkerEXT) Decode(d *binary.Decoder) error {
+func (o *GlPopGroupMarkerEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -9988,23 +9989,23 @@ func (o *GlPopGroupMarkerEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPopGroupMarkerEXT_In) Encode(e *binary.Encoder) error {
+func (o GlPopGroupMarkerEXT_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPopGroupMarkerEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlPopGroupMarkerEXT_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlPopGroupMarkerEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlPopGroupMarkerEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPopGroupMarkerEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlPopGroupMarkerEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlProgramBinaryOES) Encode(e *binary.Encoder) error {
+func (o GlProgramBinaryOES) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10017,7 +10018,7 @@ func (o GlProgramBinaryOES) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlProgramBinaryOES) Decode(d *binary.Decoder) error {
+func (o *GlProgramBinaryOES) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10032,7 +10033,7 @@ func (o *GlProgramBinaryOES) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlProgramBinaryOES_In) Encode(e *binary.Encoder) error {
+func (o GlProgramBinaryOES_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
@@ -10048,7 +10049,7 @@ func (o GlProgramBinaryOES_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlProgramBinaryOES_In) Decode(d *binary.Decoder) error {
+func (o *GlProgramBinaryOES_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10072,15 +10073,15 @@ func (o *GlProgramBinaryOES_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlProgramBinaryOES_Out) Encode(e *binary.Encoder) error {
+func (o GlProgramBinaryOES_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlProgramBinaryOES_Out) Decode(d *binary.Decoder) error {
+func (o *GlProgramBinaryOES_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlPushGroupMarkerEXT) Encode(e *binary.Encoder) error {
+func (o GlPushGroupMarkerEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10093,7 +10094,7 @@ func (o GlPushGroupMarkerEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPushGroupMarkerEXT) Decode(d *binary.Decoder) error {
+func (o *GlPushGroupMarkerEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10108,7 +10109,7 @@ func (o *GlPushGroupMarkerEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPushGroupMarkerEXT_In) Encode(e *binary.Encoder) error {
+func (o GlPushGroupMarkerEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Length); err != nil {
 		return err
 	}
@@ -10118,7 +10119,7 @@ func (o GlPushGroupMarkerEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPushGroupMarkerEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlPushGroupMarkerEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -10132,15 +10133,15 @@ func (o *GlPushGroupMarkerEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlPushGroupMarkerEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlPushGroupMarkerEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlPushGroupMarkerEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlPushGroupMarkerEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlQueryCounterEXT) Encode(e *binary.Encoder) error {
+func (o GlQueryCounterEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10153,7 +10154,7 @@ func (o GlQueryCounterEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlQueryCounterEXT) Decode(d *binary.Decoder) error {
+func (o *GlQueryCounterEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10168,7 +10169,7 @@ func (o *GlQueryCounterEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlQueryCounterEXT_In) Encode(e *binary.Encoder) error {
+func (o GlQueryCounterEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Query)); err != nil {
 		return err
 	}
@@ -10178,7 +10179,7 @@ func (o GlQueryCounterEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlQueryCounterEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlQueryCounterEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10192,15 +10193,15 @@ func (o *GlQueryCounterEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlQueryCounterEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlQueryCounterEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlQueryCounterEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlQueryCounterEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlReadPixels) Encode(e *binary.Encoder) error {
+func (o GlReadPixels) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10213,7 +10214,7 @@ func (o GlReadPixels) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlReadPixels) Decode(d *binary.Decoder) error {
+func (o *GlReadPixels) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10228,7 +10229,7 @@ func (o *GlReadPixels) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlReadPixels_In) Encode(e *binary.Encoder) error {
+func (o GlReadPixels_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.X); err != nil {
 		return err
 	}
@@ -10250,7 +10251,7 @@ func (o GlReadPixels_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlReadPixels_In) Decode(d *binary.Decoder) error {
+func (o *GlReadPixels_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -10284,14 +10285,14 @@ func (o *GlReadPixels_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlReadPixels_Out) Encode(e *binary.Encoder) error {
+func (o GlReadPixels_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.Data)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlReadPixels_Out) Decode(d *binary.Decoder) error {
+func (o *GlReadPixels_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -10300,7 +10301,7 @@ func (o *GlReadPixels_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlReleaseShaderCompiler) Encode(e *binary.Encoder) error {
+func (o GlReleaseShaderCompiler) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10313,7 +10314,7 @@ func (o GlReleaseShaderCompiler) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlReleaseShaderCompiler) Decode(d *binary.Decoder) error {
+func (o *GlReleaseShaderCompiler) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10328,23 +10329,23 @@ func (o *GlReleaseShaderCompiler) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlReleaseShaderCompiler_In) Encode(e *binary.Encoder) error {
+func (o GlReleaseShaderCompiler_In) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlReleaseShaderCompiler_In) Decode(d *binary.Decoder) error {
+func (o *GlReleaseShaderCompiler_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlReleaseShaderCompiler_Out) Encode(e *binary.Encoder) error {
+func (o GlReleaseShaderCompiler_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlReleaseShaderCompiler_Out) Decode(d *binary.Decoder) error {
+func (o *GlReleaseShaderCompiler_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorage) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorage) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10357,7 +10358,7 @@ func (o GlRenderbufferStorage) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorage) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorage) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10372,7 +10373,7 @@ func (o *GlRenderbufferStorage) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorageMultisample) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorageMultisample) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10385,7 +10386,7 @@ func (o GlRenderbufferStorageMultisample) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorageMultisample) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorageMultisample) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10400,7 +10401,7 @@ func (o *GlRenderbufferStorageMultisample) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorageMultisample_In) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorageMultisample_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -10419,7 +10420,7 @@ func (o GlRenderbufferStorageMultisample_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorageMultisample_In) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorageMultisample_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10448,15 +10449,15 @@ func (o *GlRenderbufferStorageMultisample_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorageMultisample_Out) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorageMultisample_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorageMultisample_Out) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorageMultisample_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorage_In) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorage_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -10472,7 +10473,7 @@ func (o GlRenderbufferStorage_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorage_In) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorage_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10496,15 +10497,15 @@ func (o *GlRenderbufferStorage_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlRenderbufferStorage_Out) Encode(e *binary.Encoder) error {
+func (o GlRenderbufferStorage_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlRenderbufferStorage_Out) Decode(d *binary.Decoder) error {
+func (o *GlRenderbufferStorage_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlSampleCoverage) Encode(e *binary.Encoder) error {
+func (o GlSampleCoverage) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10517,7 +10518,7 @@ func (o GlSampleCoverage) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlSampleCoverage) Decode(d *binary.Decoder) error {
+func (o *GlSampleCoverage) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10532,7 +10533,7 @@ func (o *GlSampleCoverage) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlSampleCoverage_In) Encode(e *binary.Encoder) error {
+func (o GlSampleCoverage_In) Encode(e binary.Encoder) error {
 	if err := e.Float32(o.Value); err != nil {
 		return err
 	}
@@ -10542,7 +10543,7 @@ func (o GlSampleCoverage_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlSampleCoverage_In) Decode(d *binary.Decoder) error {
+func (o *GlSampleCoverage_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -10556,15 +10557,15 @@ func (o *GlSampleCoverage_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlSampleCoverage_Out) Encode(e *binary.Encoder) error {
+func (o GlSampleCoverage_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlSampleCoverage_Out) Decode(d *binary.Decoder) error {
+func (o *GlSampleCoverage_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlScissor) Encode(e *binary.Encoder) error {
+func (o GlScissor) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10577,7 +10578,7 @@ func (o GlScissor) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlScissor) Decode(d *binary.Decoder) error {
+func (o *GlScissor) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10592,7 +10593,7 @@ func (o *GlScissor) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlScissor_In) Encode(e *binary.Encoder) error {
+func (o GlScissor_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.X); err != nil {
 		return err
 	}
@@ -10608,7 +10609,7 @@ func (o GlScissor_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlScissor_In) Decode(d *binary.Decoder) error {
+func (o *GlScissor_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -10632,15 +10633,15 @@ func (o *GlScissor_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlScissor_Out) Encode(e *binary.Encoder) error {
+func (o GlScissor_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlScissor_Out) Decode(d *binary.Decoder) error {
+func (o *GlScissor_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderBinary) Encode(e *binary.Encoder) error {
+func (o GlShaderBinary) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10653,7 +10654,7 @@ func (o GlShaderBinary) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderBinary) Decode(d *binary.Decoder) error {
+func (o *GlShaderBinary) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10668,7 +10669,7 @@ func (o *GlShaderBinary) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderBinary_In) Encode(e *binary.Encoder) error {
+func (o GlShaderBinary_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Count); err != nil {
 		return err
 	}
@@ -10692,7 +10693,7 @@ func (o GlShaderBinary_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderBinary_In) Decode(d *binary.Decoder) error {
+func (o *GlShaderBinary_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -10728,15 +10729,15 @@ func (o *GlShaderBinary_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderBinary_Out) Encode(e *binary.Encoder) error {
+func (o GlShaderBinary_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderBinary_Out) Decode(d *binary.Decoder) error {
+func (o *GlShaderBinary_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderSource) Encode(e *binary.Encoder) error {
+func (o GlShaderSource) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10749,7 +10750,7 @@ func (o GlShaderSource) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderSource) Decode(d *binary.Decoder) error {
+func (o *GlShaderSource) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10764,7 +10765,7 @@ func (o *GlShaderSource) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderSource_In) Encode(e *binary.Encoder) error {
+func (o GlShaderSource_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Shader)); err != nil {
 		return err
 	}
@@ -10790,7 +10791,7 @@ func (o GlShaderSource_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderSource_In) Decode(d *binary.Decoder) error {
+func (o *GlShaderSource_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10828,15 +10829,15 @@ func (o *GlShaderSource_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlShaderSource_Out) Encode(e *binary.Encoder) error {
+func (o GlShaderSource_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlShaderSource_Out) Decode(d *binary.Decoder) error {
+func (o *GlShaderSource_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlStartTilingQCOM) Encode(e *binary.Encoder) error {
+func (o GlStartTilingQCOM) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10849,7 +10850,7 @@ func (o GlStartTilingQCOM) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStartTilingQCOM) Decode(d *binary.Decoder) error {
+func (o *GlStartTilingQCOM) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10864,7 +10865,7 @@ func (o *GlStartTilingQCOM) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStartTilingQCOM_In) Encode(e *binary.Encoder) error {
+func (o GlStartTilingQCOM_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.X); err != nil {
 		return err
 	}
@@ -10883,7 +10884,7 @@ func (o GlStartTilingQCOM_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStartTilingQCOM_In) Decode(d *binary.Decoder) error {
+func (o *GlStartTilingQCOM_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -10912,15 +10913,15 @@ func (o *GlStartTilingQCOM_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStartTilingQCOM_Out) Encode(e *binary.Encoder) error {
+func (o GlStartTilingQCOM_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStartTilingQCOM_Out) Decode(d *binary.Decoder) error {
+func (o *GlStartTilingQCOM_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilFuncSeparate) Encode(e *binary.Encoder) error {
+func (o GlStencilFuncSeparate) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -10933,7 +10934,7 @@ func (o GlStencilFuncSeparate) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilFuncSeparate) Decode(d *binary.Decoder) error {
+func (o *GlStencilFuncSeparate) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10948,7 +10949,7 @@ func (o *GlStencilFuncSeparate) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilFuncSeparate_In) Encode(e *binary.Encoder) error {
+func (o GlStencilFuncSeparate_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Face)); err != nil {
 		return err
 	}
@@ -10964,7 +10965,7 @@ func (o GlStencilFuncSeparate_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilFuncSeparate_In) Decode(d *binary.Decoder) error {
+func (o *GlStencilFuncSeparate_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -10988,15 +10989,15 @@ func (o *GlStencilFuncSeparate_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilFuncSeparate_Out) Encode(e *binary.Encoder) error {
+func (o GlStencilFuncSeparate_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilFuncSeparate_Out) Decode(d *binary.Decoder) error {
+func (o *GlStencilFuncSeparate_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMask) Encode(e *binary.Encoder) error {
+func (o GlStencilMask) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11009,7 +11010,7 @@ func (o GlStencilMask) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilMask) Decode(d *binary.Decoder) error {
+func (o *GlStencilMask) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11024,7 +11025,7 @@ func (o *GlStencilMask) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMaskSeparate) Encode(e *binary.Encoder) error {
+func (o GlStencilMaskSeparate) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11037,7 +11038,7 @@ func (o GlStencilMaskSeparate) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilMaskSeparate) Decode(d *binary.Decoder) error {
+func (o *GlStencilMaskSeparate) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11052,7 +11053,7 @@ func (o *GlStencilMaskSeparate) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMaskSeparate_In) Encode(e *binary.Encoder) error {
+func (o GlStencilMaskSeparate_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Face)); err != nil {
 		return err
 	}
@@ -11062,7 +11063,7 @@ func (o GlStencilMaskSeparate_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilMaskSeparate_In) Decode(d *binary.Decoder) error {
+func (o *GlStencilMaskSeparate_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11076,22 +11077,22 @@ func (o *GlStencilMaskSeparate_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMaskSeparate_Out) Encode(e *binary.Encoder) error {
+func (o GlStencilMaskSeparate_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilMaskSeparate_Out) Decode(d *binary.Decoder) error {
+func (o *GlStencilMaskSeparate_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMask_In) Encode(e *binary.Encoder) error {
+func (o GlStencilMask_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.Mask); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlStencilMask_In) Decode(d *binary.Decoder) error {
+func (o *GlStencilMask_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11100,15 +11101,15 @@ func (o *GlStencilMask_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilMask_Out) Encode(e *binary.Encoder) error {
+func (o GlStencilMask_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilMask_Out) Decode(d *binary.Decoder) error {
+func (o *GlStencilMask_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilOpSeparate) Encode(e *binary.Encoder) error {
+func (o GlStencilOpSeparate) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11121,7 +11122,7 @@ func (o GlStencilOpSeparate) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilOpSeparate) Decode(d *binary.Decoder) error {
+func (o *GlStencilOpSeparate) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11136,7 +11137,7 @@ func (o *GlStencilOpSeparate) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilOpSeparate_In) Encode(e *binary.Encoder) error {
+func (o GlStencilOpSeparate_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Face)); err != nil {
 		return err
 	}
@@ -11152,7 +11153,7 @@ func (o GlStencilOpSeparate_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilOpSeparate_In) Decode(d *binary.Decoder) error {
+func (o *GlStencilOpSeparate_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11176,15 +11177,15 @@ func (o *GlStencilOpSeparate_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlStencilOpSeparate_Out) Encode(e *binary.Encoder) error {
+func (o GlStencilOpSeparate_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlStencilOpSeparate_Out) Decode(d *binary.Decoder) error {
+func (o *GlStencilOpSeparate_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexImage2D) Encode(e *binary.Encoder) error {
+func (o GlTexImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11197,7 +11198,7 @@ func (o GlTexImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexImage2D) Decode(d *binary.Decoder) error {
+func (o *GlTexImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11212,7 +11213,7 @@ func (o *GlTexImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlTexImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11243,7 +11244,7 @@ func (o GlTexImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlTexImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11292,15 +11293,15 @@ func (o *GlTexImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlTexImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameterf) Encode(e *binary.Encoder) error {
+func (o GlTexParameterf) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11313,7 +11314,7 @@ func (o GlTexParameterf) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameterf) Decode(d *binary.Decoder) error {
+func (o *GlTexParameterf) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11328,7 +11329,7 @@ func (o *GlTexParameterf) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameterf_In) Encode(e *binary.Encoder) error {
+func (o GlTexParameterf_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11341,7 +11342,7 @@ func (o GlTexParameterf_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameterf_In) Decode(d *binary.Decoder) error {
+func (o *GlTexParameterf_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11360,15 +11361,15 @@ func (o *GlTexParameterf_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameterf_Out) Encode(e *binary.Encoder) error {
+func (o GlTexParameterf_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameterf_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexParameterf_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameteri) Encode(e *binary.Encoder) error {
+func (o GlTexParameteri) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11381,7 +11382,7 @@ func (o GlTexParameteri) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameteri) Decode(d *binary.Decoder) error {
+func (o *GlTexParameteri) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11396,7 +11397,7 @@ func (o *GlTexParameteri) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameteri_In) Encode(e *binary.Encoder) error {
+func (o GlTexParameteri_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11409,7 +11410,7 @@ func (o GlTexParameteri_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameteri_In) Decode(d *binary.Decoder) error {
+func (o *GlTexParameteri_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11428,15 +11429,15 @@ func (o *GlTexParameteri_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexParameteri_Out) Encode(e *binary.Encoder) error {
+func (o GlTexParameteri_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexParameteri_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexParameteri_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage1DEXT) Encode(e *binary.Encoder) error {
+func (o GlTexStorage1DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11449,7 +11450,7 @@ func (o GlTexStorage1DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage1DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage1DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11464,7 +11465,7 @@ func (o *GlTexStorage1DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage1DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTexStorage1DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11480,7 +11481,7 @@ func (o GlTexStorage1DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage1DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage1DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11504,15 +11505,15 @@ func (o *GlTexStorage1DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage1DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTexStorage1DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage1DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage1DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage2DEXT) Encode(e *binary.Encoder) error {
+func (o GlTexStorage2DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11525,7 +11526,7 @@ func (o GlTexStorage2DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage2DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage2DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11540,7 +11541,7 @@ func (o *GlTexStorage2DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage2DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTexStorage2DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11559,7 +11560,7 @@ func (o GlTexStorage2DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage2DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage2DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11588,15 +11589,15 @@ func (o *GlTexStorage2DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage2DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTexStorage2DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage2DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage2DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage3DEXT) Encode(e *binary.Encoder) error {
+func (o GlTexStorage3DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11609,7 +11610,7 @@ func (o GlTexStorage3DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage3DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage3DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11624,7 +11625,7 @@ func (o *GlTexStorage3DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage3DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTexStorage3DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11646,7 +11647,7 @@ func (o GlTexStorage3DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage3DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage3DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11680,15 +11681,15 @@ func (o *GlTexStorage3DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexStorage3DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTexStorage3DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexStorage3DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexStorage3DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexSubImage2D) Encode(e *binary.Encoder) error {
+func (o GlTexSubImage2D) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11701,7 +11702,7 @@ func (o GlTexSubImage2D) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexSubImage2D) Decode(d *binary.Decoder) error {
+func (o *GlTexSubImage2D) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11716,7 +11717,7 @@ func (o *GlTexSubImage2D) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexSubImage2D_In) Encode(e *binary.Encoder) error {
+func (o GlTexSubImage2D_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
@@ -11747,7 +11748,7 @@ func (o GlTexSubImage2D_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexSubImage2D_In) Decode(d *binary.Decoder) error {
+func (o *GlTexSubImage2D_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11796,15 +11797,15 @@ func (o *GlTexSubImage2D_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTexSubImage2D_Out) Encode(e *binary.Encoder) error {
+func (o GlTexSubImage2D_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTexSubImage2D_Out) Decode(d *binary.Decoder) error {
+func (o *GlTexSubImage2D_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage1DEXT) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage1DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11817,7 +11818,7 @@ func (o GlTextureStorage1DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage1DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage1DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11832,7 +11833,7 @@ func (o *GlTextureStorage1DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage1DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage1DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Texture)); err != nil {
 		return err
 	}
@@ -11851,7 +11852,7 @@ func (o GlTextureStorage1DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage1DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage1DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11880,15 +11881,15 @@ func (o *GlTextureStorage1DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage1DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage1DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage1DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage1DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage2DEXT) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage2DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11901,7 +11902,7 @@ func (o GlTextureStorage2DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage2DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage2DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11916,7 +11917,7 @@ func (o *GlTextureStorage2DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage2DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage2DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Texture)); err != nil {
 		return err
 	}
@@ -11938,7 +11939,7 @@ func (o GlTextureStorage2DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage2DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage2DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -11972,15 +11973,15 @@ func (o *GlTextureStorage2DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage2DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage2DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage2DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage2DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage3DEXT) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage3DEXT) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -11993,7 +11994,7 @@ func (o GlTextureStorage3DEXT) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage3DEXT) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage3DEXT) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12008,7 +12009,7 @@ func (o *GlTextureStorage3DEXT) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage3DEXT_In) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage3DEXT_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Texture)); err != nil {
 		return err
 	}
@@ -12033,7 +12034,7 @@ func (o GlTextureStorage3DEXT_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage3DEXT_In) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage3DEXT_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12072,15 +12073,15 @@ func (o *GlTextureStorage3DEXT_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlTextureStorage3DEXT_Out) Encode(e *binary.Encoder) error {
+func (o GlTextureStorage3DEXT_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlTextureStorage3DEXT_Out) Decode(d *binary.Decoder) error {
+func (o *GlTextureStorage3DEXT_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1f) Encode(e *binary.Encoder) error {
+func (o GlUniform1f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12093,7 +12094,7 @@ func (o GlUniform1f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1f) Decode(d *binary.Decoder) error {
+func (o *GlUniform1f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12108,7 +12109,7 @@ func (o *GlUniform1f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1f_In) Encode(e *binary.Encoder) error {
+func (o GlUniform1f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12118,7 +12119,7 @@ func (o GlUniform1f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1f_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform1f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12132,15 +12133,15 @@ func (o *GlUniform1f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1f_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform1f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1f_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform1f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1fv) Encode(e *binary.Encoder) error {
+func (o GlUniform1fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12153,7 +12154,7 @@ func (o GlUniform1fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1fv) Decode(d *binary.Decoder) error {
+func (o *GlUniform1fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12168,7 +12169,7 @@ func (o *GlUniform1fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform1fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12186,7 +12187,7 @@ func (o GlUniform1fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform1fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12212,15 +12213,15 @@ func (o *GlUniform1fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform1fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform1fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1i) Encode(e *binary.Encoder) error {
+func (o GlUniform1i) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12233,7 +12234,7 @@ func (o GlUniform1i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1i) Decode(d *binary.Decoder) error {
+func (o *GlUniform1i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12248,7 +12249,7 @@ func (o *GlUniform1i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1i_In) Encode(e *binary.Encoder) error {
+func (o GlUniform1i_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12258,7 +12259,7 @@ func (o GlUniform1i_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1i_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform1i_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12272,15 +12273,15 @@ func (o *GlUniform1i_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1i_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform1i_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1i_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform1i_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1iv) Encode(e *binary.Encoder) error {
+func (o GlUniform1iv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12293,7 +12294,7 @@ func (o GlUniform1iv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1iv) Decode(d *binary.Decoder) error {
+func (o *GlUniform1iv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12308,7 +12309,7 @@ func (o *GlUniform1iv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1iv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform1iv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12326,7 +12327,7 @@ func (o GlUniform1iv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1iv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform1iv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12352,15 +12353,15 @@ func (o *GlUniform1iv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform1iv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform1iv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform1iv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform1iv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2f) Encode(e *binary.Encoder) error {
+func (o GlUniform2f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12373,7 +12374,7 @@ func (o GlUniform2f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2f) Decode(d *binary.Decoder) error {
+func (o *GlUniform2f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12388,7 +12389,7 @@ func (o *GlUniform2f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2f_In) Encode(e *binary.Encoder) error {
+func (o GlUniform2f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12401,7 +12402,7 @@ func (o GlUniform2f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2f_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform2f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12420,15 +12421,15 @@ func (o *GlUniform2f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2f_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform2f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2f_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform2f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2fv) Encode(e *binary.Encoder) error {
+func (o GlUniform2fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12441,7 +12442,7 @@ func (o GlUniform2fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2fv) Decode(d *binary.Decoder) error {
+func (o *GlUniform2fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12456,7 +12457,7 @@ func (o *GlUniform2fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform2fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12474,7 +12475,7 @@ func (o GlUniform2fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform2fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12500,15 +12501,15 @@ func (o *GlUniform2fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform2fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform2fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2i) Encode(e *binary.Encoder) error {
+func (o GlUniform2i) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12521,7 +12522,7 @@ func (o GlUniform2i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2i) Decode(d *binary.Decoder) error {
+func (o *GlUniform2i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12536,7 +12537,7 @@ func (o *GlUniform2i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2i_In) Encode(e *binary.Encoder) error {
+func (o GlUniform2i_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12549,7 +12550,7 @@ func (o GlUniform2i_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2i_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform2i_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12568,15 +12569,15 @@ func (o *GlUniform2i_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2i_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform2i_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2i_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform2i_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2iv) Encode(e *binary.Encoder) error {
+func (o GlUniform2iv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12589,7 +12590,7 @@ func (o GlUniform2iv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2iv) Decode(d *binary.Decoder) error {
+func (o *GlUniform2iv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12604,7 +12605,7 @@ func (o *GlUniform2iv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2iv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform2iv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12622,7 +12623,7 @@ func (o GlUniform2iv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2iv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform2iv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12648,15 +12649,15 @@ func (o *GlUniform2iv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform2iv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform2iv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform2iv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform2iv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3f) Encode(e *binary.Encoder) error {
+func (o GlUniform3f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12669,7 +12670,7 @@ func (o GlUniform3f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3f) Decode(d *binary.Decoder) error {
+func (o *GlUniform3f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12684,7 +12685,7 @@ func (o *GlUniform3f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3f_In) Encode(e *binary.Encoder) error {
+func (o GlUniform3f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12700,7 +12701,7 @@ func (o GlUniform3f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3f_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform3f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12724,15 +12725,15 @@ func (o *GlUniform3f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3f_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform3f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3f_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform3f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3fv) Encode(e *binary.Encoder) error {
+func (o GlUniform3fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12745,7 +12746,7 @@ func (o GlUniform3fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3fv) Decode(d *binary.Decoder) error {
+func (o *GlUniform3fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12760,7 +12761,7 @@ func (o *GlUniform3fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform3fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12778,7 +12779,7 @@ func (o GlUniform3fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform3fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12804,15 +12805,15 @@ func (o *GlUniform3fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform3fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform3fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3i) Encode(e *binary.Encoder) error {
+func (o GlUniform3i) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12825,7 +12826,7 @@ func (o GlUniform3i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3i) Decode(d *binary.Decoder) error {
+func (o *GlUniform3i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12840,7 +12841,7 @@ func (o *GlUniform3i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3i_In) Encode(e *binary.Encoder) error {
+func (o GlUniform3i_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12856,7 +12857,7 @@ func (o GlUniform3i_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3i_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform3i_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12880,15 +12881,15 @@ func (o *GlUniform3i_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3i_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform3i_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3i_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform3i_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3iv) Encode(e *binary.Encoder) error {
+func (o GlUniform3iv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12901,7 +12902,7 @@ func (o GlUniform3iv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3iv) Decode(d *binary.Decoder) error {
+func (o *GlUniform3iv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12916,7 +12917,7 @@ func (o *GlUniform3iv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3iv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform3iv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -12934,7 +12935,7 @@ func (o GlUniform3iv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3iv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform3iv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -12960,15 +12961,15 @@ func (o *GlUniform3iv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform3iv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform3iv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform3iv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform3iv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4f) Encode(e *binary.Encoder) error {
+func (o GlUniform4f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -12981,7 +12982,7 @@ func (o GlUniform4f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4f) Decode(d *binary.Decoder) error {
+func (o *GlUniform4f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -12996,7 +12997,7 @@ func (o *GlUniform4f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4f_In) Encode(e *binary.Encoder) error {
+func (o GlUniform4f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13015,7 +13016,7 @@ func (o GlUniform4f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4f_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform4f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13044,15 +13045,15 @@ func (o *GlUniform4f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4f_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform4f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4f_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform4f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4fv) Encode(e *binary.Encoder) error {
+func (o GlUniform4fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13065,7 +13066,7 @@ func (o GlUniform4fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4fv) Decode(d *binary.Decoder) error {
+func (o *GlUniform4fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13080,7 +13081,7 @@ func (o *GlUniform4fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform4fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13098,7 +13099,7 @@ func (o GlUniform4fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform4fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13124,15 +13125,15 @@ func (o *GlUniform4fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform4fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform4fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4i) Encode(e *binary.Encoder) error {
+func (o GlUniform4i) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13145,7 +13146,7 @@ func (o GlUniform4i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4i) Decode(d *binary.Decoder) error {
+func (o *GlUniform4i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13160,7 +13161,7 @@ func (o *GlUniform4i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4i_In) Encode(e *binary.Encoder) error {
+func (o GlUniform4i_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13179,7 +13180,7 @@ func (o GlUniform4i_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4i_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform4i_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13208,15 +13209,15 @@ func (o *GlUniform4i_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4i_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform4i_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4i_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform4i_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4iv) Encode(e *binary.Encoder) error {
+func (o GlUniform4iv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13229,7 +13230,7 @@ func (o GlUniform4iv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4iv) Decode(d *binary.Decoder) error {
+func (o *GlUniform4iv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13244,7 +13245,7 @@ func (o *GlUniform4iv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4iv_In) Encode(e *binary.Encoder) error {
+func (o GlUniform4iv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13262,7 +13263,7 @@ func (o GlUniform4iv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4iv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniform4iv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13288,15 +13289,15 @@ func (o *GlUniform4iv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniform4iv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniform4iv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniform4iv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniform4iv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix2fv) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix2fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13309,7 +13310,7 @@ func (o GlUniformMatrix2fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix2fv) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix2fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13324,7 +13325,7 @@ func (o *GlUniformMatrix2fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix2fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix2fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13345,7 +13346,7 @@ func (o GlUniformMatrix2fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix2fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix2fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13376,15 +13377,15 @@ func (o *GlUniformMatrix2fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix2fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix2fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix2fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix2fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix3fv) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix3fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13397,7 +13398,7 @@ func (o GlUniformMatrix3fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix3fv) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix3fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13412,7 +13413,7 @@ func (o *GlUniformMatrix3fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix3fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix3fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13433,7 +13434,7 @@ func (o GlUniformMatrix3fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix3fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix3fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13464,15 +13465,15 @@ func (o *GlUniformMatrix3fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix3fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix3fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix3fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix3fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix4fv) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix4fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13485,7 +13486,7 @@ func (o GlUniformMatrix4fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix4fv) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix4fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13500,7 +13501,7 @@ func (o *GlUniformMatrix4fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix4fv_In) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix4fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13521,7 +13522,7 @@ func (o GlUniformMatrix4fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix4fv_In) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix4fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13552,15 +13553,15 @@ func (o *GlUniformMatrix4fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUniformMatrix4fv_Out) Encode(e *binary.Encoder) error {
+func (o GlUniformMatrix4fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUniformMatrix4fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlUniformMatrix4fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUnmapBuffer) Encode(e *binary.Encoder) error {
+func (o GlUnmapBuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13573,7 +13574,7 @@ func (o GlUnmapBuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUnmapBuffer) Decode(d *binary.Decoder) error {
+func (o *GlUnmapBuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13588,14 +13589,14 @@ func (o *GlUnmapBuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUnmapBuffer_In) Encode(e *binary.Encoder) error {
+func (o GlUnmapBuffer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Target)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlUnmapBuffer_In) Decode(d *binary.Decoder) error {
+func (o *GlUnmapBuffer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13604,15 +13605,15 @@ func (o *GlUnmapBuffer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUnmapBuffer_Out) Encode(e *binary.Encoder) error {
+func (o GlUnmapBuffer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUnmapBuffer_Out) Decode(d *binary.Decoder) error {
+func (o *GlUnmapBuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlUseProgram) Encode(e *binary.Encoder) error {
+func (o GlUseProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13625,7 +13626,7 @@ func (o GlUseProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUseProgram) Decode(d *binary.Decoder) error {
+func (o *GlUseProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13640,14 +13641,14 @@ func (o *GlUseProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUseProgram_In) Encode(e *binary.Encoder) error {
+func (o GlUseProgram_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlUseProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlUseProgram_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13656,15 +13657,15 @@ func (o *GlUseProgram_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlUseProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlUseProgram_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlUseProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlUseProgram_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlValidateProgram) Encode(e *binary.Encoder) error {
+func (o GlValidateProgram) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13677,7 +13678,7 @@ func (o GlValidateProgram) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlValidateProgram) Decode(d *binary.Decoder) error {
+func (o *GlValidateProgram) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13692,14 +13693,14 @@ func (o *GlValidateProgram) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlValidateProgram_In) Encode(e *binary.Encoder) error {
+func (o GlValidateProgram_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *GlValidateProgram_In) Decode(d *binary.Decoder) error {
+func (o *GlValidateProgram_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13708,15 +13709,15 @@ func (o *GlValidateProgram_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlValidateProgram_Out) Encode(e *binary.Encoder) error {
+func (o GlValidateProgram_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlValidateProgram_Out) Decode(d *binary.Decoder) error {
+func (o *GlValidateProgram_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1f) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13729,7 +13730,7 @@ func (o GlVertexAttrib1f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1f) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13744,7 +13745,7 @@ func (o *GlVertexAttrib1f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1f_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13754,7 +13755,7 @@ func (o GlVertexAttrib1f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1f_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13768,15 +13769,15 @@ func (o *GlVertexAttrib1f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1f_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1f_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1fv) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13789,7 +13790,7 @@ func (o GlVertexAttrib1fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1fv) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13804,7 +13805,7 @@ func (o *GlVertexAttrib1fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1fv_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13819,7 +13820,7 @@ func (o GlVertexAttrib1fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1fv_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13840,15 +13841,15 @@ func (o *GlVertexAttrib1fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib1fv_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib1fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib1fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib1fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2f) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13861,7 +13862,7 @@ func (o GlVertexAttrib2f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2f) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13876,7 +13877,7 @@ func (o *GlVertexAttrib2f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2f_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13889,7 +13890,7 @@ func (o GlVertexAttrib2f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2f_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13908,15 +13909,15 @@ func (o *GlVertexAttrib2f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2f_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2f_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2fv) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -13929,7 +13930,7 @@ func (o GlVertexAttrib2fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2fv) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -13944,7 +13945,7 @@ func (o *GlVertexAttrib2fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2fv_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -13959,7 +13960,7 @@ func (o GlVertexAttrib2fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2fv_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -13980,15 +13981,15 @@ func (o *GlVertexAttrib2fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib2fv_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib2fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib2fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib2fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3f) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14001,7 +14002,7 @@ func (o GlVertexAttrib3f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3f) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14016,7 +14017,7 @@ func (o *GlVertexAttrib3f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3f_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -14032,7 +14033,7 @@ func (o GlVertexAttrib3f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3f_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14056,15 +14057,15 @@ func (o *GlVertexAttrib3f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3f_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3f_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3fv) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14077,7 +14078,7 @@ func (o GlVertexAttrib3fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3fv) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14092,7 +14093,7 @@ func (o *GlVertexAttrib3fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3fv_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -14107,7 +14108,7 @@ func (o GlVertexAttrib3fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3fv_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14128,15 +14129,15 @@ func (o *GlVertexAttrib3fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib3fv_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib3fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib3fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib3fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4f) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4f) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14149,7 +14150,7 @@ func (o GlVertexAttrib4f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4f) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14164,7 +14165,7 @@ func (o *GlVertexAttrib4f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4f_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4f_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -14183,7 +14184,7 @@ func (o GlVertexAttrib4f_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4f_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4f_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14212,15 +14213,15 @@ func (o *GlVertexAttrib4f_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4f_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4f_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4f_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4f_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4fv) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4fv) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14233,7 +14234,7 @@ func (o GlVertexAttrib4fv) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4fv) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4fv) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14248,7 +14249,7 @@ func (o *GlVertexAttrib4fv) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4fv_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4fv_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -14263,7 +14264,7 @@ func (o GlVertexAttrib4fv_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4fv_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4fv_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14284,15 +14285,15 @@ func (o *GlVertexAttrib4fv_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttrib4fv_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttrib4fv_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttrib4fv_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttrib4fv_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttribPointer) Encode(e *binary.Encoder) error {
+func (o GlVertexAttribPointer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14305,7 +14306,7 @@ func (o GlVertexAttribPointer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttribPointer) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttribPointer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14320,7 +14321,7 @@ func (o *GlVertexAttribPointer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttribPointer_In) Encode(e *binary.Encoder) error {
+func (o GlVertexAttribPointer_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Location)); err != nil {
 		return err
 	}
@@ -14342,7 +14343,7 @@ func (o GlVertexAttribPointer_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttribPointer_In) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttribPointer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14376,15 +14377,15 @@ func (o *GlVertexAttribPointer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlVertexAttribPointer_Out) Encode(e *binary.Encoder) error {
+func (o GlVertexAttribPointer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlVertexAttribPointer_Out) Decode(d *binary.Decoder) error {
+func (o *GlVertexAttribPointer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o GlViewport) Encode(e *binary.Encoder) error {
+func (o GlViewport) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14397,7 +14398,7 @@ func (o GlViewport) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlViewport) Decode(d *binary.Decoder) error {
+func (o *GlViewport) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14412,7 +14413,7 @@ func (o *GlViewport) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlViewport_In) Encode(e *binary.Encoder) error {
+func (o GlViewport_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.X); err != nil {
 		return err
 	}
@@ -14428,7 +14429,7 @@ func (o GlViewport_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *GlViewport_In) Decode(d *binary.Decoder) error {
+func (o *GlViewport_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14452,15 +14453,15 @@ func (o *GlViewport_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o GlViewport_Out) Encode(e *binary.Encoder) error {
+func (o GlViewport_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *GlViewport_Out) Decode(d *binary.Decoder) error {
+func (o *GlViewport_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o Globals) Encode(e *binary.Encoder) error {
+func (o Globals) Encode(e binary.Encoder) error {
 	if err := o.Blending.Encode(e); err != nil {
 		return err
 	}
@@ -14580,7 +14581,7 @@ func (o Globals) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Globals) Decode(d *binary.Decoder) error {
+func (o *Globals) Decode(d binary.Decoder) error {
 	if err := o.Blending.Decode(d); err != nil {
 		return err
 	}
@@ -14784,7 +14785,7 @@ func (o *Globals) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Image) Encode(e *binary.Encoder) error {
+func (o Image) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -14806,7 +14807,7 @@ func (o Image) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Image) Decode(d *binary.Decoder) error {
+func (o *Image) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -14838,7 +14839,7 @@ func (o *Image) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Init) Encode(e *binary.Encoder) error {
+func (o Init) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -14851,7 +14852,7 @@ func (o Init) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Init) Decode(d *binary.Decoder) error {
+func (o *Init) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -14866,7 +14867,7 @@ func (o *Init) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Init_In) Encode(e *binary.Encoder) error {
+func (o Init_In) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Width); err != nil {
 		return err
 	}
@@ -14885,7 +14886,7 @@ func (o Init_In) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Init_In) Decode(d *binary.Decoder) error {
+func (o *Init_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -14914,15 +14915,15 @@ func (o *Init_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Init_Out) Encode(e *binary.Encoder) error {
+func (o Init_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *Init_Out) Decode(d *binary.Decoder) error {
+func (o *Init_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o InternalState) Encode(e *binary.Encoder) error {
+func (o InternalState) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -14941,7 +14942,7 @@ func (o InternalState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *InternalState) Decode(d *binary.Decoder) error {
+func (o *InternalState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -14970,7 +14971,7 @@ func (o *InternalState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Mat2f) Encode(e *binary.Encoder) error {
+func (o Mat2f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -14983,7 +14984,7 @@ func (o Mat2f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Mat2f) Decode(d *binary.Decoder) error {
+func (o *Mat2f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -14998,7 +14999,7 @@ func (o *Mat2f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Mat3f) Encode(e *binary.Encoder) error {
+func (o Mat3f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15014,7 +15015,7 @@ func (o Mat3f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Mat3f) Decode(d *binary.Decoder) error {
+func (o *Mat3f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15032,7 +15033,7 @@ func (o *Mat3f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Mat4f) Encode(e *binary.Encoder) error {
+func (o Mat4f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15051,7 +15052,7 @@ func (o Mat4f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Mat4f) Decode(d *binary.Decoder) error {
+func (o *Mat4f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15072,7 +15073,7 @@ func (o *Mat4f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Objects) Encode(e *binary.Encoder) error {
+func (o Objects) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15199,7 +15200,7 @@ func (o Objects) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Objects) Decode(d *binary.Decoder) error {
+func (o *Objects) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15392,7 +15393,7 @@ func (o *Objects) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Program) Encode(e *binary.Encoder) error {
+func (o Program) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15452,7 +15453,7 @@ func (o Program) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Program) Decode(d *binary.Decoder) error {
+func (o *Program) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15554,14 +15555,14 @@ func (o *Program) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Query) Encode(e *binary.Encoder) error {
+func (o Query) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Query) Decode(d *binary.Decoder) error {
+func (o *Query) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15570,7 +15571,7 @@ func (o *Query) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o RasterizerState) Encode(e *binary.Encoder) error {
+func (o RasterizerState) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15639,7 +15640,7 @@ func (o RasterizerState) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *RasterizerState) Decode(d *binary.Decoder) error {
+func (o *RasterizerState) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15750,7 +15751,7 @@ func (o *RasterizerState) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Rect) Encode(e *binary.Encoder) error {
+func (o Rect) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15769,7 +15770,7 @@ func (o Rect) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Rect) Decode(d *binary.Decoder) error {
+func (o *Rect) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15798,7 +15799,7 @@ func (o *Rect) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Renderbuffer) Encode(e *binary.Encoder) error {
+func (o Renderbuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15817,7 +15818,7 @@ func (o Renderbuffer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Renderbuffer) Decode(d *binary.Decoder) error {
+func (o *Renderbuffer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15844,7 +15845,7 @@ func (o *Renderbuffer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Shader) Encode(e *binary.Encoder) error {
+func (o Shader) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -15874,7 +15875,7 @@ func (o Shader) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Shader) Decode(d *binary.Decoder) error {
+func (o *Shader) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -15918,7 +15919,7 @@ func (o *Shader) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StartTimer) Encode(e *binary.Encoder) error {
+func (o StartTimer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -15931,7 +15932,7 @@ func (o StartTimer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *StartTimer) Decode(d *binary.Decoder) error {
+func (o *StartTimer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -15946,14 +15947,14 @@ func (o *StartTimer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StartTimer_In) Encode(e *binary.Encoder) error {
+func (o StartTimer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint8(o.Index); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StartTimer_In) Decode(d *binary.Decoder) error {
+func (o *StartTimer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -15962,15 +15963,15 @@ func (o *StartTimer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StartTimer_Out) Encode(e *binary.Encoder) error {
+func (o StartTimer_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
-func (o *StartTimer_Out) Decode(d *binary.Decoder) error {
+func (o *StartTimer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o StopTimer) Encode(e *binary.Encoder) error {
+func (o StopTimer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -15983,7 +15984,7 @@ func (o StopTimer) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *StopTimer) Decode(d *binary.Decoder) error {
+func (o *StopTimer) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -15998,14 +15999,14 @@ func (o *StopTimer) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StopTimer_In) Encode(e *binary.Encoder) error {
+func (o StopTimer_In) Encode(e binary.Encoder) error {
 	if err := e.Uint8(o.Index); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StopTimer_In) Decode(d *binary.Decoder) error {
+func (o *StopTimer_In) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -16014,14 +16015,14 @@ func (o *StopTimer_In) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o StopTimer_Out) Encode(e *binary.Encoder) error {
+func (o StopTimer_Out) Encode(e binary.Encoder) error {
 	if err := e.Uint64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *StopTimer_Out) Decode(d *binary.Decoder) error {
+func (o *StopTimer_Out) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16030,7 +16031,7 @@ func (o *StopTimer_Out) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Texture) Encode(e *binary.Encoder) error {
+func (o Texture) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16092,7 +16093,7 @@ func (o Texture) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Texture) Decode(d *binary.Decoder) error {
+func (o *Texture) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16194,7 +16195,7 @@ func (o *Texture) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Uniform) Encode(e *binary.Encoder) error {
+func (o Uniform) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16210,7 +16211,7 @@ func (o Uniform) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Uniform) Decode(d *binary.Decoder) error {
+func (o *Uniform) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16232,7 +16233,7 @@ func (o *Uniform) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o UniformValue) Encode(e *binary.Encoder) error {
+func (o UniformValue) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16272,7 +16273,7 @@ func (o UniformValue) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *UniformValue) Decode(d *binary.Decoder) error {
+func (o *UniformValue) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16318,7 +16319,7 @@ func (o *UniformValue) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec2f) Encode(e *binary.Encoder) error {
+func (o Vec2f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16331,7 +16332,7 @@ func (o Vec2f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec2f) Decode(d *binary.Decoder) error {
+func (o *Vec2f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16350,7 +16351,7 @@ func (o *Vec2f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec2i) Encode(e *binary.Encoder) error {
+func (o Vec2i) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16363,7 +16364,7 @@ func (o Vec2i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec2i) Decode(d *binary.Decoder) error {
+func (o *Vec2i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16382,7 +16383,7 @@ func (o *Vec2i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec3f) Encode(e *binary.Encoder) error {
+func (o Vec3f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16398,7 +16399,7 @@ func (o Vec3f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec3f) Decode(d *binary.Decoder) error {
+func (o *Vec3f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16422,7 +16423,7 @@ func (o *Vec3f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec3i) Encode(e *binary.Encoder) error {
+func (o Vec3i) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16438,7 +16439,7 @@ func (o Vec3i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec3i) Decode(d *binary.Decoder) error {
+func (o *Vec3i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16462,7 +16463,7 @@ func (o *Vec3i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec4f) Encode(e *binary.Encoder) error {
+func (o Vec4f) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16481,7 +16482,7 @@ func (o Vec4f) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec4f) Decode(d *binary.Decoder) error {
+func (o *Vec4f) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16510,7 +16511,7 @@ func (o *Vec4f) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Vec4i) Encode(e *binary.Encoder) error {
+func (o Vec4i) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16529,7 +16530,7 @@ func (o Vec4i) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Vec4i) Decode(d *binary.Decoder) error {
+func (o *Vec4i) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16558,14 +16559,14 @@ func (o *Vec4i) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o VertexArray) Encode(e *binary.Encoder) error {
+func (o VertexArray) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *VertexArray) Decode(d *binary.Decoder) error {
+func (o *VertexArray) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16574,7 +16575,7 @@ func (o *VertexArray) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o VertexAttribute) Encode(e *binary.Encoder) error {
+func (o VertexAttribute) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16590,7 +16591,7 @@ func (o VertexAttribute) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *VertexAttribute) Decode(d *binary.Decoder) error {
+func (o *VertexAttribute) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -16614,7 +16615,7 @@ func (o *VertexAttribute) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o VertexAttributeArray) Encode(e *binary.Encoder) error {
+func (o VertexAttributeArray) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
 		return err
 	}
@@ -16639,7 +16640,7 @@ func (o VertexAttributeArray) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *VertexAttributeArray) Decode(d *binary.Decoder) error {
+func (o *VertexAttributeArray) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {

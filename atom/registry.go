@@ -16,21 +16,21 @@ package atom
 
 import "fmt"
 
-var registry = map[TypeID]TypeInfo{}
+var atomRegistry = map[TypeID]TypeInfo{}
 
 // Register registers the atom type ty with the atom registry. If another atom
 // is already registered with the same type identifer then Register will panic.
 func Register(ty TypeInfo) {
-	if _, dup := registry[ty.ID]; dup {
+	if _, dup := atomRegistry[ty.ID]; dup {
 		panic(fmt.Errorf("Duplicate atom type id 0x%x registered", ty.ID))
 	}
-	registry[ty.ID] = ty
+	atomRegistry[ty.ID] = ty
 }
 
 // New builds a new instance of the atom with type identifier id. The type must
 // have previously been registered with Register.
 func New(id TypeID) (Atom, error) {
-	if ty, ok := registry[id]; ok {
+	if ty, ok := atomRegistry[id]; ok {
 		return ty.New(), nil
 	} else {
 		return nil, fmt.Errorf("Atom type id 0x%x not registered", id)

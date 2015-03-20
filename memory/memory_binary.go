@@ -8,16 +8,17 @@ package memory
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
 	//struct memory.Observation { Context:atom.ContextID, Range:Range, ResourceID:binary.ID }
-	binary.Register(binary.ID{0x50, 0x86, 0x69, 0x52, 0x83, 0xb3, 0xa4, 0x09, 0x9c, 0xe7, 0x86, 0x7c, 0x31, 0x92, 0x66, 0x82, 0xb1, 0x05, 0x99, 0x67}, &Observation{})
+	registry.Add(binary.ID{0x50, 0x86, 0x69, 0x52, 0x83, 0xb3, 0xa4, 0x09, 0x9c, 0xe7, 0x86, 0x7c, 0x31, 0x92, 0x66, 0x82, 0xb1, 0x05, 0x99, 0x67}, &Observation{})
 	//struct memory.Range { Base:Pointer, Size:uint64 }
-	binary.Register(binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}, &Range{})
+	registry.Add(binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}, &Range{})
 }
 
-func (o Observation) Encode(e *binary.Encoder) error {
+func (o Observation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -30,7 +31,7 @@ func (o Observation) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Observation) Decode(d *binary.Decoder) error {
+func (o *Observation) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -45,7 +46,7 @@ func (o *Observation) Decode(d *binary.Decoder) error {
 	return nil
 }
 
-func (o Range) Encode(e *binary.Encoder) error {
+func (o Range) Encode(e binary.Encoder) error {
 	if err := e.Uint64(uint64(o.Base)); err != nil {
 		return err
 	}
@@ -55,7 +56,7 @@ func (o Range) Encode(e *binary.Encoder) error {
 	return nil
 }
 
-func (o *Range) Decode(d *binary.Decoder) error {
+func (o *Range) Decode(d binary.Decoder) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {

@@ -21,6 +21,8 @@ import (
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 )
@@ -40,12 +42,12 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		// Flush only fails if channel fails, multiplexer already knows, so we ignore the error
 		defer w.Flush()
 
-		d := binary.NewDecoder(channel)
-		e := binary.NewEncoder(w)
+		d := cyclic.Decoder(vle.Reader(channel))
+		e := cyclic.Encoder(vle.Writer(w))
 
 		// Check the RPC header
 		var h [4]byte
-		if _, err := d.Read(h[:]); err != nil || h != header {
+		if err := d.Data(h[:]); err != nil || h != header {
 			logger.Error("%v", ErrInvalidHeader)
 			e.Object(ErrInvalidHeader)
 			return

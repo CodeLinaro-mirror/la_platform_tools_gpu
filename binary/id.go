@@ -28,12 +28,12 @@ func (id ID) Valid() bool {
 	return id != ID{}
 }
 
-func (id ID) Encode(e *Encoder) error {
-	return e.WriteFull(id[:])
+func (id ID) Encode(e Encoder) error {
+	return e.Data(id[:])
 }
 
-func (id *ID) Decode(d *Decoder) error {
-	return d.ReadFull((*id)[:])
+func (id *ID) Decode(d Decoder) error {
+	return d.Data((*id)[:])
 }
 
 func (id ID) Format(f fmt.State, c rune) {

@@ -23,6 +23,8 @@ import (
 	"path/filepath"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -51,7 +53,7 @@ func CreateUnboundedArchive(path string) Store {
 	records := make(map[binary.ID]span)
 
 	// Use a buffered reader to quickly read the active records
-	d := binary.NewDecoder(bufio.NewReaderSize(index, 256<<10))
+	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(index, 256<<10)))
 	for {
 		var r record
 		if err := r.decode(d); err != io.EOF {
@@ -107,7 +109,7 @@ func (s unboundedArchive) Store(id binary.ID, _ binary.Object, data []byte, logg
 			},
 		}
 
-		e := binary.NewEncoder(s.index)
+		e := cyclic.Encoder(vle.Writer(s.index))
 		record.encode(e)
 
 		s.records[id] = record.span
@@ -144,7 +146,7 @@ func (s unboundedArchive) Load(id binary.ID, logger log.Logger, out binary.Objec
 			return
 		}
 
-		d := binary.NewDecoder(bytes.NewBuffer(data))
+		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
 		size, err = len(data), out.Decode(d)
 		return
 	}

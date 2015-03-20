@@ -19,6 +19,8 @@ import (
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/multiplexer"
 )
 
@@ -50,11 +52,11 @@ func (b Client) Send(call binary.Encodable) (interface{}, error) {
 	defer channel.Close()
 
 	w := bufio.NewWriterSize(channel, b.m.MTU())
-	d := binary.NewDecoder(channel)
-	e := binary.NewEncoder(w)
+	d := cyclic.Decoder(vle.Reader(channel))
+	e := cyclic.Encoder(vle.Writer(w))
 
 	// Write the RPC header
-	if err := e.WriteFull(header[:]); err != nil {
+	if err := e.Data(header[:]); err != nil {
 		return nil, err
 	}
 

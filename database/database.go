@@ -27,6 +27,8 @@ import (
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
+	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -101,7 +103,7 @@ func (d *database) loadMetadataIfExists(id binary.ID, logger log.Logger, metadat
 func (d *database) storeMetadata(id binary.ID, metadata *metadata, logger log.Logger) error {
 	logger = logger.Enter("Database.storeMetadata")
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := metadata.Encode(enc); err != nil {
 		return err
 	}
@@ -131,7 +133,7 @@ func (d *database) StoreLink(to, id binary.ID, logger log.Logger) (err error) {
 func (d *database) store(r binary.Object, logger log.Logger, metaType metaType, storeToUse store.Store) (id binary.ID, err error) {
 	// Encode the resource
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := r.Encode(enc); err != nil {
 		return binary.ID{}, err
 	}
@@ -173,7 +175,7 @@ func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id bi
 	defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
 
 	buf := &bytes.Buffer{}
-	enc := binary.NewEncoder(buf)
+	enc := cyclic.Encoder(vle.Writer(buf))
 	if err := enc.Object(request); err != nil {
 		return binary.ID{}, err
 	}
@@ -301,7 +303,7 @@ func (d *database) Captures() (map[string]binary.ID, error) {
 				return result, err
 			} else {
 				defer r.Close()
-				d := binary.NewDecoder(r)
+				d := cyclic.Decoder(vle.Reader(r))
 				id := binary.ID{}
 				if err := id.Decode(d); err != nil {
 					return result, err
