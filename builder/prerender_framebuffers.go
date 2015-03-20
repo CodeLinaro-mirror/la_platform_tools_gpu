@@ -27,7 +27,12 @@ import (
 
 // build writes to out an empty Binary resource after processing the given PrerenderFramebuffers request.
 func (request *PrerenderFramebuffers) build(db database.Database, logger log.Logger, out binary.Object) error {
-	atoms, _, err := getAtoms(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
+	if err != nil {
+		return err
+	}
+
+	atoms, err := loadAtoms(capture.Atoms, db, logger)
 	if err != nil {
 		return err
 	}

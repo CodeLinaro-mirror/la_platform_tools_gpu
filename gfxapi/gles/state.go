@@ -3,26 +3,15 @@ package gles
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
-	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 )
 
-type state struct {
+type State struct {
 	Globals
-	Mem memory.Memory
+	ValidateOutput bool
 }
 
-func initialState() *state {
-	s := state{}
-	s.Init()
-	return &s
-}
-
-func (s *state) Memory() *memory.Memory {
-	return &s.Mem
-}
-
-func (s *state) GetFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (width, height uint32, err error) {
+func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (width, height uint32, err error) {
 	framebufferID := s.BoundFramebuffers[FramebufferTarget_GL_FRAMEBUFFER]
 
 	framebuffer, ok := s.Instances.Framebuffers[framebufferID]
@@ -30,10 +19,10 @@ func (s *state) GetFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (
 		return 0, 0, fmt.Errorf("No GL_FRAMEBUFFER bound")
 	}
 
-	attachment, ok := map[gfxapi.FramebufferAttachment]FramebufferAttachment{
-		gfxapi.FramebufferAttachmentColor:   FramebufferAttachment_GL_COLOR_ATTACHMENT0,
-		gfxapi.FramebufferAttachmentDepth:   FramebufferAttachment_GL_DEPTH_ATTACHMENT,
-		gfxapi.FramebufferAttachmentStencil: FramebufferAttachment_GL_STENCIL_ATTACHMENT,
+	attachment, ok := map[state.FramebufferAttachment]FramebufferAttachment{
+		state.FramebufferAttachmentColor:   FramebufferAttachment_GL_COLOR_ATTACHMENT0,
+		state.FramebufferAttachmentDepth:   FramebufferAttachment_GL_DEPTH_ATTACHMENT,
+		state.FramebufferAttachmentStencil: FramebufferAttachment_GL_STENCIL_ATTACHMENT,
 	}[att]
 	if !ok {
 		return 0, 0, fmt.Errorf("Framebuffer attachment %v unsupported by gles", att)

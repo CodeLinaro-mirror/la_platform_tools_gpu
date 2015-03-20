@@ -20,6 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/executor"
@@ -124,9 +125,9 @@ func (b *batcher) send(requests []Request) (err error) {
 	}
 
 	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment), b.device.ByteOrder())
-	writer := b.context.Generator.ReplayWriter(builder)
 
-	transforms.Transform(atoms, adapter{writer, postbackHandlers})
+	adapter := adapter{handlers: postbackHandlers, builder: builder, state: state.New()}
+	transforms.Transform(atoms, &adapter)
 
 	payload, decoder := builder.Build(b.logger)
 
@@ -147,14 +148,15 @@ func (b *batcher) send(requests []Request) (err error) {
 	)
 }
 
-// adapter conforms to the the atom Writer interface, forwarding writes to a
-// replay Writer.
+// adapter conforms to the the atom Writer interface, performing replay writes
+// on each atom.
 type adapter struct {
-	writer   Writer
 	handlers executor.PostbackHandlerMap
+	builder  *builder.Builder
+	state    *state.State
 }
 
-func (w adapter) Write(id atom.ID, a atom.Atom) {
+func (w *adapter) Write(id atom.ID, a atom.Atom) {
 	_, postback := w.handlers[id]
-	w.writer.Write(id, a, postback)
+	Replay(id, a, w.state, w.builder, postback)
 }

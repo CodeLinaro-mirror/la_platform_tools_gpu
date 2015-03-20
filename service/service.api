@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@handle type string ApiId
 @handle type string AtomStreamId
 @handle type string BinaryId
 @handle type string CaptureId
@@ -21,6 +22,10 @@
 @handle type string MemoryInfoId
 @handle type string SchemaId
 @handle type string TimingInfoId
+
+// Import imports capture data emitted by the graphics spy, returning the new
+// capture identifier.
+cmd CaptureId Import(string name, array<u8> Data) { return ? }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the
 // server.
@@ -32,12 +37,10 @@ cmd array<CaptureId> GetCaptures() { return ? }
 cmd array<DeviceId> GetDevices() { return ? }
 
 // GetState returns an identifier to a binary blob containing the graphics state
-// for the given context immediately following the atom after.
+// immediately following the atom after.
 // The binary blob can be fetched with a call to ResolveBinary, and decoded
 // using the capture's schema.
-cmd BinaryId GetState(CaptureId capture,
-                      u32       contextId,
-                      u64       after)
+cmd BinaryId GetState(CaptureId capture, u64 after)
 { return ? }
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture and
@@ -48,12 +51,9 @@ cmd HierarchyId GetHierarchy(CaptureId capture,
 { return ? }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
-// for the given capture, context and range, immediately following the atom
+// for the given capture and range, immediately following the atom
 // after.
-cmd MemoryInfoId GetMemoryInfo(CaptureId   capture,
-                               u32         contextId,
-                               u64         after,
-                               MemoryRange rng)
+cmd MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, MemoryRange rng)
 { return ? }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
@@ -107,15 +107,15 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
                                    array<u64> atomIds)
 { return ? }
 
-cmd AtomStream ResolveAtomStream(AtomStreamId id) { return ? }
-cmd Binary     ResolveBinary(BinaryId id) { return ? }
-cmd Capture    ResolveCapture(CaptureId id) { return ? }
-cmd Device     ResolveDevice(DeviceId id) { return ? }
-cmd Hierarchy  ResolveHierarchy(HierarchyId id) { return ? }
-cmd ImageInfo  ResolveImageInfo(ImageInfoId id) { return ? }
-cmd MemoryInfo ResolveMemoryInfo(MemoryInfoId id) { return ? }
-cmd Schema     ResolveSchema(SchemaId id) { return ? }
-cmd TimingInfo ResolveTimingInfo(TimingInfoId id) { return ? }
+cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
+cmd Binary             ResolveBinary(BinaryId id) { return ? }
+cmd Capture            ResolveCapture(CaptureId id) { return ? }
+cmd Device             ResolveDevice(DeviceId id) { return ? }
+cmd Hierarchy          ResolveHierarchy(HierarchyId id) { return ? }
+cmd ImageInfo          ResolveImageInfo(ImageInfoId id) { return ? }
+cmd MemoryInfo         ResolveMemoryInfo(MemoryInfoId id) { return ? }
+cmd Schema             ResolveSchema(SchemaId id) { return ? }
+cmd TimingInfo         ResolveTimingInfo(TimingInfoId id) { return ? }
 
 // Device describes replay target avaliable to the server.
 class Device {
@@ -130,10 +130,10 @@ class Device {
 
 // Capture describes single capture file held by the server.
 class Capture {
-  string        Name       // Name given to the capture. i.e. "KittyWorld"
-  string        API        // The name of the API used in the capture. Will be removed.
-  AtomStreamId  Atoms      // The identifier to the stream of atoms in this capture.
-  array<u32>    ContextIds // All context identifiers used by all atoms in the capture.
+  string              Name     // Name given to the capture. i.e. "KittyWorld"
+  AtomStreamId        Atoms    // The identifier to the stream of atoms in this capture.
+  SchemaId            Schema   // The schema used to decode types in this capture.
+  array<AtomContext>  Contexts // The contexts used by the capture.
 }
 
 // Binary holds a blob of data.
@@ -142,10 +142,15 @@ class Binary {
 }
 
 // AtomStream holds a stream of atoms in binary form. The atoms can be unpacked
-// using the schema.
+// using the capture's schema.
 class AtomStream {
-  array<u8> Data   // Encoded atom stream.
-  SchemaId  Schema // Schema used to unpack the atom stream.
+  array<u8> Data // Encoded atom stream.
+}
+
+// AtomContext holds the information about a single context in an AtomStream.
+class AtomContext {
+  u32   Id  // The context id.
+  ApiId Api // The context API.
 }
 
 // Hierarchy holds the root to an AtomGroup hierarchy.
@@ -241,14 +246,14 @@ class RenderSettings {
 // types stored within the AtomStream and state. Clients use the Schema to know
 // how to interpret these types.
 class Schema {
-  array<ArrayInfo*>       Arrays
-  array<StaticArrayInfo*> StaticArrays
-  array<MapInfo*>         Maps
-  array<EnumInfo*>        Enums
-  array<StructInfo*>      Structs
-  array<ClassInfo*>       Classes
-  array<AtomInfo>         Atoms
-  StructInfo*             State
+  array<AtomInfo>  Atoms // The schema description of all atoms in all APIs.
+  array<ApiSchema> Apis  // The per-API schema descriptions.
+}
+
+// ApiSchema describes the schema used by a single graphics API.
+class ApiSchema {
+  ApiId      Api   // The API identifier.
+  StructInfo State // The state layout.
 }
 
 // TypeKind is the exhaustive list of all types supported by the schema.

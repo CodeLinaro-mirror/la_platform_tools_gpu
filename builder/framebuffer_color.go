@@ -62,7 +62,12 @@ func (request *RenderFramebufferColor) build(mgr *replay.Manager, db database.Da
 		ContextID: request.Context,
 	}
 
-	api, err := getAPI(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
+	if err != nil {
+		return err
+	}
+
+	api, err := getAPI(capture.Contexts, request.Context)
 	if err != nil {
 		return err
 	}

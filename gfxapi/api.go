@@ -39,12 +39,8 @@ type CallTiming struct {
 type API interface {
 	// Name returns the official name of the api.
 	Name() string
-	// Schema returns the programmatic description of the api, as used by clients.
-	Schema() service.Schema
-	// InitialState builds and returns a clean state block for the api.
-	InitialState() State
-	// StateMutator returns an object that can be used to emulate the state changes caused by api commands.
-	StateMutator(State) atom.Writer
+	// ID returns the unique identifier of the api.
+	ID() service.ApiId
 	// ColorBuffer is used to request the color buffer at a particular point in a capture.
 	ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan Image
 	// DepthBuffer is used to request the depth buffer at a particular point in a capture.
@@ -53,19 +49,26 @@ type API interface {
 	TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan CallTiming
 }
 
-var apis map[string]API = make(map[string]API)
+// APIer is the interface of types belonging to an API. Atoms declared within a
+// graphics API should implement this interface.
+type APIer interface {
+	API() API
+}
+
+var apis map[service.ApiId]API = make(map[service.ApiId]API)
 
 // Register adds an api to the understood set.
 // It is illegal to register the same name twice.
 func Register(api API) {
-	if _, present := apis[api.Name()]; present {
-		panic(fmt.Errorf("API name %s registered more than once", api.Name()))
+	id := api.ID()
+	if _, present := apis[id]; present {
+		panic(fmt.Errorf("API %s registered more than once", id))
 	}
-	apis[api.Name()] = api
+	apis[id] = api
 }
 
-// Find looks up a graphics API by name.
-// If the name has not been registered, it returns nil.
-func Find(name string) API {
-	return apis[name]
+// Find looks up a graphics API by identifier.
+// If the id has not been registered, it returns nil.
+func Find(id service.ApiId) API {
+	return apis[id]
 }

@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -21,37 +22,38 @@ import (
 //   GL_ATC_RGB_AMD
 //   GL_ATC_RGBA_EXPLICIT_ALPHA_AMD
 //   GL_ETC1_RGB8_OES
-func uncompressTextures(capture service.CaptureId, db database.Database, logger log.Logger) atom.Transform {
-	mutator := StateMutator{State: initialState()}
+func decompressTextures(capture service.CaptureId, db database.Database, logger log.Logger) atom.Transformer {
+	logger = logger.Enter("decompressTextures")
+	s := state.New()
+	return atom.Transform("DecompressTextures", func(id atom.ID, a atom.Atom, out atom.Writer) {
+		if err := s.Mutate(a); err != nil {
+			logger.Error("%v", err)
+		}
 
-	return func(id atom.ID, a atom.Atom, out atom.Writer) {
-		mutator.Write(id, a)
 		switch a := a.(type) {
-		default:
-			out.Write(id, a)
 		case *GlCompressedTexImage2D:
 			resourceID := calcTextureID(capture, id, a)
-			var uncompressed binary.Data
-			if db.Load(resourceID, logger, &uncompressed) != nil {
+			var decompressed binary.Data
+			if db.Load(resourceID, logger, &decompressed) != nil {
 				var err error
-				uncompressed, err = decompress(db, logger, a, mutator.State.Mem)
+				decompressed, err = decompress(db, logger, a, &s.Memory)
 				if err != nil {
 					panic(err)
 				}
-				data := binary.Data(uncompressed)
-				uncompressedID, err := db.Store(&data, logger)
+				data := binary.Data(decompressed)
+				decompressedID, err := db.Store(&data, logger)
 				if err != nil {
 					panic(err)
 				}
-				err = db.StoreLink(uncompressedID, resourceID, logger)
+				err = db.StoreLink(decompressedID, resourceID, logger)
 				if err != nil {
 					panic(err)
 				}
 			}
 
 			address := memory.Pointer(0xF000000000000000)
-			out.Write(id, &memory.Observation{
-				Range:      memory.Range{Base: address, Size: uint64(len(uncompressed))},
+			out.Write(id, &atom.Observation{
+				Range:      memory.Range{Base: address, Size: uint64(len(decompressed))},
 				ResourceID: resourceID,
 				Context:    a.ContextID(),
 			})
@@ -67,8 +69,11 @@ func uncompressTextures(capture service.CaptureId, db database.Database, logger 
 				TexelType_GL_UNSIGNED_BYTE,
 				TexturePointer(address),
 			))
+
+		default:
+			out.Write(id, a)
 		}
-	}
+	})
 }
 
 func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID {
@@ -80,10 +85,10 @@ func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID
 	return binary.NewID(buf.Bytes())
 }
 
-func decompress(db database.Database, logger log.Logger, a *GlCompressedTexImage2D, mem memory.Memory) ([]byte, error) {
+func decompress(db database.Database, logger log.Logger, a *GlCompressedTexImage2D, m *memory.Memory) ([]byte, error) {
 	pointer := memory.Pointer(a.In.Data)
 	compressedSize := uint64(a.In.ImageSize)
-	compressed, err := mem.Slice(memory.Range{Base: pointer, Size: compressedSize}).Get(db, logger)
+	compressed, err := m.Slice(memory.Range{Base: pointer, Size: compressedSize}).Get(db, logger)
 	if err != nil {
 		panic(err)
 	}

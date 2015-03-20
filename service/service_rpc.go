@@ -11,11 +11,12 @@ import (
 )
 
 type RPC interface {
+	Import(l log.Logger, name string, Data U8Array) (CaptureId, error)
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
-	GetState(l log.Logger, capture CaptureId, contextId uint32, after uint64) (BinaryId, error)
+	GetState(l log.Logger, capture CaptureId, after uint64) (BinaryId, error)
 	GetHierarchy(l log.Logger, capture CaptureId, contextId uint32) (HierarchyId, error)
-	GetMemoryInfo(l log.Logger, capture CaptureId, contextId uint32, after uint64, rng MemoryRange) (MemoryInfoId, error)
+	GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng MemoryRange) (MemoryInfoId, error)
 	GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64, settings RenderSettings) (ImageInfoId, error)
 	GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64) (ImageInfoId, error)
 	ReplaceAtom(l log.Logger, capture CaptureId, atomId uint64, atomType uint16, data Binary) (CaptureId, error)
@@ -31,6 +32,9 @@ type RPC interface {
 	ResolveSchema(l log.Logger, id SchemaId) (Schema, error)
 	ResolveTimingInfo(l log.Logger, id TimingInfoId) (TimingInfo, error)
 }
+
+// Handle ApiId
+type ApiId struct{ binary.ID }
 
 // Handle AtomStreamId
 type AtomStreamId struct{ binary.ID }
@@ -59,8 +63,11 @@ type SchemaId struct{ binary.ID }
 // Handle TimingInfoId
 type TimingInfoId struct{ binary.ID }
 
-// Array ArrayInfoRefArray
-type ArrayInfoArray []*ArrayInfo
+// Array ApiSchemaArray
+type ApiSchemaArray []ApiSchema
+
+// Array AtomContextArray
+type AtomContextArray []AtomContext
 
 // Array AtomGroupArray
 type AtomGroupArray []AtomGroup
@@ -92,20 +99,11 @@ type EnumInfoArray []*EnumInfo
 // Array FieldInfoRefArray
 type FieldInfoArray []*FieldInfo
 
-// Array MapInfoRefArray
-type MapInfoArray []*MapInfo
-
 // Array MemoryRangeArray
 type MemoryRangeArray []MemoryRange
 
 // Array ParameterInfoArray
 type ParameterInfoArray []ParameterInfo
-
-// Array StaticArrayInfoRefArray
-type StaticArrayInfoArray []*StaticArrayInfo
-
-// Array StructInfoRefArray
-type StructInfoArray []*StructInfo
 
 // Array U32Array
 type U32Array []uint32
@@ -181,10 +179,10 @@ type Device struct {
 
 // Class Capture
 type Capture struct {
-	Name       string
-	API        string
-	Atoms      AtomStreamId
-	ContextIds U32Array
+	Name     string
+	Atoms    AtomStreamId
+	Schema   SchemaId
+	Contexts AtomContextArray
 }
 
 // Class Binary
@@ -194,8 +192,13 @@ type Binary struct {
 
 // Class AtomStream
 type AtomStream struct {
-	Data   U8Array
-	Schema SchemaId
+	Data U8Array
+}
+
+// Class AtomContext
+type AtomContext struct {
+	Id  uint32
+	Api ApiId
 }
 
 // Class Hierarchy
@@ -267,14 +270,14 @@ type RenderSettings struct {
 
 // Class Schema
 type Schema struct {
-	Arrays       ArrayInfoArray
-	StaticArrays StaticArrayInfoArray
-	Maps         MapInfoArray
-	Enums        EnumInfoArray
-	Structs      StructInfoArray
-	Classes      ClassInfoArray
-	Atoms        AtomInfoArray
-	State        *StructInfo
+	Atoms AtomInfoArray
+	Apis  ApiSchemaArray
+}
+
+// Class ApiSchema
+type ApiSchema struct {
+	Api   ApiId
+	State StructInfo
 }
 
 // Class ArrayInfo

@@ -27,7 +27,6 @@ import (
 type GetState struct {
 	binary.Generate
 	Capture service.CaptureId
-	Context atom.ContextID
 	After   atom.ID
 }
 
@@ -42,7 +41,6 @@ type GetHierarchy struct {
 type GetMemoryInfo struct {
 	binary.Generate
 	Capture service.CaptureId
-	Context atom.ContextID
 	After   atom.ID
 	Range   memory.Range
 }
@@ -115,6 +113,11 @@ type RenderFramebufferColor struct {
 	Width     uint32
 	Height    uint32
 	Wireframe bool
+}
+
+// getContexts records the parameters of an internal request.
+type getContexts struct {
+	Stream service.AtomStreamId
 }
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.

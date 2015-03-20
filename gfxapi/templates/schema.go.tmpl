@@ -20,11 +20,11 @@ limitations under the License.
 
   import (
     "android.googlesource.com/platform/tools/gpu/atom"
-    "android.googlesource.com/platform/tools/gpu/memory"
+    "android.googlesource.com/platform/tools/gpu/gfxapi/schema"
     "android.googlesource.com/platform/tools/gpu/service"
   )
 
-  func (a api) Schema() service.Schema {
+  func init() {
     s := schemaBuilder{
       arrays:       make(map[int]*service.ArrayInfo),
       staticArrays: make(map[int]*service.StaticArrayInfo),
@@ -32,64 +32,18 @@ limitations under the License.
       enums:        make(map[int]*service.EnumInfo),
       structs:      make(map[int]*service.StructInfo),
       classes:      make(map[int]*service.ClassInfo),
-      boolInfo:     service.CreateSimpleInfo("bool",    service.TypeKindBool),
-      floatInfo:    service.CreateSimpleInfo("float",   service.TypeKindF32),
-      doubleInfo:   service.CreateSimpleInfo("double",  service.TypeKindF64),
-      intInfo:      service.CreateSimpleInfo("int",     service.TypeKindS8),
-      uintInfo:     service.CreateSimpleInfo("uint",    service.TypeKindU8),
-      s8Info:       service.CreateSimpleInfo("s8",      service.TypeKindS8),
-      u8Info:       service.CreateSimpleInfo("u8",      service.TypeKindU8),
-      s16Info:      service.CreateSimpleInfo("s16",     service.TypeKindS16),
-      u16Info:      service.CreateSimpleInfo("u16",     service.TypeKindU16),
-      s32Info:      service.CreateSimpleInfo("s32",     service.TypeKindS32),
-      u32Info:      service.CreateSimpleInfo("u32",     service.TypeKindU32),
-      s64Info:      service.CreateSimpleInfo("s64",     service.TypeKindS64),
-      u64Info:      service.CreateSimpleInfo("u64",     service.TypeKindU64),
-      pointerInfo:  service.CreateSimpleInfo("pointer", service.TypeKindPointer),
-      memoryInfo:   service.CreateSimpleInfo("memory",  service.TypeKindMemory),
-      stringInfo:   service.CreateSimpleInfo("string",  service.TypeKindString),
-      anyInfo:      service.CreateSimpleInfo("any",     service.TypeKindAny),
-      idInfo:       service.CreateSimpleInfo("id",      service.TypeKindID),
     }
 
-    return service.Schema{
-      Arrays: service.ArrayInfoArray{
-        {{range $id, $_ := $.Arrays}}
-          s.getArrayInfo({{$id}}),
-        {{end}}
+    {{range $i, $c := AllCommands $}}
+      schema.RegisterAtom({{Macro "Command" "Command" $c "Index" $i}})
+    {{end}}
+    schema.RegisterAPI(api{}, service.StructInfo{
+      Name:   "state",
+      Kind:   service.TypeKindStruct,
+      Fields: service.FieldInfoArray{
+        {{Macro "Globals" $}}
       },
-      StaticArrays: service.StaticArrayInfoArray{
-        {{range $id, $_ := $.StaticArrays}}
-          s.getStaticArrayInfo({{$id}}),
-        {{end}}
-      },
-      Maps: service.MapInfoArray{
-        {{range $id, $_ := $.Maps}}
-          s.getMapInfo({{$id}}),
-        {{end}}
-      },
-      Enums: service.EnumInfoArray{
-        {{range $id, $_ := $.Enums}}
-          s.getEnumInfo({{$id}}),
-        {{end}}
-      },
-      Classes: service.ClassInfoArray{
-        {{range $id, $_ := $.Classes}}
-          s.getClassInfo({{$id}}),
-        {{end}}
-      },
-      Atoms: service.AtomInfoArray{
-        {{range $i, $c := AllCommands $}}{{Macro "Command" "Command" $c "Index" $i}}{{end}}
-        {{Macro "FixedAtoms"}}
-      },
-      State: service.CreateStructInfo(
-        "globals",
-        service.TypeKindStruct,
-        service.FieldInfoArray{
-          {{Macro "Globals" $}}
-        },
-      ),
-    }
+    })
   }
 
   type schemaBuilder struct {
@@ -99,24 +53,6 @@ limitations under the License.
     enums        map[int]*service.EnumInfo
     structs      map[int]*service.StructInfo
     classes      map[int]*service.ClassInfo
-    boolInfo     service.TypeInfo
-    intInfo      service.TypeInfo
-    uintInfo     service.TypeInfo
-    floatInfo    service.TypeInfo
-    doubleInfo   service.TypeInfo
-    s8Info       service.TypeInfo
-    u8Info       service.TypeInfo
-    s16Info      service.TypeInfo
-    u16Info      service.TypeInfo
-    s32Info      service.TypeInfo
-    u32Info      service.TypeInfo
-    s64Info      service.TypeInfo
-    u64Info      service.TypeInfo
-    pointerInfo  service.TypeInfo
-    memoryInfo   service.TypeInfo
-    stringInfo   service.TypeInfo
-    anyInfo      service.TypeInfo
-    idInfo       service.TypeInfo
   }
   {{Macro "GetInfo" "Type" "Array"       "Map" "arrays"       "List" $.Arrays      }}
   {{Macro "GetInfo" "Type" "StaticArray" "Map" "staticArrays" "List" $.StaticArrays}}
@@ -125,6 +61,7 @@ limitations under the License.
   {{Macro "GetInfo" "Type" "Class"       "Map" "classes"      "List" $.Classes     }}
 
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
@@ -159,11 +96,7 @@ limitations under the License.
 {{define "Array"}}
   {{AssertType $ "Array"}}
 
-  service.CreateArrayInfo(
-    "{{$.Name}}",
-    service.TypeKindArray,
-    {{Macro "TypeInfo" $.ValueType}},
-  )
+  service.CreateArrayInfo("{{$.Name}}", service.TypeKindArray, {{Macro "TypeInfo" $.ValueType}})
 {{end}}
 
 
@@ -175,12 +108,7 @@ limitations under the License.
 {{define "StaticArray"}}
   {{AssertType $ "StaticArray"}}
 
-  service.CreateStaticArrayInfo(
-    "{{$.Name}}",
-    service.TypeKindStaticArray,
-    {{Macro "TypeInfo" $.ValueType}},
-    []uint32{ {{range $d := $.Dimensions}}{{$d}}, {{end}} },
-  )
+  service.CreateStaticArrayInfo("{{$.Name}}", service.TypeKindStaticArray, {{Macro "TypeInfo" $.ValueType}}, service.U32Array({{Strings $.Dimensions | Join ", "}}))
 {{end}}
 
 
@@ -192,12 +120,7 @@ limitations under the License.
 {{define "Map"}}
   {{AssertType $ "Map"}}
 
-  service.CreateMapInfo(
-    "{{$.Name}}",
-    service.TypeKindMap,
-    {{Macro "TypeInfo" $.KeyType}},
-    {{Macro "TypeInfo" $.ValueType}},
-  )
+  service.CreateMapInfo("{{$.Name}}", service.TypeKindMap, {{Macro "TypeInfo" $.KeyType}}, {{Macro "TypeInfo" $.ValueType}})
 {{end}}
 
 
@@ -312,7 +235,7 @@ limitations under the License.
     IsDrawCall:       {{if GetAnnotation $.Command "DrawCall"}}true{{else}}false{{end}},
     IsEndOfFrame:     {{if GetAnnotation $.Command "EndOfFrame"}}true{{else}}false{{end}},
     DocumentationUrl: "{{$.Command.Docs}}",
-  },
+  }
 {{end}}
 
 
@@ -323,7 +246,7 @@ limitations under the License.
 */}}
 {{define "FixedAtoms"}}
   service.AtomInfo{
-    Type:       uint16(memory.TypeIDObservation),
+    Type:       uint16(atom.TypeIDObservation),
     Name:       "MemoryObservation",
     Parameters: service.ParameterInfoArray{
       service.ParameterInfo{
@@ -361,23 +284,23 @@ limitations under the License.
   {{else if IsEnum          $}}s.getEnumInfo({{IndexOf $api.Enums $}})
   {{else if IsClass         $}}s.getClassInfo({{IndexOf $api.Classes $}})
   {{else if IsPointer       $}}s.getClassInfo({{IndexOf $api.Classes $.To}})
-  {{else if IsBool          $}}s.boolInfo
-  {{else if IsInt           $}}s.intInfo
-  {{else if IsUint          $}}s.uintInfo
-  {{else if IsS8            $}}s.s8Info
-  {{else if IsU8            $}}s.u8Info
-  {{else if IsS16           $}}s.s16Info
-  {{else if IsU16           $}}s.u16Info
-  {{else if IsS32           $}}s.s32Info
-  {{else if IsU32           $}}s.u32Info
-  {{else if IsF32           $}}s.floatInfo
-  {{else if IsS64           $}}s.s64Info
-  {{else if IsU64           $}}s.u64Info
-  {{else if IsF64           $}}s.doubleInfo
-  {{else if IsPointerType   $}}s.pointerInfo
-  {{else if IsMemory        $}}s.memoryInfo
-  {{else if IsString        $}}s.stringInfo
-  {{else if IsAny           $}}s.anyInfo
+  {{else if IsBool          $}}schema.Bool
+  {{else if IsInt           $}}schema.Int
+  {{else if IsUint          $}}schema.Uint
+  {{else if IsS8            $}}schema.S8
+  {{else if IsU8            $}}schema.U8
+  {{else if IsS16           $}}schema.S16
+  {{else if IsU16           $}}schema.U16
+  {{else if IsS32           $}}schema.S32
+  {{else if IsU32           $}}schema.U32
+  {{else if IsF32           $}}schema.Float
+  {{else if IsS64           $}}schema.S64
+  {{else if IsU64           $}}schema.U64
+  {{else if IsF64           $}}schema.Double
+  {{else if IsPointerType   $}}schema.Pointer
+  {{else if IsMemory        $}}schema.Memory
+  {{else if IsString        $}}schema.String
+  {{else if IsAny           $}}schema.Any
   {{else}}{{Error "macro TypeInfo called with unsupported type: %v" $.Name}}
   {{end}}
 {{end}}

@@ -19,10 +19,10 @@ func init() {
 	registry.Add(binary.ID{0x58, 0x7b, 0xc7, 0xb7, 0x49, 0x32, 0xbc, 0x81, 0x16, 0x3f, 0xf1, 0x3e, 0xf7, 0xe4, 0xfe, 0x22, 0x69, 0x20, 0xe0, 0x7e}, &GetFramebufferDepth{})
 	//struct builder.GetHierarchy { Capture:service.CaptureId, Context:atom.ContextID }
 	registry.Add(binary.ID{0x12, 0x07, 0xf0, 0x2c, 0x93, 0xbc, 0x86, 0xbf, 0x08, 0xf0, 0x80, 0x9c, 0x39, 0xd3, 0xbe, 0x36, 0x3f, 0x03, 0x9c, 0x1f}, &GetHierarchy{})
-	//struct builder.GetMemoryInfo { Capture:service.CaptureId, Context:atom.ContextID, After:atom.ID, Range:memory.Range }
-	registry.Add(binary.ID{0x3e, 0xb2, 0xf5, 0xdf, 0x21, 0x65, 0x09, 0x47, 0x15, 0xae, 0x5b, 0xd3, 0x1a, 0x3c, 0xdc, 0x92, 0x42, 0x22, 0xd5, 0xed}, &GetMemoryInfo{})
-	//struct builder.GetState { Capture:service.CaptureId, Context:atom.ContextID, After:atom.ID }
-	registry.Add(binary.ID{0xcc, 0x73, 0xb1, 0xcd, 0x7b, 0x24, 0xec, 0x45, 0x6a, 0x8e, 0x2f, 0x05, 0xb5, 0x13, 0x89, 0x9c, 0xe3, 0x5a, 0x8a, 0x7c}, &GetState{})
+	//struct builder.GetMemoryInfo { Capture:service.CaptureId, After:atom.ID, Range:memory.Range }
+	registry.Add(binary.ID{0x22, 0xa8, 0x99, 0x68, 0xab, 0xd1, 0x15, 0x03, 0xc1, 0xa8, 0x64, 0x09, 0xc6, 0x32, 0xe0, 0xbe, 0x47, 0xdd, 0x4e, 0xfc}, &GetMemoryInfo{})
+	//struct builder.GetState { Capture:service.CaptureId, After:atom.ID }
+	registry.Add(binary.ID{0x1a, 0xda, 0x15, 0x58, 0x2c, 0x9d, 0xff, 0x1a, 0x42, 0xcc, 0x07, 0xa5, 0xd4, 0x52, 0x07, 0xd1, 0xc1, 0x45, 0x05, 0xf9}, &GetState{})
 	//struct builder.GetTimingInfo { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, TimingMask:service.TimingMask }
 	registry.Add(binary.ID{0x7b, 0x2e, 0x4a, 0x89, 0x35, 0x2a, 0x37, 0x8a, 0x00, 0x6f, 0xc8, 0x41, 0x7a, 0xeb, 0x45, 0xb9, 0x28, 0x87, 0x9d, 0x7f}, &GetTimingInfo{})
 	//struct builder.PrerenderFramebuffers { Device:service.DeviceId, Capture:service.CaptureId, AtomIDs:[]uint64, Width:uint32, Height:uint32 }
@@ -145,9 +145,6 @@ func (o GetMemoryInfo) Encode(e binary.Encoder) error {
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Context)); err != nil {
-		return err
-	}
 	if err := e.Uint64(uint64(o.After)); err != nil {
 		return err
 	}
@@ -160,11 +157,6 @@ func (o GetMemoryInfo) Encode(e binary.Encoder) error {
 func (o *GetMemoryInfo) Decode(d binary.Decoder) error {
 	if err := o.Capture.Decode(d); err != nil {
 		return err
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Context = atom.ContextID(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -181,9 +173,6 @@ func (o GetState) Encode(e binary.Encoder) error {
 	if err := o.Capture.Encode(e); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Context)); err != nil {
-		return err
-	}
 	if err := e.Uint64(uint64(o.After)); err != nil {
 		return err
 	}
@@ -193,11 +182,6 @@ func (o GetState) Encode(e binary.Encoder) error {
 func (o *GetState) Decode(d binary.Decoder) error {
 	if err := o.Capture.Decode(d); err != nil {
 		return err
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Context = atom.ContextID(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err

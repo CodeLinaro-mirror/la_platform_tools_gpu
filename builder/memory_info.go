@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -28,27 +29,29 @@ import (
 
 // build writes to out the MemoryInfo resource resulting from the given GetMemoryInfo request.
 func (request *GetMemoryInfo) build(db database.Database, logger log.Logger, out binary.Object) error {
-	atoms, _, err := getAtoms(request.Capture, db, logger)
+	capture, err := loadCapture(request.Capture, db, logger)
 	if err != nil {
 		return err
 	}
+
+	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	if err != nil {
+		return err
+	}
+
 	if request.After >= atom.ID(len(atoms)) {
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	api, err := getAPI(request.Capture, db, logger)
-	if err != nil {
-		return err
-	}
-
-	state := api.InitialState()
-	mutator := api.StateMutator(state)
-	for i, a := range atoms[:request.After] {
-		mutator.Write(atom.ID(i), a)
+	s := state.New()
+	for _, a := range atoms[:request.After] {
+		if err := s.Mutate(a); err != nil {
+			return err
+		}
 	}
 
 	// TODO: Stale, Unknown
-	data, err := state.Memory().Slice(request.Range).Get(db, logger)
+	data, err := s.Memory.Slice(request.Range).Get(db, logger)
 	if err != nil {
 		return err
 	}

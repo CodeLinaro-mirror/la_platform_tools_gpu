@@ -20,7 +20,9 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -28,9 +30,10 @@ import (
 
 func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []atom.Atom, opcodes []interface{}, constants []byte) {
 	b := builder.New(ptrSize, ptrAlignment, binary.LittleEndian)
-	r := newReplayWriter(b)
-	for _, atom := range atoms {
-		r.Write(0, atom, wantOutput)
+	s := state.New()
+	s.Contexts[0] = &State{}
+	for i, a := range atoms {
+		replay.Replay(atom.ID(i), a, s, b, wantOutput)
 	}
 
 	payload, _ := b.Build(log.Nop{})

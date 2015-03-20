@@ -19,12 +19,19 @@ func (l *Transforms) Add(t ...Transformer) {
 	*l = append(*l, t...)
 }
 
-// Transform is an atom transform function conforming to the Transformer
-// interface. It can be used to simplify the creation of simple Transformers.
-type Transform func(id ID, atom Atom, output Writer)
+// Transform is a helper for building simple Transformers that are implemented
+// by function f. name is used to identify the transform when logging.
+func Transform(name string, f func(id ID, atom Atom, output Writer)) Transformer {
+	return transform{name, f}
+}
 
-func (f Transform) Transform(id ID, atom Atom, output Writer) {
-	f(id, atom, output)
+type transform struct {
+	N string                                // Transform name. Used for debugging.
+	F func(id ID, atom Atom, output Writer) // The transform function.
+}
+
+func (t transform) Transform(id ID, atom Atom, output Writer) {
+	t.F(id, atom, output)
 }
 
 type processWriter struct {

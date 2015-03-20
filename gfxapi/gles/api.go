@@ -12,6 +12,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type RenderbufferId uint32
@@ -742,6 +743,7 @@ func (c *Init) TypeID() atom.TypeID {
 func (c *Init) Flags() atom.Flags {
 	return 0
 }
+func (Init) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // StartTimer
@@ -777,6 +779,7 @@ func (c *StartTimer) TypeID() atom.TypeID {
 func (c *StartTimer) Flags() atom.Flags {
 	return 0
 }
+func (StartTimer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // StopTimer
@@ -814,6 +817,7 @@ func (c *StopTimer) TypeID() atom.TypeID {
 func (c *StopTimer) Flags() atom.Flags {
 	return 0
 }
+func (StopTimer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // FlushPostBuffer
@@ -846,6 +850,7 @@ func (c *FlushPostBuffer) TypeID() atom.TypeID {
 func (c *FlushPostBuffer) Flags() atom.Flags {
 	return 0
 }
+func (FlushPostBuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglCreateContext
@@ -884,6 +889,7 @@ func (c *EglCreateContext) TypeID() atom.TypeID {
 func (c *EglCreateContext) Flags() atom.Flags {
 	return 0
 }
+func (EglCreateContext) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglMakeCurrent
@@ -919,6 +925,7 @@ func (c *EglMakeCurrent) TypeID() atom.TypeID {
 func (c *EglMakeCurrent) Flags() atom.Flags {
 	return 0
 }
+func (EglMakeCurrent) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglSwapBuffers
@@ -951,6 +958,7 @@ func (c *EglSwapBuffers) TypeID() atom.TypeID {
 func (c *EglSwapBuffers) Flags() atom.Flags {
 	return 0 | atom.EndOfFrame
 }
+func (EglSwapBuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableClientState
@@ -986,6 +994,7 @@ func (c *GlEnableClientState) TypeID() atom.TypeID {
 func (c *GlEnableClientState) Flags() atom.Flags {
 	return 0
 }
+func (GlEnableClientState) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableClientState
@@ -1021,6 +1030,7 @@ func (c *GlDisableClientState) TypeID() atom.TypeID {
 func (c *GlDisableClientState) Flags() atom.Flags {
 	return 0
 }
+func (GlDisableClientState) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramBinaryOES
@@ -1068,6 +1078,7 @@ func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID {
 func (c *GlGetProgramBinaryOES) Flags() atom.Flags {
 	return 0
 }
+func (GlGetProgramBinaryOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlProgramBinaryOES
@@ -1112,6 +1123,7 @@ func (c *GlProgramBinaryOES) TypeID() atom.TypeID {
 func (c *GlProgramBinaryOES) Flags() atom.Flags {
 	return 0
 }
+func (GlProgramBinaryOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStartTilingQCOM
@@ -1159,6 +1171,7 @@ func (c *GlStartTilingQCOM) TypeID() atom.TypeID {
 func (c *GlStartTilingQCOM) Flags() atom.Flags {
 	return 0
 }
+func (GlStartTilingQCOM) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndTilingQCOM
@@ -1194,6 +1207,7 @@ func (c *GlEndTilingQCOM) TypeID() atom.TypeID {
 func (c *GlEndTilingQCOM) Flags() atom.Flags {
 	return 0
 }
+func (GlEndTilingQCOM) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDiscardFramebufferEXT
@@ -1235,6 +1249,7 @@ func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID {
 func (c *GlDiscardFramebufferEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlDiscardFramebufferEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInsertEventMarkerEXT
@@ -1273,6 +1288,7 @@ func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID {
 func (c *GlInsertEventMarkerEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlInsertEventMarkerEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPushGroupMarkerEXT
@@ -1311,6 +1327,7 @@ func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID {
 func (c *GlPushGroupMarkerEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlPushGroupMarkerEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPopGroupMarkerEXT
@@ -1343,6 +1360,7 @@ func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID {
 func (c *GlPopGroupMarkerEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlPopGroupMarkerEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage1DEXT
@@ -1387,6 +1405,7 @@ func (c *GlTexStorage1DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage1DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTexStorage1DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage2DEXT
@@ -1434,6 +1453,7 @@ func (c *GlTexStorage2DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage2DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTexStorage2DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage3DEXT
@@ -1484,6 +1504,7 @@ func (c *GlTexStorage3DEXT) TypeID() atom.TypeID {
 func (c *GlTexStorage3DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTexStorage3DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage1DEXT
@@ -1531,6 +1552,7 @@ func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage1DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTextureStorage1DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage2DEXT
@@ -1581,6 +1603,7 @@ func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage2DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTextureStorage2DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage3DEXT
@@ -1634,6 +1657,7 @@ func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID {
 func (c *GlTextureStorage3DEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlTextureStorage3DEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenVertexArraysOES
@@ -1672,6 +1696,7 @@ func (c *GlGenVertexArraysOES) TypeID() atom.TypeID {
 func (c *GlGenVertexArraysOES) Flags() atom.Flags {
 	return 0
 }
+func (GlGenVertexArraysOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindVertexArrayOES
@@ -1707,6 +1732,7 @@ func (c *GlBindVertexArrayOES) TypeID() atom.TypeID {
 func (c *GlBindVertexArrayOES) Flags() atom.Flags {
 	return 0
 }
+func (GlBindVertexArrayOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteVertexArraysOES
@@ -1745,6 +1771,7 @@ func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID {
 func (c *GlDeleteVertexArraysOES) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteVertexArraysOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsVertexArrayOES
@@ -1782,6 +1809,7 @@ func (c *GlIsVertexArrayOES) TypeID() atom.TypeID {
 func (c *GlIsVertexArrayOES) Flags() atom.Flags {
 	return 0
 }
+func (GlIsVertexArrayOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetTexture2DOES
@@ -1820,6 +1848,7 @@ func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID {
 func (c *GlEGLImageTargetTexture2DOES) Flags() atom.Flags {
 	return 0
 }
+func (GlEGLImageTargetTexture2DOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetRenderbufferStorageOES
@@ -1858,6 +1887,7 @@ func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID {
 func (c *GlEGLImageTargetRenderbufferStorageOES) Flags() atom.Flags {
 	return 0
 }
+func (GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetGraphicsResetStatusEXT
@@ -1892,6 +1922,7 @@ func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID {
 func (c *GlGetGraphicsResetStatusEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetGraphicsResetStatusEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindAttribLocation
@@ -1933,6 +1964,7 @@ func (c *GlBindAttribLocation) TypeID() atom.TypeID {
 func (c *GlBindAttribLocation) Flags() atom.Flags {
 	return 0
 }
+func (GlBindAttribLocation) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFunc
@@ -1971,6 +2003,7 @@ func (c *GlBlendFunc) TypeID() atom.TypeID {
 func (c *GlBlendFunc) Flags() atom.Flags {
 	return 0
 }
+func (GlBlendFunc) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFuncSeparate
@@ -2015,6 +2048,7 @@ func (c *GlBlendFuncSeparate) TypeID() atom.TypeID {
 func (c *GlBlendFuncSeparate) Flags() atom.Flags {
 	return 0
 }
+func (GlBlendFuncSeparate) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquation
@@ -2050,6 +2084,7 @@ func (c *GlBlendEquation) TypeID() atom.TypeID {
 func (c *GlBlendEquation) Flags() atom.Flags {
 	return 0
 }
+func (GlBlendEquation) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquationSeparate
@@ -2088,6 +2123,7 @@ func (c *GlBlendEquationSeparate) TypeID() atom.TypeID {
 func (c *GlBlendEquationSeparate) Flags() atom.Flags {
 	return 0
 }
+func (GlBlendEquationSeparate) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendColor
@@ -2132,6 +2168,7 @@ func (c *GlBlendColor) TypeID() atom.TypeID {
 func (c *GlBlendColor) Flags() atom.Flags {
 	return 0
 }
+func (GlBlendColor) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableVertexAttribArray
@@ -2167,6 +2204,7 @@ func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID {
 func (c *GlEnableVertexAttribArray) Flags() atom.Flags {
 	return 0
 }
+func (GlEnableVertexAttribArray) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableVertexAttribArray
@@ -2202,6 +2240,7 @@ func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID {
 func (c *GlDisableVertexAttribArray) Flags() atom.Flags {
 	return 0
 }
+func (GlDisableVertexAttribArray) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttribPointer
@@ -2252,6 +2291,7 @@ func (c *GlVertexAttribPointer) TypeID() atom.TypeID {
 func (c *GlVertexAttribPointer) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttribPointer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveAttrib
@@ -2305,6 +2345,7 @@ func (c *GlGetActiveAttrib) TypeID() atom.TypeID {
 func (c *GlGetActiveAttrib) Flags() atom.Flags {
 	return 0
 }
+func (GlGetActiveAttrib) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveUniform
@@ -2358,6 +2399,7 @@ func (c *GlGetActiveUniform) TypeID() atom.TypeID {
 func (c *GlGetActiveUniform) Flags() atom.Flags {
 	return 0
 }
+func (GlGetActiveUniform) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetError
@@ -2392,6 +2434,7 @@ func (c *GlGetError) TypeID() atom.TypeID {
 func (c *GlGetError) Flags() atom.Flags {
 	return 0
 }
+func (GlGetError) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramiv
@@ -2433,6 +2476,7 @@ func (c *GlGetProgramiv) TypeID() atom.TypeID {
 func (c *GlGetProgramiv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetProgramiv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderiv
@@ -2474,6 +2518,7 @@ func (c *GlGetShaderiv) TypeID() atom.TypeID {
 func (c *GlGetShaderiv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetShaderiv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformLocation
@@ -2514,6 +2559,7 @@ func (c *GlGetUniformLocation) TypeID() atom.TypeID {
 func (c *GlGetUniformLocation) Flags() atom.Flags {
 	return 0
 }
+func (GlGetUniformLocation) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttribLocation
@@ -2554,6 +2600,7 @@ func (c *GlGetAttribLocation) TypeID() atom.TypeID {
 func (c *GlGetAttribLocation) Flags() atom.Flags {
 	return 0
 }
+func (GlGetAttribLocation) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPixelStorei
@@ -2592,6 +2639,7 @@ func (c *GlPixelStorei) TypeID() atom.TypeID {
 func (c *GlPixelStorei) Flags() atom.Flags {
 	return 0
 }
+func (GlPixelStorei) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameteri
@@ -2633,6 +2681,7 @@ func (c *GlTexParameteri) TypeID() atom.TypeID {
 func (c *GlTexParameteri) Flags() atom.Flags {
 	return 0
 }
+func (GlTexParameteri) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameterf
@@ -2674,6 +2723,7 @@ func (c *GlTexParameterf) TypeID() atom.TypeID {
 func (c *GlTexParameterf) Flags() atom.Flags {
 	return 0
 }
+func (GlTexParameterf) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameteriv
@@ -2715,6 +2765,7 @@ func (c *GlGetTexParameteriv) TypeID() atom.TypeID {
 func (c *GlGetTexParameteriv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetTexParameteriv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameterfv
@@ -2756,6 +2807,7 @@ func (c *GlGetTexParameterfv) TypeID() atom.TypeID {
 func (c *GlGetTexParameterfv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetTexParameterfv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1i
@@ -2794,6 +2846,7 @@ func (c *GlUniform1i) TypeID() atom.TypeID {
 func (c *GlUniform1i) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform1i) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2i
@@ -2835,6 +2888,7 @@ func (c *GlUniform2i) TypeID() atom.TypeID {
 func (c *GlUniform2i) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform2i) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3i
@@ -2879,6 +2933,7 @@ func (c *GlUniform3i) TypeID() atom.TypeID {
 func (c *GlUniform3i) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform3i) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4i
@@ -2926,6 +2981,7 @@ func (c *GlUniform4i) TypeID() atom.TypeID {
 func (c *GlUniform4i) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform4i) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1iv
@@ -2967,6 +3023,7 @@ func (c *GlUniform1iv) TypeID() atom.TypeID {
 func (c *GlUniform1iv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform1iv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2iv
@@ -3008,6 +3065,7 @@ func (c *GlUniform2iv) TypeID() atom.TypeID {
 func (c *GlUniform2iv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform2iv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3iv
@@ -3049,6 +3107,7 @@ func (c *GlUniform3iv) TypeID() atom.TypeID {
 func (c *GlUniform3iv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform3iv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4iv
@@ -3090,6 +3149,7 @@ func (c *GlUniform4iv) TypeID() atom.TypeID {
 func (c *GlUniform4iv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform4iv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1f
@@ -3128,6 +3188,7 @@ func (c *GlUniform1f) TypeID() atom.TypeID {
 func (c *GlUniform1f) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform1f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2f
@@ -3169,6 +3230,7 @@ func (c *GlUniform2f) TypeID() atom.TypeID {
 func (c *GlUniform2f) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform2f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3f
@@ -3213,6 +3275,7 @@ func (c *GlUniform3f) TypeID() atom.TypeID {
 func (c *GlUniform3f) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform3f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4f
@@ -3260,6 +3323,7 @@ func (c *GlUniform4f) TypeID() atom.TypeID {
 func (c *GlUniform4f) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform4f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1fv
@@ -3301,6 +3365,7 @@ func (c *GlUniform1fv) TypeID() atom.TypeID {
 func (c *GlUniform1fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform1fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2fv
@@ -3342,6 +3407,7 @@ func (c *GlUniform2fv) TypeID() atom.TypeID {
 func (c *GlUniform2fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform2fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3fv
@@ -3383,6 +3449,7 @@ func (c *GlUniform3fv) TypeID() atom.TypeID {
 func (c *GlUniform3fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform3fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4fv
@@ -3424,6 +3491,7 @@ func (c *GlUniform4fv) TypeID() atom.TypeID {
 func (c *GlUniform4fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniform4fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix2fv
@@ -3468,6 +3536,7 @@ func (c *GlUniformMatrix2fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix2fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniformMatrix2fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix3fv
@@ -3512,6 +3581,7 @@ func (c *GlUniformMatrix3fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix3fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniformMatrix3fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix4fv
@@ -3556,6 +3626,7 @@ func (c *GlUniformMatrix4fv) TypeID() atom.TypeID {
 func (c *GlUniformMatrix4fv) Flags() atom.Flags {
 	return 0
 }
+func (GlUniformMatrix4fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformfv
@@ -3597,6 +3668,7 @@ func (c *GlGetUniformfv) TypeID() atom.TypeID {
 func (c *GlGetUniformfv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetUniformfv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformiv
@@ -3638,6 +3710,7 @@ func (c *GlGetUniformiv) TypeID() atom.TypeID {
 func (c *GlGetUniformiv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetUniformiv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1f
@@ -3676,6 +3749,7 @@ func (c *GlVertexAttrib1f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib1f) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib1f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2f
@@ -3717,6 +3791,7 @@ func (c *GlVertexAttrib2f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib2f) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib2f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3f
@@ -3761,6 +3836,7 @@ func (c *GlVertexAttrib3f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib3f) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib3f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4f
@@ -3808,6 +3884,7 @@ func (c *GlVertexAttrib4f) TypeID() atom.TypeID {
 func (c *GlVertexAttrib4f) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib4f) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1fv
@@ -3846,6 +3923,7 @@ func (c *GlVertexAttrib1fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib1fv) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib1fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2fv
@@ -3884,6 +3962,7 @@ func (c *GlVertexAttrib2fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib2fv) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib2fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3fv
@@ -3922,6 +4001,7 @@ func (c *GlVertexAttrib3fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib3fv) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib3fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4fv
@@ -3960,6 +4040,7 @@ func (c *GlVertexAttrib4fv) TypeID() atom.TypeID {
 func (c *GlVertexAttrib4fv) Flags() atom.Flags {
 	return 0
 }
+func (GlVertexAttrib4fv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderPrecisionFormat
@@ -4004,6 +4085,7 @@ func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID {
 func (c *GlGetShaderPrecisionFormat) Flags() atom.Flags {
 	return 0
 }
+func (GlGetShaderPrecisionFormat) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthMask
@@ -4039,6 +4121,7 @@ func (c *GlDepthMask) TypeID() atom.TypeID {
 func (c *GlDepthMask) Flags() atom.Flags {
 	return 0
 }
+func (GlDepthMask) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthFunc
@@ -4074,6 +4157,7 @@ func (c *GlDepthFunc) TypeID() atom.TypeID {
 func (c *GlDepthFunc) Flags() atom.Flags {
 	return 0
 }
+func (GlDepthFunc) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthRangef
@@ -4112,6 +4196,7 @@ func (c *GlDepthRangef) TypeID() atom.TypeID {
 func (c *GlDepthRangef) Flags() atom.Flags {
 	return 0
 }
+func (GlDepthRangef) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlColorMask
@@ -4156,6 +4241,7 @@ func (c *GlColorMask) TypeID() atom.TypeID {
 func (c *GlColorMask) Flags() atom.Flags {
 	return 0
 }
+func (GlColorMask) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMask
@@ -4191,6 +4277,7 @@ func (c *GlStencilMask) TypeID() atom.TypeID {
 func (c *GlStencilMask) Flags() atom.Flags {
 	return 0
 }
+func (GlStencilMask) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMaskSeparate
@@ -4229,6 +4316,7 @@ func (c *GlStencilMaskSeparate) TypeID() atom.TypeID {
 func (c *GlStencilMaskSeparate) Flags() atom.Flags {
 	return 0
 }
+func (GlStencilMaskSeparate) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilFuncSeparate
@@ -4273,6 +4361,7 @@ func (c *GlStencilFuncSeparate) TypeID() atom.TypeID {
 func (c *GlStencilFuncSeparate) Flags() atom.Flags {
 	return 0
 }
+func (GlStencilFuncSeparate) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilOpSeparate
@@ -4317,6 +4406,7 @@ func (c *GlStencilOpSeparate) TypeID() atom.TypeID {
 func (c *GlStencilOpSeparate) Flags() atom.Flags {
 	return 0
 }
+func (GlStencilOpSeparate) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFrontFace
@@ -4352,6 +4442,7 @@ func (c *GlFrontFace) TypeID() atom.TypeID {
 func (c *GlFrontFace) Flags() atom.Flags {
 	return 0
 }
+func (GlFrontFace) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlViewport
@@ -4396,6 +4487,7 @@ func (c *GlViewport) TypeID() atom.TypeID {
 func (c *GlViewport) Flags() atom.Flags {
 	return 0
 }
+func (GlViewport) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlScissor
@@ -4440,6 +4532,7 @@ func (c *GlScissor) TypeID() atom.TypeID {
 func (c *GlScissor) Flags() atom.Flags {
 	return 0
 }
+func (GlScissor) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlActiveTexture
@@ -4475,6 +4568,7 @@ func (c *GlActiveTexture) TypeID() atom.TypeID {
 func (c *GlActiveTexture) Flags() atom.Flags {
 	return 0
 }
+func (GlActiveTexture) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenTextures
@@ -4513,6 +4607,7 @@ func (c *GlGenTextures) TypeID() atom.TypeID {
 func (c *GlGenTextures) Flags() atom.Flags {
 	return 0
 }
+func (GlGenTextures) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteTextures
@@ -4551,6 +4646,7 @@ func (c *GlDeleteTextures) TypeID() atom.TypeID {
 func (c *GlDeleteTextures) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteTextures) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsTexture
@@ -4588,6 +4684,7 @@ func (c *GlIsTexture) TypeID() atom.TypeID {
 func (c *GlIsTexture) Flags() atom.Flags {
 	return 0
 }
+func (GlIsTexture) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindTexture
@@ -4626,6 +4723,7 @@ func (c *GlBindTexture) TypeID() atom.TypeID {
 func (c *GlBindTexture) Flags() atom.Flags {
 	return 0
 }
+func (GlBindTexture) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexImage2D
@@ -4685,6 +4783,7 @@ func (c *GlTexImage2D) TypeID() atom.TypeID {
 func (c *GlTexImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlTexImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexSubImage2D
@@ -4744,6 +4843,7 @@ func (c *GlTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlTexSubImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexImage2D
@@ -4800,6 +4900,7 @@ func (c *GlCopyTexImage2D) TypeID() atom.TypeID {
 func (c *GlCopyTexImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlCopyTexImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexSubImage2D
@@ -4856,6 +4957,7 @@ func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlCopyTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlCopyTexSubImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexImage2D
@@ -4912,6 +5014,7 @@ func (c *GlCompressedTexImage2D) TypeID() atom.TypeID {
 func (c *GlCompressedTexImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlCompressedTexImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexSubImage2D
@@ -4971,6 +5074,7 @@ func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID {
 func (c *GlCompressedTexSubImage2D) Flags() atom.Flags {
 	return 0
 }
+func (GlCompressedTexSubImage2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenerateMipmap
@@ -5006,6 +5110,7 @@ func (c *GlGenerateMipmap) TypeID() atom.TypeID {
 func (c *GlGenerateMipmap) Flags() atom.Flags {
 	return 0
 }
+func (GlGenerateMipmap) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReadPixels
@@ -5059,6 +5164,7 @@ func (c *GlReadPixels) TypeID() atom.TypeID {
 func (c *GlReadPixels) Flags() atom.Flags {
 	return 0
 }
+func (GlReadPixels) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenFramebuffers
@@ -5097,6 +5203,7 @@ func (c *GlGenFramebuffers) TypeID() atom.TypeID {
 func (c *GlGenFramebuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlGenFramebuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindFramebuffer
@@ -5135,6 +5242,7 @@ func (c *GlBindFramebuffer) TypeID() atom.TypeID {
 func (c *GlBindFramebuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlBindFramebuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCheckFramebufferStatus
@@ -5172,6 +5280,7 @@ func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID {
 func (c *GlCheckFramebufferStatus) Flags() atom.Flags {
 	return 0
 }
+func (GlCheckFramebufferStatus) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteFramebuffers
@@ -5210,6 +5319,7 @@ func (c *GlDeleteFramebuffers) TypeID() atom.TypeID {
 func (c *GlDeleteFramebuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteFramebuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsFramebuffer
@@ -5247,6 +5357,7 @@ func (c *GlIsFramebuffer) TypeID() atom.TypeID {
 func (c *GlIsFramebuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlIsFramebuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenRenderbuffers
@@ -5285,6 +5396,7 @@ func (c *GlGenRenderbuffers) TypeID() atom.TypeID {
 func (c *GlGenRenderbuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlGenRenderbuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindRenderbuffer
@@ -5323,6 +5435,7 @@ func (c *GlBindRenderbuffer) TypeID() atom.TypeID {
 func (c *GlBindRenderbuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlBindRenderbuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorage
@@ -5367,6 +5480,7 @@ func (c *GlRenderbufferStorage) TypeID() atom.TypeID {
 func (c *GlRenderbufferStorage) Flags() atom.Flags {
 	return 0
 }
+func (GlRenderbufferStorage) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteRenderbuffers
@@ -5405,6 +5519,7 @@ func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID {
 func (c *GlDeleteRenderbuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteRenderbuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsRenderbuffer
@@ -5442,6 +5557,7 @@ func (c *GlIsRenderbuffer) TypeID() atom.TypeID {
 func (c *GlIsRenderbuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlIsRenderbuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetRenderbufferParameteriv
@@ -5483,6 +5599,7 @@ func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID {
 func (c *GlGetRenderbufferParameteriv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetRenderbufferParameteriv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenBuffers
@@ -5521,6 +5638,7 @@ func (c *GlGenBuffers) TypeID() atom.TypeID {
 func (c *GlGenBuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlGenBuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindBuffer
@@ -5559,6 +5677,7 @@ func (c *GlBindBuffer) TypeID() atom.TypeID {
 func (c *GlBindBuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlBindBuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferData
@@ -5603,6 +5722,7 @@ func (c *GlBufferData) TypeID() atom.TypeID {
 func (c *GlBufferData) Flags() atom.Flags {
 	return 0
 }
+func (GlBufferData) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferSubData
@@ -5647,6 +5767,7 @@ func (c *GlBufferSubData) TypeID() atom.TypeID {
 func (c *GlBufferSubData) Flags() atom.Flags {
 	return 0
 }
+func (GlBufferSubData) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteBuffers
@@ -5685,6 +5806,7 @@ func (c *GlDeleteBuffers) TypeID() atom.TypeID {
 func (c *GlDeleteBuffers) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteBuffers) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsBuffer
@@ -5722,6 +5844,7 @@ func (c *GlIsBuffer) TypeID() atom.TypeID {
 func (c *GlIsBuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlIsBuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBufferParameteriv
@@ -5763,6 +5886,7 @@ func (c *GlGetBufferParameteriv) TypeID() atom.TypeID {
 func (c *GlGetBufferParameteriv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetBufferParameteriv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateShader
@@ -5800,6 +5924,7 @@ func (c *GlCreateShader) TypeID() atom.TypeID {
 func (c *GlCreateShader) Flags() atom.Flags {
 	return 0
 }
+func (GlCreateShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteShader
@@ -5835,6 +5960,7 @@ func (c *GlDeleteShader) TypeID() atom.TypeID {
 func (c *GlDeleteShader) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderSource
@@ -5879,6 +6005,7 @@ func (c *GlShaderSource) TypeID() atom.TypeID {
 func (c *GlShaderSource) Flags() atom.Flags {
 	return 0
 }
+func (GlShaderSource) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderBinary
@@ -5926,6 +6053,7 @@ func (c *GlShaderBinary) TypeID() atom.TypeID {
 func (c *GlShaderBinary) Flags() atom.Flags {
 	return 0
 }
+func (GlShaderBinary) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderInfoLog
@@ -5970,6 +6098,7 @@ func (c *GlGetShaderInfoLog) TypeID() atom.TypeID {
 func (c *GlGetShaderInfoLog) Flags() atom.Flags {
 	return 0
 }
+func (GlGetShaderInfoLog) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderSource
@@ -6014,6 +6143,7 @@ func (c *GlGetShaderSource) TypeID() atom.TypeID {
 func (c *GlGetShaderSource) Flags() atom.Flags {
 	return 0
 }
+func (GlGetShaderSource) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReleaseShaderCompiler
@@ -6046,6 +6176,7 @@ func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID {
 func (c *GlReleaseShaderCompiler) Flags() atom.Flags {
 	return 0
 }
+func (GlReleaseShaderCompiler) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompileShader
@@ -6081,6 +6212,7 @@ func (c *GlCompileShader) TypeID() atom.TypeID {
 func (c *GlCompileShader) Flags() atom.Flags {
 	return 0
 }
+func (GlCompileShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsShader
@@ -6118,6 +6250,7 @@ func (c *GlIsShader) TypeID() atom.TypeID {
 func (c *GlIsShader) Flags() atom.Flags {
 	return 0
 }
+func (GlIsShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateProgram
@@ -6152,6 +6285,7 @@ func (c *GlCreateProgram) TypeID() atom.TypeID {
 func (c *GlCreateProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlCreateProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteProgram
@@ -6187,6 +6321,7 @@ func (c *GlDeleteProgram) TypeID() atom.TypeID {
 func (c *GlDeleteProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlAttachShader
@@ -6225,6 +6360,7 @@ func (c *GlAttachShader) TypeID() atom.TypeID {
 func (c *GlAttachShader) Flags() atom.Flags {
 	return 0
 }
+func (GlAttachShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDetachShader
@@ -6263,6 +6399,7 @@ func (c *GlDetachShader) TypeID() atom.TypeID {
 func (c *GlDetachShader) Flags() atom.Flags {
 	return 0
 }
+func (GlDetachShader) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttachedShaders
@@ -6307,6 +6444,7 @@ func (c *GlGetAttachedShaders) TypeID() atom.TypeID {
 func (c *GlGetAttachedShaders) Flags() atom.Flags {
 	return 0
 }
+func (GlGetAttachedShaders) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLinkProgram
@@ -6342,6 +6480,7 @@ func (c *GlLinkProgram) TypeID() atom.TypeID {
 func (c *GlLinkProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlLinkProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramInfoLog
@@ -6386,6 +6525,7 @@ func (c *GlGetProgramInfoLog) TypeID() atom.TypeID {
 func (c *GlGetProgramInfoLog) Flags() atom.Flags {
 	return 0
 }
+func (GlGetProgramInfoLog) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUseProgram
@@ -6421,6 +6561,7 @@ func (c *GlUseProgram) TypeID() atom.TypeID {
 func (c *GlUseProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlUseProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsProgram
@@ -6458,6 +6599,7 @@ func (c *GlIsProgram) TypeID() atom.TypeID {
 func (c *GlIsProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlIsProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlValidateProgram
@@ -6493,6 +6635,7 @@ func (c *GlValidateProgram) TypeID() atom.TypeID {
 func (c *GlValidateProgram) Flags() atom.Flags {
 	return 0
 }
+func (GlValidateProgram) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearColor
@@ -6537,6 +6680,7 @@ func (c *GlClearColor) TypeID() atom.TypeID {
 func (c *GlClearColor) Flags() atom.Flags {
 	return 0
 }
+func (GlClearColor) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearDepthf
@@ -6572,6 +6716,7 @@ func (c *GlClearDepthf) TypeID() atom.TypeID {
 func (c *GlClearDepthf) Flags() atom.Flags {
 	return 0
 }
+func (GlClearDepthf) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearStencil
@@ -6607,6 +6752,7 @@ func (c *GlClearStencil) TypeID() atom.TypeID {
 func (c *GlClearStencil) Flags() atom.Flags {
 	return 0
 }
+func (GlClearStencil) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClear
@@ -6642,6 +6788,7 @@ func (c *GlClear) TypeID() atom.TypeID {
 func (c *GlClear) Flags() atom.Flags {
 	return 0
 }
+func (GlClear) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCullFace
@@ -6677,6 +6824,7 @@ func (c *GlCullFace) TypeID() atom.TypeID {
 func (c *GlCullFace) Flags() atom.Flags {
 	return 0
 }
+func (GlCullFace) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPolygonOffset
@@ -6715,6 +6863,7 @@ func (c *GlPolygonOffset) TypeID() atom.TypeID {
 func (c *GlPolygonOffset) Flags() atom.Flags {
 	return 0
 }
+func (GlPolygonOffset) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLineWidth
@@ -6750,6 +6899,7 @@ func (c *GlLineWidth) TypeID() atom.TypeID {
 func (c *GlLineWidth) Flags() atom.Flags {
 	return 0
 }
+func (GlLineWidth) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlSampleCoverage
@@ -6788,6 +6938,7 @@ func (c *GlSampleCoverage) TypeID() atom.TypeID {
 func (c *GlSampleCoverage) Flags() atom.Flags {
 	return 0
 }
+func (GlSampleCoverage) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlHint
@@ -6826,6 +6977,7 @@ func (c *GlHint) TypeID() atom.TypeID {
 func (c *GlHint) Flags() atom.Flags {
 	return 0
 }
+func (GlHint) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferRenderbuffer
@@ -6870,6 +7022,7 @@ func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID {
 func (c *GlFramebufferRenderbuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlFramebufferRenderbuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferTexture2D
@@ -6917,6 +7070,7 @@ func (c *GlFramebufferTexture2D) TypeID() atom.TypeID {
 func (c *GlFramebufferTexture2D) Flags() atom.Flags {
 	return 0
 }
+func (GlFramebufferTexture2D) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFramebufferAttachmentParameteriv
@@ -6961,6 +7115,7 @@ func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID {
 func (c *GlGetFramebufferAttachmentParameteriv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetFramebufferAttachmentParameteriv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawElements
@@ -7005,6 +7160,7 @@ func (c *GlDrawElements) TypeID() atom.TypeID {
 func (c *GlDrawElements) Flags() atom.Flags {
 	return 0 | atom.DrawCall
 }
+func (GlDrawElements) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawArrays
@@ -7046,6 +7202,7 @@ func (c *GlDrawArrays) TypeID() atom.TypeID {
 func (c *GlDrawArrays) Flags() atom.Flags {
 	return 0 | atom.DrawCall
 }
+func (GlDrawArrays) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFlush
@@ -7078,6 +7235,7 @@ func (c *GlFlush) TypeID() atom.TypeID {
 func (c *GlFlush) Flags() atom.Flags {
 	return 0
 }
+func (GlFlush) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFinish
@@ -7110,6 +7268,7 @@ func (c *GlFinish) TypeID() atom.TypeID {
 func (c *GlFinish) Flags() atom.Flags {
 	return 0
 }
+func (GlFinish) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBooleanv
@@ -7148,6 +7307,7 @@ func (c *GlGetBooleanv) TypeID() atom.TypeID {
 func (c *GlGetBooleanv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetBooleanv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFloatv
@@ -7186,6 +7346,7 @@ func (c *GlGetFloatv) TypeID() atom.TypeID {
 func (c *GlGetFloatv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetFloatv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetIntegerv
@@ -7224,6 +7385,7 @@ func (c *GlGetIntegerv) TypeID() atom.TypeID {
 func (c *GlGetIntegerv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetIntegerv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetString
@@ -7261,6 +7423,7 @@ func (c *GlGetString) TypeID() atom.TypeID {
 func (c *GlGetString) Flags() atom.Flags {
 	return 0
 }
+func (GlGetString) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnable
@@ -7296,6 +7459,7 @@ func (c *GlEnable) TypeID() atom.TypeID {
 func (c *GlEnable) Flags() atom.Flags {
 	return 0
 }
+func (GlEnable) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisable
@@ -7331,6 +7495,7 @@ func (c *GlDisable) TypeID() atom.TypeID {
 func (c *GlDisable) Flags() atom.Flags {
 	return 0
 }
+func (GlDisable) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsEnabled
@@ -7368,6 +7533,7 @@ func (c *GlIsEnabled) TypeID() atom.TypeID {
 func (c *GlIsEnabled) Flags() atom.Flags {
 	return 0
 }
+func (GlIsEnabled) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlMapBufferRange
@@ -7414,6 +7580,7 @@ func (c *GlMapBufferRange) TypeID() atom.TypeID {
 func (c *GlMapBufferRange) Flags() atom.Flags {
 	return 0
 }
+func (GlMapBufferRange) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUnmapBuffer
@@ -7449,6 +7616,7 @@ func (c *GlUnmapBuffer) TypeID() atom.TypeID {
 func (c *GlUnmapBuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlUnmapBuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInvalidateFramebuffer
@@ -7490,6 +7658,7 @@ func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID {
 func (c *GlInvalidateFramebuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlInvalidateFramebuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorageMultisample
@@ -7537,6 +7706,7 @@ func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID {
 func (c *GlRenderbufferStorageMultisample) Flags() atom.Flags {
 	return 0
 }
+func (GlRenderbufferStorageMultisample) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlitFramebuffer
@@ -7599,6 +7769,7 @@ func (c *GlBlitFramebuffer) TypeID() atom.TypeID {
 func (c *GlBlitFramebuffer) Flags() atom.Flags {
 	return 0
 }
+func (GlBlitFramebuffer) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueries
@@ -7637,6 +7808,7 @@ func (c *GlGenQueries) TypeID() atom.TypeID {
 func (c *GlGenQueries) Flags() atom.Flags {
 	return 0
 }
+func (GlGenQueries) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQuery
@@ -7675,6 +7847,7 @@ func (c *GlBeginQuery) TypeID() atom.TypeID {
 func (c *GlBeginQuery) Flags() atom.Flags {
 	return 0
 }
+func (GlBeginQuery) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQuery
@@ -7710,6 +7883,7 @@ func (c *GlEndQuery) TypeID() atom.TypeID {
 func (c *GlEndQuery) Flags() atom.Flags {
 	return 0
 }
+func (GlEndQuery) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueries
@@ -7748,6 +7922,7 @@ func (c *GlDeleteQueries) TypeID() atom.TypeID {
 func (c *GlDeleteQueries) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteQueries) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQuery
@@ -7785,6 +7960,7 @@ func (c *GlIsQuery) TypeID() atom.TypeID {
 func (c *GlIsQuery) Flags() atom.Flags {
 	return 0
 }
+func (GlIsQuery) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryiv
@@ -7826,6 +8002,7 @@ func (c *GlGetQueryiv) TypeID() atom.TypeID {
 func (c *GlGetQueryiv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryiv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuiv
@@ -7867,6 +8044,7 @@ func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectuiv) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryObjectuiv) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueriesEXT
@@ -7905,6 +8083,7 @@ func (c *GlGenQueriesEXT) TypeID() atom.TypeID {
 func (c *GlGenQueriesEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGenQueriesEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQueryEXT
@@ -7943,6 +8122,7 @@ func (c *GlBeginQueryEXT) TypeID() atom.TypeID {
 func (c *GlBeginQueryEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlBeginQueryEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQueryEXT
@@ -7978,6 +8158,7 @@ func (c *GlEndQueryEXT) TypeID() atom.TypeID {
 func (c *GlEndQueryEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlEndQueryEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueriesEXT
@@ -8016,6 +8197,7 @@ func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID {
 func (c *GlDeleteQueriesEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlDeleteQueriesEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQueryEXT
@@ -8053,6 +8235,7 @@ func (c *GlIsQueryEXT) TypeID() atom.TypeID {
 func (c *GlIsQueryEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlIsQueryEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlQueryCounterEXT
@@ -8091,6 +8274,7 @@ func (c *GlQueryCounterEXT) TypeID() atom.TypeID {
 func (c *GlQueryCounterEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlQueryCounterEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryivEXT
@@ -8132,6 +8316,7 @@ func (c *GlGetQueryivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryivEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryivEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectivEXT
@@ -8173,6 +8358,7 @@ func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectivEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryObjectivEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuivEXT
@@ -8214,6 +8400,7 @@ func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryObjectuivEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjecti64vEXT
@@ -8255,6 +8442,7 @@ func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryObjecti64vEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectui64vEXT
@@ -8296,6 +8484,7 @@ func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID {
 func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags {
 	return 0
 }
+func (GlGetQueryObjectui64vEXT) API() gfxapi.API { return API() }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Color
@@ -14096,14 +14285,11 @@ func NewGlGetQueryObjectui64vEXT(
 ////////////////////////////////////////////////////////////////////////////////
 type api struct{}
 
-func (a api) Name() string {
+func (api) Name() string {
 	return "gles"
 }
-func (a api) InitialState() gfxapi.State {
-	return initialState()
-}
-func (a api) StateMutator(s gfxapi.State) atom.Writer {
-	return &StateMutator{State: s.(*state)}
+func (api) ID() service.ApiId {
+	return service.ApiId{binary.NewID([]byte("gles"))}
 }
 func API() gfxapi.API {
 	return api{}
@@ -14112,1129 +14298,1129 @@ func init() {
 	gfxapi.Register(API())
 	atom.Register(atom.TypeInfo{
 		Name: "Init",
-		Docs: "http://www.khronos.org/opengles/sdk/1.1/docs/man",
+		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man]",
 		ID:   0,
 		New:  func() atom.Atom { return &Init{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "StartTimer",
-		Docs: "",
+		Docs: "[]",
 		ID:   1,
 		New:  func() atom.Atom { return &StartTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "StopTimer",
-		Docs: "",
+		Docs: "[]",
 		ID:   2,
 		New:  func() atom.Atom { return &StopTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "FlushPostBuffer",
-		Docs: "",
+		Docs: "[]",
 		ID:   3,
 		New:  func() atom.Atom { return &FlushPostBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "EglCreateContext",
-		Docs: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml",
+		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml]",
 		ID:   4,
 		New:  func() atom.Atom { return &EglCreateContext{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "EglMakeCurrent",
-		Docs: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml",
+		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml]",
 		ID:   5,
 		New:  func() atom.Atom { return &EglMakeCurrent{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "EglSwapBuffers",
-		Docs: "http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml",
+		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml]",
 		ID:   6,
 		New:  func() atom.Atom { return &EglSwapBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEnableClientState",
-		Docs: "http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 		ID:   7,
 		New:  func() atom.Atom { return &GlEnableClientState{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDisableClientState",
-		Docs: "http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 		ID:   8,
 		New:  func() atom.Atom { return &GlDisableClientState{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetProgramBinaryOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 		ID:   9,
 		New:  func() atom.Atom { return &GlGetProgramBinaryOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlProgramBinaryOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 		ID:   10,
 		New:  func() atom.Atom { return &GlProgramBinaryOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlStartTilingQCOM",
-		Docs: "http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 		ID:   11,
 		New:  func() atom.Atom { return &GlStartTilingQCOM{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEndTilingQCOM",
-		Docs: "http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 		ID:   12,
 		New:  func() atom.Atom { return &GlEndTilingQCOM{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDiscardFramebufferEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt]",
 		ID:   13,
 		New:  func() atom.Atom { return &GlDiscardFramebufferEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlInsertEventMarkerEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   14,
 		New:  func() atom.Atom { return &GlInsertEventMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlPushGroupMarkerEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   15,
 		New:  func() atom.Atom { return &GlPushGroupMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlPopGroupMarkerEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   16,
 		New:  func() atom.Atom { return &GlPopGroupMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexStorage1DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   17,
 		New:  func() atom.Atom { return &GlTexStorage1DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexStorage2DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   18,
 		New:  func() atom.Atom { return &GlTexStorage2DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexStorage3DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   19,
 		New:  func() atom.Atom { return &GlTexStorage3DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTextureStorage1DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   20,
 		New:  func() atom.Atom { return &GlTextureStorage1DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTextureStorage2DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   21,
 		New:  func() atom.Atom { return &GlTextureStorage2DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTextureStorage3DEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   22,
 		New:  func() atom.Atom { return &GlTextureStorage3DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenVertexArraysOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   23,
 		New:  func() atom.Atom { return &GlGenVertexArraysOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindVertexArrayOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   24,
 		New:  func() atom.Atom { return &GlBindVertexArrayOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteVertexArraysOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   25,
 		New:  func() atom.Atom { return &GlDeleteVertexArraysOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsVertexArrayOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   26,
 		New:  func() atom.Atom { return &GlIsVertexArrayOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEGLImageTargetTexture2DOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
 		ID:   27,
 		New:  func() atom.Atom { return &GlEGLImageTargetTexture2DOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEGLImageTargetRenderbufferStorageOES",
-		Docs: "http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
 		ID:   28,
 		New:  func() atom.Atom { return &GlEGLImageTargetRenderbufferStorageOES{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetGraphicsResetStatusEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt]",
 		ID:   29,
 		New:  func() atom.Atom { return &GlGetGraphicsResetStatusEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindAttribLocation",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml]",
 		ID:   30,
 		New:  func() atom.Atom { return &GlBindAttribLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlendFunc",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml]",
 		ID:   31,
 		New:  func() atom.Atom { return &GlBlendFunc{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlendFuncSeparate",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml]",
 		ID:   32,
 		New:  func() atom.Atom { return &GlBlendFuncSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlendEquation",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml]",
 		ID:   33,
 		New:  func() atom.Atom { return &GlBlendEquation{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlendEquationSeparate",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml]",
 		ID:   34,
 		New:  func() atom.Atom { return &GlBlendEquationSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlendColor",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml]",
 		ID:   35,
 		New:  func() atom.Atom { return &GlBlendColor{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEnableVertexAttribArray",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml]",
 		ID:   36,
 		New:  func() atom.Atom { return &GlEnableVertexAttribArray{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDisableVertexAttribArray",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml]",
 		ID:   37,
 		New:  func() atom.Atom { return &GlDisableVertexAttribArray{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttribPointer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml]",
 		ID:   38,
 		New:  func() atom.Atom { return &GlVertexAttribPointer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetActiveAttrib",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml]",
 		ID:   39,
 		New:  func() atom.Atom { return &GlGetActiveAttrib{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetActiveUniform",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml]",
 		ID:   40,
 		New:  func() atom.Atom { return &GlGetActiveUniform{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetError",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml]",
 		ID:   41,
 		New:  func() atom.Atom { return &GlGetError{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetProgramiv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
 		ID:   42,
 		New:  func() atom.Atom { return &GlGetProgramiv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetShaderiv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml]",
 		ID:   43,
 		New:  func() atom.Atom { return &GlGetShaderiv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetUniformLocation",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml]",
 		ID:   44,
 		New:  func() atom.Atom { return &GlGetUniformLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetAttribLocation",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml]",
 		ID:   45,
 		New:  func() atom.Atom { return &GlGetAttribLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlPixelStorei",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml]",
 		ID:   46,
 		New:  func() atom.Atom { return &GlPixelStorei{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexParameteri",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 		ID:   47,
 		New:  func() atom.Atom { return &GlTexParameteri{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexParameterf",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 		ID:   48,
 		New:  func() atom.Atom { return &GlTexParameterf{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetTexParameteriv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 		ID:   49,
 		New:  func() atom.Atom { return &GlGetTexParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetTexParameterfv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 		ID:   50,
 		New:  func() atom.Atom { return &GlGetTexParameterfv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform1i",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   51,
 		New:  func() atom.Atom { return &GlUniform1i{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform2i",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   52,
 		New:  func() atom.Atom { return &GlUniform2i{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform3i",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   53,
 		New:  func() atom.Atom { return &GlUniform3i{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform4i",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   54,
 		New:  func() atom.Atom { return &GlUniform4i{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform1iv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   55,
 		New:  func() atom.Atom { return &GlUniform1iv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform2iv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   56,
 		New:  func() atom.Atom { return &GlUniform2iv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform3iv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   57,
 		New:  func() atom.Atom { return &GlUniform3iv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform4iv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   58,
 		New:  func() atom.Atom { return &GlUniform4iv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform1f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   59,
 		New:  func() atom.Atom { return &GlUniform1f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform2f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   60,
 		New:  func() atom.Atom { return &GlUniform2f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform3f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   61,
 		New:  func() atom.Atom { return &GlUniform3f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform4f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   62,
 		New:  func() atom.Atom { return &GlUniform4f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform1fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   63,
 		New:  func() atom.Atom { return &GlUniform1fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform2fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   64,
 		New:  func() atom.Atom { return &GlUniform2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform3fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   65,
 		New:  func() atom.Atom { return &GlUniform3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniform4fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   66,
 		New:  func() atom.Atom { return &GlUniform4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniformMatrix2fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   67,
 		New:  func() atom.Atom { return &GlUniformMatrix2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniformMatrix3fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   68,
 		New:  func() atom.Atom { return &GlUniformMatrix3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUniformMatrix4fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   69,
 		New:  func() atom.Atom { return &GlUniformMatrix4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetUniformfv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 		ID:   70,
 		New:  func() atom.Atom { return &GlGetUniformfv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetUniformiv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 		ID:   71,
 		New:  func() atom.Atom { return &GlGetUniformiv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib1f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   72,
 		New:  func() atom.Atom { return &GlVertexAttrib1f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib2f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   73,
 		New:  func() atom.Atom { return &GlVertexAttrib2f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib3f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   74,
 		New:  func() atom.Atom { return &GlVertexAttrib3f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib4f",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   75,
 		New:  func() atom.Atom { return &GlVertexAttrib4f{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib1fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   76,
 		New:  func() atom.Atom { return &GlVertexAttrib1fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib2fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   77,
 		New:  func() atom.Atom { return &GlVertexAttrib2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib3fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   78,
 		New:  func() atom.Atom { return &GlVertexAttrib3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlVertexAttrib4fv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   79,
 		New:  func() atom.Atom { return &GlVertexAttrib4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetShaderPrecisionFormat",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml]",
 		ID:   80,
 		New:  func() atom.Atom { return &GlGetShaderPrecisionFormat{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDepthMask",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml]",
 		ID:   81,
 		New:  func() atom.Atom { return &GlDepthMask{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDepthFunc",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml]",
 		ID:   82,
 		New:  func() atom.Atom { return &GlDepthFunc{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDepthRangef",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml]",
 		ID:   83,
 		New:  func() atom.Atom { return &GlDepthRangef{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlColorMask",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml]",
 		ID:   84,
 		New:  func() atom.Atom { return &GlColorMask{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlStencilMask",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml]",
 		ID:   85,
 		New:  func() atom.Atom { return &GlStencilMask{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlStencilMaskSeparate",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml]",
 		ID:   86,
 		New:  func() atom.Atom { return &GlStencilMaskSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlStencilFuncSeparate",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml]",
 		ID:   87,
 		New:  func() atom.Atom { return &GlStencilFuncSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlStencilOpSeparate",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml]",
 		ID:   88,
 		New:  func() atom.Atom { return &GlStencilOpSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlFrontFace",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml]",
 		ID:   89,
 		New:  func() atom.Atom { return &GlFrontFace{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlViewport",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml]",
 		ID:   90,
 		New:  func() atom.Atom { return &GlViewport{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlScissor",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml]",
 		ID:   91,
 		New:  func() atom.Atom { return &GlScissor{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlActiveTexture",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml]",
 		ID:   92,
 		New:  func() atom.Atom { return &GlActiveTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenTextures",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml]",
 		ID:   93,
 		New:  func() atom.Atom { return &GlGenTextures{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteTextures",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml]",
 		ID:   94,
 		New:  func() atom.Atom { return &GlDeleteTextures{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsTexture",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml]",
 		ID:   95,
 		New:  func() atom.Atom { return &GlIsTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindTexture",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml]",
 		ID:   96,
 		New:  func() atom.Atom { return &GlBindTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml]",
 		ID:   97,
 		New:  func() atom.Atom { return &GlTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlTexSubImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml]",
 		ID:   98,
 		New:  func() atom.Atom { return &GlTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCopyTexImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml]",
 		ID:   99,
 		New:  func() atom.Atom { return &GlCopyTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCopyTexSubImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml]",
 		ID:   100,
 		New:  func() atom.Atom { return &GlCopyTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCompressedTexImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml]",
 		ID:   101,
 		New:  func() atom.Atom { return &GlCompressedTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCompressedTexSubImage2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml]",
 		ID:   102,
 		New:  func() atom.Atom { return &GlCompressedTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenerateMipmap",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml]",
 		ID:   103,
 		New:  func() atom.Atom { return &GlGenerateMipmap{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlReadPixels",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml]",
 		ID:   104,
 		New:  func() atom.Atom { return &GlReadPixels{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenFramebuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml]",
 		ID:   105,
 		New:  func() atom.Atom { return &GlGenFramebuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindFramebuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml]",
 		ID:   106,
 		New:  func() atom.Atom { return &GlBindFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCheckFramebufferStatus",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml]",
 		ID:   107,
 		New:  func() atom.Atom { return &GlCheckFramebufferStatus{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteFramebuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml]",
 		ID:   108,
 		New:  func() atom.Atom { return &GlDeleteFramebuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsFramebuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml]",
 		ID:   109,
 		New:  func() atom.Atom { return &GlIsFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenRenderbuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml]",
 		ID:   110,
 		New:  func() atom.Atom { return &GlGenRenderbuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindRenderbuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml]",
 		ID:   111,
 		New:  func() atom.Atom { return &GlBindRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlRenderbufferStorage",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml]",
 		ID:   112,
 		New:  func() atom.Atom { return &GlRenderbufferStorage{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteRenderbuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml]",
 		ID:   113,
 		New:  func() atom.Atom { return &GlDeleteRenderbuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsRenderbuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml]",
 		ID:   114,
 		New:  func() atom.Atom { return &GlIsRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetRenderbufferParameteriv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml]",
 		ID:   115,
 		New:  func() atom.Atom { return &GlGetRenderbufferParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenBuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml]",
 		ID:   116,
 		New:  func() atom.Atom { return &GlGenBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBindBuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml]",
 		ID:   117,
 		New:  func() atom.Atom { return &GlBindBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBufferData",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml]",
 		ID:   118,
 		New:  func() atom.Atom { return &GlBufferData{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBufferSubData",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml]",
 		ID:   119,
 		New:  func() atom.Atom { return &GlBufferSubData{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteBuffers",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml]",
 		ID:   120,
 		New:  func() atom.Atom { return &GlDeleteBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsBuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml]",
 		ID:   121,
 		New:  func() atom.Atom { return &GlIsBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetBufferParameteriv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml]",
 		ID:   122,
 		New:  func() atom.Atom { return &GlGetBufferParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCreateShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml]",
 		ID:   123,
 		New:  func() atom.Atom { return &GlCreateShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml]",
 		ID:   124,
 		New:  func() atom.Atom { return &GlDeleteShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlShaderSource",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml]",
 		ID:   125,
 		New:  func() atom.Atom { return &GlShaderSource{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlShaderBinary",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml]",
 		ID:   126,
 		New:  func() atom.Atom { return &GlShaderBinary{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetShaderInfoLog",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml]",
 		ID:   127,
 		New:  func() atom.Atom { return &GlGetShaderInfoLog{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetShaderSource",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml]",
 		ID:   128,
 		New:  func() atom.Atom { return &GlGetShaderSource{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlReleaseShaderCompiler",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml]",
 		ID:   129,
 		New:  func() atom.Atom { return &GlReleaseShaderCompiler{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCompileShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml]",
 		ID:   130,
 		New:  func() atom.Atom { return &GlCompileShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml]",
 		ID:   131,
 		New:  func() atom.Atom { return &GlIsShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCreateProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml]",
 		ID:   132,
 		New:  func() atom.Atom { return &GlCreateProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml]",
 		ID:   133,
 		New:  func() atom.Atom { return &GlDeleteProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlAttachShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml]",
 		ID:   134,
 		New:  func() atom.Atom { return &GlAttachShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDetachShader",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml]",
 		ID:   135,
 		New:  func() atom.Atom { return &GlDetachShader{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetAttachedShaders",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml]",
 		ID:   136,
 		New:  func() atom.Atom { return &GlGetAttachedShaders{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlLinkProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml]",
 		ID:   137,
 		New:  func() atom.Atom { return &GlLinkProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetProgramInfoLog",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml]",
 		ID:   138,
 		New:  func() atom.Atom { return &GlGetProgramInfoLog{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUseProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml]",
 		ID:   139,
 		New:  func() atom.Atom { return &GlUseProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml]",
 		ID:   140,
 		New:  func() atom.Atom { return &GlIsProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlValidateProgram",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml]",
 		ID:   141,
 		New:  func() atom.Atom { return &GlValidateProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlClearColor",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml]",
 		ID:   142,
 		New:  func() atom.Atom { return &GlClearColor{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlClearDepthf",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml]",
 		ID:   143,
 		New:  func() atom.Atom { return &GlClearDepthf{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlClearStencil",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml]",
 		ID:   144,
 		New:  func() atom.Atom { return &GlClearStencil{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlClear",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml]",
 		ID:   145,
 		New:  func() atom.Atom { return &GlClear{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlCullFace",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml]",
 		ID:   146,
 		New:  func() atom.Atom { return &GlCullFace{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlPolygonOffset",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml]",
 		ID:   147,
 		New:  func() atom.Atom { return &GlPolygonOffset{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlLineWidth",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml]",
 		ID:   148,
 		New:  func() atom.Atom { return &GlLineWidth{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlSampleCoverage",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml]",
 		ID:   149,
 		New:  func() atom.Atom { return &GlSampleCoverage{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlHint",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml]",
 		ID:   150,
 		New:  func() atom.Atom { return &GlHint{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlFramebufferRenderbuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml]",
 		ID:   151,
 		New:  func() atom.Atom { return &GlFramebufferRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlFramebufferTexture2D",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml]",
 		ID:   152,
 		New:  func() atom.Atom { return &GlFramebufferTexture2D{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetFramebufferAttachmentParameteriv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml]",
 		ID:   153,
 		New:  func() atom.Atom { return &GlGetFramebufferAttachmentParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDrawElements",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml]",
 		ID:   154,
 		New:  func() atom.Atom { return &GlDrawElements{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDrawArrays",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml]",
 		ID:   155,
 		New:  func() atom.Atom { return &GlDrawArrays{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlFlush",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml]",
 		ID:   156,
 		New:  func() atom.Atom { return &GlFlush{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlFinish",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml]",
 		ID:   157,
 		New:  func() atom.Atom { return &GlFinish{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetBooleanv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   158,
 		New:  func() atom.Atom { return &GlGetBooleanv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetFloatv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   159,
 		New:  func() atom.Atom { return &GlGetFloatv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetIntegerv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   160,
 		New:  func() atom.Atom { return &GlGetIntegerv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetString",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml]",
 		ID:   161,
 		New:  func() atom.Atom { return &GlGetString{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEnable",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml]",
 		ID:   162,
 		New:  func() atom.Atom { return &GlEnable{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDisable",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml]",
 		ID:   163,
 		New:  func() atom.Atom { return &GlDisable{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsEnabled",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml]",
 		ID:   164,
 		New:  func() atom.Atom { return &GlIsEnabled{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlMapBufferRange",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 		ID:   165,
 		New:  func() atom.Atom { return &GlMapBufferRange{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlUnmapBuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 		ID:   166,
 		New:  func() atom.Atom { return &GlUnmapBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlInvalidateFramebuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml]",
 		ID:   167,
 		New:  func() atom.Atom { return &GlInvalidateFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlRenderbufferStorageMultisample",
-		Docs: "http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt",
+		Docs: "[http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt]",
 		ID:   168,
 		New:  func() atom.Atom { return &GlRenderbufferStorageMultisample{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBlitFramebuffer",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml]",
 		ID:   169,
 		New:  func() atom.Atom { return &GlBlitFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenQueries",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml]",
 		ID:   170,
 		New:  func() atom.Atom { return &GlGenQueries{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBeginQuery",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml]",
 		ID:   171,
 		New:  func() atom.Atom { return &GlBeginQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEndQuery",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml]",
 		ID:   172,
 		New:  func() atom.Atom { return &GlEndQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteQueries",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml]",
 		ID:   173,
 		New:  func() atom.Atom { return &GlDeleteQueries{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsQuery",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml]",
 		ID:   174,
 		New:  func() atom.Atom { return &GlIsQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryiv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml]",
 		ID:   175,
 		New:  func() atom.Atom { return &GlGetQueryiv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryObjectuiv",
-		Docs: "http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml",
+		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml]",
 		ID:   176,
 		New:  func() atom.Atom { return &GlGetQueryObjectuiv{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGenQueriesEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   177,
 		New:  func() atom.Atom { return &GlGenQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlBeginQueryEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   178,
 		New:  func() atom.Atom { return &GlBeginQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlEndQueryEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   179,
 		New:  func() atom.Atom { return &GlEndQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlDeleteQueriesEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   180,
 		New:  func() atom.Atom { return &GlDeleteQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlIsQueryEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   181,
 		New:  func() atom.Atom { return &GlIsQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlQueryCounterEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   182,
 		New:  func() atom.Atom { return &GlQueryCounterEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryivEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   183,
 		New:  func() atom.Atom { return &GlGetQueryivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryObjectivEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   184,
 		New:  func() atom.Atom { return &GlGetQueryObjectivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryObjectuivEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   185,
 		New:  func() atom.Atom { return &GlGetQueryObjectuivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryObjecti64vEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   186,
 		New:  func() atom.Atom { return &GlGetQueryObjecti64vEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "GlGetQueryObjectui64vEXT",
-		Docs: "http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt",
+		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   187,
 		New:  func() atom.Atom { return &GlGetQueryObjectui64vEXT{} },
 	})

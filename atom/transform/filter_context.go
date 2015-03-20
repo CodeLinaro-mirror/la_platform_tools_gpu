@@ -18,10 +18,10 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 
 // ContextFilter returns a Transformer that only outputs atoms matching the
 // specified context id.
-func ContextFilter(context atom.ContextID) atom.Transform {
-	return func(id atom.ID, a atom.Atom, out atom.Writer) {
+func ContextFilter(context atom.ContextID) atom.Transformer {
+	return atom.Transform("ContextFilter", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if a.ContextID() == context {
 			out.Write(id, a)
 		}
-	}
+	})
 }

@@ -5,19 +5,15 @@
 package test
 
 import (
-	"fmt"
 	"io"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/memory"
+	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
-
-type replayer interface {
-	replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)
-}
 
 func readBytes(r io.Reader, c uint64) ([]byte, error) {
 	b := make([]byte, c)
@@ -86,59 +82,59 @@ var funcInfoCmdVoid3Remapped = builder.FunctionInfo{ID: 44, ReturnType: protocol
 var funcInfoCmdVoidOut3Remapped = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoCmdVoidOutArrayOfRemapped = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
 
-func (c remapped) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+func (c remapped) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (arr BoolArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.Bool(e))
+			ϟb.Push(value.Bool(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr F32Array) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr F32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.F32(e))
+			ϟb.Push(value.F32(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr RemappedArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr RemappedArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			if key, remap := e.remap(ω, s); remap {
-				loadRemap(b, key, e.value(b, ω, s))
+			if key, remap := e.remap(ϟa, ϟs); remap {
+				loadRemap(ϟb, key, e.value(ϟb, ϟa, ϟs))
 			} else {
-				b.Push(e.value(b, ω, s))
+				ϟb.Push(e.value(ϟb, ϟa, ϟs))
 			}
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr S8Array) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr S8Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(value.S8(e))
+			ϟb.Push(value.S8(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr StringArray) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+func (arr StringArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
-			b.Push(b.String(e))
+			ϟb.Push(ϟb.String(e))
 		}
-		return b.Buffer(len(arr))
+		return ϟb.Buffer(len(arr))
 	} else {
 		return value.AbsolutePointer(0)
 	}
@@ -581,18 +577,6 @@ func (o *CmdVoidOutArrayOfRemapped_Postback) Decode(a_cnt uint64, d *protocol.De
 	}
 	return nil
 }
-
-type replayWriter struct {
-	builder *builder.Builder
-	state   *state
-}
-
-func newReplayWriter(b *builder.Builder) *replayWriter {
-	return &replayWriter{
-		builder: b,
-		state:   initialState(),
-	}
-}
 func loadRemap(b *builder.Builder, key interface{}, val value.Value) {
 	ptr, found := b.Remappings[key]
 	if found {
@@ -614,143 +598,146 @@ func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty proto
 		b.Remappings[key] = ptr
 	}
 }
-func (r *replayWriter) Write(id atom.ID, a atom.Atom, wantOutput bool) {
-	b := r.builder
-	switch ω := a.(type) {
-	case *memory.Observation:
-		b.Observation(ω.Range, ω.ResourceID)
-	case replayer:
-		ω.replay(id, r.state, b, wantOutput)
-	case *atom.EOS:
-	default:
-		panic(fmt.Errorf("Unsupported atom type %T for Write", ω))
-	}
-	b.EndAtom()
+
+var _ = replay.Replayer(&CmdVoid{}) // interface compliance check
+func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.CallNoPush(funcInfoCmdVoid)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoid{}) // interface compliance check
-func (ω *CmdVoid) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.CallNoPush(funcInfoCmdVoid)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidU8{}) // interface compliance check
+func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U8(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidU8)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidU8{}) // interface compliance check
-func (ω *CmdVoidU8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U8(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidU8)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidS8{}) // interface compliance check
+func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S8(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidS8)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidS8{}) // interface compliance check
-func (ω *CmdVoidS8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S8(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidS8)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidU16{}) // interface compliance check
+func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U16(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidU16)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidU16{}) // interface compliance check
-func (ω *CmdVoidU16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U16(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidU16)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidS16{}) // interface compliance check
+func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S16(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidS16)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidS16{}) // interface compliance check
-func (ω *CmdVoidS16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S16(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidS16)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidF32{}) // interface compliance check
+func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F32(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidF32)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidF32{}) // interface compliance check
-func (ω *CmdVoidF32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F32(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidF32)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidU32{}) // interface compliance check
+func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U32(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidU32)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidU32{}) // interface compliance check
-func (ω *CmdVoidU32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U32(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidU32)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidS32{}) // interface compliance check
+func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S32(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidS32)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidS32{}) // interface compliance check
-func (ω *CmdVoidS32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S32(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidS32)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidF64{}) // interface compliance check
+func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.F64(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidF64)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidF64{}) // interface compliance check
-func (ω *CmdVoidF64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.F64(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidF64)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidU64{}) // interface compliance check
+func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.U64(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidU64)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidU64{}) // interface compliance check
-func (ω *CmdVoidU64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.U64(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidU64)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidS64{}) // interface compliance check
+func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.S64(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidS64)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidS64{}) // interface compliance check
-func (ω *CmdVoidS64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.S64(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidS64)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidBool{}) // interface compliance check
+func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(value.Bool(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidBool)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidBool{}) // interface compliance check
-func (ω *CmdVoidBool) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(value.Bool(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidBool)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidString{}) // interface compliance check
+func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟb.String(ϟa.In.A))
+	ϟb.CallNoPush(funcInfoCmdVoidString)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidString{}) // interface compliance check
-func (ω *CmdVoidString) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(b.String(ω.In.A))
-	b.CallNoPush(funcInfoCmdVoidString)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoid3Strings{}) // interface compliance check
+func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟb.String(ϟa.In.A))
+	ϟb.Push(ϟb.String(ϟa.In.B))
+	ϟb.Push(ϟb.String(ϟa.In.C))
+	ϟb.CallNoPush(funcInfoCmdVoid3Strings)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoid3Strings{}) // interface compliance check
-func (ω *CmdVoid3Strings) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(b.String(ω.In.A))
-	b.Push(b.String(ω.In.B))
-	b.Push(b.String(ω.In.C))
-	b.CallNoPush(funcInfoCmdVoid3Strings)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoid3Arrays{}) // interface compliance check
+func (ϟa *CmdVoid3Arrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.B.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.C.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoCmdVoid3Arrays)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoid3Arrays{}) // interface compliance check
-func (ω *CmdVoid3Arrays) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.A.value(b, ω, s))
-	b.Push(ω.In.B.value(b, ω, s))
-	b.Push(ω.In.C.value(b, ω, s))
-	b.CallNoPush(funcInfoCmdVoid3Arrays)
-	StateMutator{State: s}.Write(id, ω)
+var _ = replay.Replayer(&CmdVoidArrayOfStrings{}) // interface compliance check
+func (ϟa *CmdVoidArrayOfStrings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoCmdVoidArrayOfStrings)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidArrayOfStrings{}) // interface compliance check
-func (ω *CmdVoidArrayOfStrings) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	b.Push(ω.In.A.value(b, ω, s))
-	b.CallNoPush(funcInfoCmdVoidArrayOfStrings)
-	StateMutator{State: s}.Write(id, ω)
-}
-
-var _ = replayer(&CmdU8{}) // interface compliance check
-func (ω *CmdU8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	b.CallPush(funcInfoCmdU8)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdU8{}) // interface compliance check
+func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	ϟb.CallPush(funcInfoCmdU8)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdU8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -758,16 +745,17 @@ func (ω *CmdU8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput boo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdS8{}) // interface compliance check
-func (ω *CmdS8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	b.CallPush(funcInfoCmdS8)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdS8{}) // interface compliance check
+func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	ϟb.CallPush(funcInfoCmdS8)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdS8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -775,16 +763,17 @@ func (ω *CmdS8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput boo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdU16{}) // interface compliance check
-func (ω *CmdU16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
-	b.CallPush(funcInfoCmdU16)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdU16{}) // interface compliance check
+func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
+	ϟb.CallPush(funcInfoCmdU16)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdU16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -792,16 +781,17 @@ func (ω *CmdU16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdS16{}) // interface compliance check
-func (ω *CmdS16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
-	b.CallPush(funcInfoCmdS16)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdS16{}) // interface compliance check
+func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
+	ϟb.CallPush(funcInfoCmdS16)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdS16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -809,16 +799,17 @@ func (ω *CmdS16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdF32{}) // interface compliance check
-func (ω *CmdF32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoCmdF32)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdF32{}) // interface compliance check
+func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoCmdF32)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdF32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -826,16 +817,17 @@ func (ω *CmdF32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdU32{}) // interface compliance check
-func (ω *CmdU32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoCmdU32)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdU32{}) // interface compliance check
+func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoCmdU32)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdU32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -843,16 +835,17 @@ func (ω *CmdU32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdS32{}) // interface compliance check
-func (ω *CmdS32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	b.CallPush(funcInfoCmdS32)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdS32{}) // interface compliance check
+func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
+	ϟb.CallPush(funcInfoCmdS32)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdS32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -860,16 +853,17 @@ func (ω *CmdS32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdF64{}) // interface compliance check
-func (ω *CmdF64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
-	b.CallPush(funcInfoCmdF64)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdF64{}) // interface compliance check
+func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
+	ϟb.CallPush(funcInfoCmdF64)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdF64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -877,16 +871,17 @@ func (ω *CmdF64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdU64{}) // interface compliance check
-func (ω *CmdU64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
-	b.CallPush(funcInfoCmdU64)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdU64{}) // interface compliance check
+func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
+	ϟb.CallPush(funcInfoCmdU64)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdU64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -894,16 +889,17 @@ func (ω *CmdU64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdS64{}) // interface compliance check
-func (ω *CmdS64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
-	b.CallPush(funcInfoCmdS64)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdS64{}) // interface compliance check
+func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
+	ϟb.CallPush(funcInfoCmdS64)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdS64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -911,16 +907,17 @@ func (ω *CmdS64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bo
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdBool{}) // interface compliance check
-func (ω *CmdBool) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	b.CallPush(funcInfoCmdBool)
-	b.Store(outputs[0])
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdBool{}) // interface compliance check
+func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
+	ϟb.CallPush(funcInfoCmdBool)
+	ϟb.Store(outputs[0])
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdBool_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -928,18 +925,19 @@ func (ω *CmdBool) replay(id atom.ID, s *state, b *builder.Builder, wantOutput b
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdString{}) // interface compliance check
-func (ω *CmdString) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdString{}) // interface compliance check
+func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	result_cnt := uint64(10)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	b.CallPush(funcInfoCmdString)
-	b.Push(outputs[0])
-	b.Strcpy(result_cnt)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.CallPush(funcInfoCmdString)
+	ϟb.Push(outputs[0])
+	ϟb.Strcpy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdString_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -947,18 +945,19 @@ func (ω *CmdString) replay(id atom.ID, s *state, b *builder.Builder, wantOutput
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdArrayOfFloat{}) // interface compliance check
-func (ω *CmdArrayOfFloat) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdArrayOfFloat{}) // interface compliance check
+func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	result_cnt := uint64(10)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{result_cnt * 4 /* result */})
-	b.CallPush(funcInfoCmdArrayOfFloat)
-	b.Push(outputs[0])
-	b.Copy(result_cnt * 4)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt * 4 /* result */})
+	ϟb.CallPush(funcInfoCmdArrayOfFloat)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt * 4)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdArrayOfFloat_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -966,18 +965,19 @@ func (ω *CmdArrayOfFloat) replay(id atom.ID, s *state, b *builder.Builder, want
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdPointer{}) // interface compliance check
-func (ω *CmdPointer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdPointer{}) // interface compliance check
+func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	result_cnt := uint64(10)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	b.CallPush(funcInfoCmdPointer)
-	b.Push(outputs[0])
-	b.Copy(result_cnt)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.CallPush(funcInfoCmdPointer)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdPointer_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -985,16 +985,17 @@ func (ω *CmdPointer) replay(id atom.ID, s *state, b *builder.Builder, wantOutpu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutU8{}) // interface compliance check
-func (ω *CmdVoidOutU8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutU8)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutU8{}) // interface compliance check
+func (ϟa *CmdVoidOutU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutU8)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1002,16 +1003,17 @@ func (ω *CmdVoidOutU8) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutS8{}) // interface compliance check
-func (ω *CmdVoidOutS8) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutS8)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutS8{}) // interface compliance check
+func (ϟa *CmdVoidOutS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutS8)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1019,16 +1021,17 @@ func (ω *CmdVoidOutS8) replay(id atom.ID, s *state, b *builder.Builder, wantOut
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutU16{}) // interface compliance check
-func (ω *CmdVoidOutU16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutU16)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutU16{}) // interface compliance check
+func (ϟa *CmdVoidOutU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutU16)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1036,16 +1039,17 @@ func (ω *CmdVoidOutU16) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutS16{}) // interface compliance check
-func (ω *CmdVoidOutS16) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutS16)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutS16{}) // interface compliance check
+func (ϟa *CmdVoidOutS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutS16)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1053,16 +1057,17 @@ func (ω *CmdVoidOutS16) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutF32{}) // interface compliance check
-func (ω *CmdVoidOutF32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutF32)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutF32{}) // interface compliance check
+func (ϟa *CmdVoidOutF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutF32)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutF32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1070,16 +1075,17 @@ func (ω *CmdVoidOutF32) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutU32{}) // interface compliance check
-func (ω *CmdVoidOutU32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutU32)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutU32{}) // interface compliance check
+func (ϟa *CmdVoidOutU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutU32)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1087,16 +1093,17 @@ func (ω *CmdVoidOutU32) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutS32{}) // interface compliance check
-func (ω *CmdVoidOutS32) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutS32)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutS32{}) // interface compliance check
+func (ϟa *CmdVoidOutS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutS32)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1104,16 +1111,17 @@ func (ω *CmdVoidOutS32) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutF64{}) // interface compliance check
-func (ω *CmdVoidOutF64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutF64)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutF64{}) // interface compliance check
+func (ϟa *CmdVoidOutF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutF64)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutF64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1121,16 +1129,17 @@ func (ω *CmdVoidOutF64) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutU64{}) // interface compliance check
-func (ω *CmdVoidOutU64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutU64)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutU64{}) // interface compliance check
+func (ϟa *CmdVoidOutU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutU64)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1138,16 +1147,17 @@ func (ω *CmdVoidOutU64) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutS64{}) // interface compliance check
-func (ω *CmdVoidOutS64) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutS64)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutS64{}) // interface compliance check
+func (ϟa *CmdVoidOutS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutS64)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1155,16 +1165,17 @@ func (ω *CmdVoidOutS64) replay(id atom.ID, s *state, b *builder.Builder, wantOu
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutBool{}) // interface compliance check
-func (ω *CmdVoidOutBool) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutBool)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+var _ = replay.Replayer(&CmdVoidOutBool{}) // interface compliance check
+func (ϟa *CmdVoidOutBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutBool)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutBool_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1172,17 +1183,18 @@ func (ω *CmdVoidOutBool) replay(id atom.ID, s *state, b *builder.Builder, wantO
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutString{}) // interface compliance check
-func (ω *CmdVoidOutString) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdVoidOutString{}) // interface compliance check
+func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	a_cnt := uint64(10)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutString)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutString)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutString_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err
@@ -1190,17 +1202,18 @@ func (ω *CmdVoidOutString) replay(id atom.ID, s *state, b *builder.Builder, wan
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutFixedSizeBuffer{}) // interface compliance check
-func (ω *CmdVoidOutFixedSizeBuffer) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdVoidOutFixedSizeBuffer{}) // interface compliance check
+func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	a_cnt := uint64(10)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutFixedSizeBuffer)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutFixedSizeBuffer)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutFixedSizeBuffer_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err
@@ -1208,21 +1221,22 @@ func (ω *CmdVoidOutFixedSizeBuffer) replay(id atom.ID, s *state, b *builder.Bui
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOut3Strings{}) // interface compliance check
-func (ω *CmdVoidOut3Strings) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdVoidOut3Strings{}) // interface compliance check
+func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	a_cnt := uint64(15)
 	b_cnt := uint64(31)
 	c_cnt := uint64(47)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */, b_cnt /* b */, c_cnt /* c */})
-	b.Push(outputs[0]) // a
-	b.Push(outputs[1]) // b
-	b.Push(outputs[2]) // c
-	b.CallNoPush(funcInfoCmdVoidOut3Strings)
-	StateMutator{State: s}.Write(id, ω)
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */, b_cnt /* b */, c_cnt /* c */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.Push(outputs[1]) // b
+	ϟb.Push(outputs[2]) // c
+	ϟb.CallNoPush(funcInfoCmdVoidOut3Strings)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOut3Strings_Postback{}
 			if err := postback.Decode(a_cnt,
 				b_cnt,
@@ -1232,48 +1246,50 @@ func (ω *CmdVoidOut3Strings) replay(id atom.ID, s *state, b *builder.Builder, w
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoid3Remapped{}) // interface compliance check
-func (ω *CmdVoid3Remapped) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	if key, remap := ω.In.A.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.A.value(b, ω, s))
+var _ = replay.Replayer(&CmdVoid3Remapped{}) // interface compliance check
+func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	if key, remap := ϟa.In.A.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.A.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.A.value(b, ω, s))
+		ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.B.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.B.value(b, ω, s))
+	if key, remap := ϟa.In.B.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.B.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.B.value(b, ω, s))
+		ϟb.Push(ϟa.In.B.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ω.In.C.remap(ω, s); remap {
-		loadRemap(b, key, ω.In.C.value(b, ω, s))
+	if key, remap := ϟa.In.C.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.In.C.value(ϟb, ϟa, ϟs))
 	} else {
-		b.Push(ω.In.C.value(b, ω, s))
+		ϟb.Push(ϟa.In.C.value(ϟb, ϟa, ϟs))
 	}
-	b.CallNoPush(funcInfoCmdVoid3Remapped)
-	StateMutator{State: s}.Write(id, ω)
+	ϟb.CallNoPush(funcInfoCmdVoid3Remapped)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOut3Remapped{}) // interface compliance check
-func (ω *CmdVoidOut3Remapped) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{4 /* a */, 4 /* b */, 4 /* c */})
-	b.Push(outputs[0]) // a
-	b.Push(outputs[1]) // b
-	b.Push(outputs[2]) // c
-	b.CallNoPush(funcInfoCmdVoidOut3Remapped)
-	StateMutator{State: s}.Write(id, ω)
-	if key, remap := ω.Out.A.remap(ω, s); remap {
-		storeRemap(b, key, outputs[0], protocol.TypeUint32)
+var _ = replay.Replayer(&CmdVoidOut3Remapped{}) // interface compliance check
+func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */, 4 /* b */, 4 /* c */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.Push(outputs[1]) // b
+	ϟb.Push(outputs[2]) // c
+	ϟb.CallNoPush(funcInfoCmdVoidOut3Remapped)
+	ϟa.Mutate(ϟs)
+	if key, remap := ϟa.Out.A.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
-	if key, remap := ω.Out.B.remap(ω, s); remap {
-		storeRemap(b, key, outputs[1], protocol.TypeUint32)
+	if key, remap := ϟa.Out.B.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[1], protocol.TypeUint32)
 	}
-	if key, remap := ω.Out.C.remap(ω, s); remap {
-		storeRemap(b, key, outputs[2], protocol.TypeUint32)
+	if key, remap := ϟa.Out.C.remap(ϟa, ϟs); remap {
+		storeRemap(ϟb, key, outputs[2], protocol.TypeUint32)
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOut3Remapped_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1281,23 +1297,24 @@ func (ω *CmdVoidOut3Remapped) replay(id atom.ID, s *state, b *builder.Builder, 
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }
 
-var _ = replayer(&CmdVoidOutArrayOfRemapped{}) // interface compliance check
-func (ω *CmdVoidOutArrayOfRemapped) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+var _ = replay.Replayer(&CmdVoidOutArrayOfRemapped{}) // interface compliance check
+func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	a_cnt := uint64(5)
-	outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{a_cnt * 4 /* a */})
-	b.Push(outputs[0]) // a
-	b.CallNoPush(funcInfoCmdVoidOutArrayOfRemapped)
-	StateMutator{State: s}.Write(id, ω)
-	for i, e := range ω.Out.A {
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt * 4 /* a */})
+	ϟb.Push(outputs[0]) // a
+	ϟb.CallNoPush(funcInfoCmdVoidOutArrayOfRemapped)
+	ϟa.Mutate(ϟs)
+	for i, e := range ϟa.Out.A {
 		ptr := outputs[0].Offset(uint64(i * 4))
-		if key, remap := e.remap(ω, s); remap {
-			storeRemap(b, key, ptr, protocol.TypeUint32)
+		if key, remap := e.remap(ϟa, ϟs); remap {
+			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
 		}
 	}
-	if wantOutput {
-		b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
 			postback := CmdVoidOutArrayOfRemapped_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err
@@ -1305,4 +1322,5 @@ func (ω *CmdVoidOutArrayOfRemapped) replay(id atom.ID, s *state, b *builder.Bui
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
 }

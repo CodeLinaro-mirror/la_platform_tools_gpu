@@ -29,10 +29,6 @@ limitations under the License.
     "android.googlesource.com/platform/tools/gpu/replay/value"
   )
 
-  type replayer interface {
-    replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool)
-  }
-
   func readBytes(r io.Reader, c uint64) ([]byte, error) {
     b := make([]byte, c)
     _, err := io.ReadFull(r, b)
@@ -65,18 +61,6 @@ limitations under the License.
 
   {{ForEach (AllCommands $) "DeclarePostbacks" | JoinWith "\n"}}
 
-  type replayWriter struct {
-    builder    *builder.Builder
-    state      *state
-  }
-
-  func newReplayWriter(b *builder.Builder) *replayWriter {
-    return &replayWriter{
-      builder:    b,
-      state:      initialState(),
-    }
-  }
-
   func loadRemap(b *builder.Builder, key interface{}, val value.Value) {
     ptr, found := b.Remappings[key]
     if found {
@@ -99,8 +83,6 @@ limitations under the License.
       b.Remappings[key] = ptr
     }
   }
-
-  {{template "WriteFunction" $}}
 
   {{ForEach (AllCommands $) "DeclareCommandReplay" | JoinWith "\n"}}
 {{end}}
@@ -133,16 +115,16 @@ limitations under the License.
   {{AssertType $ "Class"}}
 
   {{if not (or (GetAnnotation $ "internal") (GetAnnotation $ "Interface"))}}
-    func (c {{Macro "Go.Type" $}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value {
+    func (c {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
       {{$union := GetAnnotation $ "union"}}
       {{range $i, $f := $.Fields}}
         {{/* TODO: Figure out proper handling of unions. */}}
         {{if not (and $i $union)}}
           {{$fname := (print "c." (Macro "Go.Public" $f.Name))}}
-          b.Push({{Macro "Value" "Type" $f.Type "Name" $fname}})
+          ϟb.Push({{Macro "Value" "Type" $f.Type "Name" $fname}})
         {{end}}
       {{end}}
-      return b.Buffer(§
+      return ϟb.Buffer(§
         {{if $union}}1
         {{else}}{{range $i, $_ := $.Fields}}{{if not (HasMore $i $.Fields)}}{{$i}}+1{{end}}{{end}}
         {{end}}§)
@@ -161,7 +143,7 @@ limitations under the License.
 
   {{if not (GetAnnotation $ "replay_custom_value")}}
     {{$v := print (Macro "Go.Type" $.To) "(c)"}}
-    func (c {{$.Name}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+    func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
   {{end}}
 {{end}}
 
@@ -175,12 +157,12 @@ limitations under the License.
   {{AssertType $ "Array" "StaticArray"}}
 
   {{if not (or (GetAnnotation $.ValueType "internal") (IsAny $.ValueType))}}
-    func (arr {{Macro "Go.Type" $}}) value(b *builder.Builder, ω atom.Atom, s *state) value.Pointer {
+    func (arr {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
       if len(arr) > 0 {
         for _, e := range arr {
           {{Macro "PushInput" "Type" $.ValueType "Name" "e"}}
         }
-        return b.Buffer(len(arr))
+        return ϟb.Buffer(len(arr))
       } else {
         return value.AbsolutePointer(0)
       }
@@ -273,30 +255,6 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the Write function
--------------------------------------------------------------------------------
-*/}}
-{{define "WriteFunction"}}
-  {{AssertType $ "API"}}
-
-  func (r *replayWriter) Write(id atom.ID, a atom.Atom, wantOutput bool) {
-    b := r.builder
-    switch ω := a.(type) {
-      case *memory.Observation:
-        b.Observation(ω.Range, ω.ResourceID)
-      case replayer:
-        ω.replay(id, r.state, b, wantOutput)
-      case *atom.EOS:
-      default:
-        panic(fmt.Errorf("Unsupported atom type %T for Write", ω))
-    }
-    b.EndAtom()
-  }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   Emits the replay function for the specified command
 -------------------------------------------------------------------------------
 */}}
@@ -304,18 +262,18 @@ limitations under the License.
   {{AssertType $ "Function"}}
 
   {{$name := Macro "Go.CmdName" $}}
-  var _ = replayer(&{{$name}}{}) // interface compliance check
+  var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
   {{if GetAnnotation $ "replay_custom"}}
-    func (ω *{{$name}}) defaultReplay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+    func (ϟa *{{$name}}) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
   {{else}}
-    func (ω *{{$name}}) replay(id atom.ID, s *state, b *builder.Builder, wantOutput bool) {
+    func (ϟa *{{$name}}) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
   {{end}}
     {{/* Declare all the of local variables describing the array counts */}}
     {{template "DefineArrayCounts" $}}
 
     {{if len $.Outputs}}
       {{/* Create a temporary buffer to hold all the output parameters */}}
-      outputs, size := b.AllocateTemporaryMemoryChunks([]uint64{§
+      outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{§
         {{range $i, $p := $.Outputs}}
           {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
         {{end}}
@@ -325,36 +283,36 @@ limitations under the License.
     {{/* Push all the parameters on the stack */}}
     {{range $p := $.CallParameters}}
       {{$type := TypeOf $p}}
-      {{$name := print "ω." (Macro "Go.Parameter" $p)}}
-      {{if $p.Output}} b.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
+      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+      {{if $p.Output}} ϟb.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
       {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
       {{end}}
     {{end}}
 
     {{/* Call the function */}}
     {{if not (IsVoid $.Return.Type)}}
-      b.CallPush({{Macro "BuilderFunctionInfo" $}})
+      ϟb.CallPush({{Macro "BuilderFunctionInfo" $}})
       {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
       {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
     {{else}}
-      b.CallNoPush({{Macro "BuilderFunctionInfo" $}})
+      ϟb.CallNoPush({{Macro "BuilderFunctionInfo" $}})
     {{end}}
 
     {{/* Simulate the call */}}
-    StateMutator{State: s}.Write(id, ω)
+    ϟa.Mutate(ϟs)
 
     {{/* Remap outputs */}}
     {{range $i, $p := $.Outputs}}
       {{$type    := TypeOf $p}}
-      {{$name    := print "ω." (Macro "Go.Parameter" $p)}}
+      {{$name    := print "ϟa." (Macro "Go.Parameter" $p)}}
       {{$pointer := print "outputs[" $i "]"}}
       {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
     {{end}}
 
     {{if len $.Outputs}}
       {{/* Post back the data, if it is wanted */}}
-      if wantOutput {
-        b.Post(outputs[0], size, id, func(d *protocol.Decoder) (interface{}, error) {
+      if postback {
+        ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
           postback := {{Macro "CmdPostbacksName" $}}{}
           {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
           if err := postback.Decode({{$array_counts}}d); err != nil {
@@ -364,6 +322,7 @@ limitations under the License.
         })
       }
     {{end}}
+    ϟb.EndAtom()
   }
 {{end}}
 
@@ -382,16 +341,16 @@ limitations under the License.
   {{     if IsPseudonym $.Type}}
     {{Macro "StoreReturn" "Type" $.Type.To "Destination" $.Destination}}
   {{else if IsArray     $.Type}}
-    b.Push({{$.Destination}})
-    b.Copy({{Macro "ArrayCount" $name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}})
+    ϟb.Push({{$.Destination}})
+    ϟb.Copy({{Macro "ArrayCount" $name}} * {{Macro "SizeOf" "Type" $.Type.ValueType}})
   {{else if IsString $.Type}}
-    b.Push({{$.Destination}})
-    b.Strcpy({{Macro "ArrayCount" $name}})
+    ϟb.Push({{$.Destination}})
+    ϟb.Strcpy({{Macro "ArrayCount" $name}})
   {{else if IsPointerType $.Type}}
-    b.Push({{$.Destination}})
-    b.Copy({{Macro "ArrayCount" $name}})
+    ϟb.Push({{$.Destination}})
+    ϟb.Copy({{Macro "ArrayCount" $name}})
   {{else}}
-    b.Store({{$.Destination}})
+    ϟb.Store({{$.Destination}})
   {{end}}
 
 {{end}}
@@ -407,13 +366,13 @@ limitations under the License.
   {{AssertType $.Name "string"}}
 
   {{if (GetAnnotation $.Type "replay_remap")}}
-    if key, remap := {{$.Name}}.remap(ω, s); remap {
-      loadRemap(b, key, {{Macro "Value" "Type" $.Type "Name" $.Name}})
+    if key, remap := {{$.Name}}.remap(ϟa, ϟs); remap {
+      loadRemap(ϟb, key, {{Macro "Value" "Type" $.Type "Name" $.Name}})
     } else {
-      b.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+      ϟb.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
     }
   {{else}}
-    b.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
+    ϟb.Push({{Macro "Value" "Type" $.Type "Name" $.Name}})
   {{end}}
 {{end}}
 
@@ -430,8 +389,8 @@ limitations under the License.
   {{AssertType $.Pointer "string"}}
 
   {{if (GetAnnotation $.Type "replay_remap")}}
-    if key, remap := {{$.Name}}.remap(ω, s); remap {
-      storeRemap(b, key, {{$.Pointer}}, {{Macro "BuilderType" $.Type}})
+    if key, remap := {{$.Name}}.remap(ϟa, ϟs); remap {
+      storeRemap(ϟb, key, {{$.Pointer}}, {{Macro "BuilderType" $.Type}})
     }
   {{else if IsArray $.Type}}
     {{$type    := $.Type.ValueType}}
@@ -563,7 +522,7 @@ limitations under the License.
   {{AssertType $.Type "Type"}}
   {{AssertType $.Name "string"}}
 
-  {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(b, ω, s)
+  {{if (GetAnnotation $.Type "replay_custom_value")}}{{$.Name}}.value(ϟb, ϟa, ϟs)
   {{else if IsBool        $.Type}}value.Bool({{$.Name}})
   {{else if IsS8          $.Type}}value.S8({{$.Name}})
   {{else if IsU8          $.Type}}value.U8({{$.Name}})
@@ -575,13 +534,13 @@ limitations under the License.
   {{else if IsF64         $.Type}}value.F64({{$.Name}})
   {{else if IsU64         $.Type}}value.U64({{$.Name}})
   {{else if IsS64         $.Type}}value.S64({{$.Name}})
-  {{else if IsString      $.Type}}b.String({{$.Name}})
+  {{else if IsString      $.Type}}ϟb.String({{$.Name}})
   {{else if IsPointerType $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsEnum        $.Type}}value.U32({{$.Name}})
-  {{else if IsArray       $.Type}}{{$.Name}}.value(b, ω, s)
-  {{else if IsStaticArray $.Type}}{{$.Name}}.value(b, ω, s)
-  {{else if IsPseudonym   $.Type}}{{$.Name}}.value(b, ω, s)
-  {{else if IsClass       $.Type}}{{$.Name}}.value(b, ω, s)
+  {{else if IsArray       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsStaticArray $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsPseudonym   $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsClass       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
   {{else                          }}{{Error "macro Value '%v' called with unsupported type: %s" $.Name $.Type.Name}}
   {{end}}
 {{end}}
