@@ -60,10 +60,10 @@ type UniformLocation int32
 func (c *UniformLocation) Less(rhs UniformLocation) bool  { return int32(*c) < int32(rhs) }
 func (c *UniformLocation) Equal(rhs UniformLocation) bool { return int32(*c) == int32(rhs) }
 
-type AttributeLocation int32
+type AttributeLocation uint32
 
-func (c *AttributeLocation) Less(rhs AttributeLocation) bool  { return int32(*c) < int32(rhs) }
-func (c *AttributeLocation) Equal(rhs AttributeLocation) bool { return int32(*c) == int32(rhs) }
+func (c *AttributeLocation) Less(rhs AttributeLocation) bool  { return uint32(*c) < uint32(rhs) }
+func (c *AttributeLocation) Equal(rhs AttributeLocation) bool { return uint32(*c) == uint32(rhs) }
 
 type IndicesPointer memory.Pointer
 
@@ -255,7 +255,6 @@ func (m CubemapLevel_s32Map) Get(key int32) CubemapLevel {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -280,7 +279,6 @@ func (m FramebufferAttachmentInfo_FramebufferAttachmentMap) Get(key FramebufferA
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -345,7 +343,6 @@ func (m Image_CubeMapImageTargetMap) Get(key CubeMapImageTarget) Image {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -370,7 +367,6 @@ func (m Image_s32Map) Get(key int32) Image {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -555,7 +551,6 @@ func (m TextureId_TextureTargetMap_TextureUnitMap) Get(key TextureUnit) TextureI
 	v, ok := m[key]
 	if !ok {
 		v = make(TextureId_TextureTargetMap)
-		m[key] = v
 	}
 	return v
 }
@@ -620,7 +615,6 @@ func (m Uniform_UniformLocationMap) Get(key UniformLocation) Uniform {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -685,7 +679,6 @@ func (m VertexAttribute_s32Map) Get(key int32) VertexAttribute {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
-		m[key] = v
 	}
 	return v
 }
@@ -2255,7 +2248,7 @@ func (GlDisableVertexAttribArray) API() gfxapi.API { return API() }
 type GlVertexAttribPointer_In struct {
 	binary.Generate
 	Location   AttributeLocation
-	Size       VertexAttribSize
+	Size       int32
 	Type       VertexAttribType
 	Normalized bool
 	Stride     int32
@@ -2276,7 +2269,7 @@ func (c *GlVertexAttribPointer) String() string {
 	parts = append(parts, "glVertexAttribPointer(",
 		fmt.Sprintf("location:%v", c.In.Location),
 		", ",
-		c.In.Size.String(),
+		fmt.Sprintf("size:%v", c.In.Size),
 		", ",
 		c.In.Type.String(),
 		", ",
@@ -7084,9 +7077,9 @@ func (GlFramebufferTexture2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 type GlGetFramebufferAttachmentParameteriv_In struct {
 	binary.Generate
-	Target     FramebufferTarget
-	Attachment FramebufferAttachment
-	Parameter  FramebufferAttachmentParameter
+	FramebufferTarget FramebufferTarget
+	Attachment        FramebufferAttachment
+	Parameter         FramebufferAttachmentParameter
 }
 type GlGetFramebufferAttachmentParameteriv_Out struct {
 	binary.Generate
@@ -7102,7 +7095,7 @@ type GlGetFramebufferAttachmentParameteriv struct {
 func (c *GlGetFramebufferAttachmentParameteriv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetFramebufferAttachmentParameteriv(",
-		c.In.Target.String(),
+		c.In.FramebufferTarget.String(),
 		", ",
 		c.In.Attachment.String(),
 		", ",
@@ -8932,7 +8925,7 @@ type VertexAttributeArray struct {
 	binary.Generate
 	CreatedAt  atom.ID
 	Enabled    bool
-	Size       VertexAttribSize
+	Size       int32
 	Type       VertexAttribType
 	Normalized bool
 	Stride     int32
@@ -8941,7 +8934,7 @@ type VertexAttributeArray struct {
 
 func (c *VertexAttributeArray) Init() {
 	c.Enabled = false
-	c.Size = VertexAttribSize_SIZE_4
+	c.Size = 4
 	c.Type = VertexAttribType_GL_FLOAT
 	c.Normalized = false
 	c.Stride = 0
@@ -9409,14 +9402,16 @@ func (v TexelFormat_GLES_1_1) String() string {
 type TexelFormat_GLES_3_0 uint32
 
 const (
-	TexelFormat_GLES_3_0_GL_RED             = TexelFormat_GLES_3_0(6403)
-	TexelFormat_GLES_3_0_GL_RED_INTEGER     = TexelFormat_GLES_3_0(36244)
-	TexelFormat_GLES_3_0_GL_RG              = TexelFormat_GLES_3_0(33319)
-	TexelFormat_GLES_3_0_GL_RG_INTEGER      = TexelFormat_GLES_3_0(33320)
-	TexelFormat_GLES_3_0_GL_RGB_INTEGER     = TexelFormat_GLES_3_0(36248)
-	TexelFormat_GLES_3_0_GL_RGBA_INTEGER    = TexelFormat_GLES_3_0(36249)
-	TexelFormat_GLES_3_0_GL_DEPTH_COMPONENT = TexelFormat_GLES_3_0(6402)
-	TexelFormat_GLES_3_0_GL_DEPTH_STENCIL   = TexelFormat_GLES_3_0(34041)
+	TexelFormat_GLES_3_0_GL_RED               = TexelFormat_GLES_3_0(6403)
+	TexelFormat_GLES_3_0_GL_RED_INTEGER       = TexelFormat_GLES_3_0(36244)
+	TexelFormat_GLES_3_0_GL_RG                = TexelFormat_GLES_3_0(33319)
+	TexelFormat_GLES_3_0_GL_RG_INTEGER        = TexelFormat_GLES_3_0(33320)
+	TexelFormat_GLES_3_0_GL_RGB_INTEGER       = TexelFormat_GLES_3_0(36248)
+	TexelFormat_GLES_3_0_GL_RGBA_INTEGER      = TexelFormat_GLES_3_0(36249)
+	TexelFormat_GLES_3_0_GL_DEPTH_COMPONENT   = TexelFormat_GLES_3_0(6402)
+	TexelFormat_GLES_3_0_GL_DEPTH_COMPONENT16 = TexelFormat_GLES_3_0(33189)
+	TexelFormat_GLES_3_0_GL_DEPTH_STENCIL     = TexelFormat_GLES_3_0(34041)
+	TexelFormat_GLES_3_0_GL_DEPTH24_STENCIL8  = TexelFormat_GLES_3_0(35056)
 )
 
 func (v TexelFormat_GLES_3_0) String() string {
@@ -9435,8 +9430,12 @@ func (v TexelFormat_GLES_3_0) String() string {
 		return "GL_RGBA_INTEGER"
 	case 6402:
 		return "GL_DEPTH_COMPONENT"
+	case 33189:
+		return "GL_DEPTH_COMPONENT16"
 	case 34041:
 		return "GL_DEPTH_STENCIL"
+	case 35056:
+		return "GL_DEPTH24_STENCIL8"
 	default:
 		return fmt.Sprintf("TexelFormat_GLES_3_0<0x%.4x>", uint32(v))
 	}
@@ -9464,14 +9463,16 @@ const (
 
 // TexelFormat_GLES_3_0
 const (
-	TexelFormat_GL_RED             = TexelFormat(6403)
-	TexelFormat_GL_RED_INTEGER     = TexelFormat(36244)
-	TexelFormat_GL_RG              = TexelFormat(33319)
-	TexelFormat_GL_RG_INTEGER      = TexelFormat(33320)
-	TexelFormat_GL_RGB_INTEGER     = TexelFormat(36248)
-	TexelFormat_GL_RGBA_INTEGER    = TexelFormat(36249)
-	TexelFormat_GL_DEPTH_COMPONENT = TexelFormat(6402)
-	TexelFormat_GL_DEPTH_STENCIL   = TexelFormat(34041)
+	TexelFormat_GL_RED               = TexelFormat(6403)
+	TexelFormat_GL_RED_INTEGER       = TexelFormat(36244)
+	TexelFormat_GL_RG                = TexelFormat(33319)
+	TexelFormat_GL_RG_INTEGER        = TexelFormat(33320)
+	TexelFormat_GL_RGB_INTEGER       = TexelFormat(36248)
+	TexelFormat_GL_RGBA_INTEGER      = TexelFormat(36249)
+	TexelFormat_GL_DEPTH_COMPONENT   = TexelFormat(6402)
+	TexelFormat_GL_DEPTH_COMPONENT16 = TexelFormat(33189)
+	TexelFormat_GL_DEPTH_STENCIL     = TexelFormat(34041)
+	TexelFormat_GL_DEPTH24_STENCIL8  = TexelFormat(35056)
 )
 
 func (v TexelFormat) String() string {
@@ -9503,8 +9504,12 @@ func (v TexelFormat) String() string {
 		return "GL_RGBA_INTEGER"
 	case 6402:
 		return "GL_DEPTH_COMPONENT"
+	case 33189:
+		return "GL_DEPTH_COMPONENT16"
 	case 34041:
 		return "GL_DEPTH_STENCIL"
+	case 35056:
+		return "GL_DEPTH24_STENCIL8"
 	default:
 		return fmt.Sprintf("TexelFormat<0x%.4x>", uint32(v))
 	}
@@ -9664,14 +9669,16 @@ const (
 
 // TexelFormat_GLES_3_0
 const (
-	ImageTexelFormat_GL_RED             = ImageTexelFormat(6403)
-	ImageTexelFormat_GL_RED_INTEGER     = ImageTexelFormat(36244)
-	ImageTexelFormat_GL_RG              = ImageTexelFormat(33319)
-	ImageTexelFormat_GL_RG_INTEGER      = ImageTexelFormat(33320)
-	ImageTexelFormat_GL_RGB_INTEGER     = ImageTexelFormat(36248)
-	ImageTexelFormat_GL_RGBA_INTEGER    = ImageTexelFormat(36249)
-	ImageTexelFormat_GL_DEPTH_COMPONENT = ImageTexelFormat(6402)
-	ImageTexelFormat_GL_DEPTH_STENCIL   = ImageTexelFormat(34041)
+	ImageTexelFormat_GL_RED               = ImageTexelFormat(6403)
+	ImageTexelFormat_GL_RED_INTEGER       = ImageTexelFormat(36244)
+	ImageTexelFormat_GL_RG                = ImageTexelFormat(33319)
+	ImageTexelFormat_GL_RG_INTEGER        = ImageTexelFormat(33320)
+	ImageTexelFormat_GL_RGB_INTEGER       = ImageTexelFormat(36248)
+	ImageTexelFormat_GL_RGBA_INTEGER      = ImageTexelFormat(36249)
+	ImageTexelFormat_GL_DEPTH_COMPONENT   = ImageTexelFormat(6402)
+	ImageTexelFormat_GL_DEPTH_COMPONENT16 = ImageTexelFormat(33189)
+	ImageTexelFormat_GL_DEPTH_STENCIL     = ImageTexelFormat(34041)
+	ImageTexelFormat_GL_DEPTH24_STENCIL8  = ImageTexelFormat(35056)
 )
 
 // CompressedTexelFormat
@@ -9719,8 +9726,12 @@ func (v ImageTexelFormat) String() string {
 		return "GL_RGBA_INTEGER"
 	case 6402:
 		return "GL_DEPTH_COMPONENT"
+	case 33189:
+		return "GL_DEPTH_COMPONENT16"
 	case 34041:
 		return "GL_DEPTH_STENCIL"
+	case 35056:
+		return "GL_DEPTH24_STENCIL8"
 	// CompressedTexelFormat
 	// CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
 	case 36196:
@@ -9744,24 +9755,33 @@ type TexelType uint32
 
 const (
 	TexelType_GL_UNSIGNED_BYTE          = TexelType(5121)
+	TexelType_GL_UNSIGNED_SHORT         = TexelType(5123)
+	TexelType_GL_UNSIGNED_INT           = TexelType(5125)
+	TexelType_GL_FLOAT                  = TexelType(5126)
 	TexelType_GL_UNSIGNED_SHORT_4_4_4_4 = TexelType(32819)
 	TexelType_GL_UNSIGNED_SHORT_5_5_5_1 = TexelType(32820)
 	TexelType_GL_UNSIGNED_SHORT_5_6_5   = TexelType(33635)
-	TexelType_GL_FLOAT                  = TexelType(5126)
+	TexelType_GL_UNSIGNED_INT_24_8      = TexelType(34042)
 )
 
 func (v TexelType) String() string {
 	switch v {
 	case 5121:
 		return "GL_UNSIGNED_BYTE"
+	case 5123:
+		return "GL_UNSIGNED_SHORT"
+	case 5125:
+		return "GL_UNSIGNED_INT"
+	case 5126:
+		return "GL_FLOAT"
 	case 32819:
 		return "GL_UNSIGNED_SHORT_4_4_4_4"
 	case 32820:
 		return "GL_UNSIGNED_SHORT_5_5_5_1"
 	case 33635:
 		return "GL_UNSIGNED_SHORT_5_6_5"
-	case 5126:
-		return "GL_FLOAT"
+	case 34042:
+		return "GL_UNSIGNED_INT_24_8"
 	default:
 		return fmt.Sprintf("TexelType<0x%.4x>", uint32(v))
 	}
@@ -11994,33 +12014,6 @@ func (v TextureKind) String() string {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// enum VertexAttribSize
-////////////////////////////////////////////////////////////////////////////////
-type VertexAttribSize uint32
-
-const (
-	VertexAttribSize_SIZE_1 = VertexAttribSize(1)
-	VertexAttribSize_SIZE_2 = VertexAttribSize(2)
-	VertexAttribSize_SIZE_3 = VertexAttribSize(3)
-	VertexAttribSize_SIZE_4 = VertexAttribSize(4)
-)
-
-func (v VertexAttribSize) String() string {
-	switch v {
-	case 1:
-		return "SIZE_1"
-	case 2:
-		return "SIZE_2"
-	case 3:
-		return "SIZE_3"
-	case 4:
-		return "SIZE_4"
-	default:
-		return fmt.Sprintf("VertexAttribSize<0x%.4x>", uint32(v))
-	}
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // enum QueryParameter_GLES_3
 ////////////////////////////////////////////////////////////////////////////////
 type QueryParameter_GLES_3 uint32
@@ -12804,7 +12797,7 @@ func NewGlDisableVertexAttribArray(
 }
 func NewGlVertexAttribPointer(
 	pLocation AttributeLocation,
-	pSize VertexAttribSize,
+	pSize int32,
 	pType VertexAttribType,
 	pNormalized bool,
 	pStride int32,
@@ -13956,13 +13949,13 @@ func NewGlFramebufferTexture2D(
 	}
 }
 func NewGlGetFramebufferAttachmentParameteriv(
-	pTarget FramebufferTarget,
+	pFramebufferTarget FramebufferTarget,
 	pAttachment FramebufferAttachment,
 	pParameter FramebufferAttachmentParameter,
 	pValue S32Array,
 ) *GlGetFramebufferAttachmentParameteriv {
 	return &GlGetFramebufferAttachmentParameteriv{
-		In:  GlGetFramebufferAttachmentParameteriv_In{Target: pTarget, Attachment: pAttachment, Parameter: pParameter},
+		In:  GlGetFramebufferAttachmentParameteriv_In{FramebufferTarget: pFramebufferTarget, Attachment: pAttachment, Parameter: pParameter},
 		Out: GlGetFramebufferAttachmentParameteriv_Out{Value: pValue},
 	}
 }
@@ -14305,7 +14298,7 @@ func init() {
 	gfxapi.Register(API())
 	atom.Register(atom.TypeInfo{
 		Name: "Init",
-		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man]",
+		Docs: "[]",
 		ID:   0,
 		New:  func() atom.Atom { return &Init{} },
 	})

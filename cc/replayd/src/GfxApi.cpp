@@ -494,7 +494,7 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindAttribLocation(%u, %d, %s)\n", program, location, name);
+        CAZE_INFO("glBindAttribLocation(%u, %u, %s)\n", program, location, name);
         if (glBindAttribLocation != nullptr) {
             glBindAttribLocation(program, location, name);
         } else {
@@ -599,7 +599,7 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
 bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glEnableVertexAttribArray(%d)\n", location);
+        CAZE_INFO("glEnableVertexAttribArray(%u)\n", location);
         if (glEnableVertexAttribArray != nullptr) {
             glEnableVertexAttribArray(location);
         } else {
@@ -615,7 +615,7 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
 bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glDisableVertexAttribArray(%d)\n", location);
+        CAZE_INFO("glDisableVertexAttribArray(%u)\n", location);
         if (glDisableVertexAttribArray != nullptr) {
             glDisableVertexAttribArray(location);
         } else {
@@ -633,10 +633,10 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     int32_t stride = stack->pop<int32_t>();
     bool normalized = stack->pop<bool>();
     VertexAttribType type = stack->pop<VertexAttribType>();
-    VertexAttribSize size = stack->pop<VertexAttribSize>();
+    int32_t size = stack->pop<int32_t>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttribPointer(%d, %u, %u, %d, %d, %p)\n", location, size, type,
+        CAZE_INFO("glVertexAttribPointer(%u, %d, %u, %d, %d, %p)\n", location, size, type,
                   normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);
@@ -659,7 +659,7 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetActiveAttrib(%u, %d, %d, %p, %p, %p, %p)\n", program, location, buffer_size,
+        CAZE_INFO("glGetActiveAttrib(%u, %u, %d, %p, %p, %p, %p)\n", program, location, buffer_size,
                   buffer_bytes_written, vector_count, type, name);
         if (glGetActiveAttrib != nullptr) {
             glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
@@ -781,7 +781,7 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
         CAZE_INFO("glGetAttribLocation(%u, %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
             AttributeLocation return_value = glGetAttribLocation(program, name);
-            CAZE_INFO("Returned: %d\n", return_value);
+            CAZE_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<AttributeLocation>(return_value);
             }
@@ -1273,7 +1273,7 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib1f(%d, %f)\n", location, value0);
+        CAZE_INFO("glVertexAttrib1f(%u, %f)\n", location, value0);
         if (glVertexAttrib1f != nullptr) {
             glVertexAttrib1f(location, value0);
         } else {
@@ -1291,7 +1291,7 @@ bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib2f(%d, %f, %f)\n", location, value0, value1);
+        CAZE_INFO("glVertexAttrib2f(%u, %f, %f)\n", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
             glVertexAttrib2f(location, value0, value1);
         } else {
@@ -1310,7 +1310,7 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
+        CAZE_INFO("glVertexAttrib3f(%u, %f, %f, %f)\n", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
             glVertexAttrib3f(location, value0, value1, value2);
         } else {
@@ -1330,7 +1330,7 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2,
+        CAZE_INFO("glVertexAttrib4f(%u, %f, %f, %f, %f)\n", location, value0, value1, value2,
                   value3);
         if (glVertexAttrib4f != nullptr) {
             glVertexAttrib4f(location, value0, value1, value2, value3);
@@ -1348,7 +1348,7 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib1fv(%d, %p)\n", location, value);
+        CAZE_INFO("glVertexAttrib1fv(%u, %p)\n", location, value);
         if (glVertexAttrib1fv != nullptr) {
             glVertexAttrib1fv(location, value);
         } else {
@@ -1365,7 +1365,7 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib2fv(%d, %p)\n", location, value);
+        CAZE_INFO("glVertexAttrib2fv(%u, %p)\n", location, value);
         if (glVertexAttrib2fv != nullptr) {
             glVertexAttrib2fv(location, value);
         } else {
@@ -1382,7 +1382,7 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib3fv(%d, %p)\n", location, value);
+        CAZE_INFO("glVertexAttrib3fv(%u, %p)\n", location, value);
         if (glVertexAttrib3fv != nullptr) {
             glVertexAttrib3fv(location, value);
         } else {
@@ -1399,7 +1399,7 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib4fv(%d, %p)\n", location, value);
+        CAZE_INFO("glVertexAttrib4fv(%u, %p)\n", location, value);
         if (glVertexAttrib4fv != nullptr) {
             glVertexAttrib4fv(location, value);
         } else {
@@ -2768,12 +2768,12 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
     FramebufferAttachmentParameter parameter = stack->pop<FramebufferAttachmentParameter>();
     FramebufferAttachment attachment = stack->pop<FramebufferAttachment>();
-    FramebufferTarget target = stack->pop<FramebufferTarget>();
+    FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", target, attachment,
-                  parameter, value);
+        CAZE_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", framebuffer_target,
+                  attachment, parameter, value);
         if (glGetFramebufferAttachmentParameteriv != nullptr) {
-            glGetFramebufferAttachmentParameteriv(target, attachment, parameter, value);
+            glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
         } else {
             CAZE_WARNING(
                     "Attempted to call unsupported function "

@@ -203,7 +203,9 @@ enum TexelFormat_GLES_3_0 {
     GL_RGB_INTEGER                                  = 0x8D98,
     GL_RGBA_INTEGER                                 = 0x8D99,
     GL_DEPTH_COMPONENT                              = 0x1902,
+    GL_DEPTH_COMPONENT16                            = 0x81A5,
     GL_DEPTH_STENCIL                                = 0x84F9,
+    GL_DEPTH24_STENCIL8                             = 0x88F0,
 }
 
 enum TexelFormat : TexelFormat_GLES_1_1, TexelFormat_GLES_3_0 {}
@@ -241,10 +243,13 @@ enum ImageTexelFormat : TexelFormat, CompressedTexelFormat {}
 
 enum TexelType {
     GL_UNSIGNED_BYTE                                = 0x1401,
+    GL_UNSIGNED_SHORT                               = 0x1403,
+    GL_UNSIGNED_INT                                 = 0x1405,
+    GL_FLOAT                                        = 0x1406,
     GL_UNSIGNED_SHORT_4_4_4_4                       = 0x8033,
     GL_UNSIGNED_SHORT_5_5_5_1                       = 0x8034,
     GL_UNSIGNED_SHORT_5_6_5                         = 0x8363,
-    GL_FLOAT                                        = 0x1406,
+    GL_UNSIGNED_INT_24_8                            = 0x84FA,
 }
 
 enum FramebufferAttachment {
@@ -742,14 +747,6 @@ enum TextureKind {
     CUBEMAP                                         = 2,
 }
 
-enum VertexAttribSize {
-    SIZE_1                                          = 1,
-    SIZE_2                                          = 2,
-    SIZE_3                                          = 3,
-    SIZE_4                                          = 4,
-}
-
-
 enum QueryParameter_GLES_3 {
     GL_CURRENT_QUERY                                = 0x8865,
 }
@@ -1020,7 +1017,7 @@ class VertexArray {}
 @internal
 class VertexAttributeArray {
     bool             Enabled = false
-    VertexAttribSize Size = SIZE_4
+    s32              Size = 4
     VertexAttribType Type = GL_FLOAT
     bool             Normalized = false
     s32              Stride = 0
@@ -1093,7 +1090,7 @@ class InternalState {
 // @replay_remap type u32 SyncObjectId
 @replay_remap type s32 UniformLocation
 
-type s32 AttributeLocation
+type u32 AttributeLocation
 
 @replay_custom_value type pointer IndicesPointer
 @replay_custom_value type pointer VertexPointer
@@ -1143,8 +1140,6 @@ cmd void init(s32                width,
               RenderbufferFormat color_fmt,
               RenderbufferFormat depth_fmt,
               RenderbufferFormat stencil_fmt) {
-    http://www.khronos.org/opengles/sdk/1.1/docs/man
-
     Instances.Buffers[Internals.NilBuffer] = new Buffer{}
     Instances.Textures[Internals.NilTexture] = new Texture{}
     Instances.Renderbuffers[Internals.NilRenderbuffer] = new Renderbuffer{}
@@ -1481,13 +1476,14 @@ cmd void glDisableVertexAttribArray(AttributeLocation location) {
 }
 
 cmd void glVertexAttribPointer(AttributeLocation location,
-                               VertexAttribSize  size,
+                               s32               size,
                                VertexAttribType  type,
                                bool              normalized,
                                s32               stride,
                                VertexPointer     data) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml
-    assert(stride > -1)
+    assert (size >= 1) && (size <= 4)
+    assert stride >= 0
     a := VertexAttributeArrays[location]
     a.Size       = size
     a.Type       = type
@@ -2235,7 +2231,12 @@ cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) 
     if ((framebuffer in Instances.Framebuffers) == false) {
         Instances.Framebuffers[framebuffer] = new Framebuffer{}
     }
-    BoundFramebuffers[target] = framebuffer
+    if target == GL_FRAMEBUFFER {
+        BoundFramebuffers[GL_READ_FRAMEBUFFER] = framebuffer
+        BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = framebuffer
+    } else {
+        BoundFramebuffers[target] = framebuffer
+    }
 }
 
 cmd FramebufferStatus glCheckFramebufferStatus(FramebufferTarget target) {
@@ -2416,10 +2417,10 @@ cmd void glShaderBinary(s32             count,
     }
 }
 
-cmd void glGetShaderInfoLog(ShaderId     shader,
-                            s32          buffer_length,
-                            out s32      string_length_written,
-                            out string   info) {
+cmd void glGetShaderInfoLog(ShaderId   shader,
+                            s32        buffer_length,
+                            out s32    string_length_written,
+                            out string info) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml
     assert len(info) >= buffer_length
     s := Instances.Shaders[shader]
@@ -2427,10 +2428,10 @@ cmd void glGetShaderInfoLog(ShaderId     shader,
     info = substr(s.InfoLog, 0, string_length_written)
 }
 
-cmd void glGetShaderSource(ShaderId     shader,
-                           s32          buffer_length,
-                           out s32      string_length_written,
-                           out string   source) {
+cmd void glGetShaderSource(ShaderId   shader,
+                           s32        buffer_length,
+                           out s32    string_length_written,
+                           out string source) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml
     assert len(source) >= buffer_length
     s := Instances.Shaders[shader]
@@ -2479,9 +2480,9 @@ cmd void glDetachShader(ProgramId program, ShaderId shader) {
     p.Shaders.Delete(s.Type)
 }
 
-cmd void glGetAttachedShaders(ProgramId           program,
-                              s32                 buffer_length,
-                              out s32             shaders_length_written,
+cmd void glGetAttachedShaders(ProgramId             program,
+                              s32                   buffer_length,
+                              out s32               shaders_length_written,
                               inout array<ShaderId> shaders) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml
     assert len(shaders) >= buffer_length
@@ -2498,7 +2499,7 @@ cmd void glLinkProgram(ProgramId program) {
     // TODO: program.Binary < ?
 }
 
-cmd void glGetProgramInfoLog(ProgramId    program,
+cmd void glGetProgramInfoLog(ProgramId  program,
                              s32        buffer_length,
                              out s32    string_length_written,
                              out string info) {
@@ -2585,9 +2586,14 @@ cmd void glFramebufferRenderbuffer(FramebufferTarget     framebuffer_target,
                                    RenderbufferTarget    renderbuffer_target,
                                    RenderbufferId        renderbuffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml
-    framebufferId := BoundFramebuffers[framebuffer_target]
+    target := switch (framebuffer_target) {
+        case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
+    }
+    framebufferId := BoundFramebuffers[target]
     framebuffer   := Instances.Framebuffers[framebufferId]
-    attachment  := framebuffer.Attachments[framebuffer_attachment]
+    attachment    := framebuffer.Attachments[framebuffer_attachment]
     if (renderbuffer == Internals.NilRenderbuffer) {
       attachment.Type = GL_NONE
     } else {
@@ -2605,7 +2611,12 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
                                 TextureId             texture,
                                 s32                   level) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml
-    framebufferId := BoundFramebuffers[framebuffer_target]
+    target := switch (framebuffer_target) {
+        case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
+    }
+    framebufferId := BoundFramebuffers[target]
     framebuffer   := Instances.Framebuffers[framebufferId]
     attachment    := framebuffer.Attachments[framebuffer_attachment]
     if (texture == Internals.NilTexture) {
@@ -2613,8 +2624,7 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
       attachment.Object       = Internals.NilTexture as u32
       attachment.TextureLevel = 0
       attachment.CubeMapFace  = GL_TEXTURE_CUBE_MAP_POSITIVE_X
-    }
-    if (texture != Internals.NilTexture) { // TODO: ELSE
+    } else {
       attachment.Type         = GL_TEXTURE
       attachment.Object       = texture as u32
       attachment.TextureLevel = level
@@ -2631,12 +2641,17 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
     framebuffer.Attachments[framebuffer_attachment] = attachment
 }
 
-cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              target,
+cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              framebuffer_target,
                                                FramebufferAttachment          attachment,
                                                FramebufferAttachmentParameter parameter,
                                                inout array<s32>                 value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml
     assert len(value) >= 1
+    target := switch (framebuffer_target) {
+        case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
+        case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
+    }
     framebufferId := BoundFramebuffers[target]
     framebuffer   := Instances.Framebuffers[framebufferId]
     a             := framebuffer.Attachments[attachment]

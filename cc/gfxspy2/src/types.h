@@ -231,7 +231,9 @@ public:
     static const uint32_t GL_RGB_INTEGER = 36248;
     static const uint32_t GL_RGBA_INTEGER = 36249;
     static const uint32_t GL_DEPTH_COMPONENT = 6402;
+    static const uint32_t GL_DEPTH_COMPONENT16 = 33189;
     static const uint32_t GL_DEPTH_STENCIL = 34041;
+    static const uint32_t GL_DEPTH24_STENCIL8 = 35056;
 
     inline TexelFormat_GLES_3_0() : mValue(0) {}
     inline TexelFormat_GLES_3_0(uint32_t v) : mValue(v) {}
@@ -255,7 +257,9 @@ public:
     static const uint32_t GL_RGB_INTEGER = 36248;
     static const uint32_t GL_RGBA_INTEGER = 36249;
     static const uint32_t GL_DEPTH_COMPONENT = 6402;
+    static const uint32_t GL_DEPTH_COMPONENT16 = 33189;
     static const uint32_t GL_DEPTH_STENCIL = 34041;
+    static const uint32_t GL_DEPTH24_STENCIL8 = 35056;
 
     inline TexelFormat() : mValue(0) {}
     inline TexelFormat(uint32_t v) : mValue(v) {}
@@ -349,7 +353,9 @@ public:
     static const uint32_t GL_RGB_INTEGER = 36248;
     static const uint32_t GL_RGBA_INTEGER = 36249;
     static const uint32_t GL_DEPTH_COMPONENT = 6402;
+    static const uint32_t GL_DEPTH_COMPONENT16 = 33189;
     static const uint32_t GL_DEPTH_STENCIL = 34041;
+    static const uint32_t GL_DEPTH24_STENCIL8 = 35056;
     static const uint32_t GL_ETC1_RGB8_OES = 36196;
     static const uint32_t GL_ATC_RGB_AMD = 35986;
     static const uint32_t GL_ATC_RGBA_EXPLICIT_ALPHA_AMD = 35987;
@@ -366,10 +372,13 @@ private:
 class TexelType {
 public:
     static const uint32_t GL_UNSIGNED_BYTE = 5121;
+    static const uint32_t GL_UNSIGNED_SHORT = 5123;
+    static const uint32_t GL_UNSIGNED_INT = 5125;
+    static const uint32_t GL_FLOAT = 5126;
     static const uint32_t GL_UNSIGNED_SHORT_4_4_4_4 = 32819;
     static const uint32_t GL_UNSIGNED_SHORT_5_5_5_1 = 32820;
     static const uint32_t GL_UNSIGNED_SHORT_5_6_5 = 33635;
-    static const uint32_t GL_FLOAT = 5126;
+    static const uint32_t GL_UNSIGNED_INT_24_8 = 34042;
 
     inline TexelType() : mValue(0) {}
     inline TexelType(uint32_t v) : mValue(v) {}
@@ -1429,21 +1438,6 @@ private:
 };
 
 
-class VertexAttribSize {
-public:
-    static const uint32_t SIZE_1 = 1;
-    static const uint32_t SIZE_2 = 2;
-    static const uint32_t SIZE_3 = 3;
-    static const uint32_t SIZE_4 = 4;
-
-    inline VertexAttribSize() : mValue(0) {}
-    inline VertexAttribSize(uint32_t v) : mValue(v) {}
-    inline operator uint32_t() const { return mValue; }
-private:
-    uint32_t mValue;
-};
-
-
 class QueryParameter_GLES_3 {
 public:
     static const uint32_t GL_CURRENT_QUERY = 34917;
@@ -1646,7 +1640,7 @@ typedef uint32_t ProgramId;
 typedef uint32_t VertexArrayId;
 typedef uint32_t QueryId;
 typedef int32_t UniformLocation;
-typedef int32_t AttributeLocation;
+typedef uint32_t AttributeLocation;
 typedef void* IndicesPointer;
 typedef void* VertexPointer;
 typedef void* TexturePointer;
@@ -1854,7 +1848,7 @@ struct VertexArray {
 
 struct VertexAttributeArray {
     bool Enabled;
-    VertexAttribSize Size;
+    int32_t Size;
     VertexAttribType Type;
     bool Normalized;
     int32_t Stride;

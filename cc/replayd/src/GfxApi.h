@@ -279,7 +279,9 @@ enum class TexelFormat_GLES_3_0 : uint32_t {
     GL_RGB_INTEGER = 36248,
     GL_RGBA_INTEGER = 36249,
     GL_DEPTH_COMPONENT = 6402,
+    GL_DEPTH_COMPONENT16 = 33189,
     GL_DEPTH_STENCIL = 34041,
+    GL_DEPTH24_STENCIL8 = 35056,
 };
 
 enum class TexelFormat : uint32_t {};
@@ -313,10 +315,13 @@ enum class ImageTexelFormat : uint32_t {};
 
 enum class TexelType : uint32_t {
     GL_UNSIGNED_BYTE = 5121,
+    GL_UNSIGNED_SHORT = 5123,
+    GL_UNSIGNED_INT = 5125,
+    GL_FLOAT = 5126,
     GL_UNSIGNED_SHORT_4_4_4_4 = 32819,
     GL_UNSIGNED_SHORT_5_5_5_1 = 32820,
     GL_UNSIGNED_SHORT_5_6_5 = 33635,
-    GL_FLOAT = 5126,
+    GL_UNSIGNED_INT_24_8 = 34042,
 };
 
 enum class FramebufferAttachment : uint32_t {
@@ -802,13 +807,6 @@ enum class TextureKind : uint32_t {
     CUBEMAP = 2,
 };
 
-enum class VertexAttribSize : uint32_t {
-    SIZE_1 = 1,
-    SIZE_2 = 2,
-    SIZE_3 = 3,
-    SIZE_4 = 4,
-};
-
 enum class QueryParameter_GLES_3 : uint32_t {
     GL_CURRENT_QUERY = 34917,
 };
@@ -900,7 +898,7 @@ typedef uint32_t ProgramId;
 typedef uint32_t VertexArrayId;
 typedef uint32_t QueryId;
 typedef int32_t UniformLocation;
-typedef int32_t AttributeLocation;
+typedef uint32_t AttributeLocation;
 typedef void *IndicesPointer;
 typedef void *VertexPointer;
 typedef void *TexturePointer;
@@ -960,7 +958,7 @@ typedef void(STDCALL *PFNGLBLENDEQUATIONSEPARATE)(BlendEquation rgb, BlendEquati
 typedef void(STDCALL *PFNGLBLENDCOLOR)(float red, float green, float blue, float alpha);
 typedef void(STDCALL *PFNGLENABLEVERTEXATTRIBARRAY)(AttributeLocation location);
 typedef void(STDCALL *PFNGLDISABLEVERTEXATTRIBARRAY)(AttributeLocation location);
-typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(AttributeLocation location, VertexAttribSize size,
+typedef void(STDCALL *PFNGLVERTEXATTRIBPOINTER)(AttributeLocation location, int32_t size,
                                                 VertexAttribType type, bool normalized,
                                                 int32_t stride, VertexPointer data);
 typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(ProgramId program, AttributeLocation location,
@@ -1141,7 +1139,7 @@ typedef void(STDCALL *PFNGLFRAMEBUFFERTEXTURE2D)(FramebufferTarget framebuffer_t
                                                  TextureImageTarget texture_target,
                                                  TextureId texture, int32_t level);
 typedef void(STDCALL *PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV)(
-        FramebufferTarget target, FramebufferAttachment attachment,
+        FramebufferTarget framebuffer_target, FramebufferAttachment attachment,
         FramebufferAttachmentParameter parameter, int32_t *value);
 typedef void(STDCALL *PFNGLDRAWELEMENTS)(DrawMode draw_mode, int32_t element_count,
                                          IndicesType indices_type, IndicesPointer indices);
