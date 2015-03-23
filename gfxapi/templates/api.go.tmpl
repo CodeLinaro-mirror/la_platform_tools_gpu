@@ -148,7 +148,6 @@ limitations under the License.
       v, ok := m[key]
       if !ok {
         {{$init}}
-        m[key] = v
       }
       return v
     {{else}}
