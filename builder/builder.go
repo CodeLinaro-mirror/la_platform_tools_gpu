@@ -32,6 +32,10 @@ import (
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
+// The root database ID to a captures object, storing the identifiers to all
+// captures that are held in the database.
+var captureIdsDatabaseID = binary.NewID([]byte("ALL CAPTURES VERSION 1.0"))
+
 type builder struct {
 	ReplayManager *replay.Manager
 }
@@ -77,27 +81,27 @@ func (b *builder) Version() uint32 {
 	return 0
 }
 
-// calcContexts scans the atom list for all contexts used, and returns a
-// AtomContextArray.
+// calcContexts scans the atom list for all contexts used, sorts them into
+// ascending order, and returns a AtomContextArray.
 func calcContexts(atoms atom.List) service.AtomContextArray {
-	contexts := map[atom.ContextID]service.AtomContext{}
+	contexts := service.AtomContextArray{}
+	seen := map[atom.ContextID]struct{}{}
 	for _, a := range atoms {
 		id := a.ContextID()
-		if _, found := contexts[id]; !found {
+		if _, ok := seen[id]; !ok {
 			if a, ok := a.(gfxapi.APIer); ok {
-				contexts[id] = service.AtomContext{
+				seen[id] = struct{}{}
+				contexts = append(contexts, service.AtomContext{
 					Api: a.API().ID(),
 					Id:  uint32(id),
-				}
+				})
 			}
 		}
 	}
 
-	a := make(service.AtomContextArray, 0, len(contexts))
-	for _, ctx := range contexts {
-		a = append(a, ctx)
-	}
-	return a
+	sort.Sort(contexts)
+
+	return contexts
 }
 
 // NewCapture builds a new capture containing atoms, stores it into db and
@@ -131,7 +135,41 @@ func NewCapture(name string, atoms atom.List, db database.Database, logger log.L
 		return service.CaptureId{}, err
 	}
 
+	// TODO: This is a read-modify-write operation with no safty for concurrent
+	// writes! A mutex in this function would provided limited safety as the
+	// database could be modifying the captures list elsewhere. We really need
+	// atomic write support in the database. b/19889089.
+
+	// Load the list of captures stored in the database
+	ids, _ := Captures(db, logger)
+
+	for _, i := range ids {
+		if i.ID == id {
+			// Capture already imported
+			return service.CaptureId{id}, nil
+		}
+	}
+
+	// Add the capture into the list of captures stored by the database.
+	c := captures{ids: ids}
+	c.ids = append(c.ids, service.CaptureId{id})
+
+	record, err := db.Store(&c, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+	if err := db.StoreLink(record, captureIdsDatabaseID, logger); err != nil {
+		return service.CaptureId{}, err
+	}
+
 	return service.CaptureId{id}, nil
+}
+
+// Captures returns all the captures stored by the database.
+func Captures(db database.Database, logger log.Logger) (service.CaptureIdArray, error) {
+	var c captures
+	err := db.Load(captureIdsDatabaseID, logger, &c)
+	return c.ids, err
 }
 
 func loadCapture(captureID service.CaptureId, db database.Database, logger log.Logger) (service.Capture, error) {

@@ -115,9 +115,10 @@ type RenderFramebufferColor struct {
 	Wireframe bool
 }
 
-// getContexts records the parameters of an internal request.
-type getContexts struct {
-	Stream service.AtomStreamId
+// captures records the parameters of an internal request.
+type captures struct {
+	binary.Generate
+	ids service.CaptureIdArray
 }
 
 // getCaptureFramebufferDimensions records the parameters of an internal request.
