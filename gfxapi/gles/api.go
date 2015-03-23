@@ -255,6 +255,7 @@ func (m CubemapLevel_s32Map) Get(key int32) CubemapLevel {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
@@ -279,6 +280,7 @@ func (m FramebufferAttachmentInfo_FramebufferAttachmentMap) Get(key FramebufferA
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
@@ -343,6 +345,7 @@ func (m Image_CubeMapImageTargetMap) Get(key CubeMapImageTarget) Image {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
@@ -367,6 +370,7 @@ func (m Image_s32Map) Get(key int32) Image {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
@@ -551,6 +555,7 @@ func (m TextureId_TextureTargetMap_TextureUnitMap) Get(key TextureUnit) TextureI
 	v, ok := m[key]
 	if !ok {
 		v = make(TextureId_TextureTargetMap)
+		m[key] = v
 	}
 	return v
 }
@@ -615,6 +620,7 @@ func (m Uniform_UniformLocationMap) Get(key UniformLocation) Uniform {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
@@ -679,6 +685,7 @@ func (m VertexAttribute_s32Map) Get(key int32) VertexAttribute {
 	v, ok := m[key]
 	if !ok {
 		v.Init()
+		m[key] = v
 	}
 	return v
 }
