@@ -37,6 +37,8 @@ func init() {
 	registry.Add(binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}, &atomFramebufferDimensions{})
 	//struct builder.captureFramebufferDimensions { Dimensions:[]atomFramebufferDimensions }
 	registry.Add(binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}, &captureFramebufferDimensions{})
+	//struct builder.captures { ids:service.CaptureIdArray }
+	registry.Add(binary.ID{0xcd, 0x35, 0x8f, 0x5e, 0x40, 0x7f, 0x41, 0x75, 0x9b, 0xf7, 0x39, 0x22, 0xe1, 0xc2, 0x06, 0xd0, 0x20, 0xcc, 0xca, 0xe4}, &captures{})
 	//struct builder.getCaptureFramebufferDimensions { Capture:service.CaptureId, Context:atom.ContextID }
 	registry.Add(binary.ID{0xb7, 0xfe, 0xcb, 0x4d, 0x92, 0xa9, 0x4f, 0x3e, 0xf2, 0xf3, 0x1a, 0xd4, 0x72, 0x7a, 0x76, 0xa5, 0xb5, 0xde, 0x99, 0x3c}, &getCaptureFramebufferDimensions{})
 }
@@ -482,6 +484,32 @@ func (o *captureFramebufferDimensions) Decode(d binary.Decoder) error {
 		o.Dimensions = make([]atomFramebufferDimensions, count)
 		for i := range o.Dimensions {
 			if err := o.Dimensions[i].Decode(d); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (o captures) Encode(e binary.Encoder) error {
+	if err := e.Int32(int32(len(o.ids))); err != nil {
+		return err
+	}
+	for i := range o.ids {
+		if err := o.ids[i].Encode(e); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (o *captures) Decode(d binary.Decoder) error {
+	if count, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.ids = make(service.CaptureIdArray, count)
+		for i := range o.ids {
+			if err := o.ids[i].Decode(d); err != nil {
 				return err
 			}
 		}

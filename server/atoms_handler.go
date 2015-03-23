@@ -20,6 +20,7 @@ import (
 	"strconv"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -40,25 +41,31 @@ type atomsHandler struct {
 // atoms of the capture/context identified by their respective parameters, parsed
 // from the given req query string.
 func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
-	captures, err := h.Captures()
+	logger := log.Nop{}
+
+	captures, err := builder.Captures(h, logger)
 	if err != nil {
 		panic(err)
 	}
 
 	captureName := req.URL.Query().Get(captureParamName)
-	captureID, found := captures[captureName]
-	if !found {
+
+	var capture service.Capture
+	for _, id := range captures {
+		if err := h.Load(id.ID, logger, &capture); err == nil {
+			if capture.Name == captureName {
+				break
+			}
+		}
+	}
+
+	if capture.Name != captureName {
 		http.NotFound(res, req)
 		return
 	}
 
-	var c service.Capture
-	if err := h.Load(captureID, log.Nop{}, &c); err != nil {
-		panic(err)
-	}
-
 	var stream service.AtomStream
-	if err := h.Load(c.Atoms.ID, log.Nop{}, &stream); err != nil {
+	if err := h.Load(capture.Atoms.ID, log.Nop{}, &stream); err != nil {
 		panic(err)
 	}
 

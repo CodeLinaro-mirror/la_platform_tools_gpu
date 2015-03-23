@@ -67,15 +67,7 @@ func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) 
 
 // GetCaptures returns the full list of capture identifiers avaliable on the server.
 func (s rpcServer) GetCaptures(logger log.Logger) (service.CaptureIdArray, error) {
-	captures, err := s.Database.Captures()
-	if err != nil {
-		return nil, err
-	}
-	ids := service.CaptureIdArray{}
-	for _, id := range captures {
-		ids = append(ids, service.CaptureId{id})
-	}
-	return ids, nil
+	return builder.Captures(s.Database, logger)
 }
 
 // GetDevices returns the full list of replay devices avaliable to the server.

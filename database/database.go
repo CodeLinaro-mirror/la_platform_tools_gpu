@@ -20,10 +20,7 @@ package database
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
-	"os"
 	"path/filepath"
-	"strings"
 	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -42,7 +39,6 @@ type Database interface {
 	Store(binary.Object, log.Logger) (binary.ID, error)
 	Load(binary.ID, log.Logger, binary.Object) error
 	Contains(binary.ID, log.Logger) bool
-	Captures() (map[string]binary.ID, error)
 	Close()
 }
 
@@ -286,32 +282,4 @@ func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
 func (d *database) Close() {
 	d.metaStore.Close()
 	d.dataStore.Close()
-}
-
-func (d *database) Captures() (map[string]binary.ID, error) {
-	result := make(map[string]binary.ID)
-	files, err := ioutil.ReadDir(d.path)
-	if err != nil {
-		return result, err
-	}
-	for _, file := range files {
-		filename := file.Name()
-		if filepath.Ext(filename) == extension {
-			name := strings.TrimSuffix(filename, extension)
-			path := filepath.Join(d.path, filename)
-			if r, err := os.Open(path); err != nil {
-				return result, err
-			} else {
-				defer r.Close()
-				d := cyclic.Decoder(vle.Reader(r))
-				id := binary.ID{}
-				if err := id.Decode(d); err != nil {
-					return result, err
-				} else {
-					result[name] = id
-				}
-			}
-		}
-	}
-	return result, nil
 }
