@@ -533,8 +533,8 @@ func init() {
 	registry.Add(binary.ID{0x78, 0x80, 0xbd, 0xa7, 0x8b, 0x1f, 0xed, 0x26, 0x98, 0xfa, 0x0f, 0xeb, 0x76, 0x1f, 0x0f, 0x6c, 0x76, 0x0e, 0xc7, 0x71}, &GlGetFloatv_Out{})
 	//struct gles.GlGetFramebufferAttachmentParameteriv { Context:atom.ContextID, In:GlGetFramebufferAttachmentParameteriv_In, Out:GlGetFramebufferAttachmentParameteriv_Out }
 	registry.Add(binary.ID{0x37, 0x03, 0xc3, 0x52, 0x2c, 0xb6, 0x81, 0x30, 0x36, 0xe1, 0x7d, 0x5c, 0x53, 0x01, 0xcb, 0x8a, 0x84, 0x55, 0x62, 0x3a}, &GlGetFramebufferAttachmentParameteriv{})
-	//struct gles.GlGetFramebufferAttachmentParameteriv_In { Target:FramebufferTarget, Attachment:FramebufferAttachment, Parameter:FramebufferAttachmentParameter }
-	registry.Add(binary.ID{0xc0, 0xe0, 0x7a, 0x20, 0x55, 0xe0, 0x43, 0xb8, 0xbb, 0x26, 0xaa, 0xdb, 0x40, 0x24, 0x69, 0xb5, 0x6c, 0xf9, 0x25, 0xea}, &GlGetFramebufferAttachmentParameteriv_In{})
+	//struct gles.GlGetFramebufferAttachmentParameteriv_In { FramebufferTarget:FramebufferTarget, Attachment:FramebufferAttachment, Parameter:FramebufferAttachmentParameter }
+	registry.Add(binary.ID{0xe4, 0x1b, 0x42, 0x03, 0x2b, 0x50, 0x5f, 0xad, 0x04, 0x8a, 0xf5, 0x0b, 0x4a, 0xf7, 0x18, 0x79, 0x8b, 0x36, 0x34, 0x4c}, &GlGetFramebufferAttachmentParameteriv_In{})
 	//struct gles.GlGetFramebufferAttachmentParameteriv_Out { Value:S32Array }
 	registry.Add(binary.ID{0xa3, 0xed, 0x99, 0xa9, 0x58, 0xa1, 0x04, 0xd2, 0xca, 0x19, 0x6a, 0x6f, 0xaf, 0x71, 0xc2, 0x5a, 0x1a, 0x58, 0x91, 0x2f}, &GlGetFramebufferAttachmentParameteriv_Out{})
 	//struct gles.GlGetGraphicsResetStatusEXT { Context:atom.ContextID, In:GlGetGraphicsResetStatusEXT_In, Out:GlGetGraphicsResetStatusEXT_Out }
@@ -1127,8 +1127,8 @@ func init() {
 	registry.Add(binary.ID{0x15, 0x79, 0x27, 0x7e, 0xf1, 0x46, 0x91, 0x84, 0x9f, 0x37, 0x06, 0x40, 0x16, 0x6b, 0xc0, 0x91, 0x0d, 0x6d, 0x98, 0x61}, &GlVertexAttrib4fv_Out{})
 	//struct gles.GlVertexAttribPointer { Context:atom.ContextID, In:GlVertexAttribPointer_In, Out:GlVertexAttribPointer_Out }
 	registry.Add(binary.ID{0x96, 0x59, 0xc0, 0xe4, 0xa1, 0x19, 0x7e, 0x40, 0x67, 0x2e, 0x56, 0xa5, 0xc4, 0x9d, 0xac, 0xbf, 0xa2, 0x05, 0x07, 0x17}, &GlVertexAttribPointer{})
-	//struct gles.GlVertexAttribPointer_In { Location:AttributeLocation, Size:VertexAttribSize, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:VertexPointer }
-	registry.Add(binary.ID{0x48, 0x33, 0xf8, 0x52, 0x50, 0x06, 0xf0, 0xfc, 0xa4, 0x7e, 0x73, 0x37, 0x29, 0x1f, 0x40, 0x61, 0x3c, 0x14, 0x20, 0xca}, &GlVertexAttribPointer_In{})
+	//struct gles.GlVertexAttribPointer_In { Location:AttributeLocation, Size:int32, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:VertexPointer }
+	registry.Add(binary.ID{0x9c, 0xe1, 0xb1, 0x13, 0x47, 0x9e, 0x71, 0x27, 0xcd, 0x06, 0x70, 0xd0, 0x10, 0xf6, 0x90, 0x33, 0x9b, 0xe1, 0xb2, 0xe6}, &GlVertexAttribPointer_In{})
 	//struct gles.GlVertexAttribPointer_Out { }
 	registry.Add(binary.ID{0x9c, 0x5e, 0xd0, 0x73, 0xcf, 0x2d, 0x7a, 0xe1, 0x5e, 0x9a, 0x37, 0x64, 0x8e, 0x56, 0x08, 0x43, 0xde, 0x0e, 0x07, 0x7d}, &GlVertexAttribPointer_Out{})
 	//struct gles.GlViewport { Context:atom.ContextID, In:GlViewport_In, Out:GlViewport_Out }
@@ -1203,8 +1203,8 @@ func init() {
 	registry.Add(binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}, &VertexArray{})
 	//struct gles.VertexAttribute { CreatedAt:atom.ID, Name:string, VectorCount:int32, Type:ShaderAttribType }
 	registry.Add(binary.ID{0xfd, 0x98, 0xd6, 0x90, 0x60, 0x52, 0x6f, 0xa2, 0x9c, 0x21, 0xde, 0xa1, 0x72, 0xe6, 0x53, 0x6b, 0x3e, 0x76, 0x01, 0xd4}, &VertexAttribute{})
-	//struct gles.VertexAttributeArray { CreatedAt:atom.ID, Enabled:bool, Size:VertexAttribSize, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:memory.Pointer }
-	registry.Add(binary.ID{0x7f, 0x9b, 0xc8, 0x0b, 0xa0, 0x98, 0xaa, 0x09, 0xa2, 0xff, 0x40, 0x0d, 0xc4, 0x89, 0x6c, 0x89, 0x77, 0x5b, 0x66, 0x31}, &VertexAttributeArray{})
+	//struct gles.VertexAttributeArray { CreatedAt:atom.ID, Enabled:bool, Size:int32, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:memory.Pointer }
+	registry.Add(binary.ID{0xe3, 0x60, 0xc4, 0x18, 0x4a, 0x52, 0x23, 0x65, 0xc3, 0xc9, 0x59, 0x67, 0x6b, 0x4e, 0xba, 0xa6, 0x3e, 0xa4, 0x8a, 0xf2}, &VertexAttributeArray{})
 }
 
 func (o BlendState) Encode(e binary.Encoder) error {
@@ -2005,7 +2005,7 @@ func (o GlBindAttribLocation_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.String(o.Name); err != nil {
@@ -2020,7 +2020,7 @@ func (o *GlBindAttribLocation_In) Decode(d binary.Decoder) error {
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -4898,14 +4898,14 @@ func (o *GlDisableVertexAttribArray) Decode(d binary.Decoder) error {
 }
 
 func (o GlDisableVertexAttribArray_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *GlDisableVertexAttribArray_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -5398,14 +5398,14 @@ func (o *GlEnableVertexAttribArray) Decode(d binary.Decoder) error {
 }
 
 func (o GlEnableVertexAttribArray_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *GlEnableVertexAttribArray_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -6489,7 +6489,7 @@ func (o GlGetActiveAttrib_In) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Program)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(o.BufferSize); err != nil {
@@ -6504,7 +6504,7 @@ func (o *GlGetActiveAttrib_In) Decode(d binary.Decoder) error {
 	} else {
 		o.Program = ProgramId(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -6798,14 +6798,14 @@ func (o *GlGetAttribLocation_In) Decode(d binary.Decoder) error {
 }
 
 func (o GlGetAttribLocation_Out) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Result)); err != nil {
+	if err := e.Uint32(uint32(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *GlGetAttribLocation_Out) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Result = AttributeLocation(obj)
@@ -7106,7 +7106,7 @@ func (o *GlGetFramebufferAttachmentParameteriv) Decode(d binary.Decoder) error {
 }
 
 func (o GlGetFramebufferAttachmentParameteriv_In) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(o.Target)); err != nil {
+	if err := e.Uint32(uint32(o.FramebufferTarget)); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Attachment)); err != nil {
@@ -7122,7 +7122,7 @@ func (o *GlGetFramebufferAttachmentParameteriv_In) Decode(d binary.Decoder) erro
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = FramebufferTarget(obj)
+		o.FramebufferTarget = FramebufferTarget(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -13746,7 +13746,7 @@ func (o *GlVertexAttrib1f) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib1f_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -13756,7 +13756,7 @@ func (o GlVertexAttrib1f_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib1f_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -13806,7 +13806,7 @@ func (o *GlVertexAttrib1fv) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib1fv_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(len(o.Value))); err != nil {
@@ -13821,7 +13821,7 @@ func (o GlVertexAttrib1fv_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib1fv_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -13878,7 +13878,7 @@ func (o *GlVertexAttrib2f) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib2f_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -13891,7 +13891,7 @@ func (o GlVertexAttrib2f_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib2f_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -13946,7 +13946,7 @@ func (o *GlVertexAttrib2fv) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib2fv_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(len(o.Value))); err != nil {
@@ -13961,7 +13961,7 @@ func (o GlVertexAttrib2fv_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib2fv_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -14018,7 +14018,7 @@ func (o *GlVertexAttrib3f) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib3f_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -14034,7 +14034,7 @@ func (o GlVertexAttrib3f_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib3f_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -14094,7 +14094,7 @@ func (o *GlVertexAttrib3fv) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib3fv_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(len(o.Value))); err != nil {
@@ -14109,7 +14109,7 @@ func (o GlVertexAttrib3fv_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib3fv_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -14166,7 +14166,7 @@ func (o *GlVertexAttrib4f) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib4f_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Float32(o.Value0); err != nil {
@@ -14185,7 +14185,7 @@ func (o GlVertexAttrib4f_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib4f_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -14250,7 +14250,7 @@ func (o *GlVertexAttrib4fv) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttrib4fv_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
 	if err := e.Int32(int32(len(o.Value))); err != nil {
@@ -14265,7 +14265,7 @@ func (o GlVertexAttrib4fv_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttrib4fv_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
@@ -14322,10 +14322,10 @@ func (o *GlVertexAttribPointer) Decode(d binary.Decoder) error {
 }
 
 func (o GlVertexAttribPointer_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(o.Location)); err != nil {
+	if err := e.Uint32(uint32(o.Location)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Size)); err != nil {
+	if err := e.Int32(o.Size); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Type)); err != nil {
@@ -14344,15 +14344,15 @@ func (o GlVertexAttribPointer_In) Encode(e binary.Encoder) error {
 }
 
 func (o *GlVertexAttribPointer_In) Decode(d binary.Decoder) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Location = AttributeLocation(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.Size = VertexAttribSize(obj)
+		o.Size = int32(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
@@ -14514,7 +14514,7 @@ func (o Globals) Encode(e binary.Encoder) error {
 		return err
 	}
 	for k, v := range o.VertexAttributeArrays {
-		if err := e.Int32(int32(k)); err != nil {
+		if err := e.Uint32(uint32(k)); err != nil {
 			return err
 		}
 		if v != nil {
@@ -14672,7 +14672,7 @@ func (o *Globals) Decode(d binary.Decoder) error {
 		for i := int32(0); i < count; i++ {
 			var k AttributeLocation
 			var v *VertexAttributeArray
-			if obj, err := d.Int32(); err != nil {
+			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
 				k = AttributeLocation(obj)
@@ -15421,7 +15421,7 @@ func (o Program) Encode(e binary.Encoder) error {
 		if err := e.String(k); err != nil {
 			return err
 		}
-		if err := e.Int32(int32(v)); err != nil {
+		if err := e.Uint32(uint32(v)); err != nil {
 			return err
 		}
 	}
@@ -15501,7 +15501,7 @@ func (o *Program) Decode(d binary.Decoder) error {
 			} else {
 				k = string(obj)
 			}
-			if obj, err := d.Int32(); err != nil {
+			if obj, err := d.Uint32(); err != nil {
 				return err
 			} else {
 				v = AttributeLocation(obj)
@@ -16622,7 +16622,7 @@ func (o VertexAttributeArray) Encode(e binary.Encoder) error {
 	if err := e.Bool(o.Enabled); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.Size)); err != nil {
+	if err := e.Int32(o.Size); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(o.Type)); err != nil {
@@ -16651,10 +16651,10 @@ func (o *VertexAttributeArray) Decode(d binary.Decoder) error {
 	} else {
 		o.Enabled = bool(obj)
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
-		o.Size = VertexAttribSize(obj)
+		o.Size = int32(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err

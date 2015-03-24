@@ -68,7 +68,7 @@ public:
     inline void glBlendColor(void (__stdcall *F)(float, float, float, float), float red, float green, float blue, float alpha);
     inline void glEnableVertexAttribArray(void (__stdcall *F)(AttributeLocation), AttributeLocation location);
     inline void glDisableVertexAttribArray(void (__stdcall *F)(AttributeLocation), AttributeLocation location);
-    inline void glVertexAttribPointer(void (__stdcall *F)(AttributeLocation, VertexAttribSize, VertexAttribType, bool, int32_t, VertexPointer), AttributeLocation location, VertexAttribSize size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data);
+    inline void glVertexAttribPointer(void (__stdcall *F)(AttributeLocation, int32_t, VertexAttribType, bool, int32_t, VertexPointer), AttributeLocation location, int32_t size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data);
     inline void glGetActiveAttrib(void (__stdcall *F)(ProgramId, AttributeLocation, int32_t, int32_t*, int32_t*, ShaderAttribType*, const char*), ProgramId program, AttributeLocation location, int32_t buffer_size, int32_t* buffer_bytes_written, int32_t* vector_count, ShaderAttribType* type, const char* name);
     inline void glGetActiveUniform(void (__stdcall *F)(ProgramId, int32_t, int32_t, int32_t*, int32_t*, ShaderUniformType*, const char*), ProgramId program, int32_t location, int32_t buffer_size, int32_t* buffer_bytes_written, int32_t* size, ShaderUniformType* type, const char* name);
     inline Error glGetError(Error (__stdcall *F)());
@@ -183,7 +183,7 @@ public:
     inline void glHint(void (__stdcall *F)(HintTarget, HintMode), HintTarget target, HintMode mode);
     inline void glFramebufferRenderbuffer(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, RenderbufferTarget, RenderbufferId), FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, RenderbufferTarget renderbuffer_target, RenderbufferId renderbuffer);
     inline void glFramebufferTexture2D(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, TextureImageTarget, TextureId, int32_t), FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, TextureImageTarget texture_target, TextureId texture, int32_t level);
-    inline void glGetFramebufferAttachmentParameteriv(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, FramebufferAttachmentParameter, int32_t*), FramebufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value);
+    inline void glGetFramebufferAttachmentParameteriv(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, FramebufferAttachmentParameter, int32_t*), FramebufferTarget framebuffer_target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value);
     inline void glDrawElements(void (__stdcall *F)(DrawMode, int32_t, IndicesType, IndicesPointer), DrawMode draw_mode, int32_t element_count, IndicesType indices_type, IndicesPointer indices);
     inline void glDrawArrays(void (__stdcall *F)(DrawMode, int32_t, int32_t), DrawMode draw_mode, int32_t first_index, int32_t index_count);
     inline void glFlush(void (__stdcall *F)());
@@ -782,7 +782,7 @@ inline void Spy::glBindAttribLocation(void (__stdcall *F)(ProgramId, AttributeLo
     mEncoder->U16(30); // Type ID -- TODO: mEncoder->Id(GL_BIND_ATTRIB_LOCATION_ID);
     mEncoder->U32(mContextId);
     mEncoder->U32(program);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->String(name);
 }
 
@@ -845,7 +845,7 @@ inline void Spy::glEnableVertexAttribArray(void (__stdcall *F)(AttributeLocation
 
     mEncoder->U16(36); // Type ID -- TODO: mEncoder->Id(GL_ENABLE_VERTEX_ATTRIB_ARRAY_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
 }
 
 inline void Spy::glDisableVertexAttribArray(void (__stdcall *F)(AttributeLocation), AttributeLocation location) {
@@ -854,17 +854,17 @@ inline void Spy::glDisableVertexAttribArray(void (__stdcall *F)(AttributeLocatio
 
     mEncoder->U16(37); // Type ID -- TODO: mEncoder->Id(GL_DISABLE_VERTEX_ATTRIB_ARRAY_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
 }
 
-inline void Spy::glVertexAttribPointer(void (__stdcall *F)(AttributeLocation, VertexAttribSize, VertexAttribType, bool, int32_t, VertexPointer), AttributeLocation location, VertexAttribSize size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data) {
+inline void Spy::glVertexAttribPointer(void (__stdcall *F)(AttributeLocation, int32_t, VertexAttribType, bool, int32_t, VertexPointer), AttributeLocation location, int32_t size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data) {
     F(location, size, type, normalized, stride, data);
     mState.glVertexAttribPointer(location, size, type, normalized, stride, data);
 
     mEncoder->U16(38); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB_POINTER_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
-    mEncoder->U32(static_cast<uint32_t>(size));
+    mEncoder->U32(location);
+    mEncoder->S32(size);
     mEncoder->U32(static_cast<uint32_t>(type));
     mEncoder->Bool(normalized);
     mEncoder->S32(stride);
@@ -878,7 +878,7 @@ inline void Spy::glGetActiveAttrib(void (__stdcall *F)(ProgramId, AttributeLocat
     mEncoder->U16(39); // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
     mEncoder->U32(mContextId);
     mEncoder->U32(program);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->S32(buffer_size);
     mEncoder->S32(*buffer_bytes_written);
     mEncoder->S32(*vector_count);
@@ -955,7 +955,7 @@ inline AttributeLocation Spy::glGetAttribLocation(AttributeLocation (__stdcall *
     mEncoder->U32(mContextId);
     mEncoder->U32(program);
     mEncoder->String(name);
-    mEncoder->S32(result);
+    mEncoder->U32(result);
 
     return result;
 }
@@ -1258,7 +1258,7 @@ inline void Spy::glVertexAttrib1f(void (__stdcall *F)(AttributeLocation, float),
 
     mEncoder->U16(72); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1F_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->F32(value0);
 }
 
@@ -1268,7 +1268,7 @@ inline void Spy::glVertexAttrib2f(void (__stdcall *F)(AttributeLocation, float, 
 
     mEncoder->U16(73); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2F_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->F32(value0);
     mEncoder->F32(value1);
 }
@@ -1279,7 +1279,7 @@ inline void Spy::glVertexAttrib3f(void (__stdcall *F)(AttributeLocation, float, 
 
     mEncoder->U16(74); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3F_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->F32(value0);
     mEncoder->F32(value1);
     mEncoder->F32(value2);
@@ -1291,7 +1291,7 @@ inline void Spy::glVertexAttrib4f(void (__stdcall *F)(AttributeLocation, float, 
 
     mEncoder->U16(75); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4F_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->F32(value0);
     mEncoder->F32(value1);
     mEncoder->F32(value2);
@@ -1304,7 +1304,7 @@ inline void Spy::glVertexAttrib1fv(void (__stdcall *F)(AttributeLocation, float*
 
     mEncoder->U16(76); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB1FV_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->U64(reinterpret_cast<uint64_t>(value));
 }
 
@@ -1314,7 +1314,7 @@ inline void Spy::glVertexAttrib2fv(void (__stdcall *F)(AttributeLocation, float*
 
     mEncoder->U16(77); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB2FV_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->U64(reinterpret_cast<uint64_t>(value));
 }
 
@@ -1324,7 +1324,7 @@ inline void Spy::glVertexAttrib3fv(void (__stdcall *F)(AttributeLocation, float*
 
     mEncoder->U16(78); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB3FV_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->U64(reinterpret_cast<uint64_t>(value));
 }
 
@@ -1334,7 +1334,7 @@ inline void Spy::glVertexAttrib4fv(void (__stdcall *F)(AttributeLocation, float*
 
     mEncoder->U16(79); // Type ID -- TODO: mEncoder->Id(GL_VERTEX_ATTRIB4FV_ID);
     mEncoder->U32(mContextId);
-    mEncoder->S32(location);
+    mEncoder->U32(location);
     mEncoder->U64(reinterpret_cast<uint64_t>(value));
 }
 
@@ -2154,13 +2154,13 @@ inline void Spy::glFramebufferTexture2D(void (__stdcall *F)(FramebufferTarget, F
     mEncoder->S32(level);
 }
 
-inline void Spy::glGetFramebufferAttachmentParameteriv(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, FramebufferAttachmentParameter, int32_t*), FramebufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value) {
-    F(target, attachment, parameter, value);
-    mState.glGetFramebufferAttachmentParameteriv(target, attachment, parameter, value);
+inline void Spy::glGetFramebufferAttachmentParameteriv(void (__stdcall *F)(FramebufferTarget, FramebufferAttachment, FramebufferAttachmentParameter, int32_t*), FramebufferTarget framebuffer_target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value) {
+    F(framebuffer_target, attachment, parameter, value);
+    mState.glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
 
     mEncoder->U16(153); // Type ID -- TODO: mEncoder->Id(GL_GET_FRAMEBUFFER_ATTACHMENT_PARAMETERIV_ID);
     mEncoder->U32(mContextId);
-    mEncoder->U32(static_cast<uint32_t>(target));
+    mEncoder->U32(static_cast<uint32_t>(framebuffer_target));
     mEncoder->U32(static_cast<uint32_t>(attachment));
     mEncoder->U32(static_cast<uint32_t>(parameter));
     mEncoder->U64(reinterpret_cast<uint64_t>(value));

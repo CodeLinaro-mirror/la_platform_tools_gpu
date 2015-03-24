@@ -51,7 +51,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 1,
@@ -262,7 +262,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "preserveMask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -277,7 +277,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "preserve_mask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -726,7 +726,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -861,7 +861,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 		},
@@ -876,7 +876,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 		},
@@ -891,12 +891,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "size",
-				Type: s.getEnumInfo(76),
+				Type: schema.S32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -936,7 +936,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1121,7 +1121,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "result",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  true,
 			},
 		},
@@ -1816,7 +1816,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1836,7 +1836,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1861,7 +1861,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1891,7 +1891,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1926,7 +1926,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1946,7 +1946,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1966,7 +1966,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1986,7 +1986,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "location",
-				Type: schema.S32,
+				Type: schema.U32,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3615,7 +3615,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(87),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 		},
@@ -3784,7 +3784,7 @@ func init() {
 		Name: "glGetFramebufferAttachmentParameteriv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
-				Name: "target",
+				Name: "framebuffer_target",
 				Type: s.getEnumInfo(24),
 				Out:  false,
 			},
@@ -4033,7 +4033,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "access",
-				Type: s.getEnumInfo(88),
+				Type: s.getEnumInfo(87),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4168,7 +4168,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(87),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4208,7 +4208,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4228,7 +4228,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4283,12 +4283,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(79),
+				Type: s.getEnumInfo(78),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4313,7 +4313,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4353,7 +4353,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4373,7 +4373,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4433,7 +4433,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4448,12 +4448,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(79),
+				Type: s.getEnumInfo(78),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4478,7 +4478,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4503,7 +4503,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4528,7 +4528,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4553,7 +4553,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4701,7 +4701,7 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateMapInfo("AttributeLocation_stringMap", service.TypeKindMap, schema.String, schema.S32)
+		e = service.CreateMapInfo("AttributeLocation_stringMap", service.TypeKindMap, schema.String, schema.U32)
 	case 1:
 		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
 	case 2:
@@ -4747,7 +4747,7 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 22:
 		e = service.CreateMapInfo("VertexArrayRef_VertexArrayIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(24))
 	case 23:
-		e = service.CreateMapInfo("VertexAttributeArrayRef_AttributeLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(25))
+		e = service.CreateMapInfo("VertexAttributeArrayRef_AttributeLocationMap", service.TypeKindMap, schema.U32, s.getClassInfo(25))
 	case 24:
 		e = service.CreateMapInfo("VertexAttribute_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(11))
 	}
@@ -4989,8 +4989,16 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 6402,
 				},
 				service.EnumEntry{
+					Name:  "GL_DEPTH_COMPONENT16",
+					Value: 33189,
+				},
+				service.EnumEntry{
 					Name:  "GL_DEPTH_STENCIL",
 					Value: 34041,
+				},
+				service.EnumEntry{
+					Name:  "GL_DEPTH24_STENCIL8",
+					Value: 35056,
 				},
 			},
 			service.EnumInfoArray{},
@@ -5111,6 +5119,18 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5121,
 				},
 				service.EnumEntry{
+					Name:  "GL_UNSIGNED_SHORT",
+					Value: 5123,
+				},
+				service.EnumEntry{
+					Name:  "GL_UNSIGNED_INT",
+					Value: 5125,
+				},
+				service.EnumEntry{
+					Name:  "GL_FLOAT",
+					Value: 5126,
+				},
+				service.EnumEntry{
 					Name:  "GL_UNSIGNED_SHORT_4_4_4_4",
 					Value: 32819,
 				},
@@ -5123,8 +5143,8 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 33635,
 				},
 				service.EnumEntry{
-					Name:  "GL_FLOAT",
-					Value: 5126,
+					Name:  "GL_UNSIGNED_INT_24_8",
+					Value: 34042,
 				},
 			},
 			service.EnumInfoArray{},
@@ -6877,30 +6897,6 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 		)
 	case 76:
 		e = service.CreateEnumInfo(
-			"VertexAttribSize",
-			service.TypeKindEnum,
-			[]service.EnumEntry{
-				service.EnumEntry{
-					Name:  "SIZE_1",
-					Value: 1,
-				},
-				service.EnumEntry{
-					Name:  "SIZE_2",
-					Value: 2,
-				},
-				service.EnumEntry{
-					Name:  "SIZE_3",
-					Value: 3,
-				},
-				service.EnumEntry{
-					Name:  "SIZE_4",
-					Value: 4,
-				},
-			},
-			service.EnumInfoArray{},
-		)
-	case 77:
-		e = service.CreateEnumInfo(
 			"QueryParameter_GLES_3",
 			service.TypeKindEnum,
 			[]service.EnumEntry{
@@ -6911,7 +6907,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 78:
+	case 77:
 		e = service.CreateEnumInfo(
 			"QueryParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -6923,17 +6919,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 79:
+	case 78:
 		e = service.CreateEnumInfo(
 			"QueryParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(76),
 				s.getEnumInfo(77),
-				s.getEnumInfo(78),
 			},
 		)
-	case 80:
+	case 79:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_GLES_3",
 			service.TypeKindEnum,
@@ -6949,24 +6945,24 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 81:
+	case 80:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{},
 		)
-	case 82:
+	case 81:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(79),
 				s.getEnumInfo(80),
-				s.getEnumInfo(81),
 			},
 		)
-	case 83:
+	case 82:
 		e = service.CreateEnumInfo(
 			"QueryTarget_GLES_3",
 			service.TypeKindEnum,
@@ -6986,7 +6982,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 84:
+	case 83:
 		e = service.CreateEnumInfo(
 			"QueryTarget_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -7002,17 +6998,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 85:
+	case 84:
 		e = service.CreateEnumInfo(
 			"QueryTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(82),
 				s.getEnumInfo(83),
-				s.getEnumInfo(84),
 			},
 		)
-	case 86:
+	case 85:
 		e = service.CreateEnumInfo(
 			"TilePreserveMaskQCOM",
 			service.TypeKindEnum,
@@ -7148,7 +7144,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 87:
+	case 86:
 		e = service.CreateEnumInfo(
 			"ClearMask",
 			service.TypeKindEnum,
@@ -7168,7 +7164,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 88:
+	case 87:
 		e = service.CreateEnumInfo(
 			"MapBufferRangeAccess",
 			service.TypeKindEnum,
@@ -7807,7 +7803,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Size",
-					Type: s.getEnumInfo(76),
+					Type: schema.S32,
 				},
 				&service.FieldInfo{
 					Name: "Type",

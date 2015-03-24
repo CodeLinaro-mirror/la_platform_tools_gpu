@@ -12,19 +12,22 @@ type State struct {
 }
 
 func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (width, height uint32, err error) {
-	framebufferID := s.BoundFramebuffers[FramebufferTarget_GL_FRAMEBUFFER]
+	framebufferID := s.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
 
 	framebuffer, ok := s.Instances.Framebuffers[framebufferID]
 	if !ok {
 		return 0, 0, fmt.Errorf("No GL_FRAMEBUFFER bound")
 	}
 
-	attachment, ok := map[state.FramebufferAttachment]FramebufferAttachment{
-		state.FramebufferAttachmentColor:   FramebufferAttachment_GL_COLOR_ATTACHMENT0,
-		state.FramebufferAttachmentDepth:   FramebufferAttachment_GL_DEPTH_ATTACHMENT,
-		state.FramebufferAttachmentStencil: FramebufferAttachment_GL_STENCIL_ATTACHMENT,
-	}[att]
-	if !ok {
+	var attachment FramebufferAttachment
+	switch att {
+	case state.FramebufferAttachmentColor:
+		attachment = FramebufferAttachment_GL_COLOR_ATTACHMENT0
+	case state.FramebufferAttachmentDepth:
+		attachment = FramebufferAttachment_GL_DEPTH_ATTACHMENT
+	case state.FramebufferAttachmentStencil:
+		attachment = FramebufferAttachment_GL_STENCIL_ATTACHMENT
+	default:
 		return 0, 0, fmt.Errorf("Framebuffer attachment %v unsupported by gles", att)
 	}
 

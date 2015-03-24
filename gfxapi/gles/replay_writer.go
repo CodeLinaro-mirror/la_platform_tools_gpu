@@ -79,7 +79,7 @@ var funcInfoGlGetError = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeU
 var funcInfoGlGetProgramiv = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetShaderiv = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlGetUniformLocation = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeInt32, Parameters: 2}
-var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeInt32, Parameters: 2}
+var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeUint32, Parameters: 2}
 var funcInfoGlPixelStorei = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 2}
 var funcInfoGlTexParameteri = builder.FunctionInfo{ID: 47, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoGlTexParameterf = builder.FunctionInfo{ID: 48, ReturnType: protocol.TypeVoid, Parameters: 3}
@@ -251,7 +251,7 @@ func (c UniformLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.S
 	return value.S32(int32(c))
 }
 func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
-	return value.S32(int32(c))
+	return value.U32(uint32(c))
 }
 func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
@@ -645,8 +645,8 @@ type GlGetAttribLocation_Postback struct {
 
 func (o *GlGetAttribLocation_Postback) Decode(d *protocol.Decoder) error {
 	{
-		var x int32
-		if v, err := d.Int32(); err == nil {
+		var x uint32
+		if v, err := d.Uint32(); err == nil {
 			x = v
 		} else {
 			return err
@@ -1788,7 +1788,7 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *state.State, ϟb
 var _ = replay.Replayer(&GlVertexAttribPointer{}) // interface compliance check
 func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.U32(ϟa.In.Size))
+	ϟb.Push(value.S32(ϟa.In.Size))
 	ϟb.Push(value.U32(ϟa.In.Type))
 	ϟb.Push(value.Bool(ϟa.In.Normalized))
 	ϟb.Push(value.S32(ϟa.In.Stride))
@@ -3523,7 +3523,7 @@ var _ = replay.Replayer(&GlGetFramebufferAttachmentParameteriv{}) // interface c
 func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	value_cnt := uint64(1)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.In.Attachment))
 	ϟb.Push(value.U32(ϟa.In.Parameter))
 	ϟb.Push(outputs[0]) // value

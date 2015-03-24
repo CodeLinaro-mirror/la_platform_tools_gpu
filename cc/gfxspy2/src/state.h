@@ -64,7 +64,7 @@ public:
     inline void glBlendColor(float red, float green, float blue, float alpha);
     inline void glEnableVertexAttribArray(AttributeLocation location);
     inline void glDisableVertexAttribArray(AttributeLocation location);
-    inline void glVertexAttribPointer(AttributeLocation location, VertexAttribSize size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data);
+    inline void glVertexAttribPointer(AttributeLocation location, int32_t size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data);
     inline void glGetActiveAttrib(ProgramId program, AttributeLocation location, int32_t buffer_size, int32_t buffer_bytes_written, int32_t vector_count, ShaderAttribType type, const char* name);
     inline void glGetActiveUniform(ProgramId program, int32_t location, int32_t buffer_size, int32_t buffer_bytes_written, int32_t size, ShaderUniformType type, const char* name);
     inline void glGetError(Error result);
@@ -179,7 +179,7 @@ public:
     inline void glHint(HintTarget target, HintMode mode);
     inline void glFramebufferRenderbuffer(FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, RenderbufferTarget renderbuffer_target, RenderbufferId renderbuffer);
     inline void glFramebufferTexture2D(FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, TextureImageTarget texture_target, TextureId texture, int32_t level);
-    inline void glGetFramebufferAttachmentParameteriv(FramebufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value);
+    inline void glGetFramebufferAttachmentParameteriv(FramebufferTarget framebuffer_target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value);
     inline void glDrawElements(DrawMode draw_mode, int32_t element_count, IndicesType indices_type, IndicesPointer indices);
     inline void glDrawArrays(DrawMode draw_mode, int32_t first_index, int32_t index_count);
     inline void glFlush();
@@ -429,7 +429,7 @@ inline void State::glDisableVertexAttribArray(AttributeLocation location) {
     a->Enabled = false;
 }
 
-inline void State::glVertexAttribPointer(AttributeLocation location, VertexAttribSize size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data) {
+inline void State::glVertexAttribPointer(AttributeLocation location, int32_t size, VertexAttribType type, bool normalized, int32_t stride, VertexPointer data) {
     std::shared_ptr<VertexAttributeArray> a = this->VertexAttributeArrays[location];
     a->Size = size;
     a->Type = type;
@@ -994,7 +994,12 @@ inline void State::glBindFramebuffer(FramebufferTarget target, FramebufferId fra
     if (this->Instances.Framebuffers.count(framebuffer) > 0 == false) {
         this->Instances.Framebuffers[framebuffer] = std::shared_ptr<Framebuffer>(new Framebuffer());
     }
-    this->BoundFramebuffers[target] = framebuffer;
+    if (target == FramebufferTarget::GL_FRAMEBUFFER) {
+        this->BoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = framebuffer;
+        this->BoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = framebuffer;
+    } else {
+        this->BoundFramebuffers[target] = framebuffer;
+    }
 }
 
 inline void State::glCheckFramebufferStatus(FramebufferTarget target, FramebufferStatus result) {
@@ -1245,7 +1250,12 @@ inline void State::glHint(HintTarget target, HintMode mode) {
 }
 
 inline void State::glFramebufferRenderbuffer(FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, RenderbufferTarget renderbuffer_target, RenderbufferId renderbuffer) {
-    FramebufferId framebufferId = this->BoundFramebuffers[framebuffer_target];
+    FramebufferTarget target = /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER)) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ FramebufferTarget();
+    FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.Framebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->Attachments[framebuffer_attachment];
     if (renderbuffer == this->Internals.NilRenderbuffer) {
@@ -1260,7 +1270,12 @@ inline void State::glFramebufferRenderbuffer(FramebufferTarget framebuffer_targe
 }
 
 inline void State::glFramebufferTexture2D(FramebufferTarget framebuffer_target, FramebufferAttachment framebuffer_attachment, TextureImageTarget texture_target, TextureId texture, int32_t level) {
-    FramebufferId framebufferId = this->BoundFramebuffers[framebuffer_target];
+    FramebufferTarget target = /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER)) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ FramebufferTarget();
+    FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.Framebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->Attachments[framebuffer_attachment];
     if (texture == this->Internals.NilTexture) {
@@ -1268,8 +1283,7 @@ inline void State::glFramebufferTexture2D(FramebufferTarget framebuffer_target, 
         attachment.Object = static_cast<uint32_t>(this->Internals.NilTexture);
         attachment.TextureLevel = 0;
         attachment.CubeMapFace = CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-    }
-    if (texture != this->Internals.NilTexture) {
+    } else {
         attachment.Type = FramebufferAttachmentType::GL_TEXTURE;
         attachment.Object = static_cast<uint32_t>(texture);
         attachment.TextureLevel = level;
@@ -1286,7 +1300,12 @@ inline void State::glFramebufferTexture2D(FramebufferTarget framebuffer_target, 
     framebuffer->Attachments[framebuffer_attachment] = attachment;
 }
 
-inline void State::glGetFramebufferAttachmentParameteriv(FramebufferTarget target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value) {
+inline void State::glGetFramebufferAttachmentParameteriv(FramebufferTarget framebuffer_target, FramebufferAttachment attachment, FramebufferAttachmentParameter parameter, int32_t* value) {
+    FramebufferTarget target = /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER)) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */((framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER)) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ FramebufferTarget();
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.Framebuffers[framebufferId];
     FramebufferAttachmentInfo a = framebuffer->Attachments[attachment];

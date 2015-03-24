@@ -1710,7 +1710,12 @@ func (ϟa *GlBindFramebuffer) Mutate(ϟs *state.State) error {
 			return s
 		}()
 	}
-	ϟc.BoundFramebuffers[ϟa.In.Target] = ϟa.In.Framebuffer
+	if (ϟa.In.Target) == (FramebufferTarget_GL_FRAMEBUFFER) {
+		ϟc.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = ϟa.In.Framebuffer
+		ϟc.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = ϟa.In.Framebuffer
+	} else {
+		ϟc.BoundFramebuffers[ϟa.In.Target] = ϟa.In.Framebuffer
+	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glBindFramebuffer expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -2302,7 +2307,21 @@ func (ϟa *GlHint) Mutate(ϟs *state.State) error {
 func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlFramebufferRenderbuffer_Out{}
-	framebufferId := ϟc.BoundFramebuffers.Get(ϟa.In.FramebufferTarget)     // FramebufferId
+	target := func() (result FramebufferTarget) {
+		switch ϟa.In.FramebufferTarget {
+		case FramebufferTarget_GL_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_READ_FRAMEBUFFER:
+			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		default:
+			// TODO: better unmatched handling
+			log.Panicf("Unmatched switch in capture")
+			return result
+		}
+	}() // FramebufferTarget
+	framebufferId := ϟc.BoundFramebuffers.Get(target)                      // FramebufferId
 	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferRef
 	attachment := framebuffer.Attachments.Get(ϟa.In.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.In.Renderbuffer) == (ϟc.Internals.NilRenderbuffer) {
@@ -2314,7 +2333,7 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 	attachment.TextureLevel = 0
 	attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	framebuffer.Attachments[ϟa.In.FramebufferAttachment] = attachment
-	_, _, _ = framebufferId, framebuffer, attachment
+	_, _, _, _ = target, framebufferId, framebuffer, attachment
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glFramebufferRenderbuffer expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -2323,7 +2342,21 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlFramebufferTexture2D_Out{}
-	framebufferId := ϟc.BoundFramebuffers.Get(ϟa.In.FramebufferTarget)     // FramebufferId
+	target := func() (result FramebufferTarget) {
+		switch ϟa.In.FramebufferTarget {
+		case FramebufferTarget_GL_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_READ_FRAMEBUFFER:
+			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		default:
+			// TODO: better unmatched handling
+			log.Panicf("Unmatched switch in capture")
+			return result
+		}
+	}() // FramebufferTarget
+	framebufferId := ϟc.BoundFramebuffers.Get(target)                      // FramebufferId
 	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferRef
 	attachment := framebuffer.Attachments.Get(ϟa.In.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.In.Texture) == (ϟc.Internals.NilTexture) {
@@ -2331,8 +2364,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 		attachment.Object = uint32(ϟc.Internals.NilTexture)
 		attachment.TextureLevel = 0
 		attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
-	}
-	if (ϟa.In.Texture) != (ϟc.Internals.NilTexture) {
+	} else {
 		attachment.Type = FramebufferAttachmentType_GL_TEXTURE
 		attachment.Object = uint32(ϟa.In.Texture)
 		attachment.TextureLevel = ϟa.In.Level
@@ -2360,7 +2392,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 		}()
 	}
 	framebuffer.Attachments[ϟa.In.FramebufferAttachment] = attachment
-	_, _, _ = framebufferId, framebuffer, attachment
+	_, _, _, _ = target, framebufferId, framebuffer, attachment
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glFramebufferTexture2D expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -2370,7 +2402,21 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetFramebufferAttachmentParameteriv_Out{}
 	ϟo.Value = make(S32Array, 1)
-	framebufferId := ϟc.BoundFramebuffers.Get(ϟa.In.Target)     // FramebufferId
+	target := func() (result FramebufferTarget) {
+		switch ϟa.In.FramebufferTarget {
+		case FramebufferTarget_GL_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_DRAW_FRAMEBUFFER:
+			return FramebufferTarget_GL_DRAW_FRAMEBUFFER
+		case FramebufferTarget_GL_READ_FRAMEBUFFER:
+			return FramebufferTarget_GL_READ_FRAMEBUFFER
+		default:
+			// TODO: better unmatched handling
+			log.Panicf("Unmatched switch in capture")
+			return result
+		}
+	}() // FramebufferTarget
+	framebufferId := ϟc.BoundFramebuffers.Get(target)           // FramebufferId
 	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId) // FramebufferRef
 	a := framebuffer.Attachments.Get(ϟa.In.Attachment)          // FramebufferAttachmentInfo
 	ϟo.Value[0] = func() (result int32) {
@@ -2389,7 +2435,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 			return result
 		}
 	}()
-	_, _, _ = framebufferId, framebuffer, a
+	_, _, _, _ = target, framebufferId, framebuffer, a
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetFramebufferAttachmentParameteriv expected %v got %v", ϟa.Out, ϟo)
 	}
