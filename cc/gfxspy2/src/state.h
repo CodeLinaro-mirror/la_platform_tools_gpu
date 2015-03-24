@@ -268,7 +268,8 @@ inline void State::init(int32_t width, int32_t height, RenderbufferFormat color_
     backbuffer->Attachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo();
     backbuffer->Attachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo();
     this->Instances.Framebuffers[this->Internals.Backbuffer] = backbuffer;
-    this->BoundFramebuffers[FramebufferTarget::GL_FRAMEBUFFER] = this->Internals.Backbuffer;
+    this->BoundFramebuffers[FramebufferTarget::GL_DRAW_FRAMEBUFFER] = this->Internals.Backbuffer;
+    this->BoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = this->Internals.Backbuffer;
     this->Rasterizing.Scissor.Width = width;
     this->Rasterizing.Scissor.Height = height;
     this->Rasterizing.StencilMask[FaceMode::GL_FRONT] = 4294967295;
@@ -360,7 +361,7 @@ inline void State::glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) {
 }
 
 inline void State::glBindVertexArrayOES(VertexArrayId array) {
-    if (this->Instances.VertexArrays.count(array) > 0 == false) {
+    if (!(this->Instances.VertexArrays.count(array) > 0)) {
         this->Instances.VertexArrays[array] = std::shared_ptr<VertexArray>(new VertexArray());
     }
     this->BoundVertexArray = array;
@@ -845,6 +846,9 @@ inline void State::glScissor(int32_t x, int32_t y, int32_t width, int32_t height
 
 inline void State::glActiveTexture(TextureUnit unit) {
     this->ActiveTextureUnit = unit;
+    if (!(this->TextureUnits.count(unit) > 0)) {
+        this->TextureUnits[unit] = this->TextureUnits[unit];
+    }
 }
 
 inline void State::glGenTextures(int32_t count, TextureId* textures) {
@@ -866,7 +870,7 @@ inline void State::glIsTexture(TextureId texture, bool result) {
 }
 
 inline void State::glBindTexture(TextureTarget target, TextureId texture) {
-    if (this->Instances.Textures.count(texture) > 0 == false) {
+    if (!(this->Instances.Textures.count(texture) > 0)) {
         this->Instances.Textures[texture] = std::shared_ptr<Texture>(new Texture());
     }
     this->TextureUnits[this->ActiveTextureUnit][target] = texture;
@@ -991,7 +995,7 @@ inline void State::glGenFramebuffers(int32_t count, FramebufferId* framebuffers)
 }
 
 inline void State::glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) {
-    if (this->Instances.Framebuffers.count(framebuffer) > 0 == false) {
+    if (!(this->Instances.Framebuffers.count(framebuffer) > 0)) {
         this->Instances.Framebuffers[framebuffer] = std::shared_ptr<Framebuffer>(new Framebuffer());
     }
     if (target == FramebufferTarget::GL_FRAMEBUFFER) {
@@ -1025,7 +1029,7 @@ inline void State::glGenRenderbuffers(int32_t count, RenderbufferId* renderbuffe
 }
 
 inline void State::glBindRenderbuffer(RenderbufferTarget target, RenderbufferId renderbuffer) {
-    if (this->Instances.Renderbuffers.count(renderbuffer) > 0 == false) {
+    if (!(this->Instances.Renderbuffers.count(renderbuffer) > 0)) {
         this->Instances.Renderbuffers[renderbuffer] = std::shared_ptr<Renderbuffer>(new Renderbuffer());
     }
     this->BoundRenderbuffers[target] = renderbuffer;
@@ -1068,7 +1072,7 @@ inline void State::glGenBuffers(int32_t count, BufferId* buffers) {
 }
 
 inline void State::glBindBuffer(BufferTarget target, BufferId buffer) {
-    if (this->Instances.Buffers.count(buffer) > 0 == false) {
+    if (!(this->Instances.Buffers.count(buffer) > 0)) {
         this->Instances.Buffers[buffer] = std::shared_ptr<Buffer>(new Buffer());
     }
     this->BoundBuffers[target] = buffer;
