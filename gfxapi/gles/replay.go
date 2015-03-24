@@ -82,8 +82,9 @@ func (a api) ReplayTransforms(
 						req.out <- gfxapi.Image{Error: err}
 					}
 				}), readFramebufferColor{
-					width:  req.width,
-					height: req.height,
+					contextID: ctx.ContextID,
+					width:     req.width,
+					height:    req.height,
 				},
 			)
 
@@ -98,7 +99,10 @@ func (a api) ReplayTransforms(
 					} else {
 						req.out <- gfxapi.Image{Error: err}
 					}
-				}), readFramebufferDepth{},
+				}), readFramebufferDepth{
+					contextID: ctx.ContextID,
+					database:  db,
+				},
 			)
 
 		case timeCallsRequest:
