@@ -1187,7 +1187,8 @@ cmd void init(s32                width,
 
     Instances.Framebuffers[Internals.Backbuffer] = backbuffer
 
-    BoundFramebuffers[GL_FRAMEBUFFER] = Internals.Backbuffer
+    BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = Internals.Backbuffer
+    BoundFramebuffers[GL_READ_FRAMEBUFFER] = Internals.Backbuffer
 
     Rasterizing.Scissor.Width  = width
     Rasterizing.Scissor.Height = height
@@ -1349,7 +1350,7 @@ cmd void glGenVertexArraysOES(s32 count, inout array<VertexArrayId> arrays) {
 
 cmd void glBindVertexArrayOES(VertexArrayId array) {
     http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
-    if ((array in Instances.VertexArrays) == false) {
+    if !(array in Instances.VertexArrays) {
       Instances.VertexArrays[array] = new VertexArray{}
     }
     BoundVertexArray = array
@@ -1990,6 +1991,9 @@ cmd void glScissor(s32 x, s32 y, s32 width, s32 height) {
 cmd void glActiveTexture(TextureUnit unit) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml
     ActiveTextureUnit = unit
+    if !(unit in TextureUnits) {
+        TextureUnits[unit] = TextureUnits[unit]
+    }
 }
 
 cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
@@ -2017,7 +2021,7 @@ cmd bool glIsTexture(TextureId texture) {
 
 cmd void glBindTexture(TextureTarget target, TextureId texture) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
-    if ((texture in Instances.Textures) == false) {
+    if !(texture in Instances.Textures) {
       Instances.Textures[texture] = new Texture{}
     }
     TextureUnits[ActiveTextureUnit][target] = texture
@@ -2228,7 +2232,7 @@ cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
 
 cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml
-    if ((framebuffer in Instances.Framebuffers) == false) {
+    if !(framebuffer in Instances.Framebuffers) {
         Instances.Framebuffers[framebuffer] = new Framebuffer{}
     }
     if target == GL_FRAMEBUFFER {
@@ -2269,7 +2273,7 @@ cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers
 
 cmd void glBindRenderbuffer(RenderbufferTarget target, RenderbufferId renderbuffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml
-    if ((renderbuffer in Instances.Renderbuffers) == false) {
+    if !(renderbuffer in Instances.Renderbuffers) {
       Instances.Renderbuffers[renderbuffer] = new Renderbuffer{}
     }
     BoundRenderbuffers[target] = renderbuffer
@@ -2333,7 +2337,7 @@ cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
 
 cmd void glBindBuffer(BufferTarget target, BufferId buffer) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml
-    if ((buffer in Instances.Buffers) == false) {
+    if !(buffer in Instances.Buffers) {
         Instances.Buffers[buffer] = new Buffer{}
     }
     BoundBuffers[target] = buffer

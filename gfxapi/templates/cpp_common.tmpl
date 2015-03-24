@@ -294,6 +294,7 @@ limitations under the License.
   {{else if IsStringValue      $}}{{printf "%q" $}}
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
+  {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "C++.Read" $.Expression}})
   {{else if IsEnumEntry        $}}{{$.Enum.Name}}::{{$.Name}}
   {{else if IsLocal            $}}{{$.Name}}
   {{else if IsBitTest          $}}({{Macro "C++.Read" $.Bitfield}} & {{Macro "C++.Read" $.Bits}}) != 0

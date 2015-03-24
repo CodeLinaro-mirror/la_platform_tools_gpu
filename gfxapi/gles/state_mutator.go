@@ -97,7 +97,8 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		return s
 	}()
 	ϟc.Instances.Framebuffers[ϟc.Internals.Backbuffer] = backbuffer
-	ϟc.BoundFramebuffers[FramebufferTarget_GL_FRAMEBUFFER] = ϟc.Internals.Backbuffer
+	ϟc.BoundFramebuffers[FramebufferTarget_GL_DRAW_FRAMEBUFFER] = ϟc.Internals.Backbuffer
+	ϟc.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = ϟc.Internals.Backbuffer
 	ϟc.Rasterizing.Scissor.Width = ϟa.In.Width
 	ϟc.Rasterizing.Scissor.Height = ϟa.In.Height
 	ϟc.Rasterizing.StencilMask[FaceMode_GL_FRONT] = 4294967295
@@ -325,7 +326,7 @@ func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindVertexArrayOES_Out{}
-	if (ϟc.Instances.VertexArrays.Contains(ϟa.In.Array)) == (false) {
+	if !(ϟc.Instances.VertexArrays.Contains(ϟa.In.Array)) {
 		ϟc.Instances.VertexArrays[ϟa.In.Array] = func() *VertexArray {
 			s := &VertexArray{}
 			s.Init()
@@ -1417,6 +1418,9 @@ func (ϟa *GlActiveTexture) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlActiveTexture_Out{}
 	ϟc.ActiveTextureUnit = ϟa.In.Unit
+	if !(ϟc.TextureUnits.Contains(ϟa.In.Unit)) {
+		ϟc.TextureUnits[ϟa.In.Unit] = ϟc.TextureUnits.Get(ϟa.In.Unit)
+	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glActiveTexture expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -1464,7 +1468,7 @@ func (ϟa *GlIsTexture) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindTexture) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindTexture_Out{}
-	if (ϟc.Instances.Textures.Contains(ϟa.In.Texture)) == (false) {
+	if !(ϟc.Instances.Textures.Contains(ϟa.In.Texture)) {
 		ϟc.Instances.Textures[ϟa.In.Texture] = func() *Texture {
 			s := &Texture{}
 			s.Init()
@@ -1703,7 +1707,7 @@ func (ϟa *GlGenFramebuffers) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindFramebuffer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindFramebuffer_Out{}
-	if (ϟc.Instances.Framebuffers.Contains(ϟa.In.Framebuffer)) == (false) {
+	if !(ϟc.Instances.Framebuffers.Contains(ϟa.In.Framebuffer)) {
 		ϟc.Instances.Framebuffers[ϟa.In.Framebuffer] = func() *Framebuffer {
 			s := &Framebuffer{}
 			s.Init()
@@ -1772,7 +1776,7 @@ func (ϟa *GlGenRenderbuffers) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindRenderbuffer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindRenderbuffer_Out{}
-	if (ϟc.Instances.Renderbuffers.Contains(ϟa.In.Renderbuffer)) == (false) {
+	if !(ϟc.Instances.Renderbuffers.Contains(ϟa.In.Renderbuffer)) {
 		ϟc.Instances.Renderbuffers[ϟa.In.Renderbuffer] = func() *Renderbuffer {
 			s := &Renderbuffer{}
 			s.Init()
@@ -1867,7 +1871,7 @@ func (ϟa *GlGenBuffers) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindBuffer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindBuffer_Out{}
-	if (ϟc.Instances.Buffers.Contains(ϟa.In.Buffer)) == (false) {
+	if !(ϟc.Instances.Buffers.Contains(ϟa.In.Buffer)) {
 		ϟc.Instances.Buffers[ϟa.In.Buffer] = func() *Buffer {
 			s := &Buffer{}
 			s.Init()
