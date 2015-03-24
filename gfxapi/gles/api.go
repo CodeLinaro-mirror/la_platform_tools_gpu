@@ -12435,6 +12435,7 @@ func (g *Globals) Init() {
 	g.Instances.Init()
 }
 func NewInit(
+	contextID atom.ContextID,
 	pWidth int32,
 	pHeight int32,
 	pColorFmt RenderbufferFormat,
@@ -12442,73 +12443,93 @@ func NewInit(
 	pStencilFmt RenderbufferFormat,
 ) *Init {
 	return &Init{
-		In:  Init_In{Width: pWidth, Height: pHeight, ColorFmt: pColorFmt, DepthFmt: pDepthFmt, StencilFmt: pStencilFmt},
-		Out: Init_Out{},
+		Context: contextID,
+		In:      Init_In{Width: pWidth, Height: pHeight, ColorFmt: pColorFmt, DepthFmt: pDepthFmt, StencilFmt: pStencilFmt},
+		Out:     Init_Out{},
 	}
 }
 func NewStartTimer(
+	contextID atom.ContextID,
 	pIndex uint8,
 ) *StartTimer {
 	return &StartTimer{
-		In:  StartTimer_In{Index: pIndex},
-		Out: StartTimer_Out{},
+		Context: contextID,
+		In:      StartTimer_In{Index: pIndex},
+		Out:     StartTimer_Out{},
 	}
 }
 func NewStopTimer(
+	contextID atom.ContextID,
 	pIndex uint8,
 	pResult uint64,
 ) *StopTimer {
 	return &StopTimer{
-		In:  StopTimer_In{Index: pIndex},
-		Out: StopTimer_Out{Result: pResult},
+		Context: contextID,
+		In:      StopTimer_In{Index: pIndex},
+		Out:     StopTimer_Out{Result: pResult},
 	}
 }
-func NewFlushPostBuffer() *FlushPostBuffer {
+func NewFlushPostBuffer(
+	contextID atom.ContextID,
+) *FlushPostBuffer {
 	return &FlushPostBuffer{
-		In:  FlushPostBuffer_In{},
-		Out: FlushPostBuffer_Out{},
+		Context: contextID,
+		In:      FlushPostBuffer_In{},
+		Out:     FlushPostBuffer_Out{},
 	}
 }
 func NewEglCreateContext(
+	contextID atom.ContextID,
 	pVersion int32,
 	pContext int32,
 ) *EglCreateContext {
 	return &EglCreateContext{
-		In:  EglCreateContext_In{},
-		Out: EglCreateContext_Out{Version: pVersion, Context: pContext},
+		Context: contextID,
+		In:      EglCreateContext_In{},
+		Out:     EglCreateContext_Out{Version: pVersion, Context: pContext},
 	}
 }
 func NewEglMakeCurrent(
+	contextID atom.ContextID,
 	pContext int32,
 ) *EglMakeCurrent {
 	return &EglMakeCurrent{
-		In:  EglMakeCurrent_In{Context: pContext},
-		Out: EglMakeCurrent_Out{},
+		Context: contextID,
+		In:      EglMakeCurrent_In{Context: pContext},
+		Out:     EglMakeCurrent_Out{},
 	}
 }
-func NewEglSwapBuffers() *EglSwapBuffers {
+func NewEglSwapBuffers(
+	contextID atom.ContextID,
+) *EglSwapBuffers {
 	return &EglSwapBuffers{
-		In:  EglSwapBuffers_In{},
-		Out: EglSwapBuffers_Out{},
+		Context: contextID,
+		In:      EglSwapBuffers_In{},
+		Out:     EglSwapBuffers_Out{},
 	}
 }
 func NewGlEnableClientState(
+	contextID atom.ContextID,
 	pType ArrayType,
 ) *GlEnableClientState {
 	return &GlEnableClientState{
-		In:  GlEnableClientState_In{Type: pType},
-		Out: GlEnableClientState_Out{},
+		Context: contextID,
+		In:      GlEnableClientState_In{Type: pType},
+		Out:     GlEnableClientState_Out{},
 	}
 }
 func NewGlDisableClientState(
+	contextID atom.ContextID,
 	pType ArrayType,
 ) *GlDisableClientState {
 	return &GlDisableClientState{
-		In:  GlDisableClientState_In{Type: pType},
-		Out: GlDisableClientState_Out{},
+		Context: contextID,
+		In:      GlDisableClientState_In{Type: pType},
+		Out:     GlDisableClientState_Out{},
 	}
 }
 func NewGlGetProgramBinaryOES(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pBufferSize int32,
 	pBytesWritten int32,
@@ -12516,22 +12537,26 @@ func NewGlGetProgramBinaryOES(
 	pBinary memory.Pointer,
 ) *GlGetProgramBinaryOES {
 	return &GlGetProgramBinaryOES{
-		In:  GlGetProgramBinaryOES_In{Program: pProgram, BufferSize: pBufferSize},
-		Out: GlGetProgramBinaryOES_Out{BytesWritten: pBytesWritten, BinaryFormat: pBinaryFormat, Binary: pBinary},
+		Context: contextID,
+		In:      GlGetProgramBinaryOES_In{Program: pProgram, BufferSize: pBufferSize},
+		Out:     GlGetProgramBinaryOES_Out{BytesWritten: pBytesWritten, BinaryFormat: pBinaryFormat, Binary: pBinary},
 	}
 }
 func NewGlProgramBinaryOES(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pBinaryFormat uint32,
 	pBinary memory.Pointer,
 	pBinarySize int32,
 ) *GlProgramBinaryOES {
 	return &GlProgramBinaryOES{
-		In:  GlProgramBinaryOES_In{Program: pProgram, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
-		Out: GlProgramBinaryOES_Out{},
+		Context: contextID,
+		In:      GlProgramBinaryOES_In{Program: pProgram, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
+		Out:     GlProgramBinaryOES_Out{},
 	}
 }
 func NewGlStartTilingQCOM(
+	contextID atom.ContextID,
 	pX int32,
 	pY int32,
 	pWidth int32,
@@ -12539,64 +12564,79 @@ func NewGlStartTilingQCOM(
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlStartTilingQCOM {
 	return &GlStartTilingQCOM{
-		In:  GlStartTilingQCOM_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, PreserveMask: pPreserveMask},
-		Out: GlStartTilingQCOM_Out{},
+		Context: contextID,
+		In:      GlStartTilingQCOM_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, PreserveMask: pPreserveMask},
+		Out:     GlStartTilingQCOM_Out{},
 	}
 }
 func NewGlEndTilingQCOM(
+	contextID atom.ContextID,
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlEndTilingQCOM {
 	return &GlEndTilingQCOM{
-		In:  GlEndTilingQCOM_In{PreserveMask: pPreserveMask},
-		Out: GlEndTilingQCOM_Out{},
+		Context: contextID,
+		In:      GlEndTilingQCOM_In{PreserveMask: pPreserveMask},
+		Out:     GlEndTilingQCOM_Out{},
 	}
 }
 func NewGlDiscardFramebufferEXT(
+	contextID atom.ContextID,
 	pTarget FramebufferTarget,
 	pNumAttachments int32,
 	pAttachments DiscardFramebufferAttachmentArray,
 ) *GlDiscardFramebufferEXT {
 	return &GlDiscardFramebufferEXT{
-		In:  GlDiscardFramebufferEXT_In{Target: pTarget, NumAttachments: pNumAttachments, Attachments: pAttachments},
-		Out: GlDiscardFramebufferEXT_Out{},
+		Context: contextID,
+		In:      GlDiscardFramebufferEXT_In{Target: pTarget, NumAttachments: pNumAttachments, Attachments: pAttachments},
+		Out:     GlDiscardFramebufferEXT_Out{},
 	}
 }
 func NewGlInsertEventMarkerEXT(
+	contextID atom.ContextID,
 	pLength int32,
 	pMarker string,
 ) *GlInsertEventMarkerEXT {
 	return &GlInsertEventMarkerEXT{
-		In:  GlInsertEventMarkerEXT_In{Length: pLength, Marker: pMarker},
-		Out: GlInsertEventMarkerEXT_Out{},
+		Context: contextID,
+		In:      GlInsertEventMarkerEXT_In{Length: pLength, Marker: pMarker},
+		Out:     GlInsertEventMarkerEXT_Out{},
 	}
 }
 func NewGlPushGroupMarkerEXT(
+	contextID atom.ContextID,
 	pLength int32,
 	pMarker string,
 ) *GlPushGroupMarkerEXT {
 	return &GlPushGroupMarkerEXT{
-		In:  GlPushGroupMarkerEXT_In{Length: pLength, Marker: pMarker},
-		Out: GlPushGroupMarkerEXT_Out{},
+		Context: contextID,
+		In:      GlPushGroupMarkerEXT_In{Length: pLength, Marker: pMarker},
+		Out:     GlPushGroupMarkerEXT_Out{},
 	}
 }
-func NewGlPopGroupMarkerEXT() *GlPopGroupMarkerEXT {
+func NewGlPopGroupMarkerEXT(
+	contextID atom.ContextID,
+) *GlPopGroupMarkerEXT {
 	return &GlPopGroupMarkerEXT{
-		In:  GlPopGroupMarkerEXT_In{},
-		Out: GlPopGroupMarkerEXT_Out{},
+		Context: contextID,
+		In:      GlPopGroupMarkerEXT_In{},
+		Out:     GlPopGroupMarkerEXT_Out{},
 	}
 }
 func NewGlTexStorage1DEXT(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pLevels int32,
 	pFormat TexelFormat,
 	pWidth int32,
 ) *GlTexStorage1DEXT {
 	return &GlTexStorage1DEXT{
-		In:  GlTexStorage1DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
-		Out: GlTexStorage1DEXT_Out{},
+		Context: contextID,
+		In:      GlTexStorage1DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
+		Out:     GlTexStorage1DEXT_Out{},
 	}
 }
 func NewGlTexStorage2DEXT(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pLevels int32,
 	pFormat TexelFormat,
@@ -12604,11 +12644,13 @@ func NewGlTexStorage2DEXT(
 	pHeight int32,
 ) *GlTexStorage2DEXT {
 	return &GlTexStorage2DEXT{
-		In:  GlTexStorage2DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out: GlTexStorage2DEXT_Out{},
+		Context: contextID,
+		In:      GlTexStorage2DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
+		Out:     GlTexStorage2DEXT_Out{},
 	}
 }
 func NewGlTexStorage3DEXT(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pLevels int32,
 	pFormat TexelFormat,
@@ -12617,11 +12659,13 @@ func NewGlTexStorage3DEXT(
 	pDepth int32,
 ) *GlTexStorage3DEXT {
 	return &GlTexStorage3DEXT{
-		In:  GlTexStorage3DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
-		Out: GlTexStorage3DEXT_Out{},
+		Context: contextID,
+		In:      GlTexStorage3DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
+		Out:     GlTexStorage3DEXT_Out{},
 	}
 }
 func NewGlTextureStorage1DEXT(
+	contextID atom.ContextID,
 	pTexture TextureId,
 	pTarget TextureTarget,
 	pLevels int32,
@@ -12629,11 +12673,13 @@ func NewGlTextureStorage1DEXT(
 	pWidth int32,
 ) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{
-		In:  GlTextureStorage1DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
-		Out: GlTextureStorage1DEXT_Out{},
+		Context: contextID,
+		In:      GlTextureStorage1DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
+		Out:     GlTextureStorage1DEXT_Out{},
 	}
 }
 func NewGlTextureStorage2DEXT(
+	contextID atom.ContextID,
 	pTexture TextureId,
 	pTarget TextureTarget,
 	pLevels int32,
@@ -12642,11 +12688,13 @@ func NewGlTextureStorage2DEXT(
 	pHeight int32,
 ) *GlTextureStorage2DEXT {
 	return &GlTextureStorage2DEXT{
-		In:  GlTextureStorage2DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out: GlTextureStorage2DEXT_Out{},
+		Context: contextID,
+		In:      GlTextureStorage2DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
+		Out:     GlTextureStorage2DEXT_Out{},
 	}
 }
 func NewGlTextureStorage3DEXT(
+	contextID atom.ContextID,
 	pTexture TextureId,
 	pTarget TextureTarget,
 	pLevels int32,
@@ -12656,146 +12704,178 @@ func NewGlTextureStorage3DEXT(
 	pDepth int32,
 ) *GlTextureStorage3DEXT {
 	return &GlTextureStorage3DEXT{
-		In:  GlTextureStorage3DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
-		Out: GlTextureStorage3DEXT_Out{},
+		Context: contextID,
+		In:      GlTextureStorage3DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
+		Out:     GlTextureStorage3DEXT_Out{},
 	}
 }
 func NewGlGenVertexArraysOES(
+	contextID atom.ContextID,
 	pCount int32,
 	pArrays VertexArrayIdArray,
 ) *GlGenVertexArraysOES {
 	return &GlGenVertexArraysOES{
-		In:  GlGenVertexArraysOES_In{Count: pCount},
-		Out: GlGenVertexArraysOES_Out{Arrays: pArrays},
+		Context: contextID,
+		In:      GlGenVertexArraysOES_In{Count: pCount},
+		Out:     GlGenVertexArraysOES_Out{Arrays: pArrays},
 	}
 }
 func NewGlBindVertexArrayOES(
+	contextID atom.ContextID,
 	pArray VertexArrayId,
 ) *GlBindVertexArrayOES {
 	return &GlBindVertexArrayOES{
-		In:  GlBindVertexArrayOES_In{Array: pArray},
-		Out: GlBindVertexArrayOES_Out{},
+		Context: contextID,
+		In:      GlBindVertexArrayOES_In{Array: pArray},
+		Out:     GlBindVertexArrayOES_Out{},
 	}
 }
 func NewGlDeleteVertexArraysOES(
+	contextID atom.ContextID,
 	pCount int32,
 	pArrays VertexArrayIdArray,
 ) *GlDeleteVertexArraysOES {
 	return &GlDeleteVertexArraysOES{
-		In:  GlDeleteVertexArraysOES_In{Count: pCount, Arrays: pArrays},
-		Out: GlDeleteVertexArraysOES_Out{},
+		Context: contextID,
+		In:      GlDeleteVertexArraysOES_In{Count: pCount, Arrays: pArrays},
+		Out:     GlDeleteVertexArraysOES_Out{},
 	}
 }
 func NewGlIsVertexArrayOES(
+	contextID atom.ContextID,
 	pArray VertexArrayId,
 	pResult bool,
 ) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{
-		In:  GlIsVertexArrayOES_In{Array: pArray},
-		Out: GlIsVertexArrayOES_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsVertexArrayOES_In{Array: pArray},
+		Out:     GlIsVertexArrayOES_Out{Result: pResult},
 	}
 }
 func NewGlEGLImageTargetTexture2DOES(
+	contextID atom.ContextID,
 	pTarget ImageTargetTexture,
 	pImage ImageOES,
 ) *GlEGLImageTargetTexture2DOES {
 	return &GlEGLImageTargetTexture2DOES{
-		In:  GlEGLImageTargetTexture2DOES_In{Target: pTarget, Image: pImage},
-		Out: GlEGLImageTargetTexture2DOES_Out{},
+		Context: contextID,
+		In:      GlEGLImageTargetTexture2DOES_In{Target: pTarget, Image: pImage},
+		Out:     GlEGLImageTargetTexture2DOES_Out{},
 	}
 }
 func NewGlEGLImageTargetRenderbufferStorageOES(
+	contextID atom.ContextID,
 	pTarget ImageTargetRenderbufferStorage,
 	pImage TexturePointer,
 ) *GlEGLImageTargetRenderbufferStorageOES {
 	return &GlEGLImageTargetRenderbufferStorageOES{
-		In:  GlEGLImageTargetRenderbufferStorageOES_In{Target: pTarget, Image: pImage},
-		Out: GlEGLImageTargetRenderbufferStorageOES_Out{},
+		Context: contextID,
+		In:      GlEGLImageTargetRenderbufferStorageOES_In{Target: pTarget, Image: pImage},
+		Out:     GlEGLImageTargetRenderbufferStorageOES_Out{},
 	}
 }
 func NewGlGetGraphicsResetStatusEXT(
+	contextID atom.ContextID,
 	pResult ResetStatus,
 ) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{
-		In:  GlGetGraphicsResetStatusEXT_In{},
-		Out: GlGetGraphicsResetStatusEXT_Out{Result: pResult},
+		Context: contextID,
+		In:      GlGetGraphicsResetStatusEXT_In{},
+		Out:     GlGetGraphicsResetStatusEXT_Out{Result: pResult},
 	}
 }
 func NewGlBindAttribLocation(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pLocation AttributeLocation,
 	pName string,
 ) *GlBindAttribLocation {
 	return &GlBindAttribLocation{
-		In:  GlBindAttribLocation_In{Program: pProgram, Location: pLocation, Name: pName},
-		Out: GlBindAttribLocation_Out{},
+		Context: contextID,
+		In:      GlBindAttribLocation_In{Program: pProgram, Location: pLocation, Name: pName},
+		Out:     GlBindAttribLocation_Out{},
 	}
 }
 func NewGlBlendFunc(
+	contextID atom.ContextID,
 	pSrcFactor BlendFactor,
 	pDstFactor BlendFactor,
 ) *GlBlendFunc {
 	return &GlBlendFunc{
-		In:  GlBlendFunc_In{SrcFactor: pSrcFactor, DstFactor: pDstFactor},
-		Out: GlBlendFunc_Out{},
+		Context: contextID,
+		In:      GlBlendFunc_In{SrcFactor: pSrcFactor, DstFactor: pDstFactor},
+		Out:     GlBlendFunc_Out{},
 	}
 }
 func NewGlBlendFuncSeparate(
+	contextID atom.ContextID,
 	pSrcFactorRgb BlendFactor,
 	pDstFactorRgb BlendFactor,
 	pSrcFactorAlpha BlendFactor,
 	pDstFactorAlpha BlendFactor,
 ) *GlBlendFuncSeparate {
 	return &GlBlendFuncSeparate{
-		In:  GlBlendFuncSeparate_In{SrcFactorRgb: pSrcFactorRgb, DstFactorRgb: pDstFactorRgb, SrcFactorAlpha: pSrcFactorAlpha, DstFactorAlpha: pDstFactorAlpha},
-		Out: GlBlendFuncSeparate_Out{},
+		Context: contextID,
+		In:      GlBlendFuncSeparate_In{SrcFactorRgb: pSrcFactorRgb, DstFactorRgb: pDstFactorRgb, SrcFactorAlpha: pSrcFactorAlpha, DstFactorAlpha: pDstFactorAlpha},
+		Out:     GlBlendFuncSeparate_Out{},
 	}
 }
 func NewGlBlendEquation(
+	contextID atom.ContextID,
 	pEquation BlendEquation,
 ) *GlBlendEquation {
 	return &GlBlendEquation{
-		In:  GlBlendEquation_In{Equation: pEquation},
-		Out: GlBlendEquation_Out{},
+		Context: contextID,
+		In:      GlBlendEquation_In{Equation: pEquation},
+		Out:     GlBlendEquation_Out{},
 	}
 }
 func NewGlBlendEquationSeparate(
+	contextID atom.ContextID,
 	pRgb BlendEquation,
 	pAlpha BlendEquation,
 ) *GlBlendEquationSeparate {
 	return &GlBlendEquationSeparate{
-		In:  GlBlendEquationSeparate_In{Rgb: pRgb, Alpha: pAlpha},
-		Out: GlBlendEquationSeparate_Out{},
+		Context: contextID,
+		In:      GlBlendEquationSeparate_In{Rgb: pRgb, Alpha: pAlpha},
+		Out:     GlBlendEquationSeparate_Out{},
 	}
 }
 func NewGlBlendColor(
+	contextID atom.ContextID,
 	pRed float32,
 	pGreen float32,
 	pBlue float32,
 	pAlpha float32,
 ) *GlBlendColor {
 	return &GlBlendColor{
-		In:  GlBlendColor_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
-		Out: GlBlendColor_Out{},
+		Context: contextID,
+		In:      GlBlendColor_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
+		Out:     GlBlendColor_Out{},
 	}
 }
 func NewGlEnableVertexAttribArray(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 ) *GlEnableVertexAttribArray {
 	return &GlEnableVertexAttribArray{
-		In:  GlEnableVertexAttribArray_In{Location: pLocation},
-		Out: GlEnableVertexAttribArray_Out{},
+		Context: contextID,
+		In:      GlEnableVertexAttribArray_In{Location: pLocation},
+		Out:     GlEnableVertexAttribArray_Out{},
 	}
 }
 func NewGlDisableVertexAttribArray(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 ) *GlDisableVertexAttribArray {
 	return &GlDisableVertexAttribArray{
-		In:  GlDisableVertexAttribArray_In{Location: pLocation},
-		Out: GlDisableVertexAttribArray_Out{},
+		Context: contextID,
+		In:      GlDisableVertexAttribArray_In{Location: pLocation},
+		Out:     GlDisableVertexAttribArray_Out{},
 	}
 }
 func NewGlVertexAttribPointer(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pSize int32,
 	pType VertexAttribType,
@@ -12804,11 +12884,13 @@ func NewGlVertexAttribPointer(
 	pData VertexPointer,
 ) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{
-		In:  GlVertexAttribPointer_In{Location: pLocation, Size: pSize, Type: pType, Normalized: pNormalized, Stride: pStride, Data: pData},
-		Out: GlVertexAttribPointer_Out{},
+		Context: contextID,
+		In:      GlVertexAttribPointer_In{Location: pLocation, Size: pSize, Type: pType, Normalized: pNormalized, Stride: pStride, Data: pData},
+		Out:     GlVertexAttribPointer_Out{},
 	}
 }
 func NewGlGetActiveAttrib(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pLocation AttributeLocation,
 	pBufferSize int32,
@@ -12818,11 +12900,13 @@ func NewGlGetActiveAttrib(
 	pName string,
 ) *GlGetActiveAttrib {
 	return &GlGetActiveAttrib{
-		In:  GlGetActiveAttrib_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
-		Out: GlGetActiveAttrib_Out{BufferBytesWritten: pBufferBytesWritten, VectorCount: pVectorCount, Type: pType, Name: pName},
+		Context: contextID,
+		In:      GlGetActiveAttrib_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
+		Out:     GlGetActiveAttrib_Out{BufferBytesWritten: pBufferBytesWritten, VectorCount: pVectorCount, Type: pType, Name: pName},
 	}
 }
 func NewGlGetActiveUniform(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pLocation int32,
 	pBufferSize int32,
@@ -12832,138 +12916,166 @@ func NewGlGetActiveUniform(
 	pName string,
 ) *GlGetActiveUniform {
 	return &GlGetActiveUniform{
-		In:  GlGetActiveUniform_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
-		Out: GlGetActiveUniform_Out{BufferBytesWritten: pBufferBytesWritten, Size: pSize, Type: pType, Name: pName},
+		Context: contextID,
+		In:      GlGetActiveUniform_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
+		Out:     GlGetActiveUniform_Out{BufferBytesWritten: pBufferBytesWritten, Size: pSize, Type: pType, Name: pName},
 	}
 }
 func NewGlGetError(
+	contextID atom.ContextID,
 	pResult Error,
 ) *GlGetError {
 	return &GlGetError{
-		In:  GlGetError_In{},
-		Out: GlGetError_Out{Result: pResult},
+		Context: contextID,
+		In:      GlGetError_In{},
+		Out:     GlGetError_Out{Result: pResult},
 	}
 }
 func NewGlGetProgramiv(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pParameter ProgramParameter,
 	pValue S32Array,
 ) *GlGetProgramiv {
 	return &GlGetProgramiv{
-		In:  GlGetProgramiv_In{Program: pProgram, Parameter: pParameter},
-		Out: GlGetProgramiv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetProgramiv_In{Program: pProgram, Parameter: pParameter},
+		Out:     GlGetProgramiv_Out{Value: pValue},
 	}
 }
 func NewGlGetShaderiv(
+	contextID atom.ContextID,
 	pShader ShaderId,
 	pParameter ShaderParameter,
 	pValue S32Array,
 ) *GlGetShaderiv {
 	return &GlGetShaderiv{
-		In:  GlGetShaderiv_In{Shader: pShader, Parameter: pParameter},
-		Out: GlGetShaderiv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetShaderiv_In{Shader: pShader, Parameter: pParameter},
+		Out:     GlGetShaderiv_Out{Value: pValue},
 	}
 }
 func NewGlGetUniformLocation(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pName string,
 	pResult UniformLocation,
 ) *GlGetUniformLocation {
 	return &GlGetUniformLocation{
-		In:  GlGetUniformLocation_In{Program: pProgram, Name: pName},
-		Out: GlGetUniformLocation_Out{Result: pResult},
+		Context: contextID,
+		In:      GlGetUniformLocation_In{Program: pProgram, Name: pName},
+		Out:     GlGetUniformLocation_Out{Result: pResult},
 	}
 }
 func NewGlGetAttribLocation(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pName string,
 	pResult AttributeLocation,
 ) *GlGetAttribLocation {
 	return &GlGetAttribLocation{
-		In:  GlGetAttribLocation_In{Program: pProgram, Name: pName},
-		Out: GlGetAttribLocation_Out{Result: pResult},
+		Context: contextID,
+		In:      GlGetAttribLocation_In{Program: pProgram, Name: pName},
+		Out:     GlGetAttribLocation_Out{Result: pResult},
 	}
 }
 func NewGlPixelStorei(
+	contextID atom.ContextID,
 	pParameter PixelStoreParameter,
 	pValue int32,
 ) *GlPixelStorei {
 	return &GlPixelStorei{
-		In:  GlPixelStorei_In{Parameter: pParameter, Value: pValue},
-		Out: GlPixelStorei_Out{},
+		Context: contextID,
+		In:      GlPixelStorei_In{Parameter: pParameter, Value: pValue},
+		Out:     GlPixelStorei_Out{},
 	}
 }
 func NewGlTexParameteri(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pParameter TextureParameter,
 	pValue int32,
 ) *GlTexParameteri {
 	return &GlTexParameteri{
-		In:  GlTexParameteri_In{Target: pTarget, Parameter: pParameter, Value: pValue},
-		Out: GlTexParameteri_Out{},
+		Context: contextID,
+		In:      GlTexParameteri_In{Target: pTarget, Parameter: pParameter, Value: pValue},
+		Out:     GlTexParameteri_Out{},
 	}
 }
 func NewGlTexParameterf(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pParameter TextureParameter,
 	pValue float32,
 ) *GlTexParameterf {
 	return &GlTexParameterf{
-		In:  GlTexParameterf_In{Target: pTarget, Parameter: pParameter, Value: pValue},
-		Out: GlTexParameterf_Out{},
+		Context: contextID,
+		In:      GlTexParameterf_In{Target: pTarget, Parameter: pParameter, Value: pValue},
+		Out:     GlTexParameterf_Out{},
 	}
 }
 func NewGlGetTexParameteriv(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pParameter TextureParameter,
 	pValues S32Array,
 ) *GlGetTexParameteriv {
 	return &GlGetTexParameteriv{
-		In:  GlGetTexParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetTexParameteriv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetTexParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetTexParameteriv_Out{Values: pValues},
 	}
 }
 func NewGlGetTexParameterfv(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pParameter TextureParameter,
 	pValues F32Array,
 ) *GlGetTexParameterfv {
 	return &GlGetTexParameterfv{
-		In:  GlGetTexParameterfv_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetTexParameterfv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetTexParameterfv_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetTexParameterfv_Out{Values: pValues},
 	}
 }
 func NewGlUniform1i(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue int32,
 ) *GlUniform1i {
 	return &GlUniform1i{
-		In:  GlUniform1i_In{Location: pLocation, Value: pValue},
-		Out: GlUniform1i_Out{},
+		Context: contextID,
+		In:      GlUniform1i_In{Location: pLocation, Value: pValue},
+		Out:     GlUniform1i_Out{},
 	}
 }
 func NewGlUniform2i(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 int32,
 	pValue1 int32,
 ) *GlUniform2i {
 	return &GlUniform2i{
-		In:  GlUniform2i_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out: GlUniform2i_Out{},
+		Context: contextID,
+		In:      GlUniform2i_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
+		Out:     GlUniform2i_Out{},
 	}
 }
 func NewGlUniform3i(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 int32,
 	pValue1 int32,
 	pValue2 int32,
 ) *GlUniform3i {
 	return &GlUniform3i{
-		In:  GlUniform3i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out: GlUniform3i_Out{},
+		Context: contextID,
+		In:      GlUniform3i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
+		Out:     GlUniform3i_Out{},
 	}
 }
 func NewGlUniform4i(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 int32,
 	pValue1 int32,
@@ -12971,81 +13083,97 @@ func NewGlUniform4i(
 	pValue3 int32,
 ) *GlUniform4i {
 	return &GlUniform4i{
-		In:  GlUniform4i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out: GlUniform4i_Out{},
+		Context: contextID,
+		In:      GlUniform4i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
+		Out:     GlUniform4i_Out{},
 	}
 }
 func NewGlUniform1iv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue S32Array,
 ) *GlUniform1iv {
 	return &GlUniform1iv{
-		In:  GlUniform1iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform1iv_Out{},
+		Context: contextID,
+		In:      GlUniform1iv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform1iv_Out{},
 	}
 }
 func NewGlUniform2iv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue S32Array,
 ) *GlUniform2iv {
 	return &GlUniform2iv{
-		In:  GlUniform2iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform2iv_Out{},
+		Context: contextID,
+		In:      GlUniform2iv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform2iv_Out{},
 	}
 }
 func NewGlUniform3iv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue S32Array,
 ) *GlUniform3iv {
 	return &GlUniform3iv{
-		In:  GlUniform3iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform3iv_Out{},
+		Context: contextID,
+		In:      GlUniform3iv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform3iv_Out{},
 	}
 }
 func NewGlUniform4iv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue S32Array,
 ) *GlUniform4iv {
 	return &GlUniform4iv{
-		In:  GlUniform4iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform4iv_Out{},
+		Context: contextID,
+		In:      GlUniform4iv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform4iv_Out{},
 	}
 }
 func NewGlUniform1f(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue float32,
 ) *GlUniform1f {
 	return &GlUniform1f{
-		In:  GlUniform1f_In{Location: pLocation, Value: pValue},
-		Out: GlUniform1f_Out{},
+		Context: contextID,
+		In:      GlUniform1f_In{Location: pLocation, Value: pValue},
+		Out:     GlUniform1f_Out{},
 	}
 }
 func NewGlUniform2f(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 float32,
 	pValue1 float32,
 ) *GlUniform2f {
 	return &GlUniform2f{
-		In:  GlUniform2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out: GlUniform2f_Out{},
+		Context: contextID,
+		In:      GlUniform2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
+		Out:     GlUniform2f_Out{},
 	}
 }
 func NewGlUniform3f(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 float32,
 	pValue1 float32,
 	pValue2 float32,
 ) *GlUniform3f {
 	return &GlUniform3f{
-		In:  GlUniform3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out: GlUniform3f_Out{},
+		Context: contextID,
+		In:      GlUniform3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
+		Out:     GlUniform3f_Out{},
 	}
 }
 func NewGlUniform4f(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pValue0 float32,
 	pValue1 float32,
@@ -13053,134 +13181,160 @@ func NewGlUniform4f(
 	pValue3 float32,
 ) *GlUniform4f {
 	return &GlUniform4f{
-		In:  GlUniform4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out: GlUniform4f_Out{},
+		Context: contextID,
+		In:      GlUniform4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
+		Out:     GlUniform4f_Out{},
 	}
 }
 func NewGlUniform1fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue F32Array,
 ) *GlUniform1fv {
 	return &GlUniform1fv{
-		In:  GlUniform1fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform1fv_Out{},
+		Context: contextID,
+		In:      GlUniform1fv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform1fv_Out{},
 	}
 }
 func NewGlUniform2fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue F32Array,
 ) *GlUniform2fv {
 	return &GlUniform2fv{
-		In:  GlUniform2fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform2fv_Out{},
+		Context: contextID,
+		In:      GlUniform2fv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform2fv_Out{},
 	}
 }
 func NewGlUniform3fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue F32Array,
 ) *GlUniform3fv {
 	return &GlUniform3fv{
-		In:  GlUniform3fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform3fv_Out{},
+		Context: contextID,
+		In:      GlUniform3fv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform3fv_Out{},
 	}
 }
 func NewGlUniform4fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pValue F32Array,
 ) *GlUniform4fv {
 	return &GlUniform4fv{
-		In:  GlUniform4fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out: GlUniform4fv_Out{},
+		Context: contextID,
+		In:      GlUniform4fv_In{Location: pLocation, Count: pCount, Value: pValue},
+		Out:     GlUniform4fv_Out{},
 	}
 }
 func NewGlUniformMatrix2fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pTranspose bool,
 	pValues F32Array,
 ) *GlUniformMatrix2fv {
 	return &GlUniformMatrix2fv{
-		In:  GlUniformMatrix2fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out: GlUniformMatrix2fv_Out{},
+		Context: contextID,
+		In:      GlUniformMatrix2fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
+		Out:     GlUniformMatrix2fv_Out{},
 	}
 }
 func NewGlUniformMatrix3fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pTranspose bool,
 	pValues F32Array,
 ) *GlUniformMatrix3fv {
 	return &GlUniformMatrix3fv{
-		In:  GlUniformMatrix3fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out: GlUniformMatrix3fv_Out{},
+		Context: contextID,
+		In:      GlUniformMatrix3fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
+		Out:     GlUniformMatrix3fv_Out{},
 	}
 }
 func NewGlUniformMatrix4fv(
+	contextID atom.ContextID,
 	pLocation UniformLocation,
 	pCount int32,
 	pTranspose bool,
 	pValues F32Array,
 ) *GlUniformMatrix4fv {
 	return &GlUniformMatrix4fv{
-		In:  GlUniformMatrix4fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out: GlUniformMatrix4fv_Out{},
+		Context: contextID,
+		In:      GlUniformMatrix4fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
+		Out:     GlUniformMatrix4fv_Out{},
 	}
 }
 func NewGlGetUniformfv(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pLocation UniformLocation,
 	pValues F32Array,
 ) *GlGetUniformfv {
 	return &GlGetUniformfv{
-		In:  GlGetUniformfv_In{Program: pProgram, Location: pLocation, Values: pValues},
-		Out: GlGetUniformfv_Out{},
+		Context: contextID,
+		In:      GlGetUniformfv_In{Program: pProgram, Location: pLocation, Values: pValues},
+		Out:     GlGetUniformfv_Out{},
 	}
 }
 func NewGlGetUniformiv(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pLocation UniformLocation,
 	pValues S32Array,
 ) *GlGetUniformiv {
 	return &GlGetUniformiv{
-		In:  GlGetUniformiv_In{Program: pProgram, Location: pLocation, Values: pValues},
-		Out: GlGetUniformiv_Out{},
+		Context: contextID,
+		In:      GlGetUniformiv_In{Program: pProgram, Location: pLocation, Values: pValues},
+		Out:     GlGetUniformiv_Out{},
 	}
 }
 func NewGlVertexAttrib1f(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue0 float32,
 ) *GlVertexAttrib1f {
 	return &GlVertexAttrib1f{
-		In:  GlVertexAttrib1f_In{Location: pLocation, Value0: pValue0},
-		Out: GlVertexAttrib1f_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib1f_In{Location: pLocation, Value0: pValue0},
+		Out:     GlVertexAttrib1f_Out{},
 	}
 }
 func NewGlVertexAttrib2f(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue0 float32,
 	pValue1 float32,
 ) *GlVertexAttrib2f {
 	return &GlVertexAttrib2f{
-		In:  GlVertexAttrib2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out: GlVertexAttrib2f_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
+		Out:     GlVertexAttrib2f_Out{},
 	}
 }
 func NewGlVertexAttrib3f(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue0 float32,
 	pValue1 float32,
 	pValue2 float32,
 ) *GlVertexAttrib3f {
 	return &GlVertexAttrib3f{
-		In:  GlVertexAttrib3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out: GlVertexAttrib3f_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
+		Out:     GlVertexAttrib3f_Out{},
 	}
 }
 func NewGlVertexAttrib4f(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue0 float32,
 	pValue1 float32,
@@ -13188,207 +13342,251 @@ func NewGlVertexAttrib4f(
 	pValue3 float32,
 ) *GlVertexAttrib4f {
 	return &GlVertexAttrib4f{
-		In:  GlVertexAttrib4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out: GlVertexAttrib4f_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
+		Out:     GlVertexAttrib4f_Out{},
 	}
 }
 func NewGlVertexAttrib1fv(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue F32Array,
 ) *GlVertexAttrib1fv {
 	return &GlVertexAttrib1fv{
-		In:  GlVertexAttrib1fv_In{Location: pLocation, Value: pValue},
-		Out: GlVertexAttrib1fv_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib1fv_In{Location: pLocation, Value: pValue},
+		Out:     GlVertexAttrib1fv_Out{},
 	}
 }
 func NewGlVertexAttrib2fv(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue F32Array,
 ) *GlVertexAttrib2fv {
 	return &GlVertexAttrib2fv{
-		In:  GlVertexAttrib2fv_In{Location: pLocation, Value: pValue},
-		Out: GlVertexAttrib2fv_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib2fv_In{Location: pLocation, Value: pValue},
+		Out:     GlVertexAttrib2fv_Out{},
 	}
 }
 func NewGlVertexAttrib3fv(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue F32Array,
 ) *GlVertexAttrib3fv {
 	return &GlVertexAttrib3fv{
-		In:  GlVertexAttrib3fv_In{Location: pLocation, Value: pValue},
-		Out: GlVertexAttrib3fv_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib3fv_In{Location: pLocation, Value: pValue},
+		Out:     GlVertexAttrib3fv_Out{},
 	}
 }
 func NewGlVertexAttrib4fv(
+	contextID atom.ContextID,
 	pLocation AttributeLocation,
 	pValue F32Array,
 ) *GlVertexAttrib4fv {
 	return &GlVertexAttrib4fv{
-		In:  GlVertexAttrib4fv_In{Location: pLocation, Value: pValue},
-		Out: GlVertexAttrib4fv_Out{},
+		Context: contextID,
+		In:      GlVertexAttrib4fv_In{Location: pLocation, Value: pValue},
+		Out:     GlVertexAttrib4fv_Out{},
 	}
 }
 func NewGlGetShaderPrecisionFormat(
+	contextID atom.ContextID,
 	pShaderType ShaderType,
 	pPrecisionType PrecisionType,
 	pRange S32Array,
 	pPrecision int32,
 ) *GlGetShaderPrecisionFormat {
 	return &GlGetShaderPrecisionFormat{
-		In:  GlGetShaderPrecisionFormat_In{ShaderType: pShaderType, PrecisionType: pPrecisionType},
-		Out: GlGetShaderPrecisionFormat_Out{Range: pRange, Precision: pPrecision},
+		Context: contextID,
+		In:      GlGetShaderPrecisionFormat_In{ShaderType: pShaderType, PrecisionType: pPrecisionType},
+		Out:     GlGetShaderPrecisionFormat_Out{Range: pRange, Precision: pPrecision},
 	}
 }
 func NewGlDepthMask(
+	contextID atom.ContextID,
 	pEnabled bool,
 ) *GlDepthMask {
 	return &GlDepthMask{
-		In:  GlDepthMask_In{Enabled: pEnabled},
-		Out: GlDepthMask_Out{},
+		Context: contextID,
+		In:      GlDepthMask_In{Enabled: pEnabled},
+		Out:     GlDepthMask_Out{},
 	}
 }
 func NewGlDepthFunc(
+	contextID atom.ContextID,
 	pFunction TestFunction,
 ) *GlDepthFunc {
 	return &GlDepthFunc{
-		In:  GlDepthFunc_In{Function: pFunction},
-		Out: GlDepthFunc_Out{},
+		Context: contextID,
+		In:      GlDepthFunc_In{Function: pFunction},
+		Out:     GlDepthFunc_Out{},
 	}
 }
 func NewGlDepthRangef(
+	contextID atom.ContextID,
 	pNear float32,
 	pFar float32,
 ) *GlDepthRangef {
 	return &GlDepthRangef{
-		In:  GlDepthRangef_In{Near: pNear, Far: pFar},
-		Out: GlDepthRangef_Out{},
+		Context: contextID,
+		In:      GlDepthRangef_In{Near: pNear, Far: pFar},
+		Out:     GlDepthRangef_Out{},
 	}
 }
 func NewGlColorMask(
+	contextID atom.ContextID,
 	pRed bool,
 	pGreen bool,
 	pBlue bool,
 	pAlpha bool,
 ) *GlColorMask {
 	return &GlColorMask{
-		In:  GlColorMask_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
-		Out: GlColorMask_Out{},
+		Context: contextID,
+		In:      GlColorMask_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
+		Out:     GlColorMask_Out{},
 	}
 }
 func NewGlStencilMask(
+	contextID atom.ContextID,
 	pMask uint32,
 ) *GlStencilMask {
 	return &GlStencilMask{
-		In:  GlStencilMask_In{Mask: pMask},
-		Out: GlStencilMask_Out{},
+		Context: contextID,
+		In:      GlStencilMask_In{Mask: pMask},
+		Out:     GlStencilMask_Out{},
 	}
 }
 func NewGlStencilMaskSeparate(
+	contextID atom.ContextID,
 	pFace FaceMode,
 	pMask uint32,
 ) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{
-		In:  GlStencilMaskSeparate_In{Face: pFace, Mask: pMask},
-		Out: GlStencilMaskSeparate_Out{},
+		Context: contextID,
+		In:      GlStencilMaskSeparate_In{Face: pFace, Mask: pMask},
+		Out:     GlStencilMaskSeparate_Out{},
 	}
 }
 func NewGlStencilFuncSeparate(
+	contextID atom.ContextID,
 	pFace FaceMode,
 	pFunction TestFunction,
 	pReferenceValue int32,
 	pMask int32,
 ) *GlStencilFuncSeparate {
 	return &GlStencilFuncSeparate{
-		In:  GlStencilFuncSeparate_In{Face: pFace, Function: pFunction, ReferenceValue: pReferenceValue, Mask: pMask},
-		Out: GlStencilFuncSeparate_Out{},
+		Context: contextID,
+		In:      GlStencilFuncSeparate_In{Face: pFace, Function: pFunction, ReferenceValue: pReferenceValue, Mask: pMask},
+		Out:     GlStencilFuncSeparate_Out{},
 	}
 }
 func NewGlStencilOpSeparate(
+	contextID atom.ContextID,
 	pFace FaceMode,
 	pStencilFail StencilAction,
 	pStencilPassDepthFail StencilAction,
 	pStencilPassDepthPass StencilAction,
 ) *GlStencilOpSeparate {
 	return &GlStencilOpSeparate{
-		In:  GlStencilOpSeparate_In{Face: pFace, StencilFail: pStencilFail, StencilPassDepthFail: pStencilPassDepthFail, StencilPassDepthPass: pStencilPassDepthPass},
-		Out: GlStencilOpSeparate_Out{},
+		Context: contextID,
+		In:      GlStencilOpSeparate_In{Face: pFace, StencilFail: pStencilFail, StencilPassDepthFail: pStencilPassDepthFail, StencilPassDepthPass: pStencilPassDepthPass},
+		Out:     GlStencilOpSeparate_Out{},
 	}
 }
 func NewGlFrontFace(
+	contextID atom.ContextID,
 	pOrientation FaceOrientation,
 ) *GlFrontFace {
 	return &GlFrontFace{
-		In:  GlFrontFace_In{Orientation: pOrientation},
-		Out: GlFrontFace_Out{},
+		Context: contextID,
+		In:      GlFrontFace_In{Orientation: pOrientation},
+		Out:     GlFrontFace_Out{},
 	}
 }
 func NewGlViewport(
+	contextID atom.ContextID,
 	pX int32,
 	pY int32,
 	pWidth int32,
 	pHeight int32,
 ) *GlViewport {
 	return &GlViewport{
-		In:  GlViewport_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out: GlViewport_Out{},
+		Context: contextID,
+		In:      GlViewport_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
+		Out:     GlViewport_Out{},
 	}
 }
 func NewGlScissor(
+	contextID atom.ContextID,
 	pX int32,
 	pY int32,
 	pWidth int32,
 	pHeight int32,
 ) *GlScissor {
 	return &GlScissor{
-		In:  GlScissor_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out: GlScissor_Out{},
+		Context: contextID,
+		In:      GlScissor_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
+		Out:     GlScissor_Out{},
 	}
 }
 func NewGlActiveTexture(
+	contextID atom.ContextID,
 	pUnit TextureUnit,
 ) *GlActiveTexture {
 	return &GlActiveTexture{
-		In:  GlActiveTexture_In{Unit: pUnit},
-		Out: GlActiveTexture_Out{},
+		Context: contextID,
+		In:      GlActiveTexture_In{Unit: pUnit},
+		Out:     GlActiveTexture_Out{},
 	}
 }
 func NewGlGenTextures(
+	contextID atom.ContextID,
 	pCount int32,
 	pTextures TextureIdArray,
 ) *GlGenTextures {
 	return &GlGenTextures{
-		In:  GlGenTextures_In{Count: pCount},
-		Out: GlGenTextures_Out{Textures: pTextures},
+		Context: contextID,
+		In:      GlGenTextures_In{Count: pCount},
+		Out:     GlGenTextures_Out{Textures: pTextures},
 	}
 }
 func NewGlDeleteTextures(
+	contextID atom.ContextID,
 	pCount int32,
 	pTextures TextureIdArray,
 ) *GlDeleteTextures {
 	return &GlDeleteTextures{
-		In:  GlDeleteTextures_In{Count: pCount, Textures: pTextures},
-		Out: GlDeleteTextures_Out{},
+		Context: contextID,
+		In:      GlDeleteTextures_In{Count: pCount, Textures: pTextures},
+		Out:     GlDeleteTextures_Out{},
 	}
 }
 func NewGlIsTexture(
+	contextID atom.ContextID,
 	pTexture TextureId,
 	pResult bool,
 ) *GlIsTexture {
 	return &GlIsTexture{
-		In:  GlIsTexture_In{Texture: pTexture},
-		Out: GlIsTexture_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsTexture_In{Texture: pTexture},
+		Out:     GlIsTexture_Out{Result: pResult},
 	}
 }
 func NewGlBindTexture(
+	contextID atom.ContextID,
 	pTarget TextureTarget,
 	pTexture TextureId,
 ) *GlBindTexture {
 	return &GlBindTexture{
-		In:  GlBindTexture_In{Target: pTarget, Texture: pTexture},
-		Out: GlBindTexture_Out{},
+		Context: contextID,
+		In:      GlBindTexture_In{Target: pTarget, Texture: pTexture},
+		Out:     GlBindTexture_Out{},
 	}
 }
 func NewGlTexImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pInternalFormat TexelFormat,
@@ -13400,11 +13598,13 @@ func NewGlTexImage2D(
 	pData TexturePointer,
 ) *GlTexImage2D {
 	return &GlTexImage2D{
-		In:  GlTexImage2D_In{Target: pTarget, Level: pLevel, InternalFormat: pInternalFormat, Width: pWidth, Height: pHeight, Border: pBorder, Format: pFormat, Type: pType, Data: pData},
-		Out: GlTexImage2D_Out{},
+		Context: contextID,
+		In:      GlTexImage2D_In{Target: pTarget, Level: pLevel, InternalFormat: pInternalFormat, Width: pWidth, Height: pHeight, Border: pBorder, Format: pFormat, Type: pType, Data: pData},
+		Out:     GlTexImage2D_Out{},
 	}
 }
 func NewGlTexSubImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pXoffset int32,
@@ -13416,11 +13616,13 @@ func NewGlTexSubImage2D(
 	pData TexturePointer,
 ) *GlTexSubImage2D {
 	return &GlTexSubImage2D{
-		In:  GlTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData},
-		Out: GlTexSubImage2D_Out{},
+		Context: contextID,
+		In:      GlTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData},
+		Out:     GlTexSubImage2D_Out{},
 	}
 }
 func NewGlCopyTexImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pFormat TexelFormat,
@@ -13431,11 +13633,13 @@ func NewGlCopyTexImage2D(
 	pBorder int32,
 ) *GlCopyTexImage2D {
 	return &GlCopyTexImage2D{
-		In:  GlCopyTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, X: pX, Y: pY, Width: pWidth, Height: pHeight, Border: pBorder},
-		Out: GlCopyTexImage2D_Out{},
+		Context: contextID,
+		In:      GlCopyTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, X: pX, Y: pY, Width: pWidth, Height: pHeight, Border: pBorder},
+		Out:     GlCopyTexImage2D_Out{},
 	}
 }
 func NewGlCopyTexSubImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pXoffset int32,
@@ -13446,11 +13650,13 @@ func NewGlCopyTexSubImage2D(
 	pHeight int32,
 ) *GlCopyTexSubImage2D {
 	return &GlCopyTexSubImage2D{
-		In:  GlCopyTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out: GlCopyTexSubImage2D_Out{},
+		Context: contextID,
+		In:      GlCopyTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, X: pX, Y: pY, Width: pWidth, Height: pHeight},
+		Out:     GlCopyTexSubImage2D_Out{},
 	}
 }
 func NewGlCompressedTexImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pFormat CompressedTexelFormat,
@@ -13461,11 +13667,13 @@ func NewGlCompressedTexImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexImage2D {
 	return &GlCompressedTexImage2D{
-		In:  GlCompressedTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, Width: pWidth, Height: pHeight, Border: pBorder, ImageSize: pImageSize, Data: pData},
-		Out: GlCompressedTexImage2D_Out{},
+		Context: contextID,
+		In:      GlCompressedTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, Width: pWidth, Height: pHeight, Border: pBorder, ImageSize: pImageSize, Data: pData},
+		Out:     GlCompressedTexImage2D_Out{},
 	}
 }
 func NewGlCompressedTexSubImage2D(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 	pLevel int32,
 	pXoffset int32,
@@ -13477,19 +13685,23 @@ func NewGlCompressedTexSubImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexSubImage2D {
 	return &GlCompressedTexSubImage2D{
-		In:  GlCompressedTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, ImageSize: pImageSize, Data: pData},
-		Out: GlCompressedTexSubImage2D_Out{},
+		Context: contextID,
+		In:      GlCompressedTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, ImageSize: pImageSize, Data: pData},
+		Out:     GlCompressedTexSubImage2D_Out{},
 	}
 }
 func NewGlGenerateMipmap(
+	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 ) *GlGenerateMipmap {
 	return &GlGenerateMipmap{
-		In:  GlGenerateMipmap_In{Target: pTarget},
-		Out: GlGenerateMipmap_Out{},
+		Context: contextID,
+		In:      GlGenerateMipmap_In{Target: pTarget},
+		Out:     GlGenerateMipmap_Out{},
 	}
 }
 func NewGlReadPixels(
+	contextID atom.ContextID,
 	pX int32,
 	pY int32,
 	pWidth int32,
@@ -13499,209 +13711,253 @@ func NewGlReadPixels(
 	pData memory.Pointer,
 ) *GlReadPixels {
 	return &GlReadPixels{
-		In:  GlReadPixels_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType},
-		Out: GlReadPixels_Out{Data: pData},
+		Context: contextID,
+		In:      GlReadPixels_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType},
+		Out:     GlReadPixels_Out{Data: pData},
 	}
 }
 func NewGlGenFramebuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pFramebuffers FramebufferIdArray,
 ) *GlGenFramebuffers {
 	return &GlGenFramebuffers{
-		In:  GlGenFramebuffers_In{Count: pCount},
-		Out: GlGenFramebuffers_Out{Framebuffers: pFramebuffers},
+		Context: contextID,
+		In:      GlGenFramebuffers_In{Count: pCount},
+		Out:     GlGenFramebuffers_Out{Framebuffers: pFramebuffers},
 	}
 }
 func NewGlBindFramebuffer(
+	contextID atom.ContextID,
 	pTarget FramebufferTarget,
 	pFramebuffer FramebufferId,
 ) *GlBindFramebuffer {
 	return &GlBindFramebuffer{
-		In:  GlBindFramebuffer_In{Target: pTarget, Framebuffer: pFramebuffer},
-		Out: GlBindFramebuffer_Out{},
+		Context: contextID,
+		In:      GlBindFramebuffer_In{Target: pTarget, Framebuffer: pFramebuffer},
+		Out:     GlBindFramebuffer_Out{},
 	}
 }
 func NewGlCheckFramebufferStatus(
+	contextID atom.ContextID,
 	pTarget FramebufferTarget,
 	pResult FramebufferStatus,
 ) *GlCheckFramebufferStatus {
 	return &GlCheckFramebufferStatus{
-		In:  GlCheckFramebufferStatus_In{Target: pTarget},
-		Out: GlCheckFramebufferStatus_Out{Result: pResult},
+		Context: contextID,
+		In:      GlCheckFramebufferStatus_In{Target: pTarget},
+		Out:     GlCheckFramebufferStatus_Out{Result: pResult},
 	}
 }
 func NewGlDeleteFramebuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pFramebuffers FramebufferIdArray,
 ) *GlDeleteFramebuffers {
 	return &GlDeleteFramebuffers{
-		In:  GlDeleteFramebuffers_In{Count: pCount, Framebuffers: pFramebuffers},
-		Out: GlDeleteFramebuffers_Out{},
+		Context: contextID,
+		In:      GlDeleteFramebuffers_In{Count: pCount, Framebuffers: pFramebuffers},
+		Out:     GlDeleteFramebuffers_Out{},
 	}
 }
 func NewGlIsFramebuffer(
+	contextID atom.ContextID,
 	pFramebuffer FramebufferId,
 	pResult bool,
 ) *GlIsFramebuffer {
 	return &GlIsFramebuffer{
-		In:  GlIsFramebuffer_In{Framebuffer: pFramebuffer},
-		Out: GlIsFramebuffer_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsFramebuffer_In{Framebuffer: pFramebuffer},
+		Out:     GlIsFramebuffer_Out{Result: pResult},
 	}
 }
 func NewGlGenRenderbuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pRenderbuffers RenderbufferIdArray,
 ) *GlGenRenderbuffers {
 	return &GlGenRenderbuffers{
-		In:  GlGenRenderbuffers_In{Count: pCount},
-		Out: GlGenRenderbuffers_Out{Renderbuffers: pRenderbuffers},
+		Context: contextID,
+		In:      GlGenRenderbuffers_In{Count: pCount},
+		Out:     GlGenRenderbuffers_Out{Renderbuffers: pRenderbuffers},
 	}
 }
 func NewGlBindRenderbuffer(
+	contextID atom.ContextID,
 	pTarget RenderbufferTarget,
 	pRenderbuffer RenderbufferId,
 ) *GlBindRenderbuffer {
 	return &GlBindRenderbuffer{
-		In:  GlBindRenderbuffer_In{Target: pTarget, Renderbuffer: pRenderbuffer},
-		Out: GlBindRenderbuffer_Out{},
+		Context: contextID,
+		In:      GlBindRenderbuffer_In{Target: pTarget, Renderbuffer: pRenderbuffer},
+		Out:     GlBindRenderbuffer_Out{},
 	}
 }
 func NewGlRenderbufferStorage(
+	contextID atom.ContextID,
 	pTarget RenderbufferTarget,
 	pFormat RenderbufferFormat,
 	pWidth int32,
 	pHeight int32,
 ) *GlRenderbufferStorage {
 	return &GlRenderbufferStorage{
-		In:  GlRenderbufferStorage_In{Target: pTarget, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out: GlRenderbufferStorage_Out{},
+		Context: contextID,
+		In:      GlRenderbufferStorage_In{Target: pTarget, Format: pFormat, Width: pWidth, Height: pHeight},
+		Out:     GlRenderbufferStorage_Out{},
 	}
 }
 func NewGlDeleteRenderbuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pRenderbuffers RenderbufferIdArray,
 ) *GlDeleteRenderbuffers {
 	return &GlDeleteRenderbuffers{
-		In:  GlDeleteRenderbuffers_In{Count: pCount, Renderbuffers: pRenderbuffers},
-		Out: GlDeleteRenderbuffers_Out{},
+		Context: contextID,
+		In:      GlDeleteRenderbuffers_In{Count: pCount, Renderbuffers: pRenderbuffers},
+		Out:     GlDeleteRenderbuffers_Out{},
 	}
 }
 func NewGlIsRenderbuffer(
+	contextID atom.ContextID,
 	pRenderbuffer RenderbufferId,
 	pResult bool,
 ) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{
-		In:  GlIsRenderbuffer_In{Renderbuffer: pRenderbuffer},
-		Out: GlIsRenderbuffer_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsRenderbuffer_In{Renderbuffer: pRenderbuffer},
+		Out:     GlIsRenderbuffer_Out{Result: pResult},
 	}
 }
 func NewGlGetRenderbufferParameteriv(
+	contextID atom.ContextID,
 	pTarget RenderbufferTarget,
 	pParameter RenderbufferParameter,
 	pValues S32Array,
 ) *GlGetRenderbufferParameteriv {
 	return &GlGetRenderbufferParameteriv{
-		In:  GlGetRenderbufferParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetRenderbufferParameteriv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetRenderbufferParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetRenderbufferParameteriv_Out{Values: pValues},
 	}
 }
 func NewGlGenBuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pBuffers BufferIdArray,
 ) *GlGenBuffers {
 	return &GlGenBuffers{
-		In:  GlGenBuffers_In{Count: pCount},
-		Out: GlGenBuffers_Out{Buffers: pBuffers},
+		Context: contextID,
+		In:      GlGenBuffers_In{Count: pCount},
+		Out:     GlGenBuffers_Out{Buffers: pBuffers},
 	}
 }
 func NewGlBindBuffer(
+	contextID atom.ContextID,
 	pTarget BufferTarget,
 	pBuffer BufferId,
 ) *GlBindBuffer {
 	return &GlBindBuffer{
-		In:  GlBindBuffer_In{Target: pTarget, Buffer: pBuffer},
-		Out: GlBindBuffer_Out{},
+		Context: contextID,
+		In:      GlBindBuffer_In{Target: pTarget, Buffer: pBuffer},
+		Out:     GlBindBuffer_Out{},
 	}
 }
 func NewGlBufferData(
+	contextID atom.ContextID,
 	pTarget BufferTarget,
 	pSize int32,
 	pData BufferDataPointer,
 	pUsage BufferUsage,
 ) *GlBufferData {
 	return &GlBufferData{
-		In:  GlBufferData_In{Target: pTarget, Size: pSize, Data: pData, Usage: pUsage},
-		Out: GlBufferData_Out{},
+		Context: contextID,
+		In:      GlBufferData_In{Target: pTarget, Size: pSize, Data: pData, Usage: pUsage},
+		Out:     GlBufferData_Out{},
 	}
 }
 func NewGlBufferSubData(
+	contextID atom.ContextID,
 	pTarget BufferTarget,
 	pOffset int32,
 	pSize int32,
 	pData memory.Pointer,
 ) *GlBufferSubData {
 	return &GlBufferSubData{
-		In:  GlBufferSubData_In{Target: pTarget, Offset: pOffset, Size: pSize, Data: pData},
-		Out: GlBufferSubData_Out{},
+		Context: contextID,
+		In:      GlBufferSubData_In{Target: pTarget, Offset: pOffset, Size: pSize, Data: pData},
+		Out:     GlBufferSubData_Out{},
 	}
 }
 func NewGlDeleteBuffers(
+	contextID atom.ContextID,
 	pCount int32,
 	pBuffers BufferIdArray,
 ) *GlDeleteBuffers {
 	return &GlDeleteBuffers{
-		In:  GlDeleteBuffers_In{Count: pCount, Buffers: pBuffers},
-		Out: GlDeleteBuffers_Out{},
+		Context: contextID,
+		In:      GlDeleteBuffers_In{Count: pCount, Buffers: pBuffers},
+		Out:     GlDeleteBuffers_Out{},
 	}
 }
 func NewGlIsBuffer(
+	contextID atom.ContextID,
 	pBuffer BufferId,
 	pResult bool,
 ) *GlIsBuffer {
 	return &GlIsBuffer{
-		In:  GlIsBuffer_In{Buffer: pBuffer},
-		Out: GlIsBuffer_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsBuffer_In{Buffer: pBuffer},
+		Out:     GlIsBuffer_Out{Result: pResult},
 	}
 }
 func NewGlGetBufferParameteriv(
+	contextID atom.ContextID,
 	pTarget BufferTarget,
 	pParameter BufferParameter,
 	pValue int32,
 ) *GlGetBufferParameteriv {
 	return &GlGetBufferParameteriv{
-		In:  GlGetBufferParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetBufferParameteriv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetBufferParameteriv_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetBufferParameteriv_Out{Value: pValue},
 	}
 }
 func NewGlCreateShader(
+	contextID atom.ContextID,
 	pType ShaderType,
 	pResult ShaderId,
 ) *GlCreateShader {
 	return &GlCreateShader{
-		In:  GlCreateShader_In{Type: pType},
-		Out: GlCreateShader_Out{Result: pResult},
+		Context: contextID,
+		In:      GlCreateShader_In{Type: pType},
+		Out:     GlCreateShader_Out{Result: pResult},
 	}
 }
 func NewGlDeleteShader(
+	contextID atom.ContextID,
 	pShader ShaderId,
 ) *GlDeleteShader {
 	return &GlDeleteShader{
-		In:  GlDeleteShader_In{Shader: pShader},
-		Out: GlDeleteShader_Out{},
+		Context: contextID,
+		In:      GlDeleteShader_In{Shader: pShader},
+		Out:     GlDeleteShader_Out{},
 	}
 }
 func NewGlShaderSource(
+	contextID atom.ContextID,
 	pShader ShaderId,
 	pCount int32,
 	pSource StringArray,
 	pLength S32Array,
 ) *GlShaderSource {
 	return &GlShaderSource{
-		In:  GlShaderSource_In{Shader: pShader, Count: pCount, Source: pSource, Length: pLength},
-		Out: GlShaderSource_Out{},
+		Context: contextID,
+		In:      GlShaderSource_In{Shader: pShader, Count: pCount, Source: pSource, Length: pLength},
+		Out:     GlShaderSource_Out{},
 	}
 }
 func NewGlShaderBinary(
+	contextID atom.ContextID,
 	pCount int32,
 	pShaders ShaderIdArray,
 	pBinaryFormat uint32,
@@ -13709,234 +13965,287 @@ func NewGlShaderBinary(
 	pBinarySize int32,
 ) *GlShaderBinary {
 	return &GlShaderBinary{
-		In:  GlShaderBinary_In{Count: pCount, Shaders: pShaders, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
-		Out: GlShaderBinary_Out{},
+		Context: contextID,
+		In:      GlShaderBinary_In{Count: pCount, Shaders: pShaders, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
+		Out:     GlShaderBinary_Out{},
 	}
 }
 func NewGlGetShaderInfoLog(
+	contextID atom.ContextID,
 	pShader ShaderId,
 	pBufferLength int32,
 	pStringLengthWritten int32,
 	pInfo string,
 ) *GlGetShaderInfoLog {
 	return &GlGetShaderInfoLog{
-		In:  GlGetShaderInfoLog_In{Shader: pShader, BufferLength: pBufferLength},
-		Out: GlGetShaderInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
+		Context: contextID,
+		In:      GlGetShaderInfoLog_In{Shader: pShader, BufferLength: pBufferLength},
+		Out:     GlGetShaderInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
 	}
 }
 func NewGlGetShaderSource(
+	contextID atom.ContextID,
 	pShader ShaderId,
 	pBufferLength int32,
 	pStringLengthWritten int32,
 	pSource string,
 ) *GlGetShaderSource {
 	return &GlGetShaderSource{
-		In:  GlGetShaderSource_In{Shader: pShader, BufferLength: pBufferLength},
-		Out: GlGetShaderSource_Out{StringLengthWritten: pStringLengthWritten, Source: pSource},
+		Context: contextID,
+		In:      GlGetShaderSource_In{Shader: pShader, BufferLength: pBufferLength},
+		Out:     GlGetShaderSource_Out{StringLengthWritten: pStringLengthWritten, Source: pSource},
 	}
 }
-func NewGlReleaseShaderCompiler() *GlReleaseShaderCompiler {
+func NewGlReleaseShaderCompiler(
+	contextID atom.ContextID,
+) *GlReleaseShaderCompiler {
 	return &GlReleaseShaderCompiler{
-		In:  GlReleaseShaderCompiler_In{},
-		Out: GlReleaseShaderCompiler_Out{},
+		Context: contextID,
+		In:      GlReleaseShaderCompiler_In{},
+		Out:     GlReleaseShaderCompiler_Out{},
 	}
 }
 func NewGlCompileShader(
+	contextID atom.ContextID,
 	pShader ShaderId,
 ) *GlCompileShader {
 	return &GlCompileShader{
-		In:  GlCompileShader_In{Shader: pShader},
-		Out: GlCompileShader_Out{},
+		Context: contextID,
+		In:      GlCompileShader_In{Shader: pShader},
+		Out:     GlCompileShader_Out{},
 	}
 }
 func NewGlIsShader(
+	contextID atom.ContextID,
 	pShader ShaderId,
 	pResult bool,
 ) *GlIsShader {
 	return &GlIsShader{
-		In:  GlIsShader_In{Shader: pShader},
-		Out: GlIsShader_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsShader_In{Shader: pShader},
+		Out:     GlIsShader_Out{Result: pResult},
 	}
 }
 func NewGlCreateProgram(
+	contextID atom.ContextID,
 	pResult ProgramId,
 ) *GlCreateProgram {
 	return &GlCreateProgram{
-		In:  GlCreateProgram_In{},
-		Out: GlCreateProgram_Out{Result: pResult},
+		Context: contextID,
+		In:      GlCreateProgram_In{},
+		Out:     GlCreateProgram_Out{Result: pResult},
 	}
 }
 func NewGlDeleteProgram(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlDeleteProgram {
 	return &GlDeleteProgram{
-		In:  GlDeleteProgram_In{Program: pProgram},
-		Out: GlDeleteProgram_Out{},
+		Context: contextID,
+		In:      GlDeleteProgram_In{Program: pProgram},
+		Out:     GlDeleteProgram_Out{},
 	}
 }
 func NewGlAttachShader(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pShader ShaderId,
 ) *GlAttachShader {
 	return &GlAttachShader{
-		In:  GlAttachShader_In{Program: pProgram, Shader: pShader},
-		Out: GlAttachShader_Out{},
+		Context: contextID,
+		In:      GlAttachShader_In{Program: pProgram, Shader: pShader},
+		Out:     GlAttachShader_Out{},
 	}
 }
 func NewGlDetachShader(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pShader ShaderId,
 ) *GlDetachShader {
 	return &GlDetachShader{
-		In:  GlDetachShader_In{Program: pProgram, Shader: pShader},
-		Out: GlDetachShader_Out{},
+		Context: contextID,
+		In:      GlDetachShader_In{Program: pProgram, Shader: pShader},
+		Out:     GlDetachShader_Out{},
 	}
 }
 func NewGlGetAttachedShaders(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pBufferLength int32,
 	pShadersLengthWritten int32,
 	pShaders ShaderIdArray,
 ) *GlGetAttachedShaders {
 	return &GlGetAttachedShaders{
-		In:  GlGetAttachedShaders_In{Program: pProgram, BufferLength: pBufferLength},
-		Out: GlGetAttachedShaders_Out{ShadersLengthWritten: pShadersLengthWritten, Shaders: pShaders},
+		Context: contextID,
+		In:      GlGetAttachedShaders_In{Program: pProgram, BufferLength: pBufferLength},
+		Out:     GlGetAttachedShaders_Out{ShadersLengthWritten: pShadersLengthWritten, Shaders: pShaders},
 	}
 }
 func NewGlLinkProgram(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlLinkProgram {
 	return &GlLinkProgram{
-		In:  GlLinkProgram_In{Program: pProgram},
-		Out: GlLinkProgram_Out{},
+		Context: contextID,
+		In:      GlLinkProgram_In{Program: pProgram},
+		Out:     GlLinkProgram_Out{},
 	}
 }
 func NewGlGetProgramInfoLog(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pBufferLength int32,
 	pStringLengthWritten int32,
 	pInfo string,
 ) *GlGetProgramInfoLog {
 	return &GlGetProgramInfoLog{
-		In:  GlGetProgramInfoLog_In{Program: pProgram, BufferLength: pBufferLength},
-		Out: GlGetProgramInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
+		Context: contextID,
+		In:      GlGetProgramInfoLog_In{Program: pProgram, BufferLength: pBufferLength},
+		Out:     GlGetProgramInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
 	}
 }
 func NewGlUseProgram(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlUseProgram {
 	return &GlUseProgram{
-		In:  GlUseProgram_In{Program: pProgram},
-		Out: GlUseProgram_Out{},
+		Context: contextID,
+		In:      GlUseProgram_In{Program: pProgram},
+		Out:     GlUseProgram_Out{},
 	}
 }
 func NewGlIsProgram(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 	pResult bool,
 ) *GlIsProgram {
 	return &GlIsProgram{
-		In:  GlIsProgram_In{Program: pProgram},
-		Out: GlIsProgram_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsProgram_In{Program: pProgram},
+		Out:     GlIsProgram_Out{Result: pResult},
 	}
 }
 func NewGlValidateProgram(
+	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlValidateProgram {
 	return &GlValidateProgram{
-		In:  GlValidateProgram_In{Program: pProgram},
-		Out: GlValidateProgram_Out{},
+		Context: contextID,
+		In:      GlValidateProgram_In{Program: pProgram},
+		Out:     GlValidateProgram_Out{},
 	}
 }
 func NewGlClearColor(
+	contextID atom.ContextID,
 	pR float32,
 	pG float32,
 	pB float32,
 	pA float32,
 ) *GlClearColor {
 	return &GlClearColor{
-		In:  GlClearColor_In{R: pR, G: pG, B: pB, A: pA},
-		Out: GlClearColor_Out{},
+		Context: contextID,
+		In:      GlClearColor_In{R: pR, G: pG, B: pB, A: pA},
+		Out:     GlClearColor_Out{},
 	}
 }
 func NewGlClearDepthf(
+	contextID atom.ContextID,
 	pDepth float32,
 ) *GlClearDepthf {
 	return &GlClearDepthf{
-		In:  GlClearDepthf_In{Depth: pDepth},
-		Out: GlClearDepthf_Out{},
+		Context: contextID,
+		In:      GlClearDepthf_In{Depth: pDepth},
+		Out:     GlClearDepthf_Out{},
 	}
 }
 func NewGlClearStencil(
+	contextID atom.ContextID,
 	pStencil int32,
 ) *GlClearStencil {
 	return &GlClearStencil{
-		In:  GlClearStencil_In{Stencil: pStencil},
-		Out: GlClearStencil_Out{},
+		Context: contextID,
+		In:      GlClearStencil_In{Stencil: pStencil},
+		Out:     GlClearStencil_Out{},
 	}
 }
 func NewGlClear(
+	contextID atom.ContextID,
 	pMask ClearMask,
 ) *GlClear {
 	return &GlClear{
-		In:  GlClear_In{Mask: pMask},
-		Out: GlClear_Out{},
+		Context: contextID,
+		In:      GlClear_In{Mask: pMask},
+		Out:     GlClear_Out{},
 	}
 }
 func NewGlCullFace(
+	contextID atom.ContextID,
 	pMode FaceMode,
 ) *GlCullFace {
 	return &GlCullFace{
-		In:  GlCullFace_In{Mode: pMode},
-		Out: GlCullFace_Out{},
+		Context: contextID,
+		In:      GlCullFace_In{Mode: pMode},
+		Out:     GlCullFace_Out{},
 	}
 }
 func NewGlPolygonOffset(
+	contextID atom.ContextID,
 	pScaleFactor float32,
 	pUnits float32,
 ) *GlPolygonOffset {
 	return &GlPolygonOffset{
-		In:  GlPolygonOffset_In{ScaleFactor: pScaleFactor, Units: pUnits},
-		Out: GlPolygonOffset_Out{},
+		Context: contextID,
+		In:      GlPolygonOffset_In{ScaleFactor: pScaleFactor, Units: pUnits},
+		Out:     GlPolygonOffset_Out{},
 	}
 }
 func NewGlLineWidth(
+	contextID atom.ContextID,
 	pWidth float32,
 ) *GlLineWidth {
 	return &GlLineWidth{
-		In:  GlLineWidth_In{Width: pWidth},
-		Out: GlLineWidth_Out{},
+		Context: contextID,
+		In:      GlLineWidth_In{Width: pWidth},
+		Out:     GlLineWidth_Out{},
 	}
 }
 func NewGlSampleCoverage(
+	contextID atom.ContextID,
 	pValue float32,
 	pInvert bool,
 ) *GlSampleCoverage {
 	return &GlSampleCoverage{
-		In:  GlSampleCoverage_In{Value: pValue, Invert: pInvert},
-		Out: GlSampleCoverage_Out{},
+		Context: contextID,
+		In:      GlSampleCoverage_In{Value: pValue, Invert: pInvert},
+		Out:     GlSampleCoverage_Out{},
 	}
 }
 func NewGlHint(
+	contextID atom.ContextID,
 	pTarget HintTarget,
 	pMode HintMode,
 ) *GlHint {
 	return &GlHint{
-		In:  GlHint_In{Target: pTarget, Mode: pMode},
-		Out: GlHint_Out{},
+		Context: contextID,
+		In:      GlHint_In{Target: pTarget, Mode: pMode},
+		Out:     GlHint_Out{},
 	}
 }
 func NewGlFramebufferRenderbuffer(
+	contextID atom.ContextID,
 	pFramebufferTarget FramebufferTarget,
 	pFramebufferAttachment FramebufferAttachment,
 	pRenderbufferTarget RenderbufferTarget,
 	pRenderbuffer RenderbufferId,
 ) *GlFramebufferRenderbuffer {
 	return &GlFramebufferRenderbuffer{
-		In:  GlFramebufferRenderbuffer_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, RenderbufferTarget: pRenderbufferTarget, Renderbuffer: pRenderbuffer},
-		Out: GlFramebufferRenderbuffer_Out{},
+		Context: contextID,
+		In:      GlFramebufferRenderbuffer_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, RenderbufferTarget: pRenderbufferTarget, Renderbuffer: pRenderbuffer},
+		Out:     GlFramebufferRenderbuffer_Out{},
 	}
 }
 func NewGlFramebufferTexture2D(
+	contextID atom.ContextID,
 	pFramebufferTarget FramebufferTarget,
 	pFramebufferAttachment FramebufferAttachment,
 	pTextureTarget TextureImageTarget,
@@ -13944,116 +14253,144 @@ func NewGlFramebufferTexture2D(
 	pLevel int32,
 ) *GlFramebufferTexture2D {
 	return &GlFramebufferTexture2D{
-		In:  GlFramebufferTexture2D_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, TextureTarget: pTextureTarget, Texture: pTexture, Level: pLevel},
-		Out: GlFramebufferTexture2D_Out{},
+		Context: contextID,
+		In:      GlFramebufferTexture2D_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, TextureTarget: pTextureTarget, Texture: pTexture, Level: pLevel},
+		Out:     GlFramebufferTexture2D_Out{},
 	}
 }
 func NewGlGetFramebufferAttachmentParameteriv(
+	contextID atom.ContextID,
 	pFramebufferTarget FramebufferTarget,
 	pAttachment FramebufferAttachment,
 	pParameter FramebufferAttachmentParameter,
 	pValue S32Array,
 ) *GlGetFramebufferAttachmentParameteriv {
 	return &GlGetFramebufferAttachmentParameteriv{
-		In:  GlGetFramebufferAttachmentParameteriv_In{FramebufferTarget: pFramebufferTarget, Attachment: pAttachment, Parameter: pParameter},
-		Out: GlGetFramebufferAttachmentParameteriv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetFramebufferAttachmentParameteriv_In{FramebufferTarget: pFramebufferTarget, Attachment: pAttachment, Parameter: pParameter},
+		Out:     GlGetFramebufferAttachmentParameteriv_Out{Value: pValue},
 	}
 }
 func NewGlDrawElements(
+	contextID atom.ContextID,
 	pDrawMode DrawMode,
 	pElementCount int32,
 	pIndicesType IndicesType,
 	pIndices IndicesPointer,
 ) *GlDrawElements {
 	return &GlDrawElements{
-		In:  GlDrawElements_In{DrawMode: pDrawMode, ElementCount: pElementCount, IndicesType: pIndicesType, Indices: pIndices},
-		Out: GlDrawElements_Out{},
+		Context: contextID,
+		In:      GlDrawElements_In{DrawMode: pDrawMode, ElementCount: pElementCount, IndicesType: pIndicesType, Indices: pIndices},
+		Out:     GlDrawElements_Out{},
 	}
 }
 func NewGlDrawArrays(
+	contextID atom.ContextID,
 	pDrawMode DrawMode,
 	pFirstIndex int32,
 	pIndexCount int32,
 ) *GlDrawArrays {
 	return &GlDrawArrays{
-		In:  GlDrawArrays_In{DrawMode: pDrawMode, FirstIndex: pFirstIndex, IndexCount: pIndexCount},
-		Out: GlDrawArrays_Out{},
+		Context: contextID,
+		In:      GlDrawArrays_In{DrawMode: pDrawMode, FirstIndex: pFirstIndex, IndexCount: pIndexCount},
+		Out:     GlDrawArrays_Out{},
 	}
 }
-func NewGlFlush() *GlFlush {
+func NewGlFlush(
+	contextID atom.ContextID,
+) *GlFlush {
 	return &GlFlush{
-		In:  GlFlush_In{},
-		Out: GlFlush_Out{},
+		Context: contextID,
+		In:      GlFlush_In{},
+		Out:     GlFlush_Out{},
 	}
 }
-func NewGlFinish() *GlFinish {
+func NewGlFinish(
+	contextID atom.ContextID,
+) *GlFinish {
 	return &GlFinish{
-		In:  GlFinish_In{},
-		Out: GlFinish_Out{},
+		Context: contextID,
+		In:      GlFinish_In{},
+		Out:     GlFinish_Out{},
 	}
 }
 func NewGlGetBooleanv(
+	contextID atom.ContextID,
 	pParam StateVariable,
 	pValues BoolArray,
 ) *GlGetBooleanv {
 	return &GlGetBooleanv{
-		In:  GlGetBooleanv_In{Param: pParam},
-		Out: GlGetBooleanv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetBooleanv_In{Param: pParam},
+		Out:     GlGetBooleanv_Out{Values: pValues},
 	}
 }
 func NewGlGetFloatv(
+	contextID atom.ContextID,
 	pParam StateVariable,
 	pValues F32Array,
 ) *GlGetFloatv {
 	return &GlGetFloatv{
-		In:  GlGetFloatv_In{Param: pParam},
-		Out: GlGetFloatv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetFloatv_In{Param: pParam},
+		Out:     GlGetFloatv_Out{Values: pValues},
 	}
 }
 func NewGlGetIntegerv(
+	contextID atom.ContextID,
 	pParam StateVariable,
 	pValues S32Array,
 ) *GlGetIntegerv {
 	return &GlGetIntegerv{
-		In:  GlGetIntegerv_In{Param: pParam},
-		Out: GlGetIntegerv_Out{Values: pValues},
+		Context: contextID,
+		In:      GlGetIntegerv_In{Param: pParam},
+		Out:     GlGetIntegerv_Out{Values: pValues},
 	}
 }
 func NewGlGetString(
+	contextID atom.ContextID,
 	pParam StringConstant,
 	pResult string,
 ) *GlGetString {
 	return &GlGetString{
-		In:  GlGetString_In{Param: pParam},
-		Out: GlGetString_Out{Result: pResult},
+		Context: contextID,
+		In:      GlGetString_In{Param: pParam},
+		Out:     GlGetString_Out{Result: pResult},
 	}
 }
 func NewGlEnable(
+	contextID atom.ContextID,
 	pCapability Capability,
 ) *GlEnable {
 	return &GlEnable{
-		In:  GlEnable_In{Capability: pCapability},
-		Out: GlEnable_Out{},
+		Context: contextID,
+		In:      GlEnable_In{Capability: pCapability},
+		Out:     GlEnable_Out{},
 	}
 }
 func NewGlDisable(
+	contextID atom.ContextID,
 	pCapability Capability,
 ) *GlDisable {
 	return &GlDisable{
-		In:  GlDisable_In{Capability: pCapability},
-		Out: GlDisable_Out{},
+		Context: contextID,
+		In:      GlDisable_In{Capability: pCapability},
+		Out:     GlDisable_Out{},
 	}
 }
 func NewGlIsEnabled(
+	contextID atom.ContextID,
 	pCapability Capability,
 	pResult bool,
 ) *GlIsEnabled {
 	return &GlIsEnabled{
-		In:  GlIsEnabled_In{Capability: pCapability},
-		Out: GlIsEnabled_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsEnabled_In{Capability: pCapability},
+		Out:     GlIsEnabled_Out{Result: pResult},
 	}
 }
 func NewGlMapBufferRange(
+	contextID atom.ContextID,
 	pTarget MapBufferTarget,
 	pOffset int32,
 	pLength int32,
@@ -14061,29 +14398,35 @@ func NewGlMapBufferRange(
 	pResult memory.Pointer,
 ) *GlMapBufferRange {
 	return &GlMapBufferRange{
-		In:  GlMapBufferRange_In{Target: pTarget, Offset: pOffset, Length: pLength, Access: pAccess},
-		Out: GlMapBufferRange_Out{Result: pResult},
+		Context: contextID,
+		In:      GlMapBufferRange_In{Target: pTarget, Offset: pOffset, Length: pLength, Access: pAccess},
+		Out:     GlMapBufferRange_Out{Result: pResult},
 	}
 }
 func NewGlUnmapBuffer(
+	contextID atom.ContextID,
 	pTarget MapBufferTarget,
 ) *GlUnmapBuffer {
 	return &GlUnmapBuffer{
-		In:  GlUnmapBuffer_In{Target: pTarget},
-		Out: GlUnmapBuffer_Out{},
+		Context: contextID,
+		In:      GlUnmapBuffer_In{Target: pTarget},
+		Out:     GlUnmapBuffer_Out{},
 	}
 }
 func NewGlInvalidateFramebuffer(
+	contextID atom.ContextID,
 	pTarget FramebufferTarget,
 	pCount int32,
 	pAttachments FramebufferAttachmentArray,
 ) *GlInvalidateFramebuffer {
 	return &GlInvalidateFramebuffer{
-		In:  GlInvalidateFramebuffer_In{Target: pTarget, Count: pCount, Attachments: pAttachments},
-		Out: GlInvalidateFramebuffer_Out{},
+		Context: contextID,
+		In:      GlInvalidateFramebuffer_In{Target: pTarget, Count: pCount, Attachments: pAttachments},
+		Out:     GlInvalidateFramebuffer_Out{},
 	}
 }
 func NewGlRenderbufferStorageMultisample(
+	contextID atom.ContextID,
 	pTarget RenderbufferTarget,
 	pSamples int32,
 	pFormat RenderbufferFormat,
@@ -14091,11 +14434,13 @@ func NewGlRenderbufferStorageMultisample(
 	pHeight int32,
 ) *GlRenderbufferStorageMultisample {
 	return &GlRenderbufferStorageMultisample{
-		In:  GlRenderbufferStorageMultisample_In{Target: pTarget, Samples: pSamples, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out: GlRenderbufferStorageMultisample_Out{},
+		Context: contextID,
+		In:      GlRenderbufferStorageMultisample_In{Target: pTarget, Samples: pSamples, Format: pFormat, Width: pWidth, Height: pHeight},
+		Out:     GlRenderbufferStorageMultisample_Out{},
 	}
 }
 func NewGlBlitFramebuffer(
+	contextID atom.ContextID,
 	pSrcX0 int32,
 	pSrcY0 int32,
 	pSrcX1 int32,
@@ -14108,175 +14453,212 @@ func NewGlBlitFramebuffer(
 	pFilter TextureFilterMode,
 ) *GlBlitFramebuffer {
 	return &GlBlitFramebuffer{
-		In:  GlBlitFramebuffer_In{SrcX0: pSrcX0, SrcY0: pSrcY0, SrcX1: pSrcX1, SrcY1: pSrcY1, DstX0: pDstX0, DstY0: pDstY0, DstX1: pDstX1, DstY1: pDstY1, Mask: pMask, Filter: pFilter},
-		Out: GlBlitFramebuffer_Out{},
+		Context: contextID,
+		In:      GlBlitFramebuffer_In{SrcX0: pSrcX0, SrcY0: pSrcY0, SrcX1: pSrcX1, SrcY1: pSrcY1, DstX0: pDstX0, DstY0: pDstY0, DstX1: pDstX1, DstY1: pDstY1, Mask: pMask, Filter: pFilter},
+		Out:     GlBlitFramebuffer_Out{},
 	}
 }
 func NewGlGenQueries(
+	contextID atom.ContextID,
 	pCount int32,
 	pQueries QueryIdArray,
 ) *GlGenQueries {
 	return &GlGenQueries{
-		In:  GlGenQueries_In{Count: pCount},
-		Out: GlGenQueries_Out{Queries: pQueries},
+		Context: contextID,
+		In:      GlGenQueries_In{Count: pCount},
+		Out:     GlGenQueries_Out{Queries: pQueries},
 	}
 }
 func NewGlBeginQuery(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 	pQuery QueryId,
 ) *GlBeginQuery {
 	return &GlBeginQuery{
-		In:  GlBeginQuery_In{Target: pTarget, Query: pQuery},
-		Out: GlBeginQuery_Out{},
+		Context: contextID,
+		In:      GlBeginQuery_In{Target: pTarget, Query: pQuery},
+		Out:     GlBeginQuery_Out{},
 	}
 }
 func NewGlEndQuery(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 ) *GlEndQuery {
 	return &GlEndQuery{
-		In:  GlEndQuery_In{Target: pTarget},
-		Out: GlEndQuery_Out{},
+		Context: contextID,
+		In:      GlEndQuery_In{Target: pTarget},
+		Out:     GlEndQuery_Out{},
 	}
 }
 func NewGlDeleteQueries(
+	contextID atom.ContextID,
 	pCount int32,
 	pQueries QueryIdArray,
 ) *GlDeleteQueries {
 	return &GlDeleteQueries{
-		In:  GlDeleteQueries_In{Count: pCount, Queries: pQueries},
-		Out: GlDeleteQueries_Out{},
+		Context: contextID,
+		In:      GlDeleteQueries_In{Count: pCount, Queries: pQueries},
+		Out:     GlDeleteQueries_Out{},
 	}
 }
 func NewGlIsQuery(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pResult bool,
 ) *GlIsQuery {
 	return &GlIsQuery{
-		In:  GlIsQuery_In{Query: pQuery},
-		Out: GlIsQuery_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsQuery_In{Query: pQuery},
+		Out:     GlIsQuery_Out{Result: pResult},
 	}
 }
 func NewGlGetQueryiv(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 	pParameter QueryParameter,
 	pValue int32,
 ) *GlGetQueryiv {
 	return &GlGetQueryiv{
-		In:  GlGetQueryiv_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetQueryiv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryiv_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetQueryiv_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectuiv(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pParameter QueryObjectParameter,
 	pValue uint32,
 ) *GlGetQueryObjectuiv {
 	return &GlGetQueryObjectuiv{
-		In:  GlGetQueryObjectuiv_In{Query: pQuery, Parameter: pParameter},
-		Out: GlGetQueryObjectuiv_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryObjectuiv_In{Query: pQuery, Parameter: pParameter},
+		Out:     GlGetQueryObjectuiv_Out{Value: pValue},
 	}
 }
 func NewGlGenQueriesEXT(
+	contextID atom.ContextID,
 	pCount int32,
 	pQueries QueryIdArray,
 ) *GlGenQueriesEXT {
 	return &GlGenQueriesEXT{
-		In:  GlGenQueriesEXT_In{Count: pCount},
-		Out: GlGenQueriesEXT_Out{Queries: pQueries},
+		Context: contextID,
+		In:      GlGenQueriesEXT_In{Count: pCount},
+		Out:     GlGenQueriesEXT_Out{Queries: pQueries},
 	}
 }
 func NewGlBeginQueryEXT(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 	pQuery QueryId,
 ) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{
-		In:  GlBeginQueryEXT_In{Target: pTarget, Query: pQuery},
-		Out: GlBeginQueryEXT_Out{},
+		Context: contextID,
+		In:      GlBeginQueryEXT_In{Target: pTarget, Query: pQuery},
+		Out:     GlBeginQueryEXT_Out{},
 	}
 }
 func NewGlEndQueryEXT(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 ) *GlEndQueryEXT {
 	return &GlEndQueryEXT{
-		In:  GlEndQueryEXT_In{Target: pTarget},
-		Out: GlEndQueryEXT_Out{},
+		Context: contextID,
+		In:      GlEndQueryEXT_In{Target: pTarget},
+		Out:     GlEndQueryEXT_Out{},
 	}
 }
 func NewGlDeleteQueriesEXT(
+	contextID atom.ContextID,
 	pCount int32,
 	pQueries QueryIdArray,
 ) *GlDeleteQueriesEXT {
 	return &GlDeleteQueriesEXT{
-		In:  GlDeleteQueriesEXT_In{Count: pCount, Queries: pQueries},
-		Out: GlDeleteQueriesEXT_Out{},
+		Context: contextID,
+		In:      GlDeleteQueriesEXT_In{Count: pCount, Queries: pQueries},
+		Out:     GlDeleteQueriesEXT_Out{},
 	}
 }
 func NewGlIsQueryEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pResult bool,
 ) *GlIsQueryEXT {
 	return &GlIsQueryEXT{
-		In:  GlIsQueryEXT_In{Query: pQuery},
-		Out: GlIsQueryEXT_Out{Result: pResult},
+		Context: contextID,
+		In:      GlIsQueryEXT_In{Query: pQuery},
+		Out:     GlIsQueryEXT_Out{Result: pResult},
 	}
 }
 func NewGlQueryCounterEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pTarget QueryTarget,
 ) *GlQueryCounterEXT {
 	return &GlQueryCounterEXT{
-		In:  GlQueryCounterEXT_In{Query: pQuery, Target: pTarget},
-		Out: GlQueryCounterEXT_Out{},
+		Context: contextID,
+		In:      GlQueryCounterEXT_In{Query: pQuery, Target: pTarget},
+		Out:     GlQueryCounterEXT_Out{},
 	}
 }
 func NewGlGetQueryivEXT(
+	contextID atom.ContextID,
 	pTarget QueryTarget,
 	pParameter QueryParameter,
 	pValue int32,
 ) *GlGetQueryivEXT {
 	return &GlGetQueryivEXT{
-		In:  GlGetQueryivEXT_In{Target: pTarget, Parameter: pParameter},
-		Out: GlGetQueryivEXT_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryivEXT_In{Target: pTarget, Parameter: pParameter},
+		Out:     GlGetQueryivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectivEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pParameter QueryObjectParameter,
 	pValue int32,
 ) *GlGetQueryObjectivEXT {
 	return &GlGetQueryObjectivEXT{
-		In:  GlGetQueryObjectivEXT_In{Query: pQuery, Parameter: pParameter},
-		Out: GlGetQueryObjectivEXT_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryObjectivEXT_In{Query: pQuery, Parameter: pParameter},
+		Out:     GlGetQueryObjectivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectuivEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pParameter QueryObjectParameter,
 	pValue uint32,
 ) *GlGetQueryObjectuivEXT {
 	return &GlGetQueryObjectuivEXT{
-		In:  GlGetQueryObjectuivEXT_In{Query: pQuery, Parameter: pParameter},
-		Out: GlGetQueryObjectuivEXT_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryObjectuivEXT_In{Query: pQuery, Parameter: pParameter},
+		Out:     GlGetQueryObjectuivEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjecti64vEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pParameter QueryObjectParameter,
 	pValue int64,
 ) *GlGetQueryObjecti64vEXT {
 	return &GlGetQueryObjecti64vEXT{
-		In:  GlGetQueryObjecti64vEXT_In{Query: pQuery, Parameter: pParameter},
-		Out: GlGetQueryObjecti64vEXT_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryObjecti64vEXT_In{Query: pQuery, Parameter: pParameter},
+		Out:     GlGetQueryObjecti64vEXT_Out{Value: pValue},
 	}
 }
 func NewGlGetQueryObjectui64vEXT(
+	contextID atom.ContextID,
 	pQuery QueryId,
 	pParameter QueryObjectParameter,
 	pValue uint64,
 ) *GlGetQueryObjectui64vEXT {
 	return &GlGetQueryObjectui64vEXT{
-		In:  GlGetQueryObjectui64vEXT_In{Query: pQuery, Parameter: pParameter},
-		Out: GlGetQueryObjectui64vEXT_Out{Value: pValue},
+		Context: contextID,
+		In:      GlGetQueryObjectui64vEXT_In{Query: pQuery, Parameter: pParameter},
+		Out:     GlGetQueryObjectui64vEXT_Out{Value: pValue},
 	}
 }
 

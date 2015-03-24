@@ -57,22 +57,23 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, af
 }
 
 func TestClear(t *testing.T) {
+	cid := atom.ContextID(0)
 	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
 	w, h := uint32(64), uint32(64)
 	atoms := atom.List{
-		/* 0 */ gles.NewInit(int32(w), int32(h),
-			gles.RenderbufferFormat_GL_RGB565,            // Unused
-			gles.RenderbufferFormat_GL_DEPTH_COMPONENT16, // Unused
-			gles.RenderbufferFormat_GL_STENCIL_INDEX8,    // Unused
+		/* 0 */ gles.NewInit(cid, int32(w), int32(h),
+			gles.RenderbufferFormat_GL_RGB565,
+			gles.RenderbufferFormat_GL_DEPTH_COMPONENT16,
+			gles.RenderbufferFormat_GL_STENCIL_INDEX8,
 		),
-		/* 1 */ gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
-		/* 2 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 3 */ gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
-		/* 4 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 5 */ gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
-		/* 6 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 7 */ gles.NewGlClearColor(0.0, 0.0, 0.0, 1.0),
-		/* 8 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 1 */ gles.NewGlClearColor(cid, 1.0, 0.0, 0.0, 1.0),
+		/* 2 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 3 */ gles.NewGlClearColor(cid, 0.0, 1.0, 0.0, 1.0),
+		/* 4 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 5 */ gles.NewGlClearColor(cid, 0.0, 0.0, 1.0, 1.0),
+		/* 6 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 7 */ gles.NewGlClearColor(cid, 0.0, 0.0, 0.0, 1.0),
+		/* 8 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	}
 
 	mgr := replay.New(db, logger)

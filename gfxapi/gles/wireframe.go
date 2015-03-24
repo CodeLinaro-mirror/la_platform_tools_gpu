@@ -27,6 +27,7 @@ func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 
 		if a.Flags().IsDrawCall() {
 			c := getState(a, s)
+			cid := a.ContextID()
 			indices, drawMode, err := getIndices(id, a, db, c, &s.Memory, logger)
 			if err != nil {
 				logger.Error(err.Error())
@@ -55,16 +56,15 @@ func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 			// Unbind the index buffer
 			oldIndexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
 			out.Write(id, NewGlBindBuffer(
-				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0))
+				cid, BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0))
 
 			// Draw the wire-frame
 			out.Write(id, NewGlDrawElements(
-				drawMode, int32(len(indices)), wireframeDataType, IndicesPointer(address)))
+				cid, drawMode, int32(len(indices)), wireframeDataType, IndicesPointer(address)))
 
 			// Rebind the old index buffer
 			out.Write(id, NewGlBindBuffer(
-				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER),
-				oldIndexBufferID))
+				cid, BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), oldIndexBufferID))
 		} else {
 			out.Write(id, a)
 		}

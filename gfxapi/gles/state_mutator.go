@@ -121,7 +121,7 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 	return nil
 }
 func (ϟa *StartTimer) Mutate(ϟs *state.State) error {
-	ϟc := getState(ϟa, ϟs)
+	ϟc := &State{}
 	ϟo := StartTimer_Out{}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying startTimer expected %v got %v", ϟa.Out, ϟo)
@@ -129,7 +129,7 @@ func (ϟa *StartTimer) Mutate(ϟs *state.State) error {
 	return nil
 }
 func (ϟa *StopTimer) Mutate(ϟs *state.State) error {
-	ϟc := getState(ϟa, ϟs)
+	ϟc := &State{}
 	ϟo := StopTimer_Out{}
 	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -138,7 +138,7 @@ func (ϟa *StopTimer) Mutate(ϟs *state.State) error {
 	return nil
 }
 func (ϟa *FlushPostBuffer) Mutate(ϟs *state.State) error {
-	ϟc := getState(ϟa, ϟs)
+	ϟc := &State{}
 	ϟo := FlushPostBuffer_Out{}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying flushPostBuffer expected %v got %v", ϟa.Out, ϟo)
