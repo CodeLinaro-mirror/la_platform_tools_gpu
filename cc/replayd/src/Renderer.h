@@ -29,7 +29,7 @@ namespace caze {
 class Renderer {
 public:
     // Construct and return an offscreen renderer with the specified dimensions.
-    static std::unique_ptr<Renderer> create(int width, int height);
+    static std::unique_ptr<Renderer> create(int width, int height, int depthSize, int stencilSize);
 
     // Destroys the renderer and any associated off-screen windows.
     virtual ~Renderer() {}

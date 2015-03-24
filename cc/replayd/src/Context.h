@@ -71,7 +71,7 @@ private:
     void registerCallbacks(Interpreter* interpreter);
 
     // Initialize the context for replay
-    bool init(int width, int height);
+    bool init(int width, int height, int depthSize, int stencilSize);
 
     // Post a chunk of data where the number of bytes is on the top of the stack (uint32_t) and the
     // address for the data is the second element on the stack (void*)

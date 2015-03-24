@@ -114,15 +114,34 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         return this->flushPostBuffer(stack);
     });
 
-    // Function for initializing the API context. The first three argument are not currently used.
+    // Function for initializing the API context.
     interpreter->registerFunction(gfxapi::Ids::Init, [this](Stack* stack, bool) {
-        stack->discard(3);
+        uint32_t stencil_fmt = stack->pop<uint32_t>();
+        uint32_t depth_fmt = stack->pop<uint32_t>();
+        uint32_t color_fmt = stack->pop<uint32_t>();
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
 
+        uint32_t depthSize = 0;
+        switch (depth_fmt) {
+            case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_DEPTH_COMPONENT16):
+                depthSize = 16;
+                break;
+            case static_cast<uint32_t>(gfxapi::TexelFormat_GLES_3_0::GL_DEPTH24_STENCIL8):
+                depthSize = 24;
+                break;
+        }
+
+        uint32_t stencilSize = 0;
+        switch (stencil_fmt) {
+            case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_STENCIL_INDEX8):
+            case static_cast<uint32_t>(gfxapi::TexelFormat_GLES_3_0::GL_DEPTH24_STENCIL8):
+                stencilSize = 8;
+        }
+
         if (stack->isValid()) {
-            CAZE_INFO("init(%d, %d)\n", height, width);
-            return this->init(width, height);
+            CAZE_INFO("init(%d, %d, %d, %d)\n", height, width, depthSize, stencilSize);
+            return this->init(width, height, depthSize, stencilSize);
         } else {
             CAZE_WARNING("Error during calling function initGl\n");
             return false;
@@ -130,8 +149,8 @@ void Context::registerCallbacks(Interpreter* interpreter) {
     });
 }
 
-bool Context::init(int width, int height) {
-    mRenderer = Renderer::create(width, height);
+bool Context::init(int width, int height, int depthSize, int stencilSize) {
+    mRenderer = Renderer::create(width, height, depthSize, stencilSize);
     return true;
 }
 
