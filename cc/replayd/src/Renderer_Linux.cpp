@@ -70,7 +70,7 @@ void glXDestroyContext(Display *dpy, GLXContext ctx);
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height);
+    RendererImpl(int width, int height, int depthSize, int stencilSize);
     virtual ~RendererImpl() override;
 
     virtual const char* name() override;
@@ -84,7 +84,7 @@ private:
     GLXPbuffer mPbuffer;
 };
 
-RendererImpl::RendererImpl(int width, int height) {
+RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     mDisplay = XOpenDisplay(nullptr);
     if (mDisplay == nullptr) {
         CAZE_FATAL("Unable to to open X display\n");
@@ -101,8 +101,8 @@ RendererImpl::RendererImpl(int width, int height) {
         GLX_GREEN_SIZE, 8,
         GLX_BLUE_SIZE, 8,
         GLX_ALPHA_SIZE, 8,
-        GLX_DEPTH_SIZE, 24,
-        GLX_STENCIL_SIZE, 8,
+        GLX_DEPTH_SIZE, depthSize,
+        GLX_STENCIL_SIZE, stencilSize,
         GLX_RENDER_TYPE, GLX_RGBA_BIT,
         GLX_DRAWABLE_TYPE, GLX_PBUFFER_BIT,
         None
@@ -166,8 +166,8 @@ const char* RendererImpl::version() {
 
 } // end of anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height));
+std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
+    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
 }
 
 }  // end of namespace caze

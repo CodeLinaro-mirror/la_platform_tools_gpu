@@ -28,30 +28,26 @@ namespace caze {
 namespace {
 
 const TCHAR* wndClassName = TEXT("replayd");
+int gDepthSize = 0;
+int gStencilSize = 0;
 
 HGLRC renderingContext = nullptr;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     switch(message) {
         case WM_CREATE: {
-            PIXELFORMATDESCRIPTOR pfd = {
-                sizeof(PIXELFORMATDESCRIPTOR),
-                1,
-                PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-                PFD_TYPE_RGBA,
-                32,                            // Color buffer bits-per-pixel
-                0, 0, 0, 0, 0, 0,
-                0,
-                0,
-                0,
-                0, 0, 0, 0,
-                24,                            // Depth buffer bits-per-pixel
-                8,                             // Stencil buffer bits-per-pixel
-                0,
-                PFD_MAIN_PLANE,
-                0,
-                0, 0, 0
-            };
+            PIXELFORMATDESCRIPTOR pfd;
+            memset(&pfd, 0, sizeof(pfd));
+
+            pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+            pfd.nVersion = 1;
+            pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+            pfd.iPixelType = PFD_TYPE_RGBA;
+            pfd.cColorBits = 32;
+            pfd.cDepthBits = gDepthSize;
+            pfd.cStencilBits = gStencilSize;
+            pfd.cAlphaBits = 8;
+            pfd.iLayerType = PFD_MAIN_PLANE;
 
             HDC deviceContext = GetDC(hWnd);
 
@@ -106,7 +102,7 @@ WNDCLASS registerWindowClass() {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height);
+    RendererImpl(int width, int height, int depthSize, int stencilSize);
     virtual ~RendererImpl() override;
 
     virtual const char* name() override;
@@ -118,10 +114,12 @@ private:
     HWND mWindow;
 };
 
-RendererImpl::RendererImpl(int width, int height) {
+RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     if (renderingContext != 0) {
         CAZE_FATAL("Renderer already created. Only one instance can be created at any given time.\n");
     }
+    gDepthSize = depthSize;
+    gStencilSize = stencilSize;
 
     static WNDCLASS wc = registerWindowClass(); // Only needs to be done once per app life-time.
 
@@ -162,8 +160,8 @@ const char* RendererImpl::version() {
 
 } // end of anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height));
+std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
+    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
 }
 
 }  // end of namespace caze

@@ -30,7 +30,7 @@ namespace {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height);
+    RendererImpl(int width, int height, int depthSize, int stencilSize);
     virtual ~RendererImpl() override;
 
     virtual const char* name() override;
@@ -43,7 +43,7 @@ private:
     NSOpenGLContext* mContext;
 };
 
-RendererImpl::RendererImpl(int width, int height) {
+RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     [NSApplication sharedApplication];
 
     NSRect rect = NSMakeRect(0, 0, width, height);
@@ -60,8 +60,9 @@ RendererImpl::RendererImpl(int width, int height) {
 
     NSOpenGLPixelFormatAttribute attributes[] = {
         NSOpenGLPFANoRecovery,
-        NSOpenGLPFAColorSize, (NSOpenGLPixelFormatAttribute)24,
-        NSOpenGLPFADepthSize, (NSOpenGLPixelFormatAttribute)32,
+        NSOpenGLPFAColorSize, (NSOpenGLPixelFormatAttribute)32,
+        NSOpenGLPFADepthSize, (NSOpenGLPixelFormatAttribute)depthSize,
+        NSOpenGLPFAStencilSize, (NSOpenGLPixelFormatAttribute)stencilSize,
         NSOpenGLPFAAccelerated,
         NSOpenGLPFABackingStore,
         (NSOpenGLPixelFormatAttribute)0
@@ -113,8 +114,8 @@ const char* RendererImpl::version() {
 
 } // end of anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height));
+std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
+    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
 }
 
 }  // end of namespace caze

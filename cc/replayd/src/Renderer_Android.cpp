@@ -29,7 +29,7 @@ namespace {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height);
+    RendererImpl(int width, int height, int depthSize, int stencilSize);
     virtual ~RendererImpl() override;
 
     virtual const char* name() override;
@@ -43,7 +43,7 @@ private:
     EGLDisplay mEglDisplay;
 };
 
-RendererImpl::RendererImpl(int width, int height) {
+RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     EGLint error;
 
     mEglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
@@ -66,21 +66,15 @@ RendererImpl::RendererImpl(int width, int height) {
 
     // Find a supported EGL context config.
     const int configAttribList[] = {
-        // RGBA8 buffer
         EGL_RED_SIZE, 8,
         EGL_GREEN_SIZE, 8,
         EGL_BLUE_SIZE, 8,
         EGL_ALPHA_SIZE, 8,
         EGL_BUFFER_SIZE, 32,
-
-        // D8S8 buffer
-        EGL_DEPTH_SIZE, 8,
-        EGL_STENCIL_SIZE, 8,
-
-        // GL|ES API version
-        // Note: EGL_OPENGL_ES3_BIT_KHR is undefined on Android NDK.
+        EGL_DEPTH_SIZE, depthSize,
+        EGL_STENCIL_SIZE, stencilSize,
+        EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,
         EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-
         EGL_NONE
     };
     int one = 1;
@@ -176,8 +170,8 @@ const char* RendererImpl::version() {
 
 } // end of anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height));
+std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
+    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
 }
 
 }  // end of namespace caze
