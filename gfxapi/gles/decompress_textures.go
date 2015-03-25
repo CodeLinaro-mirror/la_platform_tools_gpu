@@ -59,6 +59,7 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 			})
 
 			out.Write(id, NewGlTexImage2D(
+				a.ContextID(),
 				a.In.Target,
 				a.In.Level,
 				TexelFormat_GL_RGBA,

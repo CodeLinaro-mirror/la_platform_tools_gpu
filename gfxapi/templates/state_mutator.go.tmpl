@@ -32,10 +32,12 @@ limitations under the License.
 
   {{range $c := AllCommands $}}
     func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *state.State) error {
-      {{if $c.GetAnnotation "initializer"}}
+      {{if $c.GetAnnotation "synthetic"}}
         ϟc := &State{}
-        ϟc.Init()
-        ϟs.Contexts[ϟa.ContextID()] = ϟc
+        {{if $c.GetAnnotation "initializer"}}
+          ϟc.Init()
+          ϟs.Contexts[ϟa.ContextID()] = ϟc
+        {{end}}
       {{else}}
         ϟc := getState(ϟa, ϟs)
       {{end}}

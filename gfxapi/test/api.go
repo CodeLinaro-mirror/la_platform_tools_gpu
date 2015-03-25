@@ -1759,388 +1759,483 @@ type Globals struct {
 
 func (g *Globals) Init() {
 }
-func NewCmdVoid() *CmdVoid {
+func NewCmdVoid(
+	contextID atom.ContextID,
+) *CmdVoid {
 	return &CmdVoid{
-		In:  CmdVoid_In{},
-		Out: CmdVoid_Out{},
+		Context: contextID,
+		In:      CmdVoid_In{},
+		Out:     CmdVoid_Out{},
 	}
 }
 func NewCmdVoidU8(
+	contextID atom.ContextID,
 	pA uint8,
 ) *CmdVoidU8 {
 	return &CmdVoidU8{
-		In:  CmdVoidU8_In{A: pA},
-		Out: CmdVoidU8_Out{},
+		Context: contextID,
+		In:      CmdVoidU8_In{A: pA},
+		Out:     CmdVoidU8_Out{},
 	}
 }
 func NewCmdVoidS8(
+	contextID atom.ContextID,
 	pA int8,
 ) *CmdVoidS8 {
 	return &CmdVoidS8{
-		In:  CmdVoidS8_In{A: pA},
-		Out: CmdVoidS8_Out{},
+		Context: contextID,
+		In:      CmdVoidS8_In{A: pA},
+		Out:     CmdVoidS8_Out{},
 	}
 }
 func NewCmdVoidU16(
+	contextID atom.ContextID,
 	pA uint16,
 ) *CmdVoidU16 {
 	return &CmdVoidU16{
-		In:  CmdVoidU16_In{A: pA},
-		Out: CmdVoidU16_Out{},
+		Context: contextID,
+		In:      CmdVoidU16_In{A: pA},
+		Out:     CmdVoidU16_Out{},
 	}
 }
 func NewCmdVoidS16(
+	contextID atom.ContextID,
 	pA int16,
 ) *CmdVoidS16 {
 	return &CmdVoidS16{
-		In:  CmdVoidS16_In{A: pA},
-		Out: CmdVoidS16_Out{},
+		Context: contextID,
+		In:      CmdVoidS16_In{A: pA},
+		Out:     CmdVoidS16_Out{},
 	}
 }
 func NewCmdVoidF32(
+	contextID atom.ContextID,
 	pA float32,
 ) *CmdVoidF32 {
 	return &CmdVoidF32{
-		In:  CmdVoidF32_In{A: pA},
-		Out: CmdVoidF32_Out{},
+		Context: contextID,
+		In:      CmdVoidF32_In{A: pA},
+		Out:     CmdVoidF32_Out{},
 	}
 }
 func NewCmdVoidU32(
+	contextID atom.ContextID,
 	pA uint32,
 ) *CmdVoidU32 {
 	return &CmdVoidU32{
-		In:  CmdVoidU32_In{A: pA},
-		Out: CmdVoidU32_Out{},
+		Context: contextID,
+		In:      CmdVoidU32_In{A: pA},
+		Out:     CmdVoidU32_Out{},
 	}
 }
 func NewCmdVoidS32(
+	contextID atom.ContextID,
 	pA int32,
 ) *CmdVoidS32 {
 	return &CmdVoidS32{
-		In:  CmdVoidS32_In{A: pA},
-		Out: CmdVoidS32_Out{},
+		Context: contextID,
+		In:      CmdVoidS32_In{A: pA},
+		Out:     CmdVoidS32_Out{},
 	}
 }
 func NewCmdVoidF64(
+	contextID atom.ContextID,
 	pA float64,
 ) *CmdVoidF64 {
 	return &CmdVoidF64{
-		In:  CmdVoidF64_In{A: pA},
-		Out: CmdVoidF64_Out{},
+		Context: contextID,
+		In:      CmdVoidF64_In{A: pA},
+		Out:     CmdVoidF64_Out{},
 	}
 }
 func NewCmdVoidU64(
+	contextID atom.ContextID,
 	pA uint64,
 ) *CmdVoidU64 {
 	return &CmdVoidU64{
-		In:  CmdVoidU64_In{A: pA},
-		Out: CmdVoidU64_Out{},
+		Context: contextID,
+		In:      CmdVoidU64_In{A: pA},
+		Out:     CmdVoidU64_Out{},
 	}
 }
 func NewCmdVoidS64(
+	contextID atom.ContextID,
 	pA int64,
 ) *CmdVoidS64 {
 	return &CmdVoidS64{
-		In:  CmdVoidS64_In{A: pA},
-		Out: CmdVoidS64_Out{},
+		Context: contextID,
+		In:      CmdVoidS64_In{A: pA},
+		Out:     CmdVoidS64_Out{},
 	}
 }
 func NewCmdVoidBool(
+	contextID atom.ContextID,
 	pA bool,
 ) *CmdVoidBool {
 	return &CmdVoidBool{
-		In:  CmdVoidBool_In{A: pA},
-		Out: CmdVoidBool_Out{},
+		Context: contextID,
+		In:      CmdVoidBool_In{A: pA},
+		Out:     CmdVoidBool_Out{},
 	}
 }
 func NewCmdVoidString(
+	contextID atom.ContextID,
 	pA string,
 ) *CmdVoidString {
 	return &CmdVoidString{
-		In:  CmdVoidString_In{A: pA},
-		Out: CmdVoidString_Out{},
+		Context: contextID,
+		In:      CmdVoidString_In{A: pA},
+		Out:     CmdVoidString_Out{},
 	}
 }
 func NewCmdVoid3Strings(
+	contextID atom.ContextID,
 	pA string,
 	pB string,
 	pC string,
 ) *CmdVoid3Strings {
 	return &CmdVoid3Strings{
-		In:  CmdVoid3Strings_In{A: pA, B: pB, C: pC},
-		Out: CmdVoid3Strings_Out{},
+		Context: contextID,
+		In:      CmdVoid3Strings_In{A: pA, B: pB, C: pC},
+		Out:     CmdVoid3Strings_Out{},
 	}
 }
 func NewCmdVoid3Arrays(
+	contextID atom.ContextID,
 	pA S8Array,
 	pB StringArray,
 	pC BoolArray,
 ) *CmdVoid3Arrays {
 	return &CmdVoid3Arrays{
-		In:  CmdVoid3Arrays_In{A: pA, B: pB, C: pC},
-		Out: CmdVoid3Arrays_Out{},
+		Context: contextID,
+		In:      CmdVoid3Arrays_In{A: pA, B: pB, C: pC},
+		Out:     CmdVoid3Arrays_Out{},
 	}
 }
 func NewCmdVoidArrayOfStrings(
+	contextID atom.ContextID,
 	pA StringArray,
 ) *CmdVoidArrayOfStrings {
 	return &CmdVoidArrayOfStrings{
-		In:  CmdVoidArrayOfStrings_In{A: pA},
-		Out: CmdVoidArrayOfStrings_Out{},
+		Context: contextID,
+		In:      CmdVoidArrayOfStrings_In{A: pA},
+		Out:     CmdVoidArrayOfStrings_Out{},
 	}
 }
 func NewCmdU8(
+	contextID atom.ContextID,
 	pResult uint8,
 ) *CmdU8 {
 	return &CmdU8{
-		In:  CmdU8_In{},
-		Out: CmdU8_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdU8_In{},
+		Out:     CmdU8_Out{Result: pResult},
 	}
 }
 func NewCmdS8(
+	contextID atom.ContextID,
 	pResult int8,
 ) *CmdS8 {
 	return &CmdS8{
-		In:  CmdS8_In{},
-		Out: CmdS8_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdS8_In{},
+		Out:     CmdS8_Out{Result: pResult},
 	}
 }
 func NewCmdU16(
+	contextID atom.ContextID,
 	pResult uint16,
 ) *CmdU16 {
 	return &CmdU16{
-		In:  CmdU16_In{},
-		Out: CmdU16_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdU16_In{},
+		Out:     CmdU16_Out{Result: pResult},
 	}
 }
 func NewCmdS16(
+	contextID atom.ContextID,
 	pResult int16,
 ) *CmdS16 {
 	return &CmdS16{
-		In:  CmdS16_In{},
-		Out: CmdS16_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdS16_In{},
+		Out:     CmdS16_Out{Result: pResult},
 	}
 }
 func NewCmdF32(
+	contextID atom.ContextID,
 	pResult float32,
 ) *CmdF32 {
 	return &CmdF32{
-		In:  CmdF32_In{},
-		Out: CmdF32_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdF32_In{},
+		Out:     CmdF32_Out{Result: pResult},
 	}
 }
 func NewCmdU32(
+	contextID atom.ContextID,
 	pResult uint32,
 ) *CmdU32 {
 	return &CmdU32{
-		In:  CmdU32_In{},
-		Out: CmdU32_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdU32_In{},
+		Out:     CmdU32_Out{Result: pResult},
 	}
 }
 func NewCmdS32(
+	contextID atom.ContextID,
 	pResult int32,
 ) *CmdS32 {
 	return &CmdS32{
-		In:  CmdS32_In{},
-		Out: CmdS32_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdS32_In{},
+		Out:     CmdS32_Out{Result: pResult},
 	}
 }
 func NewCmdF64(
+	contextID atom.ContextID,
 	pResult float64,
 ) *CmdF64 {
 	return &CmdF64{
-		In:  CmdF64_In{},
-		Out: CmdF64_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdF64_In{},
+		Out:     CmdF64_Out{Result: pResult},
 	}
 }
 func NewCmdU64(
+	contextID atom.ContextID,
 	pResult uint64,
 ) *CmdU64 {
 	return &CmdU64{
-		In:  CmdU64_In{},
-		Out: CmdU64_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdU64_In{},
+		Out:     CmdU64_Out{Result: pResult},
 	}
 }
 func NewCmdS64(
+	contextID atom.ContextID,
 	pResult int64,
 ) *CmdS64 {
 	return &CmdS64{
-		In:  CmdS64_In{},
-		Out: CmdS64_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdS64_In{},
+		Out:     CmdS64_Out{Result: pResult},
 	}
 }
 func NewCmdBool(
+	contextID atom.ContextID,
 	pResult bool,
 ) *CmdBool {
 	return &CmdBool{
-		In:  CmdBool_In{},
-		Out: CmdBool_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdBool_In{},
+		Out:     CmdBool_Out{Result: pResult},
 	}
 }
 func NewCmdString(
+	contextID atom.ContextID,
 	pResult string,
 ) *CmdString {
 	return &CmdString{
-		In:  CmdString_In{},
-		Out: CmdString_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdString_In{},
+		Out:     CmdString_Out{Result: pResult},
 	}
 }
 func NewCmdArrayOfFloat(
+	contextID atom.ContextID,
 	pResult F32Array,
 ) *CmdArrayOfFloat {
 	return &CmdArrayOfFloat{
-		In:  CmdArrayOfFloat_In{},
-		Out: CmdArrayOfFloat_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdArrayOfFloat_In{},
+		Out:     CmdArrayOfFloat_Out{Result: pResult},
 	}
 }
 func NewCmdPointer(
+	contextID atom.ContextID,
 	pResult memory.Pointer,
 ) *CmdPointer {
 	return &CmdPointer{
-		In:  CmdPointer_In{},
-		Out: CmdPointer_Out{Result: pResult},
+		Context: contextID,
+		In:      CmdPointer_In{},
+		Out:     CmdPointer_Out{Result: pResult},
 	}
 }
 func NewCmdVoidOutU8(
+	contextID atom.ContextID,
 	pA uint8,
 ) *CmdVoidOutU8 {
 	return &CmdVoidOutU8{
-		In:  CmdVoidOutU8_In{},
-		Out: CmdVoidOutU8_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutU8_In{},
+		Out:     CmdVoidOutU8_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS8(
+	contextID atom.ContextID,
 	pA int8,
 ) *CmdVoidOutS8 {
 	return &CmdVoidOutS8{
-		In:  CmdVoidOutS8_In{},
-		Out: CmdVoidOutS8_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutS8_In{},
+		Out:     CmdVoidOutS8_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU16(
+	contextID atom.ContextID,
 	pA uint16,
 ) *CmdVoidOutU16 {
 	return &CmdVoidOutU16{
-		In:  CmdVoidOutU16_In{},
-		Out: CmdVoidOutU16_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutU16_In{},
+		Out:     CmdVoidOutU16_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS16(
+	contextID atom.ContextID,
 	pA int16,
 ) *CmdVoidOutS16 {
 	return &CmdVoidOutS16{
-		In:  CmdVoidOutS16_In{},
-		Out: CmdVoidOutS16_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutS16_In{},
+		Out:     CmdVoidOutS16_Out{A: pA},
 	}
 }
 func NewCmdVoidOutF32(
+	contextID atom.ContextID,
 	pA float32,
 ) *CmdVoidOutF32 {
 	return &CmdVoidOutF32{
-		In:  CmdVoidOutF32_In{},
-		Out: CmdVoidOutF32_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutF32_In{},
+		Out:     CmdVoidOutF32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU32(
+	contextID atom.ContextID,
 	pA uint32,
 ) *CmdVoidOutU32 {
 	return &CmdVoidOutU32{
-		In:  CmdVoidOutU32_In{},
-		Out: CmdVoidOutU32_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutU32_In{},
+		Out:     CmdVoidOutU32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS32(
+	contextID atom.ContextID,
 	pA int32,
 ) *CmdVoidOutS32 {
 	return &CmdVoidOutS32{
-		In:  CmdVoidOutS32_In{},
-		Out: CmdVoidOutS32_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutS32_In{},
+		Out:     CmdVoidOutS32_Out{A: pA},
 	}
 }
 func NewCmdVoidOutF64(
+	contextID atom.ContextID,
 	pA float64,
 ) *CmdVoidOutF64 {
 	return &CmdVoidOutF64{
-		In:  CmdVoidOutF64_In{},
-		Out: CmdVoidOutF64_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutF64_In{},
+		Out:     CmdVoidOutF64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutU64(
+	contextID atom.ContextID,
 	pA uint64,
 ) *CmdVoidOutU64 {
 	return &CmdVoidOutU64{
-		In:  CmdVoidOutU64_In{},
-		Out: CmdVoidOutU64_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutU64_In{},
+		Out:     CmdVoidOutU64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutS64(
+	contextID atom.ContextID,
 	pA int64,
 ) *CmdVoidOutS64 {
 	return &CmdVoidOutS64{
-		In:  CmdVoidOutS64_In{},
-		Out: CmdVoidOutS64_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutS64_In{},
+		Out:     CmdVoidOutS64_Out{A: pA},
 	}
 }
 func NewCmdVoidOutBool(
+	contextID atom.ContextID,
 	pA bool,
 ) *CmdVoidOutBool {
 	return &CmdVoidOutBool{
-		In:  CmdVoidOutBool_In{},
-		Out: CmdVoidOutBool_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutBool_In{},
+		Out:     CmdVoidOutBool_Out{A: pA},
 	}
 }
 func NewCmdVoidOutString(
+	contextID atom.ContextID,
 	pA string,
 ) *CmdVoidOutString {
 	return &CmdVoidOutString{
-		In:  CmdVoidOutString_In{},
-		Out: CmdVoidOutString_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutString_In{},
+		Out:     CmdVoidOutString_Out{A: pA},
 	}
 }
 func NewCmdVoidOutFixedSizeBuffer(
+	contextID atom.ContextID,
 	pA memory.Pointer,
 ) *CmdVoidOutFixedSizeBuffer {
 	return &CmdVoidOutFixedSizeBuffer{
-		In:  CmdVoidOutFixedSizeBuffer_In{},
-		Out: CmdVoidOutFixedSizeBuffer_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutFixedSizeBuffer_In{},
+		Out:     CmdVoidOutFixedSizeBuffer_Out{A: pA},
 	}
 }
 func NewCmdVoidOut3Strings(
+	contextID atom.ContextID,
 	pA string,
 	pB string,
 	pC string,
 ) *CmdVoidOut3Strings {
 	return &CmdVoidOut3Strings{
-		In:  CmdVoidOut3Strings_In{},
-		Out: CmdVoidOut3Strings_Out{A: pA, B: pB, C: pC},
+		Context: contextID,
+		In:      CmdVoidOut3Strings_In{},
+		Out:     CmdVoidOut3Strings_Out{A: pA, B: pB, C: pC},
 	}
 }
 func NewCmdVoid3Remapped(
+	contextID atom.ContextID,
 	pA remapped,
 	pB remapped,
 	pC remapped,
 ) *CmdVoid3Remapped {
 	return &CmdVoid3Remapped{
-		In:  CmdVoid3Remapped_In{A: pA, B: pB, C: pC},
-		Out: CmdVoid3Remapped_Out{},
+		Context: contextID,
+		In:      CmdVoid3Remapped_In{A: pA, B: pB, C: pC},
+		Out:     CmdVoid3Remapped_Out{},
 	}
 }
 func NewCmdVoidOut3Remapped(
+	contextID atom.ContextID,
 	pA remapped,
 	pB remapped,
 	pC remapped,
 ) *CmdVoidOut3Remapped {
 	return &CmdVoidOut3Remapped{
-		In:  CmdVoidOut3Remapped_In{},
-		Out: CmdVoidOut3Remapped_Out{A: pA, B: pB, C: pC},
+		Context: contextID,
+		In:      CmdVoidOut3Remapped_In{},
+		Out:     CmdVoidOut3Remapped_Out{A: pA, B: pB, C: pC},
 	}
 }
 func NewCmdVoidOutArrayOfRemapped(
+	contextID atom.ContextID,
 	pA RemappedArray,
 ) *CmdVoidOutArrayOfRemapped {
 	return &CmdVoidOutArrayOfRemapped{
-		In:  CmdVoidOutArrayOfRemapped_In{},
-		Out: CmdVoidOutArrayOfRemapped_Out{A: pA},
+		Context: contextID,
+		In:      CmdVoidOutArrayOfRemapped_In{},
+		Out:     CmdVoidOutArrayOfRemapped_Out{A: pA},
 	}
 }
 

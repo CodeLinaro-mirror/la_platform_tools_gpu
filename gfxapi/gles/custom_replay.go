@@ -124,8 +124,8 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *state.State) value.V
 //       spy emits location hinting information.
 func (ω *GlGetAttribLocation) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
 	if ω.Out.Result >= 0 {
-		NewGlBindAttribLocation(ω.In.Program, ω.Out.Result, ω.In.Name).Replay(id, s, b, false)
-		NewGlLinkProgram(ω.In.Program).Replay(id, s, b, false)
+		NewGlBindAttribLocation(ω.ContextID(), ω.In.Program, ω.Out.Result, ω.In.Name).Replay(id, s, b, false)
+		NewGlLinkProgram(ω.ContextID(), ω.In.Program).Replay(id, s, b, false)
 	}
 }
 

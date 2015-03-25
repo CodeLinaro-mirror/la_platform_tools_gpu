@@ -592,11 +592,13 @@ limitations under the License.
   {{range $c := AllCommands $}}
     {{$name       := Macro "Go.CmdName" $c}}
     func New{{$name}}(
+        contextID atom.ContextID,
         {{range $p := $c.FullParameters}}
           p{{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}},
         {{end}}
       ) *{{$name}} {
       return &{{$name}} {
+        Context: contextID,
         In: {{Macro "Go.CmdInsName" $c}}{§
           {{range $p := $c.FullParameters}}
             {{if not $p.Output}}

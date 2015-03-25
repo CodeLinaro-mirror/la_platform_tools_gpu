@@ -208,6 +208,7 @@ func destroyResourcesAtEOS() atom.Transformer {
 
 		case *atom.EOS:
 			s := getState(a, s)
+			cid := a.ContextID()
 
 			// Delete all Renderbuffers.
 			renderbuffers := RenderbufferIdArray{}
@@ -218,7 +219,7 @@ func destroyResourcesAtEOS() atom.Transformer {
 				}
 			}
 			if len(renderbuffers) > 0 {
-				out.Write(id, NewGlDeleteRenderbuffers(int32(len(renderbuffers)), renderbuffers))
+				out.Write(id, NewGlDeleteRenderbuffers(cid, int32(len(renderbuffers)), renderbuffers))
 			}
 
 			// Delete all Textures.
@@ -227,7 +228,7 @@ func destroyResourcesAtEOS() atom.Transformer {
 				textures = append(textures, textureId)
 			}
 			if len(textures) > 0 {
-				out.Write(id, NewGlDeleteTextures(int32(len(textures)), textures))
+				out.Write(id, NewGlDeleteTextures(cid, int32(len(textures)), textures))
 			}
 
 			// Delete all Framebuffers.
@@ -236,7 +237,7 @@ func destroyResourcesAtEOS() atom.Transformer {
 				framebuffers = append(framebuffers, framebufferId)
 			}
 			if len(framebuffers) > 0 {
-				out.Write(id, NewGlDeleteFramebuffers(int32(len(framebuffers)), framebuffers))
+				out.Write(id, NewGlDeleteFramebuffers(cid, int32(len(framebuffers)), framebuffers))
 			}
 
 			// Delete all Buffers.
@@ -245,17 +246,17 @@ func destroyResourcesAtEOS() atom.Transformer {
 				buffers = append(buffers, bufferId)
 			}
 			if len(buffers) > 0 {
-				out.Write(id, NewGlDeleteBuffers(int32(len(buffers)), buffers))
+				out.Write(id, NewGlDeleteBuffers(cid, int32(len(buffers)), buffers))
 			}
 
 			// Delete all Shaders.
 			for shaderId := range s.Instances.Shaders {
-				out.Write(id, NewGlDeleteShader(shaderId))
+				out.Write(id, NewGlDeleteShader(cid, shaderId))
 			}
 
 			// Delete all Programs.
 			for programId := range s.Instances.Programs {
-				out.Write(id, NewGlDeleteProgram(programId))
+				out.Write(id, NewGlDeleteProgram(cid, programId))
 			}
 
 			// Delete all VertexArrays.
@@ -264,12 +265,12 @@ func destroyResourcesAtEOS() atom.Transformer {
 				vertexArrays = append(vertexArrays, vertexArrayId)
 			}
 			if len(vertexArrays) > 0 {
-				out.Write(id, NewGlDeleteVertexArraysOES(int32(len(vertexArrays)), vertexArrays))
+				out.Write(id, NewGlDeleteVertexArraysOES(cid, int32(len(vertexArrays)), vertexArrays))
 			}
 
 			// Delete all SyncObjects. TODO: Uncomment when added to API file.
 			// for syncObjectId := range s.Instances.SyncObjects {
-			// 	out.Write(id, NewGlDeleteSync(syncObjectId))
+			// 	out.Write(id, NewGlDeleteSync(cid, syncObjectId))
 			// }
 		}
 		out.Write(id, a)
