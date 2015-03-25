@@ -195,7 +195,7 @@ func TestWriteChannel(t *testing.T) {
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeData),
 		0,                       // channel id
-		5,                       // data length
+		10,                      // data length
 		'h', 'e', 'l', 'l', 'o', // data
 	}, 8, nil})
 }
@@ -269,22 +269,22 @@ func TestMultiPacketWriteChannel(t *testing.T) {
 	checkRead(t, outBuf, readCheck{[]byte{
 		byte(msgTypeData),
 		0,             // channel id
-		3,             // data length
+		6,             // data length
 		'h', 'e', 'l', // data
 
 		byte(msgTypeData),
 		0,             // channel id
-		3,             // data length
+		6,             // data length
 		'l', 'o', ' ', // data
 
 		byte(msgTypeData),
 		0,             // channel id
-		3,             // data length
+		6,             // data length
 		'w', 'o', 'r', // data
 
 		byte(msgTypeData),
 		0,        // channel id
-		2,        // data length
+		4,        // data length
 		'l', 'd', // data
 	}, 23, nil})
 }
@@ -307,7 +307,7 @@ func TestRecvChannel(t *testing.T) {
 	inBuf.Write([]byte{
 		byte(msgTypeData),
 		0,                       // channel id
-		5,                       // data length
+		10,                      // data length
 		'h', 'e', 'l', 'l', 'o', // data
 	})
 
@@ -342,13 +342,13 @@ func TestRecvOnClosedChannel(t *testing.T) {
 			inBuf.Write([]byte{
 				byte(msgTypeData),
 				0,                  // channel id
-				4,                  // data length
+				8,                  // data length
 				'd', 'a', 't', 'a', // data
 			})
 			inBuf.Write([]byte{
 				byte(msgTypeData),
 				1,                  // channel id
-				4,                  // data length
+				8,                  // data length
 				'd', 'a', 't', 'a', // data
 			})
 		}

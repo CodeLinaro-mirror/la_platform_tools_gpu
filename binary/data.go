@@ -18,14 +18,14 @@ package binary
 type Data []byte
 
 func (data Data) Encode(e Encoder) error {
-	if err := e.Uint32(uint32(len(data))); err != nil {
+	if err := e.Int32(int32(len(data))); err != nil {
 		return err
 	}
 	return e.Data(data)
 }
 
 func (data *Data) Decode(d Decoder) error {
-	if c, err := d.Uint32(); err != nil || c == 0 {
+	if c, err := d.Int32(); err != nil || c == 0 {
 		return err
 	} else {
 		*data = make([]byte, c)
