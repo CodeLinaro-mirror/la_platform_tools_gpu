@@ -152,7 +152,7 @@ func reflow(in string, indentSize int) ([]byte, error) {
 		case newline:
 			panicWrite(buf, '\n')
 			fallthrough
-		case '\n':
+		case '\n', '\r':
 			if !join {
 				wasNewline = true
 			}
