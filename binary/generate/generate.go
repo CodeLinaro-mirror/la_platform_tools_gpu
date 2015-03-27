@@ -92,12 +92,13 @@ type Field struct {
 
 // Type is used to describe fields of a struct.
 type Type struct {
-	Name    string // The name of the type.
-	Native  string // The go native name of the type.
-	Kind    Kind   // The types basic Kind.
-	KeyType *Type  // If the type is a Map, holds the key type.
-	SubType *Type  // If the type is an Array, Map or Pointer, holds the element type.
-	Method  string // The encode/decode method to use.
+	Name       string // The name of the type.
+	Native     string // The go native name of the type.
+	Kind       Kind   // The types basic Kind.
+	KeyType    *Type  // If the type is a Map, holds the key type.
+	SubType    *Type  // If the type is an Array, Map or Pointer, holds the element type.
+	Method     string // The encode/decode method to use.
+	SkipMethod string // The skip method to use.
 }
 
 // FromTypename creates and initializes a Struct from a types.Typename.
@@ -160,6 +161,8 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 			t.Native = "int32"
 		case types.Byte:
 			t.Native = "uint8"
+		case types.String:
+			t.SkipMethod = "SkipString"
 		}
 		t.Method = strings.Title(t.Native)
 		if t.Native != t.Name {
@@ -173,6 +176,29 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 	case *types.Slice:
 		t.Kind = Array
 		t.SubType = FromType(pkg, from.Elem())
+		switch elem := from.Elem().(type) {
+		case *types.Basic:
+			switch elem.Kind() {
+			case types.Byte:
+				t.Method = "Data"
+			}
+		}
+	case *types.Array:
+		t.Kind = Array
+		switch elem := from.Elem().(type) {
+		case *types.Basic:
+			switch elem.Kind() {
+			case types.Byte:
+				if from.Len() == binary.IDSize {
+					t.Kind = Native
+					t.SkipMethod = "SkipID"
+					t.Method = "ID"
+				}
+			}
+		}
+		if t.Kind == Array {
+			t.SubType = FromType(pkg, from.Elem())
+		}
 	case *types.Map:
 		t.Kind = Map
 		t.KeyType = FromType(pkg, from.Key())

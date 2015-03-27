@@ -38,3 +38,13 @@ func (o *Range) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
+
+func (*Range) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}

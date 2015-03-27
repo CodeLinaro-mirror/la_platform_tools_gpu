@@ -59,14 +59,14 @@ type record struct {
 }
 
 func (s *record) decode(d binary.Decoder) (err error) {
-	if err := s.id.Decode(d); err != nil {
+	if s.id, err = d.ID(); err != nil {
 		return err
 	}
 	return s.span.decode(d)
 }
 
 func (r record) encode(e binary.Encoder) error {
-	if err := r.id.Encode(e); err != nil {
+	if err := e.ID(r.id); err != nil {
 		return err
 	}
 	return r.span.encode(e)

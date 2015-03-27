@@ -69,6 +69,9 @@ func (e unknownTypeID) Error() string {
 // New creates a zero value instance for the given type ID.
 // If this ID is not for a registered type, New returns a non-nil error.
 func New(typeId binary.ID) (binary.Decodable, error) {
+	if typeId == (binary.ID{}) {
+		return nil, nil
+	}
 	t, idFound := idToType[typeId]
 	if !idFound {
 		return nil, unknownTypeID(typeId)
@@ -79,6 +82,9 @@ func New(typeId binary.ID) (binary.Decodable, error) {
 // Nil returns a typed nil interface for the given type ID.
 // This allows calling of methods that accept a nil pointer, eg Skip.
 func Nil(typeId binary.ID) (binary.Decodable, error) {
+	if typeId == (binary.ID{}) {
+		return nil, nil
+	}
 	t, idFound := idToType[typeId]
 	if !idFound {
 		return nil, unknownTypeID(typeId)

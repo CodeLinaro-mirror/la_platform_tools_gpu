@@ -35,6 +35,14 @@ func (o *delay) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*delay) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o request) Encode(e binary.Encoder) error {
 	if err := e.String(o.data); err != nil {
 		return err
@@ -51,6 +59,14 @@ func (o *request) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*request) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o response) Encode(e binary.Encoder) error {
 	if err := e.String(o.data); err != nil {
 		return err
@@ -64,5 +80,13 @@ func (o *response) Decode(d binary.Decoder) error {
 	} else {
 		o.data = string(obj)
 	}
+	return nil
+}
+
+func (*response) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
 	return nil
 }

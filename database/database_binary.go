@@ -19,7 +19,7 @@ func (o metadata) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Type)); err != nil {
 		return err
 	}
-	if err := o.LinkTo.Encode(e); err != nil {
+	if err := e.ID(o.LinkTo); err != nil {
 		return err
 	}
 	if o.Request != nil {
@@ -38,8 +38,10 @@ func (o *metadata) Decode(d binary.Decoder) error {
 	} else {
 		o.Type = metaType(obj)
 	}
-	if err := o.LinkTo.Decode(d); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.LinkTo = binary.ID(obj)
 	}
 	if obj, err := d.Object(); err != nil {
 		return err
@@ -47,6 +49,20 @@ func (o *metadata) Decode(d binary.Decoder) error {
 		o.Request = obj.(binary.Object)
 	} else {
 		o.Request = nil
+	}
+	return nil
+}
+
+func (*metadata) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+
+	if err := d.SkipObject(); err != nil {
+		return err
 	}
 	return nil
 }

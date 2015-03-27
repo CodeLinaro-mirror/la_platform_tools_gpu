@@ -33,12 +33,16 @@ var (
 		"decode": func(name string, t *Type) string {
 			return kindDispatch(goDecodeMap, name, t)
 		},
+		"skip": func(name string, t *Type) string {
+			return kindDispatch(goSkipMap, name, t)
+		},
 		"header": func(tool string) string {
 			return copyright.Build("generated_by", copyright.Info{Tool: tool})
 		},
 	}
 	goEncodeMap kindToTemplate
 	goDecodeMap kindToTemplate
+	goSkipMap   kindToTemplate
 	goFile      *template.Template
 	goRegister  *template.Template
 	goEncoder   *template.Template
@@ -52,6 +56,7 @@ func init() {
 	goDecoder = getTemplate(goTemplates, "Decoder")
 	goEncodeMap = getTemplateMap(goTemplates, "Encode")
 	goDecodeMap = getTemplateMap(goTemplates, "Decode")
+	goSkipMap = getTemplateMap(goTemplates, "Skip")
 }
 
 // GoFile generates the all the go code for a file with a set of structs.

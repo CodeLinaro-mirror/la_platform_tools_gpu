@@ -18,7 +18,7 @@ func init() {
 }
 
 func (o Blob) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.Data))); err != nil {
+	if err := e.Uint32(uint32(len(o.Data))); err != nil {
 		return err
 	}
 	if err := e.Data(o.Data); err != nil {
@@ -28,7 +28,7 @@ func (o Blob) Encode(e binary.Encoder) error {
 }
 
 func (o *Blob) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Data = make([]byte, count)
@@ -39,11 +39,22 @@ func (o *Blob) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*Blob) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (o keyValue) Encode(e binary.Encoder) error {
-	if err := o.id.Encode(e); err != nil {
+	if err := e.ID(o.id); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.buffer))); err != nil {
+	if err := e.Uint32(uint32(len(o.buffer))); err != nil {
 		return err
 	}
 	if err := e.Data(o.buffer); err != nil {
@@ -53,14 +64,31 @@ func (o keyValue) Encode(e binary.Encoder) error {
 }
 
 func (o *keyValue) Decode(d binary.Decoder) error {
-	if err := o.id.Decode(d); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.id = binary.ID(obj)
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.buffer = make([]byte, count)
 		if err := d.Data(o.buffer); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (*keyValue) Skip(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
 			return err
 		}
 	}

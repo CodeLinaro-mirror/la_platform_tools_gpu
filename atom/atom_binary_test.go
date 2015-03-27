@@ -43,6 +43,16 @@ func (o *testAtomA) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*testAtomA) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o testAtomB) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
@@ -63,6 +73,16 @@ func (o *testAtomB) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Bool = bool(obj)
+	}
+	return nil
+}
+
+func (*testAtomB) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
 	}
 	return nil
 }
@@ -88,5 +108,16 @@ func (o *testAtomC) Decode(d binary.Decoder) error {
 	} else {
 		o.String = string(obj)
 	}
+	return nil
+}
+
+func (*testAtomC) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
 	return nil
 }

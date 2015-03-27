@@ -303,10 +303,10 @@ func (o CmdArrayOfFloat) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -318,10 +318,23 @@ func (o *CmdArrayOfFloat) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdArrayOfFloat) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdArrayOfFloat_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdArrayOfFloat_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -335,8 +348,12 @@ func (o *CmdArrayOfFloat_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdArrayOfFloat_In) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdArrayOfFloat_Out) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.Result))); err != nil {
+	if err := e.Uint32(uint32(len(o.Result))); err != nil {
 		return err
 	}
 	for i := range o.Result {
@@ -348,7 +365,7 @@ func (o CmdArrayOfFloat_Out) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdArrayOfFloat_Out) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Result = make(F32Array, count)
@@ -363,14 +380,27 @@ func (o *CmdArrayOfFloat_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdArrayOfFloat_Out) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Float32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func (o CmdBool) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -382,10 +412,23 @@ func (o *CmdBool) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdBool) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdBool_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdBool_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -396,6 +439,10 @@ func (o CmdBool_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdBool_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdBool_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -415,14 +462,21 @@ func (o *CmdBool_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdBool_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdF32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -434,10 +488,23 @@ func (o *CmdF32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdF32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdF32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdF32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -448,6 +515,10 @@ func (o CmdF32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdF32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdF32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -467,14 +538,21 @@ func (o *CmdF32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdF32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdF64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -486,10 +564,23 @@ func (o *CmdF64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdF64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdF64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdF64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -500,6 +591,10 @@ func (o CmdF64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdF64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdF64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -519,14 +614,21 @@ func (o *CmdF64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdF64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Float64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdPointer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -538,10 +640,23 @@ func (o *CmdPointer) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdPointer) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdPointer_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdPointer_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -552,6 +667,10 @@ func (o CmdPointer_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdPointer_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdPointer_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -571,14 +690,21 @@ func (o *CmdPointer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdPointer_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdS16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -590,10 +716,23 @@ func (o *CmdS16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdS16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -604,6 +743,10 @@ func (o CmdS16_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdS16_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdS16_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -623,14 +766,21 @@ func (o *CmdS16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdS16_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdS32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -642,10 +792,23 @@ func (o *CmdS32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdS32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -656,6 +819,10 @@ func (o CmdS32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdS32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdS32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -675,14 +842,21 @@ func (o *CmdS32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdS32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdS64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -694,10 +868,23 @@ func (o *CmdS64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdS64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -708,6 +895,10 @@ func (o CmdS64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdS64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdS64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -727,14 +918,21 @@ func (o *CmdS64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdS64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdS8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -746,10 +944,23 @@ func (o *CmdS8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdS8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdS8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -760,6 +971,10 @@ func (o CmdS8_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdS8_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdS8_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -779,14 +994,21 @@ func (o *CmdS8_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdS8_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdString) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -798,10 +1020,23 @@ func (o *CmdString) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdString) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdString_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdString_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -812,6 +1047,10 @@ func (o CmdString_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdString_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdString_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -831,14 +1070,22 @@ func (o *CmdString_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdString_Out) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o CmdU16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -850,10 +1097,23 @@ func (o *CmdU16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdU16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -864,6 +1124,10 @@ func (o CmdU16_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdU16_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdU16_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -883,14 +1147,21 @@ func (o *CmdU16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdU16_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdU32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -902,10 +1173,23 @@ func (o *CmdU32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdU32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -916,6 +1200,10 @@ func (o CmdU32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdU32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdU32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -935,14 +1223,21 @@ func (o *CmdU32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdU32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdU64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -954,10 +1249,23 @@ func (o *CmdU64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdU64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -968,6 +1276,10 @@ func (o CmdU64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdU64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdU64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -987,14 +1299,21 @@ func (o *CmdU64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdU64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdU8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1006,10 +1325,23 @@ func (o *CmdU8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdU8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdU8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1020,6 +1352,10 @@ func (o CmdU8_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdU8_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdU8_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1039,14 +1375,21 @@ func (o *CmdU8_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdU8_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoid) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1058,10 +1401,23 @@ func (o *CmdVoid) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoid) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1071,10 +1427,10 @@ func (o CmdVoid3Arrays) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1086,17 +1442,30 @@ func (o *CmdVoid3Arrays) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoid3Arrays) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Arrays_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Arrays_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.A))); err != nil {
+	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
 	for i := range o.A {
@@ -1104,7 +1473,7 @@ func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
 			return err
 		}
 	}
-	if err := e.Int32(int32(len(o.B))); err != nil {
+	if err := e.Uint32(uint32(len(o.B))); err != nil {
 		return err
 	}
 	for i := range o.B {
@@ -1112,7 +1481,7 @@ func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
 			return err
 		}
 	}
-	if err := e.Int32(int32(len(o.C))); err != nil {
+	if err := e.Uint32(uint32(len(o.C))); err != nil {
 		return err
 	}
 	for i := range o.C {
@@ -1124,7 +1493,7 @@ func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.A = make(S8Array, count)
@@ -1136,7 +1505,7 @@ func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
 			}
 		}
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.B = make(StringArray, count)
@@ -1148,7 +1517,7 @@ func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
 			}
 		}
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.C = make(BoolArray, count)
@@ -1163,6 +1532,38 @@ func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Arrays_In) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int8(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipString(); err != nil {
+				return err
+			}
+
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Bool(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func (o CmdVoid3Arrays_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1171,14 +1572,18 @@ func (o *CmdVoid3Arrays_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Arrays_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoid3Remapped) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1190,10 +1595,23 @@ func (o *CmdVoid3Remapped) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoid3Remapped) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Remapped_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Remapped_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1231,6 +1649,19 @@ func (o *CmdVoid3Remapped_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Remapped_In) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoid3Remapped_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1239,14 +1670,18 @@ func (o *CmdVoid3Remapped_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Remapped_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoid3Strings) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1258,10 +1693,23 @@ func (o *CmdVoid3Strings) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoid3Strings) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Strings_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoid3Strings_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1299,6 +1747,22 @@ func (o *CmdVoid3Strings_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Strings_In) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o CmdVoid3Strings_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1307,14 +1771,18 @@ func (o *CmdVoid3Strings_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid3Strings_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidArrayOfStrings) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1326,17 +1794,30 @@ func (o *CmdVoidArrayOfStrings) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidArrayOfStrings_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidArrayOfStrings_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o CmdVoidArrayOfStrings_In) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.A))); err != nil {
+	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
 	for i := range o.A {
@@ -1348,7 +1829,7 @@ func (o CmdVoidArrayOfStrings_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidArrayOfStrings_In) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.A = make(StringArray, count)
@@ -1363,6 +1844,20 @@ func (o *CmdVoidArrayOfStrings_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidArrayOfStrings_In) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipString(); err != nil {
+				return err
+			}
+
+		}
+	}
+	return nil
+}
+
 func (o CmdVoidArrayOfStrings_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1371,14 +1866,18 @@ func (o *CmdVoidArrayOfStrings_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidArrayOfStrings_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidBool) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1390,10 +1889,23 @@ func (o *CmdVoidBool) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidBool) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidBool_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidBool_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1415,6 +1927,13 @@ func (o *CmdVoidBool_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidBool_In) Skip(d binary.Decoder) error {
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidBool_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1423,14 +1942,18 @@ func (o *CmdVoidBool_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidBool_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidF32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1442,10 +1965,23 @@ func (o *CmdVoidF32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidF32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidF32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidF32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1467,6 +2003,13 @@ func (o *CmdVoidF32_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidF32_In) Skip(d binary.Decoder) error {
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidF32_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1475,14 +2018,18 @@ func (o *CmdVoidF32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidF32_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidF64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1494,10 +2041,23 @@ func (o *CmdVoidF64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidF64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidF64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidF64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1519,6 +2079,13 @@ func (o *CmdVoidF64_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidF64_In) Skip(d binary.Decoder) error {
+	if _, err := d.Float64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidF64_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -1527,14 +2094,18 @@ func (o *CmdVoidF64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidF64_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidOut3Remapped) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1546,10 +2117,23 @@ func (o *CmdVoidOut3Remapped) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOut3Remapped) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOut3Remapped_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOut3Remapped_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1560,6 +2144,10 @@ func (o CmdVoidOut3Remapped_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOut3Remapped_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOut3Remapped_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1595,14 +2183,27 @@ func (o *CmdVoidOut3Remapped_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOut3Remapped_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOut3Strings) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1614,10 +2215,23 @@ func (o *CmdVoidOut3Strings) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOut3Strings) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOut3Strings_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOut3Strings_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1628,6 +2242,10 @@ func (o CmdVoidOut3Strings_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOut3Strings_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOut3Strings_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1663,14 +2281,30 @@ func (o *CmdVoidOut3Strings_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOut3Strings_Out) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o CmdVoidOutArrayOfRemapped) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1682,10 +2316,23 @@ func (o *CmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutArrayOfRemapped) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutArrayOfRemapped_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutArrayOfRemapped_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1699,8 +2346,12 @@ func (o *CmdVoidOutArrayOfRemapped_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutArrayOfRemapped_In) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.A))); err != nil {
+	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
 	for i := range o.A {
@@ -1712,7 +2363,7 @@ func (o CmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutArrayOfRemapped_Out) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.A = make(RemappedArray, count)
@@ -1727,14 +2378,27 @@ func (o *CmdVoidOutArrayOfRemapped_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutArrayOfRemapped_Out) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func (o CmdVoidOutBool) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1746,10 +2410,23 @@ func (o *CmdVoidOutBool) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutBool) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutBool_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutBool_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1760,6 +2437,10 @@ func (o CmdVoidOutBool_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutBool_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutBool_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1779,14 +2460,21 @@ func (o *CmdVoidOutBool_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutBool_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutF32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1798,10 +2486,23 @@ func (o *CmdVoidOutF32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutF32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutF32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutF32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1812,6 +2513,10 @@ func (o CmdVoidOutF32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutF32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutF32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1831,14 +2536,21 @@ func (o *CmdVoidOutF32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutF32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutF64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1850,10 +2562,23 @@ func (o *CmdVoidOutF64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutF64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutF64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutF64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1864,6 +2589,10 @@ func (o CmdVoidOutF64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutF64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutF64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1883,14 +2612,21 @@ func (o *CmdVoidOutF64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutF64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Float64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1902,10 +2638,23 @@ func (o *CmdVoidOutFixedSizeBuffer) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutFixedSizeBuffer_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutFixedSizeBuffer_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1916,6 +2665,10 @@ func (o CmdVoidOutFixedSizeBuffer_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutFixedSizeBuffer_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutFixedSizeBuffer_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1935,14 +2688,21 @@ func (o *CmdVoidOutFixedSizeBuffer_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutFixedSizeBuffer_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutS16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -1954,10 +2714,23 @@ func (o *CmdVoidOutS16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutS16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -1968,6 +2741,10 @@ func (o CmdVoidOutS16_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutS16_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutS16_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -1987,14 +2764,21 @@ func (o *CmdVoidOutS16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutS16_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutS32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2006,10 +2790,23 @@ func (o *CmdVoidOutS32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutS32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2020,6 +2817,10 @@ func (o CmdVoidOutS32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutS32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutS32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2039,14 +2840,21 @@ func (o *CmdVoidOutS32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutS32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutS64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2058,10 +2866,23 @@ func (o *CmdVoidOutS64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutS64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2072,6 +2893,10 @@ func (o CmdVoidOutS64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutS64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutS64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2091,14 +2916,21 @@ func (o *CmdVoidOutS64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutS64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutS8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2110,10 +2942,23 @@ func (o *CmdVoidOutS8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutS8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutS8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2124,6 +2969,10 @@ func (o CmdVoidOutS8_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutS8_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutS8_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2143,14 +2992,21 @@ func (o *CmdVoidOutS8_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutS8_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Int8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutString) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2162,10 +3018,23 @@ func (o *CmdVoidOutString) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutString) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutString_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutString_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2176,6 +3045,10 @@ func (o CmdVoidOutString_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutString_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutString_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2195,14 +3068,22 @@ func (o *CmdVoidOutString_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutString_Out) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o CmdVoidOutU16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2214,10 +3095,23 @@ func (o *CmdVoidOutU16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutU16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2228,6 +3122,10 @@ func (o CmdVoidOutU16_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutU16_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutU16_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2247,14 +3145,21 @@ func (o *CmdVoidOutU16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutU16_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutU32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2266,10 +3171,23 @@ func (o *CmdVoidOutU32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutU32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2280,6 +3198,10 @@ func (o CmdVoidOutU32_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutU32_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutU32_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2299,14 +3221,21 @@ func (o *CmdVoidOutU32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutU32_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutU64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2318,10 +3247,23 @@ func (o *CmdVoidOutU64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutU64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2332,6 +3274,10 @@ func (o CmdVoidOutU64_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutU64_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutU64_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2351,14 +3297,21 @@ func (o *CmdVoidOutU64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutU64_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidOutU8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2370,10 +3323,23 @@ func (o *CmdVoidOutU8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidOutU8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidOutU8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2384,6 +3350,10 @@ func (o CmdVoidOutU8_In) Encode(e binary.Encoder) error {
 }
 
 func (o *CmdVoidOutU8_In) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidOutU8_In) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2403,14 +3373,21 @@ func (o *CmdVoidOutU8_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidOutU8_Out) Skip(d binary.Decoder) error {
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidS16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2422,10 +3399,23 @@ func (o *CmdVoidS16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidS16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2447,6 +3437,13 @@ func (o *CmdVoidS16_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS16_In) Skip(d binary.Decoder) error {
+	if _, err := d.Int16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidS16_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2455,14 +3452,18 @@ func (o *CmdVoidS16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS16_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidS32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2474,10 +3475,23 @@ func (o *CmdVoidS32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidS32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2499,6 +3513,13 @@ func (o *CmdVoidS32_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS32_In) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidS32_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2507,14 +3528,18 @@ func (o *CmdVoidS32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS32_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidS64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2526,10 +3551,23 @@ func (o *CmdVoidS64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidS64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2551,6 +3589,13 @@ func (o *CmdVoidS64_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS64_In) Skip(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidS64_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2559,14 +3604,18 @@ func (o *CmdVoidS64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS64_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidS8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2578,10 +3627,23 @@ func (o *CmdVoidS8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidS8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidS8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2603,6 +3665,13 @@ func (o *CmdVoidS8_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS8_In) Skip(d binary.Decoder) error {
+	if _, err := d.Int8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidS8_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2611,14 +3680,18 @@ func (o *CmdVoidS8_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidS8_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidString) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2630,10 +3703,23 @@ func (o *CmdVoidString) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidString) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidString_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidString_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2655,6 +3741,14 @@ func (o *CmdVoidString_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidString_In) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o CmdVoidString_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2663,14 +3757,18 @@ func (o *CmdVoidString_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidString_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidU16) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2682,10 +3780,23 @@ func (o *CmdVoidU16) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidU16) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU16_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU16_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2707,6 +3818,13 @@ func (o *CmdVoidU16_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU16_In) Skip(d binary.Decoder) error {
+	if _, err := d.Uint16(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidU16_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2715,14 +3833,18 @@ func (o *CmdVoidU16_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU16_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidU32) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2734,10 +3856,23 @@ func (o *CmdVoidU32) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidU32) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU32_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU32_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2759,6 +3894,13 @@ func (o *CmdVoidU32_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU32_In) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidU32_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2767,14 +3909,18 @@ func (o *CmdVoidU32_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU32_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidU64) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2786,10 +3932,23 @@ func (o *CmdVoidU64) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidU64) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU64_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU64_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2811,6 +3970,13 @@ func (o *CmdVoidU64_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU64_In) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidU64_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2819,14 +3985,18 @@ func (o *CmdVoidU64_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU64_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoidU8) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.In.Encode(e); err != nil {
+	if err := e.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Encode(e); err != nil {
+	if err := e.Value(&o.Out); err != nil {
 		return err
 	}
 	return nil
@@ -2838,10 +4008,23 @@ func (o *CmdVoidU8) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = atom.ContextID(obj)
 	}
-	if err := o.In.Decode(d); err != nil {
+	if err := d.Value(&o.In); err != nil {
 		return err
 	}
-	if err := o.Out.Decode(d); err != nil {
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*CmdVoidU8) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU8_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CmdVoidU8_Out)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -2863,11 +4046,22 @@ func (o *CmdVoidU8_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoidU8_In) Skip(d binary.Decoder) error {
+	if _, err := d.Uint8(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o CmdVoidU8_Out) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *CmdVoidU8_Out) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*CmdVoidU8_Out) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -2879,6 +4073,10 @@ func (o *CmdVoid_In) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid_In) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o CmdVoid_Out) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -2887,10 +4085,18 @@ func (o *CmdVoid_Out) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*CmdVoid_Out) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o Globals) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *Globals) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*Globals) Skip(d binary.Decoder) error {
 	return nil
 }

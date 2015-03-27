@@ -8,6 +8,7 @@ package atom
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 func init() {
@@ -31,18 +32,22 @@ func (o *EOS) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*EOS) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o Group) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
-	if err := o.Range.Encode(e); err != nil {
+	if err := e.Value(&o.Range); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.SubGroups))); err != nil {
+	if err := e.Uint32(uint32(len(o.SubGroups))); err != nil {
 		return err
 	}
 	for i := range o.SubGroups {
-		if err := o.SubGroups[i].Encode(e); err != nil {
+		if err := e.Value(&o.SubGroups[i]); err != nil {
 			return err
 		}
 	}
@@ -55,15 +60,35 @@ func (o *Group) Decode(d binary.Decoder) error {
 	} else {
 		o.Name = string(obj)
 	}
-	if err := o.Range.Decode(d); err != nil {
+	if err := d.Value(&o.Range); err != nil {
 		return err
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.SubGroups = make(GroupList, count)
 		for i := range o.SubGroups {
-			if err := o.SubGroups[i].Decode(d); err != nil {
+			if err := d.Value(&o.SubGroups[i]); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (*Group) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipValue((*Range)(nil)); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*Group)(nil)); err != nil {
 				return err
 			}
 		}
@@ -75,10 +100,10 @@ func (o Observation) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
-	if err := o.Range.Encode(e); err != nil {
+	if err := e.Value(&o.Range); err != nil {
 		return err
 	}
-	if err := o.ResourceID.Encode(e); err != nil {
+	if err := e.ID(o.ResourceID); err != nil {
 		return err
 	}
 	return nil
@@ -90,12 +115,28 @@ func (o *Observation) Decode(d binary.Decoder) error {
 	} else {
 		o.Context = ContextID(obj)
 	}
-	if err := o.Range.Decode(d); err != nil {
+	if err := d.Value(&o.Range); err != nil {
 		return err
 	}
-	if err := o.ResourceID.Decode(d); err != nil {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ResourceID = binary.ID(obj)
+	}
+	return nil
+}
+
+func (*Observation) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
+	if err := d.SkipValue((*memory.Range)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -123,11 +164,21 @@ func (o *Range) Decode(d binary.Decoder) error {
 	return nil
 }
 
-func (o Resource) Encode(e binary.Encoder) error {
-	if err := o.ResourceID.Encode(e); err != nil {
+func (*Range) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.Data))); err != nil {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o Resource) Encode(e binary.Encoder) error {
+	if err := e.ID(o.ResourceID); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.Data))); err != nil {
 		return err
 	}
 	if err := e.Data(o.Data); err != nil {
@@ -137,14 +188,31 @@ func (o Resource) Encode(e binary.Encoder) error {
 }
 
 func (o *Resource) Decode(d binary.Decoder) error {
-	if err := o.ResourceID.Decode(d); err != nil {
+	if obj, err := d.ID(); err != nil {
 		return err
+	} else {
+		o.ResourceID = binary.ID(obj)
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Data = make([]byte, count)
 		if err := d.Data(o.Data); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (*Resource) Skip(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
+		return err
+	}
+
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
 			return err
 		}
 	}

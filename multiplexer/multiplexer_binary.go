@@ -35,11 +35,18 @@ func (o *msgCloseChannel) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*msgCloseChannel) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o msgData) Encode(e binary.Encoder) error {
 	if err := e.Uint32(uint32(o.c)); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.d))); err != nil {
+	if err := e.Uint32(uint32(len(o.d))); err != nil {
 		return err
 	}
 	if err := e.Data(o.d); err != nil {
@@ -54,11 +61,25 @@ func (o *msgData) Decode(d binary.Decoder) error {
 	} else {
 		o.c = channelId(obj)
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.d = make([]byte, count)
 		if err := d.Data(o.d); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (*msgData) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
 			return err
 		}
 	}
@@ -77,6 +98,13 @@ func (o *msgOpenChannel) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.channelId = channelId(obj)
+	}
+	return nil
+}
+
+func (*msgOpenChannel) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
 	}
 	return nil
 }

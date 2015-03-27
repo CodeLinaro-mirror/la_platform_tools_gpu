@@ -30,3 +30,11 @@ func (o *Error) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
+
+func (*Error) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
