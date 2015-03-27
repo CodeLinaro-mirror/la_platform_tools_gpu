@@ -44,66 +44,43 @@ const uint64_t MAX_MEMORY_SIZE = 1024;
 class GazerListenerTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection = new StrictMock<MockConnection>();
+        mConnection = new MockConnection();
         mGazerListener.reset(
             new GazerListener(std::unique_ptr<Connection>(mConnection), MAX_MEMORY_SIZE));
     }
 
-    StrictMock<MockConnection>* mConnection;
+    MockConnection* mConnection;
     std::unique_ptr<GazerListener> mGazerListener;
 };
-
-void registerMocksForCreateGazerConnection(MockConnection* connection) {
-    // Connection type
-    EXPECT_CALL(*connection, recv(_, 1))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint8_t>(1))), ReturnArg<1>()));
-
-    EXPECT_CALL(*connection, recv(_, 4))
-            // Replay id length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(0))), ReturnArg<1>()))
-            // Replay length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(0))), ReturnArg<1>()));
-
-    // Replay id
-    EXPECT_CALL(*connection, recv(_, 0)).WillOnce(ReturnArg<1>());
-}
 
 }  // end of anonymous namespace
 
 TEST_F(GazerListenerTest, AcceptConnection) {
-    auto clientConnection = new StrictMock<MockConnection>();
-
-    EXPECT_CALL(*mConnection, acceptProxy()).WillOnce(Return(clientConnection));
-
-    registerMocksForCreateGazerConnection(clientConnection);
-
+    auto clientConnection = new MockConnection();
+    mConnection->connections.push(clientConnection);
+    pushUint8(&clientConnection->in, GazerListener::REPLAY_REQUEST);
+    pushString(&clientConnection->in, "");
+    pushUint32(&clientConnection->in, 0);
     EXPECT_THAT(mGazerListener->acceptConnection(), NotNull());
 }
 
 TEST_F(GazerListenerTest, AcceptConnectionErrorAccept) {
-    EXPECT_CALL(*mConnection, acceptProxy()).WillOnce(Return(nullptr));
-
     EXPECT_THAT(mGazerListener->acceptConnection(), IsNull());
 }
 
 TEST_F(GazerListenerTest, AcceptConnectionErrorGazerConnection) {
-    auto clientConnection1 = new StrictMock<MockConnection>();
-    auto clientConnection2 = new StrictMock<MockConnection>();
-
-    EXPECT_CALL(*mConnection, acceptProxy())
-            .WillOnce(Return(clientConnection1))
-            .WillOnce(Return(clientConnection2));
-
-    // Connection type
-    EXPECT_CALL(*clientConnection1, recv(_, 1))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint8_t>(1))), ReturnArg<1>()));
-
-    // Replay id length failed
-    EXPECT_CALL(*clientConnection1, recv(_, 4)).WillOnce(Return(2));
-
-    registerMocksForCreateGazerConnection(clientConnection2);
-
+    std::string replayId = "Replay2";
+    auto clientConnection1 = new MockConnection();
+    auto clientConnection2 = new MockConnection();
+    mConnection->connections.push(clientConnection1);
+    mConnection->connections.push(clientConnection2);
+    pushUint8(&clientConnection1->in, GazerListener::REPLAY_REQUEST);
+    pushUint8(&clientConnection1->in, '1');
+    pushUint8(&clientConnection2->in, GazerListener::REPLAY_REQUEST);
+    pushString(&clientConnection2->in, replayId);
+    pushUint32(&clientConnection2->in, 0);
     EXPECT_THAT(mGazerListener->acceptConnection(), NotNull());
+    //TODO: check we actually got connection 2
 }
 
 }  // end of namespace test

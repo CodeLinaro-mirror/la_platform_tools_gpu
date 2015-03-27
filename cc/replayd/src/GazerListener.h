@@ -37,12 +37,12 @@ public:
     // the newly created socket object.
     std::unique_ptr<GazerConnection> acceptConnection();
 
-private:
     enum ConnectionType {
         DEVICE_INFO    = 0,
         REPLAY_REQUEST = 1,
     };
 
+private:
     // The underlying server socket for the listener
     std::unique_ptr<Connection> mConn;
     // The maximum memory size that can be reported as supported by this device.

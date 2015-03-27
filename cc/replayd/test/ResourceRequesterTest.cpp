@@ -32,71 +32,65 @@ using ::testing::DoAll;
 using ::testing::Return;
 using ::testing::ReturnArg;
 using ::testing::StrictMock;
+using ::testing::ElementsAreArray;
 
 namespace android {
 namespace caze {
 namespace test {
 namespace {
 
-const size_t BUFFER_SIZE = 4096;
-
 class ResourceRequesterTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection = new StrictMock<MockConnection>();
+        mConnection = new MockConnection();
         mGazer = createGazerConnection(mConnection, "", 0);
         mResourceProvider = ResourceRequester::create();
-        mBuffer.reset(new uint8_t[BUFFER_SIZE]);
     }
 
-    StrictMock<MockConnection>* mConnection;
+    MockConnection* mConnection;
     std::unique_ptr<GazerConnection> mGazer;
     std::unique_ptr<ResourceProvider> mResourceProvider;
-    std::unique_ptr<uint8_t[]> mBuffer;
+    std::vector<uint8_t> mBuffer;
 };
 
 }  // end of anonymous namespace
 
 TEST_F(ResourceRequesterTest, Prefetch) {
-    EXPECT_TRUE(mResourceProvider->prefetch({{"A", 16}, {"B", 32}}, *mGazer, mBuffer.get(),
-                                            BUFFER_SIZE));
+    mBuffer.resize(4096);
+    EXPECT_TRUE(mResourceProvider->prefetch({{"A", 16}, {"B", 32}}, *mGazer, mBuffer.data(),
+                                            mBuffer.size()));
 }
 
 TEST_F(ResourceRequesterTest, SingleGet) {
-    EXPECT_CALL(*mConnection, send(VoidPointee(std::vector<uint8_t>{0}), 1))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<uint32_t>(1)), 4))
-            .WillOnce(ReturnArg<1>())   // Resource count
-            .WillOnce(ReturnArg<1>());  // Resource id length
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<std::string>("A")), 1))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*mConnection, recv(_, 3))
-            .WillOnce(DoAll(SetVoidPointee(toByteVector<std::string>("XYZ")), ReturnArg<1>()));
-    EXPECT_TRUE(mResourceProvider->get("A", *mGazer, mBuffer.get(), 3));
-    EXPECT_THAT(mBuffer.get(), VoidPointee(toByteVector<std::string>("XYZ")));
+    std::vector<uint8_t> payload = {'X', 'Y', 'Z'};
+    mBuffer.resize(payload.size());
+    std::vector<uint8_t> expected;
+    pushUint8(&expected, GazerConnection::MESSAGE_TYPE_GET);
+    pushUint32(&expected, 1);
+    pushString(&expected, "A");
+
+    pushBytes(&mConnection->in, payload);
+
+    EXPECT_TRUE(mResourceProvider->get("A", *mGazer, mBuffer.data(), 3));
+    EXPECT_THAT(mBuffer, ElementsAreArray(payload));
+    EXPECT_EQ(mConnection->out, expected);
 }
 
 TEST_F(ResourceRequesterTest, MultiGet) {
-    EXPECT_CALL(*mConnection, send(VoidPointee(std::vector<uint8_t>{0}), 1))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*mConnection, send(VoidPointee(std::vector<uint8_t>{2, 0, 0, 0}), 4))
-            .WillOnce(ReturnArg<1>());  // Resource count
-    EXPECT_CALL(*mConnection, send(VoidPointee(std::vector<uint8_t>{1, 0, 0, 0}), 4))
-            .WillOnce(ReturnArg<1>())   // Resource 1 name length
-            .WillOnce(ReturnArg<1>());  // Resource 2 name length
-    // Resource 1 name
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<std::string>("A")), 1))
-            .WillOnce(ReturnArg<1>());
-    // Resource 2 name
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<std::string>("B")), 1))
-            .WillOnce(ReturnArg<1>());
-    // Resource content
-    EXPECT_CALL(*mConnection, recv(_, 8))
-            .WillOnce(DoAll(SetVoidPointee(toByteVector<std::string>("XYZ12345")), ReturnArg<1>()));
-    EXPECT_TRUE(mResourceProvider->get({{"A", 3}, {"B", 5}}, *mGazer, mBuffer.get()));
-    EXPECT_THAT(mBuffer.get(), VoidPointee(toByteVector<std::string>("XYZ12345")));
-}
+    std::vector<uint8_t> payload = {'X', 'Y', 'Z', '1', '2', '3', '4', '5'};
+    mBuffer.resize(payload.size());
+    std::vector<uint8_t> expected;
+    pushUint8(&expected, GazerConnection::MESSAGE_TYPE_GET);
+    pushUint32(&expected, 2);
+    pushString(&expected, "A");
+    pushString(&expected, "B");
 
+    pushBytes(&mConnection->in, payload);
+
+    EXPECT_TRUE(mResourceProvider->get({{"A", 3}, {"B", 5}}, *mGazer, mBuffer.data(), mBuffer.size()));
+    EXPECT_THAT(mBuffer, ElementsAreArray(payload));
+    EXPECT_EQ(mConnection->out, expected);
+}
 }  // end of namespace test
 }  // end of namespace caze
 }  // end of namespace android

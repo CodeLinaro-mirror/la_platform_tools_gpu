@@ -38,6 +38,7 @@ using ::testing::Return;
 using ::testing::ReturnArg;
 using ::testing::StrictMock;
 using ::testing::WithArg;
+using ::testing::ElementsAreArray;
 
 namespace android {
 namespace caze {
@@ -116,7 +117,8 @@ TEST_F(ContextTest, LoadResource) {
 
     EXPECT_THAT(context, NotNull());
     EXPECT_TRUE(context->interpret());
-    EXPECT_THAT(mMemoryManager->volatileToAbsolute(0), VoidPointee(resourceA));
+    auto res = (uint8_t*)mMemoryManager->volatileToAbsolute(0);
+    EXPECT_THAT(resourceA, ElementsAreArray(res, resourceA.size()));
 }
 
 TEST_F(ContextTest, LoadResourcePopFailed) {
@@ -154,22 +156,18 @@ TEST_F(ContextTest, PostData) {
             {instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 1),
              instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 6),
              instruction(Interpreter::InstructionCode::POST)});
+    std::vector<uint8_t> expected;
+    pushUint8(&expected, GazerConnection::MESSAGE_TYPE_POST);
+    pushUint32(&expected, 6);
+    pushBytes(&expected, {1, 2, 3, 4, 5, 6});
 
-    auto connection = new StrictMock<MockConnection>();
-
-    EXPECT_CALL(*connection, send(VoidPointee(std::vector<uint8_t>{1}), 1))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*connection, send(VoidPointee(toByteVector<uint32_t>(6)), 4))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*connection, send(VoidPointee(std::vector<uint8_t>{1, 2, 3, 4, 5, 6}), 6))
-            .WillOnce(ReturnArg<1>());
-
+    auto connection = new MockConnection();
     resourceProviderLoadReplay(mResourceProvider.get(), replayData);
     auto gazerConnection = createGazerConnection(connection, "", replayData.size());
     auto context = Context::create(*gazerConnection, mResourceProvider.get(), mMemoryManager.get());
-
     EXPECT_THAT(context, NotNull());
     EXPECT_TRUE(context->interpret());
+    EXPECT_EQ(connection->out, expected);
 }
 
 TEST_F(ContextTest, PostDataErrorPop) {
@@ -194,21 +192,11 @@ TEST_F(ContextTest, PostDataErrorPost) {
              instruction(Interpreter::InstructionCode::PUSH_I, BaseType::Uint32, 6),
              instruction(Interpreter::InstructionCode::POST)});
 
-    auto connection = new StrictMock<MockConnection>();
-
-    EXPECT_CALL(*connection, send(VoidPointee(std::vector<uint8_t>{1}), 1))
-            .WillOnce(ReturnArg<1>());
-    EXPECT_CALL(*connection, send(VoidPointee(std::vector<uint8_t>{6, 0, 0, 0}), 4))
-            .WillOnce(ReturnArg<1>());
-    // Send failed
-    EXPECT_CALL(*connection, send(VoidPointee(std::vector<uint8_t>{1, 2, 3, 4, 5, 6}), 6))
-            .WillOnce(Return(0));
-
+    auto connection = new MockConnection();
+    connection->out_limit = 7;
     resourceProviderLoadReplay(mResourceProvider.get(), replayData);
-
     auto gazerConnection = createGazerConnection(connection, "", replayData.size());
     auto context = Context::create(*gazerConnection, mResourceProvider.get(), mMemoryManager.get());
-
     EXPECT_THAT(context, NotNull());
     EXPECT_FALSE(context->interpret());
 }

@@ -43,9 +43,10 @@ public:
     // Resources are written to the memory location given by <target> and at most <size> bytes
     // are written. Returns true if the resource was successfully loaded and all <size> bytes were
     // written, otherwise false.
-    virtual bool get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                     uint32_t size) = 0;
-    virtual bool get(const ResourceList& resources, const GazerConnection& gazer, void* target);
+    virtual bool get(const ResourceId& id, const GazerConnection& gazer,
+                     void* target, uint32_t size) = 0;
+    virtual bool get(const ResourceList& resources, const GazerConnection& gazer,
+                     void* target, uint32_t size);
 
     // Prefetches the resources for resource providers where prefetching is available.
     // The resources vector have to contain (resource id, resource size) pairs and buffer should

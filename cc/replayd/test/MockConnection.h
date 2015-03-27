@@ -20,6 +20,8 @@
 #include "Connection.h"
 
 #include <memory>
+#include <cstring>
+#include <queue>
 
 #include <gmock/gmock.h>
 
@@ -29,15 +31,38 @@ namespace test {
 
 class MockConnection : public Connection {
 public:
-    MOCK_METHOD2(send, size_t(const void* data, size_t size));
-    MOCK_METHOD2(recv, size_t(void* data, size_t size));
-    MOCK_METHOD0(acceptProxy, Connection*());
+    MockConnection() : read_pos(0), out_limit(-1) {}
+    virtual size_t send(const void* data, size_t size) {
+        if ((out_limit >= 0)  && (size > out_limit - out.size())) {
+            size = out_limit - out.size();
+        }
+        out.insert(out.end(), (char*)data, (char*)data + size);
+        return size;
+    }
+    virtual size_t recv(void* data, size_t size) {
+        if (size > in.size() - read_pos) {
+            size = in.size() - read_pos;
+        }
+        std::memcpy(data, &in[read_pos], size);
+        read_pos += size;
+        return size;
+    }
 
     const char* error() override { return ""; }
-
-    std::unique_ptr<Connection> accept() override {
-        return std::unique_ptr<Connection>(this->acceptProxy());
+    std::unique_ptr<Connection> accept() {
+        if (connections.size() == 0) {
+            return nullptr;
+        }
+        auto conn = connections.front();
+        connections.pop();
+        return std::unique_ptr<Connection>(conn);
     }
+
+    std::queue<Connection*> connections;
+    std::vector<uint8_t> in;
+    int read_pos;
+    std::vector<uint8_t> out;
+    int out_limit;
 };
 
 }  // end of namespace test

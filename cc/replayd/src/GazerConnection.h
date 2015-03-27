@@ -51,7 +51,6 @@ public:
     // the posting was successful false otherwise.
     bool post(const void* postData, uint32_t postSize) const;
 
-private:
     // Type of the message sent to the server. It have to be consistent with the values expected by
     // the server
     enum MessageType : uint8_t {
@@ -59,6 +58,7 @@ private:
         MESSAGE_TYPE_POST = 1,
     };
 
+private:
     // Initialize the member variables of the GazerConnection object
     GazerConnection(std::unique_ptr<Connection> conn, const std::string& replayId,
                     uint32_t replayLen);

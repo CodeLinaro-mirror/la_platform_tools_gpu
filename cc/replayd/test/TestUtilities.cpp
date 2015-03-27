@@ -52,41 +52,28 @@ uint32_t instruction(Interpreter::InstructionCode code, BaseType type, uint32_t 
            (data & 0x000fffff);
 }
 
-namespace {
-void addUint32ToUint8Vector(std::vector<uint8_t>* v, uint32_t x) {
+void pushBytes(std::vector<uint8_t>* buf, const std::vector<uint8_t>& v) {
+  buf->insert(buf->end(), v.begin(), v.end());
+}
+void pushUint8(std::vector<uint8_t>* buf, uint8_t v) {
+  buf->push_back(v);
+}
+void pushUint32(std::vector<uint8_t>* buf, uint32_t v) {
     for (uint8_t i = 0; i < 32; i += 8) {
-        v->push_back((x >> i) & 0xff);
-    }
+      buf->push_back((v >> i) & 0xff);
+  }
 }
+void pushString(std::vector<uint8_t>* buf, const std::string& str) {
+  pushUint32(buf, str.size());
+  for(char c : str) {
+      buf->push_back(c);
+  }
 }
-
-template <>
-std::vector<uint8_t> toByteVector<uint8_t>(const uint8_t& x) {
-    return {x};
-}
-
-template <>
-std::vector<uint8_t> toByteVector<uint32_t>(const uint32_t& x) {
-    std::vector<uint8_t> v;
-    addUint32ToUint8Vector(&v, x);
-    return v;
-}
-
-template <>
-std::vector<uint8_t> toByteVector<std::string>(const std::string& x) {
-    std::vector<uint8_t> v;
-    v.insert(v.end(), x.begin(), x.end());
-    return v;
-}
-
-template <>
-std::vector<uint8_t> toByteVector<std::vector<uint32_t>>(const std::vector<uint32_t>& x) {
-    std::vector<uint8_t> v;
-    for (auto& it : x) {
-        std::vector<uint8_t> t = toByteVector(it);
-        v.insert(v.end(), t.begin(), t.end());
-    }
-    return v;
+void pushString(std::vector<uint8_t>* buf, const char* str) {
+  pushUint32(buf, strlen(str));
+  for(char c = *str; c != 0; str++, c = *str) {
+      buf->push_back(c);
+  }
 }
 
 std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemorySize,
@@ -94,19 +81,18 @@ std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemor
                                       const ResourceProvider::ResourceList& resources,
                                       const std::vector<uint32_t>& instructions) {
     std::vector<uint8_t> replayData;
-    addUint32ToUint8Vector(&replayData, stackSize);
-    addUint32ToUint8Vector(&replayData, volatileMemorySize);
-    addUint32ToUint8Vector(&replayData, constantMemory.size());
-    replayData.insert(replayData.end(), constantMemory.begin(), constantMemory.end());
-    addUint32ToUint8Vector(&replayData, resources.size());
+    pushUint32(&replayData, stackSize);
+    pushUint32(&replayData, volatileMemorySize);
+    pushUint32(&replayData, constantMemory.size());
+    pushBytes(&replayData, constantMemory);
+    pushUint32(&replayData, resources.size());
     for (auto& it : resources) {
-        addUint32ToUint8Vector(&replayData, it.first.size());
-        replayData.insert(replayData.end(), it.first.begin(), it.first.end());
-        addUint32ToUint8Vector(&replayData, it.second);
+        pushString(&replayData, it.first);
+        pushUint32(&replayData, it.second);
     }
-    addUint32ToUint8Vector(&replayData, instructions.size() * sizeof(uint32_t));
+    pushUint32(&replayData, instructions.size() * sizeof(uint32_t));
     for (auto it : instructions) {
-        addUint32ToUint8Vector(&replayData, it);
+        pushUint32(&replayData, it);
     }
     return replayData;
 }
@@ -114,24 +100,11 @@ std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemor
 std::unique_ptr<GazerConnection> createGazerConnection(MockConnection* connection,
                                                        const std::string& replayId,
                                                        uint32_t replayLength) {
-    std::vector<uint8_t> replayIdData;
-    std::vector<uint8_t> replayIdLengthData;
-    std::vector<uint8_t> replayLengthData;
-
-    replayIdData.insert(replayIdData.end(), replayId.begin(), replayId.end());
-    addUint32ToUint8Vector(&replayIdLengthData, replayId.size());
-    addUint32ToUint8Vector(&replayLengthData, replayLength);
-
-    EXPECT_CALL(*connection, recv(_, _))
-            // Replay id length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(replayIdLengthData)), ReturnArg<1>()))
-            // Replay id
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(replayIdData)), ReturnArg<1>()))
-            // Replay length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(replayLengthData)), ReturnArg<1>()));
+    pushString(&connection->in, replayId);
+    pushUint32(&connection->in, replayLength);
 
     std::unique_ptr<GazerConnection> gazerConnection =
-            GazerConnection::create(std::unique_ptr<Connection>(connection));
+        GazerConnection::create(std::unique_ptr<Connection>(connection));
 
     EXPECT_THAT(gazerConnection, NotNull());
 
@@ -140,8 +113,7 @@ std::unique_ptr<GazerConnection> createGazerConnection(MockConnection* connectio
 
 std::unique_ptr<GazerConnection> createGazerConnection(const std::string& replayId,
                                                        uint32_t replayLength) {
-    StrictMock<MockConnection>* connection = new StrictMock<MockConnection>();
-    return createGazerConnection(connection, replayId, replayLength);
+    return createGazerConnection(new MockConnection(), replayId, replayLength);
 }
 
 }  // end of namespace test

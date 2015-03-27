@@ -25,10 +25,10 @@ namespace android {
 namespace caze {
 
 bool ResourceProvider::get(const ResourceList& resources,
-                           const GazerConnection& gazer, void* target) {
+                           const GazerConnection& gazer, void* target, uint32_t size) {
     size_t offset = 0;
     for (const auto& it : resources) {
-        if (!get(it.first, gazer, static_cast<uint8_t*>(target) + offset, it.second)) {
+        if (!get(it.first, gazer, static_cast<uint8_t*>(target) + offset, size - offset)) {
             return false;
         }
         offset += it.second;

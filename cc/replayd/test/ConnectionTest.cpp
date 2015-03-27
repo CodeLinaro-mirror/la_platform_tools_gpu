@@ -28,6 +28,7 @@ using ::testing::Return;
 using ::testing::ReturnArg;
 using ::testing::StrictMock;
 using ::testing::WithArg;
+using ::testing::ElementsAre;
 
 namespace android {
 namespace caze {
@@ -39,96 +40,46 @@ const std::string testString = "ABCDE";
 class ConnectionTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection.reset(new StrictMock<MockConnection>());
+        mConnection.reset(new MockConnection());
     }
 
-    std::unique_ptr<StrictMock<MockConnection>> mConnection;
+    std::unique_ptr<MockConnection> mConnection;
 };
 
 }  // end of anonymous namespace
 
 TEST_F(ConnectionTest, SendEmptyString) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<uint32_t>(0)), 4))
-            .WillOnce(ReturnArg<1>());
-    // Content of the string
-    EXPECT_CALL(*mConnection, send(_, 0)).WillOnce(ReturnArg<1>());
-
     EXPECT_TRUE(mConnection->sendString(""));
+    EXPECT_THAT(mConnection->out, ElementsAre(0, 0, 0, 0));
 }
 
 TEST_F(ConnectionTest, SendString) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<uint32_t>(testString.size())), 4))
-            .WillOnce(ReturnArg<1>());
-    // Content of the string
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector(testString)), testString.size()))
-            .WillOnce(ReturnArg<1>());
-
     EXPECT_TRUE(mConnection->sendString(testString));
+    EXPECT_THAT(mConnection->out, ElementsAre(
+        5, 0, 0, 0, 'A', 'B', 'C', 'D', 'E'));
 }
 
-TEST_F(ConnectionTest, SendStringErrorLength) {
-    // Length of the string send failed (only 2 byte sent out of 4)
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<uint32_t>(testString.size())), 4))
-            .WillOnce(Return(2));
-
-    EXPECT_FALSE(mConnection->sendString(testString));
-}
-
-TEST_F(ConnectionTest, SendStringErrorContent) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector<uint32_t>(testString.size())), 4))
-            .WillOnce(ReturnArg<1>());
-    // Content of the string send failed (0 byte sent out of 5)
-    EXPECT_CALL(*mConnection, send(VoidPointee(toByteVector(testString)), testString.size()))
-            .WillOnce(Return(0));
-
+TEST_F(ConnectionTest, SendStringError) {
+    mConnection->out_limit = 3;
     EXPECT_FALSE(mConnection->sendString(testString));
 }
 
 TEST_F(ConnectionTest, ReadEmptyString) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, recv(_, 4))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(0))), ReturnArg<1>()));
-    // Content of the string
-    EXPECT_CALL(*mConnection, recv(_, 0)).WillOnce(ReturnArg<1>());
-
+    pushString(&mConnection->in, "");
     std::string s;
     EXPECT_TRUE(mConnection->readString(&s));
     EXPECT_EQ("", s);
 }
 
 TEST_F(ConnectionTest, ReadString) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, recv(_, 4))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(testString.size()))),
-                            ReturnArg<1>()));
-    // Content of the string
-    EXPECT_CALL(*mConnection, recv(_, testString.size()))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector(testString))), ReturnArg<1>()));
-
+    pushString(&mConnection->in, testString);
     std::string s;
     EXPECT_TRUE(mConnection->readString(&s));
     EXPECT_EQ(testString, s);
 }
 
-TEST_F(ConnectionTest, ReadStringLengthError) {
-    // Length of the string read failed (2 out of 4 byte read)
-    EXPECT_CALL(*mConnection, recv(_, 4)).WillOnce(Return(2));
-
-    std::string s;
-    EXPECT_FALSE(mConnection->readString(&s));
-}
-
-TEST_F(ConnectionTest, ReadStringContentError) {
-    // Length of the string
-    EXPECT_CALL(*mConnection, recv(_, 4))
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(testString.size()))),
-                            ReturnArg<1>()));
-    // Content of the string read failed (3 out of 5 byte read)
-    EXPECT_CALL(*mConnection, recv(_, testString.size())).WillOnce(Return(3));
-
+TEST_F(ConnectionTest, ReadStringError) {
+    pushBytes(&mConnection->in, {'A', 'B'});
     std::string s;
     EXPECT_FALSE(mConnection->readString(&s));
 }
