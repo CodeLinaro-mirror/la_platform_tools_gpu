@@ -19,6 +19,7 @@ package opcode
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
@@ -91,7 +92,7 @@ type Call struct {
 	FunctionID uint16 // The function identifier to call.
 }
 
-func (c Call) Encode(e *protocol.Encoder) error {
+func (c Call) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpCall, setBit(uint32(c.FunctionID), 24, c.PushReturn)))
 }
 
@@ -101,7 +102,7 @@ type PushI struct {
 	Value    uint32        // The value to push packed into the low 20 bits.
 }
 
-func (c PushI) Encode(e *protocol.Encoder) error {
+func (c PushI) Encode(e binary.Encoder) error {
 	return e.Uint32(packCYZ(protocol.OpPushI, uint32(c.DataType), c.Value))
 }
 
@@ -111,7 +112,7 @@ type LoadC struct {
 	Address  uint32        // The pointer to the value in constant address-space.
 }
 
-func (c LoadC) Encode(e *protocol.Encoder) error {
+func (c LoadC) Encode(e binary.Encoder) error {
 	return e.Uint32(packCYZ(protocol.OpLoadC, uint32(c.DataType), c.Address))
 }
 
@@ -121,7 +122,7 @@ type LoadV struct {
 	Address  uint32        // The pointer to the value in volatile address-space.
 }
 
-func (c LoadV) Encode(e *protocol.Encoder) error {
+func (c LoadV) Encode(e binary.Encoder) error {
 	return e.Uint32(packCYZ(protocol.OpLoadV, uint32(c.DataType), c.Address))
 }
 
@@ -130,7 +131,7 @@ type Load struct {
 	DataType protocol.Type // The value types to load.
 }
 
-func (c Load) Encode(e *protocol.Encoder) error {
+func (c Load) Encode(e binary.Encoder) error {
 	return e.Uint32(packCYZ(protocol.OpLoad, uint32(c.DataType), 0))
 }
 
@@ -139,7 +140,7 @@ type Pop struct {
 	Count uint32 // Number of elements to pop from the top of the stack.
 }
 
-func (c Pop) Encode(e *protocol.Encoder) error {
+func (c Pop) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpPop, c.Count))
 }
 
@@ -148,14 +149,14 @@ type StoreV struct {
 	Address uint32 // Pointer in volatile address-space.
 }
 
-func (c StoreV) Encode(e *protocol.Encoder) error {
+func (c StoreV) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpStoreV, c.Address))
 }
 
 // Store represents the STORE virtual machine opcode.
 type Store struct{}
 
-func (c Store) Encode(e *protocol.Encoder) error {
+func (c Store) Encode(e binary.Encoder) error {
 	return e.Uint32(packC(protocol.OpStore))
 }
 
@@ -164,14 +165,14 @@ type Resource struct {
 	ID uint32 // The index of the resource identifier.
 }
 
-func (c Resource) Encode(e *protocol.Encoder) error {
+func (c Resource) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpResource, c.ID))
 }
 
 // Post represents the POST virtual machine opcode.
 type Post struct{}
 
-func (c Post) Encode(e *protocol.Encoder) error {
+func (c Post) Encode(e binary.Encoder) error {
 	return e.Uint32(packC(protocol.OpPost))
 }
 
@@ -180,7 +181,7 @@ type Copy struct {
 	Count uint32 // Number of bytes to copy.
 }
 
-func (c Copy) Encode(e *protocol.Encoder) error {
+func (c Copy) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpCopy, c.Count))
 }
 
@@ -189,7 +190,7 @@ type Clone struct {
 	Index uint32 // Index of element from top of stack to clone.
 }
 
-func (c Clone) Encode(e *protocol.Encoder) error {
+func (c Clone) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpClone, c.Index))
 }
 
@@ -198,7 +199,7 @@ type Strcpy struct {
 	MaxSize uint32 // Maximum size in bytes to copy.
 }
 
-func (c Strcpy) Encode(e *protocol.Encoder) error {
+func (c Strcpy) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpStrcpy, c.MaxSize))
 }
 
@@ -207,12 +208,12 @@ type Extend struct {
 	Value uint32 // 26 bit value to extend the top of the stack by.
 }
 
-func (c Extend) Encode(e *protocol.Encoder) error {
+func (c Extend) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpExtend, c.Value))
 }
 
 // Decode returns the opcode decoded from decoder d.
-func Decode(d *protocol.Decoder) (interface{}, error) {
+func Decode(d binary.Decoder) (interface{}, error) {
 	i, err := d.Uint32()
 	if err != nil {
 		return nil, err

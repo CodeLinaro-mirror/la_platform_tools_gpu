@@ -120,11 +120,8 @@ const uint8_t* ReplayRequest::loadResourceIds(const uint8_t* ptr) {
 
     mResources.reserve(resourceCount);
     for (uint32_t i = 0; i < resourceCount; ++i) {
-        uint32_t resourceNameLength = *reinterpret_cast<const uint32_t*>(ptr);
-        ptr += sizeof(uint32_t);
-
-        const std::string resourceName(reinterpret_cast<const char*>(ptr), resourceNameLength);
-        ptr += resourceNameLength;
+        const std::string resourceName(reinterpret_cast<const char*>(ptr));
+        ptr += resourceName.length() + 1;
 
         uint32_t resourceSize = *reinterpret_cast<const uint32_t*>(ptr);
         ptr += sizeof(uint32_t);

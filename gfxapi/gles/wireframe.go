@@ -7,11 +7,12 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
-	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
 // wireframe returns an atom transform that replaces all draw calls of triangle
@@ -76,7 +77,7 @@ type index uint32
 // TODO: The decode/encode methods below assume little endian
 
 func decodeIndices(data []byte, indicesType IndicesType) ([]index, error) {
-	dec := protocol.NewDecoder(bytes.NewBuffer(data), eb.LittleEndian)
+	dec := flat.Decoder(endian.Reader(bytes.NewBuffer(data), eb.LittleEndian))
 	indices := make([]index, 0)
 	switch indicesType {
 	case IndicesType_GL_UNSIGNED_BYTE:
@@ -119,7 +120,7 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 		}
 	}
 	buf := &bytes.Buffer{}
-	enc := protocol.NewEncoder(buf, eb.LittleEndian)
+	enc := flat.Encoder(endian.Writer(buf, eb.LittleEndian))
 	switch {
 	case maxIndex > 0xFFFF:
 		// TODO: GL_UNSIGNED_INT in glDrawElements is supported only since GLES 3.0

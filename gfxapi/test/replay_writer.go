@@ -5,9 +5,8 @@
 package test
 
 import (
-	"io"
-
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -15,12 +14,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func readBytes(r io.Reader, c uint64) ([]byte, error) {
+func readBytes(r binary.Reader, c uint64) ([]byte, error) {
 	b := make([]byte, c)
-	_, err := io.ReadFull(r, b)
+	err := r.Data(b)
 	return b, err
 }
-func readString(r io.Reader, c uint64) (string, error) {
+func readString(r binary.Reader, c uint64) (string, error) {
 	if buf, err := readBytes(r, c); err == nil {
 		str := string(buf)
 		for i, c := range str {
@@ -144,7 +143,7 @@ type CmdU8_Postback struct {
 	Result uint8
 }
 
-func (o *CmdU8_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdU8_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint8(); err == nil {
 		o.Result = v
 	} else {
@@ -157,7 +156,7 @@ type CmdS8_Postback struct {
 	Result int8
 }
 
-func (o *CmdS8_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdS8_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int8(); err == nil {
 		o.Result = v
 	} else {
@@ -170,7 +169,7 @@ type CmdU16_Postback struct {
 	Result uint16
 }
 
-func (o *CmdU16_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdU16_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint16(); err == nil {
 		o.Result = v
 	} else {
@@ -183,7 +182,7 @@ type CmdS16_Postback struct {
 	Result int16
 }
 
-func (o *CmdS16_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdS16_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int16(); err == nil {
 		o.Result = v
 	} else {
@@ -196,7 +195,7 @@ type CmdF32_Postback struct {
 	Result float32
 }
 
-func (o *CmdF32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdF32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Float32(); err == nil {
 		o.Result = v
 	} else {
@@ -209,7 +208,7 @@ type CmdU32_Postback struct {
 	Result uint32
 }
 
-func (o *CmdU32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdU32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Result = v
 	} else {
@@ -222,7 +221,7 @@ type CmdS32_Postback struct {
 	Result int32
 }
 
-func (o *CmdS32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdS32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Result = v
 	} else {
@@ -235,7 +234,7 @@ type CmdF64_Postback struct {
 	Result float64
 }
 
-func (o *CmdF64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdF64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Float64(); err == nil {
 		o.Result = v
 	} else {
@@ -248,7 +247,7 @@ type CmdU64_Postback struct {
 	Result uint64
 }
 
-func (o *CmdU64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdU64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint64(); err == nil {
 		o.Result = v
 	} else {
@@ -261,7 +260,7 @@ type CmdS64_Postback struct {
 	Result int64
 }
 
-func (o *CmdS64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdS64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int64(); err == nil {
 		o.Result = v
 	} else {
@@ -274,7 +273,7 @@ type CmdBool_Postback struct {
 	Result bool
 }
 
-func (o *CmdBool_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdBool_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -287,7 +286,7 @@ type CmdString_Postback struct {
 	Result string
 }
 
-func (o *CmdString_Postback) Decode(result_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdString_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
 	if val, err := readString(d, result_cnt); err == nil {
 		o.Result = val
 	} else {
@@ -300,7 +299,7 @@ type CmdArrayOfFloat_Postback struct {
 	Result F32Array
 }
 
-func (o *CmdArrayOfFloat_Postback) Decode(result_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdArrayOfFloat_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
 	o.Result = make(F32Array, result_cnt)
 	for i := range o.Result {
 		if v, err := d.Float32(); err == nil {
@@ -316,7 +315,7 @@ type CmdPointer_Postback struct {
 	Result []byte
 }
 
-func (o *CmdPointer_Postback) Decode(result_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdPointer_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
 	if val, err := readBytes(d, result_cnt); err == nil {
 		o.Result = val
 	} else {
@@ -329,7 +328,7 @@ type CmdVoidOutU8_Postback struct {
 	A uint8
 }
 
-func (o *CmdVoidOutU8_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutU8_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint8(); err == nil {
 		o.A = v
 	} else {
@@ -342,7 +341,7 @@ type CmdVoidOutS8_Postback struct {
 	A int8
 }
 
-func (o *CmdVoidOutS8_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutS8_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int8(); err == nil {
 		o.A = v
 	} else {
@@ -355,7 +354,7 @@ type CmdVoidOutU16_Postback struct {
 	A uint16
 }
 
-func (o *CmdVoidOutU16_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutU16_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint16(); err == nil {
 		o.A = v
 	} else {
@@ -368,7 +367,7 @@ type CmdVoidOutS16_Postback struct {
 	A int16
 }
 
-func (o *CmdVoidOutS16_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutS16_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int16(); err == nil {
 		o.A = v
 	} else {
@@ -381,7 +380,7 @@ type CmdVoidOutF32_Postback struct {
 	A float32
 }
 
-func (o *CmdVoidOutF32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutF32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Float32(); err == nil {
 		o.A = v
 	} else {
@@ -394,7 +393,7 @@ type CmdVoidOutU32_Postback struct {
 	A uint32
 }
 
-func (o *CmdVoidOutU32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutU32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.A = v
 	} else {
@@ -407,7 +406,7 @@ type CmdVoidOutS32_Postback struct {
 	A int32
 }
 
-func (o *CmdVoidOutS32_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutS32_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.A = v
 	} else {
@@ -420,7 +419,7 @@ type CmdVoidOutF64_Postback struct {
 	A float64
 }
 
-func (o *CmdVoidOutF64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutF64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Float64(); err == nil {
 		o.A = v
 	} else {
@@ -433,7 +432,7 @@ type CmdVoidOutU64_Postback struct {
 	A uint64
 }
 
-func (o *CmdVoidOutU64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutU64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint64(); err == nil {
 		o.A = v
 	} else {
@@ -446,7 +445,7 @@ type CmdVoidOutS64_Postback struct {
 	A int64
 }
 
-func (o *CmdVoidOutS64_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutS64_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int64(); err == nil {
 		o.A = v
 	} else {
@@ -459,7 +458,7 @@ type CmdVoidOutBool_Postback struct {
 	A bool
 }
 
-func (o *CmdVoidOutBool_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOutBool_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.A = v
 	} else {
@@ -472,7 +471,7 @@ type CmdVoidOutString_Postback struct {
 	A string
 }
 
-func (o *CmdVoidOutString_Postback) Decode(a_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdVoidOutString_Postback) Decode(a_cnt uint64, d binary.Decoder) error {
 	if val, err := readString(d, a_cnt); err == nil {
 		o.A = val
 	} else {
@@ -485,7 +484,7 @@ type CmdVoidOutFixedSizeBuffer_Postback struct {
 	A []byte
 }
 
-func (o *CmdVoidOutFixedSizeBuffer_Postback) Decode(a_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdVoidOutFixedSizeBuffer_Postback) Decode(a_cnt uint64, d binary.Decoder) error {
 	if val, err := readBytes(d, a_cnt); err == nil {
 		o.A = val
 	} else {
@@ -502,7 +501,7 @@ type CmdVoidOut3Strings_Postback struct {
 
 func (o *CmdVoidOut3Strings_Postback) Decode(a_cnt uint64,
 	b_cnt uint64,
-	c_cnt uint64, d *protocol.Decoder) error {
+	c_cnt uint64, d binary.Decoder) error {
 	if val, err := readString(d, a_cnt); err == nil {
 		o.A = val
 	} else {
@@ -527,7 +526,7 @@ type CmdVoidOut3Remapped_Postback struct {
 	C remapped
 }
 
-func (o *CmdVoidOut3Remapped_Postback) Decode(d *protocol.Decoder) error {
+func (o *CmdVoidOut3Remapped_Postback) Decode(d binary.Decoder) error {
 	{
 		var x uint32
 		if v, err := d.Uint32(); err == nil {
@@ -562,7 +561,7 @@ type CmdVoidOutArrayOfRemapped_Postback struct {
 	A RemappedArray
 }
 
-func (o *CmdVoidOutArrayOfRemapped_Postback) Decode(a_cnt uint64, d *protocol.Decoder) error {
+func (o *CmdVoidOutArrayOfRemapped_Postback) Decode(a_cnt uint64, d binary.Decoder) error {
 	o.A = make(RemappedArray, a_cnt)
 	for i := range o.A {
 		{
@@ -737,7 +736,7 @@ func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, po
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdU8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -755,7 +754,7 @@ func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, po
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdS8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -773,7 +772,7 @@ func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdU16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -791,7 +790,7 @@ func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdS16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -809,7 +808,7 @@ func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdF32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -827,7 +826,7 @@ func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdU32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -845,7 +844,7 @@ func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdS32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -863,7 +862,7 @@ func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdF64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -881,7 +880,7 @@ func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdU64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -899,7 +898,7 @@ func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdS64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -917,7 +916,7 @@ func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, 
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdBool_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -937,7 +936,7 @@ func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟb.Strcpy(result_cnt)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdString_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -957,7 +956,7 @@ func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟb.Copy(result_cnt * 4)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdArrayOfFloat_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -977,7 +976,7 @@ func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟb.Copy(result_cnt)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdPointer_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -995,7 +994,7 @@ func (ϟa *CmdVoidOutU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟb.CallNoPush(funcInfoCmdVoidOutU8)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1013,7 +1012,7 @@ func (ϟa *CmdVoidOutS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟb.CallNoPush(funcInfoCmdVoidOutS8)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS8_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1031,7 +1030,7 @@ func (ϟa *CmdVoidOutU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutU16)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1049,7 +1048,7 @@ func (ϟa *CmdVoidOutS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutS16)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS16_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1067,7 +1066,7 @@ func (ϟa *CmdVoidOutF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutF32)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutF32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1085,7 +1084,7 @@ func (ϟa *CmdVoidOutU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutU32)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1103,7 +1102,7 @@ func (ϟa *CmdVoidOutS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutS32)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS32_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1121,7 +1120,7 @@ func (ϟa *CmdVoidOutF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutF64)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutF64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1139,7 +1138,7 @@ func (ϟa *CmdVoidOutU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutU64)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutU64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1157,7 +1156,7 @@ func (ϟa *CmdVoidOutS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoCmdVoidOutS64)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutS64_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1175,7 +1174,7 @@ func (ϟa *CmdVoidOutBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟb.CallNoPush(funcInfoCmdVoidOutBool)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutBool_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1194,7 +1193,7 @@ func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟb.CallNoPush(funcInfoCmdVoidOutString)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutString_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err
@@ -1213,7 +1212,7 @@ func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟb.CallNoPush(funcInfoCmdVoidOutFixedSizeBuffer)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutFixedSizeBuffer_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err
@@ -1236,7 +1235,7 @@ func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟb.CallNoPush(funcInfoCmdVoidOut3Strings)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOut3Strings_Postback{}
 			if err := postback.Decode(a_cnt,
 				b_cnt,
@@ -1289,7 +1288,7 @@ func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 		storeRemap(ϟb, key, outputs[2], protocol.TypeUint32)
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOut3Remapped_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1314,7 +1313,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := CmdVoidOutArrayOfRemapped_Postback{}
 			if err := postback.Decode(a_cnt, d); err != nil {
 				return nil, err

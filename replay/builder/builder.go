@@ -24,6 +24,8 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -57,7 +59,7 @@ type ResponseDecoder func(r io.Reader) <-chan Postback
 // PostDecoder decodes a single atom's postback, returning the postback data or
 // an error. The PostDecoder must decode all the data that was issued in the
 // Post call before returning.
-type PostDecoder func(*protocol.Decoder) (interface{}, error)
+type PostDecoder func(binary.Decoder) (interface{}, error)
 
 // Builder is used to build the Payload to send to the replay virtual machine.
 // The builder has a number of methods for mutating the virtual machine stack,
@@ -389,7 +391,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	vml := b.layoutVolatileMemory(logger)
 
 	opcodes := &bytes.Buffer{}
-	e := protocol.NewEncoder(opcodes, b.byteOrder)
+	e := flat.Encoder(endian.Writer(opcodes, b.byteOrder))
 	for _, i := range b.instructions {
 		i.Encode(vml, e)
 	}
@@ -409,7 +411,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 	logger.Info("Resource count:         %d", len(payload.Resources))
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
-		d := protocol.NewDecoder(r, b.byteOrder)
+		d := flat.Decoder(endian.Reader(r, b.byteOrder))
 		c := make(chan Postback, 8)
 		go func() {
 			for _, p := range b.decoders {

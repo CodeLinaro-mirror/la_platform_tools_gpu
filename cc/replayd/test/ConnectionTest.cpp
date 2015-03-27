@@ -50,13 +50,13 @@ protected:
 
 TEST_F(ConnectionTest, SendEmptyString) {
     EXPECT_TRUE(mConnection->sendString(""));
-    EXPECT_THAT(mConnection->out, ElementsAre(0, 0, 0, 0));
+    EXPECT_THAT(mConnection->out, ElementsAre(0));
 }
 
 TEST_F(ConnectionTest, SendString) {
     EXPECT_TRUE(mConnection->sendString(testString));
     EXPECT_THAT(mConnection->out, ElementsAre(
-        5, 0, 0, 0, 'A', 'B', 'C', 'D', 'E'));
+        'A', 'B', 'C', 'D', 'E', 0));
 }
 
 TEST_F(ConnectionTest, SendStringError) {
