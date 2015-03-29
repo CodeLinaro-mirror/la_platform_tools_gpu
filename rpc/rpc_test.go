@@ -15,54 +15,41 @@
 package rpc
 
 import (
-	"crypto/sha1"
 	"io"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 const mtu = 1024
 
-type base string
-
-func (o *base) Encode(e binary.Encoder) error {
-	return e.String(string(*o))
+type request struct {
+	binary.Generate
+	data string
 }
 
-func (o *base) Decode(d binary.Decoder) error {
-	s, err := d.String()
-	*o = base(s)
-	return err
+type delay struct {
+	binary.Generate
+	data string
 }
 
-type request struct{ base }
-type delay struct{ base }
-type response struct{ base }
-
-var requestID = sha1.Sum([]byte("requestID"))
-var delayID = sha1.Sum([]byte("delayID"))
-var responseID = sha1.Sum([]byte("responseID"))
-
-func init() {
-	registry.Add(requestID, &request{})
-	registry.Add(delayID, &delay{})
-	registry.Add(responseID, &response{})
+type response struct {
+	binary.Generate
+	data string
 }
 
 func create() Client {
-	pass := make(chan base, 1)
+	pass := make(chan string, 1)
 	sr, cw := io.Pipe()
 	cr, sw := io.Pipe()
 	Serve(log.Nop{}, sr, sw, mtu, func(call interface{}) binary.Encodable {
 		switch o := call.(type) {
 		case *request:
-			pass <- o.base
-			return &response{o.base}
+			pass <- o.data
+			return &response{data: o.data}
 		case *delay:
-			return &response{<-pass}
+			return &response{data: <-pass}
 		default:
 			return NewError("Invalid call type %T", o)
 		}
@@ -71,26 +58,26 @@ func create() Client {
 }
 
 func simpleRequest(t *testing.T, c Client, v string) {
-	r, err := c.Send(&request{base(v)})
+	r, err := c.Send(&request{data: v})
 	if err != nil {
 		t.Fatalf("Unexpected error %s from rpc", err)
 	}
 	if r, ok := r.(*response); !ok {
 		t.Fatalf("Unexpected response type %T from rpc", r)
-	} else if string(r.base) != v {
-		t.Fatalf("expected %s got %s from rpc", v, r.base)
+	} else if string(r.data) != v {
+		t.Fatalf("expected %s got %s from rpc", v, r.data)
 	}
 }
 
 func delayRequest(t *testing.T, c Client, send string, expect string) {
-	r, err := c.Send(&delay{base(send)})
+	r, err := c.Send(&delay{data: send})
 	if err != nil {
 		t.Fatalf("Unexpected error %s from rpc", err)
 	}
 	if r, ok := r.(*response); !ok {
 		t.Fatalf("Unexpected response type %T from rpc", r)
-	} else if string(r.base) != expect {
-		t.Fatalf("expected %s got %s from rpc", expect, r.base)
+	} else if string(r.data) != expect {
+		t.Fatalf("expected %s got %s from rpc", expect, r.data)
 	}
 }
 

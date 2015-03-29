@@ -22,66 +22,16 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-var testRequestTypeId = binary.ID{0x12, 0x34}
-
 type testResource struct {
+	binary.Generate
 	Int    int
 	String string
 	Array  []bool
-}
-
-func init() {
-	registry.Add(testRequestTypeId, &testRequest{})
-}
-
-func (r *testResource) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(r.Int)); err != nil {
-		return err
-	}
-	if err := e.String(r.String); err != nil {
-		return err
-	}
-	if err := e.Int32(int32(len(r.Array))); err != nil {
-		return err
-	}
-	for _, v := range r.Array {
-		if err := e.Bool(bool(v)); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (r *testResource) Decode(d binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		r.Int = int(v)
-	} else {
-		return err
-	}
-	if v, err := d.String(); err == nil {
-		r.String = v
-	} else {
-		return err
-	}
-	if v, err := d.Int32(); err == nil {
-		r.Array = make([]bool, v)
-		for i := range r.Array {
-			if b, err := d.Bool(); err == nil {
-				r.Array[i] = b
-			} else {
-				return err
-			}
-		}
-	} else {
-		return err
-	}
-	return nil
 }
 
 var testResourceA = &testResource{
@@ -91,17 +41,8 @@ var testResourceA = &testResource{
 }
 
 type testRequest struct {
+	binary.Generate
 	Id int
-}
-
-func (t *testRequest) Encode(e binary.Encoder) error {
-	return e.Int32(int32(t.Id))
-}
-
-func (t *testRequest) Decode(d binary.Decoder) error {
-	id, err := d.Int32()
-	t.Id = int(id)
-	return err
 }
 
 func decodeTestRequest(d binary.Decoder) (binary.Object, error) {
@@ -206,7 +147,7 @@ func TestStoreLink(t *testing.T) {
 
 func TestStoreDataRequest(t *testing.T) {
 	db, ds, vs, ms := create(nil)
-	id, err := db.StoreRequest(&testRequest{123}, log.Nop{})
+	id, err := db.StoreRequest(&testRequest{Id: 123}, log.Nop{})
 	if err != nil {
 		panic(err)
 	}
@@ -293,7 +234,7 @@ func TestLoadDataRequest(t *testing.T) {
 	syncBegin := make(chan bool)
 	syncEnd := make(chan bool)
 	builder := &testBuilder{}
-	request := &testRequest{123}
+	request := &testRequest{Id: 123}
 	db, ds, vs, ms := create(builder)
 
 	id, _ := db.StoreRequest(request, log.Nop{})

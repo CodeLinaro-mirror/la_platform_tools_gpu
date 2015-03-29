@@ -76,45 +76,65 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	file := generate.File{}
+	files := map[string]*generate.File{}
 	for _, pkg := range info.Created {
-		file.Package = pkg.Pkg.Name()
-		for _, name := range filterStructs(pkg) {
+		pkgName := pkg.Pkg.Name()
+		structs := filterStructs(pkg)
+		for _, name := range structs {
+			fileName := pkgName
+			fromFile := config.Fset.File(name.Pos()).Name()
+			isTest := strings.HasSuffix(fromFile, "_test.go")
+			if isTest {
+				fileName += "#test"
+			}
 			s := generate.FromTypename(pkg.Pkg, name)
 			if s != nil {
+				file, found := files[fileName]
+				if !found {
+					file = &generate.File{}
+					file.Package = pkgName
+					file.IsTest = isTest
+					files[fileName] = file
+				}
 				file.Structs = append(file.Structs, s)
 			}
 		}
 	}
-	generate.Sort(file.Structs)
-	if *golang {
-		file := file
-		file.Generated = fmt.Sprintf("codergen -go")
-		result, err := generate.GoFile(&file)
-		if err != nil {
-			return err
+	for _, file := range files {
+		generate.Sort(file.Structs)
+		if *golang {
+			file := file
+			file.Generated = fmt.Sprintf("codergen -go")
+			result, err := generate.GoFile(file)
+			if err != nil {
+				return err
+			}
+			filename := file.Package+"_binary.go"
+			if file.IsTest {
+				filename = file.Package+"_binary_test.go"
+			}
+			err = ioutil.WriteFile(path.Join(wd, filename), result, os.ModePerm)
+			if err != nil {
+				return err
+			}
 		}
-		err = ioutil.WriteFile(path.Join(wd, file.Package+"_binary.go"), result, os.ModePerm)
-		if err != nil {
-			return err
-		}
-	}
-	if *java != "" {
-		file := file
-		file.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
-		file.ClassPrefix = strings.Title(file.Package)
-		i := strings.LastIndex(*java, "/com/")
-		if i >= 0 {
-			file.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
-		}
-		filename := filepath.Join(*java, "ObjectFactory.java")
-		result, err := generate.JavaFile(&file)
-		if err != nil {
-			return err
-		}
-		err = ioutil.WriteFile(filename, result, os.ModePerm)
-		if err != nil {
-			return err
+		if *java != "" && !file.IsTest {
+			file := file
+			file.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
+			file.ClassPrefix = strings.Title(file.Package)
+			i := strings.LastIndex(*java, "/com/")
+			if i >= 0 {
+				file.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
+			}
+			filename := filepath.Join(*java, "ObjectFactory.java")
+			result, err := generate.JavaFile(file)
+			if err != nil {
+				return err
+			}
+			err = ioutil.WriteFile(filename, result, os.ModePerm)
+			if err != nil {
+				return err
+			}
 		}
 	}
 	return nil
