@@ -324,7 +324,7 @@ func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, lo
 
 		// If compaction is in-flight send the record to the compaction goroutine.
 		if s.insertCh != nil {
-			kv := keyValue{id, data}
+			kv := keyValue{id: id, buffer: data}
 			s.insertCh <- kv
 			if logger != nil {
 				logger.Info("Insert sent to compactor. Size %v", len(data))
@@ -415,7 +415,7 @@ func (s *compactingArchive) Delete(id binary.ID, logger log.Logger) {
 			// If compaction is in-flight send the record to the compaction goroutine.
 			if s.insertCh != nil {
 				empty := make([]byte, 0)
-				kv := keyValue{id, empty}
+				kv := keyValue{id: id, buffer: empty}
 				s.insertCh <- kv
 				if logger != nil {
 					logger.Info("Delete sent to compactor.")
@@ -577,7 +577,7 @@ func (s *compactingArchive) compaction(l log.Logger) error {
 				}
 			}
 
-			insertFun(keyValue{record.id, data})
+			insertFun(keyValue{id: record.id, buffer: data})
 
 			// Whilst outputting records allow updates from channel.
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2014 The Android Open Source Project
+// Copyright (C) 2015 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,23 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package binary
+package store
 
-// Data is an codable byte buffer.
-type Data []byte
+import "android.googlesource.com/platform/tools/gpu/binary"
 
-func (data Data) Encode(e Encoder) error {
-	if err := e.Int32(int32(len(data))); err != nil {
-		return err
-	}
-	return e.Data(data)
-}
-
-func (data *Data) Decode(d Decoder) error {
-	if c, err := d.Int32(); err != nil || c == 0 {
-		return err
-	} else {
-		*data = make([]byte, c)
-		return d.Data(*data)
-	}
+// Blob is an encodable wrapper for a byte array, used for storing raw data
+// in databases.
+type Blob struct {
+	binary.Generate
+	Data []byte
 }

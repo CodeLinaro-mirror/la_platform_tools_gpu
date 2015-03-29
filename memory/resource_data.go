@@ -19,6 +19,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -28,15 +29,15 @@ type resourceData struct {
 }
 
 func (r resourceData) Get(db database.Database, logger log.Logger) ([]byte, error) {
-	binary := binary.Data{}
+	binary := store.Blob{}
 	if err := db.Load(r.resId, logger, &binary); err != nil {
 		return nil, err
 	}
-	if r.size != uint64(len(binary)) {
+	if r.size != uint64(len(binary.Data)) {
 		return nil, fmt.Errorf("Loaded resource is unexpected size. Expected 0x%x, got 0x%x for resource %v",
-			r.size, len(binary), r.resId)
+			r.size, len(binary.Data), r.resId)
 	}
-	return []byte(binary), nil
+	return binary.Data, nil
 }
 
 func (r resourceData) Slice(rng Range) DataSlicer {

@@ -71,21 +71,21 @@ func encodeOpenChannel(e binary.Encoder, s channelId) error {
 	if err := msgTypeOpenChannel.encode(e); err != nil {
 		return err
 	}
-	return msgOpenChannel{s}.encode(e)
+	return msgOpenChannel{channelId: s}.Encode(e)
 }
 
 func encodeCloseChannel(e binary.Encoder, s channelId) error {
 	if err := msgTypeCloseChannel.encode(e); err != nil {
 		return err
 	}
-	return msgCloseChannel{s}.encode(e)
+	return msgCloseChannel{channelId: s}.Encode(e)
 }
 
 func encodeData(e binary.Encoder, s channelId, d []byte) error {
 	if err := msgTypeData.encode(e); err != nil {
 		return err
 	}
-	return msgData{s, d}.encode(e)
+	return msgData{c: s, d: d}.Encode(e)
 }
 
 func (s sender) sendCloseChannel(i channelId) error {

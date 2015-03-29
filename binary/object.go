@@ -41,5 +41,5 @@ type Object interface {
 // }
 type Generate struct{}
 
-func Encode(Generate) error { panic(fmt.Errorf("Missing encode function")) }
-func Decode(Generate) error { panic(fmt.Errorf("Missing decode function")) }
+func (Generate) Encode(Encoder) error { panic(fmt.Errorf("Missing encode function")) }
+func (Generate) Decode(Decoder) error { panic(fmt.Errorf("Missing decode function")) }

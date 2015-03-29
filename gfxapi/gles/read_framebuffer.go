@@ -10,6 +10,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -114,12 +115,12 @@ func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Buil
 	for _, f := range []float32{-1., -1., 1., -1., -1., 1., 1., 1.} {
 		enc.Float32(f)
 	}
-	positionsData := binary.Data(buffer.Bytes())
+	positionsData := store.Blob{Data: buffer.Bytes()}
 	positionsDataId, err := a.database.Store(&positionsData, log.Nop{})
 	if err != nil {
 		return
 	}
-	indicesData := binary.Data([]byte{0, 1, 2, 3})
+	indicesData := store.Blob{Data: []byte{0, 1, 2, 3}}
 	indicesDataId, err := a.database.Store(&indicesData, log.Nop{})
 	if err != nil {
 		return
