@@ -31,7 +31,6 @@ limitations under the License.
     {{$c | Macro "Class" | Reflow 2 | Write (print $c.Name ".java")}}
   {{end}}
 {{end}}
-{{$ | Macro "Binary" | Write "ObjectFactory.java"}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -570,14 +569,4 @@ limitations under the License.
         super(d);
     }
   }
-{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the RPC binary coder implementation
--------------------------------------------------------------------------------
-*/}}
-{{define "Binary"}}
-  {{AssertType $ "API"}}
-  {{JavaFile (ConvertAPI $)}}
 {{end}}

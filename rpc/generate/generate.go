@@ -18,9 +18,7 @@
 package generate
 
 import (
-	"bytes"
 	"fmt"
-	"io"
 	"path/filepath"
 	"strings"
 
@@ -163,97 +161,11 @@ func addFields(s *binary.Struct, c *semantic.Class) {
 	}
 }
 
-func converter(pkgName string) func(api *semantic.API) *binary.File {
-	return func(api *semantic.API) *binary.File {
-		result := &binary.File{
-			Package:   pkgName,
-			Generated: "rpcapi",
-		}
-		for _, cmd := range api.Functions {
-			params := &binary.Struct{
-				Name:    fmt.Sprintf("call%s", cmd.Name),
-				Package: pkgName,
-			}
-			for _, decl := range cmd.CallParameters() {
-				f := binary.Field{
-					Name: decl.Name,
-					Type: fromType(decl.Type),
-				}
-				params.Fields = append(params.Fields, f)
-			}
-			params.UpdateID()
-			result.Structs = append(result.Structs, params)
-			ret := &binary.Struct{
-				Name:    fmt.Sprintf("result%s", cmd.Name),
-				Package: pkgName,
-			}
-			for _, decl := range cmd.Outputs {
-				f := binary.Field{
-					Name: decl.Name,
-					Type: fromType(cmd.Return.Type),
-				}
-				// TODO: remove naming hack
-				if decl == cmd.Return {
-					f.Name = "value"
-				}
-				ret.Fields = append(ret.Fields, f)
-			}
-			ret.UpdateID()
-			result.Structs = append(result.Structs, ret)
-		}
-		for _, c := range api.Classes {
-			if c.GetAnnotation("Interface") != nil {
-				continue
-			}
-			s := &binary.Struct{Name: c.Name, Package: pkgName}
-			addFields(s, c)
-			s.UpdateID()
-			result.Structs = append(result.Structs, s)
-		}
-		binary.Sort(result.Structs)
-		return result
-	}
-}
-
-func wrapStructWriter(f func(io.Writer, *binary.Struct) error) func(s *binary.Struct) (string, error) {
-	return func(s *binary.Struct) (string, error) {
-		b := &bytes.Buffer{}
-		err := f(b, s)
-		return b.String(), err
-	}
-}
-
 // Init prepares a new template processor that layers the apic one with
 // the functions from the binary codec generate package.
 func Init(apiFile string, api *semantic.API) *template.Functions {
 	apiFile, _ = filepath.Abs(apiFile)
-	pkg := filepath.Base(filepath.Dir(apiFile))
-	return template.NewFunctions(apiFile, api, loader, map[string]interface{}{
-		"ConvertAPI": converter(pkg),
-		"GoRegister": wrapStructWriter(binary.GoRegister),
-		"GoEncoder":  wrapStructWriter(binary.GoEncoder),
-		"GoDecoder":  wrapStructWriter(binary.GoDecoder),
-		"GoFile": func(s *binary.File) (string, error) {
-			result, err := binary.GoFile(s)
-			return string(result), err
-		},
-		"JavaFile": func(f *template.Functions) interface{} {
-			return func(s *binary.File) (string, error) {
-				javaFile := *s
-				if g, err := f.Global("package"); err == nil && g != nil {
-					javaFile.Package = fmt.Sprint(g)
-				}
-				if g, err := f.Global("indent"); err == nil && g != nil {
-					javaFile.Indent = fmt.Sprint(g)
-				}
-				if g, err := f.Global("member"); err == nil && g != nil {
-					javaFile.MemberPrefix = fmt.Sprint(g)
-				}
-				result, err := binary.JavaFile(&javaFile)
-				return string(result), err
-			}
-		},
-	})
+	return template.NewFunctions(apiFile, api, loader, map[string]interface{}{})
 }
 
 // Go invokes the main go code generation template.

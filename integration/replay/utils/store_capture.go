@@ -32,7 +32,7 @@ func storeAtoms(t *testing.T, atoms atom.List, db database.Database, l log.Logge
 	if err != nil {
 		t.Fatalf("Failed to store atom stream: %v", err)
 	}
-	return service.AtomStreamId{id}
+	return service.AtomStreamId{ID: id}
 }
 
 // StoreCapture encodes and writes the atom list to the database, returning an
@@ -46,5 +46,5 @@ func StoreCapture(t *testing.T, atoms atom.List, db database.Database, l log.Log
 	if err != nil {
 		t.Fatalf("Failed to store test capture: %v", err)
 	}
-	return service.CaptureId{id}
+	return service.CaptureId{ID: id}
 }

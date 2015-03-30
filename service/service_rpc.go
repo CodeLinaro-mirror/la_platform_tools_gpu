@@ -34,34 +34,64 @@ type RPC interface {
 }
 
 // Handle ApiId
-type ApiId struct{ binary.ID }
+type ApiId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle AtomStreamId
-type AtomStreamId struct{ binary.ID }
+type AtomStreamId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle BinaryId
-type BinaryId struct{ binary.ID }
+type BinaryId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle CaptureId
-type CaptureId struct{ binary.ID }
+type CaptureId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle DeviceId
-type DeviceId struct{ binary.ID }
+type DeviceId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle HierarchyId
-type HierarchyId struct{ binary.ID }
+type HierarchyId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle ImageInfoId
-type ImageInfoId struct{ binary.ID }
+type ImageInfoId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle MemoryInfoId
-type MemoryInfoId struct{ binary.ID }
+type MemoryInfoId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle SchemaId
-type SchemaId struct{ binary.ID }
+type SchemaId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Handle TimingInfoId
-type TimingInfoId struct{ binary.ID }
+type TimingInfoId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Array ApiSchemaArray
 type ApiSchemaArray []ApiSchema
@@ -168,6 +198,7 @@ type TypeInfo interface {
 
 // Class Device
 type Device struct {
+	binary.Generate
 	Name                   string
 	Model                  string
 	OS                     string
@@ -179,6 +210,7 @@ type Device struct {
 
 // Class Capture
 type Capture struct {
+	binary.Generate
 	Name     string
 	Atoms    AtomStreamId
 	Schema   SchemaId
@@ -187,27 +219,32 @@ type Capture struct {
 
 // Class Binary
 type Binary struct {
+	binary.Generate
 	Data U8Array
 }
 
 // Class AtomStream
 type AtomStream struct {
+	binary.Generate
 	Data U8Array
 }
 
 // Class AtomContext
 type AtomContext struct {
+	binary.Generate
 	Id  uint32
 	Api ApiId
 }
 
 // Class Hierarchy
 type Hierarchy struct {
+	binary.Generate
 	Root AtomGroup
 }
 
 // Class AtomGroup
 type AtomGroup struct {
+	binary.Generate
 	Name      string
 	Range     AtomRange
 	SubGroups AtomGroupArray
@@ -215,12 +252,14 @@ type AtomGroup struct {
 
 // Class AtomRange
 type AtomRange struct {
+	binary.Generate
 	First uint64
 	Count uint64
 }
 
 // Class MemoryInfo
 type MemoryInfo struct {
+	binary.Generate
 	Data    U8Array
 	Stale   MemoryRangeArray
 	Current MemoryRangeArray
@@ -229,12 +268,14 @@ type MemoryInfo struct {
 
 // Class MemoryRange
 type MemoryRange struct {
+	binary.Generate
 	Base uint64
 	Size uint64
 }
 
 // Class ImageInfo
 type ImageInfo struct {
+	binary.Generate
 	Format ImageFormat
 	Width  uint32
 	Height uint32
@@ -243,6 +284,7 @@ type ImageInfo struct {
 
 // Class TimingInfo
 type TimingInfo struct {
+	binary.Generate
 	PerCommand  AtomTimerArray
 	PerDrawCall AtomRangeTimerArray
 	PerFrame    AtomRangeTimerArray
@@ -250,12 +292,14 @@ type TimingInfo struct {
 
 // Class AtomTimer
 type AtomTimer struct {
+	binary.Generate
 	AtomId      uint64
 	Nanoseconds uint64
 }
 
 // Class AtomRangeTimer
 type AtomRangeTimer struct {
+	binary.Generate
 	FromAtomId  uint64
 	ToAtomId    uint64
 	Nanoseconds uint64
@@ -263,6 +307,7 @@ type AtomRangeTimer struct {
 
 // Class RenderSettings
 type RenderSettings struct {
+	binary.Generate
 	MaxWidth  uint32
 	MaxHeight uint32
 	Wireframe bool
@@ -270,18 +315,21 @@ type RenderSettings struct {
 
 // Class Schema
 type Schema struct {
+	binary.Generate
 	Atoms AtomInfoArray
 	Apis  ApiSchemaArray
 }
 
 // Class ApiSchema
 type ApiSchema struct {
+	binary.Generate
 	Api   ApiId
 	State StructInfo
 }
 
 // Class ArrayInfo
 type ArrayInfo struct {
+	binary.Generate
 	Name        string
 	Kind        TypeKind
 	ElementType TypeInfo
@@ -289,6 +337,7 @@ type ArrayInfo struct {
 
 // Class StaticArrayInfo
 type StaticArrayInfo struct {
+	binary.Generate
 	Name        string
 	Kind        TypeKind
 	ElementType TypeInfo
@@ -297,6 +346,7 @@ type StaticArrayInfo struct {
 
 // Class MapInfo
 type MapInfo struct {
+	binary.Generate
 	Name      string
 	Kind      TypeKind
 	KeyType   TypeInfo
@@ -305,6 +355,7 @@ type MapInfo struct {
 
 // Class EnumInfo
 type EnumInfo struct {
+	binary.Generate
 	Name    string
 	Kind    TypeKind
 	Entries EnumEntryArray
@@ -313,12 +364,14 @@ type EnumInfo struct {
 
 // Class EnumEntry
 type EnumEntry struct {
+	binary.Generate
 	Name  string
 	Value uint32
 }
 
 // Class StructInfo
 type StructInfo struct {
+	binary.Generate
 	Name   string
 	Kind   TypeKind
 	Fields FieldInfoArray
@@ -326,6 +379,7 @@ type StructInfo struct {
 
 // Class ClassInfo
 type ClassInfo struct {
+	binary.Generate
 	Name    string
 	Kind    TypeKind
 	Fields  FieldInfoArray
@@ -334,12 +388,14 @@ type ClassInfo struct {
 
 // Class FieldInfo
 type FieldInfo struct {
+	binary.Generate
 	Name string
 	Type TypeInfo
 }
 
 // Class AtomInfo
 type AtomInfo struct {
+	binary.Generate
 	Type             uint16
 	Name             string
 	Parameters       ParameterInfoArray
@@ -351,6 +407,7 @@ type AtomInfo struct {
 
 // Class ParameterInfo
 type ParameterInfo struct {
+	binary.Generate
 	Name string
 	Type TypeInfo
 	Out  bool
@@ -358,6 +415,7 @@ type ParameterInfo struct {
 
 // Class SimpleInfo
 type SimpleInfo struct {
+	binary.Generate
 	Name string
 	Kind TypeKind
 }

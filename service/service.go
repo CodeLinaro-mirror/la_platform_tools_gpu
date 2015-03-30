@@ -13,6 +13,7 @@
 // limitations under the License.
 
 //go:generate rpcapi --go service.api
+//go:generate codergen -go
 
 // Package service is the definition of the RPC GPU debugger service exposed by the server.
 //

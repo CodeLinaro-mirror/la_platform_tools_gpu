@@ -26,7 +26,10 @@ type RPC interface {
 }
 
 // Handle ResourceId
-type ResourceId struct{ binary.ID }
+type ResourceId struct {
+	binary.Generate
+	ID binary.ID
+}
 
 // Array ListNodeRefArray
 type ListNodeArray []*ListNode
@@ -48,6 +51,7 @@ type Base interface {
 
 // Class Resource
 type Resource struct {
+	binary.Generate
 	Int    uint32
 	Float  float32
 	String string
@@ -55,6 +59,7 @@ type Resource struct {
 
 // Class Struct
 type Struct struct {
+	binary.Generate
 	String string
 	U32    uint32
 	Enum   Enum
@@ -62,12 +67,14 @@ type Struct struct {
 
 // Class ListNode
 type ListNode struct {
+	binary.Generate
 	Name string
 	Next *ListNode
 }
 
 // Class Derived
 type Derived struct {
+	binary.Generate
 	Name string
 	Enum Enum
 }

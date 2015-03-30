@@ -5,59 +5,72 @@
 
 package service
 
+import "android.googlesource.com/platform/tools/gpu/binary"
+
 // Call Import
 type callImport struct {
+	binary.Generate
 	name string
 	Data U8Array
 }
 
 // Result Import
 type resultImport struct {
+	binary.Generate
 	value CaptureId
 }
 
 // Call GetCaptures
 type callGetCaptures struct {
+	binary.Generate
 }
 
 // Result GetCaptures
 type resultGetCaptures struct {
+	binary.Generate
 	value CaptureIdArray
 }
 
 // Call GetDevices
 type callGetDevices struct {
+	binary.Generate
 }
 
 // Result GetDevices
 type resultGetDevices struct {
+	binary.Generate
 	value DeviceIdArray
 }
 
 // Call GetState
 type callGetState struct {
+	binary.Generate
 	capture CaptureId
 	after   uint64
 }
 
 // Result GetState
 type resultGetState struct {
+	binary.Generate
 	value BinaryId
 }
 
 // Call GetHierarchy
 type callGetHierarchy struct {
+	binary.Generate
 	capture   CaptureId
 	contextId uint32
 }
 
 // Result GetHierarchy
 type resultGetHierarchy struct {
+	binary.Generate
 	value HierarchyId
 }
 
 // Call GetMemoryInfo
 type callGetMemoryInfo struct {
+	binary.Generate
 	capture CaptureId
 	after   uint64
 	rng     MemoryRange
@@ -65,11 +78,13 @@ type callGetMemoryInfo struct {
 
 // Result GetMemoryInfo
 type resultGetMemoryInfo struct {
+	binary.Generate
 	value MemoryInfoId
 }
 
 // Call GetFramebufferColor
 type callGetFramebufferColor struct {
+	binary.Generate
 	device    DeviceId
 	capture   CaptureId
 	contextId uint32
@@ -79,11 +94,13 @@ type callGetFramebufferColor struct {
 
 // Result GetFramebufferColor
 type resultGetFramebufferColor struct {
+	binary.Generate
 	value ImageInfoId
 }
 
 // Call GetFramebufferDepth
 type callGetFramebufferDepth struct {
+	binary.Generate
 	device    DeviceId
 	capture   CaptureId
 	contextId uint32
@@ -92,11 +109,13 @@ type callGetFramebufferDepth struct {
 
 // Result GetFramebufferDepth
 type resultGetFramebufferDepth struct {
+	binary.Generate
 	value ImageInfoId
 }
 
 // Call ReplaceAtom
 type callReplaceAtom struct {
+	binary.Generate
 	capture  CaptureId
 	atomId   uint64
 	atomType uint16
@@ -105,11 +124,13 @@ type callReplaceAtom struct {
 
 // Result ReplaceAtom
 type resultReplaceAtom struct {
+	binary.Generate
 	value CaptureId
 }
 
 // Call GetTimingInfo
 type callGetTimingInfo struct {
+	binary.Generate
 	device    DeviceId
 	capture   CaptureId
 	contextId uint32
@@ -118,11 +139,13 @@ type callGetTimingInfo struct {
 
 // Result GetTimingInfo
 type resultGetTimingInfo struct {
+	binary.Generate
 	value TimingInfoId
 }
 
 // Call PrerenderFramebuffers
 type callPrerenderFramebuffers struct {
+	binary.Generate
 	device  DeviceId
 	capture CaptureId
 	width   uint32
@@ -132,95 +155,114 @@ type callPrerenderFramebuffers struct {
 
 // Result PrerenderFramebuffers
 type resultPrerenderFramebuffers struct {
+	binary.Generate
 	value BinaryId
 }
 
 // Call ResolveAtomStream
 type callResolveAtomStream struct {
+	binary.Generate
 	id AtomStreamId
 }
 
 // Result ResolveAtomStream
 type resultResolveAtomStream struct {
+	binary.Generate
 	value AtomStream
 }
 
 // Call ResolveBinary
 type callResolveBinary struct {
+	binary.Generate
 	id BinaryId
 }
 
 // Result ResolveBinary
 type resultResolveBinary struct {
+	binary.Generate
 	value Binary
 }
 
 // Call ResolveCapture
 type callResolveCapture struct {
+	binary.Generate
 	id CaptureId
 }
 
 // Result ResolveCapture
 type resultResolveCapture struct {
+	binary.Generate
 	value Capture
 }
 
 // Call ResolveDevice
 type callResolveDevice struct {
+	binary.Generate
 	id DeviceId
 }
 
 // Result ResolveDevice
 type resultResolveDevice struct {
+	binary.Generate
 	value Device
 }
 
 // Call ResolveHierarchy
 type callResolveHierarchy struct {
+	binary.Generate
 	id HierarchyId
 }
 
 // Result ResolveHierarchy
 type resultResolveHierarchy struct {
+	binary.Generate
 	value Hierarchy
 }
 
 // Call ResolveImageInfo
 type callResolveImageInfo struct {
+	binary.Generate
 	id ImageInfoId
 }
 
 // Result ResolveImageInfo
 type resultResolveImageInfo struct {
+	binary.Generate
 	value ImageInfo
 }
 
 // Call ResolveMemoryInfo
 type callResolveMemoryInfo struct {
+	binary.Generate
 	id MemoryInfoId
 }
 
 // Result ResolveMemoryInfo
 type resultResolveMemoryInfo struct {
+	binary.Generate
 	value MemoryInfo
 }
 
 // Call ResolveSchema
 type callResolveSchema struct {
+	binary.Generate
 	id SchemaId
 }
 
 // Result ResolveSchema
 type resultResolveSchema struct {
+	binary.Generate
 	value Schema
 }
 
 // Call ResolveTimingInfo
 type callResolveTimingInfo struct {
+	binary.Generate
 	id TimingInfoId
 }
 
 // Result ResolveTimingInfo
 type resultResolveTimingInfo struct {
+	binary.Generate
 	value TimingInfo
 }

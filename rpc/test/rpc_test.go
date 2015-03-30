@@ -13,6 +13,7 @@
 // limitations under the License.
 
 //go:generate rpcapi --go rpc_test.api
+//go:generate codergen -go
 
 // Package test is a pure test package to do full testing of the rpc package.
 package test
@@ -32,7 +33,7 @@ var testStruct = Struct{
 	U32:    42,
 	Enum:   EnumOne,
 }
-var testResourceId = ResourceId{binary.NewID([]byte("Test resource id"))}
+var testResourceId = ResourceId{ID: binary.NewID([]byte("Test resource id"))}
 var testResource = Resource{Int: 10, Float: 20, String: "30"}
 var testSingleListNode = CreateListNode("Single ListNode", nil)
 var testListNodeChain = CreateListNode("ListNodeA", CreateListNode("ListNodeB", CreateListNode("ListNodeC", nil)))
