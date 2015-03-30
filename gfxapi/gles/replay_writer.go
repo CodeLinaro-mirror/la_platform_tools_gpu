@@ -5,9 +5,8 @@
 package gles
 
 import (
-	"io"
-
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -15,12 +14,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func readBytes(r io.Reader, c uint64) ([]byte, error) {
+func readBytes(r binary.Reader, c uint64) ([]byte, error) {
 	b := make([]byte, c)
-	_, err := io.ReadFull(r, b)
+	err := r.Data(b)
 	return b, err
 }
-func readString(r io.Reader, c uint64) (string, error) {
+func readString(r binary.Reader, c uint64) (string, error) {
 	if buf, err := readBytes(r, c); err == nil {
 		str := string(buf)
 		for i, c := range str {
@@ -416,7 +415,7 @@ type StopTimer_Postback struct {
 	Result uint64
 }
 
-func (o *StopTimer_Postback) Decode(d *protocol.Decoder) error {
+func (o *StopTimer_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint64(); err == nil {
 		o.Result = v
 	} else {
@@ -430,7 +429,7 @@ type EglCreateContext_Postback struct {
 	Context int32
 }
 
-func (o *EglCreateContext_Postback) Decode(d *protocol.Decoder) error {
+func (o *EglCreateContext_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Version = v
 	} else {
@@ -450,7 +449,7 @@ type GlGetProgramBinaryOES_Postback struct {
 	Binary       []byte
 }
 
-func (o *GlGetProgramBinaryOES_Postback) Decode(binary_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetProgramBinaryOES_Postback) Decode(binary_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.BytesWritten = v
 	} else {
@@ -473,7 +472,7 @@ type GlGenVertexArraysOES_Postback struct {
 	Arrays VertexArrayIdArray
 }
 
-func (o *GlGenVertexArraysOES_Postback) Decode(arrays_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenVertexArraysOES_Postback) Decode(arrays_cnt uint64, d binary.Decoder) error {
 	o.Arrays = make(VertexArrayIdArray, arrays_cnt)
 	for i := range o.Arrays {
 		{
@@ -493,7 +492,7 @@ type GlIsVertexArrayOES_Postback struct {
 	Result bool
 }
 
-func (o *GlIsVertexArrayOES_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsVertexArrayOES_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -506,7 +505,7 @@ type GlGetGraphicsResetStatusEXT_Postback struct {
 	Result ResetStatus
 }
 
-func (o *GlGetGraphicsResetStatusEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetGraphicsResetStatusEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Result = ResetStatus(v)
 	} else {
@@ -522,7 +521,7 @@ type GlGetActiveAttrib_Postback struct {
 	Name               string
 }
 
-func (o *GlGetActiveAttrib_Postback) Decode(name_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetActiveAttrib_Postback) Decode(name_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.BufferBytesWritten = v
 	} else {
@@ -553,7 +552,7 @@ type GlGetActiveUniform_Postback struct {
 	Name               string
 }
 
-func (o *GlGetActiveUniform_Postback) Decode(name_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetActiveUniform_Postback) Decode(name_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.BufferBytesWritten = v
 	} else {
@@ -581,7 +580,7 @@ type GlGetError_Postback struct {
 	Result Error
 }
 
-func (o *GlGetError_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetError_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Result = Error(v)
 	} else {
@@ -594,7 +593,7 @@ type GlGetProgramiv_Postback struct {
 	Value S32Array
 }
 
-func (o *GlGetProgramiv_Postback) Decode(value_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetProgramiv_Postback) Decode(value_cnt uint64, d binary.Decoder) error {
 	o.Value = make(S32Array, value_cnt)
 	for i := range o.Value {
 		if v, err := d.Int32(); err == nil {
@@ -610,7 +609,7 @@ type GlGetShaderiv_Postback struct {
 	Value S32Array
 }
 
-func (o *GlGetShaderiv_Postback) Decode(value_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetShaderiv_Postback) Decode(value_cnt uint64, d binary.Decoder) error {
 	o.Value = make(S32Array, value_cnt)
 	for i := range o.Value {
 		if v, err := d.Int32(); err == nil {
@@ -626,7 +625,7 @@ type GlGetUniformLocation_Postback struct {
 	Result UniformLocation
 }
 
-func (o *GlGetUniformLocation_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetUniformLocation_Postback) Decode(d binary.Decoder) error {
 	{
 		var x int32
 		if v, err := d.Int32(); err == nil {
@@ -643,7 +642,7 @@ type GlGetAttribLocation_Postback struct {
 	Result AttributeLocation
 }
 
-func (o *GlGetAttribLocation_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetAttribLocation_Postback) Decode(d binary.Decoder) error {
 	{
 		var x uint32
 		if v, err := d.Uint32(); err == nil {
@@ -660,7 +659,7 @@ type GlGetTexParameteriv_Postback struct {
 	Values S32Array
 }
 
-func (o *GlGetTexParameteriv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetTexParameteriv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(S32Array, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Int32(); err == nil {
@@ -676,7 +675,7 @@ type GlGetTexParameterfv_Postback struct {
 	Values F32Array
 }
 
-func (o *GlGetTexParameterfv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetTexParameterfv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(F32Array, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Float32(); err == nil {
@@ -693,7 +692,7 @@ type GlGetShaderPrecisionFormat_Postback struct {
 	Precision int32
 }
 
-func (o *GlGetShaderPrecisionFormat_Postback) Decode(range_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetShaderPrecisionFormat_Postback) Decode(range_cnt uint64, d binary.Decoder) error {
 	o.Range = make(S32Array, range_cnt)
 	for i := range o.Range {
 		if v, err := d.Int32(); err == nil {
@@ -714,7 +713,7 @@ type GlGenTextures_Postback struct {
 	Textures TextureIdArray
 }
 
-func (o *GlGenTextures_Postback) Decode(textures_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenTextures_Postback) Decode(textures_cnt uint64, d binary.Decoder) error {
 	o.Textures = make(TextureIdArray, textures_cnt)
 	for i := range o.Textures {
 		{
@@ -734,7 +733,7 @@ type GlIsTexture_Postback struct {
 	Result bool
 }
 
-func (o *GlIsTexture_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsTexture_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -747,7 +746,7 @@ type GlReadPixels_Postback struct {
 	Data []byte
 }
 
-func (o *GlReadPixels_Postback) Decode(data_cnt uint64, d *protocol.Decoder) error {
+func (o *GlReadPixels_Postback) Decode(data_cnt uint64, d binary.Decoder) error {
 	if val, err := readBytes(d, data_cnt); err == nil {
 		o.Data = val
 	} else {
@@ -760,7 +759,7 @@ type GlGenFramebuffers_Postback struct {
 	Framebuffers FramebufferIdArray
 }
 
-func (o *GlGenFramebuffers_Postback) Decode(framebuffers_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenFramebuffers_Postback) Decode(framebuffers_cnt uint64, d binary.Decoder) error {
 	o.Framebuffers = make(FramebufferIdArray, framebuffers_cnt)
 	for i := range o.Framebuffers {
 		{
@@ -780,7 +779,7 @@ type GlCheckFramebufferStatus_Postback struct {
 	Result FramebufferStatus
 }
 
-func (o *GlCheckFramebufferStatus_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlCheckFramebufferStatus_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Result = FramebufferStatus(v)
 	} else {
@@ -793,7 +792,7 @@ type GlIsFramebuffer_Postback struct {
 	Result bool
 }
 
-func (o *GlIsFramebuffer_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsFramebuffer_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -806,7 +805,7 @@ type GlGenRenderbuffers_Postback struct {
 	Renderbuffers RenderbufferIdArray
 }
 
-func (o *GlGenRenderbuffers_Postback) Decode(renderbuffers_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenRenderbuffers_Postback) Decode(renderbuffers_cnt uint64, d binary.Decoder) error {
 	o.Renderbuffers = make(RenderbufferIdArray, renderbuffers_cnt)
 	for i := range o.Renderbuffers {
 		{
@@ -826,7 +825,7 @@ type GlIsRenderbuffer_Postback struct {
 	Result bool
 }
 
-func (o *GlIsRenderbuffer_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsRenderbuffer_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -839,7 +838,7 @@ type GlGetRenderbufferParameteriv_Postback struct {
 	Values S32Array
 }
 
-func (o *GlGetRenderbufferParameteriv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetRenderbufferParameteriv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(S32Array, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Int32(); err == nil {
@@ -855,7 +854,7 @@ type GlGenBuffers_Postback struct {
 	Buffers BufferIdArray
 }
 
-func (o *GlGenBuffers_Postback) Decode(buffers_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenBuffers_Postback) Decode(buffers_cnt uint64, d binary.Decoder) error {
 	o.Buffers = make(BufferIdArray, buffers_cnt)
 	for i := range o.Buffers {
 		{
@@ -875,7 +874,7 @@ type GlIsBuffer_Postback struct {
 	Result bool
 }
 
-func (o *GlIsBuffer_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsBuffer_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -888,7 +887,7 @@ type GlGetBufferParameteriv_Postback struct {
 	Value int32
 }
 
-func (o *GlGetBufferParameteriv_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetBufferParameteriv_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Value = v
 	} else {
@@ -901,7 +900,7 @@ type GlCreateShader_Postback struct {
 	Result ShaderId
 }
 
-func (o *GlCreateShader_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlCreateShader_Postback) Decode(d binary.Decoder) error {
 	{
 		var x uint32
 		if v, err := d.Uint32(); err == nil {
@@ -919,7 +918,7 @@ type GlGetShaderInfoLog_Postback struct {
 	Info                string
 }
 
-func (o *GlGetShaderInfoLog_Postback) Decode(info_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetShaderInfoLog_Postback) Decode(info_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.StringLengthWritten = v
 	} else {
@@ -938,7 +937,7 @@ type GlGetShaderSource_Postback struct {
 	Source              string
 }
 
-func (o *GlGetShaderSource_Postback) Decode(source_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetShaderSource_Postback) Decode(source_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.StringLengthWritten = v
 	} else {
@@ -956,7 +955,7 @@ type GlIsShader_Postback struct {
 	Result bool
 }
 
-func (o *GlIsShader_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsShader_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -969,7 +968,7 @@ type GlCreateProgram_Postback struct {
 	Result ProgramId
 }
 
-func (o *GlCreateProgram_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlCreateProgram_Postback) Decode(d binary.Decoder) error {
 	{
 		var x uint32
 		if v, err := d.Uint32(); err == nil {
@@ -987,7 +986,7 @@ type GlGetAttachedShaders_Postback struct {
 	Shaders              ShaderIdArray
 }
 
-func (o *GlGetAttachedShaders_Postback) Decode(shaders_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetAttachedShaders_Postback) Decode(shaders_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.ShadersLengthWritten = v
 	} else {
@@ -1013,7 +1012,7 @@ type GlGetProgramInfoLog_Postback struct {
 	Info                string
 }
 
-func (o *GlGetProgramInfoLog_Postback) Decode(info_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetProgramInfoLog_Postback) Decode(info_cnt uint64, d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.StringLengthWritten = v
 	} else {
@@ -1031,7 +1030,7 @@ type GlIsProgram_Postback struct {
 	Result bool
 }
 
-func (o *GlIsProgram_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsProgram_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -1044,7 +1043,7 @@ type GlGetFramebufferAttachmentParameteriv_Postback struct {
 	Value S32Array
 }
 
-func (o *GlGetFramebufferAttachmentParameteriv_Postback) Decode(value_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetFramebufferAttachmentParameteriv_Postback) Decode(value_cnt uint64, d binary.Decoder) error {
 	o.Value = make(S32Array, value_cnt)
 	for i := range o.Value {
 		if v, err := d.Int32(); err == nil {
@@ -1060,7 +1059,7 @@ type GlGetBooleanv_Postback struct {
 	Values BoolArray
 }
 
-func (o *GlGetBooleanv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetBooleanv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(BoolArray, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Bool(); err == nil {
@@ -1076,7 +1075,7 @@ type GlGetFloatv_Postback struct {
 	Values F32Array
 }
 
-func (o *GlGetFloatv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetFloatv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(F32Array, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Float32(); err == nil {
@@ -1092,7 +1091,7 @@ type GlGetIntegerv_Postback struct {
 	Values S32Array
 }
 
-func (o *GlGetIntegerv_Postback) Decode(values_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetIntegerv_Postback) Decode(values_cnt uint64, d binary.Decoder) error {
 	o.Values = make(S32Array, values_cnt)
 	for i := range o.Values {
 		if v, err := d.Int32(); err == nil {
@@ -1108,7 +1107,7 @@ type GlGetString_Postback struct {
 	Result string
 }
 
-func (o *GlGetString_Postback) Decode(result_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGetString_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
 	if val, err := readString(d, result_cnt); err == nil {
 		o.Result = val
 	} else {
@@ -1121,7 +1120,7 @@ type GlIsEnabled_Postback struct {
 	Result bool
 }
 
-func (o *GlIsEnabled_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsEnabled_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -1134,7 +1133,7 @@ type GlMapBufferRange_Postback struct {
 	Result []byte
 }
 
-func (o *GlMapBufferRange_Postback) Decode(result_cnt uint64, d *protocol.Decoder) error {
+func (o *GlMapBufferRange_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
 	if val, err := readBytes(d, result_cnt); err == nil {
 		o.Result = val
 	} else {
@@ -1147,7 +1146,7 @@ type GlGenQueries_Postback struct {
 	Queries QueryIdArray
 }
 
-func (o *GlGenQueries_Postback) Decode(queries_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenQueries_Postback) Decode(queries_cnt uint64, d binary.Decoder) error {
 	o.Queries = make(QueryIdArray, queries_cnt)
 	for i := range o.Queries {
 		{
@@ -1167,7 +1166,7 @@ type GlIsQuery_Postback struct {
 	Result bool
 }
 
-func (o *GlIsQuery_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsQuery_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -1180,7 +1179,7 @@ type GlGetQueryiv_Postback struct {
 	Value int32
 }
 
-func (o *GlGetQueryiv_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryiv_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Value = v
 	} else {
@@ -1193,7 +1192,7 @@ type GlGetQueryObjectuiv_Postback struct {
 	Value uint32
 }
 
-func (o *GlGetQueryObjectuiv_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryObjectuiv_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Value = v
 	} else {
@@ -1206,7 +1205,7 @@ type GlGenQueriesEXT_Postback struct {
 	Queries QueryIdArray
 }
 
-func (o *GlGenQueriesEXT_Postback) Decode(queries_cnt uint64, d *protocol.Decoder) error {
+func (o *GlGenQueriesEXT_Postback) Decode(queries_cnt uint64, d binary.Decoder) error {
 	o.Queries = make(QueryIdArray, queries_cnt)
 	for i := range o.Queries {
 		{
@@ -1226,7 +1225,7 @@ type GlIsQueryEXT_Postback struct {
 	Result bool
 }
 
-func (o *GlIsQueryEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlIsQueryEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Bool(); err == nil {
 		o.Result = v
 	} else {
@@ -1239,7 +1238,7 @@ type GlGetQueryivEXT_Postback struct {
 	Value int32
 }
 
-func (o *GlGetQueryivEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryivEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Value = v
 	} else {
@@ -1252,7 +1251,7 @@ type GlGetQueryObjectivEXT_Postback struct {
 	Value int32
 }
 
-func (o *GlGetQueryObjectivEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryObjectivEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int32(); err == nil {
 		o.Value = v
 	} else {
@@ -1265,7 +1264,7 @@ type GlGetQueryObjectuivEXT_Postback struct {
 	Value uint32
 }
 
-func (o *GlGetQueryObjectuivEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryObjectuivEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint32(); err == nil {
 		o.Value = v
 	} else {
@@ -1278,7 +1277,7 @@ type GlGetQueryObjecti64vEXT_Postback struct {
 	Value int64
 }
 
-func (o *GlGetQueryObjecti64vEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryObjecti64vEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Int64(); err == nil {
 		o.Value = v
 	} else {
@@ -1291,7 +1290,7 @@ type GlGetQueryObjectui64vEXT_Postback struct {
 	Value uint64
 }
 
-func (o *GlGetQueryObjectui64vEXT_Postback) Decode(d *protocol.Decoder) error {
+func (o *GlGetQueryObjectui64vEXT_Postback) Decode(d binary.Decoder) error {
 	if v, err := d.Uint64(); err == nil {
 		o.Value = v
 	} else {
@@ -1349,7 +1348,7 @@ func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := StopTimer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1375,7 +1374,7 @@ func (ϟa *EglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟb.CallNoPush(funcInfoEglCreateContext)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := EglCreateContext_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1433,7 +1432,7 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟb.CallNoPush(funcInfoGlGetProgramBinaryOES)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetProgramBinaryOES_Postback{}
 			if err := postback.Decode(binary_cnt, d); err != nil {
 				return nil, err
@@ -1616,7 +1615,7 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenVertexArraysOES_Postback{}
 			if err := postback.Decode(arrays_cnt, d); err != nil {
 				return nil, err
@@ -1660,7 +1659,7 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsVertexArrayOES_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1696,7 +1695,7 @@ func (ϟa *GlGetGraphicsResetStatusEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟ
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetGraphicsResetStatusEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1816,7 +1815,7 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟb.CallNoPush(funcInfoGlGetActiveAttrib)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetActiveAttrib_Postback{}
 			if err := postback.Decode(name_cnt, d); err != nil {
 				return nil, err
@@ -1845,7 +1844,7 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟb.CallNoPush(funcInfoGlGetActiveUniform)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetActiveUniform_Postback{}
 			if err := postback.Decode(name_cnt, d); err != nil {
 				return nil, err
@@ -1863,7 +1862,7 @@ func (ϟa *GlGetError) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetError_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1888,7 +1887,7 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟb.CallNoPush(funcInfoGlGetProgramiv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetProgramiv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -1913,7 +1912,7 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoGlGetShaderiv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetShaderiv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -1940,7 +1939,7 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 		storeRemap(ϟb, key, outputs[0], protocol.TypeInt32)
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetUniformLocation_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -1964,7 +1963,7 @@ func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetAttribLocation_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2014,7 +2013,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.CallNoPush(funcInfoGlGetTexParameteriv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetTexParameteriv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2035,7 +2034,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.CallNoPush(funcInfoGlGetTexParameterfv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetTexParameterfv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2444,7 +2443,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *state.State, ϟb
 	ϟb.CallNoPush(funcInfoGlGetShaderPrecisionFormat)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetShaderPrecisionFormat_Postback{}
 			if err := postback.Decode(range_cnt, d); err != nil {
 				return nil, err
@@ -2583,7 +2582,7 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenTextures_Postback{}
 			if err := postback.Decode(textures_cnt, d); err != nil {
 				return nil, err
@@ -2615,7 +2614,7 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsTexture_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2754,7 +2753,7 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟb.CallNoPush(funcInfoGlReadPixels)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlReadPixels_Postback{}
 			if err := postback.Decode(data_cnt, d); err != nil {
 				return nil, err
@@ -2780,7 +2779,7 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenFramebuffers_Postback{}
 			if err := postback.Decode(framebuffers_cnt, d); err != nil {
 				return nil, err
@@ -2812,7 +2811,7 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *state.State, ϟb *
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlCheckFramebufferStatus_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2844,7 +2843,7 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsFramebuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2870,7 +2869,7 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenRenderbuffers_Postback{}
 			if err := postback.Decode(renderbuffers_cnt, d); err != nil {
 				return nil, err
@@ -2926,7 +2925,7 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsRenderbuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -2947,7 +2946,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, �
 	ϟb.CallNoPush(funcInfoGlGetRenderbufferParameteriv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetRenderbufferParameteriv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -2973,7 +2972,7 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenBuffers_Postback{}
 			if err := postback.Decode(buffers_cnt, d); err != nil {
 				return nil, err
@@ -3040,7 +3039,7 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsBuffer_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3060,7 +3059,7 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	ϟb.CallNoPush(funcInfoGlGetBufferParameteriv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetBufferParameteriv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3082,7 +3081,7 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlCreateShader_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3147,7 +3146,7 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟb.CallNoPush(funcInfoGlGetShaderInfoLog)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetShaderInfoLog_Postback{}
 			if err := postback.Decode(info_cnt, d); err != nil {
 				return nil, err
@@ -3173,7 +3172,7 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟb.CallNoPush(funcInfoGlGetShaderSource)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetShaderSource_Postback{}
 			if err := postback.Decode(source_cnt, d); err != nil {
 				return nil, err
@@ -3215,7 +3214,7 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsShader_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3236,7 +3235,7 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlCreateProgram_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3314,7 +3313,7 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetAttachedShaders_Postback{}
 			if err := postback.Decode(shaders_cnt, d); err != nil {
 				return nil, err
@@ -3352,7 +3351,7 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.CallNoPush(funcInfoGlGetProgramInfoLog)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetProgramInfoLog_Postback{}
 			if err := postback.Decode(info_cnt, d); err != nil {
 				return nil, err
@@ -3387,7 +3386,7 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsProgram_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3530,7 +3529,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *state
 	ϟb.CallNoPush(funcInfoGlGetFramebufferAttachmentParameteriv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetFramebufferAttachmentParameteriv_Postback{}
 			if err := postback.Decode(value_cnt, d); err != nil {
 				return nil, err
@@ -3585,7 +3584,7 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoGlGetBooleanv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetBooleanv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3605,7 +3604,7 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.CallNoPush(funcInfoGlGetFloatv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetFloatv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3625,7 +3624,7 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.CallNoPush(funcInfoGlGetIntegerv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetIntegerv_Postback{}
 			if err := postback.Decode(values_cnt, d); err != nil {
 				return nil, err
@@ -3646,7 +3645,7 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.Strcpy(result_cnt)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetString_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -3681,7 +3680,7 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsEnabled_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3705,7 +3704,7 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟb.Copy(result_cnt)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlMapBufferRange_Postback{}
 			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
@@ -3778,7 +3777,7 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenQueries_Postback{}
 			if err := postback.Decode(queries_cnt, d); err != nil {
 				return nil, err
@@ -3831,7 +3830,7 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsQuery_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3851,7 +3850,7 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟb.CallNoPush(funcInfoGlGetQueryiv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryiv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3875,7 +3874,7 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectuiv)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectuiv_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3901,7 +3900,7 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 		}
 	}
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGenQueriesEXT_Postback{}
 			if err := postback.Decode(queries_cnt, d); err != nil {
 				return nil, err
@@ -3954,7 +3953,7 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlIsQueryEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -3987,7 +3986,7 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟb.CallNoPush(funcInfoGlGetQueryivEXT)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -4011,7 +4010,7 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectivEXT)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -4035,7 +4034,7 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectuivEXT)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectuivEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -4059,7 +4058,7 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟb.CallNoPush(funcInfoGlGetQueryObjecti64vEXT)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjecti64vEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err
@@ -4083,7 +4082,7 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectui64vEXT)
 	ϟa.Mutate(ϟs)
 	if postback {
-		ϟb.Post(outputs[0], size, ϟi, func(d *protocol.Decoder) (interface{}, error) {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := GlGetQueryObjectui64vEXT_Postback{}
 			if err := postback.Decode(d); err != nil {
 				return nil, err

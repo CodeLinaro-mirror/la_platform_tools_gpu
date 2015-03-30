@@ -3,18 +3,18 @@ package gles
 import (
 	"bytes"
 	eb "encoding/binary"
-	"io"
 	"math/rand"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
-	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
@@ -110,7 +110,7 @@ func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Buil
 
 	// Map vertex attrib and indice resources.
 	var buffer bytes.Buffer
-	enc := protocol.NewEncoder(&buffer, eb.LittleEndian)
+	enc := flat.Encoder(endian.Writer(&buffer, eb.LittleEndian))
 	for _, f := range []float32{-1., -1., 1., -1., -1., 1., 1., 1.} {
 		enc.Float32(f)
 	}
@@ -306,9 +306,9 @@ func postColorData(id atom.ID, b *builder.Builder, s *state.State, width, height
 	b.CallNoPush(funcInfoGlReadPixels)
 
 	b.Post(addr, imageSize, id,
-		func(d *protocol.Decoder) (interface{}, error) {
+		func(d binary.Decoder) (interface{}, error) {
 			buf := make([]byte, imageSize)
-			_, err := io.ReadFull(d, buf)
+			err := d.Data(buf)
 			return buf, err
 		},
 	)

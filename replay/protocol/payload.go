@@ -34,7 +34,7 @@ type Payload struct {
 	Opcodes            []byte         // The encoded list of opcodes.
 }
 
-func (p *Payload) Encode(e *Encoder) error {
+func (p *Payload) Encode(e binary.Encoder) error {
 	if err := e.Uint32(p.StackSize); err != nil {
 		return err
 	}
@@ -44,7 +44,7 @@ func (p *Payload) Encode(e *Encoder) error {
 	if err := e.Uint32(uint32(len(p.Constants))); err != nil {
 		return err
 	}
-	if _, err := e.Write(p.Constants); err != nil {
+	if err := e.Data(p.Constants); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(p.Resources))); err != nil {
@@ -61,13 +61,13 @@ func (p *Payload) Encode(e *Encoder) error {
 	if err := e.Uint32(uint32(len(p.Opcodes))); err != nil {
 		return err
 	}
-	if _, err := e.Write(p.Opcodes); err != nil {
+	if err := e.Data(p.Opcodes); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *Payload) Decode(d *Decoder) (err error) {
+func (p *Payload) Decode(d binary.Decoder) (err error) {
 	if p.StackSize, err = d.Uint32(); err != nil {
 		return err
 	}
@@ -78,7 +78,7 @@ func (p *Payload) Decode(d *Decoder) (err error) {
 		return err
 	} else {
 		p.Constants = make([]byte, count)
-		if _, err = d.Read(p.Constants); err != nil {
+		if err = d.Data(p.Constants); err != nil {
 			return err
 		}
 	}
@@ -102,7 +102,7 @@ func (p *Payload) Decode(d *Decoder) (err error) {
 		return err
 	} else {
 		p.Opcodes = make([]byte, count)
-		if _, err = d.Read(p.Opcodes); err != nil {
+		if err = d.Data(p.Opcodes); err != nil {
 			return err
 		}
 	}

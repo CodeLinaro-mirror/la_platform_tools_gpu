@@ -24,6 +24,8 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -74,7 +76,7 @@ func Execute(
 func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
-	e := protocol.NewEncoder(buf, r.byteOrder)
+	e := flat.Encoder(endian.Writer(buf, r.byteOrder))
 	if err := r.payload.Encode(e); err != nil {
 		return err
 	}
@@ -116,8 +118,8 @@ func (r executor) execute() error {
 func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) error {
 	connection := r.connection
 	defer connection.Close()
-	e := protocol.NewEncoder(connection, r.byteOrder)
-	d := protocol.NewDecoder(connection, r.byteOrder)
+	e := flat.Encoder(endian.Writer(connection, r.byteOrder))
+	d := flat.Decoder(endian.Reader(connection, r.byteOrder))
 
 	if err := e.Uint8(uint8(protocol.ConnectionTypeReplay)); err != nil {
 		return err
@@ -156,7 +158,7 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 }
 
 func (r executor) handleDataResponse(postbacks io.Writer) error {
-	d := protocol.NewDecoder(r.connection, r.byteOrder)
+	d := flat.Decoder(endian.Reader(r.connection, r.byteOrder))
 
 	n, err := d.Uint32()
 	if err != nil {
@@ -173,7 +175,7 @@ func (r executor) handleDataResponse(postbacks io.Writer) error {
 
 func (r executor) handleGetData() error {
 	logger := r.logger.Enter("handleGetData")
-	d := protocol.NewDecoder(r.connection, r.byteOrder)
+	d := flat.Decoder(endian.Reader(r.connection, r.byteOrder))
 
 	resourceCount, err := d.Uint32()
 	if err != nil {

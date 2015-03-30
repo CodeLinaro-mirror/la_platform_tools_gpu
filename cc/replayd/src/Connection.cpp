@@ -22,21 +22,20 @@ namespace android {
 namespace caze {
 
 bool Connection::sendString(const std::string& s) {
-    uint32_t length = static_cast<uint32_t>(s.size());
-    if (this->send(&length, sizeof(length)) != sizeof(length)) {
-        return false;
-    }
+    uint32_t length = static_cast<uint32_t>(s.size())+1;
     return this->send(s.c_str(), length) == length;
 }
 
 bool Connection::readString(std::string* s) {
-    uint32_t length;
-    if (this->recv(&length, sizeof(length)) != sizeof(length)) {
-        return false;
+    char c;
+    s->clear();
+    while(true) {
+        if (this->recv(&c, 1) != 1) { return false; }
+        if (c == 0) {
+            return true;
+        }
+        s->push_back(c);
     }
-
-    s->resize(length);
-    return this->recv(&s->front(), length) == length;
 }
 
 }  // end of namespace caze

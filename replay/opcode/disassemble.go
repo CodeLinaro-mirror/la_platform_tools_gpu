@@ -17,17 +17,18 @@
 package opcode
 
 import (
-	"encoding/binary"
+	eb "encoding/binary"
 	"io"
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/replay/protocol"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 )
 
 // Disassemble disassembles and returns the stream of encoded Opcodes from r,
 // stopping once an EOF is reached.
-func Disassemble(r io.Reader, byteOrder binary.ByteOrder) ([]interface{}, error) {
-	d := protocol.NewDecoder(r, byteOrder)
+func Disassemble(r io.Reader, byteOrder eb.ByteOrder) ([]interface{}, error) {
+	d := flat.Decoder(endian.Reader(r, byteOrder))
 	opcodes := []interface{}{}
 	for {
 		opcode, err := Decode(d)

@@ -20,12 +20,13 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/replay/protocol"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
 type constantEncoder struct {
-	encoder     *protocol.Encoder
+	encoder     binary.Encoder
 	buffer      *bytes.Buffer
 	constantMap map[binary.ID]uint64
 	data        []byte
@@ -34,7 +35,7 @@ type constantEncoder struct {
 
 func newConstantEncoder(alignment int, byteOrder eb.ByteOrder) *constantEncoder {
 	buffer := &bytes.Buffer{}
-	encoder := protocol.NewEncoder(buffer, byteOrder)
+	encoder := flat.Encoder(endian.Writer(buffer, byteOrder))
 	return &constantEncoder{
 		encoder:     encoder,
 		buffer:      buffer,
@@ -82,7 +83,7 @@ func (e *constantEncoder) writeValues(v ...value.Value) value.Pointer {
 
 func (e *constantEncoder) writeString(s string) value.Pointer {
 	e.begin()
-	e.encoder.CString(s)
+	e.encoder.String(s)
 	return e.finish()
 }
 

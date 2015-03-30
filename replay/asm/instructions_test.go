@@ -21,6 +21,8 @@ import (
 	"encoding/binary"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/replay/opcode"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
@@ -33,7 +35,7 @@ func (testPtrResolver) TranslateCapturePointer(ptr uint64) uint64   { return ptr
 
 func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}
-	b := protocol.NewEncoder(buf, binary.LittleEndian)
+	b := flat.Encoder(endian.Writer(buf, binary.LittleEndian))
 	for _, Instruction := range Instructions {
 		Instruction.Encode(testPtrResolver{}, b)
 	}
