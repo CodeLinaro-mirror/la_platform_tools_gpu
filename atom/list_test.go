@@ -29,8 +29,6 @@ var testList = List{
 	&testAtomC{Context: 0x10, String: "Pizza"},
 }
 var testData = []byte{
-	0x03, // Atom count
-
 	0x0a,       // Atom 0: Type
 	0x10,       // Atom 0: Context
 	0x80, 0xc8, // Atom 0: Data
@@ -42,6 +40,8 @@ var testData = []byte{
 	0x1e,                          // Atom 2: Type
 	0x10,                          // Atom 2: Context
 	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: Data
+
+	0xc0, 0xff, 0xff, // EOS
 }
 
 func TestAtomListEncode(t *testing.T) {
@@ -88,9 +88,8 @@ func TestAtomListWriteTo(t *testing.T) {
 	expected := writeRecordList{
 		writeRecord{0, &testAtomA{Context: 0x10, Int32: 100}},
 		writeRecord{1, &testAtomB{Context: 0x20, Bool: true}},
-		writeRecord{3, &EOS{Context: 0x20}},
 		writeRecord{2, &testAtomC{Context: 0x10, String: "Pizza"}},
-		writeRecord{4, &EOS{Context: 0x10}},
+		writeRecord{3, &EOS{}},
 	}
 	got := writeRecordList{}
 	testList.WriteTo(&got)

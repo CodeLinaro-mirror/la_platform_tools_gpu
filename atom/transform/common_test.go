@@ -89,8 +89,12 @@ func checkTransform(t *testing.T, transformer atom.Transformer, inputs, expected
 	if !matched {
 		c := max(len(expected), len(got))
 		for i := 0; i < c; i++ {
-			if i > len(got) {
+			if i >= len(got) {
 				t.Errorf("(%d) Expected: %#v Got: <nothing>", i, expected[i])
+				continue
+			}
+			if i >= len(expected) {
+				t.Errorf("(%d) Expected: <nothing> Got: %#v", i, got[i])
 				continue
 			}
 			e, g := expected[i], got[i]

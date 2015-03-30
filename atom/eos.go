@@ -19,16 +19,15 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // TypeIDEos is the EOS's unique type identifier.
 const TypeIDEos TypeID = 0xffff
 
-// EOS is used to indicate that there will be no more atoms in the stream with
-// the EOS's context identifier after the EOS atom.
+// EOS is used to indicate that there will be no more atoms in the stream of any
+// context after the EOS atom.
 type EOS struct {
 	binary.Generate
-	Context ContextID
 }
 
 func (c *EOS) Name() string         { return "EOS" }
 func (c *EOS) Docs() string         { return "" }
 func (c *EOS) TypeID() TypeID       { return TypeIDEos }
-func (c *EOS) ContextID() ContextID { return c.Context }
+func (c *EOS) ContextID() ContextID { return ^ContextID(0) }
 func (c *EOS) String() string       { return "EOS" }
 func (c *EOS) Flags() Flags         { return 0 }

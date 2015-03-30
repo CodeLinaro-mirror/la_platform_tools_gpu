@@ -5,6 +5,7 @@
 package gles
 
 import (
+	"fmt"
 	"log"
 	"reflect"
 
@@ -15,8 +16,14 @@ import (
 
 func getState(a atom.Atom, s *state.State) *State {
 	id := a.ContextID()
-	return s.Contexts[id].(*State)
+	if state, ok := s.Contexts[id].(*State); ok {
+		return state
+	} else {
+		panic(fmt.Errorf("State for atom %T with context id %d was %T, expected *gles.State",
+			a, id, s.Contexts[id]))
+	}
 }
+
 func (ϟa *Init) Mutate(ϟs *state.State) error {
 	ϟc := &State{}
 	ϟc.Init()

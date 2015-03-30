@@ -19,25 +19,13 @@ import "android.googlesource.com/platform/tools/gpu/binary"
 // List is a list of atoms.
 type List []Atom
 
-// WriteTo writes all atoms in the list to w, inserting EOS atoms after the last
-// atom of each context.
+// WriteTo writes all atoms in the list to w, terminating with a single EOS
+// atom.
 func (l *List) WriteTo(w Writer) {
-	// Find the last atom index for each context
-	last := make(map[ContextID]int)
-	for i, a := range *l {
-		last[a.ContextID()] = i
-	}
-
-	// Write out the atoms, injecting EOS markers for each context.
-	nextEosID := ID(len(*l))
 	for i, a := range *l {
 		w.Write(ID(i), a)
-		ctx := a.ContextID()
-		if last[ctx] == i {
-			w.Write(nextEosID, &EOS{Context: ctx})
-			nextEosID++
-		}
 	}
+	w.Write(ID(len(*l)), &EOS{})
 }
 
 // Clone makes and returns a shallow copy of the atom list.
@@ -61,9 +49,6 @@ func (l *List) AddAt(a Atom, id ID) {
 
 // Encode encodes the atom list using the specified encoder.
 func (l *List) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(len(*l))); err != nil {
-		return err
-	}
 	for _, atom := range *l {
 		if err := e.Uint16(uint16(atom.TypeID())); err != nil {
 			return err
@@ -72,30 +57,31 @@ func (l *List) Encode(e binary.Encoder) error {
 			return err
 		}
 	}
+	if err := e.Uint16(uint16(TypeIDEos)); err != nil {
+		return err
+	}
 	return nil
 }
 
 // Encode decodes the atom list using the specified encoder.
 func (l *List) Decode(d binary.Decoder) error {
-	count, err := d.Uint32()
-	if err != nil {
-		*l = List{} // Clear the list
-		return err
-	}
-	*l = make(List, count)
-	for i := range *l {
-		var typeID uint16
-		if typeID, err = d.Uint16(); err != nil {
+	*l = List{}
+	for true {
+		typeID, err := d.Uint16()
+		if err != nil {
 			return err
 		}
 		atom, err := New(TypeID(typeID))
 		if err != nil {
 			return err
 		}
+		if _, ok := atom.(*EOS); ok {
+			break
+		}
 		if err := atom.Decode(d); err != nil {
 			return err
 		}
-		(*l)[i] = atom
+		(*l) = append(*l, atom)
 	}
 	return nil
 }
