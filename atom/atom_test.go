@@ -21,6 +21,7 @@ const testAtomIDB = TypeID(20)
 const testAtomIDC = TypeID(30)
 
 type testAtomA struct {
+	binary.Generate
 	Context ContextID
 	Int32   int32
 }
@@ -29,23 +30,9 @@ func (testAtomA) TypeID() TypeID          { return testAtomIDA }
 func (a *testAtomA) ContextID() ContextID { return a.Context }
 func (a *testAtomA) Info() string         { return "" }
 func (a *testAtomA) Flags() Flags         { return 0 }
-func (a *testAtomA) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(a.Context)); err != nil {
-		return err
-	}
-	return e.Int32(a.Int32)
-}
-func (a *testAtomA) Decode(d binary.Decoder) (err error) {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		a.Context = ContextID(obj)
-	}
-	a.Int32, err = d.Int32()
-	return
-}
 
 type testAtomB struct {
+	binary.Generate
 	Context ContextID
 	Bool    bool
 }
@@ -54,23 +41,9 @@ func (testAtomB) TypeID() TypeID          { return testAtomIDB }
 func (a *testAtomB) ContextID() ContextID { return a.Context }
 func (a *testAtomB) Info() string         { return "" }
 func (a *testAtomB) Flags() Flags         { return 0 }
-func (a *testAtomB) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(a.Context)); err != nil {
-		return err
-	}
-	return e.Bool(a.Bool)
-}
-func (a *testAtomB) Decode(d binary.Decoder) (err error) {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		a.Context = ContextID(obj)
-	}
-	a.Bool, err = d.Bool()
-	return
-}
 
 type testAtomC struct {
+	binary.Generate
 	Context ContextID
 	String  string
 }
@@ -79,21 +52,6 @@ func (testAtomC) TypeID() TypeID          { return testAtomIDC }
 func (a *testAtomC) ContextID() ContextID { return a.Context }
 func (a *testAtomC) Info() string         { return "" }
 func (a *testAtomC) Flags() Flags         { return 0 }
-func (a *testAtomC) Encode(e binary.Encoder) error {
-	if err := e.Uint32(uint32(a.Context)); err != nil {
-		return err
-	}
-	return e.String(a.String)
-}
-func (a *testAtomC) Decode(d binary.Decoder) (err error) {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		a.Context = ContextID(obj)
-	}
-	a.String, err = d.String()
-	return
-}
 
 func init() {
 	Register(TypeInfo{ID: testAtomIDA, New: func() Atom { return &testAtomA{} }})
