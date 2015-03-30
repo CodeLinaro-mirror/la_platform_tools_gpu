@@ -45,7 +45,7 @@ func (request *GetFramebufferDepth) build(db database.Database, logger log.Logge
 		Format: service.ImageFormatFloat32, // TODO: Add support for other formats.
 		Width:  fbWidth,
 		Height: fbHeight,
-		Data:   service.BinaryId{data},
+		Data:   service.BinaryId{ID: data},
 	})
 	return nil
 }

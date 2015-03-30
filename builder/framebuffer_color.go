@@ -49,7 +49,7 @@ func (request *GetFramebufferColor) build(db database.Database, logger log.Logge
 		Format: service.ImageFormatRGBA8, // TODO: Add support for other formats.
 		Width:  imgWidth,
 		Height: imgHeight,
-		Data:   service.BinaryId{data},
+		Data:   service.BinaryId{ID: data},
 	})
 	return nil
 }

@@ -163,8 +163,8 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 
 	capture := service.Capture{
 		Name:     name,
-		Atoms:    service.AtomStreamId{streamID},
-		Schema:   service.SchemaId{schemaID},
+		Atoms:    service.AtomStreamId{ID: streamID},
+		Schema:   service.SchemaId{ID: schemaID},
 		Contexts: calcContexts(atoms),
 	}
 
@@ -184,13 +184,13 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 	for _, i := range ids {
 		if i.ID == id {
 			// Capture already imported
-			return service.CaptureId{id}, nil
+			return service.CaptureId{ID: id}, nil
 		}
 	}
 
 	// Add the capture into the list of captures stored by the database.
 	c := captures{ids: ids}
-	c.ids = append(c.ids, service.CaptureId{id})
+	c.ids = append(c.ids, service.CaptureId{ID: id})
 
 	record, err := db.Store(&c, logger)
 	if err != nil {
@@ -200,7 +200,7 @@ func ImportCapture(name string, atoms atom.List, db database.Database, logger lo
 		return service.CaptureId{}, err
 	}
 
-	return service.CaptureId{id}, nil
+	return service.CaptureId{ID: id}, nil
 }
 
 // Captures returns all the captures stored by the database.

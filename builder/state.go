@@ -57,6 +57,6 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 		return err
 	}
 
-	store.CopyResource(out, &service.Binary{buf.Bytes()})
+	store.CopyResource(out, &service.Binary{Data: buf.Bytes()})
 	return nil
 }

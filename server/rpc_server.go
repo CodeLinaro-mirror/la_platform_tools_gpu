@@ -91,7 +91,7 @@ func (s rpcServer) GetState(logger log.Logger, captureID service.CaptureId, at u
 		Capture: captureID,
 		After:   atom.ID(at),
 	}, logger)
-	return service.BinaryId{id}, err
+	return service.BinaryId{ID: id}, err
 }
 
 // GetHierarchy returns the atom hierarchy identifier for the given capture and context.
@@ -101,7 +101,7 @@ func (s rpcServer) GetHierarchy(logger log.Logger, captureID service.CaptureId, 
 		Capture: captureID,
 		Context: atom.ContextID(ctxID),
 	}, logger)
-	return service.HierarchyId{id}, err
+	return service.HierarchyId{ID: id}, err
 }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
@@ -112,7 +112,7 @@ func (s rpcServer) GetMemoryInfo(logger log.Logger, captureID service.CaptureId,
 		After:   atom.ID(after),
 		Range:   memory.Range{Base: memory.Pointer(rng.Base), Size: rng.Size},
 	}, logger)
-	return service.MemoryInfoId{id}, err
+	return service.MemoryInfoId{ID: id}, err
 }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound color buffer for the given device,
@@ -126,7 +126,7 @@ func (s rpcServer) GetFramebufferColor(logger log.Logger, deviceID service.Devic
 		After:    atom.ID(after),
 		Settings: settings,
 	}, logger)
-	return service.ImageInfoId{id}, err
+	return service.ImageInfoId{ID: id}, err
 }
 
 // GetFramebufferDepth returns the ImageInfo identifier describing the bound depth buffer for the given device,
@@ -138,7 +138,7 @@ func (s rpcServer) GetFramebufferDepth(logger log.Logger, deviceID service.Devic
 		Context: atom.ContextID(ctxID),
 		After:   atom.ID(after),
 	}, logger)
-	return service.ImageInfoId{id}, err
+	return service.ImageInfoId{ID: id}, err
 }
 
 // ReplaceAtom creates and new capture based on an existing capture, but with a single atom replaced.
@@ -149,7 +149,7 @@ func (s rpcServer) ReplaceAtom(logger log.Logger, capture service.CaptureId, ato
 		Type:    atom.TypeID(atomType),
 		Data:    data,
 	}, logger)
-	return service.CaptureId{id}, err
+	return service.CaptureId{ID: id}, err
 }
 
 // GetTimingInfo performs timings of the given capture, context on the given device,
@@ -162,7 +162,7 @@ func (s rpcServer) GetTimingInfo(logger log.Logger, deviceID service.DeviceId, c
 		Context:    atom.ContextID(ctxID),
 		TimingMask: mask,
 	}, logger)
-	return service.TimingInfoId{id}, err
+	return service.TimingInfoId{ID: id}, err
 }
 
 // PrerenderFramebuffers renders the framebuffer contents after each of the given atoms of interest
@@ -178,7 +178,7 @@ func (s rpcServer) PrerenderFramebuffers(logger log.Logger, deviceID service.Dev
 		Height:  height,
 		AtomIDs: atomIDs,
 	}, logger)
-	return service.BinaryId{id}, err
+	return service.BinaryId{ID: id}, err
 }
 
 // ResolveAtomStream resolves the given id to a cached AtomStream or builds it on demand before returning it.

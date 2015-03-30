@@ -124,7 +124,7 @@ limitations under the License.
 {{define "Arguments"}}
   {{AssertType $ "Function"}}
 
-  {{range $i, $p := $.CallParameters}}{{if $i}}, {{end}}§{{$p.Name}}{{end}}
+  {{range $i, $p := $.CallParameters}}{{if $i}}, {{end}}§{{$p.Name}}:{{$p.Name}}{{end}}
 {{end}}
 
 
@@ -544,7 +544,7 @@ func (h {{$.Name}}) Valid() bool {
           case *{{Macro "CallName" $c}}:
             {{if not (IsVoid $c.Return.Type)}}
               if res, err := server.{{$c.Name}}(l{{range $p := $c.CallParameters}}, call.{{$p.Name}}{{end}}); err == nil {
-                return &{{Macro "ResultName" $c}}{ res }
+                return &{{Macro "ResultName" $c}}{ value:res }
               } else {
                 return rpc.NewError(err.Error())
               }

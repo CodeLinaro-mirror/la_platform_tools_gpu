@@ -30,19 +30,19 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		switch call := in.(type) {
 		case *callAdd:
 			if res, err := server.Add(l, call.a, call.b); err == nil {
-				return &resultAdd{res}
+				return &resultAdd{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callEnumToString:
 			if res, err := server.EnumToString(l, call.e); err == nil {
-				return &resultEnumToString{res}
+				return &resultEnumToString{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetStruct:
 			if res, err := server.GetStruct(l); err == nil {
-				return &resultGetStruct{res}
+				return &resultGetStruct{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -54,7 +54,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		case *callGetResource:
 			if res, err := server.GetResource(l); err == nil {
-				return &resultGetResource{res}
+				return &resultGetResource{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
@@ -66,37 +66,37 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 			}
 		case *callResolveResource:
 			if res, err := server.ResolveResource(l, call.r); err == nil {
-				return &resultResolveResource{res}
+				return &resultResolveResource{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetSingleListNode:
 			if res, err := server.GetSingleListNode(l); err == nil {
-				return &resultGetSingleListNode{res}
+				return &resultGetSingleListNode{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetListNodeChain:
 			if res, err := server.GetListNodeChain(l); err == nil {
-				return &resultGetListNodeChain{res}
+				return &resultGetListNodeChain{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetListNodeChainArray:
 			if res, err := server.GetListNodeChainArray(l); err == nil {
-				return &resultGetListNodeChainArray{res}
+				return &resultGetListNodeChainArray{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetBase:
 			if res, err := server.GetBase(l); err == nil {
-				return &resultGetBase{res}
+				return &resultGetBase{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetDerived:
 			if res, err := server.GetDerived(l); err == nil {
-				return &resultGetDerived{res}
+				return &resultGetDerived{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
