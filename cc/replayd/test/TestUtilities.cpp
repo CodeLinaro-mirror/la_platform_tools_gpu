@@ -67,13 +67,13 @@ void pushString(std::vector<uint8_t>* buf, const std::string& str) {
   for(char c : str) {
       buf->push_back(c);
   }
-  buf.push_back(0);
+  buf->push_back(0);
 }
 void pushString(std::vector<uint8_t>* buf, const char* str) {
   for(char c = *str; c != 0; str++, c = *str) {
       buf->push_back(c);
   }
-  buf.push_back(0);
+  buf->push_back(0);
 }
 
 std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemorySize,
