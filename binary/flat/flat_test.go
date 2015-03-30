@@ -35,11 +35,9 @@ type testObjectB struct {
 }
 
 type testObjectC struct {
-	data string
+	binary.Generate "disable"
+	data            string
 }
-
-func (o testObjectC) Encode(e binary.Encoder) error  { return nil }
-func (o *testObjectC) Decode(d binary.Decoder) error { return nil }
 
 var testObjA = &testObjectA{data: "ObjectA"}
 var testObjB = &testObjectB{data: "ObjectB"}

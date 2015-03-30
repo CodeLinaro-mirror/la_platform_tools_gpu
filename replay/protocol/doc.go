@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+//go:generate codergen -go
+
 // Package protocol contains the constants and types used to communicate with
 // the replay system and its virtual-machine interpreter.
 //
