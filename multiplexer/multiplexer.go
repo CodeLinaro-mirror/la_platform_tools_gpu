@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+//go:generate codergen -go
+
 // Package multiplexer provides multiple data-stream multiplexing over a single binary data-stream.
 package multiplexer
 
@@ -102,7 +104,7 @@ func (m *Multiplexer) recv() {
 		switch ty {
 		case msgTypeOpenChannel:
 			msg := msgOpenChannel{}
-			if err := msg.decode(d); err != nil {
+			if err := msg.Decode(d); err != nil {
 				return
 			}
 			s := m.createChannel(remote(msg.channelId))
@@ -110,14 +112,14 @@ func (m *Multiplexer) recv() {
 
 		case msgTypeCloseChannel:
 			msg := msgCloseChannel{}
-			if err := msg.decode(d); err != nil {
+			if err := msg.Decode(d); err != nil {
 				return
 			}
 			m.closeChannel(remote(msg.channelId), false)
 
 		case msgTypeData:
 			msg := msgData{}
-			if err := msg.decode(d); err != nil {
+			if err := msg.Decode(d); err != nil {
 				return
 			}
 			id := remote(msg.c)

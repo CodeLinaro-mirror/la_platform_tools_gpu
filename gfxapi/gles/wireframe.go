@@ -6,10 +6,10 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -43,7 +43,7 @@ func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 			// Store the wire-frame at virtual address
 			address := memory.Pointer(0x5746000000000000)
 			wireframeData, wireframeDataType := encodeIndices(indices)
-			res := binary.Data(wireframeData)
+			res := store.Blob{Data: wireframeData}
 			resID, err := db.Store(&res, logger)
 			if err != nil {
 				panic(err)

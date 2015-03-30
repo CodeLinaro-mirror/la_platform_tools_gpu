@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -33,14 +34,13 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
 			resourceID := calcTextureID(capture, id, a)
-			var decompressed binary.Data
-			if db.Load(resourceID, logger, &decompressed) != nil {
-				var err error
-				decompressed, err = decompress(db, logger, a, &s.Memory)
+			var blob store.Blob
+			if db.Load(resourceID, logger, &blob) != nil {
+				decompressed, err := decompress(db, logger, a, &s.Memory)
 				if err != nil {
 					panic(err)
 				}
-				data := binary.Data(decompressed)
+				data := store.Blob{Data: decompressed}
 				decompressedID, err := db.Store(&data, logger)
 				if err != nil {
 					panic(err)
@@ -53,7 +53,7 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 
 			address := memory.Pointer(0xF000000000000000)
 			out.Write(id, &atom.Observation{
-				Range:      memory.Range{Base: address, Size: uint64(len(decompressed))},
+				Range:      memory.Range{Base: address, Size: uint64(len(blob.Data))},
 				ResourceID: resourceID,
 				Context:    a.ContextID(),
 			})

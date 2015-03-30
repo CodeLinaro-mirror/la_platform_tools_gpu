@@ -31,29 +31,16 @@ import (
 
 // Each record in the small archive is the id and a data buffer.
 type keyValue struct {
+	binary.Generate
 	id     binary.ID
-	buffer binary.Data
-}
-
-func (s *keyValue) decode(d binary.Decoder) (err error) {
-	if err := s.id.Decode(d); err != nil {
-		return err
-	}
-	return s.buffer.Decode(d)
-}
-
-func (r keyValue) encode(e binary.Encoder) error {
-	if err := r.id.Encode(e); err != nil {
-		return err
-	}
-	return r.buffer.Encode(e)
+	buffer []byte
 }
 
 type smallArchive struct {
 	worker         chan<- func()
 	workerSync     chan<- func()
 	data           *os.File
-	records        map[binary.ID]binary.Data
+	records        map[binary.ID][]byte
 	waste          int
 	size           int
 	path           string
@@ -89,13 +76,13 @@ func CreateSmallArchive(path string, compactionSize int) Store {
 
 	waste := 0
 	size := 0
-	records := make(map[binary.ID]binary.Data)
+	records := make(map[binary.ID][]byte)
 
 	// Use a buffered reader to quickly read the archive records
 	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(data, 256<<10)))
 	for {
 		var r keyValue
-		if err := r.decode(d); err != io.EOF {
+		if err := r.Decode(d); err != io.EOF {
 			if err != nil {
 				panic(err)
 			}
@@ -185,7 +172,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 	recordsCopyArray := make([]keyValue, len(s.records))
 	i := 0
 	for id, data := range s.records {
-		recordsCopyArray[i] = keyValue{id, data}
+		recordsCopyArray[i] = keyValue{id: id, buffer: data}
 		i++
 	}
 	afterCopyRecords := time.Now()
@@ -215,7 +202,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 				waste += prevSize
 			}
 
-			err := insert.encode(e)
+			err := insert.Encode(e)
 			if err != nil {
 				panic(err)
 			}
@@ -239,7 +226,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		}
 
 		for _, record := range recordsCopyArray {
-			err := record.encode(e)
+			err := record.Encode(e)
 			if err != nil {
 				panic(err)
 			}
@@ -397,7 +384,7 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 		}
 
 		e := cyclic.Encoder(vle.Writer(s.data))
-		err := record.encode(e)
+		err := record.Encode(e)
 		if err != nil {
 			panic(err)
 		}

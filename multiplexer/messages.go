@@ -16,9 +16,7 @@
 
 package multiplexer
 
-import (
-	"android.googlesource.com/platform/tools/gpu/binary"
-)
+import "android.googlesource.com/platform/tools/gpu/binary"
 
 const (
 	msgTypeOpenChannel = msgType(iota)
@@ -27,34 +25,22 @@ const (
 )
 
 type msg interface {
+	binary.Object
 	channel() channelId
-	encode(e binary.Encoder) error
-	decode(d binary.Decoder) error
 }
 
 type msgOpenChannel struct {
+	binary.Generate
 	channelId
 }
 
 type msgCloseChannel struct {
+	binary.Generate
 	channelId
 }
 
 type msgData struct {
+	binary.Generate
 	c channelId
-	d binary.Data
-}
-
-func (m msgData) encode(e binary.Encoder) error {
-	if err := m.c.encode(e); err != nil {
-		return err
-	}
-	return m.d.Encode(e)
-}
-
-func (m *msgData) decode(d binary.Decoder) error {
-	if err := m.c.decode(d); err != nil {
-		return err
-	}
-	return m.d.Decode(d)
+	d []byte
 }

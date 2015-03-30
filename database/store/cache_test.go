@@ -59,8 +59,8 @@ func createMockStore() *mockStore {
 	}
 }
 
-func validateLoad(t *testing.T, cache *cache, id binary.ID, expectedSize int, expectedData *binary.Data, expectedErr error) {
-	data := &binary.Data{}
+func validateLoad(t *testing.T, cache *cache, id binary.ID, expectedSize int, expectedData *Blob, expectedErr error) {
+	data := &Blob{Data: []byte{}}
 	size, err := cache.Load(id, nil, data)
 	if expectedSize != size {
 		t.Errorf("invalid size, expected %v got %v", expectedSize, size)
@@ -88,7 +88,7 @@ func calcSize(r binary.Object) int {
 
 func TestCacheMiss(t *testing.T) {
 	id := binary.NewID([]byte("123"))
-	data := &binary.Data{1, 2, 3}
+	data := &Blob{Data: []byte{1, 2, 3}}
 	size := calcSize(data)
 	loadCallCount := 0
 
@@ -119,7 +119,7 @@ func TestCacheMiss(t *testing.T) {
 
 func TestCacheHit(t *testing.T) {
 	id := binary.NewID([]byte("123"))
-	data := &binary.Data{1, 2, 3}
+	data := &Blob{Data: []byte{1, 2, 3}}
 	size := calcSize(data)
 	loadCallCount := 0
 
@@ -147,7 +147,7 @@ func TestCacheHit(t *testing.T) {
 
 func TestCacheMultipleLoads(t *testing.T) {
 	id := binary.NewID([]byte("123"))
-	data := &binary.Data{1, 2, 3}
+	data := &Blob{Data: []byte{1, 2, 3}}
 	size := calcSize(data)
 	loadCallCount := 0
 	loadSync := make(chan bool)
@@ -202,11 +202,11 @@ func TestCacheMultipleLoads(t *testing.T) {
 
 func TestCacheOverflow(t *testing.T) {
 	idA, idB, idC := binary.NewID([]byte("123")), binary.NewID([]byte("456")), binary.NewID([]byte("789"))
-	dataA := &binary.Data{1, 2, 3, 4}
+	dataA := &Blob{Data: []byte{1, 2, 3, 4}}
 	sizeA := calcSize(dataA)
-	dataB := &binary.Data{4, 5, 6, 7}
+	dataB := &Blob{Data: []byte{4, 5, 6, 7}}
 	sizeB := calcSize(dataB)
-	dataC := &binary.Data{8, 9, 10, 11}
+	dataC := &Blob{Data: []byte{8, 9, 10, 11}}
 	sizeC := calcSize(dataC)
 	loadCallCount := 0
 
@@ -269,8 +269,8 @@ func TestCacheOverflow(t *testing.T) {
 
 func TestCacheReplace(t *testing.T) {
 	id := binary.NewID([]byte("123"))
-	dataA := &binary.Data{1, 2, 3}
-	dataB := &binary.Data{4, 5, 6, 7, 8, 9}
+	dataA := &Blob{Data: []byte{1, 2, 3}}
+	dataB := &Blob{Data: []byte{4, 5, 6, 7, 8, 9}}
 	sizeB := calcSize(dataB)
 
 	inner := createMockStore()
