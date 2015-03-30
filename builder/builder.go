@@ -104,9 +104,47 @@ func calcContexts(atoms atom.List) service.AtomContextArray {
 	return contexts
 }
 
-// NewCapture builds a new capture containing atoms, stores it into db and
+// extractResources returns a new atom list with all the resources extracted
+// and placed into the database.
+func extractResources(atoms atom.List, db database.Database, logger log.Logger) (atom.List, error) {
+	out := make(atom.List, 0, len(atoms))
+	idmap := map[binary.ID]binary.ID{}
+	for _, a := range atoms {
+		switch a := a.(type) {
+		case *atom.Resource:
+			blob := store.Blob{Data: a.Data}
+			if id, err := db.Store(&blob, logger); err != nil {
+				return nil, err
+			} else {
+				idmap[a.ResourceID] = id
+			}
+
+		case *atom.Observation:
+			id := a.ResourceID
+			if remapped, ok := idmap[id]; ok { // Avoid a db link and remap ids here.
+				id = remapped
+			}
+			out = append(out, &atom.Observation{
+				Context:    a.Context,
+				Range:      a.Range,
+				ResourceID: id,
+			})
+
+		default:
+			out = append(out, a)
+		}
+	}
+	return out, nil
+}
+
+// ImportCapture builds a new capture containing atoms, stores it into db and
 // returns the new capture identifier.
-func NewCapture(name string, atoms atom.List, db database.Database, logger log.Logger) (service.CaptureId, error) {
+func ImportCapture(name string, atoms atom.List, db database.Database, logger log.Logger) (service.CaptureId, error) {
+	atoms, err := extractResources(atoms, db, logger)
+	if err != nil {
+		return service.CaptureId{}, err
+	}
+
 	stream, err := service.NewAtomStream(atoms)
 	if err != nil {
 		return service.CaptureId{}, err
@@ -228,6 +266,12 @@ func getAtomFramebufferDimensions(captureID service.CaptureId, contextID atom.Co
 	idx := sort.Search(len(captureFbDims.Dimensions), func(x int) bool {
 		return captureFbDims.Dimensions[x].From > after
 	}) - 1
+
+	if idx < 0 {
+		return 0, 0, fmt.Errorf("No dimension records found after atom %d. FB dimension records = %d",
+			after, len(captureFbDims.Dimensions))
+	}
+
 	return captureFbDims.Dimensions[idx].Width, captureFbDims.Dimensions[idx].Height, nil
 }
 

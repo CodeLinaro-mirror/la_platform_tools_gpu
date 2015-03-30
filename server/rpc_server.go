@@ -58,7 +58,7 @@ func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) 
 	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
 		return service.CaptureId{}, err
 	}
-	id, err := builder.NewCapture(name, atoms, s.Database, logger)
+	id, err := builder.ImportCapture(name, atoms, s.Database, logger)
 	if err != nil {
 		return service.CaptureId{}, err
 	}

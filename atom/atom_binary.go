@@ -19,6 +19,8 @@ func init() {
 	registry.Add(binary.ID{0x2c, 0x9a, 0x2b, 0x93, 0xd5, 0xce, 0x4b, 0x84, 0x06, 0xcc, 0x43, 0xcb, 0xb7, 0x4b, 0xc4, 0x0a, 0x9b, 0x05, 0x11, 0x48}, &Observation{})
 	//struct atom.Range { Start:ID, End:ID }
 	registry.Add(binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}, &Range{})
+	//struct atom.Resource { ResourceID:binary.ID, Data:[]byte }
+	registry.Add(binary.ID{0xb8, 0x93, 0xdf, 0x90, 0x52, 0x2e, 0x33, 0x0b, 0x84, 0x00, 0x06, 0x1e, 0xca, 0x2d, 0xb0, 0x0a, 0xd6, 0x7c, 0x65, 0x25}, &Resource{})
 }
 
 func (o EOS) Encode(e binary.Encoder) error {
@@ -117,6 +119,34 @@ func (o *Range) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.End = ID(obj)
+	}
+	return nil
+}
+
+func (o Resource) Encode(e binary.Encoder) error {
+	if err := o.ResourceID.Encode(e); err != nil {
+		return err
+	}
+	if err := e.Int32(int32(len(o.Data))); err != nil {
+		return err
+	}
+	if err := e.Data(o.Data); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *Resource) Decode(d binary.Decoder) error {
+	if err := o.ResourceID.Decode(d); err != nil {
+		return err
+	}
+	if count, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Data = make([]byte, count)
+		if err := d.Data(o.Data); err != nil {
+			return err
+		}
 	}
 	return nil
 }
