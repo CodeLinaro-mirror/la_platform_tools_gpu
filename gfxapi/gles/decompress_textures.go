@@ -40,8 +40,8 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 				if err != nil {
 					panic(err)
 				}
-				data := store.Blob{Data: decompressed}
-				decompressedID, err := db.Store(&data, logger)
+				blob = store.Blob{Data: decompressed}
+				decompressedID, err := db.Store(&blob, logger)
 				if err != nil {
 					panic(err)
 				}
