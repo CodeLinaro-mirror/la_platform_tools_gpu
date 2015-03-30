@@ -18,6 +18,7 @@ limitations under the License.
   {{template "Go.GeneratedHeader" (Global "OutputDir")}}
 
   import (
+    "fmt"
     "log"
 
     "android.googlesource.com/platform/tools/gpu/atom"
@@ -27,9 +28,14 @@ limitations under the License.
 
   func getState(a atom.Atom, s *state.State) *State {
     id := a.ContextID()
-    return s.Contexts[id].(*State)
+    if state, ok := s.Contexts[id].(*State); ok {
+      return state
+    } else {
+      panic(fmt.Errorf("State for atom %T with context id %d was %T, expected *{{Global "API"}}.State",
+        a, id, s.Contexts[id]))
+    }
   }
-
+¶
   {{range $c := AllCommands $}}
     func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *state.State) error {
       {{if $c.GetAnnotation "synthetic"}}

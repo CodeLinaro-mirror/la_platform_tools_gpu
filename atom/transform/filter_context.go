@@ -17,10 +17,13 @@ package transform
 import "android.googlesource.com/platform/tools/gpu/atom"
 
 // ContextFilter returns a Transformer that only outputs atoms matching the
-// specified context id.
+// specified context id and the EOS atom.
 func ContextFilter(context atom.ContextID) atom.Transformer {
 	return atom.Transform("ContextFilter", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if a.ContextID() == context {
+			out.Write(id, a)
+		}
+		if _, iseos := a.(*atom.EOS); iseos {
 			out.Write(id, a)
 		}
 	})
