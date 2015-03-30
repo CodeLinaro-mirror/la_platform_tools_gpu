@@ -58,9 +58,11 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{define "EncodeArray"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
 			return err
 		}
-		for i := range {{.Name}} {
+		{{if eq .Type.SubType.Method "Uint8"}}if err := e.Data({{.Name}}); err != nil {
+			return err
+		}{{else}}for i := range {{.Name}} {
 			{{encode (print .Name "[i]") .Type.SubType}}
-		} {{end}}
+		}{{end}}{{end}}
 
 {{define "EncodeMap"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
 			return err
@@ -105,9 +107,11 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
-			for i := range {{.Name}} {
+			{{if eq .Type.SubType.Method "Uint8"}}if err := d.Data({{.Name}}); err != nil {
+				return err
+			}{{else}}for i := range {{.Name}} {
 				{{decode (print .Name "[i]") .Type.SubType}}
-			}
+			}{{end}}
 		} {{end}}
 
 {{define "DecodeMap"}} if count, err := d.Int32(); err != nil {
