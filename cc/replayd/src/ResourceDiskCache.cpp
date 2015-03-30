@@ -126,7 +126,7 @@ bool ResourceDiskCache::prefetch(const ResourceList& resources,
         } else {
             // If next resource not fit into this batch then fetch the current batch
             if (querySumSize + res.second > size) {
-                if (!fetch(gazer, buffer, query)) {
+                if (!fetch(gazer, buffer, size, query)) {
                     return false;
                 }
 
@@ -141,16 +141,17 @@ bool ResourceDiskCache::prefetch(const ResourceList& resources,
 
     // Fetch the last batch if it isn't empty
     if (query.size() > 0) {
-        return fetch(gazer, buffer, query);
+        return fetch(gazer, buffer, size, query);
     }
 
     return true;
 }
 
-bool ResourceDiskCache::fetch(const GazerConnection& gazer, void* buffer,
+bool ResourceDiskCache::fetch(const GazerConnection& gazer,
+                              void* buffer, uint32_t size,
                               const ResourceList& query) {
     // Request the resources from the fall back provider
-    if (!mFallbackProvider->get(query, gazer, buffer)) {
+    if (!mFallbackProvider->get(query, gazer, buffer, size)) {
         return false;
     }
 

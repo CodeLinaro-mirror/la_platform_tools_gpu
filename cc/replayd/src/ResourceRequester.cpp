@@ -26,18 +26,23 @@ std::unique_ptr<ResourceRequester> ResourceRequester::create() {
     return std::unique_ptr<ResourceRequester>(new ResourceRequester());
 }
 
-bool ResourceRequester::get(const ResourceId& id, const GazerConnection& gazer, void* target,
-                            uint32_t size) {
+bool ResourceRequester::get(const ResourceId& id, const GazerConnection& gazer,
+                            void* target, uint32_t size) {
     return gazer.getResources({id}, target, size);
 }
 
 bool ResourceRequester::get(const ResourceList& resources,
-                            const GazerConnection& gazer, void* target) {
+                            const GazerConnection& gazer,
+                            void* target, uint32_t size) {
     uint32_t querySize = 0;
     std::vector<ResourceId> query;
     for (const auto& r : resources) {
         query.push_back(r.first);
         querySize += r.second;
+    }
+    if (querySize > size) {
+        // Not enough space, don't even try!
+        return false;
     }
     return gazer.getResources(query, target, querySize);
 }

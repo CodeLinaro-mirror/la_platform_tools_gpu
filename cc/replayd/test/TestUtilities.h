@@ -37,21 +37,6 @@ class MockConnection;
 
 namespace test {
 
-// Matcher for matching the data pointed by a void pointer (arg) against the reference data provided
-// in the data variable. Data should be an iterable collection of uint8_t types and arg should be a
-// void pointer.
-MATCHER_P(VoidPointee, data, "") {
-    uint32_t i = 0;
-    bool result = true;
-    const uint8_t* typedArg = static_cast<const uint8_t*>(arg);
-    for (uint8_t it : data) {
-        if (it != typedArg[i]) {
-            result = false;
-        }
-        ++i;
-    }
-    return result;
-}
 
 // Action for setting the values pointed by a void pointer (arg0). Data should be an iterable
 // collection of uint8_t types and arg should be a void pointer.
@@ -69,8 +54,11 @@ uint32_t instruction(Interpreter::InstructionCode code);
 uint32_t instruction(Interpreter::InstructionCode code, uint32_t data);
 uint32_t instruction(Interpreter::InstructionCode code, BaseType type, uint32_t data);
 
-template <typename T>
-std::vector<uint8_t> toByteVector(const T& x);
+void pushBytes(std::vector<uint8_t>* buf, const std::vector<uint8_t>& v);
+void pushUint8(std::vector<uint8_t>* buf, uint8_t v);
+void pushUint32(std::vector<uint8_t>* buf, uint32_t v);
+void pushString(std::vector<uint8_t>* buf, const std::string& str);
+void pushString(std::vector<uint8_t>* buf, const char* str);
 
 std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemorySize,
                                       const std::vector<uint8_t>& constantMemory,

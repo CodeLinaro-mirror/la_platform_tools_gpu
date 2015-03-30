@@ -16,6 +16,7 @@
 
 #include "Connection.h"
 #include "GazerConnection.h"
+#include "GazerListener.h"
 #include "MemoryManager.h"
 #include "MockConnection.h"
 #include "MockResourceProvider.h"
@@ -37,6 +38,7 @@ using ::testing::Return;
 using ::testing::ReturnArg;
 using ::testing::StrictMock;
 using ::testing::WithArg;
+using ::testing::ElementsAreArray;
 
 namespace android {
 namespace caze {
@@ -51,28 +53,22 @@ const std::string replayId = "ABCDE";
 TEST(ReplayRequestTestStatic, Create) {
     uint32_t stackSize = 128;
     uint32_t volatileMemorySize = 1024;
-    auto constantMemory = toByteVector<std::string>("ABCDEFGH");
+    std::vector<uint8_t> constantMemory =
+        {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     ResourceProvider::ResourceList resources{{"ZYX", 16}, {"1234", 32}};
     std::vector<uint32_t> instructionList{0, 1, 2};
 
     auto replayData = createReplayData(stackSize, volatileMemorySize, constantMemory, resources,
                                        instructionList);
 
-    auto connection = new StrictMock<MockConnection>();
+    auto connection = new MockConnection();
     std::unique_ptr<StrictMock<MockResourceProvider>> resourceProvider(
             new StrictMock<MockResourceProvider>());
-
-    EXPECT_CALL(*connection, recv(_, _))
-            // Replay id length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(replayId.size()))),
-                            ReturnArg<1>()))
-            // Replay id
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector(replayId))), ReturnArg<1>()))
-            // Replay length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(replayData.size()))),
-                            ReturnArg<1>()));
+    pushString(&connection->in, replayId);
+    pushUint32(&connection->in, replayData.size());
 
     EXPECT_CALL(*resourceProvider, get(Eq(replayId), _, _, replayData.size()))
+            // Replay data
             .WillOnce(DoAll(WithArg<2>(SetVoidPointee(replayData)), ReturnArg<3>()));
 
     std::unique_ptr<MemoryManager> memoryManager(new MemoryManager({MEMORY_SIZE}));
@@ -87,28 +83,20 @@ TEST(ReplayRequestTestStatic, Create) {
     EXPECT_EQ(stackSize, replayRequest->getStackSize());
     EXPECT_EQ(volatileMemorySize, replayRequest->getVolatileMemorySize());
     EXPECT_EQ(resources, replayRequest->getResources());
-    EXPECT_EQ(constantMemory.size(), replayRequest->getConstantMemory().second);
-    EXPECT_THAT(replayRequest->getConstantMemory().first, VoidPointee(constantMemory));
-    EXPECT_EQ(instructionList.size(), replayRequest->getInstructionList().second);
-    EXPECT_THAT(static_cast<const void*>(replayRequest->getInstructionList().first),
-                VoidPointee(toByteVector(instructionList)));
+    EXPECT_THAT(constantMemory,
+        ElementsAreArray((uint8_t*)(replayRequest->getConstantMemory().first), replayRequest->getConstantMemory().second));
+    EXPECT_THAT(instructionList,
+        ElementsAreArray(replayRequest->getInstructionList().first, replayRequest->getInstructionList().second));
 }
 
 TEST(ReplayRequestTestStatic, CreateErrorGet) {
     uint32_t replayLength = 255;
-    StrictMock<MockConnection>* connection = new StrictMock<MockConnection>();
+    MockConnection* connection = new MockConnection();
     std::unique_ptr<StrictMock<MockResourceProvider>> resourceProvider(
             new StrictMock<MockResourceProvider>());
 
-    EXPECT_CALL(*connection, recv(_, _))
-            // Replay id length
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector<uint32_t>(replayId.size()))),
-                            ReturnArg<1>()))
-            // Replay id
-            .WillOnce(DoAll(WithArg<0>(SetVoidPointee(toByteVector(replayId))), ReturnArg<1>()))
-            // Replay length
-            .WillOnce(
-                    DoAll(WithArg<0>(SetVoidPointee(toByteVector(replayLength))), ReturnArg<1>()));
+    pushString(&connection->in, replayId);
+    pushUint32(&connection->in, replayLength);
 
     // Get replay request from resource provider fail
     EXPECT_CALL(*resourceProvider, get(Eq(replayId), _, _, replayLength)).WillOnce(Return(0));

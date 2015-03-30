@@ -49,7 +49,7 @@ private:
     // Fetch the resources from the underlying resource provider and saves them into the disk cache.
     // When fetching multiply resources it calculates the offset of the resources in the response
     // got from the fall back provider to save the correct data for each resource
-    bool fetch(const GazerConnection& gazer, void* buffer, const ResourceList& query);
+    bool fetch(const GazerConnection& gazer, void* buffer, uint32_t size, const ResourceList& query);
 
     // Fall back resource provider for the cases when the requested resource is not in the disk
     // cache
