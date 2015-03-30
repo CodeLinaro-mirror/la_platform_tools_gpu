@@ -274,7 +274,7 @@ func (b *Builder) CallNoPush(f FunctionInfo) {
 	})
 }
 
-// Copy pops the source address and then the target address from the top of the
+// Copy pops the target address and then the source address from the top of the
 // stack, and then copies Count bytes from source to target.
 func (b *Builder) Copy(size uint64) {
 	b.popStack()

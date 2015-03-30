@@ -190,7 +190,7 @@ func (a Pop) Encode(r value.PointerResolver, e binary.Encoder) error {
 	return opcode.Pop{Count: a.Count}.Encode(e)
 }
 
-// Copy is an Instruction that pops the source address and then the target
+// Copy is an Instruction that pops the target address and then the source
 // address from the top of the VM stack, and then copies Count bytes from
 // source to target.
 type Copy struct {
@@ -262,7 +262,7 @@ func (a Store) Encode(r value.PointerResolver, e binary.Encoder) error {
 	}
 }
 
-// Strcpy is an Instruction that pops the source address then the target address
+// Strcpy is an Instruction that pops the target address then the source address
 // from the top of the VM stack, and then copies at most MaxCount-1 bytes from
 // source to target. If the MaxCount is greater than the source string length,
 // then the target will be padded with 0s. The destination buffer will always be
