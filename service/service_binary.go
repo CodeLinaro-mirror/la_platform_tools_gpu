@@ -403,10 +403,8 @@ func (o AtomStream) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
-	for i := range o.Data {
-		if err := e.Uint8(o.Data[i]); err != nil {
-			return err
-		}
+	if err := e.Data(o.Data); err != nil {
+		return err
 	}
 	return nil
 }
@@ -416,12 +414,8 @@ func (o *AtomStream) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
-		for i := range o.Data {
-			if obj, err := d.Uint8(); err != nil {
-				return err
-			} else {
-				o.Data[i] = uint8(obj)
-			}
+		if err := d.Data(o.Data); err != nil {
+			return err
 		}
 	}
 	return nil
@@ -455,10 +449,8 @@ func (o Binary) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
-	for i := range o.Data {
-		if err := e.Uint8(o.Data[i]); err != nil {
-			return err
-		}
+	if err := e.Data(o.Data); err != nil {
+		return err
 	}
 	return nil
 }
@@ -468,12 +460,8 @@ func (o *Binary) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
-		for i := range o.Data {
-			if obj, err := d.Uint8(); err != nil {
-				return err
-			} else {
-				o.Data[i] = uint8(obj)
-			}
+		if err := d.Data(o.Data); err != nil {
+			return err
 		}
 	}
 	return nil
@@ -895,10 +883,8 @@ func (o MemoryInfo) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
-	for i := range o.Data {
-		if err := e.Uint8(o.Data[i]); err != nil {
-			return err
-		}
+	if err := e.Data(o.Data); err != nil {
+		return err
 	}
 	if err := e.Int32(int32(len(o.Stale))); err != nil {
 		return err
@@ -932,12 +918,8 @@ func (o *MemoryInfo) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
-		for i := range o.Data {
-			if obj, err := d.Uint8(); err != nil {
-				return err
-			} else {
-				o.Data[i] = uint8(obj)
-			}
+		if err := d.Data(o.Data); err != nil {
+			return err
 		}
 	}
 	if count, err := d.Int32(); err != nil {
@@ -1514,10 +1496,8 @@ func (o callImport) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(len(o.Data))); err != nil {
 		return err
 	}
-	for i := range o.Data {
-		if err := e.Uint8(o.Data[i]); err != nil {
-			return err
-		}
+	if err := e.Data(o.Data); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1532,12 +1512,8 @@ func (o *callImport) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Data = make(U8Array, count)
-		for i := range o.Data {
-			if obj, err := d.Uint8(); err != nil {
-				return err
-			} else {
-				o.Data[i] = uint8(obj)
-			}
+		if err := d.Data(o.Data); err != nil {
+			return err
 		}
 	}
 	return nil

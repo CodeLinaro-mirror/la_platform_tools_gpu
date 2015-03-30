@@ -39,6 +39,7 @@ type Style struct {
 type File struct {
 	Generated string
 	Package   string
+	IsTest    bool
 	Structs   []*Struct
 	Style
 }
