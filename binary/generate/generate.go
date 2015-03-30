@@ -110,7 +110,10 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
-		if decl.Anonymous() && decl.Type().String() == "android.googlesource.com/platform/tools/gpu/binary.Generate" {
+		tag := t.Tag(i)
+		if decl.Anonymous() &&
+			decl.Type().String() == "android.googlesource.com/platform/tools/gpu/binary.Generate" &&
+			tag != "disable" {
 			tagged = true
 			continue
 		}

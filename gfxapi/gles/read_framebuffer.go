@@ -26,15 +26,14 @@ var _ = replay.Replayer(readFramebufferColor{})
 // readFramebufferDepth is an atom used to postback the content of the currently
 // bound framebuffer's depth attachment.
 type readFramebufferDepth struct {
-	contextID atom.ContextID
-	database  database.Database
+	binary.Generate "disable"
+	contextID       atom.ContextID
+	database        database.Database
 }
 
-func (a readFramebufferDepth) ContextID() atom.ContextID   { return a.contextID }
-func (a readFramebufferDepth) Decode(binary.Decoder) error { return nil }
-func (a readFramebufferDepth) Encode(binary.Encoder) error { return nil }
-func (a readFramebufferDepth) TypeID() atom.TypeID         { return 0 }
-func (a readFramebufferDepth) Flags() atom.Flags           { return 0 }
+func (a readFramebufferDepth) ContextID() atom.ContextID { return a.contextID }
+func (a readFramebufferDepth) TypeID() atom.TypeID       { return 0 }
+func (a readFramebufferDepth) Flags() atom.Flags         { return 0 }
 
 func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
 	defer b.EndAtom()
@@ -224,15 +223,14 @@ func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Buil
 // readFramebufferColor is an atom used to postback the content of the currently
 // bound framebuffer's color attachment.
 type readFramebufferColor struct {
-	contextID     atom.ContextID
-	width, height uint32
+	binary.Generate "disable"
+	contextID       atom.ContextID
+	width, height   uint32
 }
 
-func (a readFramebufferColor) ContextID() atom.ContextID   { return a.contextID }
-func (a readFramebufferColor) Decode(binary.Decoder) error { return nil }
-func (a readFramebufferColor) Encode(binary.Encoder) error { return nil }
-func (a readFramebufferColor) TypeID() atom.TypeID         { return 0 }
-func (a readFramebufferColor) Flags() atom.Flags           { return 0 }
+func (a readFramebufferColor) ContextID() atom.ContextID { return a.contextID }
+func (a readFramebufferColor) TypeID() atom.TypeID       { return 0 }
+func (a readFramebufferColor) Flags() atom.Flags         { return 0 }
 
 func (a readFramebufferColor) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
 	defer b.EndAtom()
