@@ -14,36 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_GFXSPY_ENCODER_H
-#define ANDROID_GFXSPY_ENCODER_H
+#ifndef GAPIC_GET_GFX_PROC_ADDRESS_H
+#define GAPIC_GET_GFX_PROC_ADDRESS_H
 
-#include <stdint.h>
+namespace gapic {
 
-#include "id.h"
+// GetGfxProcAddress returns the function pointer to the function with the given
+// name, or nullptr if the function was not found.
+void* GetGfxProcAddress(const char* name);
 
-class StreamWriter;
+} // namespace gapic
 
-class Encoder {
-public:
-    Encoder(StreamWriter* output);
-
-    void Bool(bool);
-    void S8(int8_t);
-    void U8(uint8_t);
-    void U16(uint16_t);
-    void S16(int16_t);
-    void F32(float);
-    void U32(uint32_t);
-    void S32(int32_t);
-    void F64(double);
-    void U64(uint64_t);
-    void S64(int64_t);
-    void String(const char*);
-    void Data(const void*, uint64_t);
-    void Id(const Id&);
-
-private:
-    StreamWriter* mOutput;
-};
-
-#endif // ANDROID_GFXSPY_ENCODER_H
+#endif // GAPIC_GET_GFX_PROC_ADDRESS_H

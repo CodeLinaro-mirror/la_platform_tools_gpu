@@ -14,18 +14,34 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_GFXSPY_ID_H
-#define ANDROID_GFXSPY_ID_H
+#ifndef GAPIC_ID_H
+#define GAPIC_ID_H
 
 #include <stdint.h>
+#include <functional>
 
+namespace gapic {
+
+// Id is a 20-byte unique identifier.
 struct Id {
     Id();
+
+    // Construct an Id with the hash of the given memory address.
     Id(const void* ptr, uint64_t size);
 
-    static void hash(const void* ptr, uint64_t size, Id& out);
+    bool operator == (const Id& rhs) const;
 
     uint8_t data[20];
 };
 
-#endif // ANDROID_GFXSPY_ID_H
+} // namespace gapic
+
+namespace std {
+template <> struct hash<gapic::Id> {
+    inline size_t operator()(const gapic::Id& id) const { 
+        return *reinterpret_cast<const size_t*>(id.data);
+    }
+};
+}
+
+#endif // GAPIC_ID_H

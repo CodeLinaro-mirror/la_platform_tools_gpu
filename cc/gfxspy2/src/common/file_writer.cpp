@@ -16,6 +16,8 @@
 
 #include "file_writer.h"
 
+namespace gapic {
+
 FileWriter::FileWriter(const char* path) {
     mFile = fopen(path, "wb");
     // TODO: assert(mFile != nullptr)
@@ -28,3 +30,5 @@ FileWriter::~FileWriter() {
 void FileWriter::Write(const void* data, uint64_t size) {
     fwrite(data, static_cast<size_t>(size), 1, mFile);
 }
+
+} // namespace gapic

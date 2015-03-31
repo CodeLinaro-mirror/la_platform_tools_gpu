@@ -19,6 +19,8 @@
 
 #include <string>
 
+namespace gapic {
+
 Encoder::Encoder(StreamWriter* output) : mOutput(output) {}
 
 void Encoder::Bool(bool v) {
@@ -125,16 +127,18 @@ void Encoder::S64(int64_t v) {
 }
 
 void Encoder::String(const char* v) {
-    uint32_t len = strlen(v);
+    uint32_t len = v != nullptr ? static_cast<uint32_t>(strlen(v)) : 0;
     U32(len);
     mOutput->Write(v, len);
 }
 
-void Encoder::Data(const void* ptr, uint64_t size) {
-    U64(size);
+void Encoder::Data(const void* ptr, int32_t size) {
+    S32(size);
     mOutput->Write(ptr, size);
 }
 
-void Encoder::Id(const ::Id& id) {
-    mOutput->Write(&id, sizeof(id));
+void Encoder::Id(const gapic::Id& id) {
+    mOutput->Write(&id.data, 20);
 }
+
+} // namespace gapic
