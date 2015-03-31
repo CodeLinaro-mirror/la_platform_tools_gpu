@@ -144,8 +144,8 @@ bool Interpreter::post() {
 
 bool Interpreter::copy(uint32_t opcode) {
     uint32_t count = extract26bitData(opcode);
-    const void* source = mStack.pop<const void*>();
     void* target = mStack.pop<void*>();
+    const void* source = mStack.pop<const void*>();
     if (source == nullptr) {
         CAZE_WARNING("Error: copy source address is null\n");
         return false;

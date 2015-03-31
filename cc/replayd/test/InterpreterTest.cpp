@@ -199,8 +199,8 @@ TEST_F(InterpreterTest, Copy) {
     mMemoryManager->setConstantMemory({constantBaseAddress, 10});
 
     std::vector<uint32_t> instructions{
-            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 987),
             instruction(Interpreter::InstructionCode::PUSH_I, BaseType::ConstantPointer, 5),
+            instruction(Interpreter::InstructionCode::PUSH_I, BaseType::VolatilePointer, 987),
             instruction(Interpreter::InstructionCode::COPY, 3)};
     bool res = mInterpreter->run({&instructions.front(), instructions.size()});
     EXPECT_TRUE(res);

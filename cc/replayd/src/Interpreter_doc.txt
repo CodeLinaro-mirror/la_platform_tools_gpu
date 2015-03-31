@@ -107,17 +107,17 @@ Opcodes
     Copy
         <code:6> <count:26>
             * COPY(count) [-2 (pointer, pointer)]
-            * Pop the source address then the target address from the top of the stack, and then
+            * Pop the target address then the source address from the top of the stack, and then
               copy count bytes from source to target.
         <code:6> <n:26>
             * CLONE(n) [+1 (any type)]
             * Copy the n-th element from the stack to the top of the stack
         <code:6> <max-count:26>
-            STRCPY() [-2 (pointer, pointer)]
-                * Pop the source address then the target address from the top of the stack, and
-                  then copy at most max-count minus one bytes from source to target. If the
-                  max-count is greater than the source string length, then the target will be padded
-                  with 0s. The destination buffer will always be 0-terminated.
+            * STRCPY() [-2 (pointer, pointer)]
+            * Pop the target address then the source address from the top of the stack, and
+              then copy at most max-count minus one bytes from source to target. If the
+              max-count is greater than the source string length, then the target will be padded
+              with 0s. The destination buffer will always be 0-terminated.
 
     Calculation
         <code:6> <value:26>
