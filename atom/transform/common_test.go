@@ -23,17 +23,16 @@ import (
 )
 
 type testAtom struct {
+	binary.Generate
 	ID        atom.ID
 	Type      atom.TypeID
 	Context   atom.ContextID
 	AtomFlags atom.Flags
 }
 
-func (a testAtom) TypeID() atom.TypeID         { return a.Type }
-func (a testAtom) ContextID() atom.ContextID   { return a.Context }
-func (a testAtom) Flags() atom.Flags           { return a.AtomFlags }
-func (a testAtom) Encode(binary.Encoder) error { return nil }
-func (a testAtom) Decode(binary.Decoder) error { return nil }
+func (a testAtom) TypeID() atom.TypeID       { return a.Type }
+func (a testAtom) ContextID() atom.ContextID { return a.Context }
+func (a testAtom) Flags() atom.Flags         { return a.AtomFlags }
 
 type atomAtomIDList []atomAtomID
 
@@ -44,7 +43,7 @@ func list(atoms ...interface{}) atomAtomIDList {
 	l := atomAtomIDList{}
 	for _, a := range atoms {
 		switch a := a.(type) {
-		case testAtom:
+		case *testAtom:
 			l = append(l, atomAtomID{a, a.ID})
 		case atomAtomID:
 			l = append(l, a)

@@ -372,7 +372,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 		idx = uint32(len(b.resources))
 		b.resourceIDToIdx[resourceID] = idx
 		b.resources = append(b.resources, protocol.ResourceInfo{
-			ID:   resourceID,
+			ID:   resourceID.String(),
 			Size: uint32(rng.Size),
 		})
 	}

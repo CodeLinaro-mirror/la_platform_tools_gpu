@@ -22,25 +22,25 @@ import (
 
 func TestEarlyTerminator(t *testing.T) {
 	inputs := list(
-		testAtom{ID: 10},
-		testAtom{ID: 30},
-		testAtom{ID: 20},
-		testAtom{ID: 50},
-		testAtom{ID: 90},
-		testAtom{ID: 70},
-		testAtom{ID: 80},
-		testAtom{ID: 00},
-		testAtom{ID: 60},
-		testAtom{ID: 40},
+		&testAtom{ID: 10},
+		&testAtom{ID: 30},
+		&testAtom{ID: 20},
+		&testAtom{ID: 50},
+		&testAtom{ID: 90},
+		&testAtom{ID: 70},
+		&testAtom{ID: 80},
+		&testAtom{ID: 00},
+		&testAtom{ID: 60},
+		&testAtom{ID: 40},
 		atomAtomID{&atom.EOS{}, 0},
 	)
 	expected := list(
-		testAtom{ID: 10},
-		testAtom{ID: 30},
-		testAtom{ID: 20},
-		testAtom{ID: 50},
-		testAtom{ID: 90},
-		testAtom{ID: 70},
+		&testAtom{ID: 10},
+		&testAtom{ID: 30},
+		&testAtom{ID: 20},
+		&testAtom{ID: 50},
+		&testAtom{ID: 90},
+		&testAtom{ID: 70},
 		atomAtomID{&atom.EOS{}, 0},
 	)
 

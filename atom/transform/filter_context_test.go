@@ -22,38 +22,38 @@ import (
 
 func TestContextFilter(t *testing.T) {
 	inputs := list(
-		testAtom{ID: 10, Context: 1},
-		testAtom{ID: 30, Context: 2},
-		testAtom{ID: 20, Context: 3},
-		testAtom{ID: 50, Context: 1},
-		testAtom{ID: 90, Context: 2},
-		testAtom{ID: 70, Context: 3},
-		testAtom{ID: 80, Context: 2},
-		testAtom{ID: 00, Context: 3},
-		testAtom{ID: 60, Context: 3},
-		testAtom{ID: 40, Context: 3},
+		&testAtom{ID: 10, Context: 1},
+		&testAtom{ID: 30, Context: 2},
+		&testAtom{ID: 20, Context: 3},
+		&testAtom{ID: 50, Context: 1},
+		&testAtom{ID: 90, Context: 2},
+		&testAtom{ID: 70, Context: 3},
+		&testAtom{ID: 80, Context: 2},
+		&testAtom{ID: 00, Context: 3},
+		&testAtom{ID: 60, Context: 3},
+		&testAtom{ID: 40, Context: 3},
 		atomAtomID{&atom.EOS{}, 999},
 	)
 
 	checkTransform(t, ContextFilter(1), inputs, list(
-		testAtom{ID: 10, Context: 1},
-		testAtom{ID: 50, Context: 1},
+		&testAtom{ID: 10, Context: 1},
+		&testAtom{ID: 50, Context: 1},
 		atomAtomID{&atom.EOS{}, 999},
 	))
 
 	checkTransform(t, ContextFilter(2), inputs, list(
-		testAtom{ID: 30, Context: 2},
-		testAtom{ID: 90, Context: 2},
-		testAtom{ID: 80, Context: 2},
+		&testAtom{ID: 30, Context: 2},
+		&testAtom{ID: 90, Context: 2},
+		&testAtom{ID: 80, Context: 2},
 		atomAtomID{&atom.EOS{}, 999},
 	))
 
 	checkTransform(t, ContextFilter(3), inputs, list(
-		testAtom{ID: 20, Context: 3},
-		testAtom{ID: 70, Context: 3},
-		testAtom{ID: 00, Context: 3},
-		testAtom{ID: 60, Context: 3},
-		testAtom{ID: 40, Context: 3},
+		&testAtom{ID: 20, Context: 3},
+		&testAtom{ID: 70, Context: 3},
+		&testAtom{ID: 00, Context: 3},
+		&testAtom{ID: 60, Context: 3},
+		&testAtom{ID: 40, Context: 3},
 		atomAtomID{&atom.EOS{}, 999},
 	))
 }
