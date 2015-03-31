@@ -11,10 +11,24 @@ extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType typ
 extern string substr(string s, s32 start, s32 end)
 extern s32    stateVariableSize(StateVariable v)
 extern void   memcpy(any dest, any src, s32 size)
+extern void   read(pointer p, s32 offset, s32 size)
+extern void   write(pointer p, s32 offset, s32 size)
 
 /////////////////////////////////////////////////////////////////
 // Macros
 /////////////////////////////////////////////////////////////////
+
+macro s32 vertexAttribTypeSize(VertexAttribType t) {
+  return switch (t) {
+    case GL_BYTE:           1
+    case GL_UNSIGNED_BYTE:  1
+    case GL_SHORT:          2
+    case GL_UNSIGNED_SHORT: 2
+    case GL_FIXED:          4
+    case GL_FLOAT:          4
+  }
+}
+
 macro s32 min(s32 a, s32 b) {
   return switch(a < b) {
     case true:  a
@@ -1016,12 +1030,13 @@ class VertexArray {}
 
 @internal
 class VertexAttributeArray {
-    bool             Enabled = false
-    s32              Size = 4
-    VertexAttribType Type = GL_FLOAT
+    bool             Enabled    = false
+    s32              Size       = 4        // Number of components. 1, 2, 3 or 4.
+    VertexAttribType Type       = GL_FLOAT // Type of each component.
     bool             Normalized = false
-    s32              Stride = 0
-    pointer          Data
+    s32              Stride     = 0        // Byte offset between each consecutive attribute, or 0 for tight.
+    BufferId         Buffer     = 0
+    pointer          Pointer
 }
 
 @internal
@@ -1240,6 +1255,47 @@ cmd void eglSwapBuffers() {  // HACK: Hacked to match the spy's output
     http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
 }
 
+/////////////////////////////////////////////////////////////////
+// WGL APIs
+/////////////////////////////////////////////////////////////////
+/*
+type pointer HGLRC
+type int     BOOL
+
+@replay_custom
+@ReturnSize(0)
+cmd HGLRC wglCreateContext(HDC hdc) {
+    assert len(hdc) >= 0
+    return ?
+}
+
+@replay_custom
+cmd BOOL  wglDeleteContext(HGLRC hdc) {
+    assert len(hdc) >= 0
+    return ?
+}
+
+@replay_custom
+cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+    assert len(hdc) >= 0
+    assert len(hglrc) >= 0
+    return ?
+}
+
+@replay_custom
+@ReturnSize(0)
+cmd HDC wglGetCurrentDC() {
+    return ?
+}
+*/
+
+type pointer HDC
+
+@replay_custom
+@EndOfFrame
+cmd void wglSwapBuffers(HDC hdc) {
+    http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
+}
 /////////////////////////////////////////////////////////////////
 // GLES 1 APIs
 /////////////////////////////////////////////////////////////////
@@ -1490,7 +1546,8 @@ cmd void glVertexAttribPointer(AttributeLocation location,
     a.Type       = type
     a.Normalized = normalized
     a.Stride     = stride
-    a.Data       = data as pointer
+    a.Pointer    = data as pointer
+    a.Buffer     = BoundBuffers[GL_ARRAY_BUFFER]
 }
 
 cmd void glGetActiveAttrib(ProgramId            program,
@@ -2049,6 +2106,7 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
@@ -2065,6 +2123,8 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
+            memcpy(l.Data, data, l.Size)
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
             t.Cubemap[level] = cube
@@ -2097,6 +2157,7 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
@@ -2113,6 +2174,7 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
@@ -2166,6 +2228,7 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Size:   image_size,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
@@ -2182,6 +2245,7 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Size:   image_size,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
+            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
@@ -2347,6 +2411,7 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml
     id := BoundBuffers[target]
     b  := Instances.Buffers[id]
+    read(data as pointer, 0, size)
     memcpy(b.Data, data, size)
     b.Size = size
     b.Usage = usage
@@ -2648,7 +2713,7 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
 cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              framebuffer_target,
                                                FramebufferAttachment          attachment,
                                                FramebufferAttachmentParameter parameter,
-                                               inout array<s32>                 value) {
+                                               inout array<s32>               value) {
     http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml
     assert len(value) >= 1
     target := switch (framebuffer_target) {
@@ -2696,6 +2761,8 @@ cmd void glDrawElements(DrawMode       draw_mode,
             }
         }
     }*/
+
+    // TODO: Memory observations
 }
 
 @DrawCall
@@ -2705,6 +2772,18 @@ cmd void glDrawArrays(DrawMode draw_mode, s32 first_index, s32 index_count) {
     // for a in BoundFramebuffers[GL_FRAMEBUFFER].Attachments {
         // modifies(a.Levels[0].Data) // COMPILATION ERROR
     // }
+
+    for i in (0 .. 64) { // TODO: Count
+        arr := VertexAttributeArrays[i as AttributeLocation]
+        if arr.Enabled {
+          elsize := vertexAttribTypeSize(arr.Type) * arr.Size // TODO: Stride
+          size   := elsize * index_count
+          offset := elsize * first_index
+          if arr.Buffer == 0 {
+            read(arr.Pointer, offset, size)
+          }
+        }
+    }
 }
 
 cmd void glFlush() {

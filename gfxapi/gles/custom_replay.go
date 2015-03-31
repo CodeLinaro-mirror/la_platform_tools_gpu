@@ -133,3 +133,4 @@ func (ω *GlGetAttribLocation) Replay(id atom.ID, s *state.State, b *builder.Bui
 func (ω *EglCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
 func (ω *EglMakeCurrent) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *EglSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
+func (ω *WglSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}

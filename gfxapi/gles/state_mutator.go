@@ -178,6 +178,14 @@ func (ϟa *EglSwapBuffers) Mutate(ϟs *state.State) error {
 	}
 	return nil
 }
+func (ϟa *WglSwapBuffers) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := WglSwapBuffers_Out{}
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
+		log.Printf("Applying wglSwapBuffers expected %v got %v", ϟa.Out, ϟo)
+	}
+	return nil
+}
 func (ϟa *GlEnableClientState) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlEnableClientState_Out{}
@@ -493,7 +501,8 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *state.State) error {
 	a.Type = ϟa.In.Type
 	a.Normalized = ϟa.In.Normalized
 	a.Stride = ϟa.In.Stride
-	a.Data = memory.Pointer(ϟa.In.Data)
+	a.Pointer = memory.Pointer(ϟa.In.Data)
+	a.Buffer = ϟc.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER)
 	_ = a
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glVertexAttribPointer expected %v got %v", ϟa.Out, ϟo)
@@ -1504,6 +1513,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1524,6 +1534,11 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
+		l.Data.Write(ϟs.Memory.Slice(memory.Range{
+			Base: memory.Pointer(ϟa.In.Data),
+			Size: uint64(l.Size),
+		}))
 		cube := t.Cubemap.Get(ϟa.In.Level) // CubemapLevel
 		cube.Faces[CubeMapImageTarget(ϟa.In.Target)] = l
 		t.Cubemap[ϟa.In.Level] = cube
@@ -1556,6 +1571,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1576,6 +1592,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1628,6 +1645,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1648,6 +1666,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
+		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1896,6 +1915,7 @@ func (ϟa *GlBufferData) Mutate(ϟs *state.State) error {
 	ϟo := GlBufferData_Out{}
 	id := ϟc.BoundBuffers.Get(ϟa.In.Target) // BufferId
 	b := ϟc.Instances.Buffers.Get(id)       // BufferRef
+	read(memory.Pointer(ϟa.In.Data), 0, ϟa.In.Size)
 	b.Data.Write(ϟs.Memory.Slice(memory.Range{
 		Base: memory.Pointer(ϟa.In.Data),
 		Size: uint64(ϟa.In.Size),
@@ -2463,6 +2483,40 @@ func (ϟa *GlDrawElements) Mutate(ϟs *state.State) error {
 func (ϟa *GlDrawArrays) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDrawArrays_Out{}
+	for i := int32(0); i < 64; i++ {
+		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayRef
+		if arr.Enabled {
+			vertexAttribTypeSize_4_t := arr.Type // VertexAttribType
+			vertexAttribTypeSize_4_result := func() (result int32) {
+				switch vertexAttribTypeSize_4_t {
+				case VertexAttribType_GL_BYTE:
+					return 1
+				case VertexAttribType_GL_UNSIGNED_BYTE:
+					return 1
+				case VertexAttribType_GL_SHORT:
+					return 2
+				case VertexAttribType_GL_UNSIGNED_SHORT:
+					return 2
+				case VertexAttribType_GL_FIXED:
+					return 4
+				case VertexAttribType_GL_FLOAT:
+					return 4
+				default:
+					// TODO: better unmatched handling
+					log.Panicf("Unmatched switch in capture")
+					return result
+				}
+			}() // s32
+			elsize := (vertexAttribTypeSize_4_result) * (arr.Size) // s32
+			size := (elsize) * (ϟa.In.IndexCount)                  // s32
+			offset := (elsize) * (ϟa.In.FirstIndex)                // s32
+			if (arr.Buffer) == (BufferId(0)) {
+				read(arr.Pointer, offset, size)
+			}
+			_, _, _, _, _ = vertexAttribTypeSize_4_t, vertexAttribTypeSize_4_result, elsize, size, offset
+		}
+		_ = arr
+	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glDrawArrays expected %v got %v", ϟa.Out, ϟo)
 	}

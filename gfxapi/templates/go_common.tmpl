@@ -31,9 +31,9 @@ limitations under the License.
   {{else if IsArray         $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsStaticArray   $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsMap           $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsPointer       $}}*{{Macro "Go.QualifiedName" $.To}}
   {{else if IsClass         $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsEnum          $}}{{Macro "Go.QualifiedName" $}}
+  {{else if IsPointer       $}}*{{Macro "Go.Type" $.To}}
   {{else if IsBool          $}}bool
   {{else if IsInt           $}}int64
   {{else if IsUint          $}}uint64
@@ -56,8 +56,6 @@ limitations under the License.
 {{end}}
 
 
-{{/*
--------------------------------------------------------------------------------
 {{/*
 -------------------------------------------------------------------------------
   Emits the logic to decode the specified variable.

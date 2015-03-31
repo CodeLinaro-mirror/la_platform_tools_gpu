@@ -61,6 +61,22 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
+    HDC hdc = stack->pop<HDC>();
+    if (stack->isValid()) {
+        CAZE_INFO("wglSwapBuffers(%p)\n", hdc);
+        if (wglSwapBuffers != nullptr) {
+            wglSwapBuffers(hdc);
+        } else {
+            CAZE_WARNING("Attempted to call unsupported function wglSwapBuffers\n");
+        }
+        return true;
+    } else {
+        CAZE_WARNING("Error during calling function wglSwapBuffers\n");
+        return false;
+    }
+}
+
 bool callGlEnableClientState(Stack* stack, bool pushReturn) {
     ArrayType type = stack->pop<ArrayType>();
     if (stack->isValid()) {
@@ -3404,6 +3420,7 @@ bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
 PFNEGLCREATECONTEXT eglCreateContext = nullptr;
 PFNEGLMAKECURRENT eglMakeCurrent = nullptr;
 PFNEGLSWAPBUFFERS eglSwapBuffers = nullptr;
+PFNWGLSWAPBUFFERS wglSwapBuffers = nullptr;
 PFNGLENABLECLIENTSTATE glEnableClientState = nullptr;
 PFNGLDISABLECLIENTSTATE glDisableClientState = nullptr;
 PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES = nullptr;
@@ -3590,6 +3607,7 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::EglCreateContext, callEglCreateContext);
     interpreter->registerFunction(Ids::EglMakeCurrent, callEglMakeCurrent);
     interpreter->registerFunction(Ids::EglSwapBuffers, callEglSwapBuffers);
+    interpreter->registerFunction(Ids::WglSwapBuffers, callWglSwapBuffers);
     interpreter->registerFunction(Ids::GlEnableClientState, callGlEnableClientState);
     interpreter->registerFunction(Ids::GlDisableClientState, callGlDisableClientState);
     interpreter->registerFunction(Ids::GlGetProgramBinaryOES, callGlGetProgramBinaryOES);
@@ -3782,6 +3800,7 @@ void Initialize() {
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers = reinterpret_cast<PFNEGLSWAPBUFFERS>(GetGfxProcAddress("eglSwapBuffers"));
+    wglSwapBuffers = reinterpret_cast<PFNWGLSWAPBUFFERS>(GetGfxProcAddress("wglSwapBuffers"));
     glEnableClientState =
             reinterpret_cast<PFNGLENABLECLIENTSTATE>(GetGfxProcAddress("glEnableClientState"));
     glDisableClientState =

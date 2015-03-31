@@ -218,8 +218,8 @@ limitations under the License.
 {{define "PostbackType"}}
   {{AssertType $ "Type"}}
 
-  {{if IsPointerType $}}[]byte
-  {{else              }}{{Macro "Go.Type" $}}
+  {{if IsPointerType (Underlying $)}}[]byte
+  {{else}}{{Macro "Go.Type" $}}
   {{end}}
 {{end}}
 
@@ -237,11 +237,10 @@ limitations under the License.
   {{     if IsString      $.Type}}if val, err := readString(d, {{$.Count}}); err == nil { {{$.Name}} = val } else { return err }
   {{else if IsPointerType $.Type}}if val, err := readBytes(d, {{$.Count}});  err == nil { {{$.Name}} = val } else { return err }
   {{else if IsPseudonym   $.Type}}
-    {{$underlying := $.Type.To}}
     {
-      var x {{Macro "Go.Type" $underlying}}
-      {{Macro "DecodePostback" "Type" $underlying "Name" "x" "Count" $.Count}}
-      {{$.Name}} = {{$.Type.Name}}(x)
+      var x {{Macro "PostbackType" $.Type.To}}
+      {{Macro "DecodePostback" "Type" $.Type.To "Name" "x" "Count" $.Count}}
+      {{$.Name}} = {{Macro "PostbackType" $.Type}}(x)
     }
   {{else if IsArray       $.Type}}
     {{$.Name}} = make({{Macro "PostbackType" $.Type}}, {{$.Count}})
@@ -461,7 +460,9 @@ limitations under the License.
   {{else if IsU64           $.Type}}8
   {{else if IsF64           $.Type}}8
   {{else if IsEnum          $.Type}}4
-  {{else if IsPointer       $.Type}}uint64(b.PointerSize())
+  {{else if IsPointer       $.Type}}uint64(ϟb.PointerSize())
+  {{else if IsInt           $.Type}}uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */
+  {{else if IsUint          $.Type}}uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(unsigned int) */
   {{else                          }}{{Error "macro SizeOf '%s' called with unsupported type: %v" $.Name $.Type}}
   {{end}}
 {{end}}
@@ -535,6 +536,8 @@ limitations under the License.
   {{else if IsF64         $.Type}}value.F64({{$.Name}})
   {{else if IsU64         $.Type}}value.U64({{$.Name}})
   {{else if IsS64         $.Type}}value.S64({{$.Name}})
+  {{else if IsInt         $.Type}}value.S64({{$.Name}})
+  {{else if IsUint        $.Type}}value.U64({{$.Name}})
   {{else if IsString      $.Type}}ϟb.String({{$.Name}})
   {{else if IsPointerType $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsEnum        $.Type}}value.U32({{$.Name}})

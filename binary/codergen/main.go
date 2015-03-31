@@ -109,9 +109,9 @@ func run() error {
 			if err != nil {
 				return err
 			}
-			filename := file.Package+"_binary.go"
+			filename := file.Package + "_binary.go"
 			if file.IsTest {
-				filename = file.Package+"_binary_test.go"
+				filename = file.Package + "_binary_test.go"
 			}
 			err = ioutil.WriteFile(path.Join(wd, filename), result, os.ModePerm)
 			if err != nil {

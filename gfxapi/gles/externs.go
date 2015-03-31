@@ -1,6 +1,13 @@
 package gles
 
-import "fmt"
+import (
+	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/memory"
+)
+
+func read(memory.Pointer, int32, int32)  {} // TEMP
+func write(memory.Pointer, int32, int32) {} // TEMP
 
 func strlen(str string) int32 {
 	return int32(len(str))
@@ -185,6 +192,7 @@ func stateVariableSize(v StateVariable) int32 {
 	case StateVariable_GL_GPU_DISJOINT_EXT:
 		return 1
 	default:
-		panic(fmt.Sprintf("Unknown size for state variable: %s\n", v.String()))
+		fmt.Printf("Warning: Unknown size for state variable: %s\n", v.String())
+		return 0
 	}
 }
