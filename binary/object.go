@@ -16,23 +16,49 @@ package binary
 
 import "fmt"
 
+// Object is the interface to any class that wants to be encoded/decoded.
 type Object interface {
-	Encodable
-	Decodable
+	// Class returns the serialize information and functionality for this type.
+	// The method should be valid on a nil pointer.
+	Class() Class
 }
 
-// Generate is used to tag structures that need auto generated Encode and Decode
-// methods.
+// Class represents a struct type in the binary registry.
+type Class interface {
+	// ID should be a sha1 has of the types signature, such that
+	// no two classes generate the same ID, and any change to the types name or
+	// fields causes it's id to change.
+	ID() ID
+
+	// Encode writes the supplied object to the supplied Encoder.
+	// The object must be a type the Class understands, the implementation is
+	// allowed to panic if it is not.
+	Encode(Encoder, Object) error
+
+	// Decode reads a single object from the supplied Decoder.
+	Decode(Decoder) (Object, error)
+
+	// DecodeTo reads into the supplied object from the supplied Decoder.
+	// The object must be a type the Class understands, the implementation is
+	// allowed to panic if it is not.
+	DecodeTo(Decoder, Object) error
+
+	// Skip moves over a single object from the supplied Decoder.
+	// This must skip the same data that Decode would have read.
+	Skip(Decoder) error
+}
+
+// Generate is used to tag structures that need an auto generated Class.
 // The codergen function searches packages for structs that have this type as an
 // anonymous field, and then automatically generates the encoding and decoding
 // functionality for those structures. For example, the following struct would
-// create the methods needed to encode and decode the Name and Value fields, as
-// well as registering a type identifier.
+// create the Class with methods needed to encode and decode the Name and Value
+// fields, and register that class.
 // The embedding will also fully implement the binary.Object interface, but with
-// methods that panic. This will get overridden with the generated Encode and
-// Decode methods. This is important because it means the package is resolvable
-// without the generated code, which means the types can be correctly evaluated
-// during the generation process.
+// methods that panic. This will get overridden with the generated Methods.
+// This is important because it means the package is resolvable without the
+// generated code, which means the types can be correctly evaluated during the
+// generation process.
 //
 // type MyNamedValue struct {
 //    binary.Generate
@@ -41,8 +67,6 @@ type Object interface {
 // }
 type Generate struct{}
 
-func (Generate) Encode(Encoder) error { panic(fmt.Errorf("Missing encode function")) }
-func (Generate) Decode(Decoder) error { panic(fmt.Errorf("Missing decode function")) }
-func (Generate) Skip(Decoder) error   { panic(fmt.Errorf("Missing skip function")) }
+func (Generate) Class() Class { panic(fmt.Errorf("Class() not implemented")) }
 
 var _ Object = Generate{} // Verify that Generate implements Object.

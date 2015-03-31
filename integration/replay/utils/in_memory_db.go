@@ -83,10 +83,10 @@ func (d *inMemoryDatabase) Captures() (map[string]binary.ID, error) {
 
 func (d *inMemoryDatabase) Close() {}
 
-func hash(o binary.Encodable) binary.ID {
+func hash(o binary.Object) binary.ID {
 	b := bytes.Buffer{}
 	e := cyclic.Encoder(vle.Writer(&b))
-	if err := o.Encode(e); err != nil {
+	if err := e.Value(o); err != nil {
 		panic(err)
 	}
 	return binary.NewID(b.Bytes())

@@ -11,18 +11,25 @@ import (
 )
 
 func init() {
-	//struct rpc.Error { message:string }
-	registry.Add(binary.ID{0xfe, 0x76, 0xe0, 0x3a, 0x44, 0xa3, 0xc0, 0x38, 0xdb, 0x62, 0x2e, 0xe3, 0xf3, 0xe4, 0xf9, 0x87, 0xf9, 0x19, 0xbe, 0xfd}, &Error{})
+	registry.Add((*Error)(nil).Class())
 }
 
-func (o Error) Encode(e binary.Encoder) error {
+var (
+	binaryIDError = binary.ID{0xfe, 0x76, 0xe0, 0x3a, 0x44, 0xa3, 0xc0, 0x38, 0xdb, 0x62, 0x2e, 0xe3, 0xf3, 0xe4, 0xf9, 0x87, 0xf9, 0x19, 0xbe, 0xfd}
+)
+
+type binaryClassError struct{}
+
+func (*Error) Class() binary.Class {
+	return (*binaryClassError)(nil)
+}
+func doEncodeError(e binary.Encoder, o *Error) error {
 	if err := e.String(o.message); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *Error) Decode(d binary.Decoder) error {
+func doDecodeError(d binary.Decoder, o *Error) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -30,11 +37,21 @@ func (o *Error) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Error) Skip(d binary.Decoder) error {
+func doSkipError(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassError) ID() binary.ID { return binaryIDError }
+func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeError(e, obj.(*Error))
+}
+func (*binaryClassError) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Error{}
+	return obj, doDecodeError(d, obj)
+}
+func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeError(d, obj.(*Error))
+}
+func (*binaryClassError) Skip(d binary.Decoder) error { return doSkipError(d) }

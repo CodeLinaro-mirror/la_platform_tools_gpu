@@ -45,7 +45,7 @@ type smallArchive struct {
 	size           int
 	path           string
 	compactionSize int
-	insertCh       chan<- keyValue
+	insertCh       chan<- *keyValue
 	compacting     bool
 }
 
@@ -81,8 +81,8 @@ func CreateSmallArchive(path string, compactionSize int) Store {
 	// Use a buffered reader to quickly read the archive records
 	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(data, 256<<10)))
 	for {
-		var r keyValue
-		if err := r.Decode(d); err != io.EOF {
+		r := &keyValue{}
+		if err := d.Value(r); err != io.EOF {
 			if err != nil {
 				panic(err)
 			}
@@ -162,17 +162,17 @@ func (s *smallArchive) compaction(l log.Logger) error {
 	// - In worker: put everything back to normal.
 
 	// Create a channel for concurrent updates.
-	insertCh := make(chan keyValue, 64)
+	insertCh := make(chan *keyValue, 64)
 	s.insertCh = insertCh
 
 	// Make an in-memory copy of the records. By copying into an array we can manage
 	// about 20k records per millisecond.
 
 	beforeCopyRecords := time.Now()
-	recordsCopyArray := make([]keyValue, len(s.records))
+	recordsCopyArray := make([]*keyValue, len(s.records))
 	i := 0
 	for id, data := range s.records {
-		recordsCopyArray[i] = keyValue{id: id, buffer: data}
+		recordsCopyArray[i] = &keyValue{id: id, buffer: data}
 		i++
 	}
 	afterCopyRecords := time.Now()
@@ -196,13 +196,13 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		didSecondInsertPath := false
 		didThirdInsertPath := false
 
-		insertFun := func(insert keyValue) {
+		insertFun := func(insert *keyValue) {
 			if prevSize, ok := recordsWritten[insert.id]; ok {
 				// As new records can be added we need to keep track of waste
 				waste += prevSize
 			}
 
-			err := insert.Encode(e)
+			err := e.Value(insert)
 			if err != nil {
 				panic(err)
 			}
@@ -226,7 +226,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		}
 
 		for _, record := range recordsCopyArray {
-			err := record.Encode(e)
+			err := e.Value(record)
 			if err != nil {
 				panic(err)
 			}
@@ -378,13 +378,13 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 			s.waste += len(prevRecord)
 		}
 
-		record := keyValue{
+		record := &keyValue{
 			id:     id,
 			buffer: data,
 		}
 
 		e := cyclic.Encoder(vle.Writer(s.data))
-		err := record.Encode(e)
+		err := e.Value(record)
 		if err != nil {
 			panic(err)
 		}
@@ -433,7 +433,7 @@ func (s *smallArchive) Load(id binary.ID, logger log.Logger, out binary.Object) 
 		}
 
 		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(rec)))
-		size, err = len(rec), out.Decode(d)
+		size, err = len(rec), d.Value(out)
 		return
 	}
 	<-done

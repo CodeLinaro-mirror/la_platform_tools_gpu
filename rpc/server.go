@@ -28,7 +28,7 @@ import (
 )
 
 // Handler is the signature for a function that handles incoming rpc calls.
-type Handler func(interface{}) binary.Encodable
+type Handler func(interface{}) binary.Object
 
 // Server implements the receiving side of a client server rpc pair.
 // It listens on the reader for calls, and dispatches them to the supplied handler.

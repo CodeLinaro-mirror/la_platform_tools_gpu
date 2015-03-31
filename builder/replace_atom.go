@@ -49,7 +49,8 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 		return err
 	}
 
-	if err := atom.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(request.Data.Data)))); err != nil {
+	d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(request.Data.Data)))
+	if err := d.Value(atom); err != nil {
 		return err
 	}
 

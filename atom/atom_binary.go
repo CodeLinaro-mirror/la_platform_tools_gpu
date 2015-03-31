@@ -12,31 +12,54 @@ import (
 )
 
 func init() {
-	//struct atom.EOS { }
-	registry.Add(binary.ID{0x6d, 0x1b, 0x27, 0x53, 0x11, 0xd8, 0x6a, 0xdf, 0x7b, 0xe9, 0x13, 0x38, 0x5a, 0x06, 0x2e, 0x47, 0x36, 0x07, 0xe7, 0xdf}, &EOS{})
-	//struct atom.Group { Name:string, Range:Range, SubGroups:GroupList }
-	registry.Add(binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}, &Group{})
-	//struct atom.Observation { Context:ContextID, Range:memory.Range, ResourceID:binary.ID }
-	registry.Add(binary.ID{0x2c, 0x9a, 0x2b, 0x93, 0xd5, 0xce, 0x4b, 0x84, 0x06, 0xcc, 0x43, 0xcb, 0xb7, 0x4b, 0xc4, 0x0a, 0x9b, 0x05, 0x11, 0x48}, &Observation{})
-	//struct atom.Range { Start:ID, End:ID }
-	registry.Add(binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}, &Range{})
-	//struct atom.Resource { ResourceID:binary.ID, Data:[]byte }
-	registry.Add(binary.ID{0xb8, 0x93, 0xdf, 0x90, 0x52, 0x2e, 0x33, 0x0b, 0x84, 0x00, 0x06, 0x1e, 0xca, 0x2d, 0xb0, 0x0a, 0xd6, 0x7c, 0x65, 0x25}, &Resource{})
+	registry.Add((*EOS)(nil).Class())
+	registry.Add((*Group)(nil).Class())
+	registry.Add((*Observation)(nil).Class())
+	registry.Add((*Range)(nil).Class())
+	registry.Add((*Resource)(nil).Class())
 }
 
-func (o EOS) Encode(e binary.Encoder) error {
+var (
+	binaryIDEOS         = binary.ID{0x6d, 0x1b, 0x27, 0x53, 0x11, 0xd8, 0x6a, 0xdf, 0x7b, 0xe9, 0x13, 0x38, 0x5a, 0x06, 0x2e, 0x47, 0x36, 0x07, 0xe7, 0xdf}
+	binaryIDGroup       = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
+	binaryIDObservation = binary.ID{0x2c, 0x9a, 0x2b, 0x93, 0xd5, 0xce, 0x4b, 0x84, 0x06, 0xcc, 0x43, 0xcb, 0xb7, 0x4b, 0xc4, 0x0a, 0x9b, 0x05, 0x11, 0x48}
+	binaryIDRange       = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
+	binaryIDResource    = binary.ID{0xb8, 0x93, 0xdf, 0x90, 0x52, 0x2e, 0x33, 0x0b, 0x84, 0x00, 0x06, 0x1e, 0xca, 0x2d, 0xb0, 0x0a, 0xd6, 0x7c, 0x65, 0x25}
+)
+
+type binaryClassEOS struct{}
+
+func (*EOS) Class() binary.Class {
+	return (*binaryClassEOS)(nil)
+}
+func doEncodeEOS(e binary.Encoder, o *EOS) error {
 	return nil
 }
-
-func (o *EOS) Decode(d binary.Decoder) error {
+func doDecodeEOS(d binary.Decoder, o *EOS) error {
 	return nil
 }
-
-func (*EOS) Skip(d binary.Decoder) error {
+func doSkipEOS(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassEOS) ID() binary.ID { return binaryIDEOS }
+func (*binaryClassEOS) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeEOS(e, obj.(*EOS))
+}
+func (*binaryClassEOS) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &EOS{}
+	return obj, doDecodeEOS(d, obj)
+}
+func (*binaryClassEOS) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeEOS(d, obj.(*EOS))
+}
+func (*binaryClassEOS) Skip(d binary.Decoder) error { return doSkipEOS(d) }
 
-func (o Group) Encode(e binary.Encoder) error {
+type binaryClassGroup struct{}
+
+func (*Group) Class() binary.Class {
+	return (*binaryClassGroup)(nil)
+}
+func doEncodeGroup(e binary.Encoder, o *Group) error {
 	if err := e.String(o.Name); err != nil {
 		return err
 	}
@@ -53,8 +76,7 @@ func (o Group) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Group) Decode(d binary.Decoder) error {
+func doDecodeGroup(d binary.Decoder, o *Group) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -75,12 +97,10 @@ func (o *Group) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Group) Skip(d binary.Decoder) error {
+func doSkipGroup(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if err := d.SkipValue((*Range)(nil)); err != nil {
 		return err
 	}
@@ -95,8 +115,25 @@ func (*Group) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGroup) ID() binary.ID { return binaryIDGroup }
+func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGroup(e, obj.(*Group))
+}
+func (*binaryClassGroup) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Group{}
+	return obj, doDecodeGroup(d, obj)
+}
+func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGroup(d, obj.(*Group))
+}
+func (*binaryClassGroup) Skip(d binary.Decoder) error { return doSkipGroup(d) }
 
-func (o Observation) Encode(e binary.Encoder) error {
+type binaryClassObservation struct{}
+
+func (*Observation) Class() binary.Class {
+	return (*binaryClassObservation)(nil)
+}
+func doEncodeObservation(e binary.Encoder, o *Observation) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -108,8 +145,7 @@ func (o Observation) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Observation) Decode(d binary.Decoder) error {
+func doDecodeObservation(d binary.Decoder, o *Observation) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -125,8 +161,7 @@ func (o *Observation) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Observation) Skip(d binary.Decoder) error {
+func doSkipObservation(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -136,11 +171,27 @@ func (*Observation) Skip(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassObservation) ID() binary.ID { return binaryIDObservation }
+func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeObservation(e, obj.(*Observation))
+}
+func (*binaryClassObservation) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Observation{}
+	return obj, doDecodeObservation(d, obj)
+}
+func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeObservation(d, obj.(*Observation))
+}
+func (*binaryClassObservation) Skip(d binary.Decoder) error { return doSkipObservation(d) }
 
-func (o Range) Encode(e binary.Encoder) error {
+type binaryClassRange struct{}
+
+func (*Range) Class() binary.Class {
+	return (*binaryClassRange)(nil)
+}
+func doEncodeRange(e binary.Encoder, o *Range) error {
 	if err := e.Uint64(uint64(o.Start)); err != nil {
 		return err
 	}
@@ -149,8 +200,7 @@ func (o Range) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Range) Decode(d binary.Decoder) error {
+func doDecodeRange(d binary.Decoder, o *Range) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -163,8 +213,7 @@ func (o *Range) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Range) Skip(d binary.Decoder) error {
+func doSkipRange(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -173,8 +222,25 @@ func (*Range) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassRange) ID() binary.ID { return binaryIDRange }
+func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRange(e, obj.(*Range))
+}
+func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Range{}
+	return obj, doDecodeRange(d, obj)
+}
+func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRange(d, obj.(*Range))
+}
+func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
 
-func (o Resource) Encode(e binary.Encoder) error {
+type binaryClassResource struct{}
+
+func (*Resource) Class() binary.Class {
+	return (*binaryClassResource)(nil)
+}
+func doEncodeResource(e binary.Encoder, o *Resource) error {
 	if err := e.ID(o.ResourceID); err != nil {
 		return err
 	}
@@ -186,8 +252,7 @@ func (o Resource) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Resource) Decode(d binary.Decoder) error {
+func doDecodeResource(d binary.Decoder, o *Resource) error {
 	if obj, err := d.ID(); err != nil {
 		return err
 	} else {
@@ -203,12 +268,10 @@ func (o *Resource) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Resource) Skip(d binary.Decoder) error {
+func doSkipResource(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
 		return err
 	}
-
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -218,3 +281,15 @@ func (*Resource) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassResource) ID() binary.ID { return binaryIDResource }
+func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeResource(e, obj.(*Resource))
+}
+func (*binaryClassResource) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Resource{}
+	return obj, doDecodeResource(d, obj)
+}
+func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeResource(d, obj.(*Resource))
+}
+func (*binaryClassResource) Skip(d binary.Decoder) error { return doSkipResource(d) }

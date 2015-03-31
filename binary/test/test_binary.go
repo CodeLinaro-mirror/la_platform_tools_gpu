@@ -11,20 +11,27 @@ import (
 )
 
 func init() {
-	//struct test.TypeA { data:string }
-	registry.Add(binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}, &TypeA{})
-	//struct test.TypeB { data:string }
-	registry.Add(binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}, &TypeB{})
+	registry.Add((*TypeA)(nil).Class())
+	registry.Add((*TypeB)(nil).Class())
 }
 
-func (o TypeA) Encode(e binary.Encoder) error {
+var (
+	binaryIDTypeA = binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}
+	binaryIDTypeB = binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}
+)
+
+type binaryClassTypeA struct{}
+
+func (*TypeA) Class() binary.Class {
+	return (*binaryClassTypeA)(nil)
+}
+func doEncodeTypeA(e binary.Encoder, o *TypeA) error {
 	if err := e.String(o.data); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *TypeA) Decode(d binary.Decoder) error {
+func doDecodeTypeA(d binary.Decoder, o *TypeA) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -32,23 +39,37 @@ func (o *TypeA) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*TypeA) Skip(d binary.Decoder) error {
+func doSkipTypeA(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassTypeA) ID() binary.ID { return binaryIDTypeA }
+func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTypeA(e, obj.(*TypeA))
+}
+func (*binaryClassTypeA) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &TypeA{}
+	return obj, doDecodeTypeA(d, obj)
+}
+func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTypeA(d, obj.(*TypeA))
+}
+func (*binaryClassTypeA) Skip(d binary.Decoder) error { return doSkipTypeA(d) }
 
-func (o TypeB) Encode(e binary.Encoder) error {
+type binaryClassTypeB struct{}
+
+func (*TypeB) Class() binary.Class {
+	return (*binaryClassTypeB)(nil)
+}
+func doEncodeTypeB(e binary.Encoder, o *TypeB) error {
 	if err := e.String(o.data); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *TypeB) Decode(d binary.Decoder) error {
+func doDecodeTypeB(d binary.Decoder, o *TypeB) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -56,11 +77,21 @@ func (o *TypeB) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*TypeB) Skip(d binary.Decoder) error {
+func doSkipTypeB(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassTypeB) ID() binary.ID { return binaryIDTypeB }
+func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTypeB(e, obj.(*TypeB))
+}
+func (*binaryClassTypeB) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &TypeB{}
+	return obj, doDecodeTypeB(d, obj)
+}
+func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTypeB(d, obj.(*TypeB))
+}
+func (*binaryClassTypeB) Skip(d binary.Decoder) error { return doSkipTypeB(d) }

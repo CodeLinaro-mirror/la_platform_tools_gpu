@@ -11,20 +11,27 @@ import (
 )
 
 func init() {
-	//struct database.testRequest { Id:int }
-	registry.Add(binary.ID{0xeb, 0x22, 0x94, 0x6d, 0xc2, 0x60, 0x9a, 0x2a, 0x77, 0xe3, 0x55, 0xbd, 0x64, 0xb3, 0xe0, 0x50, 0x18, 0xf6, 0xdf, 0x32}, &testRequest{})
-	//struct database.testResource { Int:int, String:string, Array:[]bool }
-	registry.Add(binary.ID{0xb3, 0x21, 0x8c, 0xc0, 0x87, 0x2e, 0x74, 0x3a, 0xc4, 0x68, 0xe1, 0x50, 0xc7, 0xe4, 0xc4, 0xea, 0x6f, 0xd2, 0xd1, 0x95}, &testResource{})
+	registry.Add((*testRequest)(nil).Class())
+	registry.Add((*testResource)(nil).Class())
 }
 
-func (o testRequest) Encode(e binary.Encoder) error {
+var (
+	binaryIDtestRequest  = binary.ID{0xeb, 0x22, 0x94, 0x6d, 0xc2, 0x60, 0x9a, 0x2a, 0x77, 0xe3, 0x55, 0xbd, 0x64, 0xb3, 0xe0, 0x50, 0x18, 0xf6, 0xdf, 0x32}
+	binaryIDtestResource = binary.ID{0xb3, 0x21, 0x8c, 0xc0, 0x87, 0x2e, 0x74, 0x3a, 0xc4, 0x68, 0xe1, 0x50, 0xc7, 0xe4, 0xc4, 0xea, 0x6f, 0xd2, 0xd1, 0x95}
+)
+
+type binaryClasstestRequest struct{}
+
+func (*testRequest) Class() binary.Class {
+	return (*binaryClasstestRequest)(nil)
+}
+func doEncodetestRequest(e binary.Encoder, o *testRequest) error {
 	if err := e.Int32(int32(o.Id)); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *testRequest) Decode(d binary.Decoder) error {
+func doDecodetestRequest(d binary.Decoder, o *testRequest) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -32,15 +39,31 @@ func (o *testRequest) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*testRequest) Skip(d binary.Decoder) error {
+func doSkiptestRequest(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClasstestRequest) ID() binary.ID { return binaryIDtestRequest }
+func (*binaryClasstestRequest) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodetestRequest(e, obj.(*testRequest))
+}
+func (*binaryClasstestRequest) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &testRequest{}
+	return obj, doDecodetestRequest(d, obj)
+}
+func (*binaryClasstestRequest) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodetestRequest(d, obj.(*testRequest))
+}
+func (*binaryClasstestRequest) Skip(d binary.Decoder) error { return doSkiptestRequest(d) }
 
-func (o testResource) Encode(e binary.Encoder) error {
+type binaryClasstestResource struct{}
+
+func (*testResource) Class() binary.Class {
+	return (*binaryClasstestResource)(nil)
+}
+func doEncodetestResource(e binary.Encoder, o *testResource) error {
 	if err := e.Int32(int32(o.Int)); err != nil {
 		return err
 	}
@@ -57,8 +80,7 @@ func (o testResource) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *testResource) Decode(d binary.Decoder) error {
+func doDecodetestResource(d binary.Decoder, o *testResource) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -83,15 +105,13 @@ func (o *testResource) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*testResource) Skip(d binary.Decoder) error {
+func doSkiptestResource(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -103,3 +123,15 @@ func (*testResource) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClasstestResource) ID() binary.ID { return binaryIDtestResource }
+func (*binaryClasstestResource) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodetestResource(e, obj.(*testResource))
+}
+func (*binaryClasstestResource) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &testResource{}
+	return obj, doDecodetestResource(d, obj)
+}
+func (*binaryClasstestResource) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodetestResource(d, obj.(*testResource))
+}
+func (*binaryClasstestResource) Skip(d binary.Decoder) error { return doSkiptestResource(d) }

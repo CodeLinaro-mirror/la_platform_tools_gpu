@@ -12,15 +12,23 @@ import (
 )
 
 func init() {
-	//struct test.AtomA { ID:atom.ID, Context:atom.ContextID, AtomFlags:atom.Flags }
-	registry.Add(binary.ID{0x93, 0xd6, 0x70, 0x1c, 0xfd, 0xd0, 0x94, 0x2c, 0x76, 0x37, 0x90, 0xab, 0x8e, 0x6a, 0x5d, 0xd4, 0xfc, 0x89, 0x46, 0x19}, &AtomA{})
-	//struct test.AtomB { ID:atom.ID, Context:atom.ContextID, Bool:bool }
-	registry.Add(binary.ID{0xf7, 0x13, 0x06, 0x25, 0x79, 0x12, 0x04, 0x35, 0x63, 0xf4, 0x9a, 0xfe, 0x6c, 0x54, 0x56, 0xb9, 0x81, 0x7f, 0x9e, 0x16}, &AtomB{})
-	//struct test.AtomC { Context:atom.ContextID, String:string }
-	registry.Add(binary.ID{0x71, 0xf8, 0x24, 0x91, 0x87, 0x47, 0x11, 0x26, 0xea, 0x2e, 0xa2, 0x6d, 0xb4, 0x81, 0x17, 0x61, 0xd9, 0x41, 0x03, 0x78}, &AtomC{})
+	registry.Add((*AtomA)(nil).Class())
+	registry.Add((*AtomB)(nil).Class())
+	registry.Add((*AtomC)(nil).Class())
 }
 
-func (o AtomA) Encode(e binary.Encoder) error {
+var (
+	binaryIDAtomA = binary.ID{0x93, 0xd6, 0x70, 0x1c, 0xfd, 0xd0, 0x94, 0x2c, 0x76, 0x37, 0x90, 0xab, 0x8e, 0x6a, 0x5d, 0xd4, 0xfc, 0x89, 0x46, 0x19}
+	binaryIDAtomB = binary.ID{0xf7, 0x13, 0x06, 0x25, 0x79, 0x12, 0x04, 0x35, 0x63, 0xf4, 0x9a, 0xfe, 0x6c, 0x54, 0x56, 0xb9, 0x81, 0x7f, 0x9e, 0x16}
+	binaryIDAtomC = binary.ID{0x71, 0xf8, 0x24, 0x91, 0x87, 0x47, 0x11, 0x26, 0xea, 0x2e, 0xa2, 0x6d, 0xb4, 0x81, 0x17, 0x61, 0xd9, 0x41, 0x03, 0x78}
+)
+
+type binaryClassAtomA struct{}
+
+func (*AtomA) Class() binary.Class {
+	return (*binaryClassAtomA)(nil)
+}
+func doEncodeAtomA(e binary.Encoder, o *AtomA) error {
 	if err := e.Uint64(uint64(o.ID)); err != nil {
 		return err
 	}
@@ -32,8 +40,7 @@ func (o AtomA) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *AtomA) Decode(d binary.Decoder) error {
+func doDecodeAtomA(d binary.Decoder, o *AtomA) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -51,8 +58,7 @@ func (o *AtomA) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*AtomA) Skip(d binary.Decoder) error {
+func doSkipAtomA(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -64,8 +70,25 @@ func (*AtomA) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassAtomA) ID() binary.ID { return binaryIDAtomA }
+func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeAtomA(e, obj.(*AtomA))
+}
+func (*binaryClassAtomA) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &AtomA{}
+	return obj, doDecodeAtomA(d, obj)
+}
+func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeAtomA(d, obj.(*AtomA))
+}
+func (*binaryClassAtomA) Skip(d binary.Decoder) error { return doSkipAtomA(d) }
 
-func (o AtomB) Encode(e binary.Encoder) error {
+type binaryClassAtomB struct{}
+
+func (*AtomB) Class() binary.Class {
+	return (*binaryClassAtomB)(nil)
+}
+func doEncodeAtomB(e binary.Encoder, o *AtomB) error {
 	if err := e.Uint64(uint64(o.ID)); err != nil {
 		return err
 	}
@@ -77,8 +100,7 @@ func (o AtomB) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *AtomB) Decode(d binary.Decoder) error {
+func doDecodeAtomB(d binary.Decoder, o *AtomB) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -96,8 +118,7 @@ func (o *AtomB) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*AtomB) Skip(d binary.Decoder) error {
+func doSkipAtomB(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -109,8 +130,25 @@ func (*AtomB) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassAtomB) ID() binary.ID { return binaryIDAtomB }
+func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeAtomB(e, obj.(*AtomB))
+}
+func (*binaryClassAtomB) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &AtomB{}
+	return obj, doDecodeAtomB(d, obj)
+}
+func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeAtomB(d, obj.(*AtomB))
+}
+func (*binaryClassAtomB) Skip(d binary.Decoder) error { return doSkipAtomB(d) }
 
-func (o AtomC) Encode(e binary.Encoder) error {
+type binaryClassAtomC struct{}
+
+func (*AtomC) Class() binary.Class {
+	return (*binaryClassAtomC)(nil)
+}
+func doEncodeAtomC(e binary.Encoder, o *AtomC) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -119,8 +157,7 @@ func (o AtomC) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *AtomC) Decode(d binary.Decoder) error {
+func doDecodeAtomC(d binary.Decoder, o *AtomC) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -133,14 +170,24 @@ func (o *AtomC) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*AtomC) Skip(d binary.Decoder) error {
+func doSkipAtomC(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassAtomC) ID() binary.ID { return binaryIDAtomC }
+func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeAtomC(e, obj.(*AtomC))
+}
+func (*binaryClassAtomC) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &AtomC{}
+	return obj, doDecodeAtomC(d, obj)
+}
+func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeAtomC(d, obj.(*AtomC))
+}
+func (*binaryClassAtomC) Skip(d binary.Decoder) error { return doSkipAtomC(d) }

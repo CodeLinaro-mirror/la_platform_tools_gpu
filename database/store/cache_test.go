@@ -76,7 +76,7 @@ func validateLoad(t *testing.T, cache *cache, id binary.ID, expectedSize int, ex
 func encode(r binary.Object) []byte {
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := r.Encode(enc); err != nil {
+	if err := enc.Value(r); err != nil {
 		panic(err)
 	}
 	return buf.Bytes()

@@ -16,7 +16,6 @@ package flat
 
 import (
 	"bytes"
-	"io/ioutil"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -123,10 +122,6 @@ func TestObject(t *testing.T) {
 }
 
 func TestUnknownTypeError(t *testing.T) {
-	e := Encoder(vle.Writer(ioutil.Discard))
-	if err := e.Object(test.BadObject); err == nil {
-		t.Errorf("Expected error encoding unknown type")
-	}
 	d := Decoder(vle.Reader(bytes.NewBuffer([]byte{
 		0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x09,

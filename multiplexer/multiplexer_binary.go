@@ -11,22 +11,29 @@ import (
 )
 
 func init() {
-	//struct multiplexer.msgCloseChannel { channelId:channelId }
-	registry.Add(binary.ID{0x91, 0x02, 0x58, 0x8a, 0x4e, 0xad, 0x6f, 0xda, 0x71, 0xbf, 0xc3, 0x4c, 0xd1, 0x77, 0xee, 0x5c, 0x1a, 0x56, 0x5b, 0x7c}, &msgCloseChannel{})
-	//struct multiplexer.msgData { c:channelId, d:[]byte }
-	registry.Add(binary.ID{0x0e, 0x45, 0xd6, 0x4e, 0x3a, 0xea, 0x25, 0xbd, 0x5a, 0x98, 0x7e, 0x60, 0x3d, 0xd3, 0xfc, 0x40, 0xd1, 0x70, 0x87, 0xb4}, &msgData{})
-	//struct multiplexer.msgOpenChannel { channelId:channelId }
-	registry.Add(binary.ID{0x3c, 0x8b, 0x89, 0x19, 0x27, 0x6e, 0x2d, 0x99, 0x2d, 0xb0, 0x11, 0x4e, 0x31, 0x50, 0x5a, 0xd4, 0x83, 0xf5, 0xdf, 0x7d}, &msgOpenChannel{})
+	registry.Add((*msgCloseChannel)(nil).Class())
+	registry.Add((*msgData)(nil).Class())
+	registry.Add((*msgOpenChannel)(nil).Class())
 }
 
-func (o msgCloseChannel) Encode(e binary.Encoder) error {
+var (
+	binaryIDmsgCloseChannel = binary.ID{0x91, 0x02, 0x58, 0x8a, 0x4e, 0xad, 0x6f, 0xda, 0x71, 0xbf, 0xc3, 0x4c, 0xd1, 0x77, 0xee, 0x5c, 0x1a, 0x56, 0x5b, 0x7c}
+	binaryIDmsgData         = binary.ID{0x0e, 0x45, 0xd6, 0x4e, 0x3a, 0xea, 0x25, 0xbd, 0x5a, 0x98, 0x7e, 0x60, 0x3d, 0xd3, 0xfc, 0x40, 0xd1, 0x70, 0x87, 0xb4}
+	binaryIDmsgOpenChannel  = binary.ID{0x3c, 0x8b, 0x89, 0x19, 0x27, 0x6e, 0x2d, 0x99, 0x2d, 0xb0, 0x11, 0x4e, 0x31, 0x50, 0x5a, 0xd4, 0x83, 0xf5, 0xdf, 0x7d}
+)
+
+type binaryClassmsgCloseChannel struct{}
+
+func (*msgCloseChannel) Class() binary.Class {
+	return (*binaryClassmsgCloseChannel)(nil)
+}
+func doEncodemsgCloseChannel(e binary.Encoder, o *msgCloseChannel) error {
 	if err := e.Uint32(uint32(o.channelId)); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *msgCloseChannel) Decode(d binary.Decoder) error {
+func doDecodemsgCloseChannel(d binary.Decoder, o *msgCloseChannel) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -34,15 +41,31 @@ func (o *msgCloseChannel) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*msgCloseChannel) Skip(d binary.Decoder) error {
+func doSkipmsgCloseChannel(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassmsgCloseChannel) ID() binary.ID { return binaryIDmsgCloseChannel }
+func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
+}
+func (*binaryClassmsgCloseChannel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &msgCloseChannel{}
+	return obj, doDecodemsgCloseChannel(d, obj)
+}
+func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
+}
+func (*binaryClassmsgCloseChannel) Skip(d binary.Decoder) error { return doSkipmsgCloseChannel(d) }
 
-func (o msgData) Encode(e binary.Encoder) error {
+type binaryClassmsgData struct{}
+
+func (*msgData) Class() binary.Class {
+	return (*binaryClassmsgData)(nil)
+}
+func doEncodemsgData(e binary.Encoder, o *msgData) error {
 	if err := e.Uint32(uint32(o.c)); err != nil {
 		return err
 	}
@@ -54,8 +77,7 @@ func (o msgData) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *msgData) Decode(d binary.Decoder) error {
+func doDecodemsgData(d binary.Decoder, o *msgData) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -71,8 +93,7 @@ func (o *msgData) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*msgData) Skip(d binary.Decoder) error {
+func doSkipmsgData(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -85,15 +106,31 @@ func (*msgData) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassmsgData) ID() binary.ID { return binaryIDmsgData }
+func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodemsgData(e, obj.(*msgData))
+}
+func (*binaryClassmsgData) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &msgData{}
+	return obj, doDecodemsgData(d, obj)
+}
+func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodemsgData(d, obj.(*msgData))
+}
+func (*binaryClassmsgData) Skip(d binary.Decoder) error { return doSkipmsgData(d) }
 
-func (o msgOpenChannel) Encode(e binary.Encoder) error {
+type binaryClassmsgOpenChannel struct{}
+
+func (*msgOpenChannel) Class() binary.Class {
+	return (*binaryClassmsgOpenChannel)(nil)
+}
+func doEncodemsgOpenChannel(e binary.Encoder, o *msgOpenChannel) error {
 	if err := e.Uint32(uint32(o.channelId)); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *msgOpenChannel) Decode(d binary.Decoder) error {
+func doDecodemsgOpenChannel(d binary.Decoder, o *msgOpenChannel) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -101,10 +138,21 @@ func (o *msgOpenChannel) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*msgOpenChannel) Skip(d binary.Decoder) error {
+func doSkipmsgOpenChannel(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassmsgOpenChannel) ID() binary.ID { return binaryIDmsgOpenChannel }
+func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
+}
+func (*binaryClassmsgOpenChannel) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &msgOpenChannel{}
+	return obj, doDecodemsgOpenChannel(d, obj)
+}
+func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
+}
+func (*binaryClassmsgOpenChannel) Skip(d binary.Decoder) error { return doSkipmsgOpenChannel(d) }

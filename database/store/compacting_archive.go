@@ -364,7 +364,7 @@ func (s *compactingArchive) Load(id binary.ID, logger log.Logger, out binary.Obj
 		}
 
 		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
-		size, err = len(data), out.Decode(d)
+		size, err = len(data), d.Value(out)
 		return
 	}
 

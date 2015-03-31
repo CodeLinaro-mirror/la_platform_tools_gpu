@@ -47,7 +47,7 @@ type testRequest struct {
 
 func decodeTestRequest(d binary.Decoder) (binary.Object, error) {
 	o := &testRequest{}
-	e := o.Decode(d)
+	e := d.Value(o)
 	return o, e
 }
 
@@ -177,7 +177,7 @@ func TestStore(t *testing.T) {
 	// Assert the single data entry binary data is as expected
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	testResourceA.Encode(enc)
+	enc.Value(testResourceA)
 	if !reflect.DeepEqual(buf.Bytes(), ds.entries[id].data) {
 		t.Fatalf("encoded data did not match")
 	}

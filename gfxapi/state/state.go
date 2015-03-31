@@ -51,8 +51,7 @@ func (s *State) Mutate(a atom.Atom) error {
 
 // Context represents the graphics state for a single graphics context.
 type Context interface {
+	binary.Object
 	// GetFramebufferAttachmentSize returns the width and height of the framebuffer at the given attachment.
 	GetFramebufferAttachmentSize(attachment FramebufferAttachment) (width uint32, height uint32, err error)
-	// Encode writes the context state to a binary stream.
-	Encode(binary.Encoder) error
 }

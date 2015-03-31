@@ -43,7 +43,7 @@ func create() Client {
 	pass := make(chan string, 1)
 	sr, cw := io.Pipe()
 	cr, sw := io.Pipe()
-	Serve(log.Nop{}, sr, sw, mtu, func(call interface{}) binary.Encodable {
+	Serve(log.Nop{}, sr, sw, mtu, func(call interface{}) binary.Object {
 		switch o := call.(type) {
 		case *request:
 			pass <- o.data

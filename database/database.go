@@ -100,7 +100,7 @@ func (d *database) storeMetadata(id binary.ID, metadata *metadata, logger log.Lo
 	logger = logger.Enter("Database.storeMetadata")
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := metadata.Encode(enc); err != nil {
+	if err := enc.Value(metadata); err != nil {
 		return err
 	}
 	return d.metaStore.Store(id, metadata, buf.Bytes(), logger)
@@ -130,7 +130,7 @@ func (d *database) store(r binary.Object, logger log.Logger, metaType metaType, 
 	// Encode the resource
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := r.Encode(enc); err != nil {
+	if err := enc.Value(r); err != nil {
 		return binary.ID{}, err
 	}
 

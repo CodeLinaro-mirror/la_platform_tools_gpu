@@ -78,7 +78,7 @@ func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
 	e := flat.Encoder(endian.Writer(buf, r.byteOrder))
-	if err := r.payload.Encode(e); err != nil {
+	if err := e.Value(&r.payload); err != nil {
 		return err
 	}
 

@@ -25,7 +25,7 @@ import (
 func Encoder(writer binary.Writer) binary.Encoder {
 	return &encoder{
 		Writer:  writer,
-		objects: map[interface{}]uint32{},
+		objects: map[binary.Object]uint32{},
 		ids:     map[binary.ID]uint32{},
 	}
 }
@@ -34,20 +34,20 @@ func Encoder(writer binary.Writer) binary.Encoder {
 func Decoder(reader binary.Reader) binary.Decoder {
 	return &decoder{
 		Reader:  reader,
-		objects: map[uint32]interface{}{},
+		objects: map[uint32]binary.Object{},
 		ids:     map[uint32]binary.ID{},
 	}
 }
 
 type encoder struct {
 	binary.Writer
-	objects map[interface{}]uint32
+	objects map[binary.Object]uint32
 	ids     map[binary.ID]uint32
 }
 
 type decoder struct {
 	binary.Reader
-	objects map[uint32]interface{}
+	objects map[uint32]binary.Object
 	ids     map[uint32]binary.ID
 }
 
@@ -78,7 +78,7 @@ func (d *decoder) ID() (binary.ID, error) {
 	}
 	id, found := d.ids[sid]
 	if !found {
-		fmt.Errorf("Unknown object sid %v", sid)
+		fmt.Errorf("Unknown id sid %v", sid)
 	}
 	return id, nil
 }
@@ -92,51 +92,42 @@ func (d *decoder) SkipID() error {
 	return nil
 }
 
-func (e *encoder) Value(obj binary.Encodable) error {
-	return obj.Encode(e)
-}
+func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
+func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
 
-func (d *decoder) Value(obj binary.Decodable) error {
-	return obj.Decode(d)
-}
-
-func (d *decoder) SkipValue(obj binary.Decodable) error {
-	return obj.Skip(d)
-}
-
-func (e *encoder) Variant(obj binary.Encodable) error {
+func (e *encoder) Variant(obj binary.Object) error {
 	if obj == nil {
 		return e.ID(binary.ID{})
 	}
-	if id, err := registry.TypeOf(obj); err != nil {
-		return err
-	} else if err := e.ID(id); err != nil {
+	class := obj.Class()
+	if err := e.ID(class.ID()); err != nil {
 		return err
 	}
-	return obj.Encode(e)
+	return class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (interface{}, error) {
+func (d *decoder) Variant() (binary.Object, error) {
 	if id, err := d.ID(); err != nil {
 		return nil, err
-	} else if obj, err := registry.New(id); err != nil || obj == nil {
-		return obj, err
+	} else if class := registry.Lookup(id); class == nil {
+		return nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		return obj, obj.Decode(d)
+		return class.Decode(d)
 	}
 }
 
 func (d *decoder) SkipVariant() (binary.ID, error) {
 	if id, err := d.ID(); err != nil {
 		return id, err
-	} else if obj, err := registry.Nil(id); err != nil || obj == nil {
-		return id, err
+	} else if class := registry.Lookup(id); class == nil {
+		return id, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		return id, obj.Skip(d)
+		return id, class.Skip(d)
 	}
 }
 
-func (e *encoder) Object(obj binary.Encodable) error {
+func (e *encoder) Object(obj binary.Object) error {
 	if obj == nil {
 		return e.Uint32(0)
 	}
@@ -152,7 +143,7 @@ func (e *encoder) Object(obj binary.Encodable) error {
 	}
 }
 
-func (d *decoder) Object() (interface{}, error) {
+func (d *decoder) Object() (binary.Object, error) {
 	v, err := d.Uint32()
 	if err != nil || v == 0 {
 		return nil, err
@@ -184,10 +175,8 @@ func (d *decoder) SkipObject() (binary.ID, error) {
 			return binary.ID{}, nil
 		} else if obj, found := d.objects[sid]; !found {
 			return binary.ID{}, fmt.Errorf("Unknown object sid %v", sid)
-		} else if id, err := registry.TypeOf(obj); err != nil {
-			return id, err
 		} else {
-			return id, nil
+			return obj.Class().ID(), nil
 		}
 	}
 	return d.SkipVariant()
