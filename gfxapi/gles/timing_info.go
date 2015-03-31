@@ -43,20 +43,20 @@ func (t *timingInfoTransform) stopTimer(cid atom.ContextID, toID atom.ID, index 
 		switch mask {
 		case service.TimingMaskTimingPerCommand:
 			t.timingInfo.PerCommand = append(t.timingInfo.PerCommand, service.AtomTimer{
-				uint64(toID),
-				val.Result,
+				AtomId:      uint64(toID),
+				Nanoseconds: val.Result,
 			})
 		case service.TimingMaskTimingPerDrawCall:
 			t.timingInfo.PerDrawCall = append(t.timingInfo.PerDrawCall, service.AtomRangeTimer{
-				uint64(fromID),
-				uint64(toID),
-				val.Result,
+				FromAtomId:  uint64(fromID),
+				ToAtomId:    uint64(toID),
+				Nanoseconds: val.Result,
 			})
 		case service.TimingMaskTimingPerFrame:
 			t.timingInfo.PerFrame = append(t.timingInfo.PerFrame, service.AtomRangeTimer{
-				uint64(fromID),
-				uint64(toID),
-				val.Result,
+				FromAtomId:  uint64(fromID),
+				ToAtomId:    uint64(toID),
+				Nanoseconds: val.Result,
 			})
 		}
 	})

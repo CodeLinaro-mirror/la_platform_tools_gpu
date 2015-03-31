@@ -30,121 +30,121 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		switch call := in.(type) {
 		case *callImport:
 			if res, err := server.Import(l, call.name, call.Data); err == nil {
-				return &resultImport{res}
+				return &resultImport{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetCaptures:
 			if res, err := server.GetCaptures(l); err == nil {
-				return &resultGetCaptures{res}
+				return &resultGetCaptures{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetDevices:
 			if res, err := server.GetDevices(l); err == nil {
-				return &resultGetDevices{res}
+				return &resultGetDevices{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetState:
 			if res, err := server.GetState(l, call.capture, call.after); err == nil {
-				return &resultGetState{res}
+				return &resultGetState{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetHierarchy:
 			if res, err := server.GetHierarchy(l, call.capture, call.contextId); err == nil {
-				return &resultGetHierarchy{res}
+				return &resultGetHierarchy{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetMemoryInfo:
 			if res, err := server.GetMemoryInfo(l, call.capture, call.after, call.rng); err == nil {
-				return &resultGetMemoryInfo{res}
+				return &resultGetMemoryInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferColor:
 			if res, err := server.GetFramebufferColor(l, call.device, call.capture, call.contextId, call.after, call.settings); err == nil {
-				return &resultGetFramebufferColor{res}
+				return &resultGetFramebufferColor{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferDepth:
 			if res, err := server.GetFramebufferDepth(l, call.device, call.capture, call.contextId, call.after); err == nil {
-				return &resultGetFramebufferDepth{res}
+				return &resultGetFramebufferDepth{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callReplaceAtom:
 			if res, err := server.ReplaceAtom(l, call.capture, call.atomId, call.atomType, call.data); err == nil {
-				return &resultReplaceAtom{res}
+				return &resultReplaceAtom{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetTimingInfo:
 			if res, err := server.GetTimingInfo(l, call.device, call.capture, call.contextId, call.mask); err == nil {
-				return &resultGetTimingInfo{res}
+				return &resultGetTimingInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callPrerenderFramebuffers:
 			if res, err := server.PrerenderFramebuffers(l, call.device, call.capture, call.width, call.height, call.atomIds); err == nil {
-				return &resultPrerenderFramebuffers{res}
+				return &resultPrerenderFramebuffers{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveAtomStream:
 			if res, err := server.ResolveAtomStream(l, call.id); err == nil {
-				return &resultResolveAtomStream{res}
+				return &resultResolveAtomStream{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveBinary:
 			if res, err := server.ResolveBinary(l, call.id); err == nil {
-				return &resultResolveBinary{res}
+				return &resultResolveBinary{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveCapture:
 			if res, err := server.ResolveCapture(l, call.id); err == nil {
-				return &resultResolveCapture{res}
+				return &resultResolveCapture{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveDevice:
 			if res, err := server.ResolveDevice(l, call.id); err == nil {
-				return &resultResolveDevice{res}
+				return &resultResolveDevice{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveHierarchy:
 			if res, err := server.ResolveHierarchy(l, call.id); err == nil {
-				return &resultResolveHierarchy{res}
+				return &resultResolveHierarchy{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveImageInfo:
 			if res, err := server.ResolveImageInfo(l, call.id); err == nil {
-				return &resultResolveImageInfo{res}
+				return &resultResolveImageInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveMemoryInfo:
 			if res, err := server.ResolveMemoryInfo(l, call.id); err == nil {
-				return &resultResolveMemoryInfo{res}
+				return &resultResolveMemoryInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveSchema:
 			if res, err := server.ResolveSchema(l, call.id); err == nil {
-				return &resultResolveSchema{res}
+				return &resultResolveSchema{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callResolveTimingInfo:
 			if res, err := server.ResolveTimingInfo(l, call.id); err == nil {
-				return &resultResolveTimingInfo{res}
+				return &resultResolveTimingInfo{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}

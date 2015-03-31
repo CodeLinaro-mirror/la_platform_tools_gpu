@@ -502,7 +502,7 @@ limitations under the License.
   }
 
   func (api) ID() service.ApiId {
-    return service.ApiId{ binary.NewID([]byte("{{Global "API"}}")) }
+    return service.ApiId{ ID:binary.NewID([]byte("{{Global "API"}}")) }
   }
 
   func API() gfxapi.API {

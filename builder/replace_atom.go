@@ -65,7 +65,7 @@ func (request *ReplaceAtom) build(db database.Database, logger log.Logger, out b
 		return err
 	}
 
-	capture.Atoms = service.AtomStreamId{newStreamId}
+	capture.Atoms = service.AtomStreamId{ID: newStreamId}
 
 	store.CopyResource(out, &capture)
 	return nil

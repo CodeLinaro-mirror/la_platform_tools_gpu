@@ -14671,7 +14671,7 @@ func (api) Name() string {
 	return "gles"
 }
 func (api) ID() service.ApiId {
-	return service.ApiId{binary.NewID([]byte("gles"))}
+	return service.ApiId{ID: binary.NewID([]byte("gles"))}
 }
 func API() gfxapi.API {
 	return api{}
