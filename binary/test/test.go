@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 type TypeA struct {
@@ -111,9 +112,12 @@ func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Rea
 	}
 	// Reset to beginning so we can verify skip offsets
 	reader.Seek(0, 0)
-	for i := range entry.Values {
-		if err := d.SkipObject(); err != nil {
+	for i, v := range entry.Values {
+		ty, _ := registry.TypeOf(v)
+		if id, err := d.SkipObject(); err != nil {
 			t.Errorf("%v[%v] SkipObject gave unexpected error: %v", entry.Name, i, err)
+		} else if ty != id {
+			t.Errorf("%v[%v] SkipObject gave unexpected type: expected %v got %v", entry.Name, i, ty, id)
 		}
 		if offsets[i] != reader.Len() {
 			t.Errorf("%v[%v] bad skip. Expected: %v, got: %v", entry.Name, i, offsets[i], reader.Len())

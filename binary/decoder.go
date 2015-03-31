@@ -30,14 +30,14 @@ type Decoder interface {
 	// stream must have been previously registered with binary.registry.Add.
 	Variant() (interface{}, error)
 	// SkipVariant must skip the same data that a call to Variant would read.
-	SkipVariant() error
+	SkipVariant() (ID, error)
 	// Object decodes and returns a Decodable from the stream. Object instances
 	// that were encoded multiple times may be decoded and returned as a shared,
 	// single instance. The type id in the stream must have been previously
 	// registered with binary.registry.Add.
 	Object() (interface{}, error)
 	// SkipObject must skip the same data that a call to Object would read.
-	SkipObject() error
+	SkipObject() (ID, error)
 }
 
 // Decodable is the interface for an object that can be read from a Decoder.

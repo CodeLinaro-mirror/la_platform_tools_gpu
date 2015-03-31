@@ -61,7 +61,7 @@ func (*metadata) Skip(d binary.Decoder) error {
 		return err
 	}
 
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil

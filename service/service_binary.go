@@ -269,7 +269,7 @@ func (*ArrayInfo) Skip(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -882,7 +882,7 @@ func (*ClassInfo) Skip(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -891,7 +891,7 @@ func (*ClassInfo) Skip(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -1139,7 +1139,7 @@ func (*EnumInfo) Skip(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -1182,7 +1182,7 @@ func (*FieldInfo) Skip(d binary.Decoder) error {
 		return err
 	}
 
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -1371,10 +1371,10 @@ func (*MapInfo) Skip(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -1595,7 +1595,7 @@ func (*ParameterInfo) Skip(d binary.Decoder) error {
 		return err
 	}
 
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if _, err := d.Bool(); err != nil {
@@ -1840,7 +1840,7 @@ func (*StaticArrayInfo) Skip(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -1917,7 +1917,7 @@ func (*StructInfo) Skip(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}

@@ -20746,7 +20746,7 @@ func (*Globals) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21555,7 +21555,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21567,7 +21567,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21579,7 +21579,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21591,7 +21591,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21603,7 +21603,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21615,7 +21615,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21627,7 +21627,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -21639,7 +21639,7 @@ func (*Objects) Skip(d binary.Decoder) error {
 			if _, err := d.Uint32(); err != nil {
 				return err
 			}
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
