@@ -5,114 +5,140 @@
 
 package test
 
+import "android.googlesource.com/platform/tools/gpu/binary"
+
 // Call Add
 type callAdd struct {
+	binary.Generate
 	a uint32
 	b uint32
 }
 
 // Result Add
 type resultAdd struct {
+	binary.Generate
 	value uint32
 }
 
 // Call EnumToString
 type callEnumToString struct {
+	binary.Generate
 	e Enum
 }
 
 // Result EnumToString
 type resultEnumToString struct {
+	binary.Generate
 	value string
 }
 
 // Call GetStruct
 type callGetStruct struct {
+	binary.Generate
 }
 
 // Result GetStruct
 type resultGetStruct struct {
+	binary.Generate
 	value Struct
 }
 
 // Call SetStruct
 type callSetStruct struct {
+	binary.Generate
 	s Struct
 }
 
 // Result SetStruct
 type resultSetStruct struct {
+	binary.Generate
 }
 
 // Call GetResource
 type callGetResource struct {
+	binary.Generate
 }
 
 // Result GetResource
 type resultGetResource struct {
+	binary.Generate
 	value ResourceId
 }
 
 // Call UseResource
 type callUseResource struct {
+	binary.Generate
 	r ResourceId
 }
 
 // Result UseResource
 type resultUseResource struct {
+	binary.Generate
 }
 
 // Call ResolveResource
 type callResolveResource struct {
+	binary.Generate
 	r ResourceId
 }
 
 // Result ResolveResource
 type resultResolveResource struct {
+	binary.Generate
 	value Resource
 }
 
 // Call GetSingleListNode
 type callGetSingleListNode struct {
+	binary.Generate
 }
 
 // Result GetSingleListNode
 type resultGetSingleListNode struct {
+	binary.Generate
 	value *ListNode
 }
 
 // Call GetListNodeChain
 type callGetListNodeChain struct {
+	binary.Generate
 }
 
 // Result GetListNodeChain
 type resultGetListNodeChain struct {
+	binary.Generate
 	value *ListNode
 }
 
 // Call GetListNodeChainArray
 type callGetListNodeChainArray struct {
+	binary.Generate
 }
 
 // Result GetListNodeChainArray
 type resultGetListNodeChainArray struct {
+	binary.Generate
 	value ListNodeArray
 }
 
 // Call GetBase
 type callGetBase struct {
+	binary.Generate
 }
 
 // Result GetBase
 type resultGetBase struct {
+	binary.Generate
 	value Base
 }
 
 // Call GetDerived
 type callGetDerived struct {
+	binary.Generate
 }
 
 // Result GetDerived
 type resultGetDerived struct {
+	binary.Generate
 	value Base
 }

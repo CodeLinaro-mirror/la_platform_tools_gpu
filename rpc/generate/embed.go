@@ -32,8 +32,6 @@ limitations under the License.
 {{$ | Macro "Rpc" "role" "Helpers" "api" | GoFmt | Write (print $api "_helpers.go")}}
 {{$ | Macro "Client" | GoFmt | Write (print $api "_client.go")}}
 {{$ | Macro "Server" | GoFmt | Write (print $api "_server.go")}}
-{{$ | Macro "Binary" | Write (print $api "_binary.go")}}
-
 
 {{define "Rpc"}}
   {{template "GeneratedHeader"}}
@@ -284,6 +282,7 @@ limitations under the License.
 
   // Class {{$.Name}}
   type {{$.Name}} struct {
+    binary.Generate
     {{Macro "AllFields" "Class" $ "Macro" "DeclareClassField"}}
   }
 {{end}}
@@ -311,7 +310,10 @@ limitations under the License.
   {{AssertType $ "Pseudonym"}}
 
   // Handle {{$.Name}}
-  type {{$.Name}} struct { binary.ID }
+  type {{$.Name}} struct {
+    binary.Generate
+    ID binary.ID
+ }
 {{end}}
 
 {{define "HandleExtra"}}{{end}}
@@ -421,6 +423,7 @@ func (h {{$.Name}}) Valid() bool {
 
   // Call {{$.Name}}
   type {{Macro "CallName" $}} struct {
+    binary.Generate
     {{range $i, $p := $.CallParameters}}
       {{$p.Name}} {{Macro "Type" (TypeOf $p)}}
     {{end}}
@@ -452,6 +455,7 @@ func (h {{$.Name}}) Valid() bool {
 
   // Result {{$.Name}}
   type {{Macro "ResultName" $}} struct {
+    binary.Generate
     {{if not (IsVoid $.Return.Type)}}
       value {{Macro "Type" $.Return.Type}}
     {{end}}
@@ -576,16 +580,6 @@ func (h {{$.Name}}) Valid() bool {
     })
   }
 {{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the RPC binary coder implementation
--------------------------------------------------------------------------------
-*/}}
-{{define "Binary"}}
-  {{AssertType $ "API"}}
-  {{GoFile (ConvertAPI $)}}
-{{end}}
 `
 const rpc_java_tmpl_file = `rpc.java.tmpl`
 const rpc_java_tmpl = `{{/*
@@ -621,7 +615,6 @@ limitations under the License.
     {{$c | Macro "Class" | Reflow 2 | Write (print $c.Name ".java")}}
   {{end}}
 {{end}}
-{{$ | Macro "Binary" | Write "ObjectFactory.java"}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -1160,16 +1153,6 @@ limitations under the License.
         super(d);
     }
   }
-{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the RPC binary coder implementation
--------------------------------------------------------------------------------
-*/}}
-{{define "Binary"}}
-  {{AssertType $ "API"}}
-  {{JavaFile (ConvertAPI $)}}
 {{end}}
 `
 const rpc_common_go_tmpl_file = `rpc_common_go.tmpl`
