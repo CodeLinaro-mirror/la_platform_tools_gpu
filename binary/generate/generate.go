@@ -22,7 +22,9 @@ import (
 	"bytes"
 	"fmt"
 	"path"
+	"reflect"
 	"sort"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -101,6 +103,20 @@ type Type struct {
 	SkipMethod string // The skip method to use.
 }
 
+type tag string
+
+func (t tag) Flag(name string) bool {
+	v := reflect.StructTag(t).Get(name)
+	if len(v) == 0 {
+		return false
+	}
+	b, err := strconv.ParseBool(v)
+	if err != nil {
+		panic(fmt.Errorf("Malformed struct tag %q in %q: %v", name, t, err))
+	}
+	return b
+}
+
 // FromTypename creates and initializes a Struct from a types.Typename.
 // It assumes that the typename will map to a types.Struct, and adds all the
 // fields of that struct to the Struct information.
@@ -111,16 +127,16 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
 		decl := t.Field(i)
-		tag := t.Tag(i)
+		tag := tag(t.Tag(i))
 		if decl.Anonymous() &&
 			decl.Type().String() == "android.googlesource.com/platform/tools/gpu/binary.Generate" &&
-			tag != "disable" {
+			!tag.Flag("disable") {
 			tagged = true
 			continue
 		}
 		f := Field{}
 		f.Name = decl.Name()
-		f.Type = FromType(pkg, decl.Type())
+		f.Type = fromType(pkg, decl.Type())
 		f.Anonymous = decl.Anonymous()
 		s.Fields = append(s.Fields, f)
 	}
@@ -146,8 +162,8 @@ func (s *Struct) UpdateID() {
 	s.ID = binary.NewID([]byte(s.Signature))
 }
 
-// FromType creates a appropriate Type object from a types.Type.
-func FromType(pkg *types.Package, from types.Type) *Type {
+// fromType creates a appropriate Type object from a types.Type.
+func fromType(pkg *types.Package, from types.Type) *Type {
 	t := &Type{Name: path.Base(types.TypeString(pkg, from))}
 	if _, isNamed := from.(*types.Named); isNamed {
 		from = from.Underlying()
@@ -170,12 +186,12 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 		}
 	case *types.Pointer:
 		t.Kind = Pointer
-		t.SubType = FromType(pkg, from.Elem())
+		t.SubType = fromType(pkg, from.Elem())
 	case *types.Interface:
 		t.Kind = Interface
 	case *types.Slice:
 		t.Kind = Array
-		t.SubType = FromType(pkg, from.Elem())
+		t.SubType = fromType(pkg, from.Elem())
 		switch elem := from.Elem().(type) {
 		case *types.Basic:
 			switch elem.Kind() {
@@ -197,12 +213,12 @@ func FromType(pkg *types.Package, from types.Type) *Type {
 			}
 		}
 		if t.Kind == Array {
-			t.SubType = FromType(pkg, from.Elem())
+			t.SubType = fromType(pkg, from.Elem())
 		}
 	case *types.Map:
 		t.Kind = Map
-		t.KeyType = FromType(pkg, from.Key())
-		t.SubType = FromType(pkg, from.Elem())
+		t.KeyType = fromType(pkg, from.Key())
+		t.SubType = fromType(pkg, from.Elem())
 	default:
 		t.Kind = Codeable
 	}

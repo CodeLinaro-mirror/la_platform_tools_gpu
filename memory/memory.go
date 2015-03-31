@@ -146,7 +146,7 @@ type memoryWrite struct {
 // Memory slice has Get called will any resolving, loading or copying of binary
 // data occur.
 type Memory struct {
-	binary.Generate "disable"
+	binary.Generate `disable:"true"`
 	writes          []memoryWrite
 }
 

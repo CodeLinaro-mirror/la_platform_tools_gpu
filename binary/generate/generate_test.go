@@ -24,6 +24,32 @@ import (
 	"golang.org/x/tools/go/types"
 )
 
+var fields = []Field{
+	{Name: "u8", Type: &Type{Name: "uint8", Kind: Native, Method: "Uint8"}},
+	{Name: "u16", Type: &Type{Name: "uint16", Kind: Native, Method: "Uint16"}},
+	{Name: "u32", Type: &Type{Name: "uint32", Kind: Native, Method: "Uint32"}},
+	{Name: "u64", Type: &Type{Name: "uint64", Kind: Native, Method: "Uint64"}},
+	{Name: "i8", Type: &Type{Name: "int8", Kind: Native, Method: "Int8"}},
+	{Name: "i16", Type: &Type{Name: "int16", Kind: Native, Method: "Int16"}},
+	{Name: "i32", Type: &Type{Name: "int32", Kind: Native, Method: "Int32"}},
+	{Name: "i64", Type: &Type{Name: "int64", Kind: Native, Method: "Int64"}},
+	{Name: "f32", Type: &Type{Name: "float32", Kind: Native, Method: "Float32"}},
+	{Name: "f64", Type: &Type{Name: "float64", Kind: Native, Method: "Float64"}},
+	{Name: "bool", Type: &Type{Name: "bool", Kind: Native, Method: "Bool"}},
+	{Name: "byte", Type: &Type{Name: "byte", Native: "uint8", Kind: Remap, Method: "Uint8"}},
+	{Name: "int", Type: &Type{Name: "int", Native: "int32", Kind: Remap, Method: "Int32"}},
+	{Name: "str", Type: &Type{Name: "string", Kind: Native, Method: "String", SkipMethod: "SkipString"}},
+	{Name: "codeable", Type: &Type{Name: "struct{}", Kind: Codeable}},
+	{Name: "pointer", Type: &Type{Name: "*struct{}", Kind: Pointer}},
+	{Name: "slice", Type: &Type{Name: "[]struct{}", Kind: Array}},
+	{Name: "object", Type: &Type{Name: "interface{}", Kind: Interface}},
+	{Name: "dict", Type: &Type{Name: "map[string]struct{}", Kind: Map}},
+	{Name: "data", Type: &Type{Name: "[]byte", Kind: Array, Method: "Data"}},
+	{Name: "id", Type: &Type{Name: "binary.ID", Native: "[20]byte", Kind: Native, Method: "ID", SkipMethod: "SkipID"}},
+	{Name: "array", Type: &Type{Name: "Other", Native: "[10]int", Kind: Array}},
+	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: Array}, Anonymous: true},
+}
+
 func parseStructs(source string) []*Struct {
 	config := loader.Config{}
 	fakeFile := fmt.Sprintf(`
@@ -45,7 +71,9 @@ func parseStructs(source string) []*Struct {
 			if n, ok := def.(*types.TypeName); ok {
 				if t, ok := n.Type().(*types.Named); ok {
 					if _, ok := t.Underlying().(*types.Struct); ok {
-						result = append(result, FromTypename(pkg.Pkg, n))
+						if s := FromTypename(pkg.Pkg, n); s != nil {
+							result = append(result, s)
+						}
 					}
 				}
 			}
@@ -69,6 +97,13 @@ func TestEmpty(t *testing.T) {
 	s := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	if len(s.Fields) != 0 {
 		t.Errorf("Got %d fields, expected none", len(s.Fields))
+	}
+}
+
+func TestDisable(t *testing.T) {
+	s := parseStructs("type MyStruct struct {binary.Generate `disable:\"true\"`}")
+	if len(s) != 0 {
+		t.Errorf("Got %d structs, expected none", len(s))
 	}
 }
 
@@ -115,30 +150,6 @@ func TestFieldTypeAffectsID(t *testing.T) {
 
 func TestTypes(t *testing.T) {
 	prefix := "type Other [10]int\n"
-	fields := []Field{
-		{"a", &Type{"uint8", "uint8", Native, nil, nil, "Uint8", ""}, false},
-		{"b", &Type{"uint16", "uint16", Native, nil, nil, "Uint16", ""}, false},
-		{"c", &Type{"uint32", "uint32", Native, nil, nil, "Uint32", ""}, false},
-		{"d", &Type{"uint64", "uint64", Native, nil, nil, "Uint64", ""}, false},
-		{"e", &Type{"int8", "int8", Native, nil, nil, "Int8", ""}, false},
-		{"f", &Type{"int16", "int16", Native, nil, nil, "Int16", ""}, false},
-		{"g", &Type{"int32", "int32", Native, nil, nil, "Int32", ""}, false},
-		{"h", &Type{"int64", "int64", Native, nil, nil, "Int64", ""}, false},
-		{"i", &Type{"float32", "float32", Native, nil, nil, "Float32", ""}, false},
-		{"j", &Type{"float64", "float64", Native, nil, nil, "Float64", ""}, false},
-		{"k", &Type{"byte", "uint8", Remap, nil, nil, "Uint8", ""}, false},
-		{"l", &Type{"int", "int32", Remap, nil, nil, "Int32", ""}, false},
-		{"m", &Type{"bool", "bool", Native, nil, nil, "Bool", ""}, false},
-		{"n", &Type{"string", "string", Native, nil, nil, "String", "SkipString"}, false},
-		{"o", &Type{"struct{}", "struct{}", Codeable, nil, nil, "", ""}, false},
-		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, nil, "", ""}, false},
-		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, nil, "", ""}, false},
-		{"r", &Type{"interface{}", "interface{}", Interface, nil, nil, "", ""}, false},
-		{"s", &Type{"map[string]struct{}", "map[string]struct{}", Map, nil, nil, "", ""}, false},
-		{"u", &Type{"[]byte", "[]byte", Array, nil, nil, "Data", ""}, false},
-		{"v", &Type{"binary.ID", "[20]byte", Native, nil, nil, "ID", "SkipID"}, false},
-		{"", &Type{"Other", "[10]int", Array, nil, nil, "", ""}, true},
-	}
 	source := &bytes.Buffer{}
 	fmt.Fprintln(source, prefix)
 	fmt.Fprint(source, "type MyStruct struct {binary.Generate;\n")
@@ -162,9 +173,13 @@ func TestTypes(t *testing.T) {
 			t.Errorf("Got field kind %d, expected %d for %s %s",
 				got.Type.Kind, expected.Type.Kind, expected.Name, expected.Type.Name)
 		}
-		if got.Type.Native != expected.Type.Native {
+		native := expected.Type.Native
+		if len(native) == 0 {
+			native = expected.Type.Name
+		}
+		if got.Type.Native != native {
 			t.Errorf("Got field native type %s, expected %s for %s %s",
-				got.Type.Native, expected.Type.Native, expected.Name, expected.Type.Name)
+				got.Type.Native, native, expected.Name, expected.Type.Name)
 		}
 		if got.Type.Method != expected.Type.Method {
 			t.Errorf("Got encoder method %s, expected %s for %s %s",
