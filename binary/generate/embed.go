@@ -137,8 +137,8 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 {{else}}if _,err := d.{{.Type.Method}}(); err != nil { return err } {{end}} {{end}}
 {{define "SkipRemap"}}{{template "SkipNative" .}}{{end}}
 {{define "SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
-{{define "SkipPointer"}} if err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "SkipInterface"}} if err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "SkipInterface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 
 {{define "SkipArray"}} if count, err := d.Uint32(); err != nil {
 			return err

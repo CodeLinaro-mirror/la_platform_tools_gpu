@@ -78,16 +78,16 @@ func (d *decoder) Variant() (interface{}, error) {
 	}
 }
 
-func (d *decoder) SkipVariant() error {
+func (d *decoder) SkipVariant() (binary.ID, error) {
 	if id, err := d.ID(); err != nil {
-		return err
+		return id, err
 	} else if obj, err := registry.Nil(id); err != nil || obj == nil {
-		return err
+		return id, err
 	} else {
-		return obj.Skip(d)
+		return id, obj.Skip(d)
 	}
 }
 
 func (e *encoder) Object(obj binary.Encodable) error { return e.Variant(obj) }
 func (d *decoder) Object() (interface{}, error)      { return d.Variant() }
-func (d *decoder) SkipObject() error                 { return d.SkipVariant() }
+func (d *decoder) SkipObject() (binary.ID, error)    { return d.SkipVariant() }

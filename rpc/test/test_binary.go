@@ -141,7 +141,7 @@ func (*ListNode) Skip(d binary.Decoder) error {
 		return err
 	}
 
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -537,7 +537,7 @@ func (o *resultGetBase) Decode(d binary.Decoder) error {
 }
 
 func (*resultGetBase) Skip(d binary.Decoder) error {
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -566,7 +566,7 @@ func (o *resultGetDerived) Decode(d binary.Decoder) error {
 }
 
 func (*resultGetDerived) Skip(d binary.Decoder) error {
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -595,7 +595,7 @@ func (o *resultGetListNodeChain) Decode(d binary.Decoder) error {
 }
 
 func (*resultGetListNodeChain) Skip(d binary.Decoder) error {
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
@@ -640,7 +640,7 @@ func (*resultGetListNodeChainArray) Skip(d binary.Decoder) error {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipObject(); err != nil {
+			if _, err := d.SkipObject(); err != nil {
 				return err
 			}
 		}
@@ -692,7 +692,7 @@ func (o *resultGetSingleListNode) Decode(d binary.Decoder) error {
 }
 
 func (*resultGetSingleListNode) Skip(d binary.Decoder) error {
-	if err := d.SkipObject(); err != nil {
+	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil

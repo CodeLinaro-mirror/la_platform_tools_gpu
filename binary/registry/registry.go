@@ -43,7 +43,7 @@ func Add(id binary.ID, instance binary.Object) {
 }
 
 type unknownType struct {
-	Object binary.Encodable
+	Object interface{}
 }
 
 func (e unknownType) Error() string {
@@ -52,7 +52,7 @@ func (e unknownType) Error() string {
 
 // TypeOf returns the registered type ID for the obj.
 // If there is no ID for this type of object, TypeOf returns a non-nil error.
-func TypeOf(obj binary.Encodable) (binary.ID, error) {
+func TypeOf(obj interface{}) (binary.ID, error) {
 	id, idFound := typeToID[reflect.TypeOf(obj)]
 	if !idFound {
 		return binary.ID{}, unknownType{obj}

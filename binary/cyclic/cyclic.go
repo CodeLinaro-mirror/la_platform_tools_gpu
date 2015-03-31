@@ -126,13 +126,13 @@ func (d *decoder) Variant() (interface{}, error) {
 	}
 }
 
-func (d *decoder) SkipVariant() error {
+func (d *decoder) SkipVariant() (binary.ID, error) {
 	if id, err := d.ID(); err != nil {
-		return err
+		return id, err
 	} else if obj, err := registry.Nil(id); err != nil || obj == nil {
-		return err
+		return id, err
 	} else {
-		return obj.Skip(d)
+		return id, obj.Skip(d)
 	}
 }
 
@@ -162,7 +162,8 @@ func (d *decoder) Object() (interface{}, error) {
 	o, found := d.objects[sid]
 	switch {
 	case found && decode:
-		return o, d.SkipVariant()
+		_, err := d.SkipVariant()
+		return o, err
 	case decode:
 		o, err = d.Variant()
 		d.objects[sid] = o
@@ -174,9 +175,20 @@ func (d *decoder) Object() (interface{}, error) {
 	}
 }
 
-func (d *decoder) SkipObject() error {
-	if v, err := d.Uint32(); ((v & 1) == 0) || (err != nil) {
-		return err
+func (d *decoder) SkipObject() (binary.ID, error) {
+	if v, err := d.Uint32(); err != nil {
+		return binary.ID{}, err
+	} else if (v & 1) == 0 {
+		sid := v >> 1
+		if sid == 0 {
+			return binary.ID{}, nil
+		} else if obj, found := d.objects[sid]; !found {
+			return binary.ID{}, fmt.Errorf("Unknown object sid %v", sid)
+		} else if id, err := registry.TypeOf(obj); err != nil {
+			return id, err
+		} else {
+			return id, nil
+		}
 	}
 	return d.SkipVariant()
 }
