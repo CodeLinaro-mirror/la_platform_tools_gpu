@@ -40,6 +40,10 @@ func (t *ExampleObject) Decode(d binary.Decoder) error {
 	return err
 }
 
+func (ExampleObject) Skip(d binary.Decoder) error {
+	return d.SkipString()
+}
+
 func init() {
 	registry.Add(ExampleObjectID, &ExampleObject{})
 }

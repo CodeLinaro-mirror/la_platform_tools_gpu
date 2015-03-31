@@ -55,3 +55,19 @@ func (o *testAtom) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
+
+func (*testAtom) Skip(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint16(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}

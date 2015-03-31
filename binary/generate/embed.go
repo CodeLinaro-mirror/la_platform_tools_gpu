@@ -37,7 +37,7 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "EncodeRemap"}} if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{end}}
 
-{{define "EncodeCodeable"}} if err := {{.Name}}.Encode(e); err != nil { return err } {{end}}
+{{define "EncodeCodeable"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
 
 {{define "EncodePointer"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
@@ -55,16 +55,16 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			return err
 		} {{end}}
 
-{{define "EncodeArray"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
+{{define "EncodeArray"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
 		}
-		{{if eq .Type.SubType.Method "Uint8"}}if err := e.Data({{.Name}}); err != nil {
+		{{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
 			return err
 		}{{else}}for i := range {{.Name}} {
 			{{encode (print .Name "[i]") .Type.SubType}}
 		}{{end}}{{end}}
 
-{{define "EncodeMap"}} if err := e.Int32(int32(len({{.Name}}))); err != nil {
+{{define "EncodeMap"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
 		}
 		for k, v := range {{.Name}} {
@@ -85,7 +85,7 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "DecodeRemap"}}{{template "DecodeNative" .}}{{end}}
 
-{{define "DecodeCodeable"}} if err := {{.Name}}.Decode(d); err != nil { return err } {{end}}
+{{define "DecodeCodeable"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
 
 {{define "DecodePointer"}} if obj, err := d.Object(); err != nil {
 			return err
@@ -103,28 +103,59 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "DecodeArray"}} if count, err := d.Int32(); err != nil {
+{{define "DecodeArray"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
-			{{if eq .Type.SubType.Method "Uint8"}}if err := d.Data({{.Name}}); err != nil {
+			{{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
 				return err
 			}{{else}}for i := range {{.Name}} {
 				{{decode (print .Name "[i]") .Type.SubType}}
 			}{{end}}
 		} {{end}}
 
-{{define "DecodeMap"}} if count, err := d.Int32(); err != nil {
+{{define "DecodeMap"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
 			m := {{.Name}}
-			for i := int32(0); i < count; i++ {
+			for i := uint32(0); i < count; i++ {
 				var k {{.Type.KeyType.Name}}
 				var v {{.Type.SubType.Name}}
 				{{decode "k" .Type.KeyType}}
 				{{decode "v" .Type.SubType}}
 				m[k] = v
+			}
+		} {{end}}
+
+{{define "Skiper"}}func (*{{.Name}}) Skip(d binary.Decoder) error {
+	{{range .Fields}}{{skip (print "o." .Name) .Type}}
+	{{end}} return nil
+} {{end}}
+
+{{define "SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil { return err}
+{{else}}if _,err := d.{{.Type.Method}}(); err != nil { return err } {{end}} {{end}}
+{{define "SkipRemap"}}{{template "SkipNative" .}}{{end}}
+{{define "SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
+{{define "SkipPointer"}} if err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "SkipInterface"}} if err := d.SkipObject(); err != nil { return err } {{end}}
+
+{{define "SkipArray"}} if count, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			{{if .Type.Method}}if err := d.Skip(count); err != nil {
+				return err
+			}{{else}}for i := uint32(0); i < count; i++ {
+				{{skip (print .Name "[i]") .Type.SubType}}
+			}{{end}}
+		} {{end}}
+
+{{define "SkipMap"}} if count, err := d.Uint32(); err != nil {
+			return err
+		} else {
+			for i := uint32(0); i < count; i++ {
+				{{skip "k" .Type.KeyType}}
+				{{skip "v" .Type.SubType}}
 			}
 		} {{end}}
 
@@ -146,6 +177,8 @@ func init() {
 	{{template "Encoder" .}}
 
 	{{template "Decoder" .}}
+
+	{{template "Skiper" .}}
 {{end}}
 
 {{end}}

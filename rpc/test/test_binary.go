@@ -95,6 +95,17 @@ func (o *Derived) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*Derived) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o ListNode) Encode(e binary.Encoder) error {
 	if err := e.String(o.Name); err != nil {
 		return err
@@ -121,6 +132,17 @@ func (o *ListNode) Decode(d binary.Decoder) error {
 		o.Next = obj.(*ListNode)
 	} else {
 		o.Next = nil
+	}
+	return nil
+}
+
+func (*ListNode) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if err := d.SkipObject(); err != nil {
+		return err
 	}
 	return nil
 }
@@ -157,17 +179,41 @@ func (o *Resource) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*Resource) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (o ResourceId) Encode(e binary.Encoder) error {
-	if err := o.ID.Encode(e); err != nil {
+	if err := e.ID(o.ID); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *ResourceId) Decode(d binary.Decoder) error {
-	if err := o.ID.Decode(d); err != nil {
+	if obj, err := d.ID(); err != nil {
+		return err
+	} else {
+		o.ID = binary.ID(obj)
+	}
+	return nil
+}
+
+func (*ResourceId) Skip(d binary.Decoder) error {
+	if err := d.SkipID(); err != nil {
 		return err
 	}
+
 	return nil
 }
 
@@ -203,6 +249,20 @@ func (o *Struct) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*Struct) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o callAdd) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.a); err != nil {
 		return err
@@ -227,6 +287,16 @@ func (o *callAdd) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callAdd) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o callEnumToString) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.e)); err != nil {
 		return err
@@ -243,11 +313,22 @@ func (o *callEnumToString) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callEnumToString) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o callGetBase) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *callGetBase) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*callGetBase) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -259,11 +340,19 @@ func (o *callGetDerived) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callGetDerived) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o callGetListNodeChain) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *callGetListNodeChain) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*callGetListNodeChain) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -275,11 +364,19 @@ func (o *callGetListNodeChainArray) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callGetListNodeChainArray) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o callGetResource) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *callGetResource) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*callGetResource) Skip(d binary.Decoder) error {
 	return nil
 }
 
@@ -291,6 +388,10 @@ func (o *callGetSingleListNode) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callGetSingleListNode) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o callGetStruct) Encode(e binary.Encoder) error {
 	return nil
 }
@@ -299,43 +400,68 @@ func (o *callGetStruct) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*callGetStruct) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o callResolveResource) Encode(e binary.Encoder) error {
-	if err := o.r.Encode(e); err != nil {
+	if err := e.Value(&o.r); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *callResolveResource) Decode(d binary.Decoder) error {
-	if err := o.r.Decode(d); err != nil {
+	if err := d.Value(&o.r); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*callResolveResource) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o callSetStruct) Encode(e binary.Encoder) error {
-	if err := o.s.Encode(e); err != nil {
+	if err := e.Value(&o.s); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *callSetStruct) Decode(d binary.Decoder) error {
-	if err := o.s.Decode(d); err != nil {
+	if err := d.Value(&o.s); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*callSetStruct) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*Struct)(nil)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o callUseResource) Encode(e binary.Encoder) error {
-	if err := o.r.Encode(e); err != nil {
+	if err := e.Value(&o.r); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *callUseResource) Decode(d binary.Decoder) error {
-	if err := o.r.Decode(d); err != nil {
+	if err := d.Value(&o.r); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*callUseResource) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -357,6 +483,13 @@ func (o *resultAdd) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultAdd) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o resultEnumToString) Encode(e binary.Encoder) error {
 	if err := e.String(o.value); err != nil {
 		return err
@@ -370,6 +503,14 @@ func (o *resultEnumToString) Decode(d binary.Decoder) error {
 	} else {
 		o.value = string(obj)
 	}
+	return nil
+}
+
+func (*resultEnumToString) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -391,6 +532,13 @@ func (o *resultGetBase) Decode(d binary.Decoder) error {
 		o.value = obj.(Base)
 	} else {
 		o.value = nil
+	}
+	return nil
+}
+
+func (*resultGetBase) Skip(d binary.Decoder) error {
+	if err := d.SkipObject(); err != nil {
+		return err
 	}
 	return nil
 }
@@ -417,6 +565,13 @@ func (o *resultGetDerived) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultGetDerived) Skip(d binary.Decoder) error {
+	if err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o resultGetListNodeChain) Encode(e binary.Encoder) error {
 	if o.value != nil {
 		if err := e.Object(o.value); err != nil {
@@ -439,8 +594,15 @@ func (o *resultGetListNodeChain) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultGetListNodeChain) Skip(d binary.Decoder) error {
+	if err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o resultGetListNodeChainArray) Encode(e binary.Encoder) error {
-	if err := e.Int32(int32(len(o.value))); err != nil {
+	if err := e.Uint32(uint32(len(o.value))); err != nil {
 		return err
 	}
 	for i := range o.value {
@@ -456,7 +618,7 @@ func (o resultGetListNodeChainArray) Encode(e binary.Encoder) error {
 }
 
 func (o *resultGetListNodeChainArray) Decode(d binary.Decoder) error {
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.value = make(ListNodeArray, count)
@@ -473,15 +635,35 @@ func (o *resultGetListNodeChainArray) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultGetListNodeChainArray) Skip(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipObject(); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func (o resultGetResource) Encode(e binary.Encoder) error {
-	if err := o.value.Encode(e); err != nil {
+	if err := e.Value(&o.value); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *resultGetResource) Decode(d binary.Decoder) error {
-	if err := o.value.Decode(d); err != nil {
+	if err := d.Value(&o.value); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*resultGetResource) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*ResourceId)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -509,29 +691,50 @@ func (o *resultGetSingleListNode) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultGetSingleListNode) Skip(d binary.Decoder) error {
+	if err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o resultGetStruct) Encode(e binary.Encoder) error {
-	if err := o.value.Encode(e); err != nil {
+	if err := e.Value(&o.value); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *resultGetStruct) Decode(d binary.Decoder) error {
-	if err := o.value.Decode(d); err != nil {
+	if err := d.Value(&o.value); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*resultGetStruct) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*Struct)(nil)); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o resultResolveResource) Encode(e binary.Encoder) error {
-	if err := o.value.Encode(e); err != nil {
+	if err := e.Value(&o.value); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (o *resultResolveResource) Decode(d binary.Decoder) error {
-	if err := o.value.Decode(d); err != nil {
+	if err := d.Value(&o.value); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (*resultResolveResource) Skip(d binary.Decoder) error {
+	if err := d.SkipValue((*Resource)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -545,10 +748,18 @@ func (o *resultSetStruct) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*resultSetStruct) Skip(d binary.Decoder) error {
+	return nil
+}
+
 func (o resultUseResource) Encode(e binary.Encoder) error {
 	return nil
 }
 
 func (o *resultUseResource) Decode(d binary.Decoder) error {
+	return nil
+}
+
+func (*resultUseResource) Skip(d binary.Decoder) error {
 	return nil
 }

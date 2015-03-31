@@ -20,20 +20,15 @@ import (
 	"fmt"
 )
 
+// IDSize is the size of an ID.
+const IDSize = 20
+
 // ID is a codeable unique identifier.
-type ID [20]byte
+type ID [IDSize]byte
 
 // Valid returns true if the id is not the default value.
 func (id ID) Valid() bool {
 	return id != ID{}
-}
-
-func (id ID) Encode(e Encoder) error {
-	return e.Data(id[:])
-}
-
-func (id *ID) Decode(d Decoder) error {
-	return d.Data((*id)[:])
 }
 
 func (id ID) Format(f fmt.State, c rune) {

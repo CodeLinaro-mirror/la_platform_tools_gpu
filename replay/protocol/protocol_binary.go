@@ -24,21 +24,21 @@ func (o Payload) Encode(e binary.Encoder) error {
 	if err := e.Uint32(o.VolatileMemorySize); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.Constants))); err != nil {
+	if err := e.Uint32(uint32(len(o.Constants))); err != nil {
 		return err
 	}
 	if err := e.Data(o.Constants); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.Resources))); err != nil {
+	if err := e.Uint32(uint32(len(o.Resources))); err != nil {
 		return err
 	}
 	for i := range o.Resources {
-		if err := o.Resources[i].Encode(e); err != nil {
+		if err := e.Value(&o.Resources[i]); err != nil {
 			return err
 		}
 	}
-	if err := e.Int32(int32(len(o.Opcodes))); err != nil {
+	if err := e.Uint32(uint32(len(o.Opcodes))); err != nil {
 		return err
 	}
 	if err := e.Data(o.Opcodes); err != nil {
@@ -58,7 +58,7 @@ func (o *Payload) Decode(d binary.Decoder) error {
 	} else {
 		o.VolatileMemorySize = uint32(obj)
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Constants = make([]byte, count)
@@ -66,21 +66,54 @@ func (o *Payload) Decode(d binary.Decoder) error {
 			return err
 		}
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Resources = make([]ResourceInfo, count)
 		for i := range o.Resources {
-			if err := o.Resources[i].Decode(d); err != nil {
+			if err := d.Value(&o.Resources[i]); err != nil {
 				return err
 			}
 		}
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Opcodes = make([]byte, count)
 		if err := d.Data(o.Opcodes); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (*Payload) Skip(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
+			return err
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*ResourceInfo)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		if err := d.Skip(count); err != nil {
 			return err
 		}
 	}
@@ -107,6 +140,17 @@ func (o *ResourceInfo) Decode(d binary.Decoder) error {
 		return err
 	} else {
 		o.Size = uint32(obj)
+	}
+	return nil
+}
+
+func (*ResourceInfo) Skip(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if _, err := d.Uint32(); err != nil {
+		return err
 	}
 	return nil
 }

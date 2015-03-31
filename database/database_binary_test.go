@@ -33,6 +33,13 @@ func (o *testRequest) Decode(d binary.Decoder) error {
 	return nil
 }
 
+func (*testRequest) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o testResource) Encode(e binary.Encoder) error {
 	if err := e.Int32(int32(o.Int)); err != nil {
 		return err
@@ -40,7 +47,7 @@ func (o testResource) Encode(e binary.Encoder) error {
 	if err := e.String(o.String); err != nil {
 		return err
 	}
-	if err := e.Int32(int32(len(o.Array))); err != nil {
+	if err := e.Uint32(uint32(len(o.Array))); err != nil {
 		return err
 	}
 	for i := range o.Array {
@@ -62,7 +69,7 @@ func (o *testResource) Decode(d binary.Decoder) error {
 	} else {
 		o.String = string(obj)
 	}
-	if count, err := d.Int32(); err != nil {
+	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		o.Array = make([]bool, count)
@@ -71,6 +78,26 @@ func (o *testResource) Decode(d binary.Decoder) error {
 				return err
 			} else {
 				o.Array[i] = bool(obj)
+			}
+		}
+	}
+	return nil
+}
+
+func (*testResource) Skip(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Bool(); err != nil {
+				return err
 			}
 		}
 	}

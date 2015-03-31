@@ -43,3 +43,6 @@ type Generate struct{}
 
 func (Generate) Encode(Encoder) error { panic(fmt.Errorf("Missing encode function")) }
 func (Generate) Decode(Decoder) error { panic(fmt.Errorf("Missing decode function")) }
+func (Generate) Skip(Decoder) error   { panic(fmt.Errorf("Missing skip function")) }
+
+var _ Object = Generate{} // Verify that Generate implements Object.

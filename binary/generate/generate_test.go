@@ -114,28 +114,30 @@ func TestFieldTypeAffectsID(t *testing.T) {
 }
 
 func TestTypes(t *testing.T) {
-	prefix := "type Other [20]byte\n"
+	prefix := "type Other [10]int\n"
 	fields := []Field{
-		{"a", &Type{"uint8", "uint8", Native, nil, nil, "Uint8"}, false},
-		{"b", &Type{"uint16", "uint16", Native, nil, nil, "Uint16"}, false},
-		{"c", &Type{"uint32", "uint32", Native, nil, nil, "Uint32"}, false},
-		{"d", &Type{"uint64", "uint64", Native, nil, nil, "Uint64"}, false},
-		{"e", &Type{"int8", "int8", Native, nil, nil, "Int8"}, false},
-		{"f", &Type{"int16", "int16", Native, nil, nil, "Int16"}, false},
-		{"g", &Type{"int32", "int32", Native, nil, nil, "Int32"}, false},
-		{"h", &Type{"int64", "int64", Native, nil, nil, "Int64"}, false},
-		{"i", &Type{"float32", "float32", Native, nil, nil, "Float32"}, false},
-		{"j", &Type{"float64", "float64", Native, nil, nil, "Float64"}, false},
-		{"k", &Type{"byte", "uint8", Remap, nil, nil, "Uint8"}, false},
-		{"l", &Type{"int", "int32", Remap, nil, nil, "Int32"}, false},
-		{"m", &Type{"bool", "bool", Native, nil, nil, "Bool"}, false},
-		{"n", &Type{"string", "string", Native, nil, nil, "String"}, false},
-		{"o", &Type{"struct{}", "struct{}", Codeable, nil, nil, ""}, false},
-		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, nil, ""}, false},
-		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, nil, ""}, false},
-		{"r", &Type{"interface{}", "interface{}", Interface, nil, nil, ""}, false},
-		{"s", &Type{"map[string]struct{}", "map[string]struct{}", Map, nil, nil, ""}, false},
-		{"", &Type{"Other", "[20]byte", Codeable, nil, nil, ""}, true},
+		{"a", &Type{"uint8", "uint8", Native, nil, nil, "Uint8", ""}, false},
+		{"b", &Type{"uint16", "uint16", Native, nil, nil, "Uint16", ""}, false},
+		{"c", &Type{"uint32", "uint32", Native, nil, nil, "Uint32", ""}, false},
+		{"d", &Type{"uint64", "uint64", Native, nil, nil, "Uint64", ""}, false},
+		{"e", &Type{"int8", "int8", Native, nil, nil, "Int8", ""}, false},
+		{"f", &Type{"int16", "int16", Native, nil, nil, "Int16", ""}, false},
+		{"g", &Type{"int32", "int32", Native, nil, nil, "Int32", ""}, false},
+		{"h", &Type{"int64", "int64", Native, nil, nil, "Int64", ""}, false},
+		{"i", &Type{"float32", "float32", Native, nil, nil, "Float32", ""}, false},
+		{"j", &Type{"float64", "float64", Native, nil, nil, "Float64", ""}, false},
+		{"k", &Type{"byte", "uint8", Remap, nil, nil, "Uint8", ""}, false},
+		{"l", &Type{"int", "int32", Remap, nil, nil, "Int32", ""}, false},
+		{"m", &Type{"bool", "bool", Native, nil, nil, "Bool", ""}, false},
+		{"n", &Type{"string", "string", Native, nil, nil, "String", "SkipString"}, false},
+		{"o", &Type{"struct{}", "struct{}", Codeable, nil, nil, "", ""}, false},
+		{"p", &Type{"*struct{}", "*struct{}", Pointer, nil, nil, "", ""}, false},
+		{"q", &Type{"[]struct{}", "[]struct{}", Array, nil, nil, "", ""}, false},
+		{"r", &Type{"interface{}", "interface{}", Interface, nil, nil, "", ""}, false},
+		{"s", &Type{"map[string]struct{}", "map[string]struct{}", Map, nil, nil, "", ""}, false},
+		{"u", &Type{"[]byte", "[]byte", Array, nil, nil, "Data", ""}, false},
+		{"v", &Type{"binary.ID", "[20]byte", Native, nil, nil, "ID", "SkipID"}, false},
+		{"", &Type{"Other", "[10]int", Array, nil, nil, "", ""}, true},
 	}
 	source := &bytes.Buffer{}
 	fmt.Fprintln(source, prefix)
@@ -167,6 +169,10 @@ func TestTypes(t *testing.T) {
 		if got.Type.Method != expected.Type.Method {
 			t.Errorf("Got encoder method %s, expected %s for %s %s",
 				got.Type.Method, expected.Type.Method, expected.Name, expected.Type.Name)
+		}
+		if got.Type.SkipMethod != expected.Type.SkipMethod {
+			t.Errorf("Got decoder skip method %s, expected %s for %s %s",
+				got.Type.SkipMethod, expected.Type.SkipMethod, expected.Name, expected.Type.Name)
 		}
 		if got.Anonymous != expected.Anonymous {
 			t.Errorf("Got anonymous %v, expected %v for %s %s", got.Anonymous, expected.Anonymous, expected.Name, expected.Type.Name)

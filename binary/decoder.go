@@ -17,11 +17,27 @@ package binary
 // Decoder extends Reader with additional methods for decoding objects.
 type Decoder interface {
 	Reader
-	// Object decodes and returns a Decodable. Object instances that were encoded
-	// multiple times may be decoded and returned as a shared, single instance.
-	// The type id in the stream must have been previously registered with
-	// binary.registry.Add.
+	// ID decodes a binary.ID from the stream.
+	ID() (ID, error)
+	// SkipID skips over a binary.ID in the stream.
+	SkipID() error
+	// Value decodes a Decodable from the stream.
+	Value(Decodable) error
+	// SkipValue must skip the same data that a call to Value would read.
+	// The value may be a typed nil.
+	SkipValue(Decodable) error
+	// Variant decodes and returns a Decodable from the stream. The type id in the
+	// stream must have been previously registered with binary.registry.Add.
+	Variant() (interface{}, error)
+	// SkipVariant must skip the same data that a call to Variant would read.
+	SkipVariant() error
+	// Object decodes and returns a Decodable from the stream. Object instances
+	// that were encoded multiple times may be decoded and returned as a shared,
+	// single instance. The type id in the stream must have been previously
+	// registered with binary.registry.Add.
 	Object() (interface{}, error)
+	// SkipObject must skip the same data that a call to Object would read.
+	SkipObject() error
 }
 
 // Decodable is the interface for an object that can be read from a Decoder.
@@ -29,4 +45,8 @@ type Decodable interface {
 	// Decode the object's data from the Decoder.
 	// The implementation must be symmetrical to Encode.
 	Decode(Decoder) error
+	// Skip the object's data from the Decoder.
+	// This must skip the same data that Decode would have read, and must be safe
+	// to call with a nil receiver.
+	Skip(Decoder) error
 }

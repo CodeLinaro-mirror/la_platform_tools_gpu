@@ -17,8 +17,16 @@ package binary
 // Encoder extends Writer with additional methods for encoding objects.
 type Encoder interface {
 	Writer
-	// Object encodes an Encodable. The type of obj must have
+	// ID writes a binary.ID to the stream.
+	ID(ID) error
+	// Object encodes an Encodable with no type preamble and no sharing.
+	Value(obj Encodable) error
+	// Variant encodes an Encodable with no sharing. The type of obj must have
 	// been previously registered with binary.registry.Add.
+	Variant(obj Encodable) error
+	// Object encodes an Encodable, optionally encoding objects only on the first
+	// time it sees them. The type of obj must have been previously registered
+	// with binary.registry.Add.
 	Object(obj Encodable) error
 }
 
