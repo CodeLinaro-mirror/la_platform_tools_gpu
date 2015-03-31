@@ -35,7 +35,7 @@ type TypeB struct {
 }
 
 type BadType struct {
-	binary.Generate "disable"
+	binary.Generate `disable:"true"`
 	data            string
 }
 

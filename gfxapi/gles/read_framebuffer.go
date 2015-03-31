@@ -26,7 +26,7 @@ var _ = replay.Replayer(readFramebufferColor{})
 // readFramebufferDepth is an atom used to postback the content of the currently
 // bound framebuffer's depth attachment.
 type readFramebufferDepth struct {
-	binary.Generate "disable"
+	binary.Generate `disable:"true"`
 	contextID       atom.ContextID
 	database        database.Database
 }
@@ -223,7 +223,7 @@ func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Buil
 // readFramebufferColor is an atom used to postback the content of the currently
 // bound framebuffer's color attachment.
 type readFramebufferColor struct {
-	binary.Generate "disable"
+	binary.Generate `disable:"true"`
 	contextID       atom.ContextID
 	width, height   uint32
 }
