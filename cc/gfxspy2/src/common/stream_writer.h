@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-#include "id.h"
-#include "hash.h"
+#ifndef GAPIC_WRITER_H
+#define GAPIC_WRITER_H
 
-Id::Id() {
-}
+#include <stdint.h>
 
-Id::Id(const void* ptr, uint64_t size) {
-    hash(ptr, size, *this);
-}
+namespace gapic {
 
-void Id::hash(const void* ptr, uint64_t size, Id& out) {
-    MurmurHash3_x86_128(ptr, size, 0x342d23f2, &out.data[0]);
-    MurmurHash3_x86_128(ptr, size, 0x89e15a65, &out.data[8]);
-    MurmurHash3_x86_32(ptr, size, 0x4dd61236, &out.data[16]);
-}
+// StreamWriter is a pure-virtual interface used to write data streams.
+class StreamWriter {
+public:
+    virtual void Write(const void* data, uint64_t size) = 0;
+
+protected:
+    virtual ~StreamWriter() {}
+};
+
+} // namespace gapic
+
+#endif // GAPIC_WRITER_H

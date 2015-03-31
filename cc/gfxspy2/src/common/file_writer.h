@@ -14,21 +14,29 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_GFXSPY_FILE_WRITER_H
-#define ANDROID_GFXSPY_FILE_WRITER_H
+#ifndef GAPIC_FILE_WRITER_H
+#define GAPIC_FILE_WRITER_H
 
 #include "stream_writer.h"
 
 #include <stdio.h>
 
+namespace gapic {
+
+// FileWriter is an implementation of the StreamWriter interface that writes to
+// a binary file.
 class FileWriter : public StreamWriter {
 public:
     FileWriter(const char* path);
     ~FileWriter();
+
+    // StreamWriter compliance
     virtual void Write(const void* data, uint64_t size) override;
 
 private:
     FILE* mFile;
 };
 
-#endif // ANDROID_GFXSPY_FILE_WRITER_H
+} // namespace gapic
+
+#endif // GAPIC_FILE_WRITER_H
