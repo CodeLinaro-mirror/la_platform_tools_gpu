@@ -146,7 +146,8 @@ type memoryWrite struct {
 // Memory slice has Get called will any resolving, loading or copying of binary
 // data occur.
 type Memory struct {
-	writes []memoryWrite
+	binary.Generate "disable"
+	writes          []memoryWrite
 }
 
 // Slice returns a DataSliceWriter referencing the subset of the Memory range.
@@ -158,6 +159,3 @@ func (m *Memory) Slice(rng Range) DataSliceWriter {
 func (m *Memory) Write(d Data) {
 	m.writes = append(m.writes, memoryWrite{Range{Base: 0, Size: d.Size()}, d})
 }
-
-func (m *Memory) Encode(e binary.Encoder) error { return nil /* Currently not persisted */ }
-func (m *Memory) Decode(d binary.Decoder) error { return nil /* Currently not persisted */ }
