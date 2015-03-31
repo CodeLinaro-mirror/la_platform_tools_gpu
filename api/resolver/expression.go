@@ -356,13 +356,14 @@ func length(ctx *context, in *ast.Length) *semantic.Length {
 		return out
 	}
 	ok := false
-	switch at.(type) {
+	ty := baseType(at)
+	switch ty.(type) {
 	case *semantic.Array:
 		ok = true
 	case *semantic.Map:
 		ok = true
 	case *semantic.Builtin:
-		if at == semantic.StringType || at == semantic.PointerType {
+		if ty == semantic.StringType || ty == semantic.PointerType {
 			ok = true
 		}
 	}

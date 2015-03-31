@@ -37,12 +37,27 @@ limitations under the License.
   {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsPointerType $}}void*
   {{else if IsString      $}}const char*
-  {{else if IsEnum        $}}{{$.Name}}
+  {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsMemory      $}}Memory
   {{else if IsAny         $}}auto
   {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ type for the specified Enum.
+  By default this emits the enum name, but this behaviour can be overridden with
+  the global "C++.EnumTypeOverride".
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.EnumType"}}
+  {{AssertType $ "Enum"}}
+
+  {{$override := Global "C++.EnumTypeOverride"}}
+  {{if $override}}{{$override}}{{else}}{{$.Name}}{{end}}
 {{end}}
 
 
@@ -157,36 +172,6 @@ limitations under the License.
 
   {{$ty := TypeOf $.Return}}
   {{Macro "C++.Type" $ty}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  If the specified function has any parameters of type 'any', then this macro
-  emits a function template specifier listing each of the 'any' parameters
-  for the given function.
--------------------------------------------------------------------------------
-*/}}
-{{define "TemplateParameters"}}
-  {{AssertType $ "Function"}}
-
-  {{$params := ForEach $.FullParameters "C++.ParameterTypenameAny"}}
-  {{if $params}}template<{{$params | JoinWith ", "}}>{{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  If the specified parameter is of type 'any' then this macro emits the
-  corresponding template typename declaration. If the parameter is not of type
-  'any' then nothing is emitted.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.ParameterTypenameAny"}}
-  {{AssertType $ "Parameter"}}
-
-  {{$name := Macro "C++.ParameterTypeAny" $}}
-  {{if $name}}typename {{Macro "C++.ParameterTypeAny" $}}{{end}}
 {{end}}
 
 
@@ -310,7 +295,8 @@ limitations under the License.
   {{else if IsMapIndex         $}}{{Macro "C++.Read" $.Map}}[{{Macro "C++.Read" $.Index}}]
   {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
   {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
-  {{else if IsClassInitializer $}}{{Macro "C++.StateType" $}}()
+  {{else if IsClassInitializer $}}
+    {{Macro "C++.StateType" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.StateType" $ty.To}}>(new {{Macro "C++.StateType" $ty.To}}())
   {{else if IsSelect           $}}
     /* switch({{Macro "C++.Read" $.Value}}) */»
@@ -391,7 +377,8 @@ limitations under the License.
   {{AssertType $ "Call"}}
 
   {{if $.Target.Object}}{{Macro "C++.MethodCall" $}}
-  {{else              }}{{$.Target.Function.Name}}(§{{Macro "C++.ReadList" $.Arguments}})
+  {{else}}{{/* extern */}}
+    {{Global "C++.ExternPrefix"}}{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
   {{end}}
 {{end}}
 
@@ -467,6 +454,10 @@ limitations under the License.
   ////////////////////////////////////////////////////////////////////////////////
 {{end}}
 
+{{/* Defaults */}}
+{{if not (Global "C++.ExternPrefix")}}
+  {{Global "C++.ExternPrefix" ""}}
+{{end}}
 
 {{$clang_style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"}}
 {{Global "clang-format" (Strings "clang-format" "-style" $clang_style)}}

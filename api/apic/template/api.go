@@ -39,6 +39,19 @@ func (*Functions) GetAnnotation(ty interface{}, name string) *semantic.Annotatio
 	return a.GetAnnotation(name)
 }
 
+// Underlying returns the underlying type for ty by recursively traversing the
+// pseudonym chain until reaching and returning the first non-pseudoym type.
+// If ty is not a pseudonym then it is simply returned.
+func (f *Functions) Underlying(ty semantic.Type) semantic.Type {
+	for {
+		if pseudo, ok := ty.(*semantic.Pseudonym); ok {
+			ty = pseudo.To
+		} else {
+			return ty
+		}
+	}
+}
+
 // GetArrayParamCount returns the inferred array size for param as a semantic
 // expression. If the array size cannot be inferred, then GetArrayParamCount
 // returns nil.

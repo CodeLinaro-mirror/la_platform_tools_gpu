@@ -573,6 +573,8 @@ limitations under the License.
   {{else if IsF64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsU64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsS64         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsInt         $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsUint        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsString      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsEnum        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsPointerType $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}

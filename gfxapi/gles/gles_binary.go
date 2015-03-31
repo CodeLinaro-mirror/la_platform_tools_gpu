@@ -1203,8 +1203,14 @@ func init() {
 	registry.Add(binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}, &VertexArray{})
 	//struct gles.VertexAttribute { CreatedAt:atom.ID, Name:string, VectorCount:int32, Type:ShaderAttribType }
 	registry.Add(binary.ID{0xfd, 0x98, 0xd6, 0x90, 0x60, 0x52, 0x6f, 0xa2, 0x9c, 0x21, 0xde, 0xa1, 0x72, 0xe6, 0x53, 0x6b, 0x3e, 0x76, 0x01, 0xd4}, &VertexAttribute{})
-	//struct gles.VertexAttributeArray { CreatedAt:atom.ID, Enabled:bool, Size:int32, Type:VertexAttribType, Normalized:bool, Stride:int32, Data:memory.Pointer }
-	registry.Add(binary.ID{0xe3, 0x60, 0xc4, 0x18, 0x4a, 0x52, 0x23, 0x65, 0xc3, 0xc9, 0x59, 0x67, 0x6b, 0x4e, 0xba, 0xa6, 0x3e, 0xa4, 0x8a, 0xf2}, &VertexAttributeArray{})
+	//struct gles.VertexAttributeArray { CreatedAt:atom.ID, Enabled:bool, Size:int32, Type:VertexAttribType, Normalized:bool, Stride:int32, Buffer:BufferId, Pointer:memory.Pointer }
+	registry.Add(binary.ID{0xdf, 0xc2, 0xa1, 0x19, 0xde, 0x94, 0x60, 0x90, 0xb7, 0x97, 0x38, 0xec, 0x44, 0x9d, 0x26, 0x87, 0xe4, 0x8b, 0xdd, 0x08}, &VertexAttributeArray{})
+	//struct gles.WglSwapBuffers { Context:atom.ContextID, In:WglSwapBuffers_In, Out:WglSwapBuffers_Out }
+	registry.Add(binary.ID{0xac, 0x03, 0x9a, 0x19, 0x4f, 0x76, 0x33, 0xbe, 0x44, 0xc6, 0x4e, 0x3e, 0x1d, 0x42, 0xc8, 0x20, 0x17, 0x81, 0xe6, 0xdb}, &WglSwapBuffers{})
+	//struct gles.WglSwapBuffers_In { Hdc:HDC }
+	registry.Add(binary.ID{0x45, 0xfb, 0x5a, 0xc7, 0xb6, 0xb9, 0x4e, 0x7b, 0x06, 0xe9, 0x11, 0x10, 0xe7, 0x0b, 0xbb, 0x39, 0x55, 0x62, 0x1f, 0x05}, &WglSwapBuffers_In{})
+	//struct gles.WglSwapBuffers_Out { }
+	registry.Add(binary.ID{0x1b, 0x76, 0x16, 0x97, 0xac, 0x80, 0x8e, 0x6a, 0x49, 0xd5, 0x22, 0xc9, 0x62, 0x2d, 0x97, 0xc5, 0x42, 0xd6, 0x69, 0x84}, &WglSwapBuffers_Out{})
 }
 
 func (o BlendState) Encode(e binary.Encoder) error {
@@ -16634,7 +16640,10 @@ func (o VertexAttributeArray) Encode(e binary.Encoder) error {
 	if err := e.Int32(o.Stride); err != nil {
 		return err
 	}
-	if err := e.Uint64(uint64(o.Data)); err != nil {
+	if err := e.Uint32(uint32(o.Buffer)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Pointer)); err != nil {
 		return err
 	}
 	return nil
@@ -16671,10 +16680,67 @@ func (o *VertexAttributeArray) Decode(d binary.Decoder) error {
 	} else {
 		o.Stride = int32(obj)
 	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buffer = BufferId(obj)
+	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Data = memory.Pointer(obj)
+		o.Pointer = memory.Pointer(obj)
 	}
+	return nil
+}
+
+func (o WglSwapBuffers) Encode(e binary.Encoder) error {
+	if err := e.Uint32(uint32(o.Context)); err != nil {
+		return err
+	}
+	if err := o.In.Encode(e); err != nil {
+		return err
+	}
+	if err := o.Out.Encode(e); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *WglSwapBuffers) Decode(d binary.Decoder) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Context = atom.ContextID(obj)
+	}
+	if err := o.In.Decode(d); err != nil {
+		return err
+	}
+	if err := o.Out.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o WglSwapBuffers_In) Encode(e binary.Encoder) error {
+	if err := e.Uint64(uint64(o.Hdc)); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *WglSwapBuffers_In) Decode(d binary.Decoder) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Hdc = HDC(obj)
+	}
+	return nil
+}
+
+func (o WglSwapBuffers_Out) Encode(e binary.Encoder) error {
+	return nil
+}
+
+func (o *WglSwapBuffers_Out) Decode(d binary.Decoder) error {
 	return nil
 }

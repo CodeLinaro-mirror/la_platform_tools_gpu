@@ -1645,6 +1645,7 @@ typedef void* IndicesPointer;
 typedef void* VertexPointer;
 typedef void* TexturePointer;
 typedef void* BufferDataPointer;
+typedef void* HDC;
 typedef void* ImageOES;
 
 // Maps
@@ -1852,7 +1853,8 @@ struct VertexAttributeArray {
     VertexAttribType Type;
     bool Normalized;
     int32_t Stride;
-    void* Data;
+    BufferId Buffer;
+    void* Pointer;
 };
 
 struct Query {

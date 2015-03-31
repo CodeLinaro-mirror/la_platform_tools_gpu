@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{Global "C++.EnumTypeOverride" "uint32_t"}}
+
 {{Include "cpp_common.tmpl"}}
 {{$ | Macro "State" | Reflow 4 | Write "state.h"}}
 
@@ -18,29 +20,30 @@ limitations under the License.
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
 ¶
-  #ifndef ANDROID_GFXSPY_STATE_H
-  #define ANDROID_GFXSPY_STATE_H
+  #ifndef GAPII_STATE_H
+  #define GAPII_STATE_H
 ¶
-  #include "encoder.h"
+  #include "common/encoder.h"
   #include "types.h"
 ¶
   namespace gfxspy {«
 ¶
   class State {
   «public:»
+    typedef std::function<void(void* ptr, uint64_t offset, uint64_t size)> ObserveFunc;
+¶
     {{range $f := $.Functions}}
       inline void {{$f.Name}}({{Macro "Parameters" $f}});
     {{end}}
+¶
+    ObserveFunc read;
+    ObserveFunc write;
 ¶
     {{range $g := $.Globals}}
       {{Macro "C++.Type" $g}} {{$g.Name}};
     {{end}}
 ¶
-  «private:»
-    {{range $e := $.Externs}}
-      {{Macro "TemplateParameters" $e}}
-      {{Macro "C++.ReturnType" $e}} {{$e.Name}}({{Macro "C++.CallParameters" $e}});
-    {{end}}
+#include "state_externs.inl"
   };
 ¶
   {{range $f := $.Functions}}
@@ -50,7 +53,8 @@ limitations under the License.
   {{end}}
 ¶
   »} // namespace gfxspy
-  #endif // ANDROID_GFXSPY_STATE_H
+¶
+  #endif // GAPII_STATE_H
 ¶
 {{end}}
 
@@ -89,9 +93,10 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{     if IsAssign $}}{{Macro "Assign" $}}
-  {{else if IsReturn $}}return;
-  {{else if IsBranch $}}if ({{Macro "C++.Read" $.Condition}}) {
+  {{     if IsAssign    $}}{{if not (Macro "IsOutput" $.LHS   )}}{{Macro "C++.Statement" $}}{{end}}
+  {{else if IsMapAssign $}}{{if not (Macro "IsOutput" $.To.Map)}}{{Macro "C++.Statement" $}}{{end}}
+  {{else if IsReturn    $}}return;
+  {{else if IsBranch    $}}if ({{Macro "C++.Read" $.Condition}}) {
     {{Macro "C++.Block" $.True}}
     {{if len $.False.Statements}}
       } else {
@@ -116,14 +121,13 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the logic to perform an assign statement if the LHS is not an output.
+  Emits a non-empty string if the expression refers to a (or part of) an output
+  parameter.
 -------------------------------------------------------------------------------
 */}}
-{{define "Assign"}}
-  {{AssertType $ "Assign"}}
-
-  {{if not ((IsParameter $.LHS) $.LHS.Output)}}
-    {{Macro "C++.Read" $.LHS}} = {{Macro "C++.Read" $.RHS}};
+{{define "IsOutput"}}
+  {{if      IsParameter  $}}{{if $.Output}}TRUE{{end}}
+  {{else if IsArrayIndex $}}{{Macro "IsOutput" $.Array}}
   {{end}}
 {{end}}
 
