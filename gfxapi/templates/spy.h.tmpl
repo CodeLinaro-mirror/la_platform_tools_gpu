@@ -11,6 +11,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{Global "C++.EnumTypeOverride" "uint32_t"}}
+{{Global "C++.ExternPrefix"     "mState."}}
+
 {{Include "cpp_common.tmpl"}}
 {{$ | Macro "Spy" | Reflow 4 | Write "spy.h"}}
 
@@ -18,30 +21,36 @@ limitations under the License.
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
 ¶
-  #ifndef ANDROID_GFXSPY_SPY_H
-  #define ANDROID_GFXSPY_SPY_H
+  #ifndef GAPII_SPY_H
+  #define GAPII_SPY_H
 ¶
-  #include "encoder.h"
+  #include "common/encoder.h"
   #include "types.h"
   #include "state.h"
 ¶
   #include <stdint.h>
+  #include <unordered_set>
 ¶
-  namespace gfxspy {«
+  namespace gapii {«
 ¶
   class Spy {
   «public:»
-    inline Spy(uint32_t contextId, Encoder* encoder);
-
+    inline Spy(uint32_t contextId, gapic::Encoder* encoder);
+    inline Spy::~Spy();
+¶
     {{range $f := $.Functions}}
-      {{Macro "MethodDefinitions" $f}}
+      {{if not (GetAnnotation $f "synthetic")}}
+        {{Macro "MethodDefinitions" $f}}
+      {{end}}
     {{end}}
 ¶
   «private:»
-    static const Id RESOURCE_ID;
-    static const Id OBSERVATION_ID;
+    static const gapic::Id RESOURCE_ID;
+    static const gapic::Id OBSERVATION_ID;
     {{range $f := $.Functions}}
-      static const Id {{Macro "ID" $f}};
+      {{if not (GetAnnotation $f "synthetic")}}
+        static const gapic::Id {{Macro "ID" $f}};
+      {{end}}
     {{end}}
 ¶
     enum order {
@@ -49,44 +58,67 @@ limitations under the License.
       POST_OBSERVE,
     };
 ¶
-    bool observed(const Id& id) const;
-    template <typename T> inline void observe(const T* ptr, uint64_t cnt, order order);
+    inline void observe(const void* base, uint64_t offset, uint64_t size);
+¶
+    std::unordered_set<gapic::Id> mObserved;
     uint32_t mContextId;
-    Encoder* mEncoder;
+    std::unique_ptr<gapic::Encoder> mEncoder;
+    Imports mImports;
     State mState;
   };
 ¶
   // Inline methods
-  inline Spy::Spy(uint32_t contextId, Encoder* encoder) :
-      mContextId(contextId), mEncoder(encoder) {}
-¶
-  template <typename T>
-  inline void Spy::observe(const T* ptr, uint64_t cnt, order order) {
-      const uint64_t size = cnt * sizeof(T);
-      Id id(ptr, size);
-      if (!observed(id)) {
-        mEncoder->Id(RESOURCE_ID);
-        mEncoder->Id(id);
-        mEncoder->Data(ptr, size);
-      }
-      mEncoder->Id(OBSERVATION_ID);
-      mEncoder->Bool(order == PRE_OBSERVE);
-      mEncoder->U64(reinterpret_cast<uint64_t>(ptr));
-      mEncoder->U64(size);
+  inline Spy::Spy(uint32_t contextId, gapic::Encoder* encoder) : mContextId(contextId), mEncoder(encoder) {
+    mState.read = std::bind(&Spy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    mState.write = std::bind(&Spy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    mImports.Resolve();
+
+    // HACK TODO: Remove
+    const int32_t  width   = 256;
+    const int32_t  height  = 256;
+    const uint32_t color   = RenderbufferFormat::GL_RGB565;
+    const uint32_t depth   = RenderbufferFormat::GL_DEPTH_COMPONENT16;
+    const uint32_t stencil = RenderbufferFormat::GL_STENCIL_INDEX8;
+    mState.init(width, height, color, depth, stencil);
+    mEncoder->U16(0); // INIT_ID
+    mEncoder->U32(mContextId);
+    mEncoder->S32(width);
+    mEncoder->S32(height);
+    mEncoder->U32(color);
+    mEncoder->U32(depth);
+    mEncoder->U32(stencil);
   }
 ¶
-  template <>
-  inline void Spy::observe(const void *ptr, uint64_t cnt, order order) {
-      observe<uint8_t>(reinterpret_cast<const uint8_t*>(ptr), cnt, order);
+  Spy::~Spy() {
+      mEncoder->U16(0xffff); // Type ID -- TODO: mEncoder->Id(EOS_ID);
+  }
+¶
+  inline void Spy::observe(const void* base, uint64_t offset, uint64_t size) {
+    const void* ptr = reinterpret_cast<const uint8_t*>(base) + offset;
+    gapic::Id id(ptr, size);
+    if (mObserved.count(id) == 0) {
+        mEncoder->U16(0xfffd); // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
+        mEncoder->Id(id);
+        mEncoder->Data(ptr, static_cast<int32_t>(size));
+        mObserved.emplace(id);
+    }
+    mEncoder->U16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
+    mEncoder->U32(mContextId);
+    mEncoder->U64(reinterpret_cast<uint64_t>(ptr));
+    mEncoder->U64(size);
+    mEncoder->Id(id);
   }
 ¶
   {{range $i, $f := $.Functions}}
-    {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
-    {{Macro "MethodImplementation" $f}}¶
+    {{if not (GetAnnotation $f "synthetic")}}
+      {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
+      {{Macro "MethodImplementation" $f}}¶
+    {{end}}
   {{end}}
 ¶
-  »} // namespace gfxspy
-  #endif // ANDROID_GFXSPY_SPY_H
+  »} // namespace gapii
+¶
+  #endif // GAPII_SPY_H
 ¶
 {{end}}
 
@@ -105,26 +137,13 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the function pointer parameter for the spy Call function.
--------------------------------------------------------------------------------
-*/}}
-{{define "FunctionPointer"}}
-  {{AssertType $ "Function"}}
-
-  {{Macro "C++.ReturnType" $}} (__stdcall *F)({{Macro "C++.CallParameterTypes" $}})
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   Emits a single C++ method definition for the given atom.
 -------------------------------------------------------------------------------
 */}}
 {{define "MethodDefinitions"}}
   {{AssertType $ "Function"}}
 
-  {{$cp := Macro "C++.CallParameters" $}}
-  inline {{Macro "C++.ReturnType" $}} {{$.Name}}({{Macro "FunctionPointer" $}}{{if $cp}}, {{$cp}}{{end}});
+  inline {{Macro "C++.ReturnType" $}} {{$.Name}}({{Macro "C++.CallParameters" $}});
 {{end}}
 
 
@@ -136,70 +155,24 @@ limitations under the License.
 {{define "MethodImplementation"}}
   {{AssertType $ "Function"}}
 
-  {{$cp  := Macro "C++.CallParameters" $}}
   {{$ret := not (IsVoid $.Return.Type)}}
-  inline {{Macro "C++.ReturnType" $}} Spy::{{$.Name}}({{Macro "FunctionPointer" $}}{{if $cp}}, {{$cp}}{{end}}) {
-    {{$pre_obs  := Macro "PreCallObservations"  $}}
-    {{$post_obs := Macro "PostCallObservations" $}}
-
-    {{if $pre_obs}}{{$pre_obs}}¶{{end}}
-
-    {{if $ret}}{{Macro "C++.ReturnType" $}} result = F({{Macro "C++.CallArguments" $}});
-    {{else}}F({{Macro "C++.CallArguments" $}});
+  inline {{Macro "C++.ReturnType" $}} Spy::{{$.Name}}({{Macro "C++.CallParameters" $}}) {
+    {{if $ret}}{{Macro "C++.ReturnType" $}} result = mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
+    {{else}}mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
     {{end}}
     mState.{{$.Name}}({{Macro "C++.ReadList" $.FullParameters}});
 ¶
-    {{/*{{if $post_obs}}{{$post_obs}}¶{{end}}*/}}
-
     mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     mEncoder->U32(mContextId);
     {{range $i, $p := $.FullParameters}}
       {{$name := Macro "C++.ReadParameter" $p}}
-      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $name}};
+      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $name}}
     {{end}}
 
     {{if $ret}}¶
       return result;
     {{end}}
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ pre-call observations.
--------------------------------------------------------------------------------
-*/}}
-{{define "PreCallObservations"}}
-  {{AssertType $ "Function"}}
-
-  {{range $i, $p := $.FullParameters}}
-    {{if $p.Input}}
-      {{$ty := TypeOf $p}}
-      {{if IsPointerType $ty}}
-        observe({{Macro "C++.ReadParameter" $p}}, {{Macro "ArrayParamCount" $p}}, PRE_OBSERVE);
-      {{end}}
-    {{end}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ post-call observations.
--------------------------------------------------------------------------------
-*/}}
-{{define "PostCallObservations"}}
-  {{AssertType $ "Function"}}
-
-  {{range $i, $p := $.FullParameters}}
-    {{if $p.Output}}
-      {{$ty := TypeOf $p}}
-      {{if IsPointerType $ty}}
-        observe({{Macro "C++.ReadParameter" $p}}, {{Macro "ArrayParamCount" $p}}, POST_OBSERVE);
-      {{end}}
-    {{end}}
-  {{end}}
 {{end}}
 
 
@@ -235,23 +208,36 @@ limitations under the License.
   {{AssertType $.Parameter "Parameter"}}
 
   {{     if IsPseudonym   $.Type}}{{Macro "Encode" "Type" $.Type.To "Name" $.Name "Parameter" $.Parameter}}
-  {{else if IsBool        $.Type}}mEncoder->Bool({{$.Name}})
-  {{else if IsInt         $.Type}}mEncoder->Int({{$.Name}})
-  {{else if IsUint        $.Type}}mEncoder->Uint({{$.Name}})
-  {{else if IsU8          $.Type}}mEncoder->U8({{$.Name}})
-  {{else if IsS8          $.Type}}mEncoder->S8({{$.Name}})
-  {{else if IsU16         $.Type}}mEncoder->U16({{$.Name}})
-  {{else if IsS16         $.Type}}mEncoder->S16({{$.Name}})
-  {{else if IsF32         $.Type}}mEncoder->F32({{$.Name}})
-  {{else if IsU32         $.Type}}mEncoder->U32({{$.Name}})
-  {{else if IsS32         $.Type}}mEncoder->S32({{$.Name}})
-  {{else if IsF64         $.Type}}mEncoder->F64({{$.Name}})
-  {{else if IsU64         $.Type}}mEncoder->U64({{$.Name}})
-  {{else if IsS64         $.Type}}mEncoder->S64({{$.Name}})
-  {{else if IsPointerType $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
-  {{else if IsString      $.Type}}mEncoder->String({{$.Name}})
-  {{else if IsEnum        $.Type}}mEncoder->U32(static_cast<uint32_t>({{$.Name}}))
+  {{else if IsBool        $.Type}}mEncoder->Bool({{$.Name}});
+  {{else if IsU8          $.Type}}mEncoder->U8({{$.Name}});
+  {{else if IsS8          $.Type}}mEncoder->S8({{$.Name}});
+  {{else if IsU16         $.Type}}mEncoder->U16({{$.Name}});
+  {{else if IsS16         $.Type}}mEncoder->S16({{$.Name}});
+  {{else if IsF32         $.Type}}mEncoder->F32({{$.Name}});
+  {{else if IsU32         $.Type}}mEncoder->U32({{$.Name}});
+  {{else if IsS32         $.Type}}mEncoder->S32({{$.Name}});
+  {{else if IsF64         $.Type}}mEncoder->F64({{$.Name}});
+  {{else if IsU64         $.Type}}mEncoder->U64({{$.Name}});
+  {{else if IsS64         $.Type}}mEncoder->S64({{$.Name}});
+  {{else if IsInt         $.Type}}mEncoder->S64({{$.Name}});
+  {{else if IsUint        $.Type}}mEncoder->U64({{$.Name}});
+  {{else if IsPointerType $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}));
+  {{else if IsString      $.Type}}mEncoder->String({{$.Name}});
+  {{else if IsEnum        $.Type}}mEncoder->U32(static_cast<uint32_t>({{$.Name}}));
+  {{else if IsArray       $.Type}}
+    if ({{$.Name}} != nullptr) { // TODO: This check should not be necessary!
+      int32_t count_ = {{Macro "ArrayParamCount" $.Parameter}};
+      mEncoder->S32(count_);
+      for (int i = 0; i < count_; i++) {
+        {{$el := print $.Name "[i]"}}
+        {{Macro "Encode" "Type" $.Type.ValueType "Name" $el "Parameter" $.Parameter}}
+      }
+    } else {
+      mEncoder->S32(0);
+    }
+  {{/* TODO: Store arrays as resources
   {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
+  */}}
   {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
   {{end}}
 {{end}}
