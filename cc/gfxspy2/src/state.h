@@ -22,7 +22,7 @@
 #include "common/encoder.h"
 #include "types.h"
 
-namespace gfxspy {
+namespace gapii {
 
 class State {
 public:
@@ -1778,6 +1778,6 @@ inline void State::glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, u
 }
 
 
-} // namespace gfxspy
+} // namespace gapii
 
 #endif // GAPII_STATE_H
