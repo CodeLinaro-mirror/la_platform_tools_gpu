@@ -224,3 +224,19 @@ func (Functions) TrimLeft(cutset string, v ...interface{}) stringList {
 	}
 	return out
 }
+
+// FilterOut returns from with all occurances of v removed.
+func (Functions) FilterOut(v, from stringList) stringList {
+	m := make(map[string]struct{}, len(v))
+	for _, s := range v {
+		m[s] = struct{}{}
+	}
+
+	out := make(stringList, 0, len(from))
+	for _, s := range from {
+		if _, found := m[s]; !found {
+			out = append(out, s)
+		}
+	}
+	return out
+}
