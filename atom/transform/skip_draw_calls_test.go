@@ -18,40 +18,41 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
 func TestSkipDrawCalls(t *testing.T) {
 	inputs := list(
-		&testAtom{ID: 2},
-		&testAtom{ID: 4, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 3},
-		&testAtom{ID: 7, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 8, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 6},
-		&testAtom{ID: 13, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 18},
-		&testAtom{ID: 5},
-		&testAtom{ID: 12},
-		&testAtom{ID: 10, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 11, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 2},
+		&test.AtomA{ID: 4, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 3},
+		&test.AtomA{ID: 7, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 8, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 6},
+		&test.AtomA{ID: 13, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 18},
+		&test.AtomA{ID: 5},
+		&test.AtomA{ID: 12},
+		&test.AtomA{ID: 10, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 11, AtomFlags: atom.EndOfFrame},
 
-		&testAtom{ID: 25},
-		&testAtom{ID: 24, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 23},
-		&testAtom{ID: 11, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 25},
+		&test.AtomA{ID: 24, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 23},
+		&test.AtomA{ID: 11, AtomFlags: atom.EndOfFrame},
 
-		&testAtom{ID: 0},
-		&testAtom{ID: 1, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 15},
-		&testAtom{ID: 14, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 9},
-		&testAtom{ID: 16, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 17, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 19},
-		&testAtom{ID: 26, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 19},
-		&testAtom{ID: 27, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 21, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 0},
+		&test.AtomA{ID: 1, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 15},
+		&test.AtomA{ID: 14, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 9},
+		&test.AtomA{ID: 16, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 17, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 19},
+		&test.AtomA{ID: 26, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 19},
+		&test.AtomA{ID: 27, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 21, AtomFlags: atom.EndOfFrame},
 		atomAtomID{&atom.EOS{}, 200},
 	)
 
@@ -60,36 +61,36 @@ func TestSkipDrawCalls(t *testing.T) {
 	transform.Draw(14)
 	transform.Draw(17)
 	checkTransform(t, transform, inputs, list(
-		&testAtom{ID: 2},
-		&testAtom{ID: 4, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 3},
-		&testAtom{ID: 7, AtomFlags: atom.DrawCall}, // <---
-		// &testAtom{ID: 8, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 6},
-		// &testAtom{ID: 13, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 18},
-		&testAtom{ID: 5},
-		&testAtom{ID: 12},
-		//&testAtom{ID: 10, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 11, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 2},
+		&test.AtomA{ID: 4, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 3},
+		&test.AtomA{ID: 7, AtomFlags: atom.DrawCall}, // <---
+		// &test.AtomA{ID: 8, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 6},
+		// &test.AtomA{ID: 13, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 18},
+		&test.AtomA{ID: 5},
+		&test.AtomA{ID: 12},
+		//&test.AtomA{ID: 10, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 11, AtomFlags: atom.EndOfFrame},
 
-		&testAtom{ID: 25},
-		// &testAtom{ID: 24, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 23},
-		&testAtom{ID: 11, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 25},
+		// &test.AtomA{ID: 24, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 23},
+		&test.AtomA{ID: 11, AtomFlags: atom.EndOfFrame},
 
-		&testAtom{ID: 0},
-		&testAtom{ID: 1, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 15},
-		&testAtom{ID: 14, AtomFlags: atom.DrawCall}, // <---
-		&testAtom{ID: 9},
-		&testAtom{ID: 16, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 17, AtomFlags: atom.DrawCall}, // <---
-		&testAtom{ID: 19},
-		// &testAtom{ID: 26, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 19},
-		// &testAtom{ID: 27, AtomFlags: atom.DrawCall},
-		&testAtom{ID: 21, AtomFlags: atom.EndOfFrame},
+		&test.AtomA{ID: 0},
+		&test.AtomA{ID: 1, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 15},
+		&test.AtomA{ID: 14, AtomFlags: atom.DrawCall}, // <---
+		&test.AtomA{ID: 9},
+		&test.AtomA{ID: 16, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 17, AtomFlags: atom.DrawCall}, // <---
+		&test.AtomA{ID: 19},
+		// &test.AtomA{ID: 26, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 19},
+		// &test.AtomA{ID: 27, AtomFlags: atom.DrawCall},
+		&test.AtomA{ID: 21, AtomFlags: atom.EndOfFrame},
 		atomAtomID{&atom.EOS{}, 200},
 	))
 }

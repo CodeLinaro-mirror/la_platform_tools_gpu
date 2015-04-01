@@ -12,34 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package atom
+package atom_test
 
 import (
 	"bytes"
 	"reflect"
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/atom/test"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
-var testList = List{
-	&testAtomA{Context: 0x10, Int32: 100},
-	&testAtomB{Context: 0x20, Bool: true},
-	&testAtomC{Context: 0x10, String: "Pizza"},
+var testList = atom.List{
+	&test.AtomA{Context: 0x10},
+	&test.AtomB{Context: 0x20, Bool: true},
+	&test.AtomC{Context: 0x10, String: "Pizza"},
 }
 var testData = []byte{
-	0x0a,       // Atom 0: Type
-	0x10,       // Atom 0: Context
-	0x80, 0xc8, // Atom 0: Data
+	0x01, // Atom 0: Type
+	0x00, // Atom 0: ID
+	0x10, // Atom 0: Context
+	0x00, // Atom 0: Flags
 
-	0x14, // Atom 1: Type
+	0x02, // Atom 1: Type
+	0x00, // Atom 1: ID
 	0x20, // Atom 1: Context
-	0x01, // Atom 1: Data
+	0x01, // Atom 1: Bool
 
-	0x1e,                          // Atom 2: Type
+	0x03,                          // Atom 2: Type
 	0x10,                          // Atom 2: Context
-	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: Data
+	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: String
 
 	0xc0, 0xff, 0xff, // EOS
 }
@@ -58,7 +62,7 @@ func TestAtomListEncode(t *testing.T) {
 }
 
 func TestAtomListDecode(t *testing.T) {
-	list := List{}
+	list := atom.List{}
 	err := list.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(testData))))
 	if err != nil {
 		t.Errorf("Decode returned unexpected error: %v", err)
@@ -69,12 +73,12 @@ func TestAtomListDecode(t *testing.T) {
 }
 
 type writeRecord struct {
-	id   ID
-	atom Atom
+	id   atom.ID
+	atom atom.Atom
 }
 type writeRecordList []writeRecord
 
-func (t *writeRecordList) Write(id ID, atom Atom) { *t = append(*t, writeRecord{id, atom}) }
+func (t *writeRecordList) Write(id atom.ID, atom atom.Atom) { *t = append(*t, writeRecord{id, atom}) }
 
 func max(a, b int) int {
 	if a > b {
@@ -86,10 +90,10 @@ func max(a, b int) int {
 
 func TestAtomListWriteTo(t *testing.T) {
 	expected := writeRecordList{
-		writeRecord{0, &testAtomA{Context: 0x10, Int32: 100}},
-		writeRecord{1, &testAtomB{Context: 0x20, Bool: true}},
-		writeRecord{2, &testAtomC{Context: 0x10, String: "Pizza"}},
-		writeRecord{3, &EOS{}},
+		writeRecord{0, &test.AtomA{Context: 0x10}},
+		writeRecord{1, &test.AtomB{Context: 0x20, Bool: true}},
+		writeRecord{2, &test.AtomC{Context: 0x10, String: "Pizza"}},
+		writeRecord{3, &atom.EOS{}},
 	}
 	got := writeRecordList{}
 	testList.WriteTo(&got)
