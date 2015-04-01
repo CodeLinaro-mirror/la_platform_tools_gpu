@@ -23,6 +23,7 @@
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.cpp.tmpl
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.h.tmpl
 
+//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/exports.cpp.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/imports.cpp.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/imports.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/spy.h.tmpl
