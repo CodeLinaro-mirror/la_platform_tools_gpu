@@ -11,6 +11,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{Global "C++.EnumTypeOverride" "uint32_t"}}
+
 {{Include "cpp_common.tmpl"}}
 {{$ | Macro "Types" | Reflow 4 | Write "types.h"}}
 
@@ -18,14 +20,14 @@ limitations under the License.
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
 ¶
-  #ifndef ANDROID_GFXSPY_TYPES_H
-  #define ANDROID_GFXSPY_TYPES_H
+  #ifndef GAPII_TYPES_H
+  #define GAPII_TYPES_H
 ¶
   #include <map>
   #include <memory>
   #include <stdint.h>
 ¶
-  namespace gfxspy {«
+  namespace gapii {«
 ¶
   class Memory {};
   class Any {};
@@ -37,18 +39,11 @@ limitations under the License.
 ¶
   // Enums & bitfields
   {{range $e := $.Enums}}
-    class {{$e.Name}} {
-    «public:»
+    namespace {{$e.Name}} {
       {{range $e := $e.AllEntries}}
         static const uint32_t {{$e.Name}} = {{$e.Value}};
       {{end}}
-¶
-      inline {{$e.Name}}() : mValue(0) {}
-      inline {{$e.Name}}(uint32_t v) : mValue(v) {}
-      inline operator uint32_t() const { return mValue; }
-    «private:»
-      uint32_t mValue;
-    };¶
+    }¶
 ¶
   {{end}}
 ¶
@@ -66,12 +61,17 @@ limitations under the License.
   {{range $c := $.Classes}}
     struct {{$c.Name}} {
       {{range $f := $c.Fields}}
+        inline {{$c.Name}}& Set{{$f.Name}}({{Macro "C++.StateType" $f}} v) { this->{{$f.Name}} = v; return *this; }
+      {{end}}
+¶
+      {{range $f := $c.Fields}}
         {{Macro "C++.StateType" $f}} {{$f.Name}};
       {{end}}
     };¶
   {{end}}
 ¶
-  »} // namespace gfxspy
-  #endif // ANDROID_GFXSPY_TYPES_H
+  »} // namespace gapii
+¶
+  #endif // GAPII_TYPES_H
 ¶
 {{end}}
