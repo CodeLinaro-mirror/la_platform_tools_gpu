@@ -1,0 +1,70 @@
+{{/*
+Copyright (C) 2015 The Android Open Source Project
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{Global "C++.EnumTypeOverride" "uint32_t"}}
+
+{{Include "cpp_common.tmpl"}}
+{{$ | Macro "Exports" | Reflow 4 | Write "exports.cpp"}}
+
+{{define "Exports"}}
+  {{AssertType $ "API"}}
+  {{Macro "C++.AOSP.Copyright"}}
+¶
+  #include "common/file_writer.h"
+  #include "common/get_gfx_proc_address.h"
+¶
+  #include "imports.h"
+  #include "spy.h"
+  #include "types.h"
+¶
+  using namespace gapii;
+¶
+  namespace {«
+¶
+  // spy lazily constructs and returns the instance to the spy.
+  Spy* spy() {
+    static Spy spy(0, new gapic::Encoder(new gapic::FileWriter("atoms")));
+    return &spy;
+  }
+¶
+  »} // anonymous namespace
+¶
+  extern "C" {«
+¶
+  {{range $c := AllCommands $}}
+    {{if not (GetAnnotation $c "synthetic")}}
+      {{Macro "C++.ReturnType" $c}} __stdcall {{$c.Name}}({{Macro "C++.CallParameters" $c}}) {
+        {{if not (IsVoid $c.Return.Type)}}return §{{end}}
+        spy()->{{$c.Name}}({{Macro "C++.CallArguments" $c}});
+      }
+    {{end}}
+  {{end}}
+¶
+  typedef void (__stdcall *WGLPROC)();
+  WGLPROC __stdcall wglGetProcAddress(const char* name) {
+    {{range $i, $c := AllCommands $}}
+      {{if not (GetAnnotation $c "synthetic")}}
+        if (strcmp(name, "{{$c.Name}}") == 0) { return reinterpret_cast<WGLPROC>({{$c.Name}}); }
+      {{end}}
+    {{end}}
+¶
+    // TODO: If we reach this code, we're not capturing the command!
+    typedef WGLPROC (__stdcall* PFNWGLGETPROCADDRESS)(const char*);
+    PFNWGLGETPROCADDRESS wglGetProcAddress = reinterpret_cast<PFNWGLGETPROCADDRESS>(
+        gapic::GetGfxProcAddress("wglGetProcAddress"));
+    return wglGetProcAddress != nullptr ? wglGetProcAddress(name) : nullptr;
+  }
+¶
+  »} // extern "C"
+{{end}}
+
