@@ -56,24 +56,24 @@ export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_GENERATE_FLAGS="-v -x"
 export GO_TEST_FLAGS="-v -x"
 
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/embed $GPU_RELATIVE_SOURCE_PATH/tools/embed
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/tools/copyright
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/binary/generate
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/rpc/generate
+go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/embed    $GPU_RELATIVE_SOURCE_PATH/tools/embed
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/tools/copyright
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/binary/generate
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc/generate
 go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/codergen $GPU_RELATIVE_SOURCE_PATH/binary/codergen
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/replay/protocol
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/rpc
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/rpcapi $GPU_RELATIVE_SOURCE_PATH/rpc/rpcapi
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/rpc/test
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/service
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/apic $GPU_RELATIVE_SOURCE_PATH/api/apic
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/gfxapi/test
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/gfxapi/gles
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/atom
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/builder
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/database
-go generate $GO_GENERATE_FLAGS $GPU_RELATIVE_SOURCE_PATH/memory
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gazer $GPU_RELATIVE_SOURCE_PATH/server/cmd
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/replay/protocol
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc
+go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/rpcapi   $GPU_RELATIVE_SOURCE_PATH/rpc/rpcapi
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc/test
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/service
+go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/apic     $GPU_RELATIVE_SOURCE_PATH/api/apic
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/gfxapi/test
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/gfxapi/gles
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/atom
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/builder
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/database
+go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/memory
+go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gazer    $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
 src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle --info
 
