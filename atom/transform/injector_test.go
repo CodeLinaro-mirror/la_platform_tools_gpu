@@ -18,39 +18,40 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
 func TestInjector(t *testing.T) {
 	inputs := list(
-		&testAtom{ID: 10},
-		&testAtom{ID: 30},
-		&testAtom{ID: 50},
-		&testAtom{ID: 90},
-		&testAtom{ID: 00},
-		&testAtom{ID: 60},
+		&test.AtomA{ID: 10},
+		&test.AtomA{ID: 30},
+		&test.AtomA{ID: 50},
+		&test.AtomA{ID: 90},
+		&test.AtomA{ID: 00},
+		&test.AtomA{ID: 60},
 		atomAtomID{&atom.EOS{}, 0},
 	)
 	expected := list(
-		&testAtom{ID: 10},
-		&testAtom{ID: 30},
-		&testAtom{ID: 20, Context: 1},
-		&testAtom{ID: 50},
-		&testAtom{ID: 90},
-		&testAtom{ID: 70, AtomFlags: 2},
-		&testAtom{ID: 80},
-		&testAtom{ID: 00},
-		&testAtom{ID: 60},
-		&testAtom{ID: 40, Type: 3},
+		&test.AtomA{ID: 10},
+		&test.AtomA{ID: 30},
+		&test.AtomA{ID: 20, Context: 1},
+		&test.AtomA{ID: 50},
+		&test.AtomA{ID: 90},
+		&test.AtomA{ID: 70, AtomFlags: 2},
+		&test.AtomA{ID: 80},
+		&test.AtomA{ID: 00},
+		&test.AtomA{ID: 60},
+		&test.AtomB{ID: 40},
 		atomAtomID{&atom.EOS{}, 0},
 	)
 
 	transform := &Injector{}
-	transform.Inject(30, 20, &testAtom{ID: 20, Context: 1})
-	transform.Inject(90, 70, &testAtom{ID: 70, AtomFlags: 2})
-	transform.Inject(90, 80, &testAtom{ID: 80})
-	transform.Inject(60, 40, &testAtom{ID: 40, Type: 3})
+	transform.Inject(30, 20, &test.AtomA{ID: 20, Context: 1})
+	transform.Inject(90, 70, &test.AtomA{ID: 70, AtomFlags: 2})
+	transform.Inject(90, 80, &test.AtomA{ID: 80})
+	transform.Inject(60, 40, &test.AtomB{ID: 40})
 
-	transform.Inject(40, 0, &testAtom{Context: 0xdead}) // Should not be injected
+	transform.Inject(40, 0, &test.AtomA{Context: 0xdead}) // Should not be injected
 
 	checkTransform(t, transform, inputs, expected)
 }

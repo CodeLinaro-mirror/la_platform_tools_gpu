@@ -19,36 +19,26 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
-
-type testAtom struct {
-	binary.Generate
-	ID        atom.ID
-	Type      atom.TypeID
-	Context   atom.ContextID
-	AtomFlags atom.Flags
-}
-
-func (a testAtom) TypeID() atom.TypeID       { return a.Type }
-func (a testAtom) ContextID() atom.ContextID { return a.Context }
-func (a testAtom) Flags() atom.Flags         { return a.AtomFlags }
 
 type atomAtomIDList []atomAtomID
 
-// list takes a mix of testAtoms and atomAtomIDs and returns a atomAtomIDList.
-// testAtoms are transformed into atomAtomIDs by using the ID field as the atom
+// list takes a mix of test.Atoms and atomAtomIDs and returns a atomAtomIDList.
+// test.Atoms are transformed into atomAtomIDs by using the ID field as the atom
 // id.
 func list(atoms ...interface{}) atomAtomIDList {
 	l := atomAtomIDList{}
 	for _, a := range atoms {
 		switch a := a.(type) {
-		case *testAtom:
+		case *test.AtomA:
+			l = append(l, atomAtomID{a, a.ID})
+		case *test.AtomB:
 			l = append(l, atomAtomID{a, a.ID})
 		case atomAtomID:
 			l = append(l, a)
 		default:
-			panic("list only accepts types testAtom or atomAtomID")
+			panic("list only accepts types testAtom[AB] or atomAtomID")
 		}
 	}
 	return l
