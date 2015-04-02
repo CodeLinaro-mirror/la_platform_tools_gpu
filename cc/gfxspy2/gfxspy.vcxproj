@@ -19,6 +19,7 @@
     <ClCompile Include="src\exports.cpp" />
     <ClCompile Include="src\imports.cpp" />
     <ClCompile Include="src\opengl32_resolve.cpp" />
+    <ClCompile Include="src\spy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="src\opengl32_x64.asm">
@@ -34,6 +35,7 @@
     <ClInclude Include="src\common\hash.h" />
     <ClInclude Include="src\common\id.h" />
     <ClInclude Include="src\common\stream_writer.h" />
+    <ClInclude Include="src\gles_spy.h" />
     <ClInclude Include="src\imports.h" />
     <ClInclude Include="src\spy.h" />
     <ClInclude Include="src\state.h" />
