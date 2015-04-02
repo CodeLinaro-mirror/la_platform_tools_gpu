@@ -23,13 +23,13 @@
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.cpp.tmpl
 //go:generate apic template --dir ../../cc/replayd/src gles.api ../templates/GfxApi.h.tmpl
 
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_spy.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/exports.cpp.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/imports.cpp.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/imports.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_exports.def.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_resolve.cpp.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_x64.asm.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/spy.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/state.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/types.h.tmpl
 
