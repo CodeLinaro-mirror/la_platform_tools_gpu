@@ -14,34 +14,29 @@ limitations under the License.
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 {{Global "C++.ExternPrefix"     "mState."}}
 
-{{$filename := print (Global "API") "_spy.h" }}
-{{Global "SpyName" (print (Title (Global "API")) "Spy")}}
-
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "api_spy.h" | Reflow 4 | Write $filename}}
+{{$ | Macro "Spy" | Reflow 4 | Write "spy.h"}}
 
-{{define "api_spy.h"}}
+{{define "Spy"}}
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
-  {{$spyname := Global "SpyName"}}
-  {{$guard := print "GAPII_" (Upper (Global "API")) "_SPY_H"}}
 ¶
-  #ifndef {{$guard}}
-  #define {{$guard}}
+  #ifndef GAPII_SPY_H
+  #define GAPII_SPY_H
 ¶
   #include "common/encoder.h"
-  #include "imports.h"
-  #include "state.h"
   #include "types.h"
+  #include "state.h"
 ¶
   #include <stdint.h>
   #include <unordered_set>
 ¶
   namespace gapii {«
 ¶
-  class {{$spyname}} {
+  class Spy {
   «public:»
-    inline {{$spyname}}(gapic::Encoder* encoder);
+    inline Spy(uint32_t contextId, gapic::Encoder* encoder);
+    inline Spy::~Spy();
 ¶
     {{range $f := $.Functions}}
       {{if not (GetAnnotation $f "synthetic")}}
@@ -66,15 +61,16 @@ limitations under the License.
     inline void observe(const void* base, uint64_t offset, uint64_t size);
 ¶
     std::unordered_set<gapic::Id> mObserved;
+    uint32_t mContextId;
     std::unique_ptr<gapic::Encoder> mEncoder;
     Imports mImports;
     State mState;
   };
 ¶
   // Inline methods
-  inline {{$spyname}}::{{$spyname}}(gapic::Encoder* encoder) : mEncoder(encoder) {
-    mState.read = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    mState.write = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+  inline Spy::Spy(uint32_t contextId, gapic::Encoder* encoder) : mContextId(contextId), mEncoder(encoder) {
+    mState.read = std::bind(&Spy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    mState.write = std::bind(&Spy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mImports.Resolve();
 
     // HACK TODO: Remove
@@ -85,7 +81,7 @@ limitations under the License.
     const uint32_t stencil = RenderbufferFormat::GL_STENCIL_INDEX8;
     mState.init(width, height, color, depth, stencil);
     mEncoder->U16(0); // INIT_ID
-    mEncoder->U32(0); // ContextID
+    mEncoder->U32(mContextId);
     mEncoder->S32(width);
     mEncoder->S32(height);
     mEncoder->U32(color);
@@ -93,7 +89,11 @@ limitations under the License.
     mEncoder->U32(stencil);
   }
 ¶
-  inline void {{$spyname}}::observe(const void* base, uint64_t offset, uint64_t size) {
+  Spy::~Spy() {
+      mEncoder->U16(0xffff); // Type ID -- TODO: mEncoder->Id(EOS_ID);
+  }
+¶
+  inline void Spy::observe(const void* base, uint64_t offset, uint64_t size) {
     const void* ptr = reinterpret_cast<const uint8_t*>(base) + offset;
     gapic::Id id(ptr, size);
     if (mObserved.count(id) == 0) {
@@ -103,7 +103,7 @@ limitations under the License.
         mObserved.emplace(id);
     }
     mEncoder->U16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
-    mEncoder->U32(0); // TODO: ContextID
+    mEncoder->U32(mContextId);
     mEncoder->U64(reinterpret_cast<uint64_t>(ptr));
     mEncoder->U64(size);
     mEncoder->Id(id);
@@ -118,7 +118,7 @@ limitations under the License.
 ¶
   »} // namespace gapii
 ¶
-  #endif // {{$guard}}
+  #endif // GAPII_SPY_H
 ¶
 {{end}}
 
@@ -156,16 +156,14 @@ limitations under the License.
   {{AssertType $ "Function"}}
 
   {{$ret := not (IsVoid $.Return.Type)}}
-  {{$spyname := Global "SpyName"}}
-
-  inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$.Name}}({{Macro "C++.CallParameters" $}}) {
+  inline {{Macro "C++.ReturnType" $}} Spy::{{$.Name}}({{Macro "C++.CallParameters" $}}) {
     {{if $ret}}{{Macro "C++.ReturnType" $}} result = mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
     {{else}}mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
     {{end}}
     mState.{{$.Name}}({{Macro "C++.ReadList" $.FullParameters}});
 ¶
     mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-    mEncoder->U32(0); // TODO: ContextID
+    mEncoder->U32(mContextId);
     {{range $i, $p := $.FullParameters}}
       {{$name := Macro "C++.ReadParameter" $p}}
       {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $name}}
