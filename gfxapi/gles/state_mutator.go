@@ -178,6 +178,24 @@ func (ϟa *EglSwapBuffers) Mutate(ϟs *state.State) error {
 	}
 	return nil
 }
+func (ϟa *WglCreateContext) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := WglCreateContext_Out{}
+	ϟo.Result = ϟa.Out.Result
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
+		log.Printf("Applying wglCreateContext expected %v got %v", ϟa.Out, ϟo)
+	}
+	return nil
+}
+func (ϟa *WglMakeCurrent) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := WglMakeCurrent_Out{}
+	ϟo.Result = ϟa.Out.Result
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
+		log.Printf("Applying wglMakeCurrent expected %v got %v", ϟa.Out, ϟo)
+	}
+	return nil
+}
 func (ϟa *WglSwapBuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := WglSwapBuffers_Out{}

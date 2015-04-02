@@ -917,7 +917,11 @@ typedef void* TexturePointer;
 
 typedef void* BufferDataPointer;
 
+typedef void* HGLRC;
+
 typedef void* HDC;
+
+typedef int BOOL;
 
 typedef void* ImageOES;
 

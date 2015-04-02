@@ -32,7 +32,8 @@ namespace {
 
 // spy lazily constructs and returns the instance to the spy.
 Spy* spy() {
-    static Spy spy(new gapic::Encoder(new gapic::FileWriter("atoms")));
+    static Spy spy(
+            std::shared_ptr<gapic::Encoder>(new gapic::Encoder(new gapic::FileWriter("atoms"))));
     return &spy;
 }
 
@@ -45,6 +46,10 @@ EXPORT void STDCALL eglCreateContext(int32_t* version, int32_t* context) {
 }
 EXPORT void STDCALL eglMakeCurrent(int32_t context) { spy()->eglMakeCurrent(context); }
 EXPORT void STDCALL eglSwapBuffers() { spy()->eglSwapBuffers(); }
+EXPORT HGLRC STDCALL wglCreateContext(HDC hdc) { return spy()->wglCreateContext(hdc); }
+EXPORT BOOL STDCALL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+    return spy()->wglMakeCurrent(hdc, hglrc);
+}
 EXPORT void STDCALL wglSwapBuffers(HDC hdc) { spy()->wglSwapBuffers(hdc); }
 EXPORT void STDCALL glEnableClientState(uint32_t type) { spy()->glEnableClientState(type); }
 EXPORT void STDCALL glDisableClientState(uint32_t type) { spy()->glDisableClientState(type); }
@@ -592,6 +597,12 @@ WGLPROC STDCALL wglGetProcAddress(const char* name) {
     }
     if (strcmp(name, "eglSwapBuffers") == 0) {
         return reinterpret_cast<WGLPROC>(eglSwapBuffers);
+    }
+    if (strcmp(name, "wglCreateContext") == 0) {
+        return reinterpret_cast<WGLPROC>(wglCreateContext);
+    }
+    if (strcmp(name, "wglMakeCurrent") == 0) {
+        return reinterpret_cast<WGLPROC>(wglMakeCurrent);
     }
     if (strcmp(name, "wglSwapBuffers") == 0) {
         return reinterpret_cast<WGLPROC>(wglSwapBuffers);

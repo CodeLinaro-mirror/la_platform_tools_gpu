@@ -46,13 +46,17 @@ limitations under the License.
 ¶
   class {{$spyname}} {
   «public:»
-    inline {{$spyname}}(gapic::Encoder* encoder);
+    inline {{$spyname}}(std::shared_ptr<gapic::Encoder> encoder);
 ¶
     {{range $f := AllCommands $}}
       {{if not (GetAnnotation $f "synthetic")}}
         {{Macro "MethodDefinitions" $f}}
       {{end}}
     {{end}}
+¶
+  «protected:»
+    {{Macro "ApiClassnames.Imports"}} mImports;
+    {{Macro "ApiClassnames.State"  }} mState;
 ¶
   «private:»
     static const gapic::Id RESOURCE_ID;
@@ -71,31 +75,14 @@ limitations under the License.
     inline void observe(const void* base, uint64_t offset, uint64_t size);
 ¶
     std::unordered_set<gapic::Id> mObserved;
-    std::unique_ptr<gapic::Encoder> mEncoder;
-    {{Macro "ApiClassnames.Imports"}} mImports;
-    {{Macro "ApiClassnames.State"  }} mState;
+    std::shared_ptr<gapic::Encoder> mEncoder;
   };
 ¶
   // Inline methods
-  inline {{$spyname}}::{{$spyname}}(gapic::Encoder* encoder) : mEncoder(encoder) {
+  inline {{$spyname}}::{{$spyname}}(std::shared_ptr<gapic::Encoder> encoder) : mEncoder(encoder) {
     mState.read = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mState.write = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mImports.Resolve();
-
-    // HACK TODO: Remove
-    const int32_t  width   = 256;
-    const int32_t  height  = 256;
-    const uint32_t color   = RenderbufferFormat::GL_RGB565;
-    const uint32_t depth   = RenderbufferFormat::GL_DEPTH_COMPONENT16;
-    const uint32_t stencil = RenderbufferFormat::GL_STENCIL_INDEX8;
-    mState.init(width, height, color, depth, stencil);
-    mEncoder->U16(0); // INIT_ID
-    mEncoder->U32(0); // ContextID
-    mEncoder->S32(width);
-    mEncoder->S32(height);
-    mEncoder->U32(color);
-    mEncoder->U32(depth);
-    mEncoder->U32(stencil);
   }
 ¶
   inline void {{$spyname}}::observe(const void* base, uint64_t offset, uint64_t size) {
