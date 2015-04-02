@@ -16,7 +16,6 @@ package generate
 
 import (
 	"bytes"
-	"io"
 	"text/template"
 
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
@@ -44,16 +43,10 @@ var (
 	goDecodeMap kindToTemplate
 	goSkipMap   kindToTemplate
 	goFile      *template.Template
-	goRegister  *template.Template
-	goEncoder   *template.Template
-	goDecoder   *template.Template
 )
 
 func init() {
 	goFile = getTemplate(goTemplates, "File")
-	goRegister = getTemplate(goTemplates, "Register")
-	goEncoder = getTemplate(goTemplates, "Encoder")
-	goDecoder = getTemplate(goTemplates, "Decoder")
 	goEncodeMap = getTemplateMap(goTemplates, "Encode")
 	goDecodeMap = getTemplateMap(goTemplates, "Decode")
 	goSkipMap = getTemplateMap(goTemplates, "Skip")
@@ -70,20 +63,4 @@ func GoFile(file *File) ([]byte, error) {
 		return b.Bytes(), nil
 	}
 	return result, nil
-}
-
-// GoRegister generates the go code to register a Struct with the system,
-// writing it to an io.Writer.
-func GoRegister(w io.Writer, s *Struct) error {
-	return goRegister.Execute(w, s)
-}
-
-// GoEncoder generates an encoder for a Struct, writing it to an io.Writer.
-func GoEncoder(w io.Writer, s *Struct) error {
-	return goEncoder.Execute(w, s)
-}
-
-// GoEncoder generates a decoder for a Struct, writing it to an io.Writer.
-func GoDecoder(w io.Writer, s *Struct) error {
-	return goDecoder.Execute(w, s)
 }

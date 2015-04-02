@@ -25,13 +25,32 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "Register"}} //{{.Signature}}
-	registry.Add(binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} }, &{{.Name}}{}) {{end}}
+{{define "ID"}} binaryID{{.Name}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
 
-{{define "Encoder"}}func (o {{.Name}}) Encode(e binary.Encoder) error {
+{{define "Init"}} registry.Add((*{{.Name}})(nil).Class()){{end}}
+
+{{define "Class"}} type binaryClass{{.Name}} struct{}
+func (*{{.Name}}) Class() binary.Class {
+	return (*binaryClass{{.Name}})(nil)
+}
+func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {
 	{{range .Fields}}{{encode (print "o." .Name) .Type}}
-	{{end}} return nil
-} {{end}}
+{{end}} return nil
+}
+func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {
+	{{range .Fields}}{{decode (print "o." .Name) .Type}}
+{{end}} return nil
+}
+func doSkip{{.Name}}(d binary.Decoder) error {
+	{{range .Fields}}{{skip (print "_." .Name) .Type}}
+{{end}} return nil
+}
+func (*binaryClass{{.Name}}) ID() binary.ID { return binaryID{{.Name}} }
+func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {return doEncode{{.Name}}(e, obj.(*{{.Name}})) }
+func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
+func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
+func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
+{{end}}
 
 {{define "EncodeNative"}} if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{end}}
 
@@ -71,11 +90,6 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			{{encode "k" .Type.KeyType}}
 			{{encode "v" .Type.SubType}}
 		} {{end}}
-
-{{define "Decoder"}}func (o *{{.Name}}) Decode(d binary.Decoder) error {
-	{{range .Fields}}{{decode (print "o." .Name) .Type}}
-	{{end}} return nil
-} {{end}}
 
 {{define "DecodeNative"}} if obj, err := d.{{.Type.Method}}(); err != nil {
 			return err
@@ -128,13 +142,11 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 			}
 		} {{end}}
 
-{{define "Skiper"}}func (*{{.Name}}) Skip(d binary.Decoder) error {
-	{{range .Fields}}{{skip (print "o." .Name) .Type}}
-	{{end}} return nil
-} {{end}}
-
-{{define "SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil { return err}
-{{else}}if _,err := d.{{.Type.Method}}(); err != nil { return err } {{end}} {{end}}
+{{define "SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil {
+	return err
+} {{else}}if _,err := d.{{.Type.Method}}(); err != nil {
+		return err
+} {{end}} {{end}}
 {{define "SkipRemap"}}{{template "SkipNative" .}}{{end}}
 {{define "SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
 {{define "SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
@@ -165,20 +177,21 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 package {{.Package}}
 
 import (
-       "android.googlesource.com/platform/tools/gpu/binary"
-       "android.googlesource.com/platform/tools/gpu/binary/registry"
+	"reflect"
+
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 func init() {
-	{{range .Structs}}{{template "Register" .}}
+	{{range .Structs}}{{template "Init" .}}
 	{{end}} }
 
-{{range .Structs}}
-	{{template "Encoder" .}}
+var (
+{{range .Structs}} {{template "ID" .}}
+{{end}} )
 
-	{{template "Decoder" .}}
-
-	{{template "Skiper" .}}
+{{range .Structs}} {{template "Class" .}}
 {{end}}
 
 {{end}}

@@ -43,7 +43,7 @@ func NewClient(r io.Reader, w io.Writer, mtu int) Client {
 // It blocks until a reply is received or an error indicating there will be no
 // reply occurs.
 // This method is safe for concurrent use.
-func (b Client) Send(call binary.Encodable) (interface{}, error) {
+func (b Client) Send(call binary.Object) (interface{}, error) {
 	channel, err := b.m.OpenChannel()
 	if err != nil {
 		return nil, err

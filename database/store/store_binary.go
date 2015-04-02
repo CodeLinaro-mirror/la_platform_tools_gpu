@@ -11,13 +11,21 @@ import (
 )
 
 func init() {
-	//struct store.Blob { Data:[]byte }
-	registry.Add(binary.ID{0x82, 0x3c, 0x72, 0x55, 0x53, 0x73, 0x2a, 0xab, 0x7c, 0xd0, 0xad, 0x23, 0xd9, 0xf6, 0x5f, 0xd6, 0xf4, 0x54, 0x3c, 0x66}, &Blob{})
-	//struct store.keyValue { id:binary.ID, buffer:[]byte }
-	registry.Add(binary.ID{0x4f, 0xab, 0x88, 0xad, 0xe2, 0xbc, 0x26, 0x85, 0xfc, 0x31, 0x21, 0xee, 0x4d, 0xcd, 0x67, 0x79, 0x35, 0xeb, 0x4a, 0x9f}, &keyValue{})
+	registry.Add((*Blob)(nil).Class())
+	registry.Add((*keyValue)(nil).Class())
 }
 
-func (o Blob) Encode(e binary.Encoder) error {
+var (
+	binaryIDBlob     = binary.ID{0x82, 0x3c, 0x72, 0x55, 0x53, 0x73, 0x2a, 0xab, 0x7c, 0xd0, 0xad, 0x23, 0xd9, 0xf6, 0x5f, 0xd6, 0xf4, 0x54, 0x3c, 0x66}
+	binaryIDkeyValue = binary.ID{0x4f, 0xab, 0x88, 0xad, 0xe2, 0xbc, 0x26, 0x85, 0xfc, 0x31, 0x21, 0xee, 0x4d, 0xcd, 0x67, 0x79, 0x35, 0xeb, 0x4a, 0x9f}
+)
+
+type binaryClassBlob struct{}
+
+func (*Blob) Class() binary.Class {
+	return (*binaryClassBlob)(nil)
+}
+func doEncodeBlob(e binary.Encoder, o *Blob) error {
 	if err := e.Uint32(uint32(len(o.Data))); err != nil {
 		return err
 	}
@@ -26,8 +34,7 @@ func (o Blob) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Blob) Decode(d binary.Decoder) error {
+func doDecodeBlob(d binary.Decoder, o *Blob) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -38,8 +45,7 @@ func (o *Blob) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Blob) Skip(d binary.Decoder) error {
+func doSkipBlob(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -49,8 +55,25 @@ func (*Blob) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassBlob) ID() binary.ID { return binaryIDBlob }
+func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBlob(e, obj.(*Blob))
+}
+func (*binaryClassBlob) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Blob{}
+	return obj, doDecodeBlob(d, obj)
+}
+func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBlob(d, obj.(*Blob))
+}
+func (*binaryClassBlob) Skip(d binary.Decoder) error { return doSkipBlob(d) }
 
-func (o keyValue) Encode(e binary.Encoder) error {
+type binaryClasskeyValue struct{}
+
+func (*keyValue) Class() binary.Class {
+	return (*binaryClasskeyValue)(nil)
+}
+func doEncodekeyValue(e binary.Encoder, o *keyValue) error {
 	if err := e.ID(o.id); err != nil {
 		return err
 	}
@@ -62,8 +85,7 @@ func (o keyValue) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *keyValue) Decode(d binary.Decoder) error {
+func doDecodekeyValue(d binary.Decoder, o *keyValue) error {
 	if obj, err := d.ID(); err != nil {
 		return err
 	} else {
@@ -79,12 +101,10 @@ func (o *keyValue) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*keyValue) Skip(d binary.Decoder) error {
+func doSkipkeyValue(d binary.Decoder) error {
 	if err := d.SkipID(); err != nil {
 		return err
 	}
-
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -94,3 +114,15 @@ func (*keyValue) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClasskeyValue) ID() binary.ID { return binaryIDkeyValue }
+func (*binaryClasskeyValue) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodekeyValue(e, obj.(*keyValue))
+}
+func (*binaryClasskeyValue) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &keyValue{}
+	return obj, doDecodekeyValue(d, obj)
+}
+func (*binaryClasskeyValue) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodekeyValue(d, obj.(*keyValue))
+}
+func (*binaryClasskeyValue) Skip(d binary.Decoder) error { return doSkipkeyValue(d) }

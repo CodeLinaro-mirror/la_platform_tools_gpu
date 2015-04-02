@@ -11,11 +11,19 @@ import (
 )
 
 func init() {
-	//struct memory.Range { Base:Pointer, Size:uint64 }
-	registry.Add(binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}, &Range{})
+	registry.Add((*Range)(nil).Class())
 }
 
-func (o Range) Encode(e binary.Encoder) error {
+var (
+	binaryIDRange = binary.ID{0x01, 0xb1, 0x05, 0xd5, 0x0b, 0xba, 0x21, 0x01, 0x69, 0x0e, 0xaf, 0x02, 0x39, 0xba, 0x67, 0xa0, 0x6b, 0x64, 0xc1, 0x7f}
+)
+
+type binaryClassRange struct{}
+
+func (*Range) Class() binary.Class {
+	return (*binaryClassRange)(nil)
+}
+func doEncodeRange(e binary.Encoder, o *Range) error {
 	if err := e.Uint64(uint64(o.Base)); err != nil {
 		return err
 	}
@@ -24,8 +32,7 @@ func (o Range) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *Range) Decode(d binary.Decoder) error {
+func doDecodeRange(d binary.Decoder, o *Range) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -38,8 +45,7 @@ func (o *Range) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*Range) Skip(d binary.Decoder) error {
+func doSkipRange(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -48,3 +54,15 @@ func (*Range) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassRange) ID() binary.ID { return binaryIDRange }
+func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRange(e, obj.(*Range))
+}
+func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Range{}
+	return obj, doDecodeRange(d, obj)
+}
+func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRange(d, obj.(*Range))
+}
+func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }

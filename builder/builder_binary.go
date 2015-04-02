@@ -14,37 +14,45 @@ import (
 )
 
 func init() {
-	//struct builder.GetFramebufferColor { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, After:atom.ID, Settings:service.RenderSettings }
-	registry.Add(binary.ID{0x07, 0xe6, 0x14, 0x11, 0xbf, 0xcd, 0x17, 0xde, 0x2f, 0xd1, 0x47, 0x23, 0xda, 0xb2, 0x6e, 0xed, 0xf5, 0xfb, 0xda, 0xee}, &GetFramebufferColor{})
-	//struct builder.GetFramebufferDepth { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, After:atom.ID }
-	registry.Add(binary.ID{0x58, 0x7b, 0xc7, 0xb7, 0x49, 0x32, 0xbc, 0x81, 0x16, 0x3f, 0xf1, 0x3e, 0xf7, 0xe4, 0xfe, 0x22, 0x69, 0x20, 0xe0, 0x7e}, &GetFramebufferDepth{})
-	//struct builder.GetHierarchy { Capture:service.CaptureId, Context:atom.ContextID }
-	registry.Add(binary.ID{0x12, 0x07, 0xf0, 0x2c, 0x93, 0xbc, 0x86, 0xbf, 0x08, 0xf0, 0x80, 0x9c, 0x39, 0xd3, 0xbe, 0x36, 0x3f, 0x03, 0x9c, 0x1f}, &GetHierarchy{})
-	//struct builder.GetMemoryInfo { Capture:service.CaptureId, After:atom.ID, Range:memory.Range }
-	registry.Add(binary.ID{0x22, 0xa8, 0x99, 0x68, 0xab, 0xd1, 0x15, 0x03, 0xc1, 0xa8, 0x64, 0x09, 0xc6, 0x32, 0xe0, 0xbe, 0x47, 0xdd, 0x4e, 0xfc}, &GetMemoryInfo{})
-	//struct builder.GetState { Capture:service.CaptureId, After:atom.ID }
-	registry.Add(binary.ID{0x1a, 0xda, 0x15, 0x58, 0x2c, 0x9d, 0xff, 0x1a, 0x42, 0xcc, 0x07, 0xa5, 0xd4, 0x52, 0x07, 0xd1, 0xc1, 0x45, 0x05, 0xf9}, &GetState{})
-	//struct builder.GetTimingInfo { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, TimingMask:service.TimingMask }
-	registry.Add(binary.ID{0x7b, 0x2e, 0x4a, 0x89, 0x35, 0x2a, 0x37, 0x8a, 0x00, 0x6f, 0xc8, 0x41, 0x7a, 0xeb, 0x45, 0xb9, 0x28, 0x87, 0x9d, 0x7f}, &GetTimingInfo{})
-	//struct builder.PrerenderFramebuffers { Device:service.DeviceId, Capture:service.CaptureId, AtomIDs:[]uint64, Width:uint32, Height:uint32 }
-	registry.Add(binary.ID{0x73, 0x29, 0x0a, 0x18, 0x79, 0xcc, 0xfb, 0x98, 0x5e, 0x8d, 0x91, 0x0b, 0x16, 0xd4, 0xea, 0x1a, 0xc9, 0xa9, 0xe2, 0xfd}, &PrerenderFramebuffers{})
-	//struct builder.RenderFramebufferColor { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, After:atom.ID, Width:uint32, Height:uint32, Wireframe:bool }
-	registry.Add(binary.ID{0xb1, 0x24, 0x05, 0x59, 0xc8, 0x92, 0xd1, 0x25, 0xf7, 0x4a, 0x5e, 0x6b, 0x5e, 0x53, 0xdf, 0x9c, 0xa7, 0x13, 0x77, 0x54}, &RenderFramebufferColor{})
-	//struct builder.RenderFramebufferDepth { Capture:service.CaptureId, Context:atom.ContextID, Device:service.DeviceId, After:atom.ID, FramebufferWidth:uint32, FramebufferHeight:uint32 }
-	registry.Add(binary.ID{0x46, 0xc5, 0xf6, 0x91, 0x95, 0x80, 0x74, 0x9f, 0x6c, 0x45, 0x97, 0x2a, 0xa9, 0x4e, 0xaa, 0x6b, 0xba, 0xac, 0xa5, 0x30}, &RenderFramebufferDepth{})
-	//struct builder.ReplaceAtom { Capture:service.CaptureId, Atom:atom.ID, Type:atom.TypeID, Data:service.Binary }
-	registry.Add(binary.ID{0x81, 0x95, 0x81, 0x1b, 0xdd, 0x39, 0xfe, 0x7c, 0x43, 0x51, 0x80, 0xbc, 0x3b, 0xf1, 0x71, 0x44, 0x1e, 0x7b, 0x9e, 0x3a}, &ReplaceAtom{})
-	//struct builder.atomFramebufferDimensions { From:atom.ID, Width:uint32, Height:uint32 }
-	registry.Add(binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}, &atomFramebufferDimensions{})
-	//struct builder.captureFramebufferDimensions { Dimensions:[]atomFramebufferDimensions }
-	registry.Add(binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}, &captureFramebufferDimensions{})
-	//struct builder.captures { ids:service.CaptureIdArray }
-	registry.Add(binary.ID{0xcd, 0x35, 0x8f, 0x5e, 0x40, 0x7f, 0x41, 0x75, 0x9b, 0xf7, 0x39, 0x22, 0xe1, 0xc2, 0x06, 0xd0, 0x20, 0xcc, 0xca, 0xe4}, &captures{})
-	//struct builder.getCaptureFramebufferDimensions { Capture:service.CaptureId, Context:atom.ContextID }
-	registry.Add(binary.ID{0xb7, 0xfe, 0xcb, 0x4d, 0x92, 0xa9, 0x4f, 0x3e, 0xf2, 0xf3, 0x1a, 0xd4, 0x72, 0x7a, 0x76, 0xa5, 0xb5, 0xde, 0x99, 0x3c}, &getCaptureFramebufferDimensions{})
+	registry.Add((*GetFramebufferColor)(nil).Class())
+	registry.Add((*GetFramebufferDepth)(nil).Class())
+	registry.Add((*GetHierarchy)(nil).Class())
+	registry.Add((*GetMemoryInfo)(nil).Class())
+	registry.Add((*GetState)(nil).Class())
+	registry.Add((*GetTimingInfo)(nil).Class())
+	registry.Add((*PrerenderFramebuffers)(nil).Class())
+	registry.Add((*RenderFramebufferColor)(nil).Class())
+	registry.Add((*RenderFramebufferDepth)(nil).Class())
+	registry.Add((*ReplaceAtom)(nil).Class())
+	registry.Add((*atomFramebufferDimensions)(nil).Class())
+	registry.Add((*captureFramebufferDimensions)(nil).Class())
+	registry.Add((*captures)(nil).Class())
+	registry.Add((*getCaptureFramebufferDimensions)(nil).Class())
 }
 
-func (o GetFramebufferColor) Encode(e binary.Encoder) error {
+var (
+	binaryIDGetFramebufferColor             = binary.ID{0x07, 0xe6, 0x14, 0x11, 0xbf, 0xcd, 0x17, 0xde, 0x2f, 0xd1, 0x47, 0x23, 0xda, 0xb2, 0x6e, 0xed, 0xf5, 0xfb, 0xda, 0xee}
+	binaryIDGetFramebufferDepth             = binary.ID{0x58, 0x7b, 0xc7, 0xb7, 0x49, 0x32, 0xbc, 0x81, 0x16, 0x3f, 0xf1, 0x3e, 0xf7, 0xe4, 0xfe, 0x22, 0x69, 0x20, 0xe0, 0x7e}
+	binaryIDGetHierarchy                    = binary.ID{0x12, 0x07, 0xf0, 0x2c, 0x93, 0xbc, 0x86, 0xbf, 0x08, 0xf0, 0x80, 0x9c, 0x39, 0xd3, 0xbe, 0x36, 0x3f, 0x03, 0x9c, 0x1f}
+	binaryIDGetMemoryInfo                   = binary.ID{0x22, 0xa8, 0x99, 0x68, 0xab, 0xd1, 0x15, 0x03, 0xc1, 0xa8, 0x64, 0x09, 0xc6, 0x32, 0xe0, 0xbe, 0x47, 0xdd, 0x4e, 0xfc}
+	binaryIDGetState                        = binary.ID{0x1a, 0xda, 0x15, 0x58, 0x2c, 0x9d, 0xff, 0x1a, 0x42, 0xcc, 0x07, 0xa5, 0xd4, 0x52, 0x07, 0xd1, 0xc1, 0x45, 0x05, 0xf9}
+	binaryIDGetTimingInfo                   = binary.ID{0x7b, 0x2e, 0x4a, 0x89, 0x35, 0x2a, 0x37, 0x8a, 0x00, 0x6f, 0xc8, 0x41, 0x7a, 0xeb, 0x45, 0xb9, 0x28, 0x87, 0x9d, 0x7f}
+	binaryIDPrerenderFramebuffers           = binary.ID{0x73, 0x29, 0x0a, 0x18, 0x79, 0xcc, 0xfb, 0x98, 0x5e, 0x8d, 0x91, 0x0b, 0x16, 0xd4, 0xea, 0x1a, 0xc9, 0xa9, 0xe2, 0xfd}
+	binaryIDRenderFramebufferColor          = binary.ID{0xb1, 0x24, 0x05, 0x59, 0xc8, 0x92, 0xd1, 0x25, 0xf7, 0x4a, 0x5e, 0x6b, 0x5e, 0x53, 0xdf, 0x9c, 0xa7, 0x13, 0x77, 0x54}
+	binaryIDRenderFramebufferDepth          = binary.ID{0x46, 0xc5, 0xf6, 0x91, 0x95, 0x80, 0x74, 0x9f, 0x6c, 0x45, 0x97, 0x2a, 0xa9, 0x4e, 0xaa, 0x6b, 0xba, 0xac, 0xa5, 0x30}
+	binaryIDReplaceAtom                     = binary.ID{0x81, 0x95, 0x81, 0x1b, 0xdd, 0x39, 0xfe, 0x7c, 0x43, 0x51, 0x80, 0xbc, 0x3b, 0xf1, 0x71, 0x44, 0x1e, 0x7b, 0x9e, 0x3a}
+	binaryIDatomFramebufferDimensions       = binary.ID{0xb6, 0xbb, 0x6b, 0x01, 0xb6, 0x82, 0xdb, 0x1f, 0xca, 0x6c, 0x74, 0x22, 0xc4, 0x74, 0xca, 0x61, 0xdd, 0x28, 0xe6, 0xf3}
+	binaryIDcaptureFramebufferDimensions    = binary.ID{0xb6, 0xbf, 0x92, 0x09, 0xa7, 0xde, 0x07, 0xf3, 0x0d, 0x9b, 0x37, 0xf8, 0x67, 0x83, 0x83, 0xbb, 0xb4, 0x8b, 0x53, 0xf5}
+	binaryIDcaptures                        = binary.ID{0xcd, 0x35, 0x8f, 0x5e, 0x40, 0x7f, 0x41, 0x75, 0x9b, 0xf7, 0x39, 0x22, 0xe1, 0xc2, 0x06, 0xd0, 0x20, 0xcc, 0xca, 0xe4}
+	binaryIDgetCaptureFramebufferDimensions = binary.ID{0xb7, 0xfe, 0xcb, 0x4d, 0x92, 0xa9, 0x4f, 0x3e, 0xf2, 0xf3, 0x1a, 0xd4, 0x72, 0x7a, 0x76, 0xa5, 0xb5, 0xde, 0x99, 0x3c}
+)
+
+type binaryClassGetFramebufferColor struct{}
+
+func (*GetFramebufferColor) Class() binary.Class {
+	return (*binaryClassGetFramebufferColor)(nil)
+}
+func doEncodeGetFramebufferColor(e binary.Encoder, o *GetFramebufferColor) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -62,8 +70,7 @@ func (o GetFramebufferColor) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetFramebufferColor) Decode(d binary.Decoder) error {
+func doDecodeGetFramebufferColor(d binary.Decoder, o *GetFramebufferColor) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -85,8 +92,7 @@ func (o *GetFramebufferColor) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetFramebufferColor) Skip(d binary.Decoder) error {
+func doSkipGetFramebufferColor(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -104,8 +110,27 @@ func (*GetFramebufferColor) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetFramebufferColor) ID() binary.ID { return binaryIDGetFramebufferColor }
+func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetFramebufferColor(e, obj.(*GetFramebufferColor))
+}
+func (*binaryClassGetFramebufferColor) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetFramebufferColor{}
+	return obj, doDecodeGetFramebufferColor(d, obj)
+}
+func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetFramebufferColor(d, obj.(*GetFramebufferColor))
+}
+func (*binaryClassGetFramebufferColor) Skip(d binary.Decoder) error {
+	return doSkipGetFramebufferColor(d)
+}
 
-func (o GetFramebufferDepth) Encode(e binary.Encoder) error {
+type binaryClassGetFramebufferDepth struct{}
+
+func (*GetFramebufferDepth) Class() binary.Class {
+	return (*binaryClassGetFramebufferDepth)(nil)
+}
+func doEncodeGetFramebufferDepth(e binary.Encoder, o *GetFramebufferDepth) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -120,8 +145,7 @@ func (o GetFramebufferDepth) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetFramebufferDepth) Decode(d binary.Decoder) error {
+func doDecodeGetFramebufferDepth(d binary.Decoder, o *GetFramebufferDepth) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -140,8 +164,7 @@ func (o *GetFramebufferDepth) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetFramebufferDepth) Skip(d binary.Decoder) error {
+func doSkipGetFramebufferDepth(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -156,8 +179,27 @@ func (*GetFramebufferDepth) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetFramebufferDepth) ID() binary.ID { return binaryIDGetFramebufferDepth }
+func (*binaryClassGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetFramebufferDepth(e, obj.(*GetFramebufferDepth))
+}
+func (*binaryClassGetFramebufferDepth) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetFramebufferDepth{}
+	return obj, doDecodeGetFramebufferDepth(d, obj)
+}
+func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetFramebufferDepth(d, obj.(*GetFramebufferDepth))
+}
+func (*binaryClassGetFramebufferDepth) Skip(d binary.Decoder) error {
+	return doSkipGetFramebufferDepth(d)
+}
 
-func (o GetHierarchy) Encode(e binary.Encoder) error {
+type binaryClassGetHierarchy struct{}
+
+func (*GetHierarchy) Class() binary.Class {
+	return (*binaryClassGetHierarchy)(nil)
+}
+func doEncodeGetHierarchy(e binary.Encoder, o *GetHierarchy) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -166,8 +208,7 @@ func (o GetHierarchy) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetHierarchy) Decode(d binary.Decoder) error {
+func doDecodeGetHierarchy(d binary.Decoder, o *GetHierarchy) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -178,8 +219,7 @@ func (o *GetHierarchy) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetHierarchy) Skip(d binary.Decoder) error {
+func doSkipGetHierarchy(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -188,8 +228,25 @@ func (*GetHierarchy) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetHierarchy) ID() binary.ID { return binaryIDGetHierarchy }
+func (*binaryClassGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetHierarchy(e, obj.(*GetHierarchy))
+}
+func (*binaryClassGetHierarchy) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetHierarchy{}
+	return obj, doDecodeGetHierarchy(d, obj)
+}
+func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetHierarchy(d, obj.(*GetHierarchy))
+}
+func (*binaryClassGetHierarchy) Skip(d binary.Decoder) error { return doSkipGetHierarchy(d) }
 
-func (o GetMemoryInfo) Encode(e binary.Encoder) error {
+type binaryClassGetMemoryInfo struct{}
+
+func (*GetMemoryInfo) Class() binary.Class {
+	return (*binaryClassGetMemoryInfo)(nil)
+}
+func doEncodeGetMemoryInfo(e binary.Encoder, o *GetMemoryInfo) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -201,8 +258,7 @@ func (o GetMemoryInfo) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetMemoryInfo) Decode(d binary.Decoder) error {
+func doDecodeGetMemoryInfo(d binary.Decoder, o *GetMemoryInfo) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -216,8 +272,7 @@ func (o *GetMemoryInfo) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetMemoryInfo) Skip(d binary.Decoder) error {
+func doSkipGetMemoryInfo(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -229,8 +284,25 @@ func (*GetMemoryInfo) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetMemoryInfo) ID() binary.ID { return binaryIDGetMemoryInfo }
+func (*binaryClassGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetMemoryInfo(e, obj.(*GetMemoryInfo))
+}
+func (*binaryClassGetMemoryInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetMemoryInfo{}
+	return obj, doDecodeGetMemoryInfo(d, obj)
+}
+func (*binaryClassGetMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetMemoryInfo(d, obj.(*GetMemoryInfo))
+}
+func (*binaryClassGetMemoryInfo) Skip(d binary.Decoder) error { return doSkipGetMemoryInfo(d) }
 
-func (o GetState) Encode(e binary.Encoder) error {
+type binaryClassGetState struct{}
+
+func (*GetState) Class() binary.Class {
+	return (*binaryClassGetState)(nil)
+}
+func doEncodeGetState(e binary.Encoder, o *GetState) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -239,8 +311,7 @@ func (o GetState) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetState) Decode(d binary.Decoder) error {
+func doDecodeGetState(d binary.Decoder, o *GetState) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -251,8 +322,7 @@ func (o *GetState) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetState) Skip(d binary.Decoder) error {
+func doSkipGetState(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -261,8 +331,25 @@ func (*GetState) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetState) ID() binary.ID { return binaryIDGetState }
+func (*binaryClassGetState) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetState(e, obj.(*GetState))
+}
+func (*binaryClassGetState) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetState{}
+	return obj, doDecodeGetState(d, obj)
+}
+func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetState(d, obj.(*GetState))
+}
+func (*binaryClassGetState) Skip(d binary.Decoder) error { return doSkipGetState(d) }
 
-func (o GetTimingInfo) Encode(e binary.Encoder) error {
+type binaryClassGetTimingInfo struct{}
+
+func (*GetTimingInfo) Class() binary.Class {
+	return (*binaryClassGetTimingInfo)(nil)
+}
+func doEncodeGetTimingInfo(e binary.Encoder, o *GetTimingInfo) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -277,8 +364,7 @@ func (o GetTimingInfo) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *GetTimingInfo) Decode(d binary.Decoder) error {
+func doDecodeGetTimingInfo(d binary.Decoder, o *GetTimingInfo) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -297,8 +383,7 @@ func (o *GetTimingInfo) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*GetTimingInfo) Skip(d binary.Decoder) error {
+func doSkipGetTimingInfo(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -313,8 +398,25 @@ func (*GetTimingInfo) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassGetTimingInfo) ID() binary.ID { return binaryIDGetTimingInfo }
+func (*binaryClassGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGetTimingInfo(e, obj.(*GetTimingInfo))
+}
+func (*binaryClassGetTimingInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GetTimingInfo{}
+	return obj, doDecodeGetTimingInfo(d, obj)
+}
+func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGetTimingInfo(d, obj.(*GetTimingInfo))
+}
+func (*binaryClassGetTimingInfo) Skip(d binary.Decoder) error { return doSkipGetTimingInfo(d) }
 
-func (o PrerenderFramebuffers) Encode(e binary.Encoder) error {
+type binaryClassPrerenderFramebuffers struct{}
+
+func (*PrerenderFramebuffers) Class() binary.Class {
+	return (*binaryClassPrerenderFramebuffers)(nil)
+}
+func doEncodePrerenderFramebuffers(e binary.Encoder, o *PrerenderFramebuffers) error {
 	if err := e.Value(&o.Device); err != nil {
 		return err
 	}
@@ -337,8 +439,7 @@ func (o PrerenderFramebuffers) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *PrerenderFramebuffers) Decode(d binary.Decoder) error {
+func doDecodePrerenderFramebuffers(d binary.Decoder, o *PrerenderFramebuffers) error {
 	if err := d.Value(&o.Device); err != nil {
 		return err
 	}
@@ -369,8 +470,7 @@ func (o *PrerenderFramebuffers) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*PrerenderFramebuffers) Skip(d binary.Decoder) error {
+func doSkipPrerenderFramebuffers(d binary.Decoder) error {
 	if err := d.SkipValue((*service.DeviceId)(nil)); err != nil {
 		return err
 	}
@@ -394,8 +494,27 @@ func (*PrerenderFramebuffers) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassPrerenderFramebuffers) ID() binary.ID { return binaryIDPrerenderFramebuffers }
+func (*binaryClassPrerenderFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodePrerenderFramebuffers(e, obj.(*PrerenderFramebuffers))
+}
+func (*binaryClassPrerenderFramebuffers) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &PrerenderFramebuffers{}
+	return obj, doDecodePrerenderFramebuffers(d, obj)
+}
+func (*binaryClassPrerenderFramebuffers) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodePrerenderFramebuffers(d, obj.(*PrerenderFramebuffers))
+}
+func (*binaryClassPrerenderFramebuffers) Skip(d binary.Decoder) error {
+	return doSkipPrerenderFramebuffers(d)
+}
 
-func (o RenderFramebufferColor) Encode(e binary.Encoder) error {
+type binaryClassRenderFramebufferColor struct{}
+
+func (*RenderFramebufferColor) Class() binary.Class {
+	return (*binaryClassRenderFramebufferColor)(nil)
+}
+func doEncodeRenderFramebufferColor(e binary.Encoder, o *RenderFramebufferColor) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -419,8 +538,7 @@ func (o RenderFramebufferColor) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *RenderFramebufferColor) Decode(d binary.Decoder) error {
+func doDecodeRenderFramebufferColor(d binary.Decoder, o *RenderFramebufferColor) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -454,8 +572,7 @@ func (o *RenderFramebufferColor) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*RenderFramebufferColor) Skip(d binary.Decoder) error {
+func doSkipRenderFramebufferColor(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -479,8 +596,27 @@ func (*RenderFramebufferColor) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassRenderFramebufferColor) ID() binary.ID { return binaryIDRenderFramebufferColor }
+func (*binaryClassRenderFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRenderFramebufferColor(e, obj.(*RenderFramebufferColor))
+}
+func (*binaryClassRenderFramebufferColor) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &RenderFramebufferColor{}
+	return obj, doDecodeRenderFramebufferColor(d, obj)
+}
+func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRenderFramebufferColor(d, obj.(*RenderFramebufferColor))
+}
+func (*binaryClassRenderFramebufferColor) Skip(d binary.Decoder) error {
+	return doSkipRenderFramebufferColor(d)
+}
 
-func (o RenderFramebufferDepth) Encode(e binary.Encoder) error {
+type binaryClassRenderFramebufferDepth struct{}
+
+func (*RenderFramebufferDepth) Class() binary.Class {
+	return (*binaryClassRenderFramebufferDepth)(nil)
+}
+func doEncodeRenderFramebufferDepth(e binary.Encoder, o *RenderFramebufferDepth) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -501,8 +637,7 @@ func (o RenderFramebufferDepth) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *RenderFramebufferDepth) Decode(d binary.Decoder) error {
+func doDecodeRenderFramebufferDepth(d binary.Decoder, o *RenderFramebufferDepth) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -531,8 +666,7 @@ func (o *RenderFramebufferDepth) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*RenderFramebufferDepth) Skip(d binary.Decoder) error {
+func doSkipRenderFramebufferDepth(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -553,8 +687,27 @@ func (*RenderFramebufferDepth) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassRenderFramebufferDepth) ID() binary.ID { return binaryIDRenderFramebufferDepth }
+func (*binaryClassRenderFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRenderFramebufferDepth(e, obj.(*RenderFramebufferDepth))
+}
+func (*binaryClassRenderFramebufferDepth) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &RenderFramebufferDepth{}
+	return obj, doDecodeRenderFramebufferDepth(d, obj)
+}
+func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRenderFramebufferDepth(d, obj.(*RenderFramebufferDepth))
+}
+func (*binaryClassRenderFramebufferDepth) Skip(d binary.Decoder) error {
+	return doSkipRenderFramebufferDepth(d)
+}
 
-func (o ReplaceAtom) Encode(e binary.Encoder) error {
+type binaryClassReplaceAtom struct{}
+
+func (*ReplaceAtom) Class() binary.Class {
+	return (*binaryClassReplaceAtom)(nil)
+}
+func doEncodeReplaceAtom(e binary.Encoder, o *ReplaceAtom) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -569,8 +722,7 @@ func (o ReplaceAtom) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *ReplaceAtom) Decode(d binary.Decoder) error {
+func doDecodeReplaceAtom(d binary.Decoder, o *ReplaceAtom) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -589,8 +741,7 @@ func (o *ReplaceAtom) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*ReplaceAtom) Skip(d binary.Decoder) error {
+func doSkipReplaceAtom(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -605,8 +756,25 @@ func (*ReplaceAtom) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassReplaceAtom) ID() binary.ID { return binaryIDReplaceAtom }
+func (*binaryClassReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeReplaceAtom(e, obj.(*ReplaceAtom))
+}
+func (*binaryClassReplaceAtom) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ReplaceAtom{}
+	return obj, doDecodeReplaceAtom(d, obj)
+}
+func (*binaryClassReplaceAtom) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeReplaceAtom(d, obj.(*ReplaceAtom))
+}
+func (*binaryClassReplaceAtom) Skip(d binary.Decoder) error { return doSkipReplaceAtom(d) }
 
-func (o atomFramebufferDimensions) Encode(e binary.Encoder) error {
+type binaryClassatomFramebufferDimensions struct{}
+
+func (*atomFramebufferDimensions) Class() binary.Class {
+	return (*binaryClassatomFramebufferDimensions)(nil)
+}
+func doEncodeatomFramebufferDimensions(e binary.Encoder, o *atomFramebufferDimensions) error {
 	if err := e.Uint64(uint64(o.From)); err != nil {
 		return err
 	}
@@ -618,8 +786,7 @@ func (o atomFramebufferDimensions) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *atomFramebufferDimensions) Decode(d binary.Decoder) error {
+func doDecodeatomFramebufferDimensions(d binary.Decoder, o *atomFramebufferDimensions) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -637,8 +804,7 @@ func (o *atomFramebufferDimensions) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*atomFramebufferDimensions) Skip(d binary.Decoder) error {
+func doSkipatomFramebufferDimensions(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -650,8 +816,27 @@ func (*atomFramebufferDimensions) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassatomFramebufferDimensions) ID() binary.ID { return binaryIDatomFramebufferDimensions }
+func (*binaryClassatomFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeatomFramebufferDimensions(e, obj.(*atomFramebufferDimensions))
+}
+func (*binaryClassatomFramebufferDimensions) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &atomFramebufferDimensions{}
+	return obj, doDecodeatomFramebufferDimensions(d, obj)
+}
+func (*binaryClassatomFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeatomFramebufferDimensions(d, obj.(*atomFramebufferDimensions))
+}
+func (*binaryClassatomFramebufferDimensions) Skip(d binary.Decoder) error {
+	return doSkipatomFramebufferDimensions(d)
+}
 
-func (o captureFramebufferDimensions) Encode(e binary.Encoder) error {
+type binaryClasscaptureFramebufferDimensions struct{}
+
+func (*captureFramebufferDimensions) Class() binary.Class {
+	return (*binaryClasscaptureFramebufferDimensions)(nil)
+}
+func doEncodecaptureFramebufferDimensions(e binary.Encoder, o *captureFramebufferDimensions) error {
 	if err := e.Uint32(uint32(len(o.Dimensions))); err != nil {
 		return err
 	}
@@ -662,8 +847,7 @@ func (o captureFramebufferDimensions) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *captureFramebufferDimensions) Decode(d binary.Decoder) error {
+func doDecodecaptureFramebufferDimensions(d binary.Decoder, o *captureFramebufferDimensions) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -676,8 +860,7 @@ func (o *captureFramebufferDimensions) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*captureFramebufferDimensions) Skip(d binary.Decoder) error {
+func doSkipcaptureFramebufferDimensions(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -689,8 +872,29 @@ func (*captureFramebufferDimensions) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClasscaptureFramebufferDimensions) ID() binary.ID {
+	return binaryIDcaptureFramebufferDimensions
+}
+func (*binaryClasscaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecaptureFramebufferDimensions(e, obj.(*captureFramebufferDimensions))
+}
+func (*binaryClasscaptureFramebufferDimensions) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &captureFramebufferDimensions{}
+	return obj, doDecodecaptureFramebufferDimensions(d, obj)
+}
+func (*binaryClasscaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecaptureFramebufferDimensions(d, obj.(*captureFramebufferDimensions))
+}
+func (*binaryClasscaptureFramebufferDimensions) Skip(d binary.Decoder) error {
+	return doSkipcaptureFramebufferDimensions(d)
+}
 
-func (o captures) Encode(e binary.Encoder) error {
+type binaryClasscaptures struct{}
+
+func (*captures) Class() binary.Class {
+	return (*binaryClasscaptures)(nil)
+}
+func doEncodecaptures(e binary.Encoder, o *captures) error {
 	if err := e.Uint32(uint32(len(o.ids))); err != nil {
 		return err
 	}
@@ -701,8 +905,7 @@ func (o captures) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *captures) Decode(d binary.Decoder) error {
+func doDecodecaptures(d binary.Decoder, o *captures) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -715,8 +918,7 @@ func (o *captures) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*captures) Skip(d binary.Decoder) error {
+func doSkipcaptures(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -728,8 +930,25 @@ func (*captures) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClasscaptures) ID() binary.ID { return binaryIDcaptures }
+func (*binaryClasscaptures) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodecaptures(e, obj.(*captures))
+}
+func (*binaryClasscaptures) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &captures{}
+	return obj, doDecodecaptures(d, obj)
+}
+func (*binaryClasscaptures) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodecaptures(d, obj.(*captures))
+}
+func (*binaryClasscaptures) Skip(d binary.Decoder) error { return doSkipcaptures(d) }
 
-func (o getCaptureFramebufferDimensions) Encode(e binary.Encoder) error {
+type binaryClassgetCaptureFramebufferDimensions struct{}
+
+func (*getCaptureFramebufferDimensions) Class() binary.Class {
+	return (*binaryClassgetCaptureFramebufferDimensions)(nil)
+}
+func doEncodegetCaptureFramebufferDimensions(e binary.Encoder, o *getCaptureFramebufferDimensions) error {
 	if err := e.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -738,8 +957,7 @@ func (o getCaptureFramebufferDimensions) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *getCaptureFramebufferDimensions) Decode(d binary.Decoder) error {
+func doDecodegetCaptureFramebufferDimensions(d binary.Decoder, o *getCaptureFramebufferDimensions) error {
 	if err := d.Value(&o.Capture); err != nil {
 		return err
 	}
@@ -750,8 +968,7 @@ func (o *getCaptureFramebufferDimensions) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*getCaptureFramebufferDimensions) Skip(d binary.Decoder) error {
+func doSkipgetCaptureFramebufferDimensions(d binary.Decoder) error {
 	if err := d.SkipValue((*service.CaptureId)(nil)); err != nil {
 		return err
 	}
@@ -759,4 +976,20 @@ func (*getCaptureFramebufferDimensions) Skip(d binary.Decoder) error {
 		return err
 	}
 	return nil
+}
+func (*binaryClassgetCaptureFramebufferDimensions) ID() binary.ID {
+	return binaryIDgetCaptureFramebufferDimensions
+}
+func (*binaryClassgetCaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodegetCaptureFramebufferDimensions(e, obj.(*getCaptureFramebufferDimensions))
+}
+func (*binaryClassgetCaptureFramebufferDimensions) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &getCaptureFramebufferDimensions{}
+	return obj, doDecodegetCaptureFramebufferDimensions(d, obj)
+}
+func (*binaryClassgetCaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodegetCaptureFramebufferDimensions(d, obj.(*getCaptureFramebufferDimensions))
+}
+func (*binaryClassgetCaptureFramebufferDimensions) Skip(d binary.Decoder) error {
+	return doSkipgetCaptureFramebufferDimensions(d)
 }

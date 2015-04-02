@@ -80,9 +80,9 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID {
 	buf := &bytes.Buffer{}
 	e := cyclic.Encoder(vle.Writer(buf))
-	capture.Encode(e)
+	e.Value(&capture)
 	e.Uint64(uint64(id))
-	a.Encode(e)
+	e.Value(a)
 	return binary.NewID(buf.Bytes())
 }
 

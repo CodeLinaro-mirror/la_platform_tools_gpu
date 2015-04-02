@@ -17,6 +17,8 @@
 package flat
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
@@ -52,42 +54,41 @@ func (d *decoder) SkipID() error {
 	return d.Skip(binary.IDSize)
 }
 
-func (e *encoder) Value(obj binary.Encodable) error     { return obj.Encode(e) }
-func (d *decoder) Value(obj binary.Decodable) error     { return obj.Decode(d) }
-func (d *decoder) SkipValue(obj binary.Decodable) error { return obj.Skip(d) }
+func (e *encoder) Value(obj binary.Object) error     { return obj.Class().Encode(e, obj) }
+func (d *decoder) Value(obj binary.Object) error     { return obj.Class().DecodeTo(d, obj) }
+func (d *decoder) SkipValue(obj binary.Object) error { return obj.Class().Skip(d) }
 
-func (e *encoder) Variant(obj binary.Encodable) error {
+func (e *encoder) Variant(obj binary.Object) error {
 	if obj == nil {
 		return e.ID(binary.ID{})
 	}
-	if id, err := registry.TypeOf(obj); err != nil {
-		return err
-	} else if err := e.ID(id); err != nil {
+	class := obj.Class()
+	if err := e.ID(class.ID()); err != nil {
 		return err
 	}
-	return obj.Encode(e)
+	return class.Encode(e, obj)
 }
 
-func (d *decoder) Variant() (interface{}, error) {
+func (d *decoder) Variant() (binary.Object, error) {
 	if id, err := d.ID(); err != nil {
 		return nil, err
-	} else if obj, err := registry.New(id); err != nil || obj == nil {
-		return obj, err
+	} else if class := registry.Lookup(id); class == nil {
+		return nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		return obj, obj.Decode(d)
+		return class.Decode(d)
 	}
 }
 
 func (d *decoder) SkipVariant() (binary.ID, error) {
 	if id, err := d.ID(); err != nil {
 		return id, err
-	} else if obj, err := registry.Nil(id); err != nil || obj == nil {
-		return id, err
+	} else if class := registry.Lookup(id); class == nil {
+		return id, fmt.Errorf("Unknown type id %v", id)
 	} else {
-		return id, obj.Skip(d)
+		return id, class.Skip(d)
 	}
 }
 
-func (e *encoder) Object(obj binary.Encodable) error { return e.Variant(obj) }
-func (d *decoder) Object() (interface{}, error)      { return d.Variant() }
-func (d *decoder) SkipObject() (binary.ID, error)    { return d.SkipVariant() }
+func (e *encoder) Object(obj binary.Object) error { return e.Variant(obj) }
+func (d *decoder) Object() (binary.Object, error) { return d.Variant() }
+func (d *decoder) SkipObject() (binary.ID, error) { return d.SkipVariant() }

@@ -11,22 +11,29 @@ import (
 )
 
 func init() {
-	//struct rpc.delay { data:string }
-	registry.Add(binary.ID{0x9c, 0xc9, 0xea, 0xcf, 0xef, 0x65, 0x94, 0x95, 0x5c, 0xb7, 0x55, 0x1d, 0x1a, 0xc8, 0x3e, 0x0c, 0x95, 0xff, 0x80, 0x48}, &delay{})
-	//struct rpc.request { data:string }
-	registry.Add(binary.ID{0xd9, 0x1d, 0x45, 0x70, 0x7d, 0x68, 0xb3, 0xe0, 0xe4, 0x10, 0x02, 0xe0, 0xca, 0x06, 0xa4, 0x52, 0xd4, 0xf3, 0xec, 0xfb}, &request{})
-	//struct rpc.response { data:string }
-	registry.Add(binary.ID{0x45, 0x91, 0xb8, 0xc1, 0xb7, 0x54, 0x77, 0xb2, 0x60, 0x33, 0x19, 0x78, 0x12, 0x5e, 0xec, 0x92, 0x47, 0xdf, 0x02, 0xf1}, &response{})
+	registry.Add((*delay)(nil).Class())
+	registry.Add((*request)(nil).Class())
+	registry.Add((*response)(nil).Class())
 }
 
-func (o delay) Encode(e binary.Encoder) error {
+var (
+	binaryIDdelay    = binary.ID{0x9c, 0xc9, 0xea, 0xcf, 0xef, 0x65, 0x94, 0x95, 0x5c, 0xb7, 0x55, 0x1d, 0x1a, 0xc8, 0x3e, 0x0c, 0x95, 0xff, 0x80, 0x48}
+	binaryIDrequest  = binary.ID{0xd9, 0x1d, 0x45, 0x70, 0x7d, 0x68, 0xb3, 0xe0, 0xe4, 0x10, 0x02, 0xe0, 0xca, 0x06, 0xa4, 0x52, 0xd4, 0xf3, 0xec, 0xfb}
+	binaryIDresponse = binary.ID{0x45, 0x91, 0xb8, 0xc1, 0xb7, 0x54, 0x77, 0xb2, 0x60, 0x33, 0x19, 0x78, 0x12, 0x5e, 0xec, 0x92, 0x47, 0xdf, 0x02, 0xf1}
+)
+
+type binaryClassdelay struct{}
+
+func (*delay) Class() binary.Class {
+	return (*binaryClassdelay)(nil)
+}
+func doEncodedelay(e binary.Encoder, o *delay) error {
 	if err := e.String(o.data); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *delay) Decode(d binary.Decoder) error {
+func doDecodedelay(d binary.Decoder, o *delay) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -34,23 +41,37 @@ func (o *delay) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*delay) Skip(d binary.Decoder) error {
+func doSkipdelay(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassdelay) ID() binary.ID { return binaryIDdelay }
+func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodedelay(e, obj.(*delay))
+}
+func (*binaryClassdelay) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &delay{}
+	return obj, doDecodedelay(d, obj)
+}
+func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodedelay(d, obj.(*delay))
+}
+func (*binaryClassdelay) Skip(d binary.Decoder) error { return doSkipdelay(d) }
 
-func (o request) Encode(e binary.Encoder) error {
+type binaryClassrequest struct{}
+
+func (*request) Class() binary.Class {
+	return (*binaryClassrequest)(nil)
+}
+func doEncoderequest(e binary.Encoder, o *request) error {
 	if err := e.String(o.data); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *request) Decode(d binary.Decoder) error {
+func doDecoderequest(d binary.Decoder, o *request) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -58,23 +79,37 @@ func (o *request) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*request) Skip(d binary.Decoder) error {
+func doSkiprequest(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassrequest) ID() binary.ID { return binaryIDrequest }
+func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderequest(e, obj.(*request))
+}
+func (*binaryClassrequest) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &request{}
+	return obj, doDecoderequest(d, obj)
+}
+func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderequest(d, obj.(*request))
+}
+func (*binaryClassrequest) Skip(d binary.Decoder) error { return doSkiprequest(d) }
 
-func (o response) Encode(e binary.Encoder) error {
+type binaryClassresponse struct{}
+
+func (*response) Class() binary.Class {
+	return (*binaryClassresponse)(nil)
+}
+func doEncoderesponse(e binary.Encoder, o *response) error {
 	if err := e.String(o.data); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *response) Decode(d binary.Decoder) error {
+func doDecoderesponse(d binary.Decoder, o *response) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -82,11 +117,21 @@ func (o *response) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*response) Skip(d binary.Decoder) error {
+func doSkipresponse(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassresponse) ID() binary.ID { return binaryIDresponse }
+func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncoderesponse(e, obj.(*response))
+}
+func (*binaryClassresponse) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &response{}
+	return obj, doDecoderesponse(d, obj)
+}
+func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecoderesponse(d, obj.(*response))
+}
+func (*binaryClassresponse) Skip(d binary.Decoder) error { return doSkipresponse(d) }

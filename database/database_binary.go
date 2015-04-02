@@ -11,11 +11,19 @@ import (
 )
 
 func init() {
-	//struct database.metadata { Type:metaType, LinkTo:binary.ID, Request:binary.Object }
-	registry.Add(binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}, &metadata{})
+	registry.Add((*metadata)(nil).Class())
 }
 
-func (o metadata) Encode(e binary.Encoder) error {
+var (
+	binaryIDmetadata = binary.ID{0x84, 0x31, 0x02, 0x95, 0x2a, 0x0a, 0x75, 0xc0, 0x5a, 0xe3, 0x0b, 0x4c, 0x25, 0x31, 0xa9, 0x0f, 0x5e, 0xf6, 0xfd, 0x35}
+)
+
+type binaryClassmetadata struct{}
+
+func (*metadata) Class() binary.Class {
+	return (*binaryClassmetadata)(nil)
+}
+func doEncodemetadata(e binary.Encoder, o *metadata) error {
 	if err := e.Int32(int32(o.Type)); err != nil {
 		return err
 	}
@@ -31,8 +39,7 @@ func (o metadata) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *metadata) Decode(d binary.Decoder) error {
+func doDecodemetadata(d binary.Decoder, o *metadata) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -52,17 +59,27 @@ func (o *metadata) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*metadata) Skip(d binary.Decoder) error {
+func doSkipmetadata(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	if err := d.SkipID(); err != nil {
 		return err
 	}
-
 	if _, err := d.SkipObject(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassmetadata) ID() binary.ID { return binaryIDmetadata }
+func (*binaryClassmetadata) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodemetadata(e, obj.(*metadata))
+}
+func (*binaryClassmetadata) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &metadata{}
+	return obj, doDecodemetadata(d, obj)
+}
+func (*binaryClassmetadata) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodemetadata(d, obj.(*metadata))
+}
+func (*binaryClassmetadata) Skip(d binary.Decoder) error { return doSkipmetadata(d) }

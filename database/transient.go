@@ -86,7 +86,7 @@ func (t *transient) Store(r binary.Object, logger log.Logger) (id binary.ID, err
 
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
-	if err := r.Encode(enc); err != nil {
+	if err := enc.Value(r); err != nil {
 		return binary.ID{}, err
 	}
 
@@ -139,7 +139,7 @@ func (t *transient) Load(id binary.ID, logger log.Logger, out binary.Object) (er
 	if entry, ok := t.entries[id]; ok {
 		t.mutex.Unlock()
 		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(entry)))
-		err := out.Decode(d)
+		err := d.Value(out)
 		t.mutex.Lock()
 		t.dropLocked(id, logger)
 		t.mutex.Unlock()

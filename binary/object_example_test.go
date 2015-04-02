@@ -26,26 +26,44 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 )
 
-var ExampleObjectID = binary.NewID([]byte("ExampleObjectId"))
-
 type ExampleObject struct{ Data string }
+type ExampleClass struct{}
 
-func (t *ExampleObject) Encode(e binary.Encoder) error {
-	return e.String(t.Data)
+var ExampleID = binary.ID{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14}
+
+func (*ExampleObject) Class() binary.Class {
+	return (*ExampleClass)(nil)
 }
 
-func (t *ExampleObject) Decode(d binary.Decoder) error {
+func (*ExampleClass) ID() binary.ID {
+	return ExampleID
+}
+
+func (*ExampleClass) Encode(e binary.Encoder, obj binary.Object) error {
+	o := obj.(*ExampleObject)
+	return e.String(o.Data)
+}
+
+func (*ExampleClass) Decode(d binary.Decoder) (binary.Object, error) {
+	o := &ExampleObject{}
 	var err error
-	t.Data, err = d.String()
+	o.Data, err = d.String()
+	return o, err
+}
+
+func (*ExampleClass) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	o := obj.(*ExampleObject)
+	var err error
+	o.Data, err = d.String()
 	return err
 }
 
-func (ExampleObject) Skip(d binary.Decoder) error {
+func (*ExampleClass) Skip(d binary.Decoder) error {
 	return d.SkipString()
 }
 
 func init() {
-	registry.Add(ExampleObjectID, &ExampleObject{})
+	registry.Add((*ExampleObject)(nil).Class())
 }
 
 // This example shows how to write a type with custom encode and decode

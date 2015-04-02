@@ -22,7 +22,6 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/registry"
 )
 
 type TypeA struct {
@@ -79,7 +78,7 @@ func EncodeObject(t *testing.T, entry Entry, e binary.Encoder, buf *bytes.Buffer
 func DecodeValue(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Reader) {
 	offsets := make([]int, len(entry.Values))
 	for i, o := range entry.Values {
-		got := reflect.New(reflect.TypeOf(o).Elem()).Interface().(binary.Decodable)
+		got := reflect.New(reflect.TypeOf(o).Elem()).Interface().(binary.Object)
 		if err := d.Value(got); err != nil {
 			t.Errorf("%v[%v] Value gave unexpected error: %v", entry.Name, i, err)
 		} else if !reflect.DeepEqual(o, got) {
@@ -90,7 +89,7 @@ func DecodeValue(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Read
 	// Reset to beginning so we can verify skip offsets
 	reader.Seek(0, 0)
 	for i, o := range entry.Values {
-		got := reflect.Zero(reflect.TypeOf(o)).Interface().(binary.Decodable)
+		got := reflect.Zero(reflect.TypeOf(o)).Interface().(binary.Object)
 		if err := d.SkipValue(got); err != nil {
 			t.Errorf("%v[%v] SkipValue gave unexpected error: %v", entry.Name, i, err)
 		}
@@ -113,11 +112,14 @@ func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Rea
 	// Reset to beginning so we can verify skip offsets
 	reader.Seek(0, 0)
 	for i, v := range entry.Values {
-		ty, _ := registry.TypeOf(v)
+		var ty binary.Class = binary.NilClass
+		if v != nil {
+			ty = v.Class()
+		}
 		if id, err := d.SkipObject(); err != nil {
 			t.Errorf("%v[%v] SkipObject gave unexpected error: %v", entry.Name, i, err)
-		} else if ty != id {
-			t.Errorf("%v[%v] SkipObject gave unexpected type: expected %v got %v", entry.Name, i, ty, id)
+		} else if ty.ID() != id {
+			t.Errorf("%v[%v] SkipObject gave unexpected type: expected %v got %v", entry.Name, i, ty.ID, id)
 		}
 		if offsets[i] != reader.Len() {
 			t.Errorf("%v[%v] bad skip. Expected: %v, got: %v", entry.Name, i, offsets[i], reader.Len())

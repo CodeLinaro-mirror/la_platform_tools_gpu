@@ -103,23 +103,23 @@ func (m *Multiplexer) recv() {
 		}
 		switch ty {
 		case msgTypeOpenChannel:
-			msg := msgOpenChannel{}
-			if err := msg.Decode(d); err != nil {
+			msg := &msgOpenChannel{}
+			if err := d.Value(msg); err != nil {
 				return
 			}
 			s := m.createChannel(remote(msg.channelId))
 			go m.channelOpenedCallback(s)
 
 		case msgTypeCloseChannel:
-			msg := msgCloseChannel{}
-			if err := msg.Decode(d); err != nil {
+			msg := &msgCloseChannel{}
+			if err := d.Value(msg); err != nil {
 				return
 			}
 			m.closeChannel(remote(msg.channelId), false)
 
 		case msgTypeData:
-			msg := msgData{}
-			if err := msg.Decode(d); err != nil {
+			msg := &msgData{}
+			if err := d.Value(msg); err != nil {
 				return
 			}
 			id := remote(msg.c)

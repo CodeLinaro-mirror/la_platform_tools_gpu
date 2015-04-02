@@ -16,7 +16,7 @@ import (
 )
 
 func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
-	rpc.Serve(l, r, w, mtu, func(in interface{}) (res binary.Encodable) {
+	rpc.Serve(l, r, w, mtu, func(in interface{}) (res binary.Object) {
 		l := l.Fork().Enter(fmt.Sprintf("%v", in))
 		defer func() {
 			if err := recover(); err == nil {

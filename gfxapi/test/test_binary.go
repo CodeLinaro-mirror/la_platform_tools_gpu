@@ -13,293 +13,301 @@ import (
 )
 
 func init() {
-	//struct test.CmdArrayOfFloat { Context:atom.ContextID, In:CmdArrayOfFloat_In, Out:CmdArrayOfFloat_Out }
-	registry.Add(binary.ID{0xc7, 0xbe, 0x8b, 0xe6, 0x15, 0x6e, 0x20, 0x18, 0x6c, 0xec, 0xb3, 0xdf, 0xa3, 0x66, 0xae, 0xf0, 0x94, 0xe0, 0x48, 0xda}, &CmdArrayOfFloat{})
-	//struct test.CmdArrayOfFloat_In { }
-	registry.Add(binary.ID{0xd5, 0x2b, 0xc7, 0x41, 0xb0, 0x20, 0x45, 0x1e, 0x83, 0xbd, 0x77, 0xf4, 0xca, 0x4d, 0x9a, 0x2c, 0xbb, 0x2b, 0x07, 0x90}, &CmdArrayOfFloat_In{})
-	//struct test.CmdArrayOfFloat_Out { Result:F32Array }
-	registry.Add(binary.ID{0x36, 0x3c, 0x3e, 0x10, 0x7a, 0xbb, 0xa4, 0x7c, 0x75, 0x9a, 0x9f, 0x19, 0x07, 0x1b, 0x7e, 0x9a, 0x95, 0x0d, 0x1c, 0x30}, &CmdArrayOfFloat_Out{})
-	//struct test.CmdBool { Context:atom.ContextID, In:CmdBool_In, Out:CmdBool_Out }
-	registry.Add(binary.ID{0xfc, 0x9c, 0x18, 0xaa, 0x58, 0xf9, 0x5c, 0x18, 0xfe, 0x28, 0xc6, 0x72, 0x0a, 0xa7, 0x2e, 0xb9, 0xcc, 0x7d, 0xde, 0x21}, &CmdBool{})
-	//struct test.CmdBool_In { }
-	registry.Add(binary.ID{0xa8, 0xc3, 0xf0, 0xd7, 0xdf, 0x03, 0x75, 0x19, 0x03, 0x76, 0x72, 0x4c, 0xb8, 0xd4, 0x55, 0x0a, 0xff, 0x6f, 0x46, 0xcf}, &CmdBool_In{})
-	//struct test.CmdBool_Out { Result:bool }
-	registry.Add(binary.ID{0x6f, 0x9e, 0x3b, 0xfa, 0xe7, 0xd8, 0x25, 0x76, 0xe7, 0x91, 0x65, 0x6c, 0x99, 0xb3, 0x80, 0x04, 0x17, 0xf4, 0xb8, 0xd8}, &CmdBool_Out{})
-	//struct test.CmdF32 { Context:atom.ContextID, In:CmdF32_In, Out:CmdF32_Out }
-	registry.Add(binary.ID{0xda, 0xaf, 0xbd, 0xf3, 0xcb, 0x30, 0xb6, 0x68, 0x7a, 0xcd, 0xf4, 0xc8, 0x54, 0x6b, 0x47, 0x6d, 0x29, 0x03, 0xe5, 0xca}, &CmdF32{})
-	//struct test.CmdF32_In { }
-	registry.Add(binary.ID{0x37, 0x2e, 0x12, 0xe8, 0xb9, 0xf9, 0xdf, 0x55, 0x73, 0x54, 0x0c, 0xb7, 0x0a, 0xcf, 0xb6, 0x3a, 0x5d, 0x8e, 0xc0, 0xea}, &CmdF32_In{})
-	//struct test.CmdF32_Out { Result:float32 }
-	registry.Add(binary.ID{0xa5, 0x94, 0x0e, 0xe8, 0x83, 0xf7, 0xb9, 0x64, 0x34, 0x1a, 0x70, 0xf4, 0x75, 0x8a, 0x61, 0xf7, 0x62, 0x8b, 0xe5, 0x7b}, &CmdF32_Out{})
-	//struct test.CmdF64 { Context:atom.ContextID, In:CmdF64_In, Out:CmdF64_Out }
-	registry.Add(binary.ID{0x42, 0x3c, 0x1a, 0x84, 0x64, 0x17, 0xaf, 0xe4, 0x29, 0x6f, 0x9e, 0x59, 0x95, 0xd6, 0x38, 0xd5, 0x83, 0xd8, 0x67, 0x75}, &CmdF64{})
-	//struct test.CmdF64_In { }
-	registry.Add(binary.ID{0x52, 0xb1, 0x85, 0xd0, 0x4b, 0xb3, 0x41, 0xf5, 0x38, 0xd4, 0xc2, 0xfd, 0x72, 0x2d, 0x11, 0x9b, 0x75, 0xb0, 0x89, 0xea}, &CmdF64_In{})
-	//struct test.CmdF64_Out { Result:float64 }
-	registry.Add(binary.ID{0x54, 0x76, 0x58, 0x05, 0x51, 0xe0, 0x1e, 0x09, 0xc5, 0x2a, 0x9c, 0xdc, 0xfa, 0xb5, 0x96, 0x0a, 0xd2, 0x18, 0xef, 0x66}, &CmdF64_Out{})
-	//struct test.CmdPointer { Context:atom.ContextID, In:CmdPointer_In, Out:CmdPointer_Out }
-	registry.Add(binary.ID{0xbf, 0x67, 0x3e, 0x0f, 0x67, 0x62, 0x75, 0x98, 0x1a, 0xc2, 0x36, 0x67, 0xec, 0x14, 0x95, 0x83, 0x6f, 0x96, 0xfb, 0x86}, &CmdPointer{})
-	//struct test.CmdPointer_In { }
-	registry.Add(binary.ID{0x02, 0x87, 0x43, 0x42, 0xe1, 0xcf, 0x50, 0x41, 0x05, 0x53, 0x0d, 0x1c, 0xa7, 0x77, 0x4a, 0xfe, 0xf8, 0x99, 0x68, 0x27}, &CmdPointer_In{})
-	//struct test.CmdPointer_Out { Result:memory.Pointer }
-	registry.Add(binary.ID{0xe3, 0xa5, 0xa0, 0xc2, 0x07, 0xfc, 0xf6, 0xbd, 0x8d, 0x89, 0xae, 0xb2, 0x02, 0xdf, 0xeb, 0x15, 0x0a, 0xf0, 0x65, 0x12}, &CmdPointer_Out{})
-	//struct test.CmdS16 { Context:atom.ContextID, In:CmdS16_In, Out:CmdS16_Out }
-	registry.Add(binary.ID{0x7c, 0x7c, 0x2d, 0x85, 0x27, 0x81, 0xd9, 0xc7, 0xf2, 0x53, 0x3b, 0x0b, 0x81, 0x13, 0xc8, 0xbc, 0xd4, 0x23, 0xe9, 0x1b}, &CmdS16{})
-	//struct test.CmdS16_In { }
-	registry.Add(binary.ID{0xb4, 0x21, 0xaf, 0x09, 0xe1, 0xcb, 0x81, 0x1f, 0x25, 0x29, 0xaf, 0x09, 0x9e, 0xf5, 0x48, 0x32, 0xb2, 0x99, 0xfd, 0x74}, &CmdS16_In{})
-	//struct test.CmdS16_Out { Result:int16 }
-	registry.Add(binary.ID{0x6f, 0x2b, 0xe4, 0x31, 0xff, 0x53, 0xb9, 0x35, 0xc9, 0x13, 0x54, 0x06, 0xdb, 0x9c, 0x04, 0xcd, 0x69, 0x27, 0xa9, 0x74}, &CmdS16_Out{})
-	//struct test.CmdS32 { Context:atom.ContextID, In:CmdS32_In, Out:CmdS32_Out }
-	registry.Add(binary.ID{0x63, 0xf9, 0x22, 0x35, 0x17, 0xe0, 0x49, 0xc0, 0x77, 0x8f, 0x23, 0x22, 0x4f, 0x84, 0x9d, 0xc9, 0x50, 0xea, 0x10, 0x02}, &CmdS32{})
-	//struct test.CmdS32_In { }
-	registry.Add(binary.ID{0xa2, 0x0c, 0x1a, 0x78, 0x13, 0x5b, 0xb9, 0xf4, 0xb9, 0x84, 0x46, 0x26, 0x3c, 0xbc, 0xbc, 0x6c, 0x28, 0x96, 0xa6, 0x2d}, &CmdS32_In{})
-	//struct test.CmdS32_Out { Result:int32 }
-	registry.Add(binary.ID{0x83, 0x99, 0xd5, 0xe8, 0xb6, 0xc5, 0x6a, 0x3b, 0xf5, 0x20, 0x22, 0x59, 0x40, 0xc9, 0xde, 0x88, 0x09, 0x09, 0xa5, 0xe9}, &CmdS32_Out{})
-	//struct test.CmdS64 { Context:atom.ContextID, In:CmdS64_In, Out:CmdS64_Out }
-	registry.Add(binary.ID{0xbd, 0x2e, 0x78, 0xa7, 0x9a, 0x51, 0xad, 0xc9, 0xfa, 0x1b, 0x28, 0x52, 0xb8, 0xc8, 0xcc, 0x63, 0xc1, 0xec, 0xae, 0xea}, &CmdS64{})
-	//struct test.CmdS64_In { }
-	registry.Add(binary.ID{0x69, 0x7f, 0x8a, 0x03, 0xf3, 0xd1, 0x13, 0x1b, 0x1c, 0x15, 0xc8, 0x9f, 0x23, 0x73, 0x1c, 0xc2, 0xfd, 0x9e, 0xe3, 0x3b}, &CmdS64_In{})
-	//struct test.CmdS64_Out { Result:int64 }
-	registry.Add(binary.ID{0xae, 0x38, 0x61, 0x6c, 0x5c, 0xb0, 0x30, 0xcc, 0xce, 0xce, 0x4e, 0xf0, 0x9d, 0x70, 0x0f, 0xd2, 0x4c, 0x11, 0x68, 0x86}, &CmdS64_Out{})
-	//struct test.CmdS8 { Context:atom.ContextID, In:CmdS8_In, Out:CmdS8_Out }
-	registry.Add(binary.ID{0x29, 0x72, 0x6a, 0x87, 0xc4, 0xe1, 0x2f, 0x7c, 0x63, 0x50, 0xa4, 0xc7, 0x74, 0xde, 0xf1, 0xf4, 0xe0, 0x5e, 0x05, 0x4c}, &CmdS8{})
-	//struct test.CmdS8_In { }
-	registry.Add(binary.ID{0xc7, 0xb6, 0xa0, 0x8b, 0xfb, 0xc6, 0x57, 0x3d, 0x90, 0x4d, 0x6b, 0x67, 0xfc, 0x5a, 0x3d, 0x59, 0x87, 0x3d, 0x8e, 0xb1}, &CmdS8_In{})
-	//struct test.CmdS8_Out { Result:int8 }
-	registry.Add(binary.ID{0xf9, 0xf1, 0x54, 0x03, 0x51, 0xfc, 0xd1, 0xe0, 0xf2, 0x74, 0x68, 0xb8, 0x9a, 0xf5, 0x53, 0x46, 0xd1, 0xb3, 0xf4, 0x7b}, &CmdS8_Out{})
-	//struct test.CmdString { Context:atom.ContextID, In:CmdString_In, Out:CmdString_Out }
-	registry.Add(binary.ID{0xb7, 0x58, 0xe4, 0xf9, 0xd0, 0x2e, 0x81, 0x4f, 0x94, 0x2d, 0xc9, 0x95, 0x86, 0xcf, 0x31, 0xc0, 0x86, 0xe3, 0x2d, 0x03}, &CmdString{})
-	//struct test.CmdString_In { }
-	registry.Add(binary.ID{0x00, 0xe3, 0x87, 0xcd, 0xd3, 0xd5, 0x7d, 0x83, 0x8f, 0x1d, 0xf9, 0x26, 0x3d, 0x5a, 0x9c, 0x87, 0xb8, 0x31, 0x8c, 0x70}, &CmdString_In{})
-	//struct test.CmdString_Out { Result:string }
-	registry.Add(binary.ID{0x49, 0x91, 0x68, 0x46, 0x4b, 0x1e, 0xf5, 0x69, 0x9f, 0x35, 0x4b, 0x6f, 0x13, 0x6a, 0xbe, 0x56, 0x49, 0x3a, 0xd9, 0x23}, &CmdString_Out{})
-	//struct test.CmdU16 { Context:atom.ContextID, In:CmdU16_In, Out:CmdU16_Out }
-	registry.Add(binary.ID{0x7d, 0xc6, 0xc1, 0x51, 0xe1, 0xbf, 0x87, 0x67, 0x33, 0x28, 0xf8, 0xbc, 0x93, 0xaa, 0xe8, 0xb9, 0xad, 0x5c, 0x65, 0xfc}, &CmdU16{})
-	//struct test.CmdU16_In { }
-	registry.Add(binary.ID{0xd2, 0xa1, 0x65, 0xb8, 0x84, 0x2d, 0x34, 0x0a, 0x3a, 0x73, 0x08, 0x34, 0xfb, 0xa6, 0x44, 0xf2, 0x1c, 0x36, 0x3a, 0xdc}, &CmdU16_In{})
-	//struct test.CmdU16_Out { Result:uint16 }
-	registry.Add(binary.ID{0x80, 0x9c, 0x36, 0x68, 0x0d, 0xff, 0x0c, 0x69, 0xb4, 0x59, 0x87, 0x55, 0x87, 0x78, 0x36, 0x99, 0x7f, 0x8d, 0x75, 0x98}, &CmdU16_Out{})
-	//struct test.CmdU32 { Context:atom.ContextID, In:CmdU32_In, Out:CmdU32_Out }
-	registry.Add(binary.ID{0x41, 0x36, 0xcb, 0x68, 0xb9, 0x2b, 0xc4, 0x61, 0xfa, 0x26, 0x03, 0x81, 0xbd, 0x3d, 0xbe, 0x7b, 0x04, 0x3c, 0x98, 0x5b}, &CmdU32{})
-	//struct test.CmdU32_In { }
-	registry.Add(binary.ID{0x73, 0x20, 0x0d, 0x68, 0x76, 0x5b, 0x5a, 0xae, 0x0a, 0xf1, 0xef, 0x70, 0x50, 0x0d, 0x66, 0xe8, 0xe9, 0xbe, 0x79, 0xf8}, &CmdU32_In{})
-	//struct test.CmdU32_Out { Result:uint32 }
-	registry.Add(binary.ID{0x36, 0x73, 0x3e, 0x1d, 0x85, 0x32, 0x08, 0x71, 0xba, 0x61, 0xbe, 0xaa, 0x42, 0xf0, 0x3a, 0x0a, 0x33, 0x1d, 0x00, 0x80}, &CmdU32_Out{})
-	//struct test.CmdU64 { Context:atom.ContextID, In:CmdU64_In, Out:CmdU64_Out }
-	registry.Add(binary.ID{0xcf, 0xd9, 0xb9, 0x9c, 0x49, 0xcf, 0xeb, 0xbf, 0x69, 0x3d, 0x83, 0xfa, 0x61, 0x98, 0x84, 0xe0, 0xa4, 0xa7, 0x3f, 0xeb}, &CmdU64{})
-	//struct test.CmdU64_In { }
-	registry.Add(binary.ID{0xf9, 0x54, 0x3e, 0x9a, 0xe2, 0x2a, 0x29, 0x49, 0xec, 0x6d, 0x3c, 0x5a, 0xe5, 0xaf, 0x0d, 0x82, 0xb2, 0x40, 0xad, 0xe1}, &CmdU64_In{})
-	//struct test.CmdU64_Out { Result:uint64 }
-	registry.Add(binary.ID{0xc7, 0x94, 0x16, 0x55, 0x11, 0x63, 0x43, 0xe8, 0x65, 0x97, 0x2f, 0x34, 0x5f, 0x60, 0x43, 0xe9, 0xa8, 0x5e, 0x5a, 0x42}, &CmdU64_Out{})
-	//struct test.CmdU8 { Context:atom.ContextID, In:CmdU8_In, Out:CmdU8_Out }
-	registry.Add(binary.ID{0x03, 0x49, 0x07, 0x3a, 0xb3, 0xdf, 0xb8, 0xcf, 0x43, 0xae, 0x0b, 0x22, 0xfb, 0x5d, 0xf3, 0x01, 0x01, 0x7e, 0xa9, 0x68}, &CmdU8{})
-	//struct test.CmdU8_In { }
-	registry.Add(binary.ID{0xf4, 0x59, 0x68, 0x38, 0xe0, 0xa8, 0xec, 0x9e, 0xb2, 0x95, 0x67, 0xe4, 0x5e, 0xca, 0x90, 0x7b, 0xeb, 0xc0, 0xac, 0x98}, &CmdU8_In{})
-	//struct test.CmdU8_Out { Result:uint8 }
-	registry.Add(binary.ID{0xce, 0x2e, 0x2a, 0xec, 0xd3, 0xeb, 0x97, 0x56, 0xfb, 0x73, 0x1d, 0x83, 0xb1, 0x73, 0x68, 0xa5, 0x4b, 0xbf, 0x36, 0xf2}, &CmdU8_Out{})
-	//struct test.CmdVoid { Context:atom.ContextID, In:CmdVoid_In, Out:CmdVoid_Out }
-	registry.Add(binary.ID{0x88, 0x4a, 0x99, 0xf4, 0xfa, 0xe0, 0xc3, 0xfa, 0x45, 0xdf, 0x5a, 0xf0, 0xd9, 0x15, 0x1a, 0x30, 0xb0, 0x04, 0xb4, 0xd8}, &CmdVoid{})
-	//struct test.CmdVoid3Arrays { Context:atom.ContextID, In:CmdVoid3Arrays_In, Out:CmdVoid3Arrays_Out }
-	registry.Add(binary.ID{0x34, 0xd8, 0x53, 0x48, 0x0c, 0xa9, 0x39, 0xf1, 0xee, 0x48, 0xec, 0x05, 0x50, 0x75, 0x9d, 0x9d, 0xf7, 0xca, 0x1d, 0x07}, &CmdVoid3Arrays{})
-	//struct test.CmdVoid3Arrays_In { A:S8Array, B:StringArray, C:BoolArray }
-	registry.Add(binary.ID{0x9b, 0x77, 0x88, 0x62, 0x7c, 0x3f, 0xd7, 0x49, 0xaa, 0x32, 0xff, 0x17, 0xd1, 0x65, 0xcc, 0xda, 0xaf, 0xad, 0x8e, 0xf0}, &CmdVoid3Arrays_In{})
-	//struct test.CmdVoid3Arrays_Out { }
-	registry.Add(binary.ID{0xfe, 0x87, 0x9c, 0x49, 0x76, 0x14, 0x11, 0xd1, 0x60, 0xa2, 0x61, 0xee, 0xbf, 0x09, 0x43, 0x0e, 0x45, 0x08, 0x97, 0x52}, &CmdVoid3Arrays_Out{})
-	//struct test.CmdVoid3Remapped { Context:atom.ContextID, In:CmdVoid3Remapped_In, Out:CmdVoid3Remapped_Out }
-	registry.Add(binary.ID{0xe4, 0x31, 0xc2, 0x20, 0x2b, 0x84, 0x05, 0xd6, 0x48, 0xa9, 0x2d, 0xd7, 0xff, 0x4e, 0xce, 0xf1, 0xf8, 0xe9, 0x4e, 0xbd}, &CmdVoid3Remapped{})
-	//struct test.CmdVoid3Remapped_In { A:remapped, B:remapped, C:remapped }
-	registry.Add(binary.ID{0x65, 0x9c, 0xe6, 0x1c, 0x4c, 0x6e, 0xe5, 0xed, 0x14, 0xcb, 0xe9, 0x57, 0xee, 0x05, 0xc6, 0x43, 0x4e, 0x7e, 0x45, 0x42}, &CmdVoid3Remapped_In{})
-	//struct test.CmdVoid3Remapped_Out { }
-	registry.Add(binary.ID{0x60, 0x0a, 0xfe, 0x1a, 0xa7, 0xb0, 0x3c, 0x64, 0xa2, 0x73, 0x7a, 0xa9, 0xff, 0x89, 0xe8, 0xc8, 0x18, 0x3a, 0xca, 0xd0}, &CmdVoid3Remapped_Out{})
-	//struct test.CmdVoid3Strings { Context:atom.ContextID, In:CmdVoid3Strings_In, Out:CmdVoid3Strings_Out }
-	registry.Add(binary.ID{0x42, 0xa0, 0xbc, 0xde, 0x7d, 0x62, 0x67, 0x5e, 0xe3, 0x8f, 0xd3, 0x76, 0x92, 0x8b, 0xa0, 0x9e, 0xfe, 0x6f, 0x1c, 0xf8}, &CmdVoid3Strings{})
-	//struct test.CmdVoid3Strings_In { A:string, B:string, C:string }
-	registry.Add(binary.ID{0x85, 0x28, 0x3e, 0x66, 0x72, 0xcc, 0x8a, 0xd9, 0x1a, 0xac, 0x60, 0x7c, 0xb7, 0x54, 0x99, 0x58, 0x9e, 0x7c, 0x50, 0x2f}, &CmdVoid3Strings_In{})
-	//struct test.CmdVoid3Strings_Out { }
-	registry.Add(binary.ID{0x4c, 0x9e, 0x35, 0x94, 0xa5, 0x95, 0x17, 0xd6, 0x6c, 0x33, 0x21, 0xf1, 0xfc, 0xf2, 0x18, 0x89, 0x36, 0x9a, 0x48, 0x30}, &CmdVoid3Strings_Out{})
-	//struct test.CmdVoidArrayOfStrings { Context:atom.ContextID, In:CmdVoidArrayOfStrings_In, Out:CmdVoidArrayOfStrings_Out }
-	registry.Add(binary.ID{0xf7, 0xb9, 0x87, 0x78, 0x8b, 0x97, 0x71, 0x36, 0x8e, 0x42, 0x4f, 0x47, 0xf6, 0xbb, 0x1c, 0x80, 0x4f, 0xd2, 0x1b, 0x82}, &CmdVoidArrayOfStrings{})
-	//struct test.CmdVoidArrayOfStrings_In { A:StringArray }
-	registry.Add(binary.ID{0x86, 0xc8, 0x7e, 0x7c, 0x94, 0x4c, 0x70, 0xba, 0x02, 0x8a, 0x73, 0xf2, 0x63, 0x93, 0x29, 0x2d, 0x7c, 0xc5, 0x17, 0x28}, &CmdVoidArrayOfStrings_In{})
-	//struct test.CmdVoidArrayOfStrings_Out { }
-	registry.Add(binary.ID{0x42, 0x2a, 0xaf, 0xb7, 0x87, 0x49, 0xd6, 0x31, 0xed, 0xd7, 0xfa, 0xd7, 0xa7, 0x94, 0x3b, 0xbd, 0x4c, 0xfd, 0x83, 0x3c}, &CmdVoidArrayOfStrings_Out{})
-	//struct test.CmdVoidBool { Context:atom.ContextID, In:CmdVoidBool_In, Out:CmdVoidBool_Out }
-	registry.Add(binary.ID{0xc1, 0x9c, 0xeb, 0xb3, 0xfb, 0xec, 0xc6, 0xb9, 0x90, 0x04, 0x99, 0xdb, 0x0a, 0x33, 0x5f, 0xda, 0x12, 0x38, 0xfa, 0x06}, &CmdVoidBool{})
-	//struct test.CmdVoidBool_In { A:bool }
-	registry.Add(binary.ID{0x15, 0xed, 0xa2, 0xcd, 0xec, 0x73, 0xbc, 0x31, 0x1c, 0xc7, 0xaa, 0x20, 0x1e, 0x50, 0xb8, 0x30, 0x12, 0xf2, 0xea, 0xab}, &CmdVoidBool_In{})
-	//struct test.CmdVoidBool_Out { }
-	registry.Add(binary.ID{0x08, 0x1e, 0xf8, 0xd5, 0xb6, 0x95, 0x1b, 0x66, 0x97, 0xfd, 0x06, 0xaf, 0x76, 0x3b, 0xa4, 0xfd, 0x09, 0xf6, 0x0c, 0xf7}, &CmdVoidBool_Out{})
-	//struct test.CmdVoidF32 { Context:atom.ContextID, In:CmdVoidF32_In, Out:CmdVoidF32_Out }
-	registry.Add(binary.ID{0x60, 0x5d, 0x8c, 0x59, 0xc3, 0xea, 0x56, 0xcf, 0x11, 0x68, 0x04, 0xd5, 0xe5, 0x31, 0xce, 0x2e, 0xd3, 0x32, 0x22, 0xe2}, &CmdVoidF32{})
-	//struct test.CmdVoidF32_In { A:float32 }
-	registry.Add(binary.ID{0x7f, 0x8a, 0x76, 0x16, 0x25, 0xe5, 0x4f, 0x6e, 0x88, 0xdc, 0xd4, 0x97, 0x04, 0x8c, 0x22, 0x75, 0xc9, 0xc6, 0xa1, 0x3c}, &CmdVoidF32_In{})
-	//struct test.CmdVoidF32_Out { }
-	registry.Add(binary.ID{0xb8, 0xe3, 0x7c, 0x1a, 0xa9, 0x57, 0x2b, 0x62, 0x49, 0xcc, 0xeb, 0x03, 0xa8, 0xd4, 0xf7, 0x81, 0x29, 0x61, 0x2d, 0x47}, &CmdVoidF32_Out{})
-	//struct test.CmdVoidF64 { Context:atom.ContextID, In:CmdVoidF64_In, Out:CmdVoidF64_Out }
-	registry.Add(binary.ID{0xac, 0x85, 0xda, 0xe0, 0x41, 0x9d, 0xf8, 0x2d, 0x50, 0x9d, 0xae, 0x08, 0x2c, 0x0c, 0x7b, 0xb0, 0x30, 0x75, 0xcd, 0xb4}, &CmdVoidF64{})
-	//struct test.CmdVoidF64_In { A:float64 }
-	registry.Add(binary.ID{0xed, 0xf7, 0xff, 0xb1, 0x65, 0xdf, 0x39, 0x7e, 0x22, 0xa7, 0x60, 0x10, 0x44, 0xfe, 0x95, 0x6a, 0x51, 0x1d, 0x04, 0xa2}, &CmdVoidF64_In{})
-	//struct test.CmdVoidF64_Out { }
-	registry.Add(binary.ID{0xc1, 0xe2, 0x8d, 0xd9, 0xa0, 0xf2, 0xd6, 0x31, 0x3f, 0xcf, 0x6b, 0x33, 0x5c, 0x88, 0x54, 0xb9, 0xe0, 0x16, 0x0d, 0x18}, &CmdVoidF64_Out{})
-	//struct test.CmdVoidOut3Remapped { Context:atom.ContextID, In:CmdVoidOut3Remapped_In, Out:CmdVoidOut3Remapped_Out }
-	registry.Add(binary.ID{0xd5, 0x42, 0x81, 0x40, 0x1c, 0x68, 0x52, 0x47, 0xca, 0x63, 0x02, 0x1c, 0x53, 0xda, 0xae, 0xc3, 0x16, 0xf4, 0xf8, 0x75}, &CmdVoidOut3Remapped{})
-	//struct test.CmdVoidOut3Remapped_In { }
-	registry.Add(binary.ID{0x5c, 0x6b, 0x8f, 0xaf, 0x40, 0xc0, 0x25, 0x1d, 0x27, 0x99, 0x7b, 0xd9, 0x5f, 0xba, 0x3e, 0x20, 0xa2, 0x74, 0x8e, 0x3c}, &CmdVoidOut3Remapped_In{})
-	//struct test.CmdVoidOut3Remapped_Out { A:remapped, B:remapped, C:remapped }
-	registry.Add(binary.ID{0xb6, 0x69, 0x41, 0xc0, 0x8a, 0x84, 0x88, 0xc3, 0x3f, 0x94, 0xcc, 0x3a, 0xc1, 0x02, 0x48, 0x92, 0x2b, 0x53, 0xbc, 0xea}, &CmdVoidOut3Remapped_Out{})
-	//struct test.CmdVoidOut3Strings { Context:atom.ContextID, In:CmdVoidOut3Strings_In, Out:CmdVoidOut3Strings_Out }
-	registry.Add(binary.ID{0x56, 0x9b, 0x78, 0xc4, 0x56, 0xce, 0xfb, 0x66, 0x40, 0x19, 0xb6, 0xe5, 0xf9, 0x1e, 0x76, 0x49, 0x8a, 0x8b, 0xfd, 0xad}, &CmdVoidOut3Strings{})
-	//struct test.CmdVoidOut3Strings_In { }
-	registry.Add(binary.ID{0x02, 0xb0, 0x9c, 0x20, 0xaf, 0xeb, 0x29, 0x43, 0xe1, 0x4d, 0x06, 0x2f, 0xe1, 0x8a, 0x12, 0x04, 0x98, 0x9c, 0xe5, 0xcf}, &CmdVoidOut3Strings_In{})
-	//struct test.CmdVoidOut3Strings_Out { A:string, B:string, C:string }
-	registry.Add(binary.ID{0xcf, 0xd1, 0x6b, 0xe1, 0xc6, 0xc1, 0xe5, 0x3d, 0xee, 0x9c, 0xd6, 0x3d, 0x86, 0xfb, 0x95, 0xff, 0xee, 0x10, 0x78, 0xcf}, &CmdVoidOut3Strings_Out{})
-	//struct test.CmdVoidOutArrayOfRemapped { Context:atom.ContextID, In:CmdVoidOutArrayOfRemapped_In, Out:CmdVoidOutArrayOfRemapped_Out }
-	registry.Add(binary.ID{0xc8, 0x7c, 0x03, 0x3f, 0x92, 0x37, 0xd8, 0xcd, 0x75, 0x11, 0xab, 0xee, 0xc9, 0xcc, 0xde, 0xd6, 0x4c, 0x7f, 0x9e, 0x5e}, &CmdVoidOutArrayOfRemapped{})
-	//struct test.CmdVoidOutArrayOfRemapped_In { }
-	registry.Add(binary.ID{0x8e, 0xf9, 0x7a, 0xc5, 0x69, 0x1f, 0xc5, 0x94, 0x17, 0x22, 0xc7, 0xd3, 0x4a, 0xa4, 0xe1, 0x2a, 0x2e, 0x01, 0xac, 0x88}, &CmdVoidOutArrayOfRemapped_In{})
-	//struct test.CmdVoidOutArrayOfRemapped_Out { A:RemappedArray }
-	registry.Add(binary.ID{0x9e, 0x88, 0x02, 0x47, 0x74, 0xbc, 0x64, 0xdf, 0xbc, 0x37, 0x15, 0xb3, 0xb4, 0x38, 0x9b, 0xab, 0x21, 0x81, 0x02, 0x90}, &CmdVoidOutArrayOfRemapped_Out{})
-	//struct test.CmdVoidOutBool { Context:atom.ContextID, In:CmdVoidOutBool_In, Out:CmdVoidOutBool_Out }
-	registry.Add(binary.ID{0x1c, 0xcb, 0x3c, 0x37, 0x26, 0xf5, 0xb0, 0x6d, 0x66, 0x3e, 0xf5, 0x83, 0x48, 0x13, 0x50, 0xfe, 0x95, 0x5b, 0x8e, 0x20}, &CmdVoidOutBool{})
-	//struct test.CmdVoidOutBool_In { }
-	registry.Add(binary.ID{0x80, 0x53, 0x0f, 0x2e, 0x35, 0x68, 0x1f, 0x68, 0x12, 0x68, 0x0b, 0xb6, 0x47, 0xf2, 0x93, 0xcb, 0xe2, 0xa5, 0x01, 0x95}, &CmdVoidOutBool_In{})
-	//struct test.CmdVoidOutBool_Out { A:bool }
-	registry.Add(binary.ID{0x22, 0xa8, 0xe6, 0x66, 0x3f, 0x29, 0xba, 0xfd, 0x51, 0xec, 0x33, 0xb4, 0xed, 0xcd, 0xd3, 0xd5, 0xbe, 0x83, 0xd2, 0x8e}, &CmdVoidOutBool_Out{})
-	//struct test.CmdVoidOutF32 { Context:atom.ContextID, In:CmdVoidOutF32_In, Out:CmdVoidOutF32_Out }
-	registry.Add(binary.ID{0x1d, 0x41, 0xce, 0xd7, 0x6a, 0x15, 0x8d, 0xab, 0xe0, 0x8e, 0x47, 0x0b, 0x4f, 0x3e, 0x9b, 0x1c, 0x95, 0x98, 0x23, 0xee}, &CmdVoidOutF32{})
-	//struct test.CmdVoidOutF32_In { }
-	registry.Add(binary.ID{0x9c, 0x56, 0x82, 0x30, 0xbb, 0x8b, 0x12, 0x84, 0x6a, 0xf2, 0x47, 0x8e, 0x4d, 0xcd, 0xfc, 0x43, 0xf1, 0x0c, 0x68, 0xa5}, &CmdVoidOutF32_In{})
-	//struct test.CmdVoidOutF32_Out { A:float32 }
-	registry.Add(binary.ID{0x61, 0x33, 0xd0, 0xe0, 0xab, 0x9d, 0x49, 0x7a, 0xbd, 0x54, 0x63, 0x31, 0x94, 0x31, 0xbf, 0x72, 0xf5, 0x5c, 0x04, 0x2c}, &CmdVoidOutF32_Out{})
-	//struct test.CmdVoidOutF64 { Context:atom.ContextID, In:CmdVoidOutF64_In, Out:CmdVoidOutF64_Out }
-	registry.Add(binary.ID{0x91, 0x80, 0x24, 0x86, 0x48, 0xe3, 0x08, 0x0c, 0x45, 0xfe, 0xa1, 0x19, 0x26, 0xdb, 0xc2, 0x46, 0xc7, 0x8d, 0xc2, 0x35}, &CmdVoidOutF64{})
-	//struct test.CmdVoidOutF64_In { }
-	registry.Add(binary.ID{0x71, 0x03, 0x21, 0x58, 0x82, 0x18, 0xe3, 0x75, 0xf7, 0xe5, 0xf1, 0xc4, 0x9e, 0x43, 0xe3, 0x97, 0x14, 0x57, 0x33, 0xde}, &CmdVoidOutF64_In{})
-	//struct test.CmdVoidOutF64_Out { A:float64 }
-	registry.Add(binary.ID{0x74, 0x18, 0x51, 0x17, 0x14, 0x72, 0x02, 0x47, 0x94, 0x32, 0xa8, 0xe6, 0xc4, 0x12, 0xdc, 0x80, 0xe4, 0x00, 0x1c, 0x6f}, &CmdVoidOutF64_Out{})
-	//struct test.CmdVoidOutFixedSizeBuffer { Context:atom.ContextID, In:CmdVoidOutFixedSizeBuffer_In, Out:CmdVoidOutFixedSizeBuffer_Out }
-	registry.Add(binary.ID{0x21, 0x7a, 0x15, 0x75, 0xc1, 0x28, 0x61, 0x86, 0x5b, 0xd7, 0x7a, 0xf7, 0x51, 0xef, 0xb5, 0xdf, 0x26, 0x9e, 0xf7, 0x6d}, &CmdVoidOutFixedSizeBuffer{})
-	//struct test.CmdVoidOutFixedSizeBuffer_In { }
-	registry.Add(binary.ID{0x7b, 0x3d, 0x39, 0xa6, 0x2f, 0x5d, 0xa4, 0xe3, 0x9c, 0x88, 0xe4, 0x23, 0x09, 0x67, 0x4f, 0x5e, 0xec, 0xaf, 0xb5, 0xe6}, &CmdVoidOutFixedSizeBuffer_In{})
-	//struct test.CmdVoidOutFixedSizeBuffer_Out { A:memory.Pointer }
-	registry.Add(binary.ID{0x74, 0xf3, 0x71, 0x06, 0x6d, 0xbd, 0x2f, 0x37, 0xde, 0xfc, 0x57, 0xfd, 0x6e, 0xd2, 0xf5, 0x9e, 0x88, 0x34, 0x07, 0xed}, &CmdVoidOutFixedSizeBuffer_Out{})
-	//struct test.CmdVoidOutS16 { Context:atom.ContextID, In:CmdVoidOutS16_In, Out:CmdVoidOutS16_Out }
-	registry.Add(binary.ID{0xd2, 0x6e, 0xd4, 0xc6, 0xf1, 0xaf, 0x77, 0x18, 0xab, 0xb0, 0xd2, 0x2c, 0xd8, 0xe0, 0x7e, 0x1f, 0x63, 0xed, 0xa0, 0xf4}, &CmdVoidOutS16{})
-	//struct test.CmdVoidOutS16_In { }
-	registry.Add(binary.ID{0xde, 0x5b, 0x1b, 0x9d, 0xd9, 0xd9, 0xf5, 0xbd, 0xc7, 0x50, 0x1c, 0x24, 0x7a, 0xb1, 0xec, 0x3b, 0x3c, 0xcc, 0xb1, 0xa6}, &CmdVoidOutS16_In{})
-	//struct test.CmdVoidOutS16_Out { A:int16 }
-	registry.Add(binary.ID{0xd4, 0x93, 0xe1, 0x5e, 0xcf, 0x55, 0xf5, 0x5b, 0x2c, 0x0f, 0xc5, 0x50, 0x5f, 0x63, 0x10, 0xe0, 0x89, 0x1a, 0x4a, 0xb2}, &CmdVoidOutS16_Out{})
-	//struct test.CmdVoidOutS32 { Context:atom.ContextID, In:CmdVoidOutS32_In, Out:CmdVoidOutS32_Out }
-	registry.Add(binary.ID{0xcc, 0x0e, 0x27, 0xd7, 0x51, 0xc7, 0xf5, 0x76, 0xde, 0x4a, 0xb1, 0x6a, 0xce, 0x9e, 0xd4, 0xe4, 0x75, 0xb4, 0x23, 0x5d}, &CmdVoidOutS32{})
-	//struct test.CmdVoidOutS32_In { }
-	registry.Add(binary.ID{0x59, 0xd6, 0x69, 0xb5, 0xd9, 0xdd, 0x1e, 0x51, 0x2d, 0xce, 0xf0, 0x7a, 0x76, 0x32, 0xd4, 0xdf, 0xf4, 0x3a, 0x77, 0x69}, &CmdVoidOutS32_In{})
-	//struct test.CmdVoidOutS32_Out { A:int32 }
-	registry.Add(binary.ID{0xac, 0x2c, 0xba, 0x2f, 0x42, 0x97, 0x82, 0xc5, 0x8d, 0x6d, 0xa0, 0xee, 0x81, 0xb0, 0x41, 0x8f, 0xc4, 0xfb, 0xd1, 0x14}, &CmdVoidOutS32_Out{})
-	//struct test.CmdVoidOutS64 { Context:atom.ContextID, In:CmdVoidOutS64_In, Out:CmdVoidOutS64_Out }
-	registry.Add(binary.ID{0xd8, 0x2d, 0xf3, 0x72, 0x09, 0xb0, 0x12, 0x11, 0xaf, 0x75, 0x0a, 0x5c, 0x73, 0x4f, 0xce, 0x00, 0x34, 0x4f, 0xa5, 0xa5}, &CmdVoidOutS64{})
-	//struct test.CmdVoidOutS64_In { }
-	registry.Add(binary.ID{0x94, 0x53, 0xd0, 0xdc, 0xd7, 0x4c, 0x8f, 0xc8, 0x92, 0xab, 0x9e, 0x8f, 0x86, 0xf6, 0xe4, 0x5f, 0x0d, 0xb0, 0xf7, 0x92}, &CmdVoidOutS64_In{})
-	//struct test.CmdVoidOutS64_Out { A:int64 }
-	registry.Add(binary.ID{0xa4, 0x92, 0x52, 0x7c, 0x76, 0xc7, 0x28, 0xd9, 0x5b, 0x93, 0x43, 0x8b, 0x16, 0xec, 0x9b, 0x46, 0xda, 0xb1, 0xf8, 0x8e}, &CmdVoidOutS64_Out{})
-	//struct test.CmdVoidOutS8 { Context:atom.ContextID, In:CmdVoidOutS8_In, Out:CmdVoidOutS8_Out }
-	registry.Add(binary.ID{0x32, 0x2b, 0xdf, 0xa9, 0x14, 0x93, 0x7e, 0x03, 0x19, 0x3f, 0x08, 0xf5, 0x8b, 0x20, 0x10, 0xff, 0xfc, 0xdf, 0xc6, 0x04}, &CmdVoidOutS8{})
-	//struct test.CmdVoidOutS8_In { }
-	registry.Add(binary.ID{0x64, 0x51, 0xa7, 0x31, 0xea, 0xa3, 0xd8, 0x1a, 0x29, 0xc2, 0x80, 0xf5, 0xf2, 0x3a, 0xf3, 0xd0, 0xcf, 0x97, 0x8c, 0xd5}, &CmdVoidOutS8_In{})
-	//struct test.CmdVoidOutS8_Out { A:int8 }
-	registry.Add(binary.ID{0x3f, 0xdc, 0xe4, 0x54, 0x18, 0x2f, 0x52, 0xb2, 0xa2, 0xc7, 0x55, 0xe7, 0xd8, 0x2f, 0x62, 0x7c, 0x79, 0xd8, 0xe5, 0x12}, &CmdVoidOutS8_Out{})
-	//struct test.CmdVoidOutString { Context:atom.ContextID, In:CmdVoidOutString_In, Out:CmdVoidOutString_Out }
-	registry.Add(binary.ID{0x14, 0x66, 0xca, 0x1e, 0x3a, 0x67, 0xcb, 0x47, 0x11, 0x36, 0x98, 0x8b, 0x64, 0xa9, 0x96, 0x4a, 0x75, 0x5f, 0xd7, 0x55}, &CmdVoidOutString{})
-	//struct test.CmdVoidOutString_In { }
-	registry.Add(binary.ID{0x8c, 0x64, 0xde, 0x14, 0x7c, 0x77, 0xb9, 0xb5, 0xda, 0x1d, 0x73, 0x73, 0x67, 0x88, 0x66, 0xdf, 0x19, 0xbe, 0x14, 0x49}, &CmdVoidOutString_In{})
-	//struct test.CmdVoidOutString_Out { A:string }
-	registry.Add(binary.ID{0xa0, 0x86, 0x50, 0x4d, 0x16, 0x5c, 0x18, 0x88, 0x68, 0xc0, 0x83, 0x79, 0x9d, 0x79, 0xbe, 0xea, 0xf6, 0x91, 0x8a, 0x6c}, &CmdVoidOutString_Out{})
-	//struct test.CmdVoidOutU16 { Context:atom.ContextID, In:CmdVoidOutU16_In, Out:CmdVoidOutU16_Out }
-	registry.Add(binary.ID{0xcd, 0x28, 0x5c, 0x10, 0x79, 0xdf, 0x33, 0xca, 0x4e, 0xd9, 0x74, 0xc8, 0x21, 0x8e, 0xed, 0x55, 0x51, 0xf6, 0xb6, 0x19}, &CmdVoidOutU16{})
-	//struct test.CmdVoidOutU16_In { }
-	registry.Add(binary.ID{0x9d, 0xd4, 0x7d, 0xf0, 0x72, 0x98, 0xca, 0x33, 0x02, 0xdf, 0x75, 0x5c, 0x0d, 0x96, 0xc2, 0x70, 0xdc, 0xd8, 0x31, 0x64}, &CmdVoidOutU16_In{})
-	//struct test.CmdVoidOutU16_Out { A:uint16 }
-	registry.Add(binary.ID{0xb5, 0x1d, 0x4c, 0x89, 0x7e, 0xa8, 0x7c, 0x44, 0x41, 0x3c, 0xf3, 0xfa, 0x25, 0x33, 0x58, 0x3b, 0x84, 0xe4, 0x5b, 0x68}, &CmdVoidOutU16_Out{})
-	//struct test.CmdVoidOutU32 { Context:atom.ContextID, In:CmdVoidOutU32_In, Out:CmdVoidOutU32_Out }
-	registry.Add(binary.ID{0xde, 0xae, 0xc8, 0x69, 0x2a, 0xf8, 0x11, 0x62, 0x06, 0x40, 0x90, 0xe4, 0x63, 0x78, 0xc5, 0xcd, 0x1a, 0x76, 0xb8, 0x4f}, &CmdVoidOutU32{})
-	//struct test.CmdVoidOutU32_In { }
-	registry.Add(binary.ID{0xb4, 0x3f, 0x2f, 0x02, 0x88, 0x18, 0xa7, 0xd8, 0xe8, 0x61, 0xc4, 0x4c, 0x23, 0xec, 0xc8, 0x37, 0xc9, 0x26, 0xf5, 0xda}, &CmdVoidOutU32_In{})
-	//struct test.CmdVoidOutU32_Out { A:uint32 }
-	registry.Add(binary.ID{0x6b, 0x9c, 0x03, 0xb9, 0x66, 0x45, 0x98, 0xbf, 0xfc, 0x2b, 0xe9, 0x23, 0x35, 0x19, 0xae, 0xfc, 0xe6, 0x96, 0xd0, 0x8a}, &CmdVoidOutU32_Out{})
-	//struct test.CmdVoidOutU64 { Context:atom.ContextID, In:CmdVoidOutU64_In, Out:CmdVoidOutU64_Out }
-	registry.Add(binary.ID{0x6f, 0xe9, 0x0c, 0x3b, 0x09, 0x95, 0x53, 0xdd, 0x03, 0x1e, 0x11, 0x08, 0x9c, 0x9a, 0xdc, 0x3d, 0x4e, 0x83, 0x49, 0x30}, &CmdVoidOutU64{})
-	//struct test.CmdVoidOutU64_In { }
-	registry.Add(binary.ID{0x65, 0x55, 0x3e, 0xf3, 0xdf, 0xb4, 0x25, 0x2c, 0x68, 0x21, 0xcd, 0x50, 0x18, 0x2e, 0xe3, 0x19, 0x48, 0xa5, 0xa3, 0x9e}, &CmdVoidOutU64_In{})
-	//struct test.CmdVoidOutU64_Out { A:uint64 }
-	registry.Add(binary.ID{0xd6, 0x7f, 0x83, 0x76, 0xfb, 0x02, 0xf0, 0x90, 0x4c, 0x98, 0xb5, 0x35, 0x8b, 0x40, 0xd2, 0xcc, 0xf7, 0xe9, 0x12, 0xf0}, &CmdVoidOutU64_Out{})
-	//struct test.CmdVoidOutU8 { Context:atom.ContextID, In:CmdVoidOutU8_In, Out:CmdVoidOutU8_Out }
-	registry.Add(binary.ID{0xd0, 0x8f, 0x08, 0x14, 0x71, 0x7f, 0xbc, 0x99, 0x21, 0x6e, 0xd6, 0x8d, 0x1f, 0xdd, 0x36, 0xfa, 0xbc, 0x3e, 0xb7, 0xe2}, &CmdVoidOutU8{})
-	//struct test.CmdVoidOutU8_In { }
-	registry.Add(binary.ID{0x3a, 0x86, 0xed, 0x4a, 0xe6, 0x08, 0xfb, 0xfb, 0x55, 0x60, 0x6d, 0xff, 0x8c, 0xdf, 0x97, 0x7a, 0x97, 0x05, 0x5a, 0xe0}, &CmdVoidOutU8_In{})
-	//struct test.CmdVoidOutU8_Out { A:uint8 }
-	registry.Add(binary.ID{0xcc, 0x4e, 0xe7, 0xc3, 0x4c, 0xc2, 0xda, 0xf0, 0x12, 0xba, 0x07, 0xc2, 0x33, 0xe6, 0xb9, 0x2a, 0x91, 0xf7, 0x37, 0x7b}, &CmdVoidOutU8_Out{})
-	//struct test.CmdVoidS16 { Context:atom.ContextID, In:CmdVoidS16_In, Out:CmdVoidS16_Out }
-	registry.Add(binary.ID{0x54, 0x5a, 0x6d, 0xc0, 0x63, 0x8e, 0x52, 0xad, 0x89, 0x9d, 0x0a, 0x7f, 0xc3, 0x0f, 0x05, 0xc5, 0xf4, 0xc0, 0xe5, 0xad}, &CmdVoidS16{})
-	//struct test.CmdVoidS16_In { A:int16 }
-	registry.Add(binary.ID{0x16, 0xae, 0xb7, 0xa3, 0x26, 0x62, 0x4c, 0xcb, 0xb5, 0xa5, 0xe7, 0x73, 0xe2, 0xae, 0x9f, 0x13, 0xa5, 0xab, 0xd6, 0x7b}, &CmdVoidS16_In{})
-	//struct test.CmdVoidS16_Out { }
-	registry.Add(binary.ID{0xc2, 0x8d, 0x3f, 0x6c, 0x18, 0xe3, 0xad, 0xcd, 0x1b, 0xfd, 0x32, 0x07, 0xb0, 0xac, 0xb6, 0x77, 0x61, 0xe2, 0x61, 0x2a}, &CmdVoidS16_Out{})
-	//struct test.CmdVoidS32 { Context:atom.ContextID, In:CmdVoidS32_In, Out:CmdVoidS32_Out }
-	registry.Add(binary.ID{0xab, 0x94, 0xfd, 0xb7, 0x22, 0x50, 0xe6, 0xca, 0x99, 0x13, 0x6e, 0xc1, 0x0f, 0x30, 0x35, 0xaf, 0xb0, 0x91, 0x1a, 0x90}, &CmdVoidS32{})
-	//struct test.CmdVoidS32_In { A:int32 }
-	registry.Add(binary.ID{0x54, 0xd9, 0xab, 0x22, 0xeb, 0x5e, 0xdd, 0xa3, 0x98, 0xa0, 0x9c, 0xeb, 0xa1, 0xbf, 0xce, 0x47, 0x4b, 0x1f, 0x1e, 0xb7}, &CmdVoidS32_In{})
-	//struct test.CmdVoidS32_Out { }
-	registry.Add(binary.ID{0x6a, 0x76, 0x11, 0x15, 0x8f, 0x47, 0xd6, 0x28, 0x77, 0x88, 0x92, 0x2d, 0x10, 0xf0, 0x35, 0xdc, 0xb6, 0xcb, 0x7e, 0xcd}, &CmdVoidS32_Out{})
-	//struct test.CmdVoidS64 { Context:atom.ContextID, In:CmdVoidS64_In, Out:CmdVoidS64_Out }
-	registry.Add(binary.ID{0x4c, 0x3c, 0x10, 0x60, 0x83, 0x3d, 0x2a, 0x95, 0xa5, 0x88, 0x4e, 0xb9, 0x4e, 0x95, 0x3e, 0x4f, 0x7c, 0x61, 0x0d, 0xcf}, &CmdVoidS64{})
-	//struct test.CmdVoidS64_In { A:int64 }
-	registry.Add(binary.ID{0x08, 0x8b, 0xf2, 0x89, 0xf3, 0xee, 0xb9, 0xde, 0x0c, 0xdc, 0x6f, 0x8c, 0x7d, 0xf9, 0x06, 0x8c, 0x8e, 0xca, 0x57, 0xc2}, &CmdVoidS64_In{})
-	//struct test.CmdVoidS64_Out { }
-	registry.Add(binary.ID{0x4f, 0xd2, 0x2a, 0x43, 0x41, 0x15, 0x7b, 0x52, 0x75, 0xd3, 0x17, 0xf3, 0xe8, 0x62, 0x9e, 0x24, 0xa6, 0x80, 0x43, 0xde}, &CmdVoidS64_Out{})
-	//struct test.CmdVoidS8 { Context:atom.ContextID, In:CmdVoidS8_In, Out:CmdVoidS8_Out }
-	registry.Add(binary.ID{0xd2, 0xb4, 0x40, 0x6d, 0xf4, 0x86, 0x47, 0x4d, 0xba, 0x24, 0xd3, 0x05, 0xc9, 0x23, 0x67, 0x74, 0x3a, 0xdc, 0xb5, 0xbe}, &CmdVoidS8{})
-	//struct test.CmdVoidS8_In { A:int8 }
-	registry.Add(binary.ID{0xb6, 0xca, 0xcf, 0x10, 0x86, 0x00, 0x71, 0x1f, 0x6b, 0x6d, 0x5c, 0x12, 0xe5, 0x22, 0xcd, 0x3a, 0xf6, 0xcc, 0xc3, 0xe4}, &CmdVoidS8_In{})
-	//struct test.CmdVoidS8_Out { }
-	registry.Add(binary.ID{0xdd, 0xf2, 0xef, 0x10, 0x58, 0xaf, 0x17, 0x18, 0x84, 0xed, 0x77, 0x36, 0xa7, 0xb9, 0xbc, 0x75, 0xe5, 0xf0, 0x43, 0x97}, &CmdVoidS8_Out{})
-	//struct test.CmdVoidString { Context:atom.ContextID, In:CmdVoidString_In, Out:CmdVoidString_Out }
-	registry.Add(binary.ID{0xf3, 0xc0, 0xeb, 0xea, 0x8f, 0xd2, 0x14, 0xd3, 0xa4, 0xe3, 0x6f, 0x4b, 0x26, 0xc3, 0xeb, 0x56, 0x4a, 0x6c, 0xf5, 0x36}, &CmdVoidString{})
-	//struct test.CmdVoidString_In { A:string }
-	registry.Add(binary.ID{0xb9, 0xab, 0x97, 0x3e, 0x7b, 0xcd, 0xa3, 0x51, 0x80, 0x02, 0x78, 0x72, 0xef, 0x8c, 0x09, 0x7a, 0x38, 0x8f, 0xab, 0xac}, &CmdVoidString_In{})
-	//struct test.CmdVoidString_Out { }
-	registry.Add(binary.ID{0xe5, 0x7d, 0x1d, 0x4b, 0x30, 0x25, 0x62, 0xd1, 0xcf, 0xd9, 0xd7, 0xc3, 0x90, 0x0d, 0x3e, 0xcb, 0xc3, 0xc0, 0xa5, 0x8b}, &CmdVoidString_Out{})
-	//struct test.CmdVoidU16 { Context:atom.ContextID, In:CmdVoidU16_In, Out:CmdVoidU16_Out }
-	registry.Add(binary.ID{0x8d, 0xb5, 0xb8, 0xdd, 0x67, 0xcd, 0xcf, 0x30, 0x2d, 0x86, 0xa5, 0xbf, 0x4e, 0xa7, 0x08, 0x20, 0xe9, 0x43, 0x78, 0xd4}, &CmdVoidU16{})
-	//struct test.CmdVoidU16_In { A:uint16 }
-	registry.Add(binary.ID{0x63, 0xc8, 0x6d, 0x49, 0x08, 0x06, 0x22, 0xd0, 0x35, 0xce, 0x67, 0xeb, 0x7c, 0x53, 0xbf, 0x45, 0xee, 0x5d, 0x46, 0x21}, &CmdVoidU16_In{})
-	//struct test.CmdVoidU16_Out { }
-	registry.Add(binary.ID{0x45, 0x1b, 0xd6, 0xc1, 0x77, 0x09, 0xd3, 0x30, 0x50, 0x4e, 0x96, 0x77, 0xbe, 0xfd, 0x47, 0xf5, 0xf8, 0xa9, 0x9e, 0xff}, &CmdVoidU16_Out{})
-	//struct test.CmdVoidU32 { Context:atom.ContextID, In:CmdVoidU32_In, Out:CmdVoidU32_Out }
-	registry.Add(binary.ID{0x50, 0x36, 0xdb, 0x4b, 0xb7, 0x63, 0xb5, 0xa5, 0xc2, 0x10, 0xa4, 0x7b, 0xbf, 0x27, 0xc7, 0xfd, 0xa9, 0xb8, 0x35, 0x61}, &CmdVoidU32{})
-	//struct test.CmdVoidU32_In { A:uint32 }
-	registry.Add(binary.ID{0x57, 0x0b, 0x28, 0xf4, 0xb9, 0x9f, 0x49, 0xc0, 0x61, 0x3c, 0x0f, 0x74, 0x64, 0x21, 0xb6, 0x36, 0x82, 0x54, 0x6c, 0xfb}, &CmdVoidU32_In{})
-	//struct test.CmdVoidU32_Out { }
-	registry.Add(binary.ID{0xb3, 0x89, 0x6a, 0x2f, 0x0b, 0x86, 0x82, 0x99, 0xfa, 0x6c, 0xc0, 0xfd, 0xa5, 0x3f, 0x9e, 0x54, 0xe8, 0x2d, 0x91, 0xf4}, &CmdVoidU32_Out{})
-	//struct test.CmdVoidU64 { Context:atom.ContextID, In:CmdVoidU64_In, Out:CmdVoidU64_Out }
-	registry.Add(binary.ID{0x64, 0x87, 0x14, 0xab, 0x1b, 0x8a, 0x7e, 0x95, 0xe4, 0x3f, 0x96, 0x63, 0x9d, 0xb8, 0xa1, 0x04, 0x38, 0xf6, 0x31, 0xdf}, &CmdVoidU64{})
-	//struct test.CmdVoidU64_In { A:uint64 }
-	registry.Add(binary.ID{0xff, 0x65, 0xf1, 0x19, 0xf1, 0x83, 0x1e, 0xa3, 0xec, 0xb7, 0xbf, 0x05, 0xd2, 0x01, 0x34, 0x49, 0x96, 0x24, 0xf5, 0x80}, &CmdVoidU64_In{})
-	//struct test.CmdVoidU64_Out { }
-	registry.Add(binary.ID{0xa9, 0xf2, 0xf5, 0x8f, 0xfa, 0x7c, 0xfa, 0xe6, 0x2a, 0xba, 0x4b, 0x9b, 0xc5, 0x66, 0xd0, 0x38, 0x5f, 0xfa, 0x45, 0x72}, &CmdVoidU64_Out{})
-	//struct test.CmdVoidU8 { Context:atom.ContextID, In:CmdVoidU8_In, Out:CmdVoidU8_Out }
-	registry.Add(binary.ID{0x10, 0x59, 0xf1, 0x81, 0x29, 0xee, 0x78, 0x8a, 0x88, 0xc3, 0xcc, 0xe1, 0xdb, 0x27, 0x92, 0x4d, 0x87, 0x7b, 0x1e, 0xa6}, &CmdVoidU8{})
-	//struct test.CmdVoidU8_In { A:uint8 }
-	registry.Add(binary.ID{0x71, 0xe9, 0x6a, 0x42, 0xf3, 0xb7, 0xb8, 0x7d, 0x2b, 0xbf, 0xc2, 0x6e, 0x90, 0xce, 0xfc, 0xf4, 0x8f, 0x9d, 0x95, 0x3b}, &CmdVoidU8_In{})
-	//struct test.CmdVoidU8_Out { }
-	registry.Add(binary.ID{0xfc, 0x5d, 0x21, 0xa4, 0x08, 0x80, 0x75, 0xbf, 0xd1, 0x06, 0xde, 0x62, 0x38, 0x89, 0xba, 0x82, 0x3d, 0xa7, 0xb2, 0x31}, &CmdVoidU8_Out{})
-	//struct test.CmdVoid_In { }
-	registry.Add(binary.ID{0xa5, 0x5f, 0x43, 0x9c, 0x2a, 0xa1, 0x4c, 0x57, 0xce, 0x2f, 0xa5, 0xe9, 0x24, 0xa1, 0x0e, 0x80, 0xc9, 0x4d, 0x50, 0x21}, &CmdVoid_In{})
-	//struct test.CmdVoid_Out { }
-	registry.Add(binary.ID{0x0a, 0x66, 0x32, 0xd7, 0x4e, 0x98, 0x3b, 0x60, 0x0c, 0x8c, 0x8e, 0x55, 0x3d, 0xeb, 0x45, 0x53, 0xa6, 0xce, 0x6a, 0xd1}, &CmdVoid_Out{})
-	//struct test.Globals { }
-	registry.Add(binary.ID{0xc0, 0x56, 0xa7, 0xd5, 0x53, 0x88, 0xac, 0xaa, 0x75, 0x81, 0x46, 0x04, 0x13, 0xd4, 0xd3, 0x88, 0x43, 0x9c, 0xef, 0x61}, &Globals{})
+	registry.Add((*CmdArrayOfFloat)(nil).Class())
+	registry.Add((*CmdArrayOfFloat_In)(nil).Class())
+	registry.Add((*CmdArrayOfFloat_Out)(nil).Class())
+	registry.Add((*CmdBool)(nil).Class())
+	registry.Add((*CmdBool_In)(nil).Class())
+	registry.Add((*CmdBool_Out)(nil).Class())
+	registry.Add((*CmdF32)(nil).Class())
+	registry.Add((*CmdF32_In)(nil).Class())
+	registry.Add((*CmdF32_Out)(nil).Class())
+	registry.Add((*CmdF64)(nil).Class())
+	registry.Add((*CmdF64_In)(nil).Class())
+	registry.Add((*CmdF64_Out)(nil).Class())
+	registry.Add((*CmdPointer)(nil).Class())
+	registry.Add((*CmdPointer_In)(nil).Class())
+	registry.Add((*CmdPointer_Out)(nil).Class())
+	registry.Add((*CmdS16)(nil).Class())
+	registry.Add((*CmdS16_In)(nil).Class())
+	registry.Add((*CmdS16_Out)(nil).Class())
+	registry.Add((*CmdS32)(nil).Class())
+	registry.Add((*CmdS32_In)(nil).Class())
+	registry.Add((*CmdS32_Out)(nil).Class())
+	registry.Add((*CmdS64)(nil).Class())
+	registry.Add((*CmdS64_In)(nil).Class())
+	registry.Add((*CmdS64_Out)(nil).Class())
+	registry.Add((*CmdS8)(nil).Class())
+	registry.Add((*CmdS8_In)(nil).Class())
+	registry.Add((*CmdS8_Out)(nil).Class())
+	registry.Add((*CmdString)(nil).Class())
+	registry.Add((*CmdString_In)(nil).Class())
+	registry.Add((*CmdString_Out)(nil).Class())
+	registry.Add((*CmdU16)(nil).Class())
+	registry.Add((*CmdU16_In)(nil).Class())
+	registry.Add((*CmdU16_Out)(nil).Class())
+	registry.Add((*CmdU32)(nil).Class())
+	registry.Add((*CmdU32_In)(nil).Class())
+	registry.Add((*CmdU32_Out)(nil).Class())
+	registry.Add((*CmdU64)(nil).Class())
+	registry.Add((*CmdU64_In)(nil).Class())
+	registry.Add((*CmdU64_Out)(nil).Class())
+	registry.Add((*CmdU8)(nil).Class())
+	registry.Add((*CmdU8_In)(nil).Class())
+	registry.Add((*CmdU8_Out)(nil).Class())
+	registry.Add((*CmdVoid)(nil).Class())
+	registry.Add((*CmdVoid3Arrays)(nil).Class())
+	registry.Add((*CmdVoid3Arrays_In)(nil).Class())
+	registry.Add((*CmdVoid3Arrays_Out)(nil).Class())
+	registry.Add((*CmdVoid3Remapped)(nil).Class())
+	registry.Add((*CmdVoid3Remapped_In)(nil).Class())
+	registry.Add((*CmdVoid3Remapped_Out)(nil).Class())
+	registry.Add((*CmdVoid3Strings)(nil).Class())
+	registry.Add((*CmdVoid3Strings_In)(nil).Class())
+	registry.Add((*CmdVoid3Strings_Out)(nil).Class())
+	registry.Add((*CmdVoidArrayOfStrings)(nil).Class())
+	registry.Add((*CmdVoidArrayOfStrings_In)(nil).Class())
+	registry.Add((*CmdVoidArrayOfStrings_Out)(nil).Class())
+	registry.Add((*CmdVoidBool)(nil).Class())
+	registry.Add((*CmdVoidBool_In)(nil).Class())
+	registry.Add((*CmdVoidBool_Out)(nil).Class())
+	registry.Add((*CmdVoidF32)(nil).Class())
+	registry.Add((*CmdVoidF32_In)(nil).Class())
+	registry.Add((*CmdVoidF32_Out)(nil).Class())
+	registry.Add((*CmdVoidF64)(nil).Class())
+	registry.Add((*CmdVoidF64_In)(nil).Class())
+	registry.Add((*CmdVoidF64_Out)(nil).Class())
+	registry.Add((*CmdVoidOut3Remapped)(nil).Class())
+	registry.Add((*CmdVoidOut3Remapped_In)(nil).Class())
+	registry.Add((*CmdVoidOut3Remapped_Out)(nil).Class())
+	registry.Add((*CmdVoidOut3Strings)(nil).Class())
+	registry.Add((*CmdVoidOut3Strings_In)(nil).Class())
+	registry.Add((*CmdVoidOut3Strings_Out)(nil).Class())
+	registry.Add((*CmdVoidOutArrayOfRemapped)(nil).Class())
+	registry.Add((*CmdVoidOutArrayOfRemapped_In)(nil).Class())
+	registry.Add((*CmdVoidOutArrayOfRemapped_Out)(nil).Class())
+	registry.Add((*CmdVoidOutBool)(nil).Class())
+	registry.Add((*CmdVoidOutBool_In)(nil).Class())
+	registry.Add((*CmdVoidOutBool_Out)(nil).Class())
+	registry.Add((*CmdVoidOutF32)(nil).Class())
+	registry.Add((*CmdVoidOutF32_In)(nil).Class())
+	registry.Add((*CmdVoidOutF32_Out)(nil).Class())
+	registry.Add((*CmdVoidOutF64)(nil).Class())
+	registry.Add((*CmdVoidOutF64_In)(nil).Class())
+	registry.Add((*CmdVoidOutF64_Out)(nil).Class())
+	registry.Add((*CmdVoidOutFixedSizeBuffer)(nil).Class())
+	registry.Add((*CmdVoidOutFixedSizeBuffer_In)(nil).Class())
+	registry.Add((*CmdVoidOutFixedSizeBuffer_Out)(nil).Class())
+	registry.Add((*CmdVoidOutS16)(nil).Class())
+	registry.Add((*CmdVoidOutS16_In)(nil).Class())
+	registry.Add((*CmdVoidOutS16_Out)(nil).Class())
+	registry.Add((*CmdVoidOutS32)(nil).Class())
+	registry.Add((*CmdVoidOutS32_In)(nil).Class())
+	registry.Add((*CmdVoidOutS32_Out)(nil).Class())
+	registry.Add((*CmdVoidOutS64)(nil).Class())
+	registry.Add((*CmdVoidOutS64_In)(nil).Class())
+	registry.Add((*CmdVoidOutS64_Out)(nil).Class())
+	registry.Add((*CmdVoidOutS8)(nil).Class())
+	registry.Add((*CmdVoidOutS8_In)(nil).Class())
+	registry.Add((*CmdVoidOutS8_Out)(nil).Class())
+	registry.Add((*CmdVoidOutString)(nil).Class())
+	registry.Add((*CmdVoidOutString_In)(nil).Class())
+	registry.Add((*CmdVoidOutString_Out)(nil).Class())
+	registry.Add((*CmdVoidOutU16)(nil).Class())
+	registry.Add((*CmdVoidOutU16_In)(nil).Class())
+	registry.Add((*CmdVoidOutU16_Out)(nil).Class())
+	registry.Add((*CmdVoidOutU32)(nil).Class())
+	registry.Add((*CmdVoidOutU32_In)(nil).Class())
+	registry.Add((*CmdVoidOutU32_Out)(nil).Class())
+	registry.Add((*CmdVoidOutU64)(nil).Class())
+	registry.Add((*CmdVoidOutU64_In)(nil).Class())
+	registry.Add((*CmdVoidOutU64_Out)(nil).Class())
+	registry.Add((*CmdVoidOutU8)(nil).Class())
+	registry.Add((*CmdVoidOutU8_In)(nil).Class())
+	registry.Add((*CmdVoidOutU8_Out)(nil).Class())
+	registry.Add((*CmdVoidS16)(nil).Class())
+	registry.Add((*CmdVoidS16_In)(nil).Class())
+	registry.Add((*CmdVoidS16_Out)(nil).Class())
+	registry.Add((*CmdVoidS32)(nil).Class())
+	registry.Add((*CmdVoidS32_In)(nil).Class())
+	registry.Add((*CmdVoidS32_Out)(nil).Class())
+	registry.Add((*CmdVoidS64)(nil).Class())
+	registry.Add((*CmdVoidS64_In)(nil).Class())
+	registry.Add((*CmdVoidS64_Out)(nil).Class())
+	registry.Add((*CmdVoidS8)(nil).Class())
+	registry.Add((*CmdVoidS8_In)(nil).Class())
+	registry.Add((*CmdVoidS8_Out)(nil).Class())
+	registry.Add((*CmdVoidString)(nil).Class())
+	registry.Add((*CmdVoidString_In)(nil).Class())
+	registry.Add((*CmdVoidString_Out)(nil).Class())
+	registry.Add((*CmdVoidU16)(nil).Class())
+	registry.Add((*CmdVoidU16_In)(nil).Class())
+	registry.Add((*CmdVoidU16_Out)(nil).Class())
+	registry.Add((*CmdVoidU32)(nil).Class())
+	registry.Add((*CmdVoidU32_In)(nil).Class())
+	registry.Add((*CmdVoidU32_Out)(nil).Class())
+	registry.Add((*CmdVoidU64)(nil).Class())
+	registry.Add((*CmdVoidU64_In)(nil).Class())
+	registry.Add((*CmdVoidU64_Out)(nil).Class())
+	registry.Add((*CmdVoidU8)(nil).Class())
+	registry.Add((*CmdVoidU8_In)(nil).Class())
+	registry.Add((*CmdVoidU8_Out)(nil).Class())
+	registry.Add((*CmdVoid_In)(nil).Class())
+	registry.Add((*CmdVoid_Out)(nil).Class())
+	registry.Add((*Globals)(nil).Class())
 }
 
-func (o CmdArrayOfFloat) Encode(e binary.Encoder) error {
+var (
+	binaryIDCmdArrayOfFloat               = binary.ID{0xc7, 0xbe, 0x8b, 0xe6, 0x15, 0x6e, 0x20, 0x18, 0x6c, 0xec, 0xb3, 0xdf, 0xa3, 0x66, 0xae, 0xf0, 0x94, 0xe0, 0x48, 0xda}
+	binaryIDCmdArrayOfFloat_In            = binary.ID{0xd5, 0x2b, 0xc7, 0x41, 0xb0, 0x20, 0x45, 0x1e, 0x83, 0xbd, 0x77, 0xf4, 0xca, 0x4d, 0x9a, 0x2c, 0xbb, 0x2b, 0x07, 0x90}
+	binaryIDCmdArrayOfFloat_Out           = binary.ID{0x36, 0x3c, 0x3e, 0x10, 0x7a, 0xbb, 0xa4, 0x7c, 0x75, 0x9a, 0x9f, 0x19, 0x07, 0x1b, 0x7e, 0x9a, 0x95, 0x0d, 0x1c, 0x30}
+	binaryIDCmdBool                       = binary.ID{0xfc, 0x9c, 0x18, 0xaa, 0x58, 0xf9, 0x5c, 0x18, 0xfe, 0x28, 0xc6, 0x72, 0x0a, 0xa7, 0x2e, 0xb9, 0xcc, 0x7d, 0xde, 0x21}
+	binaryIDCmdBool_In                    = binary.ID{0xa8, 0xc3, 0xf0, 0xd7, 0xdf, 0x03, 0x75, 0x19, 0x03, 0x76, 0x72, 0x4c, 0xb8, 0xd4, 0x55, 0x0a, 0xff, 0x6f, 0x46, 0xcf}
+	binaryIDCmdBool_Out                   = binary.ID{0x6f, 0x9e, 0x3b, 0xfa, 0xe7, 0xd8, 0x25, 0x76, 0xe7, 0x91, 0x65, 0x6c, 0x99, 0xb3, 0x80, 0x04, 0x17, 0xf4, 0xb8, 0xd8}
+	binaryIDCmdF32                        = binary.ID{0xda, 0xaf, 0xbd, 0xf3, 0xcb, 0x30, 0xb6, 0x68, 0x7a, 0xcd, 0xf4, 0xc8, 0x54, 0x6b, 0x47, 0x6d, 0x29, 0x03, 0xe5, 0xca}
+	binaryIDCmdF32_In                     = binary.ID{0x37, 0x2e, 0x12, 0xe8, 0xb9, 0xf9, 0xdf, 0x55, 0x73, 0x54, 0x0c, 0xb7, 0x0a, 0xcf, 0xb6, 0x3a, 0x5d, 0x8e, 0xc0, 0xea}
+	binaryIDCmdF32_Out                    = binary.ID{0xa5, 0x94, 0x0e, 0xe8, 0x83, 0xf7, 0xb9, 0x64, 0x34, 0x1a, 0x70, 0xf4, 0x75, 0x8a, 0x61, 0xf7, 0x62, 0x8b, 0xe5, 0x7b}
+	binaryIDCmdF64                        = binary.ID{0x42, 0x3c, 0x1a, 0x84, 0x64, 0x17, 0xaf, 0xe4, 0x29, 0x6f, 0x9e, 0x59, 0x95, 0xd6, 0x38, 0xd5, 0x83, 0xd8, 0x67, 0x75}
+	binaryIDCmdF64_In                     = binary.ID{0x52, 0xb1, 0x85, 0xd0, 0x4b, 0xb3, 0x41, 0xf5, 0x38, 0xd4, 0xc2, 0xfd, 0x72, 0x2d, 0x11, 0x9b, 0x75, 0xb0, 0x89, 0xea}
+	binaryIDCmdF64_Out                    = binary.ID{0x54, 0x76, 0x58, 0x05, 0x51, 0xe0, 0x1e, 0x09, 0xc5, 0x2a, 0x9c, 0xdc, 0xfa, 0xb5, 0x96, 0x0a, 0xd2, 0x18, 0xef, 0x66}
+	binaryIDCmdPointer                    = binary.ID{0xbf, 0x67, 0x3e, 0x0f, 0x67, 0x62, 0x75, 0x98, 0x1a, 0xc2, 0x36, 0x67, 0xec, 0x14, 0x95, 0x83, 0x6f, 0x96, 0xfb, 0x86}
+	binaryIDCmdPointer_In                 = binary.ID{0x02, 0x87, 0x43, 0x42, 0xe1, 0xcf, 0x50, 0x41, 0x05, 0x53, 0x0d, 0x1c, 0xa7, 0x77, 0x4a, 0xfe, 0xf8, 0x99, 0x68, 0x27}
+	binaryIDCmdPointer_Out                = binary.ID{0xe3, 0xa5, 0xa0, 0xc2, 0x07, 0xfc, 0xf6, 0xbd, 0x8d, 0x89, 0xae, 0xb2, 0x02, 0xdf, 0xeb, 0x15, 0x0a, 0xf0, 0x65, 0x12}
+	binaryIDCmdS16                        = binary.ID{0x7c, 0x7c, 0x2d, 0x85, 0x27, 0x81, 0xd9, 0xc7, 0xf2, 0x53, 0x3b, 0x0b, 0x81, 0x13, 0xc8, 0xbc, 0xd4, 0x23, 0xe9, 0x1b}
+	binaryIDCmdS16_In                     = binary.ID{0xb4, 0x21, 0xaf, 0x09, 0xe1, 0xcb, 0x81, 0x1f, 0x25, 0x29, 0xaf, 0x09, 0x9e, 0xf5, 0x48, 0x32, 0xb2, 0x99, 0xfd, 0x74}
+	binaryIDCmdS16_Out                    = binary.ID{0x6f, 0x2b, 0xe4, 0x31, 0xff, 0x53, 0xb9, 0x35, 0xc9, 0x13, 0x54, 0x06, 0xdb, 0x9c, 0x04, 0xcd, 0x69, 0x27, 0xa9, 0x74}
+	binaryIDCmdS32                        = binary.ID{0x63, 0xf9, 0x22, 0x35, 0x17, 0xe0, 0x49, 0xc0, 0x77, 0x8f, 0x23, 0x22, 0x4f, 0x84, 0x9d, 0xc9, 0x50, 0xea, 0x10, 0x02}
+	binaryIDCmdS32_In                     = binary.ID{0xa2, 0x0c, 0x1a, 0x78, 0x13, 0x5b, 0xb9, 0xf4, 0xb9, 0x84, 0x46, 0x26, 0x3c, 0xbc, 0xbc, 0x6c, 0x28, 0x96, 0xa6, 0x2d}
+	binaryIDCmdS32_Out                    = binary.ID{0x83, 0x99, 0xd5, 0xe8, 0xb6, 0xc5, 0x6a, 0x3b, 0xf5, 0x20, 0x22, 0x59, 0x40, 0xc9, 0xde, 0x88, 0x09, 0x09, 0xa5, 0xe9}
+	binaryIDCmdS64                        = binary.ID{0xbd, 0x2e, 0x78, 0xa7, 0x9a, 0x51, 0xad, 0xc9, 0xfa, 0x1b, 0x28, 0x52, 0xb8, 0xc8, 0xcc, 0x63, 0xc1, 0xec, 0xae, 0xea}
+	binaryIDCmdS64_In                     = binary.ID{0x69, 0x7f, 0x8a, 0x03, 0xf3, 0xd1, 0x13, 0x1b, 0x1c, 0x15, 0xc8, 0x9f, 0x23, 0x73, 0x1c, 0xc2, 0xfd, 0x9e, 0xe3, 0x3b}
+	binaryIDCmdS64_Out                    = binary.ID{0xae, 0x38, 0x61, 0x6c, 0x5c, 0xb0, 0x30, 0xcc, 0xce, 0xce, 0x4e, 0xf0, 0x9d, 0x70, 0x0f, 0xd2, 0x4c, 0x11, 0x68, 0x86}
+	binaryIDCmdS8                         = binary.ID{0x29, 0x72, 0x6a, 0x87, 0xc4, 0xe1, 0x2f, 0x7c, 0x63, 0x50, 0xa4, 0xc7, 0x74, 0xde, 0xf1, 0xf4, 0xe0, 0x5e, 0x05, 0x4c}
+	binaryIDCmdS8_In                      = binary.ID{0xc7, 0xb6, 0xa0, 0x8b, 0xfb, 0xc6, 0x57, 0x3d, 0x90, 0x4d, 0x6b, 0x67, 0xfc, 0x5a, 0x3d, 0x59, 0x87, 0x3d, 0x8e, 0xb1}
+	binaryIDCmdS8_Out                     = binary.ID{0xf9, 0xf1, 0x54, 0x03, 0x51, 0xfc, 0xd1, 0xe0, 0xf2, 0x74, 0x68, 0xb8, 0x9a, 0xf5, 0x53, 0x46, 0xd1, 0xb3, 0xf4, 0x7b}
+	binaryIDCmdString                     = binary.ID{0xb7, 0x58, 0xe4, 0xf9, 0xd0, 0x2e, 0x81, 0x4f, 0x94, 0x2d, 0xc9, 0x95, 0x86, 0xcf, 0x31, 0xc0, 0x86, 0xe3, 0x2d, 0x03}
+	binaryIDCmdString_In                  = binary.ID{0x00, 0xe3, 0x87, 0xcd, 0xd3, 0xd5, 0x7d, 0x83, 0x8f, 0x1d, 0xf9, 0x26, 0x3d, 0x5a, 0x9c, 0x87, 0xb8, 0x31, 0x8c, 0x70}
+	binaryIDCmdString_Out                 = binary.ID{0x49, 0x91, 0x68, 0x46, 0x4b, 0x1e, 0xf5, 0x69, 0x9f, 0x35, 0x4b, 0x6f, 0x13, 0x6a, 0xbe, 0x56, 0x49, 0x3a, 0xd9, 0x23}
+	binaryIDCmdU16                        = binary.ID{0x7d, 0xc6, 0xc1, 0x51, 0xe1, 0xbf, 0x87, 0x67, 0x33, 0x28, 0xf8, 0xbc, 0x93, 0xaa, 0xe8, 0xb9, 0xad, 0x5c, 0x65, 0xfc}
+	binaryIDCmdU16_In                     = binary.ID{0xd2, 0xa1, 0x65, 0xb8, 0x84, 0x2d, 0x34, 0x0a, 0x3a, 0x73, 0x08, 0x34, 0xfb, 0xa6, 0x44, 0xf2, 0x1c, 0x36, 0x3a, 0xdc}
+	binaryIDCmdU16_Out                    = binary.ID{0x80, 0x9c, 0x36, 0x68, 0x0d, 0xff, 0x0c, 0x69, 0xb4, 0x59, 0x87, 0x55, 0x87, 0x78, 0x36, 0x99, 0x7f, 0x8d, 0x75, 0x98}
+	binaryIDCmdU32                        = binary.ID{0x41, 0x36, 0xcb, 0x68, 0xb9, 0x2b, 0xc4, 0x61, 0xfa, 0x26, 0x03, 0x81, 0xbd, 0x3d, 0xbe, 0x7b, 0x04, 0x3c, 0x98, 0x5b}
+	binaryIDCmdU32_In                     = binary.ID{0x73, 0x20, 0x0d, 0x68, 0x76, 0x5b, 0x5a, 0xae, 0x0a, 0xf1, 0xef, 0x70, 0x50, 0x0d, 0x66, 0xe8, 0xe9, 0xbe, 0x79, 0xf8}
+	binaryIDCmdU32_Out                    = binary.ID{0x36, 0x73, 0x3e, 0x1d, 0x85, 0x32, 0x08, 0x71, 0xba, 0x61, 0xbe, 0xaa, 0x42, 0xf0, 0x3a, 0x0a, 0x33, 0x1d, 0x00, 0x80}
+	binaryIDCmdU64                        = binary.ID{0xcf, 0xd9, 0xb9, 0x9c, 0x49, 0xcf, 0xeb, 0xbf, 0x69, 0x3d, 0x83, 0xfa, 0x61, 0x98, 0x84, 0xe0, 0xa4, 0xa7, 0x3f, 0xeb}
+	binaryIDCmdU64_In                     = binary.ID{0xf9, 0x54, 0x3e, 0x9a, 0xe2, 0x2a, 0x29, 0x49, 0xec, 0x6d, 0x3c, 0x5a, 0xe5, 0xaf, 0x0d, 0x82, 0xb2, 0x40, 0xad, 0xe1}
+	binaryIDCmdU64_Out                    = binary.ID{0xc7, 0x94, 0x16, 0x55, 0x11, 0x63, 0x43, 0xe8, 0x65, 0x97, 0x2f, 0x34, 0x5f, 0x60, 0x43, 0xe9, 0xa8, 0x5e, 0x5a, 0x42}
+	binaryIDCmdU8                         = binary.ID{0x03, 0x49, 0x07, 0x3a, 0xb3, 0xdf, 0xb8, 0xcf, 0x43, 0xae, 0x0b, 0x22, 0xfb, 0x5d, 0xf3, 0x01, 0x01, 0x7e, 0xa9, 0x68}
+	binaryIDCmdU8_In                      = binary.ID{0xf4, 0x59, 0x68, 0x38, 0xe0, 0xa8, 0xec, 0x9e, 0xb2, 0x95, 0x67, 0xe4, 0x5e, 0xca, 0x90, 0x7b, 0xeb, 0xc0, 0xac, 0x98}
+	binaryIDCmdU8_Out                     = binary.ID{0xce, 0x2e, 0x2a, 0xec, 0xd3, 0xeb, 0x97, 0x56, 0xfb, 0x73, 0x1d, 0x83, 0xb1, 0x73, 0x68, 0xa5, 0x4b, 0xbf, 0x36, 0xf2}
+	binaryIDCmdVoid                       = binary.ID{0x88, 0x4a, 0x99, 0xf4, 0xfa, 0xe0, 0xc3, 0xfa, 0x45, 0xdf, 0x5a, 0xf0, 0xd9, 0x15, 0x1a, 0x30, 0xb0, 0x04, 0xb4, 0xd8}
+	binaryIDCmdVoid3Arrays                = binary.ID{0x34, 0xd8, 0x53, 0x48, 0x0c, 0xa9, 0x39, 0xf1, 0xee, 0x48, 0xec, 0x05, 0x50, 0x75, 0x9d, 0x9d, 0xf7, 0xca, 0x1d, 0x07}
+	binaryIDCmdVoid3Arrays_In             = binary.ID{0x9b, 0x77, 0x88, 0x62, 0x7c, 0x3f, 0xd7, 0x49, 0xaa, 0x32, 0xff, 0x17, 0xd1, 0x65, 0xcc, 0xda, 0xaf, 0xad, 0x8e, 0xf0}
+	binaryIDCmdVoid3Arrays_Out            = binary.ID{0xfe, 0x87, 0x9c, 0x49, 0x76, 0x14, 0x11, 0xd1, 0x60, 0xa2, 0x61, 0xee, 0xbf, 0x09, 0x43, 0x0e, 0x45, 0x08, 0x97, 0x52}
+	binaryIDCmdVoid3Remapped              = binary.ID{0xe4, 0x31, 0xc2, 0x20, 0x2b, 0x84, 0x05, 0xd6, 0x48, 0xa9, 0x2d, 0xd7, 0xff, 0x4e, 0xce, 0xf1, 0xf8, 0xe9, 0x4e, 0xbd}
+	binaryIDCmdVoid3Remapped_In           = binary.ID{0x65, 0x9c, 0xe6, 0x1c, 0x4c, 0x6e, 0xe5, 0xed, 0x14, 0xcb, 0xe9, 0x57, 0xee, 0x05, 0xc6, 0x43, 0x4e, 0x7e, 0x45, 0x42}
+	binaryIDCmdVoid3Remapped_Out          = binary.ID{0x60, 0x0a, 0xfe, 0x1a, 0xa7, 0xb0, 0x3c, 0x64, 0xa2, 0x73, 0x7a, 0xa9, 0xff, 0x89, 0xe8, 0xc8, 0x18, 0x3a, 0xca, 0xd0}
+	binaryIDCmdVoid3Strings               = binary.ID{0x42, 0xa0, 0xbc, 0xde, 0x7d, 0x62, 0x67, 0x5e, 0xe3, 0x8f, 0xd3, 0x76, 0x92, 0x8b, 0xa0, 0x9e, 0xfe, 0x6f, 0x1c, 0xf8}
+	binaryIDCmdVoid3Strings_In            = binary.ID{0x85, 0x28, 0x3e, 0x66, 0x72, 0xcc, 0x8a, 0xd9, 0x1a, 0xac, 0x60, 0x7c, 0xb7, 0x54, 0x99, 0x58, 0x9e, 0x7c, 0x50, 0x2f}
+	binaryIDCmdVoid3Strings_Out           = binary.ID{0x4c, 0x9e, 0x35, 0x94, 0xa5, 0x95, 0x17, 0xd6, 0x6c, 0x33, 0x21, 0xf1, 0xfc, 0xf2, 0x18, 0x89, 0x36, 0x9a, 0x48, 0x30}
+	binaryIDCmdVoidArrayOfStrings         = binary.ID{0xf7, 0xb9, 0x87, 0x78, 0x8b, 0x97, 0x71, 0x36, 0x8e, 0x42, 0x4f, 0x47, 0xf6, 0xbb, 0x1c, 0x80, 0x4f, 0xd2, 0x1b, 0x82}
+	binaryIDCmdVoidArrayOfStrings_In      = binary.ID{0x86, 0xc8, 0x7e, 0x7c, 0x94, 0x4c, 0x70, 0xba, 0x02, 0x8a, 0x73, 0xf2, 0x63, 0x93, 0x29, 0x2d, 0x7c, 0xc5, 0x17, 0x28}
+	binaryIDCmdVoidArrayOfStrings_Out     = binary.ID{0x42, 0x2a, 0xaf, 0xb7, 0x87, 0x49, 0xd6, 0x31, 0xed, 0xd7, 0xfa, 0xd7, 0xa7, 0x94, 0x3b, 0xbd, 0x4c, 0xfd, 0x83, 0x3c}
+	binaryIDCmdVoidBool                   = binary.ID{0xc1, 0x9c, 0xeb, 0xb3, 0xfb, 0xec, 0xc6, 0xb9, 0x90, 0x04, 0x99, 0xdb, 0x0a, 0x33, 0x5f, 0xda, 0x12, 0x38, 0xfa, 0x06}
+	binaryIDCmdVoidBool_In                = binary.ID{0x15, 0xed, 0xa2, 0xcd, 0xec, 0x73, 0xbc, 0x31, 0x1c, 0xc7, 0xaa, 0x20, 0x1e, 0x50, 0xb8, 0x30, 0x12, 0xf2, 0xea, 0xab}
+	binaryIDCmdVoidBool_Out               = binary.ID{0x08, 0x1e, 0xf8, 0xd5, 0xb6, 0x95, 0x1b, 0x66, 0x97, 0xfd, 0x06, 0xaf, 0x76, 0x3b, 0xa4, 0xfd, 0x09, 0xf6, 0x0c, 0xf7}
+	binaryIDCmdVoidF32                    = binary.ID{0x60, 0x5d, 0x8c, 0x59, 0xc3, 0xea, 0x56, 0xcf, 0x11, 0x68, 0x04, 0xd5, 0xe5, 0x31, 0xce, 0x2e, 0xd3, 0x32, 0x22, 0xe2}
+	binaryIDCmdVoidF32_In                 = binary.ID{0x7f, 0x8a, 0x76, 0x16, 0x25, 0xe5, 0x4f, 0x6e, 0x88, 0xdc, 0xd4, 0x97, 0x04, 0x8c, 0x22, 0x75, 0xc9, 0xc6, 0xa1, 0x3c}
+	binaryIDCmdVoidF32_Out                = binary.ID{0xb8, 0xe3, 0x7c, 0x1a, 0xa9, 0x57, 0x2b, 0x62, 0x49, 0xcc, 0xeb, 0x03, 0xa8, 0xd4, 0xf7, 0x81, 0x29, 0x61, 0x2d, 0x47}
+	binaryIDCmdVoidF64                    = binary.ID{0xac, 0x85, 0xda, 0xe0, 0x41, 0x9d, 0xf8, 0x2d, 0x50, 0x9d, 0xae, 0x08, 0x2c, 0x0c, 0x7b, 0xb0, 0x30, 0x75, 0xcd, 0xb4}
+	binaryIDCmdVoidF64_In                 = binary.ID{0xed, 0xf7, 0xff, 0xb1, 0x65, 0xdf, 0x39, 0x7e, 0x22, 0xa7, 0x60, 0x10, 0x44, 0xfe, 0x95, 0x6a, 0x51, 0x1d, 0x04, 0xa2}
+	binaryIDCmdVoidF64_Out                = binary.ID{0xc1, 0xe2, 0x8d, 0xd9, 0xa0, 0xf2, 0xd6, 0x31, 0x3f, 0xcf, 0x6b, 0x33, 0x5c, 0x88, 0x54, 0xb9, 0xe0, 0x16, 0x0d, 0x18}
+	binaryIDCmdVoidOut3Remapped           = binary.ID{0xd5, 0x42, 0x81, 0x40, 0x1c, 0x68, 0x52, 0x47, 0xca, 0x63, 0x02, 0x1c, 0x53, 0xda, 0xae, 0xc3, 0x16, 0xf4, 0xf8, 0x75}
+	binaryIDCmdVoidOut3Remapped_In        = binary.ID{0x5c, 0x6b, 0x8f, 0xaf, 0x40, 0xc0, 0x25, 0x1d, 0x27, 0x99, 0x7b, 0xd9, 0x5f, 0xba, 0x3e, 0x20, 0xa2, 0x74, 0x8e, 0x3c}
+	binaryIDCmdVoidOut3Remapped_Out       = binary.ID{0xb6, 0x69, 0x41, 0xc0, 0x8a, 0x84, 0x88, 0xc3, 0x3f, 0x94, 0xcc, 0x3a, 0xc1, 0x02, 0x48, 0x92, 0x2b, 0x53, 0xbc, 0xea}
+	binaryIDCmdVoidOut3Strings            = binary.ID{0x56, 0x9b, 0x78, 0xc4, 0x56, 0xce, 0xfb, 0x66, 0x40, 0x19, 0xb6, 0xe5, 0xf9, 0x1e, 0x76, 0x49, 0x8a, 0x8b, 0xfd, 0xad}
+	binaryIDCmdVoidOut3Strings_In         = binary.ID{0x02, 0xb0, 0x9c, 0x20, 0xaf, 0xeb, 0x29, 0x43, 0xe1, 0x4d, 0x06, 0x2f, 0xe1, 0x8a, 0x12, 0x04, 0x98, 0x9c, 0xe5, 0xcf}
+	binaryIDCmdVoidOut3Strings_Out        = binary.ID{0xcf, 0xd1, 0x6b, 0xe1, 0xc6, 0xc1, 0xe5, 0x3d, 0xee, 0x9c, 0xd6, 0x3d, 0x86, 0xfb, 0x95, 0xff, 0xee, 0x10, 0x78, 0xcf}
+	binaryIDCmdVoidOutArrayOfRemapped     = binary.ID{0xc8, 0x7c, 0x03, 0x3f, 0x92, 0x37, 0xd8, 0xcd, 0x75, 0x11, 0xab, 0xee, 0xc9, 0xcc, 0xde, 0xd6, 0x4c, 0x7f, 0x9e, 0x5e}
+	binaryIDCmdVoidOutArrayOfRemapped_In  = binary.ID{0x8e, 0xf9, 0x7a, 0xc5, 0x69, 0x1f, 0xc5, 0x94, 0x17, 0x22, 0xc7, 0xd3, 0x4a, 0xa4, 0xe1, 0x2a, 0x2e, 0x01, 0xac, 0x88}
+	binaryIDCmdVoidOutArrayOfRemapped_Out = binary.ID{0x9e, 0x88, 0x02, 0x47, 0x74, 0xbc, 0x64, 0xdf, 0xbc, 0x37, 0x15, 0xb3, 0xb4, 0x38, 0x9b, 0xab, 0x21, 0x81, 0x02, 0x90}
+	binaryIDCmdVoidOutBool                = binary.ID{0x1c, 0xcb, 0x3c, 0x37, 0x26, 0xf5, 0xb0, 0x6d, 0x66, 0x3e, 0xf5, 0x83, 0x48, 0x13, 0x50, 0xfe, 0x95, 0x5b, 0x8e, 0x20}
+	binaryIDCmdVoidOutBool_In             = binary.ID{0x80, 0x53, 0x0f, 0x2e, 0x35, 0x68, 0x1f, 0x68, 0x12, 0x68, 0x0b, 0xb6, 0x47, 0xf2, 0x93, 0xcb, 0xe2, 0xa5, 0x01, 0x95}
+	binaryIDCmdVoidOutBool_Out            = binary.ID{0x22, 0xa8, 0xe6, 0x66, 0x3f, 0x29, 0xba, 0xfd, 0x51, 0xec, 0x33, 0xb4, 0xed, 0xcd, 0xd3, 0xd5, 0xbe, 0x83, 0xd2, 0x8e}
+	binaryIDCmdVoidOutF32                 = binary.ID{0x1d, 0x41, 0xce, 0xd7, 0x6a, 0x15, 0x8d, 0xab, 0xe0, 0x8e, 0x47, 0x0b, 0x4f, 0x3e, 0x9b, 0x1c, 0x95, 0x98, 0x23, 0xee}
+	binaryIDCmdVoidOutF32_In              = binary.ID{0x9c, 0x56, 0x82, 0x30, 0xbb, 0x8b, 0x12, 0x84, 0x6a, 0xf2, 0x47, 0x8e, 0x4d, 0xcd, 0xfc, 0x43, 0xf1, 0x0c, 0x68, 0xa5}
+	binaryIDCmdVoidOutF32_Out             = binary.ID{0x61, 0x33, 0xd0, 0xe0, 0xab, 0x9d, 0x49, 0x7a, 0xbd, 0x54, 0x63, 0x31, 0x94, 0x31, 0xbf, 0x72, 0xf5, 0x5c, 0x04, 0x2c}
+	binaryIDCmdVoidOutF64                 = binary.ID{0x91, 0x80, 0x24, 0x86, 0x48, 0xe3, 0x08, 0x0c, 0x45, 0xfe, 0xa1, 0x19, 0x26, 0xdb, 0xc2, 0x46, 0xc7, 0x8d, 0xc2, 0x35}
+	binaryIDCmdVoidOutF64_In              = binary.ID{0x71, 0x03, 0x21, 0x58, 0x82, 0x18, 0xe3, 0x75, 0xf7, 0xe5, 0xf1, 0xc4, 0x9e, 0x43, 0xe3, 0x97, 0x14, 0x57, 0x33, 0xde}
+	binaryIDCmdVoidOutF64_Out             = binary.ID{0x74, 0x18, 0x51, 0x17, 0x14, 0x72, 0x02, 0x47, 0x94, 0x32, 0xa8, 0xe6, 0xc4, 0x12, 0xdc, 0x80, 0xe4, 0x00, 0x1c, 0x6f}
+	binaryIDCmdVoidOutFixedSizeBuffer     = binary.ID{0x21, 0x7a, 0x15, 0x75, 0xc1, 0x28, 0x61, 0x86, 0x5b, 0xd7, 0x7a, 0xf7, 0x51, 0xef, 0xb5, 0xdf, 0x26, 0x9e, 0xf7, 0x6d}
+	binaryIDCmdVoidOutFixedSizeBuffer_In  = binary.ID{0x7b, 0x3d, 0x39, 0xa6, 0x2f, 0x5d, 0xa4, 0xe3, 0x9c, 0x88, 0xe4, 0x23, 0x09, 0x67, 0x4f, 0x5e, 0xec, 0xaf, 0xb5, 0xe6}
+	binaryIDCmdVoidOutFixedSizeBuffer_Out = binary.ID{0x74, 0xf3, 0x71, 0x06, 0x6d, 0xbd, 0x2f, 0x37, 0xde, 0xfc, 0x57, 0xfd, 0x6e, 0xd2, 0xf5, 0x9e, 0x88, 0x34, 0x07, 0xed}
+	binaryIDCmdVoidOutS16                 = binary.ID{0xd2, 0x6e, 0xd4, 0xc6, 0xf1, 0xaf, 0x77, 0x18, 0xab, 0xb0, 0xd2, 0x2c, 0xd8, 0xe0, 0x7e, 0x1f, 0x63, 0xed, 0xa0, 0xf4}
+	binaryIDCmdVoidOutS16_In              = binary.ID{0xde, 0x5b, 0x1b, 0x9d, 0xd9, 0xd9, 0xf5, 0xbd, 0xc7, 0x50, 0x1c, 0x24, 0x7a, 0xb1, 0xec, 0x3b, 0x3c, 0xcc, 0xb1, 0xa6}
+	binaryIDCmdVoidOutS16_Out             = binary.ID{0xd4, 0x93, 0xe1, 0x5e, 0xcf, 0x55, 0xf5, 0x5b, 0x2c, 0x0f, 0xc5, 0x50, 0x5f, 0x63, 0x10, 0xe0, 0x89, 0x1a, 0x4a, 0xb2}
+	binaryIDCmdVoidOutS32                 = binary.ID{0xcc, 0x0e, 0x27, 0xd7, 0x51, 0xc7, 0xf5, 0x76, 0xde, 0x4a, 0xb1, 0x6a, 0xce, 0x9e, 0xd4, 0xe4, 0x75, 0xb4, 0x23, 0x5d}
+	binaryIDCmdVoidOutS32_In              = binary.ID{0x59, 0xd6, 0x69, 0xb5, 0xd9, 0xdd, 0x1e, 0x51, 0x2d, 0xce, 0xf0, 0x7a, 0x76, 0x32, 0xd4, 0xdf, 0xf4, 0x3a, 0x77, 0x69}
+	binaryIDCmdVoidOutS32_Out             = binary.ID{0xac, 0x2c, 0xba, 0x2f, 0x42, 0x97, 0x82, 0xc5, 0x8d, 0x6d, 0xa0, 0xee, 0x81, 0xb0, 0x41, 0x8f, 0xc4, 0xfb, 0xd1, 0x14}
+	binaryIDCmdVoidOutS64                 = binary.ID{0xd8, 0x2d, 0xf3, 0x72, 0x09, 0xb0, 0x12, 0x11, 0xaf, 0x75, 0x0a, 0x5c, 0x73, 0x4f, 0xce, 0x00, 0x34, 0x4f, 0xa5, 0xa5}
+	binaryIDCmdVoidOutS64_In              = binary.ID{0x94, 0x53, 0xd0, 0xdc, 0xd7, 0x4c, 0x8f, 0xc8, 0x92, 0xab, 0x9e, 0x8f, 0x86, 0xf6, 0xe4, 0x5f, 0x0d, 0xb0, 0xf7, 0x92}
+	binaryIDCmdVoidOutS64_Out             = binary.ID{0xa4, 0x92, 0x52, 0x7c, 0x76, 0xc7, 0x28, 0xd9, 0x5b, 0x93, 0x43, 0x8b, 0x16, 0xec, 0x9b, 0x46, 0xda, 0xb1, 0xf8, 0x8e}
+	binaryIDCmdVoidOutS8                  = binary.ID{0x32, 0x2b, 0xdf, 0xa9, 0x14, 0x93, 0x7e, 0x03, 0x19, 0x3f, 0x08, 0xf5, 0x8b, 0x20, 0x10, 0xff, 0xfc, 0xdf, 0xc6, 0x04}
+	binaryIDCmdVoidOutS8_In               = binary.ID{0x64, 0x51, 0xa7, 0x31, 0xea, 0xa3, 0xd8, 0x1a, 0x29, 0xc2, 0x80, 0xf5, 0xf2, 0x3a, 0xf3, 0xd0, 0xcf, 0x97, 0x8c, 0xd5}
+	binaryIDCmdVoidOutS8_Out              = binary.ID{0x3f, 0xdc, 0xe4, 0x54, 0x18, 0x2f, 0x52, 0xb2, 0xa2, 0xc7, 0x55, 0xe7, 0xd8, 0x2f, 0x62, 0x7c, 0x79, 0xd8, 0xe5, 0x12}
+	binaryIDCmdVoidOutString              = binary.ID{0x14, 0x66, 0xca, 0x1e, 0x3a, 0x67, 0xcb, 0x47, 0x11, 0x36, 0x98, 0x8b, 0x64, 0xa9, 0x96, 0x4a, 0x75, 0x5f, 0xd7, 0x55}
+	binaryIDCmdVoidOutString_In           = binary.ID{0x8c, 0x64, 0xde, 0x14, 0x7c, 0x77, 0xb9, 0xb5, 0xda, 0x1d, 0x73, 0x73, 0x67, 0x88, 0x66, 0xdf, 0x19, 0xbe, 0x14, 0x49}
+	binaryIDCmdVoidOutString_Out          = binary.ID{0xa0, 0x86, 0x50, 0x4d, 0x16, 0x5c, 0x18, 0x88, 0x68, 0xc0, 0x83, 0x79, 0x9d, 0x79, 0xbe, 0xea, 0xf6, 0x91, 0x8a, 0x6c}
+	binaryIDCmdVoidOutU16                 = binary.ID{0xcd, 0x28, 0x5c, 0x10, 0x79, 0xdf, 0x33, 0xca, 0x4e, 0xd9, 0x74, 0xc8, 0x21, 0x8e, 0xed, 0x55, 0x51, 0xf6, 0xb6, 0x19}
+	binaryIDCmdVoidOutU16_In              = binary.ID{0x9d, 0xd4, 0x7d, 0xf0, 0x72, 0x98, 0xca, 0x33, 0x02, 0xdf, 0x75, 0x5c, 0x0d, 0x96, 0xc2, 0x70, 0xdc, 0xd8, 0x31, 0x64}
+	binaryIDCmdVoidOutU16_Out             = binary.ID{0xb5, 0x1d, 0x4c, 0x89, 0x7e, 0xa8, 0x7c, 0x44, 0x41, 0x3c, 0xf3, 0xfa, 0x25, 0x33, 0x58, 0x3b, 0x84, 0xe4, 0x5b, 0x68}
+	binaryIDCmdVoidOutU32                 = binary.ID{0xde, 0xae, 0xc8, 0x69, 0x2a, 0xf8, 0x11, 0x62, 0x06, 0x40, 0x90, 0xe4, 0x63, 0x78, 0xc5, 0xcd, 0x1a, 0x76, 0xb8, 0x4f}
+	binaryIDCmdVoidOutU32_In              = binary.ID{0xb4, 0x3f, 0x2f, 0x02, 0x88, 0x18, 0xa7, 0xd8, 0xe8, 0x61, 0xc4, 0x4c, 0x23, 0xec, 0xc8, 0x37, 0xc9, 0x26, 0xf5, 0xda}
+	binaryIDCmdVoidOutU32_Out             = binary.ID{0x6b, 0x9c, 0x03, 0xb9, 0x66, 0x45, 0x98, 0xbf, 0xfc, 0x2b, 0xe9, 0x23, 0x35, 0x19, 0xae, 0xfc, 0xe6, 0x96, 0xd0, 0x8a}
+	binaryIDCmdVoidOutU64                 = binary.ID{0x6f, 0xe9, 0x0c, 0x3b, 0x09, 0x95, 0x53, 0xdd, 0x03, 0x1e, 0x11, 0x08, 0x9c, 0x9a, 0xdc, 0x3d, 0x4e, 0x83, 0x49, 0x30}
+	binaryIDCmdVoidOutU64_In              = binary.ID{0x65, 0x55, 0x3e, 0xf3, 0xdf, 0xb4, 0x25, 0x2c, 0x68, 0x21, 0xcd, 0x50, 0x18, 0x2e, 0xe3, 0x19, 0x48, 0xa5, 0xa3, 0x9e}
+	binaryIDCmdVoidOutU64_Out             = binary.ID{0xd6, 0x7f, 0x83, 0x76, 0xfb, 0x02, 0xf0, 0x90, 0x4c, 0x98, 0xb5, 0x35, 0x8b, 0x40, 0xd2, 0xcc, 0xf7, 0xe9, 0x12, 0xf0}
+	binaryIDCmdVoidOutU8                  = binary.ID{0xd0, 0x8f, 0x08, 0x14, 0x71, 0x7f, 0xbc, 0x99, 0x21, 0x6e, 0xd6, 0x8d, 0x1f, 0xdd, 0x36, 0xfa, 0xbc, 0x3e, 0xb7, 0xe2}
+	binaryIDCmdVoidOutU8_In               = binary.ID{0x3a, 0x86, 0xed, 0x4a, 0xe6, 0x08, 0xfb, 0xfb, 0x55, 0x60, 0x6d, 0xff, 0x8c, 0xdf, 0x97, 0x7a, 0x97, 0x05, 0x5a, 0xe0}
+	binaryIDCmdVoidOutU8_Out              = binary.ID{0xcc, 0x4e, 0xe7, 0xc3, 0x4c, 0xc2, 0xda, 0xf0, 0x12, 0xba, 0x07, 0xc2, 0x33, 0xe6, 0xb9, 0x2a, 0x91, 0xf7, 0x37, 0x7b}
+	binaryIDCmdVoidS16                    = binary.ID{0x54, 0x5a, 0x6d, 0xc0, 0x63, 0x8e, 0x52, 0xad, 0x89, 0x9d, 0x0a, 0x7f, 0xc3, 0x0f, 0x05, 0xc5, 0xf4, 0xc0, 0xe5, 0xad}
+	binaryIDCmdVoidS16_In                 = binary.ID{0x16, 0xae, 0xb7, 0xa3, 0x26, 0x62, 0x4c, 0xcb, 0xb5, 0xa5, 0xe7, 0x73, 0xe2, 0xae, 0x9f, 0x13, 0xa5, 0xab, 0xd6, 0x7b}
+	binaryIDCmdVoidS16_Out                = binary.ID{0xc2, 0x8d, 0x3f, 0x6c, 0x18, 0xe3, 0xad, 0xcd, 0x1b, 0xfd, 0x32, 0x07, 0xb0, 0xac, 0xb6, 0x77, 0x61, 0xe2, 0x61, 0x2a}
+	binaryIDCmdVoidS32                    = binary.ID{0xab, 0x94, 0xfd, 0xb7, 0x22, 0x50, 0xe6, 0xca, 0x99, 0x13, 0x6e, 0xc1, 0x0f, 0x30, 0x35, 0xaf, 0xb0, 0x91, 0x1a, 0x90}
+	binaryIDCmdVoidS32_In                 = binary.ID{0x54, 0xd9, 0xab, 0x22, 0xeb, 0x5e, 0xdd, 0xa3, 0x98, 0xa0, 0x9c, 0xeb, 0xa1, 0xbf, 0xce, 0x47, 0x4b, 0x1f, 0x1e, 0xb7}
+	binaryIDCmdVoidS32_Out                = binary.ID{0x6a, 0x76, 0x11, 0x15, 0x8f, 0x47, 0xd6, 0x28, 0x77, 0x88, 0x92, 0x2d, 0x10, 0xf0, 0x35, 0xdc, 0xb6, 0xcb, 0x7e, 0xcd}
+	binaryIDCmdVoidS64                    = binary.ID{0x4c, 0x3c, 0x10, 0x60, 0x83, 0x3d, 0x2a, 0x95, 0xa5, 0x88, 0x4e, 0xb9, 0x4e, 0x95, 0x3e, 0x4f, 0x7c, 0x61, 0x0d, 0xcf}
+	binaryIDCmdVoidS64_In                 = binary.ID{0x08, 0x8b, 0xf2, 0x89, 0xf3, 0xee, 0xb9, 0xde, 0x0c, 0xdc, 0x6f, 0x8c, 0x7d, 0xf9, 0x06, 0x8c, 0x8e, 0xca, 0x57, 0xc2}
+	binaryIDCmdVoidS64_Out                = binary.ID{0x4f, 0xd2, 0x2a, 0x43, 0x41, 0x15, 0x7b, 0x52, 0x75, 0xd3, 0x17, 0xf3, 0xe8, 0x62, 0x9e, 0x24, 0xa6, 0x80, 0x43, 0xde}
+	binaryIDCmdVoidS8                     = binary.ID{0xd2, 0xb4, 0x40, 0x6d, 0xf4, 0x86, 0x47, 0x4d, 0xba, 0x24, 0xd3, 0x05, 0xc9, 0x23, 0x67, 0x74, 0x3a, 0xdc, 0xb5, 0xbe}
+	binaryIDCmdVoidS8_In                  = binary.ID{0xb6, 0xca, 0xcf, 0x10, 0x86, 0x00, 0x71, 0x1f, 0x6b, 0x6d, 0x5c, 0x12, 0xe5, 0x22, 0xcd, 0x3a, 0xf6, 0xcc, 0xc3, 0xe4}
+	binaryIDCmdVoidS8_Out                 = binary.ID{0xdd, 0xf2, 0xef, 0x10, 0x58, 0xaf, 0x17, 0x18, 0x84, 0xed, 0x77, 0x36, 0xa7, 0xb9, 0xbc, 0x75, 0xe5, 0xf0, 0x43, 0x97}
+	binaryIDCmdVoidString                 = binary.ID{0xf3, 0xc0, 0xeb, 0xea, 0x8f, 0xd2, 0x14, 0xd3, 0xa4, 0xe3, 0x6f, 0x4b, 0x26, 0xc3, 0xeb, 0x56, 0x4a, 0x6c, 0xf5, 0x36}
+	binaryIDCmdVoidString_In              = binary.ID{0xb9, 0xab, 0x97, 0x3e, 0x7b, 0xcd, 0xa3, 0x51, 0x80, 0x02, 0x78, 0x72, 0xef, 0x8c, 0x09, 0x7a, 0x38, 0x8f, 0xab, 0xac}
+	binaryIDCmdVoidString_Out             = binary.ID{0xe5, 0x7d, 0x1d, 0x4b, 0x30, 0x25, 0x62, 0xd1, 0xcf, 0xd9, 0xd7, 0xc3, 0x90, 0x0d, 0x3e, 0xcb, 0xc3, 0xc0, 0xa5, 0x8b}
+	binaryIDCmdVoidU16                    = binary.ID{0x8d, 0xb5, 0xb8, 0xdd, 0x67, 0xcd, 0xcf, 0x30, 0x2d, 0x86, 0xa5, 0xbf, 0x4e, 0xa7, 0x08, 0x20, 0xe9, 0x43, 0x78, 0xd4}
+	binaryIDCmdVoidU16_In                 = binary.ID{0x63, 0xc8, 0x6d, 0x49, 0x08, 0x06, 0x22, 0xd0, 0x35, 0xce, 0x67, 0xeb, 0x7c, 0x53, 0xbf, 0x45, 0xee, 0x5d, 0x46, 0x21}
+	binaryIDCmdVoidU16_Out                = binary.ID{0x45, 0x1b, 0xd6, 0xc1, 0x77, 0x09, 0xd3, 0x30, 0x50, 0x4e, 0x96, 0x77, 0xbe, 0xfd, 0x47, 0xf5, 0xf8, 0xa9, 0x9e, 0xff}
+	binaryIDCmdVoidU32                    = binary.ID{0x50, 0x36, 0xdb, 0x4b, 0xb7, 0x63, 0xb5, 0xa5, 0xc2, 0x10, 0xa4, 0x7b, 0xbf, 0x27, 0xc7, 0xfd, 0xa9, 0xb8, 0x35, 0x61}
+	binaryIDCmdVoidU32_In                 = binary.ID{0x57, 0x0b, 0x28, 0xf4, 0xb9, 0x9f, 0x49, 0xc0, 0x61, 0x3c, 0x0f, 0x74, 0x64, 0x21, 0xb6, 0x36, 0x82, 0x54, 0x6c, 0xfb}
+	binaryIDCmdVoidU32_Out                = binary.ID{0xb3, 0x89, 0x6a, 0x2f, 0x0b, 0x86, 0x82, 0x99, 0xfa, 0x6c, 0xc0, 0xfd, 0xa5, 0x3f, 0x9e, 0x54, 0xe8, 0x2d, 0x91, 0xf4}
+	binaryIDCmdVoidU64                    = binary.ID{0x64, 0x87, 0x14, 0xab, 0x1b, 0x8a, 0x7e, 0x95, 0xe4, 0x3f, 0x96, 0x63, 0x9d, 0xb8, 0xa1, 0x04, 0x38, 0xf6, 0x31, 0xdf}
+	binaryIDCmdVoidU64_In                 = binary.ID{0xff, 0x65, 0xf1, 0x19, 0xf1, 0x83, 0x1e, 0xa3, 0xec, 0xb7, 0xbf, 0x05, 0xd2, 0x01, 0x34, 0x49, 0x96, 0x24, 0xf5, 0x80}
+	binaryIDCmdVoidU64_Out                = binary.ID{0xa9, 0xf2, 0xf5, 0x8f, 0xfa, 0x7c, 0xfa, 0xe6, 0x2a, 0xba, 0x4b, 0x9b, 0xc5, 0x66, 0xd0, 0x38, 0x5f, 0xfa, 0x45, 0x72}
+	binaryIDCmdVoidU8                     = binary.ID{0x10, 0x59, 0xf1, 0x81, 0x29, 0xee, 0x78, 0x8a, 0x88, 0xc3, 0xcc, 0xe1, 0xdb, 0x27, 0x92, 0x4d, 0x87, 0x7b, 0x1e, 0xa6}
+	binaryIDCmdVoidU8_In                  = binary.ID{0x71, 0xe9, 0x6a, 0x42, 0xf3, 0xb7, 0xb8, 0x7d, 0x2b, 0xbf, 0xc2, 0x6e, 0x90, 0xce, 0xfc, 0xf4, 0x8f, 0x9d, 0x95, 0x3b}
+	binaryIDCmdVoidU8_Out                 = binary.ID{0xfc, 0x5d, 0x21, 0xa4, 0x08, 0x80, 0x75, 0xbf, 0xd1, 0x06, 0xde, 0x62, 0x38, 0x89, 0xba, 0x82, 0x3d, 0xa7, 0xb2, 0x31}
+	binaryIDCmdVoid_In                    = binary.ID{0xa5, 0x5f, 0x43, 0x9c, 0x2a, 0xa1, 0x4c, 0x57, 0xce, 0x2f, 0xa5, 0xe9, 0x24, 0xa1, 0x0e, 0x80, 0xc9, 0x4d, 0x50, 0x21}
+	binaryIDCmdVoid_Out                   = binary.ID{0x0a, 0x66, 0x32, 0xd7, 0x4e, 0x98, 0x3b, 0x60, 0x0c, 0x8c, 0x8e, 0x55, 0x3d, 0xeb, 0x45, 0x53, 0xa6, 0xce, 0x6a, 0xd1}
+	binaryIDGlobals                       = binary.ID{0xc0, 0x56, 0xa7, 0xd5, 0x53, 0x88, 0xac, 0xaa, 0x75, 0x81, 0x46, 0x04, 0x13, 0xd4, 0xd3, 0x88, 0x43, 0x9c, 0xef, 0x61}
+)
+
+type binaryClassCmdArrayOfFloat struct{}
+
+func (*CmdArrayOfFloat) Class() binary.Class {
+	return (*binaryClassCmdArrayOfFloat)(nil)
+}
+func doEncodeCmdArrayOfFloat(e binary.Encoder, o *CmdArrayOfFloat) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -311,8 +319,7 @@ func (o CmdArrayOfFloat) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdArrayOfFloat) Decode(d binary.Decoder) error {
+func doDecodeCmdArrayOfFloat(d binary.Decoder, o *CmdArrayOfFloat) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -326,8 +333,7 @@ func (o *CmdArrayOfFloat) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdArrayOfFloat) Skip(d binary.Decoder) error {
+func doSkipCmdArrayOfFloat(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -339,20 +345,52 @@ func (*CmdArrayOfFloat) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdArrayOfFloat) ID() binary.ID { return binaryIDCmdArrayOfFloat }
+func (*binaryClassCmdArrayOfFloat) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdArrayOfFloat(e, obj.(*CmdArrayOfFloat))
+}
+func (*binaryClassCmdArrayOfFloat) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdArrayOfFloat{}
+	return obj, doDecodeCmdArrayOfFloat(d, obj)
+}
+func (*binaryClassCmdArrayOfFloat) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdArrayOfFloat(d, obj.(*CmdArrayOfFloat))
+}
+func (*binaryClassCmdArrayOfFloat) Skip(d binary.Decoder) error { return doSkipCmdArrayOfFloat(d) }
 
-func (o CmdArrayOfFloat_In) Encode(e binary.Encoder) error {
+type binaryClassCmdArrayOfFloat_In struct{}
+
+func (*CmdArrayOfFloat_In) Class() binary.Class {
+	return (*binaryClassCmdArrayOfFloat_In)(nil)
+}
+func doEncodeCmdArrayOfFloat_In(e binary.Encoder, o *CmdArrayOfFloat_In) error {
 	return nil
 }
-
-func (o *CmdArrayOfFloat_In) Decode(d binary.Decoder) error {
+func doDecodeCmdArrayOfFloat_In(d binary.Decoder, o *CmdArrayOfFloat_In) error {
 	return nil
 }
-
-func (*CmdArrayOfFloat_In) Skip(d binary.Decoder) error {
+func doSkipCmdArrayOfFloat_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdArrayOfFloat_In) ID() binary.ID { return binaryIDCmdArrayOfFloat_In }
+func (*binaryClassCmdArrayOfFloat_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdArrayOfFloat_In(e, obj.(*CmdArrayOfFloat_In))
+}
+func (*binaryClassCmdArrayOfFloat_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdArrayOfFloat_In{}
+	return obj, doDecodeCmdArrayOfFloat_In(d, obj)
+}
+func (*binaryClassCmdArrayOfFloat_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdArrayOfFloat_In(d, obj.(*CmdArrayOfFloat_In))
+}
+func (*binaryClassCmdArrayOfFloat_In) Skip(d binary.Decoder) error { return doSkipCmdArrayOfFloat_In(d) }
 
-func (o CmdArrayOfFloat_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdArrayOfFloat_Out struct{}
+
+func (*CmdArrayOfFloat_Out) Class() binary.Class {
+	return (*binaryClassCmdArrayOfFloat_Out)(nil)
+}
+func doEncodeCmdArrayOfFloat_Out(e binary.Encoder, o *CmdArrayOfFloat_Out) error {
 	if err := e.Uint32(uint32(len(o.Result))); err != nil {
 		return err
 	}
@@ -363,8 +401,7 @@ func (o CmdArrayOfFloat_Out) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdArrayOfFloat_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdArrayOfFloat_Out(d binary.Decoder, o *CmdArrayOfFloat_Out) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -379,8 +416,7 @@ func (o *CmdArrayOfFloat_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdArrayOfFloat_Out) Skip(d binary.Decoder) error {
+func doSkipCmdArrayOfFloat_Out(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -392,8 +428,27 @@ func (*CmdArrayOfFloat_Out) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdArrayOfFloat_Out) ID() binary.ID { return binaryIDCmdArrayOfFloat_Out }
+func (*binaryClassCmdArrayOfFloat_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdArrayOfFloat_Out(e, obj.(*CmdArrayOfFloat_Out))
+}
+func (*binaryClassCmdArrayOfFloat_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdArrayOfFloat_Out{}
+	return obj, doDecodeCmdArrayOfFloat_Out(d, obj)
+}
+func (*binaryClassCmdArrayOfFloat_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdArrayOfFloat_Out(d, obj.(*CmdArrayOfFloat_Out))
+}
+func (*binaryClassCmdArrayOfFloat_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdArrayOfFloat_Out(d)
+}
 
-func (o CmdBool) Encode(e binary.Encoder) error {
+type binaryClassCmdBool struct{}
+
+func (*CmdBool) Class() binary.Class {
+	return (*binaryClassCmdBool)(nil)
+}
+func doEncodeCmdBool(e binary.Encoder, o *CmdBool) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -405,8 +460,7 @@ func (o CmdBool) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdBool) Decode(d binary.Decoder) error {
+func doDecodeCmdBool(d binary.Decoder, o *CmdBool) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -420,8 +474,7 @@ func (o *CmdBool) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdBool) Skip(d binary.Decoder) error {
+func doSkipCmdBool(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -433,27 +486,58 @@ func (*CmdBool) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdBool) ID() binary.ID { return binaryIDCmdBool }
+func (*binaryClassCmdBool) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdBool(e, obj.(*CmdBool))
+}
+func (*binaryClassCmdBool) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdBool{}
+	return obj, doDecodeCmdBool(d, obj)
+}
+func (*binaryClassCmdBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdBool(d, obj.(*CmdBool))
+}
+func (*binaryClassCmdBool) Skip(d binary.Decoder) error { return doSkipCmdBool(d) }
 
-func (o CmdBool_In) Encode(e binary.Encoder) error {
+type binaryClassCmdBool_In struct{}
+
+func (*CmdBool_In) Class() binary.Class {
+	return (*binaryClassCmdBool_In)(nil)
+}
+func doEncodeCmdBool_In(e binary.Encoder, o *CmdBool_In) error {
 	return nil
 }
-
-func (o *CmdBool_In) Decode(d binary.Decoder) error {
+func doDecodeCmdBool_In(d binary.Decoder, o *CmdBool_In) error {
 	return nil
 }
-
-func (*CmdBool_In) Skip(d binary.Decoder) error {
+func doSkipCmdBool_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdBool_In) ID() binary.ID { return binaryIDCmdBool_In }
+func (*binaryClassCmdBool_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdBool_In(e, obj.(*CmdBool_In))
+}
+func (*binaryClassCmdBool_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdBool_In{}
+	return obj, doDecodeCmdBool_In(d, obj)
+}
+func (*binaryClassCmdBool_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdBool_In(d, obj.(*CmdBool_In))
+}
+func (*binaryClassCmdBool_In) Skip(d binary.Decoder) error { return doSkipCmdBool_In(d) }
 
-func (o CmdBool_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdBool_Out struct{}
+
+func (*CmdBool_Out) Class() binary.Class {
+	return (*binaryClassCmdBool_Out)(nil)
+}
+func doEncodeCmdBool_Out(e binary.Encoder, o *CmdBool_Out) error {
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdBool_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdBool_Out(d binary.Decoder, o *CmdBool_Out) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -461,15 +545,31 @@ func (o *CmdBool_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdBool_Out) Skip(d binary.Decoder) error {
+func doSkipCmdBool_Out(d binary.Decoder) error {
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdBool_Out) ID() binary.ID { return binaryIDCmdBool_Out }
+func (*binaryClassCmdBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdBool_Out(e, obj.(*CmdBool_Out))
+}
+func (*binaryClassCmdBool_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdBool_Out{}
+	return obj, doDecodeCmdBool_Out(d, obj)
+}
+func (*binaryClassCmdBool_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdBool_Out(d, obj.(*CmdBool_Out))
+}
+func (*binaryClassCmdBool_Out) Skip(d binary.Decoder) error { return doSkipCmdBool_Out(d) }
 
-func (o CmdF32) Encode(e binary.Encoder) error {
+type binaryClassCmdF32 struct{}
+
+func (*CmdF32) Class() binary.Class {
+	return (*binaryClassCmdF32)(nil)
+}
+func doEncodeCmdF32(e binary.Encoder, o *CmdF32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -481,8 +581,7 @@ func (o CmdF32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdF32) Decode(d binary.Decoder) error {
+func doDecodeCmdF32(d binary.Decoder, o *CmdF32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -496,8 +595,7 @@ func (o *CmdF32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdF32) Skip(d binary.Decoder) error {
+func doSkipCmdF32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -509,27 +607,58 @@ func (*CmdF32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdF32) ID() binary.ID { return binaryIDCmdF32 }
+func (*binaryClassCmdF32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF32(e, obj.(*CmdF32))
+}
+func (*binaryClassCmdF32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF32{}
+	return obj, doDecodeCmdF32(d, obj)
+}
+func (*binaryClassCmdF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF32(d, obj.(*CmdF32))
+}
+func (*binaryClassCmdF32) Skip(d binary.Decoder) error { return doSkipCmdF32(d) }
 
-func (o CmdF32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdF32_In struct{}
+
+func (*CmdF32_In) Class() binary.Class {
+	return (*binaryClassCmdF32_In)(nil)
+}
+func doEncodeCmdF32_In(e binary.Encoder, o *CmdF32_In) error {
 	return nil
 }
-
-func (o *CmdF32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdF32_In(d binary.Decoder, o *CmdF32_In) error {
 	return nil
 }
-
-func (*CmdF32_In) Skip(d binary.Decoder) error {
+func doSkipCmdF32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdF32_In) ID() binary.ID { return binaryIDCmdF32_In }
+func (*binaryClassCmdF32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF32_In(e, obj.(*CmdF32_In))
+}
+func (*binaryClassCmdF32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF32_In{}
+	return obj, doDecodeCmdF32_In(d, obj)
+}
+func (*binaryClassCmdF32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF32_In(d, obj.(*CmdF32_In))
+}
+func (*binaryClassCmdF32_In) Skip(d binary.Decoder) error { return doSkipCmdF32_In(d) }
 
-func (o CmdF32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdF32_Out struct{}
+
+func (*CmdF32_Out) Class() binary.Class {
+	return (*binaryClassCmdF32_Out)(nil)
+}
+func doEncodeCmdF32_Out(e binary.Encoder, o *CmdF32_Out) error {
 	if err := e.Float32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdF32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdF32_Out(d binary.Decoder, o *CmdF32_Out) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -537,15 +666,31 @@ func (o *CmdF32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdF32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdF32_Out(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdF32_Out) ID() binary.ID { return binaryIDCmdF32_Out }
+func (*binaryClassCmdF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF32_Out(e, obj.(*CmdF32_Out))
+}
+func (*binaryClassCmdF32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF32_Out{}
+	return obj, doDecodeCmdF32_Out(d, obj)
+}
+func (*binaryClassCmdF32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF32_Out(d, obj.(*CmdF32_Out))
+}
+func (*binaryClassCmdF32_Out) Skip(d binary.Decoder) error { return doSkipCmdF32_Out(d) }
 
-func (o CmdF64) Encode(e binary.Encoder) error {
+type binaryClassCmdF64 struct{}
+
+func (*CmdF64) Class() binary.Class {
+	return (*binaryClassCmdF64)(nil)
+}
+func doEncodeCmdF64(e binary.Encoder, o *CmdF64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -557,8 +702,7 @@ func (o CmdF64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdF64) Decode(d binary.Decoder) error {
+func doDecodeCmdF64(d binary.Decoder, o *CmdF64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -572,8 +716,7 @@ func (o *CmdF64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdF64) Skip(d binary.Decoder) error {
+func doSkipCmdF64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -585,27 +728,58 @@ func (*CmdF64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdF64) ID() binary.ID { return binaryIDCmdF64 }
+func (*binaryClassCmdF64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF64(e, obj.(*CmdF64))
+}
+func (*binaryClassCmdF64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF64{}
+	return obj, doDecodeCmdF64(d, obj)
+}
+func (*binaryClassCmdF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF64(d, obj.(*CmdF64))
+}
+func (*binaryClassCmdF64) Skip(d binary.Decoder) error { return doSkipCmdF64(d) }
 
-func (o CmdF64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdF64_In struct{}
+
+func (*CmdF64_In) Class() binary.Class {
+	return (*binaryClassCmdF64_In)(nil)
+}
+func doEncodeCmdF64_In(e binary.Encoder, o *CmdF64_In) error {
 	return nil
 }
-
-func (o *CmdF64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdF64_In(d binary.Decoder, o *CmdF64_In) error {
 	return nil
 }
-
-func (*CmdF64_In) Skip(d binary.Decoder) error {
+func doSkipCmdF64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdF64_In) ID() binary.ID { return binaryIDCmdF64_In }
+func (*binaryClassCmdF64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF64_In(e, obj.(*CmdF64_In))
+}
+func (*binaryClassCmdF64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF64_In{}
+	return obj, doDecodeCmdF64_In(d, obj)
+}
+func (*binaryClassCmdF64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF64_In(d, obj.(*CmdF64_In))
+}
+func (*binaryClassCmdF64_In) Skip(d binary.Decoder) error { return doSkipCmdF64_In(d) }
 
-func (o CmdF64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdF64_Out struct{}
+
+func (*CmdF64_Out) Class() binary.Class {
+	return (*binaryClassCmdF64_Out)(nil)
+}
+func doEncodeCmdF64_Out(e binary.Encoder, o *CmdF64_Out) error {
 	if err := e.Float64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdF64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdF64_Out(d binary.Decoder, o *CmdF64_Out) error {
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -613,15 +787,31 @@ func (o *CmdF64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdF64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdF64_Out(d binary.Decoder) error {
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdF64_Out) ID() binary.ID { return binaryIDCmdF64_Out }
+func (*binaryClassCmdF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdF64_Out(e, obj.(*CmdF64_Out))
+}
+func (*binaryClassCmdF64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdF64_Out{}
+	return obj, doDecodeCmdF64_Out(d, obj)
+}
+func (*binaryClassCmdF64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdF64_Out(d, obj.(*CmdF64_Out))
+}
+func (*binaryClassCmdF64_Out) Skip(d binary.Decoder) error { return doSkipCmdF64_Out(d) }
 
-func (o CmdPointer) Encode(e binary.Encoder) error {
+type binaryClassCmdPointer struct{}
+
+func (*CmdPointer) Class() binary.Class {
+	return (*binaryClassCmdPointer)(nil)
+}
+func doEncodeCmdPointer(e binary.Encoder, o *CmdPointer) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -633,8 +823,7 @@ func (o CmdPointer) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdPointer) Decode(d binary.Decoder) error {
+func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -648,8 +837,7 @@ func (o *CmdPointer) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdPointer) Skip(d binary.Decoder) error {
+func doSkipCmdPointer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -661,27 +849,58 @@ func (*CmdPointer) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdPointer) ID() binary.ID { return binaryIDCmdPointer }
+func (*binaryClassCmdPointer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdPointer(e, obj.(*CmdPointer))
+}
+func (*binaryClassCmdPointer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdPointer{}
+	return obj, doDecodeCmdPointer(d, obj)
+}
+func (*binaryClassCmdPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdPointer(d, obj.(*CmdPointer))
+}
+func (*binaryClassCmdPointer) Skip(d binary.Decoder) error { return doSkipCmdPointer(d) }
 
-func (o CmdPointer_In) Encode(e binary.Encoder) error {
+type binaryClassCmdPointer_In struct{}
+
+func (*CmdPointer_In) Class() binary.Class {
+	return (*binaryClassCmdPointer_In)(nil)
+}
+func doEncodeCmdPointer_In(e binary.Encoder, o *CmdPointer_In) error {
 	return nil
 }
-
-func (o *CmdPointer_In) Decode(d binary.Decoder) error {
+func doDecodeCmdPointer_In(d binary.Decoder, o *CmdPointer_In) error {
 	return nil
 }
-
-func (*CmdPointer_In) Skip(d binary.Decoder) error {
+func doSkipCmdPointer_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdPointer_In) ID() binary.ID { return binaryIDCmdPointer_In }
+func (*binaryClassCmdPointer_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdPointer_In(e, obj.(*CmdPointer_In))
+}
+func (*binaryClassCmdPointer_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdPointer_In{}
+	return obj, doDecodeCmdPointer_In(d, obj)
+}
+func (*binaryClassCmdPointer_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdPointer_In(d, obj.(*CmdPointer_In))
+}
+func (*binaryClassCmdPointer_In) Skip(d binary.Decoder) error { return doSkipCmdPointer_In(d) }
 
-func (o CmdPointer_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdPointer_Out struct{}
+
+func (*CmdPointer_Out) Class() binary.Class {
+	return (*binaryClassCmdPointer_Out)(nil)
+}
+func doEncodeCmdPointer_Out(e binary.Encoder, o *CmdPointer_Out) error {
 	if err := e.Uint64(uint64(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdPointer_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdPointer_Out(d binary.Decoder, o *CmdPointer_Out) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -689,15 +908,31 @@ func (o *CmdPointer_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdPointer_Out) Skip(d binary.Decoder) error {
+func doSkipCmdPointer_Out(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdPointer_Out) ID() binary.ID { return binaryIDCmdPointer_Out }
+func (*binaryClassCmdPointer_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdPointer_Out(e, obj.(*CmdPointer_Out))
+}
+func (*binaryClassCmdPointer_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdPointer_Out{}
+	return obj, doDecodeCmdPointer_Out(d, obj)
+}
+func (*binaryClassCmdPointer_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdPointer_Out(d, obj.(*CmdPointer_Out))
+}
+func (*binaryClassCmdPointer_Out) Skip(d binary.Decoder) error { return doSkipCmdPointer_Out(d) }
 
-func (o CmdS16) Encode(e binary.Encoder) error {
+type binaryClassCmdS16 struct{}
+
+func (*CmdS16) Class() binary.Class {
+	return (*binaryClassCmdS16)(nil)
+}
+func doEncodeCmdS16(e binary.Encoder, o *CmdS16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -709,8 +944,7 @@ func (o CmdS16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdS16) Decode(d binary.Decoder) error {
+func doDecodeCmdS16(d binary.Decoder, o *CmdS16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -724,8 +958,7 @@ func (o *CmdS16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS16) Skip(d binary.Decoder) error {
+func doSkipCmdS16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -737,27 +970,58 @@ func (*CmdS16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdS16) ID() binary.ID { return binaryIDCmdS16 }
+func (*binaryClassCmdS16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS16(e, obj.(*CmdS16))
+}
+func (*binaryClassCmdS16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS16{}
+	return obj, doDecodeCmdS16(d, obj)
+}
+func (*binaryClassCmdS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS16(d, obj.(*CmdS16))
+}
+func (*binaryClassCmdS16) Skip(d binary.Decoder) error { return doSkipCmdS16(d) }
 
-func (o CmdS16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdS16_In struct{}
+
+func (*CmdS16_In) Class() binary.Class {
+	return (*binaryClassCmdS16_In)(nil)
+}
+func doEncodeCmdS16_In(e binary.Encoder, o *CmdS16_In) error {
 	return nil
 }
-
-func (o *CmdS16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdS16_In(d binary.Decoder, o *CmdS16_In) error {
 	return nil
 }
-
-func (*CmdS16_In) Skip(d binary.Decoder) error {
+func doSkipCmdS16_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdS16_In) ID() binary.ID { return binaryIDCmdS16_In }
+func (*binaryClassCmdS16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS16_In(e, obj.(*CmdS16_In))
+}
+func (*binaryClassCmdS16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS16_In{}
+	return obj, doDecodeCmdS16_In(d, obj)
+}
+func (*binaryClassCmdS16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS16_In(d, obj.(*CmdS16_In))
+}
+func (*binaryClassCmdS16_In) Skip(d binary.Decoder) error { return doSkipCmdS16_In(d) }
 
-func (o CmdS16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdS16_Out struct{}
+
+func (*CmdS16_Out) Class() binary.Class {
+	return (*binaryClassCmdS16_Out)(nil)
+}
+func doEncodeCmdS16_Out(e binary.Encoder, o *CmdS16_Out) error {
 	if err := e.Int16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdS16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdS16_Out(d binary.Decoder, o *CmdS16_Out) error {
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -765,15 +1029,31 @@ func (o *CmdS16_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdS16_Out(d binary.Decoder) error {
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdS16_Out) ID() binary.ID { return binaryIDCmdS16_Out }
+func (*binaryClassCmdS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS16_Out(e, obj.(*CmdS16_Out))
+}
+func (*binaryClassCmdS16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS16_Out{}
+	return obj, doDecodeCmdS16_Out(d, obj)
+}
+func (*binaryClassCmdS16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS16_Out(d, obj.(*CmdS16_Out))
+}
+func (*binaryClassCmdS16_Out) Skip(d binary.Decoder) error { return doSkipCmdS16_Out(d) }
 
-func (o CmdS32) Encode(e binary.Encoder) error {
+type binaryClassCmdS32 struct{}
+
+func (*CmdS32) Class() binary.Class {
+	return (*binaryClassCmdS32)(nil)
+}
+func doEncodeCmdS32(e binary.Encoder, o *CmdS32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -785,8 +1065,7 @@ func (o CmdS32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdS32) Decode(d binary.Decoder) error {
+func doDecodeCmdS32(d binary.Decoder, o *CmdS32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -800,8 +1079,7 @@ func (o *CmdS32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS32) Skip(d binary.Decoder) error {
+func doSkipCmdS32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -813,27 +1091,58 @@ func (*CmdS32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdS32) ID() binary.ID { return binaryIDCmdS32 }
+func (*binaryClassCmdS32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS32(e, obj.(*CmdS32))
+}
+func (*binaryClassCmdS32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS32{}
+	return obj, doDecodeCmdS32(d, obj)
+}
+func (*binaryClassCmdS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS32(d, obj.(*CmdS32))
+}
+func (*binaryClassCmdS32) Skip(d binary.Decoder) error { return doSkipCmdS32(d) }
 
-func (o CmdS32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdS32_In struct{}
+
+func (*CmdS32_In) Class() binary.Class {
+	return (*binaryClassCmdS32_In)(nil)
+}
+func doEncodeCmdS32_In(e binary.Encoder, o *CmdS32_In) error {
 	return nil
 }
-
-func (o *CmdS32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdS32_In(d binary.Decoder, o *CmdS32_In) error {
 	return nil
 }
-
-func (*CmdS32_In) Skip(d binary.Decoder) error {
+func doSkipCmdS32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdS32_In) ID() binary.ID { return binaryIDCmdS32_In }
+func (*binaryClassCmdS32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS32_In(e, obj.(*CmdS32_In))
+}
+func (*binaryClassCmdS32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS32_In{}
+	return obj, doDecodeCmdS32_In(d, obj)
+}
+func (*binaryClassCmdS32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS32_In(d, obj.(*CmdS32_In))
+}
+func (*binaryClassCmdS32_In) Skip(d binary.Decoder) error { return doSkipCmdS32_In(d) }
 
-func (o CmdS32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdS32_Out struct{}
+
+func (*CmdS32_Out) Class() binary.Class {
+	return (*binaryClassCmdS32_Out)(nil)
+}
+func doEncodeCmdS32_Out(e binary.Encoder, o *CmdS32_Out) error {
 	if err := e.Int32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdS32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdS32_Out(d binary.Decoder, o *CmdS32_Out) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -841,15 +1150,31 @@ func (o *CmdS32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdS32_Out(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdS32_Out) ID() binary.ID { return binaryIDCmdS32_Out }
+func (*binaryClassCmdS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS32_Out(e, obj.(*CmdS32_Out))
+}
+func (*binaryClassCmdS32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS32_Out{}
+	return obj, doDecodeCmdS32_Out(d, obj)
+}
+func (*binaryClassCmdS32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS32_Out(d, obj.(*CmdS32_Out))
+}
+func (*binaryClassCmdS32_Out) Skip(d binary.Decoder) error { return doSkipCmdS32_Out(d) }
 
-func (o CmdS64) Encode(e binary.Encoder) error {
+type binaryClassCmdS64 struct{}
+
+func (*CmdS64) Class() binary.Class {
+	return (*binaryClassCmdS64)(nil)
+}
+func doEncodeCmdS64(e binary.Encoder, o *CmdS64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -861,8 +1186,7 @@ func (o CmdS64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdS64) Decode(d binary.Decoder) error {
+func doDecodeCmdS64(d binary.Decoder, o *CmdS64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -876,8 +1200,7 @@ func (o *CmdS64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS64) Skip(d binary.Decoder) error {
+func doSkipCmdS64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -889,27 +1212,58 @@ func (*CmdS64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdS64) ID() binary.ID { return binaryIDCmdS64 }
+func (*binaryClassCmdS64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS64(e, obj.(*CmdS64))
+}
+func (*binaryClassCmdS64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS64{}
+	return obj, doDecodeCmdS64(d, obj)
+}
+func (*binaryClassCmdS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS64(d, obj.(*CmdS64))
+}
+func (*binaryClassCmdS64) Skip(d binary.Decoder) error { return doSkipCmdS64(d) }
 
-func (o CmdS64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdS64_In struct{}
+
+func (*CmdS64_In) Class() binary.Class {
+	return (*binaryClassCmdS64_In)(nil)
+}
+func doEncodeCmdS64_In(e binary.Encoder, o *CmdS64_In) error {
 	return nil
 }
-
-func (o *CmdS64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdS64_In(d binary.Decoder, o *CmdS64_In) error {
 	return nil
 }
-
-func (*CmdS64_In) Skip(d binary.Decoder) error {
+func doSkipCmdS64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdS64_In) ID() binary.ID { return binaryIDCmdS64_In }
+func (*binaryClassCmdS64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS64_In(e, obj.(*CmdS64_In))
+}
+func (*binaryClassCmdS64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS64_In{}
+	return obj, doDecodeCmdS64_In(d, obj)
+}
+func (*binaryClassCmdS64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS64_In(d, obj.(*CmdS64_In))
+}
+func (*binaryClassCmdS64_In) Skip(d binary.Decoder) error { return doSkipCmdS64_In(d) }
 
-func (o CmdS64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdS64_Out struct{}
+
+func (*CmdS64_Out) Class() binary.Class {
+	return (*binaryClassCmdS64_Out)(nil)
+}
+func doEncodeCmdS64_Out(e binary.Encoder, o *CmdS64_Out) error {
 	if err := e.Int64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdS64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdS64_Out(d binary.Decoder, o *CmdS64_Out) error {
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -917,15 +1271,31 @@ func (o *CmdS64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdS64_Out(d binary.Decoder) error {
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdS64_Out) ID() binary.ID { return binaryIDCmdS64_Out }
+func (*binaryClassCmdS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS64_Out(e, obj.(*CmdS64_Out))
+}
+func (*binaryClassCmdS64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS64_Out{}
+	return obj, doDecodeCmdS64_Out(d, obj)
+}
+func (*binaryClassCmdS64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS64_Out(d, obj.(*CmdS64_Out))
+}
+func (*binaryClassCmdS64_Out) Skip(d binary.Decoder) error { return doSkipCmdS64_Out(d) }
 
-func (o CmdS8) Encode(e binary.Encoder) error {
+type binaryClassCmdS8 struct{}
+
+func (*CmdS8) Class() binary.Class {
+	return (*binaryClassCmdS8)(nil)
+}
+func doEncodeCmdS8(e binary.Encoder, o *CmdS8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -937,8 +1307,7 @@ func (o CmdS8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdS8) Decode(d binary.Decoder) error {
+func doDecodeCmdS8(d binary.Decoder, o *CmdS8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -952,8 +1321,7 @@ func (o *CmdS8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS8) Skip(d binary.Decoder) error {
+func doSkipCmdS8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -965,27 +1333,58 @@ func (*CmdS8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdS8) ID() binary.ID { return binaryIDCmdS8 }
+func (*binaryClassCmdS8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS8(e, obj.(*CmdS8))
+}
+func (*binaryClassCmdS8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS8{}
+	return obj, doDecodeCmdS8(d, obj)
+}
+func (*binaryClassCmdS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS8(d, obj.(*CmdS8))
+}
+func (*binaryClassCmdS8) Skip(d binary.Decoder) error { return doSkipCmdS8(d) }
 
-func (o CmdS8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdS8_In struct{}
+
+func (*CmdS8_In) Class() binary.Class {
+	return (*binaryClassCmdS8_In)(nil)
+}
+func doEncodeCmdS8_In(e binary.Encoder, o *CmdS8_In) error {
 	return nil
 }
-
-func (o *CmdS8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdS8_In(d binary.Decoder, o *CmdS8_In) error {
 	return nil
 }
-
-func (*CmdS8_In) Skip(d binary.Decoder) error {
+func doSkipCmdS8_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdS8_In) ID() binary.ID { return binaryIDCmdS8_In }
+func (*binaryClassCmdS8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS8_In(e, obj.(*CmdS8_In))
+}
+func (*binaryClassCmdS8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS8_In{}
+	return obj, doDecodeCmdS8_In(d, obj)
+}
+func (*binaryClassCmdS8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS8_In(d, obj.(*CmdS8_In))
+}
+func (*binaryClassCmdS8_In) Skip(d binary.Decoder) error { return doSkipCmdS8_In(d) }
 
-func (o CmdS8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdS8_Out struct{}
+
+func (*CmdS8_Out) Class() binary.Class {
+	return (*binaryClassCmdS8_Out)(nil)
+}
+func doEncodeCmdS8_Out(e binary.Encoder, o *CmdS8_Out) error {
 	if err := e.Int8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdS8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdS8_Out(d binary.Decoder, o *CmdS8_Out) error {
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -993,15 +1392,31 @@ func (o *CmdS8_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdS8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdS8_Out(d binary.Decoder) error {
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdS8_Out) ID() binary.ID { return binaryIDCmdS8_Out }
+func (*binaryClassCmdS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdS8_Out(e, obj.(*CmdS8_Out))
+}
+func (*binaryClassCmdS8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdS8_Out{}
+	return obj, doDecodeCmdS8_Out(d, obj)
+}
+func (*binaryClassCmdS8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdS8_Out(d, obj.(*CmdS8_Out))
+}
+func (*binaryClassCmdS8_Out) Skip(d binary.Decoder) error { return doSkipCmdS8_Out(d) }
 
-func (o CmdString) Encode(e binary.Encoder) error {
+type binaryClassCmdString struct{}
+
+func (*CmdString) Class() binary.Class {
+	return (*binaryClassCmdString)(nil)
+}
+func doEncodeCmdString(e binary.Encoder, o *CmdString) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1013,8 +1428,7 @@ func (o CmdString) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdString) Decode(d binary.Decoder) error {
+func doDecodeCmdString(d binary.Decoder, o *CmdString) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1028,8 +1442,7 @@ func (o *CmdString) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdString) Skip(d binary.Decoder) error {
+func doSkipCmdString(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1041,27 +1454,58 @@ func (*CmdString) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdString) ID() binary.ID { return binaryIDCmdString }
+func (*binaryClassCmdString) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdString(e, obj.(*CmdString))
+}
+func (*binaryClassCmdString) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdString{}
+	return obj, doDecodeCmdString(d, obj)
+}
+func (*binaryClassCmdString) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdString(d, obj.(*CmdString))
+}
+func (*binaryClassCmdString) Skip(d binary.Decoder) error { return doSkipCmdString(d) }
 
-func (o CmdString_In) Encode(e binary.Encoder) error {
+type binaryClassCmdString_In struct{}
+
+func (*CmdString_In) Class() binary.Class {
+	return (*binaryClassCmdString_In)(nil)
+}
+func doEncodeCmdString_In(e binary.Encoder, o *CmdString_In) error {
 	return nil
 }
-
-func (o *CmdString_In) Decode(d binary.Decoder) error {
+func doDecodeCmdString_In(d binary.Decoder, o *CmdString_In) error {
 	return nil
 }
-
-func (*CmdString_In) Skip(d binary.Decoder) error {
+func doSkipCmdString_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdString_In) ID() binary.ID { return binaryIDCmdString_In }
+func (*binaryClassCmdString_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdString_In(e, obj.(*CmdString_In))
+}
+func (*binaryClassCmdString_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdString_In{}
+	return obj, doDecodeCmdString_In(d, obj)
+}
+func (*binaryClassCmdString_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdString_In(d, obj.(*CmdString_In))
+}
+func (*binaryClassCmdString_In) Skip(d binary.Decoder) error { return doSkipCmdString_In(d) }
 
-func (o CmdString_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdString_Out struct{}
+
+func (*CmdString_Out) Class() binary.Class {
+	return (*binaryClassCmdString_Out)(nil)
+}
+func doEncodeCmdString_Out(e binary.Encoder, o *CmdString_Out) error {
 	if err := e.String(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdString_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdString_Out(d binary.Decoder, o *CmdString_Out) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1069,16 +1513,31 @@ func (o *CmdString_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdString_Out) Skip(d binary.Decoder) error {
+func doSkipCmdString_Out(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassCmdString_Out) ID() binary.ID { return binaryIDCmdString_Out }
+func (*binaryClassCmdString_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdString_Out(e, obj.(*CmdString_Out))
+}
+func (*binaryClassCmdString_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdString_Out{}
+	return obj, doDecodeCmdString_Out(d, obj)
+}
+func (*binaryClassCmdString_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdString_Out(d, obj.(*CmdString_Out))
+}
+func (*binaryClassCmdString_Out) Skip(d binary.Decoder) error { return doSkipCmdString_Out(d) }
 
-func (o CmdU16) Encode(e binary.Encoder) error {
+type binaryClassCmdU16 struct{}
+
+func (*CmdU16) Class() binary.Class {
+	return (*binaryClassCmdU16)(nil)
+}
+func doEncodeCmdU16(e binary.Encoder, o *CmdU16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1090,8 +1549,7 @@ func (o CmdU16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdU16) Decode(d binary.Decoder) error {
+func doDecodeCmdU16(d binary.Decoder, o *CmdU16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1105,8 +1563,7 @@ func (o *CmdU16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU16) Skip(d binary.Decoder) error {
+func doSkipCmdU16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1118,27 +1575,58 @@ func (*CmdU16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdU16) ID() binary.ID { return binaryIDCmdU16 }
+func (*binaryClassCmdU16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU16(e, obj.(*CmdU16))
+}
+func (*binaryClassCmdU16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU16{}
+	return obj, doDecodeCmdU16(d, obj)
+}
+func (*binaryClassCmdU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU16(d, obj.(*CmdU16))
+}
+func (*binaryClassCmdU16) Skip(d binary.Decoder) error { return doSkipCmdU16(d) }
 
-func (o CmdU16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdU16_In struct{}
+
+func (*CmdU16_In) Class() binary.Class {
+	return (*binaryClassCmdU16_In)(nil)
+}
+func doEncodeCmdU16_In(e binary.Encoder, o *CmdU16_In) error {
 	return nil
 }
-
-func (o *CmdU16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdU16_In(d binary.Decoder, o *CmdU16_In) error {
 	return nil
 }
-
-func (*CmdU16_In) Skip(d binary.Decoder) error {
+func doSkipCmdU16_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdU16_In) ID() binary.ID { return binaryIDCmdU16_In }
+func (*binaryClassCmdU16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU16_In(e, obj.(*CmdU16_In))
+}
+func (*binaryClassCmdU16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU16_In{}
+	return obj, doDecodeCmdU16_In(d, obj)
+}
+func (*binaryClassCmdU16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU16_In(d, obj.(*CmdU16_In))
+}
+func (*binaryClassCmdU16_In) Skip(d binary.Decoder) error { return doSkipCmdU16_In(d) }
 
-func (o CmdU16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdU16_Out struct{}
+
+func (*CmdU16_Out) Class() binary.Class {
+	return (*binaryClassCmdU16_Out)(nil)
+}
+func doEncodeCmdU16_Out(e binary.Encoder, o *CmdU16_Out) error {
 	if err := e.Uint16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdU16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdU16_Out(d binary.Decoder, o *CmdU16_Out) error {
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -1146,15 +1634,31 @@ func (o *CmdU16_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdU16_Out(d binary.Decoder) error {
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdU16_Out) ID() binary.ID { return binaryIDCmdU16_Out }
+func (*binaryClassCmdU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU16_Out(e, obj.(*CmdU16_Out))
+}
+func (*binaryClassCmdU16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU16_Out{}
+	return obj, doDecodeCmdU16_Out(d, obj)
+}
+func (*binaryClassCmdU16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU16_Out(d, obj.(*CmdU16_Out))
+}
+func (*binaryClassCmdU16_Out) Skip(d binary.Decoder) error { return doSkipCmdU16_Out(d) }
 
-func (o CmdU32) Encode(e binary.Encoder) error {
+type binaryClassCmdU32 struct{}
+
+func (*CmdU32) Class() binary.Class {
+	return (*binaryClassCmdU32)(nil)
+}
+func doEncodeCmdU32(e binary.Encoder, o *CmdU32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1166,8 +1670,7 @@ func (o CmdU32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdU32) Decode(d binary.Decoder) error {
+func doDecodeCmdU32(d binary.Decoder, o *CmdU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1181,8 +1684,7 @@ func (o *CmdU32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU32) Skip(d binary.Decoder) error {
+func doSkipCmdU32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1194,27 +1696,58 @@ func (*CmdU32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdU32) ID() binary.ID { return binaryIDCmdU32 }
+func (*binaryClassCmdU32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU32(e, obj.(*CmdU32))
+}
+func (*binaryClassCmdU32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU32{}
+	return obj, doDecodeCmdU32(d, obj)
+}
+func (*binaryClassCmdU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU32(d, obj.(*CmdU32))
+}
+func (*binaryClassCmdU32) Skip(d binary.Decoder) error { return doSkipCmdU32(d) }
 
-func (o CmdU32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdU32_In struct{}
+
+func (*CmdU32_In) Class() binary.Class {
+	return (*binaryClassCmdU32_In)(nil)
+}
+func doEncodeCmdU32_In(e binary.Encoder, o *CmdU32_In) error {
 	return nil
 }
-
-func (o *CmdU32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdU32_In(d binary.Decoder, o *CmdU32_In) error {
 	return nil
 }
-
-func (*CmdU32_In) Skip(d binary.Decoder) error {
+func doSkipCmdU32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdU32_In) ID() binary.ID { return binaryIDCmdU32_In }
+func (*binaryClassCmdU32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU32_In(e, obj.(*CmdU32_In))
+}
+func (*binaryClassCmdU32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU32_In{}
+	return obj, doDecodeCmdU32_In(d, obj)
+}
+func (*binaryClassCmdU32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU32_In(d, obj.(*CmdU32_In))
+}
+func (*binaryClassCmdU32_In) Skip(d binary.Decoder) error { return doSkipCmdU32_In(d) }
 
-func (o CmdU32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdU32_Out struct{}
+
+func (*CmdU32_Out) Class() binary.Class {
+	return (*binaryClassCmdU32_Out)(nil)
+}
+func doEncodeCmdU32_Out(e binary.Encoder, o *CmdU32_Out) error {
 	if err := e.Uint32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdU32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdU32_Out(d binary.Decoder, o *CmdU32_Out) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1222,15 +1755,31 @@ func (o *CmdU32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdU32_Out(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdU32_Out) ID() binary.ID { return binaryIDCmdU32_Out }
+func (*binaryClassCmdU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU32_Out(e, obj.(*CmdU32_Out))
+}
+func (*binaryClassCmdU32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU32_Out{}
+	return obj, doDecodeCmdU32_Out(d, obj)
+}
+func (*binaryClassCmdU32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU32_Out(d, obj.(*CmdU32_Out))
+}
+func (*binaryClassCmdU32_Out) Skip(d binary.Decoder) error { return doSkipCmdU32_Out(d) }
 
-func (o CmdU64) Encode(e binary.Encoder) error {
+type binaryClassCmdU64 struct{}
+
+func (*CmdU64) Class() binary.Class {
+	return (*binaryClassCmdU64)(nil)
+}
+func doEncodeCmdU64(e binary.Encoder, o *CmdU64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1242,8 +1791,7 @@ func (o CmdU64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdU64) Decode(d binary.Decoder) error {
+func doDecodeCmdU64(d binary.Decoder, o *CmdU64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1257,8 +1805,7 @@ func (o *CmdU64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU64) Skip(d binary.Decoder) error {
+func doSkipCmdU64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1270,27 +1817,58 @@ func (*CmdU64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdU64) ID() binary.ID { return binaryIDCmdU64 }
+func (*binaryClassCmdU64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU64(e, obj.(*CmdU64))
+}
+func (*binaryClassCmdU64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU64{}
+	return obj, doDecodeCmdU64(d, obj)
+}
+func (*binaryClassCmdU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU64(d, obj.(*CmdU64))
+}
+func (*binaryClassCmdU64) Skip(d binary.Decoder) error { return doSkipCmdU64(d) }
 
-func (o CmdU64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdU64_In struct{}
+
+func (*CmdU64_In) Class() binary.Class {
+	return (*binaryClassCmdU64_In)(nil)
+}
+func doEncodeCmdU64_In(e binary.Encoder, o *CmdU64_In) error {
 	return nil
 }
-
-func (o *CmdU64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdU64_In(d binary.Decoder, o *CmdU64_In) error {
 	return nil
 }
-
-func (*CmdU64_In) Skip(d binary.Decoder) error {
+func doSkipCmdU64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdU64_In) ID() binary.ID { return binaryIDCmdU64_In }
+func (*binaryClassCmdU64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU64_In(e, obj.(*CmdU64_In))
+}
+func (*binaryClassCmdU64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU64_In{}
+	return obj, doDecodeCmdU64_In(d, obj)
+}
+func (*binaryClassCmdU64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU64_In(d, obj.(*CmdU64_In))
+}
+func (*binaryClassCmdU64_In) Skip(d binary.Decoder) error { return doSkipCmdU64_In(d) }
 
-func (o CmdU64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdU64_Out struct{}
+
+func (*CmdU64_Out) Class() binary.Class {
+	return (*binaryClassCmdU64_Out)(nil)
+}
+func doEncodeCmdU64_Out(e binary.Encoder, o *CmdU64_Out) error {
 	if err := e.Uint64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdU64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdU64_Out(d binary.Decoder, o *CmdU64_Out) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1298,15 +1876,31 @@ func (o *CmdU64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdU64_Out(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdU64_Out) ID() binary.ID { return binaryIDCmdU64_Out }
+func (*binaryClassCmdU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU64_Out(e, obj.(*CmdU64_Out))
+}
+func (*binaryClassCmdU64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU64_Out{}
+	return obj, doDecodeCmdU64_Out(d, obj)
+}
+func (*binaryClassCmdU64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU64_Out(d, obj.(*CmdU64_Out))
+}
+func (*binaryClassCmdU64_Out) Skip(d binary.Decoder) error { return doSkipCmdU64_Out(d) }
 
-func (o CmdU8) Encode(e binary.Encoder) error {
+type binaryClassCmdU8 struct{}
+
+func (*CmdU8) Class() binary.Class {
+	return (*binaryClassCmdU8)(nil)
+}
+func doEncodeCmdU8(e binary.Encoder, o *CmdU8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1318,8 +1912,7 @@ func (o CmdU8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdU8) Decode(d binary.Decoder) error {
+func doDecodeCmdU8(d binary.Decoder, o *CmdU8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1333,8 +1926,7 @@ func (o *CmdU8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU8) Skip(d binary.Decoder) error {
+func doSkipCmdU8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1346,27 +1938,58 @@ func (*CmdU8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdU8) ID() binary.ID { return binaryIDCmdU8 }
+func (*binaryClassCmdU8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU8(e, obj.(*CmdU8))
+}
+func (*binaryClassCmdU8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU8{}
+	return obj, doDecodeCmdU8(d, obj)
+}
+func (*binaryClassCmdU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU8(d, obj.(*CmdU8))
+}
+func (*binaryClassCmdU8) Skip(d binary.Decoder) error { return doSkipCmdU8(d) }
 
-func (o CmdU8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdU8_In struct{}
+
+func (*CmdU8_In) Class() binary.Class {
+	return (*binaryClassCmdU8_In)(nil)
+}
+func doEncodeCmdU8_In(e binary.Encoder, o *CmdU8_In) error {
 	return nil
 }
-
-func (o *CmdU8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdU8_In(d binary.Decoder, o *CmdU8_In) error {
 	return nil
 }
-
-func (*CmdU8_In) Skip(d binary.Decoder) error {
+func doSkipCmdU8_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdU8_In) ID() binary.ID { return binaryIDCmdU8_In }
+func (*binaryClassCmdU8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU8_In(e, obj.(*CmdU8_In))
+}
+func (*binaryClassCmdU8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU8_In{}
+	return obj, doDecodeCmdU8_In(d, obj)
+}
+func (*binaryClassCmdU8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU8_In(d, obj.(*CmdU8_In))
+}
+func (*binaryClassCmdU8_In) Skip(d binary.Decoder) error { return doSkipCmdU8_In(d) }
 
-func (o CmdU8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdU8_Out struct{}
+
+func (*CmdU8_Out) Class() binary.Class {
+	return (*binaryClassCmdU8_Out)(nil)
+}
+func doEncodeCmdU8_Out(e binary.Encoder, o *CmdU8_Out) error {
 	if err := e.Uint8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdU8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdU8_Out(d binary.Decoder, o *CmdU8_Out) error {
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -1374,15 +1997,31 @@ func (o *CmdU8_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdU8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdU8_Out(d binary.Decoder) error {
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdU8_Out) ID() binary.ID { return binaryIDCmdU8_Out }
+func (*binaryClassCmdU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdU8_Out(e, obj.(*CmdU8_Out))
+}
+func (*binaryClassCmdU8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdU8_Out{}
+	return obj, doDecodeCmdU8_Out(d, obj)
+}
+func (*binaryClassCmdU8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdU8_Out(d, obj.(*CmdU8_Out))
+}
+func (*binaryClassCmdU8_Out) Skip(d binary.Decoder) error { return doSkipCmdU8_Out(d) }
 
-func (o CmdVoid) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid struct{}
+
+func (*CmdVoid) Class() binary.Class {
+	return (*binaryClassCmdVoid)(nil)
+}
+func doEncodeCmdVoid(e binary.Encoder, o *CmdVoid) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1394,8 +2033,7 @@ func (o CmdVoid) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1409,8 +2047,7 @@ func (o *CmdVoid) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid) Skip(d binary.Decoder) error {
+func doSkipCmdVoid(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1422,8 +2059,25 @@ func (*CmdVoid) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoid) ID() binary.ID { return binaryIDCmdVoid }
+func (*binaryClassCmdVoid) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid(e, obj.(*CmdVoid))
+}
+func (*binaryClassCmdVoid) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid{}
+	return obj, doDecodeCmdVoid(d, obj)
+}
+func (*binaryClassCmdVoid) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid(d, obj.(*CmdVoid))
+}
+func (*binaryClassCmdVoid) Skip(d binary.Decoder) error { return doSkipCmdVoid(d) }
 
-func (o CmdVoid3Arrays) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Arrays struct{}
+
+func (*CmdVoid3Arrays) Class() binary.Class {
+	return (*binaryClassCmdVoid3Arrays)(nil)
+}
+func doEncodeCmdVoid3Arrays(e binary.Encoder, o *CmdVoid3Arrays) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1435,8 +2089,7 @@ func (o CmdVoid3Arrays) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Arrays) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Arrays(d binary.Decoder, o *CmdVoid3Arrays) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1450,8 +2103,7 @@ func (o *CmdVoid3Arrays) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Arrays) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Arrays(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1463,8 +2115,25 @@ func (*CmdVoid3Arrays) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoid3Arrays) ID() binary.ID { return binaryIDCmdVoid3Arrays }
+func (*binaryClassCmdVoid3Arrays) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Arrays(e, obj.(*CmdVoid3Arrays))
+}
+func (*binaryClassCmdVoid3Arrays) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Arrays{}
+	return obj, doDecodeCmdVoid3Arrays(d, obj)
+}
+func (*binaryClassCmdVoid3Arrays) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Arrays(d, obj.(*CmdVoid3Arrays))
+}
+func (*binaryClassCmdVoid3Arrays) Skip(d binary.Decoder) error { return doSkipCmdVoid3Arrays(d) }
 
-func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Arrays_In struct{}
+
+func (*CmdVoid3Arrays_In) Class() binary.Class {
+	return (*binaryClassCmdVoid3Arrays_In)(nil)
+}
+func doEncodeCmdVoid3Arrays_In(e binary.Encoder, o *CmdVoid3Arrays_In) error {
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -1491,8 +2160,7 @@ func (o CmdVoid3Arrays_In) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Arrays_In(d binary.Decoder, o *CmdVoid3Arrays_In) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1531,8 +2199,7 @@ func (o *CmdVoid3Arrays_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Arrays_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Arrays_In(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1549,7 +2216,6 @@ func (*CmdVoid3Arrays_In) Skip(d binary.Decoder) error {
 			if err := d.SkipString(); err != nil {
 				return err
 			}
-
 		}
 	}
 	if count, err := d.Uint32(); err != nil {
@@ -1563,20 +2229,52 @@ func (*CmdVoid3Arrays_In) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoid3Arrays_In) ID() binary.ID { return binaryIDCmdVoid3Arrays_In }
+func (*binaryClassCmdVoid3Arrays_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Arrays_In(e, obj.(*CmdVoid3Arrays_In))
+}
+func (*binaryClassCmdVoid3Arrays_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Arrays_In{}
+	return obj, doDecodeCmdVoid3Arrays_In(d, obj)
+}
+func (*binaryClassCmdVoid3Arrays_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Arrays_In(d, obj.(*CmdVoid3Arrays_In))
+}
+func (*binaryClassCmdVoid3Arrays_In) Skip(d binary.Decoder) error { return doSkipCmdVoid3Arrays_In(d) }
 
-func (o CmdVoid3Arrays_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Arrays_Out struct{}
+
+func (*CmdVoid3Arrays_Out) Class() binary.Class {
+	return (*binaryClassCmdVoid3Arrays_Out)(nil)
+}
+func doEncodeCmdVoid3Arrays_Out(e binary.Encoder, o *CmdVoid3Arrays_Out) error {
 	return nil
 }
-
-func (o *CmdVoid3Arrays_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Arrays_Out(d binary.Decoder, o *CmdVoid3Arrays_Out) error {
 	return nil
 }
-
-func (*CmdVoid3Arrays_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Arrays_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoid3Arrays_Out) ID() binary.ID { return binaryIDCmdVoid3Arrays_Out }
+func (*binaryClassCmdVoid3Arrays_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Arrays_Out(e, obj.(*CmdVoid3Arrays_Out))
+}
+func (*binaryClassCmdVoid3Arrays_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Arrays_Out{}
+	return obj, doDecodeCmdVoid3Arrays_Out(d, obj)
+}
+func (*binaryClassCmdVoid3Arrays_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Arrays_Out(d, obj.(*CmdVoid3Arrays_Out))
+}
+func (*binaryClassCmdVoid3Arrays_Out) Skip(d binary.Decoder) error { return doSkipCmdVoid3Arrays_Out(d) }
 
-func (o CmdVoid3Remapped) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Remapped struct{}
+
+func (*CmdVoid3Remapped) Class() binary.Class {
+	return (*binaryClassCmdVoid3Remapped)(nil)
+}
+func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1588,8 +2286,7 @@ func (o CmdVoid3Remapped) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Remapped) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1603,8 +2300,7 @@ func (o *CmdVoid3Remapped) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Remapped) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Remapped(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1616,8 +2312,25 @@ func (*CmdVoid3Remapped) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoid3Remapped) ID() binary.ID { return binaryIDCmdVoid3Remapped }
+func (*binaryClassCmdVoid3Remapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Remapped(e, obj.(*CmdVoid3Remapped))
+}
+func (*binaryClassCmdVoid3Remapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Remapped{}
+	return obj, doDecodeCmdVoid3Remapped(d, obj)
+}
+func (*binaryClassCmdVoid3Remapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Remapped(d, obj.(*CmdVoid3Remapped))
+}
+func (*binaryClassCmdVoid3Remapped) Skip(d binary.Decoder) error { return doSkipCmdVoid3Remapped(d) }
 
-func (o CmdVoid3Remapped_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Remapped_In struct{}
+
+func (*CmdVoid3Remapped_In) Class() binary.Class {
+	return (*binaryClassCmdVoid3Remapped_In)(nil)
+}
+func doEncodeCmdVoid3Remapped_In(e binary.Encoder, o *CmdVoid3Remapped_In) error {
 	if err := e.Uint32(uint32(o.A)); err != nil {
 		return err
 	}
@@ -1629,8 +2342,7 @@ func (o CmdVoid3Remapped_In) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Remapped_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Remapped_In(d binary.Decoder, o *CmdVoid3Remapped_In) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1648,8 +2360,7 @@ func (o *CmdVoid3Remapped_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Remapped_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Remapped_In(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1661,20 +2372,56 @@ func (*CmdVoid3Remapped_In) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (o CmdVoid3Remapped_Out) Encode(e binary.Encoder) error {
-	return nil
+func (*binaryClassCmdVoid3Remapped_In) ID() binary.ID { return binaryIDCmdVoid3Remapped_In }
+func (*binaryClassCmdVoid3Remapped_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Remapped_In(e, obj.(*CmdVoid3Remapped_In))
+}
+func (*binaryClassCmdVoid3Remapped_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Remapped_In{}
+	return obj, doDecodeCmdVoid3Remapped_In(d, obj)
+}
+func (*binaryClassCmdVoid3Remapped_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Remapped_In(d, obj.(*CmdVoid3Remapped_In))
+}
+func (*binaryClassCmdVoid3Remapped_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoid3Remapped_In(d)
 }
 
-func (o *CmdVoid3Remapped_Out) Decode(d binary.Decoder) error {
+type binaryClassCmdVoid3Remapped_Out struct{}
+
+func (*CmdVoid3Remapped_Out) Class() binary.Class {
+	return (*binaryClassCmdVoid3Remapped_Out)(nil)
+}
+func doEncodeCmdVoid3Remapped_Out(e binary.Encoder, o *CmdVoid3Remapped_Out) error {
 	return nil
 }
-
-func (*CmdVoid3Remapped_Out) Skip(d binary.Decoder) error {
+func doDecodeCmdVoid3Remapped_Out(d binary.Decoder, o *CmdVoid3Remapped_Out) error {
 	return nil
 }
+func doSkipCmdVoid3Remapped_Out(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassCmdVoid3Remapped_Out) ID() binary.ID { return binaryIDCmdVoid3Remapped_Out }
+func (*binaryClassCmdVoid3Remapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Remapped_Out(e, obj.(*CmdVoid3Remapped_Out))
+}
+func (*binaryClassCmdVoid3Remapped_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Remapped_Out{}
+	return obj, doDecodeCmdVoid3Remapped_Out(d, obj)
+}
+func (*binaryClassCmdVoid3Remapped_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Remapped_Out(d, obj.(*CmdVoid3Remapped_Out))
+}
+func (*binaryClassCmdVoid3Remapped_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoid3Remapped_Out(d)
+}
 
-func (o CmdVoid3Strings) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Strings struct{}
+
+func (*CmdVoid3Strings) Class() binary.Class {
+	return (*binaryClassCmdVoid3Strings)(nil)
+}
+func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1686,8 +2433,7 @@ func (o CmdVoid3Strings) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Strings) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1701,8 +2447,7 @@ func (o *CmdVoid3Strings) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Strings) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Strings(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1714,8 +2459,25 @@ func (*CmdVoid3Strings) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoid3Strings) ID() binary.ID { return binaryIDCmdVoid3Strings }
+func (*binaryClassCmdVoid3Strings) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Strings(e, obj.(*CmdVoid3Strings))
+}
+func (*binaryClassCmdVoid3Strings) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Strings{}
+	return obj, doDecodeCmdVoid3Strings(d, obj)
+}
+func (*binaryClassCmdVoid3Strings) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Strings(d, obj.(*CmdVoid3Strings))
+}
+func (*binaryClassCmdVoid3Strings) Skip(d binary.Decoder) error { return doSkipCmdVoid3Strings(d) }
 
-func (o CmdVoid3Strings_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Strings_In struct{}
+
+func (*CmdVoid3Strings_In) Class() binary.Class {
+	return (*binaryClassCmdVoid3Strings_In)(nil)
+}
+func doEncodeCmdVoid3Strings_In(e binary.Encoder, o *CmdVoid3Strings_In) error {
 	if err := e.String(o.A); err != nil {
 		return err
 	}
@@ -1727,8 +2489,7 @@ func (o CmdVoid3Strings_In) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoid3Strings_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Strings_In(d binary.Decoder, o *CmdVoid3Strings_In) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1746,36 +2507,66 @@ func (o *CmdVoid3Strings_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoid3Strings_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Strings_In(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassCmdVoid3Strings_In) ID() binary.ID { return binaryIDCmdVoid3Strings_In }
+func (*binaryClassCmdVoid3Strings_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Strings_In(e, obj.(*CmdVoid3Strings_In))
+}
+func (*binaryClassCmdVoid3Strings_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Strings_In{}
+	return obj, doDecodeCmdVoid3Strings_In(d, obj)
+}
+func (*binaryClassCmdVoid3Strings_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Strings_In(d, obj.(*CmdVoid3Strings_In))
+}
+func (*binaryClassCmdVoid3Strings_In) Skip(d binary.Decoder) error { return doSkipCmdVoid3Strings_In(d) }
 
-func (o CmdVoid3Strings_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid3Strings_Out struct{}
+
+func (*CmdVoid3Strings_Out) Class() binary.Class {
+	return (*binaryClassCmdVoid3Strings_Out)(nil)
+}
+func doEncodeCmdVoid3Strings_Out(e binary.Encoder, o *CmdVoid3Strings_Out) error {
 	return nil
 }
-
-func (o *CmdVoid3Strings_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid3Strings_Out(d binary.Decoder, o *CmdVoid3Strings_Out) error {
 	return nil
 }
-
-func (*CmdVoid3Strings_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoid3Strings_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoid3Strings_Out) ID() binary.ID { return binaryIDCmdVoid3Strings_Out }
+func (*binaryClassCmdVoid3Strings_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3Strings_Out(e, obj.(*CmdVoid3Strings_Out))
+}
+func (*binaryClassCmdVoid3Strings_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3Strings_Out{}
+	return obj, doDecodeCmdVoid3Strings_Out(d, obj)
+}
+func (*binaryClassCmdVoid3Strings_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3Strings_Out(d, obj.(*CmdVoid3Strings_Out))
+}
+func (*binaryClassCmdVoid3Strings_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoid3Strings_Out(d)
+}
 
-func (o CmdVoidArrayOfStrings) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidArrayOfStrings struct{}
+
+func (*CmdVoidArrayOfStrings) Class() binary.Class {
+	return (*binaryClassCmdVoidArrayOfStrings)(nil)
+}
+func doEncodeCmdVoidArrayOfStrings(e binary.Encoder, o *CmdVoidArrayOfStrings) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1787,8 +2578,7 @@ func (o CmdVoidArrayOfStrings) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidArrayOfStrings) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidArrayOfStrings(d binary.Decoder, o *CmdVoidArrayOfStrings) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1802,8 +2592,7 @@ func (o *CmdVoidArrayOfStrings) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
+func doSkipCmdVoidArrayOfStrings(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1815,8 +2604,27 @@ func (*CmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidArrayOfStrings) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings }
+func (*binaryClassCmdVoidArrayOfStrings) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidArrayOfStrings(e, obj.(*CmdVoidArrayOfStrings))
+}
+func (*binaryClassCmdVoidArrayOfStrings) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidArrayOfStrings{}
+	return obj, doDecodeCmdVoidArrayOfStrings(d, obj)
+}
+func (*binaryClassCmdVoidArrayOfStrings) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidArrayOfStrings(d, obj.(*CmdVoidArrayOfStrings))
+}
+func (*binaryClassCmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidArrayOfStrings(d)
+}
 
-func (o CmdVoidArrayOfStrings_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidArrayOfStrings_In struct{}
+
+func (*CmdVoidArrayOfStrings_In) Class() binary.Class {
+	return (*binaryClassCmdVoidArrayOfStrings_In)(nil)
+}
+func doEncodeCmdVoidArrayOfStrings_In(e binary.Encoder, o *CmdVoidArrayOfStrings_In) error {
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -1827,8 +2635,7 @@ func (o CmdVoidArrayOfStrings_In) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidArrayOfStrings_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidArrayOfStrings_In(d binary.Decoder, o *CmdVoidArrayOfStrings_In) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1843,8 +2650,7 @@ func (o *CmdVoidArrayOfStrings_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidArrayOfStrings_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidArrayOfStrings_In(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1852,25 +2658,60 @@ func (*CmdVoidArrayOfStrings_In) Skip(d binary.Decoder) error {
 			if err := d.SkipString(); err != nil {
 				return err
 			}
-
 		}
 	}
 	return nil
 }
-
-func (o CmdVoidArrayOfStrings_Out) Encode(e binary.Encoder) error {
-	return nil
+func (*binaryClassCmdVoidArrayOfStrings_In) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings_In }
+func (*binaryClassCmdVoidArrayOfStrings_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidArrayOfStrings_In(e, obj.(*CmdVoidArrayOfStrings_In))
+}
+func (*binaryClassCmdVoidArrayOfStrings_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidArrayOfStrings_In{}
+	return obj, doDecodeCmdVoidArrayOfStrings_In(d, obj)
+}
+func (*binaryClassCmdVoidArrayOfStrings_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidArrayOfStrings_In(d, obj.(*CmdVoidArrayOfStrings_In))
+}
+func (*binaryClassCmdVoidArrayOfStrings_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidArrayOfStrings_In(d)
 }
 
-func (o *CmdVoidArrayOfStrings_Out) Decode(d binary.Decoder) error {
+type binaryClassCmdVoidArrayOfStrings_Out struct{}
+
+func (*CmdVoidArrayOfStrings_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidArrayOfStrings_Out)(nil)
+}
+func doEncodeCmdVoidArrayOfStrings_Out(e binary.Encoder, o *CmdVoidArrayOfStrings_Out) error {
 	return nil
 }
-
-func (*CmdVoidArrayOfStrings_Out) Skip(d binary.Decoder) error {
+func doDecodeCmdVoidArrayOfStrings_Out(d binary.Decoder, o *CmdVoidArrayOfStrings_Out) error {
 	return nil
 }
+func doSkipCmdVoidArrayOfStrings_Out(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassCmdVoidArrayOfStrings_Out) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings_Out }
+func (*binaryClassCmdVoidArrayOfStrings_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidArrayOfStrings_Out(e, obj.(*CmdVoidArrayOfStrings_Out))
+}
+func (*binaryClassCmdVoidArrayOfStrings_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidArrayOfStrings_Out{}
+	return obj, doDecodeCmdVoidArrayOfStrings_Out(d, obj)
+}
+func (*binaryClassCmdVoidArrayOfStrings_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidArrayOfStrings_Out(d, obj.(*CmdVoidArrayOfStrings_Out))
+}
+func (*binaryClassCmdVoidArrayOfStrings_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidArrayOfStrings_Out(d)
+}
 
-func (o CmdVoidBool) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidBool struct{}
+
+func (*CmdVoidBool) Class() binary.Class {
+	return (*binaryClassCmdVoidBool)(nil)
+}
+func doEncodeCmdVoidBool(e binary.Encoder, o *CmdVoidBool) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1882,8 +2723,7 @@ func (o CmdVoidBool) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidBool) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1897,8 +2737,7 @@ func (o *CmdVoidBool) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidBool) Skip(d binary.Decoder) error {
+func doSkipCmdVoidBool(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1910,15 +2749,31 @@ func (*CmdVoidBool) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidBool) ID() binary.ID { return binaryIDCmdVoidBool }
+func (*binaryClassCmdVoidBool) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidBool(e, obj.(*CmdVoidBool))
+}
+func (*binaryClassCmdVoidBool) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidBool{}
+	return obj, doDecodeCmdVoidBool(d, obj)
+}
+func (*binaryClassCmdVoidBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidBool(d, obj.(*CmdVoidBool))
+}
+func (*binaryClassCmdVoidBool) Skip(d binary.Decoder) error { return doSkipCmdVoidBool(d) }
 
-func (o CmdVoidBool_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidBool_In struct{}
+
+func (*CmdVoidBool_In) Class() binary.Class {
+	return (*binaryClassCmdVoidBool_In)(nil)
+}
+func doEncodeCmdVoidBool_In(e binary.Encoder, o *CmdVoidBool_In) error {
 	if err := e.Bool(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidBool_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidBool_In(d binary.Decoder, o *CmdVoidBool_In) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -1926,27 +2781,58 @@ func (o *CmdVoidBool_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidBool_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidBool_In(d binary.Decoder) error {
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidBool_In) ID() binary.ID { return binaryIDCmdVoidBool_In }
+func (*binaryClassCmdVoidBool_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidBool_In(e, obj.(*CmdVoidBool_In))
+}
+func (*binaryClassCmdVoidBool_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidBool_In{}
+	return obj, doDecodeCmdVoidBool_In(d, obj)
+}
+func (*binaryClassCmdVoidBool_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidBool_In(d, obj.(*CmdVoidBool_In))
+}
+func (*binaryClassCmdVoidBool_In) Skip(d binary.Decoder) error { return doSkipCmdVoidBool_In(d) }
 
-func (o CmdVoidBool_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidBool_Out struct{}
+
+func (*CmdVoidBool_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidBool_Out)(nil)
+}
+func doEncodeCmdVoidBool_Out(e binary.Encoder, o *CmdVoidBool_Out) error {
 	return nil
 }
-
-func (o *CmdVoidBool_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidBool_Out(d binary.Decoder, o *CmdVoidBool_Out) error {
 	return nil
 }
-
-func (*CmdVoidBool_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidBool_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidBool_Out) ID() binary.ID { return binaryIDCmdVoidBool_Out }
+func (*binaryClassCmdVoidBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidBool_Out(e, obj.(*CmdVoidBool_Out))
+}
+func (*binaryClassCmdVoidBool_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidBool_Out{}
+	return obj, doDecodeCmdVoidBool_Out(d, obj)
+}
+func (*binaryClassCmdVoidBool_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidBool_Out(d, obj.(*CmdVoidBool_Out))
+}
+func (*binaryClassCmdVoidBool_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidBool_Out(d) }
 
-func (o CmdVoidF32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF32 struct{}
+
+func (*CmdVoidF32) Class() binary.Class {
+	return (*binaryClassCmdVoidF32)(nil)
+}
+func doEncodeCmdVoidF32(e binary.Encoder, o *CmdVoidF32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -1958,8 +2844,7 @@ func (o CmdVoidF32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidF32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1973,8 +2858,7 @@ func (o *CmdVoidF32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidF32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1986,15 +2870,31 @@ func (*CmdVoidF32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidF32) ID() binary.ID { return binaryIDCmdVoidF32 }
+func (*binaryClassCmdVoidF32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF32(e, obj.(*CmdVoidF32))
+}
+func (*binaryClassCmdVoidF32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF32{}
+	return obj, doDecodeCmdVoidF32(d, obj)
+}
+func (*binaryClassCmdVoidF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF32(d, obj.(*CmdVoidF32))
+}
+func (*binaryClassCmdVoidF32) Skip(d binary.Decoder) error { return doSkipCmdVoidF32(d) }
 
-func (o CmdVoidF32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF32_In struct{}
+
+func (*CmdVoidF32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidF32_In)(nil)
+}
+func doEncodeCmdVoidF32_In(e binary.Encoder, o *CmdVoidF32_In) error {
 	if err := e.Float32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidF32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF32_In(d binary.Decoder, o *CmdVoidF32_In) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -2002,27 +2902,58 @@ func (o *CmdVoidF32_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidF32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF32_In(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidF32_In) ID() binary.ID { return binaryIDCmdVoidF32_In }
+func (*binaryClassCmdVoidF32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF32_In(e, obj.(*CmdVoidF32_In))
+}
+func (*binaryClassCmdVoidF32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF32_In{}
+	return obj, doDecodeCmdVoidF32_In(d, obj)
+}
+func (*binaryClassCmdVoidF32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF32_In(d, obj.(*CmdVoidF32_In))
+}
+func (*binaryClassCmdVoidF32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidF32_In(d) }
 
-func (o CmdVoidF32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF32_Out struct{}
+
+func (*CmdVoidF32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidF32_Out)(nil)
+}
+func doEncodeCmdVoidF32_Out(e binary.Encoder, o *CmdVoidF32_Out) error {
 	return nil
 }
-
-func (o *CmdVoidF32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF32_Out(d binary.Decoder, o *CmdVoidF32_Out) error {
 	return nil
 }
-
-func (*CmdVoidF32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF32_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidF32_Out) ID() binary.ID { return binaryIDCmdVoidF32_Out }
+func (*binaryClassCmdVoidF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF32_Out(e, obj.(*CmdVoidF32_Out))
+}
+func (*binaryClassCmdVoidF32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF32_Out{}
+	return obj, doDecodeCmdVoidF32_Out(d, obj)
+}
+func (*binaryClassCmdVoidF32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF32_Out(d, obj.(*CmdVoidF32_Out))
+}
+func (*binaryClassCmdVoidF32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidF32_Out(d) }
 
-func (o CmdVoidF64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF64 struct{}
+
+func (*CmdVoidF64) Class() binary.Class {
+	return (*binaryClassCmdVoidF64)(nil)
+}
+func doEncodeCmdVoidF64(e binary.Encoder, o *CmdVoidF64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2034,8 +2965,7 @@ func (o CmdVoidF64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidF64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2049,8 +2979,7 @@ func (o *CmdVoidF64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidF64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2062,15 +2991,31 @@ func (*CmdVoidF64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidF64) ID() binary.ID { return binaryIDCmdVoidF64 }
+func (*binaryClassCmdVoidF64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF64(e, obj.(*CmdVoidF64))
+}
+func (*binaryClassCmdVoidF64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF64{}
+	return obj, doDecodeCmdVoidF64(d, obj)
+}
+func (*binaryClassCmdVoidF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF64(d, obj.(*CmdVoidF64))
+}
+func (*binaryClassCmdVoidF64) Skip(d binary.Decoder) error { return doSkipCmdVoidF64(d) }
 
-func (o CmdVoidF64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF64_In struct{}
+
+func (*CmdVoidF64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidF64_In)(nil)
+}
+func doEncodeCmdVoidF64_In(e binary.Encoder, o *CmdVoidF64_In) error {
 	if err := e.Float64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidF64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF64_In(d binary.Decoder, o *CmdVoidF64_In) error {
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -2078,27 +3023,58 @@ func (o *CmdVoidF64_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidF64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF64_In(d binary.Decoder) error {
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidF64_In) ID() binary.ID { return binaryIDCmdVoidF64_In }
+func (*binaryClassCmdVoidF64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF64_In(e, obj.(*CmdVoidF64_In))
+}
+func (*binaryClassCmdVoidF64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF64_In{}
+	return obj, doDecodeCmdVoidF64_In(d, obj)
+}
+func (*binaryClassCmdVoidF64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF64_In(d, obj.(*CmdVoidF64_In))
+}
+func (*binaryClassCmdVoidF64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidF64_In(d) }
 
-func (o CmdVoidF64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidF64_Out struct{}
+
+func (*CmdVoidF64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidF64_Out)(nil)
+}
+func doEncodeCmdVoidF64_Out(e binary.Encoder, o *CmdVoidF64_Out) error {
 	return nil
 }
-
-func (o *CmdVoidF64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidF64_Out(d binary.Decoder, o *CmdVoidF64_Out) error {
 	return nil
 }
-
-func (*CmdVoidF64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidF64_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidF64_Out) ID() binary.ID { return binaryIDCmdVoidF64_Out }
+func (*binaryClassCmdVoidF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidF64_Out(e, obj.(*CmdVoidF64_Out))
+}
+func (*binaryClassCmdVoidF64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidF64_Out{}
+	return obj, doDecodeCmdVoidF64_Out(d, obj)
+}
+func (*binaryClassCmdVoidF64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidF64_Out(d, obj.(*CmdVoidF64_Out))
+}
+func (*binaryClassCmdVoidF64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidF64_Out(d) }
 
-func (o CmdVoidOut3Remapped) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOut3Remapped struct{}
+
+func (*CmdVoidOut3Remapped) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Remapped)(nil)
+}
+func doEncodeCmdVoidOut3Remapped(e binary.Encoder, o *CmdVoidOut3Remapped) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2110,8 +3086,7 @@ func (o CmdVoidOut3Remapped) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOut3Remapped) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Remapped(d binary.Decoder, o *CmdVoidOut3Remapped) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2125,8 +3100,7 @@ func (o *CmdVoidOut3Remapped) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOut3Remapped) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOut3Remapped(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2138,20 +3112,56 @@ func (*CmdVoidOut3Remapped) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (o CmdVoidOut3Remapped_In) Encode(e binary.Encoder) error {
-	return nil
+func (*binaryClassCmdVoidOut3Remapped) ID() binary.ID { return binaryIDCmdVoidOut3Remapped }
+func (*binaryClassCmdVoidOut3Remapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Remapped(e, obj.(*CmdVoidOut3Remapped))
+}
+func (*binaryClassCmdVoidOut3Remapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Remapped{}
+	return obj, doDecodeCmdVoidOut3Remapped(d, obj)
+}
+func (*binaryClassCmdVoidOut3Remapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Remapped(d, obj.(*CmdVoidOut3Remapped))
+}
+func (*binaryClassCmdVoidOut3Remapped) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOut3Remapped(d)
 }
 
-func (o *CmdVoidOut3Remapped_In) Decode(d binary.Decoder) error {
+type binaryClassCmdVoidOut3Remapped_In struct{}
+
+func (*CmdVoidOut3Remapped_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Remapped_In)(nil)
+}
+func doEncodeCmdVoidOut3Remapped_In(e binary.Encoder, o *CmdVoidOut3Remapped_In) error {
 	return nil
 }
-
-func (*CmdVoidOut3Remapped_In) Skip(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Remapped_In(d binary.Decoder, o *CmdVoidOut3Remapped_In) error {
 	return nil
 }
+func doSkipCmdVoidOut3Remapped_In(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassCmdVoidOut3Remapped_In) ID() binary.ID { return binaryIDCmdVoidOut3Remapped_In }
+func (*binaryClassCmdVoidOut3Remapped_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Remapped_In(e, obj.(*CmdVoidOut3Remapped_In))
+}
+func (*binaryClassCmdVoidOut3Remapped_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Remapped_In{}
+	return obj, doDecodeCmdVoidOut3Remapped_In(d, obj)
+}
+func (*binaryClassCmdVoidOut3Remapped_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Remapped_In(d, obj.(*CmdVoidOut3Remapped_In))
+}
+func (*binaryClassCmdVoidOut3Remapped_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOut3Remapped_In(d)
+}
 
-func (o CmdVoidOut3Remapped_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOut3Remapped_Out struct{}
+
+func (*CmdVoidOut3Remapped_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Remapped_Out)(nil)
+}
+func doEncodeCmdVoidOut3Remapped_Out(e binary.Encoder, o *CmdVoidOut3Remapped_Out) error {
 	if err := e.Uint32(uint32(o.A)); err != nil {
 		return err
 	}
@@ -2163,8 +3173,7 @@ func (o CmdVoidOut3Remapped_Out) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOut3Remapped_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Remapped_Out(d binary.Decoder, o *CmdVoidOut3Remapped_Out) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2182,8 +3191,7 @@ func (o *CmdVoidOut3Remapped_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOut3Remapped_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOut3Remapped_Out(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2195,8 +3203,27 @@ func (*CmdVoidOut3Remapped_Out) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOut3Remapped_Out) ID() binary.ID { return binaryIDCmdVoidOut3Remapped_Out }
+func (*binaryClassCmdVoidOut3Remapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Remapped_Out(e, obj.(*CmdVoidOut3Remapped_Out))
+}
+func (*binaryClassCmdVoidOut3Remapped_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Remapped_Out{}
+	return obj, doDecodeCmdVoidOut3Remapped_Out(d, obj)
+}
+func (*binaryClassCmdVoidOut3Remapped_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Remapped_Out(d, obj.(*CmdVoidOut3Remapped_Out))
+}
+func (*binaryClassCmdVoidOut3Remapped_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOut3Remapped_Out(d)
+}
 
-func (o CmdVoidOut3Strings) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOut3Strings struct{}
+
+func (*CmdVoidOut3Strings) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Strings)(nil)
+}
+func doEncodeCmdVoidOut3Strings(e binary.Encoder, o *CmdVoidOut3Strings) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2208,8 +3235,7 @@ func (o CmdVoidOut3Strings) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOut3Strings) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Strings(d binary.Decoder, o *CmdVoidOut3Strings) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2223,8 +3249,7 @@ func (o *CmdVoidOut3Strings) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOut3Strings) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOut3Strings(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2236,20 +3261,54 @@ func (*CmdVoidOut3Strings) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOut3Strings) ID() binary.ID { return binaryIDCmdVoidOut3Strings }
+func (*binaryClassCmdVoidOut3Strings) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Strings(e, obj.(*CmdVoidOut3Strings))
+}
+func (*binaryClassCmdVoidOut3Strings) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Strings{}
+	return obj, doDecodeCmdVoidOut3Strings(d, obj)
+}
+func (*binaryClassCmdVoidOut3Strings) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Strings(d, obj.(*CmdVoidOut3Strings))
+}
+func (*binaryClassCmdVoidOut3Strings) Skip(d binary.Decoder) error { return doSkipCmdVoidOut3Strings(d) }
 
-func (o CmdVoidOut3Strings_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOut3Strings_In struct{}
+
+func (*CmdVoidOut3Strings_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Strings_In)(nil)
+}
+func doEncodeCmdVoidOut3Strings_In(e binary.Encoder, o *CmdVoidOut3Strings_In) error {
 	return nil
 }
-
-func (o *CmdVoidOut3Strings_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Strings_In(d binary.Decoder, o *CmdVoidOut3Strings_In) error {
 	return nil
 }
-
-func (*CmdVoidOut3Strings_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOut3Strings_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOut3Strings_In) ID() binary.ID { return binaryIDCmdVoidOut3Strings_In }
+func (*binaryClassCmdVoidOut3Strings_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Strings_In(e, obj.(*CmdVoidOut3Strings_In))
+}
+func (*binaryClassCmdVoidOut3Strings_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Strings_In{}
+	return obj, doDecodeCmdVoidOut3Strings_In(d, obj)
+}
+func (*binaryClassCmdVoidOut3Strings_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Strings_In(d, obj.(*CmdVoidOut3Strings_In))
+}
+func (*binaryClassCmdVoidOut3Strings_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOut3Strings_In(d)
+}
 
-func (o CmdVoidOut3Strings_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOut3Strings_Out struct{}
+
+func (*CmdVoidOut3Strings_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOut3Strings_Out)(nil)
+}
+func doEncodeCmdVoidOut3Strings_Out(e binary.Encoder, o *CmdVoidOut3Strings_Out) error {
 	if err := e.String(o.A); err != nil {
 		return err
 	}
@@ -2261,8 +3320,7 @@ func (o CmdVoidOut3Strings_Out) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOut3Strings_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOut3Strings_Out(d binary.Decoder, o *CmdVoidOut3Strings_Out) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -2280,24 +3338,39 @@ func (o *CmdVoidOut3Strings_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOut3Strings_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOut3Strings_Out(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassCmdVoidOut3Strings_Out) ID() binary.ID { return binaryIDCmdVoidOut3Strings_Out }
+func (*binaryClassCmdVoidOut3Strings_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOut3Strings_Out(e, obj.(*CmdVoidOut3Strings_Out))
+}
+func (*binaryClassCmdVoidOut3Strings_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOut3Strings_Out{}
+	return obj, doDecodeCmdVoidOut3Strings_Out(d, obj)
+}
+func (*binaryClassCmdVoidOut3Strings_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOut3Strings_Out(d, obj.(*CmdVoidOut3Strings_Out))
+}
+func (*binaryClassCmdVoidOut3Strings_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOut3Strings_Out(d)
+}
 
-func (o CmdVoidOutArrayOfRemapped) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutArrayOfRemapped struct{}
+
+func (*CmdVoidOutArrayOfRemapped) Class() binary.Class {
+	return (*binaryClassCmdVoidOutArrayOfRemapped)(nil)
+}
+func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRemapped) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2309,8 +3382,7 @@ func (o CmdVoidOutArrayOfRemapped) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRemapped) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2324,8 +3396,7 @@ func (o *CmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutArrayOfRemapped) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutArrayOfRemapped(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2337,20 +3408,58 @@ func (*CmdVoidOutArrayOfRemapped) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (o CmdVoidOutArrayOfRemapped_In) Encode(e binary.Encoder) error {
-	return nil
+func (*binaryClassCmdVoidOutArrayOfRemapped) ID() binary.ID { return binaryIDCmdVoidOutArrayOfRemapped }
+func (*binaryClassCmdVoidOutArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutArrayOfRemapped(e, obj.(*CmdVoidOutArrayOfRemapped))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutArrayOfRemapped{}
+	return obj, doDecodeCmdVoidOutArrayOfRemapped(d, obj)
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutArrayOfRemapped(d, obj.(*CmdVoidOutArrayOfRemapped))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutArrayOfRemapped(d)
 }
 
-func (o *CmdVoidOutArrayOfRemapped_In) Decode(d binary.Decoder) error {
+type binaryClassCmdVoidOutArrayOfRemapped_In struct{}
+
+func (*CmdVoidOutArrayOfRemapped_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutArrayOfRemapped_In)(nil)
+}
+func doEncodeCmdVoidOutArrayOfRemapped_In(e binary.Encoder, o *CmdVoidOutArrayOfRemapped_In) error {
 	return nil
 }
-
-func (*CmdVoidOutArrayOfRemapped_In) Skip(d binary.Decoder) error {
+func doDecodeCmdVoidOutArrayOfRemapped_In(d binary.Decoder, o *CmdVoidOutArrayOfRemapped_In) error {
 	return nil
 }
+func doSkipCmdVoidOutArrayOfRemapped_In(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) ID() binary.ID {
+	return binaryIDCmdVoidOutArrayOfRemapped_In
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutArrayOfRemapped_In(e, obj.(*CmdVoidOutArrayOfRemapped_In))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutArrayOfRemapped_In{}
+	return obj, doDecodeCmdVoidOutArrayOfRemapped_In(d, obj)
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutArrayOfRemapped_In(d, obj.(*CmdVoidOutArrayOfRemapped_In))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutArrayOfRemapped_In(d)
+}
 
-func (o CmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutArrayOfRemapped_Out struct{}
+
+func (*CmdVoidOutArrayOfRemapped_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutArrayOfRemapped_Out)(nil)
+}
+func doEncodeCmdVoidOutArrayOfRemapped_Out(e binary.Encoder, o *CmdVoidOutArrayOfRemapped_Out) error {
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -2361,8 +3470,7 @@ func (o CmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutArrayOfRemapped_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutArrayOfRemapped_Out(d binary.Decoder, o *CmdVoidOutArrayOfRemapped_Out) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2377,8 +3485,7 @@ func (o *CmdVoidOutArrayOfRemapped_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutArrayOfRemapped_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutArrayOfRemapped_Out(d binary.Decoder) error {
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2390,8 +3497,29 @@ func (*CmdVoidOutArrayOfRemapped_Out) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) ID() binary.ID {
+	return binaryIDCmdVoidOutArrayOfRemapped_Out
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutArrayOfRemapped_Out(e, obj.(*CmdVoidOutArrayOfRemapped_Out))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutArrayOfRemapped_Out{}
+	return obj, doDecodeCmdVoidOutArrayOfRemapped_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutArrayOfRemapped_Out(d, obj.(*CmdVoidOutArrayOfRemapped_Out))
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutArrayOfRemapped_Out(d)
+}
 
-func (o CmdVoidOutBool) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutBool struct{}
+
+func (*CmdVoidOutBool) Class() binary.Class {
+	return (*binaryClassCmdVoidOutBool)(nil)
+}
+func doEncodeCmdVoidOutBool(e binary.Encoder, o *CmdVoidOutBool) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2403,8 +3531,7 @@ func (o CmdVoidOutBool) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutBool) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutBool(d binary.Decoder, o *CmdVoidOutBool) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2418,8 +3545,7 @@ func (o *CmdVoidOutBool) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutBool) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutBool(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2431,27 +3557,58 @@ func (*CmdVoidOutBool) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutBool) ID() binary.ID { return binaryIDCmdVoidOutBool }
+func (*binaryClassCmdVoidOutBool) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutBool(e, obj.(*CmdVoidOutBool))
+}
+func (*binaryClassCmdVoidOutBool) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutBool{}
+	return obj, doDecodeCmdVoidOutBool(d, obj)
+}
+func (*binaryClassCmdVoidOutBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutBool(d, obj.(*CmdVoidOutBool))
+}
+func (*binaryClassCmdVoidOutBool) Skip(d binary.Decoder) error { return doSkipCmdVoidOutBool(d) }
 
-func (o CmdVoidOutBool_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutBool_In struct{}
+
+func (*CmdVoidOutBool_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutBool_In)(nil)
+}
+func doEncodeCmdVoidOutBool_In(e binary.Encoder, o *CmdVoidOutBool_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutBool_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutBool_In(d binary.Decoder, o *CmdVoidOutBool_In) error {
 	return nil
 }
-
-func (*CmdVoidOutBool_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutBool_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutBool_In) ID() binary.ID { return binaryIDCmdVoidOutBool_In }
+func (*binaryClassCmdVoidOutBool_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutBool_In(e, obj.(*CmdVoidOutBool_In))
+}
+func (*binaryClassCmdVoidOutBool_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutBool_In{}
+	return obj, doDecodeCmdVoidOutBool_In(d, obj)
+}
+func (*binaryClassCmdVoidOutBool_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutBool_In(d, obj.(*CmdVoidOutBool_In))
+}
+func (*binaryClassCmdVoidOutBool_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutBool_In(d) }
 
-func (o CmdVoidOutBool_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutBool_Out struct{}
+
+func (*CmdVoidOutBool_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutBool_Out)(nil)
+}
+func doEncodeCmdVoidOutBool_Out(e binary.Encoder, o *CmdVoidOutBool_Out) error {
 	if err := e.Bool(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutBool_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutBool_Out(d binary.Decoder, o *CmdVoidOutBool_Out) error {
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -2459,15 +3616,31 @@ func (o *CmdVoidOutBool_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutBool_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutBool_Out(d binary.Decoder) error {
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutBool_Out) ID() binary.ID { return binaryIDCmdVoidOutBool_Out }
+func (*binaryClassCmdVoidOutBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutBool_Out(e, obj.(*CmdVoidOutBool_Out))
+}
+func (*binaryClassCmdVoidOutBool_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutBool_Out{}
+	return obj, doDecodeCmdVoidOutBool_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutBool_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutBool_Out(d, obj.(*CmdVoidOutBool_Out))
+}
+func (*binaryClassCmdVoidOutBool_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutBool_Out(d) }
 
-func (o CmdVoidOutF32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF32 struct{}
+
+func (*CmdVoidOutF32) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF32)(nil)
+}
+func doEncodeCmdVoidOutF32(e binary.Encoder, o *CmdVoidOutF32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2479,8 +3652,7 @@ func (o CmdVoidOutF32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutF32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF32(d binary.Decoder, o *CmdVoidOutF32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2494,8 +3666,7 @@ func (o *CmdVoidOutF32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutF32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2507,27 +3678,58 @@ func (*CmdVoidOutF32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutF32) ID() binary.ID { return binaryIDCmdVoidOutF32 }
+func (*binaryClassCmdVoidOutF32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF32(e, obj.(*CmdVoidOutF32))
+}
+func (*binaryClassCmdVoidOutF32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF32{}
+	return obj, doDecodeCmdVoidOutF32(d, obj)
+}
+func (*binaryClassCmdVoidOutF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF32(d, obj.(*CmdVoidOutF32))
+}
+func (*binaryClassCmdVoidOutF32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF32(d) }
 
-func (o CmdVoidOutF32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF32_In struct{}
+
+func (*CmdVoidOutF32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF32_In)(nil)
+}
+func doEncodeCmdVoidOutF32_In(e binary.Encoder, o *CmdVoidOutF32_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutF32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF32_In(d binary.Decoder, o *CmdVoidOutF32_In) error {
 	return nil
 }
-
-func (*CmdVoidOutF32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutF32_In) ID() binary.ID { return binaryIDCmdVoidOutF32_In }
+func (*binaryClassCmdVoidOutF32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF32_In(e, obj.(*CmdVoidOutF32_In))
+}
+func (*binaryClassCmdVoidOutF32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF32_In{}
+	return obj, doDecodeCmdVoidOutF32_In(d, obj)
+}
+func (*binaryClassCmdVoidOutF32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF32_In(d, obj.(*CmdVoidOutF32_In))
+}
+func (*binaryClassCmdVoidOutF32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF32_In(d) }
 
-func (o CmdVoidOutF32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF32_Out struct{}
+
+func (*CmdVoidOutF32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF32_Out)(nil)
+}
+func doEncodeCmdVoidOutF32_Out(e binary.Encoder, o *CmdVoidOutF32_Out) error {
 	if err := e.Float32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutF32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF32_Out(d binary.Decoder, o *CmdVoidOutF32_Out) error {
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -2535,15 +3737,31 @@ func (o *CmdVoidOutF32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutF32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF32_Out(d binary.Decoder) error {
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutF32_Out) ID() binary.ID { return binaryIDCmdVoidOutF32_Out }
+func (*binaryClassCmdVoidOutF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF32_Out(e, obj.(*CmdVoidOutF32_Out))
+}
+func (*binaryClassCmdVoidOutF32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF32_Out{}
+	return obj, doDecodeCmdVoidOutF32_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutF32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF32_Out(d, obj.(*CmdVoidOutF32_Out))
+}
+func (*binaryClassCmdVoidOutF32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF32_Out(d) }
 
-func (o CmdVoidOutF64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF64 struct{}
+
+func (*CmdVoidOutF64) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF64)(nil)
+}
+func doEncodeCmdVoidOutF64(e binary.Encoder, o *CmdVoidOutF64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2555,8 +3773,7 @@ func (o CmdVoidOutF64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutF64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF64(d binary.Decoder, o *CmdVoidOutF64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2570,8 +3787,7 @@ func (o *CmdVoidOutF64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutF64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2583,27 +3799,58 @@ func (*CmdVoidOutF64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutF64) ID() binary.ID { return binaryIDCmdVoidOutF64 }
+func (*binaryClassCmdVoidOutF64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF64(e, obj.(*CmdVoidOutF64))
+}
+func (*binaryClassCmdVoidOutF64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF64{}
+	return obj, doDecodeCmdVoidOutF64(d, obj)
+}
+func (*binaryClassCmdVoidOutF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF64(d, obj.(*CmdVoidOutF64))
+}
+func (*binaryClassCmdVoidOutF64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF64(d) }
 
-func (o CmdVoidOutF64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF64_In struct{}
+
+func (*CmdVoidOutF64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF64_In)(nil)
+}
+func doEncodeCmdVoidOutF64_In(e binary.Encoder, o *CmdVoidOutF64_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutF64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF64_In(d binary.Decoder, o *CmdVoidOutF64_In) error {
 	return nil
 }
-
-func (*CmdVoidOutF64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutF64_In) ID() binary.ID { return binaryIDCmdVoidOutF64_In }
+func (*binaryClassCmdVoidOutF64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF64_In(e, obj.(*CmdVoidOutF64_In))
+}
+func (*binaryClassCmdVoidOutF64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF64_In{}
+	return obj, doDecodeCmdVoidOutF64_In(d, obj)
+}
+func (*binaryClassCmdVoidOutF64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF64_In(d, obj.(*CmdVoidOutF64_In))
+}
+func (*binaryClassCmdVoidOutF64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF64_In(d) }
 
-func (o CmdVoidOutF64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutF64_Out struct{}
+
+func (*CmdVoidOutF64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutF64_Out)(nil)
+}
+func doEncodeCmdVoidOutF64_Out(e binary.Encoder, o *CmdVoidOutF64_Out) error {
 	if err := e.Float64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutF64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutF64_Out(d binary.Decoder, o *CmdVoidOutF64_Out) error {
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -2611,15 +3858,31 @@ func (o *CmdVoidOutF64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutF64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutF64_Out(d binary.Decoder) error {
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutF64_Out) ID() binary.ID { return binaryIDCmdVoidOutF64_Out }
+func (*binaryClassCmdVoidOutF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutF64_Out(e, obj.(*CmdVoidOutF64_Out))
+}
+func (*binaryClassCmdVoidOutF64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutF64_Out{}
+	return obj, doDecodeCmdVoidOutF64_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutF64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutF64_Out(d, obj.(*CmdVoidOutF64_Out))
+}
+func (*binaryClassCmdVoidOutF64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF64_Out(d) }
 
-func (o CmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutFixedSizeBuffer struct{}
+
+func (*CmdVoidOutFixedSizeBuffer) Class() binary.Class {
+	return (*binaryClassCmdVoidOutFixedSizeBuffer)(nil)
+}
+func doEncodeCmdVoidOutFixedSizeBuffer(e binary.Encoder, o *CmdVoidOutFixedSizeBuffer) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2631,8 +3894,7 @@ func (o CmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutFixedSizeBuffer) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutFixedSizeBuffer(d binary.Decoder, o *CmdVoidOutFixedSizeBuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2646,8 +3908,7 @@ func (o *CmdVoidOutFixedSizeBuffer) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutFixedSizeBuffer(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2659,27 +3920,64 @@ func (*CmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (o CmdVoidOutFixedSizeBuffer_In) Encode(e binary.Encoder) error {
-	return nil
+func (*binaryClassCmdVoidOutFixedSizeBuffer) ID() binary.ID { return binaryIDCmdVoidOutFixedSizeBuffer }
+func (*binaryClassCmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutFixedSizeBuffer(e, obj.(*CmdVoidOutFixedSizeBuffer))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutFixedSizeBuffer{}
+	return obj, doDecodeCmdVoidOutFixedSizeBuffer(d, obj)
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutFixedSizeBuffer(d, obj.(*CmdVoidOutFixedSizeBuffer))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutFixedSizeBuffer(d)
 }
 
-func (o *CmdVoidOutFixedSizeBuffer_In) Decode(d binary.Decoder) error {
+type binaryClassCmdVoidOutFixedSizeBuffer_In struct{}
+
+func (*CmdVoidOutFixedSizeBuffer_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutFixedSizeBuffer_In)(nil)
+}
+func doEncodeCmdVoidOutFixedSizeBuffer_In(e binary.Encoder, o *CmdVoidOutFixedSizeBuffer_In) error {
 	return nil
 }
-
-func (*CmdVoidOutFixedSizeBuffer_In) Skip(d binary.Decoder) error {
+func doDecodeCmdVoidOutFixedSizeBuffer_In(d binary.Decoder, o *CmdVoidOutFixedSizeBuffer_In) error {
 	return nil
 }
+func doSkipCmdVoidOutFixedSizeBuffer_In(d binary.Decoder) error {
+	return nil
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) ID() binary.ID {
+	return binaryIDCmdVoidOutFixedSizeBuffer_In
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutFixedSizeBuffer_In(e, obj.(*CmdVoidOutFixedSizeBuffer_In))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutFixedSizeBuffer_In{}
+	return obj, doDecodeCmdVoidOutFixedSizeBuffer_In(d, obj)
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutFixedSizeBuffer_In(d, obj.(*CmdVoidOutFixedSizeBuffer_In))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutFixedSizeBuffer_In(d)
+}
 
-func (o CmdVoidOutFixedSizeBuffer_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutFixedSizeBuffer_Out struct{}
+
+func (*CmdVoidOutFixedSizeBuffer_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutFixedSizeBuffer_Out)(nil)
+}
+func doEncodeCmdVoidOutFixedSizeBuffer_Out(e binary.Encoder, o *CmdVoidOutFixedSizeBuffer_Out) error {
 	if err := e.Uint64(uint64(o.A)); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutFixedSizeBuffer_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutFixedSizeBuffer_Out(d binary.Decoder, o *CmdVoidOutFixedSizeBuffer_Out) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -2687,15 +3985,35 @@ func (o *CmdVoidOutFixedSizeBuffer_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutFixedSizeBuffer_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutFixedSizeBuffer_Out(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) ID() binary.ID {
+	return binaryIDCmdVoidOutFixedSizeBuffer_Out
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutFixedSizeBuffer_Out(e, obj.(*CmdVoidOutFixedSizeBuffer_Out))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutFixedSizeBuffer_Out{}
+	return obj, doDecodeCmdVoidOutFixedSizeBuffer_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutFixedSizeBuffer_Out(d, obj.(*CmdVoidOutFixedSizeBuffer_Out))
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutFixedSizeBuffer_Out(d)
+}
 
-func (o CmdVoidOutS16) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS16 struct{}
+
+func (*CmdVoidOutS16) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS16)(nil)
+}
+func doEncodeCmdVoidOutS16(e binary.Encoder, o *CmdVoidOutS16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2707,8 +4025,7 @@ func (o CmdVoidOutS16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS16) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS16(d binary.Decoder, o *CmdVoidOutS16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2722,8 +4039,7 @@ func (o *CmdVoidOutS16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS16) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2735,27 +4051,58 @@ func (*CmdVoidOutS16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS16) ID() binary.ID { return binaryIDCmdVoidOutS16 }
+func (*binaryClassCmdVoidOutS16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS16(e, obj.(*CmdVoidOutS16))
+}
+func (*binaryClassCmdVoidOutS16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS16{}
+	return obj, doDecodeCmdVoidOutS16(d, obj)
+}
+func (*binaryClassCmdVoidOutS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS16(d, obj.(*CmdVoidOutS16))
+}
+func (*binaryClassCmdVoidOutS16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS16(d) }
 
-func (o CmdVoidOutS16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS16_In struct{}
+
+func (*CmdVoidOutS16_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS16_In)(nil)
+}
+func doEncodeCmdVoidOutS16_In(e binary.Encoder, o *CmdVoidOutS16_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutS16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS16_In(d binary.Decoder, o *CmdVoidOutS16_In) error {
 	return nil
 }
-
-func (*CmdVoidOutS16_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS16_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutS16_In) ID() binary.ID { return binaryIDCmdVoidOutS16_In }
+func (*binaryClassCmdVoidOutS16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS16_In(e, obj.(*CmdVoidOutS16_In))
+}
+func (*binaryClassCmdVoidOutS16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS16_In{}
+	return obj, doDecodeCmdVoidOutS16_In(d, obj)
+}
+func (*binaryClassCmdVoidOutS16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS16_In(d, obj.(*CmdVoidOutS16_In))
+}
+func (*binaryClassCmdVoidOutS16_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS16_In(d) }
 
-func (o CmdVoidOutS16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS16_Out struct{}
+
+func (*CmdVoidOutS16_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS16_Out)(nil)
+}
+func doEncodeCmdVoidOutS16_Out(e binary.Encoder, o *CmdVoidOutS16_Out) error {
 	if err := e.Int16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS16_Out(d binary.Decoder, o *CmdVoidOutS16_Out) error {
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -2763,15 +4110,31 @@ func (o *CmdVoidOutS16_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS16_Out(d binary.Decoder) error {
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS16_Out) ID() binary.ID { return binaryIDCmdVoidOutS16_Out }
+func (*binaryClassCmdVoidOutS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS16_Out(e, obj.(*CmdVoidOutS16_Out))
+}
+func (*binaryClassCmdVoidOutS16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS16_Out{}
+	return obj, doDecodeCmdVoidOutS16_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutS16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS16_Out(d, obj.(*CmdVoidOutS16_Out))
+}
+func (*binaryClassCmdVoidOutS16_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS16_Out(d) }
 
-func (o CmdVoidOutS32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS32 struct{}
+
+func (*CmdVoidOutS32) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS32)(nil)
+}
+func doEncodeCmdVoidOutS32(e binary.Encoder, o *CmdVoidOutS32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2783,8 +4146,7 @@ func (o CmdVoidOutS32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS32(d binary.Decoder, o *CmdVoidOutS32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2798,8 +4160,7 @@ func (o *CmdVoidOutS32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2811,27 +4172,58 @@ func (*CmdVoidOutS32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS32) ID() binary.ID { return binaryIDCmdVoidOutS32 }
+func (*binaryClassCmdVoidOutS32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS32(e, obj.(*CmdVoidOutS32))
+}
+func (*binaryClassCmdVoidOutS32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS32{}
+	return obj, doDecodeCmdVoidOutS32(d, obj)
+}
+func (*binaryClassCmdVoidOutS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS32(d, obj.(*CmdVoidOutS32))
+}
+func (*binaryClassCmdVoidOutS32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS32(d) }
 
-func (o CmdVoidOutS32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS32_In struct{}
+
+func (*CmdVoidOutS32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS32_In)(nil)
+}
+func doEncodeCmdVoidOutS32_In(e binary.Encoder, o *CmdVoidOutS32_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutS32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS32_In(d binary.Decoder, o *CmdVoidOutS32_In) error {
 	return nil
 }
-
-func (*CmdVoidOutS32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutS32_In) ID() binary.ID { return binaryIDCmdVoidOutS32_In }
+func (*binaryClassCmdVoidOutS32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS32_In(e, obj.(*CmdVoidOutS32_In))
+}
+func (*binaryClassCmdVoidOutS32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS32_In{}
+	return obj, doDecodeCmdVoidOutS32_In(d, obj)
+}
+func (*binaryClassCmdVoidOutS32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS32_In(d, obj.(*CmdVoidOutS32_In))
+}
+func (*binaryClassCmdVoidOutS32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS32_In(d) }
 
-func (o CmdVoidOutS32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS32_Out struct{}
+
+func (*CmdVoidOutS32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS32_Out)(nil)
+}
+func doEncodeCmdVoidOutS32_Out(e binary.Encoder, o *CmdVoidOutS32_Out) error {
 	if err := e.Int32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS32_Out(d binary.Decoder, o *CmdVoidOutS32_Out) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -2839,15 +4231,31 @@ func (o *CmdVoidOutS32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS32_Out(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS32_Out) ID() binary.ID { return binaryIDCmdVoidOutS32_Out }
+func (*binaryClassCmdVoidOutS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS32_Out(e, obj.(*CmdVoidOutS32_Out))
+}
+func (*binaryClassCmdVoidOutS32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS32_Out{}
+	return obj, doDecodeCmdVoidOutS32_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutS32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS32_Out(d, obj.(*CmdVoidOutS32_Out))
+}
+func (*binaryClassCmdVoidOutS32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS32_Out(d) }
 
-func (o CmdVoidOutS64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS64 struct{}
+
+func (*CmdVoidOutS64) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS64)(nil)
+}
+func doEncodeCmdVoidOutS64(e binary.Encoder, o *CmdVoidOutS64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2859,8 +4267,7 @@ func (o CmdVoidOutS64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS64(d binary.Decoder, o *CmdVoidOutS64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2874,8 +4281,7 @@ func (o *CmdVoidOutS64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2887,27 +4293,58 @@ func (*CmdVoidOutS64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS64) ID() binary.ID { return binaryIDCmdVoidOutS64 }
+func (*binaryClassCmdVoidOutS64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS64(e, obj.(*CmdVoidOutS64))
+}
+func (*binaryClassCmdVoidOutS64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS64{}
+	return obj, doDecodeCmdVoidOutS64(d, obj)
+}
+func (*binaryClassCmdVoidOutS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS64(d, obj.(*CmdVoidOutS64))
+}
+func (*binaryClassCmdVoidOutS64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS64(d) }
 
-func (o CmdVoidOutS64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS64_In struct{}
+
+func (*CmdVoidOutS64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS64_In)(nil)
+}
+func doEncodeCmdVoidOutS64_In(e binary.Encoder, o *CmdVoidOutS64_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutS64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS64_In(d binary.Decoder, o *CmdVoidOutS64_In) error {
 	return nil
 }
-
-func (*CmdVoidOutS64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutS64_In) ID() binary.ID { return binaryIDCmdVoidOutS64_In }
+func (*binaryClassCmdVoidOutS64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS64_In(e, obj.(*CmdVoidOutS64_In))
+}
+func (*binaryClassCmdVoidOutS64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS64_In{}
+	return obj, doDecodeCmdVoidOutS64_In(d, obj)
+}
+func (*binaryClassCmdVoidOutS64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS64_In(d, obj.(*CmdVoidOutS64_In))
+}
+func (*binaryClassCmdVoidOutS64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS64_In(d) }
 
-func (o CmdVoidOutS64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS64_Out struct{}
+
+func (*CmdVoidOutS64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS64_Out)(nil)
+}
+func doEncodeCmdVoidOutS64_Out(e binary.Encoder, o *CmdVoidOutS64_Out) error {
 	if err := e.Int64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS64_Out(d binary.Decoder, o *CmdVoidOutS64_Out) error {
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -2915,15 +4352,31 @@ func (o *CmdVoidOutS64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS64_Out(d binary.Decoder) error {
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS64_Out) ID() binary.ID { return binaryIDCmdVoidOutS64_Out }
+func (*binaryClassCmdVoidOutS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS64_Out(e, obj.(*CmdVoidOutS64_Out))
+}
+func (*binaryClassCmdVoidOutS64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS64_Out{}
+	return obj, doDecodeCmdVoidOutS64_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutS64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS64_Out(d, obj.(*CmdVoidOutS64_Out))
+}
+func (*binaryClassCmdVoidOutS64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS64_Out(d) }
 
-func (o CmdVoidOutS8) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS8 struct{}
+
+func (*CmdVoidOutS8) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS8)(nil)
+}
+func doEncodeCmdVoidOutS8(e binary.Encoder, o *CmdVoidOutS8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -2935,8 +4388,7 @@ func (o CmdVoidOutS8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS8) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS8(d binary.Decoder, o *CmdVoidOutS8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2950,8 +4402,7 @@ func (o *CmdVoidOutS8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS8) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2963,27 +4414,58 @@ func (*CmdVoidOutS8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS8) ID() binary.ID { return binaryIDCmdVoidOutS8 }
+func (*binaryClassCmdVoidOutS8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS8(e, obj.(*CmdVoidOutS8))
+}
+func (*binaryClassCmdVoidOutS8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS8{}
+	return obj, doDecodeCmdVoidOutS8(d, obj)
+}
+func (*binaryClassCmdVoidOutS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS8(d, obj.(*CmdVoidOutS8))
+}
+func (*binaryClassCmdVoidOutS8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS8(d) }
 
-func (o CmdVoidOutS8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS8_In struct{}
+
+func (*CmdVoidOutS8_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS8_In)(nil)
+}
+func doEncodeCmdVoidOutS8_In(e binary.Encoder, o *CmdVoidOutS8_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutS8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS8_In(d binary.Decoder, o *CmdVoidOutS8_In) error {
 	return nil
 }
-
-func (*CmdVoidOutS8_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS8_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutS8_In) ID() binary.ID { return binaryIDCmdVoidOutS8_In }
+func (*binaryClassCmdVoidOutS8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS8_In(e, obj.(*CmdVoidOutS8_In))
+}
+func (*binaryClassCmdVoidOutS8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS8_In{}
+	return obj, doDecodeCmdVoidOutS8_In(d, obj)
+}
+func (*binaryClassCmdVoidOutS8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS8_In(d, obj.(*CmdVoidOutS8_In))
+}
+func (*binaryClassCmdVoidOutS8_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS8_In(d) }
 
-func (o CmdVoidOutS8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutS8_Out struct{}
+
+func (*CmdVoidOutS8_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutS8_Out)(nil)
+}
+func doEncodeCmdVoidOutS8_Out(e binary.Encoder, o *CmdVoidOutS8_Out) error {
 	if err := e.Int8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutS8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutS8_Out(d binary.Decoder, o *CmdVoidOutS8_Out) error {
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -2991,15 +4473,31 @@ func (o *CmdVoidOutS8_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutS8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutS8_Out(d binary.Decoder) error {
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutS8_Out) ID() binary.ID { return binaryIDCmdVoidOutS8_Out }
+func (*binaryClassCmdVoidOutS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutS8_Out(e, obj.(*CmdVoidOutS8_Out))
+}
+func (*binaryClassCmdVoidOutS8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutS8_Out{}
+	return obj, doDecodeCmdVoidOutS8_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutS8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutS8_Out(d, obj.(*CmdVoidOutS8_Out))
+}
+func (*binaryClassCmdVoidOutS8_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS8_Out(d) }
 
-func (o CmdVoidOutString) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutString struct{}
+
+func (*CmdVoidOutString) Class() binary.Class {
+	return (*binaryClassCmdVoidOutString)(nil)
+}
+func doEncodeCmdVoidOutString(e binary.Encoder, o *CmdVoidOutString) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3011,8 +4509,7 @@ func (o CmdVoidOutString) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutString) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutString(d binary.Decoder, o *CmdVoidOutString) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3026,8 +4523,7 @@ func (o *CmdVoidOutString) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutString) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutString(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3039,27 +4535,60 @@ func (*CmdVoidOutString) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutString) ID() binary.ID { return binaryIDCmdVoidOutString }
+func (*binaryClassCmdVoidOutString) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutString(e, obj.(*CmdVoidOutString))
+}
+func (*binaryClassCmdVoidOutString) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutString{}
+	return obj, doDecodeCmdVoidOutString(d, obj)
+}
+func (*binaryClassCmdVoidOutString) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutString(d, obj.(*CmdVoidOutString))
+}
+func (*binaryClassCmdVoidOutString) Skip(d binary.Decoder) error { return doSkipCmdVoidOutString(d) }
 
-func (o CmdVoidOutString_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutString_In struct{}
+
+func (*CmdVoidOutString_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutString_In)(nil)
+}
+func doEncodeCmdVoidOutString_In(e binary.Encoder, o *CmdVoidOutString_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutString_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutString_In(d binary.Decoder, o *CmdVoidOutString_In) error {
 	return nil
 }
-
-func (*CmdVoidOutString_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutString_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutString_In) ID() binary.ID { return binaryIDCmdVoidOutString_In }
+func (*binaryClassCmdVoidOutString_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutString_In(e, obj.(*CmdVoidOutString_In))
+}
+func (*binaryClassCmdVoidOutString_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutString_In{}
+	return obj, doDecodeCmdVoidOutString_In(d, obj)
+}
+func (*binaryClassCmdVoidOutString_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutString_In(d, obj.(*CmdVoidOutString_In))
+}
+func (*binaryClassCmdVoidOutString_In) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutString_In(d)
+}
 
-func (o CmdVoidOutString_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutString_Out struct{}
+
+func (*CmdVoidOutString_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutString_Out)(nil)
+}
+func doEncodeCmdVoidOutString_Out(e binary.Encoder, o *CmdVoidOutString_Out) error {
 	if err := e.String(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutString_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutString_Out(d binary.Decoder, o *CmdVoidOutString_Out) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -3067,16 +4596,33 @@ func (o *CmdVoidOutString_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutString_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutString_Out(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassCmdVoidOutString_Out) ID() binary.ID { return binaryIDCmdVoidOutString_Out }
+func (*binaryClassCmdVoidOutString_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutString_Out(e, obj.(*CmdVoidOutString_Out))
+}
+func (*binaryClassCmdVoidOutString_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutString_Out{}
+	return obj, doDecodeCmdVoidOutString_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutString_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutString_Out(d, obj.(*CmdVoidOutString_Out))
+}
+func (*binaryClassCmdVoidOutString_Out) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutString_Out(d)
+}
 
-func (o CmdVoidOutU16) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU16 struct{}
+
+func (*CmdVoidOutU16) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU16)(nil)
+}
+func doEncodeCmdVoidOutU16(e binary.Encoder, o *CmdVoidOutU16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3088,8 +4634,7 @@ func (o CmdVoidOutU16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU16) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU16(d binary.Decoder, o *CmdVoidOutU16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3103,8 +4648,7 @@ func (o *CmdVoidOutU16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU16) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3116,27 +4660,58 @@ func (*CmdVoidOutU16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU16) ID() binary.ID { return binaryIDCmdVoidOutU16 }
+func (*binaryClassCmdVoidOutU16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU16(e, obj.(*CmdVoidOutU16))
+}
+func (*binaryClassCmdVoidOutU16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU16{}
+	return obj, doDecodeCmdVoidOutU16(d, obj)
+}
+func (*binaryClassCmdVoidOutU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU16(d, obj.(*CmdVoidOutU16))
+}
+func (*binaryClassCmdVoidOutU16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU16(d) }
 
-func (o CmdVoidOutU16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU16_In struct{}
+
+func (*CmdVoidOutU16_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU16_In)(nil)
+}
+func doEncodeCmdVoidOutU16_In(e binary.Encoder, o *CmdVoidOutU16_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutU16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU16_In(d binary.Decoder, o *CmdVoidOutU16_In) error {
 	return nil
 }
-
-func (*CmdVoidOutU16_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU16_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutU16_In) ID() binary.ID { return binaryIDCmdVoidOutU16_In }
+func (*binaryClassCmdVoidOutU16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU16_In(e, obj.(*CmdVoidOutU16_In))
+}
+func (*binaryClassCmdVoidOutU16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU16_In{}
+	return obj, doDecodeCmdVoidOutU16_In(d, obj)
+}
+func (*binaryClassCmdVoidOutU16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU16_In(d, obj.(*CmdVoidOutU16_In))
+}
+func (*binaryClassCmdVoidOutU16_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU16_In(d) }
 
-func (o CmdVoidOutU16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU16_Out struct{}
+
+func (*CmdVoidOutU16_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU16_Out)(nil)
+}
+func doEncodeCmdVoidOutU16_Out(e binary.Encoder, o *CmdVoidOutU16_Out) error {
 	if err := e.Uint16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU16_Out(d binary.Decoder, o *CmdVoidOutU16_Out) error {
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -3144,15 +4719,31 @@ func (o *CmdVoidOutU16_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU16_Out(d binary.Decoder) error {
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU16_Out) ID() binary.ID { return binaryIDCmdVoidOutU16_Out }
+func (*binaryClassCmdVoidOutU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU16_Out(e, obj.(*CmdVoidOutU16_Out))
+}
+func (*binaryClassCmdVoidOutU16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU16_Out{}
+	return obj, doDecodeCmdVoidOutU16_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutU16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU16_Out(d, obj.(*CmdVoidOutU16_Out))
+}
+func (*binaryClassCmdVoidOutU16_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU16_Out(d) }
 
-func (o CmdVoidOutU32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU32 struct{}
+
+func (*CmdVoidOutU32) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU32)(nil)
+}
+func doEncodeCmdVoidOutU32(e binary.Encoder, o *CmdVoidOutU32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3164,8 +4755,7 @@ func (o CmdVoidOutU32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU32(d binary.Decoder, o *CmdVoidOutU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3179,8 +4769,7 @@ func (o *CmdVoidOutU32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3192,27 +4781,58 @@ func (*CmdVoidOutU32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU32) ID() binary.ID { return binaryIDCmdVoidOutU32 }
+func (*binaryClassCmdVoidOutU32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU32(e, obj.(*CmdVoidOutU32))
+}
+func (*binaryClassCmdVoidOutU32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU32{}
+	return obj, doDecodeCmdVoidOutU32(d, obj)
+}
+func (*binaryClassCmdVoidOutU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU32(d, obj.(*CmdVoidOutU32))
+}
+func (*binaryClassCmdVoidOutU32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU32(d) }
 
-func (o CmdVoidOutU32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU32_In struct{}
+
+func (*CmdVoidOutU32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU32_In)(nil)
+}
+func doEncodeCmdVoidOutU32_In(e binary.Encoder, o *CmdVoidOutU32_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutU32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU32_In(d binary.Decoder, o *CmdVoidOutU32_In) error {
 	return nil
 }
-
-func (*CmdVoidOutU32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU32_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutU32_In) ID() binary.ID { return binaryIDCmdVoidOutU32_In }
+func (*binaryClassCmdVoidOutU32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU32_In(e, obj.(*CmdVoidOutU32_In))
+}
+func (*binaryClassCmdVoidOutU32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU32_In{}
+	return obj, doDecodeCmdVoidOutU32_In(d, obj)
+}
+func (*binaryClassCmdVoidOutU32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU32_In(d, obj.(*CmdVoidOutU32_In))
+}
+func (*binaryClassCmdVoidOutU32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU32_In(d) }
 
-func (o CmdVoidOutU32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU32_Out struct{}
+
+func (*CmdVoidOutU32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU32_Out)(nil)
+}
+func doEncodeCmdVoidOutU32_Out(e binary.Encoder, o *CmdVoidOutU32_Out) error {
 	if err := e.Uint32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU32_Out(d binary.Decoder, o *CmdVoidOutU32_Out) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3220,15 +4840,31 @@ func (o *CmdVoidOutU32_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU32_Out(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU32_Out) ID() binary.ID { return binaryIDCmdVoidOutU32_Out }
+func (*binaryClassCmdVoidOutU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU32_Out(e, obj.(*CmdVoidOutU32_Out))
+}
+func (*binaryClassCmdVoidOutU32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU32_Out{}
+	return obj, doDecodeCmdVoidOutU32_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutU32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU32_Out(d, obj.(*CmdVoidOutU32_Out))
+}
+func (*binaryClassCmdVoidOutU32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU32_Out(d) }
 
-func (o CmdVoidOutU64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU64 struct{}
+
+func (*CmdVoidOutU64) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU64)(nil)
+}
+func doEncodeCmdVoidOutU64(e binary.Encoder, o *CmdVoidOutU64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3240,8 +4876,7 @@ func (o CmdVoidOutU64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU64(d binary.Decoder, o *CmdVoidOutU64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3255,8 +4890,7 @@ func (o *CmdVoidOutU64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3268,27 +4902,58 @@ func (*CmdVoidOutU64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU64) ID() binary.ID { return binaryIDCmdVoidOutU64 }
+func (*binaryClassCmdVoidOutU64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU64(e, obj.(*CmdVoidOutU64))
+}
+func (*binaryClassCmdVoidOutU64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU64{}
+	return obj, doDecodeCmdVoidOutU64(d, obj)
+}
+func (*binaryClassCmdVoidOutU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU64(d, obj.(*CmdVoidOutU64))
+}
+func (*binaryClassCmdVoidOutU64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU64(d) }
 
-func (o CmdVoidOutU64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU64_In struct{}
+
+func (*CmdVoidOutU64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU64_In)(nil)
+}
+func doEncodeCmdVoidOutU64_In(e binary.Encoder, o *CmdVoidOutU64_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutU64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU64_In(d binary.Decoder, o *CmdVoidOutU64_In) error {
 	return nil
 }
-
-func (*CmdVoidOutU64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU64_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutU64_In) ID() binary.ID { return binaryIDCmdVoidOutU64_In }
+func (*binaryClassCmdVoidOutU64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU64_In(e, obj.(*CmdVoidOutU64_In))
+}
+func (*binaryClassCmdVoidOutU64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU64_In{}
+	return obj, doDecodeCmdVoidOutU64_In(d, obj)
+}
+func (*binaryClassCmdVoidOutU64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU64_In(d, obj.(*CmdVoidOutU64_In))
+}
+func (*binaryClassCmdVoidOutU64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU64_In(d) }
 
-func (o CmdVoidOutU64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU64_Out struct{}
+
+func (*CmdVoidOutU64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU64_Out)(nil)
+}
+func doEncodeCmdVoidOutU64_Out(e binary.Encoder, o *CmdVoidOutU64_Out) error {
 	if err := e.Uint64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU64_Out(d binary.Decoder, o *CmdVoidOutU64_Out) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -3296,15 +4961,31 @@ func (o *CmdVoidOutU64_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU64_Out(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU64_Out) ID() binary.ID { return binaryIDCmdVoidOutU64_Out }
+func (*binaryClassCmdVoidOutU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU64_Out(e, obj.(*CmdVoidOutU64_Out))
+}
+func (*binaryClassCmdVoidOutU64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU64_Out{}
+	return obj, doDecodeCmdVoidOutU64_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutU64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU64_Out(d, obj.(*CmdVoidOutU64_Out))
+}
+func (*binaryClassCmdVoidOutU64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU64_Out(d) }
 
-func (o CmdVoidOutU8) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU8 struct{}
+
+func (*CmdVoidOutU8) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU8)(nil)
+}
+func doEncodeCmdVoidOutU8(e binary.Encoder, o *CmdVoidOutU8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3316,8 +4997,7 @@ func (o CmdVoidOutU8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU8) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU8(d binary.Decoder, o *CmdVoidOutU8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3331,8 +5011,7 @@ func (o *CmdVoidOutU8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU8) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3344,27 +5023,58 @@ func (*CmdVoidOutU8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU8) ID() binary.ID { return binaryIDCmdVoidOutU8 }
+func (*binaryClassCmdVoidOutU8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU8(e, obj.(*CmdVoidOutU8))
+}
+func (*binaryClassCmdVoidOutU8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU8{}
+	return obj, doDecodeCmdVoidOutU8(d, obj)
+}
+func (*binaryClassCmdVoidOutU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU8(d, obj.(*CmdVoidOutU8))
+}
+func (*binaryClassCmdVoidOutU8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU8(d) }
 
-func (o CmdVoidOutU8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU8_In struct{}
+
+func (*CmdVoidOutU8_In) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU8_In)(nil)
+}
+func doEncodeCmdVoidOutU8_In(e binary.Encoder, o *CmdVoidOutU8_In) error {
 	return nil
 }
-
-func (o *CmdVoidOutU8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU8_In(d binary.Decoder, o *CmdVoidOutU8_In) error {
 	return nil
 }
-
-func (*CmdVoidOutU8_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU8_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidOutU8_In) ID() binary.ID { return binaryIDCmdVoidOutU8_In }
+func (*binaryClassCmdVoidOutU8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU8_In(e, obj.(*CmdVoidOutU8_In))
+}
+func (*binaryClassCmdVoidOutU8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU8_In{}
+	return obj, doDecodeCmdVoidOutU8_In(d, obj)
+}
+func (*binaryClassCmdVoidOutU8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU8_In(d, obj.(*CmdVoidOutU8_In))
+}
+func (*binaryClassCmdVoidOutU8_In) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU8_In(d) }
 
-func (o CmdVoidOutU8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidOutU8_Out struct{}
+
+func (*CmdVoidOutU8_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidOutU8_Out)(nil)
+}
+func doEncodeCmdVoidOutU8_Out(e binary.Encoder, o *CmdVoidOutU8_Out) error {
 	if err := e.Uint8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidOutU8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidOutU8_Out(d binary.Decoder, o *CmdVoidOutU8_Out) error {
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -3372,15 +5082,31 @@ func (o *CmdVoidOutU8_Out) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidOutU8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidOutU8_Out(d binary.Decoder) error {
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidOutU8_Out) ID() binary.ID { return binaryIDCmdVoidOutU8_Out }
+func (*binaryClassCmdVoidOutU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutU8_Out(e, obj.(*CmdVoidOutU8_Out))
+}
+func (*binaryClassCmdVoidOutU8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutU8_Out{}
+	return obj, doDecodeCmdVoidOutU8_Out(d, obj)
+}
+func (*binaryClassCmdVoidOutU8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutU8_Out(d, obj.(*CmdVoidOutU8_Out))
+}
+func (*binaryClassCmdVoidOutU8_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU8_Out(d) }
 
-func (o CmdVoidS16) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS16 struct{}
+
+func (*CmdVoidS16) Class() binary.Class {
+	return (*binaryClassCmdVoidS16)(nil)
+}
+func doEncodeCmdVoidS16(e binary.Encoder, o *CmdVoidS16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3392,8 +5118,7 @@ func (o CmdVoidS16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidS16) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3407,8 +5132,7 @@ func (o *CmdVoidS16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS16) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3420,15 +5144,31 @@ func (*CmdVoidS16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS16) ID() binary.ID { return binaryIDCmdVoidS16 }
+func (*binaryClassCmdVoidS16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS16(e, obj.(*CmdVoidS16))
+}
+func (*binaryClassCmdVoidS16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS16{}
+	return obj, doDecodeCmdVoidS16(d, obj)
+}
+func (*binaryClassCmdVoidS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS16(d, obj.(*CmdVoidS16))
+}
+func (*binaryClassCmdVoidS16) Skip(d binary.Decoder) error { return doSkipCmdVoidS16(d) }
 
-func (o CmdVoidS16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS16_In struct{}
+
+func (*CmdVoidS16_In) Class() binary.Class {
+	return (*binaryClassCmdVoidS16_In)(nil)
+}
+func doEncodeCmdVoidS16_In(e binary.Encoder, o *CmdVoidS16_In) error {
 	if err := e.Int16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidS16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS16_In(d binary.Decoder, o *CmdVoidS16_In) error {
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -3436,27 +5176,58 @@ func (o *CmdVoidS16_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS16_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS16_In(d binary.Decoder) error {
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS16_In) ID() binary.ID { return binaryIDCmdVoidS16_In }
+func (*binaryClassCmdVoidS16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS16_In(e, obj.(*CmdVoidS16_In))
+}
+func (*binaryClassCmdVoidS16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS16_In{}
+	return obj, doDecodeCmdVoidS16_In(d, obj)
+}
+func (*binaryClassCmdVoidS16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS16_In(d, obj.(*CmdVoidS16_In))
+}
+func (*binaryClassCmdVoidS16_In) Skip(d binary.Decoder) error { return doSkipCmdVoidS16_In(d) }
 
-func (o CmdVoidS16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS16_Out struct{}
+
+func (*CmdVoidS16_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidS16_Out)(nil)
+}
+func doEncodeCmdVoidS16_Out(e binary.Encoder, o *CmdVoidS16_Out) error {
 	return nil
 }
-
-func (o *CmdVoidS16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS16_Out(d binary.Decoder, o *CmdVoidS16_Out) error {
 	return nil
 }
-
-func (*CmdVoidS16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS16_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidS16_Out) ID() binary.ID { return binaryIDCmdVoidS16_Out }
+func (*binaryClassCmdVoidS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS16_Out(e, obj.(*CmdVoidS16_Out))
+}
+func (*binaryClassCmdVoidS16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS16_Out{}
+	return obj, doDecodeCmdVoidS16_Out(d, obj)
+}
+func (*binaryClassCmdVoidS16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS16_Out(d, obj.(*CmdVoidS16_Out))
+}
+func (*binaryClassCmdVoidS16_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidS16_Out(d) }
 
-func (o CmdVoidS32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS32 struct{}
+
+func (*CmdVoidS32) Class() binary.Class {
+	return (*binaryClassCmdVoidS32)(nil)
+}
+func doEncodeCmdVoidS32(e binary.Encoder, o *CmdVoidS32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3468,8 +5239,7 @@ func (o CmdVoidS32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidS32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3483,8 +5253,7 @@ func (o *CmdVoidS32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3496,15 +5265,31 @@ func (*CmdVoidS32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS32) ID() binary.ID { return binaryIDCmdVoidS32 }
+func (*binaryClassCmdVoidS32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS32(e, obj.(*CmdVoidS32))
+}
+func (*binaryClassCmdVoidS32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS32{}
+	return obj, doDecodeCmdVoidS32(d, obj)
+}
+func (*binaryClassCmdVoidS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS32(d, obj.(*CmdVoidS32))
+}
+func (*binaryClassCmdVoidS32) Skip(d binary.Decoder) error { return doSkipCmdVoidS32(d) }
 
-func (o CmdVoidS32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS32_In struct{}
+
+func (*CmdVoidS32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidS32_In)(nil)
+}
+func doEncodeCmdVoidS32_In(e binary.Encoder, o *CmdVoidS32_In) error {
 	if err := e.Int32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidS32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS32_In(d binary.Decoder, o *CmdVoidS32_In) error {
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -3512,27 +5297,58 @@ func (o *CmdVoidS32_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS32_In(d binary.Decoder) error {
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS32_In) ID() binary.ID { return binaryIDCmdVoidS32_In }
+func (*binaryClassCmdVoidS32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS32_In(e, obj.(*CmdVoidS32_In))
+}
+func (*binaryClassCmdVoidS32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS32_In{}
+	return obj, doDecodeCmdVoidS32_In(d, obj)
+}
+func (*binaryClassCmdVoidS32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS32_In(d, obj.(*CmdVoidS32_In))
+}
+func (*binaryClassCmdVoidS32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidS32_In(d) }
 
-func (o CmdVoidS32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS32_Out struct{}
+
+func (*CmdVoidS32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidS32_Out)(nil)
+}
+func doEncodeCmdVoidS32_Out(e binary.Encoder, o *CmdVoidS32_Out) error {
 	return nil
 }
-
-func (o *CmdVoidS32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS32_Out(d binary.Decoder, o *CmdVoidS32_Out) error {
 	return nil
 }
-
-func (*CmdVoidS32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS32_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidS32_Out) ID() binary.ID { return binaryIDCmdVoidS32_Out }
+func (*binaryClassCmdVoidS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS32_Out(e, obj.(*CmdVoidS32_Out))
+}
+func (*binaryClassCmdVoidS32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS32_Out{}
+	return obj, doDecodeCmdVoidS32_Out(d, obj)
+}
+func (*binaryClassCmdVoidS32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS32_Out(d, obj.(*CmdVoidS32_Out))
+}
+func (*binaryClassCmdVoidS32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidS32_Out(d) }
 
-func (o CmdVoidS64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS64 struct{}
+
+func (*CmdVoidS64) Class() binary.Class {
+	return (*binaryClassCmdVoidS64)(nil)
+}
+func doEncodeCmdVoidS64(e binary.Encoder, o *CmdVoidS64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3544,8 +5360,7 @@ func (o CmdVoidS64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidS64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3559,8 +5374,7 @@ func (o *CmdVoidS64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3572,15 +5386,31 @@ func (*CmdVoidS64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS64) ID() binary.ID { return binaryIDCmdVoidS64 }
+func (*binaryClassCmdVoidS64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS64(e, obj.(*CmdVoidS64))
+}
+func (*binaryClassCmdVoidS64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS64{}
+	return obj, doDecodeCmdVoidS64(d, obj)
+}
+func (*binaryClassCmdVoidS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS64(d, obj.(*CmdVoidS64))
+}
+func (*binaryClassCmdVoidS64) Skip(d binary.Decoder) error { return doSkipCmdVoidS64(d) }
 
-func (o CmdVoidS64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS64_In struct{}
+
+func (*CmdVoidS64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidS64_In)(nil)
+}
+func doEncodeCmdVoidS64_In(e binary.Encoder, o *CmdVoidS64_In) error {
 	if err := e.Int64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidS64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS64_In(d binary.Decoder, o *CmdVoidS64_In) error {
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -3588,27 +5418,58 @@ func (o *CmdVoidS64_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS64_In(d binary.Decoder) error {
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS64_In) ID() binary.ID { return binaryIDCmdVoidS64_In }
+func (*binaryClassCmdVoidS64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS64_In(e, obj.(*CmdVoidS64_In))
+}
+func (*binaryClassCmdVoidS64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS64_In{}
+	return obj, doDecodeCmdVoidS64_In(d, obj)
+}
+func (*binaryClassCmdVoidS64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS64_In(d, obj.(*CmdVoidS64_In))
+}
+func (*binaryClassCmdVoidS64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidS64_In(d) }
 
-func (o CmdVoidS64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS64_Out struct{}
+
+func (*CmdVoidS64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidS64_Out)(nil)
+}
+func doEncodeCmdVoidS64_Out(e binary.Encoder, o *CmdVoidS64_Out) error {
 	return nil
 }
-
-func (o *CmdVoidS64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS64_Out(d binary.Decoder, o *CmdVoidS64_Out) error {
 	return nil
 }
-
-func (*CmdVoidS64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS64_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidS64_Out) ID() binary.ID { return binaryIDCmdVoidS64_Out }
+func (*binaryClassCmdVoidS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS64_Out(e, obj.(*CmdVoidS64_Out))
+}
+func (*binaryClassCmdVoidS64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS64_Out{}
+	return obj, doDecodeCmdVoidS64_Out(d, obj)
+}
+func (*binaryClassCmdVoidS64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS64_Out(d, obj.(*CmdVoidS64_Out))
+}
+func (*binaryClassCmdVoidS64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidS64_Out(d) }
 
-func (o CmdVoidS8) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS8 struct{}
+
+func (*CmdVoidS8) Class() binary.Class {
+	return (*binaryClassCmdVoidS8)(nil)
+}
+func doEncodeCmdVoidS8(e binary.Encoder, o *CmdVoidS8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3620,8 +5481,7 @@ func (o CmdVoidS8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidS8) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3635,8 +5495,7 @@ func (o *CmdVoidS8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS8) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3648,15 +5507,31 @@ func (*CmdVoidS8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS8) ID() binary.ID { return binaryIDCmdVoidS8 }
+func (*binaryClassCmdVoidS8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS8(e, obj.(*CmdVoidS8))
+}
+func (*binaryClassCmdVoidS8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS8{}
+	return obj, doDecodeCmdVoidS8(d, obj)
+}
+func (*binaryClassCmdVoidS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS8(d, obj.(*CmdVoidS8))
+}
+func (*binaryClassCmdVoidS8) Skip(d binary.Decoder) error { return doSkipCmdVoidS8(d) }
 
-func (o CmdVoidS8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS8_In struct{}
+
+func (*CmdVoidS8_In) Class() binary.Class {
+	return (*binaryClassCmdVoidS8_In)(nil)
+}
+func doEncodeCmdVoidS8_In(e binary.Encoder, o *CmdVoidS8_In) error {
 	if err := e.Int8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidS8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS8_In(d binary.Decoder, o *CmdVoidS8_In) error {
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -3664,27 +5539,58 @@ func (o *CmdVoidS8_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidS8_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS8_In(d binary.Decoder) error {
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidS8_In) ID() binary.ID { return binaryIDCmdVoidS8_In }
+func (*binaryClassCmdVoidS8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS8_In(e, obj.(*CmdVoidS8_In))
+}
+func (*binaryClassCmdVoidS8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS8_In{}
+	return obj, doDecodeCmdVoidS8_In(d, obj)
+}
+func (*binaryClassCmdVoidS8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS8_In(d, obj.(*CmdVoidS8_In))
+}
+func (*binaryClassCmdVoidS8_In) Skip(d binary.Decoder) error { return doSkipCmdVoidS8_In(d) }
 
-func (o CmdVoidS8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidS8_Out struct{}
+
+func (*CmdVoidS8_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidS8_Out)(nil)
+}
+func doEncodeCmdVoidS8_Out(e binary.Encoder, o *CmdVoidS8_Out) error {
 	return nil
 }
-
-func (o *CmdVoidS8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidS8_Out(d binary.Decoder, o *CmdVoidS8_Out) error {
 	return nil
 }
-
-func (*CmdVoidS8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidS8_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidS8_Out) ID() binary.ID { return binaryIDCmdVoidS8_Out }
+func (*binaryClassCmdVoidS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidS8_Out(e, obj.(*CmdVoidS8_Out))
+}
+func (*binaryClassCmdVoidS8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidS8_Out{}
+	return obj, doDecodeCmdVoidS8_Out(d, obj)
+}
+func (*binaryClassCmdVoidS8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidS8_Out(d, obj.(*CmdVoidS8_Out))
+}
+func (*binaryClassCmdVoidS8_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidS8_Out(d) }
 
-func (o CmdVoidString) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidString struct{}
+
+func (*CmdVoidString) Class() binary.Class {
+	return (*binaryClassCmdVoidString)(nil)
+}
+func doEncodeCmdVoidString(e binary.Encoder, o *CmdVoidString) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3696,8 +5602,7 @@ func (o CmdVoidString) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidString) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3711,8 +5616,7 @@ func (o *CmdVoidString) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidString) Skip(d binary.Decoder) error {
+func doSkipCmdVoidString(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3724,15 +5628,31 @@ func (*CmdVoidString) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidString) ID() binary.ID { return binaryIDCmdVoidString }
+func (*binaryClassCmdVoidString) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidString(e, obj.(*CmdVoidString))
+}
+func (*binaryClassCmdVoidString) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidString{}
+	return obj, doDecodeCmdVoidString(d, obj)
+}
+func (*binaryClassCmdVoidString) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidString(d, obj.(*CmdVoidString))
+}
+func (*binaryClassCmdVoidString) Skip(d binary.Decoder) error { return doSkipCmdVoidString(d) }
 
-func (o CmdVoidString_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidString_In struct{}
+
+func (*CmdVoidString_In) Class() binary.Class {
+	return (*binaryClassCmdVoidString_In)(nil)
+}
+func doEncodeCmdVoidString_In(e binary.Encoder, o *CmdVoidString_In) error {
 	if err := e.String(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidString_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidString_In(d binary.Decoder, o *CmdVoidString_In) error {
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -3740,28 +5660,58 @@ func (o *CmdVoidString_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidString_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidString_In(d binary.Decoder) error {
 	if err := d.SkipString(); err != nil {
 		return err
 	}
-
 	return nil
 }
+func (*binaryClassCmdVoidString_In) ID() binary.ID { return binaryIDCmdVoidString_In }
+func (*binaryClassCmdVoidString_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidString_In(e, obj.(*CmdVoidString_In))
+}
+func (*binaryClassCmdVoidString_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidString_In{}
+	return obj, doDecodeCmdVoidString_In(d, obj)
+}
+func (*binaryClassCmdVoidString_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidString_In(d, obj.(*CmdVoidString_In))
+}
+func (*binaryClassCmdVoidString_In) Skip(d binary.Decoder) error { return doSkipCmdVoidString_In(d) }
 
-func (o CmdVoidString_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidString_Out struct{}
+
+func (*CmdVoidString_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidString_Out)(nil)
+}
+func doEncodeCmdVoidString_Out(e binary.Encoder, o *CmdVoidString_Out) error {
 	return nil
 }
-
-func (o *CmdVoidString_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidString_Out(d binary.Decoder, o *CmdVoidString_Out) error {
 	return nil
 }
-
-func (*CmdVoidString_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidString_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidString_Out) ID() binary.ID { return binaryIDCmdVoidString_Out }
+func (*binaryClassCmdVoidString_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidString_Out(e, obj.(*CmdVoidString_Out))
+}
+func (*binaryClassCmdVoidString_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidString_Out{}
+	return obj, doDecodeCmdVoidString_Out(d, obj)
+}
+func (*binaryClassCmdVoidString_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidString_Out(d, obj.(*CmdVoidString_Out))
+}
+func (*binaryClassCmdVoidString_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidString_Out(d) }
 
-func (o CmdVoidU16) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU16 struct{}
+
+func (*CmdVoidU16) Class() binary.Class {
+	return (*binaryClassCmdVoidU16)(nil)
+}
+func doEncodeCmdVoidU16(e binary.Encoder, o *CmdVoidU16) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3773,8 +5723,7 @@ func (o CmdVoidU16) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidU16) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3788,8 +5737,7 @@ func (o *CmdVoidU16) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU16) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU16(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3801,15 +5749,31 @@ func (*CmdVoidU16) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU16) ID() binary.ID { return binaryIDCmdVoidU16 }
+func (*binaryClassCmdVoidU16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU16(e, obj.(*CmdVoidU16))
+}
+func (*binaryClassCmdVoidU16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU16{}
+	return obj, doDecodeCmdVoidU16(d, obj)
+}
+func (*binaryClassCmdVoidU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU16(d, obj.(*CmdVoidU16))
+}
+func (*binaryClassCmdVoidU16) Skip(d binary.Decoder) error { return doSkipCmdVoidU16(d) }
 
-func (o CmdVoidU16_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU16_In struct{}
+
+func (*CmdVoidU16_In) Class() binary.Class {
+	return (*binaryClassCmdVoidU16_In)(nil)
+}
+func doEncodeCmdVoidU16_In(e binary.Encoder, o *CmdVoidU16_In) error {
 	if err := e.Uint16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidU16_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU16_In(d binary.Decoder, o *CmdVoidU16_In) error {
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -3817,27 +5781,58 @@ func (o *CmdVoidU16_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU16_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU16_In(d binary.Decoder) error {
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU16_In) ID() binary.ID { return binaryIDCmdVoidU16_In }
+func (*binaryClassCmdVoidU16_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU16_In(e, obj.(*CmdVoidU16_In))
+}
+func (*binaryClassCmdVoidU16_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU16_In{}
+	return obj, doDecodeCmdVoidU16_In(d, obj)
+}
+func (*binaryClassCmdVoidU16_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU16_In(d, obj.(*CmdVoidU16_In))
+}
+func (*binaryClassCmdVoidU16_In) Skip(d binary.Decoder) error { return doSkipCmdVoidU16_In(d) }
 
-func (o CmdVoidU16_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU16_Out struct{}
+
+func (*CmdVoidU16_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidU16_Out)(nil)
+}
+func doEncodeCmdVoidU16_Out(e binary.Encoder, o *CmdVoidU16_Out) error {
 	return nil
 }
-
-func (o *CmdVoidU16_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU16_Out(d binary.Decoder, o *CmdVoidU16_Out) error {
 	return nil
 }
-
-func (*CmdVoidU16_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU16_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidU16_Out) ID() binary.ID { return binaryIDCmdVoidU16_Out }
+func (*binaryClassCmdVoidU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU16_Out(e, obj.(*CmdVoidU16_Out))
+}
+func (*binaryClassCmdVoidU16_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU16_Out{}
+	return obj, doDecodeCmdVoidU16_Out(d, obj)
+}
+func (*binaryClassCmdVoidU16_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU16_Out(d, obj.(*CmdVoidU16_Out))
+}
+func (*binaryClassCmdVoidU16_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidU16_Out(d) }
 
-func (o CmdVoidU32) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU32 struct{}
+
+func (*CmdVoidU32) Class() binary.Class {
+	return (*binaryClassCmdVoidU32)(nil)
+}
+func doEncodeCmdVoidU32(e binary.Encoder, o *CmdVoidU32) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3849,8 +5844,7 @@ func (o CmdVoidU32) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidU32) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3864,8 +5858,7 @@ func (o *CmdVoidU32) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU32) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU32(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3877,15 +5870,31 @@ func (*CmdVoidU32) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU32) ID() binary.ID { return binaryIDCmdVoidU32 }
+func (*binaryClassCmdVoidU32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU32(e, obj.(*CmdVoidU32))
+}
+func (*binaryClassCmdVoidU32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU32{}
+	return obj, doDecodeCmdVoidU32(d, obj)
+}
+func (*binaryClassCmdVoidU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU32(d, obj.(*CmdVoidU32))
+}
+func (*binaryClassCmdVoidU32) Skip(d binary.Decoder) error { return doSkipCmdVoidU32(d) }
 
-func (o CmdVoidU32_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU32_In struct{}
+
+func (*CmdVoidU32_In) Class() binary.Class {
+	return (*binaryClassCmdVoidU32_In)(nil)
+}
+func doEncodeCmdVoidU32_In(e binary.Encoder, o *CmdVoidU32_In) error {
 	if err := e.Uint32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidU32_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU32_In(d binary.Decoder, o *CmdVoidU32_In) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3893,27 +5902,58 @@ func (o *CmdVoidU32_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU32_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU32_In(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU32_In) ID() binary.ID { return binaryIDCmdVoidU32_In }
+func (*binaryClassCmdVoidU32_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU32_In(e, obj.(*CmdVoidU32_In))
+}
+func (*binaryClassCmdVoidU32_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU32_In{}
+	return obj, doDecodeCmdVoidU32_In(d, obj)
+}
+func (*binaryClassCmdVoidU32_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU32_In(d, obj.(*CmdVoidU32_In))
+}
+func (*binaryClassCmdVoidU32_In) Skip(d binary.Decoder) error { return doSkipCmdVoidU32_In(d) }
 
-func (o CmdVoidU32_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU32_Out struct{}
+
+func (*CmdVoidU32_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidU32_Out)(nil)
+}
+func doEncodeCmdVoidU32_Out(e binary.Encoder, o *CmdVoidU32_Out) error {
 	return nil
 }
-
-func (o *CmdVoidU32_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU32_Out(d binary.Decoder, o *CmdVoidU32_Out) error {
 	return nil
 }
-
-func (*CmdVoidU32_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU32_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidU32_Out) ID() binary.ID { return binaryIDCmdVoidU32_Out }
+func (*binaryClassCmdVoidU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU32_Out(e, obj.(*CmdVoidU32_Out))
+}
+func (*binaryClassCmdVoidU32_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU32_Out{}
+	return obj, doDecodeCmdVoidU32_Out(d, obj)
+}
+func (*binaryClassCmdVoidU32_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU32_Out(d, obj.(*CmdVoidU32_Out))
+}
+func (*binaryClassCmdVoidU32_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidU32_Out(d) }
 
-func (o CmdVoidU64) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU64 struct{}
+
+func (*CmdVoidU64) Class() binary.Class {
+	return (*binaryClassCmdVoidU64)(nil)
+}
+func doEncodeCmdVoidU64(e binary.Encoder, o *CmdVoidU64) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -3925,8 +5965,7 @@ func (o CmdVoidU64) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidU64) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -3940,8 +5979,7 @@ func (o *CmdVoidU64) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU64) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU64(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -3953,15 +5991,31 @@ func (*CmdVoidU64) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU64) ID() binary.ID { return binaryIDCmdVoidU64 }
+func (*binaryClassCmdVoidU64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU64(e, obj.(*CmdVoidU64))
+}
+func (*binaryClassCmdVoidU64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU64{}
+	return obj, doDecodeCmdVoidU64(d, obj)
+}
+func (*binaryClassCmdVoidU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU64(d, obj.(*CmdVoidU64))
+}
+func (*binaryClassCmdVoidU64) Skip(d binary.Decoder) error { return doSkipCmdVoidU64(d) }
 
-func (o CmdVoidU64_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU64_In struct{}
+
+func (*CmdVoidU64_In) Class() binary.Class {
+	return (*binaryClassCmdVoidU64_In)(nil)
+}
+func doEncodeCmdVoidU64_In(e binary.Encoder, o *CmdVoidU64_In) error {
 	if err := e.Uint64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidU64_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU64_In(d binary.Decoder, o *CmdVoidU64_In) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -3969,27 +6023,58 @@ func (o *CmdVoidU64_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU64_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU64_In(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU64_In) ID() binary.ID { return binaryIDCmdVoidU64_In }
+func (*binaryClassCmdVoidU64_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU64_In(e, obj.(*CmdVoidU64_In))
+}
+func (*binaryClassCmdVoidU64_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU64_In{}
+	return obj, doDecodeCmdVoidU64_In(d, obj)
+}
+func (*binaryClassCmdVoidU64_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU64_In(d, obj.(*CmdVoidU64_In))
+}
+func (*binaryClassCmdVoidU64_In) Skip(d binary.Decoder) error { return doSkipCmdVoidU64_In(d) }
 
-func (o CmdVoidU64_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU64_Out struct{}
+
+func (*CmdVoidU64_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidU64_Out)(nil)
+}
+func doEncodeCmdVoidU64_Out(e binary.Encoder, o *CmdVoidU64_Out) error {
 	return nil
 }
-
-func (o *CmdVoidU64_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU64_Out(d binary.Decoder, o *CmdVoidU64_Out) error {
 	return nil
 }
-
-func (*CmdVoidU64_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU64_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidU64_Out) ID() binary.ID { return binaryIDCmdVoidU64_Out }
+func (*binaryClassCmdVoidU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU64_Out(e, obj.(*CmdVoidU64_Out))
+}
+func (*binaryClassCmdVoidU64_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU64_Out{}
+	return obj, doDecodeCmdVoidU64_Out(d, obj)
+}
+func (*binaryClassCmdVoidU64_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU64_Out(d, obj.(*CmdVoidU64_Out))
+}
+func (*binaryClassCmdVoidU64_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidU64_Out(d) }
 
-func (o CmdVoidU8) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU8 struct{}
+
+func (*CmdVoidU8) Class() binary.Class {
+	return (*binaryClassCmdVoidU8)(nil)
+}
+func doEncodeCmdVoidU8(e binary.Encoder, o *CmdVoidU8) error {
 	if err := e.Uint32(uint32(o.Context)); err != nil {
 		return err
 	}
@@ -4001,8 +6086,7 @@ func (o CmdVoidU8) Encode(e binary.Encoder) error {
 	}
 	return nil
 }
-
-func (o *CmdVoidU8) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -4016,8 +6100,7 @@ func (o *CmdVoidU8) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU8) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU8(d binary.Decoder) error {
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -4029,15 +6112,31 @@ func (*CmdVoidU8) Skip(d binary.Decoder) error {
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU8) ID() binary.ID { return binaryIDCmdVoidU8 }
+func (*binaryClassCmdVoidU8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU8(e, obj.(*CmdVoidU8))
+}
+func (*binaryClassCmdVoidU8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU8{}
+	return obj, doDecodeCmdVoidU8(d, obj)
+}
+func (*binaryClassCmdVoidU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU8(d, obj.(*CmdVoidU8))
+}
+func (*binaryClassCmdVoidU8) Skip(d binary.Decoder) error { return doSkipCmdVoidU8(d) }
 
-func (o CmdVoidU8_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU8_In struct{}
+
+func (*CmdVoidU8_In) Class() binary.Class {
+	return (*binaryClassCmdVoidU8_In)(nil)
+}
+func doEncodeCmdVoidU8_In(e binary.Encoder, o *CmdVoidU8_In) error {
 	if err := e.Uint8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
-
-func (o *CmdVoidU8_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU8_In(d binary.Decoder, o *CmdVoidU8_In) error {
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -4045,58 +6144,129 @@ func (o *CmdVoidU8_In) Decode(d binary.Decoder) error {
 	}
 	return nil
 }
-
-func (*CmdVoidU8_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU8_In(d binary.Decoder) error {
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
 	return nil
 }
+func (*binaryClassCmdVoidU8_In) ID() binary.ID { return binaryIDCmdVoidU8_In }
+func (*binaryClassCmdVoidU8_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU8_In(e, obj.(*CmdVoidU8_In))
+}
+func (*binaryClassCmdVoidU8_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU8_In{}
+	return obj, doDecodeCmdVoidU8_In(d, obj)
+}
+func (*binaryClassCmdVoidU8_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU8_In(d, obj.(*CmdVoidU8_In))
+}
+func (*binaryClassCmdVoidU8_In) Skip(d binary.Decoder) error { return doSkipCmdVoidU8_In(d) }
 
-func (o CmdVoidU8_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoidU8_Out struct{}
+
+func (*CmdVoidU8_Out) Class() binary.Class {
+	return (*binaryClassCmdVoidU8_Out)(nil)
+}
+func doEncodeCmdVoidU8_Out(e binary.Encoder, o *CmdVoidU8_Out) error {
 	return nil
 }
-
-func (o *CmdVoidU8_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoidU8_Out(d binary.Decoder, o *CmdVoidU8_Out) error {
 	return nil
 }
-
-func (*CmdVoidU8_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoidU8_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoidU8_Out) ID() binary.ID { return binaryIDCmdVoidU8_Out }
+func (*binaryClassCmdVoidU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidU8_Out(e, obj.(*CmdVoidU8_Out))
+}
+func (*binaryClassCmdVoidU8_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidU8_Out{}
+	return obj, doDecodeCmdVoidU8_Out(d, obj)
+}
+func (*binaryClassCmdVoidU8_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidU8_Out(d, obj.(*CmdVoidU8_Out))
+}
+func (*binaryClassCmdVoidU8_Out) Skip(d binary.Decoder) error { return doSkipCmdVoidU8_Out(d) }
 
-func (o CmdVoid_In) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid_In struct{}
+
+func (*CmdVoid_In) Class() binary.Class {
+	return (*binaryClassCmdVoid_In)(nil)
+}
+func doEncodeCmdVoid_In(e binary.Encoder, o *CmdVoid_In) error {
 	return nil
 }
-
-func (o *CmdVoid_In) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid_In(d binary.Decoder, o *CmdVoid_In) error {
 	return nil
 }
-
-func (*CmdVoid_In) Skip(d binary.Decoder) error {
+func doSkipCmdVoid_In(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoid_In) ID() binary.ID { return binaryIDCmdVoid_In }
+func (*binaryClassCmdVoid_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid_In(e, obj.(*CmdVoid_In))
+}
+func (*binaryClassCmdVoid_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid_In{}
+	return obj, doDecodeCmdVoid_In(d, obj)
+}
+func (*binaryClassCmdVoid_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid_In(d, obj.(*CmdVoid_In))
+}
+func (*binaryClassCmdVoid_In) Skip(d binary.Decoder) error { return doSkipCmdVoid_In(d) }
 
-func (o CmdVoid_Out) Encode(e binary.Encoder) error {
+type binaryClassCmdVoid_Out struct{}
+
+func (*CmdVoid_Out) Class() binary.Class {
+	return (*binaryClassCmdVoid_Out)(nil)
+}
+func doEncodeCmdVoid_Out(e binary.Encoder, o *CmdVoid_Out) error {
 	return nil
 }
-
-func (o *CmdVoid_Out) Decode(d binary.Decoder) error {
+func doDecodeCmdVoid_Out(d binary.Decoder, o *CmdVoid_Out) error {
 	return nil
 }
-
-func (*CmdVoid_Out) Skip(d binary.Decoder) error {
+func doSkipCmdVoid_Out(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassCmdVoid_Out) ID() binary.ID { return binaryIDCmdVoid_Out }
+func (*binaryClassCmdVoid_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid_Out(e, obj.(*CmdVoid_Out))
+}
+func (*binaryClassCmdVoid_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid_Out{}
+	return obj, doDecodeCmdVoid_Out(d, obj)
+}
+func (*binaryClassCmdVoid_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid_Out(d, obj.(*CmdVoid_Out))
+}
+func (*binaryClassCmdVoid_Out) Skip(d binary.Decoder) error { return doSkipCmdVoid_Out(d) }
 
-func (o Globals) Encode(e binary.Encoder) error {
+type binaryClassGlobals struct{}
+
+func (*Globals) Class() binary.Class {
+	return (*binaryClassGlobals)(nil)
+}
+func doEncodeGlobals(e binary.Encoder, o *Globals) error {
 	return nil
 }
-
-func (o *Globals) Decode(d binary.Decoder) error {
+func doDecodeGlobals(d binary.Decoder, o *Globals) error {
 	return nil
 }
-
-func (*Globals) Skip(d binary.Decoder) error {
+func doSkipGlobals(d binary.Decoder) error {
 	return nil
 }
+func (*binaryClassGlobals) ID() binary.ID { return binaryIDGlobals }
+func (*binaryClassGlobals) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlobals(e, obj.(*Globals))
+}
+func (*binaryClassGlobals) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Globals{}
+	return obj, doDecodeGlobals(d, obj)
+}
+func (*binaryClassGlobals) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlobals(d, obj.(*Globals))
+}
+func (*binaryClassGlobals) Skip(d binary.Decoder) error { return doSkipGlobals(d) }

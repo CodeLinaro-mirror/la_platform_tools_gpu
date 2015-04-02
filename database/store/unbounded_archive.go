@@ -147,7 +147,7 @@ func (s unboundedArchive) Load(id binary.ID, logger log.Logger, out binary.Objec
 		}
 
 		d := cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))
-		size, err = len(data), out.Decode(d)
+		size, err = len(data), d.Value(out)
 		return
 	}
 

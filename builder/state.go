@@ -53,7 +53,7 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 	}
 
 	buf := &bytes.Buffer{}
-	if err := s.Encode(cyclic.Encoder(vle.Writer(buf))); err != nil {
+	if err := cyclic.Encoder(vle.Writer(buf)).Value(s); err != nil {
 		return err
 	}
 

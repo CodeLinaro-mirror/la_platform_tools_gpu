@@ -14,18 +14,14 @@
 
 package binary
 
-// Encoder extends Writer with additional methods for encoding objects.
-type Encoder interface {
-	Writer
-	// ID writes a binary.ID to the stream.
-	ID(ID) error
-	// Object encodes an Object with no type preamble and no sharing.
-	Value(obj Object) error
-	// Variant encodes an Object with no sharing. The type of obj must have
-	// been previously registered with binary.registry.Add.
-	Variant(obj Object) error
-	// Object encodes an Object, optionally encoding objects only on the first
-	// time it sees them. The type of obj must have been previously registered
-	// with binary.registry.Add.
-	Object(obj Object) error
-}
+type binaryClassNil ID
+
+var (
+	NilClass = &binaryClassNil{}
+)
+
+func (class *binaryClassNil) ID() ID                         { return ID(*class) }
+func (*binaryClassNil) Encode(e Encoder, obj Object) error   { return nil }
+func (*binaryClassNil) Decode(d Decoder) (Object, error)     { return nil, nil }
+func (*binaryClassNil) DecodeTo(d Decoder, obj Object) error { return nil }
+func (*binaryClassNil) Skip(d Decoder) error                 { return nil }

@@ -53,7 +53,7 @@ func (l *List) Encode(e binary.Encoder) error {
 		if err := e.Uint16(uint16(atom.TypeID())); err != nil {
 			return err
 		}
-		if err := atom.Encode(e); err != nil {
+		if err := e.Value(atom); err != nil {
 			return err
 		}
 	}
@@ -78,7 +78,7 @@ func (l *List) Decode(d binary.Decoder) error {
 		if _, ok := atom.(*EOS); ok {
 			break
 		}
-		if err := atom.Decode(d); err != nil {
+		if err := d.Value(atom); err != nil {
 			return err
 		}
 		(*l) = append(*l, atom)
