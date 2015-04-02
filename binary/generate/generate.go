@@ -51,6 +51,7 @@ type File struct {
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
 	Name      string    // The simple name of the type.
+	IDName    string    // The name to give the ID of the type.
 	Package   string    // The package name the struct belongs to.
 	Fields    []Field   // Descriptions of the fields of the struct.
 	Signature string    // The full string type signature of the Struct.
@@ -75,9 +76,11 @@ const (
 	Pointer
 	// Array is the kind for an in place slice, with a dynamic length.
 	Array
+	// Stream is the kind for an in place slice, with a Terminator.
+	Stream
 	// Interface is the kind for an object boxed in an binary.Object interface
 	// (or superset of). If the object has equality (==) with a previously
-	// encoded object, then this object will be encoded as a reference to the
+	// encoded object, then this object may be encoded as a reference to the
 	// first encoded object.
 	Interface
 	// Map is the kind for a key value map.
@@ -104,6 +107,10 @@ type Type struct {
 }
 
 type tag string
+
+func (t tag) Get(name string) string {
+	return reflect.StructTag(t).Get(name)
+}
 
 func (t tag) Flag(name string) bool {
 	v := reflect.StructTag(t).Get(name)
@@ -132,11 +139,12 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 			decl.Type().String() == "android.googlesource.com/platform/tools/gpu/binary.Generate" &&
 			!tag.Flag("disable") {
 			tagged = true
+			s.IDName = tag.Get("id")
 			continue
 		}
 		f := Field{}
 		f.Name = decl.Name()
-		f.Type = fromType(pkg, decl.Type())
+		f.Type = fromType(pkg, decl.Type(), tag)
 		f.Anonymous = decl.Anonymous()
 		s.Fields = append(s.Fields, f)
 	}
@@ -160,10 +168,13 @@ func (s *Struct) UpdateID() {
 	fmt.Fprint(b, " }")
 	s.Signature = b.String()
 	s.ID = binary.NewID([]byte(s.Signature))
+	if s.IDName == "" {
+		s.IDName = "binaryID" + s.Name
+	}
 }
 
 // fromType creates a appropriate Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type) *Type {
+func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 	t := &Type{Name: path.Base(types.TypeString(pkg, from))}
 	if _, isNamed := from.(*types.Named); isNamed {
 		from = from.Underlying()
@@ -186,12 +197,16 @@ func fromType(pkg *types.Package, from types.Type) *Type {
 		}
 	case *types.Pointer:
 		t.Kind = Pointer
-		t.SubType = fromType(pkg, from.Elem())
+		t.SubType = fromType(pkg, from.Elem(), tag)
 	case *types.Interface:
 		t.Kind = Interface
 	case *types.Slice:
-		t.Kind = Array
-		t.SubType = fromType(pkg, from.Elem())
+		if tag.Flag("stream") {
+			t.Kind = Stream
+		} else {
+			t.Kind = Array
+		}
+		t.SubType = fromType(pkg, from.Elem(), "")
 		switch elem := from.Elem().(type) {
 		case *types.Basic:
 			switch elem.Kind() {
@@ -213,12 +228,12 @@ func fromType(pkg *types.Package, from types.Type) *Type {
 			}
 		}
 		if t.Kind == Array {
-			t.SubType = fromType(pkg, from.Elem())
+			t.SubType = fromType(pkg, from.Elem(), "")
 		}
 	case *types.Map:
 		t.Kind = Map
-		t.KeyType = fromType(pkg, from.Key())
-		t.SubType = fromType(pkg, from.Elem())
+		t.KeyType = fromType(pkg, from.Key(), "")
+		t.SubType = fromType(pkg, from.Elem(), "")
 	default:
 		t.Kind = Codeable
 	}
@@ -256,6 +271,7 @@ func getTemplateMap(t *template.Template, prefix string) kindToTemplate {
 		Pointer:   getTemplate(t, prefix+"Pointer"),
 		Interface: getTemplate(t, prefix+"Interface"),
 		Array:     getTemplate(t, prefix+"Array"),
+		Stream:    getTemplate(t, prefix+"Stream"),
 		Map:       getTemplate(t, prefix+"Map"),
 	}
 }

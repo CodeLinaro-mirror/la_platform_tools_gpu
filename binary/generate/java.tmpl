@@ -31,6 +31,9 @@
 »»for (int i = 0; i < {{.Name}}.length; i++) {
 »»»{{encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
+
+{{define "EncodeStream"}}{{end}}
+
 {{define "EncodeMap"}}TODO: Java map handling{{end}}
 
 {{define "Decoder"}}
@@ -49,6 +52,8 @@
 »»for (int i = 0; i < {{.Name}}.length; i++) {
 »»»{{decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
+
+{{define "DecodeStream"}}{{end}}
 
 {{define "File"}}/*
  * Copyright (C) 2015 The Android Open Source Project

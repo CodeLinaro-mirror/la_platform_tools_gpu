@@ -25,7 +25,7 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "ID"}} binaryID{{.Name}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
+{{define "ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
 
 {{define "Init"}} registry.Add((*{{.Name}})(nil).Class()){{end}}
 
@@ -45,7 +45,7 @@ func doSkip{{.Name}}(d binary.Decoder) error {
 	{{range .Fields}}{{skip (print "_." .Name) .Type}}
 {{end}} return nil
 }
-func (*binaryClass{{.Name}}) ID() binary.ID { return binaryID{{.Name}} }
+func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
 func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {return doEncode{{.Name}}(e, obj.(*{{.Name}})) }
 func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
 func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
@@ -82,6 +82,15 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 		}{{else}}for i := range {{.Name}} {
 			{{encode (print .Name "[i]") .Type.SubType}}
 		}{{end}}{{end}}
+
+{{define "EncodeStream"}}for _, o := range {{.Name}} {
+			if err := e.Object(o); err != nil {
+				return err
+			}
+		}
+		if err := e.Object((*objects.Terminator)(nil)); err != nil {
+			return err
+		}{{end}}
 
 {{define "EncodeMap"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
@@ -128,6 +137,16 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			}{{end}}
 		} {{end}}
 
+{{define "DecodeStream"}}for {
+			if obj, err := d.Object(); err != nil {
+				return err
+			} else if _, end := obj.(*objects.Terminator); end {
+				break
+			} else {
+				{{.Name}} = append({{.Name}}, obj.({{.Type.SubType.Name}}))
+			}
+		} {{end}}
+
 {{define "DecodeMap"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
@@ -160,6 +179,14 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			}{{else}}for i := uint32(0); i < count; i++ {
 				{{skip (print .Name "[i]") .Type.SubType}}
 			}{{end}}
+		} {{end}}
+
+{{define "SkipStream"}}for {
+			if id, err := d.SkipObject(); err != nil {
+				return err
+			} else if id == objects.TerminatorID {
+				break
+			}
 		} {{end}}
 
 {{define "SkipMap"}} if count, err := d.Uint32(); err != nil {
@@ -230,6 +257,9 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»for (int i = 0; i < {{.Name}}.length; i++) {
 »»»{{encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
+
+{{define "EncodeStream"}}{{end}}
+
 {{define "EncodeMap"}}TODO: Java map handling{{end}}
 
 {{define "Decoder"}}
@@ -248,6 +278,8 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»for (int i = 0; i < {{.Name}}.length; i++) {
 »»»{{decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
+
+{{define "DecodeStream"}}{{end}}
 
 {{define "File"}}/*
  * Copyright (C) 2015 The Android Open Source Project

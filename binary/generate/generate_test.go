@@ -42,6 +42,7 @@ var fields = []Field{
 	{Name: "codeable", Type: &Type{Name: "struct{}", Kind: Codeable}},
 	{Name: "pointer", Type: &Type{Name: "*struct{}", Kind: Pointer}},
 	{Name: "slice", Type: &Type{Name: "[]struct{}", Kind: Array}},
+	{Name: "stream", Type: &Type{Name: "[]struct{}", Kind: Stream}},
 	{Name: "object", Type: &Type{Name: "interface{}", Kind: Interface}},
 	{Name: "dict", Type: &Type{Name: "map[string]struct{}", Kind: Map}},
 	{Name: "data", Type: &Type{Name: "[]byte", Kind: Array, Method: "Data"}},
@@ -154,7 +155,11 @@ func TestTypes(t *testing.T) {
 	fmt.Fprintln(source, prefix)
 	fmt.Fprint(source, "type MyStruct struct {binary.Generate;\n")
 	for _, f := range fields {
-		fmt.Fprintf(source, "  %s %s\n", f.Name, f.Type.Name)
+		fmt.Fprintf(source, "  %s %s", f.Name, f.Type.Name)
+		if f.Type.Kind == Stream {
+			fmt.Fprint(source, " `stream:\"true\"`")
+		}
+		fmt.Fprintln(source)
 	}
 	fmt.Fprint(source, "}\n")
 	s := parseStruct(t, "MyStruct", source.String())
