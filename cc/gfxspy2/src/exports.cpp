@@ -29,7 +29,7 @@ namespace {
 
 // spy lazily constructs and returns the instance to the spy.
 Spy* spy() {
-    static Spy spy(0, new gapic::Encoder(new gapic::FileWriter("atoms")));
+    static Spy spy(new gapic::Encoder(new gapic::FileWriter("atoms")));
     return &spy;
 }
 
