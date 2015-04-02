@@ -60,7 +60,7 @@ func (*Functions) GetArrayParamCount(param *semantic.Parameter) interface{} {
 	for _, s := range f.Block.Statements {
 		assert, ok := s.(*semantic.Assert)
 		if !ok {
-			break
+			continue
 		}
 		binary, ok := assert.Condition.(*semantic.BinaryOp)
 		if !ok {
