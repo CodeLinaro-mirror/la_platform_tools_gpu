@@ -70,7 +70,8 @@ func doSkipAtomA(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomA) ID() binary.ID { return binaryIDAtomA }
+func (*binaryClassAtomA) ID() binary.ID      { return binaryIDAtomA }
+func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomA(e, obj.(*AtomA))
 }
@@ -130,7 +131,8 @@ func doSkipAtomB(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomB) ID() binary.ID { return binaryIDAtomB }
+func (*binaryClassAtomB) ID() binary.ID      { return binaryIDAtomB }
+func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomB(e, obj.(*AtomB))
 }
@@ -179,7 +181,8 @@ func doSkipAtomC(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomC) ID() binary.ID { return binaryIDAtomC }
+func (*binaryClassAtomC) ID() binary.ID      { return binaryIDAtomC }
+func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomC(e, obj.(*AtomC))
 }

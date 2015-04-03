@@ -55,7 +55,8 @@ func doSkipBlob(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassBlob) ID() binary.ID { return binaryIDBlob }
+func (*binaryClassBlob) ID() binary.ID      { return binaryIDBlob }
+func (*binaryClassBlob) New() binary.Object { return &Blob{} }
 func (*binaryClassBlob) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeBlob(e, obj.(*Blob))
 }
@@ -114,7 +115,8 @@ func doSkipkeyValue(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasskeyValue) ID() binary.ID { return binaryIDkeyValue }
+func (*binaryClasskeyValue) ID() binary.ID      { return binaryIDkeyValue }
+func (*binaryClasskeyValue) New() binary.Object { return &keyValue{} }
 func (*binaryClasskeyValue) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodekeyValue(e, obj.(*keyValue))
 }

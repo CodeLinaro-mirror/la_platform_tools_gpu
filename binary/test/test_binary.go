@@ -45,7 +45,8 @@ func doSkipTypeA(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTypeA) ID() binary.ID { return binaryIDTypeA }
+func (*binaryClassTypeA) ID() binary.ID      { return binaryIDTypeA }
+func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTypeA(e, obj.(*TypeA))
 }
@@ -83,7 +84,8 @@ func doSkipTypeB(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTypeB) ID() binary.ID { return binaryIDTypeB }
+func (*binaryClassTypeB) ID() binary.ID      { return binaryIDTypeB }
+func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTypeB(e, obj.(*TypeB))
 }

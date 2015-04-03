@@ -47,7 +47,8 @@ func doSkipdelay(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassdelay) ID() binary.ID { return binaryIDdelay }
+func (*binaryClassdelay) ID() binary.ID      { return binaryIDdelay }
+func (*binaryClassdelay) New() binary.Object { return &delay{} }
 func (*binaryClassdelay) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodedelay(e, obj.(*delay))
 }
@@ -85,7 +86,8 @@ func doSkiprequest(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassrequest) ID() binary.ID { return binaryIDrequest }
+func (*binaryClassrequest) ID() binary.ID      { return binaryIDrequest }
+func (*binaryClassrequest) New() binary.Object { return &request{} }
 func (*binaryClassrequest) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderequest(e, obj.(*request))
 }
@@ -123,7 +125,8 @@ func doSkipresponse(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresponse) ID() binary.ID { return binaryIDresponse }
+func (*binaryClassresponse) ID() binary.ID      { return binaryIDresponse }
+func (*binaryClassresponse) New() binary.Object { return &response{} }
 func (*binaryClassresponse) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesponse(e, obj.(*response))
 }

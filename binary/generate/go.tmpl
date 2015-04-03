@@ -33,6 +33,7 @@ func doSkip{{.Name}}(d binary.Decoder) error {
 {{end}} return nil
 }
 func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
+func (*binaryClass{{.Name}}) New() binary.Object { return &{{.Name}}{} }
 func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {return doEncode{{.Name}}(e, obj.(*{{.Name}})) }
 func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
 func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
@@ -211,10 +212,9 @@ package {{.Package}}
 
 import (
 	"reflect"
-
-	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
-)
+	{{range $imp, $v := .Imports}}"{{$imp}}"
+{{end}})
 
 func init() {
 	{{range .Structs}}{{template "Init" .}}

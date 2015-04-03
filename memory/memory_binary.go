@@ -54,7 +54,8 @@ func doSkipRange(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRange) ID() binary.ID { return binaryIDRange }
+func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
+func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRange(e, obj.(*Range))
 }
