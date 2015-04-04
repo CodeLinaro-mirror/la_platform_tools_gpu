@@ -2,7 +2,6 @@ package gles
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -77,7 +76,7 @@ type index uint32
 // TODO: The decode/encode methods below assume little endian
 
 func decodeIndices(data []byte, indicesType IndicesType) ([]index, error) {
-	dec := flat.Decoder(endian.Reader(bytes.NewBuffer(data), eb.LittleEndian))
+	dec := flat.Decoder(endian.Reader(bytes.NewBuffer(data), endian.Little))
 	indices := make([]index, 0)
 	switch indicesType {
 	case IndicesType_GL_UNSIGNED_BYTE:
@@ -120,7 +119,7 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 		}
 	}
 	buf := &bytes.Buffer{}
-	enc := flat.Encoder(endian.Writer(buf, eb.LittleEndian))
+	enc := flat.Encoder(endian.Writer(buf, endian.Little))
 	switch {
 	case maxIndex > 0xFFFF:
 		// TODO: GL_UNSIGNED_INT in glDrawElements is supported only since GLES 3.0

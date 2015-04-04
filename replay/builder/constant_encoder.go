@@ -16,7 +16,6 @@ package builder
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -33,7 +32,7 @@ type constantEncoder struct {
 	alignment   uint64
 }
 
-func newConstantEncoder(alignment int, byteOrder eb.ByteOrder) *constantEncoder {
+func newConstantEncoder(alignment int, byteOrder endian.ByteOrder) *constantEncoder {
 	buffer := &bytes.Buffer{}
 	encoder := flat.Encoder(endian.Writer(buffer, byteOrder))
 	return &constantEncoder{

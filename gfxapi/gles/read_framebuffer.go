@@ -2,7 +2,6 @@ package gles
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"math/rand"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
@@ -110,7 +109,7 @@ func (a readFramebufferDepth) Replay(id atom.ID, s *state.State, b *builder.Buil
 
 	// Map vertex attrib and indice resources.
 	var buffer bytes.Buffer
-	enc := flat.Encoder(endian.Writer(&buffer, eb.LittleEndian))
+	enc := flat.Encoder(endian.Writer(&buffer, endian.Little))
 	for _, f := range []float32{-1., -1., 1., -1., -1., 1., 1., 1.} {
 		enc.Float32(f)
 	}

@@ -18,7 +18,6 @@ package asm
 
 import (
 	"bytes"
-	"encoding/binary"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
@@ -35,11 +34,11 @@ func (testPtrResolver) TranslateCapturePointer(ptr uint64) uint64   { return ptr
 
 func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}
-	b := flat.Encoder(endian.Writer(buf, binary.LittleEndian))
+	b := flat.Encoder(endian.Writer(buf, endian.Little))
 	for _, Instruction := range Instructions {
 		Instruction.Encode(testPtrResolver{}, b)
 	}
-	gotOpcodes, err := opcode.Disassemble(buf, binary.LittleEndian)
+	gotOpcodes, err := opcode.Disassemble(buf, endian.Little)
 	if err != nil {
 		panic(err)
 	}

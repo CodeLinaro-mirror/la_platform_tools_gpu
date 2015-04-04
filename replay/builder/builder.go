@@ -17,7 +17,6 @@ package builder
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -75,7 +74,7 @@ type Builder struct {
 	stack           []stackItem
 	ptrSize         int
 	ptrAlignment    int
-	byteOrder       eb.ByteOrder
+	byteOrder       endian.ByteOrder
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -88,7 +87,7 @@ type Builder struct {
 // New returns a newly constructed Builder configured to replay on a target
 // architecture that has a pointer size of ptrSize bytes and and alignment of
 // ptrAlignment bytes, with byte ordering that matches byteOrder.
-func New(ptrSize, ptrAlignment int, byteOrder eb.ByteOrder) *Builder {
+func New(ptrSize, ptrAlignment int, byteOrder endian.ByteOrder) *Builder {
 	return &Builder{
 		constantMemory:  newConstantEncoder(ptrAlignment, byteOrder),
 		heap:            allocator{alignment: uint64(ptrAlignment)},

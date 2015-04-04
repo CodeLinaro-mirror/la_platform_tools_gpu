@@ -16,7 +16,6 @@ package endian
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"reflect"
 	"testing"
 )
@@ -122,9 +121,9 @@ func TestReadWrite(t *testing.T) {
 			}},
 	} {
 		b := &bytes.Buffer{}
-		rv := reflect.ValueOf(Reader(b, eb.LittleEndian))
+		rv := reflect.ValueOf(Reader(b, Little))
 		r := rv.MethodByName(e.name)
-		wv := reflect.ValueOf(Writer(b, eb.LittleEndian))
+		wv := reflect.ValueOf(Writer(b, Little))
 		w := wv.MethodByName(e.name)
 		s := reflect.ValueOf(e.values)
 		for i := 0; i < s.Len(); i++ {
