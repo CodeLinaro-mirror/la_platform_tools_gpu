@@ -53,7 +53,6 @@ func TestSkipDrawCalls(t *testing.T) {
 		&test.AtomA{ID: 19},
 		&test.AtomA{ID: 27, AtomFlags: atom.DrawCall},
 		&test.AtomA{ID: 21, AtomFlags: atom.EndOfFrame},
-		atomAtomID{&atom.EOS{}, 200},
 	)
 
 	transform := &SkipDrawCalls{}
@@ -91,6 +90,5 @@ func TestSkipDrawCalls(t *testing.T) {
 		&test.AtomA{ID: 19},
 		// &test.AtomA{ID: 27, AtomFlags: atom.DrawCall},
 		&test.AtomA{ID: 21, AtomFlags: atom.EndOfFrame},
-		atomAtomID{&atom.EOS{}, 200},
 	))
 }

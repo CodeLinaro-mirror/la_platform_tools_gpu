@@ -43,9 +43,13 @@ func (t *SkipDrawCalls) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	if t.requests.Contains(id) {
 		t.flush(true, out)
 		t.requests.Remove(id)
-	} else if _, eos := a.(*atom.EOS); a.Flags().IsEndOfFrame() || eos {
+	} else if a.Flags().IsEndOfFrame() {
 		t.flush(false, out)
 	}
+}
+
+func (t *SkipDrawCalls) Flush(out atom.Writer) {
+	t.flush(false, out)
 }
 
 func (t *SkipDrawCalls) flush(draw bool, out atom.Writer) {

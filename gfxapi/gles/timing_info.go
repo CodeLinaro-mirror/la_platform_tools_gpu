@@ -79,21 +79,6 @@ func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer
 	case *Init:
 		out.Write(id, a)
 
-	case *atom.EOS:
-		if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {
-			t.stopTimer(cid, id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
-		}
-		if _, frameStarted := t.timerStartId[frameThreadTimer]; frameStarted && t.perFrame {
-			t.stopTimer(cid, id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
-		}
-
-		id := t.postback(func(interface{}, error) {
-			t.out <- gfxapi.CallTiming{TimingInfo: t.timingInfo}
-			close(t.out)
-		})
-
-		out.Write(id, a)
-
 	default:
 		if _, frameStarted := t.timerStartId[frameThreadTimer]; t.perFrame && !frameStarted {
 			t.startTimer(cid, id, frameThreadTimer, out)
@@ -118,4 +103,20 @@ func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer
 			t.stopTimer(cid, id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
 		}
 	}
+}
+
+func (t *timingInfoTransform) Flush(out atom.Writer) {
+	id := atom.NoID
+	cid := atom.NoContextID
+	if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {
+		t.stopTimer(cid, id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
+	}
+	if _, frameStarted := t.timerStartId[frameThreadTimer]; frameStarted && t.perFrame {
+		t.stopTimer(cid, id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
+	}
+
+	t.postback(func(interface{}, error) {
+		t.out <- gfxapi.CallTiming{TimingInfo: t.timingInfo}
+		close(t.out)
+	})
 }

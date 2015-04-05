@@ -139,7 +139,7 @@ func (a api) ReplayTransforms(
 	}
 
 	// Cleanup
-	transforms.Add(destroyResourcesAtEOS())
+	transforms.Add(&destroyResourcesAtEOS{state: state.New()})
 
 	return transforms
 }
@@ -199,88 +199,89 @@ func halfFloatOESToHalfFloatARB() atom.Transformer {
 	})
 }
 
-// destroyResourcesAtEOS returns a transform that destroys all textures,
+// destroyResourcesAtEOS is a transform that destroys all textures,
 // framebuffers, buffers, shaders, programs and vertex-arrays that were not
 // destroyed by EOS.
-func destroyResourcesAtEOS() atom.Transformer {
-	s := state.New()
-	return atom.Transform("DestroyResourcesAtEOS", func(id atom.ID, a atom.Atom, out atom.Writer) {
-		switch a := a.(type) {
-		default:
-		case state.Mutator:
-			a.Mutate(s)
+type destroyResourcesAtEOS struct {
+	state *state.State
+}
 
-		case *atom.EOS:
-			for cid, state := range s.Contexts {
-				s, ok := state.(*State)
-				if !ok {
-					continue
-				}
+func (t *destroyResourcesAtEOS) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
+	if m, ok := a.(state.Mutator); ok {
+		m.Mutate(t.state)
+	}
+	out.Write(id, a)
+}
 
-				// Delete all Renderbuffers.
-				renderbuffers := RenderbufferIdArray{}
-				for renderbufferId := range s.Instances.Renderbuffers {
-					// Skip virtual renderbuffers: backbuffer_color(-1), backbuffer_depth(-2), backbuffer_stencil(-3).
-					if renderbufferId < 0xf0000000 {
-						renderbuffers = append(renderbuffers, renderbufferId)
-					}
-				}
-				if len(renderbuffers) > 0 {
-					out.Write(id, NewGlDeleteRenderbuffers(cid, int32(len(renderbuffers)), renderbuffers))
-				}
+func (t *destroyResourcesAtEOS) Flush(out atom.Writer) {
+	id := atom.NoID
+	for cid, state := range t.state.Contexts {
+		s, ok := state.(*State)
+		if !ok {
+			return
+		}
 
-				// Delete all Textures.
-				textures := TextureIdArray{}
-				for textureId := range s.Instances.Textures {
-					textures = append(textures, textureId)
-				}
-				if len(textures) > 0 {
-					out.Write(id, NewGlDeleteTextures(cid, int32(len(textures)), textures))
-				}
-
-				// Delete all Framebuffers.
-				framebuffers := FramebufferIdArray{}
-				for framebufferId := range s.Instances.Framebuffers {
-					framebuffers = append(framebuffers, framebufferId)
-				}
-				if len(framebuffers) > 0 {
-					out.Write(id, NewGlDeleteFramebuffers(cid, int32(len(framebuffers)), framebuffers))
-				}
-
-				// Delete all Buffers.
-				buffers := BufferIdArray{}
-				for bufferId := range s.Instances.Buffers {
-					buffers = append(buffers, bufferId)
-				}
-				if len(buffers) > 0 {
-					out.Write(id, NewGlDeleteBuffers(cid, int32(len(buffers)), buffers))
-				}
-
-				// Delete all Shaders.
-				for shaderId := range s.Instances.Shaders {
-					out.Write(id, NewGlDeleteShader(cid, shaderId))
-				}
-
-				// Delete all Programs.
-				for programId := range s.Instances.Programs {
-					out.Write(id, NewGlDeleteProgram(cid, programId))
-				}
-
-				// Delete all VertexArrays.
-				vertexArrays := VertexArrayIdArray{}
-				for vertexArrayId := range s.Instances.VertexArrays {
-					vertexArrays = append(vertexArrays, vertexArrayId)
-				}
-				if len(vertexArrays) > 0 {
-					out.Write(id, NewGlDeleteVertexArraysOES(cid, int32(len(vertexArrays)), vertexArrays))
-				}
-
-				// Delete all SyncObjects. TODO: Uncomment when added to API file.
-				// for syncObjectId := range s.Instances.SyncObjects {
-				// 	out.Write(id, NewGlDeleteSync(cid, syncObjectId))
-				// }
+		// Delete all Renderbuffers.
+		renderbuffers := RenderbufferIdArray{}
+		for renderbufferId := range s.Instances.Renderbuffers {
+			// Skip virtual renderbuffers: backbuffer_color(-1), backbuffer_depth(-2), backbuffer_stencil(-3).
+			if renderbufferId < 0xf0000000 {
+				renderbuffers = append(renderbuffers, renderbufferId)
 			}
 		}
-		out.Write(id, a)
-	})
+		if len(renderbuffers) > 0 {
+			out.Write(id, NewGlDeleteRenderbuffers(cid, int32(len(renderbuffers)), renderbuffers))
+		}
+
+		// Delete all Textures.
+		textures := TextureIdArray{}
+		for textureId := range s.Instances.Textures {
+			textures = append(textures, textureId)
+		}
+		if len(textures) > 0 {
+			out.Write(id, NewGlDeleteTextures(cid, int32(len(textures)), textures))
+		}
+
+		// Delete all Framebuffers.
+		framebuffers := FramebufferIdArray{}
+		for framebufferId := range s.Instances.Framebuffers {
+			framebuffers = append(framebuffers, framebufferId)
+		}
+		if len(framebuffers) > 0 {
+			out.Write(id, NewGlDeleteFramebuffers(cid, int32(len(framebuffers)), framebuffers))
+		}
+
+		// Delete all Buffers.
+		buffers := BufferIdArray{}
+		for bufferId := range s.Instances.Buffers {
+			buffers = append(buffers, bufferId)
+		}
+		if len(buffers) > 0 {
+			out.Write(id, NewGlDeleteBuffers(cid, int32(len(buffers)), buffers))
+		}
+
+		// Delete all Shaders.
+		for shaderId := range s.Instances.Shaders {
+			out.Write(id, NewGlDeleteShader(cid, shaderId))
+		}
+
+		// Delete all Programs.
+		for programId := range s.Instances.Programs {
+			out.Write(id, NewGlDeleteProgram(cid, programId))
+		}
+
+		// Delete all VertexArrays.
+		vertexArrays := VertexArrayIdArray{}
+		for vertexArrayId := range s.Instances.VertexArrays {
+			vertexArrays = append(vertexArrays, vertexArrayId)
+		}
+		if len(vertexArrays) > 0 {
+			out.Write(id, NewGlDeleteVertexArraysOES(cid, int32(len(vertexArrays)), vertexArrays))
+		}
+
+		// Delete all SyncObjects. TODO: Uncomment when added to API file.
+		// for syncObjectId := range s.Instances.SyncObjects {
+		// 	out.Write(id, NewGlDeleteSync(cid, syncObjectId))
+		// }
+	}
 }

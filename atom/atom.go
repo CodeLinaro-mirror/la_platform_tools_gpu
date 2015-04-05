@@ -42,6 +42,12 @@ type Atom interface {
 // ID is the index of an atom in an atom stream.
 type ID uint64
 
+// NoID is used when you have to pass an ID, but don't have one to use.
+const NoID = ^ID(0)
+
 // ContextIDs are used to identify which thread or rendering context each atom
 // belongs to. The numerical value is meaningless aside from equality testing.
 type ContextID uint32
+
+// NoContext is used when the ContextID is not really a valid context.
+const NoContextID = ^ContextID(0)

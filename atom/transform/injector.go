@@ -41,3 +41,5 @@ func (t *Injector) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 		delete(t.injections, id)
 	}
 }
+
+func (t *Injector) Flush(out atom.Writer) {}

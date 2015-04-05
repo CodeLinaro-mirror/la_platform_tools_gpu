@@ -17,7 +17,6 @@ package transform
 import (
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
@@ -33,7 +32,6 @@ func TestEarlyTerminator(t *testing.T) {
 		&test.AtomA{ID: 00},
 		&test.AtomA{ID: 60},
 		&test.AtomA{ID: 40},
-		atomAtomID{&atom.EOS{}, 0},
 	)
 	expected := list(
 		&test.AtomA{ID: 10},
@@ -42,7 +40,6 @@ func TestEarlyTerminator(t *testing.T) {
 		&test.AtomA{ID: 50},
 		&test.AtomA{ID: 90},
 		&test.AtomA{ID: 70},
-		atomAtomID{&atom.EOS{}, 0},
 	)
 
 	transform := &EarlyTerminator{}

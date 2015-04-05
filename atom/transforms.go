@@ -11,6 +11,10 @@ func (l Transforms) Transform(atoms List, out Writer) {
 		chain = processWriter{l[i], chain}
 	}
 	atoms.WriteTo(chain)
+	for p, ok := chain.(processWriter); ok; p, ok = chain.(processWriter) {
+		chain = p.o
+		p.t.Flush(chain)
+	}
 }
 
 // Add is a convenience function for appending the list of Transformers t to the
@@ -34,9 +38,13 @@ func (t transform) Transform(id ID, atom Atom, output Writer) {
 	t.F(id, atom, output)
 }
 
+func (t transform) Flush(output Writer) {}
+
 type processWriter struct {
 	t Transformer
 	o Writer
 }
 
-func (p processWriter) Write(id ID, a Atom) { p.t.Transform(id, a, p.o) }
+func (p processWriter) Write(id ID, a Atom) {
+	p.t.Transform(id, a, p.o)
+}
