@@ -30,7 +30,10 @@ func Encoder(writer binary.Writer) binary.Encoder {
 
 // Decoder creates a binary.Decoder that reads from the provided binary.Reader.
 func Decoder(reader binary.Reader) binary.Decoder {
-	return &decoder{Reader: reader}
+	return &decoder{
+		Reader:    reader,
+		Namespace: registry.Global,
+	}
 }
 
 type encoder struct {
@@ -39,6 +42,7 @@ type encoder struct {
 
 type decoder struct {
 	binary.Reader
+	Namespace *registry.Namespace
 }
 
 func (e *encoder) ID(id binary.ID) error {
@@ -72,7 +76,7 @@ func (e *encoder) Variant(obj binary.Object) error {
 func (d *decoder) Variant() (binary.Object, error) {
 	if id, err := d.ID(); err != nil {
 		return nil, err
-	} else if class := registry.Lookup(id); class == nil {
+	} else if class := d.Namespace.Lookup(id); class == nil {
 		return nil, fmt.Errorf("Unknown type id %v", id)
 	} else {
 		return class.Decode(d)
@@ -82,7 +86,7 @@ func (d *decoder) Variant() (binary.Object, error) {
 func (d *decoder) SkipVariant() (binary.ID, error) {
 	if id, err := d.ID(); err != nil {
 		return id, err
-	} else if class := registry.Lookup(id); class == nil {
+	} else if class := d.Namespace.Lookup(id); class == nil {
 		return id, fmt.Errorf("Unknown type id %v", id)
 	} else {
 		return id, class.Skip(d)
