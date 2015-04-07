@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include "Target.h"
+#include <gapic/target.h>
 
-#if TARGET_OS == CAZE_OS_LINUX
+#if TARGET_OS == GAPID_OS_LINUX
 
 #include "GfxApi.h"
 #include "Log.h"
@@ -87,13 +87,13 @@ private:
 RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     mDisplay = XOpenDisplay(nullptr);
     if (mDisplay == nullptr) {
-        CAZE_FATAL("Unable to to open X display\n");
+        GAPID_FATAL("Unable to to open X display\n");
     }
 
     int major;
     int minor;
     if (!glXQueryVersion(mDisplay, &major, &minor) || (major == 1 && minor < 3)) {
-        CAZE_FATAL("GLX 1.3+ unsupported by X server (was %d.%d)\n", major, minor);
+        GAPID_FATAL("GLX 1.3+ unsupported by X server (was %d.%d)\n", major, minor);
     }
 
     const int visualAttribs[] = {
@@ -111,14 +111,14 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     GLXFBConfig *fbConfigs = glXChooseFBConfig(
             mDisplay, DefaultScreen(mDisplay), visualAttribs, &fbConfigsCount);
     if (fbConfigs == nullptr) {
-        CAZE_FATAL("Unable to find a suitable X framebuffer config\n");
+        GAPID_FATAL("Unable to find a suitable X framebuffer config\n");
     }
     GLXFBConfig fbConfig = fbConfigs[0];
     XFree(fbConfigs);
 
     mContext = glXCreateNewContext(mDisplay, fbConfig, GLX_RGBA_TYPE, nullptr, True);
     if (mContext == nullptr) {
-        CAZE_FATAL("Failed to create glX context\n");
+        GAPID_FATAL("Failed to create glX context\n");
     }
     XSync(mDisplay, False);
 
@@ -130,7 +130,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     mPbuffer = glXCreatePbuffer(mDisplay, fbConfig, pbufferAttribs);
 
     if (!glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext)) {
-        CAZE_FATAL("Unable to make GLX context current\n");
+        GAPID_FATAL("Unable to make GLX context current\n");
     }
 
     gfxapi::Initialize();
@@ -173,5 +173,5 @@ std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize,
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_LINUX
+#endif // TARGET_OS == GAPID_OS_LINUX
 

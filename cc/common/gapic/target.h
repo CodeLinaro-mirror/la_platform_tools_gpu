@@ -14,39 +14,39 @@
  * limitations under the License.
  */
 
-#ifndef ANDROID_CAZE_TARGET_H
-#define ANDROID_CAZE_TARGET_H
+#ifndef GAPID_TARGET_H
+#define GAPID_TARGET_H
 
 // These values are used for target differentiation on session initialization.
 // Do not change them without also updating the server-side replay code.
-#define CAZE_OS_LINUX   1
-#define CAZE_OS_OSX     2
-#define CAZE_OS_WINDOWS 3
-#define CAZE_OS_ANDROID 4
+#define GAPID_OS_LINUX   1
+#define GAPID_OS_OSX     2
+#define GAPID_OS_WINDOWS 3
+#define GAPID_OS_ANDROID 4
 
 #if defined(TARGET_OS_LINUX)
-#   define TARGET_OS CAZE_OS_LINUX
+#   define TARGET_OS GAPID_OS_LINUX
 #   define STDCALL
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
 
 #if defined(TARGET_OS_OSX)
-#   define TARGET_OS CAZE_OS_OSX
+#   define TARGET_OS GAPID_OS_OSX
 #   define STDCALL
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
 
 #if defined(TARGET_OS_ANDROID)
-#   define TARGET_OS CAZE_OS_ANDROID
+#   define TARGET_OS GAPID_OS_ANDROID
 #   define STDCALL
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
 
 #if defined(TARGET_OS_WINDOWS)
-#   define TARGET_OS CAZE_OS_WINDOWS
+#   define TARGET_OS GAPID_OS_WINDOWS
 #   define STDCALL __stdcall
 #   define PATH_DELIMITER '\\'
 #   define PATH_DELIMITER_STR "\\"
@@ -62,4 +62,4 @@
 #   define snprintf _snprintf
 #endif // _MSC_VER
 
-#endif  // ANDROID_CAZE_TARGET_H
+#endif  // GAPID_TARGET_H

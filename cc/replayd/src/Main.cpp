@@ -24,15 +24,16 @@
 #include "ResourceInMemoryCache.h"
 #include "ResourceRequester.h"
 #include "SocketConnection.h"
-#include "Target.h"
+
+#include <gapic/target.h>
 
 #include <memory>
 #include <stdlib.h>
 #include <string.h>
 
-#if TARGET_OS == CAZE_OS_ANDROID
+#if TARGET_OS == GAPID_OS_ANDROID
 #include <android_native_app_glue.h>
-#endif  // TARGET_OS == CAZE_OS_ANDROID
+#endif  // TARGET_OS == GAPID_OS_ANDROID
 
 namespace android {
 namespace caze {
@@ -67,7 +68,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
                        MemoryManager* memoryManager) {
     std::unique_ptr<Connection> listenConn = SocketConnection::create("127.0.0.1", listenerPort);
     if (listenConn == nullptr) {
-        CAZE_FATAL("Failed to create listening socket\n");
+        GAPID_FATAL("Failed to create listening socket\n");
     }
     GazerListener listener(std::move(listenConn), memoryManager->getSize());
 
@@ -83,7 +84,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
         std::unique_ptr<Context> context =
                 Context::create(*gazer, resourceProvider.get(), memoryManager);
         if (context == nullptr) {
-            CAZE_WARNING("Loading Context failed!\n");
+            GAPID_WARNING("Loading Context failed!\n");
             continue;
         }
 
@@ -96,7 +97,7 @@ void listenConnections(const char* listenerPort, const char* cachePath,
 }  // end of namespace caze
 }  // end of namespace android
 
-#if TARGET_OS == CAZE_OS_ANDROID
+#if TARGET_OS == GAPID_OS_ANDROID
 // Main function for android
 void android_main(struct android_app*) {
     app_dummy();
@@ -104,7 +105,7 @@ void android_main(struct android_app*) {
     ::android::caze::listenConnections("9285", "/sdcard/caze_cache", &memoryManager);
 }
 
-#else  // TARGET_OS == CAZE_OS_ANDROID
+#else  // TARGET_OS == GAPID_OS_ANDROID
 // Main function for PC
 int main(int argc, char* argv[]) {
     bool useCache = true;
@@ -120,4 +121,4 @@ int main(int argc, char* argv[]) {
     return EXIT_SUCCESS;
 }
 
-#endif  // TARGET_OS == CAZE_OS_ANDROID
+#endif  // TARGET_OS == GAPID_OS_ANDROID

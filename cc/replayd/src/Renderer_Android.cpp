@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Target.h"
 
-#if TARGET_OS == CAZE_OS_ANDROID
+#include <gapic/target.h>
+
+#if TARGET_OS == GAPID_OS_ANDROID
 
 #include "GfxApi.h"
 #include "Log.h"
@@ -49,19 +50,19 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     mEglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to get EGL display: %d\n", error);
+        GAPID_FATAL("Failed to get EGL display: %d\n", error);
     }
 
     eglInitialize(mEglDisplay, nullptr, nullptr);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to initialize EGL: %d\n", error);
+        GAPID_FATAL("Failed to initialize EGL: %d\n", error);
     }
 
     eglBindAPI(EGL_OPENGL_ES_API);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to bind EGL API: %d\n", error);
+        GAPID_FATAL("Failed to bind EGL API: %d\n", error);
     }
 
     // Find a supported EGL context config.
@@ -82,7 +83,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     eglChooseConfig(mEglDisplay, configAttribList, &eglConfig, 1, &one);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to choose EGL config: %d\n", error);
+        GAPID_FATAL("Failed to choose EGL config: %d\n", error);
     }
 
     // Create an EGL context.
@@ -93,7 +94,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     mEglContext = eglCreateContext(mEglDisplay, eglConfig, EGL_NO_CONTEXT, contextAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to create EGL context: %d\n", error);
+        GAPID_FATAL("Failed to create EGL context: %d\n", error);
     }
 
     // Create an EGL surface for the read/draw framebuffer.
@@ -105,13 +106,13 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     mEglSurface = eglCreatePbufferSurface(mEglDisplay, eglConfig, surfaceAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to create EGL pbuffer surface: %d\n", error);
+        GAPID_FATAL("Failed to create EGL pbuffer surface: %d\n", error);
     }
 
     eglMakeCurrent(mEglDisplay, mEglSurface, mEglSurface, mEglContext);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_FATAL("Failed to make EGL current: %d\n", error);
+        GAPID_FATAL("Failed to make EGL current: %d\n", error);
     }
 
     // Initialize the graphics API
@@ -124,31 +125,31 @@ RendererImpl::~RendererImpl() {
     eglMakeCurrent(mEglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to release EGL context: %d\n", error);
+        GAPID_WARNING("Failed to release EGL context: %d\n", error);
     }
 
     eglDestroySurface(mEglDisplay, mEglSurface);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to destroy EGL surface: %d\n", error);
+        GAPID_WARNING("Failed to destroy EGL surface: %d\n", error);
     }
 
     eglDestroyContext(mEglDisplay, mEglContext);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to destroy EGL context: %d\n", error);
+        GAPID_WARNING("Failed to destroy EGL context: %d\n", error);
     }
 
     eglTerminate(mEglDisplay);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to terminate EGL: %d\n", error);
+        GAPID_WARNING("Failed to terminate EGL: %d\n", error);
     }
 
     eglReleaseThread();
     error = eglGetError();
     if (error != EGL_SUCCESS) {
-        CAZE_WARNING("Failed to release EGL thread: %d\n", error);
+        GAPID_WARNING("Failed to release EGL thread: %d\n", error);
     }
 }
 
@@ -177,5 +178,5 @@ std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize,
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_ANDROID
+#endif // TARGET_OS == GAPID_OS_ANDROID
 

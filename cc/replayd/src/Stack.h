@@ -45,17 +45,17 @@ public:
     template <typename T>
     T pop() {
         if (!mValid) {
-            CAZE_WARNING("Pop on invalid stack\n");
+            GAPID_WARNING("Pop on invalid stack\n");
             return T();
         }
 
         if (mTop == 0 || mTop > mStack.size()) {
             mValid = false;
-            CAZE_WARNING("Stack head is pointing outside of the stack, offset: %d\n", mTop);
+            GAPID_WARNING("Stack head is pointing outside of the stack, offset: %d\n", mTop);
             return T();
         }
 
-        CAZE_DEBUG("-%s pop()\n", mStack[mTop-1].debugInfo(mMemoryManager));
+        GAPID_DEBUG("-%s pop()\n", mStack[mTop-1].debugInfo(mMemoryManager));
         return PopImpl<T>::pop(this);
     }
 
@@ -64,18 +64,18 @@ public:
     template <typename T>
     void push(T value) {
         if (!mValid) {
-            CAZE_WARNING("Push on invalid stack\n");
+            GAPID_WARNING("Push on invalid stack\n");
             return;
         }
 
         if (mTop > mStack.size() - 1) {
             mValid = false;
-            CAZE_WARNING("Stack head is pointing outside of the stack, offset: %d\n", mTop);
+            GAPID_WARNING("Stack head is pointing outside of the stack, offset: %d\n", mTop);
             return;
         }
 
         mStack[mTop].set(TypeToBaseType<typename std::remove_cv<T>::type>::type, &value);
-        CAZE_DEBUG("+%s push()\n", mStack[mTop].debugInfo(mMemoryManager));
+        GAPID_DEBUG("+%s push()\n", mStack[mTop].debugInfo(mMemoryManager));
         mTop++;
     }
 
@@ -121,7 +121,7 @@ private:
             BaseType baseType = TypeToBaseType<typename std::remove_cv<T>::type>::type;
             if (stack->mStack[stack->mTop].type() != baseType) {
                 stack->mValid = false;
-                CAZE_WARNING(
+                GAPID_WARNING(
                         "Pop type (%s) doesn't match with the type at the top of the stack (%s)\n",
                         baseTypeName(baseType),
                         baseTypeName(stack->mStack[stack->mTop].type()));
@@ -149,7 +149,7 @@ private:
                     return static_cast<T*>(stack->mMemoryManager->volatileToAbsolute(offset));
                 }
                 default:
-                    CAZE_WARNING("Pop pointer from non pointer type (%s) is not allowed!\n",
+                    GAPID_WARNING("Pop pointer from non pointer type (%s) is not allowed!\n",
                                  baseTypeName(stack->mStack[stack->mTop].type()));
                     stack->mValid = false;
                     return nullptr;

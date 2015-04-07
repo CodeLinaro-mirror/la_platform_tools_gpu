@@ -87,21 +87,21 @@ Stack::Stack(uint32_t size, const MemoryManager* memoryManager) :
 }
 
 void Stack::printStack() const {
-    CAZE_DEBUG("Stack size: %u\n", mTop);
+    GAPID_DEBUG("Stack size: %u\n", mTop);
     for (uint32_t i = 0; i < mTop; ++i) {
-        CAZE_DEBUG("(%d) %s\n", i, mStack[i].debugInfo(mMemoryManager));
+        GAPID_DEBUG("(%d) %s\n", i, mStack[i].debugInfo(mMemoryManager));
     }
 }
 
 BaseType Stack::getTopType() {
     if (!mValid) {
-        CAZE_WARNING("GetTopType on invalid stack\n");
+        GAPID_WARNING("GetTopType on invalid stack\n");
         return BaseType::Bool;
     }
 
     if (mTop == 0 || mTop > mStack.size()) {
         mValid = false;
-        CAZE_WARNING("GetTopType with invalid stack head: %u (size: %zu)\n", mTop, mStack.size());
+        GAPID_WARNING("GetTopType with invalid stack head: %u (size: %zu)\n", mTop, mStack.size());
         return BaseType::Bool;
     }
 
@@ -110,37 +110,37 @@ BaseType Stack::getTopType() {
 
 void Stack::pushFrom(BaseType type, const void* data) {
     if (!mValid) {
-        CAZE_WARNING("PushFrom on invalid stack\n");
+        GAPID_WARNING("PushFrom on invalid stack\n");
         return;
     }
 
     if (mTop > mStack.size() - 1) {
         mValid = false;
-        CAZE_WARNING("PushFrom with invalid stack head: %u (size: %lu)\n", mTop,
+        GAPID_WARNING("PushFrom with invalid stack head: %u (size: %lu)\n", mTop,
                      static_cast<unsigned long>(mStack.size()));
         return;
     }
 
     mStack[mTop].set(type, data);
-    CAZE_DEBUG("+%s pushFrom(%p)\n", mStack[mTop].debugInfo(mMemoryManager), data);
+    GAPID_DEBUG("+%s pushFrom(%p)\n", mStack[mTop].debugInfo(mMemoryManager), data);
     mTop++;
 }
 
 void Stack::popTo(void* address, bool castPtrsToAbsolute) {
     if (!mValid) {
-        CAZE_WARNING("PopTo on invalid stack\n");
+        GAPID_WARNING("PopTo on invalid stack\n");
         return;
     }
 
     if (mTop == 0 || mTop > mStack.size()) {
         mValid = false;
-        CAZE_WARNING("PopTo with invalid stack head: %u (size: %lu)\n", mTop,
+        GAPID_WARNING("PopTo with invalid stack head: %u (size: %lu)\n", mTop,
                      static_cast<unsigned long>(mStack.size()));
         return;
     }
 
     mTop--;
-    CAZE_DEBUG("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
+    GAPID_DEBUG("-%s popTo(%p)\n", mStack[mTop].debugInfo(mMemoryManager), address);
 
     if (castPtrsToAbsolute) {
         switch (mStack[mTop].type()) {
@@ -166,18 +166,18 @@ void Stack::popTo(void* address, bool castPtrsToAbsolute) {
 
 void Stack::discard(uint32_t count) {
     if (!mValid) {
-        CAZE_WARNING("Discard on invalid stack\n");
+        GAPID_WARNING("Discard on invalid stack\n");
         return;
     }
 
     if (count > mTop) {
         mValid = false;
-        CAZE_WARNING("Discarding more element (%u) then in the stack (%u)\n", count, mTop);
+        GAPID_WARNING("Discarding more element (%u) then in the stack (%u)\n", count, mTop);
         return;
     }
 
     for (uint32_t i = 0; i < count; i++) {
-        CAZE_DEBUG("-%s discard()\n", mStack[mTop - i - 1].debugInfo(mMemoryManager));
+        GAPID_DEBUG("-%s discard()\n", mStack[mTop - i - 1].debugInfo(mMemoryManager));
     }
 
     mTop -= count;
@@ -185,24 +185,24 @@ void Stack::discard(uint32_t count) {
 
 void Stack::clone(uint32_t n) {
     if (!mValid) {
-        CAZE_WARNING("Clone on invalid stack\n");
+        GAPID_WARNING("Clone on invalid stack\n");
         return;
     }
 
     if (mTop >= mStack.size()) {
         mValid = false;
-        CAZE_WARNING("Cloning to full stack\n");
+        GAPID_WARNING("Cloning to full stack\n");
         return;
     }
 
     if (mTop < n + 1) {
         mValid = false;
-        CAZE_WARNING("Cloning from invalid index: %u (head: %u)\n", n, mTop);
+        GAPID_WARNING("Cloning from invalid index: %u (head: %u)\n", n, mTop);
         return;
     }
 
     mStack[mTop] = mStack[mTop - n - 1];
-    CAZE_DEBUG("+%s clone(%d)\n", mStack[mTop].debugInfo(mMemoryManager), n);
+    GAPID_DEBUG("+%s clone(%d)\n", mStack[mTop].debugInfo(mMemoryManager), n);
     mTop++;
 }
 

@@ -16,7 +16,8 @@
 
 #include "Log.h"
 #include "ResourceProvider.h"
-#include "Target.h"
+
+#include <gapic/target.h>
 
 #include <stdint.h>
 #include <utility>

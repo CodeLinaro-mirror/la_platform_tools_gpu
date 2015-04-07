@@ -36,7 +36,7 @@ var DisableLocalDeviceCache = false
 // running on.
 type deviceOS uint8
 
-// These must be kept in sync with TARGET_OS in cc/replayd/src/Target.h
+// These must be kept in sync with TARGET_OS in cc/common/gapic/target.h
 const (
 	osLinux   deviceOS = 1
 	osOSX     deviceOS = 2

@@ -15,12 +15,13 @@
  */
 
 #include "Log.h"
-#include "Target.h"
 #include "Timer.h"
+
+#include <gapic/target.h>
 
 #include <ctime>
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
 #include "windows.h"
 #else
 #include <errno.h>
@@ -39,23 +40,23 @@ const uint64_t MICRO_TO_NANO = 1000;
 // Use platformDurationToNanosecods() to convert the difference in values returned from two calls to
 // platformGetTime() into nanoseconds.
 inline uint64_t platformGetTime() {
-#if TARGET_OS == CAZE_OS_OSX
+#if TARGET_OS == GAPID_OS_OSX
     timeval tv = {0, 0};
     if (gettimeofday(&tv, NULL) != 0) {
-        CAZE_FATAL("Unable to start timer. Error: %d", errno);
+        GAPID_FATAL("Unable to start timer. Error: %d", errno);
     }
     return uint64_t(tv.tv_usec) * MICRO_TO_NANO +
             uint64_t(tv.tv_sec) * SEC_TO_NANO;
-#elif TARGET_OS == CAZE_OS_WINDOWS
+#elif TARGET_OS == GAPID_OS_WINDOWS
     LARGE_INTEGER i;
     if (!QueryPerformanceCounter(&i)) {
-        CAZE_FATAL("Unable to start timer. Error: %d", GetLastError());
+        GAPID_FATAL("Unable to start timer. Error: %d", GetLastError());
     }
     return i.QuadPart;
 #else
     timespec ts = {0, 0};
     if (clock_gettime(CLOCK_MONOTONIC, &ts) != 0) {
-        CAZE_FATAL("Unable to start timer. Error: %d", errno);
+        GAPID_FATAL("Unable to start timer. Error: %d", errno);
     }
     return uint64_t(ts.tv_nsec) + uint64_t(ts.tv_sec) * SEC_TO_NANO;
 #endif
@@ -63,12 +64,12 @@ inline uint64_t platformGetTime() {
 
 // See platformGetTime().
 inline uint64_t platformDurationToNanosecods(uint64_t duration) {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     static LARGE_INTEGER sFreq;
     if (sFreq.QuadPart == 0) {
         QueryPerformanceFrequency(&sFreq);
         if (sFreq.QuadPart == 0) {
-            CAZE_FATAL("Unable to query performance frequency. Error: %d", GetLastError());
+            GAPID_FATAL("Unable to query performance frequency. Error: %d", GetLastError());
         }
     }
     return (duration * SEC_TO_NANO) / sFreq.QuadPart;

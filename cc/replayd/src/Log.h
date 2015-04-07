@@ -31,7 +31,7 @@
 // * LOG_LEVEL_DEBUG    Verbose logs used only for debugging. They can have significant effect on
 //                      the performance of the application
 
-#include "Target.h"
+#include <gapic/target.h>
 
 // Levels of logging from least verbose to most verbose.
 #define LOG_LEVEL_FATAL   0
@@ -44,23 +44,23 @@
 #   define LOG_LEVEL LOG_LEVEL_WARNING
 #endif
 
-#define CAZE_STR(S) CAZE_STR2(S)
-#define CAZE_STR2(S) #S
+#define GAPID_STR(S) GAPID_STR2(S)
+#define GAPID_STR2(S) #S
 
-#if TARGET_OS == CAZE_OS_ANDROID
+#if TARGET_OS == GAPID_OS_ANDROID
 
 #include <android/log.h>
-#define CAZE_FATAL_IMPL(...) \
-    __android_log_assert(nullptr, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
-#define CAZE_WARNING_IMPL(...) \
-    __android_log_print(ANDROID_LOG_WARN, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
-#define CAZE_INFO_IMPL(...) \
-    __android_log_print(ANDROID_LOG_INFO, "Caze", __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
-#define CAZE_DEBUG_IMPL(...)                       \
+#define GAPID_FATAL_IMPL(...) \
+    __android_log_assert(nullptr, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+#define GAPID_WARNING_IMPL(...) \
+    __android_log_print(ANDROID_LOG_WARN, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+#define GAPID_INFO_IMPL(...) \
+    __android_log_print(ANDROID_LOG_INFO, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+#define GAPID_DEBUG_IMPL(...)                       \
     __android_log_print(ANDROID_LOG_DEBUG, "Caze", \
-                        __FILE__ ":" CAZE_STR(__LINE__) ": " __VA_ARGS__);
+                        __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
 
-#else  // TARGET_OS == CAZE_OS_ANDROID
+#else  // TARGET_OS == GAPID_OS_ANDROID
 
 #include <stdio.h>
 
@@ -92,38 +92,39 @@ private:
 }  // end of namespace caze
 }  // end of namespace android
 
-#define CAZE_FATAL_IMPL(...) \
-        ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
-#define CAZE_WARNING_IMPL(...)                                                           \
-        ::android::caze::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" CAZE_STR(__LINE__), \
+#define GAPID_FATAL_IMPL(...) \
+        ::android::caze::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+#define GAPID_WARNING_IMPL(...)                                                           \
+        ::android::caze::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" GAPID_STR(__LINE__), \
                                      __VA_ARGS__)
-#define CAZE_INFO_IMPL(...) \
-        ::android::caze::Logger::log(LOG_LEVEL_INFO, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
-#define CAZE_DEBUG_IMPL(...) \
-        ::android::caze::Logger::log(LOG_LEVEL_DEBUG, __FILE__ ":" CAZE_STR(__LINE__), __VA_ARGS__)
+#define GAPID_INFO_IMPL(...) \
+        ::android::caze::Logger::log(LOG_LEVEL_INFO, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+#define GAPID_DEBUG_IMPL(...) \
+        ::android::caze::Logger::log(LOG_LEVEL_DEBUG, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
 
-#endif  // TARGET_OS == CAZE_OS_ANDROID
+#endif  // TARGET_OS == GAPID_OS_ANDROID
 
 // Define the required log macros based on the specified log level
 
-#define CAZE_FATAL(...) CAZE_FATAL_IMPL(__VA_ARGS__)
+#define GAPID_FATAL(...) GAPID_FATAL_IMPL(__VA_ARGS__)
 
 #if LOG_LEVEL >= LOG_LEVEL_WARNING
-#   define CAZE_WARNING(...) CAZE_WARNING_IMPL(__VA_ARGS__)
+#   define GAPID_WARNING(...) GAPID_WARNING_IMPL(__VA_ARGS__)
 #else
-#   define CAZE_WARNING(...)
+#   define GAPID_WARNING(...)
 #endif
 
 #if LOG_LEVEL >= LOG_LEVEL_INFO
-#   define CAZE_INFO(...) CAZE_INFO_IMPL(__VA_ARGS__)
+#   define GAPID_INFO(...) GAPID_INFO_IMPL(__VA_ARGS__)
 #else
-#   define CAZE_INFO(...)
+#   define GAPID_INFO(...)
 #endif
 
 #if LOG_LEVEL >= LOG_LEVEL_DEBUG
-#   define CAZE_DEBUG(...) CAZE_DEBUG_IMPL(__VA_ARGS__)
+#   define GAPID_DEBUG(...) GAPID_DEBUG_IMPL(__VA_ARGS__)
 #else
-#   define CAZE_DEBUG(...)
+#   define GAPID_DEBUG(...)
 #endif
+
 
 #endif  // ANDROID_CAZE_LOG_H

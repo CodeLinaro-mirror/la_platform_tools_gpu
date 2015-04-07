@@ -28,7 +28,7 @@
 #include <utility>
 #include <vector>
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
 #include <direct.h>
 #define mkdir(path, mode) _mkdir(path)
 #else
@@ -64,7 +64,7 @@ int mkdirAll(const std::string& path) {
 std::unique_ptr<ResourceProvider> ResourceDiskCache::create(
         std::unique_ptr<ResourceProvider> fallbackProvider, const std::string& path) {
     if (0 != mkdirAll(path)) {
-        CAZE_WARNING("Couldn't access/create cache directory; disabling disk cache.");
+        GAPID_WARNING("Couldn't access/create cache directory; disabling disk cache.");
         return fallbackProvider;  // Disk path was inaccessible.
     } else {
         std::string diskPath = path;
@@ -122,7 +122,7 @@ bool ResourceDiskCache::prefetch(const ResourceList& resources,
         if (FILE* fi = fopen(filepath.c_str(), "rb")) {
             fclose(fi);
         } else if (res.second > size) {
-            CAZE_WARNING("Can't prefetch resource because of limited buffer size");
+            GAPID_WARNING("Can't prefetch resource because of limited buffer size");
         } else {
             // If next resource not fit into this batch then fetch the current batch
             if (querySumSize + res.second > size) {

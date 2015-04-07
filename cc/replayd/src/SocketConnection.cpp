@@ -16,18 +16,19 @@
 
 #include "Log.h"
 #include "SocketConnection.h"
-#include "Target.h"
+
+#include <gapic/target.h>
 
 #include <stdint.h>
 #include <string.h>
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
 
 #define _WSPIAPI_EMIT_LEGACY
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
 
 #include <errno.h>
 #include <netdb.h>
@@ -35,34 +36,34 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 
 namespace android {
 namespace caze {
 namespace {
 
 void close(int fd) {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     ::closesocket(fd);
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     ::close(fd);
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 size_t recv(int sockfd, void *buf, size_t len, int flags) {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     return ::recv(sockfd, static_cast<char*>(buf), static_cast<int>(len), flags);
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     return ::recv(sockfd, buf, len, flags);
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 size_t send(int sockfd, const void *buf, size_t len, int flags) {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     return ::send(sockfd, static_cast<const char*>(buf), static_cast<int>(len), flags);
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     return ::send(sockfd, buf, len, flags);
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 int accept(int sockfd, struct sockaddr *addr, size_t *addrlen) {
@@ -70,11 +71,11 @@ int accept(int sockfd, struct sockaddr *addr, size_t *addrlen) {
         return static_cast<int>(::accept(sockfd, addr, nullptr));
     }
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     int addrlenTmp = static_cast<int>(*addrlen);
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     socklen_t addrlenTmp = *addrlen;
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 
     int ret = static_cast<int>(::accept(sockfd, addr, &addrlenTmp));
     *addrlen = addrlenTmp;
@@ -91,12 +92,12 @@ void freeaddrinfo(struct addrinfo *res) {
 }
 
 int setsockopt(int sockfd, int level, int optname, const void *optval, size_t optlen) {
-#if TARGET_OS == CAZE_OS_WINDOWS
-    return ::setsockopt(sockfd, level, optname, static_cast<const char*>(optval), 
+#if TARGET_OS == GAPID_OS_WINDOWS
+    return ::setsockopt(sockfd, level, optname, static_cast<const char*>(optval),
             static_cast<int>(optlen));
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     return ::setsockopt(sockfd, level, optname, optval, optlen);
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 int socket(int domain, int type, int protocol) {
@@ -108,19 +109,19 @@ int listen(int sockfd, int backlog) {
 }
 
 int bind(int sockfd, const struct sockaddr *addr, size_t addrlen) {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     return ::bind(sockfd, addr, static_cast<int>(addrlen));
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     return ::bind(sockfd, addr, addrlen);
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 int error() {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     return ::WSAGetLastError();
-#else  // TARGET_OS == CAZE_OS_WINDOWS
+#else  // TARGET_OS == GAPID_OS_WINDOWS
     return errno;
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 }  // end of anonymous namespace
@@ -147,7 +148,7 @@ const char* SocketConnection::error() {
 std::unique_ptr<Connection> SocketConnection::accept() {
     int clientSocket = caze::accept(mSocket, nullptr, nullptr);
     if (-1 == clientSocket) {
-        CAZE_WARNING("Failed to accept incoming connection: %s\n", strerror(caze::error()));
+        GAPID_WARNING("Failed to accept incoming connection: %s\n", strerror(caze::error()));
         return nullptr;
     }
     return std::unique_ptr<Connection>(new SocketConnection(clientSocket));
@@ -168,7 +169,7 @@ std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const
 
     const int getaddrinfoRes = caze::getaddrinfo(hostname, port, &hints, &addr);
     if (0 != getaddrinfoRes) {
-        CAZE_WARNING("getaddrinfo() failed: %d - %s.\n", getaddrinfoRes, strerror(caze::error()));
+        GAPID_WARNING("getaddrinfo() failed: %d - %s.\n", getaddrinfoRes, strerror(caze::error()));
         return nullptr;
     }
     auto addrDeleter = [](struct addrinfo* ptr) { caze::freeaddrinfo(ptr); };  // deferred.
@@ -176,7 +177,7 @@ std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const
 
     const int sock = caze::socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
     if (-1 == sock) {
-        CAZE_WARNING("socket() failed: %s.\n", strerror(caze::error()));
+        GAPID_WARNING("socket() failed: %s.\n", strerror(caze::error()));
         return nullptr;
     }
     auto socketCloser = [](const int* ptr) { caze::close(*ptr); };  // deferred.
@@ -184,17 +185,17 @@ std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const
 
     const int one = 1;
     if (-1 == caze::setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&one, sizeof(int))) {
-        CAZE_WARNING("setsockopt() failed: %s\n", strerror(caze::error()));
+        GAPID_WARNING("setsockopt() failed: %s\n", strerror(caze::error()));
         return nullptr;
     }
 
     if (-1 == caze::bind(sock, addr->ai_addr, addr->ai_addrlen)) {
-        CAZE_WARNING("bind() failed: %s.\n", strerror(caze::error()));
+        GAPID_WARNING("bind() failed: %s.\n", strerror(caze::error()));
         return nullptr;
     }
 
     if (-1 == caze::listen(sock, 10)) {
-        CAZE_WARNING("listen() failed: %s.\n", strerror(caze::error()));
+        GAPID_WARNING("listen() failed: %s.\n", strerror(caze::error()));
         return nullptr;
     }
 
@@ -203,19 +204,19 @@ std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const
 }
 
 SocketConnection::NetworkInitializer::NetworkInitializer() {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     WSADATA wsaData;
     int wsaInitRes = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (wsaInitRes != 0) {
-        CAZE_FATAL("WSAStartup failed with error code: %d\n", wsaInitRes);
+        GAPID_FATAL("WSAStartup failed with error code: %d\n", wsaInitRes);
     }
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 SocketConnection::NetworkInitializer::~NetworkInitializer() {
-#if TARGET_OS == CAZE_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     ::WSACleanup();
-#endif  // TARGET_OS == CAZE_OS_WINDOWS
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 }  // end of namespace caze

@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Target.h"
 
-#if TARGET_OS == CAZE_OS_ANDROID
+#include <gapic/target.h>
+
+#if TARGET_OS == GAPID_OS_ANDROID
 
 #include "Log.h"
 
@@ -40,7 +41,7 @@ public:
   inline DlLoader(const char* name) {
     mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
     if (mLibrary == nullptr) {
-      CAZE_FATAL("Can't load library %s: %s", name, dlerror());
+      GAPID_FATAL("Can't load library %s: %s", name, dlerror());
     }
   }
 
@@ -68,7 +69,7 @@ void* GetGfxProcAddress(const char* name) {
     getProcAddressType getProcAddress =
             reinterpret_cast<getProcAddressType>(dlLoader.lookup("eglGetProcAddress"));
     if (getProcAddress == nullptr) {
-      CAZE_FATAL("Can't find eglGetProcAddress(): %s", dlerror());
+      GAPID_FATAL("Can't find eglGetProcAddress(): %s", dlerror());
     }
 
     return getProcAddress(name);
@@ -77,4 +78,4 @@ void* GetGfxProcAddress(const char* name) {
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_ANDROID
+#endif // TARGET_OS == GAPID_OS_ANDROID
