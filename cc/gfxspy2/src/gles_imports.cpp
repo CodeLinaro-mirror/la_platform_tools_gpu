@@ -289,4 +289,4 @@ void GlesImports::Resolve() {
             GetGfxProcAddress("glGetQueryObjectui64vEXT"));
 }
 
-}  // end of namespace gapii
+}  // namespace gapii

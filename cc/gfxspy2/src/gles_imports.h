@@ -514,6 +514,6 @@ struct GlesImports {
     PFNGLGETQUERYOBJECTI64VEXT glGetQueryObjecti64vEXT;
     PFNGLGETQUERYOBJECTUI64VEXT glGetQueryObjectui64vEXT;
 };
-}  // end of namespace gapii
+}  // namespace gapii
 
 #endif  // GAPII_GLES_IMPORTS_H
