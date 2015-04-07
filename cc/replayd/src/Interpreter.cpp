@@ -35,7 +35,7 @@ Interpreter::Interpreter(const MemoryManager* memoryManager, uint32_t stackDepth
 bool Interpreter::run(const std::pair<const uint32_t*, uint32_t>& instructions) {
     for (uint32_t i = 0; i < instructions.second; ++i) {
         if (!interpret(instructions.first[i])) {
-            CAZE_WARNING(
+            GAPID_WARNING(
                     "Interpreter is stopped because of an interpretation error in opcode %u (%u)\n",
                     i, instructions.first[i]);
             return false;
@@ -63,7 +63,7 @@ uint32_t Interpreter::extract26bitData(uint32_t opcode) const {
 bool Interpreter::call(uint32_t opcode) {
     auto func = mFunctions.find(opcode & FUNCTION_ID_MASK);
     if (func == mFunctions.end()) {
-        CAZE_WARNING("Invalid function id: %u\n", opcode & FUNCTION_ID_MASK);
+        GAPID_WARNING("Invalid function id: %u\n", opcode & FUNCTION_ID_MASK);
         return false;
     } else {
         return func->second(&mStack, (opcode & PUSH_RETURN_MASK) != 0);
@@ -147,11 +147,11 @@ bool Interpreter::copy(uint32_t opcode) {
     void* target = mStack.pop<void*>();
     const void* source = mStack.pop<const void*>();
     if (source == nullptr) {
-        CAZE_WARNING("Error: copy source address is null\n");
+        GAPID_WARNING("Error: copy source address is null\n");
         return false;
     }
     if (target == nullptr) {
-        CAZE_WARNING("Error: copy destination address is null\n");
+        GAPID_WARNING("Error: copy destination address is null\n");
         return false;
     }
     memcpy(target, source, count);
@@ -168,11 +168,11 @@ bool Interpreter::strcpy(uint32_t opcode) {
     char* target = mStack.pop<char*>();
     const char* source = mStack.pop<const char*>();
     if (source == nullptr) {
-        CAZE_WARNING("Error: strcpy source address is null\n");
+        GAPID_WARNING("Error: strcpy source address is null\n");
         return false;
     }
     if (target == nullptr) {
-        CAZE_WARNING("Error: strcpy destination address is null\n");
+        GAPID_WARNING("Error: strcpy destination address is null\n");
         return false;
     }
     uint32_t i;
@@ -218,9 +218,9 @@ bool Interpreter::extend(uint32_t opcode) {
     return mStack.isValid();
 }
 
-#define DEBUG_OPCODE(name, value) CAZE_DEBUG(name "\n")
-#define DEBUG_OPCODE_26(name, value) CAZE_DEBUG(name "(%#010x)\n", value & DATA_MASK26)
-#define DEBUG_OPCODE_TY_20(name, value) CAZE_DEBUG(name "(%#010x, %s)\n", value & DATA_MASK20, baseTypeName(extractType(value)))
+#define DEBUG_OPCODE(name, value) GAPID_DEBUG(name "\n")
+#define DEBUG_OPCODE_26(name, value) GAPID_DEBUG(name "(%#010x)\n", value & DATA_MASK26)
+#define DEBUG_OPCODE_TY_20(name, value) GAPID_DEBUG(name "(%#010x, %s)\n", value & DATA_MASK20, baseTypeName(extractType(value)))
 
 bool Interpreter::interpret(uint32_t opcode) {
     InstructionCode code = static_cast<InstructionCode>(opcode >> OPCODE_BIT_SHIFT);
@@ -268,7 +268,7 @@ bool Interpreter::interpret(uint32_t opcode) {
             DEBUG_OPCODE_26("EXTEND", opcode);
             return this->extend(opcode);
         default:
-            CAZE_WARNING("Unknown opcode! %#010x\n", opcode);
+            GAPID_WARNING("Unknown opcode! %#010x\n", opcode);
             return false;
     }
 }

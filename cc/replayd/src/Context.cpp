@@ -25,7 +25,8 @@
 #include "ReplayRequest.h"
 #include "ResourceProvider.h"
 #include "Stack.h"
-#include "Target.h"
+
+#include <gapic/target.h>
 
 #include <cstdlib>
 #include <sstream>
@@ -65,18 +66,18 @@ bool Context::initialize() {
     }
 
     if (!mMemoryManager->setVolatileMemory(mReplayRequest->getVolatileMemorySize())) {
-        CAZE_WARNING("Setting the volatile memory size failed (size: %u)\n",
+        GAPID_WARNING("Setting the volatile memory size failed (size: %u)\n",
                      mReplayRequest->getVolatileMemorySize());
         return false;
     }
 
     mMemoryManager->setConstantMemory(mReplayRequest->getConstantMemory());
 
-    CAZE_INFO("Prefetching resources...\n");
+    GAPID_INFO("Prefetching resources...\n");
     mResourceProvider->prefetch(mReplayRequest->getResources(), mGazer,
                                 mMemoryManager->getVolatileAddress(),
                                 mReplayRequest->getVolatileMemorySize());
-    CAZE_INFO("Prefetching ready\n");
+    GAPID_INFO("Prefetching ready\n");
 
     mInMemoryCacheSize = static_cast<uint32_t>(
             static_cast<uint8_t*>(mMemoryManager->getVolatileAddress()) -
@@ -140,10 +141,10 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         }
 
         if (stack->isValid()) {
-            CAZE_INFO("init(%d, %d, %d, %d)\n", height, width, depthSize, stencilSize);
+            GAPID_INFO("init(%d, %d, %d, %d)\n", height, width, depthSize, stencilSize);
             return this->init(width, height, depthSize, stencilSize);
         } else {
-            CAZE_WARNING("Error during calling function initGl\n");
+            GAPID_WARNING("Error during calling function initGl\n");
             return false;
         }
     });
@@ -159,13 +160,13 @@ bool Context::loadResource(Stack* stack) {
     void* address = stack->pop<void*>();
 
     if (!stack->isValid()) {
-        CAZE_WARNING("Error during loadResource\n");
+        GAPID_WARNING("Error during loadResource\n");
         return false;
     }
 
     const auto& resourceData = mReplayRequest->getResourceData(resourceId);
     if (!mResourceProvider->get(resourceData.first, mGazer, address, resourceData.second)) {
-        CAZE_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
+        GAPID_WARNING("Can't fetch resource: %s\n", resourceData.first.c_str());
         return false;
     }
 
@@ -177,7 +178,7 @@ bool Context::postData(Stack* stack) {
     const void* address = stack->pop<const void*>();
 
     if (!stack->isValid()) {
-        CAZE_WARNING("Error during postData\n");
+        GAPID_WARNING("Error during postData\n");
         return false;
     }
 
@@ -186,7 +187,7 @@ bool Context::postData(Stack* stack) {
 
 bool Context::flushPostBuffer(Stack* stack) {
     if (!stack->isValid()) {
-        CAZE_WARNING("Error during flushPostBuffer\n");
+        GAPID_WARNING("Error during flushPostBuffer\n");
         return false;
     }
 
@@ -197,14 +198,14 @@ bool Context::startTimer(Stack* stack) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            CAZE_INFO("startTimer(%d)\n", index);
+            GAPID_INFO("startTimer(%d)\n", index);
             mTimers[index].Start();
             return true;
         } else {
-            CAZE_WARNING("StartTimer called with invalid index %d", index);
+            GAPID_WARNING("StartTimer called with invalid index %d", index);
         }
     } else {
-        CAZE_WARNING("Error while calling function StartTimer\n");
+        GAPID_WARNING("Error while calling function StartTimer\n");
     }
     return false;
 }
@@ -213,17 +214,17 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
     uint8_t index = stack->pop<uint8_t>();
     if (stack->isValid()) {
         if (index < MAX_TIMERS) {
-            CAZE_INFO("stopTimer(%d)\n", index);
+            GAPID_INFO("stopTimer(%d)\n", index);
             uint64_t ns = mTimers[index].Stop();
             if (pushReturn) {
                 stack->push(ns);
             }
             return true;
         } else {
-            CAZE_WARNING("StopTimer called with invalid index %d", index);
+            GAPID_WARNING("StopTimer called with invalid index %d", index);
         }
     } else {
-        CAZE_WARNING("Error while calling function StopTimer\n");
+        GAPID_WARNING("Error while calling function StopTimer\n");
     }
     return false;
 }

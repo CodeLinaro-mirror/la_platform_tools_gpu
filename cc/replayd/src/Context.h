@@ -17,8 +17,9 @@
 #ifndef ANDROID_CAZE_CONTEXT_H
 #define ANDROID_CAZE_CONTEXT_H
 
-#include "Target.h"
 #include "Timer.h"
+
+#include <gapic/target.h>
 
 #include <memory>
 #include <string>

@@ -17,15 +17,15 @@ bool callEglCreateContext(Stack* stack, bool pushReturn) {
     int32_t* context = stack->pop<int32_t*>();
     int32_t* version = stack->pop<int32_t*>();
     if (stack->isValid()) {
-        CAZE_INFO("eglCreateContext(%p, %p)\n", version, context);
+        GAPID_INFO("eglCreateContext(%p, %p)\n", version, context);
         if (eglCreateContext != nullptr) {
             eglCreateContext(version, context);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function eglCreateContext\n");
+            GAPID_WARNING("Attempted to call unsupported function eglCreateContext\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function eglCreateContext\n");
+        GAPID_WARNING("Error during calling function eglCreateContext\n");
         return false;
     }
 }
@@ -33,30 +33,30 @@ bool callEglCreateContext(Stack* stack, bool pushReturn) {
 bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
     int32_t context = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("eglMakeCurrent(%d)\n", context);
+        GAPID_INFO("eglMakeCurrent(%d)\n", context);
         if (eglMakeCurrent != nullptr) {
             eglMakeCurrent(context);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function eglMakeCurrent\n");
+            GAPID_WARNING("Attempted to call unsupported function eglMakeCurrent\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function eglMakeCurrent\n");
+        GAPID_WARNING("Error during calling function eglMakeCurrent\n");
         return false;
     }
 }
 
 bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("eglSwapBuffers()\n");
+        GAPID_INFO("eglSwapBuffers()\n");
         if (eglSwapBuffers != nullptr) {
             eglSwapBuffers();
         } else {
-            CAZE_WARNING("Attempted to call unsupported function eglSwapBuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function eglSwapBuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function eglSwapBuffers\n");
+        GAPID_WARNING("Error during calling function eglSwapBuffers\n");
         return false;
     }
 }
@@ -64,15 +64,15 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
 bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
     HDC hdc = stack->pop<HDC>();
     if (stack->isValid()) {
-        CAZE_INFO("wglSwapBuffers(%p)\n", hdc);
+        GAPID_INFO("wglSwapBuffers(%p)\n", hdc);
         if (wglSwapBuffers != nullptr) {
             wglSwapBuffers(hdc);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function wglSwapBuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function wglSwapBuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function wglSwapBuffers\n");
+        GAPID_WARNING("Error during calling function wglSwapBuffers\n");
         return false;
     }
 }
@@ -80,15 +80,15 @@ bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
 bool callGlEnableClientState(Stack* stack, bool pushReturn) {
     ArrayType type = stack->pop<ArrayType>();
     if (stack->isValid()) {
-        CAZE_INFO("glEnableClientState(%u)\n", type);
+        GAPID_INFO("glEnableClientState(%u)\n", type);
         if (glEnableClientState != nullptr) {
             glEnableClientState(type);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEnableClientState\n");
+            GAPID_WARNING("Attempted to call unsupported function glEnableClientState\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEnableClientState\n");
+        GAPID_WARNING("Error during calling function glEnableClientState\n");
         return false;
     }
 }
@@ -96,15 +96,15 @@ bool callGlEnableClientState(Stack* stack, bool pushReturn) {
 bool callGlDisableClientState(Stack* stack, bool pushReturn) {
     ArrayType type = stack->pop<ArrayType>();
     if (stack->isValid()) {
-        CAZE_INFO("glDisableClientState(%u)\n", type);
+        GAPID_INFO("glDisableClientState(%u)\n", type);
         if (glDisableClientState != nullptr) {
             glDisableClientState(type);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDisableClientState\n");
+            GAPID_WARNING("Attempted to call unsupported function glDisableClientState\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDisableClientState\n");
+        GAPID_WARNING("Error during calling function glDisableClientState\n");
         return false;
     }
 }
@@ -116,16 +116,16 @@ bool callGlGetProgramBinaryOES(Stack* stack, bool pushReturn) {
     int32_t buffer_size = stack->pop<int32_t>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetProgramBinaryOES(%u, %d, %p, %p, %p)\n", program, buffer_size,
-                  bytes_written, binary_format, binary);
+        GAPID_INFO("glGetProgramBinaryOES(%u, %d, %p, %p, %p)\n", program, buffer_size,
+                   bytes_written, binary_format, binary);
         if (glGetProgramBinaryOES != nullptr) {
             glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetProgramBinaryOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetProgramBinaryOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetProgramBinaryOES\n");
+        GAPID_WARNING("Error during calling function glGetProgramBinaryOES\n");
         return false;
     }
 }
@@ -136,16 +136,16 @@ bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
     uint32_t binary_format = stack->pop<uint32_t>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glProgramBinaryOES(%u, %u, %p, %d)\n", program, binary_format, binary,
-                  binary_size);
+        GAPID_INFO("glProgramBinaryOES(%u, %u, %p, %d)\n", program, binary_format, binary,
+                   binary_size);
         if (glProgramBinaryOES != nullptr) {
             glProgramBinaryOES(program, binary_format, binary, binary_size);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glProgramBinaryOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glProgramBinaryOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glProgramBinaryOES\n");
+        GAPID_WARNING("Error during calling function glProgramBinaryOES\n");
         return false;
     }
 }
@@ -157,15 +157,15 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glStartTilingQCOM(%d, %d, %d, %d, %u)\n", x, y, width, height, preserveMask);
+        GAPID_INFO("glStartTilingQCOM(%d, %d, %d, %d, %u)\n", x, y, width, height, preserveMask);
         if (glStartTilingQCOM != nullptr) {
             glStartTilingQCOM(x, y, width, height, preserveMask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glStartTilingQCOM\n");
+            GAPID_WARNING("Attempted to call unsupported function glStartTilingQCOM\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glStartTilingQCOM\n");
+        GAPID_WARNING("Error during calling function glStartTilingQCOM\n");
         return false;
     }
 }
@@ -173,15 +173,15 @@ bool callGlStartTilingQCOM(Stack* stack, bool pushReturn) {
 bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
     TilePreserveMaskQCOM preserve_mask = stack->pop<TilePreserveMaskQCOM>();
     if (stack->isValid()) {
-        CAZE_INFO("glEndTilingQCOM(%u)\n", preserve_mask);
+        GAPID_INFO("glEndTilingQCOM(%u)\n", preserve_mask);
         if (glEndTilingQCOM != nullptr) {
             glEndTilingQCOM(preserve_mask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEndTilingQCOM\n");
+            GAPID_WARNING("Attempted to call unsupported function glEndTilingQCOM\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEndTilingQCOM\n");
+        GAPID_WARNING("Error during calling function glEndTilingQCOM\n");
         return false;
     }
 }
@@ -191,15 +191,15 @@ bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
     int32_t numAttachments = stack->pop<int32_t>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glDiscardFramebufferEXT(%u, %d, %p)\n", target, numAttachments, attachments);
+        GAPID_INFO("glDiscardFramebufferEXT(%u, %d, %p)\n", target, numAttachments, attachments);
         if (glDiscardFramebufferEXT != nullptr) {
             glDiscardFramebufferEXT(target, numAttachments, attachments);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDiscardFramebufferEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glDiscardFramebufferEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDiscardFramebufferEXT\n");
+        GAPID_WARNING("Error during calling function glDiscardFramebufferEXT\n");
         return false;
     }
 }
@@ -208,15 +208,15 @@ bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
     const char* marker = stack->pop<const char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glInsertEventMarkerEXT(%d, %s)\n", length, marker);
+        GAPID_INFO("glInsertEventMarkerEXT(%d, %s)\n", length, marker);
         if (glInsertEventMarkerEXT != nullptr) {
             glInsertEventMarkerEXT(length, marker);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glInsertEventMarkerEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glInsertEventMarkerEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glInsertEventMarkerEXT\n");
+        GAPID_WARNING("Error during calling function glInsertEventMarkerEXT\n");
         return false;
     }
 }
@@ -225,30 +225,30 @@ bool callGlPushGroupMarkerEXT(Stack* stack, bool pushReturn) {
     const char* marker = stack->pop<const char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glPushGroupMarkerEXT(%d, %s)\n", length, marker);
+        GAPID_INFO("glPushGroupMarkerEXT(%d, %s)\n", length, marker);
         if (glPushGroupMarkerEXT != nullptr) {
             glPushGroupMarkerEXT(length, marker);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glPushGroupMarkerEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glPushGroupMarkerEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glPushGroupMarkerEXT\n");
+        GAPID_WARNING("Error during calling function glPushGroupMarkerEXT\n");
         return false;
     }
 }
 
 bool callGlPopGroupMarkerEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glPopGroupMarkerEXT()\n");
+        GAPID_INFO("glPopGroupMarkerEXT()\n");
         if (glPopGroupMarkerEXT != nullptr) {
             glPopGroupMarkerEXT();
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glPopGroupMarkerEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glPopGroupMarkerEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glPopGroupMarkerEXT\n");
+        GAPID_WARNING("Error during calling function glPopGroupMarkerEXT\n");
         return false;
     }
 }
@@ -259,15 +259,15 @@ bool callGlTexStorage1DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexStorage1DEXT(%u, %d, %u, %d)\n", target, levels, format, width);
+        GAPID_INFO("glTexStorage1DEXT(%u, %d, %u, %d)\n", target, levels, format, width);
         if (glTexStorage1DEXT != nullptr) {
             glTexStorage1DEXT(target, levels, format, width);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexStorage1DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexStorage1DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexStorage1DEXT\n");
+        GAPID_WARNING("Error during calling function glTexStorage1DEXT\n");
         return false;
     }
 }
@@ -279,15 +279,16 @@ bool callGlTexStorage2DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexStorage2DEXT(%u, %d, %u, %d, %d)\n", target, levels, format, width, height);
+        GAPID_INFO("glTexStorage2DEXT(%u, %d, %u, %d, %d)\n", target, levels, format, width,
+                   height);
         if (glTexStorage2DEXT != nullptr) {
             glTexStorage2DEXT(target, levels, format, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexStorage2DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexStorage2DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexStorage2DEXT\n");
+        GAPID_WARNING("Error during calling function glTexStorage2DEXT\n");
         return false;
     }
 }
@@ -300,16 +301,16 @@ bool callGlTexStorage3DEXT(Stack* stack, bool pushReturn) {
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexStorage3DEXT(%u, %d, %u, %d, %d, %d)\n", target, levels, format, width,
-                  height, depth);
+        GAPID_INFO("glTexStorage3DEXT(%u, %d, %u, %d, %d, %d)\n", target, levels, format, width,
+                   height, depth);
         if (glTexStorage3DEXT != nullptr) {
             glTexStorage3DEXT(target, levels, format, width, height, depth);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexStorage3DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexStorage3DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexStorage3DEXT\n");
+        GAPID_WARNING("Error during calling function glTexStorage3DEXT\n");
         return false;
     }
 }
@@ -321,16 +322,16 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
     TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
-        CAZE_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
-                  width);
+        GAPID_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
+                   width);
         if (glTextureStorage1DEXT != nullptr) {
             glTextureStorage1DEXT(texture, target, levels, format, width);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTextureStorage1DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTextureStorage1DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTextureStorage1DEXT\n");
+        GAPID_WARNING("Error during calling function glTextureStorage1DEXT\n");
         return false;
     }
 }
@@ -343,16 +344,16 @@ bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
     TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
-        CAZE_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
-                  format, width, height);
+        GAPID_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
+                   format, width, height);
         if (glTextureStorage2DEXT != nullptr) {
             glTextureStorage2DEXT(texture, target, levels, format, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTextureStorage2DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTextureStorage2DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTextureStorage2DEXT\n");
+        GAPID_WARNING("Error during calling function glTextureStorage2DEXT\n");
         return false;
     }
 }
@@ -366,16 +367,16 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
     TextureTarget target = stack->pop<TextureTarget>();
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
-        CAZE_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
-                  format, width, height, depth);
+        GAPID_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
+                   format, width, height, depth);
         if (glTextureStorage3DEXT != nullptr) {
             glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTextureStorage3DEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glTextureStorage3DEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTextureStorage3DEXT\n");
+        GAPID_WARNING("Error during calling function glTextureStorage3DEXT\n");
         return false;
     }
 }
@@ -384,15 +385,15 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
     VertexArrayId* arrays = stack->pop<VertexArrayId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenVertexArraysOES(%d, %p)\n", count, arrays);
+        GAPID_INFO("glGenVertexArraysOES(%d, %p)\n", count, arrays);
         if (glGenVertexArraysOES != nullptr) {
             glGenVertexArraysOES(count, arrays);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenVertexArraysOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenVertexArraysOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenVertexArraysOES\n");
+        GAPID_WARNING("Error during calling function glGenVertexArraysOES\n");
         return false;
     }
 }
@@ -400,15 +401,15 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
 bool callGlBindVertexArrayOES(Stack* stack, bool pushReturn) {
     VertexArrayId array = stack->pop<VertexArrayId>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindVertexArrayOES(%u)\n", array);
+        GAPID_INFO("glBindVertexArrayOES(%u)\n", array);
         if (glBindVertexArrayOES != nullptr) {
             glBindVertexArrayOES(array);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindVertexArrayOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindVertexArrayOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindVertexArrayOES\n");
+        GAPID_WARNING("Error during calling function glBindVertexArrayOES\n");
         return false;
     }
 }
@@ -417,15 +418,15 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
     VertexArrayId* arrays = stack->pop<VertexArrayId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteVertexArraysOES(%d, %p)\n", count, arrays);
+        GAPID_INFO("glDeleteVertexArraysOES(%d, %p)\n", count, arrays);
         if (glDeleteVertexArraysOES != nullptr) {
             glDeleteVertexArraysOES(count, arrays);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteVertexArraysOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteVertexArraysOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteVertexArraysOES\n");
+        GAPID_WARNING("Error during calling function glDeleteVertexArraysOES\n");
         return false;
     }
 }
@@ -433,19 +434,19 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
 bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
     VertexArrayId array = stack->pop<VertexArrayId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsVertexArrayOES(%u)\n", array);
+        GAPID_INFO("glIsVertexArrayOES(%u)\n", array);
         if (glIsVertexArrayOES != nullptr) {
             bool return_value = glIsVertexArrayOES(array);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsVertexArrayOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsVertexArrayOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsVertexArrayOES\n");
+        GAPID_WARNING("Error during calling function glIsVertexArrayOES\n");
         return false;
     }
 }
@@ -454,15 +455,15 @@ bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
     ImageOES image = stack->pop<ImageOES>();
     ImageTargetTexture target = stack->pop<ImageTargetTexture>();
     if (stack->isValid()) {
-        CAZE_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
+        GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
         if (glEGLImageTargetTexture2DOES != nullptr) {
             glEGLImageTargetTexture2DOES(target, image);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEGLImageTargetTexture2DOES\n");
+            GAPID_WARNING("Attempted to call unsupported function glEGLImageTargetTexture2DOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEGLImageTargetTexture2DOES\n");
+        GAPID_WARNING("Error during calling function glEGLImageTargetTexture2DOES\n");
         return false;
     }
 }
@@ -471,36 +472,36 @@ bool callGlEGLImageTargetRenderbufferStorageOES(Stack* stack, bool pushReturn) {
     TexturePointer image = stack->pop<TexturePointer>();
     ImageTargetRenderbufferStorage target = stack->pop<ImageTargetRenderbufferStorage>();
     if (stack->isValid()) {
-        CAZE_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
+        GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
         if (glEGLImageTargetRenderbufferStorageOES != nullptr) {
             glEGLImageTargetRenderbufferStorageOES(target, image);
         } else {
-            CAZE_WARNING(
+            GAPID_WARNING(
                     "Attempted to call unsupported function "
                     "glEGLImageTargetRenderbufferStorageOES\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEGLImageTargetRenderbufferStorageOES\n");
+        GAPID_WARNING("Error during calling function glEGLImageTargetRenderbufferStorageOES\n");
         return false;
     }
 }
 
 bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glGetGraphicsResetStatusEXT()\n");
+        GAPID_INFO("glGetGraphicsResetStatusEXT()\n");
         if (glGetGraphicsResetStatusEXT != nullptr) {
             ResetStatus return_value = glGetGraphicsResetStatusEXT();
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<ResetStatus>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetGraphicsResetStatusEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetGraphicsResetStatusEXT\n");
+        GAPID_WARNING("Error during calling function glGetGraphicsResetStatusEXT\n");
         return false;
     }
 }
@@ -510,15 +511,15 @@ bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindAttribLocation(%u, %u, %s)\n", program, location, name);
+        GAPID_INFO("glBindAttribLocation(%u, %u, %s)\n", program, location, name);
         if (glBindAttribLocation != nullptr) {
             glBindAttribLocation(program, location, name);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindAttribLocation\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindAttribLocation\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindAttribLocation\n");
+        GAPID_WARNING("Error during calling function glBindAttribLocation\n");
         return false;
     }
 }
@@ -527,15 +528,15 @@ bool callGlBlendFunc(Stack* stack, bool pushReturn) {
     BlendFactor dst_factor = stack->pop<BlendFactor>();
     BlendFactor src_factor = stack->pop<BlendFactor>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlendFunc(%u, %u)\n", src_factor, dst_factor);
+        GAPID_INFO("glBlendFunc(%u, %u)\n", src_factor, dst_factor);
         if (glBlendFunc != nullptr) {
             glBlendFunc(src_factor, dst_factor);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlendFunc\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlendFunc\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlendFunc\n");
+        GAPID_WARNING("Error during calling function glBlendFunc\n");
         return false;
     }
 }
@@ -546,16 +547,16 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
     BlendFactor dst_factor_rgb = stack->pop<BlendFactor>();
     BlendFactor src_factor_rgb = stack->pop<BlendFactor>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlendFuncSeparate(%u, %u, %u, %u)\n", src_factor_rgb, dst_factor_rgb,
-                  src_factor_alpha, dst_factor_alpha);
+        GAPID_INFO("glBlendFuncSeparate(%u, %u, %u, %u)\n", src_factor_rgb, dst_factor_rgb,
+                   src_factor_alpha, dst_factor_alpha);
         if (glBlendFuncSeparate != nullptr) {
             glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha, dst_factor_alpha);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlendFuncSeparate\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlendFuncSeparate\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlendFuncSeparate\n");
+        GAPID_WARNING("Error during calling function glBlendFuncSeparate\n");
         return false;
     }
 }
@@ -563,15 +564,15 @@ bool callGlBlendFuncSeparate(Stack* stack, bool pushReturn) {
 bool callGlBlendEquation(Stack* stack, bool pushReturn) {
     BlendEquation equation = stack->pop<BlendEquation>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlendEquation(%u)\n", equation);
+        GAPID_INFO("glBlendEquation(%u)\n", equation);
         if (glBlendEquation != nullptr) {
             glBlendEquation(equation);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlendEquation\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquation\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlendEquation\n");
+        GAPID_WARNING("Error during calling function glBlendEquation\n");
         return false;
     }
 }
@@ -580,15 +581,15 @@ bool callGlBlendEquationSeparate(Stack* stack, bool pushReturn) {
     BlendEquation alpha = stack->pop<BlendEquation>();
     BlendEquation rgb = stack->pop<BlendEquation>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlendEquationSeparate(%u, %u)\n", rgb, alpha);
+        GAPID_INFO("glBlendEquationSeparate(%u, %u)\n", rgb, alpha);
         if (glBlendEquationSeparate != nullptr) {
             glBlendEquationSeparate(rgb, alpha);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlendEquationSeparate\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlendEquationSeparate\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlendEquationSeparate\n");
+        GAPID_WARNING("Error during calling function glBlendEquationSeparate\n");
         return false;
     }
 }
@@ -599,15 +600,15 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
     float green = stack->pop<float>();
     float red = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlendColor(%f, %f, %f, %f)\n", red, green, blue, alpha);
+        GAPID_INFO("glBlendColor(%f, %f, %f, %f)\n", red, green, blue, alpha);
         if (glBlendColor != nullptr) {
             glBlendColor(red, green, blue, alpha);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlendColor\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlendColor\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlendColor\n");
+        GAPID_WARNING("Error during calling function glBlendColor\n");
         return false;
     }
 }
@@ -615,15 +616,15 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
 bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glEnableVertexAttribArray(%u)\n", location);
+        GAPID_INFO("glEnableVertexAttribArray(%u)\n", location);
         if (glEnableVertexAttribArray != nullptr) {
             glEnableVertexAttribArray(location);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEnableVertexAttribArray\n");
+            GAPID_WARNING("Attempted to call unsupported function glEnableVertexAttribArray\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEnableVertexAttribArray\n");
+        GAPID_WARNING("Error during calling function glEnableVertexAttribArray\n");
         return false;
     }
 }
@@ -631,15 +632,15 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
 bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glDisableVertexAttribArray(%u)\n", location);
+        GAPID_INFO("glDisableVertexAttribArray(%u)\n", location);
         if (glDisableVertexAttribArray != nullptr) {
             glDisableVertexAttribArray(location);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDisableVertexAttribArray\n");
+            GAPID_WARNING("Attempted to call unsupported function glDisableVertexAttribArray\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDisableVertexAttribArray\n");
+        GAPID_WARNING("Error during calling function glDisableVertexAttribArray\n");
         return false;
     }
 }
@@ -652,16 +653,16 @@ bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
     int32_t size = stack->pop<int32_t>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttribPointer(%u, %d, %u, %d, %d, %p)\n", location, size, type,
-                  normalized, stride, data);
+        GAPID_INFO("glVertexAttribPointer(%u, %d, %u, %d, %d, %p)\n", location, size, type,
+                   normalized, stride, data);
         if (glVertexAttribPointer != nullptr) {
             glVertexAttribPointer(location, size, type, normalized, stride, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttribPointer\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttribPointer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttribPointer\n");
+        GAPID_WARNING("Error during calling function glVertexAttribPointer\n");
         return false;
     }
 }
@@ -675,17 +676,17 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     AttributeLocation location = stack->pop<AttributeLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetActiveAttrib(%u, %u, %d, %p, %p, %p, %p)\n", program, location, buffer_size,
-                  buffer_bytes_written, vector_count, type, name);
+        GAPID_INFO("glGetActiveAttrib(%u, %u, %d, %p, %p, %p, %p)\n", program, location,
+                   buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveAttrib != nullptr) {
             glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                               type, name);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetActiveAttrib\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetActiveAttrib\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetActiveAttrib\n");
+        GAPID_WARNING("Error during calling function glGetActiveAttrib\n");
         return false;
     }
 }
@@ -699,36 +700,36 @@ bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     int32_t location = stack->pop<int32_t>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetActiveUniform(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
-                  buffer_size, buffer_bytes_written, size, type, name);
+        GAPID_INFO("glGetActiveUniform(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
+                   buffer_size, buffer_bytes_written, size, type, name);
         if (glGetActiveUniform != nullptr) {
             glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
                                name);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetActiveUniform\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetActiveUniform\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetActiveUniform\n");
+        GAPID_WARNING("Error during calling function glGetActiveUniform\n");
         return false;
     }
 }
 
 bool callGlGetError(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glGetError()\n");
+        GAPID_INFO("glGetError()\n");
         if (glGetError != nullptr) {
             Error return_value = glGetError();
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<Error>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetError\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetError\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetError\n");
+        GAPID_WARNING("Error during calling function glGetError\n");
         return false;
     }
 }
@@ -738,15 +739,15 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
     ProgramParameter parameter = stack->pop<ProgramParameter>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
+        GAPID_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
         if (glGetProgramiv != nullptr) {
             glGetProgramiv(program, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetProgramiv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetProgramiv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetProgramiv\n");
+        GAPID_WARNING("Error during calling function glGetProgramiv\n");
         return false;
     }
 }
@@ -756,15 +757,15 @@ bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
     ShaderParameter parameter = stack->pop<ShaderParameter>();
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
+        GAPID_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
         if (glGetShaderiv != nullptr) {
             glGetShaderiv(shader, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetShaderiv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetShaderiv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetShaderiv\n");
+        GAPID_WARNING("Error during calling function glGetShaderiv\n");
         return false;
     }
 }
@@ -773,19 +774,19 @@ bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
     const char* name = stack->pop<const char*>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetUniformLocation(%u, %s)\n", program, name);
+        GAPID_INFO("glGetUniformLocation(%u, %s)\n", program, name);
         if (glGetUniformLocation != nullptr) {
             UniformLocation return_value = glGetUniformLocation(program, name);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<UniformLocation>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetUniformLocation\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetUniformLocation\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetUniformLocation\n");
+        GAPID_WARNING("Error during calling function glGetUniformLocation\n");
         return false;
     }
 }
@@ -794,19 +795,19 @@ bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
     const char* name = stack->pop<const char*>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetAttribLocation(%u, %s)\n", program, name);
+        GAPID_INFO("glGetAttribLocation(%u, %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
             AttributeLocation return_value = glGetAttribLocation(program, name);
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<AttributeLocation>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetAttribLocation\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetAttribLocation\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetAttribLocation\n");
+        GAPID_WARNING("Error during calling function glGetAttribLocation\n");
         return false;
     }
 }
@@ -815,15 +816,15 @@ bool callGlPixelStorei(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
     PixelStoreParameter parameter = stack->pop<PixelStoreParameter>();
     if (stack->isValid()) {
-        CAZE_INFO("glPixelStorei(%u, %d)\n", parameter, value);
+        GAPID_INFO("glPixelStorei(%u, %d)\n", parameter, value);
         if (glPixelStorei != nullptr) {
             glPixelStorei(parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glPixelStorei\n");
+            GAPID_WARNING("Attempted to call unsupported function glPixelStorei\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glPixelStorei\n");
+        GAPID_WARNING("Error during calling function glPixelStorei\n");
         return false;
     }
 }
@@ -833,15 +834,15 @@ bool callGlTexParameteri(Stack* stack, bool pushReturn) {
     TextureParameter parameter = stack->pop<TextureParameter>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexParameteri(%u, %u, %d)\n", target, parameter, value);
+        GAPID_INFO("glTexParameteri(%u, %u, %d)\n", target, parameter, value);
         if (glTexParameteri != nullptr) {
             glTexParameteri(target, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexParameteri\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexParameteri\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexParameteri\n");
+        GAPID_WARNING("Error during calling function glTexParameteri\n");
         return false;
     }
 }
@@ -851,15 +852,15 @@ bool callGlTexParameterf(Stack* stack, bool pushReturn) {
     TextureParameter parameter = stack->pop<TextureParameter>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexParameterf(%u, %u, %f)\n", target, parameter, value);
+        GAPID_INFO("glTexParameterf(%u, %u, %f)\n", target, parameter, value);
         if (glTexParameterf != nullptr) {
             glTexParameterf(target, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexParameterf\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexParameterf\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexParameterf\n");
+        GAPID_WARNING("Error during calling function glTexParameterf\n");
         return false;
     }
 }
@@ -869,15 +870,15 @@ bool callGlGetTexParameteriv(Stack* stack, bool pushReturn) {
     TextureParameter parameter = stack->pop<TextureParameter>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetTexParameteriv(%u, %u, %p)\n", target, parameter, values);
+        GAPID_INFO("glGetTexParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameteriv != nullptr) {
             glGetTexParameteriv(target, parameter, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetTexParameteriv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameteriv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetTexParameteriv\n");
+        GAPID_WARNING("Error during calling function glGetTexParameteriv\n");
         return false;
     }
 }
@@ -887,15 +888,15 @@ bool callGlGetTexParameterfv(Stack* stack, bool pushReturn) {
     TextureParameter parameter = stack->pop<TextureParameter>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetTexParameterfv(%u, %u, %p)\n", target, parameter, values);
+        GAPID_INFO("glGetTexParameterfv(%u, %u, %p)\n", target, parameter, values);
         if (glGetTexParameterfv != nullptr) {
             glGetTexParameterfv(target, parameter, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetTexParameterfv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetTexParameterfv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetTexParameterfv\n");
+        GAPID_WARNING("Error during calling function glGetTexParameterfv\n");
         return false;
     }
 }
@@ -904,15 +905,15 @@ bool callGlUniform1i(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform1i(%d, %d)\n", location, value);
+        GAPID_INFO("glUniform1i(%d, %d)\n", location, value);
         if (glUniform1i != nullptr) {
             glUniform1i(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform1i\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform1i\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform1i\n");
+        GAPID_WARNING("Error during calling function glUniform1i\n");
         return false;
     }
 }
@@ -922,15 +923,15 @@ bool callGlUniform2i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform2i(%d, %d, %d)\n", location, value0, value1);
+        GAPID_INFO("glUniform2i(%d, %d, %d)\n", location, value0, value1);
         if (glUniform2i != nullptr) {
             glUniform2i(location, value0, value1);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform2i\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform2i\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform2i\n");
+        GAPID_WARNING("Error during calling function glUniform2i\n");
         return false;
     }
 }
@@ -941,15 +942,15 @@ bool callGlUniform3i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform3i(%d, %d, %d, %d)\n", location, value0, value1, value2);
+        GAPID_INFO("glUniform3i(%d, %d, %d, %d)\n", location, value0, value1, value2);
         if (glUniform3i != nullptr) {
             glUniform3i(location, value0, value1, value2);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform3i\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform3i\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform3i\n");
+        GAPID_WARNING("Error during calling function glUniform3i\n");
         return false;
     }
 }
@@ -961,15 +962,15 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
     int32_t value0 = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform4i(%d, %d, %d, %d, %d)\n", location, value0, value1, value2, value3);
+        GAPID_INFO("glUniform4i(%d, %d, %d, %d, %d)\n", location, value0, value1, value2, value3);
         if (glUniform4i != nullptr) {
             glUniform4i(location, value0, value1, value2, value3);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform4i\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform4i\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform4i\n");
+        GAPID_WARNING("Error during calling function glUniform4i\n");
         return false;
     }
 }
@@ -979,15 +980,15 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform1iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, value);
         if (glUniform1iv != nullptr) {
             glUniform1iv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform1iv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform1iv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform1iv\n");
+        GAPID_WARNING("Error during calling function glUniform1iv\n");
         return false;
     }
 }
@@ -997,15 +998,15 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform2iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, value);
         if (glUniform2iv != nullptr) {
             glUniform2iv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform2iv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform2iv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform2iv\n");
+        GAPID_WARNING("Error during calling function glUniform2iv\n");
         return false;
     }
 }
@@ -1015,15 +1016,15 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform3iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, value);
         if (glUniform3iv != nullptr) {
             glUniform3iv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform3iv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform3iv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform3iv\n");
+        GAPID_WARNING("Error during calling function glUniform3iv\n");
         return false;
     }
 }
@@ -1033,15 +1034,15 @@ bool callGlUniform4iv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform4iv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, value);
         if (glUniform4iv != nullptr) {
             glUniform4iv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform4iv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform4iv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform4iv\n");
+        GAPID_WARNING("Error during calling function glUniform4iv\n");
         return false;
     }
 }
@@ -1050,15 +1051,15 @@ bool callGlUniform1f(Stack* stack, bool pushReturn) {
     float value = stack->pop<float>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform1f(%d, %f)\n", location, value);
+        GAPID_INFO("glUniform1f(%d, %f)\n", location, value);
         if (glUniform1f != nullptr) {
             glUniform1f(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform1f\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform1f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform1f\n");
+        GAPID_WARNING("Error during calling function glUniform1f\n");
         return false;
     }
 }
@@ -1068,15 +1069,15 @@ bool callGlUniform2f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform2f(%d, %f, %f)\n", location, value0, value1);
+        GAPID_INFO("glUniform2f(%d, %f, %f)\n", location, value0, value1);
         if (glUniform2f != nullptr) {
             glUniform2f(location, value0, value1);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform2f\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform2f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform2f\n");
+        GAPID_WARNING("Error during calling function glUniform2f\n");
         return false;
     }
 }
@@ -1087,15 +1088,15 @@ bool callGlUniform3f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
+        GAPID_INFO("glUniform3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
         if (glUniform3f != nullptr) {
             glUniform3f(location, value0, value1, value2);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform3f\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform3f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform3f\n");
+        GAPID_WARNING("Error during calling function glUniform3f\n");
         return false;
     }
 }
@@ -1107,15 +1108,15 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2, value3);
+        GAPID_INFO("glUniform4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2, value3);
         if (glUniform4f != nullptr) {
             glUniform4f(location, value0, value1, value2, value3);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform4f\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform4f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform4f\n");
+        GAPID_WARNING("Error during calling function glUniform4f\n");
         return false;
     }
 }
@@ -1125,15 +1126,15 @@ bool callGlUniform1fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform1fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, value);
         if (glUniform1fv != nullptr) {
             glUniform1fv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform1fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform1fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform1fv\n");
+        GAPID_WARNING("Error during calling function glUniform1fv\n");
         return false;
     }
 }
@@ -1143,15 +1144,15 @@ bool callGlUniform2fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform2fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, value);
         if (glUniform2fv != nullptr) {
             glUniform2fv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform2fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform2fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform2fv\n");
+        GAPID_WARNING("Error during calling function glUniform2fv\n");
         return false;
     }
 }
@@ -1161,15 +1162,15 @@ bool callGlUniform3fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform3fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, value);
         if (glUniform3fv != nullptr) {
             glUniform3fv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform3fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform3fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform3fv\n");
+        GAPID_WARNING("Error during calling function glUniform3fv\n");
         return false;
     }
 }
@@ -1179,15 +1180,15 @@ bool callGlUniform4fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniform4fv(%d, %d, %p)\n", location, count, value);
+        GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, value);
         if (glUniform4fv != nullptr) {
             glUniform4fv(location, count, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniform4fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniform4fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniform4fv\n");
+        GAPID_WARNING("Error during calling function glUniform4fv\n");
         return false;
     }
 }
@@ -1198,15 +1199,15 @@ bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniformMatrix2fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix2fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix2fv != nullptr) {
             glUniformMatrix2fv(location, count, transpose, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniformMatrix2fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniformMatrix2fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniformMatrix2fv\n");
+        GAPID_WARNING("Error during calling function glUniformMatrix2fv\n");
         return false;
     }
 }
@@ -1217,15 +1218,15 @@ bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniformMatrix3fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix3fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix3fv != nullptr) {
             glUniformMatrix3fv(location, count, transpose, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniformMatrix3fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniformMatrix3fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniformMatrix3fv\n");
+        GAPID_WARNING("Error during calling function glUniformMatrix3fv\n");
         return false;
     }
 }
@@ -1236,15 +1237,15 @@ bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     UniformLocation location = stack->pop<UniformLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glUniformMatrix4fv(%d, %d, %d, %p)\n", location, count, transpose, values);
+        GAPID_INFO("glUniformMatrix4fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix4fv != nullptr) {
             glUniformMatrix4fv(location, count, transpose, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUniformMatrix4fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glUniformMatrix4fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUniformMatrix4fv\n");
+        GAPID_WARNING("Error during calling function glUniformMatrix4fv\n");
         return false;
     }
 }
@@ -1254,15 +1255,15 @@ bool callGlGetUniformfv(Stack* stack, bool pushReturn) {
     UniformLocation location = stack->pop<UniformLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetUniformfv(%u, %d, %p)\n", program, location, values);
+        GAPID_INFO("glGetUniformfv(%u, %d, %p)\n", program, location, values);
         if (glGetUniformfv != nullptr) {
             glGetUniformfv(program, location, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetUniformfv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetUniformfv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetUniformfv\n");
+        GAPID_WARNING("Error during calling function glGetUniformfv\n");
         return false;
     }
 }
@@ -1272,15 +1273,15 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
     UniformLocation location = stack->pop<UniformLocation>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetUniformiv(%u, %d, %p)\n", program, location, values);
+        GAPID_INFO("glGetUniformiv(%u, %d, %p)\n", program, location, values);
         if (glGetUniformiv != nullptr) {
             glGetUniformiv(program, location, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetUniformiv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetUniformiv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetUniformiv\n");
+        GAPID_WARNING("Error during calling function glGetUniformiv\n");
         return false;
     }
 }
@@ -1289,15 +1290,15 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib1f(%u, %f)\n", location, value0);
+        GAPID_INFO("glVertexAttrib1f(%u, %f)\n", location, value0);
         if (glVertexAttrib1f != nullptr) {
             glVertexAttrib1f(location, value0);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib1f\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib1f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib1f\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib1f\n");
         return false;
     }
 }
@@ -1307,15 +1308,15 @@ bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib2f(%u, %f, %f)\n", location, value0, value1);
+        GAPID_INFO("glVertexAttrib2f(%u, %f, %f)\n", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
             glVertexAttrib2f(location, value0, value1);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib2f\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib2f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib2f\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib2f\n");
         return false;
     }
 }
@@ -1326,15 +1327,15 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib3f(%u, %f, %f, %f)\n", location, value0, value1, value2);
+        GAPID_INFO("glVertexAttrib3f(%u, %f, %f, %f)\n", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
             glVertexAttrib3f(location, value0, value1, value2);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib3f\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib3f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib3f\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib3f\n");
         return false;
     }
 }
@@ -1346,16 +1347,16 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib4f(%u, %f, %f, %f, %f)\n", location, value0, value1, value2,
-                  value3);
+        GAPID_INFO("glVertexAttrib4f(%u, %f, %f, %f, %f)\n", location, value0, value1, value2,
+                   value3);
         if (glVertexAttrib4f != nullptr) {
             glVertexAttrib4f(location, value0, value1, value2, value3);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib4f\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib4f\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib4f\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib4f\n");
         return false;
     }
 }
@@ -1364,15 +1365,15 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib1fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib1fv(%u, %p)\n", location, value);
         if (glVertexAttrib1fv != nullptr) {
             glVertexAttrib1fv(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib1fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib1fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib1fv\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib1fv\n");
         return false;
     }
 }
@@ -1381,15 +1382,15 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib2fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib2fv(%u, %p)\n", location, value);
         if (glVertexAttrib2fv != nullptr) {
             glVertexAttrib2fv(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib2fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib2fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib2fv\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib2fv\n");
         return false;
     }
 }
@@ -1398,15 +1399,15 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib3fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib3fv(%u, %p)\n", location, value);
         if (glVertexAttrib3fv != nullptr) {
             glVertexAttrib3fv(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib3fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib3fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib3fv\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib3fv\n");
         return false;
     }
 }
@@ -1415,15 +1416,15 @@ bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
     float* value = stack->pop<float*>();
     AttributeLocation location = stack->pop<AttributeLocation>();
     if (stack->isValid()) {
-        CAZE_INFO("glVertexAttrib4fv(%u, %p)\n", location, value);
+        GAPID_INFO("glVertexAttrib4fv(%u, %p)\n", location, value);
         if (glVertexAttrib4fv != nullptr) {
             glVertexAttrib4fv(location, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glVertexAttrib4fv\n");
+            GAPID_WARNING("Attempted to call unsupported function glVertexAttrib4fv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glVertexAttrib4fv\n");
+        GAPID_WARNING("Error during calling function glVertexAttrib4fv\n");
         return false;
     }
 }
@@ -1434,16 +1435,16 @@ bool callGlGetShaderPrecisionFormat(Stack* stack, bool pushReturn) {
     PrecisionType precision_type = stack->pop<PrecisionType>();
     ShaderType shader_type = stack->pop<ShaderType>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)\n", shader_type, precision_type,
-                  range, precision);
+        GAPID_INFO("glGetShaderPrecisionFormat(%u, %u, %p, %p)\n", shader_type, precision_type,
+                   range, precision);
         if (glGetShaderPrecisionFormat != nullptr) {
             glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetShaderPrecisionFormat\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetShaderPrecisionFormat\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetShaderPrecisionFormat\n");
+        GAPID_WARNING("Error during calling function glGetShaderPrecisionFormat\n");
         return false;
     }
 }
@@ -1451,15 +1452,15 @@ bool callGlGetShaderPrecisionFormat(Stack* stack, bool pushReturn) {
 bool callGlDepthMask(Stack* stack, bool pushReturn) {
     bool enabled = stack->pop<bool>();
     if (stack->isValid()) {
-        CAZE_INFO("glDepthMask(%d)\n", enabled);
+        GAPID_INFO("glDepthMask(%d)\n", enabled);
         if (glDepthMask != nullptr) {
             glDepthMask(enabled);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDepthMask\n");
+            GAPID_WARNING("Attempted to call unsupported function glDepthMask\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDepthMask\n");
+        GAPID_WARNING("Error during calling function glDepthMask\n");
         return false;
     }
 }
@@ -1467,15 +1468,15 @@ bool callGlDepthMask(Stack* stack, bool pushReturn) {
 bool callGlDepthFunc(Stack* stack, bool pushReturn) {
     TestFunction function = stack->pop<TestFunction>();
     if (stack->isValid()) {
-        CAZE_INFO("glDepthFunc(%u)\n", function);
+        GAPID_INFO("glDepthFunc(%u)\n", function);
         if (glDepthFunc != nullptr) {
             glDepthFunc(function);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDepthFunc\n");
+            GAPID_WARNING("Attempted to call unsupported function glDepthFunc\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDepthFunc\n");
+        GAPID_WARNING("Error during calling function glDepthFunc\n");
         return false;
     }
 }
@@ -1484,15 +1485,15 @@ bool callGlDepthRangef(Stack* stack, bool pushReturn) {
     float far = stack->pop<float>();
     float near = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glDepthRangef(%f, %f)\n", near, far);
+        GAPID_INFO("glDepthRangef(%f, %f)\n", near, far);
         if (glDepthRangef != nullptr) {
             glDepthRangef(near, far);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDepthRangef\n");
+            GAPID_WARNING("Attempted to call unsupported function glDepthRangef\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDepthRangef\n");
+        GAPID_WARNING("Error during calling function glDepthRangef\n");
         return false;
     }
 }
@@ -1503,15 +1504,15 @@ bool callGlColorMask(Stack* stack, bool pushReturn) {
     bool green = stack->pop<bool>();
     bool red = stack->pop<bool>();
     if (stack->isValid()) {
-        CAZE_INFO("glColorMask(%d, %d, %d, %d)\n", red, green, blue, alpha);
+        GAPID_INFO("glColorMask(%d, %d, %d, %d)\n", red, green, blue, alpha);
         if (glColorMask != nullptr) {
             glColorMask(red, green, blue, alpha);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glColorMask\n");
+            GAPID_WARNING("Attempted to call unsupported function glColorMask\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glColorMask\n");
+        GAPID_WARNING("Error during calling function glColorMask\n");
         return false;
     }
 }
@@ -1519,15 +1520,15 @@ bool callGlColorMask(Stack* stack, bool pushReturn) {
 bool callGlStencilMask(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glStencilMask(%u)\n", mask);
+        GAPID_INFO("glStencilMask(%u)\n", mask);
         if (glStencilMask != nullptr) {
             glStencilMask(mask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glStencilMask\n");
+            GAPID_WARNING("Attempted to call unsupported function glStencilMask\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glStencilMask\n");
+        GAPID_WARNING("Error during calling function glStencilMask\n");
         return false;
     }
 }
@@ -1536,15 +1537,15 @@ bool callGlStencilMaskSeparate(Stack* stack, bool pushReturn) {
     uint32_t mask = stack->pop<uint32_t>();
     FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glStencilMaskSeparate(%u, %u)\n", face, mask);
+        GAPID_INFO("glStencilMaskSeparate(%u, %u)\n", face, mask);
         if (glStencilMaskSeparate != nullptr) {
             glStencilMaskSeparate(face, mask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glStencilMaskSeparate\n");
+            GAPID_WARNING("Attempted to call unsupported function glStencilMaskSeparate\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glStencilMaskSeparate\n");
+        GAPID_WARNING("Error during calling function glStencilMaskSeparate\n");
         return false;
     }
 }
@@ -1555,15 +1556,16 @@ bool callGlStencilFuncSeparate(Stack* stack, bool pushReturn) {
     TestFunction function = stack->pop<TestFunction>();
     FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glStencilFuncSeparate(%u, %u, %d, %d)\n", face, function, reference_value, mask);
+        GAPID_INFO("glStencilFuncSeparate(%u, %u, %d, %d)\n", face, function, reference_value,
+                   mask);
         if (glStencilFuncSeparate != nullptr) {
             glStencilFuncSeparate(face, function, reference_value, mask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glStencilFuncSeparate\n");
+            GAPID_WARNING("Attempted to call unsupported function glStencilFuncSeparate\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glStencilFuncSeparate\n");
+        GAPID_WARNING("Error during calling function glStencilFuncSeparate\n");
         return false;
     }
 }
@@ -1574,17 +1576,17 @@ bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
     StencilAction stencil_fail = stack->pop<StencilAction>();
     FaceMode face = stack->pop<FaceMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glStencilOpSeparate(%u, %u, %u, %u)\n", face, stencil_fail,
-                  stencil_pass_depth_fail, stencil_pass_depth_pass);
+        GAPID_INFO("glStencilOpSeparate(%u, %u, %u, %u)\n", face, stencil_fail,
+                   stencil_pass_depth_fail, stencil_pass_depth_pass);
         if (glStencilOpSeparate != nullptr) {
             glStencilOpSeparate(face, stencil_fail, stencil_pass_depth_fail,
                                 stencil_pass_depth_pass);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glStencilOpSeparate\n");
+            GAPID_WARNING("Attempted to call unsupported function glStencilOpSeparate\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glStencilOpSeparate\n");
+        GAPID_WARNING("Error during calling function glStencilOpSeparate\n");
         return false;
     }
 }
@@ -1592,15 +1594,15 @@ bool callGlStencilOpSeparate(Stack* stack, bool pushReturn) {
 bool callGlFrontFace(Stack* stack, bool pushReturn) {
     FaceOrientation orientation = stack->pop<FaceOrientation>();
     if (stack->isValid()) {
-        CAZE_INFO("glFrontFace(%u)\n", orientation);
+        GAPID_INFO("glFrontFace(%u)\n", orientation);
         if (glFrontFace != nullptr) {
             glFrontFace(orientation);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glFrontFace\n");
+            GAPID_WARNING("Attempted to call unsupported function glFrontFace\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glFrontFace\n");
+        GAPID_WARNING("Error during calling function glFrontFace\n");
         return false;
     }
 }
@@ -1611,15 +1613,15 @@ bool callGlViewport(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glViewport(%d, %d, %d, %d)\n", x, y, width, height);
+        GAPID_INFO("glViewport(%d, %d, %d, %d)\n", x, y, width, height);
         if (glViewport != nullptr) {
             glViewport(x, y, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glViewport\n");
+            GAPID_WARNING("Attempted to call unsupported function glViewport\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glViewport\n");
+        GAPID_WARNING("Error during calling function glViewport\n");
         return false;
     }
 }
@@ -1630,15 +1632,15 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glScissor(%d, %d, %d, %d)\n", x, y, width, height);
+        GAPID_INFO("glScissor(%d, %d, %d, %d)\n", x, y, width, height);
         if (glScissor != nullptr) {
             glScissor(x, y, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glScissor\n");
+            GAPID_WARNING("Attempted to call unsupported function glScissor\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glScissor\n");
+        GAPID_WARNING("Error during calling function glScissor\n");
         return false;
     }
 }
@@ -1646,15 +1648,15 @@ bool callGlScissor(Stack* stack, bool pushReturn) {
 bool callGlActiveTexture(Stack* stack, bool pushReturn) {
     TextureUnit unit = stack->pop<TextureUnit>();
     if (stack->isValid()) {
-        CAZE_INFO("glActiveTexture(%u)\n", unit);
+        GAPID_INFO("glActiveTexture(%u)\n", unit);
         if (glActiveTexture != nullptr) {
             glActiveTexture(unit);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glActiveTexture\n");
+            GAPID_WARNING("Attempted to call unsupported function glActiveTexture\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glActiveTexture\n");
+        GAPID_WARNING("Error during calling function glActiveTexture\n");
         return false;
     }
 }
@@ -1663,15 +1665,15 @@ bool callGlGenTextures(Stack* stack, bool pushReturn) {
     TextureId* textures = stack->pop<TextureId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenTextures(%d, %p)\n", count, textures);
+        GAPID_INFO("glGenTextures(%d, %p)\n", count, textures);
         if (glGenTextures != nullptr) {
             glGenTextures(count, textures);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenTextures\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenTextures\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenTextures\n");
+        GAPID_WARNING("Error during calling function glGenTextures\n");
         return false;
     }
 }
@@ -1680,15 +1682,15 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
     TextureId* textures = stack->pop<TextureId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteTextures(%d, %p)\n", count, textures);
+        GAPID_INFO("glDeleteTextures(%d, %p)\n", count, textures);
         if (glDeleteTextures != nullptr) {
             glDeleteTextures(count, textures);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteTextures\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteTextures\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteTextures\n");
+        GAPID_WARNING("Error during calling function glDeleteTextures\n");
         return false;
     }
 }
@@ -1696,19 +1698,19 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
 bool callGlIsTexture(Stack* stack, bool pushReturn) {
     TextureId texture = stack->pop<TextureId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsTexture(%u)\n", texture);
+        GAPID_INFO("glIsTexture(%u)\n", texture);
         if (glIsTexture != nullptr) {
             bool return_value = glIsTexture(texture);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsTexture\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsTexture\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsTexture\n");
+        GAPID_WARNING("Error during calling function glIsTexture\n");
         return false;
     }
 }
@@ -1717,15 +1719,15 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
     TextureId texture = stack->pop<TextureId>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindTexture(%u, %u)\n", target, texture);
+        GAPID_INFO("glBindTexture(%u, %u)\n", target, texture);
         if (glBindTexture != nullptr) {
             glBindTexture(target, texture);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindTexture\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindTexture\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindTexture\n");
+        GAPID_WARNING("Error during calling function glBindTexture\n");
         return false;
     }
 }
@@ -1741,16 +1743,16 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexImage2D(%u, %d, %u, %d, %d, %d, %u, %u, %p)\n", target, level,
-                  internal_format, width, height, border, format, type, data);
+        GAPID_INFO("glTexImage2D(%u, %d, %u, %d, %d, %d, %u, %u, %p)\n", target, level,
+                   internal_format, width, height, border, format, type, data);
         if (glTexImage2D != nullptr) {
             glTexImage2D(target, level, internal_format, width, height, border, format, type, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexImage2D\n");
+        GAPID_WARNING("Error during calling function glTexImage2D\n");
         return false;
     }
 }
@@ -1766,16 +1768,16 @@ bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %u, %p)\n", target, level, xoffset,
-                  yoffset, width, height, format, type, data);
+        GAPID_INFO("glTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %u, %p)\n", target, level, xoffset,
+                   yoffset, width, height, format, type, data);
         if (glTexSubImage2D != nullptr) {
             glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glTexSubImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glTexSubImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glTexSubImage2D\n");
+        GAPID_WARNING("Error during calling function glTexSubImage2D\n");
         return false;
     }
 }
@@ -1790,16 +1792,16 @@ bool callGlCopyTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glCopyTexImage2D(%u, %d, %u, %d, %d, %d, %d, %d)\n", target, level, format, x, y,
-                  width, height, border);
+        GAPID_INFO("glCopyTexImage2D(%u, %d, %u, %d, %d, %d, %d, %d)\n", target, level, format, x,
+                   y, width, height, border);
         if (glCopyTexImage2D != nullptr) {
             glCopyTexImage2D(target, level, format, x, y, width, height, border);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCopyTexImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glCopyTexImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCopyTexImage2D\n");
+        GAPID_WARNING("Error during calling function glCopyTexImage2D\n");
         return false;
     }
 }
@@ -1814,16 +1816,16 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glCopyTexSubImage2D(%u, %d, %d, %d, %d, %d, %d, %d)\n", target, level, xoffset,
-                  yoffset, x, y, width, height);
+        GAPID_INFO("glCopyTexSubImage2D(%u, %d, %d, %d, %d, %d, %d, %d)\n", target, level, xoffset,
+                   yoffset, x, y, width, height);
         if (glCopyTexSubImage2D != nullptr) {
             glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCopyTexSubImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glCopyTexSubImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCopyTexSubImage2D\n");
+        GAPID_WARNING("Error during calling function glCopyTexSubImage2D\n");
         return false;
     }
 }
@@ -1838,16 +1840,16 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glCompressedTexImage2D(%u, %d, %u, %d, %d, %d, %d, %p)\n", target, level, format,
-                  width, height, border, image_size, data);
+        GAPID_INFO("glCompressedTexImage2D(%u, %d, %u, %d, %d, %d, %d, %p)\n", target, level,
+                   format, width, height, border, image_size, data);
         if (glCompressedTexImage2D != nullptr) {
             glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCompressedTexImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glCompressedTexImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCompressedTexImage2D\n");
+        GAPID_WARNING("Error during calling function glCompressedTexImage2D\n");
         return false;
     }
 }
@@ -1863,17 +1865,17 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glCompressedTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %d, %p)\n", target, level,
-                  xoffset, yoffset, width, height, format, image_size, data);
+        GAPID_INFO("glCompressedTexSubImage2D(%u, %d, %d, %d, %d, %d, %u, %d, %p)\n", target, level,
+                   xoffset, yoffset, width, height, format, image_size, data);
         if (glCompressedTexSubImage2D != nullptr) {
             glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
                                       image_size, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCompressedTexSubImage2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glCompressedTexSubImage2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCompressedTexSubImage2D\n");
+        GAPID_WARNING("Error during calling function glCompressedTexSubImage2D\n");
         return false;
     }
 }
@@ -1881,15 +1883,15 @@ bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
 bool callGlGenerateMipmap(Stack* stack, bool pushReturn) {
     TextureImageTarget target = stack->pop<TextureImageTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenerateMipmap(%u)\n", target);
+        GAPID_INFO("glGenerateMipmap(%u)\n", target);
         if (glGenerateMipmap != nullptr) {
             glGenerateMipmap(target);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenerateMipmap\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenerateMipmap\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenerateMipmap\n");
+        GAPID_WARNING("Error during calling function glGenerateMipmap\n");
         return false;
     }
 }
@@ -1903,16 +1905,16 @@ bool callGlReadPixels(Stack* stack, bool pushReturn) {
     int32_t y = stack->pop<int32_t>();
     int32_t x = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glReadPixels(%d, %d, %d, %d, %u, %u, %p)\n", x, y, width, height, format, type,
-                  data);
+        GAPID_INFO("glReadPixels(%d, %d, %d, %d, %u, %u, %p)\n", x, y, width, height, format, type,
+                   data);
         if (glReadPixels != nullptr) {
             glReadPixels(x, y, width, height, format, type, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glReadPixels\n");
+            GAPID_WARNING("Attempted to call unsupported function glReadPixels\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glReadPixels\n");
+        GAPID_WARNING("Error during calling function glReadPixels\n");
         return false;
     }
 }
@@ -1921,15 +1923,15 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
     FramebufferId* framebuffers = stack->pop<FramebufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenFramebuffers(%d, %p)\n", count, framebuffers);
+        GAPID_INFO("glGenFramebuffers(%d, %p)\n", count, framebuffers);
         if (glGenFramebuffers != nullptr) {
             glGenFramebuffers(count, framebuffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenFramebuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenFramebuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenFramebuffers\n");
+        GAPID_WARNING("Error during calling function glGenFramebuffers\n");
         return false;
     }
 }
@@ -1938,15 +1940,15 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
     FramebufferId framebuffer = stack->pop<FramebufferId>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
+        GAPID_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
         if (glBindFramebuffer != nullptr) {
             glBindFramebuffer(target, framebuffer);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindFramebuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindFramebuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindFramebuffer\n");
+        GAPID_WARNING("Error during calling function glBindFramebuffer\n");
         return false;
     }
 }
@@ -1954,19 +1956,19 @@ bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
 bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glCheckFramebufferStatus(%u)\n", target);
+        GAPID_INFO("glCheckFramebufferStatus(%u)\n", target);
         if (glCheckFramebufferStatus != nullptr) {
             FramebufferStatus return_value = glCheckFramebufferStatus(target);
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<FramebufferStatus>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCheckFramebufferStatus\n");
+            GAPID_WARNING("Attempted to call unsupported function glCheckFramebufferStatus\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCheckFramebufferStatus\n");
+        GAPID_WARNING("Error during calling function glCheckFramebufferStatus\n");
         return false;
     }
 }
@@ -1975,15 +1977,15 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
     FramebufferId* framebuffers = stack->pop<FramebufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteFramebuffers(%d, %p)\n", count, framebuffers);
+        GAPID_INFO("glDeleteFramebuffers(%d, %p)\n", count, framebuffers);
         if (glDeleteFramebuffers != nullptr) {
             glDeleteFramebuffers(count, framebuffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteFramebuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteFramebuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteFramebuffers\n");
+        GAPID_WARNING("Error during calling function glDeleteFramebuffers\n");
         return false;
     }
 }
@@ -1991,19 +1993,19 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
 bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
     FramebufferId framebuffer = stack->pop<FramebufferId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsFramebuffer(%u)\n", framebuffer);
+        GAPID_INFO("glIsFramebuffer(%u)\n", framebuffer);
         if (glIsFramebuffer != nullptr) {
             bool return_value = glIsFramebuffer(framebuffer);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsFramebuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsFramebuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsFramebuffer\n");
+        GAPID_WARNING("Error during calling function glIsFramebuffer\n");
         return false;
     }
 }
@@ -2012,15 +2014,15 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
     RenderbufferId* renderbuffers = stack->pop<RenderbufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenRenderbuffers(%d, %p)\n", count, renderbuffers);
+        GAPID_INFO("glGenRenderbuffers(%d, %p)\n", count, renderbuffers);
         if (glGenRenderbuffers != nullptr) {
             glGenRenderbuffers(count, renderbuffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenRenderbuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenRenderbuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenRenderbuffers\n");
+        GAPID_WARNING("Error during calling function glGenRenderbuffers\n");
         return false;
     }
 }
@@ -2029,15 +2031,15 @@ bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
     RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
     RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
+        GAPID_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
         if (glBindRenderbuffer != nullptr) {
             glBindRenderbuffer(target, renderbuffer);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindRenderbuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindRenderbuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindRenderbuffer\n");
+        GAPID_WARNING("Error during calling function glBindRenderbuffer\n");
         return false;
     }
 }
@@ -2048,15 +2050,15 @@ bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
     RenderbufferFormat format = stack->pop<RenderbufferFormat>();
     RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glRenderbufferStorage(%u, %u, %d, %d)\n", target, format, width, height);
+        GAPID_INFO("glRenderbufferStorage(%u, %u, %d, %d)\n", target, format, width, height);
         if (glRenderbufferStorage != nullptr) {
             glRenderbufferStorage(target, format, width, height);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glRenderbufferStorage\n");
+            GAPID_WARNING("Attempted to call unsupported function glRenderbufferStorage\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glRenderbufferStorage\n");
+        GAPID_WARNING("Error during calling function glRenderbufferStorage\n");
         return false;
     }
 }
@@ -2065,15 +2067,15 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
     RenderbufferId* renderbuffers = stack->pop<RenderbufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteRenderbuffers(%d, %p)\n", count, renderbuffers);
+        GAPID_INFO("glDeleteRenderbuffers(%d, %p)\n", count, renderbuffers);
         if (glDeleteRenderbuffers != nullptr) {
             glDeleteRenderbuffers(count, renderbuffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteRenderbuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteRenderbuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteRenderbuffers\n");
+        GAPID_WARNING("Error during calling function glDeleteRenderbuffers\n");
         return false;
     }
 }
@@ -2081,19 +2083,19 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
 bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
     RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsRenderbuffer(%u)\n", renderbuffer);
+        GAPID_INFO("glIsRenderbuffer(%u)\n", renderbuffer);
         if (glIsRenderbuffer != nullptr) {
             bool return_value = glIsRenderbuffer(renderbuffer);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsRenderbuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsRenderbuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsRenderbuffer\n");
+        GAPID_WARNING("Error during calling function glIsRenderbuffer\n");
         return false;
     }
 }
@@ -2103,15 +2105,15 @@ bool callGlGetRenderbufferParameteriv(Stack* stack, bool pushReturn) {
     RenderbufferParameter parameter = stack->pop<RenderbufferParameter>();
     RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetRenderbufferParameteriv(%u, %u, %p)\n", target, parameter, values);
+        GAPID_INFO("glGetRenderbufferParameteriv(%u, %u, %p)\n", target, parameter, values);
         if (glGetRenderbufferParameteriv != nullptr) {
             glGetRenderbufferParameteriv(target, parameter, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetRenderbufferParameteriv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetRenderbufferParameteriv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetRenderbufferParameteriv\n");
+        GAPID_WARNING("Error during calling function glGetRenderbufferParameteriv\n");
         return false;
     }
 }
@@ -2120,15 +2122,15 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
     BufferId* buffers = stack->pop<BufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenBuffers(%d, %p)\n", count, buffers);
+        GAPID_INFO("glGenBuffers(%d, %p)\n", count, buffers);
         if (glGenBuffers != nullptr) {
             glGenBuffers(count, buffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenBuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenBuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenBuffers\n");
+        GAPID_WARNING("Error during calling function glGenBuffers\n");
         return false;
     }
 }
@@ -2137,15 +2139,15 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
     BufferId buffer = stack->pop<BufferId>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBindBuffer(%u, %u)\n", target, buffer);
+        GAPID_INFO("glBindBuffer(%u, %u)\n", target, buffer);
         if (glBindBuffer != nullptr) {
             glBindBuffer(target, buffer);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBindBuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glBindBuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBindBuffer\n");
+        GAPID_WARNING("Error during calling function glBindBuffer\n");
         return false;
     }
 }
@@ -2156,15 +2158,15 @@ bool callGlBufferData(Stack* stack, bool pushReturn) {
     int32_t size = stack->pop<int32_t>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBufferData(%u, %d, %p, %u)\n", target, size, data, usage);
+        GAPID_INFO("glBufferData(%u, %d, %p, %u)\n", target, size, data, usage);
         if (glBufferData != nullptr) {
             glBufferData(target, size, data, usage);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBufferData\n");
+            GAPID_WARNING("Attempted to call unsupported function glBufferData\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBufferData\n");
+        GAPID_WARNING("Error during calling function glBufferData\n");
         return false;
     }
 }
@@ -2175,15 +2177,15 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
     int32_t offset = stack->pop<int32_t>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBufferSubData(%u, %d, %d, %p)\n", target, offset, size, data);
+        GAPID_INFO("glBufferSubData(%u, %d, %d, %p)\n", target, offset, size, data);
         if (glBufferSubData != nullptr) {
             glBufferSubData(target, offset, size, data);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBufferSubData\n");
+            GAPID_WARNING("Attempted to call unsupported function glBufferSubData\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBufferSubData\n");
+        GAPID_WARNING("Error during calling function glBufferSubData\n");
         return false;
     }
 }
@@ -2192,15 +2194,15 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
     BufferId* buffers = stack->pop<BufferId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteBuffers(%d, %p)\n", count, buffers);
+        GAPID_INFO("glDeleteBuffers(%d, %p)\n", count, buffers);
         if (glDeleteBuffers != nullptr) {
             glDeleteBuffers(count, buffers);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteBuffers\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteBuffers\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteBuffers\n");
+        GAPID_WARNING("Error during calling function glDeleteBuffers\n");
         return false;
     }
 }
@@ -2208,19 +2210,19 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
 bool callGlIsBuffer(Stack* stack, bool pushReturn) {
     BufferId buffer = stack->pop<BufferId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsBuffer(%u)\n", buffer);
+        GAPID_INFO("glIsBuffer(%u)\n", buffer);
         if (glIsBuffer != nullptr) {
             bool return_value = glIsBuffer(buffer);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsBuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsBuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsBuffer\n");
+        GAPID_WARNING("Error during calling function glIsBuffer\n");
         return false;
     }
 }
@@ -2230,15 +2232,15 @@ bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
     BufferParameter parameter = stack->pop<BufferParameter>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetBufferParameteriv(%u, %u, %p)\n", target, parameter, value);
+        GAPID_INFO("glGetBufferParameteriv(%u, %u, %p)\n", target, parameter, value);
         if (glGetBufferParameteriv != nullptr) {
             glGetBufferParameteriv(target, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetBufferParameteriv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetBufferParameteriv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetBufferParameteriv\n");
+        GAPID_WARNING("Error during calling function glGetBufferParameteriv\n");
         return false;
     }
 }
@@ -2246,19 +2248,19 @@ bool callGlGetBufferParameteriv(Stack* stack, bool pushReturn) {
 bool callGlCreateShader(Stack* stack, bool pushReturn) {
     ShaderType type = stack->pop<ShaderType>();
     if (stack->isValid()) {
-        CAZE_INFO("glCreateShader(%u)\n", type);
+        GAPID_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
             ShaderId return_value = glCreateShader(type);
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<ShaderId>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCreateShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glCreateShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCreateShader\n");
+        GAPID_WARNING("Error during calling function glCreateShader\n");
         return false;
     }
 }
@@ -2266,15 +2268,15 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
 bool callGlDeleteShader(Stack* stack, bool pushReturn) {
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteShader(%u)\n", shader);
+        GAPID_INFO("glDeleteShader(%u)\n", shader);
         if (glDeleteShader != nullptr) {
             glDeleteShader(shader);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteShader\n");
+        GAPID_WARNING("Error during calling function glDeleteShader\n");
         return false;
     }
 }
@@ -2285,15 +2287,15 @@ bool callGlShaderSource(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glShaderSource(%u, %d, %p, %p)\n", shader, count, source, length);
+        GAPID_INFO("glShaderSource(%u, %d, %p, %p)\n", shader, count, source, length);
         if (glShaderSource != nullptr) {
             glShaderSource(shader, count, source, length);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glShaderSource\n");
+            GAPID_WARNING("Attempted to call unsupported function glShaderSource\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glShaderSource\n");
+        GAPID_WARNING("Error during calling function glShaderSource\n");
         return false;
     }
 }
@@ -2305,16 +2307,16 @@ bool callGlShaderBinary(Stack* stack, bool pushReturn) {
     ShaderId* shaders = stack->pop<ShaderId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glShaderBinary(%d, %p, %u, %p, %d)\n", count, shaders, binary_format, binary,
-                  binary_size);
+        GAPID_INFO("glShaderBinary(%d, %p, %u, %p, %d)\n", count, shaders, binary_format, binary,
+                   binary_size);
         if (glShaderBinary != nullptr) {
             glShaderBinary(count, shaders, binary_format, binary, binary_size);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glShaderBinary\n");
+            GAPID_WARNING("Attempted to call unsupported function glShaderBinary\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glShaderBinary\n");
+        GAPID_WARNING("Error during calling function glShaderBinary\n");
         return false;
     }
 }
@@ -2325,16 +2327,16 @@ bool callGlGetShaderInfoLog(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetShaderInfoLog(%u, %d, %p, %p)\n", shader, buffer_length,
-                  string_length_written, info);
+        GAPID_INFO("glGetShaderInfoLog(%u, %d, %p, %p)\n", shader, buffer_length,
+                   string_length_written, info);
         if (glGetShaderInfoLog != nullptr) {
             glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetShaderInfoLog\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetShaderInfoLog\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetShaderInfoLog\n");
+        GAPID_WARNING("Error during calling function glGetShaderInfoLog\n");
         return false;
     }
 }
@@ -2345,31 +2347,31 @@ bool callGlGetShaderSource(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetShaderSource(%u, %d, %p, %p)\n", shader, buffer_length,
-                  string_length_written, source);
+        GAPID_INFO("glGetShaderSource(%u, %d, %p, %p)\n", shader, buffer_length,
+                   string_length_written, source);
         if (glGetShaderSource != nullptr) {
             glGetShaderSource(shader, buffer_length, string_length_written, source);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetShaderSource\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetShaderSource\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetShaderSource\n");
+        GAPID_WARNING("Error during calling function glGetShaderSource\n");
         return false;
     }
 }
 
 bool callGlReleaseShaderCompiler(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glReleaseShaderCompiler()\n");
+        GAPID_INFO("glReleaseShaderCompiler()\n");
         if (glReleaseShaderCompiler != nullptr) {
             glReleaseShaderCompiler();
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glReleaseShaderCompiler\n");
+            GAPID_WARNING("Attempted to call unsupported function glReleaseShaderCompiler\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glReleaseShaderCompiler\n");
+        GAPID_WARNING("Error during calling function glReleaseShaderCompiler\n");
         return false;
     }
 }
@@ -2377,15 +2379,15 @@ bool callGlReleaseShaderCompiler(Stack* stack, bool pushReturn) {
 bool callGlCompileShader(Stack* stack, bool pushReturn) {
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glCompileShader(%u)\n", shader);
+        GAPID_INFO("glCompileShader(%u)\n", shader);
         if (glCompileShader != nullptr) {
             glCompileShader(shader);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCompileShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glCompileShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCompileShader\n");
+        GAPID_WARNING("Error during calling function glCompileShader\n");
         return false;
     }
 }
@@ -2393,38 +2395,38 @@ bool callGlCompileShader(Stack* stack, bool pushReturn) {
 bool callGlIsShader(Stack* stack, bool pushReturn) {
     ShaderId shader = stack->pop<ShaderId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsShader(%u)\n", shader);
+        GAPID_INFO("glIsShader(%u)\n", shader);
         if (glIsShader != nullptr) {
             bool return_value = glIsShader(shader);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsShader\n");
+        GAPID_WARNING("Error during calling function glIsShader\n");
         return false;
     }
 }
 
 bool callGlCreateProgram(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glCreateProgram()\n");
+        GAPID_INFO("glCreateProgram()\n");
         if (glCreateProgram != nullptr) {
             ProgramId return_value = glCreateProgram();
-            CAZE_INFO("Returned: %u\n", return_value);
+            GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
                 stack->push<ProgramId>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCreateProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glCreateProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCreateProgram\n");
+        GAPID_WARNING("Error during calling function glCreateProgram\n");
         return false;
     }
 }
@@ -2432,15 +2434,15 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
 bool callGlDeleteProgram(Stack* stack, bool pushReturn) {
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteProgram(%u)\n", program);
+        GAPID_INFO("glDeleteProgram(%u)\n", program);
         if (glDeleteProgram != nullptr) {
             glDeleteProgram(program);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteProgram\n");
+        GAPID_WARNING("Error during calling function glDeleteProgram\n");
         return false;
     }
 }
@@ -2449,15 +2451,15 @@ bool callGlAttachShader(Stack* stack, bool pushReturn) {
     ShaderId shader = stack->pop<ShaderId>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glAttachShader(%u, %u)\n", program, shader);
+        GAPID_INFO("glAttachShader(%u, %u)\n", program, shader);
         if (glAttachShader != nullptr) {
             glAttachShader(program, shader);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glAttachShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glAttachShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glAttachShader\n");
+        GAPID_WARNING("Error during calling function glAttachShader\n");
         return false;
     }
 }
@@ -2466,15 +2468,15 @@ bool callGlDetachShader(Stack* stack, bool pushReturn) {
     ShaderId shader = stack->pop<ShaderId>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glDetachShader(%u, %u)\n", program, shader);
+        GAPID_INFO("glDetachShader(%u, %u)\n", program, shader);
         if (glDetachShader != nullptr) {
             glDetachShader(program, shader);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDetachShader\n");
+            GAPID_WARNING("Attempted to call unsupported function glDetachShader\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDetachShader\n");
+        GAPID_WARNING("Error during calling function glDetachShader\n");
         return false;
     }
 }
@@ -2485,16 +2487,16 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetAttachedShaders(%u, %d, %p, %p)\n", program, buffer_length,
-                  shaders_length_written, shaders);
+        GAPID_INFO("glGetAttachedShaders(%u, %d, %p, %p)\n", program, buffer_length,
+                   shaders_length_written, shaders);
         if (glGetAttachedShaders != nullptr) {
             glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetAttachedShaders\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetAttachedShaders\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetAttachedShaders\n");
+        GAPID_WARNING("Error during calling function glGetAttachedShaders\n");
         return false;
     }
 }
@@ -2502,15 +2504,15 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
 bool callGlLinkProgram(Stack* stack, bool pushReturn) {
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glLinkProgram(%u)\n", program);
+        GAPID_INFO("glLinkProgram(%u)\n", program);
         if (glLinkProgram != nullptr) {
             glLinkProgram(program);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glLinkProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glLinkProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glLinkProgram\n");
+        GAPID_WARNING("Error during calling function glLinkProgram\n");
         return false;
     }
 }
@@ -2521,16 +2523,16 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
     int32_t buffer_length = stack->pop<int32_t>();
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetProgramInfoLog(%u, %d, %p, %p)\n", program, buffer_length,
-                  string_length_written, info);
+        GAPID_INFO("glGetProgramInfoLog(%u, %d, %p, %p)\n", program, buffer_length,
+                   string_length_written, info);
         if (glGetProgramInfoLog != nullptr) {
             glGetProgramInfoLog(program, buffer_length, string_length_written, info);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetProgramInfoLog\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetProgramInfoLog\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetProgramInfoLog\n");
+        GAPID_WARNING("Error during calling function glGetProgramInfoLog\n");
         return false;
     }
 }
@@ -2538,15 +2540,15 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
 bool callGlUseProgram(Stack* stack, bool pushReturn) {
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glUseProgram(%u)\n", program);
+        GAPID_INFO("glUseProgram(%u)\n", program);
         if (glUseProgram != nullptr) {
             glUseProgram(program);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUseProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glUseProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUseProgram\n");
+        GAPID_WARNING("Error during calling function glUseProgram\n");
         return false;
     }
 }
@@ -2554,19 +2556,19 @@ bool callGlUseProgram(Stack* stack, bool pushReturn) {
 bool callGlIsProgram(Stack* stack, bool pushReturn) {
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsProgram(%u)\n", program);
+        GAPID_INFO("glIsProgram(%u)\n", program);
         if (glIsProgram != nullptr) {
             bool return_value = glIsProgram(program);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsProgram\n");
+        GAPID_WARNING("Error during calling function glIsProgram\n");
         return false;
     }
 }
@@ -2574,15 +2576,15 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
 bool callGlValidateProgram(Stack* stack, bool pushReturn) {
     ProgramId program = stack->pop<ProgramId>();
     if (stack->isValid()) {
-        CAZE_INFO("glValidateProgram(%u)\n", program);
+        GAPID_INFO("glValidateProgram(%u)\n", program);
         if (glValidateProgram != nullptr) {
             glValidateProgram(program);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glValidateProgram\n");
+            GAPID_WARNING("Attempted to call unsupported function glValidateProgram\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glValidateProgram\n");
+        GAPID_WARNING("Error during calling function glValidateProgram\n");
         return false;
     }
 }
@@ -2593,15 +2595,15 @@ bool callGlClearColor(Stack* stack, bool pushReturn) {
     float g = stack->pop<float>();
     float r = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glClearColor(%f, %f, %f, %f)\n", r, g, b, a);
+        GAPID_INFO("glClearColor(%f, %f, %f, %f)\n", r, g, b, a);
         if (glClearColor != nullptr) {
             glClearColor(r, g, b, a);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glClearColor\n");
+            GAPID_WARNING("Attempted to call unsupported function glClearColor\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glClearColor\n");
+        GAPID_WARNING("Error during calling function glClearColor\n");
         return false;
     }
 }
@@ -2609,15 +2611,15 @@ bool callGlClearColor(Stack* stack, bool pushReturn) {
 bool callGlClearDepthf(Stack* stack, bool pushReturn) {
     float depth = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glClearDepthf(%f)\n", depth);
+        GAPID_INFO("glClearDepthf(%f)\n", depth);
         if (glClearDepthf != nullptr) {
             glClearDepthf(depth);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glClearDepthf\n");
+            GAPID_WARNING("Attempted to call unsupported function glClearDepthf\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glClearDepthf\n");
+        GAPID_WARNING("Error during calling function glClearDepthf\n");
         return false;
     }
 }
@@ -2625,15 +2627,15 @@ bool callGlClearDepthf(Stack* stack, bool pushReturn) {
 bool callGlClearStencil(Stack* stack, bool pushReturn) {
     int32_t stencil = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glClearStencil(%d)\n", stencil);
+        GAPID_INFO("glClearStencil(%d)\n", stencil);
         if (glClearStencil != nullptr) {
             glClearStencil(stencil);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glClearStencil\n");
+            GAPID_WARNING("Attempted to call unsupported function glClearStencil\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glClearStencil\n");
+        GAPID_WARNING("Error during calling function glClearStencil\n");
         return false;
     }
 }
@@ -2641,15 +2643,15 @@ bool callGlClearStencil(Stack* stack, bool pushReturn) {
 bool callGlClear(Stack* stack, bool pushReturn) {
     ClearMask mask = stack->pop<ClearMask>();
     if (stack->isValid()) {
-        CAZE_INFO("glClear(%u)\n", mask);
+        GAPID_INFO("glClear(%u)\n", mask);
         if (glClear != nullptr) {
             glClear(mask);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glClear\n");
+            GAPID_WARNING("Attempted to call unsupported function glClear\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glClear\n");
+        GAPID_WARNING("Error during calling function glClear\n");
         return false;
     }
 }
@@ -2657,15 +2659,15 @@ bool callGlClear(Stack* stack, bool pushReturn) {
 bool callGlCullFace(Stack* stack, bool pushReturn) {
     FaceMode mode = stack->pop<FaceMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glCullFace(%u)\n", mode);
+        GAPID_INFO("glCullFace(%u)\n", mode);
         if (glCullFace != nullptr) {
             glCullFace(mode);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glCullFace\n");
+            GAPID_WARNING("Attempted to call unsupported function glCullFace\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glCullFace\n");
+        GAPID_WARNING("Error during calling function glCullFace\n");
         return false;
     }
 }
@@ -2674,15 +2676,15 @@ bool callGlPolygonOffset(Stack* stack, bool pushReturn) {
     float units = stack->pop<float>();
     float scale_factor = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glPolygonOffset(%f, %f)\n", scale_factor, units);
+        GAPID_INFO("glPolygonOffset(%f, %f)\n", scale_factor, units);
         if (glPolygonOffset != nullptr) {
             glPolygonOffset(scale_factor, units);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glPolygonOffset\n");
+            GAPID_WARNING("Attempted to call unsupported function glPolygonOffset\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glPolygonOffset\n");
+        GAPID_WARNING("Error during calling function glPolygonOffset\n");
         return false;
     }
 }
@@ -2690,15 +2692,15 @@ bool callGlPolygonOffset(Stack* stack, bool pushReturn) {
 bool callGlLineWidth(Stack* stack, bool pushReturn) {
     float width = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glLineWidth(%f)\n", width);
+        GAPID_INFO("glLineWidth(%f)\n", width);
         if (glLineWidth != nullptr) {
             glLineWidth(width);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glLineWidth\n");
+            GAPID_WARNING("Attempted to call unsupported function glLineWidth\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glLineWidth\n");
+        GAPID_WARNING("Error during calling function glLineWidth\n");
         return false;
     }
 }
@@ -2707,15 +2709,15 @@ bool callGlSampleCoverage(Stack* stack, bool pushReturn) {
     bool invert = stack->pop<bool>();
     float value = stack->pop<float>();
     if (stack->isValid()) {
-        CAZE_INFO("glSampleCoverage(%f, %d)\n", value, invert);
+        GAPID_INFO("glSampleCoverage(%f, %d)\n", value, invert);
         if (glSampleCoverage != nullptr) {
             glSampleCoverage(value, invert);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glSampleCoverage\n");
+            GAPID_WARNING("Attempted to call unsupported function glSampleCoverage\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glSampleCoverage\n");
+        GAPID_WARNING("Error during calling function glSampleCoverage\n");
         return false;
     }
 }
@@ -2724,15 +2726,15 @@ bool callGlHint(Stack* stack, bool pushReturn) {
     HintMode mode = stack->pop<HintMode>();
     HintTarget target = stack->pop<HintTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glHint(%u, %u)\n", target, mode);
+        GAPID_INFO("glHint(%u, %u)\n", target, mode);
         if (glHint != nullptr) {
             glHint(target, mode);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glHint\n");
+            GAPID_WARNING("Attempted to call unsupported function glHint\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glHint\n");
+        GAPID_WARNING("Error during calling function glHint\n");
         return false;
     }
 }
@@ -2743,17 +2745,17 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
     FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
     FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glFramebufferRenderbuffer(%u, %u, %u, %u)\n", framebuffer_target,
-                  framebuffer_attachment, renderbuffer_target, renderbuffer);
+        GAPID_INFO("glFramebufferRenderbuffer(%u, %u, %u, %u)\n", framebuffer_target,
+                   framebuffer_attachment, renderbuffer_target, renderbuffer);
         if (glFramebufferRenderbuffer != nullptr) {
             glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
                                       renderbuffer_target, renderbuffer);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glFramebufferRenderbuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferRenderbuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glFramebufferRenderbuffer\n");
+        GAPID_WARNING("Error during calling function glFramebufferRenderbuffer\n");
         return false;
     }
 }
@@ -2765,17 +2767,17 @@ bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
     FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
     FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glFramebufferTexture2D(%u, %u, %u, %u, %d)\n", framebuffer_target,
-                  framebuffer_attachment, texture_target, texture, level);
+        GAPID_INFO("glFramebufferTexture2D(%u, %u, %u, %u, %d)\n", framebuffer_target,
+                   framebuffer_attachment, texture_target, texture, level);
         if (glFramebufferTexture2D != nullptr) {
             glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
                                    texture, level);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glFramebufferTexture2D\n");
+            GAPID_WARNING("Attempted to call unsupported function glFramebufferTexture2D\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glFramebufferTexture2D\n");
+        GAPID_WARNING("Error during calling function glFramebufferTexture2D\n");
         return false;
     }
 }
@@ -2786,18 +2788,18 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
     FramebufferAttachment attachment = stack->pop<FramebufferAttachment>();
     FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", framebuffer_target,
-                  attachment, parameter, value);
+        GAPID_INFO("glGetFramebufferAttachmentParameteriv(%u, %u, %u, %p)\n", framebuffer_target,
+                   attachment, parameter, value);
         if (glGetFramebufferAttachmentParameteriv != nullptr) {
             glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
         } else {
-            CAZE_WARNING(
+            GAPID_WARNING(
                     "Attempted to call unsupported function "
                     "glGetFramebufferAttachmentParameteriv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetFramebufferAttachmentParameteriv\n");
+        GAPID_WARNING("Error during calling function glGetFramebufferAttachmentParameteriv\n");
         return false;
     }
 }
@@ -2808,16 +2810,16 @@ bool callGlDrawElements(Stack* stack, bool pushReturn) {
     int32_t element_count = stack->pop<int32_t>();
     DrawMode draw_mode = stack->pop<DrawMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glDrawElements(%u, %d, %u, %p)\n", draw_mode, element_count, indices_type,
-                  indices);
+        GAPID_INFO("glDrawElements(%u, %d, %u, %p)\n", draw_mode, element_count, indices_type,
+                   indices);
         if (glDrawElements != nullptr) {
             glDrawElements(draw_mode, element_count, indices_type, indices);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDrawElements\n");
+            GAPID_WARNING("Attempted to call unsupported function glDrawElements\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDrawElements\n");
+        GAPID_WARNING("Error during calling function glDrawElements\n");
         return false;
     }
 }
@@ -2827,45 +2829,45 @@ bool callGlDrawArrays(Stack* stack, bool pushReturn) {
     int32_t first_index = stack->pop<int32_t>();
     DrawMode draw_mode = stack->pop<DrawMode>();
     if (stack->isValid()) {
-        CAZE_INFO("glDrawArrays(%u, %d, %d)\n", draw_mode, first_index, index_count);
+        GAPID_INFO("glDrawArrays(%u, %d, %d)\n", draw_mode, first_index, index_count);
         if (glDrawArrays != nullptr) {
             glDrawArrays(draw_mode, first_index, index_count);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDrawArrays\n");
+            GAPID_WARNING("Attempted to call unsupported function glDrawArrays\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDrawArrays\n");
+        GAPID_WARNING("Error during calling function glDrawArrays\n");
         return false;
     }
 }
 
 bool callGlFlush(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glFlush()\n");
+        GAPID_INFO("glFlush()\n");
         if (glFlush != nullptr) {
             glFlush();
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glFlush\n");
+            GAPID_WARNING("Attempted to call unsupported function glFlush\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glFlush\n");
+        GAPID_WARNING("Error during calling function glFlush\n");
         return false;
     }
 }
 
 bool callGlFinish(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
-        CAZE_INFO("glFinish()\n");
+        GAPID_INFO("glFinish()\n");
         if (glFinish != nullptr) {
             glFinish();
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glFinish\n");
+            GAPID_WARNING("Attempted to call unsupported function glFinish\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glFinish\n");
+        GAPID_WARNING("Error during calling function glFinish\n");
         return false;
     }
 }
@@ -2874,15 +2876,15 @@ bool callGlGetBooleanv(Stack* stack, bool pushReturn) {
     bool* values = stack->pop<bool*>();
     StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetBooleanv(%u, %p)\n", param, values);
+        GAPID_INFO("glGetBooleanv(%u, %p)\n", param, values);
         if (glGetBooleanv != nullptr) {
             glGetBooleanv(param, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetBooleanv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetBooleanv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetBooleanv\n");
+        GAPID_WARNING("Error during calling function glGetBooleanv\n");
         return false;
     }
 }
@@ -2891,15 +2893,15 @@ bool callGlGetFloatv(Stack* stack, bool pushReturn) {
     float* values = stack->pop<float*>();
     StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetFloatv(%u, %p)\n", param, values);
+        GAPID_INFO("glGetFloatv(%u, %p)\n", param, values);
         if (glGetFloatv != nullptr) {
             glGetFloatv(param, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetFloatv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetFloatv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetFloatv\n");
+        GAPID_WARNING("Error during calling function glGetFloatv\n");
         return false;
     }
 }
@@ -2908,15 +2910,15 @@ bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
     int32_t* values = stack->pop<int32_t*>();
     StateVariable param = stack->pop<StateVariable>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetIntegerv(%u, %p)\n", param, values);
+        GAPID_INFO("glGetIntegerv(%u, %p)\n", param, values);
         if (glGetIntegerv != nullptr) {
             glGetIntegerv(param, values);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetIntegerv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetIntegerv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetIntegerv\n");
+        GAPID_WARNING("Error during calling function glGetIntegerv\n");
         return false;
     }
 }
@@ -2924,19 +2926,19 @@ bool callGlGetIntegerv(Stack* stack, bool pushReturn) {
 bool callGlGetString(Stack* stack, bool pushReturn) {
     StringConstant param = stack->pop<StringConstant>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetString(%u)\n", param);
+        GAPID_INFO("glGetString(%u)\n", param);
         if (glGetString != nullptr) {
             const char* return_value = glGetString(param);
-            CAZE_INFO("Returned: %s\n", return_value);
+            GAPID_INFO("Returned: %s\n", return_value);
             if (pushReturn) {
                 stack->push<const char*>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetString\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetString\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetString\n");
+        GAPID_WARNING("Error during calling function glGetString\n");
         return false;
     }
 }
@@ -2944,15 +2946,15 @@ bool callGlGetString(Stack* stack, bool pushReturn) {
 bool callGlEnable(Stack* stack, bool pushReturn) {
     Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
-        CAZE_INFO("glEnable(%u)\n", capability);
+        GAPID_INFO("glEnable(%u)\n", capability);
         if (glEnable != nullptr) {
             glEnable(capability);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEnable\n");
+            GAPID_WARNING("Attempted to call unsupported function glEnable\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEnable\n");
+        GAPID_WARNING("Error during calling function glEnable\n");
         return false;
     }
 }
@@ -2960,15 +2962,15 @@ bool callGlEnable(Stack* stack, bool pushReturn) {
 bool callGlDisable(Stack* stack, bool pushReturn) {
     Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
-        CAZE_INFO("glDisable(%u)\n", capability);
+        GAPID_INFO("glDisable(%u)\n", capability);
         if (glDisable != nullptr) {
             glDisable(capability);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDisable\n");
+            GAPID_WARNING("Attempted to call unsupported function glDisable\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDisable\n");
+        GAPID_WARNING("Error during calling function glDisable\n");
         return false;
     }
 }
@@ -2976,19 +2978,19 @@ bool callGlDisable(Stack* stack, bool pushReturn) {
 bool callGlIsEnabled(Stack* stack, bool pushReturn) {
     Capability capability = stack->pop<Capability>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsEnabled(%u)\n", capability);
+        GAPID_INFO("glIsEnabled(%u)\n", capability);
         if (glIsEnabled != nullptr) {
             bool return_value = glIsEnabled(capability);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsEnabled\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsEnabled\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsEnabled\n");
+        GAPID_WARNING("Error during calling function glIsEnabled\n");
         return false;
     }
 }
@@ -2999,19 +3001,19 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
     int32_t offset = stack->pop<int32_t>();
     MapBufferTarget target = stack->pop<MapBufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
+        GAPID_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
         if (glMapBufferRange != nullptr) {
             void* return_value = glMapBufferRange(target, offset, length, access);
-            CAZE_INFO("Returned: %p\n", return_value);
+            GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
                 stack->push<void*>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glMapBufferRange\n");
+            GAPID_WARNING("Attempted to call unsupported function glMapBufferRange\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glMapBufferRange\n");
+        GAPID_WARNING("Error during calling function glMapBufferRange\n");
         return false;
     }
 }
@@ -3019,15 +3021,15 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
 bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
     MapBufferTarget target = stack->pop<MapBufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glUnmapBuffer(%u)\n", target);
+        GAPID_INFO("glUnmapBuffer(%u)\n", target);
         if (glUnmapBuffer != nullptr) {
             glUnmapBuffer(target);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glUnmapBuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glUnmapBuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glUnmapBuffer\n");
+        GAPID_WARNING("Error during calling function glUnmapBuffer\n");
         return false;
     }
 }
@@ -3037,15 +3039,15 @@ bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
     int32_t count = stack->pop<int32_t>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glInvalidateFramebuffer(%u, %d, %p)\n", target, count, attachments);
+        GAPID_INFO("glInvalidateFramebuffer(%u, %d, %p)\n", target, count, attachments);
         if (glInvalidateFramebuffer != nullptr) {
             glInvalidateFramebuffer(target, count, attachments);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glInvalidateFramebuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glInvalidateFramebuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glInvalidateFramebuffer\n");
+        GAPID_WARNING("Error during calling function glInvalidateFramebuffer\n");
         return false;
     }
 }
@@ -3057,17 +3059,17 @@ bool callGlRenderbufferStorageMultisample(Stack* stack, bool pushReturn) {
     int32_t samples = stack->pop<int32_t>();
     RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glRenderbufferStorageMultisample(%u, %d, %u, %d, %d)\n", target, samples, format,
-                  width, height);
+        GAPID_INFO("glRenderbufferStorageMultisample(%u, %d, %u, %d, %d)\n", target, samples,
+                   format, width, height);
         if (glRenderbufferStorageMultisample != nullptr) {
             glRenderbufferStorageMultisample(target, samples, format, width, height);
         } else {
-            CAZE_WARNING(
+            GAPID_WARNING(
                     "Attempted to call unsupported function glRenderbufferStorageMultisample\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glRenderbufferStorageMultisample\n");
+        GAPID_WARNING("Error during calling function glRenderbufferStorageMultisample\n");
         return false;
     }
 }
@@ -3084,16 +3086,16 @@ bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
     int32_t srcY0 = stack->pop<int32_t>();
     int32_t srcX0 = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glBlitFramebuffer(%d, %d, %d, %d, %d, %d, %d, %d, %u, %u)\n", srcX0, srcY0,
-                  srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
+        GAPID_INFO("glBlitFramebuffer(%d, %d, %d, %d, %d, %d, %d, %d, %u, %u)\n", srcX0, srcY0,
+                   srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
         if (glBlitFramebuffer != nullptr) {
             glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBlitFramebuffer\n");
+            GAPID_WARNING("Attempted to call unsupported function glBlitFramebuffer\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBlitFramebuffer\n");
+        GAPID_WARNING("Error during calling function glBlitFramebuffer\n");
         return false;
     }
 }
@@ -3102,15 +3104,15 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
     QueryId* queries = stack->pop<QueryId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenQueries(%d, %p)\n", count, queries);
+        GAPID_INFO("glGenQueries(%d, %p)\n", count, queries);
         if (glGenQueries != nullptr) {
             glGenQueries(count, queries);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenQueries\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenQueries\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenQueries\n");
+        GAPID_WARNING("Error during calling function glGenQueries\n");
         return false;
     }
 }
@@ -3119,15 +3121,15 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBeginQuery(%u, %u)\n", target, query);
+        GAPID_INFO("glBeginQuery(%u, %u)\n", target, query);
         if (glBeginQuery != nullptr) {
             glBeginQuery(target, query);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBeginQuery\n");
+            GAPID_WARNING("Attempted to call unsupported function glBeginQuery\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBeginQuery\n");
+        GAPID_WARNING("Error during calling function glBeginQuery\n");
         return false;
     }
 }
@@ -3135,15 +3137,15 @@ bool callGlBeginQuery(Stack* stack, bool pushReturn) {
 bool callGlEndQuery(Stack* stack, bool pushReturn) {
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glEndQuery(%u)\n", target);
+        GAPID_INFO("glEndQuery(%u)\n", target);
         if (glEndQuery != nullptr) {
             glEndQuery(target);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEndQuery\n");
+            GAPID_WARNING("Attempted to call unsupported function glEndQuery\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEndQuery\n");
+        GAPID_WARNING("Error during calling function glEndQuery\n");
         return false;
     }
 }
@@ -3152,15 +3154,15 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
     QueryId* queries = stack->pop<QueryId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteQueries(%d, %p)\n", count, queries);
+        GAPID_INFO("glDeleteQueries(%d, %p)\n", count, queries);
         if (glDeleteQueries != nullptr) {
             glDeleteQueries(count, queries);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteQueries\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteQueries\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteQueries\n");
+        GAPID_WARNING("Error during calling function glDeleteQueries\n");
         return false;
     }
 }
@@ -3168,19 +3170,19 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
 bool callGlIsQuery(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsQuery(%u)\n", query);
+        GAPID_INFO("glIsQuery(%u)\n", query);
         if (glIsQuery != nullptr) {
             bool return_value = glIsQuery(query);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsQuery\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsQuery\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsQuery\n");
+        GAPID_WARNING("Error during calling function glIsQuery\n");
         return false;
     }
 }
@@ -3190,15 +3192,15 @@ bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
     QueryParameter parameter = stack->pop<QueryParameter>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
+        GAPID_INFO("glGetQueryiv(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryiv != nullptr) {
             glGetQueryiv(target, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryiv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryiv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryiv\n");
+        GAPID_WARNING("Error during calling function glGetQueryiv\n");
         return false;
     }
 }
@@ -3208,15 +3210,15 @@ bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuiv != nullptr) {
             glGetQueryObjectuiv(query, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectuiv\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectuiv\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryObjectuiv\n");
+        GAPID_WARNING("Error during calling function glGetQueryObjectuiv\n");
         return false;
     }
 }
@@ -3225,15 +3227,15 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
     QueryId* queries = stack->pop<QueryId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glGenQueriesEXT(%d, %p)\n", count, queries);
+        GAPID_INFO("glGenQueriesEXT(%d, %p)\n", count, queries);
         if (glGenQueriesEXT != nullptr) {
             glGenQueriesEXT(count, queries);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGenQueriesEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGenQueriesEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGenQueriesEXT\n");
+        GAPID_WARNING("Error during calling function glGenQueriesEXT\n");
         return false;
     }
 }
@@ -3242,15 +3244,15 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
+        GAPID_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
         if (glBeginQueryEXT != nullptr) {
             glBeginQueryEXT(target, query);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glBeginQueryEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glBeginQueryEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glBeginQueryEXT\n");
+        GAPID_WARNING("Error during calling function glBeginQueryEXT\n");
         return false;
     }
 }
@@ -3258,15 +3260,15 @@ bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
 bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glEndQueryEXT(%u)\n", target);
+        GAPID_INFO("glEndQueryEXT(%u)\n", target);
         if (glEndQueryEXT != nullptr) {
             glEndQueryEXT(target);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glEndQueryEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glEndQueryEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glEndQueryEXT\n");
+        GAPID_WARNING("Error during calling function glEndQueryEXT\n");
         return false;
     }
 }
@@ -3275,15 +3277,15 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
     QueryId* queries = stack->pop<QueryId*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
-        CAZE_INFO("glDeleteQueriesEXT(%d, %p)\n", count, queries);
+        GAPID_INFO("glDeleteQueriesEXT(%d, %p)\n", count, queries);
         if (glDeleteQueriesEXT != nullptr) {
             glDeleteQueriesEXT(count, queries);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glDeleteQueriesEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glDeleteQueriesEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glDeleteQueriesEXT\n");
+        GAPID_WARNING("Error during calling function glDeleteQueriesEXT\n");
         return false;
     }
 }
@@ -3291,19 +3293,19 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
 bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glIsQueryEXT(%u)\n", query);
+        GAPID_INFO("glIsQueryEXT(%u)\n", query);
         if (glIsQueryEXT != nullptr) {
             bool return_value = glIsQueryEXT(query);
-            CAZE_INFO("Returned: %d\n", return_value);
+            GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
                 stack->push<bool>(return_value);
             }
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glIsQueryEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glIsQueryEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glIsQueryEXT\n");
+        GAPID_WARNING("Error during calling function glIsQueryEXT\n");
         return false;
     }
 }
@@ -3312,15 +3314,15 @@ bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
     QueryTarget target = stack->pop<QueryTarget>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
+        GAPID_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
         if (glQueryCounterEXT != nullptr) {
             glQueryCounterEXT(query, target);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glQueryCounterEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glQueryCounterEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glQueryCounterEXT\n");
+        GAPID_WARNING("Error during calling function glQueryCounterEXT\n");
         return false;
     }
 }
@@ -3330,15 +3332,15 @@ bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
     QueryParameter parameter = stack->pop<QueryParameter>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
+        GAPID_INFO("glGetQueryivEXT(%u, %u, %p)\n", target, parameter, value);
         if (glGetQueryivEXT != nullptr) {
             glGetQueryivEXT(target, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryivEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryivEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryivEXT\n");
+        GAPID_WARNING("Error during calling function glGetQueryivEXT\n");
         return false;
     }
 }
@@ -3348,15 +3350,15 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectivEXT != nullptr) {
             glGetQueryObjectivEXT(query, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectivEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectivEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryObjectivEXT\n");
+        GAPID_WARNING("Error during calling function glGetQueryObjectivEXT\n");
         return false;
     }
 }
@@ -3366,15 +3368,15 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuivEXT != nullptr) {
             glGetQueryObjectuivEXT(query, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectuivEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectuivEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryObjectuivEXT\n");
+        GAPID_WARNING("Error during calling function glGetQueryObjectuivEXT\n");
         return false;
     }
 }
@@ -3384,15 +3386,15 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjecti64vEXT != nullptr) {
             glGetQueryObjecti64vEXT(query, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjecti64vEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjecti64vEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryObjecti64vEXT\n");
+        GAPID_WARNING("Error during calling function glGetQueryObjecti64vEXT\n");
         return false;
     }
 }
@@ -3402,15 +3404,15 @@ bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
     QueryId query = stack->pop<QueryId>();
     if (stack->isValid()) {
-        CAZE_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
+        GAPID_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectui64vEXT != nullptr) {
             glGetQueryObjectui64vEXT(query, parameter, value);
         } else {
-            CAZE_WARNING("Attempted to call unsupported function glGetQueryObjectui64vEXT\n");
+            GAPID_WARNING("Attempted to call unsupported function glGetQueryObjectui64vEXT\n");
         }
         return true;
     } else {
-        CAZE_WARNING("Error during calling function glGetQueryObjectui64vEXT\n");
+        GAPID_WARNING("Error during calling function glGetQueryObjectui64vEXT\n");
         return false;
     }
 }

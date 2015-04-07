@@ -15,9 +15,10 @@
  */
 
 #include "Log.h"
-#include "Target.h"
 
-#if TARGET_OS != CAZE_OS_ANDROID
+#include <gapic/target.h>
+
+#if TARGET_OS != GAPID_OS_ANDROID
 
 #include <errno.h>
 #include <stdarg.h>
@@ -49,10 +50,10 @@ Logger::Logger(const char* fileName) {
     mFile = fopen(fileName, "w");
     if (mFile == nullptr) {
         mFile = stderr;
-        CAZE_WARNING("Can't open file for logging (%s): %s\n", fileName, strerror(errno));
-        CAZE_INFO("Start logging to stderr\n");
+        GAPID_WARNING("Can't open file for logging (%s): %s\n", fileName, strerror(errno));
+        GAPID_INFO("Start logging to stderr\n");
     } else {
-        CAZE_INFO("Start logging to %s\n", fileName);
+        GAPID_INFO("Start logging to %s\n", fileName);
     }
 }
 
@@ -81,4 +82,4 @@ void Logger::logImpl(unsigned level, const char* location, const char* format, v
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif  // TARGET_OS != CAZE_OS_ANDROID
+#endif  // TARGET_OS != GAPID_OS_ANDROID

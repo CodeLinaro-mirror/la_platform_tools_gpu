@@ -32,14 +32,14 @@ namespace caze {
 std::unique_ptr<ReplayRequest> ReplayRequest::create(const GazerConnection& gazer,
                                                      ResourceProvider* resourceProvider,
                                                      MemoryManager* memoryManager) {
-    CAZE_INFO("Load replay request...\n");
+    GAPID_INFO("Load replay request...\n");
 
     memoryManager->setReplayDataSize(gazer.replayLength());
 
     // Request the replay data from the gazer connection
     if (!resourceProvider->get(gazer.replayId(), gazer, memoryManager->getReplayAddress(),
                                gazer.replayLength())) {
-        CAZE_WARNING("Can't load replay request: %s\n", gazer.replayId().c_str());
+        GAPID_WARNING("Can't load replay request: %s\n", gazer.replayId().c_str());
         return nullptr;
     }
 
@@ -84,7 +84,7 @@ bool ReplayRequest::load(void* data, uint32_t size) {
     ptr = loadResourceIds(ptr);
     ptr = loadInstructionList(ptr);
 
-    CAZE_INFO("Replay request loaded\n");
+    GAPID_INFO("Replay request loaded\n");
 
     return ptr - size == data;
 }
@@ -92,14 +92,14 @@ bool ReplayRequest::load(void* data, uint32_t size) {
 const uint8_t* ReplayRequest::loadVolatileMemorySize(const uint8_t* ptr) {
     mVolatileMemorySize = *reinterpret_cast<const uint32_t*>(ptr);
     ptr += sizeof(uint32_t);
-    CAZE_INFO("Volatile memory size: %d\n", mVolatileMemorySize);
+    GAPID_INFO("Volatile memory size: %d\n", mVolatileMemorySize);
     return ptr;
 }
 
 const uint8_t* ReplayRequest::loadStackSize(const uint8_t* ptr) {
     mStackSize = *reinterpret_cast<const uint32_t*>(ptr);
     ptr += sizeof(uint32_t);
-    CAZE_INFO("Stack size: %d\n", mStackSize);
+    GAPID_INFO("Stack size: %d\n", mStackSize);
     return ptr;
 }
 
@@ -108,7 +108,7 @@ const uint8_t* ReplayRequest::loadConstantMemory(const uint8_t* ptr) {
     ptr += sizeof(uint32_t);
 
     mConstantMemory = {ptr, constantMemorySize};
-    CAZE_INFO("Constant memory size: %d\n", constantMemorySize);
+    GAPID_INFO("Constant memory size: %d\n", constantMemorySize);
     ptr += constantMemorySize;
 
     return ptr;
@@ -128,7 +128,7 @@ const uint8_t* ReplayRequest::loadResourceIds(const uint8_t* ptr) {
 
         mResources.emplace_back(std::move(resourceName), resourceSize);
     }
-    CAZE_INFO("Resources: %d\n", resourceCount);
+    GAPID_INFO("Resources: %d\n", resourceCount);
 
     return ptr;
 }
@@ -139,7 +139,7 @@ const uint8_t* ReplayRequest::loadInstructionList(const uint8_t* ptr) {
 
     const uint32_t instructionCount = instructionListSize / sizeof(uint32_t);
     mInstructionList = {reinterpret_cast<const uint32_t*>(ptr), instructionCount};
-    CAZE_INFO("Instruction count: %d\n", instructionCount);
+    GAPID_INFO("Instruction count: %d\n", instructionCount);
     ptr += instructionListSize;
 
     return ptr;

@@ -39,19 +39,19 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
     while (true) {
         std::unique_ptr<Connection> client = mConn->accept();
         if (client == nullptr) {
-            CAZE_WARNING("Failed to accept incoming connection\n");
+            GAPID_WARNING("Failed to accept incoming connection\n");
             return nullptr;
         }
 
         uint8_t connectionType;
         if (client->recv(&connectionType, sizeof(connectionType)) != sizeof(connectionType)) {
-            CAZE_WARNING("Failed to read connection type\n");
+            GAPID_WARNING("Failed to read connection type\n");
             return nullptr;
         }
 
         switch (connectionType) {
             case DEVICE_INFO: {
-                CAZE_INFO("Sending device info\n");
+                GAPID_INFO("Sending device info\n");
                 uint8_t ptrSize = sizeof(void*);
                 uint8_t ptrAlign = std::alignment_of<void*>::value;
                 uint8_t targetOs = TARGET_OS;
@@ -61,7 +61,7 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
                     !client->send(ptrAlign) ||
                     !client->send(mMaxMemorySize) ||
                     !client->send(targetOs)) {
-                    CAZE_WARNING("Failed to send connection header\n");
+                    GAPID_WARNING("Failed to send connection header\n");
                     return nullptr;
                 }
                 break;
@@ -71,7 +71,7 @@ std::unique_ptr<GazerConnection> GazerListener::acceptConnection() {
                 if (conn != nullptr) {
                     return conn;
                 } else {
-                    CAZE_WARNING("Loading GazerConnection failed!\n");
+                    GAPID_WARNING("Loading GazerConnection failed!\n");
                 }
                 break;
             }

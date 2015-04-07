@@ -51,7 +51,7 @@ uint32_t baseTypeSize(BaseType type) {
         case BaseType::VolatilePointer:
             return sizeof(uint32_t);
         default:
-            CAZE_FATAL("Invalid BaseType: %d", int(type));
+            GAPID_FATAL("Invalid BaseType: %d", int(type));
             return 0;
     }
 }
@@ -87,7 +87,7 @@ const char* baseTypeName(BaseType type) {
         case BaseType::VolatilePointer:
             return "volatile pointer";
         default:
-            CAZE_FATAL("Invalid BaseType: %d", int(type));
+            GAPID_FATAL("Invalid BaseType: %d", int(type));
             return "unknown";
     }
 }

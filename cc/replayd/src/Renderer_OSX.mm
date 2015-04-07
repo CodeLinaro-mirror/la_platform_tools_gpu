@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Target.h"
 
-#if TARGET_OS == CAZE_OS_OSX
+#include <gapic/target.h>
+
+#if TARGET_OS == GAPID_OS_OSX
 
 #include "GfxApi.h"
 #include "Log.h"
@@ -55,7 +56,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
         defer:NO
     ];
     if (mWindow == nullptr) {
-        CAZE_FATAL("Unable to create NSWindow");
+        GAPID_FATAL("Unable to create NSWindow");
     }
 
     NSOpenGLPixelFormatAttribute attributes[] = {
@@ -70,12 +71,12 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
 
     NSOpenGLPixelFormat* format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
     if (format == nullptr) {
-        CAZE_FATAL("Unable to create NSOpenGLPixelFormat");
+        GAPID_FATAL("Unable to create NSOpenGLPixelFormat");
     }
 
     mContext = [[NSOpenGLContext alloc] initWithFormat:format shareContext:nil];
     if (mContext == nullptr) {
-        CAZE_FATAL("Unable to create NSOpenGLContext");
+        GAPID_FATAL("Unable to create NSOpenGLContext");
     }
 
     [mContext setView:[mWindow contentView]];
@@ -121,5 +122,5 @@ std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize,
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_OSX
+#endif // TARGET_OS == GAPID_OS_OSX
 

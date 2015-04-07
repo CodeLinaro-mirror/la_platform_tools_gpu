@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Target.h"
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#include <gapic/target.h>
+
+#if TARGET_OS == GAPID_OS_WINDOWS
 
 #include "GfxApi.h"
 #include "Log.h"
@@ -57,20 +58,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) 
 
             renderingContext = wglCreateContext(deviceContext);
             if (renderingContext == nullptr) {
-                CAZE_FATAL("Failed to create GL context. Error: %d", GetLastError());
+                GAPID_FATAL("Failed to create GL context. Error: %d", GetLastError());
             }
             if (!wglMakeCurrent(deviceContext, renderingContext)) {
-                CAZE_FATAL("Failed to attach GL context. Error: %d", GetLastError());
+                GAPID_FATAL("Failed to attach GL context. Error: %d", GetLastError());
             }
             break;
         }
         case WM_DESTROY: {
             HDC deviceContext = GetDC(hWnd);
             if (!wglMakeCurrent(deviceContext, nullptr)) {
-                CAZE_FATAL("Failed to detach GL context. Error: %d", GetLastError());
+                GAPID_FATAL("Failed to detach GL context. Error: %d", GetLastError());
             }
             if (!wglDeleteContext(renderingContext)) {
-                CAZE_FATAL("Failed to delete GL context. Error: %d", GetLastError());
+                GAPID_FATAL("Failed to delete GL context. Error: %d", GetLastError());
             }
             renderingContext = nullptr;
             break;
@@ -94,7 +95,7 @@ WNDCLASS registerWindowClass() {
     wc.lpszClassName = wndClassName;
 
     if (RegisterClass(&wc) == 0) {
-        CAZE_FATAL("Failed to register window class. Error: %d", GetLastError());
+        GAPID_FATAL("Failed to register window class. Error: %d", GetLastError());
     }
 
     return wc;
@@ -116,7 +117,7 @@ private:
 
 RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
     if (renderingContext != 0) {
-        CAZE_FATAL("Renderer already created. Only one instance can be created at any given time.\n");
+        GAPID_FATAL("Renderer already created. Only one instance can be created at any given time.\n");
     }
     gDepthSize = depthSize;
     gStencilSize = stencilSize;
@@ -125,7 +126,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
 
     mWindow = CreateWindow(wndClassName, TEXT(""), WS_POPUP, 0, 0, width, height, 0, 0, GetModuleHandle(0), 0);
     if (mWindow == 0) {
-        CAZE_FATAL("Failed to create window. Error: %d", GetLastError());
+        GAPID_FATAL("Failed to create window. Error: %d", GetLastError());
     }
 
     // Initialize the graphics API
@@ -134,7 +135,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
 
 RendererImpl::~RendererImpl() {
     if (!DestroyWindow(mWindow)) {
-        CAZE_FATAL("Failed to destroy window. Error: %d", GetLastError());
+        GAPID_FATAL("Failed to destroy window. Error: %d", GetLastError());
     }
 }
 
@@ -167,5 +168,5 @@ std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize,
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_WINDOWS
+#endif // TARGET_OS == GAPID_OS_WINDOWS
 

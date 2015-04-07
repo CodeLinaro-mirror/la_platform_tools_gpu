@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Target.h"
 
-#if TARGET_OS == CAZE_OS_WINDOWS
+#include <gapic/target.h>
+
+#if TARGET_OS == GAPID_OS_WINDOWS
 
 #include <windows.h>
 #include <wingdi.h>
@@ -39,4 +40,4 @@ void* GetGfxProcAddress(const char *name) {
 }  // end of namespace caze
 }  // end of namespace android
 
-#endif // TARGET_OS == CAZE_OS_WINDOWS
+#endif // TARGET_OS == GAPID_OS_WINDOWS
