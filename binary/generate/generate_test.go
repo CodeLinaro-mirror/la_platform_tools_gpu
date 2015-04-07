@@ -47,8 +47,8 @@ var fields = []Field{
 	{Name: "dict", Type: &Type{Name: "map[string]struct{}", Kind: Map}},
 	{Name: "data", Type: &Type{Name: "[]byte", Kind: Array, Method: "Data"}},
 	{Name: "id", Type: &Type{Name: "binary.ID", Native: "[20]byte", Kind: Native, Method: "ID", SkipMethod: "SkipID"}},
-	{Name: "array", Type: &Type{Name: "Other", Native: "[10]int", Kind: Array}},
-	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: Array}, Anonymous: true},
+	{Name: "array", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}},
+	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}, Anonymous: true},
 }
 
 func parseStructs(source string) []*Struct {
