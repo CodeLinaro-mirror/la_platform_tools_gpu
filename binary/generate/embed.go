@@ -83,6 +83,12 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			{{encode (print .Name "[i]") .Type.SubType}}
 		}{{end}}{{end}}
 
+{{define "EncodeStaticArray"}} {{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
+			return err
+		}{{else}}for i := range {{.Name}} {
+			{{encode (print .Name "[i]") .Type.SubType}}
+		}{{end}}{{end}}
+
 {{define "EncodeStream"}}for _, o := range {{.Name}} {
 			if err := e.Object(o); err != nil {
 				return err
@@ -137,6 +143,12 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			}{{end}}
 		} {{end}}
 
+{{define "DecodeStaticArray"}} {{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
+				return err
+			}{{else}}for i := range {{.Name}} {
+				{{decode (print .Name "[i]") .Type.SubType}}
+			}{{end}} {{end}}
+
 {{define "DecodeStream"}}for {
 			if obj, err := d.Object(); err != nil {
 				return err
@@ -180,6 +192,13 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 				{{skip (print .Name "[i]") .Type.SubType}}
 			}{{end}}
 		} {{end}}
+
+{{define "SkipStaticArray"}} {{if .Type.Method}}if err := d.Skip({{.Type.Length}}); err != nil {
+			return err
+		}{{else}}for i := uint32(0); i < {{.Type.Length}}; i++ {
+			{{skip (print .Name "[i]") .Type.SubType}}
+		}{{end}} {{end}}
+
 
 {{define "SkipStream"}}for {
 			if id, err := d.SkipObject(); err != nil {
@@ -258,6 +277,11 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 »»»{{encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
+{{define "EncodeStaticArray"}}
+»»for (int i = 0; i < {{.Type.Length}}; i++) {
+»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»}{{end}}
+
 {{define "EncodeStream"}}{{end}}
 
 {{define "EncodeMap"}}TODO: Java map handling{{end}}
@@ -276,6 +300,11 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 
 {{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
+»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»}{{end}}
+
+{{define "DecodeStaticArray"}}{{.Name}} = new {{storage .Type.SubType}}[{{.Type.Length}}];
+»»for (int i = 0; i < {{.Type.Length}}; i++) {
 »»»{{decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 

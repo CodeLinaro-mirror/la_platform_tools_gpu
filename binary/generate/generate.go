@@ -76,6 +76,8 @@ const (
 	Pointer
 	// Array is the kind for an in place slice, with a dynamic length.
 	Array
+	// StaticArray is the kind for an in place array, with a fixed length.
+	StaticArray
 	// Stream is the kind for an in place slice, with a Terminator.
 	Stream
 	// Interface is the kind for an object boxed in an binary.Object interface
@@ -101,7 +103,8 @@ type Type struct {
 	Native     string // The go native name of the type.
 	Kind       Kind   // The types basic Kind.
 	KeyType    *Type  // If the type is a Map, holds the key type.
-	SubType    *Type  // If the type is an Array, Map or Pointer, holds the element type.
+	SubType    *Type  // If the type is an Array, Map, Pointer or StaticArray, holds the element type.
+	Length     int    // If the type is a StaticArray, holds the fixed array size.
 	Method     string // The encode/decode method to use.
 	SkipMethod string // The skip method to use.
 }
@@ -215,7 +218,8 @@ func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 			}
 		}
 	case *types.Array:
-		t.Kind = Array
+		t.Kind = StaticArray
+		t.Length = int(from.Len())
 		switch elem := from.Elem().(type) {
 		case *types.Basic:
 			switch elem.Kind() {
@@ -227,7 +231,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 				}
 			}
 		}
-		if t.Kind == Array {
+		if t.Kind == StaticArray {
 			t.SubType = fromType(pkg, from.Elem(), "")
 		}
 	case *types.Map:
@@ -265,14 +269,15 @@ type kindToTemplate map[Kind]*template.Template
 
 func getTemplateMap(t *template.Template, prefix string) kindToTemplate {
 	return kindToTemplate{
-		Native:    getTemplate(t, prefix+"Native"),
-		Remap:     getTemplate(t, prefix+"Remap"),
-		Codeable:  getTemplate(t, prefix+"Codeable"),
-		Pointer:   getTemplate(t, prefix+"Pointer"),
-		Interface: getTemplate(t, prefix+"Interface"),
-		Array:     getTemplate(t, prefix+"Array"),
-		Stream:    getTemplate(t, prefix+"Stream"),
-		Map:       getTemplate(t, prefix+"Map"),
+		Native:      getTemplate(t, prefix+"Native"),
+		Remap:       getTemplate(t, prefix+"Remap"),
+		Codeable:    getTemplate(t, prefix+"Codeable"),
+		Pointer:     getTemplate(t, prefix+"Pointer"),
+		Interface:   getTemplate(t, prefix+"Interface"),
+		Array:       getTemplate(t, prefix+"Array"),
+		StaticArray: getTemplate(t, prefix+"StaticArray"),
+		Stream:      getTemplate(t, prefix+"Stream"),
+		Map:         getTemplate(t, prefix+"Map"),
 	}
 }
 
