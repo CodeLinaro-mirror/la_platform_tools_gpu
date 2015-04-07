@@ -16,10 +16,10 @@ package test
 
 import (
 	"bytes"
-	"encoding/binary"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -33,7 +33,7 @@ const (
 )
 
 func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []atom.Atom, opcodes []interface{}, constants []byte) {
-	b := builder.New(ptrSize, ptrAlignment, binary.LittleEndian)
+	b := builder.New(ptrSize, ptrAlignment, endian.Little)
 	s := state.New()
 	s.Contexts[cid] = &State{}
 	for i, a := range atoms {
@@ -43,7 +43,7 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 	payload, _ := b.Build(log.Nop{})
 
 	ops := bytes.NewBuffer(payload.Opcodes)
-	gotOpcodes, err := opcode.Disassemble(ops, binary.LittleEndian)
+	gotOpcodes, err := opcode.Disassemble(ops, endian.Little)
 	if err != nil {
 		t.Errorf("Failed to disassemble opcodes: %v", err)
 	}

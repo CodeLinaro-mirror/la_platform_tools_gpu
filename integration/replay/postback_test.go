@@ -15,11 +15,11 @@
 package replay
 
 import (
-	eb "encoding/binary"
 	"reflect"
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -46,7 +46,7 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 	f(b)
 
 	payload, decoder := b.Build(logger)
-	err = executor.Execute(payload, decoder, connection, db, logger, handlers, eb.LittleEndian)
+	err = executor.Execute(payload, decoder, connection, db, logger, handlers, endian.Little)
 	if err != nil {
 		t.Errorf("Executor failed with error: %v", err)
 	}

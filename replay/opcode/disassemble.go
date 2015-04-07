@@ -17,7 +17,6 @@
 package opcode
 
 import (
-	eb "encoding/binary"
 	"io"
 	"testing"
 
@@ -27,7 +26,7 @@ import (
 
 // Disassemble disassembles and returns the stream of encoded Opcodes from r,
 // stopping once an EOF is reached.
-func Disassemble(r io.Reader, byteOrder eb.ByteOrder) ([]interface{}, error) {
+func Disassemble(r io.Reader, byteOrder endian.ByteOrder) ([]interface{}, error) {
 	d := flat.Decoder(endian.Reader(r, byteOrder))
 	opcodes := []interface{}{}
 	for {

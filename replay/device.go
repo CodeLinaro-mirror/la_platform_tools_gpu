@@ -15,7 +15,6 @@
 package replay
 
 import (
-	"encoding/binary"
 	"fmt"
 	"io"
 	"net"
@@ -24,6 +23,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atexit"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
@@ -73,7 +73,7 @@ type Device interface {
 	// Connect opens a connection to the replay device.
 	Connect() (io.ReadWriteCloser, error)
 	// ByteOrder returns a byte ordering object for the replay device.
-	ByteOrder() binary.ByteOrder
+	ByteOrder() endian.ByteOrder
 }
 
 type deviceBase struct {
@@ -89,9 +89,9 @@ func (d deviceBase) Info() *service.Device {
 	return d.device
 }
 
-func (d deviceBase) ByteOrder() binary.ByteOrder {
+func (d deviceBase) ByteOrder() endian.ByteOrder {
 	// TODO: vary the endian based on the device info
-	return binary.LittleEndian
+	return endian.Little
 }
 
 type androidDevice struct {

@@ -17,7 +17,6 @@ package executor
 
 import (
 	"bytes"
-	eb "encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -46,7 +45,7 @@ type executor struct {
 	database   database.Database
 	logger     log.Logger
 	handlers   PostbackHandlerMap
-	byteOrder  eb.ByteOrder
+	byteOrder  endian.ByteOrder
 }
 
 // Execute sends the replay payload for execution on the target replay device
@@ -61,7 +60,7 @@ func Execute(
 	database database.Database,
 	logger log.Logger,
 	handlers PostbackHandlerMap,
-	byteOrder eb.ByteOrder) error {
+	byteOrder endian.ByteOrder) error {
 
 	return executor{
 		payload:    payload,

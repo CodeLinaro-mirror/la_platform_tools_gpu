@@ -24,28 +24,35 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
+type ByteOrder eb.ByteOrder
+
+var (
+	Little = ByteOrder(eb.LittleEndian)
+	Big    = ByteOrder(eb.BigEndian)
+)
+
 // Reader creates a binary.Reader that reads from the provided io.Reader, with the
 // specified byte order.
-func Reader(r io.Reader, byteOrder eb.ByteOrder) binary.Reader {
+func Reader(r io.Reader, byteOrder ByteOrder) binary.Reader {
 	return &reader{reader: r, byteOrder: byteOrder}
 }
 
 // Writer creates a binary.Writer that writes to the supplied stream, with the
 // specified byte order.
-func Writer(w io.Writer, byteOrder eb.ByteOrder) binary.Writer {
+func Writer(w io.Writer, byteOrder ByteOrder) binary.Writer {
 	return &writer{writer: w, byteOrder: byteOrder}
 }
 
 type reader struct {
 	reader    io.Reader
 	tmp       [8]byte
-	byteOrder eb.ByteOrder
+	byteOrder ByteOrder
 }
 
 type writer struct {
 	writer    io.Writer
 	tmp       [8]byte
-	byteOrder eb.ByteOrder
+	byteOrder ByteOrder
 }
 
 func (r *reader) Data(p []byte) error {
