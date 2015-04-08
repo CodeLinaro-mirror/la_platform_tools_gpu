@@ -1,0 +1,185 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package build
+
+import (
+	"bytes"
+	"os"
+	"os/exec"
+	"path/filepath"
+)
+
+// File represents the path to a file or directory.
+type File string
+
+// Path returns a File formed from the joined path segments.
+func Path(segments ...string) File {
+	return File(filepath.Join(segments...))
+}
+
+// Join returns a File formed from joining this File with ext.
+func (f File) Join(ext ...string) File {
+	return File(filepath.Join(append([]string{string(f)}, ext...)...))
+}
+
+// RelativeTo returns the path of this File relative to base.
+func (f File) RelativeTo(base File) string {
+	rel, err := filepath.Rel(string(base), string(f))
+	if err != nil {
+		panic(err)
+	}
+	return rel
+}
+
+// Absolute returns the absolute path of this File.
+func (f File) Absolute() string {
+	abs, err := filepath.Abs(string(f))
+	if err != nil {
+		panic(err)
+	}
+	return abs
+}
+
+// Exists returns true if this File exists.
+func (f File) Exists() bool {
+	_, err := os.Stat(string(f.Absolute()))
+	return err == nil
+}
+
+// Delete deletes the File.
+func (f File) Delete() error {
+	return os.Remove(string(f))
+}
+
+// Name returns the name part of the File (without directories).
+func (f File) Name() string {
+	return filepath.Base(string(f))
+}
+
+// Dir returns the directory part of the File (without filename).
+func (f File) Dir() string {
+	return filepath.Dir(string(f))
+}
+
+// Ext returns the extension of the file, including the '.', or an empty string
+// if the file has no extension.
+func (f File) Ext() string {
+	return filepath.Ext(string(f))
+}
+
+// ChangeExt returns a new File with the extension changed to ext.
+func (f File) ChangeExt(ext string) File {
+	prev := filepath.Ext(string(f))
+	noext := f[:len(f)-len(prev)]
+	return noext + File(ext)
+}
+
+// Glob returns a FileSet of all files matching any of the specified patterns.
+func (f File) Glob(patterns ...string) FileSet {
+	fs := FileSet{}
+	for _, patten := range patterns {
+		glob, err := filepath.Glob(string(f.Join(patten)))
+		if err != nil {
+			panic(err)
+		}
+		files := make(FileSet, len(glob))
+		for i := range glob {
+			files[i] = File(glob[i])
+		}
+		fs = fs.Append(files...)
+	}
+	return fs
+}
+
+// Matches returns true if the File matches any of the patterns.
+func (f File) Matches(patterns ...string) bool {
+	abs := filepath.Base(f.Absolute())
+	for _, pattern := range patterns {
+		matched, err := filepath.Match(pattern, abs)
+		if err != nil {
+			panic(err)
+		}
+		if matched {
+			return true
+		}
+	}
+	return false
+}
+
+// MkdirAll creates the directory hierarchy to hold this File.
+func (f File) MkdirAll() {
+	abs := f.Absolute()
+	dir, _ := filepath.Split(abs)
+	if len(dir) > 0 {
+		if err := os.MkdirAll(dir, os.ModePerm); err != nil {
+			panic(err)
+		}
+	}
+}
+
+// Exec executes this File with the specified arguments.
+func (f File) Exec(env Environment, args ...string) error {
+	return f.ExecAt(env, "", args...)
+}
+
+// ExecAt executes this File with the specified arguments with the working
+// directory set to wd.
+func (f File) ExecAt(env Environment, wd File, args ...string) error {
+	logger := env.Logger.Enter("Exec")
+
+	var path string
+	if f.Exists() {
+		path = string(f)
+	} else {
+		var err error
+		path, err = exec.LookPath(string(f))
+		if err != nil {
+			return err
+		}
+	}
+	if env.Verbose {
+		logger.Info("%s %v", path, args)
+	}
+
+	cmd := exec.Command(path, args...)
+	cmd.Dir = string(wd)
+	buffer := &bytes.Buffer{}
+	cmd.Stdout = buffer
+	cmd.Stderr = buffer
+	err := cmd.Run()
+	switch {
+	case err != nil:
+		if msg := string(buffer.Bytes()); msg != "" {
+			logger.Error("\n\n%s", msg)
+		}
+		logger.Error("\n\nReturned: %v", err)
+
+	case env.Verbose:
+		if msg := string(buffer.Bytes()); msg != "" {
+			logger.Info("\n\n%s", msg)
+		}
+	}
+	return err
+}
+
+// LookPath looks for the file f on the system PATH, returning the absolute
+// path to the file if found, otherwise an empty File.
+func (f File) LookPath() File {
+	if path, err := exec.LookPath(string(f)); err == nil {
+		return File(path)
+	} else {
+		return ""
+	}
+}

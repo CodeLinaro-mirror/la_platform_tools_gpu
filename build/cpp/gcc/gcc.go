@@ -1,0 +1,146 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Package gcc contains C++ toolchains for building with gcc.
+package gcc
+
+import (
+	"fmt"
+	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/build"
+	"android.googlesource.com/platform/tools/gpu/build/cpp"
+)
+
+var GCC = &cpp.Toolchain{
+	Compiler: gccCompile,
+	Archiver: gccArchive,
+	Linker:   gccLink,
+	ExeName: func(cfg cpp.Config) string {
+		if cfg.OS == "windows" {
+			return cfg.Name + ".exe"
+		} else {
+			return cfg.Name
+		}
+	},
+	LibName: func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	ObjExt:  func(cpp.Config) string { return ".o" },
+}
+
+type tools struct {
+	cc build.File
+	ar build.File
+}
+
+func getTools(cfg cpp.Config) (*tools, error) {
+	var t tools
+
+	if build.HostOS == "linux" {
+		switch cfg.OS {
+		case "linux":
+			bin := build.Root.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")
+			t = tools{
+				cc: bin.Join("x86_64-linux-gcc"),
+				ar: bin.Join("x86_64-linux-ar"),
+			}
+
+		case "windows":
+			bin := build.Root.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-w64-mingw32-4.8", "bin")
+			t = tools{
+				cc: bin.Join("x86_64-w64-mingw32-gcc"),
+				ar: bin.Join("x86_64-w64-mingw32-ar"),
+			}
+
+		default:
+			return nil, fmt.Errorf("Cross compiling to '%s' is currently not avaliable", cfg.OS)
+		}
+	} else {
+		t = tools{
+			cc: build.File("gcc").LookPath(),
+			ar: build.File("ar").LookPath(),
+		}
+	}
+
+	if !t.cc.Exists() {
+		return nil, fmt.Errorf("GCC tool '%s' was not found", t.cc)
+	}
+
+	if !t.ar.Exists() {
+		return nil, fmt.Errorf("GCC tool '%s' was not found", t.ar)
+	}
+
+	return &t, nil
+}
+
+func gccCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("GCC.Compile")
+
+	tools, err := getTools(cfg)
+	if err != nil {
+		return err
+	}
+
+	a := append([]string{"-c"}, cfg.CompilerArgs...)
+	for _, isp := range cfg.IncludeSearchPaths {
+		a = append(a, fmt.Sprintf("-I%s", isp))
+	}
+	for n, v := range cfg.Defines {
+		a = append(a, fmt.Sprintf("-D%s=%s", n, v))
+	}
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	a = append(a, "-o", string(output))
+	return tools.cc.Exec(env, a...)
+}
+
+func gccArchive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("GCC.Archive")
+
+	tools, err := getTools(cfg)
+	if err != nil {
+		return err
+	}
+
+	a := []string{"-rcs"}
+	a = append(a, output.Absolute())
+	a = append(a, cfg.ArchiverArgs...)
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	return tools.ar.Exec(env, a...)
+}
+
+func gccLink(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("GCC.Link")
+
+	tools, err := getTools(cfg)
+	if err != nil {
+		return err
+	}
+
+	a := append([]string{}, cfg.LinkerArgs...)
+	for _, lsp := range cfg.LibrarySearchPaths {
+		a = append(a, fmt.Sprintf("-L%s", lsp))
+	}
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	for _, library := range cfg.Libraries {
+		name := strings.TrimPrefix(strings.TrimSuffix(string(library), ".a"), "lib")
+		a = append(a, fmt.Sprintf("-l%s", name))
+	}
+	a = append(a, "-o", string(output))
+	return tools.cc.Exec(env, a...)
+}
