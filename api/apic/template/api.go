@@ -66,21 +66,19 @@ func (*Functions) GetArrayParamCount(param *semantic.Parameter) interface{} {
 		if !ok {
 			continue
 		}
-		if (binary.Operator != ast.OpGE) && (binary.Operator != ast.OpEQ) {
-			continue
+		if length, ok := binary.LHS.(*semantic.Length); ok {
+			if binary.Operator == ast.OpGE || binary.Operator == ast.OpEQ {
+				if p, ok := length.Object.(*semantic.Parameter); ok && p == param {
+					return binary.RHS
+				}
+			}
+		} else if length, ok := binary.RHS.(*semantic.Length); ok {
+			if binary.Operator == ast.OpLE || binary.Operator == ast.OpEQ {
+				if p, ok := length.Object.(*semantic.Parameter); ok && p == param {
+					return binary.LHS
+				}
+			}
 		}
-		length, ok := binary.LHS.(*semantic.Length)
-		if !ok {
-			continue
-		}
-		p, ok := length.Object.(*semantic.Parameter)
-		if !ok {
-			continue
-		}
-		if p != param {
-			continue
-		}
-		return binary.RHS
 	}
 	return nil
 }
