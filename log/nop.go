@@ -35,3 +35,6 @@ func (Nop) Fork() Logger { return Nop{} }
 
 // Flush does nothing
 func (Nop) Flush() {}
+
+// Close does nothing
+func (Nop) Close() {}

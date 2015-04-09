@@ -49,7 +49,7 @@ const (
 // rpcReady channel is closed as soon as incoming RPC requests can start being issued.
 func Run(config Config, rpcReady chan<- struct{}) {
 	// Create the server logfile.
-	logger, err := log.NewFile(config.LogfilePath)
+	logger, err := log.File(config.LogfilePath)
 	if err != nil {
 		panic(err)
 	}

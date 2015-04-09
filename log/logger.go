@@ -40,4 +40,8 @@ type Logger interface {
 
 	// Flush ensures that any pending messages are written by the logger.
 	Flush()
+
+	// Close closes the logger, automatically flushing any remaining messages.
+	// After calling Close, no other methods can be called on the logger.
+	Close()
 }
