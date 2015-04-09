@@ -13,6 +13,7 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
+GAPIC_PATH := $(LOCAL_PATH)/../../../common
 GTEST_PATH := $(LOCAL_PATH)/../../../../../../../../../../../external/gtest
 GMOCK_PATH := $(LOCAL_PATH)/../../../../../../../../../../../external/gmock
 
@@ -25,7 +26,7 @@ LOCAL_MODULE           := caze_static
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_CFLAGS           := -std=c++11 -DEGL_EGLEXT_PROTOTYPES -DGL_GLEXT_PROTOTYPES -DTARGET_OS_ANDROID -Ofast
-LOCAL_C_INCLUDES       := /usr/local/include
+LOCAL_C_INCLUDES       := /usr/local/include $(GAPIC_PATH)
 include $(BUILD_STATIC_LIBRARY)
 
 # Compile the replay daemon into a shared library for the apk creation
@@ -37,7 +38,7 @@ LOCAL_MODULE           := caze
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_CFLAGS           := -std=c++11 -DEGL_EGLEXT_PROTOTYPES -DGL_GLEXT_PROTOTYPES -DTARGET_OS_ANDROID -Ofast
-LOCAL_C_INCLUDES       := /usr/local/include
+LOCAL_C_INCLUDES       := /usr/local/include $(GAPIC_PATH)
 LOCAL_LDLIBS           := -lEGL -lGLESv1_CM -lGLESv3 -llog -landroid -lz
 LOCAL_STATIC_LIBRARIES := android_native_app_glue caze_static
 include $(BUILD_SHARED_LIBRARY)
@@ -73,7 +74,7 @@ LOCAL_MODULE           := caze_test
 LOCAL_SRC_FILES        := $(SRC_FILE_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_CFLAGS           := -std=c++11 -DEGL_EGLEXT_PROTOTYPES -DGL_GLEXT_PROTOTYPES -DTARGET_OS_ANDROID
-LOCAL_C_INCLUDES       := /usr/local/include $(LOCAL_PATH)/../../src $(GTEST_PATH)/include $(GMOCK_PATH)/include
+LOCAL_C_INCLUDES       := /usr/local/include $(LOCAL_PATH)/../../src $(GTEST_PATH)/include $(GMOCK_PATH)/include $(GAPIC_PATH)
 LOCAL_LDLIBS           := -lEGL -lGLESv1_CM -lGLESv3 -llog -landroid -lz
 LOCAL_STATIC_LIBRARIES := gtest gmock caze_static
 include $(BUILD_EXECUTABLE)
