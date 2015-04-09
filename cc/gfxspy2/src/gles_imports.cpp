@@ -17,11 +17,11 @@
  */
 
 #include "common/get_gfx_proc_address.h"
-#include "imports.h"
+#include "gles_imports.h"
 
 namespace gapii {
 
-void Imports::Resolve() {
+void GlesImports::Resolve() {
     using namespace gapic;
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));

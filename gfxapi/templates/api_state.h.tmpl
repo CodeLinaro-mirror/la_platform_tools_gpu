@@ -14,26 +14,29 @@ limitations under the License.
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "State" | Reflow 4 | Write "state.h"}}
+{{$filename := print (Global "API") "_state.h" }}
+{{$ | Macro "State" | Format (Global "clang-format") | Write $filename}}
 
 {{define "State"}}
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
+  {{$classname := print (Title (Global "API")) "State"}}
+  {{$guard := print "GAPII_" (Upper (Global "API")) "_STATE_H"}}
 ¶
-  #ifndef GAPII_STATE_H
-  #define GAPII_STATE_H
+  #ifndef {{$guard}}
+  #define {{$guard}}
 ¶
   #include "common/encoder.h"
-  #include "types.h"
+  #include "{{Global "API"}}_types.h"
 ¶
   namespace gapii {«
 ¶
-  class State {
+  class {{$classname}} {
   «public:»
     typedef std::function<void(void* ptr, uint64_t offset, uint64_t size)> ObserveFunc;
 ¶
-    {{range $f := $.Functions}}
-      inline void {{$f.Name}}({{Macro "Parameters" $f}});
+    {{range $c := AllCommands $}}
+      inline void {{Macro "C++.MethodName" $c}}({{Macro "Parameters" $c}});
     {{end}}
 ¶
     ObserveFunc read;
@@ -43,18 +46,18 @@ limitations under the License.
       {{Macro "C++.Type" $g}} {{$g.Name}};
     {{end}}
 ¶
-#include "state_externs.inl"
+    #include "{{Global "API"}}_state_externs.inl"
   };
 ¶
-  {{range $f := $.Functions}}
-    inline void State::{{$f.Name}}({{Macro "Parameters" $f}}) {
-      {{Macro "Block" $f.Block}}
+  {{range $c := AllCommands $}}
+    inline void {{$classname}}::{{Macro "C++.MethodName" $c}}({{Macro "Parameters" $c}}) {
+      {{Macro "Block" $c.Block}}
     }¶
   {{end}}
 ¶
   »} // namespace gapii
 ¶
-  #endif // GAPII_STATE_H
+  #endif // {{$guard}}
 ¶
 {{end}}
 
@@ -80,10 +83,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Block"}}
-  {{range $s := $.Statements}}
-    {{$v := Macro "Statement" $s}}
-    {{$v}}
-  {{end}}
+  {{ForEach $.Statements "Statement" | JoinWith "\n"}}
 {{end}}
 
 

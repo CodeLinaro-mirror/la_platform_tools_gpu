@@ -15,7 +15,8 @@
  */}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "imports.cpp" | Format (Global "clang-format") | Write "imports.cpp"}}
+{{$filename := print (Global "API") "_imports.cpp" }}
+{{$ | Macro "imports.cpp" | Format (Global "clang-format") | Write $filename}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -26,15 +27,16 @@
 {{template "C++.AOSP.Copyright"}}
 ¶
 #include "common/get_gfx_proc_address.h"
-#include "imports.h"
+#include "{{Global "API"}}_imports.h"
 ¶
 namespace gapii {
 ¶
-  void Imports::Resolve() {
+  void {{Title (Global "API")}}Imports::Resolve() {
     using namespace gapic;
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{$c.Name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$c.Name}}"));
+        {{$name := Macro "C++.MethodName" $c}}
+        {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$name}}"));
       {{end}}
     {{end}}
   }
