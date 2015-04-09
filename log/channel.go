@@ -97,3 +97,8 @@ func (c *channel) Flush() {
 	c.out <- flush
 	<-flush
 }
+
+func (c *channel) Close() {
+	c.Flush()
+	close(c.out)
+}

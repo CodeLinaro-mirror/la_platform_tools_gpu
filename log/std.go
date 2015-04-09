@@ -30,9 +30,11 @@ func Std() Logger {
 				} else {
 					os.Stdout.WriteString(t.String())
 				}
+
 			case FlushRequest:
 				os.Stderr.Sync()
 				os.Stdout.Sync()
+				close(t)
 			}
 		}
 	}()

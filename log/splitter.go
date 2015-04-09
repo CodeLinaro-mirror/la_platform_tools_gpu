@@ -87,3 +87,12 @@ func (s *Splitter) Flush() {
 		l.Flush()
 	}
 }
+
+// Close will call Close on all logs passed to Add.
+func (s *Splitter) Close() {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	for _, l := range s.listeners {
+		l.Close()
+	}
+}
