@@ -53,8 +53,11 @@ func initGlobals(f *Functions) {
 func (f *Functions) Global(name string, values ...interface{}) (interface{}, error) {
 	switch len(values) {
 	case 0:
-		value, _ := f.globals[name]
-		return value, nil
+		if value, ok := f.globals[name]; ok {
+			return value, nil
+		} else {
+			return "", nil
+		}
 	case 1:
 		f.globals[name] = values[0]
 		return "", nil

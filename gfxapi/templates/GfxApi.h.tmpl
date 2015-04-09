@@ -54,15 +54,25 @@ namespace Ids {
 } // end of namespace FunctionIds
 ¶
 {{range $e := $.Enums}}
-  enum class {{$e.Name}} : uint32_t {
-    {{range $e := $e.Entries}}
-      {{$e.Name}} = {{$e.Value}},
+  enum class {{Macro "C++.EnumName" $e}} : uint32_t {
+    {{range $entry := $e.Entries}}
+      {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}},
     {{end}}
   };¶
 {{end}}
 
 {{range $p := $.Pseudonyms}}
-  typedef {{Macro "C++.Type" $p.To}} {{$p.Name}};
+  typedef {{Macro "C++.Type" $p.To}} {{Macro "C++.Type" $p}};
+{{end}}
+¶
+{{range $c := $.Classes}}
+  {{if not (GetAnnotation $c "internal")}}
+  typedef {{if GetAnnotation $c "union"}}union{{else}}struct{{end}} {
+    {{range $f := $c.Fields}}
+      {{Macro "C++.Type" $f}} {{$f.Name}}{{Macro "C++.ArrayPostfix" $f}};
+    {{end}}
+  } {{Macro "C++.Type" $c}};¶
+  {{end}}
 {{end}}
 ¶
 {{range $c := AllCommands $}}
