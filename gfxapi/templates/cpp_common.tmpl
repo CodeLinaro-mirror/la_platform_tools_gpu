@@ -17,7 +17,7 @@ limitations under the License.
 */}}
 {{define "C++.Type"}}
   {{if not (IsType $)}}{{Macro "C++.Type" (TypeOf $)}}
-  {{else if IsPseudonym   $}}{{$.Name}}
+  {{else if IsPseudonym   $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsVoid        $}}void
   {{else if IsBool        $}}bool
   {{else if IsInt         $}}int
@@ -33,10 +33,10 @@ limitations under the License.
   {{else if IsU64         $}}uint64_t
   {{else if IsS64         $}}int64_t
   {{else if IsMap         $}}{{$.Name}}
-  {{else if IsClass       $}}{{$.Name}}
+  {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsPointerType $}}void*
-  {{else if IsString      $}}const char*
+  {{else if IsString      $}}char*
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsMemory      $}}Memory
@@ -130,17 +130,18 @@ limitations under the License.
   {{AssertType $ "Parameter"}}
 
   {{$ty := TypeOf $}}
-  {{if $.Output}}
-    {{     if IsPointerType $ty}}{{Macro "C++.Type" $ty}}
-    {{else if IsArray       $ty}}{{Macro "C++.Type" $ty}}
-    {{else if IsString      $ty}}{{Macro "C++.Type" $ty}}
-    {{else if IsAny         $ty}}{{Macro "C++.ParameterTypeAny" $}}*
-    {{else                     }}{{Macro "C++.Type" $ty}}*
-    {{end}}
+  {{if IsAny $ty}}
+    {{Macro "C++.ParameterTypeAny" $}}
   {{else}}
-    {{if IsAny $ty}}{{Macro "C++.ParameterTypeAny" $}}
-    {{else        }}{{Macro "C++.Type" $ty}}
-    {{end}}
+    {{$isRef := or (IsArray $ty) (IsString $ty) (IsPointerType $ty)}}
+
+    {{/* Prefix const for read-only reference parameters. */}}
+    {{if and (not $.Output) $isRef}}const {{end}}§
+
+    {{Macro "C++.Type" $ty}}§
+
+    {{/* Postfix reference for non-reference output parameters. */}}
+    {{if and $.Output (not $isRef)}}*{{end}}
   {{end}}
 {{end}}
 
@@ -461,3 +462,56 @@ limitations under the License.
 
 {{$clang_style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"}}
 {{Global "clang-format" (Strings "clang-format" "-style" $clang_style)}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ global method name for the given method or function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.MethodName"}}
+  {{AssertType $ "Function"}}
+
+  {{$p := Global "prefix"}}
+  {{if $p}}
+    {{$p}}{{if $.Owner}}{{Title $.Owner.Typename}}{{end}}{{Title $.Name}}
+  {{else}}
+    {{if $.Owner}}{{$.Owner.Typename}}{{Title $.Name}}
+    {{else}}{{$.Name}}
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ name of an enum type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.EnumName"}}
+  {{AssertType $ "Enum"}}
+
+  {{if $p := Global "prefix"}}{{$p}}{{Title $.Name}}
+  {{else}}{{$.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ name of an enum entry.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.EnumEntryName"}}
+  {{AssertType $.Enum "Enum"}}
+  {{AssertType $.Name "string"}}
+
+  {{/* TODO: Get rid of enum prefixes. */}}
+  {{if $enumPrefix := GetAnnotation $.Enum "prefix"}}
+    {{index $enumPrefix.Arguments 0}}_§
+  {{else if $apiPrefix := Global "prefix"}}
+    {{Upper $apiPrefix}}_§
+    {{$.Enum.Name | SplitPascalCase | Upper | JoinWith "_"}}_§
+  {{end}}
+  {{TrimLeft "_" $.Name}}
+{{end}}
