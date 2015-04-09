@@ -19,15 +19,9 @@ import (
 	"path/filepath"
 )
 
-// File implements the Logger interface, writing all messages out to a text file.
-type File struct {
-	channel
-	flushed chan struct{}
-}
-
-// NewFile creates a new File that will write messages to the specified file path.
+// File creates a new Logger that will write messages to the specified file path.
 // If a file exists at the specified path, then this file will be overwritten.
-func NewFile(path string) (*File, error) {
+func File(path string) (Logger, error) {
 	os.MkdirAll(filepath.Dir(path), 0755)
 	file, err := os.Create(path)
 	if err != nil {
@@ -40,6 +34,7 @@ func NewFile(path string) (*File, error) {
 			switch t := t.(type) {
 			case Entry:
 				file.WriteString(t.String())
+
 			case FlushRequest:
 				file.Sync()
 				close(t)
@@ -47,19 +42,10 @@ func NewFile(path string) (*File, error) {
 		}
 	}()
 	nextUid := uint32(1)
-	return &File{
-		channel: channel{
-			uid:     0,
-			nextUid: &nextUid,
-			scope:   "",
-			out:     out,
-		},
+	return &channel{
+		uid:     0,
+		nextUid: &nextUid,
+		scope:   "",
+		out:     out,
 	}, nil
-}
-
-// Close closes the file. Writing messages to the File after it has been closed may deadlock the
-// program.
-func (f *File) Close() {
-	f.Flush()
-	close(f.out)
 }
