@@ -49,9 +49,10 @@ var osToSystem = map[string]string{
 // Toolchain for building an Android executable env, without being packaged into an
 // APK (user-debug only).
 var EXE = &cpp.Toolchain{
-	Compiler: ndkCompile,
-	Archiver: ndkArchive,
-	Linker:   ndkLinkExe,
+	Compiler: compile,
+	Archiver: archive,
+	Linker:   linkExe,
+	DepsFor:  depsFor,
 	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s", cfg.Name, cfg.Architecture) },
 	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	ObjExt:   func(cfg cpp.Config) string { return ".o" },
@@ -59,9 +60,10 @@ var EXE = &cpp.Toolchain{
 
 // Toolchain for building an Android shared library.
 var SO = &cpp.Toolchain{
-	Compiler: ndkCompile,
-	Archiver: ndkArchive,
-	Linker:   ndkLinkSo,
+	Compiler: compile,
+	Archiver: archive,
+	Linker:   linkSo,
+	DepsFor:  depsFor,
 	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
 	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	ObjExt:   func(cfg cpp.Config) string { return ".o" },
@@ -69,9 +71,10 @@ var SO = &cpp.Toolchain{
 
 // Toolchain for building an Android APK.
 var APK = &cpp.Toolchain{
-	Compiler: ndkCompile,
-	Archiver: ndkArchive,
-	Linker:   ndkLinkAPK,
+	Compiler: compile,
+	Archiver: archive,
+	Linker:   linkAPK,
+	DepsFor:  depsFor,
 	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.apk", cfg.Name, cfg.Architecture) },
 	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	ObjExt:   func(cfg cpp.Config) string { return ".o" },
@@ -131,7 +134,11 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	}, nil
 }
 
-func ndkCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.File {
+	return cpp.IntermediatePath(output, ".dep", cfg, env)
+}
+
+func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Compile")
 
 	tools, err := getTools(cfg)
@@ -139,9 +146,12 @@ func ndkCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 		return err
 	}
 
+	depfile := depFileFor(output, cfg, env)
+
 	a := []string{
 		"--sysroot=" + tools.sysroot.Absolute(),
-		"-c",
+		"-c",                              // Compile to .o
+		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 		"-fPIC", // TODO: Not required for exes
 	}
 	a = append(a, cfg.CompilerArgs...)
@@ -158,7 +168,7 @@ func ndkCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	return tools.cc.Exec(env, a...)
 }
 
-func ndkArchive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Archive")
 
 	tools, err := getTools(cfg)
@@ -175,7 +185,7 @@ func ndkArchive(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	return tools.ar.Exec(env, a...)
 }
 
-func ndkLinkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Link-exe")
 
 	tools, err := getTools(cfg)
@@ -200,7 +210,7 @@ func ndkLinkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	return tools.cc.Exec(env, a...)
 }
 
-func ndkLinkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Link-so")
 
 	tools, err := getTools(cfg)
@@ -228,7 +238,7 @@ func ndkLinkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env buil
 	return tools.cc.Exec(env, a...)
 }
 
-func ndkLinkAPK(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func linkAPK(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Link-apk")
 
 	paths, err := ResolvePaths()
@@ -258,7 +268,7 @@ func ndkLinkAPK(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	ioutil.WriteFile(strings.Absolute(), stringsXml(cfg.Name), 0666)
 	so := root.Join("lib", ndkArchToTarget[cfg.Architecture].abi, "lib"+cfg.Name+".so")
 	so.MkdirAll()
-	if err := ndkLinkSo(inputs, so, cfg, env); err != nil {
+	if err := linkSo(inputs, so, cfg, env); err != nil {
 		return err
 	}
 
@@ -300,6 +310,14 @@ func ndkLinkAPK(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 
 	log("Done")
 	return nil
+}
+
+func depsFor(output build.File, cfg cpp.Config, env build.Environment) (deps build.FileSet, valid bool) {
+	env.Logger = env.Logger.Enter("NDK.Deps")
+
+	depfile := depFileFor(output, cfg, env)
+
+	return cpp.ParseDepFile(depfile, env)
 }
 
 func androidManifest(cfg cpp.Config) []byte {

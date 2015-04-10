@@ -14,6 +14,8 @@
 
 package build
 
+import "time"
+
 // FileSet is a list of Files with no duplicates.
 type FileSet []File
 
@@ -71,6 +73,18 @@ nextfile:
 		out = append(out, file)
 	}
 	return out
+}
+
+// LastModified returns the most recent time any of the files were modified.
+func (fs FileSet) LastModified() time.Time {
+	t := time.Time{}
+	for _, f := range fs {
+		m := f.LastModified()
+		if t.Before(m) {
+			t = m
+		}
+	}
+	return t
 }
 
 func (fs FileSet) toMap() map[File]struct{} {

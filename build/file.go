@@ -19,6 +19,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"time"
 )
 
 // File represents the path to a file or directory.
@@ -56,6 +57,15 @@ func (f File) Absolute() string {
 func (f File) Exists() bool {
 	_, err := os.Stat(string(f.Absolute()))
 	return err == nil
+}
+
+// LastModified returns the time the file was last modified.
+func (f File) LastModified() time.Time {
+	s, err := os.Stat(string(f.Absolute()))
+	if err != nil {
+		panic(err)
+	}
+	return s.ModTime()
 }
 
 // Delete deletes the File.
@@ -166,6 +176,8 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	case env.Verbose:
 		if msg := string(buffer.Bytes()); msg != "" {
 			logger.Info("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
+		} else {
+			logger.Info("%s succeeded", f.Name())
 		}
 	}
 	return err

@@ -24,9 +24,10 @@ import (
 )
 
 var GCC = &cpp.Toolchain{
-	Compiler: gccCompile,
-	Archiver: gccArchive,
-	Linker:   gccLink,
+	Compiler: compile,
+	Archiver: archive,
+	Linker:   link,
+	DepsFor:  depsFor,
 	ExeName: func(cfg cpp.Config) string {
 		if cfg.OS == "windows" {
 			return cfg.Name + ".exe"
@@ -83,7 +84,11 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	return &t, nil
 }
 
-func gccCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.File {
+	return cpp.IntermediatePath(output, ".dep", cfg, env)
+}
+
+func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("GCC.Compile")
 
 	tools, err := getTools(cfg)
@@ -91,7 +96,12 @@ func gccCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 		return err
 	}
 
-	a := append([]string{"-c"}, cfg.CompilerArgs...)
+	depfile := depFileFor(output, cfg, env)
+
+	a := append([]string{
+		"-c",                              // Compile to .o
+		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
+	}, cfg.CompilerArgs...)
 	for _, isp := range cfg.IncludeSearchPaths {
 		a = append(a, fmt.Sprintf("-I%s", isp))
 	}
@@ -101,11 +111,11 @@ func gccCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	for _, input := range inputs {
 		a = append(a, input.Absolute())
 	}
-	a = append(a, "-v", "-o", string(output))
+	a = append(a, "-o", string(output))
 	return tools.cc.Exec(env, a...)
 }
 
-func gccArchive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("GCC.Archive")
 
 	tools, err := getTools(cfg)
@@ -122,7 +132,7 @@ func gccArchive(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	return tools.ar.Exec(env, a...)
 }
 
-func gccLink(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func link(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("GCC.Link")
 
 	tools, err := getTools(cfg)
@@ -143,4 +153,12 @@ func gccLink(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	}
 	a = append(a, "-o", string(output))
 	return tools.cc.Exec(env, a...)
+}
+
+func depsFor(output build.File, cfg cpp.Config, env build.Environment) (deps build.FileSet, valid bool) {
+	env.Logger = env.Logger.Enter("GCC.Deps")
+
+	depfile := depFileFor(output, cfg, env)
+
+	return cpp.ParseDepFile(depfile, env)
 }

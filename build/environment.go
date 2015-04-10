@@ -25,5 +25,6 @@ type Environment struct {
 	Keypass       string     // The password to the key in the keystore.
 	Keyalias      string     // The alias of the key used to sign APKs.
 	Logger        log.Logger // The logger to emit log messages to.
+	ForceBuild    bool       // If true, all build steps will be forced.
 	Verbose       bool       // If true, logging should be verbose.
 }

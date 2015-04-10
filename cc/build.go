@@ -36,6 +36,7 @@ var (
 	keypass    = flag.String("keypass", "android", "The password to the keystore's key")
 	keyalias   = flag.String("alias", "androiddebugkey", "The alias of the key used to sign APKs")
 	logfile    = flag.String("logfile", "", "Writes logging to a file instead of stdout")
+	forcebuild = flag.Bool("f", false, "All build steps will be forced")
 	verbose    = flag.Bool("v", false, "Enable verbose logging")
 )
 
@@ -73,6 +74,7 @@ func run() int {
 		Keypass:       *keypass,
 		Keyalias:      *keyalias,
 		Logger:        logger,
+		ForceBuild:    *forcebuild,
 		Verbose:       *verbose,
 	}
 

@@ -24,6 +24,7 @@ import (
 )
 
 type tool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
+type depsFor func(output build.File, cfg Config, env build.Environment) (deps build.FileSet, valid bool)
 
 var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm"}
 
@@ -32,6 +33,7 @@ type Toolchain struct {
 	Compiler tool                // Tool used to compile source to object files.
 	Archiver tool                // Tool used to package object files into archives.
 	Linker   tool                // Tool used to link objects and packages into executables.
+	DepsFor  depsFor             // Returns the list of dependencies for the given file.
 	ExeName  func(Config) string // Returns the name of the emitted executable.
 	LibName  func(Config) string // Returns the name of the emitted static library file.
 	ObjExt   func(Config) string // Extension used for object files.
@@ -117,16 +119,47 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 	wg.Add(len(sources))
 	for i, source := range sources {
 		i, source, env := i, source, env
-		env.Logger = env.Logger.Fork() // Give each go-routine a unique logger context id.
-		go func() {
-			defer wg.Done()
-			object := IntermediatePath(source, cfg.Toolchain.ObjExt(cfg), cfg, env)
+		object := IntermediatePath(source, cfg.Toolchain.ObjExt(cfg), cfg, env)
+
+		if requiresCompile(source, object, cfg, env) {
+			env.Logger = env.Logger.Fork() // Give each go-routine a unique logger context id.
+			go func() {
+				defer wg.Done()
+				objects[i] = object
+				errors[i] = cfg.Toolchain.Compiler(build.FileSet{source}, object, cfg, env)
+			}()
+		} else {
 			objects[i] = object
-			errors[i] = cfg.Toolchain.Compiler(build.FileSet{source}, object, cfg, env)
-		}()
+			wg.Done()
+			if env.Verbose {
+				env.Logger.Info("%s is up-to-date", object)
+			}
+		}
 	}
 	wg.Wait()
 	return objects, combineErrors(errors)
+}
+
+func requiresCompile(source, output build.File, cfg Config, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	t := output.LastModified()
+	if source.LastModified().After(t) {
+		return true
+	}
+	depsFor := cfg.Toolchain.DepsFor
+	if depsFor == nil {
+		return true // If the toolchain can't check dependencies, then we have to build
+	}
+	deps, valid := depsFor(output, cfg, env)
+	if !valid || deps.LastModified().After(t) {
+		return true
+	}
+	return false
 }
 
 // Executable links the list of input files into an executable using the Config
@@ -143,19 +176,39 @@ func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.
 
 	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
 
-	sourceLibraries := build.FileSet{}
+	libraries := build.FileSet{}
 	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
 		dir, base := filepath.Split(library.Absolute())
-		sourceLibraries = sourceLibraries.Append(build.File(base))
+		libraries = libraries.Append(build.File(base))
 		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
 	}
 
-	cfg.Libraries = append(sourceLibraries, cfg.Libraries...)
+	cfg.Libraries = append(libraries, cfg.Libraries...)
 
 	output := env.Output.Join(cfg.Toolchain.ExeName(cfg))
 	output.MkdirAll()
 
-	return output, cfg.Toolchain.Linker(objects, output, cfg, env)
+	if requiresLink(inputs.Append(objects...), output, env) {
+		return output, cfg.Toolchain.Linker(objects, output, cfg, env)
+	} else {
+		if env.Verbose {
+			env.Logger.Info("%s is up-to-date", output)
+		}
+		return output, nil
+	}
+}
+
+func requiresLink(inputs build.FileSet, output build.File, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	if inputs.LastModified().After(output.LastModified()) {
+		return true
+	}
+	return false
 }
 
 // StaticLibrary archives the list of input files into an static library using
@@ -176,7 +229,27 @@ func StaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bui
 	output := env.Intermediates.Join(Triplet(cfg), name).ChangeExt(cfg.Toolchain.LibExt(cfg))
 	output.MkdirAll()
 
-	return output, cfg.Toolchain.Archiver(objects, output, cfg, env)
+	if requiresArchive(objects, output, env) {
+		return output, cfg.Toolchain.Archiver(objects, output, cfg, env)
+	} else {
+		if env.Verbose {
+			env.Logger.Info("%s is up-to-date", output)
+		}
+		return output, nil
+	}
+}
+
+func requiresArchive(objects build.FileSet, output build.File, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	if objects.LastModified().After(output.LastModified()) {
+		return true
+	}
+	return false
 }
 
 // Triplet returns a string combining the os, architecture and flavour of cfg.
