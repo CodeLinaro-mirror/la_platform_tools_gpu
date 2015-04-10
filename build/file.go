@@ -165,7 +165,7 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 
 	case env.Verbose:
 		if msg := string(buffer.Bytes()); msg != "" {
-			logger.Error("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
+			logger.Info("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
 		}
 	}
 	return err
