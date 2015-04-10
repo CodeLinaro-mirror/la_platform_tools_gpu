@@ -28,14 +28,15 @@ import (
 )
 
 var (
-	targets   = flag.String("targets", build.HostOS, "A comma separated list of targets to build.")
-	runtests  = flag.Bool("runtests", false, "Run the tests after building")
-	keystore  = flag.String("keystore", GPURoot.Join("build", "keystore", "debug.keystore").Absolute(), "The keystore used to sign APKs")
-	storepass = flag.String("storepass", "android", "The password to the keystore")
-	keypass   = flag.String("keypass", "android", "The password to the keystore's key")
-	keyalias  = flag.String("alias", "androiddebugkey", "The alias of the key used to sign APKs")
-	logfile   = flag.String("logfile", "", "Writes logging to a file instead of stdout")
-	verbose   = flag.Bool("v", false, "Enable verbose logging")
+	targets    = flag.String("targets", build.HostOS, "A comma separated list of targets to build.")
+	buildtests = flag.Bool("buildtests", true, "Build the tests")
+	runtests   = flag.Bool("runtests", true, "Run the tests after building the tests")
+	keystore   = flag.String("keystore", GPURoot.Join("build", "keystore", "debug.keystore").Absolute(), "The keystore used to sign APKs")
+	storepass  = flag.String("storepass", "android", "The password to the keystore")
+	keypass    = flag.String("keypass", "android", "The password to the keystore's key")
+	keyalias   = flag.String("alias", "androiddebugkey", "The alias of the key used to sign APKs")
+	logfile    = flag.String("logfile", "", "Writes logging to a file instead of stdout")
+	verbose    = flag.Bool("v", false, "Enable verbose logging")
 )
 
 var (
@@ -156,20 +157,25 @@ func (t Target) Build(env build.Environment) error {
 		return rootLogger.Enter(name)
 	}
 
-	// Build gtest into a library
-	env.Logger = begin(t.Gtest.Name)
-	gtestSource := GtestRoot.Join("src").Glob("gtest-all.cc", "gtest_main.cc")
-	gtestLib, err := cpp.StaticLibrary(gtestSource, t.Gtest, env)
-	if err != nil {
-		return err
-	}
+	var gtestLib, gmockLib build.File
+	if *buildtests {
+		var err error
 
-	// Build gmock into a library
-	env.Logger = begin(t.Gmock.Name)
-	gmockSource := GmockRoot.Join("src").Glob("gmock-all.cc")
-	gmockLib, err := cpp.StaticLibrary(gmockSource, t.Gmock, env)
-	if err != nil {
-		return err
+		// Build gtest into a library
+		env.Logger = begin(t.Gtest.Name)
+		gtestSource := GtestRoot.Join("src").Glob("gtest-all.cc", "gtest_main.cc")
+		gtestLib, err = cpp.StaticLibrary(gtestSource, t.Gtest, env)
+		if err != nil {
+			return err
+		}
+
+		// Build gmock into a library
+		env.Logger = begin(t.Gmock.Name)
+		gmockSource := GmockRoot.Join("src").Glob("gmock-all.cc")
+		gmockLib, err = cpp.StaticLibrary(gmockSource, t.Gmock, env)
+		if err != nil {
+			return err
+		}
 	}
 
 	// Gather the source files for gapir
@@ -182,14 +188,6 @@ func (t Target) Build(env build.Environment) error {
 		return err
 	}
 
-	// Build gapir tests.
-	env.Logger = begin(t.GapirTests.Name)
-	gapirTestSource := ReplaydRoot.Join("test").Glob(t.SourceFiles...).Append(gapirLib, gtestLib, gmockLib)
-	gapirTest, err := cpp.Executable(gapirTestSource, t.GapirTests, env)
-	if err != nil {
-		return err
-	}
-
 	// Build replayd from the gapir static library and Main.cpp.
 	env.Logger = begin(t.Replayd.Name)
 	replaydSource := build.Files(gapirLib, ReplaydRoot.Join("src", "Main.cpp"))
@@ -197,10 +195,20 @@ func (t Target) Build(env build.Environment) error {
 		return err
 	}
 
-	if *runtests && t.Replayd.OS == build.HostOS {
-		env.Logger = begin("Running gapir-tests")
-		if err := gapirTest.Exec(env); err != nil {
+	// Build gapir tests.
+	if *buildtests {
+		env.Logger = begin(t.GapirTests.Name)
+		gapirTestSource := ReplaydRoot.Join("test").Glob(t.SourceFiles...).Append(gapirLib, gtestLib, gmockLib)
+		gapirTest, err := cpp.Executable(gapirTestSource, t.GapirTests, env)
+		if err != nil {
 			return err
+		}
+
+		if *runtests && t.Replayd.OS == build.HostOS {
+			env.Logger = begin("Running gapir-tests")
+			if err := gapirTest.Exec(env); err != nil {
+				return err
+			}
 		}
 	}
 
