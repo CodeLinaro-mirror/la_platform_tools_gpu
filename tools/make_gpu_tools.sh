@@ -75,7 +75,7 @@ go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE
 go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/memory
 go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gazer    $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
-src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle --info
+go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v
 
 # Kill any existing replay daemon before running tests.
 killall replayd || true
@@ -97,5 +97,5 @@ killall replayd || true
 if [ $crosscompile_windows -eq 1 ]; then
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
   go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows_amd64/gazer.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/cmd
-  src/$GPU_RELATIVE_SOURCE_PATH/cc/gradlew -b src/$GPU_RELATIVE_SOURCE_PATH/cc/build.gradle --info replayd:windows64installLocal
+  go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --target=windows
 fi

@@ -32,5 +32,4 @@ go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_
 go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_SOURCE_PATH%\memory
 go build    %GO_BUILD_FLAGS%    %GPU_BUILD_ROOT%\bin\gazer.exe    %GPU_RELATIVE_SOURCE_PATH%\server\cmd
 
-:: TODO: enable gradle build for .cpp files.
-::src\%GPU_RELATIVE_SOURCE_PATH%\cc\gradlew.bat -b src\%GPU_RELATIVE_SOURCE_PATH%\cc\build.gradle --info
+go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v
