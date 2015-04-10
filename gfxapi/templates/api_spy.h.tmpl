@@ -18,9 +18,9 @@ limitations under the License.
 {{Global "SpyName" (print (Title (Global "API")) "Spy")}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "api_spy.h" | Reflow 4 | Write $filename}}
+{{$ | Macro "Spy" | Format (Global "clang-format") | Write $filename}}
 
-{{define "api_spy.h"}}
+{{define "Spy"}}
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
   {{$spyname := Global "SpyName"}}
@@ -30,9 +30,9 @@ limitations under the License.
   #define {{$guard}}
 ¶
   #include "common/encoder.h"
-  #include "imports.h"
-  #include "state.h"
-  #include "types.h"
+  #include "{{Global "API"}}_imports.h"
+  #include "{{Global "API"}}_state.h"
+  #include "{{Global "API"}}_types.h"
 ¶
   #include <stdint.h>
   #include <unordered_set>
@@ -43,7 +43,7 @@ limitations under the License.
   «public:»
     inline {{$spyname}}(gapic::Encoder* encoder);
 ¶
-    {{range $f := $.Functions}}
+    {{range $f := AllCommands $}}
       {{if not (GetAnnotation $f "synthetic")}}
         {{Macro "MethodDefinitions" $f}}
       {{end}}
@@ -52,7 +52,7 @@ limitations under the License.
   «private:»
     static const gapic::Id RESOURCE_ID;
     static const gapic::Id OBSERVATION_ID;
-    {{range $f := $.Functions}}
+    {{range $f := AllCommands $}}
       {{if not (GetAnnotation $f "synthetic")}}
         static const gapic::Id {{Macro "ID" $f}};
       {{end}}
@@ -109,7 +109,7 @@ limitations under the License.
     mEncoder->Id(id);
   }
 ¶
-  {{range $i, $f := $.Functions}}
+  {{range $i, $f := AllCommands $}}
     {{if not (GetAnnotation $f "synthetic")}}
       {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
       {{Macro "MethodImplementation" $f}}¶
@@ -131,7 +131,7 @@ limitations under the License.
 {{define "ID"}}
   {{AssertType $ "Function"}}
 
-  {{SplitPascalCase $.Name | Upper | JoinWith "_"}}_ID
+  {{Macro "C++.MethodName" $ | SplitPascalCase | Upper | JoinWith "_"}}_ID
 {{end}}
 
 
@@ -143,7 +143,7 @@ limitations under the License.
 {{define "MethodDefinitions"}}
   {{AssertType $ "Function"}}
 
-  inline {{Macro "C++.ReturnType" $}} {{$.Name}}({{Macro "C++.CallParameters" $}});
+  inline {{Macro "C++.ReturnType" $}} {{Macro "C++.MethodName" $}}({{Macro "C++.CallParameters" $}});
 {{end}}
 
 
@@ -155,20 +155,21 @@ limitations under the License.
 {{define "MethodImplementation"}}
   {{AssertType $ "Function"}}
 
+  {{$name := Macro "C++.MethodName" $}}
   {{$ret := not (IsVoid $.Return.Type)}}
   {{$spyname := Global "SpyName"}}
 
-  inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$.Name}}({{Macro "C++.CallParameters" $}}) {
-    {{if $ret}}{{Macro "C++.ReturnType" $}} result = mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
-    {{else}}mImports.{{$.Name}}({{Macro "C++.CallArguments" $}});
+  inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
+    {{if $ret}}{{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
+    {{else}}mImports.{{$name}}({{Macro "C++.CallArguments" $}});
     {{end}}
-    mState.{{$.Name}}({{Macro "C++.ReadList" $.FullParameters}});
+    mState.{{$name}}({{Macro "C++.ReadList" $.FullParameters}});
 ¶
     mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     mEncoder->U32(0); // TODO: ContextID
     {{range $i, $p := $.FullParameters}}
-      {{$name := Macro "C++.ReadParameter" $p}}
-      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $name}}
+      {{$pname := Macro "C++.ReadParameter" $p}}
+      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
     {{end}}
 
     {{if $ret}}¶
@@ -240,6 +241,7 @@ limitations under the License.
   {{/* TODO: Store arrays as resources
   {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
   */}}
+  {{else if and (IsClass $.Type) (GetAnnotation $.Type "union")}}/* TODO: mEncoder on union */
   {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
   {{end}}
 {{end}}

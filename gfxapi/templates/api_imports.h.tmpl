@@ -17,7 +17,8 @@
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "imports.h" | Format (Global "clang-format") | Write "imports.h"}}
+{{$filename := print (Global "API") "_imports.h" }}
+{{$ | Macro "imports.h" | Format (Global "clang-format") | Write $filename}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -25,34 +26,36 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "imports.h"}}
-{{Macro "C++.AOSP.Copyright"}}
+  {{Macro "C++.AOSP.Copyright"}}
+  {{$classname := print (Title (Global "API")) "Imports"}}
+  {{$guard := print "GAPII_" (Upper (Global "API")) "_IMPORTS_H"}}
 ¶
-#ifndef GAPII_IMPORTS_H
-#define GAPII_IMPORTS_H
+  #ifndef {{$guard}}
+  #define {{$guard}}
 ¶
-#include "types.h"
+  #include "{{Global "API"}}_types.h"
 ¶
-namespace gapii {
+  namespace gapii {
 ¶
-struct Imports {
-  void Resolve();
+  struct {{$classname}} {
+    void Resolve();
 ¶
-  {{range $c := AllCommands $}}
-    {{if not (GetAnnotation $c "synthetic")}}
-      {{template "TypedefFunctionPtr" $c}}
+    {{range $c := AllCommands $}}
+      {{if not (GetAnnotation $c "synthetic")}}
+        {{template "TypedefFunctionPtr" $c}}
+      {{end}}
     {{end}}
-  {{end}}
 ¶
-  {{range $c := AllCommands $}}
-    {{if not (GetAnnotation $c "synthetic")}}
-      {{template "FunctionPtrDecl" $c}}
+    {{range $c := AllCommands $}}
+      {{if not (GetAnnotation $c "synthetic")}}
+        {{template "FunctionPtrDecl" $c}}
+      {{end}}
     {{end}}
-  {{end}}
 ¶
-  };
-} // end of namespace gapii
+    };
+  } // end of namespace gapii
 ¶
-#endif // GAPII_IMPORTS_H
+  #endif // {{$guard}}
 ¶
 {{end}}
 
@@ -65,7 +68,7 @@ struct Imports {
 {{define "FunctionPtrType"}}
   {{AssertType $ "Function"}}
 
-  PFN{{Upper $.Name}}
+  PFN{{Macro "C++.MethodName" $ | Upper}}
 {{end}}
 
 
@@ -89,5 +92,5 @@ struct Imports {
 {{define "FunctionPtrDecl"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "FunctionPtrType" $}} {{$.Name}};
+  {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}};
 {{end}}
