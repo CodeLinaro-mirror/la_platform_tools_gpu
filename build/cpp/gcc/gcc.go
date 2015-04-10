@@ -101,7 +101,7 @@ func gccCompile(inputs build.FileSet, output build.File, cfg cpp.Config, env bui
 	for _, input := range inputs {
 		a = append(a, input.Absolute())
 	}
-	a = append(a, "-o", string(output))
+	a = append(a, "-v", "-o", string(output))
 	return tools.cc.Exec(env, a...)
 }
 

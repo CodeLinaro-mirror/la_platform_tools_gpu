@@ -85,7 +85,7 @@ func (c *channel) Enter(name string) Logger {
 
 func (c *channel) Fork() Logger {
 	return &channel{
-		uid:     atomic.AddUint32(c.nextUid, 1),
+		uid:     atomic.AddUint32(c.nextUid, 1) - 1,
 		nextUid: c.nextUid,
 		scope:   c.scope,
 		out:     c.out,

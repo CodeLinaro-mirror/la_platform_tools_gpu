@@ -116,7 +116,8 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 	errors := make([]error, len(sources))
 	wg.Add(len(sources))
 	for i, source := range sources {
-		i, source := i, source
+		i, source, env := i, source, env
+		env.Logger = env.Logger.Fork() // Give each go-routine a unique logger context id.
 		go func() {
 			defer wg.Done()
 			object := IntermediatePath(source, cfg.Toolchain.ObjExt(cfg), cfg, env)
