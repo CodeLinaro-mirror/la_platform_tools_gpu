@@ -42,7 +42,7 @@ var ndkArchToTarget = map[string]ndkTarget{
 
 var osToSystem = map[string]string{
 	"windows": "windows-x86_64",
-	"linux":   "linux-x86",
+	"linux":   "linux-x86_64",
 	"osx":     "darwin-x86_64",
 }
 
@@ -52,7 +52,7 @@ var EXE = &cpp.Toolchain{
 	Compiler: ndkCompile,
 	Archiver: ndkArchive,
 	Linker:   ndkLinkExe,
-	ExeName:  func(cfg cpp.Config) string { return cfg.Name },
+	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s", cfg.Name, cfg.Architecture) },
 	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	ObjExt:   func(cfg cpp.Config) string { return ".o" },
 }
@@ -62,7 +62,7 @@ var SO = &cpp.Toolchain{
 	Compiler: ndkCompile,
 	Archiver: ndkArchive,
 	Linker:   ndkLinkSo,
-	ExeName:  func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
 	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
 	ObjExt:   func(cfg cpp.Config) string { return ".o" },
 }
@@ -108,6 +108,9 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	}
 	arch := fmt.Sprintf("arch-%s", cfg.Architecture)
 	bin := paths.NDK.Join("toolchains", target.name+"-"+target.version, "prebuilt", system, "bin")
+	if !bin.Exists() {
+		return nil, fmt.Errorf("NDK toolchain for %s version %s not found", target.name, target.version)
+	}
 
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
 
