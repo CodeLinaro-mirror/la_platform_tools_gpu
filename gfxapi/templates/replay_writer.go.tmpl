@@ -268,61 +268,63 @@ limitations under the License.
   {{else}}
     func (ϟa *{{$name}}) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
   {{end}}
-    {{/* Declare all the of local variables describing the array counts */}}
-    {{template "DefineArrayCounts" $}}
+  ϟc := {{if GetAnnotation $ "synthetic"}}&State{}{{else}}getState(ϟa, ϟs){{end}}
+  _ = ϟc
+  {{/* Declare all the of local variables describing the array counts */}}
+  {{template "DefineArrayCounts" $}}
 
-    {{if len $.Outputs}}
-      {{/* Create a temporary buffer to hold all the output parameters */}}
-      outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{§
-        {{range $i, $p := $.Outputs}}
-          {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
-        {{end}}
-      })
-    {{end}}
-
-    {{/* Push all the parameters on the stack */}}
-    {{range $p := $.CallParameters}}
-      {{$type := TypeOf $p}}
-      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-      {{if $p.Output}} ϟb.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
-      {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
+  {{if len $.Outputs}}
+    {{/* Create a temporary buffer to hold all the output parameters */}}
+    outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{§
+      {{range $i, $p := $.Outputs}}
+        {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
       {{end}}
-    {{end}}
+    })
+  {{end}}
 
-    {{/* Call the function */}}
-    {{if not (IsVoid $.Return.Type)}}
-      ϟb.CallPush({{Macro "BuilderFunctionInfo" $}})
-      {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
-      {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
-    {{else}}
-      ϟb.CallNoPush({{Macro "BuilderFunctionInfo" $}})
+  {{/* Push all the parameters on the stack */}}
+  {{range $p := $.CallParameters}}
+    {{$type := TypeOf $p}}
+    {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+    {{if $p.Output}} ϟb.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
+    {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
     {{end}}
+  {{end}}
 
-    {{/* Simulate the call */}}
-    ϟa.Mutate(ϟs)
+  {{/* Call the function */}}
+  {{if not (IsVoid $.Return.Type)}}
+    ϟb.CallPush({{Macro "BuilderFunctionInfo" $}})
+    {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
+    {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
+  {{else}}
+    ϟb.CallNoPush({{Macro "BuilderFunctionInfo" $}})
+  {{end}}
 
-    {{/* Remap outputs */}}
-    {{range $i, $p := $.Outputs}}
-      {{$type    := TypeOf $p}}
-      {{$name    := print "ϟa." (Macro "Go.Parameter" $p)}}
-      {{$pointer := print "outputs[" $i "]"}}
-      {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
-    {{end}}
+  {{/* Simulate the call */}}
+  ϟa.Mutate(ϟs)
 
-    {{if len $.Outputs}}
-      {{/* Post back the data, if it is wanted */}}
-      if postback {
-        ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
-          postback := {{Macro "CmdPostbacksName" $}}{}
-          {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
-          if err := postback.Decode({{$array_counts}}d); err != nil {
-            return nil, err
-          }
-          return postback, nil
-        })
-      }
-    {{end}}
-    ϟb.EndAtom()
+  {{/* Remap outputs */}}
+  {{range $i, $p := $.Outputs}}
+    {{$type    := TypeOf $p}}
+    {{$name    := print "ϟa." (Macro "Go.Parameter" $p)}}
+    {{$pointer := print "outputs[" $i "]"}}
+    {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
+  {{end}}
+
+  {{if len $.Outputs}}
+  {{/* Post back the data, if it is wanted */}}
+    if postback {
+      ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+        postback := {{Macro "CmdPostbacksName" $}}{}
+        {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
+        if err := postback.Decode({{$array_counts}}d); err != nil {
+          return nil, err
+        }
+        return postback, nil
+      })
+    }
+  {{end}}
+  ϟb.EndAtom()
   }
 {{end}}
 

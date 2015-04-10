@@ -70,7 +70,7 @@
 {{define "FunctionPtrDecl"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "FunctionPtrType" $}} {{$.Name}} = nullptr;
+  {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}} = nullptr;
 {{end}}
 
 
@@ -86,7 +86,8 @@
   void Register(Interpreter* interpreter) {
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        interpreter->registerFunction(Ids::{{Macro "C++.Public" $c.Name}}, call{{Macro "C++.Public" $c.Name}});
+        {{$name := Macro "C++.Public" (Macro "C++.MethodName" $c)}}
+        interpreter->registerFunction(Ids::{{$name}}, call{{$name}});
       {{end}}
     {{end}}
   }
@@ -105,7 +106,8 @@
   void Initialize() {
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{$c.Name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$c.Name}}"));
+        {{$name := Macro "C++.MethodName" $c}}
+        {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$name}}"));
       {{end}}
     {{end}}
   }
@@ -117,7 +119,7 @@
 
   {{$name := Macro "C++.MethodName" $}}
 
-  bool call{{Title $name}}(Stack* stack, bool pushReturn) {
+  bool call{{Macro "C++.Public" $name}}(Stack* stack, bool pushReturn) {
     {{range $p := (Reverse $.CallParameters)}}
       {{Macro "C++.ParameterType" $p}} {{$p.Name}} = stack->pop<{{Macro "C++.ParameterType" $p}}>();
     {{end}}
