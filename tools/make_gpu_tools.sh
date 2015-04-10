@@ -75,7 +75,7 @@ go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE
 go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/memory
 go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gazer    $GPU_RELATIVE_SOURCE_PATH/server/cmd
 
-go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v
+go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --runtests
 
 # Kill any existing replay daemon before running tests.
 killall replayd || true
