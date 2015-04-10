@@ -16,8 +16,8 @@
     <ClCompile Include="src\common\get_gfx_proc_address.cpp" />
     <ClCompile Include="src\common\hash.cpp" />
     <ClCompile Include="src\common\id.cpp" />
-    <ClCompile Include="src\exports.cpp" />
-    <ClCompile Include="src\imports.cpp" />
+    <ClCompile Include="src\gles_exports.cpp" />
+    <ClCompile Include="src\gles_imports.cpp" />
     <ClCompile Include="src\opengl32_resolve.cpp" />
     <ClCompile Include="src\spy.cpp" />
   </ItemGroup>
@@ -25,8 +25,8 @@
     <MASM Include="src\opengl32_x64.asm">
       <FileType>Document</FileType>
     </MASM>
+    <None Include="src\gles_state_externs.inl" />
     <None Include="src\opengl32_exports.def" />
-    <None Include="src\state_externs.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common\encoder.h" />
@@ -35,10 +35,11 @@
     <ClInclude Include="src\common\hash.h" />
     <ClInclude Include="src\common\id.h" />
     <ClInclude Include="src\common\stream_writer.h" />
+    <ClInclude Include="src\gles_imports.h" />
     <ClInclude Include="src\gles_spy.h" />
-    <ClInclude Include="src\imports.h" />
+    <ClInclude Include="src\gles_state.h" />
+    <ClInclude Include="src\gles_types.h" />
     <ClInclude Include="src\spy.h" />
-    <ClInclude Include="src\state.h" />
     <ClInclude Include="src\types.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

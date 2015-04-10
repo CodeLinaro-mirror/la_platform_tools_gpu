@@ -14,7 +14,8 @@ limitations under the License.
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "Exports" | Reflow 4 | Write "exports.cpp"}}
+{{$filename := print (Global "API") "_exports.cpp" }}
+{{$ | Macro "Exports" | Format (Global "clang-format") | Write $filename}}
 
 {{define "Exports"}}
   {{AssertType $ "API"}}
@@ -23,9 +24,9 @@ limitations under the License.
   #include "common/file_writer.h"
   #include "common/get_gfx_proc_address.h"
 ¶
-  #include "imports.h"
+  #include "{{Global "API"}}_imports.h"
+  #include "{{Global "API"}}_types.h"
   #include "spy.h"
-  #include "types.h"
 ¶
   using namespace gapii;
 ¶
@@ -43,9 +44,10 @@ limitations under the License.
 ¶
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
-      {{Macro "C++.ReturnType" $c}} __stdcall {{$c.Name}}({{Macro "C++.CallParameters" $c}}) {
+      {{$name := Macro "C++.MethodName" $c}}
+      {{Macro "C++.ReturnType" $c}} __stdcall {{$name}}({{Macro "C++.CallParameters" $c}}) {
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
-        spy()->{{$c.Name}}({{Macro "C++.CallArguments" $c}});
+        spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }
     {{end}}
   {{end}}
@@ -53,8 +55,9 @@ limitations under the License.
   typedef void (__stdcall *WGLPROC)();
   WGLPROC __stdcall wglGetProcAddress(const char* name) {
     {{range $i, $c := AllCommands $}}
+      {{$name := Macro "C++.MethodName" $c}}
       {{if not (GetAnnotation $c "synthetic")}}
-        if (strcmp(name, "{{$c.Name}}") == 0) { return reinterpret_cast<WGLPROC>({{$c.Name}}); }
+        if (strcmp(name, "{{$name}}") == 0) { return reinterpret_cast<WGLPROC>({{$name}}); }
       {{end}}
     {{end}}
 ¶

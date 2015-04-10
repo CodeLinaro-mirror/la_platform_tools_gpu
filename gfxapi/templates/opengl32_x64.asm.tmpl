@@ -14,6 +14,7 @@
  * limitations under the License.
  */}}
 
+{{Include "cpp_common.tmpl"}}
 {{Include "opengl32_exports.tmpl"}}
 {{$ | Macro "opengl32_x64.asm" | Reflow 4 | Write "opengl32_x64.asm"}}
 
@@ -84,7 +85,7 @@ extern resolved:SDWORD
   {{$opengl32_exports := Strings (Macro "OpenGL32Exports") | SplitOn "\n"}}
 
   {{/* This is the list of functions that the spy exports. */}}
-  {{$api_exports := (ForEach (AllCommands $) "CommandName") | Strings "wglGetProcAddress"}}
+  {{$api_exports := (ForEach (AllCommands $) "C++.MethodName") | Strings "wglGetProcAddress"}}
 
   {{/* This is list of functions we need to create trampolines for. */}}
   {{$trampolines := $opengl32_exports | FilterOut $api_exports}}
@@ -94,16 +95,4 @@ extern resolved:SDWORD
   {{end}}
 end
 ¶
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Returns the name of the specified command.
--------------------------------------------------------------------------------
-*/}}
-{{define "CommandName"}}
-  {{AssertType $ "Function"}}
-
-  {{$.Name}}
 {{end}}

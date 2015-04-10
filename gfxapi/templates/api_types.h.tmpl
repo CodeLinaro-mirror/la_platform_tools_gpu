@@ -14,34 +14,35 @@ limitations under the License.
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
 {{Include "cpp_common.tmpl"}}
-{{$ | Macro "Types" | Reflow 4 | Write "types.h"}}
+{{$filename := print (Global "API") "_types.h" }}
+{{$ | Macro "Types" | Format (Global "clang-format") | Write $filename}}
 
 {{define "Types"}}
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
+  {{$guard := print "GAPII_" (Upper (Global "API")) "_TYPES_H"}}
 ¶
-  #ifndef GAPII_TYPES_H
-  #define GAPII_TYPES_H
+  #ifndef {{$guard}}
+  #define {{$guard}}
 ¶
-  #include <map>
   #include <memory>
   #include <stdint.h>
+  #include <unordered_map>
+¶
+  #include "types.h"
 ¶
   namespace gapii {«
 ¶
-  class Memory {};
-  class Any {};
-¶
   // Class forward declarations.
   {{range $c := $.Classes}}
-    struct {{$c.Name}};
+    struct {{Macro "C++.StateType" $c}};
   {{end}}
 ¶
   // Enums & bitfields
   {{range $e := $.Enums}}
-    namespace {{$e.Name}} {
-      {{range $e := $e.AllEntries}}
-        static const uint32_t {{$e.Name}} = {{$e.Value}};
+    namespace {{Macro "C++.EnumName" $e}} {
+      {{range $entry := $e.AllEntries}}
+        static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
       {{end}}
     }¶
 ¶
@@ -54,7 +55,7 @@ limitations under the License.
 ¶
   // Maps
   {{range $m := $.Maps}}
-    typedef std::map<{{Macro "C++.StateType" $m.KeyType}}, {{Macro "C++.StateType" $m.ValueType}}> {{$m.Name}};
+    typedef std::unordered_map<{{Macro "C++.StateType" $m.KeyType}}, {{Macro "C++.StateType" $m.ValueType}}> {{$m.Name}};
   {{end}}
 ¶
   // Classes
@@ -72,6 +73,6 @@ limitations under the License.
 ¶
   »} // namespace gapii
 ¶
-  #endif // GAPII_TYPES_H
+  #endif // {{$guard}}
 ¶
 {{end}}

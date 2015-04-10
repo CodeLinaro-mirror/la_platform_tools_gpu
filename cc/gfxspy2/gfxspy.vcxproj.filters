@@ -18,10 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\exports.cpp">
+    <ClCompile Include="src\gles_exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\imports.cpp">
+    <ClCompile Include="src\gles_imports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\opengl32_resolve.cpp">
@@ -55,13 +55,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\imports.h">
+    <ClInclude Include="src\gles_imports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gles_spy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gles_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gles_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\spy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\types.h">
@@ -83,9 +89,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\common\stream_writer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gles_spy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
