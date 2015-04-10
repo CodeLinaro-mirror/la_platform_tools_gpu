@@ -108,7 +108,7 @@ limitations under the License.
 {{define "StaticArray"}}
   {{AssertType $ "StaticArray"}}
 
-  service.CreateStaticArrayInfo("{{$.Name}}", service.TypeKindStaticArray, {{Macro "TypeInfo" $.ValueType}}, service.U32Array({{Strings $.Dimensions | Join ", "}}))
+  service.CreateStaticArrayInfo("{{$.Name}}", service.TypeKindStaticArray, {{Macro "TypeInfo" $.ValueType}}, service.U32Array([]uint32{ {{Strings $.Dimensions | JoinWith ", "}} }))
 {{end}}
 
 

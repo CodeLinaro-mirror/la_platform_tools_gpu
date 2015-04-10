@@ -49,7 +49,7 @@ namespace Ids {
   // List of the function ids for the API functions. This list have to be consistent with the
   // function ids on the server side because they are part of the communication protocol
   {{range $i, $c := AllCommands $}}
-    static const uint16_t {{Macro "C++.Public" $c.Name}} = {{$i}};
+    static const uint16_t {{Macro "C++.Public" (Macro "C++.MethodName" $c)}} = {{$i}};
   {{end}}
 } // end of namespace FunctionIds
 ¶
@@ -116,5 +116,5 @@ namespace Ids {
 {{define "FunctionPtrExtern"}}
   {{AssertType $ "Function"}}
 
-  extern {{Macro "FunctionPtrType" $}} {{$.Name}};
+  extern {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}};
 {{end}}

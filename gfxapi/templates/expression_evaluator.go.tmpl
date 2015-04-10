@@ -207,8 +207,11 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "ReadLength"}}
-  {{if IsParameter $}}{{Macro "Read" (GetArrayParamCount $)}}
-  {{else            }}len({{Macro "Read" $}})
+  {{if IsParameter $}}
+    {{if $c := GetArrayParamCount $}}{{Macro "Read" $c}}
+    {{else}}len({{Macro "Read" $}})
+    {{end}}
+  {{else}}len({{Macro "Read" $}})
   {{end}}
 {{end}}
 
