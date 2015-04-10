@@ -161,14 +161,11 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	err := cmd.Run()
 	switch {
 	case err != nil:
-		if msg := string(buffer.Bytes()); msg != "" {
-			logger.Error("\n\n%s", msg)
-		}
-		logger.Error("\n\nReturned: %v", err)
+		logger.Error("\n\n%s\n--- %s failed: %v ---", string(buffer.Bytes()), f.Name(), err)
 
 	case env.Verbose:
 		if msg := string(buffer.Bytes()); msg != "" {
-			logger.Info("\n\n%s", msg)
+			logger.Error("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
 		}
 	}
 	return err

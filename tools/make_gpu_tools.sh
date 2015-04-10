@@ -95,7 +95,7 @@ fi
 killall replayd || true
 
 if [ $crosscompile_windows -eq 1 ]; then
-  go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --target=windows
+  go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --targets=windows
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
   go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows_amd64/gazer.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/cmd
 fi

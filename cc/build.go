@@ -16,7 +16,9 @@ package main
 
 import (
 	"flag"
+	"os"
 	"strings"
+	"sync"
 
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
@@ -26,7 +28,7 @@ import (
 )
 
 var (
-	target    = flag.String("target", build.HostOS, "The target to build")
+	targets   = flag.String("targets", build.HostOS, "A comma separated list of targets to build.")
 	runtests  = flag.Bool("runtests", false, "Run the tests after building")
 	keystore  = flag.String("keystore", GPURoot.Join("build", "keystore", "debug.keystore").Absolute(), "The keystore used to sign APKs")
 	storepass = flag.String("storepass", "android", "The password to the keystore")
@@ -46,7 +48,10 @@ var (
 
 func main() {
 	flag.Parse()
+	os.Exit(run())
+}
 
+func run() int {
 	var logger log.Logger
 	if len(*logfile) > 0 {
 		var err error
@@ -69,7 +74,57 @@ func main() {
 		Logger:        logger,
 		Verbose:       *verbose,
 	}
-	targets[*target].Build(env)
+
+	targetNames := strings.Split(*targets, ",")
+	targets := make([]Target, len(targetNames))
+	for i, targetName := range targetNames {
+		if target, found := buildTargets[targetName]; found {
+			targets[i] = target
+		} else {
+			available := []string{}
+			for t := range buildTargets {
+				available = append(available, t)
+			}
+			logger.Error("Unknown target '%s'. Available targets: %v", targetName, available)
+			return 1
+		}
+	}
+
+	// Kick each of the targets on a separate go-routine.
+	wg := sync.WaitGroup{}
+	errors := make([]error, len(targets))
+	wg.Add(len(targets))
+	for i := range targets {
+		i := i
+		go func() {
+			env.Logger = logger.Fork().Enter(targetNames[i])
+			errors[i] = targets[i].Build(env)
+			wg.Done()
+		}()
+	}
+
+	// Wait for all go-routines to finish.
+	wg.Wait()
+
+	// Check for errors.
+	failed := false
+	for i := range targets {
+		targetName := targetNames[i]
+		if err := errors[i]; err != nil {
+			logger.Error("Target %v failed with error: %v", targetName, err)
+			failed = true
+		} else {
+			if *verbose {
+				logger.Info("Target %v succeeded", targetName)
+			}
+		}
+	}
+
+	if failed {
+		return 1
+	}
+
+	return 0
 }
 
 type Target struct {
@@ -92,68 +147,64 @@ func (t Target) Extend(n Target) Target {
 	}
 }
 
-func (t Target) Build(env build.Environment) {
+func (t Target) Build(env build.Environment) error {
 	rootLogger := env.Logger
-	begin := func(cfg cpp.Config) log.Logger {
+	begin := func(name string) log.Logger {
 		if env.Verbose {
-			rootLogger.Info("Building %s", cfg.Name)
+			rootLogger.Info("Building %s", name)
 		}
-		return rootLogger.Enter(cfg.Name)
+		return rootLogger.Enter(name)
 	}
 
 	// Build gtest into a library
-	env.Logger = begin(t.Gtest)
+	env.Logger = begin(t.Gtest.Name)
 	gtestSource := GtestRoot.Join("src").Glob("gtest-all.cc", "gtest_main.cc")
 	gtestLib, err := cpp.StaticLibrary(gtestSource, t.Gtest, env)
 	if err != nil {
-		env.Logger.Error("%v", err)
-		return
+		return err
 	}
 
 	// Build gmock into a library
-	env.Logger = begin(t.Gmock)
+	env.Logger = begin(t.Gmock.Name)
 	gmockSource := GmockRoot.Join("src").Glob("gmock-all.cc")
 	gmockLib, err := cpp.StaticLibrary(gmockSource, t.Gmock, env)
 	if err != nil {
-		env.Logger.Error("%v", err)
-		return
+		return err
 	}
 
 	// Gather the source files for gapir
 	gapirSource := ReplaydRoot.Join("src").Glob(t.SourceFiles...).Exclude("Main.cpp")
 
 	// Build the gapir static library.
-	env.Logger = begin(t.Gapir)
+	env.Logger = begin(t.Gapir.Name)
 	gapirLib, err := cpp.StaticLibrary(gapirSource, t.Gapir, env)
 	if err != nil {
-		env.Logger.Error("%v", err)
-		return
+		return err
 	}
 
 	// Build gapir tests.
-	env.Logger = begin(t.GapirTests)
+	env.Logger = begin(t.GapirTests.Name)
 	gapirTestSource := ReplaydRoot.Join("test").Glob(t.SourceFiles...).Append(gapirLib, gtestLib, gmockLib)
 	gapirTest, err := cpp.Executable(gapirTestSource, t.GapirTests, env)
 	if err != nil {
-		env.Logger.Error("%v", err)
-		return
+		return err
 	}
 
 	// Build replayd from the gapir static library and Main.cpp.
-	env.Logger = begin(t.Replayd)
+	env.Logger = begin(t.Replayd.Name)
 	replaydSource := build.Files(gapirLib, ReplaydRoot.Join("src", "Main.cpp"))
 	if _, err := cpp.Executable(replaydSource, t.Replayd, env); err != nil {
-		env.Logger.Error("%v", err)
-		return
+		return err
 	}
 
-	if *runtests {
-		env.Logger.Info("Running gapir-tests:")
+	if *runtests && t.Replayd.OS == build.HostOS {
+		env.Logger = begin("Running gapir-tests")
 		if err := gapirTest.Exec(env); err != nil {
-			env.Logger.Error("%v", err)
-			return
+			return err
 		}
 	}
+
+	return nil
 }
 
 func base(toolchain *cpp.Toolchain, os, architecture string) Target {
@@ -219,7 +270,7 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 	}
 }
 
-var targets = map[string]Target{
+var buildTargets = map[string]Target{
 	"linux": base(gcc.GCC, "linux", "x64").Extend(Target{
 		GapirTests: cpp.Config{
 			Libraries: build.FileSet{"dl", "GL", "stdc++", "m", "pthread", "X11", "rt"},
