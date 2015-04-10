@@ -23,8 +23,8 @@ import (
 
 // Settings for the particular SDK/NDK build/platform we're using.
 const (
-	ndkEnvVar  = "ANDROID_NDK"
-	sdkEnvVar  = "ANDROID_SDK"
+	ndkEnvVar  = "ANDROID_NDK_ROOT"
+	sdkEnvVar  = "ANDROID_HOME"
 	javaEnvVar = "JAVA_HOME"
 )
 
