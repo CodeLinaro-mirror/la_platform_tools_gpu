@@ -16,7 +16,7 @@
 
 #include "resource_in_memory_cache.h"
 
-#include <gapic/Log.h>
+#include <gapic/log.h>
 
 #include <string.h>
 
