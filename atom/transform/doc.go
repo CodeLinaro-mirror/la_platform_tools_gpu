@@ -12,7 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go
-
 // Package transform provides implementations of the atom Transformer interface.
 package transform

@@ -1,7 +1,5 @@
 package state
 
-//go:generate codergen -go
-
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
