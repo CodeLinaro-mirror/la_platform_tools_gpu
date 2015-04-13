@@ -20,23 +20,53 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 )
 
+// Namespace represents a mapping of type identifiers to their Class.
+type Namespace struct {
+	parent  *Namespace
+	classes map[binary.ID]binary.Class
+}
+
 var (
-	ids = map[binary.ID]binary.Class{
-		binary.NilClass.ID(): binary.NilClass,
-	}
+	// Global is the default global Namespace object.
+	Global = NewNamespace(nil)
 )
 
-// Add a new type to the binary encoding system.
+// NewNamespace creates a new namespace layered on top of the specified parent.
+func NewNamespace(parent *Namespace) *Namespace {
+	return &Namespace{
+		parent:  parent,
+		classes: map[binary.ID]binary.Class{},
+	}
+}
+
+// Add a new type to the global Namespace.
 func Add(class binary.Class) {
+	Global.Add(class)
+}
+
+// Add a new type to the Namespace.
+func (n Namespace) Add(class binary.Class) {
 	id := class.ID()
-	if old, found := ids[id]; found {
+	if old, found := n.classes[id]; found {
 		panic(fmt.Errorf("Id %x for %s already as type %s", id, class, old))
 	}
-	ids[id] = class
+	n.classes[id] = class
 }
 
 // Lookup looks up a Class by the given type id.
 // If there is no match, it will return nil.
 func Lookup(id binary.ID) binary.Class {
-	return ids[id]
+	return Global.Lookup(id)
+}
+
+// Lookup looks up a Class by the given type id in the Namespace.
+// If there is no match, it will return nil.
+func (n Namespace) Lookup(id binary.ID) binary.Class {
+	if class, found := n.classes[id]; found {
+		return class
+	}
+	if n.parent != nil {
+		return n.parent.Lookup(id)
+	}
+	return nil
 }

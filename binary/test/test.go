@@ -22,6 +22,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/objects"
 )
 
 type TypeA struct {
@@ -112,7 +113,7 @@ func DecodeObject(t *testing.T, entry Entry, d binary.Decoder, reader *bytes.Rea
 	// Reset to beginning so we can verify skip offsets
 	reader.Seek(0, 0)
 	for i, v := range entry.Values {
-		var ty binary.Class = binary.NilClass
+		var ty binary.Class = objects.NilClass
 		if v != nil {
 			ty = v.Class()
 		}
