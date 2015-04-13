@@ -47,7 +47,8 @@ func doSkipmsgCloseChannel(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassmsgCloseChannel) ID() binary.ID { return binaryIDmsgCloseChannel }
+func (*binaryClassmsgCloseChannel) ID() binary.ID      { return binaryIDmsgCloseChannel }
+func (*binaryClassmsgCloseChannel) New() binary.Object { return &msgCloseChannel{} }
 func (*binaryClassmsgCloseChannel) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodemsgCloseChannel(e, obj.(*msgCloseChannel))
 }
@@ -106,7 +107,8 @@ func doSkipmsgData(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassmsgData) ID() binary.ID { return binaryIDmsgData }
+func (*binaryClassmsgData) ID() binary.ID      { return binaryIDmsgData }
+func (*binaryClassmsgData) New() binary.Object { return &msgData{} }
 func (*binaryClassmsgData) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodemsgData(e, obj.(*msgData))
 }
@@ -144,7 +146,8 @@ func doSkipmsgOpenChannel(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassmsgOpenChannel) ID() binary.ID { return binaryIDmsgOpenChannel }
+func (*binaryClassmsgOpenChannel) ID() binary.ID      { return binaryIDmsgOpenChannel }
+func (*binaryClassmsgOpenChannel) New() binary.Object { return &msgOpenChannel{} }
 func (*binaryClassmsgOpenChannel) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodemsgOpenChannel(e, obj.(*msgOpenChannel))
 }

@@ -45,7 +45,8 @@ func doSkiptestRequest(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasstestRequest) ID() binary.ID { return binaryIDtestRequest }
+func (*binaryClasstestRequest) ID() binary.ID      { return binaryIDtestRequest }
+func (*binaryClasstestRequest) New() binary.Object { return &testRequest{} }
 func (*binaryClasstestRequest) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodetestRequest(e, obj.(*testRequest))
 }
@@ -123,7 +124,8 @@ func doSkiptestResource(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasstestResource) ID() binary.ID { return binaryIDtestResource }
+func (*binaryClasstestResource) ID() binary.ID      { return binaryIDtestResource }
+func (*binaryClasstestResource) New() binary.Object { return &testResource{} }
 func (*binaryClasstestResource) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodetestResource(e, obj.(*testResource))
 }

@@ -1316,7 +1316,8 @@ func doSkipBlendState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassBlendState) ID() binary.ID { return binaryIDBlendState }
+func (*binaryClassBlendState) ID() binary.ID      { return binaryIDBlendState }
+func (*binaryClassBlendState) New() binary.Object { return &BlendState{} }
 func (*binaryClassBlendState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeBlendState(e, obj.(*BlendState))
 }
@@ -1385,7 +1386,8 @@ func doSkipBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassBuffer) ID() binary.ID { return binaryIDBuffer }
+func (*binaryClassBuffer) ID() binary.ID      { return binaryIDBuffer }
+func (*binaryClassBuffer) New() binary.Object { return &Buffer{} }
 func (*binaryClassBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeBuffer(e, obj.(*Buffer))
 }
@@ -1454,7 +1456,8 @@ func doSkipClearState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassClearState) ID() binary.ID { return binaryIDClearState }
+func (*binaryClassClearState) ID() binary.ID      { return binaryIDClearState }
+func (*binaryClassClearState) New() binary.Object { return &ClearState{} }
 func (*binaryClassClearState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeClearState(e, obj.(*ClearState))
 }
@@ -1536,7 +1539,8 @@ func doSkipColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassColor) ID() binary.ID { return binaryIDColor }
+func (*binaryClassColor) ID() binary.ID      { return binaryIDColor }
+func (*binaryClassColor) New() binary.Object { return &Color{} }
 func (*binaryClassColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeColor(e, obj.(*Color))
 }
@@ -1616,7 +1620,8 @@ func doSkipCubemapLevel(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCubemapLevel) ID() binary.ID { return binaryIDCubemapLevel }
+func (*binaryClassCubemapLevel) ID() binary.ID      { return binaryIDCubemapLevel }
+func (*binaryClassCubemapLevel) New() binary.Object { return &CubemapLevel{} }
 func (*binaryClassCubemapLevel) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCubemapLevel(e, obj.(*CubemapLevel))
 }
@@ -1672,7 +1677,8 @@ func doSkipEglCreateContext(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEglCreateContext) ID() binary.ID { return binaryIDEglCreateContext }
+func (*binaryClassEglCreateContext) ID() binary.ID      { return binaryIDEglCreateContext }
+func (*binaryClassEglCreateContext) New() binary.Object { return &EglCreateContext{} }
 func (*binaryClassEglCreateContext) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglCreateContext(e, obj.(*EglCreateContext))
 }
@@ -1699,7 +1705,8 @@ func doDecodeEglCreateContext_In(d binary.Decoder, o *EglCreateContext_In) error
 func doSkipEglCreateContext_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassEglCreateContext_In) ID() binary.ID { return binaryIDEglCreateContext_In }
+func (*binaryClassEglCreateContext_In) ID() binary.ID      { return binaryIDEglCreateContext_In }
+func (*binaryClassEglCreateContext_In) New() binary.Object { return &EglCreateContext_In{} }
 func (*binaryClassEglCreateContext_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglCreateContext_In(e, obj.(*EglCreateContext_In))
 }
@@ -1750,7 +1757,8 @@ func doSkipEglCreateContext_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEglCreateContext_Out) ID() binary.ID { return binaryIDEglCreateContext_Out }
+func (*binaryClassEglCreateContext_Out) ID() binary.ID      { return binaryIDEglCreateContext_Out }
+func (*binaryClassEglCreateContext_Out) New() binary.Object { return &EglCreateContext_Out{} }
 func (*binaryClassEglCreateContext_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglCreateContext_Out(e, obj.(*EglCreateContext_Out))
 }
@@ -1808,7 +1816,8 @@ func doSkipEglMakeCurrent(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEglMakeCurrent) ID() binary.ID { return binaryIDEglMakeCurrent }
+func (*binaryClassEglMakeCurrent) ID() binary.ID      { return binaryIDEglMakeCurrent }
+func (*binaryClassEglMakeCurrent) New() binary.Object { return &EglMakeCurrent{} }
 func (*binaryClassEglMakeCurrent) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglMakeCurrent(e, obj.(*EglMakeCurrent))
 }
@@ -1846,7 +1855,8 @@ func doSkipEglMakeCurrent_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEglMakeCurrent_In) ID() binary.ID { return binaryIDEglMakeCurrent_In }
+func (*binaryClassEglMakeCurrent_In) ID() binary.ID      { return binaryIDEglMakeCurrent_In }
+func (*binaryClassEglMakeCurrent_In) New() binary.Object { return &EglMakeCurrent_In{} }
 func (*binaryClassEglMakeCurrent_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglMakeCurrent_In(e, obj.(*EglMakeCurrent_In))
 }
@@ -1873,7 +1883,8 @@ func doDecodeEglMakeCurrent_Out(d binary.Decoder, o *EglMakeCurrent_Out) error {
 func doSkipEglMakeCurrent_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassEglMakeCurrent_Out) ID() binary.ID { return binaryIDEglMakeCurrent_Out }
+func (*binaryClassEglMakeCurrent_Out) ID() binary.ID      { return binaryIDEglMakeCurrent_Out }
+func (*binaryClassEglMakeCurrent_Out) New() binary.Object { return &EglMakeCurrent_Out{} }
 func (*binaryClassEglMakeCurrent_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglMakeCurrent_Out(e, obj.(*EglMakeCurrent_Out))
 }
@@ -1929,7 +1940,8 @@ func doSkipEglSwapBuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEglSwapBuffers) ID() binary.ID { return binaryIDEglSwapBuffers }
+func (*binaryClassEglSwapBuffers) ID() binary.ID      { return binaryIDEglSwapBuffers }
+func (*binaryClassEglSwapBuffers) New() binary.Object { return &EglSwapBuffers{} }
 func (*binaryClassEglSwapBuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglSwapBuffers(e, obj.(*EglSwapBuffers))
 }
@@ -1956,7 +1968,8 @@ func doDecodeEglSwapBuffers_In(d binary.Decoder, o *EglSwapBuffers_In) error {
 func doSkipEglSwapBuffers_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassEglSwapBuffers_In) ID() binary.ID { return binaryIDEglSwapBuffers_In }
+func (*binaryClassEglSwapBuffers_In) ID() binary.ID      { return binaryIDEglSwapBuffers_In }
+func (*binaryClassEglSwapBuffers_In) New() binary.Object { return &EglSwapBuffers_In{} }
 func (*binaryClassEglSwapBuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglSwapBuffers_In(e, obj.(*EglSwapBuffers_In))
 }
@@ -1983,7 +1996,8 @@ func doDecodeEglSwapBuffers_Out(d binary.Decoder, o *EglSwapBuffers_Out) error {
 func doSkipEglSwapBuffers_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassEglSwapBuffers_Out) ID() binary.ID { return binaryIDEglSwapBuffers_Out }
+func (*binaryClassEglSwapBuffers_Out) ID() binary.ID      { return binaryIDEglSwapBuffers_Out }
+func (*binaryClassEglSwapBuffers_Out) New() binary.Object { return &EglSwapBuffers_Out{} }
 func (*binaryClassEglSwapBuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEglSwapBuffers_Out(e, obj.(*EglSwapBuffers_Out))
 }
@@ -2039,7 +2053,8 @@ func doSkipFlushPostBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassFlushPostBuffer) ID() binary.ID { return binaryIDFlushPostBuffer }
+func (*binaryClassFlushPostBuffer) ID() binary.ID      { return binaryIDFlushPostBuffer }
+func (*binaryClassFlushPostBuffer) New() binary.Object { return &FlushPostBuffer{} }
 func (*binaryClassFlushPostBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFlushPostBuffer(e, obj.(*FlushPostBuffer))
 }
@@ -2066,7 +2081,8 @@ func doDecodeFlushPostBuffer_In(d binary.Decoder, o *FlushPostBuffer_In) error {
 func doSkipFlushPostBuffer_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassFlushPostBuffer_In) ID() binary.ID { return binaryIDFlushPostBuffer_In }
+func (*binaryClassFlushPostBuffer_In) ID() binary.ID      { return binaryIDFlushPostBuffer_In }
+func (*binaryClassFlushPostBuffer_In) New() binary.Object { return &FlushPostBuffer_In{} }
 func (*binaryClassFlushPostBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFlushPostBuffer_In(e, obj.(*FlushPostBuffer_In))
 }
@@ -2093,7 +2109,8 @@ func doDecodeFlushPostBuffer_Out(d binary.Decoder, o *FlushPostBuffer_Out) error
 func doSkipFlushPostBuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassFlushPostBuffer_Out) ID() binary.ID { return binaryIDFlushPostBuffer_Out }
+func (*binaryClassFlushPostBuffer_Out) ID() binary.ID      { return binaryIDFlushPostBuffer_Out }
+func (*binaryClassFlushPostBuffer_Out) New() binary.Object { return &FlushPostBuffer_Out{} }
 func (*binaryClassFlushPostBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFlushPostBuffer_Out(e, obj.(*FlushPostBuffer_Out))
 }
@@ -2175,7 +2192,8 @@ func doSkipFramebuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassFramebuffer) ID() binary.ID { return binaryIDFramebuffer }
+func (*binaryClassFramebuffer) ID() binary.ID      { return binaryIDFramebuffer }
+func (*binaryClassFramebuffer) New() binary.Object { return &Framebuffer{} }
 func (*binaryClassFramebuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFramebuffer(e, obj.(*Framebuffer))
 }
@@ -2257,7 +2275,8 @@ func doSkipFramebufferAttachmentInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassFramebufferAttachmentInfo) ID() binary.ID { return binaryIDFramebufferAttachmentInfo }
+func (*binaryClassFramebufferAttachmentInfo) ID() binary.ID      { return binaryIDFramebufferAttachmentInfo }
+func (*binaryClassFramebufferAttachmentInfo) New() binary.Object { return &FramebufferAttachmentInfo{} }
 func (*binaryClassFramebufferAttachmentInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFramebufferAttachmentInfo(e, obj.(*FramebufferAttachmentInfo))
 }
@@ -2315,7 +2334,8 @@ func doSkipGlActiveTexture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlActiveTexture) ID() binary.ID { return binaryIDGlActiveTexture }
+func (*binaryClassGlActiveTexture) ID() binary.ID      { return binaryIDGlActiveTexture }
+func (*binaryClassGlActiveTexture) New() binary.Object { return &GlActiveTexture{} }
 func (*binaryClassGlActiveTexture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlActiveTexture(e, obj.(*GlActiveTexture))
 }
@@ -2353,7 +2373,8 @@ func doSkipGlActiveTexture_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlActiveTexture_In) ID() binary.ID { return binaryIDGlActiveTexture_In }
+func (*binaryClassGlActiveTexture_In) ID() binary.ID      { return binaryIDGlActiveTexture_In }
+func (*binaryClassGlActiveTexture_In) New() binary.Object { return &GlActiveTexture_In{} }
 func (*binaryClassGlActiveTexture_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlActiveTexture_In(e, obj.(*GlActiveTexture_In))
 }
@@ -2380,7 +2401,8 @@ func doDecodeGlActiveTexture_Out(d binary.Decoder, o *GlActiveTexture_Out) error
 func doSkipGlActiveTexture_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlActiveTexture_Out) ID() binary.ID { return binaryIDGlActiveTexture_Out }
+func (*binaryClassGlActiveTexture_Out) ID() binary.ID      { return binaryIDGlActiveTexture_Out }
+func (*binaryClassGlActiveTexture_Out) New() binary.Object { return &GlActiveTexture_Out{} }
 func (*binaryClassGlActiveTexture_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlActiveTexture_Out(e, obj.(*GlActiveTexture_Out))
 }
@@ -2438,7 +2460,8 @@ func doSkipGlAttachShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlAttachShader) ID() binary.ID { return binaryIDGlAttachShader }
+func (*binaryClassGlAttachShader) ID() binary.ID      { return binaryIDGlAttachShader }
+func (*binaryClassGlAttachShader) New() binary.Object { return &GlAttachShader{} }
 func (*binaryClassGlAttachShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlAttachShader(e, obj.(*GlAttachShader))
 }
@@ -2487,7 +2510,8 @@ func doSkipGlAttachShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlAttachShader_In) ID() binary.ID { return binaryIDGlAttachShader_In }
+func (*binaryClassGlAttachShader_In) ID() binary.ID      { return binaryIDGlAttachShader_In }
+func (*binaryClassGlAttachShader_In) New() binary.Object { return &GlAttachShader_In{} }
 func (*binaryClassGlAttachShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlAttachShader_In(e, obj.(*GlAttachShader_In))
 }
@@ -2514,7 +2538,8 @@ func doDecodeGlAttachShader_Out(d binary.Decoder, o *GlAttachShader_Out) error {
 func doSkipGlAttachShader_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlAttachShader_Out) ID() binary.ID { return binaryIDGlAttachShader_Out }
+func (*binaryClassGlAttachShader_Out) ID() binary.ID      { return binaryIDGlAttachShader_Out }
+func (*binaryClassGlAttachShader_Out) New() binary.Object { return &GlAttachShader_Out{} }
 func (*binaryClassGlAttachShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlAttachShader_Out(e, obj.(*GlAttachShader_Out))
 }
@@ -2570,7 +2595,8 @@ func doSkipGlBeginQuery(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBeginQuery) ID() binary.ID { return binaryIDGlBeginQuery }
+func (*binaryClassGlBeginQuery) ID() binary.ID      { return binaryIDGlBeginQuery }
+func (*binaryClassGlBeginQuery) New() binary.Object { return &GlBeginQuery{} }
 func (*binaryClassGlBeginQuery) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQuery(e, obj.(*GlBeginQuery))
 }
@@ -2626,7 +2652,8 @@ func doSkipGlBeginQueryEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBeginQueryEXT) ID() binary.ID { return binaryIDGlBeginQueryEXT }
+func (*binaryClassGlBeginQueryEXT) ID() binary.ID      { return binaryIDGlBeginQueryEXT }
+func (*binaryClassGlBeginQueryEXT) New() binary.Object { return &GlBeginQueryEXT{} }
 func (*binaryClassGlBeginQueryEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQueryEXT(e, obj.(*GlBeginQueryEXT))
 }
@@ -2675,7 +2702,8 @@ func doSkipGlBeginQueryEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBeginQueryEXT_In) ID() binary.ID { return binaryIDGlBeginQueryEXT_In }
+func (*binaryClassGlBeginQueryEXT_In) ID() binary.ID      { return binaryIDGlBeginQueryEXT_In }
+func (*binaryClassGlBeginQueryEXT_In) New() binary.Object { return &GlBeginQueryEXT_In{} }
 func (*binaryClassGlBeginQueryEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQueryEXT_In(e, obj.(*GlBeginQueryEXT_In))
 }
@@ -2702,7 +2730,8 @@ func doDecodeGlBeginQueryEXT_Out(d binary.Decoder, o *GlBeginQueryEXT_Out) error
 func doSkipGlBeginQueryEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBeginQueryEXT_Out) ID() binary.ID { return binaryIDGlBeginQueryEXT_Out }
+func (*binaryClassGlBeginQueryEXT_Out) ID() binary.ID      { return binaryIDGlBeginQueryEXT_Out }
+func (*binaryClassGlBeginQueryEXT_Out) New() binary.Object { return &GlBeginQueryEXT_Out{} }
 func (*binaryClassGlBeginQueryEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQueryEXT_Out(e, obj.(*GlBeginQueryEXT_Out))
 }
@@ -2753,7 +2782,8 @@ func doSkipGlBeginQuery_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBeginQuery_In) ID() binary.ID { return binaryIDGlBeginQuery_In }
+func (*binaryClassGlBeginQuery_In) ID() binary.ID      { return binaryIDGlBeginQuery_In }
+func (*binaryClassGlBeginQuery_In) New() binary.Object { return &GlBeginQuery_In{} }
 func (*binaryClassGlBeginQuery_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQuery_In(e, obj.(*GlBeginQuery_In))
 }
@@ -2780,7 +2810,8 @@ func doDecodeGlBeginQuery_Out(d binary.Decoder, o *GlBeginQuery_Out) error {
 func doSkipGlBeginQuery_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBeginQuery_Out) ID() binary.ID { return binaryIDGlBeginQuery_Out }
+func (*binaryClassGlBeginQuery_Out) ID() binary.ID      { return binaryIDGlBeginQuery_Out }
+func (*binaryClassGlBeginQuery_Out) New() binary.Object { return &GlBeginQuery_Out{} }
 func (*binaryClassGlBeginQuery_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBeginQuery_Out(e, obj.(*GlBeginQuery_Out))
 }
@@ -2836,7 +2867,8 @@ func doSkipGlBindAttribLocation(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindAttribLocation) ID() binary.ID { return binaryIDGlBindAttribLocation }
+func (*binaryClassGlBindAttribLocation) ID() binary.ID      { return binaryIDGlBindAttribLocation }
+func (*binaryClassGlBindAttribLocation) New() binary.Object { return &GlBindAttribLocation{} }
 func (*binaryClassGlBindAttribLocation) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindAttribLocation(e, obj.(*GlBindAttribLocation))
 }
@@ -2898,7 +2930,8 @@ func doSkipGlBindAttribLocation_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindAttribLocation_In) ID() binary.ID { return binaryIDGlBindAttribLocation_In }
+func (*binaryClassGlBindAttribLocation_In) ID() binary.ID      { return binaryIDGlBindAttribLocation_In }
+func (*binaryClassGlBindAttribLocation_In) New() binary.Object { return &GlBindAttribLocation_In{} }
 func (*binaryClassGlBindAttribLocation_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindAttribLocation_In(e, obj.(*GlBindAttribLocation_In))
 }
@@ -2927,7 +2960,8 @@ func doDecodeGlBindAttribLocation_Out(d binary.Decoder, o *GlBindAttribLocation_
 func doSkipGlBindAttribLocation_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindAttribLocation_Out) ID() binary.ID { return binaryIDGlBindAttribLocation_Out }
+func (*binaryClassGlBindAttribLocation_Out) ID() binary.ID      { return binaryIDGlBindAttribLocation_Out }
+func (*binaryClassGlBindAttribLocation_Out) New() binary.Object { return &GlBindAttribLocation_Out{} }
 func (*binaryClassGlBindAttribLocation_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindAttribLocation_Out(e, obj.(*GlBindAttribLocation_Out))
 }
@@ -2985,7 +3019,8 @@ func doSkipGlBindBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindBuffer) ID() binary.ID { return binaryIDGlBindBuffer }
+func (*binaryClassGlBindBuffer) ID() binary.ID      { return binaryIDGlBindBuffer }
+func (*binaryClassGlBindBuffer) New() binary.Object { return &GlBindBuffer{} }
 func (*binaryClassGlBindBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindBuffer(e, obj.(*GlBindBuffer))
 }
@@ -3034,7 +3069,8 @@ func doSkipGlBindBuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindBuffer_In) ID() binary.ID { return binaryIDGlBindBuffer_In }
+func (*binaryClassGlBindBuffer_In) ID() binary.ID      { return binaryIDGlBindBuffer_In }
+func (*binaryClassGlBindBuffer_In) New() binary.Object { return &GlBindBuffer_In{} }
 func (*binaryClassGlBindBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindBuffer_In(e, obj.(*GlBindBuffer_In))
 }
@@ -3061,7 +3097,8 @@ func doDecodeGlBindBuffer_Out(d binary.Decoder, o *GlBindBuffer_Out) error {
 func doSkipGlBindBuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindBuffer_Out) ID() binary.ID { return binaryIDGlBindBuffer_Out }
+func (*binaryClassGlBindBuffer_Out) ID() binary.ID      { return binaryIDGlBindBuffer_Out }
+func (*binaryClassGlBindBuffer_Out) New() binary.Object { return &GlBindBuffer_Out{} }
 func (*binaryClassGlBindBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindBuffer_Out(e, obj.(*GlBindBuffer_Out))
 }
@@ -3117,7 +3154,8 @@ func doSkipGlBindFramebuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindFramebuffer) ID() binary.ID { return binaryIDGlBindFramebuffer }
+func (*binaryClassGlBindFramebuffer) ID() binary.ID      { return binaryIDGlBindFramebuffer }
+func (*binaryClassGlBindFramebuffer) New() binary.Object { return &GlBindFramebuffer{} }
 func (*binaryClassGlBindFramebuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindFramebuffer(e, obj.(*GlBindFramebuffer))
 }
@@ -3166,7 +3204,8 @@ func doSkipGlBindFramebuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindFramebuffer_In) ID() binary.ID { return binaryIDGlBindFramebuffer_In }
+func (*binaryClassGlBindFramebuffer_In) ID() binary.ID      { return binaryIDGlBindFramebuffer_In }
+func (*binaryClassGlBindFramebuffer_In) New() binary.Object { return &GlBindFramebuffer_In{} }
 func (*binaryClassGlBindFramebuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindFramebuffer_In(e, obj.(*GlBindFramebuffer_In))
 }
@@ -3195,7 +3234,8 @@ func doDecodeGlBindFramebuffer_Out(d binary.Decoder, o *GlBindFramebuffer_Out) e
 func doSkipGlBindFramebuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindFramebuffer_Out) ID() binary.ID { return binaryIDGlBindFramebuffer_Out }
+func (*binaryClassGlBindFramebuffer_Out) ID() binary.ID      { return binaryIDGlBindFramebuffer_Out }
+func (*binaryClassGlBindFramebuffer_Out) New() binary.Object { return &GlBindFramebuffer_Out{} }
 func (*binaryClassGlBindFramebuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindFramebuffer_Out(e, obj.(*GlBindFramebuffer_Out))
 }
@@ -3253,7 +3293,8 @@ func doSkipGlBindRenderbuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindRenderbuffer) ID() binary.ID { return binaryIDGlBindRenderbuffer }
+func (*binaryClassGlBindRenderbuffer) ID() binary.ID      { return binaryIDGlBindRenderbuffer }
+func (*binaryClassGlBindRenderbuffer) New() binary.Object { return &GlBindRenderbuffer{} }
 func (*binaryClassGlBindRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindRenderbuffer(e, obj.(*GlBindRenderbuffer))
 }
@@ -3302,7 +3343,8 @@ func doSkipGlBindRenderbuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindRenderbuffer_In) ID() binary.ID { return binaryIDGlBindRenderbuffer_In }
+func (*binaryClassGlBindRenderbuffer_In) ID() binary.ID      { return binaryIDGlBindRenderbuffer_In }
+func (*binaryClassGlBindRenderbuffer_In) New() binary.Object { return &GlBindRenderbuffer_In{} }
 func (*binaryClassGlBindRenderbuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindRenderbuffer_In(e, obj.(*GlBindRenderbuffer_In))
 }
@@ -3331,7 +3373,8 @@ func doDecodeGlBindRenderbuffer_Out(d binary.Decoder, o *GlBindRenderbuffer_Out)
 func doSkipGlBindRenderbuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindRenderbuffer_Out) ID() binary.ID { return binaryIDGlBindRenderbuffer_Out }
+func (*binaryClassGlBindRenderbuffer_Out) ID() binary.ID      { return binaryIDGlBindRenderbuffer_Out }
+func (*binaryClassGlBindRenderbuffer_Out) New() binary.Object { return &GlBindRenderbuffer_Out{} }
 func (*binaryClassGlBindRenderbuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindRenderbuffer_Out(e, obj.(*GlBindRenderbuffer_Out))
 }
@@ -3389,7 +3432,8 @@ func doSkipGlBindTexture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindTexture) ID() binary.ID { return binaryIDGlBindTexture }
+func (*binaryClassGlBindTexture) ID() binary.ID      { return binaryIDGlBindTexture }
+func (*binaryClassGlBindTexture) New() binary.Object { return &GlBindTexture{} }
 func (*binaryClassGlBindTexture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindTexture(e, obj.(*GlBindTexture))
 }
@@ -3438,7 +3482,8 @@ func doSkipGlBindTexture_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindTexture_In) ID() binary.ID { return binaryIDGlBindTexture_In }
+func (*binaryClassGlBindTexture_In) ID() binary.ID      { return binaryIDGlBindTexture_In }
+func (*binaryClassGlBindTexture_In) New() binary.Object { return &GlBindTexture_In{} }
 func (*binaryClassGlBindTexture_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindTexture_In(e, obj.(*GlBindTexture_In))
 }
@@ -3465,7 +3510,8 @@ func doDecodeGlBindTexture_Out(d binary.Decoder, o *GlBindTexture_Out) error {
 func doSkipGlBindTexture_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindTexture_Out) ID() binary.ID { return binaryIDGlBindTexture_Out }
+func (*binaryClassGlBindTexture_Out) ID() binary.ID      { return binaryIDGlBindTexture_Out }
+func (*binaryClassGlBindTexture_Out) New() binary.Object { return &GlBindTexture_Out{} }
 func (*binaryClassGlBindTexture_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindTexture_Out(e, obj.(*GlBindTexture_Out))
 }
@@ -3521,7 +3567,8 @@ func doSkipGlBindVertexArrayOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindVertexArrayOES) ID() binary.ID { return binaryIDGlBindVertexArrayOES }
+func (*binaryClassGlBindVertexArrayOES) ID() binary.ID      { return binaryIDGlBindVertexArrayOES }
+func (*binaryClassGlBindVertexArrayOES) New() binary.Object { return &GlBindVertexArrayOES{} }
 func (*binaryClassGlBindVertexArrayOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindVertexArrayOES(e, obj.(*GlBindVertexArrayOES))
 }
@@ -3561,7 +3608,8 @@ func doSkipGlBindVertexArrayOES_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBindVertexArrayOES_In) ID() binary.ID { return binaryIDGlBindVertexArrayOES_In }
+func (*binaryClassGlBindVertexArrayOES_In) ID() binary.ID      { return binaryIDGlBindVertexArrayOES_In }
+func (*binaryClassGlBindVertexArrayOES_In) New() binary.Object { return &GlBindVertexArrayOES_In{} }
 func (*binaryClassGlBindVertexArrayOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindVertexArrayOES_In(e, obj.(*GlBindVertexArrayOES_In))
 }
@@ -3590,7 +3638,8 @@ func doDecodeGlBindVertexArrayOES_Out(d binary.Decoder, o *GlBindVertexArrayOES_
 func doSkipGlBindVertexArrayOES_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBindVertexArrayOES_Out) ID() binary.ID { return binaryIDGlBindVertexArrayOES_Out }
+func (*binaryClassGlBindVertexArrayOES_Out) ID() binary.ID      { return binaryIDGlBindVertexArrayOES_Out }
+func (*binaryClassGlBindVertexArrayOES_Out) New() binary.Object { return &GlBindVertexArrayOES_Out{} }
 func (*binaryClassGlBindVertexArrayOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBindVertexArrayOES_Out(e, obj.(*GlBindVertexArrayOES_Out))
 }
@@ -3648,7 +3697,8 @@ func doSkipGlBlendColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendColor) ID() binary.ID { return binaryIDGlBlendColor }
+func (*binaryClassGlBlendColor) ID() binary.ID      { return binaryIDGlBlendColor }
+func (*binaryClassGlBlendColor) New() binary.Object { return &GlBlendColor{} }
 func (*binaryClassGlBlendColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendColor(e, obj.(*GlBlendColor))
 }
@@ -3719,7 +3769,8 @@ func doSkipGlBlendColor_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendColor_In) ID() binary.ID { return binaryIDGlBlendColor_In }
+func (*binaryClassGlBlendColor_In) ID() binary.ID      { return binaryIDGlBlendColor_In }
+func (*binaryClassGlBlendColor_In) New() binary.Object { return &GlBlendColor_In{} }
 func (*binaryClassGlBlendColor_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendColor_In(e, obj.(*GlBlendColor_In))
 }
@@ -3746,7 +3797,8 @@ func doDecodeGlBlendColor_Out(d binary.Decoder, o *GlBlendColor_Out) error {
 func doSkipGlBlendColor_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBlendColor_Out) ID() binary.ID { return binaryIDGlBlendColor_Out }
+func (*binaryClassGlBlendColor_Out) ID() binary.ID      { return binaryIDGlBlendColor_Out }
+func (*binaryClassGlBlendColor_Out) New() binary.Object { return &GlBlendColor_Out{} }
 func (*binaryClassGlBlendColor_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendColor_Out(e, obj.(*GlBlendColor_Out))
 }
@@ -3802,7 +3854,8 @@ func doSkipGlBlendEquation(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendEquation) ID() binary.ID { return binaryIDGlBlendEquation }
+func (*binaryClassGlBlendEquation) ID() binary.ID      { return binaryIDGlBlendEquation }
+func (*binaryClassGlBlendEquation) New() binary.Object { return &GlBlendEquation{} }
 func (*binaryClassGlBlendEquation) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquation(e, obj.(*GlBlendEquation))
 }
@@ -3858,7 +3911,8 @@ func doSkipGlBlendEquationSeparate(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendEquationSeparate) ID() binary.ID { return binaryIDGlBlendEquationSeparate }
+func (*binaryClassGlBlendEquationSeparate) ID() binary.ID      { return binaryIDGlBlendEquationSeparate }
+func (*binaryClassGlBlendEquationSeparate) New() binary.Object { return &GlBlendEquationSeparate{} }
 func (*binaryClassGlBlendEquationSeparate) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquationSeparate(e, obj.(*GlBlendEquationSeparate))
 }
@@ -3912,6 +3966,9 @@ func doSkipGlBlendEquationSeparate_In(d binary.Decoder) error {
 func (*binaryClassGlBlendEquationSeparate_In) ID() binary.ID {
 	return binaryIDGlBlendEquationSeparate_In
 }
+func (*binaryClassGlBlendEquationSeparate_In) New() binary.Object {
+	return &GlBlendEquationSeparate_In{}
+}
 func (*binaryClassGlBlendEquationSeparate_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquationSeparate_In(e, obj.(*GlBlendEquationSeparate_In))
 }
@@ -3942,6 +3999,9 @@ func doSkipGlBlendEquationSeparate_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlBlendEquationSeparate_Out) ID() binary.ID {
 	return binaryIDGlBlendEquationSeparate_Out
+}
+func (*binaryClassGlBlendEquationSeparate_Out) New() binary.Object {
+	return &GlBlendEquationSeparate_Out{}
 }
 func (*binaryClassGlBlendEquationSeparate_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquationSeparate_Out(e, obj.(*GlBlendEquationSeparate_Out))
@@ -3982,7 +4042,8 @@ func doSkipGlBlendEquation_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendEquation_In) ID() binary.ID { return binaryIDGlBlendEquation_In }
+func (*binaryClassGlBlendEquation_In) ID() binary.ID      { return binaryIDGlBlendEquation_In }
+func (*binaryClassGlBlendEquation_In) New() binary.Object { return &GlBlendEquation_In{} }
 func (*binaryClassGlBlendEquation_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquation_In(e, obj.(*GlBlendEquation_In))
 }
@@ -4009,7 +4070,8 @@ func doDecodeGlBlendEquation_Out(d binary.Decoder, o *GlBlendEquation_Out) error
 func doSkipGlBlendEquation_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBlendEquation_Out) ID() binary.ID { return binaryIDGlBlendEquation_Out }
+func (*binaryClassGlBlendEquation_Out) ID() binary.ID      { return binaryIDGlBlendEquation_Out }
+func (*binaryClassGlBlendEquation_Out) New() binary.Object { return &GlBlendEquation_Out{} }
 func (*binaryClassGlBlendEquation_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendEquation_Out(e, obj.(*GlBlendEquation_Out))
 }
@@ -4067,7 +4129,8 @@ func doSkipGlBlendFunc(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendFunc) ID() binary.ID { return binaryIDGlBlendFunc }
+func (*binaryClassGlBlendFunc) ID() binary.ID      { return binaryIDGlBlendFunc }
+func (*binaryClassGlBlendFunc) New() binary.Object { return &GlBlendFunc{} }
 func (*binaryClassGlBlendFunc) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFunc(e, obj.(*GlBlendFunc))
 }
@@ -4123,7 +4186,8 @@ func doSkipGlBlendFuncSeparate(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendFuncSeparate) ID() binary.ID { return binaryIDGlBlendFuncSeparate }
+func (*binaryClassGlBlendFuncSeparate) ID() binary.ID      { return binaryIDGlBlendFuncSeparate }
+func (*binaryClassGlBlendFuncSeparate) New() binary.Object { return &GlBlendFuncSeparate{} }
 func (*binaryClassGlBlendFuncSeparate) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFuncSeparate(e, obj.(*GlBlendFuncSeparate))
 }
@@ -4196,7 +4260,8 @@ func doSkipGlBlendFuncSeparate_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendFuncSeparate_In) ID() binary.ID { return binaryIDGlBlendFuncSeparate_In }
+func (*binaryClassGlBlendFuncSeparate_In) ID() binary.ID      { return binaryIDGlBlendFuncSeparate_In }
+func (*binaryClassGlBlendFuncSeparate_In) New() binary.Object { return &GlBlendFuncSeparate_In{} }
 func (*binaryClassGlBlendFuncSeparate_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFuncSeparate_In(e, obj.(*GlBlendFuncSeparate_In))
 }
@@ -4225,7 +4290,8 @@ func doDecodeGlBlendFuncSeparate_Out(d binary.Decoder, o *GlBlendFuncSeparate_Ou
 func doSkipGlBlendFuncSeparate_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBlendFuncSeparate_Out) ID() binary.ID { return binaryIDGlBlendFuncSeparate_Out }
+func (*binaryClassGlBlendFuncSeparate_Out) ID() binary.ID      { return binaryIDGlBlendFuncSeparate_Out }
+func (*binaryClassGlBlendFuncSeparate_Out) New() binary.Object { return &GlBlendFuncSeparate_Out{} }
 func (*binaryClassGlBlendFuncSeparate_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFuncSeparate_Out(e, obj.(*GlBlendFuncSeparate_Out))
 }
@@ -4276,7 +4342,8 @@ func doSkipGlBlendFunc_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlendFunc_In) ID() binary.ID { return binaryIDGlBlendFunc_In }
+func (*binaryClassGlBlendFunc_In) ID() binary.ID      { return binaryIDGlBlendFunc_In }
+func (*binaryClassGlBlendFunc_In) New() binary.Object { return &GlBlendFunc_In{} }
 func (*binaryClassGlBlendFunc_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFunc_In(e, obj.(*GlBlendFunc_In))
 }
@@ -4303,7 +4370,8 @@ func doDecodeGlBlendFunc_Out(d binary.Decoder, o *GlBlendFunc_Out) error {
 func doSkipGlBlendFunc_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBlendFunc_Out) ID() binary.ID { return binaryIDGlBlendFunc_Out }
+func (*binaryClassGlBlendFunc_Out) ID() binary.ID      { return binaryIDGlBlendFunc_Out }
+func (*binaryClassGlBlendFunc_Out) New() binary.Object { return &GlBlendFunc_Out{} }
 func (*binaryClassGlBlendFunc_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlendFunc_Out(e, obj.(*GlBlendFunc_Out))
 }
@@ -4359,7 +4427,8 @@ func doSkipGlBlitFramebuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlitFramebuffer) ID() binary.ID { return binaryIDGlBlitFramebuffer }
+func (*binaryClassGlBlitFramebuffer) ID() binary.ID      { return binaryIDGlBlitFramebuffer }
+func (*binaryClassGlBlitFramebuffer) New() binary.Object { return &GlBlitFramebuffer{} }
 func (*binaryClassGlBlitFramebuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlitFramebuffer(e, obj.(*GlBlitFramebuffer))
 }
@@ -4496,7 +4565,8 @@ func doSkipGlBlitFramebuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBlitFramebuffer_In) ID() binary.ID { return binaryIDGlBlitFramebuffer_In }
+func (*binaryClassGlBlitFramebuffer_In) ID() binary.ID      { return binaryIDGlBlitFramebuffer_In }
+func (*binaryClassGlBlitFramebuffer_In) New() binary.Object { return &GlBlitFramebuffer_In{} }
 func (*binaryClassGlBlitFramebuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlitFramebuffer_In(e, obj.(*GlBlitFramebuffer_In))
 }
@@ -4525,7 +4595,8 @@ func doDecodeGlBlitFramebuffer_Out(d binary.Decoder, o *GlBlitFramebuffer_Out) e
 func doSkipGlBlitFramebuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBlitFramebuffer_Out) ID() binary.ID { return binaryIDGlBlitFramebuffer_Out }
+func (*binaryClassGlBlitFramebuffer_Out) ID() binary.ID      { return binaryIDGlBlitFramebuffer_Out }
+func (*binaryClassGlBlitFramebuffer_Out) New() binary.Object { return &GlBlitFramebuffer_Out{} }
 func (*binaryClassGlBlitFramebuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBlitFramebuffer_Out(e, obj.(*GlBlitFramebuffer_Out))
 }
@@ -4583,7 +4654,8 @@ func doSkipGlBufferData(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBufferData) ID() binary.ID { return binaryIDGlBufferData }
+func (*binaryClassGlBufferData) ID() binary.ID      { return binaryIDGlBufferData }
+func (*binaryClassGlBufferData) New() binary.Object { return &GlBufferData{} }
 func (*binaryClassGlBufferData) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferData(e, obj.(*GlBufferData))
 }
@@ -4654,7 +4726,8 @@ func doSkipGlBufferData_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBufferData_In) ID() binary.ID { return binaryIDGlBufferData_In }
+func (*binaryClassGlBufferData_In) ID() binary.ID      { return binaryIDGlBufferData_In }
+func (*binaryClassGlBufferData_In) New() binary.Object { return &GlBufferData_In{} }
 func (*binaryClassGlBufferData_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferData_In(e, obj.(*GlBufferData_In))
 }
@@ -4681,7 +4754,8 @@ func doDecodeGlBufferData_Out(d binary.Decoder, o *GlBufferData_Out) error {
 func doSkipGlBufferData_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBufferData_Out) ID() binary.ID { return binaryIDGlBufferData_Out }
+func (*binaryClassGlBufferData_Out) ID() binary.ID      { return binaryIDGlBufferData_Out }
+func (*binaryClassGlBufferData_Out) New() binary.Object { return &GlBufferData_Out{} }
 func (*binaryClassGlBufferData_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferData_Out(e, obj.(*GlBufferData_Out))
 }
@@ -4737,7 +4811,8 @@ func doSkipGlBufferSubData(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBufferSubData) ID() binary.ID { return binaryIDGlBufferSubData }
+func (*binaryClassGlBufferSubData) ID() binary.ID      { return binaryIDGlBufferSubData }
+func (*binaryClassGlBufferSubData) New() binary.Object { return &GlBufferSubData{} }
 func (*binaryClassGlBufferSubData) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferSubData(e, obj.(*GlBufferSubData))
 }
@@ -4808,7 +4883,8 @@ func doSkipGlBufferSubData_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlBufferSubData_In) ID() binary.ID { return binaryIDGlBufferSubData_In }
+func (*binaryClassGlBufferSubData_In) ID() binary.ID      { return binaryIDGlBufferSubData_In }
+func (*binaryClassGlBufferSubData_In) New() binary.Object { return &GlBufferSubData_In{} }
 func (*binaryClassGlBufferSubData_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferSubData_In(e, obj.(*GlBufferSubData_In))
 }
@@ -4835,7 +4911,8 @@ func doDecodeGlBufferSubData_Out(d binary.Decoder, o *GlBufferSubData_Out) error
 func doSkipGlBufferSubData_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlBufferSubData_Out) ID() binary.ID { return binaryIDGlBufferSubData_Out }
+func (*binaryClassGlBufferSubData_Out) ID() binary.ID      { return binaryIDGlBufferSubData_Out }
+func (*binaryClassGlBufferSubData_Out) New() binary.Object { return &GlBufferSubData_Out{} }
 func (*binaryClassGlBufferSubData_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlBufferSubData_Out(e, obj.(*GlBufferSubData_Out))
 }
@@ -4893,7 +4970,8 @@ func doSkipGlCheckFramebufferStatus(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCheckFramebufferStatus) ID() binary.ID { return binaryIDGlCheckFramebufferStatus }
+func (*binaryClassGlCheckFramebufferStatus) ID() binary.ID      { return binaryIDGlCheckFramebufferStatus }
+func (*binaryClassGlCheckFramebufferStatus) New() binary.Object { return &GlCheckFramebufferStatus{} }
 func (*binaryClassGlCheckFramebufferStatus) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCheckFramebufferStatus(e, obj.(*GlCheckFramebufferStatus))
 }
@@ -4936,6 +5014,9 @@ func doSkipGlCheckFramebufferStatus_In(d binary.Decoder) error {
 func (*binaryClassGlCheckFramebufferStatus_In) ID() binary.ID {
 	return binaryIDGlCheckFramebufferStatus_In
 }
+func (*binaryClassGlCheckFramebufferStatus_In) New() binary.Object {
+	return &GlCheckFramebufferStatus_In{}
+}
 func (*binaryClassGlCheckFramebufferStatus_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCheckFramebufferStatus_In(e, obj.(*GlCheckFramebufferStatus_In))
 }
@@ -4977,6 +5058,9 @@ func doSkipGlCheckFramebufferStatus_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlCheckFramebufferStatus_Out) ID() binary.ID {
 	return binaryIDGlCheckFramebufferStatus_Out
+}
+func (*binaryClassGlCheckFramebufferStatus_Out) New() binary.Object {
+	return &GlCheckFramebufferStatus_Out{}
 }
 func (*binaryClassGlCheckFramebufferStatus_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCheckFramebufferStatus_Out(e, obj.(*GlCheckFramebufferStatus_Out))
@@ -5035,7 +5119,8 @@ func doSkipGlClear(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClear) ID() binary.ID { return binaryIDGlClear }
+func (*binaryClassGlClear) ID() binary.ID      { return binaryIDGlClear }
+func (*binaryClassGlClear) New() binary.Object { return &GlClear{} }
 func (*binaryClassGlClear) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClear(e, obj.(*GlClear))
 }
@@ -5091,7 +5176,8 @@ func doSkipGlClearColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearColor) ID() binary.ID { return binaryIDGlClearColor }
+func (*binaryClassGlClearColor) ID() binary.ID      { return binaryIDGlClearColor }
+func (*binaryClassGlClearColor) New() binary.Object { return &GlClearColor{} }
 func (*binaryClassGlClearColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearColor(e, obj.(*GlClearColor))
 }
@@ -5162,7 +5248,8 @@ func doSkipGlClearColor_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearColor_In) ID() binary.ID { return binaryIDGlClearColor_In }
+func (*binaryClassGlClearColor_In) ID() binary.ID      { return binaryIDGlClearColor_In }
+func (*binaryClassGlClearColor_In) New() binary.Object { return &GlClearColor_In{} }
 func (*binaryClassGlClearColor_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearColor_In(e, obj.(*GlClearColor_In))
 }
@@ -5189,7 +5276,8 @@ func doDecodeGlClearColor_Out(d binary.Decoder, o *GlClearColor_Out) error {
 func doSkipGlClearColor_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlClearColor_Out) ID() binary.ID { return binaryIDGlClearColor_Out }
+func (*binaryClassGlClearColor_Out) ID() binary.ID      { return binaryIDGlClearColor_Out }
+func (*binaryClassGlClearColor_Out) New() binary.Object { return &GlClearColor_Out{} }
 func (*binaryClassGlClearColor_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearColor_Out(e, obj.(*GlClearColor_Out))
 }
@@ -5245,7 +5333,8 @@ func doSkipGlClearDepthf(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearDepthf) ID() binary.ID { return binaryIDGlClearDepthf }
+func (*binaryClassGlClearDepthf) ID() binary.ID      { return binaryIDGlClearDepthf }
+func (*binaryClassGlClearDepthf) New() binary.Object { return &GlClearDepthf{} }
 func (*binaryClassGlClearDepthf) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearDepthf(e, obj.(*GlClearDepthf))
 }
@@ -5283,7 +5372,8 @@ func doSkipGlClearDepthf_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearDepthf_In) ID() binary.ID { return binaryIDGlClearDepthf_In }
+func (*binaryClassGlClearDepthf_In) ID() binary.ID      { return binaryIDGlClearDepthf_In }
+func (*binaryClassGlClearDepthf_In) New() binary.Object { return &GlClearDepthf_In{} }
 func (*binaryClassGlClearDepthf_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearDepthf_In(e, obj.(*GlClearDepthf_In))
 }
@@ -5310,7 +5400,8 @@ func doDecodeGlClearDepthf_Out(d binary.Decoder, o *GlClearDepthf_Out) error {
 func doSkipGlClearDepthf_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlClearDepthf_Out) ID() binary.ID { return binaryIDGlClearDepthf_Out }
+func (*binaryClassGlClearDepthf_Out) ID() binary.ID      { return binaryIDGlClearDepthf_Out }
+func (*binaryClassGlClearDepthf_Out) New() binary.Object { return &GlClearDepthf_Out{} }
 func (*binaryClassGlClearDepthf_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearDepthf_Out(e, obj.(*GlClearDepthf_Out))
 }
@@ -5366,7 +5457,8 @@ func doSkipGlClearStencil(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearStencil) ID() binary.ID { return binaryIDGlClearStencil }
+func (*binaryClassGlClearStencil) ID() binary.ID      { return binaryIDGlClearStencil }
+func (*binaryClassGlClearStencil) New() binary.Object { return &GlClearStencil{} }
 func (*binaryClassGlClearStencil) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearStencil(e, obj.(*GlClearStencil))
 }
@@ -5404,7 +5496,8 @@ func doSkipGlClearStencil_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClearStencil_In) ID() binary.ID { return binaryIDGlClearStencil_In }
+func (*binaryClassGlClearStencil_In) ID() binary.ID      { return binaryIDGlClearStencil_In }
+func (*binaryClassGlClearStencil_In) New() binary.Object { return &GlClearStencil_In{} }
 func (*binaryClassGlClearStencil_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearStencil_In(e, obj.(*GlClearStencil_In))
 }
@@ -5431,7 +5524,8 @@ func doDecodeGlClearStencil_Out(d binary.Decoder, o *GlClearStencil_Out) error {
 func doSkipGlClearStencil_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlClearStencil_Out) ID() binary.ID { return binaryIDGlClearStencil_Out }
+func (*binaryClassGlClearStencil_Out) ID() binary.ID      { return binaryIDGlClearStencil_Out }
+func (*binaryClassGlClearStencil_Out) New() binary.Object { return &GlClearStencil_Out{} }
 func (*binaryClassGlClearStencil_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClearStencil_Out(e, obj.(*GlClearStencil_Out))
 }
@@ -5469,7 +5563,8 @@ func doSkipGlClear_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlClear_In) ID() binary.ID { return binaryIDGlClear_In }
+func (*binaryClassGlClear_In) ID() binary.ID      { return binaryIDGlClear_In }
+func (*binaryClassGlClear_In) New() binary.Object { return &GlClear_In{} }
 func (*binaryClassGlClear_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClear_In(e, obj.(*GlClear_In))
 }
@@ -5496,7 +5591,8 @@ func doDecodeGlClear_Out(d binary.Decoder, o *GlClear_Out) error {
 func doSkipGlClear_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlClear_Out) ID() binary.ID { return binaryIDGlClear_Out }
+func (*binaryClassGlClear_Out) ID() binary.ID      { return binaryIDGlClear_Out }
+func (*binaryClassGlClear_Out) New() binary.Object { return &GlClear_Out{} }
 func (*binaryClassGlClear_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlClear_Out(e, obj.(*GlClear_Out))
 }
@@ -5552,7 +5648,8 @@ func doSkipGlColorMask(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlColorMask) ID() binary.ID { return binaryIDGlColorMask }
+func (*binaryClassGlColorMask) ID() binary.ID      { return binaryIDGlColorMask }
+func (*binaryClassGlColorMask) New() binary.Object { return &GlColorMask{} }
 func (*binaryClassGlColorMask) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlColorMask(e, obj.(*GlColorMask))
 }
@@ -5623,7 +5720,8 @@ func doSkipGlColorMask_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlColorMask_In) ID() binary.ID { return binaryIDGlColorMask_In }
+func (*binaryClassGlColorMask_In) ID() binary.ID      { return binaryIDGlColorMask_In }
+func (*binaryClassGlColorMask_In) New() binary.Object { return &GlColorMask_In{} }
 func (*binaryClassGlColorMask_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlColorMask_In(e, obj.(*GlColorMask_In))
 }
@@ -5650,7 +5748,8 @@ func doDecodeGlColorMask_Out(d binary.Decoder, o *GlColorMask_Out) error {
 func doSkipGlColorMask_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlColorMask_Out) ID() binary.ID { return binaryIDGlColorMask_Out }
+func (*binaryClassGlColorMask_Out) ID() binary.ID      { return binaryIDGlColorMask_Out }
+func (*binaryClassGlColorMask_Out) New() binary.Object { return &GlColorMask_Out{} }
 func (*binaryClassGlColorMask_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlColorMask_Out(e, obj.(*GlColorMask_Out))
 }
@@ -5706,7 +5805,8 @@ func doSkipGlCompileShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCompileShader) ID() binary.ID { return binaryIDGlCompileShader }
+func (*binaryClassGlCompileShader) ID() binary.ID      { return binaryIDGlCompileShader }
+func (*binaryClassGlCompileShader) New() binary.Object { return &GlCompileShader{} }
 func (*binaryClassGlCompileShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompileShader(e, obj.(*GlCompileShader))
 }
@@ -5744,7 +5844,8 @@ func doSkipGlCompileShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCompileShader_In) ID() binary.ID { return binaryIDGlCompileShader_In }
+func (*binaryClassGlCompileShader_In) ID() binary.ID      { return binaryIDGlCompileShader_In }
+func (*binaryClassGlCompileShader_In) New() binary.Object { return &GlCompileShader_In{} }
 func (*binaryClassGlCompileShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompileShader_In(e, obj.(*GlCompileShader_In))
 }
@@ -5771,7 +5872,8 @@ func doDecodeGlCompileShader_Out(d binary.Decoder, o *GlCompileShader_Out) error
 func doSkipGlCompileShader_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlCompileShader_Out) ID() binary.ID { return binaryIDGlCompileShader_Out }
+func (*binaryClassGlCompileShader_Out) ID() binary.ID      { return binaryIDGlCompileShader_Out }
+func (*binaryClassGlCompileShader_Out) New() binary.Object { return &GlCompileShader_Out{} }
 func (*binaryClassGlCompileShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompileShader_Out(e, obj.(*GlCompileShader_Out))
 }
@@ -5829,7 +5931,8 @@ func doSkipGlCompressedTexImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCompressedTexImage2D) ID() binary.ID { return binaryIDGlCompressedTexImage2D }
+func (*binaryClassGlCompressedTexImage2D) ID() binary.ID      { return binaryIDGlCompressedTexImage2D }
+func (*binaryClassGlCompressedTexImage2D) New() binary.Object { return &GlCompressedTexImage2D{} }
 func (*binaryClassGlCompressedTexImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexImage2D(e, obj.(*GlCompressedTexImage2D))
 }
@@ -5946,7 +6049,8 @@ func doSkipGlCompressedTexImage2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCompressedTexImage2D_In) ID() binary.ID { return binaryIDGlCompressedTexImage2D_In }
+func (*binaryClassGlCompressedTexImage2D_In) ID() binary.ID      { return binaryIDGlCompressedTexImage2D_In }
+func (*binaryClassGlCompressedTexImage2D_In) New() binary.Object { return &GlCompressedTexImage2D_In{} }
 func (*binaryClassGlCompressedTexImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexImage2D_In(e, obj.(*GlCompressedTexImage2D_In))
 }
@@ -5977,6 +6081,9 @@ func doSkipGlCompressedTexImage2D_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlCompressedTexImage2D_Out) ID() binary.ID {
 	return binaryIDGlCompressedTexImage2D_Out
+}
+func (*binaryClassGlCompressedTexImage2D_Out) New() binary.Object {
+	return &GlCompressedTexImage2D_Out{}
 }
 func (*binaryClassGlCompressedTexImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexImage2D_Out(e, obj.(*GlCompressedTexImage2D_Out))
@@ -6035,7 +6142,8 @@ func doSkipGlCompressedTexSubImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCompressedTexSubImage2D) ID() binary.ID { return binaryIDGlCompressedTexSubImage2D }
+func (*binaryClassGlCompressedTexSubImage2D) ID() binary.ID      { return binaryIDGlCompressedTexSubImage2D }
+func (*binaryClassGlCompressedTexSubImage2D) New() binary.Object { return &GlCompressedTexSubImage2D{} }
 func (*binaryClassGlCompressedTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexSubImage2D(e, obj.(*GlCompressedTexSubImage2D))
 }
@@ -6166,6 +6274,9 @@ func doSkipGlCompressedTexSubImage2D_In(d binary.Decoder) error {
 func (*binaryClassGlCompressedTexSubImage2D_In) ID() binary.ID {
 	return binaryIDGlCompressedTexSubImage2D_In
 }
+func (*binaryClassGlCompressedTexSubImage2D_In) New() binary.Object {
+	return &GlCompressedTexSubImage2D_In{}
+}
 func (*binaryClassGlCompressedTexSubImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexSubImage2D_In(e, obj.(*GlCompressedTexSubImage2D_In))
 }
@@ -6196,6 +6307,9 @@ func doSkipGlCompressedTexSubImage2D_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlCompressedTexSubImage2D_Out) ID() binary.ID {
 	return binaryIDGlCompressedTexSubImage2D_Out
+}
+func (*binaryClassGlCompressedTexSubImage2D_Out) New() binary.Object {
+	return &GlCompressedTexSubImage2D_Out{}
 }
 func (*binaryClassGlCompressedTexSubImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCompressedTexSubImage2D_Out(e, obj.(*GlCompressedTexSubImage2D_Out))
@@ -6254,7 +6368,8 @@ func doSkipGlCopyTexImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCopyTexImage2D) ID() binary.ID { return binaryIDGlCopyTexImage2D }
+func (*binaryClassGlCopyTexImage2D) ID() binary.ID      { return binaryIDGlCopyTexImage2D }
+func (*binaryClassGlCopyTexImage2D) New() binary.Object { return &GlCopyTexImage2D{} }
 func (*binaryClassGlCopyTexImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexImage2D(e, obj.(*GlCopyTexImage2D))
 }
@@ -6369,7 +6484,8 @@ func doSkipGlCopyTexImage2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCopyTexImage2D_In) ID() binary.ID { return binaryIDGlCopyTexImage2D_In }
+func (*binaryClassGlCopyTexImage2D_In) ID() binary.ID      { return binaryIDGlCopyTexImage2D_In }
+func (*binaryClassGlCopyTexImage2D_In) New() binary.Object { return &GlCopyTexImage2D_In{} }
 func (*binaryClassGlCopyTexImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexImage2D_In(e, obj.(*GlCopyTexImage2D_In))
 }
@@ -6398,7 +6514,8 @@ func doDecodeGlCopyTexImage2D_Out(d binary.Decoder, o *GlCopyTexImage2D_Out) err
 func doSkipGlCopyTexImage2D_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlCopyTexImage2D_Out) ID() binary.ID { return binaryIDGlCopyTexImage2D_Out }
+func (*binaryClassGlCopyTexImage2D_Out) ID() binary.ID      { return binaryIDGlCopyTexImage2D_Out }
+func (*binaryClassGlCopyTexImage2D_Out) New() binary.Object { return &GlCopyTexImage2D_Out{} }
 func (*binaryClassGlCopyTexImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexImage2D_Out(e, obj.(*GlCopyTexImage2D_Out))
 }
@@ -6456,7 +6573,8 @@ func doSkipGlCopyTexSubImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCopyTexSubImage2D) ID() binary.ID { return binaryIDGlCopyTexSubImage2D }
+func (*binaryClassGlCopyTexSubImage2D) ID() binary.ID      { return binaryIDGlCopyTexSubImage2D }
+func (*binaryClassGlCopyTexSubImage2D) New() binary.Object { return &GlCopyTexSubImage2D{} }
 func (*binaryClassGlCopyTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexSubImage2D(e, obj.(*GlCopyTexSubImage2D))
 }
@@ -6573,7 +6691,8 @@ func doSkipGlCopyTexSubImage2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCopyTexSubImage2D_In) ID() binary.ID { return binaryIDGlCopyTexSubImage2D_In }
+func (*binaryClassGlCopyTexSubImage2D_In) ID() binary.ID      { return binaryIDGlCopyTexSubImage2D_In }
+func (*binaryClassGlCopyTexSubImage2D_In) New() binary.Object { return &GlCopyTexSubImage2D_In{} }
 func (*binaryClassGlCopyTexSubImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexSubImage2D_In(e, obj.(*GlCopyTexSubImage2D_In))
 }
@@ -6602,7 +6721,8 @@ func doDecodeGlCopyTexSubImage2D_Out(d binary.Decoder, o *GlCopyTexSubImage2D_Ou
 func doSkipGlCopyTexSubImage2D_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlCopyTexSubImage2D_Out) ID() binary.ID { return binaryIDGlCopyTexSubImage2D_Out }
+func (*binaryClassGlCopyTexSubImage2D_Out) ID() binary.ID      { return binaryIDGlCopyTexSubImage2D_Out }
+func (*binaryClassGlCopyTexSubImage2D_Out) New() binary.Object { return &GlCopyTexSubImage2D_Out{} }
 func (*binaryClassGlCopyTexSubImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCopyTexSubImage2D_Out(e, obj.(*GlCopyTexSubImage2D_Out))
 }
@@ -6660,7 +6780,8 @@ func doSkipGlCreateProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCreateProgram) ID() binary.ID { return binaryIDGlCreateProgram }
+func (*binaryClassGlCreateProgram) ID() binary.ID      { return binaryIDGlCreateProgram }
+func (*binaryClassGlCreateProgram) New() binary.Object { return &GlCreateProgram{} }
 func (*binaryClassGlCreateProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateProgram(e, obj.(*GlCreateProgram))
 }
@@ -6687,7 +6808,8 @@ func doDecodeGlCreateProgram_In(d binary.Decoder, o *GlCreateProgram_In) error {
 func doSkipGlCreateProgram_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlCreateProgram_In) ID() binary.ID { return binaryIDGlCreateProgram_In }
+func (*binaryClassGlCreateProgram_In) ID() binary.ID      { return binaryIDGlCreateProgram_In }
+func (*binaryClassGlCreateProgram_In) New() binary.Object { return &GlCreateProgram_In{} }
 func (*binaryClassGlCreateProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateProgram_In(e, obj.(*GlCreateProgram_In))
 }
@@ -6725,7 +6847,8 @@ func doSkipGlCreateProgram_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCreateProgram_Out) ID() binary.ID { return binaryIDGlCreateProgram_Out }
+func (*binaryClassGlCreateProgram_Out) ID() binary.ID      { return binaryIDGlCreateProgram_Out }
+func (*binaryClassGlCreateProgram_Out) New() binary.Object { return &GlCreateProgram_Out{} }
 func (*binaryClassGlCreateProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateProgram_Out(e, obj.(*GlCreateProgram_Out))
 }
@@ -6783,7 +6906,8 @@ func doSkipGlCreateShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCreateShader) ID() binary.ID { return binaryIDGlCreateShader }
+func (*binaryClassGlCreateShader) ID() binary.ID      { return binaryIDGlCreateShader }
+func (*binaryClassGlCreateShader) New() binary.Object { return &GlCreateShader{} }
 func (*binaryClassGlCreateShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateShader(e, obj.(*GlCreateShader))
 }
@@ -6821,7 +6945,8 @@ func doSkipGlCreateShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCreateShader_In) ID() binary.ID { return binaryIDGlCreateShader_In }
+func (*binaryClassGlCreateShader_In) ID() binary.ID      { return binaryIDGlCreateShader_In }
+func (*binaryClassGlCreateShader_In) New() binary.Object { return &GlCreateShader_In{} }
 func (*binaryClassGlCreateShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateShader_In(e, obj.(*GlCreateShader_In))
 }
@@ -6859,7 +6984,8 @@ func doSkipGlCreateShader_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCreateShader_Out) ID() binary.ID { return binaryIDGlCreateShader_Out }
+func (*binaryClassGlCreateShader_Out) ID() binary.ID      { return binaryIDGlCreateShader_Out }
+func (*binaryClassGlCreateShader_Out) New() binary.Object { return &GlCreateShader_Out{} }
 func (*binaryClassGlCreateShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCreateShader_Out(e, obj.(*GlCreateShader_Out))
 }
@@ -6915,7 +7041,8 @@ func doSkipGlCullFace(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCullFace) ID() binary.ID { return binaryIDGlCullFace }
+func (*binaryClassGlCullFace) ID() binary.ID      { return binaryIDGlCullFace }
+func (*binaryClassGlCullFace) New() binary.Object { return &GlCullFace{} }
 func (*binaryClassGlCullFace) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCullFace(e, obj.(*GlCullFace))
 }
@@ -6953,7 +7080,8 @@ func doSkipGlCullFace_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlCullFace_In) ID() binary.ID { return binaryIDGlCullFace_In }
+func (*binaryClassGlCullFace_In) ID() binary.ID      { return binaryIDGlCullFace_In }
+func (*binaryClassGlCullFace_In) New() binary.Object { return &GlCullFace_In{} }
 func (*binaryClassGlCullFace_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCullFace_In(e, obj.(*GlCullFace_In))
 }
@@ -6980,7 +7108,8 @@ func doDecodeGlCullFace_Out(d binary.Decoder, o *GlCullFace_Out) error {
 func doSkipGlCullFace_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlCullFace_Out) ID() binary.ID { return binaryIDGlCullFace_Out }
+func (*binaryClassGlCullFace_Out) ID() binary.ID      { return binaryIDGlCullFace_Out }
+func (*binaryClassGlCullFace_Out) New() binary.Object { return &GlCullFace_Out{} }
 func (*binaryClassGlCullFace_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlCullFace_Out(e, obj.(*GlCullFace_Out))
 }
@@ -7036,7 +7165,8 @@ func doSkipGlDeleteBuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteBuffers) ID() binary.ID { return binaryIDGlDeleteBuffers }
+func (*binaryClassGlDeleteBuffers) ID() binary.ID      { return binaryIDGlDeleteBuffers }
+func (*binaryClassGlDeleteBuffers) New() binary.Object { return &GlDeleteBuffers{} }
 func (*binaryClassGlDeleteBuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteBuffers(e, obj.(*GlDeleteBuffers))
 }
@@ -7103,7 +7233,8 @@ func doSkipGlDeleteBuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteBuffers_In) ID() binary.ID { return binaryIDGlDeleteBuffers_In }
+func (*binaryClassGlDeleteBuffers_In) ID() binary.ID      { return binaryIDGlDeleteBuffers_In }
+func (*binaryClassGlDeleteBuffers_In) New() binary.Object { return &GlDeleteBuffers_In{} }
 func (*binaryClassGlDeleteBuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteBuffers_In(e, obj.(*GlDeleteBuffers_In))
 }
@@ -7130,7 +7261,8 @@ func doDecodeGlDeleteBuffers_Out(d binary.Decoder, o *GlDeleteBuffers_Out) error
 func doSkipGlDeleteBuffers_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteBuffers_Out) ID() binary.ID { return binaryIDGlDeleteBuffers_Out }
+func (*binaryClassGlDeleteBuffers_Out) ID() binary.ID      { return binaryIDGlDeleteBuffers_Out }
+func (*binaryClassGlDeleteBuffers_Out) New() binary.Object { return &GlDeleteBuffers_Out{} }
 func (*binaryClassGlDeleteBuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteBuffers_Out(e, obj.(*GlDeleteBuffers_Out))
 }
@@ -7188,7 +7320,8 @@ func doSkipGlDeleteFramebuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteFramebuffers) ID() binary.ID { return binaryIDGlDeleteFramebuffers }
+func (*binaryClassGlDeleteFramebuffers) ID() binary.ID      { return binaryIDGlDeleteFramebuffers }
+func (*binaryClassGlDeleteFramebuffers) New() binary.Object { return &GlDeleteFramebuffers{} }
 func (*binaryClassGlDeleteFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteFramebuffers(e, obj.(*GlDeleteFramebuffers))
 }
@@ -7257,7 +7390,8 @@ func doSkipGlDeleteFramebuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteFramebuffers_In) ID() binary.ID { return binaryIDGlDeleteFramebuffers_In }
+func (*binaryClassGlDeleteFramebuffers_In) ID() binary.ID      { return binaryIDGlDeleteFramebuffers_In }
+func (*binaryClassGlDeleteFramebuffers_In) New() binary.Object { return &GlDeleteFramebuffers_In{} }
 func (*binaryClassGlDeleteFramebuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteFramebuffers_In(e, obj.(*GlDeleteFramebuffers_In))
 }
@@ -7286,7 +7420,8 @@ func doDecodeGlDeleteFramebuffers_Out(d binary.Decoder, o *GlDeleteFramebuffers_
 func doSkipGlDeleteFramebuffers_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteFramebuffers_Out) ID() binary.ID { return binaryIDGlDeleteFramebuffers_Out }
+func (*binaryClassGlDeleteFramebuffers_Out) ID() binary.ID      { return binaryIDGlDeleteFramebuffers_Out }
+func (*binaryClassGlDeleteFramebuffers_Out) New() binary.Object { return &GlDeleteFramebuffers_Out{} }
 func (*binaryClassGlDeleteFramebuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteFramebuffers_Out(e, obj.(*GlDeleteFramebuffers_Out))
 }
@@ -7344,7 +7479,8 @@ func doSkipGlDeleteProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteProgram) ID() binary.ID { return binaryIDGlDeleteProgram }
+func (*binaryClassGlDeleteProgram) ID() binary.ID      { return binaryIDGlDeleteProgram }
+func (*binaryClassGlDeleteProgram) New() binary.Object { return &GlDeleteProgram{} }
 func (*binaryClassGlDeleteProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteProgram(e, obj.(*GlDeleteProgram))
 }
@@ -7382,7 +7518,8 @@ func doSkipGlDeleteProgram_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteProgram_In) ID() binary.ID { return binaryIDGlDeleteProgram_In }
+func (*binaryClassGlDeleteProgram_In) ID() binary.ID      { return binaryIDGlDeleteProgram_In }
+func (*binaryClassGlDeleteProgram_In) New() binary.Object { return &GlDeleteProgram_In{} }
 func (*binaryClassGlDeleteProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteProgram_In(e, obj.(*GlDeleteProgram_In))
 }
@@ -7409,7 +7546,8 @@ func doDecodeGlDeleteProgram_Out(d binary.Decoder, o *GlDeleteProgram_Out) error
 func doSkipGlDeleteProgram_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteProgram_Out) ID() binary.ID { return binaryIDGlDeleteProgram_Out }
+func (*binaryClassGlDeleteProgram_Out) ID() binary.ID      { return binaryIDGlDeleteProgram_Out }
+func (*binaryClassGlDeleteProgram_Out) New() binary.Object { return &GlDeleteProgram_Out{} }
 func (*binaryClassGlDeleteProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteProgram_Out(e, obj.(*GlDeleteProgram_Out))
 }
@@ -7467,7 +7605,8 @@ func doSkipGlDeleteQueries(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteQueries) ID() binary.ID { return binaryIDGlDeleteQueries }
+func (*binaryClassGlDeleteQueries) ID() binary.ID      { return binaryIDGlDeleteQueries }
+func (*binaryClassGlDeleteQueries) New() binary.Object { return &GlDeleteQueries{} }
 func (*binaryClassGlDeleteQueries) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueries(e, obj.(*GlDeleteQueries))
 }
@@ -7523,7 +7662,8 @@ func doSkipGlDeleteQueriesEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteQueriesEXT) ID() binary.ID { return binaryIDGlDeleteQueriesEXT }
+func (*binaryClassGlDeleteQueriesEXT) ID() binary.ID      { return binaryIDGlDeleteQueriesEXT }
+func (*binaryClassGlDeleteQueriesEXT) New() binary.Object { return &GlDeleteQueriesEXT{} }
 func (*binaryClassGlDeleteQueriesEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueriesEXT(e, obj.(*GlDeleteQueriesEXT))
 }
@@ -7590,7 +7730,8 @@ func doSkipGlDeleteQueriesEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteQueriesEXT_In) ID() binary.ID { return binaryIDGlDeleteQueriesEXT_In }
+func (*binaryClassGlDeleteQueriesEXT_In) ID() binary.ID      { return binaryIDGlDeleteQueriesEXT_In }
+func (*binaryClassGlDeleteQueriesEXT_In) New() binary.Object { return &GlDeleteQueriesEXT_In{} }
 func (*binaryClassGlDeleteQueriesEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueriesEXT_In(e, obj.(*GlDeleteQueriesEXT_In))
 }
@@ -7619,7 +7760,8 @@ func doDecodeGlDeleteQueriesEXT_Out(d binary.Decoder, o *GlDeleteQueriesEXT_Out)
 func doSkipGlDeleteQueriesEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteQueriesEXT_Out) ID() binary.ID { return binaryIDGlDeleteQueriesEXT_Out }
+func (*binaryClassGlDeleteQueriesEXT_Out) ID() binary.ID      { return binaryIDGlDeleteQueriesEXT_Out }
+func (*binaryClassGlDeleteQueriesEXT_Out) New() binary.Object { return &GlDeleteQueriesEXT_Out{} }
 func (*binaryClassGlDeleteQueriesEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueriesEXT_Out(e, obj.(*GlDeleteQueriesEXT_Out))
 }
@@ -7688,7 +7830,8 @@ func doSkipGlDeleteQueries_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteQueries_In) ID() binary.ID { return binaryIDGlDeleteQueries_In }
+func (*binaryClassGlDeleteQueries_In) ID() binary.ID      { return binaryIDGlDeleteQueries_In }
+func (*binaryClassGlDeleteQueries_In) New() binary.Object { return &GlDeleteQueries_In{} }
 func (*binaryClassGlDeleteQueries_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueries_In(e, obj.(*GlDeleteQueries_In))
 }
@@ -7715,7 +7858,8 @@ func doDecodeGlDeleteQueries_Out(d binary.Decoder, o *GlDeleteQueries_Out) error
 func doSkipGlDeleteQueries_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteQueries_Out) ID() binary.ID { return binaryIDGlDeleteQueries_Out }
+func (*binaryClassGlDeleteQueries_Out) ID() binary.ID      { return binaryIDGlDeleteQueries_Out }
+func (*binaryClassGlDeleteQueries_Out) New() binary.Object { return &GlDeleteQueries_Out{} }
 func (*binaryClassGlDeleteQueries_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteQueries_Out(e, obj.(*GlDeleteQueries_Out))
 }
@@ -7773,7 +7917,8 @@ func doSkipGlDeleteRenderbuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteRenderbuffers) ID() binary.ID { return binaryIDGlDeleteRenderbuffers }
+func (*binaryClassGlDeleteRenderbuffers) ID() binary.ID      { return binaryIDGlDeleteRenderbuffers }
+func (*binaryClassGlDeleteRenderbuffers) New() binary.Object { return &GlDeleteRenderbuffers{} }
 func (*binaryClassGlDeleteRenderbuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteRenderbuffers(e, obj.(*GlDeleteRenderbuffers))
 }
@@ -7842,7 +7987,8 @@ func doSkipGlDeleteRenderbuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteRenderbuffers_In) ID() binary.ID { return binaryIDGlDeleteRenderbuffers_In }
+func (*binaryClassGlDeleteRenderbuffers_In) ID() binary.ID      { return binaryIDGlDeleteRenderbuffers_In }
+func (*binaryClassGlDeleteRenderbuffers_In) New() binary.Object { return &GlDeleteRenderbuffers_In{} }
 func (*binaryClassGlDeleteRenderbuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteRenderbuffers_In(e, obj.(*GlDeleteRenderbuffers_In))
 }
@@ -7871,7 +8017,8 @@ func doDecodeGlDeleteRenderbuffers_Out(d binary.Decoder, o *GlDeleteRenderbuffer
 func doSkipGlDeleteRenderbuffers_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteRenderbuffers_Out) ID() binary.ID { return binaryIDGlDeleteRenderbuffers_Out }
+func (*binaryClassGlDeleteRenderbuffers_Out) ID() binary.ID      { return binaryIDGlDeleteRenderbuffers_Out }
+func (*binaryClassGlDeleteRenderbuffers_Out) New() binary.Object { return &GlDeleteRenderbuffers_Out{} }
 func (*binaryClassGlDeleteRenderbuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteRenderbuffers_Out(e, obj.(*GlDeleteRenderbuffers_Out))
 }
@@ -7929,7 +8076,8 @@ func doSkipGlDeleteShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteShader) ID() binary.ID { return binaryIDGlDeleteShader }
+func (*binaryClassGlDeleteShader) ID() binary.ID      { return binaryIDGlDeleteShader }
+func (*binaryClassGlDeleteShader) New() binary.Object { return &GlDeleteShader{} }
 func (*binaryClassGlDeleteShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteShader(e, obj.(*GlDeleteShader))
 }
@@ -7967,7 +8115,8 @@ func doSkipGlDeleteShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteShader_In) ID() binary.ID { return binaryIDGlDeleteShader_In }
+func (*binaryClassGlDeleteShader_In) ID() binary.ID      { return binaryIDGlDeleteShader_In }
+func (*binaryClassGlDeleteShader_In) New() binary.Object { return &GlDeleteShader_In{} }
 func (*binaryClassGlDeleteShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteShader_In(e, obj.(*GlDeleteShader_In))
 }
@@ -7994,7 +8143,8 @@ func doDecodeGlDeleteShader_Out(d binary.Decoder, o *GlDeleteShader_Out) error {
 func doSkipGlDeleteShader_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteShader_Out) ID() binary.ID { return binaryIDGlDeleteShader_Out }
+func (*binaryClassGlDeleteShader_Out) ID() binary.ID      { return binaryIDGlDeleteShader_Out }
+func (*binaryClassGlDeleteShader_Out) New() binary.Object { return &GlDeleteShader_Out{} }
 func (*binaryClassGlDeleteShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteShader_Out(e, obj.(*GlDeleteShader_Out))
 }
@@ -8050,7 +8200,8 @@ func doSkipGlDeleteTextures(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteTextures) ID() binary.ID { return binaryIDGlDeleteTextures }
+func (*binaryClassGlDeleteTextures) ID() binary.ID      { return binaryIDGlDeleteTextures }
+func (*binaryClassGlDeleteTextures) New() binary.Object { return &GlDeleteTextures{} }
 func (*binaryClassGlDeleteTextures) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteTextures(e, obj.(*GlDeleteTextures))
 }
@@ -8117,7 +8268,8 @@ func doSkipGlDeleteTextures_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteTextures_In) ID() binary.ID { return binaryIDGlDeleteTextures_In }
+func (*binaryClassGlDeleteTextures_In) ID() binary.ID      { return binaryIDGlDeleteTextures_In }
+func (*binaryClassGlDeleteTextures_In) New() binary.Object { return &GlDeleteTextures_In{} }
 func (*binaryClassGlDeleteTextures_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteTextures_In(e, obj.(*GlDeleteTextures_In))
 }
@@ -8146,7 +8298,8 @@ func doDecodeGlDeleteTextures_Out(d binary.Decoder, o *GlDeleteTextures_Out) err
 func doSkipGlDeleteTextures_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDeleteTextures_Out) ID() binary.ID { return binaryIDGlDeleteTextures_Out }
+func (*binaryClassGlDeleteTextures_Out) ID() binary.ID      { return binaryIDGlDeleteTextures_Out }
+func (*binaryClassGlDeleteTextures_Out) New() binary.Object { return &GlDeleteTextures_Out{} }
 func (*binaryClassGlDeleteTextures_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteTextures_Out(e, obj.(*GlDeleteTextures_Out))
 }
@@ -8204,7 +8357,8 @@ func doSkipGlDeleteVertexArraysOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDeleteVertexArraysOES) ID() binary.ID { return binaryIDGlDeleteVertexArraysOES }
+func (*binaryClassGlDeleteVertexArraysOES) ID() binary.ID      { return binaryIDGlDeleteVertexArraysOES }
+func (*binaryClassGlDeleteVertexArraysOES) New() binary.Object { return &GlDeleteVertexArraysOES{} }
 func (*binaryClassGlDeleteVertexArraysOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteVertexArraysOES(e, obj.(*GlDeleteVertexArraysOES))
 }
@@ -8276,6 +8430,9 @@ func doSkipGlDeleteVertexArraysOES_In(d binary.Decoder) error {
 func (*binaryClassGlDeleteVertexArraysOES_In) ID() binary.ID {
 	return binaryIDGlDeleteVertexArraysOES_In
 }
+func (*binaryClassGlDeleteVertexArraysOES_In) New() binary.Object {
+	return &GlDeleteVertexArraysOES_In{}
+}
 func (*binaryClassGlDeleteVertexArraysOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteVertexArraysOES_In(e, obj.(*GlDeleteVertexArraysOES_In))
 }
@@ -8306,6 +8463,9 @@ func doSkipGlDeleteVertexArraysOES_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlDeleteVertexArraysOES_Out) ID() binary.ID {
 	return binaryIDGlDeleteVertexArraysOES_Out
+}
+func (*binaryClassGlDeleteVertexArraysOES_Out) New() binary.Object {
+	return &GlDeleteVertexArraysOES_Out{}
 }
 func (*binaryClassGlDeleteVertexArraysOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDeleteVertexArraysOES_Out(e, obj.(*GlDeleteVertexArraysOES_Out))
@@ -8364,7 +8524,8 @@ func doSkipGlDepthFunc(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthFunc) ID() binary.ID { return binaryIDGlDepthFunc }
+func (*binaryClassGlDepthFunc) ID() binary.ID      { return binaryIDGlDepthFunc }
+func (*binaryClassGlDepthFunc) New() binary.Object { return &GlDepthFunc{} }
 func (*binaryClassGlDepthFunc) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthFunc(e, obj.(*GlDepthFunc))
 }
@@ -8402,7 +8563,8 @@ func doSkipGlDepthFunc_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthFunc_In) ID() binary.ID { return binaryIDGlDepthFunc_In }
+func (*binaryClassGlDepthFunc_In) ID() binary.ID      { return binaryIDGlDepthFunc_In }
+func (*binaryClassGlDepthFunc_In) New() binary.Object { return &GlDepthFunc_In{} }
 func (*binaryClassGlDepthFunc_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthFunc_In(e, obj.(*GlDepthFunc_In))
 }
@@ -8429,7 +8591,8 @@ func doDecodeGlDepthFunc_Out(d binary.Decoder, o *GlDepthFunc_Out) error {
 func doSkipGlDepthFunc_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDepthFunc_Out) ID() binary.ID { return binaryIDGlDepthFunc_Out }
+func (*binaryClassGlDepthFunc_Out) ID() binary.ID      { return binaryIDGlDepthFunc_Out }
+func (*binaryClassGlDepthFunc_Out) New() binary.Object { return &GlDepthFunc_Out{} }
 func (*binaryClassGlDepthFunc_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthFunc_Out(e, obj.(*GlDepthFunc_Out))
 }
@@ -8485,7 +8648,8 @@ func doSkipGlDepthMask(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthMask) ID() binary.ID { return binaryIDGlDepthMask }
+func (*binaryClassGlDepthMask) ID() binary.ID      { return binaryIDGlDepthMask }
+func (*binaryClassGlDepthMask) New() binary.Object { return &GlDepthMask{} }
 func (*binaryClassGlDepthMask) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthMask(e, obj.(*GlDepthMask))
 }
@@ -8523,7 +8687,8 @@ func doSkipGlDepthMask_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthMask_In) ID() binary.ID { return binaryIDGlDepthMask_In }
+func (*binaryClassGlDepthMask_In) ID() binary.ID      { return binaryIDGlDepthMask_In }
+func (*binaryClassGlDepthMask_In) New() binary.Object { return &GlDepthMask_In{} }
 func (*binaryClassGlDepthMask_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthMask_In(e, obj.(*GlDepthMask_In))
 }
@@ -8550,7 +8715,8 @@ func doDecodeGlDepthMask_Out(d binary.Decoder, o *GlDepthMask_Out) error {
 func doSkipGlDepthMask_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDepthMask_Out) ID() binary.ID { return binaryIDGlDepthMask_Out }
+func (*binaryClassGlDepthMask_Out) ID() binary.ID      { return binaryIDGlDepthMask_Out }
+func (*binaryClassGlDepthMask_Out) New() binary.Object { return &GlDepthMask_Out{} }
 func (*binaryClassGlDepthMask_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthMask_Out(e, obj.(*GlDepthMask_Out))
 }
@@ -8606,7 +8772,8 @@ func doSkipGlDepthRangef(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthRangef) ID() binary.ID { return binaryIDGlDepthRangef }
+func (*binaryClassGlDepthRangef) ID() binary.ID      { return binaryIDGlDepthRangef }
+func (*binaryClassGlDepthRangef) New() binary.Object { return &GlDepthRangef{} }
 func (*binaryClassGlDepthRangef) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthRangef(e, obj.(*GlDepthRangef))
 }
@@ -8655,7 +8822,8 @@ func doSkipGlDepthRangef_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDepthRangef_In) ID() binary.ID { return binaryIDGlDepthRangef_In }
+func (*binaryClassGlDepthRangef_In) ID() binary.ID      { return binaryIDGlDepthRangef_In }
+func (*binaryClassGlDepthRangef_In) New() binary.Object { return &GlDepthRangef_In{} }
 func (*binaryClassGlDepthRangef_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthRangef_In(e, obj.(*GlDepthRangef_In))
 }
@@ -8682,7 +8850,8 @@ func doDecodeGlDepthRangef_Out(d binary.Decoder, o *GlDepthRangef_Out) error {
 func doSkipGlDepthRangef_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDepthRangef_Out) ID() binary.ID { return binaryIDGlDepthRangef_Out }
+func (*binaryClassGlDepthRangef_Out) ID() binary.ID      { return binaryIDGlDepthRangef_Out }
+func (*binaryClassGlDepthRangef_Out) New() binary.Object { return &GlDepthRangef_Out{} }
 func (*binaryClassGlDepthRangef_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDepthRangef_Out(e, obj.(*GlDepthRangef_Out))
 }
@@ -8738,7 +8907,8 @@ func doSkipGlDetachShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDetachShader) ID() binary.ID { return binaryIDGlDetachShader }
+func (*binaryClassGlDetachShader) ID() binary.ID      { return binaryIDGlDetachShader }
+func (*binaryClassGlDetachShader) New() binary.Object { return &GlDetachShader{} }
 func (*binaryClassGlDetachShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDetachShader(e, obj.(*GlDetachShader))
 }
@@ -8787,7 +8957,8 @@ func doSkipGlDetachShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDetachShader_In) ID() binary.ID { return binaryIDGlDetachShader_In }
+func (*binaryClassGlDetachShader_In) ID() binary.ID      { return binaryIDGlDetachShader_In }
+func (*binaryClassGlDetachShader_In) New() binary.Object { return &GlDetachShader_In{} }
 func (*binaryClassGlDetachShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDetachShader_In(e, obj.(*GlDetachShader_In))
 }
@@ -8814,7 +8985,8 @@ func doDecodeGlDetachShader_Out(d binary.Decoder, o *GlDetachShader_Out) error {
 func doSkipGlDetachShader_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDetachShader_Out) ID() binary.ID { return binaryIDGlDetachShader_Out }
+func (*binaryClassGlDetachShader_Out) ID() binary.ID      { return binaryIDGlDetachShader_Out }
+func (*binaryClassGlDetachShader_Out) New() binary.Object { return &GlDetachShader_Out{} }
 func (*binaryClassGlDetachShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDetachShader_Out(e, obj.(*GlDetachShader_Out))
 }
@@ -8870,7 +9042,8 @@ func doSkipGlDisable(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDisable) ID() binary.ID { return binaryIDGlDisable }
+func (*binaryClassGlDisable) ID() binary.ID      { return binaryIDGlDisable }
+func (*binaryClassGlDisable) New() binary.Object { return &GlDisable{} }
 func (*binaryClassGlDisable) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisable(e, obj.(*GlDisable))
 }
@@ -8926,7 +9099,8 @@ func doSkipGlDisableClientState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDisableClientState) ID() binary.ID { return binaryIDGlDisableClientState }
+func (*binaryClassGlDisableClientState) ID() binary.ID      { return binaryIDGlDisableClientState }
+func (*binaryClassGlDisableClientState) New() binary.Object { return &GlDisableClientState{} }
 func (*binaryClassGlDisableClientState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableClientState(e, obj.(*GlDisableClientState))
 }
@@ -8966,7 +9140,8 @@ func doSkipGlDisableClientState_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDisableClientState_In) ID() binary.ID { return binaryIDGlDisableClientState_In }
+func (*binaryClassGlDisableClientState_In) ID() binary.ID      { return binaryIDGlDisableClientState_In }
+func (*binaryClassGlDisableClientState_In) New() binary.Object { return &GlDisableClientState_In{} }
 func (*binaryClassGlDisableClientState_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableClientState_In(e, obj.(*GlDisableClientState_In))
 }
@@ -8995,7 +9170,8 @@ func doDecodeGlDisableClientState_Out(d binary.Decoder, o *GlDisableClientState_
 func doSkipGlDisableClientState_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDisableClientState_Out) ID() binary.ID { return binaryIDGlDisableClientState_Out }
+func (*binaryClassGlDisableClientState_Out) ID() binary.ID      { return binaryIDGlDisableClientState_Out }
+func (*binaryClassGlDisableClientState_Out) New() binary.Object { return &GlDisableClientState_Out{} }
 func (*binaryClassGlDisableClientState_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableClientState_Out(e, obj.(*GlDisableClientState_Out))
 }
@@ -9056,6 +9232,9 @@ func doSkipGlDisableVertexAttribArray(d binary.Decoder) error {
 func (*binaryClassGlDisableVertexAttribArray) ID() binary.ID {
 	return binaryIDGlDisableVertexAttribArray
 }
+func (*binaryClassGlDisableVertexAttribArray) New() binary.Object {
+	return &GlDisableVertexAttribArray{}
+}
 func (*binaryClassGlDisableVertexAttribArray) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableVertexAttribArray(e, obj.(*GlDisableVertexAttribArray))
 }
@@ -9098,6 +9277,9 @@ func doSkipGlDisableVertexAttribArray_In(d binary.Decoder) error {
 func (*binaryClassGlDisableVertexAttribArray_In) ID() binary.ID {
 	return binaryIDGlDisableVertexAttribArray_In
 }
+func (*binaryClassGlDisableVertexAttribArray_In) New() binary.Object {
+	return &GlDisableVertexAttribArray_In{}
+}
 func (*binaryClassGlDisableVertexAttribArray_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableVertexAttribArray_In(e, obj.(*GlDisableVertexAttribArray_In))
 }
@@ -9128,6 +9310,9 @@ func doSkipGlDisableVertexAttribArray_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlDisableVertexAttribArray_Out) ID() binary.ID {
 	return binaryIDGlDisableVertexAttribArray_Out
+}
+func (*binaryClassGlDisableVertexAttribArray_Out) New() binary.Object {
+	return &GlDisableVertexAttribArray_Out{}
 }
 func (*binaryClassGlDisableVertexAttribArray_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisableVertexAttribArray_Out(e, obj.(*GlDisableVertexAttribArray_Out))
@@ -9168,7 +9353,8 @@ func doSkipGlDisable_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDisable_In) ID() binary.ID { return binaryIDGlDisable_In }
+func (*binaryClassGlDisable_In) ID() binary.ID      { return binaryIDGlDisable_In }
+func (*binaryClassGlDisable_In) New() binary.Object { return &GlDisable_In{} }
 func (*binaryClassGlDisable_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisable_In(e, obj.(*GlDisable_In))
 }
@@ -9195,7 +9381,8 @@ func doDecodeGlDisable_Out(d binary.Decoder, o *GlDisable_Out) error {
 func doSkipGlDisable_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDisable_Out) ID() binary.ID { return binaryIDGlDisable_Out }
+func (*binaryClassGlDisable_Out) ID() binary.ID      { return binaryIDGlDisable_Out }
+func (*binaryClassGlDisable_Out) New() binary.Object { return &GlDisable_Out{} }
 func (*binaryClassGlDisable_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDisable_Out(e, obj.(*GlDisable_Out))
 }
@@ -9251,7 +9438,8 @@ func doSkipGlDiscardFramebufferEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDiscardFramebufferEXT) ID() binary.ID { return binaryIDGlDiscardFramebufferEXT }
+func (*binaryClassGlDiscardFramebufferEXT) ID() binary.ID      { return binaryIDGlDiscardFramebufferEXT }
+func (*binaryClassGlDiscardFramebufferEXT) New() binary.Object { return &GlDiscardFramebufferEXT{} }
 func (*binaryClassGlDiscardFramebufferEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDiscardFramebufferEXT(e, obj.(*GlDiscardFramebufferEXT))
 }
@@ -9334,6 +9522,9 @@ func doSkipGlDiscardFramebufferEXT_In(d binary.Decoder) error {
 func (*binaryClassGlDiscardFramebufferEXT_In) ID() binary.ID {
 	return binaryIDGlDiscardFramebufferEXT_In
 }
+func (*binaryClassGlDiscardFramebufferEXT_In) New() binary.Object {
+	return &GlDiscardFramebufferEXT_In{}
+}
 func (*binaryClassGlDiscardFramebufferEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDiscardFramebufferEXT_In(e, obj.(*GlDiscardFramebufferEXT_In))
 }
@@ -9364,6 +9555,9 @@ func doSkipGlDiscardFramebufferEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlDiscardFramebufferEXT_Out) ID() binary.ID {
 	return binaryIDGlDiscardFramebufferEXT_Out
+}
+func (*binaryClassGlDiscardFramebufferEXT_Out) New() binary.Object {
+	return &GlDiscardFramebufferEXT_Out{}
 }
 func (*binaryClassGlDiscardFramebufferEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDiscardFramebufferEXT_Out(e, obj.(*GlDiscardFramebufferEXT_Out))
@@ -9422,7 +9616,8 @@ func doSkipGlDrawArrays(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDrawArrays) ID() binary.ID { return binaryIDGlDrawArrays }
+func (*binaryClassGlDrawArrays) ID() binary.ID      { return binaryIDGlDrawArrays }
+func (*binaryClassGlDrawArrays) New() binary.Object { return &GlDrawArrays{} }
 func (*binaryClassGlDrawArrays) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawArrays(e, obj.(*GlDrawArrays))
 }
@@ -9482,7 +9677,8 @@ func doSkipGlDrawArrays_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDrawArrays_In) ID() binary.ID { return binaryIDGlDrawArrays_In }
+func (*binaryClassGlDrawArrays_In) ID() binary.ID      { return binaryIDGlDrawArrays_In }
+func (*binaryClassGlDrawArrays_In) New() binary.Object { return &GlDrawArrays_In{} }
 func (*binaryClassGlDrawArrays_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawArrays_In(e, obj.(*GlDrawArrays_In))
 }
@@ -9509,7 +9705,8 @@ func doDecodeGlDrawArrays_Out(d binary.Decoder, o *GlDrawArrays_Out) error {
 func doSkipGlDrawArrays_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDrawArrays_Out) ID() binary.ID { return binaryIDGlDrawArrays_Out }
+func (*binaryClassGlDrawArrays_Out) ID() binary.ID      { return binaryIDGlDrawArrays_Out }
+func (*binaryClassGlDrawArrays_Out) New() binary.Object { return &GlDrawArrays_Out{} }
 func (*binaryClassGlDrawArrays_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawArrays_Out(e, obj.(*GlDrawArrays_Out))
 }
@@ -9565,7 +9762,8 @@ func doSkipGlDrawElements(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDrawElements) ID() binary.ID { return binaryIDGlDrawElements }
+func (*binaryClassGlDrawElements) ID() binary.ID      { return binaryIDGlDrawElements }
+func (*binaryClassGlDrawElements) New() binary.Object { return &GlDrawElements{} }
 func (*binaryClassGlDrawElements) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawElements(e, obj.(*GlDrawElements))
 }
@@ -9636,7 +9834,8 @@ func doSkipGlDrawElements_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlDrawElements_In) ID() binary.ID { return binaryIDGlDrawElements_In }
+func (*binaryClassGlDrawElements_In) ID() binary.ID      { return binaryIDGlDrawElements_In }
+func (*binaryClassGlDrawElements_In) New() binary.Object { return &GlDrawElements_In{} }
 func (*binaryClassGlDrawElements_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawElements_In(e, obj.(*GlDrawElements_In))
 }
@@ -9663,7 +9862,8 @@ func doDecodeGlDrawElements_Out(d binary.Decoder, o *GlDrawElements_Out) error {
 func doSkipGlDrawElements_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlDrawElements_Out) ID() binary.ID { return binaryIDGlDrawElements_Out }
+func (*binaryClassGlDrawElements_Out) ID() binary.ID      { return binaryIDGlDrawElements_Out }
+func (*binaryClassGlDrawElements_Out) New() binary.Object { return &GlDrawElements_Out{} }
 func (*binaryClassGlDrawElements_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlDrawElements_Out(e, obj.(*GlDrawElements_Out))
 }
@@ -9722,6 +9922,9 @@ func doSkipGlEGLImageTargetRenderbufferStorageOES(d binary.Decoder) error {
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) ID() binary.ID {
 	return binaryIDGlEGLImageTargetRenderbufferStorageOES
 }
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) New() binary.Object {
+	return &GlEGLImageTargetRenderbufferStorageOES{}
+}
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetRenderbufferStorageOES(e, obj.(*GlEGLImageTargetRenderbufferStorageOES))
 }
@@ -9775,6 +9978,9 @@ func doSkipGlEGLImageTargetRenderbufferStorageOES_In(d binary.Decoder) error {
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_In) ID() binary.ID {
 	return binaryIDGlEGLImageTargetRenderbufferStorageOES_In
 }
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_In) New() binary.Object {
+	return &GlEGLImageTargetRenderbufferStorageOES_In{}
+}
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetRenderbufferStorageOES_In(e, obj.(*GlEGLImageTargetRenderbufferStorageOES_In))
 }
@@ -9805,6 +10011,9 @@ func doSkipGlEGLImageTargetRenderbufferStorageOES_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_Out) ID() binary.ID {
 	return binaryIDGlEGLImageTargetRenderbufferStorageOES_Out
+}
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_Out) New() binary.Object {
+	return &GlEGLImageTargetRenderbufferStorageOES_Out{}
 }
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetRenderbufferStorageOES_Out(e, obj.(*GlEGLImageTargetRenderbufferStorageOES_Out))
@@ -9866,6 +10075,9 @@ func doSkipGlEGLImageTargetTexture2DOES(d binary.Decoder) error {
 func (*binaryClassGlEGLImageTargetTexture2DOES) ID() binary.ID {
 	return binaryIDGlEGLImageTargetTexture2DOES
 }
+func (*binaryClassGlEGLImageTargetTexture2DOES) New() binary.Object {
+	return &GlEGLImageTargetTexture2DOES{}
+}
 func (*binaryClassGlEGLImageTargetTexture2DOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetTexture2DOES(e, obj.(*GlEGLImageTargetTexture2DOES))
 }
@@ -9919,6 +10131,9 @@ func doSkipGlEGLImageTargetTexture2DOES_In(d binary.Decoder) error {
 func (*binaryClassGlEGLImageTargetTexture2DOES_In) ID() binary.ID {
 	return binaryIDGlEGLImageTargetTexture2DOES_In
 }
+func (*binaryClassGlEGLImageTargetTexture2DOES_In) New() binary.Object {
+	return &GlEGLImageTargetTexture2DOES_In{}
+}
 func (*binaryClassGlEGLImageTargetTexture2DOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetTexture2DOES_In(e, obj.(*GlEGLImageTargetTexture2DOES_In))
 }
@@ -9949,6 +10164,9 @@ func doSkipGlEGLImageTargetTexture2DOES_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlEGLImageTargetTexture2DOES_Out) ID() binary.ID {
 	return binaryIDGlEGLImageTargetTexture2DOES_Out
+}
+func (*binaryClassGlEGLImageTargetTexture2DOES_Out) New() binary.Object {
+	return &GlEGLImageTargetTexture2DOES_Out{}
 }
 func (*binaryClassGlEGLImageTargetTexture2DOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEGLImageTargetTexture2DOES_Out(e, obj.(*GlEGLImageTargetTexture2DOES_Out))
@@ -10007,7 +10225,8 @@ func doSkipGlEnable(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEnable) ID() binary.ID { return binaryIDGlEnable }
+func (*binaryClassGlEnable) ID() binary.ID      { return binaryIDGlEnable }
+func (*binaryClassGlEnable) New() binary.Object { return &GlEnable{} }
 func (*binaryClassGlEnable) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnable(e, obj.(*GlEnable))
 }
@@ -10063,7 +10282,8 @@ func doSkipGlEnableClientState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEnableClientState) ID() binary.ID { return binaryIDGlEnableClientState }
+func (*binaryClassGlEnableClientState) ID() binary.ID      { return binaryIDGlEnableClientState }
+func (*binaryClassGlEnableClientState) New() binary.Object { return &GlEnableClientState{} }
 func (*binaryClassGlEnableClientState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableClientState(e, obj.(*GlEnableClientState))
 }
@@ -10103,7 +10323,8 @@ func doSkipGlEnableClientState_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEnableClientState_In) ID() binary.ID { return binaryIDGlEnableClientState_In }
+func (*binaryClassGlEnableClientState_In) ID() binary.ID      { return binaryIDGlEnableClientState_In }
+func (*binaryClassGlEnableClientState_In) New() binary.Object { return &GlEnableClientState_In{} }
 func (*binaryClassGlEnableClientState_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableClientState_In(e, obj.(*GlEnableClientState_In))
 }
@@ -10132,7 +10353,8 @@ func doDecodeGlEnableClientState_Out(d binary.Decoder, o *GlEnableClientState_Ou
 func doSkipGlEnableClientState_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlEnableClientState_Out) ID() binary.ID { return binaryIDGlEnableClientState_Out }
+func (*binaryClassGlEnableClientState_Out) ID() binary.ID      { return binaryIDGlEnableClientState_Out }
+func (*binaryClassGlEnableClientState_Out) New() binary.Object { return &GlEnableClientState_Out{} }
 func (*binaryClassGlEnableClientState_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableClientState_Out(e, obj.(*GlEnableClientState_Out))
 }
@@ -10190,7 +10412,8 @@ func doSkipGlEnableVertexAttribArray(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEnableVertexAttribArray) ID() binary.ID { return binaryIDGlEnableVertexAttribArray }
+func (*binaryClassGlEnableVertexAttribArray) ID() binary.ID      { return binaryIDGlEnableVertexAttribArray }
+func (*binaryClassGlEnableVertexAttribArray) New() binary.Object { return &GlEnableVertexAttribArray{} }
 func (*binaryClassGlEnableVertexAttribArray) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableVertexAttribArray(e, obj.(*GlEnableVertexAttribArray))
 }
@@ -10233,6 +10456,9 @@ func doSkipGlEnableVertexAttribArray_In(d binary.Decoder) error {
 func (*binaryClassGlEnableVertexAttribArray_In) ID() binary.ID {
 	return binaryIDGlEnableVertexAttribArray_In
 }
+func (*binaryClassGlEnableVertexAttribArray_In) New() binary.Object {
+	return &GlEnableVertexAttribArray_In{}
+}
 func (*binaryClassGlEnableVertexAttribArray_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableVertexAttribArray_In(e, obj.(*GlEnableVertexAttribArray_In))
 }
@@ -10263,6 +10489,9 @@ func doSkipGlEnableVertexAttribArray_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlEnableVertexAttribArray_Out) ID() binary.ID {
 	return binaryIDGlEnableVertexAttribArray_Out
+}
+func (*binaryClassGlEnableVertexAttribArray_Out) New() binary.Object {
+	return &GlEnableVertexAttribArray_Out{}
 }
 func (*binaryClassGlEnableVertexAttribArray_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnableVertexAttribArray_Out(e, obj.(*GlEnableVertexAttribArray_Out))
@@ -10303,7 +10532,8 @@ func doSkipGlEnable_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEnable_In) ID() binary.ID { return binaryIDGlEnable_In }
+func (*binaryClassGlEnable_In) ID() binary.ID      { return binaryIDGlEnable_In }
+func (*binaryClassGlEnable_In) New() binary.Object { return &GlEnable_In{} }
 func (*binaryClassGlEnable_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnable_In(e, obj.(*GlEnable_In))
 }
@@ -10330,7 +10560,8 @@ func doDecodeGlEnable_Out(d binary.Decoder, o *GlEnable_Out) error {
 func doSkipGlEnable_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlEnable_Out) ID() binary.ID { return binaryIDGlEnable_Out }
+func (*binaryClassGlEnable_Out) ID() binary.ID      { return binaryIDGlEnable_Out }
+func (*binaryClassGlEnable_Out) New() binary.Object { return &GlEnable_Out{} }
 func (*binaryClassGlEnable_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEnable_Out(e, obj.(*GlEnable_Out))
 }
@@ -10386,7 +10617,8 @@ func doSkipGlEndQuery(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndQuery) ID() binary.ID { return binaryIDGlEndQuery }
+func (*binaryClassGlEndQuery) ID() binary.ID      { return binaryIDGlEndQuery }
+func (*binaryClassGlEndQuery) New() binary.Object { return &GlEndQuery{} }
 func (*binaryClassGlEndQuery) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQuery(e, obj.(*GlEndQuery))
 }
@@ -10442,7 +10674,8 @@ func doSkipGlEndQueryEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndQueryEXT) ID() binary.ID { return binaryIDGlEndQueryEXT }
+func (*binaryClassGlEndQueryEXT) ID() binary.ID      { return binaryIDGlEndQueryEXT }
+func (*binaryClassGlEndQueryEXT) New() binary.Object { return &GlEndQueryEXT{} }
 func (*binaryClassGlEndQueryEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQueryEXT(e, obj.(*GlEndQueryEXT))
 }
@@ -10480,7 +10713,8 @@ func doSkipGlEndQueryEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndQueryEXT_In) ID() binary.ID { return binaryIDGlEndQueryEXT_In }
+func (*binaryClassGlEndQueryEXT_In) ID() binary.ID      { return binaryIDGlEndQueryEXT_In }
+func (*binaryClassGlEndQueryEXT_In) New() binary.Object { return &GlEndQueryEXT_In{} }
 func (*binaryClassGlEndQueryEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQueryEXT_In(e, obj.(*GlEndQueryEXT_In))
 }
@@ -10507,7 +10741,8 @@ func doDecodeGlEndQueryEXT_Out(d binary.Decoder, o *GlEndQueryEXT_Out) error {
 func doSkipGlEndQueryEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlEndQueryEXT_Out) ID() binary.ID { return binaryIDGlEndQueryEXT_Out }
+func (*binaryClassGlEndQueryEXT_Out) ID() binary.ID      { return binaryIDGlEndQueryEXT_Out }
+func (*binaryClassGlEndQueryEXT_Out) New() binary.Object { return &GlEndQueryEXT_Out{} }
 func (*binaryClassGlEndQueryEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQueryEXT_Out(e, obj.(*GlEndQueryEXT_Out))
 }
@@ -10545,7 +10780,8 @@ func doSkipGlEndQuery_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndQuery_In) ID() binary.ID { return binaryIDGlEndQuery_In }
+func (*binaryClassGlEndQuery_In) ID() binary.ID      { return binaryIDGlEndQuery_In }
+func (*binaryClassGlEndQuery_In) New() binary.Object { return &GlEndQuery_In{} }
 func (*binaryClassGlEndQuery_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQuery_In(e, obj.(*GlEndQuery_In))
 }
@@ -10572,7 +10808,8 @@ func doDecodeGlEndQuery_Out(d binary.Decoder, o *GlEndQuery_Out) error {
 func doSkipGlEndQuery_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlEndQuery_Out) ID() binary.ID { return binaryIDGlEndQuery_Out }
+func (*binaryClassGlEndQuery_Out) ID() binary.ID      { return binaryIDGlEndQuery_Out }
+func (*binaryClassGlEndQuery_Out) New() binary.Object { return &GlEndQuery_Out{} }
 func (*binaryClassGlEndQuery_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndQuery_Out(e, obj.(*GlEndQuery_Out))
 }
@@ -10628,7 +10865,8 @@ func doSkipGlEndTilingQCOM(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndTilingQCOM) ID() binary.ID { return binaryIDGlEndTilingQCOM }
+func (*binaryClassGlEndTilingQCOM) ID() binary.ID      { return binaryIDGlEndTilingQCOM }
+func (*binaryClassGlEndTilingQCOM) New() binary.Object { return &GlEndTilingQCOM{} }
 func (*binaryClassGlEndTilingQCOM) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndTilingQCOM(e, obj.(*GlEndTilingQCOM))
 }
@@ -10666,7 +10904,8 @@ func doSkipGlEndTilingQCOM_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlEndTilingQCOM_In) ID() binary.ID { return binaryIDGlEndTilingQCOM_In }
+func (*binaryClassGlEndTilingQCOM_In) ID() binary.ID      { return binaryIDGlEndTilingQCOM_In }
+func (*binaryClassGlEndTilingQCOM_In) New() binary.Object { return &GlEndTilingQCOM_In{} }
 func (*binaryClassGlEndTilingQCOM_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndTilingQCOM_In(e, obj.(*GlEndTilingQCOM_In))
 }
@@ -10693,7 +10932,8 @@ func doDecodeGlEndTilingQCOM_Out(d binary.Decoder, o *GlEndTilingQCOM_Out) error
 func doSkipGlEndTilingQCOM_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlEndTilingQCOM_Out) ID() binary.ID { return binaryIDGlEndTilingQCOM_Out }
+func (*binaryClassGlEndTilingQCOM_Out) ID() binary.ID      { return binaryIDGlEndTilingQCOM_Out }
+func (*binaryClassGlEndTilingQCOM_Out) New() binary.Object { return &GlEndTilingQCOM_Out{} }
 func (*binaryClassGlEndTilingQCOM_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlEndTilingQCOM_Out(e, obj.(*GlEndTilingQCOM_Out))
 }
@@ -10751,7 +10991,8 @@ func doSkipGlFinish(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFinish) ID() binary.ID { return binaryIDGlFinish }
+func (*binaryClassGlFinish) ID() binary.ID      { return binaryIDGlFinish }
+func (*binaryClassGlFinish) New() binary.Object { return &GlFinish{} }
 func (*binaryClassGlFinish) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFinish(e, obj.(*GlFinish))
 }
@@ -10778,7 +11019,8 @@ func doDecodeGlFinish_In(d binary.Decoder, o *GlFinish_In) error {
 func doSkipGlFinish_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlFinish_In) ID() binary.ID { return binaryIDGlFinish_In }
+func (*binaryClassGlFinish_In) ID() binary.ID      { return binaryIDGlFinish_In }
+func (*binaryClassGlFinish_In) New() binary.Object { return &GlFinish_In{} }
 func (*binaryClassGlFinish_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFinish_In(e, obj.(*GlFinish_In))
 }
@@ -10805,7 +11047,8 @@ func doDecodeGlFinish_Out(d binary.Decoder, o *GlFinish_Out) error {
 func doSkipGlFinish_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlFinish_Out) ID() binary.ID { return binaryIDGlFinish_Out }
+func (*binaryClassGlFinish_Out) ID() binary.ID      { return binaryIDGlFinish_Out }
+func (*binaryClassGlFinish_Out) New() binary.Object { return &GlFinish_Out{} }
 func (*binaryClassGlFinish_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFinish_Out(e, obj.(*GlFinish_Out))
 }
@@ -10861,7 +11104,8 @@ func doSkipGlFlush(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFlush) ID() binary.ID { return binaryIDGlFlush }
+func (*binaryClassGlFlush) ID() binary.ID      { return binaryIDGlFlush }
+func (*binaryClassGlFlush) New() binary.Object { return &GlFlush{} }
 func (*binaryClassGlFlush) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFlush(e, obj.(*GlFlush))
 }
@@ -10888,7 +11132,8 @@ func doDecodeGlFlush_In(d binary.Decoder, o *GlFlush_In) error {
 func doSkipGlFlush_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlFlush_In) ID() binary.ID { return binaryIDGlFlush_In }
+func (*binaryClassGlFlush_In) ID() binary.ID      { return binaryIDGlFlush_In }
+func (*binaryClassGlFlush_In) New() binary.Object { return &GlFlush_In{} }
 func (*binaryClassGlFlush_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFlush_In(e, obj.(*GlFlush_In))
 }
@@ -10915,7 +11160,8 @@ func doDecodeGlFlush_Out(d binary.Decoder, o *GlFlush_Out) error {
 func doSkipGlFlush_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlFlush_Out) ID() binary.ID { return binaryIDGlFlush_Out }
+func (*binaryClassGlFlush_Out) ID() binary.ID      { return binaryIDGlFlush_Out }
+func (*binaryClassGlFlush_Out) New() binary.Object { return &GlFlush_Out{} }
 func (*binaryClassGlFlush_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFlush_Out(e, obj.(*GlFlush_Out))
 }
@@ -10971,7 +11217,8 @@ func doSkipGlFramebufferRenderbuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFramebufferRenderbuffer) ID() binary.ID { return binaryIDGlFramebufferRenderbuffer }
+func (*binaryClassGlFramebufferRenderbuffer) ID() binary.ID      { return binaryIDGlFramebufferRenderbuffer }
+func (*binaryClassGlFramebufferRenderbuffer) New() binary.Object { return &GlFramebufferRenderbuffer{} }
 func (*binaryClassGlFramebufferRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferRenderbuffer(e, obj.(*GlFramebufferRenderbuffer))
 }
@@ -11047,6 +11294,9 @@ func doSkipGlFramebufferRenderbuffer_In(d binary.Decoder) error {
 func (*binaryClassGlFramebufferRenderbuffer_In) ID() binary.ID {
 	return binaryIDGlFramebufferRenderbuffer_In
 }
+func (*binaryClassGlFramebufferRenderbuffer_In) New() binary.Object {
+	return &GlFramebufferRenderbuffer_In{}
+}
 func (*binaryClassGlFramebufferRenderbuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferRenderbuffer_In(e, obj.(*GlFramebufferRenderbuffer_In))
 }
@@ -11077,6 +11327,9 @@ func doSkipGlFramebufferRenderbuffer_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlFramebufferRenderbuffer_Out) ID() binary.ID {
 	return binaryIDGlFramebufferRenderbuffer_Out
+}
+func (*binaryClassGlFramebufferRenderbuffer_Out) New() binary.Object {
+	return &GlFramebufferRenderbuffer_Out{}
 }
 func (*binaryClassGlFramebufferRenderbuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferRenderbuffer_Out(e, obj.(*GlFramebufferRenderbuffer_Out))
@@ -11135,7 +11388,8 @@ func doSkipGlFramebufferTexture2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFramebufferTexture2D) ID() binary.ID { return binaryIDGlFramebufferTexture2D }
+func (*binaryClassGlFramebufferTexture2D) ID() binary.ID      { return binaryIDGlFramebufferTexture2D }
+func (*binaryClassGlFramebufferTexture2D) New() binary.Object { return &GlFramebufferTexture2D{} }
 func (*binaryClassGlFramebufferTexture2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferTexture2D(e, obj.(*GlFramebufferTexture2D))
 }
@@ -11219,7 +11473,8 @@ func doSkipGlFramebufferTexture2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFramebufferTexture2D_In) ID() binary.ID { return binaryIDGlFramebufferTexture2D_In }
+func (*binaryClassGlFramebufferTexture2D_In) ID() binary.ID      { return binaryIDGlFramebufferTexture2D_In }
+func (*binaryClassGlFramebufferTexture2D_In) New() binary.Object { return &GlFramebufferTexture2D_In{} }
 func (*binaryClassGlFramebufferTexture2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferTexture2D_In(e, obj.(*GlFramebufferTexture2D_In))
 }
@@ -11250,6 +11505,9 @@ func doSkipGlFramebufferTexture2D_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlFramebufferTexture2D_Out) ID() binary.ID {
 	return binaryIDGlFramebufferTexture2D_Out
+}
+func (*binaryClassGlFramebufferTexture2D_Out) New() binary.Object {
+	return &GlFramebufferTexture2D_Out{}
 }
 func (*binaryClassGlFramebufferTexture2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFramebufferTexture2D_Out(e, obj.(*GlFramebufferTexture2D_Out))
@@ -11308,7 +11566,8 @@ func doSkipGlFrontFace(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFrontFace) ID() binary.ID { return binaryIDGlFrontFace }
+func (*binaryClassGlFrontFace) ID() binary.ID      { return binaryIDGlFrontFace }
+func (*binaryClassGlFrontFace) New() binary.Object { return &GlFrontFace{} }
 func (*binaryClassGlFrontFace) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFrontFace(e, obj.(*GlFrontFace))
 }
@@ -11346,7 +11605,8 @@ func doSkipGlFrontFace_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlFrontFace_In) ID() binary.ID { return binaryIDGlFrontFace_In }
+func (*binaryClassGlFrontFace_In) ID() binary.ID      { return binaryIDGlFrontFace_In }
+func (*binaryClassGlFrontFace_In) New() binary.Object { return &GlFrontFace_In{} }
 func (*binaryClassGlFrontFace_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFrontFace_In(e, obj.(*GlFrontFace_In))
 }
@@ -11373,7 +11633,8 @@ func doDecodeGlFrontFace_Out(d binary.Decoder, o *GlFrontFace_Out) error {
 func doSkipGlFrontFace_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlFrontFace_Out) ID() binary.ID { return binaryIDGlFrontFace_Out }
+func (*binaryClassGlFrontFace_Out) ID() binary.ID      { return binaryIDGlFrontFace_Out }
+func (*binaryClassGlFrontFace_Out) New() binary.Object { return &GlFrontFace_Out{} }
 func (*binaryClassGlFrontFace_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlFrontFace_Out(e, obj.(*GlFrontFace_Out))
 }
@@ -11429,7 +11690,8 @@ func doSkipGlGenBuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenBuffers) ID() binary.ID { return binaryIDGlGenBuffers }
+func (*binaryClassGlGenBuffers) ID() binary.ID      { return binaryIDGlGenBuffers }
+func (*binaryClassGlGenBuffers) New() binary.Object { return &GlGenBuffers{} }
 func (*binaryClassGlGenBuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenBuffers(e, obj.(*GlGenBuffers))
 }
@@ -11467,7 +11729,8 @@ func doSkipGlGenBuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenBuffers_In) ID() binary.ID { return binaryIDGlGenBuffers_In }
+func (*binaryClassGlGenBuffers_In) ID() binary.ID      { return binaryIDGlGenBuffers_In }
+func (*binaryClassGlGenBuffers_In) New() binary.Object { return &GlGenBuffers_In{} }
 func (*binaryClassGlGenBuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenBuffers_In(e, obj.(*GlGenBuffers_In))
 }
@@ -11523,7 +11786,8 @@ func doSkipGlGenBuffers_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenBuffers_Out) ID() binary.ID { return binaryIDGlGenBuffers_Out }
+func (*binaryClassGlGenBuffers_Out) ID() binary.ID      { return binaryIDGlGenBuffers_Out }
+func (*binaryClassGlGenBuffers_Out) New() binary.Object { return &GlGenBuffers_Out{} }
 func (*binaryClassGlGenBuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenBuffers_Out(e, obj.(*GlGenBuffers_Out))
 }
@@ -11579,7 +11843,8 @@ func doSkipGlGenFramebuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenFramebuffers) ID() binary.ID { return binaryIDGlGenFramebuffers }
+func (*binaryClassGlGenFramebuffers) ID() binary.ID      { return binaryIDGlGenFramebuffers }
+func (*binaryClassGlGenFramebuffers) New() binary.Object { return &GlGenFramebuffers{} }
 func (*binaryClassGlGenFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenFramebuffers(e, obj.(*GlGenFramebuffers))
 }
@@ -11617,7 +11882,8 @@ func doSkipGlGenFramebuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenFramebuffers_In) ID() binary.ID { return binaryIDGlGenFramebuffers_In }
+func (*binaryClassGlGenFramebuffers_In) ID() binary.ID      { return binaryIDGlGenFramebuffers_In }
+func (*binaryClassGlGenFramebuffers_In) New() binary.Object { return &GlGenFramebuffers_In{} }
 func (*binaryClassGlGenFramebuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenFramebuffers_In(e, obj.(*GlGenFramebuffers_In))
 }
@@ -11675,7 +11941,8 @@ func doSkipGlGenFramebuffers_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenFramebuffers_Out) ID() binary.ID { return binaryIDGlGenFramebuffers_Out }
+func (*binaryClassGlGenFramebuffers_Out) ID() binary.ID      { return binaryIDGlGenFramebuffers_Out }
+func (*binaryClassGlGenFramebuffers_Out) New() binary.Object { return &GlGenFramebuffers_Out{} }
 func (*binaryClassGlGenFramebuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenFramebuffers_Out(e, obj.(*GlGenFramebuffers_Out))
 }
@@ -11733,7 +12000,8 @@ func doSkipGlGenQueries(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueries) ID() binary.ID { return binaryIDGlGenQueries }
+func (*binaryClassGlGenQueries) ID() binary.ID      { return binaryIDGlGenQueries }
+func (*binaryClassGlGenQueries) New() binary.Object { return &GlGenQueries{} }
 func (*binaryClassGlGenQueries) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueries(e, obj.(*GlGenQueries))
 }
@@ -11789,7 +12057,8 @@ func doSkipGlGenQueriesEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueriesEXT) ID() binary.ID { return binaryIDGlGenQueriesEXT }
+func (*binaryClassGlGenQueriesEXT) ID() binary.ID      { return binaryIDGlGenQueriesEXT }
+func (*binaryClassGlGenQueriesEXT) New() binary.Object { return &GlGenQueriesEXT{} }
 func (*binaryClassGlGenQueriesEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueriesEXT(e, obj.(*GlGenQueriesEXT))
 }
@@ -11827,7 +12096,8 @@ func doSkipGlGenQueriesEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueriesEXT_In) ID() binary.ID { return binaryIDGlGenQueriesEXT_In }
+func (*binaryClassGlGenQueriesEXT_In) ID() binary.ID      { return binaryIDGlGenQueriesEXT_In }
+func (*binaryClassGlGenQueriesEXT_In) New() binary.Object { return &GlGenQueriesEXT_In{} }
 func (*binaryClassGlGenQueriesEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueriesEXT_In(e, obj.(*GlGenQueriesEXT_In))
 }
@@ -11883,7 +12153,8 @@ func doSkipGlGenQueriesEXT_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueriesEXT_Out) ID() binary.ID { return binaryIDGlGenQueriesEXT_Out }
+func (*binaryClassGlGenQueriesEXT_Out) ID() binary.ID      { return binaryIDGlGenQueriesEXT_Out }
+func (*binaryClassGlGenQueriesEXT_Out) New() binary.Object { return &GlGenQueriesEXT_Out{} }
 func (*binaryClassGlGenQueriesEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueriesEXT_Out(e, obj.(*GlGenQueriesEXT_Out))
 }
@@ -11923,7 +12194,8 @@ func doSkipGlGenQueries_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueries_In) ID() binary.ID { return binaryIDGlGenQueries_In }
+func (*binaryClassGlGenQueries_In) ID() binary.ID      { return binaryIDGlGenQueries_In }
+func (*binaryClassGlGenQueries_In) New() binary.Object { return &GlGenQueries_In{} }
 func (*binaryClassGlGenQueries_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueries_In(e, obj.(*GlGenQueries_In))
 }
@@ -11979,7 +12251,8 @@ func doSkipGlGenQueries_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenQueries_Out) ID() binary.ID { return binaryIDGlGenQueries_Out }
+func (*binaryClassGlGenQueries_Out) ID() binary.ID      { return binaryIDGlGenQueries_Out }
+func (*binaryClassGlGenQueries_Out) New() binary.Object { return &GlGenQueries_Out{} }
 func (*binaryClassGlGenQueries_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenQueries_Out(e, obj.(*GlGenQueries_Out))
 }
@@ -12035,7 +12308,8 @@ func doSkipGlGenRenderbuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenRenderbuffers) ID() binary.ID { return binaryIDGlGenRenderbuffers }
+func (*binaryClassGlGenRenderbuffers) ID() binary.ID      { return binaryIDGlGenRenderbuffers }
+func (*binaryClassGlGenRenderbuffers) New() binary.Object { return &GlGenRenderbuffers{} }
 func (*binaryClassGlGenRenderbuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenRenderbuffers(e, obj.(*GlGenRenderbuffers))
 }
@@ -12073,7 +12347,8 @@ func doSkipGlGenRenderbuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenRenderbuffers_In) ID() binary.ID { return binaryIDGlGenRenderbuffers_In }
+func (*binaryClassGlGenRenderbuffers_In) ID() binary.ID      { return binaryIDGlGenRenderbuffers_In }
+func (*binaryClassGlGenRenderbuffers_In) New() binary.Object { return &GlGenRenderbuffers_In{} }
 func (*binaryClassGlGenRenderbuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenRenderbuffers_In(e, obj.(*GlGenRenderbuffers_In))
 }
@@ -12131,7 +12406,8 @@ func doSkipGlGenRenderbuffers_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenRenderbuffers_Out) ID() binary.ID { return binaryIDGlGenRenderbuffers_Out }
+func (*binaryClassGlGenRenderbuffers_Out) ID() binary.ID      { return binaryIDGlGenRenderbuffers_Out }
+func (*binaryClassGlGenRenderbuffers_Out) New() binary.Object { return &GlGenRenderbuffers_Out{} }
 func (*binaryClassGlGenRenderbuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenRenderbuffers_Out(e, obj.(*GlGenRenderbuffers_Out))
 }
@@ -12189,7 +12465,8 @@ func doSkipGlGenTextures(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenTextures) ID() binary.ID { return binaryIDGlGenTextures }
+func (*binaryClassGlGenTextures) ID() binary.ID      { return binaryIDGlGenTextures }
+func (*binaryClassGlGenTextures) New() binary.Object { return &GlGenTextures{} }
 func (*binaryClassGlGenTextures) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenTextures(e, obj.(*GlGenTextures))
 }
@@ -12227,7 +12504,8 @@ func doSkipGlGenTextures_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenTextures_In) ID() binary.ID { return binaryIDGlGenTextures_In }
+func (*binaryClassGlGenTextures_In) ID() binary.ID      { return binaryIDGlGenTextures_In }
+func (*binaryClassGlGenTextures_In) New() binary.Object { return &GlGenTextures_In{} }
 func (*binaryClassGlGenTextures_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenTextures_In(e, obj.(*GlGenTextures_In))
 }
@@ -12283,7 +12561,8 @@ func doSkipGlGenTextures_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenTextures_Out) ID() binary.ID { return binaryIDGlGenTextures_Out }
+func (*binaryClassGlGenTextures_Out) ID() binary.ID      { return binaryIDGlGenTextures_Out }
+func (*binaryClassGlGenTextures_Out) New() binary.Object { return &GlGenTextures_Out{} }
 func (*binaryClassGlGenTextures_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenTextures_Out(e, obj.(*GlGenTextures_Out))
 }
@@ -12339,7 +12618,8 @@ func doSkipGlGenVertexArraysOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenVertexArraysOES) ID() binary.ID { return binaryIDGlGenVertexArraysOES }
+func (*binaryClassGlGenVertexArraysOES) ID() binary.ID      { return binaryIDGlGenVertexArraysOES }
+func (*binaryClassGlGenVertexArraysOES) New() binary.Object { return &GlGenVertexArraysOES{} }
 func (*binaryClassGlGenVertexArraysOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenVertexArraysOES(e, obj.(*GlGenVertexArraysOES))
 }
@@ -12379,7 +12659,8 @@ func doSkipGlGenVertexArraysOES_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenVertexArraysOES_In) ID() binary.ID { return binaryIDGlGenVertexArraysOES_In }
+func (*binaryClassGlGenVertexArraysOES_In) ID() binary.ID      { return binaryIDGlGenVertexArraysOES_In }
+func (*binaryClassGlGenVertexArraysOES_In) New() binary.Object { return &GlGenVertexArraysOES_In{} }
 func (*binaryClassGlGenVertexArraysOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenVertexArraysOES_In(e, obj.(*GlGenVertexArraysOES_In))
 }
@@ -12437,7 +12718,8 @@ func doSkipGlGenVertexArraysOES_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenVertexArraysOES_Out) ID() binary.ID { return binaryIDGlGenVertexArraysOES_Out }
+func (*binaryClassGlGenVertexArraysOES_Out) ID() binary.ID      { return binaryIDGlGenVertexArraysOES_Out }
+func (*binaryClassGlGenVertexArraysOES_Out) New() binary.Object { return &GlGenVertexArraysOES_Out{} }
 func (*binaryClassGlGenVertexArraysOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenVertexArraysOES_Out(e, obj.(*GlGenVertexArraysOES_Out))
 }
@@ -12495,7 +12777,8 @@ func doSkipGlGenerateMipmap(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenerateMipmap) ID() binary.ID { return binaryIDGlGenerateMipmap }
+func (*binaryClassGlGenerateMipmap) ID() binary.ID      { return binaryIDGlGenerateMipmap }
+func (*binaryClassGlGenerateMipmap) New() binary.Object { return &GlGenerateMipmap{} }
 func (*binaryClassGlGenerateMipmap) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenerateMipmap(e, obj.(*GlGenerateMipmap))
 }
@@ -12533,7 +12816,8 @@ func doSkipGlGenerateMipmap_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGenerateMipmap_In) ID() binary.ID { return binaryIDGlGenerateMipmap_In }
+func (*binaryClassGlGenerateMipmap_In) ID() binary.ID      { return binaryIDGlGenerateMipmap_In }
+func (*binaryClassGlGenerateMipmap_In) New() binary.Object { return &GlGenerateMipmap_In{} }
 func (*binaryClassGlGenerateMipmap_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenerateMipmap_In(e, obj.(*GlGenerateMipmap_In))
 }
@@ -12562,7 +12846,8 @@ func doDecodeGlGenerateMipmap_Out(d binary.Decoder, o *GlGenerateMipmap_Out) err
 func doSkipGlGenerateMipmap_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlGenerateMipmap_Out) ID() binary.ID { return binaryIDGlGenerateMipmap_Out }
+func (*binaryClassGlGenerateMipmap_Out) ID() binary.ID      { return binaryIDGlGenerateMipmap_Out }
+func (*binaryClassGlGenerateMipmap_Out) New() binary.Object { return &GlGenerateMipmap_Out{} }
 func (*binaryClassGlGenerateMipmap_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGenerateMipmap_Out(e, obj.(*GlGenerateMipmap_Out))
 }
@@ -12620,7 +12905,8 @@ func doSkipGlGetActiveAttrib(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveAttrib) ID() binary.ID { return binaryIDGlGetActiveAttrib }
+func (*binaryClassGlGetActiveAttrib) ID() binary.ID      { return binaryIDGlGetActiveAttrib }
+func (*binaryClassGlGetActiveAttrib) New() binary.Object { return &GlGetActiveAttrib{} }
 func (*binaryClassGlGetActiveAttrib) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveAttrib(e, obj.(*GlGetActiveAttrib))
 }
@@ -12680,7 +12966,8 @@ func doSkipGlGetActiveAttrib_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveAttrib_In) ID() binary.ID { return binaryIDGlGetActiveAttrib_In }
+func (*binaryClassGlGetActiveAttrib_In) ID() binary.ID      { return binaryIDGlGetActiveAttrib_In }
+func (*binaryClassGlGetActiveAttrib_In) New() binary.Object { return &GlGetActiveAttrib_In{} }
 func (*binaryClassGlGetActiveAttrib_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveAttrib_In(e, obj.(*GlGetActiveAttrib_In))
 }
@@ -12753,7 +13040,8 @@ func doSkipGlGetActiveAttrib_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveAttrib_Out) ID() binary.ID { return binaryIDGlGetActiveAttrib_Out }
+func (*binaryClassGlGetActiveAttrib_Out) ID() binary.ID      { return binaryIDGlGetActiveAttrib_Out }
+func (*binaryClassGlGetActiveAttrib_Out) New() binary.Object { return &GlGetActiveAttrib_Out{} }
 func (*binaryClassGlGetActiveAttrib_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveAttrib_Out(e, obj.(*GlGetActiveAttrib_Out))
 }
@@ -12811,7 +13099,8 @@ func doSkipGlGetActiveUniform(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveUniform) ID() binary.ID { return binaryIDGlGetActiveUniform }
+func (*binaryClassGlGetActiveUniform) ID() binary.ID      { return binaryIDGlGetActiveUniform }
+func (*binaryClassGlGetActiveUniform) New() binary.Object { return &GlGetActiveUniform{} }
 func (*binaryClassGlGetActiveUniform) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveUniform(e, obj.(*GlGetActiveUniform))
 }
@@ -12871,7 +13160,8 @@ func doSkipGlGetActiveUniform_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveUniform_In) ID() binary.ID { return binaryIDGlGetActiveUniform_In }
+func (*binaryClassGlGetActiveUniform_In) ID() binary.ID      { return binaryIDGlGetActiveUniform_In }
+func (*binaryClassGlGetActiveUniform_In) New() binary.Object { return &GlGetActiveUniform_In{} }
 func (*binaryClassGlGetActiveUniform_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveUniform_In(e, obj.(*GlGetActiveUniform_In))
 }
@@ -12944,7 +13234,8 @@ func doSkipGlGetActiveUniform_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetActiveUniform_Out) ID() binary.ID { return binaryIDGlGetActiveUniform_Out }
+func (*binaryClassGlGetActiveUniform_Out) ID() binary.ID      { return binaryIDGlGetActiveUniform_Out }
+func (*binaryClassGlGetActiveUniform_Out) New() binary.Object { return &GlGetActiveUniform_Out{} }
 func (*binaryClassGlGetActiveUniform_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetActiveUniform_Out(e, obj.(*GlGetActiveUniform_Out))
 }
@@ -13002,7 +13293,8 @@ func doSkipGlGetAttachedShaders(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttachedShaders) ID() binary.ID { return binaryIDGlGetAttachedShaders }
+func (*binaryClassGlGetAttachedShaders) ID() binary.ID      { return binaryIDGlGetAttachedShaders }
+func (*binaryClassGlGetAttachedShaders) New() binary.Object { return &GlGetAttachedShaders{} }
 func (*binaryClassGlGetAttachedShaders) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttachedShaders(e, obj.(*GlGetAttachedShaders))
 }
@@ -13053,7 +13345,8 @@ func doSkipGlGetAttachedShaders_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttachedShaders_In) ID() binary.ID { return binaryIDGlGetAttachedShaders_In }
+func (*binaryClassGlGetAttachedShaders_In) ID() binary.ID      { return binaryIDGlGetAttachedShaders_In }
+func (*binaryClassGlGetAttachedShaders_In) New() binary.Object { return &GlGetAttachedShaders_In{} }
 func (*binaryClassGlGetAttachedShaders_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttachedShaders_In(e, obj.(*GlGetAttachedShaders_In))
 }
@@ -13122,7 +13415,8 @@ func doSkipGlGetAttachedShaders_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttachedShaders_Out) ID() binary.ID { return binaryIDGlGetAttachedShaders_Out }
+func (*binaryClassGlGetAttachedShaders_Out) ID() binary.ID      { return binaryIDGlGetAttachedShaders_Out }
+func (*binaryClassGlGetAttachedShaders_Out) New() binary.Object { return &GlGetAttachedShaders_Out{} }
 func (*binaryClassGlGetAttachedShaders_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttachedShaders_Out(e, obj.(*GlGetAttachedShaders_Out))
 }
@@ -13180,7 +13474,8 @@ func doSkipGlGetAttribLocation(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttribLocation) ID() binary.ID { return binaryIDGlGetAttribLocation }
+func (*binaryClassGlGetAttribLocation) ID() binary.ID      { return binaryIDGlGetAttribLocation }
+func (*binaryClassGlGetAttribLocation) New() binary.Object { return &GlGetAttribLocation{} }
 func (*binaryClassGlGetAttribLocation) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttribLocation(e, obj.(*GlGetAttribLocation))
 }
@@ -13231,7 +13526,8 @@ func doSkipGlGetAttribLocation_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttribLocation_In) ID() binary.ID { return binaryIDGlGetAttribLocation_In }
+func (*binaryClassGlGetAttribLocation_In) ID() binary.ID      { return binaryIDGlGetAttribLocation_In }
+func (*binaryClassGlGetAttribLocation_In) New() binary.Object { return &GlGetAttribLocation_In{} }
 func (*binaryClassGlGetAttribLocation_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttribLocation_In(e, obj.(*GlGetAttribLocation_In))
 }
@@ -13271,7 +13567,8 @@ func doSkipGlGetAttribLocation_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetAttribLocation_Out) ID() binary.ID { return binaryIDGlGetAttribLocation_Out }
+func (*binaryClassGlGetAttribLocation_Out) ID() binary.ID      { return binaryIDGlGetAttribLocation_Out }
+func (*binaryClassGlGetAttribLocation_Out) New() binary.Object { return &GlGetAttribLocation_Out{} }
 func (*binaryClassGlGetAttribLocation_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetAttribLocation_Out(e, obj.(*GlGetAttribLocation_Out))
 }
@@ -13329,7 +13626,8 @@ func doSkipGlGetBooleanv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetBooleanv) ID() binary.ID { return binaryIDGlGetBooleanv }
+func (*binaryClassGlGetBooleanv) ID() binary.ID      { return binaryIDGlGetBooleanv }
+func (*binaryClassGlGetBooleanv) New() binary.Object { return &GlGetBooleanv{} }
 func (*binaryClassGlGetBooleanv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBooleanv(e, obj.(*GlGetBooleanv))
 }
@@ -13367,7 +13665,8 @@ func doSkipGlGetBooleanv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetBooleanv_In) ID() binary.ID { return binaryIDGlGetBooleanv_In }
+func (*binaryClassGlGetBooleanv_In) ID() binary.ID      { return binaryIDGlGetBooleanv_In }
+func (*binaryClassGlGetBooleanv_In) New() binary.Object { return &GlGetBooleanv_In{} }
 func (*binaryClassGlGetBooleanv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBooleanv_In(e, obj.(*GlGetBooleanv_In))
 }
@@ -13423,7 +13722,8 @@ func doSkipGlGetBooleanv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetBooleanv_Out) ID() binary.ID { return binaryIDGlGetBooleanv_Out }
+func (*binaryClassGlGetBooleanv_Out) ID() binary.ID      { return binaryIDGlGetBooleanv_Out }
+func (*binaryClassGlGetBooleanv_Out) New() binary.Object { return &GlGetBooleanv_Out{} }
 func (*binaryClassGlGetBooleanv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBooleanv_Out(e, obj.(*GlGetBooleanv_Out))
 }
@@ -13479,7 +13779,8 @@ func doSkipGlGetBufferParameteriv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetBufferParameteriv) ID() binary.ID { return binaryIDGlGetBufferParameteriv }
+func (*binaryClassGlGetBufferParameteriv) ID() binary.ID      { return binaryIDGlGetBufferParameteriv }
+func (*binaryClassGlGetBufferParameteriv) New() binary.Object { return &GlGetBufferParameteriv{} }
 func (*binaryClassGlGetBufferParameteriv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBufferParameteriv(e, obj.(*GlGetBufferParameteriv))
 }
@@ -13530,7 +13831,8 @@ func doSkipGlGetBufferParameteriv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetBufferParameteriv_In) ID() binary.ID { return binaryIDGlGetBufferParameteriv_In }
+func (*binaryClassGlGetBufferParameteriv_In) ID() binary.ID      { return binaryIDGlGetBufferParameteriv_In }
+func (*binaryClassGlGetBufferParameteriv_In) New() binary.Object { return &GlGetBufferParameteriv_In{} }
 func (*binaryClassGlGetBufferParameteriv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBufferParameteriv_In(e, obj.(*GlGetBufferParameteriv_In))
 }
@@ -13572,6 +13874,9 @@ func doSkipGlGetBufferParameteriv_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetBufferParameteriv_Out) ID() binary.ID {
 	return binaryIDGlGetBufferParameteriv_Out
+}
+func (*binaryClassGlGetBufferParameteriv_Out) New() binary.Object {
+	return &GlGetBufferParameteriv_Out{}
 }
 func (*binaryClassGlGetBufferParameteriv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetBufferParameteriv_Out(e, obj.(*GlGetBufferParameteriv_Out))
@@ -13630,7 +13935,8 @@ func doSkipGlGetError(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetError) ID() binary.ID { return binaryIDGlGetError }
+func (*binaryClassGlGetError) ID() binary.ID      { return binaryIDGlGetError }
+func (*binaryClassGlGetError) New() binary.Object { return &GlGetError{} }
 func (*binaryClassGlGetError) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetError(e, obj.(*GlGetError))
 }
@@ -13657,7 +13963,8 @@ func doDecodeGlGetError_In(d binary.Decoder, o *GlGetError_In) error {
 func doSkipGlGetError_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlGetError_In) ID() binary.ID { return binaryIDGlGetError_In }
+func (*binaryClassGlGetError_In) ID() binary.ID      { return binaryIDGlGetError_In }
+func (*binaryClassGlGetError_In) New() binary.Object { return &GlGetError_In{} }
 func (*binaryClassGlGetError_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetError_In(e, obj.(*GlGetError_In))
 }
@@ -13695,7 +14002,8 @@ func doSkipGlGetError_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetError_Out) ID() binary.ID { return binaryIDGlGetError_Out }
+func (*binaryClassGlGetError_Out) ID() binary.ID      { return binaryIDGlGetError_Out }
+func (*binaryClassGlGetError_Out) New() binary.Object { return &GlGetError_Out{} }
 func (*binaryClassGlGetError_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetError_Out(e, obj.(*GlGetError_Out))
 }
@@ -13751,7 +14059,8 @@ func doSkipGlGetFloatv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetFloatv) ID() binary.ID { return binaryIDGlGetFloatv }
+func (*binaryClassGlGetFloatv) ID() binary.ID      { return binaryIDGlGetFloatv }
+func (*binaryClassGlGetFloatv) New() binary.Object { return &GlGetFloatv{} }
 func (*binaryClassGlGetFloatv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFloatv(e, obj.(*GlGetFloatv))
 }
@@ -13789,7 +14098,8 @@ func doSkipGlGetFloatv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetFloatv_In) ID() binary.ID { return binaryIDGlGetFloatv_In }
+func (*binaryClassGlGetFloatv_In) ID() binary.ID      { return binaryIDGlGetFloatv_In }
+func (*binaryClassGlGetFloatv_In) New() binary.Object { return &GlGetFloatv_In{} }
 func (*binaryClassGlGetFloatv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFloatv_In(e, obj.(*GlGetFloatv_In))
 }
@@ -13845,7 +14155,8 @@ func doSkipGlGetFloatv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetFloatv_Out) ID() binary.ID { return binaryIDGlGetFloatv_Out }
+func (*binaryClassGlGetFloatv_Out) ID() binary.ID      { return binaryIDGlGetFloatv_Out }
+func (*binaryClassGlGetFloatv_Out) New() binary.Object { return &GlGetFloatv_Out{} }
 func (*binaryClassGlGetFloatv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFloatv_Out(e, obj.(*GlGetFloatv_Out))
 }
@@ -13903,6 +14214,9 @@ func doSkipGlGetFramebufferAttachmentParameteriv(d binary.Decoder) error {
 }
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) ID() binary.ID {
 	return binaryIDGlGetFramebufferAttachmentParameteriv
+}
+func (*binaryClassGlGetFramebufferAttachmentParameteriv) New() binary.Object {
+	return &GlGetFramebufferAttachmentParameteriv{}
 }
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFramebufferAttachmentParameteriv(e, obj.(*GlGetFramebufferAttachmentParameteriv))
@@ -13968,6 +14282,9 @@ func doSkipGlGetFramebufferAttachmentParameteriv_In(d binary.Decoder) error {
 func (*binaryClassGlGetFramebufferAttachmentParameteriv_In) ID() binary.ID {
 	return binaryIDGlGetFramebufferAttachmentParameteriv_In
 }
+func (*binaryClassGlGetFramebufferAttachmentParameteriv_In) New() binary.Object {
+	return &GlGetFramebufferAttachmentParameteriv_In{}
+}
 func (*binaryClassGlGetFramebufferAttachmentParameteriv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFramebufferAttachmentParameteriv_In(e, obj.(*GlGetFramebufferAttachmentParameteriv_In))
 }
@@ -14027,6 +14344,9 @@ func doSkipGlGetFramebufferAttachmentParameteriv_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetFramebufferAttachmentParameteriv_Out) ID() binary.ID {
 	return binaryIDGlGetFramebufferAttachmentParameteriv_Out
+}
+func (*binaryClassGlGetFramebufferAttachmentParameteriv_Out) New() binary.Object {
+	return &GlGetFramebufferAttachmentParameteriv_Out{}
 }
 func (*binaryClassGlGetFramebufferAttachmentParameteriv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetFramebufferAttachmentParameteriv_Out(e, obj.(*GlGetFramebufferAttachmentParameteriv_Out))
@@ -14088,6 +14408,9 @@ func doSkipGlGetGraphicsResetStatusEXT(d binary.Decoder) error {
 func (*binaryClassGlGetGraphicsResetStatusEXT) ID() binary.ID {
 	return binaryIDGlGetGraphicsResetStatusEXT
 }
+func (*binaryClassGlGetGraphicsResetStatusEXT) New() binary.Object {
+	return &GlGetGraphicsResetStatusEXT{}
+}
 func (*binaryClassGlGetGraphicsResetStatusEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetGraphicsResetStatusEXT(e, obj.(*GlGetGraphicsResetStatusEXT))
 }
@@ -14118,6 +14441,9 @@ func doSkipGlGetGraphicsResetStatusEXT_In(d binary.Decoder) error {
 }
 func (*binaryClassGlGetGraphicsResetStatusEXT_In) ID() binary.ID {
 	return binaryIDGlGetGraphicsResetStatusEXT_In
+}
+func (*binaryClassGlGetGraphicsResetStatusEXT_In) New() binary.Object {
+	return &GlGetGraphicsResetStatusEXT_In{}
 }
 func (*binaryClassGlGetGraphicsResetStatusEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetGraphicsResetStatusEXT_In(e, obj.(*GlGetGraphicsResetStatusEXT_In))
@@ -14160,6 +14486,9 @@ func doSkipGlGetGraphicsResetStatusEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetGraphicsResetStatusEXT_Out) ID() binary.ID {
 	return binaryIDGlGetGraphicsResetStatusEXT_Out
+}
+func (*binaryClassGlGetGraphicsResetStatusEXT_Out) New() binary.Object {
+	return &GlGetGraphicsResetStatusEXT_Out{}
 }
 func (*binaryClassGlGetGraphicsResetStatusEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetGraphicsResetStatusEXT_Out(e, obj.(*GlGetGraphicsResetStatusEXT_Out))
@@ -14218,7 +14547,8 @@ func doSkipGlGetIntegerv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetIntegerv) ID() binary.ID { return binaryIDGlGetIntegerv }
+func (*binaryClassGlGetIntegerv) ID() binary.ID      { return binaryIDGlGetIntegerv }
+func (*binaryClassGlGetIntegerv) New() binary.Object { return &GlGetIntegerv{} }
 func (*binaryClassGlGetIntegerv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetIntegerv(e, obj.(*GlGetIntegerv))
 }
@@ -14256,7 +14586,8 @@ func doSkipGlGetIntegerv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetIntegerv_In) ID() binary.ID { return binaryIDGlGetIntegerv_In }
+func (*binaryClassGlGetIntegerv_In) ID() binary.ID      { return binaryIDGlGetIntegerv_In }
+func (*binaryClassGlGetIntegerv_In) New() binary.Object { return &GlGetIntegerv_In{} }
 func (*binaryClassGlGetIntegerv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetIntegerv_In(e, obj.(*GlGetIntegerv_In))
 }
@@ -14312,7 +14643,8 @@ func doSkipGlGetIntegerv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetIntegerv_Out) ID() binary.ID { return binaryIDGlGetIntegerv_Out }
+func (*binaryClassGlGetIntegerv_Out) ID() binary.ID      { return binaryIDGlGetIntegerv_Out }
+func (*binaryClassGlGetIntegerv_Out) New() binary.Object { return &GlGetIntegerv_Out{} }
 func (*binaryClassGlGetIntegerv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetIntegerv_Out(e, obj.(*GlGetIntegerv_Out))
 }
@@ -14368,7 +14700,8 @@ func doSkipGlGetProgramBinaryOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramBinaryOES) ID() binary.ID { return binaryIDGlGetProgramBinaryOES }
+func (*binaryClassGlGetProgramBinaryOES) ID() binary.ID      { return binaryIDGlGetProgramBinaryOES }
+func (*binaryClassGlGetProgramBinaryOES) New() binary.Object { return &GlGetProgramBinaryOES{} }
 func (*binaryClassGlGetProgramBinaryOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramBinaryOES(e, obj.(*GlGetProgramBinaryOES))
 }
@@ -14419,7 +14752,8 @@ func doSkipGlGetProgramBinaryOES_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramBinaryOES_In) ID() binary.ID { return binaryIDGlGetProgramBinaryOES_In }
+func (*binaryClassGlGetProgramBinaryOES_In) ID() binary.ID      { return binaryIDGlGetProgramBinaryOES_In }
+func (*binaryClassGlGetProgramBinaryOES_In) New() binary.Object { return &GlGetProgramBinaryOES_In{} }
 func (*binaryClassGlGetProgramBinaryOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramBinaryOES_In(e, obj.(*GlGetProgramBinaryOES_In))
 }
@@ -14481,7 +14815,8 @@ func doSkipGlGetProgramBinaryOES_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramBinaryOES_Out) ID() binary.ID { return binaryIDGlGetProgramBinaryOES_Out }
+func (*binaryClassGlGetProgramBinaryOES_Out) ID() binary.ID      { return binaryIDGlGetProgramBinaryOES_Out }
+func (*binaryClassGlGetProgramBinaryOES_Out) New() binary.Object { return &GlGetProgramBinaryOES_Out{} }
 func (*binaryClassGlGetProgramBinaryOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramBinaryOES_Out(e, obj.(*GlGetProgramBinaryOES_Out))
 }
@@ -14539,7 +14874,8 @@ func doSkipGlGetProgramInfoLog(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramInfoLog) ID() binary.ID { return binaryIDGlGetProgramInfoLog }
+func (*binaryClassGlGetProgramInfoLog) ID() binary.ID      { return binaryIDGlGetProgramInfoLog }
+func (*binaryClassGlGetProgramInfoLog) New() binary.Object { return &GlGetProgramInfoLog{} }
 func (*binaryClassGlGetProgramInfoLog) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramInfoLog(e, obj.(*GlGetProgramInfoLog))
 }
@@ -14590,7 +14926,8 @@ func doSkipGlGetProgramInfoLog_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramInfoLog_In) ID() binary.ID { return binaryIDGlGetProgramInfoLog_In }
+func (*binaryClassGlGetProgramInfoLog_In) ID() binary.ID      { return binaryIDGlGetProgramInfoLog_In }
+func (*binaryClassGlGetProgramInfoLog_In) New() binary.Object { return &GlGetProgramInfoLog_In{} }
 func (*binaryClassGlGetProgramInfoLog_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramInfoLog_In(e, obj.(*GlGetProgramInfoLog_In))
 }
@@ -14641,7 +14978,8 @@ func doSkipGlGetProgramInfoLog_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramInfoLog_Out) ID() binary.ID { return binaryIDGlGetProgramInfoLog_Out }
+func (*binaryClassGlGetProgramInfoLog_Out) ID() binary.ID      { return binaryIDGlGetProgramInfoLog_Out }
+func (*binaryClassGlGetProgramInfoLog_Out) New() binary.Object { return &GlGetProgramInfoLog_Out{} }
 func (*binaryClassGlGetProgramInfoLog_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramInfoLog_Out(e, obj.(*GlGetProgramInfoLog_Out))
 }
@@ -14699,7 +15037,8 @@ func doSkipGlGetProgramiv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramiv) ID() binary.ID { return binaryIDGlGetProgramiv }
+func (*binaryClassGlGetProgramiv) ID() binary.ID      { return binaryIDGlGetProgramiv }
+func (*binaryClassGlGetProgramiv) New() binary.Object { return &GlGetProgramiv{} }
 func (*binaryClassGlGetProgramiv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramiv(e, obj.(*GlGetProgramiv))
 }
@@ -14748,7 +15087,8 @@ func doSkipGlGetProgramiv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramiv_In) ID() binary.ID { return binaryIDGlGetProgramiv_In }
+func (*binaryClassGlGetProgramiv_In) ID() binary.ID      { return binaryIDGlGetProgramiv_In }
+func (*binaryClassGlGetProgramiv_In) New() binary.Object { return &GlGetProgramiv_In{} }
 func (*binaryClassGlGetProgramiv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramiv_In(e, obj.(*GlGetProgramiv_In))
 }
@@ -14804,7 +15144,8 @@ func doSkipGlGetProgramiv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetProgramiv_Out) ID() binary.ID { return binaryIDGlGetProgramiv_Out }
+func (*binaryClassGlGetProgramiv_Out) ID() binary.ID      { return binaryIDGlGetProgramiv_Out }
+func (*binaryClassGlGetProgramiv_Out) New() binary.Object { return &GlGetProgramiv_Out{} }
 func (*binaryClassGlGetProgramiv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetProgramiv_Out(e, obj.(*GlGetProgramiv_Out))
 }
@@ -14860,7 +15201,8 @@ func doSkipGlGetQueryObjecti64vEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjecti64vEXT) ID() binary.ID { return binaryIDGlGetQueryObjecti64vEXT }
+func (*binaryClassGlGetQueryObjecti64vEXT) ID() binary.ID      { return binaryIDGlGetQueryObjecti64vEXT }
+func (*binaryClassGlGetQueryObjecti64vEXT) New() binary.Object { return &GlGetQueryObjecti64vEXT{} }
 func (*binaryClassGlGetQueryObjecti64vEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjecti64vEXT(e, obj.(*GlGetQueryObjecti64vEXT))
 }
@@ -14914,6 +15256,9 @@ func doSkipGlGetQueryObjecti64vEXT_In(d binary.Decoder) error {
 func (*binaryClassGlGetQueryObjecti64vEXT_In) ID() binary.ID {
 	return binaryIDGlGetQueryObjecti64vEXT_In
 }
+func (*binaryClassGlGetQueryObjecti64vEXT_In) New() binary.Object {
+	return &GlGetQueryObjecti64vEXT_In{}
+}
 func (*binaryClassGlGetQueryObjecti64vEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjecti64vEXT_In(e, obj.(*GlGetQueryObjecti64vEXT_In))
 }
@@ -14955,6 +15300,9 @@ func doSkipGlGetQueryObjecti64vEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetQueryObjecti64vEXT_Out) ID() binary.ID {
 	return binaryIDGlGetQueryObjecti64vEXT_Out
+}
+func (*binaryClassGlGetQueryObjecti64vEXT_Out) New() binary.Object {
+	return &GlGetQueryObjecti64vEXT_Out{}
 }
 func (*binaryClassGlGetQueryObjecti64vEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjecti64vEXT_Out(e, obj.(*GlGetQueryObjecti64vEXT_Out))
@@ -15013,7 +15361,8 @@ func doSkipGlGetQueryObjectivEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectivEXT) ID() binary.ID { return binaryIDGlGetQueryObjectivEXT }
+func (*binaryClassGlGetQueryObjectivEXT) ID() binary.ID      { return binaryIDGlGetQueryObjectivEXT }
+func (*binaryClassGlGetQueryObjectivEXT) New() binary.Object { return &GlGetQueryObjectivEXT{} }
 func (*binaryClassGlGetQueryObjectivEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectivEXT(e, obj.(*GlGetQueryObjectivEXT))
 }
@@ -15064,7 +15413,8 @@ func doSkipGlGetQueryObjectivEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectivEXT_In) ID() binary.ID { return binaryIDGlGetQueryObjectivEXT_In }
+func (*binaryClassGlGetQueryObjectivEXT_In) ID() binary.ID      { return binaryIDGlGetQueryObjectivEXT_In }
+func (*binaryClassGlGetQueryObjectivEXT_In) New() binary.Object { return &GlGetQueryObjectivEXT_In{} }
 func (*binaryClassGlGetQueryObjectivEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectivEXT_In(e, obj.(*GlGetQueryObjectivEXT_In))
 }
@@ -15104,7 +15454,8 @@ func doSkipGlGetQueryObjectivEXT_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectivEXT_Out) ID() binary.ID { return binaryIDGlGetQueryObjectivEXT_Out }
+func (*binaryClassGlGetQueryObjectivEXT_Out) ID() binary.ID      { return binaryIDGlGetQueryObjectivEXT_Out }
+func (*binaryClassGlGetQueryObjectivEXT_Out) New() binary.Object { return &GlGetQueryObjectivEXT_Out{} }
 func (*binaryClassGlGetQueryObjectivEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectivEXT_Out(e, obj.(*GlGetQueryObjectivEXT_Out))
 }
@@ -15162,7 +15513,8 @@ func doSkipGlGetQueryObjectui64vEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectui64vEXT) ID() binary.ID { return binaryIDGlGetQueryObjectui64vEXT }
+func (*binaryClassGlGetQueryObjectui64vEXT) ID() binary.ID      { return binaryIDGlGetQueryObjectui64vEXT }
+func (*binaryClassGlGetQueryObjectui64vEXT) New() binary.Object { return &GlGetQueryObjectui64vEXT{} }
 func (*binaryClassGlGetQueryObjectui64vEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectui64vEXT(e, obj.(*GlGetQueryObjectui64vEXT))
 }
@@ -15216,6 +15568,9 @@ func doSkipGlGetQueryObjectui64vEXT_In(d binary.Decoder) error {
 func (*binaryClassGlGetQueryObjectui64vEXT_In) ID() binary.ID {
 	return binaryIDGlGetQueryObjectui64vEXT_In
 }
+func (*binaryClassGlGetQueryObjectui64vEXT_In) New() binary.Object {
+	return &GlGetQueryObjectui64vEXT_In{}
+}
 func (*binaryClassGlGetQueryObjectui64vEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectui64vEXT_In(e, obj.(*GlGetQueryObjectui64vEXT_In))
 }
@@ -15257,6 +15612,9 @@ func doSkipGlGetQueryObjectui64vEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetQueryObjectui64vEXT_Out) ID() binary.ID {
 	return binaryIDGlGetQueryObjectui64vEXT_Out
+}
+func (*binaryClassGlGetQueryObjectui64vEXT_Out) New() binary.Object {
+	return &GlGetQueryObjectui64vEXT_Out{}
 }
 func (*binaryClassGlGetQueryObjectui64vEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectui64vEXT_Out(e, obj.(*GlGetQueryObjectui64vEXT_Out))
@@ -15315,7 +15673,8 @@ func doSkipGlGetQueryObjectuiv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectuiv) ID() binary.ID { return binaryIDGlGetQueryObjectuiv }
+func (*binaryClassGlGetQueryObjectuiv) ID() binary.ID      { return binaryIDGlGetQueryObjectuiv }
+func (*binaryClassGlGetQueryObjectuiv) New() binary.Object { return &GlGetQueryObjectuiv{} }
 func (*binaryClassGlGetQueryObjectuiv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuiv(e, obj.(*GlGetQueryObjectuiv))
 }
@@ -15373,7 +15732,8 @@ func doSkipGlGetQueryObjectuivEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectuivEXT) ID() binary.ID { return binaryIDGlGetQueryObjectuivEXT }
+func (*binaryClassGlGetQueryObjectuivEXT) ID() binary.ID      { return binaryIDGlGetQueryObjectuivEXT }
+func (*binaryClassGlGetQueryObjectuivEXT) New() binary.Object { return &GlGetQueryObjectuivEXT{} }
 func (*binaryClassGlGetQueryObjectuivEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuivEXT(e, obj.(*GlGetQueryObjectuivEXT))
 }
@@ -15424,7 +15784,8 @@ func doSkipGlGetQueryObjectuivEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectuivEXT_In) ID() binary.ID { return binaryIDGlGetQueryObjectuivEXT_In }
+func (*binaryClassGlGetQueryObjectuivEXT_In) ID() binary.ID      { return binaryIDGlGetQueryObjectuivEXT_In }
+func (*binaryClassGlGetQueryObjectuivEXT_In) New() binary.Object { return &GlGetQueryObjectuivEXT_In{} }
 func (*binaryClassGlGetQueryObjectuivEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuivEXT_In(e, obj.(*GlGetQueryObjectuivEXT_In))
 }
@@ -15466,6 +15827,9 @@ func doSkipGlGetQueryObjectuivEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlGetQueryObjectuivEXT_Out) ID() binary.ID {
 	return binaryIDGlGetQueryObjectuivEXT_Out
+}
+func (*binaryClassGlGetQueryObjectuivEXT_Out) New() binary.Object {
+	return &GlGetQueryObjectuivEXT_Out{}
 }
 func (*binaryClassGlGetQueryObjectuivEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuivEXT_Out(e, obj.(*GlGetQueryObjectuivEXT_Out))
@@ -15517,7 +15881,8 @@ func doSkipGlGetQueryObjectuiv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectuiv_In) ID() binary.ID { return binaryIDGlGetQueryObjectuiv_In }
+func (*binaryClassGlGetQueryObjectuiv_In) ID() binary.ID      { return binaryIDGlGetQueryObjectuiv_In }
+func (*binaryClassGlGetQueryObjectuiv_In) New() binary.Object { return &GlGetQueryObjectuiv_In{} }
 func (*binaryClassGlGetQueryObjectuiv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuiv_In(e, obj.(*GlGetQueryObjectuiv_In))
 }
@@ -15557,7 +15922,8 @@ func doSkipGlGetQueryObjectuiv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryObjectuiv_Out) ID() binary.ID { return binaryIDGlGetQueryObjectuiv_Out }
+func (*binaryClassGlGetQueryObjectuiv_Out) ID() binary.ID      { return binaryIDGlGetQueryObjectuiv_Out }
+func (*binaryClassGlGetQueryObjectuiv_Out) New() binary.Object { return &GlGetQueryObjectuiv_Out{} }
 func (*binaryClassGlGetQueryObjectuiv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryObjectuiv_Out(e, obj.(*GlGetQueryObjectuiv_Out))
 }
@@ -15615,7 +15981,8 @@ func doSkipGlGetQueryiv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryiv) ID() binary.ID { return binaryIDGlGetQueryiv }
+func (*binaryClassGlGetQueryiv) ID() binary.ID      { return binaryIDGlGetQueryiv }
+func (*binaryClassGlGetQueryiv) New() binary.Object { return &GlGetQueryiv{} }
 func (*binaryClassGlGetQueryiv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryiv(e, obj.(*GlGetQueryiv))
 }
@@ -15671,7 +16038,8 @@ func doSkipGlGetQueryivEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryivEXT) ID() binary.ID { return binaryIDGlGetQueryivEXT }
+func (*binaryClassGlGetQueryivEXT) ID() binary.ID      { return binaryIDGlGetQueryivEXT }
+func (*binaryClassGlGetQueryivEXT) New() binary.Object { return &GlGetQueryivEXT{} }
 func (*binaryClassGlGetQueryivEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryivEXT(e, obj.(*GlGetQueryivEXT))
 }
@@ -15720,7 +16088,8 @@ func doSkipGlGetQueryivEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryivEXT_In) ID() binary.ID { return binaryIDGlGetQueryivEXT_In }
+func (*binaryClassGlGetQueryivEXT_In) ID() binary.ID      { return binaryIDGlGetQueryivEXT_In }
+func (*binaryClassGlGetQueryivEXT_In) New() binary.Object { return &GlGetQueryivEXT_In{} }
 func (*binaryClassGlGetQueryivEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryivEXT_In(e, obj.(*GlGetQueryivEXT_In))
 }
@@ -15758,7 +16127,8 @@ func doSkipGlGetQueryivEXT_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryivEXT_Out) ID() binary.ID { return binaryIDGlGetQueryivEXT_Out }
+func (*binaryClassGlGetQueryivEXT_Out) ID() binary.ID      { return binaryIDGlGetQueryivEXT_Out }
+func (*binaryClassGlGetQueryivEXT_Out) New() binary.Object { return &GlGetQueryivEXT_Out{} }
 func (*binaryClassGlGetQueryivEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryivEXT_Out(e, obj.(*GlGetQueryivEXT_Out))
 }
@@ -15809,7 +16179,8 @@ func doSkipGlGetQueryiv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryiv_In) ID() binary.ID { return binaryIDGlGetQueryiv_In }
+func (*binaryClassGlGetQueryiv_In) ID() binary.ID      { return binaryIDGlGetQueryiv_In }
+func (*binaryClassGlGetQueryiv_In) New() binary.Object { return &GlGetQueryiv_In{} }
 func (*binaryClassGlGetQueryiv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryiv_In(e, obj.(*GlGetQueryiv_In))
 }
@@ -15847,7 +16218,8 @@ func doSkipGlGetQueryiv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetQueryiv_Out) ID() binary.ID { return binaryIDGlGetQueryiv_Out }
+func (*binaryClassGlGetQueryiv_Out) ID() binary.ID      { return binaryIDGlGetQueryiv_Out }
+func (*binaryClassGlGetQueryiv_Out) New() binary.Object { return &GlGetQueryiv_Out{} }
 func (*binaryClassGlGetQueryiv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetQueryiv_Out(e, obj.(*GlGetQueryiv_Out))
 }
@@ -15906,6 +16278,9 @@ func doSkipGlGetRenderbufferParameteriv(d binary.Decoder) error {
 func (*binaryClassGlGetRenderbufferParameteriv) ID() binary.ID {
 	return binaryIDGlGetRenderbufferParameteriv
 }
+func (*binaryClassGlGetRenderbufferParameteriv) New() binary.Object {
+	return &GlGetRenderbufferParameteriv{}
+}
 func (*binaryClassGlGetRenderbufferParameteriv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetRenderbufferParameteriv(e, obj.(*GlGetRenderbufferParameteriv))
 }
@@ -15958,6 +16333,9 @@ func doSkipGlGetRenderbufferParameteriv_In(d binary.Decoder) error {
 }
 func (*binaryClassGlGetRenderbufferParameteriv_In) ID() binary.ID {
 	return binaryIDGlGetRenderbufferParameteriv_In
+}
+func (*binaryClassGlGetRenderbufferParameteriv_In) New() binary.Object {
+	return &GlGetRenderbufferParameteriv_In{}
 }
 func (*binaryClassGlGetRenderbufferParameteriv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetRenderbufferParameteriv_In(e, obj.(*GlGetRenderbufferParameteriv_In))
@@ -16019,6 +16397,9 @@ func doSkipGlGetRenderbufferParameteriv_Out(d binary.Decoder) error {
 func (*binaryClassGlGetRenderbufferParameteriv_Out) ID() binary.ID {
 	return binaryIDGlGetRenderbufferParameteriv_Out
 }
+func (*binaryClassGlGetRenderbufferParameteriv_Out) New() binary.Object {
+	return &GlGetRenderbufferParameteriv_Out{}
+}
 func (*binaryClassGlGetRenderbufferParameteriv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetRenderbufferParameteriv_Out(e, obj.(*GlGetRenderbufferParameteriv_Out))
 }
@@ -16076,7 +16457,8 @@ func doSkipGlGetShaderInfoLog(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderInfoLog) ID() binary.ID { return binaryIDGlGetShaderInfoLog }
+func (*binaryClassGlGetShaderInfoLog) ID() binary.ID      { return binaryIDGlGetShaderInfoLog }
+func (*binaryClassGlGetShaderInfoLog) New() binary.Object { return &GlGetShaderInfoLog{} }
 func (*binaryClassGlGetShaderInfoLog) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderInfoLog(e, obj.(*GlGetShaderInfoLog))
 }
@@ -16125,7 +16507,8 @@ func doSkipGlGetShaderInfoLog_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderInfoLog_In) ID() binary.ID { return binaryIDGlGetShaderInfoLog_In }
+func (*binaryClassGlGetShaderInfoLog_In) ID() binary.ID      { return binaryIDGlGetShaderInfoLog_In }
+func (*binaryClassGlGetShaderInfoLog_In) New() binary.Object { return &GlGetShaderInfoLog_In{} }
 func (*binaryClassGlGetShaderInfoLog_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderInfoLog_In(e, obj.(*GlGetShaderInfoLog_In))
 }
@@ -16176,7 +16559,8 @@ func doSkipGlGetShaderInfoLog_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderInfoLog_Out) ID() binary.ID { return binaryIDGlGetShaderInfoLog_Out }
+func (*binaryClassGlGetShaderInfoLog_Out) ID() binary.ID      { return binaryIDGlGetShaderInfoLog_Out }
+func (*binaryClassGlGetShaderInfoLog_Out) New() binary.Object { return &GlGetShaderInfoLog_Out{} }
 func (*binaryClassGlGetShaderInfoLog_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderInfoLog_Out(e, obj.(*GlGetShaderInfoLog_Out))
 }
@@ -16237,6 +16621,9 @@ func doSkipGlGetShaderPrecisionFormat(d binary.Decoder) error {
 func (*binaryClassGlGetShaderPrecisionFormat) ID() binary.ID {
 	return binaryIDGlGetShaderPrecisionFormat
 }
+func (*binaryClassGlGetShaderPrecisionFormat) New() binary.Object {
+	return &GlGetShaderPrecisionFormat{}
+}
 func (*binaryClassGlGetShaderPrecisionFormat) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderPrecisionFormat(e, obj.(*GlGetShaderPrecisionFormat))
 }
@@ -16289,6 +16676,9 @@ func doSkipGlGetShaderPrecisionFormat_In(d binary.Decoder) error {
 }
 func (*binaryClassGlGetShaderPrecisionFormat_In) ID() binary.ID {
 	return binaryIDGlGetShaderPrecisionFormat_In
+}
+func (*binaryClassGlGetShaderPrecisionFormat_In) New() binary.Object {
+	return &GlGetShaderPrecisionFormat_In{}
 }
 func (*binaryClassGlGetShaderPrecisionFormat_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderPrecisionFormat_In(e, obj.(*GlGetShaderPrecisionFormat_In))
@@ -16361,6 +16751,9 @@ func doSkipGlGetShaderPrecisionFormat_Out(d binary.Decoder) error {
 func (*binaryClassGlGetShaderPrecisionFormat_Out) ID() binary.ID {
 	return binaryIDGlGetShaderPrecisionFormat_Out
 }
+func (*binaryClassGlGetShaderPrecisionFormat_Out) New() binary.Object {
+	return &GlGetShaderPrecisionFormat_Out{}
+}
 func (*binaryClassGlGetShaderPrecisionFormat_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderPrecisionFormat_Out(e, obj.(*GlGetShaderPrecisionFormat_Out))
 }
@@ -16418,7 +16811,8 @@ func doSkipGlGetShaderSource(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderSource) ID() binary.ID { return binaryIDGlGetShaderSource }
+func (*binaryClassGlGetShaderSource) ID() binary.ID      { return binaryIDGlGetShaderSource }
+func (*binaryClassGlGetShaderSource) New() binary.Object { return &GlGetShaderSource{} }
 func (*binaryClassGlGetShaderSource) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderSource(e, obj.(*GlGetShaderSource))
 }
@@ -16467,7 +16861,8 @@ func doSkipGlGetShaderSource_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderSource_In) ID() binary.ID { return binaryIDGlGetShaderSource_In }
+func (*binaryClassGlGetShaderSource_In) ID() binary.ID      { return binaryIDGlGetShaderSource_In }
+func (*binaryClassGlGetShaderSource_In) New() binary.Object { return &GlGetShaderSource_In{} }
 func (*binaryClassGlGetShaderSource_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderSource_In(e, obj.(*GlGetShaderSource_In))
 }
@@ -16518,7 +16913,8 @@ func doSkipGlGetShaderSource_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderSource_Out) ID() binary.ID { return binaryIDGlGetShaderSource_Out }
+func (*binaryClassGlGetShaderSource_Out) ID() binary.ID      { return binaryIDGlGetShaderSource_Out }
+func (*binaryClassGlGetShaderSource_Out) New() binary.Object { return &GlGetShaderSource_Out{} }
 func (*binaryClassGlGetShaderSource_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderSource_Out(e, obj.(*GlGetShaderSource_Out))
 }
@@ -16576,7 +16972,8 @@ func doSkipGlGetShaderiv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderiv) ID() binary.ID { return binaryIDGlGetShaderiv }
+func (*binaryClassGlGetShaderiv) ID() binary.ID      { return binaryIDGlGetShaderiv }
+func (*binaryClassGlGetShaderiv) New() binary.Object { return &GlGetShaderiv{} }
 func (*binaryClassGlGetShaderiv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderiv(e, obj.(*GlGetShaderiv))
 }
@@ -16625,7 +17022,8 @@ func doSkipGlGetShaderiv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderiv_In) ID() binary.ID { return binaryIDGlGetShaderiv_In }
+func (*binaryClassGlGetShaderiv_In) ID() binary.ID      { return binaryIDGlGetShaderiv_In }
+func (*binaryClassGlGetShaderiv_In) New() binary.Object { return &GlGetShaderiv_In{} }
 func (*binaryClassGlGetShaderiv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderiv_In(e, obj.(*GlGetShaderiv_In))
 }
@@ -16681,7 +17079,8 @@ func doSkipGlGetShaderiv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetShaderiv_Out) ID() binary.ID { return binaryIDGlGetShaderiv_Out }
+func (*binaryClassGlGetShaderiv_Out) ID() binary.ID      { return binaryIDGlGetShaderiv_Out }
+func (*binaryClassGlGetShaderiv_Out) New() binary.Object { return &GlGetShaderiv_Out{} }
 func (*binaryClassGlGetShaderiv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetShaderiv_Out(e, obj.(*GlGetShaderiv_Out))
 }
@@ -16737,7 +17136,8 @@ func doSkipGlGetString(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetString) ID() binary.ID { return binaryIDGlGetString }
+func (*binaryClassGlGetString) ID() binary.ID      { return binaryIDGlGetString }
+func (*binaryClassGlGetString) New() binary.Object { return &GlGetString{} }
 func (*binaryClassGlGetString) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetString(e, obj.(*GlGetString))
 }
@@ -16775,7 +17175,8 @@ func doSkipGlGetString_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetString_In) ID() binary.ID { return binaryIDGlGetString_In }
+func (*binaryClassGlGetString_In) ID() binary.ID      { return binaryIDGlGetString_In }
+func (*binaryClassGlGetString_In) New() binary.Object { return &GlGetString_In{} }
 func (*binaryClassGlGetString_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetString_In(e, obj.(*GlGetString_In))
 }
@@ -16813,7 +17214,8 @@ func doSkipGlGetString_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetString_Out) ID() binary.ID { return binaryIDGlGetString_Out }
+func (*binaryClassGlGetString_Out) ID() binary.ID      { return binaryIDGlGetString_Out }
+func (*binaryClassGlGetString_Out) New() binary.Object { return &GlGetString_Out{} }
 func (*binaryClassGlGetString_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetString_Out(e, obj.(*GlGetString_Out))
 }
@@ -16869,7 +17271,8 @@ func doSkipGlGetTexParameterfv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameterfv) ID() binary.ID { return binaryIDGlGetTexParameterfv }
+func (*binaryClassGlGetTexParameterfv) ID() binary.ID      { return binaryIDGlGetTexParameterfv }
+func (*binaryClassGlGetTexParameterfv) New() binary.Object { return &GlGetTexParameterfv{} }
 func (*binaryClassGlGetTexParameterfv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameterfv(e, obj.(*GlGetTexParameterfv))
 }
@@ -16920,7 +17323,8 @@ func doSkipGlGetTexParameterfv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameterfv_In) ID() binary.ID { return binaryIDGlGetTexParameterfv_In }
+func (*binaryClassGlGetTexParameterfv_In) ID() binary.ID      { return binaryIDGlGetTexParameterfv_In }
+func (*binaryClassGlGetTexParameterfv_In) New() binary.Object { return &GlGetTexParameterfv_In{} }
 func (*binaryClassGlGetTexParameterfv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameterfv_In(e, obj.(*GlGetTexParameterfv_In))
 }
@@ -16978,7 +17382,8 @@ func doSkipGlGetTexParameterfv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameterfv_Out) ID() binary.ID { return binaryIDGlGetTexParameterfv_Out }
+func (*binaryClassGlGetTexParameterfv_Out) ID() binary.ID      { return binaryIDGlGetTexParameterfv_Out }
+func (*binaryClassGlGetTexParameterfv_Out) New() binary.Object { return &GlGetTexParameterfv_Out{} }
 func (*binaryClassGlGetTexParameterfv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameterfv_Out(e, obj.(*GlGetTexParameterfv_Out))
 }
@@ -17036,7 +17441,8 @@ func doSkipGlGetTexParameteriv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameteriv) ID() binary.ID { return binaryIDGlGetTexParameteriv }
+func (*binaryClassGlGetTexParameteriv) ID() binary.ID      { return binaryIDGlGetTexParameteriv }
+func (*binaryClassGlGetTexParameteriv) New() binary.Object { return &GlGetTexParameteriv{} }
 func (*binaryClassGlGetTexParameteriv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameteriv(e, obj.(*GlGetTexParameteriv))
 }
@@ -17087,7 +17493,8 @@ func doSkipGlGetTexParameteriv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameteriv_In) ID() binary.ID { return binaryIDGlGetTexParameteriv_In }
+func (*binaryClassGlGetTexParameteriv_In) ID() binary.ID      { return binaryIDGlGetTexParameteriv_In }
+func (*binaryClassGlGetTexParameteriv_In) New() binary.Object { return &GlGetTexParameteriv_In{} }
 func (*binaryClassGlGetTexParameteriv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameteriv_In(e, obj.(*GlGetTexParameteriv_In))
 }
@@ -17145,7 +17552,8 @@ func doSkipGlGetTexParameteriv_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetTexParameteriv_Out) ID() binary.ID { return binaryIDGlGetTexParameteriv_Out }
+func (*binaryClassGlGetTexParameteriv_Out) ID() binary.ID      { return binaryIDGlGetTexParameteriv_Out }
+func (*binaryClassGlGetTexParameteriv_Out) New() binary.Object { return &GlGetTexParameteriv_Out{} }
 func (*binaryClassGlGetTexParameteriv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetTexParameteriv_Out(e, obj.(*GlGetTexParameteriv_Out))
 }
@@ -17203,7 +17611,8 @@ func doSkipGlGetUniformLocation(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformLocation) ID() binary.ID { return binaryIDGlGetUniformLocation }
+func (*binaryClassGlGetUniformLocation) ID() binary.ID      { return binaryIDGlGetUniformLocation }
+func (*binaryClassGlGetUniformLocation) New() binary.Object { return &GlGetUniformLocation{} }
 func (*binaryClassGlGetUniformLocation) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformLocation(e, obj.(*GlGetUniformLocation))
 }
@@ -17254,7 +17663,8 @@ func doSkipGlGetUniformLocation_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformLocation_In) ID() binary.ID { return binaryIDGlGetUniformLocation_In }
+func (*binaryClassGlGetUniformLocation_In) ID() binary.ID      { return binaryIDGlGetUniformLocation_In }
+func (*binaryClassGlGetUniformLocation_In) New() binary.Object { return &GlGetUniformLocation_In{} }
 func (*binaryClassGlGetUniformLocation_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformLocation_In(e, obj.(*GlGetUniformLocation_In))
 }
@@ -17294,7 +17704,8 @@ func doSkipGlGetUniformLocation_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformLocation_Out) ID() binary.ID { return binaryIDGlGetUniformLocation_Out }
+func (*binaryClassGlGetUniformLocation_Out) ID() binary.ID      { return binaryIDGlGetUniformLocation_Out }
+func (*binaryClassGlGetUniformLocation_Out) New() binary.Object { return &GlGetUniformLocation_Out{} }
 func (*binaryClassGlGetUniformLocation_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformLocation_Out(e, obj.(*GlGetUniformLocation_Out))
 }
@@ -17352,7 +17763,8 @@ func doSkipGlGetUniformfv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformfv) ID() binary.ID { return binaryIDGlGetUniformfv }
+func (*binaryClassGlGetUniformfv) ID() binary.ID      { return binaryIDGlGetUniformfv }
+func (*binaryClassGlGetUniformfv) New() binary.Object { return &GlGetUniformfv{} }
 func (*binaryClassGlGetUniformfv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformfv(e, obj.(*GlGetUniformfv))
 }
@@ -17430,7 +17842,8 @@ func doSkipGlGetUniformfv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformfv_In) ID() binary.ID { return binaryIDGlGetUniformfv_In }
+func (*binaryClassGlGetUniformfv_In) ID() binary.ID      { return binaryIDGlGetUniformfv_In }
+func (*binaryClassGlGetUniformfv_In) New() binary.Object { return &GlGetUniformfv_In{} }
 func (*binaryClassGlGetUniformfv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformfv_In(e, obj.(*GlGetUniformfv_In))
 }
@@ -17457,7 +17870,8 @@ func doDecodeGlGetUniformfv_Out(d binary.Decoder, o *GlGetUniformfv_Out) error {
 func doSkipGlGetUniformfv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlGetUniformfv_Out) ID() binary.ID { return binaryIDGlGetUniformfv_Out }
+func (*binaryClassGlGetUniformfv_Out) ID() binary.ID      { return binaryIDGlGetUniformfv_Out }
+func (*binaryClassGlGetUniformfv_Out) New() binary.Object { return &GlGetUniformfv_Out{} }
 func (*binaryClassGlGetUniformfv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformfv_Out(e, obj.(*GlGetUniformfv_Out))
 }
@@ -17513,7 +17927,8 @@ func doSkipGlGetUniformiv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformiv) ID() binary.ID { return binaryIDGlGetUniformiv }
+func (*binaryClassGlGetUniformiv) ID() binary.ID      { return binaryIDGlGetUniformiv }
+func (*binaryClassGlGetUniformiv) New() binary.Object { return &GlGetUniformiv{} }
 func (*binaryClassGlGetUniformiv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformiv(e, obj.(*GlGetUniformiv))
 }
@@ -17591,7 +18006,8 @@ func doSkipGlGetUniformiv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlGetUniformiv_In) ID() binary.ID { return binaryIDGlGetUniformiv_In }
+func (*binaryClassGlGetUniformiv_In) ID() binary.ID      { return binaryIDGlGetUniformiv_In }
+func (*binaryClassGlGetUniformiv_In) New() binary.Object { return &GlGetUniformiv_In{} }
 func (*binaryClassGlGetUniformiv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformiv_In(e, obj.(*GlGetUniformiv_In))
 }
@@ -17618,7 +18034,8 @@ func doDecodeGlGetUniformiv_Out(d binary.Decoder, o *GlGetUniformiv_Out) error {
 func doSkipGlGetUniformiv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlGetUniformiv_Out) ID() binary.ID { return binaryIDGlGetUniformiv_Out }
+func (*binaryClassGlGetUniformiv_Out) ID() binary.ID      { return binaryIDGlGetUniformiv_Out }
+func (*binaryClassGlGetUniformiv_Out) New() binary.Object { return &GlGetUniformiv_Out{} }
 func (*binaryClassGlGetUniformiv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlGetUniformiv_Out(e, obj.(*GlGetUniformiv_Out))
 }
@@ -17674,7 +18091,8 @@ func doSkipGlHint(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlHint) ID() binary.ID { return binaryIDGlHint }
+func (*binaryClassGlHint) ID() binary.ID      { return binaryIDGlHint }
+func (*binaryClassGlHint) New() binary.Object { return &GlHint{} }
 func (*binaryClassGlHint) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlHint(e, obj.(*GlHint))
 }
@@ -17723,7 +18141,8 @@ func doSkipGlHint_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlHint_In) ID() binary.ID { return binaryIDGlHint_In }
+func (*binaryClassGlHint_In) ID() binary.ID      { return binaryIDGlHint_In }
+func (*binaryClassGlHint_In) New() binary.Object { return &GlHint_In{} }
 func (*binaryClassGlHint_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlHint_In(e, obj.(*GlHint_In))
 }
@@ -17750,7 +18169,8 @@ func doDecodeGlHint_Out(d binary.Decoder, o *GlHint_Out) error {
 func doSkipGlHint_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlHint_Out) ID() binary.ID { return binaryIDGlHint_Out }
+func (*binaryClassGlHint_Out) ID() binary.ID      { return binaryIDGlHint_Out }
+func (*binaryClassGlHint_Out) New() binary.Object { return &GlHint_Out{} }
 func (*binaryClassGlHint_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlHint_Out(e, obj.(*GlHint_Out))
 }
@@ -17806,7 +18226,8 @@ func doSkipGlInsertEventMarkerEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlInsertEventMarkerEXT) ID() binary.ID { return binaryIDGlInsertEventMarkerEXT }
+func (*binaryClassGlInsertEventMarkerEXT) ID() binary.ID      { return binaryIDGlInsertEventMarkerEXT }
+func (*binaryClassGlInsertEventMarkerEXT) New() binary.Object { return &GlInsertEventMarkerEXT{} }
 func (*binaryClassGlInsertEventMarkerEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInsertEventMarkerEXT(e, obj.(*GlInsertEventMarkerEXT))
 }
@@ -17857,7 +18278,8 @@ func doSkipGlInsertEventMarkerEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlInsertEventMarkerEXT_In) ID() binary.ID { return binaryIDGlInsertEventMarkerEXT_In }
+func (*binaryClassGlInsertEventMarkerEXT_In) ID() binary.ID      { return binaryIDGlInsertEventMarkerEXT_In }
+func (*binaryClassGlInsertEventMarkerEXT_In) New() binary.Object { return &GlInsertEventMarkerEXT_In{} }
 func (*binaryClassGlInsertEventMarkerEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInsertEventMarkerEXT_In(e, obj.(*GlInsertEventMarkerEXT_In))
 }
@@ -17888,6 +18310,9 @@ func doSkipGlInsertEventMarkerEXT_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlInsertEventMarkerEXT_Out) ID() binary.ID {
 	return binaryIDGlInsertEventMarkerEXT_Out
+}
+func (*binaryClassGlInsertEventMarkerEXT_Out) New() binary.Object {
+	return &GlInsertEventMarkerEXT_Out{}
 }
 func (*binaryClassGlInsertEventMarkerEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInsertEventMarkerEXT_Out(e, obj.(*GlInsertEventMarkerEXT_Out))
@@ -17946,7 +18371,8 @@ func doSkipGlInvalidateFramebuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlInvalidateFramebuffer) ID() binary.ID { return binaryIDGlInvalidateFramebuffer }
+func (*binaryClassGlInvalidateFramebuffer) ID() binary.ID      { return binaryIDGlInvalidateFramebuffer }
+func (*binaryClassGlInvalidateFramebuffer) New() binary.Object { return &GlInvalidateFramebuffer{} }
 func (*binaryClassGlInvalidateFramebuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInvalidateFramebuffer(e, obj.(*GlInvalidateFramebuffer))
 }
@@ -18029,6 +18455,9 @@ func doSkipGlInvalidateFramebuffer_In(d binary.Decoder) error {
 func (*binaryClassGlInvalidateFramebuffer_In) ID() binary.ID {
 	return binaryIDGlInvalidateFramebuffer_In
 }
+func (*binaryClassGlInvalidateFramebuffer_In) New() binary.Object {
+	return &GlInvalidateFramebuffer_In{}
+}
 func (*binaryClassGlInvalidateFramebuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInvalidateFramebuffer_In(e, obj.(*GlInvalidateFramebuffer_In))
 }
@@ -18059,6 +18488,9 @@ func doSkipGlInvalidateFramebuffer_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlInvalidateFramebuffer_Out) ID() binary.ID {
 	return binaryIDGlInvalidateFramebuffer_Out
+}
+func (*binaryClassGlInvalidateFramebuffer_Out) New() binary.Object {
+	return &GlInvalidateFramebuffer_Out{}
 }
 func (*binaryClassGlInvalidateFramebuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlInvalidateFramebuffer_Out(e, obj.(*GlInvalidateFramebuffer_Out))
@@ -18117,7 +18549,8 @@ func doSkipGlIsBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsBuffer) ID() binary.ID { return binaryIDGlIsBuffer }
+func (*binaryClassGlIsBuffer) ID() binary.ID      { return binaryIDGlIsBuffer }
+func (*binaryClassGlIsBuffer) New() binary.Object { return &GlIsBuffer{} }
 func (*binaryClassGlIsBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsBuffer(e, obj.(*GlIsBuffer))
 }
@@ -18155,7 +18588,8 @@ func doSkipGlIsBuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsBuffer_In) ID() binary.ID { return binaryIDGlIsBuffer_In }
+func (*binaryClassGlIsBuffer_In) ID() binary.ID      { return binaryIDGlIsBuffer_In }
+func (*binaryClassGlIsBuffer_In) New() binary.Object { return &GlIsBuffer_In{} }
 func (*binaryClassGlIsBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsBuffer_In(e, obj.(*GlIsBuffer_In))
 }
@@ -18193,7 +18627,8 @@ func doSkipGlIsBuffer_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsBuffer_Out) ID() binary.ID { return binaryIDGlIsBuffer_Out }
+func (*binaryClassGlIsBuffer_Out) ID() binary.ID      { return binaryIDGlIsBuffer_Out }
+func (*binaryClassGlIsBuffer_Out) New() binary.Object { return &GlIsBuffer_Out{} }
 func (*binaryClassGlIsBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsBuffer_Out(e, obj.(*GlIsBuffer_Out))
 }
@@ -18249,7 +18684,8 @@ func doSkipGlIsEnabled(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsEnabled) ID() binary.ID { return binaryIDGlIsEnabled }
+func (*binaryClassGlIsEnabled) ID() binary.ID      { return binaryIDGlIsEnabled }
+func (*binaryClassGlIsEnabled) New() binary.Object { return &GlIsEnabled{} }
 func (*binaryClassGlIsEnabled) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsEnabled(e, obj.(*GlIsEnabled))
 }
@@ -18287,7 +18723,8 @@ func doSkipGlIsEnabled_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsEnabled_In) ID() binary.ID { return binaryIDGlIsEnabled_In }
+func (*binaryClassGlIsEnabled_In) ID() binary.ID      { return binaryIDGlIsEnabled_In }
+func (*binaryClassGlIsEnabled_In) New() binary.Object { return &GlIsEnabled_In{} }
 func (*binaryClassGlIsEnabled_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsEnabled_In(e, obj.(*GlIsEnabled_In))
 }
@@ -18325,7 +18762,8 @@ func doSkipGlIsEnabled_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsEnabled_Out) ID() binary.ID { return binaryIDGlIsEnabled_Out }
+func (*binaryClassGlIsEnabled_Out) ID() binary.ID      { return binaryIDGlIsEnabled_Out }
+func (*binaryClassGlIsEnabled_Out) New() binary.Object { return &GlIsEnabled_Out{} }
 func (*binaryClassGlIsEnabled_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsEnabled_Out(e, obj.(*GlIsEnabled_Out))
 }
@@ -18381,7 +18819,8 @@ func doSkipGlIsFramebuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsFramebuffer) ID() binary.ID { return binaryIDGlIsFramebuffer }
+func (*binaryClassGlIsFramebuffer) ID() binary.ID      { return binaryIDGlIsFramebuffer }
+func (*binaryClassGlIsFramebuffer) New() binary.Object { return &GlIsFramebuffer{} }
 func (*binaryClassGlIsFramebuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsFramebuffer(e, obj.(*GlIsFramebuffer))
 }
@@ -18419,7 +18858,8 @@ func doSkipGlIsFramebuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsFramebuffer_In) ID() binary.ID { return binaryIDGlIsFramebuffer_In }
+func (*binaryClassGlIsFramebuffer_In) ID() binary.ID      { return binaryIDGlIsFramebuffer_In }
+func (*binaryClassGlIsFramebuffer_In) New() binary.Object { return &GlIsFramebuffer_In{} }
 func (*binaryClassGlIsFramebuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsFramebuffer_In(e, obj.(*GlIsFramebuffer_In))
 }
@@ -18457,7 +18897,8 @@ func doSkipGlIsFramebuffer_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsFramebuffer_Out) ID() binary.ID { return binaryIDGlIsFramebuffer_Out }
+func (*binaryClassGlIsFramebuffer_Out) ID() binary.ID      { return binaryIDGlIsFramebuffer_Out }
+func (*binaryClassGlIsFramebuffer_Out) New() binary.Object { return &GlIsFramebuffer_Out{} }
 func (*binaryClassGlIsFramebuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsFramebuffer_Out(e, obj.(*GlIsFramebuffer_Out))
 }
@@ -18515,7 +18956,8 @@ func doSkipGlIsProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsProgram) ID() binary.ID { return binaryIDGlIsProgram }
+func (*binaryClassGlIsProgram) ID() binary.ID      { return binaryIDGlIsProgram }
+func (*binaryClassGlIsProgram) New() binary.Object { return &GlIsProgram{} }
 func (*binaryClassGlIsProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsProgram(e, obj.(*GlIsProgram))
 }
@@ -18553,7 +18995,8 @@ func doSkipGlIsProgram_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsProgram_In) ID() binary.ID { return binaryIDGlIsProgram_In }
+func (*binaryClassGlIsProgram_In) ID() binary.ID      { return binaryIDGlIsProgram_In }
+func (*binaryClassGlIsProgram_In) New() binary.Object { return &GlIsProgram_In{} }
 func (*binaryClassGlIsProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsProgram_In(e, obj.(*GlIsProgram_In))
 }
@@ -18591,7 +19034,8 @@ func doSkipGlIsProgram_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsProgram_Out) ID() binary.ID { return binaryIDGlIsProgram_Out }
+func (*binaryClassGlIsProgram_Out) ID() binary.ID      { return binaryIDGlIsProgram_Out }
+func (*binaryClassGlIsProgram_Out) New() binary.Object { return &GlIsProgram_Out{} }
 func (*binaryClassGlIsProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsProgram_Out(e, obj.(*GlIsProgram_Out))
 }
@@ -18647,7 +19091,8 @@ func doSkipGlIsQuery(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQuery) ID() binary.ID { return binaryIDGlIsQuery }
+func (*binaryClassGlIsQuery) ID() binary.ID      { return binaryIDGlIsQuery }
+func (*binaryClassGlIsQuery) New() binary.Object { return &GlIsQuery{} }
 func (*binaryClassGlIsQuery) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQuery(e, obj.(*GlIsQuery))
 }
@@ -18703,7 +19148,8 @@ func doSkipGlIsQueryEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQueryEXT) ID() binary.ID { return binaryIDGlIsQueryEXT }
+func (*binaryClassGlIsQueryEXT) ID() binary.ID      { return binaryIDGlIsQueryEXT }
+func (*binaryClassGlIsQueryEXT) New() binary.Object { return &GlIsQueryEXT{} }
 func (*binaryClassGlIsQueryEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQueryEXT(e, obj.(*GlIsQueryEXT))
 }
@@ -18741,7 +19187,8 @@ func doSkipGlIsQueryEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQueryEXT_In) ID() binary.ID { return binaryIDGlIsQueryEXT_In }
+func (*binaryClassGlIsQueryEXT_In) ID() binary.ID      { return binaryIDGlIsQueryEXT_In }
+func (*binaryClassGlIsQueryEXT_In) New() binary.Object { return &GlIsQueryEXT_In{} }
 func (*binaryClassGlIsQueryEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQueryEXT_In(e, obj.(*GlIsQueryEXT_In))
 }
@@ -18779,7 +19226,8 @@ func doSkipGlIsQueryEXT_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQueryEXT_Out) ID() binary.ID { return binaryIDGlIsQueryEXT_Out }
+func (*binaryClassGlIsQueryEXT_Out) ID() binary.ID      { return binaryIDGlIsQueryEXT_Out }
+func (*binaryClassGlIsQueryEXT_Out) New() binary.Object { return &GlIsQueryEXT_Out{} }
 func (*binaryClassGlIsQueryEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQueryEXT_Out(e, obj.(*GlIsQueryEXT_Out))
 }
@@ -18817,7 +19265,8 @@ func doSkipGlIsQuery_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQuery_In) ID() binary.ID { return binaryIDGlIsQuery_In }
+func (*binaryClassGlIsQuery_In) ID() binary.ID      { return binaryIDGlIsQuery_In }
+func (*binaryClassGlIsQuery_In) New() binary.Object { return &GlIsQuery_In{} }
 func (*binaryClassGlIsQuery_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQuery_In(e, obj.(*GlIsQuery_In))
 }
@@ -18855,7 +19304,8 @@ func doSkipGlIsQuery_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsQuery_Out) ID() binary.ID { return binaryIDGlIsQuery_Out }
+func (*binaryClassGlIsQuery_Out) ID() binary.ID      { return binaryIDGlIsQuery_Out }
+func (*binaryClassGlIsQuery_Out) New() binary.Object { return &GlIsQuery_Out{} }
 func (*binaryClassGlIsQuery_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsQuery_Out(e, obj.(*GlIsQuery_Out))
 }
@@ -18911,7 +19361,8 @@ func doSkipGlIsRenderbuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsRenderbuffer) ID() binary.ID { return binaryIDGlIsRenderbuffer }
+func (*binaryClassGlIsRenderbuffer) ID() binary.ID      { return binaryIDGlIsRenderbuffer }
+func (*binaryClassGlIsRenderbuffer) New() binary.Object { return &GlIsRenderbuffer{} }
 func (*binaryClassGlIsRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsRenderbuffer(e, obj.(*GlIsRenderbuffer))
 }
@@ -18949,7 +19400,8 @@ func doSkipGlIsRenderbuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsRenderbuffer_In) ID() binary.ID { return binaryIDGlIsRenderbuffer_In }
+func (*binaryClassGlIsRenderbuffer_In) ID() binary.ID      { return binaryIDGlIsRenderbuffer_In }
+func (*binaryClassGlIsRenderbuffer_In) New() binary.Object { return &GlIsRenderbuffer_In{} }
 func (*binaryClassGlIsRenderbuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsRenderbuffer_In(e, obj.(*GlIsRenderbuffer_In))
 }
@@ -18989,7 +19441,8 @@ func doSkipGlIsRenderbuffer_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsRenderbuffer_Out) ID() binary.ID { return binaryIDGlIsRenderbuffer_Out }
+func (*binaryClassGlIsRenderbuffer_Out) ID() binary.ID      { return binaryIDGlIsRenderbuffer_Out }
+func (*binaryClassGlIsRenderbuffer_Out) New() binary.Object { return &GlIsRenderbuffer_Out{} }
 func (*binaryClassGlIsRenderbuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsRenderbuffer_Out(e, obj.(*GlIsRenderbuffer_Out))
 }
@@ -19047,7 +19500,8 @@ func doSkipGlIsShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsShader) ID() binary.ID { return binaryIDGlIsShader }
+func (*binaryClassGlIsShader) ID() binary.ID      { return binaryIDGlIsShader }
+func (*binaryClassGlIsShader) New() binary.Object { return &GlIsShader{} }
 func (*binaryClassGlIsShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsShader(e, obj.(*GlIsShader))
 }
@@ -19085,7 +19539,8 @@ func doSkipGlIsShader_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsShader_In) ID() binary.ID { return binaryIDGlIsShader_In }
+func (*binaryClassGlIsShader_In) ID() binary.ID      { return binaryIDGlIsShader_In }
+func (*binaryClassGlIsShader_In) New() binary.Object { return &GlIsShader_In{} }
 func (*binaryClassGlIsShader_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsShader_In(e, obj.(*GlIsShader_In))
 }
@@ -19123,7 +19578,8 @@ func doSkipGlIsShader_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsShader_Out) ID() binary.ID { return binaryIDGlIsShader_Out }
+func (*binaryClassGlIsShader_Out) ID() binary.ID      { return binaryIDGlIsShader_Out }
+func (*binaryClassGlIsShader_Out) New() binary.Object { return &GlIsShader_Out{} }
 func (*binaryClassGlIsShader_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsShader_Out(e, obj.(*GlIsShader_Out))
 }
@@ -19179,7 +19635,8 @@ func doSkipGlIsTexture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsTexture) ID() binary.ID { return binaryIDGlIsTexture }
+func (*binaryClassGlIsTexture) ID() binary.ID      { return binaryIDGlIsTexture }
+func (*binaryClassGlIsTexture) New() binary.Object { return &GlIsTexture{} }
 func (*binaryClassGlIsTexture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsTexture(e, obj.(*GlIsTexture))
 }
@@ -19217,7 +19674,8 @@ func doSkipGlIsTexture_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsTexture_In) ID() binary.ID { return binaryIDGlIsTexture_In }
+func (*binaryClassGlIsTexture_In) ID() binary.ID      { return binaryIDGlIsTexture_In }
+func (*binaryClassGlIsTexture_In) New() binary.Object { return &GlIsTexture_In{} }
 func (*binaryClassGlIsTexture_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsTexture_In(e, obj.(*GlIsTexture_In))
 }
@@ -19255,7 +19713,8 @@ func doSkipGlIsTexture_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsTexture_Out) ID() binary.ID { return binaryIDGlIsTexture_Out }
+func (*binaryClassGlIsTexture_Out) ID() binary.ID      { return binaryIDGlIsTexture_Out }
+func (*binaryClassGlIsTexture_Out) New() binary.Object { return &GlIsTexture_Out{} }
 func (*binaryClassGlIsTexture_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsTexture_Out(e, obj.(*GlIsTexture_Out))
 }
@@ -19311,7 +19770,8 @@ func doSkipGlIsVertexArrayOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsVertexArrayOES) ID() binary.ID { return binaryIDGlIsVertexArrayOES }
+func (*binaryClassGlIsVertexArrayOES) ID() binary.ID      { return binaryIDGlIsVertexArrayOES }
+func (*binaryClassGlIsVertexArrayOES) New() binary.Object { return &GlIsVertexArrayOES{} }
 func (*binaryClassGlIsVertexArrayOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsVertexArrayOES(e, obj.(*GlIsVertexArrayOES))
 }
@@ -19349,7 +19809,8 @@ func doSkipGlIsVertexArrayOES_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsVertexArrayOES_In) ID() binary.ID { return binaryIDGlIsVertexArrayOES_In }
+func (*binaryClassGlIsVertexArrayOES_In) ID() binary.ID      { return binaryIDGlIsVertexArrayOES_In }
+func (*binaryClassGlIsVertexArrayOES_In) New() binary.Object { return &GlIsVertexArrayOES_In{} }
 func (*binaryClassGlIsVertexArrayOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsVertexArrayOES_In(e, obj.(*GlIsVertexArrayOES_In))
 }
@@ -19389,7 +19850,8 @@ func doSkipGlIsVertexArrayOES_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlIsVertexArrayOES_Out) ID() binary.ID { return binaryIDGlIsVertexArrayOES_Out }
+func (*binaryClassGlIsVertexArrayOES_Out) ID() binary.ID      { return binaryIDGlIsVertexArrayOES_Out }
+func (*binaryClassGlIsVertexArrayOES_Out) New() binary.Object { return &GlIsVertexArrayOES_Out{} }
 func (*binaryClassGlIsVertexArrayOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlIsVertexArrayOES_Out(e, obj.(*GlIsVertexArrayOES_Out))
 }
@@ -19447,7 +19909,8 @@ func doSkipGlLineWidth(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlLineWidth) ID() binary.ID { return binaryIDGlLineWidth }
+func (*binaryClassGlLineWidth) ID() binary.ID      { return binaryIDGlLineWidth }
+func (*binaryClassGlLineWidth) New() binary.Object { return &GlLineWidth{} }
 func (*binaryClassGlLineWidth) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLineWidth(e, obj.(*GlLineWidth))
 }
@@ -19485,7 +19948,8 @@ func doSkipGlLineWidth_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlLineWidth_In) ID() binary.ID { return binaryIDGlLineWidth_In }
+func (*binaryClassGlLineWidth_In) ID() binary.ID      { return binaryIDGlLineWidth_In }
+func (*binaryClassGlLineWidth_In) New() binary.Object { return &GlLineWidth_In{} }
 func (*binaryClassGlLineWidth_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLineWidth_In(e, obj.(*GlLineWidth_In))
 }
@@ -19512,7 +19976,8 @@ func doDecodeGlLineWidth_Out(d binary.Decoder, o *GlLineWidth_Out) error {
 func doSkipGlLineWidth_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlLineWidth_Out) ID() binary.ID { return binaryIDGlLineWidth_Out }
+func (*binaryClassGlLineWidth_Out) ID() binary.ID      { return binaryIDGlLineWidth_Out }
+func (*binaryClassGlLineWidth_Out) New() binary.Object { return &GlLineWidth_Out{} }
 func (*binaryClassGlLineWidth_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLineWidth_Out(e, obj.(*GlLineWidth_Out))
 }
@@ -19568,7 +20033,8 @@ func doSkipGlLinkProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlLinkProgram) ID() binary.ID { return binaryIDGlLinkProgram }
+func (*binaryClassGlLinkProgram) ID() binary.ID      { return binaryIDGlLinkProgram }
+func (*binaryClassGlLinkProgram) New() binary.Object { return &GlLinkProgram{} }
 func (*binaryClassGlLinkProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLinkProgram(e, obj.(*GlLinkProgram))
 }
@@ -19606,7 +20072,8 @@ func doSkipGlLinkProgram_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlLinkProgram_In) ID() binary.ID { return binaryIDGlLinkProgram_In }
+func (*binaryClassGlLinkProgram_In) ID() binary.ID      { return binaryIDGlLinkProgram_In }
+func (*binaryClassGlLinkProgram_In) New() binary.Object { return &GlLinkProgram_In{} }
 func (*binaryClassGlLinkProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLinkProgram_In(e, obj.(*GlLinkProgram_In))
 }
@@ -19633,7 +20100,8 @@ func doDecodeGlLinkProgram_Out(d binary.Decoder, o *GlLinkProgram_Out) error {
 func doSkipGlLinkProgram_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlLinkProgram_Out) ID() binary.ID { return binaryIDGlLinkProgram_Out }
+func (*binaryClassGlLinkProgram_Out) ID() binary.ID      { return binaryIDGlLinkProgram_Out }
+func (*binaryClassGlLinkProgram_Out) New() binary.Object { return &GlLinkProgram_Out{} }
 func (*binaryClassGlLinkProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlLinkProgram_Out(e, obj.(*GlLinkProgram_Out))
 }
@@ -19689,7 +20157,8 @@ func doSkipGlMapBufferRange(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlMapBufferRange) ID() binary.ID { return binaryIDGlMapBufferRange }
+func (*binaryClassGlMapBufferRange) ID() binary.ID      { return binaryIDGlMapBufferRange }
+func (*binaryClassGlMapBufferRange) New() binary.Object { return &GlMapBufferRange{} }
 func (*binaryClassGlMapBufferRange) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlMapBufferRange(e, obj.(*GlMapBufferRange))
 }
@@ -19760,7 +20229,8 @@ func doSkipGlMapBufferRange_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlMapBufferRange_In) ID() binary.ID { return binaryIDGlMapBufferRange_In }
+func (*binaryClassGlMapBufferRange_In) ID() binary.ID      { return binaryIDGlMapBufferRange_In }
+func (*binaryClassGlMapBufferRange_In) New() binary.Object { return &GlMapBufferRange_In{} }
 func (*binaryClassGlMapBufferRange_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlMapBufferRange_In(e, obj.(*GlMapBufferRange_In))
 }
@@ -19800,7 +20270,8 @@ func doSkipGlMapBufferRange_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlMapBufferRange_Out) ID() binary.ID { return binaryIDGlMapBufferRange_Out }
+func (*binaryClassGlMapBufferRange_Out) ID() binary.ID      { return binaryIDGlMapBufferRange_Out }
+func (*binaryClassGlMapBufferRange_Out) New() binary.Object { return &GlMapBufferRange_Out{} }
 func (*binaryClassGlMapBufferRange_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlMapBufferRange_Out(e, obj.(*GlMapBufferRange_Out))
 }
@@ -19858,7 +20329,8 @@ func doSkipGlPixelStorei(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPixelStorei) ID() binary.ID { return binaryIDGlPixelStorei }
+func (*binaryClassGlPixelStorei) ID() binary.ID      { return binaryIDGlPixelStorei }
+func (*binaryClassGlPixelStorei) New() binary.Object { return &GlPixelStorei{} }
 func (*binaryClassGlPixelStorei) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPixelStorei(e, obj.(*GlPixelStorei))
 }
@@ -19907,7 +20379,8 @@ func doSkipGlPixelStorei_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPixelStorei_In) ID() binary.ID { return binaryIDGlPixelStorei_In }
+func (*binaryClassGlPixelStorei_In) ID() binary.ID      { return binaryIDGlPixelStorei_In }
+func (*binaryClassGlPixelStorei_In) New() binary.Object { return &GlPixelStorei_In{} }
 func (*binaryClassGlPixelStorei_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPixelStorei_In(e, obj.(*GlPixelStorei_In))
 }
@@ -19934,7 +20407,8 @@ func doDecodeGlPixelStorei_Out(d binary.Decoder, o *GlPixelStorei_Out) error {
 func doSkipGlPixelStorei_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlPixelStorei_Out) ID() binary.ID { return binaryIDGlPixelStorei_Out }
+func (*binaryClassGlPixelStorei_Out) ID() binary.ID      { return binaryIDGlPixelStorei_Out }
+func (*binaryClassGlPixelStorei_Out) New() binary.Object { return &GlPixelStorei_Out{} }
 func (*binaryClassGlPixelStorei_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPixelStorei_Out(e, obj.(*GlPixelStorei_Out))
 }
@@ -19990,7 +20464,8 @@ func doSkipGlPolygonOffset(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPolygonOffset) ID() binary.ID { return binaryIDGlPolygonOffset }
+func (*binaryClassGlPolygonOffset) ID() binary.ID      { return binaryIDGlPolygonOffset }
+func (*binaryClassGlPolygonOffset) New() binary.Object { return &GlPolygonOffset{} }
 func (*binaryClassGlPolygonOffset) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPolygonOffset(e, obj.(*GlPolygonOffset))
 }
@@ -20039,7 +20514,8 @@ func doSkipGlPolygonOffset_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPolygonOffset_In) ID() binary.ID { return binaryIDGlPolygonOffset_In }
+func (*binaryClassGlPolygonOffset_In) ID() binary.ID      { return binaryIDGlPolygonOffset_In }
+func (*binaryClassGlPolygonOffset_In) New() binary.Object { return &GlPolygonOffset_In{} }
 func (*binaryClassGlPolygonOffset_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPolygonOffset_In(e, obj.(*GlPolygonOffset_In))
 }
@@ -20066,7 +20542,8 @@ func doDecodeGlPolygonOffset_Out(d binary.Decoder, o *GlPolygonOffset_Out) error
 func doSkipGlPolygonOffset_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlPolygonOffset_Out) ID() binary.ID { return binaryIDGlPolygonOffset_Out }
+func (*binaryClassGlPolygonOffset_Out) ID() binary.ID      { return binaryIDGlPolygonOffset_Out }
+func (*binaryClassGlPolygonOffset_Out) New() binary.Object { return &GlPolygonOffset_Out{} }
 func (*binaryClassGlPolygonOffset_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPolygonOffset_Out(e, obj.(*GlPolygonOffset_Out))
 }
@@ -20124,7 +20601,8 @@ func doSkipGlPopGroupMarkerEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPopGroupMarkerEXT) ID() binary.ID { return binaryIDGlPopGroupMarkerEXT }
+func (*binaryClassGlPopGroupMarkerEXT) ID() binary.ID      { return binaryIDGlPopGroupMarkerEXT }
+func (*binaryClassGlPopGroupMarkerEXT) New() binary.Object { return &GlPopGroupMarkerEXT{} }
 func (*binaryClassGlPopGroupMarkerEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPopGroupMarkerEXT(e, obj.(*GlPopGroupMarkerEXT))
 }
@@ -20153,7 +20631,8 @@ func doDecodeGlPopGroupMarkerEXT_In(d binary.Decoder, o *GlPopGroupMarkerEXT_In)
 func doSkipGlPopGroupMarkerEXT_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlPopGroupMarkerEXT_In) ID() binary.ID { return binaryIDGlPopGroupMarkerEXT_In }
+func (*binaryClassGlPopGroupMarkerEXT_In) ID() binary.ID      { return binaryIDGlPopGroupMarkerEXT_In }
+func (*binaryClassGlPopGroupMarkerEXT_In) New() binary.Object { return &GlPopGroupMarkerEXT_In{} }
 func (*binaryClassGlPopGroupMarkerEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPopGroupMarkerEXT_In(e, obj.(*GlPopGroupMarkerEXT_In))
 }
@@ -20182,7 +20661,8 @@ func doDecodeGlPopGroupMarkerEXT_Out(d binary.Decoder, o *GlPopGroupMarkerEXT_Ou
 func doSkipGlPopGroupMarkerEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlPopGroupMarkerEXT_Out) ID() binary.ID { return binaryIDGlPopGroupMarkerEXT_Out }
+func (*binaryClassGlPopGroupMarkerEXT_Out) ID() binary.ID      { return binaryIDGlPopGroupMarkerEXT_Out }
+func (*binaryClassGlPopGroupMarkerEXT_Out) New() binary.Object { return &GlPopGroupMarkerEXT_Out{} }
 func (*binaryClassGlPopGroupMarkerEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPopGroupMarkerEXT_Out(e, obj.(*GlPopGroupMarkerEXT_Out))
 }
@@ -20240,7 +20720,8 @@ func doSkipGlProgramBinaryOES(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlProgramBinaryOES) ID() binary.ID { return binaryIDGlProgramBinaryOES }
+func (*binaryClassGlProgramBinaryOES) ID() binary.ID      { return binaryIDGlProgramBinaryOES }
+func (*binaryClassGlProgramBinaryOES) New() binary.Object { return &GlProgramBinaryOES{} }
 func (*binaryClassGlProgramBinaryOES) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlProgramBinaryOES(e, obj.(*GlProgramBinaryOES))
 }
@@ -20311,7 +20792,8 @@ func doSkipGlProgramBinaryOES_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlProgramBinaryOES_In) ID() binary.ID { return binaryIDGlProgramBinaryOES_In }
+func (*binaryClassGlProgramBinaryOES_In) ID() binary.ID      { return binaryIDGlProgramBinaryOES_In }
+func (*binaryClassGlProgramBinaryOES_In) New() binary.Object { return &GlProgramBinaryOES_In{} }
 func (*binaryClassGlProgramBinaryOES_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlProgramBinaryOES_In(e, obj.(*GlProgramBinaryOES_In))
 }
@@ -20340,7 +20822,8 @@ func doDecodeGlProgramBinaryOES_Out(d binary.Decoder, o *GlProgramBinaryOES_Out)
 func doSkipGlProgramBinaryOES_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlProgramBinaryOES_Out) ID() binary.ID { return binaryIDGlProgramBinaryOES_Out }
+func (*binaryClassGlProgramBinaryOES_Out) ID() binary.ID      { return binaryIDGlProgramBinaryOES_Out }
+func (*binaryClassGlProgramBinaryOES_Out) New() binary.Object { return &GlProgramBinaryOES_Out{} }
 func (*binaryClassGlProgramBinaryOES_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlProgramBinaryOES_Out(e, obj.(*GlProgramBinaryOES_Out))
 }
@@ -20398,7 +20881,8 @@ func doSkipGlPushGroupMarkerEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPushGroupMarkerEXT) ID() binary.ID { return binaryIDGlPushGroupMarkerEXT }
+func (*binaryClassGlPushGroupMarkerEXT) ID() binary.ID      { return binaryIDGlPushGroupMarkerEXT }
+func (*binaryClassGlPushGroupMarkerEXT) New() binary.Object { return &GlPushGroupMarkerEXT{} }
 func (*binaryClassGlPushGroupMarkerEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPushGroupMarkerEXT(e, obj.(*GlPushGroupMarkerEXT))
 }
@@ -20449,7 +20933,8 @@ func doSkipGlPushGroupMarkerEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlPushGroupMarkerEXT_In) ID() binary.ID { return binaryIDGlPushGroupMarkerEXT_In }
+func (*binaryClassGlPushGroupMarkerEXT_In) ID() binary.ID      { return binaryIDGlPushGroupMarkerEXT_In }
+func (*binaryClassGlPushGroupMarkerEXT_In) New() binary.Object { return &GlPushGroupMarkerEXT_In{} }
 func (*binaryClassGlPushGroupMarkerEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPushGroupMarkerEXT_In(e, obj.(*GlPushGroupMarkerEXT_In))
 }
@@ -20478,7 +20963,8 @@ func doDecodeGlPushGroupMarkerEXT_Out(d binary.Decoder, o *GlPushGroupMarkerEXT_
 func doSkipGlPushGroupMarkerEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlPushGroupMarkerEXT_Out) ID() binary.ID { return binaryIDGlPushGroupMarkerEXT_Out }
+func (*binaryClassGlPushGroupMarkerEXT_Out) ID() binary.ID      { return binaryIDGlPushGroupMarkerEXT_Out }
+func (*binaryClassGlPushGroupMarkerEXT_Out) New() binary.Object { return &GlPushGroupMarkerEXT_Out{} }
 func (*binaryClassGlPushGroupMarkerEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlPushGroupMarkerEXT_Out(e, obj.(*GlPushGroupMarkerEXT_Out))
 }
@@ -20536,7 +21022,8 @@ func doSkipGlQueryCounterEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlQueryCounterEXT) ID() binary.ID { return binaryIDGlQueryCounterEXT }
+func (*binaryClassGlQueryCounterEXT) ID() binary.ID      { return binaryIDGlQueryCounterEXT }
+func (*binaryClassGlQueryCounterEXT) New() binary.Object { return &GlQueryCounterEXT{} }
 func (*binaryClassGlQueryCounterEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlQueryCounterEXT(e, obj.(*GlQueryCounterEXT))
 }
@@ -20585,7 +21072,8 @@ func doSkipGlQueryCounterEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlQueryCounterEXT_In) ID() binary.ID { return binaryIDGlQueryCounterEXT_In }
+func (*binaryClassGlQueryCounterEXT_In) ID() binary.ID      { return binaryIDGlQueryCounterEXT_In }
+func (*binaryClassGlQueryCounterEXT_In) New() binary.Object { return &GlQueryCounterEXT_In{} }
 func (*binaryClassGlQueryCounterEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlQueryCounterEXT_In(e, obj.(*GlQueryCounterEXT_In))
 }
@@ -20614,7 +21102,8 @@ func doDecodeGlQueryCounterEXT_Out(d binary.Decoder, o *GlQueryCounterEXT_Out) e
 func doSkipGlQueryCounterEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlQueryCounterEXT_Out) ID() binary.ID { return binaryIDGlQueryCounterEXT_Out }
+func (*binaryClassGlQueryCounterEXT_Out) ID() binary.ID      { return binaryIDGlQueryCounterEXT_Out }
+func (*binaryClassGlQueryCounterEXT_Out) New() binary.Object { return &GlQueryCounterEXT_Out{} }
 func (*binaryClassGlQueryCounterEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlQueryCounterEXT_Out(e, obj.(*GlQueryCounterEXT_Out))
 }
@@ -20672,7 +21161,8 @@ func doSkipGlReadPixels(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlReadPixels) ID() binary.ID { return binaryIDGlReadPixels }
+func (*binaryClassGlReadPixels) ID() binary.ID      { return binaryIDGlReadPixels }
+func (*binaryClassGlReadPixels) New() binary.Object { return &GlReadPixels{} }
 func (*binaryClassGlReadPixels) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReadPixels(e, obj.(*GlReadPixels))
 }
@@ -20765,7 +21255,8 @@ func doSkipGlReadPixels_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlReadPixels_In) ID() binary.ID { return binaryIDGlReadPixels_In }
+func (*binaryClassGlReadPixels_In) ID() binary.ID      { return binaryIDGlReadPixels_In }
+func (*binaryClassGlReadPixels_In) New() binary.Object { return &GlReadPixels_In{} }
 func (*binaryClassGlReadPixels_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReadPixels_In(e, obj.(*GlReadPixels_In))
 }
@@ -20803,7 +21294,8 @@ func doSkipGlReadPixels_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlReadPixels_Out) ID() binary.ID { return binaryIDGlReadPixels_Out }
+func (*binaryClassGlReadPixels_Out) ID() binary.ID      { return binaryIDGlReadPixels_Out }
+func (*binaryClassGlReadPixels_Out) New() binary.Object { return &GlReadPixels_Out{} }
 func (*binaryClassGlReadPixels_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReadPixels_Out(e, obj.(*GlReadPixels_Out))
 }
@@ -20859,7 +21351,8 @@ func doSkipGlReleaseShaderCompiler(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlReleaseShaderCompiler) ID() binary.ID { return binaryIDGlReleaseShaderCompiler }
+func (*binaryClassGlReleaseShaderCompiler) ID() binary.ID      { return binaryIDGlReleaseShaderCompiler }
+func (*binaryClassGlReleaseShaderCompiler) New() binary.Object { return &GlReleaseShaderCompiler{} }
 func (*binaryClassGlReleaseShaderCompiler) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReleaseShaderCompiler(e, obj.(*GlReleaseShaderCompiler))
 }
@@ -20891,6 +21384,9 @@ func doSkipGlReleaseShaderCompiler_In(d binary.Decoder) error {
 func (*binaryClassGlReleaseShaderCompiler_In) ID() binary.ID {
 	return binaryIDGlReleaseShaderCompiler_In
 }
+func (*binaryClassGlReleaseShaderCompiler_In) New() binary.Object {
+	return &GlReleaseShaderCompiler_In{}
+}
 func (*binaryClassGlReleaseShaderCompiler_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReleaseShaderCompiler_In(e, obj.(*GlReleaseShaderCompiler_In))
 }
@@ -20921,6 +21417,9 @@ func doSkipGlReleaseShaderCompiler_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlReleaseShaderCompiler_Out) ID() binary.ID {
 	return binaryIDGlReleaseShaderCompiler_Out
+}
+func (*binaryClassGlReleaseShaderCompiler_Out) New() binary.Object {
+	return &GlReleaseShaderCompiler_Out{}
 }
 func (*binaryClassGlReleaseShaderCompiler_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlReleaseShaderCompiler_Out(e, obj.(*GlReleaseShaderCompiler_Out))
@@ -20979,7 +21478,8 @@ func doSkipGlRenderbufferStorage(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlRenderbufferStorage) ID() binary.ID { return binaryIDGlRenderbufferStorage }
+func (*binaryClassGlRenderbufferStorage) ID() binary.ID      { return binaryIDGlRenderbufferStorage }
+func (*binaryClassGlRenderbufferStorage) New() binary.Object { return &GlRenderbufferStorage{} }
 func (*binaryClassGlRenderbufferStorage) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorage(e, obj.(*GlRenderbufferStorage))
 }
@@ -21039,6 +21539,9 @@ func doSkipGlRenderbufferStorageMultisample(d binary.Decoder) error {
 }
 func (*binaryClassGlRenderbufferStorageMultisample) ID() binary.ID {
 	return binaryIDGlRenderbufferStorageMultisample
+}
+func (*binaryClassGlRenderbufferStorageMultisample) New() binary.Object {
+	return &GlRenderbufferStorageMultisample{}
 }
 func (*binaryClassGlRenderbufferStorageMultisample) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorageMultisample(e, obj.(*GlRenderbufferStorageMultisample))
@@ -21126,6 +21629,9 @@ func doSkipGlRenderbufferStorageMultisample_In(d binary.Decoder) error {
 func (*binaryClassGlRenderbufferStorageMultisample_In) ID() binary.ID {
 	return binaryIDGlRenderbufferStorageMultisample_In
 }
+func (*binaryClassGlRenderbufferStorageMultisample_In) New() binary.Object {
+	return &GlRenderbufferStorageMultisample_In{}
+}
 func (*binaryClassGlRenderbufferStorageMultisample_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorageMultisample_In(e, obj.(*GlRenderbufferStorageMultisample_In))
 }
@@ -21156,6 +21662,9 @@ func doSkipGlRenderbufferStorageMultisample_Out(d binary.Decoder) error {
 }
 func (*binaryClassGlRenderbufferStorageMultisample_Out) ID() binary.ID {
 	return binaryIDGlRenderbufferStorageMultisample_Out
+}
+func (*binaryClassGlRenderbufferStorageMultisample_Out) New() binary.Object {
+	return &GlRenderbufferStorageMultisample_Out{}
 }
 func (*binaryClassGlRenderbufferStorageMultisample_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorageMultisample_Out(e, obj.(*GlRenderbufferStorageMultisample_Out))
@@ -21229,7 +21738,8 @@ func doSkipGlRenderbufferStorage_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlRenderbufferStorage_In) ID() binary.ID { return binaryIDGlRenderbufferStorage_In }
+func (*binaryClassGlRenderbufferStorage_In) ID() binary.ID      { return binaryIDGlRenderbufferStorage_In }
+func (*binaryClassGlRenderbufferStorage_In) New() binary.Object { return &GlRenderbufferStorage_In{} }
 func (*binaryClassGlRenderbufferStorage_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorage_In(e, obj.(*GlRenderbufferStorage_In))
 }
@@ -21258,7 +21768,8 @@ func doDecodeGlRenderbufferStorage_Out(d binary.Decoder, o *GlRenderbufferStorag
 func doSkipGlRenderbufferStorage_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlRenderbufferStorage_Out) ID() binary.ID { return binaryIDGlRenderbufferStorage_Out }
+func (*binaryClassGlRenderbufferStorage_Out) ID() binary.ID      { return binaryIDGlRenderbufferStorage_Out }
+func (*binaryClassGlRenderbufferStorage_Out) New() binary.Object { return &GlRenderbufferStorage_Out{} }
 func (*binaryClassGlRenderbufferStorage_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlRenderbufferStorage_Out(e, obj.(*GlRenderbufferStorage_Out))
 }
@@ -21316,7 +21827,8 @@ func doSkipGlSampleCoverage(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlSampleCoverage) ID() binary.ID { return binaryIDGlSampleCoverage }
+func (*binaryClassGlSampleCoverage) ID() binary.ID      { return binaryIDGlSampleCoverage }
+func (*binaryClassGlSampleCoverage) New() binary.Object { return &GlSampleCoverage{} }
 func (*binaryClassGlSampleCoverage) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlSampleCoverage(e, obj.(*GlSampleCoverage))
 }
@@ -21365,7 +21877,8 @@ func doSkipGlSampleCoverage_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlSampleCoverage_In) ID() binary.ID { return binaryIDGlSampleCoverage_In }
+func (*binaryClassGlSampleCoverage_In) ID() binary.ID      { return binaryIDGlSampleCoverage_In }
+func (*binaryClassGlSampleCoverage_In) New() binary.Object { return &GlSampleCoverage_In{} }
 func (*binaryClassGlSampleCoverage_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlSampleCoverage_In(e, obj.(*GlSampleCoverage_In))
 }
@@ -21394,7 +21907,8 @@ func doDecodeGlSampleCoverage_Out(d binary.Decoder, o *GlSampleCoverage_Out) err
 func doSkipGlSampleCoverage_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlSampleCoverage_Out) ID() binary.ID { return binaryIDGlSampleCoverage_Out }
+func (*binaryClassGlSampleCoverage_Out) ID() binary.ID      { return binaryIDGlSampleCoverage_Out }
+func (*binaryClassGlSampleCoverage_Out) New() binary.Object { return &GlSampleCoverage_Out{} }
 func (*binaryClassGlSampleCoverage_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlSampleCoverage_Out(e, obj.(*GlSampleCoverage_Out))
 }
@@ -21452,7 +21966,8 @@ func doSkipGlScissor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlScissor) ID() binary.ID { return binaryIDGlScissor }
+func (*binaryClassGlScissor) ID() binary.ID      { return binaryIDGlScissor }
+func (*binaryClassGlScissor) New() binary.Object { return &GlScissor{} }
 func (*binaryClassGlScissor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlScissor(e, obj.(*GlScissor))
 }
@@ -21523,7 +22038,8 @@ func doSkipGlScissor_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlScissor_In) ID() binary.ID { return binaryIDGlScissor_In }
+func (*binaryClassGlScissor_In) ID() binary.ID      { return binaryIDGlScissor_In }
+func (*binaryClassGlScissor_In) New() binary.Object { return &GlScissor_In{} }
 func (*binaryClassGlScissor_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlScissor_In(e, obj.(*GlScissor_In))
 }
@@ -21550,7 +22066,8 @@ func doDecodeGlScissor_Out(d binary.Decoder, o *GlScissor_Out) error {
 func doSkipGlScissor_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlScissor_Out) ID() binary.ID { return binaryIDGlScissor_Out }
+func (*binaryClassGlScissor_Out) ID() binary.ID      { return binaryIDGlScissor_Out }
+func (*binaryClassGlScissor_Out) New() binary.Object { return &GlScissor_Out{} }
 func (*binaryClassGlScissor_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlScissor_Out(e, obj.(*GlScissor_Out))
 }
@@ -21606,7 +22123,8 @@ func doSkipGlShaderBinary(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlShaderBinary) ID() binary.ID { return binaryIDGlShaderBinary }
+func (*binaryClassGlShaderBinary) ID() binary.ID      { return binaryIDGlShaderBinary }
+func (*binaryClassGlShaderBinary) New() binary.Object { return &GlShaderBinary{} }
 func (*binaryClassGlShaderBinary) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderBinary(e, obj.(*GlShaderBinary))
 }
@@ -21706,7 +22224,8 @@ func doSkipGlShaderBinary_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlShaderBinary_In) ID() binary.ID { return binaryIDGlShaderBinary_In }
+func (*binaryClassGlShaderBinary_In) ID() binary.ID      { return binaryIDGlShaderBinary_In }
+func (*binaryClassGlShaderBinary_In) New() binary.Object { return &GlShaderBinary_In{} }
 func (*binaryClassGlShaderBinary_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderBinary_In(e, obj.(*GlShaderBinary_In))
 }
@@ -21733,7 +22252,8 @@ func doDecodeGlShaderBinary_Out(d binary.Decoder, o *GlShaderBinary_Out) error {
 func doSkipGlShaderBinary_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlShaderBinary_Out) ID() binary.ID { return binaryIDGlShaderBinary_Out }
+func (*binaryClassGlShaderBinary_Out) ID() binary.ID      { return binaryIDGlShaderBinary_Out }
+func (*binaryClassGlShaderBinary_Out) New() binary.Object { return &GlShaderBinary_Out{} }
 func (*binaryClassGlShaderBinary_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderBinary_Out(e, obj.(*GlShaderBinary_Out))
 }
@@ -21789,7 +22309,8 @@ func doSkipGlShaderSource(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlShaderSource) ID() binary.ID { return binaryIDGlShaderSource }
+func (*binaryClassGlShaderSource) ID() binary.ID      { return binaryIDGlShaderSource }
+func (*binaryClassGlShaderSource) New() binary.Object { return &GlShaderSource{} }
 func (*binaryClassGlShaderSource) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderSource(e, obj.(*GlShaderSource))
 }
@@ -21896,7 +22417,8 @@ func doSkipGlShaderSource_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlShaderSource_In) ID() binary.ID { return binaryIDGlShaderSource_In }
+func (*binaryClassGlShaderSource_In) ID() binary.ID      { return binaryIDGlShaderSource_In }
+func (*binaryClassGlShaderSource_In) New() binary.Object { return &GlShaderSource_In{} }
 func (*binaryClassGlShaderSource_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderSource_In(e, obj.(*GlShaderSource_In))
 }
@@ -21923,7 +22445,8 @@ func doDecodeGlShaderSource_Out(d binary.Decoder, o *GlShaderSource_Out) error {
 func doSkipGlShaderSource_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlShaderSource_Out) ID() binary.ID { return binaryIDGlShaderSource_Out }
+func (*binaryClassGlShaderSource_Out) ID() binary.ID      { return binaryIDGlShaderSource_Out }
+func (*binaryClassGlShaderSource_Out) New() binary.Object { return &GlShaderSource_Out{} }
 func (*binaryClassGlShaderSource_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlShaderSource_Out(e, obj.(*GlShaderSource_Out))
 }
@@ -21979,7 +22502,8 @@ func doSkipGlStartTilingQCOM(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStartTilingQCOM) ID() binary.ID { return binaryIDGlStartTilingQCOM }
+func (*binaryClassGlStartTilingQCOM) ID() binary.ID      { return binaryIDGlStartTilingQCOM }
+func (*binaryClassGlStartTilingQCOM) New() binary.Object { return &GlStartTilingQCOM{} }
 func (*binaryClassGlStartTilingQCOM) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStartTilingQCOM(e, obj.(*GlStartTilingQCOM))
 }
@@ -22061,7 +22585,8 @@ func doSkipGlStartTilingQCOM_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStartTilingQCOM_In) ID() binary.ID { return binaryIDGlStartTilingQCOM_In }
+func (*binaryClassGlStartTilingQCOM_In) ID() binary.ID      { return binaryIDGlStartTilingQCOM_In }
+func (*binaryClassGlStartTilingQCOM_In) New() binary.Object { return &GlStartTilingQCOM_In{} }
 func (*binaryClassGlStartTilingQCOM_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStartTilingQCOM_In(e, obj.(*GlStartTilingQCOM_In))
 }
@@ -22090,7 +22615,8 @@ func doDecodeGlStartTilingQCOM_Out(d binary.Decoder, o *GlStartTilingQCOM_Out) e
 func doSkipGlStartTilingQCOM_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlStartTilingQCOM_Out) ID() binary.ID { return binaryIDGlStartTilingQCOM_Out }
+func (*binaryClassGlStartTilingQCOM_Out) ID() binary.ID      { return binaryIDGlStartTilingQCOM_Out }
+func (*binaryClassGlStartTilingQCOM_Out) New() binary.Object { return &GlStartTilingQCOM_Out{} }
 func (*binaryClassGlStartTilingQCOM_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStartTilingQCOM_Out(e, obj.(*GlStartTilingQCOM_Out))
 }
@@ -22148,7 +22674,8 @@ func doSkipGlStencilFuncSeparate(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilFuncSeparate) ID() binary.ID { return binaryIDGlStencilFuncSeparate }
+func (*binaryClassGlStencilFuncSeparate) ID() binary.ID      { return binaryIDGlStencilFuncSeparate }
+func (*binaryClassGlStencilFuncSeparate) New() binary.Object { return &GlStencilFuncSeparate{} }
 func (*binaryClassGlStencilFuncSeparate) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilFuncSeparate(e, obj.(*GlStencilFuncSeparate))
 }
@@ -22221,7 +22748,8 @@ func doSkipGlStencilFuncSeparate_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilFuncSeparate_In) ID() binary.ID { return binaryIDGlStencilFuncSeparate_In }
+func (*binaryClassGlStencilFuncSeparate_In) ID() binary.ID      { return binaryIDGlStencilFuncSeparate_In }
+func (*binaryClassGlStencilFuncSeparate_In) New() binary.Object { return &GlStencilFuncSeparate_In{} }
 func (*binaryClassGlStencilFuncSeparate_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilFuncSeparate_In(e, obj.(*GlStencilFuncSeparate_In))
 }
@@ -22250,7 +22778,8 @@ func doDecodeGlStencilFuncSeparate_Out(d binary.Decoder, o *GlStencilFuncSeparat
 func doSkipGlStencilFuncSeparate_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlStencilFuncSeparate_Out) ID() binary.ID { return binaryIDGlStencilFuncSeparate_Out }
+func (*binaryClassGlStencilFuncSeparate_Out) ID() binary.ID      { return binaryIDGlStencilFuncSeparate_Out }
+func (*binaryClassGlStencilFuncSeparate_Out) New() binary.Object { return &GlStencilFuncSeparate_Out{} }
 func (*binaryClassGlStencilFuncSeparate_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilFuncSeparate_Out(e, obj.(*GlStencilFuncSeparate_Out))
 }
@@ -22308,7 +22837,8 @@ func doSkipGlStencilMask(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilMask) ID() binary.ID { return binaryIDGlStencilMask }
+func (*binaryClassGlStencilMask) ID() binary.ID      { return binaryIDGlStencilMask }
+func (*binaryClassGlStencilMask) New() binary.Object { return &GlStencilMask{} }
 func (*binaryClassGlStencilMask) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMask(e, obj.(*GlStencilMask))
 }
@@ -22364,7 +22894,8 @@ func doSkipGlStencilMaskSeparate(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilMaskSeparate) ID() binary.ID { return binaryIDGlStencilMaskSeparate }
+func (*binaryClassGlStencilMaskSeparate) ID() binary.ID      { return binaryIDGlStencilMaskSeparate }
+func (*binaryClassGlStencilMaskSeparate) New() binary.Object { return &GlStencilMaskSeparate{} }
 func (*binaryClassGlStencilMaskSeparate) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMaskSeparate(e, obj.(*GlStencilMaskSeparate))
 }
@@ -22415,7 +22946,8 @@ func doSkipGlStencilMaskSeparate_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilMaskSeparate_In) ID() binary.ID { return binaryIDGlStencilMaskSeparate_In }
+func (*binaryClassGlStencilMaskSeparate_In) ID() binary.ID      { return binaryIDGlStencilMaskSeparate_In }
+func (*binaryClassGlStencilMaskSeparate_In) New() binary.Object { return &GlStencilMaskSeparate_In{} }
 func (*binaryClassGlStencilMaskSeparate_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMaskSeparate_In(e, obj.(*GlStencilMaskSeparate_In))
 }
@@ -22444,7 +22976,8 @@ func doDecodeGlStencilMaskSeparate_Out(d binary.Decoder, o *GlStencilMaskSeparat
 func doSkipGlStencilMaskSeparate_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlStencilMaskSeparate_Out) ID() binary.ID { return binaryIDGlStencilMaskSeparate_Out }
+func (*binaryClassGlStencilMaskSeparate_Out) ID() binary.ID      { return binaryIDGlStencilMaskSeparate_Out }
+func (*binaryClassGlStencilMaskSeparate_Out) New() binary.Object { return &GlStencilMaskSeparate_Out{} }
 func (*binaryClassGlStencilMaskSeparate_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMaskSeparate_Out(e, obj.(*GlStencilMaskSeparate_Out))
 }
@@ -22484,7 +23017,8 @@ func doSkipGlStencilMask_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilMask_In) ID() binary.ID { return binaryIDGlStencilMask_In }
+func (*binaryClassGlStencilMask_In) ID() binary.ID      { return binaryIDGlStencilMask_In }
+func (*binaryClassGlStencilMask_In) New() binary.Object { return &GlStencilMask_In{} }
 func (*binaryClassGlStencilMask_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMask_In(e, obj.(*GlStencilMask_In))
 }
@@ -22511,7 +23045,8 @@ func doDecodeGlStencilMask_Out(d binary.Decoder, o *GlStencilMask_Out) error {
 func doSkipGlStencilMask_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlStencilMask_Out) ID() binary.ID { return binaryIDGlStencilMask_Out }
+func (*binaryClassGlStencilMask_Out) ID() binary.ID      { return binaryIDGlStencilMask_Out }
+func (*binaryClassGlStencilMask_Out) New() binary.Object { return &GlStencilMask_Out{} }
 func (*binaryClassGlStencilMask_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilMask_Out(e, obj.(*GlStencilMask_Out))
 }
@@ -22567,7 +23102,8 @@ func doSkipGlStencilOpSeparate(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilOpSeparate) ID() binary.ID { return binaryIDGlStencilOpSeparate }
+func (*binaryClassGlStencilOpSeparate) ID() binary.ID      { return binaryIDGlStencilOpSeparate }
+func (*binaryClassGlStencilOpSeparate) New() binary.Object { return &GlStencilOpSeparate{} }
 func (*binaryClassGlStencilOpSeparate) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilOpSeparate(e, obj.(*GlStencilOpSeparate))
 }
@@ -22640,7 +23176,8 @@ func doSkipGlStencilOpSeparate_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlStencilOpSeparate_In) ID() binary.ID { return binaryIDGlStencilOpSeparate_In }
+func (*binaryClassGlStencilOpSeparate_In) ID() binary.ID      { return binaryIDGlStencilOpSeparate_In }
+func (*binaryClassGlStencilOpSeparate_In) New() binary.Object { return &GlStencilOpSeparate_In{} }
 func (*binaryClassGlStencilOpSeparate_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilOpSeparate_In(e, obj.(*GlStencilOpSeparate_In))
 }
@@ -22669,7 +23206,8 @@ func doDecodeGlStencilOpSeparate_Out(d binary.Decoder, o *GlStencilOpSeparate_Ou
 func doSkipGlStencilOpSeparate_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlStencilOpSeparate_Out) ID() binary.ID { return binaryIDGlStencilOpSeparate_Out }
+func (*binaryClassGlStencilOpSeparate_Out) ID() binary.ID      { return binaryIDGlStencilOpSeparate_Out }
+func (*binaryClassGlStencilOpSeparate_Out) New() binary.Object { return &GlStencilOpSeparate_Out{} }
 func (*binaryClassGlStencilOpSeparate_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlStencilOpSeparate_Out(e, obj.(*GlStencilOpSeparate_Out))
 }
@@ -22727,7 +23265,8 @@ func doSkipGlTexImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexImage2D) ID() binary.ID { return binaryIDGlTexImage2D }
+func (*binaryClassGlTexImage2D) ID() binary.ID      { return binaryIDGlTexImage2D }
+func (*binaryClassGlTexImage2D) New() binary.Object { return &GlTexImage2D{} }
 func (*binaryClassGlTexImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexImage2D(e, obj.(*GlTexImage2D))
 }
@@ -22853,7 +23392,8 @@ func doSkipGlTexImage2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexImage2D_In) ID() binary.ID { return binaryIDGlTexImage2D_In }
+func (*binaryClassGlTexImage2D_In) ID() binary.ID      { return binaryIDGlTexImage2D_In }
+func (*binaryClassGlTexImage2D_In) New() binary.Object { return &GlTexImage2D_In{} }
 func (*binaryClassGlTexImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexImage2D_In(e, obj.(*GlTexImage2D_In))
 }
@@ -22880,7 +23420,8 @@ func doDecodeGlTexImage2D_Out(d binary.Decoder, o *GlTexImage2D_Out) error {
 func doSkipGlTexImage2D_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexImage2D_Out) ID() binary.ID { return binaryIDGlTexImage2D_Out }
+func (*binaryClassGlTexImage2D_Out) ID() binary.ID      { return binaryIDGlTexImage2D_Out }
+func (*binaryClassGlTexImage2D_Out) New() binary.Object { return &GlTexImage2D_Out{} }
 func (*binaryClassGlTexImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexImage2D_Out(e, obj.(*GlTexImage2D_Out))
 }
@@ -22936,7 +23477,8 @@ func doSkipGlTexParameterf(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexParameterf) ID() binary.ID { return binaryIDGlTexParameterf }
+func (*binaryClassGlTexParameterf) ID() binary.ID      { return binaryIDGlTexParameterf }
+func (*binaryClassGlTexParameterf) New() binary.Object { return &GlTexParameterf{} }
 func (*binaryClassGlTexParameterf) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameterf(e, obj.(*GlTexParameterf))
 }
@@ -22996,7 +23538,8 @@ func doSkipGlTexParameterf_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexParameterf_In) ID() binary.ID { return binaryIDGlTexParameterf_In }
+func (*binaryClassGlTexParameterf_In) ID() binary.ID      { return binaryIDGlTexParameterf_In }
+func (*binaryClassGlTexParameterf_In) New() binary.Object { return &GlTexParameterf_In{} }
 func (*binaryClassGlTexParameterf_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameterf_In(e, obj.(*GlTexParameterf_In))
 }
@@ -23023,7 +23566,8 @@ func doDecodeGlTexParameterf_Out(d binary.Decoder, o *GlTexParameterf_Out) error
 func doSkipGlTexParameterf_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexParameterf_Out) ID() binary.ID { return binaryIDGlTexParameterf_Out }
+func (*binaryClassGlTexParameterf_Out) ID() binary.ID      { return binaryIDGlTexParameterf_Out }
+func (*binaryClassGlTexParameterf_Out) New() binary.Object { return &GlTexParameterf_Out{} }
 func (*binaryClassGlTexParameterf_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameterf_Out(e, obj.(*GlTexParameterf_Out))
 }
@@ -23081,7 +23625,8 @@ func doSkipGlTexParameteri(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexParameteri) ID() binary.ID { return binaryIDGlTexParameteri }
+func (*binaryClassGlTexParameteri) ID() binary.ID      { return binaryIDGlTexParameteri }
+func (*binaryClassGlTexParameteri) New() binary.Object { return &GlTexParameteri{} }
 func (*binaryClassGlTexParameteri) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameteri(e, obj.(*GlTexParameteri))
 }
@@ -23141,7 +23686,8 @@ func doSkipGlTexParameteri_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexParameteri_In) ID() binary.ID { return binaryIDGlTexParameteri_In }
+func (*binaryClassGlTexParameteri_In) ID() binary.ID      { return binaryIDGlTexParameteri_In }
+func (*binaryClassGlTexParameteri_In) New() binary.Object { return &GlTexParameteri_In{} }
 func (*binaryClassGlTexParameteri_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameteri_In(e, obj.(*GlTexParameteri_In))
 }
@@ -23168,7 +23714,8 @@ func doDecodeGlTexParameteri_Out(d binary.Decoder, o *GlTexParameteri_Out) error
 func doSkipGlTexParameteri_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexParameteri_Out) ID() binary.ID { return binaryIDGlTexParameteri_Out }
+func (*binaryClassGlTexParameteri_Out) ID() binary.ID      { return binaryIDGlTexParameteri_Out }
+func (*binaryClassGlTexParameteri_Out) New() binary.Object { return &GlTexParameteri_Out{} }
 func (*binaryClassGlTexParameteri_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexParameteri_Out(e, obj.(*GlTexParameteri_Out))
 }
@@ -23226,7 +23773,8 @@ func doSkipGlTexStorage1DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage1DEXT) ID() binary.ID { return binaryIDGlTexStorage1DEXT }
+func (*binaryClassGlTexStorage1DEXT) ID() binary.ID      { return binaryIDGlTexStorage1DEXT }
+func (*binaryClassGlTexStorage1DEXT) New() binary.Object { return &GlTexStorage1DEXT{} }
 func (*binaryClassGlTexStorage1DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage1DEXT(e, obj.(*GlTexStorage1DEXT))
 }
@@ -23297,7 +23845,8 @@ func doSkipGlTexStorage1DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage1DEXT_In) ID() binary.ID { return binaryIDGlTexStorage1DEXT_In }
+func (*binaryClassGlTexStorage1DEXT_In) ID() binary.ID      { return binaryIDGlTexStorage1DEXT_In }
+func (*binaryClassGlTexStorage1DEXT_In) New() binary.Object { return &GlTexStorage1DEXT_In{} }
 func (*binaryClassGlTexStorage1DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage1DEXT_In(e, obj.(*GlTexStorage1DEXT_In))
 }
@@ -23326,7 +23875,8 @@ func doDecodeGlTexStorage1DEXT_Out(d binary.Decoder, o *GlTexStorage1DEXT_Out) e
 func doSkipGlTexStorage1DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexStorage1DEXT_Out) ID() binary.ID { return binaryIDGlTexStorage1DEXT_Out }
+func (*binaryClassGlTexStorage1DEXT_Out) ID() binary.ID      { return binaryIDGlTexStorage1DEXT_Out }
+func (*binaryClassGlTexStorage1DEXT_Out) New() binary.Object { return &GlTexStorage1DEXT_Out{} }
 func (*binaryClassGlTexStorage1DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage1DEXT_Out(e, obj.(*GlTexStorage1DEXT_Out))
 }
@@ -23384,7 +23934,8 @@ func doSkipGlTexStorage2DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage2DEXT) ID() binary.ID { return binaryIDGlTexStorage2DEXT }
+func (*binaryClassGlTexStorage2DEXT) ID() binary.ID      { return binaryIDGlTexStorage2DEXT }
+func (*binaryClassGlTexStorage2DEXT) New() binary.Object { return &GlTexStorage2DEXT{} }
 func (*binaryClassGlTexStorage2DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage2DEXT(e, obj.(*GlTexStorage2DEXT))
 }
@@ -23466,7 +24017,8 @@ func doSkipGlTexStorage2DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage2DEXT_In) ID() binary.ID { return binaryIDGlTexStorage2DEXT_In }
+func (*binaryClassGlTexStorage2DEXT_In) ID() binary.ID      { return binaryIDGlTexStorage2DEXT_In }
+func (*binaryClassGlTexStorage2DEXT_In) New() binary.Object { return &GlTexStorage2DEXT_In{} }
 func (*binaryClassGlTexStorage2DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage2DEXT_In(e, obj.(*GlTexStorage2DEXT_In))
 }
@@ -23495,7 +24047,8 @@ func doDecodeGlTexStorage2DEXT_Out(d binary.Decoder, o *GlTexStorage2DEXT_Out) e
 func doSkipGlTexStorage2DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexStorage2DEXT_Out) ID() binary.ID { return binaryIDGlTexStorage2DEXT_Out }
+func (*binaryClassGlTexStorage2DEXT_Out) ID() binary.ID      { return binaryIDGlTexStorage2DEXT_Out }
+func (*binaryClassGlTexStorage2DEXT_Out) New() binary.Object { return &GlTexStorage2DEXT_Out{} }
 func (*binaryClassGlTexStorage2DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage2DEXT_Out(e, obj.(*GlTexStorage2DEXT_Out))
 }
@@ -23553,7 +24106,8 @@ func doSkipGlTexStorage3DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage3DEXT) ID() binary.ID { return binaryIDGlTexStorage3DEXT }
+func (*binaryClassGlTexStorage3DEXT) ID() binary.ID      { return binaryIDGlTexStorage3DEXT }
+func (*binaryClassGlTexStorage3DEXT) New() binary.Object { return &GlTexStorage3DEXT{} }
 func (*binaryClassGlTexStorage3DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage3DEXT(e, obj.(*GlTexStorage3DEXT))
 }
@@ -23646,7 +24200,8 @@ func doSkipGlTexStorage3DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexStorage3DEXT_In) ID() binary.ID { return binaryIDGlTexStorage3DEXT_In }
+func (*binaryClassGlTexStorage3DEXT_In) ID() binary.ID      { return binaryIDGlTexStorage3DEXT_In }
+func (*binaryClassGlTexStorage3DEXT_In) New() binary.Object { return &GlTexStorage3DEXT_In{} }
 func (*binaryClassGlTexStorage3DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage3DEXT_In(e, obj.(*GlTexStorage3DEXT_In))
 }
@@ -23675,7 +24230,8 @@ func doDecodeGlTexStorage3DEXT_Out(d binary.Decoder, o *GlTexStorage3DEXT_Out) e
 func doSkipGlTexStorage3DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexStorage3DEXT_Out) ID() binary.ID { return binaryIDGlTexStorage3DEXT_Out }
+func (*binaryClassGlTexStorage3DEXT_Out) ID() binary.ID      { return binaryIDGlTexStorage3DEXT_Out }
+func (*binaryClassGlTexStorage3DEXT_Out) New() binary.Object { return &GlTexStorage3DEXT_Out{} }
 func (*binaryClassGlTexStorage3DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexStorage3DEXT_Out(e, obj.(*GlTexStorage3DEXT_Out))
 }
@@ -23733,7 +24289,8 @@ func doSkipGlTexSubImage2D(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexSubImage2D) ID() binary.ID { return binaryIDGlTexSubImage2D }
+func (*binaryClassGlTexSubImage2D) ID() binary.ID      { return binaryIDGlTexSubImage2D }
+func (*binaryClassGlTexSubImage2D) New() binary.Object { return &GlTexSubImage2D{} }
 func (*binaryClassGlTexSubImage2D) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexSubImage2D(e, obj.(*GlTexSubImage2D))
 }
@@ -23859,7 +24416,8 @@ func doSkipGlTexSubImage2D_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTexSubImage2D_In) ID() binary.ID { return binaryIDGlTexSubImage2D_In }
+func (*binaryClassGlTexSubImage2D_In) ID() binary.ID      { return binaryIDGlTexSubImage2D_In }
+func (*binaryClassGlTexSubImage2D_In) New() binary.Object { return &GlTexSubImage2D_In{} }
 func (*binaryClassGlTexSubImage2D_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexSubImage2D_In(e, obj.(*GlTexSubImage2D_In))
 }
@@ -23886,7 +24444,8 @@ func doDecodeGlTexSubImage2D_Out(d binary.Decoder, o *GlTexSubImage2D_Out) error
 func doSkipGlTexSubImage2D_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTexSubImage2D_Out) ID() binary.ID { return binaryIDGlTexSubImage2D_Out }
+func (*binaryClassGlTexSubImage2D_Out) ID() binary.ID      { return binaryIDGlTexSubImage2D_Out }
+func (*binaryClassGlTexSubImage2D_Out) New() binary.Object { return &GlTexSubImage2D_Out{} }
 func (*binaryClassGlTexSubImage2D_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTexSubImage2D_Out(e, obj.(*GlTexSubImage2D_Out))
 }
@@ -23944,7 +24503,8 @@ func doSkipGlTextureStorage1DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage1DEXT) ID() binary.ID { return binaryIDGlTextureStorage1DEXT }
+func (*binaryClassGlTextureStorage1DEXT) ID() binary.ID      { return binaryIDGlTextureStorage1DEXT }
+func (*binaryClassGlTextureStorage1DEXT) New() binary.Object { return &GlTextureStorage1DEXT{} }
 func (*binaryClassGlTextureStorage1DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage1DEXT(e, obj.(*GlTextureStorage1DEXT))
 }
@@ -24028,7 +24588,8 @@ func doSkipGlTextureStorage1DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage1DEXT_In) ID() binary.ID { return binaryIDGlTextureStorage1DEXT_In }
+func (*binaryClassGlTextureStorage1DEXT_In) ID() binary.ID      { return binaryIDGlTextureStorage1DEXT_In }
+func (*binaryClassGlTextureStorage1DEXT_In) New() binary.Object { return &GlTextureStorage1DEXT_In{} }
 func (*binaryClassGlTextureStorage1DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage1DEXT_In(e, obj.(*GlTextureStorage1DEXT_In))
 }
@@ -24057,7 +24618,8 @@ func doDecodeGlTextureStorage1DEXT_Out(d binary.Decoder, o *GlTextureStorage1DEX
 func doSkipGlTextureStorage1DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTextureStorage1DEXT_Out) ID() binary.ID { return binaryIDGlTextureStorage1DEXT_Out }
+func (*binaryClassGlTextureStorage1DEXT_Out) ID() binary.ID      { return binaryIDGlTextureStorage1DEXT_Out }
+func (*binaryClassGlTextureStorage1DEXT_Out) New() binary.Object { return &GlTextureStorage1DEXT_Out{} }
 func (*binaryClassGlTextureStorage1DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage1DEXT_Out(e, obj.(*GlTextureStorage1DEXT_Out))
 }
@@ -24115,7 +24677,8 @@ func doSkipGlTextureStorage2DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage2DEXT) ID() binary.ID { return binaryIDGlTextureStorage2DEXT }
+func (*binaryClassGlTextureStorage2DEXT) ID() binary.ID      { return binaryIDGlTextureStorage2DEXT }
+func (*binaryClassGlTextureStorage2DEXT) New() binary.Object { return &GlTextureStorage2DEXT{} }
 func (*binaryClassGlTextureStorage2DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage2DEXT(e, obj.(*GlTextureStorage2DEXT))
 }
@@ -24210,7 +24773,8 @@ func doSkipGlTextureStorage2DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage2DEXT_In) ID() binary.ID { return binaryIDGlTextureStorage2DEXT_In }
+func (*binaryClassGlTextureStorage2DEXT_In) ID() binary.ID      { return binaryIDGlTextureStorage2DEXT_In }
+func (*binaryClassGlTextureStorage2DEXT_In) New() binary.Object { return &GlTextureStorage2DEXT_In{} }
 func (*binaryClassGlTextureStorage2DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage2DEXT_In(e, obj.(*GlTextureStorage2DEXT_In))
 }
@@ -24239,7 +24803,8 @@ func doDecodeGlTextureStorage2DEXT_Out(d binary.Decoder, o *GlTextureStorage2DEX
 func doSkipGlTextureStorage2DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTextureStorage2DEXT_Out) ID() binary.ID { return binaryIDGlTextureStorage2DEXT_Out }
+func (*binaryClassGlTextureStorage2DEXT_Out) ID() binary.ID      { return binaryIDGlTextureStorage2DEXT_Out }
+func (*binaryClassGlTextureStorage2DEXT_Out) New() binary.Object { return &GlTextureStorage2DEXT_Out{} }
 func (*binaryClassGlTextureStorage2DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage2DEXT_Out(e, obj.(*GlTextureStorage2DEXT_Out))
 }
@@ -24297,7 +24862,8 @@ func doSkipGlTextureStorage3DEXT(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage3DEXT) ID() binary.ID { return binaryIDGlTextureStorage3DEXT }
+func (*binaryClassGlTextureStorage3DEXT) ID() binary.ID      { return binaryIDGlTextureStorage3DEXT }
+func (*binaryClassGlTextureStorage3DEXT) New() binary.Object { return &GlTextureStorage3DEXT{} }
 func (*binaryClassGlTextureStorage3DEXT) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage3DEXT(e, obj.(*GlTextureStorage3DEXT))
 }
@@ -24403,7 +24969,8 @@ func doSkipGlTextureStorage3DEXT_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlTextureStorage3DEXT_In) ID() binary.ID { return binaryIDGlTextureStorage3DEXT_In }
+func (*binaryClassGlTextureStorage3DEXT_In) ID() binary.ID      { return binaryIDGlTextureStorage3DEXT_In }
+func (*binaryClassGlTextureStorage3DEXT_In) New() binary.Object { return &GlTextureStorage3DEXT_In{} }
 func (*binaryClassGlTextureStorage3DEXT_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage3DEXT_In(e, obj.(*GlTextureStorage3DEXT_In))
 }
@@ -24432,7 +24999,8 @@ func doDecodeGlTextureStorage3DEXT_Out(d binary.Decoder, o *GlTextureStorage3DEX
 func doSkipGlTextureStorage3DEXT_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlTextureStorage3DEXT_Out) ID() binary.ID { return binaryIDGlTextureStorage3DEXT_Out }
+func (*binaryClassGlTextureStorage3DEXT_Out) ID() binary.ID      { return binaryIDGlTextureStorage3DEXT_Out }
+func (*binaryClassGlTextureStorage3DEXT_Out) New() binary.Object { return &GlTextureStorage3DEXT_Out{} }
 func (*binaryClassGlTextureStorage3DEXT_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlTextureStorage3DEXT_Out(e, obj.(*GlTextureStorage3DEXT_Out))
 }
@@ -24490,7 +25058,8 @@ func doSkipGlUniform1f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1f) ID() binary.ID { return binaryIDGlUniform1f }
+func (*binaryClassGlUniform1f) ID() binary.ID      { return binaryIDGlUniform1f }
+func (*binaryClassGlUniform1f) New() binary.Object { return &GlUniform1f{} }
 func (*binaryClassGlUniform1f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1f(e, obj.(*GlUniform1f))
 }
@@ -24539,7 +25108,8 @@ func doSkipGlUniform1f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1f_In) ID() binary.ID { return binaryIDGlUniform1f_In }
+func (*binaryClassGlUniform1f_In) ID() binary.ID      { return binaryIDGlUniform1f_In }
+func (*binaryClassGlUniform1f_In) New() binary.Object { return &GlUniform1f_In{} }
 func (*binaryClassGlUniform1f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1f_In(e, obj.(*GlUniform1f_In))
 }
@@ -24566,7 +25136,8 @@ func doDecodeGlUniform1f_Out(d binary.Decoder, o *GlUniform1f_Out) error {
 func doSkipGlUniform1f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform1f_Out) ID() binary.ID { return binaryIDGlUniform1f_Out }
+func (*binaryClassGlUniform1f_Out) ID() binary.ID      { return binaryIDGlUniform1f_Out }
+func (*binaryClassGlUniform1f_Out) New() binary.Object { return &GlUniform1f_Out{} }
 func (*binaryClassGlUniform1f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1f_Out(e, obj.(*GlUniform1f_Out))
 }
@@ -24622,7 +25193,8 @@ func doSkipGlUniform1fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1fv) ID() binary.ID { return binaryIDGlUniform1fv }
+func (*binaryClassGlUniform1fv) ID() binary.ID      { return binaryIDGlUniform1fv }
+func (*binaryClassGlUniform1fv) New() binary.Object { return &GlUniform1fv{} }
 func (*binaryClassGlUniform1fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1fv(e, obj.(*GlUniform1fv))
 }
@@ -24700,7 +25272,8 @@ func doSkipGlUniform1fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1fv_In) ID() binary.ID { return binaryIDGlUniform1fv_In }
+func (*binaryClassGlUniform1fv_In) ID() binary.ID      { return binaryIDGlUniform1fv_In }
+func (*binaryClassGlUniform1fv_In) New() binary.Object { return &GlUniform1fv_In{} }
 func (*binaryClassGlUniform1fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1fv_In(e, obj.(*GlUniform1fv_In))
 }
@@ -24727,7 +25300,8 @@ func doDecodeGlUniform1fv_Out(d binary.Decoder, o *GlUniform1fv_Out) error {
 func doSkipGlUniform1fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform1fv_Out) ID() binary.ID { return binaryIDGlUniform1fv_Out }
+func (*binaryClassGlUniform1fv_Out) ID() binary.ID      { return binaryIDGlUniform1fv_Out }
+func (*binaryClassGlUniform1fv_Out) New() binary.Object { return &GlUniform1fv_Out{} }
 func (*binaryClassGlUniform1fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1fv_Out(e, obj.(*GlUniform1fv_Out))
 }
@@ -24783,7 +25357,8 @@ func doSkipGlUniform1i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1i) ID() binary.ID { return binaryIDGlUniform1i }
+func (*binaryClassGlUniform1i) ID() binary.ID      { return binaryIDGlUniform1i }
+func (*binaryClassGlUniform1i) New() binary.Object { return &GlUniform1i{} }
 func (*binaryClassGlUniform1i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1i(e, obj.(*GlUniform1i))
 }
@@ -24832,7 +25407,8 @@ func doSkipGlUniform1i_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1i_In) ID() binary.ID { return binaryIDGlUniform1i_In }
+func (*binaryClassGlUniform1i_In) ID() binary.ID      { return binaryIDGlUniform1i_In }
+func (*binaryClassGlUniform1i_In) New() binary.Object { return &GlUniform1i_In{} }
 func (*binaryClassGlUniform1i_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1i_In(e, obj.(*GlUniform1i_In))
 }
@@ -24859,7 +25435,8 @@ func doDecodeGlUniform1i_Out(d binary.Decoder, o *GlUniform1i_Out) error {
 func doSkipGlUniform1i_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform1i_Out) ID() binary.ID { return binaryIDGlUniform1i_Out }
+func (*binaryClassGlUniform1i_Out) ID() binary.ID      { return binaryIDGlUniform1i_Out }
+func (*binaryClassGlUniform1i_Out) New() binary.Object { return &GlUniform1i_Out{} }
 func (*binaryClassGlUniform1i_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1i_Out(e, obj.(*GlUniform1i_Out))
 }
@@ -24915,7 +25492,8 @@ func doSkipGlUniform1iv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1iv) ID() binary.ID { return binaryIDGlUniform1iv }
+func (*binaryClassGlUniform1iv) ID() binary.ID      { return binaryIDGlUniform1iv }
+func (*binaryClassGlUniform1iv) New() binary.Object { return &GlUniform1iv{} }
 func (*binaryClassGlUniform1iv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1iv(e, obj.(*GlUniform1iv))
 }
@@ -24993,7 +25571,8 @@ func doSkipGlUniform1iv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform1iv_In) ID() binary.ID { return binaryIDGlUniform1iv_In }
+func (*binaryClassGlUniform1iv_In) ID() binary.ID      { return binaryIDGlUniform1iv_In }
+func (*binaryClassGlUniform1iv_In) New() binary.Object { return &GlUniform1iv_In{} }
 func (*binaryClassGlUniform1iv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1iv_In(e, obj.(*GlUniform1iv_In))
 }
@@ -25020,7 +25599,8 @@ func doDecodeGlUniform1iv_Out(d binary.Decoder, o *GlUniform1iv_Out) error {
 func doSkipGlUniform1iv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform1iv_Out) ID() binary.ID { return binaryIDGlUniform1iv_Out }
+func (*binaryClassGlUniform1iv_Out) ID() binary.ID      { return binaryIDGlUniform1iv_Out }
+func (*binaryClassGlUniform1iv_Out) New() binary.Object { return &GlUniform1iv_Out{} }
 func (*binaryClassGlUniform1iv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform1iv_Out(e, obj.(*GlUniform1iv_Out))
 }
@@ -25076,7 +25656,8 @@ func doSkipGlUniform2f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2f) ID() binary.ID { return binaryIDGlUniform2f }
+func (*binaryClassGlUniform2f) ID() binary.ID      { return binaryIDGlUniform2f }
+func (*binaryClassGlUniform2f) New() binary.Object { return &GlUniform2f{} }
 func (*binaryClassGlUniform2f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2f(e, obj.(*GlUniform2f))
 }
@@ -25136,7 +25717,8 @@ func doSkipGlUniform2f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2f_In) ID() binary.ID { return binaryIDGlUniform2f_In }
+func (*binaryClassGlUniform2f_In) ID() binary.ID      { return binaryIDGlUniform2f_In }
+func (*binaryClassGlUniform2f_In) New() binary.Object { return &GlUniform2f_In{} }
 func (*binaryClassGlUniform2f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2f_In(e, obj.(*GlUniform2f_In))
 }
@@ -25163,7 +25745,8 @@ func doDecodeGlUniform2f_Out(d binary.Decoder, o *GlUniform2f_Out) error {
 func doSkipGlUniform2f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform2f_Out) ID() binary.ID { return binaryIDGlUniform2f_Out }
+func (*binaryClassGlUniform2f_Out) ID() binary.ID      { return binaryIDGlUniform2f_Out }
+func (*binaryClassGlUniform2f_Out) New() binary.Object { return &GlUniform2f_Out{} }
 func (*binaryClassGlUniform2f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2f_Out(e, obj.(*GlUniform2f_Out))
 }
@@ -25219,7 +25802,8 @@ func doSkipGlUniform2fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2fv) ID() binary.ID { return binaryIDGlUniform2fv }
+func (*binaryClassGlUniform2fv) ID() binary.ID      { return binaryIDGlUniform2fv }
+func (*binaryClassGlUniform2fv) New() binary.Object { return &GlUniform2fv{} }
 func (*binaryClassGlUniform2fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2fv(e, obj.(*GlUniform2fv))
 }
@@ -25297,7 +25881,8 @@ func doSkipGlUniform2fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2fv_In) ID() binary.ID { return binaryIDGlUniform2fv_In }
+func (*binaryClassGlUniform2fv_In) ID() binary.ID      { return binaryIDGlUniform2fv_In }
+func (*binaryClassGlUniform2fv_In) New() binary.Object { return &GlUniform2fv_In{} }
 func (*binaryClassGlUniform2fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2fv_In(e, obj.(*GlUniform2fv_In))
 }
@@ -25324,7 +25909,8 @@ func doDecodeGlUniform2fv_Out(d binary.Decoder, o *GlUniform2fv_Out) error {
 func doSkipGlUniform2fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform2fv_Out) ID() binary.ID { return binaryIDGlUniform2fv_Out }
+func (*binaryClassGlUniform2fv_Out) ID() binary.ID      { return binaryIDGlUniform2fv_Out }
+func (*binaryClassGlUniform2fv_Out) New() binary.Object { return &GlUniform2fv_Out{} }
 func (*binaryClassGlUniform2fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2fv_Out(e, obj.(*GlUniform2fv_Out))
 }
@@ -25380,7 +25966,8 @@ func doSkipGlUniform2i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2i) ID() binary.ID { return binaryIDGlUniform2i }
+func (*binaryClassGlUniform2i) ID() binary.ID      { return binaryIDGlUniform2i }
+func (*binaryClassGlUniform2i) New() binary.Object { return &GlUniform2i{} }
 func (*binaryClassGlUniform2i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2i(e, obj.(*GlUniform2i))
 }
@@ -25440,7 +26027,8 @@ func doSkipGlUniform2i_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2i_In) ID() binary.ID { return binaryIDGlUniform2i_In }
+func (*binaryClassGlUniform2i_In) ID() binary.ID      { return binaryIDGlUniform2i_In }
+func (*binaryClassGlUniform2i_In) New() binary.Object { return &GlUniform2i_In{} }
 func (*binaryClassGlUniform2i_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2i_In(e, obj.(*GlUniform2i_In))
 }
@@ -25467,7 +26055,8 @@ func doDecodeGlUniform2i_Out(d binary.Decoder, o *GlUniform2i_Out) error {
 func doSkipGlUniform2i_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform2i_Out) ID() binary.ID { return binaryIDGlUniform2i_Out }
+func (*binaryClassGlUniform2i_Out) ID() binary.ID      { return binaryIDGlUniform2i_Out }
+func (*binaryClassGlUniform2i_Out) New() binary.Object { return &GlUniform2i_Out{} }
 func (*binaryClassGlUniform2i_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2i_Out(e, obj.(*GlUniform2i_Out))
 }
@@ -25523,7 +26112,8 @@ func doSkipGlUniform2iv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2iv) ID() binary.ID { return binaryIDGlUniform2iv }
+func (*binaryClassGlUniform2iv) ID() binary.ID      { return binaryIDGlUniform2iv }
+func (*binaryClassGlUniform2iv) New() binary.Object { return &GlUniform2iv{} }
 func (*binaryClassGlUniform2iv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2iv(e, obj.(*GlUniform2iv))
 }
@@ -25601,7 +26191,8 @@ func doSkipGlUniform2iv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform2iv_In) ID() binary.ID { return binaryIDGlUniform2iv_In }
+func (*binaryClassGlUniform2iv_In) ID() binary.ID      { return binaryIDGlUniform2iv_In }
+func (*binaryClassGlUniform2iv_In) New() binary.Object { return &GlUniform2iv_In{} }
 func (*binaryClassGlUniform2iv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2iv_In(e, obj.(*GlUniform2iv_In))
 }
@@ -25628,7 +26219,8 @@ func doDecodeGlUniform2iv_Out(d binary.Decoder, o *GlUniform2iv_Out) error {
 func doSkipGlUniform2iv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform2iv_Out) ID() binary.ID { return binaryIDGlUniform2iv_Out }
+func (*binaryClassGlUniform2iv_Out) ID() binary.ID      { return binaryIDGlUniform2iv_Out }
+func (*binaryClassGlUniform2iv_Out) New() binary.Object { return &GlUniform2iv_Out{} }
 func (*binaryClassGlUniform2iv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform2iv_Out(e, obj.(*GlUniform2iv_Out))
 }
@@ -25684,7 +26276,8 @@ func doSkipGlUniform3f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3f) ID() binary.ID { return binaryIDGlUniform3f }
+func (*binaryClassGlUniform3f) ID() binary.ID      { return binaryIDGlUniform3f }
+func (*binaryClassGlUniform3f) New() binary.Object { return &GlUniform3f{} }
 func (*binaryClassGlUniform3f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3f(e, obj.(*GlUniform3f))
 }
@@ -25755,7 +26348,8 @@ func doSkipGlUniform3f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3f_In) ID() binary.ID { return binaryIDGlUniform3f_In }
+func (*binaryClassGlUniform3f_In) ID() binary.ID      { return binaryIDGlUniform3f_In }
+func (*binaryClassGlUniform3f_In) New() binary.Object { return &GlUniform3f_In{} }
 func (*binaryClassGlUniform3f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3f_In(e, obj.(*GlUniform3f_In))
 }
@@ -25782,7 +26376,8 @@ func doDecodeGlUniform3f_Out(d binary.Decoder, o *GlUniform3f_Out) error {
 func doSkipGlUniform3f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform3f_Out) ID() binary.ID { return binaryIDGlUniform3f_Out }
+func (*binaryClassGlUniform3f_Out) ID() binary.ID      { return binaryIDGlUniform3f_Out }
+func (*binaryClassGlUniform3f_Out) New() binary.Object { return &GlUniform3f_Out{} }
 func (*binaryClassGlUniform3f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3f_Out(e, obj.(*GlUniform3f_Out))
 }
@@ -25838,7 +26433,8 @@ func doSkipGlUniform3fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3fv) ID() binary.ID { return binaryIDGlUniform3fv }
+func (*binaryClassGlUniform3fv) ID() binary.ID      { return binaryIDGlUniform3fv }
+func (*binaryClassGlUniform3fv) New() binary.Object { return &GlUniform3fv{} }
 func (*binaryClassGlUniform3fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3fv(e, obj.(*GlUniform3fv))
 }
@@ -25916,7 +26512,8 @@ func doSkipGlUniform3fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3fv_In) ID() binary.ID { return binaryIDGlUniform3fv_In }
+func (*binaryClassGlUniform3fv_In) ID() binary.ID      { return binaryIDGlUniform3fv_In }
+func (*binaryClassGlUniform3fv_In) New() binary.Object { return &GlUniform3fv_In{} }
 func (*binaryClassGlUniform3fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3fv_In(e, obj.(*GlUniform3fv_In))
 }
@@ -25943,7 +26540,8 @@ func doDecodeGlUniform3fv_Out(d binary.Decoder, o *GlUniform3fv_Out) error {
 func doSkipGlUniform3fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform3fv_Out) ID() binary.ID { return binaryIDGlUniform3fv_Out }
+func (*binaryClassGlUniform3fv_Out) ID() binary.ID      { return binaryIDGlUniform3fv_Out }
+func (*binaryClassGlUniform3fv_Out) New() binary.Object { return &GlUniform3fv_Out{} }
 func (*binaryClassGlUniform3fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3fv_Out(e, obj.(*GlUniform3fv_Out))
 }
@@ -25999,7 +26597,8 @@ func doSkipGlUniform3i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3i) ID() binary.ID { return binaryIDGlUniform3i }
+func (*binaryClassGlUniform3i) ID() binary.ID      { return binaryIDGlUniform3i }
+func (*binaryClassGlUniform3i) New() binary.Object { return &GlUniform3i{} }
 func (*binaryClassGlUniform3i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3i(e, obj.(*GlUniform3i))
 }
@@ -26070,7 +26669,8 @@ func doSkipGlUniform3i_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3i_In) ID() binary.ID { return binaryIDGlUniform3i_In }
+func (*binaryClassGlUniform3i_In) ID() binary.ID      { return binaryIDGlUniform3i_In }
+func (*binaryClassGlUniform3i_In) New() binary.Object { return &GlUniform3i_In{} }
 func (*binaryClassGlUniform3i_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3i_In(e, obj.(*GlUniform3i_In))
 }
@@ -26097,7 +26697,8 @@ func doDecodeGlUniform3i_Out(d binary.Decoder, o *GlUniform3i_Out) error {
 func doSkipGlUniform3i_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform3i_Out) ID() binary.ID { return binaryIDGlUniform3i_Out }
+func (*binaryClassGlUniform3i_Out) ID() binary.ID      { return binaryIDGlUniform3i_Out }
+func (*binaryClassGlUniform3i_Out) New() binary.Object { return &GlUniform3i_Out{} }
 func (*binaryClassGlUniform3i_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3i_Out(e, obj.(*GlUniform3i_Out))
 }
@@ -26153,7 +26754,8 @@ func doSkipGlUniform3iv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3iv) ID() binary.ID { return binaryIDGlUniform3iv }
+func (*binaryClassGlUniform3iv) ID() binary.ID      { return binaryIDGlUniform3iv }
+func (*binaryClassGlUniform3iv) New() binary.Object { return &GlUniform3iv{} }
 func (*binaryClassGlUniform3iv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3iv(e, obj.(*GlUniform3iv))
 }
@@ -26231,7 +26833,8 @@ func doSkipGlUniform3iv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform3iv_In) ID() binary.ID { return binaryIDGlUniform3iv_In }
+func (*binaryClassGlUniform3iv_In) ID() binary.ID      { return binaryIDGlUniform3iv_In }
+func (*binaryClassGlUniform3iv_In) New() binary.Object { return &GlUniform3iv_In{} }
 func (*binaryClassGlUniform3iv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3iv_In(e, obj.(*GlUniform3iv_In))
 }
@@ -26258,7 +26861,8 @@ func doDecodeGlUniform3iv_Out(d binary.Decoder, o *GlUniform3iv_Out) error {
 func doSkipGlUniform3iv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform3iv_Out) ID() binary.ID { return binaryIDGlUniform3iv_Out }
+func (*binaryClassGlUniform3iv_Out) ID() binary.ID      { return binaryIDGlUniform3iv_Out }
+func (*binaryClassGlUniform3iv_Out) New() binary.Object { return &GlUniform3iv_Out{} }
 func (*binaryClassGlUniform3iv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform3iv_Out(e, obj.(*GlUniform3iv_Out))
 }
@@ -26314,7 +26918,8 @@ func doSkipGlUniform4f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4f) ID() binary.ID { return binaryIDGlUniform4f }
+func (*binaryClassGlUniform4f) ID() binary.ID      { return binaryIDGlUniform4f }
+func (*binaryClassGlUniform4f) New() binary.Object { return &GlUniform4f{} }
 func (*binaryClassGlUniform4f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4f(e, obj.(*GlUniform4f))
 }
@@ -26396,7 +27001,8 @@ func doSkipGlUniform4f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4f_In) ID() binary.ID { return binaryIDGlUniform4f_In }
+func (*binaryClassGlUniform4f_In) ID() binary.ID      { return binaryIDGlUniform4f_In }
+func (*binaryClassGlUniform4f_In) New() binary.Object { return &GlUniform4f_In{} }
 func (*binaryClassGlUniform4f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4f_In(e, obj.(*GlUniform4f_In))
 }
@@ -26423,7 +27029,8 @@ func doDecodeGlUniform4f_Out(d binary.Decoder, o *GlUniform4f_Out) error {
 func doSkipGlUniform4f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform4f_Out) ID() binary.ID { return binaryIDGlUniform4f_Out }
+func (*binaryClassGlUniform4f_Out) ID() binary.ID      { return binaryIDGlUniform4f_Out }
+func (*binaryClassGlUniform4f_Out) New() binary.Object { return &GlUniform4f_Out{} }
 func (*binaryClassGlUniform4f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4f_Out(e, obj.(*GlUniform4f_Out))
 }
@@ -26479,7 +27086,8 @@ func doSkipGlUniform4fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4fv) ID() binary.ID { return binaryIDGlUniform4fv }
+func (*binaryClassGlUniform4fv) ID() binary.ID      { return binaryIDGlUniform4fv }
+func (*binaryClassGlUniform4fv) New() binary.Object { return &GlUniform4fv{} }
 func (*binaryClassGlUniform4fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4fv(e, obj.(*GlUniform4fv))
 }
@@ -26557,7 +27165,8 @@ func doSkipGlUniform4fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4fv_In) ID() binary.ID { return binaryIDGlUniform4fv_In }
+func (*binaryClassGlUniform4fv_In) ID() binary.ID      { return binaryIDGlUniform4fv_In }
+func (*binaryClassGlUniform4fv_In) New() binary.Object { return &GlUniform4fv_In{} }
 func (*binaryClassGlUniform4fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4fv_In(e, obj.(*GlUniform4fv_In))
 }
@@ -26584,7 +27193,8 @@ func doDecodeGlUniform4fv_Out(d binary.Decoder, o *GlUniform4fv_Out) error {
 func doSkipGlUniform4fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform4fv_Out) ID() binary.ID { return binaryIDGlUniform4fv_Out }
+func (*binaryClassGlUniform4fv_Out) ID() binary.ID      { return binaryIDGlUniform4fv_Out }
+func (*binaryClassGlUniform4fv_Out) New() binary.Object { return &GlUniform4fv_Out{} }
 func (*binaryClassGlUniform4fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4fv_Out(e, obj.(*GlUniform4fv_Out))
 }
@@ -26640,7 +27250,8 @@ func doSkipGlUniform4i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4i) ID() binary.ID { return binaryIDGlUniform4i }
+func (*binaryClassGlUniform4i) ID() binary.ID      { return binaryIDGlUniform4i }
+func (*binaryClassGlUniform4i) New() binary.Object { return &GlUniform4i{} }
 func (*binaryClassGlUniform4i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4i(e, obj.(*GlUniform4i))
 }
@@ -26722,7 +27333,8 @@ func doSkipGlUniform4i_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4i_In) ID() binary.ID { return binaryIDGlUniform4i_In }
+func (*binaryClassGlUniform4i_In) ID() binary.ID      { return binaryIDGlUniform4i_In }
+func (*binaryClassGlUniform4i_In) New() binary.Object { return &GlUniform4i_In{} }
 func (*binaryClassGlUniform4i_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4i_In(e, obj.(*GlUniform4i_In))
 }
@@ -26749,7 +27361,8 @@ func doDecodeGlUniform4i_Out(d binary.Decoder, o *GlUniform4i_Out) error {
 func doSkipGlUniform4i_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform4i_Out) ID() binary.ID { return binaryIDGlUniform4i_Out }
+func (*binaryClassGlUniform4i_Out) ID() binary.ID      { return binaryIDGlUniform4i_Out }
+func (*binaryClassGlUniform4i_Out) New() binary.Object { return &GlUniform4i_Out{} }
 func (*binaryClassGlUniform4i_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4i_Out(e, obj.(*GlUniform4i_Out))
 }
@@ -26805,7 +27418,8 @@ func doSkipGlUniform4iv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4iv) ID() binary.ID { return binaryIDGlUniform4iv }
+func (*binaryClassGlUniform4iv) ID() binary.ID      { return binaryIDGlUniform4iv }
+func (*binaryClassGlUniform4iv) New() binary.Object { return &GlUniform4iv{} }
 func (*binaryClassGlUniform4iv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4iv(e, obj.(*GlUniform4iv))
 }
@@ -26883,7 +27497,8 @@ func doSkipGlUniform4iv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniform4iv_In) ID() binary.ID { return binaryIDGlUniform4iv_In }
+func (*binaryClassGlUniform4iv_In) ID() binary.ID      { return binaryIDGlUniform4iv_In }
+func (*binaryClassGlUniform4iv_In) New() binary.Object { return &GlUniform4iv_In{} }
 func (*binaryClassGlUniform4iv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4iv_In(e, obj.(*GlUniform4iv_In))
 }
@@ -26910,7 +27525,8 @@ func doDecodeGlUniform4iv_Out(d binary.Decoder, o *GlUniform4iv_Out) error {
 func doSkipGlUniform4iv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniform4iv_Out) ID() binary.ID { return binaryIDGlUniform4iv_Out }
+func (*binaryClassGlUniform4iv_Out) ID() binary.ID      { return binaryIDGlUniform4iv_Out }
+func (*binaryClassGlUniform4iv_Out) New() binary.Object { return &GlUniform4iv_Out{} }
 func (*binaryClassGlUniform4iv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniform4iv_Out(e, obj.(*GlUniform4iv_Out))
 }
@@ -26966,7 +27582,8 @@ func doSkipGlUniformMatrix2fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix2fv) ID() binary.ID { return binaryIDGlUniformMatrix2fv }
+func (*binaryClassGlUniformMatrix2fv) ID() binary.ID      { return binaryIDGlUniformMatrix2fv }
+func (*binaryClassGlUniformMatrix2fv) New() binary.Object { return &GlUniformMatrix2fv{} }
 func (*binaryClassGlUniformMatrix2fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix2fv(e, obj.(*GlUniformMatrix2fv))
 }
@@ -27055,7 +27672,8 @@ func doSkipGlUniformMatrix2fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix2fv_In) ID() binary.ID { return binaryIDGlUniformMatrix2fv_In }
+func (*binaryClassGlUniformMatrix2fv_In) ID() binary.ID      { return binaryIDGlUniformMatrix2fv_In }
+func (*binaryClassGlUniformMatrix2fv_In) New() binary.Object { return &GlUniformMatrix2fv_In{} }
 func (*binaryClassGlUniformMatrix2fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix2fv_In(e, obj.(*GlUniformMatrix2fv_In))
 }
@@ -27084,7 +27702,8 @@ func doDecodeGlUniformMatrix2fv_Out(d binary.Decoder, o *GlUniformMatrix2fv_Out)
 func doSkipGlUniformMatrix2fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniformMatrix2fv_Out) ID() binary.ID { return binaryIDGlUniformMatrix2fv_Out }
+func (*binaryClassGlUniformMatrix2fv_Out) ID() binary.ID      { return binaryIDGlUniformMatrix2fv_Out }
+func (*binaryClassGlUniformMatrix2fv_Out) New() binary.Object { return &GlUniformMatrix2fv_Out{} }
 func (*binaryClassGlUniformMatrix2fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix2fv_Out(e, obj.(*GlUniformMatrix2fv_Out))
 }
@@ -27142,7 +27761,8 @@ func doSkipGlUniformMatrix3fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix3fv) ID() binary.ID { return binaryIDGlUniformMatrix3fv }
+func (*binaryClassGlUniformMatrix3fv) ID() binary.ID      { return binaryIDGlUniformMatrix3fv }
+func (*binaryClassGlUniformMatrix3fv) New() binary.Object { return &GlUniformMatrix3fv{} }
 func (*binaryClassGlUniformMatrix3fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix3fv(e, obj.(*GlUniformMatrix3fv))
 }
@@ -27231,7 +27851,8 @@ func doSkipGlUniformMatrix3fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix3fv_In) ID() binary.ID { return binaryIDGlUniformMatrix3fv_In }
+func (*binaryClassGlUniformMatrix3fv_In) ID() binary.ID      { return binaryIDGlUniformMatrix3fv_In }
+func (*binaryClassGlUniformMatrix3fv_In) New() binary.Object { return &GlUniformMatrix3fv_In{} }
 func (*binaryClassGlUniformMatrix3fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix3fv_In(e, obj.(*GlUniformMatrix3fv_In))
 }
@@ -27260,7 +27881,8 @@ func doDecodeGlUniformMatrix3fv_Out(d binary.Decoder, o *GlUniformMatrix3fv_Out)
 func doSkipGlUniformMatrix3fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniformMatrix3fv_Out) ID() binary.ID { return binaryIDGlUniformMatrix3fv_Out }
+func (*binaryClassGlUniformMatrix3fv_Out) ID() binary.ID      { return binaryIDGlUniformMatrix3fv_Out }
+func (*binaryClassGlUniformMatrix3fv_Out) New() binary.Object { return &GlUniformMatrix3fv_Out{} }
 func (*binaryClassGlUniformMatrix3fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix3fv_Out(e, obj.(*GlUniformMatrix3fv_Out))
 }
@@ -27318,7 +27940,8 @@ func doSkipGlUniformMatrix4fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix4fv) ID() binary.ID { return binaryIDGlUniformMatrix4fv }
+func (*binaryClassGlUniformMatrix4fv) ID() binary.ID      { return binaryIDGlUniformMatrix4fv }
+func (*binaryClassGlUniformMatrix4fv) New() binary.Object { return &GlUniformMatrix4fv{} }
 func (*binaryClassGlUniformMatrix4fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix4fv(e, obj.(*GlUniformMatrix4fv))
 }
@@ -27407,7 +28030,8 @@ func doSkipGlUniformMatrix4fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUniformMatrix4fv_In) ID() binary.ID { return binaryIDGlUniformMatrix4fv_In }
+func (*binaryClassGlUniformMatrix4fv_In) ID() binary.ID      { return binaryIDGlUniformMatrix4fv_In }
+func (*binaryClassGlUniformMatrix4fv_In) New() binary.Object { return &GlUniformMatrix4fv_In{} }
 func (*binaryClassGlUniformMatrix4fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix4fv_In(e, obj.(*GlUniformMatrix4fv_In))
 }
@@ -27436,7 +28060,8 @@ func doDecodeGlUniformMatrix4fv_Out(d binary.Decoder, o *GlUniformMatrix4fv_Out)
 func doSkipGlUniformMatrix4fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUniformMatrix4fv_Out) ID() binary.ID { return binaryIDGlUniformMatrix4fv_Out }
+func (*binaryClassGlUniformMatrix4fv_Out) ID() binary.ID      { return binaryIDGlUniformMatrix4fv_Out }
+func (*binaryClassGlUniformMatrix4fv_Out) New() binary.Object { return &GlUniformMatrix4fv_Out{} }
 func (*binaryClassGlUniformMatrix4fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUniformMatrix4fv_Out(e, obj.(*GlUniformMatrix4fv_Out))
 }
@@ -27494,7 +28119,8 @@ func doSkipGlUnmapBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUnmapBuffer) ID() binary.ID { return binaryIDGlUnmapBuffer }
+func (*binaryClassGlUnmapBuffer) ID() binary.ID      { return binaryIDGlUnmapBuffer }
+func (*binaryClassGlUnmapBuffer) New() binary.Object { return &GlUnmapBuffer{} }
 func (*binaryClassGlUnmapBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUnmapBuffer(e, obj.(*GlUnmapBuffer))
 }
@@ -27532,7 +28158,8 @@ func doSkipGlUnmapBuffer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUnmapBuffer_In) ID() binary.ID { return binaryIDGlUnmapBuffer_In }
+func (*binaryClassGlUnmapBuffer_In) ID() binary.ID      { return binaryIDGlUnmapBuffer_In }
+func (*binaryClassGlUnmapBuffer_In) New() binary.Object { return &GlUnmapBuffer_In{} }
 func (*binaryClassGlUnmapBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUnmapBuffer_In(e, obj.(*GlUnmapBuffer_In))
 }
@@ -27559,7 +28186,8 @@ func doDecodeGlUnmapBuffer_Out(d binary.Decoder, o *GlUnmapBuffer_Out) error {
 func doSkipGlUnmapBuffer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUnmapBuffer_Out) ID() binary.ID { return binaryIDGlUnmapBuffer_Out }
+func (*binaryClassGlUnmapBuffer_Out) ID() binary.ID      { return binaryIDGlUnmapBuffer_Out }
+func (*binaryClassGlUnmapBuffer_Out) New() binary.Object { return &GlUnmapBuffer_Out{} }
 func (*binaryClassGlUnmapBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUnmapBuffer_Out(e, obj.(*GlUnmapBuffer_Out))
 }
@@ -27615,7 +28243,8 @@ func doSkipGlUseProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUseProgram) ID() binary.ID { return binaryIDGlUseProgram }
+func (*binaryClassGlUseProgram) ID() binary.ID      { return binaryIDGlUseProgram }
+func (*binaryClassGlUseProgram) New() binary.Object { return &GlUseProgram{} }
 func (*binaryClassGlUseProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUseProgram(e, obj.(*GlUseProgram))
 }
@@ -27653,7 +28282,8 @@ func doSkipGlUseProgram_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlUseProgram_In) ID() binary.ID { return binaryIDGlUseProgram_In }
+func (*binaryClassGlUseProgram_In) ID() binary.ID      { return binaryIDGlUseProgram_In }
+func (*binaryClassGlUseProgram_In) New() binary.Object { return &GlUseProgram_In{} }
 func (*binaryClassGlUseProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUseProgram_In(e, obj.(*GlUseProgram_In))
 }
@@ -27680,7 +28310,8 @@ func doDecodeGlUseProgram_Out(d binary.Decoder, o *GlUseProgram_Out) error {
 func doSkipGlUseProgram_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlUseProgram_Out) ID() binary.ID { return binaryIDGlUseProgram_Out }
+func (*binaryClassGlUseProgram_Out) ID() binary.ID      { return binaryIDGlUseProgram_Out }
+func (*binaryClassGlUseProgram_Out) New() binary.Object { return &GlUseProgram_Out{} }
 func (*binaryClassGlUseProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlUseProgram_Out(e, obj.(*GlUseProgram_Out))
 }
@@ -27736,7 +28367,8 @@ func doSkipGlValidateProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlValidateProgram) ID() binary.ID { return binaryIDGlValidateProgram }
+func (*binaryClassGlValidateProgram) ID() binary.ID      { return binaryIDGlValidateProgram }
+func (*binaryClassGlValidateProgram) New() binary.Object { return &GlValidateProgram{} }
 func (*binaryClassGlValidateProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlValidateProgram(e, obj.(*GlValidateProgram))
 }
@@ -27774,7 +28406,8 @@ func doSkipGlValidateProgram_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlValidateProgram_In) ID() binary.ID { return binaryIDGlValidateProgram_In }
+func (*binaryClassGlValidateProgram_In) ID() binary.ID      { return binaryIDGlValidateProgram_In }
+func (*binaryClassGlValidateProgram_In) New() binary.Object { return &GlValidateProgram_In{} }
 func (*binaryClassGlValidateProgram_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlValidateProgram_In(e, obj.(*GlValidateProgram_In))
 }
@@ -27803,7 +28436,8 @@ func doDecodeGlValidateProgram_Out(d binary.Decoder, o *GlValidateProgram_Out) e
 func doSkipGlValidateProgram_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlValidateProgram_Out) ID() binary.ID { return binaryIDGlValidateProgram_Out }
+func (*binaryClassGlValidateProgram_Out) ID() binary.ID      { return binaryIDGlValidateProgram_Out }
+func (*binaryClassGlValidateProgram_Out) New() binary.Object { return &GlValidateProgram_Out{} }
 func (*binaryClassGlValidateProgram_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlValidateProgram_Out(e, obj.(*GlValidateProgram_Out))
 }
@@ -27861,7 +28495,8 @@ func doSkipGlVertexAttrib1f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib1f) ID() binary.ID { return binaryIDGlVertexAttrib1f }
+func (*binaryClassGlVertexAttrib1f) ID() binary.ID      { return binaryIDGlVertexAttrib1f }
+func (*binaryClassGlVertexAttrib1f) New() binary.Object { return &GlVertexAttrib1f{} }
 func (*binaryClassGlVertexAttrib1f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1f(e, obj.(*GlVertexAttrib1f))
 }
@@ -27910,7 +28545,8 @@ func doSkipGlVertexAttrib1f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib1f_In) ID() binary.ID { return binaryIDGlVertexAttrib1f_In }
+func (*binaryClassGlVertexAttrib1f_In) ID() binary.ID      { return binaryIDGlVertexAttrib1f_In }
+func (*binaryClassGlVertexAttrib1f_In) New() binary.Object { return &GlVertexAttrib1f_In{} }
 func (*binaryClassGlVertexAttrib1f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1f_In(e, obj.(*GlVertexAttrib1f_In))
 }
@@ -27939,7 +28575,8 @@ func doDecodeGlVertexAttrib1f_Out(d binary.Decoder, o *GlVertexAttrib1f_Out) err
 func doSkipGlVertexAttrib1f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib1f_Out) ID() binary.ID { return binaryIDGlVertexAttrib1f_Out }
+func (*binaryClassGlVertexAttrib1f_Out) ID() binary.ID      { return binaryIDGlVertexAttrib1f_Out }
+func (*binaryClassGlVertexAttrib1f_Out) New() binary.Object { return &GlVertexAttrib1f_Out{} }
 func (*binaryClassGlVertexAttrib1f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1f_Out(e, obj.(*GlVertexAttrib1f_Out))
 }
@@ -27997,7 +28634,8 @@ func doSkipGlVertexAttrib1fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib1fv) ID() binary.ID { return binaryIDGlVertexAttrib1fv }
+func (*binaryClassGlVertexAttrib1fv) ID() binary.ID      { return binaryIDGlVertexAttrib1fv }
+func (*binaryClassGlVertexAttrib1fv) New() binary.Object { return &GlVertexAttrib1fv{} }
 func (*binaryClassGlVertexAttrib1fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1fv(e, obj.(*GlVertexAttrib1fv))
 }
@@ -28064,7 +28702,8 @@ func doSkipGlVertexAttrib1fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib1fv_In) ID() binary.ID { return binaryIDGlVertexAttrib1fv_In }
+func (*binaryClassGlVertexAttrib1fv_In) ID() binary.ID      { return binaryIDGlVertexAttrib1fv_In }
+func (*binaryClassGlVertexAttrib1fv_In) New() binary.Object { return &GlVertexAttrib1fv_In{} }
 func (*binaryClassGlVertexAttrib1fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1fv_In(e, obj.(*GlVertexAttrib1fv_In))
 }
@@ -28093,7 +28732,8 @@ func doDecodeGlVertexAttrib1fv_Out(d binary.Decoder, o *GlVertexAttrib1fv_Out) e
 func doSkipGlVertexAttrib1fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib1fv_Out) ID() binary.ID { return binaryIDGlVertexAttrib1fv_Out }
+func (*binaryClassGlVertexAttrib1fv_Out) ID() binary.ID      { return binaryIDGlVertexAttrib1fv_Out }
+func (*binaryClassGlVertexAttrib1fv_Out) New() binary.Object { return &GlVertexAttrib1fv_Out{} }
 func (*binaryClassGlVertexAttrib1fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib1fv_Out(e, obj.(*GlVertexAttrib1fv_Out))
 }
@@ -28151,7 +28791,8 @@ func doSkipGlVertexAttrib2f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib2f) ID() binary.ID { return binaryIDGlVertexAttrib2f }
+func (*binaryClassGlVertexAttrib2f) ID() binary.ID      { return binaryIDGlVertexAttrib2f }
+func (*binaryClassGlVertexAttrib2f) New() binary.Object { return &GlVertexAttrib2f{} }
 func (*binaryClassGlVertexAttrib2f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2f(e, obj.(*GlVertexAttrib2f))
 }
@@ -28211,7 +28852,8 @@ func doSkipGlVertexAttrib2f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib2f_In) ID() binary.ID { return binaryIDGlVertexAttrib2f_In }
+func (*binaryClassGlVertexAttrib2f_In) ID() binary.ID      { return binaryIDGlVertexAttrib2f_In }
+func (*binaryClassGlVertexAttrib2f_In) New() binary.Object { return &GlVertexAttrib2f_In{} }
 func (*binaryClassGlVertexAttrib2f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2f_In(e, obj.(*GlVertexAttrib2f_In))
 }
@@ -28240,7 +28882,8 @@ func doDecodeGlVertexAttrib2f_Out(d binary.Decoder, o *GlVertexAttrib2f_Out) err
 func doSkipGlVertexAttrib2f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib2f_Out) ID() binary.ID { return binaryIDGlVertexAttrib2f_Out }
+func (*binaryClassGlVertexAttrib2f_Out) ID() binary.ID      { return binaryIDGlVertexAttrib2f_Out }
+func (*binaryClassGlVertexAttrib2f_Out) New() binary.Object { return &GlVertexAttrib2f_Out{} }
 func (*binaryClassGlVertexAttrib2f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2f_Out(e, obj.(*GlVertexAttrib2f_Out))
 }
@@ -28298,7 +28941,8 @@ func doSkipGlVertexAttrib2fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib2fv) ID() binary.ID { return binaryIDGlVertexAttrib2fv }
+func (*binaryClassGlVertexAttrib2fv) ID() binary.ID      { return binaryIDGlVertexAttrib2fv }
+func (*binaryClassGlVertexAttrib2fv) New() binary.Object { return &GlVertexAttrib2fv{} }
 func (*binaryClassGlVertexAttrib2fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2fv(e, obj.(*GlVertexAttrib2fv))
 }
@@ -28365,7 +29009,8 @@ func doSkipGlVertexAttrib2fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib2fv_In) ID() binary.ID { return binaryIDGlVertexAttrib2fv_In }
+func (*binaryClassGlVertexAttrib2fv_In) ID() binary.ID      { return binaryIDGlVertexAttrib2fv_In }
+func (*binaryClassGlVertexAttrib2fv_In) New() binary.Object { return &GlVertexAttrib2fv_In{} }
 func (*binaryClassGlVertexAttrib2fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2fv_In(e, obj.(*GlVertexAttrib2fv_In))
 }
@@ -28394,7 +29039,8 @@ func doDecodeGlVertexAttrib2fv_Out(d binary.Decoder, o *GlVertexAttrib2fv_Out) e
 func doSkipGlVertexAttrib2fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib2fv_Out) ID() binary.ID { return binaryIDGlVertexAttrib2fv_Out }
+func (*binaryClassGlVertexAttrib2fv_Out) ID() binary.ID      { return binaryIDGlVertexAttrib2fv_Out }
+func (*binaryClassGlVertexAttrib2fv_Out) New() binary.Object { return &GlVertexAttrib2fv_Out{} }
 func (*binaryClassGlVertexAttrib2fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib2fv_Out(e, obj.(*GlVertexAttrib2fv_Out))
 }
@@ -28452,7 +29098,8 @@ func doSkipGlVertexAttrib3f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib3f) ID() binary.ID { return binaryIDGlVertexAttrib3f }
+func (*binaryClassGlVertexAttrib3f) ID() binary.ID      { return binaryIDGlVertexAttrib3f }
+func (*binaryClassGlVertexAttrib3f) New() binary.Object { return &GlVertexAttrib3f{} }
 func (*binaryClassGlVertexAttrib3f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3f(e, obj.(*GlVertexAttrib3f))
 }
@@ -28523,7 +29170,8 @@ func doSkipGlVertexAttrib3f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib3f_In) ID() binary.ID { return binaryIDGlVertexAttrib3f_In }
+func (*binaryClassGlVertexAttrib3f_In) ID() binary.ID      { return binaryIDGlVertexAttrib3f_In }
+func (*binaryClassGlVertexAttrib3f_In) New() binary.Object { return &GlVertexAttrib3f_In{} }
 func (*binaryClassGlVertexAttrib3f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3f_In(e, obj.(*GlVertexAttrib3f_In))
 }
@@ -28552,7 +29200,8 @@ func doDecodeGlVertexAttrib3f_Out(d binary.Decoder, o *GlVertexAttrib3f_Out) err
 func doSkipGlVertexAttrib3f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib3f_Out) ID() binary.ID { return binaryIDGlVertexAttrib3f_Out }
+func (*binaryClassGlVertexAttrib3f_Out) ID() binary.ID      { return binaryIDGlVertexAttrib3f_Out }
+func (*binaryClassGlVertexAttrib3f_Out) New() binary.Object { return &GlVertexAttrib3f_Out{} }
 func (*binaryClassGlVertexAttrib3f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3f_Out(e, obj.(*GlVertexAttrib3f_Out))
 }
@@ -28610,7 +29259,8 @@ func doSkipGlVertexAttrib3fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib3fv) ID() binary.ID { return binaryIDGlVertexAttrib3fv }
+func (*binaryClassGlVertexAttrib3fv) ID() binary.ID      { return binaryIDGlVertexAttrib3fv }
+func (*binaryClassGlVertexAttrib3fv) New() binary.Object { return &GlVertexAttrib3fv{} }
 func (*binaryClassGlVertexAttrib3fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3fv(e, obj.(*GlVertexAttrib3fv))
 }
@@ -28677,7 +29327,8 @@ func doSkipGlVertexAttrib3fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib3fv_In) ID() binary.ID { return binaryIDGlVertexAttrib3fv_In }
+func (*binaryClassGlVertexAttrib3fv_In) ID() binary.ID      { return binaryIDGlVertexAttrib3fv_In }
+func (*binaryClassGlVertexAttrib3fv_In) New() binary.Object { return &GlVertexAttrib3fv_In{} }
 func (*binaryClassGlVertexAttrib3fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3fv_In(e, obj.(*GlVertexAttrib3fv_In))
 }
@@ -28706,7 +29357,8 @@ func doDecodeGlVertexAttrib3fv_Out(d binary.Decoder, o *GlVertexAttrib3fv_Out) e
 func doSkipGlVertexAttrib3fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib3fv_Out) ID() binary.ID { return binaryIDGlVertexAttrib3fv_Out }
+func (*binaryClassGlVertexAttrib3fv_Out) ID() binary.ID      { return binaryIDGlVertexAttrib3fv_Out }
+func (*binaryClassGlVertexAttrib3fv_Out) New() binary.Object { return &GlVertexAttrib3fv_Out{} }
 func (*binaryClassGlVertexAttrib3fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib3fv_Out(e, obj.(*GlVertexAttrib3fv_Out))
 }
@@ -28764,7 +29416,8 @@ func doSkipGlVertexAttrib4f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib4f) ID() binary.ID { return binaryIDGlVertexAttrib4f }
+func (*binaryClassGlVertexAttrib4f) ID() binary.ID      { return binaryIDGlVertexAttrib4f }
+func (*binaryClassGlVertexAttrib4f) New() binary.Object { return &GlVertexAttrib4f{} }
 func (*binaryClassGlVertexAttrib4f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4f(e, obj.(*GlVertexAttrib4f))
 }
@@ -28846,7 +29499,8 @@ func doSkipGlVertexAttrib4f_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib4f_In) ID() binary.ID { return binaryIDGlVertexAttrib4f_In }
+func (*binaryClassGlVertexAttrib4f_In) ID() binary.ID      { return binaryIDGlVertexAttrib4f_In }
+func (*binaryClassGlVertexAttrib4f_In) New() binary.Object { return &GlVertexAttrib4f_In{} }
 func (*binaryClassGlVertexAttrib4f_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4f_In(e, obj.(*GlVertexAttrib4f_In))
 }
@@ -28875,7 +29529,8 @@ func doDecodeGlVertexAttrib4f_Out(d binary.Decoder, o *GlVertexAttrib4f_Out) err
 func doSkipGlVertexAttrib4f_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib4f_Out) ID() binary.ID { return binaryIDGlVertexAttrib4f_Out }
+func (*binaryClassGlVertexAttrib4f_Out) ID() binary.ID      { return binaryIDGlVertexAttrib4f_Out }
+func (*binaryClassGlVertexAttrib4f_Out) New() binary.Object { return &GlVertexAttrib4f_Out{} }
 func (*binaryClassGlVertexAttrib4f_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4f_Out(e, obj.(*GlVertexAttrib4f_Out))
 }
@@ -28933,7 +29588,8 @@ func doSkipGlVertexAttrib4fv(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib4fv) ID() binary.ID { return binaryIDGlVertexAttrib4fv }
+func (*binaryClassGlVertexAttrib4fv) ID() binary.ID      { return binaryIDGlVertexAttrib4fv }
+func (*binaryClassGlVertexAttrib4fv) New() binary.Object { return &GlVertexAttrib4fv{} }
 func (*binaryClassGlVertexAttrib4fv) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4fv(e, obj.(*GlVertexAttrib4fv))
 }
@@ -29000,7 +29656,8 @@ func doSkipGlVertexAttrib4fv_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttrib4fv_In) ID() binary.ID { return binaryIDGlVertexAttrib4fv_In }
+func (*binaryClassGlVertexAttrib4fv_In) ID() binary.ID      { return binaryIDGlVertexAttrib4fv_In }
+func (*binaryClassGlVertexAttrib4fv_In) New() binary.Object { return &GlVertexAttrib4fv_In{} }
 func (*binaryClassGlVertexAttrib4fv_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4fv_In(e, obj.(*GlVertexAttrib4fv_In))
 }
@@ -29029,7 +29686,8 @@ func doDecodeGlVertexAttrib4fv_Out(d binary.Decoder, o *GlVertexAttrib4fv_Out) e
 func doSkipGlVertexAttrib4fv_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttrib4fv_Out) ID() binary.ID { return binaryIDGlVertexAttrib4fv_Out }
+func (*binaryClassGlVertexAttrib4fv_Out) ID() binary.ID      { return binaryIDGlVertexAttrib4fv_Out }
+func (*binaryClassGlVertexAttrib4fv_Out) New() binary.Object { return &GlVertexAttrib4fv_Out{} }
 func (*binaryClassGlVertexAttrib4fv_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttrib4fv_Out(e, obj.(*GlVertexAttrib4fv_Out))
 }
@@ -29087,7 +29745,8 @@ func doSkipGlVertexAttribPointer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttribPointer) ID() binary.ID { return binaryIDGlVertexAttribPointer }
+func (*binaryClassGlVertexAttribPointer) ID() binary.ID      { return binaryIDGlVertexAttribPointer }
+func (*binaryClassGlVertexAttribPointer) New() binary.Object { return &GlVertexAttribPointer{} }
 func (*binaryClassGlVertexAttribPointer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttribPointer(e, obj.(*GlVertexAttribPointer))
 }
@@ -29182,7 +29841,8 @@ func doSkipGlVertexAttribPointer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlVertexAttribPointer_In) ID() binary.ID { return binaryIDGlVertexAttribPointer_In }
+func (*binaryClassGlVertexAttribPointer_In) ID() binary.ID      { return binaryIDGlVertexAttribPointer_In }
+func (*binaryClassGlVertexAttribPointer_In) New() binary.Object { return &GlVertexAttribPointer_In{} }
 func (*binaryClassGlVertexAttribPointer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttribPointer_In(e, obj.(*GlVertexAttribPointer_In))
 }
@@ -29211,7 +29871,8 @@ func doDecodeGlVertexAttribPointer_Out(d binary.Decoder, o *GlVertexAttribPointe
 func doSkipGlVertexAttribPointer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlVertexAttribPointer_Out) ID() binary.ID { return binaryIDGlVertexAttribPointer_Out }
+func (*binaryClassGlVertexAttribPointer_Out) ID() binary.ID      { return binaryIDGlVertexAttribPointer_Out }
+func (*binaryClassGlVertexAttribPointer_Out) New() binary.Object { return &GlVertexAttribPointer_Out{} }
 func (*binaryClassGlVertexAttribPointer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlVertexAttribPointer_Out(e, obj.(*GlVertexAttribPointer_Out))
 }
@@ -29269,7 +29930,8 @@ func doSkipGlViewport(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlViewport) ID() binary.ID { return binaryIDGlViewport }
+func (*binaryClassGlViewport) ID() binary.ID      { return binaryIDGlViewport }
+func (*binaryClassGlViewport) New() binary.Object { return &GlViewport{} }
 func (*binaryClassGlViewport) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlViewport(e, obj.(*GlViewport))
 }
@@ -29340,7 +30002,8 @@ func doSkipGlViewport_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlViewport_In) ID() binary.ID { return binaryIDGlViewport_In }
+func (*binaryClassGlViewport_In) ID() binary.ID      { return binaryIDGlViewport_In }
+func (*binaryClassGlViewport_In) New() binary.Object { return &GlViewport_In{} }
 func (*binaryClassGlViewport_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlViewport_In(e, obj.(*GlViewport_In))
 }
@@ -29367,7 +30030,8 @@ func doDecodeGlViewport_Out(d binary.Decoder, o *GlViewport_Out) error {
 func doSkipGlViewport_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlViewport_Out) ID() binary.ID { return binaryIDGlViewport_Out }
+func (*binaryClassGlViewport_Out) ID() binary.ID      { return binaryIDGlViewport_Out }
+func (*binaryClassGlViewport_Out) New() binary.Object { return &GlViewport_Out{} }
 func (*binaryClassGlViewport_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlViewport_Out(e, obj.(*GlViewport_Out))
 }
@@ -29830,7 +30494,8 @@ func doSkipGlobals(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGlobals) ID() binary.ID { return binaryIDGlobals }
+func (*binaryClassGlobals) ID() binary.ID      { return binaryIDGlobals }
+func (*binaryClassGlobals) New() binary.Object { return &Globals{} }
 func (*binaryClassGlobals) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlobals(e, obj.(*Globals))
 }
@@ -29921,7 +30586,8 @@ func doSkipImage(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassImage) ID() binary.ID { return binaryIDImage }
+func (*binaryClassImage) ID() binary.ID      { return binaryIDImage }
+func (*binaryClassImage) New() binary.Object { return &Image{} }
 func (*binaryClassImage) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeImage(e, obj.(*Image))
 }
@@ -29977,7 +30643,8 @@ func doSkipInit(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassInit) ID() binary.ID { return binaryIDInit }
+func (*binaryClassInit) ID() binary.ID      { return binaryIDInit }
+func (*binaryClassInit) New() binary.Object { return &Init{} }
 func (*binaryClassInit) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeInit(e, obj.(*Init))
 }
@@ -30059,7 +30726,8 @@ func doSkipInit_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassInit_In) ID() binary.ID { return binaryIDInit_In }
+func (*binaryClassInit_In) ID() binary.ID      { return binaryIDInit_In }
+func (*binaryClassInit_In) New() binary.Object { return &Init_In{} }
 func (*binaryClassInit_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeInit_In(e, obj.(*Init_In))
 }
@@ -30086,7 +30754,8 @@ func doDecodeInit_Out(d binary.Decoder, o *Init_Out) error {
 func doSkipInit_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassInit_Out) ID() binary.ID { return binaryIDInit_Out }
+func (*binaryClassInit_Out) ID() binary.ID      { return binaryIDInit_Out }
+func (*binaryClassInit_Out) New() binary.Object { return &Init_Out{} }
 func (*binaryClassInit_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeInit_Out(e, obj.(*Init_Out))
 }
@@ -30168,7 +30837,8 @@ func doSkipInternalState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassInternalState) ID() binary.ID { return binaryIDInternalState }
+func (*binaryClassInternalState) ID() binary.ID      { return binaryIDInternalState }
+func (*binaryClassInternalState) New() binary.Object { return &InternalState{} }
 func (*binaryClassInternalState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeInternalState(e, obj.(*InternalState))
 }
@@ -30224,7 +30894,8 @@ func doSkipMat2f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMat2f) ID() binary.ID { return binaryIDMat2f }
+func (*binaryClassMat2f) ID() binary.ID      { return binaryIDMat2f }
+func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
 func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMat2f(e, obj.(*Mat2f))
 }
@@ -30289,7 +30960,8 @@ func doSkipMat3f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMat3f) ID() binary.ID { return binaryIDMat3f }
+func (*binaryClassMat3f) ID() binary.ID      { return binaryIDMat3f }
+func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
 func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMat3f(e, obj.(*Mat3f))
 }
@@ -30363,7 +31035,8 @@ func doSkipMat4f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMat4f) ID() binary.ID { return binaryIDMat4f }
+func (*binaryClassMat4f) ID() binary.ID      { return binaryIDMat4f }
+func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
 func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMat4f(e, obj.(*Mat4f))
 }
@@ -30801,7 +31474,8 @@ func doSkipObjects(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassObjects) ID() binary.ID { return binaryIDObjects }
+func (*binaryClassObjects) ID() binary.ID      { return binaryIDObjects }
+func (*binaryClassObjects) New() binary.Object { return &Objects{} }
 func (*binaryClassObjects) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeObjects(e, obj.(*Objects))
 }
@@ -31042,7 +31716,8 @@ func doSkipProgram(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassProgram) ID() binary.ID { return binaryIDProgram }
+func (*binaryClassProgram) ID() binary.ID      { return binaryIDProgram }
+func (*binaryClassProgram) New() binary.Object { return &Program{} }
 func (*binaryClassProgram) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeProgram(e, obj.(*Program))
 }
@@ -31080,7 +31755,8 @@ func doSkipQuery(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassQuery) ID() binary.ID { return binaryIDQuery }
+func (*binaryClassQuery) ID() binary.ID      { return binaryIDQuery }
+func (*binaryClassQuery) New() binary.Object { return &Query{} }
 func (*binaryClassQuery) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeQuery(e, obj.(*Query))
 }
@@ -31345,7 +32021,8 @@ func doSkipRasterizerState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRasterizerState) ID() binary.ID { return binaryIDRasterizerState }
+func (*binaryClassRasterizerState) ID() binary.ID      { return binaryIDRasterizerState }
+func (*binaryClassRasterizerState) New() binary.Object { return &RasterizerState{} }
 func (*binaryClassRasterizerState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRasterizerState(e, obj.(*RasterizerState))
 }
@@ -31427,7 +32104,8 @@ func doSkipRect(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRect) ID() binary.ID { return binaryIDRect }
+func (*binaryClassRect) ID() binary.ID      { return binaryIDRect }
+func (*binaryClassRect) New() binary.Object { return &Rect{} }
 func (*binaryClassRect) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRect(e, obj.(*Rect))
 }
@@ -31507,7 +32185,8 @@ func doSkipRenderbuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRenderbuffer) ID() binary.ID { return binaryIDRenderbuffer }
+func (*binaryClassRenderbuffer) ID() binary.ID      { return binaryIDRenderbuffer }
+func (*binaryClassRenderbuffer) New() binary.Object { return &Renderbuffer{} }
 func (*binaryClassRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRenderbuffer(e, obj.(*Renderbuffer))
 }
@@ -31627,7 +32306,8 @@ func doSkipShader(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassShader) ID() binary.ID { return binaryIDShader }
+func (*binaryClassShader) ID() binary.ID      { return binaryIDShader }
+func (*binaryClassShader) New() binary.Object { return &Shader{} }
 func (*binaryClassShader) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeShader(e, obj.(*Shader))
 }
@@ -31683,7 +32363,8 @@ func doSkipStartTimer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStartTimer) ID() binary.ID { return binaryIDStartTimer }
+func (*binaryClassStartTimer) ID() binary.ID      { return binaryIDStartTimer }
+func (*binaryClassStartTimer) New() binary.Object { return &StartTimer{} }
 func (*binaryClassStartTimer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStartTimer(e, obj.(*StartTimer))
 }
@@ -31721,7 +32402,8 @@ func doSkipStartTimer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStartTimer_In) ID() binary.ID { return binaryIDStartTimer_In }
+func (*binaryClassStartTimer_In) ID() binary.ID      { return binaryIDStartTimer_In }
+func (*binaryClassStartTimer_In) New() binary.Object { return &StartTimer_In{} }
 func (*binaryClassStartTimer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStartTimer_In(e, obj.(*StartTimer_In))
 }
@@ -31748,7 +32430,8 @@ func doDecodeStartTimer_Out(d binary.Decoder, o *StartTimer_Out) error {
 func doSkipStartTimer_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassStartTimer_Out) ID() binary.ID { return binaryIDStartTimer_Out }
+func (*binaryClassStartTimer_Out) ID() binary.ID      { return binaryIDStartTimer_Out }
+func (*binaryClassStartTimer_Out) New() binary.Object { return &StartTimer_Out{} }
 func (*binaryClassStartTimer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStartTimer_Out(e, obj.(*StartTimer_Out))
 }
@@ -31804,7 +32487,8 @@ func doSkipStopTimer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStopTimer) ID() binary.ID { return binaryIDStopTimer }
+func (*binaryClassStopTimer) ID() binary.ID      { return binaryIDStopTimer }
+func (*binaryClassStopTimer) New() binary.Object { return &StopTimer{} }
 func (*binaryClassStopTimer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStopTimer(e, obj.(*StopTimer))
 }
@@ -31842,7 +32526,8 @@ func doSkipStopTimer_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStopTimer_In) ID() binary.ID { return binaryIDStopTimer_In }
+func (*binaryClassStopTimer_In) ID() binary.ID      { return binaryIDStopTimer_In }
+func (*binaryClassStopTimer_In) New() binary.Object { return &StopTimer_In{} }
 func (*binaryClassStopTimer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStopTimer_In(e, obj.(*StopTimer_In))
 }
@@ -31880,7 +32565,8 @@ func doSkipStopTimer_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStopTimer_Out) ID() binary.ID { return binaryIDStopTimer_Out }
+func (*binaryClassStopTimer_Out) ID() binary.ID      { return binaryIDStopTimer_Out }
+func (*binaryClassStopTimer_Out) New() binary.Object { return &StopTimer_Out{} }
 func (*binaryClassStopTimer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStopTimer_Out(e, obj.(*StopTimer_Out))
 }
@@ -32123,7 +32809,8 @@ func doSkipTexture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTexture) ID() binary.ID { return binaryIDTexture }
+func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
+func (*binaryClassTexture) New() binary.Object { return &Texture{} }
 func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTexture(e, obj.(*Texture))
 }
@@ -32192,7 +32879,8 @@ func doSkipUniform(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassUniform) ID() binary.ID { return binaryIDUniform }
+func (*binaryClassUniform) ID() binary.ID      { return binaryIDUniform }
+func (*binaryClassUniform) New() binary.Object { return &Uniform{} }
 func (*binaryClassUniform) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeUniform(e, obj.(*Uniform))
 }
@@ -32333,7 +33021,8 @@ func doSkipUniformValue(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassUniformValue) ID() binary.ID { return binaryIDUniformValue }
+func (*binaryClassUniformValue) ID() binary.ID      { return binaryIDUniformValue }
+func (*binaryClassUniformValue) New() binary.Object { return &UniformValue{} }
 func (*binaryClassUniformValue) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeUniformValue(e, obj.(*UniformValue))
 }
@@ -32393,7 +33082,8 @@ func doSkipVec2f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec2f) ID() binary.ID { return binaryIDVec2f }
+func (*binaryClassVec2f) ID() binary.ID      { return binaryIDVec2f }
+func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
 func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec2f(e, obj.(*Vec2f))
 }
@@ -32453,7 +33143,8 @@ func doSkipVec2i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec2i) ID() binary.ID { return binaryIDVec2i }
+func (*binaryClassVec2i) ID() binary.ID      { return binaryIDVec2i }
+func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
 func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec2i(e, obj.(*Vec2i))
 }
@@ -32524,7 +33215,8 @@ func doSkipVec3f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec3f) ID() binary.ID { return binaryIDVec3f }
+func (*binaryClassVec3f) ID() binary.ID      { return binaryIDVec3f }
+func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
 func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec3f(e, obj.(*Vec3f))
 }
@@ -32595,7 +33287,8 @@ func doSkipVec3i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec3i) ID() binary.ID { return binaryIDVec3i }
+func (*binaryClassVec3i) ID() binary.ID      { return binaryIDVec3i }
+func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
 func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec3i(e, obj.(*Vec3i))
 }
@@ -32677,7 +33370,8 @@ func doSkipVec4f(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec4f) ID() binary.ID { return binaryIDVec4f }
+func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
+func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
 func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec4f(e, obj.(*Vec4f))
 }
@@ -32759,7 +33453,8 @@ func doSkipVec4i(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVec4i) ID() binary.ID { return binaryIDVec4i }
+func (*binaryClassVec4i) ID() binary.ID      { return binaryIDVec4i }
+func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
 func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVec4i(e, obj.(*Vec4i))
 }
@@ -32797,7 +33492,8 @@ func doSkipVertexArray(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVertexArray) ID() binary.ID { return binaryIDVertexArray }
+func (*binaryClassVertexArray) ID() binary.ID      { return binaryIDVertexArray }
+func (*binaryClassVertexArray) New() binary.Object { return &VertexArray{} }
 func (*binaryClassVertexArray) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVertexArray(e, obj.(*VertexArray))
 }
@@ -32868,7 +33564,8 @@ func doSkipVertexAttribute(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVertexAttribute) ID() binary.ID { return binaryIDVertexAttribute }
+func (*binaryClassVertexAttribute) ID() binary.ID      { return binaryIDVertexAttribute }
+func (*binaryClassVertexAttribute) New() binary.Object { return &VertexAttribute{} }
 func (*binaryClassVertexAttribute) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVertexAttribute(e, obj.(*VertexAttribute))
 }
@@ -32983,7 +33680,8 @@ func doSkipVertexAttributeArray(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassVertexAttributeArray) ID() binary.ID { return binaryIDVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
 func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
 }
@@ -33041,7 +33739,8 @@ func doSkipWglSwapBuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassWglSwapBuffers) ID() binary.ID { return binaryIDWglSwapBuffers }
+func (*binaryClassWglSwapBuffers) ID() binary.ID      { return binaryIDWglSwapBuffers }
+func (*binaryClassWglSwapBuffers) New() binary.Object { return &WglSwapBuffers{} }
 func (*binaryClassWglSwapBuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeWglSwapBuffers(e, obj.(*WglSwapBuffers))
 }
@@ -33079,7 +33778,8 @@ func doSkipWglSwapBuffers_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassWglSwapBuffers_In) ID() binary.ID { return binaryIDWglSwapBuffers_In }
+func (*binaryClassWglSwapBuffers_In) ID() binary.ID      { return binaryIDWglSwapBuffers_In }
+func (*binaryClassWglSwapBuffers_In) New() binary.Object { return &WglSwapBuffers_In{} }
 func (*binaryClassWglSwapBuffers_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeWglSwapBuffers_In(e, obj.(*WglSwapBuffers_In))
 }
@@ -33106,7 +33806,8 @@ func doDecodeWglSwapBuffers_Out(d binary.Decoder, o *WglSwapBuffers_Out) error {
 func doSkipWglSwapBuffers_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassWglSwapBuffers_Out) ID() binary.ID { return binaryIDWglSwapBuffers_Out }
+func (*binaryClassWglSwapBuffers_Out) ID() binary.ID      { return binaryIDWglSwapBuffers_Out }
+func (*binaryClassWglSwapBuffers_Out) New() binary.Object { return &WglSwapBuffers_Out{} }
 func (*binaryClassWglSwapBuffers_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeWglSwapBuffers_Out(e, obj.(*WglSwapBuffers_Out))
 }

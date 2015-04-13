@@ -71,7 +71,8 @@ func doSkipmetadata(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassmetadata) ID() binary.ID { return binaryIDmetadata }
+func (*binaryClassmetadata) ID() binary.ID      { return binaryIDmetadata }
+func (*binaryClassmetadata) New() binary.Object { return &metadata{} }
 func (*binaryClassmetadata) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodemetadata(e, obj.(*metadata))
 }

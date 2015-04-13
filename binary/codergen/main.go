@@ -87,20 +87,24 @@ func run() error {
 			if isTest {
 				fileName += "#test"
 			}
-			s := generate.FromTypename(pkg.Pkg, name)
+			file, found := files[fileName]
+			if !found {
+				file = &generate.File{}
+				file.Package = pkgName
+				file.IsTest = isTest
+				file.Imports = make(map[string]struct{})
+				files[fileName] = file
+			}
+			s := generate.FromTypename(pkg.Pkg, name, file.Imports)
 			if s != nil {
-				file, found := files[fileName]
-				if !found {
-					file = &generate.File{}
-					file.Package = pkgName
-					file.IsTest = isTest
-					files[fileName] = file
-				}
 				file.Structs = append(file.Structs, s)
 			}
 		}
 	}
 	for _, file := range files {
+		if len(file.Structs) == 0 {
+			continue
+		}
 		generate.Sort(file.Structs)
 		if *golang {
 			file := file

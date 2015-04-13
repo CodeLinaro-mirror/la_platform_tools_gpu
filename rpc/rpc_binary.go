@@ -43,7 +43,8 @@ func doSkipError(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassError) ID() binary.ID { return binaryIDError }
+func (*binaryClassError) ID() binary.ID      { return binaryIDError }
+func (*binaryClassError) New() binary.Object { return &Error{} }
 func (*binaryClassError) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeError(e, obj.(*Error))
 }

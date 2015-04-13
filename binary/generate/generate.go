@@ -38,11 +38,14 @@ type Style struct {
 	Indent       string
 }
 
+type Imports map[string]struct{}
+
 type File struct {
 	Generated string
 	Package   string
 	IsTest    bool
 	Structs   []*Struct
+	Imports   Imports
 	Style
 }
 
@@ -130,7 +133,7 @@ func (t tag) Flag(name string) bool {
 // FromTypename creates and initializes a Struct from a types.Typename.
 // It assumes that the typename will map to a types.Struct, and adds all the
 // fields of that struct to the Struct information.
-func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
+func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
 	t := n.Type().Underlying().(*types.Struct)
 	s := &Struct{Name: n.Name()}
 	s.Package = pkg.Name()
@@ -147,7 +150,8 @@ func FromTypename(pkg *types.Package, n *types.TypeName) *Struct {
 		}
 		f := Field{}
 		f.Name = decl.Name()
-		f.Type = fromType(pkg, decl.Type(), tag)
+		f.Type = fromType(pkg, decl.Type(), tag, imports)
+		delete(imports, pkg.Path())
 		f.Anonymous = decl.Anonymous()
 		s.Fields = append(s.Fields, f)
 	}
@@ -177,10 +181,14 @@ func (s *Struct) UpdateID() {
 }
 
 // fromType creates a appropriate Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
+func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) *Type {
 	t := &Type{Name: path.Base(types.TypeString(pkg, from))}
-	if _, isNamed := from.(*types.Named); isNamed {
+	if named, isNamed := from.(*types.Named); isNamed {
 		from = from.Underlying()
+		p := named.Obj().Pkg()
+		if p != nil {
+			imports[p.Path()] = struct{}{}
+		}
 	}
 	t.Native = from.String()
 	switch from := from.(type) {
@@ -200,7 +208,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 		}
 	case *types.Pointer:
 		t.Kind = Pointer
-		t.SubType = fromType(pkg, from.Elem(), tag)
+		t.SubType = fromType(pkg, from.Elem(), tag, imports)
 	case *types.Interface:
 		t.Kind = Interface
 	case *types.Slice:
@@ -209,7 +217,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 		} else {
 			t.Kind = Array
 		}
-		t.SubType = fromType(pkg, from.Elem(), "")
+		t.SubType = fromType(pkg, from.Elem(), "", imports)
 		switch elem := from.Elem().(type) {
 		case *types.Basic:
 			switch elem.Kind() {
@@ -232,12 +240,12 @@ func fromType(pkg *types.Package, from types.Type, tag tag) *Type {
 			}
 		}
 		if t.Kind == StaticArray {
-			t.SubType = fromType(pkg, from.Elem(), "")
+			t.SubType = fromType(pkg, from.Elem(), "", imports)
 		}
 	case *types.Map:
 		t.Kind = Map
-		t.KeyType = fromType(pkg, from.Key(), "")
-		t.SubType = fromType(pkg, from.Elem(), "")
+		t.KeyType = fromType(pkg, from.Key(), "", imports)
+		t.SubType = fromType(pkg, from.Elem(), "", imports)
 	default:
 		t.Kind = Codeable
 	}

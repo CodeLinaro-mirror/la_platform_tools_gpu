@@ -345,7 +345,8 @@ func doSkipCmdArrayOfFloat(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdArrayOfFloat) ID() binary.ID { return binaryIDCmdArrayOfFloat }
+func (*binaryClassCmdArrayOfFloat) ID() binary.ID      { return binaryIDCmdArrayOfFloat }
+func (*binaryClassCmdArrayOfFloat) New() binary.Object { return &CmdArrayOfFloat{} }
 func (*binaryClassCmdArrayOfFloat) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdArrayOfFloat(e, obj.(*CmdArrayOfFloat))
 }
@@ -372,7 +373,8 @@ func doDecodeCmdArrayOfFloat_In(d binary.Decoder, o *CmdArrayOfFloat_In) error {
 func doSkipCmdArrayOfFloat_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdArrayOfFloat_In) ID() binary.ID { return binaryIDCmdArrayOfFloat_In }
+func (*binaryClassCmdArrayOfFloat_In) ID() binary.ID      { return binaryIDCmdArrayOfFloat_In }
+func (*binaryClassCmdArrayOfFloat_In) New() binary.Object { return &CmdArrayOfFloat_In{} }
 func (*binaryClassCmdArrayOfFloat_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdArrayOfFloat_In(e, obj.(*CmdArrayOfFloat_In))
 }
@@ -428,7 +430,8 @@ func doSkipCmdArrayOfFloat_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdArrayOfFloat_Out) ID() binary.ID { return binaryIDCmdArrayOfFloat_Out }
+func (*binaryClassCmdArrayOfFloat_Out) ID() binary.ID      { return binaryIDCmdArrayOfFloat_Out }
+func (*binaryClassCmdArrayOfFloat_Out) New() binary.Object { return &CmdArrayOfFloat_Out{} }
 func (*binaryClassCmdArrayOfFloat_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdArrayOfFloat_Out(e, obj.(*CmdArrayOfFloat_Out))
 }
@@ -486,7 +489,8 @@ func doSkipCmdBool(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdBool) ID() binary.ID { return binaryIDCmdBool }
+func (*binaryClassCmdBool) ID() binary.ID      { return binaryIDCmdBool }
+func (*binaryClassCmdBool) New() binary.Object { return &CmdBool{} }
 func (*binaryClassCmdBool) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdBool(e, obj.(*CmdBool))
 }
@@ -513,7 +517,8 @@ func doDecodeCmdBool_In(d binary.Decoder, o *CmdBool_In) error {
 func doSkipCmdBool_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdBool_In) ID() binary.ID { return binaryIDCmdBool_In }
+func (*binaryClassCmdBool_In) ID() binary.ID      { return binaryIDCmdBool_In }
+func (*binaryClassCmdBool_In) New() binary.Object { return &CmdBool_In{} }
 func (*binaryClassCmdBool_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdBool_In(e, obj.(*CmdBool_In))
 }
@@ -551,7 +556,8 @@ func doSkipCmdBool_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdBool_Out) ID() binary.ID { return binaryIDCmdBool_Out }
+func (*binaryClassCmdBool_Out) ID() binary.ID      { return binaryIDCmdBool_Out }
+func (*binaryClassCmdBool_Out) New() binary.Object { return &CmdBool_Out{} }
 func (*binaryClassCmdBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdBool_Out(e, obj.(*CmdBool_Out))
 }
@@ -607,7 +613,8 @@ func doSkipCmdF32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdF32) ID() binary.ID { return binaryIDCmdF32 }
+func (*binaryClassCmdF32) ID() binary.ID      { return binaryIDCmdF32 }
+func (*binaryClassCmdF32) New() binary.Object { return &CmdF32{} }
 func (*binaryClassCmdF32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF32(e, obj.(*CmdF32))
 }
@@ -634,7 +641,8 @@ func doDecodeCmdF32_In(d binary.Decoder, o *CmdF32_In) error {
 func doSkipCmdF32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdF32_In) ID() binary.ID { return binaryIDCmdF32_In }
+func (*binaryClassCmdF32_In) ID() binary.ID      { return binaryIDCmdF32_In }
+func (*binaryClassCmdF32_In) New() binary.Object { return &CmdF32_In{} }
 func (*binaryClassCmdF32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF32_In(e, obj.(*CmdF32_In))
 }
@@ -672,7 +680,8 @@ func doSkipCmdF32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdF32_Out) ID() binary.ID { return binaryIDCmdF32_Out }
+func (*binaryClassCmdF32_Out) ID() binary.ID      { return binaryIDCmdF32_Out }
+func (*binaryClassCmdF32_Out) New() binary.Object { return &CmdF32_Out{} }
 func (*binaryClassCmdF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF32_Out(e, obj.(*CmdF32_Out))
 }
@@ -728,7 +737,8 @@ func doSkipCmdF64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdF64) ID() binary.ID { return binaryIDCmdF64 }
+func (*binaryClassCmdF64) ID() binary.ID      { return binaryIDCmdF64 }
+func (*binaryClassCmdF64) New() binary.Object { return &CmdF64{} }
 func (*binaryClassCmdF64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF64(e, obj.(*CmdF64))
 }
@@ -755,7 +765,8 @@ func doDecodeCmdF64_In(d binary.Decoder, o *CmdF64_In) error {
 func doSkipCmdF64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdF64_In) ID() binary.ID { return binaryIDCmdF64_In }
+func (*binaryClassCmdF64_In) ID() binary.ID      { return binaryIDCmdF64_In }
+func (*binaryClassCmdF64_In) New() binary.Object { return &CmdF64_In{} }
 func (*binaryClassCmdF64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF64_In(e, obj.(*CmdF64_In))
 }
@@ -793,7 +804,8 @@ func doSkipCmdF64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdF64_Out) ID() binary.ID { return binaryIDCmdF64_Out }
+func (*binaryClassCmdF64_Out) ID() binary.ID      { return binaryIDCmdF64_Out }
+func (*binaryClassCmdF64_Out) New() binary.Object { return &CmdF64_Out{} }
 func (*binaryClassCmdF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdF64_Out(e, obj.(*CmdF64_Out))
 }
@@ -849,7 +861,8 @@ func doSkipCmdPointer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdPointer) ID() binary.ID { return binaryIDCmdPointer }
+func (*binaryClassCmdPointer) ID() binary.ID      { return binaryIDCmdPointer }
+func (*binaryClassCmdPointer) New() binary.Object { return &CmdPointer{} }
 func (*binaryClassCmdPointer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdPointer(e, obj.(*CmdPointer))
 }
@@ -876,7 +889,8 @@ func doDecodeCmdPointer_In(d binary.Decoder, o *CmdPointer_In) error {
 func doSkipCmdPointer_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdPointer_In) ID() binary.ID { return binaryIDCmdPointer_In }
+func (*binaryClassCmdPointer_In) ID() binary.ID      { return binaryIDCmdPointer_In }
+func (*binaryClassCmdPointer_In) New() binary.Object { return &CmdPointer_In{} }
 func (*binaryClassCmdPointer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdPointer_In(e, obj.(*CmdPointer_In))
 }
@@ -914,7 +928,8 @@ func doSkipCmdPointer_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdPointer_Out) ID() binary.ID { return binaryIDCmdPointer_Out }
+func (*binaryClassCmdPointer_Out) ID() binary.ID      { return binaryIDCmdPointer_Out }
+func (*binaryClassCmdPointer_Out) New() binary.Object { return &CmdPointer_Out{} }
 func (*binaryClassCmdPointer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdPointer_Out(e, obj.(*CmdPointer_Out))
 }
@@ -970,7 +985,8 @@ func doSkipCmdS16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS16) ID() binary.ID { return binaryIDCmdS16 }
+func (*binaryClassCmdS16) ID() binary.ID      { return binaryIDCmdS16 }
+func (*binaryClassCmdS16) New() binary.Object { return &CmdS16{} }
 func (*binaryClassCmdS16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS16(e, obj.(*CmdS16))
 }
@@ -997,7 +1013,8 @@ func doDecodeCmdS16_In(d binary.Decoder, o *CmdS16_In) error {
 func doSkipCmdS16_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdS16_In) ID() binary.ID { return binaryIDCmdS16_In }
+func (*binaryClassCmdS16_In) ID() binary.ID      { return binaryIDCmdS16_In }
+func (*binaryClassCmdS16_In) New() binary.Object { return &CmdS16_In{} }
 func (*binaryClassCmdS16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS16_In(e, obj.(*CmdS16_In))
 }
@@ -1035,7 +1052,8 @@ func doSkipCmdS16_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS16_Out) ID() binary.ID { return binaryIDCmdS16_Out }
+func (*binaryClassCmdS16_Out) ID() binary.ID      { return binaryIDCmdS16_Out }
+func (*binaryClassCmdS16_Out) New() binary.Object { return &CmdS16_Out{} }
 func (*binaryClassCmdS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS16_Out(e, obj.(*CmdS16_Out))
 }
@@ -1091,7 +1109,8 @@ func doSkipCmdS32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS32) ID() binary.ID { return binaryIDCmdS32 }
+func (*binaryClassCmdS32) ID() binary.ID      { return binaryIDCmdS32 }
+func (*binaryClassCmdS32) New() binary.Object { return &CmdS32{} }
 func (*binaryClassCmdS32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS32(e, obj.(*CmdS32))
 }
@@ -1118,7 +1137,8 @@ func doDecodeCmdS32_In(d binary.Decoder, o *CmdS32_In) error {
 func doSkipCmdS32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdS32_In) ID() binary.ID { return binaryIDCmdS32_In }
+func (*binaryClassCmdS32_In) ID() binary.ID      { return binaryIDCmdS32_In }
+func (*binaryClassCmdS32_In) New() binary.Object { return &CmdS32_In{} }
 func (*binaryClassCmdS32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS32_In(e, obj.(*CmdS32_In))
 }
@@ -1156,7 +1176,8 @@ func doSkipCmdS32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS32_Out) ID() binary.ID { return binaryIDCmdS32_Out }
+func (*binaryClassCmdS32_Out) ID() binary.ID      { return binaryIDCmdS32_Out }
+func (*binaryClassCmdS32_Out) New() binary.Object { return &CmdS32_Out{} }
 func (*binaryClassCmdS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS32_Out(e, obj.(*CmdS32_Out))
 }
@@ -1212,7 +1233,8 @@ func doSkipCmdS64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS64) ID() binary.ID { return binaryIDCmdS64 }
+func (*binaryClassCmdS64) ID() binary.ID      { return binaryIDCmdS64 }
+func (*binaryClassCmdS64) New() binary.Object { return &CmdS64{} }
 func (*binaryClassCmdS64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS64(e, obj.(*CmdS64))
 }
@@ -1239,7 +1261,8 @@ func doDecodeCmdS64_In(d binary.Decoder, o *CmdS64_In) error {
 func doSkipCmdS64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdS64_In) ID() binary.ID { return binaryIDCmdS64_In }
+func (*binaryClassCmdS64_In) ID() binary.ID      { return binaryIDCmdS64_In }
+func (*binaryClassCmdS64_In) New() binary.Object { return &CmdS64_In{} }
 func (*binaryClassCmdS64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS64_In(e, obj.(*CmdS64_In))
 }
@@ -1277,7 +1300,8 @@ func doSkipCmdS64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS64_Out) ID() binary.ID { return binaryIDCmdS64_Out }
+func (*binaryClassCmdS64_Out) ID() binary.ID      { return binaryIDCmdS64_Out }
+func (*binaryClassCmdS64_Out) New() binary.Object { return &CmdS64_Out{} }
 func (*binaryClassCmdS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS64_Out(e, obj.(*CmdS64_Out))
 }
@@ -1333,7 +1357,8 @@ func doSkipCmdS8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS8) ID() binary.ID { return binaryIDCmdS8 }
+func (*binaryClassCmdS8) ID() binary.ID      { return binaryIDCmdS8 }
+func (*binaryClassCmdS8) New() binary.Object { return &CmdS8{} }
 func (*binaryClassCmdS8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS8(e, obj.(*CmdS8))
 }
@@ -1360,7 +1385,8 @@ func doDecodeCmdS8_In(d binary.Decoder, o *CmdS8_In) error {
 func doSkipCmdS8_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdS8_In) ID() binary.ID { return binaryIDCmdS8_In }
+func (*binaryClassCmdS8_In) ID() binary.ID      { return binaryIDCmdS8_In }
+func (*binaryClassCmdS8_In) New() binary.Object { return &CmdS8_In{} }
 func (*binaryClassCmdS8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS8_In(e, obj.(*CmdS8_In))
 }
@@ -1398,7 +1424,8 @@ func doSkipCmdS8_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdS8_Out) ID() binary.ID { return binaryIDCmdS8_Out }
+func (*binaryClassCmdS8_Out) ID() binary.ID      { return binaryIDCmdS8_Out }
+func (*binaryClassCmdS8_Out) New() binary.Object { return &CmdS8_Out{} }
 func (*binaryClassCmdS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdS8_Out(e, obj.(*CmdS8_Out))
 }
@@ -1454,7 +1481,8 @@ func doSkipCmdString(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdString) ID() binary.ID { return binaryIDCmdString }
+func (*binaryClassCmdString) ID() binary.ID      { return binaryIDCmdString }
+func (*binaryClassCmdString) New() binary.Object { return &CmdString{} }
 func (*binaryClassCmdString) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdString(e, obj.(*CmdString))
 }
@@ -1481,7 +1509,8 @@ func doDecodeCmdString_In(d binary.Decoder, o *CmdString_In) error {
 func doSkipCmdString_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdString_In) ID() binary.ID { return binaryIDCmdString_In }
+func (*binaryClassCmdString_In) ID() binary.ID      { return binaryIDCmdString_In }
+func (*binaryClassCmdString_In) New() binary.Object { return &CmdString_In{} }
 func (*binaryClassCmdString_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdString_In(e, obj.(*CmdString_In))
 }
@@ -1519,7 +1548,8 @@ func doSkipCmdString_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdString_Out) ID() binary.ID { return binaryIDCmdString_Out }
+func (*binaryClassCmdString_Out) ID() binary.ID      { return binaryIDCmdString_Out }
+func (*binaryClassCmdString_Out) New() binary.Object { return &CmdString_Out{} }
 func (*binaryClassCmdString_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdString_Out(e, obj.(*CmdString_Out))
 }
@@ -1575,7 +1605,8 @@ func doSkipCmdU16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU16) ID() binary.ID { return binaryIDCmdU16 }
+func (*binaryClassCmdU16) ID() binary.ID      { return binaryIDCmdU16 }
+func (*binaryClassCmdU16) New() binary.Object { return &CmdU16{} }
 func (*binaryClassCmdU16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU16(e, obj.(*CmdU16))
 }
@@ -1602,7 +1633,8 @@ func doDecodeCmdU16_In(d binary.Decoder, o *CmdU16_In) error {
 func doSkipCmdU16_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdU16_In) ID() binary.ID { return binaryIDCmdU16_In }
+func (*binaryClassCmdU16_In) ID() binary.ID      { return binaryIDCmdU16_In }
+func (*binaryClassCmdU16_In) New() binary.Object { return &CmdU16_In{} }
 func (*binaryClassCmdU16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU16_In(e, obj.(*CmdU16_In))
 }
@@ -1640,7 +1672,8 @@ func doSkipCmdU16_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU16_Out) ID() binary.ID { return binaryIDCmdU16_Out }
+func (*binaryClassCmdU16_Out) ID() binary.ID      { return binaryIDCmdU16_Out }
+func (*binaryClassCmdU16_Out) New() binary.Object { return &CmdU16_Out{} }
 func (*binaryClassCmdU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU16_Out(e, obj.(*CmdU16_Out))
 }
@@ -1696,7 +1729,8 @@ func doSkipCmdU32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU32) ID() binary.ID { return binaryIDCmdU32 }
+func (*binaryClassCmdU32) ID() binary.ID      { return binaryIDCmdU32 }
+func (*binaryClassCmdU32) New() binary.Object { return &CmdU32{} }
 func (*binaryClassCmdU32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU32(e, obj.(*CmdU32))
 }
@@ -1723,7 +1757,8 @@ func doDecodeCmdU32_In(d binary.Decoder, o *CmdU32_In) error {
 func doSkipCmdU32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdU32_In) ID() binary.ID { return binaryIDCmdU32_In }
+func (*binaryClassCmdU32_In) ID() binary.ID      { return binaryIDCmdU32_In }
+func (*binaryClassCmdU32_In) New() binary.Object { return &CmdU32_In{} }
 func (*binaryClassCmdU32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU32_In(e, obj.(*CmdU32_In))
 }
@@ -1761,7 +1796,8 @@ func doSkipCmdU32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU32_Out) ID() binary.ID { return binaryIDCmdU32_Out }
+func (*binaryClassCmdU32_Out) ID() binary.ID      { return binaryIDCmdU32_Out }
+func (*binaryClassCmdU32_Out) New() binary.Object { return &CmdU32_Out{} }
 func (*binaryClassCmdU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU32_Out(e, obj.(*CmdU32_Out))
 }
@@ -1817,7 +1853,8 @@ func doSkipCmdU64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU64) ID() binary.ID { return binaryIDCmdU64 }
+func (*binaryClassCmdU64) ID() binary.ID      { return binaryIDCmdU64 }
+func (*binaryClassCmdU64) New() binary.Object { return &CmdU64{} }
 func (*binaryClassCmdU64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU64(e, obj.(*CmdU64))
 }
@@ -1844,7 +1881,8 @@ func doDecodeCmdU64_In(d binary.Decoder, o *CmdU64_In) error {
 func doSkipCmdU64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdU64_In) ID() binary.ID { return binaryIDCmdU64_In }
+func (*binaryClassCmdU64_In) ID() binary.ID      { return binaryIDCmdU64_In }
+func (*binaryClassCmdU64_In) New() binary.Object { return &CmdU64_In{} }
 func (*binaryClassCmdU64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU64_In(e, obj.(*CmdU64_In))
 }
@@ -1882,7 +1920,8 @@ func doSkipCmdU64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU64_Out) ID() binary.ID { return binaryIDCmdU64_Out }
+func (*binaryClassCmdU64_Out) ID() binary.ID      { return binaryIDCmdU64_Out }
+func (*binaryClassCmdU64_Out) New() binary.Object { return &CmdU64_Out{} }
 func (*binaryClassCmdU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU64_Out(e, obj.(*CmdU64_Out))
 }
@@ -1938,7 +1977,8 @@ func doSkipCmdU8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU8) ID() binary.ID { return binaryIDCmdU8 }
+func (*binaryClassCmdU8) ID() binary.ID      { return binaryIDCmdU8 }
+func (*binaryClassCmdU8) New() binary.Object { return &CmdU8{} }
 func (*binaryClassCmdU8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU8(e, obj.(*CmdU8))
 }
@@ -1965,7 +2005,8 @@ func doDecodeCmdU8_In(d binary.Decoder, o *CmdU8_In) error {
 func doSkipCmdU8_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdU8_In) ID() binary.ID { return binaryIDCmdU8_In }
+func (*binaryClassCmdU8_In) ID() binary.ID      { return binaryIDCmdU8_In }
+func (*binaryClassCmdU8_In) New() binary.Object { return &CmdU8_In{} }
 func (*binaryClassCmdU8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU8_In(e, obj.(*CmdU8_In))
 }
@@ -2003,7 +2044,8 @@ func doSkipCmdU8_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdU8_Out) ID() binary.ID { return binaryIDCmdU8_Out }
+func (*binaryClassCmdU8_Out) ID() binary.ID      { return binaryIDCmdU8_Out }
+func (*binaryClassCmdU8_Out) New() binary.Object { return &CmdU8_Out{} }
 func (*binaryClassCmdU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdU8_Out(e, obj.(*CmdU8_Out))
 }
@@ -2059,7 +2101,8 @@ func doSkipCmdVoid(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid) ID() binary.ID { return binaryIDCmdVoid }
+func (*binaryClassCmdVoid) ID() binary.ID      { return binaryIDCmdVoid }
+func (*binaryClassCmdVoid) New() binary.Object { return &CmdVoid{} }
 func (*binaryClassCmdVoid) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid(e, obj.(*CmdVoid))
 }
@@ -2115,7 +2158,8 @@ func doSkipCmdVoid3Arrays(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Arrays) ID() binary.ID { return binaryIDCmdVoid3Arrays }
+func (*binaryClassCmdVoid3Arrays) ID() binary.ID      { return binaryIDCmdVoid3Arrays }
+func (*binaryClassCmdVoid3Arrays) New() binary.Object { return &CmdVoid3Arrays{} }
 func (*binaryClassCmdVoid3Arrays) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Arrays(e, obj.(*CmdVoid3Arrays))
 }
@@ -2229,7 +2273,8 @@ func doSkipCmdVoid3Arrays_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Arrays_In) ID() binary.ID { return binaryIDCmdVoid3Arrays_In }
+func (*binaryClassCmdVoid3Arrays_In) ID() binary.ID      { return binaryIDCmdVoid3Arrays_In }
+func (*binaryClassCmdVoid3Arrays_In) New() binary.Object { return &CmdVoid3Arrays_In{} }
 func (*binaryClassCmdVoid3Arrays_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Arrays_In(e, obj.(*CmdVoid3Arrays_In))
 }
@@ -2256,7 +2301,8 @@ func doDecodeCmdVoid3Arrays_Out(d binary.Decoder, o *CmdVoid3Arrays_Out) error {
 func doSkipCmdVoid3Arrays_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoid3Arrays_Out) ID() binary.ID { return binaryIDCmdVoid3Arrays_Out }
+func (*binaryClassCmdVoid3Arrays_Out) ID() binary.ID      { return binaryIDCmdVoid3Arrays_Out }
+func (*binaryClassCmdVoid3Arrays_Out) New() binary.Object { return &CmdVoid3Arrays_Out{} }
 func (*binaryClassCmdVoid3Arrays_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Arrays_Out(e, obj.(*CmdVoid3Arrays_Out))
 }
@@ -2312,7 +2358,8 @@ func doSkipCmdVoid3Remapped(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Remapped) ID() binary.ID { return binaryIDCmdVoid3Remapped }
+func (*binaryClassCmdVoid3Remapped) ID() binary.ID      { return binaryIDCmdVoid3Remapped }
+func (*binaryClassCmdVoid3Remapped) New() binary.Object { return &CmdVoid3Remapped{} }
 func (*binaryClassCmdVoid3Remapped) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Remapped(e, obj.(*CmdVoid3Remapped))
 }
@@ -2372,7 +2419,8 @@ func doSkipCmdVoid3Remapped_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Remapped_In) ID() binary.ID { return binaryIDCmdVoid3Remapped_In }
+func (*binaryClassCmdVoid3Remapped_In) ID() binary.ID      { return binaryIDCmdVoid3Remapped_In }
+func (*binaryClassCmdVoid3Remapped_In) New() binary.Object { return &CmdVoid3Remapped_In{} }
 func (*binaryClassCmdVoid3Remapped_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Remapped_In(e, obj.(*CmdVoid3Remapped_In))
 }
@@ -2401,7 +2449,8 @@ func doDecodeCmdVoid3Remapped_Out(d binary.Decoder, o *CmdVoid3Remapped_Out) err
 func doSkipCmdVoid3Remapped_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoid3Remapped_Out) ID() binary.ID { return binaryIDCmdVoid3Remapped_Out }
+func (*binaryClassCmdVoid3Remapped_Out) ID() binary.ID      { return binaryIDCmdVoid3Remapped_Out }
+func (*binaryClassCmdVoid3Remapped_Out) New() binary.Object { return &CmdVoid3Remapped_Out{} }
 func (*binaryClassCmdVoid3Remapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Remapped_Out(e, obj.(*CmdVoid3Remapped_Out))
 }
@@ -2459,7 +2508,8 @@ func doSkipCmdVoid3Strings(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Strings) ID() binary.ID { return binaryIDCmdVoid3Strings }
+func (*binaryClassCmdVoid3Strings) ID() binary.ID      { return binaryIDCmdVoid3Strings }
+func (*binaryClassCmdVoid3Strings) New() binary.Object { return &CmdVoid3Strings{} }
 func (*binaryClassCmdVoid3Strings) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Strings(e, obj.(*CmdVoid3Strings))
 }
@@ -2519,7 +2569,8 @@ func doSkipCmdVoid3Strings_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoid3Strings_In) ID() binary.ID { return binaryIDCmdVoid3Strings_In }
+func (*binaryClassCmdVoid3Strings_In) ID() binary.ID      { return binaryIDCmdVoid3Strings_In }
+func (*binaryClassCmdVoid3Strings_In) New() binary.Object { return &CmdVoid3Strings_In{} }
 func (*binaryClassCmdVoid3Strings_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Strings_In(e, obj.(*CmdVoid3Strings_In))
 }
@@ -2546,7 +2597,8 @@ func doDecodeCmdVoid3Strings_Out(d binary.Decoder, o *CmdVoid3Strings_Out) error
 func doSkipCmdVoid3Strings_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoid3Strings_Out) ID() binary.ID { return binaryIDCmdVoid3Strings_Out }
+func (*binaryClassCmdVoid3Strings_Out) ID() binary.ID      { return binaryIDCmdVoid3Strings_Out }
+func (*binaryClassCmdVoid3Strings_Out) New() binary.Object { return &CmdVoid3Strings_Out{} }
 func (*binaryClassCmdVoid3Strings_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid3Strings_Out(e, obj.(*CmdVoid3Strings_Out))
 }
@@ -2604,7 +2656,8 @@ func doSkipCmdVoidArrayOfStrings(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidArrayOfStrings) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings }
+func (*binaryClassCmdVoidArrayOfStrings) ID() binary.ID      { return binaryIDCmdVoidArrayOfStrings }
+func (*binaryClassCmdVoidArrayOfStrings) New() binary.Object { return &CmdVoidArrayOfStrings{} }
 func (*binaryClassCmdVoidArrayOfStrings) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidArrayOfStrings(e, obj.(*CmdVoidArrayOfStrings))
 }
@@ -2662,7 +2715,8 @@ func doSkipCmdVoidArrayOfStrings_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidArrayOfStrings_In) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings_In }
+func (*binaryClassCmdVoidArrayOfStrings_In) ID() binary.ID      { return binaryIDCmdVoidArrayOfStrings_In }
+func (*binaryClassCmdVoidArrayOfStrings_In) New() binary.Object { return &CmdVoidArrayOfStrings_In{} }
 func (*binaryClassCmdVoidArrayOfStrings_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidArrayOfStrings_In(e, obj.(*CmdVoidArrayOfStrings_In))
 }
@@ -2691,7 +2745,8 @@ func doDecodeCmdVoidArrayOfStrings_Out(d binary.Decoder, o *CmdVoidArrayOfString
 func doSkipCmdVoidArrayOfStrings_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidArrayOfStrings_Out) ID() binary.ID { return binaryIDCmdVoidArrayOfStrings_Out }
+func (*binaryClassCmdVoidArrayOfStrings_Out) ID() binary.ID      { return binaryIDCmdVoidArrayOfStrings_Out }
+func (*binaryClassCmdVoidArrayOfStrings_Out) New() binary.Object { return &CmdVoidArrayOfStrings_Out{} }
 func (*binaryClassCmdVoidArrayOfStrings_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidArrayOfStrings_Out(e, obj.(*CmdVoidArrayOfStrings_Out))
 }
@@ -2749,7 +2804,8 @@ func doSkipCmdVoidBool(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidBool) ID() binary.ID { return binaryIDCmdVoidBool }
+func (*binaryClassCmdVoidBool) ID() binary.ID      { return binaryIDCmdVoidBool }
+func (*binaryClassCmdVoidBool) New() binary.Object { return &CmdVoidBool{} }
 func (*binaryClassCmdVoidBool) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidBool(e, obj.(*CmdVoidBool))
 }
@@ -2787,7 +2843,8 @@ func doSkipCmdVoidBool_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidBool_In) ID() binary.ID { return binaryIDCmdVoidBool_In }
+func (*binaryClassCmdVoidBool_In) ID() binary.ID      { return binaryIDCmdVoidBool_In }
+func (*binaryClassCmdVoidBool_In) New() binary.Object { return &CmdVoidBool_In{} }
 func (*binaryClassCmdVoidBool_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidBool_In(e, obj.(*CmdVoidBool_In))
 }
@@ -2814,7 +2871,8 @@ func doDecodeCmdVoidBool_Out(d binary.Decoder, o *CmdVoidBool_Out) error {
 func doSkipCmdVoidBool_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidBool_Out) ID() binary.ID { return binaryIDCmdVoidBool_Out }
+func (*binaryClassCmdVoidBool_Out) ID() binary.ID      { return binaryIDCmdVoidBool_Out }
+func (*binaryClassCmdVoidBool_Out) New() binary.Object { return &CmdVoidBool_Out{} }
 func (*binaryClassCmdVoidBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidBool_Out(e, obj.(*CmdVoidBool_Out))
 }
@@ -2870,7 +2928,8 @@ func doSkipCmdVoidF32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidF32) ID() binary.ID { return binaryIDCmdVoidF32 }
+func (*binaryClassCmdVoidF32) ID() binary.ID      { return binaryIDCmdVoidF32 }
+func (*binaryClassCmdVoidF32) New() binary.Object { return &CmdVoidF32{} }
 func (*binaryClassCmdVoidF32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF32(e, obj.(*CmdVoidF32))
 }
@@ -2908,7 +2967,8 @@ func doSkipCmdVoidF32_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidF32_In) ID() binary.ID { return binaryIDCmdVoidF32_In }
+func (*binaryClassCmdVoidF32_In) ID() binary.ID      { return binaryIDCmdVoidF32_In }
+func (*binaryClassCmdVoidF32_In) New() binary.Object { return &CmdVoidF32_In{} }
 func (*binaryClassCmdVoidF32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF32_In(e, obj.(*CmdVoidF32_In))
 }
@@ -2935,7 +2995,8 @@ func doDecodeCmdVoidF32_Out(d binary.Decoder, o *CmdVoidF32_Out) error {
 func doSkipCmdVoidF32_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidF32_Out) ID() binary.ID { return binaryIDCmdVoidF32_Out }
+func (*binaryClassCmdVoidF32_Out) ID() binary.ID      { return binaryIDCmdVoidF32_Out }
+func (*binaryClassCmdVoidF32_Out) New() binary.Object { return &CmdVoidF32_Out{} }
 func (*binaryClassCmdVoidF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF32_Out(e, obj.(*CmdVoidF32_Out))
 }
@@ -2991,7 +3052,8 @@ func doSkipCmdVoidF64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidF64) ID() binary.ID { return binaryIDCmdVoidF64 }
+func (*binaryClassCmdVoidF64) ID() binary.ID      { return binaryIDCmdVoidF64 }
+func (*binaryClassCmdVoidF64) New() binary.Object { return &CmdVoidF64{} }
 func (*binaryClassCmdVoidF64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF64(e, obj.(*CmdVoidF64))
 }
@@ -3029,7 +3091,8 @@ func doSkipCmdVoidF64_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidF64_In) ID() binary.ID { return binaryIDCmdVoidF64_In }
+func (*binaryClassCmdVoidF64_In) ID() binary.ID      { return binaryIDCmdVoidF64_In }
+func (*binaryClassCmdVoidF64_In) New() binary.Object { return &CmdVoidF64_In{} }
 func (*binaryClassCmdVoidF64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF64_In(e, obj.(*CmdVoidF64_In))
 }
@@ -3056,7 +3119,8 @@ func doDecodeCmdVoidF64_Out(d binary.Decoder, o *CmdVoidF64_Out) error {
 func doSkipCmdVoidF64_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidF64_Out) ID() binary.ID { return binaryIDCmdVoidF64_Out }
+func (*binaryClassCmdVoidF64_Out) ID() binary.ID      { return binaryIDCmdVoidF64_Out }
+func (*binaryClassCmdVoidF64_Out) New() binary.Object { return &CmdVoidF64_Out{} }
 func (*binaryClassCmdVoidF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidF64_Out(e, obj.(*CmdVoidF64_Out))
 }
@@ -3112,7 +3176,8 @@ func doSkipCmdVoidOut3Remapped(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Remapped) ID() binary.ID { return binaryIDCmdVoidOut3Remapped }
+func (*binaryClassCmdVoidOut3Remapped) ID() binary.ID      { return binaryIDCmdVoidOut3Remapped }
+func (*binaryClassCmdVoidOut3Remapped) New() binary.Object { return &CmdVoidOut3Remapped{} }
 func (*binaryClassCmdVoidOut3Remapped) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Remapped(e, obj.(*CmdVoidOut3Remapped))
 }
@@ -3141,7 +3206,8 @@ func doDecodeCmdVoidOut3Remapped_In(d binary.Decoder, o *CmdVoidOut3Remapped_In)
 func doSkipCmdVoidOut3Remapped_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOut3Remapped_In) ID() binary.ID { return binaryIDCmdVoidOut3Remapped_In }
+func (*binaryClassCmdVoidOut3Remapped_In) ID() binary.ID      { return binaryIDCmdVoidOut3Remapped_In }
+func (*binaryClassCmdVoidOut3Remapped_In) New() binary.Object { return &CmdVoidOut3Remapped_In{} }
 func (*binaryClassCmdVoidOut3Remapped_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Remapped_In(e, obj.(*CmdVoidOut3Remapped_In))
 }
@@ -3203,7 +3269,8 @@ func doSkipCmdVoidOut3Remapped_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Remapped_Out) ID() binary.ID { return binaryIDCmdVoidOut3Remapped_Out }
+func (*binaryClassCmdVoidOut3Remapped_Out) ID() binary.ID      { return binaryIDCmdVoidOut3Remapped_Out }
+func (*binaryClassCmdVoidOut3Remapped_Out) New() binary.Object { return &CmdVoidOut3Remapped_Out{} }
 func (*binaryClassCmdVoidOut3Remapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Remapped_Out(e, obj.(*CmdVoidOut3Remapped_Out))
 }
@@ -3261,7 +3328,8 @@ func doSkipCmdVoidOut3Strings(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Strings) ID() binary.ID { return binaryIDCmdVoidOut3Strings }
+func (*binaryClassCmdVoidOut3Strings) ID() binary.ID      { return binaryIDCmdVoidOut3Strings }
+func (*binaryClassCmdVoidOut3Strings) New() binary.Object { return &CmdVoidOut3Strings{} }
 func (*binaryClassCmdVoidOut3Strings) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Strings(e, obj.(*CmdVoidOut3Strings))
 }
@@ -3288,7 +3356,8 @@ func doDecodeCmdVoidOut3Strings_In(d binary.Decoder, o *CmdVoidOut3Strings_In) e
 func doSkipCmdVoidOut3Strings_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOut3Strings_In) ID() binary.ID { return binaryIDCmdVoidOut3Strings_In }
+func (*binaryClassCmdVoidOut3Strings_In) ID() binary.ID      { return binaryIDCmdVoidOut3Strings_In }
+func (*binaryClassCmdVoidOut3Strings_In) New() binary.Object { return &CmdVoidOut3Strings_In{} }
 func (*binaryClassCmdVoidOut3Strings_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Strings_In(e, obj.(*CmdVoidOut3Strings_In))
 }
@@ -3350,7 +3419,8 @@ func doSkipCmdVoidOut3Strings_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Strings_Out) ID() binary.ID { return binaryIDCmdVoidOut3Strings_Out }
+func (*binaryClassCmdVoidOut3Strings_Out) ID() binary.ID      { return binaryIDCmdVoidOut3Strings_Out }
+func (*binaryClassCmdVoidOut3Strings_Out) New() binary.Object { return &CmdVoidOut3Strings_Out{} }
 func (*binaryClassCmdVoidOut3Strings_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOut3Strings_Out(e, obj.(*CmdVoidOut3Strings_Out))
 }
@@ -3408,7 +3478,8 @@ func doSkipCmdVoidOutArrayOfRemapped(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutArrayOfRemapped) ID() binary.ID { return binaryIDCmdVoidOutArrayOfRemapped }
+func (*binaryClassCmdVoidOutArrayOfRemapped) ID() binary.ID      { return binaryIDCmdVoidOutArrayOfRemapped }
+func (*binaryClassCmdVoidOutArrayOfRemapped) New() binary.Object { return &CmdVoidOutArrayOfRemapped{} }
 func (*binaryClassCmdVoidOutArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutArrayOfRemapped(e, obj.(*CmdVoidOutArrayOfRemapped))
 }
@@ -3439,6 +3510,9 @@ func doSkipCmdVoidOutArrayOfRemapped_In(d binary.Decoder) error {
 }
 func (*binaryClassCmdVoidOutArrayOfRemapped_In) ID() binary.ID {
 	return binaryIDCmdVoidOutArrayOfRemapped_In
+}
+func (*binaryClassCmdVoidOutArrayOfRemapped_In) New() binary.Object {
+	return &CmdVoidOutArrayOfRemapped_In{}
 }
 func (*binaryClassCmdVoidOutArrayOfRemapped_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutArrayOfRemapped_In(e, obj.(*CmdVoidOutArrayOfRemapped_In))
@@ -3500,6 +3574,9 @@ func doSkipCmdVoidOutArrayOfRemapped_Out(d binary.Decoder) error {
 func (*binaryClassCmdVoidOutArrayOfRemapped_Out) ID() binary.ID {
 	return binaryIDCmdVoidOutArrayOfRemapped_Out
 }
+func (*binaryClassCmdVoidOutArrayOfRemapped_Out) New() binary.Object {
+	return &CmdVoidOutArrayOfRemapped_Out{}
+}
 func (*binaryClassCmdVoidOutArrayOfRemapped_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutArrayOfRemapped_Out(e, obj.(*CmdVoidOutArrayOfRemapped_Out))
 }
@@ -3557,7 +3634,8 @@ func doSkipCmdVoidOutBool(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutBool) ID() binary.ID { return binaryIDCmdVoidOutBool }
+func (*binaryClassCmdVoidOutBool) ID() binary.ID      { return binaryIDCmdVoidOutBool }
+func (*binaryClassCmdVoidOutBool) New() binary.Object { return &CmdVoidOutBool{} }
 func (*binaryClassCmdVoidOutBool) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutBool(e, obj.(*CmdVoidOutBool))
 }
@@ -3584,7 +3662,8 @@ func doDecodeCmdVoidOutBool_In(d binary.Decoder, o *CmdVoidOutBool_In) error {
 func doSkipCmdVoidOutBool_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutBool_In) ID() binary.ID { return binaryIDCmdVoidOutBool_In }
+func (*binaryClassCmdVoidOutBool_In) ID() binary.ID      { return binaryIDCmdVoidOutBool_In }
+func (*binaryClassCmdVoidOutBool_In) New() binary.Object { return &CmdVoidOutBool_In{} }
 func (*binaryClassCmdVoidOutBool_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutBool_In(e, obj.(*CmdVoidOutBool_In))
 }
@@ -3622,7 +3701,8 @@ func doSkipCmdVoidOutBool_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutBool_Out) ID() binary.ID { return binaryIDCmdVoidOutBool_Out }
+func (*binaryClassCmdVoidOutBool_Out) ID() binary.ID      { return binaryIDCmdVoidOutBool_Out }
+func (*binaryClassCmdVoidOutBool_Out) New() binary.Object { return &CmdVoidOutBool_Out{} }
 func (*binaryClassCmdVoidOutBool_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutBool_Out(e, obj.(*CmdVoidOutBool_Out))
 }
@@ -3678,7 +3758,8 @@ func doSkipCmdVoidOutF32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutF32) ID() binary.ID { return binaryIDCmdVoidOutF32 }
+func (*binaryClassCmdVoidOutF32) ID() binary.ID      { return binaryIDCmdVoidOutF32 }
+func (*binaryClassCmdVoidOutF32) New() binary.Object { return &CmdVoidOutF32{} }
 func (*binaryClassCmdVoidOutF32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF32(e, obj.(*CmdVoidOutF32))
 }
@@ -3705,7 +3786,8 @@ func doDecodeCmdVoidOutF32_In(d binary.Decoder, o *CmdVoidOutF32_In) error {
 func doSkipCmdVoidOutF32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutF32_In) ID() binary.ID { return binaryIDCmdVoidOutF32_In }
+func (*binaryClassCmdVoidOutF32_In) ID() binary.ID      { return binaryIDCmdVoidOutF32_In }
+func (*binaryClassCmdVoidOutF32_In) New() binary.Object { return &CmdVoidOutF32_In{} }
 func (*binaryClassCmdVoidOutF32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF32_In(e, obj.(*CmdVoidOutF32_In))
 }
@@ -3743,7 +3825,8 @@ func doSkipCmdVoidOutF32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutF32_Out) ID() binary.ID { return binaryIDCmdVoidOutF32_Out }
+func (*binaryClassCmdVoidOutF32_Out) ID() binary.ID      { return binaryIDCmdVoidOutF32_Out }
+func (*binaryClassCmdVoidOutF32_Out) New() binary.Object { return &CmdVoidOutF32_Out{} }
 func (*binaryClassCmdVoidOutF32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF32_Out(e, obj.(*CmdVoidOutF32_Out))
 }
@@ -3799,7 +3882,8 @@ func doSkipCmdVoidOutF64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutF64) ID() binary.ID { return binaryIDCmdVoidOutF64 }
+func (*binaryClassCmdVoidOutF64) ID() binary.ID      { return binaryIDCmdVoidOutF64 }
+func (*binaryClassCmdVoidOutF64) New() binary.Object { return &CmdVoidOutF64{} }
 func (*binaryClassCmdVoidOutF64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF64(e, obj.(*CmdVoidOutF64))
 }
@@ -3826,7 +3910,8 @@ func doDecodeCmdVoidOutF64_In(d binary.Decoder, o *CmdVoidOutF64_In) error {
 func doSkipCmdVoidOutF64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutF64_In) ID() binary.ID { return binaryIDCmdVoidOutF64_In }
+func (*binaryClassCmdVoidOutF64_In) ID() binary.ID      { return binaryIDCmdVoidOutF64_In }
+func (*binaryClassCmdVoidOutF64_In) New() binary.Object { return &CmdVoidOutF64_In{} }
 func (*binaryClassCmdVoidOutF64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF64_In(e, obj.(*CmdVoidOutF64_In))
 }
@@ -3864,7 +3949,8 @@ func doSkipCmdVoidOutF64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutF64_Out) ID() binary.ID { return binaryIDCmdVoidOutF64_Out }
+func (*binaryClassCmdVoidOutF64_Out) ID() binary.ID      { return binaryIDCmdVoidOutF64_Out }
+func (*binaryClassCmdVoidOutF64_Out) New() binary.Object { return &CmdVoidOutF64_Out{} }
 func (*binaryClassCmdVoidOutF64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutF64_Out(e, obj.(*CmdVoidOutF64_Out))
 }
@@ -3920,7 +4006,8 @@ func doSkipCmdVoidOutFixedSizeBuffer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutFixedSizeBuffer) ID() binary.ID { return binaryIDCmdVoidOutFixedSizeBuffer }
+func (*binaryClassCmdVoidOutFixedSizeBuffer) ID() binary.ID      { return binaryIDCmdVoidOutFixedSizeBuffer }
+func (*binaryClassCmdVoidOutFixedSizeBuffer) New() binary.Object { return &CmdVoidOutFixedSizeBuffer{} }
 func (*binaryClassCmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutFixedSizeBuffer(e, obj.(*CmdVoidOutFixedSizeBuffer))
 }
@@ -3951,6 +4038,9 @@ func doSkipCmdVoidOutFixedSizeBuffer_In(d binary.Decoder) error {
 }
 func (*binaryClassCmdVoidOutFixedSizeBuffer_In) ID() binary.ID {
 	return binaryIDCmdVoidOutFixedSizeBuffer_In
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_In) New() binary.Object {
+	return &CmdVoidOutFixedSizeBuffer_In{}
 }
 func (*binaryClassCmdVoidOutFixedSizeBuffer_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutFixedSizeBuffer_In(e, obj.(*CmdVoidOutFixedSizeBuffer_In))
@@ -3993,6 +4083,9 @@ func doSkipCmdVoidOutFixedSizeBuffer_Out(d binary.Decoder) error {
 }
 func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) ID() binary.ID {
 	return binaryIDCmdVoidOutFixedSizeBuffer_Out
+}
+func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) New() binary.Object {
+	return &CmdVoidOutFixedSizeBuffer_Out{}
 }
 func (*binaryClassCmdVoidOutFixedSizeBuffer_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutFixedSizeBuffer_Out(e, obj.(*CmdVoidOutFixedSizeBuffer_Out))
@@ -4051,7 +4144,8 @@ func doSkipCmdVoidOutS16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS16) ID() binary.ID { return binaryIDCmdVoidOutS16 }
+func (*binaryClassCmdVoidOutS16) ID() binary.ID      { return binaryIDCmdVoidOutS16 }
+func (*binaryClassCmdVoidOutS16) New() binary.Object { return &CmdVoidOutS16{} }
 func (*binaryClassCmdVoidOutS16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS16(e, obj.(*CmdVoidOutS16))
 }
@@ -4078,7 +4172,8 @@ func doDecodeCmdVoidOutS16_In(d binary.Decoder, o *CmdVoidOutS16_In) error {
 func doSkipCmdVoidOutS16_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutS16_In) ID() binary.ID { return binaryIDCmdVoidOutS16_In }
+func (*binaryClassCmdVoidOutS16_In) ID() binary.ID      { return binaryIDCmdVoidOutS16_In }
+func (*binaryClassCmdVoidOutS16_In) New() binary.Object { return &CmdVoidOutS16_In{} }
 func (*binaryClassCmdVoidOutS16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS16_In(e, obj.(*CmdVoidOutS16_In))
 }
@@ -4116,7 +4211,8 @@ func doSkipCmdVoidOutS16_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS16_Out) ID() binary.ID { return binaryIDCmdVoidOutS16_Out }
+func (*binaryClassCmdVoidOutS16_Out) ID() binary.ID      { return binaryIDCmdVoidOutS16_Out }
+func (*binaryClassCmdVoidOutS16_Out) New() binary.Object { return &CmdVoidOutS16_Out{} }
 func (*binaryClassCmdVoidOutS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS16_Out(e, obj.(*CmdVoidOutS16_Out))
 }
@@ -4172,7 +4268,8 @@ func doSkipCmdVoidOutS32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS32) ID() binary.ID { return binaryIDCmdVoidOutS32 }
+func (*binaryClassCmdVoidOutS32) ID() binary.ID      { return binaryIDCmdVoidOutS32 }
+func (*binaryClassCmdVoidOutS32) New() binary.Object { return &CmdVoidOutS32{} }
 func (*binaryClassCmdVoidOutS32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS32(e, obj.(*CmdVoidOutS32))
 }
@@ -4199,7 +4296,8 @@ func doDecodeCmdVoidOutS32_In(d binary.Decoder, o *CmdVoidOutS32_In) error {
 func doSkipCmdVoidOutS32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutS32_In) ID() binary.ID { return binaryIDCmdVoidOutS32_In }
+func (*binaryClassCmdVoidOutS32_In) ID() binary.ID      { return binaryIDCmdVoidOutS32_In }
+func (*binaryClassCmdVoidOutS32_In) New() binary.Object { return &CmdVoidOutS32_In{} }
 func (*binaryClassCmdVoidOutS32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS32_In(e, obj.(*CmdVoidOutS32_In))
 }
@@ -4237,7 +4335,8 @@ func doSkipCmdVoidOutS32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS32_Out) ID() binary.ID { return binaryIDCmdVoidOutS32_Out }
+func (*binaryClassCmdVoidOutS32_Out) ID() binary.ID      { return binaryIDCmdVoidOutS32_Out }
+func (*binaryClassCmdVoidOutS32_Out) New() binary.Object { return &CmdVoidOutS32_Out{} }
 func (*binaryClassCmdVoidOutS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS32_Out(e, obj.(*CmdVoidOutS32_Out))
 }
@@ -4293,7 +4392,8 @@ func doSkipCmdVoidOutS64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS64) ID() binary.ID { return binaryIDCmdVoidOutS64 }
+func (*binaryClassCmdVoidOutS64) ID() binary.ID      { return binaryIDCmdVoidOutS64 }
+func (*binaryClassCmdVoidOutS64) New() binary.Object { return &CmdVoidOutS64{} }
 func (*binaryClassCmdVoidOutS64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS64(e, obj.(*CmdVoidOutS64))
 }
@@ -4320,7 +4420,8 @@ func doDecodeCmdVoidOutS64_In(d binary.Decoder, o *CmdVoidOutS64_In) error {
 func doSkipCmdVoidOutS64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutS64_In) ID() binary.ID { return binaryIDCmdVoidOutS64_In }
+func (*binaryClassCmdVoidOutS64_In) ID() binary.ID      { return binaryIDCmdVoidOutS64_In }
+func (*binaryClassCmdVoidOutS64_In) New() binary.Object { return &CmdVoidOutS64_In{} }
 func (*binaryClassCmdVoidOutS64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS64_In(e, obj.(*CmdVoidOutS64_In))
 }
@@ -4358,7 +4459,8 @@ func doSkipCmdVoidOutS64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS64_Out) ID() binary.ID { return binaryIDCmdVoidOutS64_Out }
+func (*binaryClassCmdVoidOutS64_Out) ID() binary.ID      { return binaryIDCmdVoidOutS64_Out }
+func (*binaryClassCmdVoidOutS64_Out) New() binary.Object { return &CmdVoidOutS64_Out{} }
 func (*binaryClassCmdVoidOutS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS64_Out(e, obj.(*CmdVoidOutS64_Out))
 }
@@ -4414,7 +4516,8 @@ func doSkipCmdVoidOutS8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS8) ID() binary.ID { return binaryIDCmdVoidOutS8 }
+func (*binaryClassCmdVoidOutS8) ID() binary.ID      { return binaryIDCmdVoidOutS8 }
+func (*binaryClassCmdVoidOutS8) New() binary.Object { return &CmdVoidOutS8{} }
 func (*binaryClassCmdVoidOutS8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS8(e, obj.(*CmdVoidOutS8))
 }
@@ -4441,7 +4544,8 @@ func doDecodeCmdVoidOutS8_In(d binary.Decoder, o *CmdVoidOutS8_In) error {
 func doSkipCmdVoidOutS8_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutS8_In) ID() binary.ID { return binaryIDCmdVoidOutS8_In }
+func (*binaryClassCmdVoidOutS8_In) ID() binary.ID      { return binaryIDCmdVoidOutS8_In }
+func (*binaryClassCmdVoidOutS8_In) New() binary.Object { return &CmdVoidOutS8_In{} }
 func (*binaryClassCmdVoidOutS8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS8_In(e, obj.(*CmdVoidOutS8_In))
 }
@@ -4479,7 +4583,8 @@ func doSkipCmdVoidOutS8_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutS8_Out) ID() binary.ID { return binaryIDCmdVoidOutS8_Out }
+func (*binaryClassCmdVoidOutS8_Out) ID() binary.ID      { return binaryIDCmdVoidOutS8_Out }
+func (*binaryClassCmdVoidOutS8_Out) New() binary.Object { return &CmdVoidOutS8_Out{} }
 func (*binaryClassCmdVoidOutS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutS8_Out(e, obj.(*CmdVoidOutS8_Out))
 }
@@ -4535,7 +4640,8 @@ func doSkipCmdVoidOutString(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutString) ID() binary.ID { return binaryIDCmdVoidOutString }
+func (*binaryClassCmdVoidOutString) ID() binary.ID      { return binaryIDCmdVoidOutString }
+func (*binaryClassCmdVoidOutString) New() binary.Object { return &CmdVoidOutString{} }
 func (*binaryClassCmdVoidOutString) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutString(e, obj.(*CmdVoidOutString))
 }
@@ -4562,7 +4668,8 @@ func doDecodeCmdVoidOutString_In(d binary.Decoder, o *CmdVoidOutString_In) error
 func doSkipCmdVoidOutString_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutString_In) ID() binary.ID { return binaryIDCmdVoidOutString_In }
+func (*binaryClassCmdVoidOutString_In) ID() binary.ID      { return binaryIDCmdVoidOutString_In }
+func (*binaryClassCmdVoidOutString_In) New() binary.Object { return &CmdVoidOutString_In{} }
 func (*binaryClassCmdVoidOutString_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutString_In(e, obj.(*CmdVoidOutString_In))
 }
@@ -4602,7 +4709,8 @@ func doSkipCmdVoidOutString_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutString_Out) ID() binary.ID { return binaryIDCmdVoidOutString_Out }
+func (*binaryClassCmdVoidOutString_Out) ID() binary.ID      { return binaryIDCmdVoidOutString_Out }
+func (*binaryClassCmdVoidOutString_Out) New() binary.Object { return &CmdVoidOutString_Out{} }
 func (*binaryClassCmdVoidOutString_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutString_Out(e, obj.(*CmdVoidOutString_Out))
 }
@@ -4660,7 +4768,8 @@ func doSkipCmdVoidOutU16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU16) ID() binary.ID { return binaryIDCmdVoidOutU16 }
+func (*binaryClassCmdVoidOutU16) ID() binary.ID      { return binaryIDCmdVoidOutU16 }
+func (*binaryClassCmdVoidOutU16) New() binary.Object { return &CmdVoidOutU16{} }
 func (*binaryClassCmdVoidOutU16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU16(e, obj.(*CmdVoidOutU16))
 }
@@ -4687,7 +4796,8 @@ func doDecodeCmdVoidOutU16_In(d binary.Decoder, o *CmdVoidOutU16_In) error {
 func doSkipCmdVoidOutU16_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutU16_In) ID() binary.ID { return binaryIDCmdVoidOutU16_In }
+func (*binaryClassCmdVoidOutU16_In) ID() binary.ID      { return binaryIDCmdVoidOutU16_In }
+func (*binaryClassCmdVoidOutU16_In) New() binary.Object { return &CmdVoidOutU16_In{} }
 func (*binaryClassCmdVoidOutU16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU16_In(e, obj.(*CmdVoidOutU16_In))
 }
@@ -4725,7 +4835,8 @@ func doSkipCmdVoidOutU16_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU16_Out) ID() binary.ID { return binaryIDCmdVoidOutU16_Out }
+func (*binaryClassCmdVoidOutU16_Out) ID() binary.ID      { return binaryIDCmdVoidOutU16_Out }
+func (*binaryClassCmdVoidOutU16_Out) New() binary.Object { return &CmdVoidOutU16_Out{} }
 func (*binaryClassCmdVoidOutU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU16_Out(e, obj.(*CmdVoidOutU16_Out))
 }
@@ -4781,7 +4892,8 @@ func doSkipCmdVoidOutU32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU32) ID() binary.ID { return binaryIDCmdVoidOutU32 }
+func (*binaryClassCmdVoidOutU32) ID() binary.ID      { return binaryIDCmdVoidOutU32 }
+func (*binaryClassCmdVoidOutU32) New() binary.Object { return &CmdVoidOutU32{} }
 func (*binaryClassCmdVoidOutU32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU32(e, obj.(*CmdVoidOutU32))
 }
@@ -4808,7 +4920,8 @@ func doDecodeCmdVoidOutU32_In(d binary.Decoder, o *CmdVoidOutU32_In) error {
 func doSkipCmdVoidOutU32_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutU32_In) ID() binary.ID { return binaryIDCmdVoidOutU32_In }
+func (*binaryClassCmdVoidOutU32_In) ID() binary.ID      { return binaryIDCmdVoidOutU32_In }
+func (*binaryClassCmdVoidOutU32_In) New() binary.Object { return &CmdVoidOutU32_In{} }
 func (*binaryClassCmdVoidOutU32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU32_In(e, obj.(*CmdVoidOutU32_In))
 }
@@ -4846,7 +4959,8 @@ func doSkipCmdVoidOutU32_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU32_Out) ID() binary.ID { return binaryIDCmdVoidOutU32_Out }
+func (*binaryClassCmdVoidOutU32_Out) ID() binary.ID      { return binaryIDCmdVoidOutU32_Out }
+func (*binaryClassCmdVoidOutU32_Out) New() binary.Object { return &CmdVoidOutU32_Out{} }
 func (*binaryClassCmdVoidOutU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU32_Out(e, obj.(*CmdVoidOutU32_Out))
 }
@@ -4902,7 +5016,8 @@ func doSkipCmdVoidOutU64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU64) ID() binary.ID { return binaryIDCmdVoidOutU64 }
+func (*binaryClassCmdVoidOutU64) ID() binary.ID      { return binaryIDCmdVoidOutU64 }
+func (*binaryClassCmdVoidOutU64) New() binary.Object { return &CmdVoidOutU64{} }
 func (*binaryClassCmdVoidOutU64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU64(e, obj.(*CmdVoidOutU64))
 }
@@ -4929,7 +5044,8 @@ func doDecodeCmdVoidOutU64_In(d binary.Decoder, o *CmdVoidOutU64_In) error {
 func doSkipCmdVoidOutU64_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutU64_In) ID() binary.ID { return binaryIDCmdVoidOutU64_In }
+func (*binaryClassCmdVoidOutU64_In) ID() binary.ID      { return binaryIDCmdVoidOutU64_In }
+func (*binaryClassCmdVoidOutU64_In) New() binary.Object { return &CmdVoidOutU64_In{} }
 func (*binaryClassCmdVoidOutU64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU64_In(e, obj.(*CmdVoidOutU64_In))
 }
@@ -4967,7 +5083,8 @@ func doSkipCmdVoidOutU64_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU64_Out) ID() binary.ID { return binaryIDCmdVoidOutU64_Out }
+func (*binaryClassCmdVoidOutU64_Out) ID() binary.ID      { return binaryIDCmdVoidOutU64_Out }
+func (*binaryClassCmdVoidOutU64_Out) New() binary.Object { return &CmdVoidOutU64_Out{} }
 func (*binaryClassCmdVoidOutU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU64_Out(e, obj.(*CmdVoidOutU64_Out))
 }
@@ -5023,7 +5140,8 @@ func doSkipCmdVoidOutU8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU8) ID() binary.ID { return binaryIDCmdVoidOutU8 }
+func (*binaryClassCmdVoidOutU8) ID() binary.ID      { return binaryIDCmdVoidOutU8 }
+func (*binaryClassCmdVoidOutU8) New() binary.Object { return &CmdVoidOutU8{} }
 func (*binaryClassCmdVoidOutU8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU8(e, obj.(*CmdVoidOutU8))
 }
@@ -5050,7 +5168,8 @@ func doDecodeCmdVoidOutU8_In(d binary.Decoder, o *CmdVoidOutU8_In) error {
 func doSkipCmdVoidOutU8_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidOutU8_In) ID() binary.ID { return binaryIDCmdVoidOutU8_In }
+func (*binaryClassCmdVoidOutU8_In) ID() binary.ID      { return binaryIDCmdVoidOutU8_In }
+func (*binaryClassCmdVoidOutU8_In) New() binary.Object { return &CmdVoidOutU8_In{} }
 func (*binaryClassCmdVoidOutU8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU8_In(e, obj.(*CmdVoidOutU8_In))
 }
@@ -5088,7 +5207,8 @@ func doSkipCmdVoidOutU8_Out(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU8_Out) ID() binary.ID { return binaryIDCmdVoidOutU8_Out }
+func (*binaryClassCmdVoidOutU8_Out) ID() binary.ID      { return binaryIDCmdVoidOutU8_Out }
+func (*binaryClassCmdVoidOutU8_Out) New() binary.Object { return &CmdVoidOutU8_Out{} }
 func (*binaryClassCmdVoidOutU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidOutU8_Out(e, obj.(*CmdVoidOutU8_Out))
 }
@@ -5144,7 +5264,8 @@ func doSkipCmdVoidS16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS16) ID() binary.ID { return binaryIDCmdVoidS16 }
+func (*binaryClassCmdVoidS16) ID() binary.ID      { return binaryIDCmdVoidS16 }
+func (*binaryClassCmdVoidS16) New() binary.Object { return &CmdVoidS16{} }
 func (*binaryClassCmdVoidS16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS16(e, obj.(*CmdVoidS16))
 }
@@ -5182,7 +5303,8 @@ func doSkipCmdVoidS16_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS16_In) ID() binary.ID { return binaryIDCmdVoidS16_In }
+func (*binaryClassCmdVoidS16_In) ID() binary.ID      { return binaryIDCmdVoidS16_In }
+func (*binaryClassCmdVoidS16_In) New() binary.Object { return &CmdVoidS16_In{} }
 func (*binaryClassCmdVoidS16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS16_In(e, obj.(*CmdVoidS16_In))
 }
@@ -5209,7 +5331,8 @@ func doDecodeCmdVoidS16_Out(d binary.Decoder, o *CmdVoidS16_Out) error {
 func doSkipCmdVoidS16_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidS16_Out) ID() binary.ID { return binaryIDCmdVoidS16_Out }
+func (*binaryClassCmdVoidS16_Out) ID() binary.ID      { return binaryIDCmdVoidS16_Out }
+func (*binaryClassCmdVoidS16_Out) New() binary.Object { return &CmdVoidS16_Out{} }
 func (*binaryClassCmdVoidS16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS16_Out(e, obj.(*CmdVoidS16_Out))
 }
@@ -5265,7 +5388,8 @@ func doSkipCmdVoidS32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS32) ID() binary.ID { return binaryIDCmdVoidS32 }
+func (*binaryClassCmdVoidS32) ID() binary.ID      { return binaryIDCmdVoidS32 }
+func (*binaryClassCmdVoidS32) New() binary.Object { return &CmdVoidS32{} }
 func (*binaryClassCmdVoidS32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS32(e, obj.(*CmdVoidS32))
 }
@@ -5303,7 +5427,8 @@ func doSkipCmdVoidS32_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS32_In) ID() binary.ID { return binaryIDCmdVoidS32_In }
+func (*binaryClassCmdVoidS32_In) ID() binary.ID      { return binaryIDCmdVoidS32_In }
+func (*binaryClassCmdVoidS32_In) New() binary.Object { return &CmdVoidS32_In{} }
 func (*binaryClassCmdVoidS32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS32_In(e, obj.(*CmdVoidS32_In))
 }
@@ -5330,7 +5455,8 @@ func doDecodeCmdVoidS32_Out(d binary.Decoder, o *CmdVoidS32_Out) error {
 func doSkipCmdVoidS32_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidS32_Out) ID() binary.ID { return binaryIDCmdVoidS32_Out }
+func (*binaryClassCmdVoidS32_Out) ID() binary.ID      { return binaryIDCmdVoidS32_Out }
+func (*binaryClassCmdVoidS32_Out) New() binary.Object { return &CmdVoidS32_Out{} }
 func (*binaryClassCmdVoidS32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS32_Out(e, obj.(*CmdVoidS32_Out))
 }
@@ -5386,7 +5512,8 @@ func doSkipCmdVoidS64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS64) ID() binary.ID { return binaryIDCmdVoidS64 }
+func (*binaryClassCmdVoidS64) ID() binary.ID      { return binaryIDCmdVoidS64 }
+func (*binaryClassCmdVoidS64) New() binary.Object { return &CmdVoidS64{} }
 func (*binaryClassCmdVoidS64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS64(e, obj.(*CmdVoidS64))
 }
@@ -5424,7 +5551,8 @@ func doSkipCmdVoidS64_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS64_In) ID() binary.ID { return binaryIDCmdVoidS64_In }
+func (*binaryClassCmdVoidS64_In) ID() binary.ID      { return binaryIDCmdVoidS64_In }
+func (*binaryClassCmdVoidS64_In) New() binary.Object { return &CmdVoidS64_In{} }
 func (*binaryClassCmdVoidS64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS64_In(e, obj.(*CmdVoidS64_In))
 }
@@ -5451,7 +5579,8 @@ func doDecodeCmdVoidS64_Out(d binary.Decoder, o *CmdVoidS64_Out) error {
 func doSkipCmdVoidS64_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidS64_Out) ID() binary.ID { return binaryIDCmdVoidS64_Out }
+func (*binaryClassCmdVoidS64_Out) ID() binary.ID      { return binaryIDCmdVoidS64_Out }
+func (*binaryClassCmdVoidS64_Out) New() binary.Object { return &CmdVoidS64_Out{} }
 func (*binaryClassCmdVoidS64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS64_Out(e, obj.(*CmdVoidS64_Out))
 }
@@ -5507,7 +5636,8 @@ func doSkipCmdVoidS8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS8) ID() binary.ID { return binaryIDCmdVoidS8 }
+func (*binaryClassCmdVoidS8) ID() binary.ID      { return binaryIDCmdVoidS8 }
+func (*binaryClassCmdVoidS8) New() binary.Object { return &CmdVoidS8{} }
 func (*binaryClassCmdVoidS8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS8(e, obj.(*CmdVoidS8))
 }
@@ -5545,7 +5675,8 @@ func doSkipCmdVoidS8_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidS8_In) ID() binary.ID { return binaryIDCmdVoidS8_In }
+func (*binaryClassCmdVoidS8_In) ID() binary.ID      { return binaryIDCmdVoidS8_In }
+func (*binaryClassCmdVoidS8_In) New() binary.Object { return &CmdVoidS8_In{} }
 func (*binaryClassCmdVoidS8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS8_In(e, obj.(*CmdVoidS8_In))
 }
@@ -5572,7 +5703,8 @@ func doDecodeCmdVoidS8_Out(d binary.Decoder, o *CmdVoidS8_Out) error {
 func doSkipCmdVoidS8_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidS8_Out) ID() binary.ID { return binaryIDCmdVoidS8_Out }
+func (*binaryClassCmdVoidS8_Out) ID() binary.ID      { return binaryIDCmdVoidS8_Out }
+func (*binaryClassCmdVoidS8_Out) New() binary.Object { return &CmdVoidS8_Out{} }
 func (*binaryClassCmdVoidS8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidS8_Out(e, obj.(*CmdVoidS8_Out))
 }
@@ -5628,7 +5760,8 @@ func doSkipCmdVoidString(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidString) ID() binary.ID { return binaryIDCmdVoidString }
+func (*binaryClassCmdVoidString) ID() binary.ID      { return binaryIDCmdVoidString }
+func (*binaryClassCmdVoidString) New() binary.Object { return &CmdVoidString{} }
 func (*binaryClassCmdVoidString) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidString(e, obj.(*CmdVoidString))
 }
@@ -5666,7 +5799,8 @@ func doSkipCmdVoidString_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidString_In) ID() binary.ID { return binaryIDCmdVoidString_In }
+func (*binaryClassCmdVoidString_In) ID() binary.ID      { return binaryIDCmdVoidString_In }
+func (*binaryClassCmdVoidString_In) New() binary.Object { return &CmdVoidString_In{} }
 func (*binaryClassCmdVoidString_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidString_In(e, obj.(*CmdVoidString_In))
 }
@@ -5693,7 +5827,8 @@ func doDecodeCmdVoidString_Out(d binary.Decoder, o *CmdVoidString_Out) error {
 func doSkipCmdVoidString_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidString_Out) ID() binary.ID { return binaryIDCmdVoidString_Out }
+func (*binaryClassCmdVoidString_Out) ID() binary.ID      { return binaryIDCmdVoidString_Out }
+func (*binaryClassCmdVoidString_Out) New() binary.Object { return &CmdVoidString_Out{} }
 func (*binaryClassCmdVoidString_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidString_Out(e, obj.(*CmdVoidString_Out))
 }
@@ -5749,7 +5884,8 @@ func doSkipCmdVoidU16(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU16) ID() binary.ID { return binaryIDCmdVoidU16 }
+func (*binaryClassCmdVoidU16) ID() binary.ID      { return binaryIDCmdVoidU16 }
+func (*binaryClassCmdVoidU16) New() binary.Object { return &CmdVoidU16{} }
 func (*binaryClassCmdVoidU16) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU16(e, obj.(*CmdVoidU16))
 }
@@ -5787,7 +5923,8 @@ func doSkipCmdVoidU16_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU16_In) ID() binary.ID { return binaryIDCmdVoidU16_In }
+func (*binaryClassCmdVoidU16_In) ID() binary.ID      { return binaryIDCmdVoidU16_In }
+func (*binaryClassCmdVoidU16_In) New() binary.Object { return &CmdVoidU16_In{} }
 func (*binaryClassCmdVoidU16_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU16_In(e, obj.(*CmdVoidU16_In))
 }
@@ -5814,7 +5951,8 @@ func doDecodeCmdVoidU16_Out(d binary.Decoder, o *CmdVoidU16_Out) error {
 func doSkipCmdVoidU16_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidU16_Out) ID() binary.ID { return binaryIDCmdVoidU16_Out }
+func (*binaryClassCmdVoidU16_Out) ID() binary.ID      { return binaryIDCmdVoidU16_Out }
+func (*binaryClassCmdVoidU16_Out) New() binary.Object { return &CmdVoidU16_Out{} }
 func (*binaryClassCmdVoidU16_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU16_Out(e, obj.(*CmdVoidU16_Out))
 }
@@ -5870,7 +6008,8 @@ func doSkipCmdVoidU32(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU32) ID() binary.ID { return binaryIDCmdVoidU32 }
+func (*binaryClassCmdVoidU32) ID() binary.ID      { return binaryIDCmdVoidU32 }
+func (*binaryClassCmdVoidU32) New() binary.Object { return &CmdVoidU32{} }
 func (*binaryClassCmdVoidU32) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU32(e, obj.(*CmdVoidU32))
 }
@@ -5908,7 +6047,8 @@ func doSkipCmdVoidU32_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU32_In) ID() binary.ID { return binaryIDCmdVoidU32_In }
+func (*binaryClassCmdVoidU32_In) ID() binary.ID      { return binaryIDCmdVoidU32_In }
+func (*binaryClassCmdVoidU32_In) New() binary.Object { return &CmdVoidU32_In{} }
 func (*binaryClassCmdVoidU32_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU32_In(e, obj.(*CmdVoidU32_In))
 }
@@ -5935,7 +6075,8 @@ func doDecodeCmdVoidU32_Out(d binary.Decoder, o *CmdVoidU32_Out) error {
 func doSkipCmdVoidU32_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidU32_Out) ID() binary.ID { return binaryIDCmdVoidU32_Out }
+func (*binaryClassCmdVoidU32_Out) ID() binary.ID      { return binaryIDCmdVoidU32_Out }
+func (*binaryClassCmdVoidU32_Out) New() binary.Object { return &CmdVoidU32_Out{} }
 func (*binaryClassCmdVoidU32_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU32_Out(e, obj.(*CmdVoidU32_Out))
 }
@@ -5991,7 +6132,8 @@ func doSkipCmdVoidU64(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU64) ID() binary.ID { return binaryIDCmdVoidU64 }
+func (*binaryClassCmdVoidU64) ID() binary.ID      { return binaryIDCmdVoidU64 }
+func (*binaryClassCmdVoidU64) New() binary.Object { return &CmdVoidU64{} }
 func (*binaryClassCmdVoidU64) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU64(e, obj.(*CmdVoidU64))
 }
@@ -6029,7 +6171,8 @@ func doSkipCmdVoidU64_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU64_In) ID() binary.ID { return binaryIDCmdVoidU64_In }
+func (*binaryClassCmdVoidU64_In) ID() binary.ID      { return binaryIDCmdVoidU64_In }
+func (*binaryClassCmdVoidU64_In) New() binary.Object { return &CmdVoidU64_In{} }
 func (*binaryClassCmdVoidU64_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU64_In(e, obj.(*CmdVoidU64_In))
 }
@@ -6056,7 +6199,8 @@ func doDecodeCmdVoidU64_Out(d binary.Decoder, o *CmdVoidU64_Out) error {
 func doSkipCmdVoidU64_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidU64_Out) ID() binary.ID { return binaryIDCmdVoidU64_Out }
+func (*binaryClassCmdVoidU64_Out) ID() binary.ID      { return binaryIDCmdVoidU64_Out }
+func (*binaryClassCmdVoidU64_Out) New() binary.Object { return &CmdVoidU64_Out{} }
 func (*binaryClassCmdVoidU64_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU64_Out(e, obj.(*CmdVoidU64_Out))
 }
@@ -6112,7 +6256,8 @@ func doSkipCmdVoidU8(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU8) ID() binary.ID { return binaryIDCmdVoidU8 }
+func (*binaryClassCmdVoidU8) ID() binary.ID      { return binaryIDCmdVoidU8 }
+func (*binaryClassCmdVoidU8) New() binary.Object { return &CmdVoidU8{} }
 func (*binaryClassCmdVoidU8) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU8(e, obj.(*CmdVoidU8))
 }
@@ -6150,7 +6295,8 @@ func doSkipCmdVoidU8_In(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidU8_In) ID() binary.ID { return binaryIDCmdVoidU8_In }
+func (*binaryClassCmdVoidU8_In) ID() binary.ID      { return binaryIDCmdVoidU8_In }
+func (*binaryClassCmdVoidU8_In) New() binary.Object { return &CmdVoidU8_In{} }
 func (*binaryClassCmdVoidU8_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU8_In(e, obj.(*CmdVoidU8_In))
 }
@@ -6177,7 +6323,8 @@ func doDecodeCmdVoidU8_Out(d binary.Decoder, o *CmdVoidU8_Out) error {
 func doSkipCmdVoidU8_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoidU8_Out) ID() binary.ID { return binaryIDCmdVoidU8_Out }
+func (*binaryClassCmdVoidU8_Out) ID() binary.ID      { return binaryIDCmdVoidU8_Out }
+func (*binaryClassCmdVoidU8_Out) New() binary.Object { return &CmdVoidU8_Out{} }
 func (*binaryClassCmdVoidU8_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoidU8_Out(e, obj.(*CmdVoidU8_Out))
 }
@@ -6204,7 +6351,8 @@ func doDecodeCmdVoid_In(d binary.Decoder, o *CmdVoid_In) error {
 func doSkipCmdVoid_In(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoid_In) ID() binary.ID { return binaryIDCmdVoid_In }
+func (*binaryClassCmdVoid_In) ID() binary.ID      { return binaryIDCmdVoid_In }
+func (*binaryClassCmdVoid_In) New() binary.Object { return &CmdVoid_In{} }
 func (*binaryClassCmdVoid_In) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid_In(e, obj.(*CmdVoid_In))
 }
@@ -6231,7 +6379,8 @@ func doDecodeCmdVoid_Out(d binary.Decoder, o *CmdVoid_Out) error {
 func doSkipCmdVoid_Out(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassCmdVoid_Out) ID() binary.ID { return binaryIDCmdVoid_Out }
+func (*binaryClassCmdVoid_Out) ID() binary.ID      { return binaryIDCmdVoid_Out }
+func (*binaryClassCmdVoid_Out) New() binary.Object { return &CmdVoid_Out{} }
 func (*binaryClassCmdVoid_Out) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCmdVoid_Out(e, obj.(*CmdVoid_Out))
 }
@@ -6258,7 +6407,8 @@ func doDecodeGlobals(d binary.Decoder, o *Globals) error {
 func doSkipGlobals(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassGlobals) ID() binary.ID { return binaryIDGlobals }
+func (*binaryClassGlobals) ID() binary.ID      { return binaryIDGlobals }
+func (*binaryClassGlobals) New() binary.Object { return &Globals{} }
 func (*binaryClassGlobals) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGlobals(e, obj.(*Globals))
 }

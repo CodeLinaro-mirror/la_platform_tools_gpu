@@ -125,7 +125,8 @@ func doSkipPayload(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassPayload) ID() binary.ID { return binaryIDPayload }
+func (*binaryClassPayload) ID() binary.ID      { return binaryIDPayload }
+func (*binaryClassPayload) New() binary.Object { return &Payload{} }
 func (*binaryClassPayload) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodePayload(e, obj.(*Payload))
 }
@@ -174,7 +175,8 @@ func doSkipResourceInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassResourceInfo) ID() binary.ID { return binaryIDResourceInfo }
+func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
+func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
 func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeResourceInfo(e, obj.(*ResourceInfo))
 }

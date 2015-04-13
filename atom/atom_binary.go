@@ -41,7 +41,8 @@ func doDecodeEOS(d binary.Decoder, o *EOS) error {
 func doSkipEOS(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassEOS) ID() binary.ID { return binaryIDEOS }
+func (*binaryClassEOS) ID() binary.ID      { return binaryIDEOS }
+func (*binaryClassEOS) New() binary.Object { return &EOS{} }
 func (*binaryClassEOS) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEOS(e, obj.(*EOS))
 }
@@ -115,7 +116,8 @@ func doSkipGroup(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGroup) ID() binary.ID { return binaryIDGroup }
+func (*binaryClassGroup) ID() binary.ID      { return binaryIDGroup }
+func (*binaryClassGroup) New() binary.Object { return &Group{} }
 func (*binaryClassGroup) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGroup(e, obj.(*Group))
 }
@@ -173,7 +175,8 @@ func doSkipObservation(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassObservation) ID() binary.ID { return binaryIDObservation }
+func (*binaryClassObservation) ID() binary.ID      { return binaryIDObservation }
+func (*binaryClassObservation) New() binary.Object { return &Observation{} }
 func (*binaryClassObservation) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeObservation(e, obj.(*Observation))
 }
@@ -222,7 +225,8 @@ func doSkipRange(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRange) ID() binary.ID { return binaryIDRange }
+func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
+func (*binaryClassRange) New() binary.Object { return &Range{} }
 func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRange(e, obj.(*Range))
 }
@@ -281,7 +285,8 @@ func doSkipResource(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassResource) ID() binary.ID { return binaryIDResource }
+func (*binaryClassResource) ID() binary.ID      { return binaryIDResource }
+func (*binaryClassResource) New() binary.Object { return &Resource{} }
 func (*binaryClassResource) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeResource(e, obj.(*Resource))
 }

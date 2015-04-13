@@ -32,7 +32,8 @@ func doDecodeTerminator(d binary.Decoder, o *Terminator) error {
 func doSkipTerminator(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClassTerminator) ID() binary.ID { return TerminatorID }
+func (*binaryClassTerminator) ID() binary.ID      { return TerminatorID }
+func (*binaryClassTerminator) New() binary.Object { return &Terminator{} }
 func (*binaryClassTerminator) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTerminator(e, obj.(*Terminator))
 }

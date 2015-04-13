@@ -58,7 +58,13 @@ func GoFile(file *File) ([]byte, error) {
 	if err := goFile.Execute(b, file); err != nil {
 		return nil, err
 	}
-	result, err := imports.Process("", b.Bytes(), nil)
+	options := &imports.Options{
+		TabWidth:  8,
+		TabIndent: true,
+		Comments:  true,
+		Fragment:  true,
+	}
+	result, err := imports.Process("", b.Bytes(), options)
 	if err != nil {
 		return b.Bytes(), nil
 	}

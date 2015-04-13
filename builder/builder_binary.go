@@ -110,7 +110,8 @@ func doSkipGetFramebufferColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetFramebufferColor) ID() binary.ID { return binaryIDGetFramebufferColor }
+func (*binaryClassGetFramebufferColor) ID() binary.ID      { return binaryIDGetFramebufferColor }
+func (*binaryClassGetFramebufferColor) New() binary.Object { return &GetFramebufferColor{} }
 func (*binaryClassGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetFramebufferColor(e, obj.(*GetFramebufferColor))
 }
@@ -179,7 +180,8 @@ func doSkipGetFramebufferDepth(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetFramebufferDepth) ID() binary.ID { return binaryIDGetFramebufferDepth }
+func (*binaryClassGetFramebufferDepth) ID() binary.ID      { return binaryIDGetFramebufferDepth }
+func (*binaryClassGetFramebufferDepth) New() binary.Object { return &GetFramebufferDepth{} }
 func (*binaryClassGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetFramebufferDepth(e, obj.(*GetFramebufferDepth))
 }
@@ -228,7 +230,8 @@ func doSkipGetHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetHierarchy) ID() binary.ID { return binaryIDGetHierarchy }
+func (*binaryClassGetHierarchy) ID() binary.ID      { return binaryIDGetHierarchy }
+func (*binaryClassGetHierarchy) New() binary.Object { return &GetHierarchy{} }
 func (*binaryClassGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetHierarchy(e, obj.(*GetHierarchy))
 }
@@ -284,7 +287,8 @@ func doSkipGetMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetMemoryInfo) ID() binary.ID { return binaryIDGetMemoryInfo }
+func (*binaryClassGetMemoryInfo) ID() binary.ID      { return binaryIDGetMemoryInfo }
+func (*binaryClassGetMemoryInfo) New() binary.Object { return &GetMemoryInfo{} }
 func (*binaryClassGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetMemoryInfo(e, obj.(*GetMemoryInfo))
 }
@@ -331,7 +335,8 @@ func doSkipGetState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetState) ID() binary.ID { return binaryIDGetState }
+func (*binaryClassGetState) ID() binary.ID      { return binaryIDGetState }
+func (*binaryClassGetState) New() binary.Object { return &GetState{} }
 func (*binaryClassGetState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetState(e, obj.(*GetState))
 }
@@ -398,7 +403,8 @@ func doSkipGetTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassGetTimingInfo) ID() binary.ID { return binaryIDGetTimingInfo }
+func (*binaryClassGetTimingInfo) ID() binary.ID      { return binaryIDGetTimingInfo }
+func (*binaryClassGetTimingInfo) New() binary.Object { return &GetTimingInfo{} }
 func (*binaryClassGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeGetTimingInfo(e, obj.(*GetTimingInfo))
 }
@@ -494,7 +500,8 @@ func doSkipPrerenderFramebuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassPrerenderFramebuffers) ID() binary.ID { return binaryIDPrerenderFramebuffers }
+func (*binaryClassPrerenderFramebuffers) ID() binary.ID      { return binaryIDPrerenderFramebuffers }
+func (*binaryClassPrerenderFramebuffers) New() binary.Object { return &PrerenderFramebuffers{} }
 func (*binaryClassPrerenderFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodePrerenderFramebuffers(e, obj.(*PrerenderFramebuffers))
 }
@@ -596,7 +603,8 @@ func doSkipRenderFramebufferColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRenderFramebufferColor) ID() binary.ID { return binaryIDRenderFramebufferColor }
+func (*binaryClassRenderFramebufferColor) ID() binary.ID      { return binaryIDRenderFramebufferColor }
+func (*binaryClassRenderFramebufferColor) New() binary.Object { return &RenderFramebufferColor{} }
 func (*binaryClassRenderFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRenderFramebufferColor(e, obj.(*RenderFramebufferColor))
 }
@@ -687,7 +695,8 @@ func doSkipRenderFramebufferDepth(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRenderFramebufferDepth) ID() binary.ID { return binaryIDRenderFramebufferDepth }
+func (*binaryClassRenderFramebufferDepth) ID() binary.ID      { return binaryIDRenderFramebufferDepth }
+func (*binaryClassRenderFramebufferDepth) New() binary.Object { return &RenderFramebufferDepth{} }
 func (*binaryClassRenderFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRenderFramebufferDepth(e, obj.(*RenderFramebufferDepth))
 }
@@ -756,7 +765,8 @@ func doSkipReplaceAtom(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassReplaceAtom) ID() binary.ID { return binaryIDReplaceAtom }
+func (*binaryClassReplaceAtom) ID() binary.ID      { return binaryIDReplaceAtom }
+func (*binaryClassReplaceAtom) New() binary.Object { return &ReplaceAtom{} }
 func (*binaryClassReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeReplaceAtom(e, obj.(*ReplaceAtom))
 }
@@ -816,7 +826,8 @@ func doSkipatomFramebufferDimensions(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassatomFramebufferDimensions) ID() binary.ID { return binaryIDatomFramebufferDimensions }
+func (*binaryClassatomFramebufferDimensions) ID() binary.ID      { return binaryIDatomFramebufferDimensions }
+func (*binaryClassatomFramebufferDimensions) New() binary.Object { return &atomFramebufferDimensions{} }
 func (*binaryClassatomFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeatomFramebufferDimensions(e, obj.(*atomFramebufferDimensions))
 }
@@ -875,6 +886,9 @@ func doSkipcaptureFramebufferDimensions(d binary.Decoder) error {
 func (*binaryClasscaptureFramebufferDimensions) ID() binary.ID {
 	return binaryIDcaptureFramebufferDimensions
 }
+func (*binaryClasscaptureFramebufferDimensions) New() binary.Object {
+	return &captureFramebufferDimensions{}
+}
 func (*binaryClasscaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecaptureFramebufferDimensions(e, obj.(*captureFramebufferDimensions))
 }
@@ -930,7 +944,8 @@ func doSkipcaptures(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscaptures) ID() binary.ID { return binaryIDcaptures }
+func (*binaryClasscaptures) ID() binary.ID      { return binaryIDcaptures }
+func (*binaryClasscaptures) New() binary.Object { return &captures{} }
 func (*binaryClasscaptures) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecaptures(e, obj.(*captures))
 }
@@ -979,6 +994,9 @@ func doSkipgetCaptureFramebufferDimensions(d binary.Decoder) error {
 }
 func (*binaryClassgetCaptureFramebufferDimensions) ID() binary.ID {
 	return binaryIDgetCaptureFramebufferDimensions
+}
+func (*binaryClassgetCaptureFramebufferDimensions) New() binary.Object {
+	return &getCaptureFramebufferDimensions{}
 }
 func (*binaryClassgetCaptureFramebufferDimensions) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodegetCaptureFramebufferDimensions(e, obj.(*getCaptureFramebufferDimensions))

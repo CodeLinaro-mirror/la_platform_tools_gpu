@@ -197,7 +197,8 @@ func doSkipApiId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassApiId) ID() binary.ID { return binaryIDApiId }
+func (*binaryClassApiId) ID() binary.ID      { return binaryIDApiId }
+func (*binaryClassApiId) New() binary.Object { return &ApiId{} }
 func (*binaryClassApiId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeApiId(e, obj.(*ApiId))
 }
@@ -242,7 +243,8 @@ func doSkipApiSchema(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassApiSchema) ID() binary.ID { return binaryIDApiSchema }
+func (*binaryClassApiSchema) ID() binary.ID      { return binaryIDApiSchema }
+func (*binaryClassApiSchema) New() binary.Object { return &ApiSchema{} }
 func (*binaryClassApiSchema) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeApiSchema(e, obj.(*ApiSchema))
 }
@@ -308,7 +310,8 @@ func doSkipArrayInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassArrayInfo) ID() binary.ID { return binaryIDArrayInfo }
+func (*binaryClassArrayInfo) ID() binary.ID      { return binaryIDArrayInfo }
+func (*binaryClassArrayInfo) New() binary.Object { return &ArrayInfo{} }
 func (*binaryClassArrayInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeArrayInfo(e, obj.(*ArrayInfo))
 }
@@ -355,7 +358,8 @@ func doSkipAtomContext(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomContext) ID() binary.ID { return binaryIDAtomContext }
+func (*binaryClassAtomContext) ID() binary.ID      { return binaryIDAtomContext }
+func (*binaryClassAtomContext) New() binary.Object { return &AtomContext{} }
 func (*binaryClassAtomContext) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomContext(e, obj.(*AtomContext))
 }
@@ -429,7 +433,8 @@ func doSkipAtomGroup(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomGroup) ID() binary.ID { return binaryIDAtomGroup }
+func (*binaryClassAtomGroup) ID() binary.ID      { return binaryIDAtomGroup }
+func (*binaryClassAtomGroup) New() binary.Object { return &AtomGroup{} }
 func (*binaryClassAtomGroup) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomGroup(e, obj.(*AtomGroup))
 }
@@ -549,7 +554,8 @@ func doSkipAtomInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomInfo) ID() binary.ID { return binaryIDAtomInfo }
+func (*binaryClassAtomInfo) ID() binary.ID      { return binaryIDAtomInfo }
+func (*binaryClassAtomInfo) New() binary.Object { return &AtomInfo{} }
 func (*binaryClassAtomInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomInfo(e, obj.(*AtomInfo))
 }
@@ -598,7 +604,8 @@ func doSkipAtomRange(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomRange) ID() binary.ID { return binaryIDAtomRange }
+func (*binaryClassAtomRange) ID() binary.ID      { return binaryIDAtomRange }
+func (*binaryClassAtomRange) New() binary.Object { return &AtomRange{} }
 func (*binaryClassAtomRange) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomRange(e, obj.(*AtomRange))
 }
@@ -658,7 +665,8 @@ func doSkipAtomRangeTimer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomRangeTimer) ID() binary.ID { return binaryIDAtomRangeTimer }
+func (*binaryClassAtomRangeTimer) ID() binary.ID      { return binaryIDAtomRangeTimer }
+func (*binaryClassAtomRangeTimer) New() binary.Object { return &AtomRangeTimer{} }
 func (*binaryClassAtomRangeTimer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomRangeTimer(e, obj.(*AtomRangeTimer))
 }
@@ -706,7 +714,8 @@ func doSkipAtomStream(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomStream) ID() binary.ID { return binaryIDAtomStream }
+func (*binaryClassAtomStream) ID() binary.ID      { return binaryIDAtomStream }
+func (*binaryClassAtomStream) New() binary.Object { return &AtomStream{} }
 func (*binaryClassAtomStream) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomStream(e, obj.(*AtomStream))
 }
@@ -744,7 +753,8 @@ func doSkipAtomStreamId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomStreamId) ID() binary.ID { return binaryIDAtomStreamId }
+func (*binaryClassAtomStreamId) ID() binary.ID      { return binaryIDAtomStreamId }
+func (*binaryClassAtomStreamId) New() binary.Object { return &AtomStreamId{} }
 func (*binaryClassAtomStreamId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomStreamId(e, obj.(*AtomStreamId))
 }
@@ -793,7 +803,8 @@ func doSkipAtomTimer(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomTimer) ID() binary.ID { return binaryIDAtomTimer }
+func (*binaryClassAtomTimer) ID() binary.ID      { return binaryIDAtomTimer }
+func (*binaryClassAtomTimer) New() binary.Object { return &AtomTimer{} }
 func (*binaryClassAtomTimer) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomTimer(e, obj.(*AtomTimer))
 }
@@ -841,7 +852,8 @@ func doSkipBinary(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassBinary) ID() binary.ID { return binaryIDBinary }
+func (*binaryClassBinary) ID() binary.ID      { return binaryIDBinary }
+func (*binaryClassBinary) New() binary.Object { return &Binary{} }
 func (*binaryClassBinary) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeBinary(e, obj.(*Binary))
 }
@@ -879,7 +891,8 @@ func doSkipBinaryId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassBinaryId) ID() binary.ID { return binaryIDBinaryId }
+func (*binaryClassBinaryId) ID() binary.ID      { return binaryIDBinaryId }
+func (*binaryClassBinaryId) New() binary.Object { return &BinaryId{} }
 func (*binaryClassBinaryId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeBinaryId(e, obj.(*BinaryId))
 }
@@ -962,7 +975,8 @@ func doSkipCapture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCapture) ID() binary.ID { return binaryIDCapture }
+func (*binaryClassCapture) ID() binary.ID      { return binaryIDCapture }
+func (*binaryClassCapture) New() binary.Object { return &Capture{} }
 func (*binaryClassCapture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCapture(e, obj.(*Capture))
 }
@@ -1000,7 +1014,8 @@ func doSkipCaptureId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCaptureId) ID() binary.ID { return binaryIDCaptureId }
+func (*binaryClassCaptureId) ID() binary.ID      { return binaryIDCaptureId }
+func (*binaryClassCaptureId) New() binary.Object { return &CaptureId{} }
 func (*binaryClassCaptureId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeCaptureId(e, obj.(*CaptureId))
 }
@@ -1119,7 +1134,8 @@ func doSkipClassInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassClassInfo) ID() binary.ID { return binaryIDClassInfo }
+func (*binaryClassClassInfo) ID() binary.ID      { return binaryIDClassInfo }
+func (*binaryClassClassInfo) New() binary.Object { return &ClassInfo{} }
 func (*binaryClassClassInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeClassInfo(e, obj.(*ClassInfo))
 }
@@ -1223,7 +1239,8 @@ func doSkipDevice(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassDevice) ID() binary.ID { return binaryIDDevice }
+func (*binaryClassDevice) ID() binary.ID      { return binaryIDDevice }
+func (*binaryClassDevice) New() binary.Object { return &Device{} }
 func (*binaryClassDevice) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeDevice(e, obj.(*Device))
 }
@@ -1261,7 +1278,8 @@ func doSkipDeviceId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassDeviceId) ID() binary.ID { return binaryIDDeviceId }
+func (*binaryClassDeviceId) ID() binary.ID      { return binaryIDDeviceId }
+func (*binaryClassDeviceId) New() binary.Object { return &DeviceId{} }
 func (*binaryClassDeviceId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeDeviceId(e, obj.(*DeviceId))
 }
@@ -1310,7 +1328,8 @@ func doSkipEnumEntry(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEnumEntry) ID() binary.ID { return binaryIDEnumEntry }
+func (*binaryClassEnumEntry) ID() binary.ID      { return binaryIDEnumEntry }
+func (*binaryClassEnumEntry) New() binary.Object { return &EnumEntry{} }
 func (*binaryClassEnumEntry) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEnumEntry(e, obj.(*EnumEntry))
 }
@@ -1421,7 +1440,8 @@ func doSkipEnumInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassEnumInfo) ID() binary.ID { return binaryIDEnumInfo }
+func (*binaryClassEnumInfo) ID() binary.ID      { return binaryIDEnumInfo }
+func (*binaryClassEnumInfo) New() binary.Object { return &EnumInfo{} }
 func (*binaryClassEnumInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeEnumInfo(e, obj.(*EnumInfo))
 }
@@ -1476,7 +1496,8 @@ func doSkipFieldInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassFieldInfo) ID() binary.ID { return binaryIDFieldInfo }
+func (*binaryClassFieldInfo) ID() binary.ID      { return binaryIDFieldInfo }
+func (*binaryClassFieldInfo) New() binary.Object { return &FieldInfo{} }
 func (*binaryClassFieldInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeFieldInfo(e, obj.(*FieldInfo))
 }
@@ -1512,7 +1533,8 @@ func doSkipHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassHierarchy) ID() binary.ID { return binaryIDHierarchy }
+func (*binaryClassHierarchy) ID() binary.ID      { return binaryIDHierarchy }
+func (*binaryClassHierarchy) New() binary.Object { return &Hierarchy{} }
 func (*binaryClassHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeHierarchy(e, obj.(*Hierarchy))
 }
@@ -1550,7 +1572,8 @@ func doSkipHierarchyId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassHierarchyId) ID() binary.ID { return binaryIDHierarchyId }
+func (*binaryClassHierarchyId) ID() binary.ID      { return binaryIDHierarchyId }
+func (*binaryClassHierarchyId) New() binary.Object { return &HierarchyId{} }
 func (*binaryClassHierarchyId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeHierarchyId(e, obj.(*HierarchyId))
 }
@@ -1619,7 +1642,8 @@ func doSkipImageInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassImageInfo) ID() binary.ID { return binaryIDImageInfo }
+func (*binaryClassImageInfo) ID() binary.ID      { return binaryIDImageInfo }
+func (*binaryClassImageInfo) New() binary.Object { return &ImageInfo{} }
 func (*binaryClassImageInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeImageInfo(e, obj.(*ImageInfo))
 }
@@ -1657,7 +1681,8 @@ func doSkipImageInfoId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassImageInfoId) ID() binary.ID { return binaryIDImageInfoId }
+func (*binaryClassImageInfoId) ID() binary.ID      { return binaryIDImageInfoId }
+func (*binaryClassImageInfoId) New() binary.Object { return &ImageInfoId{} }
 func (*binaryClassImageInfoId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeImageInfoId(e, obj.(*ImageInfoId))
 }
@@ -1740,7 +1765,8 @@ func doSkipMapInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMapInfo) ID() binary.ID { return binaryIDMapInfo }
+func (*binaryClassMapInfo) ID() binary.ID      { return binaryIDMapInfo }
+func (*binaryClassMapInfo) New() binary.Object { return &MapInfo{} }
 func (*binaryClassMapInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMapInfo(e, obj.(*MapInfo))
 }
@@ -1869,7 +1895,8 @@ func doSkipMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMemoryInfo) ID() binary.ID { return binaryIDMemoryInfo }
+func (*binaryClassMemoryInfo) ID() binary.ID      { return binaryIDMemoryInfo }
+func (*binaryClassMemoryInfo) New() binary.Object { return &MemoryInfo{} }
 func (*binaryClassMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMemoryInfo(e, obj.(*MemoryInfo))
 }
@@ -1907,7 +1934,8 @@ func doSkipMemoryInfoId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMemoryInfoId) ID() binary.ID { return binaryIDMemoryInfoId }
+func (*binaryClassMemoryInfoId) ID() binary.ID      { return binaryIDMemoryInfoId }
+func (*binaryClassMemoryInfoId) New() binary.Object { return &MemoryInfoId{} }
 func (*binaryClassMemoryInfoId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMemoryInfoId(e, obj.(*MemoryInfoId))
 }
@@ -1956,7 +1984,8 @@ func doSkipMemoryRange(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassMemoryRange) ID() binary.ID { return binaryIDMemoryRange }
+func (*binaryClassMemoryRange) ID() binary.ID      { return binaryIDMemoryRange }
+func (*binaryClassMemoryRange) New() binary.Object { return &MemoryRange{} }
 func (*binaryClassMemoryRange) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeMemoryRange(e, obj.(*MemoryRange))
 }
@@ -2022,7 +2051,8 @@ func doSkipParameterInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassParameterInfo) ID() binary.ID { return binaryIDParameterInfo }
+func (*binaryClassParameterInfo) ID() binary.ID      { return binaryIDParameterInfo }
+func (*binaryClassParameterInfo) New() binary.Object { return &ParameterInfo{} }
 func (*binaryClassParameterInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeParameterInfo(e, obj.(*ParameterInfo))
 }
@@ -2082,7 +2112,8 @@ func doSkipRenderSettings(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassRenderSettings) ID() binary.ID { return binaryIDRenderSettings }
+func (*binaryClassRenderSettings) ID() binary.ID      { return binaryIDRenderSettings }
+func (*binaryClassRenderSettings) New() binary.Object { return &RenderSettings{} }
 func (*binaryClassRenderSettings) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeRenderSettings(e, obj.(*RenderSettings))
 }
@@ -2163,7 +2194,8 @@ func doSkipSchema(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassSchema) ID() binary.ID { return binaryIDSchema }
+func (*binaryClassSchema) ID() binary.ID      { return binaryIDSchema }
+func (*binaryClassSchema) New() binary.Object { return &Schema{} }
 func (*binaryClassSchema) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeSchema(e, obj.(*Schema))
 }
@@ -2201,7 +2233,8 @@ func doSkipSchemaId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassSchemaId) ID() binary.ID { return binaryIDSchemaId }
+func (*binaryClassSchemaId) ID() binary.ID      { return binaryIDSchemaId }
+func (*binaryClassSchemaId) New() binary.Object { return &SchemaId{} }
 func (*binaryClassSchemaId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeSchemaId(e, obj.(*SchemaId))
 }
@@ -2250,7 +2283,8 @@ func doSkipSimpleInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassSimpleInfo) ID() binary.ID { return binaryIDSimpleInfo }
+func (*binaryClassSimpleInfo) ID() binary.ID      { return binaryIDSimpleInfo }
+func (*binaryClassSimpleInfo) New() binary.Object { return &SimpleInfo{} }
 func (*binaryClassSimpleInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeSimpleInfo(e, obj.(*SimpleInfo))
 }
@@ -2345,7 +2379,8 @@ func doSkipStaticArrayInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStaticArrayInfo) ID() binary.ID { return binaryIDStaticArrayInfo }
+func (*binaryClassStaticArrayInfo) ID() binary.ID      { return binaryIDStaticArrayInfo }
+func (*binaryClassStaticArrayInfo) New() binary.Object { return &StaticArrayInfo{} }
 func (*binaryClassStaticArrayInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStaticArrayInfo(e, obj.(*StaticArrayInfo))
 }
@@ -2429,7 +2464,8 @@ func doSkipStructInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassStructInfo) ID() binary.ID { return binaryIDStructInfo }
+func (*binaryClassStructInfo) ID() binary.ID      { return binaryIDStructInfo }
+func (*binaryClassStructInfo) New() binary.Object { return &StructInfo{} }
 func (*binaryClassStructInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeStructInfo(e, obj.(*StructInfo))
 }
@@ -2537,7 +2573,8 @@ func doSkipTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTimingInfo) ID() binary.ID { return binaryIDTimingInfo }
+func (*binaryClassTimingInfo) ID() binary.ID      { return binaryIDTimingInfo }
+func (*binaryClassTimingInfo) New() binary.Object { return &TimingInfo{} }
 func (*binaryClassTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTimingInfo(e, obj.(*TimingInfo))
 }
@@ -2575,7 +2612,8 @@ func doSkipTimingInfoId(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTimingInfoId) ID() binary.ID { return binaryIDTimingInfoId }
+func (*binaryClassTimingInfoId) ID() binary.ID      { return binaryIDTimingInfoId }
+func (*binaryClassTimingInfoId) New() binary.Object { return &TimingInfoId{} }
 func (*binaryClassTimingInfoId) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTimingInfoId(e, obj.(*TimingInfoId))
 }
@@ -2602,7 +2640,8 @@ func doDecodecallGetCaptures(d binary.Decoder, o *callGetCaptures) error {
 func doSkipcallGetCaptures(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClasscallGetCaptures) ID() binary.ID { return binaryIDcallGetCaptures }
+func (*binaryClasscallGetCaptures) ID() binary.ID      { return binaryIDcallGetCaptures }
+func (*binaryClasscallGetCaptures) New() binary.Object { return &callGetCaptures{} }
 func (*binaryClasscallGetCaptures) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetCaptures(e, obj.(*callGetCaptures))
 }
@@ -2629,7 +2668,8 @@ func doDecodecallGetDevices(d binary.Decoder, o *callGetDevices) error {
 func doSkipcallGetDevices(d binary.Decoder) error {
 	return nil
 }
-func (*binaryClasscallGetDevices) ID() binary.ID { return binaryIDcallGetDevices }
+func (*binaryClasscallGetDevices) ID() binary.ID      { return binaryIDcallGetDevices }
+func (*binaryClasscallGetDevices) New() binary.Object { return &callGetDevices{} }
 func (*binaryClasscallGetDevices) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetDevices(e, obj.(*callGetDevices))
 }
@@ -2705,7 +2745,8 @@ func doSkipcallGetFramebufferColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetFramebufferColor) ID() binary.ID { return binaryIDcallGetFramebufferColor }
+func (*binaryClasscallGetFramebufferColor) ID() binary.ID      { return binaryIDcallGetFramebufferColor }
+func (*binaryClasscallGetFramebufferColor) New() binary.Object { return &callGetFramebufferColor{} }
 func (*binaryClasscallGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetFramebufferColor(e, obj.(*callGetFramebufferColor))
 }
@@ -2774,7 +2815,8 @@ func doSkipcallGetFramebufferDepth(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetFramebufferDepth) ID() binary.ID { return binaryIDcallGetFramebufferDepth }
+func (*binaryClasscallGetFramebufferDepth) ID() binary.ID      { return binaryIDcallGetFramebufferDepth }
+func (*binaryClasscallGetFramebufferDepth) New() binary.Object { return &callGetFramebufferDepth{} }
 func (*binaryClasscallGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetFramebufferDepth(e, obj.(*callGetFramebufferDepth))
 }
@@ -2823,7 +2865,8 @@ func doSkipcallGetHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetHierarchy) ID() binary.ID { return binaryIDcallGetHierarchy }
+func (*binaryClasscallGetHierarchy) ID() binary.ID      { return binaryIDcallGetHierarchy }
+func (*binaryClasscallGetHierarchy) New() binary.Object { return &callGetHierarchy{} }
 func (*binaryClasscallGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetHierarchy(e, obj.(*callGetHierarchy))
 }
@@ -2879,7 +2922,8 @@ func doSkipcallGetMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetMemoryInfo) ID() binary.ID { return binaryIDcallGetMemoryInfo }
+func (*binaryClasscallGetMemoryInfo) ID() binary.ID      { return binaryIDcallGetMemoryInfo }
+func (*binaryClasscallGetMemoryInfo) New() binary.Object { return &callGetMemoryInfo{} }
 func (*binaryClasscallGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetMemoryInfo(e, obj.(*callGetMemoryInfo))
 }
@@ -2926,7 +2970,8 @@ func doSkipcallGetState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetState) ID() binary.ID { return binaryIDcallGetState }
+func (*binaryClasscallGetState) ID() binary.ID      { return binaryIDcallGetState }
+func (*binaryClasscallGetState) New() binary.Object { return &callGetState{} }
 func (*binaryClasscallGetState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetState(e, obj.(*callGetState))
 }
@@ -2993,7 +3038,8 @@ func doSkipcallGetTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallGetTimingInfo) ID() binary.ID { return binaryIDcallGetTimingInfo }
+func (*binaryClasscallGetTimingInfo) ID() binary.ID      { return binaryIDcallGetTimingInfo }
+func (*binaryClasscallGetTimingInfo) New() binary.Object { return &callGetTimingInfo{} }
 func (*binaryClasscallGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallGetTimingInfo(e, obj.(*callGetTimingInfo))
 }
@@ -3052,7 +3098,8 @@ func doSkipcallImport(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallImport) ID() binary.ID { return binaryIDcallImport }
+func (*binaryClasscallImport) ID() binary.ID      { return binaryIDcallImport }
+func (*binaryClasscallImport) New() binary.Object { return &callImport{} }
 func (*binaryClasscallImport) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallImport(e, obj.(*callImport))
 }
@@ -3148,7 +3195,8 @@ func doSkipcallPrerenderFramebuffers(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallPrerenderFramebuffers) ID() binary.ID { return binaryIDcallPrerenderFramebuffers }
+func (*binaryClasscallPrerenderFramebuffers) ID() binary.ID      { return binaryIDcallPrerenderFramebuffers }
+func (*binaryClasscallPrerenderFramebuffers) New() binary.Object { return &callPrerenderFramebuffers{} }
 func (*binaryClasscallPrerenderFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallPrerenderFramebuffers(e, obj.(*callPrerenderFramebuffers))
 }
@@ -3217,7 +3265,8 @@ func doSkipcallReplaceAtom(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallReplaceAtom) ID() binary.ID { return binaryIDcallReplaceAtom }
+func (*binaryClasscallReplaceAtom) ID() binary.ID      { return binaryIDcallReplaceAtom }
+func (*binaryClasscallReplaceAtom) New() binary.Object { return &callReplaceAtom{} }
 func (*binaryClasscallReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallReplaceAtom(e, obj.(*callReplaceAtom))
 }
@@ -3253,7 +3302,8 @@ func doSkipcallResolveAtomStream(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveAtomStream) ID() binary.ID { return binaryIDcallResolveAtomStream }
+func (*binaryClasscallResolveAtomStream) ID() binary.ID      { return binaryIDcallResolveAtomStream }
+func (*binaryClasscallResolveAtomStream) New() binary.Object { return &callResolveAtomStream{} }
 func (*binaryClasscallResolveAtomStream) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveAtomStream(e, obj.(*callResolveAtomStream))
 }
@@ -3291,7 +3341,8 @@ func doSkipcallResolveBinary(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveBinary) ID() binary.ID { return binaryIDcallResolveBinary }
+func (*binaryClasscallResolveBinary) ID() binary.ID      { return binaryIDcallResolveBinary }
+func (*binaryClasscallResolveBinary) New() binary.Object { return &callResolveBinary{} }
 func (*binaryClasscallResolveBinary) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveBinary(e, obj.(*callResolveBinary))
 }
@@ -3327,7 +3378,8 @@ func doSkipcallResolveCapture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveCapture) ID() binary.ID { return binaryIDcallResolveCapture }
+func (*binaryClasscallResolveCapture) ID() binary.ID      { return binaryIDcallResolveCapture }
+func (*binaryClasscallResolveCapture) New() binary.Object { return &callResolveCapture{} }
 func (*binaryClasscallResolveCapture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveCapture(e, obj.(*callResolveCapture))
 }
@@ -3363,7 +3415,8 @@ func doSkipcallResolveDevice(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveDevice) ID() binary.ID { return binaryIDcallResolveDevice }
+func (*binaryClasscallResolveDevice) ID() binary.ID      { return binaryIDcallResolveDevice }
+func (*binaryClasscallResolveDevice) New() binary.Object { return &callResolveDevice{} }
 func (*binaryClasscallResolveDevice) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveDevice(e, obj.(*callResolveDevice))
 }
@@ -3399,7 +3452,8 @@ func doSkipcallResolveHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveHierarchy) ID() binary.ID { return binaryIDcallResolveHierarchy }
+func (*binaryClasscallResolveHierarchy) ID() binary.ID      { return binaryIDcallResolveHierarchy }
+func (*binaryClasscallResolveHierarchy) New() binary.Object { return &callResolveHierarchy{} }
 func (*binaryClasscallResolveHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveHierarchy(e, obj.(*callResolveHierarchy))
 }
@@ -3437,7 +3491,8 @@ func doSkipcallResolveImageInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveImageInfo) ID() binary.ID { return binaryIDcallResolveImageInfo }
+func (*binaryClasscallResolveImageInfo) ID() binary.ID      { return binaryIDcallResolveImageInfo }
+func (*binaryClasscallResolveImageInfo) New() binary.Object { return &callResolveImageInfo{} }
 func (*binaryClasscallResolveImageInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveImageInfo(e, obj.(*callResolveImageInfo))
 }
@@ -3475,7 +3530,8 @@ func doSkipcallResolveMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveMemoryInfo) ID() binary.ID { return binaryIDcallResolveMemoryInfo }
+func (*binaryClasscallResolveMemoryInfo) ID() binary.ID      { return binaryIDcallResolveMemoryInfo }
+func (*binaryClasscallResolveMemoryInfo) New() binary.Object { return &callResolveMemoryInfo{} }
 func (*binaryClasscallResolveMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveMemoryInfo(e, obj.(*callResolveMemoryInfo))
 }
@@ -3513,7 +3569,8 @@ func doSkipcallResolveSchema(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveSchema) ID() binary.ID { return binaryIDcallResolveSchema }
+func (*binaryClasscallResolveSchema) ID() binary.ID      { return binaryIDcallResolveSchema }
+func (*binaryClasscallResolveSchema) New() binary.Object { return &callResolveSchema{} }
 func (*binaryClasscallResolveSchema) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveSchema(e, obj.(*callResolveSchema))
 }
@@ -3549,7 +3606,8 @@ func doSkipcallResolveTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClasscallResolveTimingInfo) ID() binary.ID { return binaryIDcallResolveTimingInfo }
+func (*binaryClasscallResolveTimingInfo) ID() binary.ID      { return binaryIDcallResolveTimingInfo }
+func (*binaryClasscallResolveTimingInfo) New() binary.Object { return &callResolveTimingInfo{} }
 func (*binaryClasscallResolveTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodecallResolveTimingInfo(e, obj.(*callResolveTimingInfo))
 }
@@ -3605,7 +3663,8 @@ func doSkipresultGetCaptures(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetCaptures) ID() binary.ID { return binaryIDresultGetCaptures }
+func (*binaryClassresultGetCaptures) ID() binary.ID      { return binaryIDresultGetCaptures }
+func (*binaryClassresultGetCaptures) New() binary.Object { return &resultGetCaptures{} }
 func (*binaryClassresultGetCaptures) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetCaptures(e, obj.(*resultGetCaptures))
 }
@@ -3659,7 +3718,8 @@ func doSkipresultGetDevices(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetDevices) ID() binary.ID { return binaryIDresultGetDevices }
+func (*binaryClassresultGetDevices) ID() binary.ID      { return binaryIDresultGetDevices }
+func (*binaryClassresultGetDevices) New() binary.Object { return &resultGetDevices{} }
 func (*binaryClassresultGetDevices) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetDevices(e, obj.(*resultGetDevices))
 }
@@ -3695,7 +3755,8 @@ func doSkipresultGetFramebufferColor(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetFramebufferColor) ID() binary.ID { return binaryIDresultGetFramebufferColor }
+func (*binaryClassresultGetFramebufferColor) ID() binary.ID      { return binaryIDresultGetFramebufferColor }
+func (*binaryClassresultGetFramebufferColor) New() binary.Object { return &resultGetFramebufferColor{} }
 func (*binaryClassresultGetFramebufferColor) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetFramebufferColor(e, obj.(*resultGetFramebufferColor))
 }
@@ -3733,7 +3794,8 @@ func doSkipresultGetFramebufferDepth(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetFramebufferDepth) ID() binary.ID { return binaryIDresultGetFramebufferDepth }
+func (*binaryClassresultGetFramebufferDepth) ID() binary.ID      { return binaryIDresultGetFramebufferDepth }
+func (*binaryClassresultGetFramebufferDepth) New() binary.Object { return &resultGetFramebufferDepth{} }
 func (*binaryClassresultGetFramebufferDepth) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetFramebufferDepth(e, obj.(*resultGetFramebufferDepth))
 }
@@ -3771,7 +3833,8 @@ func doSkipresultGetHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetHierarchy) ID() binary.ID { return binaryIDresultGetHierarchy }
+func (*binaryClassresultGetHierarchy) ID() binary.ID      { return binaryIDresultGetHierarchy }
+func (*binaryClassresultGetHierarchy) New() binary.Object { return &resultGetHierarchy{} }
 func (*binaryClassresultGetHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetHierarchy(e, obj.(*resultGetHierarchy))
 }
@@ -3807,7 +3870,8 @@ func doSkipresultGetMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetMemoryInfo) ID() binary.ID { return binaryIDresultGetMemoryInfo }
+func (*binaryClassresultGetMemoryInfo) ID() binary.ID      { return binaryIDresultGetMemoryInfo }
+func (*binaryClassresultGetMemoryInfo) New() binary.Object { return &resultGetMemoryInfo{} }
 func (*binaryClassresultGetMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetMemoryInfo(e, obj.(*resultGetMemoryInfo))
 }
@@ -3845,7 +3909,8 @@ func doSkipresultGetState(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetState) ID() binary.ID { return binaryIDresultGetState }
+func (*binaryClassresultGetState) ID() binary.ID      { return binaryIDresultGetState }
+func (*binaryClassresultGetState) New() binary.Object { return &resultGetState{} }
 func (*binaryClassresultGetState) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetState(e, obj.(*resultGetState))
 }
@@ -3881,7 +3946,8 @@ func doSkipresultGetTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultGetTimingInfo) ID() binary.ID { return binaryIDresultGetTimingInfo }
+func (*binaryClassresultGetTimingInfo) ID() binary.ID      { return binaryIDresultGetTimingInfo }
+func (*binaryClassresultGetTimingInfo) New() binary.Object { return &resultGetTimingInfo{} }
 func (*binaryClassresultGetTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultGetTimingInfo(e, obj.(*resultGetTimingInfo))
 }
@@ -3919,7 +3985,8 @@ func doSkipresultImport(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultImport) ID() binary.ID { return binaryIDresultImport }
+func (*binaryClassresultImport) ID() binary.ID      { return binaryIDresultImport }
+func (*binaryClassresultImport) New() binary.Object { return &resultImport{} }
 func (*binaryClassresultImport) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultImport(e, obj.(*resultImport))
 }
@@ -3958,6 +4025,9 @@ func doSkipresultPrerenderFramebuffers(d binary.Decoder) error {
 func (*binaryClassresultPrerenderFramebuffers) ID() binary.ID {
 	return binaryIDresultPrerenderFramebuffers
 }
+func (*binaryClassresultPrerenderFramebuffers) New() binary.Object {
+	return &resultPrerenderFramebuffers{}
+}
 func (*binaryClassresultPrerenderFramebuffers) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultPrerenderFramebuffers(e, obj.(*resultPrerenderFramebuffers))
 }
@@ -3995,7 +4065,8 @@ func doSkipresultReplaceAtom(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultReplaceAtom) ID() binary.ID { return binaryIDresultReplaceAtom }
+func (*binaryClassresultReplaceAtom) ID() binary.ID      { return binaryIDresultReplaceAtom }
+func (*binaryClassresultReplaceAtom) New() binary.Object { return &resultReplaceAtom{} }
 func (*binaryClassresultReplaceAtom) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultReplaceAtom(e, obj.(*resultReplaceAtom))
 }
@@ -4031,7 +4102,8 @@ func doSkipresultResolveAtomStream(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveAtomStream) ID() binary.ID { return binaryIDresultResolveAtomStream }
+func (*binaryClassresultResolveAtomStream) ID() binary.ID      { return binaryIDresultResolveAtomStream }
+func (*binaryClassresultResolveAtomStream) New() binary.Object { return &resultResolveAtomStream{} }
 func (*binaryClassresultResolveAtomStream) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveAtomStream(e, obj.(*resultResolveAtomStream))
 }
@@ -4069,7 +4141,8 @@ func doSkipresultResolveBinary(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveBinary) ID() binary.ID { return binaryIDresultResolveBinary }
+func (*binaryClassresultResolveBinary) ID() binary.ID      { return binaryIDresultResolveBinary }
+func (*binaryClassresultResolveBinary) New() binary.Object { return &resultResolveBinary{} }
 func (*binaryClassresultResolveBinary) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveBinary(e, obj.(*resultResolveBinary))
 }
@@ -4107,7 +4180,8 @@ func doSkipresultResolveCapture(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveCapture) ID() binary.ID { return binaryIDresultResolveCapture }
+func (*binaryClassresultResolveCapture) ID() binary.ID      { return binaryIDresultResolveCapture }
+func (*binaryClassresultResolveCapture) New() binary.Object { return &resultResolveCapture{} }
 func (*binaryClassresultResolveCapture) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveCapture(e, obj.(*resultResolveCapture))
 }
@@ -4145,7 +4219,8 @@ func doSkipresultResolveDevice(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveDevice) ID() binary.ID { return binaryIDresultResolveDevice }
+func (*binaryClassresultResolveDevice) ID() binary.ID      { return binaryIDresultResolveDevice }
+func (*binaryClassresultResolveDevice) New() binary.Object { return &resultResolveDevice{} }
 func (*binaryClassresultResolveDevice) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveDevice(e, obj.(*resultResolveDevice))
 }
@@ -4183,7 +4258,8 @@ func doSkipresultResolveHierarchy(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveHierarchy) ID() binary.ID { return binaryIDresultResolveHierarchy }
+func (*binaryClassresultResolveHierarchy) ID() binary.ID      { return binaryIDresultResolveHierarchy }
+func (*binaryClassresultResolveHierarchy) New() binary.Object { return &resultResolveHierarchy{} }
 func (*binaryClassresultResolveHierarchy) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveHierarchy(e, obj.(*resultResolveHierarchy))
 }
@@ -4221,7 +4297,8 @@ func doSkipresultResolveImageInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveImageInfo) ID() binary.ID { return binaryIDresultResolveImageInfo }
+func (*binaryClassresultResolveImageInfo) ID() binary.ID      { return binaryIDresultResolveImageInfo }
+func (*binaryClassresultResolveImageInfo) New() binary.Object { return &resultResolveImageInfo{} }
 func (*binaryClassresultResolveImageInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveImageInfo(e, obj.(*resultResolveImageInfo))
 }
@@ -4259,7 +4336,8 @@ func doSkipresultResolveMemoryInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveMemoryInfo) ID() binary.ID { return binaryIDresultResolveMemoryInfo }
+func (*binaryClassresultResolveMemoryInfo) ID() binary.ID      { return binaryIDresultResolveMemoryInfo }
+func (*binaryClassresultResolveMemoryInfo) New() binary.Object { return &resultResolveMemoryInfo{} }
 func (*binaryClassresultResolveMemoryInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveMemoryInfo(e, obj.(*resultResolveMemoryInfo))
 }
@@ -4297,7 +4375,8 @@ func doSkipresultResolveSchema(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveSchema) ID() binary.ID { return binaryIDresultResolveSchema }
+func (*binaryClassresultResolveSchema) ID() binary.ID      { return binaryIDresultResolveSchema }
+func (*binaryClassresultResolveSchema) New() binary.Object { return &resultResolveSchema{} }
 func (*binaryClassresultResolveSchema) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveSchema(e, obj.(*resultResolveSchema))
 }
@@ -4335,7 +4414,8 @@ func doSkipresultResolveTimingInfo(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassresultResolveTimingInfo) ID() binary.ID { return binaryIDresultResolveTimingInfo }
+func (*binaryClassresultResolveTimingInfo) ID() binary.ID      { return binaryIDresultResolveTimingInfo }
+func (*binaryClassresultResolveTimingInfo) New() binary.Object { return &resultResolveTimingInfo{} }
 func (*binaryClassresultResolveTimingInfo) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncoderesultResolveTimingInfo(e, obj.(*resultResolveTimingInfo))
 }

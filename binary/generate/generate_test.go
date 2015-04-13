@@ -67,12 +67,13 @@ func parseStructs(source string) []*Struct {
 		log.Fatalf("load failed: %s", err)
 	}
 	result := []*Struct{}
+	imports := make(Imports)
 	for _, pkg := range info.Created {
 		for _, def := range pkg.Defs {
 			if n, ok := def.(*types.TypeName); ok {
 				if t, ok := n.Type().(*types.Named); ok {
 					if _, ok := t.Underlying().(*types.Struct); ok {
-						if s := FromTypename(pkg.Pkg, n); s != nil {
+						if s := FromTypename(pkg.Pkg, n, imports); s != nil {
 							result = append(result, s)
 						}
 					}
