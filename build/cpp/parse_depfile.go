@@ -47,21 +47,18 @@ func ParseDepFile(file build.File, env build.Environment) (deps build.FileSet, d
 }
 
 func parseDeps(s string) (build.FileSet, error) {
-	p := strings.Split(s, ":")
+	p := strings.Split(s, ": ")
 	if len(p) != 2 {
 		return build.FileSet{}, errors.New("Parse failure - no colon found")
 	}
 	s = p[1]
 
+	// Remove trailing '\' then newline
+	s = strings.Replace(s, "\\\n", "", -1)
+	s = strings.Replace(s, "\\\r\n", "", -1)
+
 	deps := build.FileSet{}
-	for _, s := range strings.FieldsFunc(s, func(r rune) bool {
-		switch r {
-		case '\\', '\t', '\n', ' ':
-			return true
-		default:
-			return false
-		}
-	}) {
+	for _, s := range strings.Fields(s) {
 		deps = deps.Append(build.File(s))
 	}
 	return deps, nil

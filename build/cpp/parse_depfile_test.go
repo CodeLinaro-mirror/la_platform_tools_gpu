@@ -52,6 +52,16 @@ func TestParseDeps(t *testing.T) {
 				"/dev/gpu/src/foo/C.h", "/dev/gpu/src/foo/D.h",
 			},
 		}, {
+			depfile: `c:\dev\gpu\pkg\foo\bar.o: \
+  c:\dev\gpu\pkg\foo\A.cpp \
+  c:\dev\gpu\pkg\foo\B.h c:\dev\gpu\pkg\foo\C.h \
+  c:\dev\gpu\pkg\foo\D.h
+`,
+			expected: build.FileSet{
+				`c:\dev\gpu\pkg\foo\A.cpp`, `c:\dev\gpu\pkg\foo\B.h`,
+				`c:\dev\gpu\pkg\foo\C.h`, `c:\dev\gpu\pkg\foo\D.h`,
+			},
+		}, {
 			depfile: ``,
 			fail:    true,
 		}, {
