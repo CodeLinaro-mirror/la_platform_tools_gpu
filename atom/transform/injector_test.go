@@ -17,7 +17,6 @@ package transform
 import (
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
@@ -29,7 +28,6 @@ func TestInjector(t *testing.T) {
 		&test.AtomA{ID: 90},
 		&test.AtomA{ID: 00},
 		&test.AtomA{ID: 60},
-		atomAtomID{&atom.EOS{}, 0},
 	)
 	expected := list(
 		&test.AtomA{ID: 10},
@@ -42,7 +40,6 @@ func TestInjector(t *testing.T) {
 		&test.AtomA{ID: 00},
 		&test.AtomA{ID: 60},
 		&test.AtomB{ID: 40},
-		atomAtomID{&atom.EOS{}, 0},
 	)
 
 	transform := &Injector{}

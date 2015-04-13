@@ -26,7 +26,6 @@ type Replayer interface {
 // the replay instructions should include postback of all outputs of the Atom.
 func Replay(id atom.ID, a atom.Atom, s *state.State, b *builder.Builder, postback bool) {
 	switch a := a.(type) {
-	case *atom.EOS:
 	case *atom.Observation:
 		b.Observation(a.Range, a.ResourceID)
 	case Replayer:

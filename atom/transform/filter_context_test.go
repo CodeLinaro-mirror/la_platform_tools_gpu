@@ -17,7 +17,6 @@ package transform
 import (
 	"testing"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/atom/test"
 )
 
@@ -33,20 +32,17 @@ func TestContextFilter(t *testing.T) {
 		&test.AtomA{ID: 00, Context: 3},
 		&test.AtomA{ID: 60, Context: 3},
 		&test.AtomA{ID: 40, Context: 3},
-		atomAtomID{&atom.EOS{}, 999},
 	)
 
 	checkTransform(t, ContextFilter(1), inputs, list(
 		&test.AtomA{ID: 10, Context: 1},
 		&test.AtomA{ID: 50, Context: 1},
-		atomAtomID{&atom.EOS{}, 999},
 	))
 
 	checkTransform(t, ContextFilter(2), inputs, list(
 		&test.AtomA{ID: 30, Context: 2},
 		&test.AtomA{ID: 90, Context: 2},
 		&test.AtomA{ID: 80, Context: 2},
-		atomAtomID{&atom.EOS{}, 999},
 	))
 
 	checkTransform(t, ContextFilter(3), inputs, list(
@@ -55,6 +51,5 @@ func TestContextFilter(t *testing.T) {
 		&test.AtomA{ID: 00, Context: 3},
 		&test.AtomA{ID: 60, Context: 3},
 		&test.AtomA{ID: 40, Context: 3},
-		atomAtomID{&atom.EOS{}, 999},
 	))
 }

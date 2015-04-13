@@ -25,7 +25,6 @@ func (l *List) WriteTo(w Writer) {
 	for i, a := range *l {
 		w.Write(ID(i), a)
 	}
-	w.Write(ID(len(*l)), &EOS{})
 }
 
 // Clone makes and returns a shallow copy of the atom list.
@@ -71,12 +70,12 @@ func (l *List) Decode(d binary.Decoder) error {
 		if err != nil {
 			return err
 		}
+		if TypeID(typeID) == TypeIDEos {
+			break
+		}
 		atom, err := New(TypeID(typeID))
 		if err != nil {
 			return err
-		}
-		if _, ok := atom.(*EOS); ok {
-			break
 		}
 		if err := d.Value(atom); err != nil {
 			return err

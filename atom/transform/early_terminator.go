@@ -33,13 +33,12 @@ func (t *EarlyTerminator) Add(id atom.ID) {
 }
 
 func (t *EarlyTerminator) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
-	if len(t.requests) > 0 {
-		out.Write(id, a)
-		t.requests.Remove(id)
+	if len(t.requests) == 0 {
+		// Seen all the atoms we want, ignore remaining ones
 		return
 	}
-
-	if _, ok := a.(*atom.EOS); ok {
-		out.Write(id, a)
-	}
+	out.Write(id, a)
+	t.requests.Remove(id)
 }
+
+func (t *EarlyTerminator) Flush(out atom.Writer) {}

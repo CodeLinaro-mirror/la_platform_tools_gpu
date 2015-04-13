@@ -93,7 +93,6 @@ func TestAtomListWriteTo(t *testing.T) {
 		writeRecord{0, &test.AtomA{Context: 0x10}},
 		writeRecord{1, &test.AtomB{Context: 0x20, Bool: true}},
 		writeRecord{2, &test.AtomC{Context: 0x10, String: "Pizza"}},
-		writeRecord{3, &atom.EOS{}},
 	}
 	got := writeRecordList{}
 	testList.WriteTo(&got)

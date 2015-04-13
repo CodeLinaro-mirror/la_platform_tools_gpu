@@ -18,7 +18,3 @@ package atom
 // must have a unique type idenitifier. Any changes to the binary format of an
 // atom must result in a new type identifier to maintain binary compatability.
 type TypeID uint16
-
-func init() {
-	Register(TypeInfo{ID: TypeIDEos, New: func() Atom { return &EOS{} }})
-}
