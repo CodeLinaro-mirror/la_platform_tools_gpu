@@ -43,6 +43,8 @@ var (
 var (
 	GPURoot     = build.Root.Join("tools", "gpu", "src", "android.googlesource.com", "platform", "tools", "gpu")
 	CCRoot      = GPURoot.Join("cc")
+	GapicRoot   = CCRoot.Join("gapic")
+	GapirRoot   = CCRoot.Join("gapir")
 	ReplaydRoot = CCRoot.Join("replayd")
 	GmockRoot   = build.Root.Join("external", "gmock")
 	GtestRoot   = build.Root.Join("external", "gtest")
@@ -134,6 +136,7 @@ type Target struct {
 	SourceFiles []string
 	Gtest       cpp.Config
 	Gmock       cpp.Config
+	Gapic       cpp.Config
 	Gapir       cpp.Config
 	GapirTests  cpp.Config
 	Replayd     cpp.Config
@@ -144,6 +147,7 @@ func (t Target) Extend(n Target) Target {
 		SourceFiles: append(append([]string{}, t.SourceFiles...), n.SourceFiles...),
 		Gtest:       t.Gtest.Extend(n.Gtest),
 		Gmock:       t.Gmock.Extend(n.Gmock),
+		Gapic:       t.Gapic.Extend(n.Gapic),
 		Gapir:       t.Gapir.Extend(n.Gapir),
 		GapirTests:  t.GapirTests.Extend(n.GapirTests),
 		Replayd:     t.Replayd.Extend(n.Replayd),
@@ -180,8 +184,22 @@ func (t Target) Build(env build.Environment) error {
 		}
 	}
 
+	// Gather the source files for gapic
+	gapicSource := GapicRoot.Glob(t.SourceFiles...).
+		Append(GapicRoot.Join(t.Gapic.OS).Glob(t.SourceFiles...)...).
+		Exclude("*_test.cpp")
+
+	// Build the gapic static library.
+	env.Logger = begin(t.Gapic.Name)
+	gapicLib, err := cpp.StaticLibrary(gapicSource, t.Gapic, env)
+	if err != nil {
+		return err
+	}
+
 	// Gather the source files for gapir
-	gapirSource := ReplaydRoot.Join("src").Glob(t.SourceFiles...).Exclude("Main.cpp")
+	gapirSource := GapirRoot.Glob(t.SourceFiles...).
+		Append(GapirRoot.Join(t.Gapir.OS).Glob(t.SourceFiles...)...).
+		Exclude("*_test.cpp")
 
 	// Build the gapir static library.
 	env.Logger = begin(t.Gapir.Name)
@@ -192,16 +210,20 @@ func (t Target) Build(env build.Environment) error {
 
 	// Build replayd from the gapir static library and Main.cpp.
 	env.Logger = begin(t.Replayd.Name)
-	replaydSource := build.Files(gapirLib, ReplaydRoot.Join("src", "Main.cpp"))
-	if _, err := cpp.Executable(replaydSource, t.Replayd, env); err != nil {
+	replaydSource := build.Files(ReplaydRoot.Join("main.cpp"))
+	replaydInputs := replaydSource.Append(gapirLib, gapicLib)
+	if _, err := cpp.Executable(replaydInputs, t.Replayd, env); err != nil {
 		return err
 	}
 
 	// Build gapir tests.
 	if *buildtests {
 		env.Logger = begin(t.GapirTests.Name)
-		gapirTestSource := ReplaydRoot.Join("test").Glob(t.SourceFiles...).Append(gapirLib, gtestLib, gmockLib)
-		gapirTest, err := cpp.Executable(gapirTestSource, t.GapirTests, env)
+		gapirTestSource := GapirRoot.Glob(t.SourceFiles...).
+			Append(GapirRoot.Join(t.Gapir.OS).Glob(t.SourceFiles...)...).
+			Filter("*_test.cpp")
+		gapirTestInputs := gapirTestSource.Append(gapirLib, gapicLib, gtestLib, gmockLib)
+		gapirTest, err := cpp.Executable(gapirTestInputs, t.GapirTests, env)
 		if err != nil {
 			return err
 		}
@@ -249,28 +271,27 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 				GtestRoot.Join("include"),
 			},
 		}),
+		Gapic: base.Extend(cpp.Config{
+			Name:               "gapic",
+			IncludeSearchPaths: build.FileSet{CCRoot},
+		}),
 		Gapir: base.Extend(cpp.Config{
-			Name: "gapir",
-			IncludeSearchPaths: build.FileSet{
-				CCRoot.Join("common"),
-			},
+			Name:               "gapir",
+			IncludeSearchPaths: build.FileSet{CCRoot},
 		}),
 		GapirTests: base.Extend(cpp.Config{
 			Name:      "gapir-tests",
 			Libraries: build.FileSet{"stdc++"},
 			IncludeSearchPaths: build.FileSet{
-				ReplaydRoot.Join("src"),
-				CCRoot.Join("common"),
+				CCRoot,
 				GmockRoot.Join("include"),
 				GtestRoot.Join("include"),
 			},
 		}),
 		Replayd: base.Extend(cpp.Config{
-			Name:      "replayd",
-			Libraries: build.FileSet{"stdc++"},
-			IncludeSearchPaths: build.FileSet{
-				CCRoot.Join("common"),
-			},
+			Name:               "replayd",
+			Libraries:          build.FileSet{"stdc++"},
+			IncludeSearchPaths: build.FileSet{CCRoot},
 			Permissions: []string{
 				"android.permission.INTERNET",
 				"android.permission.READ_EXTERNAL_STORAGE",
