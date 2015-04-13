@@ -44,7 +44,7 @@ namespace gapir {
 namespace test {
 namespace {
 
-const size_t MEMORY_SIZE = 4096;
+const uint32_t MEMORY_SIZE = 4096;
 const std::string replayId = "ABCDE";
 
 }  // anonymous namespace
@@ -70,7 +70,8 @@ TEST(ReplayRequestTestStatic, Create) {
             // Replay data
             .WillOnce(DoAll(WithArg<2>(SetVoidPointee(replayData)), ReturnArg<3>()));
 
-    std::unique_ptr<MemoryManager> memoryManager(new MemoryManager({MEMORY_SIZE}));
+    std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
+    std::unique_ptr<MemoryManager> memoryManager(new MemoryManager(memorySizes));
 
     auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
     auto replayRequest =
@@ -100,7 +101,8 @@ TEST(ReplayRequestTestStatic, CreateErrorGet) {
     // Get replay request from resource provider fail
     EXPECT_CALL(*resourceProvider, get(Eq(replayId), _, _, replayLength)).WillOnce(Return(0));
 
-    std::unique_ptr<MemoryManager> memoryManager(new MemoryManager({MEMORY_SIZE}));
+    std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
+    std::unique_ptr<MemoryManager> memoryManager(new MemoryManager(memorySizes));
 
     auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
     auto replayRequest =

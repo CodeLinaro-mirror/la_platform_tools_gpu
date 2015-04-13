@@ -179,7 +179,7 @@ func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.
 	libraries := build.FileSet{}
 	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
 		dir, base := filepath.Split(library.Absolute())
-		libraries = libraries.Append(build.File(base))
+		libraries = libraries.Append(build.File(base).ChangeExt(""))
 		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
 	}
 
