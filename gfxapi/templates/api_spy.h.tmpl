@@ -11,13 +11,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{/* ---- Includes ---- */}}
+{{Include "api_classnames.tmpl"}}
+{{Include "cpp_common.tmpl"    }}
+
+{{/* ---- Overrides ---- */}}
+{{Global "C++.StringType"       "char*"   }}
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
-{{Global "C++.ExternPrefix"     "mState."}}
+{{Global "C++.ExternPrefix"     "mState." }}
 
 {{$filename := print (Global "API") "_spy.h" }}
 {{Global "SpyName" (print (Title (Global "API")) "Spy")}}
-
-{{Include "cpp_common.tmpl"}}
 {{$ | Macro "Spy" | Format (Global "clang-format") | Write $filename}}
 
 {{define "Spy"}}
@@ -29,10 +33,11 @@ limitations under the License.
   #ifndef {{$guard}}
   #define {{$guard}}
 ¶
-  #include "common/encoder.h"
   #include "{{Global "API"}}_imports.h"
   #include "{{Global "API"}}_state.h"
   #include "{{Global "API"}}_types.h"
+¶
+  #include <gapic/encoder.h>
 ¶
   #include <stdint.h>
   #include <unordered_set>
@@ -67,8 +72,8 @@ limitations under the License.
 ¶
     std::unordered_set<gapic::Id> mObserved;
     std::unique_ptr<gapic::Encoder> mEncoder;
-    Imports mImports;
-    State mState;
+    {{Macro "ApiClassnames.Imports"}} mImports;
+    {{Macro "ApiClassnames.State"  }} mState;
   };
 ¶
   // Inline methods
@@ -160,10 +165,14 @@ limitations under the License.
   {{$spyname := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
-    {{if $ret}}{{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
-    {{else}}mImports.{{$name}}({{Macro "C++.CallArguments" $}});
+    {{$args := Macro "C++.CallArguments" $}}
+    {{if $ret}}
+      {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
+      mState.{{$name}}({{if $args}}{{$args}}, {{end}}result);
+    {{else}}
+      mImports.{{$name}}({{$args}});
+      mState.{{$name}}({{$args}});
     {{end}}
-    mState.{{$name}}({{Macro "C++.ReadList" $.FullParameters}});
 ¶
     mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     mEncoder->U32(0); // TODO: ContextID

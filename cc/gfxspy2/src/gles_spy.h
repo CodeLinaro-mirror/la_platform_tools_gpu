@@ -19,10 +19,11 @@
 #ifndef GAPII_GLES_SPY_H
 #define GAPII_GLES_SPY_H
 
-#include "common/encoder.h"
 #include "gles_imports.h"
 #include "gles_state.h"
 #include "gles_types.h"
+
+#include <gapic/encoder.h>
 
 #include <stdint.h>
 #include <unordered_set>
@@ -477,8 +478,8 @@ private:
 
     std::unordered_set<gapic::Id> mObserved;
     std::unique_ptr<gapic::Encoder> mEncoder;
-    Imports mImports;
-    State mState;
+    GlesImports mImports;
+    GlesState mState;
 };
 
 // Inline methods
@@ -522,7 +523,7 @@ inline void GlesSpy::observe(const void* base, uint64_t offset, uint64_t size) {
 
 inline void GlesSpy::eglCreateContext(int32_t* version, int32_t* context) {
     mImports.eglCreateContext(version, context);
-    mState.eglCreateContext(*version, *context);
+    mState.eglCreateContext(version, context);
 
     mEncoder->U16(4);  // Type ID -- TODO: mEncoder->Id(EGL_CREATE_CONTEXT_ID);
     mEncoder->U32(0);  // TODO: ContextID
@@ -578,7 +579,7 @@ inline void GlesSpy::glGetProgramBinaryOES(ProgramId program, int32_t buffer_siz
                                            int32_t* bytes_written, uint32_t* binary_format,
                                            void* binary) {
     mImports.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
-    mState.glGetProgramBinaryOES(program, buffer_size, *bytes_written, *binary_format, binary);
+    mState.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
 
     mEncoder->U16(10);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_BINARY_O_E_S_ID);
     mEncoder->U32(0);   // TODO: ContextID
@@ -955,8 +956,8 @@ inline void GlesSpy::glGetActiveAttrib(ProgramId program, AttributeLocation loca
                                        int32_t* vector_count, uint32_t* type, char* name) {
     mImports.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                                type, name);
-    mState.glGetActiveAttrib(program, location, buffer_size, *buffer_bytes_written, *vector_count,
-                             *type, name);
+    mState.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
+                             type, name);
 
     mEncoder->U16(40);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_ATTRIB_ID);
     mEncoder->U32(0);   // TODO: ContextID
@@ -974,7 +975,7 @@ inline void GlesSpy::glGetActiveUniform(ProgramId program, int32_t location, int
                                         uint32_t* type, char* name) {
     mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
                                 name);
-    mState.glGetActiveUniform(program, location, buffer_size, *buffer_bytes_written, *size, *type,
+    mState.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
                               name);
 
     mEncoder->U16(41);  // Type ID -- TODO: mEncoder->Id(GL_GET_ACTIVE_UNIFORM_ID);
@@ -1607,7 +1608,7 @@ inline void GlesSpy::glVertexAttrib4fv(AttributeLocation location, const float* 
 inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                                 int32_t* range, int32_t* precision) {
     mImports.glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
-    mState.glGetShaderPrecisionFormat(shader_type, precision_type, range, *precision);
+    mState.glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
 
     mEncoder->U16(81);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_PRECISION_FORMAT_ID);
     mEncoder->U32(0);   // TODO: ContextID
@@ -2199,7 +2200,7 @@ inline bool GlesSpy::glIsBuffer(BufferId buffer) {
 
 inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
     mImports.glGetBufferParameteriv(target, parameter, value);
-    mState.glGetBufferParameteriv(target, parameter, *value);
+    mState.glGetBufferParameteriv(target, parameter, value);
 
     mEncoder->U16(123);  // Type ID -- TODO: mEncoder->Id(GL_GET_BUFFER_PARAMETERIV_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2283,7 +2284,7 @@ inline void GlesSpy::glShaderBinary(int32_t count, const ShaderId* shaders, uint
 inline void GlesSpy::glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
                                         int32_t* string_length_written, char* info) {
     mImports.glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
-    mState.glGetShaderInfoLog(shader, buffer_length, *string_length_written, info);
+    mState.glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
 
     mEncoder->U16(128);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_INFO_LOG_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2296,7 +2297,7 @@ inline void GlesSpy::glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
 inline void GlesSpy::glGetShaderSource(ShaderId shader, int32_t buffer_length,
                                        int32_t* string_length_written, char* source) {
     mImports.glGetShaderSource(shader, buffer_length, string_length_written, source);
-    mState.glGetShaderSource(shader, buffer_length, *string_length_written, source);
+    mState.glGetShaderSource(shader, buffer_length, string_length_written, source);
 
     mEncoder->U16(129);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_SOURCE_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2378,7 +2379,7 @@ inline void GlesSpy::glDetachShader(ProgramId program, ShaderId shader) {
 inline void GlesSpy::glGetAttachedShaders(ProgramId program, int32_t buffer_length,
                                           int32_t* shaders_length_written, ShaderId* shaders) {
     mImports.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
-    mState.glGetAttachedShaders(program, buffer_length, *shaders_length_written, shaders);
+    mState.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
 
     mEncoder->U16(137);  // Type ID -- TODO: mEncoder->Id(GL_GET_ATTACHED_SHADERS_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2408,7 +2409,7 @@ inline void GlesSpy::glLinkProgram(ProgramId program) {
 inline void GlesSpy::glGetProgramInfoLog(ProgramId program, int32_t buffer_length,
                                          int32_t* string_length_written, char* info) {
     mImports.glGetProgramInfoLog(program, buffer_length, string_length_written, info);
-    mState.glGetProgramInfoLog(program, buffer_length, *string_length_written, info);
+    mState.glGetProgramInfoLog(program, buffer_length, string_length_written, info);
 
     mEncoder->U16(139);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_INFO_LOG_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2880,7 +2881,7 @@ inline bool GlesSpy::glIsQuery(QueryId query) {
 
 inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
     mImports.glGetQueryiv(target, parameter, value);
-    mState.glGetQueryiv(target, parameter, *value);
+    mState.glGetQueryiv(target, parameter, value);
 
     mEncoder->U16(176);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2891,7 +2892,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
 
 inline void GlesSpy::glGetQueryObjectuiv(QueryId query, uint32_t parameter, uint32_t* value) {
     mImports.glGetQueryObjectuiv(query, parameter, value);
-    mState.glGetQueryObjectuiv(query, parameter, *value);
+    mState.glGetQueryObjectuiv(query, parameter, value);
 
     mEncoder->U16(177);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2979,7 +2980,7 @@ inline void GlesSpy::glQueryCounterEXT(QueryId query, uint32_t target) {
 
 inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
     mImports.glGetQueryivEXT(target, parameter, value);
-    mState.glGetQueryivEXT(target, parameter, *value);
+    mState.glGetQueryivEXT(target, parameter, value);
 
     mEncoder->U16(184);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -2990,7 +2991,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
 
 inline void GlesSpy::glGetQueryObjectivEXT(QueryId query, uint32_t parameter, int32_t* value) {
     mImports.glGetQueryObjectivEXT(query, parameter, value);
-    mState.glGetQueryObjectivEXT(query, parameter, *value);
+    mState.glGetQueryObjectivEXT(query, parameter, value);
 
     mEncoder->U16(185);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -3001,7 +3002,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(QueryId query, uint32_t parameter, in
 
 inline void GlesSpy::glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, uint32_t* value) {
     mImports.glGetQueryObjectuivEXT(query, parameter, value);
-    mState.glGetQueryObjectuivEXT(query, parameter, *value);
+    mState.glGetQueryObjectuivEXT(query, parameter, value);
 
     mEncoder->U16(186);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -3012,7 +3013,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, u
 
 inline void GlesSpy::glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, int64_t* value) {
     mImports.glGetQueryObjecti64vEXT(query, parameter, value);
-    mState.glGetQueryObjecti64vEXT(query, parameter, *value);
+    mState.glGetQueryObjecti64vEXT(query, parameter, value);
 
     mEncoder->U16(187);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
     mEncoder->U32(0);    // TODO: ContextID
@@ -3023,7 +3024,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, 
 
 inline void GlesSpy::glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, uint64_t* value) {
     mImports.glGetQueryObjectui64vEXT(query, parameter, value);
-    mState.glGetQueryObjectui64vEXT(query, parameter, *value);
+    mState.glGetQueryObjectui64vEXT(query, parameter, value);
 
     mEncoder->U16(188);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);
     mEncoder->U32(0);    // TODO: ContextID

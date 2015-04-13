@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#include <gapic/target.h>
-
 #include <dlfcn.h>
 #include <stdlib.h>
 #include <string.h>

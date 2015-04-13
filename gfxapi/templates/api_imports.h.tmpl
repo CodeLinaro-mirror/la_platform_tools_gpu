@@ -14,9 +14,14 @@
  * limitations under the License.
  */}}
 
+{{/* ---- Includes ---- */}}
+{{Include "api_classnames.tmpl"}}
+{{Include "cpp_common.tmpl"    }}
+
+{{/* ---- Overrides ---- */}}
+{{Global "C++.StringType"       "char*"   }}
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
-{{Include "cpp_common.tmpl"}}
 {{$filename := print (Global "API") "_imports.h" }}
 {{$ | Macro "imports.h" | Format (Global "clang-format") | Write $filename}}
 
@@ -27,7 +32,6 @@
 */}}
 {{define "imports.h"}}
   {{Macro "C++.AOSP.Copyright"}}
-  {{$classname := print (Title (Global "API")) "Imports"}}
   {{$guard := print "GAPII_" (Upper (Global "API")) "_IMPORTS_H"}}
 ¶
   #ifndef {{$guard}}
@@ -35,9 +39,11 @@
 ¶
   #include "{{Global "API"}}_types.h"
 ¶
+  #include <gapic/target.h> // STDCALL
+¶
   namespace gapii {
 ¶
-  struct {{$classname}} {
+  struct {{Macro "ApiClassnames.Imports"}} {
     void Resolve();
 ¶
     {{range $c := AllCommands $}}
@@ -80,7 +86,7 @@
 {{define "TypedefFunctionPtr"}}
   {{AssertType $ "Function"}}
 
-  typedef {{Macro "C++.ReturnType" $}} (__stdcall *{{Macro "FunctionPtrType" $}})({{Macro "C++.CallParameters" $}});
+  typedef {{Macro "C++.ReturnType" $}} (STDCALL *{{Macro "FunctionPtrType" $}})({{Macro "C++.CallParameters" $}});
 {{end}}
 
 

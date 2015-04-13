@@ -17,7 +17,7 @@
 #include "encoder.h"
 #include "stream_writer.h"
 
-#include <string>
+#include <cstring>
 
 namespace gapic {
 

@@ -11,9 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{/* ---- Includes ---- */}}
+{{Include "cpp_common.tmpl"}}
+
+{{/* ---- Overrides ---- */}}
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
-{{Include "cpp_common.tmpl"}}
 {{$filename := print (Global "API") "_types.h" }}
 {{$ | Macro "Types" | Format (Global "clang-format") | Write $filename}}
 
@@ -27,52 +30,125 @@ limitations under the License.
 ¶
   #include <memory>
   #include <stdint.h>
+  #include <string>
   #include <unordered_map>
 ¶
   #include "types.h"
 ¶
   namespace gapii {«
 ¶
-  // Class forward declarations.
-  {{range $c := $.Classes}}
-    struct {{Macro "C++.StateType" $c}};
-  {{end}}
-¶
-  // Enums & bitfields
   {{range $e := $.Enums}}
-    namespace {{Macro "C++.EnumName" $e}} {
-      {{range $entry := $e.AllEntries}}
-        static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
-      {{end}}
-    }¶
-¶
+    {{Macro "DeclareType" $e}}
   {{end}}
-¶
-  // Pseudonyms
-  {{range $e := $.Pseudonyms}}
-    typedef {{Macro "C++.StateType" $e.To}} {{$e.Name}};
+  {{range $p := $.Pseudonyms}}
+    {{Macro "DeclareType" $p}}
   {{end}}
-¶
-  // Maps
   {{range $m := $.Maps}}
-    typedef std::unordered_map<{{Macro "C++.StateType" $m.KeyType}}, {{Macro "C++.StateType" $m.ValueType}}> {{$m.Name}};
+    {{Macro "DeclareType" $m}}
   {{end}}
-¶
-  // Classes
   {{range $c := $.Classes}}
-    struct {{$c.Name}} {
-      {{range $f := $c.Fields}}
-        inline {{$c.Name}}& Set{{$f.Name}}({{Macro "C++.StateType" $f}} v) { this->{{$f.Name}} = v; return *this; }
-      {{end}}
-¶
-      {{range $f := $c.Fields}}
-        {{Macro "C++.StateType" $f}} {{$f.Name}};
-      {{end}}
-    };¶
+    {{Macro "DeclareType" $c}}
   {{end}}
 ¶
   »} // namespace gapii
 ¶
   #endif // {{$guard}}
 ¶
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ type declaration specified AST type if it hasn't already been
+  declared.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareType"}}
+  {{if not (IsBuiltin $)}}
+    {{$key  := printf "ApiType%dDeclared" $.Name}}
+    {{if not (Global $key)}}
+      {{Global $key "true"}}
+      {{     if IsClass     $}}{{Macro "DeclareClass"     $}}
+      {{else if IsEnum      $}}{{Macro "DeclareEnum"      $}}
+      {{else if IsPseudonym $}}{{Macro "DeclarePseudonym" $}}
+      {{else if IsMap       $}}{{Macro "DeclareMap"       $}}
+      {{else if IsPointer   $}}{{Macro "DeclareType"      $.To}}
+      {{else if IsArray     $}}{{Macro "DeclareType"      $.ValueType}}
+      {{else}}{{Error "DeclareType does not support type '%T'" $}}
+      {{end}}
+¶
+    {{end}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the declarations for all non-declared field types of the class followed
+  by the class declaration.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareClass"}}
+  {{AssertType $ "Class"}}
+
+  {{range $f := $.Fields}}
+    {{Macro "DeclareType" (TypeOf $f)}}
+  {{end}}
+
+  struct {{$.Name}} {
+    {{range $f := $.Fields}}
+      inline {{$.Name}}& Set{{$f.Name}}({{Macro "C++.StateType" $f}} v) { m{{$f.Name}} = v; return *this; }
+    {{end}}
+¶
+    {{range $f := $.Fields}}
+      {{Macro "C++.StateType" $f}} m{{$f.Name}};
+    {{end}}
+  };
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits an enum declaration as a number of uint32_t constants in a namespace.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareEnum"}}
+  {{AssertType $ "Enum"}}
+
+  namespace {{Macro "C++.EnumName" $}} {
+    {{range $entry := $.AllEntries}}
+      static const uint32_t {{Macro "C++.EnumEntryName" $entry}} = {{$entry.Value}};
+    {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the declaration of the pseudonym's target type (if it is not already
+  declared) followed by the pseudonym's typedef declaration.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclarePseudonym"}}
+  {{AssertType $ "Pseudonym"}}
+
+  {{Macro "DeclareType" $.To}}
+
+  typedef {{Macro "C++.StateType" $.To}} {{$.Name}};
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the declaration of the map's key and value types (if it is not already
+  declared) followed by the map's declaration as a std::unordered_map.
+-------------------------------------------------------------------------------
+*/}}
+{{define "DeclareMap"}}
+  {{AssertType $ "Map"}}
+
+  {{Macro "DeclareType" $.KeyType}}
+  {{Macro "DeclareType" $.ValueType}}
+
+  typedef std::unordered_map<{{Macro "C++.StateType" $.KeyType}}, {{Macro "C++.StateType" $.ValueType}}> {{$.Name}};
 {{end}}

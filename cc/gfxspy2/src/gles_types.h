@@ -21,47 +21,13 @@
 
 #include <memory>
 #include <stdint.h>
+#include <string>
 #include <unordered_map>
 
 #include "types.h"
 
 namespace gapii {
 
-// Class forward declarations.
-struct Color;
-struct Rect;
-struct Image;
-struct FramebufferAttachable;
-struct Renderbuffer;
-struct Texture;
-struct CubemapLevel;
-struct FramebufferAttachmentInfo;
-struct Framebuffer;
-struct Buffer;
-struct Shader;
-struct VertexAttribute;
-struct Vec2i;
-struct Vec3i;
-struct Vec4i;
-struct Vec2f;
-struct Vec3f;
-struct Vec4f;
-struct Mat2f;
-struct Mat3f;
-struct Mat4f;
-struct UniformValue;
-struct Uniform;
-struct Program;
-struct VertexArray;
-struct VertexAttributeArray;
-struct Query;
-struct BlendState;
-struct RasterizerState;
-struct ClearState;
-struct InternalState;
-struct Objects;
-
-// Enums & bitfields
 namespace DrawMode {
 static const uint32_t GL_LINE_LOOP = 2;
 static const uint32_t GL_LINE_STRIP = 3;
@@ -923,893 +889,929 @@ static const uint32_t GL_MAP_FLUSH_EXPLICIT_BIT = 16;
 static const uint32_t GL_MAP_UNSYNCHRONIZED_BIT = 32;
 }
 
-// Pseudonyms
 typedef uint32_t RenderbufferId;
+
 typedef uint32_t TextureId;
+
 typedef uint32_t FramebufferId;
+
 typedef uint32_t BufferId;
+
 typedef uint32_t ShaderId;
+
 typedef uint32_t ProgramId;
+
 typedef uint32_t VertexArrayId;
+
 typedef uint32_t QueryId;
+
 typedef int32_t UniformLocation;
+
 typedef uint32_t AttributeLocation;
+
 typedef void* IndicesPointer;
+
 typedef void* VertexPointer;
+
 typedef void* TexturePointer;
+
 typedef void* BufferDataPointer;
+
 typedef void* HDC;
+
 typedef void* ImageOES;
 
-// Maps
-typedef std::unordered_map<char*, AttributeLocation> AttributeLocation_stringMap;
+typedef std::unordered_map<std::string, AttributeLocation> AttributeLocation_stringMap;
+
 typedef std::unordered_map<uint32_t, bool> Bool_CapabilityMap;
+
 typedef std::unordered_map<uint32_t, BufferId> BufferId_BufferTargetMap;
-typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferRef_BufferIdMap;
-typedef std::unordered_map<int32_t, CubemapLevel> CubemapLevel_s32Map;
-typedef std::unordered_map<uint32_t, FramebufferAttachmentInfo>
-        FramebufferAttachmentInfo_FramebufferAttachmentMap;
-typedef std::unordered_map<uint32_t, FramebufferId> FramebufferId_FramebufferTargetMap;
-typedef std::unordered_map<FramebufferId, std::shared_ptr<Framebuffer>>
-        FramebufferRef_FramebufferIdMap;
-typedef std::unordered_map<uint32_t, Image> Image_CubeMapImageTargetMap;
-typedef std::unordered_map<int32_t, Image> Image_s32Map;
-typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramRef_ProgramIdMap;
-typedef std::unordered_map<QueryId, std::shared_ptr<Query>> QueryRef_QueryIdMap;
-typedef std::unordered_map<uint32_t, RenderbufferId> RenderbufferId_RenderbufferTargetMap;
-typedef std::unordered_map<RenderbufferId, std::shared_ptr<Renderbuffer>>
-        RenderbufferRef_RenderbufferIdMap;
-typedef std::unordered_map<uint32_t, int32_t> S32_PixelStoreParameterMap;
-typedef std::unordered_map<uint32_t, ShaderId> ShaderId_ShaderTypeMap;
-typedef std::unordered_map<ShaderId, std::shared_ptr<Shader>> ShaderRef_ShaderIdMap;
-typedef std::unordered_map<uint32_t, TextureId> TextureId_TextureTargetMap;
-typedef std::unordered_map<uint32_t, TextureId_TextureTargetMap>
-        TextureId_TextureTargetMap_TextureUnitMap;
-typedef std::unordered_map<TextureId, std::shared_ptr<Texture>> TextureRef_TextureIdMap;
-typedef std::unordered_map<uint32_t, uint32_t> U32_FaceModeMap;
-typedef std::unordered_map<UniformLocation, Uniform> Uniform_UniformLocationMap;
-typedef std::unordered_map<VertexArrayId, std::shared_ptr<VertexArray>>
-        VertexArrayRef_VertexArrayIdMap;
-typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>
-        VertexAttributeArrayRef_AttributeLocationMap;
-typedef std::unordered_map<int32_t, VertexAttribute> VertexAttribute_s32Map;
-
-// Classes
-struct Color {
-    inline Color& SetRed(float v) {
-        this->Red = v;
-        return *this;
-    }
-    inline Color& SetGreen(float v) {
-        this->Green = v;
-        return *this;
-    }
-    inline Color& SetBlue(float v) {
-        this->Blue = v;
-        return *this;
-    }
-    inline Color& SetAlpha(float v) {
-        this->Alpha = v;
-        return *this;
-    }
-
-    float Red;
-    float Green;
-    float Blue;
-    float Alpha;
-};
-
-struct Rect {
-    inline Rect& SetX(int32_t v) {
-        this->X = v;
-        return *this;
-    }
-    inline Rect& SetY(int32_t v) {
-        this->Y = v;
-        return *this;
-    }
-    inline Rect& SetWidth(int32_t v) {
-        this->Width = v;
-        return *this;
-    }
-    inline Rect& SetHeight(int32_t v) {
-        this->Height = v;
-        return *this;
-    }
-
-    int32_t X;
-    int32_t Y;
-    int32_t Width;
-    int32_t Height;
-};
-
-struct Image {
-    inline Image& SetWidth(int32_t v) {
-        this->Width = v;
-        return *this;
-    }
-    inline Image& SetHeight(int32_t v) {
-        this->Height = v;
-        return *this;
-    }
-    inline Image& SetData(Memory v) {
-        this->Data = v;
-        return *this;
-    }
-    inline Image& SetSize(int32_t v) {
-        this->Size = v;
-        return *this;
-    }
-    inline Image& SetFormat(uint32_t v) {
-        this->Format = v;
-        return *this;
-    }
-
-    int32_t Width;
-    int32_t Height;
-    Memory Data;
-    int32_t Size;
-    uint32_t Format;
-};
-
-struct FramebufferAttachable {};
-
-struct Renderbuffer {
-    inline Renderbuffer& SetWidth(int32_t v) {
-        this->Width = v;
-        return *this;
-    }
-    inline Renderbuffer& SetHeight(int32_t v) {
-        this->Height = v;
-        return *this;
-    }
-    inline Renderbuffer& SetData(Memory v) {
-        this->Data = v;
-        return *this;
-    }
-    inline Renderbuffer& SetFormat(uint32_t v) {
-        this->Format = v;
-        return *this;
-    }
-
-    int32_t Width;
-    int32_t Height;
-    Memory Data;
-    uint32_t Format;
-};
-
-struct Texture {
-    inline Texture& SetKind(uint32_t v) {
-        this->Kind = v;
-        return *this;
-    }
-    inline Texture& SetFormat(uint32_t v) {
-        this->Format = v;
-        return *this;
-    }
-    inline Texture& SetTexture2D(Image_s32Map v) {
-        this->Texture2D = v;
-        return *this;
-    }
-    inline Texture& SetCubemap(CubemapLevel_s32Map v) {
-        this->Cubemap = v;
-        return *this;
-    }
-    inline Texture& SetMagFilter(uint32_t v) {
-        this->MagFilter = v;
-        return *this;
-    }
-    inline Texture& SetMinFilter(uint32_t v) {
-        this->MinFilter = v;
-        return *this;
-    }
-    inline Texture& SetWrapS(uint32_t v) {
-        this->WrapS = v;
-        return *this;
-    }
-    inline Texture& SetWrapT(uint32_t v) {
-        this->WrapT = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleR(uint32_t v) {
-        this->SwizzleR = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleG(uint32_t v) {
-        this->SwizzleG = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleB(uint32_t v) {
-        this->SwizzleB = v;
-        return *this;
-    }
-    inline Texture& SetSwizzleA(uint32_t v) {
-        this->SwizzleA = v;
-        return *this;
-    }
-    inline Texture& SetMaxAnisotropy(float v) {
-        this->MaxAnisotropy = v;
-        return *this;
-    }
-
-    uint32_t Kind;
-    uint32_t Format;
-    Image_s32Map Texture2D;
-    CubemapLevel_s32Map Cubemap;
-    uint32_t MagFilter;
-    uint32_t MinFilter;
-    uint32_t WrapS;
-    uint32_t WrapT;
-    uint32_t SwizzleR;
-    uint32_t SwizzleG;
-    uint32_t SwizzleB;
-    uint32_t SwizzleA;
-    float MaxAnisotropy;
-};
-
-struct CubemapLevel {
-    inline CubemapLevel& SetFaces(Image_CubeMapImageTargetMap v) {
-        this->Faces = v;
-        return *this;
-    }
-
-    Image_CubeMapImageTargetMap Faces;
-};
-
-struct FramebufferAttachmentInfo {
-    inline FramebufferAttachmentInfo& SetObject(uint32_t v) {
-        this->Object = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetType(uint32_t v) {
-        this->Type = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetTextureLevel(int32_t v) {
-        this->TextureLevel = v;
-        return *this;
-    }
-    inline FramebufferAttachmentInfo& SetCubeMapFace(uint32_t v) {
-        this->CubeMapFace = v;
-        return *this;
-    }
-
-    uint32_t Object;
-    uint32_t Type;
-    int32_t TextureLevel;
-    uint32_t CubeMapFace;
-};
-
-struct Framebuffer {
-    inline Framebuffer& SetAttachments(FramebufferAttachmentInfo_FramebufferAttachmentMap v) {
-        this->Attachments = v;
-        return *this;
-    }
-
-    FramebufferAttachmentInfo_FramebufferAttachmentMap Attachments;
-};
 
 struct Buffer {
     inline Buffer& SetData(Memory v) {
-        this->Data = v;
+        mData = v;
         return *this;
     }
     inline Buffer& SetSize(int32_t v) {
-        this->Size = v;
+        mSize = v;
         return *this;
     }
     inline Buffer& SetUsage(uint32_t v) {
-        this->Usage = v;
+        mUsage = v;
         return *this;
     }
 
-    Memory Data;
-    int32_t Size;
-    uint32_t Usage;
+    Memory mData;
+    int32_t mSize;
+    uint32_t mUsage;
 };
 
-struct Shader {
-    inline Shader& SetBinary(Memory v) {
-        this->Binary = v;
+typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferRef_BufferIdMap;
+
+struct Image {
+    inline Image& SetWidth(int32_t v) {
+        mWidth = v;
         return *this;
     }
-    inline Shader& SetCompiled(bool v) {
-        this->Compiled = v;
+    inline Image& SetHeight(int32_t v) {
+        mHeight = v;
         return *this;
     }
-    inline Shader& SetDeletable(bool v) {
-        this->Deletable = v;
+    inline Image& SetData(Memory v) {
+        mData = v;
         return *this;
     }
-    inline Shader& SetInfoLog(char* v) {
-        this->InfoLog = v;
+    inline Image& SetSize(int32_t v) {
+        mSize = v;
         return *this;
     }
-    inline Shader& SetSource(char** v) {
-        this->Source = v;
-        return *this;
-    }
-    inline Shader& SetType(uint32_t v) {
-        this->Type = v;
+    inline Image& SetFormat(uint32_t v) {
+        mFormat = v;
         return *this;
     }
 
-    Memory Binary;
-    bool Compiled;
-    bool Deletable;
-    char* InfoLog;
-    char** Source;
-    uint32_t Type;
+    int32_t mWidth;
+    int32_t mHeight;
+    Memory mData;
+    int32_t mSize;
+    uint32_t mFormat;
 };
+
+typedef std::unordered_map<uint32_t, Image> Image_CubeMapImageTargetMap;
+
+struct CubemapLevel {
+    inline CubemapLevel& SetFaces(Image_CubeMapImageTargetMap v) {
+        mFaces = v;
+        return *this;
+    }
+
+    Image_CubeMapImageTargetMap mFaces;
+};
+
+typedef std::unordered_map<int32_t, CubemapLevel> CubemapLevel_s32Map;
+
+struct FramebufferAttachmentInfo {
+    inline FramebufferAttachmentInfo& SetObject(uint32_t v) {
+        mObject = v;
+        return *this;
+    }
+    inline FramebufferAttachmentInfo& SetType(uint32_t v) {
+        mType = v;
+        return *this;
+    }
+    inline FramebufferAttachmentInfo& SetTextureLevel(int32_t v) {
+        mTextureLevel = v;
+        return *this;
+    }
+    inline FramebufferAttachmentInfo& SetCubeMapFace(uint32_t v) {
+        mCubeMapFace = v;
+        return *this;
+    }
+
+    uint32_t mObject;
+    uint32_t mType;
+    int32_t mTextureLevel;
+    uint32_t mCubeMapFace;
+};
+
+typedef std::unordered_map<uint32_t, FramebufferAttachmentInfo>
+        FramebufferAttachmentInfo_FramebufferAttachmentMap;
+
+typedef std::unordered_map<uint32_t, FramebufferId> FramebufferId_FramebufferTargetMap;
+
+struct Framebuffer {
+    inline Framebuffer& SetAttachments(FramebufferAttachmentInfo_FramebufferAttachmentMap v) {
+        mAttachments = v;
+        return *this;
+    }
+
+    FramebufferAttachmentInfo_FramebufferAttachmentMap mAttachments;
+};
+
+typedef std::unordered_map<FramebufferId, std::shared_ptr<Framebuffer>>
+        FramebufferRef_FramebufferIdMap;
+
+typedef std::unordered_map<int32_t, Image> Image_s32Map;
+
+typedef std::unordered_map<uint32_t, ShaderId> ShaderId_ShaderTypeMap;
 
 struct VertexAttribute {
-    inline VertexAttribute& SetName(char* v) {
-        this->Name = v;
+    inline VertexAttribute& SetName(std::string v) {
+        mName = v;
         return *this;
     }
     inline VertexAttribute& SetVectorCount(int32_t v) {
-        this->VectorCount = v;
+        mVectorCount = v;
         return *this;
     }
     inline VertexAttribute& SetType(uint32_t v) {
-        this->Type = v;
+        mType = v;
         return *this;
     }
 
-    char* Name;
-    int32_t VectorCount;
-    uint32_t Type;
+    std::string mName;
+    int32_t mVectorCount;
+    uint32_t mType;
 };
 
-struct Vec2i {
-    inline Vec2i& SetX(int32_t v) {
-        this->X = v;
-        return *this;
-    }
-    inline Vec2i& SetY(int32_t v) {
-        this->Y = v;
-        return *this;
-    }
-
-    int32_t X;
-    int32_t Y;
-};
-
-struct Vec3i {
-    inline Vec3i& SetX(int32_t v) {
-        this->X = v;
-        return *this;
-    }
-    inline Vec3i& SetY(int32_t v) {
-        this->Y = v;
-        return *this;
-    }
-    inline Vec3i& SetZ(int32_t v) {
-        this->Z = v;
-        return *this;
-    }
-
-    int32_t X;
-    int32_t Y;
-    int32_t Z;
-};
-
-struct Vec4i {
-    inline Vec4i& SetX(int32_t v) {
-        this->X = v;
-        return *this;
-    }
-    inline Vec4i& SetY(int32_t v) {
-        this->Y = v;
-        return *this;
-    }
-    inline Vec4i& SetZ(int32_t v) {
-        this->Z = v;
-        return *this;
-    }
-    inline Vec4i& SetW(int32_t v) {
-        this->W = v;
-        return *this;
-    }
-
-    int32_t X;
-    int32_t Y;
-    int32_t Z;
-    int32_t W;
-};
+typedef std::unordered_map<int32_t, VertexAttribute> VertexAttribute_s32Map;
 
 struct Vec2f {
     inline Vec2f& SetX(float v) {
-        this->X = v;
+        mX = v;
         return *this;
     }
     inline Vec2f& SetY(float v) {
-        this->Y = v;
+        mY = v;
         return *this;
     }
 
-    float X;
-    float Y;
+    float mX;
+    float mY;
 };
 
 struct Vec3f {
     inline Vec3f& SetX(float v) {
-        this->X = v;
+        mX = v;
         return *this;
     }
     inline Vec3f& SetY(float v) {
-        this->Y = v;
+        mY = v;
         return *this;
     }
     inline Vec3f& SetZ(float v) {
-        this->Z = v;
+        mZ = v;
         return *this;
     }
 
-    float X;
-    float Y;
-    float Z;
+    float mX;
+    float mY;
+    float mZ;
 };
 
 struct Vec4f {
     inline Vec4f& SetX(float v) {
-        this->X = v;
+        mX = v;
         return *this;
     }
     inline Vec4f& SetY(float v) {
-        this->Y = v;
+        mY = v;
         return *this;
     }
     inline Vec4f& SetZ(float v) {
-        this->Z = v;
+        mZ = v;
         return *this;
     }
     inline Vec4f& SetW(float v) {
-        this->W = v;
+        mW = v;
         return *this;
     }
 
-    float X;
-    float Y;
-    float Z;
-    float W;
+    float mX;
+    float mY;
+    float mZ;
+    float mW;
+};
+
+struct Vec2i {
+    inline Vec2i& SetX(int32_t v) {
+        mX = v;
+        return *this;
+    }
+    inline Vec2i& SetY(int32_t v) {
+        mY = v;
+        return *this;
+    }
+
+    int32_t mX;
+    int32_t mY;
+};
+
+struct Vec3i {
+    inline Vec3i& SetX(int32_t v) {
+        mX = v;
+        return *this;
+    }
+    inline Vec3i& SetY(int32_t v) {
+        mY = v;
+        return *this;
+    }
+    inline Vec3i& SetZ(int32_t v) {
+        mZ = v;
+        return *this;
+    }
+
+    int32_t mX;
+    int32_t mY;
+    int32_t mZ;
+};
+
+struct Vec4i {
+    inline Vec4i& SetX(int32_t v) {
+        mX = v;
+        return *this;
+    }
+    inline Vec4i& SetY(int32_t v) {
+        mY = v;
+        return *this;
+    }
+    inline Vec4i& SetZ(int32_t v) {
+        mZ = v;
+        return *this;
+    }
+    inline Vec4i& SetW(int32_t v) {
+        mW = v;
+        return *this;
+    }
+
+    int32_t mX;
+    int32_t mY;
+    int32_t mZ;
+    int32_t mW;
 };
 
 struct Mat2f {
     inline Mat2f& SetCol0(Vec2f v) {
-        this->Col0 = v;
+        mCol0 = v;
         return *this;
     }
     inline Mat2f& SetCol1(Vec2f v) {
-        this->Col1 = v;
+        mCol1 = v;
         return *this;
     }
 
-    Vec2f Col0;
-    Vec2f Col1;
+    Vec2f mCol0;
+    Vec2f mCol1;
 };
 
 struct Mat3f {
     inline Mat3f& SetCol0(Vec3f v) {
-        this->Col0 = v;
+        mCol0 = v;
         return *this;
     }
     inline Mat3f& SetCol1(Vec3f v) {
-        this->Col1 = v;
+        mCol1 = v;
         return *this;
     }
     inline Mat3f& SetCol2(Vec3f v) {
-        this->Col2 = v;
+        mCol2 = v;
         return *this;
     }
 
-    Vec3f Col0;
-    Vec3f Col1;
-    Vec3f Col2;
+    Vec3f mCol0;
+    Vec3f mCol1;
+    Vec3f mCol2;
 };
 
 struct Mat4f {
     inline Mat4f& SetCol0(Vec4f v) {
-        this->Col0 = v;
+        mCol0 = v;
         return *this;
     }
     inline Mat4f& SetCol1(Vec4f v) {
-        this->Col1 = v;
+        mCol1 = v;
         return *this;
     }
     inline Mat4f& SetCol2(Vec4f v) {
-        this->Col2 = v;
+        mCol2 = v;
         return *this;
     }
     inline Mat4f& SetCol3(Vec4f v) {
-        this->Col3 = v;
+        mCol3 = v;
         return *this;
     }
 
-    Vec4f Col0;
-    Vec4f Col1;
-    Vec4f Col2;
-    Vec4f Col3;
+    Vec4f mCol0;
+    Vec4f mCol1;
+    Vec4f mCol2;
+    Vec4f mCol3;
 };
 
 struct UniformValue {
     inline UniformValue& SetF32(float v) {
-        this->F32 = v;
+        mF32 = v;
         return *this;
     }
     inline UniformValue& SetVec2f(Vec2f v) {
-        this->Vec2f = v;
+        mVec2f = v;
         return *this;
     }
     inline UniformValue& SetVec3f(Vec3f v) {
-        this->Vec3f = v;
+        mVec3f = v;
         return *this;
     }
     inline UniformValue& SetVec4f(Vec4f v) {
-        this->Vec4f = v;
+        mVec4f = v;
         return *this;
     }
     inline UniformValue& SetS32(int32_t v) {
-        this->S32 = v;
+        mS32 = v;
         return *this;
     }
     inline UniformValue& SetVec2i(Vec2i v) {
-        this->Vec2i = v;
+        mVec2i = v;
         return *this;
     }
     inline UniformValue& SetVec3i(Vec3i v) {
-        this->Vec3i = v;
+        mVec3i = v;
         return *this;
     }
     inline UniformValue& SetVec4i(Vec4i v) {
-        this->Vec4i = v;
+        mVec4i = v;
         return *this;
     }
     inline UniformValue& SetMat2f(Mat2f v) {
-        this->Mat2f = v;
+        mMat2f = v;
         return *this;
     }
     inline UniformValue& SetMat3f(Mat3f v) {
-        this->Mat3f = v;
+        mMat3f = v;
         return *this;
     }
     inline UniformValue& SetMat4f(Mat4f v) {
-        this->Mat4f = v;
+        mMat4f = v;
         return *this;
     }
 
-    float F32;
-    Vec2f Vec2f;
-    Vec3f Vec3f;
-    Vec4f Vec4f;
-    int32_t S32;
-    Vec2i Vec2i;
-    Vec3i Vec3i;
-    Vec4i Vec4i;
-    Mat2f Mat2f;
-    Mat3f Mat3f;
-    Mat4f Mat4f;
+    float mF32;
+    Vec2f mVec2f;
+    Vec3f mVec3f;
+    Vec4f mVec4f;
+    int32_t mS32;
+    Vec2i mVec2i;
+    Vec3i mVec3i;
+    Vec4i mVec4i;
+    Mat2f mMat2f;
+    Mat3f mMat3f;
+    Mat4f mMat4f;
 };
 
 struct Uniform {
-    inline Uniform& SetName(char* v) {
-        this->Name = v;
+    inline Uniform& SetName(std::string v) {
+        mName = v;
         return *this;
     }
     inline Uniform& SetType(uint32_t v) {
-        this->Type = v;
+        mType = v;
         return *this;
     }
     inline Uniform& SetValue(UniformValue v) {
-        this->Value = v;
+        mValue = v;
         return *this;
     }
 
-    char* Name;
-    uint32_t Type;
-    UniformValue Value;
+    std::string mName;
+    uint32_t mType;
+    UniformValue mValue;
 };
+
+typedef std::unordered_map<UniformLocation, Uniform> Uniform_UniformLocationMap;
 
 struct Program {
     inline Program& SetShaders(ShaderId_ShaderTypeMap v) {
-        this->Shaders = v;
+        mShaders = v;
         return *this;
     }
     inline Program& SetLinked(bool v) {
-        this->Linked = v;
+        mLinked = v;
         return *this;
     }
     inline Program& SetBinary(Memory v) {
-        this->Binary = v;
+        mBinary = v;
         return *this;
     }
     inline Program& SetAttributeBindings(AttributeLocation_stringMap v) {
-        this->AttributeBindings = v;
+        mAttributeBindings = v;
         return *this;
     }
     inline Program& SetAttributes(VertexAttribute_s32Map v) {
-        this->Attributes = v;
+        mAttributes = v;
         return *this;
     }
     inline Program& SetUniforms(Uniform_UniformLocationMap v) {
-        this->Uniforms = v;
+        mUniforms = v;
         return *this;
     }
-    inline Program& SetInfoLog(char* v) {
-        this->InfoLog = v;
+    inline Program& SetInfoLog(std::string v) {
+        mInfoLog = v;
         return *this;
     }
 
-    ShaderId_ShaderTypeMap Shaders;
-    bool Linked;
-    Memory Binary;
-    AttributeLocation_stringMap AttributeBindings;
-    VertexAttribute_s32Map Attributes;
-    Uniform_UniformLocationMap Uniforms;
-    char* InfoLog;
+    ShaderId_ShaderTypeMap mShaders;
+    bool mLinked;
+    Memory mBinary;
+    AttributeLocation_stringMap mAttributeBindings;
+    VertexAttribute_s32Map mAttributes;
+    Uniform_UniformLocationMap mUniforms;
+    std::string mInfoLog;
 };
 
-struct VertexArray {};
-
-struct VertexAttributeArray {
-    inline VertexAttributeArray& SetEnabled(bool v) {
-        this->Enabled = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetSize(int32_t v) {
-        this->Size = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetType(uint32_t v) {
-        this->Type = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetNormalized(bool v) {
-        this->Normalized = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetStride(int32_t v) {
-        this->Stride = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetBuffer(BufferId v) {
-        this->Buffer = v;
-        return *this;
-    }
-    inline VertexAttributeArray& SetPointer(void* v) {
-        this->Pointer = v;
-        return *this;
-    }
-
-    bool Enabled;
-    int32_t Size;
-    uint32_t Type;
-    bool Normalized;
-    int32_t Stride;
-    BufferId Buffer;
-    void* Pointer;
-};
+typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramRef_ProgramIdMap;
 
 struct Query {};
 
-struct BlendState {
-    inline BlendState& SetSrcRgbBlendFactor(uint32_t v) {
-        this->SrcRgbBlendFactor = v;
+typedef std::unordered_map<QueryId, std::shared_ptr<Query>> QueryRef_QueryIdMap;
+
+typedef std::unordered_map<uint32_t, RenderbufferId> RenderbufferId_RenderbufferTargetMap;
+
+struct Renderbuffer {
+    inline Renderbuffer& SetWidth(int32_t v) {
+        mWidth = v;
         return *this;
     }
-    inline BlendState& SetSrcAlphaBlendFactor(uint32_t v) {
-        this->SrcAlphaBlendFactor = v;
+    inline Renderbuffer& SetHeight(int32_t v) {
+        mHeight = v;
         return *this;
     }
-    inline BlendState& SetDstRgbBlendFactor(uint32_t v) {
-        this->DstRgbBlendFactor = v;
+    inline Renderbuffer& SetData(Memory v) {
+        mData = v;
         return *this;
     }
-    inline BlendState& SetDstAlphaBlendFactor(uint32_t v) {
-        this->DstAlphaBlendFactor = v;
-        return *this;
-    }
-    inline BlendState& SetBlendEquationRgb(uint32_t v) {
-        this->BlendEquationRgb = v;
-        return *this;
-    }
-    inline BlendState& SetBlendEquationAlpha(uint32_t v) {
-        this->BlendEquationAlpha = v;
-        return *this;
-    }
-    inline BlendState& SetBlendColor(Color v) {
-        this->BlendColor = v;
+    inline Renderbuffer& SetFormat(uint32_t v) {
+        mFormat = v;
         return *this;
     }
 
-    uint32_t SrcRgbBlendFactor;
-    uint32_t SrcAlphaBlendFactor;
-    uint32_t DstRgbBlendFactor;
-    uint32_t DstAlphaBlendFactor;
-    uint32_t BlendEquationRgb;
-    uint32_t BlendEquationAlpha;
-    Color BlendColor;
+    int32_t mWidth;
+    int32_t mHeight;
+    Memory mData;
+    uint32_t mFormat;
+};
+
+typedef std::unordered_map<RenderbufferId, std::shared_ptr<Renderbuffer>>
+        RenderbufferRef_RenderbufferIdMap;
+
+typedef std::unordered_map<uint32_t, int32_t> S32_PixelStoreParameterMap;
+
+struct Shader {
+    inline Shader& SetBinary(Memory v) {
+        mBinary = v;
+        return *this;
+    }
+    inline Shader& SetCompiled(bool v) {
+        mCompiled = v;
+        return *this;
+    }
+    inline Shader& SetDeletable(bool v) {
+        mDeletable = v;
+        return *this;
+    }
+    inline Shader& SetInfoLog(std::string v) {
+        mInfoLog = v;
+        return *this;
+    }
+    inline Shader& SetSource(std::string* v) {
+        mSource = v;
+        return *this;
+    }
+    inline Shader& SetType(uint32_t v) {
+        mType = v;
+        return *this;
+    }
+
+    Memory mBinary;
+    bool mCompiled;
+    bool mDeletable;
+    std::string mInfoLog;
+    std::string* mSource;
+    uint32_t mType;
+};
+
+typedef std::unordered_map<ShaderId, std::shared_ptr<Shader>> ShaderRef_ShaderIdMap;
+
+typedef std::unordered_map<uint32_t, TextureId> TextureId_TextureTargetMap;
+
+typedef std::unordered_map<uint32_t, TextureId_TextureTargetMap>
+        TextureId_TextureTargetMap_TextureUnitMap;
+
+struct Texture {
+    inline Texture& SetKind(uint32_t v) {
+        mKind = v;
+        return *this;
+    }
+    inline Texture& SetFormat(uint32_t v) {
+        mFormat = v;
+        return *this;
+    }
+    inline Texture& SetTexture2D(Image_s32Map v) {
+        mTexture2D = v;
+        return *this;
+    }
+    inline Texture& SetCubemap(CubemapLevel_s32Map v) {
+        mCubemap = v;
+        return *this;
+    }
+    inline Texture& SetMagFilter(uint32_t v) {
+        mMagFilter = v;
+        return *this;
+    }
+    inline Texture& SetMinFilter(uint32_t v) {
+        mMinFilter = v;
+        return *this;
+    }
+    inline Texture& SetWrapS(uint32_t v) {
+        mWrapS = v;
+        return *this;
+    }
+    inline Texture& SetWrapT(uint32_t v) {
+        mWrapT = v;
+        return *this;
+    }
+    inline Texture& SetSwizzleR(uint32_t v) {
+        mSwizzleR = v;
+        return *this;
+    }
+    inline Texture& SetSwizzleG(uint32_t v) {
+        mSwizzleG = v;
+        return *this;
+    }
+    inline Texture& SetSwizzleB(uint32_t v) {
+        mSwizzleB = v;
+        return *this;
+    }
+    inline Texture& SetSwizzleA(uint32_t v) {
+        mSwizzleA = v;
+        return *this;
+    }
+    inline Texture& SetMaxAnisotropy(float v) {
+        mMaxAnisotropy = v;
+        return *this;
+    }
+
+    uint32_t mKind;
+    uint32_t mFormat;
+    Image_s32Map mTexture2D;
+    CubemapLevel_s32Map mCubemap;
+    uint32_t mMagFilter;
+    uint32_t mMinFilter;
+    uint32_t mWrapS;
+    uint32_t mWrapT;
+    uint32_t mSwizzleR;
+    uint32_t mSwizzleG;
+    uint32_t mSwizzleB;
+    uint32_t mSwizzleA;
+    float mMaxAnisotropy;
+};
+
+typedef std::unordered_map<TextureId, std::shared_ptr<Texture>> TextureRef_TextureIdMap;
+
+typedef std::unordered_map<uint32_t, uint32_t> U32_FaceModeMap;
+
+struct VertexArray {};
+
+typedef std::unordered_map<VertexArrayId, std::shared_ptr<VertexArray>>
+        VertexArrayRef_VertexArrayIdMap;
+
+struct VertexAttributeArray {
+    inline VertexAttributeArray& SetEnabled(bool v) {
+        mEnabled = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetSize(int32_t v) {
+        mSize = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetType(uint32_t v) {
+        mType = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetNormalized(bool v) {
+        mNormalized = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetStride(int32_t v) {
+        mStride = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetBuffer(BufferId v) {
+        mBuffer = v;
+        return *this;
+    }
+    inline VertexAttributeArray& SetPointer(void* v) {
+        mPointer = v;
+        return *this;
+    }
+
+    bool mEnabled;
+    int32_t mSize;
+    uint32_t mType;
+    bool mNormalized;
+    int32_t mStride;
+    BufferId mBuffer;
+    void* mPointer;
+};
+
+typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>
+        VertexAttributeArrayRef_AttributeLocationMap;
+
+struct Color {
+    inline Color& SetRed(float v) {
+        mRed = v;
+        return *this;
+    }
+    inline Color& SetGreen(float v) {
+        mGreen = v;
+        return *this;
+    }
+    inline Color& SetBlue(float v) {
+        mBlue = v;
+        return *this;
+    }
+    inline Color& SetAlpha(float v) {
+        mAlpha = v;
+        return *this;
+    }
+
+    float mRed;
+    float mGreen;
+    float mBlue;
+    float mAlpha;
+};
+
+struct Rect {
+    inline Rect& SetX(int32_t v) {
+        mX = v;
+        return *this;
+    }
+    inline Rect& SetY(int32_t v) {
+        mY = v;
+        return *this;
+    }
+    inline Rect& SetWidth(int32_t v) {
+        mWidth = v;
+        return *this;
+    }
+    inline Rect& SetHeight(int32_t v) {
+        mHeight = v;
+        return *this;
+    }
+
+    int32_t mX;
+    int32_t mY;
+    int32_t mWidth;
+    int32_t mHeight;
+};
+
+struct FramebufferAttachable {};
+
+struct BlendState {
+    inline BlendState& SetSrcRgbBlendFactor(uint32_t v) {
+        mSrcRgbBlendFactor = v;
+        return *this;
+    }
+    inline BlendState& SetSrcAlphaBlendFactor(uint32_t v) {
+        mSrcAlphaBlendFactor = v;
+        return *this;
+    }
+    inline BlendState& SetDstRgbBlendFactor(uint32_t v) {
+        mDstRgbBlendFactor = v;
+        return *this;
+    }
+    inline BlendState& SetDstAlphaBlendFactor(uint32_t v) {
+        mDstAlphaBlendFactor = v;
+        return *this;
+    }
+    inline BlendState& SetBlendEquationRgb(uint32_t v) {
+        mBlendEquationRgb = v;
+        return *this;
+    }
+    inline BlendState& SetBlendEquationAlpha(uint32_t v) {
+        mBlendEquationAlpha = v;
+        return *this;
+    }
+    inline BlendState& SetBlendColor(Color v) {
+        mBlendColor = v;
+        return *this;
+    }
+
+    uint32_t mSrcRgbBlendFactor;
+    uint32_t mSrcAlphaBlendFactor;
+    uint32_t mDstRgbBlendFactor;
+    uint32_t mDstAlphaBlendFactor;
+    uint32_t mBlendEquationRgb;
+    uint32_t mBlendEquationAlpha;
+    Color mBlendColor;
 };
 
 struct RasterizerState {
     inline RasterizerState& SetDepthMask(bool v) {
-        this->DepthMask = v;
+        mDepthMask = v;
         return *this;
     }
     inline RasterizerState& SetDepthTestFunction(uint32_t v) {
-        this->DepthTestFunction = v;
+        mDepthTestFunction = v;
         return *this;
     }
     inline RasterizerState& SetDepthNear(float v) {
-        this->DepthNear = v;
+        mDepthNear = v;
         return *this;
     }
     inline RasterizerState& SetDepthFar(float v) {
-        this->DepthFar = v;
+        mDepthFar = v;
         return *this;
     }
     inline RasterizerState& SetColorMaskRed(bool v) {
-        this->ColorMaskRed = v;
+        mColorMaskRed = v;
         return *this;
     }
     inline RasterizerState& SetColorMaskGreen(bool v) {
-        this->ColorMaskGreen = v;
+        mColorMaskGreen = v;
         return *this;
     }
     inline RasterizerState& SetColorMaskBlue(bool v) {
-        this->ColorMaskBlue = v;
+        mColorMaskBlue = v;
         return *this;
     }
     inline RasterizerState& SetColorMaskAlpha(bool v) {
-        this->ColorMaskAlpha = v;
+        mColorMaskAlpha = v;
         return *this;
     }
     inline RasterizerState& SetStencilMask(U32_FaceModeMap v) {
-        this->StencilMask = v;
+        mStencilMask = v;
         return *this;
     }
     inline RasterizerState& SetViewport(Rect v) {
-        this->Viewport = v;
+        mViewport = v;
         return *this;
     }
     inline RasterizerState& SetScissor(Rect v) {
-        this->Scissor = v;
+        mScissor = v;
         return *this;
     }
     inline RasterizerState& SetFrontFace(uint32_t v) {
-        this->FrontFace = v;
+        mFrontFace = v;
         return *this;
     }
     inline RasterizerState& SetCullFace(uint32_t v) {
-        this->CullFace = v;
+        mCullFace = v;
         return *this;
     }
     inline RasterizerState& SetLineWidth(float v) {
-        this->LineWidth = v;
+        mLineWidth = v;
         return *this;
     }
     inline RasterizerState& SetPolygonOffsetFactor(float v) {
-        this->PolygonOffsetFactor = v;
+        mPolygonOffsetFactor = v;
         return *this;
     }
     inline RasterizerState& SetPolygonOffsetUnits(float v) {
-        this->PolygonOffsetUnits = v;
+        mPolygonOffsetUnits = v;
         return *this;
     }
     inline RasterizerState& SetSampleCoverageValue(float v) {
-        this->SampleCoverageValue = v;
+        mSampleCoverageValue = v;
         return *this;
     }
     inline RasterizerState& SetSampleCoverageInvert(bool v) {
-        this->SampleCoverageInvert = v;
+        mSampleCoverageInvert = v;
         return *this;
     }
 
-    bool DepthMask;
-    uint32_t DepthTestFunction;
-    float DepthNear;
-    float DepthFar;
-    bool ColorMaskRed;
-    bool ColorMaskGreen;
-    bool ColorMaskBlue;
-    bool ColorMaskAlpha;
-    U32_FaceModeMap StencilMask;
-    Rect Viewport;
-    Rect Scissor;
-    uint32_t FrontFace;
-    uint32_t CullFace;
-    float LineWidth;
-    float PolygonOffsetFactor;
-    float PolygonOffsetUnits;
-    float SampleCoverageValue;
-    bool SampleCoverageInvert;
+    bool mDepthMask;
+    uint32_t mDepthTestFunction;
+    float mDepthNear;
+    float mDepthFar;
+    bool mColorMaskRed;
+    bool mColorMaskGreen;
+    bool mColorMaskBlue;
+    bool mColorMaskAlpha;
+    U32_FaceModeMap mStencilMask;
+    Rect mViewport;
+    Rect mScissor;
+    uint32_t mFrontFace;
+    uint32_t mCullFace;
+    float mLineWidth;
+    float mPolygonOffsetFactor;
+    float mPolygonOffsetUnits;
+    float mSampleCoverageValue;
+    bool mSampleCoverageInvert;
 };
 
 struct ClearState {
     inline ClearState& SetClearColor(Color v) {
-        this->ClearColor = v;
+        mClearColor = v;
         return *this;
     }
     inline ClearState& SetClearDepth(float v) {
-        this->ClearDepth = v;
+        mClearDepth = v;
         return *this;
     }
     inline ClearState& SetClearStencil(int32_t v) {
-        this->ClearStencil = v;
+        mClearStencil = v;
         return *this;
     }
 
-    Color ClearColor;
-    float ClearDepth;
-    int32_t ClearStencil;
+    Color mClearColor;
+    float mClearDepth;
+    int32_t mClearStencil;
 };
 
 struct InternalState {
     inline InternalState& SetNilBuffer(BufferId v) {
-        this->NilBuffer = v;
+        mNilBuffer = v;
         return *this;
     }
     inline InternalState& SetNilTexture(TextureId v) {
-        this->NilTexture = v;
+        mNilTexture = v;
         return *this;
     }
     inline InternalState& SetNilRenderbuffer(RenderbufferId v) {
-        this->NilRenderbuffer = v;
+        mNilRenderbuffer = v;
         return *this;
     }
     inline InternalState& SetBackbuffer(FramebufferId v) {
-        this->Backbuffer = v;
+        mBackbuffer = v;
         return *this;
     }
 
-    BufferId NilBuffer;
-    TextureId NilTexture;
-    RenderbufferId NilRenderbuffer;
-    FramebufferId Backbuffer;
+    BufferId mNilBuffer;
+    TextureId mNilTexture;
+    RenderbufferId mNilRenderbuffer;
+    FramebufferId mBackbuffer;
 };
 
 struct Objects {
     inline Objects& SetRenderbuffers(RenderbufferRef_RenderbufferIdMap v) {
-        this->Renderbuffers = v;
+        mRenderbuffers = v;
         return *this;
     }
     inline Objects& SetTextures(TextureRef_TextureIdMap v) {
-        this->Textures = v;
+        mTextures = v;
         return *this;
     }
     inline Objects& SetFramebuffers(FramebufferRef_FramebufferIdMap v) {
-        this->Framebuffers = v;
+        mFramebuffers = v;
         return *this;
     }
     inline Objects& SetBuffers(BufferRef_BufferIdMap v) {
-        this->Buffers = v;
+        mBuffers = v;
         return *this;
     }
     inline Objects& SetShaders(ShaderRef_ShaderIdMap v) {
-        this->Shaders = v;
+        mShaders = v;
         return *this;
     }
     inline Objects& SetPrograms(ProgramRef_ProgramIdMap v) {
-        this->Programs = v;
+        mPrograms = v;
         return *this;
     }
     inline Objects& SetVertexArrays(VertexArrayRef_VertexArrayIdMap v) {
-        this->VertexArrays = v;
+        mVertexArrays = v;
         return *this;
     }
     inline Objects& SetQueries(QueryRef_QueryIdMap v) {
-        this->Queries = v;
+        mQueries = v;
         return *this;
     }
 
-    RenderbufferRef_RenderbufferIdMap Renderbuffers;
-    TextureRef_TextureIdMap Textures;
-    FramebufferRef_FramebufferIdMap Framebuffers;
-    BufferRef_BufferIdMap Buffers;
-    ShaderRef_ShaderIdMap Shaders;
-    ProgramRef_ProgramIdMap Programs;
-    VertexArrayRef_VertexArrayIdMap VertexArrays;
-    QueryRef_QueryIdMap Queries;
+    RenderbufferRef_RenderbufferIdMap mRenderbuffers;
+    TextureRef_TextureIdMap mTextures;
+    FramebufferRef_FramebufferIdMap mFramebuffers;
+    BufferRef_BufferIdMap mBuffers;
+    ShaderRef_ShaderIdMap mShaders;
+    ProgramRef_ProgramIdMap mPrograms;
+    VertexArrayRef_VertexArrayIdMap mVertexArrays;
+    QueryRef_QueryIdMap mQueries;
 };
 
 }  // namespace gapii

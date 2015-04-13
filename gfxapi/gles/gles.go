@@ -30,9 +30,9 @@
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_state.h.tmpl
 //go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_types.h.tmpl
 
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_exports.def.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_resolve.cpp.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/opengl32_x64.asm.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_exports.def.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_resolve.cpp.tmpl
+//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_x64.asm.tmpl
 
 // Package gles implementes the API interface for the OpenGL ES graphics library.
 package gles

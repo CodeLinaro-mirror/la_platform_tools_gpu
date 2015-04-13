@@ -11,9 +11,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{/* ---- Includes ---- */}}
+{{Include "cpp_common.tmpl"}}
+
+{{/* ---- Overrides ---- */}}
+{{Global "C++.StringType"       "char*"}}
 {{Global "C++.EnumTypeOverride" "uint32_t"}}
 
-{{Include "cpp_common.tmpl"}}
 {{$filename := print (Global "API") "_exports.cpp" }}
 {{$ | Macro "Exports" | Format (Global "clang-format") | Write $filename}}
 
@@ -21,12 +25,15 @@ limitations under the License.
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
 ¶
-  #include "common/file_writer.h"
-  #include "common/get_gfx_proc_address.h"
-¶
   #include "{{Global "API"}}_imports.h"
   #include "{{Global "API"}}_types.h"
   #include "spy.h"
+¶
+  #include <string.h>
+¶
+  #include <gapic/file_writer.h>
+  #include <gapic/get_gfx_proc_address.h>
+  #include <gapic/target.h> // STDCALL
 ¶
   using namespace gapii;
 ¶
@@ -45,15 +52,15 @@ limitations under the License.
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "C++.MethodName" $c}}
-      {{Macro "C++.ReturnType" $c}} __stdcall {{$name}}({{Macro "C++.CallParameters" $c}}) {
+      {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
         spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }
     {{end}}
   {{end}}
 ¶
-  typedef void (__stdcall *WGLPROC)();
-  WGLPROC __stdcall wglGetProcAddress(const char* name) {
+  typedef void (STDCALL *WGLPROC)();
+  WGLPROC STDCALL wglGetProcAddress(const char* name) {
     {{range $i, $c := AllCommands $}}
       {{$name := Macro "C++.MethodName" $c}}
       {{if not (GetAnnotation $c "synthetic")}}
@@ -62,7 +69,7 @@ limitations under the License.
     {{end}}
 ¶
     // TODO: If we reach this code, we're not capturing the command!
-    typedef WGLPROC (__stdcall* PFNWGLGETPROCADDRESS)(const char*);
+    typedef WGLPROC (STDCALL* PFNWGLGETPROCADDRESS)(const char*);
     PFNWGLGETPROCADDRESS wglGetProcAddress = reinterpret_cast<PFNWGLGETPROCADDRESS>(
         gapic::GetGfxProcAddress("wglGetProcAddress"));
     return wglGetProcAddress != nullptr ? wglGetProcAddress(name) : nullptr;
