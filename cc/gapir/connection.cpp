@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "Connection.h"
+#include "connection.h"
 
 #include <string>
 
