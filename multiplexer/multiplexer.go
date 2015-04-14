@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-//go:generate codergen -go
-
 // Package multiplexer provides multiple data-stream multiplexing over a single binary data-stream.
 package multiplexer
 

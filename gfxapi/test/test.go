@@ -16,7 +16,6 @@
 //go:generate apic template gfxapi_test.api ../templates/replay_writer.go.tmpl
 //go:generate apic template gfxapi_test.api ../templates/schema.go.tmpl
 //go:generate apic template gfxapi_test.api ../templates/state_mutator.go.tmpl
-//go:generate codergen -go
 
 // Package test is the integration test suite for the api compiler and templates.
 package test

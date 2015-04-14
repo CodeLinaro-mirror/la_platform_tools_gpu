@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go
-
 // Package memory contains types used for representing and simulating memory
 // observed in the capture.
 package memory

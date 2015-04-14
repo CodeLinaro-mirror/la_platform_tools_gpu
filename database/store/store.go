@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go
-
 // Package store implements the storage layers of the database system.
 package store
 

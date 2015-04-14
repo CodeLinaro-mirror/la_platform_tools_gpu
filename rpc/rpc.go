@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go
-
 // Package rpc implements a remote procedure call system.
 //
 // RPC uses the binary package for serialization and the multiplexer package to

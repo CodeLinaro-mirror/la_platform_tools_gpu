@@ -13,7 +13,6 @@
 // limitations under the License.
 
 //go:generate rpcapi --go rpc_test.api
-//go:generate codergen -go
 
 // Package test is a pure test package to do full testing of the rpc package.
 package test

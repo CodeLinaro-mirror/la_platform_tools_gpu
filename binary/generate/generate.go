@@ -44,6 +44,7 @@ type File struct {
 	Generated string
 	Package   string
 	IsTest    bool
+	Path      string
 	Structs   []*Struct
 	Imports   Imports
 	Style

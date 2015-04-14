@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate codergen -go
-
 // Package atom provides the fundamental types used to describe a capture stream.
 package atom
 
