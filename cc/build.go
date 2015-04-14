@@ -142,6 +142,7 @@ type Target struct {
 	Gapii       cpp.Config
 	Gapir       cpp.Config
 	GapirTests  cpp.Config
+	Spy         cpp.Config
 	Replayd     cpp.Config
 }
 
@@ -154,6 +155,7 @@ func (t Target) Extend(n Target) Target {
 		Gapii:       t.Gapii.Extend(n.Gapii),
 		Gapir:       t.Gapir.Extend(n.Gapir),
 		GapirTests:  t.GapirTests.Extend(n.GapirTests),
+		Spy:         t.Spy.Extend(n.Spy),
 		Replayd:     t.Replayd.Extend(n.Replayd),
 	}
 }
@@ -222,6 +224,16 @@ func (t Target) Build(env build.Environment) error {
 	env.Logger = begin(t.Gapir.Name)
 	gapirLib, err := cpp.StaticLibrary(gapirSource, t.Gapir, env)
 	if err != nil {
+		return err
+	}
+
+	// Build the spy from the gapii static library.
+	env.Logger = begin(t.Spy.Name)
+	// TODO: using the static-lib strips symbol visibility from the
+	// dynamic-library.
+	// Investigate linker flags to use build.Files(gapiiLib, gapicLib)
+	spyInputs := gapiiSource.Append(gapicLib)
+	if _, err := cpp.DynamicLibrary(spyInputs, t.Spy, env); err != nil {
 		return err
 	}
 
@@ -316,6 +328,10 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 				GtestRoot.Join("include"),
 			},
 		}),
+		Spy: base.Extend(cpp.Config{
+			Name:               "spy",
+			IncludeSearchPaths: build.FileSet{CCRoot},
+		}),
 		Replayd: base.Extend(cpp.Config{
 			Name: "replayd",
 			IncludeSearchPaths: build.FileSet{
@@ -333,10 +349,10 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 var buildTargets = map[string]Target{
 	"linux": base(gcc.GCC, "linux", "x64").Extend(Target{
 		GapirTests: cpp.Config{
-			Libraries: build.FileSet{"dl", "GL", "stdc++", "m", "pthread", "X11", "rt"},
+			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
 		},
 		Replayd: cpp.Config{
-			Libraries: build.FileSet{"dl", "GL", "stdc++", "m", "pthread", "X11", "rt"},
+			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
 		},
 	}),
 

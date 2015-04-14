@@ -27,6 +27,7 @@
 #if defined(TARGET_OS_LINUX)
 #   define TARGET_OS GAPID_OS_LINUX
 #   define STDCALL
+#   define EXPORT __attribute__ ((visibility ("default")))
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
@@ -34,6 +35,7 @@
 #if defined(TARGET_OS_OSX)
 #   define TARGET_OS GAPID_OS_OSX
 #   define STDCALL
+#   define EXPORT __attribute__ ((visibility ("default")))
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
@@ -41,6 +43,7 @@
 #if defined(TARGET_OS_ANDROID)
 #   define TARGET_OS GAPID_OS_ANDROID
 #   define STDCALL
+#   define EXPORT __attribute__ ((visibility ("default")))
 #   define PATH_DELIMITER '/'
 #   define PATH_DELIMITER_STR "/"
 #endif
@@ -48,6 +51,7 @@
 #if defined(TARGET_OS_WINDOWS)
 #   define TARGET_OS GAPID_OS_WINDOWS
 #   define STDCALL __stdcall
+#   define EXPORT
 #   define PATH_DELIMITER '\\'
 #   define PATH_DELIMITER_STR "\\"
 #endif
