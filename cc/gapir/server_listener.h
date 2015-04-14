@@ -19,9 +19,15 @@
 
 #include <memory>
 
-namespace gapir {
+namespace gapic {
 
 class Connection;
+
+} // namespace gapic
+
+
+namespace gapir {
+
 class ServerConnection;
 
 // Class for listening to incoming connections from the server.
@@ -30,7 +36,7 @@ public:
     // Construct a ServerListener using the specified connection.
     // maxMemorySize is the maximum memory size that can be reported as
     // supported by this device.
-    explicit ServerListener(std::unique_ptr<Connection> conn, uint64_t maxMemorySize);
+    explicit ServerListener(std::unique_ptr<gapic::Connection> conn, uint64_t maxMemorySize);
 
     // Accept a new incoming connection on the underlying socket and creates a ServerConnection over
     // the newly created socket object.
@@ -43,7 +49,7 @@ public:
 
 private:
     // The underlying server socket for the listener
-    std::unique_ptr<Connection> mConn;
+    std::unique_ptr<gapic::Connection> mConn;
     // The maximum memory size that can be reported as supported by this device.
     uint64_t mMaxMemorySize;
 };

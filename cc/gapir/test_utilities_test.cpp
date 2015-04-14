@@ -15,17 +15,16 @@
  */
 
 #include "base_type.h"
-#include "connection.h"
 #include "interpreter.h"
 #include "mock_connection.h"
 #include "server_connection.h"
 #include "test_utilities.h"
 
+#include <gmock/gmock.h>
+
 #include <memory>
 #include <string>
 #include <vector>
-
-#include <gmock/gmock.h>
 
 using ::testing::_;
 using ::testing::DoAll;
@@ -103,7 +102,7 @@ std::unique_ptr<ServerConnection> createServerConnection(MockConnection* connect
     pushUint32(&connection->in, replayLength);
 
     std::unique_ptr<ServerConnection> gazerConnection =
-        ServerConnection::create(std::unique_ptr<Connection>(connection));
+        ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));
 
     EXPECT_THAT(gazerConnection, NotNull());
 

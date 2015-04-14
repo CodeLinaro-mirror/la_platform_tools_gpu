@@ -18,9 +18,9 @@
 #include "stack.h"
 #include "test_utilities.h"
 
-#include <memory>
-
 #include <gtest/gtest.h>
+
+#include <memory>
 
 namespace gapir {
 namespace test {

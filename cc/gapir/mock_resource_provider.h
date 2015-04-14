@@ -20,9 +20,9 @@
 #include "resource_provider.h"
 #include "server_connection.h"
 
-#include <vector>
-
 #include <gmock/gmock.h>
+
+#include <vector>
 
 namespace gapir {
 namespace test {

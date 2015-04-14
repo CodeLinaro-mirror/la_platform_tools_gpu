@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-#include "connection.h"
 #include "mock_connection.h"
 #include "server_connection.h"
 #include "test_utilities.h"
 
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
 #include <memory>
 #include <string>
 #include <vector>
-
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
 
 using ::testing::_;
 using ::testing::DoAll;
@@ -61,20 +60,20 @@ TEST(ServerConnectionTestStatic, Create) {
     pushString(&connection->in, replayId);
     pushUint32(&connection->in, replayLength);
 
-    auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
+    auto svrConnection = ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));
 
-    EXPECT_THAT(gazerConnection, NotNull());
-    EXPECT_EQ(replayId, gazerConnection->replayId());
-    EXPECT_EQ(replayLength, gazerConnection->replayLength());
+    EXPECT_THAT(svrConnection, NotNull());
+    EXPECT_EQ(replayId, svrConnection->replayId());
+    EXPECT_EQ(replayLength, svrConnection->replayLength());
 }
 
 TEST(ServerConnectionTestStatic, CreateErrorReadReplayId) {
     auto connection = new MockConnection();
     pushUint8(&connection->in, 'A');
     // Replay id read failed
-    auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
+    auto svrConnection = ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));
 
-    EXPECT_THAT(gazerConnection, IsNull());
+    EXPECT_THAT(svrConnection, IsNull());
 }
 
 TEST_F(ServerConnectionTest, Get) {

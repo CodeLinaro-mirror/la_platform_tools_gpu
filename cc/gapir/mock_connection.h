@@ -17,18 +17,18 @@
 #ifndef GAPIR_MOCK_CONNECTION_H
 #define GAPIR_MOCK_CONNECTION_H
 
-#include "connection.h"
+#include <gapic/connection.h>
+
+#include <gmock/gmock.h>
 
 #include <memory>
 #include <cstring>
 #include <queue>
 
-#include <gmock/gmock.h>
-
 namespace gapir {
 namespace test {
 
-class MockConnection : public Connection {
+class MockConnection : public gapic::Connection {
 public:
     MockConnection() : read_pos(0), out_limit(-1) {}
     virtual size_t send(const void* data, size_t size) {

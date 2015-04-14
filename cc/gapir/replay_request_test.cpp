@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include "connection.h"
 #include "memory_manager.h"
 #include "mock_connection.h"
 #include "mock_resource_provider.h"
@@ -23,12 +22,12 @@
 #include "server_listener.h"
 #include "test_utilities.h"
 
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
 #include <memory>
 #include <string>
 #include <vector>
-
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
 
 using ::testing::_;
 using ::testing::DoAll;
@@ -73,7 +72,7 @@ TEST(ReplayRequestTestStatic, Create) {
     std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
     std::unique_ptr<MemoryManager> memoryManager(new MemoryManager(memorySizes));
 
-    auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
+    auto gazerConnection = ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));
     auto replayRequest =
             ReplayRequest::create(*gazerConnection, resourceProvider.get(), memoryManager.get());
 
@@ -104,7 +103,7 @@ TEST(ReplayRequestTestStatic, CreateErrorGet) {
     std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
     std::unique_ptr<MemoryManager> memoryManager(new MemoryManager(memorySizes));
 
-    auto gazerConnection = ServerConnection::create(std::unique_ptr<Connection>(connection));
+    auto gazerConnection = ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));
     auto replayRequest =
             ReplayRequest::create(*gazerConnection, resourceProvider.get(), memoryManager.get());
 

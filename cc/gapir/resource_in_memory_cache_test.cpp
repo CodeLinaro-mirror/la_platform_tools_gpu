@@ -21,11 +21,11 @@
 #include "server_connection.h"
 #include "test_utilities.h"
 
-#include <memory>
-#include <vector>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <memory>
+#include <vector>
 
 using ::testing::_;
 using ::testing::ContainerEq;

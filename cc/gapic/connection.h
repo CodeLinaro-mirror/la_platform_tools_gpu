@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-#ifndef GAPIR_CONNECTION_H
-#define GAPIR_CONNECTION_H
+#ifndef GAPIC_CONNECTION_H
+#define GAPIC_CONNECTION_H
 
 #include <cstddef>
 #include <memory>
 #include <string>
 
-namespace gapir {
+namespace gapic {
 
-// Abstract base class for representing a connection to the server with simple helper methods for
-// sending specific data types
+// Abstract base class for representing a connections to a remote with simple helper methods for
+// sending specific data types.
 class Connection {
 public:
     virtual ~Connection() {}
@@ -62,4 +62,4 @@ inline bool Connection::send(const T& data) {
 
 }  // namespace gapir
 
-#endif  // GAPIR_CONNECTION_H
+#endif  // GAPIC_CONNECTION_H

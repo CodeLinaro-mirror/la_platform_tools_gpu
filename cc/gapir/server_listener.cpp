@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-#include "connection.h"
 #include "server_connection.h"
 #include "server_listener.h"
 
+#include <gapic/connection.h>
 #include <gapic/log.h>
 
 #include <string.h>
@@ -30,14 +30,14 @@ namespace gapir {
 
 static const uint32_t PROTOCOL_VERSION = 1;
 
-ServerListener::ServerListener(std::unique_ptr<Connection> conn, uint64_t maxMemorySize) :
+ServerListener::ServerListener(std::unique_ptr<gapic::Connection> conn, uint64_t maxMemorySize) :
         mConn(std::move(conn)),
         mMaxMemorySize(maxMemorySize) {
 }
 
 std::unique_ptr<ServerConnection> ServerListener::acceptConnection() {
     while (true) {
-        std::unique_ptr<Connection> client = mConn->accept();
+        std::unique_ptr<gapic::Connection> client = mConn->accept();
         if (client == nullptr) {
             GAPID_WARNING("Failed to accept incoming connection\n");
             return nullptr;
