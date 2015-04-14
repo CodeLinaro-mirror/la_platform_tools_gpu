@@ -17,6 +17,7 @@ package template
 import (
 	"bytes"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -34,6 +35,7 @@ var (
 	}
 	dir    = command.Flags.String("dir", cwd(), "The output directory")
 	tracer = command.Flags.String("t", "", "The template function trace expression")
+	deps   = command.Flags.String("deps", "", "The dependancies file to generate")
 )
 
 func init() {
@@ -45,6 +47,41 @@ func init() {
 func cwd() string {
 	p, _ := os.Getwd()
 	return p
+}
+
+var (
+	inputs  []string
+	outputs []string
+)
+
+func inputDep(name string) {
+	path, _ := filepath.Abs(name)
+	inputs = append(inputs, path)
+}
+
+func outputDep(name string) {
+	path, _ := filepath.Abs(name)
+	outputs = append(outputs, path)
+}
+
+func writeDeps() error {
+	if len(*deps) == 0 {
+		return nil
+	}
+	commands.Log("Write deps to %v\n", *deps)
+	file, err := os.Create(*deps)
+	if err != nil {
+		return err
+	}
+	fmt.Fprintln(file, "==Inputs==")
+	for _, entry := range inputs {
+		fmt.Fprintln(file, entry)
+	}
+	fmt.Fprintln(file, "==Outputs==")
+	for _, entry := range outputs {
+		fmt.Fprintln(file, entry)
+	}
+	return file.Close()
 }
 
 // Include loads each of the templates and executes their main bodies.
@@ -61,6 +98,7 @@ func (f *Functions) Include(templates ...string) error {
 		}
 		if f.templates.Lookup(t) == nil {
 			commands.Log("Reading template %q\n", t)
+			inputDep(t)
 			tmplData, err := f.loader(t)
 			commands.MaybeError(t, err)
 			tmpl, err := f.templates.New(t).Parse(string(tmplData))
@@ -80,6 +118,7 @@ func (f *Functions) Include(templates ...string) error {
 func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
 	commands.Log("Writing output to %q\n", outputPath)
+	outputDep(outputPath)
 	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
 }
 
@@ -99,6 +138,7 @@ func doTemplate(flags flag.FlagSet) {
 	}
 	mainTemplate := args[1]
 	commands.Log("Reading api file %q\n", apiName)
+	inputDep(apiName)
 	info, err := ioutil.ReadFile(apiName)
 	commands.MaybeError(apiName, err)
 	commands.Log("Compiling api file %q\n", apiName)
@@ -108,4 +148,5 @@ func doTemplate(flags flag.FlagSet) {
 	commands.CheckErrors(apiName, errs)
 	f := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
 	commands.MaybeError(mainTemplate, f.Include(mainTemplate))
+	writeDeps()
 }

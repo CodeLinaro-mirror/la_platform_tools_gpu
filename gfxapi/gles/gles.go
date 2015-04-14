@@ -12,26 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//go:generate apic validate gles.api
-
-//go:generate apic template gles.api ../templates/api.go.tmpl
-//go:generate apic template gles.api ../templates/replay_writer.go.tmpl
-//go:generate apic template gles.api ../templates/schema.go.tmpl
-//go:generate apic template gles.api ../templates/state_mutator.go.tmpl
-
-//go:generate apic template --dir ../../cc/gapir gles.api ../templates/gfx_api.cpp.tmpl
-//go:generate apic template --dir ../../cc/gapir gles.api ../templates/gfx_api.h.tmpl
-
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_exports.cpp.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_imports.cpp.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_imports.h.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_spy.h.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_state.h.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src gles.api ../templates/api_types.h.tmpl
-
-//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_exports.def.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_resolve.cpp.tmpl
-//go:generate apic template --dir ../../cc/gfxspy2/src/windows gles.api ../templates/opengl32_x64.asm.tmpl
-
 // Package gles implementes the API interface for the OpenGL ES graphics library.
 package gles
