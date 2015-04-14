@@ -24,12 +24,14 @@ import (
 )
 
 var MSVC = &cpp.Toolchain{
-	Compiler: compile,
-	Archiver: archive,
-	Linker:   link,
-	ExeName:  func(cfg cpp.Config) string { return cfg.Name + ".exe" },
-	LibName:  func(cfg cpp.Config) string { return cfg.Name + ".lib" },
-	ObjExt:   func(cpp.Config) string { return ".obj" },
+	Compiler:  compile,
+	Archiver:  archive,
+	DllLinker: linkDll,
+	ExeLinker: linkExe,
+	LibName:   func(cfg cpp.Config) string { return cfg.Name + ".lib" },
+	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".dll" },
+	ExeName:   func(cfg cpp.Config) string { return cfg.Name + ".exe" },
+	ObjExt:    func(cpp.Config) string { return ".obj" },
 }
 
 // Paths contains the list of directories required by the MSVC toolchain.
@@ -91,8 +93,34 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	return paths.Lib.Exec(env, a...)
 }
 
-func link(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("MSVC.Link")
+func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("MSVC.LinkDll")
+
+	paths, err := ResolvePaths()
+	if err != nil {
+		return err
+	}
+
+	a := append([]string{
+		"/MACHINE:X64",
+		"/DLL",
+		"/nologo",
+	}, cfg.LinkerArgs...)
+	for _, lsp := range cfg.LibrarySearchPaths.Append(paths.LibrarySearchPaths...) {
+		a = append(a, fmt.Sprintf("/LIBPATH:%s", lsp))
+	}
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	for _, library := range cfg.Libraries {
+		a = append(a, string(library.ChangeExt(".lib")))
+	}
+	a = append(a, "/OUT:"+string(output))
+	return paths.Link.Exec(env, a...)
+}
+
+func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("MSVC.LinkExe")
 
 	paths, err := ResolvePaths()
 	if err != nil {
@@ -111,7 +139,7 @@ func link(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Env
 		a = append(a, input.Absolute())
 	}
 	for _, library := range cfg.Libraries {
-		a = append(a, string(library+".lib"))
+		a = append(a, string(library.ChangeExt(".lib")))
 	}
 	a = append(a, "/OUT:"+string(output))
 	return paths.Link.Exec(env, a...)

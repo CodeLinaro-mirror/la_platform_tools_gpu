@@ -52,7 +52,7 @@ limitations under the License.
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "C++.MethodName" $c}}
-      {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
+      EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
         spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }

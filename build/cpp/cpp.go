@@ -30,13 +30,15 @@ var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm"}
 
 // Toolchain is a collection of tools used to build objects, libraries and programs.
 type Toolchain struct {
-	Compiler tool                // Tool used to compile source to object files.
-	Archiver tool                // Tool used to package object files into archives.
-	Linker   tool                // Tool used to link objects and packages into executables.
-	DepsFor  depsFor             // Returns the list of dependencies for the given file.
-	ExeName  func(Config) string // Returns the name of the emitted executable.
-	LibName  func(Config) string // Returns the name of the emitted static library file.
-	ObjExt   func(Config) string // Extension used for object files.
+	Compiler  tool                // Tool used to compile source to object files.
+	Archiver  tool                // Tool used to package object files into archives.
+	DllLinker tool                // Tool used to link objects and packages into dynamic libraries.
+	ExeLinker tool                // Tool used to link objects and packages into executables.
+	DepsFor   depsFor             // Returns the list of dependencies for the given file.
+	LibName   func(Config) string // Returns the name of the emitted static library file.
+	DllName   func(Config) string // Returns the name of the emitted dynamic library file.
+	ExeName   func(Config) string // Returns the name of the emitted executable.
+	ObjExt    func(Config) string // Extension used for object files.
 }
 
 func (t Toolchain) LibExt(cfg Config) string {
@@ -140,77 +142,6 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 	return objects, combineErrors(errors)
 }
 
-func requiresCompile(source, output build.File, cfg Config, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
-	}
-	if !output.Exists() {
-		return true
-	}
-	t := output.LastModified()
-	if source.LastModified().After(t) {
-		return true
-	}
-	depsFor := cfg.Toolchain.DepsFor
-	if depsFor == nil {
-		return true // If the toolchain can't check dependencies, then we have to build
-	}
-	deps, valid := depsFor(output, cfg, env)
-	if !valid || deps.LastModified().After(t) {
-		return true
-	}
-	return false
-}
-
-// Executable links the list of input files into an executable using the Config
-// and build Environment. The inputs can be a combination of source files,
-// object files and / or library files. Compile returns the output executable
-// file.
-func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
-	env.Logger = env.Logger.Enter("C++.Executable")
-
-	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
-	if err != nil {
-		return "", err
-	}
-
-	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
-
-	libraries := build.FileSet{}
-	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
-		dir, base := filepath.Split(library.Absolute())
-		libraries = libraries.Append(build.File(base).ChangeExt(""))
-		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
-	}
-
-	cfg.Libraries = append(libraries, cfg.Libraries...)
-
-	output := env.Output.Join(cfg.Toolchain.ExeName(cfg))
-	output.MkdirAll()
-
-	if requiresLink(inputs.Append(objects...), output, env) {
-		return output, cfg.Toolchain.Linker(objects, output, cfg, env)
-	} else {
-		if env.Verbose {
-			env.Logger.Info("%s is up-to-date", output)
-		}
-		return output, nil
-	}
-}
-
-func requiresLink(inputs build.FileSet, output build.File, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
-	}
-	if !output.Exists() {
-		return true
-	}
-	if inputs.LastModified().After(output.LastModified()) {
-		return true
-	}
-	return false
-}
-
 // StaticLibrary archives the list of input files into an static library using
 // the Config and build Environment. The inputs can be a combination of source
 // files and / or object files. StaticLibrary returns the output static library
@@ -239,17 +170,76 @@ func StaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bui
 	}
 }
 
-func requiresArchive(objects build.FileSet, output build.File, env build.Environment) bool {
-	if env.ForceBuild {
-		return true
+// DynamicLibrary links the list of input files into an dynamically-linked
+// library using the Config and build Environment. The inputs can be a
+// combination of source files, object files and / or library files.
+// DynamicLibrary returns the output dynamic-library file file.
+func DynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
+	env.Logger = env.Logger.Enter("C++.DynamicLibrary")
+
+	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
+	if err != nil {
+		return "", err
 	}
-	if !output.Exists() {
-		return true
+
+	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
+
+	libraries := build.FileSet{}
+	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
+		dir, base := filepath.Split(library.Absolute())
+		libraries = libraries.Append(build.File(base))
+		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
 	}
-	if objects.LastModified().After(output.LastModified()) {
-		return true
+
+	cfg.Libraries = append(libraries, cfg.Libraries...)
+
+	output := env.Output.Join(cfg.Toolchain.DllName(cfg))
+	output.MkdirAll()
+
+	if requiresLink(inputs.Append(objects...), output, env) {
+		return output, cfg.Toolchain.DllLinker(objects, output, cfg, env)
+	} else {
+		if env.Verbose {
+			env.Logger.Info("%s is up-to-date", output)
+		}
+		return output, nil
 	}
-	return false
+}
+
+// Executable links the list of input files into an executable using the Config
+// and build Environment. The inputs can be a combination of source files,
+// object files and / or library files. Executable returns the output executable
+// file.
+func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.File, error) {
+	env.Logger = env.Logger.Enter("C++.Executable")
+
+	objects, err := Compile(inputs.Filter(sourcePatterns...), cfg, env)
+	if err != nil {
+		return "", err
+	}
+
+	objects = objects.Append(inputs.Filter("*" + cfg.Toolchain.ObjExt(cfg))...)
+
+	libraries := build.FileSet{}
+	for _, library := range inputs.Filter("*" + cfg.Toolchain.LibExt(cfg)) {
+		dir, base := filepath.Split(library.Absolute())
+		libraries = libraries.Append(build.File(base).ChangeExt(""))
+		cfg.LibrarySearchPaths = cfg.LibrarySearchPaths.Append(build.File(dir))
+	}
+
+	cfg.Libraries = append(libraries, cfg.Libraries...)
+
+	output := env.Output.Join(cfg.Toolchain.ExeName(cfg))
+	output.MkdirAll()
+
+	if requiresLink(inputs.Append(objects...), output, env) {
+		return output, cfg.Toolchain.ExeLinker(objects, output, cfg, env)
+	} else {
+		if env.Verbose {
+			env.Logger.Info("%s is up-to-date", output)
+		}
+		return output, nil
+	}
 }
 
 // Triplet returns a string combining the os, architecture and flavour of cfg.
@@ -265,4 +255,52 @@ func IntermediatePath(source build.File, ext string, cfg Config, env build.Envir
 	out := env.Intermediates.Join(Triplet(cfg), rel).ChangeExt(ext)
 	out.MkdirAll()
 	return out
+}
+
+func requiresCompile(source, output build.File, cfg Config, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	t := output.LastModified()
+	if source.LastModified().After(t) {
+		return true
+	}
+	depsFor := cfg.Toolchain.DepsFor
+	if depsFor == nil {
+		return true // If the toolchain can't check dependencies, then we have to build
+	}
+	deps, valid := depsFor(output, cfg, env)
+	if !valid || deps.LastModified().After(t) {
+		return true
+	}
+	return false
+}
+
+func requiresArchive(objects build.FileSet, output build.File, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	if objects.LastModified().After(output.LastModified()) {
+		return true
+	}
+	return false
+}
+
+func requiresLink(inputs build.FileSet, output build.File, env build.Environment) bool {
+	if env.ForceBuild {
+		return true
+	}
+	if !output.Exists() {
+		return true
+	}
+	if inputs.LastModified().After(output.LastModified()) {
+		return true
+	}
+	return false
 }

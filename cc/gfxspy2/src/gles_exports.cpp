@@ -40,500 +40,545 @@ Spy* spy() {
 
 extern "C" {
 
-void STDCALL eglCreateContext(int32_t* version, int32_t* context) {
+EXPORT void STDCALL eglCreateContext(int32_t* version, int32_t* context) {
     spy()->eglCreateContext(version, context);
 }
-void STDCALL eglMakeCurrent(int32_t context) { spy()->eglMakeCurrent(context); }
-void STDCALL eglSwapBuffers() { spy()->eglSwapBuffers(); }
-void STDCALL wglSwapBuffers(HDC hdc) { spy()->wglSwapBuffers(hdc); }
-void STDCALL glEnableClientState(uint32_t type) { spy()->glEnableClientState(type); }
-void STDCALL glDisableClientState(uint32_t type) { spy()->glDisableClientState(type); }
-void STDCALL glGetProgramBinaryOES(ProgramId program, int32_t buffer_size, int32_t* bytes_written,
-                                   uint32_t* binary_format, void* binary) {
+EXPORT void STDCALL eglMakeCurrent(int32_t context) { spy()->eglMakeCurrent(context); }
+EXPORT void STDCALL eglSwapBuffers() { spy()->eglSwapBuffers(); }
+EXPORT void STDCALL wglSwapBuffers(HDC hdc) { spy()->wglSwapBuffers(hdc); }
+EXPORT void STDCALL glEnableClientState(uint32_t type) { spy()->glEnableClientState(type); }
+EXPORT void STDCALL glDisableClientState(uint32_t type) { spy()->glDisableClientState(type); }
+EXPORT void STDCALL glGetProgramBinaryOES(ProgramId program, int32_t buffer_size,
+                                          int32_t* bytes_written, uint32_t* binary_format,
+                                          void* binary) {
     spy()->glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
 }
-void STDCALL glProgramBinaryOES(ProgramId program, uint32_t binary_format, const void* binary,
-                                int32_t binary_size) {
+EXPORT void STDCALL glProgramBinaryOES(ProgramId program, uint32_t binary_format,
+                                       const void* binary, int32_t binary_size) {
     spy()->glProgramBinaryOES(program, binary_format, binary, binary_size);
 }
-void STDCALL
+EXPORT void STDCALL
 glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t preserveMask) {
     spy()->glStartTilingQCOM(x, y, width, height, preserveMask);
 }
-void STDCALL glEndTilingQCOM(uint32_t preserve_mask) { spy()->glEndTilingQCOM(preserve_mask); }
-void STDCALL
+EXPORT void STDCALL glEndTilingQCOM(uint32_t preserve_mask) {
+    spy()->glEndTilingQCOM(preserve_mask);
+}
+EXPORT void STDCALL
 glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments, const uint32_t* attachments) {
     spy()->glDiscardFramebufferEXT(target, numAttachments, attachments);
 }
-void STDCALL glInsertEventMarkerEXT(int32_t length, const char* marker) {
+EXPORT void STDCALL glInsertEventMarkerEXT(int32_t length, const char* marker) {
     spy()->glInsertEventMarkerEXT(length, marker);
 }
-void STDCALL glPushGroupMarkerEXT(int32_t length, const char* marker) {
+EXPORT void STDCALL glPushGroupMarkerEXT(int32_t length, const char* marker) {
     spy()->glPushGroupMarkerEXT(length, marker);
 }
-void STDCALL glPopGroupMarkerEXT() { spy()->glPopGroupMarkerEXT(); }
-void STDCALL glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width) {
+EXPORT void STDCALL glPopGroupMarkerEXT() { spy()->glPopGroupMarkerEXT(); }
+EXPORT void STDCALL
+glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width) {
     spy()->glTexStorage1DEXT(target, levels, format, width);
 }
-void STDCALL
+EXPORT void STDCALL
 glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width, int32_t height) {
     spy()->glTexStorage2DEXT(target, levels, format, width, height);
 }
-void STDCALL glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width,
-                               int32_t height, int32_t depth) {
+EXPORT void STDCALL glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format,
+                                      int32_t width, int32_t height, int32_t depth) {
     spy()->glTexStorage3DEXT(target, levels, format, width, height, depth);
 }
-void STDCALL glTextureStorage1DEXT(TextureId texture, uint32_t target, int32_t levels,
-                                   uint32_t format, int32_t width) {
+EXPORT void STDCALL glTextureStorage1DEXT(TextureId texture, uint32_t target, int32_t levels,
+                                          uint32_t format, int32_t width) {
     spy()->glTextureStorage1DEXT(texture, target, levels, format, width);
 }
-void STDCALL glTextureStorage2DEXT(TextureId texture, uint32_t target, int32_t levels,
-                                   uint32_t format, int32_t width, int32_t height) {
+EXPORT void STDCALL glTextureStorage2DEXT(TextureId texture, uint32_t target, int32_t levels,
+                                          uint32_t format, int32_t width, int32_t height) {
     spy()->glTextureStorage2DEXT(texture, target, levels, format, width, height);
 }
-void STDCALL glTextureStorage3DEXT(TextureId texture, uint32_t target, int32_t levels,
-                                   uint32_t format, int32_t width, int32_t height, int32_t depth) {
+EXPORT void STDCALL glTextureStorage3DEXT(TextureId texture, uint32_t target, int32_t levels,
+                                          uint32_t format, int32_t width, int32_t height,
+                                          int32_t depth) {
     spy()->glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
 }
-void STDCALL glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) {
+EXPORT void STDCALL glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) {
     spy()->glGenVertexArraysOES(count, arrays);
 }
-void STDCALL glBindVertexArrayOES(VertexArrayId array) { spy()->glBindVertexArrayOES(array); }
-void STDCALL glDeleteVertexArraysOES(int32_t count, const VertexArrayId* arrays) {
+EXPORT void STDCALL glBindVertexArrayOES(VertexArrayId array) {
+    spy()->glBindVertexArrayOES(array);
+}
+EXPORT void STDCALL glDeleteVertexArraysOES(int32_t count, const VertexArrayId* arrays) {
     spy()->glDeleteVertexArraysOES(count, arrays);
 }
-bool STDCALL glIsVertexArrayOES(VertexArrayId array) { return spy()->glIsVertexArrayOES(array); }
-void STDCALL glEGLImageTargetTexture2DOES(uint32_t target, ImageOES image) {
+EXPORT bool STDCALL glIsVertexArrayOES(VertexArrayId array) {
+    return spy()->glIsVertexArrayOES(array);
+}
+EXPORT void STDCALL glEGLImageTargetTexture2DOES(uint32_t target, ImageOES image) {
     spy()->glEGLImageTargetTexture2DOES(target, image);
 }
-void STDCALL glEGLImageTargetRenderbufferStorageOES(uint32_t target, TexturePointer image) {
+EXPORT void STDCALL glEGLImageTargetRenderbufferStorageOES(uint32_t target, TexturePointer image) {
     spy()->glEGLImageTargetRenderbufferStorageOES(target, image);
 }
-uint32_t STDCALL glGetGraphicsResetStatusEXT() { return spy()->glGetGraphicsResetStatusEXT(); }
-void STDCALL glBindAttribLocation(ProgramId program, AttributeLocation location, const char* name) {
+EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT() {
+    return spy()->glGetGraphicsResetStatusEXT();
+}
+EXPORT void STDCALL
+glBindAttribLocation(ProgramId program, AttributeLocation location, const char* name) {
     spy()->glBindAttribLocation(program, location, name);
 }
-void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
+EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
     spy()->glBlendFunc(src_factor, dst_factor);
 }
-void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
-                                 uint32_t src_factor_alpha, uint32_t dst_factor_alpha) {
+EXPORT void STDCALL glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
+                                        uint32_t src_factor_alpha, uint32_t dst_factor_alpha) {
     spy()->glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha, dst_factor_alpha);
 }
-void STDCALL glBlendEquation(uint32_t equation) { spy()->glBlendEquation(equation); }
-void STDCALL glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
+EXPORT void STDCALL glBlendEquation(uint32_t equation) { spy()->glBlendEquation(equation); }
+EXPORT void STDCALL glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
     spy()->glBlendEquationSeparate(rgb, alpha);
 }
-void STDCALL glBlendColor(float red, float green, float blue, float alpha) {
+EXPORT void STDCALL glBlendColor(float red, float green, float blue, float alpha) {
     spy()->glBlendColor(red, green, blue, alpha);
 }
-void STDCALL glEnableVertexAttribArray(AttributeLocation location) {
+EXPORT void STDCALL glEnableVertexAttribArray(AttributeLocation location) {
     spy()->glEnableVertexAttribArray(location);
 }
-void STDCALL glDisableVertexAttribArray(AttributeLocation location) {
+EXPORT void STDCALL glDisableVertexAttribArray(AttributeLocation location) {
     spy()->glDisableVertexAttribArray(location);
 }
-void STDCALL glVertexAttribPointer(AttributeLocation location, int32_t size, uint32_t type,
-                                   bool normalized, int32_t stride, VertexPointer data) {
+EXPORT void STDCALL glVertexAttribPointer(AttributeLocation location, int32_t size, uint32_t type,
+                                          bool normalized, int32_t stride, VertexPointer data) {
     spy()->glVertexAttribPointer(location, size, type, normalized, stride, data);
 }
-void STDCALL glGetActiveAttrib(ProgramId program, AttributeLocation location, int32_t buffer_size,
-                               int32_t* buffer_bytes_written, int32_t* vector_count, uint32_t* type,
-                               char* name) {
+EXPORT void STDCALL glGetActiveAttrib(ProgramId program, AttributeLocation location,
+                                      int32_t buffer_size, int32_t* buffer_bytes_written,
+                                      int32_t* vector_count, uint32_t* type, char* name) {
     spy()->glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                              type, name);
 }
-void STDCALL glGetActiveUniform(ProgramId program, int32_t location, int32_t buffer_size,
-                                int32_t* buffer_bytes_written, int32_t* size, uint32_t* type,
-                                char* name) {
+EXPORT void STDCALL glGetActiveUniform(ProgramId program, int32_t location, int32_t buffer_size,
+                                       int32_t* buffer_bytes_written, int32_t* size, uint32_t* type,
+                                       char* name) {
     spy()->glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
                               name);
 }
-uint32_t STDCALL glGetError() { return spy()->glGetError(); }
-void STDCALL glGetProgramiv(ProgramId program, uint32_t parameter, int32_t* value) {
+EXPORT uint32_t STDCALL glGetError() { return spy()->glGetError(); }
+EXPORT void STDCALL glGetProgramiv(ProgramId program, uint32_t parameter, int32_t* value) {
     spy()->glGetProgramiv(program, parameter, value);
 }
-void STDCALL glGetShaderiv(ShaderId shader, uint32_t parameter, int32_t* value) {
+EXPORT void STDCALL glGetShaderiv(ShaderId shader, uint32_t parameter, int32_t* value) {
     spy()->glGetShaderiv(shader, parameter, value);
 }
-UniformLocation STDCALL glGetUniformLocation(ProgramId program, const char* name) {
+EXPORT UniformLocation STDCALL glGetUniformLocation(ProgramId program, const char* name) {
     return spy()->glGetUniformLocation(program, name);
 }
-AttributeLocation STDCALL glGetAttribLocation(ProgramId program, const char* name) {
+EXPORT AttributeLocation STDCALL glGetAttribLocation(ProgramId program, const char* name) {
     return spy()->glGetAttribLocation(program, name);
 }
-void STDCALL glPixelStorei(uint32_t parameter, int32_t value) {
+EXPORT void STDCALL glPixelStorei(uint32_t parameter, int32_t value) {
     spy()->glPixelStorei(parameter, value);
 }
-void STDCALL glTexParameteri(uint32_t target, uint32_t parameter, int32_t value) {
+EXPORT void STDCALL glTexParameteri(uint32_t target, uint32_t parameter, int32_t value) {
     spy()->glTexParameteri(target, parameter, value);
 }
-void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value) {
+EXPORT void STDCALL glTexParameterf(uint32_t target, uint32_t parameter, float value) {
     spy()->glTexParameterf(target, parameter, value);
 }
-void STDCALL glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
+EXPORT void STDCALL glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
     spy()->glGetTexParameteriv(target, parameter, values);
 }
-void STDCALL glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
+EXPORT void STDCALL glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
     spy()->glGetTexParameterfv(target, parameter, values);
 }
-void STDCALL glUniform1i(UniformLocation location, int32_t value) {
+EXPORT void STDCALL glUniform1i(UniformLocation location, int32_t value) {
     spy()->glUniform1i(location, value);
 }
-void STDCALL glUniform2i(UniformLocation location, int32_t value0, int32_t value1) {
+EXPORT void STDCALL glUniform2i(UniformLocation location, int32_t value0, int32_t value1) {
     spy()->glUniform2i(location, value0, value1);
 }
-void STDCALL glUniform3i(UniformLocation location, int32_t value0, int32_t value1, int32_t value2) {
+EXPORT void STDCALL
+glUniform3i(UniformLocation location, int32_t value0, int32_t value1, int32_t value2) {
     spy()->glUniform3i(location, value0, value1, value2);
 }
-void STDCALL glUniform4i(UniformLocation location, int32_t value0, int32_t value1, int32_t value2,
-                         int32_t value3) {
+EXPORT void STDCALL glUniform4i(UniformLocation location, int32_t value0, int32_t value1,
+                                int32_t value2, int32_t value3) {
     spy()->glUniform4i(location, value0, value1, value2, value3);
 }
-void STDCALL glUniform1iv(UniformLocation location, int32_t count, const int32_t* value) {
+EXPORT void STDCALL glUniform1iv(UniformLocation location, int32_t count, const int32_t* value) {
     spy()->glUniform1iv(location, count, value);
 }
-void STDCALL glUniform2iv(UniformLocation location, int32_t count, const int32_t* value) {
+EXPORT void STDCALL glUniform2iv(UniformLocation location, int32_t count, const int32_t* value) {
     spy()->glUniform2iv(location, count, value);
 }
-void STDCALL glUniform3iv(UniformLocation location, int32_t count, const int32_t* value) {
+EXPORT void STDCALL glUniform3iv(UniformLocation location, int32_t count, const int32_t* value) {
     spy()->glUniform3iv(location, count, value);
 }
-void STDCALL glUniform4iv(UniformLocation location, int32_t count, const int32_t* value) {
+EXPORT void STDCALL glUniform4iv(UniformLocation location, int32_t count, const int32_t* value) {
     spy()->glUniform4iv(location, count, value);
 }
-void STDCALL glUniform1f(UniformLocation location, float value) {
+EXPORT void STDCALL glUniform1f(UniformLocation location, float value) {
     spy()->glUniform1f(location, value);
 }
-void STDCALL glUniform2f(UniformLocation location, float value0, float value1) {
+EXPORT void STDCALL glUniform2f(UniformLocation location, float value0, float value1) {
     spy()->glUniform2f(location, value0, value1);
 }
-void STDCALL glUniform3f(UniformLocation location, float value0, float value1, float value2) {
+EXPORT void STDCALL
+glUniform3f(UniformLocation location, float value0, float value1, float value2) {
     spy()->glUniform3f(location, value0, value1, value2);
 }
-void STDCALL
+EXPORT void STDCALL
 glUniform4f(UniformLocation location, float value0, float value1, float value2, float value3) {
     spy()->glUniform4f(location, value0, value1, value2, value3);
 }
-void STDCALL glUniform1fv(UniformLocation location, int32_t count, const float* value) {
+EXPORT void STDCALL glUniform1fv(UniformLocation location, int32_t count, const float* value) {
     spy()->glUniform1fv(location, count, value);
 }
-void STDCALL glUniform2fv(UniformLocation location, int32_t count, const float* value) {
+EXPORT void STDCALL glUniform2fv(UniformLocation location, int32_t count, const float* value) {
     spy()->glUniform2fv(location, count, value);
 }
-void STDCALL glUniform3fv(UniformLocation location, int32_t count, const float* value) {
+EXPORT void STDCALL glUniform3fv(UniformLocation location, int32_t count, const float* value) {
     spy()->glUniform3fv(location, count, value);
 }
-void STDCALL glUniform4fv(UniformLocation location, int32_t count, const float* value) {
+EXPORT void STDCALL glUniform4fv(UniformLocation location, int32_t count, const float* value) {
     spy()->glUniform4fv(location, count, value);
 }
-void STDCALL
+EXPORT void STDCALL
 glUniformMatrix2fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
     spy()->glUniformMatrix2fv(location, count, transpose, values);
 }
-void STDCALL
+EXPORT void STDCALL
 glUniformMatrix3fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
     spy()->glUniformMatrix3fv(location, count, transpose, values);
 }
-void STDCALL
+EXPORT void STDCALL
 glUniformMatrix4fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
     spy()->glUniformMatrix4fv(location, count, transpose, values);
 }
-void STDCALL glGetUniformfv(ProgramId program, UniformLocation location, const float* values) {
+EXPORT void STDCALL
+glGetUniformfv(ProgramId program, UniformLocation location, const float* values) {
     spy()->glGetUniformfv(program, location, values);
 }
-void STDCALL glGetUniformiv(ProgramId program, UniformLocation location, const int32_t* values) {
+EXPORT void STDCALL
+glGetUniformiv(ProgramId program, UniformLocation location, const int32_t* values) {
     spy()->glGetUniformiv(program, location, values);
 }
-void STDCALL glVertexAttrib1f(AttributeLocation location, float value0) {
+EXPORT void STDCALL glVertexAttrib1f(AttributeLocation location, float value0) {
     spy()->glVertexAttrib1f(location, value0);
 }
-void STDCALL glVertexAttrib2f(AttributeLocation location, float value0, float value1) {
+EXPORT void STDCALL glVertexAttrib2f(AttributeLocation location, float value0, float value1) {
     spy()->glVertexAttrib2f(location, value0, value1);
 }
-void STDCALL
+EXPORT void STDCALL
 glVertexAttrib3f(AttributeLocation location, float value0, float value1, float value2) {
     spy()->glVertexAttrib3f(location, value0, value1, value2);
 }
-void STDCALL glVertexAttrib4f(AttributeLocation location, float value0, float value1, float value2,
-                              float value3) {
+EXPORT void STDCALL glVertexAttrib4f(AttributeLocation location, float value0, float value1,
+                                     float value2, float value3) {
     spy()->glVertexAttrib4f(location, value0, value1, value2, value3);
 }
-void STDCALL glVertexAttrib1fv(AttributeLocation location, const float* value) {
+EXPORT void STDCALL glVertexAttrib1fv(AttributeLocation location, const float* value) {
     spy()->glVertexAttrib1fv(location, value);
 }
-void STDCALL glVertexAttrib2fv(AttributeLocation location, const float* value) {
+EXPORT void STDCALL glVertexAttrib2fv(AttributeLocation location, const float* value) {
     spy()->glVertexAttrib2fv(location, value);
 }
-void STDCALL glVertexAttrib3fv(AttributeLocation location, const float* value) {
+EXPORT void STDCALL glVertexAttrib3fv(AttributeLocation location, const float* value) {
     spy()->glVertexAttrib3fv(location, value);
 }
-void STDCALL glVertexAttrib4fv(AttributeLocation location, const float* value) {
+EXPORT void STDCALL glVertexAttrib4fv(AttributeLocation location, const float* value) {
     spy()->glVertexAttrib4fv(location, value);
 }
-void STDCALL glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
-                                        int32_t* range, int32_t* precision) {
+EXPORT void STDCALL glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
+                                               int32_t* range, int32_t* precision) {
     spy()->glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
 }
-void STDCALL glDepthMask(bool enabled) { spy()->glDepthMask(enabled); }
-void STDCALL glDepthFunc(uint32_t function) { spy()->glDepthFunc(function); }
-void STDCALL glDepthRangef(float near, float far) { spy()->glDepthRangef(near, far); }
-void STDCALL glColorMask(bool red, bool green, bool blue, bool alpha) {
+EXPORT void STDCALL glDepthMask(bool enabled) { spy()->glDepthMask(enabled); }
+EXPORT void STDCALL glDepthFunc(uint32_t function) { spy()->glDepthFunc(function); }
+EXPORT void STDCALL glDepthRangef(float near, float far) { spy()->glDepthRangef(near, far); }
+EXPORT void STDCALL glColorMask(bool red, bool green, bool blue, bool alpha) {
     spy()->glColorMask(red, green, blue, alpha);
 }
-void STDCALL glStencilMask(uint32_t mask) { spy()->glStencilMask(mask); }
-void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask) {
+EXPORT void STDCALL glStencilMask(uint32_t mask) { spy()->glStencilMask(mask); }
+EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     spy()->glStencilMaskSeparate(face, mask);
 }
-void STDCALL
+EXPORT void STDCALL
 glStencilFuncSeparate(uint32_t face, uint32_t function, int32_t reference_value, int32_t mask) {
     spy()->glStencilFuncSeparate(face, function, reference_value, mask);
 }
-void STDCALL glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
-                                 uint32_t stencil_pass_depth_fail,
-                                 uint32_t stencil_pass_depth_pass) {
+EXPORT void STDCALL glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
+                                        uint32_t stencil_pass_depth_fail,
+                                        uint32_t stencil_pass_depth_pass) {
     spy()->glStencilOpSeparate(face, stencil_fail, stencil_pass_depth_fail,
                                stencil_pass_depth_pass);
 }
-void STDCALL glFrontFace(uint32_t orientation) { spy()->glFrontFace(orientation); }
-void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t height) {
+EXPORT void STDCALL glFrontFace(uint32_t orientation) { spy()->glFrontFace(orientation); }
+EXPORT void STDCALL glViewport(int32_t x, int32_t y, int32_t width, int32_t height) {
     spy()->glViewport(x, y, width, height);
 }
-void STDCALL glScissor(int32_t x, int32_t y, int32_t width, int32_t height) {
+EXPORT void STDCALL glScissor(int32_t x, int32_t y, int32_t width, int32_t height) {
     spy()->glScissor(x, y, width, height);
 }
-void STDCALL glActiveTexture(uint32_t unit) { spy()->glActiveTexture(unit); }
-void STDCALL glGenTextures(int32_t count, TextureId* textures) {
+EXPORT void STDCALL glActiveTexture(uint32_t unit) { spy()->glActiveTexture(unit); }
+EXPORT void STDCALL glGenTextures(int32_t count, TextureId* textures) {
     spy()->glGenTextures(count, textures);
 }
-void STDCALL glDeleteTextures(int32_t count, const TextureId* textures) {
+EXPORT void STDCALL glDeleteTextures(int32_t count, const TextureId* textures) {
     spy()->glDeleteTextures(count, textures);
 }
-bool STDCALL glIsTexture(TextureId texture) { return spy()->glIsTexture(texture); }
-void STDCALL glBindTexture(uint32_t target, TextureId texture) {
+EXPORT bool STDCALL glIsTexture(TextureId texture) { return spy()->glIsTexture(texture); }
+EXPORT void STDCALL glBindTexture(uint32_t target, TextureId texture) {
     spy()->glBindTexture(target, texture);
 }
-void STDCALL glTexImage2D(uint32_t target, int32_t level, uint32_t internal_format, int32_t width,
-                          int32_t height, int32_t border, uint32_t format, uint32_t type,
-                          TexturePointer data) {
+EXPORT void STDCALL glTexImage2D(uint32_t target, int32_t level, uint32_t internal_format,
+                                 int32_t width, int32_t height, int32_t border, uint32_t format,
+                                 uint32_t type, TexturePointer data) {
     spy()->glTexImage2D(target, level, internal_format, width, height, border, format, type, data);
 }
-void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset, int32_t yoffset,
-                             int32_t width, int32_t height, uint32_t format, uint32_t type,
-                             TexturePointer data) {
+EXPORT void STDCALL glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
+                                    int32_t yoffset, int32_t width, int32_t height, uint32_t format,
+                                    uint32_t type, TexturePointer data) {
     spy()->glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
 }
-void STDCALL glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x, int32_t y,
-                              int32_t width, int32_t height, int32_t border) {
+EXPORT void STDCALL glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
+                                     int32_t y, int32_t width, int32_t height, int32_t border) {
     spy()->glCopyTexImage2D(target, level, format, x, y, width, height, border);
 }
-void STDCALL glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset, int32_t yoffset,
-                                 int32_t x, int32_t y, int32_t width, int32_t height) {
+EXPORT void STDCALL glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
+                                        int32_t yoffset, int32_t x, int32_t y, int32_t width,
+                                        int32_t height) {
     spy()->glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
 }
-void STDCALL glCompressedTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t width,
-                                    int32_t height, int32_t border, int32_t image_size,
-                                    TexturePointer data) {
+EXPORT void STDCALL glCompressedTexImage2D(uint32_t target, int32_t level, uint32_t format,
+                                           int32_t width, int32_t height, int32_t border,
+                                           int32_t image_size, TexturePointer data) {
     spy()->glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
 }
-void STDCALL glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
-                                       int32_t yoffset, int32_t width, int32_t height,
-                                       uint32_t format, int32_t image_size, TexturePointer data) {
+EXPORT void STDCALL glCompressedTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
+                                              int32_t yoffset, int32_t width, int32_t height,
+                                              uint32_t format, int32_t image_size,
+                                              TexturePointer data) {
     spy()->glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
                                      image_size, data);
 }
-void STDCALL glGenerateMipmap(uint32_t target) { spy()->glGenerateMipmap(target); }
-void STDCALL glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t format,
-                          uint32_t type, void* data) {
+EXPORT void STDCALL glGenerateMipmap(uint32_t target) { spy()->glGenerateMipmap(target); }
+EXPORT void STDCALL glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
+                                 uint32_t format, uint32_t type, void* data) {
     spy()->glReadPixels(x, y, width, height, format, type, data);
 }
-void STDCALL glGenFramebuffers(int32_t count, FramebufferId* framebuffers) {
+EXPORT void STDCALL glGenFramebuffers(int32_t count, FramebufferId* framebuffers) {
     spy()->glGenFramebuffers(count, framebuffers);
 }
-void STDCALL glBindFramebuffer(uint32_t target, FramebufferId framebuffer) {
+EXPORT void STDCALL glBindFramebuffer(uint32_t target, FramebufferId framebuffer) {
     spy()->glBindFramebuffer(target, framebuffer);
 }
-uint32_t STDCALL glCheckFramebufferStatus(uint32_t target) {
+EXPORT uint32_t STDCALL glCheckFramebufferStatus(uint32_t target) {
     return spy()->glCheckFramebufferStatus(target);
 }
-void STDCALL glDeleteFramebuffers(int32_t count, const FramebufferId* framebuffers) {
+EXPORT void STDCALL glDeleteFramebuffers(int32_t count, const FramebufferId* framebuffers) {
     spy()->glDeleteFramebuffers(count, framebuffers);
 }
-bool STDCALL glIsFramebuffer(FramebufferId framebuffer) {
+EXPORT bool STDCALL glIsFramebuffer(FramebufferId framebuffer) {
     return spy()->glIsFramebuffer(framebuffer);
 }
-void STDCALL glGenRenderbuffers(int32_t count, RenderbufferId* renderbuffers) {
+EXPORT void STDCALL glGenRenderbuffers(int32_t count, RenderbufferId* renderbuffers) {
     spy()->glGenRenderbuffers(count, renderbuffers);
 }
-void STDCALL glBindRenderbuffer(uint32_t target, RenderbufferId renderbuffer) {
+EXPORT void STDCALL glBindRenderbuffer(uint32_t target, RenderbufferId renderbuffer) {
     spy()->glBindRenderbuffer(target, renderbuffer);
 }
-void STDCALL
+EXPORT void STDCALL
 glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width, int32_t height) {
     spy()->glRenderbufferStorage(target, format, width, height);
 }
-void STDCALL glDeleteRenderbuffers(int32_t count, const RenderbufferId* renderbuffers) {
+EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, const RenderbufferId* renderbuffers) {
     spy()->glDeleteRenderbuffers(count, renderbuffers);
 }
-bool STDCALL glIsRenderbuffer(RenderbufferId renderbuffer) {
+EXPORT bool STDCALL glIsRenderbuffer(RenderbufferId renderbuffer) {
     return spy()->glIsRenderbuffer(renderbuffer);
 }
-void STDCALL glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
+EXPORT void STDCALL
+glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
     spy()->glGetRenderbufferParameteriv(target, parameter, values);
 }
-void STDCALL glGenBuffers(int32_t count, BufferId* buffers) { spy()->glGenBuffers(count, buffers); }
-void STDCALL glBindBuffer(uint32_t target, BufferId buffer) { spy()->glBindBuffer(target, buffer); }
-void STDCALL glBufferData(uint32_t target, int32_t size, BufferDataPointer data, uint32_t usage) {
+EXPORT void STDCALL glGenBuffers(int32_t count, BufferId* buffers) {
+    spy()->glGenBuffers(count, buffers);
+}
+EXPORT void STDCALL glBindBuffer(uint32_t target, BufferId buffer) {
+    spy()->glBindBuffer(target, buffer);
+}
+EXPORT void STDCALL
+glBufferData(uint32_t target, int32_t size, BufferDataPointer data, uint32_t usage) {
     spy()->glBufferData(target, size, data, usage);
 }
-void STDCALL glBufferSubData(uint32_t target, int32_t offset, int32_t size, const void* data) {
+EXPORT void STDCALL
+glBufferSubData(uint32_t target, int32_t offset, int32_t size, const void* data) {
     spy()->glBufferSubData(target, offset, size, data);
 }
-void STDCALL glDeleteBuffers(int32_t count, const BufferId* buffers) {
+EXPORT void STDCALL glDeleteBuffers(int32_t count, const BufferId* buffers) {
     spy()->glDeleteBuffers(count, buffers);
 }
-bool STDCALL glIsBuffer(BufferId buffer) { return spy()->glIsBuffer(buffer); }
-void STDCALL glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
+EXPORT bool STDCALL glIsBuffer(BufferId buffer) { return spy()->glIsBuffer(buffer); }
+EXPORT void STDCALL glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
     spy()->glGetBufferParameteriv(target, parameter, value);
 }
-ShaderId STDCALL glCreateShader(uint32_t type) { return spy()->glCreateShader(type); }
-void STDCALL glDeleteShader(ShaderId shader) { spy()->glDeleteShader(shader); }
-void STDCALL
+EXPORT ShaderId STDCALL glCreateShader(uint32_t type) { return spy()->glCreateShader(type); }
+EXPORT void STDCALL glDeleteShader(ShaderId shader) { spy()->glDeleteShader(shader); }
+EXPORT void STDCALL
 glShaderSource(ShaderId shader, int32_t count, const char** source, const int32_t* length) {
     spy()->glShaderSource(shader, count, source, length);
 }
-void STDCALL glShaderBinary(int32_t count, const ShaderId* shaders, uint32_t binary_format,
-                            const void* binary, int32_t binary_size) {
+EXPORT void STDCALL glShaderBinary(int32_t count, const ShaderId* shaders, uint32_t binary_format,
+                                   const void* binary, int32_t binary_size) {
     spy()->glShaderBinary(count, shaders, binary_format, binary, binary_size);
 }
-void STDCALL glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
-                                int32_t* string_length_written, char* info) {
+EXPORT void STDCALL glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
+                                       int32_t* string_length_written, char* info) {
     spy()->glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
 }
-void STDCALL glGetShaderSource(ShaderId shader, int32_t buffer_length,
-                               int32_t* string_length_written, char* source) {
+EXPORT void STDCALL glGetShaderSource(ShaderId shader, int32_t buffer_length,
+                                      int32_t* string_length_written, char* source) {
     spy()->glGetShaderSource(shader, buffer_length, string_length_written, source);
 }
-void STDCALL glReleaseShaderCompiler() { spy()->glReleaseShaderCompiler(); }
-void STDCALL glCompileShader(ShaderId shader) { spy()->glCompileShader(shader); }
-bool STDCALL glIsShader(ShaderId shader) { return spy()->glIsShader(shader); }
-ProgramId STDCALL glCreateProgram() { return spy()->glCreateProgram(); }
-void STDCALL glDeleteProgram(ProgramId program) { spy()->glDeleteProgram(program); }
-void STDCALL glAttachShader(ProgramId program, ShaderId shader) {
+EXPORT void STDCALL glReleaseShaderCompiler() { spy()->glReleaseShaderCompiler(); }
+EXPORT void STDCALL glCompileShader(ShaderId shader) { spy()->glCompileShader(shader); }
+EXPORT bool STDCALL glIsShader(ShaderId shader) { return spy()->glIsShader(shader); }
+EXPORT ProgramId STDCALL glCreateProgram() { return spy()->glCreateProgram(); }
+EXPORT void STDCALL glDeleteProgram(ProgramId program) { spy()->glDeleteProgram(program); }
+EXPORT void STDCALL glAttachShader(ProgramId program, ShaderId shader) {
     spy()->glAttachShader(program, shader);
 }
-void STDCALL glDetachShader(ProgramId program, ShaderId shader) {
+EXPORT void STDCALL glDetachShader(ProgramId program, ShaderId shader) {
     spy()->glDetachShader(program, shader);
 }
-void STDCALL glGetAttachedShaders(ProgramId program, int32_t buffer_length,
-                                  int32_t* shaders_length_written, ShaderId* shaders) {
+EXPORT void STDCALL glGetAttachedShaders(ProgramId program, int32_t buffer_length,
+                                         int32_t* shaders_length_written, ShaderId* shaders) {
     spy()->glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
 }
-void STDCALL glLinkProgram(ProgramId program) { spy()->glLinkProgram(program); }
-void STDCALL glGetProgramInfoLog(ProgramId program, int32_t buffer_length,
-                                 int32_t* string_length_written, char* info) {
+EXPORT void STDCALL glLinkProgram(ProgramId program) { spy()->glLinkProgram(program); }
+EXPORT void STDCALL glGetProgramInfoLog(ProgramId program, int32_t buffer_length,
+                                        int32_t* string_length_written, char* info) {
     spy()->glGetProgramInfoLog(program, buffer_length, string_length_written, info);
 }
-void STDCALL glUseProgram(ProgramId program) { spy()->glUseProgram(program); }
-bool STDCALL glIsProgram(ProgramId program) { return spy()->glIsProgram(program); }
-void STDCALL glValidateProgram(ProgramId program) { spy()->glValidateProgram(program); }
-void STDCALL glClearColor(float r, float g, float b, float a) { spy()->glClearColor(r, g, b, a); }
-void STDCALL glClearDepthf(float depth) { spy()->glClearDepthf(depth); }
-void STDCALL glClearStencil(int32_t stencil) { spy()->glClearStencil(stencil); }
-void STDCALL glClear(uint32_t mask) { spy()->glClear(mask); }
-void STDCALL glCullFace(uint32_t mode) { spy()->glCullFace(mode); }
-void STDCALL glPolygonOffset(float scale_factor, float units) {
+EXPORT void STDCALL glUseProgram(ProgramId program) { spy()->glUseProgram(program); }
+EXPORT bool STDCALL glIsProgram(ProgramId program) { return spy()->glIsProgram(program); }
+EXPORT void STDCALL glValidateProgram(ProgramId program) { spy()->glValidateProgram(program); }
+EXPORT void STDCALL glClearColor(float r, float g, float b, float a) {
+    spy()->glClearColor(r, g, b, a);
+}
+EXPORT void STDCALL glClearDepthf(float depth) { spy()->glClearDepthf(depth); }
+EXPORT void STDCALL glClearStencil(int32_t stencil) { spy()->glClearStencil(stencil); }
+EXPORT void STDCALL glClear(uint32_t mask) { spy()->glClear(mask); }
+EXPORT void STDCALL glCullFace(uint32_t mode) { spy()->glCullFace(mode); }
+EXPORT void STDCALL glPolygonOffset(float scale_factor, float units) {
     spy()->glPolygonOffset(scale_factor, units);
 }
-void STDCALL glLineWidth(float width) { spy()->glLineWidth(width); }
-void STDCALL glSampleCoverage(float value, bool invert) { spy()->glSampleCoverage(value, invert); }
-void STDCALL glHint(uint32_t target, uint32_t mode) { spy()->glHint(target, mode); }
-void STDCALL glFramebufferRenderbuffer(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
-                                       uint32_t renderbuffer_target, RenderbufferId renderbuffer) {
+EXPORT void STDCALL glLineWidth(float width) { spy()->glLineWidth(width); }
+EXPORT void STDCALL glSampleCoverage(float value, bool invert) {
+    spy()->glSampleCoverage(value, invert);
+}
+EXPORT void STDCALL glHint(uint32_t target, uint32_t mode) { spy()->glHint(target, mode); }
+EXPORT void STDCALL
+glFramebufferRenderbuffer(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
+                          uint32_t renderbuffer_target, RenderbufferId renderbuffer) {
     spy()->glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
                                      renderbuffer_target, renderbuffer);
 }
-void STDCALL glFramebufferTexture2D(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
-                                    uint32_t texture_target, TextureId texture, int32_t level) {
+EXPORT void STDCALL glFramebufferTexture2D(uint32_t framebuffer_target,
+                                           uint32_t framebuffer_attachment, uint32_t texture_target,
+                                           TextureId texture, int32_t level) {
     spy()->glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
                                   texture, level);
 }
-void STDCALL glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target, uint32_t attachment,
-                                                   uint32_t parameter, int32_t* value) {
+EXPORT void STDCALL glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target,
+                                                          uint32_t attachment, uint32_t parameter,
+                                                          int32_t* value) {
     spy()->glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
 }
-void STDCALL glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type,
-                            IndicesPointer indices) {
+EXPORT void STDCALL glDrawElements(uint32_t draw_mode, int32_t element_count, uint32_t indices_type,
+                                   IndicesPointer indices) {
     spy()->glDrawElements(draw_mode, element_count, indices_type, indices);
 }
-void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
+EXPORT void STDCALL glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
     spy()->glDrawArrays(draw_mode, first_index, index_count);
 }
-void STDCALL glFlush() { spy()->glFlush(); }
-void STDCALL glFinish() { spy()->glFinish(); }
-void STDCALL glGetBooleanv(uint32_t param, bool* values) { spy()->glGetBooleanv(param, values); }
-void STDCALL glGetFloatv(uint32_t param, float* values) { spy()->glGetFloatv(param, values); }
-void STDCALL glGetIntegerv(uint32_t param, int32_t* values) { spy()->glGetIntegerv(param, values); }
-char* STDCALL glGetString(uint32_t param) { return spy()->glGetString(param); }
-void STDCALL glEnable(uint32_t capability) { spy()->glEnable(capability); }
-void STDCALL glDisable(uint32_t capability) { spy()->glDisable(capability); }
-bool STDCALL glIsEnabled(uint32_t capability) { return spy()->glIsEnabled(capability); }
-void* STDCALL glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access) {
+EXPORT void STDCALL glFlush() { spy()->glFlush(); }
+EXPORT void STDCALL glFinish() { spy()->glFinish(); }
+EXPORT void STDCALL glGetBooleanv(uint32_t param, bool* values) {
+    spy()->glGetBooleanv(param, values);
+}
+EXPORT void STDCALL glGetFloatv(uint32_t param, float* values) {
+    spy()->glGetFloatv(param, values);
+}
+EXPORT void STDCALL glGetIntegerv(uint32_t param, int32_t* values) {
+    spy()->glGetIntegerv(param, values);
+}
+EXPORT char* STDCALL glGetString(uint32_t param) { return spy()->glGetString(param); }
+EXPORT void STDCALL glEnable(uint32_t capability) { spy()->glEnable(capability); }
+EXPORT void STDCALL glDisable(uint32_t capability) { spy()->glDisable(capability); }
+EXPORT bool STDCALL glIsEnabled(uint32_t capability) { return spy()->glIsEnabled(capability); }
+EXPORT void* STDCALL
+glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access) {
     return spy()->glMapBufferRange(target, offset, length, access);
 }
-void STDCALL glUnmapBuffer(uint32_t target) { spy()->glUnmapBuffer(target); }
-void STDCALL glInvalidateFramebuffer(uint32_t target, int32_t count, const uint32_t* attachments) {
+EXPORT void STDCALL glUnmapBuffer(uint32_t target) { spy()->glUnmapBuffer(target); }
+EXPORT void STDCALL
+glInvalidateFramebuffer(uint32_t target, int32_t count, const uint32_t* attachments) {
     spy()->glInvalidateFramebuffer(target, count, attachments);
 }
-void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t samples, uint32_t format,
-                                              int32_t width, int32_t height) {
+EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
+                                                     uint32_t format, int32_t width,
+                                                     int32_t height) {
     spy()->glRenderbufferStorageMultisample(target, samples, format, width, height);
 }
-void STDCALL glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
-                               int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
-                               uint32_t mask, uint32_t filter) {
+EXPORT void STDCALL glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
+                                      int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
+                                      uint32_t mask, uint32_t filter) {
     spy()->glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
 }
-void STDCALL glGenQueries(int32_t count, QueryId* queries) { spy()->glGenQueries(count, queries); }
-void STDCALL glBeginQuery(uint32_t target, QueryId query) { spy()->glBeginQuery(target, query); }
-void STDCALL glEndQuery(uint32_t target) { spy()->glEndQuery(target); }
-void STDCALL glDeleteQueries(int32_t count, const QueryId* queries) {
+EXPORT void STDCALL glGenQueries(int32_t count, QueryId* queries) {
+    spy()->glGenQueries(count, queries);
+}
+EXPORT void STDCALL glBeginQuery(uint32_t target, QueryId query) {
+    spy()->glBeginQuery(target, query);
+}
+EXPORT void STDCALL glEndQuery(uint32_t target) { spy()->glEndQuery(target); }
+EXPORT void STDCALL glDeleteQueries(int32_t count, const QueryId* queries) {
     spy()->glDeleteQueries(count, queries);
 }
-bool STDCALL glIsQuery(QueryId query) { return spy()->glIsQuery(query); }
-void STDCALL glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
+EXPORT bool STDCALL glIsQuery(QueryId query) { return spy()->glIsQuery(query); }
+EXPORT void STDCALL glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
     spy()->glGetQueryiv(target, parameter, value);
 }
-void STDCALL glGetQueryObjectuiv(QueryId query, uint32_t parameter, uint32_t* value) {
+EXPORT void STDCALL glGetQueryObjectuiv(QueryId query, uint32_t parameter, uint32_t* value) {
     spy()->glGetQueryObjectuiv(query, parameter, value);
 }
-void STDCALL glGenQueriesEXT(int32_t count, QueryId* queries) {
+EXPORT void STDCALL glGenQueriesEXT(int32_t count, QueryId* queries) {
     spy()->glGenQueriesEXT(count, queries);
 }
-void STDCALL glBeginQueryEXT(uint32_t target, QueryId query) {
+EXPORT void STDCALL glBeginQueryEXT(uint32_t target, QueryId query) {
     spy()->glBeginQueryEXT(target, query);
 }
-void STDCALL glEndQueryEXT(uint32_t target) { spy()->glEndQueryEXT(target); }
-void STDCALL glDeleteQueriesEXT(int32_t count, const QueryId* queries) {
+EXPORT void STDCALL glEndQueryEXT(uint32_t target) { spy()->glEndQueryEXT(target); }
+EXPORT void STDCALL glDeleteQueriesEXT(int32_t count, const QueryId* queries) {
     spy()->glDeleteQueriesEXT(count, queries);
 }
-bool STDCALL glIsQueryEXT(QueryId query) { return spy()->glIsQueryEXT(query); }
-void STDCALL glQueryCounterEXT(QueryId query, uint32_t target) {
+EXPORT bool STDCALL glIsQueryEXT(QueryId query) { return spy()->glIsQueryEXT(query); }
+EXPORT void STDCALL glQueryCounterEXT(QueryId query, uint32_t target) {
     spy()->glQueryCounterEXT(query, target);
 }
-void STDCALL glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
+EXPORT void STDCALL glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
     spy()->glGetQueryivEXT(target, parameter, value);
 }
-void STDCALL glGetQueryObjectivEXT(QueryId query, uint32_t parameter, int32_t* value) {
+EXPORT void STDCALL glGetQueryObjectivEXT(QueryId query, uint32_t parameter, int32_t* value) {
     spy()->glGetQueryObjectivEXT(query, parameter, value);
 }
-void STDCALL glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, uint32_t* value) {
+EXPORT void STDCALL glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, uint32_t* value) {
     spy()->glGetQueryObjectuivEXT(query, parameter, value);
 }
-void STDCALL glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, int64_t* value) {
+EXPORT void STDCALL glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, int64_t* value) {
     spy()->glGetQueryObjecti64vEXT(query, parameter, value);
 }
-void STDCALL glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, uint64_t* value) {
+EXPORT void STDCALL glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, uint64_t* value) {
     spy()->glGetQueryObjectui64vEXT(query, parameter, value);
 }
 

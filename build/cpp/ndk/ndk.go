@@ -49,35 +49,28 @@ var osToSystem = map[string]string{
 // Toolchain for building an Android executable env, without being packaged into an
 // APK (user-debug only).
 var EXE = &cpp.Toolchain{
-	Compiler: compile,
-	Archiver: archive,
-	Linker:   linkExe,
-	DepsFor:  depsFor,
-	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s", cfg.Name, cfg.Architecture) },
-	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	ObjExt:   func(cfg cpp.Config) string { return ".o" },
-}
-
-// Toolchain for building an Android shared library.
-var SO = &cpp.Toolchain{
-	Compiler: compile,
-	Archiver: archive,
-	Linker:   linkSo,
-	DepsFor:  depsFor,
-	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
-	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	ObjExt:   func(cfg cpp.Config) string { return ".o" },
+	Compiler:  compile,
+	Archiver:  archive,
+	DllLinker: linkSo,
+	ExeLinker: linkExe,
+	DepsFor:   depsFor,
+	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
+	ExeName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s", cfg.Name, cfg.Architecture) },
+	ObjExt:    func(cfg cpp.Config) string { return ".o" },
 }
 
 // Toolchain for building an Android APK.
 var APK = &cpp.Toolchain{
-	Compiler: compile,
-	Archiver: archive,
-	Linker:   linkAPK,
-	DepsFor:  depsFor,
-	ExeName:  func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.apk", cfg.Name, cfg.Architecture) },
-	LibName:  func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	ObjExt:   func(cfg cpp.Config) string { return ".o" },
+	Compiler:  compile,
+	Archiver:  archive,
+	DllLinker: linkSo,
+	ExeLinker: linkApk,
+	DepsFor:   depsFor,
+	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
+	ExeName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.apk", cfg.Name, cfg.Architecture) },
+	ObjExt:    func(cfg cpp.Config) string { return ".o" },
 }
 
 type tools struct {
@@ -185,33 +178,8 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	return tools.ar.Exec(env, a...)
 }
 
-func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.Link-exe")
-
-	tools, err := getTools(cfg)
-	if err != nil {
-		return err
-	}
-
-	a := []string{"--sysroot=" + tools.sysroot.Absolute()}
-	a = append(a, cfg.LinkerArgs...)
-	for _, lsp := range cfg.LibrarySearchPaths.Append(tools.libdirs...) {
-		a = append(a, fmt.Sprintf("-L%s", lsp))
-	}
-	for _, input := range inputs {
-		a = append(a, input.Absolute())
-	}
-	for _, library := range cfg.Libraries.Append(tools.libs...) {
-		name := strings.TrimPrefix(strings.TrimSuffix(string(library), ".a"), "lib")
-		a = append(a, fmt.Sprintf("-l%s", name))
-	}
-
-	a = append(a, "-o", string(output))
-	return tools.cc.Exec(env, a...)
-}
-
 func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.Link-so")
+	env.Logger = env.Logger.Enter("NDK.LinkSo")
 
 	tools, err := getTools(cfg)
 	if err != nil {
@@ -238,8 +206,33 @@ func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.E
 	return tools.cc.Exec(env, a...)
 }
 
-func linkAPK(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("NDK.Link-apk")
+func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("NDK.LinkExe")
+
+	tools, err := getTools(cfg)
+	if err != nil {
+		return err
+	}
+
+	a := []string{"--sysroot=" + tools.sysroot.Absolute()}
+	a = append(a, cfg.LinkerArgs...)
+	for _, lsp := range cfg.LibrarySearchPaths.Append(tools.libdirs...) {
+		a = append(a, fmt.Sprintf("-L%s", lsp))
+	}
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	for _, library := range cfg.Libraries.Append(tools.libs...) {
+		name := strings.TrimPrefix(strings.TrimSuffix(string(library), ".a"), "lib")
+		a = append(a, fmt.Sprintf("-l%s", name))
+	}
+
+	a = append(a, "-o", string(output))
+	return tools.cc.Exec(env, a...)
+}
+
+func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("NDK.LinkApk")
 
 	paths, err := ResolvePaths()
 	if err != nil {

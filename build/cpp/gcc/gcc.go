@@ -24,19 +24,31 @@ import (
 )
 
 var GCC = &cpp.Toolchain{
-	Compiler: compile,
-	Archiver: archive,
-	Linker:   link,
-	DepsFor:  depsFor,
+	Compiler:  compile,
+	Archiver:  archive,
+	DllLinker: linkDll,
+	ExeLinker: linkExe,
+	DepsFor:   depsFor,
+	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
+	DllName: func(cfg cpp.Config) string {
+		switch cfg.OS {
+		case "windows":
+			return cfg.Name + ".dll"
+		case "osx":
+			return cfg.Name + ".dylib"
+		default:
+			return cfg.Name + ".so"
+		}
+	},
 	ExeName: func(cfg cpp.Config) string {
-		if cfg.OS == "windows" {
+		switch cfg.OS {
+		case "windows":
 			return cfg.Name + ".exe"
-		} else {
+		default:
 			return cfg.Name
 		}
 	},
-	LibName: func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	ObjExt:  func(cpp.Config) string { return ".o" },
+	ObjExt: func(cpp.Config) string { return ".o" },
 }
 
 type tools struct {
@@ -99,7 +111,10 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	depfile := depFileFor(output, cfg, env)
 
 	a := append([]string{
-		"-c",                              // Compile to .o
+		"-c", // Compile to .o
+		"-fPIC",
+		"-fvisibility=hidden",
+		"-fvisibility-inlines-hidden",
 		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 	}, cfg.CompilerArgs...)
 	for _, isp := range cfg.IncludeSearchPaths {
@@ -132,8 +147,41 @@ func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	return tools.ar.Exec(env, a...)
 }
 
-func link(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
-	env.Logger = env.Logger.Enter("GCC.Link")
+func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("GCC.LinkDll")
+
+	tools, err := getTools(cfg)
+	if err != nil {
+		return err
+	}
+
+	a := append([]string{
+		"-fPIC",
+	}, cfg.LinkerArgs...)
+
+	switch cfg.OS {
+	case "osx":
+		a = append(a, "-dynamiclib")
+	default:
+		a = append(a, "-shared")
+	}
+
+	for _, lsp := range cfg.LibrarySearchPaths {
+		a = append(a, fmt.Sprintf("-L%s", lsp))
+	}
+	for _, input := range inputs {
+		a = append(a, input.Absolute())
+	}
+	for _, library := range cfg.Libraries {
+		name := strings.TrimPrefix(strings.TrimSuffix(string(library), ".a"), "lib")
+		a = append(a, fmt.Sprintf("-l%s", name))
+	}
+	a = append(a, "-o", string(output))
+	return tools.cc.Exec(env, a...)
+}
+
+func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+	env.Logger = env.Logger.Enter("GCC.LinkExe")
 
 	tools, err := getTools(cfg)
 	if err != nil {
