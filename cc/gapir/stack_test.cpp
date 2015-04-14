@@ -26,13 +26,14 @@ namespace gapir {
 namespace test {
 namespace {
 
-const size_t MEMORY_SIZE = 4096;
+const uint32_t MEMORY_SIZE = 4096;
 const uint32_t STACK_CAPACITY = 128;
 
 class StackTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mMemoryManager.reset(new MemoryManager({MEMORY_SIZE}));
+        std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
+        mMemoryManager.reset(new MemoryManager(memorySizes));
         mStack.reset(new Stack(STACK_CAPACITY, mMemoryManager.get()));
     }
 
