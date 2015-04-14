@@ -27,6 +27,16 @@ import (
 	"golang.org/x/tools/imports"
 )
 
+var (
+	verbose = flag.Bool("v", false, "verbose messages")
+	output  = flag.String("out", "embed.go", "the file to generate")
+)
+
+const usage = `embed: A tool to embed files into go source.
+Usage: embed [--out=file] <inputs>...
+  -help: show this help message
+`
+
 const header = `
 ////////////////////////////////////////////////////////////////////////////////
 // Do not modify!
@@ -38,39 +48,64 @@ package %s
 `
 
 type embed struct {
+	path     string
 	filename string
 	name     string
 	contents []byte
 }
 
 func run() error {
+	flag.Usage = func() {
+		fmt.Printf(usage)
+		flag.PrintDefaults()
+	}
 	flag.Parse()
-	pwd, err := filepath.Abs(".")
-	if err != nil {
-		return err
-	}
-	files, err := ioutil.ReadDir(pwd)
-	if err != nil {
-		return err
-	}
-	entries := []embed{}
-	for _, info := range files {
-		if info.IsDir() {
-			continue
-		}
-		extension := filepath.Ext(info.Name())
-		if extension == ".go" {
-			continue
-		}
-		name := strings.Replace(info.Name(), ".", "_", -1)
-		data, err := ioutil.ReadFile(info.Name())
+	args := flag.Args()
+	entries := []*embed{}
+	if len(args) == 0 {
+		pwd, err := filepath.Abs(".")
 		if err != nil {
 			return err
 		}
-		entries = append(entries, embed{info.Name(), name, data})
+		files, err := ioutil.ReadDir(pwd)
+		if err != nil {
+			return err
+		}
+		for _, info := range files {
+			if info.IsDir() {
+				continue
+			}
+			extension := filepath.Ext(info.Name())
+			if extension == ".go" {
+				continue
+			}
+			path := filepath.Join(pwd, info.Name())
+			entries = append(entries, &embed{path: path})
+		}
+	} else {
+		for _, arg := range args {
+			path, err := filepath.Abs(arg)
+			if err != nil {
+				return err
+			}
+			entries = append(entries, &embed{path: path})
+		}
+	}
+	var err error
+	for _, entry := range entries {
+		entry.filename = filepath.Base(entry.path)
+		entry.name = strings.Replace(entry.filename, ".", "_", -1)
+		entry.contents, err = ioutil.ReadFile(entry.path)
+		if err != nil {
+			return err
+		}
 	}
 	// write the header
-	_, pkg := filepath.Split(pwd)
+	out, err := filepath.Abs(*output)
+	if err != nil {
+		return err
+	}
+	pkg := filepath.Base(filepath.Dir(out))
 	b := &bytes.Buffer{}
 	fmt.Fprintf(b, header, pkg)
 	// write the map
@@ -85,13 +120,16 @@ func run() error {
 		fmt.Fprintf(b, "const %s = `", entry.name)
 		fmt.Fprint(b, strings.Replace(string(entry.contents), "`", "` + \"`\" + `", -1))
 		fmt.Fprint(b, "`\n")
+		if *verbose {
+			fmt.Printf("Embed %s from %s\n", entry.name, entry.path)
+		}
 	}
 	// reformat the output
 	result, err := imports.Process("", b.Bytes(), nil)
 	if err != nil {
 		result = b.Bytes()
 	}
-	if err := ioutil.WriteFile("embed.go", result, 0666); err != nil {
+	if err := ioutil.WriteFile(out, result, 0666); err != nil {
 		return err
 	}
 	return nil
