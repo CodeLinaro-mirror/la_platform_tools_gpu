@@ -15,7 +15,6 @@
  */
 
 #include <gapic/log.h>
-#include <gapic/target.h>
 
 #include <dlfcn.h>
 

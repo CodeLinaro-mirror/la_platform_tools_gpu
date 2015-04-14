@@ -18,6 +18,8 @@
 #include <windows.h>
 #include <wingdi.h>
 
+#include <gapic/target.h> // snprintf
+
 namespace {
 
 typedef void* (__stdcall *PFNWGLGETPROCADDRESS)(const char* name);
