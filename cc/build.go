@@ -23,6 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/build"
 	"android.googlesource.com/platform/tools/gpu/build/cpp"
 	"android.googlesource.com/platform/tools/gpu/build/cpp/gcc"
+	"android.googlesource.com/platform/tools/gpu/build/cpp/msvc"
 	"android.googlesource.com/platform/tools/gpu/build/cpp/ndk"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -248,11 +249,19 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 		Defines: map[string]string{
 			"TARGET_OS_" + strings.ToUpper(os): "1",
 		},
-		CompilerArgs: []string{"-std=c++11"},
 	}
+
 	if toolchain == gcc.GCC {
-		base.LibrarySearchPaths = build.FileSet{"/usr/local/lib"}
+		base.LibrarySearchPaths = build.Files("/usr/local/lib")
 	}
+
+	if toolchain != msvc.MSVC {
+		base.Libraries = build.Files("stdc++")
+		base.CompilerArgs = []string{"-std=c++11"}
+	} else {
+		base.Flavor += "-msvc"
+	}
+
 	return Target{
 		SourceFiles: []string{"*.cpp", "*.cc"},
 		Gtest: base.Extend(cpp.Config{
@@ -280,8 +289,7 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 			IncludeSearchPaths: build.FileSet{CCRoot},
 		}),
 		GapirTests: base.Extend(cpp.Config{
-			Name:      "gapir-tests",
-			Libraries: build.FileSet{"stdc++"},
+			Name: "gapir-tests",
 			IncludeSearchPaths: build.FileSet{
 				CCRoot,
 				GmockRoot.Join("include"),
@@ -289,9 +297,10 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 			},
 		}),
 		Replayd: base.Extend(cpp.Config{
-			Name:               "replayd",
-			Libraries:          build.FileSet{"stdc++"},
-			IncludeSearchPaths: build.FileSet{CCRoot},
+			Name: "replayd",
+			IncludeSearchPaths: build.FileSet{
+				CCRoot,
+			},
 			Permissions: []string{
 				"android.permission.INTERNET",
 				"android.permission.READ_EXTERNAL_STORAGE",
@@ -331,10 +340,19 @@ var buildTargets = map[string]Target{
 
 	"windows": base(gcc.GCC, "windows", "x64").Extend(Target{
 		GapirTests: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32"},
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
 		},
 		Replayd: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32"},
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+	}),
+
+	"windows-msvc": base(msvc.MSVC, "windows", "x64").Extend(Target{
+		GapirTests: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+		Replayd: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
 		},
 	}),
 

@@ -46,7 +46,8 @@ const uint32_t CACHE_SIZE = 2048;
 class ResourceInMemoryCacheTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mMemoryManager.reset(new MemoryManager({MEMORY_SIZE}));
+        std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
+        mMemoryManager.reset(new MemoryManager(memorySizes));
         mMemoryManager->setVolatileMemory(MEMORY_SIZE - CACHE_SIZE);
 
         mFallbackProvider = new StrictMock<MockResourceProvider>();

@@ -25,12 +25,13 @@ namespace gapir {
 namespace test {
 namespace {
 
-const size_t MEMORY_SIZE = 4096;
+const uint32_t MEMORY_SIZE = 4096;
 
 class MemoryManagerTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mMemoryManager.reset(new MemoryManager({MEMORY_SIZE}));
+        std::vector<uint32_t> memorySizes = {MEMORY_SIZE};
+        mMemoryManager.reset(new MemoryManager(memorySizes));
     }
 
     std::unique_ptr<MemoryManager> mMemoryManager;
