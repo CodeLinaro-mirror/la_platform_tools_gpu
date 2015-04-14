@@ -15,7 +15,16 @@
  */
 
 inline int32_t strlen(const char* s) {
-    return s != nullptr ? static_cast<int32_t>(::strlen(s)) : 0;
+    if (s == nullptr) {
+        return 0;
+    }
+    int32_t i = 0;
+    while (s[i] != 0) { i++; }
+    return i;
+}
+
+inline int32_t strlen(const std::string& s) {
+    return s.length();
 }
 
 inline void memcpy(Memory, void*, int) {} // TODO

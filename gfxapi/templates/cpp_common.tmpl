@@ -10,6 +10,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
+
+{{/*
+-------------------------------------------------------------------------------
+  Defaults - overridable
+-------------------------------------------------------------------------------
+*/}}
+{{Global "C++.StringType" "std::string"}}
+
 {{/*
 -------------------------------------------------------------------------------
   Emits the C++ type for the specified AST type.
@@ -36,7 +44,7 @@ limitations under the License.
   {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsPointerType $}}void*
-  {{else if IsString      $}}char*
+  {{else if IsString      $}}{{Global "C++.StringType"}}
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
@@ -140,7 +148,10 @@ limitations under the License.
     {{/* Prefix const for read-only reference parameters. */}}
     {{if and (not $.Output) $isRef}}const {{end}}§
 
+    {{$string_ty := Global "C++.StringType"}}
+    {{Global "C++.StringType" "char*"}} {{/* Push */}}
     {{Macro "C++.Type" $ty}}§
+    {{Global "C++.StringType" $string_ty}} {{/* Pop */}}
 
     {{/* Postfix reference for non-reference output parameters. */}}
     {{if and $.Output (not $isRef)}}*{{end}}
@@ -194,9 +205,26 @@ limitations under the License.
 {{/*
 -------------------------------------------------------------------------------
   Emits the C++ logic to execute the given statement.
+  If the global "C++.StatementTypeOverride" is specified then this the macro
+  with the specified name is called, otherwise the macro delegates to
+  "C++.StatementDefault".
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Statement"}}
+  {{if $override := Global "C++.StatementTypeOverride"}}
+    {{Macro $override $}}
+  {{else}}
+    {{Macro "C++.StatementDefault" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute the given statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.StatementDefault"}}
   {{     if IsDeclareLocal $}}{{Macro "C++.StateType" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
@@ -235,7 +263,29 @@ limitations under the License.
 {{define "C++.Assign"}}
   {{AssertType $ "Assign"}}
 
-  {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
+  {{if IsArray (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
+  {{else                     }}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform an assignment between two arrays.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ArrayAssign"}}
+  {{AssertType $ "Assign"}}
+
+  {{AssertType (TypeOf $.LHS) "Array"}}
+  {{AssertType (TypeOf $.RHS) "Array"}}
+
+  {{$lhs   := Macro "C++.Read" $.LHS}}
+  {{$rhs   := Macro "C++.Read" $.RHS}}
+  {{$count := Macro "C++.Read" (GetArrayParamCount $.RHS)}}
+  for (int i, c = 0, {{$count}}; i < c; i++) {
+    {{$lhs}}[i] = {{$rhs}}[i];
+  }
 {{end}}
 
 
@@ -291,7 +341,7 @@ limitations under the License.
   {{else if IsCall             $}}{{Macro "C++.Call" $}}
   {{else if IsUnknown          $}}{{Macro "C++.Read" $.Inferred}}
   {{else if IsObserved         $}}{{$.Parameter.Name}}
-  {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}{{$.Field.Name}}
+  {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}m{{$.Field.Name}}
   {{else if IsGlobal           $}}this->{{$.Name}}
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
   {{else if IsArrayIndex       $}}{{Macro "C++.Read" $.Array}}[{{Macro "C++.Read" $.Index}}]
@@ -409,8 +459,9 @@ limitations under the License.
 {{define "C++.ReadParameter"}}
   {{AssertType $ "Parameter"}}
 
-  {{$ty := TypeOf $}}
-  {{$deref := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty) (eq $.Name $.Function.Return.Name))}}
+  {{$ty       := TypeOf $}}
+  {{$isResult := eq $.Name $.Function.Return.Name}}
+  {{$deref    := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty) $isResult)}}
   {{if and $.Output $deref}}*{{end}}{{$.Name}}
 {{end}}
 

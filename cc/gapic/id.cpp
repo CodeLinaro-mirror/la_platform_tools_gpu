@@ -14,15 +14,31 @@
  * limitations under the License.
  */
 
-#ifndef GAPIC_GET_GFX_PROC_ADDRESS_H
-#define GAPIC_GET_GFX_PROC_ADDRESS_H
+#include "id.h"
+#include "hash.h"
+
+#include <string.h>
+
+namespace {
+
+void hash(const void* ptr, uint64_t size, gapic::Id& out) {
+    int s = static_cast<int>(size);
+    MurmurHash3_x86_128(ptr, s, 0x342d23f2, &out.data[0]);
+    MurmurHash3_x86_32(ptr, s, 0x4dd61236, &out.data[16]);
+}
+
+} // anonymous namespace
 
 namespace gapic {
 
-// GetGfxProcAddress returns the function pointer to the function with the given
-// name, or nullptr if the function was not found.
-void* GetGfxProcAddress(const char* name);
+Id::Id() {}
+
+Id::Id(const void* ptr, uint64_t size) {
+    hash(ptr, size, *this);
+}
+
+bool Id::operator == (const Id& rhs) const {
+    return memcmp(data, rhs.data, sizeof(data)) == 0;
+}
 
 } // namespace gapic
-
-#endif // GAPIC_GET_GFX_PROC_ADDRESS_H

@@ -14,7 +14,9 @@
  * limitations under the License.
  */}}
 
+{{/* ---- Includes ---- */}}
 {{Include "cpp_common.tmpl"}}
+
 {{$filename := print (Global "API") "_imports.cpp" }}
 {{$ | Macro "imports.cpp" | Format (Global "clang-format") | Write $filename}}
 
@@ -26,8 +28,9 @@
 {{define "imports.cpp"}}
 {{template "C++.AOSP.Copyright"}}
 ¶
-#include "common/get_gfx_proc_address.h"
 #include "{{Global "API"}}_imports.h"
+¶
+#include <gapic/get_gfx_proc_address.h>
 ¶
 namespace gapii {
 ¶

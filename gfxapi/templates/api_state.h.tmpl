@@ -11,23 +11,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{Global "C++.EnumTypeOverride" "uint32_t"}}
+{{/* ---- Includes ---- */}}
+{{Include "api_classnames.tmpl"}}
+{{Include "cpp_common.tmpl"    }}
 
-{{Include "cpp_common.tmpl"}}
+{{/* ---- Overrides ---- */}}
+{{Global "C++.EnumTypeOverride"      "uint32_t" }}
+{{Global "C++.StatementTypeOverride" "Statement"}}
+
 {{$filename := print (Global "API") "_state.h" }}
 {{$ | Macro "State" | Format (Global "clang-format") | Write $filename}}
 
 {{define "State"}}
   {{AssertType $ "API"}}
   {{Macro "C++.AOSP.Copyright"}}
-  {{$classname := print (Title (Global "API")) "State"}}
+  {{$classname := Macro "ApiClassnames.State"}}
   {{$guard := print "GAPII_" (Upper (Global "API")) "_STATE_H"}}
 ¶
   #ifndef {{$guard}}
   #define {{$guard}}
 ¶
-  #include "common/encoder.h"
   #include "{{Global "API"}}_types.h"
+¶
+  #include <gapic/encoder.h>
 ¶
   namespace gapii {«
 ¶
@@ -51,7 +57,7 @@ limitations under the License.
 ¶
   {{range $c := AllCommands $}}
     inline void {{$classname}}::{{Macro "C++.MethodName" $c}}({{Macro "Parameters" $c}}) {
-      {{Macro "Block" $c.Block}}
+      {{Macro "C++.Block" $c.Block}}
     }¶
   {{end}}
 ¶
@@ -65,25 +71,18 @@ limitations under the License.
 {{/*
 -------------------------------------------------------------------------------
   Emits the comma-separated list of type-name paired parameters for given
-  function, including the return value. All outputs are treated as inputs.
+  function, including the return value. All parameters are marked const.
 -------------------------------------------------------------------------------
 */}}
 {{define "Parameters"}}
   {{AssertType $ "Function"}}
 
-  {{range $i, $p := $.FullParameters}}
-    {{if $i}}, {{end}}{{Macro "C++.Type" $p}} {{$p.Name}}§
+  {{range $i, $p := $.CallParameters}}
+    {{if $i}}, {{end}}{{Macro "C++.ParameterType" $p}} const {{$p.Name}}§
   {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the logic for all the statements in the given block.
--------------------------------------------------------------------------------
-*/}}
-{{define "Block"}}
-  {{ForEach $.Statements "Statement" | JoinWith "\n"}}
+  {{if not (IsVoid $.Return.Type)}}
+    {{if len $.CallParameters}}, {{end}}{{Macro "C++.Type" $.Return.Type}} const result§
+  {{end}}
 {{end}}
 
 
@@ -93,28 +92,10 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{     if IsAssign    $}}{{if not (Macro "IsOutput" $.LHS   )}}{{Macro "C++.Statement" $}}{{end}}
-  {{else if IsMapAssign $}}{{if not (Macro "IsOutput" $.To.Map)}}{{Macro "C++.Statement" $}}{{end}}
+  {{     if IsAssign    $}}{{if not (Macro "IsOutput" $.LHS)}}{{Macro "C++.StatementDefault" $}}{{end}}
+  {{else if IsMapAssign $}}{{if not (Macro "IsOutput" $.To )}}{{Macro "C++.StatementDefault" $}}{{end}}
   {{else if IsReturn    $}}return;
-  {{else if IsBranch    $}}if ({{Macro "C++.Read" $.Condition}}) {
-    {{Macro "C++.Block" $.True}}
-    {{if len $.False.Statements}}
-      } else {
-        {{Macro "C++.Block" $.False}}
-    {{end}}
-    }
-  {{else if IsSwitch $}}
-    switch ({{Macro "C++.Read" $.Value}}) {
-      {{range $i, $c := $.Cases}}
-        {{range $j, $cond := $c.Conditions}}
-          case {{Macro "C++.Read" $cond}}:{{if HasMore $j $c.Conditions}} // fall-through...{{else}} {{"{"}}{{end}}
-        {{end}}
-          {{Macro "C++.Block" $c.Block}}
-          break;
-        }
-      {{end}}
-    }
-  {{else}}{{Macro "C++.Statement" $}}
+  {{else                 }}{{Macro "C++.StatementDefault" $}}
   {{end}}
 {{end}}
 
@@ -128,6 +109,8 @@ limitations under the License.
 {{define "IsOutput"}}
   {{if      IsParameter  $}}{{if $.Output}}TRUE{{end}}
   {{else if IsArrayIndex $}}{{Macro "IsOutput" $.Array}}
+  {{else if IsMapIndex   $}}{{Macro "IsOutput" $.Map}}
+  {{/* {{else if IsMember     $}}{{Macro "IsOutput" $.Object}} */}} {{/* TODO: Check to see if this a pointer - if so, this may not mutate the output */}}
   {{end}}
 {{end}}
 

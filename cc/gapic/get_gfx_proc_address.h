@@ -19,7 +19,8 @@
 
 namespace gapic {
 
-// Gets the address of the graphics function with the specified name.
+// GetGfxProcAddress returns the function pointer to the function with the given
+// name, or nullptr if the function was not found.
 void* GetGfxProcAddress(const char* name);
 
 }  // namespace gapic

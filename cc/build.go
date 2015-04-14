@@ -45,6 +45,7 @@ var (
 	GPURoot     = build.Root.Join("tools", "gpu", "src", "android.googlesource.com", "platform", "tools", "gpu")
 	CCRoot      = GPURoot.Join("cc")
 	GapicRoot   = CCRoot.Join("gapic")
+	GapiiRoot   = CCRoot.Join("gfxspy2", "src")
 	GapirRoot   = CCRoot.Join("gapir")
 	ReplaydRoot = CCRoot.Join("replayd")
 	GmockRoot   = build.Root.Join("external", "gmock")
@@ -138,6 +139,7 @@ type Target struct {
 	Gtest       cpp.Config
 	Gmock       cpp.Config
 	Gapic       cpp.Config
+	Gapii       cpp.Config
 	Gapir       cpp.Config
 	GapirTests  cpp.Config
 	Replayd     cpp.Config
@@ -149,6 +151,7 @@ func (t Target) Extend(n Target) Target {
 		Gtest:       t.Gtest.Extend(n.Gtest),
 		Gmock:       t.Gmock.Extend(n.Gmock),
 		Gapic:       t.Gapic.Extend(n.Gapic),
+		Gapii:       t.Gapii.Extend(n.Gapii),
 		Gapir:       t.Gapir.Extend(n.Gapir),
 		GapirTests:  t.GapirTests.Extend(n.GapirTests),
 		Replayd:     t.Replayd.Extend(n.Replayd),
@@ -196,6 +199,19 @@ func (t Target) Build(env build.Environment) error {
 	if err != nil {
 		return err
 	}
+
+	// Gather the source files for gapii
+	gapiiSource := GapiiRoot.Glob(t.SourceFiles...).
+		Append(GapiiRoot.Join(t.Gapic.OS).Glob(t.SourceFiles...)...).
+		Exclude("*_test.cpp")
+
+	// Build the gapii static library.
+	env.Logger = begin(t.Gapii.Name)
+	gapiiLib, err := cpp.StaticLibrary(gapiiSource, t.Gapii, env)
+	if err != nil {
+		return err
+	}
+	_ = gapiiLib
 
 	// Gather the source files for gapir
 	gapirSource := GapirRoot.Glob(t.SourceFiles...).
@@ -282,6 +298,10 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 		}),
 		Gapic: base.Extend(cpp.Config{
 			Name:               "gapic",
+			IncludeSearchPaths: build.FileSet{CCRoot},
+		}),
+		Gapii: base.Extend(cpp.Config{
+			Name:               "gapii",
 			IncludeSearchPaths: build.FileSet{CCRoot},
 		}),
 		Gapir: base.Extend(cpp.Config{

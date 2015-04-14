@@ -14,24 +14,41 @@
  * limitations under the License.
  */
 
-#include <gapic/target.h>
-
+#include <stdio.h>
 #include <windows.h>
 #include <wingdi.h>
 
-namespace gapic {
+namespace {
 
-void* GetGfxProcAddress(const char *name) {
-    void* p = (void*) wglGetProcAddress(name);
+typedef void* (__stdcall *PFNWGLGETPROCADDRESS)(const char* name);
 
-    // Function not found with wglGetProcAddress - try opengl32.dll directly.
-    if (p == nullptr ||
-        (p == (void*) 0x1) || (p == (void*) 0x2) || (p == (void*) 0x3) || (p == (void*) -1)) {
-        static HMODULE module = LoadLibrary(TEXT("opengl32.dll"));
-        p = (void*)GetProcAddress(module, name);
-    }
+HMODULE loadOpengl32() {
+    char sysdir[MAX_PATH];
+    GetSystemDirectoryA(sysdir, MAX_PATH-1);
 
-    return p;
+    char dllpath[MAX_PATH];
+    snprintf(dllpath, MAX_PATH, "%s\\opengl32.dll", sysdir);
+    return LoadLibraryExA(dllpath, NULL, 0);
 }
 
-}  // namespace gapic
+} // anonymous namespace
+
+namespace gapic {
+
+void* GetGfxProcAddress(const char* name) {
+    static HMODULE module = loadOpengl32();
+
+    if (void* f = reinterpret_cast<void*>(GetProcAddress(module, name))) {
+        return f;
+    }
+
+    static PFNWGLGETPROCADDRESS gpa = reinterpret_cast<PFNWGLGETPROCADDRESS>(
+            GetProcAddress(module, "wglGetProcAddress"));
+    if (gpa != nullptr) {
+        return gpa(name);
+    }
+
+    return nullptr;
+}
+
+} // namespace gapic
