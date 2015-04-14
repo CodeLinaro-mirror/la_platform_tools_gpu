@@ -16,6 +16,7 @@ package cpp
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"strings"
 
@@ -59,7 +60,12 @@ func parseDeps(s string) (build.FileSet, error) {
 
 	deps := build.FileSet{}
 	for _, s := range strings.Fields(s) {
-		deps = deps.Append(build.File(s))
+		file := build.File(s)
+		if file.Exists() {
+			deps = deps.Append(file)
+		} else {
+			return build.FileSet{}, fmt.Errorf("Missing dependency '%s'", file)
+		}
 	}
 	return deps, nil
 }
