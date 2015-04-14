@@ -17,6 +17,7 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"go/build"
@@ -205,12 +206,19 @@ func run() error {
 }
 
 func (e *Entry) Generate() error {
-	if *verbose {
-		fmt.Printf("Generate %s\n", e.Output)
-	}
 	result, err := e.Generator(&e.File)
 	if err != nil {
 		return err
+	}
+	current, err := ioutil.ReadFile(e.Output)
+	if err == nil && bytes.Equal(result, current) {
+		if *verbose {
+			fmt.Printf("No change for %s\n", e.Output)
+		}
+		return nil
+	}
+	if *verbose {
+		fmt.Printf("Generate %s\n", e.Output)
 	}
 	return ioutil.WriteFile(e.Output, result, os.ModePerm)
 }
