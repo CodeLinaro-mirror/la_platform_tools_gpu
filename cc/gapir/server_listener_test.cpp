@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-#include "connection.h"
 #include "mock_connection.h"
 #include "server_connection.h"
 #include "server_listener.h"
 #include "test_utilities.h"
 
-#include <memory>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <memory>
 
 using ::testing::_;
 using ::testing::DoAll;
@@ -45,7 +44,7 @@ protected:
     virtual void SetUp() {
         mConnection = new MockConnection();
         mServerListener.reset(
-            new ServerListener(std::unique_ptr<Connection>(mConnection), MAX_MEMORY_SIZE));
+            new ServerListener(std::unique_ptr<gapic::Connection>(mConnection), MAX_MEMORY_SIZE));
     }
 
     MockConnection* mConnection;

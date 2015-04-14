@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <gapir/connection.h>
 #include <gapir/context.h>
 #include <gapir/memory_manager.h>
 #include <gapir/resource_disk_cache.h>
@@ -22,9 +21,10 @@
 #include <gapir/resource_requester.h>
 #include <gapir/server_connection.h>
 #include <gapir/server_listener.h>
-#include <gapir/socket_connection.h>
 
+#include <gapic/connection.h>
 #include <gapic/log.h>
+#include <gapic/socket_connection.h>
 #include <gapic/target.h>
 
 #include <memory>
@@ -35,6 +35,7 @@
 #include <android_native_app_glue.h>
 #endif  // TARGET_OS == GAPID_OS_ANDROID
 
+using namespace gapic;
 using namespace gapir;
 
 namespace {

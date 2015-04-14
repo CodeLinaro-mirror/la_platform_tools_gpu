@@ -17,10 +17,10 @@
 #include "interpreter.h"
 #include "test_utilities.h"
 
+#include <gtest/gtest.h>
+
 #include <memory>
 #include <vector>
-
-#include <gtest/gtest.h>
 
 namespace gapir {
 namespace test {

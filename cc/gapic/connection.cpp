@@ -18,7 +18,7 @@
 
 #include <string>
 
-namespace gapir {
+namespace gapic {
 
 bool Connection::sendString(const std::string& s) {
     uint32_t length = static_cast<uint32_t>(s.size())+1;
@@ -37,4 +37,4 @@ bool Connection::readString(std::string* s) {
     }
 }
 
-}  // namespace gapir
+}  // namespace gapic

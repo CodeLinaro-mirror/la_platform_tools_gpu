@@ -23,11 +23,11 @@
 #include "resource_provider.h"
 #include "test_utilities.h"
 
-#include <memory>
-#include <vector>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <memory>
+#include <vector>
 
 using ::testing::_;
 using ::testing::DoAll;

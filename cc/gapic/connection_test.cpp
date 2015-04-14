@@ -17,10 +17,10 @@
 #include "mock_connection.h"
 #include "test_utilities.h"
 
-#include <string>
-
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <string>
 
 using ::testing::_;
 using ::testing::DoAll;

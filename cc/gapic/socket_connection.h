@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef GAPIR_SOCKET_CONNECTION_H
-#define GAPIR_SOCKET_CONNECTION_H
+#ifndef GAPIC_SOCKET_CONNECTION_H
+#define GAPIC_SOCKET_CONNECTION_H
 
 #include "connection.h"
 
@@ -25,7 +25,7 @@
 #include <memory>
 #include <string>
 
-namespace gapir {
+namespace gapic {
 
 // Connection object using a native socket
 class SocketConnection : public Connection {
@@ -61,6 +61,6 @@ private:
     NetworkInitializer mNetworkInitializer;
 };
 
-}  // namespace gapir
+}  // namespace gapic
 
 #endif
