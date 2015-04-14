@@ -53,24 +53,9 @@ if [ $use_xvfb -eq 1 ]; then
 fi
 
 export GO_BUILD_FLAGS="-i -v -x -o"
-export GO_GENERATE_FLAGS="-v -x"
 export GO_TEST_FLAGS="-v -x"
 
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/embed    $GPU_RELATIVE_SOURCE_PATH/tools/embed
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/tools/copyright
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/binary/generate
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc/generate
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/rpcapi   $GPU_RELATIVE_SOURCE_PATH/rpc/rpcapi
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/rpc/test
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/service
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/apic     $GPU_RELATIVE_SOURCE_PATH/api/apic
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/gfxapi/test
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/gfxapi/gles
-go generate $GO_GENERATE_FLAGS                              $GPU_RELATIVE_SOURCE_PATH/builder
 go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gapis    $GPU_RELATIVE_SOURCE_PATH/server/gapis
-
-go run src/$GPU_RELATIVE_SOURCE_PATH/binary/codergen $GPU_RELATIVE_SOURCE_PATH/...
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --runtests
 
