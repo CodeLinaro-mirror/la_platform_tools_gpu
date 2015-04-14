@@ -30,6 +30,6 @@ go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_
 go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_SOURCE_PATH%\builder
 go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_SOURCE_PATH%\database
 go generate %GO_GENERATE_FLAGS%                                   %GPU_RELATIVE_SOURCE_PATH%\memory
-go build    %GO_BUILD_FLAGS%    %GPU_BUILD_ROOT%\bin\gazer.exe    %GPU_RELATIVE_SOURCE_PATH%\server\cmd
+go build    %GO_BUILD_FLAGS%    %GPU_BUILD_ROOT%\bin\gapis.exe    %GPU_RELATIVE_SOURCE_PATH%\server\gapis
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --runtests
