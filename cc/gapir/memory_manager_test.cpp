@@ -16,10 +16,10 @@
 
 #include "memory_manager.h"
 
+#include <gtest/gtest.h>
+
 #include <memory>
 #include <vector>
-
-#include <gtest/gtest.h>
 
 namespace gapir {
 namespace test {

@@ -16,11 +16,11 @@
 
 #include "post_buffer.h"
 
-#include <vector>
-
-#include <string.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <string.h>
+#include <vector>
 
 namespace gapir {
 namespace test {

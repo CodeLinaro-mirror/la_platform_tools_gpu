@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include "connection.h"
 #include "server_connection.h"
 
+#include <gapic/connection.h>
 #include <gapic/log.h>
 
 #include <memory>
@@ -25,7 +25,8 @@
 
 namespace gapir {
 
-std::unique_ptr<ServerConnection> ServerConnection::create(std::unique_ptr<Connection> conn) {
+std::unique_ptr<ServerConnection> ServerConnection::create(
+        std::unique_ptr<gapic::Connection> conn) {
     std::string replayId;
     if (!conn->readString(&replayId)) {
         GAPID_WARNING("Failed to read replay id. Error: %s\n", conn->error());
@@ -42,8 +43,8 @@ std::unique_ptr<ServerConnection> ServerConnection::create(std::unique_ptr<Conne
             new ServerConnection(std::move(conn), replayId, replayLen));
 }
 
-ServerConnection::ServerConnection(std::unique_ptr<Connection> conn, const std::string& replayId,
-                                 uint32_t replayLen) :
+ServerConnection::ServerConnection(std::unique_ptr<gapic::Connection> conn,
+        const std::string& replayId, uint32_t replayLen) :
         mConn(std::move(conn)),
         mReplayLen(replayLen),
         mReplayId(replayId) {

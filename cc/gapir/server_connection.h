@@ -21,15 +21,20 @@
 #include <string>
 #include <vector>
 
-namespace gapir {
+namespace gapic {
 
 class Connection;
+
+} // namespace gapic
+
+
+namespace gapir {
 
 // Class for managing the communication between the replay daemon and the server (gazer)
 class ServerConnection {
 public:
     // Creates a gazer connection using the given connection
-    static std::unique_ptr<ServerConnection> create(std::unique_ptr<Connection> conn);
+    static std::unique_ptr<ServerConnection> create(std::unique_ptr<gapic::Connection> conn);
 
     ~ServerConnection();
 
@@ -59,11 +64,11 @@ public:
 
 private:
     // Initialize the member variables of the ServerConnection object
-    ServerConnection(std::unique_ptr<Connection> conn, const std::string& replayId,
+    ServerConnection(std::unique_ptr<gapic::Connection> conn, const std::string& replayId,
                     uint32_t replayLen);
 
     // The connection used for sending and receiving data to and from the server.
-    std::unique_ptr<Connection> mConn;
+    std::unique_ptr<gapic::Connection> mConn;
 
     // The length of the replay this connection belongs to.
     uint32_t mReplayLen;
