@@ -45,6 +45,9 @@
     <ClCompile Include="src\spy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\wgl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\state_externs.inl">
@@ -89,6 +92,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\common\stream_writer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gles_spy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\wgl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

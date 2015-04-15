@@ -384,6 +384,9 @@ var buildTargets = map[string]Target{
 	}),
 
 	"windows-msvc": base(msvc.MSVC, "windows", "x64").Extend(Target{
+		Spy: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
 		GapirTests: cpp.Config{
 			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
 		},

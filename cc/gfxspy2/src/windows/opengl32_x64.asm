@@ -356,7 +356,6 @@ TRAMPOLINE glVertex4sv, real__glVertex4sv
 TRAMPOLINE glVertexPointer, real__glVertexPointer
 TRAMPOLINE wglChoosePixelFormat, real__wglChoosePixelFormat
 TRAMPOLINE wglCopyContext, real__wglCopyContext
-TRAMPOLINE wglCreateContext, real__wglCreateContext
 TRAMPOLINE wglCreateLayerContext, real__wglCreateLayerContext
 TRAMPOLINE wglDeleteContext, real__wglDeleteContext
 TRAMPOLINE wglDescribeLayerPlane, real__wglDescribeLayerPlane
@@ -366,7 +365,6 @@ TRAMPOLINE wglGetCurrentDC, real__wglGetCurrentDC
 TRAMPOLINE wglGetDefaultProcAddress, real__wglGetDefaultProcAddress
 TRAMPOLINE wglGetLayerPaletteEntries, real__wglGetLayerPaletteEntries
 TRAMPOLINE wglGetPixelFormat, real__wglGetPixelFormat
-TRAMPOLINE wglMakeCurrent, real__wglMakeCurrent
 TRAMPOLINE wglRealizeLayerPalette, real__wglRealizeLayerPalette
 TRAMPOLINE wglSetLayerPaletteEntries, real__wglSetLayerPaletteEntries
 TRAMPOLINE wglSetPixelFormat, real__wglSetPixelFormat

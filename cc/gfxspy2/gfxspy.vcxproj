@@ -20,6 +20,7 @@
     <ClCompile Include="src\gles_imports.cpp" />
     <ClCompile Include="src\opengl32_resolve.cpp" />
     <ClCompile Include="src\spy.cpp" />
+    <ClCompile Include="src\wgl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="src\opengl32_x64.asm">
@@ -41,6 +42,7 @@
     <ClInclude Include="src\gles_types.h" />
     <ClInclude Include="src\spy.h" />
     <ClInclude Include="src\types.h" />
+    <ClInclude Include="src\wgl.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{82A6E748-4FF3-4734-9F2F-28C416C8A296}</ProjectGuid>
@@ -76,11 +78,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\..\..\..\..\bin\</OutDir>
     <IntDir>..\..\..\..\..\..\..\pkg\windows_amd64\android.googlesource.com\platform\tools\gpu\cc\gfxspy\</IntDir>
+    <TargetName>opengl32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\..\..\..\..\bin\</OutDir>
     <IntDir>..\..\..\..\..\..\..\pkg\windows_amd64\android.googlesource.com\platform\tools\gpu\cc\gfxspy\</IntDir>
+    <TargetName>opengl32</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -93,6 +97,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>src\opengl32_exports.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -110,6 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>src\opengl32_exports.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

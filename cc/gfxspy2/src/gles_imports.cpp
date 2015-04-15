@@ -27,6 +27,8 @@ void GlesImports::Resolve() {
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers = reinterpret_cast<PFNEGLSWAPBUFFERS>(GetGfxProcAddress("eglSwapBuffers"));
+    wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(GetGfxProcAddress("wglCreateContext"));
+    wglMakeCurrent = reinterpret_cast<PFNWGLMAKECURRENT>(GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers = reinterpret_cast<PFNWGLSWAPBUFFERS>(GetGfxProcAddress("wglSwapBuffers"));
     glEnableClientState =
             reinterpret_cast<PFNGLENABLECLIENTSTATE>(GetGfxProcAddress("glEnableClientState"));

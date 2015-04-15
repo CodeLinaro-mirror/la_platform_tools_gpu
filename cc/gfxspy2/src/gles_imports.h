@@ -31,6 +31,8 @@ struct GlesImports {
     typedef void(STDCALL *PFNEGLCREATECONTEXT)(int32_t *version, int32_t *context);
     typedef void(STDCALL *PFNEGLMAKECURRENT)(int32_t context);
     typedef void(STDCALL *PFNEGLSWAPBUFFERS)();
+    typedef HGLRC(STDCALL *PFNWGLCREATECONTEXT)(HDC hdc);
+    typedef BOOL(STDCALL *PFNWGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(HDC hdc);
     typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(uint32_t type);
@@ -321,6 +323,8 @@ struct GlesImports {
     PFNEGLCREATECONTEXT eglCreateContext;
     PFNEGLMAKECURRENT eglMakeCurrent;
     PFNEGLSWAPBUFFERS eglSwapBuffers;
+    PFNWGLCREATECONTEXT wglCreateContext;
+    PFNWGLMAKECURRENT wglMakeCurrent;
     PFNWGLSWAPBUFFERS wglSwapBuffers;
     PFNGLENABLECLIENTSTATE glEnableClientState;
     PFNGLDISABLECLIENTSTATE glDisableClientState;

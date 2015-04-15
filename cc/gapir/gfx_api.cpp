@@ -61,6 +61,47 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callWglCreateContext(Stack* stack, bool pushReturn) {
+    HDC hdc = stack->pop<HDC>();
+    if (stack->isValid()) {
+        GAPID_INFO("wglCreateContext(%p)\n", hdc);
+        if (wglCreateContext != nullptr) {
+            HGLRC return_value = wglCreateContext(hdc);
+            GAPID_INFO("Returned: %p\n", return_value);
+            if (pushReturn) {
+                stack->push<HGLRC>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function wglCreateContext\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function wglCreateContext\n");
+        return false;
+    }
+}
+
+bool callWglMakeCurrent(Stack* stack, bool pushReturn) {
+    HGLRC hglrc = stack->pop<HGLRC>();
+    HDC hdc = stack->pop<HDC>();
+    if (stack->isValid()) {
+        GAPID_INFO("wglMakeCurrent(%p, %p)\n", hdc, hglrc);
+        if (wglMakeCurrent != nullptr) {
+            BOOL return_value = wglMakeCurrent(hdc, hglrc);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<BOOL>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function wglMakeCurrent\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function wglMakeCurrent\n");
+        return false;
+    }
+}
+
 bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
     HDC hdc = stack->pop<HDC>();
     if (stack->isValid()) {
@@ -3423,6 +3464,8 @@ bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
 PFNEGLCREATECONTEXT eglCreateContext = nullptr;
 PFNEGLMAKECURRENT eglMakeCurrent = nullptr;
 PFNEGLSWAPBUFFERS eglSwapBuffers = nullptr;
+PFNWGLCREATECONTEXT wglCreateContext = nullptr;
+PFNWGLMAKECURRENT wglMakeCurrent = nullptr;
 PFNWGLSWAPBUFFERS wglSwapBuffers = nullptr;
 PFNGLENABLECLIENTSTATE glEnableClientState = nullptr;
 PFNGLDISABLECLIENTSTATE glDisableClientState = nullptr;
@@ -3610,6 +3653,8 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::EglCreateContext, callEglCreateContext);
     interpreter->registerFunction(Ids::EglMakeCurrent, callEglMakeCurrent);
     interpreter->registerFunction(Ids::EglSwapBuffers, callEglSwapBuffers);
+    interpreter->registerFunction(Ids::WglCreateContext, callWglCreateContext);
+    interpreter->registerFunction(Ids::WglMakeCurrent, callWglMakeCurrent);
     interpreter->registerFunction(Ids::WglSwapBuffers, callWglSwapBuffers);
     interpreter->registerFunction(Ids::GlEnableClientState, callGlEnableClientState);
     interpreter->registerFunction(Ids::GlDisableClientState, callGlDisableClientState);
@@ -3806,6 +3851,10 @@ void Initialize() {
             reinterpret_cast<PFNEGLMAKECURRENT>(gapic::GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers =
             reinterpret_cast<PFNEGLSWAPBUFFERS>(gapic::GetGfxProcAddress("eglSwapBuffers"));
+    wglCreateContext =
+            reinterpret_cast<PFNWGLCREATECONTEXT>(gapic::GetGfxProcAddress("wglCreateContext"));
+    wglMakeCurrent =
+            reinterpret_cast<PFNWGLMAKECURRENT>(gapic::GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers =
             reinterpret_cast<PFNWGLSWAPBUFFERS>(gapic::GetGfxProcAddress("wglSwapBuffers"));
     glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(

@@ -1259,44 +1259,31 @@ cmd void eglSwapBuffers() {  // HACK: Hacked to match the spy's output
 /////////////////////////////////////////////////////////////////
 // WGL APIs
 /////////////////////////////////////////////////////////////////
-/*
 type pointer HGLRC
-type int     BOOL
+type pointer HDC
+type int BOOL
 
 @replay_custom
 @ReturnSize(0)
 cmd HGLRC wglCreateContext(HDC hdc) {
+    http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx
     assert len(hdc) >= 0
-    return ?
-}
-
-@replay_custom
-cmd BOOL  wglDeleteContext(HGLRC hdc) {
-    assert len(hdc) >= 0
-    return ?
-}
-
-@replay_custom
-cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
-    assert len(hdc) >= 0
-    assert len(hglrc) >= 0
     return ?
 }
 
 @replay_custom
 @ReturnSize(0)
-cmd HDC wglGetCurrentDC() {
+cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+    http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx
     return ?
 }
-*/
-
-type pointer HDC
 
 @replay_custom
 @EndOfFrame
 cmd void wglSwapBuffers(HDC hdc) {
     http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
 }
+
 /////////////////////////////////////////////////////////////////
 // GLES 1 APIs
 /////////////////////////////////////////////////////////////////

@@ -37,6 +37,8 @@ public:
     inline void eglCreateContext(int32_t* const version, int32_t* const context);
     inline void eglMakeCurrent(int32_t const context);
     inline void eglSwapBuffers();
+    inline void wglCreateContext(HDC const hdc, HGLRC const result);
+    inline void wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result);
     inline void wglSwapBuffers(HDC const hdc);
     inline void glEnableClientState(uint32_t const type);
     inline void glDisableClientState(uint32_t const type);
@@ -435,6 +437,12 @@ inline void GlesState::eglCreateContext(int32_t* const version, int32_t* const c
 inline void GlesState::eglMakeCurrent(int32_t const context) {}
 
 inline void GlesState::eglSwapBuffers() {}
+
+inline void GlesState::wglCreateContext(HDC const hdc, HGLRC const result) { return; }
+
+inline void GlesState::wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result) {
+    return;
+}
 
 inline void GlesState::wglSwapBuffers(HDC const hdc) {}
 
