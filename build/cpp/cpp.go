@@ -26,7 +26,7 @@ import (
 type tool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
 type depsFor func(output build.File, cfg Config, env build.Environment) (deps build.FileSet, valid bool)
 
-var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm"}
+var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
 
 // Toolchain is a collection of tools used to build objects, libraries and programs.
 type Toolchain struct {
@@ -61,6 +61,7 @@ type Config struct {
 	IncludeSearchPaths build.FileSet     // The list of include search paths.
 	AdditionalSources  build.FileSet     // Additional list of source files to compile.
 	Permissions        []string          // APK required permissions (NDK only).
+	ModuleDefinition   build.File        // An optional module definition file for dlls.
 }
 
 // Extend returns a new Config based on this Config, but with field added or
@@ -92,6 +93,10 @@ func (c Config) Extend(n Config) Config {
 	c.IncludeSearchPaths = c.IncludeSearchPaths.Append(n.IncludeSearchPaths...)
 	c.AdditionalSources = c.AdditionalSources.Append(n.AdditionalSources...)
 	c.Permissions = append(append([]string{}, c.Permissions...), n.Permissions...)
+	if n.ModuleDefinition != "" {
+		c.ModuleDefinition = n.ModuleDefinition
+	}
+
 	return c
 }
 
@@ -250,9 +255,13 @@ func Triplet(cfg Config) string {
 // IntermediatePath returns a File in the intermediate directory for generating
 // a file built from source using cfg and env.
 func IntermediatePath(source build.File, ext string, cfg Config, env build.Environment) build.File {
-	rel := source.RelativeTo(build.Root)
+	root := env.Roots.Find(source)
+	if root == nil {
+		root = &build.RepoRoot
+	}
+	rel := source.RelativeTo(root.Path)
 	rel = strings.Replace(rel, "..", "__", -1) // prevent leaking outside of the Intermediates directory
-	out := env.Intermediates.Join(Triplet(cfg), rel).ChangeExt(ext)
+	out := env.Intermediates.Join(Triplet(cfg), root.Name, rel).ChangeExt(ext)
 	out.MkdirAll()
 	return out
 }

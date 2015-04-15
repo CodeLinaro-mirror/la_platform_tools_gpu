@@ -54,6 +54,7 @@ func ResolvePaths() (Paths, error) {
 	vc := vstools.Join("..", "..", "VC")
 
 	paths.Cl = vc.Join("bin", "amd64", "cl.exe")
+	paths.Ml = vc.Join("bin", "amd64", "ml64.exe")
 	paths.Lib = vc.Join("bin", "amd64", "lib.exe")
 	paths.Link = vc.Join("bin", "amd64", "link.exe")
 	paths.IncludeSearchPaths = build.Files(
@@ -66,12 +67,10 @@ func ResolvePaths() (Paths, error) {
 		sdk.Join("Lib", "winv6.3", "um", "x64"),
 	)
 
-	if !paths.Cl.Exists() {
-		return Paths{}, fmt.Errorf("MSVC tool '%s' was not found", paths.Cl)
-	}
-
-	if !paths.Link.Exists() {
-		return Paths{}, fmt.Errorf("MSVC tool '%s' was not found", paths.Link)
+	for _, tool := range []build.File{paths.Cl, paths.Ml, paths.Lib, paths.Link} {
+		if !tool.Exists() {
+			return Paths{}, fmt.Errorf("MSVC tool '%s' was not found", tool)
+		}
 	}
 
 	paths.resolved = true

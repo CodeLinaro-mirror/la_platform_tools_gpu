@@ -40,6 +40,7 @@ type Paths struct {
 	resolved bool
 
 	Cl   build.File // The MSVC compiler.
+	Ml   build.File // The MSVC macro assembler.
 	Lib  build.File // The MSVC static library tool.
 	Link build.File // The MSVC linker tool.
 
@@ -55,23 +56,53 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	a := append([]string{
-		"/c",    // Compile, don't link
-		"/EHsc", // Enable exceptions
-		"/nologo",
-	}, cfg.CompilerArgs...)
+	if asm := inputs.Filter("*.asm"); len(asm) > 0 {
+		a := []string{
+			"/Cx", // Preserve case in public and extern symbols.
+			"/nologo",
+		}
+		for n, v := range cfg.Defines {
+			a = append(a, fmt.Sprintf("/D%s=%s", n, v))
+		}
+		// MASM is really sensitive about output paths - change the working
+		// directory to the .obj output, and strip the directory part of the name
+		// from the output flag.
+		for _, file := range asm {
+			a = append(a,
+				"/Fo", output.Name(),
+				"/c", file.Absolute(),
+			)
+		}
+		if err := paths.Ml.ExecAt(env, build.File(output.Dir()), a...); err != nil {
+			return err
+		}
+		inputs = inputs.Remove(asm...)
+	}
 
-	for _, isp := range cfg.IncludeSearchPaths.Append(paths.IncludeSearchPaths...) {
-		a = append(a, fmt.Sprintf("/I%s", isp))
+	if len(inputs) > 0 {
+		a := append([]string{
+			"/c",    // Compile, don't link
+			"/Z7",   // Generate debug information into .obj
+			"/EHsc", // Enable exceptions
+			"/nologo",
+		}, cfg.CompilerArgs...)
+
+		for _, isp := range cfg.IncludeSearchPaths.Append(paths.IncludeSearchPaths...) {
+			a = append(a, fmt.Sprintf("/I%s", isp))
+		}
+		for n, v := range cfg.Defines {
+			a = append(a, fmt.Sprintf("/D%s=%s", n, v))
+		}
+		for _, input := range inputs {
+			a = append(a, input.Absolute())
+		}
+		a = append(a, "/Fo:"+output.Absolute())
+		if err := paths.Cl.ExecAt(env, build.File(paths.Cl.Dir()), a...); err != nil {
+			return err
+		}
 	}
-	for n, v := range cfg.Defines {
-		a = append(a, fmt.Sprintf("/D%s=%s", n, v))
-	}
-	for _, input := range inputs {
-		a = append(a, input.Absolute())
-	}
-	a = append(a, "/Fo:"+string(output))
-	return paths.Cl.ExecAt(env, build.File(paths.Cl.Dir()), a...)
+
+	return nil
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
@@ -104,6 +135,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	a := append([]string{
 		"/MACHINE:X64",
 		"/DLL",
+		"/DEBUG",
 		"/nologo",
 	}, cfg.LinkerArgs...)
 	for _, lsp := range cfg.LibrarySearchPaths.Append(paths.LibrarySearchPaths...) {
@@ -115,7 +147,10 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	for _, library := range cfg.Libraries {
 		a = append(a, string(library.ChangeExt(".lib")))
 	}
-	a = append(a, "/OUT:"+string(output))
+	if cfg.ModuleDefinition != "" {
+		a = append(a, "/DEF:"+cfg.ModuleDefinition.Absolute())
+	}
+	a = append(a, "/OUT:"+output.Absolute())
 	return paths.Link.Exec(env, a...)
 }
 
@@ -130,6 +165,7 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	a := append([]string{
 		"/MACHINE:X64",
 		"/SUBSYSTEM:CONSOLE",
+		"/DEBUG",
 		"/nologo",
 	}, cfg.LinkerArgs...)
 	for _, lsp := range cfg.LibrarySearchPaths.Append(paths.LibrarySearchPaths...) {
