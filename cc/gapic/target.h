@@ -51,7 +51,7 @@
 #if defined(TARGET_OS_WINDOWS)
 #   define TARGET_OS GAPID_OS_WINDOWS
 #   define STDCALL __stdcall
-#   define EXPORT
+#   define EXPORT __declspec(dllexport)
 #   define PATH_DELIMITER '\\'
 #   define PATH_DELIMITER_STR "\\"
 #endif

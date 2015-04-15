@@ -59,6 +59,16 @@ func (f File) Exists() bool {
 	return err == nil
 }
 
+// Contains returns true if this directory contains the file f.
+func (d File) Contains(f File) bool {
+	a := d.Absolute()
+	b := f.Absolute()
+	if len(b) <= len(a)+1 {
+		return false
+	}
+	return b[:len(a)] == a && b[len(a)] == filepath.Separator
+}
+
 // LastModified returns the time the file was last modified.
 func (f File) LastModified() time.Time {
 	s, err := os.Stat(string(f.Absolute()))

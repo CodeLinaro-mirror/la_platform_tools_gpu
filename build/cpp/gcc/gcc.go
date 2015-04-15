@@ -62,14 +62,14 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	if build.HostOS == "linux" {
 		switch cfg.OS {
 		case "linux":
-			bin := build.Root.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")
+			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-linux-glibc2.11-4.8", "bin")
 			t = tools{
 				cc: bin.Join("x86_64-linux-gcc"),
 				ar: bin.Join("x86_64-linux-ar"),
 			}
 
 		case "windows":
-			bin := build.Root.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-w64-mingw32-4.8", "bin")
+			bin := build.RepoRoot.Path.Join("prebuilts", "gcc", "linux-x86", "host", "x86_64-w64-mingw32-4.8", "bin")
 			t = tools{
 				cc: bin.Join("x86_64-w64-mingw32-gcc"),
 				ar: bin.Join("x86_64-w64-mingw32-ar"),

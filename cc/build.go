@@ -42,14 +42,15 @@ var (
 )
 
 var (
-	GPURoot     = build.Root.Join("tools", "gpu", "src", "android.googlesource.com", "platform", "tools", "gpu")
-	CCRoot      = GPURoot.Join("cc")
-	GapicRoot   = CCRoot.Join("gapic")
-	GapiiRoot   = CCRoot.Join("gfxspy2", "src")
-	GapirRoot   = CCRoot.Join("gapir")
-	ReplaydRoot = CCRoot.Join("replayd")
-	GmockRoot   = build.Root.Join("external", "gmock")
-	GtestRoot   = build.Root.Join("external", "gtest")
+	ExternalRoot = build.RepoRoot.Path.Join("external")
+	GPURoot      = build.RepoRoot.Path.Join("tools", "gpu", "src", "android.googlesource.com", "platform", "tools", "gpu")
+	CCRoot       = GPURoot.Join("cc")
+	GapicRoot    = CCRoot.Join("gapic")
+	GapiiRoot    = CCRoot.Join("gfxspy2", "src")
+	GapirRoot    = CCRoot.Join("gapir")
+	ReplaydRoot  = CCRoot.Join("replayd")
+	GmockRoot    = ExternalRoot.Join("gmock")
+	GtestRoot    = ExternalRoot.Join("gtest")
 )
 
 func main() {
@@ -71,15 +72,19 @@ func run() int {
 	defer logger.Close()
 
 	env := build.Environment{
-		Output:        build.Root.Join("tools", "gpu", "bin"),
-		Intermediates: build.Root.Join("tools", "gpu", "pkg"),
-		Keystore:      build.File(*keystore),
-		Storepass:     *storepass,
-		Keypass:       *keypass,
-		Keyalias:      *keyalias,
-		Logger:        logger,
-		ForceBuild:    *forcebuild,
-		Verbose:       *verbose,
+		Output:        build.RepoRoot.Path.Join("tools", "gpu", "bin"),
+		Intermediates: build.RepoRoot.Path.Join("tools", "gpu", "pkg"),
+		Roots: build.RootList{
+			build.Root{Name: "external", Path: ExternalRoot},
+			build.Root{Name: "gpu", Path: GPURoot},
+		},
+		Keystore:   build.File(*keystore),
+		Storepass:  *storepass,
+		Keypass:    *keypass,
+		Keyalias:   *keyalias,
+		Logger:     logger,
+		ForceBuild: *forcebuild,
+		Verbose:    *verbose,
 	}
 
 	targetNames := strings.Split(*targets, ",")
@@ -375,6 +380,9 @@ var buildTargets = map[string]Target{
 	}),
 
 	"windows": base(gcc.GCC, "windows", "x64").Extend(Target{
+		Spy: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
 		GapirTests: cpp.Config{
 			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
 		},
@@ -385,7 +393,10 @@ var buildTargets = map[string]Target{
 
 	"windows-msvc": base(msvc.MSVC, "windows", "x64").Extend(Target{
 		Spy: cpp.Config{
-			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+			Name:              "opengl32",
+			AdditionalSources: build.FileSet{GapiiRoot.Join("windows", "opengl32_x64.asm")},
+			ModuleDefinition:  GapiiRoot.Join("windows", "opengl32_exports.def"),
+			Libraries:         build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
 		},
 		GapirTests: cpp.Config{
 			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},

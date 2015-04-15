@@ -62,7 +62,7 @@ limitations under the License.
   {{end}}
 ¶
   typedef void (STDCALL *WGLPROC)();
-  WGLPROC STDCALL wglGetProcAddress(const char* name) {
+  EXPORT WGLPROC STDCALL wglGetProcAddress(const char* name) {
     {{range $i, $c := AllCommands $}}
       {{$name := Macro "C++.MethodName" $c}}
       {{if not (GetAnnotation $c "synthetic")}}

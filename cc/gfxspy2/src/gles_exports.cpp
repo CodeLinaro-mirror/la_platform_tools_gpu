@@ -588,7 +588,7 @@ EXPORT void STDCALL glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, 
 }
 
 typedef void(STDCALL* WGLPROC)();
-WGLPROC STDCALL wglGetProcAddress(const char* name) {
+EXPORT WGLPROC STDCALL wglGetProcAddress(const char* name) {
     if (strcmp(name, "eglCreateContext") == 0) {
         return reinterpret_cast<WGLPROC>(eglCreateContext);
     }

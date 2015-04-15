@@ -20,6 +20,7 @@ import "android.googlesource.com/platform/tools/gpu/log"
 type Environment struct {
 	Output        File       // The output directory
 	Intermediates File       // The intermediates directory
+	Roots         RootList   // List of root directories.
 	Keystore      File       // The path to the keystore used to sign APKs.
 	Storepass     string     // The password to the keystore.
 	Keypass       string     // The password to the key in the keystore.
@@ -27,4 +28,24 @@ type Environment struct {
 	Logger        log.Logger // The logger to emit log messages to.
 	ForceBuild    bool       // If true, all build steps will be forced.
 	Verbose       bool       // If true, logging should be verbose.
+}
+
+// Root describes a named root directory.
+type Root struct {
+	Name string // Name of this root.
+	Path File   // Root path
+}
+
+// RootList is a list of roots.
+type RootList []Root
+
+// Find returns the first Root that contains the file f, or nil if no roots
+// contain the file.
+func (l RootList) Find(f File) *Root {
+	for _, r := range l {
+		if r.Path.Contains(f) {
+			return &r
+		}
+	}
+	return nil
 }

@@ -21,11 +21,11 @@ import (
 )
 
 // Root returns the repo-root of the project.
-var Root = func() File {
+var RepoRoot = func() Root {
 	gopaths := filepath.SplitList(os.Getenv("GOPATH"))
 	for _, gopath := range gopaths {
 		if File(gopath).Join("src", "android.googlesource.com", "platform", "tools", "gpu", "build", "root.go").Exists() {
-			return File(File(gopath).Join("..", "..").Absolute())
+			return Root{Name: "repo", Path: File(File(gopath).Join("..", "..").Absolute())}
 		}
 	}
 	panic(fmt.Errorf("Project could not be found in any GOPATH: %v", gopaths))

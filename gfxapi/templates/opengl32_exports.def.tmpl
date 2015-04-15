@@ -12,6 +12,7 @@ limitations under the License.
 */}}
 
 {{Include "opengl32_exports.tmpl"}}
+{{Include "cpp_common.tmpl"}}
 {{$ | Macro "opengl32_exports.def" | Reflow 2 | Write "opengl32_exports.def"}}
 
 {{/*
@@ -23,11 +24,18 @@ limitations under the License.
 {{define "opengl32_exports.def"}}
   {{AssertType $ "API"}}
 
+  {{/* This is the list of functions that OpenGL32.dll needs to export. */}}
   {{$opengl32_exports := Strings (Macro "OpenGL32Exports") | SplitOn "\n"}}
+
+  {{/* This is the list of functions that the spy exports. */}}
+  {{$api_exports := (ForEach (AllCommands $) "C++.MethodName") | Strings "wglGetProcAddress"}}
+
+  {{/* This is list of functions we need to export. */}}
+  {{$exports := $opengl32_exports | FilterOut $api_exports}}
 
 LIBRARY
 EXPORTS»
-  {{range $f := $opengl32_exports}}
+  {{range $f := $exports}}
     {{$f}}
   {{end}}
 «
