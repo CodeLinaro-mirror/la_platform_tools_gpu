@@ -28,8 +28,8 @@ import (
 )
 
 type Config struct {
-	HttpPort    int
-	RpcPort     int
+	HttpAddress string
+	RpcAddress  string
 	DataPath    string
 	LogfilePath string
 }
@@ -67,7 +67,7 @@ func Run(config Config, rpcReady chan<- struct{}) {
 		Database:      database,
 		ReplayManager: replayManager,
 	}
-	go rpc.ListenAndServe(fmt.Sprintf(":%d", config.RpcPort), mtu, logger)
+	go rpc.ListenAndServe(config.RpcAddress, mtu, logger)
 
 	// If provided, tell the caller chan that the RPC listener is ready.
 	if nil != rpcReady {
@@ -77,5 +77,5 @@ func Run(config Config, rpcReady chan<- struct{}) {
 	// Setup and run the (blocking) HTTP listener.
 	http.Handle(atomsRoute, http.StripPrefix(atomsRoute, atomsHandler{database}))
 	http.Handle(schemaRoute, http.StripPrefix(schemaRoute, http.HandlerFunc(schemaHandler)))
-	http.ListenAndServe(fmt.Sprintf(":%d", config.HttpPort), nil)
+	http.ListenAndServe(config.HttpAddress, nil)
 }

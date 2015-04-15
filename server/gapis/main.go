@@ -28,8 +28,8 @@ import (
 import _ "android.googlesource.com/platform/tools/gpu/gfxapi/all"
 
 var (
-	httpPort    = flag.Int("httpPort", 8080, "TCP port of the server's HTTP listener")
-	rpcPort     = flag.Int("rpcPort", 6700, "TCP port of the server's RPC listener")
+	http        = flag.String("http", "localhost:8080", "TCP host:port of the server's HTTP listener")
+	rpc         = flag.String("rpc", "localhost:6700", "TCP host:port of the server's RPC listener")
 	dataPath    = flag.String("data", "data", "Path to the server's data folder")
 	logfilePath = flag.String("logfile", filepath.Join("logs", "server.log"), "Path to the server's logfile")
 )
@@ -47,8 +47,8 @@ func main() {
 	logfileAbsPath, _ := filepath.Abs(*logfilePath)
 
 	server.Run(server.Config{
-		HttpPort:    *httpPort,
-		RpcPort:     *rpcPort,
+		HttpAddress: *http,
+		RpcAddress:  *rpc,
 		DataPath:    dataAbsPath,
 		LogfilePath: logfileAbsPath,
 	}, nil)
