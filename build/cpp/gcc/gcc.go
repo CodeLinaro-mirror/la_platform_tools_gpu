@@ -112,6 +112,7 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 
 	a := append([]string{
 		"-c", // Compile to .o
+		optFlags(cfg),
 		"-fPIC",
 		"-fvisibility=hidden",
 		"-fvisibility-inlines-hidden",
@@ -156,6 +157,7 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	}
 
 	a := append([]string{
+		optFlags(cfg),
 		"-fPIC",
 	}, cfg.LinkerArgs...)
 
@@ -188,7 +190,9 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	a := append([]string{}, cfg.LinkerArgs...)
+	a := append([]string{
+		optFlags(cfg),
+	}, cfg.LinkerArgs...)
 	for _, lsp := range cfg.LibrarySearchPaths {
 		a = append(a, fmt.Sprintf("-L%s", lsp))
 	}
@@ -209,4 +213,13 @@ func depsFor(output build.File, cfg cpp.Config, env build.Environment) (deps bui
 	depfile := depFileFor(output, cfg, env)
 
 	return cpp.ParseDepFile(depfile, env)
+}
+
+func optFlags(cfg cpp.Config) string {
+	switch cfg.OptimizationLevel {
+	case cpp.NoOptimization:
+		return "-O0"
+	default:
+		return "-O2"
+	}
 }

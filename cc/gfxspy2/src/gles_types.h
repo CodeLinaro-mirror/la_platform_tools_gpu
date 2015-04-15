@@ -23,6 +23,7 @@
 #include <stdint.h>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "types.h"
 
@@ -1404,7 +1405,7 @@ struct Shader {
         mInfoLog = v;
         return *this;
     }
-    inline Shader& SetSource(std::string* v) {
+    inline Shader& SetSource(std::vector<std::string> v) {
         mSource = v;
         return *this;
     }
@@ -1417,7 +1418,7 @@ struct Shader {
     bool mCompiled;
     bool mDeletable;
     std::string mInfoLog;
-    std::string* mSource;
+    std::vector<std::string> mSource;
     uint32_t mType;
 };
 

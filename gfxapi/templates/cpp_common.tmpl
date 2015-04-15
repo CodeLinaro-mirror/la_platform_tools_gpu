@@ -11,12 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{/*
--------------------------------------------------------------------------------
-  Defaults - overridable
--------------------------------------------------------------------------------
-*/}}
-{{Global "C++.StringType" "std::string"}}
 
 {{/*
 -------------------------------------------------------------------------------
@@ -44,7 +38,7 @@ limitations under the License.
   {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsPointerType $}}void*
-  {{else if IsString      $}}{{Global "C++.StringType"}}
+  {{else if IsString      $}}char*
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
@@ -75,13 +69,17 @@ limitations under the License.
 -------------------------------------------------------------------------------
   Emits the C++ type for use in a state block or class for the specified AST
   type.
-  For pointers this emits a shared-pointer type.
+  For strings this emits a std::string type.
+  For pointers this emits a std::shared_ptr type.
+  For vectors this emits a std::vector type.
   For other types this is the same as "C++.Type"
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.StateType"}}
   {{if not (IsType $)}}{{Macro "C++.StateType" (TypeOf $)}}
+  {{else if IsString  $}}std::string
   {{else if IsPointer $}}std::shared_ptr<{{Macro "C++.StateType" $.To}}>
+  {{else if IsArray   $}}std::vector<{{Macro "C++.StateType" $.ValueType}}>
   {{else               }}{{Macro "C++.Type" $}}
   {{end}}
 {{end}}
@@ -148,10 +146,7 @@ limitations under the License.
     {{/* Prefix const for read-only reference parameters. */}}
     {{if and (not $.Output) $isRef}}const {{end}}§
 
-    {{$string_ty := Global "C++.StringType"}}
-    {{Global "C++.StringType" "char*"}} {{/* Push */}}
     {{Macro "C++.Type" $ty}}§
-    {{Global "C++.StringType" $string_ty}} {{/* Pop */}}
 
     {{/* Postfix reference for non-reference output parameters. */}}
     {{if and $.Output (not $isRef)}}*{{end}}
@@ -283,7 +278,8 @@ limitations under the License.
   {{$lhs   := Macro "C++.Read" $.LHS}}
   {{$rhs   := Macro "C++.Read" $.RHS}}
   {{$count := Macro "C++.Read" (GetArrayParamCount $.RHS)}}
-  for (int i, c = 0, {{$count}}; i < c; i++) {
+  {{$lhs}}.resize({{$count}});
+  for (int32_t i = 0, c = {{$count}}; i < c; i++) {
     {{$lhs}}[i] = {{$rhs}}[i];
   }
 {{end}}
