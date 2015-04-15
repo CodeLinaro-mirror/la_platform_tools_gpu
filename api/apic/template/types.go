@@ -71,6 +71,7 @@ var (
 		semantic.Map{},
 		semantic.Member{},
 		semantic.New{},
+		semantic.Null{},
 		semantic.Observed{},
 		semantic.Parameter{},
 		semantic.Pointer{},

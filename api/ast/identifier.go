@@ -46,6 +46,7 @@ const (
 	KeywordMacro     = "macro"
 	KeywordMap       = "map"
 	KeywordNew       = "new"
+	KeywordNull      = "null"
 	KeywordOut       = "out"
 	KeywordReturn    = "return"
 	KeywordPseudonym = "type"

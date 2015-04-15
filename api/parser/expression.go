@@ -118,8 +118,11 @@ func requireClassInitializer(p *parse.Parser, cst *parse.Branch, class *ast.Iden
 	return e
 }
 
-// 'true' | 'false' | '"' string '"' | '?' | number
+// 'null' | 'true' | 'false' | '"' string '"' | '?' | number
 func literal(p *parse.Parser, cst *parse.Branch) ast.Node {
+	if l := keyword(ast.KeywordNull, p, cst); l != nil {
+		return &ast.Null{CST: l}
+	}
 	if l := keyword(ast.KeywordTrue, p, cst); l != nil {
 		return &ast.Bool{CST: l, Value: true}
 	}
