@@ -18,7 +18,7 @@
 
 #include <gapic/target.h>
 
-#if TARGET_OS == TARGET_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
 #include "windows/wgl.h"
 #endif // TARGET_OS
 
@@ -46,7 +46,7 @@ void Spy::init(int32_t width, int32_t height,
 }
 
 HGLRC Spy::wglCreateContext(HDC hdc) {
-#if TARGET_OS == TARGET_OS_WINDOWS
+#if TARGET_OS == GAPID_OS_WINDOWS
     wgl::FramebufferInfo info;
     wgl::getFramebufferInfo(hdc, info);
     init(info.width, info.height,

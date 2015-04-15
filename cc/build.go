@@ -275,10 +275,11 @@ func (t Target) Build(env build.Environment) error {
 
 func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 	base := cpp.Config{
-		Toolchain:    toolchain,
-		OS:           os,
-		Architecture: architecture,
-		Flavor:       "release",
+		Toolchain:         toolchain,
+		OptimizationLevel: cpp.FullOptimization,
+		OS:                os,
+		Architecture:      architecture,
+		Flavor:            "release",
 		Defines: map[string]string{
 			"TARGET_OS_" + strings.ToUpper(os): "1",
 		},

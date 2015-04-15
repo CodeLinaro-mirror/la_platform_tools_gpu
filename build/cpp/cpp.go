@@ -28,6 +28,14 @@ type depsFor func(output build.File, cfg Config, env build.Environment) (deps bu
 
 var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
 
+// OptimisationLevel is an enumerator of optimisation levels to use by a toolchain.
+type OptimizationLevel int
+
+const (
+	NoOptimization   = iota // Use to disable optimization. Useful for debugging.
+	FullOptimization        // Full optimizations enabled. Fastest option.
+)
+
 // Toolchain is a collection of tools used to build objects, libraries and programs.
 type Toolchain struct {
 	Compiler  tool                // Tool used to compile source to object files.
@@ -49,6 +57,7 @@ func (t Toolchain) LibExt(cfg Config) string {
 type Config struct {
 	Name               string            // The name that may be mangled to produce the output file.
 	Toolchain          *Toolchain        // The toolchain used to build.
+	OptimizationLevel  OptimizationLevel // The optimization level to use.
 	OS                 string            // The target operating system, e.g. "windows".
 	Architecture       string            // The target architecture, e.g. "x64".
 	Flavor             string            // Flavor is used to separate different build configurations, e.g. "release".

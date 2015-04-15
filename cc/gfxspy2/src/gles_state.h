@@ -301,7 +301,7 @@ public:
     inline void glGetBooleanv(uint32_t const param, bool* const values);
     inline void glGetFloatv(uint32_t const param, float* const values);
     inline void glGetIntegerv(uint32_t const param, int32_t* const values);
-    inline void glGetString(uint32_t const param, std::string const result);
+    inline void glGetString(uint32_t const param, char* const result);
     inline void glEnable(uint32_t const capability);
     inline void glDisable(uint32_t const capability);
     inline void glIsEnabled(uint32_t const capability, bool const result);
@@ -1342,7 +1342,8 @@ inline void GlesState::glDeleteShader(ShaderId const shader) {
 inline void GlesState::glShaderSource(ShaderId const shader, int32_t const count,
                                       const char** const source, const int32_t* const length) {
     std::shared_ptr<Shader> s = this->Instances.mShaders[shader];
-    for (int i, c = 0, count; i < c; i++) {
+    s->mSource.resize(count);
+    for (int32_t i = 0, c = count; i < c; i++) {
         s->mSource[i] = source[i];
     }
 }
@@ -1917,7 +1918,7 @@ inline void GlesState::glGetIntegerv(uint32_t const param, int32_t* const values
     }
 }
 
-inline void GlesState::glGetString(uint32_t const param, std::string const result) { return; }
+inline void GlesState::glGetString(uint32_t const param, char* const result) { return; }
 
 inline void GlesState::glEnable(uint32_t const capability) {
     this->Capabilities[capability] = true;
