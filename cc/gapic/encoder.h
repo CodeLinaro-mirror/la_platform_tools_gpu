@@ -17,9 +17,10 @@
 #ifndef GAPIC_ENCODER_H
 #define GAPIC_ENCODER_H
 
-#include <stdint.h>
-
 #include "id.h"
+
+#include <stdint.h>
+#include <unordered_map>
 
 namespace gapic {
 
@@ -44,9 +45,10 @@ public:
     void S64(int64_t);
     void String(const char*);
     void Data(const void* ptr, int32_t size);
-    void Id(const Id&);
+    void Id(const gapic::Id&);
 
 private:
+    std::unordered_map<gapic::Id, uint32_t> mIds;
     StreamWriter* mOutput;
 };
 
