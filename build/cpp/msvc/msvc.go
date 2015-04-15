@@ -81,10 +81,11 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 
 	if len(inputs) > 0 {
 		a := append([]string{
+			"/nologo",
 			"/c",    // Compile, don't link
 			"/Z7",   // Generate debug information into .obj
 			"/EHsc", // Enable exceptions
-			"/nologo",
+			optFlags(cfg),
 		}, cfg.CompilerArgs...)
 
 		for _, isp := range cfg.IncludeSearchPaths.Append(paths.IncludeSearchPaths...) {
@@ -179,4 +180,13 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	}
 	a = append(a, "/OUT:"+string(output))
 	return paths.Link.Exec(env, a...)
+}
+
+func optFlags(cfg cpp.Config) string {
+	switch cfg.OptimizationLevel {
+	case cpp.NoOptimization:
+		return "/Od"
+	default:
+		return "/Ox"
+	}
 }

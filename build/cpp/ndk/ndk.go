@@ -143,7 +143,8 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 
 	a := []string{
 		"--sysroot=" + tools.sysroot.Absolute(),
-		"-c",                              // Compile to .o
+		"-c", // Compile to .o
+		optFlags(cfg),
 		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 		"-fPIC", // TODO: Not required for exes
 	}
@@ -187,6 +188,7 @@ func linkSo(inputs build.FileSet, output build.File, cfg cpp.Config, env build.E
 	}
 
 	a := []string{
+		optFlags(cfg),
 		"--sysroot=" + tools.sysroot.Absolute(),
 		"--shared",
 	}
@@ -214,7 +216,10 @@ func linkExe(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	a := []string{"--sysroot=" + tools.sysroot.Absolute()}
+	a := []string{
+		"--sysroot=" + tools.sysroot.Absolute(),
+		optFlags(cfg),
+	}
 	a = append(a, cfg.LinkerArgs...)
 	for _, lsp := range cfg.LibrarySearchPaths.Append(tools.libdirs...) {
 		a = append(a, fmt.Sprintf("-L%s", lsp))
@@ -341,4 +346,13 @@ func stringsXml(name string) []byte {
 <resources>
     <string name="app_name">%s</string>
 </resources>`, name))
+}
+
+func optFlags(cfg cpp.Config) string {
+	switch cfg.OptimizationLevel {
+	case cpp.NoOptimization:
+		return "-O0"
+	default:
+		return "-O2"
+	}
 }

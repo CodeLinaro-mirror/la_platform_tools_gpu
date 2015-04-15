@@ -18,9 +18,6 @@
 {{Include "gfx_api_common.tmpl"}}
 {{Include "cpp_common.tmpl"    }}
 
-{{/* ---- Overrides ---- */}}
-{{Global "C++.StringType" "char*"}}
-
 {{$ | Macro "gfx_api.h" | Format (Global "clang-format") | Write "gfx_api.h"}}
 
 {{/*
