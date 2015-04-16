@@ -654,12 +654,12 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
     mEncoder->S32(numAttachments);
     if (attachments != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = numAttachments;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(static_cast<uint32_t>(attachments[i]));
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -788,12 +788,12 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) 
     mEncoder->S32(count);
     if (arrays != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(arrays[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -815,12 +815,12 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, const VertexArrayId*
     mEncoder->S32(count);
     if (arrays != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(arrays[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1027,12 +1027,12 @@ inline void GlesSpy::glGetProgramiv(ProgramId program, uint32_t parameter, int32
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1046,12 +1046,12 @@ inline void GlesSpy::glGetShaderiv(ShaderId shader, uint32_t parameter, int32_t*
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1123,12 +1123,12 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1142,12 +1142,12 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1209,12 +1209,12 @@ inline void GlesSpy::glUniform1iv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1228,12 +1228,12 @@ inline void GlesSpy::glUniform2iv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 2;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1247,12 +1247,12 @@ inline void GlesSpy::glUniform3iv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 3;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1266,12 +1266,12 @@ inline void GlesSpy::glUniform4iv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 4;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1333,12 +1333,12 @@ inline void GlesSpy::glUniform1fv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1352,12 +1352,12 @@ inline void GlesSpy::glUniform2fv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 2;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1371,12 +1371,12 @@ inline void GlesSpy::glUniform3fv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 3;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1390,12 +1390,12 @@ inline void GlesSpy::glUniform4fv(UniformLocation location, int32_t count, const
     mEncoder->S32(count);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 4;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1411,12 +1411,12 @@ inline void GlesSpy::glUniformMatrix2fv(UniformLocation location, int32_t count,
     mEncoder->Bool(transpose);
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 4;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1432,12 +1432,12 @@ inline void GlesSpy::glUniformMatrix3fv(UniformLocation location, int32_t count,
     mEncoder->Bool(transpose);
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 9;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1453,12 +1453,12 @@ inline void GlesSpy::glUniformMatrix4fv(UniformLocation location, int32_t count,
     mEncoder->Bool(transpose);
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count * 16;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1473,12 +1473,12 @@ inline void GlesSpy::glGetUniformfv(ProgramId program, UniformLocation location,
     mEncoder->S32(location);
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1493,12 +1493,12 @@ inline void GlesSpy::glGetUniformiv(ProgramId program, UniformLocation location,
     mEncoder->S32(location);
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1559,12 +1559,12 @@ inline void GlesSpy::glVertexAttrib1fv(AttributeLocation location, const float* 
     mEncoder->U32(location);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1577,12 +1577,12 @@ inline void GlesSpy::glVertexAttrib2fv(AttributeLocation location, const float* 
     mEncoder->U32(location);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 2;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1595,12 +1595,12 @@ inline void GlesSpy::glVertexAttrib3fv(AttributeLocation location, const float* 
     mEncoder->U32(location);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 3;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1613,12 +1613,12 @@ inline void GlesSpy::glVertexAttrib4fv(AttributeLocation location, const float* 
     mEncoder->U32(location);
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 4;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1633,12 +1633,12 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
     mEncoder->U32(static_cast<uint32_t>(precision_type));
     if (range != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 2;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(range[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
     mEncoder->S32(*precision);
 }
@@ -1782,12 +1782,12 @@ inline void GlesSpy::glGenTextures(int32_t count, TextureId* textures) {
     mEncoder->S32(count);
     if (textures != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(textures[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1800,12 +1800,12 @@ inline void GlesSpy::glDeleteTextures(int32_t count, const TextureId* textures) 
     mEncoder->S32(count);
     if (textures != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(textures[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -1979,12 +1979,12 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, FramebufferId* framebuffer
     mEncoder->S32(count);
     if (framebuffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(framebuffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2019,12 +2019,12 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, const FramebufferId* fr
     mEncoder->S32(count);
     if (framebuffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(framebuffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2049,12 +2049,12 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, RenderbufferId* renderbuf
     mEncoder->S32(count);
     if (renderbuffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(renderbuffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2090,12 +2090,12 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, const RenderbufferId* 
     mEncoder->S32(count);
     if (renderbuffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(renderbuffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2122,12 +2122,12 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2140,12 +2140,12 @@ inline void GlesSpy::glGenBuffers(int32_t count, BufferId* buffers) {
     mEncoder->S32(count);
     if (buffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(buffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2194,12 +2194,12 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, const BufferId* buffers) {
     mEncoder->S32(count);
     if (buffers != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(buffers[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2258,21 +2258,21 @@ inline void GlesSpy::glShaderSource(ShaderId shader, int32_t count, const char**
     mEncoder->S32(count);
     if (source != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->String(source[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
     if (length != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(length[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2286,12 +2286,12 @@ inline void GlesSpy::glShaderBinary(int32_t count, const ShaderId* shaders, uint
     mEncoder->S32(count);
     if (shaders != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(shaders[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
     mEncoder->U32(binary_format);
     mEncoder->U64(reinterpret_cast<uint64_t>(binary));
@@ -2405,12 +2405,12 @@ inline void GlesSpy::glGetAttachedShaders(ProgramId program, int32_t buffer_leng
     mEncoder->S32(*shaders_length_written);
     if (shaders != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = buffer_length;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(shaders[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2603,12 +2603,12 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
     mEncoder->U32(static_cast<uint32_t>(parameter));
     if (value != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = 1;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(value[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2661,12 +2661,12 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
     mEncoder->U32(static_cast<uint32_t>(param));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = mState.stateVariableSize(param);
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->Bool(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2679,12 +2679,12 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
     mEncoder->U32(static_cast<uint32_t>(param));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = mState.stateVariableSize(param);
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->F32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2697,12 +2697,12 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
     mEncoder->U32(static_cast<uint32_t>(param));
     if (values != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = mState.stateVariableSize(param);
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->S32(values[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2784,12 +2784,12 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
     mEncoder->S32(count);
     if (attachments != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(static_cast<uint32_t>(attachments[i]));
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2838,12 +2838,12 @@ inline void GlesSpy::glGenQueries(int32_t count, QueryId* queries) {
     mEncoder->S32(count);
     if (queries != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(queries[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2875,12 +2875,12 @@ inline void GlesSpy::glDeleteQueries(int32_t count, const QueryId* queries) {
     mEncoder->S32(count);
     if (queries != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(queries[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2927,12 +2927,12 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, QueryId* queries) {
     mEncoder->S32(count);
     if (queries != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(queries[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
@@ -2964,12 +2964,12 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, const QueryId* queries) {
     mEncoder->S32(count);
     if (queries != nullptr) {  // TODO: This check should not be necessary!
         int32_t count_ = count;
-        mEncoder->S32(count_);
+        mEncoder->U32(count_);
         for (int i = 0; i < count_; i++) {
             mEncoder->U32(queries[i]);
         }
     } else {
-        mEncoder->S32(0);
+        mEncoder->U32(0);
     }
 }
 
