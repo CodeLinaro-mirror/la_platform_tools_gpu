@@ -16,6 +16,7 @@ package build
 
 import (
 	"bytes"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -147,6 +148,24 @@ func (f File) MkdirAll() {
 			panic(err)
 		}
 	}
+}
+
+// CopyTo copied this File to dst, replacing any existing file at dst.
+func (f File) CopyTo(dst File) error {
+	s, err := os.Open(f.Absolute())
+	if err != nil {
+		return err
+	}
+	defer s.Close()
+
+	d, err := os.Create(dst.Absolute())
+	if err != nil {
+		return err
+	}
+	defer d.Close()
+
+	_, err = io.Copy(d, s)
+	return err
 }
 
 // Exec executes this File with the specified arguments.

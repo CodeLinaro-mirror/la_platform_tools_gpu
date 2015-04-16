@@ -18,7 +18,6 @@ import "android.googlesource.com/platform/tools/gpu/log"
 
 // Environment holds the global environment configuration for the build.
 type Environment struct {
-	Output        File       // The output directory
 	Intermediates File       // The intermediates directory
 	Roots         RootList   // List of root directories.
 	Keystore      File       // The path to the keystore used to sign APKs.
