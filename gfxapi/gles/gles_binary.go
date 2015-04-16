@@ -15,12 +15,18 @@ import (
 func init() {
 	registry.Add((*BlendState)(nil).Class())
 	registry.Add((*Buffer)(nil).Class())
+	registry.Add((*CGLCreateContext)(nil).Class())
+	registry.Add((*CGLCreateContext_In)(nil).Class())
+	registry.Add((*CGLCreateContext_Out)(nil).Class())
 	registry.Add((*ClearState)(nil).Class())
 	registry.Add((*Color)(nil).Class())
 	registry.Add((*CubemapLevel)(nil).Class())
 	registry.Add((*EglCreateContext)(nil).Class())
 	registry.Add((*EglCreateContext_In)(nil).Class())
 	registry.Add((*EglCreateContext_Out)(nil).Class())
+	registry.Add((*EglInitialize)(nil).Class())
+	registry.Add((*EglInitialize_In)(nil).Class())
+	registry.Add((*EglInitialize_Out)(nil).Class())
 	registry.Add((*EglMakeCurrent)(nil).Class())
 	registry.Add((*EglMakeCurrent_In)(nil).Class())
 	registry.Add((*EglMakeCurrent_Out)(nil).Class())
@@ -623,12 +629,18 @@ func init() {
 var (
 	binaryIDBlendState                                 = binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}
 	binaryIDBuffer                                     = binary.ID{0x80, 0x34, 0x59, 0xc1, 0x81, 0x15, 0x42, 0x19, 0x83, 0x1d, 0x6e, 0xd6, 0xc7, 0x4d, 0xd9, 0x0f, 0xc8, 0x3e, 0xdb, 0x6f}
+	binaryIDCGLCreateContext                           = binary.ID{0x72, 0x76, 0x4f, 0x50, 0x23, 0x17, 0x39, 0x6d, 0x7f, 0x19, 0xbc, 0x08, 0xae, 0xa5, 0x06, 0x71, 0x96, 0x5d, 0xf1, 0xdf}
+	binaryIDCGLCreateContext_In                        = binary.ID{0x1e, 0x6a, 0x28, 0x9e, 0x6d, 0x83, 0x60, 0xd6, 0x11, 0x0a, 0x8a, 0xe8, 0x05, 0xaa, 0xac, 0x5e, 0xb0, 0xce, 0x03, 0xef}
+	binaryIDCGLCreateContext_Out                       = binary.ID{0xc0, 0x12, 0x42, 0x99, 0xc1, 0xe0, 0x30, 0xb7, 0xce, 0x6d, 0xd3, 0x20, 0x5a, 0xbf, 0xdd, 0xd7, 0x59, 0xf6, 0xfc, 0x5c}
 	binaryIDClearState                                 = binary.ID{0xd3, 0xbe, 0x8f, 0x85, 0x49, 0x55, 0xe3, 0x17, 0x03, 0xb1, 0x02, 0x1c, 0xe0, 0x2d, 0x25, 0x8c, 0x17, 0x53, 0xc5, 0x62}
 	binaryIDColor                                      = binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}
 	binaryIDCubemapLevel                               = binary.ID{0xac, 0x36, 0x1f, 0x38, 0xdc, 0xa2, 0x33, 0xa9, 0xce, 0xce, 0xfe, 0x64, 0x9f, 0x30, 0x8d, 0xaf, 0xb2, 0xd6, 0xde, 0x94}
 	binaryIDEglCreateContext                           = binary.ID{0x6a, 0x6f, 0x72, 0x49, 0x9c, 0xa2, 0xef, 0x18, 0x62, 0x1b, 0x6d, 0x7b, 0xf5, 0x5a, 0xa1, 0x79, 0x7d, 0x80, 0x4c, 0x88}
 	binaryIDEglCreateContext_In                        = binary.ID{0x5d, 0x10, 0xa8, 0x36, 0xed, 0xf3, 0x46, 0xd1, 0xb0, 0x34, 0x0e, 0x4f, 0x90, 0x8b, 0x0c, 0xa8, 0x74, 0x14, 0xf4, 0xea}
 	binaryIDEglCreateContext_Out                       = binary.ID{0x39, 0x85, 0x84, 0x32, 0x42, 0xdb, 0x66, 0x4e, 0x3f, 0xdd, 0x57, 0x93, 0x3e, 0x3f, 0x31, 0x04, 0x2a, 0xb8, 0x82, 0x99}
+	binaryIDEglInitialize                              = binary.ID{0xc3, 0x96, 0xef, 0x9a, 0xcb, 0x5f, 0xfb, 0x83, 0xb3, 0xc2, 0x8c, 0x14, 0x01, 0x85, 0xc9, 0x21, 0x59, 0x9b, 0xb9, 0x99}
+	binaryIDEglInitialize_In                           = binary.ID{0xa2, 0x5f, 0xed, 0xd6, 0xac, 0xe1, 0x62, 0x54, 0xb8, 0x5d, 0x07, 0xe5, 0xb2, 0x51, 0x54, 0x52, 0x2c, 0x12, 0xcb, 0x05}
+	binaryIDEglInitialize_Out                          = binary.ID{0xe0, 0x2d, 0x1a, 0xa0, 0xf9, 0x8e, 0x34, 0x75, 0x1e, 0x19, 0x28, 0xad, 0x8b, 0x04, 0x8b, 0x2e, 0xf0, 0x2b, 0xf2, 0x7d}
 	binaryIDEglMakeCurrent                             = binary.ID{0x65, 0xee, 0xe8, 0x53, 0x54, 0xe9, 0x38, 0xaf, 0xa6, 0x9c, 0xa0, 0x0e, 0x52, 0x24, 0x49, 0xb5, 0x9e, 0xb6, 0x9f, 0xdb}
 	binaryIDEglMakeCurrent_In                          = binary.ID{0x50, 0xfd, 0xde, 0x0d, 0x0b, 0xbb, 0x7c, 0xaa, 0x14, 0xd0, 0x2b, 0x42, 0x8a, 0x68, 0x47, 0xb8, 0x77, 0xa6, 0x1f, 0xcc}
 	binaryIDEglMakeCurrent_Out                         = binary.ID{0xf9, 0x96, 0x86, 0xfb, 0x25, 0x31, 0x36, 0x39, 0x5b, 0x94, 0x02, 0x30, 0x97, 0x36, 0x1c, 0xca, 0x70, 0xb1, 0xf5, 0x0e}
@@ -1412,6 +1424,167 @@ func (*binaryClassBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassBuffer) Skip(d binary.Decoder) error { return doSkipBuffer(d) }
 
+type binaryClassCGLCreateContext struct{}
+
+func (*CGLCreateContext) Class() binary.Class {
+	return (*binaryClassCGLCreateContext)(nil)
+}
+func doEncodeCGLCreateContext(e binary.Encoder, o *CGLCreateContext) error {
+	if err := e.Uint32(uint32(o.Context)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.In); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGLCreateContext(d binary.Decoder, o *CGLCreateContext) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Context = atom.ContextID(obj)
+	}
+	if err := d.Value(&o.In); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCGLCreateContext(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGLCreateContext_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*CGLCreateContext_Out)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGLCreateContext) ID() binary.ID      { return binaryIDCGLCreateContext }
+func (*binaryClassCGLCreateContext) New() binary.Object { return &CGLCreateContext{} }
+func (*binaryClassCGLCreateContext) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGLCreateContext(e, obj.(*CGLCreateContext))
+}
+func (*binaryClassCGLCreateContext) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGLCreateContext{}
+	return obj, doDecodeCGLCreateContext(d, obj)
+}
+func (*binaryClassCGLCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGLCreateContext(d, obj.(*CGLCreateContext))
+}
+func (*binaryClassCGLCreateContext) Skip(d binary.Decoder) error { return doSkipCGLCreateContext(d) }
+
+type binaryClassCGLCreateContext_In struct{}
+
+func (*CGLCreateContext_In) Class() binary.Class {
+	return (*binaryClassCGLCreateContext_In)(nil)
+}
+func doEncodeCGLCreateContext_In(e binary.Encoder, o *CGLCreateContext_In) error {
+	if err := e.Uint64(uint64(o.Pix)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Share)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Ctx)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGLCreateContext_In(d binary.Decoder, o *CGLCreateContext_In) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Pix = CGLPixelFormatObj(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Share = CGLContextObj(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Ctx = CGLContextObj(obj)
+	}
+	return nil
+}
+func doSkipCGLCreateContext_In(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGLCreateContext_In) ID() binary.ID      { return binaryIDCGLCreateContext_In }
+func (*binaryClassCGLCreateContext_In) New() binary.Object { return &CGLCreateContext_In{} }
+func (*binaryClassCGLCreateContext_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGLCreateContext_In(e, obj.(*CGLCreateContext_In))
+}
+func (*binaryClassCGLCreateContext_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGLCreateContext_In{}
+	return obj, doDecodeCGLCreateContext_In(d, obj)
+}
+func (*binaryClassCGLCreateContext_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGLCreateContext_In(d, obj.(*CGLCreateContext_In))
+}
+func (*binaryClassCGLCreateContext_In) Skip(d binary.Decoder) error {
+	return doSkipCGLCreateContext_In(d)
+}
+
+type binaryClassCGLCreateContext_Out struct{}
+
+func (*CGLCreateContext_Out) Class() binary.Class {
+	return (*binaryClassCGLCreateContext_Out)(nil)
+}
+func doEncodeCGLCreateContext_Out(e binary.Encoder, o *CGLCreateContext_Out) error {
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCGLCreateContext_Out(d binary.Decoder, o *CGLCreateContext_Out) error {
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = CGLError(obj)
+	}
+	return nil
+}
+func doSkipCGLCreateContext_Out(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCGLCreateContext_Out) ID() binary.ID      { return binaryIDCGLCreateContext_Out }
+func (*binaryClassCGLCreateContext_Out) New() binary.Object { return &CGLCreateContext_Out{} }
+func (*binaryClassCGLCreateContext_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCGLCreateContext_Out(e, obj.(*CGLCreateContext_Out))
+}
+func (*binaryClassCGLCreateContext_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CGLCreateContext_Out{}
+	return obj, doDecodeCGLCreateContext_Out(d, obj)
+}
+func (*binaryClassCGLCreateContext_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCGLCreateContext_Out(d, obj.(*CGLCreateContext_Out))
+}
+func (*binaryClassCGLCreateContext_Out) Skip(d binary.Decoder) error {
+	return doSkipCGLCreateContext_Out(d)
+}
+
 type binaryClassClearState struct{}
 
 func (*ClearState) Class() binary.Class {
@@ -1784,6 +1957,152 @@ func (*binaryClassEglCreateContext_Out) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassEglCreateContext_Out) Skip(d binary.Decoder) error {
 	return doSkipEglCreateContext_Out(d)
 }
+
+type binaryClassEglInitialize struct{}
+
+func (*EglInitialize) Class() binary.Class {
+	return (*binaryClassEglInitialize)(nil)
+}
+func doEncodeEglInitialize(e binary.Encoder, o *EglInitialize) error {
+	if err := e.Uint32(uint32(o.Context)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.In); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeEglInitialize(d binary.Decoder, o *EglInitialize) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Context = atom.ContextID(obj)
+	}
+	if err := d.Value(&o.In); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Out); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipEglInitialize(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*EglInitialize_In)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*EglInitialize_Out)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassEglInitialize) ID() binary.ID      { return binaryIDEglInitialize }
+func (*binaryClassEglInitialize) New() binary.Object { return &EglInitialize{} }
+func (*binaryClassEglInitialize) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeEglInitialize(e, obj.(*EglInitialize))
+}
+func (*binaryClassEglInitialize) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &EglInitialize{}
+	return obj, doDecodeEglInitialize(d, obj)
+}
+func (*binaryClassEglInitialize) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeEglInitialize(d, obj.(*EglInitialize))
+}
+func (*binaryClassEglInitialize) Skip(d binary.Decoder) error { return doSkipEglInitialize(d) }
+
+type binaryClassEglInitialize_In struct{}
+
+func (*EglInitialize_In) Class() binary.Class {
+	return (*binaryClassEglInitialize_In)(nil)
+}
+func doEncodeEglInitialize_In(e binary.Encoder, o *EglInitialize_In) error {
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeEglInitialize_In(d binary.Decoder, o *EglInitialize_In) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = EGLDisplay(obj)
+	}
+	return nil
+}
+func doSkipEglInitialize_In(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassEglInitialize_In) ID() binary.ID      { return binaryIDEglInitialize_In }
+func (*binaryClassEglInitialize_In) New() binary.Object { return &EglInitialize_In{} }
+func (*binaryClassEglInitialize_In) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeEglInitialize_In(e, obj.(*EglInitialize_In))
+}
+func (*binaryClassEglInitialize_In) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &EglInitialize_In{}
+	return obj, doDecodeEglInitialize_In(d, obj)
+}
+func (*binaryClassEglInitialize_In) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeEglInitialize_In(d, obj.(*EglInitialize_In))
+}
+func (*binaryClassEglInitialize_In) Skip(d binary.Decoder) error { return doSkipEglInitialize_In(d) }
+
+type binaryClassEglInitialize_Out struct{}
+
+func (*EglInitialize_Out) Class() binary.Class {
+	return (*binaryClassEglInitialize_Out)(nil)
+}
+func doEncodeEglInitialize_Out(e binary.Encoder, o *EglInitialize_Out) error {
+	if err := e.Int32(o.Major); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Minor); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeEglInitialize_Out(d binary.Decoder, o *EglInitialize_Out) error {
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Major = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Minor = int32(obj)
+	}
+	return nil
+}
+func doSkipEglInitialize_Out(d binary.Decoder) error {
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassEglInitialize_Out) ID() binary.ID      { return binaryIDEglInitialize_Out }
+func (*binaryClassEglInitialize_Out) New() binary.Object { return &EglInitialize_Out{} }
+func (*binaryClassEglInitialize_Out) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeEglInitialize_Out(e, obj.(*EglInitialize_Out))
+}
+func (*binaryClassEglInitialize_Out) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &EglInitialize_Out{}
+	return obj, doDecodeEglInitialize_Out(d, obj)
+}
+func (*binaryClassEglInitialize_Out) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeEglInitialize_Out(d, obj.(*EglInitialize_Out))
+}
+func (*binaryClassEglInitialize_Out) Skip(d binary.Decoder) error { return doSkipEglInitialize_Out(d) }
 
 type binaryClassEglMakeCurrent struct{}
 

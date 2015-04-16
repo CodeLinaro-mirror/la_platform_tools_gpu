@@ -918,11 +918,19 @@ typedef void* TexturePointer;
 
 typedef void* BufferDataPointer;
 
+typedef void* EGLDisplay;
+
 typedef void* HGLRC;
 
 typedef void* HDC;
 
 typedef int BOOL;
+
+typedef int CGLError;
+
+typedef void* CGLPixelFormatObj;
+
+typedef void* CGLContextObj;
 
 typedef void* ImageOES;
 

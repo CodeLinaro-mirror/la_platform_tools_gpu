@@ -30,7 +30,6 @@ limitations under the License.
 ¶
   #include <string.h>
 ¶
-  #include <gapic/file_writer.h>
   #include <gapic/get_gfx_proc_address.h>
   #include <gapic/target.h> // STDCALL
 ¶
@@ -40,9 +39,7 @@ limitations under the License.
 ¶
   // spy lazily constructs and returns the instance to the spy.
   Spy* spy() {
-    static Spy spy(
-        std::shared_ptr<gapic::Encoder>(
-            new gapic::Encoder(new gapic::FileWriter("atoms"))));
+    static Spy spy;
     return &spy;
   }
 ¶
@@ -60,21 +57,24 @@ limitations under the License.
     {{end}}
   {{end}}
 ¶
-  typedef void (STDCALL *WGLPROC)();
-  EXPORT WGLPROC STDCALL wglGetProcAddress(const char* name) {
+  typedef void (STDCALL *GFXPROC)();
+  GFXPROC getProcAddress(const char* name) {
     {{range $i, $c := AllCommands $}}
       {{$name := Macro "C++.MethodName" $c}}
       {{if not (GetAnnotation $c "synthetic")}}
-        if (strcmp(name, "{{$name}}") == 0) { return reinterpret_cast<WGLPROC>({{$name}}); }
+        if (strcmp(name, "{{$name}}") == 0) { return reinterpret_cast<GFXPROC>({{$name}}); }
       {{end}}
     {{end}}
 ¶
     // TODO: If we reach this code, we're not capturing the command!
-    typedef WGLPROC (STDCALL* PFNWGLGETPROCADDRESS)(const char*);
+    typedef GFXPROC (STDCALL* PFNWGLGETPROCADDRESS)(const char*);
     PFNWGLGETPROCADDRESS wglGetProcAddress = reinterpret_cast<PFNWGLGETPROCADDRESS>(
         gapic::GetGfxProcAddress("wglGetProcAddress"));
     return wglGetProcAddress != nullptr ? wglGetProcAddress(name) : nullptr;
   }
+¶
+  EXPORT GFXPROC STDCALL wglGetProcAddress(const char* name) { return getProcAddress(name); }
+  EXPORT GFXPROC STDCALL eglGetProcAddress(const char* name) { return getProcAddress(name); }
 ¶
   »} // extern "C"
 {{end}}

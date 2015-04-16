@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-#include <gapic/log.h>
-
-#include <dlfcn.h>
+#include "../dl_loader.h"
+#include "../log.h"
 
 #if defined(__LP64__)
 #define SYSTEM_LIB_PATH "/system/lib64/"
@@ -26,37 +25,6 @@
 
 namespace gapic {
 
-namespace {
-
-// Utility class for retrieving function pointers from dynamic libraries.
-class DlLoader {
-public:
-  // Loads the specified dynamic library. If the library cannot be loaded then this is a fatal
-  // error.
-  inline DlLoader(const char* name) {
-    mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
-    if (mLibrary == nullptr) {
-      GAPID_FATAL("Can't load library %s: %s", name, dlerror());
-    }
-  }
-
-  // Unloads the library loaded in the constructor.
-  inline ~DlLoader() {
-    dlclose(mLibrary);
-  }
-
-  // Looks up the function with the specified name from the library. Returns nullptr if the function
-  // is not found.
-  inline void* lookup(const char* name) {
-    return dlsym(mLibrary, name);
-  }
-
-private:
-  void* mLibrary;
-};
-
-} // anonymous namespace
-
 void* GetGfxProcAddress(const char* name) {
     static DlLoader dlLoader(SYSTEM_LIB_PATH "libEGL.so");
 
@@ -64,7 +32,7 @@ void* GetGfxProcAddress(const char* name) {
     getProcAddressType getProcAddress =
             reinterpret_cast<getProcAddressType>(dlLoader.lookup("eglGetProcAddress"));
     if (getProcAddress == nullptr) {
-      GAPID_FATAL("Can't find eglGetProcAddress(): %s", dlerror());
+      return nullptr;
     }
 
     return getProcAddress(name);
