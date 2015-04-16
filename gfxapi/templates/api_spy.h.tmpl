@@ -225,13 +225,13 @@ limitations under the License.
   {{else if IsArray       $.Type}}
     if ({{$.Name}} != nullptr) { // TODO: This check should not be necessary!
       int32_t count_ = {{Macro "ArrayParamCount" $.Parameter}};
-      mEncoder->S32(count_);
+      mEncoder->U32(count_);
       for (int i = 0; i < count_; i++) {
         {{$el := print $.Name "[i]"}}
         {{Macro "Encode" "Type" $.Type.ValueType "Name" $el "Parameter" $.Parameter}}
       }
     } else {
-      mEncoder->S32(0);
+      mEncoder->U32(0);
     }
   {{/* TODO: Store arrays as resources
   {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))

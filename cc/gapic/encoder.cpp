@@ -133,12 +133,20 @@ void Encoder::String(const char* v) {
 }
 
 void Encoder::Data(const void* ptr, int32_t size) {
-    S32(size);
+    U32(size);
     mOutput->Write(ptr, size);
 }
 
 void Encoder::Id(const gapic::Id& id) {
-    mOutput->Write(&id.data, 20);
+    auto it = mIds.find(id);
+    if (it != mIds.end()) {
+        U32(it->second << 1);
+    } else {
+        uint32_t sid = mIds.size() + 1;
+        mIds[id] = sid;
+        U32((sid << 1) | 1);
+        mOutput->Write(&id.data, 20);
+    }
 }
 
 } // namespace gapic
