@@ -6,18 +6,32 @@ set -ex
 # Ensure we get the full path of this script's directory.
 PROGDIR=`dirname $0`
 PROGDIR=`cd $PROGDIR && pwd`
+HOST_OS=$(uname | tr A-Z a-z)"-x64"
 
 source $PROGDIR/setup_env_common.txt
 source $PROGDIR/setup_toolchain_linux64.txt
 
-crosscompile_windows=1
+if [[ $HOST_OS == "linux-x64" ]]; then
+  crosscompile_windows=1
+else
+  crosscompile_windows=0
+fi
+
 run_integration_tests=0
 use_xvfb=0
+
+BUILD_NUMBER="SNAPSHOT-"`date -u -Iseconds`
+BUILD_FLAVOR="release"
+DIST_DIR=$GPU_BUILD_ROOT/dist
 
 function show_help {
   # Turn off command echoing so the help message is readable.
   set +x
-  echo "USAGE: "`basename $0`" [-h] [-i] [-w] [-x]"
+  echo "USAGE: "`basename $0`" [options]"
+  echo ""
+  echo "  -b <name/number> Sets the build number (used for artifact naming)."
+  echo "  -d <absolute path> Sets the distribution directory."
+  echo "  -f <release|debug> Sets the build flavor."
   echo "  -h    Show this message."
   echo "  -i    Run integration tests."
   echo "  -w    Do NOT cross-compile the server for Windows."
@@ -25,8 +39,14 @@ function show_help {
   echo "        without an X server."
 }
 
-while getopts "h?iwx" opt; do
+while getopts "b:d:f:h?iwx" opt; do
     case "$opt" in
+    b)  BUILD_NUMBER=$OPTARG
+        ;;
+    d)  DIST_DIR=$OPTARG
+        ;;
+    f)  BUILD_FLAVOR=$OPTARG
+        ;;
     h|\?)  show_help
         exit 0
         ;;
@@ -55,7 +75,7 @@ fi
 export GO_BUILD_FLAGS="-i -v -x -o"
 export GO_TEST_FLAGS="-v -x"
 
-go build    $GO_BUILD_FLAGS    $GPU_BUILD_ROOT/bin/gapis    $GPU_RELATIVE_SOURCE_PATH/server/gapis
+go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/$HOST_OS/$BUILD_FLAVOR/gapis $GPU_RELATIVE_SOURCE_PATH/server/gapis
 
 go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --runtests
 
@@ -79,5 +99,27 @@ killall replayd || true
 if [ $crosscompile_windows -eq 1 ]; then
   go run src/$GPU_RELATIVE_SOURCE_PATH/cc/build.go --v --f --targets=windows
   source $PROGDIR/setup_toolchain_linux_xc_win64.txt
-  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows_amd64/gapis.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/gapis
+  go build $GO_BUILD_FLAGS $GPU_BUILD_ROOT/bin/windows-x64/$BUILD_FLAVOR/gapis.exe -ldflags="-extld=$CC" $GPU_RELATIVE_SOURCE_PATH/server/gapis
+fi
+
+# Create zip files for the build artifacts.
+if [[ -n "$DIST_DIR" ]]; then
+  mkdir -p $DIST_DIR
+  cd $GPU_BUILD_ROOT
+  for TARGET_OS in linux-x64 windows-x64 osx-x64; do
+      if [[ $TARGET_OS == $HOST_OS || ( $HOST_OS == linux-x64 && $TARGET_OS == windows-x64 && $crosscompile_windows == 1 ) ]]; then
+          if [[ $TARGET_OS == windows-x64 ]]; then
+            EXE_EXTENSION=".exe"
+          else
+            EXE_EXTENSION=""
+          fi
+
+          ZIP="$DIST_DIR/gpu-tools-$TARGET_OS-$BUILD_FLAVOR-$BUILD_NUMBER.zip"
+          rm -f $ZIP
+
+          for ARTIFACT in gapis replayd; do
+            zip -9rq $ZIP bin/$TARGET_OS/$BUILD_FLAVOR/$ARTIFACT$EXE_EXTENSION
+          done
+      fi
+  done
 fi
