@@ -220,7 +220,7 @@ func (e *Entry) Generate() error {
 	if *verbose {
 		fmt.Printf("Generate %s\n", e.Output)
 	}
-	return ioutil.WriteFile(e.Output, result, os.ModePerm)
+	return ioutil.WriteFile(e.Output, result, 0666)
 }
 
 func main() {
