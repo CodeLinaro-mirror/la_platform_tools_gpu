@@ -31,10 +31,10 @@ void hash(const void* ptr, uint64_t size, gapic::Id& out) {
 
 namespace gapic {
 
-Id::Id() {}
-
-Id::Id(const void* ptr, uint64_t size) {
-    hash(ptr, size, *this);
+Id Id::Hash(const void* ptr, uint64_t size) {
+    Id id;
+    hash(ptr, size, id);
+    return id;
 }
 
 bool Id::operator == (const Id& rhs) const {

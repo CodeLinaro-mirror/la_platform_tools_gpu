@@ -24,10 +24,8 @@ namespace gapic {
 
 // Id is a 20-byte unique identifier.
 struct Id {
-    Id();
-
     // Construct an Id with the hash of the given memory address.
-    Id(const void* ptr, uint64_t size);
+    static Id Hash(const void* ptr, uint64_t size);
 
     bool operator == (const Id& rhs) const;
 

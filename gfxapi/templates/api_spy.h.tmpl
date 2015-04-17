@@ -88,17 +88,17 @@ limitations under the License.
 ¶
   inline void {{$spyname}}::observe(const void* base, uint64_t offset, uint64_t size) {
     const void* ptr = reinterpret_cast<const uint8_t*>(base) + offset;
-    gapic::Id id(ptr, size);
+    gapic::Id id = gapic::Id::Hash(ptr, size);
     if (mObserved.count(id) == 0) {
-        mEncoder->U16(0xfffd); // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
+        mEncoder->Uint16(0xfffd); // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
         mEncoder->Id(id);
         mEncoder->Data(ptr, static_cast<int32_t>(size));
         mObserved.emplace(id);
     }
-    mEncoder->U16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
-    mEncoder->U32(0); // TODO: ContextID
-    mEncoder->U64(reinterpret_cast<uint64_t>(ptr));
-    mEncoder->U64(size);
+    mEncoder->Uint16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
+    mEncoder->Uint32(0); // TODO: ContextID
+    mEncoder->Uint64(reinterpret_cast<uint64_t>(ptr));
+    mEncoder->Uint64(size);
     mEncoder->Id(id);
   }
 ¶
@@ -163,8 +163,8 @@ limitations under the License.
       mState.{{$name}}({{$args}});
     {{end}}
 ¶
-    mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-    mEncoder->U32(0); // TODO: ContextID
+    mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
+    mEncoder->Uint32(0); // TODO: ContextID
 
     {{range $p := $.FullParameters}}
       {{if not $p.Output}}
@@ -220,31 +220,31 @@ limitations under the License.
 
   {{     if IsPseudonym   $.Type}}{{Macro "Encode" "Type" $.Type.To "Name" $.Name "Parameter" $.Parameter}}
   {{else if IsBool        $.Type}}mEncoder->Bool({{$.Name}});
-  {{else if IsU8          $.Type}}mEncoder->U8({{$.Name}});
-  {{else if IsS8          $.Type}}mEncoder->S8({{$.Name}});
-  {{else if IsU16         $.Type}}mEncoder->U16({{$.Name}});
-  {{else if IsS16         $.Type}}mEncoder->S16({{$.Name}});
-  {{else if IsF32         $.Type}}mEncoder->F32({{$.Name}});
-  {{else if IsU32         $.Type}}mEncoder->U32({{$.Name}});
-  {{else if IsS32         $.Type}}mEncoder->S32({{$.Name}});
-  {{else if IsF64         $.Type}}mEncoder->F64({{$.Name}});
-  {{else if IsU64         $.Type}}mEncoder->U64({{$.Name}});
-  {{else if IsS64         $.Type}}mEncoder->S64({{$.Name}});
-  {{else if IsInt         $.Type}}mEncoder->S64({{$.Name}});
-  {{else if IsUint        $.Type}}mEncoder->U64({{$.Name}});
-  {{else if IsPointer     $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}));
+  {{else if IsU8          $.Type}}mEncoder->Uint8({{$.Name}});
+  {{else if IsS8          $.Type}}mEncoder->Int8({{$.Name}});
+  {{else if IsU16         $.Type}}mEncoder->Uint16({{$.Name}});
+  {{else if IsS16         $.Type}}mEncoder->Int16({{$.Name}});
+  {{else if IsF32         $.Type}}mEncoder->Float32({{$.Name}});
+  {{else if IsU32         $.Type}}mEncoder->Uint32({{$.Name}});
+  {{else if IsS32         $.Type}}mEncoder->Int32({{$.Name}});
+  {{else if IsF64         $.Type}}mEncoder->Float64({{$.Name}});
+  {{else if IsU64         $.Type}}mEncoder->Uint64({{$.Name}});
+  {{else if IsS64         $.Type}}mEncoder->Int64({{$.Name}});
+  {{else if IsInt         $.Type}}mEncoder->Int64({{$.Name}});
+  {{else if IsUint        $.Type}}mEncoder->Uint64({{$.Name}});
+  {{else if IsPointer     $.Type}}mEncoder->Uint64(reinterpret_cast<uint64_t>({{$.Name}}));
   {{else if IsString      $.Type}}mEncoder->String({{$.Name}});
-  {{else if IsEnum        $.Type}}mEncoder->U32(static_cast<uint32_t>({{$.Name}}));
+  {{else if IsEnum        $.Type}}mEncoder->Uint32(static_cast<uint32_t>({{$.Name}}));
   {{else if IsArray       $.Type}}
     if ({{$.Name}} != nullptr) { // TODO: This check should not be necessary!
       int32_t count_ = {{Macro "ArrayParamCount" $.Parameter}};
-      mEncoder->U32(count_);
+      mEncoder->Uint32(count_);
       for (int i = 0; i < count_; i++) {
         {{$el := print $.Name "[i]"}}
         {{Macro "Encode" "Type" $.Type.ValueType "Name" $el "Parameter" $.Parameter}}
       }
     } else {
-      mEncoder->U32(0);
+      mEncoder->Uint32(0);
     }
   {{/* TODO: Store arrays as resources
   {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
