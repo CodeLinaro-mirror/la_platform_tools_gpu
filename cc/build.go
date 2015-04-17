@@ -45,6 +45,7 @@ var (
 var (
 	ExternalRoot = build.RepoRoot.Path.Join("external")
 	GPURoot      = build.RepoRoot.Path.Join("tools", "gpu", "src", "android.googlesource.com", "platform", "tools", "gpu")
+	BinRoot      = build.RepoRoot.Path.Join("tools", "gpu", "bin")
 	CCRoot       = GPURoot.Join("cc")
 	GapicRoot    = CCRoot.Join("gapic")
 	GapiiRoot    = CCRoot.Join("gfxspy2", "src")
@@ -73,7 +74,6 @@ func run() int {
 	defer logger.Close()
 
 	env := build.Environment{
-		Output:        build.RepoRoot.Path.Join("tools", "gpu", "bin"),
 		Intermediates: build.RepoRoot.Path.Join("tools", "gpu", "pkg"),
 		Roots: build.RootList{
 			build.Root{Name: "external", Path: ExternalRoot},
@@ -248,7 +248,8 @@ func (t Target) Build(env build.Environment) error {
 	env.Logger = begin(t.Replayd.Name)
 	replaydSource := build.Files(ReplaydRoot.Join("main.cpp"))
 	replaydInputs := replaydSource.Append(gapirLib, gapicLib)
-	if _, err := cpp.Executable(replaydInputs, t.Replayd, env); err != nil {
+	replayd, err := cpp.Executable(replaydInputs, t.Replayd, env)
+	if err != nil {
 		return err
 	}
 
@@ -268,6 +269,18 @@ func (t Target) Build(env build.Environment) error {
 			env.Logger = begin("Running gapir-tests")
 			if err := gapirTest.Exec(env); err != nil {
 				return err
+			}
+		}
+	}
+
+	if t.Replayd.OS == build.HostOS {
+		src, dst := replayd, BinRoot.Join(replayd.Name())
+		env.Logger = rootLogger
+		env.Logger.Info("symlinking %s -> %s", src, dst)
+		if os.Symlink(src.Absolute(), dst.Absolute()) != nil {
+			env.Logger.Info("Symlink failed, copying instead.")
+			if err := src.CopyTo(dst); err != nil {
+				env.Logger.Error("Copy failed: %v", err)
 			}
 		}
 	}
@@ -292,6 +305,8 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 		base.Flavor = "release"
 		base.OptimizationLevel = cpp.FullOptimization
 	}
+
+	base.OutputDir = BinRoot.Join(os+"-"+architecture, base.Flavor)
 
 	if toolchain == gcc.GCC {
 		base.LibrarySearchPaths = build.Files("/usr/local/lib")
@@ -361,75 +376,85 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 }
 
 func getBuildTargets() map[string]Target {
+	noext := ""
+
+	linux := base(gcc.GCC, "linux", "x64").Extend(Target{
+		GapirTests: cpp.Config{
+			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
+		},
+		Replayd: cpp.Config{
+			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
+		},
+	})
+
+	osx := base(gcc.GCC, "osx", "x64").Extend(Target{
+		SourceFiles: []string{"*.mm"},
+		Spy: cpp.Config{
+			Name:      "OpenGL",
+			OutputExt: &noext,
+		},
+		GapirTests: cpp.Config{
+			LinkerArgs: []string{
+				"-framework", "Cocoa",
+				"-framework", "OpenGL",
+			},
+			Libraries: build.FileSet{"pthread"},
+		},
+		Replayd: cpp.Config{
+			LinkerArgs: []string{
+				"-framework", "Cocoa",
+				"-framework", "OpenGL",
+			},
+			Libraries: build.FileSet{"pthread"},
+		},
+	})
+	osx.Spy.OutputDir = osx.Spy.OutputDir.Join("OpenGL.framework", "Versions", "A")
+
+	windows := base(gcc.GCC, "windows", "x64").Extend(Target{
+		Spy: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+		GapirTests: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+		Replayd: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+	})
+
+	windows_msvc := base(msvc.MSVC, "windows", "x64").Extend(Target{
+		Spy: cpp.Config{
+			Name:              "opengl32",
+			AdditionalSources: build.FileSet{GapiiRoot.Join("windows", "opengl32_x64.asm")},
+			ModuleDefinition:  GapiiRoot.Join("windows", "opengl32_exports.def"),
+			Libraries:         build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+		GapirTests: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+		Replayd: cpp.Config{
+			Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
+		},
+	})
+
+	android_arm := base(ndk.APK, "android", "arm").Extend(Target{
+		GapirTests: cpp.Config{
+			Toolchain: ndk.EXE,
+			Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
+		},
+		Replayd: cpp.Config{
+			Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
+			IncludeSearchPaths: build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue")},
+			AdditionalSources:  build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
+		},
+	})
+
 	return map[string]Target{
-		"linux": base(gcc.GCC, "linux", "x64").Extend(Target{
-			GapirTests: cpp.Config{
-				Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
-			},
-			Replayd: cpp.Config{
-				Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
-			},
-		}),
-
-		"osx": base(gcc.GCC, "osx", "x64").Extend(Target{
-			SourceFiles: []string{"*.mm"},
-			Spy: cpp.Config{
-				Name: "OpenGL",
-			},
-			GapirTests: cpp.Config{
-				LinkerArgs: []string{
-					"-framework", "Cocoa",
-					"-framework", "OpenGL",
-				},
-				Libraries: build.FileSet{"pthread"},
-			},
-			Replayd: cpp.Config{
-				LinkerArgs: []string{
-					"-framework", "Cocoa",
-					"-framework", "OpenGL",
-				},
-				Libraries: build.FileSet{"pthread"},
-			},
-		}),
-
-		"windows": base(gcc.GCC, "windows", "x64").Extend(Target{
-			Spy: cpp.Config{
-				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-			GapirTests: cpp.Config{
-				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-			Replayd: cpp.Config{
-				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-		}),
-
-		"windows-msvc": base(msvc.MSVC, "windows", "x64").Extend(Target{
-			Spy: cpp.Config{
-				Name:              "opengl32",
-				AdditionalSources: build.FileSet{GapiiRoot.Join("windows", "opengl32_x64.asm")},
-				ModuleDefinition:  GapiiRoot.Join("windows", "opengl32_exports.def"),
-				Libraries:         build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-			GapirTests: cpp.Config{
-				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-			Replayd: cpp.Config{
-				Libraries: build.FileSet{"ws2_32", "opengl32", "gdi32", "user32"},
-			},
-		}),
-
-		"android-arm": base(ndk.APK, "android", "arm").Extend(Target{
-			GapirTests: cpp.Config{
-				Toolchain: ndk.EXE,
-				Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
-			},
-			Replayd: cpp.Config{
-				Libraries:          build.FileSet{"EGL", "log", "android", "z", "m"},
-				IncludeSearchPaths: build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue")},
-				AdditionalSources:  build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
-			},
-		}),
+		"linux":        linux,
+		"osx":          osx,
+		"windows":      windows,
+		"windows-msvc": windows_msvc,
+		"android-arm":  android_arm,
 	}
 }
 

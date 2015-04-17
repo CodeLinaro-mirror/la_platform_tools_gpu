@@ -55,8 +55,8 @@ var EXE = &cpp.Toolchain{
 	ExeLinker: linkExe,
 	DepsFor:   depsFor,
 	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
-	ExeName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s", cfg.Name, cfg.Architecture) },
+	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:   func(cfg cpp.Config) string { return cfg.Name },
 	ObjExt:    func(cfg cpp.Config) string { return ".o" },
 }
 
@@ -68,8 +68,8 @@ var APK = &cpp.Toolchain{
 	ExeLinker: linkApk,
 	DepsFor:   depsFor,
 	LibName:   func(cfg cpp.Config) string { return "lib" + cfg.Name + ".a" },
-	DllName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.so", cfg.Name, cfg.Architecture) },
-	ExeName:   func(cfg cpp.Config) string { return fmt.Sprintf("%s-%s.apk", cfg.Name, cfg.Architecture) },
+	DllName:   func(cfg cpp.Config) string { return cfg.Name + ".so" },
+	ExeName:   func(cfg cpp.Config) string { return cfg.Name + ".apk" },
 	ObjExt:    func(cfg cpp.Config) string { return ".o" },
 }
 

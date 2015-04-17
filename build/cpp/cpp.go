@@ -56,6 +56,8 @@ func (t Toolchain) LibExt(cfg Config) string {
 // Config is the configuration for a C++, C or Objective-C++ build.
 type Config struct {
 	Name               string            // The name that may be mangled to produce the output file.
+	OutputExt          *string           // The output file extension. If nil, a toolchain default is used.
+	OutputDir          build.File        // The output directory
 	Toolchain          *Toolchain        // The toolchain used to build.
 	OptimizationLevel  OptimizationLevel // The optimization level to use.
 	OS                 string            // The target operating system, e.g. "windows".
@@ -78,6 +80,12 @@ type Config struct {
 func (c Config) Extend(n Config) Config {
 	if n.Name != "" {
 		c.Name = n.Name
+	}
+	if n.OutputExt != nil {
+		c.OutputExt = n.OutputExt
+	}
+	if n.OutputDir != "" {
+		c.OutputDir = n.OutputDir
 	}
 	if n.Toolchain != nil {
 		c.Toolchain = n.Toolchain
@@ -128,6 +136,11 @@ func combineErrors(errs []error) error {
 func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.FileSet, error) {
 	env.Logger = env.Logger.Enter("C++.Compile")
 
+	ext := cfg.Toolchain.ObjExt(cfg)
+	if cfg.OutputExt != nil {
+		ext = *cfg.OutputExt
+	}
+
 	wg := sync.WaitGroup{}
 	sources = sources.Append(cfg.AdditionalSources...)
 	objects := make([]build.File, len(sources))
@@ -135,7 +148,7 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 	wg.Add(len(sources))
 	for i, source := range sources {
 		i, source, env := i, source, env
-		object := IntermediatePath(source, cfg.Toolchain.ObjExt(cfg), cfg, env)
+		object := IntermediatePath(source, ext, cfg, env)
 
 		if requiresCompile(source, object, cfg, env) {
 			env.Logger = env.Logger.Fork() // Give each go-routine a unique logger context id.
@@ -172,6 +185,9 @@ func StaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bui
 
 	name := cfg.Toolchain.LibName(cfg)
 	output := env.Intermediates.Join(Triplet(cfg), name).ChangeExt(cfg.Toolchain.LibExt(cfg))
+	if cfg.OutputExt != nil {
+		output = output.ChangeExt(*cfg.OutputExt)
+	}
 	output.MkdirAll()
 
 	if requiresArchive(objects, output, env) {
@@ -207,7 +223,10 @@ func DynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bu
 
 	cfg.Libraries = append(libraries, cfg.Libraries...)
 
-	output := env.Output.Join(cfg.Toolchain.DllName(cfg))
+	output := cfg.OutputDir.Join(cfg.Toolchain.DllName(cfg))
+	if cfg.OutputExt != nil {
+		output = output.ChangeExt(*cfg.OutputExt)
+	}
 	output.MkdirAll()
 
 	if requiresLink(inputs.Append(objects...), output, env) {
@@ -243,7 +262,10 @@ func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.
 
 	cfg.Libraries = append(libraries, cfg.Libraries...)
 
-	output := env.Output.Join(cfg.Toolchain.ExeName(cfg))
+	output := cfg.OutputDir.Join(cfg.Toolchain.ExeName(cfg))
+	if cfg.OutputExt != nil {
+		output = output.ChangeExt(*cfg.OutputExt)
+	}
 	output.MkdirAll()
 
 	if requiresLink(inputs.Append(objects...), output, env) {
