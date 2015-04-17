@@ -21,7 +21,7 @@
 
 namespace gapic {
 
-Encoder::Encoder(StreamWriter* output) : mOutput(output) {}
+Encoder::Encoder(std::shared_ptr<StreamWriter> output) : mOutput(output) {}
 
 void Encoder::Bool(bool v) {
     uint8_t b = v ? 1 : 0;

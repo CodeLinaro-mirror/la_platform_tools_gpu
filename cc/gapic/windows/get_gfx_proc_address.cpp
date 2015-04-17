@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
+#include "../dl_loader.h"
+#include "../target.h" // snprintf
+
 #include <stdio.h>
+#include <string>
 #include <windows.h>
 #include <wingdi.h>
-
-#include <gapic/target.h> // snprintf
 
 namespace {
 
 typedef void* (__stdcall *PFNWGLGETPROCADDRESS)(const char* name);
 
-HMODULE loadOpengl32() {
+std::string opengl32Path() {
     char sysdir[MAX_PATH];
     GetSystemDirectoryA(sysdir, MAX_PATH-1);
 
     char dllpath[MAX_PATH];
     snprintf(dllpath, MAX_PATH, "%s\\opengl32.dll", sysdir);
-    return LoadLibraryExA(dllpath, NULL, 0);
+    return std::string(dllpath);
 }
 
 } // anonymous namespace
@@ -38,14 +40,13 @@ HMODULE loadOpengl32() {
 namespace gapic {
 
 void* GetGfxProcAddress(const char* name) {
-    static HMODULE module = loadOpengl32();
+    static DlLoader opengl(opengl32Path().c_str());
 
-    if (void* f = reinterpret_cast<void*>(GetProcAddress(module, name))) {
+    if (void* f = opengl.lookup(name)) {
         return f;
     }
 
-    static PFNWGLGETPROCADDRESS gpa = reinterpret_cast<PFNWGLGETPROCADDRESS>(
-            GetProcAddress(module, "wglGetProcAddress"));
+    auto gpa = reinterpret_cast<PFNWGLGETPROCADDRESS>(opengl.lookup("wglGetProcAddress"));
     if (gpa != nullptr) {
         return gpa(name);
     }

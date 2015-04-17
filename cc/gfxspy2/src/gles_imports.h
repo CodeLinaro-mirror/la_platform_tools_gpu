@@ -28,12 +28,15 @@ namespace gapii {
 struct GlesImports {
     void Resolve();
 
+    typedef void(STDCALL *PFNEGLINITIALIZE)(EGLDisplay display, int32_t *major, int32_t *minor);
     typedef void(STDCALL *PFNEGLCREATECONTEXT)(int32_t *version, int32_t *context);
     typedef void(STDCALL *PFNEGLMAKECURRENT)(int32_t context);
     typedef void(STDCALL *PFNEGLSWAPBUFFERS)();
     typedef HGLRC(STDCALL *PFNWGLCREATECONTEXT)(HDC hdc);
     typedef BOOL(STDCALL *PFNWGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(HDC hdc);
+    typedef CGLError(STDCALL *PFNCGLCREATECONTEXT)(CGLPixelFormatObj pix, CGLContextObj share,
+                                                   CGLContextObj ctx);
     typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(ProgramId program, int32_t buffer_size,
@@ -320,12 +323,14 @@ struct GlesImports {
     typedef void(STDCALL *PFNGLGETQUERYOBJECTUI64VEXT)(QueryId query, uint32_t parameter,
                                                        uint64_t *value);
 
+    PFNEGLINITIALIZE eglInitialize;
     PFNEGLCREATECONTEXT eglCreateContext;
     PFNEGLMAKECURRENT eglMakeCurrent;
     PFNEGLSWAPBUFFERS eglSwapBuffers;
     PFNWGLCREATECONTEXT wglCreateContext;
     PFNWGLMAKECURRENT wglMakeCurrent;
     PFNWGLSWAPBUFFERS wglSwapBuffers;
+    PFNCGLCREATECONTEXT CGLCreateContext;
     PFNGLENABLECLIENTSTATE glEnableClientState;
     PFNGLDISABLECLIENTSTATE glDisableClientState;
     PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;

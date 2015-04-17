@@ -1235,6 +1235,15 @@ cmd void flushPostBuffer() {}
 /////////////////////////////////////////////////////////////////
 // EGL APIs
 /////////////////////////////////////////////////////////////////
+type pointer EGLDisplay
+
+@replay_custom
+cmd void eglInitialize(EGLDisplay display, out s32 major, out s32 minor) {
+    http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
+    major = ?
+    minor = ?
+}
+
 @replay_custom
 cmd void eglCreateContext(out s32 version, out s32 context) {  // HACK: Hacked to match the spy's output
 // cmd void eglCreateContext(pointer display, pointer config, pointer share_context, array<s32> attrib_list) {
@@ -1282,6 +1291,22 @@ cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 @EndOfFrame
 cmd void wglSwapBuffers(HDC hdc) {
     http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
+}
+
+/////////////////////////////////////////////////////////////////
+// CGL APIs
+/////////////////////////////////////////////////////////////////
+type int CGLError
+type pointer CGLPixelFormatObj
+type pointer CGLContextObj
+
+@replay_custom
+cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, /* out HACK: Breaks array count */ CGLContextObj ctx) {
+    http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
+    assert len(pix) >= 0
+    assert len(share) >= 0
+    assert len(ctx) >= 0
+    return ?
 }
 
 /////////////////////////////////////////////////////////////////

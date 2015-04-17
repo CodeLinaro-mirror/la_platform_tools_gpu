@@ -152,6 +152,16 @@ func (ϟa *FlushPostBuffer) Mutate(ϟs *state.State) error {
 	}
 	return nil
 }
+func (ϟa *EglInitialize) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := EglInitialize_Out{}
+	ϟo.Major = ϟa.Out.Major
+	ϟo.Minor = ϟa.Out.Minor
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
+		log.Printf("Applying eglInitialize expected %v got %v", ϟa.Out, ϟo)
+	}
+	return nil
+}
 func (ϟa *EglCreateContext) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := EglCreateContext_Out{}
@@ -201,6 +211,15 @@ func (ϟa *WglSwapBuffers) Mutate(ϟs *state.State) error {
 	ϟo := WglSwapBuffers_Out{}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying wglSwapBuffers expected %v got %v", ϟa.Out, ϟo)
+	}
+	return nil
+}
+func (ϟa *CGLCreateContext) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := CGLCreateContext_Out{}
+	ϟo.Result = ϟa.Out.Result
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
+		log.Printf("Applying CGLCreateContext expected %v got %v", ϟa.Out, ϟo)
 	}
 	return nil
 }
