@@ -20,10 +20,7 @@
 #include "connection.h"
 
 #include <stdint.h>
-
-#include <cstddef>
 #include <memory>
-#include <string>
 
 namespace gapic {
 
