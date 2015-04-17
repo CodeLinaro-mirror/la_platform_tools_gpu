@@ -61,6 +61,8 @@ func expression(ctx *context, in ast.Node) semantic.Expression {
 		return semantic.BoolValue(in.Value)
 	case *ast.String:
 		return semantic.StringValue(in.Value)
+	case *ast.Null:
+		return semantic.Null{AST: in, Type: ctx.scope.inferType}
 	default:
 		ctx.icef(in, "Unhandled expression type %T found", in)
 		return invalid{}
