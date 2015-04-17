@@ -121,7 +121,10 @@ func (m *Multiplexer) recv() {
 				return
 			}
 			id := remote(msg.c)
-			if channel, found := m.channels[id]; found {
+			m.channelLock.Lock()
+			channel, found := m.channels[id]
+			m.channelLock.Unlock()
+			if found {
 				channel.receive(msg.d)
 			} else {
 				// Likely this channel was closed this side, and we're receiving data
