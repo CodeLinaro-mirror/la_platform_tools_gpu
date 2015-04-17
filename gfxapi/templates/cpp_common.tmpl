@@ -51,6 +51,35 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the C++ default value for the provided AST type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Null"}}
+  {{AssertType $ "Type"}}
+  {{     if IsPointer       $}}nullptr
+  {{else if IsArray         $}}nullptr
+  {{else if IsBool          $}}false
+  {{else if IsInt           $}}0
+  {{else if IsUint          $}}0
+  {{else if IsS8            $}}0
+  {{else if IsU8            $}}0
+  {{else if IsS16           $}}0
+  {{else if IsU16           $}}0
+  {{else if IsS32           $}}0
+  {{else if IsU32           $}}0
+  {{else if IsF32           $}}0
+  {{else if IsS64           $}}0
+  {{else if IsU64           $}}0
+  {{else if IsF64           $}}0
+  {{else if IsPointerType   $}}nullptr
+  {{else if IsString        $}}""
+  {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the C++ type for the specified Enum.
   By default this emits the enum name, but this behaviour can be overridden with
   the global "C++.EnumTypeOverride".
@@ -344,6 +373,7 @@ limitations under the License.
   {{else if IsMapIndex         $}}{{Macro "C++.Read" $.Map}}[{{Macro "C++.Read" $.Index}}]
   {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
   {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
+  {{else if IsNull             $}}{{Macro "C++.Null" $.Type}}
   {{else if IsClassInitializer $}}
     {{Macro "C++.StateType" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.StateType" $ty.To}}>(new {{Macro "C++.StateType" $ty.To}}())

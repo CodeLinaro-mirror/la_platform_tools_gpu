@@ -61,6 +61,7 @@ func (t String) Fragment() parse.Fragment           { return t.CST }
 func (t Switch) Fragment() parse.Fragment           { return t.CST }
 func (t UnaryOp) Fragment() parse.Fragment          { return t.CST }
 func (t Unknown) Fragment() parse.Fragment          { return t.CST }
+func (t Null) Fragment() parse.Fragment             { return t.CST }
 func (t URL) Fragment() parse.Fragment              { return t.CST }
 
 func (t Invalid) Fragment() parse.Fragment { return nil }

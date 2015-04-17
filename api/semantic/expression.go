@@ -143,6 +143,17 @@ func (u Unknown) ExpressionType() Type {
 	return u.Inferred.ExpressionType()
 }
 
+// Null represents a default value.
+type Null struct {
+	AST  *ast.Null // the underlying syntax node this was built from
+	Type Type      // the resolved type of this null
+}
+
+// ExpressionType implements Expression with the inferred type of the null.
+func (n Null) ExpressionType() Type {
+	return n.Type
+}
+
 // Represents a length of object expression.
 // Object must be of either Array, Map or string type.
 // The length expression is allowed to be of any numeric type

@@ -153,6 +153,7 @@ limitations under the License.
   {{else if IsMapIndex     $}}{{Macro "Read" $.Map}}.Get({{Macro "Read" $.Index}})
   {{else if IsMapContains  $}}{{Macro "Read" $.Map}}.Contains({{Macro "Read" $.Key}})
   {{else if IsLength       $}}{{Macro "Go.Type" $.Type}}({{Macro "ReadLength" $.Object}})
+  {{else if IsNull         $}}{{Macro "Go.Null" $.Type}}
   {{else if IsSelect       $}}
     func() (result {{Macro "Go.Type" $}}) {
       switch {{Macro "Read" $.Value}} {

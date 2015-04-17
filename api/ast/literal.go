@@ -44,6 +44,12 @@ type Unknown struct {
 	CST *parse.Leaf // underlying parse leaf for this node
 }
 
+// Null represents the null literal. This is the default value for the inferred
+// type, and must be used in a context where the type can be inferred.
+type Null struct {
+	CST *parse.Leaf // underlying parse leaf for this node
+}
+
 // URL holds things that start with "http:", used for documentation links in blocks.
 type URL struct {
 	CST *parse.Leaf // underlying parse leaf for this node
