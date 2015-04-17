@@ -301,6 +301,7 @@ func base(toolchain *cpp.Toolchain, os, architecture string) Target {
 	if *debug {
 		base.Flavor = "debug"
 		base.OptimizationLevel = cpp.NoOptimization
+		base.Defines["LOG_LEVEL"] = "3" // LOG_LEVEL_DEBUG
 	} else {
 		base.Flavor = "release"
 		base.OptimizationLevel = cpp.FullOptimization
