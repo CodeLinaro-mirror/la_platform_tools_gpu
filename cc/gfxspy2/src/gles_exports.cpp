@@ -22,7 +22,6 @@
 
 #include <string.h>
 
-#include <gapic/file_writer.h>
 #include <gapic/get_gfx_proc_address.h>
 #include <gapic/target.h>  // STDCALL
 
@@ -32,15 +31,16 @@ namespace {
 
 // spy lazily constructs and returns the instance to the spy.
 Spy* spy() {
-    static Spy spy(
-            std::shared_ptr<gapic::Encoder>(new gapic::Encoder(new gapic::FileWriter("atoms"))));
+    static Spy spy;
     return &spy;
 }
 
 }  // anonymous namespace
 
 extern "C" {
-
+EXPORT void STDCALL eglInitialize(EGLDisplay display, int32_t* major, int32_t* minor) {
+    spy()->eglInitialize(display, major, minor);
+}
 EXPORT void STDCALL eglCreateContext(int32_t* version, int32_t* context) {
     spy()->eglCreateContext(version, context);
 }
@@ -51,6 +51,10 @@ EXPORT BOOL STDCALL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
     return spy()->wglMakeCurrent(hdc, hglrc);
 }
 EXPORT void STDCALL wglSwapBuffers(HDC hdc) { spy()->wglSwapBuffers(hdc); }
+EXPORT CGLError STDCALL
+        CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx) {
+    return spy()->CGLCreateContext(pix, share, ctx);
+}
 EXPORT void STDCALL glEnableClientState(uint32_t type) { spy()->glEnableClientState(type); }
 EXPORT void STDCALL glDisableClientState(uint32_t type) { spy()->glDisableClientState(type); }
 EXPORT void STDCALL glGetProgramBinaryOES(ProgramId program, int32_t buffer_size,
@@ -62,15 +66,15 @@ EXPORT void STDCALL glProgramBinaryOES(ProgramId program, uint32_t binary_format
                                        const void* binary, int32_t binary_size) {
     spy()->glProgramBinaryOES(program, binary_format, binary, binary_size);
 }
-EXPORT void STDCALL
-glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int32_t height, uint32_t preserveMask) {
+EXPORT void STDCALL glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int32_t height,
+                                      uint32_t preserveMask) {
     spy()->glStartTilingQCOM(x, y, width, height, preserveMask);
 }
 EXPORT void STDCALL glEndTilingQCOM(uint32_t preserve_mask) {
     spy()->glEndTilingQCOM(preserve_mask);
 }
-EXPORT void STDCALL
-glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments, const uint32_t* attachments) {
+EXPORT void STDCALL glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments,
+                                            const uint32_t* attachments) {
     spy()->glDiscardFramebufferEXT(target, numAttachments, attachments);
 }
 EXPORT void STDCALL glInsertEventMarkerEXT(int32_t length, const char* marker) {
@@ -81,11 +85,11 @@ EXPORT void STDCALL glPushGroupMarkerEXT(int32_t length, const char* marker) {
 }
 EXPORT void STDCALL glPopGroupMarkerEXT() { spy()->glPopGroupMarkerEXT(); }
 EXPORT void STDCALL
-glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width) {
+        glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width) {
     spy()->glTexStorage1DEXT(target, levels, format, width);
 }
-EXPORT void STDCALL
-glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format, int32_t width, int32_t height) {
+EXPORT void STDCALL glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format,
+                                      int32_t width, int32_t height) {
     spy()->glTexStorage2DEXT(target, levels, format, width, height);
 }
 EXPORT void STDCALL glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format,
@@ -127,7 +131,7 @@ EXPORT uint32_t STDCALL glGetGraphicsResetStatusEXT() {
     return spy()->glGetGraphicsResetStatusEXT();
 }
 EXPORT void STDCALL
-glBindAttribLocation(ProgramId program, AttributeLocation location, const char* name) {
+        glBindAttribLocation(ProgramId program, AttributeLocation location, const char* name) {
     spy()->glBindAttribLocation(program, location, name);
 }
 EXPORT void STDCALL glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
@@ -201,7 +205,7 @@ EXPORT void STDCALL glUniform2i(UniformLocation location, int32_t value0, int32_
     spy()->glUniform2i(location, value0, value1);
 }
 EXPORT void STDCALL
-glUniform3i(UniformLocation location, int32_t value0, int32_t value1, int32_t value2) {
+        glUniform3i(UniformLocation location, int32_t value0, int32_t value1, int32_t value2) {
     spy()->glUniform3i(location, value0, value1, value2);
 }
 EXPORT void STDCALL glUniform4i(UniformLocation location, int32_t value0, int32_t value1,
@@ -227,11 +231,11 @@ EXPORT void STDCALL glUniform2f(UniformLocation location, float value0, float va
     spy()->glUniform2f(location, value0, value1);
 }
 EXPORT void STDCALL
-glUniform3f(UniformLocation location, float value0, float value1, float value2) {
+        glUniform3f(UniformLocation location, float value0, float value1, float value2) {
     spy()->glUniform3f(location, value0, value1, value2);
 }
-EXPORT void STDCALL
-glUniform4f(UniformLocation location, float value0, float value1, float value2, float value3) {
+EXPORT void STDCALL glUniform4f(UniformLocation location, float value0, float value1, float value2,
+                                float value3) {
     spy()->glUniform4f(location, value0, value1, value2, value3);
 }
 EXPORT void STDCALL glUniform1fv(UniformLocation location, int32_t count, const float* value) {
@@ -246,24 +250,24 @@ EXPORT void STDCALL glUniform3fv(UniformLocation location, int32_t count, const 
 EXPORT void STDCALL glUniform4fv(UniformLocation location, int32_t count, const float* value) {
     spy()->glUniform4fv(location, count, value);
 }
-EXPORT void STDCALL
-glUniformMatrix2fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
+EXPORT void STDCALL glUniformMatrix2fv(UniformLocation location, int32_t count, bool transpose,
+                                       const float* values) {
     spy()->glUniformMatrix2fv(location, count, transpose, values);
 }
-EXPORT void STDCALL
-glUniformMatrix3fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
+EXPORT void STDCALL glUniformMatrix3fv(UniformLocation location, int32_t count, bool transpose,
+                                       const float* values) {
     spy()->glUniformMatrix3fv(location, count, transpose, values);
 }
-EXPORT void STDCALL
-glUniformMatrix4fv(UniformLocation location, int32_t count, bool transpose, const float* values) {
+EXPORT void STDCALL glUniformMatrix4fv(UniformLocation location, int32_t count, bool transpose,
+                                       const float* values) {
     spy()->glUniformMatrix4fv(location, count, transpose, values);
 }
 EXPORT void STDCALL
-glGetUniformfv(ProgramId program, UniformLocation location, const float* values) {
+        glGetUniformfv(ProgramId program, UniformLocation location, const float* values) {
     spy()->glGetUniformfv(program, location, values);
 }
 EXPORT void STDCALL
-glGetUniformiv(ProgramId program, UniformLocation location, const int32_t* values) {
+        glGetUniformiv(ProgramId program, UniformLocation location, const int32_t* values) {
     spy()->glGetUniformiv(program, location, values);
 }
 EXPORT void STDCALL glVertexAttrib1f(AttributeLocation location, float value0) {
@@ -273,7 +277,7 @@ EXPORT void STDCALL glVertexAttrib2f(AttributeLocation location, float value0, f
     spy()->glVertexAttrib2f(location, value0, value1);
 }
 EXPORT void STDCALL
-glVertexAttrib3f(AttributeLocation location, float value0, float value1, float value2) {
+        glVertexAttrib3f(AttributeLocation location, float value0, float value1, float value2) {
     spy()->glVertexAttrib3f(location, value0, value1, value2);
 }
 EXPORT void STDCALL glVertexAttrib4f(AttributeLocation location, float value0, float value1,
@@ -306,8 +310,8 @@ EXPORT void STDCALL glStencilMask(uint32_t mask) { spy()->glStencilMask(mask); }
 EXPORT void STDCALL glStencilMaskSeparate(uint32_t face, uint32_t mask) {
     spy()->glStencilMaskSeparate(face, mask);
 }
-EXPORT void STDCALL
-glStencilFuncSeparate(uint32_t face, uint32_t function, int32_t reference_value, int32_t mask) {
+EXPORT void STDCALL glStencilFuncSeparate(uint32_t face, uint32_t function, int32_t reference_value,
+                                          int32_t mask) {
     spy()->glStencilFuncSeparate(face, function, reference_value, mask);
 }
 EXPORT void STDCALL glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
@@ -392,7 +396,7 @@ EXPORT void STDCALL glBindRenderbuffer(uint32_t target, RenderbufferId renderbuf
     spy()->glBindRenderbuffer(target, renderbuffer);
 }
 EXPORT void STDCALL
-glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width, int32_t height) {
+        glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width, int32_t height) {
     spy()->glRenderbufferStorage(target, format, width, height);
 }
 EXPORT void STDCALL glDeleteRenderbuffers(int32_t count, const RenderbufferId* renderbuffers) {
@@ -402,7 +406,7 @@ EXPORT bool STDCALL glIsRenderbuffer(RenderbufferId renderbuffer) {
     return spy()->glIsRenderbuffer(renderbuffer);
 }
 EXPORT void STDCALL
-glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
+        glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
     spy()->glGetRenderbufferParameteriv(target, parameter, values);
 }
 EXPORT void STDCALL glGenBuffers(int32_t count, BufferId* buffers) {
@@ -412,11 +416,11 @@ EXPORT void STDCALL glBindBuffer(uint32_t target, BufferId buffer) {
     spy()->glBindBuffer(target, buffer);
 }
 EXPORT void STDCALL
-glBufferData(uint32_t target, int32_t size, BufferDataPointer data, uint32_t usage) {
+        glBufferData(uint32_t target, int32_t size, BufferDataPointer data, uint32_t usage) {
     spy()->glBufferData(target, size, data, usage);
 }
 EXPORT void STDCALL
-glBufferSubData(uint32_t target, int32_t offset, int32_t size, const void* data) {
+        glBufferSubData(uint32_t target, int32_t offset, int32_t size, const void* data) {
     spy()->glBufferSubData(target, offset, size, data);
 }
 EXPORT void STDCALL glDeleteBuffers(int32_t count, const BufferId* buffers) {
@@ -429,7 +433,7 @@ EXPORT void STDCALL glGetBufferParameteriv(uint32_t target, uint32_t parameter, 
 EXPORT ShaderId STDCALL glCreateShader(uint32_t type) { return spy()->glCreateShader(type); }
 EXPORT void STDCALL glDeleteShader(ShaderId shader) { spy()->glDeleteShader(shader); }
 EXPORT void STDCALL
-glShaderSource(ShaderId shader, int32_t count, const char** source, const int32_t* length) {
+        glShaderSource(ShaderId shader, int32_t count, const char** source, const int32_t* length) {
     spy()->glShaderSource(shader, count, source, length);
 }
 EXPORT void STDCALL glShaderBinary(int32_t count, const ShaderId* shaders, uint32_t binary_format,
@@ -483,8 +487,8 @@ EXPORT void STDCALL glSampleCoverage(float value, bool invert) {
 }
 EXPORT void STDCALL glHint(uint32_t target, uint32_t mode) { spy()->glHint(target, mode); }
 EXPORT void STDCALL
-glFramebufferRenderbuffer(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
-                          uint32_t renderbuffer_target, RenderbufferId renderbuffer) {
+        glFramebufferRenderbuffer(uint32_t framebuffer_target, uint32_t framebuffer_attachment,
+                                  uint32_t renderbuffer_target, RenderbufferId renderbuffer) {
     spy()->glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
                                      renderbuffer_target, renderbuffer);
 }
@@ -522,12 +526,12 @@ EXPORT void STDCALL glEnable(uint32_t capability) { spy()->glEnable(capability);
 EXPORT void STDCALL glDisable(uint32_t capability) { spy()->glDisable(capability); }
 EXPORT bool STDCALL glIsEnabled(uint32_t capability) { return spy()->glIsEnabled(capability); }
 EXPORT void* STDCALL
-glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access) {
+        glMapBufferRange(uint32_t target, int32_t offset, int32_t length, uint32_t access) {
     return spy()->glMapBufferRange(target, offset, length, access);
 }
 EXPORT void STDCALL glUnmapBuffer(uint32_t target) { spy()->glUnmapBuffer(target); }
 EXPORT void STDCALL
-glInvalidateFramebuffer(uint32_t target, int32_t count, const uint32_t* attachments) {
+        glInvalidateFramebuffer(uint32_t target, int32_t count, const uint32_t* attachments) {
     spy()->glInvalidateFramebuffer(target, count, attachments);
 }
 EXPORT void STDCALL glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
@@ -587,575 +591,584 @@ EXPORT void STDCALL glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, 
     spy()->glGetQueryObjectui64vEXT(query, parameter, value);
 }
 
-typedef void(STDCALL* WGLPROC)();
-EXPORT WGLPROC STDCALL wglGetProcAddress(const char* name) {
+typedef void(STDCALL* GFXPROC)();
+GFXPROC getProcAddress(const char* name) {
+    if (strcmp(name, "eglInitialize") == 0) {
+        return reinterpret_cast<GFXPROC>(eglInitialize);
+    }
     if (strcmp(name, "eglCreateContext") == 0) {
-        return reinterpret_cast<WGLPROC>(eglCreateContext);
+        return reinterpret_cast<GFXPROC>(eglCreateContext);
     }
     if (strcmp(name, "eglMakeCurrent") == 0) {
-        return reinterpret_cast<WGLPROC>(eglMakeCurrent);
+        return reinterpret_cast<GFXPROC>(eglMakeCurrent);
     }
     if (strcmp(name, "eglSwapBuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(eglSwapBuffers);
+        return reinterpret_cast<GFXPROC>(eglSwapBuffers);
     }
     if (strcmp(name, "wglCreateContext") == 0) {
-        return reinterpret_cast<WGLPROC>(wglCreateContext);
+        return reinterpret_cast<GFXPROC>(wglCreateContext);
     }
     if (strcmp(name, "wglMakeCurrent") == 0) {
-        return reinterpret_cast<WGLPROC>(wglMakeCurrent);
+        return reinterpret_cast<GFXPROC>(wglMakeCurrent);
     }
     if (strcmp(name, "wglSwapBuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(wglSwapBuffers);
+        return reinterpret_cast<GFXPROC>(wglSwapBuffers);
+    }
+    if (strcmp(name, "CGLCreateContext") == 0) {
+        return reinterpret_cast<GFXPROC>(CGLCreateContext);
     }
     if (strcmp(name, "glEnableClientState") == 0) {
-        return reinterpret_cast<WGLPROC>(glEnableClientState);
+        return reinterpret_cast<GFXPROC>(glEnableClientState);
     }
     if (strcmp(name, "glDisableClientState") == 0) {
-        return reinterpret_cast<WGLPROC>(glDisableClientState);
+        return reinterpret_cast<GFXPROC>(glDisableClientState);
     }
     if (strcmp(name, "glGetProgramBinaryOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetProgramBinaryOES);
+        return reinterpret_cast<GFXPROC>(glGetProgramBinaryOES);
     }
     if (strcmp(name, "glProgramBinaryOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glProgramBinaryOES);
+        return reinterpret_cast<GFXPROC>(glProgramBinaryOES);
     }
     if (strcmp(name, "glStartTilingQCOM") == 0) {
-        return reinterpret_cast<WGLPROC>(glStartTilingQCOM);
+        return reinterpret_cast<GFXPROC>(glStartTilingQCOM);
     }
     if (strcmp(name, "glEndTilingQCOM") == 0) {
-        return reinterpret_cast<WGLPROC>(glEndTilingQCOM);
+        return reinterpret_cast<GFXPROC>(glEndTilingQCOM);
     }
     if (strcmp(name, "glDiscardFramebufferEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glDiscardFramebufferEXT);
+        return reinterpret_cast<GFXPROC>(glDiscardFramebufferEXT);
     }
     if (strcmp(name, "glInsertEventMarkerEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glInsertEventMarkerEXT);
+        return reinterpret_cast<GFXPROC>(glInsertEventMarkerEXT);
     }
     if (strcmp(name, "glPushGroupMarkerEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glPushGroupMarkerEXT);
+        return reinterpret_cast<GFXPROC>(glPushGroupMarkerEXT);
     }
     if (strcmp(name, "glPopGroupMarkerEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glPopGroupMarkerEXT);
+        return reinterpret_cast<GFXPROC>(glPopGroupMarkerEXT);
     }
     if (strcmp(name, "glTexStorage1DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexStorage1DEXT);
+        return reinterpret_cast<GFXPROC>(glTexStorage1DEXT);
     }
     if (strcmp(name, "glTexStorage2DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexStorage2DEXT);
+        return reinterpret_cast<GFXPROC>(glTexStorage2DEXT);
     }
     if (strcmp(name, "glTexStorage3DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexStorage3DEXT);
+        return reinterpret_cast<GFXPROC>(glTexStorage3DEXT);
     }
     if (strcmp(name, "glTextureStorage1DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTextureStorage1DEXT);
+        return reinterpret_cast<GFXPROC>(glTextureStorage1DEXT);
     }
     if (strcmp(name, "glTextureStorage2DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTextureStorage2DEXT);
+        return reinterpret_cast<GFXPROC>(glTextureStorage2DEXT);
     }
     if (strcmp(name, "glTextureStorage3DEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glTextureStorage3DEXT);
+        return reinterpret_cast<GFXPROC>(glTextureStorage3DEXT);
     }
     if (strcmp(name, "glGenVertexArraysOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenVertexArraysOES);
+        return reinterpret_cast<GFXPROC>(glGenVertexArraysOES);
     }
     if (strcmp(name, "glBindVertexArrayOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindVertexArrayOES);
+        return reinterpret_cast<GFXPROC>(glBindVertexArrayOES);
     }
     if (strcmp(name, "glDeleteVertexArraysOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteVertexArraysOES);
+        return reinterpret_cast<GFXPROC>(glDeleteVertexArraysOES);
     }
     if (strcmp(name, "glIsVertexArrayOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsVertexArrayOES);
+        return reinterpret_cast<GFXPROC>(glIsVertexArrayOES);
     }
     if (strcmp(name, "glEGLImageTargetTexture2DOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glEGLImageTargetTexture2DOES);
+        return reinterpret_cast<GFXPROC>(glEGLImageTargetTexture2DOES);
     }
     if (strcmp(name, "glEGLImageTargetRenderbufferStorageOES") == 0) {
-        return reinterpret_cast<WGLPROC>(glEGLImageTargetRenderbufferStorageOES);
+        return reinterpret_cast<GFXPROC>(glEGLImageTargetRenderbufferStorageOES);
     }
     if (strcmp(name, "glGetGraphicsResetStatusEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetGraphicsResetStatusEXT);
+        return reinterpret_cast<GFXPROC>(glGetGraphicsResetStatusEXT);
     }
     if (strcmp(name, "glBindAttribLocation") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindAttribLocation);
+        return reinterpret_cast<GFXPROC>(glBindAttribLocation);
     }
     if (strcmp(name, "glBlendFunc") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlendFunc);
+        return reinterpret_cast<GFXPROC>(glBlendFunc);
     }
     if (strcmp(name, "glBlendFuncSeparate") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlendFuncSeparate);
+        return reinterpret_cast<GFXPROC>(glBlendFuncSeparate);
     }
     if (strcmp(name, "glBlendEquation") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlendEquation);
+        return reinterpret_cast<GFXPROC>(glBlendEquation);
     }
     if (strcmp(name, "glBlendEquationSeparate") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlendEquationSeparate);
+        return reinterpret_cast<GFXPROC>(glBlendEquationSeparate);
     }
     if (strcmp(name, "glBlendColor") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlendColor);
+        return reinterpret_cast<GFXPROC>(glBlendColor);
     }
     if (strcmp(name, "glEnableVertexAttribArray") == 0) {
-        return reinterpret_cast<WGLPROC>(glEnableVertexAttribArray);
+        return reinterpret_cast<GFXPROC>(glEnableVertexAttribArray);
     }
     if (strcmp(name, "glDisableVertexAttribArray") == 0) {
-        return reinterpret_cast<WGLPROC>(glDisableVertexAttribArray);
+        return reinterpret_cast<GFXPROC>(glDisableVertexAttribArray);
     }
     if (strcmp(name, "glVertexAttribPointer") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttribPointer);
+        return reinterpret_cast<GFXPROC>(glVertexAttribPointer);
     }
     if (strcmp(name, "glGetActiveAttrib") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetActiveAttrib);
+        return reinterpret_cast<GFXPROC>(glGetActiveAttrib);
     }
     if (strcmp(name, "glGetActiveUniform") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetActiveUniform);
+        return reinterpret_cast<GFXPROC>(glGetActiveUniform);
     }
     if (strcmp(name, "glGetError") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetError);
+        return reinterpret_cast<GFXPROC>(glGetError);
     }
     if (strcmp(name, "glGetProgramiv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetProgramiv);
+        return reinterpret_cast<GFXPROC>(glGetProgramiv);
     }
     if (strcmp(name, "glGetShaderiv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetShaderiv);
+        return reinterpret_cast<GFXPROC>(glGetShaderiv);
     }
     if (strcmp(name, "glGetUniformLocation") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetUniformLocation);
+        return reinterpret_cast<GFXPROC>(glGetUniformLocation);
     }
     if (strcmp(name, "glGetAttribLocation") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetAttribLocation);
+        return reinterpret_cast<GFXPROC>(glGetAttribLocation);
     }
     if (strcmp(name, "glPixelStorei") == 0) {
-        return reinterpret_cast<WGLPROC>(glPixelStorei);
+        return reinterpret_cast<GFXPROC>(glPixelStorei);
     }
     if (strcmp(name, "glTexParameteri") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexParameteri);
+        return reinterpret_cast<GFXPROC>(glTexParameteri);
     }
     if (strcmp(name, "glTexParameterf") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexParameterf);
+        return reinterpret_cast<GFXPROC>(glTexParameterf);
     }
     if (strcmp(name, "glGetTexParameteriv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetTexParameteriv);
+        return reinterpret_cast<GFXPROC>(glGetTexParameteriv);
     }
     if (strcmp(name, "glGetTexParameterfv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetTexParameterfv);
+        return reinterpret_cast<GFXPROC>(glGetTexParameterfv);
     }
     if (strcmp(name, "glUniform1i") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform1i);
+        return reinterpret_cast<GFXPROC>(glUniform1i);
     }
     if (strcmp(name, "glUniform2i") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform2i);
+        return reinterpret_cast<GFXPROC>(glUniform2i);
     }
     if (strcmp(name, "glUniform3i") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform3i);
+        return reinterpret_cast<GFXPROC>(glUniform3i);
     }
     if (strcmp(name, "glUniform4i") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform4i);
+        return reinterpret_cast<GFXPROC>(glUniform4i);
     }
     if (strcmp(name, "glUniform1iv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform1iv);
+        return reinterpret_cast<GFXPROC>(glUniform1iv);
     }
     if (strcmp(name, "glUniform2iv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform2iv);
+        return reinterpret_cast<GFXPROC>(glUniform2iv);
     }
     if (strcmp(name, "glUniform3iv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform3iv);
+        return reinterpret_cast<GFXPROC>(glUniform3iv);
     }
     if (strcmp(name, "glUniform4iv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform4iv);
+        return reinterpret_cast<GFXPROC>(glUniform4iv);
     }
     if (strcmp(name, "glUniform1f") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform1f);
+        return reinterpret_cast<GFXPROC>(glUniform1f);
     }
     if (strcmp(name, "glUniform2f") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform2f);
+        return reinterpret_cast<GFXPROC>(glUniform2f);
     }
     if (strcmp(name, "glUniform3f") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform3f);
+        return reinterpret_cast<GFXPROC>(glUniform3f);
     }
     if (strcmp(name, "glUniform4f") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform4f);
+        return reinterpret_cast<GFXPROC>(glUniform4f);
     }
     if (strcmp(name, "glUniform1fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform1fv);
+        return reinterpret_cast<GFXPROC>(glUniform1fv);
     }
     if (strcmp(name, "glUniform2fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform2fv);
+        return reinterpret_cast<GFXPROC>(glUniform2fv);
     }
     if (strcmp(name, "glUniform3fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform3fv);
+        return reinterpret_cast<GFXPROC>(glUniform3fv);
     }
     if (strcmp(name, "glUniform4fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniform4fv);
+        return reinterpret_cast<GFXPROC>(glUniform4fv);
     }
     if (strcmp(name, "glUniformMatrix2fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniformMatrix2fv);
+        return reinterpret_cast<GFXPROC>(glUniformMatrix2fv);
     }
     if (strcmp(name, "glUniformMatrix3fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniformMatrix3fv);
+        return reinterpret_cast<GFXPROC>(glUniformMatrix3fv);
     }
     if (strcmp(name, "glUniformMatrix4fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glUniformMatrix4fv);
+        return reinterpret_cast<GFXPROC>(glUniformMatrix4fv);
     }
     if (strcmp(name, "glGetUniformfv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetUniformfv);
+        return reinterpret_cast<GFXPROC>(glGetUniformfv);
     }
     if (strcmp(name, "glGetUniformiv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetUniformiv);
+        return reinterpret_cast<GFXPROC>(glGetUniformiv);
     }
     if (strcmp(name, "glVertexAttrib1f") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib1f);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib1f);
     }
     if (strcmp(name, "glVertexAttrib2f") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib2f);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib2f);
     }
     if (strcmp(name, "glVertexAttrib3f") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib3f);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib3f);
     }
     if (strcmp(name, "glVertexAttrib4f") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib4f);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib4f);
     }
     if (strcmp(name, "glVertexAttrib1fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib1fv);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib1fv);
     }
     if (strcmp(name, "glVertexAttrib2fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib2fv);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib2fv);
     }
     if (strcmp(name, "glVertexAttrib3fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib3fv);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib3fv);
     }
     if (strcmp(name, "glVertexAttrib4fv") == 0) {
-        return reinterpret_cast<WGLPROC>(glVertexAttrib4fv);
+        return reinterpret_cast<GFXPROC>(glVertexAttrib4fv);
     }
     if (strcmp(name, "glGetShaderPrecisionFormat") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetShaderPrecisionFormat);
+        return reinterpret_cast<GFXPROC>(glGetShaderPrecisionFormat);
     }
     if (strcmp(name, "glDepthMask") == 0) {
-        return reinterpret_cast<WGLPROC>(glDepthMask);
+        return reinterpret_cast<GFXPROC>(glDepthMask);
     }
     if (strcmp(name, "glDepthFunc") == 0) {
-        return reinterpret_cast<WGLPROC>(glDepthFunc);
+        return reinterpret_cast<GFXPROC>(glDepthFunc);
     }
     if (strcmp(name, "glDepthRangef") == 0) {
-        return reinterpret_cast<WGLPROC>(glDepthRangef);
+        return reinterpret_cast<GFXPROC>(glDepthRangef);
     }
     if (strcmp(name, "glColorMask") == 0) {
-        return reinterpret_cast<WGLPROC>(glColorMask);
+        return reinterpret_cast<GFXPROC>(glColorMask);
     }
     if (strcmp(name, "glStencilMask") == 0) {
-        return reinterpret_cast<WGLPROC>(glStencilMask);
+        return reinterpret_cast<GFXPROC>(glStencilMask);
     }
     if (strcmp(name, "glStencilMaskSeparate") == 0) {
-        return reinterpret_cast<WGLPROC>(glStencilMaskSeparate);
+        return reinterpret_cast<GFXPROC>(glStencilMaskSeparate);
     }
     if (strcmp(name, "glStencilFuncSeparate") == 0) {
-        return reinterpret_cast<WGLPROC>(glStencilFuncSeparate);
+        return reinterpret_cast<GFXPROC>(glStencilFuncSeparate);
     }
     if (strcmp(name, "glStencilOpSeparate") == 0) {
-        return reinterpret_cast<WGLPROC>(glStencilOpSeparate);
+        return reinterpret_cast<GFXPROC>(glStencilOpSeparate);
     }
     if (strcmp(name, "glFrontFace") == 0) {
-        return reinterpret_cast<WGLPROC>(glFrontFace);
+        return reinterpret_cast<GFXPROC>(glFrontFace);
     }
     if (strcmp(name, "glViewport") == 0) {
-        return reinterpret_cast<WGLPROC>(glViewport);
+        return reinterpret_cast<GFXPROC>(glViewport);
     }
     if (strcmp(name, "glScissor") == 0) {
-        return reinterpret_cast<WGLPROC>(glScissor);
+        return reinterpret_cast<GFXPROC>(glScissor);
     }
     if (strcmp(name, "glActiveTexture") == 0) {
-        return reinterpret_cast<WGLPROC>(glActiveTexture);
+        return reinterpret_cast<GFXPROC>(glActiveTexture);
     }
     if (strcmp(name, "glGenTextures") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenTextures);
+        return reinterpret_cast<GFXPROC>(glGenTextures);
     }
     if (strcmp(name, "glDeleteTextures") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteTextures);
+        return reinterpret_cast<GFXPROC>(glDeleteTextures);
     }
     if (strcmp(name, "glIsTexture") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsTexture);
+        return reinterpret_cast<GFXPROC>(glIsTexture);
     }
     if (strcmp(name, "glBindTexture") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindTexture);
+        return reinterpret_cast<GFXPROC>(glBindTexture);
     }
     if (strcmp(name, "glTexImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexImage2D);
+        return reinterpret_cast<GFXPROC>(glTexImage2D);
     }
     if (strcmp(name, "glTexSubImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glTexSubImage2D);
+        return reinterpret_cast<GFXPROC>(glTexSubImage2D);
     }
     if (strcmp(name, "glCopyTexImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glCopyTexImage2D);
+        return reinterpret_cast<GFXPROC>(glCopyTexImage2D);
     }
     if (strcmp(name, "glCopyTexSubImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glCopyTexSubImage2D);
+        return reinterpret_cast<GFXPROC>(glCopyTexSubImage2D);
     }
     if (strcmp(name, "glCompressedTexImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glCompressedTexImage2D);
+        return reinterpret_cast<GFXPROC>(glCompressedTexImage2D);
     }
     if (strcmp(name, "glCompressedTexSubImage2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glCompressedTexSubImage2D);
+        return reinterpret_cast<GFXPROC>(glCompressedTexSubImage2D);
     }
     if (strcmp(name, "glGenerateMipmap") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenerateMipmap);
+        return reinterpret_cast<GFXPROC>(glGenerateMipmap);
     }
     if (strcmp(name, "glReadPixels") == 0) {
-        return reinterpret_cast<WGLPROC>(glReadPixels);
+        return reinterpret_cast<GFXPROC>(glReadPixels);
     }
     if (strcmp(name, "glGenFramebuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenFramebuffers);
+        return reinterpret_cast<GFXPROC>(glGenFramebuffers);
     }
     if (strcmp(name, "glBindFramebuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindFramebuffer);
+        return reinterpret_cast<GFXPROC>(glBindFramebuffer);
     }
     if (strcmp(name, "glCheckFramebufferStatus") == 0) {
-        return reinterpret_cast<WGLPROC>(glCheckFramebufferStatus);
+        return reinterpret_cast<GFXPROC>(glCheckFramebufferStatus);
     }
     if (strcmp(name, "glDeleteFramebuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteFramebuffers);
+        return reinterpret_cast<GFXPROC>(glDeleteFramebuffers);
     }
     if (strcmp(name, "glIsFramebuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsFramebuffer);
+        return reinterpret_cast<GFXPROC>(glIsFramebuffer);
     }
     if (strcmp(name, "glGenRenderbuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenRenderbuffers);
+        return reinterpret_cast<GFXPROC>(glGenRenderbuffers);
     }
     if (strcmp(name, "glBindRenderbuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindRenderbuffer);
+        return reinterpret_cast<GFXPROC>(glBindRenderbuffer);
     }
     if (strcmp(name, "glRenderbufferStorage") == 0) {
-        return reinterpret_cast<WGLPROC>(glRenderbufferStorage);
+        return reinterpret_cast<GFXPROC>(glRenderbufferStorage);
     }
     if (strcmp(name, "glDeleteRenderbuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteRenderbuffers);
+        return reinterpret_cast<GFXPROC>(glDeleteRenderbuffers);
     }
     if (strcmp(name, "glIsRenderbuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsRenderbuffer);
+        return reinterpret_cast<GFXPROC>(glIsRenderbuffer);
     }
     if (strcmp(name, "glGetRenderbufferParameteriv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetRenderbufferParameteriv);
+        return reinterpret_cast<GFXPROC>(glGetRenderbufferParameteriv);
     }
     if (strcmp(name, "glGenBuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenBuffers);
+        return reinterpret_cast<GFXPROC>(glGenBuffers);
     }
     if (strcmp(name, "glBindBuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glBindBuffer);
+        return reinterpret_cast<GFXPROC>(glBindBuffer);
     }
     if (strcmp(name, "glBufferData") == 0) {
-        return reinterpret_cast<WGLPROC>(glBufferData);
+        return reinterpret_cast<GFXPROC>(glBufferData);
     }
     if (strcmp(name, "glBufferSubData") == 0) {
-        return reinterpret_cast<WGLPROC>(glBufferSubData);
+        return reinterpret_cast<GFXPROC>(glBufferSubData);
     }
     if (strcmp(name, "glDeleteBuffers") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteBuffers);
+        return reinterpret_cast<GFXPROC>(glDeleteBuffers);
     }
     if (strcmp(name, "glIsBuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsBuffer);
+        return reinterpret_cast<GFXPROC>(glIsBuffer);
     }
     if (strcmp(name, "glGetBufferParameteriv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetBufferParameteriv);
+        return reinterpret_cast<GFXPROC>(glGetBufferParameteriv);
     }
     if (strcmp(name, "glCreateShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glCreateShader);
+        return reinterpret_cast<GFXPROC>(glCreateShader);
     }
     if (strcmp(name, "glDeleteShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteShader);
+        return reinterpret_cast<GFXPROC>(glDeleteShader);
     }
     if (strcmp(name, "glShaderSource") == 0) {
-        return reinterpret_cast<WGLPROC>(glShaderSource);
+        return reinterpret_cast<GFXPROC>(glShaderSource);
     }
     if (strcmp(name, "glShaderBinary") == 0) {
-        return reinterpret_cast<WGLPROC>(glShaderBinary);
+        return reinterpret_cast<GFXPROC>(glShaderBinary);
     }
     if (strcmp(name, "glGetShaderInfoLog") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetShaderInfoLog);
+        return reinterpret_cast<GFXPROC>(glGetShaderInfoLog);
     }
     if (strcmp(name, "glGetShaderSource") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetShaderSource);
+        return reinterpret_cast<GFXPROC>(glGetShaderSource);
     }
     if (strcmp(name, "glReleaseShaderCompiler") == 0) {
-        return reinterpret_cast<WGLPROC>(glReleaseShaderCompiler);
+        return reinterpret_cast<GFXPROC>(glReleaseShaderCompiler);
     }
     if (strcmp(name, "glCompileShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glCompileShader);
+        return reinterpret_cast<GFXPROC>(glCompileShader);
     }
     if (strcmp(name, "glIsShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsShader);
+        return reinterpret_cast<GFXPROC>(glIsShader);
     }
     if (strcmp(name, "glCreateProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glCreateProgram);
+        return reinterpret_cast<GFXPROC>(glCreateProgram);
     }
     if (strcmp(name, "glDeleteProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteProgram);
+        return reinterpret_cast<GFXPROC>(glDeleteProgram);
     }
     if (strcmp(name, "glAttachShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glAttachShader);
+        return reinterpret_cast<GFXPROC>(glAttachShader);
     }
     if (strcmp(name, "glDetachShader") == 0) {
-        return reinterpret_cast<WGLPROC>(glDetachShader);
+        return reinterpret_cast<GFXPROC>(glDetachShader);
     }
     if (strcmp(name, "glGetAttachedShaders") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetAttachedShaders);
+        return reinterpret_cast<GFXPROC>(glGetAttachedShaders);
     }
     if (strcmp(name, "glLinkProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glLinkProgram);
+        return reinterpret_cast<GFXPROC>(glLinkProgram);
     }
     if (strcmp(name, "glGetProgramInfoLog") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetProgramInfoLog);
+        return reinterpret_cast<GFXPROC>(glGetProgramInfoLog);
     }
     if (strcmp(name, "glUseProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glUseProgram);
+        return reinterpret_cast<GFXPROC>(glUseProgram);
     }
     if (strcmp(name, "glIsProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsProgram);
+        return reinterpret_cast<GFXPROC>(glIsProgram);
     }
     if (strcmp(name, "glValidateProgram") == 0) {
-        return reinterpret_cast<WGLPROC>(glValidateProgram);
+        return reinterpret_cast<GFXPROC>(glValidateProgram);
     }
     if (strcmp(name, "glClearColor") == 0) {
-        return reinterpret_cast<WGLPROC>(glClearColor);
+        return reinterpret_cast<GFXPROC>(glClearColor);
     }
     if (strcmp(name, "glClearDepthf") == 0) {
-        return reinterpret_cast<WGLPROC>(glClearDepthf);
+        return reinterpret_cast<GFXPROC>(glClearDepthf);
     }
     if (strcmp(name, "glClearStencil") == 0) {
-        return reinterpret_cast<WGLPROC>(glClearStencil);
+        return reinterpret_cast<GFXPROC>(glClearStencil);
     }
     if (strcmp(name, "glClear") == 0) {
-        return reinterpret_cast<WGLPROC>(glClear);
+        return reinterpret_cast<GFXPROC>(glClear);
     }
     if (strcmp(name, "glCullFace") == 0) {
-        return reinterpret_cast<WGLPROC>(glCullFace);
+        return reinterpret_cast<GFXPROC>(glCullFace);
     }
     if (strcmp(name, "glPolygonOffset") == 0) {
-        return reinterpret_cast<WGLPROC>(glPolygonOffset);
+        return reinterpret_cast<GFXPROC>(glPolygonOffset);
     }
     if (strcmp(name, "glLineWidth") == 0) {
-        return reinterpret_cast<WGLPROC>(glLineWidth);
+        return reinterpret_cast<GFXPROC>(glLineWidth);
     }
     if (strcmp(name, "glSampleCoverage") == 0) {
-        return reinterpret_cast<WGLPROC>(glSampleCoverage);
+        return reinterpret_cast<GFXPROC>(glSampleCoverage);
     }
     if (strcmp(name, "glHint") == 0) {
-        return reinterpret_cast<WGLPROC>(glHint);
+        return reinterpret_cast<GFXPROC>(glHint);
     }
     if (strcmp(name, "glFramebufferRenderbuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glFramebufferRenderbuffer);
+        return reinterpret_cast<GFXPROC>(glFramebufferRenderbuffer);
     }
     if (strcmp(name, "glFramebufferTexture2D") == 0) {
-        return reinterpret_cast<WGLPROC>(glFramebufferTexture2D);
+        return reinterpret_cast<GFXPROC>(glFramebufferTexture2D);
     }
     if (strcmp(name, "glGetFramebufferAttachmentParameteriv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetFramebufferAttachmentParameteriv);
+        return reinterpret_cast<GFXPROC>(glGetFramebufferAttachmentParameteriv);
     }
     if (strcmp(name, "glDrawElements") == 0) {
-        return reinterpret_cast<WGLPROC>(glDrawElements);
+        return reinterpret_cast<GFXPROC>(glDrawElements);
     }
     if (strcmp(name, "glDrawArrays") == 0) {
-        return reinterpret_cast<WGLPROC>(glDrawArrays);
+        return reinterpret_cast<GFXPROC>(glDrawArrays);
     }
     if (strcmp(name, "glFlush") == 0) {
-        return reinterpret_cast<WGLPROC>(glFlush);
+        return reinterpret_cast<GFXPROC>(glFlush);
     }
     if (strcmp(name, "glFinish") == 0) {
-        return reinterpret_cast<WGLPROC>(glFinish);
+        return reinterpret_cast<GFXPROC>(glFinish);
     }
     if (strcmp(name, "glGetBooleanv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetBooleanv);
+        return reinterpret_cast<GFXPROC>(glGetBooleanv);
     }
     if (strcmp(name, "glGetFloatv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetFloatv);
+        return reinterpret_cast<GFXPROC>(glGetFloatv);
     }
     if (strcmp(name, "glGetIntegerv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetIntegerv);
+        return reinterpret_cast<GFXPROC>(glGetIntegerv);
     }
     if (strcmp(name, "glGetString") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetString);
+        return reinterpret_cast<GFXPROC>(glGetString);
     }
     if (strcmp(name, "glEnable") == 0) {
-        return reinterpret_cast<WGLPROC>(glEnable);
+        return reinterpret_cast<GFXPROC>(glEnable);
     }
     if (strcmp(name, "glDisable") == 0) {
-        return reinterpret_cast<WGLPROC>(glDisable);
+        return reinterpret_cast<GFXPROC>(glDisable);
     }
     if (strcmp(name, "glIsEnabled") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsEnabled);
+        return reinterpret_cast<GFXPROC>(glIsEnabled);
     }
     if (strcmp(name, "glMapBufferRange") == 0) {
-        return reinterpret_cast<WGLPROC>(glMapBufferRange);
+        return reinterpret_cast<GFXPROC>(glMapBufferRange);
     }
     if (strcmp(name, "glUnmapBuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glUnmapBuffer);
+        return reinterpret_cast<GFXPROC>(glUnmapBuffer);
     }
     if (strcmp(name, "glInvalidateFramebuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glInvalidateFramebuffer);
+        return reinterpret_cast<GFXPROC>(glInvalidateFramebuffer);
     }
     if (strcmp(name, "glRenderbufferStorageMultisample") == 0) {
-        return reinterpret_cast<WGLPROC>(glRenderbufferStorageMultisample);
+        return reinterpret_cast<GFXPROC>(glRenderbufferStorageMultisample);
     }
     if (strcmp(name, "glBlitFramebuffer") == 0) {
-        return reinterpret_cast<WGLPROC>(glBlitFramebuffer);
+        return reinterpret_cast<GFXPROC>(glBlitFramebuffer);
     }
     if (strcmp(name, "glGenQueries") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenQueries);
+        return reinterpret_cast<GFXPROC>(glGenQueries);
     }
     if (strcmp(name, "glBeginQuery") == 0) {
-        return reinterpret_cast<WGLPROC>(glBeginQuery);
+        return reinterpret_cast<GFXPROC>(glBeginQuery);
     }
     if (strcmp(name, "glEndQuery") == 0) {
-        return reinterpret_cast<WGLPROC>(glEndQuery);
+        return reinterpret_cast<GFXPROC>(glEndQuery);
     }
     if (strcmp(name, "glDeleteQueries") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteQueries);
+        return reinterpret_cast<GFXPROC>(glDeleteQueries);
     }
     if (strcmp(name, "glIsQuery") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsQuery);
+        return reinterpret_cast<GFXPROC>(glIsQuery);
     }
     if (strcmp(name, "glGetQueryiv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryiv);
+        return reinterpret_cast<GFXPROC>(glGetQueryiv);
     }
     if (strcmp(name, "glGetQueryObjectuiv") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryObjectuiv);
+        return reinterpret_cast<GFXPROC>(glGetQueryObjectuiv);
     }
     if (strcmp(name, "glGenQueriesEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGenQueriesEXT);
+        return reinterpret_cast<GFXPROC>(glGenQueriesEXT);
     }
     if (strcmp(name, "glBeginQueryEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glBeginQueryEXT);
+        return reinterpret_cast<GFXPROC>(glBeginQueryEXT);
     }
     if (strcmp(name, "glEndQueryEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glEndQueryEXT);
+        return reinterpret_cast<GFXPROC>(glEndQueryEXT);
     }
     if (strcmp(name, "glDeleteQueriesEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glDeleteQueriesEXT);
+        return reinterpret_cast<GFXPROC>(glDeleteQueriesEXT);
     }
     if (strcmp(name, "glIsQueryEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glIsQueryEXT);
+        return reinterpret_cast<GFXPROC>(glIsQueryEXT);
     }
     if (strcmp(name, "glQueryCounterEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glQueryCounterEXT);
+        return reinterpret_cast<GFXPROC>(glQueryCounterEXT);
     }
     if (strcmp(name, "glGetQueryivEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryivEXT);
+        return reinterpret_cast<GFXPROC>(glGetQueryivEXT);
     }
     if (strcmp(name, "glGetQueryObjectivEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryObjectivEXT);
+        return reinterpret_cast<GFXPROC>(glGetQueryObjectivEXT);
     }
     if (strcmp(name, "glGetQueryObjectuivEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryObjectuivEXT);
+        return reinterpret_cast<GFXPROC>(glGetQueryObjectuivEXT);
     }
     if (strcmp(name, "glGetQueryObjecti64vEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryObjecti64vEXT);
+        return reinterpret_cast<GFXPROC>(glGetQueryObjecti64vEXT);
     }
     if (strcmp(name, "glGetQueryObjectui64vEXT") == 0) {
-        return reinterpret_cast<WGLPROC>(glGetQueryObjectui64vEXT);
+        return reinterpret_cast<GFXPROC>(glGetQueryObjectui64vEXT);
     }
 
     // TODO: If we reach this code, we're not capturing the command!
-    typedef WGLPROC(STDCALL * PFNWGLGETPROCADDRESS)(const char*);
+    typedef GFXPROC(STDCALL * PFNWGLGETPROCADDRESS)(const char*);
     PFNWGLGETPROCADDRESS wglGetProcAddress =
             reinterpret_cast<PFNWGLGETPROCADDRESS>(gapic::GetGfxProcAddress("wglGetProcAddress"));
     return wglGetProcAddress != nullptr ? wglGetProcAddress(name) : nullptr;
 }
+
+EXPORT GFXPROC STDCALL wglGetProcAddress(const char* name) { return getProcAddress(name); }
+EXPORT GFXPROC STDCALL eglGetProcAddress(const char* name) { return getProcAddress(name); }
 
 }  // extern "C"

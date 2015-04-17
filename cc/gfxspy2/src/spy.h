@@ -25,11 +25,14 @@ namespace gapii {
 
 class Spy : public GlesSpy {
 public:
-    Spy(std::shared_ptr<gapic::Encoder> encoder);
+    Spy();
     ~Spy();
 
+    void eglInitialize(EGLDisplay display, int32_t* major, int32_t* minor);
+    void eglMakeCurrent(int32_t context);
     HGLRC wglCreateContext(HDC hdc);
     BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
+    CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx);
 
 private:
     void init(int32_t width, int32_t height,

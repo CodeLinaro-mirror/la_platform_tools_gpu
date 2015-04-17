@@ -24,12 +24,14 @@ namespace gapii {
 
 void GlesImports::Resolve() {
     using namespace gapic;
+    eglInitialize = reinterpret_cast<PFNEGLINITIALIZE>(GetGfxProcAddress("eglInitialize"));
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers = reinterpret_cast<PFNEGLSWAPBUFFERS>(GetGfxProcAddress("eglSwapBuffers"));
     wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(GetGfxProcAddress("wglCreateContext"));
     wglMakeCurrent = reinterpret_cast<PFNWGLMAKECURRENT>(GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers = reinterpret_cast<PFNWGLSWAPBUFFERS>(GetGfxProcAddress("wglSwapBuffers"));
+    CGLCreateContext = reinterpret_cast<PFNCGLCREATECONTEXT>(GetGfxProcAddress("CGLCreateContext"));
     glEnableClientState =
             reinterpret_cast<PFNGLENABLECLIENTSTATE>(GetGfxProcAddress("glEnableClientState"));
     glDisableClientState =

@@ -14,15 +14,27 @@
  * limitations under the License.
  */
 
-#include <dlfcn.h>
+#include "../dl_loader.h"
+#include "../log.h"
+
 #include <stdlib.h>
 #include <string.h>
 
 namespace gapic {
 
+#define FRAMEWORK_ROOT "/System/Library/Frameworks/OpenGL.framework/"
+
 void* GetGfxProcAddress(const char *name) {
-    return dlsym(RTLD_DEFAULT, name);
+    static DlLoader opengl(FRAMEWORK_ROOT "OpenGL");
+    if (void* proc = opengl.lookup(name)) { return proc; }
+
+    static DlLoader gl(FRAMEWORK_ROOT "Libraries/libGL.dylib");
+    if (void* proc = gl.lookup(name)) { return proc; }
+
+    static DlLoader glu(FRAMEWORK_ROOT "Libraries/libGLU.dylib");
+    if (void* proc = glu.lookup(name)) { return proc; }
+
+    return nullptr;
 }
 
-}  // namespace gapic
-
+} // namespace gapic

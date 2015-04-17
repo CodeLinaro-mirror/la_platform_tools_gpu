@@ -19,6 +19,7 @@
 
 #include "id.h"
 
+#include <memory>
 #include <stdint.h>
 #include <unordered_map>
 
@@ -30,7 +31,7 @@ class StreamWriter;
 // using variable-length-encoding.
 class Encoder {
 public:
-    Encoder(StreamWriter* output);
+    Encoder(std::shared_ptr<StreamWriter> output);
 
     void Bool(bool);
     void S8(int8_t);
@@ -49,7 +50,7 @@ public:
 
 private:
     std::unordered_map<gapic::Id, uint32_t> mIds;
-    StreamWriter* mOutput;
+    std::shared_ptr<StreamWriter> mOutput;
 };
 
 } // namespace gapic

@@ -113,6 +113,7 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	a := append([]string{
 		"-c", // Compile to .o
 		optFlags(cfg),
+		"-g", // Generate debug info
 		"-fPIC",
 		"-fvisibility=hidden",
 		"-fvisibility-inlines-hidden",
@@ -164,6 +165,8 @@ func linkDll(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	switch cfg.OS {
 	case "osx":
 		a = append(a, "-dynamiclib")
+		a = append(a, "-compatibility_version", "1.0.0")
+		a = append(a, "-current_version", "1.0.0")
 	default:
 		a = append(a, "-shared")
 	}

@@ -45,7 +45,7 @@ limitations under the License.
 ¶
   class {{$spyname}} {
   «public:»
-    inline {{$spyname}}(std::shared_ptr<gapic::Encoder> encoder);
+    inline void init(std::shared_ptr<gapic::Encoder> encoder);
 ¶
     {{range $f := AllCommands $}}
       {{if not (GetAnnotation $f "synthetic")}}
@@ -78,7 +78,8 @@ limitations under the License.
   };
 ¶
   // Inline methods
-  inline {{$spyname}}::{{$spyname}}(std::shared_ptr<gapic::Encoder> encoder) : mEncoder(encoder) {
+  inline void {{$spyname}}::init(std::shared_ptr<gapic::Encoder> encoder) {
+    mEncoder = encoder;
     mState.read = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mState.write = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mImports.Resolve();

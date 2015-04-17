@@ -34,12 +34,15 @@ public:
     inline void startTimer(uint8_t const index);
     inline void stopTimer(uint8_t const index, uint64_t const result);
     inline void flushPostBuffer();
+    inline void eglInitialize(EGLDisplay const display, int32_t* const major, int32_t* const minor);
     inline void eglCreateContext(int32_t* const version, int32_t* const context);
     inline void eglMakeCurrent(int32_t const context);
     inline void eglSwapBuffers();
     inline void wglCreateContext(HDC const hdc, HGLRC const result);
     inline void wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result);
     inline void wglSwapBuffers(HDC const hdc);
+    inline void CGLCreateContext(CGLPixelFormatObj const pix, CGLContextObj const share,
+                                 CGLContextObj const ctx, CGLError const result);
     inline void glEnableClientState(uint32_t const type);
     inline void glDisableClientState(uint32_t const type);
     inline void glGetProgramBinaryOES(ProgramId const program, int32_t const buffer_size,
@@ -432,6 +435,9 @@ inline void GlesState::stopTimer(uint8_t const index, uint64_t const result) { r
 
 inline void GlesState::flushPostBuffer() {}
 
+inline void GlesState::eglInitialize(EGLDisplay const display, int32_t* const major,
+                                     int32_t* const minor) {}
+
 inline void GlesState::eglCreateContext(int32_t* const version, int32_t* const context) {}
 
 inline void GlesState::eglMakeCurrent(int32_t const context) {}
@@ -445,6 +451,11 @@ inline void GlesState::wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL con
 }
 
 inline void GlesState::wglSwapBuffers(HDC const hdc) {}
+
+inline void GlesState::CGLCreateContext(CGLPixelFormatObj const pix, CGLContextObj const share,
+                                        CGLContextObj const ctx, CGLError const result) {
+    return;
+}
 
 inline void GlesState::glEnableClientState(uint32_t const type) {
     this->Capabilities[static_cast<uint32_t>(type)] = true;
@@ -873,9 +884,8 @@ inline void GlesState::glUniformMatrix2fv(UniformLocation const location, int32_
     std::shared_ptr<Program> program = this->Instances.mPrograms[this->BoundProgram];
     Uniform uniform = program->mUniforms[location];
     uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
-    uniform.mValue.mMat2f = Mat2f()
-                                    .SetCol0(Vec2f().SetX(values[0]).SetY(values[1]))
-                                    .SetCol1(Vec2f().SetX(values[0]).SetY(values[1]));
+    uniform.mValue.mMat2f = Mat2f().SetCol0(Vec2f().SetX(values[0]).SetY(values[1])).SetCol1(
+            Vec2f().SetX(values[0]).SetY(values[1]));
     program->mUniforms[location] = uniform;
 }
 
@@ -902,16 +912,10 @@ inline void GlesState::glUniformMatrix4fv(UniformLocation const location, int32_
                             values[3]))
                     .SetCol1(Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(
                             values[7]))
-                    .SetCol2(Vec4f()
-                                     .SetX(values[8])
-                                     .SetY(values[9])
-                                     .SetZ(values[10])
-                                     .SetW(values[11]))
-                    .SetCol3(Vec4f()
-                                     .SetX(values[12])
-                                     .SetY(values[13])
-                                     .SetZ(values[14])
-                                     .SetW(values[15]));
+                    .SetCol2(Vec4f().SetX(values[8]).SetY(values[9]).SetZ(values[10]).SetW(
+                            values[11]))
+                    .SetCol3(Vec4f().SetX(values[12]).SetY(values[13]).SetZ(values[14]).SetW(
+                            values[15]));
     program->mUniforms[location] = uniform;
 }
 
@@ -1156,11 +1160,8 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(image_size)
-                              .SetFormat(static_cast<uint32_t>(format));
+            Image l = Image().SetWidth(width).SetHeight(height).SetSize(image_size).SetFormat(
+                    static_cast<uint32_t>(format));
             read(static_cast<void*>(data), 0, l.mSize);
             memcpy(l.mData, data, l.mSize);
             t->mTexture2D[level] = l;
@@ -1177,11 +1178,8 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(image_size)
-                              .SetFormat(static_cast<uint32_t>(format));
+            Image l = Image().SetWidth(width).SetHeight(height).SetSize(image_size).SetFormat(
+                    static_cast<uint32_t>(format));
             read(static_cast<void*>(data), 0, l.mSize);
             memcpy(l.mData, data, l.mSize);
             CubemapLevel cube = t->mCubemap[level];

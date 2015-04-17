@@ -38,10 +38,11 @@ struct Id {
 
 namespace std {
 template <> struct hash<gapic::Id> {
-    inline size_t operator()(const gapic::Id& id) const { 
+    inline size_t operator()(const gapic::Id& id) const {
         return *reinterpret_cast<const size_t*>(id.data);
     }
 };
-}
+
+}  // namespace gapic
 
 #endif // GAPIC_ID_H

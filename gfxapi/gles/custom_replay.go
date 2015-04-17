@@ -130,7 +130,9 @@ func (ω *GlGetAttribLocation) Replay(id atom.ID, s *state.State, b *builder.Bui
 }
 
 // These are not called in replay
+func (ω *CGLCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
 func (ω *EglCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
+func (ω *EglInitialize) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)    {}
 func (ω *EglMakeCurrent) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *EglSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *WglCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
