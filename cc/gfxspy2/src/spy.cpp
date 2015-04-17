@@ -15,8 +15,9 @@
  */
 
 #include "spy.h"
+#include "connection_writer.h"
 
-#include <gapic/file_writer.h>
+#include <gapic/encoder.h>
 #include <gapic/target.h>
 
 #if TARGET_OS == GAPID_OS_WINDOWS
@@ -29,12 +30,11 @@ Spy::Spy() {
 }
 
 Spy::~Spy() {
-    mEncoder->U16(0xffff); // Type ID -- TODO: mEncoder->Id(EOS_ID);
 }
 
 void Spy::init(int32_t width, int32_t height,
         uint32_t colorFormat, uint32_t depthFormat, uint32_t stencilFormat) {
-    auto writer = std::shared_ptr<gapic::StreamWriter>(new gapic::FileWriter("atoms"));
+    auto writer = ConnectionWriter::listen("127.0.0.1", "9286");
     auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
 
     mEncoder = encoder;
