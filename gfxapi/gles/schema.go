@@ -102,18 +102,23 @@ func init() {
 		Name: "eglInitialize",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
-				Name: "display",
+				Name: "dpy",
 				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "major",
-				Type: schema.S32,
+				Type: schema.Int,
 				Out:  true,
 			},
 			service.ParameterInfo{
 				Name: "minor",
-				Type: schema.S32,
+				Type: schema.Int,
+				Out:  true,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Int,
 				Out:  true,
 			},
 		},
@@ -127,13 +132,28 @@ func init() {
 		Name: "eglCreateContext",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
-				Name: "version",
-				Type: schema.S32,
-				Out:  true,
+				Name: "display",
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
-				Name: "context",
-				Type: schema.S32,
+				Name: "config",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "share_context",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "attrib_list",
+				Type: s.getArrayInfo(3),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Pointer,
 				Out:  true,
 			},
 		},
@@ -147,9 +167,29 @@ func init() {
 		Name: "eglMakeCurrent",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
-				Name: "context",
-				Type: schema.S32,
+				Name: "display",
+				Type: schema.Pointer,
 				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "draw",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "read",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "context",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Int,
+				Out:  true,
 			},
 		},
 		IsCommand:        true,
@@ -158,9 +198,25 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type:             7,
-		Name:             "eglSwapBuffers",
-		Parameters:       []service.ParameterInfo{},
+		Type: 7,
+		Name: "eglSwapBuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "display",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "surface",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Int,
+				Out:  true,
+			},
+		},
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     true,
@@ -711,7 +767,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(12),
+				Type: s.getArrayInfo(13),
 				Out:  true,
 			},
 		},
@@ -746,7 +802,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(12),
+				Type: s.getArrayInfo(13),
 				Out:  false,
 			},
 		},
@@ -1161,7 +1217,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -1186,7 +1242,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -1331,7 +1387,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -1356,7 +1412,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  true,
 			},
 		},
@@ -1491,7 +1547,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -1516,7 +1572,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -1541,7 +1597,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -1566,7 +1622,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -1701,7 +1757,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1726,7 +1782,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1751,7 +1807,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1776,7 +1832,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1806,7 +1862,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1836,7 +1892,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1866,7 +1922,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1891,7 +1947,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -1916,7 +1972,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -2046,7 +2102,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -2066,7 +2122,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -2086,7 +2142,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -2106,7 +2162,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -2131,7 +2187,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "range",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -2421,7 +2477,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(11),
+				Type: s.getArrayInfo(12),
 				Out:  true,
 			},
 		},
@@ -2441,7 +2497,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(11),
+				Type: s.getArrayInfo(12),
 				Out:  false,
 			},
 		},
@@ -2876,7 +2932,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(5),
+				Type: s.getArrayInfo(6),
 				Out:  true,
 			},
 		},
@@ -2936,7 +2992,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(5),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -2976,7 +3032,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(8),
 				Out:  true,
 			},
 		},
@@ -3046,7 +3102,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(8),
 				Out:  false,
 			},
 		},
@@ -3091,7 +3147,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -3316,12 +3372,12 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "source",
-				Type: s.getArrayInfo(10),
+				Type: s.getArrayInfo(11),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "length",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -3341,7 +3397,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(10),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3560,7 +3616,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(10),
 				Out:  true,
 			},
 		},
@@ -3915,7 +3971,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -4028,7 +4084,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(4),
 				Out:  true,
 			},
 		},
@@ -4048,7 +4104,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -4193,7 +4249,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attachments",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(5),
 				Out:  false,
 			},
 		},
@@ -4308,7 +4364,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(7),
 				Out:  true,
 			},
 		},
@@ -4363,7 +4419,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(7),
 				Out:  false,
 			},
 		},
@@ -4453,7 +4509,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(7),
 				Out:  true,
 			},
 		},
@@ -4508,7 +4564,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(7),
 				Out:  false,
 			},
 		},
@@ -4776,24 +4832,26 @@ func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
 	case 2:
 		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(51))
 	case 3:
-		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
+		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
 	case 4:
-		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(20))
+		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
 	case 5:
-		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(20))
 	case 6:
-		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
 	case 7:
-		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
 	case 8:
-		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
+		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
 	case 9:
-		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
 	case 10:
-		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
+		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
 	case 11:
-		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
 	case 12:
+		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
+	case 13:
 		e = service.CreateArrayInfo("VertexArrayIdArray", service.TypeKindArray, schema.U32)
 	}
 	s.arrays[id] = e
@@ -7583,7 +7641,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Source",
-					Type: s.getArrayInfo(10),
+					Type: s.getArrayInfo(11),
 				},
 				&service.FieldInfo{
 					Name: "Type",

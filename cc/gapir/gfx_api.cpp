@@ -14,13 +14,17 @@ namespace gfxapi {
 namespace {
 
 bool callEglInitialize(Stack* stack, bool pushReturn) {
-    int32_t* minor = stack->pop<int32_t*>();
-    int32_t* major = stack->pop<int32_t*>();
-    EGLDisplay display = stack->pop<EGLDisplay>();
+    EGLint* minor = stack->pop<EGLint*>();
+    EGLint* major = stack->pop<EGLint*>();
+    EGLDisplay dpy = stack->pop<EGLDisplay>();
     if (stack->isValid()) {
-        GAPID_INFO("eglInitialize(%p, %p, %p)\n", display, major, minor);
+        GAPID_INFO("eglInitialize(%p, %p, %p)\n", dpy, major, minor);
         if (eglInitialize != nullptr) {
-            eglInitialize(display, major, minor);
+            EGLBoolean return_value = eglInitialize(dpy, major, minor);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<EGLBoolean>(return_value);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglInitialize\n");
         }
@@ -32,12 +36,19 @@ bool callEglInitialize(Stack* stack, bool pushReturn) {
 }
 
 bool callEglCreateContext(Stack* stack, bool pushReturn) {
-    int32_t* context = stack->pop<int32_t*>();
-    int32_t* version = stack->pop<int32_t*>();
+    const EGLint* attrib_list = stack->pop<const EGLint*>();
+    EGLContext share_context = stack->pop<EGLContext>();
+    EGLConfig config = stack->pop<EGLConfig>();
+    EGLDisplay display = stack->pop<EGLDisplay>();
     if (stack->isValid()) {
-        GAPID_INFO("eglCreateContext(%p, %p)\n", version, context);
+        GAPID_INFO("eglCreateContext(%p, %p, %p, %p)\n", display, config, share_context,
+                   attrib_list);
         if (eglCreateContext != nullptr) {
-            eglCreateContext(version, context);
+            EGLContext return_value = eglCreateContext(display, config, share_context, attrib_list);
+            GAPID_INFO("Returned: %p\n", return_value);
+            if (pushReturn) {
+                stack->push<EGLContext>(return_value);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglCreateContext\n");
         }
@@ -49,11 +60,18 @@ bool callEglCreateContext(Stack* stack, bool pushReturn) {
 }
 
 bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
-    int32_t context = stack->pop<int32_t>();
+    EGLContext context = stack->pop<EGLContext>();
+    EGLSurface read = stack->pop<EGLSurface>();
+    EGLSurface draw = stack->pop<EGLSurface>();
+    EGLDisplay display = stack->pop<EGLDisplay>();
     if (stack->isValid()) {
-        GAPID_INFO("eglMakeCurrent(%d)\n", context);
+        GAPID_INFO("eglMakeCurrent(%p, %p, %p, %p)\n", display, draw, read, context);
         if (eglMakeCurrent != nullptr) {
-            eglMakeCurrent(context);
+            EGLBoolean return_value = eglMakeCurrent(display, draw, read, context);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<EGLBoolean>(return_value);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglMakeCurrent\n");
         }
@@ -65,10 +83,16 @@ bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
 }
 
 bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
+    const void* surface = stack->pop<const void*>();
+    EGLDisplay display = stack->pop<EGLDisplay>();
     if (stack->isValid()) {
-        GAPID_INFO("eglSwapBuffers()\n");
+        GAPID_INFO("eglSwapBuffers(%p, %p)\n", display, surface);
         if (eglSwapBuffers != nullptr) {
-            eglSwapBuffers();
+            EGLBoolean return_value = eglSwapBuffers(display, surface);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<EGLBoolean>(return_value);
+            }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglSwapBuffers\n");
         }

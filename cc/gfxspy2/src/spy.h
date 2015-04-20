@@ -28,8 +28,7 @@ public:
     Spy();
     ~Spy();
 
-    void eglInitialize(EGLDisplay display, int32_t* major, int32_t* minor);
-    void eglMakeCurrent(int32_t context);
+    EGLBoolean eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor);
     HGLRC wglCreateContext(HDC hdc);
     BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
     CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx);

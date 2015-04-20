@@ -23,7 +23,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/build"
 )
 
-type tool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
+type misotool func(inputs build.FileSet, output build.File, cfg Config, env build.Environment) error
+type sisotool func(input build.File, output build.File, cfg Config, env build.Environment) error
 type depsFor func(output build.File, cfg Config, env build.Environment) (deps build.FileSet, valid bool)
 
 var sourcePatterns = []string{"*.cpp", "*.c", "*.cc", "*.mm", "*.asm"}
@@ -38,10 +39,10 @@ const (
 
 // Toolchain is a collection of tools used to build objects, libraries and programs.
 type Toolchain struct {
-	Compiler  tool                // Tool used to compile source to object files.
-	Archiver  tool                // Tool used to package object files into archives.
-	DllLinker tool                // Tool used to link objects and packages into dynamic libraries.
-	ExeLinker tool                // Tool used to link objects and packages into executables.
+	Compiler  sisotool            // Tool used to compile source to object files.
+	Archiver  misotool            // Tool used to package object files into archives.
+	DllLinker misotool            // Tool used to link objects and packages into dynamic libraries.
+	ExeLinker misotool            // Tool used to link objects and packages into executables.
 	DepsFor   depsFor             // Returns the list of dependencies for the given file.
 	LibName   func(Config) string // Returns the name of the emitted static library file.
 	DllName   func(Config) string // Returns the name of the emitted dynamic library file.
@@ -155,7 +156,7 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 			go func() {
 				defer wg.Done()
 				objects[i] = object
-				errors[i] = cfg.Toolchain.Compiler(build.FileSet{source}, object, cfg, env)
+				errors[i] = cfg.Toolchain.Compiler(source, object, cfg, env)
 			}()
 		} else {
 			objects[i] = object

@@ -37,6 +37,7 @@ limitations under the License.
   #include "{{Global "API"}}_types.h"
 ¶
   #include <gapic/encoder.h>
+  #include <gapic/log.h>
 ¶
   #include <stdint.h>
   #include <unordered_set>
@@ -152,6 +153,7 @@ limitations under the License.
   {{$spyname := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
+    GAPID_INFO("{{$name}}");
     {{$args := Macro "C++.CallArguments" $}}
     {{if $ret}}
       {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
@@ -163,9 +165,19 @@ limitations under the License.
 ¶
     mEncoder->U16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
     mEncoder->U32(0); // TODO: ContextID
-    {{range $i, $p := $.FullParameters}}
-      {{$pname := Macro "C++.ReadParameter" $p}}
-      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
+
+    {{range $p := $.FullParameters}}
+      {{if not $p.Output}}
+        {{$pname := Macro "C++.ReadParameter" $p}}
+        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
+      {{end}}
+    {{end}}
+
+    {{range $p := $.FullParameters}}
+      {{if $p.Output}}
+        {{$pname := Macro "C++.ReadParameter" $p}}
+        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
+      {{end}}
     {{end}}
 
     {{if $ret}}¶
@@ -186,11 +198,11 @@ limitations under the License.
 
   {{if eq $.Function.Return.Name $.Name}}
     {{$cnt_expr := GetAnnotation $.Function "ReturnSize"}}
-    {{if not $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
+    {{if IsNil $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
     {{Macro "C++.Read" (index $cnt_expr.Arguments 0)}}
   {{else}}
     {{$cnt_expr := GetArrayParamCount $}}
-    {{if not $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
+    {{if IsNil $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
     {{Macro "C++.Read" $cnt_expr}}
   {{end}}
 {{end}}

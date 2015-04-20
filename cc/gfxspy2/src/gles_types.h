@@ -918,7 +918,17 @@ typedef void* TexturePointer;
 
 typedef void* BufferDataPointer;
 
+typedef int EGLBoolean;
+
+typedef int EGLint;
+
+typedef void* EGLConfig;
+
+typedef void* EGLContext;
+
 typedef void* EGLDisplay;
+
+typedef void* EGLSurface;
 
 typedef void* HGLRC;
 

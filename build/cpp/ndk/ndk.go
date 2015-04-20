@@ -74,6 +74,7 @@ var APK = &cpp.Toolchain{
 }
 
 type tools struct {
+	as      build.File
 	cc      build.File
 	ar      build.File
 	sysroot build.File
@@ -111,6 +112,7 @@ func getTools(cfg cpp.Config) (*tools, error) {
 	ndkPlatform := fmt.Sprintf("android-%d", ndkAndroidVersion)
 
 	return &tools{
+		as: bin.Join(target.name + "-as" + build.HostExecutableExtension),
 		cc: bin.Join(target.name + "-gcc" + build.HostExecutableExtension),
 		ar: bin.Join(target.name + "-ar" + build.HostExecutableExtension),
 		incdirs: build.FileSet{
@@ -131,7 +133,7 @@ func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.
 	return cpp.IntermediatePath(output, ".dep", cfg, env)
 }
 
-func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("NDK.Compile")
 
 	tools, err := getTools(cfg)
@@ -139,27 +141,30 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	depfile := depFileFor(output, cfg, env)
+	switch input.Ext() {
+	case ".asm":
+		return tools.as.Exec(env, "-o", output.Absolute(), input.Absolute())
 
-	a := []string{
-		"--sysroot=" + tools.sysroot.Absolute(),
-		"-c", // Compile to .o
-		optFlags(cfg),
-		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
-		"-fPIC", // TODO: Not required for exes
+	default:
+		depfile := depFileFor(output, cfg, env)
+
+		a := []string{
+			"--sysroot=" + tools.sysroot.Absolute(),
+			"-c", // Compile to .o
+			optFlags(cfg),
+			"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
+			"-fPIC", // TODO: Not required for exes
+		}
+		a = append(a, cfg.CompilerArgs...)
+		for _, isp := range cfg.IncludeSearchPaths.Append(tools.incdirs...) {
+			a = append(a, fmt.Sprintf("-I%s", isp))
+		}
+		for n, v := range cfg.Defines {
+			a = append(a, fmt.Sprintf("-D%s=%s", n, v))
+		}
+		a = append(a, input.Absolute(), "-o", string(output))
+		return tools.cc.Exec(env, a...)
 	}
-	a = append(a, cfg.CompilerArgs...)
-	for _, isp := range cfg.IncludeSearchPaths.Append(tools.incdirs...) {
-		a = append(a, fmt.Sprintf("-I%s", isp))
-	}
-	for n, v := range cfg.Defines {
-		a = append(a, fmt.Sprintf("-D%s=%s", n, v))
-	}
-	for _, input := range inputs {
-		a = append(a, input.Absolute())
-	}
-	a = append(a, "-o", string(output))
-	return tools.cc.Exec(env, a...)
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {

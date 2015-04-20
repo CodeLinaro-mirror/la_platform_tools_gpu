@@ -100,7 +100,7 @@ func depFileFor(output build.File, cfg cpp.Config, env build.Environment) build.
 	return cpp.IntermediatePath(output, ".dep", cfg, env)
 }
 
-func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("GCC.Compile")
 
 	tools, err := getTools(cfg)
@@ -125,10 +125,7 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 	for n, v := range cfg.Defines {
 		a = append(a, fmt.Sprintf("-D%s=%s", n, v))
 	}
-	for _, input := range inputs {
-		a = append(a, input.Absolute())
-	}
-	a = append(a, "-o", string(output))
+	a = append(a, input.Absolute(), "-o", string(output))
 	return tools.cc.Exec(env, a...)
 }
 

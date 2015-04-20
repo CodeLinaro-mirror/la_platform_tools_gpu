@@ -128,6 +128,11 @@ func trace(name string, f interface{}) func(values ...interface{}) (interface{},
 	}
 }
 
+// IsNil returns true if v is nil.
+func (f *Functions) IsNil(v interface{}) bool {
+	return v == nil
+}
+
 // Error raises an error terminating execution of the template.
 //   {{Error "Foo returned error: %s" $err}}
 func (f *Functions) Error(s string, args ...interface{}) (string, error) {

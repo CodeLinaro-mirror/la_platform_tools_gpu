@@ -448,6 +448,9 @@ func getBuildTargets() map[string]Target {
 			IncludeSearchPaths: build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue")},
 			AdditionalSources:  build.FileSet{ndkRoot().Join("sources", "android", "native_app_glue", "android_native_app_glue.c")},
 		},
+		Spy: cpp.Config{
+			Libraries: build.FileSet{"log", "z", "m", "dl"},
+		},
 	})
 
 	return map[string]Target{

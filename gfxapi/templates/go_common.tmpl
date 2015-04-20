@@ -78,8 +78,9 @@ limitations under the License.
   {{else if IsS64           $}}0
   {{else if IsU64           $}}0
   {{else if IsF64           $}}0
-  {{else if IsPointerType   $}}nil
+  {{else if IsPointerType   $}}0
   {{else if IsString        $}}""
+  {{else if IsPseudonym     $}}{{Macro "Go.Type" $}}({{Macro "Go.Null" $.To}})
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}

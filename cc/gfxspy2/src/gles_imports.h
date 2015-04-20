@@ -28,10 +28,13 @@ namespace gapii {
 struct GlesImports {
     void Resolve();
 
-    typedef void(STDCALL *PFNEGLINITIALIZE)(EGLDisplay display, int32_t *major, int32_t *minor);
-    typedef void(STDCALL *PFNEGLCREATECONTEXT)(int32_t *version, int32_t *context);
-    typedef void(STDCALL *PFNEGLMAKECURRENT)(int32_t context);
-    typedef void(STDCALL *PFNEGLSWAPBUFFERS)();
+    typedef EGLBoolean(STDCALL *PFNEGLINITIALIZE)(EGLDisplay dpy, EGLint *major, EGLint *minor);
+    typedef EGLContext(STDCALL *PFNEGLCREATECONTEXT)(EGLDisplay display, EGLConfig config,
+                                                     EGLContext share_context,
+                                                     const EGLint *attrib_list);
+    typedef EGLBoolean(STDCALL *PFNEGLMAKECURRENT)(EGLDisplay display, EGLSurface draw,
+                                                   EGLSurface read, EGLContext context);
+    typedef EGLBoolean(STDCALL *PFNEGLSWAPBUFFERS)(EGLDisplay display, const void *surface);
     typedef HGLRC(STDCALL *PFNWGLCREATECONTEXT)(HDC hdc);
     typedef BOOL(STDCALL *PFNWGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(HDC hdc);

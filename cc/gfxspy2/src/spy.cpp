@@ -27,6 +27,10 @@
 namespace gapii {
 
 Spy::Spy() {
+    auto writer = ConnectionWriter::listen("127.0.0.1", "9286");
+    auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
+    mEncoder = encoder;
+    GlesSpy::init(encoder);
 }
 
 Spy::~Spy() {
@@ -34,32 +38,22 @@ Spy::~Spy() {
 
 void Spy::init(int32_t width, int32_t height,
         uint32_t colorFormat, uint32_t depthFormat, uint32_t stencilFormat) {
-    auto writer = ConnectionWriter::listen("127.0.0.1", "9286");
-    auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
-
-    mEncoder = encoder;
-    GlesSpy::init(encoder);
-
+    mImports.Resolve();
     mState.init(width, height, colorFormat, depthFormat, stencilFormat);
-    encoder->U16(0); // INIT_ID
-    encoder->U32(0); // ContextID
-    encoder->S32(width);
-    encoder->S32(height);
-    encoder->U32(colorFormat);
-    encoder->U32(depthFormat);
-    encoder->U32(stencilFormat);
+    mEncoder->U16(0); // INIT_ID
+    mEncoder->U32(0); // ContextID
+    mEncoder->S32(width);
+    mEncoder->S32(height);
+    mEncoder->U32(colorFormat);
+    mEncoder->U32(depthFormat);
+    mEncoder->U32(stencilFormat);
 }
 
-void Spy::eglInitialize(EGLDisplay display, int32_t* major, int32_t* minor) {
+EGLBoolean Spy::eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor) {
     using namespace RenderbufferFormat;
     // TODO: Fetch dimensions and formats from OS.
     init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8);
-    GlesSpy::eglInitialize(display, major, minor);
-}
-
-void Spy::eglMakeCurrent(int32_t context) {
-    GlesSpy::eglMakeCurrent(context);
-    mImports.Resolve();
+    return GlesSpy::eglInitialize(dpy, major, minor);
 }
 
 HGLRC Spy::wglCreateContext(HDC hdc) {

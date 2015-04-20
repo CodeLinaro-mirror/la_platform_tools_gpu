@@ -636,17 +636,17 @@ var (
 	binaryIDColor                                      = binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}
 	binaryIDCubemapLevel                               = binary.ID{0xac, 0x36, 0x1f, 0x38, 0xdc, 0xa2, 0x33, 0xa9, 0xce, 0xce, 0xfe, 0x64, 0x9f, 0x30, 0x8d, 0xaf, 0xb2, 0xd6, 0xde, 0x94}
 	binaryIDEglCreateContext                           = binary.ID{0x6a, 0x6f, 0x72, 0x49, 0x9c, 0xa2, 0xef, 0x18, 0x62, 0x1b, 0x6d, 0x7b, 0xf5, 0x5a, 0xa1, 0x79, 0x7d, 0x80, 0x4c, 0x88}
-	binaryIDEglCreateContext_In                        = binary.ID{0x5d, 0x10, 0xa8, 0x36, 0xed, 0xf3, 0x46, 0xd1, 0xb0, 0x34, 0x0e, 0x4f, 0x90, 0x8b, 0x0c, 0xa8, 0x74, 0x14, 0xf4, 0xea}
-	binaryIDEglCreateContext_Out                       = binary.ID{0x39, 0x85, 0x84, 0x32, 0x42, 0xdb, 0x66, 0x4e, 0x3f, 0xdd, 0x57, 0x93, 0x3e, 0x3f, 0x31, 0x04, 0x2a, 0xb8, 0x82, 0x99}
+	binaryIDEglCreateContext_In                        = binary.ID{0x0f, 0x0d, 0x7d, 0x81, 0xe8, 0x7d, 0x7f, 0x47, 0x66, 0x65, 0xe9, 0x65, 0xb8, 0x1a, 0x71, 0x36, 0x44, 0xf2, 0x1c, 0x66}
+	binaryIDEglCreateContext_Out                       = binary.ID{0x71, 0xbd, 0xed, 0xab, 0xa7, 0xc3, 0x13, 0x3a, 0xe0, 0x2b, 0x91, 0x76, 0xe3, 0x36, 0x39, 0x04, 0xb0, 0x26, 0x80, 0x0e}
 	binaryIDEglInitialize                              = binary.ID{0xc3, 0x96, 0xef, 0x9a, 0xcb, 0x5f, 0xfb, 0x83, 0xb3, 0xc2, 0x8c, 0x14, 0x01, 0x85, 0xc9, 0x21, 0x59, 0x9b, 0xb9, 0x99}
-	binaryIDEglInitialize_In                           = binary.ID{0xa2, 0x5f, 0xed, 0xd6, 0xac, 0xe1, 0x62, 0x54, 0xb8, 0x5d, 0x07, 0xe5, 0xb2, 0x51, 0x54, 0x52, 0x2c, 0x12, 0xcb, 0x05}
-	binaryIDEglInitialize_Out                          = binary.ID{0xe0, 0x2d, 0x1a, 0xa0, 0xf9, 0x8e, 0x34, 0x75, 0x1e, 0x19, 0x28, 0xad, 0x8b, 0x04, 0x8b, 0x2e, 0xf0, 0x2b, 0xf2, 0x7d}
+	binaryIDEglInitialize_In                           = binary.ID{0x44, 0x80, 0xb1, 0x79, 0x74, 0x4e, 0xcc, 0xa3, 0xda, 0x59, 0x71, 0xc4, 0xcb, 0xd8, 0x1b, 0x14, 0x9b, 0x07, 0xec, 0x4a}
+	binaryIDEglInitialize_Out                          = binary.ID{0xab, 0xa7, 0x2a, 0x0f, 0x73, 0x81, 0x84, 0x35, 0x98, 0x3c, 0x2c, 0x86, 0xbf, 0x13, 0xa6, 0x2f, 0x37, 0x7b, 0xfb, 0x62}
 	binaryIDEglMakeCurrent                             = binary.ID{0x65, 0xee, 0xe8, 0x53, 0x54, 0xe9, 0x38, 0xaf, 0xa6, 0x9c, 0xa0, 0x0e, 0x52, 0x24, 0x49, 0xb5, 0x9e, 0xb6, 0x9f, 0xdb}
-	binaryIDEglMakeCurrent_In                          = binary.ID{0x50, 0xfd, 0xde, 0x0d, 0x0b, 0xbb, 0x7c, 0xaa, 0x14, 0xd0, 0x2b, 0x42, 0x8a, 0x68, 0x47, 0xb8, 0x77, 0xa6, 0x1f, 0xcc}
-	binaryIDEglMakeCurrent_Out                         = binary.ID{0xf9, 0x96, 0x86, 0xfb, 0x25, 0x31, 0x36, 0x39, 0x5b, 0x94, 0x02, 0x30, 0x97, 0x36, 0x1c, 0xca, 0x70, 0xb1, 0xf5, 0x0e}
+	binaryIDEglMakeCurrent_In                          = binary.ID{0xee, 0x3d, 0x96, 0x07, 0xff, 0x90, 0x2c, 0xfb, 0x59, 0x39, 0x1f, 0x75, 0xb3, 0xb1, 0x28, 0xc7, 0xec, 0x5f, 0x05, 0x47}
+	binaryIDEglMakeCurrent_Out                         = binary.ID{0xe5, 0xeb, 0xc6, 0x34, 0x1e, 0x13, 0xee, 0xfd, 0x72, 0xf1, 0xe3, 0x5c, 0x89, 0x4d, 0x39, 0x3a, 0x5c, 0xb3, 0xb6, 0xd2}
 	binaryIDEglSwapBuffers                             = binary.ID{0xeb, 0xc7, 0x78, 0xbf, 0xd3, 0x0f, 0x07, 0x2d, 0xfb, 0xee, 0x73, 0x2d, 0xf3, 0x3d, 0xf3, 0xb7, 0x59, 0xb9, 0xaf, 0x2f}
-	binaryIDEglSwapBuffers_In                          = binary.ID{0xf7, 0x30, 0x1c, 0xc6, 0xd7, 0x10, 0xca, 0x48, 0xd8, 0x24, 0x69, 0xb5, 0x52, 0xa7, 0x0c, 0x39, 0x06, 0xc7, 0xf3, 0xbf}
-	binaryIDEglSwapBuffers_Out                         = binary.ID{0xeb, 0xbf, 0xeb, 0x76, 0xd7, 0xf0, 0x68, 0x0f, 0x64, 0x9b, 0xe0, 0x46, 0x5f, 0xa3, 0x91, 0x36, 0x95, 0xda, 0xa6, 0x24}
+	binaryIDEglSwapBuffers_In                          = binary.ID{0xa4, 0x29, 0x82, 0x4a, 0x4e, 0x65, 0x9f, 0xd8, 0x83, 0xaf, 0xd0, 0xd6, 0x4e, 0x61, 0x38, 0x44, 0x9a, 0x76, 0xdd, 0xb1}
+	binaryIDEglSwapBuffers_Out                         = binary.ID{0xd6, 0x85, 0xc9, 0x15, 0x9b, 0x2a, 0x61, 0xbd, 0x18, 0xc5, 0x2a, 0xe8, 0xe8, 0x39, 0x7f, 0xb5, 0x3c, 0x9f, 0x93, 0x2f}
 	binaryIDFlushPostBuffer                            = binary.ID{0x98, 0xef, 0xbe, 0x78, 0xb2, 0x49, 0xb8, 0x9f, 0x06, 0x10, 0xd6, 0x89, 0xc0, 0x1d, 0xe7, 0x6d, 0x74, 0x5d, 0x61, 0x04}
 	binaryIDFlushPostBuffer_In                         = binary.ID{0xe5, 0x6e, 0xeb, 0x42, 0x94, 0xcd, 0x5e, 0xee, 0xd1, 0x14, 0xd4, 0xe9, 0x2a, 0x23, 0x4f, 0x51, 0x7e, 0x52, 0xe0, 0x44}
 	binaryIDFlushPostBuffer_Out                        = binary.ID{0x91, 0xb7, 0xe5, 0x33, 0xe2, 0x4d, 0xb8, 0x8a, 0x4a, 0x52, 0x1b, 0x91, 0xb3, 0xad, 0x32, 0x0a, 0x0a, 0xf5, 0x0c, 0xd6}
@@ -1882,12 +1882,74 @@ func (*EglCreateContext_In) Class() binary.Class {
 	return (*binaryClassEglCreateContext_In)(nil)
 }
 func doEncodeEglCreateContext_In(e binary.Encoder, o *EglCreateContext_In) error {
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Config)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.ShareContext)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.AttribList))); err != nil {
+		return err
+	}
+	for i := range o.AttribList {
+		if err := e.Int64(int64(o.AttribList[i])); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 func doDecodeEglCreateContext_In(d binary.Decoder, o *EglCreateContext_In) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = EGLDisplay(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Config = EGLConfig(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.ShareContext = EGLContext(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.AttribList = make(EGLintArray, count)
+		for i := range o.AttribList {
+			if obj, err := d.Int64(); err != nil {
+				return err
+			} else {
+				o.AttribList[i] = EGLint(obj)
+			}
+		}
+	}
 	return nil
 }
 func doSkipEglCreateContext_In(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int64(); err != nil {
+				return err
+			}
+		}
+	}
 	return nil
 }
 func (*binaryClassEglCreateContext_In) ID() binary.ID      { return binaryIDEglCreateContext_In }
@@ -1912,32 +1974,21 @@ func (*EglCreateContext_Out) Class() binary.Class {
 	return (*binaryClassEglCreateContext_Out)(nil)
 }
 func doEncodeEglCreateContext_Out(e binary.Encoder, o *EglCreateContext_Out) error {
-	if err := e.Int32(o.Version); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Context); err != nil {
+	if err := e.Uint64(uint64(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEglCreateContext_Out(d binary.Decoder, o *EglCreateContext_Out) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Version = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Context = int32(obj)
+		o.Result = EGLContext(obj)
 	}
 	return nil
 }
 func doSkipEglCreateContext_Out(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
@@ -2021,7 +2072,7 @@ func (*EglInitialize_In) Class() binary.Class {
 	return (*binaryClassEglInitialize_In)(nil)
 }
 func doEncodeEglInitialize_In(e binary.Encoder, o *EglInitialize_In) error {
-	if err := e.Uint64(uint64(o.Display)); err != nil {
+	if err := e.Uint64(uint64(o.Dpy)); err != nil {
 		return err
 	}
 	return nil
@@ -2030,7 +2081,7 @@ func doDecodeEglInitialize_In(d binary.Decoder, o *EglInitialize_In) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Display = EGLDisplay(obj)
+		o.Dpy = EGLDisplay(obj)
 	}
 	return nil
 }
@@ -2060,32 +2111,43 @@ func (*EglInitialize_Out) Class() binary.Class {
 	return (*binaryClassEglInitialize_Out)(nil)
 }
 func doEncodeEglInitialize_Out(e binary.Encoder, o *EglInitialize_Out) error {
-	if err := e.Int32(o.Major); err != nil {
+	if err := e.Int64(int64(o.Major)); err != nil {
 		return err
 	}
-	if err := e.Int32(o.Minor); err != nil {
+	if err := e.Int64(int64(o.Minor)); err != nil {
+		return err
+	}
+	if err := e.Int64(int64(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEglInitialize_Out(d binary.Decoder, o *EglInitialize_Out) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
-		o.Major = int32(obj)
+		o.Major = EGLint(obj)
 	}
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
-		o.Minor = int32(obj)
+		o.Minor = EGLint(obj)
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = EGLBoolean(obj)
 	}
 	return nil
 }
 func doSkipEglInitialize_Out(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Int64(); err != nil {
 		return err
 	}
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
 		return err
 	}
 	return nil
@@ -2167,21 +2229,54 @@ func (*EglMakeCurrent_In) Class() binary.Class {
 	return (*binaryClassEglMakeCurrent_In)(nil)
 }
 func doEncodeEglMakeCurrent_In(e binary.Encoder, o *EglMakeCurrent_In) error {
-	if err := e.Int32(o.Context); err != nil {
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Draw)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Read)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Context)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeEglMakeCurrent_In(d binary.Decoder, o *EglMakeCurrent_In) error {
-	if obj, err := d.Int32(); err != nil {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Context = int32(obj)
+		o.Display = EGLDisplay(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Draw = EGLSurface(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Read = EGLSurface(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Context = EGLContext(obj)
 	}
 	return nil
 }
 func doSkipEglMakeCurrent_In(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	return nil
@@ -2206,12 +2301,23 @@ func (*EglMakeCurrent_Out) Class() binary.Class {
 	return (*binaryClassEglMakeCurrent_Out)(nil)
 }
 func doEncodeEglMakeCurrent_Out(e binary.Encoder, o *EglMakeCurrent_Out) error {
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeEglMakeCurrent_Out(d binary.Decoder, o *EglMakeCurrent_Out) error {
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = EGLBoolean(obj)
+	}
 	return nil
 }
 func doSkipEglMakeCurrent_Out(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
 	return nil
 }
 func (*binaryClassEglMakeCurrent_Out) ID() binary.ID      { return binaryIDEglMakeCurrent_Out }
@@ -2291,12 +2397,34 @@ func (*EglSwapBuffers_In) Class() binary.Class {
 	return (*binaryClassEglSwapBuffers_In)(nil)
 }
 func doEncodeEglSwapBuffers_In(e binary.Encoder, o *EglSwapBuffers_In) error {
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Surface)); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeEglSwapBuffers_In(d binary.Decoder, o *EglSwapBuffers_In) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = EGLDisplay(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Surface = memory.Pointer(obj)
+	}
 	return nil
 }
 func doSkipEglSwapBuffers_In(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
 	return nil
 }
 func (*binaryClassEglSwapBuffers_In) ID() binary.ID      { return binaryIDEglSwapBuffers_In }
@@ -2319,12 +2447,23 @@ func (*EglSwapBuffers_Out) Class() binary.Class {
 	return (*binaryClassEglSwapBuffers_Out)(nil)
 }
 func doEncodeEglSwapBuffers_Out(e binary.Encoder, o *EglSwapBuffers_Out) error {
+	if err := e.Int64(int64(o.Result)); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeEglSwapBuffers_Out(d binary.Decoder, o *EglSwapBuffers_Out) error {
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = EGLBoolean(obj)
+	}
 	return nil
 }
 func doSkipEglSwapBuffers_Out(d binary.Decoder) error {
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
 	return nil
 }
 func (*binaryClassEglSwapBuffers_Out) ID() binary.ID      { return binaryIDEglSwapBuffers_Out }

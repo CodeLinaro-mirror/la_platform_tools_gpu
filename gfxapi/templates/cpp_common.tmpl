@@ -73,6 +73,7 @@ limitations under the License.
   {{else if IsF64           $}}0
   {{else if IsPointerType   $}}nullptr
   {{else if IsString        $}}""
+  {{else if IsPseudonym     $}}{{Macro "C++.Null" $.To}}
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
@@ -499,7 +500,9 @@ limitations under the License.
   {{$ty       := TypeOf $}}
   {{$isResult := eq $.Name $.Function.Return.Name}}
   {{$deref    := not (or (IsPointerType $ty) (IsArray $ty) (IsString $ty) $isResult)}}
-  {{if and $.Output $deref}}*{{end}}{{$.Name}}
+  {{/* HACK: Avoid dereferencing nullptrs.
+       Remove when we change outputs to be explicit pointer types.*/}}
+  {{$.Name}}{{if and $.Output $deref}}? (*{{$.Name}}) : {{Macro "C++.Type" $ty}}{}{{end}}
 {{end}}
 
 

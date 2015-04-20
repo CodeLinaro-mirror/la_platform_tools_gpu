@@ -34,10 +34,16 @@ public:
     inline void startTimer(uint8_t const index);
     inline void stopTimer(uint8_t const index, uint64_t const result);
     inline void flushPostBuffer();
-    inline void eglInitialize(EGLDisplay const display, int32_t* const major, int32_t* const minor);
-    inline void eglCreateContext(int32_t* const version, int32_t* const context);
-    inline void eglMakeCurrent(int32_t const context);
-    inline void eglSwapBuffers();
+    inline void eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor,
+                              EGLBoolean const result);
+    inline void eglCreateContext(EGLDisplay const display, EGLConfig const config,
+                                 EGLContext const share_context, const EGLint* const attrib_list,
+                                 EGLContext const result);
+    inline void eglMakeCurrent(EGLDisplay const display, EGLSurface const draw,
+                               EGLSurface const read, EGLContext const context,
+                               EGLBoolean const result);
+    inline void eglSwapBuffers(EGLDisplay const display, const void* const surface,
+                               EGLBoolean const result);
     inline void wglCreateContext(HDC const hdc, HGLRC const result);
     inline void wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result);
     inline void wglSwapBuffers(HDC const hdc);
@@ -435,14 +441,27 @@ inline void GlesState::stopTimer(uint8_t const index, uint64_t const result) { r
 
 inline void GlesState::flushPostBuffer() {}
 
-inline void GlesState::eglInitialize(EGLDisplay const display, int32_t* const major,
-                                     int32_t* const minor) {}
+inline void GlesState::eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor,
+                                     EGLBoolean const result) {
+    return;
+}
 
-inline void GlesState::eglCreateContext(int32_t* const version, int32_t* const context) {}
+inline void GlesState::eglCreateContext(EGLDisplay const display, EGLConfig const config,
+                                        EGLContext const share_context,
+                                        const EGLint* const attrib_list, EGLContext const result) {
+    return;
+}
 
-inline void GlesState::eglMakeCurrent(int32_t const context) {}
+inline void GlesState::eglMakeCurrent(EGLDisplay const display, EGLSurface const draw,
+                                      EGLSurface const read, EGLContext const context,
+                                      EGLBoolean const result) {
+    return;
+}
 
-inline void GlesState::eglSwapBuffers() {}
+inline void GlesState::eglSwapBuffers(EGLDisplay const display, const void* const surface,
+                                      EGLBoolean const result) {
+    return;
+}
 
 inline void GlesState::wglCreateContext(HDC const hdc, HGLRC const result) { return; }
 
@@ -1067,8 +1086,10 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                               .SetHeight(height)
                               .SetSize(imageSize(width, height, format, type))
                               .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
-            memcpy(l.mData, data, l.mSize);
+            if (data != nullptr) {
+                read(static_cast<void*>(data), 0, l.mSize);
+                memcpy(l.mData, data, l.mSize);
+            }
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
             t->mFormat = static_cast<uint32_t>(format);
@@ -1088,8 +1109,10 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                               .SetHeight(height)
                               .SetSize(imageSize(width, height, format, type))
                               .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
-            memcpy(l.mData, data, l.mSize);
+            if (data != nullptr) {
+                read(static_cast<void*>(data), 0, l.mSize);
+                memcpy(l.mData, data, l.mSize);
+            }
             CubemapLevel cube = t->mCubemap[level];
             cube.mFaces[static_cast<uint32_t>(target)] = l;
             t->mCubemap[level] = cube;
@@ -1313,8 +1336,10 @@ inline void GlesState::glBufferData(uint32_t const target, int32_t const size,
                                     BufferDataPointer const data, uint32_t const usage) {
     BufferId id = this->BoundBuffers[target];
     std::shared_ptr<Buffer> b = this->Instances.mBuffers[id];
-    read(static_cast<void*>(data), 0, size);
-    memcpy(b->mData, data, size);
+    if (data != nullptr) {
+        read(static_cast<void*>(data), 0, size);
+        memcpy(b->mData, data, size);
+    }
     b->mSize = size;
     b->mUsage = usage;
 }
