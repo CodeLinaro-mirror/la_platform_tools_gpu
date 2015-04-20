@@ -53,10 +53,10 @@ func CreateUnboundedArchive(path string) Store {
 	records := make(map[binary.ID]span)
 
 	// Use a buffered reader to quickly read the active records
-	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(index, 256<<10)))
+	reader := vle.Reader(bufio.NewReaderSize(index, 256<<10))
 	for {
 		var r record
-		if err := r.decode(d); err != io.EOF {
+		if err := r.decode(cyclic.Decoder(reader)); err != io.EOF {
 			if err != nil {
 				panic(err)
 			}

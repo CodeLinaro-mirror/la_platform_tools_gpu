@@ -79,10 +79,10 @@ func CreateSmallArchive(path string, compactionSize int) Store {
 	records := make(map[binary.ID][]byte)
 
 	// Use a buffered reader to quickly read the archive records
-	d := cyclic.Decoder(vle.Reader(bufio.NewReaderSize(data, 256<<10)))
+	reader := vle.Reader(bufio.NewReaderSize(data, 256<<10))
 	for {
 		r := &keyValue{}
-		if err := d.Value(r); err != io.EOF {
+		if err := cyclic.Decoder(reader).Value(r); err != io.EOF {
 			if err != nil {
 				panic(err)
 			}
@@ -181,7 +181,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 	go func() {
 		// Output records using buffered IO.
 		writer := bufio.NewWriterSize(compacting, 256<<10)
-		e := cyclic.Encoder(vle.Writer(writer))
+		w := vle.Writer(writer)
 
 		size := 0
 		waste := 0
@@ -202,7 +202,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 				waste += prevSize
 			}
 
-			err := e.Value(insert)
+			err := cyclic.Encoder(w).Value(insert)
 			if err != nil {
 				panic(err)
 			}
@@ -226,7 +226,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		}
 
 		for _, record := range recordsCopyArray {
-			err := e.Value(record)
+			err := cyclic.Encoder(w).Value(record)
 			if err != nil {
 				panic(err)
 			}
@@ -383,8 +383,7 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 			buffer: data,
 		}
 
-		e := cyclic.Encoder(vle.Writer(s.data))
-		err := e.Value(record)
+		err := cyclic.Encoder(vle.Writer(s.data)).Value(record)
 		if err != nil {
 			panic(err)
 		}
