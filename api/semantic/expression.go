@@ -114,6 +114,18 @@ type ArrayIndex struct {
 // ExpressionType implements Expression returning the value type of the array.
 func (i *ArrayIndex) ExpressionType() Type { return i.ValueType }
 
+// Slice represents using the slicing operator on an array type.
+type Slice struct {
+	AST   *ast.Index // the underlying syntax node this was built from
+	Array Expression // the expression that returns the array to be indexed
+	Lower Expression // the inclusive lower bound to slice at
+	Upper Expression // the non-inclusive upper bound to slice at
+}
+
+// ExpressionType implements Expression.
+// It returns VoidType as slices are only valid in Copy assignments.
+func (i *Slice) ExpressionType() Type { return VoidType }
+
 // MapIndex represents using the indexing operator on a map type.
 type MapIndex struct {
 	AST       *ast.Index // the underlying syntax node this was built from
@@ -141,6 +153,16 @@ func (u Unknown) ExpressionType() Type {
 		return AnyType
 	}
 	return u.Inferred.ExpressionType()
+}
+
+// Ignore represents an _ expression.
+type Ignore struct {
+	AST ast.Node // the underlying syntax node this was built from
+}
+
+// ExpressionType implements Expression.
+func (i Ignore) ExpressionType() Type {
+	return AnyType
 }
 
 // Null represents a default value.

@@ -56,6 +56,7 @@ var (
 		semantic.Choice{},
 		semantic.ClassInitializer{},
 		semantic.Class{},
+		semantic.Copy{},
 		semantic.DeclareLocal{},
 		semantic.EnumEntry{},
 		semantic.Enum{},

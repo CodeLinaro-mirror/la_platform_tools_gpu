@@ -46,18 +46,29 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 	default:
 		lhs = expression(ctx, in.LHS)
 	}
-	if lhs != nil {
+	if in.RHS == nil {
+		if lhs == nil {
+			// lhs was deferred, but no rhs is available
+			lhs = expression(ctx, in.LHS)
+		}
+	} else if lhs != nil {
 		ctx.with(lhs.ExpressionType(), func() {
+			// allow us to infer rhs type from lhs
 			rhs = expression(ctx, in.RHS)
 		})
 	} else {
+		// lhs was deferred, do the rhs first
 		rhs = expression(ctx, in.RHS)
 		ctx.with(rhs.ExpressionType(), func() {
+			// allow us to infer lhs type from rhs
 			lhs = expression(ctx, in.LHS)
 		})
 	}
 	lt := lhs.ExpressionType()
-	rt := rhs.ExpressionType()
+	rt := semantic.Type(semantic.VoidType)
+	if rhs != nil {
+		rt = rhs.ExpressionType()
+	}
 	var out semantic.Expression
 	switch in.Operator {
 	case ast.OpIn:
@@ -98,6 +109,8 @@ func binaryOp(ctx *context, in *ast.BinaryOp) semantic.Expression {
 		if !equal(lt, rt) {
 			ctx.errorf(in, "range %s %s %s not allowed", typename(lt), in.Operator, typename(rt))
 		}
+		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
+	case ast.OpSlice:
 		out = &semantic.BinaryOp{AST: in, LHS: lhs, RHS: rhs, Type: lt, Operator: in.Operator}
 	default:
 		ctx.icef(in, "unknown binary operator %s", in.Operator)

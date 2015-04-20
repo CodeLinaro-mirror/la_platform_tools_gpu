@@ -251,6 +251,7 @@ limitations under the License.
 {{define "C++.StatementDefault"}}
   {{     if IsDeclareLocal $}}{{Macro "C++.StateType" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
+  {{else if IsCopy         $}}{{Macro "C++.Copy" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
   {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
   {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
@@ -290,6 +291,16 @@ limitations under the License.
   {{if IsArray (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
   {{else                     }}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to copy from Src to Dst
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.Copy"}}
+  {{AssertType $ "Copy"}}
 {{end}}
 
 

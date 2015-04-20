@@ -72,6 +72,15 @@ type Assign struct {
 	RHS      Expression  // the value to store
 }
 
+// Copy is the special form of assign that copies data between slices. One of
+// LHS or RHS may be missing, and if both are present the upper bound on one may
+// be inferred from the other.
+type Copy struct {
+	AST *ast.Assign // the underlying syntax node this was built from
+	Dst *Slice      // the slice to copy to
+	Src *Slice      // the slice to copy from
+}
+
 // MapAssign represents assigning to a map index expression.
 type MapAssign struct {
 	AST      *ast.Assign // the underlying syntax node this was built from

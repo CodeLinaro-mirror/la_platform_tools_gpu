@@ -34,6 +34,7 @@ limitations under the License.
   {{else if IsAssert       $}}
   {{else if IsAssign       $}}{{Macro "Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
   {{else if IsMapAssign    $}}{{Macro "MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
+  {{else if IsCopy         $}}{{Macro "Copy" $}}
   {{else if IsReturn       $}}{{Macro "Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsBranch       $}}if {{Macro "Read" $.Condition}} {
     {{Macro "Block" $.True}}
@@ -114,6 +115,20 @@ limitations under the License.
 */}}
 {{define "Assign"}}
   {{Macro "Read" $.LHS}} {{$.Operator}} {{Macro "Read" $.RHS}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to copy from Src to Dst
+-------------------------------------------------------------------------------
+*/}}
+{{define "Copy"}}
+  {{AssertType $ "Copy"}}
+  {{if and $.Src $.Dst}}//TODO: memcpy
+  {{else if $.Src}}read(memory.Pointer({{Macro "Read" $.Src.Array}}),{{Macro "Read" $.Src.Lower}},{{Macro "Read" $.Src.Upper}})
+  {{else}}write(memory.Pointer({{Macro "Read" $.Dst.Array}}),{{Macro "Read" $.Dst.Lower}},{{Macro "Read" $.Dst.Upper}})
+  {{end}}
 {{end}}
 
 
