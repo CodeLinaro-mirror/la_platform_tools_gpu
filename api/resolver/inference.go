@@ -73,7 +73,7 @@ func inferNumber(ctx *context, in *ast.Number, infer semantic.Type) semantic.Exp
 
 func inferUnknown(ctx *context, lhs semantic.Node, rhs semantic.Node) {
 	u := findUnknown(ctx, rhs)
-	if u != nil {
+	if u != nil && u.Inferred == nil {
 		u.Inferred = lhsToObserved(ctx, lhs)
 	}
 }

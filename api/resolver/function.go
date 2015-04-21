@@ -92,9 +92,7 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 		}
 		ctx.with(semantic.VoidType, func() {
 			for _, p := range out.FullParameters {
-				if p != out.Return {
-					ctx.add(p.Name, p)
-				}
+				ctx.add(p.Name, p)
 			}
 			if out.This != nil {
 				ctx.add(string(ast.KeywordThis), out.This)
