@@ -32,6 +32,7 @@ const (
 	OpBlockEnd      = "}"
 	OpIndexStart    = "["
 	OpIndexEnd      = "]"
+	OpSlice         = ":"
 	OpListStart     = "("
 	OpListSeparator = ","
 	OpListEnd       = ")"
@@ -91,6 +92,7 @@ func init() {
 		OpBlockEnd,
 		OpIndexStart,
 		OpIndexEnd,
+		OpSlice,
 		OpListStart,
 		OpListSeparator,
 		OpListEnd,

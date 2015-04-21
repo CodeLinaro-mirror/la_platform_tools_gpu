@@ -135,6 +135,9 @@ func (ctx *context) disambiguate(matches []semantic.Node) []semantic.Node {
 // If it cannot find exactly 1 unambiguous match, it reports an error, and
 // nil is returned.
 func (ctx *context) get(at ast.Node, name string) semantic.Node {
+	if name == "_" {
+		return &semantic.Ignore{AST: at}
+	}
 	matches := ctx.disambiguate(ctx.find(name))
 	switch len(matches) {
 	case 0:
