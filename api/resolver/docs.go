@@ -34,7 +34,9 @@ func processSeparator(docs *[]string, s parse.Separator) {
 		switch {
 		case strings.HasPrefix(s, lineDocStart):
 			line := strings.TrimSpace(strings.TrimPrefix(s, lineDocStart))
-			*docs = append(*docs, line)
+			if !strings.HasPrefix(line, "/") {
+				*docs = append(*docs, line)
+			}
 		case strings.HasPrefix(s, blockDocStart):
 			s = strings.TrimSuffix(strings.TrimPrefix(s, blockDocStart), blockDocEnd)
 			lines := strings.Split(s, "\n")

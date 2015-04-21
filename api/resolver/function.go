@@ -87,9 +87,6 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 	in := out.AST
 	out.Owner = owner
 	if in.Block != nil {
-		if in.Block.Docs != nil {
-			out.Docs = []string{in.Block.Docs.URL.String()}
-		}
 		ctx.with(semantic.VoidType, func() {
 			for _, p := range out.FullParameters {
 				ctx.add(p.Name, p)

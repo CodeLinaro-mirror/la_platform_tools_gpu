@@ -1238,31 +1238,31 @@ cmd void flushPostBuffer() {}
 type pointer EGLDisplay
 
 @replay_custom
+///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
 cmd void eglInitialize(EGLDisplay display, out s32 major, out s32 minor) {
-    http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
     major = ?
     minor = ?
 }
 
 @replay_custom
+///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml
 cmd void eglCreateContext(out s32 version, out s32 context) {  // HACK: Hacked to match the spy's output
 // cmd void eglCreateContext(pointer display, pointer config, pointer share_context, array<s32> attrib_list) {
-    http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml
     version = ?
     context = ?
 }
 
 @replay_custom
+///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml
 cmd void eglMakeCurrent(s32 context) {  // HACK: Hacked to match the spy's output
 // cmd void eglMakeCurrent(pointer display, pointer draw, pointer read, pointer context) {
-    http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml
 }
 
 @replay_custom
 @EndOfFrame
+///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
 cmd void eglSwapBuffers() {  // HACK: Hacked to match the spy's output
 // cmd bool eglSwapBuffers(pointer display, pointer surface) {
-    http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
 }
 
 /////////////////////////////////////////////////////////////////
@@ -1274,23 +1274,23 @@ type int BOOL
 
 @replay_custom
 @ReturnSize(0)
+///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx
 cmd HGLRC wglCreateContext(HDC hdc) {
-    http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx
     assert len(hdc) >= 0
     return ?
 }
 
 @replay_custom
 @ReturnSize(0)
+///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx
 cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
-    http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx
     return ?
 }
 
 @replay_custom
 @EndOfFrame
+///http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
 cmd void wglSwapBuffers(HDC hdc) {
-    http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
 }
 
 /////////////////////////////////////////////////////////////////
@@ -1301,8 +1301,8 @@ type pointer CGLPixelFormatObj
 type pointer CGLContextObj
 
 @replay_custom
+///http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
 cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, /* out HACK: Breaks array count */ CGLContextObj ctx) {
-    http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
     assert len(pix) >= 0
     assert len(share) >= 0
     assert len(ctx) >= 0
@@ -1313,13 +1313,13 @@ cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, /* out
 // GLES 1 APIs
 /////////////////////////////////////////////////////////////////
 
+///http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
 cmd void glEnableClientState(ArrayType type) {
-    http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
     Capabilities[type as Capability] = true
 }
 
+///http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
 cmd void glDisableClientState(ArrayType type) {
-    http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
     Capabilities[type as Capability] = false
 }
 
@@ -1328,87 +1328,87 @@ cmd void glDisableClientState(ArrayType type) {
 /////////////////////////////////////////////////////////////////
 
 // OES_get_program_binary
+///http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
 cmd void glGetProgramBinaryOES(ProgramId   program,
                                s32         buffer_size,
                                out s32     bytes_written,
                                out u32     binary_format,
                                out pointer binary) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
     assert len(binary) >= buffer_size
     bytes_written = ?
     binary_format = ?
     binary = ?
 }
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
 cmd void glProgramBinaryOES(ProgramId program,
                             u32       binary_format,
                             pointer   binary,
                             s32       binary_size) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
     assert len(binary) >= binary_size
 }
 
 // QCOM_tiled_rendering
 
+///http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt
 cmd void glStartTilingQCOM(s32 x, s32 y, s32 width, s32 height, TilePreserveMaskQCOM preserveMask) {
-    http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt
 cmd void glEndTilingQCOM(TilePreserveMaskQCOM preserve_mask) {
-    http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt
 }
 
 // EXT_discard_framebuffer
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt
 cmd void glDiscardFramebufferEXT(FramebufferTarget target, s32 numAttachments, array<DiscardFramebufferAttachment> attachments) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt
     assert len(attachments) >= numAttachments
 }
 
 // EXT_debug_marker
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 cmd void glInsertEventMarkerEXT(s32 length, string marker) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 cmd void glPushGroupMarkerEXT(s32 length, string marker) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 cmd void glPopGroupMarkerEXT() {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt
 }
 
 // EXT_texture_storage
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTexStorage1DEXT(TextureTarget target, s32 levels, TexelFormat format, s32 width) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTexStorage2DEXT(TextureTarget target, s32 levels, TexelFormat format, s32 width, s32 height) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTexStorage3DEXT(TextureTarget target, s32 levels, TexelFormat format, s32 width, s32 height, s32 depth) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTextureStorage1DEXT(TextureId texture, TextureTarget target, s32 levels, TexelFormat format, s32 width) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTextureStorage2DEXT(TextureId texture, TextureTarget target, s32 levels, TexelFormat format, s32 width, s32 height) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 cmd void glTextureStorage3DEXT(TextureId texture, TextureTarget target, s32 levels, TexelFormat format, s32 width, s32 height, s32 depth) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt
 }
 
 // OES_vertex_array_object
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glGenVertexArraysOES(s32 count, inout array<VertexArrayId> arrays) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
     assert len(arrays) >= count
     for i in (0 .. count) {
         id := ? as VertexArrayId
@@ -1417,45 +1417,46 @@ cmd void glGenVertexArraysOES(s32 count, inout array<VertexArrayId> arrays) {
     }
 }
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glBindVertexArrayOES(VertexArrayId array) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
     if !(array in Instances.VertexArrays) {
       Instances.VertexArrays[array] = new VertexArray{}
     }
     BoundVertexArray = array
 }
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glDeleteVertexArraysOES(s32 count, array<VertexArrayId> arrays) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
     assert len(arrays) >= count
     for i in (0 .. count) {
       Instances.VertexArrays.Delete(arrays[i])
     }
 }
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd bool glIsVertexArrayOES(VertexArrayId array) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
     return array in Instances.VertexArrays
 }
 
 // OES_EGL_image extension:
 @replay_custom_value type pointer ImageOES
+///http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt
 cmd void glEGLImageTargetTexture2DOES(ImageTargetTexture target, ImageOES image) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt
 cmd void glEGLImageTargetRenderbufferStorageOES(ImageTargetRenderbufferStorage target, TexturePointer image) {
-    http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt
 }
 
 // EXT_robustness
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd ResetStatus glGetGraphicsResetStatusEXT() {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
     return ?
 }
 
 /*
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd void glReadnPixelsEXT(s32 x,
                           s32 y,
                           s32 width,
@@ -1464,21 +1465,20 @@ cmd void glReadnPixelsEXT(s32 x,
                           enum type,
                           s32 buffer_size,
                           out pointer data) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd void glGetnUniformfvEXT(u32             program,
                             UniformLocation location,
                             s32             buffer_size,
                             inout           array<f32> params) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd void glGetnUniformivEXT(u32             program,
                             UniformLocation location,
                             s32             buffer_size,
                             inout           array<s32> params) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 }
 */
 
@@ -1486,45 +1486,45 @@ cmd void glGetnUniformivEXT(u32             program,
 // GLES 2 APIs
 /////////////////////////////////////////////////////////////////
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml
 cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, string name) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml
     p := Instances.Programs[program]
     p.AttributeBindings[name] = location
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml
 cmd void glBlendFunc(BlendFactor src_factor, BlendFactor dst_factor) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml
     Blending.SrcRgbBlendFactor   = src_factor
     Blending.SrcAlphaBlendFactor = src_factor
     Blending.DstRgbBlendFactor   = dst_factor
     Blending.DstAlphaBlendFactor = dst_factor
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml
 cmd void glBlendFuncSeparate(BlendFactor src_factor_rgb,
                              BlendFactor dst_factor_rgb,
                              BlendFactor src_factor_alpha,
                              BlendFactor dst_factor_alpha) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml
     Blending.SrcRgbBlendFactor   = src_factor_rgb
     Blending.DstRgbBlendFactor   = dst_factor_rgb
     Blending.SrcAlphaBlendFactor = src_factor_alpha
     Blending.DstAlphaBlendFactor = dst_factor_alpha
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml
 cmd void glBlendEquation(BlendEquation equation) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml
     Blending.BlendEquationRgb   = equation
     Blending.BlendEquationAlpha = equation
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml
 cmd void glBlendEquationSeparate(BlendEquation rgb, BlendEquation alpha) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml
     Blending.BlendEquationRgb   = rgb
     Blending.BlendEquationAlpha = alpha
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml
 cmd void glBlendColor(f32 red, f32 green, f32 blue, f32 alpha) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml
     Blending.BlendColor = Color{
       Red:   red,
       Green: green,
@@ -1533,25 +1533,25 @@ cmd void glBlendColor(f32 red, f32 green, f32 blue, f32 alpha) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml
 cmd void glEnableVertexAttribArray(AttributeLocation location) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml
     a := VertexAttributeArrays[location]
     a.Enabled = true
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml
 cmd void glDisableVertexAttribArray(AttributeLocation location) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml
     a := VertexAttributeArrays[location]
     a.Enabled = false
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml
 cmd void glVertexAttribPointer(AttributeLocation location,
                                s32               size,
                                VertexAttribType  type,
                                bool              normalized,
                                s32               stride,
                                VertexPointer     data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml
     assert (size >= 1) && (size <= 4)
     assert stride >= 0
     a := VertexAttributeArrays[location]
@@ -1563,6 +1563,7 @@ cmd void glVertexAttribPointer(AttributeLocation location,
     a.Buffer     = BoundBuffers[GL_ARRAY_BUFFER]
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml
 cmd void glGetActiveAttrib(ProgramId            program,
                            AttributeLocation    location,
                            s32                  buffer_size,
@@ -1570,7 +1571,6 @@ cmd void glGetActiveAttrib(ProgramId            program,
                            out s32              vector_count,
                            out ShaderAttribType type,
                            out string           name) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml
     assert len(name) >= buffer_size    // TODO: We need to examine the shader to build the vertex attributes map at link time
     // a := program.VertexAttributes[location]
     buffer_bytes_written = ? // min(buffer_size, strlen(a.Name))
@@ -1582,6 +1582,7 @@ cmd void glGetActiveAttrib(ProgramId            program,
 // TODO: This method cannot use UniformLocation as the location type
 // as this will create an unwanted self-mapping to<->from the captured
 // location.
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml
 cmd void glGetActiveUniform(ProgramId             program,
                             s32                   location,
                             s32                   buffer_size,
@@ -1589,7 +1590,6 @@ cmd void glGetActiveUniform(ProgramId             program,
                             out s32               size,
                             out ShaderUniformType type,
                             out string            name) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml
     assert len(name) >= buffer_size    // TODO: We need to examine the shader to build the uniforms map at link time
     // a := program.Uniforms[location]
     buffer_bytes_written = ? // min(buffer_size, strlen(a.Name))
@@ -1598,18 +1598,18 @@ cmd void glGetActiveUniform(ProgramId             program,
     name                 = ? // a.Name
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml
 cmd Error glGetError() {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml
     return ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml
 cmd void glGetProgramiv(ProgramId program, ProgramParameter parameter, inout array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml
     assert len(value) >= 1    value = ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml
 cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, inout array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml
     assert len(value) >= 1
     s := Instances.Shaders[shader]
     value[0] = switch (parameter) {
@@ -1621,27 +1621,27 @@ cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, inout array<s
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml
 cmd UniformLocation glGetUniformLocation(ProgramId program, string name) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml
     return ?
 }
 
 @replay_custom // Translates to glBindAttribLocation
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml
 cmd AttributeLocation glGetAttribLocation(ProgramId program, string name) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml
     return ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml
 cmd void glPixelStorei(PixelStoreParameter parameter, s32 value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml
     assert((value == 1) || (value == 2) || (value == 4) || (value == 8))
     PixelStorage[parameter] = value
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
 cmd void glTexParameteri(TextureTarget    target,
                          TextureParameter parameter,
                          s32              value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
     id := TextureUnits[ActiveTextureUnit][target]
     t  := Instances.Textures[id]
     switch (parameter) {
@@ -1657,10 +1657,10 @@ cmd void glTexParameteri(TextureTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
 cmd void glTexParameterf(TextureTarget    target,
                          TextureParameter parameter,
                          f32              value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
     id := TextureUnits[ActiveTextureUnit][target]
     t  := Instances.Textures[id]
     switch (parameter) {
@@ -1676,10 +1676,10 @@ cmd void glTexParameterf(TextureTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
 cmd void glGetTexParameteriv(TextureTarget    target,
                              TextureParameter parameter,
                              inout array<s32>   values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
     assert len(values) >= 1
     id := TextureUnits[ActiveTextureUnit][target]
     t  := Instances.Textures[id]
@@ -1696,10 +1696,10 @@ cmd void glGetTexParameteriv(TextureTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
 cmd void glGetTexParameterfv(TextureTarget    target,
                              TextureParameter parameter,
                              inout array<f32>   values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
     assert len(values) >= 1
     id := TextureUnits[ActiveTextureUnit][target]
     t  := Instances.Textures[id]
@@ -1716,8 +1716,8 @@ cmd void glGetTexParameterfv(TextureTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1i(UniformLocation location, s32 value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT
@@ -1725,8 +1725,8 @@ cmd void glUniform1i(UniformLocation location, s32 value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC2
@@ -1734,8 +1734,8 @@ cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value2) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC3
@@ -1743,8 +1743,8 @@ cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value2, s32 value3) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC4
@@ -1752,8 +1752,8 @@ cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1763,8 +1763,8 @@ cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1774,8 +1774,8 @@ cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1785,8 +1785,8 @@ cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*4)
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1796,8 +1796,8 @@ cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1f(UniformLocation location, f32 value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
@@ -1805,8 +1805,8 @@ cmd void glUniform1f(UniformLocation location, f32 value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
@@ -1814,8 +1814,8 @@ cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value2) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
@@ -1823,8 +1823,8 @@ cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value2, f32 value3) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     program := Instances.Programs[BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
@@ -1832,8 +1832,8 @@ cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= count
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1843,8 +1843,8 @@ cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*2)
     program := Instances.Programs[BoundProgram]
     // TODO: Use count
@@ -1854,8 +1854,8 @@ cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*3)
     // TODO: Use count
     program := Instances.Programs[BoundProgram]
@@ -1865,8 +1865,8 @@ cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(value) >= (count*4)
     // TODO: Use count
     program := Instances.Programs[BoundProgram]
@@ -1876,8 +1876,8 @@ cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*4)
     // TODO: Use count
     program := Instances.Programs[BoundProgram]
@@ -1890,8 +1890,8 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*9)
     // TODO: Use count
     program := Instances.Programs[BoundProgram]
@@ -1905,8 +1905,8 @@ cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose,
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
     assert len(values) >= (count*16)
     // TODO: Use count
     program := Instances.Programs[BoundProgram]
@@ -1920,95 +1920,95 @@ cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose,
     program.Uniforms[location] = uniform
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
 cmd void glGetUniformfv(ProgramId program, UniformLocation location, array<f32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
     assert len(values) >= 1
     // p := Instances.Programs[program]
     // uniform := p.Uniforms[location]
     // values = uniform.Value as array<f32>
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
 cmd void glGetUniformiv(ProgramId program, UniformLocation location, array<s32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml
     assert len(values) >= 1
     // p := Instances.Programs[program]
     // uniform := p.Uniforms[location]
     // values = uniform.Value as array<s32>
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib1f(AttributeLocation location, f32 value0) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib2f(AttributeLocation location, f32 value0, f32 value1) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib3f(AttributeLocation location, f32 value0, f32 value1, f32 value2) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib4f(AttributeLocation location, f32 value0, f32 value1, f32 value2, f32 value3) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib1fv(AttributeLocation location, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
     assert len(value) >= 1
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib2fv(AttributeLocation location, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
     assert len(value) >= 2
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib3fv(AttributeLocation location, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
     assert len(value) >= 3
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
 cmd void glVertexAttrib4fv(AttributeLocation location, array<f32> value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml
     assert len(value) >= 4
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml
 cmd void glGetShaderPrecisionFormat(ShaderType shader_type, PrecisionType precision_type, inout array<s32> range, out s32 precision) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml
     assert len(range) >= 2
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml
 cmd void glDepthMask(bool enabled) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml
     Rasterizing.DepthMask = enabled
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml
 cmd void glDepthFunc(TestFunction function) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml
     Rasterizing.DepthTestFunction = function
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml
 cmd void glDepthRangef(f32 near, f32 far) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml
     Rasterizing.DepthNear = near
     Rasterizing.DepthFar = far
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml
 cmd void glColorMask(bool red, bool green, bool blue, bool alpha) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml
     Rasterizing.ColorMaskRed   = red
     Rasterizing.ColorMaskGreen = green
     Rasterizing.ColorMaskBlue  = blue
     Rasterizing.ColorMaskAlpha = alpha
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml
 cmd void glStencilMask(u32 mask) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml
     Rasterizing.StencilMask[GL_FRONT] = mask
     Rasterizing.StencilMask[GL_BACK] = mask
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml
 cmd void glStencilMaskSeparate(FaceMode face, u32 mask) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml
     switch (face) {
         case GL_FRONT: Rasterizing.StencilMask[GL_FRONT] = mask
         case GL_BACK:  Rasterizing.StencilMask[GL_BACK] = mask
@@ -2019,27 +2019,27 @@ cmd void glStencilMaskSeparate(FaceMode face, u32 mask) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml
 cmd void glStencilFuncSeparate(FaceMode     face,
                                TestFunction function,
                                s32          reference_value,
                                s32          mask) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml
 cmd void glStencilOpSeparate(FaceMode      face,
                              StencilAction stencil_fail,
                              StencilAction stencil_pass_depth_fail,
                              StencilAction stencil_pass_depth_pass) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml
 cmd void glFrontFace(FaceOrientation orientation) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml
     Rasterizing.FrontFace = orientation
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml
 cmd void glViewport(s32 x, s32 y, s32 width, s32 height) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml
     Rasterizing.Viewport = Rect{
         X:      x,
         Y:      y,
@@ -2048,8 +2048,8 @@ cmd void glViewport(s32 x, s32 y, s32 width, s32 height) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml
 cmd void glScissor(s32 x, s32 y, s32 width, s32 height) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml
     Rasterizing.Scissor = Rect{
         X:      x,
         Y:      y,
@@ -2058,16 +2058,16 @@ cmd void glScissor(s32 x, s32 y, s32 width, s32 height) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml
 cmd void glActiveTexture(TextureUnit unit) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml
     ActiveTextureUnit = unit
     if !(unit in TextureUnits) {
         TextureUnits[unit] = TextureUnits[unit]
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml
 cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml
     assert len(textures) >= count
     for i in (0 .. count) {
       id := ? as TextureId
@@ -2076,27 +2076,28 @@ cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml
 cmd void glDeleteTextures(s32 count, array<TextureId> textures) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml
     assert len(textures) >= count
     for i in (0 .. count) {
       Instances.Textures.Delete(textures[i])
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml
 cmd bool glIsTexture(TextureId texture) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml
     return texture in Instances.Textures
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
 cmd void glBindTexture(TextureTarget target, TextureId texture) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
     if !(texture in Instances.Textures) {
       Instances.Textures[texture] = new Texture{}
     }
     TextureUnits[ActiveTextureUnit][target] = texture
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml
 cmd void glTexImage2D(TextureImageTarget target,
                       s32                level,
                       TexelFormat        internal_format,
@@ -2106,7 +2107,6 @@ cmd void glTexImage2D(TextureImageTarget target,
                       TexelFormat        format,
                       TexelType          type,
                       TexturePointer     data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml
     assert(internal_format == format)
     assert(border == 0)
     switch(target) {
@@ -2148,6 +2148,7 @@ cmd void glTexImage2D(TextureImageTarget target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml
 cmd void glTexSubImage2D(TextureImageTarget target,
                          s32                level,
                          s32                xoffset,
@@ -2157,7 +2158,6 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                          TexelFormat        format,
                          TexelType          type,
                          TexturePointer     data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml
     // TODO: This does not consider xoffset or yoffset and completely replaces the level.
     // FIX.
     switch(target) {
@@ -2199,6 +2199,7 @@ cmd void glTexSubImage2D(TextureImageTarget target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml
 cmd void glCopyTexImage2D(TextureImageTarget target,
                           s32                level,
                           TexelFormat        format,
@@ -2207,9 +2208,9 @@ cmd void glCopyTexImage2D(TextureImageTarget target,
                           s32                width,
                           s32                height,
                           s32                border) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml
 cmd void glCopyTexSubImage2D(TextureImageTarget target,
                              s32                level,
                              s32                xoffset,
@@ -2218,9 +2219,9 @@ cmd void glCopyTexSubImage2D(TextureImageTarget target,
                              s32                y,
                              s32                width,
                              s32                height) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml
 cmd void glCompressedTexImage2D(TextureImageTarget    target,
                                 s32                   level,
                                 CompressedTexelFormat format,
@@ -2229,7 +2230,6 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                                 s32                   border,
                                 s32                   image_size,
                                 TexturePointer        data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml
     assert(border == 0)
     switch(target) {
         case GL_TEXTURE_2D: {
@@ -2270,6 +2270,7 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml
 cmd void glCompressedTexSubImage2D(TextureImageTarget    target,
                                    s32                   level,
                                    s32                   xoffset,
@@ -2279,13 +2280,13 @@ cmd void glCompressedTexSubImage2D(TextureImageTarget    target,
                                    CompressedTexelFormat format,
                                    s32                   image_size,
                                    TexturePointer        data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml
 cmd void glGenerateMipmap(TextureImageTarget target) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml
 cmd void glReadPixels(s32              x,
                       s32              y,
                       s32              width,
@@ -2293,12 +2294,11 @@ cmd void glReadPixels(s32              x,
                       BaseTexelFormat  format,
                       TexelType        type,
                       out pointer      data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml
     assert len(data) >= imageSize(width, height, format as TexelFormat, type)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
 cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
     assert len(framebuffers) >= count
     for i in (0 .. count) {
         id := ? as FramebufferId
@@ -2307,8 +2307,8 @@ cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml
 cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml
     if !(framebuffer in Instances.Framebuffers) {
         Instances.Framebuffers[framebuffer] = new Framebuffer{}
     }
@@ -2320,26 +2320,26 @@ cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) 
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml
 cmd FramebufferStatus glCheckFramebufferStatus(FramebufferTarget target) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml
     return ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml
 cmd void glDeleteFramebuffers(s32 count, array<FramebufferId> framebuffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml
     assert len(framebuffers) >= count
     for i in (0 .. count) {
         Instances.Framebuffers.Delete(framebuffers[i])
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml
 cmd bool glIsFramebuffer(FramebufferId framebuffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml
     return framebuffer in Instances.Framebuffers
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml
 cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml
     assert len(renderbuffers) >= count
     for i in (0 .. count) {
         id := ? as RenderbufferId
@@ -2348,19 +2348,19 @@ cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml
 cmd void glBindRenderbuffer(RenderbufferTarget target, RenderbufferId renderbuffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml
     if !(renderbuffer in Instances.Renderbuffers) {
       Instances.Renderbuffers[renderbuffer] = new Renderbuffer{}
     }
     BoundRenderbuffers[target] = renderbuffer
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml
 cmd void glRenderbufferStorage(RenderbufferTarget target,
                                RenderbufferFormat format,
                                s32                width,
                                s32                height) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml
     id := BoundRenderbuffers[target]
     rb := Instances.Renderbuffers[id]
     rb.Format = format
@@ -2368,23 +2368,23 @@ cmd void glRenderbufferStorage(RenderbufferTarget target,
     rb.Height = height
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml
 cmd void glDeleteRenderbuffers(s32 count, array<RenderbufferId> renderbuffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml
     assert len(renderbuffers) >= count
     for i in (0 .. count) {
         Instances.Renderbuffers.Delete(renderbuffers[i])
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml
 cmd bool glIsRenderbuffer(RenderbufferId renderbuffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml
     return renderbuffer in Instances.Renderbuffers
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml
 cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
                                       RenderbufferParameter parameter,
                                       inout array<s32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml
     assert len(values) >= 1
     id := BoundRenderbuffers[target]
     rb := Instances.Renderbuffers[id]
@@ -2402,8 +2402,8 @@ cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml
 cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml
     assert len(buffers) >= count
     for i in (0 .. count) {
         id := ? as BufferId
@@ -2412,16 +2412,16 @@ cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml
 cmd void glBindBuffer(BufferTarget target, BufferId buffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml
     if !(buffer in Instances.Buffers) {
         Instances.Buffers[buffer] = new Buffer{}
     }
     BoundBuffers[target] = buffer
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml
 cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, BufferUsage usage) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml
     id := BoundBuffers[target]
     b  := Instances.Buffers[id]
     read(data as pointer, 0, size)
@@ -2430,29 +2430,29 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
     b.Usage = usage
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml
 cmd void glBufferSubData(BufferTarget target, s32 offset, s32 size, pointer data) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml
     assert len(data) >= size
     // TODO: Assignment to subset
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml
 cmd void glDeleteBuffers(s32 count, array<BufferId> buffers) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml
     assert len(buffers) >= count
     for i in (0 .. count) {
         Instances.Buffers.Delete(buffers[i])
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml
 cmd bool glIsBuffer(BufferId buffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml
     return buffer in Instances.Buffers
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml
 cmd void glGetBufferParameteriv(BufferTarget    target,
                                 BufferParameter parameter,
                                 out s32         value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml
     id := BoundBuffers[target]
     b  := Instances.Buffers[id]
     value = switch (parameter) {
@@ -2461,8 +2461,8 @@ cmd void glGetBufferParameteriv(BufferTarget    target,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml
 cmd ShaderId glCreateShader(ShaderType type) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml
     id := ? as ShaderId
     Instances.Shaders[id] = new Shader{}
     s := Instances.Shaders[id]
@@ -2470,28 +2470,28 @@ cmd ShaderId glCreateShader(ShaderType type) {
     return id
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml
 cmd void glDeleteShader(ShaderId shader) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml
     s := Instances.Shaders[shader]
     s.Deletable = true
     // TODO: refcount shader attachment and only destroy if zero
     Instances.Shaders.Delete(shader)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml
 cmd void glShaderSource(ShaderId shader, s32 count, array<string> source, array<s32> length) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml
     assert len(source) >= count
     assert len(length) >= count
     s := Instances.Shaders[shader]
     s.Source = source
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml
 cmd void glShaderBinary(s32             count,
                         array<ShaderId> shaders,
                         u32             binary_format,
                         pointer         binary,
                         s32             binary_size) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml
     assert len(shaders) >= count
     assert len(binary) >= binary_size
     for i in (0 .. count) {
@@ -2499,22 +2499,22 @@ cmd void glShaderBinary(s32             count,
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml
 cmd void glGetShaderInfoLog(ShaderId   shader,
                             s32        buffer_length,
                             out s32    string_length_written,
                             out string info) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml
     assert len(info) >= buffer_length
     s := Instances.Shaders[shader]
     string_length_written = min(buffer_length, strlen(s.InfoLog))
     info = substr(s.InfoLog, 0, string_length_written)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml
 cmd void glGetShaderSource(ShaderId   shader,
                            s32        buffer_length,
                            out s32    string_length_written,
                            out string source) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml
     assert len(source) >= buffer_length
     s := Instances.Shaders[shader]
     // TODO: Concatenate shader.Source[] instead of using shader.Source[0].
@@ -2522,92 +2522,92 @@ cmd void glGetShaderSource(ShaderId   shader,
     source = substr(s.Source[0], 0, string_length_written)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml
 cmd void glReleaseShaderCompiler() {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml
 cmd void glCompileShader(ShaderId shader) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml
     // TODO: shader.Binary < ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml
 cmd bool glIsShader(ShaderId shader) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml
     return shader in Instances.Shaders
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml
 cmd ProgramId glCreateProgram() {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml
     id := ? as ProgramId
     Instances.Programs[id] = new Program{}
     return id
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml
 cmd void glDeleteProgram(ProgramId program) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml
     Instances.Programs.Delete(program)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml
 cmd void glAttachShader(ProgramId program, ShaderId shader) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml
     p := Instances.Programs[program]
     s := Instances.Shaders[shader]
     p.Shaders[s.Type] = shader
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml
 cmd void glDetachShader(ProgramId program, ShaderId shader) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml
     p := Instances.Programs[program]
     s := Instances.Shaders[shader]
     p.Shaders.Delete(s.Type)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml
 cmd void glGetAttachedShaders(ProgramId             program,
                               s32                   buffer_length,
                               out s32               shaders_length_written,
                               inout array<ShaderId> shaders) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml
     assert len(shaders) >= buffer_length
     p := Instances.Programs[program]
     shaders_length_written = min(buffer_length, len(p.Shaders))
     shaders = p.Shaders.Range()
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml
 cmd void glLinkProgram(ProgramId program) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml
     //for s in (program.Shaders) {
         // TODO: use(s.Binary)
     //}
     // TODO: program.Binary < ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml
 cmd void glGetProgramInfoLog(ProgramId  program,
                              s32        buffer_length,
                              out s32    string_length_written,
                              out string info) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml
     assert len(info) >= buffer_length
     p := Instances.Programs[program]
     string_length_written = min(buffer_length, strlen(p.InfoLog))
     info = substr(p.InfoLog, 0, string_length_written)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml
 cmd void glUseProgram(ProgramId program) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml
     BoundProgram = program
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml
 cmd bool glIsProgram(ProgramId program) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml
     return program in Instances.Programs
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml
 cmd void glValidateProgram(ProgramId program) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml
 cmd void glClearColor(f32 r, f32 g, f32 b, f32 a) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml
     Clearing.ClearColor = Color{
       Red:   r,
       Green: g,
@@ -2616,18 +2616,18 @@ cmd void glClearColor(f32 r, f32 g, f32 b, f32 a) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml
 cmd void glClearDepthf(f32 depth) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml
     Clearing.ClearDepth = depth
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml
 cmd void glClearStencil(s32 stencil) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml
     Clearing.ClearStencil = stencil
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml
 cmd void glClear(ClearMask mask) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml
     // TODO: use(Clearing.ClearColor) when mask[GL_COLOR_BUFFER_BIT] == true
     if (GL_COLOR_BUFFER_BIT in mask) {
         // color := BoundFramebuffers[GL_FRAMEBUFFER].Attachments[GL_COLOR_ATTACHMENT0]
@@ -2636,38 +2636,38 @@ cmd void glClear(ClearMask mask) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml
 cmd void glCullFace(FaceMode mode) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml
     Rasterizing.CullFace = mode
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml
 cmd void glPolygonOffset(f32 scale_factor, f32 units) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml
     Rasterizing.PolygonOffsetUnits  = units
     Rasterizing.PolygonOffsetFactor = scale_factor
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml
 cmd void glLineWidth(f32 width) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml
     Rasterizing.LineWidth = width
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml
 cmd void glSampleCoverage(f32 value, bool invert) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml
     Rasterizing.SampleCoverageValue  = value
     Rasterizing.SampleCoverageInvert = invert
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml
 cmd void glHint(HintTarget target, HintMode mode) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml
     GenerateMipmapHint = mode
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml
 cmd void glFramebufferRenderbuffer(FramebufferTarget     framebuffer_target,
                                    FramebufferAttachment framebuffer_attachment,
                                    RenderbufferTarget    renderbuffer_target,
                                    RenderbufferId        renderbuffer) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
@@ -2687,12 +2687,12 @@ cmd void glFramebufferRenderbuffer(FramebufferTarget     framebuffer_target,
     framebuffer.Attachments[framebuffer_attachment] = attachment
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml
 cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
                                 FramebufferAttachment framebuffer_attachment,
                                 TextureImageTarget    texture_target,
                                 TextureId             texture,
                                 s32                   level) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
@@ -2723,11 +2723,11 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
     framebuffer.Attachments[framebuffer_attachment] = attachment
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml
 cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              framebuffer_target,
                                                FramebufferAttachment          attachment,
                                                FramebufferAttachmentParameter parameter,
                                                inout array<s32>               value) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml
     assert len(value) >= 1
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
@@ -2746,11 +2746,11 @@ cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              fr
 }
 
 @DrawCall
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml
 cmd void glDrawElements(DrawMode       draw_mode,
                         s32            element_count,
                         IndicesType    indices_type,
                         IndicesPointer indices) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml
     /*TODO: use(BoundProgram.Binary)
     for a in (BoundFramebuffers[GL_FRAMEBUFFER].Attachments) {
         switch (a.Type) {
@@ -2779,8 +2779,8 @@ cmd void glDrawElements(DrawMode       draw_mode,
 }
 
 @DrawCall
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml
 cmd void glDrawArrays(DrawMode draw_mode, s32 first_index, s32 index_count) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml
     //TODO: use(BoundProgram.Binary)
     // for a in BoundFramebuffers[GL_FRAMEBUFFER].Attachments {
         // modifies(a.Levels[0].Data) // COMPILATION ERROR
@@ -2799,16 +2799,16 @@ cmd void glDrawArrays(DrawMode draw_mode, s32 first_index, s32 index_count) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml
 cmd void glFlush() {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml
 cmd void glFinish() {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetBooleanv(StateVariable param, inout array<bool> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
     assert len(values) >= stateVariableSize(param)
     switch (param) {
       case GL_BLEND:
@@ -2851,8 +2851,8 @@ cmd void glGetBooleanv(StateVariable param, inout array<bool> values) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetFloatv(StateVariable param, inout array<f32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
     assert len(values) >= stateVariableSize(param)
     switch (param) {
       case GL_DEPTH_RANGE: {
@@ -2891,8 +2891,8 @@ cmd void glGetFloatv(StateVariable param, inout array<f32> values) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetIntegerv(StateVariable param, inout array<s32> values) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
     assert len(values) >= stateVariableSize(param)
     switch (param) {
       case GL_ACTIVE_TEXTURE:
@@ -3070,23 +3070,23 @@ cmd void glGetIntegerv(StateVariable param, inout array<s32> values) {
 }
 
 @ReturnSize(256)
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml
 cmd string glGetString(StringConstant param) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml
     return ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml
 cmd void glEnable(Capability capability) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml
     Capabilities[capability] = true
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml
 cmd void glDisable(Capability capability) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml
     Capabilities[capability] = false
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml
 cmd bool glIsEnabled(Capability capability) {
-    http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml
     return Capabilities[capability]
 }
 
@@ -3110,47 +3110,48 @@ enum ClientWaitSyncSignal {
 
 bitfield SyncFlags {}
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glFenceSync.xhtml
 cmd SyncObject glFenceSync(SyncCondition condition, SyncFlags flags) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glFenceSync.xhtml
     return ?
     create(result)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteSync.xhtml
 cmd void glDeleteSync(SyncObject sync) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteSync.xhtml
     Instances.SyncObjects.Delete(sync)
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glClientWaitSync.xhtml
 cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags flags, s32 timeout) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glClientWaitSync.xhtml
 }
 */
 
 @ReturnSize(length)
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd pointer glMapBufferRange(MapBufferTarget target, s32 offset, s32 length, MapBufferRangeAccess access) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
     return ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd void glUnmapBuffer(MapBufferTarget target) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml
 cmd void glInvalidateFramebuffer(FramebufferTarget       target,
                                  s32                     count,
                                  array<FramebufferAttachment> attachments) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml
     assert len(attachments) >= count
 }
 
+///http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt
 cmd void glRenderbufferStorageMultisample(RenderbufferTarget target,
                                           s32                samples,
                                           RenderbufferFormat format,
                                           s32                width,
                                           s32                height) {
-    http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml
 cmd void glBlitFramebuffer(s32               srcX0,
                            s32               srcY0,
                            s32               srcX1,
@@ -3161,11 +3162,10 @@ cmd void glBlitFramebuffer(s32               srcX0,
                            s32               dstY1,
                            ClearMask         mask,
                            TextureFilterMode filter) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml
 cmd void glGenQueries(s32 count, inout array<QueryId> queries) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml
     assert len(queries) >= count
     for i in (0 .. count) {
       id := ? as QueryId
@@ -3174,41 +3174,41 @@ cmd void glGenQueries(s32 count, inout array<QueryId> queries) {
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml
 cmd void glBeginQuery(QueryTarget target, QueryId query) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml
 cmd void glEndQuery(QueryTarget target) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml
 cmd void glDeleteQueries(s32 count, array<QueryId> queries) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml
     assert len(queries) >= count
     for i in (0 .. count) {
       Instances.Queries.Delete(queries[i])
     }
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml
 cmd bool glIsQuery(QueryId query) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml
     return query in Instances.Queries
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml
 cmd void glGetQueryiv(QueryTarget target, QueryParameter parameter, out s32 value) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml
     value = ?
 }
 
+///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml
 cmd void glGetQueryObjectuiv(QueryId query, QueryObjectParameter parameter, out u32 value) {
-    http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml
     value = ?
 }
 
 // EXT_disjoint_timer_query
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGenQueriesEXT(s32 count, inout array<QueryId> queries) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     assert len(queries) >= count
     for i in (0 .. count) {
         id := ? as QueryId
@@ -3217,52 +3217,52 @@ cmd void glGenQueriesEXT(s32 count, inout array<QueryId> queries) {
     }
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glBeginQueryEXT(QueryTarget target, QueryId query) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glEndQueryEXT(QueryTarget target) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glDeleteQueriesEXT(s32 count, array<QueryId> queries) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     assert len(queries) >= count
     for i in (0 .. count) {
         Instances.Queries.Delete(queries[i])
     }
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd bool glIsQueryEXT(QueryId query) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     return query in Instances.Queries
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glQueryCounterEXT(QueryId query, QueryTarget target) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGetQueryivEXT(QueryTarget target, QueryParameter parameter, out s32 value) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     value = ?
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGetQueryObjectivEXT(QueryId query, QueryObjectParameter parameter, out s32 value) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     value = ?
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGetQueryObjectuivEXT(QueryId query, QueryObjectParameter parameter, out u32 value) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     value = ?
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGetQueryObjecti64vEXT(QueryId query, QueryObjectParameter parameter, out s64 value) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     value = ?
 }
 
+///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGetQueryObjectui64vEXT(QueryId query, QueryObjectParameter parameter, out u64 value) {
-    http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
     value = ?
 }

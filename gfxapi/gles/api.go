@@ -15030,19 +15030,19 @@ func init() {
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "WglCreateContext",
-		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379%28v=vs.85%29.aspx]",
+		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx]",
 		ID:   8,
 		New:  func() atom.Atom { return &WglCreateContext{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "WglMakeCurrent",
-		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387%28v=vs.85%29.aspx]",
+		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx]",
 		ID:   9,
 		New:  func() atom.Atom { return &WglMakeCurrent{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "WglSwapBuffers",
-		Docs: "[http://msdn.microsoft.com/en-us/library/dd369060%28v=vs.85%29]",
+		Docs: "[http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)]",
 		ID:   10,
 		New:  func() atom.Atom { return &WglSwapBuffers{} },
 	})

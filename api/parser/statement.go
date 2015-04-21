@@ -25,7 +25,6 @@ func requireBlock(p *parse.Parser, cst *parse.Branch) *ast.Block {
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		block.CST = cst
 		if operator(ast.OpBlockStart, p, cst) {
-			block.Docs = url(p, cst)
 			for !operator(ast.OpBlockEnd, p, cst) {
 				block.Statements = append(block.Statements, requireStatement(p, cst))
 			}
