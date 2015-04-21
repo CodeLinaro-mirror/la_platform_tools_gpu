@@ -26,7 +26,6 @@ type Function struct {
 	Return         *Parameter    // the return parameter
 	This           *Parameter    // the this parameter, missing for non method functions
 	FullParameters []*Parameter  // all the parameters, including This at the start if valid, and Return at the end if not void
-	Outputs        []*Parameter  // only the output parameters
 	Block          *Block        // the body of the function, missing for externs
 	Signature      *Signature    // the type signature of the function
 }
@@ -47,8 +46,6 @@ type Parameter struct {
 	Function    *Function      // the function this parameter belongs to
 	Name        string         // the name of the parameter
 	Docs        []string       // the documentation for the parameter
-	Input       bool           // true if the parameter is an input
-	Output      bool           // true if the parameter is an output
 	Type        Type           // the type of the parameter
 }
 

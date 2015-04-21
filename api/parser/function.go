@@ -25,9 +25,8 @@ func function(f *ast.Function, p *parse.Parser, cst *parse.Branch, withBlock boo
 	var result *ast.Parameter
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		result = &ast.Parameter{
-			CST:    cst,
-			Type:   requireTypeRef(p, cst),
-			Output: true,
+			CST:  cst,
+			Type: requireTypeRef(p, cst),
 		}
 	})
 	f.Name = requireIdentifier(p, cst)
@@ -52,18 +51,8 @@ func parameter(p *parse.Parser, cst *parse.Branch) *ast.Parameter {
 	param := &ast.Parameter{}
 	parseAnnotations(&param.Annotations, p, cst)
 	param.CST = cst
-	switch {
-	case keyword(ast.KeywordThis, p, cst) != nil:
+	if keyword(ast.KeywordThis, p, cst) != nil {
 		param.This = true
-	case keyword(ast.KeywordIn, p, cst) != nil:
-		param.Input = true
-	case keyword(ast.KeywordOut, p, cst) != nil:
-		param.Output = true
-	case keyword(ast.KeywordInout, p, cst) != nil:
-		param.Input = true
-		param.Output = true
-	default:
-		param.Input = true
 	}
 	param.Type = requireTypeRef(p, cst)
 	parseAnnotations(&param.Annotations, p, cst)

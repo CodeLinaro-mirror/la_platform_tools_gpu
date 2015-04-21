@@ -230,7 +230,7 @@
         service.ParameterInfo{
           Name: "{{$p.Name}}",
           Type: {{Macro "TypeInfo" (TypeOf $p)}},
-          Out:  {{if $p.Output}}true{{else}}false{{end}},
+          Out:  {{if eq $p.Name "result"}}true{{else}}false{{end}},
         },
       {{end}}
     },

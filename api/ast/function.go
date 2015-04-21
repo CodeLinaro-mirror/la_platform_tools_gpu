@@ -34,8 +34,6 @@ func (t Function) Fragment() parse.Fragment { return t.CST }
 type Parameter struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to this parameter
-	Input       bool          // true if the parameter is an input
-	Output      bool          // true if the parameters is an output
 	This        bool          // true if the parameter is the this pointer of a method
 	Type        Node          // the type of the parameter
 	Name        *Identifier   // the name the parameter as exposed to the body
