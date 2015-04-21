@@ -231,22 +231,46 @@ func member(ctx *context, in *ast.Member) semantic.Expression {
 	return out
 }
 
-func index(ctx *context, in *ast.Index) semantic.Expression {
-	object := expression(ctx, in.Object)
-	at := object.ExpressionType()
-	switch at := at.(type) {
-	case *semantic.Array:
-		out := &semantic.ArrayIndex{AST: in, Array: object}
-		ctx.with(semantic.Int32Type, func() {
-			out.Index = expression(ctx, in.Index)
-		})
-		it := out.Index.ExpressionType()
-		if !equal(it, semantic.Int32Type) && !equal(it, semantic.Uint32Type) {
-			ctx.errorf(in, "type %s not valid indexing array", typename(it))
+func arrayIndex(ctx *context, in *ast.Index, object semantic.Expression, valueType semantic.Type) semantic.Expression {
+	var index semantic.Expression
+	ctx.with(semantic.Int32Type, func() {
+		index = expression(ctx, in.Index)
+	})
+	if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
+		// slice operator indexing
+		out := &semantic.Slice{
+			AST:   in,
+			Array: object,
+			Lower: bop.LHS,
+			Upper: bop.RHS,
 		}
-		out.ValueType = at.ValueType
 		ctx.mappings[in] = out
 		return out
+	}
+	// Normal array indexing
+	out := &semantic.ArrayIndex{AST: in, Array: object, Index: index}
+	it := index.ExpressionType()
+	if !equal(it, semantic.Int32Type) && !equal(it, semantic.Uint32Type) {
+		ctx.errorf(in, "type %s not valid indexing array", typename(it))
+	}
+	out.ValueType = valueType
+	ctx.mappings[in] = out
+	return out
+}
+
+func index(ctx *context, in *ast.Index) semantic.Expression {
+	object := expression(ctx, in.Object)
+	at := baseType(object.ExpressionType())
+	switch at := at.(type) {
+	case *semantic.Builtin:
+		switch at {
+		case semantic.PointerType:
+			return arrayIndex(ctx, in, object, semantic.Uint8Type)
+		case semantic.MemoryType:
+			return arrayIndex(ctx, in, object, semantic.Uint8Type)
+		}
+	case *semantic.Array:
+		return arrayIndex(ctx, in, object, at.ValueType)
 	case *semantic.Map:
 		out := &semantic.MapIndex{AST: in, Map: object}
 		ctx.with(at.KeyType, func() {
@@ -259,10 +283,9 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 		out.ValueType = at.ValueType
 		ctx.mappings[in] = out
 		return out
-	default:
-		ctx.errorf(in, "index operation on non indexable type %s", typename(at))
-		return invalid{}
 	}
+	ctx.errorf(in, "index operation on non indexable type %s", typename(at))
+	return invalid{}
 }
 
 func identifier(ctx *context, in *ast.Identifier) semantic.Expression {

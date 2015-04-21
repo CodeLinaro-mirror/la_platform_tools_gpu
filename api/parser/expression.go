@@ -272,7 +272,7 @@ func length(p *parse.Parser, cst *parse.Branch) *ast.Length {
 	return s
 }
 
-// lhs '[' expression ']'
+// lhs '[' expression [ ':' [ expression ] ] ']'
 func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
@@ -282,6 +282,16 @@ func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 		e.CST = cst
 		requireOperator(ast.OpIndexStart, p, cst)
 		e.Index = requireExpression(p, cst)
+		if operator(ast.OpSlice, p, cst) {
+			n := &ast.BinaryOp{LHS: e.Index, Operator: ast.OpSlice}
+			if !peekOperator(ast.OpIndexEnd, p) {
+				p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+					n.CST = cst
+					n.RHS = requireSimpleExpression(p, cst)
+				})
+			}
+			e.Index = n
+		}
 		requireOperator(ast.OpIndexEnd, p, cst)
 	})
 	return e

@@ -106,24 +106,52 @@ func assert(ctx *context, in *ast.Assert) *semantic.Assert {
 	return out
 }
 
+func sliceAssign(ctx *context, in *ast.Assign, lhs semantic.Expression, rhs semantic.Expression) semantic.Node {
+	ls, isls := lhs.(*semantic.Slice)
+	rs, isrs := rhs.(*semantic.Slice)
+	if !(isls || isrs) {
+		// no slices involved, not a slice assign
+		return nil
+	}
+	out := &semantic.Copy{AST: in, Dst: ls, Src: rs}
+	if !isls {
+		// read expression
+		if _, ignore := lhs.(*semantic.Ignore); !ignore {
+			ctx.errorf(in, "invalid slice assignment to %s", typename(lhs.ExpressionType()))
+		}
+	} else if !isrs {
+		// write expression
+		if _, ignore := rhs.(*semantic.Ignore); !ignore {
+			ctx.errorf(in, "invalid slice assignment from %s", typename(rhs.ExpressionType()))
+		}
+		return out
+	} else {
+		// full copy expression
+		// TODO: infer upper bound
+	}
+	return out
+}
+
 func assign(ctx *context, in *ast.Assign) semantic.Node {
 	lhs := expression(ctx, in.LHS)
 	var rhs semantic.Expression
 	ctx.with(lhs.ExpressionType(), func() {
 		rhs = expression(ctx, in.RHS)
 	})
-	inferUnknown(ctx, lhs, rhs)
-	lt := lhs.ExpressionType()
-	rt := rhs.ExpressionType()
-	if !assignable(lt, rt) {
-		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
-	}
-	var out semantic.Node
-	switch lhs := lhs.(type) {
-	case *semantic.MapIndex:
-		out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
-	default:
-		out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
+	out := sliceAssign(ctx, in, lhs, rhs)
+	if out == nil {
+		inferUnknown(ctx, lhs, rhs)
+		lt := lhs.ExpressionType()
+		rt := rhs.ExpressionType()
+		if !assignable(lt, rt) {
+			ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
+		}
+		switch lhs := lhs.(type) {
+		case *semantic.MapIndex:
+			out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
+		default:
+			out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
+		}
 	}
 	ctx.mappings[in] = out
 	return out
