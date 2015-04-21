@@ -31,7 +31,7 @@ type Value interface {
 	// Get returns the bit-representation of the value. For example a boolean
 	// value would either be 0 or 1, a uint32 value would be zero-extended, a
 	// float64 would be the IEEE 754 representation reinterpreted as a uint64.
-	Get(PointerResolver) uint64
+	Get(PointerResolver) (uint64, error)
 }
 
 // Pointer is a pointer-typed Value.

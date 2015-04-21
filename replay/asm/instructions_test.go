@@ -29,18 +29,22 @@ import (
 
 type testPtrResolver struct{}
 
-func (testPtrResolver) TranslateTemporaryPointer(ptr uint64) uint64 { return ptr }
-func (testPtrResolver) TranslateCapturePointer(ptr uint64) uint64   { return ptr }
+func (testPtrResolver) TranslateTemporaryPointer(ptr uint64) (uint64, error) { return ptr, nil }
+func (testPtrResolver) TranslateCapturePointer(ptr uint64) (uint64, error)   { return ptr, nil }
 
 func check(t *testing.T, Instructions []Instruction, expected ...interface{}) {
 	buf := &bytes.Buffer{}
 	b := flat.Encoder(endian.Writer(buf, endian.Little))
-	for _, Instruction := range Instructions {
-		Instruction.Encode(testPtrResolver{}, b)
+	for _, instruction := range Instructions {
+		err := instruction.Encode(testPtrResolver{}, b)
+		if err != nil {
+			t.Errorf("Unexpected error encoding instruction %T %+v: %v",
+				instruction, instruction, err)
+		}
 	}
 	gotOpcodes, err := opcode.Disassemble(buf, endian.Little)
 	if err != nil {
-		panic(err)
+		t.Errorf("Unexpected error: %v", err)
 	}
 	opcode.CheckDisassembly(t, gotOpcodes, expected...)
 }

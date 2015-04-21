@@ -129,7 +129,10 @@ func (b *batcher) send(requests []Request) (err error) {
 	adapter := adapter{handlers: postbackHandlers, builder: builder, state: state.New()}
 	transforms.Transform(atoms, &adapter)
 
-	payload, decoder := builder.Build(b.logger)
+	payload, decoder, err := builder.Build(b.logger)
+	if err != nil {
+		return fmt.Errorf("Failed to build replay payload: %v", err)
+	}
 
 	connection, err := b.device.Connect()
 	if err != nil {
