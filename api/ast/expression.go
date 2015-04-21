@@ -20,7 +20,6 @@ import "android.googlesource.com/platform/tools/gpu/parse"
 // of a {} pair.
 type Block struct {
 	CST        *parse.Branch // underlying parse structure for this node
-	Docs       *URL          // the url to the documentation for this block
 	Statements []Node        // The set of statements that make up the block
 }
 

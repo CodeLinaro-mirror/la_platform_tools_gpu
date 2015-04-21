@@ -2263,7 +2263,7 @@ func init() {
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidU8",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   1,
 		New:  func() atom.Atom { return &CmdVoidU8{} },
 	})
@@ -2335,25 +2335,25 @@ func init() {
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Strings",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   13,
 		New:  func() atom.Atom { return &CmdVoid3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Arrays",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   14,
 		New:  func() atom.Atom { return &CmdVoid3Arrays{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidArrayOfStrings",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   15,
 		New:  func() atom.Atom { return &CmdVoidArrayOfStrings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdU8",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   16,
 		New:  func() atom.Atom { return &CmdU8{} },
 	})
@@ -2437,7 +2437,7 @@ func init() {
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOutU8",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   30,
 		New:  func() atom.Atom { return &CmdVoidOutU8{} },
 	})
@@ -2515,19 +2515,19 @@ func init() {
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOut3Strings",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   43,
 		New:  func() atom.Atom { return &CmdVoidOut3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoid3Remapped",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   44,
 		New:  func() atom.Atom { return &CmdVoid3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
 		Name: "CmdVoidOut3Remapped",
-		Docs: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		Docs: "[]",
 		ID:   45,
 		New:  func() atom.Atom { return &CmdVoidOut3Remapped{} },
 	})

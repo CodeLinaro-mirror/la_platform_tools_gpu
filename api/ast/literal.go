@@ -14,11 +14,7 @@
 
 package ast
 
-import (
-	"net/url"
-
-	"android.googlesource.com/platform/tools/gpu/parse"
-)
+import "android.googlesource.com/platform/tools/gpu/parse"
 
 // Number represents a typeless numeric constant.
 type Number struct {
@@ -48,10 +44,4 @@ type Unknown struct {
 // type, and must be used in a context where the type can be inferred.
 type Null struct {
 	CST *parse.Leaf // underlying parse leaf for this node
-}
-
-// URL holds things that start with "http:", used for documentation links in blocks.
-type URL struct {
-	CST *parse.Leaf // underlying parse leaf for this node
-	URL url.URL     // the actual url
 }

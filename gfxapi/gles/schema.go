@@ -184,7 +184,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379%28v=vs.85%29.aspx]",
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 9,
@@ -209,7 +209,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387%28v=vs.85%29.aspx]",
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 10,
@@ -224,7 +224,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     true,
-		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/dd369060%28v=vs.85%29]",
+		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 11,

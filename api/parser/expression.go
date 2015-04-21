@@ -15,8 +15,6 @@
 package parser
 
 import (
-	neturl "net/url"
-
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
@@ -173,26 +171,6 @@ func requireNumber(p *parse.Parser, cst *parse.Branch) *ast.Number {
 	if n == nil {
 		p.Expected("number")
 	}
-	return n
-}
-
-// 'http://' notspace
-func url(p *parse.Parser, cst *parse.Branch) *ast.URL {
-	if !p.String("http://") {
-		return nil
-	}
-	p.NotSpace()
-	n := &ast.URL{}
-	p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
-		n.CST = l
-		l.SetToken(p.Consume())
-		v, err := neturl.Parse(l.Token().String())
-		if err != nil {
-			p.Expected("http url")
-		} else {
-			n.URL = *v
-		}
-	})
 	return n
 }
 

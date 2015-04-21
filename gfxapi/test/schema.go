@@ -40,7 +40,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 2,
@@ -230,7 +230,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 14,
@@ -255,7 +255,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 15,
@@ -270,7 +270,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 16,
@@ -285,7 +285,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 17,
@@ -495,7 +495,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 31,
@@ -700,7 +700,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 44,
@@ -725,7 +725,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 45,
@@ -750,7 +750,7 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[///////////////////////////////////////////////////////////// /////////////////////////////////////////////////////////////]",
+		DocumentationUrl: "[]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 46,
