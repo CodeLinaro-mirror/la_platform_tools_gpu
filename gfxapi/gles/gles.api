@@ -7,25 +7,27 @@
 alias map<TextureUnit, map<TextureTarget, TextureId>> TextureUnitMap
 
 extern s32    strlen(string s)
-extern s32    imageSize(s32 width, s32 height, TexelFormat format, TexelType type)
+extern u32    imageSize(u32 width, u32 height, TexelFormat format, TexelType type)
 extern string substr(string s, s32 start, s32 end)
 extern s32    stateVariableSize(StateVariable v)
-extern void   memcpy(any dest, any src, s32 size)
-extern void   read(pointer p, s32 offset, s32 size)
-extern void   write(pointer p, s32 offset, s32 size)
+extern void   memcpy(any dest, any src, u32 size)
+extern void   read(pointer p, u32 offset, u32 size)
+extern void   write(pointer p, u32 offset, u32 size)
 
 /////////////////////////////////////////////////////////////////
 // Macros
 /////////////////////////////////////////////////////////////////
 
-macro s32 vertexAttribTypeSize(VertexAttribType t) {
+macro u32 vertexAttribTypeSize(VertexAttribType t) {
   return switch (t) {
-    case GL_BYTE:           1
-    case GL_UNSIGNED_BYTE:  1
-    case GL_SHORT:          2
-    case GL_UNSIGNED_SHORT: 2
-    case GL_FIXED:          4
-    case GL_FLOAT:          4
+    case GL_BYTE:                  1
+    case GL_UNSIGNED_BYTE:         1
+    case GL_SHORT:                 2
+    case GL_UNSIGNED_SHORT:        2
+    case GL_FIXED:                 4
+    case GL_FLOAT:                 4
+    case GL_ARB_half_float_vertex: 2
+    case GL_HALF_FLOAT_OES:        2
   }
 }
 
@@ -37,7 +39,7 @@ macro s32 min(s32 a, s32 b) {
 }
 
 /* Not ready for primetime yet...
-macro s32 imageSize(s32 width, s32 height, TexelFormat format, TexelType type) {
+macro u32 imageSize(u32 width, u32 height, TexelFormat format, TexelType type) {
     return switch (format) { // TODO: Consider ty
         case GL_ALPHA:            width * height
         case GL_LUMINANCE:        width * height
@@ -231,6 +233,11 @@ enum RenderbufferFormat {
     GL_RGBA8                                        = 0x8058,
     GL_DEPTH_COMPONENT16                            = 0x81A5,
     GL_STENCIL_INDEX8                               = 0x8D48,
+}
+
+// http://www.khronos.org/registry/specs/ARB/half_float_vertex.txt
+enum Type_ARB_half_float_vertex {
+    GL_ARB_half_float_vertex                        = 0x140B,
 }
 
 // http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_half_float.txt
@@ -522,7 +529,8 @@ enum StringConstant {
     GL_VERSION                                      = 0x1F02,
 }
 
-enum VertexAttribType : Type_OES_vertex_half_float {
+enum VertexAttribType : Type_OES_vertex_half_float
+                      , Type_ARB_half_float_vertex {
     GL_BYTE                                         = 0x1400,
     GL_FIXED                                        = 0x140C,
     GL_FLOAT                                        = 0x1406,
@@ -879,7 +887,7 @@ class Image {
     s32              Width
     s32              Height
     memory           Data
-    s32              Size
+    u32              Size
     ImageTexelFormat Format
 }
 
@@ -1032,12 +1040,12 @@ class VertexArray {}
 @internal
 class VertexAttributeArray {
     bool             Enabled    = false
-    s32              Size       = 4        // Number of components. 1, 2, 3 or 4.
+    u32              Size       = 4        // Number of components. 1, 2, 3 or 4.
     VertexAttribType Type       = GL_FLOAT // Type of each component.
     bool             Normalized = false
     s32              Stride     = 0        // Byte offset between each consecutive attribute, or 0 for tight.
     BufferId         Buffer     = 0
-    pointer          Pointer
+    pointer          Pointer               // Used if Buffer == 0
 }
 
 @internal
@@ -1567,7 +1575,7 @@ cmd void glVertexAttribPointer(AttributeLocation location,
     assert (size >= 1) && (size <= 4)
     assert stride >= 0
     a := VertexAttributeArrays[location]
-    a.Size       = size
+    a.Size       = size as u32
     a.Type       = type
     a.Normalized = normalized
     a.Stride     = stride
@@ -2128,11 +2136,10 @@ cmd void glTexImage2D(TextureImageTarget target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   imageSize(width, height, format, type),
+                Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             if data != null {
-                read(data as pointer, 0, l.Size)
                 memcpy(l.Data, data, l.Size)
             }
             t.Texture2D[level] = l
@@ -2147,11 +2154,10 @@ cmd void glTexImage2D(TextureImageTarget target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   imageSize(width, height, format, type),
+                Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
             if data != null {
-                read(data as pointer, 0, l.Size)
                 memcpy(l.Data, data, l.Size)
             }
             cube := t.Cubemap[level]
@@ -2183,10 +2189,9 @@ cmd void glTexSubImage2D(TextureImageTarget target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   imageSize(width, height, format, type),
+                Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
@@ -2200,10 +2205,9 @@ cmd void glTexSubImage2D(TextureImageTarget target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   imageSize(width, height, format, type),
+                Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
@@ -2254,10 +2258,9 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   image_size,
+                Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
@@ -2271,10 +2274,9 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
             l  := Image {
                 Width:  width,
                 Height: height,
-                Size:   image_size,
+                Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
             memcpy(l.Data, data, l.Size)
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
@@ -2310,7 +2312,7 @@ cmd void glReadPixels(s32              x,
                       BaseTexelFormat  format,
                       TexelType        type,
                       out pointer      data) {
-    assert len(data) >= imageSize(width, height, format as TexelFormat, type)
+    assert len(data) >= imageSize(width as u32, height as u32, format as TexelFormat, type)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
@@ -2441,8 +2443,7 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
     id := BoundBuffers[target]
     b  := Instances.Buffers[id]
     if data != null {
-        read(data as pointer, 0, size)
-        memcpy(b.Data, data, size)
+        memcpy(b.Data, data, size as u32)
     }
     b.Size = size
     b.Usage = usage
@@ -2763,58 +2764,58 @@ cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              fr
     }
 }
 
+macro void ReadVertexArrays(u32 first_index, u32 index_count) {
+    for i in (0 .. len(VertexAttributeArrays)) {
+        arr := VertexAttributeArrays[i as AttributeLocation]
+        if arr.Enabled {
+            elsize := vertexAttribTypeSize(arr.Type) * arr.Size // TODO: Stride
+            size   := elsize * index_count
+            offset := elsize * first_index
+            if arr.Buffer == 0 {
+                read(arr.Pointer, offset, size)
+            }
+        }
+    }
+}
+
+macro u32 IndexSize(IndicesType indices_type) {
+    return switch(indices_type) {
+        case GL_UNSIGNED_BYTE:  1
+        case GL_UNSIGNED_SHORT: 2
+        case GL_UNSIGNED_INT:   4
+    }
+}
+
+extern u32     minIndex(pointer indices, IndicesType indices_type, u32 element_count)
+extern u32     maxIndex(pointer indices, IndicesType indices_type, u32 element_count)
+extern pointer memoryOffset(memory m, u64 by)
+
 @DrawCall
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml
 cmd void glDrawElements(DrawMode       draw_mode,
                         s32            element_count,
                         IndicesType    indices_type,
                         IndicesPointer indices) {
-    /*TODO: use(BoundProgram.Binary)
-    for a in (BoundFramebuffers[GL_FRAMEBUFFER].Attachments) {
-        switch (a.Type) {
-            case GL_TEXTURE: {
-                t := a.Object as TextureId
-                switch (t.Kind) {
-                    case TEXTURE2D: {
-                        level := t.Texture2D.GetOrError(a.TextureLevel)
-                        // TODO: modifies(level.Data)
-                    }
-                    case CUBEMAP: {
-                        level := t.Cubemap.GetOrError(a.TextureLevel)
-                        face  := level.Faces.GetOrError(a.CubeMapFace)
-                        // TODO: modifies(face.Data)
-                    }
-                }
-            }
-            case GL_RENDERBUFFER: {
-                f := a.Object as Renderbuffer
-                // TODO: modifies(f.Data)
-            }
-        }
-    }*/
+    id := BoundBuffers[GL_ELEMENT_ARRAY_BUFFER]
+    index_data := switch (id != Internals.NilBuffer) {
+        case true:  memoryOffset(Instances.Buffers[id].Data, indices as u64)
+        case false: indices as pointer
+    }
 
-    // TODO: Memory observations
+    // Read the indices
+    read(index_data as pointer, 0, (element_count as u32) * IndexSize(indices_type))
+
+    // Read the vertices
+    first := minIndex(index_data, indices_type, element_count as u32)
+    last  := maxIndex(index_data, indices_type, element_count as u32)
+
+    ReadVertexArrays(first, last - first)
 }
 
 @DrawCall
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml
 cmd void glDrawArrays(DrawMode draw_mode, s32 first_index, s32 index_count) {
-    //TODO: use(BoundProgram.Binary)
-    // for a in BoundFramebuffers[GL_FRAMEBUFFER].Attachments {
-        // modifies(a.Levels[0].Data) // COMPILATION ERROR
-    // }
-
-    for i in (0 .. 64) { // TODO: Count
-        arr := VertexAttributeArrays[i as AttributeLocation]
-        if arr.Enabled {
-          elsize := vertexAttribTypeSize(arr.Type) * arr.Size // TODO: Stride
-          size   := elsize * index_count
-          offset := elsize * first_index
-          if arr.Buffer == 0 {
-            read(arr.Pointer, offset, size)
-          }
-        }
-    }
+    ReadVertexArrays(first_index as u32, index_count as u32)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml

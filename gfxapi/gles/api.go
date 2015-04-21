@@ -8828,7 +8828,7 @@ type Image struct {
 	Width     int32
 	Height    int32
 	Data      memory.Memory
-	Size      int32
+	Size      uint32
 	Format    ImageTexelFormat
 }
 
@@ -9226,7 +9226,7 @@ type VertexAttributeArray struct {
 	binary.Generate
 	CreatedAt  atom.ID
 	Enabled    bool
-	Size       int32
+	Size       uint32
 	Type       VertexAttribType
 	Normalized bool
 	Stride     int32
@@ -9848,6 +9848,24 @@ func (v RenderbufferFormat) String() string {
 		return "GL_STENCIL_INDEX8"
 	default:
 		return fmt.Sprintf("RenderbufferFormat<0x%.4x>", uint32(v))
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// enum Type_ARB_half_float_vertex
+////////////////////////////////////////////////////////////////////////////////
+type Type_ARB_half_float_vertex uint32
+
+const (
+	Type_ARB_half_float_vertex_GL_ARB_half_float_vertex = Type_ARB_half_float_vertex(5131)
+)
+
+func (v Type_ARB_half_float_vertex) String() string {
+	switch v {
+	case 5131:
+		return "GL_ARB_half_float_vertex"
+	default:
+		return fmt.Sprintf("Type_ARB_half_float_vertex<0x%.4x>", uint32(v))
 	}
 }
 
@@ -11378,6 +11396,11 @@ const (
 	VertexAttribType_GL_HALF_FLOAT_OES = VertexAttribType(36193)
 )
 
+// Type_ARB_half_float_vertex
+const (
+	VertexAttribType_GL_ARB_half_float_vertex = VertexAttribType(5131)
+)
+
 func (v VertexAttribType) String() string {
 	switch v {
 	case 5120:
@@ -11395,6 +11418,9 @@ func (v VertexAttribType) String() string {
 	// Type_OES_vertex_half_float
 	case 36193:
 		return "GL_HALF_FLOAT_OES"
+	// Type_ARB_half_float_vertex
+	case 5131:
+		return "GL_ARB_half_float_vertex"
 	default:
 		return fmt.Sprintf("VertexAttribType<0x%.4x>", uint32(v))
 	}

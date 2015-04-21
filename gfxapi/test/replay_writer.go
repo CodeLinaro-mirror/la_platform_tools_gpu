@@ -1013,7 +1013,7 @@ func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(10)
+	result_cnt := uint64(int32(10))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
 	ϟb.CallPush(funcInfoCmdString)
 	ϟb.Push(outputs[0])
@@ -1036,7 +1036,7 @@ func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(10)
+	result_cnt := uint64(int32(10))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt * 4 /* result */})
 	ϟb.CallPush(funcInfoCmdArrayOfFloat)
 	ϟb.Push(outputs[0])
@@ -1059,7 +1059,7 @@ func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(10)
+	result_cnt := uint64(int32(10))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
 	ϟb.CallPush(funcInfoCmdPointer)
 	ϟb.Push(outputs[0])
@@ -1313,7 +1313,7 @@ func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	a_cnt := uint64(10)
+	a_cnt := uint64(int32(10))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
 	ϟb.Push(outputs[0]) // a
 	ϟb.CallNoPush(funcInfoCmdVoidOutString)
@@ -1335,7 +1335,7 @@ func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	a_cnt := uint64(10)
+	a_cnt := uint64(int32(10))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */})
 	ϟb.Push(outputs[0]) // a
 	ϟb.CallNoPush(funcInfoCmdVoidOutFixedSizeBuffer)
@@ -1357,9 +1357,9 @@ func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	a_cnt := uint64(15)
-	b_cnt := uint64(31)
-	c_cnt := uint64(47)
+	a_cnt := uint64(int32(15))
+	b_cnt := uint64(int32(31))
+	c_cnt := uint64(int32(47))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt /* a */, b_cnt /* b */, c_cnt /* c */})
 	ϟb.Push(outputs[0]) // a
 	ϟb.Push(outputs[1]) // b
@@ -1442,7 +1442,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	a_cnt := uint64(5)
+	a_cnt := uint64(int32(5))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{a_cnt * 4 /* a */})
 	ϟb.Push(outputs[0]) // a
 	ϟb.CallNoPush(funcInfoCmdVoidOutArrayOfRemapped)

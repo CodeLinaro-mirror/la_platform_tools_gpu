@@ -154,7 +154,7 @@ func (ϟa *CmdVoidArrayOfStrings) Mutate(ϟs *state.State) error {
 func (ϟa *CmdU8) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdU8_Out{}
-	ϟo.Result = 0
+	ϟo.Result = uint8(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_u8 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -163,7 +163,7 @@ func (ϟa *CmdU8) Mutate(ϟs *state.State) error {
 func (ϟa *CmdS8) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdS8_Out{}
-	ϟo.Result = 0
+	ϟo.Result = int8(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_s8 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -172,7 +172,7 @@ func (ϟa *CmdS8) Mutate(ϟs *state.State) error {
 func (ϟa *CmdU16) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdU16_Out{}
-	ϟo.Result = 0
+	ϟo.Result = uint16(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_u16 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -181,7 +181,7 @@ func (ϟa *CmdU16) Mutate(ϟs *state.State) error {
 func (ϟa *CmdS16) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdS16_Out{}
-	ϟo.Result = 0
+	ϟo.Result = int16(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_s16 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -190,7 +190,7 @@ func (ϟa *CmdS16) Mutate(ϟs *state.State) error {
 func (ϟa *CmdF32) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdF32_Out{}
-	ϟo.Result = 0
+	ϟo.Result = float32(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_f32 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -199,7 +199,7 @@ func (ϟa *CmdF32) Mutate(ϟs *state.State) error {
 func (ϟa *CmdU32) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdU32_Out{}
-	ϟo.Result = 0
+	ϟo.Result = uint32(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_u32 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -208,7 +208,7 @@ func (ϟa *CmdU32) Mutate(ϟs *state.State) error {
 func (ϟa *CmdS32) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdS32_Out{}
-	ϟo.Result = 0
+	ϟo.Result = int32(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_s32 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -217,7 +217,7 @@ func (ϟa *CmdS32) Mutate(ϟs *state.State) error {
 func (ϟa *CmdF64) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdF64_Out{}
-	ϟo.Result = 0
+	ϟo.Result = float64(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_f64 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -226,7 +226,7 @@ func (ϟa *CmdF64) Mutate(ϟs *state.State) error {
 func (ϟa *CmdU64) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdU64_Out{}
-	ϟo.Result = 0
+	ϟo.Result = uint64(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_u64 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -235,7 +235,7 @@ func (ϟa *CmdU64) Mutate(ϟs *state.State) error {
 func (ϟa *CmdS64) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdS64_Out{}
-	ϟo.Result = 0
+	ϟo.Result = int64(0)
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_s64 expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -262,7 +262,7 @@ func (ϟa *CmdString) Mutate(ϟs *state.State) error {
 func (ϟa *CmdArrayOfFloat) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdArrayOfFloat_Out{}
-	ϟo.Result = make(F32Array, 10)
+	ϟo.Result = make(F32Array, int32(10))
 	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_array_of_float expected %v got %v", ϟa.Out, ϟo)
@@ -409,7 +409,7 @@ func (ϟa *CmdVoidOut3Remapped) Mutate(ϟs *state.State) error {
 func (ϟa *CmdVoidOutArrayOfRemapped) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := CmdVoidOutArrayOfRemapped_Out{}
-	ϟo.A = make(RemappedArray, 5)
+	ϟo.A = make(RemappedArray, int32(5))
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying cmd_void_out_array_of_remapped expected %v got %v", ϟa.Out, ϟo)
 	}

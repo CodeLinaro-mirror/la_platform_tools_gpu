@@ -64,8 +64,8 @@ func isNumber(t semantic.Type) bool {
 }
 
 func castable(from semantic.Type, to semantic.Type) bool {
-	fromBase := baseType(to)
-	toBase := baseType(from)
+	fromBase := baseType(from)
+	toBase := baseType(to)
 	if assignable(toBase, fromBase) {
 		return true
 	}
@@ -79,13 +79,19 @@ func castable(from semantic.Type, to semantic.Type) bool {
 			return true // enum upcast, needed but unsafe
 		}
 	}
-	if fromIsEnum && isNumber(toBase) {
+	fromIsNumber, toIsNumber := isNumber(fromBase), isNumber(toBase)
+	if fromIsEnum && toIsNumber {
 		return true // enum -> number
 	}
-	if isNumber(fromBase) && toIsEnum {
+	if fromIsNumber && toIsEnum {
 		return true // number -> enum
 	}
-	if isNumber(fromBase) && isNumber(toBase) {
+	_, fromIsPointer := fromBase.(*semantic.Pointer)
+	fromIsPointer = fromIsPointer || (fromBase == semantic.PointerType)
+	if fromIsPointer && toIsNumber {
+		return true // pointer -> number
+	}
+	if fromIsNumber && toIsNumber {
 		return true // any numeric conversion
 	}
 	return false
