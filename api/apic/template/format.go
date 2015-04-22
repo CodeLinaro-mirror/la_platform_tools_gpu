@@ -26,6 +26,8 @@ import (
 )
 
 const (
+	disable    = '⋖'
+	enable     = '⋗'
 	indent     = '»'
 	unindent   = '«'
 	suppress   = '§'
@@ -129,6 +131,7 @@ func reflow(in string, indentSize int) ([]byte, error) {
 	wasNewline := false
 	suppressing := true
 	join := false
+	enabled := true
 	buf := &bytes.Buffer{}
 	flushPending := func() {
 		if wasNewline && !suppressing {
@@ -143,40 +146,52 @@ func reflow(in string, indentSize int) ([]byte, error) {
 		join = false
 	}
 	for _, ch := range in {
-		switch ch {
-		case whitespace:
-			ch = ' '
-		case suppress:
-			suppressing = true
-			ch = 0
-		case newline:
-			panicWrite(buf, '\n')
-			fallthrough
-		case '\n', '\r':
-			if !join {
-				wasNewline = true
+		if !enabled {
+			if ch == enable {
+				enabled = true
+			} else {
+				panicWrite(buf, ch)
 			}
-			ch = 0
-		case '\t', ' ':
-			if wasNewline {
+		} else {
+			switch ch {
+			case disable:
+				flushPending()
+				enabled = false
 				ch = 0
+			case whitespace:
+				ch = ' '
+			case suppress:
+				suppressing = true
+				ch = 0
+			case newline:
+				panicWrite(buf, '\n')
+				fallthrough
+			case '\n', '\r':
+				if !join {
+					wasNewline = true
+				}
+				ch = 0
+			case '\t', ' ':
+				if wasNewline {
+					ch = 0
+				}
+			case indent:
+				ch = 0
+				depth += 1
+			case '{', '[':
+				flushPending()
+				depth += 1
+			case unindent:
+				ch = 0
+				fallthrough
+			case '}', ']':
+				depth -= 1
 			}
-		case indent:
-			ch = 0
-			depth += 1
-		case '{', '[':
-			flushPending()
-			depth += 1
-		case unindent:
-			ch = 0
-			fallthrough
-		case '}', ']':
-			depth -= 1
-		}
 
-		if ch != 0 {
-			flushPending()
-			panicWrite(buf, ch)
+			if ch != 0 {
+				flushPending()
+				panicWrite(buf, ch)
+			}
 		}
 	}
 	return buf.Bytes(), nil
