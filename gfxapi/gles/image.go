@@ -4,7 +4,7 @@ import "fmt"
 
 // imageSize returns the image pixel data size in bytes for the given
 // width, height, format and type.
-func imageSize(width, height int32, f TexelFormat, ty TexelType) int32 {
+func imageSize(width, height uint32, f TexelFormat, ty TexelType) uint32 {
 	// TODO: Consider ty
 	switch f {
 	// TexelFormat_GLES1

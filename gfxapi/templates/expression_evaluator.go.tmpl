@@ -150,7 +150,7 @@ limitations under the License.
 */}}
 {{define "Read"}}
   {{     if IsBoolValue    $}}{{$}}
-  {{else if IsNumericValue $}}{{$}}
+  {{else if IsNumericValue $}}{{Macro "Go.Type" $}}({{$}})
   {{else if IsUnaryOp      $}}{{$.Operator}}({{Macro "Read" $.Expression}})
   {{else if IsStringValue  $}}{{printf "%q" $}}
   {{else if IsEnumEntry    $}}{{$.Enum.Name}}_{{$.Name}}
@@ -180,7 +180,7 @@ limitations under the License.
         {{end}}
       default:
         // TODO: better unmatched handling
-        log.Panicf("Unmatched switch in capture")
+        panic(fmt.Errorf("Unmatched switch(%v) in atom %T", {{Macro "Read" $.Value}}, ϟa))
         return result
       }
     }()

@@ -299,6 +299,10 @@ enum class RenderbufferFormat : uint32_t {
     GL_STENCIL_INDEX8 = 36168,
 };
 
+enum class Type_ARB_half_float_vertex : uint32_t {
+    GL_ARB_half_float_vertex = 5131,
+};
+
 enum class Type_OES_vertex_half_float : uint32_t {
     GL_HALF_FLOAT_OES = 36193,
 };

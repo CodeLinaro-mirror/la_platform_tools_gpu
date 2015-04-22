@@ -140,6 +140,10 @@ static const uint32_t GL_DEPTH_COMPONENT16 = 33189;
 static const uint32_t GL_STENCIL_INDEX8 = 36168;
 }
 
+namespace Type_ARB_half_float_vertex {
+static const uint32_t GL_ARB_half_float_vertex = 5131;
+}
+
 namespace Type_OES_vertex_half_float {
 static const uint32_t GL_HALF_FLOAT_OES = 36193;
 }
@@ -558,6 +562,7 @@ static const uint32_t GL_SHORT = 5122;
 static const uint32_t GL_UNSIGNED_BYTE = 5121;
 static const uint32_t GL_UNSIGNED_SHORT = 5123;
 static const uint32_t GL_HALF_FLOAT_OES = 36193;
+static const uint32_t GL_ARB_half_float_vertex = 5131;
 }
 
 namespace ShaderAttribType {
@@ -984,7 +989,7 @@ struct Image {
         mData = v;
         return *this;
     }
-    inline Image& SetSize(int32_t v) {
+    inline Image& SetSize(uint32_t v) {
         mSize = v;
         return *this;
     }
@@ -996,7 +1001,7 @@ struct Image {
     int32_t mWidth;
     int32_t mHeight;
     Memory mData;
-    int32_t mSize;
+    uint32_t mSize;
     uint32_t mFormat;
 };
 
@@ -1530,7 +1535,7 @@ struct VertexAttributeArray {
         mEnabled = v;
         return *this;
     }
-    inline VertexAttributeArray& SetSize(int32_t v) {
+    inline VertexAttributeArray& SetSize(uint32_t v) {
         mSize = v;
         return *this;
     }
@@ -1556,7 +1561,7 @@ struct VertexAttributeArray {
     }
 
     bool mEnabled;
-    int32_t mSize;
+    uint32_t mSize;
     uint32_t mType;
     bool mNormalized;
     int32_t mStride;

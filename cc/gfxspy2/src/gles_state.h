@@ -381,9 +381,9 @@ inline void GlesState::init(int32_t const width, int32_t const height, uint32_t 
             std::shared_ptr<Texture>(new Texture());
     this->Instances.mRenderbuffers[this->Internals.mNilRenderbuffer] =
             std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    RenderbufferId backbufferColorId = static_cast<RenderbufferId>(4294967295);
-    RenderbufferId backbufferDepthId = static_cast<RenderbufferId>(4294967294);
-    RenderbufferId backbufferStencilId = static_cast<RenderbufferId>(4294967293);
+    RenderbufferId backbufferColorId = (RenderbufferId)(4294967295);
+    RenderbufferId backbufferDepthId = (RenderbufferId)(4294967294);
+    RenderbufferId backbufferStencilId = (RenderbufferId)(4294967293);
     std::shared_ptr<Renderbuffer> backbufferColor =
             std::shared_ptr<Renderbuffer>(new Renderbuffer());
     backbufferColor->mWidth = width;
@@ -405,17 +405,17 @@ inline void GlesState::init(int32_t const width, int32_t const height, uint32_t 
     std::shared_ptr<Framebuffer> backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
     backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
-                    .SetObject(static_cast<uint32_t>(backbufferColorId))
+                    .SetObject((uint32_t)(backbufferColorId))
                     .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
                     .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
     backbuffer->mAttachments[FramebufferAttachment::GL_DEPTH_ATTACHMENT] =
             FramebufferAttachmentInfo()
-                    .SetObject(static_cast<uint32_t>(backbufferDepthId))
+                    .SetObject((uint32_t)(backbufferDepthId))
                     .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
                     .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
     backbuffer->mAttachments[FramebufferAttachment::GL_STENCIL_ATTACHMENT] =
             FramebufferAttachmentInfo()
-                    .SetObject(static_cast<uint32_t>(backbufferStencilId))
+                    .SetObject((uint32_t)(backbufferStencilId))
                     .SetType(FramebufferAttachmentType::GL_RENDERBUFFER)
                     .SetCubeMapFace(CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X);
     this->Instances.mFramebuffers[this->Internals.mBackbuffer] = backbuffer;
@@ -430,7 +430,7 @@ inline void GlesState::init(int32_t const width, int32_t const height, uint32_t 
     this->PixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT] = 4;
     this->PixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t i = 0; i < 64; ++i) {
-        this->VertexAttributeArrays[static_cast<AttributeLocation>(i)] =
+        this->VertexAttributeArrays[(AttributeLocation)(i)] =
                 std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
     }
 }
@@ -477,11 +477,11 @@ inline void GlesState::CGLCreateContext(CGLPixelFormatObj const pix, CGLContextO
 }
 
 inline void GlesState::glEnableClientState(uint32_t const type) {
-    this->Capabilities[static_cast<uint32_t>(type)] = true;
+    this->Capabilities[(uint32_t)(type)] = true;
 }
 
 inline void GlesState::glDisableClientState(uint32_t const type) {
-    this->Capabilities[static_cast<uint32_t>(type)] = false;
+    this->Capabilities[(uint32_t)(type)] = false;
 }
 
 inline void GlesState::glGetProgramBinaryOES(ProgramId const program, int32_t const buffer_size,
@@ -531,7 +531,7 @@ inline void GlesState::glTextureStorage3DEXT(TextureId const texture, uint32_t c
 
 inline void GlesState::glGenVertexArraysOES(int32_t const count, VertexArrayId* const arrays) {
     for (int32_t i = 0; i < count; ++i) {
-        VertexArrayId id = static_cast<VertexArrayId>(arrays[i]);
+        VertexArrayId id = (VertexArrayId)(arrays[i]);
         this->Instances.mVertexArrays[id] = std::shared_ptr<VertexArray>(new VertexArray());
     }
 }
@@ -612,11 +612,11 @@ inline void GlesState::glVertexAttribPointer(AttributeLocation const location, i
                                              uint32_t const type, bool const normalized,
                                              int32_t const stride, VertexPointer const data) {
     std::shared_ptr<VertexAttributeArray> a = this->VertexAttributeArrays[location];
-    a->mSize = size;
+    a->mSize = (uint32_t)(size);
     a->mType = type;
     a->mNormalized = normalized;
     a->mStride = stride;
-    a->mPointer = static_cast<void*>(data);
+    a->mPointer = (void*)(data);
     a->mBuffer = this->BoundBuffers[BufferTarget::GL_ARRAY_BUFFER];
 }
 
@@ -661,39 +661,39 @@ inline void GlesState::glTexParameteri(uint32_t const target, uint32_t const par
     std::shared_ptr<Texture> t = this->Instances.mTextures[id];
     switch (parameter) {
         case TextureParameter::GL_TEXTURE_MAG_FILTER: {
-            t->mMagFilter = static_cast<uint32_t>(value);
+            t->mMagFilter = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_MIN_FILTER: {
-            t->mMinFilter = static_cast<uint32_t>(value);
+            t->mMinFilter = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_WRAP_S: {
-            t->mWrapS = static_cast<uint32_t>(value);
+            t->mWrapS = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_WRAP_T: {
-            t->mWrapT = static_cast<uint32_t>(value);
+            t->mWrapT = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
-            t->mMaxAnisotropy = static_cast<float>(value);
+            t->mMaxAnisotropy = (float)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_R: {
-            t->mSwizzleR = static_cast<uint32_t>(value);
+            t->mSwizzleR = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_G: {
-            t->mSwizzleG = static_cast<uint32_t>(value);
+            t->mSwizzleG = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_B: {
-            t->mSwizzleB = static_cast<uint32_t>(value);
+            t->mSwizzleB = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_A: {
-            t->mSwizzleA = static_cast<uint32_t>(value);
+            t->mSwizzleA = (uint32_t)(value);
             break;
         }
     }
@@ -705,19 +705,19 @@ inline void GlesState::glTexParameterf(uint32_t const target, uint32_t const par
     std::shared_ptr<Texture> t = this->Instances.mTextures[id];
     switch (parameter) {
         case TextureParameter::GL_TEXTURE_MAG_FILTER: {
-            t->mMagFilter = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mMagFilter = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_MIN_FILTER: {
-            t->mMinFilter = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mMinFilter = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_WRAP_S: {
-            t->mWrapS = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mWrapS = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_WRAP_T: {
-            t->mWrapT = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mWrapT = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: {
@@ -725,19 +725,19 @@ inline void GlesState::glTexParameterf(uint32_t const target, uint32_t const par
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_R: {
-            t->mSwizzleR = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mSwizzleR = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_G: {
-            t->mSwizzleG = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mSwizzleG = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_B: {
-            t->mSwizzleB = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mSwizzleB = (uint32_t)(value);
             break;
         }
         case TextureParameter::GL_TEXTURE_SWIZZLE_A: {
-            t->mSwizzleA = static_cast<uint32_t>(static_cast<uint32_t>(value + 0.5f));
+            t->mSwizzleA = (uint32_t)(value);
             break;
         }
     }
@@ -1051,7 +1051,7 @@ inline void GlesState::glActiveTexture(uint32_t const unit) {
 
 inline void GlesState::glGenTextures(int32_t const count, TextureId* const textures) {
     for (int32_t i = 0; i < count; ++i) {
-        TextureId id = static_cast<TextureId>(textures[i]);
+        TextureId id = (TextureId)(textures[i]);
         this->Instances.mTextures[id] = std::shared_ptr<Texture>(new Texture());
     }
 }
@@ -1081,18 +1081,18 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(imageSize(width, height, format, type))
-                              .SetFormat(static_cast<uint32_t>(format));
+            Image l =
+                    Image()
+                            .SetWidth(width)
+                            .SetHeight(height)
+                            .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
+                            .SetFormat((uint32_t)(format));
             if (data != nullptr) {
-                read(static_cast<void*>(data), 0, l.mSize);
                 memcpy(l.mData, data, l.mSize);
             }
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
         case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
@@ -1104,20 +1104,20 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(imageSize(width, height, format, type))
-                              .SetFormat(static_cast<uint32_t>(format));
+            Image l =
+                    Image()
+                            .SetWidth(width)
+                            .SetHeight(height)
+                            .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
+                            .SetFormat((uint32_t)(format));
             if (data != nullptr) {
-                read(static_cast<void*>(data), 0, l.mSize);
                 memcpy(l.mData, data, l.mSize);
             }
             CubemapLevel cube = t->mCubemap[level];
-            cube.mFaces[static_cast<uint32_t>(target)] = l;
+            cube.mFaces[(uint32_t)(target)] = l;
             t->mCubemap[level] = cube;
             t->mKind = TextureKind::CUBEMAP;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
     }
@@ -1133,16 +1133,16 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(imageSize(width, height, format, type))
-                              .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
+            Image l =
+                    Image()
+                            .SetWidth(width)
+                            .SetHeight(height)
+                            .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
+                            .SetFormat((uint32_t)(format));
             memcpy(l.mData, data, l.mSize);
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
         case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
@@ -1154,18 +1154,18 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
             TextureId id =
                     this->TextureUnits[this->ActiveTextureUnit][TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> t = this->Instances.mTextures[id];
-            Image l = Image()
-                              .SetWidth(width)
-                              .SetHeight(height)
-                              .SetSize(imageSize(width, height, format, type))
-                              .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
+            Image l =
+                    Image()
+                            .SetWidth(width)
+                            .SetHeight(height)
+                            .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
+                            .SetFormat((uint32_t)(format));
             memcpy(l.mData, data, l.mSize);
             CubemapLevel cube = t->mCubemap[level];
-            cube.mFaces[static_cast<uint32_t>(target)] = l;
+            cube.mFaces[(uint32_t)(target)] = l;
             t->mCubemap[level] = cube;
             t->mKind = TextureKind::CUBEMAP;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
     }
@@ -1193,13 +1193,12 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             Image l = Image()
                               .SetWidth(width)
                               .SetHeight(height)
-                              .SetSize(image_size)
-                              .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
+                              .SetSize((uint32_t)(image_size))
+                              .SetFormat((uint32_t)(format));
             memcpy(l.mData, data, l.mSize);
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
         case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X:  // fall-through...
@@ -1214,15 +1213,14 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             Image l = Image()
                               .SetWidth(width)
                               .SetHeight(height)
-                              .SetSize(image_size)
-                              .SetFormat(static_cast<uint32_t>(format));
-            read(static_cast<void*>(data), 0, l.mSize);
+                              .SetSize((uint32_t)(image_size))
+                              .SetFormat((uint32_t)(format));
             memcpy(l.mData, data, l.mSize);
             CubemapLevel cube = t->mCubemap[level];
-            cube.mFaces[static_cast<uint32_t>(target)] = l;
+            cube.mFaces[(uint32_t)(target)] = l;
             t->mCubemap[level] = cube;
             t->mKind = TextureKind::CUBEMAP;
-            t->mFormat = static_cast<uint32_t>(format);
+            t->mFormat = (uint32_t)(format);
             break;
         }
     }
@@ -1242,7 +1240,7 @@ inline void GlesState::glReadPixels(int32_t const x, int32_t const y, int32_t co
 
 inline void GlesState::glGenFramebuffers(int32_t const count, FramebufferId* const framebuffers) {
     for (int32_t i = 0; i < count; ++i) {
-        FramebufferId id = static_cast<FramebufferId>(framebuffers[i]);
+        FramebufferId id = (FramebufferId)(framebuffers[i]);
         this->Instances.mFramebuffers[id] = std::shared_ptr<Framebuffer>(new Framebuffer());
     }
 }
@@ -1278,7 +1276,7 @@ inline void GlesState::glIsFramebuffer(FramebufferId const framebuffer, bool con
 inline void GlesState::glGenRenderbuffers(int32_t const count,
                                           RenderbufferId* const renderbuffers) {
     for (int32_t i = 0; i < count; ++i) {
-        RenderbufferId id = static_cast<RenderbufferId>(renderbuffers[i]);
+        RenderbufferId id = (RenderbufferId)(renderbuffers[i]);
         this->Instances.mRenderbuffers[id] = std::shared_ptr<Renderbuffer>(new Renderbuffer());
     }
 }
@@ -1320,7 +1318,7 @@ inline void GlesState::glGetRenderbufferParameteriv(uint32_t const target, uint3
 
 inline void GlesState::glGenBuffers(int32_t const count, BufferId* const buffers) {
     for (int32_t i = 0; i < count; ++i) {
-        BufferId id = static_cast<BufferId>(buffers[i]);
+        BufferId id = (BufferId)(buffers[i]);
         this->Instances.mBuffers[id] = std::shared_ptr<Buffer>(new Buffer());
     }
 }
@@ -1337,8 +1335,7 @@ inline void GlesState::glBufferData(uint32_t const target, int32_t const size,
     BufferId id = this->BoundBuffers[target];
     std::shared_ptr<Buffer> b = this->Instances.mBuffers[id];
     if (data != nullptr) {
-        read(static_cast<void*>(data), 0, size);
-        memcpy(b->mData, data, size);
+        memcpy(b->mData, data, (uint32_t)(size));
     }
     b->mSize = size;
     b->mUsage = usage;
@@ -1362,7 +1359,7 @@ inline void GlesState::glGetBufferParameteriv(uint32_t const target, uint32_t co
 }
 
 inline void GlesState::glCreateShader(uint32_t const type, ShaderId const result) {
-    ShaderId id = static_cast<ShaderId>(result);
+    ShaderId id = (ShaderId)(result);
     this->Instances.mShaders[id] = std::shared_ptr<Shader>(new Shader());
     std::shared_ptr<Shader> s = this->Instances.mShaders[id];
     s->mType = type;
@@ -1401,7 +1398,7 @@ inline void GlesState::glGetShaderInfoLog(ShaderId const shader, int32_t const b
                     ? (min_0_a)
                     :
                     /* case false: */ ((min_0_a < min_0_b == false)) ? (min_0_b) :
-                                                                     /* default: */ int32_t();
+                                                                     /* default: */ 0;
 }
 
 inline void GlesState::glGetShaderSource(ShaderId const shader, int32_t const buffer_length,
@@ -1414,7 +1411,7 @@ inline void GlesState::glGetShaderSource(ShaderId const shader, int32_t const bu
                     ? (min_1_a)
                     :
                     /* case false: */ ((min_1_a < min_1_b == false)) ? (min_1_b) :
-                                                                     /* default: */ int32_t();
+                                                                     /* default: */ 0;
 }
 
 inline void GlesState::glReleaseShaderCompiler() {}
@@ -1424,7 +1421,7 @@ inline void GlesState::glCompileShader(ShaderId const shader) {}
 inline void GlesState::glIsShader(ShaderId const shader, bool const result) { return; }
 
 inline void GlesState::glCreateProgram(ProgramId const result) {
-    ProgramId id = static_cast<ProgramId>(result);
+    ProgramId id = (ProgramId)(result);
     this->Instances.mPrograms[id] = std::shared_ptr<Program>(new Program());
     return;
 }
@@ -1456,7 +1453,7 @@ inline void GlesState::glGetAttachedShaders(ProgramId const program, int32_t con
                     ? (min_2_a)
                     :
                     /* case false: */ ((min_2_a < min_2_b == false)) ? (min_2_b) :
-                                                                     /* default: */ int32_t();
+                                                                     /* default: */ 0;
 }
 
 inline void GlesState::glLinkProgram(ProgramId const program) {}
@@ -1471,7 +1468,7 @@ inline void GlesState::glGetProgramInfoLog(ProgramId const program, int32_t cons
                     ? (min_3_a)
                     :
                     /* case false: */ ((min_3_a < min_3_b == false)) ? (min_3_b) :
-                                                                     /* default: */ int32_t();
+                                                                     /* default: */ 0;
 }
 
 inline void GlesState::glUseProgram(ProgramId const program) { this->BoundProgram = program; }
@@ -1530,7 +1527,7 @@ inline void GlesState::glFramebufferRenderbuffer(uint32_t const framebuffer_targ
                                     (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
                                     ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
                                     :
-                                    /* default: */ uint32_t();
+                                    /* default: */ 0;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->mAttachments[framebuffer_attachment];
@@ -1539,7 +1536,7 @@ inline void GlesState::glFramebufferRenderbuffer(uint32_t const framebuffer_targ
     } else {
         attachment.mType = FramebufferAttachmentType::GL_RENDERBUFFER;
     }
-    attachment.mObject = static_cast<uint32_t>(renderbuffer);
+    attachment.mObject = (uint32_t)(renderbuffer);
     attachment.mTextureLevel = 0;
     attachment.mCubeMapFace = CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
     framebuffer->mAttachments[framebuffer_attachment] = attachment;
@@ -1562,18 +1559,18 @@ inline void GlesState::glFramebufferTexture2D(uint32_t const framebuffer_target,
                                     (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
                                     ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
                                     :
-                                    /* default: */ uint32_t();
+                                    /* default: */ 0;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->mAttachments[framebuffer_attachment];
     if (texture == this->Internals.mNilTexture) {
         attachment.mType = FramebufferAttachmentType::GL_NONE;
-        attachment.mObject = static_cast<uint32_t>(this->Internals.mNilTexture);
+        attachment.mObject = (uint32_t)(this->Internals.mNilTexture);
         attachment.mTextureLevel = 0;
         attachment.mCubeMapFace = CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X;
     } else {
         attachment.mType = FramebufferAttachmentType::GL_TEXTURE;
-        attachment.mObject = static_cast<uint32_t>(texture);
+        attachment.mObject = (uint32_t)(texture);
         attachment.mTextureLevel = level;
         attachment.mCubeMapFace = /* switch(texture_target) */
                 /* case TextureImageTarget::GL_TEXTURE_2D: */ (
@@ -1618,7 +1615,7 @@ inline void GlesState::glFramebufferTexture2D(uint32_t const framebuffer_target,
                                                                         ? (CubeMapImageTarget::
                                                                                    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)
                                                                         :
-                                                                        /* default: */ uint32_t();
+                                                                        /* default: */ 0;
     }
     framebuffer->mAttachments[framebuffer_attachment] = attachment;
 }
@@ -1640,55 +1637,153 @@ inline void GlesState::glGetFramebufferAttachmentParameteriv(uint32_t const fram
                                     (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
                                     ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
                                     :
-                                    /* default: */ uint32_t();
+                                    /* default: */ 0;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo a = framebuffer->mAttachments[attachment];
 }
 
 inline void GlesState::glDrawElements(uint32_t const draw_mode, int32_t const element_count,
-                                      uint32_t const indices_type, IndicesPointer const indices) {}
-
-inline void GlesState::glDrawArrays(uint32_t const draw_mode, int32_t const first_index,
-                                    int32_t const index_count) {
-    for (int32_t i = 0; i < 64; ++i) {
+                                      uint32_t const indices_type, IndicesPointer const indices) {
+    BufferId id = this->BoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER];
+    void* index_data = /* switch(id != this->Internals.mNilBuffer) */
+            /* case true: */ ((id != this->Internals.mNilBuffer == true))
+                    ? (memoryOffset(this->Instances.mBuffers[id]->mData, (uint64_t)(indices)))
+                    :
+                    /* case false: */ ((id != this->Internals.mNilBuffer == false))
+                            ? ((void*)(indices))
+                            :
+                            /* default: */ nullptr;
+    uint32_t IndexSize_4_indices_type = indices_type;
+    uint32_t IndexSize_4_result = /* switch(IndexSize_4_indices_type) */
+            /* case IndicesType::GL_UNSIGNED_BYTE: */ (
+                    (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_BYTE))
+                    ? (1)
+                    :
+                    /* case IndicesType::GL_UNSIGNED_SHORT: */ (
+                            (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_SHORT))
+                            ? (2)
+                            :
+                            /* case IndicesType::GL_UNSIGNED_INT: */ (
+                                    (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_INT))
+                                    ? (4)
+                                    :
+                                    /* default: */ 0;
+    read(index_data, 0, (uint32_t)(element_count)*IndexSize_4_result);
+    uint32_t first = minIndex(index_data, indices_type, (uint32_t)(element_count));
+    uint32_t last = maxIndex(index_data, indices_type, (uint32_t)(element_count));
+    uint32_t ReadVertexArrays_5_first_index = first;
+    uint32_t ReadVertexArrays_5_index_count = last - first;
+    for (int32_t i = 0; i < this->VertexAttributeArrays.size(); ++i) {
         std::shared_ptr<VertexAttributeArray> arr =
-                this->VertexAttributeArrays[static_cast<AttributeLocation>(i)];
+                this->VertexAttributeArrays[(AttributeLocation)(i)];
         if (arr->mEnabled) {
-            uint32_t vertexAttribTypeSize_4_t = arr->mType;
-            int32_t vertexAttribTypeSize_4_result = /* switch(vertexAttribTypeSize_4_t) */
+            uint32_t vertexAttribTypeSize_6_t = arr->mType;
+            uint32_t vertexAttribTypeSize_6_result = /* switch(vertexAttribTypeSize_6_t) */
                     /* case VertexAttribType::GL_BYTE: */ (
-                            (vertexAttribTypeSize_4_t == VertexAttribType::GL_BYTE))
+                            (vertexAttribTypeSize_6_t == VertexAttribType::GL_BYTE))
                             ? (1)
                             :
                             /* case VertexAttribType::GL_UNSIGNED_BYTE: */ ((
-                                    vertexAttribTypeSize_4_t == VertexAttribType::GL_UNSIGNED_BYTE))
+                                    vertexAttribTypeSize_6_t == VertexAttribType::GL_UNSIGNED_BYTE))
                                     ? (1)
                                     :
                                     /* case VertexAttribType::GL_SHORT: */ ((
-                                            vertexAttribTypeSize_4_t == VertexAttribType::GL_SHORT))
+                                            vertexAttribTypeSize_6_t == VertexAttribType::GL_SHORT))
                                             ? (2)
                                             :
                                             /* case VertexAttribType::GL_UNSIGNED_SHORT: */ (
-                                                    (vertexAttribTypeSize_4_t ==
+                                                    (vertexAttribTypeSize_6_t ==
                                                      VertexAttribType::GL_UNSIGNED_SHORT))
                                                     ? (2)
                                                     :
                                                     /* case VertexAttribType::GL_FIXED: */ (
-                                                            (vertexAttribTypeSize_4_t ==
+                                                            (vertexAttribTypeSize_6_t ==
                                                              VertexAttribType::GL_FIXED))
                                                             ? (4)
                                                             :
                                                             /* case VertexAttribType::GL_FLOAT: */ (
-                                                                    (vertexAttribTypeSize_4_t ==
+                                                                    (vertexAttribTypeSize_6_t ==
                                                                      VertexAttribType::GL_FLOAT))
                                                                     ? (4)
                                                                     :
-                                                                    /* default: */ int32_t();
-            int32_t elsize = vertexAttribTypeSize_4_result * arr->mSize;
-            int32_t size = elsize * index_count;
-            int32_t offset = elsize * first_index;
-            if (arr->mBuffer == static_cast<BufferId>(0)) {
+                                                                    /* case VertexAttribType::GL_ARB_half_float_vertex: */ (
+                                                                            (vertexAttribTypeSize_6_t ==
+                                                                             VertexAttribType::
+                                                                                     GL_ARB_half_float_vertex))
+                                                                            ? (2)
+                                                                            :
+                                                                            /* case VertexAttribType::GL_HALF_FLOAT_OES: */ (
+                                                                                    (vertexAttribTypeSize_6_t ==
+                                                                                     VertexAttribType::
+                                                                                             GL_HALF_FLOAT_OES))
+                                                                                    ? (2)
+                                                                                    :
+                                                                                    /* default: */ 0;
+            uint32_t elsize = vertexAttribTypeSize_6_result * arr->mSize;
+            uint32_t size = elsize * ReadVertexArrays_5_index_count;
+            uint32_t offset = elsize * ReadVertexArrays_5_first_index;
+            if (arr->mBuffer == (BufferId)(0)) {
+                read(arr->mPointer, offset, size);
+            }
+        }
+    }
+}
+
+inline void GlesState::glDrawArrays(uint32_t const draw_mode, int32_t const first_index,
+                                    int32_t const index_count) {
+    uint32_t ReadVertexArrays_7_first_index = (uint32_t)(first_index);
+    uint32_t ReadVertexArrays_7_index_count = (uint32_t)(index_count);
+    for (int32_t i = 0; i < this->VertexAttributeArrays.size(); ++i) {
+        std::shared_ptr<VertexAttributeArray> arr =
+                this->VertexAttributeArrays[(AttributeLocation)(i)];
+        if (arr->mEnabled) {
+            uint32_t vertexAttribTypeSize_8_t = arr->mType;
+            uint32_t vertexAttribTypeSize_8_result = /* switch(vertexAttribTypeSize_8_t) */
+                    /* case VertexAttribType::GL_BYTE: */ (
+                            (vertexAttribTypeSize_8_t == VertexAttribType::GL_BYTE))
+                            ? (1)
+                            :
+                            /* case VertexAttribType::GL_UNSIGNED_BYTE: */ ((
+                                    vertexAttribTypeSize_8_t == VertexAttribType::GL_UNSIGNED_BYTE))
+                                    ? (1)
+                                    :
+                                    /* case VertexAttribType::GL_SHORT: */ ((
+                                            vertexAttribTypeSize_8_t == VertexAttribType::GL_SHORT))
+                                            ? (2)
+                                            :
+                                            /* case VertexAttribType::GL_UNSIGNED_SHORT: */ (
+                                                    (vertexAttribTypeSize_8_t ==
+                                                     VertexAttribType::GL_UNSIGNED_SHORT))
+                                                    ? (2)
+                                                    :
+                                                    /* case VertexAttribType::GL_FIXED: */ (
+                                                            (vertexAttribTypeSize_8_t ==
+                                                             VertexAttribType::GL_FIXED))
+                                                            ? (4)
+                                                            :
+                                                            /* case VertexAttribType::GL_FLOAT: */ (
+                                                                    (vertexAttribTypeSize_8_t ==
+                                                                     VertexAttribType::GL_FLOAT))
+                                                                    ? (4)
+                                                                    :
+                                                                    /* case VertexAttribType::GL_ARB_half_float_vertex: */ (
+                                                                            (vertexAttribTypeSize_8_t ==
+                                                                             VertexAttribType::
+                                                                                     GL_ARB_half_float_vertex))
+                                                                            ? (2)
+                                                                            :
+                                                                            /* case VertexAttribType::GL_HALF_FLOAT_OES: */ (
+                                                                                    (vertexAttribTypeSize_8_t ==
+                                                                                     VertexAttribType::
+                                                                                             GL_HALF_FLOAT_OES))
+                                                                                    ? (2)
+                                                                                    :
+                                                                                    /* default: */ 0;
+            uint32_t elsize = vertexAttribTypeSize_8_result * arr->mSize;
+            uint32_t size = elsize * ReadVertexArrays_7_index_count;
+            uint32_t offset = elsize * ReadVertexArrays_7_first_index;
+            if (arr->mBuffer == (BufferId)(0)) {
                 read(arr->mPointer, offset, size);
             }
         }
@@ -1990,7 +2085,7 @@ inline void GlesState::glBlitFramebuffer(int32_t const srcX0, int32_t const srcY
 
 inline void GlesState::glGenQueries(int32_t const count, QueryId* const queries) {
     for (int32_t i = 0; i < count; ++i) {
-        QueryId id = static_cast<QueryId>(queries[i]);
+        QueryId id = (QueryId)(queries[i]);
         this->Instances.mQueries[id] = std::shared_ptr<Query>(new Query());
     }
 }
@@ -2015,7 +2110,7 @@ inline void GlesState::glGetQueryObjectuiv(QueryId const query, uint32_t const p
 
 inline void GlesState::glGenQueriesEXT(int32_t const count, QueryId* const queries) {
     for (int32_t i = 0; i < count; ++i) {
-        QueryId id = static_cast<QueryId>(queries[i]);
+        QueryId id = (QueryId)(queries[i]);
         this->Instances.mQueries[id] = std::shared_ptr<Query>(new Query());
     }
 }

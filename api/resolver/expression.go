@@ -140,6 +140,12 @@ func macroCall(ctx *context, in *ast.Call, stub *macroStub) semantic.Expression 
 		ctx.scope.block = callScope.block
 		// replace parameters with a new uniquely named local variable
 		for i, p := range params {
+			if i >= len(args) {
+				break // will have already errored
+			}
+			if args[i] == nil {
+				continue // will have already errored
+			}
 			l := addLocal(ctx, nil, p.Name, args[i])
 			// set the unique name after symbol table injection
 			// this means that the lookups inside the macro match the local correctly

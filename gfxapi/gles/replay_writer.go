@@ -1579,7 +1579,7 @@ func (ϟa *EglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(0)
+	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
 	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.In.Config.value(ϟb, ϟa, ϟs))
@@ -1654,7 +1654,7 @@ func (ϟa *WglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(0)
+	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
 	ϟb.Push(ϟa.In.Hdc.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoWglCreateContext)
@@ -1678,7 +1678,7 @@ func (ϟa *WglMakeCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(0)
+	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
 	ϟb.Push(ϟa.In.Hdc.value(ϟb, ϟa, ϟs))
 	ϟb.Push(ϟa.In.Hglrc.value(ϟb, ϟa, ϟs))
@@ -2315,7 +2315,7 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	value_cnt := uint64(1)
+	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
 	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
@@ -2343,7 +2343,7 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	value_cnt := uint64(1)
+	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
 	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
 		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
@@ -2466,7 +2466,7 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(1)
+	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
 	ϟb.Push(value.U32(ϟa.In.Target))
 	ϟb.Push(value.U32(ϟa.In.Parameter))
@@ -2490,7 +2490,7 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(1)
+	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
 	ϟb.Push(value.U32(ϟa.In.Target))
 	ϟb.Push(value.U32(ϟa.In.Parameter))
@@ -2988,7 +2988,7 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *state.State, ϟb
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	range_cnt := uint64(2)
+	range_cnt := uint64(int32(2))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{range_cnt * 4 /* range */, 4 /* precision */})
 	ϟb.Push(value.U32(ϟa.In.ShaderType))
 	ϟb.Push(value.U32(ϟa.In.PrecisionType))
@@ -3367,7 +3367,7 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	data_cnt := uint64(imageSize(ϟa.In.Width, ϟa.In.Height, TexelFormat(ϟa.In.Format), ϟa.In.Type))
+	data_cnt := uint64(imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), TexelFormat(ϟa.In.Format), ϟa.In.Type))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{data_cnt /* data */})
 	ϟb.Push(value.S32(ϟa.In.X))
 	ϟb.Push(value.S32(ϟa.In.Y))
@@ -3597,7 +3597,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, �
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(1)
+	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
 	ϟb.Push(value.U32(ϟa.In.Target))
 	ϟb.Push(value.U32(ϟa.In.Parameter))
@@ -4293,7 +4293,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *state
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	value_cnt := uint64(1)
+	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
 	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
 	ϟb.Push(value.U32(ϟa.In.Attachment))
@@ -4434,7 +4434,7 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(256)
+	result_cnt := uint64(int32(256))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
 	ϟb.Push(value.U32(ϟa.In.Param))
 	ϟb.CallPush(funcInfoGlGetString)

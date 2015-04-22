@@ -44,9 +44,9 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		s.Init()
 		return s
 	}()
-	backbufferColorId := RenderbufferId(4294967295)   // RenderbufferId
-	backbufferDepthId := RenderbufferId(4294967294)   // RenderbufferId
-	backbufferStencilId := RenderbufferId(4294967293) // RenderbufferId
+	backbufferColorId := RenderbufferId(uint32(4294967295))   // RenderbufferId
+	backbufferDepthId := RenderbufferId(uint32(4294967294))   // RenderbufferId
+	backbufferStencilId := RenderbufferId(uint32(4294967293)) // RenderbufferId
 	backbufferColor := func() *Renderbuffer {
 		s := &Renderbuffer{}
 		s.Init()
@@ -108,13 +108,13 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 	ϟc.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER] = ϟc.Internals.Backbuffer
 	ϟc.Rasterizing.Scissor.Width = ϟa.In.Width
 	ϟc.Rasterizing.Scissor.Height = ϟa.In.Height
-	ϟc.Rasterizing.StencilMask[FaceMode_GL_FRONT] = 4294967295
-	ϟc.Rasterizing.StencilMask[FaceMode_GL_BACK] = 4294967295
+	ϟc.Rasterizing.StencilMask[FaceMode_GL_FRONT] = uint32(4294967295)
+	ϟc.Rasterizing.StencilMask[FaceMode_GL_BACK] = uint32(4294967295)
 	ϟc.Rasterizing.Viewport.Width = ϟa.In.Width
 	ϟc.Rasterizing.Viewport.Height = ϟa.In.Height
-	ϟc.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = 4
-	ϟc.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = 4
-	for i := int32(0); i < 64; i++ {
+	ϟc.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT] = int32(4)
+	ϟc.PixelStorage[PixelStoreParameter_GL_UNPACK_ALIGNMENT] = int32(4)
+	for i := int32(int32(0)); i < int32(64); i++ {
 		ϟc.VertexAttributeArrays[AttributeLocation(i)] = func() *VertexAttributeArray {
 			s := &VertexAttributeArray{}
 			s.Init()
@@ -362,7 +362,7 @@ func (ϟa *GlGenVertexArraysOES) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenVertexArraysOES_Out{}
 	ϟo.Arrays = make(VertexArrayIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := VertexArrayId(ϟa.Out.Arrays[i]) // VertexArrayId
 		ϟc.Instances.VertexArrays[id] = func() *VertexArray {
 			s := &VertexArray{}
@@ -396,7 +396,7 @@ func (ϟa *GlBindVertexArrayOES) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteVertexArraysOES) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteVertexArraysOES_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.VertexArrays.Delete(ϟa.In.Arrays[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -536,7 +536,7 @@ func (ϟa *GlVertexAttribPointer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlVertexAttribPointer_Out{}
 	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayRef
-	a.Size = ϟa.In.Size
+	a.Size = uint32(ϟa.In.Size)
 	a.Type = ϟa.In.Type
 	a.Normalized = ϟa.In.Normalized
 	a.Stride = ϟa.In.Stride
@@ -584,7 +584,7 @@ func (ϟa *GlGetError) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetProgramiv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetProgramiv_Out{}
-	ϟo.Value = make(S32Array, 1)
+	ϟo.Value = make(S32Array, int32(1))
 	ϟo.Value = ϟa.Out.Value
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetProgramiv expected %v got %v", ϟa.Out, ϟo)
@@ -594,9 +594,9 @@ func (ϟa *GlGetProgramiv) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetShaderiv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetShaderiv_Out{}
-	ϟo.Value = make(S32Array, 1)
+	ϟo.Value = make(S32Array, int32(1))
 	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
-	ϟo.Value[0] = func() (result int32) {
+	ϟo.Value[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case ShaderParameter_GL_SHADER_TYPE:
 			return int32(s.Type)
@@ -604,12 +604,12 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *state.State) error {
 			return func() (result int32) {
 				switch s.Deletable {
 				case true:
-					return 1
+					return int32(1)
 				case false:
-					return 0
+					return int32(0)
 				default:
 					// TODO: better unmatched handling
-					log.Panicf("Unmatched switch in capture")
+					panic(fmt.Errorf("Unmatched switch(%v) in atom %T", s.Deletable, ϟa))
 					return result
 				}
 			}()
@@ -617,22 +617,22 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *state.State) error {
 			return func() (result int32) {
 				switch s.Compiled {
 				case true:
-					return 1
+					return int32(1)
 				case false:
-					return 0
+					return int32(0)
 				default:
 					// TODO: better unmatched handling
-					log.Panicf("Unmatched switch in capture")
+					panic(fmt.Errorf("Unmatched switch(%v) in atom %T", s.Compiled, ϟa))
 					return result
 				}
 			}()
 		case ShaderParameter_GL_INFO_LOG_LENGTH:
 			return strlen(s.InfoLog)
 		case ShaderParameter_GL_SHADER_SOURCE_LENGTH:
-			return strlen(s.Source[0])
+			return strlen(s.Source[int32(0)])
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -742,10 +742,10 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetTexParameteriv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetTexParameteriv_Out{}
-	ϟo.Values = make(S32Array, 1)
+	ϟo.Values = make(S32Array, int32(1))
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
 	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
-	ϟo.Values[0] = func() (result int32) {
+	ϟo.Values[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case TextureParameter_GL_TEXTURE_MAG_FILTER:
 			return int32(t.MagFilter)
@@ -767,7 +767,7 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *state.State) error {
 			return int32(t.SwizzleA)
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -780,10 +780,10 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetTexParameterfv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetTexParameterfv_Out{}
-	ϟo.Values = make(F32Array, 1)
+	ϟo.Values = make(F32Array, int32(1))
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
 	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
-	ϟo.Values[0] = func() (result float32) {
+	ϟo.Values[int32(0)] = func() (result float32) {
 		switch ϟa.In.Parameter {
 		case TextureParameter_GL_TEXTURE_MAG_FILTER:
 			return float32(t.MagFilter)
@@ -805,7 +805,7 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *state.State) error {
 			return float32(t.SwizzleA)
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -898,7 +898,7 @@ func (ϟa *GlUniform1iv) Mutate(ϟs *state.State) error {
 	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
-	uniform.Value.S32 = ϟa.In.Value[0]
+	uniform.Value.S32 = ϟa.In.Value[int32(0)]
 	program.Uniforms[ϟa.In.Location] = uniform
 	_, _ = program, uniform
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -915,8 +915,8 @@ func (ϟa *GlUniform2iv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec2i = func() Vec2i {
 		s := Vec2i{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -935,9 +935,9 @@ func (ϟa *GlUniform3iv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec3i = func() Vec3i {
 		s := Vec3i{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
-		s.Z = ϟa.In.Value[2]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
+		s.Z = ϟa.In.Value[int32(2)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -956,10 +956,10 @@ func (ϟa *GlUniform4iv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec4i = func() Vec4i {
 		s := Vec4i{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
-		s.Z = ϟa.In.Value[2]
-		s.W = ϟa.In.Value[3]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
+		s.Z = ϟa.In.Value[int32(2)]
+		s.W = ϟa.In.Value[int32(3)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -1052,7 +1052,7 @@ func (ϟa *GlUniform1fv) Mutate(ϟs *state.State) error {
 	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
-	uniform.Value.F32 = ϟa.In.Value[0]
+	uniform.Value.F32 = ϟa.In.Value[int32(0)]
 	program.Uniforms[ϟa.In.Location] = uniform
 	_, _ = program, uniform
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -1069,8 +1069,8 @@ func (ϟa *GlUniform2fv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec2f = func() Vec2f {
 		s := Vec2f{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -1089,9 +1089,9 @@ func (ϟa *GlUniform3fv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec3f = func() Vec3f {
 		s := Vec3f{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
-		s.Z = ϟa.In.Value[2]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
+		s.Z = ϟa.In.Value[int32(2)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -1110,10 +1110,10 @@ func (ϟa *GlUniform4fv) Mutate(ϟs *state.State) error {
 	uniform.Value.Vec4f = func() Vec4f {
 		s := Vec4f{}
 		s.Init()
-		s.X = ϟa.In.Value[0]
-		s.Y = ϟa.In.Value[1]
-		s.Z = ϟa.In.Value[2]
-		s.W = ϟa.In.Value[3]
+		s.X = ϟa.In.Value[int32(0)]
+		s.Y = ϟa.In.Value[int32(1)]
+		s.Z = ϟa.In.Value[int32(2)]
+		s.W = ϟa.In.Value[int32(3)]
 		return s
 	}()
 	program.Uniforms[ϟa.In.Location] = uniform
@@ -1135,15 +1135,15 @@ func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *state.State) error {
 		s.Col0 = func() Vec2f {
 			s := Vec2f{}
 			s.Init()
-			s.X = ϟa.In.Values[0]
-			s.Y = ϟa.In.Values[1]
+			s.X = ϟa.In.Values[int32(0)]
+			s.Y = ϟa.In.Values[int32(1)]
 			return s
 		}()
 		s.Col1 = func() Vec2f {
 			s := Vec2f{}
 			s.Init()
-			s.X = ϟa.In.Values[0]
-			s.Y = ϟa.In.Values[1]
+			s.X = ϟa.In.Values[int32(0)]
+			s.Y = ϟa.In.Values[int32(1)]
 			return s
 		}()
 		return s
@@ -1167,25 +1167,25 @@ func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *state.State) error {
 		s.Col0 = func() Vec3f {
 			s := Vec3f{}
 			s.Init()
-			s.X = ϟa.In.Values[0]
-			s.Y = ϟa.In.Values[1]
-			s.Z = ϟa.In.Values[2]
+			s.X = ϟa.In.Values[int32(0)]
+			s.Y = ϟa.In.Values[int32(1)]
+			s.Z = ϟa.In.Values[int32(2)]
 			return s
 		}()
 		s.Col1 = func() Vec3f {
 			s := Vec3f{}
 			s.Init()
-			s.X = ϟa.In.Values[3]
-			s.Y = ϟa.In.Values[4]
-			s.Z = ϟa.In.Values[5]
+			s.X = ϟa.In.Values[int32(3)]
+			s.Y = ϟa.In.Values[int32(4)]
+			s.Z = ϟa.In.Values[int32(5)]
 			return s
 		}()
 		s.Col2 = func() Vec3f {
 			s := Vec3f{}
 			s.Init()
-			s.X = ϟa.In.Values[6]
-			s.Y = ϟa.In.Values[7]
-			s.Z = ϟa.In.Values[8]
+			s.X = ϟa.In.Values[int32(6)]
+			s.Y = ϟa.In.Values[int32(7)]
+			s.Z = ϟa.In.Values[int32(8)]
 			return s
 		}()
 		return s
@@ -1208,37 +1208,37 @@ func (ϟa *GlUniformMatrix4fv) Mutate(ϟs *state.State) error {
 		s.Col0 = func() Vec4f {
 			s := Vec4f{}
 			s.Init()
-			s.X = ϟa.In.Values[0]
-			s.Y = ϟa.In.Values[1]
-			s.Z = ϟa.In.Values[2]
-			s.W = ϟa.In.Values[3]
+			s.X = ϟa.In.Values[int32(0)]
+			s.Y = ϟa.In.Values[int32(1)]
+			s.Z = ϟa.In.Values[int32(2)]
+			s.W = ϟa.In.Values[int32(3)]
 			return s
 		}()
 		s.Col1 = func() Vec4f {
 			s := Vec4f{}
 			s.Init()
-			s.X = ϟa.In.Values[4]
-			s.Y = ϟa.In.Values[5]
-			s.Z = ϟa.In.Values[6]
-			s.W = ϟa.In.Values[7]
+			s.X = ϟa.In.Values[int32(4)]
+			s.Y = ϟa.In.Values[int32(5)]
+			s.Z = ϟa.In.Values[int32(6)]
+			s.W = ϟa.In.Values[int32(7)]
 			return s
 		}()
 		s.Col2 = func() Vec4f {
 			s := Vec4f{}
 			s.Init()
-			s.X = ϟa.In.Values[8]
-			s.Y = ϟa.In.Values[9]
-			s.Z = ϟa.In.Values[10]
-			s.W = ϟa.In.Values[11]
+			s.X = ϟa.In.Values[int32(8)]
+			s.Y = ϟa.In.Values[int32(9)]
+			s.Z = ϟa.In.Values[int32(10)]
+			s.W = ϟa.In.Values[int32(11)]
 			return s
 		}()
 		s.Col3 = func() Vec4f {
 			s := Vec4f{}
 			s.Init()
-			s.X = ϟa.In.Values[12]
-			s.Y = ϟa.In.Values[13]
-			s.Z = ϟa.In.Values[14]
-			s.W = ϟa.In.Values[15]
+			s.X = ϟa.In.Values[int32(12)]
+			s.Y = ϟa.In.Values[int32(13)]
+			s.Z = ϟa.In.Values[int32(14)]
+			s.W = ϟa.In.Values[int32(15)]
 			return s
 		}()
 		return s
@@ -1333,7 +1333,7 @@ func (ϟa *GlVertexAttrib4fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetShaderPrecisionFormat) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetShaderPrecisionFormat_Out{}
-	ϟo.Range = make(S32Array, 2)
+	ϟo.Range = make(S32Array, int32(2))
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetShaderPrecisionFormat expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -1485,7 +1485,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenTextures_Out{}
 	ϟo.Textures = make(TextureIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := TextureId(ϟa.Out.Textures[i]) // TextureId
 		ϟc.Instances.Textures[id] = func() *Texture {
 			s := &Texture{}
@@ -1503,7 +1503,7 @@ func (ϟa *GlGenTextures) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteTextures) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteTextures_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Textures.Delete(ϟa.In.Textures[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -1548,12 +1548,11 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = imageSize(ϟa.In.Width, ϟa.In.Height, ϟa.In.Format, ϟa.In.Type)
+			s.Size = imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), ϟa.In.Format, ϟa.In.Type)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		if (ϟa.In.Data) != (TexturePointer(0)) {
-			read(memory.Pointer(ϟa.In.Data), 0, l.Size)
+		if (ϟa.In.Data) != (TexturePointer(memory.Pointer(0))) {
 			l.Data.Write(ϟs.Memory.Slice(memory.Range{
 				Base: memory.Pointer(ϟa.In.Data),
 				Size: uint64(l.Size),
@@ -1571,12 +1570,11 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = imageSize(ϟa.In.Width, ϟa.In.Height, ϟa.In.Format, ϟa.In.Type)
+			s.Size = imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), ϟa.In.Format, ϟa.In.Type)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		if (ϟa.In.Data) != (TexturePointer(0)) {
-			read(memory.Pointer(ϟa.In.Data), 0, l.Size)
+		if (ϟa.In.Data) != (TexturePointer(memory.Pointer(0))) {
 			l.Data.Write(ϟs.Memory.Slice(memory.Range{
 				Base: memory.Pointer(ϟa.In.Data),
 				Size: uint64(l.Size),
@@ -1610,11 +1608,10 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = imageSize(ϟa.In.Width, ϟa.In.Height, ϟa.In.Format, ϟa.In.Type)
+			s.Size = imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), ϟa.In.Format, ϟa.In.Type)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1631,11 +1628,10 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = imageSize(ϟa.In.Width, ϟa.In.Height, ϟa.In.Format, ϟa.In.Type)
+			s.Size = imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), ϟa.In.Format, ϟa.In.Type)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1684,11 +1680,10 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = ϟa.In.ImageSize
+			s.Size = uint32(ϟa.In.ImageSize)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1705,11 +1700,10 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Init()
 			s.Width = ϟa.In.Width
 			s.Height = ϟa.In.Height
-			s.Size = ϟa.In.ImageSize
+			s.Size = uint32(ϟa.In.ImageSize)
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
 		l.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
 			Size: uint64(l.Size),
@@ -1758,7 +1752,7 @@ func (ϟa *GlGenFramebuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenFramebuffers_Out{}
 	ϟo.Framebuffers = make(FramebufferIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := FramebufferId(ϟa.Out.Framebuffers[i]) // FramebufferId
 		ϟc.Instances.Framebuffers[id] = func() *Framebuffer {
 			s := &Framebuffer{}
@@ -1806,7 +1800,7 @@ func (ϟa *GlCheckFramebufferStatus) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteFramebuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteFramebuffers_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Framebuffers.Delete(ϟa.In.Framebuffers[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -1827,7 +1821,7 @@ func (ϟa *GlGenRenderbuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenRenderbuffers_Out{}
 	ϟo.Renderbuffers = make(RenderbufferIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := RenderbufferId(ϟa.Out.Renderbuffers[i]) // RenderbufferId
 		ϟc.Instances.Renderbuffers[id] = func() *Renderbuffer {
 			s := &Renderbuffer{}
@@ -1875,7 +1869,7 @@ func (ϟa *GlRenderbufferStorage) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteRenderbuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteRenderbuffers_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Renderbuffers.Delete(ϟa.In.Renderbuffers[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -1895,10 +1889,10 @@ func (ϟa *GlIsRenderbuffer) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetRenderbufferParameteriv_Out{}
-	ϟo.Values = make(S32Array, 1)
+	ϟo.Values = make(S32Array, int32(1))
 	id := ϟc.BoundRenderbuffers.Get(ϟa.In.Target) // RenderbufferId
 	rb := ϟc.Instances.Renderbuffers.Get(id)      // RenderbufferRef
-	ϟo.Values[0] = func() (result int32) {
+	ϟo.Values[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case RenderbufferParameter_GL_RENDERBUFFER_WIDTH:
 			return rb.Width
@@ -1908,7 +1902,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *state.State) error {
 			return int32(rb.Format)
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -1922,7 +1916,7 @@ func (ϟa *GlGenBuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenBuffers_Out{}
 	ϟo.Buffers = make(BufferIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := BufferId(ϟa.Out.Buffers[i]) // BufferId
 		ϟc.Instances.Buffers[id] = func() *Buffer {
 			s := &Buffer{}
@@ -1958,11 +1952,10 @@ func (ϟa *GlBufferData) Mutate(ϟs *state.State) error {
 	ϟo := GlBufferData_Out{}
 	id := ϟc.BoundBuffers.Get(ϟa.In.Target) // BufferId
 	b := ϟc.Instances.Buffers.Get(id)       // BufferRef
-	if (ϟa.In.Data) != (BufferDataPointer(0)) {
-		read(memory.Pointer(ϟa.In.Data), 0, ϟa.In.Size)
+	if (ϟa.In.Data) != (BufferDataPointer(memory.Pointer(0))) {
 		b.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
-			Size: uint64(ϟa.In.Size),
+			Size: uint64(uint32(ϟa.In.Size)),
 		}))
 	}
 	b.Size = ϟa.In.Size
@@ -1984,7 +1977,7 @@ func (ϟa *GlBufferSubData) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteBuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteBuffers_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Buffers.Delete(ϟa.In.Buffers[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -2014,7 +2007,7 @@ func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *state.State) error {
 			return int32(b.Usage)
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -2068,7 +2061,7 @@ func (ϟa *GlShaderSource) Mutate(ϟs *state.State) error {
 func (ϟa *GlShaderBinary) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlShaderBinary_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glShaderBinary expected %v got %v", ϟa.Out, ϟo)
@@ -2089,12 +2082,12 @@ func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *state.State) error {
 			return min_0_b
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (min_0_a) < (min_0_b), ϟa))
 			return result
 		}
 	}() // s32
 	ϟo.StringLengthWritten = min_0_result
-	ϟo.Info = substr(s.InfoLog, 0, ϟo.StringLengthWritten)
+	ϟo.Info = substr(s.InfoLog, int32(0), ϟo.StringLengthWritten)
 	_, _, _, _ = s, min_0_a, min_0_b, min_0_result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetShaderInfoLog expected %v got %v", ϟa.Out, ϟo)
@@ -2106,7 +2099,7 @@ func (ϟa *GlGetShaderSource) Mutate(ϟs *state.State) error {
 	ϟo := GlGetShaderSource_Out{}
 	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
 	min_1_a := ϟa.In.BufferLength               // s32
-	min_1_b := strlen(s.Source[0])              // s32
+	min_1_b := strlen(s.Source[int32(0)])       // s32
 	min_1_result := func() (result int32) {
 		switch (min_1_a) < (min_1_b) {
 		case true:
@@ -2115,12 +2108,12 @@ func (ϟa *GlGetShaderSource) Mutate(ϟs *state.State) error {
 			return min_1_b
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (min_1_a) < (min_1_b), ϟa))
 			return result
 		}
 	}() // s32
 	ϟo.StringLengthWritten = min_1_result
-	ϟo.Source = substr(s.Source[0], 0, ϟo.StringLengthWritten)
+	ϟo.Source = substr(s.Source[int32(0)], int32(0), ϟo.StringLengthWritten)
 	_, _, _, _ = s, min_1_a, min_1_b, min_1_result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetShaderSource expected %v got %v", ϟa.Out, ϟo)
@@ -2216,7 +2209,7 @@ func (ϟa *GlGetAttachedShaders) Mutate(ϟs *state.State) error {
 			return min_2_b
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (min_2_a) < (min_2_b), ϟa))
 			return result
 		}
 	}() // s32
@@ -2250,12 +2243,12 @@ func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *state.State) error {
 			return min_3_b
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (min_3_a) < (min_3_b), ϟa))
 			return result
 		}
 	}() // s32
 	ϟo.StringLengthWritten = min_3_result
-	ϟo.Info = substr(p.InfoLog, 0, ϟo.StringLengthWritten)
+	ϟo.Info = substr(p.InfoLog, int32(0), ϟo.StringLengthWritten)
 	_, _, _, _ = p, min_3_a, min_3_b, min_3_result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glGetProgramInfoLog expected %v got %v", ϟa.Out, ϟo)
@@ -2393,7 +2386,7 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 			return FramebufferTarget_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.FramebufferTarget, ϟa))
 			return result
 		}
 	}() // FramebufferTarget
@@ -2406,7 +2399,7 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 		attachment.Type = FramebufferAttachmentType_GL_RENDERBUFFER
 	}
 	attachment.Object = uint32(ϟa.In.Renderbuffer)
-	attachment.TextureLevel = 0
+	attachment.TextureLevel = int32(0)
 	attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	framebuffer.Attachments[ϟa.In.FramebufferAttachment] = attachment
 	_, _, _, _ = target, framebufferId, framebuffer, attachment
@@ -2428,7 +2421,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 			return FramebufferTarget_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.FramebufferTarget, ϟa))
 			return result
 		}
 	}() // FramebufferTarget
@@ -2438,7 +2431,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 	if (ϟa.In.Texture) == (ϟc.Internals.NilTexture) {
 		attachment.Type = FramebufferAttachmentType_GL_NONE
 		attachment.Object = uint32(ϟc.Internals.NilTexture)
-		attachment.TextureLevel = 0
+		attachment.TextureLevel = int32(0)
 		attachment.CubeMapFace = CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X
 	} else {
 		attachment.Type = FramebufferAttachmentType_GL_TEXTURE
@@ -2462,7 +2455,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 				return CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 			default:
 				// TODO: better unmatched handling
-				log.Panicf("Unmatched switch in capture")
+				panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.TextureTarget, ϟa))
 				return result
 			}
 		}()
@@ -2477,7 +2470,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetFramebufferAttachmentParameteriv_Out{}
-	ϟo.Value = make(S32Array, 1)
+	ϟo.Value = make(S32Array, int32(1))
 	target := func() (result FramebufferTarget) {
 		switch ϟa.In.FramebufferTarget {
 		case FramebufferTarget_GL_FRAMEBUFFER:
@@ -2488,14 +2481,14 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 			return FramebufferTarget_GL_READ_FRAMEBUFFER
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.FramebufferTarget, ϟa))
 			return result
 		}
 	}() // FramebufferTarget
 	framebufferId := ϟc.BoundFramebuffers.Get(target)           // FramebufferId
 	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId) // FramebufferRef
 	a := framebuffer.Attachments.Get(ϟa.In.Attachment)          // FramebufferAttachmentInfo
-	ϟo.Value[0] = func() (result int32) {
+	ϟo.Value[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:
 			return int32(a.Type)
@@ -2507,7 +2500,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 			return int32(a.CubeMapFace)
 		default:
 			// TODO: better unmatched handling
-			log.Panicf("Unmatched switch in capture")
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", ϟa.In.Parameter, ϟa))
 			return result
 		}
 	}()
@@ -2520,6 +2513,78 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 func (ϟa *GlDrawElements) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDrawElements_Out{}
+	id := ϟc.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER) // BufferId
+	index_data := func() (result memory.Pointer) {
+		switch (id) != (ϟc.Internals.NilBuffer) {
+		case true:
+			return memoryOffset(ϟc.Instances.Buffers.Get(id).Data, uint64(ϟa.In.Indices))
+		case false:
+			return memory.Pointer(ϟa.In.Indices)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (id) != (ϟc.Internals.NilBuffer), ϟa))
+			return result
+		}
+	}() // pointer
+	IndexSize_4_indices_type := ϟa.In.IndicesType // IndicesType
+	IndexSize_4_result := func() (result uint32) {
+		switch IndexSize_4_indices_type {
+		case IndicesType_GL_UNSIGNED_BYTE:
+			return uint32(1)
+		case IndicesType_GL_UNSIGNED_SHORT:
+			return uint32(2)
+		case IndicesType_GL_UNSIGNED_INT:
+			return uint32(4)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", IndexSize_4_indices_type, ϟa))
+			return result
+		}
+	}() // u32
+	read(index_data, uint32(0), (uint32(ϟa.In.ElementCount))*(IndexSize_4_result))
+	first := minIndex(index_data, ϟa.In.IndicesType, uint32(ϟa.In.ElementCount)) // u32
+	last := maxIndex(index_data, ϟa.In.IndicesType, uint32(ϟa.In.ElementCount))  // u32
+	ReadVertexArrays_5_first_index := first                                      // u32
+	ReadVertexArrays_5_index_count := (last) - (first)                           // u32
+	for i := int32(int32(0)); i < int32(len(ϟc.VertexAttributeArrays)); i++ {
+		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayRef
+		if arr.Enabled {
+			vertexAttribTypeSize_6_t := arr.Type // VertexAttribType
+			vertexAttribTypeSize_6_result := func() (result uint32) {
+				switch vertexAttribTypeSize_6_t {
+				case VertexAttribType_GL_BYTE:
+					return uint32(1)
+				case VertexAttribType_GL_UNSIGNED_BYTE:
+					return uint32(1)
+				case VertexAttribType_GL_SHORT:
+					return uint32(2)
+				case VertexAttribType_GL_UNSIGNED_SHORT:
+					return uint32(2)
+				case VertexAttribType_GL_FIXED:
+					return uint32(4)
+				case VertexAttribType_GL_FLOAT:
+					return uint32(4)
+				case VertexAttribType_GL_ARB_half_float_vertex:
+					return uint32(2)
+				case VertexAttribType_GL_HALF_FLOAT_OES:
+					return uint32(2)
+				default:
+					// TODO: better unmatched handling
+					panic(fmt.Errorf("Unmatched switch(%v) in atom %T", vertexAttribTypeSize_6_t, ϟa))
+					return result
+				}
+			}() // u32
+			elsize := (vertexAttribTypeSize_6_result) * (arr.Size) // u32
+			size := (elsize) * (ReadVertexArrays_5_index_count)    // u32
+			offset := (elsize) * (ReadVertexArrays_5_first_index)  // u32
+			if (arr.Buffer) == (BufferId(uint32(0))) {
+				read(arr.Pointer, offset, size)
+			}
+			_, _, _, _, _ = vertexAttribTypeSize_6_t, vertexAttribTypeSize_6_result, elsize, size, offset
+		}
+		_ = arr
+	}
+	_, _, _, _, _, _, _, _ = id, index_data, IndexSize_4_indices_type, IndexSize_4_result, first, last, ReadVertexArrays_5_first_index, ReadVertexArrays_5_index_count
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glDrawElements expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -2528,40 +2593,47 @@ func (ϟa *GlDrawElements) Mutate(ϟs *state.State) error {
 func (ϟa *GlDrawArrays) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDrawArrays_Out{}
-	for i := int32(0); i < 64; i++ {
+	ReadVertexArrays_7_first_index := uint32(ϟa.In.FirstIndex) // u32
+	ReadVertexArrays_7_index_count := uint32(ϟa.In.IndexCount) // u32
+	for i := int32(int32(0)); i < int32(len(ϟc.VertexAttributeArrays)); i++ {
 		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayRef
 		if arr.Enabled {
-			vertexAttribTypeSize_4_t := arr.Type // VertexAttribType
-			vertexAttribTypeSize_4_result := func() (result int32) {
-				switch vertexAttribTypeSize_4_t {
+			vertexAttribTypeSize_8_t := arr.Type // VertexAttribType
+			vertexAttribTypeSize_8_result := func() (result uint32) {
+				switch vertexAttribTypeSize_8_t {
 				case VertexAttribType_GL_BYTE:
-					return 1
+					return uint32(1)
 				case VertexAttribType_GL_UNSIGNED_BYTE:
-					return 1
+					return uint32(1)
 				case VertexAttribType_GL_SHORT:
-					return 2
+					return uint32(2)
 				case VertexAttribType_GL_UNSIGNED_SHORT:
-					return 2
+					return uint32(2)
 				case VertexAttribType_GL_FIXED:
-					return 4
+					return uint32(4)
 				case VertexAttribType_GL_FLOAT:
-					return 4
+					return uint32(4)
+				case VertexAttribType_GL_ARB_half_float_vertex:
+					return uint32(2)
+				case VertexAttribType_GL_HALF_FLOAT_OES:
+					return uint32(2)
 				default:
 					// TODO: better unmatched handling
-					log.Panicf("Unmatched switch in capture")
+					panic(fmt.Errorf("Unmatched switch(%v) in atom %T", vertexAttribTypeSize_8_t, ϟa))
 					return result
 				}
-			}() // s32
-			elsize := (vertexAttribTypeSize_4_result) * (arr.Size) // s32
-			size := (elsize) * (ϟa.In.IndexCount)                  // s32
-			offset := (elsize) * (ϟa.In.FirstIndex)                // s32
-			if (arr.Buffer) == (BufferId(0)) {
+			}() // u32
+			elsize := (vertexAttribTypeSize_8_result) * (arr.Size) // u32
+			size := (elsize) * (ReadVertexArrays_7_index_count)    // u32
+			offset := (elsize) * (ReadVertexArrays_7_first_index)  // u32
+			if (arr.Buffer) == (BufferId(uint32(0))) {
 				read(arr.Pointer, offset, size)
 			}
-			_, _, _, _, _ = vertexAttribTypeSize_4_t, vertexAttribTypeSize_4_result, elsize, size, offset
+			_, _, _, _, _ = vertexAttribTypeSize_8_t, vertexAttribTypeSize_8_result, elsize, size, offset
 		}
 		_ = arr
 	}
+	_, _ = ReadVertexArrays_7_first_index, ReadVertexArrays_7_index_count
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying glDrawArrays expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -2589,36 +2661,36 @@ func (ϟa *GlGetBooleanv) Mutate(ϟs *state.State) error {
 	ϟo.Values = make(BoolArray, stateVariableSize(ϟa.In.Param))
 	switch ϟa.In.Param {
 	case StateVariable_GL_BLEND:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_BLEND)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_BLEND)
 	case StateVariable_GL_CULL_FACE:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_CULL_FACE)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_CULL_FACE)
 	case StateVariable_GL_DEPTH_TEST:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_DEPTH_TEST)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_DEPTH_TEST)
 	case StateVariable_GL_DITHER:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_DITHER)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_DITHER)
 	case StateVariable_GL_POLYGON_OFFSET_FILL:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_POLYGON_OFFSET_FILL)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_POLYGON_OFFSET_FILL)
 	case StateVariable_GL_SAMPLE_ALPHA_TO_COVERAGE:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_SAMPLE_ALPHA_TO_COVERAGE)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_SAMPLE_ALPHA_TO_COVERAGE)
 	case StateVariable_GL_SAMPLE_COVERAGE:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_SAMPLE_COVERAGE)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_SAMPLE_COVERAGE)
 	case StateVariable_GL_SCISSOR_TEST:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_SCISSOR_TEST)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_SCISSOR_TEST)
 	case StateVariable_GL_STENCIL_TEST:
-		ϟo.Values[0] = ϟc.Capabilities.Get(Capability_GL_STENCIL_TEST)
+		ϟo.Values[int32(0)] = ϟc.Capabilities.Get(Capability_GL_STENCIL_TEST)
 	case StateVariable_GL_DEPTH_WRITEMASK:
-		ϟo.Values[0] = ϟc.Rasterizing.DepthMask
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.DepthMask
 	case StateVariable_GL_COLOR_WRITEMASK:
-		ϟo.Values[0] = ϟc.Rasterizing.ColorMaskRed
-		ϟo.Values[1] = ϟc.Rasterizing.ColorMaskGreen
-		ϟo.Values[2] = ϟc.Rasterizing.ColorMaskBlue
-		ϟo.Values[3] = ϟc.Rasterizing.ColorMaskAlpha
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.ColorMaskRed
+		ϟo.Values[int32(1)] = ϟc.Rasterizing.ColorMaskGreen
+		ϟo.Values[int32(2)] = ϟc.Rasterizing.ColorMaskBlue
+		ϟo.Values[int32(3)] = ϟc.Rasterizing.ColorMaskAlpha
 	case StateVariable_GL_SAMPLE_COVERAGE_INVERT:
-		ϟo.Values[0] = ϟc.Rasterizing.SampleCoverageInvert
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.SampleCoverageInvert
 	case StateVariable_GL_SHADER_COMPILER:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	default:
 		// TODO: better unmatched handling
 		v := ϟa.In.Param
@@ -2635,31 +2707,31 @@ func (ϟa *GlGetFloatv) Mutate(ϟs *state.State) error {
 	ϟo.Values = make(F32Array, stateVariableSize(ϟa.In.Param))
 	switch ϟa.In.Param {
 	case StateVariable_GL_DEPTH_RANGE:
-		ϟo.Values[0] = ϟc.Rasterizing.DepthNear
-		ϟo.Values[1] = ϟc.Rasterizing.DepthFar
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.DepthNear
+		ϟo.Values[int32(1)] = ϟc.Rasterizing.DepthFar
 	case StateVariable_GL_LINE_WIDTH:
-		ϟo.Values[0] = ϟc.Rasterizing.LineWidth
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.LineWidth
 	case StateVariable_GL_POLYGON_OFFSET_FACTOR:
-		ϟo.Values[0] = ϟc.Rasterizing.PolygonOffsetFactor
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.PolygonOffsetFactor
 	case StateVariable_GL_POLYGON_OFFSET_UNITS:
-		ϟo.Values[0] = ϟc.Rasterizing.PolygonOffsetUnits
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.PolygonOffsetUnits
 	case StateVariable_GL_SAMPLE_COVERAGE_VALUE:
-		ϟo.Values[0] = ϟc.Rasterizing.SampleCoverageValue
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.SampleCoverageValue
 	case StateVariable_GL_COLOR_CLEAR_VALUE:
-		ϟo.Values[0] = ϟc.Clearing.ClearColor.Red
-		ϟo.Values[1] = ϟc.Clearing.ClearColor.Green
-		ϟo.Values[2] = ϟc.Clearing.ClearColor.Blue
-		ϟo.Values[3] = ϟc.Clearing.ClearColor.Alpha
+		ϟo.Values[int32(0)] = ϟc.Clearing.ClearColor.Red
+		ϟo.Values[int32(1)] = ϟc.Clearing.ClearColor.Green
+		ϟo.Values[int32(2)] = ϟc.Clearing.ClearColor.Blue
+		ϟo.Values[int32(3)] = ϟc.Clearing.ClearColor.Alpha
 	case StateVariable_GL_DEPTH_CLEAR_VALUE:
-		ϟo.Values[0] = ϟc.Clearing.ClearDepth
+		ϟo.Values[int32(0)] = ϟc.Clearing.ClearDepth
 	case StateVariable_GL_ALIASED_LINE_WIDTH_RANGE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
-		ϟo.Values[1] = ϟa.Out.Values[1]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
+		ϟo.Values[int32(1)] = ϟa.Out.Values[int32(1)]
 	case StateVariable_GL_ALIASED_POINT_SIZE_RANGE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
-		ϟo.Values[1] = ϟa.Out.Values[1]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
+		ϟo.Values[int32(1)] = ϟa.Out.Values[int32(1)]
 	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	default:
 		// TODO: better unmatched handling
 		v := ϟa.In.Param
@@ -2676,127 +2748,127 @@ func (ϟa *GlGetIntegerv) Mutate(ϟs *state.State) error {
 	ϟo.Values = make(S32Array, stateVariableSize(ϟa.In.Param))
 	switch ϟa.In.Param {
 	case StateVariable_GL_ACTIVE_TEXTURE:
-		ϟo.Values[0] = int32(ϟc.ActiveTextureUnit)
+		ϟo.Values[int32(0)] = int32(ϟc.ActiveTextureUnit)
 	case StateVariable_GL_ARRAY_BUFFER_BINDING:
-		ϟo.Values[0] = int32(ϟc.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER))
+		ϟo.Values[int32(0)] = int32(ϟc.BoundBuffers.Get(BufferTarget_GL_ARRAY_BUFFER))
 	case StateVariable_GL_ELEMENT_ARRAY_BUFFER_BINDING:
-		ϟo.Values[0] = int32(ϟc.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER))
+		ϟo.Values[int32(0)] = int32(ϟc.BoundBuffers.Get(BufferTarget_GL_ELEMENT_ARRAY_BUFFER))
 	case StateVariable_GL_BLEND_SRC_ALPHA:
-		ϟo.Values[0] = int32(ϟc.Blending.SrcAlphaBlendFactor)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.SrcAlphaBlendFactor)
 	case StateVariable_GL_BLEND_SRC_RGB:
-		ϟo.Values[0] = int32(ϟc.Blending.SrcRgbBlendFactor)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.SrcRgbBlendFactor)
 	case StateVariable_GL_BLEND_DST_ALPHA:
-		ϟo.Values[0] = int32(ϟc.Blending.DstAlphaBlendFactor)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.DstAlphaBlendFactor)
 	case StateVariable_GL_BLEND_DST_RGB:
-		ϟo.Values[0] = int32(ϟc.Blending.DstRgbBlendFactor)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.DstRgbBlendFactor)
 	case StateVariable_GL_BLEND_EQUATION_RGB:
-		ϟo.Values[0] = int32(ϟc.Blending.BlendEquationRgb)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.BlendEquationRgb)
 	case StateVariable_GL_BLEND_EQUATION_ALPHA:
-		ϟo.Values[0] = int32(ϟc.Blending.BlendEquationAlpha)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.BlendEquationAlpha)
 	case StateVariable_GL_BLEND_COLOR:
-		ϟo.Values[0] = int32(ϟc.Blending.BlendColor.Red)
-		ϟo.Values[1] = int32(ϟc.Blending.BlendColor.Green)
-		ϟo.Values[2] = int32(ϟc.Blending.BlendColor.Blue)
-		ϟo.Values[3] = int32(ϟc.Blending.BlendColor.Alpha)
+		ϟo.Values[int32(0)] = int32(ϟc.Blending.BlendColor.Red)
+		ϟo.Values[int32(1)] = int32(ϟc.Blending.BlendColor.Green)
+		ϟo.Values[int32(2)] = int32(ϟc.Blending.BlendColor.Blue)
+		ϟo.Values[int32(3)] = int32(ϟc.Blending.BlendColor.Alpha)
 	case StateVariable_GL_DEPTH_FUNC:
-		ϟo.Values[0] = int32(ϟc.Rasterizing.DepthTestFunction)
+		ϟo.Values[int32(0)] = int32(ϟc.Rasterizing.DepthTestFunction)
 	case StateVariable_GL_DEPTH_CLEAR_VALUE:
-		ϟo.Values[0] = int32(ϟc.Clearing.ClearDepth)
+		ϟo.Values[int32(0)] = int32(ϟc.Clearing.ClearDepth)
 	case StateVariable_GL_STENCIL_WRITEMASK:
-		ϟo.Values[0] = int32(ϟc.Rasterizing.StencilMask.Get(FaceMode_GL_FRONT))
+		ϟo.Values[int32(0)] = int32(ϟc.Rasterizing.StencilMask.Get(FaceMode_GL_FRONT))
 	case StateVariable_GL_STENCIL_BACK_WRITEMASK:
-		ϟo.Values[0] = int32(ϟc.Rasterizing.StencilMask.Get(FaceMode_GL_BACK))
+		ϟo.Values[int32(0)] = int32(ϟc.Rasterizing.StencilMask.Get(FaceMode_GL_BACK))
 	case StateVariable_GL_VIEWPORT:
-		ϟo.Values[0] = ϟc.Rasterizing.Viewport.X
-		ϟo.Values[1] = ϟc.Rasterizing.Viewport.Y
-		ϟo.Values[2] = ϟc.Rasterizing.Viewport.Width
-		ϟo.Values[3] = ϟc.Rasterizing.Viewport.Height
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.Viewport.X
+		ϟo.Values[int32(1)] = ϟc.Rasterizing.Viewport.Y
+		ϟo.Values[int32(2)] = ϟc.Rasterizing.Viewport.Width
+		ϟo.Values[int32(3)] = ϟc.Rasterizing.Viewport.Height
 	case StateVariable_GL_SCISSOR_BOX:
-		ϟo.Values[0] = ϟc.Rasterizing.Scissor.X
-		ϟo.Values[1] = ϟc.Rasterizing.Scissor.Y
-		ϟo.Values[2] = ϟc.Rasterizing.Scissor.Width
-		ϟo.Values[3] = ϟc.Rasterizing.Scissor.Height
+		ϟo.Values[int32(0)] = ϟc.Rasterizing.Scissor.X
+		ϟo.Values[int32(1)] = ϟc.Rasterizing.Scissor.Y
+		ϟo.Values[int32(2)] = ϟc.Rasterizing.Scissor.Width
+		ϟo.Values[int32(3)] = ϟc.Rasterizing.Scissor.Height
 	case StateVariable_GL_FRONT_FACE:
-		ϟo.Values[0] = int32(ϟc.Rasterizing.FrontFace)
+		ϟo.Values[int32(0)] = int32(ϟc.Rasterizing.FrontFace)
 	case StateVariable_GL_CULL_FACE_MODE:
-		ϟo.Values[0] = int32(ϟc.Rasterizing.CullFace)
+		ϟo.Values[int32(0)] = int32(ϟc.Rasterizing.CullFace)
 	case StateVariable_GL_STENCIL_CLEAR_VALUE:
-		ϟo.Values[0] = ϟc.Clearing.ClearStencil
+		ϟo.Values[int32(0)] = ϟc.Clearing.ClearStencil
 	case StateVariable_GL_FRAMEBUFFER_BINDING:
-		ϟo.Values[0] = int32(ϟc.BoundFramebuffers.Get(FramebufferTarget_GL_FRAMEBUFFER))
+		ϟo.Values[int32(0)] = int32(ϟc.BoundFramebuffers.Get(FramebufferTarget_GL_FRAMEBUFFER))
 	case StateVariable_GL_READ_FRAMEBUFFER_BINDING:
-		ϟo.Values[0] = int32(ϟc.BoundFramebuffers.Get(FramebufferTarget_GL_READ_FRAMEBUFFER))
+		ϟo.Values[int32(0)] = int32(ϟc.BoundFramebuffers.Get(FramebufferTarget_GL_READ_FRAMEBUFFER))
 	case StateVariable_GL_RENDERBUFFER_BINDING:
-		ϟo.Values[0] = int32(ϟc.BoundRenderbuffers.Get(RenderbufferTarget_GL_RENDERBUFFER))
+		ϟo.Values[int32(0)] = int32(ϟc.BoundRenderbuffers.Get(RenderbufferTarget_GL_RENDERBUFFER))
 	case StateVariable_GL_CURRENT_PROGRAM:
-		ϟo.Values[0] = int32(ϟc.BoundProgram)
+		ϟo.Values[int32(0)] = int32(ϟc.BoundProgram)
 	case StateVariable_GL_TEXTURE_BINDING_2D:
-		ϟo.Values[0] = int32(ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D))
+		ϟo.Values[int32(0)] = int32(ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D))
 	case StateVariable_GL_TEXTURE_BINDING_CUBE_MAP:
-		ϟo.Values[0] = int32(ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP))
+		ϟo.Values[int32(0)] = int32(ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP))
 	case StateVariable_GL_GENERATE_MIPMAP_HINT:
-		ϟo.Values[0] = int32(ϟc.GenerateMipmapHint)
+		ϟo.Values[int32(0)] = int32(ϟc.GenerateMipmapHint)
 	case StateVariable_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_RENDERBUFFER_SIZE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_TEXTURE_IMAGE_UNITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_TEXTURE_SIZE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_VARYING_VECTORS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_VERTEX_ATTRIBS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_VERTEX_UNIFORM_VECTORS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_VIEWPORT_DIMS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
-		ϟo.Values[1] = ϟa.Out.Values[1]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
+		ϟo.Values[int32(1)] = ϟa.Out.Values[int32(1)]
 	case StateVariable_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_NUM_SHADER_BINARY_FORMATS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_PACK_ALIGNMENT:
-		ϟo.Values[0] = ϟc.PixelStorage.Get(PixelStoreParameter_GL_PACK_ALIGNMENT)
+		ϟo.Values[int32(0)] = ϟc.PixelStorage.Get(PixelStoreParameter_GL_PACK_ALIGNMENT)
 	case StateVariable_GL_UNPACK_ALIGNMENT:
-		ϟo.Values[0] = ϟc.PixelStorage.Get(PixelStoreParameter_GL_UNPACK_ALIGNMENT)
+		ϟo.Values[int32(0)] = ϟc.PixelStorage.Get(PixelStoreParameter_GL_UNPACK_ALIGNMENT)
 	case StateVariable_GL_ALPHA_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_BLUE_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_GREEN_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_RED_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_DEPTH_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_SAMPLE_BUFFERS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_SAMPLES:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_SHADER_BINARY_FORMATS:
 		ϟo.Values = ϟa.Out.Values
 	case StateVariable_GL_COMPRESSED_TEXTURE_FORMATS:
 		ϟo.Values = ϟa.Out.Values
 	case StateVariable_GL_STENCIL_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_SUBPIXEL_BITS:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_TYPE:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	case StateVariable_GL_GPU_DISJOINT_EXT:
-		ϟo.Values[0] = ϟa.Out.Values[0]
+		ϟo.Values[int32(0)] = ϟa.Out.Values[int32(0)]
 	default:
 		// TODO: better unmatched handling
 		v := ϟa.In.Param
@@ -2888,7 +2960,7 @@ func (ϟa *GlGenQueries) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenQueries_Out{}
 	ϟo.Queries = make(QueryIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := QueryId(ϟa.Out.Queries[i]) // QueryId
 		ϟc.Instances.Queries[id] = func() *Query {
 			s := &Query{}
@@ -2922,7 +2994,7 @@ func (ϟa *GlEndQuery) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteQueries) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteQueries_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Queries.Delete(ϟa.In.Queries[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -2961,7 +3033,7 @@ func (ϟa *GlGenQueriesEXT) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGenQueriesEXT_Out{}
 	ϟo.Queries = make(QueryIdArray, ϟa.In.Count)
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		id := QueryId(ϟa.Out.Queries[i]) // QueryId
 		ϟc.Instances.Queries[id] = func() *Query {
 			s := &Query{}
@@ -2995,7 +3067,7 @@ func (ϟa *GlEndQueryEXT) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteQueriesEXT) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteQueriesEXT_Out{}
-	for i := int32(0); i < ϟa.In.Count; i++ {
+	for i := int32(int32(0)); i < ϟa.In.Count; i++ {
 		ϟc.Instances.Queries.Delete(ϟa.In.Queries[i])
 	}
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {

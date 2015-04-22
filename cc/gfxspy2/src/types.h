@@ -17,9 +17,15 @@
 #ifndef GAPII_TYPES_H
 #define GAPII_TYPES_H
 
+#include <vector>
+
 namespace gapii {
 
-class Memory {};
+class Memory {
+public:
+    std::vector<uint8_t> data;
+};
+
 class Any {};
 
 }  // namespace gapii
