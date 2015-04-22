@@ -36,6 +36,7 @@ const (
 	OpClone    = 11
 	OpStrcpy   = 12
 	OpExtend   = 13
+	OpLabel    = 14
 )
 
 // String returns the human-readable name of the opcode.
@@ -69,6 +70,8 @@ func (t Opcode) String() string {
 		return "Strcpy"
 	case OpExtend:
 		return "Extend"
+	case OpLabel:
+		return "Label"
 	default:
 		panic(fmt.Errorf("Unknown ValueType %d", uint32(t)))
 	}
