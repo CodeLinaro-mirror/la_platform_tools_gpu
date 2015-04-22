@@ -1235,34 +1235,46 @@ cmd void flushPostBuffer() {}
 /////////////////////////////////////////////////////////////////
 // EGL APIs
 /////////////////////////////////////////////////////////////////
+type int EGLBoolean
+type int EGLint
+type pointer EGLConfig
+type pointer EGLContext
 type pointer EGLDisplay
+type pointer EGLSurface
 
 @replay_custom
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
-cmd void eglInitialize(EGLDisplay display, out s32 major, out s32 minor) {
+cmd EGLBoolean eglInitialize(EGLDisplay dpy, out EGLint major, out EGLint minor) {
     major = ?
     minor = ?
+    return ?
 }
 
 @replay_custom
+@ReturnSize(0)
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml
-cmd void eglCreateContext(out s32 version, out s32 context) {  // HACK: Hacked to match the spy's output
-// cmd void eglCreateContext(pointer display, pointer config, pointer share_context, array<s32> attrib_list) {
-    version = ?
-    context = ?
+cmd EGLContext eglCreateContext(EGLDisplay    display,
+                                EGLConfig     config,
+                                EGLContext    share_context,
+                                array<EGLint> attrib_list) {
+    assert len(attrib_list) >= 0
+    return ?
 }
 
 @replay_custom
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml
-cmd void eglMakeCurrent(s32 context) {  // HACK: Hacked to match the spy's output
-// cmd void eglMakeCurrent(pointer display, pointer draw, pointer read, pointer context) {
+cmd EGLBoolean eglMakeCurrent(EGLDisplay display,
+                              EGLSurface draw,
+                              EGLSurface read,
+                              EGLContext context) {
+    return ?
 }
 
 @replay_custom
 @EndOfFrame
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
-cmd void eglSwapBuffers() {  // HACK: Hacked to match the spy's output
-// cmd bool eglSwapBuffers(pointer display, pointer surface) {
+cmd EGLBoolean eglSwapBuffers(EGLDisplay display, pointer surface) {
+    return ?
 }
 
 /////////////////////////////////////////////////////////////////
@@ -2119,8 +2131,10 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
-            memcpy(l.Data, data, l.Size)
+            if data != null {
+                read(data as pointer, 0, l.Size)
+                memcpy(l.Data, data, l.Size)
+            }
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
@@ -2136,8 +2150,10 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width, height, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            read(data as pointer, 0, l.Size)
-            memcpy(l.Data, data, l.Size)
+            if data != null {
+                read(data as pointer, 0, l.Size)
+                memcpy(l.Data, data, l.Size)
+            }
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
             t.Cubemap[level] = cube
@@ -2424,8 +2440,10 @@ cmd void glBindBuffer(BufferTarget target, BufferId buffer) {
 cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, BufferUsage usage) {
     id := BoundBuffers[target]
     b  := Instances.Buffers[id]
-    read(data as pointer, 0, size)
-    memcpy(b.Data, data, size)
+    if data != null {
+        read(data as pointer, 0, size)
+        memcpy(b.Data, data, size)
+    }
     b.Size = size
     b.Usage = usage
 }

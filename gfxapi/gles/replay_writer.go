@@ -38,10 +38,10 @@ var funcInfoInit = builder.FunctionInfo{ID: 0, ReturnType: protocol.TypeVoid, Pa
 var funcInfoStartTimer = builder.FunctionInfo{ID: 1, ReturnType: protocol.TypeVoid, Parameters: 1}
 var funcInfoStopTimer = builder.FunctionInfo{ID: 2, ReturnType: protocol.TypeUint64, Parameters: 1}
 var funcInfoFlushPostBuffer = builder.FunctionInfo{ID: 3, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoEglInitialize = builder.FunctionInfo{ID: 4, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoEglCreateContext = builder.FunctionInfo{ID: 5, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoEglMakeCurrent = builder.FunctionInfo{ID: 6, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoEglSwapBuffers = builder.FunctionInfo{ID: 7, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoEglInitialize = builder.FunctionInfo{ID: 4, ReturnType: protocol.TypeInt32, Parameters: 3}
+var funcInfoEglCreateContext = builder.FunctionInfo{ID: 5, ReturnType: protocol.TypeAbsolutePointer, Parameters: 4}
+var funcInfoEglMakeCurrent = builder.FunctionInfo{ID: 6, ReturnType: protocol.TypeInt32, Parameters: 4}
+var funcInfoEglSwapBuffers = builder.FunctionInfo{ID: 7, ReturnType: protocol.TypeInt32, Parameters: 2}
 var funcInfoWglCreateContext = builder.FunctionInfo{ID: 8, ReturnType: protocol.TypeAbsolutePointer, Parameters: 1}
 var funcInfoWglMakeCurrent = builder.FunctionInfo{ID: 9, ReturnType: protocol.TypeInt32, Parameters: 2}
 var funcInfoWglSwapBuffers = builder.FunctionInfo{ID: 10, ReturnType: protocol.TypeVoid, Parameters: 1}
@@ -258,7 +258,22 @@ func (c UniformLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.S
 func (c AttributeLocation) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
 }
+func (c EGLBoolean) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.S64(int64(c))
+}
+func (c EGLint) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.S64(int64(c))
+}
+func (c EGLConfig) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
+}
+func (c EGLContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
+}
 func (c EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
+}
+func (c EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
 }
 func (c HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
@@ -307,6 +322,16 @@ func (arr DiscardFramebufferAttachmentArray) value(ϟb *builder.Builder, ϟa ato
 	if len(arr) > 0 {
 		for _, e := range arr {
 			ϟb.Push(value.U32(e))
+		}
+		return ϟb.Buffer(len(arr))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
+func (arr EGLintArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+	if len(arr) > 0 {
+		for _, e := range arr {
+			ϟb.Push(e.value(ϟb, ϟa, ϟs))
 		}
 		return ϟb.Buffer(len(arr))
 	} else {
@@ -452,39 +477,89 @@ func (o *StopTimer_Postback) Decode(d binary.Decoder) error {
 }
 
 type EglInitialize_Postback struct {
-	Major int32
-	Minor int32
+	Major  EGLint
+	Minor  EGLint
+	Result EGLBoolean
 }
 
 func (o *EglInitialize_Postback) Decode(d binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		o.Major = v
-	} else {
-		return err
+	{
+		var x int64
+		if v, err := d.Int64(); err == nil {
+			x = v
+		} else {
+			return err
+		}
+		o.Major = EGLint(x)
 	}
-	if v, err := d.Int32(); err == nil {
-		o.Minor = v
-	} else {
-		return err
+	{
+		var x int64
+		if v, err := d.Int64(); err == nil {
+			x = v
+		} else {
+			return err
+		}
+		o.Minor = EGLint(x)
+	}
+	{
+		var x int64
+		if v, err := d.Int64(); err == nil {
+			x = v
+		} else {
+			return err
+		}
+		o.Result = EGLBoolean(x)
 	}
 	return nil
 }
 
 type EglCreateContext_Postback struct {
-	Version int32
-	Context int32
+	Result []byte
 }
 
-func (o *EglCreateContext_Postback) Decode(d binary.Decoder) error {
-	if v, err := d.Int32(); err == nil {
-		o.Version = v
-	} else {
-		return err
+func (o *EglCreateContext_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
+	{
+		var x []byte
+		if val, err := readBytes(d, result_cnt); err == nil {
+			x = val
+		} else {
+			return err
+		}
+		o.Result = []byte(x)
 	}
-	if v, err := d.Int32(); err == nil {
-		o.Context = v
-	} else {
-		return err
+	return nil
+}
+
+type EglMakeCurrent_Postback struct {
+	Result EGLBoolean
+}
+
+func (o *EglMakeCurrent_Postback) Decode(d binary.Decoder) error {
+	{
+		var x int64
+		if v, err := d.Int64(); err == nil {
+			x = v
+		} else {
+			return err
+		}
+		o.Result = EGLBoolean(x)
+	}
+	return nil
+}
+
+type EglSwapBuffers_Postback struct {
+	Result EGLBoolean
+}
+
+func (o *EglSwapBuffers_Postback) Decode(d binary.Decoder) error {
+	{
+		var x int64
+		if v, err := d.Int64(); err == nil {
+			x = v
+		} else {
+			return err
+		}
+		o.Result = EGLBoolean(x)
 	}
 	return nil
 }
@@ -1475,11 +1550,12 @@ var _ = replay.Replayer(&EglInitialize{}) // interface compliance check
 func (ϟa *EglInitialize) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
-	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* major */, 4 /* minor */})
-	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* major */, uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* minor */, uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
+	ϟb.Push(ϟa.In.Dpy.value(ϟb, ϟa, ϟs))
 	ϟb.Push(outputs[0]) // major
 	ϟb.Push(outputs[1]) // minor
-	ϟb.CallNoPush(funcInfoEglInitialize)
+	ϟb.CallPush(funcInfoEglInitialize)
+	ϟb.Store(outputs[2])
 	ϟa.Mutate(ϟs)
 	if postback {
 		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
@@ -1497,15 +1573,20 @@ var _ = replay.Replayer(&EglCreateContext{}) // interface compliance check
 func (ϟa *EglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
-	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* version */, 4 /* context */})
-	ϟb.Push(outputs[0]) // version
-	ϟb.Push(outputs[1]) // context
-	ϟb.CallNoPush(funcInfoEglCreateContext)
+	result_cnt := uint64(0)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Config.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.ShareContext.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.AttribList.value(ϟb, ϟa, ϟs))
+	ϟb.CallPush(funcInfoEglCreateContext)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt)
 	ϟa.Mutate(ϟs)
 	if postback {
 		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
 			postback := EglCreateContext_Postback{}
-			if err := postback.Decode(d); err != nil {
+			if err := postback.Decode(result_cnt, d); err != nil {
 				return nil, err
 			}
 			return postback, nil
@@ -1518,9 +1599,23 @@ var _ = replay.Replayer(&EglMakeCurrent{}) // interface compliance check
 func (ϟa *EglMakeCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
-	ϟb.Push(value.S32(ϟa.In.Context))
-	ϟb.CallNoPush(funcInfoEglMakeCurrent)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
+	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Draw.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Read.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.In.Context.value(ϟb, ϟa, ϟs))
+	ϟb.CallPush(funcInfoEglMakeCurrent)
+	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+			postback := EglMakeCurrent_Postback{}
+			if err := postback.Decode(d); err != nil {
+				return nil, err
+			}
+			return postback, nil
+		})
+	}
 	ϟb.EndAtom()
 }
 
@@ -1528,8 +1623,21 @@ var _ = replay.Replayer(&EglSwapBuffers{}) // interface compliance check
 func (ϟa *EglSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
-	ϟb.CallNoPush(funcInfoEglSwapBuffers)
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
+	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Surface)))
+	ϟb.CallPush(funcInfoEglSwapBuffers)
+	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+			postback := EglSwapBuffers_Postback{}
+			if err := postback.Decode(d); err != nil {
+				return nil, err
+			}
+			return postback, nil
+		})
+	}
 	ϟb.EndAtom()
 }
 

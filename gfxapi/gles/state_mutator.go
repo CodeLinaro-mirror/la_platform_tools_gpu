@@ -157,6 +157,7 @@ func (ϟa *EglInitialize) Mutate(ϟs *state.State) error {
 	ϟo := EglInitialize_Out{}
 	ϟo.Major = ϟa.Out.Major
 	ϟo.Minor = ϟa.Out.Minor
+	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying eglInitialize expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -165,8 +166,7 @@ func (ϟa *EglInitialize) Mutate(ϟs *state.State) error {
 func (ϟa *EglCreateContext) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := EglCreateContext_Out{}
-	ϟo.Version = ϟa.Out.Version
-	ϟo.Context = ϟa.Out.Context
+	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying eglCreateContext expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -175,6 +175,7 @@ func (ϟa *EglCreateContext) Mutate(ϟs *state.State) error {
 func (ϟa *EglMakeCurrent) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := EglMakeCurrent_Out{}
+	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying eglMakeCurrent expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -183,6 +184,7 @@ func (ϟa *EglMakeCurrent) Mutate(ϟs *state.State) error {
 func (ϟa *EglSwapBuffers) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := EglSwapBuffers_Out{}
+	ϟo.Result = ϟa.Out.Result
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
 		log.Printf("Applying eglSwapBuffers expected %v got %v", ϟa.Out, ϟo)
 	}
@@ -1550,11 +1552,13 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.In.Data),
-			Size: uint64(l.Size),
-		}))
+		if (ϟa.In.Data) != (TexturePointer(0)) {
+			read(memory.Pointer(ϟa.In.Data), 0, l.Size)
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.In.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		t.Texture2D[ϟa.In.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
 		t.Format = ImageTexelFormat(ϟa.In.Format)
@@ -1571,11 +1575,13 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.In.Format)
 			return s
 		}() // Image
-		read(memory.Pointer(ϟa.In.Data), 0, l.Size)
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.In.Data),
-			Size: uint64(l.Size),
-		}))
+		if (ϟa.In.Data) != (TexturePointer(0)) {
+			read(memory.Pointer(ϟa.In.Data), 0, l.Size)
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.In.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		cube := t.Cubemap.Get(ϟa.In.Level) // CubemapLevel
 		cube.Faces[CubeMapImageTarget(ϟa.In.Target)] = l
 		t.Cubemap[ϟa.In.Level] = cube
@@ -1952,11 +1958,13 @@ func (ϟa *GlBufferData) Mutate(ϟs *state.State) error {
 	ϟo := GlBufferData_Out{}
 	id := ϟc.BoundBuffers.Get(ϟa.In.Target) // BufferId
 	b := ϟc.Instances.Buffers.Get(id)       // BufferRef
-	read(memory.Pointer(ϟa.In.Data), 0, ϟa.In.Size)
-	b.Data.Write(ϟs.Memory.Slice(memory.Range{
-		Base: memory.Pointer(ϟa.In.Data),
-		Size: uint64(ϟa.In.Size),
-	}))
+	if (ϟa.In.Data) != (BufferDataPointer(0)) {
+		read(memory.Pointer(ϟa.In.Data), 0, ϟa.In.Size)
+		b.Data.Write(ϟs.Memory.Slice(memory.Range{
+			Base: memory.Pointer(ϟa.In.Data),
+			Size: uint64(ϟa.In.Size),
+		}))
+	}
 	b.Size = ϟa.In.Size
 	b.Usage = ϟa.In.Usage
 	_, _ = id, b

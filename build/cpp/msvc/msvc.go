@@ -48,7 +48,7 @@ type Paths struct {
 	LibrarySearchPaths build.FileSet // MSVC additional library paths.
 }
 
-func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {
+func compile(input build.File, output build.File, cfg cpp.Config, env build.Environment) error {
 	env.Logger = env.Logger.Enter("MSVC.Compile")
 
 	paths, err := ResolvePaths()
@@ -56,7 +56,8 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		return err
 	}
 
-	if asm := inputs.Filter("*.asm"); len(asm) > 0 {
+	switch input.Ext() {
+	case ".asm":
 		a := []string{
 			"/Cx", // Preserve case in public and extern symbols.
 			"/nologo",
@@ -67,19 +68,13 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		// MASM is really sensitive about output paths - change the working
 		// directory to the .obj output, and strip the directory part of the name
 		// from the output flag.
-		for _, file := range asm {
-			a = append(a,
-				"/Fo", output.Name(),
-				"/c", file.Absolute(),
-			)
-		}
-		if err := paths.Ml.ExecAt(env, build.File(output.Dir()), a...); err != nil {
-			return err
-		}
-		inputs = inputs.Remove(asm...)
-	}
+		a = append(a,
+			"/Fo", output.Name(),
+			"/c", input.Absolute(),
+		)
+		return paths.Ml.ExecAt(env, build.File(output.Dir()), a...)
 
-	if len(inputs) > 0 {
+	default:
 		a := append([]string{
 			"/nologo",
 			"/c",    // Compile, don't link
@@ -94,16 +89,10 @@ func compile(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 		for n, v := range cfg.Defines {
 			a = append(a, fmt.Sprintf("/D%s=%s", n, v))
 		}
-		for _, input := range inputs {
-			a = append(a, input.Absolute())
-		}
-		a = append(a, "/Fo:"+output.Absolute())
-		if err := paths.Cl.ExecAt(env, build.File(paths.Cl.Dir()), a...); err != nil {
-			return err
-		}
-	}
+		a = append(a, input.Absolute(), "/Fo:"+output.Absolute())
 
-	return nil
+		return paths.Cl.ExecAt(env, build.File(paths.Cl.Dir()), a...)
+	}
 }
 
 func archive(inputs build.FileSet, output build.File, cfg cpp.Config, env build.Environment) error {

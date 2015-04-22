@@ -99,10 +99,35 @@ func (c *BufferDataPointer) Equal(rhs BufferDataPointer) bool {
 	return memory.Pointer(*c) == memory.Pointer(rhs)
 }
 
+type EGLBoolean int64
+
+func (c *EGLBoolean) Less(rhs EGLBoolean) bool  { return int64(*c) < int64(rhs) }
+func (c *EGLBoolean) Equal(rhs EGLBoolean) bool { return int64(*c) == int64(rhs) }
+
+type EGLint int64
+
+func (c *EGLint) Less(rhs EGLint) bool  { return int64(*c) < int64(rhs) }
+func (c *EGLint) Equal(rhs EGLint) bool { return int64(*c) == int64(rhs) }
+
+type EGLConfig memory.Pointer
+
+func (c *EGLConfig) Less(rhs EGLConfig) bool  { return memory.Pointer(*c) < memory.Pointer(rhs) }
+func (c *EGLConfig) Equal(rhs EGLConfig) bool { return memory.Pointer(*c) == memory.Pointer(rhs) }
+
+type EGLContext memory.Pointer
+
+func (c *EGLContext) Less(rhs EGLContext) bool  { return memory.Pointer(*c) < memory.Pointer(rhs) }
+func (c *EGLContext) Equal(rhs EGLContext) bool { return memory.Pointer(*c) == memory.Pointer(rhs) }
+
 type EGLDisplay memory.Pointer
 
 func (c *EGLDisplay) Less(rhs EGLDisplay) bool  { return memory.Pointer(*c) < memory.Pointer(rhs) }
 func (c *EGLDisplay) Equal(rhs EGLDisplay) bool { return memory.Pointer(*c) == memory.Pointer(rhs) }
+
+type EGLSurface memory.Pointer
+
+func (c *EGLSurface) Less(rhs EGLSurface) bool  { return memory.Pointer(*c) < memory.Pointer(rhs) }
+func (c *EGLSurface) Equal(rhs EGLSurface) bool { return memory.Pointer(*c) == memory.Pointer(rhs) }
 
 type HGLRC memory.Pointer
 
@@ -159,6 +184,11 @@ type DiscardFramebufferAttachmentArray []DiscardFramebufferAttachment
 
 func (s DiscardFramebufferAttachmentArray) Len() int                              { return len(s) }
 func (s DiscardFramebufferAttachmentArray) Range() []DiscardFramebufferAttachment { return s }
+
+type EGLintArray []EGLint
+
+func (s EGLintArray) Len() int        { return len(s) }
+func (s EGLintArray) Range() []EGLint { return s }
 
 type F32Array []float32
 
@@ -898,12 +928,13 @@ func (FlushPostBuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 type EglInitialize_In struct {
 	binary.Generate
-	Display EGLDisplay
+	Dpy EGLDisplay
 }
 type EglInitialize_Out struct {
 	binary.Generate
-	Major int32
-	Minor int32
+	Major  EGLint
+	Minor  EGLint
+	Result EGLBoolean
 }
 type EglInitialize struct {
 	binary.Generate
@@ -915,13 +946,14 @@ type EglInitialize struct {
 func (c *EglInitialize) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglInitialize(",
-		fmt.Sprintf("display:%v", c.In.Display),
+		fmt.Sprintf("dpy:%v", c.In.Dpy),
 		", ",
 		fmt.Sprintf("major:%v", c.Out.Major),
 		", ",
 		fmt.Sprintf("minor:%v", c.Out.Minor),
 	)
 	parts = append(parts, ")")
+	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglInitialize) ContextID() atom.ContextID {
@@ -940,11 +972,14 @@ func (EglInitialize) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 type EglCreateContext_In struct {
 	binary.Generate
+	Display      EGLDisplay
+	Config       EGLConfig
+	ShareContext EGLContext
+	AttribList   EGLintArray
 }
 type EglCreateContext_Out struct {
 	binary.Generate
-	Version int32
-	Context int32
+	Result EGLContext
 }
 type EglCreateContext struct {
 	binary.Generate
@@ -956,11 +991,16 @@ type EglCreateContext struct {
 func (c *EglCreateContext) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglCreateContext(",
-		fmt.Sprintf("version:%v", c.Out.Version),
+		fmt.Sprintf("display:%v", c.In.Display),
 		", ",
-		fmt.Sprintf("context:%v", c.Out.Context),
+		fmt.Sprintf("config:%v", c.In.Config),
+		", ",
+		fmt.Sprintf("share_context:%v", c.In.ShareContext),
+		", ",
+		fmt.Sprintf("%v", c.In.AttribList),
 	)
 	parts = append(parts, ")")
+	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglCreateContext) ContextID() atom.ContextID {
@@ -979,10 +1019,14 @@ func (EglCreateContext) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 type EglMakeCurrent_In struct {
 	binary.Generate
-	Context int32
+	Display EGLDisplay
+	Draw    EGLSurface
+	Read    EGLSurface
+	Context EGLContext
 }
 type EglMakeCurrent_Out struct {
 	binary.Generate
+	Result EGLBoolean
 }
 type EglMakeCurrent struct {
 	binary.Generate
@@ -994,9 +1038,16 @@ type EglMakeCurrent struct {
 func (c *EglMakeCurrent) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglMakeCurrent(",
+		fmt.Sprintf("display:%v", c.In.Display),
+		", ",
+		fmt.Sprintf("draw:%v", c.In.Draw),
+		", ",
+		fmt.Sprintf("read:%v", c.In.Read),
+		", ",
 		fmt.Sprintf("context:%v", c.In.Context),
 	)
 	parts = append(parts, ")")
+	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglMakeCurrent) ContextID() atom.ContextID {
@@ -1015,9 +1066,12 @@ func (EglMakeCurrent) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 type EglSwapBuffers_In struct {
 	binary.Generate
+	Display EGLDisplay
+	Surface memory.Pointer
 }
 type EglSwapBuffers_Out struct {
 	binary.Generate
+	Result EGLBoolean
 }
 type EglSwapBuffers struct {
 	binary.Generate
@@ -1028,8 +1082,13 @@ type EglSwapBuffers struct {
 
 func (c *EglSwapBuffers) String() string {
 	parts := make([]string, 0, 32)
-	parts = append(parts, "eglSwapBuffers(")
+	parts = append(parts, "eglSwapBuffers(",
+		fmt.Sprintf("display:%v", c.In.Display),
+		", ",
+		fmt.Sprintf("0x%x", c.In.Surface),
+	)
 	parts = append(parts, ")")
+	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglSwapBuffers) ContextID() atom.ContextID {
@@ -12724,44 +12783,55 @@ func NewFlushPostBuffer(
 }
 func NewEglInitialize(
 	contextID atom.ContextID,
-	pDisplay EGLDisplay,
-	pMajor int32,
-	pMinor int32,
+	pDpy EGLDisplay,
+	pMajor EGLint,
+	pMinor EGLint,
+	pResult EGLBoolean,
 ) *EglInitialize {
 	return &EglInitialize{
 		Context: contextID,
-		In:      EglInitialize_In{Display: pDisplay},
-		Out:     EglInitialize_Out{Major: pMajor, Minor: pMinor},
+		In:      EglInitialize_In{Dpy: pDpy},
+		Out:     EglInitialize_Out{Major: pMajor, Minor: pMinor, Result: pResult},
 	}
 }
 func NewEglCreateContext(
 	contextID atom.ContextID,
-	pVersion int32,
-	pContext int32,
+	pDisplay EGLDisplay,
+	pConfig EGLConfig,
+	pShareContext EGLContext,
+	pAttribList EGLintArray,
+	pResult EGLContext,
 ) *EglCreateContext {
 	return &EglCreateContext{
 		Context: contextID,
-		In:      EglCreateContext_In{},
-		Out:     EglCreateContext_Out{Version: pVersion, Context: pContext},
+		In:      EglCreateContext_In{Display: pDisplay, Config: pConfig, ShareContext: pShareContext, AttribList: pAttribList},
+		Out:     EglCreateContext_Out{Result: pResult},
 	}
 }
 func NewEglMakeCurrent(
 	contextID atom.ContextID,
-	pContext int32,
+	pDisplay EGLDisplay,
+	pDraw EGLSurface,
+	pRead EGLSurface,
+	pContext EGLContext,
+	pResult EGLBoolean,
 ) *EglMakeCurrent {
 	return &EglMakeCurrent{
 		Context: contextID,
-		In:      EglMakeCurrent_In{Context: pContext},
-		Out:     EglMakeCurrent_Out{},
+		In:      EglMakeCurrent_In{Display: pDisplay, Draw: pDraw, Read: pRead, Context: pContext},
+		Out:     EglMakeCurrent_Out{Result: pResult},
 	}
 }
 func NewEglSwapBuffers(
 	contextID atom.ContextID,
+	pDisplay EGLDisplay,
+	pSurface memory.Pointer,
+	pResult EGLBoolean,
 ) *EglSwapBuffers {
 	return &EglSwapBuffers{
 		Context: contextID,
-		In:      EglSwapBuffers_In{},
-		Out:     EglSwapBuffers_Out{},
+		In:      EglSwapBuffers_In{Display: pDisplay, Surface: pSurface},
+		Out:     EglSwapBuffers_Out{Result: pResult},
 	}
 }
 func NewWglCreateContext(

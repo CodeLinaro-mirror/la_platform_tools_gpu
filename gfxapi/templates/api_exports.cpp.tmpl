@@ -51,6 +51,7 @@ limitations under the License.
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "C++.MethodName" $c}}
       EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
+        GAPID_INFO("{{$name}}()");
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
         spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }
@@ -59,6 +60,8 @@ limitations under the License.
 ¶
   typedef void (STDCALL *GFXPROC)();
   GFXPROC getProcAddress(const char* name) {
+    GAPID_INFO("getProcAddress(%s)", name);
+
     {{range $i, $c := AllCommands $}}
       {{$name := Macro "C++.MethodName" $c}}
       {{if not (GetAnnotation $c "synthetic")}}
@@ -67,11 +70,9 @@ limitations under the License.
     {{end}}
 ¶
     // TODO: If we reach this code, we're not capturing the command!
-    typedef GFXPROC (STDCALL* PFNWGLGETPROCADDRESS)(const char*);
-    PFNWGLGETPROCADDRESS wglGetProcAddress = reinterpret_cast<PFNWGLGETPROCADDRESS>(
-        gapic::GetGfxProcAddress("wglGetProcAddress"));
-    return wglGetProcAddress != nullptr ? wglGetProcAddress(name) : nullptr;
-  }
+    GAPID_INFO("getProcAddress(%s) - not part of API", name);
+    return reinterpret_cast<GFXPROC>(gapic::GetGfxProcAddress(name));
+}
 ¶
   EXPORT GFXPROC STDCALL wglGetProcAddress(const char* name) { return getProcAddress(name); }
   EXPORT GFXPROC STDCALL eglGetProcAddress(const char* name) { return getProcAddress(name); }
