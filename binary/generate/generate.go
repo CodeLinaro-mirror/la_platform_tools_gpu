@@ -25,6 +25,7 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
+	"unicode"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"golang.org/x/tools/go/types"
@@ -179,9 +180,16 @@ func (s *Struct) UpdateID() {
 	}
 }
 
+func spaceToUnderscore(r rune) rune {
+	if unicode.IsSpace(r) {
+		return '_'
+	}
+	return r
+}
+
 // fromType creates a appropriate Type object from a types.Type.
 func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) *Type {
-	t := &Type{Name: path.Base(types.TypeString(pkg, from))}
+	t := &Type{Name: strings.Map(spaceToUnderscore, path.Base(types.TypeString(pkg, from)))}
 	if named, isNamed := from.(*types.Named); isNamed {
 		from = from.Underlying()
 		p := named.Obj().Pkg()
@@ -189,7 +197,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) *Ty
 			imports[p.Path()] = struct{}{}
 		}
 	}
-	t.Native = from.String()
+	t.Native = strings.Map(spaceToUnderscore, from.String())
 	switch from := from.(type) {
 	case *types.Basic:
 		t.Kind = Native
