@@ -270,6 +270,8 @@ limitations under the License.
   {{end}}
   ϟc := {{if GetAnnotation $ "synthetic"}}&State{}{{else}}getState(ϟa, ϟs){{end}}
   _ = ϟc
+
+  ϟb.BeginAtom(ϟi)
   {{/* Declare all the of local variables describing the array counts */}}
   {{template "DefineArrayCounts" $}}
 

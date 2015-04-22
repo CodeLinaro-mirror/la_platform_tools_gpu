@@ -18,9 +18,9 @@ package value
 type PointerResolver interface {
 	// TranslateTemporaryPointer returns the temporary address-space pointer ptr
 	// translated to volatile address-space.
-	TranslateTemporaryPointer(ptr uint64) uint64
+	TranslateTemporaryPointer(ptr uint64) (uint64, error)
 
 	// TranslateCapturePointer returns the capture-observed pointer
 	// translated to volatile address-space.
-	TranslateCapturePointer(ptr uint64) uint64
+	TranslateCapturePointer(ptr uint64) (uint64, error)
 }

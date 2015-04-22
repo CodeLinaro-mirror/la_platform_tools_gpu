@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -41,6 +42,11 @@ type stackItem struct {
 type idPostDecoder struct {
 	id atom.ID
 	pd PostDecoder
+}
+
+type marker struct {
+	instruction int     // first instruction index for this marker
+	atom        atom.ID // the atom identifier
 }
 
 // Postback holds the information for a single atom's postback data.
@@ -70,6 +76,7 @@ type Builder struct {
 	resources       []protocol.ResourceInfo
 	observedRanges  memory.RangeList
 	instructions    []asm.Instruction
+	markers         []marker
 	decoders        []idPostDecoder
 	stack           []stackItem
 	ptrSize         int
@@ -165,6 +172,14 @@ func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Po
 		offset += align(s, uint64(b.PointerAlignment()))
 	}
 	return ptrs, size
+}
+
+// BeginAtom should be called before building any replay instructions.
+func (b *Builder) BeginAtom(id atom.ID) {
+	b.markers = append(b.markers, marker{
+		atom:        id,
+		instruction: len(b.instructions),
+	})
 }
 
 // EndAtom should be called after emitting the commands to replay a single atom.
@@ -385,14 +400,18 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 // Build compiles the replay instructions, returning a Payload that can be
 // sent to the replay virtual-machine and a ResponseDecoder for interpreting
 // the responses.
-func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
+func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
 	logger = logger.Enter("Build")
 	vml := b.layoutVolatileMemory(logger)
 
 	opcodes := &bytes.Buffer{}
 	e := flat.Encoder(endian.Writer(opcodes, b.byteOrder))
-	for _, i := range b.instructions {
-		i.Encode(vml, e)
+	for idx, i := range b.instructions {
+		if err := i.Encode(vml, e); err != nil {
+			err = fmt.Errorf("Encode %T failed for atom with id %v: %v",
+				i, b.atomIDfor(idx), err)
+			return protocol.Payload{}, nil, err
+		}
 	}
 
 	payload := protocol.Payload{
@@ -428,7 +447,18 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder) {
 		}()
 		return c
 	}
-	return payload, responseDecoder
+	return payload, responseDecoder, nil
+}
+
+func (b *Builder) atomIDfor(instruction int) atom.ID {
+	i := sort.Search(len(b.markers), func(i int) bool {
+		return b.markers[i].instruction >= instruction
+	})
+	if i < len(b.markers) {
+		return b.markers[i].atom
+	} else {
+		return atom.NoID
+	}
 }
 
 func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout {
@@ -479,17 +509,17 @@ type volatileMemoryLayout struct {
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
 // the replay/value package.
-func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) uint64 {
-	return l.tempBase + offset
+func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) (uint64, error) {
+	return l.tempBase + offset, nil
 }
 
 // TranslateCapturePointer implements the PointerResolver interface method in
 // the replay/value package.
-func (l volatileMemoryLayout) TranslateCapturePointer(offset uint64) uint64 {
+func (l volatileMemoryLayout) TranslateCapturePointer(offset uint64) (uint64, error) {
 	bufferIdx := interval.IndexOf(&l.observedRanges, offset)
 	if bufferIdx < 0 {
-		panic(fmt.Errorf("Pointer 0x%x was not found in the observed memory ranges", offset))
+		return 0, fmt.Errorf("Pointer 0x%x was not found in the observed memory ranges", offset)
 	}
 	bufferStart := l.observedRanges[bufferIdx].First()
-	return l.remappedBases[bufferIdx] + offset - uint64(bufferStart)
+	return l.remappedBases[bufferIdx] + offset - uint64(bufferStart), nil
 }

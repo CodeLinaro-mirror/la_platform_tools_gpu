@@ -40,7 +40,10 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 		replay.Replay(atom.ID(i), a, s, b, wantOutput)
 	}
 
-	payload, _ := b.Build(log.Nop{})
+	payload, _, err := b.Build(log.Nop{})
+	if err != nil {
+		t.Errorf("Failed to build opcodes: %v", err)
+	}
 
 	ops := bytes.NewBuffer(payload.Opcodes)
 	gotOpcodes, err := opcode.Disassemble(ops, endian.Little)

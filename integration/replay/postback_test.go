@@ -45,7 +45,11 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 
 	f(b)
 
-	payload, decoder := b.Build(logger)
+	payload, decoder, err := b.Build(logger)
+	if err != nil {
+		t.Errorf("Build failed with error: %v", err)
+	}
+
 	err = executor.Execute(payload, decoder, connection, db, logger, handlers, endian.Little)
 	if err != nil {
 		t.Errorf("Executor failed with error: %v", err)

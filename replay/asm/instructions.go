@@ -62,6 +62,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 		if v&0x7fffff != 0 {
 			return opcode.Extend{Value: uint32(v & 0x7fffff)}.Encode(e)
 		}
+		return nil
 	case protocol.TypeDouble:
 		push := opcode.PushI{DataType: t, Value: uint32(v >> 52)}
 		if err := push.Encode(e); err != nil {
@@ -75,6 +76,7 @@ func encodePush(t protocol.Type, v uint64, e binary.Encoder) error {
 			}
 			return opcode.Extend{Value: uint32(v & mask26)}.Encode(e)
 		}
+		return nil
 	case protocol.TypeInt8, protocol.TypeInt16, protocol.TypeInt32, protocol.TypeInt64:
 		// Signed PUSHI types are sign-extended
 		switch {
@@ -177,7 +179,11 @@ type Push struct {
 }
 
 func (a Push) Encode(r value.PointerResolver, e binary.Encoder) error {
-	return encodePush(a.Value.Type(), a.Value.Get(r), e)
+	v, err := a.Value.Get(r)
+	if err != nil {
+		return err
+	}
+	return encodePush(a.Value.Type(), v, e)
 }
 
 // Pop is an Instruction that discards Count values from the top of the VM
@@ -219,13 +225,20 @@ type Load struct {
 }
 
 func (a Load) Encode(r value.PointerResolver, e binary.Encoder) error {
-	addr := a.Source.Get(r)
+	addr, err := a.Source.Get(r)
+	if err != nil {
+		return err
+	}
 	switch a.Source.(type) {
 	case value.ConstantPointer:
 		if addr < 0x100000 {
 			return opcode.LoadC{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
 		} else {
-			if err := encodePush(a.Source.Type(), a.Source.Get(r), e); err != nil {
+			val, err := a.Source.Get(r)
+			if err != nil {
+				return err
+			}
+			if err := encodePush(a.Source.Type(), val, e); err != nil {
 				return err
 			}
 			return opcode.Load{DataType: a.DataType}.Encode(e)
@@ -234,7 +247,11 @@ func (a Load) Encode(r value.PointerResolver, e binary.Encoder) error {
 		if addr < 0x100000 {
 			return opcode.LoadV{DataType: a.DataType, Address: uint32(addr)}.Encode(e)
 		} else {
-			if err := encodePush(a.Source.Type(), a.Source.Get(r), e); err != nil {
+			val, err := a.Source.Get(r)
+			if err != nil {
+				return err
+			}
+			if err := encodePush(a.Source.Type(), val, e); err != nil {
 				return err
 			}
 			return opcode.Load{DataType: a.DataType}.Encode(e)
@@ -251,11 +268,18 @@ type Store struct {
 }
 
 func (a Store) Encode(r value.PointerResolver, e binary.Encoder) error {
-	addr := a.Destination.Get(r)
+	addr, err := a.Destination.Get(r)
+	if err != nil {
+		return err
+	}
 	if addr < 0x3ffffff {
 		return opcode.StoreV{Address: uint32(addr)}.Encode(e)
 	} else {
-		if err := encodePush(a.Destination.Type(), a.Destination.Get(r), e); err != nil {
+		val, err := a.Destination.Get(r)
+		if err != nil {
+			return err
+		}
+		if err := encodePush(a.Destination.Type(), val, e); err != nil {
 			return err
 		}
 		return opcode.Store{}.Encode(e)
@@ -286,7 +310,11 @@ type Resource struct {
 
 func (a Resource) Encode(r value.PointerResolver, e binary.Encoder) error {
 	ptr := value.VolatileCapturePointer(a.Destination)
-	if err := encodePush(ptr.Type(), ptr.Get(r), e); err != nil {
+	val, err := ptr.Get(r)
+	if err != nil {
+		return err
+	}
+	if err := encodePush(ptr.Type(), val, e); err != nil {
 		return err
 	}
 	return opcode.Resource{
@@ -301,7 +329,11 @@ type Post struct {
 }
 
 func (a Post) Encode(r value.PointerResolver, e binary.Encoder) error {
-	if err := encodePush(a.Source.Type(), a.Source.Get(r), e); err != nil {
+	val, err := a.Source.Get(r)
+	if err != nil {
+		return err
+	}
+	if err := encodePush(a.Source.Type(), val, e); err != nil {
 		return err
 	}
 	if err := encodePush(protocol.TypeUint32, a.Size, e); err != nil {
