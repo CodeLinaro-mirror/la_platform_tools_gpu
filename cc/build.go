@@ -276,12 +276,9 @@ func (t Target) Build(env build.Environment) error {
 	if t.Replayd.OS == build.HostOS {
 		src, dst := replayd, BinRoot.Join(replayd.Name())
 		env.Logger = rootLogger
-		env.Logger.Info("symlinking %s -> %s", src, dst)
-		if os.Symlink(src.Absolute(), dst.Absolute()) != nil {
-			env.Logger.Info("Symlink failed, copying instead.")
-			if err := src.CopyTo(dst); err != nil {
-				env.Logger.Error("Copy failed: %v", err)
-			}
+		env.Logger.Info("Copying %s -> %s", src, dst)
+		if err := src.CopyTo(dst); err != nil {
+			env.Logger.Error("Copy failed: %v", err)
 		}
 	}
 
