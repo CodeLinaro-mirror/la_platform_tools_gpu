@@ -163,15 +163,11 @@ func (f File) CopyTo(dst File) error {
 		return err
 	}
 
-	d, err := os.Create(dst.Absolute())
+	d, err := os.OpenFile(dst.Absolute(), os.O_CREATE, fi.Mode())
 	if err != nil {
 		return err
 	}
 	defer d.Close()
-
-	if err := d.Chmod(fi.Mode()); err != nil {
-		return err
-	}
 
 	_, err = io.Copy(d, s)
 	return err
