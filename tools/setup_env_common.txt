@@ -12,13 +12,5 @@ REPO_ROOT=`cd $PROGDIR/../../../../../../../../ && pwd`
 # The path to the gpu source code (relative to $GPU_BUILD_ROOT/src).
 GPU_RELATIVE_SOURCE_PATH=android.googlesource.com/platform/tools/gpu
 
-# This script currently only works on Linux.
-# TODO: Make a version of this script for other platforms.
-export GOROOT=$REPO_ROOT/prebuilts/go/linux-x86
-export GOPATH=$GPU_BUILD_ROOT
-
-# Add the pre-built go tools to the path.
-export PATH=$GOROOT/bin:$PATH
-
 # Add the tools we build to the path.
 export PATH=$GPU_BUILD_ROOT/bin:$PATH

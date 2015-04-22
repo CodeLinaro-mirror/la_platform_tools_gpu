@@ -7,6 +7,12 @@ export LD_LIBRARY_PATH=$GCC_TOOLCHAIN_ROOT/x86_64-linux/lib64:$LD_LIBRARY_PATH
 export CC=x86_64-linux-gcc
 export CXX=x86_64-linux-g++
 
+export GOROOT=$REPO_ROOT/prebuilts/go/linux-x86
+export GOPATH=$GPU_BUILD_ROOT
+
+# Add the pre-built go tools to the path.
+export PATH=$GOROOT/bin:$PATH
+
 export GOOS=linux
 export GOARCH=amd64
 export CGO_ENABLED=1

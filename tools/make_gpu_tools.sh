@@ -6,10 +6,14 @@ set -ex
 # Ensure we get the full path of this script's directory.
 PROGDIR=`dirname $0`
 PROGDIR=`cd $PROGDIR && pwd`
-HOST_OS=$(uname | tr A-Z a-z)"-x64"
+
+# Use osx-x64 instead of darwin-x64 for Mac.
+# TODO: Switch the build to use darwin-x64 to be consistent with
+# other Android repositories.
+HOST_OS=$(uname | tr A-Z a-z | sed -e "s/darwin/osx/g")"-x64"
 
 source $PROGDIR/setup_env_common.txt
-source $PROGDIR/setup_toolchain_linux64.txt
+source $PROGDIR/setup_toolchain_$HOST_OS.txt
 
 if [[ $HOST_OS == "linux-x64" ]]; then
   crosscompile_windows=1
@@ -20,7 +24,7 @@ fi
 run_integration_tests=0
 use_xvfb=0
 
-BUILD_NUMBER="SNAPSHOT-"`date -u -Iseconds`
+BUILD_NUMBER="SNAPSHOT-"`date "+%Y-%m-%dT%H:%M:%S%z"`
 BUILD_FLAVOR="release"
 DIST_DIR=$GPU_BUILD_ROOT/dist
 
