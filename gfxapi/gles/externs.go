@@ -6,8 +6,20 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-func read(memory.Pointer, int32, int32)  {} // TEMP
-func write(memory.Pointer, int32, int32) {} // TEMP
+func read(memory.Pointer, uint32, uint32)  {} // TEMP
+func write(memory.Pointer, uint32, uint32) {} // TEMP
+
+func minIndex(pointer memory.Pointer, ty IndicesType, element_count uint32) uint32 {
+	return 0 // TEMP
+}
+
+func maxIndex(pointer memory.Pointer, ty IndicesType, element_count uint32) uint32 {
+	return 0 // TEMP
+}
+
+func memoryOffset(m memory.Memory, by uint64) memory.Pointer {
+	return 0 // TEMP
+}
 
 func strlen(str string) int32 {
 	return int32(len(str))

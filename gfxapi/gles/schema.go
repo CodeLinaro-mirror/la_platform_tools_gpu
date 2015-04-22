@@ -318,7 +318,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(42),
+				Type: s.getEnumInfo(43),
 				Out:  false,
 			},
 		},
@@ -333,7 +333,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(42),
+				Type: s.getEnumInfo(43),
 				Out:  false,
 			},
 		},
@@ -433,7 +433,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "preserveMask",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 		},
@@ -448,7 +448,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "preserve_mask",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 		},
@@ -463,7 +463,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -837,7 +837,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(72),
+				Type: s.getEnumInfo(73),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -857,7 +857,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(73),
+				Type: s.getEnumInfo(74),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -877,7 +877,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "result",
-				Type: s.getEnumInfo(74),
+				Type: s.getEnumInfo(75),
 				Out:  true,
 			},
 		},
@@ -917,12 +917,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "src_factor",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 		},
@@ -937,22 +937,22 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "src_factor_rgb",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor_rgb",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "src_factor_alpha",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor_alpha",
-				Type: s.getEnumInfo(63),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 		},
@@ -967,7 +967,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "equation",
-				Type: s.getEnumInfo(68),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 		},
@@ -982,12 +982,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "rgb",
-				Type: s.getEnumInfo(68),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "alpha",
-				Type: s.getEnumInfo(68),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 		},
@@ -1072,7 +1072,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(45),
+				Type: s.getEnumInfo(46),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1127,7 +1127,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(46),
+				Type: s.getEnumInfo(47),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -1172,7 +1172,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(47),
+				Type: s.getEnumInfo(48),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -1192,7 +1192,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "result",
-				Type: s.getEnumInfo(48),
+				Type: s.getEnumInfo(49),
 				Out:  true,
 			},
 		},
@@ -1212,7 +1212,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(52),
+				Type: s.getEnumInfo(53),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1237,7 +1237,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(53),
+				Type: s.getEnumInfo(54),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1307,7 +1307,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(54),
+				Type: s.getEnumInfo(55),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1332,7 +1332,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(59),
+				Type: s.getEnumInfo(60),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1357,7 +1357,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(59),
+				Type: s.getEnumInfo(60),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1382,7 +1382,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(59),
+				Type: s.getEnumInfo(60),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1407,7 +1407,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(59),
+				Type: s.getEnumInfo(60),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2177,12 +2177,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "shader_type",
-				Type: s.getEnumInfo(33),
+				Type: s.getEnumInfo(34),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "precision_type",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(65),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2222,7 +2222,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "function",
-				Type: s.getEnumInfo(65),
+				Type: s.getEnumInfo(66),
 				Out:  false,
 			},
 		},
@@ -2302,7 +2302,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(40),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2322,12 +2322,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(40),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "function",
-				Type: s.getEnumInfo(65),
+				Type: s.getEnumInfo(66),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2352,22 +2352,22 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(40),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_fail",
-				Type: s.getEnumInfo(66),
+				Type: s.getEnumInfo(67),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_pass_depth_fail",
-				Type: s.getEnumInfo(66),
+				Type: s.getEnumInfo(67),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_pass_depth_pass",
-				Type: s.getEnumInfo(66),
+				Type: s.getEnumInfo(67),
 				Out:  false,
 			},
 		},
@@ -2382,7 +2382,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "orientation",
-				Type: s.getEnumInfo(67),
+				Type: s.getEnumInfo(68),
 				Out:  false,
 			},
 		},
@@ -2457,7 +2457,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "unit",
-				Type: s.getEnumInfo(31),
+				Type: s.getEnumInfo(32),
 				Out:  false,
 			},
 		},
@@ -2587,7 +2587,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(19),
+				Type: s.getEnumInfo(20),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2642,7 +2642,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(19),
+				Type: s.getEnumInfo(20),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2772,7 +2772,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "format",
-				Type: s.getEnumInfo(17),
+				Type: s.getEnumInfo(18),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2842,7 +2842,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "format",
-				Type: s.getEnumInfo(17),
+				Type: s.getEnumInfo(18),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2907,7 +2907,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(19),
+				Type: s.getEnumInfo(20),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2947,7 +2947,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2967,12 +2967,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "result",
-				Type: s.getEnumInfo(26),
+				Type: s.getEnumInfo(27),
 				Out:  true,
 			},
 		},
@@ -3047,7 +3047,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(27),
+				Type: s.getEnumInfo(28),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3067,7 +3067,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(27),
+				Type: s.getEnumInfo(28),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3137,12 +3137,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(27),
+				Type: s.getEnumInfo(28),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(28),
+				Type: s.getEnumInfo(29),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3182,7 +3182,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(29),
+				Type: s.getEnumInfo(30),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3202,7 +3202,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(29),
+				Type: s.getEnumInfo(30),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3217,7 +3217,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "usage",
-				Type: s.getEnumInfo(32),
+				Type: s.getEnumInfo(33),
 				Out:  false,
 			},
 		},
@@ -3232,7 +3232,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(29),
+				Type: s.getEnumInfo(30),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3302,12 +3302,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(29),
+				Type: s.getEnumInfo(30),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(30),
+				Type: s.getEnumInfo(31),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3327,7 +3327,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(33),
+				Type: s.getEnumInfo(34),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3786,7 +3786,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(87),
 				Out:  false,
 			},
 		},
@@ -3801,7 +3801,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "mode",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(40),
 				Out:  false,
 			},
 		},
@@ -3871,12 +3871,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(49),
+				Type: s.getEnumInfo(50),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "mode",
-				Type: s.getEnumInfo(50),
+				Type: s.getEnumInfo(51),
 				Out:  false,
 			},
 		},
@@ -3891,17 +3891,17 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "framebuffer_target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "framebuffer_attachment",
-				Type: s.getEnumInfo(20),
+				Type: s.getEnumInfo(21),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "renderbuffer_target",
-				Type: s.getEnumInfo(27),
+				Type: s.getEnumInfo(28),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3921,12 +3921,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "framebuffer_target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "framebuffer_attachment",
-				Type: s.getEnumInfo(20),
+				Type: s.getEnumInfo(21),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3956,17 +3956,17 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "framebuffer_target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "attachment",
-				Type: s.getEnumInfo(20),
+				Type: s.getEnumInfo(21),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(25),
+				Type: s.getEnumInfo(26),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4059,7 +4059,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(38),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4079,7 +4079,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(38),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4099,7 +4099,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(38),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4119,7 +4119,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(44),
+				Type: s.getEnumInfo(45),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4139,7 +4139,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(43),
+				Type: s.getEnumInfo(44),
 				Out:  false,
 			},
 		},
@@ -4154,7 +4154,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(43),
+				Type: s.getEnumInfo(44),
 				Out:  false,
 			},
 		},
@@ -4169,7 +4169,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(43),
+				Type: s.getEnumInfo(44),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4189,7 +4189,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(69),
+				Type: s.getEnumInfo(70),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4204,7 +4204,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "access",
-				Type: s.getEnumInfo(87),
+				Type: s.getEnumInfo(88),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4224,7 +4224,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(69),
+				Type: s.getEnumInfo(70),
 				Out:  false,
 			},
 		},
@@ -4239,7 +4239,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(24),
+				Type: s.getEnumInfo(25),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4264,7 +4264,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(27),
+				Type: s.getEnumInfo(28),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4339,12 +4339,12 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(87),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "filter",
-				Type: s.getEnumInfo(60),
+				Type: s.getEnumInfo(61),
 				Out:  false,
 			},
 		},
@@ -4379,7 +4379,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4399,7 +4399,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -4454,12 +4454,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(78),
+				Type: s.getEnumInfo(79),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4484,7 +4484,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(81),
+				Type: s.getEnumInfo(82),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4524,7 +4524,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4544,7 +4544,7 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -4604,7 +4604,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -4619,12 +4619,12 @@ func init() {
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(84),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(78),
+				Type: s.getEnumInfo(79),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4649,7 +4649,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(81),
+				Type: s.getEnumInfo(82),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4674,7 +4674,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(81),
+				Type: s.getEnumInfo(82),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4699,7 +4699,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(81),
+				Type: s.getEnumInfo(82),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4724,7 +4724,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(81),
+				Type: s.getEnumInfo(82),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4784,7 +4784,7 @@ func init() {
 			},
 			&service.FieldInfo{
 				Name: "ActiveTextureUnit",
-				Type: s.getEnumInfo(31),
+				Type: s.getEnumInfo(32),
 			},
 			&service.FieldInfo{
 				Name: "Capabilities",
@@ -4796,7 +4796,7 @@ func init() {
 			},
 			&service.FieldInfo{
 				Name: "GenerateMipmapHint",
-				Type: s.getEnumInfo(50),
+				Type: s.getEnumInfo(51),
 			},
 			&service.FieldInfo{
 				Name: "PixelStorage",
@@ -4830,13 +4830,13 @@ func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
 	case 1:
 		e = service.CreateArrayInfo("BufferIdArray", service.TypeKindArray, schema.U32)
 	case 2:
-		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(51))
+		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(52))
 	case 3:
 		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
 	case 4:
 		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
 	case 5:
-		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(20))
+		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(21))
 	case 6:
 		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
 	case 7:
@@ -4876,17 +4876,17 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 0:
 		e = service.CreateMapInfo("AttributeLocation_stringMap", service.TypeKindMap, schema.String, schema.U32)
 	case 1:
-		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
+		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(44), schema.Bool)
 	case 2:
-		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(29), schema.U32)
+		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(30), schema.U32)
 	case 3:
 		e = service.CreateMapInfo("BufferRef_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
 	case 4:
 		e = service.CreateMapInfo("CubemapLevel_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(6))
 	case 5:
-		e = service.CreateMapInfo("FramebufferAttachmentInfo_FramebufferAttachmentMap", service.TypeKindMap, s.getEnumInfo(20), s.getClassInfo(7))
+		e = service.CreateMapInfo("FramebufferAttachmentInfo_FramebufferAttachmentMap", service.TypeKindMap, s.getEnumInfo(21), s.getClassInfo(7))
 	case 6:
-		e = service.CreateMapInfo("FramebufferId_FramebufferTargetMap", service.TypeKindMap, s.getEnumInfo(24), schema.U32)
+		e = service.CreateMapInfo("FramebufferId_FramebufferTargetMap", service.TypeKindMap, s.getEnumInfo(25), schema.U32)
 	case 7:
 		e = service.CreateMapInfo("FramebufferRef_FramebufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(8))
 	case 8:
@@ -4898,23 +4898,23 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 11:
 		e = service.CreateMapInfo("QueryRef_QueryIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(26))
 	case 12:
-		e = service.CreateMapInfo("RenderbufferId_RenderbufferTargetMap", service.TypeKindMap, s.getEnumInfo(27), schema.U32)
+		e = service.CreateMapInfo("RenderbufferId_RenderbufferTargetMap", service.TypeKindMap, s.getEnumInfo(28), schema.U32)
 	case 13:
 		e = service.CreateMapInfo("RenderbufferRef_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
 	case 14:
-		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(54), schema.S32)
+		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(55), schema.S32)
 	case 15:
-		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
+		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(34), schema.U32)
 	case 16:
 		e = service.CreateMapInfo("ShaderRef_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
 	case 17:
 		e = service.CreateMapInfo("TextureId_TextureTargetMap", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
 	case 18:
-		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(17))
+		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(32), s.getMapInfo(17))
 	case 19:
 		e = service.CreateMapInfo("TextureRef_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
 	case 20:
-		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(39), schema.U32)
+		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(40), schema.U32)
 	case 21:
 		e = service.CreateMapInfo("Uniform_UniformLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(22))
 	case 22:
@@ -5220,6 +5220,18 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 		)
 	case 14:
 		e = service.CreateEnumInfo(
+			"Type_ARB_half_float_vertex",
+			service.TypeKindEnum,
+			[]service.EnumEntry{
+				service.EnumEntry{
+					Name:  "GL_ARB_half_float_vertex",
+					Value: 5131,
+				},
+			},
+			service.EnumInfoArray{},
+		)
+	case 15:
+		e = service.CreateEnumInfo(
 			"Type_OES_vertex_half_float",
 			service.TypeKindEnum,
 			[]service.EnumEntry{
@@ -5230,7 +5242,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 15:
+	case 16:
 		e = service.CreateEnumInfo(
 			"CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture",
 			service.TypeKindEnum,
@@ -5242,7 +5254,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 16:
+	case 17:
 		e = service.CreateEnumInfo(
 			"CompressedTexelFormat_AMD_compressed_ATC_texture",
 			service.TypeKindEnum,
@@ -5262,27 +5274,27 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 17:
+	case 18:
 		e = service.CreateEnumInfo(
 			"CompressedTexelFormat",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(15),
 				s.getEnumInfo(16),
+				s.getEnumInfo(17),
 			},
 		)
-	case 18:
+	case 19:
 		e = service.CreateEnumInfo(
 			"ImageTexelFormat",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
 				s.getEnumInfo(12),
-				s.getEnumInfo(17),
+				s.getEnumInfo(18),
 			},
 		)
-	case 19:
+	case 20:
 		e = service.CreateEnumInfo(
 			"TexelType",
 			service.TypeKindEnum,
@@ -5322,7 +5334,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 20:
+	case 21:
 		e = service.CreateEnumInfo(
 			"FramebufferAttachment",
 			service.TypeKindEnum,
@@ -5342,7 +5354,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 21:
+	case 22:
 		e = service.CreateEnumInfo(
 			"FramebufferAttachmentType",
 			service.TypeKindEnum,
@@ -5362,7 +5374,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 22:
+	case 23:
 		e = service.CreateEnumInfo(
 			"FramebufferTarget_GLES_2_0",
 			service.TypeKindEnum,
@@ -5374,7 +5386,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 23:
+	case 24:
 		e = service.CreateEnumInfo(
 			"FramebufferTarget_GLES_3_1",
 			service.TypeKindEnum,
@@ -5390,17 +5402,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 24:
+	case 25:
 		e = service.CreateEnumInfo(
 			"FramebufferTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(22),
 				s.getEnumInfo(23),
+				s.getEnumInfo(24),
 			},
 		)
-	case 25:
+	case 26:
 		e = service.CreateEnumInfo(
 			"FramebufferAttachmentParameter",
 			service.TypeKindEnum,
@@ -5424,7 +5436,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 26:
+	case 27:
 		e = service.CreateEnumInfo(
 			"FramebufferStatus",
 			service.TypeKindEnum,
@@ -5452,7 +5464,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 27:
+	case 28:
 		e = service.CreateEnumInfo(
 			"RenderbufferTarget",
 			service.TypeKindEnum,
@@ -5464,7 +5476,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 28:
+	case 29:
 		e = service.CreateEnumInfo(
 			"RenderbufferParameter",
 			service.TypeKindEnum,
@@ -5508,7 +5520,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 29:
+	case 30:
 		e = service.CreateEnumInfo(
 			"BufferTarget",
 			service.TypeKindEnum,
@@ -5524,7 +5536,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 30:
+	case 31:
 		e = service.CreateEnumInfo(
 			"BufferParameter",
 			service.TypeKindEnum,
@@ -5540,7 +5552,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 31:
+	case 32:
 		e = service.CreateEnumInfo(
 			"TextureUnit",
 			service.TypeKindEnum,
@@ -5676,7 +5688,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 32:
+	case 33:
 		e = service.CreateEnumInfo(
 			"BufferUsage",
 			service.TypeKindEnum,
@@ -5696,7 +5708,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 33:
+	case 34:
 		e = service.CreateEnumInfo(
 			"ShaderType",
 			service.TypeKindEnum,
@@ -5712,7 +5724,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 34:
+	case 35:
 		e = service.CreateEnumInfo(
 			"StateVariable_GLES_2_0",
 			service.TypeKindEnum,
@@ -6064,7 +6076,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 35:
+	case 36:
 		e = service.CreateEnumInfo(
 			"StateVariable_GLES_3_1",
 			service.TypeKindEnum,
@@ -6076,7 +6088,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 36:
+	case 37:
 		e = service.CreateEnumInfo(
 			"StateVariable_EXT_texture_filter_anisotropic",
 			service.TypeKindEnum,
@@ -6088,7 +6100,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 37:
+	case 38:
 		e = service.CreateEnumInfo(
 			"StateVariable_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -6100,19 +6112,19 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 38:
+	case 39:
 		e = service.CreateEnumInfo(
 			"StateVariable",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(34),
 				s.getEnumInfo(35),
 				s.getEnumInfo(36),
 				s.getEnumInfo(37),
+				s.getEnumInfo(38),
 			},
 		)
-	case 39:
+	case 40:
 		e = service.CreateEnumInfo(
 			"FaceMode",
 			service.TypeKindEnum,
@@ -6132,7 +6144,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 40:
+	case 41:
 		e = service.CreateEnumInfo(
 			"ArrayType_GLES_1_1",
 			service.TypeKindEnum,
@@ -6156,7 +6168,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 41:
+	case 42:
 		e = service.CreateEnumInfo(
 			"ArrayType_OES_point_size_array",
 			service.TypeKindEnum,
@@ -6168,17 +6180,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 42:
+	case 43:
 		e = service.CreateEnumInfo(
 			"ArrayType",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(40),
 				s.getEnumInfo(41),
+				s.getEnumInfo(42),
 			},
 		)
-	case 43:
+	case 44:
 		e = service.CreateEnumInfo(
 			"Capability",
 			service.TypeKindEnum,
@@ -6221,10 +6233,10 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 				},
 			},
 			service.EnumInfoArray{
-				s.getEnumInfo(42),
+				s.getEnumInfo(43),
 			},
 		)
-	case 44:
+	case 45:
 		e = service.CreateEnumInfo(
 			"StringConstant",
 			service.TypeKindEnum,
@@ -6248,7 +6260,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 45:
+	case 46:
 		e = service.CreateEnumInfo(
 			"VertexAttribType",
 			service.TypeKindEnum,
@@ -6279,10 +6291,11 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 				},
 			},
 			service.EnumInfoArray{
+				s.getEnumInfo(15),
 				s.getEnumInfo(14),
 			},
 		)
-	case 46:
+	case 47:
 		e = service.CreateEnumInfo(
 			"ShaderAttribType",
 			service.TypeKindEnum,
@@ -6318,7 +6331,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 47:
+	case 48:
 		e = service.CreateEnumInfo(
 			"ShaderUniformType",
 			service.TypeKindEnum,
@@ -6394,7 +6407,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 48:
+	case 49:
 		e = service.CreateEnumInfo(
 			"Error",
 			service.TypeKindEnum,
@@ -6426,7 +6439,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 49:
+	case 50:
 		e = service.CreateEnumInfo(
 			"HintTarget",
 			service.TypeKindEnum,
@@ -6438,7 +6451,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 50:
+	case 51:
 		e = service.CreateEnumInfo(
 			"HintMode",
 			service.TypeKindEnum,
@@ -6458,7 +6471,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 51:
+	case 52:
 		e = service.CreateEnumInfo(
 			"DiscardFramebufferAttachment",
 			service.TypeKindEnum,
@@ -6478,7 +6491,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 52:
+	case 53:
 		e = service.CreateEnumInfo(
 			"ProgramParameter",
 			service.TypeKindEnum,
@@ -6522,7 +6535,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 53:
+	case 54:
 		e = service.CreateEnumInfo(
 			"ShaderParameter",
 			service.TypeKindEnum,
@@ -6550,7 +6563,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 54:
+	case 55:
 		e = service.CreateEnumInfo(
 			"PixelStoreParameter",
 			service.TypeKindEnum,
@@ -6566,7 +6579,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 55:
+	case 56:
 		e = service.CreateEnumInfo(
 			"TextureParameter_FilterMode",
 			service.TypeKindEnum,
@@ -6582,7 +6595,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 56:
+	case 57:
 		e = service.CreateEnumInfo(
 			"TextureParameter_WrapMode",
 			service.TypeKindEnum,
@@ -6598,7 +6611,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 57:
+	case 58:
 		e = service.CreateEnumInfo(
 			"TextureParameter_EXT_texture_filter_anisotropic",
 			service.TypeKindEnum,
@@ -6610,7 +6623,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 58:
+	case 59:
 		e = service.CreateEnumInfo(
 			"TextureParameter_SwizzleMode",
 			service.TypeKindEnum,
@@ -6634,19 +6647,19 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 59:
+	case 60:
 		e = service.CreateEnumInfo(
 			"TextureParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(55),
 				s.getEnumInfo(56),
-				s.getEnumInfo(58),
 				s.getEnumInfo(57),
+				s.getEnumInfo(59),
+				s.getEnumInfo(58),
 			},
 		)
-	case 60:
+	case 61:
 		e = service.CreateEnumInfo(
 			"TextureFilterMode",
 			service.TypeKindEnum,
@@ -6678,7 +6691,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 61:
+	case 62:
 		e = service.CreateEnumInfo(
 			"TextureWrapMode",
 			service.TypeKindEnum,
@@ -6698,7 +6711,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 62:
+	case 63:
 		e = service.CreateEnumInfo(
 			"TexelComponent",
 			service.TypeKindEnum,
@@ -6722,7 +6735,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 63:
+	case 64:
 		e = service.CreateEnumInfo(
 			"BlendFactor",
 			service.TypeKindEnum,
@@ -6790,7 +6803,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 64:
+	case 65:
 		e = service.CreateEnumInfo(
 			"PrecisionType",
 			service.TypeKindEnum,
@@ -6822,7 +6835,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 65:
+	case 66:
 		e = service.CreateEnumInfo(
 			"TestFunction",
 			service.TypeKindEnum,
@@ -6862,7 +6875,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 66:
+	case 67:
 		e = service.CreateEnumInfo(
 			"StencilAction",
 			service.TypeKindEnum,
@@ -6902,7 +6915,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 67:
+	case 68:
 		e = service.CreateEnumInfo(
 			"FaceOrientation",
 			service.TypeKindEnum,
@@ -6918,7 +6931,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 68:
+	case 69:
 		e = service.CreateEnumInfo(
 			"BlendEquation",
 			service.TypeKindEnum,
@@ -6938,7 +6951,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 69:
+	case 70:
 		e = service.CreateEnumInfo(
 			"MapBufferTarget",
 			service.TypeKindEnum,
@@ -6978,7 +6991,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 70:
+	case 71:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture_OES_EGL_image",
 			service.TypeKindEnum,
@@ -6990,7 +7003,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 71:
+	case 72:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture_OES_EGL_image_external",
 			service.TypeKindEnum,
@@ -7002,17 +7015,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 72:
+	case 73:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(70),
 				s.getEnumInfo(71),
+				s.getEnumInfo(72),
 			},
 		)
-	case 73:
+	case 74:
 		e = service.CreateEnumInfo(
 			"ImageTargetRenderbufferStorage",
 			service.TypeKindEnum,
@@ -7024,7 +7037,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 74:
+	case 75:
 		e = service.CreateEnumInfo(
 			"ResetStatus",
 			service.TypeKindEnum,
@@ -7048,7 +7061,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 75:
+	case 76:
 		e = service.CreateEnumInfo(
 			"TextureKind",
 			service.TypeKindEnum,
@@ -7068,7 +7081,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 76:
+	case 77:
 		e = service.CreateEnumInfo(
 			"QueryParameter_GLES_3",
 			service.TypeKindEnum,
@@ -7080,7 +7093,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 77:
+	case 78:
 		e = service.CreateEnumInfo(
 			"QueryParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -7092,17 +7105,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 78:
+	case 79:
 		e = service.CreateEnumInfo(
 			"QueryParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(76),
 				s.getEnumInfo(77),
+				s.getEnumInfo(78),
 			},
 		)
-	case 79:
+	case 80:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_GLES_3",
 			service.TypeKindEnum,
@@ -7118,24 +7131,24 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 80:
+	case 81:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{},
 		)
-	case 81:
+	case 82:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(79),
 				s.getEnumInfo(80),
+				s.getEnumInfo(81),
 			},
 		)
-	case 82:
+	case 83:
 		e = service.CreateEnumInfo(
 			"QueryTarget_GLES_3",
 			service.TypeKindEnum,
@@ -7155,7 +7168,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 83:
+	case 84:
 		e = service.CreateEnumInfo(
 			"QueryTarget_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -7171,17 +7184,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 84:
+	case 85:
 		e = service.CreateEnumInfo(
 			"QueryTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
-				s.getEnumInfo(82),
 				s.getEnumInfo(83),
+				s.getEnumInfo(84),
 			},
 		)
-	case 85:
+	case 86:
 		e = service.CreateEnumInfo(
 			"TilePreserveMaskQCOM",
 			service.TypeKindEnum,
@@ -7317,7 +7330,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 86:
+	case 87:
 		e = service.CreateEnumInfo(
 			"ClearMask",
 			service.TypeKindEnum,
@@ -7337,7 +7350,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 87:
+	case 88:
 		e = service.CreateEnumInfo(
 			"MapBufferRangeAccess",
 			service.TypeKindEnum,
@@ -7446,11 +7459,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Size",
-					Type: schema.S32,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "Format",
-					Type: s.getEnumInfo(18),
+					Type: s.getEnumInfo(19),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7495,11 +7508,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Kind",
-					Type: s.getEnumInfo(75),
+					Type: s.getEnumInfo(76),
 				},
 				&service.FieldInfo{
 					Name: "Format",
-					Type: s.getEnumInfo(18),
+					Type: s.getEnumInfo(19),
 				},
 				&service.FieldInfo{
 					Name: "Texture2D",
@@ -7511,35 +7524,35 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "MagFilter",
-					Type: s.getEnumInfo(60),
+					Type: s.getEnumInfo(61),
 				},
 				&service.FieldInfo{
 					Name: "MinFilter",
-					Type: s.getEnumInfo(60),
+					Type: s.getEnumInfo(61),
 				},
 				&service.FieldInfo{
 					Name: "WrapS",
-					Type: s.getEnumInfo(61),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "WrapT",
-					Type: s.getEnumInfo(61),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleR",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleG",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleB",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleA",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "MaxAnisotropy",
@@ -7573,7 +7586,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(21),
+					Type: s.getEnumInfo(22),
 				},
 				&service.FieldInfo{
 					Name: "TextureLevel",
@@ -7613,7 +7626,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Usage",
-					Type: s.getEnumInfo(32),
+					Type: s.getEnumInfo(33),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7645,7 +7658,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(33),
+					Type: s.getEnumInfo(34),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7665,7 +7678,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(46),
+					Type: s.getEnumInfo(47),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7913,7 +7926,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(47),
+					Type: s.getEnumInfo(48),
 				},
 				&service.FieldInfo{
 					Name: "Value",
@@ -7976,11 +7989,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Size",
-					Type: schema.S32,
+					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(45),
+					Type: s.getEnumInfo(46),
 				},
 				&service.FieldInfo{
 					Name: "Normalized",
@@ -8015,27 +8028,27 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "SrcRgbBlendFactor",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(64),
 				},
 				&service.FieldInfo{
 					Name: "SrcAlphaBlendFactor",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(64),
 				},
 				&service.FieldInfo{
 					Name: "DstRgbBlendFactor",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(64),
 				},
 				&service.FieldInfo{
 					Name: "DstAlphaBlendFactor",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(64),
 				},
 				&service.FieldInfo{
 					Name: "BlendEquationRgb",
-					Type: s.getEnumInfo(68),
+					Type: s.getEnumInfo(69),
 				},
 				&service.FieldInfo{
 					Name: "BlendEquationAlpha",
-					Type: s.getEnumInfo(68),
+					Type: s.getEnumInfo(69),
 				},
 				&service.FieldInfo{
 					Name: "BlendColor",
@@ -8055,7 +8068,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "DepthTestFunction",
-					Type: s.getEnumInfo(65),
+					Type: s.getEnumInfo(66),
 				},
 				&service.FieldInfo{
 					Name: "DepthNear",
@@ -8095,11 +8108,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "FrontFace",
-					Type: s.getEnumInfo(67),
+					Type: s.getEnumInfo(68),
 				},
 				&service.FieldInfo{
 					Name: "CullFace",
-					Type: s.getEnumInfo(39),
+					Type: s.getEnumInfo(40),
 				},
 				&service.FieldInfo{
 					Name: "LineWidth",
