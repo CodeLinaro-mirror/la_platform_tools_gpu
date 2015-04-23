@@ -167,7 +167,7 @@ func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref ast.Node) ast.Node {
 	if e := pointerType(p, cst, ref); e != nil {
 		return e
 	}
-	if s := staticArrayType(p, cst, ref); s != nil {
+	if s := indexedType(p, cst, ref); s != nil {
 		return s
 	}
 	return nil
@@ -223,20 +223,17 @@ func pointerType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.PointerT
 	return t
 }
 
-// lhs_type '[' expression { ',' expression } ']'
-func staticArrayType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.StaticArrayType {
+// lhs_type '[' [ expression ] ']'
+func indexedType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.IndexedType {
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
 	}
-	t := &ast.StaticArrayType{}
+	t := &ast.IndexedType{}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		t.CST = cst
 		requireOperator(ast.OpIndexStart, p, cst)
-		for {
-			t.Dimensions = append(t.Dimensions, requireExpression(p, cst))
-			if !operator(ast.OpListSeparator, p, cst) {
-				break
-			}
+		if !peekOperator(ast.OpIndexEnd, p) {
+			t.Index = requireExpression(p, cst)
 		}
 		requireOperator(ast.OpIndexEnd, p, cst)
 	})

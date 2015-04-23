@@ -110,14 +110,12 @@ type GenericType struct {
 	Args    []Node        // the type arguments to the generic.
 }
 
-// StaticArrayType represents a type declaration for a constant size array,
-// which looks like «type[dimensions]»
-// dimensions is a comma separated list of dimensions, for declaring
-// multidimensional arrays, for instance f32[4,4] for a matrix.
-type StaticArrayType struct {
-	CST        *parse.Branch // underlying parse structure for this node
-	ValueType  Node          // The type to store in the array
-	Dimensions []Node        // the dimensions of the array
+// IndexedType represents a type declaration with an indexing suffix,
+// which looks like «type[index]»
+type IndexedType struct {
+	CST       *parse.Branch // underlying parse structure for this node
+	ValueType Node          // The element type exposed by the indexed type
+	Index     Node          // the index of the type
 }
 
 // PointerType represents a pointer type declaration, of the form «type*»

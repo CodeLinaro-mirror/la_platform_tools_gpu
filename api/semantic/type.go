@@ -201,9 +201,9 @@ func (t Array) Member(name string) Node { return nil }
 
 // StaticArray represents a multi-dimensional fixed size array type.
 type StaticArray struct {
-	Name       string        // the full type name
-	ValueType  Type          // the storage type of the elements
-	Dimensions []Uint32Value // the dimensions of the array in outer->inner order
+	Name      string // the full type name
+	ValueType Type   // the storage type of the elements
+	Size      uint32 // the dimension of the array
 }
 
 func (t StaticArray) Typename() string        { return t.Name }
