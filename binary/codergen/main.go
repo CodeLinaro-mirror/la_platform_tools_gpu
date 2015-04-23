@@ -36,6 +36,7 @@ import (
 
 var (
 	verbose = flag.Bool("v", false, "verbose messages")
+	nowrite = flag.Bool("n", false, "don't write the files")
 	golang  = flag.Bool("go", false, "generate go code")
 	java    = flag.String("java", "", "the path to generate files in")
 )
@@ -51,9 +52,9 @@ type Entry struct {
 	Generator func(*generate.File) ([]byte, error)
 }
 
-func scan(entry string, wd string, config *loader.Config) error {
+func scan(entry string, loader *generate.Loader, files *[]*generate.File) error {
 	base := strings.TrimSuffix(entry, "...")
-	pkg, err := build.Default.Import(base, wd, build.FindOnly)
+	pkg, err := build.Default.Import(base, loader.Path, build.FindOnly)
 	if err != nil {
 		return err
 	}
@@ -61,7 +62,13 @@ func scan(entry string, wd string, config *loader.Config) error {
 		fmt.Printf("%s from %s\n", pkg.ImportPath, pkg.Dir)
 	}
 	if len(base) == len(entry) {
-		config.ImportWithTests(pkg.ImportPath)
+		file, err := loader.ScanPackage(pkg.ImportPath)
+		if err != nil {
+			return err
+		}
+		if len(file.Structs) > 0 {
+			*files = append(*files, file)
+		}
 	} else {
 		err = filepath.Walk(pkg.Dir, func(path string, info os.FileInfo, err error) error {
 			if !info.IsDir() {
@@ -71,8 +78,20 @@ func scan(entry string, wd string, config *loader.Config) error {
 				return filepath.SkipDir
 			}
 			name := pkg.ImportPath + strings.TrimPrefix(path, pkg.Dir)
-			config.ImportWithTests(name)
-			return err
+			if *verbose {
+				fmt.Printf("Reading %s\n", name)
+			}
+			file, err := loader.ScanPackage(name)
+			if err != nil {
+				if *verbose {
+					fmt.Printf("scan failed: %s\n", err)
+				}
+				return nil
+			}
+			if len(file.Structs) > 0 {
+				*files = append(*files, file)
+			}
+			return nil
 		})
 	}
 	return err
@@ -106,15 +125,11 @@ func run() error {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
-	config := &loader.Config{}
 	wd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
-	config.AllowErrors = true
-	if !*verbose {
-		config.TypeChecker.Error = func(e error) {}
-	}
+	loader := generate.NewLoader(wd)
 	if *verbose {
 		fmt.Printf("Scanning\n")
 	}
@@ -122,53 +137,16 @@ func run() error {
 	if len(args) == 0 {
 		args = append(args, "./...")
 	}
+	files := []*generate.File{}
 	for _, arg := range args {
-		if err := scan(arg, wd, config); err != nil {
+		if err := scan(arg, loader, &files); err != nil {
 			return err
 		}
 	}
 	if *verbose {
-		fmt.Printf("Loading\n")
-	}
-	info, err := config.Load()
-	if err != nil {
-		return err
-	}
-	if *verbose {
-		fmt.Printf("Generating\n")
-	}
-	files := map[string]*generate.File{}
-	for _, pkg := range info.Imported {
-		pkgName := pkg.Pkg.Name()
-		structs := filterStructs(pkg)
-		for _, name := range structs {
-			fileName := pkgName
-			fromFile := config.Fset.File(name.Pos()).Name()
-			path := filepath.Dir(fromFile)
-			isTest := strings.HasSuffix(fromFile, "_test.go")
-			if isTest {
-				fileName += "#test"
-			}
-			fileName = filepath.Join(path, fileName)
-			file, found := files[fileName]
-			if !found {
-				file = &generate.File{}
-				file.Package = pkgName
-				file.IsTest = isTest
-				file.Path = path
-				file.Imports = make(map[string]struct{})
-				files[fileName] = file
-			}
-			s := generate.FromTypename(pkg.Pkg, name, file.Imports)
-			if s != nil {
-				file.Structs = append(file.Structs, s)
-			}
-		}
+		fmt.Printf("Generating %d files\n", len(files))
 	}
 	for _, file := range files {
-		if len(file.Structs) == 0 {
-			continue
-		}
 		generate.Sort(file.Structs)
 		if *golang {
 			entry := Entry{
@@ -206,6 +184,9 @@ func run() error {
 }
 
 func (e *Entry) Generate() error {
+	if *verbose {
+		fmt.Printf("maybe %s\n", e.Output)
+	}
 	result, err := e.Generator(&e.File)
 	if err != nil {
 		return err
@@ -215,6 +196,10 @@ func (e *Entry) Generate() error {
 		if *verbose {
 			fmt.Printf("No change for %s\n", e.Output)
 		}
+		return nil
+	}
+	if *nowrite {
+		fmt.Printf("Not writing %s\n", e.Output)
 		return nil
 	}
 	if *verbose {
