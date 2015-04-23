@@ -41,94 +41,147 @@ func assertEqual(t *testing.T, n int, got U64SpanList, expected U64SpanList) {
 }
 
 func TestMerge(t *testing.T) {
+	var (
+		always           = 0x0
+		whenJoinAdjTrue  = 0x1
+		whenJoinAdjFalse = 0x2
+	)
+
 	for n, test := range []struct {
 		list     U64SpanList
 		with     U64Span
 		expected U64SpanList
+		when     int
 	}{
 		{ // Empty
 			U64SpanList{},
 			U64Span{0, 0},
 			U64SpanList{U64Span{0, 0}},
+			always,
 		},
 		{ // Duplicate
 			U64SpanList{U64Span{10, 10}},
 			U64Span{10, 10},
 			U64SpanList{U64Span{10, 10}},
+			always,
 		},
 		{ // Zero length duplicate
 			U64SpanList{U64Span{10, 0}},
 			U64Span{10, 0},
 			U64SpanList{U64Span{10, 0}},
+			always,
 		},
 		{ // between
 			U64SpanList{U64Span{0, 10}, U64Span{40, 50}},
 			U64Span{20, 30},
 			U64SpanList{U64Span{0, 10}, U64Span{20, 30}, U64Span{40, 50}},
+			always,
 		},
 		{ // before
 			U64SpanList{U64Span{10, 20}},
 			U64Span{0, 5},
 			U64SpanList{U64Span{0, 5}, U64Span{10, 20}},
+			always,
 		},
 		{ // after
 			U64SpanList{U64Span{0, 5}},
 			U64Span{10, 20},
 			U64SpanList{U64Span{0, 5}, U64Span{10, 20}},
+			always,
 		},
-		{ //extend before
+		{ // touch before (joinAdj == false)
+			U64SpanList{U64Span{3, 5}},
+			U64Span{0, 3},
+			U64SpanList{U64Span{0, 3}, U64Span{3, 5}},
+			whenJoinAdjFalse,
+		},
+		{ // touch after (joinAdj == false)
+			U64SpanList{U64Span{3, 5}},
+			U64Span{5, 7},
+			U64SpanList{U64Span{3, 5}, U64Span{5, 7}},
+			whenJoinAdjFalse,
+		},
+		{ // touch before (joinAdj == true)
+			U64SpanList{U64Span{3, 5}},
+			U64Span{0, 3},
+			U64SpanList{U64Span{0, 5}},
+			whenJoinAdjTrue,
+		},
+		{ // touch after (joinAdj == true)
+			U64SpanList{U64Span{3, 5}},
+			U64Span{5, 7},
+			U64SpanList{U64Span{3, 7}},
+			whenJoinAdjTrue,
+		},
+		{ // extend before
 			U64SpanList{U64Span{3, 5}},
 			U64Span{0, 4},
 			U64SpanList{U64Span{0, 5}},
+			always,
 		},
-		{ //extend after
+		{ // extend after
 			U64SpanList{U64Span{3, 5}},
 			U64Span{4, 7},
 			U64SpanList{U64Span{3, 7}},
+			always,
 		},
 		{ // extend middle before
 			U64SpanList{U64Span{0, 2}, U64Span{4, 6}, U64Span{8, 10}},
 			U64Span{3, 5},
 			U64SpanList{U64Span{0, 2}, U64Span{3, 6}, U64Span{8, 10}},
+			always,
 		},
 		{ // extend middle after
 			U64SpanList{U64Span{0, 2}, U64Span{4, 6}, U64Span{8, 10}},
 			U64Span{5, 7},
 			U64SpanList{U64Span{0, 2}, U64Span{4, 7}, U64Span{8, 10}},
+			always,
 		},
 		{ // inside start
 			U64SpanList{U64Span{10, 20}},
 			U64Span{10, 11},
 			U64SpanList{U64Span{10, 20}},
+			always,
 		},
 		{ // inside end
 			U64SpanList{U64Span{10, 20}},
 			U64Span{19, 20},
 			U64SpanList{U64Span{10, 20}},
+			always,
 		},
 		{ // merge first two
 			U64SpanList{U64Span{0, 10}, U64Span{20, 30}, U64Span{40, 50}},
 			U64Span{5, 25},
 			U64SpanList{U64Span{0, 30}, U64Span{40, 50}},
+			always,
 		},
 		{ // merge last two
 			U64SpanList{U64Span{0, 10}, U64Span{20, 30}, U64Span{40, 50}},
 			U64Span{25, 45},
 			U64SpanList{U64Span{0, 10}, U64Span{20, 50}},
+			always,
 		},
 		{ // merge overlap
 			U64SpanList{U64Span{0, 10}, U64Span{20, 30}, U64Span{40, 50}},
 			U64Span{5, 45},
 			U64SpanList{U64Span{0, 50}},
+			always,
 		},
 		{ // merge encompass
 			U64SpanList{U64Span{5, 10}, U64Span{20, 30}, U64Span{40, 45}},
 			U64Span{0, 50},
 			U64SpanList{U64Span{0, 50}},
+			always,
 		},
 	} {
-		Merge(&test.list, test.with)
-		assertEqual(t, n, test.list, test.expected)
+		if test.when == always || test.when == whenJoinAdjFalse {
+			Merge(&test.list, test.with, false)
+			assertEqual(t, n, test.list, test.expected)
+		}
+		if test.when == always || test.when == whenJoinAdjTrue {
+			Merge(&test.list, test.with, true)
+			assertEqual(t, n, test.list, test.expected)
+		}
 	}
 }
 
@@ -321,7 +374,7 @@ func BenchmarkGeneral(b *testing.B) {
 	iterations := buildRands(b)
 	l := U64SpanList{}
 	for _, iter := range iterations {
-		Merge(&l, iter.merge)
+		Merge(&l, iter.merge, false)
 		Replace(&l, iter.replace)
 	}
 }

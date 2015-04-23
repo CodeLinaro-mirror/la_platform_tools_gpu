@@ -44,8 +44,21 @@ func IndexOf(l List, value uint64) int {
 
 // Merge adds a span to the list, merging it with existing spans if it overlaps
 // them, and returns the index of that span.
-func Merge(l List, span U64Span) int {
-	return merge(l, span)
+// If the joinAdj parameter is true, then any intervals that are immediately
+// adjacent to span will be merged with span.
+// For example, consider the merging of intervals [0, 2] and [3, 5]:
+//
+// When joinAdj == false:
+//   ╭       ╮       ╭       ╮   ╭       ╮╭       ╮
+//   │0  1  2│ merge │3  4  5│ = │0  1  2││3  4  5│
+//   ╰       ╯       ╰       ╯   ╰       ╯╰       ╯
+//
+// When join == true:
+//   ╭       ╮       ╭       ╮   ╭                ╮
+//   │0  1  2│ merge │3  4  5│ = │0  1  2  3  4  5│
+//   ╰       ╯       ╰       ╯   ╰                ╯
+func Merge(l List, span U64Span, joinAdj bool) int {
+	return merge(l, span, joinAdj)
 }
 
 // Replace cuts the span out of any existing intervals, and then adds a new interval,
@@ -65,7 +78,7 @@ func Remove(l List, span U64Span) {
 // Intersect finds the intervals from the list that overlap with the specified span.
 func Intersect(l List, span U64Span) (first, count int) {
 	s := intersection{}
-	s.intersect(l, span)
+	s.intersect(l, span, false)
 	return s.lowIndex, s.overlap
 }
 

@@ -394,7 +394,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 		Index:       idx,
 		Destination: rng.Base,
 	})
-	interval.Merge(&b.observedRanges, rng.Span())
+	interval.Merge(&b.observedRanges, rng.Span(), true)
 }
 
 // Build compiles the replay instructions, returning a Payload that can be

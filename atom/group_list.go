@@ -62,7 +62,7 @@ func (l *GroupList) Add(start, end ID, name string) {
 	s, c := interval.Intersect(l, r.Span())
 	if c == 0 {
 		// No overlaps, clean insertion
-		i := interval.Merge(l, g.Range.Span())
+		i := interval.Merge(l, g.Range.Span(), false)
 		(*l)[i].Name = g.Name
 		(*l)[i].SubGroups = g.SubGroups
 	} else {
@@ -83,7 +83,7 @@ func (l *GroupList) Add(start, end ID, name string) {
 			// New group completely wraps one or more existing groups. Add the
 			// existing group(s) as subgroups to the new group, and add to the list.
 			g.SubGroups = append(g.SubGroups, (*l)[s:s+c]...)
-			i := interval.Merge(l, g.Range.Span())
+			i := interval.Merge(l, g.Range.Span(), false)
 			(*l)[i].Name = g.Name
 			(*l)[i].SubGroups = g.SubGroups
 		}
