@@ -60,13 +60,23 @@ func search(l List, t Predicate) int {
 }
 
 // intersect a span with a list, calculating the intersection span and interval range
-func (s *intersection) intersect(l List, span U64Span) {
-	beforeLen := search(l, func(test U64Span) bool {
-		return span.Start < test.End
-	})
-	afterIndex := search(l, func(test U64Span) bool {
-		return span.End <= test.Start
-	})
+func (s *intersection) intersect(l List, span U64Span, expand bool) {
+	var beforeLen, afterIndex int
+	if expand {
+		beforeLen = search(l, func(test U64Span) bool {
+			return span.Start <= test.End
+		})
+		afterIndex = search(l, func(test U64Span) bool {
+			return span.End < test.Start
+		})
+	} else {
+		beforeLen = search(l, func(test U64Span) bool {
+			return span.Start < test.End
+		})
+		afterIndex = search(l, func(test U64Span) bool {
+			return span.End <= test.Start
+		})
+	}
 	if afterIndex < beforeLen {
 		afterIndex, beforeLen = beforeLen, afterIndex
 	}
@@ -84,9 +94,9 @@ func (s *intersection) intersect(l List, span U64Span) {
 }
 
 // merges a new span into a list, returning the index of the span
-func merge(l List, span U64Span) int {
+func merge(l List, span U64Span, joinAdj bool) int {
 	s := intersection{}
-	s.intersect(l, span)
+	s.intersect(l, span, joinAdj)
 	adjust(l, s.lowIndex, 1-s.overlap)
 	if s.intersectsLow {
 		span.Start = s.low.Start
@@ -103,7 +113,7 @@ func merge(l List, span U64Span) int {
 // It is used to implement both Remove and Replace
 func cut(l List, span U64Span, add bool) (int, U64Span) {
 	s := intersection{}
-	s.intersect(l, span)
+	s.intersect(l, span, false)
 	if s.overlap == 0 {
 		if add {
 			adjust(l, s.lowIndex, 1)
