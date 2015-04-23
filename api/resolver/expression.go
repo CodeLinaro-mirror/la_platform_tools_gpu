@@ -355,7 +355,7 @@ func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitiali
 func new(ctx *context, in *ast.New) *semantic.New {
 	out := &semantic.New{AST: in}
 	out.Initializer = classInitializer(ctx, in.ClassInitializer)
-	out.Type = getPointerType(ctx, in, out.Initializer.Class)
+	out.Type = getPointerType(ctx, in, out.Initializer.Class, false)
 	ctx.mappings[in] = out
 	return out
 }
@@ -388,11 +388,13 @@ func length(ctx *context, in *ast.Length) *semantic.Length {
 	}
 	ok := false
 	ty := baseType(at)
-	switch ty.(type) {
+	switch ty := ty.(type) {
 	case *semantic.Array:
 		ok = true
 	case *semantic.Map:
 		ok = true
+	case *semantic.Pointer:
+		ok = ty.Array
 	case *semantic.Builtin:
 		if ty == semantic.StringType || ty == semantic.PointerType {
 			ok = true

@@ -165,7 +165,7 @@ func genericType(ctx *context, in *ast.GenericType) semantic.Type {
 
 func indexedType(ctx *context, in *ast.IndexedType) semantic.Type {
 	if in.Index == nil {
-		return getArrayType(ctx, in, type_(ctx, in.ValueType))
+		return getPointerType(ctx, in, type_(ctx, in.ValueType), true)
 	}
 	out := &semantic.StaticArray{ValueType: type_(ctx, in.ValueType)}
 	ctx.with(semantic.Uint32Type, func() {
@@ -193,8 +193,13 @@ func indexedType(ctx *context, in *ast.IndexedType) semantic.Type {
 	return out
 }
 
-func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Pointer {
-	name := strings.Title(to.Typename()) + "Ref"
+func getPointerType(ctx *context, at ast.Node, to semantic.Type, array bool) *semantic.Pointer {
+	name := strings.Title(to.Typename())
+	if array {
+		name += "Array"
+	} else {
+		name += "Ref"
+	}
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {
 			if !equal(to, p.To) {
@@ -205,8 +210,9 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 		}
 	}
 	out := &semantic.Pointer{
-		Name: name,
-		To:   to,
+		Name:  name,
+		To:    to,
+		Array: array,
 	}
 	ctx.api.Pointers = append(ctx.api.Pointers, out)
 	ctx.mappings[at] = out
@@ -214,7 +220,7 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 }
 
 func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
-	return getPointerType(ctx, in, type_(ctx, in.To))
+	return getPointerType(ctx, in, type_(ctx, in.To), false)
 }
 
 func enum(ctx *context, out *semantic.Enum) {
