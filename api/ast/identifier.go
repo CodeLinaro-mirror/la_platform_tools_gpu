@@ -31,6 +31,7 @@ const (
 	KeywordAs        = "as"
 	KeywordAssert    = "assert"
 	KeywordBitfield  = "bitfield"
+	KeywordBuffer    = "buffer"
 	KeywordCase      = "case"
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
