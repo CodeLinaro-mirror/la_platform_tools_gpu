@@ -28,10 +28,8 @@ func type_(ctx *context, in interface{}) semantic.Type {
 	switch in := in.(type) {
 	case *ast.Identifier:
 		return simpleType(ctx, in)
-	case *ast.MapType:
-		return mapType(ctx, in)
-	case *ast.ArrayType:
-		return arrayType(ctx, in)
+	case *ast.GenericType:
+		return genericType(ctx, in)
 	case *ast.StaticArrayType:
 		return staticArrayType(ctx, in)
 	case *ast.PointerType:
@@ -62,9 +60,13 @@ func simpleType(ctx *context, in *ast.Identifier) semantic.Type {
 	return out
 }
 
-func mapType(ctx *context, in *ast.MapType) *semantic.Map {
-	kt := type_(ctx, in.KeyType)
-	vt := type_(ctx, in.ValueType)
+func mapType(ctx *context, in *ast.GenericType) semantic.Type {
+	if len(in.Args) != 2 {
+		ctx.errorf(in, "Map requires 2 args, got %d", len(in.Args))
+		return semantic.VoidType
+	}
+	kt := type_(ctx, in.Args[0])
+	vt := type_(ctx, in.Args[1])
 	name := strings.Title(vt.Typename()) + "_" + kt.Typename() + "Map"
 	for _, m := range ctx.api.Maps {
 		if m.Name == name {
@@ -122,8 +124,12 @@ func mapType(ctx *context, in *ast.MapType) *semantic.Map {
 	return out
 }
 
-func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
-	vt := type_(ctx, in.ValueType)
+func arrayType(ctx *context, in *ast.GenericType) semantic.Type {
+	if len(in.Args) != 1 {
+		ctx.errorf(in, "Array requires 1 arg, got %d", len(in.Args))
+		return semantic.VoidType
+	}
+	vt := type_(ctx, in.Args[0])
 	name := strings.Title(vt.Typename()) + "Array"
 	for _, a := range ctx.api.Arrays {
 		if a.Name == name {
@@ -141,6 +147,18 @@ func arrayType(ctx *context, in *ast.ArrayType) *semantic.Array {
 	ctx.api.Arrays = append(ctx.api.Arrays, out)
 	ctx.mappings[in] = out
 	return out
+}
+
+func genericType(ctx *context, in *ast.GenericType) semantic.Type {
+	switch in.Generic.Value {
+	case ast.KeywordArray:
+		return arrayType(ctx, in)
+	case ast.KeywordMap:
+		return mapType(ctx, in)
+	default:
+		ctx.icef(in, "Generic type %s not handled", in.Generic.Value)
+		return semantic.VoidType
+	}
 }
 
 func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArray {

@@ -25,7 +25,6 @@ type Node interface {
 func (t Alias) Fragment() parse.Fragment            { return t.CST }
 func (t Annotation) Fragment() parse.Fragment       { return t.CST }
 func (t API) Fragment() parse.Fragment              { return t.CST }
-func (t ArrayType) Fragment() parse.Fragment        { return t.CST }
 func (t Assert) Fragment() parse.Fragment           { return t.CST }
 func (t Assign) Fragment() parse.Fragment           { return t.CST }
 func (t BinaryOp) Fragment() parse.Fragment         { return t.CST }
@@ -43,12 +42,12 @@ func (t EnumEntry) Fragment() parse.Fragment        { return t.CST }
 func (t Field) Fragment() parse.Fragment            { return t.CST }
 func (t FieldInitializer) Fragment() parse.Fragment { return t.CST }
 func (t Function) Fragment() parse.Fragment         { return t.CST }
+func (t GenericType) Fragment() parse.Fragment      { return t.CST }
 func (t Group) Fragment() parse.Fragment            { return t.CST }
 func (t Identifier) Fragment() parse.Fragment       { return t.CST }
 func (t Index) Fragment() parse.Fragment            { return t.CST }
 func (t Iteration) Fragment() parse.Fragment        { return t.CST }
 func (t Length) Fragment() parse.Fragment           { return t.CST }
-func (t MapType) Fragment() parse.Fragment          { return t.CST }
 func (t Member) Fragment() parse.Fragment           { return t.CST }
 func (t New) Fragment() parse.Fragment              { return t.CST }
 func (t Number) Fragment() parse.Fragment           { return t.CST }
