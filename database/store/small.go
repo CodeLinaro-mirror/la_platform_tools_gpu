@@ -26,6 +26,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -312,7 +313,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 
 			afterAll := time.Now()
 
-			if l != nil {
+			if config.DebugDatabaseStores && l != nil {
 				l = l.Enter("Compaction")
 				l.Info("After compacting Waste %v Size %v", s.waste, s.size)
 				l.Info("Write records to disk %v", afterWriteRecords.Sub(beforeWriteRecords))
@@ -350,7 +351,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		}
 	}()
 
-	if l != nil {
+	if config.DebugDatabaseStores && l != nil {
 		l.Info("Compacting copy %v records: %v", len(recordsCopyArray), afterCopyRecords.Sub(beforeCopyRecords))
 	}
 
@@ -361,7 +362,9 @@ func (s *smallArchive) compaction(l log.Logger) error {
 func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger log.Logger) error {
 	if logger != nil {
 		logger = logger.Enter("SmallArchive.Store")
-		logger.Info("id: %s size: %d waste %v total_size %v", id, len(data), s.waste, s.size)
+		if config.DebugDatabaseStores {
+			logger.Info("id: %s size: %d waste %v total_size %v", id, len(data), s.waste, s.size)
+		}
 		if len(data) > (1 << 16) {
 			logger.Warning("Store of non-small record in SmallArchive: %v bytes", len(data))
 		}
@@ -392,7 +395,7 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 		s.records[id] = data
 
 		if s.size > s.compactionSize && !s.compacting && s.waste*3 > s.compactionSize {
-			if logger != nil {
+			if config.DebugDatabaseStores && logger != nil {
 				logger.Info("Small archive starting a compaction. Size %v Waste %v",
 					s.size, s.waste)
 			}
@@ -411,9 +414,13 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 func (s *smallArchive) Load(id binary.ID, logger log.Logger, out binary.Object) (size int, err error) {
 	if logger != nil {
 		logger = logger.Enter("SmallArchive.Load")
-		logger.Info("Loading from archive: %s", id)
+		if config.DebugDatabaseStores {
+			logger.Info("Loading from archive: %s", id)
+		}
 		defer func() {
-			logger.Info("↪ size: %d, err: %v", size, err)
+			if config.DebugDatabaseStores {
+				logger.Info("↪ size: %d, err: %v", size, err)
+			}
 			if err := recover(); err != nil {
 				logger.Error("Panic when loading %v: %v", id, err)
 				panic(err)

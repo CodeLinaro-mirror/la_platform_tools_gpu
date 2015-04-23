@@ -24,6 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
@@ -110,8 +111,10 @@ func (d *database) SetBuilder(b builder) {
 
 func (d *database) StoreLink(to, id binary.ID, logger log.Logger) (err error) {
 	logger = logger.Enter("Database.StoreLink")
-	logger.Info("(to: %v, id: %v)", to, id)
-	defer func() { logger.Info("↪ err: %v", err) }()
+	if config.DebugDatabase {
+		logger.Info("(to: %v, id: %v)", to, id)
+		defer func() { logger.Info("↪ err: %v", err) }()
+	}
 
 	if to == id {
 		return nil // Link to itself, ignore
@@ -153,20 +156,26 @@ func (d *database) store(r binary.Object, logger log.Logger, metaType metaType, 
 
 func (d *database) storeDerived(r binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.storeDerived")
-	defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	if config.DebugDatabase {
+		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	}
 	return d.store(r, logger, metaTypeDerived, d.derivedStore)
 }
 
 func (d *database) Store(r binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.Store")
-	defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	if config.DebugDatabase {
+		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	}
 	return d.store(r, logger, metaTypeData, d.dataStore)
 }
 
 func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.StoreRequest")
-	logger.Info("(%+v)", request)
-	defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	if config.DebugDatabase {
+		logger.Info("(%+v)", request)
+		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+	}
 
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
@@ -186,7 +195,9 @@ func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id bi
 	err = d.loadMetadataIfExists(requestId, logger, metadata)
 	if err == nil && metadata.Type == metaTypeLink {
 		// TODO: Check request data matches
-		logger.Info("Resource already built")
+		if config.DebugDatabase {
+			logger.Info("Resource already built")
+		}
 		return requestId, nil
 	}
 
@@ -202,8 +213,10 @@ func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id bi
 
 func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
 	logger = logger.Enter("Database.Load")
-	logger.Info("(id: %v)", id)
-	defer func() { logger.Info("↪ err: %v", err) }()
+	if config.DebugDatabase {
+		logger.Info("(id: %v)", id)
+		defer func() { logger.Info("↪ err: %v", err) }()
+	}
 
 	d.mutex.Lock()
 	if pending, found := d.pending[id]; found {
@@ -232,13 +245,17 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 	if err := d.loadMetadata(id, logger, metadata); err != nil {
 		return err
 	}
-	logger.Info("Metadata: %+v", metadata)
+	if config.DebugDatabase {
+		logger.Info("Metadata: %+v", metadata)
+	}
 
 	switch metadata.Type {
 	case metaTypeLink:
 		return d.Load(metadata.LinkTo, logger, out)
 	case metaTypeLazy:
-		logger.Info("Recreating resource")
+		if config.DebugDatabase {
+			logger.Info("Recreating resource")
+		}
 
 		// Begin building of the resource
 		if err := d.builder.BuildResource(metadata.Request, d, logger, out); err != nil {
@@ -272,8 +289,10 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 
 func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
 	logger = logger.Enter("Database.Contains")
-	logger.Info("(id: %v)", id)
-	defer func() { logger.Info("↪ %v", res) }()
+	if config.DebugDatabase {
+		logger.Info("(id: %v)", id)
+		defer func() { logger.Info("↪ %v", res) }()
+	}
 	return d.metaStore.Contains(id)
 }
 
