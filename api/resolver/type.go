@@ -15,7 +15,6 @@
 package resolver
 
 import (
-	"bytes"
 	"fmt"
 	"strconv"
 	"strings"
@@ -30,8 +29,8 @@ func type_(ctx *context, in interface{}) semantic.Type {
 		return simpleType(ctx, in)
 	case *ast.GenericType:
 		return genericType(ctx, in)
-	case *ast.StaticArrayType:
-		return staticArrayType(ctx, in)
+	case *ast.IndexedType:
+		return indexedType(ctx, in)
 	case *ast.PointerType:
 		return pointerType(ctx, in)
 	case ast.Node:
@@ -124,29 +123,32 @@ func mapType(ctx *context, in *ast.GenericType) semantic.Type {
 	return out
 }
 
-func arrayType(ctx *context, in *ast.GenericType) semantic.Type {
-	if len(in.Args) != 1 {
-		ctx.errorf(in, "Array requires 1 arg, got %d", len(in.Args))
-		return semantic.VoidType
-	}
-	vt := type_(ctx, in.Args[0])
-	name := strings.Title(vt.Typename()) + "Array"
+func getArrayType(ctx *context, at ast.Node, of semantic.Type) *semantic.Array {
+	name := strings.Title(of.Typename()) + "Array"
 	for _, a := range ctx.api.Arrays {
 		if a.Name == name {
-			if !equal(vt, a.ValueType) {
-				ctx.icef(in, "Array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(vt))
+			if !equal(of, a.ValueType) {
+				ctx.icef(at, "Array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(of))
 			}
-			ctx.mappings[in] = a
+			ctx.mappings[at] = a
 			return a
 		}
 	}
 	out := &semantic.Array{
 		Name:      name,
-		ValueType: vt,
+		ValueType: of,
 	}
 	ctx.api.Arrays = append(ctx.api.Arrays, out)
-	ctx.mappings[in] = out
+	ctx.mappings[at] = out
 	return out
+}
+
+func arrayType(ctx *context, in *ast.GenericType) semantic.Type {
+	if len(in.Args) != 1 {
+		ctx.errorf(in, "Array requires 1 arg, got %d", len(in.Args))
+		return semantic.VoidType
+	}
+	return getArrayType(ctx, in, type_(ctx, in.Args[0]))
 }
 
 func genericType(ctx *context, in *ast.GenericType) semantic.Type {
@@ -161,22 +163,20 @@ func genericType(ctx *context, in *ast.GenericType) semantic.Type {
 	}
 }
 
-func staticArrayType(ctx *context, in *ast.StaticArrayType) *semantic.StaticArray {
+func indexedType(ctx *context, in *ast.IndexedType) semantic.Type {
+	if in.Index == nil {
+		return getArrayType(ctx, in, type_(ctx, in.ValueType))
+	}
 	out := &semantic.StaticArray{ValueType: type_(ctx, in.ValueType)}
-	name := bytes.NewBufferString(strings.Title(out.ValueType.Typename()))
-	name.WriteString("StaticArray")
 	ctx.with(semantic.Uint32Type, func() {
-		for _, d := range in.Dimensions {
-			e := expression(ctx, d)
-			if n, ok := e.(semantic.Uint32Value); ok {
-				out.Dimensions = append(out.Dimensions, n)
-				fmt.Fprintf(name, "_%d", uint32(n))
-			} else {
-				ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
-			}
+		e := expression(ctx, in.Index)
+		if n, ok := e.(semantic.Uint32Value); ok {
+			out.Size = uint32(n)
+		} else {
+			ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
 		}
 	})
-	out.Name = name.String()
+	out.Name = fmt.Sprintf("%sStaticArray_%d", out.Size)
 	for _, a := range ctx.api.StaticArrays {
 		if a.Name == out.Name {
 			if !equal(out.ValueType, a.ValueType) {
@@ -200,6 +200,7 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 			if !equal(to, p.To) {
 				ctx.icef(at, "Pointer %s found with non matching value, got %s expected %s", name, typename(p.To), typename(to))
 			}
+			ctx.mappings[at] = p
 			return p
 		}
 	}
@@ -208,14 +209,12 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 		To:   to,
 	}
 	ctx.api.Pointers = append(ctx.api.Pointers, out)
+	ctx.mappings[at] = out
 	return out
 }
 
 func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
-	vt := type_(ctx, in.To)
-	out := getPointerType(ctx, in, vt)
-	ctx.mappings[in] = out
-	return out
+	return getPointerType(ctx, in, type_(ctx, in.To))
 }
 
 func enum(ctx *context, out *semantic.Enum) {

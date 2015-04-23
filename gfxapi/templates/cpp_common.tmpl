@@ -538,7 +538,7 @@ limitations under the License.
 */}}
 {{define "C++.ArrayPostfix"}}
   {{if not (IsType $)}}{{Macro "C++.ArrayPostfix" (TypeOf $)}}
-  {{else if IsStaticArray $}}{{range $i := $.Dimensions}}[{{$i}}]{{end}}
+  {{else if IsStaticArray $}}[{{$.Size}}]
   {{end}}
 {{end}}
 

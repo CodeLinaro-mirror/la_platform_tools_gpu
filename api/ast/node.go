@@ -55,7 +55,7 @@ func (t Parameter) Fragment() parse.Fragment        { return t.CST }
 func (t PointerType) Fragment() parse.Fragment      { return t.CST }
 func (t Pseudonym) Fragment() parse.Fragment        { return t.CST }
 func (t Return) Fragment() parse.Fragment           { return t.CST }
-func (t StaticArrayType) Fragment() parse.Fragment  { return t.CST }
+func (t IndexedType) Fragment() parse.Fragment      { return t.CST }
 func (t String) Fragment() parse.Fragment           { return t.CST }
 func (t Switch) Fragment() parse.Fragment           { return t.CST }
 func (t UnaryOp) Fragment() parse.Fragment          { return t.CST }
