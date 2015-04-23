@@ -20,7 +20,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -76,7 +75,6 @@ type Builder struct {
 	resources       []protocol.ResourceInfo
 	observedRanges  memory.RangeList
 	instructions    []asm.Instruction
-	markers         []marker
 	decoders        []idPostDecoder
 	stack           []stackItem
 	ptrSize         int
@@ -176,9 +174,11 @@ func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Po
 
 // BeginAtom should be called before building any replay instructions.
 func (b *Builder) BeginAtom(id atom.ID) {
-	b.markers = append(b.markers, marker{
-		atom:        id,
-		instruction: len(b.instructions),
+	if id > 0x3ffffff {
+		id = 0x3ffffff // Labels have 26 bit values.
+	}
+	b.instructions = append(b.instructions, asm.Label{
+		Value: uint32(id),
 	})
 }
 
@@ -406,10 +406,13 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 
 	opcodes := &bytes.Buffer{}
 	e := flat.Encoder(endian.Writer(opcodes, b.byteOrder))
-	for idx, i := range b.instructions {
+	id := uint32(0)
+	for _, i := range b.instructions {
+		if label, ok := i.(asm.Label); ok {
+			id = label.Value
+		}
 		if err := i.Encode(vml, e); err != nil {
-			err = fmt.Errorf("Encode %T failed for atom with id %v: %v",
-				i, b.atomIDfor(idx), err)
+			err = fmt.Errorf("Encode %T failed for atom with id %v: %v", i, id, err)
 			return protocol.Payload{}, nil, err
 		}
 	}
@@ -448,17 +451,6 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 		return c
 	}
 	return payload, responseDecoder, nil
-}
-
-func (b *Builder) atomIDfor(instruction int) atom.ID {
-	i := sort.Search(len(b.markers), func(i int) bool {
-		return b.markers[i].instruction >= instruction
-	})
-	if i < len(b.markers) {
-		return b.markers[i].atom
-	} else {
-		return atom.NoID
-	}
 }
 
 func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout {

@@ -63,6 +63,7 @@ public:
         CLONE       = 11,
         STRCPY      = 12,
         EXTEND      = 13,
+        LABEL       = 14,
     };
 
     // General signature for functions callable by the interpreter with a function call instruction.
@@ -118,6 +119,7 @@ private:
     bool clone(uint32_t opcode);
     bool strcpy(uint32_t opcode);
     bool extend(uint32_t opcode);
+    bool label(uint32_t opcode);
 
     // Interpret one specific opcode. Returns true if it was successful false otherwise
     bool interpret(uint32_t opcode);
@@ -130,6 +132,9 @@ private:
 
     // Map of the supported function ids to the actual function implementations
     std::unordered_map<uint16_t, Function> mFunctions;
+
+    // The last reached label value.
+    uint32_t mLabel;
 };
 
 }  // namespace gapir

@@ -25,7 +25,8 @@
 namespace gapir {
 
 Interpreter::Interpreter(const MemoryManager* memoryManager, uint32_t stackDepth) :
-        mMemoryManager(memoryManager), mStack(stackDepth, mMemoryManager) {
+        mMemoryManager(memoryManager), mStack(stackDepth, mMemoryManager),
+        mLabel(0) {
     registerFunction(PRINT_STACK_FUNCTION_ID, [](Stack* stack, bool) {
         stack->printStack();
         return true;
@@ -36,8 +37,9 @@ bool Interpreter::run(const std::pair<const uint32_t*, uint32_t>& instructions) 
     for (uint32_t i = 0; i < instructions.second; ++i) {
         if (!interpret(instructions.first[i])) {
             GAPID_WARNING(
-                    "Interpreter is stopped because of an interpretation error in opcode %u (%u)\n",
-                    i, instructions.first[i]);
+                    "Interpreter is stopped because of an interpretation error at opcode %u (%u)\n"
+                    "Last reached label: %d\n",
+                    i, instructions.first[i], mLabel);
             return false;
         }
     }
@@ -218,6 +220,11 @@ bool Interpreter::extend(uint32_t opcode) {
     return mStack.isValid();
 }
 
+bool Interpreter::label(uint32_t opcode) {
+    mLabel = extract26bitData(opcode);
+    return mStack.isValid();
+}
+
 #define DEBUG_OPCODE(name, value) GAPID_DEBUG(name "\n")
 #define DEBUG_OPCODE_26(name, value) GAPID_DEBUG(name "(%#010x)\n", value & DATA_MASK26)
 #define DEBUG_OPCODE_TY_20(name, value) GAPID_DEBUG(name "(%#010x, %s)\n", value & DATA_MASK20, baseTypeName(extractType(value)))
@@ -267,6 +274,9 @@ bool Interpreter::interpret(uint32_t opcode) {
         case InstructionCode::EXTEND:
             DEBUG_OPCODE_26("EXTEND", opcode);
             return this->extend(opcode);
+        case InstructionCode::LABEL:
+            DEBUG_OPCODE_26("LABEL", opcode);
+            return this->label(opcode);
         default:
             GAPID_WARNING("Unknown opcode! %#010x\n", opcode);
             return false;

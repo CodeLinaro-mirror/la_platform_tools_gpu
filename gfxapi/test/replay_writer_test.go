@@ -62,6 +62,7 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoid(cid),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid.ID},
 	}, []byte{})
 }
@@ -81,39 +82,51 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 		NewCmdVoidBool(cid, true),
 		NewCmdVoidString(cid, "hello"),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint8, Value: 20},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU8.ID},
 
+		opcode.Label{Value: 1},
 		opcode.PushI{DataType: protocol.TypeInt8, Value: 0xfffec},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS8.ID},
 
+		opcode.Label{Value: 2},
 		opcode.PushI{DataType: protocol.TypeUint16, Value: 200},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU16.ID},
 
+		opcode.Label{Value: 3},
 		opcode.PushI{DataType: protocol.TypeInt16, Value: 0xfff38},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS16.ID},
 
+		opcode.Label{Value: 4},
 		opcode.PushI{DataType: protocol.TypeFloat, Value: 0x7f},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidF32.ID},
 
+		opcode.Label{Value: 5},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 2000},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU32.ID},
 
+		opcode.Label{Value: 6},
 		opcode.PushI{DataType: protocol.TypeInt32, Value: 0xff830},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS32.ID},
 
+		opcode.Label{Value: 7},
 		opcode.PushI{DataType: protocol.TypeDouble, Value: 0x3ff},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidF64.ID},
 
+		opcode.Label{Value: 8},
 		opcode.PushI{DataType: protocol.TypeUint64, Value: 20000},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidU64.ID},
 
+		opcode.Label{Value: 9},
 		opcode.PushI{DataType: protocol.TypeInt64, Value: 0xfb1e0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidS64.ID},
 
+		opcode.Label{Value: 10},
 		opcode.PushI{DataType: protocol.TypeBool, Value: 1},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidBool.ID},
 
+		opcode.Label{Value: 11},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidString.ID},
 	}, []byte{'h', 'e', 'l', 'l', 'o', 0})
@@ -123,6 +136,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoid3Strings(cid, "hello", "world", "hello"),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x08},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
@@ -137,6 +151,7 @@ func TestOperationsOpCall_3_Arrays(t *testing.T) {
 	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoid3Arrays(cid, S8Array{1, 2, 3}, StringArray{"hello", "world", ":D"}, BoolArray{true, false, true}),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00}, // a
 
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x08},
@@ -162,6 +177,7 @@ func TestOperationsOpCall_ArrayOfStrings_32bitOS(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoidArrayOfStrings(cid, StringArray{"an", "array", "of", "strings"}),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x04},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x0c},
@@ -184,6 +200,7 @@ func TestOperationsOpCall_ArrayOfStrings_64bitOS(t *testing.T) {
 	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoidArrayOfStrings(cid, StringArray{"an", "array", "of", "strings"}),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x08},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x10},
@@ -216,16 +233,27 @@ func TestOperationsOpCall_ReturnValue_DontWantOutput(t *testing.T) {
 		NewCmdS64(cid, -20000),
 		NewCmdBool(cid, true),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 1},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS8.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 2},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU16.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 3},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS16.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 4},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF32.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 5},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU32.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 6},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS32.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 7},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF64.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 8},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU64.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 9},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS64.ID}, opcode.StoreV{Address: 0},
+		opcode.Label{Value: 10},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdBool.ID}, opcode.StoreV{Address: 0},
 	}, []byte{})
 }
@@ -244,56 +272,67 @@ func TestOperationsOpCall_ReturnValue_WantOutput(t *testing.T) {
 		NewCmdS64(cid, -20000),
 		NewCmdBool(cid, true),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
 		opcode.Post{},
 
+		opcode.Label{Value: 1},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS8.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
 		opcode.Post{},
 
+		opcode.Label{Value: 2},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU16.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 2},
 		opcode.Post{},
 
+		opcode.Label{Value: 3},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS16.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 2},
 		opcode.Post{},
 
+		opcode.Label{Value: 4},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 5},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 6},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS32.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 7},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdF64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 8},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 9},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdS64.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 10},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdBool.ID}, opcode.StoreV{Address: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
@@ -305,6 +344,7 @@ func TestOperationsOpCall_ReturnValueString_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdString(cid, "hello"),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Strcpy{MaxSize: 10},
@@ -315,6 +355,7 @@ func TestOperationsOpCall_ReturnValueString_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdString(cid, "hello"),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Strcpy{MaxSize: 10},
@@ -328,6 +369,7 @@ func TestOperationsOpCall_ReturnValueArray_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdArrayOfFloat(cid, F32Array{1, 2, 3}),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 40},
@@ -338,6 +380,7 @@ func TestOperationsOpCall_ReturnValueArray_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdArrayOfFloat(cid, F32Array{1, 2, 3}),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 40},
@@ -351,6 +394,7 @@ func TestOperationsOpCall_ReturnValuePointer_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdPointer(cid, 0x100),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 10},
@@ -361,6 +405,7 @@ func TestOperationsOpCall_ReturnValuePointer_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
 		NewCmdPointer(cid, 0x100),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0},
 		opcode.Copy{Count: 10},
@@ -385,39 +430,51 @@ func TestOperationsOpCall_SingleOutputArg_DontWantOutput(t *testing.T) {
 		NewCmdVoidOutBool(cid, true),
 		NewCmdVoidOutString(cid, "hello"),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU8.ID},
 
+		opcode.Label{Value: 1},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS8.ID},
 
+		opcode.Label{Value: 2},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU16.ID},
 
+		opcode.Label{Value: 3},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS16.ID},
 
+		opcode.Label{Value: 4},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF32.ID},
 
+		opcode.Label{Value: 5},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU32.ID},
 
+		opcode.Label{Value: 6},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS32.ID},
 
+		opcode.Label{Value: 7},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF64.ID},
 
+		opcode.Label{Value: 8},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU64.ID},
 
+		opcode.Label{Value: 9},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS64.ID},
 
+		opcode.Label{Value: 10},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutBool.ID},
 
+		opcode.Label{Value: 11},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutString.ID},
 	}, []byte{})
@@ -439,78 +496,91 @@ func TestOperationsOpCall_SingleOutputArg_WantOutput(t *testing.T) {
 		NewCmdVoidOutString(cid, "hello"),
 		NewCmdVoidOutFixedSizeBuffer(cid, 0xdeadbeef),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU8.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
 		opcode.Post{},
 
+		opcode.Label{Value: 1},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS8.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
 		opcode.Post{},
 
+		opcode.Label{Value: 2},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU16.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 2},
 		opcode.Post{},
 
+		opcode.Label{Value: 3},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS16.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 2},
 		opcode.Post{},
 
+		opcode.Label{Value: 4},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF32.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 5},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU32.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 6},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS32.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 4},
 		opcode.Post{},
 
+		opcode.Label{Value: 7},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutF64.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 8},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutU64.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 9},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutS64.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 8},
 		opcode.Post{},
 
+		opcode.Label{Value: 10},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutBool.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 1},
 		opcode.Post{},
 
+		opcode.Label{Value: 11},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutString.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 10},
 		opcode.Post{},
 
+		opcode.Label{Value: 12},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutFixedSizeBuffer.ID},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
@@ -526,6 +596,7 @@ func TestOperationsOpCall_3OutputStrings_DontWantOutput(t *testing.T) {
 		// 0x00: a (byte[0x0f])
 		// 0x10: b (byte[0x1f])
 		// 0x30: c (byte[0x2f])
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x30},
@@ -540,6 +611,7 @@ func TestOperationsOpCall_3OutputStrings_WantOutput(t *testing.T) {
 		// 0x00: a (byte[0x0f])
 		// 0x10: b (byte[0x1f])
 		// 0x30: c (byte[0x2f])
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x30},
@@ -554,6 +626,7 @@ func TestOperationsOpCall_RemappedInputs(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
 		NewCmdVoid3Remapped(cid, 0x10, 0x20, 0x10),
 	}, []interface{}{
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 0x10},
 		opcode.Clone{Index: 0},
 		opcode.StoreV{Address: 0x0},
@@ -575,6 +648,7 @@ func TestOperationsOpCall_RemappedOutputs(t *testing.T) {
 		// 0x08: a
 		// 0x0c: b
 		// 0x10: c
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
@@ -598,6 +672,7 @@ func TestOperationsOpCall_RemappedArrayOutput(t *testing.T) {
 		// 0x14: a[2]
 		// 0x18: a[3]
 		// 0x1c: a[4]
+		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoidOutArrayOfRemapped.ID},
 		opcode.LoadV{DataType: protocol.TypeUint32, Address: 0x0c}, // a[0]

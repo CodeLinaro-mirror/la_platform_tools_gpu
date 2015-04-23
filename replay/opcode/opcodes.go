@@ -47,7 +47,7 @@ func setBit(bits, idx uint32, v bool) uint32 {
 // └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
 func packC(c uint32) uint32 {
 	if c >= 0x3f {
-		panic("c exceeds 6 bits")
+		panic(fmt.Errorf("c exceeds 6 bits (0x%x)", c))
 	}
 	return c << 26
 }
@@ -60,7 +60,7 @@ func packC(c uint32) uint32 {
 // └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
 func packCX(c uint32, x uint32) uint32 {
 	if x > 0x3ffffff {
-		panic("x exceeds 26 bits")
+		panic(fmt.Errorf("x exceeds 26 bits (0x%x)", x))
 	}
 	return packC(c) | x
 }
@@ -73,10 +73,10 @@ func packCX(c uint32, x uint32) uint32 {
 // └──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘
 func packCYZ(c uint32, y uint32, z uint32) uint32 {
 	if y > 0x3f {
-		panic("y exceeds 6 bits")
+		panic(fmt.Errorf("y exceeds 6 bits (0x%x)", y))
 	}
 	if z > 0xfffff {
-		panic("z exceeds 20 bits")
+		panic(fmt.Errorf("z exceeds 20 bits (0x%x)", z))
 	}
 	return packC(c) | (y << 20) | z
 }
@@ -212,6 +212,15 @@ func (c Extend) Encode(e binary.Encoder) error {
 	return e.Uint32(packCX(protocol.OpExtend, c.Value))
 }
 
+// Extend represents the LABEL virtual machine opcode.
+type Label struct {
+	Value uint32 // 26 bit label name.
+}
+
+func (c Label) Encode(e binary.Encoder) error {
+	return e.Uint32(packCX(protocol.OpLabel, c.Value))
+}
+
 // Decode returns the opcode decoded from decoder d.
 func Decode(d binary.Decoder) (interface{}, error) {
 	i, err := d.Uint32()
@@ -248,6 +257,8 @@ func Decode(d binary.Decoder) (interface{}, error) {
 		return Strcpy{MaxSize: unpackX(i)}, nil
 	case protocol.OpExtend:
 		return Extend{Value: unpackX(i)}, nil
+	case protocol.OpLabel:
+		return Label{Value: unpackX(i)}, nil
 	default:
 		return nil, fmt.Errorf("Unknown opcode with code %v", code)
 	}

@@ -341,3 +341,12 @@ func (a Post) Encode(r value.PointerResolver, e binary.Encoder) error {
 	}
 	return opcode.Post{}.Encode(e)
 }
+
+// Label is an Instruction that holds a marker value, used for debugging.
+type Label struct {
+	Value uint32
+}
+
+func (a Label) Encode(r value.PointerResolver, e binary.Encoder) error {
+	return opcode.Label{Value: a.Value}.Encode(e)
+}

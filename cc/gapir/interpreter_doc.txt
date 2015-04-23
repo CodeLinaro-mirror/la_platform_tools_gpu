@@ -130,3 +130,9 @@ Opcodes
                   point value on the stack is left-shifted by 26 bits and is bitwise-OR’ed with the
                   specified value. Bits shifted beyond the fractional part of the floating point
                   number are discarded.
+
+    Debug
+        <code:6> <value:26>
+            * LABEL(value) [no change]
+            * Set the current label to value. The label value is displayed in debug messages or
+              in the case of a crash.
