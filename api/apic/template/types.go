@@ -50,6 +50,7 @@ var (
 		semantic.BinaryOp{},
 		semantic.BitTest{},
 		semantic.Branch{},
+		semantic.Buffer{},
 		semantic.Builtin{},
 		semantic.Call{},
 		semantic.Cast{},

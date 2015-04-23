@@ -31,6 +31,7 @@ type API struct {
 	StaticArrays []*StaticArray // the fixed size array types used
 	Maps         []*Map         // the map types used
 	Pointers     []*Pointer     // the pointer types used
+	Buffers      []*Buffer      // the buffer types used
 	Signatures   []*Signature   // the function signature types used
 	Members                     // a map of name to member for top level symbols
 }

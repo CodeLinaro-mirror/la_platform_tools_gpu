@@ -234,6 +234,21 @@ func (t Pointer) Member(name string) Node {
 	return t.To.Member(name)
 }
 
+// Buffer represents a state pointer type declaration.
+type Buffer struct {
+	Name  string // the full type name
+	To    Type   // the type this is a pointer to
+	Array bool   // points to multiple elements, rather than one
+}
+
+func (t Buffer) Typename() string { return t.Name }
+func (t Buffer) Member(name string) Node {
+	if t.Array {
+		return nil
+	}
+	return t.To.Member(name)
+}
+
 // Builtin represents one of the primitive types.
 type Builtin struct {
 	Name string // the primitive type name

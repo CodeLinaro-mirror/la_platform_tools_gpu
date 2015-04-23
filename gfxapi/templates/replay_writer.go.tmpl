@@ -571,6 +571,7 @@ limitations under the License.
   {{     if IsPseudonym   $}}{{Macro "BuilderType" $.To}}
   {{else if IsPointerType $}}protocol.TypeAbsolutePointer
   {{else if IsMemory      $}}protocol.TypeAbsolutePointer
+  {{else if IsBuffer      $}}protocol.TypeAbsolutePointer
   {{else if IsString      $}}protocol.TypeAbsolutePointer
   {{else if IsArray       $}}protocol.TypeAbsolutePointer
   {{else if IsPointer     $}}protocol.TypeAbsolutePointer
