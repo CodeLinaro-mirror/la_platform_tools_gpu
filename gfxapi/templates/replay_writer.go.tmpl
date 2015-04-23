@@ -219,6 +219,7 @@ limitations under the License.
   {{AssertType $ "Type"}}
 
   {{if IsPointerType (Underlying $)}}[]byte
+  {{else if IsPointer (Underlying $)}}[]byte
   {{else}}{{Macro "Go.Type" $}}
   {{end}}
 {{end}}
@@ -235,6 +236,7 @@ limitations under the License.
   {{AssertType $.Count "string"}}
 
   {{     if IsString      $.Type}}if val, err := readString(d, {{$.Count}}); err == nil { {{$.Name}} = val } else { return err }
+  {{else if IsPointer     $.Type}}if val, err := readBytes(d, {{$.Count}});  err == nil { {{$.Name}} = val } else { return err }
   {{else if IsPointerType $.Type}}if val, err := readBytes(d, {{$.Count}});  err == nil { {{$.Name}} = val } else { return err }
   {{else if IsPseudonym   $.Type}}
     {
@@ -353,6 +355,9 @@ limitations under the License.
   {{else if IsPointerType $.Type}}
     ϟb.Push({{$.Destination}})
     ϟb.Copy({{Macro "ArrayCount" $name}})
+  {{else if IsPointer $.Type}}
+    ϟb.Push({{$.Destination}})
+    ϟb.Copy({{Macro "ArrayCount" $name}})
   {{else}}
     ϟb.Store({{$.Destination}})
   {{end}}
@@ -464,7 +469,7 @@ limitations under the License.
   {{else if IsU64           $.Type}}8
   {{else if IsF64           $.Type}}8
   {{else if IsEnum          $.Type}}4
-  {{else if IsPointer       $.Type}}uint64(ϟb.PointerSize())
+  {{else if IsPointer       $.Type}}{{if $.Type.Array}}{{AssertType $.Name "string"}}{{Macro "ArrayCount" $.Name}}{{else}}uint64(ϟb.PointerSize()){{end}}
   {{else if IsInt           $.Type}}uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */
   {{else if IsUint          $.Type}}uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(unsigned int) */
   {{else                          }}{{Error "macro SizeOf '%s' called with unsupported type: %v" $.Name $.Type}}
@@ -543,6 +548,7 @@ limitations under the License.
   {{else if IsInt         $.Type}}value.S64({{$.Name}})
   {{else if IsUint        $.Type}}value.U64({{$.Name}})
   {{else if IsString      $.Type}}ϟb.String({{$.Name}})
+  {{else if IsPointer     $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsPointerType $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsEnum        $.Type}}value.U32({{$.Name}})
   {{else if IsArray       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)

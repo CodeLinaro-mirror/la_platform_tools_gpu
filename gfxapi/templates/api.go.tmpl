@@ -225,6 +225,7 @@ limitations under the License.
       {{$field := Macro "Go.Parameter" $p}}
       {{if $i}}", ",{{end}}
       {{if      IsArray       $type}}fmt.Sprintf("%v", c.{{$field}}),
+      {{else if IsPointer     $type}}fmt.Sprintf("0x%x", c.{{$field}}),
       {{else if IsPointerType $type}}fmt.Sprintf("0x%x", c.{{$field}}),
       {{else if IsEnum        $type}}c.{{$field}}.String(),
       {{else                       }}fmt.Sprintf("{{$p.Name}}:%v", c.{{$field}}),
@@ -570,6 +571,7 @@ limitations under the License.
   {{else if IsUint        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsString      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsEnum        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
+  {{else if IsPointer     $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsPointerType $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else                        }}{{$.LHS}}.{{$.Name}}({{$.RHS}})
   {{end}}

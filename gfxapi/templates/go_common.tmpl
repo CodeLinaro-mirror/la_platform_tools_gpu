@@ -33,7 +33,7 @@ limitations under the License.
   {{else if IsMap           $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsClass         $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsEnum          $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsPointer       $}}*{{Macro "Go.Type" $.To}}
+  {{else if IsPointer       $}}{{if $.Array}}memory.Pointer{{else}}*{{Macro "Go.Type" $.To}}{{end}}
   {{else if IsBool          $}}bool
   {{else if IsInt           $}}int64
   {{else if IsUint          $}}uint64
@@ -63,7 +63,7 @@ limitations under the License.
 */}}
 {{define "Go.Null"}}
   {{AssertType $ "Type"}}
-  {{     if IsPointer       $}}nil
+  {{     if IsPointer       $}}{{if $.Array}}memory.Pointer(0){{else}}nil{{end}}
   {{else if IsArray         $}}nil
   {{else if IsBool          $}}false
   {{else if IsInt           $}}int(0)
@@ -100,7 +100,9 @@ limitations under the License.
   {{else if IsStaticArray   $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsMap           $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsClass         $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsPointer       $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
+  {{else if IsPointer       $.Type}}
+    {{if $.Type.Array}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
+    {{else}}if err := {{$.Name}}.Decode(d); err != nil { return err }{{end}}
   {{else if IsMemory        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsEnum          $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { return err }
   {{else if IsPointerType   $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }

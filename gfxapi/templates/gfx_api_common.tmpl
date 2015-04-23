@@ -50,6 +50,7 @@
 
   {{     if IsPseudonym     $}}{{Macro "PrintfFormatCode" $.To}}
   {{else if IsArray         $}}%p
+  {{else if IsPointer       $}}%p
   {{else if IsPointerType   $}}%p
   {{else if IsClass         $}}%p
   {{else if IsString        $}}%s

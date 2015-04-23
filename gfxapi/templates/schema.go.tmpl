@@ -283,7 +283,7 @@ limitations under the License.
   {{else if IsMap           $}}s.getMapInfo({{IndexOf $api.Maps $}})
   {{else if IsEnum          $}}s.getEnumInfo({{IndexOf $api.Enums $}})
   {{else if IsClass         $}}s.getClassInfo({{IndexOf $api.Classes $}})
-  {{else if IsPointer       $}}s.getClassInfo({{IndexOf $api.Classes $.To}})
+  {{else if IsPointer       $}}{{if $.Array}}schema.Pointer{{else}}s.getClassInfo({{IndexOf $api.Classes $.To}}){{end}}
   {{else if IsBool          $}}schema.Bool
   {{else if IsInt           $}}schema.Int
   {{else if IsUint          $}}schema.Uint

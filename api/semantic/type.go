@@ -221,12 +221,18 @@ func (t Map) Typename() string { return t.Name }
 
 // Pointer represents an api pointer type declaration.
 type Pointer struct {
-	Name string // the full type name
-	To   Type   // the type this is a pointer to
+	Name  string // the full type name
+	To    Type   // the type this is a pointer to
+	Array bool   // points to multiple elements, rather than one
 }
 
-func (t Pointer) Typename() string        { return t.Name }
-func (t Pointer) Member(name string) Node { return t.To.Member(name) }
+func (t Pointer) Typename() string { return t.Name }
+func (t Pointer) Member(name string) Node {
+	if t.Array {
+		return nil
+	}
+	return t.To.Member(name)
+}
 
 // Builtin represents one of the primitive types.
 type Builtin struct {
