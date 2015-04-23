@@ -116,16 +116,9 @@ limitations under the License.
 */}}
 {{define "StaticArray"}}
   {{AssertType $ "StaticArray"}}
-
-  {{range $i, $length := $.Dimensions}}
-    {{if gt 0 $i}}
-      {{Error "Multi-dimensional StaticArrays not supported."}}
-    {{else}}
-      type {{$.Name}} [{{$length}}]{{Macro "Go.Type" $.ValueType}}
-      func (s {{$.Name}}) Len() int { return {{$length}} }
-      func (s {{$.Name}}) Range() [{{$length}}]{{Macro "Go.Type" $.ValueType}} { return s}
-    {{end}}
-  {{end}}
+  type {{$.Name}} [{{$.Size}}]{{Macro "Go.Type" $.ValueType}}
+  func (s {{$.Name}}) Len() int { return {{$.Size}} }
+  func (s {{$.Name}}) Range() [{{$.Size}}]{{Macro "Go.Type" $.ValueType}} { return s}
 {{end}}
 
 
