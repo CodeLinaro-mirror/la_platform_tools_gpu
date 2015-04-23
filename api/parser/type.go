@@ -151,13 +151,10 @@ func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return ref
 }
 
-// array_type | map_type | identifier
+// generic_type | identifier
 func typeRefLHS(p *parse.Parser, cst *parse.Branch) ast.Node {
-	if a := arrayType(p, cst); a != nil {
-		return a
-	}
-	if m := mapType(p, cst); m != nil {
-		return m
+	if g := genericType(p, cst); g != nil {
+		return g
 	}
 	if i := identifier(p, cst); i != nil {
 		return i
@@ -184,35 +181,29 @@ func requireTypeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return t
 }
 
-// 'array' '<' type '>'
-func arrayType(p *parse.Parser, cst *parse.Branch) *ast.ArrayType {
-	if !peekKeyword(ast.KeywordArray, p) {
+// ( 'array' | 'map' | 'buffer' ) '<' type { ',' type } '>'
+func genericType(p *parse.Parser, cst *parse.Branch) *ast.GenericType {
+	found := false
+	for _, word := range []string{ast.KeywordArray, ast.KeywordMap, ast.KeywordBuffer} {
+		if peekKeyword(word, p) {
+			found = true
+			break
+		}
+	}
+	if !found {
 		return nil
 	}
-	t := &ast.ArrayType{}
+	t := &ast.GenericType{}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		t.CST = cst
-		requireKeyword(ast.KeywordArray, p, cst)
+		t.Generic = requireIdentifier(p, cst)
 		requireOperator(ast.OpMetaStart, p, cst)
-		t.ValueType = requireTypeRef(p, cst)
-		requireOperator(ast.OpMetaEnd, p, cst)
-	})
-	return t
-}
-
-// 'map' '<' type ',' type '>'
-func mapType(p *parse.Parser, cst *parse.Branch) *ast.MapType {
-	if !peekKeyword(ast.KeywordMap, p) {
-		return nil
-	}
-	t := &ast.MapType{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		t.CST = cst
-		requireKeyword(ast.KeywordMap, p, cst)
-		requireOperator(ast.OpMetaStart, p, cst)
-		t.KeyType = requireTypeRef(p, cst)
-		requireOperator(ast.OpListSeparator, p, cst)
-		t.ValueType = requireTypeRef(p, cst)
+		for {
+			t.Args = append(t.Args, requireTypeRef(p, cst))
+			if !operator(ast.OpListSeparator, p, cst) {
+				break
+			}
+		}
 		requireOperator(ast.OpMetaEnd, p, cst)
 	})
 	return t

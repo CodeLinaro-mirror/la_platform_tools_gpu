@@ -102,11 +102,12 @@ type Index struct {
 	Index  Node          // the index to lookup
 }
 
-// ArrayType represents a type declaration for an array, which looks
-// like «"array"<value_type>»
-type ArrayType struct {
-	CST       *parse.Branch // underlying parse structure for this node
-	ValueType Node          // the type stored as elements of the array
+// GenericType represents a generic type declaration, which looks
+// like «"array|map|buffer"<type {, type}>»
+type GenericType struct {
+	CST     *parse.Branch // underlying parse structure for this node
+	Generic *Identifier   // the generic identifier.
+	Args    []Node        // the type arguments to the generic.
 }
 
 // StaticArrayType represents a type declaration for a constant size array,
@@ -117,14 +118,6 @@ type StaticArrayType struct {
 	CST        *parse.Branch // underlying parse structure for this node
 	ValueType  Node          // The type to store in the array
 	Dimensions []Node        // the dimensions of the array
-}
-
-// MapType represents a type declaration of a map, of the form
-// «map<key_type, value_type>»
-type MapType struct {
-	CST       *parse.Branch // underlying parse structure for this node
-	KeyType   Node          // the type used to index the map
-	ValueType Node          // the type stored against the index in the map
 }
 
 // PointerType represents a pointer type declaration, of the form «type*»
