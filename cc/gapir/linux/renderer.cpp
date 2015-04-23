@@ -66,21 +66,41 @@ void glXDestroyContext(Display *dpy, GLXContext ctx);
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height, int depthSize, int stencilSize);
+    RendererImpl();
     virtual ~RendererImpl() override;
 
+    virtual void setBackbuffer(int width, int height, int depthSize, int stencilSize);
+    virtual void bind() override;
+    virtual void unbind() override;
     virtual const char* name() override;
     virtual const char* extensions() override;
     virtual const char* vendor() override;
     virtual const char* version() override;
 
 private:
+    void reset();
+
+    int mWidth;
+    int mHeight;
+    int mDepthSize;
+    int mStencilSize;
+    bool mBound;
+
     Display *mDisplay;
     GLXContext mContext;
     GLXPbuffer mPbuffer;
 };
 
-RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
+RendererImpl::RendererImpl()
+        : mWidth(0)
+        , mHeight(0)
+        , mDepthSize(0)
+        , mStencilSize(0)
+        , mBound(false)
+        , mDisplay(nullptr)
+        , mContext(nullptr)
+        , mPbuffer(0) {
+
     mDisplay = XOpenDisplay(nullptr);
     if (mDisplay == nullptr) {
         GAPID_FATAL("Unable to to open X display\n");
@@ -91,6 +111,51 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     if (!glXQueryVersion(mDisplay, &major, &minor) || (major == 1 && minor < 3)) {
         GAPID_FATAL("GLX 1.3+ unsupported by X server (was %d.%d)\n", major, minor);
     }
+
+    // Initialize with a default target.
+    setBackbuffer(8, 8, 24, 8);
+}
+
+RendererImpl::~RendererImpl() {
+    reset();
+
+    if (mDisplay != nullptr) {
+        XCloseDisplay(mDisplay);
+    }
+}
+
+void RendererImpl::reset() {
+    unbind();
+
+    if (mContext != nullptr) {
+        glXDestroyContext(mDisplay, mContext);
+        mContext = nullptr;
+    }
+
+    if (mPbuffer != 0) {
+        glXDestroyPbuffer(mDisplay, mPbuffer);
+        mPbuffer = 0;
+    }
+
+    mWidth = 0;
+    mHeight = 0;
+    mDepthSize = 0;
+    mStencilSize = 0;
+}
+
+void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stencilSize) {
+    if (mContext != nullptr &&
+        mWidth == width &&
+        mHeight == height &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+
+        return;
+    }
+
+    const bool wasBound = mBound;
+
+    reset();
 
     const int visualAttribs[] = {
         GLX_RED_SIZE, 8,
@@ -125,18 +190,34 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     };
     mPbuffer = glXCreatePbuffer(mDisplay, fbConfig, pbufferAttribs);
 
-    if (!glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext)) {
-        GAPID_FATAL("Unable to make GLX context current\n");
-    }
+    mWidth = width;
+    mHeight = height;
+    mDepthSize = depthSize;
+    mStencilSize = stencilSize;
 
-    gfxapi::Initialize();
+    if (wasBound) {
+        bind();
+    }
 }
 
-RendererImpl::~RendererImpl() {
-    if (mDisplay != nullptr) {
-        glXDestroyContext(mDisplay, mContext);
-        glXDestroyPbuffer(mDisplay, mPbuffer);
-        XCloseDisplay(mDisplay);
+void RendererImpl::bind() {
+    if (!mBound) {
+        if (!glXMakeContextCurrent(mDisplay, mPbuffer, mPbuffer, mContext)) {
+            GAPID_FATAL("Unable to make GLX context current\n");
+        }
+
+        mBound = true;
+
+        // Initialize the graphics API
+        // TODO: Inefficient - consider moving the imports into this renderer
+        gfxapi::Initialize();
+    }
+}
+
+void RendererImpl::unbind() {
+    if (mBound) {
+        // TODO: glXMakeContextCurrent(...)
+        mBound = false;
     }
 }
 
@@ -162,8 +243,8 @@ const char* RendererImpl::version() {
 
 } // anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
+Renderer* Renderer::create() {
+    return new RendererImpl();
 }
 
 }  // namespace gapir

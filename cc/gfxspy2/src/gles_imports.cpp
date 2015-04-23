@@ -28,6 +28,7 @@ void GlesImports::Resolve() {
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers = reinterpret_cast<PFNEGLSWAPBUFFERS>(GetGfxProcAddress("eglSwapBuffers"));
+    eglQuerySurface = reinterpret_cast<PFNEGLQUERYSURFACE>(GetGfxProcAddress("eglQuerySurface"));
     glXCreateContext = reinterpret_cast<PFNGLXCREATECONTEXT>(GetGfxProcAddress("glXCreateContext"));
     glXCreateNewContext =
             reinterpret_cast<PFNGLXCREATENEWCONTEXT>(GetGfxProcAddress("glXCreateNewContext"));
@@ -35,9 +36,13 @@ void GlesImports::Resolve() {
             reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(GetGfxProcAddress("glXMakeContextCurrent"));
     glXSwapBuffers = reinterpret_cast<PFNGLXSWAPBUFFERS>(GetGfxProcAddress("glXSwapBuffers"));
     wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(GetGfxProcAddress("wglCreateContext"));
+    wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARB>(
+            GetGfxProcAddress("wglCreateContextAttribsARB"));
     wglMakeCurrent = reinterpret_cast<PFNWGLMAKECURRENT>(GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers = reinterpret_cast<PFNWGLSWAPBUFFERS>(GetGfxProcAddress("wglSwapBuffers"));
     CGLCreateContext = reinterpret_cast<PFNCGLCREATECONTEXT>(GetGfxProcAddress("CGLCreateContext"));
+    CGLSetCurrentContext =
+            reinterpret_cast<PFNCGLSETCURRENTCONTEXT>(GetGfxProcAddress("CGLSetCurrentContext"));
     glEnableClientState =
             reinterpret_cast<PFNGLENABLECLIENTSTATE>(GetGfxProcAddress("glEnableClientState"));
     glDisableClientState =

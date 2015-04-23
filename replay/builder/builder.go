@@ -404,7 +404,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
 	logger = logger.Enter("Build")
 	if config.DebugReplayBuilder {
-		logger.Info("Instruction count: %d", b.instructions)
+		logger.Info("Instruction count: %d", len(b.instructions))
 	}
 
 	vml := b.layoutVolatileMemory(logger)

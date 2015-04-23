@@ -15,9 +15,12 @@
 package builder
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
@@ -25,15 +28,19 @@ import (
 
 // build writes to out the ImageInfo resource resulting from the given GetFramebufferDepth request.
 func (request *GetFramebufferDepth) build(db database.Database, logger log.Logger, out binary.Object) error {
-	fbWidth, fbHeight, err := getAtomFramebufferDimensions(request.Capture, request.Context, request.After, db, logger)
+	if !request.API.Valid() {
+		return fmt.Errorf("API must be valid")
+	}
+
+	fbWidth, fbHeight, err := getAtomFramebufferDimensions(request.Capture, request.After, db, logger)
 	if err != nil {
 		return err
 	}
 
 	data, err := db.StoreRequest(&RenderFramebufferDepth{
 		Capture: request.Capture,
-		Context: request.Context,
 		Device:  request.Device,
+		API:     request.API,
 		After:   request.After,
 	}, logger)
 
@@ -55,20 +62,19 @@ func (request *RenderFramebufferDepth) build(mgr *replay.Manager, db database.Da
 	ctx := &replay.Context{
 		DeviceID:  request.Device,
 		CaptureID: request.Capture,
-		ContextID: request.Context,
 	}
 
-	capture, err := loadCapture(request.Capture, db, logger)
-	if err != nil {
-		return err
+	api := gfxapi.Find(gfxapi.ID(request.API.ID))
+	if api == nil {
+		return fmt.Errorf("Unknown graphics API '%v'", request.API.ID)
 	}
 
-	api, err := getAPI(capture.Contexts, request.Context)
-	if err != nil {
-		return err
+	query, ok := api.(replay.QueryDepthBuffer)
+	if !ok {
+		return fmt.Errorf("The graphics API %s does not support reading depth buffers", api.Name())
 	}
 
-	img := <-api.DepthBuffer(ctx, mgr, request.After)
+	img := <-query.QueryDepthBuffer(ctx, mgr, request.After)
 	if img.Error != nil {
 		logger.Error("%v", img.Error)
 		return img.Error

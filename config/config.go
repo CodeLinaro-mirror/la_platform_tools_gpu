@@ -16,6 +16,7 @@
 package config
 
 const (
+	DebugAtom           = false
 	DebugDatabase       = false
 	DebugDatabaseStores = false
 	DebugReplay         = false

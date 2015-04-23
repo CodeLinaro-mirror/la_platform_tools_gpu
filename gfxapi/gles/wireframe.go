@@ -23,7 +23,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
@@ -33,15 +33,14 @@ import (
 func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 	logger = logger.Enter("Wireframe")
 
-	s := state.New()
+	s := &gfxapi.State{}
 	return atom.Transform("Wireframe", func(id atom.ID, a atom.Atom, out atom.Writer) {
-		if err := s.Mutate(a); err != nil {
+		if err := a.Mutate(s); err != nil {
 			logger.Error("%v", err)
 		}
 
 		if a.Flags().IsDrawCall() {
-			c := getState(a, s)
-			cid := a.ContextID()
+			c := getContext(s)
 			indices, drawMode, err := getIndices(id, a, db, c, &s.Memory, logger)
 			if err != nil {
 				logger.Error(err.Error())
@@ -64,21 +63,19 @@ func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 			out.Write(id, &atom.Observation{
 				Range:      memory.Range{Base: address, Size: uint64(len(wireframeData))},
 				ResourceID: resID,
-				Context:    a.ContextID(),
 			})
 
 			// Unbind the index buffer
 			oldIndexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
-			out.Write(id, NewGlBindBuffer(
-				cid, BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0))
+			out.Write(id, NewGlBindBuffer(BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), 0))
 
 			// Draw the wire-frame
 			out.Write(id, NewGlDrawElements(
-				cid, drawMode, int32(len(indices)), wireframeDataType, IndicesPointer(address)))
+				drawMode, int32(len(indices)), wireframeDataType, IndicesPointer(address)))
 
 			// Rebind the old index buffer
 			out.Write(id, NewGlBindBuffer(
-				cid, BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), oldIndexBufferID))
+				BufferTarget(BufferTarget_GL_ELEMENT_ARRAY_BUFFER), oldIndexBufferID))
 		} else {
 			out.Write(id, a)
 		}
@@ -157,7 +154,14 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 }
 
 // Get the effective index buffer and primitive type for draw call
-func getIndices(id atom.ID, a atom.Atom, db database.Database, s *State, m *memory.Memory, logger log.Logger) ([]index, DrawMode, error) {
+func getIndices(
+	id atom.ID,
+	a atom.Atom,
+	db database.Database,
+	c *Context,
+	m *memory.Memory,
+	logger log.Logger) ([]index, DrawMode, error) {
+
 	switch a := a.(type) {
 	case *GlDrawArrays:
 		indices := make([]index, a.IndexCount)
@@ -172,7 +176,7 @@ func getIndices(id atom.ID, a atom.Atom, db database.Database, s *State, m *memo
 			IndicesType_GL_UNSIGNED_SHORT: 2,
 			IndicesType_GL_UNSIGNED_INT:   4,
 		}[a.IndicesType]
-		indexBufferID := s.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
+		indexBufferID := c.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
 		if indexBufferID == 0 {
 			// Get the index buffer data from pointer
 			size := uint64(a.ElementCount) * indexSize
@@ -185,7 +189,7 @@ func getIndices(id atom.ID, a atom.Atom, db database.Database, s *State, m *memo
 			return indices, a.DrawMode, err
 		} else {
 			// Get the index buffer data from buffer
-			indexBuffer := s.Instances.Buffers[indexBufferID]
+			indexBuffer := c.Instances.Buffers[indexBufferID]
 			if indexBuffer == nil {
 				return nil, 0, fmt.Errorf("Can not find buffer %v", indexBufferID)
 			}

@@ -15,26 +15,33 @@
 // Package atom provides the fundamental types used to describe a capture stream.
 package atom
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
+)
 
 // Atom is the interface implemented by all objects that describe an single
 // event in a capture stream. Typical implementations of Atom describe an
 // application's call to a graphics API function or provide meta-data describing
 // observed memory or state at the time of capture.
 //
-// Each Atom instance is assigned a ContextID. The meaning of this identifier
-// is API dependent, but is typically used to identify which thread or rendering
-// context the atom belongs to. For example the ContextID is used to associate
-// atoms of the same GLES context together.
-//
 // Each implementation of Atom should have a unique and stable TypeID to ensure
 // binary compatibility with old capture formats. Any change to the Atom's
 // binary format should also result in a new TypeID.
 type Atom interface {
 	binary.Object
+
+	// API returns the graphics API this atom belongs to.
+	API() gfxapi.API
+
+	// TypeID returns the identifier of this atom's type.
 	TypeID() TypeID
-	ContextID() ContextID
+
+	// Flags returns the flags of the atom.
 	Flags() Flags
+
+	// Mutate mutates the State using the atom.
+	Mutate(*gfxapi.State) error
 }
 
 // ID is the index of an atom in an atom stream.
@@ -42,10 +49,3 @@ type ID uint64
 
 // NoID is used when you have to pass an ID, but don't have one to use.
 const NoID = ^ID(0)
-
-// ContextIDs are used to identify which thread or rendering context each atom
-// belongs to. The numerical value is meaningless aside from equality testing.
-type ContextID uint32
-
-// NoContext is used when the ContextID is not really a valid context.
-const NoContextID = ^ContextID(0)

@@ -16,7 +16,6 @@ func init() {
 	registry.Add((*StructInfo)(nil).Class())
 	registry.Add((*ApiSchema)(nil).Class())
 	registry.Add((*ArrayInfo)(nil).Class())
-	registry.Add((*AtomContext)(nil).Class())
 	registry.Add((*AtomRange)(nil).Class())
 	registry.Add((*AtomGroup)(nil).Class())
 	registry.Add((*ParameterInfo)(nil).Class())
@@ -97,11 +96,10 @@ var (
 	binaryIDStructInfo                  = binary.ID{0xf1, 0xc3, 0x58, 0x5f, 0x37, 0xfd, 0xb2, 0x84, 0xef, 0x1a, 0xf5, 0x82, 0x3d, 0xc5, 0x5a, 0x34, 0x49, 0x12, 0xd4, 0xa8}
 	binaryIDApiSchema                   = binary.ID{0x81, 0xc2, 0x28, 0xff, 0x7b, 0xad, 0x6f, 0x74, 0x5e, 0x6c, 0xf7, 0xa3, 0x21, 0xb3, 0x12, 0x26, 0x5f, 0xa7, 0x75, 0x24}
 	binaryIDArrayInfo                   = binary.ID{0xf1, 0x0b, 0xb1, 0xbf, 0x10, 0xf9, 0x53, 0x4a, 0xf6, 0x5a, 0x6f, 0xc7, 0xcb, 0xa9, 0x47, 0xfd, 0xb1, 0x23, 0x5b, 0x1d}
-	binaryIDAtomContext                 = binary.ID{0xaf, 0x31, 0xe3, 0xd8, 0x77, 0xcb, 0xdf, 0xc7, 0xc2, 0xd0, 0xba, 0x28, 0x14, 0xba, 0x94, 0x50, 0x8e, 0x12, 0xd1, 0x37}
 	binaryIDAtomRange                   = binary.ID{0xfa, 0xb9, 0x1d, 0x40, 0x16, 0xc4, 0x26, 0x4d, 0x40, 0x03, 0xb1, 0x72, 0xc9, 0x2f, 0x2f, 0x77, 0xde, 0xa7, 0x96, 0x4a}
 	binaryIDAtomGroup                   = binary.ID{0x31, 0x4b, 0xc3, 0x9a, 0x0e, 0xb2, 0x00, 0x94, 0x68, 0xc7, 0xcd, 0xbe, 0x0b, 0x1a, 0x23, 0xf0, 0xf3, 0x75, 0x56, 0x1c}
 	binaryIDParameterInfo               = binary.ID{0x46, 0x0a, 0xd9, 0x73, 0x17, 0xbd, 0x7d, 0x02, 0x14, 0xed, 0x06, 0xa8, 0x09, 0x15, 0xa4, 0xc3, 0xd0, 0xc3, 0xe0, 0xff}
-	binaryIDAtomInfo                    = binary.ID{0x7e, 0x4e, 0xe9, 0xa8, 0x1f, 0x66, 0x5d, 0x79, 0x0a, 0x5a, 0xcc, 0xd1, 0xd7, 0x1e, 0x39, 0x89, 0xf5, 0x23, 0xeb, 0x69}
+	binaryIDAtomInfo                    = binary.ID{0xed, 0x4f, 0x94, 0x77, 0x10, 0x68, 0x9a, 0xea, 0x51, 0xb3, 0x0f, 0x2b, 0x68, 0x1d, 0x78, 0x5c, 0xa3, 0x23, 0x42, 0xd5}
 	binaryIDAtomRangeTimer              = binary.ID{0xe5, 0xdd, 0xf5, 0x99, 0xf2, 0x23, 0xeb, 0x48, 0x06, 0x26, 0xe1, 0x03, 0x9f, 0x5a, 0x6e, 0x2d, 0xaf, 0x76, 0x8a, 0xf2}
 	binaryIDAtomStream                  = binary.ID{0xda, 0x04, 0xb7, 0x57, 0x79, 0xd1, 0x38, 0xd4, 0xa3, 0x75, 0x8f, 0x31, 0x43, 0x7b, 0xaf, 0x08, 0x0a, 0x6d, 0x57, 0x2c}
 	binaryIDAtomStreamId                = binary.ID{0xbe, 0x90, 0x3c, 0x40, 0x28, 0xee, 0x58, 0x7e, 0xab, 0x8c, 0xde, 0x44, 0x43, 0xb3, 0x94, 0x88, 0xff, 0x6b, 0xa0, 0x12}
@@ -109,7 +107,7 @@ var (
 	binaryIDBinary                      = binary.ID{0x9c, 0x60, 0xfa, 0x7c, 0xe1, 0x13, 0x87, 0x3d, 0x95, 0xc1, 0x76, 0xb8, 0x60, 0x56, 0xf7, 0x35, 0x5f, 0x98, 0x27, 0x8b}
 	binaryIDBinaryId                    = binary.ID{0x71, 0x35, 0xf5, 0x97, 0xf9, 0x3a, 0x8a, 0x25, 0x88, 0xf6, 0x5b, 0xe6, 0x99, 0xf5, 0x1c, 0x9c, 0x97, 0xf5, 0x68, 0x3b}
 	binaryIDSchemaId                    = binary.ID{0x5c, 0x52, 0xa3, 0xb3, 0xf2, 0xe7, 0x35, 0x90, 0xb6, 0xb2, 0x2e, 0x5e, 0xa7, 0xc5, 0xbf, 0x3a, 0xa6, 0xe7, 0x18, 0x4c}
-	binaryIDCapture                     = binary.ID{0xb7, 0xb1, 0xa0, 0x8a, 0x7f, 0x05, 0x93, 0x91, 0x8a, 0xe2, 0xf3, 0x62, 0x18, 0x40, 0x36, 0x9c, 0xb4, 0x78, 0x59, 0xa2}
+	binaryIDCapture                     = binary.ID{0xe3, 0xb4, 0x59, 0x42, 0xf5, 0xfc, 0xe5, 0x09, 0x29, 0x27, 0x0b, 0xb9, 0x4f, 0x22, 0x3b, 0x4d, 0x13, 0xb5, 0x68, 0xb0}
 	binaryIDCaptureId                   = binary.ID{0x71, 0x8d, 0x28, 0x9b, 0x6c, 0xa4, 0x85, 0x73, 0xc4, 0x8a, 0x21, 0xb3, 0x9c, 0xae, 0x27, 0xa8, 0xe2, 0x57, 0x9e, 0xdd}
 	binaryIDClassInfo                   = binary.ID{0xaf, 0x0d, 0x4c, 0x82, 0x03, 0x62, 0x6f, 0x43, 0x78, 0x0f, 0x75, 0xbe, 0xbd, 0x6e, 0x90, 0x0b, 0x79, 0x50, 0xaf, 0x4f}
 	binaryIDDevice                      = binary.ID{0x7f, 0xa5, 0x70, 0xd9, 0x93, 0xfc, 0x70, 0x27, 0x32, 0xd9, 0xb8, 0x6e, 0x2a, 0x9b, 0xf3, 0x84, 0x55, 0x4f, 0x26, 0x50}
@@ -132,14 +130,14 @@ var (
 	binaryIDTimingInfoId                = binary.ID{0x71, 0x9c, 0x16, 0xeb, 0x4e, 0x5f, 0xa1, 0x6b, 0x71, 0x0c, 0xae, 0xbc, 0x5a, 0xe8, 0x6c, 0x29, 0x97, 0xaa, 0x52, 0x0f}
 	binaryIDcallGetCaptures             = binary.ID{0xb0, 0x2f, 0x3d, 0xa5, 0x85, 0x95, 0xf4, 0x21, 0x20, 0x76, 0xa8, 0xa6, 0x5a, 0x53, 0x9f, 0xfc, 0xd8, 0x10, 0xdb, 0x15}
 	binaryIDcallGetDevices              = binary.ID{0x19, 0x14, 0x64, 0x05, 0xf6, 0xad, 0x8d, 0x48, 0xc3, 0x8e, 0x7b, 0xc8, 0x18, 0x5b, 0x2f, 0x7c, 0xb7, 0x9f, 0x5c, 0x73}
-	binaryIDcallGetFramebufferColor     = binary.ID{0x29, 0x32, 0x5d, 0x90, 0x23, 0xb8, 0x2e, 0x4d, 0x1a, 0x05, 0x0b, 0xf1, 0x01, 0xf6, 0xa1, 0x31, 0x3d, 0xaa, 0x99, 0xa2}
-	binaryIDcallGetFramebufferDepth     = binary.ID{0x5e, 0xaa, 0xb8, 0x9f, 0x94, 0xa9, 0xe2, 0x7d, 0x69, 0xdd, 0x26, 0xc3, 0xdb, 0x50, 0x74, 0xac, 0x8b, 0x41, 0x68, 0xf7}
-	binaryIDcallGetHierarchy            = binary.ID{0xf5, 0x4a, 0x93, 0x05, 0x2b, 0x23, 0x12, 0xac, 0xee, 0x44, 0x05, 0x4a, 0x2e, 0x96, 0xf8, 0xbb, 0xf5, 0x4c, 0xab, 0x95}
+	binaryIDcallGetFramebufferColor     = binary.ID{0x05, 0xfd, 0x78, 0xff, 0x3d, 0x76, 0x07, 0x2d, 0xee, 0x91, 0x3b, 0xf1, 0x99, 0x83, 0x1e, 0x4f, 0xaf, 0xd3, 0xca, 0x48}
+	binaryIDcallGetFramebufferDepth     = binary.ID{0xdd, 0x68, 0xbd, 0xbc, 0x24, 0x0a, 0x1a, 0x1c, 0xa5, 0xa6, 0xfc, 0xe2, 0x64, 0x38, 0xac, 0x67, 0xa6, 0x86, 0x64, 0x5f}
+	binaryIDcallGetHierarchy            = binary.ID{0xbf, 0x39, 0x53, 0xd4, 0xc3, 0xac, 0x61, 0x0a, 0xce, 0x6c, 0x72, 0x04, 0x39, 0xcd, 0x5f, 0xe5, 0x92, 0xd5, 0xf6, 0xa6}
 	binaryIDcallGetMemoryInfo           = binary.ID{0x89, 0xa1, 0x6f, 0x75, 0x3d, 0x07, 0xb5, 0x9f, 0x0e, 0x20, 0xad, 0x27, 0xfd, 0xe8, 0x16, 0x50, 0x59, 0x24, 0x16, 0xb3}
 	binaryIDcallGetState                = binary.ID{0xc3, 0xb2, 0x0b, 0xb8, 0x8b, 0xc7, 0x79, 0xcd, 0x06, 0xc3, 0x16, 0xef, 0x18, 0x3a, 0x96, 0x37, 0xf9, 0xad, 0x28, 0xb3}
-	binaryIDcallGetTimingInfo           = binary.ID{0xc4, 0xd2, 0x02, 0x76, 0x5f, 0x3d, 0x98, 0x8b, 0x06, 0x01, 0x68, 0x41, 0x3c, 0xc9, 0x67, 0x80, 0x88, 0x3b, 0x95, 0x8c}
+	binaryIDcallGetTimingInfo           = binary.ID{0xb1, 0x32, 0x24, 0x67, 0x2e, 0xb9, 0x1f, 0x2f, 0x72, 0xf3, 0x6b, 0x00, 0x23, 0x1f, 0xd4, 0x1a, 0x57, 0x59, 0x22, 0x29}
 	binaryIDcallImport                  = binary.ID{0x35, 0x11, 0x23, 0xbb, 0xa5, 0x10, 0x7a, 0x10, 0x7d, 0x46, 0x1d, 0x0b, 0xfc, 0x3c, 0x4e, 0x20, 0x68, 0x41, 0x1e, 0xb5}
-	binaryIDcallPrerenderFramebuffers   = binary.ID{0x15, 0x34, 0x91, 0x8d, 0xee, 0x95, 0x3e, 0x52, 0x8a, 0xb0, 0x42, 0xeb, 0x8a, 0xcf, 0xda, 0xf1, 0xc0, 0x25, 0xb2, 0xeb}
+	binaryIDcallPrerenderFramebuffers   = binary.ID{0x2f, 0x48, 0x59, 0x5f, 0xfc, 0xbf, 0xee, 0x9f, 0xfd, 0x8a, 0x56, 0x4b, 0xab, 0x90, 0xb7, 0xab, 0xeb, 0x38, 0xd1, 0x85}
 	binaryIDcallReplaceAtom             = binary.ID{0x3b, 0x6a, 0x9a, 0x30, 0x3a, 0x32, 0xc0, 0x3a, 0x50, 0x5c, 0xed, 0xa9, 0xd4, 0x6a, 0x05, 0x54, 0xb3, 0xe2, 0x95, 0x3d}
 	binaryIDcallResolveAtomStream       = binary.ID{0x6b, 0xef, 0x7c, 0x2b, 0x7e, 0x3c, 0x23, 0xe3, 0xe0, 0x38, 0xb8, 0xdc, 0xbb, 0xd2, 0x89, 0x93, 0xba, 0x99, 0x79, 0x90}
 	binaryIDcallResolveBinary           = binary.ID{0x08, 0x68, 0x1b, 0x77, 0x97, 0x0b, 0xb5, 0x34, 0x9b, 0xed, 0x14, 0x58, 0x5e, 0x45, 0x09, 0x82, 0x0c, 0x47, 0x57, 0xe9}
@@ -465,54 +463,6 @@ func (*binaryClassArrayInfo) DecodeTo(d binary.Decoder, obj binary.Object) error
 }
 func (*binaryClassArrayInfo) Skip(d binary.Decoder) error { return doSkipArrayInfo(d) }
 
-type binaryClassAtomContext struct{}
-
-func (*AtomContext) Class() binary.Class {
-	return (*binaryClassAtomContext)(nil)
-}
-func doEncodeAtomContext(e binary.Encoder, o *AtomContext) error {
-	if err := e.Uint32(o.Id); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Api); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeAtomContext(d binary.Decoder, o *AtomContext) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Id = uint32(obj)
-	}
-	if err := d.Value(&o.Api); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipAtomContext(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*ApiId)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassAtomContext) ID() binary.ID      { return binaryIDAtomContext }
-func (*binaryClassAtomContext) New() binary.Object { return &AtomContext{} }
-func (*binaryClassAtomContext) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeAtomContext(e, obj.(*AtomContext))
-}
-func (*binaryClassAtomContext) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &AtomContext{}
-	return obj, doDecodeAtomContext(d, obj)
-}
-func (*binaryClassAtomContext) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeAtomContext(d, obj.(*AtomContext))
-}
-func (*binaryClassAtomContext) Skip(d binary.Decoder) error { return doSkipAtomContext(d) }
-
 type binaryClassAtomRange struct{}
 
 func (*AtomRange) Class() binary.Class {
@@ -711,6 +661,9 @@ func (*AtomInfo) Class() binary.Class {
 	return (*binaryClassAtomInfo)(nil)
 }
 func doEncodeAtomInfo(e binary.Encoder, o *AtomInfo) error {
+	if err := e.Value(&o.Api); err != nil {
+		return err
+	}
 	if err := e.Uint16(o.Type); err != nil {
 		return err
 	}
@@ -740,6 +693,9 @@ func doEncodeAtomInfo(e binary.Encoder, o *AtomInfo) error {
 	return nil
 }
 func doDecodeAtomInfo(d binary.Decoder, o *AtomInfo) error {
+	if err := d.Value(&o.Api); err != nil {
+		return err
+	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -783,6 +739,9 @@ func doDecodeAtomInfo(d binary.Decoder, o *AtomInfo) error {
 	return nil
 }
 func doSkipAtomInfo(d binary.Decoder) error {
+	if err := d.SkipValue((*ApiId)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -1164,16 +1123,16 @@ func doEncodeCapture(e binary.Encoder, o *Capture) error {
 	if err := e.Value(&o.Atoms); err != nil {
 		return err
 	}
-	if err := e.Value(&o.Schema); err != nil {
+	if err := e.Uint32(uint32(len(o.Apis))); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(len(o.Contexts))); err != nil {
-		return err
-	}
-	for i := range o.Contexts {
-		if err := e.Value(&o.Contexts[i]); err != nil {
+	for i := range o.Apis {
+		if err := e.Value(&o.Apis[i]); err != nil {
 			return err
 		}
+	}
+	if err := e.Value(&o.Schema); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1186,18 +1145,18 @@ func doDecodeCapture(d binary.Decoder, o *Capture) error {
 	if err := d.Value(&o.Atoms); err != nil {
 		return err
 	}
-	if err := d.Value(&o.Schema); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Contexts = make(AtomContextArray, count)
-		for i := range o.Contexts {
-			if err := d.Value(&o.Contexts[i]); err != nil {
+		o.Apis = make(ApiIdArray, count)
+		for i := range o.Apis {
+			if err := d.Value(&o.Apis[i]); err != nil {
 				return err
 			}
 		}
+	}
+	if err := d.Value(&o.Schema); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1208,17 +1167,17 @@ func doSkipCapture(d binary.Decoder) error {
 	if err := d.SkipValue((*AtomStreamId)(nil)); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*SchemaId)(nil)); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
 		for i := uint32(0); i < count; i++ {
-			if err := d.SkipValue((*AtomContext)(nil)); err != nil {
+			if err := d.SkipValue((*ApiId)(nil)); err != nil {
 				return err
 			}
 		}
+	}
+	if err := d.SkipValue((*SchemaId)(nil)); err != nil {
+		return err
 	}
 	return nil
 }
@@ -2676,7 +2635,7 @@ func doEncodecallGetFramebufferColor(e binary.Encoder, o *callGetFramebufferColo
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
-	if err := e.Uint32(o.contextId); err != nil {
+	if err := e.Value(&o.api); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.after); err != nil {
@@ -2694,10 +2653,8 @@ func doDecodecallGetFramebufferColor(d binary.Decoder, o *callGetFramebufferColo
 	if err := d.Value(&o.capture); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if err := d.Value(&o.api); err != nil {
 		return err
-	} else {
-		o.contextId = uint32(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -2716,7 +2673,7 @@ func doSkipcallGetFramebufferColor(d binary.Decoder) error {
 	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*ApiId)(nil)); err != nil {
 		return err
 	}
 	if _, err := d.Uint64(); err != nil {
@@ -2755,7 +2712,7 @@ func doEncodecallGetFramebufferDepth(e binary.Encoder, o *callGetFramebufferDept
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
-	if err := e.Uint32(o.contextId); err != nil {
+	if err := e.Value(&o.api); err != nil {
 		return err
 	}
 	if err := e.Uint64(o.after); err != nil {
@@ -2770,10 +2727,8 @@ func doDecodecallGetFramebufferDepth(d binary.Decoder, o *callGetFramebufferDept
 	if err := d.Value(&o.capture); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
+	if err := d.Value(&o.api); err != nil {
 		return err
-	} else {
-		o.contextId = uint32(obj)
 	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
@@ -2789,7 +2744,7 @@ func doSkipcallGetFramebufferDepth(d binary.Decoder) error {
 	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
 		return err
 	}
-	if _, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*ApiId)(nil)); err != nil {
 		return err
 	}
 	if _, err := d.Uint64(); err != nil {
@@ -2822,27 +2777,16 @@ func doEncodecallGetHierarchy(e binary.Encoder, o *callGetHierarchy) error {
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
-	if err := e.Uint32(o.contextId); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodecallGetHierarchy(d binary.Decoder, o *callGetHierarchy) error {
 	if err := d.Value(&o.capture); err != nil {
 		return err
 	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.contextId = uint32(obj)
-	}
 	return nil
 }
 func doSkipcallGetHierarchy(d binary.Decoder) error {
 	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
@@ -2978,9 +2922,6 @@ func doEncodecallGetTimingInfo(e binary.Encoder, o *callGetTimingInfo) error {
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
-	if err := e.Uint32(o.contextId); err != nil {
-		return err
-	}
 	if err := e.Int32(int32(o.mask)); err != nil {
 		return err
 	}
@@ -2992,11 +2933,6 @@ func doDecodecallGetTimingInfo(d binary.Decoder, o *callGetTimingInfo) error {
 	}
 	if err := d.Value(&o.capture); err != nil {
 		return err
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.contextId = uint32(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -3010,9 +2946,6 @@ func doSkipcallGetTimingInfo(d binary.Decoder) error {
 		return err
 	}
 	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	if _, err := d.Int32(); err != nil {
@@ -3106,6 +3039,9 @@ func doEncodecallPrerenderFramebuffers(e binary.Encoder, o *callPrerenderFramebu
 	if err := e.Value(&o.capture); err != nil {
 		return err
 	}
+	if err := e.Value(&o.api); err != nil {
+		return err
+	}
 	if err := e.Uint32(o.width); err != nil {
 		return err
 	}
@@ -3127,6 +3063,9 @@ func doDecodecallPrerenderFramebuffers(d binary.Decoder, o *callPrerenderFramebu
 		return err
 	}
 	if err := d.Value(&o.capture); err != nil {
+		return err
+	}
+	if err := d.Value(&o.api); err != nil {
 		return err
 	}
 	if obj, err := d.Uint32(); err != nil {
@@ -3158,6 +3097,9 @@ func doSkipcallPrerenderFramebuffers(d binary.Decoder) error {
 		return err
 	}
 	if err := d.SkipValue((*CaptureId)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*ApiId)(nil)); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {

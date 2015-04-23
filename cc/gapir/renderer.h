@@ -17,8 +17,6 @@
 #ifndef GAPIR_RENDERER_H
 #define GAPIR_RENDERER_H
 
-#include <memory>
-
 namespace gapir {
 
 // Renderer is an interface to an off-screen rendering context. Constructing a renderer will perform
@@ -27,11 +25,20 @@ namespace gapir {
 // graphics context may be supported.
 class Renderer {
 public:
-    // Construct and return an offscreen renderer with the specified dimensions.
-    static std::unique_ptr<Renderer> create(int width, int height, int depthSize, int stencilSize);
+    // Construct and return an offscreen renderer.
+    static Renderer* create();
 
     // Destroys the renderer and any associated off-screen windows.
     virtual ~Renderer() {}
+
+    // Changes the back-buffer dimensions and format.
+    virtual void setBackbuffer(int width, int height, int depthSize, int stencilSize) = 0;
+
+    // Makes the current renderer active.
+    virtual void bind() = 0;
+
+    //Makes the current renderer inactive.
+    virtual void unbind() = 0;
 
     // Returns the name of the renderer's created graphics context.
     virtual const char* name() = 0;

@@ -28,18 +28,18 @@ public:
     Spy();
     ~Spy();
 
-    EGLBoolean eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor);
-    HGLRC wglCreateContext(HDC hdc);
-    BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
-    CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx);
-    GLXContext glXCreateContext(const void* display, const void* vis,
-                                GLXContext shareList, bool direct);
-    GLXContext glXCreateNewContext(const void* display, const void* fbconfig, uint32_t type,
-                                   GLXContext shared, bool direct);
+    EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor);
+    EGLBoolean eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,
+                              EGLContext context);
 
+    BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
+    CGLError CGLSetCurrentContext(CGLContextObj ctx);
+    void glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read,
+                               GLXContext ctx);
 private:
-    void init(int32_t width, int32_t height,
-        uint32_t color_fmt, uint32_t depth_fmt, uint32_t stencil_fmt);
+    void backbufferInfo(int32_t width, int32_t height,
+                        uint32_t color_fmt, uint32_t depth_fmt, uint32_t stencil_fmt,
+                        bool resetViewportScissor);
 
     std::shared_ptr<gapic::Encoder> mEncoder;
 };

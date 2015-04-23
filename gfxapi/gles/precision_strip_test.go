@@ -41,7 +41,7 @@ func runTest(t *testing.T, src string, expected string) {
 
 	mw := &mockWriter{}
 
-	s.Transform(0, NewGlShaderSource(0, 0, 1, []string{src}, nil), mw)
+	s.Transform(0, NewGlShaderSource(0, 1, []string{src}, nil), mw)
 
 	if len(mw.atoms) != 1 {
 		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
@@ -111,16 +111,16 @@ func TestStripConversion(t *testing.T) {
 func TestStripPassthrough(t *testing.T) {
 	s := precisionStrip()
 	mw := &mockWriter{}
-	init := &Init{}
+	a := &GlGetError{}
 
-	s.Transform(0, init, mw)
+	s.Transform(0, a, mw)
 
 	if len(mw.atoms) != 1 {
 		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
 	}
 
-	if mw.atoms[0] != init {
-		t.Errorf("Received wrong atom: got `%v`, expected `%v`.", mw.atoms[0], init)
+	if mw.atoms[0] != a {
+		t.Errorf("Received wrong atom: got `%v`, expected `%v`.", mw.atoms[0], a)
 		return
 	}
 }

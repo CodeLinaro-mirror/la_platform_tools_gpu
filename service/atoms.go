@@ -74,13 +74,3 @@ func (r *AtomRange) Pack(o atom.Range) {
 func (r AtomRange) Unpack(o *atom.Range) {
 	(*o) = atom.Range{Start: atom.ID(r.First), End: atom.ID(r.First + r.Count)}
 }
-
-// Len returns the number of contexts in the array.
-func (c AtomContextArray) Len() int { return len(c) }
-
-// Less returns true if the identifier of the context with index i is less than
-// the identifier of the context with index j.
-func (c AtomContextArray) Less(i, j int) bool { return c[i].Id < c[j].Id }
-
-// Swap exchanges the array elements with indices i and j.
-func (c AtomContextArray) Swap(i, j int) { c[i], c[j] = c[j], c[i] }

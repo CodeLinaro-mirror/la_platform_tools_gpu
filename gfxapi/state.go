@@ -18,21 +18,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-// FramebufferAttachment values indicate the type of frame buffer attachment.
-type FramebufferAttachment uint32
+// State represents the graphics state across all contexts.
+type State struct {
+	binary.Object
 
-const (
-	FramebufferAttachmentColor   FramebufferAttachment = iota
-	FramebufferAttachmentDepth   FramebufferAttachment = iota
-	FramebufferAttachmentStencil FramebufferAttachment = iota
-)
+	// Memory holds the memory state of the application.
+	Memory memory.Memory
 
-// State represents the common interface to managed state of a graphics system.
-type State interface {
-	// Memory returns the memory mapping for the current state.
-	Memory() *memory.Memory
-	// Encode writes the state to a binary stream.
-	Encode(binary.Encoder) error
-	// GetFramebufferAttachmentSize returns the width and height of the framebuffer at the given attachment.
-	GetFramebufferAttachmentSize(attachment FramebufferAttachment) (uint32, uint32, error)
+	// APIs holds the per-API context states.
+	APIs map[API]interface{}
 }

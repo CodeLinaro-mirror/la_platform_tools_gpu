@@ -17,7 +17,7 @@ package gles
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
 type State struct {
@@ -25,21 +25,34 @@ type State struct {
 	ValidateOutput bool
 }
 
-func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (width, height uint32, err error) {
-	framebufferID := s.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
+func getContext(s *gfxapi.State) *Context {
+	return getState(s).getContext()
+}
 
-	framebuffer, ok := s.Instances.Framebuffers[framebufferID]
+func (s *State) getContext() *Context {
+	return s.Contexts[s.CurrentThread]
+}
+
+func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (width, height uint32, err error) {
+	c := s.getContext()
+	if c == nil {
+		return 0, 0, fmt.Errorf("No context bound")
+	}
+
+	framebufferID := c.BoundFramebuffers[FramebufferTarget_GL_READ_FRAMEBUFFER]
+
+	framebuffer, ok := c.Instances.Framebuffers[framebufferID]
 	if !ok {
 		return 0, 0, fmt.Errorf("No GL_FRAMEBUFFER bound")
 	}
 
 	var attachment FramebufferAttachment
 	switch att {
-	case state.FramebufferAttachmentColor:
+	case gfxapi.FramebufferAttachmentColor:
 		attachment = FramebufferAttachment_GL_COLOR_ATTACHMENT0
-	case state.FramebufferAttachmentDepth:
+	case gfxapi.FramebufferAttachmentDepth:
 		attachment = FramebufferAttachment_GL_DEPTH_ATTACHMENT
-	case state.FramebufferAttachmentStencil:
+	case gfxapi.FramebufferAttachmentStencil:
 		attachment = FramebufferAttachment_GL_STENCIL_ATTACHMENT
 	default:
 		return 0, 0, fmt.Errorf("Framebuffer attachment %v unsupported by gles", att)
@@ -53,7 +66,7 @@ func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (w
 	switch a.Type {
 	case FramebufferAttachmentType_GL_TEXTURE:
 		id := TextureId(a.Object)
-		t := s.Instances.Textures[id]
+		t := c.Instances.Textures[id]
 		switch t.Kind {
 		case TextureKind_TEXTURE2D:
 			l := t.Texture2D[a.TextureLevel]
@@ -67,7 +80,7 @@ func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (w
 		}
 	case FramebufferAttachmentType_GL_RENDERBUFFER:
 		id := RenderbufferId(a.Object)
-		r := s.Instances.Renderbuffers[id]
+		r := c.Instances.Renderbuffers[id]
 		return uint32(r.Width), uint32(r.Height), nil
 	default:
 		return 0, 0, fmt.Errorf("Unknown framebuffer attachment type %T", a.Type)

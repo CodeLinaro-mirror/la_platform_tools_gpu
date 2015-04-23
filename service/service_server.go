@@ -53,7 +53,7 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetHierarchy:
-			if res, err := server.GetHierarchy(l, call.capture, call.contextId); err == nil {
+			if res, err := server.GetHierarchy(l, call.capture); err == nil {
 				return &resultGetHierarchy{value: res}
 			} else {
 				return rpc.NewError(err.Error())
@@ -65,32 +65,32 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferColor:
-			if res, err := server.GetFramebufferColor(l, call.device, call.capture, call.contextId, call.after, call.settings); err == nil {
+			if res, err := server.GetFramebufferColor(l, call.device, call.capture, call.api, call.after, call.settings); err == nil {
 				return &resultGetFramebufferColor{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callGetFramebufferDepth:
-			if res, err := server.GetFramebufferDepth(l, call.device, call.capture, call.contextId, call.after); err == nil {
+			if res, err := server.GetFramebufferDepth(l, call.device, call.capture, call.api, call.after); err == nil {
 				return &resultGetFramebufferDepth{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callGetTimingInfo:
+			if res, err := server.GetTimingInfo(l, call.device, call.capture, call.mask); err == nil {
+				return &resultGetTimingInfo{value: res}
+			} else {
+				return rpc.NewError(err.Error())
+			}
+		case *callPrerenderFramebuffers:
+			if res, err := server.PrerenderFramebuffers(l, call.device, call.capture, call.api, call.width, call.height, call.atomIds); err == nil {
+				return &resultPrerenderFramebuffers{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}
 		case *callReplaceAtom:
 			if res, err := server.ReplaceAtom(l, call.capture, call.atomId, call.atomType, call.data); err == nil {
 				return &resultReplaceAtom{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callGetTimingInfo:
-			if res, err := server.GetTimingInfo(l, call.device, call.capture, call.contextId, call.mask); err == nil {
-				return &resultGetTimingInfo{value: res}
-			} else {
-				return rpc.NewError(err.Error())
-			}
-		case *callPrerenderFramebuffers:
-			if res, err := server.PrerenderFramebuffers(l, call.device, call.capture, call.width, call.height, call.atomIds); err == nil {
-				return &resultPrerenderFramebuffers{value: res}
 			} else {
 				return rpc.NewError(err.Error())
 			}

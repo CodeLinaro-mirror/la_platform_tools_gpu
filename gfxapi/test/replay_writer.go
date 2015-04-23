@@ -7,7 +7,7 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -81,10 +81,10 @@ var funcInfoCmdVoid3Remapped = builder.FunctionInfo{ID: 44, ReturnType: protocol
 var funcInfoCmdVoidOut3Remapped = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoCmdVoidOutArrayOfRemapped = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
 
-func (c remapped) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+func (c remapped) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
 }
-func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
 			ϟb.Push(value.Bool(e))
@@ -94,7 +94,7 @@ func (arr BoolArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr F32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+func (arr F32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
 			ϟb.Push(value.F32(e))
@@ -104,7 +104,7 @@ func (arr F32Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State)
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr RemappedArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+func (arr RemappedArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
 			if key, remap := e.remap(ϟa, ϟs); remap {
@@ -118,7 +118,7 @@ func (arr RemappedArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.S
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr S8Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+func (arr S8Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
 			ϟb.Push(value.S8(e))
@@ -128,7 +128,7 @@ func (arr S8Array) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) 
 		return value.AbsolutePointer(0)
 	}
 }
-func (arr StringArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+func (arr StringArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {
 			ϟb.Push(ϟb.String(e))
@@ -599,8 +599,8 @@ func storeRemap(b *builder.Builder, key interface{}, val value.Pointer, ty proto
 }
 
 var _ = replay.Replayer(&CmdVoid{}) // interface compliance check
-func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.CallNoPush(funcInfoCmdVoid)
@@ -609,8 +609,8 @@ func (ϟa *CmdVoid) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, 
 }
 
 var _ = replay.Replayer(&CmdVoidU8{}) // interface compliance check
-func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.U8(ϟa.A))
@@ -620,8 +620,8 @@ func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 }
 
 var _ = replay.Replayer(&CmdVoidS8{}) // interface compliance check
-func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.S8(ϟa.A))
@@ -631,8 +631,8 @@ func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 }
 
 var _ = replay.Replayer(&CmdVoidU16{}) // interface compliance check
-func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.U16(ϟa.A))
@@ -642,8 +642,8 @@ func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidS16{}) // interface compliance check
-func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.S16(ϟa.A))
@@ -653,8 +653,8 @@ func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidF32{}) // interface compliance check
-func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.F32(ϟa.A))
@@ -664,8 +664,8 @@ func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidU32{}) // interface compliance check
-func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.U32(ϟa.A))
@@ -675,8 +675,8 @@ func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidS32{}) // interface compliance check
-func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.S32(ϟa.A))
@@ -686,8 +686,8 @@ func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidF64{}) // interface compliance check
-func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.F64(ϟa.A))
@@ -697,8 +697,8 @@ func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidU64{}) // interface compliance check
-func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.U64(ϟa.A))
@@ -708,8 +708,8 @@ func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidS64{}) // interface compliance check
-func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.S64(ϟa.A))
@@ -719,8 +719,8 @@ func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidBool{}) // interface compliance check
-func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(value.Bool(ϟa.A))
@@ -730,8 +730,8 @@ func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 }
 
 var _ = replay.Replayer(&CmdVoidString{}) // interface compliance check
-func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(ϟb.String(ϟa.A))
@@ -741,8 +741,8 @@ func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoid3Strings{}) // interface compliance check
-func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(ϟb.String(ϟa.A))
@@ -754,8 +754,8 @@ func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 }
 
 var _ = replay.Replayer(&CmdVoid3Arrays{}) // interface compliance check
-func (ϟa *CmdVoid3Arrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoid3Arrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
@@ -767,8 +767,8 @@ func (ϟa *CmdVoid3Arrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 }
 
 var _ = replay.Replayer(&CmdVoidArrayOfStrings{}) // interface compliance check
-func (ϟa *CmdVoidArrayOfStrings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidArrayOfStrings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
@@ -778,8 +778,8 @@ func (ϟa *CmdVoidArrayOfStrings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 }
 
 var _ = replay.Replayer(&CmdU8{}) // interface compliance check
-func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
@@ -799,8 +799,8 @@ func (ϟa *CmdU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, po
 }
 
 var _ = replay.Replayer(&CmdS8{}) // interface compliance check
-func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
@@ -820,8 +820,8 @@ func (ϟa *CmdS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, po
 }
 
 var _ = replay.Replayer(&CmdU16{}) // interface compliance check
-func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
@@ -841,8 +841,8 @@ func (ϟa *CmdU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdS16{}) // interface compliance check
-func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* result */})
@@ -862,8 +862,8 @@ func (ϟa *CmdS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdF32{}) // interface compliance check
-func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
@@ -883,8 +883,8 @@ func (ϟa *CmdF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdU32{}) // interface compliance check
-func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
@@ -904,8 +904,8 @@ func (ϟa *CmdU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdS32{}) // interface compliance check
-func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
@@ -925,8 +925,8 @@ func (ϟa *CmdS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdF64{}) // interface compliance check
-func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
@@ -946,8 +946,8 @@ func (ϟa *CmdF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdU64{}) // interface compliance check
-func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
@@ -967,8 +967,8 @@ func (ϟa *CmdU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdS64{}) // interface compliance check
-func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
@@ -988,8 +988,8 @@ func (ϟa *CmdS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 }
 
 var _ = replay.Replayer(&CmdBool{}) // interface compliance check
-func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
@@ -1009,8 +1009,8 @@ func (ϟa *CmdBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, 
 }
 
 var _ = replay.Replayer(&CmdString{}) // interface compliance check
-func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(10))
@@ -1032,8 +1032,8 @@ func (ϟa *CmdString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 }
 
 var _ = replay.Replayer(&CmdArrayOfFloat{}) // interface compliance check
-func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(10))
@@ -1055,8 +1055,8 @@ func (ϟa *CmdArrayOfFloat) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 }
 
 var _ = replay.Replayer(&CmdPointer{}) // interface compliance check
-func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(10))
@@ -1078,8 +1078,8 @@ func (ϟa *CmdPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 }
 
 var _ = replay.Replayer(&CmdVoidOutU8{}) // interface compliance check
-func (ϟa *CmdVoidOutU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutU8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
@@ -1099,8 +1099,8 @@ func (ϟa *CmdVoidOutU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 }
 
 var _ = replay.Replayer(&CmdVoidOutS8{}) // interface compliance check
-func (ϟa *CmdVoidOutS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutS8) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
@@ -1120,8 +1120,8 @@ func (ϟa *CmdVoidOutS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 }
 
 var _ = replay.Replayer(&CmdVoidOutU16{}) // interface compliance check
-func (ϟa *CmdVoidOutU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutU16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
@@ -1141,8 +1141,8 @@ func (ϟa *CmdVoidOutU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutS16{}) // interface compliance check
-func (ϟa *CmdVoidOutS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutS16) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{2 /* a */})
@@ -1162,8 +1162,8 @@ func (ϟa *CmdVoidOutS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutF32{}) // interface compliance check
-func (ϟa *CmdVoidOutF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutF32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
@@ -1183,8 +1183,8 @@ func (ϟa *CmdVoidOutF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutU32{}) // interface compliance check
-func (ϟa *CmdVoidOutU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutU32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
@@ -1204,8 +1204,8 @@ func (ϟa *CmdVoidOutU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutS32{}) // interface compliance check
-func (ϟa *CmdVoidOutS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutS32) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */})
@@ -1225,8 +1225,8 @@ func (ϟa *CmdVoidOutS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutF64{}) // interface compliance check
-func (ϟa *CmdVoidOutF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutF64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
@@ -1246,8 +1246,8 @@ func (ϟa *CmdVoidOutF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutU64{}) // interface compliance check
-func (ϟa *CmdVoidOutU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutU64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
@@ -1267,8 +1267,8 @@ func (ϟa *CmdVoidOutU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutS64{}) // interface compliance check
-func (ϟa *CmdVoidOutS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutS64) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* a */})
@@ -1288,8 +1288,8 @@ func (ϟa *CmdVoidOutS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 }
 
 var _ = replay.Replayer(&CmdVoidOutBool{}) // interface compliance check
-func (ϟa *CmdVoidOutBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutBool) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* a */})
@@ -1309,8 +1309,8 @@ func (ϟa *CmdVoidOutBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 }
 
 var _ = replay.Replayer(&CmdVoidOutString{}) // interface compliance check
-func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	a_cnt := uint64(int32(10))
@@ -1331,8 +1331,8 @@ func (ϟa *CmdVoidOutString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 }
 
 var _ = replay.Replayer(&CmdVoidOutFixedSizeBuffer{}) // interface compliance check
-func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	a_cnt := uint64(int32(10))
@@ -1353,8 +1353,8 @@ func (ϟa *CmdVoidOutFixedSizeBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 }
 
 var _ = replay.Replayer(&CmdVoidOut3Strings{}) // interface compliance check
-func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	a_cnt := uint64(int32(15))
@@ -1381,8 +1381,8 @@ func (ϟa *CmdVoidOut3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 }
 
 var _ = replay.Replayer(&CmdVoid3Remapped{}) // interface compliance check
-func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	if key, remap := ϟa.A.remap(ϟa, ϟs); remap {
@@ -1406,8 +1406,8 @@ func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 }
 
 var _ = replay.Replayer(&CmdVoidOut3Remapped{}) // interface compliance check
-func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* a */, 4 /* b */, 4 /* c */})
@@ -1438,8 +1438,8 @@ func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 }
 
 var _ = replay.Replayer(&CmdVoidOutArrayOfRemapped{}) // interface compliance check
-func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-	ϟc := getState(ϟa, ϟs)
+func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	a_cnt := uint64(int32(5))

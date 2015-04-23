@@ -18,6 +18,7 @@ import (
 	"sort"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -80,7 +81,7 @@ func RegisterAtom(a service.AtomInfo) {
 // RegisterAtom registers the graphics API api with the schema.
 func RegisterAPI(api gfxapi.API, state service.StructInfo) {
 	schema.Apis = append(schema.Apis, service.ApiSchema{
-		Api:   api.ID(),
+		Api:   service.ApiId{ID: binary.ID(api.ID())},
 		State: state,
 	})
 }

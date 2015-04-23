@@ -1092,14 +1092,6 @@ class ClearState {
     s32                             ClearStencil
 }
 
-@internal
-class InternalState {
-    BufferId                        NilBuffer = 0
-    TextureId                       NilTexture = 0
-    RenderbufferId                  NilRenderbuffer = 0
-    FramebufferId                   Backbuffer = 0
-}
-
 @replay_remap type u32 RenderbufferId
 @replay_remap type u32 TextureId
 @replay_remap type u32 FramebufferId
@@ -1131,8 +1123,11 @@ class Objects {
     map<QueryId, ptr<Query>>                  Queries
 }
 
+@internal type u32 ContextID
 
-// TODO: Move Globals into Context
+@internal
+class Context {
+    ContextID                                         Identifier
     BlendState                                        Blending
     RasterizerState                                   Rasterizing
     ClearState                                        Clearing
@@ -1145,86 +1140,132 @@ class Objects {
     TextureUnitMap                                    TextureUnits
     TextureUnit                                       ActiveTextureUnit = GL_TEXTURE0
     map<Capability, bool>                             Capabilities
-    InternalState                                     Internals
     HintMode                                          GenerateMipmapHint = GL_DONT_CARE
     map<PixelStoreParameter, s32>                     PixelStorage
     Objects                                           Instances
+}
 
-/////////////////////////////////////////////////////////////////
-// Synthetic APIs
-/////////////////////////////////////////////////////////////////
+type u32 ThreadID
 
-@initializer
-@synthetic
-cmd void init(s32                width,
-              s32                height,
-              RenderbufferFormat color_fmt,
-              RenderbufferFormat depth_fmt,
-              RenderbufferFormat stencil_fmt) {
-    Instances.Buffers[Internals.NilBuffer] = new Buffer{}
-    Instances.Textures[Internals.NilTexture] = new Texture{}
-    Instances.Renderbuffers[Internals.NilRenderbuffer] = new Renderbuffer{}
+// Globals
+ContextID                   NextContextID
+ThreadID                    CurrentThread
+map<ThreadID, ptr<Context>> Contexts
 
-    backbufferColorId   := 0xffffffff as RenderbufferId
-    backbufferDepthId   := 0xfffffffe as RenderbufferId
-    backbufferStencilId := 0xfffffffd as RenderbufferId
+macro ptr<Context> GetContext() {
+    context := Contexts[CurrentThread]
+    assert context != null
+    return context
+}
 
-    backbufferColor         := new Renderbuffer{}
-    backbufferColor.Width    = width
-    backbufferColor.Height   = height
-    backbufferColor.Format   = color_fmt
-    Instances.Renderbuffers[backbufferColorId] = backbufferColor
+macro void SetContext(ptr<Context> context) {
+    Contexts[CurrentThread] = context
+}
 
-    backbufferDepth         := new Renderbuffer{}
-    backbufferDepth.Width    = width
-    backbufferDepth.Height   = height
-    backbufferDepth.Format   = depth_fmt
-    Instances.Renderbuffers[backbufferDepthId] = backbufferDepth
+macro ptr<Context> CreateContext() {
+    identifier := NextContextID
+    NextContextID = NextContextID + 1
 
-    backbufferStencil       := new Renderbuffer{}
-    backbufferStencil.Width  = width
-    backbufferStencil.Height = height
-    backbufferStencil.Format = stencil_fmt
-    Instances.Renderbuffers[backbufferStencilId] = backbufferStencil
+    ctx := new Context{}
+    ctx.Identifier = identifier
+    ctx.Instances.Buffers[0] = new Buffer{}
+    ctx.Instances.Textures[0] = new Texture{}
+    ctx.Instances.Renderbuffers[0] = new Renderbuffer{}
+
+    color_id   := 0xffffffff as RenderbufferId
+    depth_id   := 0xfffffffe as RenderbufferId
+    stencil_id := 0xfffffffd as RenderbufferId
+
+    ctx.Instances.Renderbuffers[color_id] = new Renderbuffer{}
+    ctx.Instances.Renderbuffers[depth_id] = new Renderbuffer{}
+    ctx.Instances.Renderbuffers[stencil_id] = new Renderbuffer{}
 
     backbuffer := new Framebuffer{}
     backbuffer.Attachments[GL_COLOR_ATTACHMENT0] = FramebufferAttachmentInfo{
-        Object:      backbufferColorId as u32,
+        Object:      color_id as u32,
         Type:        GL_RENDERBUFFER,
         CubeMapFace: GL_TEXTURE_CUBE_MAP_POSITIVE_X,
     }
 
     backbuffer.Attachments[GL_DEPTH_ATTACHMENT] = FramebufferAttachmentInfo{
-        Object:      backbufferDepthId as u32,
+        Object:      depth_id as u32,
         Type:        GL_RENDERBUFFER,
         CubeMapFace: GL_TEXTURE_CUBE_MAP_POSITIVE_X,
     }
 
     backbuffer.Attachments[GL_STENCIL_ATTACHMENT] = FramebufferAttachmentInfo{
-        Object:      backbufferStencilId as u32,
+        Object:      stencil_id as u32,
         Type:        GL_RENDERBUFFER,
         CubeMapFace: GL_TEXTURE_CUBE_MAP_POSITIVE_X,
     }
 
-    Instances.Framebuffers[Internals.Backbuffer] = backbuffer
+    ctx.Instances.Framebuffers[0] = backbuffer
 
-    BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = Internals.Backbuffer
-    BoundFramebuffers[GL_READ_FRAMEBUFFER] = Internals.Backbuffer
-
-    Rasterizing.Scissor.Width  = width
-    Rasterizing.Scissor.Height = height
+    ctx.BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = 0
+    ctx.BoundFramebuffers[GL_READ_FRAMEBUFFER] = 0
 
     // TODO: Stencil function
-    Rasterizing.StencilMask[GL_FRONT] = 0xFFFFFFFF
-    Rasterizing.StencilMask[GL_BACK]  = 0xFFFFFFFF
-    Rasterizing.Viewport.Width        = width
-    Rasterizing.Viewport.Height       = height
+    ctx.Rasterizing.StencilMask[GL_FRONT] = 0xFFFFFFFF
+    ctx.Rasterizing.StencilMask[GL_BACK]  = 0xFFFFFFFF
 
-    PixelStorage[GL_PACK_ALIGNMENT] = 4
-    PixelStorage[GL_UNPACK_ALIGNMENT] = 4
+    ctx.PixelStorage[GL_PACK_ALIGNMENT] = 4
+    ctx.PixelStorage[GL_UNPACK_ALIGNMENT] = 4
 
     for i in (0 .. 64) { // TODO: Count
-        VertexAttributeArrays[i as AttributeLocation] = new VertexAttributeArray{}
+        ctx.VertexAttributeArrays[i as AttributeLocation] = new VertexAttributeArray{}
+    }
+
+    return ctx
+}
+
+/////////////////////////////////////////////////////////////////
+// Synthetic commands
+/////////////////////////////////////////////////////////////////
+
+// replayCreateRenderer constructs a GLES renderer for replay without making it active.
+@synthetic
+cmd void replayCreateRenderer(u32 id) {}
+
+// replayBindRenderer makes the renderer constructed with replayCreateRenderer active.
+@synthetic
+cmd void replayBindRenderer(u32 id) {}
+
+@synthetic
+cmd void backbufferInfo(s32                width,
+                        s32                height,
+                        RenderbufferFormat color_fmt,
+                        RenderbufferFormat depth_fmt,
+                        RenderbufferFormat stencil_fmt,
+                        bool               resetViewportScissor) {
+    ctx := GetContext()
+    backbuffer := ctx.Instances.Framebuffers[0]
+
+    color_id     := backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object as RenderbufferId
+    color_buffer := ctx.Instances.Renderbuffers[color_id]
+
+    depth_id     := backbuffer.Attachments[GL_DEPTH_ATTACHMENT].Object as RenderbufferId
+    depth_buffer := ctx.Instances.Renderbuffers[depth_id]
+
+    stencil_id     := backbuffer.Attachments[GL_STENCIL_ATTACHMENT].Object as RenderbufferId
+    stencil_buffer := ctx.Instances.Renderbuffers[stencil_id]
+
+    color_buffer.Width    = width
+    color_buffer.Height   = height
+    color_buffer.Format   = color_fmt
+
+    depth_buffer.Width    = width
+    depth_buffer.Height   = height
+    depth_buffer.Format   = depth_fmt
+
+    stencil_buffer.Width  = width
+    stencil_buffer.Height = height
+    stencil_buffer.Format = stencil_fmt
+
+    if resetViewportScissor {
+        ctx.Rasterizing.Scissor.Width   = width
+        ctx.Rasterizing.Scissor.Height  = height
+        ctx.Rasterizing.Viewport.Width  = width
+        ctx.Rasterizing.Viewport.Height = height
     }
 }
 
@@ -1247,7 +1288,9 @@ type pointer EGLContext
 type pointer EGLDisplay
 type pointer EGLSurface
 
-@replay_custom
+map<EGLContext, ptr<Context>> EGLContexts
+
+@no_replay
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
 cmd EGLBoolean eglInitialize(EGLDisplay dpy, out EGLint major, out EGLint minor) {
     major = ?
@@ -1255,7 +1298,7 @@ cmd EGLBoolean eglInitialize(EGLDisplay dpy, out EGLint major, out EGLint minor)
     return ?
 }
 
-@replay_custom
+@no_replay
 @ReturnSize(0)
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml
 cmd EGLContext eglCreateContext(EGLDisplay    display,
@@ -1263,22 +1306,31 @@ cmd EGLContext eglCreateContext(EGLDisplay    display,
                                 EGLContext    share_context,
                                 array<EGLint> attrib_list) {
     assert len(attrib_list) >= 0
-    return ?
+    context := ? as EGLContext
+    EGLContexts[context] = CreateContext()
+    return context
 }
 
-@replay_custom
+@no_replay
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml
 cmd EGLBoolean eglMakeCurrent(EGLDisplay display,
                               EGLSurface draw,
                               EGLSurface read,
                               EGLContext context) {
+    SetContext(EGLContexts[context])
     return ?
 }
 
-@replay_custom
+@no_replay
 @EndOfFrame
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
 cmd EGLBoolean eglSwapBuffers(EGLDisplay display, pointer surface) {
+    return ?
+}
+
+@no_replay
+cmd EGLBoolean eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint attribute, out EGLint value) {
+    value = ?
     return ?
 }
 
@@ -1288,23 +1340,30 @@ cmd EGLBoolean eglSwapBuffers(EGLDisplay display, pointer surface) {
 type pointer GLXContext
 type pointer GLXDrawable
 
-@replay_custom
+map<GLXContext, ptr<Context>> GLXContexts
+
+@no_replay
 @ReturnSize(0)
 cmd GLXContext glXCreateContext(pointer dpy, pointer vis, GLXContext shareList, bool direct) {
-    return ?
+    context := ? as GLXContext
+    GLXContexts[context] = CreateContext()
+    return context
 }
 
-@replay_custom
+@no_replay
 @ReturnSize(0)
 cmd GLXContext glXCreateNewContext(pointer display, pointer fbconfig, u32 type, GLXContext shared, bool direct) {
-    return ?
+    context := ? as GLXContext
+    GLXContexts[context] = CreateContext()
+    return context
 }
 
-@replay_custom
+@no_replay
 cmd void glXMakeContextCurrent(pointer display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
+    SetContext(GLXContexts[ctx])
 }
 
-@replay_custom
+@no_replay
 @EndOfFrame
 cmd void glXSwapBuffers(pointer display, GLXDrawable drawable) {
 }
@@ -1316,26 +1375,41 @@ type pointer HGLRC
 type pointer HDC
 type int BOOL
 
-@replay_custom
+map<HGLRC, ptr<Context>> WGLContexts
+
+@no_replay
 @ReturnSize(0)
 ///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx
 cmd HGLRC wglCreateContext(HDC hdc) {
     assert len(hdc) >= 0
-    return ?
+    context := ? as HGLRC
+    WGLContexts[context] = CreateContext()
+    return context
 }
 
-@replay_custom
+@no_replay
+@ReturnSize(0)
+///http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt
+cmd HGLRC wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext, array<int> attribList) {
+    assert len(hdc) >= 0
+    assert len(attribList) >= 0
+    context := ? as HGLRC
+    WGLContexts[context] = CreateContext()
+    return context
+}
+
+@no_replay
 @ReturnSize(0)
 ///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx
 cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
+    SetContext(WGLContexts[hglrc])
     return ?
 }
 
-@replay_custom
+@no_replay
 @EndOfFrame
 ///http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)
-cmd void wglSwapBuffers(HDC hdc) {
-}
+cmd void wglSwapBuffers(HDC hdc) {}
 
 /////////////////////////////////////////////////////////////////
 // CGL APIs
@@ -1344,12 +1418,23 @@ type int CGLError
 type pointer CGLPixelFormatObj
 type pointer CGLContextObj
 
-@replay_custom
+map<CGLContextObj, ptr<Context>> CGLContexts
+
+@no_replay
 ///http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
-cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, /* out HACK: Breaks array count */ CGLContextObj ctx) {
+cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, out CGLContextObj ctx) {
     assert len(pix) >= 0
     assert len(share) >= 0
     assert len(ctx) >= 0
+    context := ? as CGLContextObj
+    CGLContexts[context] = CreateContext()
+    ctx = context
+    return ?
+}
+
+@no_replay
+cmd CGLError CGLSetCurrentContext(CGLContextObj ctx) {
+    SetContext(CGLContexts[ctx])
     return ?
 }
 
@@ -1359,12 +1444,14 @@ cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, /* out
 
 ///http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
 cmd void glEnableClientState(ArrayType type) {
-    Capabilities[type as Capability] = true
+    ctx := GetContext()
+    ctx.Capabilities[type as Capability] = true
 }
 
 ///http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml
 cmd void glDisableClientState(ArrayType type) {
-    Capabilities[type as Capability] = false
+    ctx := GetContext()
+    ctx.Capabilities[type as Capability] = false
 }
 
 /////////////////////////////////////////////////////////////////
@@ -1454,32 +1541,36 @@ cmd void glTextureStorage3DEXT(TextureId texture, TextureTarget target, s32 leve
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glGenVertexArraysOES(s32 count, inout array<VertexArrayId> arrays) {
     assert len(arrays) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
         id := ? as VertexArrayId
-        Instances.VertexArrays[id] = new VertexArray{}
+        ctx.Instances.VertexArrays[id] = new VertexArray{}
         arrays[i] = id
     }
 }
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glBindVertexArrayOES(VertexArrayId array) {
-    if !(array in Instances.VertexArrays) {
-      Instances.VertexArrays[array] = new VertexArray{}
+    ctx := GetContext()
+    if !(array in ctx.Instances.VertexArrays) {
+        ctx.Instances.VertexArrays[array] = new VertexArray{}
     }
-    BoundVertexArray = array
+    ctx.BoundVertexArray = array
 }
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd void glDeleteVertexArraysOES(s32 count, array<VertexArrayId> arrays) {
     assert len(arrays) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-      Instances.VertexArrays.Delete(arrays[i])
+      ctx.Instances.VertexArrays.Delete(arrays[i])
     }
 }
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
 cmd bool glIsVertexArrayOES(VertexArrayId array) {
-    return array in Instances.VertexArrays
+    ctx := GetContext()
+    return array in ctx.Instances.VertexArrays
 }
 
 // OES_EGL_image extension:
@@ -1532,16 +1623,18 @@ cmd void glGetnUniformivEXT(u32             program,
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml
 cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, string name) {
-    p := Instances.Programs[program]
+    ctx := GetContext()
+    p := ctx.Instances.Programs[program]
     p.AttributeBindings[name] = location
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml
 cmd void glBlendFunc(BlendFactor src_factor, BlendFactor dst_factor) {
-    Blending.SrcRgbBlendFactor   = src_factor
-    Blending.SrcAlphaBlendFactor = src_factor
-    Blending.DstRgbBlendFactor   = dst_factor
-    Blending.DstAlphaBlendFactor = dst_factor
+    ctx := GetContext()
+    ctx.Blending.SrcRgbBlendFactor   = src_factor
+    ctx.Blending.SrcAlphaBlendFactor = src_factor
+    ctx.Blending.DstRgbBlendFactor   = dst_factor
+    ctx.Blending.DstAlphaBlendFactor = dst_factor
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml
@@ -1549,27 +1642,31 @@ cmd void glBlendFuncSeparate(BlendFactor src_factor_rgb,
                              BlendFactor dst_factor_rgb,
                              BlendFactor src_factor_alpha,
                              BlendFactor dst_factor_alpha) {
-    Blending.SrcRgbBlendFactor   = src_factor_rgb
-    Blending.DstRgbBlendFactor   = dst_factor_rgb
-    Blending.SrcAlphaBlendFactor = src_factor_alpha
-    Blending.DstAlphaBlendFactor = dst_factor_alpha
+    ctx := GetContext()
+    ctx.Blending.SrcRgbBlendFactor   = src_factor_rgb
+    ctx.Blending.DstRgbBlendFactor   = dst_factor_rgb
+    ctx.Blending.SrcAlphaBlendFactor = src_factor_alpha
+    ctx.Blending.DstAlphaBlendFactor = dst_factor_alpha
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml
 cmd void glBlendEquation(BlendEquation equation) {
-    Blending.BlendEquationRgb   = equation
-    Blending.BlendEquationAlpha = equation
+    ctx := GetContext()
+    ctx.Blending.BlendEquationRgb   = equation
+    ctx.Blending.BlendEquationAlpha = equation
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml
 cmd void glBlendEquationSeparate(BlendEquation rgb, BlendEquation alpha) {
-    Blending.BlendEquationRgb   = rgb
-    Blending.BlendEquationAlpha = alpha
+    ctx := GetContext()
+    ctx.Blending.BlendEquationRgb   = rgb
+    ctx.Blending.BlendEquationAlpha = alpha
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml
 cmd void glBlendColor(f32 red, f32 green, f32 blue, f32 alpha) {
-    Blending.BlendColor = Color{
+    ctx := GetContext()
+    ctx.Blending.BlendColor = Color{
       Red:   red,
       Green: green,
       Blue:  blue,
@@ -1579,14 +1676,14 @@ cmd void glBlendColor(f32 red, f32 green, f32 blue, f32 alpha) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml
 cmd void glEnableVertexAttribArray(AttributeLocation location) {
-    a := VertexAttributeArrays[location]
-    a.Enabled = true
+    ctx := GetContext()
+    ctx.VertexAttributeArrays[location].Enabled = true
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml
 cmd void glDisableVertexAttribArray(AttributeLocation location) {
-    a := VertexAttributeArrays[location]
-    a.Enabled = false
+    ctx := GetContext()
+    ctx.VertexAttributeArrays[location].Enabled = false
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml
@@ -1598,13 +1695,14 @@ cmd void glVertexAttribPointer(AttributeLocation location,
                                VertexPointer     data) {
     assert (size >= 1) && (size <= 4)
     assert stride >= 0
-    a := VertexAttributeArrays[location]
+    ctx := GetContext()
+    a := ctx.VertexAttributeArrays[location]
     a.Size       = size as u32
     a.Type       = type
     a.Normalized = normalized
     a.Stride     = stride
     a.Pointer    = data as pointer
-    a.Buffer     = BoundBuffers[GL_ARRAY_BUFFER]
+    a.Buffer     = ctx.BoundBuffers[GL_ARRAY_BUFFER]
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml
@@ -1655,7 +1753,8 @@ cmd void glGetProgramiv(ProgramId program, ProgramParameter parameter, inout arr
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml
 cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, inout array<s32> value) {
     assert len(value) >= 1
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    s := ctx.Instances.Shaders[shader]
     value[0] = switch (parameter) {
       case GL_SHADER_TYPE:          s.Type as s32
       case GL_DELETE_STATUS:        switch (s.Deletable) { case true: 1 case false: 0 }
@@ -1679,15 +1778,17 @@ cmd AttributeLocation glGetAttribLocation(ProgramId program, string name) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml
 cmd void glPixelStorei(PixelStoreParameter parameter, s32 value) {
     assert((value == 1) || (value == 2) || (value == 4) || (value == 8))
-    PixelStorage[parameter] = value
+    ctx := GetContext()
+    ctx.PixelStorage[parameter] = value
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml
 cmd void glTexParameteri(TextureTarget    target,
                          TextureParameter parameter,
                          s32              value) {
-    id := TextureUnits[ActiveTextureUnit][target]
-    t  := Instances.Textures[id]
+    ctx := GetContext()
+    id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+    t  := ctx.Instances.Textures[id]
     switch (parameter) {
       case GL_TEXTURE_MAG_FILTER:         t.MagFilter = value as TextureFilterMode
       case GL_TEXTURE_MIN_FILTER:         t.MinFilter = value as TextureFilterMode
@@ -1705,8 +1806,9 @@ cmd void glTexParameteri(TextureTarget    target,
 cmd void glTexParameterf(TextureTarget    target,
                          TextureParameter parameter,
                          f32              value) {
-    id := TextureUnits[ActiveTextureUnit][target]
-    t  := Instances.Textures[id]
+    ctx := GetContext()
+    id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+    t  := ctx.Instances.Textures[id]
     switch (parameter) {
       case GL_TEXTURE_MAG_FILTER:         t.MagFilter = value as TextureFilterMode
       case GL_TEXTURE_MIN_FILTER:         t.MinFilter = value as TextureFilterMode
@@ -1725,8 +1827,9 @@ cmd void glGetTexParameteriv(TextureTarget    target,
                              TextureParameter parameter,
                              inout array<s32>   values) {
     assert len(values) >= 1
-    id := TextureUnits[ActiveTextureUnit][target]
-    t  := Instances.Textures[id]
+    ctx := GetContext()
+    id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+    t  := ctx.Instances.Textures[id]
     values[0] = switch (parameter) {
       case GL_TEXTURE_MAG_FILTER:         t.MagFilter     as s32
       case GL_TEXTURE_MIN_FILTER:         t.MinFilter     as s32
@@ -1745,8 +1848,9 @@ cmd void glGetTexParameterfv(TextureTarget    target,
                              TextureParameter parameter,
                              inout array<f32>   values) {
     assert len(values) >= 1
-    id := TextureUnits[ActiveTextureUnit][target]
-    t  := Instances.Textures[id]
+    ctx := GetContext()
+    id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
+    t  := ctx.Instances.Textures[id]
     values[0] = switch (parameter) {
       case GL_TEXTURE_MAG_FILTER:         t.MagFilter     as f32
       case GL_TEXTURE_MIN_FILTER:         t.MinFilter     as f32
@@ -1762,7 +1866,8 @@ cmd void glGetTexParameterfv(TextureTarget    target,
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1i(UniformLocation location, s32 value) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT
     uniform.Value.S32 = value
@@ -1771,7 +1876,8 @@ cmd void glUniform1i(UniformLocation location, s32 value) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC2
     uniform.Value.Vec2i = Vec2i{X: value0, Y: value1}
@@ -1780,7 +1886,8 @@ cmd void glUniform2i(UniformLocation location, s32 value0, s32 value1) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value2) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC3
     uniform.Value.Vec3i = Vec3i{X: value0, Y: value1, Z: value2}
@@ -1789,7 +1896,8 @@ cmd void glUniform3i(UniformLocation location, s32 value0, s32 value1, s32 value
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value2, s32 value3) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC4
     uniform.Value.Vec4i = Vec4i{X: value0, Y: value1, Z: value2, W: value3}
@@ -1799,7 +1907,8 @@ cmd void glUniform4i(UniformLocation location, s32 value0, s32 value1, s32 value
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
     assert len(value) >= count
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT
@@ -1810,7 +1919,8 @@ cmd void glUniform1iv(UniformLocation location, s32 count, array<s32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
     assert len(value) >= (count*2)
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC2
@@ -1821,7 +1931,8 @@ cmd void glUniform2iv(UniformLocation location, s32 count, array<s32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
     assert len(value) >= (count*3)
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC3
@@ -1832,7 +1943,8 @@ cmd void glUniform3iv(UniformLocation location, s32 count, array<s32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
     assert len(value) >= (count*4)
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_INT_VEC4
@@ -1842,7 +1954,8 @@ cmd void glUniform4iv(UniformLocation location, s32 count, array<s32> value) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1f(UniformLocation location, f32 value) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
     uniform.Value.F32 = value
@@ -1851,7 +1964,8 @@ cmd void glUniform1f(UniformLocation location, f32 value) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
     uniform.Value.Vec2f = Vec2f{X: value0, Y: value1}
@@ -1860,7 +1974,8 @@ cmd void glUniform2f(UniformLocation location, f32 value0, f32 value1) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value2) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
     uniform.Value.Vec3f = Vec3f{X: value0, Y: value1, Z: value2}
@@ -1869,7 +1984,8 @@ cmd void glUniform3f(UniformLocation location, f32 value0, f32 value1, f32 value
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value2, f32 value3) {
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
     uniform.Value.Vec4f = Vec4f{X: value0, Y: value1, Z: value2, W: value3}
@@ -1879,7 +1995,8 @@ cmd void glUniform4f(UniformLocation location, f32 value0, f32 value1, f32 value
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
     assert len(value) >= count
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT
@@ -1890,7 +2007,8 @@ cmd void glUniform1fv(UniformLocation location, s32 count, array<f32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
     assert len(value) >= (count*2)
-    program := Instances.Programs[BoundProgram]
+    ctx := GetContext()
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     // TODO: Use count
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC2
@@ -1901,8 +2019,9 @@ cmd void glUniform2fv(UniformLocation location, s32 count, array<f32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
     assert len(value) >= (count*3)
+    ctx := GetContext()
     // TODO: Use count
-    program := Instances.Programs[BoundProgram]
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC3
     uniform.Value.Vec3f = Vec3f{X: value[0], Y: value[1], Z: value[2]}
@@ -1912,8 +2031,9 @@ cmd void glUniform3fv(UniformLocation location, s32 count, array<f32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
     assert len(value) >= (count*4)
+    ctx := GetContext()
     // TODO: Use count
-    program := Instances.Programs[BoundProgram]
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_VEC4
     uniform.Value.Vec4f = Vec4f{X: value[0], Y: value[1], Z: value[2], W: value[3]}
@@ -1923,8 +2043,9 @@ cmd void glUniform4fv(UniformLocation location, s32 count, array<f32> value) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     assert len(values) >= (count*4)
+    ctx := GetContext()
     // TODO: Use count
-    program := Instances.Programs[BoundProgram]
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT2
     uniform.Value.Mat2f = Mat2f{
@@ -1937,8 +2058,9 @@ cmd void glUniformMatrix2fv(UniformLocation location, s32 count, bool transpose,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     assert len(values) >= (count*9)
+    ctx := GetContext()
     // TODO: Use count
-    program := Instances.Programs[BoundProgram]
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Type = GL_FLOAT_MAT3
     uniform.Value.Mat3f = Mat3f{
@@ -1952,8 +2074,9 @@ cmd void glUniformMatrix3fv(UniformLocation location, s32 count, bool transpose,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml
 cmd void glUniformMatrix4fv(UniformLocation location, s32 count, bool transpose, array<f32> values) {
     assert len(values) >= (count*16)
+    ctx := GetContext()
     // TODO: Use count
-    program := Instances.Programs[BoundProgram]
+    program := ctx.Instances.Programs[ctx.BoundProgram]
     uniform := program.Uniforms[location]
     uniform.Value.Mat4f = Mat4f{
         Col0: Vec4f{X: values[0],  Y: values[1],  Z: values[2],  W: values[3]},
@@ -2023,42 +2146,48 @@ cmd void glGetShaderPrecisionFormat(ShaderType shader_type, PrecisionType precis
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml
 cmd void glDepthMask(bool enabled) {
-    Rasterizing.DepthMask = enabled
+    ctx := GetContext()
+    ctx.Rasterizing.DepthMask = enabled
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml
 cmd void glDepthFunc(TestFunction function) {
-    Rasterizing.DepthTestFunction = function
+    ctx := GetContext()
+    ctx.Rasterizing.DepthTestFunction = function
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml
 cmd void glDepthRangef(f32 near, f32 far) {
-    Rasterizing.DepthNear = near
-    Rasterizing.DepthFar = far
+    ctx := GetContext()
+    ctx.Rasterizing.DepthNear = near
+    ctx.Rasterizing.DepthFar = far
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml
 cmd void glColorMask(bool red, bool green, bool blue, bool alpha) {
-    Rasterizing.ColorMaskRed   = red
-    Rasterizing.ColorMaskGreen = green
-    Rasterizing.ColorMaskBlue  = blue
-    Rasterizing.ColorMaskAlpha = alpha
+    ctx := GetContext()
+    ctx.Rasterizing.ColorMaskRed   = red
+    ctx.Rasterizing.ColorMaskGreen = green
+    ctx.Rasterizing.ColorMaskBlue  = blue
+    ctx.Rasterizing.ColorMaskAlpha = alpha
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml
 cmd void glStencilMask(u32 mask) {
-    Rasterizing.StencilMask[GL_FRONT] = mask
-    Rasterizing.StencilMask[GL_BACK] = mask
+    ctx := GetContext()
+    ctx.Rasterizing.StencilMask[GL_FRONT] = mask
+    ctx.Rasterizing.StencilMask[GL_BACK] = mask
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml
 cmd void glStencilMaskSeparate(FaceMode face, u32 mask) {
+    ctx := GetContext()
     switch (face) {
-        case GL_FRONT: Rasterizing.StencilMask[GL_FRONT] = mask
-        case GL_BACK:  Rasterizing.StencilMask[GL_BACK] = mask
+        case GL_FRONT: ctx.Rasterizing.StencilMask[GL_FRONT] = mask
+        case GL_BACK:  ctx.Rasterizing.StencilMask[GL_BACK] = mask
         case GL_FRONT_AND_BACK: {
-            Rasterizing.StencilMask[GL_FRONT] = mask
-            Rasterizing.StencilMask[GL_BACK] = mask
+            ctx.Rasterizing.StencilMask[GL_FRONT] = mask
+            ctx.Rasterizing.StencilMask[GL_BACK] = mask
         }
     }
 }
@@ -2079,12 +2208,14 @@ cmd void glStencilOpSeparate(FaceMode      face,
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml
 cmd void glFrontFace(FaceOrientation orientation) {
-    Rasterizing.FrontFace = orientation
+    ctx := GetContext()
+    ctx.Rasterizing.FrontFace = orientation
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml
 cmd void glViewport(s32 x, s32 y, s32 width, s32 height) {
-    Rasterizing.Viewport = Rect{
+    ctx := GetContext()
+    ctx.Rasterizing.Viewport = Rect{
         X:      x,
         Y:      y,
         Width:  width,
@@ -2094,7 +2225,8 @@ cmd void glViewport(s32 x, s32 y, s32 width, s32 height) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml
 cmd void glScissor(s32 x, s32 y, s32 width, s32 height) {
-    Rasterizing.Scissor = Rect{
+    ctx := GetContext()
+    ctx.Rasterizing.Scissor = Rect{
         X:      x,
         Y:      y,
         Width:  width,
@@ -2104,18 +2236,20 @@ cmd void glScissor(s32 x, s32 y, s32 width, s32 height) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml
 cmd void glActiveTexture(TextureUnit unit) {
-    ActiveTextureUnit = unit
-    if !(unit in TextureUnits) {
-        TextureUnits[unit] = TextureUnits[unit]
+    ctx := GetContext()
+    ctx.ActiveTextureUnit = unit
+    if !(unit in ctx.TextureUnits) {
+        ctx.TextureUnits[unit] = ctx.TextureUnits[unit]
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml
 cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
     assert len(textures) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
       id := ? as TextureId
-      Instances.Textures[id] = new Texture{}
+      ctx.Instances.Textures[id] = new Texture{}
       textures[i] = id
     }
 }
@@ -2123,22 +2257,25 @@ cmd void glGenTextures(s32 count, inout array<TextureId> textures) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml
 cmd void glDeleteTextures(s32 count, array<TextureId> textures) {
     assert len(textures) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-      Instances.Textures.Delete(textures[i])
+      ctx.Instances.Textures.Delete(textures[i])
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml
 cmd bool glIsTexture(TextureId texture) {
-    return texture in Instances.Textures
+    ctx := GetContext()
+    return texture in ctx.Instances.Textures
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml
 cmd void glBindTexture(TextureTarget target, TextureId texture) {
-    if !(texture in Instances.Textures) {
-      Instances.Textures[texture] = new Texture{}
+    ctx := GetContext()
+    if !(texture in ctx.Instances.Textures) {
+      ctx.Instances.Textures[texture] = new Texture{}
     }
-    TextureUnits[ActiveTextureUnit][target] = texture
+    ctx.TextureUnits[ctx.ActiveTextureUnit][target] = texture
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml
@@ -2153,17 +2290,18 @@ cmd void glTexImage2D(TextureImageTarget target,
                       TexturePointer     data) {
     assert(internal_format == format)
     assert(border == 0)
+    ctx := GetContext()
     switch(target) {
         case GL_TEXTURE_2D: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_2D]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             t.Texture2D[level] = l
@@ -2173,15 +2311,15 @@ cmd void glTexImage2D(TextureImageTarget target,
         }
         case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
              GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             cube := t.Cubemap[level]
@@ -2204,19 +2342,20 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                          TexelFormat        format,
                          TexelType          type,
                          TexturePointer     data) {
+    ctx := GetContext()
     // TODO: This does not consider xoffset or yoffset and completely replaces the level.
     // FIX.
     switch(target) {
         case GL_TEXTURE_2D: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_2D]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             t.Texture2D[level] = l
@@ -2226,15 +2365,15 @@ cmd void glTexSubImage2D(TextureImageTarget target,
         }
         case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
              GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             cube := t.Cubemap[level]
@@ -2279,17 +2418,18 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                                 s32                   image_size,
                                 TexturePointer        data) {
     assert(border == 0)
+    ctx := GetContext()
     switch(target) {
         case GL_TEXTURE_2D: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_2D]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             t.Texture2D[level] = l
@@ -2299,15 +2439,15 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
         }
         case GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
              GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: {
-            id := TextureUnits[ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
-            t  := Instances.Textures[id]
+            id := ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP]
+            t  := ctx.Instances.Textures[id]
             l  := Image {
                 Width:  width,
                 Height: height,
                 Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+            if (ctx.BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             cube := t.Cubemap[level]
@@ -2350,23 +2490,25 @@ cmd void glReadPixels(s32              x,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
 cmd void glGenFramebuffers(s32 count, inout array<FramebufferId> framebuffers) {
     assert len(framebuffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
         id := ? as FramebufferId
-        Instances.Framebuffers[id] = new Framebuffer{}
+        ctx.Instances.Framebuffers[id] = new Framebuffer{}
         framebuffers[i] = id
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml
 cmd void glBindFramebuffer(FramebufferTarget target, FramebufferId framebuffer) {
-    if !(framebuffer in Instances.Framebuffers) {
-        Instances.Framebuffers[framebuffer] = new Framebuffer{}
+    ctx := GetContext()
+    if !(framebuffer in ctx.Instances.Framebuffers) {
+        ctx.Instances.Framebuffers[framebuffer] = new Framebuffer{}
     }
     if target == GL_FRAMEBUFFER {
-        BoundFramebuffers[GL_READ_FRAMEBUFFER] = framebuffer
-        BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = framebuffer
+        ctx.BoundFramebuffers[GL_READ_FRAMEBUFFER] = framebuffer
+        ctx.BoundFramebuffers[GL_DRAW_FRAMEBUFFER] = framebuffer
     } else {
-        BoundFramebuffers[target] = framebuffer
+        ctx.BoundFramebuffers[target] = framebuffer
     }
 }
 
@@ -2378,32 +2520,36 @@ cmd FramebufferStatus glCheckFramebufferStatus(FramebufferTarget target) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml
 cmd void glDeleteFramebuffers(s32 count, array<FramebufferId> framebuffers) {
     assert len(framebuffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-        Instances.Framebuffers.Delete(framebuffers[i])
+        ctx.Instances.Framebuffers.Delete(framebuffers[i])
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml
 cmd bool glIsFramebuffer(FramebufferId framebuffer) {
-    return framebuffer in Instances.Framebuffers
+    ctx := GetContext()
+    return framebuffer in ctx.Instances.Framebuffers
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml
 cmd void glGenRenderbuffers(s32 count, inout array<RenderbufferId> renderbuffers) {
     assert len(renderbuffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
         id := ? as RenderbufferId
-        Instances.Renderbuffers[id] = new Renderbuffer{}
+        ctx.Instances.Renderbuffers[id] = new Renderbuffer{}
         renderbuffers[i] = id
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml
 cmd void glBindRenderbuffer(RenderbufferTarget target, RenderbufferId renderbuffer) {
-    if !(renderbuffer in Instances.Renderbuffers) {
-      Instances.Renderbuffers[renderbuffer] = new Renderbuffer{}
+    ctx := GetContext()
+    if !(renderbuffer in ctx.Instances.Renderbuffers) {
+      ctx.Instances.Renderbuffers[renderbuffer] = new Renderbuffer{}
     }
-    BoundRenderbuffers[target] = renderbuffer
+    ctx.BoundRenderbuffers[target] = renderbuffer
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml
@@ -2411,8 +2557,9 @@ cmd void glRenderbufferStorage(RenderbufferTarget target,
                                RenderbufferFormat format,
                                s32                width,
                                s32                height) {
-    id := BoundRenderbuffers[target]
-    rb := Instances.Renderbuffers[id]
+    ctx := GetContext()
+    id := ctx.BoundRenderbuffers[target]
+    rb := ctx.Instances.Renderbuffers[id]
     rb.Format = format
     rb.Width  = width
     rb.Height = height
@@ -2421,14 +2568,16 @@ cmd void glRenderbufferStorage(RenderbufferTarget target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml
 cmd void glDeleteRenderbuffers(s32 count, array<RenderbufferId> renderbuffers) {
     assert len(renderbuffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-        Instances.Renderbuffers.Delete(renderbuffers[i])
+        ctx.Instances.Renderbuffers.Delete(renderbuffers[i])
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml
 cmd bool glIsRenderbuffer(RenderbufferId renderbuffer) {
-    return renderbuffer in Instances.Renderbuffers
+    ctx := GetContext()
+    return renderbuffer in ctx.Instances.Renderbuffers
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml
@@ -2436,8 +2585,9 @@ cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
                                       RenderbufferParameter parameter,
                                       inout array<s32> values) {
     assert len(values) >= 1
-    id := BoundRenderbuffers[target]
-    rb := Instances.Renderbuffers[id]
+    ctx := GetContext()
+    id := ctx.BoundRenderbuffers[target]
+    rb := ctx.Instances.Renderbuffers[id]
     values[0] = switch (parameter) {
       case GL_RENDERBUFFER_WIDTH:           rb.Width
       case GL_RENDERBUFFER_HEIGHT:          rb.Height
@@ -2455,25 +2605,28 @@ cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml
 cmd void glGenBuffers(s32 count, inout array<BufferId> buffers) {
     assert len(buffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
         id := ? as BufferId
-        Instances.Buffers[id] = new Buffer{}
+        ctx.Instances.Buffers[id] = new Buffer{}
         buffers[i] = id
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml
 cmd void glBindBuffer(BufferTarget target, BufferId buffer) {
-    if !(buffer in Instances.Buffers) {
-        Instances.Buffers[buffer] = new Buffer{}
+    ctx := GetContext()
+    if !(buffer in ctx.Instances.Buffers) {
+        ctx.Instances.Buffers[buffer] = new Buffer{}
     }
-    BoundBuffers[target] = buffer
+    ctx.BoundBuffers[target] = buffer
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml
 cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, BufferUsage usage) {
-    id := BoundBuffers[target]
-    b  := Instances.Buffers[id]
+    ctx := GetContext()
+    id := ctx.BoundBuffers[target]
+    b  := ctx.Instances.Buffers[id]
     if data != null {
         memcpy(b.Data, data, size as u32)
     }
@@ -2490,22 +2643,25 @@ cmd void glBufferSubData(BufferTarget target, s32 offset, s32 size, pointer data
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml
 cmd void glDeleteBuffers(s32 count, array<BufferId> buffers) {
     assert len(buffers) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-        Instances.Buffers.Delete(buffers[i])
+        ctx.Instances.Buffers.Delete(buffers[i])
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml
 cmd bool glIsBuffer(BufferId buffer) {
-    return buffer in Instances.Buffers
+    ctx := GetContext()
+    return buffer in ctx.Instances.Buffers
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml
 cmd void glGetBufferParameteriv(BufferTarget    target,
                                 BufferParameter parameter,
                                 out s32         value) {
-    id := BoundBuffers[target]
-    b  := Instances.Buffers[id]
+    ctx := GetContext()
+    id := ctx.BoundBuffers[target]
+    b  := ctx.Instances.Buffers[id]
     value = switch (parameter) {
       case GL_BUFFER_SIZE:  b.Size as s32
       case GL_BUFFER_USAGE: b.Usage as s32
@@ -2514,26 +2670,29 @@ cmd void glGetBufferParameteriv(BufferTarget    target,
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml
 cmd ShaderId glCreateShader(ShaderType type) {
+    ctx := GetContext()
     id := ? as ShaderId
-    Instances.Shaders[id] = new Shader{}
-    s := Instances.Shaders[id]
+    ctx.Instances.Shaders[id] = new Shader{}
+    s := ctx.Instances.Shaders[id]
     s.Type = type
     return id
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml
 cmd void glDeleteShader(ShaderId shader) {
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    s := ctx.Instances.Shaders[shader]
     s.Deletable = true
     // TODO: refcount shader attachment and only destroy if zero
-    Instances.Shaders.Delete(shader)
+    ctx.Instances.Shaders.Delete(shader)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml
 cmd void glShaderSource(ShaderId shader, s32 count, array<string> source, array<s32> length) {
     assert len(source) >= count
     assert len(length) >= count
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    s := ctx.Instances.Shaders[shader]
     s.Source = source
 }
 
@@ -2556,7 +2715,8 @@ cmd void glGetShaderInfoLog(ShaderId   shader,
                             out s32    string_length_written,
                             out string info) {
     assert len(info) >= buffer_length
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    s := ctx.Instances.Shaders[shader]
     string_length_written = min(buffer_length, strlen(s.InfoLog))
     info = substr(s.InfoLog, 0, string_length_written)
 }
@@ -2567,7 +2727,8 @@ cmd void glGetShaderSource(ShaderId   shader,
                            out s32    string_length_written,
                            out string source) {
     assert len(source) >= buffer_length
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    s := ctx.Instances.Shaders[shader]
     // TODO: Concatenate shader.Source[] instead of using shader.Source[0].
     string_length_written = min(buffer_length, strlen(s.Source[0]))
     source = substr(s.Source[0], 0, string_length_written)
@@ -2584,32 +2745,37 @@ cmd void glCompileShader(ShaderId shader) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml
 cmd bool glIsShader(ShaderId shader) {
-    return shader in Instances.Shaders
+    ctx := GetContext()
+    return shader in ctx.Instances.Shaders
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml
 cmd ProgramId glCreateProgram() {
+    ctx := GetContext()
     id := ? as ProgramId
-    Instances.Programs[id] = new Program{}
+    ctx.Instances.Programs[id] = new Program{}
     return id
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml
 cmd void glDeleteProgram(ProgramId program) {
-    Instances.Programs.Delete(program)
+    ctx := GetContext()
+    ctx.Instances.Programs.Delete(program)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml
 cmd void glAttachShader(ProgramId program, ShaderId shader) {
-    p := Instances.Programs[program]
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    p := ctx.Instances.Programs[program]
+    s := ctx.Instances.Shaders[shader]
     p.Shaders[s.Type] = shader
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml
 cmd void glDetachShader(ProgramId program, ShaderId shader) {
-    p := Instances.Programs[program]
-    s := Instances.Shaders[shader]
+    ctx := GetContext()
+    p := ctx.Instances.Programs[program]
+    s := ctx.Instances.Shaders[shader]
     p.Shaders.Delete(s.Type)
 }
 
@@ -2619,7 +2785,8 @@ cmd void glGetAttachedShaders(ProgramId             program,
                               out s32               shaders_length_written,
                               inout array<ShaderId> shaders) {
     assert len(shaders) >= buffer_length
-    p := Instances.Programs[program]
+    ctx := GetContext()
+    p := ctx.Instances.Programs[program]
     shaders_length_written = min(buffer_length, len(p.Shaders))
     shaders = p.Shaders.Range()
 }
@@ -2638,19 +2805,22 @@ cmd void glGetProgramInfoLog(ProgramId  program,
                              out s32    string_length_written,
                              out string info) {
     assert len(info) >= buffer_length
-    p := Instances.Programs[program]
+    ctx := GetContext()
+    p := ctx.Instances.Programs[program]
     string_length_written = min(buffer_length, strlen(p.InfoLog))
     info = substr(p.InfoLog, 0, string_length_written)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml
 cmd void glUseProgram(ProgramId program) {
-    BoundProgram = program
+    ctx := GetContext()
+    ctx.BoundProgram = program
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml
 cmd bool glIsProgram(ProgramId program) {
-    return program in Instances.Programs
+    ctx := GetContext()
+    return program in ctx.Instances.Programs
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml
@@ -2659,7 +2829,8 @@ cmd void glValidateProgram(ProgramId program) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml
 cmd void glClearColor(f32 r, f32 g, f32 b, f32 a) {
-    Clearing.ClearColor = Color{
+    ctx := GetContext()
+    ctx.Clearing.ClearColor = Color{
       Red:   r,
       Green: g,
       Blue:  b,
@@ -2669,12 +2840,14 @@ cmd void glClearColor(f32 r, f32 g, f32 b, f32 a) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml
 cmd void glClearDepthf(f32 depth) {
-    Clearing.ClearDepth = depth
+    ctx := GetContext()
+    ctx.Clearing.ClearDepth = depth
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml
 cmd void glClearStencil(s32 stencil) {
-    Clearing.ClearStencil = stencil
+    ctx := GetContext()
+    ctx.Clearing.ClearStencil = stencil
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml
@@ -2689,29 +2862,34 @@ cmd void glClear(ClearMask mask) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml
 cmd void glCullFace(FaceMode mode) {
-    Rasterizing.CullFace = mode
+    ctx := GetContext()
+    ctx.Rasterizing.CullFace = mode
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml
 cmd void glPolygonOffset(f32 scale_factor, f32 units) {
-    Rasterizing.PolygonOffsetUnits  = units
-    Rasterizing.PolygonOffsetFactor = scale_factor
+    ctx := GetContext()
+    ctx.Rasterizing.PolygonOffsetUnits  = units
+    ctx.Rasterizing.PolygonOffsetFactor = scale_factor
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml
 cmd void glLineWidth(f32 width) {
-    Rasterizing.LineWidth = width
+    ctx := GetContext()
+    ctx.Rasterizing.LineWidth = width
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml
 cmd void glSampleCoverage(f32 value, bool invert) {
-    Rasterizing.SampleCoverageValue  = value
-    Rasterizing.SampleCoverageInvert = invert
+    ctx := GetContext()
+    ctx.Rasterizing.SampleCoverageValue  = value
+    ctx.Rasterizing.SampleCoverageInvert = invert
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml
 cmd void glHint(HintTarget target, HintMode mode) {
-    GenerateMipmapHint = mode
+    ctx := GetContext()
+    ctx.GenerateMipmapHint = mode
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml
@@ -2719,15 +2897,16 @@ cmd void glFramebufferRenderbuffer(FramebufferTarget     framebuffer_target,
                                    FramebufferAttachment framebuffer_attachment,
                                    RenderbufferTarget    renderbuffer_target,
                                    RenderbufferId        renderbuffer) {
+    ctx := GetContext()
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
     }
-    framebufferId := BoundFramebuffers[target]
-    framebuffer   := Instances.Framebuffers[framebufferId]
+    framebufferId := ctx.BoundFramebuffers[target]
+    framebuffer   := ctx.Instances.Framebuffers[framebufferId]
     attachment    := framebuffer.Attachments[framebuffer_attachment]
-    if (renderbuffer == Internals.NilRenderbuffer) {
+    if (renderbuffer == 0) {
       attachment.Type = GL_NONE
     } else {
       attachment.Type = GL_RENDERBUFFER
@@ -2744,17 +2923,18 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
                                 TextureImageTarget    texture_target,
                                 TextureId             texture,
                                 s32                   level) {
+    ctx := GetContext()
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
     }
-    framebufferId := BoundFramebuffers[target]
-    framebuffer   := Instances.Framebuffers[framebufferId]
+    framebufferId := ctx.BoundFramebuffers[target]
+    framebuffer   := ctx.Instances.Framebuffers[framebufferId]
     attachment    := framebuffer.Attachments[framebuffer_attachment]
-    if (texture == Internals.NilTexture) {
+    if (texture == 0) {
       attachment.Type         = GL_NONE
-      attachment.Object       = Internals.NilTexture as u32
+      attachment.Object       = 0
       attachment.TextureLevel = 0
       attachment.CubeMapFace  = GL_TEXTURE_CUBE_MAP_POSITIVE_X
     } else {
@@ -2780,13 +2960,14 @@ cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              fr
                                                FramebufferAttachmentParameter parameter,
                                                inout array<s32>               value) {
     assert len(value) >= 1
+    ctx := GetContext()
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_DRAW_FRAMEBUFFER: GL_DRAW_FRAMEBUFFER as FramebufferTarget
         case GL_READ_FRAMEBUFFER: GL_READ_FRAMEBUFFER as FramebufferTarget
     }
-    framebufferId := BoundFramebuffers[target]
-    framebuffer   := Instances.Framebuffers[framebufferId]
+    framebufferId := ctx.BoundFramebuffers[target]
+    framebuffer   := ctx.Instances.Framebuffers[framebufferId]
     a             := framebuffer.Attachments[attachment]
     value[0] = switch (parameter) {
       case GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE:           a.Type         as s32
@@ -2796,15 +2977,18 @@ cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              fr
     }
 }
 
-macro void ReadVertexArrays(u32 first_index, u32 index_count) {
-    for i in (0 .. len(VertexAttributeArrays)) {
-        arr := VertexAttributeArrays[i as AttributeLocation]
-        if arr.Enabled {
-            elsize := vertexAttribTypeSize(arr.Type) * arr.Size // TODO: Stride
-            size   := elsize * index_count
-            offset := elsize * first_index
-            if arr.Buffer == 0 {
-                read(arr.Pointer, offset, size)
+macro void ReadVertexArrays(ptr<Context> ctx, u32 first_index, u32 last_index) {
+    for i in (0 .. len(ctx.VertexAttributeArrays)) { // TODO: HACK: We need to iterate a map.
+        arr := ctx.VertexAttributeArrays[i as AttributeLocation]
+        if arr.Enabled && arr.Buffer == 0 {
+            elsize := vertexAttribTypeSize(arr.Type) * arr.Size
+            elstride := switch (arr.Stride == 0) {
+                case true:  elsize
+                case false: arr.Stride as u32
+            }
+            for v in (first_index .. (last_index + 1)) {
+                offset := elstride * v
+                read(arr.Pointer, offset, elsize)
             }
         }
     }
@@ -2828,9 +3012,10 @@ cmd void glDrawElements(DrawMode       draw_mode,
                         s32            element_count,
                         IndicesType    indices_type,
                         IndicesPointer indices) {
-    id := BoundBuffers[GL_ELEMENT_ARRAY_BUFFER]
-    index_data := switch (id != Internals.NilBuffer) {
-        case true:  memoryOffset(Instances.Buffers[id].Data, indices as u64)
+    ctx := GetContext()
+    id := ctx.BoundBuffers[GL_ELEMENT_ARRAY_BUFFER]
+    index_data := switch (id != 0) {
+        case true:  memoryOffset(ctx.Instances.Buffers[id].Data, indices as u64)
         case false: indices as pointer
     }
 
@@ -2841,13 +3026,15 @@ cmd void glDrawElements(DrawMode       draw_mode,
     first := minIndex(index_data, indices_type, element_count as u32)
     last  := maxIndex(index_data, indices_type, element_count as u32)
 
-    ReadVertexArrays(first, last - first)
+    ReadVertexArrays(ctx, first, last)
 }
 
 @DrawCall
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml
 cmd void glDrawArrays(DrawMode draw_mode, s32 first_index, s32 index_count) {
-    ReadVertexArrays(first_index as u32, index_count as u32)
+    ctx := GetContext()
+    last_index := first_index + index_count - 1
+    ReadVertexArrays(ctx, first_index as u32, last_index as u32)
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml
@@ -2861,36 +3048,37 @@ cmd void glFinish() {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetBooleanv(StateVariable param, inout array<bool> values) {
     assert len(values) >= stateVariableSize(param)
+    ctx := GetContext()
     switch (param) {
       case GL_BLEND:
-        values[0] = Capabilities[GL_BLEND]
+        values[0] = ctx.Capabilities[GL_BLEND]
       case GL_CULL_FACE:
-        values[0] = Capabilities[GL_CULL_FACE]
+        values[0] = ctx.Capabilities[GL_CULL_FACE]
       case GL_DEPTH_TEST:
-        values[0] = Capabilities[GL_DEPTH_TEST]
+        values[0] = ctx.Capabilities[GL_DEPTH_TEST]
       case GL_DITHER:
-        values[0] = Capabilities[GL_DITHER]
+        values[0] = ctx.Capabilities[GL_DITHER]
       case GL_POLYGON_OFFSET_FILL:
-        values[0] = Capabilities[GL_POLYGON_OFFSET_FILL]
+        values[0] = ctx.Capabilities[GL_POLYGON_OFFSET_FILL]
       case GL_SAMPLE_ALPHA_TO_COVERAGE:
-        values[0] = Capabilities[GL_SAMPLE_ALPHA_TO_COVERAGE]
+        values[0] = ctx.Capabilities[GL_SAMPLE_ALPHA_TO_COVERAGE]
       case GL_SAMPLE_COVERAGE:
-        values[0] = Capabilities[GL_SAMPLE_COVERAGE]
+        values[0] = ctx.Capabilities[GL_SAMPLE_COVERAGE]
       case GL_SCISSOR_TEST:
-        values[0] = Capabilities[GL_SCISSOR_TEST]
+        values[0] = ctx.Capabilities[GL_SCISSOR_TEST]
       case GL_STENCIL_TEST:
-        values[0] = Capabilities[GL_STENCIL_TEST]
+        values[0] = ctx.Capabilities[GL_STENCIL_TEST]
 
       case GL_DEPTH_WRITEMASK:
-        values[0] = Rasterizing.DepthMask
+        values[0] = ctx.Rasterizing.DepthMask
       case GL_COLOR_WRITEMASK: {
-        values[0] = Rasterizing.ColorMaskRed
-        values[1] = Rasterizing.ColorMaskGreen
-        values[2] = Rasterizing.ColorMaskBlue
-        values[3] = Rasterizing.ColorMaskAlpha
+        values[0] = ctx.Rasterizing.ColorMaskRed
+        values[1] = ctx.Rasterizing.ColorMaskGreen
+        values[2] = ctx.Rasterizing.ColorMaskBlue
+        values[3] = ctx.Rasterizing.ColorMaskAlpha
       }
       case GL_SAMPLE_COVERAGE_INVERT:
-        values[0] = Rasterizing.SampleCoverageInvert
+        values[0] = ctx.Rasterizing.SampleCoverageInvert
       case GL_SHADER_COMPILER:
         values[0] = ?
       case GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT:
@@ -2905,27 +3093,28 @@ cmd void glGetBooleanv(StateVariable param, inout array<bool> values) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetFloatv(StateVariable param, inout array<f32> values) {
     assert len(values) >= stateVariableSize(param)
+    ctx := GetContext()
     switch (param) {
       case GL_DEPTH_RANGE: {
-        values[0] = Rasterizing.DepthNear
-        values[1] = Rasterizing.DepthFar
+        values[0] = ctx.Rasterizing.DepthNear
+        values[1] = ctx.Rasterizing.DepthFar
       }
       case GL_LINE_WIDTH:
-        values[0] = Rasterizing.LineWidth
+        values[0] = ctx.Rasterizing.LineWidth
       case GL_POLYGON_OFFSET_FACTOR:
-        values[0] = Rasterizing.PolygonOffsetFactor
+        values[0] = ctx.Rasterizing.PolygonOffsetFactor
       case GL_POLYGON_OFFSET_UNITS:
-        values[0] = Rasterizing.PolygonOffsetUnits
+        values[0] = ctx.Rasterizing.PolygonOffsetUnits
       case GL_SAMPLE_COVERAGE_VALUE:
-        values[0] = Rasterizing.SampleCoverageValue
+        values[0] = ctx.Rasterizing.SampleCoverageValue
       case GL_COLOR_CLEAR_VALUE: {
-        values[0] = Clearing.ClearColor.Red
-        values[1] = Clearing.ClearColor.Green
-        values[2] = Clearing.ClearColor.Blue
-        values[3] = Clearing.ClearColor.Alpha
+        values[0] = ctx.Clearing.ClearColor.Red
+        values[1] = ctx.Clearing.ClearColor.Green
+        values[2] = ctx.Clearing.ClearColor.Blue
+        values[3] = ctx.Clearing.ClearColor.Alpha
       }
       case GL_DEPTH_CLEAR_VALUE:
-        values[0] = Clearing.ClearDepth
+        values[0] = ctx.Clearing.ClearDepth
       case GL_ALIASED_LINE_WIDTH_RANGE: {
         values[0] = ?  /* smallest */
         values[1] = ?  /* largest */
@@ -2945,71 +3134,72 @@ cmd void glGetFloatv(StateVariable param, inout array<f32> values) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
 cmd void glGetIntegerv(StateVariable param, inout array<s32> values) {
     assert len(values) >= stateVariableSize(param)
+    ctx := GetContext()
     switch (param) {
       case GL_ACTIVE_TEXTURE:
-        values[0] = ActiveTextureUnit as s32
+        values[0] = ctx.ActiveTextureUnit as s32
       case GL_ARRAY_BUFFER_BINDING:
-        values[0] = BoundBuffers[GL_ARRAY_BUFFER] as s32
+        values[0] = ctx.BoundBuffers[GL_ARRAY_BUFFER] as s32
       case GL_ELEMENT_ARRAY_BUFFER_BINDING:
-        values[0] = BoundBuffers[GL_ELEMENT_ARRAY_BUFFER] as s32
+        values[0] = ctx.BoundBuffers[GL_ELEMENT_ARRAY_BUFFER] as s32
       case GL_BLEND_SRC_ALPHA:
-        values[0] = Blending.SrcAlphaBlendFactor as s32
+        values[0] = ctx.Blending.SrcAlphaBlendFactor as s32
       case GL_BLEND_SRC_RGB:
-        values[0] = Blending.SrcRgbBlendFactor as s32
+        values[0] = ctx.Blending.SrcRgbBlendFactor as s32
       case GL_BLEND_DST_ALPHA:
-        values[0] = Blending.DstAlphaBlendFactor as s32
+        values[0] = ctx.Blending.DstAlphaBlendFactor as s32
       case GL_BLEND_DST_RGB:
-        values[0] = Blending.DstRgbBlendFactor as s32
+        values[0] = ctx.Blending.DstRgbBlendFactor as s32
       case GL_BLEND_EQUATION_RGB:
-        values[0] = Blending.BlendEquationRgb as s32
+        values[0] = ctx.Blending.BlendEquationRgb as s32
       case GL_BLEND_EQUATION_ALPHA:
-        values[0] = Blending.BlendEquationAlpha as s32
+        values[0] = ctx.Blending.BlendEquationAlpha as s32
       case GL_BLEND_COLOR: {
-        values[0] = Blending.BlendColor.Red as s32
-        values[1] = Blending.BlendColor.Green as s32
-        values[2] = Blending.BlendColor.Blue as s32
-        values[3] = Blending.BlendColor.Alpha as s32
+        values[0] = ctx.Blending.BlendColor.Red as s32
+        values[1] = ctx.Blending.BlendColor.Green as s32
+        values[2] = ctx.Blending.BlendColor.Blue as s32
+        values[3] = ctx.Blending.BlendColor.Alpha as s32
       }
       case GL_DEPTH_FUNC:
-        values[0] = Rasterizing.DepthTestFunction as s32
+        values[0] = ctx.Rasterizing.DepthTestFunction as s32
       case GL_DEPTH_CLEAR_VALUE:
-        values[0] = Clearing.ClearDepth as s32
+        values[0] = ctx.Clearing.ClearDepth as s32
       case GL_STENCIL_WRITEMASK:
-        values[0] = Rasterizing.StencilMask[GL_FRONT] as s32
+        values[0] = ctx.Rasterizing.StencilMask[GL_FRONT] as s32
       case GL_STENCIL_BACK_WRITEMASK:
-        values[0] = Rasterizing.StencilMask[GL_BACK] as s32
+        values[0] = ctx.Rasterizing.StencilMask[GL_BACK] as s32
       case GL_VIEWPORT: {
-        values[0] = Rasterizing.Viewport.X
-        values[1] = Rasterizing.Viewport.Y
-        values[2] = Rasterizing.Viewport.Width
-        values[3] = Rasterizing.Viewport.Height
+        values[0] = ctx.Rasterizing.Viewport.X
+        values[1] = ctx.Rasterizing.Viewport.Y
+        values[2] = ctx.Rasterizing.Viewport.Width
+        values[3] = ctx.Rasterizing.Viewport.Height
       }
       case GL_SCISSOR_BOX: {
-        values[0] = Rasterizing.Scissor.X
-        values[1] = Rasterizing.Scissor.Y
-        values[2] = Rasterizing.Scissor.Width
-        values[3] = Rasterizing.Scissor.Height
+        values[0] = ctx.Rasterizing.Scissor.X
+        values[1] = ctx.Rasterizing.Scissor.Y
+        values[2] = ctx.Rasterizing.Scissor.Width
+        values[3] = ctx.Rasterizing.Scissor.Height
       }
       case GL_FRONT_FACE:
-        values[0] = Rasterizing.FrontFace as s32
+        values[0] = ctx.Rasterizing.FrontFace as s32
       case GL_CULL_FACE_MODE:
-        values[0] = Rasterizing.CullFace as s32
+        values[0] = ctx.Rasterizing.CullFace as s32
       case GL_STENCIL_CLEAR_VALUE:
-        values[0] = Clearing.ClearStencil
+        values[0] = ctx.Clearing.ClearStencil
       case GL_FRAMEBUFFER_BINDING:
-        values[0] = BoundFramebuffers[GL_FRAMEBUFFER] as s32
+        values[0] = ctx.BoundFramebuffers[GL_FRAMEBUFFER] as s32
       case GL_READ_FRAMEBUFFER_BINDING:
-        values[0] = BoundFramebuffers[GL_READ_FRAMEBUFFER] as s32
+        values[0] = ctx.BoundFramebuffers[GL_READ_FRAMEBUFFER] as s32
       case GL_RENDERBUFFER_BINDING:
-        values[0] = BoundRenderbuffers[GL_RENDERBUFFER] as s32
+        values[0] = ctx.BoundRenderbuffers[GL_RENDERBUFFER] as s32
       case GL_CURRENT_PROGRAM:
-        values[0] = BoundProgram as s32
+        values[0] = ctx.BoundProgram as s32
       case GL_TEXTURE_BINDING_2D:
-        values[0] = TextureUnits[ActiveTextureUnit][GL_TEXTURE_2D] as s32
+        values[0] = ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_2D] as s32
       case GL_TEXTURE_BINDING_CUBE_MAP:
-        values[0] = TextureUnits[ActiveTextureUnit][GL_TEXTURE_CUBE_MAP] as s32
+        values[0] = ctx.TextureUnits[ctx.ActiveTextureUnit][GL_TEXTURE_CUBE_MAP] as s32
       case GL_GENERATE_MIPMAP_HINT:
-        values[0] = GenerateMipmapHint as s32
+        values[0] = ctx.GenerateMipmapHint as s32
       case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
         values[0] = ?
         assert(values[0] > 7)
@@ -3050,9 +3240,9 @@ cmd void glGetIntegerv(StateVariable param, inout array<s32> values) {
       }
       case GL_MAX_VIEWPORT_DIMS: {
         values[0] = ?  /* max width */
-        assert(values[0] > Rasterizing.Viewport.Width-1)
+        assert(values[0] > ctx.Rasterizing.Viewport.Width-1)
         values[1] = ?  /* max height */
-        assert(values[1] > Rasterizing.Viewport.Height-1)
+        assert(values[1] > ctx.Rasterizing.Viewport.Height-1)
       }
       case GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
         values[0] = ?
@@ -3063,9 +3253,9 @@ cmd void glGetIntegerv(StateVariable param, inout array<s32> values) {
         assert(values[0] > -1)
       }
       case GL_PACK_ALIGNMENT:
-        values[0] = PixelStorage[GL_PACK_ALIGNMENT]
+        values[0] = ctx.PixelStorage[GL_PACK_ALIGNMENT]
       case GL_UNPACK_ALIGNMENT:
-        values[0] = PixelStorage[GL_UNPACK_ALIGNMENT]
+        values[0] = ctx.PixelStorage[GL_UNPACK_ALIGNMENT]
       case GL_ALPHA_BITS:
         values[0] = ?
       case GL_BLUE_BITS:
@@ -3128,17 +3318,20 @@ cmd string glGetString(StringConstant param) {
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml
 cmd void glEnable(Capability capability) {
-    Capabilities[capability] = true
+    ctx := GetContext()
+    ctx.Capabilities[capability] = true
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml
 cmd void glDisable(Capability capability) {
-    Capabilities[capability] = false
+    ctx := GetContext()
+    ctx.Capabilities[capability] = false
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml
 cmd bool glIsEnabled(Capability capability) {
-    return Capabilities[capability]
+    ctx := GetContext()
+    return ctx.Capabilities[capability]
 }
 
 /////////////////////////////////////////////////////////////////
@@ -3218,9 +3411,10 @@ cmd void glBlitFramebuffer(s32               srcX0,
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml
 cmd void glGenQueries(s32 count, inout array<QueryId> queries) {
     assert len(queries) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
       id := ? as QueryId
-      Instances.Queries[id] = new Query{}
+      ctx.Instances.Queries[id] = new Query{}
       queries[i] = id
     }
 }
@@ -3236,14 +3430,16 @@ cmd void glEndQuery(QueryTarget target) {
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml
 cmd void glDeleteQueries(s32 count, array<QueryId> queries) {
     assert len(queries) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-      Instances.Queries.Delete(queries[i])
+      ctx. Instances.Queries.Delete(queries[i])
     }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml
 cmd bool glIsQuery(QueryId query) {
-    return query in Instances.Queries
+    ctx := GetContext()
+    return query in ctx.Instances.Queries
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml
@@ -3261,9 +3457,10 @@ cmd void glGetQueryObjectuiv(QueryId query, QueryObjectParameter parameter, out 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glGenQueriesEXT(s32 count, inout array<QueryId> queries) {
     assert len(queries) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
         id := ? as QueryId
-        Instances.Queries[id] = new Query{}
+        ctx.Instances.Queries[id] = new Query{}
         queries[i] = id
     }
 }
@@ -3279,14 +3476,16 @@ cmd void glEndQueryEXT(QueryTarget target) {
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd void glDeleteQueriesEXT(s32 count, array<QueryId> queries) {
     assert len(queries) >= count
+    ctx := GetContext()
     for i in (0 .. count) {
-        Instances.Queries.Delete(queries[i])
+        ctx.Instances.Queries.Delete(queries[i])
     }
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
 cmd bool glIsQueryEXT(QueryId query) {
-    return query in Instances.Queries
+    ctx := GetContext()
+    return query in ctx.Instances.Queries
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt

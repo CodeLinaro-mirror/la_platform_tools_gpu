@@ -18,6 +18,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
 const TypeIDResource TypeID = 0xfffd
@@ -40,6 +41,18 @@ func (a *Resource) String() string {
 }
 
 // Atom compliance
-func (a *Resource) TypeID() TypeID       { return TypeIDResource }
-func (a *Resource) ContextID() ContextID { return 0 }
-func (a *Resource) Flags() Flags         { return 0 }
+func (a *Resource) API() gfxapi.API {
+	return nil
+}
+
+func (a *Resource) TypeID() TypeID {
+	return TypeIDResource
+}
+
+func (a *Resource) Flags() Flags {
+	return 0
+}
+
+func (a *Resource) Mutate(s *gfxapi.State) error {
+	return nil
+}

@@ -22,31 +22,28 @@ limitations under the License.
     "log"
 
     "android.googlesource.com/platform/tools/gpu/atom"
-    "android.googlesource.com/platform/tools/gpu/gfxapi/state"
+    "android.googlesource.com/platform/tools/gpu/gfxapi"
     "android.googlesource.com/platform/tools/gpu/memory"
   )
 
-  func getState(a atom.Atom, s *state.State) *State {
-    id := a.ContextID()
-    if state, ok := s.Contexts[id].(*State); ok {
+  func getState(s *gfxapi.State) *State {
+    api := API()
+    if state, ok := s.APIs[api].(*State); ok {
       return state
     } else {
-      panic(fmt.Errorf("State for atom %T with context id %d was %T, expected *{{Global "API"}}.State",
-        a, id, s.Contexts[id]))
+      if s.APIs == nil {
+        s.APIs = make(map[gfxapi.API]interface{})
+      }
+      state = &State{}
+      state.Init()
+      s.APIs[api] = state
+      return state
     }
   }
 ¶
   {{range $c := AllCommands $}}
-    func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *state.State) error {
-      {{if $c.GetAnnotation "synthetic"}}
-        ϟc := &State{}
-        {{if $c.GetAnnotation "initializer"}}
-          ϟc.Init()
-          ϟs.Contexts[ϟa.ContextID()] = ϟc
-        {{end}}
-      {{else}}
-        ϟc := getState(ϟa, ϟs)
-      {{end}}
+    func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State) error {
+      ϟc := getState(ϟs)
       ϟo := {{Macro "Go.CmdName" $c}}{}
       {{/* Construct slices large enough to hold all simulated output */}}
       {{range $p := $c.FullParameters}}

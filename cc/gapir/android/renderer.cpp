@@ -26,30 +26,47 @@ namespace {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height, int depthSize, int stencilSize);
+    RendererImpl();
     virtual ~RendererImpl() override;
 
+    virtual void setBackbuffer(int width, int height, int depthSize, int stencilSize);
+    virtual void bind() override;
+    virtual void unbind() override;
     virtual const char* name() override;
     virtual const char* extensions() override;
     virtual const char* vendor() override;
     virtual const char* version() override;
 
 private:
-    EGLContext mEglContext;
-    EGLSurface mEglSurface;
-    EGLDisplay mEglDisplay;
+    void reset();
+
+    int mWidth;
+    int mHeight;
+    int mDepthSize;
+    int mStencilSize;
+    bool mBound;
+
+    EGLContext mContext;
+    EGLSurface mSurface;
+    EGLDisplay mDisplay;
 };
 
-RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
-    EGLint error;
+RendererImpl::RendererImpl()
+        : mWidth(0)
+        , mHeight(0)
+        , mDepthSize(0)
+        , mStencilSize(0)
+        , mBound(false)
+        , mContext(EGL_NO_CONTEXT)
+        , mSurface(EGL_NO_SURFACE) {
 
-    mEglDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-    error = eglGetError();
+    mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+    EGLint error = eglGetError();
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to get EGL display: %d\n", error);
     }
 
-    eglInitialize(mEglDisplay, nullptr, nullptr);
+    eglInitialize(mDisplay, nullptr, nullptr);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to initialize EGL: %d\n", error);
@@ -60,6 +77,67 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to bind EGL API: %d\n", error);
     }
+
+    // Initialize with a default target.
+    setBackbuffer(8, 8, 24, 8);
+}
+
+RendererImpl::~RendererImpl() {
+    reset();
+
+    eglTerminate(mDisplay);
+    EGLint error = eglGetError();
+    if (error != EGL_SUCCESS) {
+        GAPID_WARNING("Failed to terminate EGL: %d\n", error);
+    }
+
+    eglReleaseThread();
+    error = eglGetError();
+    if (error != EGL_SUCCESS) {
+        GAPID_WARNING("Failed to release EGL thread: %d\n", error);
+    }
+}
+
+void RendererImpl::reset() {
+    unbind();
+
+    if (mSurface != EGL_NO_SURFACE) {
+        eglDestroySurface(mDisplay, mSurface);
+        EGLint error = eglGetError();
+        if (error != EGL_SUCCESS) {
+            GAPID_WARNING("Failed to destroy EGL surface: %d\n", error);
+        }
+        mSurface = EGL_NO_SURFACE;
+    }
+
+    if (mContext != EGL_NO_CONTEXT) {
+        eglDestroyContext(mDisplay, mContext);
+        EGLint error = eglGetError();
+        if (error != EGL_SUCCESS) {
+            GAPID_WARNING("Failed to destroy EGL context: %d\n", error);
+        }
+        mContext = EGL_NO_CONTEXT;
+    }
+
+    mWidth = 0;
+    mHeight = 0;
+    mDepthSize = 0;
+    mStencilSize = 0;
+}
+
+void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stencilSize) {
+    if (mContext != EGL_NO_CONTEXT &&
+        mWidth == width &&
+        mHeight == height &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+
+        return;
+    }
+
+    const bool wasBound = mBound;
+
+    reset();
 
     // Find a supported EGL context config.
     const int configAttribList[] = {
@@ -76,8 +154,8 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
     };
     int one = 1;
     EGLConfig eglConfig;
-    eglChooseConfig(mEglDisplay, configAttribList, &eglConfig, 1, &one);
-    error = eglGetError();
+    eglChooseConfig(mDisplay, configAttribList, &eglConfig, 1, &one);
+    EGLint error = eglGetError();
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to choose EGL config: %d\n", error);
     }
@@ -87,7 +165,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
         EGL_CONTEXT_CLIENT_VERSION, 2,
         EGL_NONE
     };
-    mEglContext = eglCreateContext(mEglDisplay, eglConfig, EGL_NO_CONTEXT, contextAttribList);
+    mContext = eglCreateContext(mDisplay, eglConfig, EGL_NO_CONTEXT, contextAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to create EGL context: %d\n", error);
@@ -99,76 +177,70 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
         EGL_HEIGHT, height,
         EGL_NONE
     };
-    mEglSurface = eglCreatePbufferSurface(mEglDisplay, eglConfig, surfaceAttribList);
+    mSurface = eglCreatePbufferSurface(mDisplay, eglConfig, surfaceAttribList);
     error = eglGetError();
     if (error != EGL_SUCCESS) {
         GAPID_FATAL("Failed to create EGL pbuffer surface: %d\n", error);
     }
 
-    eglMakeCurrent(mEglDisplay, mEglSurface, mEglSurface, mEglContext);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_FATAL("Failed to make EGL current: %d\n", error);
-    }
+    mWidth = width;
+    mHeight = height;
+    mDepthSize = depthSize;
+    mStencilSize = stencilSize;
 
-    // Initialize the graphics API
-    gfxapi::Initialize();
+    if (wasBound) {
+        bind();
+    }
 }
 
-RendererImpl::~RendererImpl() {
-    EGLint error;
 
-    eglMakeCurrent(mEglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to release EGL context: %d\n", error);
+void RendererImpl::bind() {
+    if (!mBound) {
+        eglMakeCurrent(mDisplay, mSurface, mSurface, mContext);
+        EGLint error = eglGetError();
+        if (error != EGL_SUCCESS) {
+            GAPID_FATAL("Failed to make EGL current: %d\n", error);
+        }
+
+        mBound = true;
+
+        // Initialize the graphics API
+        // TODO: Inefficient - consider moving the imports into this renderer
+        gfxapi::Initialize();
     }
+}
 
-    eglDestroySurface(mEglDisplay, mEglSurface);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to destroy EGL surface: %d\n", error);
-    }
-
-    eglDestroyContext(mEglDisplay, mEglContext);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to destroy EGL context: %d\n", error);
-    }
-
-    eglTerminate(mEglDisplay);
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to terminate EGL: %d\n", error);
-    }
-
-    eglReleaseThread();
-    error = eglGetError();
-    if (error != EGL_SUCCESS) {
-        GAPID_WARNING("Failed to release EGL thread: %d\n", error);
+void RendererImpl::unbind() {
+    if (mBound) {
+        eglMakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        EGLint error = eglGetError();
+        if (error != EGL_SUCCESS) {
+            GAPID_WARNING("Failed to release EGL context: %d\n", error);
+        }
+        mBound = false;
     }
 }
 
 const char* RendererImpl::name() {
-    return eglQueryString(mEglDisplay, EGL_EXTENSIONS);
+    return eglQueryString(mDisplay, EGL_EXTENSIONS);
 }
 
 const char* RendererImpl::extensions() {
-    return eglQueryString(mEglDisplay, EGL_CLIENT_APIS);
+    return eglQueryString(mDisplay, EGL_CLIENT_APIS);
 }
 
 const char* RendererImpl::vendor() {
-    return eglQueryString(mEglDisplay, EGL_VERSION);
+    return eglQueryString(mDisplay, EGL_VERSION);
 }
 
 const char* RendererImpl::version() {
-    return eglQueryString(mEglDisplay, EGL_VENDOR);
+    return eglQueryString(mDisplay, EGL_VENDOR);
 }
 
 } // anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
+Renderer* Renderer::create() {
+    return new RendererImpl();
 }
 
 }  // namespace gapir

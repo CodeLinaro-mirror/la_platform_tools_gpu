@@ -24,6 +24,13 @@
 #include "windows/wgl.h"
 #endif // TARGET_OS
 
+namespace {
+
+const uint32_t EGL_WIDTH  = 0x3057;
+const uint32_t EGL_HEIGHT = 0x3056;
+
+} // anonymous namespace
+
 namespace gapii {
 
 // Use a "localabstract" pipe on Android to prevent depending on the traced application
@@ -42,62 +49,64 @@ Spy::Spy() {
 Spy::~Spy() {
 }
 
-void Spy::init(int32_t width, int32_t height,
-        uint32_t colorFormat, uint32_t depthFormat, uint32_t stencilFormat) {
-    mImports.Resolve();
-    mState.init(width, height, colorFormat, depthFormat, stencilFormat);
-    mEncoder->Uint16(0); // INIT_ID
-    mEncoder->Uint32(0); // ContextID
-    mEncoder->Int32(width);
-    mEncoder->Int32(height);
-    mEncoder->Uint32(colorFormat);
-    mEncoder->Uint32(depthFormat);
-    mEncoder->Uint32(stencilFormat);
+EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
+    EGLBoolean res = GlesSpy::eglInitialize(dpy, major, minor);
+    if (res != 0) {
+        mImports.Resolve();
+    }
+    return res;
 }
 
-EGLBoolean Spy::eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor) {
+EGLBoolean Spy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,
+                               EGLContext context) {
     using namespace RenderbufferFormat;
-    // TODO: Fetch dimensions and formats from OS.
-    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8);
-    return GlesSpy::eglInitialize(dpy, major, minor);
-}
 
-HGLRC Spy::wglCreateContext(HDC hdc) {
-#if TARGET_OS == GAPID_OS_WINDOWS
-    wgl::FramebufferInfo info;
-    wgl::getFramebufferInfo(hdc, info);
-    init(info.width, info.height, info.colorFormat, info.depthFormat, info.stencilFormat);
-#endif // TARGET_OS
-    return GlesSpy::wglCreateContext(hdc);
+    EGLBoolean res = GlesSpy::eglMakeCurrent(display, draw, read, context);
+    if (res != 0 && draw != nullptr) {
+        int width = 0;
+        int height = 0;
+        mImports.eglQuerySurface(display, draw, EGL_WIDTH, &width);
+        mImports.eglQuerySurface(display, draw, EGL_HEIGHT, &height);
+
+        // TODO: Probe formats
+        GlesSpy::backbufferInfo(width, height, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+    }
+
+    return res;
 }
 
 BOOL Spy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
     BOOL res = GlesSpy::wglMakeCurrent(hdc, hglrc);
-    mImports.Resolve();
+    if (res != 0 && hglrc != nullptr) {
+        mImports.Resolve();
+
+#if TARGET_OS == GAPID_OS_WINDOWS
+        wgl::FramebufferInfo info;
+        wgl::getFramebufferInfo(hdc, info);
+        GlesSpy::backbufferInfo(info.width, info.height,
+                info.colorFormat, info.depthFormat, info.stencilFormat, true);
+#endif // TARGET_OS
+    }
+
     return res;
 }
 
-CGLError Spy::CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx) {
+CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
     using namespace RenderbufferFormat;
-    // TODO: Fetch dimensions and formats from OS.
-    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8);
-    return GlesSpy::CGLCreateContext(pix, share, ctx);
+    CGLError err = GlesSpy::CGLSetCurrentContext(ctx);
+    if (err == 0 && ctx != nullptr) {
+        // TODO: Fetch dimensions and formats from OS.
+        GlesSpy::backbufferInfo(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
+    }
+    return err;
 }
 
-GLXContext Spy::glXCreateContext(const void* display, const void* vis,
-                            GLXContext shareList, bool direct) {
+void Spy::glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read,
+                                GLXContext ctx) {
     using namespace RenderbufferFormat;
+    GlesSpy::glXMakeContextCurrent(display, draw, read, ctx);
     // TODO: Fetch dimensions and formats from OS.
-    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8);
-    return GlesSpy::glXCreateContext(display, vis, shareList, direct);
-}
-
-GLXContext Spy::glXCreateNewContext(const void* display, const void* fbconfig,
-                                    uint32_t type, GLXContext shared, bool direct) {
-    using namespace RenderbufferFormat;
-    // TODO: Fetch dimensions and formats from OS.
-    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8);
-    return GlesSpy::glXCreateNewContext(display, fbconfig, type, shared, direct);
+    GlesSpy::backbufferInfo(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8, true);
 }
 
 } // namespace gapii

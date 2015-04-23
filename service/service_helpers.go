@@ -36,8 +36,8 @@ func (r resultGetState) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetHierarchy) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetHierarchy(capture: %v, contextId: %v)",
-		c.capture, c.contextId,
+	fmt.Fprintf(f, "GetHierarchy(capture: %v)",
+		c.capture,
 	)
 }
 func (r resultGetHierarchy) Format(f fmt.State, c rune) {
@@ -52,19 +52,35 @@ func (r resultGetMemoryInfo) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetFramebufferColor) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetFramebufferColor(device: %v, capture: %v, contextId: %v, after: %v, settings: %v)",
-		c.device, c.capture, c.contextId, c.after, c.settings,
+	fmt.Fprintf(f, "GetFramebufferColor(device: %v, capture: %v, api: %v, after: %v, settings: %v)",
+		c.device, c.capture, c.api, c.after, c.settings,
 	)
 }
 func (r resultGetFramebufferColor) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callGetFramebufferDepth) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetFramebufferDepth(device: %v, capture: %v, contextId: %v, after: %v)",
-		c.device, c.capture, c.contextId, c.after,
+	fmt.Fprintf(f, "GetFramebufferDepth(device: %v, capture: %v, api: %v, after: %v)",
+		c.device, c.capture, c.api, c.after,
 	)
 }
 func (r resultGetFramebufferDepth) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callGetTimingInfo) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "GetTimingInfo(device: %v, capture: %v, mask: %v)",
+		c.device, c.capture, c.mask,
+	)
+}
+func (r resultGetTimingInfo) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "res: %#v", r.value)
+}
+func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
+	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, api: %v, width: %v, height: %v, atomIds: %v)",
+		c.device, c.capture, c.api, c.width, c.height, c.atomIds,
+	)
+}
+func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callReplaceAtom) Format(f fmt.State, r rune) {
@@ -73,22 +89,6 @@ func (c callReplaceAtom) Format(f fmt.State, r rune) {
 	)
 }
 func (r resultReplaceAtom) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callGetTimingInfo) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "GetTimingInfo(device: %v, capture: %v, contextId: %v, mask: %v)",
-		c.device, c.capture, c.contextId, c.mask,
-	)
-}
-func (r resultGetTimingInfo) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "res: %#v", r.value)
-}
-func (c callPrerenderFramebuffers) Format(f fmt.State, r rune) {
-	fmt.Fprintf(f, "PrerenderFramebuffers(device: %v, capture: %v, width: %v, height: %v, atomIds: %v)",
-		c.device, c.capture, c.width, c.height, c.atomIds,
-	)
-}
-func (r resultPrerenderFramebuffers) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "res: %#v", r.value)
 }
 func (c callResolveAtomStream) Format(f fmt.State, r rune) {
@@ -195,11 +195,11 @@ func (h TimingInfoId) Valid() bool {
 	return h.ID.Valid()
 }
 
+func (a ApiIdArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]ApiIdArray", len(a))
+}
 func (a ApiSchemaArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ApiSchemaArray", len(a))
-}
-func (a AtomContextArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomContextArray", len(a))
 }
 func (a AtomGroupArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]AtomGroupArray", len(a))
@@ -375,21 +375,21 @@ func (c *Device) GetRequiresShaderPatching() bool { return c.RequiresShaderPatch
 func CreateCapture(
 	Name string,
 	Atoms AtomStreamId,
+	Apis ApiIdArray,
 	Schema SchemaId,
-	Contexts AtomContextArray,
 ) *Capture {
 	return &Capture{
-		Name:     Name,
-		Atoms:    Atoms,
-		Schema:   Schema,
-		Contexts: Contexts,
+		Name:   Name,
+		Atoms:  Atoms,
+		Apis:   Apis,
+		Schema: Schema,
 	}
 }
 
-func (c *Capture) GetName() string               { return c.Name }
-func (c *Capture) GetAtoms() AtomStreamId        { return c.Atoms }
-func (c *Capture) GetSchema() SchemaId           { return c.Schema }
-func (c *Capture) GetContexts() AtomContextArray { return c.Contexts }
+func (c *Capture) GetName() string        { return c.Name }
+func (c *Capture) GetAtoms() AtomStreamId { return c.Atoms }
+func (c *Capture) GetApis() ApiIdArray    { return c.Apis }
+func (c *Capture) GetSchema() SchemaId    { return c.Schema }
 
 func CreateBinary(
 	Data U8Array,
@@ -410,19 +410,6 @@ func CreateAtomStream(
 }
 
 func (c *AtomStream) GetData() U8Array { return c.Data }
-
-func CreateAtomContext(
-	Id uint32,
-	Api ApiId,
-) *AtomContext {
-	return &AtomContext{
-		Id:  Id,
-		Api: Api,
-	}
-}
-
-func (c *AtomContext) GetId() uint32 { return c.Id }
-func (c *AtomContext) GetApi() ApiId { return c.Api }
 
 func CreateHierarchy(
 	Root AtomGroup,
@@ -736,6 +723,7 @@ func (c *FieldInfo) GetName() string   { return c.Name }
 func (c *FieldInfo) GetType() TypeInfo { return c.Type }
 
 func CreateAtomInfo(
+	Api ApiId,
 	Type uint16,
 	Name string,
 	Parameters ParameterInfoArray,
@@ -745,6 +733,7 @@ func CreateAtomInfo(
 	DocumentationUrl string,
 ) *AtomInfo {
 	return &AtomInfo{
+		Api:              Api,
 		Type:             Type,
 		Name:             Name,
 		Parameters:       Parameters,
@@ -755,6 +744,7 @@ func CreateAtomInfo(
 	}
 }
 
+func (c *AtomInfo) GetApi() ApiId                     { return c.Api }
 func (c *AtomInfo) GetType() uint16                   { return c.Type }
 func (c *AtomInfo) GetName() string                   { return c.Name }
 func (c *AtomInfo) GetParameters() ParameterInfoArray { return c.Parameters }

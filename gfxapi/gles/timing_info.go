@@ -16,7 +16,6 @@ package gles
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -33,7 +32,7 @@ const (
 // Note: this is experimental and is likely to change in the near future.
 type timingInfoTransform struct {
 	timingInfo   service.TimingInfo
-	out          chan<- gfxapi.CallTiming
+	out          chan<- replay.CallTiming
 	postback     replay.Postback
 	perCommand   bool
 	perDrawCall  bool
@@ -41,16 +40,16 @@ type timingInfoTransform struct {
 	timerStartId map[uint8]atom.ID
 }
 
-func (t *timingInfoTransform) startTimer(cid atom.ContextID, fromId atom.ID, index uint8, out atom.Writer) {
-	out.Write(transientID, NewStartTimer(cid, index))
+func (t *timingInfoTransform) startTimer(fromId atom.ID, index uint8, out atom.Writer) {
+	out.Write(transientID, NewStartTimer(index))
 	t.timerStartId[index] = fromId
 }
 
-func (t *timingInfoTransform) stopTimer(cid atom.ContextID, toID atom.ID, index uint8, mask service.TimingMask, out atom.Writer) {
+func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.TimingMask, out atom.Writer) {
 	fromID := t.timerStartId[index]
 	stopTimerId := t.postback(func(data interface{}, err error) {
 		if err != nil {
-			t.out <- gfxapi.CallTiming{Error: err}
+			t.out <- replay.CallTiming{Error: err}
 			return
 		}
 		val := data.(StopTimer_Postback)
@@ -74,63 +73,55 @@ func (t *timingInfoTransform) stopTimer(cid atom.ContextID, toID atom.ID, index 
 			})
 		}
 	})
-	out.Write(stopTimerId, NewStopTimer(cid, index, 0))
+	out.Write(stopTimerId, NewStopTimer(index, 0))
 	delete(t.timerStartId, index)
 
 	switch mask {
 	case service.TimingMaskTimingPerFrame:
-		out.Write(transientID, NewFlushPostBuffer(cid))
+		out.Write(transientID, NewFlushPostBuffer())
 	case service.TimingMaskTimingPerDrawCall:
 		if !t.perFrame {
-			out.Write(transientID, NewFlushPostBuffer(cid))
+			out.Write(transientID, NewFlushPostBuffer())
 		}
 	}
 }
 
 func (t *timingInfoTransform) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
-	cid := a.ContextID()
-	switch a := a.(type) {
-	case *Init:
-		out.Write(id, a)
+	if _, frameStarted := t.timerStartId[frameThreadTimer]; t.perFrame && !frameStarted {
+		t.startTimer(id, frameThreadTimer, out)
+	}
+	if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; t.perDrawCall && !drawCallStarted {
+		t.startTimer(id, drawCallThreadTimer, out)
+	}
+	if t.perCommand {
+		t.startTimer(id, commandThreadTimer, out)
+	}
 
-	default:
-		if _, frameStarted := t.timerStartId[frameThreadTimer]; t.perFrame && !frameStarted {
-			t.startTimer(cid, id, frameThreadTimer, out)
-		}
-		if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; t.perDrawCall && !drawCallStarted {
-			t.startTimer(cid, id, drawCallThreadTimer, out)
-		}
-		if t.perCommand {
-			t.startTimer(cid, id, commandThreadTimer, out)
-		}
+	out.Write(id, a)
 
-		out.Write(id, a)
-
-		flags := a.Flags()
-		if t.perCommand {
-			t.stopTimer(cid, id, commandThreadTimer, service.TimingMaskTimingPerCommand, out)
-		}
-		if t.perDrawCall && (flags.IsDrawCall() || flags.IsEndOfFrame()) {
-			t.stopTimer(cid, id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
-		}
-		if t.perFrame && (flags.IsEndOfFrame()) {
-			t.stopTimer(cid, id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
-		}
+	flags := a.Flags()
+	if t.perCommand {
+		t.stopTimer(id, commandThreadTimer, service.TimingMaskTimingPerCommand, out)
+	}
+	if t.perDrawCall && (flags.IsDrawCall() || flags.IsEndOfFrame()) {
+		t.stopTimer(id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
+	}
+	if t.perFrame && (flags.IsEndOfFrame()) {
+		t.stopTimer(id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
 	}
 }
 
 func (t *timingInfoTransform) Flush(out atom.Writer) {
 	id := atom.NoID
-	cid := atom.NoContextID
 	if _, drawCallStarted := t.timerStartId[drawCallThreadTimer]; drawCallStarted && t.perDrawCall {
-		t.stopTimer(cid, id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
+		t.stopTimer(id, drawCallThreadTimer, service.TimingMaskTimingPerDrawCall, out)
 	}
 	if _, frameStarted := t.timerStartId[frameThreadTimer]; frameStarted && t.perFrame {
-		t.stopTimer(cid, id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
+		t.stopTimer(id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
 	}
 
 	t.postback(func(interface{}, error) {
-		t.out <- gfxapi.CallTiming{TimingInfo: t.timingInfo}
+		t.out <- replay.CallTiming{TimingInfo: t.timingInfo}
 		close(t.out)
 	})
 }

@@ -50,12 +50,16 @@ std::unique_ptr<Context> Context::create(const ServerConnection& gazer,
 Context::Context(const ServerConnection& gazer, ResourceProvider* resourceProvider,
                  MemoryManager* memoryManager) :
         mServer(gazer), mResourceProvider(resourceProvider), mMemoryManager(memoryManager),
+        mBoundRenderer(nullptr),
         mPostBuffer(new PostBuffer(POST_BUFFER_SIZE, [this](const void* address, uint32_t count) {
             return this->mServer.post(address, count);
         })) {
 }
 
 Context::~Context() {
+    for (auto it = mRenderers.begin(); it != mRenderers.end(); it++) {
+        delete it->second;
+    }
 }
 
 bool Context::initialize() {
@@ -76,8 +80,8 @@ bool Context::initialize() {
     mResourceProvider->prefetch(mReplayRequest->getResources(), mServer,
                                 mMemoryManager->getVolatileAddress(),
                                 mReplayRequest->getVolatileMemorySize());
-    GAPID_INFO("Prefetching ready\n");
 
+    GAPID_INFO("Prefetching ready\n");
     mInMemoryCacheSize = static_cast<uint32_t>(
             static_cast<uint8_t*>(mMemoryManager->getVolatileAddress()) -
             static_cast<uint8_t*>(mMemoryManager->getBaseAddress()));
@@ -114,14 +118,48 @@ void Context::registerCallbacks(Interpreter* interpreter) {
         return this->flushPostBuffer(stack);
     });
 
-    // Function for initializing the API context.
-    interpreter->registerFunction(gfxapi::Ids::Init, [this](Stack* stack, bool) {
+    interpreter->registerFunction(gfxapi::Ids::ReplayCreateRenderer, [this](Stack* stack, bool) {
+        int32_t id = stack->pop<uint32_t>();
+        if (stack->isValid()) {
+            GAPID_INFO("replayCreateRenderer(%d)\n", id);
+            if (Renderer* prev = mRenderers[id]) {
+                if (mBoundRenderer == prev) {
+                    mBoundRenderer = nullptr;
+                }
+                delete prev;
+            }
+            mRenderers[id] = Renderer::create();
+            return true;
+        } else {
+            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
+            return false;
+        }
+    });
+
+    interpreter->registerFunction(gfxapi::Ids::ReplayBindRenderer, [this](Stack* stack, bool) {
+        int32_t id = stack->pop<uint32_t>();
+        if (stack->isValid()) {
+            GAPID_INFO("replayBindRenderer(%d)\n", id);
+            if (mBoundRenderer != nullptr) {
+                mBoundRenderer->unbind();
+                mBoundRenderer = nullptr;
+            }
+            mBoundRenderer = mRenderers[id];
+            mBoundRenderer->bind();
+            return true;
+        } else {
+            GAPID_WARNING("Error during calling function replayBindRenderer\n");
+            return false;
+        }
+    });
+
+    interpreter->registerFunction(gfxapi::Ids::BackbufferInfo, [this](Stack* stack, bool) {
+        stack->pop<bool>(); // ignored
         uint32_t stencil_fmt = stack->pop<uint32_t>();
         uint32_t depth_fmt = stack->pop<uint32_t>();
         uint32_t color_fmt = stack->pop<uint32_t>();
         int32_t height = stack->pop<int32_t>();
         int32_t width = stack->pop<int32_t>();
-
         uint32_t depthSize = 0;
         switch (depth_fmt) {
             case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_DEPTH_COMPONENT16):
@@ -131,27 +169,26 @@ void Context::registerCallbacks(Interpreter* interpreter) {
                 depthSize = 24;
                 break;
         }
-
         uint32_t stencilSize = 0;
         switch (stencil_fmt) {
             case static_cast<uint32_t>(gfxapi::RenderbufferFormat::GL_STENCIL_INDEX8):
             case static_cast<uint32_t>(gfxapi::TexelFormat_GLES_3_0::GL_DEPTH24_STENCIL8):
                 stencilSize = 8;
         }
-
-        if (stack->isValid()) {
-            GAPID_INFO("init(%d, %d, %d, %d)\n", height, width, depthSize, stencilSize);
-            return this->init(width, height, depthSize, stencilSize);
+         if (stack->isValid()) {
+            GAPID_INFO("backbufferInfo(%d, %d, 0x%x, 0x%x, 0x%x)\n",
+                    width, height, color_fmt, depth_fmt, stencil_fmt);
+            if (mBoundRenderer == nullptr) {
+                GAPID_INFO("backbufferInfo called without a bound renderer\n");
+                return false;
+            }
+            mBoundRenderer->setBackbuffer(width, height, depthSize, stencilSize);
+            return true;
         } else {
-            GAPID_WARNING("Error during calling function initGl\n");
+            GAPID_WARNING("Error during calling function replayCreateRenderer\n");
             return false;
         }
     });
-}
-
-bool Context::init(int width, int height, int depthSize, int stencilSize) {
-    mRenderer = Renderer::create(width, height, depthSize, stencilSize);
-    return true;
 }
 
 bool Context::loadResource(Stack* stack) {
@@ -201,7 +238,7 @@ bool Context::startTimer(Stack* stack) {
             mTimers[index].Start();
             return true;
         } else {
-            GAPID_WARNING("StartTimer called with invalid index %d", index);
+            GAPID_WARNING("StartTimer called with invalid index %d\n", index);
         }
     } else {
         GAPID_WARNING("Error while calling function StartTimer\n");
@@ -220,7 +257,7 @@ bool Context::stopTimer(Stack* stack, bool pushReturn) {
             }
             return true;
         } else {
-            GAPID_WARNING("StopTimer called with invalid index %d", index);
+            GAPID_WARNING("StopTimer called with invalid index %d\n", index);
         }
     } else {
         GAPID_WARNING("Error while calling function StopTimer\n");

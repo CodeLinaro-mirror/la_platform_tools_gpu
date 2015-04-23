@@ -27,13 +27,13 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay"
 )
 
-const replayTimeout = time.Second * 10
+const replayTimeout = time.Second * 5
 
 var generateReferenceImages = flag.Bool("generate", false, "generate reference images")
 
 func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, after atom.ID, w, h uint32, name string, threshold float64) {
 	select {
-	case img := <-gles.API().ColorBuffer(ctx, mgr, after, w, h, false):
+	case img := <-gles.API().(replay.QueryColorBuffer).QueryColorBuffer(ctx, mgr, after, w, h, false):
 		if img.Error != nil {
 			t.Errorf("Failed to read ColorBuffer at %d for %s. Reason: %v", after, name, img.Error)
 			return
@@ -57,23 +57,30 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, af
 }
 
 func TestClear(t *testing.T) {
-	cid := atom.ContextID(0)
 	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
 	w, h := uint32(64), uint32(64)
+	eglDisplay := gles.EGLDisplay(0x1000)
+	eglConfig := gles.EGLConfig(0x2000)
+	eglShareContext := gles.EGLContext(0)
+	eglAttribList := gles.EGLintArray{}
+	eglSurface := gles.EGLSurface(0x3000)
+	eglContext := gles.EGLContext(0x5000)
+	eglTrue := gles.EGLBoolean(1)
+	color := gles.RenderbufferFormat_GL_RGB565
+	depth := gles.RenderbufferFormat_GL_DEPTH_COMPONENT16
+	stencil := gles.RenderbufferFormat_GL_STENCIL_INDEX8
 	atoms := atom.List{
-		/* 0 */ gles.NewInit(cid, int32(w), int32(h),
-			gles.RenderbufferFormat_GL_RGB565,
-			gles.RenderbufferFormat_GL_DEPTH_COMPONENT16,
-			gles.RenderbufferFormat_GL_STENCIL_INDEX8,
-		),
-		/* 1 */ gles.NewGlClearColor(cid, 1.0, 0.0, 0.0, 1.0),
-		/* 2 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 3 */ gles.NewGlClearColor(cid, 0.0, 1.0, 0.0, 1.0),
-		/* 4 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 5 */ gles.NewGlClearColor(cid, 0.0, 0.0, 1.0, 1.0),
-		/* 6 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
-		/* 7 */ gles.NewGlClearColor(cid, 0.0, 0.0, 0.0, 1.0),
-		/* 8 */ gles.NewGlClear(cid, gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 0x0 */ gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, eglAttribList, eglContext),
+		/* 0x1 */ gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
+		/* 0x2 */ gles.NewBackbufferInfo(int32(w), int32(h), color, depth, stencil, true /* resetViewportScissor */),
+		/* 0x3 */ gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
+		/* 0x4 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 0x5 */ gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
+		/* 0x6 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 0x7 */ gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
+		/* 0x8 */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
+		/* 0x9 */ gles.NewGlClearColor(0.0, 0.0, 0.0, 1.0),
+		/* 0xa */ gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	}
 
 	mgr := replay.New(db, logger)
@@ -84,8 +91,8 @@ func TestClear(t *testing.T) {
 		DeviceID:  device.ID(),
 	}
 
-	checkColorBuffer(t, ctx, mgr, 2, w, h, "solid-red", 0)
-	checkColorBuffer(t, ctx, mgr, 4, w, h, "solid-green", 0)
-	checkColorBuffer(t, ctx, mgr, 6, w, h, "solid-blue", 0)
-	checkColorBuffer(t, ctx, mgr, 8, w, h, "transparent", 0)
+	checkColorBuffer(t, ctx, mgr, 0x4, w, h, "solid-red", 0)
+	checkColorBuffer(t, ctx, mgr, 0x6, w, h, "solid-green", 0)
+	checkColorBuffer(t, ctx, mgr, 0x8, w, h, "solid-blue", 0)
+	checkColorBuffer(t, ctx, mgr, 0xa, w, h, "transparent", 0)
 }

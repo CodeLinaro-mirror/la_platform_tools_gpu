@@ -18,9 +18,6 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
-	"android.googlesource.com/platform/tools/gpu/replay"
-	"android.googlesource.com/platform/tools/gpu/service"
 )
 
 type State struct {
@@ -28,22 +25,10 @@ type State struct {
 	ValidateOutput bool
 }
 
-func (s *State) GetFramebufferAttachmentSize(att state.FramebufferAttachment) (uint32, uint32, error) {
+func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (uint32, uint32, error) {
 	return 0, 0, nil
 }
 
-func (i remapped) remap(a atom.Atom, s *state.State) (interface{}, bool) {
+func (i remapped) remap(a atom.Atom, s *gfxapi.State) (interface{}, bool) {
 	return i, true
-}
-
-func (a api) ColorBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID, width, height uint32, wireframe bool) <-chan gfxapi.Image {
-	return nil
-}
-
-func (a api) DepthBuffer(ctx *replay.Context, mgr *replay.Manager, after atom.ID) <-chan gfxapi.Image {
-	return nil
-}
-
-func (a api) TimeCalls(ctx *replay.Context, mgr *replay.Manager, mask service.TimingMask) <-chan gfxapi.CallTiming {
-	return nil
 }

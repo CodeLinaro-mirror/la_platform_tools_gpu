@@ -103,6 +103,29 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callEglQuerySurface(Stack* stack, bool pushReturn) {
+    EGLint* value = stack->pop<EGLint*>();
+    EGLint attribute = stack->pop<EGLint>();
+    EGLSurface surface = stack->pop<EGLSurface>();
+    EGLDisplay display = stack->pop<EGLDisplay>();
+    if (stack->isValid()) {
+        GAPID_INFO("eglQuerySurface(%p, %p, %d, %p)\n", display, surface, attribute, value);
+        if (eglQuerySurface != nullptr) {
+            EGLBoolean return_value = eglQuerySurface(display, surface, attribute, value);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<EGLBoolean>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function eglQuerySurface\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function eglQuerySurface\n");
+        return false;
+    }
+}
+
 bool callGlXCreateContext(Stack* stack, bool pushReturn) {
     bool direct = stack->pop<bool>();
     GLXContext shareList = stack->pop<GLXContext>();
@@ -207,6 +230,28 @@ bool callWglCreateContext(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callWglCreateContextAttribsARB(Stack* stack, bool pushReturn) {
+    const int* attribList = stack->pop<const int*>();
+    HGLRC hShareContext = stack->pop<HGLRC>();
+    HDC hdc = stack->pop<HDC>();
+    if (stack->isValid()) {
+        GAPID_INFO("wglCreateContextAttribsARB(%p, %p, %p)\n", hdc, hShareContext, attribList);
+        if (wglCreateContextAttribsARB != nullptr) {
+            HGLRC return_value = wglCreateContextAttribsARB(hdc, hShareContext, attribList);
+            GAPID_INFO("Returned: %p\n", return_value);
+            if (pushReturn) {
+                stack->push<HGLRC>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function wglCreateContextAttribsARB\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function wglCreateContextAttribsARB\n");
+        return false;
+    }
+}
+
 bool callWglMakeCurrent(Stack* stack, bool pushReturn) {
     HGLRC hglrc = stack->pop<HGLRC>();
     HDC hdc = stack->pop<HDC>();
@@ -245,7 +290,7 @@ bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callCGLCreateContext(Stack* stack, bool pushReturn) {
-    CGLContextObj ctx = stack->pop<CGLContextObj>();
+    CGLContextObj* ctx = stack->pop<CGLContextObj*>();
     CGLContextObj share = stack->pop<CGLContextObj>();
     CGLPixelFormatObj pix = stack->pop<CGLPixelFormatObj>();
     if (stack->isValid()) {
@@ -262,6 +307,26 @@ bool callCGLCreateContext(Stack* stack, bool pushReturn) {
         return true;
     } else {
         GAPID_WARNING("Error during calling function CGLCreateContext\n");
+        return false;
+    }
+}
+
+bool callCGLSetCurrentContext(Stack* stack, bool pushReturn) {
+    CGLContextObj ctx = stack->pop<CGLContextObj>();
+    if (stack->isValid()) {
+        GAPID_INFO("CGLSetCurrentContext(%p)\n", ctx);
+        if (CGLSetCurrentContext != nullptr) {
+            CGLError return_value = CGLSetCurrentContext(ctx);
+            GAPID_INFO("Returned: %d\n", return_value);
+            if (pushReturn) {
+                stack->push<CGLError>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function CGLSetCurrentContext\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function CGLSetCurrentContext\n");
         return false;
     }
 }
@@ -3613,14 +3678,17 @@ PFNEGLINITIALIZE eglInitialize = nullptr;
 PFNEGLCREATECONTEXT eglCreateContext = nullptr;
 PFNEGLMAKECURRENT eglMakeCurrent = nullptr;
 PFNEGLSWAPBUFFERS eglSwapBuffers = nullptr;
+PFNEGLQUERYSURFACE eglQuerySurface = nullptr;
 PFNGLXCREATECONTEXT glXCreateContext = nullptr;
 PFNGLXCREATENEWCONTEXT glXCreateNewContext = nullptr;
 PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent = nullptr;
 PFNGLXSWAPBUFFERS glXSwapBuffers = nullptr;
 PFNWGLCREATECONTEXT wglCreateContext = nullptr;
+PFNWGLCREATECONTEXTATTRIBSARB wglCreateContextAttribsARB = nullptr;
 PFNWGLMAKECURRENT wglMakeCurrent = nullptr;
 PFNWGLSWAPBUFFERS wglSwapBuffers = nullptr;
 PFNCGLCREATECONTEXT CGLCreateContext = nullptr;
+PFNCGLSETCURRENTCONTEXT CGLSetCurrentContext = nullptr;
 PFNGLENABLECLIENTSTATE glEnableClientState = nullptr;
 PFNGLDISABLECLIENTSTATE glDisableClientState = nullptr;
 PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES = nullptr;
@@ -3808,14 +3876,17 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::EglCreateContext, callEglCreateContext);
     interpreter->registerFunction(Ids::EglMakeCurrent, callEglMakeCurrent);
     interpreter->registerFunction(Ids::EglSwapBuffers, callEglSwapBuffers);
+    interpreter->registerFunction(Ids::EglQuerySurface, callEglQuerySurface);
     interpreter->registerFunction(Ids::GlXCreateContext, callGlXCreateContext);
     interpreter->registerFunction(Ids::GlXCreateNewContext, callGlXCreateNewContext);
     interpreter->registerFunction(Ids::GlXMakeContextCurrent, callGlXMakeContextCurrent);
     interpreter->registerFunction(Ids::GlXSwapBuffers, callGlXSwapBuffers);
     interpreter->registerFunction(Ids::WglCreateContext, callWglCreateContext);
+    interpreter->registerFunction(Ids::WglCreateContextAttribsARB, callWglCreateContextAttribsARB);
     interpreter->registerFunction(Ids::WglMakeCurrent, callWglMakeCurrent);
     interpreter->registerFunction(Ids::WglSwapBuffers, callWglSwapBuffers);
     interpreter->registerFunction(Ids::CGLCreateContext, callCGLCreateContext);
+    interpreter->registerFunction(Ids::CGLSetCurrentContext, callCGLSetCurrentContext);
     interpreter->registerFunction(Ids::GlEnableClientState, callGlEnableClientState);
     interpreter->registerFunction(Ids::GlDisableClientState, callGlDisableClientState);
     interpreter->registerFunction(Ids::GlGetProgramBinaryOES, callGlGetProgramBinaryOES);
@@ -4012,6 +4083,8 @@ void Initialize() {
             reinterpret_cast<PFNEGLMAKECURRENT>(gapic::GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers =
             reinterpret_cast<PFNEGLSWAPBUFFERS>(gapic::GetGfxProcAddress("eglSwapBuffers"));
+    eglQuerySurface =
+            reinterpret_cast<PFNEGLQUERYSURFACE>(gapic::GetGfxProcAddress("eglQuerySurface"));
     glXCreateContext =
             reinterpret_cast<PFNGLXCREATECONTEXT>(gapic::GetGfxProcAddress("glXCreateContext"));
     glXCreateNewContext = reinterpret_cast<PFNGLXCREATENEWCONTEXT>(
@@ -4022,12 +4095,16 @@ void Initialize() {
             reinterpret_cast<PFNGLXSWAPBUFFERS>(gapic::GetGfxProcAddress("glXSwapBuffers"));
     wglCreateContext =
             reinterpret_cast<PFNWGLCREATECONTEXT>(gapic::GetGfxProcAddress("wglCreateContext"));
+    wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARB>(
+            gapic::GetGfxProcAddress("wglCreateContextAttribsARB"));
     wglMakeCurrent =
             reinterpret_cast<PFNWGLMAKECURRENT>(gapic::GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers =
             reinterpret_cast<PFNWGLSWAPBUFFERS>(gapic::GetGfxProcAddress("wglSwapBuffers"));
     CGLCreateContext =
             reinterpret_cast<PFNCGLCREATECONTEXT>(gapic::GetGfxProcAddress("CGLCreateContext"));
+    CGLSetCurrentContext = reinterpret_cast<PFNCGLSETCURRENTCONTEXT>(
+            gapic::GetGfxProcAddress("CGLSetCurrentContext"));
     glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
             gapic::GetGfxProcAddress("glEnableClientState"));
     glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(
