@@ -18,9 +18,14 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"path/filepath"
 	"testing"
 
-	"golang.org/x/tools/go/loader"
+	"go/ast"
+	"go/build"
+	"go/parser"
+	"go/token"
+
 	"golang.org/x/tools/go/types"
 )
 
@@ -51,31 +56,71 @@ var fields = []Field{
 	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}, Anonymous: true},
 }
 
+var packages = map[string]*types.Package{
+	"unsafe": types.Unsafe,
+}
+
 func parseStructs(source string) []*Struct {
-	config := loader.Config{}
 	fakeFile := fmt.Sprintf(`
 	package fake
 	import "android.googlesource.com/platform/tools/gpu/binary"
 	%s`, source)
-	file, err := config.ParseFile("", fakeFile)
+
+	pwd, err := filepath.Abs(".")
+	if err != nil {
+		log.Fatalf("Could not get pwd: %s", err)
+	}
+
+	fset := token.NewFileSet()
+	file, err := parser.ParseFile(fset, "internal.go", fakeFile, 0)
 	if err != nil {
 		log.Fatalf("invalid source: %s", err)
 	}
-	config.CreateFromFiles("", file)
-	info, err := config.Load()
+	context := build.Default
+	config := types.Config{
+		IgnoreFuncBodies: true,
+		Error:            func(error) {},
+		Packages:         packages,
+	}
+	config.Import = func(pkgs map[string]*types.Package, name string) (*types.Package, error) {
+		pkg, found := pkgs[name]
+		if found {
+			return pkg, nil
+		}
+		imp, err := context.Import(name, pwd, 0)
+		if err != nil {
+			return pkg, err
+		}
+		files := []*ast.File{}
+		for _, filename := range imp.GoFiles {
+			path := filepath.Join(imp.Dir, filename)
+			file, err := parser.ParseFile(fset, path, nil, 0)
+			if err != nil {
+				return pkg, err
+			}
+			files = append(files, file)
+		}
+		pkg, err = config.Check(imp.ImportPath, fset, files, nil)
+		if err != nil {
+			return pkg, err
+		}
+		pkgs[name] = pkg
+		return pkg, nil
+	}
+	pkg, err := config.Check("", fset, []*ast.File{file}, nil)
 	if err != nil {
-		log.Fatalf("load failed: %s", err)
+		log.Printf("type failure: %s", err)
 	}
 	result := []*Struct{}
 	imports := make(Imports)
-	for _, pkg := range info.Created {
-		for _, def := range pkg.Defs {
-			if n, ok := def.(*types.TypeName); ok {
-				if t, ok := n.Type().(*types.Named); ok {
-					if _, ok := t.Underlying().(*types.Struct); ok {
-						if s := FromTypename(pkg.Pkg, n, imports); s != nil {
-							result = append(result, s)
-						}
+	scope := pkg.Scope()
+	for _, name := range scope.Names() {
+		obj := scope.Lookup(name)
+		if n, ok := obj.(*types.TypeName); ok {
+			if t, ok := n.Type().(*types.Named); ok {
+				if _, ok := t.Underlying().(*types.Struct); ok {
+					if s := FromTypename(pkg, n, imports); s != nil {
+						result = append(result, s)
 					}
 				}
 			}
