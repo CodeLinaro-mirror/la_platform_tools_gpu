@@ -15,8 +15,9 @@
 package validate
 
 import (
-	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	"fmt"
+
+	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
 func walk(n semantic.Node, v func(semantic.Node) bool) {
@@ -54,6 +55,9 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 			walk(c, v)
 		}
 		for _, c := range n.Pointers {
+			walk(c, v)
+		}
+		for _, c := range n.Buffers {
 			walk(c, v)
 		}
 		for _, c := range n.Signatures {

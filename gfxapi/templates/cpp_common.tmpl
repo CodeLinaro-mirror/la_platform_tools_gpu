@@ -43,6 +43,7 @@ limitations under the License.
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
   {{else if IsMemory      $}}Memory
+  {{else if IsBuffer      $}}Memory
   {{else if IsAny         $}}auto
   {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
   {{end}}

@@ -298,7 +298,7 @@ limitations under the License.
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
     {{$type := TypeOf $v}}
-    {{if IsMemory $type}}
+    {{if or (IsMemory $type) (IsBuffer $type)}}
       Get{{Title $v.Name}}() *{{Macro "Go.Type" $type}}
     {{else}}
       Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
@@ -388,7 +388,7 @@ limitations under the License.
   {{range $v := $.Class.Fields}}
     {{$type := TypeOf $v}}
     {{$FType := Macro "Go.Type" $type}}
-    {{if IsMemory $type}}
+    {{if or (IsMemory $type) (IsBuffer $type)}}
       func (i *{{$.Impl}}) Get{{$v.Name}}() *{{$FType}} { return &i.{{$v.Name}} }
     {{else}}
       func (i *{{$.Impl}}) Get{{$v.Name}}() {{$FType}} { return i.{{$v.Name}} }

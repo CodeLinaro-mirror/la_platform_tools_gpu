@@ -49,6 +49,7 @@ limitations under the License.
   {{else if IsF64           $}}float64
   {{else if IsPointerType   $}}memory.Pointer
   {{else if IsMemory        $}}memory.Memory
+  {{else if IsBuffer        $}}memory.Memory
   {{else if IsString        $}}string
   {{else if IsVoid          $}}void
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
@@ -104,6 +105,7 @@ limitations under the License.
     {{if $.Type.Array}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
     {{else}}if err := {{$.Name}}.Decode(d); err != nil { return err }{{end}}
   {{else if IsMemory        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
+  {{else if IsBuffer        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsEnum          $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { return err }
   {{else if IsPointerType   $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
   {{else if IsBool          $.Type}}if v, err := d.Bool();    err == nil { {{$.Name}} = v } else { return err }

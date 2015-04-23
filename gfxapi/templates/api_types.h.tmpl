@@ -74,6 +74,7 @@ limitations under the License.
       {{else if IsPseudonym $}}{{Macro "DeclarePseudonym" $}}
       {{else if IsMap       $}}{{Macro "DeclareMap"       $}}
       {{else if IsPointer   $}}{{Macro "DeclareType"      $.To}}
+      {{else if IsBuffer    $}}{{Macro "DeclareType"      $.To}}
       {{else if IsArray     $}}{{Macro "DeclareType"      $.ValueType}}
       {{else}}{{Error "DeclareType does not support type '%T'" $}}
       {{end}}
