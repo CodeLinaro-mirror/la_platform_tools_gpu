@@ -37,12 +37,10 @@ limitations under the License.
   {{else if IsMap         $}}{{$.Name}}
   {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsPointer     $}}{{if $.Array}}void*{{else}}{{Macro "C++.Type" $.To}}*{{end}}
-  {{else if IsPointerType $}}void*
   {{else if IsString      $}}char*
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
-  {{else if IsMemory      $}}Memory
   {{else if IsBuffer      $}}Memory
   {{else if IsAny         $}}auto
   {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
@@ -73,7 +71,6 @@ limitations under the License.
   {{else if IsU64           $}}0
   {{else if IsF64           $}}0
   {{else if IsEnum          $}}0
-  {{else if IsPointerType   $}}nullptr
   {{else if IsString        $}}""
   {{else if IsPseudonym     $}}{{Macro "C++.Null" $.To}}
   {{else if IsClass         $}}{{Macro "C++.Type" $}}()
@@ -174,7 +171,7 @@ limitations under the License.
   {{if IsAny $ty}}
     {{Macro "C++.ParameterTypeAny" $}}
   {{else}}
-    {{$isRef := or (IsArray $ty) (IsString $ty) (IsPointerType $ty) (IsPointer $ty)}}
+    {{$isRef := or (IsArray $ty) (IsString $ty) (IsPointer $ty)}}
 
     {{/* Prefix const for read-only reference parameters. */}}
     {{if and (not $.Output) $isRef}}const {{end}}§
@@ -495,7 +492,7 @@ limitations under the License.
 
   {{$ty       := TypeOf $}}
   {{$isResult := eq $.Name $.Function.Return.Name}}
-  {{$deref    := not (or (IsPointerType $ty) (IsPointer $ty) (IsArray $ty) (IsString $ty) $isResult)}}
+  {{$deref    := not (or (IsPointer $ty) (IsArray $ty) (IsString $ty) $isResult)}}
   {{/* HACK: Avoid dereferencing nullptrs.
        Remove when we change outputs to be explicit pointer types.*/}}
   {{$.Name}}{{if and $.Output $deref}}? (*{{$.Name}}) : {{Macro "C++.Type" $ty}}{}{{end}}

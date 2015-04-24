@@ -2525,7 +2525,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *state.State) error {
 			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (id) != (ϟc.Internals.NilBuffer), ϟa))
 			return result
 		}
-	}() // pointer
+	}() // VoidArray
 	IndexSize_4_indices_type := ϟa.In.IndicesType // IndicesType
 	IndexSize_4_result := func() (result uint32) {
 		switch IndexSize_4_indices_type {

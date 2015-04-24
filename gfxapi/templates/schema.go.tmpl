@@ -297,8 +297,6 @@ limitations under the License.
   {{else if IsS64           $}}schema.S64
   {{else if IsU64           $}}schema.U64
   {{else if IsF64           $}}schema.Double
-  {{else if IsPointerType   $}}schema.Pointer
-  {{else if IsMemory        $}}schema.Memory
   {{else if IsBuffer        $}}schema.Memory
   {{else if IsString        $}}schema.String
   {{else if IsAny           $}}schema.Any

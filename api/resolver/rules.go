@@ -87,7 +87,6 @@ func castable(from semantic.Type, to semantic.Type) bool {
 		return true // number -> enum
 	}
 	_, fromIsPointer := fromBase.(*semantic.Pointer)
-	fromIsPointer = fromIsPointer || (fromBase == semantic.PointerType)
 	if fromIsPointer && toIsNumber {
 		return true // pointer -> number
 	}

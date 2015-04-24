@@ -226,7 +226,6 @@ limitations under the License.
       {{if $i}}", ",{{end}}
       {{if      IsArray       $type}}fmt.Sprintf("%v", c.{{$field}}),
       {{else if IsPointer     $type}}fmt.Sprintf("0x%x", c.{{$field}}),
-      {{else if IsPointerType $type}}fmt.Sprintf("0x%x", c.{{$field}}),
       {{else if IsEnum        $type}}c.{{$field}}.String(),
       {{else                       }}fmt.Sprintf("{{$p.Name}}:%v", c.{{$field}}),
       {{end}}
@@ -298,7 +297,7 @@ limitations under the License.
   {{AssertType $ "Class"}}
   {{range $v := $.Fields}}
     {{$type := TypeOf $v}}
-    {{if or (IsMemory $type) (IsBuffer $type)}}
+    {{if IsBuffer $type}}
       Get{{Title $v.Name}}() *{{Macro "Go.Type" $type}}
     {{else}}
       Get{{Title $v.Name}}() {{Macro "Go.Type" $type}}
@@ -388,7 +387,7 @@ limitations under the License.
   {{range $v := $.Class.Fields}}
     {{$type := TypeOf $v}}
     {{$FType := Macro "Go.Type" $type}}
-    {{if or (IsMemory $type) (IsBuffer $type)}}
+    {{if IsBuffer $type}}
       func (i *{{$.Impl}}) Get{{$v.Name}}() *{{$FType}} { return &i.{{$v.Name}} }
     {{else}}
       func (i *{{$.Impl}}) Get{{$v.Name}}() {{$FType}} { return i.{{$v.Name}} }
@@ -572,7 +571,6 @@ limitations under the License.
   {{else if IsString      $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsEnum        $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else if IsPointer     $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
-  {{else if IsPointerType $.Type}}{{$.LHS}} {{$.Operator}} {{$.RHS}}
   {{else                        }}{{$.LHS}}.{{$.Name}}({{$.RHS}})
   {{end}}
 {{end}}
