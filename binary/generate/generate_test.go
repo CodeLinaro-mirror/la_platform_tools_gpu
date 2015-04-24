@@ -20,13 +20,6 @@ import (
 	"log"
 	"path/filepath"
 	"testing"
-
-	"go/ast"
-	"go/build"
-	"go/parser"
-	"go/token"
-
-	"golang.org/x/tools/go/types"
 )
 
 var fields = []Field{
@@ -56,8 +49,11 @@ var fields = []Field{
 	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}, Anonymous: true},
 }
 
-var packages = map[string]*types.Package{
-	"unsafe": types.Unsafe,
+var loader *Loader
+
+func init() {
+	pwd, _ := filepath.Abs(".")
+	loader = NewLoader(pwd)
 }
 
 func parseStructs(source string) []*Struct {
@@ -66,67 +62,11 @@ func parseStructs(source string) []*Struct {
 	import "android.googlesource.com/platform/tools/gpu/binary"
 	%s`, source)
 
-	pwd, err := filepath.Abs(".")
+	file, err := loader.ScanFile("internal.go", fakeFile)
 	if err != nil {
-		log.Fatalf("Could not get pwd: %s", err)
+		log.Fatalf("Parse failed:", err)
 	}
-
-	fset := token.NewFileSet()
-	file, err := parser.ParseFile(fset, "internal.go", fakeFile, 0)
-	if err != nil {
-		log.Fatalf("invalid source: %s", err)
-	}
-	context := build.Default
-	config := types.Config{
-		IgnoreFuncBodies: true,
-		Error:            func(error) {},
-		Packages:         packages,
-	}
-	config.Import = func(pkgs map[string]*types.Package, name string) (*types.Package, error) {
-		pkg, found := pkgs[name]
-		if found {
-			return pkg, nil
-		}
-		imp, err := context.Import(name, pwd, 0)
-		if err != nil {
-			return pkg, err
-		}
-		files := []*ast.File{}
-		for _, filename := range imp.GoFiles {
-			path := filepath.Join(imp.Dir, filename)
-			file, err := parser.ParseFile(fset, path, nil, 0)
-			if err != nil {
-				return pkg, err
-			}
-			files = append(files, file)
-		}
-		pkg, err = config.Check(imp.ImportPath, fset, files, nil)
-		if err != nil {
-			return pkg, err
-		}
-		pkgs[name] = pkg
-		return pkg, nil
-	}
-	pkg, err := config.Check("", fset, []*ast.File{file}, nil)
-	if err != nil {
-		log.Printf("type failure: %s", err)
-	}
-	result := []*Struct{}
-	imports := make(Imports)
-	scope := pkg.Scope()
-	for _, name := range scope.Names() {
-		obj := scope.Lookup(name)
-		if n, ok := obj.(*types.TypeName); ok {
-			if t, ok := n.Type().(*types.Named); ok {
-				if _, ok := t.Underlying().(*types.Struct); ok {
-					if s := FromTypename(pkg, n, imports); s != nil {
-						result = append(result, s)
-					}
-				}
-			}
-		}
-	}
-	return result
+	return file.Structs
 }
 
 func parseStruct(t *testing.T, name string, source string) *Struct {
