@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+alias void[] pointer
+
 @replay_remap type u32 remapped
 
 cmd void cmd_void() {}
