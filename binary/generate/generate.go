@@ -42,6 +42,7 @@ type Imports map[string]struct{}
 type File struct {
 	Generated string
 	Package   string
+	Import    string
 	IsTest    bool
 	Path      string
 	Structs   []*Struct
