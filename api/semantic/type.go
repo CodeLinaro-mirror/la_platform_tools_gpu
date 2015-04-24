@@ -273,8 +273,6 @@ var (
 	Float64Type = &Builtin{"f64"}
 	Int64Type   = &Builtin{"s64"}
 	Uint64Type  = &Builtin{"u64"}
-	MemoryType  = &Builtin{"memory"}
-	PointerType = &Builtin{"pointer"}
 	StringType  = &Builtin{"string"}
 	VoidType    = &Builtin{"void"}
 )
@@ -297,8 +295,6 @@ func init() {
 		Float64Type,
 		Int64Type,
 		Uint64Type,
-		MemoryType,
-		PointerType,
 		StringType,
 		VoidType,
 	)

@@ -658,7 +658,6 @@ limitations under the License.
   {{else if IsS64         $}}long
   {{else if IsU64         $}}long
   {{else if IsF64         $}}double
-  {{else if IsPointerType $}}long
   {{else if IsString      $}}String
   {{else}}{{Error "macro Type called with unsupported type: %v" $.Name}}
   {{end}}

@@ -47,8 +47,6 @@ limitations under the License.
   {{else if IsS64           $}}int64
   {{else if IsU64           $}}uint64
   {{else if IsF64           $}}float64
-  {{else if IsPointerType   $}}memory.Pointer
-  {{else if IsMemory        $}}memory.Memory
   {{else if IsBuffer        $}}memory.Memory
   {{else if IsString        $}}string
   {{else if IsVoid          $}}void
@@ -79,7 +77,6 @@ limitations under the License.
   {{else if IsS64           $}}int64(0)
   {{else if IsU64           $}}uint64(0)
   {{else if IsF64           $}}float64(0)
-  {{else if IsPointerType   $}}memory.Pointer(0)
   {{else if IsString        $}}""
   {{else if IsPseudonym     $}}{{Macro "Go.Type" $}}({{Macro "Go.Null" $.To}})
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
@@ -104,10 +101,8 @@ limitations under the License.
   {{else if IsPointer       $.Type}}
     {{if $.Type.Array}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
     {{else}}if err := {{$.Name}}.Decode(d); err != nil { return err }{{end}}
-  {{else if IsMemory        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsBuffer        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
   {{else if IsEnum          $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { return err }
-  {{else if IsPointerType   $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
   {{else if IsBool          $.Type}}if v, err := d.Bool();    err == nil { {{$.Name}} = v } else { return err }
   {{else if IsInt           $.Type}}if v, err := d.Int64();   err == nil { {{$.Name}} = v } else { return err }
   {{else if IsUint          $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = v } else { return err }

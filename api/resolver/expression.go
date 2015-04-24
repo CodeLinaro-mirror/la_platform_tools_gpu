@@ -268,13 +268,6 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 	object := expression(ctx, in.Object)
 	at := baseType(object.ExpressionType())
 	switch at := at.(type) {
-	case *semantic.Builtin:
-		switch at {
-		case semantic.PointerType:
-			return arrayIndex(ctx, in, object, semantic.Uint8Type)
-		case semantic.MemoryType:
-			return arrayIndex(ctx, in, object, semantic.Uint8Type)
-		}
 	case *semantic.Array:
 		return arrayIndex(ctx, in, object, at.ValueType)
 	case *semantic.Map:
@@ -396,7 +389,7 @@ func length(ctx *context, in *ast.Length) *semantic.Length {
 	case *semantic.Pointer:
 		ok = ty.Array
 	case *semantic.Builtin:
-		if ty == semantic.StringType || ty == semantic.PointerType {
+		if ty == semantic.StringType {
 			ok = true
 		}
 	}
