@@ -362,7 +362,7 @@ public:
     BufferId_BufferTargetMap BoundBuffers;
     ProgramId BoundProgram;
     VertexArrayId BoundVertexArray;
-    VertexAttributeArrayRef_AttributeLocationMap VertexAttributeArrays;
+    VertexAttributeArrayPtr_AttributeLocationMap VertexAttributeArrays;
     TextureId_TextureTargetMap_TextureUnitMap TextureUnits;
     uint32_t ActiveTextureUnit;
     Bool_CapabilityMap Capabilities;

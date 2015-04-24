@@ -318,6 +318,16 @@ func (arr BufferIdArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.S
 		return value.AbsolutePointer(0)
 	}
 }
+func (arr CharBufferArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+	if len(arr) > 0 {
+		for _, e := range arr {
+			ϟb.Push(ϟb.String(e))
+		}
+		return ϟb.Buffer(len(arr))
+	} else {
+		return value.AbsolutePointer(0)
+	}
+}
 func (arr DiscardFramebufferAttachmentArray) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
 	if len(arr) > 0 {
 		for _, e := range arr {

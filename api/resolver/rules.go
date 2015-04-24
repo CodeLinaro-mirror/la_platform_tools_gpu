@@ -16,24 +16,54 @@ package resolver
 
 import "android.googlesource.com/platform/tools/gpu/api/semantic"
 
+func implicit(lhs semantic.Type, rhs semantic.Type) bool {
+	if lhs == semantic.AnyType {
+		return true
+	}
+	// TODO: buffer<char> = string ; this should probably not be allowed
+	if buf, isbuf := lhs.(*semantic.Buffer); isbuf && buf.To == semantic.CharType && rhs == semantic.StringType {
+		return true
+	}
+	// TODO: buffer<T> = T[] ; this should probably not be allowed
+	if buf, isbuf := lhs.(*semantic.Buffer); isbuf {
+		if ptr, isptr := rhs.(*semantic.Pointer); isptr {
+			if buf.Array == ptr.Array && assignable(buf.To, ptr.To) {
+				return true
+			}
+		}
+		if arr, isarr := rhs.(*semantic.Array); isarr {
+			if buf.Array && assignable(buf.To, arr.ValueType) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func assignable(lhs semantic.Type, rhs semantic.Type) bool {
 	if isVoid(lhs) || isVoid(rhs) {
 		return false
 	}
-	if lhs == semantic.AnyType || rhs == semantic.AnyType {
+	if equal(lhs, rhs) {
 		return true
 	}
-	return lhs == rhs
+	if implicit(lhs, rhs) {
+		return true
+	}
+	return implicit(rhs, lhs)
 }
 
 func comparable(lhs semantic.Type, rhs semantic.Type) bool {
 	if isVoid(lhs) || isVoid(rhs) {
 		return false
 	}
-	if lhs == semantic.AnyType || rhs == semantic.AnyType {
+	if equal(lhs, rhs) {
 		return true
 	}
-	return lhs == rhs
+	if implicit(lhs, rhs) {
+		return true
+	}
+	return implicit(rhs, lhs)
 }
 
 func equal(lhs semantic.Type, rhs semantic.Type) bool {

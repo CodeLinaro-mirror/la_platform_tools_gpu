@@ -47,7 +47,14 @@ limitations under the License.
   {{else if IsS64           $}}int64
   {{else if IsU64           $}}uint64
   {{else if IsF64           $}}float64
-  {{else if IsBuffer        $}}memory.Memory
+  {{else if IsBuffer      $}}
+    {{if $.Array}}
+      {{if IsU8 $.To}}memory.Memory
+      {{else if IsChar $.To}}string
+      {{else}}[]{{Macro "Go.Type" $.To}}
+      {{end}}
+    {{else}}*{{Macro "Go.Type" $.To}}
+    {{end}}
   {{else if IsString        $}}string
   {{else if IsVoid          $}}void
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}

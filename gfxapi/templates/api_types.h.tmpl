@@ -99,11 +99,11 @@ limitations under the License.
 
   struct {{$.Name}} {
     {{range $f := $.Fields}}
-      inline {{$.Name}}& Set{{$f.Name}}({{Macro "C++.StateType" $f}} v) { m{{$f.Name}} = v; return *this; }
+      inline {{$.Name}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v) { m{{$f.Name}} = v; return *this; }
     {{end}}
 ¶
     {{range $f := $.Fields}}
-      {{Macro "C++.StateType" $f}} m{{$f.Name}};
+      {{Macro "C++.Type" $f}} m{{$f.Name}};
     {{end}}
   };
 {{end}}
@@ -136,7 +136,7 @@ limitations under the License.
 
   {{Macro "DeclareType" $.To}}
 
-  typedef {{Macro "C++.StateType" $.To}} {{$.Name}};
+  typedef {{Macro "C++.Type" $.To}} {{$.Name}};
 {{end}}
 
 
@@ -152,5 +152,5 @@ limitations under the License.
   {{Macro "DeclareType" $.KeyType}}
   {{Macro "DeclareType" $.ValueType}}
 
-  typedef std::unordered_map<{{Macro "C++.StateType" $.KeyType}}, {{Macro "C++.StateType" $.ValueType}}> {{$.Name}};
+  typedef std::unordered_map<{{Macro "C++.Type" $.KeyType}}, {{Macro "C++.Type" $.ValueType}}> {{$.Name}};
 {{end}}

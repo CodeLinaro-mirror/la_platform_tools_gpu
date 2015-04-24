@@ -148,7 +148,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attrib_list",
-				Type: s.getArrayInfo(3),
+				Type: s.getArrayInfo(5),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -473,7 +473,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attachments",
-				Type: s.getArrayInfo(2),
+				Type: s.getArrayInfo(4),
 				Out:  false,
 			},
 		},
@@ -767,7 +767,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(13),
+				Type: s.getArrayInfo(22),
 				Out:  true,
 			},
 		},
@@ -802,7 +802,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(13),
+				Type: s.getArrayInfo(22),
 				Out:  false,
 			},
 		},
@@ -1217,7 +1217,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -1242,7 +1242,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -1387,7 +1387,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -1412,7 +1412,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  true,
 			},
 		},
@@ -1547,7 +1547,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -1572,7 +1572,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -1597,7 +1597,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -1622,7 +1622,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -1757,7 +1757,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1782,7 +1782,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1807,7 +1807,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1832,7 +1832,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1862,7 +1862,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1892,7 +1892,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1922,7 +1922,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1947,7 +1947,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -1972,7 +1972,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -2102,7 +2102,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -2122,7 +2122,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -2142,7 +2142,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -2162,7 +2162,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  false,
 			},
 		},
@@ -2187,7 +2187,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "range",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -2477,7 +2477,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(12),
+				Type: s.getArrayInfo(20),
 				Out:  true,
 			},
 		},
@@ -2497,7 +2497,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(12),
+				Type: s.getArrayInfo(20),
 				Out:  false,
 			},
 		},
@@ -2932,7 +2932,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(9),
 				Out:  true,
 			},
 		},
@@ -2992,7 +2992,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(6),
+				Type: s.getArrayInfo(9),
 				Out:  false,
 			},
 		},
@@ -3032,7 +3032,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(14),
 				Out:  true,
 			},
 		},
@@ -3102,7 +3102,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(8),
+				Type: s.getArrayInfo(14),
 				Out:  false,
 			},
 		},
@@ -3147,7 +3147,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -3167,7 +3167,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffers",
-				Type: s.getArrayInfo(1),
+				Type: s.getArrayInfo(2),
 				Out:  true,
 			},
 		},
@@ -3267,7 +3267,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffers",
-				Type: s.getArrayInfo(1),
+				Type: s.getArrayInfo(2),
 				Out:  false,
 			},
 		},
@@ -3372,12 +3372,12 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "source",
-				Type: s.getArrayInfo(11),
+				Type: s.getArrayInfo(18),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "length",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  false,
 			},
 		},
@@ -3397,7 +3397,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(10),
+				Type: s.getArrayInfo(17),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3616,7 +3616,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(10),
+				Type: s.getArrayInfo(17),
 				Out:  true,
 			},
 		},
@@ -3971,7 +3971,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -4084,7 +4084,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(4),
+				Type: s.getArrayInfo(6),
 				Out:  true,
 			},
 		},
@@ -4104,7 +4104,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(9),
+				Type: s.getArrayInfo(15),
 				Out:  true,
 			},
 		},
@@ -4249,7 +4249,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attachments",
-				Type: s.getArrayInfo(5),
+				Type: s.getArrayInfo(8),
 				Out:  false,
 			},
 		},
@@ -4364,7 +4364,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(12),
 				Out:  true,
 			},
 		},
@@ -4419,7 +4419,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(12),
 				Out:  false,
 			},
 		},
@@ -4509,7 +4509,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(12),
 				Out:  true,
 			},
 		},
@@ -4564,7 +4564,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(7),
+				Type: s.getArrayInfo(12),
 				Out:  false,
 			},
 		},
@@ -4828,31 +4828,51 @@ func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
 	case 0:
 		e = service.CreateArrayInfo("BoolArray", service.TypeKindArray, schema.Bool)
 	case 1:
-		e = service.CreateArrayInfo("BufferIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("BufferArray", service.TypeKindArray, s.getClassInfo(9))
 	case 2:
-		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(52))
+		e = service.CreateArrayInfo("BufferIdArray", service.TypeKindArray, schema.U32)
 	case 3:
-		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
+		e = service.CreateArrayInfo("CharBufferArray", service.TypeKindArray, schema.String)
 	case 4:
-		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
+		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(52))
 	case 5:
-		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(21))
+		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
 	case 6:
-		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
 	case 7:
-		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("FramebufferArray", service.TypeKindArray, s.getClassInfo(8))
 	case 8:
-		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(21))
 	case 9:
-		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
+		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
 	case 10:
-		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("ProgramArray", service.TypeKindArray, s.getClassInfo(23))
 	case 11:
-		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
+		e = service.CreateArrayInfo("QueryArray", service.TypeKindArray, s.getClassInfo(26))
 	case 12:
-		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
+		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
 	case 13:
+		e = service.CreateArrayInfo("RenderbufferArray", service.TypeKindArray, s.getClassInfo(4))
+	case 14:
+		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
+	case 15:
+		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
+	case 16:
+		e = service.CreateArrayInfo("ShaderArray", service.TypeKindArray, s.getClassInfo(10))
+	case 17:
+		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
+	case 18:
+		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
+	case 19:
+		e = service.CreateArrayInfo("TextureArray", service.TypeKindArray, s.getClassInfo(5))
+	case 20:
+		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
+	case 21:
+		e = service.CreateArrayInfo("VertexArrayArray", service.TypeKindArray, s.getClassInfo(24))
+	case 22:
 		e = service.CreateArrayInfo("VertexArrayIdArray", service.TypeKindArray, schema.U32)
+	case 23:
+		e = service.CreateArrayInfo("VertexAttributeArrayArray", service.TypeKindArray, s.getClassInfo(25))
 	}
 	s.arrays[id] = e
 	return e
@@ -4874,13 +4894,13 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateMapInfo("AttributeLocation_stringMap", service.TypeKindMap, schema.String, schema.U32)
+		e = service.CreateMapInfo("AttributeLocation_CharBufferMap", service.TypeKindMap, schema.String, schema.U32)
 	case 1:
 		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(44), schema.Bool)
 	case 2:
 		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(30), schema.U32)
 	case 3:
-		e = service.CreateMapInfo("BufferRef_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
+		e = service.CreateMapInfo("BufferPtr_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
 	case 4:
 		e = service.CreateMapInfo("CubemapLevel_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(6))
 	case 5:
@@ -4888,39 +4908,39 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 6:
 		e = service.CreateMapInfo("FramebufferId_FramebufferTargetMap", service.TypeKindMap, s.getEnumInfo(25), schema.U32)
 	case 7:
-		e = service.CreateMapInfo("FramebufferRef_FramebufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(8))
+		e = service.CreateMapInfo("FramebufferPtr_FramebufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(8))
 	case 8:
 		e = service.CreateMapInfo("Image_CubeMapImageTargetMap", service.TypeKindMap, s.getEnumInfo(6), s.getClassInfo(2))
 	case 9:
 		e = service.CreateMapInfo("Image_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(2))
 	case 10:
-		e = service.CreateMapInfo("ProgramRef_ProgramIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(23))
+		e = service.CreateMapInfo("ProgramPtr_ProgramIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(23))
 	case 11:
-		e = service.CreateMapInfo("QueryRef_QueryIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(26))
+		e = service.CreateMapInfo("QueryPtr_QueryIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(26))
 	case 12:
 		e = service.CreateMapInfo("RenderbufferId_RenderbufferTargetMap", service.TypeKindMap, s.getEnumInfo(28), schema.U32)
 	case 13:
-		e = service.CreateMapInfo("RenderbufferRef_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
+		e = service.CreateMapInfo("RenderbufferPtr_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
 	case 14:
 		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(55), schema.S32)
 	case 15:
 		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(34), schema.U32)
 	case 16:
-		e = service.CreateMapInfo("ShaderRef_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
+		e = service.CreateMapInfo("ShaderPtr_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
 	case 17:
 		e = service.CreateMapInfo("TextureId_TextureTargetMap", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
 	case 18:
 		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(32), s.getMapInfo(17))
 	case 19:
-		e = service.CreateMapInfo("TextureRef_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
+		e = service.CreateMapInfo("TexturePtr_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
 	case 20:
 		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(40), schema.U32)
 	case 21:
 		e = service.CreateMapInfo("Uniform_UniformLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(22))
 	case 22:
-		e = service.CreateMapInfo("VertexArrayRef_VertexArrayIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(24))
+		e = service.CreateMapInfo("VertexArrayPtr_VertexArrayIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(24))
 	case 23:
-		e = service.CreateMapInfo("VertexAttributeArrayRef_AttributeLocationMap", service.TypeKindMap, schema.U32, s.getClassInfo(25))
+		e = service.CreateMapInfo("VertexAttributeArrayPtr_AttributeLocationMap", service.TypeKindMap, schema.U32, s.getClassInfo(25))
 	case 24:
 		e = service.CreateMapInfo("VertexAttribute_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(11))
 	}
@@ -7654,7 +7674,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Source",
-					Type: s.getArrayInfo(11),
+					Type: s.getArrayInfo(3),
 				},
 				&service.FieldInfo{
 					Name: "Type",

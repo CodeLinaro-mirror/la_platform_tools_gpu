@@ -270,6 +270,14 @@ func index(ctx *context, in *ast.Index) semantic.Expression {
 	switch at := at.(type) {
 	case *semantic.Array:
 		return arrayIndex(ctx, in, object, at.ValueType)
+	case *semantic.Pointer:
+		if at.Array {
+			return arrayIndex(ctx, in, object, at.To)
+		}
+	case *semantic.Buffer:
+		if at.Array {
+			return arrayIndex(ctx, in, object, at.To)
+		}
 	case *semantic.Map:
 		out := &semantic.MapIndex{AST: in, Map: object}
 		ctx.with(at.KeyType, func() {
@@ -348,7 +356,7 @@ func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitiali
 func new(ctx *context, in *ast.New) *semantic.New {
 	out := &semantic.New{AST: in}
 	out.Initializer = classInitializer(ctx, in.ClassInitializer)
-	out.Type = getPointerType(ctx, in, out.Initializer.Class, false)
+	out.Type = getBufferType(ctx, in, out.Initializer.Class, false)
 	ctx.mappings[in] = out
 	return out
 }

@@ -51,7 +51,7 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		s := &Renderbuffer{}
 		s.Init()
 		return s
-	}() // RenderbufferRef
+	}() // RenderbufferPtr
 	backbufferColor.Width = ϟa.In.Width
 	backbufferColor.Height = ϟa.In.Height
 	backbufferColor.Format = ϟa.In.ColorFmt
@@ -60,7 +60,7 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		s := &Renderbuffer{}
 		s.Init()
 		return s
-	}() // RenderbufferRef
+	}() // RenderbufferPtr
 	backbufferDepth.Width = ϟa.In.Width
 	backbufferDepth.Height = ϟa.In.Height
 	backbufferDepth.Format = ϟa.In.DepthFmt
@@ -69,7 +69,7 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		s := &Renderbuffer{}
 		s.Init()
 		return s
-	}() // RenderbufferRef
+	}() // RenderbufferPtr
 	backbufferStencil.Width = ϟa.In.Width
 	backbufferStencil.Height = ϟa.In.Height
 	backbufferStencil.Format = ϟa.In.StencilFmt
@@ -78,7 +78,7 @@ func (ϟa *Init) Mutate(ϟs *state.State) error {
 		s := &Framebuffer{}
 		s.Init()
 		return s
-	}() // FramebufferRef
+	}() // FramebufferPtr
 	backbuffer.Attachments[FramebufferAttachment_GL_COLOR_ATTACHMENT0] = func() FramebufferAttachmentInfo {
 		s := FramebufferAttachmentInfo{}
 		s.Init()
@@ -441,7 +441,7 @@ func (ϟa *GlGetGraphicsResetStatusEXT) Mutate(ϟs *state.State) error {
 func (ϟa *GlBindAttribLocation) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBindAttribLocation_Out{}
-	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramRef
+	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramPtr
 	p.AttributeBindings[ϟa.In.Name] = ϟa.In.Location
 	_ = p
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -513,7 +513,7 @@ func (ϟa *GlBlendColor) Mutate(ϟs *state.State) error {
 func (ϟa *GlEnableVertexAttribArray) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlEnableVertexAttribArray_Out{}
-	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayRef
+	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayPtr
 	a.Enabled = true
 	_ = a
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -524,7 +524,7 @@ func (ϟa *GlEnableVertexAttribArray) Mutate(ϟs *state.State) error {
 func (ϟa *GlDisableVertexAttribArray) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDisableVertexAttribArray_Out{}
-	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayRef
+	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayPtr
 	a.Enabled = false
 	_ = a
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -535,7 +535,7 @@ func (ϟa *GlDisableVertexAttribArray) Mutate(ϟs *state.State) error {
 func (ϟa *GlVertexAttribPointer) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlVertexAttribPointer_Out{}
-	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayRef
+	a := ϟc.VertexAttributeArrays.Get(ϟa.In.Location) // VertexAttributeArrayPtr
 	a.Size = uint32(ϟa.In.Size)
 	a.Type = ϟa.In.Type
 	a.Normalized = ϟa.In.Normalized
@@ -595,7 +595,7 @@ func (ϟa *GlGetShaderiv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetShaderiv_Out{}
 	ϟo.Value = make(S32Array, int32(1))
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderPtr
 	ϟo.Value[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case ShaderParameter_GL_SHADER_TYPE:
@@ -673,7 +673,7 @@ func (ϟa *GlTexParameteri) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlTexParameteri_Out{}
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
-	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
+	t := ϟc.Instances.Textures.Get(id)                                // TexturePtr
 	switch ϟa.In.Parameter {
 	case TextureParameter_GL_TEXTURE_MAG_FILTER:
 		t.MagFilter = TextureFilterMode(ϟa.In.Value)
@@ -708,7 +708,7 @@ func (ϟa *GlTexParameterf) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlTexParameterf_Out{}
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
-	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
+	t := ϟc.Instances.Textures.Get(id)                                // TexturePtr
 	switch ϟa.In.Parameter {
 	case TextureParameter_GL_TEXTURE_MAG_FILTER:
 		t.MagFilter = TextureFilterMode(ϟa.In.Value)
@@ -744,7 +744,7 @@ func (ϟa *GlGetTexParameteriv) Mutate(ϟs *state.State) error {
 	ϟo := GlGetTexParameteriv_Out{}
 	ϟo.Values = make(S32Array, int32(1))
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
-	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
+	t := ϟc.Instances.Textures.Get(id)                                // TexturePtr
 	ϟo.Values[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case TextureParameter_GL_TEXTURE_MAG_FILTER:
@@ -782,7 +782,7 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *state.State) error {
 	ϟo := GlGetTexParameterfv_Out{}
 	ϟo.Values = make(F32Array, int32(1))
 	id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(ϟa.In.Target) // TextureId
-	t := ϟc.Instances.Textures.Get(id)                                // TextureRef
+	t := ϟc.Instances.Textures.Get(id)                                // TexturePtr
 	ϟo.Values[int32(0)] = func() (result float32) {
 		switch ϟa.In.Parameter {
 		case TextureParameter_GL_TEXTURE_MAG_FILTER:
@@ -818,7 +818,7 @@ func (ϟa *GlGetTexParameterfv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform1i) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform1i_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
 	uniform.Value.S32 = ϟa.In.Value
@@ -832,7 +832,7 @@ func (ϟa *GlUniform1i) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform2i) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform2i_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC2
 	uniform.Value.Vec2i = func() Vec2i {
@@ -852,7 +852,7 @@ func (ϟa *GlUniform2i) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform3i) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform3i_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC3
 	uniform.Value.Vec3i = func() Vec3i {
@@ -873,7 +873,7 @@ func (ϟa *GlUniform3i) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform4i) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform4i_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC4
 	uniform.Value.Vec4i = func() Vec4i {
@@ -895,7 +895,7 @@ func (ϟa *GlUniform4i) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform1iv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform1iv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT
 	uniform.Value.S32 = ϟa.In.Value[int32(0)]
@@ -909,7 +909,7 @@ func (ϟa *GlUniform1iv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform2iv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform2iv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC2
 	uniform.Value.Vec2i = func() Vec2i {
@@ -929,7 +929,7 @@ func (ϟa *GlUniform2iv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform3iv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform3iv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC3
 	uniform.Value.Vec3i = func() Vec3i {
@@ -950,7 +950,7 @@ func (ϟa *GlUniform3iv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform4iv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform4iv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_INT_VEC4
 	uniform.Value.Vec4i = func() Vec4i {
@@ -972,7 +972,7 @@ func (ϟa *GlUniform4iv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform1f) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform1f_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
 	uniform.Value.F32 = ϟa.In.Value
@@ -986,7 +986,7 @@ func (ϟa *GlUniform1f) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform2f) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform2f_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
 	uniform.Value.Vec2f = func() Vec2f {
@@ -1006,7 +1006,7 @@ func (ϟa *GlUniform2f) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform3f) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform3f_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
 	uniform.Value.Vec3f = func() Vec3f {
@@ -1027,7 +1027,7 @@ func (ϟa *GlUniform3f) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform4f) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform4f_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
 	uniform.Value.Vec4f = func() Vec4f {
@@ -1049,7 +1049,7 @@ func (ϟa *GlUniform4f) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform1fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform1fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT
 	uniform.Value.F32 = ϟa.In.Value[int32(0)]
@@ -1063,7 +1063,7 @@ func (ϟa *GlUniform1fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform2fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform2fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC2
 	uniform.Value.Vec2f = func() Vec2f {
@@ -1083,7 +1083,7 @@ func (ϟa *GlUniform2fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform3fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform3fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC3
 	uniform.Value.Vec3f = func() Vec3f {
@@ -1104,7 +1104,7 @@ func (ϟa *GlUniform3fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniform4fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniform4fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_VEC4
 	uniform.Value.Vec4f = func() Vec4f {
@@ -1126,7 +1126,7 @@ func (ϟa *GlUniform4fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniformMatrix2fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT2
 	uniform.Value.Mat2f = func() Mat2f {
@@ -1158,7 +1158,7 @@ func (ϟa *GlUniformMatrix2fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniformMatrix3fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Type = ShaderUniformType_GL_FLOAT_MAT3
 	uniform.Value.Mat3f = func() Mat3f {
@@ -1200,7 +1200,7 @@ func (ϟa *GlUniformMatrix3fv) Mutate(ϟs *state.State) error {
 func (ϟa *GlUniformMatrix4fv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlUniformMatrix4fv_Out{}
-	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramRef
+	program := ϟc.Instances.Programs.Get(ϟc.BoundProgram) // ProgramPtr
 	uniform := program.Uniforms.Get(ϟa.In.Location)       // Uniform
 	uniform.Value.Mat4f = func() Mat4f {
 		s := Mat4f{}
@@ -1542,7 +1542,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 	switch ϟa.In.Target {
 	case TextureImageTarget_GL_TEXTURE_2D:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                               // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                               // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1564,7 +1564,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 		_, _, _ = id, t, l
 	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                                     // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                                     // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1602,7 +1602,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 	switch ϟa.In.Target {
 	case TextureImageTarget_GL_TEXTURE_2D:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                               // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                               // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1622,7 +1622,7 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 		_, _, _ = id, t, l
 	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                                     // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                                     // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1674,7 +1674,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 	switch ϟa.In.Target {
 	case TextureImageTarget_GL_TEXTURE_2D:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_2D) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                               // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                               // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1694,7 +1694,7 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 		_, _, _ = id, t, l
 	case TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_X, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, TextureImageTarget_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z:
 		id := ϟc.TextureUnits.Get(ϟc.ActiveTextureUnit).Get(TextureTarget_GL_TEXTURE_CUBE_MAP) // TextureId
-		t := ϟc.Instances.Textures.Get(id)                                                     // TextureRef
+		t := ϟc.Instances.Textures.Get(id)                                                     // TexturePtr
 		l := func() Image {
 			s := Image{}
 			s.Init()
@@ -1856,7 +1856,7 @@ func (ϟa *GlRenderbufferStorage) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlRenderbufferStorage_Out{}
 	id := ϟc.BoundRenderbuffers.Get(ϟa.In.Target) // RenderbufferId
-	rb := ϟc.Instances.Renderbuffers.Get(id)      // RenderbufferRef
+	rb := ϟc.Instances.Renderbuffers.Get(id)      // RenderbufferPtr
 	rb.Format = ϟa.In.Format
 	rb.Width = ϟa.In.Width
 	rb.Height = ϟa.In.Height
@@ -1891,7 +1891,7 @@ func (ϟa *GlGetRenderbufferParameteriv) Mutate(ϟs *state.State) error {
 	ϟo := GlGetRenderbufferParameteriv_Out{}
 	ϟo.Values = make(S32Array, int32(1))
 	id := ϟc.BoundRenderbuffers.Get(ϟa.In.Target) // RenderbufferId
-	rb := ϟc.Instances.Renderbuffers.Get(id)      // RenderbufferRef
+	rb := ϟc.Instances.Renderbuffers.Get(id)      // RenderbufferPtr
 	ϟo.Values[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case RenderbufferParameter_GL_RENDERBUFFER_WIDTH:
@@ -1951,7 +1951,7 @@ func (ϟa *GlBufferData) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlBufferData_Out{}
 	id := ϟc.BoundBuffers.Get(ϟa.In.Target) // BufferId
-	b := ϟc.Instances.Buffers.Get(id)       // BufferRef
+	b := ϟc.Instances.Buffers.Get(id)       // BufferPtr
 	if (ϟa.In.Data) != (BufferDataPointer(memory.Pointer(0))) {
 		b.Data.Write(ϟs.Memory.Slice(memory.Range{
 			Base: memory.Pointer(ϟa.In.Data),
@@ -1998,7 +1998,7 @@ func (ϟa *GlGetBufferParameteriv) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetBufferParameteriv_Out{}
 	id := ϟc.BoundBuffers.Get(ϟa.In.Target) // BufferId
-	b := ϟc.Instances.Buffers.Get(id)       // BufferRef
+	b := ϟc.Instances.Buffers.Get(id)       // BufferPtr
 	ϟo.Value = func() (result int32) {
 		switch ϟa.In.Parameter {
 		case BufferParameter_GL_BUFFER_SIZE:
@@ -2026,7 +2026,7 @@ func (ϟa *GlCreateShader) Mutate(ϟs *state.State) error {
 		s.Init()
 		return s
 	}()
-	s := ϟc.Instances.Shaders.Get(id) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(id) // ShaderPtr
 	s.Type = ϟa.In.Type
 	ϟo.Result = id
 	_, _ = id, s
@@ -2038,7 +2038,7 @@ func (ϟa *GlCreateShader) Mutate(ϟs *state.State) error {
 func (ϟa *GlDeleteShader) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDeleteShader_Out{}
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderPtr
 	s.Deletable = true
 	ϟc.Instances.Shaders.Delete(ϟa.In.Shader)
 	_ = s
@@ -2050,7 +2050,7 @@ func (ϟa *GlDeleteShader) Mutate(ϟs *state.State) error {
 func (ϟa *GlShaderSource) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlShaderSource_Out{}
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderPtr
 	s.Source = ϟa.In.Source
 	_ = s
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -2071,7 +2071,7 @@ func (ϟa *GlShaderBinary) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetShaderInfoLog_Out{}
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderPtr
 	min_0_a := ϟa.In.BufferLength               // s32
 	min_0_b := strlen(s.InfoLog)                // s32
 	min_0_result := func() (result int32) {
@@ -2097,7 +2097,7 @@ func (ϟa *GlGetShaderInfoLog) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetShaderSource) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetShaderSource_Out{}
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderRef
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader) // ShaderPtr
 	min_1_a := ϟa.In.BufferLength               // s32
 	min_1_b := strlen(s.Source[int32(0)])       // s32
 	min_1_result := func() (result int32) {
@@ -2173,8 +2173,8 @@ func (ϟa *GlDeleteProgram) Mutate(ϟs *state.State) error {
 func (ϟa *GlAttachShader) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlAttachShader_Out{}
-	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramRef
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader)   // ShaderRef
+	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramPtr
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader)   // ShaderPtr
 	p.Shaders[s.Type] = ϟa.In.Shader
 	_, _ = p, s
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -2185,8 +2185,8 @@ func (ϟa *GlAttachShader) Mutate(ϟs *state.State) error {
 func (ϟa *GlDetachShader) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlDetachShader_Out{}
-	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramRef
-	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader)   // ShaderRef
+	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramPtr
+	s := ϟc.Instances.Shaders.Get(ϟa.In.Shader)   // ShaderPtr
 	p.Shaders.Delete(s.Type)
 	_, _ = p, s
 	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
@@ -2198,7 +2198,7 @@ func (ϟa *GlGetAttachedShaders) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetAttachedShaders_Out{}
 	ϟo.Shaders = make(ShaderIdArray, ϟa.In.BufferLength)
-	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramRef
+	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramPtr
 	min_2_a := ϟa.In.BufferLength                 // s32
 	min_2_b := int32(len(p.Shaders))              // s32
 	min_2_result := func() (result int32) {
@@ -2232,7 +2232,7 @@ func (ϟa *GlLinkProgram) Mutate(ϟs *state.State) error {
 func (ϟa *GlGetProgramInfoLog) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := GlGetProgramInfoLog_Out{}
-	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramRef
+	p := ϟc.Instances.Programs.Get(ϟa.In.Program) // ProgramPtr
 	min_3_a := ϟa.In.BufferLength                 // s32
 	min_3_b := strlen(p.InfoLog)                  // s32
 	min_3_result := func() (result int32) {
@@ -2391,7 +2391,7 @@ func (ϟa *GlFramebufferRenderbuffer) Mutate(ϟs *state.State) error {
 		}
 	}() // FramebufferTarget
 	framebufferId := ϟc.BoundFramebuffers.Get(target)                      // FramebufferId
-	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferRef
+	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferPtr
 	attachment := framebuffer.Attachments.Get(ϟa.In.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.In.Renderbuffer) == (ϟc.Internals.NilRenderbuffer) {
 		attachment.Type = FramebufferAttachmentType_GL_NONE
@@ -2426,7 +2426,7 @@ func (ϟa *GlFramebufferTexture2D) Mutate(ϟs *state.State) error {
 		}
 	}() // FramebufferTarget
 	framebufferId := ϟc.BoundFramebuffers.Get(target)                      // FramebufferId
-	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferRef
+	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId)            // FramebufferPtr
 	attachment := framebuffer.Attachments.Get(ϟa.In.FramebufferAttachment) // FramebufferAttachmentInfo
 	if (ϟa.In.Texture) == (ϟc.Internals.NilTexture) {
 		attachment.Type = FramebufferAttachmentType_GL_NONE
@@ -2486,7 +2486,7 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Mutate(ϟs *state.State) error
 		}
 	}() // FramebufferTarget
 	framebufferId := ϟc.BoundFramebuffers.Get(target)           // FramebufferId
-	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId) // FramebufferRef
+	framebuffer := ϟc.Instances.Framebuffers.Get(framebufferId) // FramebufferPtr
 	a := framebuffer.Attachments.Get(ϟa.In.Attachment)          // FramebufferAttachmentInfo
 	ϟo.Value[int32(0)] = func() (result int32) {
 		switch ϟa.In.Parameter {
@@ -2547,7 +2547,7 @@ func (ϟa *GlDrawElements) Mutate(ϟs *state.State) error {
 	ReadVertexArrays_5_first_index := first                                      // u32
 	ReadVertexArrays_5_index_count := (last) - (first)                           // u32
 	for i := int32(int32(0)); i < int32(len(ϟc.VertexAttributeArrays)); i++ {
-		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayRef
+		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayPtr
 		if arr.Enabled {
 			vertexAttribTypeSize_6_t := arr.Type // VertexAttribType
 			vertexAttribTypeSize_6_result := func() (result uint32) {
@@ -2596,7 +2596,7 @@ func (ϟa *GlDrawArrays) Mutate(ϟs *state.State) error {
 	ReadVertexArrays_7_first_index := uint32(ϟa.In.FirstIndex) // u32
 	ReadVertexArrays_7_index_count := uint32(ϟa.In.IndexCount) // u32
 	for i := int32(int32(0)); i < int32(len(ϟc.VertexAttributeArrays)); i++ {
-		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayRef
+		arr := ϟc.VertexAttributeArrays.Get(AttributeLocation(i)) // VertexAttributeArrayPtr
 		if arr.Enabled {
 			vertexAttribTypeSize_8_t := arr.Type // VertexAttribType
 			vertexAttribTypeSize_8_result := func() (result uint32) {
