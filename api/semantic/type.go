@@ -257,45 +257,36 @@ type Builtin struct {
 func (t Builtin) Typename() string        { return t.Name }
 func (t Builtin) Member(name string) Node { return nil }
 
+func builtin(name string) *Builtin {
+	b := &Builtin{Name: name}
+	BuiltinTypes = append(BuiltinTypes, b)
+	return b
+}
+
 var (
 	// These are all the fundamental primitive types of the api language
-	AnyType     = &Builtin{"any"}
-	BoolType    = &Builtin{"bool"}
-	IntType     = &Builtin{"int"}
-	UintType    = &Builtin{"uint"}
-	Int8Type    = &Builtin{"s8"}
-	Uint8Type   = &Builtin{"u8"}
-	Int16Type   = &Builtin{"s16"}
-	Uint16Type  = &Builtin{"u16"}
-	Int32Type   = &Builtin{"s32"}
-	Uint32Type  = &Builtin{"u32"}
-	Float32Type = &Builtin{"f32"}
-	Float64Type = &Builtin{"f64"}
-	Int64Type   = &Builtin{"s64"}
-	Uint64Type  = &Builtin{"u64"}
-	StringType  = &Builtin{"string"}
-	VoidType    = &Builtin{"void"}
+
+	// Special types
+	VoidType   = builtin("void")
+	AnyType    = builtin("any")
+	StringType = builtin("string")
+	// Unsized primitives
+	BoolType = builtin("bool")
+	CharType = builtin("char")
+	IntType  = builtin("int")
+	UintType = builtin("uint")
+	// Fixed size integer forms
+	Int8Type   = builtin("s8")
+	Uint8Type  = builtin("u8")
+	Int16Type  = builtin("s16")
+	Uint16Type = builtin("u16")
+	Int32Type  = builtin("s32")
+	Uint32Type = builtin("u32")
+	Int64Type  = builtin("s64")
+	Uint64Type = builtin("u64")
+	// Floating point forms
+	Float32Type = builtin("f32")
+	Float64Type = builtin("f64")
 )
 
 var BuiltinTypes []*Builtin
-
-func init() {
-	BuiltinTypes = append(BuiltinTypes,
-		AnyType,
-		BoolType,
-		IntType,
-		UintType,
-		Int8Type,
-		Uint8Type,
-		Int16Type,
-		Uint16Type,
-		Int32Type,
-		Uint32Type,
-		Float32Type,
-		Float64Type,
-		Int64Type,
-		Uint64Type,
-		StringType,
-		VoidType,
-	)
-}
