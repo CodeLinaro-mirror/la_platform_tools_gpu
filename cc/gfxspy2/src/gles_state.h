@@ -928,10 +928,10 @@ inline void GlesState::glUniformMatrix4fv(UniformLocation const location, int32_
     Uniform uniform = program->mUniforms[location];
     uniform.mValue.mMat4f =
             Mat4f()
-                    .SetCol0(Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(
-                            values[3]))
-                    .SetCol1(Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(
-                            values[7]))
+                    .SetCol0(
+                            Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(values[3]))
+                    .SetCol1(
+                            Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(values[7]))
                     .SetCol2(Vec4f()
                                      .SetX(values[8])
                                      .SetY(values[9])
