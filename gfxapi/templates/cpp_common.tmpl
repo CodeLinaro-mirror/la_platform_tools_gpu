@@ -41,7 +41,14 @@ limitations under the License.
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
   {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
-  {{else if IsBuffer      $}}Memory
+  {{else if IsBuffer      $}}
+    {{if $.Array}}
+      {{if IsU8 $.To}}Memory
+      {{else if IsChar $.To}}std::string
+      {{else}}std::vector<{{Macro "C++.Type" $.To}}>
+      {{end}}
+    {{else}}std::shared_ptr<{{Macro "C++.Type" $.To}}>
+    {{end}}
   {{else if IsAny         $}}auto
   {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
@@ -91,26 +98,6 @@ limitations under the License.
 
   {{if $override := Global "C++.EnumTypeOverride"}}{{$override}}
   {{else}}{{Macro "C++.EnumName" $}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ type for use in a state block or class for the specified AST
-  type.
-  For strings this emits a std::string type.
-  For pointers this emits a std::shared_ptr type.
-  For vectors this emits a std::vector type.
-  For other types this is the same as "C++.Type"
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.StateType"}}
-  {{if not (IsType $)}}{{Macro "C++.StateType" (TypeOf $)}}
-  {{else if IsString  $}}std::string
-  {{else if IsPointer $}}{{if $.Array}}{{Macro "C++.Type" $}}{{else}}std::shared_ptr<{{Macro "C++.StateType" $.To}}>{{end}}
-  {{else if IsArray   $}}std::vector<{{Macro "C++.StateType" $.ValueType}}>
-  {{else               }}{{Macro "C++.Type" $}}
   {{end}}
 {{end}}
 
@@ -250,7 +237,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.StatementDefault"}}
-  {{     if IsDeclareLocal $}}{{Macro "C++.StateType" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
+  {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
   {{else if IsCopy         $}}{{Macro "C++.Copy" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
@@ -290,6 +277,7 @@ limitations under the License.
   {{AssertType $ "Assign"}}
 
   {{if IsArray (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
+  {{else if IsBuffer (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
   {{else                     }}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
   {{end}}
 {{end}}
@@ -313,8 +301,8 @@ limitations under the License.
 {{define "C++.ArrayAssign"}}
   {{AssertType $ "Assign"}}
 
-  {{AssertType (TypeOf $.LHS) "Array"}}
-  {{AssertType (TypeOf $.RHS) "Array"}}
+  {{AssertType (TypeOf $.LHS) "Array" "Buffer"}}
+  {{AssertType (TypeOf $.RHS) "Array" "Buffer"}}
 
   {{$lhs   := Macro "C++.Read" $.LHS}}
   {{$rhs   := Macro "C++.Read" $.RHS}}
@@ -351,7 +339,7 @@ limitations under the License.
       {{Macro "C++.Block" $.Block}}
     }
   {{else}}
-    for ({{Macro "C++.StateType" $.Iterable}}::iterator {{$.Iterator.Name}} = {{Macro "C++.Read" $.Iterable}}; {{$.Iterator.Name}} != {{Macro "C++.Read" $.Iterable}}.end(); ++{{$.Iterator.Name}}) {
+    for ({{Macro "C++.Type" $.Iterable}}::iterator {{$.Iterator.Name}} = {{Macro "C++.Read" $.Iterable}}; {{$.Iterator.Name}} != {{Macro "C++.Read" $.Iterable}}.end(); ++{{$.Iterator.Name}}) {
       {{Macro "C++.Block" $.Block}}
     }
   {{end}}
@@ -387,8 +375,8 @@ limitations under the License.
   {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
   {{else if IsNull             $}}{{Macro "C++.Null" $.Type}}
   {{else if IsClassInitializer $}}
-    {{Macro "C++.StateType" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
-  {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.StateType" $ty.To}}>(new {{Macro "C++.StateType" $ty.To}}())
+    {{Macro "C++.Type" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
+  {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
   {{else if IsSelect           $}}
     /* switch({{Macro "C++.Read" $.Value}}) */»
     {{range $c := $.Choices}}
@@ -409,7 +397,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Dereference"}}
-  {{Macro "C++.Read" $}}{{if IsPointer (TypeOf $)}}->{{else}}.{{end}}
+  {{Macro "C++.Read" $}}{{if or (IsPointer (TypeOf $)) (IsBuffer (TypeOf $))}}->{{else}}.{{end}}
 {{end}}
 
 
@@ -434,7 +422,7 @@ limitations under the License.
   {{AssertType $.Name "string"}}
   {{AssertType $.Range "BinaryOp"}}
 
-  for ({{Macro "C++.StateType" $.Range.RHS}} {{$.Name}} = {{Macro "C++.Read" $.Range.LHS}}; {{$.Name}} < {{Macro "C++.Read" $.Range.RHS}}; ++{{$.Name}})
+  for ({{Macro "C++.Type" $.Range.RHS}} {{$.Name}} = {{Macro "C++.Read" $.Range.LHS}}; {{$.Name}} < {{Macro "C++.Read" $.Range.RHS}}; ++{{$.Name}})
 {{end}}
 
 
@@ -448,7 +436,7 @@ limitations under the License.
   {{$src_ty := TypeOf $.Object}}
   {{$src_fp := or (IsF32 $src_ty) (IsF64 $src_ty)}}
 
-  ({{Macro "C++.StateType" $.Type}})({{Macro "C++.Read" $.Object}})
+  ({{Macro "C++.Type" $.Type}})({{Macro "C++.Read" $.Object}})
 {{end}}
 
 

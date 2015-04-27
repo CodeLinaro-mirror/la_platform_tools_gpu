@@ -175,10 +175,20 @@ type BoolArray []bool
 func (s BoolArray) Len() int      { return len(s) }
 func (s BoolArray) Range() []bool { return s }
 
+type BufferArray []Buffer
+
+func (s BufferArray) Len() int        { return len(s) }
+func (s BufferArray) Range() []Buffer { return s }
+
 type BufferIdArray []BufferId
 
 func (s BufferIdArray) Len() int          { return len(s) }
 func (s BufferIdArray) Range() []BufferId { return s }
+
+type CharBufferArray []string
+
+func (s CharBufferArray) Len() int        { return len(s) }
+func (s CharBufferArray) Range() []string { return s }
 
 type DiscardFramebufferAttachmentArray []DiscardFramebufferAttachment
 
@@ -195,6 +205,11 @@ type F32Array []float32
 func (s F32Array) Len() int         { return len(s) }
 func (s F32Array) Range() []float32 { return s }
 
+type FramebufferArray []Framebuffer
+
+func (s FramebufferArray) Len() int             { return len(s) }
+func (s FramebufferArray) Range() []Framebuffer { return s }
+
 type FramebufferAttachmentArray []FramebufferAttachment
 
 func (s FramebufferAttachmentArray) Len() int                       { return len(s) }
@@ -205,10 +220,25 @@ type FramebufferIdArray []FramebufferId
 func (s FramebufferIdArray) Len() int               { return len(s) }
 func (s FramebufferIdArray) Range() []FramebufferId { return s }
 
+type ProgramArray []Program
+
+func (s ProgramArray) Len() int         { return len(s) }
+func (s ProgramArray) Range() []Program { return s }
+
+type QueryArray []Query
+
+func (s QueryArray) Len() int       { return len(s) }
+func (s QueryArray) Range() []Query { return s }
+
 type QueryIdArray []QueryId
 
 func (s QueryIdArray) Len() int         { return len(s) }
 func (s QueryIdArray) Range() []QueryId { return s }
+
+type RenderbufferArray []Renderbuffer
+
+func (s RenderbufferArray) Len() int              { return len(s) }
+func (s RenderbufferArray) Range() []Renderbuffer { return s }
 
 type RenderbufferIdArray []RenderbufferId
 
@@ -220,6 +250,11 @@ type S32Array []int32
 func (s S32Array) Len() int       { return len(s) }
 func (s S32Array) Range() []int32 { return s }
 
+type ShaderArray []Shader
+
+func (s ShaderArray) Len() int        { return len(s) }
+func (s ShaderArray) Range() []Shader { return s }
+
 type ShaderIdArray []ShaderId
 
 func (s ShaderIdArray) Len() int          { return len(s) }
@@ -230,29 +265,44 @@ type StringArray []string
 func (s StringArray) Len() int        { return len(s) }
 func (s StringArray) Range() []string { return s }
 
+type TextureArray []Texture
+
+func (s TextureArray) Len() int         { return len(s) }
+func (s TextureArray) Range() []Texture { return s }
+
 type TextureIdArray []TextureId
 
 func (s TextureIdArray) Len() int           { return len(s) }
 func (s TextureIdArray) Range() []TextureId { return s }
+
+type VertexArrayArray []VertexArray
+
+func (s VertexArrayArray) Len() int             { return len(s) }
+func (s VertexArrayArray) Range() []VertexArray { return s }
 
 type VertexArrayIdArray []VertexArrayId
 
 func (s VertexArrayIdArray) Len() int               { return len(s) }
 func (s VertexArrayIdArray) Range() []VertexArrayId { return s }
 
-type AttributeLocation_stringMap map[string]AttributeLocation
+type VertexAttributeArrayArray []VertexAttributeArray
 
-func (m AttributeLocation_stringMap) Get(key string) AttributeLocation {
+func (s VertexAttributeArrayArray) Len() int                      { return len(s) }
+func (s VertexAttributeArrayArray) Range() []VertexAttributeArray { return s }
+
+type AttributeLocation_CharBufferMap map[string]AttributeLocation
+
+func (m AttributeLocation_CharBufferMap) Get(key string) AttributeLocation {
 	return m[key]
 }
-func (m AttributeLocation_stringMap) Contains(key string) bool {
+func (m AttributeLocation_CharBufferMap) Contains(key string) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m AttributeLocation_stringMap) Delete(key string) {
+func (m AttributeLocation_CharBufferMap) Delete(key string) {
 	delete(m, key)
 }
-func (m AttributeLocation_stringMap) Range() []AttributeLocation {
+func (m AttributeLocation_CharBufferMap) Range() []AttributeLocation {
 	values := make([]AttributeLocation, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -300,19 +350,19 @@ func (m BufferId_BufferTargetMap) Range() []BufferId {
 	return values
 }
 
-type BufferRef_BufferIdMap map[BufferId]*Buffer
+type BufferPtr_BufferIdMap map[BufferId]*Buffer
 
-func (m BufferRef_BufferIdMap) Get(key BufferId) *Buffer {
+func (m BufferPtr_BufferIdMap) Get(key BufferId) *Buffer {
 	return m[key]
 }
-func (m BufferRef_BufferIdMap) Contains(key BufferId) bool {
+func (m BufferPtr_BufferIdMap) Contains(key BufferId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m BufferRef_BufferIdMap) Delete(key BufferId) {
+func (m BufferPtr_BufferIdMap) Delete(key BufferId) {
 	delete(m, key)
 }
-func (m BufferRef_BufferIdMap) Range() []*Buffer {
+func (m BufferPtr_BufferIdMap) Range() []*Buffer {
 	values := make([]*Buffer, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -388,19 +438,19 @@ func (m FramebufferId_FramebufferTargetMap) Range() []FramebufferId {
 	return values
 }
 
-type FramebufferRef_FramebufferIdMap map[FramebufferId]*Framebuffer
+type FramebufferPtr_FramebufferIdMap map[FramebufferId]*Framebuffer
 
-func (m FramebufferRef_FramebufferIdMap) Get(key FramebufferId) *Framebuffer {
+func (m FramebufferPtr_FramebufferIdMap) Get(key FramebufferId) *Framebuffer {
 	return m[key]
 }
-func (m FramebufferRef_FramebufferIdMap) Contains(key FramebufferId) bool {
+func (m FramebufferPtr_FramebufferIdMap) Contains(key FramebufferId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m FramebufferRef_FramebufferIdMap) Delete(key FramebufferId) {
+func (m FramebufferPtr_FramebufferIdMap) Delete(key FramebufferId) {
 	delete(m, key)
 }
-func (m FramebufferRef_FramebufferIdMap) Range() []*Framebuffer {
+func (m FramebufferPtr_FramebufferIdMap) Range() []*Framebuffer {
 	values := make([]*Framebuffer, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -456,19 +506,19 @@ func (m Image_s32Map) Range() []Image {
 	return values
 }
 
-type ProgramRef_ProgramIdMap map[ProgramId]*Program
+type ProgramPtr_ProgramIdMap map[ProgramId]*Program
 
-func (m ProgramRef_ProgramIdMap) Get(key ProgramId) *Program {
+func (m ProgramPtr_ProgramIdMap) Get(key ProgramId) *Program {
 	return m[key]
 }
-func (m ProgramRef_ProgramIdMap) Contains(key ProgramId) bool {
+func (m ProgramPtr_ProgramIdMap) Contains(key ProgramId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m ProgramRef_ProgramIdMap) Delete(key ProgramId) {
+func (m ProgramPtr_ProgramIdMap) Delete(key ProgramId) {
 	delete(m, key)
 }
-func (m ProgramRef_ProgramIdMap) Range() []*Program {
+func (m ProgramPtr_ProgramIdMap) Range() []*Program {
 	values := make([]*Program, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -476,19 +526,19 @@ func (m ProgramRef_ProgramIdMap) Range() []*Program {
 	return values
 }
 
-type QueryRef_QueryIdMap map[QueryId]*Query
+type QueryPtr_QueryIdMap map[QueryId]*Query
 
-func (m QueryRef_QueryIdMap) Get(key QueryId) *Query {
+func (m QueryPtr_QueryIdMap) Get(key QueryId) *Query {
 	return m[key]
 }
-func (m QueryRef_QueryIdMap) Contains(key QueryId) bool {
+func (m QueryPtr_QueryIdMap) Contains(key QueryId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m QueryRef_QueryIdMap) Delete(key QueryId) {
+func (m QueryPtr_QueryIdMap) Delete(key QueryId) {
 	delete(m, key)
 }
-func (m QueryRef_QueryIdMap) Range() []*Query {
+func (m QueryPtr_QueryIdMap) Range() []*Query {
 	values := make([]*Query, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -516,19 +566,19 @@ func (m RenderbufferId_RenderbufferTargetMap) Range() []RenderbufferId {
 	return values
 }
 
-type RenderbufferRef_RenderbufferIdMap map[RenderbufferId]*Renderbuffer
+type RenderbufferPtr_RenderbufferIdMap map[RenderbufferId]*Renderbuffer
 
-func (m RenderbufferRef_RenderbufferIdMap) Get(key RenderbufferId) *Renderbuffer {
+func (m RenderbufferPtr_RenderbufferIdMap) Get(key RenderbufferId) *Renderbuffer {
 	return m[key]
 }
-func (m RenderbufferRef_RenderbufferIdMap) Contains(key RenderbufferId) bool {
+func (m RenderbufferPtr_RenderbufferIdMap) Contains(key RenderbufferId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m RenderbufferRef_RenderbufferIdMap) Delete(key RenderbufferId) {
+func (m RenderbufferPtr_RenderbufferIdMap) Delete(key RenderbufferId) {
 	delete(m, key)
 }
-func (m RenderbufferRef_RenderbufferIdMap) Range() []*Renderbuffer {
+func (m RenderbufferPtr_RenderbufferIdMap) Range() []*Renderbuffer {
 	values := make([]*Renderbuffer, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -576,19 +626,19 @@ func (m ShaderId_ShaderTypeMap) Range() []ShaderId {
 	return values
 }
 
-type ShaderRef_ShaderIdMap map[ShaderId]*Shader
+type ShaderPtr_ShaderIdMap map[ShaderId]*Shader
 
-func (m ShaderRef_ShaderIdMap) Get(key ShaderId) *Shader {
+func (m ShaderPtr_ShaderIdMap) Get(key ShaderId) *Shader {
 	return m[key]
 }
-func (m ShaderRef_ShaderIdMap) Contains(key ShaderId) bool {
+func (m ShaderPtr_ShaderIdMap) Contains(key ShaderId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m ShaderRef_ShaderIdMap) Delete(key ShaderId) {
+func (m ShaderPtr_ShaderIdMap) Delete(key ShaderId) {
 	delete(m, key)
 }
-func (m ShaderRef_ShaderIdMap) Range() []*Shader {
+func (m ShaderPtr_ShaderIdMap) Range() []*Shader {
 	values := make([]*Shader, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -640,19 +690,19 @@ func (m TextureId_TextureTargetMap_TextureUnitMap) Range() []TextureId_TextureTa
 	return values
 }
 
-type TextureRef_TextureIdMap map[TextureId]*Texture
+type TexturePtr_TextureIdMap map[TextureId]*Texture
 
-func (m TextureRef_TextureIdMap) Get(key TextureId) *Texture {
+func (m TexturePtr_TextureIdMap) Get(key TextureId) *Texture {
 	return m[key]
 }
-func (m TextureRef_TextureIdMap) Contains(key TextureId) bool {
+func (m TexturePtr_TextureIdMap) Contains(key TextureId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m TextureRef_TextureIdMap) Delete(key TextureId) {
+func (m TexturePtr_TextureIdMap) Delete(key TextureId) {
 	delete(m, key)
 }
-func (m TextureRef_TextureIdMap) Range() []*Texture {
+func (m TexturePtr_TextureIdMap) Range() []*Texture {
 	values := make([]*Texture, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -704,19 +754,19 @@ func (m Uniform_UniformLocationMap) Range() []Uniform {
 	return values
 }
 
-type VertexArrayRef_VertexArrayIdMap map[VertexArrayId]*VertexArray
+type VertexArrayPtr_VertexArrayIdMap map[VertexArrayId]*VertexArray
 
-func (m VertexArrayRef_VertexArrayIdMap) Get(key VertexArrayId) *VertexArray {
+func (m VertexArrayPtr_VertexArrayIdMap) Get(key VertexArrayId) *VertexArray {
 	return m[key]
 }
-func (m VertexArrayRef_VertexArrayIdMap) Contains(key VertexArrayId) bool {
+func (m VertexArrayPtr_VertexArrayIdMap) Contains(key VertexArrayId) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m VertexArrayRef_VertexArrayIdMap) Delete(key VertexArrayId) {
+func (m VertexArrayPtr_VertexArrayIdMap) Delete(key VertexArrayId) {
 	delete(m, key)
 }
-func (m VertexArrayRef_VertexArrayIdMap) Range() []*VertexArray {
+func (m VertexArrayPtr_VertexArrayIdMap) Range() []*VertexArray {
 	values := make([]*VertexArray, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -724,19 +774,19 @@ func (m VertexArrayRef_VertexArrayIdMap) Range() []*VertexArray {
 	return values
 }
 
-type VertexAttributeArrayRef_AttributeLocationMap map[AttributeLocation]*VertexAttributeArray
+type VertexAttributeArrayPtr_AttributeLocationMap map[AttributeLocation]*VertexAttributeArray
 
-func (m VertexAttributeArrayRef_AttributeLocationMap) Get(key AttributeLocation) *VertexAttributeArray {
+func (m VertexAttributeArrayPtr_AttributeLocationMap) Get(key AttributeLocation) *VertexAttributeArray {
 	return m[key]
 }
-func (m VertexAttributeArrayRef_AttributeLocationMap) Contains(key AttributeLocation) bool {
+func (m VertexAttributeArrayPtr_AttributeLocationMap) Contains(key AttributeLocation) bool {
 	_, ok := m[key]
 	return ok
 }
-func (m VertexAttributeArrayRef_AttributeLocationMap) Delete(key AttributeLocation) {
+func (m VertexAttributeArrayPtr_AttributeLocationMap) Delete(key AttributeLocation) {
 	delete(m, key)
 }
-func (m VertexAttributeArrayRef_AttributeLocationMap) Range() []*VertexAttributeArray {
+func (m VertexAttributeArrayPtr_AttributeLocationMap) Range() []*VertexAttributeArray {
 	values := make([]*VertexAttributeArray, 0, len(m))
 	for _, value := range m {
 		values = append(values, value)
@@ -8967,7 +9017,7 @@ type Shader struct {
 	Compiled  bool
 	Deletable bool
 	InfoLog   string
-	Source    StringArray
+	Source    []string
 	Type      ShaderType
 }
 
@@ -9193,7 +9243,7 @@ type Program struct {
 	Shaders           ShaderId_ShaderTypeMap
 	Linked            bool
 	Binary            memory.Memory
-	AttributeBindings AttributeLocation_stringMap
+	AttributeBindings AttributeLocation_CharBufferMap
 	Attributes        VertexAttribute_s32Map
 	Uniforms          Uniform_UniformLocationMap
 	InfoLog           string
@@ -9201,7 +9251,7 @@ type Program struct {
 
 func (c *Program) Init() {
 	c.Shaders = make(ShaderId_ShaderTypeMap)
-	c.AttributeBindings = make(AttributeLocation_stringMap)
+	c.AttributeBindings = make(AttributeLocation_CharBufferMap)
 	c.Attributes = make(VertexAttribute_s32Map)
 	c.Uniforms = make(Uniform_UniformLocationMap)
 }
@@ -9370,25 +9420,25 @@ func (c *InternalState) GetCreatedAt() atom.ID { return c.CreatedAt }
 type Objects struct {
 	binary.Generate
 	CreatedAt     atom.ID
-	Renderbuffers RenderbufferRef_RenderbufferIdMap
-	Textures      TextureRef_TextureIdMap
-	Framebuffers  FramebufferRef_FramebufferIdMap
-	Buffers       BufferRef_BufferIdMap
-	Shaders       ShaderRef_ShaderIdMap
-	Programs      ProgramRef_ProgramIdMap
-	VertexArrays  VertexArrayRef_VertexArrayIdMap
-	Queries       QueryRef_QueryIdMap
+	Renderbuffers RenderbufferPtr_RenderbufferIdMap
+	Textures      TexturePtr_TextureIdMap
+	Framebuffers  FramebufferPtr_FramebufferIdMap
+	Buffers       BufferPtr_BufferIdMap
+	Shaders       ShaderPtr_ShaderIdMap
+	Programs      ProgramPtr_ProgramIdMap
+	VertexArrays  VertexArrayPtr_VertexArrayIdMap
+	Queries       QueryPtr_QueryIdMap
 }
 
 func (c *Objects) Init() {
-	c.Renderbuffers = make(RenderbufferRef_RenderbufferIdMap)
-	c.Textures = make(TextureRef_TextureIdMap)
-	c.Framebuffers = make(FramebufferRef_FramebufferIdMap)
-	c.Buffers = make(BufferRef_BufferIdMap)
-	c.Shaders = make(ShaderRef_ShaderIdMap)
-	c.Programs = make(ProgramRef_ProgramIdMap)
-	c.VertexArrays = make(VertexArrayRef_VertexArrayIdMap)
-	c.Queries = make(QueryRef_QueryIdMap)
+	c.Renderbuffers = make(RenderbufferPtr_RenderbufferIdMap)
+	c.Textures = make(TexturePtr_TextureIdMap)
+	c.Framebuffers = make(FramebufferPtr_FramebufferIdMap)
+	c.Buffers = make(BufferPtr_BufferIdMap)
+	c.Shaders = make(ShaderPtr_ShaderIdMap)
+	c.Programs = make(ProgramPtr_ProgramIdMap)
+	c.VertexArrays = make(VertexArrayPtr_VertexArrayIdMap)
+	c.Queries = make(QueryPtr_QueryIdMap)
 }
 func (c *Objects) GetCreatedAt() atom.ID { return c.CreatedAt }
 
@@ -12737,7 +12787,7 @@ type Globals struct {
 	BoundBuffers          BufferId_BufferTargetMap
 	BoundProgram          ProgramId
 	BoundVertexArray      VertexArrayId
-	VertexAttributeArrays VertexAttributeArrayRef_AttributeLocationMap
+	VertexAttributeArrays VertexAttributeArrayPtr_AttributeLocationMap
 	TextureUnits          TextureId_TextureTargetMap_TextureUnitMap
 	ActiveTextureUnit     TextureUnit
 	Capabilities          Bool_CapabilityMap
@@ -12754,7 +12804,7 @@ func (g *Globals) Init() {
 	g.BoundFramebuffers = make(FramebufferId_FramebufferTargetMap)
 	g.BoundRenderbuffers = make(RenderbufferId_RenderbufferTargetMap)
 	g.BoundBuffers = make(BufferId_BufferTargetMap)
-	g.VertexAttributeArrays = make(VertexAttributeArrayRef_AttributeLocationMap)
+	g.VertexAttributeArrays = make(VertexAttributeArrayPtr_AttributeLocationMap)
 	g.TextureUnits = make(TextureId_TextureTargetMap_TextureUnitMap)
 	g.ActiveTextureUnit = TextureUnit_GL_TEXTURE0
 	g.Capabilities = make(Bool_CapabilityMap)

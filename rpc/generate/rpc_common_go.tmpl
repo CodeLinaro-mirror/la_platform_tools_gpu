@@ -94,6 +94,10 @@ limitations under the License.
   {{else if IsMap                  $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsClass                $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsPointer              $}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Typename}}
+  {{else if IsBuffer               $}}
+    {{if $.Array}}{{Macro "ArrayType" $.To}}
+    {{else}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Typename}}
+    {{end}}
   {{else if IsEnum                 $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsBool                 $}}bool
   {{else if IsS8                   $}}int8

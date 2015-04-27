@@ -297,7 +297,13 @@ limitations under the License.
   {{else if IsS64           $}}schema.S64
   {{else if IsU64           $}}schema.U64
   {{else if IsF64           $}}schema.Double
-  {{else if IsBuffer        $}}schema.Memory
+  {{else if IsBuffer        $}}
+    {{if $.Array}}
+      {{if IsChar $.To}}schema.String
+      {{else if IsU8 $.To}}schema.Memory
+      {{else}}s.getArrayInfo({{IndexOf $api.Arrays $.FakeArray}})
+      {{end}}
+    {{else}}s.getClassInfo({{IndexOf $api.Classes $.To}}){{end}}
   {{else if IsString        $}}schema.String
   {{else if IsAny           $}}schema.Any
   {{else}}{{Error "macro TypeInfo called with unsupported type: %v" $.Name}}
