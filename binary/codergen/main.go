@@ -29,16 +29,14 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/generate"
-
-	"golang.org/x/tools/go/loader"
-	"golang.org/x/tools/go/types"
 )
 
 var (
-	verbose = flag.Bool("v", false, "verbose messages")
-	nowrite = flag.Bool("n", false, "don't write the files")
-	golang  = flag.Bool("go", false, "generate go code")
-	java    = flag.String("java", "", "the path to generate files in")
+	verbose     = flag.Bool("v", false, "verbose messages")
+	nowrite     = flag.Bool("n", false, "don't write the files")
+	forceSource = flag.Bool("s", false, "force source only")
+	golang      = flag.Bool("go", false, "generate go code")
+	java        = flag.String("java", "", "the path to generate files in")
 )
 
 const usage = `codergen: A tool to generate coders for go structs.
@@ -52,7 +50,7 @@ type Entry struct {
 	Generator func(*generate.File) ([]byte, error)
 }
 
-func scan(entry string, loader *generate.Loader, files *[]*generate.File) error {
+func scan(entry string, loader *generate.Loader) error {
 	base := strings.TrimSuffix(entry, "...")
 	pkg, err := build.Default.Import(base, loader.Path, build.FindOnly)
 	if err != nil {
@@ -62,15 +60,10 @@ func scan(entry string, loader *generate.Loader, files *[]*generate.File) error 
 		fmt.Printf("%s from %s\n", pkg.ImportPath, pkg.Dir)
 	}
 	if len(base) == len(entry) {
-		file, err := loader.ScanPackage(pkg.ImportPath)
-		if err != nil {
-			return err
-		}
-		if len(file.Structs) > 0 {
-			*files = append(*files, file)
-		}
+		loader.ScanPackage(pkg.ImportPath)
+		return nil
 	} else {
-		err = filepath.Walk(pkg.Dir, func(path string, info os.FileInfo, err error) error {
+		return filepath.Walk(pkg.Dir, func(path string, info os.FileInfo, err error) error {
 			if !info.IsDir() {
 				return nil
 			}
@@ -81,39 +74,10 @@ func scan(entry string, loader *generate.Loader, files *[]*generate.File) error 
 			if *verbose {
 				fmt.Printf("Reading %s\n", name)
 			}
-			file, err := loader.ScanPackage(name)
-			if err != nil {
-				if *verbose {
-					fmt.Printf("scan failed: %s\n", err)
-				}
-				return nil
-			}
-			if len(file.Structs) > 0 {
-				*files = append(*files, file)
-			}
+			loader.ScanPackage(name)
 			return nil
 		})
 	}
-	return err
-}
-
-func filterStructs(pkg *loader.PackageInfo) []*types.TypeName {
-	result := []*types.TypeName{}
-	for _, def := range pkg.Defs {
-		name, ok := def.(*types.TypeName)
-		if !ok {
-			continue
-		}
-		t, ok := name.Type().(*types.Named)
-		if !ok {
-			continue
-		}
-		if _, ok := t.Underlying().(*types.Struct); !ok {
-			continue
-		}
-		result = append(result, name)
-	}
-	return result
 }
 
 func run() error {
@@ -129,7 +93,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
-	loader := generate.NewLoader(wd)
+	loader := generate.NewLoader(wd, *forceSource)
 	if *verbose {
 		fmt.Printf("Scanning\n")
 	}
@@ -137,45 +101,31 @@ func run() error {
 	if len(args) == 0 {
 		args = append(args, "./...")
 	}
-	files := []*generate.File{}
 	for _, arg := range args {
-		if err := scan(arg, loader, &files); err != nil {
+		if err := scan(arg, loader); err != nil {
 			return err
 		}
 	}
 	if *verbose {
-		fmt.Printf("Generating %d files\n", len(files))
+		fmt.Printf("Processing\n")
 	}
-	for _, file := range files {
-		generate.Sort(file.Structs)
-		if *golang {
-			entry := Entry{
-				File:      *file,
-				Output:    file.Package + "_binary.go",
-				Generator: generate.GoFile,
-			}
-			entry.File.Generated = fmt.Sprintf("codergen -go")
-			if file.IsTest {
-				entry.Output = file.Package + "_binary_test.go"
-			}
-			entry.Output = path.Join(file.Path, entry.Output)
-			if err := entry.Generate(); err != nil {
+	if err := loader.Process(); err != nil {
+		return err
+	}
+	if *verbose {
+		fmt.Printf("Generating\n")
+	}
+	for _, dir := range loader.Directories {
+		if !dir.Scan {
+			continue
+		}
+		if dir.Module.Output != nil {
+			if err := output(dir.Module.Output); err != nil {
 				return err
 			}
 		}
-		if *java != "" && !file.IsTest {
-			entry := Entry{
-				File:      *file,
-				Output:    filepath.Join(*java, "ObjectFactory.java"),
-				Generator: generate.JavaFile,
-			}
-			entry.File.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
-			entry.File.ClassPrefix = strings.Title(file.Package)
-			i := strings.LastIndex(*java, "/com/")
-			if i >= 0 {
-				entry.File.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
-			}
-			if err := entry.Generate(); err != nil {
+		if dir.Test.Output != nil {
+			if err := output(dir.Test.Output); err != nil {
 				return err
 			}
 		}
@@ -183,10 +133,46 @@ func run() error {
 	return nil
 }
 
-func (e *Entry) Generate() error {
-	if *verbose {
-		fmt.Printf("maybe %s\n", e.Output)
+func output(file *generate.File) error {
+	if len(file.Structs) == 0 {
+		return nil
 	}
+	generate.Sort(file.Structs)
+	if *golang {
+		entry := Entry{
+			File:      *file,
+			Output:    file.Package + "_binary.go",
+			Generator: generate.GoFile,
+		}
+		entry.File.Generated = fmt.Sprintf("codergen -go")
+		if file.IsTest {
+			entry.Output = file.Package + "_binary_test.go"
+		}
+		entry.Output = path.Join(file.Path, entry.Output)
+		if err := entry.Generate(); err != nil {
+			return err
+		}
+	}
+	if *java != "" && !file.IsTest {
+		entry := Entry{
+			File:      *file,
+			Output:    filepath.Join(*java, "ObjectFactory.java"),
+			Generator: generate.JavaFile,
+		}
+		entry.File.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
+		entry.File.ClassPrefix = strings.Title(file.Package)
+		i := strings.LastIndex(*java, "/com/")
+		if i >= 0 {
+			entry.File.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
+		}
+		if err := entry.Generate(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (e *Entry) Generate() error {
 	result, err := e.Generator(&e.File)
 	if err != nil {
 		return err
