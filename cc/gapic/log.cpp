@@ -31,7 +31,16 @@
 
 namespace gapic {
 
-Logger Logger::instance("logs/replay.log");
+Logger Logger::instance;
+
+void Logger::init(const char* path) {
+    if (FILE* f = fopen(path, "w")) {
+        GAPID_INFO("Logging to %s\n", path);
+        instance.mFile = f;
+    } else {
+        GAPID_WARNING("Can't open file for logging (%s): %s\n", path, strerror(errno));
+    }
+}
 
 void Logger::log(unsigned level, const char* location, const char* format, ...) {
     va_list args;
@@ -44,17 +53,7 @@ void Logger::log(unsigned level, const char* location, const char* format, ...) 
     }
 }
 
-Logger::Logger(const char* fileName) {
-    // Open the log file or fall back to stderr if can't open the log file
-    mFile = fopen(fileName, "w");
-    if (mFile == nullptr) {
-        mFile = stderr;
-        GAPID_WARNING("Can't open file for logging (%s): %s\n", fileName, strerror(errno));
-        GAPID_INFO("Start logging to stderr\n");
-    } else {
-        GAPID_INFO("Start logging to %s\n", fileName);
-    }
-}
+Logger::Logger() : mFile(stdout) {}
 
 Logger::~Logger() {
     fclose(mFile);

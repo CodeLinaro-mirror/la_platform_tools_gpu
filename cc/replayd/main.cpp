@@ -107,6 +107,8 @@ void android_main(struct android_app*) {
 #else  // TARGET_OS == GAPID_OS_ANDROID
 // Main function for PC
 int main(int argc, char* argv[]) {
+    GAPID_LOGGER_INIT("logs/replay.log");
+
     bool useCache = true;
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--nocache") == 0) {
