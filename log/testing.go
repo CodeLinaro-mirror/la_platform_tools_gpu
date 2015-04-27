@@ -31,6 +31,9 @@ func Testing(t *testing.T) Logger {
 				case Warning, Info:
 					t.Log(o.String())
 				}
+
+			case FlushRequest:
+				close(o)
 			}
 		}
 	}()
