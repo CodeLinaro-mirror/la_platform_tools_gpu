@@ -135,9 +135,6 @@ type MemoryRangeArray []MemoryRange
 // Array ParameterInfoArray
 type ParameterInfoArray []ParameterInfo
 
-// Array U32Array
-type U32Array []uint32
-
 // Array U64Array
 type U64Array []uint64
 
@@ -341,7 +338,7 @@ type StaticArrayInfo struct {
 	Name        string
 	Kind        TypeKind
 	ElementType TypeInfo
-	Dimensions  U32Array
+	Size        uint32
 }
 
 // Class MapInfo

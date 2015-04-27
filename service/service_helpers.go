@@ -237,9 +237,6 @@ func (a MemoryRangeArray) Format(f fmt.State, c rune) {
 func (a ParameterInfoArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ParameterInfoArray", len(a))
 }
-func (a U32Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U32Array", len(a))
-}
 func (a U64Array) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]U64Array", len(a))
 }
@@ -624,20 +621,20 @@ func CreateStaticArrayInfo(
 	Name string,
 	Kind TypeKind,
 	ElementType TypeInfo,
-	Dimensions U32Array,
+	Size uint32,
 ) *StaticArrayInfo {
 	return &StaticArrayInfo{
 		Name:        Name,
 		Kind:        Kind,
 		ElementType: ElementType,
-		Dimensions:  Dimensions,
+		Size:        Size,
 	}
 }
 
 func (c *StaticArrayInfo) GetName() string          { return c.Name }
 func (c *StaticArrayInfo) GetKind() TypeKind        { return c.Kind }
 func (c *StaticArrayInfo) GetElementType() TypeInfo { return c.ElementType }
-func (c *StaticArrayInfo) GetDimensions() U32Array  { return c.Dimensions }
+func (c *StaticArrayInfo) GetSize() uint32          { return c.Size }
 
 func CreateMapInfo(
 	Name string,
