@@ -53,14 +53,32 @@ inline uint64_t rotl64(uint64_t x, int8_t r)
 // Block read - if your platform needs to do endian-swapping or can only
 // handle aligned reads, do the conversion here
 
-FORCE_INLINE uint32_t getblock32(const uint32_t * p, int i)
-{
+FORCE_INLINE uint32_t getblock32_aligned(const uint32_t* p, int i) {
     return p[i];
 }
 
-FORCE_INLINE uint64_t getblock64(const uint64_t * p, int i)
-{
+FORCE_INLINE uint32_t getblock32_unaligned(const uint32_t* p, int i) {
+    auto b = reinterpret_cast<const uint8_t*>(p);
+    return (static_cast<uint32_t>(b[0]) << 24)
+         | (static_cast<uint32_t>(b[1]) << 16)
+         | (static_cast<uint32_t>(b[2]) << 8)
+         |  static_cast<uint32_t>(b[3]);
+}
+
+FORCE_INLINE uint64_t getblock64_aligned(const uint64_t * p, int i) {
     return p[i];
+}
+
+FORCE_INLINE uint64_t getblock64_unaligned(const uint64_t * p, int i) {
+    auto b = reinterpret_cast<const uint8_t*>(p);
+    return (static_cast<uint64_t>(b[0]) << 56)
+         | (static_cast<uint64_t>(b[1]) << 48)
+         | (static_cast<uint64_t>(b[2]) << 40)
+         | (static_cast<uint64_t>(b[3]) << 32)
+         | (static_cast<uint64_t>(b[4]) << 24)
+         | (static_cast<uint64_t>(b[5]) << 16)
+         | (static_cast<uint64_t>(b[6]) << 8)
+         |  static_cast<uint64_t>(b[7]);
 }
 
 //-----------------------------------------------------------------------------
@@ -92,8 +110,8 @@ FORCE_INLINE uint64_t fmix64(uint64_t k)
 
 //-----------------------------------------------------------------------------
 
-void MurmurHash3_x86_32(const void * key, int len,
-    uint32_t seed, void * out)
+template<uint32_t (*getblock)(const uint32_t * p, int i)>
+void MurmurHash3_x86_32_(const void * key, int len, uint32_t seed, void * out)
 {
     const uint8_t * data = (const uint8_t*)key;
     const int nblocks = len / 4;
@@ -110,7 +128,7 @@ void MurmurHash3_x86_32(const void * key, int len,
 
     for (int i = -nblocks; i; i++)
     {
-        uint32_t k1 = getblock32(blocks, i);
+        uint32_t k1 = getblock(blocks, i);
 
         k1 *= c1;
         k1 = ROTL32(k1, 15);
@@ -148,8 +166,8 @@ void MurmurHash3_x86_32(const void * key, int len,
 
 //-----------------------------------------------------------------------------
 
-void MurmurHash3_x86_128(const void * key, const int len,
-    uint32_t seed, void * out)
+template<uint32_t (*getblock)(const uint32_t * p, int i)>
+void MurmurHash3_x86_128_(const void * key, const int len, uint32_t seed, void * out)
 {
     const uint8_t * data = (const uint8_t*)key;
     const int nblocks = len / 16;
@@ -171,10 +189,10 @@ void MurmurHash3_x86_128(const void * key, const int len,
 
     for (int i = -nblocks; i; i++)
     {
-        uint32_t k1 = getblock32(blocks, i * 4 + 0);
-        uint32_t k2 = getblock32(blocks, i * 4 + 1);
-        uint32_t k3 = getblock32(blocks, i * 4 + 2);
-        uint32_t k4 = getblock32(blocks, i * 4 + 3);
+        uint32_t k1 = getblock(blocks, i * 4 + 0);
+        uint32_t k2 = getblock(blocks, i * 4 + 1);
+        uint32_t k3 = getblock(blocks, i * 4 + 2);
+        uint32_t k4 = getblock(blocks, i * 4 + 3);
 
         k1 *= c1; k1 = ROTL32(k1, 15); k1 *= c2; h1 ^= k1;
 
@@ -253,8 +271,8 @@ void MurmurHash3_x86_128(const void * key, const int len,
 
 //-----------------------------------------------------------------------------
 
-void MurmurHash3_x64_128(const void * key, const int len,
-    const uint32_t seed, void * out)
+template<uint64_t (*getblock)(const uint64_t * p, int i)>
+void MurmurHash3_x64_128_(const void * key, const int len, const uint32_t seed, void * out)
 {
     const uint8_t * data = (const uint8_t*)key;
     const int nblocks = len / 16;
@@ -272,8 +290,8 @@ void MurmurHash3_x64_128(const void * key, const int len,
 
     for (int i = 0; i < nblocks; i++)
     {
-        uint64_t k1 = getblock64(blocks, i * 2 + 0);
-        uint64_t k2 = getblock64(blocks, i * 2 + 1);
+        uint64_t k1 = getblock(blocks, i * 2 + 0);
+        uint64_t k2 = getblock(blocks, i * 2 + 1);
 
         k1 *= c1; k1 = ROTL64(k1, 31); k1 *= c2; h1 ^= k1;
 
@@ -331,3 +349,28 @@ void MurmurHash3_x64_128(const void * key, const int len,
     ((uint64_t*)out)[0] = h1;
     ((uint64_t*)out)[1] = h2;
 }
+
+void MurmurHash3_x86_32(const void * key, int len, uint32_t seed, void * out) {
+    if ((reinterpret_cast<uint64_t>(key) & 0x3) == 0) {
+        MurmurHash3_x86_32_<getblock32_aligned>(key, len, seed, out);
+    } else {
+        MurmurHash3_x86_32_<getblock32_unaligned>(key, len, seed, out);
+    }
+}
+
+void MurmurHash3_x86_128(const void * key, const int len, uint32_t seed, void * out) {
+    if ((reinterpret_cast<uint64_t>(key) & 0x3) == 0) {
+        MurmurHash3_x86_128_<getblock32_aligned>(key, len, seed, out);
+    } else {
+        MurmurHash3_x86_128_<getblock32_unaligned>(key, len, seed, out);
+    }
+}
+
+void MurmurHash3_x64_128(const void * key, const int len, uint32_t seed, void * out) {
+    if ((reinterpret_cast<uint64_t>(key) & 0x7) == 0) {
+        MurmurHash3_x64_128_<getblock64_aligned>(key, len, seed, out);
+    } else {
+        MurmurHash3_x64_128_<getblock64_unaligned>(key, len, seed, out);
+    }
+}
+
