@@ -298,7 +298,7 @@ class ArrayInfo : TypeInfo {
 // StaticArrayInfo describes a static array instantiation.
 class StaticArrayInfo : TypeInfo {
   TypeInfo*  ElementType // The array's element type.
-  array<u32> Dimensions  // The array's dimensions in outer->inner order.
+  u32        Size        // The array's size.
 }
 
 // MapInfo describes a map instantiation.
