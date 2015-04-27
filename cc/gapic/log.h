@@ -50,14 +50,23 @@
 #if TARGET_OS == GAPID_OS_ANDROID
 
 #include <android/log.h>
+
+#define GAPID_LOGGER_INIT(path)
+
 #define GAPID_FATAL_IMPL(...) \
-    __android_log_assert(nullptr, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+    __android_log_assert(nullptr, "GAPID", \
+                         __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+
 #define GAPID_WARNING_IMPL(...) \
-    __android_log_print(ANDROID_LOG_WARN, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+    __android_log_print(ANDROID_LOG_WARN, "GAPID", \
+                        __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+
 #define GAPID_INFO_IMPL(...) \
-    __android_log_print(ANDROID_LOG_INFO, "Caze", __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
-#define GAPID_DEBUG_IMPL(...)                       \
-    __android_log_print(ANDROID_LOG_DEBUG, "Caze", \
+    __android_log_print(ANDROID_LOG_INFO, "GAPID", \
+                        __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
+
+#define GAPID_DEBUG_IMPL(...) \
+    __android_log_print(ANDROID_LOG_DEBUG, "GAPID", \
                         __FILE__ ":" GAPID_STR(__LINE__) ": " __VA_ARGS__);
 
 #else  // TARGET_OS == GAPID_OS_ANDROID
@@ -69,19 +78,22 @@ namespace gapic {
 // Singleton logger implementation for PCs to write formatted log messages.
 class Logger {
 public:
+    // Initializes the logger to write to the log file at path.
+    static void init(const char* path);
+
     // Write a log message to the log output with the specific log level. The location should
     // contain the place where the log is written from and the format is a standard C format string
     // If a message is logged with level LOG_LEVEL_FATAL, the program will terminate after the
     // message is printed.
     // Log messages take the form:
-    // <Time stamp> #Caze <log level>: <location> -> <message>
+    // <Time stamp> #GAPID <log level>: <location> -> <message>
     static void log(unsigned level, const char* location, const char* format, ...);
 
 private:
     // The single logger instance
     static Logger instance;
 
-    explicit Logger(const char* fileName);
+    Logger();
     ~Logger();
     void logImpl(unsigned level, const char* location, const char* format, va_list args);
 
@@ -90,15 +102,23 @@ private:
 
 }  // namespace gapic
 
+#define GAPID_LOGGER_INIT(path) gapic::Logger::init(path)
+
 #define GAPID_FATAL_IMPL(...) \
-        ::gapic::Logger::log(LOG_LEVEL_FATAL, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
-#define GAPID_WARNING_IMPL(...)                                                           \
-        ::gapic::Logger::log(LOG_LEVEL_WARNING, __FILE__ ":" GAPID_STR(__LINE__), \
-                                     __VA_ARGS__)
+        ::gapic::Logger::log(LOG_LEVEL_FATAL, \
+                             __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+
+#define GAPID_WARNING_IMPL(...) \
+        ::gapic::Logger::log(LOG_LEVEL_WARNING, \
+                             __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+
 #define GAPID_INFO_IMPL(...) \
-        ::gapic::Logger::log(LOG_LEVEL_INFO, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+        ::gapic::Logger::log(LOG_LEVEL_INFO, \
+                             __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+
 #define GAPID_DEBUG_IMPL(...) \
-        ::gapic::Logger::log(LOG_LEVEL_DEBUG, __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
+        ::gapic::Logger::log(LOG_LEVEL_DEBUG, \
+                             __FILE__ ":" GAPID_STR(__LINE__), __VA_ARGS__)
 
 #endif  // TARGET_OS == GAPID_OS_ANDROID
 
