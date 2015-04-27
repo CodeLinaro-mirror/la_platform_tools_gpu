@@ -928,10 +928,10 @@ inline void GlesState::glUniformMatrix4fv(UniformLocation const location, int32_
     Uniform uniform = program->mUniforms[location];
     uniform.mValue.mMat4f =
             Mat4f()
-                    .SetCol0(
-                            Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(values[3]))
-                    .SetCol1(
-                            Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(values[7]))
+                    .SetCol0(Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(
+                            values[3]))
+                    .SetCol1(Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(
+                            values[7]))
                     .SetCol2(Vec4f()
                                      .SetX(values[8])
                                      .SetY(values[9])
@@ -1393,12 +1393,11 @@ inline void GlesState::glGetShaderInfoLog(ShaderId const shader, int32_t const b
     std::shared_ptr<Shader> s = this->Instances.mShaders[shader];
     int32_t min_0_a = buffer_length;
     int32_t min_0_b = strlen(s->mInfoLog);
-    int32_t min_0_result = /* switch(min_0_a < min_0_b) */
-            /* case true: */ ((min_0_a < min_0_b == true))
-                    ? (min_0_a)
-                    :
-                    /* case false: */ ((min_0_a < min_0_b == false)) ? (min_0_b) :
-                                                                     /* default: */ 0;
+    int32_t min_0_result = /* clang-format off */
+    /* switch(min_0_a < min_0_b) */
+        /* case true: */(((min_0_a < min_0_b) == (true))) ? (min_0_a) :
+        /* case false: */(((min_0_a < min_0_b) == (false))) ? (min_0_b) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glGetShaderSource(ShaderId const shader, int32_t const buffer_length,
@@ -1406,12 +1405,11 @@ inline void GlesState::glGetShaderSource(ShaderId const shader, int32_t const bu
     std::shared_ptr<Shader> s = this->Instances.mShaders[shader];
     int32_t min_1_a = buffer_length;
     int32_t min_1_b = strlen(s->mSource[0]);
-    int32_t min_1_result = /* switch(min_1_a < min_1_b) */
-            /* case true: */ ((min_1_a < min_1_b == true))
-                    ? (min_1_a)
-                    :
-                    /* case false: */ ((min_1_a < min_1_b == false)) ? (min_1_b) :
-                                                                     /* default: */ 0;
+    int32_t min_1_result = /* clang-format off */
+    /* switch(min_1_a < min_1_b) */
+        /* case true: */(((min_1_a < min_1_b) == (true))) ? (min_1_a) :
+        /* case false: */(((min_1_a < min_1_b) == (false))) ? (min_1_b) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glReleaseShaderCompiler() {}
@@ -1448,12 +1446,11 @@ inline void GlesState::glGetAttachedShaders(ProgramId const program, int32_t con
     std::shared_ptr<Program> p = this->Instances.mPrograms[program];
     int32_t min_2_a = buffer_length;
     int32_t min_2_b = p->mShaders.size();
-    int32_t min_2_result = /* switch(min_2_a < min_2_b) */
-            /* case true: */ ((min_2_a < min_2_b == true))
-                    ? (min_2_a)
-                    :
-                    /* case false: */ ((min_2_a < min_2_b == false)) ? (min_2_b) :
-                                                                     /* default: */ 0;
+    int32_t min_2_result = /* clang-format off */
+    /* switch(min_2_a < min_2_b) */
+        /* case true: */(((min_2_a < min_2_b) == (true))) ? (min_2_a) :
+        /* case false: */(((min_2_a < min_2_b) == (false))) ? (min_2_b) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glLinkProgram(ProgramId const program) {}
@@ -1463,12 +1460,11 @@ inline void GlesState::glGetProgramInfoLog(ProgramId const program, int32_t cons
     std::shared_ptr<Program> p = this->Instances.mPrograms[program];
     int32_t min_3_a = buffer_length;
     int32_t min_3_b = strlen(p->mInfoLog);
-    int32_t min_3_result = /* switch(min_3_a < min_3_b) */
-            /* case true: */ ((min_3_a < min_3_b == true))
-                    ? (min_3_a)
-                    :
-                    /* case false: */ ((min_3_a < min_3_b == false)) ? (min_3_b) :
-                                                                     /* default: */ 0;
+    int32_t min_3_result = /* clang-format off */
+    /* switch(min_3_a < min_3_b) */
+        /* case true: */(((min_3_a < min_3_b) == (true))) ? (min_3_a) :
+        /* case false: */(((min_3_a < min_3_b) == (false))) ? (min_3_b) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glUseProgram(ProgramId const program) { this->BoundProgram = program; }
@@ -1514,20 +1510,12 @@ inline void GlesState::glFramebufferRenderbuffer(uint32_t const framebuffer_targ
                                                  uint32_t const framebuffer_attachment,
                                                  uint32_t const renderbuffer_target,
                                                  RenderbufferId const renderbuffer) {
-    uint32_t target = /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */ (
-                    (framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER))
-                    ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                    :
-                    /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */ (
-                            (framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER))
-                            ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                            :
-                            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */ (
-                                    (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
-                                    ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
-                                    :
-                                    /* default: */ 0;
+    uint32_t target = /* clang-format off */
+    /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ 0 /* clang-format on */;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->mAttachments[framebuffer_attachment];
@@ -1546,20 +1534,12 @@ inline void GlesState::glFramebufferTexture2D(uint32_t const framebuffer_target,
                                               uint32_t const framebuffer_attachment,
                                               uint32_t const texture_target,
                                               TextureId const texture, int32_t const level) {
-    uint32_t target = /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */ (
-                    (framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER))
-                    ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                    :
-                    /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */ (
-                            (framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER))
-                            ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                            :
-                            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */ (
-                                    (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
-                                    ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
-                                    :
-                                    /* default: */ 0;
+    uint32_t target = /* clang-format off */
+    /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ 0 /* clang-format on */;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo attachment = framebuffer->mAttachments[framebuffer_attachment];
@@ -1572,50 +1552,16 @@ inline void GlesState::glFramebufferTexture2D(uint32_t const framebuffer_target,
         attachment.mType = FramebufferAttachmentType::GL_TEXTURE;
         attachment.mObject = (uint32_t)(texture);
         attachment.mTextureLevel = level;
-        attachment.mCubeMapFace = /* switch(texture_target) */
-                /* case TextureImageTarget::GL_TEXTURE_2D: */ (
-                        (texture_target == TextureImageTarget::GL_TEXTURE_2D))
-                        ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X)
-                        :
-                        /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */ (
-                                (texture_target ==
-                                 TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X))
-                                ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X)
-                                :
-                                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */ (
-                                        (texture_target ==
-                                         TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))
-                                        ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y)
-                                        :
-                                        /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */ (
-                                                (texture_target ==
-                                                 TextureImageTarget::
-                                                         GL_TEXTURE_CUBE_MAP_POSITIVE_Z))
-                                                ? (CubeMapImageTarget::
-                                                           GL_TEXTURE_CUBE_MAP_POSITIVE_Z)
-                                                :
-                                                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */ (
-                                                        (texture_target ==
-                                                         TextureImageTarget::
-                                                                 GL_TEXTURE_CUBE_MAP_NEGATIVE_X))
-                                                        ? (CubeMapImageTarget::
-                                                                   GL_TEXTURE_CUBE_MAP_NEGATIVE_X)
-                                                        :
-                                                        /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */ (
-                                                                (texture_target ==
-                                                                 TextureImageTarget::
-                                                                         GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))
-                                                                ? (CubeMapImageTarget::
-                                                                           GL_TEXTURE_CUBE_MAP_NEGATIVE_Y)
-                                                                :
-                                                                /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */ (
-                                                                        (texture_target ==
-                                                                         TextureImageTarget::
-                                                                                 GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))
-                                                                        ? (CubeMapImageTarget::
-                                                                                   GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)
-                                                                        :
-                                                                        /* default: */ 0;
+        attachment.mCubeMapFace = /* clang-format off */
+        /* switch(texture_target) */
+            /* case TextureImageTarget::GL_TEXTURE_2D: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_2D))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_X) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Y) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_POSITIVE_Z) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_X) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Y) :
+            /* case TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: */(((texture_target) == (TextureImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) ? (CubeMapImageTarget::GL_TEXTURE_CUBE_MAP_NEGATIVE_Z) :
+            /* default: */ 0 /* clang-format on */;
     }
     framebuffer->mAttachments[framebuffer_attachment] = attachment;
 }
@@ -1624,20 +1570,12 @@ inline void GlesState::glGetFramebufferAttachmentParameteriv(uint32_t const fram
                                                              uint32_t const attachment,
                                                              uint32_t const parameter,
                                                              int32_t* const value) {
-    uint32_t target = /* switch(framebuffer_target) */
-            /* case FramebufferTarget::GL_FRAMEBUFFER: */ (
-                    (framebuffer_target == FramebufferTarget::GL_FRAMEBUFFER))
-                    ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                    :
-                    /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */ (
-                            (framebuffer_target == FramebufferTarget::GL_DRAW_FRAMEBUFFER))
-                            ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER)
-                            :
-                            /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */ (
-                                    (framebuffer_target == FramebufferTarget::GL_READ_FRAMEBUFFER))
-                                    ? (FramebufferTarget::GL_READ_FRAMEBUFFER)
-                                    :
-                                    /* default: */ 0;
+    uint32_t target = /* clang-format off */
+    /* switch(framebuffer_target) */
+        /* case FramebufferTarget::GL_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_DRAW_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_DRAW_FRAMEBUFFER))) ? (FramebufferTarget::GL_DRAW_FRAMEBUFFER) :
+        /* case FramebufferTarget::GL_READ_FRAMEBUFFER: */(((framebuffer_target) == (FramebufferTarget::GL_READ_FRAMEBUFFER))) ? (FramebufferTarget::GL_READ_FRAMEBUFFER) :
+        /* default: */ 0 /* clang-format on */;
     FramebufferId framebufferId = this->BoundFramebuffers[target];
     std::shared_ptr<Framebuffer> framebuffer = this->Instances.mFramebuffers[framebufferId];
     FramebufferAttachmentInfo a = framebuffer->mAttachments[attachment];
@@ -1646,29 +1584,18 @@ inline void GlesState::glGetFramebufferAttachmentParameteriv(uint32_t const fram
 inline void GlesState::glDrawElements(uint32_t const draw_mode, int32_t const element_count,
                                       uint32_t const indices_type, IndicesPointer const indices) {
     BufferId id = this->BoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER];
-    void* index_data = /* switch(id != this->Internals.mNilBuffer) */
-            /* case true: */ ((id != this->Internals.mNilBuffer == true))
-                    ? (memoryOffset(this->Instances.mBuffers[id]->mData, (uint64_t)(indices)))
-                    :
-                    /* case false: */ ((id != this->Internals.mNilBuffer == false))
-                            ? ((void*)(indices))
-                            :
-                            /* default: */ nullptr;
+    void* index_data = /* clang-format off */
+    /* switch(id != this->Internals.mNilBuffer) */
+        /* case true: */(((id != this->Internals.mNilBuffer) == (true))) ? (memoryOffset(this->Instances.mBuffers[id]->mData, (uint64_t)(indices))) :
+        /* case false: */(((id != this->Internals.mNilBuffer) == (false))) ? ((void*)(indices)) :
+        /* default: */ nullptr /* clang-format on */;
     uint32_t IndexSize_4_indices_type = indices_type;
-    uint32_t IndexSize_4_result = /* switch(IndexSize_4_indices_type) */
-            /* case IndicesType::GL_UNSIGNED_BYTE: */ (
-                    (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_BYTE))
-                    ? (1)
-                    :
-                    /* case IndicesType::GL_UNSIGNED_SHORT: */ (
-                            (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_SHORT))
-                            ? (2)
-                            :
-                            /* case IndicesType::GL_UNSIGNED_INT: */ (
-                                    (IndexSize_4_indices_type == IndicesType::GL_UNSIGNED_INT))
-                                    ? (4)
-                                    :
-                                    /* default: */ 0;
+    uint32_t IndexSize_4_result = /* clang-format off */
+    /* switch(IndexSize_4_indices_type) */
+        /* case IndicesType::GL_UNSIGNED_BYTE: */(((IndexSize_4_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
+        /* case IndicesType::GL_UNSIGNED_SHORT: */(((IndexSize_4_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
+        /* case IndicesType::GL_UNSIGNED_INT: */(((IndexSize_4_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
+        /* default: */ 0 /* clang-format on */;
     read(index_data, 0, (uint32_t)(element_count)*IndexSize_4_result);
     uint32_t first = minIndex(index_data, indices_type, (uint32_t)(element_count));
     uint32_t last = maxIndex(index_data, indices_type, (uint32_t)(element_count));
@@ -1679,47 +1606,17 @@ inline void GlesState::glDrawElements(uint32_t const draw_mode, int32_t const el
                 this->VertexAttributeArrays[(AttributeLocation)(i)];
         if (arr->mEnabled) {
             uint32_t vertexAttribTypeSize_6_t = arr->mType;
-            uint32_t vertexAttribTypeSize_6_result = /* switch(vertexAttribTypeSize_6_t) */
-                    /* case VertexAttribType::GL_BYTE: */ (
-                            (vertexAttribTypeSize_6_t == VertexAttribType::GL_BYTE))
-                            ? (1)
-                            :
-                            /* case VertexAttribType::GL_UNSIGNED_BYTE: */ ((
-                                    vertexAttribTypeSize_6_t == VertexAttribType::GL_UNSIGNED_BYTE))
-                                    ? (1)
-                                    :
-                                    /* case VertexAttribType::GL_SHORT: */ ((
-                                            vertexAttribTypeSize_6_t == VertexAttribType::GL_SHORT))
-                                            ? (2)
-                                            :
-                                            /* case VertexAttribType::GL_UNSIGNED_SHORT: */ (
-                                                    (vertexAttribTypeSize_6_t ==
-                                                     VertexAttribType::GL_UNSIGNED_SHORT))
-                                                    ? (2)
-                                                    :
-                                                    /* case VertexAttribType::GL_FIXED: */ (
-                                                            (vertexAttribTypeSize_6_t ==
-                                                             VertexAttribType::GL_FIXED))
-                                                            ? (4)
-                                                            :
-                                                            /* case VertexAttribType::GL_FLOAT: */ (
-                                                                    (vertexAttribTypeSize_6_t ==
-                                                                     VertexAttribType::GL_FLOAT))
-                                                                    ? (4)
-                                                                    :
-                                                                    /* case VertexAttribType::GL_ARB_half_float_vertex: */ (
-                                                                            (vertexAttribTypeSize_6_t ==
-                                                                             VertexAttribType::
-                                                                                     GL_ARB_half_float_vertex))
-                                                                            ? (2)
-                                                                            :
-                                                                            /* case VertexAttribType::GL_HALF_FLOAT_OES: */ (
-                                                                                    (vertexAttribTypeSize_6_t ==
-                                                                                     VertexAttribType::
-                                                                                             GL_HALF_FLOAT_OES))
-                                                                                    ? (2)
-                                                                                    :
-                                                                                    /* default: */ 0;
+            uint32_t vertexAttribTypeSize_6_result = /* clang-format off */
+            /* switch(vertexAttribTypeSize_6_t) */
+                /* case VertexAttribType::GL_BYTE: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_SHORT: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_FIXED: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                /* case VertexAttribType::GL_FLOAT: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                /* case VertexAttribType::GL_ARB_half_float_vertex: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((vertexAttribTypeSize_6_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                /* default: */ 0 /* clang-format on */;
             uint32_t elsize = vertexAttribTypeSize_6_result * arr->mSize;
             uint32_t size = elsize * ReadVertexArrays_5_index_count;
             uint32_t offset = elsize * ReadVertexArrays_5_first_index;
@@ -1739,47 +1636,17 @@ inline void GlesState::glDrawArrays(uint32_t const draw_mode, int32_t const firs
                 this->VertexAttributeArrays[(AttributeLocation)(i)];
         if (arr->mEnabled) {
             uint32_t vertexAttribTypeSize_8_t = arr->mType;
-            uint32_t vertexAttribTypeSize_8_result = /* switch(vertexAttribTypeSize_8_t) */
-                    /* case VertexAttribType::GL_BYTE: */ (
-                            (vertexAttribTypeSize_8_t == VertexAttribType::GL_BYTE))
-                            ? (1)
-                            :
-                            /* case VertexAttribType::GL_UNSIGNED_BYTE: */ ((
-                                    vertexAttribTypeSize_8_t == VertexAttribType::GL_UNSIGNED_BYTE))
-                                    ? (1)
-                                    :
-                                    /* case VertexAttribType::GL_SHORT: */ ((
-                                            vertexAttribTypeSize_8_t == VertexAttribType::GL_SHORT))
-                                            ? (2)
-                                            :
-                                            /* case VertexAttribType::GL_UNSIGNED_SHORT: */ (
-                                                    (vertexAttribTypeSize_8_t ==
-                                                     VertexAttribType::GL_UNSIGNED_SHORT))
-                                                    ? (2)
-                                                    :
-                                                    /* case VertexAttribType::GL_FIXED: */ (
-                                                            (vertexAttribTypeSize_8_t ==
-                                                             VertexAttribType::GL_FIXED))
-                                                            ? (4)
-                                                            :
-                                                            /* case VertexAttribType::GL_FLOAT: */ (
-                                                                    (vertexAttribTypeSize_8_t ==
-                                                                     VertexAttribType::GL_FLOAT))
-                                                                    ? (4)
-                                                                    :
-                                                                    /* case VertexAttribType::GL_ARB_half_float_vertex: */ (
-                                                                            (vertexAttribTypeSize_8_t ==
-                                                                             VertexAttribType::
-                                                                                     GL_ARB_half_float_vertex))
-                                                                            ? (2)
-                                                                            :
-                                                                            /* case VertexAttribType::GL_HALF_FLOAT_OES: */ (
-                                                                                    (vertexAttribTypeSize_8_t ==
-                                                                                     VertexAttribType::
-                                                                                             GL_HALF_FLOAT_OES))
-                                                                                    ? (2)
-                                                                                    :
-                                                                                    /* default: */ 0;
+            uint32_t vertexAttribTypeSize_8_result = /* clang-format off */
+            /* switch(vertexAttribTypeSize_8_t) */
+                /* case VertexAttribType::GL_BYTE: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_SHORT: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_FIXED: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                /* case VertexAttribType::GL_FLOAT: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                /* case VertexAttribType::GL_ARB_half_float_vertex: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((vertexAttribTypeSize_8_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                /* default: */ 0 /* clang-format on */;
             uint32_t elsize = vertexAttribTypeSize_8_result * arr->mSize;
             uint32_t size = elsize * ReadVertexArrays_7_index_count;
             uint32_t offset = elsize * ReadVertexArrays_7_first_index;

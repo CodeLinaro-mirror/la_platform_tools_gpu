@@ -377,15 +377,16 @@ limitations under the License.
   {{else if IsClassInitializer $}}
     {{Macro "C++.Type" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
-  {{else if IsSelect           $}}
+  {{else if IsSelect           $}}/* clang-format off */
     /* switch({{Macro "C++.Read" $.Value}}) */»
     {{range $c := $.Choices}}
       /* case {{range $i, $cond := $c.Conditions}}{{if $i}}, {{end}}{{Macro "C++.Read" $cond}}{{end}}: */§
       ({{range $i, $cond := $c.Conditions}}§
-          {{if $i}} || {{end}}({{Macro "C++.Read" $.Value}} == {{Macro "C++.Read" $cond}})§
+          {{if $i}} || {{end}}(({{Macro "C++.Read" $.Value}}) == ({{Macro "C++.Read" $cond}}))§
       {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
     {{end}}
-    /* default: */ {{Macro "C++.Null" $.Type}}«
+    /* default: */ {{Macro "C++.Null" $.Type}}« /* clang-format on */
+
   {{else}}{{Error "macro C++.Read called with unsupported type: %T" $}}
   {{end}}
 {{end}}

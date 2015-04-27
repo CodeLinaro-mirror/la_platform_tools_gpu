@@ -25,6 +25,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -85,7 +86,9 @@ func CreateUnboundedArchive(path string) Store {
 func (s unboundedArchive) Store(id binary.ID, _ binary.Object, data []byte, logger log.Logger) (err error) {
 	if logger != nil {
 		logger = logger.Enter("unboundedArchive.Store")
-		logger.Info("id: %s size: %d", id, len(data))
+		if config.DebugDatabaseStores {
+			logger.Info("id: %s size: %d", id, len(data))
+		}
 	}
 	s.worker <- func() {
 		offset, err := s.data.Seek(0, os.SEEK_END)
@@ -120,9 +123,13 @@ func (s unboundedArchive) Store(id binary.ID, _ binary.Object, data []byte, logg
 func (s unboundedArchive) Load(id binary.ID, logger log.Logger, out binary.Object) (size int, err error) {
 	if logger != nil {
 		logger = logger.Enter("unboundedArchive.Load")
-		logger.Info("Loading from unboundedArchive: %s", id)
+		if config.DebugDatabaseStores {
+			logger.Info("Loading from unboundedArchive: %s", id)
+		}
 		defer func() {
-			logger.Info("↪ size: %d, err: %v", size, err)
+			if config.DebugDatabaseStores {
+				logger.Info("↪ size: %d, err: %v", size, err)
+			}
 			if err := recover(); err != nil {
 				logger.Error("Panic when loading %v: %v", id, err)
 				panic(err)
