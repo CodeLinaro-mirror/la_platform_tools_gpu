@@ -50,23 +50,26 @@ var fields = []Field{
 }
 
 var loader *Loader
+var testId int
 
 func init() {
 	pwd, _ := filepath.Abs(".")
-	loader = NewLoader(pwd)
+	loader = NewLoader(pwd, false)
 }
 
 func parseStructs(source string) []*Struct {
+	testId++
 	fakeFile := fmt.Sprintf(`
 	package fake
 	import "android.googlesource.com/platform/tools/gpu/binary"
 	%s`, source)
-
-	file, err := loader.ScanFile("internal.go", fakeFile)
-	if err != nil {
-		log.Fatalf("Parse failed:", err)
+	name := fmt.Sprintf("fake_%d.go", testId)
+	loader.ScanFile(name, fakeFile)
+	if err := loader.Process(); err != nil {
+		log.Fatalf("Process failed:", err)
 	}
-	return file.Structs
+	dir := loader.GetDir(name)
+	return dir.Module.Output.Structs
 }
 
 func parseStruct(t *testing.T, name string, source string) *Struct {
