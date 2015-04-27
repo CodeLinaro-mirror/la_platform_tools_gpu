@@ -8,9 +8,9 @@ alias void[] pointer
 alias buffer<u8> memory
 alias map<TextureUnit, map<TextureTarget, TextureId>> TextureUnitMap
 
-extern s32    strlen(string s)
+extern s32    strlen(buffer<char> s)
 extern u32    imageSize(u32 width, u32 height, TexelFormat format, TexelType type)
-extern string substr(string s, s32 start, s32 end)
+extern buffer<char> substr(buffer<char> s, s32 start, s32 end)
 extern s32    stateVariableSize(StateVariable v)
 extern void   memcpy(any dest, any src, u32 size)
 extern void   read(pointer p, u32 offset, u32 size)
@@ -948,17 +948,17 @@ class Buffer {
 
 @internal
 class Shader {
-    memory        Binary
-    bool          Compiled = false
-    bool          Deletable = false
-    string        InfoLog
-    array<string> Source
-    ShaderType    Type
+    memory               Binary
+    bool                 Compiled = false
+    bool                 Deletable = false
+    buffer<char>         InfoLog
+    buffer<buffer<char>> Source
+    ShaderType           Type
 }
 
 @internal
 class VertexAttribute {
-    string           Name
+    buffer<char>     Name
     s32              VectorCount
     ShaderAttribType Type
 }
@@ -1020,20 +1020,20 @@ class UniformValue {
 
 @internal
 class Uniform {
-    string            Name
+    buffer<char>      Name
     ShaderUniformType Type
     UniformValue      Value
 }
 
 @internal
 class Program {
-    map<ShaderType, ShaderId>       Shaders
-    bool                            Linked
-    memory                          Binary
-    map<string, AttributeLocation>  AttributeBindings
-    map<s32, VertexAttribute>       Attributes
-    map<UniformLocation, Uniform>   Uniforms
-    string                          InfoLog
+    map<ShaderType, ShaderId>            Shaders
+    bool                                 Linked
+    memory                               Binary
+    map<buffer<char>, AttributeLocation> AttributeBindings
+    map<s32, VertexAttribute>            Attributes
+    map<UniformLocation, Uniform>        Uniforms
+    buffer<char>                         InfoLog
 }
 
 @internal
@@ -1125,15 +1125,15 @@ type u32 AttributeLocation
 
 @internal
 class Objects {
-    map<RenderbufferId, Renderbuffer*>    Renderbuffers
-    map<TextureId, Texture*>              Textures
-    map<FramebufferId, Framebuffer*>      Framebuffers
-    map<BufferId, Buffer*>                Buffers
-    map<ShaderId, Shader*>                Shaders
-    map<ProgramId, Program*>              Programs
-    map<VertexArrayId, VertexArray*>      VertexArrays
-//    map<SyncObjectId, SyncObject*>        SyncObjects
-    map<QueryId, Query*>                  Queries
+    map<RenderbufferId, ptr<Renderbuffer>>    Renderbuffers
+    map<TextureId, ptr<Texture>>              Textures
+    map<FramebufferId, ptr<Framebuffer>>      Framebuffers
+    map<BufferId, ptr<Buffer>>                Buffers
+    map<ShaderId, ptr<Shader>>                Shaders
+    map<ProgramId, ptr<Program>>              Programs
+    map<VertexArrayId, ptr<VertexArray>>      VertexArrays
+//    map<SyncObjectId, ptr<SyncObject>>        SyncObjects
+    map<QueryId, ptr<Query>>                  Queries
 }
 
 
@@ -1146,7 +1146,7 @@ class Objects {
     map<BufferTarget, BufferId>                       BoundBuffers
     ProgramId                                         BoundProgram
     VertexArrayId                                     BoundVertexArray
-    map<AttributeLocation, VertexAttributeArray*>     VertexAttributeArrays
+    map<AttributeLocation, ptr<VertexAttributeArray>> VertexAttributeArrays
     TextureUnitMap                                    TextureUnits
     TextureUnit                                       ActiveTextureUnit = GL_TEXTURE0
     map<Capability, bool>                             Capabilities

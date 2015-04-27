@@ -236,9 +236,10 @@ func (t Pointer) Member(name string) Node {
 
 // Buffer represents a state pointer type declaration.
 type Buffer struct {
-	Name  string // the full type name
-	To    Type   // the type this is a pointer to
-	Array bool   // points to multiple elements, rather than one
+	Name      string // the full type name
+	To        Type   // the type this is a pointer to
+	Array     bool   // points to multiple elements, rather than one
+	FakeArray *Array // TODO:Remove - Hold a fake array for now as a schema compatibility measure
 }
 
 func (t Buffer) Typename() string { return t.Name }

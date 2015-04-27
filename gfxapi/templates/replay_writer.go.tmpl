@@ -545,6 +545,12 @@ limitations under the License.
   {{else if IsPointer     $.Type}}value.VolatileCapturePointer(uint64({{$.Name}}))
   {{else if IsEnum        $.Type}}value.U32({{$.Name}})
   {{else if IsArray       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+  {{else if IsBuffer      $.Type}}
+    {{if $.Type.Array}}
+      {{if IsChar $.Type.To}}ϟb.String({{$.Name}})
+      {{else}}{{$.Name}}.value(ϟb, ϟa, ϟs)
+      {{end}}
+    {{else}}{{$.Name}}.value(ϟb, ϟa, ϟs){{end}}
   {{else if IsStaticArray $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
   {{else if IsPseudonym   $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)
   {{else if IsClass       $.Type}}{{$.Name}}.value(ϟb, ϟa, ϟs)

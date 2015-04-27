@@ -181,10 +181,10 @@ func requireTypeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return t
 }
 
-// ( 'array' | 'map' | 'buffer' ) '<' type { ',' type } '>'
+// ( 'array' | 'map' | 'buffer' | 'ptr' ) '<' type { ',' type } '>'
 func genericType(p *parse.Parser, cst *parse.Branch) *ast.GenericType {
 	found := false
-	for _, word := range []string{ast.KeywordArray, ast.KeywordMap, ast.KeywordBuffer} {
+	for _, word := range []string{ast.KeywordArray, ast.KeywordMap, ast.KeywordBuffer, ast.KeywordPointer} {
 		if peekKeyword(word, p) {
 			found = true
 			break

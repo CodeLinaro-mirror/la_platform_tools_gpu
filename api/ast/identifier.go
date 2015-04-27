@@ -49,6 +49,7 @@ const (
 	KeywordNew       = "new"
 	KeywordNull      = "null"
 	KeywordOut       = "out"
+	KeywordPointer   = "ptr"
 	KeywordReturn    = "return"
 	KeywordPseudonym = "type"
 	KeywordSwitch    = "switch"

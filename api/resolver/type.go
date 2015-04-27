@@ -163,6 +163,12 @@ func genericType(ctx *context, in *ast.GenericType) semantic.Type {
 			return semantic.VoidType
 		}
 		return getBufferType(ctx, in, type_(ctx, in.Args[0]), true)
+	case ast.KeywordPointer:
+		if len(in.Args) != 1 {
+			ctx.errorf(in, "Pointer requires 1 arg, got %d", len(in.Args))
+			return semantic.VoidType
+		}
+		return getBufferType(ctx, in, type_(ctx, in.Args[0]), false)
 	default:
 		ctx.icef(in, "Generic type %s not handled", in.Generic.Value)
 		return semantic.VoidType
@@ -245,6 +251,9 @@ func getBufferType(ctx *context, at ast.Node, to semantic.Type, array bool) *sem
 		Name:  name,
 		To:    to,
 		Array: array,
+	}
+	if to != semantic.CharType && to != semantic.Uint8Type {
+		out.FakeArray = getArrayType(ctx, at, to)
 	}
 	ctx.api.Buffers = append(ctx.api.Buffers, out)
 	ctx.mappings[at] = out

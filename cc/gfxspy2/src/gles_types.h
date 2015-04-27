@@ -949,7 +949,7 @@ typedef void* CGLContextObj;
 
 typedef void* ImageOES;
 
-typedef std::unordered_map<std::string, AttributeLocation> AttributeLocation_stringMap;
+typedef std::unordered_map<std::string, AttributeLocation> AttributeLocation_CharBufferMap;
 
 typedef std::unordered_map<uint32_t, bool> Bool_CapabilityMap;
 
@@ -974,7 +974,7 @@ struct Buffer {
     uint32_t mUsage;
 };
 
-typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferRef_BufferIdMap;
+typedef std::unordered_map<BufferId, std::shared_ptr<Buffer>> BufferPtr_BufferIdMap;
 
 struct Image {
     inline Image& SetWidth(int32_t v) {
@@ -1057,7 +1057,7 @@ struct Framebuffer {
 };
 
 typedef std::unordered_map<FramebufferId, std::shared_ptr<Framebuffer>>
-        FramebufferRef_FramebufferIdMap;
+        FramebufferPtr_FramebufferIdMap;
 
 typedef std::unordered_map<int32_t, Image> Image_s32Map;
 
@@ -1348,7 +1348,7 @@ struct Program {
         mBinary = v;
         return *this;
     }
-    inline Program& SetAttributeBindings(AttributeLocation_stringMap v) {
+    inline Program& SetAttributeBindings(AttributeLocation_CharBufferMap v) {
         mAttributeBindings = v;
         return *this;
     }
@@ -1368,17 +1368,17 @@ struct Program {
     ShaderId_ShaderTypeMap mShaders;
     bool mLinked;
     Memory mBinary;
-    AttributeLocation_stringMap mAttributeBindings;
+    AttributeLocation_CharBufferMap mAttributeBindings;
     VertexAttribute_s32Map mAttributes;
     Uniform_UniformLocationMap mUniforms;
     std::string mInfoLog;
 };
 
-typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramRef_ProgramIdMap;
+typedef std::unordered_map<ProgramId, std::shared_ptr<Program>> ProgramPtr_ProgramIdMap;
 
 struct Query {};
 
-typedef std::unordered_map<QueryId, std::shared_ptr<Query>> QueryRef_QueryIdMap;
+typedef std::unordered_map<QueryId, std::shared_ptr<Query>> QueryPtr_QueryIdMap;
 
 typedef std::unordered_map<uint32_t, RenderbufferId> RenderbufferId_RenderbufferTargetMap;
 
@@ -1407,7 +1407,7 @@ struct Renderbuffer {
 };
 
 typedef std::unordered_map<RenderbufferId, std::shared_ptr<Renderbuffer>>
-        RenderbufferRef_RenderbufferIdMap;
+        RenderbufferPtr_RenderbufferIdMap;
 
 typedef std::unordered_map<uint32_t, int32_t> S32_PixelStoreParameterMap;
 
@@ -1445,7 +1445,7 @@ struct Shader {
     uint32_t mType;
 };
 
-typedef std::unordered_map<ShaderId, std::shared_ptr<Shader>> ShaderRef_ShaderIdMap;
+typedef std::unordered_map<ShaderId, std::shared_ptr<Shader>> ShaderPtr_ShaderIdMap;
 
 typedef std::unordered_map<uint32_t, TextureId> TextureId_TextureTargetMap;
 
@@ -1521,14 +1521,14 @@ struct Texture {
     float mMaxAnisotropy;
 };
 
-typedef std::unordered_map<TextureId, std::shared_ptr<Texture>> TextureRef_TextureIdMap;
+typedef std::unordered_map<TextureId, std::shared_ptr<Texture>> TexturePtr_TextureIdMap;
 
 typedef std::unordered_map<uint32_t, uint32_t> U32_FaceModeMap;
 
 struct VertexArray {};
 
 typedef std::unordered_map<VertexArrayId, std::shared_ptr<VertexArray>>
-        VertexArrayRef_VertexArrayIdMap;
+        VertexArrayPtr_VertexArrayIdMap;
 
 struct VertexAttributeArray {
     inline VertexAttributeArray& SetEnabled(bool v) {
@@ -1570,7 +1570,7 @@ struct VertexAttributeArray {
 };
 
 typedef std::unordered_map<AttributeLocation, std::shared_ptr<VertexAttributeArray>>
-        VertexAttributeArrayRef_AttributeLocationMap;
+        VertexAttributeArrayPtr_AttributeLocationMap;
 
 struct Color {
     inline Color& SetRed(float v) {
@@ -1799,47 +1799,47 @@ struct InternalState {
 };
 
 struct Objects {
-    inline Objects& SetRenderbuffers(RenderbufferRef_RenderbufferIdMap v) {
+    inline Objects& SetRenderbuffers(RenderbufferPtr_RenderbufferIdMap v) {
         mRenderbuffers = v;
         return *this;
     }
-    inline Objects& SetTextures(TextureRef_TextureIdMap v) {
+    inline Objects& SetTextures(TexturePtr_TextureIdMap v) {
         mTextures = v;
         return *this;
     }
-    inline Objects& SetFramebuffers(FramebufferRef_FramebufferIdMap v) {
+    inline Objects& SetFramebuffers(FramebufferPtr_FramebufferIdMap v) {
         mFramebuffers = v;
         return *this;
     }
-    inline Objects& SetBuffers(BufferRef_BufferIdMap v) {
+    inline Objects& SetBuffers(BufferPtr_BufferIdMap v) {
         mBuffers = v;
         return *this;
     }
-    inline Objects& SetShaders(ShaderRef_ShaderIdMap v) {
+    inline Objects& SetShaders(ShaderPtr_ShaderIdMap v) {
         mShaders = v;
         return *this;
     }
-    inline Objects& SetPrograms(ProgramRef_ProgramIdMap v) {
+    inline Objects& SetPrograms(ProgramPtr_ProgramIdMap v) {
         mPrograms = v;
         return *this;
     }
-    inline Objects& SetVertexArrays(VertexArrayRef_VertexArrayIdMap v) {
+    inline Objects& SetVertexArrays(VertexArrayPtr_VertexArrayIdMap v) {
         mVertexArrays = v;
         return *this;
     }
-    inline Objects& SetQueries(QueryRef_QueryIdMap v) {
+    inline Objects& SetQueries(QueryPtr_QueryIdMap v) {
         mQueries = v;
         return *this;
     }
 
-    RenderbufferRef_RenderbufferIdMap mRenderbuffers;
-    TextureRef_TextureIdMap mTextures;
-    FramebufferRef_FramebufferIdMap mFramebuffers;
-    BufferRef_BufferIdMap mBuffers;
-    ShaderRef_ShaderIdMap mShaders;
-    ProgramRef_ProgramIdMap mPrograms;
-    VertexArrayRef_VertexArrayIdMap mVertexArrays;
-    QueryRef_QueryIdMap mQueries;
+    RenderbufferPtr_RenderbufferIdMap mRenderbuffers;
+    TexturePtr_TextureIdMap mTextures;
+    FramebufferPtr_FramebufferIdMap mFramebuffers;
+    BufferPtr_BufferIdMap mBuffers;
+    ShaderPtr_ShaderIdMap mShaders;
+    ProgramPtr_ProgramIdMap mPrograms;
+    VertexArrayPtr_VertexArrayIdMap mVertexArrays;
+    QueryPtr_QueryIdMap mQueries;
 };
 
 }  // namespace gapii
