@@ -25,6 +25,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -402,6 +403,10 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 // the responses.
 func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
 	logger = logger.Enter("Build")
+	if config.DebugReplayBuilder {
+		logger.Info("Instruction count: %d", b.instructions)
+	}
+
 	vml := b.layoutVolatileMemory(logger)
 
 	opcodes := &bytes.Buffer{}
@@ -425,11 +430,13 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 		Opcodes:            opcodes.Bytes(),
 	}
 
-	logger.Info("Stack size:           0x%x", payload.StackSize)
-	logger.Info("Volatile memory size: 0x%x", payload.VolatileMemorySize)
-	logger.Info("Constant memory size: 0x%x", len(payload.Constants))
-	logger.Info("Opcodes size:         0x%x", len(payload.Opcodes))
-	logger.Info("Resource count:         %d", len(payload.Resources))
+	if config.DebugReplayBuilder {
+		logger.Info("Stack size:           0x%x", payload.StackSize)
+		logger.Info("Volatile memory size: 0x%x", payload.VolatileMemorySize)
+		logger.Info("Constant memory size: 0x%x", len(payload.Constants))
+		logger.Info("Opcodes size:         0x%x", len(payload.Opcodes))
+		logger.Info("Resource count:         %d", len(payload.Resources))
+	}
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
 		d := flat.Decoder(endian.Reader(r, b.byteOrder))
@@ -484,10 +491,16 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 		size:           size,
 	}
 
-	logger.Info("Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
-	logger.Info("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-	logger.Info("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
-	logger.Info("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
+	if config.DebugReplayBuilder {
+		logger.Info("Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
+		logger.Info("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
+		logger.Info("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
+		logger.Info("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
+		for _, m := range b.observedRanges {
+			logger.Info("    Block:   %v", m)
+		}
+	}
+
 	return vml
 }
 

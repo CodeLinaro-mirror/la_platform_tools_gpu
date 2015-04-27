@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -119,15 +120,21 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.persistentDb,
 		b.logger)
 
-	b.logger.Info("Replaying %d atoms using transform chain:", len(atoms))
-	for i, t := range transforms {
-		b.logger.Info("(%d) %#v", i, t)
+	if config.DebugReplay {
+		b.logger.Info("Replaying %d atoms using transform chain:", len(atoms))
+		for i, t := range transforms {
+			b.logger.Info("(%d) %#v", i, t)
+		}
 	}
 
 	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment), b.device.ByteOrder())
 
 	adapter := adapter{handlers: postbackHandlers, builder: builder, state: state.New()}
 	transforms.Transform(atoms, &adapter)
+
+	if config.DebugReplay {
+		b.logger.Info("Building payload...")
+	}
 
 	payload, decoder, err := builder.Build(b.logger)
 	if err != nil {
@@ -139,6 +146,10 @@ func (b *batcher) send(requests []Request) (err error) {
 		return fmt.Errorf("Failed to connect to device %v: %v", td.Name, err)
 	}
 	defer connection.Close()
+
+	if config.DebugReplay {
+		b.logger.Info("Sending payload to %v.", td.Name)
+	}
 
 	return executor.Execute(
 		payload,
