@@ -16,6 +16,7 @@ package build
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"os"
 	"os/exec"
@@ -154,23 +155,25 @@ func (f File) MkdirAll() {
 func (f File) CopyTo(dst File) error {
 	s, err := os.Open(f.Absolute())
 	if err != nil {
-		return err
+		return fmt.Errorf("Open copy source failed: %v", err)
 	}
 	defer s.Close()
 
 	fi, err := s.Stat()
 	if err != nil {
-		return err
+		return fmt.Errorf("Stat copy source failed: %v", err)
 	}
 
-	d, err := os.OpenFile(dst.Absolute(), os.O_CREATE, fi.Mode())
+	d, err := os.OpenFile(dst.Absolute(), os.O_CREATE|os.O_TRUNC|os.O_WRONLY, fi.Mode())
 	if err != nil {
-		return err
+		return fmt.Errorf("Create copy target failed: %v", err)
 	}
 	defer d.Close()
 
-	_, err = io.Copy(d, s)
-	return err
+	if _, err = io.Copy(d, s); err != nil {
+		return fmt.Errorf("Copy file data failed: %v", err)
+	}
+	return nil
 }
 
 // Exec executes this File with the specified arguments.
