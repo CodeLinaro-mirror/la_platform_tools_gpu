@@ -188,7 +188,7 @@ func indexedType(ctx *context, in *ast.IndexedType) semantic.Type {
 			ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
 		}
 	})
-	out.Name = fmt.Sprintf("%sStaticArray_%d", out.Size)
+	out.Name = fmt.Sprintf("%sStaticArray_%d", out.ValueType.Typename(), out.Size)
 	for _, a := range ctx.api.StaticArrays {
 		if a.Name == out.Name {
 			if !equal(out.ValueType, a.ValueType) {
