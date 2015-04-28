@@ -383,6 +383,9 @@ func getBuildTargets() map[string]Target {
 		Replayd: cpp.Config{
 			Libraries: build.FileSet{"dl", "GL", "m", "pthread", "X11", "rt"},
 		},
+		Spy: cpp.Config{
+			Libraries: build.FileSet{"pthread"},
+		},
 	})
 
 	osx := base(gcc.GCC, "osx", "x64").Extend(Target{
@@ -435,7 +438,7 @@ func getBuildTargets() map[string]Target {
 		},
 	})
 
-	android_arm := base(ndk.APK, "android", "arm").Extend(Target{
+	android_target := Target{
 		GapirTests: cpp.Config{
 			Toolchain: ndk.EXE,
 			Libraries: build.FileSet{"EGL", "log", "android", "z", "m"},
@@ -448,14 +451,17 @@ func getBuildTargets() map[string]Target {
 		Spy: cpp.Config{
 			Libraries: build.FileSet{"log", "z", "m", "dl"},
 		},
-	})
+	}
+	android_arm := base(ndk.APK, "android", "arm").Extend(android_target)
+	android_arm64 := base(ndk.APK, "android", "arm64").Extend(android_target)
 
 	return map[string]Target{
-		"linux":        linux,
-		"osx":          osx,
-		"windows":      windows,
-		"windows-msvc": windows_msvc,
-		"android-arm":  android_arm,
+		"linux":         linux,
+		"osx":           osx,
+		"windows":       windows,
+		"windows-msvc":  windows_msvc,
+		"android-arm":   android_arm,
+		"android-arm64": android_arm64,
 	}
 }
 
