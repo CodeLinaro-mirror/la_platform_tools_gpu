@@ -16,6 +16,7 @@ package resolver
 
 import (
 	"fmt"
+	"reflect"
 
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
@@ -39,7 +40,7 @@ type scope struct {
 }
 
 func (ctx *context) errorf(at interface{}, message string, args ...interface{}) {
-	if at, ok := at.(ast.Node); ok {
+	if at, _ := at.(ast.Node); at != nil && !reflect.ValueOf(at).IsNil() {
 		if n := at.Fragment(); n != nil {
 			ctx.errors.Add(nil, n, message, args...)
 			return
