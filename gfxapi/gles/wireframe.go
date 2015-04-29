@@ -160,44 +160,44 @@ func encodeIndices(indices []index) ([]byte, IndicesType) {
 func getIndices(id atom.ID, a atom.Atom, db database.Database, s *State, m *memory.Memory, logger log.Logger) ([]index, DrawMode, error) {
 	switch a := a.(type) {
 	case *GlDrawArrays:
-		indices := make([]index, a.In.IndexCount)
+		indices := make([]index, a.IndexCount)
 		for i := range indices {
-			indices[i] = index(a.In.FirstIndex) + index(i)
+			indices[i] = index(a.FirstIndex) + index(i)
 		}
-		return indices, a.In.DrawMode, nil
+		return indices, a.DrawMode, nil
 
 	case *GlDrawElements:
 		indexSize := map[IndicesType]uint64{
 			IndicesType_GL_UNSIGNED_BYTE:  1,
 			IndicesType_GL_UNSIGNED_SHORT: 2,
 			IndicesType_GL_UNSIGNED_INT:   4,
-		}[a.In.IndicesType]
+		}[a.IndicesType]
 		indexBufferID := s.BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER]
 		if indexBufferID == 0 {
 			// Get the index buffer data from pointer
-			size := uint64(a.In.ElementCount) * indexSize
-			mem := m.Slice(memory.Range{Base: memory.Pointer(a.In.Indices), Size: size})
+			size := uint64(a.ElementCount) * indexSize
+			mem := m.Slice(memory.Range{Base: memory.Pointer(a.Indices), Size: size})
 			data, err := mem.Get(db, logger)
 			if err != nil {
-				return nil, a.In.DrawMode, err
+				return nil, a.DrawMode, err
 			}
-			indices, err := decodeIndices(data, a.In.IndicesType)
-			return indices, a.In.DrawMode, err
+			indices, err := decodeIndices(data, a.IndicesType)
+			return indices, a.DrawMode, err
 		} else {
 			// Get the index buffer data from buffer
 			indexBuffer := s.Instances.Buffers[indexBufferID]
 			if indexBuffer == nil {
 				return nil, 0, fmt.Errorf("Can not find buffer %v", indexBufferID)
 			}
-			offset := memory.Pointer(a.In.Indices)
-			size := uint64(a.In.ElementCount) * indexSize
+			offset := memory.Pointer(a.Indices)
+			size := uint64(a.ElementCount) * indexSize
 			mem := indexBuffer.Data.Slice(memory.Range{Base: offset, Size: size})
 			data, err := mem.Get(db, logger)
 			if err != nil {
-				return nil, a.In.DrawMode, err
+				return nil, a.DrawMode, err
 			}
-			indices, err := decodeIndices(data, a.In.IndicesType)
-			return indices, a.In.DrawMode, err
+			indices, err := decodeIndices(data, a.IndicesType)
+			return indices, a.DrawMode, err
 		}
 
 	default:

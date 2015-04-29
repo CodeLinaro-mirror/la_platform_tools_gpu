@@ -47,7 +47,7 @@ limitations under the License.
       {{else}}
         ϟc := getState(ϟa, ϟs)
       {{end}}
-      ϟo := {{Macro "Go.CmdOutsName" $c}}{}
+      ϟo := {{Macro "Go.CmdName" $c}}{}
       {{/* Construct slices large enough to hold all simulated output */}}
       {{range $p := $c.FullParameters}}
         {{$count := GetArrayParamCount $p}}
@@ -61,8 +61,8 @@ limitations under the License.
         {{end}}
       {{end}}
       {{Macro "Block" $c.Block}}
-      if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa.Out, ϟo) {
-        log.Printf("Applying {{$c.Name}} expected %v got %v", ϟa.Out, ϟo)
+      if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
+        log.Printf("Applying {{$c.Name}} expected %v got %v", ϟa, ϟo)
       }
       return nil
     }

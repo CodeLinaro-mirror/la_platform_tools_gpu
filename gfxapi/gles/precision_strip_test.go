@@ -54,13 +54,13 @@ func runTest(t *testing.T, src string, expected string) {
 		return
 	}
 
-	if cmd.In.Count != 1 {
-		t.Errorf("Unexpected number of lines: got %d, expected 1.", cmd.In.Count)
+	if cmd.Count != 1 {
+		t.Errorf("Unexpected number of lines: got %d, expected 1.", cmd.Count)
 		return
 	}
-	if cmd.In.Source[0] != expected {
+	if cmd.Source[0] != expected {
 		t.Errorf("Received unexpected string: got `%s`, expected `%s`.",
-			cmd.In.Source[0], expected)
+			cmd.Source[0], expected)
 	}
 }
 
