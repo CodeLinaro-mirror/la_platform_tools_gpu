@@ -613,7 +613,7 @@ func (ϟa *CmdVoidU8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U8(ϟa.In.A))
+	ϟb.Push(value.U8(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidU8)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -624,7 +624,7 @@ func (ϟa *CmdVoidS8) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S8(ϟa.In.A))
+	ϟb.Push(value.S8(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidS8)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -635,7 +635,7 @@ func (ϟa *CmdVoidU16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U16(ϟa.In.A))
+	ϟb.Push(value.U16(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidU16)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -646,7 +646,7 @@ func (ϟa *CmdVoidS16) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S16(ϟa.In.A))
+	ϟb.Push(value.S16(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidS16)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -657,7 +657,7 @@ func (ϟa *CmdVoidF32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.A))
+	ϟb.Push(value.F32(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidF32)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -668,7 +668,7 @@ func (ϟa *CmdVoidU32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.A))
+	ϟb.Push(value.U32(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidU32)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -679,7 +679,7 @@ func (ϟa *CmdVoidS32) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.A))
+	ϟb.Push(value.S32(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidS32)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -690,7 +690,7 @@ func (ϟa *CmdVoidF64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F64(ϟa.In.A))
+	ϟb.Push(value.F64(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidF64)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -701,7 +701,7 @@ func (ϟa *CmdVoidU64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U64(ϟa.In.A))
+	ϟb.Push(value.U64(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidU64)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -712,7 +712,7 @@ func (ϟa *CmdVoidS64) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S64(ϟa.In.A))
+	ϟb.Push(value.S64(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidS64)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -723,7 +723,7 @@ func (ϟa *CmdVoidBool) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.Bool(ϟa.In.A))
+	ϟb.Push(value.Bool(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidBool)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -734,7 +734,7 @@ func (ϟa *CmdVoidString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟb.String(ϟa.In.A))
+	ϟb.Push(ϟb.String(ϟa.A))
 	ϟb.CallNoPush(funcInfoCmdVoidString)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -745,9 +745,9 @@ func (ϟa *CmdVoid3Strings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟb.String(ϟa.In.A))
-	ϟb.Push(ϟb.String(ϟa.In.B))
-	ϟb.Push(ϟb.String(ϟa.In.C))
+	ϟb.Push(ϟb.String(ϟa.A))
+	ϟb.Push(ϟb.String(ϟa.B))
+	ϟb.Push(ϟb.String(ϟa.C))
 	ϟb.CallNoPush(funcInfoCmdVoid3Strings)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -758,9 +758,9 @@ func (ϟa *CmdVoid3Arrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.B.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.C.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoCmdVoid3Arrays)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -771,7 +771,7 @@ func (ϟa *CmdVoidArrayOfStrings) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoCmdVoidArrayOfStrings)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1385,20 +1385,20 @@ func (ϟa *CmdVoid3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.A.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.A.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.A.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.A.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.A.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.A.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.B.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.B.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.B.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.B.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.B.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.B.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.C.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.C.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.C.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.C.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.C.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.C.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoCmdVoid3Remapped)
 	ϟa.Mutate(ϟs)
@@ -1416,13 +1416,13 @@ func (ϟa *CmdVoidOut3Remapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.Push(outputs[2]) // c
 	ϟb.CallNoPush(funcInfoCmdVoidOut3Remapped)
 	ϟa.Mutate(ϟs)
-	if key, remap := ϟa.Out.A.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.A.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
-	if key, remap := ϟa.Out.B.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.B.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[1], protocol.TypeUint32)
 	}
-	if key, remap := ϟa.Out.C.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.C.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[2], protocol.TypeUint32)
 	}
 	if postback {
@@ -1447,7 +1447,7 @@ func (ϟa *CmdVoidOutArrayOfRemapped) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟb.Push(outputs[0]) // a
 	ϟb.CallNoPush(funcInfoCmdVoidOutArrayOfRemapped)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.A {
+	for i, e := range ϟa.A {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)

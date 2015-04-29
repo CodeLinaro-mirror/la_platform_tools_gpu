@@ -74,12 +74,12 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 
 			out.Write(id, NewGlTexImage2D(
 				a.ContextID(),
-				a.In.Target,
-				a.In.Level,
+				a.Target,
+				a.Level,
 				TexelFormat_GL_RGBA,
-				a.In.Width,
-				a.In.Height,
-				a.In.Border,
+				a.Width,
+				a.Height,
+				a.Border,
 				TexelFormat_GL_RGBA,
 				TexelType_GL_UNSIGNED_BYTE,
 				TexturePointer(address),
@@ -101,19 +101,19 @@ func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID
 }
 
 func decompress(db database.Database, logger log.Logger, a *GlCompressedTexImage2D, m *memory.Memory) ([]byte, error) {
-	pointer := memory.Pointer(a.In.Data)
-	compressedSize := uint64(a.In.ImageSize)
+	pointer := memory.Pointer(a.Data)
+	compressedSize := uint64(a.ImageSize)
 	compressed, err := m.Slice(memory.Range{Base: pointer, Size: compressedSize}).Get(db, logger)
 	if err != nil {
 		panic(err)
 	}
-	switch a.In.Format {
+	switch a.Format {
 	case CompressedTexelFormat_GL_ATC_RGB_AMD:
-		return image.Convert(compressed[:compressedSize], int(a.In.Width), int(a.In.Height), image.ATC_RGB_AMD(), image.RGBA())
+		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ATC_RGB_AMD(), image.RGBA())
 	case CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD:
-		return image.Convert(compressed[:compressedSize], int(a.In.Width), int(a.In.Height), image.ATC_RGBA_EXPLICIT_ALPHA_AMD(), image.RGBA())
+		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ATC_RGBA_EXPLICIT_ALPHA_AMD(), image.RGBA())
 	case CompressedTexelFormat_GL_ETC1_RGB8_OES:
-		return image.Convert(compressed[:compressedSize], int(a.In.Width), int(a.In.Height), image.ETC1_RGB8_OES(), image.RGBA())
+		return image.Convert(compressed[:compressedSize], int(a.Width), int(a.Height), image.ETC1_RGB8_OES(), image.RGBA())
 	}
-	return nil, fmt.Errorf("Unsupported input format: %s", a.In.Format.String())
+	return nil, fmt.Errorf("Unsupported input format: %s", a.Format.String())
 }
