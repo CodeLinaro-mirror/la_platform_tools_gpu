@@ -82,9 +82,9 @@ func (i UniformLocation) remap(a atom.Atom, s *state.State) (key interface{}, re
 	program := state.BoundProgram
 	switch a := a.(type) {
 	case *GlGetActiveUniform:
-		program = a.In.Program
+		program = a.Program
 	case *GlGetUniformLocation:
-		program = a.In.Program
+		program = a.Program
 	}
 	return struct {
 		p *Program
@@ -137,9 +137,9 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *state.State) value.V
 //       This is obviously not ideal, and we should be doing this once at glLinkProgram once the
 //       spy emits location hinting information.
 func (ω *GlGetAttribLocation) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
-	if ω.Out.Result >= 0 {
-		NewGlBindAttribLocation(ω.ContextID(), ω.In.Program, ω.Out.Result, ω.In.Name).Replay(id, s, b, false)
-		NewGlLinkProgram(ω.ContextID(), ω.In.Program).Replay(id, s, b, false)
+	if ω.Result >= 0 {
+		NewGlBindAttribLocation(ω.ContextID(), ω.Program, ω.Result, ω.Name).Replay(id, s, b, false)
+		NewGlLinkProgram(ω.ContextID(), ω.Program).Replay(id, s, b, false)
 	}
 }
 

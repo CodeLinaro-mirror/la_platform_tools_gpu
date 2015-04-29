@@ -1507,11 +1507,11 @@ func (ϟa *Init) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, pos
 	ϟc := &State{}
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.U32(ϟa.In.ColorFmt))
-	ϟb.Push(value.U32(ϟa.In.DepthFmt))
-	ϟb.Push(value.U32(ϟa.In.StencilFmt))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.U32(ϟa.ColorFmt))
+	ϟb.Push(value.U32(ϟa.DepthFmt))
+	ϟb.Push(value.U32(ϟa.StencilFmt))
 	ϟb.CallNoPush(funcInfoInit)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1522,7 +1522,7 @@ func (ϟa *StartTimer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := &State{}
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U8(ϟa.In.Index))
+	ϟb.Push(value.U8(ϟa.Index))
 	ϟb.CallNoPush(funcInfoStartTimer)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1534,7 +1534,7 @@ func (ϟa *StopTimer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* result */})
-	ϟb.Push(value.U8(ϟa.In.Index))
+	ϟb.Push(value.U8(ϟa.Index))
 	ϟb.CallPush(funcInfoStopTimer)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -1566,7 +1566,7 @@ func (ϟa *EglInitialize) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* major */, uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* minor */, uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
-	ϟb.Push(ϟa.In.Dpy.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Dpy.value(ϟb, ϟa, ϟs))
 	ϟb.Push(outputs[0]) // major
 	ϟb.Push(outputs[1]) // minor
 	ϟb.CallPush(funcInfoEglInitialize)
@@ -1591,10 +1591,10 @@ func (ϟa *EglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Config.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.ShareContext.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.AttribList.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Config.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.ShareContext.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.AttribList.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoEglCreateContext)
 	ϟb.Push(outputs[0])
 	ϟb.Copy(result_cnt)
@@ -1617,10 +1617,10 @@ func (ϟa *EglMakeCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
-	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Draw.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Read.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Context.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Draw.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Read.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Context.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoEglMakeCurrent)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -1642,8 +1642,8 @@ func (ϟa *EglSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
-	ϟb.Push(ϟa.In.Display.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Surface)))
+	ϟb.Push(ϟa.Display.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Surface)))
 	ϟb.CallPush(funcInfoEglSwapBuffers)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -1666,7 +1666,7 @@ func (ϟa *WglCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	ϟb.Push(ϟa.In.Hdc.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Hdc.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoWglCreateContext)
 	ϟb.Push(outputs[0])
 	ϟb.Copy(result_cnt)
@@ -1690,8 +1690,8 @@ func (ϟa *WglMakeCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(0))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
-	ϟb.Push(ϟa.In.Hdc.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Hglrc.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Hdc.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Hglrc.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoWglMakeCurrent)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -1712,7 +1712,7 @@ func (ϟa *WglSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Hdc.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Hdc.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoWglSwapBuffers)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1724,9 +1724,9 @@ func (ϟa *CGLCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{uint64(ϟb.PointerSize()) /* TODO: sizeof(void*) may not equal sizeof(int) */ /* result */})
-	ϟb.Push(ϟa.In.Pix.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Share.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Ctx.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Pix.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Share.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Ctx.value(ϟb, ϟa, ϟs))
 	ϟb.CallPush(funcInfoCGLCreateContext)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -1747,7 +1747,7 @@ func (ϟa *GlEnableClientState) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.CallNoPush(funcInfoGlEnableClientState)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1758,7 +1758,7 @@ func (ϟa *GlDisableClientState) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.CallNoPush(funcInfoGlDisableClientState)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1769,14 +1769,14 @@ func (ϟa *GlGetProgramBinaryOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	binary_cnt := uint64(ϟa.In.BufferSize)
+	binary_cnt := uint64(ϟa.BufferSize)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* bytes_written */, 4 /* binary_format */, binary_cnt /* binary */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(value.S32(ϟa.BufferSize))
 	ϟb.Push(outputs[0]) // bytes_written
 	ϟb.Push(outputs[1]) // binary_format
 	ϟb.Push(outputs[2]) // binary
@@ -1799,14 +1799,14 @@ func (ϟa *GlProgramBinaryOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.BinaryFormat))
-	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Binary)))
-	ϟb.Push(value.S32(ϟa.In.BinarySize))
+	ϟb.Push(value.U32(ϟa.BinaryFormat))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Binary)))
+	ϟb.Push(value.S32(ϟa.BinarySize))
 	ϟb.CallNoPush(funcInfoGlProgramBinaryOES)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1817,11 +1817,11 @@ func (ϟa *GlStartTilingQCOM) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.U32(ϟa.In.PreserveMask))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.U32(ϟa.PreserveMask))
 	ϟb.CallNoPush(funcInfoGlStartTilingQCOM)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1832,7 +1832,7 @@ func (ϟa *GlEndTilingQCOM) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.PreserveMask))
+	ϟb.Push(value.U32(ϟa.PreserveMask))
 	ϟb.CallNoPush(funcInfoGlEndTilingQCOM)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1843,9 +1843,9 @@ func (ϟa *GlDiscardFramebufferEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.NumAttachments))
-	ϟb.Push(ϟa.In.Attachments.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.NumAttachments))
+	ϟb.Push(ϟa.Attachments.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDiscardFramebufferEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1856,8 +1856,8 @@ func (ϟa *GlInsertEventMarkerEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Length))
-	ϟb.Push(ϟb.String(ϟa.In.Marker))
+	ϟb.Push(value.S32(ϟa.Length))
+	ϟb.Push(ϟb.String(ϟa.Marker))
 	ϟb.CallNoPush(funcInfoGlInsertEventMarkerEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1868,8 +1868,8 @@ func (ϟa *GlPushGroupMarkerEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Length))
-	ϟb.Push(ϟb.String(ϟa.In.Marker))
+	ϟb.Push(value.S32(ϟa.Length))
+	ϟb.Push(ϟb.String(ϟa.Marker))
 	ϟb.CallNoPush(funcInfoGlPushGroupMarkerEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1890,10 +1890,10 @@ func (ϟa *GlTexStorage1DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
 	ϟb.CallNoPush(funcInfoGlTexStorage1DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1904,11 +1904,11 @@ func (ϟa *GlTexStorage2DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlTexStorage2DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1919,12 +1919,12 @@ func (ϟa *GlTexStorage3DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.S32(ϟa.In.Depth))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.S32(ϟa.Depth))
 	ϟb.CallNoPush(funcInfoGlTexStorage3DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1935,15 +1935,15 @@ func (ϟa *GlTextureStorage1DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
 	ϟb.CallNoPush(funcInfoGlTextureStorage1DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1954,16 +1954,16 @@ func (ϟa *GlTextureStorage2DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlTextureStorage2DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1974,17 +1974,17 @@ func (ϟa *GlTextureStorage3DEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Levels))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.S32(ϟa.In.Depth))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Levels))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.S32(ϟa.Depth))
 	ϟb.CallNoPush(funcInfoGlTextureStorage3DEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -1995,13 +1995,13 @@ func (ϟa *GlGenVertexArraysOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	arrays_cnt := uint64(ϟa.In.Count)
+	arrays_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{arrays_cnt * 4 /* arrays */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // arrays
 	ϟb.CallNoPush(funcInfoGlGenVertexArraysOES)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Arrays {
+	for i, e := range ϟa.Arrays {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -2024,10 +2024,10 @@ func (ϟa *GlBindVertexArrayOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Array.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Array.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Array.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Array.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBindVertexArrayOES)
 	ϟa.Mutate(ϟs)
@@ -2039,8 +2039,8 @@ func (ϟa *GlDeleteVertexArraysOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Arrays.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Arrays.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteVertexArraysOES)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2052,10 +2052,10 @@ func (ϟa *GlIsVertexArrayOES) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Array.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Array.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Array.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Array.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Array.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Array.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsVertexArrayOES)
 	ϟb.Store(outputs[0])
@@ -2077,8 +2077,8 @@ func (ϟa *GlEGLImageTargetTexture2DOES) Replay(ϟi atom.ID, ϟs *state.State, �
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(ϟa.In.Image.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlEGLImageTargetTexture2DOES)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2089,8 +2089,8 @@ func (ϟa *GlEGLImageTargetRenderbufferStorageOES) Replay(ϟi atom.ID, ϟs *stat
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(ϟa.In.Image.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(ϟa.Image.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlEGLImageTargetRenderbufferStorageOES)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2122,13 +2122,13 @@ func (ϟa *GlBindAttribLocation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.CallNoPush(funcInfoGlBindAttribLocation)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2139,8 +2139,8 @@ func (ϟa *GlBlendFunc) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.SrcFactor))
-	ϟb.Push(value.U32(ϟa.In.DstFactor))
+	ϟb.Push(value.U32(ϟa.SrcFactor))
+	ϟb.Push(value.U32(ϟa.DstFactor))
 	ϟb.CallNoPush(funcInfoGlBlendFunc)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2151,10 +2151,10 @@ func (ϟa *GlBlendFuncSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.SrcFactorRgb))
-	ϟb.Push(value.U32(ϟa.In.DstFactorRgb))
-	ϟb.Push(value.U32(ϟa.In.SrcFactorAlpha))
-	ϟb.Push(value.U32(ϟa.In.DstFactorAlpha))
+	ϟb.Push(value.U32(ϟa.SrcFactorRgb))
+	ϟb.Push(value.U32(ϟa.DstFactorRgb))
+	ϟb.Push(value.U32(ϟa.SrcFactorAlpha))
+	ϟb.Push(value.U32(ϟa.DstFactorAlpha))
 	ϟb.CallNoPush(funcInfoGlBlendFuncSeparate)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2165,7 +2165,7 @@ func (ϟa *GlBlendEquation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Equation))
+	ϟb.Push(value.U32(ϟa.Equation))
 	ϟb.CallNoPush(funcInfoGlBlendEquation)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2176,8 +2176,8 @@ func (ϟa *GlBlendEquationSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Rgb))
-	ϟb.Push(value.U32(ϟa.In.Alpha))
+	ϟb.Push(value.U32(ϟa.Rgb))
+	ϟb.Push(value.U32(ϟa.Alpha))
 	ϟb.CallNoPush(funcInfoGlBlendEquationSeparate)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2188,10 +2188,10 @@ func (ϟa *GlBlendColor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.Red))
-	ϟb.Push(value.F32(ϟa.In.Green))
-	ϟb.Push(value.F32(ϟa.In.Blue))
-	ϟb.Push(value.F32(ϟa.In.Alpha))
+	ϟb.Push(value.F32(ϟa.Red))
+	ϟb.Push(value.F32(ϟa.Green))
+	ϟb.Push(value.F32(ϟa.Blue))
+	ϟb.Push(value.F32(ϟa.Alpha))
 	ϟb.CallNoPush(funcInfoGlBlendColor)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2202,7 +2202,7 @@ func (ϟa *GlEnableVertexAttribArray) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlEnableVertexAttribArray)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2213,7 +2213,7 @@ func (ϟa *GlDisableVertexAttribArray) Replay(ϟi atom.ID, ϟs *state.State, ϟb
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDisableVertexAttribArray)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2224,12 +2224,12 @@ func (ϟa *GlVertexAttribPointer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.S32(ϟa.In.Size))
-	ϟb.Push(value.U32(ϟa.In.Type))
-	ϟb.Push(value.Bool(ϟa.In.Normalized))
-	ϟb.Push(value.S32(ϟa.In.Stride))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Size))
+	ϟb.Push(value.U32(ϟa.Type))
+	ϟb.Push(value.Bool(ϟa.Normalized))
+	ϟb.Push(value.S32(ϟa.Stride))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlVertexAttribPointer)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2240,15 +2240,15 @@ func (ϟa *GlGetActiveAttrib) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	name_cnt := uint64(ϟa.In.BufferSize)
+	name_cnt := uint64(ϟa.BufferSize)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* vector_count */, 4 /* type */, name_cnt /* name */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.BufferSize))
 	ϟb.Push(outputs[0]) // buffer_bytes_written
 	ϟb.Push(outputs[1]) // vector_count
 	ϟb.Push(outputs[2]) // type
@@ -2272,15 +2272,15 @@ func (ϟa *GlGetActiveUniform) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	name_cnt := uint64(ϟa.In.BufferSize)
+	name_cnt := uint64(ϟa.BufferSize)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* buffer_bytes_written */, 4 /* size */, 4 /* type */, name_cnt /* name */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Location))
-	ϟb.Push(value.S32(ϟa.In.BufferSize))
+	ϟb.Push(value.S32(ϟa.Location))
+	ϟb.Push(value.S32(ϟa.BufferSize))
 	ϟb.Push(outputs[0]) // buffer_bytes_written
 	ϟb.Push(outputs[1]) // size
 	ϟb.Push(outputs[2]) // type
@@ -2327,12 +2327,12 @@ func (ϟa *GlGetProgramiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟb.BeginAtom(ϟi)
 	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetProgramiv)
 	ϟa.Mutate(ϟs)
@@ -2355,12 +2355,12 @@ func (ϟa *GlGetShaderiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟb.BeginAtom(ϟi)
 	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetShaderiv)
 	ϟa.Mutate(ϟs)
@@ -2382,16 +2382,16 @@ func (ϟa *GlGetUniformLocation) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.CallPush(funcInfoGlGetUniformLocation)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
-	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[0], protocol.TypeInt32)
 	}
 	if postback {
@@ -2412,12 +2412,12 @@ func (ϟa *GlGetAttribLocation) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟb.String(ϟa.In.Name))
+	ϟb.Push(ϟb.String(ϟa.Name))
 	ϟb.CallPush(funcInfoGlGetAttribLocation)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -2438,8 +2438,8 @@ func (ϟa *GlPixelStorei) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Parameter))
-	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.Push(value.U32(ϟa.Parameter))
+	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.CallNoPush(funcInfoGlPixelStorei)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2450,9 +2450,9 @@ func (ϟa *GlTexParameteri) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
-	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
+	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.CallNoPush(funcInfoGlTexParameteri)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2463,9 +2463,9 @@ func (ϟa *GlTexParameterf) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
-	ϟb.Push(value.F32(ϟa.In.Value))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
+	ϟb.Push(value.F32(ϟa.Value))
 	ϟb.CallNoPush(funcInfoGlTexParameterf)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2478,8 +2478,8 @@ func (ϟa *GlGetTexParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.BeginAtom(ϟi)
 	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetTexParameteriv)
 	ϟa.Mutate(ϟs)
@@ -2502,8 +2502,8 @@ func (ϟa *GlGetTexParameterfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟb.BeginAtom(ϟi)
 	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetTexParameterfv)
 	ϟa.Mutate(ϟs)
@@ -2524,12 +2524,12 @@ func (ϟa *GlUniform1i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Value))
+	ϟb.Push(value.S32(ϟa.Value))
 	ϟb.CallNoPush(funcInfoGlUniform1i)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2540,13 +2540,13 @@ func (ϟa *GlUniform2i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Value0))
-	ϟb.Push(value.S32(ϟa.In.Value1))
+	ϟb.Push(value.S32(ϟa.Value0))
+	ϟb.Push(value.S32(ϟa.Value1))
 	ϟb.CallNoPush(funcInfoGlUniform2i)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2557,14 +2557,14 @@ func (ϟa *GlUniform3i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Value0))
-	ϟb.Push(value.S32(ϟa.In.Value1))
-	ϟb.Push(value.S32(ϟa.In.Value2))
+	ϟb.Push(value.S32(ϟa.Value0))
+	ϟb.Push(value.S32(ϟa.Value1))
+	ϟb.Push(value.S32(ϟa.Value2))
 	ϟb.CallNoPush(funcInfoGlUniform3i)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2575,15 +2575,15 @@ func (ϟa *GlUniform4i) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Value0))
-	ϟb.Push(value.S32(ϟa.In.Value1))
-	ϟb.Push(value.S32(ϟa.In.Value2))
-	ϟb.Push(value.S32(ϟa.In.Value3))
+	ϟb.Push(value.S32(ϟa.Value0))
+	ϟb.Push(value.S32(ϟa.Value1))
+	ϟb.Push(value.S32(ϟa.Value2))
+	ϟb.Push(value.S32(ϟa.Value3))
 	ϟb.CallNoPush(funcInfoGlUniform4i)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2594,13 +2594,13 @@ func (ϟa *GlUniform1iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform1iv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2611,13 +2611,13 @@ func (ϟa *GlUniform2iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform2iv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2628,13 +2628,13 @@ func (ϟa *GlUniform3iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform3iv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2645,13 +2645,13 @@ func (ϟa *GlUniform4iv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform4iv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2662,12 +2662,12 @@ func (ϟa *GlUniform1f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.F32(ϟa.In.Value))
+	ϟb.Push(value.F32(ϟa.Value))
 	ϟb.CallNoPush(funcInfoGlUniform1f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2678,13 +2678,13 @@ func (ϟa *GlUniform2f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
 	ϟb.CallNoPush(funcInfoGlUniform2f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2695,14 +2695,14 @@ func (ϟa *GlUniform3f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
-	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
+	ϟb.Push(value.F32(ϟa.Value2))
 	ϟb.CallNoPush(funcInfoGlUniform3f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2713,15 +2713,15 @@ func (ϟa *GlUniform4f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
-	ϟb.Push(value.F32(ϟa.In.Value2))
-	ϟb.Push(value.F32(ϟa.In.Value3))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
+	ϟb.Push(value.F32(ϟa.Value2))
+	ϟb.Push(value.F32(ϟa.Value3))
 	ϟb.CallNoPush(funcInfoGlUniform4f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2732,13 +2732,13 @@ func (ϟa *GlUniform1fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform1fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2749,13 +2749,13 @@ func (ϟa *GlUniform2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform2fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2766,13 +2766,13 @@ func (ϟa *GlUniform3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform3fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2783,13 +2783,13 @@ func (ϟa *GlUniform4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniform4fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2800,14 +2800,14 @@ func (ϟa *GlUniformMatrix2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(value.Bool(ϟa.In.Transpose))
-	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(value.Bool(ϟa.Transpose))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniformMatrix2fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2818,14 +2818,14 @@ func (ϟa *GlUniformMatrix3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(value.Bool(ϟa.In.Transpose))
-	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(value.Bool(ϟa.Transpose))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniformMatrix3fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2836,14 +2836,14 @@ func (ϟa *GlUniformMatrix4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(value.Bool(ϟa.In.Transpose))
-	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(value.Bool(ϟa.Transpose))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlUniformMatrix4fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2854,17 +2854,17 @@ func (ϟa *GlGetUniformfv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlGetUniformfv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2875,17 +2875,17 @@ func (ϟa *GlGetUniformiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.Location.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Location.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Location.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Location.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(ϟa.In.Values.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Values.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlGetUniformiv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2896,8 +2896,8 @@ func (ϟa *GlVertexAttrib1f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.F32(ϟa.In.Value0))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.Value0))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib1f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2908,9 +2908,9 @@ func (ϟa *GlVertexAttrib2f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib2f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2921,10 +2921,10 @@ func (ϟa *GlVertexAttrib3f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
-	ϟb.Push(value.F32(ϟa.In.Value2))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
+	ϟb.Push(value.F32(ϟa.Value2))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib3f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2935,11 +2935,11 @@ func (ϟa *GlVertexAttrib4f) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.F32(ϟa.In.Value0))
-	ϟb.Push(value.F32(ϟa.In.Value1))
-	ϟb.Push(value.F32(ϟa.In.Value2))
-	ϟb.Push(value.F32(ϟa.In.Value3))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.F32(ϟa.Value0))
+	ϟb.Push(value.F32(ϟa.Value1))
+	ϟb.Push(value.F32(ϟa.Value2))
+	ϟb.Push(value.F32(ϟa.Value3))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib4f)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2950,8 +2950,8 @@ func (ϟa *GlVertexAttrib1fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib1fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2962,8 +2962,8 @@ func (ϟa *GlVertexAttrib2fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib2fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2974,8 +2974,8 @@ func (ϟa *GlVertexAttrib3fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib3fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -2986,8 +2986,8 @@ func (ϟa *GlVertexAttrib4fv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(ϟa.In.Location.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Value.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Location.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Value.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlVertexAttrib4fv)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3000,8 +3000,8 @@ func (ϟa *GlGetShaderPrecisionFormat) Replay(ϟi atom.ID, ϟs *state.State, ϟb
 	ϟb.BeginAtom(ϟi)
 	range_cnt := uint64(int32(2))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{range_cnt * 4 /* range */, 4 /* precision */})
-	ϟb.Push(value.U32(ϟa.In.ShaderType))
-	ϟb.Push(value.U32(ϟa.In.PrecisionType))
+	ϟb.Push(value.U32(ϟa.ShaderType))
+	ϟb.Push(value.U32(ϟa.PrecisionType))
 	ϟb.Push(outputs[0]) // range
 	ϟb.Push(outputs[1]) // precision
 	ϟb.CallNoPush(funcInfoGlGetShaderPrecisionFormat)
@@ -3023,7 +3023,7 @@ func (ϟa *GlDepthMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.Bool(ϟa.In.Enabled))
+	ϟb.Push(value.Bool(ϟa.Enabled))
 	ϟb.CallNoPush(funcInfoGlDepthMask)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3034,7 +3034,7 @@ func (ϟa *GlDepthFunc) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Function))
+	ϟb.Push(value.U32(ϟa.Function))
 	ϟb.CallNoPush(funcInfoGlDepthFunc)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3045,8 +3045,8 @@ func (ϟa *GlDepthRangef) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.Near))
-	ϟb.Push(value.F32(ϟa.In.Far))
+	ϟb.Push(value.F32(ϟa.Near))
+	ϟb.Push(value.F32(ϟa.Far))
 	ϟb.CallNoPush(funcInfoGlDepthRangef)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3057,10 +3057,10 @@ func (ϟa *GlColorMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.Bool(ϟa.In.Red))
-	ϟb.Push(value.Bool(ϟa.In.Green))
-	ϟb.Push(value.Bool(ϟa.In.Blue))
-	ϟb.Push(value.Bool(ϟa.In.Alpha))
+	ϟb.Push(value.Bool(ϟa.Red))
+	ϟb.Push(value.Bool(ϟa.Green))
+	ϟb.Push(value.Bool(ϟa.Blue))
+	ϟb.Push(value.Bool(ϟa.Alpha))
 	ϟb.CallNoPush(funcInfoGlColorMask)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3071,7 +3071,7 @@ func (ϟa *GlStencilMask) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.CallNoPush(funcInfoGlStencilMask)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3082,8 +3082,8 @@ func (ϟa *GlStencilMaskSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Face))
-	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.Push(value.U32(ϟa.Face))
+	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.CallNoPush(funcInfoGlStencilMaskSeparate)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3094,10 +3094,10 @@ func (ϟa *GlStencilFuncSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Face))
-	ϟb.Push(value.U32(ϟa.In.Function))
-	ϟb.Push(value.S32(ϟa.In.ReferenceValue))
-	ϟb.Push(value.S32(ϟa.In.Mask))
+	ϟb.Push(value.U32(ϟa.Face))
+	ϟb.Push(value.U32(ϟa.Function))
+	ϟb.Push(value.S32(ϟa.ReferenceValue))
+	ϟb.Push(value.S32(ϟa.Mask))
 	ϟb.CallNoPush(funcInfoGlStencilFuncSeparate)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3108,10 +3108,10 @@ func (ϟa *GlStencilOpSeparate) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Face))
-	ϟb.Push(value.U32(ϟa.In.StencilFail))
-	ϟb.Push(value.U32(ϟa.In.StencilPassDepthFail))
-	ϟb.Push(value.U32(ϟa.In.StencilPassDepthPass))
+	ϟb.Push(value.U32(ϟa.Face))
+	ϟb.Push(value.U32(ϟa.StencilFail))
+	ϟb.Push(value.U32(ϟa.StencilPassDepthFail))
+	ϟb.Push(value.U32(ϟa.StencilPassDepthPass))
 	ϟb.CallNoPush(funcInfoGlStencilOpSeparate)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3122,7 +3122,7 @@ func (ϟa *GlFrontFace) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Orientation))
+	ϟb.Push(value.U32(ϟa.Orientation))
 	ϟb.CallNoPush(funcInfoGlFrontFace)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3133,10 +3133,10 @@ func (ϟa *GlViewport) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlViewport)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3147,10 +3147,10 @@ func (ϟa *GlScissor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlScissor)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3161,7 +3161,7 @@ func (ϟa *GlActiveTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Unit))
+	ϟb.Push(value.U32(ϟa.Unit))
 	ϟb.CallNoPush(funcInfoGlActiveTexture)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3172,13 +3172,13 @@ func (ϟa *GlGenTextures) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	textures_cnt := uint64(ϟa.In.Count)
+	textures_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{textures_cnt * 4 /* textures */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // textures
 	ϟb.CallNoPush(funcInfoGlGenTextures)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Textures {
+	for i, e := range ϟa.Textures {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -3201,8 +3201,8 @@ func (ϟa *GlDeleteTextures) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Textures.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Textures.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteTextures)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3214,10 +3214,10 @@ func (ϟa *GlIsTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsTexture)
 	ϟb.Store(outputs[0])
@@ -3239,11 +3239,11 @@ func (ϟa *GlBindTexture) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBindTexture)
 	ϟa.Mutate(ϟs)
@@ -3255,15 +3255,15 @@ func (ϟa *GlTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.U32(ϟa.In.InternalFormat))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.S32(ϟa.In.Border))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.U32(ϟa.In.Type))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.U32(ϟa.InternalFormat))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.S32(ϟa.Border))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.U32(ϟa.Type))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlTexImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3274,15 +3274,15 @@ func (ϟa *GlTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.S32(ϟa.In.Xoffset))
-	ϟb.Push(value.S32(ϟa.In.Yoffset))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.U32(ϟa.In.Type))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.S32(ϟa.Xoffset))
+	ϟb.Push(value.S32(ϟa.Yoffset))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.U32(ϟa.Type))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlTexSubImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3293,14 +3293,14 @@ func (ϟa *GlCopyTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.S32(ϟa.In.Border))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.S32(ϟa.Border))
 	ϟb.CallNoPush(funcInfoGlCopyTexImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3311,14 +3311,14 @@ func (ϟa *GlCopyTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.S32(ϟa.In.Xoffset))
-	ϟb.Push(value.S32(ϟa.In.Yoffset))
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.S32(ϟa.Xoffset))
+	ϟb.Push(value.S32(ϟa.Yoffset))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlCopyTexSubImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3329,14 +3329,14 @@ func (ϟa *GlCompressedTexImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.S32(ϟa.In.Border))
-	ϟb.Push(value.S32(ϟa.In.ImageSize))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.S32(ϟa.Border))
+	ϟb.Push(value.S32(ϟa.ImageSize))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlCompressedTexImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3347,15 +3347,15 @@ func (ϟa *GlCompressedTexSubImage2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Level))
-	ϟb.Push(value.S32(ϟa.In.Xoffset))
-	ϟb.Push(value.S32(ϟa.In.Yoffset))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.ImageSize))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Level))
+	ϟb.Push(value.S32(ϟa.Xoffset))
+	ϟb.Push(value.S32(ϟa.Yoffset))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.ImageSize))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlCompressedTexSubImage2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3366,7 +3366,7 @@ func (ϟa *GlGenerateMipmap) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallNoPush(funcInfoGlGenerateMipmap)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3377,14 +3377,14 @@ func (ϟa *GlReadPixels) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	data_cnt := uint64(imageSize(uint32(ϟa.In.Width), uint32(ϟa.In.Height), TexelFormat(ϟa.In.Format), ϟa.In.Type))
+	data_cnt := uint64(imageSize(uint32(ϟa.Width), uint32(ϟa.Height), TexelFormat(ϟa.Format), ϟa.Type))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{data_cnt /* data */})
-	ϟb.Push(value.S32(ϟa.In.X))
-	ϟb.Push(value.S32(ϟa.In.Y))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(value.S32(ϟa.X))
+	ϟb.Push(value.S32(ϟa.Y))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.Push(outputs[0]) // data
 	ϟb.CallNoPush(funcInfoGlReadPixels)
 	ϟa.Mutate(ϟs)
@@ -3405,13 +3405,13 @@ func (ϟa *GlGenFramebuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	framebuffers_cnt := uint64(ϟa.In.Count)
+	framebuffers_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{framebuffers_cnt * 4 /* framebuffers */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // framebuffers
 	ϟb.CallNoPush(funcInfoGlGenFramebuffers)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Framebuffers {
+	for i, e := range ϟa.Framebuffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -3434,11 +3434,11 @@ func (ϟa *GlBindFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Framebuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBindFramebuffer)
 	ϟa.Mutate(ϟs)
@@ -3451,7 +3451,7 @@ func (ϟa *GlCheckFramebufferStatus) Replay(ϟi atom.ID, ϟs *state.State, ϟb *
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallPush(funcInfoGlCheckFramebufferStatus)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -3472,8 +3472,8 @@ func (ϟa *GlDeleteFramebuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Framebuffers.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Framebuffers.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteFramebuffers)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3485,10 +3485,10 @@ func (ϟa *GlIsFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Framebuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Framebuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Framebuffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Framebuffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsFramebuffer)
 	ϟb.Store(outputs[0])
@@ -3510,13 +3510,13 @@ func (ϟa *GlGenRenderbuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	renderbuffers_cnt := uint64(ϟa.In.Count)
+	renderbuffers_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{renderbuffers_cnt * 4 /* renderbuffers */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // renderbuffers
 	ϟb.CallNoPush(funcInfoGlGenRenderbuffers)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Renderbuffers {
+	for i, e := range ϟa.Renderbuffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -3539,11 +3539,11 @@ func (ϟa *GlBindRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBindRenderbuffer)
 	ϟa.Mutate(ϟs)
@@ -3555,10 +3555,10 @@ func (ϟa *GlRenderbufferStorage) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlRenderbufferStorage)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3569,8 +3569,8 @@ func (ϟa *GlDeleteRenderbuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Renderbuffers.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Renderbuffers.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteRenderbuffers)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3582,10 +3582,10 @@ func (ϟa *GlIsRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsRenderbuffer)
 	ϟb.Store(outputs[0])
@@ -3609,8 +3609,8 @@ func (ϟa *GlGetRenderbufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, �
 	ϟb.BeginAtom(ϟi)
 	values_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetRenderbufferParameteriv)
 	ϟa.Mutate(ϟs)
@@ -3631,13 +3631,13 @@ func (ϟa *GlGenBuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	buffers_cnt := uint64(ϟa.In.Count)
+	buffers_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{buffers_cnt * 4 /* buffers */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // buffers
 	ϟb.CallNoPush(funcInfoGlGenBuffers)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Buffers {
+	for i, e := range ϟa.Buffers {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -3660,11 +3660,11 @@ func (ϟa *GlBindBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Buffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBindBuffer)
 	ϟa.Mutate(ϟs)
@@ -3676,10 +3676,10 @@ func (ϟa *GlBufferData) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Size))
-	ϟb.Push(ϟa.In.Data.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.U32(ϟa.In.Usage))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Size))
+	ϟb.Push(ϟa.Data.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Usage))
 	ϟb.CallNoPush(funcInfoGlBufferData)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3690,10 +3690,10 @@ func (ϟa *GlBufferSubData) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Offset))
-	ϟb.Push(value.S32(ϟa.In.Size))
-	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Data)))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Offset))
+	ϟb.Push(value.S32(ϟa.Size))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Data)))
 	ϟb.CallNoPush(funcInfoGlBufferSubData)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3704,8 +3704,8 @@ func (ϟa *GlDeleteBuffers) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Buffers.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Buffers.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteBuffers)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3717,10 +3717,10 @@ func (ϟa *GlIsBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Buffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Buffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Buffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Buffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsBuffer)
 	ϟb.Store(outputs[0])
@@ -3743,8 +3743,8 @@ func (ϟa *GlGetBufferParameteriv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetBufferParameteriv)
 	ϟa.Mutate(ϟs)
@@ -3766,11 +3766,11 @@ func (ϟa *GlCreateShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* result */})
-	ϟb.Push(value.U32(ϟa.In.Type))
+	ϟb.Push(value.U32(ϟa.Type))
 	ϟb.CallPush(funcInfoGlCreateShader)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
-	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
 	if postback {
@@ -3790,10 +3790,10 @@ func (ϟa *GlDeleteShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlDeleteShader)
 	ϟa.Mutate(ϟs)
@@ -3805,14 +3805,14 @@ func (ϟa *GlShaderSource) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Source.value(ϟb, ϟa, ϟs))
-	ϟb.Push(ϟa.In.Length.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Source.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Length.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlShaderSource)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3823,11 +3823,11 @@ func (ϟa *GlShaderBinary) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Shaders.value(ϟb, ϟa, ϟs))
-	ϟb.Push(value.U32(ϟa.In.BinaryFormat))
-	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.In.Binary)))
-	ϟb.Push(value.S32(ϟa.In.BinarySize))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Shaders.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.BinaryFormat))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Binary)))
+	ϟb.Push(value.S32(ϟa.BinarySize))
 	ϟb.CallNoPush(funcInfoGlShaderBinary)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -3838,14 +3838,14 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	info_cnt := uint64(ϟa.In.BufferLength)
+	info_cnt := uint64(ϟa.BufferLength)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(value.S32(ϟa.BufferLength))
 	ϟb.Push(outputs[0]) // string_length_written
 	ϟb.Push(outputs[1]) // info
 	ϟb.CallNoPush(funcInfoGlGetShaderInfoLog)
@@ -3867,14 +3867,14 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	source_cnt := uint64(ϟa.In.BufferLength)
+	source_cnt := uint64(ϟa.BufferLength)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, source_cnt /* source */})
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(value.S32(ϟa.BufferLength))
 	ϟb.Push(outputs[0]) // string_length_written
 	ϟb.Push(outputs[1]) // source
 	ϟb.CallNoPush(funcInfoGlGetShaderSource)
@@ -3906,10 +3906,10 @@ func (ϟa *GlCompileShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlCompileShader)
 	ϟa.Mutate(ϟs)
@@ -3922,10 +3922,10 @@ func (ϟa *GlIsShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsShader)
 	ϟb.Store(outputs[0])
@@ -3951,7 +3951,7 @@ func (ϟa *GlCreateProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟb.CallPush(funcInfoGlCreateProgram)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
-	if key, remap := ϟa.Out.Result.remap(ϟa, ϟs); remap {
+	if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
 		storeRemap(ϟb, key, outputs[0], protocol.TypeUint32)
 	}
 	if postback {
@@ -3971,10 +3971,10 @@ func (ϟa *GlDeleteProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlDeleteProgram)
 	ϟa.Mutate(ϟs)
@@ -3986,15 +3986,15 @@ func (ϟa *GlAttachShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlAttachShader)
 	ϟa.Mutate(ϟs)
@@ -4006,15 +4006,15 @@ func (ϟa *GlDetachShader) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	if key, remap := ϟa.In.Shader.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Shader.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Shader.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Shader.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlDetachShader)
 	ϟa.Mutate(ϟs)
@@ -4026,19 +4026,19 @@ func (ϟa *GlGetAttachedShaders) Replay(ϟi atom.ID, ϟs *state.State, ϟb *buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	shaders_cnt := uint64(ϟa.In.BufferLength)
+	shaders_cnt := uint64(ϟa.BufferLength)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* shaders_length_written */, shaders_cnt * 4 /* shaders */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(value.S32(ϟa.BufferLength))
 	ϟb.Push(outputs[0]) // shaders_length_written
 	ϟb.Push(outputs[1]) // shaders
 	ϟb.CallNoPush(funcInfoGlGetAttachedShaders)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Shaders {
+	for i, e := range ϟa.Shaders {
 		ptr := outputs[1].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -4061,10 +4061,10 @@ func (ϟa *GlLinkProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlLinkProgram)
 	ϟa.Mutate(ϟs)
@@ -4076,14 +4076,14 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	info_cnt := uint64(ϟa.In.BufferLength)
+	info_cnt := uint64(ϟa.BufferLength)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* string_length_written */, info_cnt /* info */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.BufferLength))
+	ϟb.Push(value.S32(ϟa.BufferLength))
 	ϟb.Push(outputs[0]) // string_length_written
 	ϟb.Push(outputs[1]) // info
 	ϟb.CallNoPush(funcInfoGlGetProgramInfoLog)
@@ -4105,10 +4105,10 @@ func (ϟa *GlUseProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlUseProgram)
 	ϟa.Mutate(ϟs)
@@ -4121,10 +4121,10 @@ func (ϟa *GlIsProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsProgram)
 	ϟb.Store(outputs[0])
@@ -4146,10 +4146,10 @@ func (ϟa *GlValidateProgram) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Program.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Program.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Program.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Program.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Program.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlValidateProgram)
 	ϟa.Mutate(ϟs)
@@ -4161,10 +4161,10 @@ func (ϟa *GlClearColor) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.R))
-	ϟb.Push(value.F32(ϟa.In.G))
-	ϟb.Push(value.F32(ϟa.In.B))
-	ϟb.Push(value.F32(ϟa.In.A))
+	ϟb.Push(value.F32(ϟa.R))
+	ϟb.Push(value.F32(ϟa.G))
+	ϟb.Push(value.F32(ϟa.B))
+	ϟb.Push(value.F32(ϟa.A))
 	ϟb.CallNoPush(funcInfoGlClearColor)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4175,7 +4175,7 @@ func (ϟa *GlClearDepthf) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.Depth))
+	ϟb.Push(value.F32(ϟa.Depth))
 	ϟb.CallNoPush(funcInfoGlClearDepthf)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4186,7 +4186,7 @@ func (ϟa *GlClearStencil) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Stencil))
+	ϟb.Push(value.S32(ϟa.Stencil))
 	ϟb.CallNoPush(funcInfoGlClearStencil)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4197,7 +4197,7 @@ func (ϟa *GlClear) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Mask))
+	ϟb.Push(value.U32(ϟa.Mask))
 	ϟb.CallNoPush(funcInfoGlClear)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4208,7 +4208,7 @@ func (ϟa *GlCullFace) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Mode))
+	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.CallNoPush(funcInfoGlCullFace)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4219,8 +4219,8 @@ func (ϟa *GlPolygonOffset) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.ScaleFactor))
-	ϟb.Push(value.F32(ϟa.In.Units))
+	ϟb.Push(value.F32(ϟa.ScaleFactor))
+	ϟb.Push(value.F32(ϟa.Units))
 	ϟb.CallNoPush(funcInfoGlPolygonOffset)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4231,7 +4231,7 @@ func (ϟa *GlLineWidth) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.Width))
+	ϟb.Push(value.F32(ϟa.Width))
 	ϟb.CallNoPush(funcInfoGlLineWidth)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4242,8 +4242,8 @@ func (ϟa *GlSampleCoverage) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.F32(ϟa.In.Value))
-	ϟb.Push(value.Bool(ϟa.In.Invert))
+	ϟb.Push(value.F32(ϟa.Value))
+	ϟb.Push(value.Bool(ϟa.Invert))
 	ϟb.CallNoPush(funcInfoGlSampleCoverage)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4254,8 +4254,8 @@ func (ϟa *GlHint) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, p
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Mode))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Mode))
 	ϟb.CallNoPush(funcInfoGlHint)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4266,13 +4266,13 @@ func (ϟa *GlFramebufferRenderbuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb 
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
-	ϟb.Push(value.U32(ϟa.In.FramebufferAttachment))
-	ϟb.Push(value.U32(ϟa.In.RenderbufferTarget))
-	if key, remap := ϟa.In.Renderbuffer.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.FramebufferTarget))
+	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
+	ϟb.Push(value.U32(ϟa.RenderbufferTarget))
+	if key, remap := ϟa.Renderbuffer.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Renderbuffer.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Renderbuffer.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlFramebufferRenderbuffer)
 	ϟa.Mutate(ϟs)
@@ -4284,15 +4284,15 @@ func (ϟa *GlFramebufferTexture2D) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
-	ϟb.Push(value.U32(ϟa.In.FramebufferAttachment))
-	ϟb.Push(value.U32(ϟa.In.TextureTarget))
-	if key, remap := ϟa.In.Texture.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.FramebufferTarget))
+	ϟb.Push(value.U32(ϟa.FramebufferAttachment))
+	ϟb.Push(value.U32(ϟa.TextureTarget))
+	if key, remap := ϟa.Texture.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Texture.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Texture.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Texture.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.S32(ϟa.In.Level))
+	ϟb.Push(value.S32(ϟa.Level))
 	ϟb.CallNoPush(funcInfoGlFramebufferTexture2D)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4305,9 +4305,9 @@ func (ϟa *GlGetFramebufferAttachmentParameteriv) Replay(ϟi atom.ID, ϟs *state
 	ϟb.BeginAtom(ϟi)
 	value_cnt := uint64(int32(1))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{value_cnt * 4 /* value */})
-	ϟb.Push(value.U32(ϟa.In.FramebufferTarget))
-	ϟb.Push(value.U32(ϟa.In.Attachment))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.FramebufferTarget))
+	ϟb.Push(value.U32(ϟa.Attachment))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetFramebufferAttachmentParameteriv)
 	ϟa.Mutate(ϟs)
@@ -4328,10 +4328,10 @@ func (ϟa *GlDrawElements) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bu
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.DrawMode))
-	ϟb.Push(value.S32(ϟa.In.ElementCount))
-	ϟb.Push(value.U32(ϟa.In.IndicesType))
-	ϟb.Push(ϟa.In.Indices.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.DrawMode))
+	ϟb.Push(value.S32(ϟa.ElementCount))
+	ϟb.Push(value.U32(ϟa.IndicesType))
+	ϟb.Push(ϟa.Indices.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDrawElements)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4342,9 +4342,9 @@ func (ϟa *GlDrawArrays) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.DrawMode))
-	ϟb.Push(value.S32(ϟa.In.FirstIndex))
-	ϟb.Push(value.S32(ϟa.In.IndexCount))
+	ϟb.Push(value.U32(ϟa.DrawMode))
+	ϟb.Push(value.S32(ϟa.FirstIndex))
+	ϟb.Push(value.S32(ϟa.IndexCount))
 	ϟb.CallNoPush(funcInfoGlDrawArrays)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4375,9 +4375,9 @@ func (ϟa *GlGetBooleanv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	values_cnt := uint64(stateVariableSize(ϟa.Param))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 1 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetBooleanv)
 	ϟa.Mutate(ϟs)
@@ -4398,9 +4398,9 @@ func (ϟa *GlGetFloatv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	values_cnt := uint64(stateVariableSize(ϟa.Param))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetFloatv)
 	ϟa.Mutate(ϟs)
@@ -4421,9 +4421,9 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	values_cnt := uint64(stateVariableSize(ϟa.In.Param))
+	values_cnt := uint64(stateVariableSize(ϟa.Param))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{values_cnt * 4 /* values */})
-	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.Push(outputs[0]) // values
 	ϟb.CallNoPush(funcInfoGlGetIntegerv)
 	ϟa.Mutate(ϟs)
@@ -4446,7 +4446,7 @@ func (ϟa *GlGetString) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	ϟb.BeginAtom(ϟi)
 	result_cnt := uint64(int32(256))
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	ϟb.Push(value.U32(ϟa.In.Param))
+	ϟb.Push(value.U32(ϟa.Param))
 	ϟb.CallPush(funcInfoGlGetString)
 	ϟb.Push(outputs[0])
 	ϟb.Strcpy(result_cnt)
@@ -4468,7 +4468,7 @@ func (ϟa *GlEnable) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder,
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.CallNoPush(funcInfoGlEnable)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4479,7 +4479,7 @@ func (ϟa *GlDisable) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.CallNoPush(funcInfoGlDisable)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4491,7 +4491,7 @@ func (ϟa *GlIsEnabled) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Build
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	ϟb.Push(value.U32(ϟa.In.Capability))
+	ϟb.Push(value.U32(ϟa.Capability))
 	ϟb.CallPush(funcInfoGlIsEnabled)
 	ϟb.Store(outputs[0])
 	ϟa.Mutate(ϟs)
@@ -4512,12 +4512,12 @@ func (ϟa *GlMapBufferRange) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	result_cnt := uint64(ϟa.In.Length)
+	result_cnt := uint64(ϟa.Length)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Offset))
-	ϟb.Push(value.S32(ϟa.In.Length))
-	ϟb.Push(value.U32(ϟa.In.Access))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Offset))
+	ϟb.Push(value.S32(ϟa.Length))
+	ϟb.Push(value.U32(ϟa.Access))
 	ϟb.CallPush(funcInfoGlMapBufferRange)
 	ϟb.Push(outputs[0])
 	ϟb.Copy(result_cnt)
@@ -4539,7 +4539,7 @@ func (ϟa *GlUnmapBuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallNoPush(funcInfoGlUnmapBuffer)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4550,9 +4550,9 @@ func (ϟa *GlInvalidateFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Attachments.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Attachments.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlInvalidateFramebuffer)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4563,11 +4563,11 @@ func (ϟa *GlRenderbufferStorageMultisample) Replay(ϟi atom.ID, ϟs *state.Stat
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.S32(ϟa.In.Samples))
-	ϟb.Push(value.U32(ϟa.In.Format))
-	ϟb.Push(value.S32(ϟa.In.Width))
-	ϟb.Push(value.S32(ϟa.In.Height))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.S32(ϟa.Samples))
+	ϟb.Push(value.U32(ϟa.Format))
+	ϟb.Push(value.S32(ϟa.Width))
+	ϟb.Push(value.S32(ϟa.Height))
 	ϟb.CallNoPush(funcInfoGlRenderbufferStorageMultisample)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4578,16 +4578,16 @@ func (ϟa *GlBlitFramebuffer) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.SrcX0))
-	ϟb.Push(value.S32(ϟa.In.SrcY0))
-	ϟb.Push(value.S32(ϟa.In.SrcX1))
-	ϟb.Push(value.S32(ϟa.In.SrcY1))
-	ϟb.Push(value.S32(ϟa.In.DstX0))
-	ϟb.Push(value.S32(ϟa.In.DstY0))
-	ϟb.Push(value.S32(ϟa.In.DstX1))
-	ϟb.Push(value.S32(ϟa.In.DstY1))
-	ϟb.Push(value.U32(ϟa.In.Mask))
-	ϟb.Push(value.U32(ϟa.In.Filter))
+	ϟb.Push(value.S32(ϟa.SrcX0))
+	ϟb.Push(value.S32(ϟa.SrcY0))
+	ϟb.Push(value.S32(ϟa.SrcX1))
+	ϟb.Push(value.S32(ϟa.SrcY1))
+	ϟb.Push(value.S32(ϟa.DstX0))
+	ϟb.Push(value.S32(ϟa.DstY0))
+	ϟb.Push(value.S32(ϟa.DstX1))
+	ϟb.Push(value.S32(ϟa.DstY1))
+	ϟb.Push(value.U32(ϟa.Mask))
+	ϟb.Push(value.U32(ϟa.Filter))
 	ϟb.CallNoPush(funcInfoGlBlitFramebuffer)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4598,13 +4598,13 @@ func (ϟa *GlGenQueries) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	queries_cnt := uint64(ϟa.In.Count)
+	queries_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // queries
 	ϟb.CallNoPush(funcInfoGlGenQueries)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Queries {
+	for i, e := range ϟa.Queries {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -4627,11 +4627,11 @@ func (ϟa *GlBeginQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBeginQuery)
 	ϟa.Mutate(ϟs)
@@ -4643,7 +4643,7 @@ func (ϟa *GlEndQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallNoPush(funcInfoGlEndQuery)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4654,8 +4654,8 @@ func (ϟa *GlDeleteQueries) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Queries.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteQueries)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4667,10 +4667,10 @@ func (ϟa *GlIsQuery) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsQuery)
 	ϟb.Store(outputs[0])
@@ -4693,8 +4693,8 @@ func (ϟa *GlGetQueryiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryiv)
 	ϟa.Mutate(ϟs)
@@ -4716,12 +4716,12 @@ func (ϟa *GlGetQueryObjectuiv) Replay(ϟi atom.ID, ϟs *state.State, ϟb *build
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectuiv)
 	ϟa.Mutate(ϟs)
@@ -4742,13 +4742,13 @@ func (ϟa *GlGenQueriesEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	queries_cnt := uint64(ϟa.In.Count)
+	queries_cnt := uint64(ϟa.Count)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{queries_cnt * 4 /* queries */})
-	ϟb.Push(value.S32(ϟa.In.Count))
+	ϟb.Push(value.S32(ϟa.Count))
 	ϟb.Push(outputs[0]) // queries
 	ϟb.CallNoPush(funcInfoGlGenQueriesEXT)
 	ϟa.Mutate(ϟs)
-	for i, e := range ϟa.Out.Queries {
+	for i, e := range ϟa.Queries {
 		ptr := outputs[0].Offset(uint64(i * 4))
 		if key, remap := e.remap(ϟa, ϟs); remap {
 			storeRemap(ϟb, key, ptr, protocol.TypeUint32)
@@ -4771,11 +4771,11 @@ func (ϟa *GlBeginQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.U32(ϟa.Target))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallNoPush(funcInfoGlBeginQueryEXT)
 	ϟa.Mutate(ϟs)
@@ -4787,7 +4787,7 @@ func (ϟa *GlEndQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Bui
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallNoPush(funcInfoGlEndQueryEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4798,8 +4798,8 @@ func (ϟa *GlDeleteQueriesEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builde
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	ϟb.Push(value.S32(ϟa.In.Count))
-	ϟb.Push(ϟa.In.Queries.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.S32(ϟa.Count))
+	ϟb.Push(ϟa.Queries.value(ϟb, ϟa, ϟs))
 	ϟb.CallNoPush(funcInfoGlDeleteQueriesEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4811,10 +4811,10 @@ func (ϟa *GlIsQueryEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Buil
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{1 /* result */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
 	ϟb.CallPush(funcInfoGlIsQueryEXT)
 	ϟb.Store(outputs[0])
@@ -4836,12 +4836,12 @@ func (ϟa *GlQueryCounterEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder
 	ϟc := getState(ϟa, ϟs)
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Target))
+	ϟb.Push(value.U32(ϟa.Target))
 	ϟb.CallNoPush(funcInfoGlQueryCounterEXT)
 	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
@@ -4853,8 +4853,8 @@ func (ϟa *GlGetQueryivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.B
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	ϟb.Push(value.U32(ϟa.In.Target))
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Target))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryivEXT)
 	ϟa.Mutate(ϟs)
@@ -4876,12 +4876,12 @@ func (ϟa *GlGetQueryObjectivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectivEXT)
 	ϟa.Mutate(ϟs)
@@ -4903,12 +4903,12 @@ func (ϟa *GlGetQueryObjectuivEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *bu
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{4 /* value */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectuivEXT)
 	ϟa.Mutate(ϟs)
@@ -4930,12 +4930,12 @@ func (ϟa *GlGetQueryObjecti64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *b
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryObjecti64vEXT)
 	ϟa.Mutate(ϟs)
@@ -4957,12 +4957,12 @@ func (ϟa *GlGetQueryObjectui64vEXT) Replay(ϟi atom.ID, ϟs *state.State, ϟb *
 	_ = ϟc
 	ϟb.BeginAtom(ϟi)
 	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{8 /* value */})
-	if key, remap := ϟa.In.Query.remap(ϟa, ϟs); remap {
-		loadRemap(ϟb, key, ϟa.In.Query.value(ϟb, ϟa, ϟs))
+	if key, remap := ϟa.Query.remap(ϟa, ϟs); remap {
+		loadRemap(ϟb, key, ϟa.Query.value(ϟb, ϟa, ϟs))
 	} else {
-		ϟb.Push(ϟa.In.Query.value(ϟb, ϟa, ϟs))
+		ϟb.Push(ϟa.Query.value(ϟb, ϟa, ϟs))
 	}
-	ϟb.Push(value.U32(ϟa.In.Parameter))
+	ϟb.Push(value.U32(ϟa.Parameter))
 	ϟb.Push(outputs[0]) // value
 	ϟb.CallNoPush(funcInfoGlGetQueryObjectui64vEXT)
 	ϟa.Mutate(ϟs)

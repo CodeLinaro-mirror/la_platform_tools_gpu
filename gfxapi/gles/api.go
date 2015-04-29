@@ -821,42 +821,34 @@ func (m VertexAttribute_s32Map) Range() []VertexAttribute {
 ////////////////////////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////////////////////////
-type Init_In struct {
+type Init struct {
 	binary.Generate
+	InContext  atom.ContextID
 	Width      int32
 	Height     int32
 	ColorFmt   RenderbufferFormat
 	DepthFmt   RenderbufferFormat
 	StencilFmt RenderbufferFormat
 }
-type Init_Out struct {
-	binary.Generate
-}
-type Init struct {
-	binary.Generate
-	Context atom.ContextID
-	In      Init_In
-	Out     Init_Out
-}
 
 func (c *Init) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "init(",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		c.In.ColorFmt.String(),
+		c.ColorFmt.String(),
 		", ",
-		c.In.DepthFmt.String(),
+		c.DepthFmt.String(),
 		", ",
-		c.In.StencilFmt.String(),
+		c.StencilFmt.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *Init) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *Init) TypeID() atom.TypeID {
 	return 0
@@ -869,30 +861,22 @@ func (Init) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // StartTimer
 ////////////////////////////////////////////////////////////////////////////////
-type StartTimer_In struct {
-	binary.Generate
-	Index uint8
-}
-type StartTimer_Out struct {
-	binary.Generate
-}
 type StartTimer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      StartTimer_In
-	Out     StartTimer_Out
+	InContext atom.ContextID
+	Index     uint8
 }
 
 func (c *StartTimer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "startTimer(",
-		fmt.Sprintf("index:%v", c.In.Index),
+		fmt.Sprintf("index:%v", c.Index),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *StartTimer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *StartTimer) TypeID() atom.TypeID {
 	return 1
@@ -905,32 +889,24 @@ func (StartTimer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // StopTimer
 ////////////////////////////////////////////////////////////////////////////////
-type StopTimer_In struct {
-	binary.Generate
-	Index uint8
-}
-type StopTimer_Out struct {
-	binary.Generate
-	Result uint64
-}
 type StopTimer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      StopTimer_In
-	Out     StopTimer_Out
+	InContext atom.ContextID
+	Index     uint8
+	Result    uint64
 }
 
 func (c *StopTimer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "stopTimer(",
-		fmt.Sprintf("index:%v", c.In.Index),
+		fmt.Sprintf("index:%v", c.Index),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *StopTimer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *StopTimer) TypeID() atom.TypeID {
 	return 2
@@ -943,17 +919,9 @@ func (StopTimer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // FlushPostBuffer
 ////////////////////////////////////////////////////////////////////////////////
-type FlushPostBuffer_In struct {
-	binary.Generate
-}
-type FlushPostBuffer_Out struct {
-	binary.Generate
-}
 type FlushPostBuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      FlushPostBuffer_In
-	Out     FlushPostBuffer_Out
+	InContext atom.ContextID
 }
 
 func (c *FlushPostBuffer) String() string {
@@ -963,7 +931,7 @@ func (c *FlushPostBuffer) String() string {
 	return strings.Join(parts, "")
 }
 func (c *FlushPostBuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *FlushPostBuffer) TypeID() atom.TypeID {
 	return 3
@@ -976,38 +944,30 @@ func (FlushPostBuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // EglInitialize
 ////////////////////////////////////////////////////////////////////////////////
-type EglInitialize_In struct {
-	binary.Generate
-	Dpy EGLDisplay
-}
-type EglInitialize_Out struct {
-	binary.Generate
-	Major  EGLint
-	Minor  EGLint
-	Result EGLBoolean
-}
 type EglInitialize struct {
 	binary.Generate
-	Context atom.ContextID
-	In      EglInitialize_In
-	Out     EglInitialize_Out
+	InContext atom.ContextID
+	Dpy       EGLDisplay
+	Major     EGLint
+	Minor     EGLint
+	Result    EGLBoolean
 }
 
 func (c *EglInitialize) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglInitialize(",
-		fmt.Sprintf("dpy:%v", c.In.Dpy),
+		fmt.Sprintf("dpy:%v", c.Dpy),
 		", ",
-		fmt.Sprintf("major:%v", c.Out.Major),
+		fmt.Sprintf("major:%v", c.Major),
 		", ",
-		fmt.Sprintf("minor:%v", c.Out.Minor),
+		fmt.Sprintf("minor:%v", c.Minor),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglInitialize) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *EglInitialize) TypeID() atom.TypeID {
 	return 4
@@ -1020,41 +980,33 @@ func (EglInitialize) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // EglCreateContext
 ////////////////////////////////////////////////////////////////////////////////
-type EglCreateContext_In struct {
+type EglCreateContext struct {
 	binary.Generate
+	InContext    atom.ContextID
 	Display      EGLDisplay
 	Config       EGLConfig
 	ShareContext EGLContext
 	AttribList   EGLintArray
-}
-type EglCreateContext_Out struct {
-	binary.Generate
-	Result EGLContext
-}
-type EglCreateContext struct {
-	binary.Generate
-	Context atom.ContextID
-	In      EglCreateContext_In
-	Out     EglCreateContext_Out
+	Result       EGLContext
 }
 
 func (c *EglCreateContext) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglCreateContext(",
-		fmt.Sprintf("display:%v", c.In.Display),
+		fmt.Sprintf("display:%v", c.Display),
 		", ",
-		fmt.Sprintf("config:%v", c.In.Config),
+		fmt.Sprintf("config:%v", c.Config),
 		", ",
-		fmt.Sprintf("share_context:%v", c.In.ShareContext),
+		fmt.Sprintf("share_context:%v", c.ShareContext),
 		", ",
-		fmt.Sprintf("%v", c.In.AttribList),
+		fmt.Sprintf("%v", c.AttribList),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglCreateContext) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *EglCreateContext) TypeID() atom.TypeID {
 	return 5
@@ -1067,41 +1019,33 @@ func (EglCreateContext) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // EglMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
-type EglMakeCurrent_In struct {
-	binary.Generate
-	Display EGLDisplay
-	Draw    EGLSurface
-	Read    EGLSurface
-	Context EGLContext
-}
-type EglMakeCurrent_Out struct {
-	binary.Generate
-	Result EGLBoolean
-}
 type EglMakeCurrent struct {
 	binary.Generate
-	Context atom.ContextID
-	In      EglMakeCurrent_In
-	Out     EglMakeCurrent_Out
+	InContext atom.ContextID
+	Display   EGLDisplay
+	Draw      EGLSurface
+	Read      EGLSurface
+	Context   EGLContext
+	Result    EGLBoolean
 }
 
 func (c *EglMakeCurrent) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglMakeCurrent(",
-		fmt.Sprintf("display:%v", c.In.Display),
+		fmt.Sprintf("display:%v", c.Display),
 		", ",
-		fmt.Sprintf("draw:%v", c.In.Draw),
+		fmt.Sprintf("draw:%v", c.Draw),
 		", ",
-		fmt.Sprintf("read:%v", c.In.Read),
+		fmt.Sprintf("read:%v", c.Read),
 		", ",
-		fmt.Sprintf("context:%v", c.In.Context),
+		fmt.Sprintf("context:%v", c.Context),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglMakeCurrent) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *EglMakeCurrent) TypeID() atom.TypeID {
 	return 6
@@ -1114,35 +1058,27 @@ func (EglMakeCurrent) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // EglSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
-type EglSwapBuffers_In struct {
-	binary.Generate
-	Display EGLDisplay
-	Surface memory.Pointer
-}
-type EglSwapBuffers_Out struct {
-	binary.Generate
-	Result EGLBoolean
-}
 type EglSwapBuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      EglSwapBuffers_In
-	Out     EglSwapBuffers_Out
+	InContext atom.ContextID
+	Display   EGLDisplay
+	Surface   memory.Pointer
+	Result    EGLBoolean
 }
 
 func (c *EglSwapBuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "eglSwapBuffers(",
-		fmt.Sprintf("display:%v", c.In.Display),
+		fmt.Sprintf("display:%v", c.Display),
 		", ",
-		fmt.Sprintf("0x%x", c.In.Surface),
+		fmt.Sprintf("0x%x", c.Surface),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *EglSwapBuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *EglSwapBuffers) TypeID() atom.TypeID {
 	return 7
@@ -1155,32 +1091,24 @@ func (EglSwapBuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // WglCreateContext
 ////////////////////////////////////////////////////////////////////////////////
-type WglCreateContext_In struct {
-	binary.Generate
-	Hdc HDC
-}
-type WglCreateContext_Out struct {
-	binary.Generate
-	Result HGLRC
-}
 type WglCreateContext struct {
 	binary.Generate
-	Context atom.ContextID
-	In      WglCreateContext_In
-	Out     WglCreateContext_Out
+	InContext atom.ContextID
+	Hdc       HDC
+	Result    HGLRC
 }
 
 func (c *WglCreateContext) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "wglCreateContext(",
-		fmt.Sprintf("hdc:%v", c.In.Hdc),
+		fmt.Sprintf("hdc:%v", c.Hdc),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *WglCreateContext) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *WglCreateContext) TypeID() atom.TypeID {
 	return 8
@@ -1193,35 +1121,27 @@ func (WglCreateContext) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // WglMakeCurrent
 ////////////////////////////////////////////////////////////////////////////////
-type WglMakeCurrent_In struct {
-	binary.Generate
-	Hdc   HDC
-	Hglrc HGLRC
-}
-type WglMakeCurrent_Out struct {
-	binary.Generate
-	Result BOOL
-}
 type WglMakeCurrent struct {
 	binary.Generate
-	Context atom.ContextID
-	In      WglMakeCurrent_In
-	Out     WglMakeCurrent_Out
+	InContext atom.ContextID
+	Hdc       HDC
+	Hglrc     HGLRC
+	Result    BOOL
 }
 
 func (c *WglMakeCurrent) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "wglMakeCurrent(",
-		fmt.Sprintf("hdc:%v", c.In.Hdc),
+		fmt.Sprintf("hdc:%v", c.Hdc),
 		", ",
-		fmt.Sprintf("hglrc:%v", c.In.Hglrc),
+		fmt.Sprintf("hglrc:%v", c.Hglrc),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *WglMakeCurrent) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *WglMakeCurrent) TypeID() atom.TypeID {
 	return 9
@@ -1234,30 +1154,22 @@ func (WglMakeCurrent) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // WglSwapBuffers
 ////////////////////////////////////////////////////////////////////////////////
-type WglSwapBuffers_In struct {
-	binary.Generate
-	Hdc HDC
-}
-type WglSwapBuffers_Out struct {
-	binary.Generate
-}
 type WglSwapBuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      WglSwapBuffers_In
-	Out     WglSwapBuffers_Out
+	InContext atom.ContextID
+	Hdc       HDC
 }
 
 func (c *WglSwapBuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "wglSwapBuffers(",
-		fmt.Sprintf("hdc:%v", c.In.Hdc),
+		fmt.Sprintf("hdc:%v", c.Hdc),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *WglSwapBuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *WglSwapBuffers) TypeID() atom.TypeID {
 	return 10
@@ -1270,38 +1182,30 @@ func (WglSwapBuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // CGLCreateContext
 ////////////////////////////////////////////////////////////////////////////////
-type CGLCreateContext_In struct {
-	binary.Generate
-	Pix   CGLPixelFormatObj
-	Share CGLContextObj
-	Ctx   CGLContextObj
-}
-type CGLCreateContext_Out struct {
-	binary.Generate
-	Result CGLError
-}
 type CGLCreateContext struct {
 	binary.Generate
-	Context atom.ContextID
-	In      CGLCreateContext_In
-	Out     CGLCreateContext_Out
+	InContext atom.ContextID
+	Pix       CGLPixelFormatObj
+	Share     CGLContextObj
+	Ctx       CGLContextObj
+	Result    CGLError
 }
 
 func (c *CGLCreateContext) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "CGLCreateContext(",
-		fmt.Sprintf("pix:%v", c.In.Pix),
+		fmt.Sprintf("pix:%v", c.Pix),
 		", ",
-		fmt.Sprintf("share:%v", c.In.Share),
+		fmt.Sprintf("share:%v", c.Share),
 		", ",
-		fmt.Sprintf("ctx:%v", c.In.Ctx),
+		fmt.Sprintf("ctx:%v", c.Ctx),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *CGLCreateContext) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *CGLCreateContext) TypeID() atom.TypeID {
 	return 11
@@ -1314,30 +1218,22 @@ func (CGLCreateContext) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableClientState
 ////////////////////////////////////////////////////////////////////////////////
-type GlEnableClientState_In struct {
-	binary.Generate
-	Type ArrayType
-}
-type GlEnableClientState_Out struct {
-	binary.Generate
-}
 type GlEnableClientState struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEnableClientState_In
-	Out     GlEnableClientState_Out
+	InContext atom.ContextID
+	Type      ArrayType
 }
 
 func (c *GlEnableClientState) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEnableClientState(",
-		c.In.Type.String(),
+		c.Type.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEnableClientState) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEnableClientState) TypeID() atom.TypeID {
 	return 12
@@ -1350,30 +1246,22 @@ func (GlEnableClientState) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableClientState
 ////////////////////////////////////////////////////////////////////////////////
-type GlDisableClientState_In struct {
-	binary.Generate
-	Type ArrayType
-}
-type GlDisableClientState_Out struct {
-	binary.Generate
-}
 type GlDisableClientState struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDisableClientState_In
-	Out     GlDisableClientState_Out
+	InContext atom.ContextID
+	Type      ArrayType
 }
 
 func (c *GlDisableClientState) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDisableClientState(",
-		c.In.Type.String(),
+		c.Type.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDisableClientState) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDisableClientState) TypeID() atom.TypeID {
 	return 13
@@ -1386,42 +1274,34 @@ func (GlDisableClientState) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetProgramBinaryOES_In struct {
+type GlGetProgramBinaryOES struct {
 	binary.Generate
-	Program    ProgramId
-	BufferSize int32
-}
-type GlGetProgramBinaryOES_Out struct {
-	binary.Generate
+	InContext    atom.ContextID
+	Program      ProgramId
+	BufferSize   int32
 	BytesWritten int32
 	BinaryFormat uint32
 	Binary       memory.Pointer
-}
-type GlGetProgramBinaryOES struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlGetProgramBinaryOES_In
-	Out     GlGetProgramBinaryOES_Out
 }
 
 func (c *GlGetProgramBinaryOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetProgramBinaryOES(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("buffer_size:%v", c.In.BufferSize),
+		fmt.Sprintf("buffer_size:%v", c.BufferSize),
 		", ",
-		fmt.Sprintf("bytes_written:%v", c.Out.BytesWritten),
+		fmt.Sprintf("bytes_written:%v", c.BytesWritten),
 		", ",
-		fmt.Sprintf("binary_format:%v", c.Out.BinaryFormat),
+		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
 		", ",
-		fmt.Sprintf("0x%x", c.Out.Binary),
+		fmt.Sprintf("0x%x", c.Binary),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetProgramBinaryOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID {
 	return 14
@@ -1434,39 +1314,31 @@ func (GlGetProgramBinaryOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlProgramBinaryOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlProgramBinaryOES_In struct {
+type GlProgramBinaryOES struct {
 	binary.Generate
+	InContext    atom.ContextID
 	Program      ProgramId
 	BinaryFormat uint32
 	Binary       memory.Pointer
 	BinarySize   int32
 }
-type GlProgramBinaryOES_Out struct {
-	binary.Generate
-}
-type GlProgramBinaryOES struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlProgramBinaryOES_In
-	Out     GlProgramBinaryOES_Out
-}
 
 func (c *GlProgramBinaryOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glProgramBinaryOES(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("binary_format:%v", c.In.BinaryFormat),
+		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
 		", ",
-		fmt.Sprintf("0x%x", c.In.Binary),
+		fmt.Sprintf("0x%x", c.Binary),
 		", ",
-		fmt.Sprintf("binary_size:%v", c.In.BinarySize),
+		fmt.Sprintf("binary_size:%v", c.BinarySize),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlProgramBinaryOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlProgramBinaryOES) TypeID() atom.TypeID {
 	return 15
@@ -1479,42 +1351,34 @@ func (GlProgramBinaryOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlStartTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
-type GlStartTilingQCOM_In struct {
+type GlStartTilingQCOM struct {
 	binary.Generate
+	InContext    atom.ContextID
 	X            int32
 	Y            int32
 	Width        int32
 	Height       int32
 	PreserveMask TilePreserveMaskQCOM
 }
-type GlStartTilingQCOM_Out struct {
-	binary.Generate
-}
-type GlStartTilingQCOM struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlStartTilingQCOM_In
-	Out     GlStartTilingQCOM_Out
-}
 
 func (c *GlStartTilingQCOM) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glStartTilingQCOM(",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		c.In.PreserveMask.String(),
+		c.PreserveMask.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlStartTilingQCOM) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlStartTilingQCOM) TypeID() atom.TypeID {
 	return 16
@@ -1527,30 +1391,22 @@ func (GlStartTilingQCOM) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndTilingQCOM
 ////////////////////////////////////////////////////////////////////////////////
-type GlEndTilingQCOM_In struct {
-	binary.Generate
-	PreserveMask TilePreserveMaskQCOM
-}
-type GlEndTilingQCOM_Out struct {
-	binary.Generate
-}
 type GlEndTilingQCOM struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEndTilingQCOM_In
-	Out     GlEndTilingQCOM_Out
+	InContext    atom.ContextID
+	PreserveMask TilePreserveMaskQCOM
 }
 
 func (c *GlEndTilingQCOM) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEndTilingQCOM(",
-		c.In.PreserveMask.String(),
+		c.PreserveMask.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEndTilingQCOM) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEndTilingQCOM) TypeID() atom.TypeID {
 	return 17
@@ -1563,36 +1419,28 @@ func (GlEndTilingQCOM) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDiscardFramebufferEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlDiscardFramebufferEXT_In struct {
+type GlDiscardFramebufferEXT struct {
 	binary.Generate
+	InContext      atom.ContextID
 	Target         FramebufferTarget
 	NumAttachments int32
 	Attachments    DiscardFramebufferAttachmentArray
-}
-type GlDiscardFramebufferEXT_Out struct {
-	binary.Generate
-}
-type GlDiscardFramebufferEXT struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlDiscardFramebufferEXT_In
-	Out     GlDiscardFramebufferEXT_Out
 }
 
 func (c *GlDiscardFramebufferEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDiscardFramebufferEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("numAttachments:%v", c.In.NumAttachments),
+		fmt.Sprintf("numAttachments:%v", c.NumAttachments),
 		", ",
-		fmt.Sprintf("%v", c.In.Attachments),
+		fmt.Sprintf("%v", c.Attachments),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDiscardFramebufferEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID {
 	return 18
@@ -1605,33 +1453,25 @@ func (GlDiscardFramebufferEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlInsertEventMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlInsertEventMarkerEXT_In struct {
-	binary.Generate
-	Length int32
-	Marker string
-}
-type GlInsertEventMarkerEXT_Out struct {
-	binary.Generate
-}
 type GlInsertEventMarkerEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlInsertEventMarkerEXT_In
-	Out     GlInsertEventMarkerEXT_Out
+	InContext atom.ContextID
+	Length    int32
+	Marker    string
 }
 
 func (c *GlInsertEventMarkerEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glInsertEventMarkerEXT(",
-		fmt.Sprintf("length:%v", c.In.Length),
+		fmt.Sprintf("length:%v", c.Length),
 		", ",
-		fmt.Sprintf("marker:%v", c.In.Marker),
+		fmt.Sprintf("marker:%v", c.Marker),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlInsertEventMarkerEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID {
 	return 19
@@ -1644,33 +1484,25 @@ func (GlInsertEventMarkerEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlPushGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlPushGroupMarkerEXT_In struct {
-	binary.Generate
-	Length int32
-	Marker string
-}
-type GlPushGroupMarkerEXT_Out struct {
-	binary.Generate
-}
 type GlPushGroupMarkerEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlPushGroupMarkerEXT_In
-	Out     GlPushGroupMarkerEXT_Out
+	InContext atom.ContextID
+	Length    int32
+	Marker    string
 }
 
 func (c *GlPushGroupMarkerEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glPushGroupMarkerEXT(",
-		fmt.Sprintf("length:%v", c.In.Length),
+		fmt.Sprintf("length:%v", c.Length),
 		", ",
-		fmt.Sprintf("marker:%v", c.In.Marker),
+		fmt.Sprintf("marker:%v", c.Marker),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlPushGroupMarkerEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID {
 	return 20
@@ -1683,17 +1515,9 @@ func (GlPushGroupMarkerEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlPopGroupMarkerEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlPopGroupMarkerEXT_In struct {
-	binary.Generate
-}
-type GlPopGroupMarkerEXT_Out struct {
-	binary.Generate
-}
 type GlPopGroupMarkerEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlPopGroupMarkerEXT_In
-	Out     GlPopGroupMarkerEXT_Out
+	InContext atom.ContextID
 }
 
 func (c *GlPopGroupMarkerEXT) String() string {
@@ -1703,7 +1527,7 @@ func (c *GlPopGroupMarkerEXT) String() string {
 	return strings.Join(parts, "")
 }
 func (c *GlPopGroupMarkerEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID {
 	return 21
@@ -1716,39 +1540,31 @@ func (GlPopGroupMarkerEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexStorage1DEXT_In struct {
-	binary.Generate
-	Target TextureTarget
-	Levels int32
-	Format TexelFormat
-	Width  int32
-}
-type GlTexStorage1DEXT_Out struct {
-	binary.Generate
-}
 type GlTexStorage1DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTexStorage1DEXT_In
-	Out     GlTexStorage1DEXT_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
 }
 
 func (c *GlTexStorage1DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexStorage1DEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexStorage1DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexStorage1DEXT) TypeID() atom.TypeID {
 	return 22
@@ -1761,42 +1577,34 @@ func (GlTexStorage1DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexStorage2DEXT_In struct {
-	binary.Generate
-	Target TextureTarget
-	Levels int32
-	Format TexelFormat
-	Width  int32
-	Height int32
-}
-type GlTexStorage2DEXT_Out struct {
-	binary.Generate
-}
 type GlTexStorage2DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTexStorage2DEXT_In
-	Out     GlTexStorage2DEXT_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
+	Height    int32
 }
 
 func (c *GlTexStorage2DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexStorage2DEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexStorage2DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexStorage2DEXT) TypeID() atom.TypeID {
 	return 23
@@ -1809,45 +1617,37 @@ func (GlTexStorage2DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexStorage3DEXT_In struct {
-	binary.Generate
-	Target TextureTarget
-	Levels int32
-	Format TexelFormat
-	Width  int32
-	Height int32
-	Depth  int32
-}
-type GlTexStorage3DEXT_Out struct {
-	binary.Generate
-}
 type GlTexStorage3DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTexStorage3DEXT_In
-	Out     GlTexStorage3DEXT_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
+	Height    int32
+	Depth     int32
 }
 
 func (c *GlTexStorage3DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexStorage3DEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		fmt.Sprintf("depth:%v", c.In.Depth),
+		fmt.Sprintf("depth:%v", c.Depth),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexStorage3DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexStorage3DEXT) TypeID() atom.TypeID {
 	return 24
@@ -1860,42 +1660,34 @@ func (GlTexStorage3DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage1DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTextureStorage1DEXT_In struct {
-	binary.Generate
-	Texture TextureId
-	Target  TextureTarget
-	Levels  int32
-	Format  TexelFormat
-	Width   int32
-}
-type GlTextureStorage1DEXT_Out struct {
-	binary.Generate
-}
 type GlTextureStorage1DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTextureStorage1DEXT_In
-	Out     GlTextureStorage1DEXT_Out
+	InContext atom.ContextID
+	Texture   TextureId
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
 }
 
 func (c *GlTextureStorage1DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTextureStorage1DEXT(",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 		", ",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTextureStorage1DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID {
 	return 25
@@ -1908,45 +1700,37 @@ func (GlTextureStorage1DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage2DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTextureStorage2DEXT_In struct {
-	binary.Generate
-	Texture TextureId
-	Target  TextureTarget
-	Levels  int32
-	Format  TexelFormat
-	Width   int32
-	Height  int32
-}
-type GlTextureStorage2DEXT_Out struct {
-	binary.Generate
-}
 type GlTextureStorage2DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTextureStorage2DEXT_In
-	Out     GlTextureStorage2DEXT_Out
+	InContext atom.ContextID
+	Texture   TextureId
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
+	Height    int32
 }
 
 func (c *GlTextureStorage2DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTextureStorage2DEXT(",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 		", ",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTextureStorage2DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID {
 	return 26
@@ -1959,48 +1743,40 @@ func (GlTextureStorage2DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage3DEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlTextureStorage3DEXT_In struct {
-	binary.Generate
-	Texture TextureId
-	Target  TextureTarget
-	Levels  int32
-	Format  TexelFormat
-	Width   int32
-	Height  int32
-	Depth   int32
-}
-type GlTextureStorage3DEXT_Out struct {
-	binary.Generate
-}
 type GlTextureStorage3DEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTextureStorage3DEXT_In
-	Out     GlTextureStorage3DEXT_Out
+	InContext atom.ContextID
+	Texture   TextureId
+	Target    TextureTarget
+	Levels    int32
+	Format    TexelFormat
+	Width     int32
+	Height    int32
+	Depth     int32
 }
 
 func (c *GlTextureStorage3DEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTextureStorage3DEXT(",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 		", ",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("levels:%v", c.In.Levels),
+		fmt.Sprintf("levels:%v", c.Levels),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		fmt.Sprintf("depth:%v", c.In.Depth),
+		fmt.Sprintf("depth:%v", c.Depth),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTextureStorage3DEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID {
 	return 27
@@ -2013,33 +1789,25 @@ func (GlTextureStorage3DEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenVertexArraysOES_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenVertexArraysOES_Out struct {
-	binary.Generate
-	Arrays VertexArrayIdArray
-}
 type GlGenVertexArraysOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenVertexArraysOES_In
-	Out     GlGenVertexArraysOES_Out
+	InContext atom.ContextID
+	Count     int32
+	Arrays    VertexArrayIdArray
 }
 
 func (c *GlGenVertexArraysOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenVertexArraysOES(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Arrays),
+		fmt.Sprintf("%v", c.Arrays),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenVertexArraysOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenVertexArraysOES) TypeID() atom.TypeID {
 	return 28
@@ -2052,30 +1820,22 @@ func (GlGenVertexArraysOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindVertexArrayOES_In struct {
-	binary.Generate
-	Array VertexArrayId
-}
-type GlBindVertexArrayOES_Out struct {
-	binary.Generate
-}
 type GlBindVertexArrayOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindVertexArrayOES_In
-	Out     GlBindVertexArrayOES_Out
+	InContext atom.ContextID
+	Array     VertexArrayId
 }
 
 func (c *GlBindVertexArrayOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindVertexArrayOES(",
-		fmt.Sprintf("array:%v", c.In.Array),
+		fmt.Sprintf("array:%v", c.Array),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindVertexArrayOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindVertexArrayOES) TypeID() atom.TypeID {
 	return 29
@@ -2088,33 +1848,25 @@ func (GlBindVertexArrayOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteVertexArraysOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteVertexArraysOES_In struct {
-	binary.Generate
-	Count  int32
-	Arrays VertexArrayIdArray
-}
-type GlDeleteVertexArraysOES_Out struct {
-	binary.Generate
-}
 type GlDeleteVertexArraysOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteVertexArraysOES_In
-	Out     GlDeleteVertexArraysOES_Out
+	InContext atom.ContextID
+	Count     int32
+	Arrays    VertexArrayIdArray
 }
 
 func (c *GlDeleteVertexArraysOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteVertexArraysOES(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Arrays),
+		fmt.Sprintf("%v", c.Arrays),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteVertexArraysOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID {
 	return 30
@@ -2127,32 +1879,24 @@ func (GlDeleteVertexArraysOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsVertexArrayOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsVertexArrayOES_In struct {
-	binary.Generate
-	Array VertexArrayId
-}
-type GlIsVertexArrayOES_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsVertexArrayOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsVertexArrayOES_In
-	Out     GlIsVertexArrayOES_Out
+	InContext atom.ContextID
+	Array     VertexArrayId
+	Result    bool
 }
 
 func (c *GlIsVertexArrayOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsVertexArrayOES(",
-		fmt.Sprintf("array:%v", c.In.Array),
+		fmt.Sprintf("array:%v", c.Array),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsVertexArrayOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsVertexArrayOES) TypeID() atom.TypeID {
 	return 31
@@ -2165,33 +1909,25 @@ func (GlIsVertexArrayOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetTexture2DOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlEGLImageTargetTexture2DOES_In struct {
-	binary.Generate
-	Target ImageTargetTexture
-	Image  ImageOES
-}
-type GlEGLImageTargetTexture2DOES_Out struct {
-	binary.Generate
-}
 type GlEGLImageTargetTexture2DOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEGLImageTargetTexture2DOES_In
-	Out     GlEGLImageTargetTexture2DOES_Out
+	InContext atom.ContextID
+	Target    ImageTargetTexture
+	Image     ImageOES
 }
 
 func (c *GlEGLImageTargetTexture2DOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEGLImageTargetTexture2DOES(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("image:%v", c.In.Image),
+		fmt.Sprintf("image:%v", c.Image),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEGLImageTargetTexture2DOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID {
 	return 32
@@ -2204,33 +1940,25 @@ func (GlEGLImageTargetTexture2DOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetRenderbufferStorageOES
 ////////////////////////////////////////////////////////////////////////////////
-type GlEGLImageTargetRenderbufferStorageOES_In struct {
-	binary.Generate
-	Target ImageTargetRenderbufferStorage
-	Image  TexturePointer
-}
-type GlEGLImageTargetRenderbufferStorageOES_Out struct {
-	binary.Generate
-}
 type GlEGLImageTargetRenderbufferStorageOES struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEGLImageTargetRenderbufferStorageOES_In
-	Out     GlEGLImageTargetRenderbufferStorageOES_Out
+	InContext atom.ContextID
+	Target    ImageTargetRenderbufferStorage
+	Image     TexturePointer
 }
 
 func (c *GlEGLImageTargetRenderbufferStorageOES) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEGLImageTargetRenderbufferStorageOES(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("image:%v", c.In.Image),
+		fmt.Sprintf("image:%v", c.Image),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEGLImageTargetRenderbufferStorageOES) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID {
 	return 33
@@ -2243,29 +1971,21 @@ func (GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetGraphicsResetStatusEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetGraphicsResetStatusEXT_In struct {
-	binary.Generate
-}
-type GlGetGraphicsResetStatusEXT_Out struct {
-	binary.Generate
-	Result ResetStatus
-}
 type GlGetGraphicsResetStatusEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetGraphicsResetStatusEXT_In
-	Out     GlGetGraphicsResetStatusEXT_Out
+	InContext atom.ContextID
+	Result    ResetStatus
 }
 
 func (c *GlGetGraphicsResetStatusEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetGraphicsResetStatusEXT(")
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlGetGraphicsResetStatusEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID {
 	return 34
@@ -2278,36 +1998,28 @@ func (GlGetGraphicsResetStatusEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindAttribLocation_In struct {
-	binary.Generate
-	Program  ProgramId
-	Location AttributeLocation
-	Name     string
-}
-type GlBindAttribLocation_Out struct {
-	binary.Generate
-}
 type GlBindAttribLocation struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindAttribLocation_In
-	Out     GlBindAttribLocation_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Location  AttributeLocation
+	Name      string
 }
 
 func (c *GlBindAttribLocation) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindAttribLocation(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("name:%v", c.In.Name),
+		fmt.Sprintf("name:%v", c.Name),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindAttribLocation) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindAttribLocation) TypeID() atom.TypeID {
 	return 35
@@ -2320,33 +2032,25 @@ func (GlBindAttribLocation) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFunc
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlendFunc_In struct {
-	binary.Generate
-	SrcFactor BlendFactor
-	DstFactor BlendFactor
-}
-type GlBlendFunc_Out struct {
-	binary.Generate
-}
 type GlBlendFunc struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBlendFunc_In
-	Out     GlBlendFunc_Out
+	InContext atom.ContextID
+	SrcFactor BlendFactor
+	DstFactor BlendFactor
 }
 
 func (c *GlBlendFunc) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlendFunc(",
-		c.In.SrcFactor.String(),
+		c.SrcFactor.String(),
 		", ",
-		c.In.DstFactor.String(),
+		c.DstFactor.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlendFunc) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlendFunc) TypeID() atom.TypeID {
 	return 36
@@ -2359,39 +2063,31 @@ func (GlBlendFunc) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlendFuncSeparate_In struct {
+type GlBlendFuncSeparate struct {
 	binary.Generate
+	InContext      atom.ContextID
 	SrcFactorRgb   BlendFactor
 	DstFactorRgb   BlendFactor
 	SrcFactorAlpha BlendFactor
 	DstFactorAlpha BlendFactor
 }
-type GlBlendFuncSeparate_Out struct {
-	binary.Generate
-}
-type GlBlendFuncSeparate struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlBlendFuncSeparate_In
-	Out     GlBlendFuncSeparate_Out
-}
 
 func (c *GlBlendFuncSeparate) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlendFuncSeparate(",
-		c.In.SrcFactorRgb.String(),
+		c.SrcFactorRgb.String(),
 		", ",
-		c.In.DstFactorRgb.String(),
+		c.DstFactorRgb.String(),
 		", ",
-		c.In.SrcFactorAlpha.String(),
+		c.SrcFactorAlpha.String(),
 		", ",
-		c.In.DstFactorAlpha.String(),
+		c.DstFactorAlpha.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlendFuncSeparate) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlendFuncSeparate) TypeID() atom.TypeID {
 	return 37
@@ -2404,30 +2100,22 @@ func (GlBlendFuncSeparate) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquation
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlendEquation_In struct {
-	binary.Generate
-	Equation BlendEquation
-}
-type GlBlendEquation_Out struct {
-	binary.Generate
-}
 type GlBlendEquation struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBlendEquation_In
-	Out     GlBlendEquation_Out
+	InContext atom.ContextID
+	Equation  BlendEquation
 }
 
 func (c *GlBlendEquation) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlendEquation(",
-		c.In.Equation.String(),
+		c.Equation.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlendEquation) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlendEquation) TypeID() atom.TypeID {
 	return 38
@@ -2440,33 +2128,25 @@ func (GlBlendEquation) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquationSeparate
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlendEquationSeparate_In struct {
-	binary.Generate
-	Rgb   BlendEquation
-	Alpha BlendEquation
-}
-type GlBlendEquationSeparate_Out struct {
-	binary.Generate
-}
 type GlBlendEquationSeparate struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBlendEquationSeparate_In
-	Out     GlBlendEquationSeparate_Out
+	InContext atom.ContextID
+	Rgb       BlendEquation
+	Alpha     BlendEquation
 }
 
 func (c *GlBlendEquationSeparate) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlendEquationSeparate(",
-		c.In.Rgb.String(),
+		c.Rgb.String(),
 		", ",
-		c.In.Alpha.String(),
+		c.Alpha.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlendEquationSeparate) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlendEquationSeparate) TypeID() atom.TypeID {
 	return 39
@@ -2479,39 +2159,31 @@ func (GlBlendEquationSeparate) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendColor
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlendColor_In struct {
-	binary.Generate
-	Red   float32
-	Green float32
-	Blue  float32
-	Alpha float32
-}
-type GlBlendColor_Out struct {
-	binary.Generate
-}
 type GlBlendColor struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBlendColor_In
-	Out     GlBlendColor_Out
+	InContext atom.ContextID
+	Red       float32
+	Green     float32
+	Blue      float32
+	Alpha     float32
 }
 
 func (c *GlBlendColor) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlendColor(",
-		fmt.Sprintf("red:%v", c.In.Red),
+		fmt.Sprintf("red:%v", c.Red),
 		", ",
-		fmt.Sprintf("green:%v", c.In.Green),
+		fmt.Sprintf("green:%v", c.Green),
 		", ",
-		fmt.Sprintf("blue:%v", c.In.Blue),
+		fmt.Sprintf("blue:%v", c.Blue),
 		", ",
-		fmt.Sprintf("alpha:%v", c.In.Alpha),
+		fmt.Sprintf("alpha:%v", c.Alpha),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlendColor) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlendColor) TypeID() atom.TypeID {
 	return 40
@@ -2524,30 +2196,22 @@ func (GlBlendColor) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
-type GlEnableVertexAttribArray_In struct {
-	binary.Generate
-	Location AttributeLocation
-}
-type GlEnableVertexAttribArray_Out struct {
-	binary.Generate
-}
 type GlEnableVertexAttribArray struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEnableVertexAttribArray_In
-	Out     GlEnableVertexAttribArray_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
 }
 
 func (c *GlEnableVertexAttribArray) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEnableVertexAttribArray(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEnableVertexAttribArray) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID {
 	return 41
@@ -2560,30 +2224,22 @@ func (GlEnableVertexAttribArray) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableVertexAttribArray
 ////////////////////////////////////////////////////////////////////////////////
-type GlDisableVertexAttribArray_In struct {
-	binary.Generate
-	Location AttributeLocation
-}
-type GlDisableVertexAttribArray_Out struct {
-	binary.Generate
-}
 type GlDisableVertexAttribArray struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDisableVertexAttribArray_In
-	Out     GlDisableVertexAttribArray_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
 }
 
 func (c *GlDisableVertexAttribArray) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDisableVertexAttribArray(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDisableVertexAttribArray) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID {
 	return 42
@@ -2596,8 +2252,9 @@ func (GlDisableVertexAttribArray) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttribPointer
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttribPointer_In struct {
+type GlVertexAttribPointer struct {
 	binary.Generate
+	InContext  atom.ContextID
 	Location   AttributeLocation
 	Size       int32
 	Type       VertexAttribType
@@ -2605,36 +2262,27 @@ type GlVertexAttribPointer_In struct {
 	Stride     int32
 	Data       VertexPointer
 }
-type GlVertexAttribPointer_Out struct {
-	binary.Generate
-}
-type GlVertexAttribPointer struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttribPointer_In
-	Out     GlVertexAttribPointer_Out
-}
 
 func (c *GlVertexAttribPointer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttribPointer(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("size:%v", c.In.Size),
+		fmt.Sprintf("size:%v", c.Size),
 		", ",
-		c.In.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("normalized:%v", c.In.Normalized),
+		fmt.Sprintf("normalized:%v", c.Normalized),
 		", ",
-		fmt.Sprintf("stride:%v", c.In.Stride),
+		fmt.Sprintf("stride:%v", c.Stride),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttribPointer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttribPointer) TypeID() atom.TypeID {
 	return 43
@@ -2647,48 +2295,40 @@ func (GlVertexAttribPointer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveAttrib
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetActiveAttrib_In struct {
+type GlGetActiveAttrib struct {
 	binary.Generate
-	Program    ProgramId
-	Location   AttributeLocation
-	BufferSize int32
-}
-type GlGetActiveAttrib_Out struct {
-	binary.Generate
+	InContext          atom.ContextID
+	Program            ProgramId
+	Location           AttributeLocation
+	BufferSize         int32
 	BufferBytesWritten int32
 	VectorCount        int32
 	Type               ShaderAttribType
 	Name               string
 }
-type GlGetActiveAttrib struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlGetActiveAttrib_In
-	Out     GlGetActiveAttrib_Out
-}
 
 func (c *GlGetActiveAttrib) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetActiveAttrib(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("buffer_size:%v", c.In.BufferSize),
+		fmt.Sprintf("buffer_size:%v", c.BufferSize),
 		", ",
-		fmt.Sprintf("buffer_bytes_written:%v", c.Out.BufferBytesWritten),
+		fmt.Sprintf("buffer_bytes_written:%v", c.BufferBytesWritten),
 		", ",
-		fmt.Sprintf("vector_count:%v", c.Out.VectorCount),
+		fmt.Sprintf("vector_count:%v", c.VectorCount),
 		", ",
-		c.Out.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("name:%v", c.Out.Name),
+		fmt.Sprintf("name:%v", c.Name),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetActiveAttrib) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetActiveAttrib) TypeID() atom.TypeID {
 	return 44
@@ -2701,48 +2341,40 @@ func (GlGetActiveAttrib) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveUniform
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetActiveUniform_In struct {
+type GlGetActiveUniform struct {
 	binary.Generate
-	Program    ProgramId
-	Location   int32
-	BufferSize int32
-}
-type GlGetActiveUniform_Out struct {
-	binary.Generate
+	InContext          atom.ContextID
+	Program            ProgramId
+	Location           int32
+	BufferSize         int32
 	BufferBytesWritten int32
 	Size               int32
 	Type               ShaderUniformType
 	Name               string
 }
-type GlGetActiveUniform struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlGetActiveUniform_In
-	Out     GlGetActiveUniform_Out
-}
 
 func (c *GlGetActiveUniform) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetActiveUniform(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("buffer_size:%v", c.In.BufferSize),
+		fmt.Sprintf("buffer_size:%v", c.BufferSize),
 		", ",
-		fmt.Sprintf("buffer_bytes_written:%v", c.Out.BufferBytesWritten),
+		fmt.Sprintf("buffer_bytes_written:%v", c.BufferBytesWritten),
 		", ",
-		fmt.Sprintf("size:%v", c.Out.Size),
+		fmt.Sprintf("size:%v", c.Size),
 		", ",
-		c.Out.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("name:%v", c.Out.Name),
+		fmt.Sprintf("name:%v", c.Name),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetActiveUniform) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetActiveUniform) TypeID() atom.TypeID {
 	return 45
@@ -2755,29 +2387,21 @@ func (GlGetActiveUniform) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetError
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetError_In struct {
-	binary.Generate
-}
-type GlGetError_Out struct {
-	binary.Generate
-	Result Error
-}
 type GlGetError struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetError_In
-	Out     GlGetError_Out
+	InContext atom.ContextID
+	Result    Error
 }
 
 func (c *GlGetError) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetError(")
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlGetError) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetError) TypeID() atom.TypeID {
 	return 46
@@ -2790,36 +2414,28 @@ func (GlGetError) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramiv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetProgramiv_In struct {
-	binary.Generate
-	Program   ProgramId
-	Parameter ProgramParameter
-}
-type GlGetProgramiv_Out struct {
-	binary.Generate
-	Value S32Array
-}
 type GlGetProgramiv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetProgramiv_In
-	Out     GlGetProgramiv_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Parameter ProgramParameter
+	Value     S32Array
 }
 
 func (c *GlGetProgramiv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetProgramiv(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetProgramiv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetProgramiv) TypeID() atom.TypeID {
 	return 47
@@ -2832,36 +2448,28 @@ func (GlGetProgramiv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderiv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetShaderiv_In struct {
-	binary.Generate
-	Shader    ShaderId
-	Parameter ShaderParameter
-}
-type GlGetShaderiv_Out struct {
-	binary.Generate
-	Value S32Array
-}
 type GlGetShaderiv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetShaderiv_In
-	Out     GlGetShaderiv_Out
+	InContext atom.ContextID
+	Shader    ShaderId
+	Parameter ShaderParameter
+	Value     S32Array
 }
 
 func (c *GlGetShaderiv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetShaderiv(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetShaderiv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetShaderiv) TypeID() atom.TypeID {
 	return 48
@@ -2874,35 +2482,27 @@ func (GlGetShaderiv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformLocation
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetUniformLocation_In struct {
-	binary.Generate
-	Program ProgramId
-	Name    string
-}
-type GlGetUniformLocation_Out struct {
-	binary.Generate
-	Result UniformLocation
-}
 type GlGetUniformLocation struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetUniformLocation_In
-	Out     GlGetUniformLocation_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Name      string
+	Result    UniformLocation
 }
 
 func (c *GlGetUniformLocation) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetUniformLocation(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("name:%v", c.In.Name),
+		fmt.Sprintf("name:%v", c.Name),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlGetUniformLocation) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetUniformLocation) TypeID() atom.TypeID {
 	return 49
@@ -2915,35 +2515,27 @@ func (GlGetUniformLocation) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttribLocation
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetAttribLocation_In struct {
-	binary.Generate
-	Program ProgramId
-	Name    string
-}
-type GlGetAttribLocation_Out struct {
-	binary.Generate
-	Result AttributeLocation
-}
 type GlGetAttribLocation struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetAttribLocation_In
-	Out     GlGetAttribLocation_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Name      string
+	Result    AttributeLocation
 }
 
 func (c *GlGetAttribLocation) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetAttribLocation(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("name:%v", c.In.Name),
+		fmt.Sprintf("name:%v", c.Name),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlGetAttribLocation) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetAttribLocation) TypeID() atom.TypeID {
 	return 50
@@ -2956,33 +2548,25 @@ func (GlGetAttribLocation) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlPixelStorei
 ////////////////////////////////////////////////////////////////////////////////
-type GlPixelStorei_In struct {
-	binary.Generate
-	Parameter PixelStoreParameter
-	Value     int32
-}
-type GlPixelStorei_Out struct {
-	binary.Generate
-}
 type GlPixelStorei struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlPixelStorei_In
-	Out     GlPixelStorei_Out
+	InContext atom.ContextID
+	Parameter PixelStoreParameter
+	Value     int32
 }
 
 func (c *GlPixelStorei) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glPixelStorei(",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlPixelStorei) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlPixelStorei) TypeID() atom.TypeID {
 	return 51
@@ -2995,36 +2579,28 @@ func (GlPixelStorei) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameteri
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexParameteri_In struct {
+type GlTexParameteri struct {
 	binary.Generate
+	InContext atom.ContextID
 	Target    TextureTarget
 	Parameter TextureParameter
 	Value     int32
-}
-type GlTexParameteri_Out struct {
-	binary.Generate
-}
-type GlTexParameteri struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlTexParameteri_In
-	Out     GlTexParameteri_Out
 }
 
 func (c *GlTexParameteri) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexParameteri(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexParameteri) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexParameteri) TypeID() atom.TypeID {
 	return 52
@@ -3037,36 +2613,28 @@ func (GlTexParameteri) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameterf
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexParameterf_In struct {
+type GlTexParameterf struct {
 	binary.Generate
+	InContext atom.ContextID
 	Target    TextureTarget
 	Parameter TextureParameter
 	Value     float32
-}
-type GlTexParameterf_Out struct {
-	binary.Generate
-}
-type GlTexParameterf struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlTexParameterf_In
-	Out     GlTexParameterf_Out
 }
 
 func (c *GlTexParameterf) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexParameterf(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexParameterf) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexParameterf) TypeID() atom.TypeID {
 	return 53
@@ -3079,36 +2647,28 @@ func (GlTexParameterf) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameteriv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetTexParameteriv_In struct {
-	binary.Generate
-	Target    TextureTarget
-	Parameter TextureParameter
-}
-type GlGetTexParameteriv_Out struct {
-	binary.Generate
-	Values S32Array
-}
 type GlGetTexParameteriv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetTexParameteriv_In
-	Out     GlGetTexParameteriv_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Parameter TextureParameter
+	Values    S32Array
 }
 
 func (c *GlGetTexParameteriv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetTexParameteriv(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetTexParameteriv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetTexParameteriv) TypeID() atom.TypeID {
 	return 54
@@ -3121,36 +2681,28 @@ func (GlGetTexParameteriv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameterfv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetTexParameterfv_In struct {
-	binary.Generate
-	Target    TextureTarget
-	Parameter TextureParameter
-}
-type GlGetTexParameterfv_Out struct {
-	binary.Generate
-	Values F32Array
-}
 type GlGetTexParameterfv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetTexParameterfv_In
-	Out     GlGetTexParameterfv_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Parameter TextureParameter
+	Values    F32Array
 }
 
 func (c *GlGetTexParameterfv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetTexParameterfv(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetTexParameterfv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetTexParameterfv) TypeID() atom.TypeID {
 	return 55
@@ -3163,33 +2715,25 @@ func (GlGetTexParameterfv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1i
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform1i_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value    int32
-}
-type GlUniform1i_Out struct {
-	binary.Generate
-}
 type GlUniform1i struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform1i_In
-	Out     GlUniform1i_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value     int32
 }
 
 func (c *GlUniform1i) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform1i(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform1i) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform1i) TypeID() atom.TypeID {
 	return 56
@@ -3202,36 +2746,28 @@ func (GlUniform1i) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2i
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform2i_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   int32
-	Value1   int32
-}
-type GlUniform2i_Out struct {
-	binary.Generate
-}
 type GlUniform2i struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform2i_In
-	Out     GlUniform2i_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    int32
+	Value1    int32
 }
 
 func (c *GlUniform2i) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform2i(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform2i) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform2i) TypeID() atom.TypeID {
 	return 57
@@ -3244,39 +2780,31 @@ func (GlUniform2i) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3i
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform3i_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   int32
-	Value1   int32
-	Value2   int32
-}
-type GlUniform3i_Out struct {
-	binary.Generate
-}
 type GlUniform3i struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform3i_In
-	Out     GlUniform3i_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    int32
+	Value1    int32
+	Value2    int32
 }
 
 func (c *GlUniform3i) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform3i(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform3i) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform3i) TypeID() atom.TypeID {
 	return 58
@@ -3289,42 +2817,34 @@ func (GlUniform3i) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4i
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform4i_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   int32
-	Value1   int32
-	Value2   int32
-	Value3   int32
-}
-type GlUniform4i_Out struct {
-	binary.Generate
-}
 type GlUniform4i struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform4i_In
-	Out     GlUniform4i_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    int32
+	Value1    int32
+	Value2    int32
+	Value3    int32
 }
 
 func (c *GlUniform4i) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform4i(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 		", ",
-		fmt.Sprintf("value3:%v", c.In.Value3),
+		fmt.Sprintf("value3:%v", c.Value3),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform4i) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform4i) TypeID() atom.TypeID {
 	return 59
@@ -3337,36 +2857,28 @@ func (GlUniform4i) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1iv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform1iv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    S32Array
-}
-type GlUniform1iv_Out struct {
-	binary.Generate
-}
 type GlUniform1iv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform1iv_In
-	Out     GlUniform1iv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     S32Array
 }
 
 func (c *GlUniform1iv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform1iv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform1iv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform1iv) TypeID() atom.TypeID {
 	return 60
@@ -3379,36 +2891,28 @@ func (GlUniform1iv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2iv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform2iv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    S32Array
-}
-type GlUniform2iv_Out struct {
-	binary.Generate
-}
 type GlUniform2iv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform2iv_In
-	Out     GlUniform2iv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     S32Array
 }
 
 func (c *GlUniform2iv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform2iv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform2iv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform2iv) TypeID() atom.TypeID {
 	return 61
@@ -3421,36 +2925,28 @@ func (GlUniform2iv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3iv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform3iv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    S32Array
-}
-type GlUniform3iv_Out struct {
-	binary.Generate
-}
 type GlUniform3iv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform3iv_In
-	Out     GlUniform3iv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     S32Array
 }
 
 func (c *GlUniform3iv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform3iv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform3iv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform3iv) TypeID() atom.TypeID {
 	return 62
@@ -3463,36 +2959,28 @@ func (GlUniform3iv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4iv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform4iv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    S32Array
-}
-type GlUniform4iv_Out struct {
-	binary.Generate
-}
 type GlUniform4iv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform4iv_In
-	Out     GlUniform4iv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     S32Array
 }
 
 func (c *GlUniform4iv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform4iv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform4iv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform4iv) TypeID() atom.TypeID {
 	return 63
@@ -3505,33 +2993,25 @@ func (GlUniform4iv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1f
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform1f_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value    float32
-}
-type GlUniform1f_Out struct {
-	binary.Generate
-}
 type GlUniform1f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform1f_In
-	Out     GlUniform1f_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value     float32
 }
 
 func (c *GlUniform1f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform1f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform1f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform1f) TypeID() atom.TypeID {
 	return 64
@@ -3544,36 +3024,28 @@ func (GlUniform1f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2f
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform2f_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   float32
-	Value1   float32
-}
-type GlUniform2f_Out struct {
-	binary.Generate
-}
 type GlUniform2f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform2f_In
-	Out     GlUniform2f_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    float32
+	Value1    float32
 }
 
 func (c *GlUniform2f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform2f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform2f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform2f) TypeID() atom.TypeID {
 	return 65
@@ -3586,39 +3058,31 @@ func (GlUniform2f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3f
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform3f_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   float32
-	Value1   float32
-	Value2   float32
-}
-type GlUniform3f_Out struct {
-	binary.Generate
-}
 type GlUniform3f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform3f_In
-	Out     GlUniform3f_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    float32
+	Value1    float32
+	Value2    float32
 }
 
 func (c *GlUniform3f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform3f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform3f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform3f) TypeID() atom.TypeID {
 	return 66
@@ -3631,42 +3095,34 @@ func (GlUniform3f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4f
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform4f_In struct {
-	binary.Generate
-	Location UniformLocation
-	Value0   float32
-	Value1   float32
-	Value2   float32
-	Value3   float32
-}
-type GlUniform4f_Out struct {
-	binary.Generate
-}
 type GlUniform4f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform4f_In
-	Out     GlUniform4f_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Value0    float32
+	Value1    float32
+	Value2    float32
+	Value3    float32
 }
 
 func (c *GlUniform4f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform4f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 		", ",
-		fmt.Sprintf("value3:%v", c.In.Value3),
+		fmt.Sprintf("value3:%v", c.Value3),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform4f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform4f) TypeID() atom.TypeID {
 	return 67
@@ -3679,36 +3135,28 @@ func (GlUniform4f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform1fv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    F32Array
-}
-type GlUniform1fv_Out struct {
-	binary.Generate
-}
 type GlUniform1fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform1fv_In
-	Out     GlUniform1fv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     F32Array
 }
 
 func (c *GlUniform1fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform1fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform1fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform1fv) TypeID() atom.TypeID {
 	return 68
@@ -3721,36 +3169,28 @@ func (GlUniform1fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform2fv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    F32Array
-}
-type GlUniform2fv_Out struct {
-	binary.Generate
-}
 type GlUniform2fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform2fv_In
-	Out     GlUniform2fv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     F32Array
 }
 
 func (c *GlUniform2fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform2fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform2fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform2fv) TypeID() atom.TypeID {
 	return 69
@@ -3763,36 +3203,28 @@ func (GlUniform2fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform3fv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    F32Array
-}
-type GlUniform3fv_Out struct {
-	binary.Generate
-}
 type GlUniform3fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform3fv_In
-	Out     GlUniform3fv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     F32Array
 }
 
 func (c *GlUniform3fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform3fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform3fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform3fv) TypeID() atom.TypeID {
 	return 70
@@ -3805,36 +3237,28 @@ func (GlUniform3fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniform4fv_In struct {
-	binary.Generate
-	Location UniformLocation
-	Count    int32
-	Value    F32Array
-}
-type GlUniform4fv_Out struct {
-	binary.Generate
-}
 type GlUniform4fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUniform4fv_In
-	Out     GlUniform4fv_Out
+	InContext atom.ContextID
+	Location  UniformLocation
+	Count     int32
+	Value     F32Array
 }
 
 func (c *GlUniform4fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniform4fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniform4fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniform4fv) TypeID() atom.TypeID {
 	return 71
@@ -3847,39 +3271,31 @@ func (GlUniform4fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix2fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniformMatrix2fv_In struct {
+type GlUniformMatrix2fv struct {
 	binary.Generate
+	InContext atom.ContextID
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
-type GlUniformMatrix2fv_Out struct {
-	binary.Generate
-}
-type GlUniformMatrix2fv struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlUniformMatrix2fv_In
-	Out     GlUniformMatrix2fv_Out
-}
 
 func (c *GlUniformMatrix2fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniformMatrix2fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("transpose:%v", c.In.Transpose),
+		fmt.Sprintf("transpose:%v", c.Transpose),
 		", ",
-		fmt.Sprintf("%v", c.In.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniformMatrix2fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniformMatrix2fv) TypeID() atom.TypeID {
 	return 72
@@ -3892,39 +3308,31 @@ func (GlUniformMatrix2fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix3fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniformMatrix3fv_In struct {
+type GlUniformMatrix3fv struct {
 	binary.Generate
+	InContext atom.ContextID
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
-type GlUniformMatrix3fv_Out struct {
-	binary.Generate
-}
-type GlUniformMatrix3fv struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlUniformMatrix3fv_In
-	Out     GlUniformMatrix3fv_Out
-}
 
 func (c *GlUniformMatrix3fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniformMatrix3fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("transpose:%v", c.In.Transpose),
+		fmt.Sprintf("transpose:%v", c.Transpose),
 		", ",
-		fmt.Sprintf("%v", c.In.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniformMatrix3fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniformMatrix3fv) TypeID() atom.TypeID {
 	return 73
@@ -3937,39 +3345,31 @@ func (GlUniformMatrix3fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix4fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlUniformMatrix4fv_In struct {
+type GlUniformMatrix4fv struct {
 	binary.Generate
+	InContext atom.ContextID
 	Location  UniformLocation
 	Count     int32
 	Transpose bool
 	Values    F32Array
 }
-type GlUniformMatrix4fv_Out struct {
-	binary.Generate
-}
-type GlUniformMatrix4fv struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlUniformMatrix4fv_In
-	Out     GlUniformMatrix4fv_Out
-}
 
 func (c *GlUniformMatrix4fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUniformMatrix4fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("transpose:%v", c.In.Transpose),
+		fmt.Sprintf("transpose:%v", c.Transpose),
 		", ",
-		fmt.Sprintf("%v", c.In.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUniformMatrix4fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUniformMatrix4fv) TypeID() atom.TypeID {
 	return 74
@@ -3982,36 +3382,28 @@ func (GlUniformMatrix4fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformfv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetUniformfv_In struct {
-	binary.Generate
-	Program  ProgramId
-	Location UniformLocation
-	Values   F32Array
-}
-type GlGetUniformfv_Out struct {
-	binary.Generate
-}
 type GlGetUniformfv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetUniformfv_In
-	Out     GlGetUniformfv_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Location  UniformLocation
+	Values    F32Array
 }
 
 func (c *GlGetUniformfv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetUniformfv(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetUniformfv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetUniformfv) TypeID() atom.TypeID {
 	return 75
@@ -4024,36 +3416,28 @@ func (GlGetUniformfv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformiv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetUniformiv_In struct {
-	binary.Generate
-	Program  ProgramId
-	Location UniformLocation
-	Values   S32Array
-}
-type GlGetUniformiv_Out struct {
-	binary.Generate
-}
 type GlGetUniformiv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetUniformiv_In
-	Out     GlGetUniformiv_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Location  UniformLocation
+	Values    S32Array
 }
 
 func (c *GlGetUniformiv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetUniformiv(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetUniformiv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetUniformiv) TypeID() atom.TypeID {
 	return 76
@@ -4066,33 +3450,25 @@ func (GlGetUniformiv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1f
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib1f_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value0   float32
-}
-type GlVertexAttrib1f_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib1f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib1f_In
-	Out     GlVertexAttrib1f_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value0    float32
 }
 
 func (c *GlVertexAttrib1f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib1f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib1f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib1f) TypeID() atom.TypeID {
 	return 77
@@ -4105,36 +3481,28 @@ func (GlVertexAttrib1f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2f
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib2f_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value0   float32
-	Value1   float32
-}
-type GlVertexAttrib2f_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib2f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib2f_In
-	Out     GlVertexAttrib2f_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value0    float32
+	Value1    float32
 }
 
 func (c *GlVertexAttrib2f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib2f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib2f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib2f) TypeID() atom.TypeID {
 	return 78
@@ -4147,39 +3515,31 @@ func (GlVertexAttrib2f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3f
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib3f_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value0   float32
-	Value1   float32
-	Value2   float32
-}
-type GlVertexAttrib3f_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib3f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib3f_In
-	Out     GlVertexAttrib3f_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value0    float32
+	Value1    float32
+	Value2    float32
 }
 
 func (c *GlVertexAttrib3f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib3f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib3f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib3f) TypeID() atom.TypeID {
 	return 79
@@ -4192,42 +3552,34 @@ func (GlVertexAttrib3f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4f
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib4f_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value0   float32
-	Value1   float32
-	Value2   float32
-	Value3   float32
-}
-type GlVertexAttrib4f_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib4f struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib4f_In
-	Out     GlVertexAttrib4f_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value0    float32
+	Value1    float32
+	Value2    float32
+	Value3    float32
 }
 
 func (c *GlVertexAttrib4f) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib4f(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("value0:%v", c.In.Value0),
+		fmt.Sprintf("value0:%v", c.Value0),
 		", ",
-		fmt.Sprintf("value1:%v", c.In.Value1),
+		fmt.Sprintf("value1:%v", c.Value1),
 		", ",
-		fmt.Sprintf("value2:%v", c.In.Value2),
+		fmt.Sprintf("value2:%v", c.Value2),
 		", ",
-		fmt.Sprintf("value3:%v", c.In.Value3),
+		fmt.Sprintf("value3:%v", c.Value3),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib4f) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib4f) TypeID() atom.TypeID {
 	return 80
@@ -4240,33 +3592,25 @@ func (GlVertexAttrib4f) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib1fv_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value    F32Array
-}
-type GlVertexAttrib1fv_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib1fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib1fv_In
-	Out     GlVertexAttrib1fv_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value     F32Array
 }
 
 func (c *GlVertexAttrib1fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib1fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib1fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib1fv) TypeID() atom.TypeID {
 	return 81
@@ -4279,33 +3623,25 @@ func (GlVertexAttrib1fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib2fv_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value    F32Array
-}
-type GlVertexAttrib2fv_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib2fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib2fv_In
-	Out     GlVertexAttrib2fv_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value     F32Array
 }
 
 func (c *GlVertexAttrib2fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib2fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib2fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib2fv) TypeID() atom.TypeID {
 	return 82
@@ -4318,33 +3654,25 @@ func (GlVertexAttrib2fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib3fv_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value    F32Array
-}
-type GlVertexAttrib3fv_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib3fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib3fv_In
-	Out     GlVertexAttrib3fv_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value     F32Array
 }
 
 func (c *GlVertexAttrib3fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib3fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib3fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib3fv) TypeID() atom.TypeID {
 	return 83
@@ -4357,33 +3685,25 @@ func (GlVertexAttrib3fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4fv
 ////////////////////////////////////////////////////////////////////////////////
-type GlVertexAttrib4fv_In struct {
-	binary.Generate
-	Location AttributeLocation
-	Value    F32Array
-}
-type GlVertexAttrib4fv_Out struct {
-	binary.Generate
-}
 type GlVertexAttrib4fv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlVertexAttrib4fv_In
-	Out     GlVertexAttrib4fv_Out
+	InContext atom.ContextID
+	Location  AttributeLocation
+	Value     F32Array
 }
 
 func (c *GlVertexAttrib4fv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glVertexAttrib4fv(",
-		fmt.Sprintf("location:%v", c.In.Location),
+		fmt.Sprintf("location:%v", c.Location),
 		", ",
-		fmt.Sprintf("%v", c.In.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlVertexAttrib4fv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlVertexAttrib4fv) TypeID() atom.TypeID {
 	return 84
@@ -4396,39 +3716,31 @@ func (GlVertexAttrib4fv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderPrecisionFormat
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetShaderPrecisionFormat_In struct {
-	binary.Generate
-	ShaderType    ShaderType
-	PrecisionType PrecisionType
-}
-type GlGetShaderPrecisionFormat_Out struct {
-	binary.Generate
-	Range     S32Array
-	Precision int32
-}
 type GlGetShaderPrecisionFormat struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetShaderPrecisionFormat_In
-	Out     GlGetShaderPrecisionFormat_Out
+	InContext     atom.ContextID
+	ShaderType    ShaderType
+	PrecisionType PrecisionType
+	Range         S32Array
+	Precision     int32
 }
 
 func (c *GlGetShaderPrecisionFormat) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetShaderPrecisionFormat(",
-		c.In.ShaderType.String(),
+		c.ShaderType.String(),
 		", ",
-		c.In.PrecisionType.String(),
+		c.PrecisionType.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Range),
+		fmt.Sprintf("%v", c.Range),
 		", ",
-		fmt.Sprintf("precision:%v", c.Out.Precision),
+		fmt.Sprintf("precision:%v", c.Precision),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetShaderPrecisionFormat) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID {
 	return 85
@@ -4441,30 +3753,22 @@ func (GlGetShaderPrecisionFormat) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthMask
 ////////////////////////////////////////////////////////////////////////////////
-type GlDepthMask_In struct {
-	binary.Generate
-	Enabled bool
-}
-type GlDepthMask_Out struct {
-	binary.Generate
-}
 type GlDepthMask struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDepthMask_In
-	Out     GlDepthMask_Out
+	InContext atom.ContextID
+	Enabled   bool
 }
 
 func (c *GlDepthMask) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDepthMask(",
-		fmt.Sprintf("enabled:%v", c.In.Enabled),
+		fmt.Sprintf("enabled:%v", c.Enabled),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDepthMask) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDepthMask) TypeID() atom.TypeID {
 	return 86
@@ -4477,30 +3781,22 @@ func (GlDepthMask) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthFunc
 ////////////////////////////////////////////////////////////////////////////////
-type GlDepthFunc_In struct {
-	binary.Generate
-	Function TestFunction
-}
-type GlDepthFunc_Out struct {
-	binary.Generate
-}
 type GlDepthFunc struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDepthFunc_In
-	Out     GlDepthFunc_Out
+	InContext atom.ContextID
+	Function  TestFunction
 }
 
 func (c *GlDepthFunc) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDepthFunc(",
-		c.In.Function.String(),
+		c.Function.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDepthFunc) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDepthFunc) TypeID() atom.TypeID {
 	return 87
@@ -4513,33 +3809,25 @@ func (GlDepthFunc) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthRangef
 ////////////////////////////////////////////////////////////////////////////////
-type GlDepthRangef_In struct {
-	binary.Generate
-	Near float32
-	Far  float32
-}
-type GlDepthRangef_Out struct {
-	binary.Generate
-}
 type GlDepthRangef struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDepthRangef_In
-	Out     GlDepthRangef_Out
+	InContext atom.ContextID
+	Near      float32
+	Far       float32
 }
 
 func (c *GlDepthRangef) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDepthRangef(",
-		fmt.Sprintf("near:%v", c.In.Near),
+		fmt.Sprintf("near:%v", c.Near),
 		", ",
-		fmt.Sprintf("far:%v", c.In.Far),
+		fmt.Sprintf("far:%v", c.Far),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDepthRangef) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDepthRangef) TypeID() atom.TypeID {
 	return 88
@@ -4552,39 +3840,31 @@ func (GlDepthRangef) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlColorMask
 ////////////////////////////////////////////////////////////////////////////////
-type GlColorMask_In struct {
-	binary.Generate
-	Red   bool
-	Green bool
-	Blue  bool
-	Alpha bool
-}
-type GlColorMask_Out struct {
-	binary.Generate
-}
 type GlColorMask struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlColorMask_In
-	Out     GlColorMask_Out
+	InContext atom.ContextID
+	Red       bool
+	Green     bool
+	Blue      bool
+	Alpha     bool
 }
 
 func (c *GlColorMask) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glColorMask(",
-		fmt.Sprintf("red:%v", c.In.Red),
+		fmt.Sprintf("red:%v", c.Red),
 		", ",
-		fmt.Sprintf("green:%v", c.In.Green),
+		fmt.Sprintf("green:%v", c.Green),
 		", ",
-		fmt.Sprintf("blue:%v", c.In.Blue),
+		fmt.Sprintf("blue:%v", c.Blue),
 		", ",
-		fmt.Sprintf("alpha:%v", c.In.Alpha),
+		fmt.Sprintf("alpha:%v", c.Alpha),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlColorMask) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlColorMask) TypeID() atom.TypeID {
 	return 89
@@ -4597,30 +3877,22 @@ func (GlColorMask) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMask
 ////////////////////////////////////////////////////////////////////////////////
-type GlStencilMask_In struct {
-	binary.Generate
-	Mask uint32
-}
-type GlStencilMask_Out struct {
-	binary.Generate
-}
 type GlStencilMask struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlStencilMask_In
-	Out     GlStencilMask_Out
+	InContext atom.ContextID
+	Mask      uint32
 }
 
 func (c *GlStencilMask) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glStencilMask(",
-		fmt.Sprintf("mask:%v", c.In.Mask),
+		fmt.Sprintf("mask:%v", c.Mask),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlStencilMask) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlStencilMask) TypeID() atom.TypeID {
 	return 90
@@ -4633,33 +3905,25 @@ func (GlStencilMask) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMaskSeparate
 ////////////////////////////////////////////////////////////////////////////////
-type GlStencilMaskSeparate_In struct {
-	binary.Generate
-	Face FaceMode
-	Mask uint32
-}
-type GlStencilMaskSeparate_Out struct {
-	binary.Generate
-}
 type GlStencilMaskSeparate struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlStencilMaskSeparate_In
-	Out     GlStencilMaskSeparate_Out
+	InContext atom.ContextID
+	Face      FaceMode
+	Mask      uint32
 }
 
 func (c *GlStencilMaskSeparate) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glStencilMaskSeparate(",
-		c.In.Face.String(),
+		c.Face.String(),
 		", ",
-		fmt.Sprintf("mask:%v", c.In.Mask),
+		fmt.Sprintf("mask:%v", c.Mask),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlStencilMaskSeparate) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlStencilMaskSeparate) TypeID() atom.TypeID {
 	return 91
@@ -4672,39 +3936,31 @@ func (GlStencilMaskSeparate) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilFuncSeparate
 ////////////////////////////////////////////////////////////////////////////////
-type GlStencilFuncSeparate_In struct {
+type GlStencilFuncSeparate struct {
 	binary.Generate
+	InContext      atom.ContextID
 	Face           FaceMode
 	Function       TestFunction
 	ReferenceValue int32
 	Mask           int32
 }
-type GlStencilFuncSeparate_Out struct {
-	binary.Generate
-}
-type GlStencilFuncSeparate struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlStencilFuncSeparate_In
-	Out     GlStencilFuncSeparate_Out
-}
 
 func (c *GlStencilFuncSeparate) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glStencilFuncSeparate(",
-		c.In.Face.String(),
+		c.Face.String(),
 		", ",
-		c.In.Function.String(),
+		c.Function.String(),
 		", ",
-		fmt.Sprintf("reference_value:%v", c.In.ReferenceValue),
+		fmt.Sprintf("reference_value:%v", c.ReferenceValue),
 		", ",
-		fmt.Sprintf("mask:%v", c.In.Mask),
+		fmt.Sprintf("mask:%v", c.Mask),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlStencilFuncSeparate) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlStencilFuncSeparate) TypeID() atom.TypeID {
 	return 92
@@ -4717,39 +3973,31 @@ func (GlStencilFuncSeparate) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilOpSeparate
 ////////////////////////////////////////////////////////////////////////////////
-type GlStencilOpSeparate_In struct {
+type GlStencilOpSeparate struct {
 	binary.Generate
+	InContext            atom.ContextID
 	Face                 FaceMode
 	StencilFail          StencilAction
 	StencilPassDepthFail StencilAction
 	StencilPassDepthPass StencilAction
 }
-type GlStencilOpSeparate_Out struct {
-	binary.Generate
-}
-type GlStencilOpSeparate struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlStencilOpSeparate_In
-	Out     GlStencilOpSeparate_Out
-}
 
 func (c *GlStencilOpSeparate) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glStencilOpSeparate(",
-		c.In.Face.String(),
+		c.Face.String(),
 		", ",
-		c.In.StencilFail.String(),
+		c.StencilFail.String(),
 		", ",
-		c.In.StencilPassDepthFail.String(),
+		c.StencilPassDepthFail.String(),
 		", ",
-		c.In.StencilPassDepthPass.String(),
+		c.StencilPassDepthPass.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlStencilOpSeparate) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlStencilOpSeparate) TypeID() atom.TypeID {
 	return 93
@@ -4762,30 +4010,22 @@ func (GlStencilOpSeparate) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlFrontFace
 ////////////////////////////////////////////////////////////////////////////////
-type GlFrontFace_In struct {
-	binary.Generate
-	Orientation FaceOrientation
-}
-type GlFrontFace_Out struct {
-	binary.Generate
-}
 type GlFrontFace struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlFrontFace_In
-	Out     GlFrontFace_Out
+	InContext   atom.ContextID
+	Orientation FaceOrientation
 }
 
 func (c *GlFrontFace) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glFrontFace(",
-		c.In.Orientation.String(),
+		c.Orientation.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlFrontFace) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlFrontFace) TypeID() atom.TypeID {
 	return 94
@@ -4798,39 +4038,31 @@ func (GlFrontFace) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlViewport
 ////////////////////////////////////////////////////////////////////////////////
-type GlViewport_In struct {
-	binary.Generate
-	X      int32
-	Y      int32
-	Width  int32
-	Height int32
-}
-type GlViewport_Out struct {
-	binary.Generate
-}
 type GlViewport struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlViewport_In
-	Out     GlViewport_Out
+	InContext atom.ContextID
+	X         int32
+	Y         int32
+	Width     int32
+	Height    int32
 }
 
 func (c *GlViewport) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glViewport(",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlViewport) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlViewport) TypeID() atom.TypeID {
 	return 95
@@ -4843,39 +4075,31 @@ func (GlViewport) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlScissor
 ////////////////////////////////////////////////////////////////////////////////
-type GlScissor_In struct {
-	binary.Generate
-	X      int32
-	Y      int32
-	Width  int32
-	Height int32
-}
-type GlScissor_Out struct {
-	binary.Generate
-}
 type GlScissor struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlScissor_In
-	Out     GlScissor_Out
+	InContext atom.ContextID
+	X         int32
+	Y         int32
+	Width     int32
+	Height    int32
 }
 
 func (c *GlScissor) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glScissor(",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlScissor) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlScissor) TypeID() atom.TypeID {
 	return 96
@@ -4888,30 +4112,22 @@ func (GlScissor) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlActiveTexture
 ////////////////////////////////////////////////////////////////////////////////
-type GlActiveTexture_In struct {
-	binary.Generate
-	Unit TextureUnit
-}
-type GlActiveTexture_Out struct {
-	binary.Generate
-}
 type GlActiveTexture struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlActiveTexture_In
-	Out     GlActiveTexture_Out
+	InContext atom.ContextID
+	Unit      TextureUnit
 }
 
 func (c *GlActiveTexture) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glActiveTexture(",
-		c.In.Unit.String(),
+		c.Unit.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlActiveTexture) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlActiveTexture) TypeID() atom.TypeID {
 	return 97
@@ -4924,33 +4140,25 @@ func (GlActiveTexture) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenTextures
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenTextures_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenTextures_Out struct {
-	binary.Generate
-	Textures TextureIdArray
-}
 type GlGenTextures struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenTextures_In
-	Out     GlGenTextures_Out
+	InContext atom.ContextID
+	Count     int32
+	Textures  TextureIdArray
 }
 
 func (c *GlGenTextures) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenTextures(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Textures),
+		fmt.Sprintf("%v", c.Textures),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenTextures) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenTextures) TypeID() atom.TypeID {
 	return 98
@@ -4963,33 +4171,25 @@ func (GlGenTextures) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteTextures
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteTextures_In struct {
-	binary.Generate
-	Count    int32
-	Textures TextureIdArray
-}
-type GlDeleteTextures_Out struct {
-	binary.Generate
-}
 type GlDeleteTextures struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteTextures_In
-	Out     GlDeleteTextures_Out
+	InContext atom.ContextID
+	Count     int32
+	Textures  TextureIdArray
 }
 
 func (c *GlDeleteTextures) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteTextures(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Textures),
+		fmt.Sprintf("%v", c.Textures),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteTextures) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteTextures) TypeID() atom.TypeID {
 	return 99
@@ -5002,32 +4202,24 @@ func (GlDeleteTextures) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsTexture
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsTexture_In struct {
-	binary.Generate
-	Texture TextureId
-}
-type GlIsTexture_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsTexture struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsTexture_In
-	Out     GlIsTexture_Out
+	InContext atom.ContextID
+	Texture   TextureId
+	Result    bool
 }
 
 func (c *GlIsTexture) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsTexture(",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsTexture) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsTexture) TypeID() atom.TypeID {
 	return 100
@@ -5040,33 +4232,25 @@ func (GlIsTexture) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindTexture
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindTexture_In struct {
-	binary.Generate
-	Target  TextureTarget
-	Texture TextureId
-}
-type GlBindTexture_Out struct {
-	binary.Generate
-}
 type GlBindTexture struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindTexture_In
-	Out     GlBindTexture_Out
+	InContext atom.ContextID
+	Target    TextureTarget
+	Texture   TextureId
 }
 
 func (c *GlBindTexture) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindTexture(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindTexture) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindTexture) TypeID() atom.TypeID {
 	return 101
@@ -5079,8 +4263,9 @@ func (GlBindTexture) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexImage2D_In struct {
+type GlTexImage2D struct {
 	binary.Generate
+	InContext      atom.ContextID
 	Target         TextureImageTarget
 	Level          int32
 	InternalFormat TexelFormat
@@ -5091,42 +4276,33 @@ type GlTexImage2D_In struct {
 	Type           TexelType
 	Data           TexturePointer
 }
-type GlTexImage2D_Out struct {
-	binary.Generate
-}
-type GlTexImage2D struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlTexImage2D_In
-	Out     GlTexImage2D_Out
-}
 
 func (c *GlTexImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		c.In.InternalFormat.String(),
+		c.InternalFormat.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		fmt.Sprintf("border:%v", c.In.Border),
+		fmt.Sprintf("border:%v", c.Border),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		c.In.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexImage2D) TypeID() atom.TypeID {
 	return 102
@@ -5139,54 +4315,46 @@ func (GlTexImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlTexSubImage2D_In struct {
-	binary.Generate
-	Target  TextureImageTarget
-	Level   int32
-	Xoffset int32
-	Yoffset int32
-	Width   int32
-	Height  int32
-	Format  TexelFormat
-	Type    TexelType
-	Data    TexturePointer
-}
-type GlTexSubImage2D_Out struct {
-	binary.Generate
-}
 type GlTexSubImage2D struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlTexSubImage2D_In
-	Out     GlTexSubImage2D_Out
+	InContext atom.ContextID
+	Target    TextureImageTarget
+	Level     int32
+	Xoffset   int32
+	Yoffset   int32
+	Width     int32
+	Height    int32
+	Format    TexelFormat
+	Type      TexelType
+	Data      TexturePointer
 }
 
 func (c *GlTexSubImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glTexSubImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		fmt.Sprintf("xoffset:%v", c.In.Xoffset),
+		fmt.Sprintf("xoffset:%v", c.Xoffset),
 		", ",
-		fmt.Sprintf("yoffset:%v", c.In.Yoffset),
+		fmt.Sprintf("yoffset:%v", c.Yoffset),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		c.In.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlTexSubImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlTexSubImage2D) TypeID() atom.TypeID {
 	return 103
@@ -5199,51 +4367,43 @@ func (GlTexSubImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlCopyTexImage2D_In struct {
-	binary.Generate
-	Target TextureImageTarget
-	Level  int32
-	Format TexelFormat
-	X      int32
-	Y      int32
-	Width  int32
-	Height int32
-	Border int32
-}
-type GlCopyTexImage2D_Out struct {
-	binary.Generate
-}
 type GlCopyTexImage2D struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCopyTexImage2D_In
-	Out     GlCopyTexImage2D_Out
+	InContext atom.ContextID
+	Target    TextureImageTarget
+	Level     int32
+	Format    TexelFormat
+	X         int32
+	Y         int32
+	Width     int32
+	Height    int32
+	Border    int32
 }
 
 func (c *GlCopyTexImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCopyTexImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		fmt.Sprintf("border:%v", c.In.Border),
+		fmt.Sprintf("border:%v", c.Border),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCopyTexImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCopyTexImage2D) TypeID() atom.TypeID {
 	return 104
@@ -5256,51 +4416,43 @@ func (GlCopyTexImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlCopyTexSubImage2D_In struct {
-	binary.Generate
-	Target  TextureImageTarget
-	Level   int32
-	Xoffset int32
-	Yoffset int32
-	X       int32
-	Y       int32
-	Width   int32
-	Height  int32
-}
-type GlCopyTexSubImage2D_Out struct {
-	binary.Generate
-}
 type GlCopyTexSubImage2D struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCopyTexSubImage2D_In
-	Out     GlCopyTexSubImage2D_Out
+	InContext atom.ContextID
+	Target    TextureImageTarget
+	Level     int32
+	Xoffset   int32
+	Yoffset   int32
+	X         int32
+	Y         int32
+	Width     int32
+	Height    int32
 }
 
 func (c *GlCopyTexSubImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCopyTexSubImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		fmt.Sprintf("xoffset:%v", c.In.Xoffset),
+		fmt.Sprintf("xoffset:%v", c.Xoffset),
 		", ",
-		fmt.Sprintf("yoffset:%v", c.In.Yoffset),
+		fmt.Sprintf("yoffset:%v", c.Yoffset),
 		", ",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCopyTexSubImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID {
 	return 105
@@ -5313,8 +4465,9 @@ func (GlCopyTexSubImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlCompressedTexImage2D_In struct {
+type GlCompressedTexImage2D struct {
 	binary.Generate
+	InContext atom.ContextID
 	Target    TextureImageTarget
 	Level     int32
 	Format    CompressedTexelFormat
@@ -5324,40 +4477,31 @@ type GlCompressedTexImage2D_In struct {
 	ImageSize int32
 	Data      TexturePointer
 }
-type GlCompressedTexImage2D_Out struct {
-	binary.Generate
-}
-type GlCompressedTexImage2D struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlCompressedTexImage2D_In
-	Out     GlCompressedTexImage2D_Out
-}
 
 func (c *GlCompressedTexImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCompressedTexImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		fmt.Sprintf("border:%v", c.In.Border),
+		fmt.Sprintf("border:%v", c.Border),
 		", ",
-		fmt.Sprintf("image_size:%v", c.In.ImageSize),
+		fmt.Sprintf("image_size:%v", c.ImageSize),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCompressedTexImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCompressedTexImage2D) TypeID() atom.TypeID {
 	return 106
@@ -5370,8 +4514,9 @@ func (GlCompressedTexImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexSubImage2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlCompressedTexSubImage2D_In struct {
+type GlCompressedTexSubImage2D struct {
 	binary.Generate
+	InContext atom.ContextID
 	Target    TextureImageTarget
 	Level     int32
 	Xoffset   int32
@@ -5382,42 +4527,33 @@ type GlCompressedTexSubImage2D_In struct {
 	ImageSize int32
 	Data      TexturePointer
 }
-type GlCompressedTexSubImage2D_Out struct {
-	binary.Generate
-}
-type GlCompressedTexSubImage2D struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlCompressedTexSubImage2D_In
-	Out     GlCompressedTexSubImage2D_Out
-}
 
 func (c *GlCompressedTexSubImage2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCompressedTexSubImage2D(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 		", ",
-		fmt.Sprintf("xoffset:%v", c.In.Xoffset),
+		fmt.Sprintf("xoffset:%v", c.Xoffset),
 		", ",
-		fmt.Sprintf("yoffset:%v", c.In.Yoffset),
+		fmt.Sprintf("yoffset:%v", c.Yoffset),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("image_size:%v", c.In.ImageSize),
+		fmt.Sprintf("image_size:%v", c.ImageSize),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCompressedTexSubImage2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID {
 	return 107
@@ -5430,30 +4566,22 @@ func (GlCompressedTexSubImage2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenerateMipmap
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenerateMipmap_In struct {
-	binary.Generate
-	Target TextureImageTarget
-}
-type GlGenerateMipmap_Out struct {
-	binary.Generate
-}
 type GlGenerateMipmap struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenerateMipmap_In
-	Out     GlGenerateMipmap_Out
+	InContext atom.ContextID
+	Target    TextureImageTarget
 }
 
 func (c *GlGenerateMipmap) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenerateMipmap(",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenerateMipmap) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenerateMipmap) TypeID() atom.TypeID {
 	return 108
@@ -5466,48 +4594,40 @@ func (GlGenerateMipmap) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlReadPixels
 ////////////////////////////////////////////////////////////////////////////////
-type GlReadPixels_In struct {
-	binary.Generate
-	X      int32
-	Y      int32
-	Width  int32
-	Height int32
-	Format BaseTexelFormat
-	Type   TexelType
-}
-type GlReadPixels_Out struct {
-	binary.Generate
-	Data memory.Pointer
-}
 type GlReadPixels struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlReadPixels_In
-	Out     GlReadPixels_Out
+	InContext atom.ContextID
+	X         int32
+	Y         int32
+	Width     int32
+	Height    int32
+	Format    BaseTexelFormat
+	Type      TexelType
+	Data      memory.Pointer
 }
 
 func (c *GlReadPixels) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glReadPixels(",
-		fmt.Sprintf("x:%v", c.In.X),
+		fmt.Sprintf("x:%v", c.X),
 		", ",
-		fmt.Sprintf("y:%v", c.In.Y),
+		fmt.Sprintf("y:%v", c.Y),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		c.In.Type.String(),
+		c.Type.String(),
 		", ",
-		fmt.Sprintf("0x%x", c.Out.Data),
+		fmt.Sprintf("0x%x", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlReadPixels) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlReadPixels) TypeID() atom.TypeID {
 	return 109
@@ -5520,33 +4640,25 @@ func (GlReadPixels) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenFramebuffers_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenFramebuffers_Out struct {
-	binary.Generate
-	Framebuffers FramebufferIdArray
-}
 type GlGenFramebuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenFramebuffers_In
-	Out     GlGenFramebuffers_Out
+	InContext    atom.ContextID
+	Count        int32
+	Framebuffers FramebufferIdArray
 }
 
 func (c *GlGenFramebuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenFramebuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Framebuffers),
+		fmt.Sprintf("%v", c.Framebuffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenFramebuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenFramebuffers) TypeID() atom.TypeID {
 	return 110
@@ -5559,33 +4671,25 @@ func (GlGenFramebuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindFramebuffer_In struct {
-	binary.Generate
-	Target      FramebufferTarget
-	Framebuffer FramebufferId
-}
-type GlBindFramebuffer_Out struct {
-	binary.Generate
-}
 type GlBindFramebuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindFramebuffer_In
-	Out     GlBindFramebuffer_Out
+	InContext   atom.ContextID
+	Target      FramebufferTarget
+	Framebuffer FramebufferId
 }
 
 func (c *GlBindFramebuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindFramebuffer(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("framebuffer:%v", c.In.Framebuffer),
+		fmt.Sprintf("framebuffer:%v", c.Framebuffer),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindFramebuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindFramebuffer) TypeID() atom.TypeID {
 	return 111
@@ -5598,32 +4702,24 @@ func (GlBindFramebuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCheckFramebufferStatus
 ////////////////////////////////////////////////////////////////////////////////
-type GlCheckFramebufferStatus_In struct {
-	binary.Generate
-	Target FramebufferTarget
-}
-type GlCheckFramebufferStatus_Out struct {
-	binary.Generate
-	Result FramebufferStatus
-}
 type GlCheckFramebufferStatus struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCheckFramebufferStatus_In
-	Out     GlCheckFramebufferStatus_Out
+	InContext atom.ContextID
+	Target    FramebufferTarget
+	Result    FramebufferStatus
 }
 
 func (c *GlCheckFramebufferStatus) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCheckFramebufferStatus(",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlCheckFramebufferStatus) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID {
 	return 112
@@ -5636,33 +4732,25 @@ func (GlCheckFramebufferStatus) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteFramebuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteFramebuffers_In struct {
-	binary.Generate
-	Count        int32
-	Framebuffers FramebufferIdArray
-}
-type GlDeleteFramebuffers_Out struct {
-	binary.Generate
-}
 type GlDeleteFramebuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteFramebuffers_In
-	Out     GlDeleteFramebuffers_Out
+	InContext    atom.ContextID
+	Count        int32
+	Framebuffers FramebufferIdArray
 }
 
 func (c *GlDeleteFramebuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteFramebuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Framebuffers),
+		fmt.Sprintf("%v", c.Framebuffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteFramebuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteFramebuffers) TypeID() atom.TypeID {
 	return 113
@@ -5675,32 +4763,24 @@ func (GlDeleteFramebuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsFramebuffer_In struct {
-	binary.Generate
-	Framebuffer FramebufferId
-}
-type GlIsFramebuffer_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsFramebuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsFramebuffer_In
-	Out     GlIsFramebuffer_Out
+	InContext   atom.ContextID
+	Framebuffer FramebufferId
+	Result      bool
 }
 
 func (c *GlIsFramebuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsFramebuffer(",
-		fmt.Sprintf("framebuffer:%v", c.In.Framebuffer),
+		fmt.Sprintf("framebuffer:%v", c.Framebuffer),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsFramebuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsFramebuffer) TypeID() atom.TypeID {
 	return 114
@@ -5713,33 +4793,25 @@ func (GlIsFramebuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenRenderbuffers_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenRenderbuffers_Out struct {
-	binary.Generate
-	Renderbuffers RenderbufferIdArray
-}
 type GlGenRenderbuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenRenderbuffers_In
-	Out     GlGenRenderbuffers_Out
+	InContext     atom.ContextID
+	Count         int32
+	Renderbuffers RenderbufferIdArray
 }
 
 func (c *GlGenRenderbuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenRenderbuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Renderbuffers),
+		fmt.Sprintf("%v", c.Renderbuffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenRenderbuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenRenderbuffers) TypeID() atom.TypeID {
 	return 115
@@ -5752,33 +4824,25 @@ func (GlGenRenderbuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindRenderbuffer_In struct {
-	binary.Generate
-	Target       RenderbufferTarget
-	Renderbuffer RenderbufferId
-}
-type GlBindRenderbuffer_Out struct {
-	binary.Generate
-}
 type GlBindRenderbuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindRenderbuffer_In
-	Out     GlBindRenderbuffer_Out
+	InContext    atom.ContextID
+	Target       RenderbufferTarget
+	Renderbuffer RenderbufferId
 }
 
 func (c *GlBindRenderbuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindRenderbuffer(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("renderbuffer:%v", c.In.Renderbuffer),
+		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindRenderbuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindRenderbuffer) TypeID() atom.TypeID {
 	return 116
@@ -5791,39 +4855,31 @@ func (GlBindRenderbuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorage
 ////////////////////////////////////////////////////////////////////////////////
-type GlRenderbufferStorage_In struct {
-	binary.Generate
-	Target RenderbufferTarget
-	Format RenderbufferFormat
-	Width  int32
-	Height int32
-}
-type GlRenderbufferStorage_Out struct {
-	binary.Generate
-}
 type GlRenderbufferStorage struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlRenderbufferStorage_In
-	Out     GlRenderbufferStorage_Out
+	InContext atom.ContextID
+	Target    RenderbufferTarget
+	Format    RenderbufferFormat
+	Width     int32
+	Height    int32
 }
 
 func (c *GlRenderbufferStorage) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glRenderbufferStorage(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlRenderbufferStorage) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlRenderbufferStorage) TypeID() atom.TypeID {
 	return 117
@@ -5836,33 +4892,25 @@ func (GlRenderbufferStorage) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteRenderbuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteRenderbuffers_In struct {
-	binary.Generate
-	Count         int32
-	Renderbuffers RenderbufferIdArray
-}
-type GlDeleteRenderbuffers_Out struct {
-	binary.Generate
-}
 type GlDeleteRenderbuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteRenderbuffers_In
-	Out     GlDeleteRenderbuffers_Out
+	InContext     atom.ContextID
+	Count         int32
+	Renderbuffers RenderbufferIdArray
 }
 
 func (c *GlDeleteRenderbuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteRenderbuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Renderbuffers),
+		fmt.Sprintf("%v", c.Renderbuffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteRenderbuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID {
 	return 118
@@ -5875,32 +4923,24 @@ func (GlDeleteRenderbuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsRenderbuffer_In struct {
-	binary.Generate
-	Renderbuffer RenderbufferId
-}
-type GlIsRenderbuffer_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsRenderbuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsRenderbuffer_In
-	Out     GlIsRenderbuffer_Out
+	InContext    atom.ContextID
+	Renderbuffer RenderbufferId
+	Result       bool
 }
 
 func (c *GlIsRenderbuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsRenderbuffer(",
-		fmt.Sprintf("renderbuffer:%v", c.In.Renderbuffer),
+		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsRenderbuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsRenderbuffer) TypeID() atom.TypeID {
 	return 119
@@ -5913,36 +4953,28 @@ func (GlIsRenderbuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetRenderbufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetRenderbufferParameteriv_In struct {
-	binary.Generate
-	Target    RenderbufferTarget
-	Parameter RenderbufferParameter
-}
-type GlGetRenderbufferParameteriv_Out struct {
-	binary.Generate
-	Values S32Array
-}
 type GlGetRenderbufferParameteriv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetRenderbufferParameteriv_In
-	Out     GlGetRenderbufferParameteriv_Out
+	InContext atom.ContextID
+	Target    RenderbufferTarget
+	Parameter RenderbufferParameter
+	Values    S32Array
 }
 
 func (c *GlGetRenderbufferParameteriv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetRenderbufferParameteriv(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetRenderbufferParameteriv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID {
 	return 120
@@ -5955,33 +4987,25 @@ func (GlGetRenderbufferParameteriv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenBuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenBuffers_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenBuffers_Out struct {
-	binary.Generate
-	Buffers BufferIdArray
-}
 type GlGenBuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenBuffers_In
-	Out     GlGenBuffers_Out
+	InContext atom.ContextID
+	Count     int32
+	Buffers   BufferIdArray
 }
 
 func (c *GlGenBuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenBuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Buffers),
+		fmt.Sprintf("%v", c.Buffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenBuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenBuffers) TypeID() atom.TypeID {
 	return 121
@@ -5994,33 +5018,25 @@ func (GlGenBuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindBuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlBindBuffer_In struct {
-	binary.Generate
-	Target BufferTarget
-	Buffer BufferId
-}
-type GlBindBuffer_Out struct {
-	binary.Generate
-}
 type GlBindBuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBindBuffer_In
-	Out     GlBindBuffer_Out
+	InContext atom.ContextID
+	Target    BufferTarget
+	Buffer    BufferId
 }
 
 func (c *GlBindBuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBindBuffer(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("buffer:%v", c.In.Buffer),
+		fmt.Sprintf("buffer:%v", c.Buffer),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBindBuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBindBuffer) TypeID() atom.TypeID {
 	return 122
@@ -6033,39 +5049,31 @@ func (GlBindBuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferData
 ////////////////////////////////////////////////////////////////////////////////
-type GlBufferData_In struct {
-	binary.Generate
-	Target BufferTarget
-	Size   int32
-	Data   BufferDataPointer
-	Usage  BufferUsage
-}
-type GlBufferData_Out struct {
-	binary.Generate
-}
 type GlBufferData struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBufferData_In
-	Out     GlBufferData_Out
+	InContext atom.ContextID
+	Target    BufferTarget
+	Size      int32
+	Data      BufferDataPointer
+	Usage     BufferUsage
 }
 
 func (c *GlBufferData) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBufferData(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("size:%v", c.In.Size),
+		fmt.Sprintf("size:%v", c.Size),
 		", ",
-		fmt.Sprintf("data:%v", c.In.Data),
+		fmt.Sprintf("data:%v", c.Data),
 		", ",
-		c.In.Usage.String(),
+		c.Usage.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBufferData) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBufferData) TypeID() atom.TypeID {
 	return 123
@@ -6078,39 +5086,31 @@ func (GlBufferData) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferSubData
 ////////////////////////////////////////////////////////////////////////////////
-type GlBufferSubData_In struct {
-	binary.Generate
-	Target BufferTarget
-	Offset int32
-	Size   int32
-	Data   memory.Pointer
-}
-type GlBufferSubData_Out struct {
-	binary.Generate
-}
 type GlBufferSubData struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBufferSubData_In
-	Out     GlBufferSubData_Out
+	InContext atom.ContextID
+	Target    BufferTarget
+	Offset    int32
+	Size      int32
+	Data      memory.Pointer
 }
 
 func (c *GlBufferSubData) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBufferSubData(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("offset:%v", c.In.Offset),
+		fmt.Sprintf("offset:%v", c.Offset),
 		", ",
-		fmt.Sprintf("size:%v", c.In.Size),
+		fmt.Sprintf("size:%v", c.Size),
 		", ",
-		fmt.Sprintf("0x%x", c.In.Data),
+		fmt.Sprintf("0x%x", c.Data),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBufferSubData) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBufferSubData) TypeID() atom.TypeID {
 	return 124
@@ -6123,33 +5123,25 @@ func (GlBufferSubData) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteBuffers
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteBuffers_In struct {
-	binary.Generate
-	Count   int32
-	Buffers BufferIdArray
-}
-type GlDeleteBuffers_Out struct {
-	binary.Generate
-}
 type GlDeleteBuffers struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteBuffers_In
-	Out     GlDeleteBuffers_Out
+	InContext atom.ContextID
+	Count     int32
+	Buffers   BufferIdArray
 }
 
 func (c *GlDeleteBuffers) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteBuffers(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Buffers),
+		fmt.Sprintf("%v", c.Buffers),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteBuffers) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteBuffers) TypeID() atom.TypeID {
 	return 125
@@ -6162,32 +5154,24 @@ func (GlDeleteBuffers) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsBuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsBuffer_In struct {
-	binary.Generate
-	Buffer BufferId
-}
-type GlIsBuffer_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsBuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsBuffer_In
-	Out     GlIsBuffer_Out
+	InContext atom.ContextID
+	Buffer    BufferId
+	Result    bool
 }
 
 func (c *GlIsBuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsBuffer(",
-		fmt.Sprintf("buffer:%v", c.In.Buffer),
+		fmt.Sprintf("buffer:%v", c.Buffer),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsBuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsBuffer) TypeID() atom.TypeID {
 	return 126
@@ -6200,36 +5184,28 @@ func (GlIsBuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBufferParameteriv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetBufferParameteriv_In struct {
-	binary.Generate
-	Target    BufferTarget
-	Parameter BufferParameter
-}
-type GlGetBufferParameteriv_Out struct {
-	binary.Generate
-	Value int32
-}
 type GlGetBufferParameteriv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetBufferParameteriv_In
-	Out     GlGetBufferParameteriv_Out
+	InContext atom.ContextID
+	Target    BufferTarget
+	Parameter BufferParameter
+	Value     int32
 }
 
 func (c *GlGetBufferParameteriv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetBufferParameteriv(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetBufferParameteriv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetBufferParameteriv) TypeID() atom.TypeID {
 	return 127
@@ -6242,32 +5218,24 @@ func (GlGetBufferParameteriv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlCreateShader_In struct {
-	binary.Generate
-	Type ShaderType
-}
-type GlCreateShader_Out struct {
-	binary.Generate
-	Result ShaderId
-}
 type GlCreateShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCreateShader_In
-	Out     GlCreateShader_Out
+	InContext atom.ContextID
+	Type      ShaderType
+	Result    ShaderId
 }
 
 func (c *GlCreateShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCreateShader(",
-		c.In.Type.String(),
+		c.Type.String(),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlCreateShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCreateShader) TypeID() atom.TypeID {
 	return 128
@@ -6280,30 +5248,22 @@ func (GlCreateShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteShader_In struct {
-	binary.Generate
-	Shader ShaderId
-}
-type GlDeleteShader_Out struct {
-	binary.Generate
-}
 type GlDeleteShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteShader_In
-	Out     GlDeleteShader_Out
+	InContext atom.ContextID
+	Shader    ShaderId
 }
 
 func (c *GlDeleteShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteShader(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteShader) TypeID() atom.TypeID {
 	return 129
@@ -6316,39 +5276,31 @@ func (GlDeleteShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderSource
 ////////////////////////////////////////////////////////////////////////////////
-type GlShaderSource_In struct {
-	binary.Generate
-	Shader ShaderId
-	Count  int32
-	Source StringArray
-	Length S32Array
-}
-type GlShaderSource_Out struct {
-	binary.Generate
-}
 type GlShaderSource struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlShaderSource_In
-	Out     GlShaderSource_Out
+	InContext atom.ContextID
+	Shader    ShaderId
+	Count     int32
+	Source    StringArray
+	Length    S32Array
 }
 
 func (c *GlShaderSource) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glShaderSource(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Source),
+		fmt.Sprintf("%v", c.Source),
 		", ",
-		fmt.Sprintf("%v", c.In.Length),
+		fmt.Sprintf("%v", c.Length),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlShaderSource) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlShaderSource) TypeID() atom.TypeID {
 	return 130
@@ -6361,42 +5313,34 @@ func (GlShaderSource) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderBinary
 ////////////////////////////////////////////////////////////////////////////////
-type GlShaderBinary_In struct {
+type GlShaderBinary struct {
 	binary.Generate
+	InContext    atom.ContextID
 	Count        int32
 	Shaders      ShaderIdArray
 	BinaryFormat uint32
 	Binary       memory.Pointer
 	BinarySize   int32
 }
-type GlShaderBinary_Out struct {
-	binary.Generate
-}
-type GlShaderBinary struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlShaderBinary_In
-	Out     GlShaderBinary_Out
-}
 
 func (c *GlShaderBinary) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glShaderBinary(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Shaders),
+		fmt.Sprintf("%v", c.Shaders),
 		", ",
-		fmt.Sprintf("binary_format:%v", c.In.BinaryFormat),
+		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
 		", ",
-		fmt.Sprintf("0x%x", c.In.Binary),
+		fmt.Sprintf("0x%x", c.Binary),
 		", ",
-		fmt.Sprintf("binary_size:%v", c.In.BinarySize),
+		fmt.Sprintf("binary_size:%v", c.BinarySize),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlShaderBinary) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlShaderBinary) TypeID() atom.TypeID {
 	return 131
@@ -6409,39 +5353,31 @@ func (GlShaderBinary) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderInfoLog
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetShaderInfoLog_In struct {
-	binary.Generate
-	Shader       ShaderId
-	BufferLength int32
-}
-type GlGetShaderInfoLog_Out struct {
-	binary.Generate
-	StringLengthWritten int32
-	Info                string
-}
 type GlGetShaderInfoLog struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetShaderInfoLog_In
-	Out     GlGetShaderInfoLog_Out
+	InContext           atom.ContextID
+	Shader              ShaderId
+	BufferLength        int32
+	StringLengthWritten int32
+	Info                string
 }
 
 func (c *GlGetShaderInfoLog) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetShaderInfoLog(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 		", ",
-		fmt.Sprintf("buffer_length:%v", c.In.BufferLength),
+		fmt.Sprintf("buffer_length:%v", c.BufferLength),
 		", ",
-		fmt.Sprintf("string_length_written:%v", c.Out.StringLengthWritten),
+		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
 		", ",
-		fmt.Sprintf("info:%v", c.Out.Info),
+		fmt.Sprintf("info:%v", c.Info),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetShaderInfoLog) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetShaderInfoLog) TypeID() atom.TypeID {
 	return 132
@@ -6454,39 +5390,31 @@ func (GlGetShaderInfoLog) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderSource
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetShaderSource_In struct {
-	binary.Generate
-	Shader       ShaderId
-	BufferLength int32
-}
-type GlGetShaderSource_Out struct {
-	binary.Generate
-	StringLengthWritten int32
-	Source              string
-}
 type GlGetShaderSource struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetShaderSource_In
-	Out     GlGetShaderSource_Out
+	InContext           atom.ContextID
+	Shader              ShaderId
+	BufferLength        int32
+	StringLengthWritten int32
+	Source              string
 }
 
 func (c *GlGetShaderSource) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetShaderSource(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 		", ",
-		fmt.Sprintf("buffer_length:%v", c.In.BufferLength),
+		fmt.Sprintf("buffer_length:%v", c.BufferLength),
 		", ",
-		fmt.Sprintf("string_length_written:%v", c.Out.StringLengthWritten),
+		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
 		", ",
-		fmt.Sprintf("source:%v", c.Out.Source),
+		fmt.Sprintf("source:%v", c.Source),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetShaderSource) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetShaderSource) TypeID() atom.TypeID {
 	return 133
@@ -6499,17 +5427,9 @@ func (GlGetShaderSource) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlReleaseShaderCompiler
 ////////////////////////////////////////////////////////////////////////////////
-type GlReleaseShaderCompiler_In struct {
-	binary.Generate
-}
-type GlReleaseShaderCompiler_Out struct {
-	binary.Generate
-}
 type GlReleaseShaderCompiler struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlReleaseShaderCompiler_In
-	Out     GlReleaseShaderCompiler_Out
+	InContext atom.ContextID
 }
 
 func (c *GlReleaseShaderCompiler) String() string {
@@ -6519,7 +5439,7 @@ func (c *GlReleaseShaderCompiler) String() string {
 	return strings.Join(parts, "")
 }
 func (c *GlReleaseShaderCompiler) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID {
 	return 134
@@ -6532,30 +5452,22 @@ func (GlReleaseShaderCompiler) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompileShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlCompileShader_In struct {
-	binary.Generate
-	Shader ShaderId
-}
-type GlCompileShader_Out struct {
-	binary.Generate
-}
 type GlCompileShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCompileShader_In
-	Out     GlCompileShader_Out
+	InContext atom.ContextID
+	Shader    ShaderId
 }
 
 func (c *GlCompileShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCompileShader(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCompileShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCompileShader) TypeID() atom.TypeID {
 	return 135
@@ -6568,32 +5480,24 @@ func (GlCompileShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsShader_In struct {
-	binary.Generate
-	Shader ShaderId
-}
-type GlIsShader_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsShader_In
-	Out     GlIsShader_Out
+	InContext atom.ContextID
+	Shader    ShaderId
+	Result    bool
 }
 
 func (c *GlIsShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsShader(",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsShader) TypeID() atom.TypeID {
 	return 136
@@ -6606,29 +5510,21 @@ func (GlIsShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlCreateProgram_In struct {
-	binary.Generate
-}
-type GlCreateProgram_Out struct {
-	binary.Generate
-	Result ProgramId
-}
 type GlCreateProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCreateProgram_In
-	Out     GlCreateProgram_Out
+	InContext atom.ContextID
+	Result    ProgramId
 }
 
 func (c *GlCreateProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCreateProgram(")
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlCreateProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCreateProgram) TypeID() atom.TypeID {
 	return 137
@@ -6641,30 +5537,22 @@ func (GlCreateProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteProgram_In struct {
-	binary.Generate
-	Program ProgramId
-}
-type GlDeleteProgram_Out struct {
-	binary.Generate
-}
 type GlDeleteProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteProgram_In
-	Out     GlDeleteProgram_Out
+	InContext atom.ContextID
+	Program   ProgramId
 }
 
 func (c *GlDeleteProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteProgram(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteProgram) TypeID() atom.TypeID {
 	return 138
@@ -6677,33 +5565,25 @@ func (GlDeleteProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlAttachShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlAttachShader_In struct {
-	binary.Generate
-	Program ProgramId
-	Shader  ShaderId
-}
-type GlAttachShader_Out struct {
-	binary.Generate
-}
 type GlAttachShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlAttachShader_In
-	Out     GlAttachShader_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Shader    ShaderId
 }
 
 func (c *GlAttachShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glAttachShader(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlAttachShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlAttachShader) TypeID() atom.TypeID {
 	return 139
@@ -6716,33 +5596,25 @@ func (GlAttachShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDetachShader
 ////////////////////////////////////////////////////////////////////////////////
-type GlDetachShader_In struct {
-	binary.Generate
-	Program ProgramId
-	Shader  ShaderId
-}
-type GlDetachShader_Out struct {
-	binary.Generate
-}
 type GlDetachShader struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDetachShader_In
-	Out     GlDetachShader_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Shader    ShaderId
 }
 
 func (c *GlDetachShader) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDetachShader(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("shader:%v", c.In.Shader),
+		fmt.Sprintf("shader:%v", c.Shader),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDetachShader) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDetachShader) TypeID() atom.TypeID {
 	return 140
@@ -6755,39 +5627,31 @@ func (GlDetachShader) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttachedShaders
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetAttachedShaders_In struct {
-	binary.Generate
-	Program      ProgramId
-	BufferLength int32
-}
-type GlGetAttachedShaders_Out struct {
-	binary.Generate
-	ShadersLengthWritten int32
-	Shaders              ShaderIdArray
-}
 type GlGetAttachedShaders struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetAttachedShaders_In
-	Out     GlGetAttachedShaders_Out
+	InContext            atom.ContextID
+	Program              ProgramId
+	BufferLength         int32
+	ShadersLengthWritten int32
+	Shaders              ShaderIdArray
 }
 
 func (c *GlGetAttachedShaders) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetAttachedShaders(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("buffer_length:%v", c.In.BufferLength),
+		fmt.Sprintf("buffer_length:%v", c.BufferLength),
 		", ",
-		fmt.Sprintf("shaders_length_written:%v", c.Out.ShadersLengthWritten),
+		fmt.Sprintf("shaders_length_written:%v", c.ShadersLengthWritten),
 		", ",
-		fmt.Sprintf("%v", c.Out.Shaders),
+		fmt.Sprintf("%v", c.Shaders),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetAttachedShaders) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetAttachedShaders) TypeID() atom.TypeID {
 	return 141
@@ -6800,30 +5664,22 @@ func (GlGetAttachedShaders) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlLinkProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlLinkProgram_In struct {
-	binary.Generate
-	Program ProgramId
-}
-type GlLinkProgram_Out struct {
-	binary.Generate
-}
 type GlLinkProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlLinkProgram_In
-	Out     GlLinkProgram_Out
+	InContext atom.ContextID
+	Program   ProgramId
 }
 
 func (c *GlLinkProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glLinkProgram(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlLinkProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlLinkProgram) TypeID() atom.TypeID {
 	return 142
@@ -6836,39 +5692,31 @@ func (GlLinkProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramInfoLog
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetProgramInfoLog_In struct {
-	binary.Generate
-	Program      ProgramId
-	BufferLength int32
-}
-type GlGetProgramInfoLog_Out struct {
-	binary.Generate
-	StringLengthWritten int32
-	Info                string
-}
 type GlGetProgramInfoLog struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetProgramInfoLog_In
-	Out     GlGetProgramInfoLog_Out
+	InContext           atom.ContextID
+	Program             ProgramId
+	BufferLength        int32
+	StringLengthWritten int32
+	Info                string
 }
 
 func (c *GlGetProgramInfoLog) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetProgramInfoLog(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 		", ",
-		fmt.Sprintf("buffer_length:%v", c.In.BufferLength),
+		fmt.Sprintf("buffer_length:%v", c.BufferLength),
 		", ",
-		fmt.Sprintf("string_length_written:%v", c.Out.StringLengthWritten),
+		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
 		", ",
-		fmt.Sprintf("info:%v", c.Out.Info),
+		fmt.Sprintf("info:%v", c.Info),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetProgramInfoLog) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetProgramInfoLog) TypeID() atom.TypeID {
 	return 143
@@ -6881,30 +5729,22 @@ func (GlGetProgramInfoLog) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUseProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlUseProgram_In struct {
-	binary.Generate
-	Program ProgramId
-}
-type GlUseProgram_Out struct {
-	binary.Generate
-}
 type GlUseProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUseProgram_In
-	Out     GlUseProgram_Out
+	InContext atom.ContextID
+	Program   ProgramId
 }
 
 func (c *GlUseProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUseProgram(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUseProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUseProgram) TypeID() atom.TypeID {
 	return 144
@@ -6917,32 +5757,24 @@ func (GlUseProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsProgram_In struct {
-	binary.Generate
-	Program ProgramId
-}
-type GlIsProgram_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsProgram_In
-	Out     GlIsProgram_Out
+	InContext atom.ContextID
+	Program   ProgramId
+	Result    bool
 }
 
 func (c *GlIsProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsProgram(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsProgram) TypeID() atom.TypeID {
 	return 145
@@ -6955,30 +5787,22 @@ func (GlIsProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlValidateProgram
 ////////////////////////////////////////////////////////////////////////////////
-type GlValidateProgram_In struct {
-	binary.Generate
-	Program ProgramId
-}
-type GlValidateProgram_Out struct {
-	binary.Generate
-}
 type GlValidateProgram struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlValidateProgram_In
-	Out     GlValidateProgram_Out
+	InContext atom.ContextID
+	Program   ProgramId
 }
 
 func (c *GlValidateProgram) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glValidateProgram(",
-		fmt.Sprintf("program:%v", c.In.Program),
+		fmt.Sprintf("program:%v", c.Program),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlValidateProgram) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlValidateProgram) TypeID() atom.TypeID {
 	return 146
@@ -6991,39 +5815,31 @@ func (GlValidateProgram) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearColor
 ////////////////////////////////////////////////////////////////////////////////
-type GlClearColor_In struct {
-	binary.Generate
-	R float32
-	G float32
-	B float32
-	A float32
-}
-type GlClearColor_Out struct {
-	binary.Generate
-}
 type GlClearColor struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlClearColor_In
-	Out     GlClearColor_Out
+	InContext atom.ContextID
+	R         float32
+	G         float32
+	B         float32
+	A         float32
 }
 
 func (c *GlClearColor) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glClearColor(",
-		fmt.Sprintf("r:%v", c.In.R),
+		fmt.Sprintf("r:%v", c.R),
 		", ",
-		fmt.Sprintf("g:%v", c.In.G),
+		fmt.Sprintf("g:%v", c.G),
 		", ",
-		fmt.Sprintf("b:%v", c.In.B),
+		fmt.Sprintf("b:%v", c.B),
 		", ",
-		fmt.Sprintf("a:%v", c.In.A),
+		fmt.Sprintf("a:%v", c.A),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlClearColor) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlClearColor) TypeID() atom.TypeID {
 	return 147
@@ -7036,30 +5852,22 @@ func (GlClearColor) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearDepthf
 ////////////////////////////////////////////////////////////////////////////////
-type GlClearDepthf_In struct {
-	binary.Generate
-	Depth float32
-}
-type GlClearDepthf_Out struct {
-	binary.Generate
-}
 type GlClearDepthf struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlClearDepthf_In
-	Out     GlClearDepthf_Out
+	InContext atom.ContextID
+	Depth     float32
 }
 
 func (c *GlClearDepthf) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glClearDepthf(",
-		fmt.Sprintf("depth:%v", c.In.Depth),
+		fmt.Sprintf("depth:%v", c.Depth),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlClearDepthf) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlClearDepthf) TypeID() atom.TypeID {
 	return 148
@@ -7072,30 +5880,22 @@ func (GlClearDepthf) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearStencil
 ////////////////////////////////////////////////////////////////////////////////
-type GlClearStencil_In struct {
-	binary.Generate
-	Stencil int32
-}
-type GlClearStencil_Out struct {
-	binary.Generate
-}
 type GlClearStencil struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlClearStencil_In
-	Out     GlClearStencil_Out
+	InContext atom.ContextID
+	Stencil   int32
 }
 
 func (c *GlClearStencil) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glClearStencil(",
-		fmt.Sprintf("stencil:%v", c.In.Stencil),
+		fmt.Sprintf("stencil:%v", c.Stencil),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlClearStencil) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlClearStencil) TypeID() atom.TypeID {
 	return 149
@@ -7108,30 +5908,22 @@ func (GlClearStencil) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlClear
 ////////////////////////////////////////////////////////////////////////////////
-type GlClear_In struct {
-	binary.Generate
-	Mask ClearMask
-}
-type GlClear_Out struct {
-	binary.Generate
-}
 type GlClear struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlClear_In
-	Out     GlClear_Out
+	InContext atom.ContextID
+	Mask      ClearMask
 }
 
 func (c *GlClear) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glClear(",
-		c.In.Mask.String(),
+		c.Mask.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlClear) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlClear) TypeID() atom.TypeID {
 	return 150
@@ -7144,30 +5936,22 @@ func (GlClear) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlCullFace
 ////////////////////////////////////////////////////////////////////////////////
-type GlCullFace_In struct {
-	binary.Generate
-	Mode FaceMode
-}
-type GlCullFace_Out struct {
-	binary.Generate
-}
 type GlCullFace struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlCullFace_In
-	Out     GlCullFace_Out
+	InContext atom.ContextID
+	Mode      FaceMode
 }
 
 func (c *GlCullFace) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glCullFace(",
-		c.In.Mode.String(),
+		c.Mode.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlCullFace) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlCullFace) TypeID() atom.TypeID {
 	return 151
@@ -7180,33 +5964,25 @@ func (GlCullFace) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlPolygonOffset
 ////////////////////////////////////////////////////////////////////////////////
-type GlPolygonOffset_In struct {
-	binary.Generate
-	ScaleFactor float32
-	Units       float32
-}
-type GlPolygonOffset_Out struct {
-	binary.Generate
-}
 type GlPolygonOffset struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlPolygonOffset_In
-	Out     GlPolygonOffset_Out
+	InContext   atom.ContextID
+	ScaleFactor float32
+	Units       float32
 }
 
 func (c *GlPolygonOffset) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glPolygonOffset(",
-		fmt.Sprintf("scale_factor:%v", c.In.ScaleFactor),
+		fmt.Sprintf("scale_factor:%v", c.ScaleFactor),
 		", ",
-		fmt.Sprintf("units:%v", c.In.Units),
+		fmt.Sprintf("units:%v", c.Units),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlPolygonOffset) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlPolygonOffset) TypeID() atom.TypeID {
 	return 152
@@ -7219,30 +5995,22 @@ func (GlPolygonOffset) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlLineWidth
 ////////////////////////////////////////////////////////////////////////////////
-type GlLineWidth_In struct {
-	binary.Generate
-	Width float32
-}
-type GlLineWidth_Out struct {
-	binary.Generate
-}
 type GlLineWidth struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlLineWidth_In
-	Out     GlLineWidth_Out
+	InContext atom.ContextID
+	Width     float32
 }
 
 func (c *GlLineWidth) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glLineWidth(",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlLineWidth) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlLineWidth) TypeID() atom.TypeID {
 	return 153
@@ -7255,33 +6023,25 @@ func (GlLineWidth) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlSampleCoverage
 ////////////////////////////////////////////////////////////////////////////////
-type GlSampleCoverage_In struct {
-	binary.Generate
-	Value  float32
-	Invert bool
-}
-type GlSampleCoverage_Out struct {
-	binary.Generate
-}
 type GlSampleCoverage struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlSampleCoverage_In
-	Out     GlSampleCoverage_Out
+	InContext atom.ContextID
+	Value     float32
+	Invert    bool
 }
 
 func (c *GlSampleCoverage) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glSampleCoverage(",
-		fmt.Sprintf("value:%v", c.In.Value),
+		fmt.Sprintf("value:%v", c.Value),
 		", ",
-		fmt.Sprintf("invert:%v", c.In.Invert),
+		fmt.Sprintf("invert:%v", c.Invert),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlSampleCoverage) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlSampleCoverage) TypeID() atom.TypeID {
 	return 154
@@ -7294,33 +6054,25 @@ func (GlSampleCoverage) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlHint
 ////////////////////////////////////////////////////////////////////////////////
-type GlHint_In struct {
-	binary.Generate
-	Target HintTarget
-	Mode   HintMode
-}
-type GlHint_Out struct {
-	binary.Generate
-}
 type GlHint struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlHint_In
-	Out     GlHint_Out
+	InContext atom.ContextID
+	Target    HintTarget
+	Mode      HintMode
 }
 
 func (c *GlHint) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glHint(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Mode.String(),
+		c.Mode.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlHint) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlHint) TypeID() atom.TypeID {
 	return 155
@@ -7333,39 +6085,31 @@ func (GlHint) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferRenderbuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlFramebufferRenderbuffer_In struct {
+type GlFramebufferRenderbuffer struct {
 	binary.Generate
+	InContext             atom.ContextID
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
 	RenderbufferTarget    RenderbufferTarget
 	Renderbuffer          RenderbufferId
 }
-type GlFramebufferRenderbuffer_Out struct {
-	binary.Generate
-}
-type GlFramebufferRenderbuffer struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlFramebufferRenderbuffer_In
-	Out     GlFramebufferRenderbuffer_Out
-}
 
 func (c *GlFramebufferRenderbuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glFramebufferRenderbuffer(",
-		c.In.FramebufferTarget.String(),
+		c.FramebufferTarget.String(),
 		", ",
-		c.In.FramebufferAttachment.String(),
+		c.FramebufferAttachment.String(),
 		", ",
-		c.In.RenderbufferTarget.String(),
+		c.RenderbufferTarget.String(),
 		", ",
-		fmt.Sprintf("renderbuffer:%v", c.In.Renderbuffer),
+		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlFramebufferRenderbuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID {
 	return 156
@@ -7378,42 +6122,34 @@ func (GlFramebufferRenderbuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferTexture2D
 ////////////////////////////////////////////////////////////////////////////////
-type GlFramebufferTexture2D_In struct {
+type GlFramebufferTexture2D struct {
 	binary.Generate
+	InContext             atom.ContextID
 	FramebufferTarget     FramebufferTarget
 	FramebufferAttachment FramebufferAttachment
 	TextureTarget         TextureImageTarget
 	Texture               TextureId
 	Level                 int32
 }
-type GlFramebufferTexture2D_Out struct {
-	binary.Generate
-}
-type GlFramebufferTexture2D struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlFramebufferTexture2D_In
-	Out     GlFramebufferTexture2D_Out
-}
 
 func (c *GlFramebufferTexture2D) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glFramebufferTexture2D(",
-		c.In.FramebufferTarget.String(),
+		c.FramebufferTarget.String(),
 		", ",
-		c.In.FramebufferAttachment.String(),
+		c.FramebufferAttachment.String(),
 		", ",
-		c.In.TextureTarget.String(),
+		c.TextureTarget.String(),
 		", ",
-		fmt.Sprintf("texture:%v", c.In.Texture),
+		fmt.Sprintf("texture:%v", c.Texture),
 		", ",
-		fmt.Sprintf("level:%v", c.In.Level),
+		fmt.Sprintf("level:%v", c.Level),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlFramebufferTexture2D) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlFramebufferTexture2D) TypeID() atom.TypeID {
 	return 157
@@ -7426,39 +6162,31 @@ func (GlFramebufferTexture2D) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFramebufferAttachmentParameteriv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetFramebufferAttachmentParameteriv_In struct {
+type GlGetFramebufferAttachmentParameteriv struct {
 	binary.Generate
+	InContext         atom.ContextID
 	FramebufferTarget FramebufferTarget
 	Attachment        FramebufferAttachment
 	Parameter         FramebufferAttachmentParameter
-}
-type GlGetFramebufferAttachmentParameteriv_Out struct {
-	binary.Generate
-	Value S32Array
-}
-type GlGetFramebufferAttachmentParameteriv struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlGetFramebufferAttachmentParameteriv_In
-	Out     GlGetFramebufferAttachmentParameteriv_Out
+	Value             S32Array
 }
 
 func (c *GlGetFramebufferAttachmentParameteriv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetFramebufferAttachmentParameteriv(",
-		c.In.FramebufferTarget.String(),
+		c.FramebufferTarget.String(),
 		", ",
-		c.In.Attachment.String(),
+		c.Attachment.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Value),
+		fmt.Sprintf("%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetFramebufferAttachmentParameteriv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID {
 	return 158
@@ -7471,39 +6199,31 @@ func (GlGetFramebufferAttachmentParameteriv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawElements
 ////////////////////////////////////////////////////////////////////////////////
-type GlDrawElements_In struct {
+type GlDrawElements struct {
 	binary.Generate
+	InContext    atom.ContextID
 	DrawMode     DrawMode
 	ElementCount int32
 	IndicesType  IndicesType
 	Indices      IndicesPointer
 }
-type GlDrawElements_Out struct {
-	binary.Generate
-}
-type GlDrawElements struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlDrawElements_In
-	Out     GlDrawElements_Out
-}
 
 func (c *GlDrawElements) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDrawElements(",
-		c.In.DrawMode.String(),
+		c.DrawMode.String(),
 		", ",
-		fmt.Sprintf("element_count:%v", c.In.ElementCount),
+		fmt.Sprintf("element_count:%v", c.ElementCount),
 		", ",
-		c.In.IndicesType.String(),
+		c.IndicesType.String(),
 		", ",
-		fmt.Sprintf("indices:%v", c.In.Indices),
+		fmt.Sprintf("indices:%v", c.Indices),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDrawElements) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDrawElements) TypeID() atom.TypeID {
 	return 159
@@ -7516,36 +6236,28 @@ func (GlDrawElements) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawArrays
 ////////////////////////////////////////////////////////////////////////////////
-type GlDrawArrays_In struct {
+type GlDrawArrays struct {
 	binary.Generate
+	InContext  atom.ContextID
 	DrawMode   DrawMode
 	FirstIndex int32
 	IndexCount int32
-}
-type GlDrawArrays_Out struct {
-	binary.Generate
-}
-type GlDrawArrays struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlDrawArrays_In
-	Out     GlDrawArrays_Out
 }
 
 func (c *GlDrawArrays) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDrawArrays(",
-		c.In.DrawMode.String(),
+		c.DrawMode.String(),
 		", ",
-		fmt.Sprintf("first_index:%v", c.In.FirstIndex),
+		fmt.Sprintf("first_index:%v", c.FirstIndex),
 		", ",
-		fmt.Sprintf("index_count:%v", c.In.IndexCount),
+		fmt.Sprintf("index_count:%v", c.IndexCount),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDrawArrays) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDrawArrays) TypeID() atom.TypeID {
 	return 160
@@ -7558,17 +6270,9 @@ func (GlDrawArrays) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlFlush
 ////////////////////////////////////////////////////////////////////////////////
-type GlFlush_In struct {
-	binary.Generate
-}
-type GlFlush_Out struct {
-	binary.Generate
-}
 type GlFlush struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlFlush_In
-	Out     GlFlush_Out
+	InContext atom.ContextID
 }
 
 func (c *GlFlush) String() string {
@@ -7578,7 +6282,7 @@ func (c *GlFlush) String() string {
 	return strings.Join(parts, "")
 }
 func (c *GlFlush) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlFlush) TypeID() atom.TypeID {
 	return 161
@@ -7591,17 +6295,9 @@ func (GlFlush) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlFinish
 ////////////////////////////////////////////////////////////////////////////////
-type GlFinish_In struct {
-	binary.Generate
-}
-type GlFinish_Out struct {
-	binary.Generate
-}
 type GlFinish struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlFinish_In
-	Out     GlFinish_Out
+	InContext atom.ContextID
 }
 
 func (c *GlFinish) String() string {
@@ -7611,7 +6307,7 @@ func (c *GlFinish) String() string {
 	return strings.Join(parts, "")
 }
 func (c *GlFinish) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlFinish) TypeID() atom.TypeID {
 	return 162
@@ -7624,33 +6320,25 @@ func (GlFinish) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBooleanv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetBooleanv_In struct {
-	binary.Generate
-	Param StateVariable
-}
-type GlGetBooleanv_Out struct {
-	binary.Generate
-	Values BoolArray
-}
 type GlGetBooleanv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetBooleanv_In
-	Out     GlGetBooleanv_Out
+	InContext atom.ContextID
+	Param     StateVariable
+	Values    BoolArray
 }
 
 func (c *GlGetBooleanv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetBooleanv(",
-		c.In.Param.String(),
+		c.Param.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetBooleanv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetBooleanv) TypeID() atom.TypeID {
 	return 163
@@ -7663,33 +6351,25 @@ func (GlGetBooleanv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFloatv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetFloatv_In struct {
-	binary.Generate
-	Param StateVariable
-}
-type GlGetFloatv_Out struct {
-	binary.Generate
-	Values F32Array
-}
 type GlGetFloatv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetFloatv_In
-	Out     GlGetFloatv_Out
+	InContext atom.ContextID
+	Param     StateVariable
+	Values    F32Array
 }
 
 func (c *GlGetFloatv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetFloatv(",
-		c.In.Param.String(),
+		c.Param.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetFloatv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetFloatv) TypeID() atom.TypeID {
 	return 164
@@ -7702,33 +6382,25 @@ func (GlGetFloatv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetIntegerv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetIntegerv_In struct {
-	binary.Generate
-	Param StateVariable
-}
-type GlGetIntegerv_Out struct {
-	binary.Generate
-	Values S32Array
-}
 type GlGetIntegerv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetIntegerv_In
-	Out     GlGetIntegerv_Out
+	InContext atom.ContextID
+	Param     StateVariable
+	Values    S32Array
 }
 
 func (c *GlGetIntegerv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetIntegerv(",
-		c.In.Param.String(),
+		c.Param.String(),
 		", ",
-		fmt.Sprintf("%v", c.Out.Values),
+		fmt.Sprintf("%v", c.Values),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetIntegerv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetIntegerv) TypeID() atom.TypeID {
 	return 165
@@ -7741,32 +6413,24 @@ func (GlGetIntegerv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetString
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetString_In struct {
-	binary.Generate
-	Param StringConstant
-}
-type GlGetString_Out struct {
-	binary.Generate
-	Result string
-}
 type GlGetString struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetString_In
-	Out     GlGetString_Out
+	InContext atom.ContextID
+	Param     StringConstant
+	Result    string
 }
 
 func (c *GlGetString) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetString(",
-		c.In.Param.String(),
+		c.Param.String(),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlGetString) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetString) TypeID() atom.TypeID {
 	return 166
@@ -7779,30 +6443,22 @@ func (GlGetString) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnable
 ////////////////////////////////////////////////////////////////////////////////
-type GlEnable_In struct {
-	binary.Generate
-	Capability Capability
-}
-type GlEnable_Out struct {
-	binary.Generate
-}
 type GlEnable struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEnable_In
-	Out     GlEnable_Out
+	InContext  atom.ContextID
+	Capability Capability
 }
 
 func (c *GlEnable) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEnable(",
-		c.In.Capability.String(),
+		c.Capability.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEnable) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEnable) TypeID() atom.TypeID {
 	return 167
@@ -7815,30 +6471,22 @@ func (GlEnable) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisable
 ////////////////////////////////////////////////////////////////////////////////
-type GlDisable_In struct {
-	binary.Generate
-	Capability Capability
-}
-type GlDisable_Out struct {
-	binary.Generate
-}
 type GlDisable struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDisable_In
-	Out     GlDisable_Out
+	InContext  atom.ContextID
+	Capability Capability
 }
 
 func (c *GlDisable) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDisable(",
-		c.In.Capability.String(),
+		c.Capability.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDisable) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDisable) TypeID() atom.TypeID {
 	return 168
@@ -7851,32 +6499,24 @@ func (GlDisable) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsEnabled
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsEnabled_In struct {
-	binary.Generate
-	Capability Capability
-}
-type GlIsEnabled_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsEnabled struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsEnabled_In
-	Out     GlIsEnabled_Out
+	InContext  atom.ContextID
+	Capability Capability
+	Result     bool
 }
 
 func (c *GlIsEnabled) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsEnabled(",
-		c.In.Capability.String(),
+		c.Capability.String(),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsEnabled) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsEnabled) TypeID() atom.TypeID {
 	return 169
@@ -7889,41 +6529,33 @@ func (GlIsEnabled) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlMapBufferRange
 ////////////////////////////////////////////////////////////////////////////////
-type GlMapBufferRange_In struct {
-	binary.Generate
-	Target MapBufferTarget
-	Offset int32
-	Length int32
-	Access MapBufferRangeAccess
-}
-type GlMapBufferRange_Out struct {
-	binary.Generate
-	Result memory.Pointer
-}
 type GlMapBufferRange struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlMapBufferRange_In
-	Out     GlMapBufferRange_Out
+	InContext atom.ContextID
+	Target    MapBufferTarget
+	Offset    int32
+	Length    int32
+	Access    MapBufferRangeAccess
+	Result    memory.Pointer
 }
 
 func (c *GlMapBufferRange) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glMapBufferRange(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("offset:%v", c.In.Offset),
+		fmt.Sprintf("offset:%v", c.Offset),
 		", ",
-		fmt.Sprintf("length:%v", c.In.Length),
+		fmt.Sprintf("length:%v", c.Length),
 		", ",
-		c.In.Access.String(),
+		c.Access.String(),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlMapBufferRange) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlMapBufferRange) TypeID() atom.TypeID {
 	return 170
@@ -7936,30 +6568,22 @@ func (GlMapBufferRange) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlUnmapBuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlUnmapBuffer_In struct {
-	binary.Generate
-	Target MapBufferTarget
-}
-type GlUnmapBuffer_Out struct {
-	binary.Generate
-}
 type GlUnmapBuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlUnmapBuffer_In
-	Out     GlUnmapBuffer_Out
+	InContext atom.ContextID
+	Target    MapBufferTarget
 }
 
 func (c *GlUnmapBuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glUnmapBuffer(",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlUnmapBuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlUnmapBuffer) TypeID() atom.TypeID {
 	return 171
@@ -7972,36 +6596,28 @@ func (GlUnmapBuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlInvalidateFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlInvalidateFramebuffer_In struct {
+type GlInvalidateFramebuffer struct {
 	binary.Generate
+	InContext   atom.ContextID
 	Target      FramebufferTarget
 	Count       int32
 	Attachments FramebufferAttachmentArray
-}
-type GlInvalidateFramebuffer_Out struct {
-	binary.Generate
-}
-type GlInvalidateFramebuffer struct {
-	binary.Generate
-	Context atom.ContextID
-	In      GlInvalidateFramebuffer_In
-	Out     GlInvalidateFramebuffer_Out
 }
 
 func (c *GlInvalidateFramebuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glInvalidateFramebuffer(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Attachments),
+		fmt.Sprintf("%v", c.Attachments),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlInvalidateFramebuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID {
 	return 172
@@ -8014,42 +6630,34 @@ func (GlInvalidateFramebuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorageMultisample
 ////////////////////////////////////////////////////////////////////////////////
-type GlRenderbufferStorageMultisample_In struct {
-	binary.Generate
-	Target  RenderbufferTarget
-	Samples int32
-	Format  RenderbufferFormat
-	Width   int32
-	Height  int32
-}
-type GlRenderbufferStorageMultisample_Out struct {
-	binary.Generate
-}
 type GlRenderbufferStorageMultisample struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlRenderbufferStorageMultisample_In
-	Out     GlRenderbufferStorageMultisample_Out
+	InContext atom.ContextID
+	Target    RenderbufferTarget
+	Samples   int32
+	Format    RenderbufferFormat
+	Width     int32
+	Height    int32
 }
 
 func (c *GlRenderbufferStorageMultisample) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glRenderbufferStorageMultisample(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("samples:%v", c.In.Samples),
+		fmt.Sprintf("samples:%v", c.Samples),
 		", ",
-		c.In.Format.String(),
+		c.Format.String(),
 		", ",
-		fmt.Sprintf("width:%v", c.In.Width),
+		fmt.Sprintf("width:%v", c.Width),
 		", ",
-		fmt.Sprintf("height:%v", c.In.Height),
+		fmt.Sprintf("height:%v", c.Height),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlRenderbufferStorageMultisample) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID {
 	return 173
@@ -8062,57 +6670,49 @@ func (GlRenderbufferStorageMultisample) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlitFramebuffer
 ////////////////////////////////////////////////////////////////////////////////
-type GlBlitFramebuffer_In struct {
-	binary.Generate
-	SrcX0  int32
-	SrcY0  int32
-	SrcX1  int32
-	SrcY1  int32
-	DstX0  int32
-	DstY0  int32
-	DstX1  int32
-	DstY1  int32
-	Mask   ClearMask
-	Filter TextureFilterMode
-}
-type GlBlitFramebuffer_Out struct {
-	binary.Generate
-}
 type GlBlitFramebuffer struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBlitFramebuffer_In
-	Out     GlBlitFramebuffer_Out
+	InContext atom.ContextID
+	SrcX0     int32
+	SrcY0     int32
+	SrcX1     int32
+	SrcY1     int32
+	DstX0     int32
+	DstY0     int32
+	DstX1     int32
+	DstY1     int32
+	Mask      ClearMask
+	Filter    TextureFilterMode
 }
 
 func (c *GlBlitFramebuffer) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBlitFramebuffer(",
-		fmt.Sprintf("srcX0:%v", c.In.SrcX0),
+		fmt.Sprintf("srcX0:%v", c.SrcX0),
 		", ",
-		fmt.Sprintf("srcY0:%v", c.In.SrcY0),
+		fmt.Sprintf("srcY0:%v", c.SrcY0),
 		", ",
-		fmt.Sprintf("srcX1:%v", c.In.SrcX1),
+		fmt.Sprintf("srcX1:%v", c.SrcX1),
 		", ",
-		fmt.Sprintf("srcY1:%v", c.In.SrcY1),
+		fmt.Sprintf("srcY1:%v", c.SrcY1),
 		", ",
-		fmt.Sprintf("dstX0:%v", c.In.DstX0),
+		fmt.Sprintf("dstX0:%v", c.DstX0),
 		", ",
-		fmt.Sprintf("dstY0:%v", c.In.DstY0),
+		fmt.Sprintf("dstY0:%v", c.DstY0),
 		", ",
-		fmt.Sprintf("dstX1:%v", c.In.DstX1),
+		fmt.Sprintf("dstX1:%v", c.DstX1),
 		", ",
-		fmt.Sprintf("dstY1:%v", c.In.DstY1),
+		fmt.Sprintf("dstY1:%v", c.DstY1),
 		", ",
-		c.In.Mask.String(),
+		c.Mask.String(),
 		", ",
-		c.In.Filter.String(),
+		c.Filter.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBlitFramebuffer) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBlitFramebuffer) TypeID() atom.TypeID {
 	return 174
@@ -8125,33 +6725,25 @@ func (GlBlitFramebuffer) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueries
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenQueries_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenQueries_Out struct {
-	binary.Generate
-	Queries QueryIdArray
-}
 type GlGenQueries struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenQueries_In
-	Out     GlGenQueries_Out
+	InContext atom.ContextID
+	Count     int32
+	Queries   QueryIdArray
 }
 
 func (c *GlGenQueries) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenQueries(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Queries),
+		fmt.Sprintf("%v", c.Queries),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenQueries) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenQueries) TypeID() atom.TypeID {
 	return 175
@@ -8164,33 +6756,25 @@ func (GlGenQueries) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQuery
 ////////////////////////////////////////////////////////////////////////////////
-type GlBeginQuery_In struct {
-	binary.Generate
-	Target QueryTarget
-	Query  QueryId
-}
-type GlBeginQuery_Out struct {
-	binary.Generate
-}
 type GlBeginQuery struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBeginQuery_In
-	Out     GlBeginQuery_Out
+	InContext atom.ContextID
+	Target    QueryTarget
+	Query     QueryId
 }
 
 func (c *GlBeginQuery) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBeginQuery(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBeginQuery) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBeginQuery) TypeID() atom.TypeID {
 	return 176
@@ -8203,30 +6787,22 @@ func (GlBeginQuery) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQuery
 ////////////////////////////////////////////////////////////////////////////////
-type GlEndQuery_In struct {
-	binary.Generate
-	Target QueryTarget
-}
-type GlEndQuery_Out struct {
-	binary.Generate
-}
 type GlEndQuery struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEndQuery_In
-	Out     GlEndQuery_Out
+	InContext atom.ContextID
+	Target    QueryTarget
 }
 
 func (c *GlEndQuery) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEndQuery(",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEndQuery) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEndQuery) TypeID() atom.TypeID {
 	return 177
@@ -8239,33 +6815,25 @@ func (GlEndQuery) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueries
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteQueries_In struct {
-	binary.Generate
-	Count   int32
-	Queries QueryIdArray
-}
-type GlDeleteQueries_Out struct {
-	binary.Generate
-}
 type GlDeleteQueries struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteQueries_In
-	Out     GlDeleteQueries_Out
+	InContext atom.ContextID
+	Count     int32
+	Queries   QueryIdArray
 }
 
 func (c *GlDeleteQueries) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteQueries(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Queries),
+		fmt.Sprintf("%v", c.Queries),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteQueries) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteQueries) TypeID() atom.TypeID {
 	return 178
@@ -8278,32 +6846,24 @@ func (GlDeleteQueries) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQuery
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsQuery_In struct {
-	binary.Generate
-	Query QueryId
-}
-type GlIsQuery_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsQuery struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsQuery_In
-	Out     GlIsQuery_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Result    bool
 }
 
 func (c *GlIsQuery) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsQuery(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsQuery) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsQuery) TypeID() atom.TypeID {
 	return 179
@@ -8316,36 +6876,28 @@ func (GlIsQuery) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryiv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryiv_In struct {
-	binary.Generate
-	Target    QueryTarget
-	Parameter QueryParameter
-}
-type GlGetQueryiv_Out struct {
-	binary.Generate
-	Value int32
-}
 type GlGetQueryiv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryiv_In
-	Out     GlGetQueryiv_Out
+	InContext atom.ContextID
+	Target    QueryTarget
+	Parameter QueryParameter
+	Value     int32
 }
 
 func (c *GlGetQueryiv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryiv(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryiv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryiv) TypeID() atom.TypeID {
 	return 180
@@ -8358,36 +6910,28 @@ func (GlGetQueryiv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuiv
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryObjectuiv_In struct {
-	binary.Generate
-	Query     QueryId
-	Parameter QueryObjectParameter
-}
-type GlGetQueryObjectuiv_Out struct {
-	binary.Generate
-	Value uint32
-}
 type GlGetQueryObjectuiv struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryObjectuiv_In
-	Out     GlGetQueryObjectuiv_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Parameter QueryObjectParameter
+	Value     uint32
 }
 
 func (c *GlGetQueryObjectuiv) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryObjectuiv(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryObjectuiv) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID {
 	return 181
@@ -8400,33 +6944,25 @@ func (GlGetQueryObjectuiv) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGenQueriesEXT_In struct {
-	binary.Generate
-	Count int32
-}
-type GlGenQueriesEXT_Out struct {
-	binary.Generate
-	Queries QueryIdArray
-}
 type GlGenQueriesEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGenQueriesEXT_In
-	Out     GlGenQueriesEXT_Out
+	InContext atom.ContextID
+	Count     int32
+	Queries   QueryIdArray
 }
 
 func (c *GlGenQueriesEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGenQueriesEXT(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.Out.Queries),
+		fmt.Sprintf("%v", c.Queries),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGenQueriesEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGenQueriesEXT) TypeID() atom.TypeID {
 	return 182
@@ -8439,33 +6975,25 @@ func (GlGenQueriesEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlBeginQueryEXT_In struct {
-	binary.Generate
-	Target QueryTarget
-	Query  QueryId
-}
-type GlBeginQueryEXT_Out struct {
-	binary.Generate
-}
 type GlBeginQueryEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlBeginQueryEXT_In
-	Out     GlBeginQueryEXT_Out
+	InContext atom.ContextID
+	Target    QueryTarget
+	Query     QueryId
 }
 
 func (c *GlBeginQueryEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glBeginQueryEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlBeginQueryEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlBeginQueryEXT) TypeID() atom.TypeID {
 	return 183
@@ -8478,30 +7006,22 @@ func (GlBeginQueryEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlEndQueryEXT_In struct {
-	binary.Generate
-	Target QueryTarget
-}
-type GlEndQueryEXT_Out struct {
-	binary.Generate
-}
 type GlEndQueryEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlEndQueryEXT_In
-	Out     GlEndQueryEXT_Out
+	InContext atom.ContextID
+	Target    QueryTarget
 }
 
 func (c *GlEndQueryEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glEndQueryEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlEndQueryEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlEndQueryEXT) TypeID() atom.TypeID {
 	return 184
@@ -8514,33 +7034,25 @@ func (GlEndQueryEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueriesEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlDeleteQueriesEXT_In struct {
-	binary.Generate
-	Count   int32
-	Queries QueryIdArray
-}
-type GlDeleteQueriesEXT_Out struct {
-	binary.Generate
-}
 type GlDeleteQueriesEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlDeleteQueriesEXT_In
-	Out     GlDeleteQueriesEXT_Out
+	InContext atom.ContextID
+	Count     int32
+	Queries   QueryIdArray
 }
 
 func (c *GlDeleteQueriesEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glDeleteQueriesEXT(",
-		fmt.Sprintf("count:%v", c.In.Count),
+		fmt.Sprintf("count:%v", c.Count),
 		", ",
-		fmt.Sprintf("%v", c.In.Queries),
+		fmt.Sprintf("%v", c.Queries),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlDeleteQueriesEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID {
 	return 185
@@ -8553,32 +7065,24 @@ func (GlDeleteQueriesEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQueryEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlIsQueryEXT_In struct {
-	binary.Generate
-	Query QueryId
-}
-type GlIsQueryEXT_Out struct {
-	binary.Generate
-	Result bool
-}
 type GlIsQueryEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlIsQueryEXT_In
-	Out     GlIsQueryEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Result    bool
 }
 
 func (c *GlIsQueryEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glIsQueryEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 	)
 	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
 	return strings.Join(parts, "")
 }
 func (c *GlIsQueryEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlIsQueryEXT) TypeID() atom.TypeID {
 	return 186
@@ -8591,33 +7095,25 @@ func (GlIsQueryEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlQueryCounterEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlQueryCounterEXT_In struct {
-	binary.Generate
-	Query  QueryId
-	Target QueryTarget
-}
-type GlQueryCounterEXT_Out struct {
-	binary.Generate
-}
 type GlQueryCounterEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlQueryCounterEXT_In
-	Out     GlQueryCounterEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Target    QueryTarget
 }
 
 func (c *GlQueryCounterEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glQueryCounterEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Target.String(),
+		c.Target.String(),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlQueryCounterEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlQueryCounterEXT) TypeID() atom.TypeID {
 	return 187
@@ -8630,36 +7126,28 @@ func (GlQueryCounterEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryivEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryivEXT_In struct {
-	binary.Generate
-	Target    QueryTarget
-	Parameter QueryParameter
-}
-type GlGetQueryivEXT_Out struct {
-	binary.Generate
-	Value int32
-}
 type GlGetQueryivEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryivEXT_In
-	Out     GlGetQueryivEXT_Out
+	InContext atom.ContextID
+	Target    QueryTarget
+	Parameter QueryParameter
+	Value     int32
 }
 
 func (c *GlGetQueryivEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryivEXT(",
-		c.In.Target.String(),
+		c.Target.String(),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryivEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryivEXT) TypeID() atom.TypeID {
 	return 188
@@ -8672,36 +7160,28 @@ func (GlGetQueryivEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectivEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryObjectivEXT_In struct {
-	binary.Generate
-	Query     QueryId
-	Parameter QueryObjectParameter
-}
-type GlGetQueryObjectivEXT_Out struct {
-	binary.Generate
-	Value int32
-}
 type GlGetQueryObjectivEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryObjectivEXT_In
-	Out     GlGetQueryObjectivEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Parameter QueryObjectParameter
+	Value     int32
 }
 
 func (c *GlGetQueryObjectivEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryObjectivEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryObjectivEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID {
 	return 189
@@ -8714,36 +7194,28 @@ func (GlGetQueryObjectivEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuivEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryObjectuivEXT_In struct {
-	binary.Generate
-	Query     QueryId
-	Parameter QueryObjectParameter
-}
-type GlGetQueryObjectuivEXT_Out struct {
-	binary.Generate
-	Value uint32
-}
 type GlGetQueryObjectuivEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryObjectuivEXT_In
-	Out     GlGetQueryObjectuivEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Parameter QueryObjectParameter
+	Value     uint32
 }
 
 func (c *GlGetQueryObjectuivEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryObjectuivEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryObjectuivEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID {
 	return 190
@@ -8756,36 +7228,28 @@ func (GlGetQueryObjectuivEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjecti64vEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryObjecti64vEXT_In struct {
-	binary.Generate
-	Query     QueryId
-	Parameter QueryObjectParameter
-}
-type GlGetQueryObjecti64vEXT_Out struct {
-	binary.Generate
-	Value int64
-}
 type GlGetQueryObjecti64vEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryObjecti64vEXT_In
-	Out     GlGetQueryObjecti64vEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Parameter QueryObjectParameter
+	Value     int64
 }
 
 func (c *GlGetQueryObjecti64vEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryObjecti64vEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryObjecti64vEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID {
 	return 191
@@ -8798,36 +7262,28 @@ func (GlGetQueryObjecti64vEXT) API() gfxapi.API { return API() }
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectui64vEXT
 ////////////////////////////////////////////////////////////////////////////////
-type GlGetQueryObjectui64vEXT_In struct {
-	binary.Generate
-	Query     QueryId
-	Parameter QueryObjectParameter
-}
-type GlGetQueryObjectui64vEXT_Out struct {
-	binary.Generate
-	Value uint64
-}
 type GlGetQueryObjectui64vEXT struct {
 	binary.Generate
-	Context atom.ContextID
-	In      GlGetQueryObjectui64vEXT_In
-	Out     GlGetQueryObjectui64vEXT_Out
+	InContext atom.ContextID
+	Query     QueryId
+	Parameter QueryObjectParameter
+	Value     uint64
 }
 
 func (c *GlGetQueryObjectui64vEXT) String() string {
 	parts := make([]string, 0, 32)
 	parts = append(parts, "glGetQueryObjectui64vEXT(",
-		fmt.Sprintf("query:%v", c.In.Query),
+		fmt.Sprintf("query:%v", c.Query),
 		", ",
-		c.In.Parameter.String(),
+		c.Parameter.String(),
 		", ",
-		fmt.Sprintf("value:%v", c.Out.Value),
+		fmt.Sprintf("value:%v", c.Value),
 	)
 	parts = append(parts, ")")
 	return strings.Join(parts, "")
 }
 func (c *GlGetQueryObjectui64vEXT) ContextID() atom.ContextID {
-	return c.Context
+	return c.InContext
 }
 func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID {
 	return 192
@@ -12822,20 +11278,16 @@ func NewInit(
 	pStencilFmt RenderbufferFormat,
 ) *Init {
 	return &Init{
-		Context: contextID,
-		In:      Init_In{Width: pWidth, Height: pHeight, ColorFmt: pColorFmt, DepthFmt: pDepthFmt, StencilFmt: pStencilFmt},
-		Out:     Init_Out{},
-	}
+		InContext: contextID,
+		Width:     pWidth, Height: pHeight, ColorFmt: pColorFmt, DepthFmt: pDepthFmt, StencilFmt: pStencilFmt}
 }
 func NewStartTimer(
 	contextID atom.ContextID,
 	pIndex uint8,
 ) *StartTimer {
 	return &StartTimer{
-		Context: contextID,
-		In:      StartTimer_In{Index: pIndex},
-		Out:     StartTimer_Out{},
-	}
+		InContext: contextID,
+		Index:     pIndex}
 }
 func NewStopTimer(
 	contextID atom.ContextID,
@@ -12843,18 +11295,14 @@ func NewStopTimer(
 	pResult uint64,
 ) *StopTimer {
 	return &StopTimer{
-		Context: contextID,
-		In:      StopTimer_In{Index: pIndex},
-		Out:     StopTimer_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Index:     pIndex, Result: pResult}
 }
 func NewFlushPostBuffer(
 	contextID atom.ContextID,
 ) *FlushPostBuffer {
 	return &FlushPostBuffer{
-		Context: contextID,
-		In:      FlushPostBuffer_In{},
-		Out:     FlushPostBuffer_Out{},
+		InContext: contextID,
 	}
 }
 func NewEglInitialize(
@@ -12865,10 +11313,8 @@ func NewEglInitialize(
 	pResult EGLBoolean,
 ) *EglInitialize {
 	return &EglInitialize{
-		Context: contextID,
-		In:      EglInitialize_In{Dpy: pDpy},
-		Out:     EglInitialize_Out{Major: pMajor, Minor: pMinor, Result: pResult},
-	}
+		InContext: contextID,
+		Dpy:       pDpy, Major: pMajor, Minor: pMinor, Result: pResult}
 }
 func NewEglCreateContext(
 	contextID atom.ContextID,
@@ -12879,10 +11325,8 @@ func NewEglCreateContext(
 	pResult EGLContext,
 ) *EglCreateContext {
 	return &EglCreateContext{
-		Context: contextID,
-		In:      EglCreateContext_In{Display: pDisplay, Config: pConfig, ShareContext: pShareContext, AttribList: pAttribList},
-		Out:     EglCreateContext_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Display:   pDisplay, Config: pConfig, ShareContext: pShareContext, AttribList: pAttribList, Result: pResult}
 }
 func NewEglMakeCurrent(
 	contextID atom.ContextID,
@@ -12893,10 +11337,8 @@ func NewEglMakeCurrent(
 	pResult EGLBoolean,
 ) *EglMakeCurrent {
 	return &EglMakeCurrent{
-		Context: contextID,
-		In:      EglMakeCurrent_In{Display: pDisplay, Draw: pDraw, Read: pRead, Context: pContext},
-		Out:     EglMakeCurrent_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Display:   pDisplay, Draw: pDraw, Read: pRead, Context: pContext, Result: pResult}
 }
 func NewEglSwapBuffers(
 	contextID atom.ContextID,
@@ -12905,10 +11347,8 @@ func NewEglSwapBuffers(
 	pResult EGLBoolean,
 ) *EglSwapBuffers {
 	return &EglSwapBuffers{
-		Context: contextID,
-		In:      EglSwapBuffers_In{Display: pDisplay, Surface: pSurface},
-		Out:     EglSwapBuffers_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Display:   pDisplay, Surface: pSurface, Result: pResult}
 }
 func NewWglCreateContext(
 	contextID atom.ContextID,
@@ -12916,10 +11356,8 @@ func NewWglCreateContext(
 	pResult HGLRC,
 ) *WglCreateContext {
 	return &WglCreateContext{
-		Context: contextID,
-		In:      WglCreateContext_In{Hdc: pHdc},
-		Out:     WglCreateContext_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Hdc:       pHdc, Result: pResult}
 }
 func NewWglMakeCurrent(
 	contextID atom.ContextID,
@@ -12928,20 +11366,16 @@ func NewWglMakeCurrent(
 	pResult BOOL,
 ) *WglMakeCurrent {
 	return &WglMakeCurrent{
-		Context: contextID,
-		In:      WglMakeCurrent_In{Hdc: pHdc, Hglrc: pHglrc},
-		Out:     WglMakeCurrent_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Hdc:       pHdc, Hglrc: pHglrc, Result: pResult}
 }
 func NewWglSwapBuffers(
 	contextID atom.ContextID,
 	pHdc HDC,
 ) *WglSwapBuffers {
 	return &WglSwapBuffers{
-		Context: contextID,
-		In:      WglSwapBuffers_In{Hdc: pHdc},
-		Out:     WglSwapBuffers_Out{},
-	}
+		InContext: contextID,
+		Hdc:       pHdc}
 }
 func NewCGLCreateContext(
 	contextID atom.ContextID,
@@ -12951,30 +11385,24 @@ func NewCGLCreateContext(
 	pResult CGLError,
 ) *CGLCreateContext {
 	return &CGLCreateContext{
-		Context: contextID,
-		In:      CGLCreateContext_In{Pix: pPix, Share: pShare, Ctx: pCtx},
-		Out:     CGLCreateContext_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Pix:       pPix, Share: pShare, Ctx: pCtx, Result: pResult}
 }
 func NewGlEnableClientState(
 	contextID atom.ContextID,
 	pType ArrayType,
 ) *GlEnableClientState {
 	return &GlEnableClientState{
-		Context: contextID,
-		In:      GlEnableClientState_In{Type: pType},
-		Out:     GlEnableClientState_Out{},
-	}
+		InContext: contextID,
+		Type:      pType}
 }
 func NewGlDisableClientState(
 	contextID atom.ContextID,
 	pType ArrayType,
 ) *GlDisableClientState {
 	return &GlDisableClientState{
-		Context: contextID,
-		In:      GlDisableClientState_In{Type: pType},
-		Out:     GlDisableClientState_Out{},
-	}
+		InContext: contextID,
+		Type:      pType}
 }
 func NewGlGetProgramBinaryOES(
 	contextID atom.ContextID,
@@ -12985,10 +11413,8 @@ func NewGlGetProgramBinaryOES(
 	pBinary memory.Pointer,
 ) *GlGetProgramBinaryOES {
 	return &GlGetProgramBinaryOES{
-		Context: contextID,
-		In:      GlGetProgramBinaryOES_In{Program: pProgram, BufferSize: pBufferSize},
-		Out:     GlGetProgramBinaryOES_Out{BytesWritten: pBytesWritten, BinaryFormat: pBinaryFormat, Binary: pBinary},
-	}
+		InContext: contextID,
+		Program:   pProgram, BufferSize: pBufferSize, BytesWritten: pBytesWritten, BinaryFormat: pBinaryFormat, Binary: pBinary}
 }
 func NewGlProgramBinaryOES(
 	contextID atom.ContextID,
@@ -12998,10 +11424,8 @@ func NewGlProgramBinaryOES(
 	pBinarySize int32,
 ) *GlProgramBinaryOES {
 	return &GlProgramBinaryOES{
-		Context: contextID,
-		In:      GlProgramBinaryOES_In{Program: pProgram, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
-		Out:     GlProgramBinaryOES_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize}
 }
 func NewGlStartTilingQCOM(
 	contextID atom.ContextID,
@@ -13012,20 +11436,16 @@ func NewGlStartTilingQCOM(
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlStartTilingQCOM {
 	return &GlStartTilingQCOM{
-		Context: contextID,
-		In:      GlStartTilingQCOM_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, PreserveMask: pPreserveMask},
-		Out:     GlStartTilingQCOM_Out{},
-	}
+		InContext: contextID,
+		X:         pX, Y: pY, Width: pWidth, Height: pHeight, PreserveMask: pPreserveMask}
 }
 func NewGlEndTilingQCOM(
 	contextID atom.ContextID,
 	pPreserveMask TilePreserveMaskQCOM,
 ) *GlEndTilingQCOM {
 	return &GlEndTilingQCOM{
-		Context: contextID,
-		In:      GlEndTilingQCOM_In{PreserveMask: pPreserveMask},
-		Out:     GlEndTilingQCOM_Out{},
-	}
+		InContext:    contextID,
+		PreserveMask: pPreserveMask}
 }
 func NewGlDiscardFramebufferEXT(
 	contextID atom.ContextID,
@@ -13034,10 +11454,8 @@ func NewGlDiscardFramebufferEXT(
 	pAttachments DiscardFramebufferAttachmentArray,
 ) *GlDiscardFramebufferEXT {
 	return &GlDiscardFramebufferEXT{
-		Context: contextID,
-		In:      GlDiscardFramebufferEXT_In{Target: pTarget, NumAttachments: pNumAttachments, Attachments: pAttachments},
-		Out:     GlDiscardFramebufferEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, NumAttachments: pNumAttachments, Attachments: pAttachments}
 }
 func NewGlInsertEventMarkerEXT(
 	contextID atom.ContextID,
@@ -13045,10 +11463,8 @@ func NewGlInsertEventMarkerEXT(
 	pMarker string,
 ) *GlInsertEventMarkerEXT {
 	return &GlInsertEventMarkerEXT{
-		Context: contextID,
-		In:      GlInsertEventMarkerEXT_In{Length: pLength, Marker: pMarker},
-		Out:     GlInsertEventMarkerEXT_Out{},
-	}
+		InContext: contextID,
+		Length:    pLength, Marker: pMarker}
 }
 func NewGlPushGroupMarkerEXT(
 	contextID atom.ContextID,
@@ -13056,18 +11472,14 @@ func NewGlPushGroupMarkerEXT(
 	pMarker string,
 ) *GlPushGroupMarkerEXT {
 	return &GlPushGroupMarkerEXT{
-		Context: contextID,
-		In:      GlPushGroupMarkerEXT_In{Length: pLength, Marker: pMarker},
-		Out:     GlPushGroupMarkerEXT_Out{},
-	}
+		InContext: contextID,
+		Length:    pLength, Marker: pMarker}
 }
 func NewGlPopGroupMarkerEXT(
 	contextID atom.ContextID,
 ) *GlPopGroupMarkerEXT {
 	return &GlPopGroupMarkerEXT{
-		Context: contextID,
-		In:      GlPopGroupMarkerEXT_In{},
-		Out:     GlPopGroupMarkerEXT_Out{},
+		InContext: contextID,
 	}
 }
 func NewGlTexStorage1DEXT(
@@ -13078,10 +11490,8 @@ func NewGlTexStorage1DEXT(
 	pWidth int32,
 ) *GlTexStorage1DEXT {
 	return &GlTexStorage1DEXT{
-		Context: contextID,
-		In:      GlTexStorage1DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
-		Out:     GlTexStorage1DEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Levels: pLevels, Format: pFormat, Width: pWidth}
 }
 func NewGlTexStorage2DEXT(
 	contextID atom.ContextID,
@@ -13092,10 +11502,8 @@ func NewGlTexStorage2DEXT(
 	pHeight int32,
 ) *GlTexStorage2DEXT {
 	return &GlTexStorage2DEXT{
-		Context: contextID,
-		In:      GlTexStorage2DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out:     GlTexStorage2DEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight}
 }
 func NewGlTexStorage3DEXT(
 	contextID atom.ContextID,
@@ -13107,10 +11515,8 @@ func NewGlTexStorage3DEXT(
 	pDepth int32,
 ) *GlTexStorage3DEXT {
 	return &GlTexStorage3DEXT{
-		Context: contextID,
-		In:      GlTexStorage3DEXT_In{Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
-		Out:     GlTexStorage3DEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth}
 }
 func NewGlTextureStorage1DEXT(
 	contextID atom.ContextID,
@@ -13121,10 +11527,8 @@ func NewGlTextureStorage1DEXT(
 	pWidth int32,
 ) *GlTextureStorage1DEXT {
 	return &GlTextureStorage1DEXT{
-		Context: contextID,
-		In:      GlTextureStorage1DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth},
-		Out:     GlTextureStorage1DEXT_Out{},
-	}
+		InContext: contextID,
+		Texture:   pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth}
 }
 func NewGlTextureStorage2DEXT(
 	contextID atom.ContextID,
@@ -13136,10 +11540,8 @@ func NewGlTextureStorage2DEXT(
 	pHeight int32,
 ) *GlTextureStorage2DEXT {
 	return &GlTextureStorage2DEXT{
-		Context: contextID,
-		In:      GlTextureStorage2DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out:     GlTextureStorage2DEXT_Out{},
-	}
+		InContext: contextID,
+		Texture:   pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight}
 }
 func NewGlTextureStorage3DEXT(
 	contextID atom.ContextID,
@@ -13152,10 +11554,8 @@ func NewGlTextureStorage3DEXT(
 	pDepth int32,
 ) *GlTextureStorage3DEXT {
 	return &GlTextureStorage3DEXT{
-		Context: contextID,
-		In:      GlTextureStorage3DEXT_In{Texture: pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth},
-		Out:     GlTextureStorage3DEXT_Out{},
-	}
+		InContext: contextID,
+		Texture:   pTexture, Target: pTarget, Levels: pLevels, Format: pFormat, Width: pWidth, Height: pHeight, Depth: pDepth}
 }
 func NewGlGenVertexArraysOES(
 	contextID atom.ContextID,
@@ -13163,20 +11563,16 @@ func NewGlGenVertexArraysOES(
 	pArrays VertexArrayIdArray,
 ) *GlGenVertexArraysOES {
 	return &GlGenVertexArraysOES{
-		Context: contextID,
-		In:      GlGenVertexArraysOES_In{Count: pCount},
-		Out:     GlGenVertexArraysOES_Out{Arrays: pArrays},
-	}
+		InContext: contextID,
+		Count:     pCount, Arrays: pArrays}
 }
 func NewGlBindVertexArrayOES(
 	contextID atom.ContextID,
 	pArray VertexArrayId,
 ) *GlBindVertexArrayOES {
 	return &GlBindVertexArrayOES{
-		Context: contextID,
-		In:      GlBindVertexArrayOES_In{Array: pArray},
-		Out:     GlBindVertexArrayOES_Out{},
-	}
+		InContext: contextID,
+		Array:     pArray}
 }
 func NewGlDeleteVertexArraysOES(
 	contextID atom.ContextID,
@@ -13184,10 +11580,8 @@ func NewGlDeleteVertexArraysOES(
 	pArrays VertexArrayIdArray,
 ) *GlDeleteVertexArraysOES {
 	return &GlDeleteVertexArraysOES{
-		Context: contextID,
-		In:      GlDeleteVertexArraysOES_In{Count: pCount, Arrays: pArrays},
-		Out:     GlDeleteVertexArraysOES_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Arrays: pArrays}
 }
 func NewGlIsVertexArrayOES(
 	contextID atom.ContextID,
@@ -13195,10 +11589,8 @@ func NewGlIsVertexArrayOES(
 	pResult bool,
 ) *GlIsVertexArrayOES {
 	return &GlIsVertexArrayOES{
-		Context: contextID,
-		In:      GlIsVertexArrayOES_In{Array: pArray},
-		Out:     GlIsVertexArrayOES_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Array:     pArray, Result: pResult}
 }
 func NewGlEGLImageTargetTexture2DOES(
 	contextID atom.ContextID,
@@ -13206,10 +11598,8 @@ func NewGlEGLImageTargetTexture2DOES(
 	pImage ImageOES,
 ) *GlEGLImageTargetTexture2DOES {
 	return &GlEGLImageTargetTexture2DOES{
-		Context: contextID,
-		In:      GlEGLImageTargetTexture2DOES_In{Target: pTarget, Image: pImage},
-		Out:     GlEGLImageTargetTexture2DOES_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Image: pImage}
 }
 func NewGlEGLImageTargetRenderbufferStorageOES(
 	contextID atom.ContextID,
@@ -13217,20 +11607,16 @@ func NewGlEGLImageTargetRenderbufferStorageOES(
 	pImage TexturePointer,
 ) *GlEGLImageTargetRenderbufferStorageOES {
 	return &GlEGLImageTargetRenderbufferStorageOES{
-		Context: contextID,
-		In:      GlEGLImageTargetRenderbufferStorageOES_In{Target: pTarget, Image: pImage},
-		Out:     GlEGLImageTargetRenderbufferStorageOES_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Image: pImage}
 }
 func NewGlGetGraphicsResetStatusEXT(
 	contextID atom.ContextID,
 	pResult ResetStatus,
 ) *GlGetGraphicsResetStatusEXT {
 	return &GlGetGraphicsResetStatusEXT{
-		Context: contextID,
-		In:      GlGetGraphicsResetStatusEXT_In{},
-		Out:     GlGetGraphicsResetStatusEXT_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Result:    pResult}
 }
 func NewGlBindAttribLocation(
 	contextID atom.ContextID,
@@ -13239,10 +11625,8 @@ func NewGlBindAttribLocation(
 	pName string,
 ) *GlBindAttribLocation {
 	return &GlBindAttribLocation{
-		Context: contextID,
-		In:      GlBindAttribLocation_In{Program: pProgram, Location: pLocation, Name: pName},
-		Out:     GlBindAttribLocation_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, Location: pLocation, Name: pName}
 }
 func NewGlBlendFunc(
 	contextID atom.ContextID,
@@ -13250,10 +11634,8 @@ func NewGlBlendFunc(
 	pDstFactor BlendFactor,
 ) *GlBlendFunc {
 	return &GlBlendFunc{
-		Context: contextID,
-		In:      GlBlendFunc_In{SrcFactor: pSrcFactor, DstFactor: pDstFactor},
-		Out:     GlBlendFunc_Out{},
-	}
+		InContext: contextID,
+		SrcFactor: pSrcFactor, DstFactor: pDstFactor}
 }
 func NewGlBlendFuncSeparate(
 	contextID atom.ContextID,
@@ -13263,20 +11645,16 @@ func NewGlBlendFuncSeparate(
 	pDstFactorAlpha BlendFactor,
 ) *GlBlendFuncSeparate {
 	return &GlBlendFuncSeparate{
-		Context: contextID,
-		In:      GlBlendFuncSeparate_In{SrcFactorRgb: pSrcFactorRgb, DstFactorRgb: pDstFactorRgb, SrcFactorAlpha: pSrcFactorAlpha, DstFactorAlpha: pDstFactorAlpha},
-		Out:     GlBlendFuncSeparate_Out{},
-	}
+		InContext:    contextID,
+		SrcFactorRgb: pSrcFactorRgb, DstFactorRgb: pDstFactorRgb, SrcFactorAlpha: pSrcFactorAlpha, DstFactorAlpha: pDstFactorAlpha}
 }
 func NewGlBlendEquation(
 	contextID atom.ContextID,
 	pEquation BlendEquation,
 ) *GlBlendEquation {
 	return &GlBlendEquation{
-		Context: contextID,
-		In:      GlBlendEquation_In{Equation: pEquation},
-		Out:     GlBlendEquation_Out{},
-	}
+		InContext: contextID,
+		Equation:  pEquation}
 }
 func NewGlBlendEquationSeparate(
 	contextID atom.ContextID,
@@ -13284,10 +11662,8 @@ func NewGlBlendEquationSeparate(
 	pAlpha BlendEquation,
 ) *GlBlendEquationSeparate {
 	return &GlBlendEquationSeparate{
-		Context: contextID,
-		In:      GlBlendEquationSeparate_In{Rgb: pRgb, Alpha: pAlpha},
-		Out:     GlBlendEquationSeparate_Out{},
-	}
+		InContext: contextID,
+		Rgb:       pRgb, Alpha: pAlpha}
 }
 func NewGlBlendColor(
 	contextID atom.ContextID,
@@ -13297,30 +11673,24 @@ func NewGlBlendColor(
 	pAlpha float32,
 ) *GlBlendColor {
 	return &GlBlendColor{
-		Context: contextID,
-		In:      GlBlendColor_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
-		Out:     GlBlendColor_Out{},
-	}
+		InContext: contextID,
+		Red:       pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha}
 }
 func NewGlEnableVertexAttribArray(
 	contextID atom.ContextID,
 	pLocation AttributeLocation,
 ) *GlEnableVertexAttribArray {
 	return &GlEnableVertexAttribArray{
-		Context: contextID,
-		In:      GlEnableVertexAttribArray_In{Location: pLocation},
-		Out:     GlEnableVertexAttribArray_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation}
 }
 func NewGlDisableVertexAttribArray(
 	contextID atom.ContextID,
 	pLocation AttributeLocation,
 ) *GlDisableVertexAttribArray {
 	return &GlDisableVertexAttribArray{
-		Context: contextID,
-		In:      GlDisableVertexAttribArray_In{Location: pLocation},
-		Out:     GlDisableVertexAttribArray_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation}
 }
 func NewGlVertexAttribPointer(
 	contextID atom.ContextID,
@@ -13332,10 +11702,8 @@ func NewGlVertexAttribPointer(
 	pData VertexPointer,
 ) *GlVertexAttribPointer {
 	return &GlVertexAttribPointer{
-		Context: contextID,
-		In:      GlVertexAttribPointer_In{Location: pLocation, Size: pSize, Type: pType, Normalized: pNormalized, Stride: pStride, Data: pData},
-		Out:     GlVertexAttribPointer_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Size: pSize, Type: pType, Normalized: pNormalized, Stride: pStride, Data: pData}
 }
 func NewGlGetActiveAttrib(
 	contextID atom.ContextID,
@@ -13348,10 +11716,8 @@ func NewGlGetActiveAttrib(
 	pName string,
 ) *GlGetActiveAttrib {
 	return &GlGetActiveAttrib{
-		Context: contextID,
-		In:      GlGetActiveAttrib_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
-		Out:     GlGetActiveAttrib_Out{BufferBytesWritten: pBufferBytesWritten, VectorCount: pVectorCount, Type: pType, Name: pName},
-	}
+		InContext: contextID,
+		Program:   pProgram, Location: pLocation, BufferSize: pBufferSize, BufferBytesWritten: pBufferBytesWritten, VectorCount: pVectorCount, Type: pType, Name: pName}
 }
 func NewGlGetActiveUniform(
 	contextID atom.ContextID,
@@ -13364,20 +11730,16 @@ func NewGlGetActiveUniform(
 	pName string,
 ) *GlGetActiveUniform {
 	return &GlGetActiveUniform{
-		Context: contextID,
-		In:      GlGetActiveUniform_In{Program: pProgram, Location: pLocation, BufferSize: pBufferSize},
-		Out:     GlGetActiveUniform_Out{BufferBytesWritten: pBufferBytesWritten, Size: pSize, Type: pType, Name: pName},
-	}
+		InContext: contextID,
+		Program:   pProgram, Location: pLocation, BufferSize: pBufferSize, BufferBytesWritten: pBufferBytesWritten, Size: pSize, Type: pType, Name: pName}
 }
 func NewGlGetError(
 	contextID atom.ContextID,
 	pResult Error,
 ) *GlGetError {
 	return &GlGetError{
-		Context: contextID,
-		In:      GlGetError_In{},
-		Out:     GlGetError_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Result:    pResult}
 }
 func NewGlGetProgramiv(
 	contextID atom.ContextID,
@@ -13386,10 +11748,8 @@ func NewGlGetProgramiv(
 	pValue S32Array,
 ) *GlGetProgramiv {
 	return &GlGetProgramiv{
-		Context: contextID,
-		In:      GlGetProgramiv_In{Program: pProgram, Parameter: pParameter},
-		Out:     GlGetProgramiv_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Program:   pProgram, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetShaderiv(
 	contextID atom.ContextID,
@@ -13398,10 +11758,8 @@ func NewGlGetShaderiv(
 	pValue S32Array,
 ) *GlGetShaderiv {
 	return &GlGetShaderiv{
-		Context: contextID,
-		In:      GlGetShaderiv_In{Shader: pShader, Parameter: pParameter},
-		Out:     GlGetShaderiv_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Shader:    pShader, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetUniformLocation(
 	contextID atom.ContextID,
@@ -13410,10 +11768,8 @@ func NewGlGetUniformLocation(
 	pResult UniformLocation,
 ) *GlGetUniformLocation {
 	return &GlGetUniformLocation{
-		Context: contextID,
-		In:      GlGetUniformLocation_In{Program: pProgram, Name: pName},
-		Out:     GlGetUniformLocation_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Program:   pProgram, Name: pName, Result: pResult}
 }
 func NewGlGetAttribLocation(
 	contextID atom.ContextID,
@@ -13422,10 +11778,8 @@ func NewGlGetAttribLocation(
 	pResult AttributeLocation,
 ) *GlGetAttribLocation {
 	return &GlGetAttribLocation{
-		Context: contextID,
-		In:      GlGetAttribLocation_In{Program: pProgram, Name: pName},
-		Out:     GlGetAttribLocation_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Program:   pProgram, Name: pName, Result: pResult}
 }
 func NewGlPixelStorei(
 	contextID atom.ContextID,
@@ -13433,10 +11787,8 @@ func NewGlPixelStorei(
 	pValue int32,
 ) *GlPixelStorei {
 	return &GlPixelStorei{
-		Context: contextID,
-		In:      GlPixelStorei_In{Parameter: pParameter, Value: pValue},
-		Out:     GlPixelStorei_Out{},
-	}
+		InContext: contextID,
+		Parameter: pParameter, Value: pValue}
 }
 func NewGlTexParameteri(
 	contextID atom.ContextID,
@@ -13445,10 +11797,8 @@ func NewGlTexParameteri(
 	pValue int32,
 ) *GlTexParameteri {
 	return &GlTexParameteri{
-		Context: contextID,
-		In:      GlTexParameteri_In{Target: pTarget, Parameter: pParameter, Value: pValue},
-		Out:     GlTexParameteri_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Value: pValue}
 }
 func NewGlTexParameterf(
 	contextID atom.ContextID,
@@ -13457,10 +11807,8 @@ func NewGlTexParameterf(
 	pValue float32,
 ) *GlTexParameterf {
 	return &GlTexParameterf{
-		Context: contextID,
-		In:      GlTexParameterf_In{Target: pTarget, Parameter: pParameter, Value: pValue},
-		Out:     GlTexParameterf_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetTexParameteriv(
 	contextID atom.ContextID,
@@ -13469,10 +11817,8 @@ func NewGlGetTexParameteriv(
 	pValues S32Array,
 ) *GlGetTexParameteriv {
 	return &GlGetTexParameteriv{
-		Context: contextID,
-		In:      GlGetTexParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetTexParameteriv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Values: pValues}
 }
 func NewGlGetTexParameterfv(
 	contextID atom.ContextID,
@@ -13481,10 +11827,8 @@ func NewGlGetTexParameterfv(
 	pValues F32Array,
 ) *GlGetTexParameterfv {
 	return &GlGetTexParameterfv{
-		Context: contextID,
-		In:      GlGetTexParameterfv_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetTexParameterfv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Values: pValues}
 }
 func NewGlUniform1i(
 	contextID atom.ContextID,
@@ -13492,10 +11836,8 @@ func NewGlUniform1i(
 	pValue int32,
 ) *GlUniform1i {
 	return &GlUniform1i{
-		Context: contextID,
-		In:      GlUniform1i_In{Location: pLocation, Value: pValue},
-		Out:     GlUniform1i_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlUniform2i(
 	contextID atom.ContextID,
@@ -13504,10 +11846,8 @@ func NewGlUniform2i(
 	pValue1 int32,
 ) *GlUniform2i {
 	return &GlUniform2i{
-		Context: contextID,
-		In:      GlUniform2i_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out:     GlUniform2i_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1}
 }
 func NewGlUniform3i(
 	contextID atom.ContextID,
@@ -13517,10 +11857,8 @@ func NewGlUniform3i(
 	pValue2 int32,
 ) *GlUniform3i {
 	return &GlUniform3i{
-		Context: contextID,
-		In:      GlUniform3i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out:     GlUniform3i_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2}
 }
 func NewGlUniform4i(
 	contextID atom.ContextID,
@@ -13531,10 +11869,8 @@ func NewGlUniform4i(
 	pValue3 int32,
 ) *GlUniform4i {
 	return &GlUniform4i{
-		Context: contextID,
-		In:      GlUniform4i_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out:     GlUniform4i_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3}
 }
 func NewGlUniform1iv(
 	contextID atom.ContextID,
@@ -13543,10 +11879,8 @@ func NewGlUniform1iv(
 	pValue S32Array,
 ) *GlUniform1iv {
 	return &GlUniform1iv{
-		Context: contextID,
-		In:      GlUniform1iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform1iv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform2iv(
 	contextID atom.ContextID,
@@ -13555,10 +11889,8 @@ func NewGlUniform2iv(
 	pValue S32Array,
 ) *GlUniform2iv {
 	return &GlUniform2iv{
-		Context: contextID,
-		In:      GlUniform2iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform2iv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform3iv(
 	contextID atom.ContextID,
@@ -13567,10 +11899,8 @@ func NewGlUniform3iv(
 	pValue S32Array,
 ) *GlUniform3iv {
 	return &GlUniform3iv{
-		Context: contextID,
-		In:      GlUniform3iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform3iv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform4iv(
 	contextID atom.ContextID,
@@ -13579,10 +11909,8 @@ func NewGlUniform4iv(
 	pValue S32Array,
 ) *GlUniform4iv {
 	return &GlUniform4iv{
-		Context: contextID,
-		In:      GlUniform4iv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform4iv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform1f(
 	contextID atom.ContextID,
@@ -13590,10 +11918,8 @@ func NewGlUniform1f(
 	pValue float32,
 ) *GlUniform1f {
 	return &GlUniform1f{
-		Context: contextID,
-		In:      GlUniform1f_In{Location: pLocation, Value: pValue},
-		Out:     GlUniform1f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlUniform2f(
 	contextID atom.ContextID,
@@ -13602,10 +11928,8 @@ func NewGlUniform2f(
 	pValue1 float32,
 ) *GlUniform2f {
 	return &GlUniform2f{
-		Context: contextID,
-		In:      GlUniform2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out:     GlUniform2f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1}
 }
 func NewGlUniform3f(
 	contextID atom.ContextID,
@@ -13615,10 +11939,8 @@ func NewGlUniform3f(
 	pValue2 float32,
 ) *GlUniform3f {
 	return &GlUniform3f{
-		Context: contextID,
-		In:      GlUniform3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out:     GlUniform3f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2}
 }
 func NewGlUniform4f(
 	contextID atom.ContextID,
@@ -13629,10 +11951,8 @@ func NewGlUniform4f(
 	pValue3 float32,
 ) *GlUniform4f {
 	return &GlUniform4f{
-		Context: contextID,
-		In:      GlUniform4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out:     GlUniform4f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3}
 }
 func NewGlUniform1fv(
 	contextID atom.ContextID,
@@ -13641,10 +11961,8 @@ func NewGlUniform1fv(
 	pValue F32Array,
 ) *GlUniform1fv {
 	return &GlUniform1fv{
-		Context: contextID,
-		In:      GlUniform1fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform1fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform2fv(
 	contextID atom.ContextID,
@@ -13653,10 +11971,8 @@ func NewGlUniform2fv(
 	pValue F32Array,
 ) *GlUniform2fv {
 	return &GlUniform2fv{
-		Context: contextID,
-		In:      GlUniform2fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform2fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform3fv(
 	contextID atom.ContextID,
@@ -13665,10 +11981,8 @@ func NewGlUniform3fv(
 	pValue F32Array,
 ) *GlUniform3fv {
 	return &GlUniform3fv{
-		Context: contextID,
-		In:      GlUniform3fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform3fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniform4fv(
 	contextID atom.ContextID,
@@ -13677,10 +11991,8 @@ func NewGlUniform4fv(
 	pValue F32Array,
 ) *GlUniform4fv {
 	return &GlUniform4fv{
-		Context: contextID,
-		In:      GlUniform4fv_In{Location: pLocation, Count: pCount, Value: pValue},
-		Out:     GlUniform4fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Value: pValue}
 }
 func NewGlUniformMatrix2fv(
 	contextID atom.ContextID,
@@ -13690,10 +12002,8 @@ func NewGlUniformMatrix2fv(
 	pValues F32Array,
 ) *GlUniformMatrix2fv {
 	return &GlUniformMatrix2fv{
-		Context: contextID,
-		In:      GlUniformMatrix2fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out:     GlUniformMatrix2fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Transpose: pTranspose, Values: pValues}
 }
 func NewGlUniformMatrix3fv(
 	contextID atom.ContextID,
@@ -13703,10 +12013,8 @@ func NewGlUniformMatrix3fv(
 	pValues F32Array,
 ) *GlUniformMatrix3fv {
 	return &GlUniformMatrix3fv{
-		Context: contextID,
-		In:      GlUniformMatrix3fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out:     GlUniformMatrix3fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Transpose: pTranspose, Values: pValues}
 }
 func NewGlUniformMatrix4fv(
 	contextID atom.ContextID,
@@ -13716,10 +12024,8 @@ func NewGlUniformMatrix4fv(
 	pValues F32Array,
 ) *GlUniformMatrix4fv {
 	return &GlUniformMatrix4fv{
-		Context: contextID,
-		In:      GlUniformMatrix4fv_In{Location: pLocation, Count: pCount, Transpose: pTranspose, Values: pValues},
-		Out:     GlUniformMatrix4fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Count: pCount, Transpose: pTranspose, Values: pValues}
 }
 func NewGlGetUniformfv(
 	contextID atom.ContextID,
@@ -13728,10 +12034,8 @@ func NewGlGetUniformfv(
 	pValues F32Array,
 ) *GlGetUniformfv {
 	return &GlGetUniformfv{
-		Context: contextID,
-		In:      GlGetUniformfv_In{Program: pProgram, Location: pLocation, Values: pValues},
-		Out:     GlGetUniformfv_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, Location: pLocation, Values: pValues}
 }
 func NewGlGetUniformiv(
 	contextID atom.ContextID,
@@ -13740,10 +12044,8 @@ func NewGlGetUniformiv(
 	pValues S32Array,
 ) *GlGetUniformiv {
 	return &GlGetUniformiv{
-		Context: contextID,
-		In:      GlGetUniformiv_In{Program: pProgram, Location: pLocation, Values: pValues},
-		Out:     GlGetUniformiv_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, Location: pLocation, Values: pValues}
 }
 func NewGlVertexAttrib1f(
 	contextID atom.ContextID,
@@ -13751,10 +12053,8 @@ func NewGlVertexAttrib1f(
 	pValue0 float32,
 ) *GlVertexAttrib1f {
 	return &GlVertexAttrib1f{
-		Context: contextID,
-		In:      GlVertexAttrib1f_In{Location: pLocation, Value0: pValue0},
-		Out:     GlVertexAttrib1f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0}
 }
 func NewGlVertexAttrib2f(
 	contextID atom.ContextID,
@@ -13763,10 +12063,8 @@ func NewGlVertexAttrib2f(
 	pValue1 float32,
 ) *GlVertexAttrib2f {
 	return &GlVertexAttrib2f{
-		Context: contextID,
-		In:      GlVertexAttrib2f_In{Location: pLocation, Value0: pValue0, Value1: pValue1},
-		Out:     GlVertexAttrib2f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1}
 }
 func NewGlVertexAttrib3f(
 	contextID atom.ContextID,
@@ -13776,10 +12074,8 @@ func NewGlVertexAttrib3f(
 	pValue2 float32,
 ) *GlVertexAttrib3f {
 	return &GlVertexAttrib3f{
-		Context: contextID,
-		In:      GlVertexAttrib3f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2},
-		Out:     GlVertexAttrib3f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2}
 }
 func NewGlVertexAttrib4f(
 	contextID atom.ContextID,
@@ -13790,10 +12086,8 @@ func NewGlVertexAttrib4f(
 	pValue3 float32,
 ) *GlVertexAttrib4f {
 	return &GlVertexAttrib4f{
-		Context: contextID,
-		In:      GlVertexAttrib4f_In{Location: pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3},
-		Out:     GlVertexAttrib4f_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value0: pValue0, Value1: pValue1, Value2: pValue2, Value3: pValue3}
 }
 func NewGlVertexAttrib1fv(
 	contextID atom.ContextID,
@@ -13801,10 +12095,8 @@ func NewGlVertexAttrib1fv(
 	pValue F32Array,
 ) *GlVertexAttrib1fv {
 	return &GlVertexAttrib1fv{
-		Context: contextID,
-		In:      GlVertexAttrib1fv_In{Location: pLocation, Value: pValue},
-		Out:     GlVertexAttrib1fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlVertexAttrib2fv(
 	contextID atom.ContextID,
@@ -13812,10 +12104,8 @@ func NewGlVertexAttrib2fv(
 	pValue F32Array,
 ) *GlVertexAttrib2fv {
 	return &GlVertexAttrib2fv{
-		Context: contextID,
-		In:      GlVertexAttrib2fv_In{Location: pLocation, Value: pValue},
-		Out:     GlVertexAttrib2fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlVertexAttrib3fv(
 	contextID atom.ContextID,
@@ -13823,10 +12113,8 @@ func NewGlVertexAttrib3fv(
 	pValue F32Array,
 ) *GlVertexAttrib3fv {
 	return &GlVertexAttrib3fv{
-		Context: contextID,
-		In:      GlVertexAttrib3fv_In{Location: pLocation, Value: pValue},
-		Out:     GlVertexAttrib3fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlVertexAttrib4fv(
 	contextID atom.ContextID,
@@ -13834,10 +12122,8 @@ func NewGlVertexAttrib4fv(
 	pValue F32Array,
 ) *GlVertexAttrib4fv {
 	return &GlVertexAttrib4fv{
-		Context: contextID,
-		In:      GlVertexAttrib4fv_In{Location: pLocation, Value: pValue},
-		Out:     GlVertexAttrib4fv_Out{},
-	}
+		InContext: contextID,
+		Location:  pLocation, Value: pValue}
 }
 func NewGlGetShaderPrecisionFormat(
 	contextID atom.ContextID,
@@ -13847,30 +12133,24 @@ func NewGlGetShaderPrecisionFormat(
 	pPrecision int32,
 ) *GlGetShaderPrecisionFormat {
 	return &GlGetShaderPrecisionFormat{
-		Context: contextID,
-		In:      GlGetShaderPrecisionFormat_In{ShaderType: pShaderType, PrecisionType: pPrecisionType},
-		Out:     GlGetShaderPrecisionFormat_Out{Range: pRange, Precision: pPrecision},
-	}
+		InContext:  contextID,
+		ShaderType: pShaderType, PrecisionType: pPrecisionType, Range: pRange, Precision: pPrecision}
 }
 func NewGlDepthMask(
 	contextID atom.ContextID,
 	pEnabled bool,
 ) *GlDepthMask {
 	return &GlDepthMask{
-		Context: contextID,
-		In:      GlDepthMask_In{Enabled: pEnabled},
-		Out:     GlDepthMask_Out{},
-	}
+		InContext: contextID,
+		Enabled:   pEnabled}
 }
 func NewGlDepthFunc(
 	contextID atom.ContextID,
 	pFunction TestFunction,
 ) *GlDepthFunc {
 	return &GlDepthFunc{
-		Context: contextID,
-		In:      GlDepthFunc_In{Function: pFunction},
-		Out:     GlDepthFunc_Out{},
-	}
+		InContext: contextID,
+		Function:  pFunction}
 }
 func NewGlDepthRangef(
 	contextID atom.ContextID,
@@ -13878,10 +12158,8 @@ func NewGlDepthRangef(
 	pFar float32,
 ) *GlDepthRangef {
 	return &GlDepthRangef{
-		Context: contextID,
-		In:      GlDepthRangef_In{Near: pNear, Far: pFar},
-		Out:     GlDepthRangef_Out{},
-	}
+		InContext: contextID,
+		Near:      pNear, Far: pFar}
 }
 func NewGlColorMask(
 	contextID atom.ContextID,
@@ -13891,20 +12169,16 @@ func NewGlColorMask(
 	pAlpha bool,
 ) *GlColorMask {
 	return &GlColorMask{
-		Context: contextID,
-		In:      GlColorMask_In{Red: pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha},
-		Out:     GlColorMask_Out{},
-	}
+		InContext: contextID,
+		Red:       pRed, Green: pGreen, Blue: pBlue, Alpha: pAlpha}
 }
 func NewGlStencilMask(
 	contextID atom.ContextID,
 	pMask uint32,
 ) *GlStencilMask {
 	return &GlStencilMask{
-		Context: contextID,
-		In:      GlStencilMask_In{Mask: pMask},
-		Out:     GlStencilMask_Out{},
-	}
+		InContext: contextID,
+		Mask:      pMask}
 }
 func NewGlStencilMaskSeparate(
 	contextID atom.ContextID,
@@ -13912,10 +12186,8 @@ func NewGlStencilMaskSeparate(
 	pMask uint32,
 ) *GlStencilMaskSeparate {
 	return &GlStencilMaskSeparate{
-		Context: contextID,
-		In:      GlStencilMaskSeparate_In{Face: pFace, Mask: pMask},
-		Out:     GlStencilMaskSeparate_Out{},
-	}
+		InContext: contextID,
+		Face:      pFace, Mask: pMask}
 }
 func NewGlStencilFuncSeparate(
 	contextID atom.ContextID,
@@ -13925,10 +12197,8 @@ func NewGlStencilFuncSeparate(
 	pMask int32,
 ) *GlStencilFuncSeparate {
 	return &GlStencilFuncSeparate{
-		Context: contextID,
-		In:      GlStencilFuncSeparate_In{Face: pFace, Function: pFunction, ReferenceValue: pReferenceValue, Mask: pMask},
-		Out:     GlStencilFuncSeparate_Out{},
-	}
+		InContext: contextID,
+		Face:      pFace, Function: pFunction, ReferenceValue: pReferenceValue, Mask: pMask}
 }
 func NewGlStencilOpSeparate(
 	contextID atom.ContextID,
@@ -13938,20 +12208,16 @@ func NewGlStencilOpSeparate(
 	pStencilPassDepthPass StencilAction,
 ) *GlStencilOpSeparate {
 	return &GlStencilOpSeparate{
-		Context: contextID,
-		In:      GlStencilOpSeparate_In{Face: pFace, StencilFail: pStencilFail, StencilPassDepthFail: pStencilPassDepthFail, StencilPassDepthPass: pStencilPassDepthPass},
-		Out:     GlStencilOpSeparate_Out{},
-	}
+		InContext: contextID,
+		Face:      pFace, StencilFail: pStencilFail, StencilPassDepthFail: pStencilPassDepthFail, StencilPassDepthPass: pStencilPassDepthPass}
 }
 func NewGlFrontFace(
 	contextID atom.ContextID,
 	pOrientation FaceOrientation,
 ) *GlFrontFace {
 	return &GlFrontFace{
-		Context: contextID,
-		In:      GlFrontFace_In{Orientation: pOrientation},
-		Out:     GlFrontFace_Out{},
-	}
+		InContext:   contextID,
+		Orientation: pOrientation}
 }
 func NewGlViewport(
 	contextID atom.ContextID,
@@ -13961,10 +12227,8 @@ func NewGlViewport(
 	pHeight int32,
 ) *GlViewport {
 	return &GlViewport{
-		Context: contextID,
-		In:      GlViewport_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out:     GlViewport_Out{},
-	}
+		InContext: contextID,
+		X:         pX, Y: pY, Width: pWidth, Height: pHeight}
 }
 func NewGlScissor(
 	contextID atom.ContextID,
@@ -13974,20 +12238,16 @@ func NewGlScissor(
 	pHeight int32,
 ) *GlScissor {
 	return &GlScissor{
-		Context: contextID,
-		In:      GlScissor_In{X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out:     GlScissor_Out{},
-	}
+		InContext: contextID,
+		X:         pX, Y: pY, Width: pWidth, Height: pHeight}
 }
 func NewGlActiveTexture(
 	contextID atom.ContextID,
 	pUnit TextureUnit,
 ) *GlActiveTexture {
 	return &GlActiveTexture{
-		Context: contextID,
-		In:      GlActiveTexture_In{Unit: pUnit},
-		Out:     GlActiveTexture_Out{},
-	}
+		InContext: contextID,
+		Unit:      pUnit}
 }
 func NewGlGenTextures(
 	contextID atom.ContextID,
@@ -13995,10 +12255,8 @@ func NewGlGenTextures(
 	pTextures TextureIdArray,
 ) *GlGenTextures {
 	return &GlGenTextures{
-		Context: contextID,
-		In:      GlGenTextures_In{Count: pCount},
-		Out:     GlGenTextures_Out{Textures: pTextures},
-	}
+		InContext: contextID,
+		Count:     pCount, Textures: pTextures}
 }
 func NewGlDeleteTextures(
 	contextID atom.ContextID,
@@ -14006,10 +12264,8 @@ func NewGlDeleteTextures(
 	pTextures TextureIdArray,
 ) *GlDeleteTextures {
 	return &GlDeleteTextures{
-		Context: contextID,
-		In:      GlDeleteTextures_In{Count: pCount, Textures: pTextures},
-		Out:     GlDeleteTextures_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Textures: pTextures}
 }
 func NewGlIsTexture(
 	contextID atom.ContextID,
@@ -14017,10 +12273,8 @@ func NewGlIsTexture(
 	pResult bool,
 ) *GlIsTexture {
 	return &GlIsTexture{
-		Context: contextID,
-		In:      GlIsTexture_In{Texture: pTexture},
-		Out:     GlIsTexture_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Texture:   pTexture, Result: pResult}
 }
 func NewGlBindTexture(
 	contextID atom.ContextID,
@@ -14028,10 +12282,8 @@ func NewGlBindTexture(
 	pTexture TextureId,
 ) *GlBindTexture {
 	return &GlBindTexture{
-		Context: contextID,
-		In:      GlBindTexture_In{Target: pTarget, Texture: pTexture},
-		Out:     GlBindTexture_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Texture: pTexture}
 }
 func NewGlTexImage2D(
 	contextID atom.ContextID,
@@ -14046,10 +12298,8 @@ func NewGlTexImage2D(
 	pData TexturePointer,
 ) *GlTexImage2D {
 	return &GlTexImage2D{
-		Context: contextID,
-		In:      GlTexImage2D_In{Target: pTarget, Level: pLevel, InternalFormat: pInternalFormat, Width: pWidth, Height: pHeight, Border: pBorder, Format: pFormat, Type: pType, Data: pData},
-		Out:     GlTexImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, InternalFormat: pInternalFormat, Width: pWidth, Height: pHeight, Border: pBorder, Format: pFormat, Type: pType, Data: pData}
 }
 func NewGlTexSubImage2D(
 	contextID atom.ContextID,
@@ -14064,10 +12314,8 @@ func NewGlTexSubImage2D(
 	pData TexturePointer,
 ) *GlTexSubImage2D {
 	return &GlTexSubImage2D{
-		Context: contextID,
-		In:      GlTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData},
-		Out:     GlTexSubImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData}
 }
 func NewGlCopyTexImage2D(
 	contextID atom.ContextID,
@@ -14081,10 +12329,8 @@ func NewGlCopyTexImage2D(
 	pBorder int32,
 ) *GlCopyTexImage2D {
 	return &GlCopyTexImage2D{
-		Context: contextID,
-		In:      GlCopyTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, X: pX, Y: pY, Width: pWidth, Height: pHeight, Border: pBorder},
-		Out:     GlCopyTexImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, Format: pFormat, X: pX, Y: pY, Width: pWidth, Height: pHeight, Border: pBorder}
 }
 func NewGlCopyTexSubImage2D(
 	contextID atom.ContextID,
@@ -14098,10 +12344,8 @@ func NewGlCopyTexSubImage2D(
 	pHeight int32,
 ) *GlCopyTexSubImage2D {
 	return &GlCopyTexSubImage2D{
-		Context: contextID,
-		In:      GlCopyTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, X: pX, Y: pY, Width: pWidth, Height: pHeight},
-		Out:     GlCopyTexSubImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, X: pX, Y: pY, Width: pWidth, Height: pHeight}
 }
 func NewGlCompressedTexImage2D(
 	contextID atom.ContextID,
@@ -14115,10 +12359,8 @@ func NewGlCompressedTexImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexImage2D {
 	return &GlCompressedTexImage2D{
-		Context: contextID,
-		In:      GlCompressedTexImage2D_In{Target: pTarget, Level: pLevel, Format: pFormat, Width: pWidth, Height: pHeight, Border: pBorder, ImageSize: pImageSize, Data: pData},
-		Out:     GlCompressedTexImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, Format: pFormat, Width: pWidth, Height: pHeight, Border: pBorder, ImageSize: pImageSize, Data: pData}
 }
 func NewGlCompressedTexSubImage2D(
 	contextID atom.ContextID,
@@ -14133,20 +12375,16 @@ func NewGlCompressedTexSubImage2D(
 	pData TexturePointer,
 ) *GlCompressedTexSubImage2D {
 	return &GlCompressedTexSubImage2D{
-		Context: contextID,
-		In:      GlCompressedTexSubImage2D_In{Target: pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, ImageSize: pImageSize, Data: pData},
-		Out:     GlCompressedTexSubImage2D_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Level: pLevel, Xoffset: pXoffset, Yoffset: pYoffset, Width: pWidth, Height: pHeight, Format: pFormat, ImageSize: pImageSize, Data: pData}
 }
 func NewGlGenerateMipmap(
 	contextID atom.ContextID,
 	pTarget TextureImageTarget,
 ) *GlGenerateMipmap {
 	return &GlGenerateMipmap{
-		Context: contextID,
-		In:      GlGenerateMipmap_In{Target: pTarget},
-		Out:     GlGenerateMipmap_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget}
 }
 func NewGlReadPixels(
 	contextID atom.ContextID,
@@ -14159,10 +12397,8 @@ func NewGlReadPixels(
 	pData memory.Pointer,
 ) *GlReadPixels {
 	return &GlReadPixels{
-		Context: contextID,
-		In:      GlReadPixels_In{X: pX, Y: pY, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType},
-		Out:     GlReadPixels_Out{Data: pData},
-	}
+		InContext: contextID,
+		X:         pX, Y: pY, Width: pWidth, Height: pHeight, Format: pFormat, Type: pType, Data: pData}
 }
 func NewGlGenFramebuffers(
 	contextID atom.ContextID,
@@ -14170,10 +12406,8 @@ func NewGlGenFramebuffers(
 	pFramebuffers FramebufferIdArray,
 ) *GlGenFramebuffers {
 	return &GlGenFramebuffers{
-		Context: contextID,
-		In:      GlGenFramebuffers_In{Count: pCount},
-		Out:     GlGenFramebuffers_Out{Framebuffers: pFramebuffers},
-	}
+		InContext: contextID,
+		Count:     pCount, Framebuffers: pFramebuffers}
 }
 func NewGlBindFramebuffer(
 	contextID atom.ContextID,
@@ -14181,10 +12415,8 @@ func NewGlBindFramebuffer(
 	pFramebuffer FramebufferId,
 ) *GlBindFramebuffer {
 	return &GlBindFramebuffer{
-		Context: contextID,
-		In:      GlBindFramebuffer_In{Target: pTarget, Framebuffer: pFramebuffer},
-		Out:     GlBindFramebuffer_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Framebuffer: pFramebuffer}
 }
 func NewGlCheckFramebufferStatus(
 	contextID atom.ContextID,
@@ -14192,10 +12424,8 @@ func NewGlCheckFramebufferStatus(
 	pResult FramebufferStatus,
 ) *GlCheckFramebufferStatus {
 	return &GlCheckFramebufferStatus{
-		Context: contextID,
-		In:      GlCheckFramebufferStatus_In{Target: pTarget},
-		Out:     GlCheckFramebufferStatus_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Target:    pTarget, Result: pResult}
 }
 func NewGlDeleteFramebuffers(
 	contextID atom.ContextID,
@@ -14203,10 +12433,8 @@ func NewGlDeleteFramebuffers(
 	pFramebuffers FramebufferIdArray,
 ) *GlDeleteFramebuffers {
 	return &GlDeleteFramebuffers{
-		Context: contextID,
-		In:      GlDeleteFramebuffers_In{Count: pCount, Framebuffers: pFramebuffers},
-		Out:     GlDeleteFramebuffers_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Framebuffers: pFramebuffers}
 }
 func NewGlIsFramebuffer(
 	contextID atom.ContextID,
@@ -14214,10 +12442,8 @@ func NewGlIsFramebuffer(
 	pResult bool,
 ) *GlIsFramebuffer {
 	return &GlIsFramebuffer{
-		Context: contextID,
-		In:      GlIsFramebuffer_In{Framebuffer: pFramebuffer},
-		Out:     GlIsFramebuffer_Out{Result: pResult},
-	}
+		InContext:   contextID,
+		Framebuffer: pFramebuffer, Result: pResult}
 }
 func NewGlGenRenderbuffers(
 	contextID atom.ContextID,
@@ -14225,10 +12451,8 @@ func NewGlGenRenderbuffers(
 	pRenderbuffers RenderbufferIdArray,
 ) *GlGenRenderbuffers {
 	return &GlGenRenderbuffers{
-		Context: contextID,
-		In:      GlGenRenderbuffers_In{Count: pCount},
-		Out:     GlGenRenderbuffers_Out{Renderbuffers: pRenderbuffers},
-	}
+		InContext: contextID,
+		Count:     pCount, Renderbuffers: pRenderbuffers}
 }
 func NewGlBindRenderbuffer(
 	contextID atom.ContextID,
@@ -14236,10 +12460,8 @@ func NewGlBindRenderbuffer(
 	pRenderbuffer RenderbufferId,
 ) *GlBindRenderbuffer {
 	return &GlBindRenderbuffer{
-		Context: contextID,
-		In:      GlBindRenderbuffer_In{Target: pTarget, Renderbuffer: pRenderbuffer},
-		Out:     GlBindRenderbuffer_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Renderbuffer: pRenderbuffer}
 }
 func NewGlRenderbufferStorage(
 	contextID atom.ContextID,
@@ -14249,10 +12471,8 @@ func NewGlRenderbufferStorage(
 	pHeight int32,
 ) *GlRenderbufferStorage {
 	return &GlRenderbufferStorage{
-		Context: contextID,
-		In:      GlRenderbufferStorage_In{Target: pTarget, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out:     GlRenderbufferStorage_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Format: pFormat, Width: pWidth, Height: pHeight}
 }
 func NewGlDeleteRenderbuffers(
 	contextID atom.ContextID,
@@ -14260,10 +12480,8 @@ func NewGlDeleteRenderbuffers(
 	pRenderbuffers RenderbufferIdArray,
 ) *GlDeleteRenderbuffers {
 	return &GlDeleteRenderbuffers{
-		Context: contextID,
-		In:      GlDeleteRenderbuffers_In{Count: pCount, Renderbuffers: pRenderbuffers},
-		Out:     GlDeleteRenderbuffers_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Renderbuffers: pRenderbuffers}
 }
 func NewGlIsRenderbuffer(
 	contextID atom.ContextID,
@@ -14271,10 +12489,8 @@ func NewGlIsRenderbuffer(
 	pResult bool,
 ) *GlIsRenderbuffer {
 	return &GlIsRenderbuffer{
-		Context: contextID,
-		In:      GlIsRenderbuffer_In{Renderbuffer: pRenderbuffer},
-		Out:     GlIsRenderbuffer_Out{Result: pResult},
-	}
+		InContext:    contextID,
+		Renderbuffer: pRenderbuffer, Result: pResult}
 }
 func NewGlGetRenderbufferParameteriv(
 	contextID atom.ContextID,
@@ -14283,10 +12499,8 @@ func NewGlGetRenderbufferParameteriv(
 	pValues S32Array,
 ) *GlGetRenderbufferParameteriv {
 	return &GlGetRenderbufferParameteriv{
-		Context: contextID,
-		In:      GlGetRenderbufferParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetRenderbufferParameteriv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Values: pValues}
 }
 func NewGlGenBuffers(
 	contextID atom.ContextID,
@@ -14294,10 +12508,8 @@ func NewGlGenBuffers(
 	pBuffers BufferIdArray,
 ) *GlGenBuffers {
 	return &GlGenBuffers{
-		Context: contextID,
-		In:      GlGenBuffers_In{Count: pCount},
-		Out:     GlGenBuffers_Out{Buffers: pBuffers},
-	}
+		InContext: contextID,
+		Count:     pCount, Buffers: pBuffers}
 }
 func NewGlBindBuffer(
 	contextID atom.ContextID,
@@ -14305,10 +12517,8 @@ func NewGlBindBuffer(
 	pBuffer BufferId,
 ) *GlBindBuffer {
 	return &GlBindBuffer{
-		Context: contextID,
-		In:      GlBindBuffer_In{Target: pTarget, Buffer: pBuffer},
-		Out:     GlBindBuffer_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Buffer: pBuffer}
 }
 func NewGlBufferData(
 	contextID atom.ContextID,
@@ -14318,10 +12528,8 @@ func NewGlBufferData(
 	pUsage BufferUsage,
 ) *GlBufferData {
 	return &GlBufferData{
-		Context: contextID,
-		In:      GlBufferData_In{Target: pTarget, Size: pSize, Data: pData, Usage: pUsage},
-		Out:     GlBufferData_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Size: pSize, Data: pData, Usage: pUsage}
 }
 func NewGlBufferSubData(
 	contextID atom.ContextID,
@@ -14331,10 +12539,8 @@ func NewGlBufferSubData(
 	pData memory.Pointer,
 ) *GlBufferSubData {
 	return &GlBufferSubData{
-		Context: contextID,
-		In:      GlBufferSubData_In{Target: pTarget, Offset: pOffset, Size: pSize, Data: pData},
-		Out:     GlBufferSubData_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Offset: pOffset, Size: pSize, Data: pData}
 }
 func NewGlDeleteBuffers(
 	contextID atom.ContextID,
@@ -14342,10 +12548,8 @@ func NewGlDeleteBuffers(
 	pBuffers BufferIdArray,
 ) *GlDeleteBuffers {
 	return &GlDeleteBuffers{
-		Context: contextID,
-		In:      GlDeleteBuffers_In{Count: pCount, Buffers: pBuffers},
-		Out:     GlDeleteBuffers_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Buffers: pBuffers}
 }
 func NewGlIsBuffer(
 	contextID atom.ContextID,
@@ -14353,10 +12557,8 @@ func NewGlIsBuffer(
 	pResult bool,
 ) *GlIsBuffer {
 	return &GlIsBuffer{
-		Context: contextID,
-		In:      GlIsBuffer_In{Buffer: pBuffer},
-		Out:     GlIsBuffer_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Buffer:    pBuffer, Result: pResult}
 }
 func NewGlGetBufferParameteriv(
 	contextID atom.ContextID,
@@ -14365,10 +12567,8 @@ func NewGlGetBufferParameteriv(
 	pValue int32,
 ) *GlGetBufferParameteriv {
 	return &GlGetBufferParameteriv{
-		Context: contextID,
-		In:      GlGetBufferParameteriv_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetBufferParameteriv_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Value: pValue}
 }
 func NewGlCreateShader(
 	contextID atom.ContextID,
@@ -14376,20 +12576,16 @@ func NewGlCreateShader(
 	pResult ShaderId,
 ) *GlCreateShader {
 	return &GlCreateShader{
-		Context: contextID,
-		In:      GlCreateShader_In{Type: pType},
-		Out:     GlCreateShader_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Type:      pType, Result: pResult}
 }
 func NewGlDeleteShader(
 	contextID atom.ContextID,
 	pShader ShaderId,
 ) *GlDeleteShader {
 	return &GlDeleteShader{
-		Context: contextID,
-		In:      GlDeleteShader_In{Shader: pShader},
-		Out:     GlDeleteShader_Out{},
-	}
+		InContext: contextID,
+		Shader:    pShader}
 }
 func NewGlShaderSource(
 	contextID atom.ContextID,
@@ -14399,10 +12595,8 @@ func NewGlShaderSource(
 	pLength S32Array,
 ) *GlShaderSource {
 	return &GlShaderSource{
-		Context: contextID,
-		In:      GlShaderSource_In{Shader: pShader, Count: pCount, Source: pSource, Length: pLength},
-		Out:     GlShaderSource_Out{},
-	}
+		InContext: contextID,
+		Shader:    pShader, Count: pCount, Source: pSource, Length: pLength}
 }
 func NewGlShaderBinary(
 	contextID atom.ContextID,
@@ -14413,10 +12607,8 @@ func NewGlShaderBinary(
 	pBinarySize int32,
 ) *GlShaderBinary {
 	return &GlShaderBinary{
-		Context: contextID,
-		In:      GlShaderBinary_In{Count: pCount, Shaders: pShaders, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize},
-		Out:     GlShaderBinary_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Shaders: pShaders, BinaryFormat: pBinaryFormat, Binary: pBinary, BinarySize: pBinarySize}
 }
 func NewGlGetShaderInfoLog(
 	contextID atom.ContextID,
@@ -14426,10 +12618,8 @@ func NewGlGetShaderInfoLog(
 	pInfo string,
 ) *GlGetShaderInfoLog {
 	return &GlGetShaderInfoLog{
-		Context: contextID,
-		In:      GlGetShaderInfoLog_In{Shader: pShader, BufferLength: pBufferLength},
-		Out:     GlGetShaderInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
-	}
+		InContext: contextID,
+		Shader:    pShader, BufferLength: pBufferLength, StringLengthWritten: pStringLengthWritten, Info: pInfo}
 }
 func NewGlGetShaderSource(
 	contextID atom.ContextID,
@@ -14439,18 +12629,14 @@ func NewGlGetShaderSource(
 	pSource string,
 ) *GlGetShaderSource {
 	return &GlGetShaderSource{
-		Context: contextID,
-		In:      GlGetShaderSource_In{Shader: pShader, BufferLength: pBufferLength},
-		Out:     GlGetShaderSource_Out{StringLengthWritten: pStringLengthWritten, Source: pSource},
-	}
+		InContext: contextID,
+		Shader:    pShader, BufferLength: pBufferLength, StringLengthWritten: pStringLengthWritten, Source: pSource}
 }
 func NewGlReleaseShaderCompiler(
 	contextID atom.ContextID,
 ) *GlReleaseShaderCompiler {
 	return &GlReleaseShaderCompiler{
-		Context: contextID,
-		In:      GlReleaseShaderCompiler_In{},
-		Out:     GlReleaseShaderCompiler_Out{},
+		InContext: contextID,
 	}
 }
 func NewGlCompileShader(
@@ -14458,10 +12644,8 @@ func NewGlCompileShader(
 	pShader ShaderId,
 ) *GlCompileShader {
 	return &GlCompileShader{
-		Context: contextID,
-		In:      GlCompileShader_In{Shader: pShader},
-		Out:     GlCompileShader_Out{},
-	}
+		InContext: contextID,
+		Shader:    pShader}
 }
 func NewGlIsShader(
 	contextID atom.ContextID,
@@ -14469,30 +12653,24 @@ func NewGlIsShader(
 	pResult bool,
 ) *GlIsShader {
 	return &GlIsShader{
-		Context: contextID,
-		In:      GlIsShader_In{Shader: pShader},
-		Out:     GlIsShader_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Shader:    pShader, Result: pResult}
 }
 func NewGlCreateProgram(
 	contextID atom.ContextID,
 	pResult ProgramId,
 ) *GlCreateProgram {
 	return &GlCreateProgram{
-		Context: contextID,
-		In:      GlCreateProgram_In{},
-		Out:     GlCreateProgram_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Result:    pResult}
 }
 func NewGlDeleteProgram(
 	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlDeleteProgram {
 	return &GlDeleteProgram{
-		Context: contextID,
-		In:      GlDeleteProgram_In{Program: pProgram},
-		Out:     GlDeleteProgram_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram}
 }
 func NewGlAttachShader(
 	contextID atom.ContextID,
@@ -14500,10 +12678,8 @@ func NewGlAttachShader(
 	pShader ShaderId,
 ) *GlAttachShader {
 	return &GlAttachShader{
-		Context: contextID,
-		In:      GlAttachShader_In{Program: pProgram, Shader: pShader},
-		Out:     GlAttachShader_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, Shader: pShader}
 }
 func NewGlDetachShader(
 	contextID atom.ContextID,
@@ -14511,10 +12687,8 @@ func NewGlDetachShader(
 	pShader ShaderId,
 ) *GlDetachShader {
 	return &GlDetachShader{
-		Context: contextID,
-		In:      GlDetachShader_In{Program: pProgram, Shader: pShader},
-		Out:     GlDetachShader_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram, Shader: pShader}
 }
 func NewGlGetAttachedShaders(
 	contextID atom.ContextID,
@@ -14524,20 +12698,16 @@ func NewGlGetAttachedShaders(
 	pShaders ShaderIdArray,
 ) *GlGetAttachedShaders {
 	return &GlGetAttachedShaders{
-		Context: contextID,
-		In:      GlGetAttachedShaders_In{Program: pProgram, BufferLength: pBufferLength},
-		Out:     GlGetAttachedShaders_Out{ShadersLengthWritten: pShadersLengthWritten, Shaders: pShaders},
-	}
+		InContext: contextID,
+		Program:   pProgram, BufferLength: pBufferLength, ShadersLengthWritten: pShadersLengthWritten, Shaders: pShaders}
 }
 func NewGlLinkProgram(
 	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlLinkProgram {
 	return &GlLinkProgram{
-		Context: contextID,
-		In:      GlLinkProgram_In{Program: pProgram},
-		Out:     GlLinkProgram_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram}
 }
 func NewGlGetProgramInfoLog(
 	contextID atom.ContextID,
@@ -14547,20 +12717,16 @@ func NewGlGetProgramInfoLog(
 	pInfo string,
 ) *GlGetProgramInfoLog {
 	return &GlGetProgramInfoLog{
-		Context: contextID,
-		In:      GlGetProgramInfoLog_In{Program: pProgram, BufferLength: pBufferLength},
-		Out:     GlGetProgramInfoLog_Out{StringLengthWritten: pStringLengthWritten, Info: pInfo},
-	}
+		InContext: contextID,
+		Program:   pProgram, BufferLength: pBufferLength, StringLengthWritten: pStringLengthWritten, Info: pInfo}
 }
 func NewGlUseProgram(
 	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlUseProgram {
 	return &GlUseProgram{
-		Context: contextID,
-		In:      GlUseProgram_In{Program: pProgram},
-		Out:     GlUseProgram_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram}
 }
 func NewGlIsProgram(
 	contextID atom.ContextID,
@@ -14568,20 +12734,16 @@ func NewGlIsProgram(
 	pResult bool,
 ) *GlIsProgram {
 	return &GlIsProgram{
-		Context: contextID,
-		In:      GlIsProgram_In{Program: pProgram},
-		Out:     GlIsProgram_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Program:   pProgram, Result: pResult}
 }
 func NewGlValidateProgram(
 	contextID atom.ContextID,
 	pProgram ProgramId,
 ) *GlValidateProgram {
 	return &GlValidateProgram{
-		Context: contextID,
-		In:      GlValidateProgram_In{Program: pProgram},
-		Out:     GlValidateProgram_Out{},
-	}
+		InContext: contextID,
+		Program:   pProgram}
 }
 func NewGlClearColor(
 	contextID atom.ContextID,
@@ -14591,50 +12753,40 @@ func NewGlClearColor(
 	pA float32,
 ) *GlClearColor {
 	return &GlClearColor{
-		Context: contextID,
-		In:      GlClearColor_In{R: pR, G: pG, B: pB, A: pA},
-		Out:     GlClearColor_Out{},
-	}
+		InContext: contextID,
+		R:         pR, G: pG, B: pB, A: pA}
 }
 func NewGlClearDepthf(
 	contextID atom.ContextID,
 	pDepth float32,
 ) *GlClearDepthf {
 	return &GlClearDepthf{
-		Context: contextID,
-		In:      GlClearDepthf_In{Depth: pDepth},
-		Out:     GlClearDepthf_Out{},
-	}
+		InContext: contextID,
+		Depth:     pDepth}
 }
 func NewGlClearStencil(
 	contextID atom.ContextID,
 	pStencil int32,
 ) *GlClearStencil {
 	return &GlClearStencil{
-		Context: contextID,
-		In:      GlClearStencil_In{Stencil: pStencil},
-		Out:     GlClearStencil_Out{},
-	}
+		InContext: contextID,
+		Stencil:   pStencil}
 }
 func NewGlClear(
 	contextID atom.ContextID,
 	pMask ClearMask,
 ) *GlClear {
 	return &GlClear{
-		Context: contextID,
-		In:      GlClear_In{Mask: pMask},
-		Out:     GlClear_Out{},
-	}
+		InContext: contextID,
+		Mask:      pMask}
 }
 func NewGlCullFace(
 	contextID atom.ContextID,
 	pMode FaceMode,
 ) *GlCullFace {
 	return &GlCullFace{
-		Context: contextID,
-		In:      GlCullFace_In{Mode: pMode},
-		Out:     GlCullFace_Out{},
-	}
+		InContext: contextID,
+		Mode:      pMode}
 }
 func NewGlPolygonOffset(
 	contextID atom.ContextID,
@@ -14642,20 +12794,16 @@ func NewGlPolygonOffset(
 	pUnits float32,
 ) *GlPolygonOffset {
 	return &GlPolygonOffset{
-		Context: contextID,
-		In:      GlPolygonOffset_In{ScaleFactor: pScaleFactor, Units: pUnits},
-		Out:     GlPolygonOffset_Out{},
-	}
+		InContext:   contextID,
+		ScaleFactor: pScaleFactor, Units: pUnits}
 }
 func NewGlLineWidth(
 	contextID atom.ContextID,
 	pWidth float32,
 ) *GlLineWidth {
 	return &GlLineWidth{
-		Context: contextID,
-		In:      GlLineWidth_In{Width: pWidth},
-		Out:     GlLineWidth_Out{},
-	}
+		InContext: contextID,
+		Width:     pWidth}
 }
 func NewGlSampleCoverage(
 	contextID atom.ContextID,
@@ -14663,10 +12811,8 @@ func NewGlSampleCoverage(
 	pInvert bool,
 ) *GlSampleCoverage {
 	return &GlSampleCoverage{
-		Context: contextID,
-		In:      GlSampleCoverage_In{Value: pValue, Invert: pInvert},
-		Out:     GlSampleCoverage_Out{},
-	}
+		InContext: contextID,
+		Value:     pValue, Invert: pInvert}
 }
 func NewGlHint(
 	contextID atom.ContextID,
@@ -14674,10 +12820,8 @@ func NewGlHint(
 	pMode HintMode,
 ) *GlHint {
 	return &GlHint{
-		Context: contextID,
-		In:      GlHint_In{Target: pTarget, Mode: pMode},
-		Out:     GlHint_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Mode: pMode}
 }
 func NewGlFramebufferRenderbuffer(
 	contextID atom.ContextID,
@@ -14687,10 +12831,8 @@ func NewGlFramebufferRenderbuffer(
 	pRenderbuffer RenderbufferId,
 ) *GlFramebufferRenderbuffer {
 	return &GlFramebufferRenderbuffer{
-		Context: contextID,
-		In:      GlFramebufferRenderbuffer_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, RenderbufferTarget: pRenderbufferTarget, Renderbuffer: pRenderbuffer},
-		Out:     GlFramebufferRenderbuffer_Out{},
-	}
+		InContext:         contextID,
+		FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, RenderbufferTarget: pRenderbufferTarget, Renderbuffer: pRenderbuffer}
 }
 func NewGlFramebufferTexture2D(
 	contextID atom.ContextID,
@@ -14701,10 +12843,8 @@ func NewGlFramebufferTexture2D(
 	pLevel int32,
 ) *GlFramebufferTexture2D {
 	return &GlFramebufferTexture2D{
-		Context: contextID,
-		In:      GlFramebufferTexture2D_In{FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, TextureTarget: pTextureTarget, Texture: pTexture, Level: pLevel},
-		Out:     GlFramebufferTexture2D_Out{},
-	}
+		InContext:         contextID,
+		FramebufferTarget: pFramebufferTarget, FramebufferAttachment: pFramebufferAttachment, TextureTarget: pTextureTarget, Texture: pTexture, Level: pLevel}
 }
 func NewGlGetFramebufferAttachmentParameteriv(
 	contextID atom.ContextID,
@@ -14714,10 +12854,8 @@ func NewGlGetFramebufferAttachmentParameteriv(
 	pValue S32Array,
 ) *GlGetFramebufferAttachmentParameteriv {
 	return &GlGetFramebufferAttachmentParameteriv{
-		Context: contextID,
-		In:      GlGetFramebufferAttachmentParameteriv_In{FramebufferTarget: pFramebufferTarget, Attachment: pAttachment, Parameter: pParameter},
-		Out:     GlGetFramebufferAttachmentParameteriv_Out{Value: pValue},
-	}
+		InContext:         contextID,
+		FramebufferTarget: pFramebufferTarget, Attachment: pAttachment, Parameter: pParameter, Value: pValue}
 }
 func NewGlDrawElements(
 	contextID atom.ContextID,
@@ -14727,10 +12865,8 @@ func NewGlDrawElements(
 	pIndices IndicesPointer,
 ) *GlDrawElements {
 	return &GlDrawElements{
-		Context: contextID,
-		In:      GlDrawElements_In{DrawMode: pDrawMode, ElementCount: pElementCount, IndicesType: pIndicesType, Indices: pIndices},
-		Out:     GlDrawElements_Out{},
-	}
+		InContext: contextID,
+		DrawMode:  pDrawMode, ElementCount: pElementCount, IndicesType: pIndicesType, Indices: pIndices}
 }
 func NewGlDrawArrays(
 	contextID atom.ContextID,
@@ -14739,27 +12875,21 @@ func NewGlDrawArrays(
 	pIndexCount int32,
 ) *GlDrawArrays {
 	return &GlDrawArrays{
-		Context: contextID,
-		In:      GlDrawArrays_In{DrawMode: pDrawMode, FirstIndex: pFirstIndex, IndexCount: pIndexCount},
-		Out:     GlDrawArrays_Out{},
-	}
+		InContext: contextID,
+		DrawMode:  pDrawMode, FirstIndex: pFirstIndex, IndexCount: pIndexCount}
 }
 func NewGlFlush(
 	contextID atom.ContextID,
 ) *GlFlush {
 	return &GlFlush{
-		Context: contextID,
-		In:      GlFlush_In{},
-		Out:     GlFlush_Out{},
+		InContext: contextID,
 	}
 }
 func NewGlFinish(
 	contextID atom.ContextID,
 ) *GlFinish {
 	return &GlFinish{
-		Context: contextID,
-		In:      GlFinish_In{},
-		Out:     GlFinish_Out{},
+		InContext: contextID,
 	}
 }
 func NewGlGetBooleanv(
@@ -14768,10 +12898,8 @@ func NewGlGetBooleanv(
 	pValues BoolArray,
 ) *GlGetBooleanv {
 	return &GlGetBooleanv{
-		Context: contextID,
-		In:      GlGetBooleanv_In{Param: pParam},
-		Out:     GlGetBooleanv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Param:     pParam, Values: pValues}
 }
 func NewGlGetFloatv(
 	contextID atom.ContextID,
@@ -14779,10 +12907,8 @@ func NewGlGetFloatv(
 	pValues F32Array,
 ) *GlGetFloatv {
 	return &GlGetFloatv{
-		Context: contextID,
-		In:      GlGetFloatv_In{Param: pParam},
-		Out:     GlGetFloatv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Param:     pParam, Values: pValues}
 }
 func NewGlGetIntegerv(
 	contextID atom.ContextID,
@@ -14790,10 +12916,8 @@ func NewGlGetIntegerv(
 	pValues S32Array,
 ) *GlGetIntegerv {
 	return &GlGetIntegerv{
-		Context: contextID,
-		In:      GlGetIntegerv_In{Param: pParam},
-		Out:     GlGetIntegerv_Out{Values: pValues},
-	}
+		InContext: contextID,
+		Param:     pParam, Values: pValues}
 }
 func NewGlGetString(
 	contextID atom.ContextID,
@@ -14801,30 +12925,24 @@ func NewGlGetString(
 	pResult string,
 ) *GlGetString {
 	return &GlGetString{
-		Context: contextID,
-		In:      GlGetString_In{Param: pParam},
-		Out:     GlGetString_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Param:     pParam, Result: pResult}
 }
 func NewGlEnable(
 	contextID atom.ContextID,
 	pCapability Capability,
 ) *GlEnable {
 	return &GlEnable{
-		Context: contextID,
-		In:      GlEnable_In{Capability: pCapability},
-		Out:     GlEnable_Out{},
-	}
+		InContext:  contextID,
+		Capability: pCapability}
 }
 func NewGlDisable(
 	contextID atom.ContextID,
 	pCapability Capability,
 ) *GlDisable {
 	return &GlDisable{
-		Context: contextID,
-		In:      GlDisable_In{Capability: pCapability},
-		Out:     GlDisable_Out{},
-	}
+		InContext:  contextID,
+		Capability: pCapability}
 }
 func NewGlIsEnabled(
 	contextID atom.ContextID,
@@ -14832,10 +12950,8 @@ func NewGlIsEnabled(
 	pResult bool,
 ) *GlIsEnabled {
 	return &GlIsEnabled{
-		Context: contextID,
-		In:      GlIsEnabled_In{Capability: pCapability},
-		Out:     GlIsEnabled_Out{Result: pResult},
-	}
+		InContext:  contextID,
+		Capability: pCapability, Result: pResult}
 }
 func NewGlMapBufferRange(
 	contextID atom.ContextID,
@@ -14846,20 +12962,16 @@ func NewGlMapBufferRange(
 	pResult memory.Pointer,
 ) *GlMapBufferRange {
 	return &GlMapBufferRange{
-		Context: contextID,
-		In:      GlMapBufferRange_In{Target: pTarget, Offset: pOffset, Length: pLength, Access: pAccess},
-		Out:     GlMapBufferRange_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Target:    pTarget, Offset: pOffset, Length: pLength, Access: pAccess, Result: pResult}
 }
 func NewGlUnmapBuffer(
 	contextID atom.ContextID,
 	pTarget MapBufferTarget,
 ) *GlUnmapBuffer {
 	return &GlUnmapBuffer{
-		Context: contextID,
-		In:      GlUnmapBuffer_In{Target: pTarget},
-		Out:     GlUnmapBuffer_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget}
 }
 func NewGlInvalidateFramebuffer(
 	contextID atom.ContextID,
@@ -14868,10 +12980,8 @@ func NewGlInvalidateFramebuffer(
 	pAttachments FramebufferAttachmentArray,
 ) *GlInvalidateFramebuffer {
 	return &GlInvalidateFramebuffer{
-		Context: contextID,
-		In:      GlInvalidateFramebuffer_In{Target: pTarget, Count: pCount, Attachments: pAttachments},
-		Out:     GlInvalidateFramebuffer_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Count: pCount, Attachments: pAttachments}
 }
 func NewGlRenderbufferStorageMultisample(
 	contextID atom.ContextID,
@@ -14882,10 +12992,8 @@ func NewGlRenderbufferStorageMultisample(
 	pHeight int32,
 ) *GlRenderbufferStorageMultisample {
 	return &GlRenderbufferStorageMultisample{
-		Context: contextID,
-		In:      GlRenderbufferStorageMultisample_In{Target: pTarget, Samples: pSamples, Format: pFormat, Width: pWidth, Height: pHeight},
-		Out:     GlRenderbufferStorageMultisample_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Samples: pSamples, Format: pFormat, Width: pWidth, Height: pHeight}
 }
 func NewGlBlitFramebuffer(
 	contextID atom.ContextID,
@@ -14901,10 +13009,8 @@ func NewGlBlitFramebuffer(
 	pFilter TextureFilterMode,
 ) *GlBlitFramebuffer {
 	return &GlBlitFramebuffer{
-		Context: contextID,
-		In:      GlBlitFramebuffer_In{SrcX0: pSrcX0, SrcY0: pSrcY0, SrcX1: pSrcX1, SrcY1: pSrcY1, DstX0: pDstX0, DstY0: pDstY0, DstX1: pDstX1, DstY1: pDstY1, Mask: pMask, Filter: pFilter},
-		Out:     GlBlitFramebuffer_Out{},
-	}
+		InContext: contextID,
+		SrcX0:     pSrcX0, SrcY0: pSrcY0, SrcX1: pSrcX1, SrcY1: pSrcY1, DstX0: pDstX0, DstY0: pDstY0, DstX1: pDstX1, DstY1: pDstY1, Mask: pMask, Filter: pFilter}
 }
 func NewGlGenQueries(
 	contextID atom.ContextID,
@@ -14912,10 +13018,8 @@ func NewGlGenQueries(
 	pQueries QueryIdArray,
 ) *GlGenQueries {
 	return &GlGenQueries{
-		Context: contextID,
-		In:      GlGenQueries_In{Count: pCount},
-		Out:     GlGenQueries_Out{Queries: pQueries},
-	}
+		InContext: contextID,
+		Count:     pCount, Queries: pQueries}
 }
 func NewGlBeginQuery(
 	contextID atom.ContextID,
@@ -14923,20 +13027,16 @@ func NewGlBeginQuery(
 	pQuery QueryId,
 ) *GlBeginQuery {
 	return &GlBeginQuery{
-		Context: contextID,
-		In:      GlBeginQuery_In{Target: pTarget, Query: pQuery},
-		Out:     GlBeginQuery_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Query: pQuery}
 }
 func NewGlEndQuery(
 	contextID atom.ContextID,
 	pTarget QueryTarget,
 ) *GlEndQuery {
 	return &GlEndQuery{
-		Context: contextID,
-		In:      GlEndQuery_In{Target: pTarget},
-		Out:     GlEndQuery_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget}
 }
 func NewGlDeleteQueries(
 	contextID atom.ContextID,
@@ -14944,10 +13044,8 @@ func NewGlDeleteQueries(
 	pQueries QueryIdArray,
 ) *GlDeleteQueries {
 	return &GlDeleteQueries{
-		Context: contextID,
-		In:      GlDeleteQueries_In{Count: pCount, Queries: pQueries},
-		Out:     GlDeleteQueries_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Queries: pQueries}
 }
 func NewGlIsQuery(
 	contextID atom.ContextID,
@@ -14955,10 +13053,8 @@ func NewGlIsQuery(
 	pResult bool,
 ) *GlIsQuery {
 	return &GlIsQuery{
-		Context: contextID,
-		In:      GlIsQuery_In{Query: pQuery},
-		Out:     GlIsQuery_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Query:     pQuery, Result: pResult}
 }
 func NewGlGetQueryiv(
 	contextID atom.ContextID,
@@ -14967,10 +13063,8 @@ func NewGlGetQueryiv(
 	pValue int32,
 ) *GlGetQueryiv {
 	return &GlGetQueryiv{
-		Context: contextID,
-		In:      GlGetQueryiv_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetQueryiv_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetQueryObjectuiv(
 	contextID atom.ContextID,
@@ -14979,10 +13073,8 @@ func NewGlGetQueryObjectuiv(
 	pValue uint32,
 ) *GlGetQueryObjectuiv {
 	return &GlGetQueryObjectuiv{
-		Context: contextID,
-		In:      GlGetQueryObjectuiv_In{Query: pQuery, Parameter: pParameter},
-		Out:     GlGetQueryObjectuiv_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Query:     pQuery, Parameter: pParameter, Value: pValue}
 }
 func NewGlGenQueriesEXT(
 	contextID atom.ContextID,
@@ -14990,10 +13082,8 @@ func NewGlGenQueriesEXT(
 	pQueries QueryIdArray,
 ) *GlGenQueriesEXT {
 	return &GlGenQueriesEXT{
-		Context: contextID,
-		In:      GlGenQueriesEXT_In{Count: pCount},
-		Out:     GlGenQueriesEXT_Out{Queries: pQueries},
-	}
+		InContext: contextID,
+		Count:     pCount, Queries: pQueries}
 }
 func NewGlBeginQueryEXT(
 	contextID atom.ContextID,
@@ -15001,20 +13091,16 @@ func NewGlBeginQueryEXT(
 	pQuery QueryId,
 ) *GlBeginQueryEXT {
 	return &GlBeginQueryEXT{
-		Context: contextID,
-		In:      GlBeginQueryEXT_In{Target: pTarget, Query: pQuery},
-		Out:     GlBeginQueryEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget, Query: pQuery}
 }
 func NewGlEndQueryEXT(
 	contextID atom.ContextID,
 	pTarget QueryTarget,
 ) *GlEndQueryEXT {
 	return &GlEndQueryEXT{
-		Context: contextID,
-		In:      GlEndQueryEXT_In{Target: pTarget},
-		Out:     GlEndQueryEXT_Out{},
-	}
+		InContext: contextID,
+		Target:    pTarget}
 }
 func NewGlDeleteQueriesEXT(
 	contextID atom.ContextID,
@@ -15022,10 +13108,8 @@ func NewGlDeleteQueriesEXT(
 	pQueries QueryIdArray,
 ) *GlDeleteQueriesEXT {
 	return &GlDeleteQueriesEXT{
-		Context: contextID,
-		In:      GlDeleteQueriesEXT_In{Count: pCount, Queries: pQueries},
-		Out:     GlDeleteQueriesEXT_Out{},
-	}
+		InContext: contextID,
+		Count:     pCount, Queries: pQueries}
 }
 func NewGlIsQueryEXT(
 	contextID atom.ContextID,
@@ -15033,10 +13117,8 @@ func NewGlIsQueryEXT(
 	pResult bool,
 ) *GlIsQueryEXT {
 	return &GlIsQueryEXT{
-		Context: contextID,
-		In:      GlIsQueryEXT_In{Query: pQuery},
-		Out:     GlIsQueryEXT_Out{Result: pResult},
-	}
+		InContext: contextID,
+		Query:     pQuery, Result: pResult}
 }
 func NewGlQueryCounterEXT(
 	contextID atom.ContextID,
@@ -15044,10 +13126,8 @@ func NewGlQueryCounterEXT(
 	pTarget QueryTarget,
 ) *GlQueryCounterEXT {
 	return &GlQueryCounterEXT{
-		Context: contextID,
-		In:      GlQueryCounterEXT_In{Query: pQuery, Target: pTarget},
-		Out:     GlQueryCounterEXT_Out{},
-	}
+		InContext: contextID,
+		Query:     pQuery, Target: pTarget}
 }
 func NewGlGetQueryivEXT(
 	contextID atom.ContextID,
@@ -15056,10 +13136,8 @@ func NewGlGetQueryivEXT(
 	pValue int32,
 ) *GlGetQueryivEXT {
 	return &GlGetQueryivEXT{
-		Context: contextID,
-		In:      GlGetQueryivEXT_In{Target: pTarget, Parameter: pParameter},
-		Out:     GlGetQueryivEXT_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Target:    pTarget, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetQueryObjectivEXT(
 	contextID atom.ContextID,
@@ -15068,10 +13146,8 @@ func NewGlGetQueryObjectivEXT(
 	pValue int32,
 ) *GlGetQueryObjectivEXT {
 	return &GlGetQueryObjectivEXT{
-		Context: contextID,
-		In:      GlGetQueryObjectivEXT_In{Query: pQuery, Parameter: pParameter},
-		Out:     GlGetQueryObjectivEXT_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Query:     pQuery, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetQueryObjectuivEXT(
 	contextID atom.ContextID,
@@ -15080,10 +13156,8 @@ func NewGlGetQueryObjectuivEXT(
 	pValue uint32,
 ) *GlGetQueryObjectuivEXT {
 	return &GlGetQueryObjectuivEXT{
-		Context: contextID,
-		In:      GlGetQueryObjectuivEXT_In{Query: pQuery, Parameter: pParameter},
-		Out:     GlGetQueryObjectuivEXT_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Query:     pQuery, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetQueryObjecti64vEXT(
 	contextID atom.ContextID,
@@ -15092,10 +13166,8 @@ func NewGlGetQueryObjecti64vEXT(
 	pValue int64,
 ) *GlGetQueryObjecti64vEXT {
 	return &GlGetQueryObjecti64vEXT{
-		Context: contextID,
-		In:      GlGetQueryObjecti64vEXT_In{Query: pQuery, Parameter: pParameter},
-		Out:     GlGetQueryObjecti64vEXT_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Query:     pQuery, Parameter: pParameter, Value: pValue}
 }
 func NewGlGetQueryObjectui64vEXT(
 	contextID atom.ContextID,
@@ -15104,10 +13176,8 @@ func NewGlGetQueryObjectui64vEXT(
 	pValue uint64,
 ) *GlGetQueryObjectui64vEXT {
 	return &GlGetQueryObjectui64vEXT{
-		Context: contextID,
-		In:      GlGetQueryObjectui64vEXT_In{Query: pQuery, Parameter: pParameter},
-		Out:     GlGetQueryObjectui64vEXT_Out{Value: pValue},
-	}
+		InContext: contextID,
+		Query:     pQuery, Parameter: pParameter, Value: pValue}
 }
 
 ////////////////////////////////////////////////////////////////////////////////

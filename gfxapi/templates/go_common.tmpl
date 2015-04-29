@@ -164,7 +164,7 @@ limitations under the License.
   Emits the expression to lookup the given parameter.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.Parameter"}}{{AssertType $ "Parameter"}}{{if $.Output}}Out{{else}}In{{end}}.{{Macro "Go.Public" $.Name}}{{end}}
+{{define "Go.Parameter"}}{{AssertType $ "Parameter"}}{{Macro "Go.Public" $.Name}}{{end}}
 
 
 {{/*
@@ -173,20 +173,6 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.CmdName"}}{{AssertType $ "Function"}}{{if $.Owner}}{{Macro "Go.Type" $.Owner}}{{end}}{{Macro "Go.Public" $.Name}}{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the name of the specified command's input parameter structure.
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.CmdInsName"}}{{Macro "Go.CmdName" $}}_In{{end}}
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the name of the specified command's output parameter structure.
--------------------------------------------------------------------------------
-*/}}
-{{define "Go.CmdOutsName"}}{{Macro "Go.CmdName" $}}_Out{{end}}
 
 
 {{/*

@@ -29,7 +29,7 @@ func precisionStrip() atom.Transformer {
 		if cmd, ok := a.(*GlShaderSource); ok {
 			var src string
 
-			for _, s := range cmd.In.Source {
+			for _, s := range cmd.Source {
 				src = src + s
 			}
 
@@ -43,12 +43,10 @@ func precisionStrip() atom.Transformer {
 			src = fmt.Sprint(glsl.Formatter(tree))
 
 			out.Write(id, &GlShaderSource{
-				Context: a.ContextID(),
-				In: GlShaderSource_In{
-					Shader: cmd.In.Shader,
-					Count:  1,
-					Source: []string{src},
-				},
+				InContext: a.ContextID(),
+				Shader:    cmd.Shader,
+				Count:     1,
+				Source:    []string{src},
 			})
 		} else {
 			out.Write(id, a)

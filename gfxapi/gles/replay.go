@@ -196,16 +196,14 @@ func halfFloatOESToHalfFloatARB() atom.Transformer {
 
 	return atom.Transform("HalfFloatOESToHalfFloatARB", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if cmd, ok := a.(*GlVertexAttribPointer); ok &&
-			cmd.In.Type == VertexAttribType_GL_HALF_FLOAT_OES {
+			cmd.Type == VertexAttribType_GL_HALF_FLOAT_OES {
 			out.Write(id, &GlVertexAttribPointer{
-				In: GlVertexAttribPointer_In{
-					Location:   cmd.In.Location,
-					Size:       cmd.In.Size,
-					Type:       GL_HALF_FLOAT_ARB,
-					Normalized: cmd.In.Normalized,
-					Stride:     cmd.In.Stride,
-					Data:       cmd.In.Data,
-				},
+				Location:   cmd.Location,
+				Size:       cmd.Size,
+				Type:       GL_HALF_FLOAT_ARB,
+				Normalized: cmd.Normalized,
+				Stride:     cmd.Stride,
+				Data:       cmd.Data,
 			})
 		} else {
 			out.Write(id, a)

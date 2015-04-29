@@ -192,29 +192,12 @@ limitations under the License.
   {{$name := Macro "Go.CmdName" $.Command}}
   {{template "Go.CommentHeader" $name}}
 
-  type {{Macro "Go.CmdInsName" $.Command}} struct {
-    binary.Generate
-    {{range $p := $.Command.FullParameters}}
-      {{if not $p.Output}}
-        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
-      {{end}}
-    {{end}}
-  }
-
-  type {{Macro "Go.CmdOutsName" $.Command}} struct {
-    binary.Generate
-    {{range $p := $.Command.FullParameters}}
-      {{if $p.Output}}
-        {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
-      {{end}}
-    {{end}}
-  }
-
   type {{$name}} struct {
     binary.Generate
-    Context atom.ContextID
-    In  {{Macro "Go.CmdInsName" $.Command}}
-    Out {{Macro "Go.CmdOutsName" $.Command}}
+    InContext atom.ContextID
+    {{range $p := $.Command.FullParameters}}
+      {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
+    {{end}}
   }
 
   func (c *{{$name}}) String() string {
@@ -233,13 +216,13 @@ limitations under the License.
     )
     parts = append(parts, ")")
     {{if not (IsVoid $.Command.Return.Type)}}
-      parts = append(parts, fmt.Sprintf(" → %v", c.Out.Result))
+      parts = append(parts, fmt.Sprintf(" → %v", c.Result))
     {{end}}
     return strings.Join(parts, "")
   }
 
   func (c *{{$name}}) ContextID() atom.ContextID {
-    return c.Context
+    return c.InContext
   }
 
   func (c *{{$name}}) TypeID() atom.TypeID {
@@ -593,21 +576,10 @@ limitations under the License.
         {{end}}
       ) *{{$name}} {
       return &{{$name}} {
-        Context: contextID,
-        In: {{Macro "Go.CmdInsName" $c}}{§
-          {{range $p := $c.FullParameters}}
-            {{if not $p.Output}}
-              {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
-            {{end}}
-          {{end}}
-        },
-        Out: {{Macro "Go.CmdOutsName" $c}}{§
-          {{range $p := $c.FullParameters}}
-            {{if $p.Output}}
-              {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
-            {{end}}
-          {{end}}
-        },
+        InContext: contextID,
+        {{range $p := $c.FullParameters}}
+          {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
+        {{end}}
       }
     }
   {{end}}

@@ -160,10 +160,10 @@ limitations under the License.
   {{else if IsCast         $}}{{Macro "Go.Type" $.Type}}({{Macro "Read" $.Object}})
   {{else if IsCall         $}}{{Macro "Call" $}}
   {{else if IsUnknown      $}}{{Macro "Read" $.Inferred}}
-  {{else if IsObserved     $}}ϟa.Out.{{Macro "Go.Public" $.Parameter.Name}}
+  {{else if IsObserved     $}}ϟa.{{Macro "Go.Public" $.Parameter.Name}}
   {{else if IsMember       $}}{{Macro "Read" $.Object}}.{{Macro "Go.Public" $.Field.Name}}
   {{else if IsGlobal       $}}ϟc.{{$.Name}}
-  {{else if IsParameter    $}}{{if $.Output}}ϟo{{else}}ϟa.In{{end}}.{{Macro "Go.Public" $.Name}}
+  {{else if IsParameter    $}}ϟa.{{Macro "Go.Public" $.Name}}
   {{else if IsArrayIndex   $}}{{Macro "Read" $.Array}}[{{Macro "Read" $.Index}}]
   {{else if IsMapIndex     $}}{{Macro "Read" $.Map}}.Get({{Macro "Read" $.Index}})
   {{else if IsMapContains  $}}{{Macro "Read" $.Map}}.Contains({{Macro "Read" $.Key}})
