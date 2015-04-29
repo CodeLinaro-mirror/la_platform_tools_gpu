@@ -260,18 +260,46 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) *Ty
 	return t
 }
 
-// Sort is used to ensure stable ordering of Struct slices.
-// This is to ensure automatically generated code has minimum diffs.
-// The sort order is by Struct name.
-func Sort(structs []*Struct) {
-	sort.Sort(structsByName(structs))
+type sortEntry struct {
+	s       *Struct
+	visited bool
 }
 
-type structsByName []*Struct
+func walk(name string, byname map[string]*sortEntry, structs []*Struct, i int) int {
+	entry, found := byname[name]
+	if !found || entry.visited {
+		return i
+	}
+	entry.visited = true
+	for _, f := range entry.s.Fields {
+		i = walk(f.Type.Name, byname, structs, i)
+		if f.Type.SubType != nil {
+			i = walk(f.Type.SubType.Name, byname, structs, i)
+		}
+		if f.Type.KeyType != nil {
+			i = walk(f.Type.KeyType.Name, byname, structs, i)
+		}
+	}
+	structs[i] = entry.s
+	return i + 1
+}
 
-func (a structsByName) Len() int           { return len(a) }
-func (a structsByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a structsByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
+// Sort is used to ensure stable ordering of Struct slices.
+// This is to ensure automatically generated code has minimum diffs.
+// The sort order is by Struct name, but guarantees dependencies occur first.
+func Sort(structs []*Struct) {
+	names := make(sort.StringSlice, len(structs))
+	byname := make(map[string]*sortEntry, len(structs))
+	for i, s := range structs {
+		names[i] = s.Name
+		byname[s.Name] = &sortEntry{s, false}
+	}
+	names.Sort()
+	i := 0
+	for _, name := range names {
+		i = walk(name, byname, structs, i)
+	}
+}
 
 func getTemplate(t *template.Template, name string) *template.Template {
 	result := t.Lookup(name)
