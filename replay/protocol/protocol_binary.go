@@ -11,14 +11,64 @@ import (
 )
 
 func init() {
-	registry.Add((*Payload)(nil).Class())
 	registry.Add((*ResourceInfo)(nil).Class())
+	registry.Add((*Payload)(nil).Class())
 }
 
 var (
-	binaryIDPayload      = binary.ID{0x8b, 0x2c, 0x72, 0xa4, 0x9c, 0xec, 0x85, 0xf4, 0x10, 0xaa, 0x86, 0x3a, 0xe9, 0x7e, 0x5c, 0xfc, 0x33, 0xd7, 0x0a, 0x66}
 	binaryIDResourceInfo = binary.ID{0xbb, 0x38, 0xf6, 0x19, 0x39, 0xc0, 0xe0, 0x4b, 0x6b, 0xc9, 0x83, 0x6d, 0x6d, 0x88, 0x9d, 0xa6, 0x03, 0x28, 0x07, 0x9d}
+	binaryIDPayload      = binary.ID{0x8b, 0x2c, 0x72, 0xa4, 0x9c, 0xec, 0x85, 0xf4, 0x10, 0xaa, 0x86, 0x3a, 0xe9, 0x7e, 0x5c, 0xfc, 0x33, 0xd7, 0x0a, 0x66}
 )
+
+type binaryClassResourceInfo struct{}
+
+func (*ResourceInfo) Class() binary.Class {
+	return (*binaryClassResourceInfo)(nil)
+}
+func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) error {
+	if err := e.String(o.ID); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Size); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.ID = string(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Size = uint32(obj)
+	}
+	return nil
+}
+func doSkipResourceInfo(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
+func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
+func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeResourceInfo(e, obj.(*ResourceInfo))
+}
+func (*binaryClassResourceInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &ResourceInfo{}
+	return obj, doDecodeResourceInfo(d, obj)
+}
+func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
+}
+func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipResourceInfo(d) }
 
 type binaryClassPayload struct{}
 
@@ -138,53 +188,3 @@ func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodePayload(d, obj.(*Payload))
 }
 func (*binaryClassPayload) Skip(d binary.Decoder) error { return doSkipPayload(d) }
-
-type binaryClassResourceInfo struct{}
-
-func (*ResourceInfo) Class() binary.Class {
-	return (*binaryClassResourceInfo)(nil)
-}
-func doEncodeResourceInfo(e binary.Encoder, o *ResourceInfo) error {
-	if err := e.String(o.ID); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Size); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeResourceInfo(d binary.Decoder, o *ResourceInfo) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.ID = string(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Size = uint32(obj)
-	}
-	return nil
-}
-func doSkipResourceInfo(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassResourceInfo) ID() binary.ID      { return binaryIDResourceInfo }
-func (*binaryClassResourceInfo) New() binary.Object { return &ResourceInfo{} }
-func (*binaryClassResourceInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeResourceInfo(e, obj.(*ResourceInfo))
-}
-func (*binaryClassResourceInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &ResourceInfo{}
-	return obj, doDecodeResourceInfo(d, obj)
-}
-func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
-}
-func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipResourceInfo(d) }

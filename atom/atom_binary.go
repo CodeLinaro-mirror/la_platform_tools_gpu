@@ -12,18 +12,68 @@ import (
 )
 
 func init() {
+	registry.Add((*Range)(nil).Class())
 	registry.Add((*Group)(nil).Class())
 	registry.Add((*Observation)(nil).Class())
-	registry.Add((*Range)(nil).Class())
 	registry.Add((*Resource)(nil).Class())
 }
 
 var (
+	binaryIDRange       = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
 	binaryIDGroup       = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
 	binaryIDObservation = binary.ID{0x2c, 0x9a, 0x2b, 0x93, 0xd5, 0xce, 0x4b, 0x84, 0x06, 0xcc, 0x43, 0xcb, 0xb7, 0x4b, 0xc4, 0x0a, 0x9b, 0x05, 0x11, 0x48}
-	binaryIDRange       = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
 	binaryIDResource    = binary.ID{0xb8, 0x93, 0xdf, 0x90, 0x52, 0x2e, 0x33, 0x0b, 0x84, 0x00, 0x06, 0x1e, 0xca, 0x2d, 0xb0, 0x0a, 0xd6, 0x7c, 0x65, 0x25}
 )
+
+type binaryClassRange struct{}
+
+func (*Range) Class() binary.Class {
+	return (*binaryClassRange)(nil)
+}
+func doEncodeRange(e binary.Encoder, o *Range) error {
+	if err := e.Uint64(uint64(o.Start)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.End)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeRange(d binary.Decoder, o *Range) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Start = ID(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.End = ID(obj)
+	}
+	return nil
+}
+func doSkipRange(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
+func (*binaryClassRange) New() binary.Object { return &Range{} }
+func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRange(e, obj.(*Range))
+}
+func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Range{}
+	return obj, doDecodeRange(d, obj)
+}
+func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRange(d, obj.(*Range))
+}
+func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
 
 type binaryClassGroup struct{}
 
@@ -158,56 +208,6 @@ func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeObservation(d, obj.(*Observation))
 }
 func (*binaryClassObservation) Skip(d binary.Decoder) error { return doSkipObservation(d) }
-
-type binaryClassRange struct{}
-
-func (*Range) Class() binary.Class {
-	return (*binaryClassRange)(nil)
-}
-func doEncodeRange(e binary.Encoder, o *Range) error {
-	if err := e.Uint64(uint64(o.Start)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.End)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeRange(d binary.Decoder, o *Range) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Start = ID(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.End = ID(obj)
-	}
-	return nil
-}
-func doSkipRange(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassRange) ID() binary.ID      { return binaryIDRange }
-func (*binaryClassRange) New() binary.Object { return &Range{} }
-func (*binaryClassRange) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeRange(e, obj.(*Range))
-}
-func (*binaryClassRange) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Range{}
-	return obj, doDecodeRange(d, obj)
-}
-func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeRange(d, obj.(*Range))
-}
-func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
 
 type binaryClassResource struct{}
 
