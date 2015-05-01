@@ -149,6 +149,12 @@ func (ω *EglInitialize) Replay(id atom.ID, s *state.State, b *builder.Builder, 
 func (ω *EglCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
 func (ω *EglMakeCurrent) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *EglSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
+func (ω *GlXCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
+func (ω *GlXCreateNewContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
+}
+func (ω *GlXMakeContextCurrent) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {
+}
+func (ω *GlXSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *WglCreateContext) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool) {}
 func (ω *WglMakeCurrent) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}
 func (ω *WglSwapBuffers) Replay(id atom.ID, s *state.State, b *builder.Builder, wantOutput bool)   {}

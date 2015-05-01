@@ -28,6 +28,12 @@ void GlesImports::Resolve() {
     eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(GetGfxProcAddress("eglCreateContext"));
     eglMakeCurrent = reinterpret_cast<PFNEGLMAKECURRENT>(GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers = reinterpret_cast<PFNEGLSWAPBUFFERS>(GetGfxProcAddress("eglSwapBuffers"));
+    glXCreateContext = reinterpret_cast<PFNGLXCREATECONTEXT>(GetGfxProcAddress("glXCreateContext"));
+    glXCreateNewContext =
+            reinterpret_cast<PFNGLXCREATENEWCONTEXT>(GetGfxProcAddress("glXCreateNewContext"));
+    glXMakeContextCurrent =
+            reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(GetGfxProcAddress("glXMakeContextCurrent"));
+    glXSwapBuffers = reinterpret_cast<PFNGLXSWAPBUFFERS>(GetGfxProcAddress("glXSwapBuffers"));
     wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(GetGfxProcAddress("wglCreateContext"));
     wglMakeCurrent = reinterpret_cast<PFNWGLMAKECURRENT>(GetGfxProcAddress("wglMakeCurrent"));
     wglSwapBuffers = reinterpret_cast<PFNWGLSWAPBUFFERS>(GetGfxProcAddress("wglSwapBuffers"));

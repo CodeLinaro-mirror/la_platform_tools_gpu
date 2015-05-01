@@ -19,6 +19,8 @@
 
 #include "gles_spy.h"
 
+#include <memory>
+
 namespace gapii {
 
 class Spy : public GlesSpy {
@@ -30,6 +32,10 @@ public:
     HGLRC wglCreateContext(HDC hdc);
     BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
     CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx);
+    GLXContext glXCreateContext(const void* display, const void* vis,
+                                GLXContext shareList, bool direct);
+    GLXContext glXCreateNewContext(const void* display, const void* fbconfig, uint32_t type,
+                                   GLXContext shared, bool direct);
 
 private:
     void init(int32_t width, int32_t height,
@@ -37,7 +43,6 @@ private:
 
     std::shared_ptr<gapic::Encoder> mEncoder;
 };
-
 
 } // namespace gapii
 

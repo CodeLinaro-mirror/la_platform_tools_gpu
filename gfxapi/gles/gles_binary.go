@@ -208,6 +208,10 @@ func init() {
 	registry.Add((*GlVertexAttrib4fv)(nil).Class())
 	registry.Add((*GlVertexAttribPointer)(nil).Class())
 	registry.Add((*GlViewport)(nil).Class())
+	registry.Add((*GlXCreateContext)(nil).Class())
+	registry.Add((*GlXCreateNewContext)(nil).Class())
+	registry.Add((*GlXMakeContextCurrent)(nil).Class())
+	registry.Add((*GlXSwapBuffers)(nil).Class())
 	registry.Add((*Rect)(nil).Class())
 	registry.Add((*RasterizerState)(nil).Class())
 	registry.Add((*VertexAttributeArray)(nil).Class())
@@ -374,7 +378,7 @@ var (
 	binaryIDGlIsVertexArrayOES                     = binary.ID{0x5d, 0xf7, 0x44, 0x7f, 0x4e, 0x4e, 0x63, 0xb3, 0xac, 0xfc, 0x7b, 0xf8, 0xe3, 0x71, 0x76, 0xfa, 0x61, 0xbf, 0xae, 0x9b}
 	binaryIDGlLineWidth                            = binary.ID{0x81, 0x3c, 0xcf, 0x11, 0xb0, 0x21, 0x5e, 0xf9, 0x17, 0xc1, 0xda, 0xc7, 0x19, 0x66, 0xd6, 0xb0, 0x6b, 0x8a, 0x02, 0xd2}
 	binaryIDGlLinkProgram                          = binary.ID{0xca, 0x90, 0x5b, 0x55, 0x6a, 0x5e, 0xe6, 0x02, 0x1f, 0xbb, 0xc5, 0x02, 0x3f, 0x08, 0x6f, 0x48, 0xed, 0x26, 0xd7, 0xd9}
-	binaryIDGlMapBufferRange                       = binary.ID{0xa1, 0x43, 0x8b, 0x2f, 0xc2, 0x21, 0x96, 0xd4, 0xdb, 0x35, 0x80, 0xcb, 0x9a, 0x33, 0xb6, 0x70, 0x92, 0xd6, 0x51, 0x41}
+	binaryIDGlMapBufferRange                       = binary.ID{0x6c, 0x14, 0xfd, 0x50, 0x41, 0x57, 0x8e, 0xc3, 0x78, 0x9e, 0x92, 0xfb, 0xb3, 0x38, 0x89, 0x8b, 0xa5, 0x52, 0xb4, 0xf2}
 	binaryIDGlPixelStorei                          = binary.ID{0xf4, 0x96, 0xb2, 0x54, 0x0a, 0x2f, 0x76, 0xe5, 0xfa, 0x9c, 0x39, 0x36, 0x37, 0xb5, 0x27, 0x86, 0xce, 0xa8, 0x87, 0xed}
 	binaryIDGlPolygonOffset                        = binary.ID{0x8a, 0x85, 0x25, 0xdc, 0x98, 0x2f, 0xfa, 0x58, 0x31, 0xa3, 0x34, 0xfe, 0x15, 0x3c, 0xdc, 0x1d, 0x81, 0x63, 0x91, 0xb2}
 	binaryIDGlPopGroupMarkerEXT                    = binary.ID{0xff, 0xa5, 0x36, 0x36, 0x1b, 0xa3, 0x60, 0x91, 0x06, 0xba, 0x07, 0x3c, 0x84, 0x88, 0xa6, 0xde, 0x15, 0x2f, 0xd3, 0xa8}
@@ -423,7 +427,7 @@ var (
 	binaryIDGlUniformMatrix2fv                     = binary.ID{0x21, 0x7e, 0xda, 0x98, 0xae, 0xcd, 0xdd, 0x7f, 0xdc, 0xdd, 0x06, 0xa1, 0x2e, 0xc7, 0x75, 0xc3, 0x70, 0x19, 0x08, 0xe5}
 	binaryIDGlUniformMatrix3fv                     = binary.ID{0x3e, 0xad, 0x77, 0xcd, 0x26, 0x3e, 0xe8, 0x0a, 0x92, 0xef, 0xd5, 0xbf, 0x56, 0x26, 0xad, 0xa0, 0x34, 0x78, 0xb5, 0x14}
 	binaryIDGlUniformMatrix4fv                     = binary.ID{0x18, 0x2c, 0xc3, 0x64, 0xf0, 0xc2, 0x76, 0xb6, 0x72, 0x51, 0x8a, 0xb7, 0x62, 0xd5, 0xbc, 0x23, 0xea, 0x3b, 0xca, 0x5c}
-	binaryIDGlUnmapBuffer                          = binary.ID{0xe1, 0xdc, 0xf6, 0xd0, 0x28, 0x25, 0xfa, 0x7d, 0x7d, 0xc1, 0x68, 0xc0, 0x9d, 0x48, 0x30, 0x2b, 0xcd, 0x98, 0x0f, 0x9b}
+	binaryIDGlUnmapBuffer                          = binary.ID{0x8b, 0x7f, 0x1a, 0x29, 0x93, 0xd6, 0x61, 0x90, 0x57, 0x92, 0xcc, 0x46, 0x95, 0x0d, 0x38, 0x87, 0x64, 0x1c, 0x7b, 0x2a}
 	binaryIDGlUseProgram                           = binary.ID{0x4c, 0x0a, 0x5b, 0x99, 0xc8, 0x71, 0xec, 0x50, 0x81, 0x16, 0x80, 0xa4, 0x70, 0x3d, 0x38, 0x83, 0x10, 0xd6, 0x8b, 0x4d}
 	binaryIDGlValidateProgram                      = binary.ID{0x51, 0xa0, 0x76, 0x31, 0xcd, 0xe2, 0x0f, 0xe8, 0x5f, 0x15, 0x3b, 0x4d, 0xaf, 0x4a, 0xad, 0xdf, 0xe5, 0x3e, 0xf6, 0x90}
 	binaryIDGlVertexAttrib1f                       = binary.ID{0x32, 0xc2, 0x40, 0x28, 0xa0, 0xfb, 0x28, 0x19, 0x6c, 0x58, 0xa5, 0x2a, 0x34, 0xc1, 0xae, 0x86, 0x91, 0xc9, 0x68, 0xc1}
@@ -436,6 +440,10 @@ var (
 	binaryIDGlVertexAttrib4fv                      = binary.ID{0xf3, 0x06, 0x3c, 0x6a, 0x24, 0xde, 0xf7, 0x46, 0x8d, 0x7f, 0x06, 0xf4, 0x88, 0xf6, 0x81, 0xf8, 0x5f, 0x64, 0x6f, 0x18}
 	binaryIDGlVertexAttribPointer                  = binary.ID{0x40, 0xb9, 0x82, 0xdc, 0xb2, 0xb6, 0xec, 0x64, 0x41, 0x63, 0x2e, 0x52, 0x7e, 0xdb, 0x10, 0xa8, 0x0f, 0xee, 0x9a, 0xec}
 	binaryIDGlViewport                             = binary.ID{0x1d, 0x68, 0xb3, 0xfa, 0x74, 0x09, 0x49, 0xa3, 0x1b, 0x0b, 0x09, 0xb8, 0x99, 0x26, 0xa8, 0x86, 0x86, 0x5d, 0x49, 0xb1}
+	binaryIDGlXCreateContext                       = binary.ID{0x76, 0xf7, 0x59, 0x8d, 0xb5, 0x53, 0x50, 0xbc, 0xac, 0x7b, 0x89, 0x88, 0x86, 0xbf, 0x58, 0xd6, 0x61, 0xcf, 0xd2, 0xec}
+	binaryIDGlXCreateNewContext                    = binary.ID{0xf4, 0x19, 0xae, 0x2a, 0x88, 0xfb, 0xef, 0xb4, 0x2d, 0x12, 0x87, 0x2a, 0x2e, 0x92, 0xdc, 0x92, 0xc8, 0x47, 0xbb, 0x8b}
+	binaryIDGlXMakeContextCurrent                  = binary.ID{0x45, 0x81, 0x33, 0xf5, 0x69, 0x78, 0x90, 0x70, 0xeb, 0xd4, 0xc5, 0x56, 0xdc, 0xdb, 0x67, 0x24, 0xcb, 0xb1, 0x0f, 0x47}
+	binaryIDGlXSwapBuffers                         = binary.ID{0x87, 0x97, 0x4f, 0xd3, 0xe6, 0xfd, 0x29, 0x32, 0x62, 0x0c, 0xdb, 0x0e, 0x6b, 0x9e, 0x9a, 0xb6, 0x78, 0x10, 0x11, 0xdb}
 	binaryIDRect                                   = binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}
 	binaryIDRasterizerState                        = binary.ID{0x83, 0xef, 0x5b, 0xb5, 0xd4, 0xd5, 0x55, 0x96, 0x28, 0xf8, 0x5b, 0x5b, 0x40, 0xfe, 0x1e, 0xf9, 0x9a, 0x50, 0x8c, 0xcf}
 	binaryIDVertexAttributeArray                   = binary.ID{0x7e, 0xf1, 0x81, 0xca, 0x06, 0xda, 0xe3, 0xb7, 0x47, 0xe8, 0xdf, 0xb5, 0x8a, 0x82, 0x2c, 0xc1, 0x45, 0x5e, 0x1d, 0xc8}
@@ -10277,7 +10285,7 @@ func doDecodeGlMapBufferRange(d binary.Decoder, o *GlMapBufferRange) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = MapBufferTarget(obj)
+		o.Target = BufferTarget(obj)
 	}
 	if obj, err := d.Int32(); err != nil {
 		return err
@@ -14489,7 +14497,7 @@ func doDecodeGlUnmapBuffer(d binary.Decoder, o *GlUnmapBuffer) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.Target = MapBufferTarget(obj)
+		o.Target = BufferTarget(obj)
 	}
 	return nil
 }
@@ -15431,6 +15439,353 @@ func (*binaryClassGlViewport) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlViewport(d, obj.(*GlViewport))
 }
 func (*binaryClassGlViewport) Skip(d binary.Decoder) error { return doSkipGlViewport(d) }
+
+type binaryClassGlXCreateContext struct{}
+
+func (*GlXCreateContext) Class() binary.Class {
+	return (*binaryClassGlXCreateContext)(nil)
+}
+func doEncodeGlXCreateContext(e binary.Encoder, o *GlXCreateContext) error {
+	if err := e.Uint32(uint32(o.InContext)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Dpy)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Vis)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.ShareList)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Direct); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXCreateContext(d binary.Decoder, o *GlXCreateContext) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.InContext = atom.ContextID(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Dpy = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Vis = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.ShareList = GLXContext(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Direct = bool(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Result = GLXContext(obj)
+	}
+	return nil
+}
+func doSkipGlXCreateContext(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXCreateContext) ID() binary.ID      { return binaryIDGlXCreateContext }
+func (*binaryClassGlXCreateContext) New() binary.Object { return &GlXCreateContext{} }
+func (*binaryClassGlXCreateContext) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXCreateContext(e, obj.(*GlXCreateContext))
+}
+func (*binaryClassGlXCreateContext) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXCreateContext{}
+	return obj, doDecodeGlXCreateContext(d, obj)
+}
+func (*binaryClassGlXCreateContext) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXCreateContext(d, obj.(*GlXCreateContext))
+}
+func (*binaryClassGlXCreateContext) Skip(d binary.Decoder) error { return doSkipGlXCreateContext(d) }
+
+type binaryClassGlXCreateNewContext struct{}
+
+func (*GlXCreateNewContext) Class() binary.Class {
+	return (*binaryClassGlXCreateNewContext)(nil)
+}
+func doEncodeGlXCreateNewContext(e binary.Encoder, o *GlXCreateNewContext) error {
+	if err := e.Uint32(uint32(o.InContext)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Fbconfig)); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Type); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Shared)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Direct); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXCreateNewContext(d binary.Decoder, o *GlXCreateNewContext) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.InContext = atom.ContextID(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Fbconfig = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = uint32(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Shared = GLXContext(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Direct = bool(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Result = GLXContext(obj)
+	}
+	return nil
+}
+func doSkipGlXCreateNewContext(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXCreateNewContext) ID() binary.ID      { return binaryIDGlXCreateNewContext }
+func (*binaryClassGlXCreateNewContext) New() binary.Object { return &GlXCreateNewContext{} }
+func (*binaryClassGlXCreateNewContext) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXCreateNewContext(e, obj.(*GlXCreateNewContext))
+}
+func (*binaryClassGlXCreateNewContext) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXCreateNewContext{}
+	return obj, doDecodeGlXCreateNewContext(d, obj)
+}
+func (*binaryClassGlXCreateNewContext) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXCreateNewContext(d, obj.(*GlXCreateNewContext))
+}
+func (*binaryClassGlXCreateNewContext) Skip(d binary.Decoder) error {
+	return doSkipGlXCreateNewContext(d)
+}
+
+type binaryClassGlXMakeContextCurrent struct{}
+
+func (*GlXMakeContextCurrent) Class() binary.Class {
+	return (*binaryClassGlXMakeContextCurrent)(nil)
+}
+func doEncodeGlXMakeContextCurrent(e binary.Encoder, o *GlXMakeContextCurrent) error {
+	if err := e.Uint32(uint32(o.InContext)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Draw)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Read)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Ctx)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXMakeContextCurrent(d binary.Decoder, o *GlXMakeContextCurrent) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.InContext = atom.ContextID(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Draw = GLXDrawable(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Read = GLXDrawable(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Ctx = GLXContext(obj)
+	}
+	return nil
+}
+func doSkipGlXMakeContextCurrent(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXMakeContextCurrent) ID() binary.ID      { return binaryIDGlXMakeContextCurrent }
+func (*binaryClassGlXMakeContextCurrent) New() binary.Object { return &GlXMakeContextCurrent{} }
+func (*binaryClassGlXMakeContextCurrent) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXMakeContextCurrent(e, obj.(*GlXMakeContextCurrent))
+}
+func (*binaryClassGlXMakeContextCurrent) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXMakeContextCurrent{}
+	return obj, doDecodeGlXMakeContextCurrent(d, obj)
+}
+func (*binaryClassGlXMakeContextCurrent) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXMakeContextCurrent(d, obj.(*GlXMakeContextCurrent))
+}
+func (*binaryClassGlXMakeContextCurrent) Skip(d binary.Decoder) error {
+	return doSkipGlXMakeContextCurrent(d)
+}
+
+type binaryClassGlXSwapBuffers struct{}
+
+func (*GlXSwapBuffers) Class() binary.Class {
+	return (*binaryClassGlXSwapBuffers)(nil)
+}
+func doEncodeGlXSwapBuffers(e binary.Encoder, o *GlXSwapBuffers) error {
+	if err := e.Uint32(uint32(o.InContext)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Display)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Drawable)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeGlXSwapBuffers(d binary.Decoder, o *GlXSwapBuffers) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.InContext = atom.ContextID(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Display = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Drawable = GLXDrawable(obj)
+	}
+	return nil
+}
+func doSkipGlXSwapBuffers(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassGlXSwapBuffers) ID() binary.ID      { return binaryIDGlXSwapBuffers }
+func (*binaryClassGlXSwapBuffers) New() binary.Object { return &GlXSwapBuffers{} }
+func (*binaryClassGlXSwapBuffers) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeGlXSwapBuffers(e, obj.(*GlXSwapBuffers))
+}
+func (*binaryClassGlXSwapBuffers) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &GlXSwapBuffers{}
+	return obj, doDecodeGlXSwapBuffers(d, obj)
+}
+func (*binaryClassGlXSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeGlXSwapBuffers(d, obj.(*GlXSwapBuffers))
+}
+func (*binaryClassGlXSwapBuffers) Skip(d binary.Decoder) error { return doSkipGlXSwapBuffers(d) }
 
 type binaryClassRect struct{}
 

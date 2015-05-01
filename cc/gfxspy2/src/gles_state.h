@@ -44,6 +44,15 @@ public:
                                EGLBoolean const result);
     inline void eglSwapBuffers(EGLDisplay const display, const void* const surface,
                                EGLBoolean const result);
+    inline void glXCreateContext(const void* const dpy, const void* const vis,
+                                 GLXContext const shareList, bool const direct,
+                                 GLXContext const result);
+    inline void glXCreateNewContext(const void* const display, const void* const fbconfig,
+                                    uint32_t const type, GLXContext const shared, bool const direct,
+                                    GLXContext const result);
+    inline void glXMakeContextCurrent(const void* const display, GLXDrawable const draw,
+                                      GLXDrawable const read, GLXContext const ctx);
+    inline void glXSwapBuffers(const void* const display, GLXDrawable const drawable);
     inline void wglCreateContext(HDC const hdc, HGLRC const result);
     inline void wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result);
     inline void wglSwapBuffers(HDC const hdc);
@@ -462,6 +471,23 @@ inline void GlesState::eglSwapBuffers(EGLDisplay const display, const void* cons
                                       EGLBoolean const result) {
     return;
 }
+
+inline void GlesState::glXCreateContext(const void* const dpy, const void* const vis,
+                                        GLXContext const shareList, bool const direct,
+                                        GLXContext const result) {
+    return;
+}
+
+inline void GlesState::glXCreateNewContext(const void* const display, const void* const fbconfig,
+                                           uint32_t const type, GLXContext const shared,
+                                           bool const direct, GLXContext const result) {
+    return;
+}
+
+inline void GlesState::glXMakeContextCurrent(const void* const display, GLXDrawable const draw,
+                                             GLXDrawable const read, GLXContext const ctx) {}
+
+inline void GlesState::glXSwapBuffers(const void* const display, GLXDrawable const drawable) {}
 
 inline void GlesState::wglCreateContext(HDC const hdc, HGLRC const result) { return; }
 
@@ -1080,7 +1106,8 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            if (data != nullptr) {
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
                 memcpy(l.mData, data, l.mSize);
             }
             t->mTexture2D[level] = l;
@@ -1102,7 +1129,8 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            if (data != nullptr) {
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
                 memcpy(l.mData, data, l.mSize);
             }
             CubemapLevel cube = t->mCubemap[level];
@@ -1130,7 +1158,10 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            memcpy(l.mData, data, l.mSize);
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
+                memcpy(l.mData, data, l.mSize);
+            }
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
             t->mFormat = (uint32_t)(format);
@@ -1150,7 +1181,10 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            memcpy(l.mData, data, l.mSize);
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
+                memcpy(l.mData, data, l.mSize);
+            }
             CubemapLevel cube = t->mCubemap[level];
             cube.mFaces[(uint32_t)(target)] = l;
             t->mCubemap[level] = cube;
@@ -1184,7 +1218,10 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
                               .SetHeight(height)
                               .SetSize((uint32_t)(image_size))
                               .SetFormat((uint32_t)(format));
-            memcpy(l.mData, data, l.mSize);
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
+                memcpy(l.mData, data, l.mSize);
+            }
             t->mTexture2D[level] = l;
             t->mKind = TextureKind::TEXTURE2D;
             t->mFormat = (uint32_t)(format);
@@ -1203,7 +1240,10 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
                               .SetHeight(height)
                               .SetSize((uint32_t)(image_size))
                               .SetFormat((uint32_t)(format));
-            memcpy(l.mData, data, l.mSize);
+            if (this->BoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
+                data != nullptr) {
+                memcpy(l.mData, data, l.mSize);
+            }
             CubemapLevel cube = t->mCubemap[level];
             cube.mFaces[(uint32_t)(target)] = l;
             t->mCubemap[level] = cube;
