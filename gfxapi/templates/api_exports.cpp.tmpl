@@ -28,19 +28,58 @@ limitations under the License.
   #include "{{Global "API"}}_types.h"
   #include "spy.h"
 ¶
-  #include <string.h>
-¶
   #include <gapic/get_gfx_proc_address.h>
+  #include <gapic/log.h>
   #include <gapic/target.h> // STDCALL
 ¶
+  #include <string.h>
+¶
   using namespace gapii;
+¶
+  extern "C" {«
+  {{range $c := AllCommands $}}
+    {{if not (GetAnnotation $c "synthetic")}}
+      {{$name := Macro "C++.MethodName" $c}}
+      EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}});
+    {{end}}
+  {{end}}
+¶
+  EXPORT void* STDCALL eglGetProcAddress(const char* name);
+  EXPORT void* STDCALL wglGetProcAddress(const char* name);
+  EXPORT void* STDCALL glXGetProcAddress(const char* name);
+  EXPORT void* STDCALL glXGetProcAddressARB(const char* name);
+  »} // extern "C"
 ¶
   namespace {«
 ¶
   // spy lazily constructs and returns the instance to the spy.
   Spy* spy() {
     static Spy spy;
+    static bool initialized = false;
+    if (!initialized) {
+      GAPID_INFO("Registering spy symbols...\n");
+      {{range $i, $c := AllCommands $}}
+        {{$name := Macro "C++.MethodName" $c}}
+        {{if not (GetAnnotation $c "synthetic")}}
+          spy.RegisterSymbol("{{$name}}", reinterpret_cast<void*>({{$name}}));
+        {{end}}
+      {{end}}
+      spy.RegisterSymbol("eglGetProcAddress",    reinterpret_cast<void*>(eglGetProcAddress));
+      spy.RegisterSymbol("wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress));
+      spy.RegisterSymbol("glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress));
+      spy.RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
+      initialized = true;
+    }
     return &spy;
+  }
+
+  void* STDCALL GetSpyProcAddress(const char* name) {
+    if (void* proc = spy()->LookupSymbol(name)) {
+      return proc;
+    } else {
+      GAPID_WARNING("%s will NOT be captured.\n", name);
+      return gapic::GetGfxProcAddress(name, true);
+    }
   }
 ¶
   »} // anonymous namespace
@@ -51,31 +90,17 @@ limitations under the License.
     {{if not (GetAnnotation $c "synthetic")}}
       {{$name := Macro "C++.MethodName" $c}}
       EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
-        GAPID_INFO("{{$name}}()");
+        GAPID_INFO("{{$name}}()\n");
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}
         spy()->{{$name}}({{Macro "C++.CallArguments" $c}});
       }
     {{end}}
   {{end}}
 ¶
-  typedef void (STDCALL *GFXPROC)();
-  GFXPROC getProcAddress(const char* name) {
-    GAPID_INFO("getProcAddress(%s)", name);
-
-    {{range $i, $c := AllCommands $}}
-      {{$name := Macro "C++.MethodName" $c}}
-      {{if not (GetAnnotation $c "synthetic")}}
-        if (strcmp(name, "{{$name}}") == 0) { return reinterpret_cast<GFXPROC>({{$name}}); }
-      {{end}}
-    {{end}}
-¶
-    // TODO: If we reach this code, we're not capturing the command!
-    GAPID_INFO("getProcAddress(%s) - not part of API", name);
-    return reinterpret_cast<GFXPROC>(gapic::GetGfxProcAddress(name));
-}
-¶
-  EXPORT GFXPROC STDCALL wglGetProcAddress(const char* name) { return getProcAddress(name); }
-  EXPORT GFXPROC STDCALL eglGetProcAddress(const char* name) { return getProcAddress(name); }
+  EXPORT void* STDCALL eglGetProcAddress(const char* name)    { return GetSpyProcAddress(name); }
+  EXPORT void* STDCALL wglGetProcAddress(const char* name)    { return GetSpyProcAddress(name); }
+  EXPORT void* STDCALL glXGetProcAddress(const char* name)    { return GetSpyProcAddress(name); }
+  EXPORT void* STDCALL glXGetProcAddressARB(const char* name) { return GetSpyProcAddress(name); }
 ¶
   »} // extern "C"
 {{end}}

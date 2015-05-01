@@ -22,23 +22,24 @@ namespace gapic {
 // Utility class for retrieving function pointers from dynamic libraries.
 class DlLoader {
 public:
-  // Loads the specified dynamic library.
-  // If the library cannot be loaded then this is a fatal error.
-  DlLoader(const char* name);
+    // Loads the specified dynamic library.
+    // If the library cannot be loaded then this is a fatal error.
+    // For *nix systems, a nullptr can be used to search the application's functions.
+    DlLoader(const char* name);
 
-  // Unloads the library loaded in the constructor.
-  ~DlLoader();
+    // Unloads the library loaded in the constructor.
+    ~DlLoader();
 
-  // Looks up the function with the specified name from the library.
-  // Returns nullptr if the function is not found.
-  void* lookup(const char* name);
+    // Looks up the function with the specified name from the library.
+    // Returns nullptr if the function is not found.
+    void* lookup(const char* name);
 
 private:
-  DlLoader() =default;
-  DlLoader(const DlLoader&) =delete;
-  DlLoader& operator=(const DlLoader&) =delete;
+    DlLoader() =default;
+    DlLoader(const DlLoader&) =delete;
+    DlLoader& operator=(const DlLoader&) =delete;
 
-  void* mLibrary;
+    void* mLibrary;
 };
 
 }  // namespace gapic

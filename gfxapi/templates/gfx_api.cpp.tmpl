@@ -109,7 +109,7 @@
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
         {{$name := Macro "C++.MethodName" $c}}
-        {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}"));
+        {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
       {{end}}
     {{end}}
   }

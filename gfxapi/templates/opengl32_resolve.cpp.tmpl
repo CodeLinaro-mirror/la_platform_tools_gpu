@@ -46,7 +46,7 @@ extern "C" {«
     int resolved = 0;
     void __stdcall resolve() {
       {{range $f := $resolve}}
-        real__{{$f}} = gapic::GetGfxProcAddress("{{$f}}");
+        real__{{$f}} = gapic::GetGfxProcAddress("{{$f}}", true);
       {{end}}
         resolved = 1;
     }
