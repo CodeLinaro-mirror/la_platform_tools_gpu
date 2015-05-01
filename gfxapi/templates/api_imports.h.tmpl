@@ -47,13 +47,13 @@
 ¶
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{template "TypedefFunctionPtr" $c}}
+        {{template "C++.TypedefFunctionPtr" $c}}
       {{end}}
     {{end}}
 ¶
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{template "FunctionPtrDecl" $c}}
+        {{template "C++.FunctionPtrDecl" $c}};
       {{end}}
     {{end}}
 ¶
@@ -64,38 +64,3 @@
 ¶
 {{end}}
 
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the typedef function-pointer name for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "FunctionPtrType"}}
-  {{AssertType $ "Function"}}
-
-  PFN{{Macro "C++.MethodName" $ | Upper}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ function-pointer typedef for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "TypedefFunctionPtr"}}
-  {{AssertType $ "Function"}}
-
-  typedef {{Macro "C++.ReturnType" $}} (STDCALL *{{Macro "FunctionPtrType" $}})({{Macro "C++.CallParameters" $}});
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ function-pointer variable extern for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "FunctionPtrDecl"}}
-  {{AssertType $ "Function"}}
-
-  {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}};
-{{end}}

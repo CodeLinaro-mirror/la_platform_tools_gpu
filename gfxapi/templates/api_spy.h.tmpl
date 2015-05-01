@@ -39,8 +39,11 @@ limitations under the License.
   #include <gapic/encoder.h>
   #include <gapic/log.h>
 ¶
-  #include <stdint.h>
+  #include <memory>
+  #include <string>
   #include <unordered_set>
+¶
+  #include <stdint.h>
 ¶
   namespace gapii {«
 ¶
@@ -141,7 +144,7 @@ limitations under the License.
   {{$spyname   := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
-    GAPID_INFO("{{$name}}");
+    GAPID_INFO("{{$name}}()\n");
     {{$args := Macro "C++.CallArguments" $}}
     {{if $ret}}
       {{if $synthetic}}
@@ -159,15 +162,13 @@ limitations under the License.
 
     {{range $p := $.FullParameters}}
       {{if not $p.Output}}
-        {{$pname := Macro "C++.ReadParameter" $p}}
-        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
+        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" (Macro "C++.ReadParameter" $p)}}
       {{end}}
     {{end}}
 
     {{range $p := $.FullParameters}}
       {{if $p.Output}}
-        {{$pname := Macro "C++.ReadParameter" $p}}
-        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $pname}}
+        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" (Macro "C++.ReadParameter" $p)}}
       {{end}}
     {{end}}
 
@@ -237,11 +238,18 @@ limitations under the License.
     } else {
       mEncoder->Uint32(0);
     }
+  {{else if IsStaticArray $.Type}}
+    for (int i = 0; i < {{$.Type.Size}}; i++) {
+      {{Macro "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}
+    }
+  {{else if IsClass       $.Type}}
+    mEncoder->Uint64(0); // CreatedAt
+    {{range $f := $.Type.Fields}}
+      {{Macro "Encode" "Type" $f.Type "Name" (print $.Name ".m" $f.Name) "Parameter" $.Parameter}}
+    {{end}}
   {{/* TODO: Store arrays as resources
   {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
-  */}}
-  {{else if and (IsClass $.Type) (GetAnnotation $.Type "union")}}/* TODO: mEncoder on union */
-  {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
+  */}}{{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
   {{end}}
 {{end}}
 

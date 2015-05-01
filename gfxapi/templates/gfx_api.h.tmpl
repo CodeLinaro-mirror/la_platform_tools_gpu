@@ -15,7 +15,6 @@
  */}}
 
 {{/* ---- Includes ---- */}}
-{{Include "gfx_api_common.tmpl"}}
 {{Include "cpp_common.tmpl"    }}
 
 {{$ | Macro "gfx_api.h" | Format (Global "clang-format") | Write "gfx_api.h"}}
@@ -79,13 +78,13 @@ namespace Ids {
 ¶
 {{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
-    {{Macro "TypedefFunctionPtr" $c}}
+    {{Macro "C++.TypedefFunctionPtr" $c}}
   {{end}}
 {{end}}
 ¶
 {{range $c := AllCommands $}}
   {{if not (GetAnnotation $c "synthetic")}}
-    {{Macro "FunctionPtrExtern" $c}}
+    extern {{Macro "C++.FunctionPtrDecl" $c}};
   {{end}}
 {{end}}
 ¶
@@ -94,28 +93,4 @@ namespace Ids {
 ¶
 #endif  // GAPIR_GFX_API_H
 ¶
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ function-pointer typedef for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "TypedefFunctionPtr"}}
-  {{AssertType $ "Function"}}
-
-  typedef {{Macro "C++.ReturnType" $}} (STDCALL *{{Macro "FunctionPtrType" $}})({{Macro "C++.CallParameters" $}});
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ function-pointer variable extern for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "FunctionPtrExtern"}}
-  {{AssertType $ "Function"}}
-
-  extern {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}};
 {{end}}

@@ -371,7 +371,7 @@ limitations under the License.
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
   {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "C++.Read" $.Expression}})
-  {{else if IsEnumEntry        $}}{{$.Enum.Name}}::{{$.Name}}
+  {{else if IsEnumEntry        $}}{{Macro "C++.EnumName" $.Enum}}::{{Macro "C++.EnumEntryName" $}}
   {{else if IsLocal            $}}{{Macro "C++.LocalName" $}}
   {{else if IsBitTest          $}}({{Macro "C++.Read" $.Bitfield}} & {{Macro "C++.Read" $.Bits}}) != 0
   {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
@@ -572,8 +572,7 @@ limitations under the License.
 {{define "C++.MethodName"}}
   {{AssertType $ "Function"}}
 
-  {{$p := Global "prefix"}}
-  {{if $p}}
+  {{if $p := Global "prefix"}}
     {{$p}}{{if $.Owner}}{{Title $.Owner.Typename}}{{end}}{{Title $.Name}}
   {{else}}
     {{if $.Owner}}{{$.Owner.Typename}}{{Title $.Name}}
@@ -614,4 +613,66 @@ limitations under the License.
     {{$.Enum.Name | SplitPascalCase | Upper | JoinWith "_"}}_§
   {{end}}
   {{TrimLeft "_" $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the printf format code for the specified type
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.PrintfFormatCode"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym     $}}{{Macro "C++.PrintfFormatCode" $.To}}
+  {{else if IsArray         $}}%p
+  {{else if IsPointer       $}}%p
+  {{else if IsClass         $}}%p
+  {{else if IsString        $}}%s
+  {{else if IsBool          $}}%d
+  {{else if IsS32           $}}%d
+  {{else if IsU32           $}}%u
+  {{else if IsF32           $}}%f
+  {{else if IsInt           $}}%d
+  {{else if IsUint          $}}%u
+  {{else if IsU64           $}}%u
+  {{else if IsEnum          $}}%u
+  {{else}}{{Error "C++.PrintfFormatCode passed unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the typedef function-pointer name for a given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.FunctionPtrType"}}
+  {{AssertType $ "Function"}}
+
+  PFN{{Macro "C++.MethodName" $ | Upper}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ function-pointer typedef for a given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.TypedefFunctionPtr"}}
+  {{AssertType $ "Function"}}
+
+  typedef {{Macro "C++.ReturnType" $}} (STDCALL *{{Macro "C++.FunctionPtrType" $}})({{Macro "C++.CallParameters" $}});
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ function-pointer variable extern for a given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.FunctionPtrDecl"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "C++.FunctionPtrType" $}} {{Macro "C++.MethodName" $}}
 {{end}}

@@ -27,7 +27,6 @@ namespace gapii {
 class Spy : public GlesSpy {
 public:
     Spy();
-    ~Spy();
 
     EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor);
     EGLBoolean eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,

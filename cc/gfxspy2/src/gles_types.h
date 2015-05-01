@@ -19,13 +19,15 @@
 #ifndef GAPII_GLES_TYPES_H
 #define GAPII_GLES_TYPES_H
 
+#include "types.h"
+
 #include <memory>
-#include <stdint.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-#include "types.h"
+#include <stdint.h>
+#include <string.h>
 
 namespace gapii {
 
