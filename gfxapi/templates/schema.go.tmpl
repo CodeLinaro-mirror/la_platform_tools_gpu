@@ -222,7 +222,7 @@ limitations under the License.
   service.AtomInfo{
     Api:        service.ApiId{ID: binary.ID(apiID)},
     Type:       {{$.Index}},
-    Name:       "{{$.Command.Name}}",
+    Name:       "{{Macro "CmdName" $.Command}}",
     Parameters: []service.ParameterInfo{
       {{range $p := $.Command.FullParameters}}
         service.ParameterInfo{

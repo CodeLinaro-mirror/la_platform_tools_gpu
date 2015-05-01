@@ -66,12 +66,11 @@ limitations under the License.
   func init() {
     gfxapi.Register(API())
     {{range $i, $c := AllCommands $}}
-      {{$name := Macro "Go.CmdName" $c}}
       atom.Register(atom.TypeInfo{
-        Name: "{{$name}}",
+        Name: "{{Macro "CmdName" $c}}",
         Docs: "{{$c.Docs}}",
         ID: {{$i}},
-        New: func() atom.Atom { return &{{$name}}{} },
+        New: func() atom.Atom { return &{{Macro "Go.CmdName" $c}}{} },
       })
     {{end}}
   }
@@ -201,7 +200,7 @@ limitations under the License.
 
   func (c *{{$name}}) String() string {
     parts := make([]string, 0, 32)
-    parts = append(parts, "{{$.Command.Name}}(",
+    parts = append(parts, "{{Macro "CmdName" $.Command}}(",
     {{range $i, $p := $.Command.CallParameters}}
       {{$type := TypeOf $p}}
       {{$field := Macro "Go.Parameter" $p}}

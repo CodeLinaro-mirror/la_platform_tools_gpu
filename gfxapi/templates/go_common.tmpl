@@ -10,6 +10,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
+{{Include "common.tmpl"}}
+
+
 {{/*
 -------------------------------------------------------------------------------
   Emits the fully qualified name (prefixed with the package) of the specified
@@ -172,7 +175,11 @@ limitations under the License.
   Emits the name of the specified command's structure.
 -------------------------------------------------------------------------------
 */}}
-{{define "Go.CmdName"}}{{AssertType $ "Function"}}{{if $.Owner}}{{Macro "Go.Type" $.Owner}}{{end}}{{Macro "Go.Public" $.Name}}{{end}}
+{{define "Go.CmdName"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "Go.Public" (Macro "CmdName" $)}}
+{{end}}
 
 
 {{/*

@@ -38,7 +38,7 @@ namespace gapii {
     using namespace gapic;
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{$name := Macro "C++.MethodName" $c}}
+        {{$name := Macro "CmdName" $c}}
         {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(GetGfxProcAddress("{{$name}}", true));
       {{end}}
     {{end}}
@@ -57,5 +57,5 @@ namespace gapii {
 {{define "FunctionPtrType"}}
   {{AssertType $ "Function"}}
 
-  PFN{{Upper (Macro "C++.MethodName" $)}}
+  PFN{{Upper (Macro "CmdName" $)}}
 {{end}}

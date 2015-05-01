@@ -46,7 +46,7 @@ limitations under the License.
     typedef std::function<void(void* ptr, uint64_t offset, uint64_t size)> ObserveFunc;
 ¶
     {{range $c := AllCommands $}}
-      inline void {{Macro "C++.MethodName" $c}}({{Macro "Parameters" $c}});
+      inline void {{Macro "CmdName" $c}}({{Macro "Parameters" $c}});
     {{end}}
 ¶
     ObserveFunc read;
@@ -60,7 +60,7 @@ limitations under the License.
   };
 ¶
   {{range $c := AllCommands $}}
-    inline void {{$classname}}::{{Macro "C++.MethodName" $c}}({{Macro "Parameters" $c}}) {
+    inline void {{$classname}}::{{Macro "CmdName" $c}}({{Macro "Parameters" $c}}) {
       {{Macro "C++.Block" $c.Block}}
     }¶
   {{end}}

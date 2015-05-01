@@ -114,7 +114,7 @@ limitations under the License.
 {{define "ID"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "C++.MethodName" $ | SplitPascalCase | Upper | JoinWith "_"}}_ID
+  {{Macro "CmdName" $ | SplitPascalCase | Upper | JoinWith "_"}}_ID
 {{end}}
 
 
@@ -126,7 +126,7 @@ limitations under the License.
 {{define "MethodDefinitions"}}
   {{AssertType $ "Function"}}
 
-  inline {{Macro "C++.ReturnType" $}} {{Macro "C++.MethodName" $}}({{Macro "C++.CallParameters" $}});
+  inline {{Macro "C++.ReturnType" $}} {{Macro "CmdName" $}}({{Macro "C++.CallParameters" $}});
 {{end}}
 
 
@@ -138,7 +138,7 @@ limitations under the License.
 {{define "MethodImplementation"}}
   {{AssertType $ "Function"}}
 
-  {{$name := Macro "C++.MethodName" $}}
+  {{$name := Macro "CmdName" $}}
   {{$synthetic := GetAnnotation $ "synthetic"}}
   {{$ret       := not (IsVoid $.Return.Type)}}
   {{$spyname   := Global "SpyName"}}

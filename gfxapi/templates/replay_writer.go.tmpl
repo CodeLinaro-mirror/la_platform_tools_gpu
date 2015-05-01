@@ -109,7 +109,7 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits a function info definition for the given class, if non-internal.
+  Emits a function info definition for the given class or union, if non-internal.
 -------------------------------------------------------------------------------
 */}}
 {{define "DeclareClassValue"}}
@@ -117,18 +117,22 @@ limitations under the License.
 
   {{if not (or (Macro "IsInternal" $) (GetAnnotation $ "Interface"))}}
     func (c {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
-      {{$union := GetAnnotation $ "union"}}
-      {{range $i, $f := $.Fields}}
-        {{/* TODO: Figure out proper handling of unions. */}}
-        {{if not (and $i $union)}}
+      {{/* TODO: Figure out proper handling of unions. */}}
+      {{if GetAnnotation $ "union"}}
+        {{range $i, $f := $.Fields}}
+          {{if not $i}}
+            {{$fname := (print "c." (Macro "Go.Public" $f.Name))}}
+            ϟb.Push({{Macro "Value" "Type" $f.Type "Name" $fname}})
+          {{end}}
+        {{end}}
+        return ϟb.Buffer(1)
+      {{else}}
+        {{range $i, $f := $.Fields}}
           {{$fname := (print "c." (Macro "Go.Public" $f.Name))}}
           ϟb.Push({{Macro "Value" "Type" $f.Type "Name" $fname}})
         {{end}}
+        return ϟb.Buffer({{range $i, $_ := $.Fields}}{{if not (HasMore $i $.Fields)}}{{$i}}+1{{end}}{{end}})
       {{end}}
-      return ϟb.Buffer(§
-        {{if $union}}1
-        {{else}}{{range $i, $_ := $.Fields}}{{if not (HasMore $i $.Fields)}}{{$i}}+1{{end}}{{end}}
-        {{end}}§)
     }
   {{end}}
 {{end}}

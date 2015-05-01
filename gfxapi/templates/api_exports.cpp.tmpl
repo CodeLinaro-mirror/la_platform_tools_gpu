@@ -41,7 +41,7 @@ limitations under the License.
   extern "C" {«
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
-      {{$name := Macro "C++.MethodName" $c}}
+      {{$name := Macro "CmdName" $c}}
       EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}});
     {{end}}
   {{end}}
@@ -63,7 +63,7 @@ limitations under the License.
       gSpy.reset(new Spy());
       GAPID_INFO("Registering spy symbols...\n");
       {{range $i, $c := AllCommands $}}
-        {{$name := Macro "C++.MethodName" $c}}
+        {{$name := Macro "CmdName" $c}}
         {{if not (GetAnnotation $c "synthetic")}}
           gSpy->RegisterSymbol("{{$name}}", reinterpret_cast<void*>({{$name}}));
         {{end}}
@@ -92,7 +92,7 @@ limitations under the License.
 ¶
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
-      {{$name := Macro "C++.MethodName" $c}}
+      {{$name := Macro "CmdName" $c}}
       EXPORT {{Macro "C++.ReturnType" $c}} STDCALL {{$name}}({{Macro "C++.CallParameters" $c}}) {
         GAPID_INFO("{{$name}}()\n");
         {{if not (IsVoid $c.Return.Type)}}return §{{end}}

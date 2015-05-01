@@ -59,7 +59,7 @@ limitations under the License.
       {{end}}
       {{Macro "Block" $c.Block}}
       if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-        log.Printf("Applying {{$c.Name}} expected %v got %v", ϟa, ϟo)
+        log.Printf("Applying {{Macro "CmdName" $c}} expected %v got %v", ϟa, ϟo)
       }
       return nil
     }

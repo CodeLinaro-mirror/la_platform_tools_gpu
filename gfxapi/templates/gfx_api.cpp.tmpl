@@ -75,7 +75,7 @@
   void Register(Interpreter* interpreter) {
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{$name := Macro "C++.Public" (Macro "C++.MethodName" $c)}}
+        {{$name := Macro "C++.Public" (Macro "CmdName" $c)}}
         interpreter->registerFunction(Ids::{{$name}}, call{{$name}});
       {{end}}
     {{end}}
@@ -95,7 +95,7 @@
   void Initialize() {
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
-        {{$name := Macro "C++.MethodName" $c}}
+        {{$name := Macro "CmdName" $c}}
         {{$name}} = reinterpret_cast<{{Macro "C++.FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
       {{end}}
     {{end}}
@@ -106,7 +106,7 @@
 {{define "CommandHandler"}}
   {{AssertType $ "Function"}}
 
-  {{$name := Macro "C++.MethodName" $}}
+  {{$name := Macro "CmdName" $}}
 
   bool call{{Macro "C++.Public" $name}}(Stack* stack, bool pushReturn) {
     {{range $p := (Reverse $.CallParameters)}}
@@ -166,7 +166,7 @@
 {{define "Call"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "C++.MethodName" $}}(§
+  {{Macro "CmdName" $}}(§
     {{range $i, $p := $.CallParameters}}
       {{if $i}}, {{end}}{{$p.Name}}§
     {{end}})
