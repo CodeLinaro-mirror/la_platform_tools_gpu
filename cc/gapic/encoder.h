@@ -26,6 +26,14 @@
 namespace gapic {
 
 class StreamWriter;
+class Encodable;
+class Encoder;
+
+class Encodable {
+public:
+    virtual void Encode(Encoder* to) const = 0;
+    virtual const gapic::Id& Id() const = 0;
+};
 
 // Encoder provides methods for encoding values to the provided StreamWriter
 // using variable-length-encoding.
@@ -34,23 +42,27 @@ public:
     Encoder(std::shared_ptr<StreamWriter> output);
 
     void Bool(bool);
-    void S8(int8_t);
-    void U8(uint8_t);
-    void U16(uint16_t);
-    void S16(int16_t);
-    void F32(float);
-    void U32(uint32_t);
-    void S32(int32_t);
-    void F64(double);
-    void U64(uint64_t);
-    void S64(int64_t);
+    void Int8(int8_t);
+    void Uint8(uint8_t);
+    void Uint16(uint16_t);
+    void Int16(int16_t);
+    void Float32(float);
+    void Uint32(uint32_t);
+    void Int32(int32_t);
+    void Float64(double);
+    void Uint64(uint64_t);
+    void Int64(int64_t);
     void String(const char*);
     void Data(const void* ptr, int32_t size);
     void Id(const gapic::Id&);
 
+    void Value(const Encodable* obj);
+    void Variant(const Encodable* obj);
+    void Object(const Encodable* obj);
 private:
     std::unordered_map<gapic::Id, uint32_t> mIds;
     std::shared_ptr<StreamWriter> mOutput;
+    uint32_t mLastObjectId;
 };
 
 } // namespace gapic

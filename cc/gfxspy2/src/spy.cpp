@@ -40,13 +40,13 @@ void Spy::init(int32_t width, int32_t height,
         uint32_t colorFormat, uint32_t depthFormat, uint32_t stencilFormat) {
     mImports.Resolve();
     mState.init(width, height, colorFormat, depthFormat, stencilFormat);
-    mEncoder->U16(0); // INIT_ID
-    mEncoder->U32(0); // ContextID
-    mEncoder->S32(width);
-    mEncoder->S32(height);
-    mEncoder->U32(colorFormat);
-    mEncoder->U32(depthFormat);
-    mEncoder->U32(stencilFormat);
+    mEncoder->Uint16(0); // INIT_ID
+    mEncoder->Uint32(0); // ContextID
+    mEncoder->Int32(width);
+    mEncoder->Int32(height);
+    mEncoder->Uint32(colorFormat);
+    mEncoder->Uint32(depthFormat);
+    mEncoder->Uint32(stencilFormat);
 }
 
 EGLBoolean Spy::eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor) {
