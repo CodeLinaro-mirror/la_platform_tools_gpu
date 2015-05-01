@@ -31,7 +31,12 @@ public:
 
     // Creates a new socket connection listening on the specified hostname and port. Returns a
     // connection object on successful open or a nullptr if opening the connection is unsuccessful
-    static std::unique_ptr<Connection> create(const char* hostname, const char* port);
+    static std::unique_ptr<Connection> createSocket(const char* hostname, const char* port);
+
+    // Creates a new pipe connection listening on the specified UNIX pipename, without
+    // pipe creation on the local file system if abstract is true. Returns a connection object
+    // on successful open or a nullptr if opening the connection is unsuccessful
+    static std::unique_ptr<Connection> createPipe(const char* pipename, bool abstract);
 
     // Implementation of the Connection interface
     size_t send(const void* data, size_t size) override;

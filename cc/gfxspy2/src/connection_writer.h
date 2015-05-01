@@ -34,9 +34,13 @@ namespace gapii {
 // an incoming TCP connection.
 class ConnectionWriter : public gapic::StreamWriter {
 public:
-    // listen blocks and waits for a TCP connection to be made on the specified host and port,
-    // returning a ConnectionWriter once a connection is established.
-    static std::shared_ptr<ConnectionWriter> listen(const char* hostname, const char* port);
+    // listenSocket blocks and waits for a TCP connection to be made on the specified host and
+    // port, returning a ConnectionWriter once a connection is established.
+    static std::shared_ptr<ConnectionWriter> listenSocket(const char* hostname, const char* port);
+
+    // listenPipe blocks and waits for a UNIX connection to be made on the specified pipe name,
+    // optionally abstract, returning a ConnectionWriter once a connection is established.
+    static std::shared_ptr<ConnectionWriter> listenPipe(const char* pipename, bool abstract);
 
     // gapic::StreamWriter compliance
     virtual void Write(const void* data, uint64_t size) override;

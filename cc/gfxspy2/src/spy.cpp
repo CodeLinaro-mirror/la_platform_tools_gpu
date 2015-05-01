@@ -26,8 +26,14 @@
 
 namespace gapii {
 
+// Use a "localabstract" pipe on Android to prevent depending on the traced application
+// having the INTERNET permission set, required for opening and listening on a TCP socket.
 Spy::Spy() {
-    auto writer = ConnectionWriter::listen("127.0.0.1", "9286");
+#if TARGET_OS == GAPID_OS_ANDROID
+    auto writer = ConnectionWriter::listenPipe("gfxspy", true);
+#else // TARGET_OS
+    auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
+#endif
     auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
     mEncoder = encoder;
     GlesSpy::init(encoder);
@@ -60,8 +66,7 @@ HGLRC Spy::wglCreateContext(HDC hdc) {
 #if TARGET_OS == GAPID_OS_WINDOWS
     wgl::FramebufferInfo info;
     wgl::getFramebufferInfo(hdc, info);
-    init(info.width, info.height,
-            info.colorFormat, info.depthFormat, info.stencilFormat);
+    init(info.width, info.height, info.colorFormat, info.depthFormat, info.stencilFormat);
 #endif // TARGET_OS
     return GlesSpy::wglCreateContext(hdc);
 }
