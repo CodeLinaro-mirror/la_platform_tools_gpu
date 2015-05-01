@@ -225,6 +225,18 @@ func (Functions) TrimLeft(cutset string, v ...interface{}) stringList {
 	return out
 }
 
+func (Functions) TrimRight(cutset string, v ...interface{}) stringList {
+	l := stringify(v...)
+	out := stringList{}
+	for _, s := range l {
+		s = strings.TrimRight(s, cutset)
+		if len(s) > 0 {
+			out = append(out, s)
+		}
+	}
+	return out
+}
+
 // FilterOut returns from with all occurances of v removed.
 func (Functions) FilterOut(v, from stringList) stringList {
 	m := make(map[string]struct{}, len(v))

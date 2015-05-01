@@ -93,6 +93,8 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 			walk(n.False, v)
 		}
 	case *semantic.Builtin:
+	case *semantic.Buffer:
+		walk(n.To, v)
 	case *semantic.Call:
 		walk(n.Type, v)
 		walk(n.Target, v)
@@ -118,6 +120,9 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 		for _, f := range n.Fields {
 			walk(f, v)
 		}
+		for _, m := range n.Methods {
+			walk(m, v)
+		}
 	case *semantic.ClassInitializer:
 		for _, f := range n.Fields {
 			walk(f, v)
@@ -138,6 +143,10 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 		}
 	case *semantic.EnumEntry:
 	case *semantic.Pseudonym:
+		walk(n.To, v)
+		for _, m := range n.Methods {
+			walk(m, v)
+		}
 	case *semantic.Field:
 		walk(n.Type, v)
 		if n.Default != nil {
