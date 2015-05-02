@@ -115,17 +115,18 @@ func run() error {
 	if *verbose {
 		fmt.Printf("Generating\n")
 	}
+	gen := generate.NewGenerator()
 	for _, dir := range loader.Directories {
 		if !dir.Scan {
 			continue
 		}
 		if dir.Module.Output != nil {
-			if err := output(dir.Module.Output); err != nil {
+			if err := output(gen, dir.Module.Output); err != nil {
 				return err
 			}
 		}
 		if dir.Test.Output != nil {
-			if err := output(dir.Test.Output); err != nil {
+			if err := output(gen, dir.Test.Output); err != nil {
 				return err
 			}
 		}
@@ -133,7 +134,7 @@ func run() error {
 	return nil
 }
 
-func output(file *generate.File) error {
+func output(gen *generate.Generator, file *generate.File) error {
 	if len(file.Structs) == 0 {
 		return nil
 	}
@@ -142,7 +143,7 @@ func output(file *generate.File) error {
 		entry := Entry{
 			File:      *file,
 			Output:    file.Package + "_binary.go",
-			Generator: generate.GoFile,
+			Generator: gen.GoFile,
 		}
 		entry.File.Generated = fmt.Sprintf("codergen -go")
 		if file.IsTest {
@@ -157,7 +158,7 @@ func output(file *generate.File) error {
 		entry := Entry{
 			File:      *file,
 			Output:    filepath.Join(*java, "ObjectFactory.java"),
-			Generator: generate.JavaFile,
+			Generator: gen.JavaFile,
 		}
 		entry.File.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
 		entry.File.ClassPrefix = strings.Title(file.Package)
