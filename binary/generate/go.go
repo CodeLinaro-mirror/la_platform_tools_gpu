@@ -16,46 +16,15 @@ package generate
 
 import (
 	"bytes"
-	"text/template"
-
-	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 
 	"golang.org/x/tools/imports"
 )
 
-var (
-	goTemplates = template.Must(template.New("go.tmpl").Funcs(goFuncs).Parse(go_tmpl))
-	goFuncs     = template.FuncMap{
-		"encode": func(name string, t *Type) string {
-			return kindDispatch(goEncodeMap, name, t)
-		},
-		"decode": func(name string, t *Type) string {
-			return kindDispatch(goDecodeMap, name, t)
-		},
-		"skip": func(name string, t *Type) string {
-			return kindDispatch(goSkipMap, name, t)
-		},
-		"header": func(tool string) string {
-			return copyright.Build("generated_by", copyright.Info{Tool: tool})
-		},
-	}
-	goEncodeMap kindToTemplate
-	goDecodeMap kindToTemplate
-	goSkipMap   kindToTemplate
-	goFile      *template.Template
-)
-
-func init() {
-	goFile = getTemplate(goTemplates, "File")
-	goEncodeMap = getTemplateMap(goTemplates, "Encode")
-	goDecodeMap = getTemplateMap(goTemplates, "Decode")
-	goSkipMap = getTemplateMap(goTemplates, "Skip")
-}
-
 // GoFile generates the all the go code for a file with a set of structs.
-func GoFile(file *File) ([]byte, error) {
+func (g *Generator) GoFile(file *File) ([]byte, error) {
+	g.f.prefix = "Go."
 	b := &bytes.Buffer{}
-	if err := goFile.Execute(b, file); err != nil {
+	if err := g.f.execute(g.f.prefix+"File", b, file); err != nil {
 		return nil, err
 	}
 	options := &imports.Options{
