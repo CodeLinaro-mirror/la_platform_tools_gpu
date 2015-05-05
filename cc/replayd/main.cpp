@@ -67,23 +67,23 @@ std::unique_ptr<ResourceInMemoryCache> createResourceProvider(
 
 void listenConnections(const char* listenerPort, const char* cachePath,
                        MemoryManager* memoryManager) {
-    std::unique_ptr<Connection> listenConn = SocketConnection::create("127.0.0.1", listenerPort);
-    if (listenConn == nullptr) {
+    std::unique_ptr<Connection> conn = SocketConnection::createSocket("127.0.0.1", listenerPort);
+    if (conn == nullptr) {
         GAPID_FATAL("Failed to create listening socket\n");
     }
-    ServerListener listener(std::move(listenConn), memoryManager->getSize());
+    ServerListener listener(std::move(conn), memoryManager->getSize());
 
     std::unique_ptr<ResourceInMemoryCache> resourceProvider(
             createResourceProvider(cachePath, memoryManager));
 
     while (true) {
-        std::unique_ptr<ServerConnection> gazer(listener.acceptConnection());
-        if (!gazer) {
+        std::unique_ptr<ServerConnection> acceptedConn(listener.acceptConnection());
+        if (!acceptedConn) {
             break;
         }
 
         std::unique_ptr<Context> context =
-                Context::create(*gazer, resourceProvider.get(), memoryManager);
+                Context::create(*acceptedConn, resourceProvider.get(), memoryManager);
         if (context == nullptr) {
             GAPID_WARNING("Loading Context failed!\n");
             continue;

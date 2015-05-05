@@ -34,6 +34,7 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/un.h>
 #include <unistd.h>
 
 #endif  // TARGET_OS == GAPID_OS_WINDOWS
@@ -153,16 +154,15 @@ std::unique_ptr<Connection> SocketConnection::accept() {
     return std::unique_ptr<Connection>(new SocketConnection(clientSocket));
 }
 
-std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const char* port) {
+std::unique_ptr<Connection> SocketConnection::createSocket(
+        const char* hostname, const char* port) {
     // Network initializer to ensure that the network driver is initialized during the lifetime of
     // the create function. If the connection created successfully then the new connection will
     // hold a reference to a networkInitializer struct to ensure that the network is initialized
     NetworkInitializer networkInitializer;
 
     struct addrinfo* addr;
-    struct addrinfo hints;
-
-    memset(&hints, 0, sizeof(addrinfo));
+    struct addrinfo hints{};
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
 
@@ -200,6 +200,51 @@ std::unique_ptr<Connection> SocketConnection::create(const char* hostname, const
 
     sockScopeGuard.release();
     return std::unique_ptr<Connection>(new SocketConnection(sock));
+}
+
+std::unique_ptr<Connection> SocketConnection::createPipe(const char* pipename, bool abstract) {
+#if TARGET_OS == GAPID_OS_WINDOWS
+    // AF_UNIX is not supported on Windows.
+    return nullptr;
+#else  // TARGET_OS == GAPID_OS_WINDOWS
+    const int sock = gapic::socket(AF_UNIX, SOCK_STREAM, 0);
+    if (-1 == sock) {
+        GAPID_WARNING("socket() failed: %s.\n", strerror(gapic::error()));
+        return nullptr;
+    }
+    auto socketCloser = [](const int* ptr) { gapic::close(*ptr); };  // deferred.
+    std::unique_ptr<const int, decltype(socketCloser)> sockScopeGuard(&sock, socketCloser);
+
+    // In order to create a socket in the abstract namespace (no filesystem link), sun_path must
+    // start with a null byte followed by the abstract socket name. Abstract sockets/pipes are a
+    // non-portable Linux extension available on Android, described in Linux's man unix(7).
+
+#if (TARGET_OS != GAPID_OS_LINUX) && (TARGET_OS != GAPID_OS_ANDROID)
+    if (abstract) {
+        GAPID_WARNING("Abstract pipe '%s' creation unsupported for this platform. "
+            "Falling back to non-abstract.", pipename);
+        abstract = false;
+    }
+#endif
+
+    struct sockaddr_un pipe{};
+    pipe.sun_family = AF_UNIX;
+    strncpy(pipe.sun_path + (abstract ? 1 : 0), pipename, sizeof(pipe.sun_path)-2);
+    const size_t pipelen = sizeof(pipe.sun_family) + strlen(pipename) + (abstract ? 1 : 0);
+
+    if (-1 == gapic::bind(sock, (struct sockaddr*)&pipe, pipelen)) {
+        GAPID_WARNING("bind() failed: %s.\n", strerror(gapic::error()));
+        return nullptr;
+    }
+
+    if (-1 == gapic::listen(sock, 10)) {
+        GAPID_WARNING("listen() failed: %s.\n", strerror(gapic::error()));
+        return nullptr;
+    }
+
+    sockScopeGuard.release();
+    return std::unique_ptr<Connection>(new SocketConnection(sock));
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 SocketConnection::NetworkInitializer::NetworkInitializer() {
