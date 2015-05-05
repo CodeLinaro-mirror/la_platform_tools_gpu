@@ -35,6 +35,14 @@ struct GlesImports {
     typedef EGLBoolean(STDCALL *PFNEGLMAKECURRENT)(EGLDisplay display, EGLSurface draw,
                                                    EGLSurface read, EGLContext context);
     typedef EGLBoolean(STDCALL *PFNEGLSWAPBUFFERS)(EGLDisplay display, const void *surface);
+    typedef GLXContext(STDCALL *PFNGLXCREATECONTEXT)(const void *dpy, const void *vis,
+                                                     GLXContext shareList, bool direct);
+    typedef GLXContext(STDCALL *PFNGLXCREATENEWCONTEXT)(const void *display, const void *fbconfig,
+                                                        uint32_t type, GLXContext shared,
+                                                        bool direct);
+    typedef void(STDCALL *PFNGLXMAKECONTEXTCURRENT)(const void *display, GLXDrawable draw,
+                                                    GLXDrawable read, GLXContext ctx);
+    typedef void(STDCALL *PFNGLXSWAPBUFFERS)(const void *display, GLXDrawable drawable);
     typedef HGLRC(STDCALL *PFNWGLCREATECONTEXT)(HDC hdc);
     typedef BOOL(STDCALL *PFNWGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(HDC hdc);
@@ -330,6 +338,10 @@ struct GlesImports {
     PFNEGLCREATECONTEXT eglCreateContext;
     PFNEGLMAKECURRENT eglMakeCurrent;
     PFNEGLSWAPBUFFERS eglSwapBuffers;
+    PFNGLXCREATECONTEXT glXCreateContext;
+    PFNGLXCREATENEWCONTEXT glXCreateNewContext;
+    PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent;
+    PFNGLXSWAPBUFFERS glXSwapBuffers;
     PFNWGLCREATECONTEXT wglCreateContext;
     PFNWGLMAKECURRENT wglMakeCurrent;
     PFNWGLSWAPBUFFERS wglSwapBuffers;

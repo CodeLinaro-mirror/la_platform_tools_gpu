@@ -190,6 +190,40 @@ func (ϟa *EglSwapBuffers) Mutate(ϟs *state.State) error {
 	}
 	return nil
 }
+func (ϟa *GlXCreateContext) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := GlXCreateContext{}
+	ϟa.Result = ϟa.Result
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
+		log.Printf("Applying glXCreateContext expected %v got %v", ϟa, ϟo)
+	}
+	return nil
+}
+func (ϟa *GlXCreateNewContext) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := GlXCreateNewContext{}
+	ϟa.Result = ϟa.Result
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
+		log.Printf("Applying glXCreateNewContext expected %v got %v", ϟa, ϟo)
+	}
+	return nil
+}
+func (ϟa *GlXMakeContextCurrent) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := GlXMakeContextCurrent{}
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
+		log.Printf("Applying glXMakeContextCurrent expected %v got %v", ϟa, ϟo)
+	}
+	return nil
+}
+func (ϟa *GlXSwapBuffers) Mutate(ϟs *state.State) error {
+	ϟc := getState(ϟa, ϟs)
+	ϟo := GlXSwapBuffers{}
+	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
+		log.Printf("Applying glXSwapBuffers expected %v got %v", ϟa, ϟo)
+	}
+	return nil
+}
 func (ϟa *WglCreateContext) Mutate(ϟs *state.State) error {
 	ϟc := getState(ϟa, ϟs)
 	ϟo := WglCreateContext{}
@@ -1552,7 +1586,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(memory.Pointer(0))) {
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
 			l.Data.Write(ϟs.Memory.Slice(memory.Range{
 				Base: memory.Pointer(ϟa.Data),
 				Size: uint64(l.Size),
@@ -1574,7 +1608,7 @@ func (ϟa *GlTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		if (ϟa.Data) != (TexturePointer(memory.Pointer(0))) {
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
 			l.Data.Write(ϟs.Memory.Slice(memory.Range{
 				Base: memory.Pointer(ϟa.Data),
 				Size: uint64(l.Size),
@@ -1612,10 +1646,12 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.Data),
-			Size: uint64(l.Size),
-		}))
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		t.Texture2D[ϟa.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
 		t.Format = ImageTexelFormat(ϟa.Format)
@@ -1632,10 +1668,12 @@ func (ϟa *GlTexSubImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.Data),
-			Size: uint64(l.Size),
-		}))
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[CubeMapImageTarget(ϟa.Target)] = l
 		t.Cubemap[ϟa.Level] = cube
@@ -1684,10 +1722,12 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.Data),
-			Size: uint64(l.Size),
-		}))
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		t.Texture2D[ϟa.Level] = l
 		t.Kind = TextureKind_TEXTURE2D
 		t.Format = ImageTexelFormat(ϟa.Format)
@@ -1704,10 +1744,12 @@ func (ϟa *GlCompressedTexImage2D) Mutate(ϟs *state.State) error {
 			s.Format = ImageTexelFormat(ϟa.Format)
 			return s
 		}() // Image
-		l.Data.Write(ϟs.Memory.Slice(memory.Range{
-			Base: memory.Pointer(ϟa.Data),
-			Size: uint64(l.Size),
-		}))
+		if ((ϟc.BoundBuffers.Get(BufferTarget_GL_PIXEL_UNPACK_BUFFER)) == (BufferId(uint32(0)))) && ((ϟa.Data) != (TexturePointer(memory.Pointer(0)))) {
+			l.Data.Write(ϟs.Memory.Slice(memory.Range{
+				Base: memory.Pointer(ϟa.Data),
+				Size: uint64(l.Size),
+			}))
+		}
 		cube := t.Cubemap.Get(ϟa.Level) // CubemapLevel
 		cube.Faces[CubeMapImageTarget(ϟa.Target)] = l
 		t.Cubemap[ϟa.Level] = cube

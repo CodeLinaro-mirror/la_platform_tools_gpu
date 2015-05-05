@@ -103,6 +103,90 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
     }
 }
 
+bool callGlXCreateContext(Stack* stack, bool pushReturn) {
+    bool direct = stack->pop<bool>();
+    GLXContext shareList = stack->pop<GLXContext>();
+    const void* vis = stack->pop<const void*>();
+    const void* dpy = stack->pop<const void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXCreateContext(%p, %p, %p, %d)\n", dpy, vis, shareList, direct);
+        if (glXCreateContext != nullptr) {
+            GLXContext return_value = glXCreateContext(dpy, vis, shareList, direct);
+            GAPID_INFO("Returned: %p\n", return_value);
+            if (pushReturn) {
+                stack->push<GLXContext>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXCreateContext\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXCreateContext\n");
+        return false;
+    }
+}
+
+bool callGlXCreateNewContext(Stack* stack, bool pushReturn) {
+    bool direct = stack->pop<bool>();
+    GLXContext shared = stack->pop<GLXContext>();
+    uint32_t type = stack->pop<uint32_t>();
+    const void* fbconfig = stack->pop<const void*>();
+    const void* display = stack->pop<const void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXCreateNewContext(%p, %p, %u, %p, %d)\n", display, fbconfig, type, shared,
+                   direct);
+        if (glXCreateNewContext != nullptr) {
+            GLXContext return_value = glXCreateNewContext(display, fbconfig, type, shared, direct);
+            GAPID_INFO("Returned: %p\n", return_value);
+            if (pushReturn) {
+                stack->push<GLXContext>(return_value);
+            }
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXCreateNewContext\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXCreateNewContext\n");
+        return false;
+    }
+}
+
+bool callGlXMakeContextCurrent(Stack* stack, bool pushReturn) {
+    GLXContext ctx = stack->pop<GLXContext>();
+    GLXDrawable read = stack->pop<GLXDrawable>();
+    GLXDrawable draw = stack->pop<GLXDrawable>();
+    const void* display = stack->pop<const void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)\n", display, draw, read, ctx);
+        if (glXMakeContextCurrent != nullptr) {
+            glXMakeContextCurrent(display, draw, read, ctx);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXMakeContextCurrent\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXMakeContextCurrent\n");
+        return false;
+    }
+}
+
+bool callGlXSwapBuffers(Stack* stack, bool pushReturn) {
+    GLXDrawable drawable = stack->pop<GLXDrawable>();
+    const void* display = stack->pop<const void*>();
+    if (stack->isValid()) {
+        GAPID_INFO("glXSwapBuffers(%p, %p)\n", display, drawable);
+        if (glXSwapBuffers != nullptr) {
+            glXSwapBuffers(display, drawable);
+        } else {
+            GAPID_WARNING("Attempted to call unsupported function glXSwapBuffers\n");
+        }
+        return true;
+    } else {
+        GAPID_WARNING("Error during calling function glXSwapBuffers\n");
+        return false;
+    }
+}
+
 bool callWglCreateContext(Stack* stack, bool pushReturn) {
     HDC hdc = stack->pop<HDC>();
     if (stack->isValid()) {
@@ -3105,7 +3189,7 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
     MapBufferRangeAccess access = stack->pop<MapBufferRangeAccess>();
     int32_t length = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
-    MapBufferTarget target = stack->pop<MapBufferTarget>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glMapBufferRange(%u, %d, %d, %u)\n", target, offset, length, access);
         if (glMapBufferRange != nullptr) {
@@ -3125,7 +3209,7 @@ bool callGlMapBufferRange(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
-    MapBufferTarget target = stack->pop<MapBufferTarget>();
+    BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glUnmapBuffer(%u)\n", target);
         if (glUnmapBuffer != nullptr) {
@@ -3529,6 +3613,10 @@ PFNEGLINITIALIZE eglInitialize = nullptr;
 PFNEGLCREATECONTEXT eglCreateContext = nullptr;
 PFNEGLMAKECURRENT eglMakeCurrent = nullptr;
 PFNEGLSWAPBUFFERS eglSwapBuffers = nullptr;
+PFNGLXCREATECONTEXT glXCreateContext = nullptr;
+PFNGLXCREATENEWCONTEXT glXCreateNewContext = nullptr;
+PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent = nullptr;
+PFNGLXSWAPBUFFERS glXSwapBuffers = nullptr;
 PFNWGLCREATECONTEXT wglCreateContext = nullptr;
 PFNWGLMAKECURRENT wglMakeCurrent = nullptr;
 PFNWGLSWAPBUFFERS wglSwapBuffers = nullptr;
@@ -3720,6 +3808,10 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::EglCreateContext, callEglCreateContext);
     interpreter->registerFunction(Ids::EglMakeCurrent, callEglMakeCurrent);
     interpreter->registerFunction(Ids::EglSwapBuffers, callEglSwapBuffers);
+    interpreter->registerFunction(Ids::GlXCreateContext, callGlXCreateContext);
+    interpreter->registerFunction(Ids::GlXCreateNewContext, callGlXCreateNewContext);
+    interpreter->registerFunction(Ids::GlXMakeContextCurrent, callGlXMakeContextCurrent);
+    interpreter->registerFunction(Ids::GlXSwapBuffers, callGlXSwapBuffers);
     interpreter->registerFunction(Ids::WglCreateContext, callWglCreateContext);
     interpreter->registerFunction(Ids::WglMakeCurrent, callWglMakeCurrent);
     interpreter->registerFunction(Ids::WglSwapBuffers, callWglSwapBuffers);
@@ -3920,6 +4012,14 @@ void Initialize() {
             reinterpret_cast<PFNEGLMAKECURRENT>(gapic::GetGfxProcAddress("eglMakeCurrent"));
     eglSwapBuffers =
             reinterpret_cast<PFNEGLSWAPBUFFERS>(gapic::GetGfxProcAddress("eglSwapBuffers"));
+    glXCreateContext =
+            reinterpret_cast<PFNGLXCREATECONTEXT>(gapic::GetGfxProcAddress("glXCreateContext"));
+    glXCreateNewContext = reinterpret_cast<PFNGLXCREATENEWCONTEXT>(
+            gapic::GetGfxProcAddress("glXCreateNewContext"));
+    glXMakeContextCurrent = reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(
+            gapic::GetGfxProcAddress("glXMakeContextCurrent"));
+    glXSwapBuffers =
+            reinterpret_cast<PFNGLXSWAPBUFFERS>(gapic::GetGfxProcAddress("glXSwapBuffers"));
     wglCreateContext =
             reinterpret_cast<PFNWGLCREATECONTEXT>(gapic::GetGfxProcAddress("wglCreateContext"));
     wglMakeCurrent =

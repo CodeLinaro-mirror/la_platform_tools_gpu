@@ -329,11 +329,6 @@ enum RenderbufferParameter {
     GL_RENDERBUFFER_STENCIL_SIZE                    = 0x8D55,
 }
 
-enum BufferTarget {
-    GL_ARRAY_BUFFER                                 = 0x8892,
-    GL_ELEMENT_ARRAY_BUFFER                         = 0x8893,
-}
-
 enum BufferParameter {
     GL_BUFFER_SIZE                                  = 0x8764,
     GL_BUFFER_USAGE                                 = 0x8765,
@@ -731,7 +726,7 @@ enum BlendEquation {
 }
 
 // GLES 3
-enum MapBufferTarget {
+enum BufferTarget {
     GL_ARRAY_BUFFER                                 = 0x8892,
     GL_COPY_READ_BUFFER                             = 0x8F36,
     GL_COPY_WRITE_BUFFER                            = 0x8F37,
@@ -1285,6 +1280,33 @@ cmd EGLBoolean eglMakeCurrent(EGLDisplay display,
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml
 cmd EGLBoolean eglSwapBuffers(EGLDisplay display, pointer surface) {
     return ?
+}
+
+/////////////////////////////////////////////////////////////////
+// GLX APIs
+/////////////////////////////////////////////////////////////////
+type pointer GLXContext
+type pointer GLXDrawable
+
+@replay_custom
+@ReturnSize(0)
+cmd GLXContext glXCreateContext(pointer dpy, pointer vis, GLXContext shareList, bool direct) {
+    return ?
+}
+
+@replay_custom
+@ReturnSize(0)
+cmd GLXContext glXCreateNewContext(pointer display, pointer fbconfig, u32 type, GLXContext shared, bool direct) {
+    return ?
+}
+
+@replay_custom
+cmd void glXMakeContextCurrent(pointer display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
+}
+
+@replay_custom
+@EndOfFrame
+cmd void glXSwapBuffers(pointer display, GLXDrawable drawable) {
 }
 
 /////////////////////////////////////////////////////////////////
@@ -2141,7 +2163,7 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if data != null {
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             t.Texture2D[level] = l
@@ -2159,7 +2181,7 @@ cmd void glTexImage2D(TextureImageTarget target,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            if data != null {
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
                 memcpy(l.Data, data, l.Size)
             }
             cube := t.Cubemap[level]
@@ -2194,7 +2216,9 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            memcpy(l.Data, data, l.Size)
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+                memcpy(l.Data, data, l.Size)
+            }
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
@@ -2210,7 +2234,9 @@ cmd void glTexSubImage2D(TextureImageTarget target,
                 Size:   imageSize(width as u32, height as u32, format, type),
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            memcpy(l.Data, data, l.Size)
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+                memcpy(l.Data, data, l.Size)
+            }
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
             t.Cubemap[level] = cube
@@ -2263,7 +2289,9 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            memcpy(l.Data, data, l.Size)
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+                memcpy(l.Data, data, l.Size)
+            }
             t.Texture2D[level] = l
             t.Kind = TEXTURE2D // TODO: Warning/Error if kind has changed?
             // TODO: Warning/Error if format has changed
@@ -2279,7 +2307,9 @@ cmd void glCompressedTexImage2D(TextureImageTarget    target,
                 Size:   image_size as u32,
                 Format: format as ImageTexelFormat /* TODO: Implicit cast? */,
             }
-            memcpy(l.Data, data, l.Size)
+            if (BoundBuffers[GL_PIXEL_UNPACK_BUFFER] == 0) && (data != null) {
+                memcpy(l.Data, data, l.Size)
+            }
             cube := t.Cubemap[level]
             cube.Faces[target as CubeMapImageTarget] = l
             t.Cubemap[level] = cube
@@ -3149,12 +3179,12 @@ cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags flags, s32 
 
 @ReturnSize(length)
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
-cmd pointer glMapBufferRange(MapBufferTarget target, s32 offset, s32 length, MapBufferRangeAccess access) {
+cmd pointer glMapBufferRange(BufferTarget target, s32 offset, s32 length, MapBufferRangeAccess access) {
     return ?
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
-cmd void glUnmapBuffer(MapBufferTarget target) {
+cmd void glUnmapBuffer(BufferTarget target) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml

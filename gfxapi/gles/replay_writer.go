@@ -42,191 +42,195 @@ var funcInfoEglInitialize = builder.FunctionInfo{ID: 4, ReturnType: protocol.Typ
 var funcInfoEglCreateContext = builder.FunctionInfo{ID: 5, ReturnType: protocol.TypeAbsolutePointer, Parameters: 4}
 var funcInfoEglMakeCurrent = builder.FunctionInfo{ID: 6, ReturnType: protocol.TypeInt32, Parameters: 4}
 var funcInfoEglSwapBuffers = builder.FunctionInfo{ID: 7, ReturnType: protocol.TypeInt32, Parameters: 2}
-var funcInfoWglCreateContext = builder.FunctionInfo{ID: 8, ReturnType: protocol.TypeAbsolutePointer, Parameters: 1}
-var funcInfoWglMakeCurrent = builder.FunctionInfo{ID: 9, ReturnType: protocol.TypeInt32, Parameters: 2}
-var funcInfoWglSwapBuffers = builder.FunctionInfo{ID: 10, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoCGLCreateContext = builder.FunctionInfo{ID: 11, ReturnType: protocol.TypeInt32, Parameters: 3}
-var funcInfoGlEnableClientState = builder.FunctionInfo{ID: 12, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDisableClientState = builder.FunctionInfo{ID: 13, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlGetProgramBinaryOES = builder.FunctionInfo{ID: 14, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlProgramBinaryOES = builder.FunctionInfo{ID: 15, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlStartTilingQCOM = builder.FunctionInfo{ID: 16, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlEndTilingQCOM = builder.FunctionInfo{ID: 17, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDiscardFramebufferEXT = builder.FunctionInfo{ID: 18, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlInsertEventMarkerEXT = builder.FunctionInfo{ID: 19, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlPushGroupMarkerEXT = builder.FunctionInfo{ID: 20, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlPopGroupMarkerEXT = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoGlTexStorage1DEXT = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlTexStorage2DEXT = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlTexStorage3DEXT = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 6}
-var funcInfoGlTextureStorage1DEXT = builder.FunctionInfo{ID: 25, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlTextureStorage2DEXT = builder.FunctionInfo{ID: 26, ReturnType: protocol.TypeVoid, Parameters: 6}
-var funcInfoGlTextureStorage3DEXT = builder.FunctionInfo{ID: 27, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlGenVertexArraysOES = builder.FunctionInfo{ID: 28, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBindVertexArrayOES = builder.FunctionInfo{ID: 29, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDeleteVertexArraysOES = builder.FunctionInfo{ID: 30, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsVertexArrayOES = builder.FunctionInfo{ID: 31, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlEGLImageTargetTexture2DOES = builder.FunctionInfo{ID: 32, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlEGLImageTargetRenderbufferStorageOES = builder.FunctionInfo{ID: 33, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetGraphicsResetStatusEXT = builder.FunctionInfo{ID: 34, ReturnType: protocol.TypeUint32, Parameters: 0}
-var funcInfoGlBindAttribLocation = builder.FunctionInfo{ID: 35, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlBlendFunc = builder.FunctionInfo{ID: 36, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBlendFuncSeparate = builder.FunctionInfo{ID: 37, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlBlendEquation = builder.FunctionInfo{ID: 38, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlBlendEquationSeparate = builder.FunctionInfo{ID: 39, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBlendColor = builder.FunctionInfo{ID: 40, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlEnableVertexAttribArray = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDisableVertexAttribArray = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlVertexAttribPointer = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 6}
-var funcInfoGlGetActiveAttrib = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlGetActiveUniform = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlGetError = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeUint32, Parameters: 0}
-var funcInfoGlGetProgramiv = builder.FunctionInfo{ID: 47, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetShaderiv = builder.FunctionInfo{ID: 48, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetUniformLocation = builder.FunctionInfo{ID: 49, ReturnType: protocol.TypeInt32, Parameters: 2}
-var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 50, ReturnType: protocol.TypeUint32, Parameters: 2}
-var funcInfoGlPixelStorei = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlTexParameteri = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlTexParameterf = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetTexParameteriv = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetTexParameterfv = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform1i = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlUniform2i = builder.FunctionInfo{ID: 57, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform3i = builder.FunctionInfo{ID: 58, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlUniform4i = builder.FunctionInfo{ID: 59, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlUniform1iv = builder.FunctionInfo{ID: 60, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform2iv = builder.FunctionInfo{ID: 61, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform3iv = builder.FunctionInfo{ID: 62, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform4iv = builder.FunctionInfo{ID: 63, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform1f = builder.FunctionInfo{ID: 64, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlUniform2f = builder.FunctionInfo{ID: 65, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform3f = builder.FunctionInfo{ID: 66, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlUniform4f = builder.FunctionInfo{ID: 67, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlUniform1fv = builder.FunctionInfo{ID: 68, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform2fv = builder.FunctionInfo{ID: 69, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform3fv = builder.FunctionInfo{ID: 70, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniform4fv = builder.FunctionInfo{ID: 71, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlUniformMatrix2fv = builder.FunctionInfo{ID: 72, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlUniformMatrix3fv = builder.FunctionInfo{ID: 73, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlUniformMatrix4fv = builder.FunctionInfo{ID: 74, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlGetUniformfv = builder.FunctionInfo{ID: 75, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetUniformiv = builder.FunctionInfo{ID: 76, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlVertexAttrib1f = builder.FunctionInfo{ID: 77, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlVertexAttrib2f = builder.FunctionInfo{ID: 78, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlVertexAttrib3f = builder.FunctionInfo{ID: 79, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlVertexAttrib4f = builder.FunctionInfo{ID: 80, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlVertexAttrib1fv = builder.FunctionInfo{ID: 81, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlVertexAttrib2fv = builder.FunctionInfo{ID: 82, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlVertexAttrib3fv = builder.FunctionInfo{ID: 83, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlVertexAttrib4fv = builder.FunctionInfo{ID: 84, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetShaderPrecisionFormat = builder.FunctionInfo{ID: 85, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlDepthMask = builder.FunctionInfo{ID: 86, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDepthFunc = builder.FunctionInfo{ID: 87, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDepthRangef = builder.FunctionInfo{ID: 88, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlColorMask = builder.FunctionInfo{ID: 89, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlStencilMask = builder.FunctionInfo{ID: 90, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlStencilMaskSeparate = builder.FunctionInfo{ID: 91, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlStencilFuncSeparate = builder.FunctionInfo{ID: 92, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlStencilOpSeparate = builder.FunctionInfo{ID: 93, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlFrontFace = builder.FunctionInfo{ID: 94, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlViewport = builder.FunctionInfo{ID: 95, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlScissor = builder.FunctionInfo{ID: 96, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlActiveTexture = builder.FunctionInfo{ID: 97, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlGenTextures = builder.FunctionInfo{ID: 98, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlDeleteTextures = builder.FunctionInfo{ID: 99, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsTexture = builder.FunctionInfo{ID: 100, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlBindTexture = builder.FunctionInfo{ID: 101, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlTexImage2D = builder.FunctionInfo{ID: 102, ReturnType: protocol.TypeVoid, Parameters: 9}
-var funcInfoGlTexSubImage2D = builder.FunctionInfo{ID: 103, ReturnType: protocol.TypeVoid, Parameters: 9}
-var funcInfoGlCopyTexImage2D = builder.FunctionInfo{ID: 104, ReturnType: protocol.TypeVoid, Parameters: 8}
-var funcInfoGlCopyTexSubImage2D = builder.FunctionInfo{ID: 105, ReturnType: protocol.TypeVoid, Parameters: 8}
-var funcInfoGlCompressedTexImage2D = builder.FunctionInfo{ID: 106, ReturnType: protocol.TypeVoid, Parameters: 8}
-var funcInfoGlCompressedTexSubImage2D = builder.FunctionInfo{ID: 107, ReturnType: protocol.TypeVoid, Parameters: 9}
-var funcInfoGlGenerateMipmap = builder.FunctionInfo{ID: 108, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlReadPixels = builder.FunctionInfo{ID: 109, ReturnType: protocol.TypeVoid, Parameters: 7}
-var funcInfoGlGenFramebuffers = builder.FunctionInfo{ID: 110, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBindFramebuffer = builder.FunctionInfo{ID: 111, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlCheckFramebufferStatus = builder.FunctionInfo{ID: 112, ReturnType: protocol.TypeUint32, Parameters: 1}
-var funcInfoGlDeleteFramebuffers = builder.FunctionInfo{ID: 113, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsFramebuffer = builder.FunctionInfo{ID: 114, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlGenRenderbuffers = builder.FunctionInfo{ID: 115, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBindRenderbuffer = builder.FunctionInfo{ID: 116, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlRenderbufferStorage = builder.FunctionInfo{ID: 117, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlDeleteRenderbuffers = builder.FunctionInfo{ID: 118, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsRenderbuffer = builder.FunctionInfo{ID: 119, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlGetRenderbufferParameteriv = builder.FunctionInfo{ID: 120, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGenBuffers = builder.FunctionInfo{ID: 121, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBindBuffer = builder.FunctionInfo{ID: 122, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBufferData = builder.FunctionInfo{ID: 123, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlBufferSubData = builder.FunctionInfo{ID: 124, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlDeleteBuffers = builder.FunctionInfo{ID: 125, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsBuffer = builder.FunctionInfo{ID: 126, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlGetBufferParameteriv = builder.FunctionInfo{ID: 127, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlCreateShader = builder.FunctionInfo{ID: 128, ReturnType: protocol.TypeUint32, Parameters: 1}
-var funcInfoGlDeleteShader = builder.FunctionInfo{ID: 129, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlShaderSource = builder.FunctionInfo{ID: 130, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlShaderBinary = builder.FunctionInfo{ID: 131, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlGetShaderInfoLog = builder.FunctionInfo{ID: 132, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlGetShaderSource = builder.FunctionInfo{ID: 133, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlReleaseShaderCompiler = builder.FunctionInfo{ID: 134, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoGlCompileShader = builder.FunctionInfo{ID: 135, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlIsShader = builder.FunctionInfo{ID: 136, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlCreateProgram = builder.FunctionInfo{ID: 137, ReturnType: protocol.TypeUint32, Parameters: 0}
-var funcInfoGlDeleteProgram = builder.FunctionInfo{ID: 138, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlAttachShader = builder.FunctionInfo{ID: 139, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlDetachShader = builder.FunctionInfo{ID: 140, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetAttachedShaders = builder.FunctionInfo{ID: 141, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlLinkProgram = builder.FunctionInfo{ID: 142, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlGetProgramInfoLog = builder.FunctionInfo{ID: 143, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlUseProgram = builder.FunctionInfo{ID: 144, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlIsProgram = builder.FunctionInfo{ID: 145, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlValidateProgram = builder.FunctionInfo{ID: 146, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlClearColor = builder.FunctionInfo{ID: 147, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlClearDepthf = builder.FunctionInfo{ID: 148, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlClearStencil = builder.FunctionInfo{ID: 149, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlClear = builder.FunctionInfo{ID: 150, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlCullFace = builder.FunctionInfo{ID: 151, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlPolygonOffset = builder.FunctionInfo{ID: 152, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlLineWidth = builder.FunctionInfo{ID: 153, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlSampleCoverage = builder.FunctionInfo{ID: 154, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlHint = builder.FunctionInfo{ID: 155, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlFramebufferRenderbuffer = builder.FunctionInfo{ID: 156, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlFramebufferTexture2D = builder.FunctionInfo{ID: 157, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlGetFramebufferAttachmentParameteriv = builder.FunctionInfo{ID: 158, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlDrawElements = builder.FunctionInfo{ID: 159, ReturnType: protocol.TypeVoid, Parameters: 4}
-var funcInfoGlDrawArrays = builder.FunctionInfo{ID: 160, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlFlush = builder.FunctionInfo{ID: 161, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoGlFinish = builder.FunctionInfo{ID: 162, ReturnType: protocol.TypeVoid, Parameters: 0}
-var funcInfoGlGetBooleanv = builder.FunctionInfo{ID: 163, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetFloatv = builder.FunctionInfo{ID: 164, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetIntegerv = builder.FunctionInfo{ID: 165, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetString = builder.FunctionInfo{ID: 166, ReturnType: protocol.TypeAbsolutePointer, Parameters: 1}
-var funcInfoGlEnable = builder.FunctionInfo{ID: 167, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDisable = builder.FunctionInfo{ID: 168, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlIsEnabled = builder.FunctionInfo{ID: 169, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlMapBufferRange = builder.FunctionInfo{ID: 170, ReturnType: protocol.TypeAbsolutePointer, Parameters: 4}
-var funcInfoGlUnmapBuffer = builder.FunctionInfo{ID: 171, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlInvalidateFramebuffer = builder.FunctionInfo{ID: 172, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlRenderbufferStorageMultisample = builder.FunctionInfo{ID: 173, ReturnType: protocol.TypeVoid, Parameters: 5}
-var funcInfoGlBlitFramebuffer = builder.FunctionInfo{ID: 174, ReturnType: protocol.TypeVoid, Parameters: 10}
-var funcInfoGlGenQueries = builder.FunctionInfo{ID: 175, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBeginQuery = builder.FunctionInfo{ID: 176, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlEndQuery = builder.FunctionInfo{ID: 177, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDeleteQueries = builder.FunctionInfo{ID: 178, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsQuery = builder.FunctionInfo{ID: 179, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlGetQueryiv = builder.FunctionInfo{ID: 180, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetQueryObjectuiv = builder.FunctionInfo{ID: 181, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGenQueriesEXT = builder.FunctionInfo{ID: 182, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlBeginQueryEXT = builder.FunctionInfo{ID: 183, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlEndQueryEXT = builder.FunctionInfo{ID: 184, ReturnType: protocol.TypeVoid, Parameters: 1}
-var funcInfoGlDeleteQueriesEXT = builder.FunctionInfo{ID: 185, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlIsQueryEXT = builder.FunctionInfo{ID: 186, ReturnType: protocol.TypeBool, Parameters: 1}
-var funcInfoGlQueryCounterEXT = builder.FunctionInfo{ID: 187, ReturnType: protocol.TypeVoid, Parameters: 2}
-var funcInfoGlGetQueryivEXT = builder.FunctionInfo{ID: 188, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetQueryObjectivEXT = builder.FunctionInfo{ID: 189, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetQueryObjectuivEXT = builder.FunctionInfo{ID: 190, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetQueryObjecti64vEXT = builder.FunctionInfo{ID: 191, ReturnType: protocol.TypeVoid, Parameters: 3}
-var funcInfoGlGetQueryObjectui64vEXT = builder.FunctionInfo{ID: 192, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlXCreateContext = builder.FunctionInfo{ID: 8, ReturnType: protocol.TypeAbsolutePointer, Parameters: 4}
+var funcInfoGlXCreateNewContext = builder.FunctionInfo{ID: 9, ReturnType: protocol.TypeAbsolutePointer, Parameters: 5}
+var funcInfoGlXMakeContextCurrent = builder.FunctionInfo{ID: 10, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlXSwapBuffers = builder.FunctionInfo{ID: 11, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoWglCreateContext = builder.FunctionInfo{ID: 12, ReturnType: protocol.TypeAbsolutePointer, Parameters: 1}
+var funcInfoWglMakeCurrent = builder.FunctionInfo{ID: 13, ReturnType: protocol.TypeInt32, Parameters: 2}
+var funcInfoWglSwapBuffers = builder.FunctionInfo{ID: 14, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoCGLCreateContext = builder.FunctionInfo{ID: 15, ReturnType: protocol.TypeInt32, Parameters: 3}
+var funcInfoGlEnableClientState = builder.FunctionInfo{ID: 16, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDisableClientState = builder.FunctionInfo{ID: 17, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlGetProgramBinaryOES = builder.FunctionInfo{ID: 18, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlProgramBinaryOES = builder.FunctionInfo{ID: 19, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlStartTilingQCOM = builder.FunctionInfo{ID: 20, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlEndTilingQCOM = builder.FunctionInfo{ID: 21, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDiscardFramebufferEXT = builder.FunctionInfo{ID: 22, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlInsertEventMarkerEXT = builder.FunctionInfo{ID: 23, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlPushGroupMarkerEXT = builder.FunctionInfo{ID: 24, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlPopGroupMarkerEXT = builder.FunctionInfo{ID: 25, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoGlTexStorage1DEXT = builder.FunctionInfo{ID: 26, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlTexStorage2DEXT = builder.FunctionInfo{ID: 27, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlTexStorage3DEXT = builder.FunctionInfo{ID: 28, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoGlTextureStorage1DEXT = builder.FunctionInfo{ID: 29, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlTextureStorage2DEXT = builder.FunctionInfo{ID: 30, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoGlTextureStorage3DEXT = builder.FunctionInfo{ID: 31, ReturnType: protocol.TypeVoid, Parameters: 7}
+var funcInfoGlGenVertexArraysOES = builder.FunctionInfo{ID: 32, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBindVertexArrayOES = builder.FunctionInfo{ID: 33, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDeleteVertexArraysOES = builder.FunctionInfo{ID: 34, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsVertexArrayOES = builder.FunctionInfo{ID: 35, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlEGLImageTargetTexture2DOES = builder.FunctionInfo{ID: 36, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlEGLImageTargetRenderbufferStorageOES = builder.FunctionInfo{ID: 37, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetGraphicsResetStatusEXT = builder.FunctionInfo{ID: 38, ReturnType: protocol.TypeUint32, Parameters: 0}
+var funcInfoGlBindAttribLocation = builder.FunctionInfo{ID: 39, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlBlendFunc = builder.FunctionInfo{ID: 40, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBlendFuncSeparate = builder.FunctionInfo{ID: 41, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlBlendEquation = builder.FunctionInfo{ID: 42, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlBlendEquationSeparate = builder.FunctionInfo{ID: 43, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBlendColor = builder.FunctionInfo{ID: 44, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlEnableVertexAttribArray = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDisableVertexAttribArray = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlVertexAttribPointer = builder.FunctionInfo{ID: 47, ReturnType: protocol.TypeVoid, Parameters: 6}
+var funcInfoGlGetActiveAttrib = builder.FunctionInfo{ID: 48, ReturnType: protocol.TypeVoid, Parameters: 7}
+var funcInfoGlGetActiveUniform = builder.FunctionInfo{ID: 49, ReturnType: protocol.TypeVoid, Parameters: 7}
+var funcInfoGlGetError = builder.FunctionInfo{ID: 50, ReturnType: protocol.TypeUint32, Parameters: 0}
+var funcInfoGlGetProgramiv = builder.FunctionInfo{ID: 51, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetShaderiv = builder.FunctionInfo{ID: 52, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetUniformLocation = builder.FunctionInfo{ID: 53, ReturnType: protocol.TypeInt32, Parameters: 2}
+var funcInfoGlGetAttribLocation = builder.FunctionInfo{ID: 54, ReturnType: protocol.TypeUint32, Parameters: 2}
+var funcInfoGlPixelStorei = builder.FunctionInfo{ID: 55, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlTexParameteri = builder.FunctionInfo{ID: 56, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlTexParameterf = builder.FunctionInfo{ID: 57, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetTexParameteriv = builder.FunctionInfo{ID: 58, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetTexParameterfv = builder.FunctionInfo{ID: 59, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform1i = builder.FunctionInfo{ID: 60, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlUniform2i = builder.FunctionInfo{ID: 61, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform3i = builder.FunctionInfo{ID: 62, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlUniform4i = builder.FunctionInfo{ID: 63, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlUniform1iv = builder.FunctionInfo{ID: 64, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform2iv = builder.FunctionInfo{ID: 65, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform3iv = builder.FunctionInfo{ID: 66, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform4iv = builder.FunctionInfo{ID: 67, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform1f = builder.FunctionInfo{ID: 68, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlUniform2f = builder.FunctionInfo{ID: 69, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform3f = builder.FunctionInfo{ID: 70, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlUniform4f = builder.FunctionInfo{ID: 71, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlUniform1fv = builder.FunctionInfo{ID: 72, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform2fv = builder.FunctionInfo{ID: 73, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform3fv = builder.FunctionInfo{ID: 74, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniform4fv = builder.FunctionInfo{ID: 75, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlUniformMatrix2fv = builder.FunctionInfo{ID: 76, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlUniformMatrix3fv = builder.FunctionInfo{ID: 77, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlUniformMatrix4fv = builder.FunctionInfo{ID: 78, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlGetUniformfv = builder.FunctionInfo{ID: 79, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetUniformiv = builder.FunctionInfo{ID: 80, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlVertexAttrib1f = builder.FunctionInfo{ID: 81, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlVertexAttrib2f = builder.FunctionInfo{ID: 82, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlVertexAttrib3f = builder.FunctionInfo{ID: 83, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlVertexAttrib4f = builder.FunctionInfo{ID: 84, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlVertexAttrib1fv = builder.FunctionInfo{ID: 85, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlVertexAttrib2fv = builder.FunctionInfo{ID: 86, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlVertexAttrib3fv = builder.FunctionInfo{ID: 87, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlVertexAttrib4fv = builder.FunctionInfo{ID: 88, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetShaderPrecisionFormat = builder.FunctionInfo{ID: 89, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlDepthMask = builder.FunctionInfo{ID: 90, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDepthFunc = builder.FunctionInfo{ID: 91, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDepthRangef = builder.FunctionInfo{ID: 92, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlColorMask = builder.FunctionInfo{ID: 93, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlStencilMask = builder.FunctionInfo{ID: 94, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlStencilMaskSeparate = builder.FunctionInfo{ID: 95, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlStencilFuncSeparate = builder.FunctionInfo{ID: 96, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlStencilOpSeparate = builder.FunctionInfo{ID: 97, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlFrontFace = builder.FunctionInfo{ID: 98, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlViewport = builder.FunctionInfo{ID: 99, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlScissor = builder.FunctionInfo{ID: 100, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlActiveTexture = builder.FunctionInfo{ID: 101, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlGenTextures = builder.FunctionInfo{ID: 102, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlDeleteTextures = builder.FunctionInfo{ID: 103, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsTexture = builder.FunctionInfo{ID: 104, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlBindTexture = builder.FunctionInfo{ID: 105, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlTexImage2D = builder.FunctionInfo{ID: 106, ReturnType: protocol.TypeVoid, Parameters: 9}
+var funcInfoGlTexSubImage2D = builder.FunctionInfo{ID: 107, ReturnType: protocol.TypeVoid, Parameters: 9}
+var funcInfoGlCopyTexImage2D = builder.FunctionInfo{ID: 108, ReturnType: protocol.TypeVoid, Parameters: 8}
+var funcInfoGlCopyTexSubImage2D = builder.FunctionInfo{ID: 109, ReturnType: protocol.TypeVoid, Parameters: 8}
+var funcInfoGlCompressedTexImage2D = builder.FunctionInfo{ID: 110, ReturnType: protocol.TypeVoid, Parameters: 8}
+var funcInfoGlCompressedTexSubImage2D = builder.FunctionInfo{ID: 111, ReturnType: protocol.TypeVoid, Parameters: 9}
+var funcInfoGlGenerateMipmap = builder.FunctionInfo{ID: 112, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlReadPixels = builder.FunctionInfo{ID: 113, ReturnType: protocol.TypeVoid, Parameters: 7}
+var funcInfoGlGenFramebuffers = builder.FunctionInfo{ID: 114, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBindFramebuffer = builder.FunctionInfo{ID: 115, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlCheckFramebufferStatus = builder.FunctionInfo{ID: 116, ReturnType: protocol.TypeUint32, Parameters: 1}
+var funcInfoGlDeleteFramebuffers = builder.FunctionInfo{ID: 117, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsFramebuffer = builder.FunctionInfo{ID: 118, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlGenRenderbuffers = builder.FunctionInfo{ID: 119, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBindRenderbuffer = builder.FunctionInfo{ID: 120, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlRenderbufferStorage = builder.FunctionInfo{ID: 121, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlDeleteRenderbuffers = builder.FunctionInfo{ID: 122, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsRenderbuffer = builder.FunctionInfo{ID: 123, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlGetRenderbufferParameteriv = builder.FunctionInfo{ID: 124, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGenBuffers = builder.FunctionInfo{ID: 125, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBindBuffer = builder.FunctionInfo{ID: 126, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBufferData = builder.FunctionInfo{ID: 127, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlBufferSubData = builder.FunctionInfo{ID: 128, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlDeleteBuffers = builder.FunctionInfo{ID: 129, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsBuffer = builder.FunctionInfo{ID: 130, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlGetBufferParameteriv = builder.FunctionInfo{ID: 131, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlCreateShader = builder.FunctionInfo{ID: 132, ReturnType: protocol.TypeUint32, Parameters: 1}
+var funcInfoGlDeleteShader = builder.FunctionInfo{ID: 133, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlShaderSource = builder.FunctionInfo{ID: 134, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlShaderBinary = builder.FunctionInfo{ID: 135, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlGetShaderInfoLog = builder.FunctionInfo{ID: 136, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlGetShaderSource = builder.FunctionInfo{ID: 137, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlReleaseShaderCompiler = builder.FunctionInfo{ID: 138, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoGlCompileShader = builder.FunctionInfo{ID: 139, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlIsShader = builder.FunctionInfo{ID: 140, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlCreateProgram = builder.FunctionInfo{ID: 141, ReturnType: protocol.TypeUint32, Parameters: 0}
+var funcInfoGlDeleteProgram = builder.FunctionInfo{ID: 142, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlAttachShader = builder.FunctionInfo{ID: 143, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlDetachShader = builder.FunctionInfo{ID: 144, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetAttachedShaders = builder.FunctionInfo{ID: 145, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlLinkProgram = builder.FunctionInfo{ID: 146, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlGetProgramInfoLog = builder.FunctionInfo{ID: 147, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlUseProgram = builder.FunctionInfo{ID: 148, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlIsProgram = builder.FunctionInfo{ID: 149, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlValidateProgram = builder.FunctionInfo{ID: 150, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlClearColor = builder.FunctionInfo{ID: 151, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlClearDepthf = builder.FunctionInfo{ID: 152, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlClearStencil = builder.FunctionInfo{ID: 153, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlClear = builder.FunctionInfo{ID: 154, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlCullFace = builder.FunctionInfo{ID: 155, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlPolygonOffset = builder.FunctionInfo{ID: 156, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlLineWidth = builder.FunctionInfo{ID: 157, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlSampleCoverage = builder.FunctionInfo{ID: 158, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlHint = builder.FunctionInfo{ID: 159, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlFramebufferRenderbuffer = builder.FunctionInfo{ID: 160, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlFramebufferTexture2D = builder.FunctionInfo{ID: 161, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlGetFramebufferAttachmentParameteriv = builder.FunctionInfo{ID: 162, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlDrawElements = builder.FunctionInfo{ID: 163, ReturnType: protocol.TypeVoid, Parameters: 4}
+var funcInfoGlDrawArrays = builder.FunctionInfo{ID: 164, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlFlush = builder.FunctionInfo{ID: 165, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoGlFinish = builder.FunctionInfo{ID: 166, ReturnType: protocol.TypeVoid, Parameters: 0}
+var funcInfoGlGetBooleanv = builder.FunctionInfo{ID: 167, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetFloatv = builder.FunctionInfo{ID: 168, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetIntegerv = builder.FunctionInfo{ID: 169, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetString = builder.FunctionInfo{ID: 170, ReturnType: protocol.TypeAbsolutePointer, Parameters: 1}
+var funcInfoGlEnable = builder.FunctionInfo{ID: 171, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDisable = builder.FunctionInfo{ID: 172, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlIsEnabled = builder.FunctionInfo{ID: 173, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlMapBufferRange = builder.FunctionInfo{ID: 174, ReturnType: protocol.TypeAbsolutePointer, Parameters: 4}
+var funcInfoGlUnmapBuffer = builder.FunctionInfo{ID: 175, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlInvalidateFramebuffer = builder.FunctionInfo{ID: 176, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlRenderbufferStorageMultisample = builder.FunctionInfo{ID: 177, ReturnType: protocol.TypeVoid, Parameters: 5}
+var funcInfoGlBlitFramebuffer = builder.FunctionInfo{ID: 178, ReturnType: protocol.TypeVoid, Parameters: 10}
+var funcInfoGlGenQueries = builder.FunctionInfo{ID: 179, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBeginQuery = builder.FunctionInfo{ID: 180, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlEndQuery = builder.FunctionInfo{ID: 181, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDeleteQueries = builder.FunctionInfo{ID: 182, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsQuery = builder.FunctionInfo{ID: 183, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlGetQueryiv = builder.FunctionInfo{ID: 184, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetQueryObjectuiv = builder.FunctionInfo{ID: 185, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGenQueriesEXT = builder.FunctionInfo{ID: 186, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlBeginQueryEXT = builder.FunctionInfo{ID: 187, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlEndQueryEXT = builder.FunctionInfo{ID: 188, ReturnType: protocol.TypeVoid, Parameters: 1}
+var funcInfoGlDeleteQueriesEXT = builder.FunctionInfo{ID: 189, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlIsQueryEXT = builder.FunctionInfo{ID: 190, ReturnType: protocol.TypeBool, Parameters: 1}
+var funcInfoGlQueryCounterEXT = builder.FunctionInfo{ID: 191, ReturnType: protocol.TypeVoid, Parameters: 2}
+var funcInfoGlGetQueryivEXT = builder.FunctionInfo{ID: 192, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetQueryObjectivEXT = builder.FunctionInfo{ID: 193, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetQueryObjectuivEXT = builder.FunctionInfo{ID: 194, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetQueryObjecti64vEXT = builder.FunctionInfo{ID: 195, ReturnType: protocol.TypeVoid, Parameters: 3}
+var funcInfoGlGetQueryObjectui64vEXT = builder.FunctionInfo{ID: 196, ReturnType: protocol.TypeVoid, Parameters: 3}
 
 func (c RenderbufferId) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.U32(uint32(c))
@@ -274,6 +278,12 @@ func (c EGLDisplay) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State)
 	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
 }
 func (c EGLSurface) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
+}
+func (c GLXContext) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
+}
+func (c GLXDrawable) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
 	return value.VolatileCapturePointer(uint64(memory.Pointer(c)))
 }
 func (c HGLRC) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
@@ -570,6 +580,40 @@ func (o *EglSwapBuffers_Postback) Decode(d binary.Decoder) error {
 			return err
 		}
 		o.Result = EGLBoolean(x)
+	}
+	return nil
+}
+
+type GlXCreateContext_Postback struct {
+	Result []byte
+}
+
+func (o *GlXCreateContext_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
+	{
+		var x []byte
+		if val, err := readBytes(d, result_cnt); err == nil {
+			x = val
+		} else {
+			return err
+		}
+		o.Result = []byte(x)
+	}
+	return nil
+}
+
+type GlXCreateNewContext_Postback struct {
+	Result []byte
+}
+
+func (o *GlXCreateNewContext_Postback) Decode(result_cnt uint64, d binary.Decoder) error {
+	{
+		var x []byte
+		if val, err := readBytes(d, result_cnt); err == nil {
+			x = val
+		} else {
+			return err
+		}
+		o.Result = []byte(x)
 	}
 	return nil
 }
@@ -1656,6 +1700,87 @@ func (ϟa *EglSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *bui
 			return postback, nil
 		})
 	}
+	ϟb.EndAtom()
+}
+
+var _ = replay.Replayer(&GlXCreateContext{}) // interface compliance check
+func (ϟa *GlXCreateContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟa, ϟs)
+	_ = ϟc
+	ϟb.BeginAtom(ϟi)
+	result_cnt := uint64(int32(0))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Dpy)))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Vis)))
+	ϟb.Push(ϟa.ShareList.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.Bool(ϟa.Direct))
+	ϟb.CallPush(funcInfoGlXCreateContext)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+			postback := GlXCreateContext_Postback{}
+			if err := postback.Decode(result_cnt, d); err != nil {
+				return nil, err
+			}
+			return postback, nil
+		})
+	}
+	ϟb.EndAtom()
+}
+
+var _ = replay.Replayer(&GlXCreateNewContext{}) // interface compliance check
+func (ϟa *GlXCreateNewContext) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟa, ϟs)
+	_ = ϟc
+	ϟb.BeginAtom(ϟi)
+	result_cnt := uint64(int32(0))
+	outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{result_cnt /* result */})
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Display)))
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Fbconfig)))
+	ϟb.Push(value.U32(ϟa.Type))
+	ϟb.Push(ϟa.Shared.value(ϟb, ϟa, ϟs))
+	ϟb.Push(value.Bool(ϟa.Direct))
+	ϟb.CallPush(funcInfoGlXCreateNewContext)
+	ϟb.Push(outputs[0])
+	ϟb.Copy(result_cnt)
+	ϟa.Mutate(ϟs)
+	if postback {
+		ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+			postback := GlXCreateNewContext_Postback{}
+			if err := postback.Decode(result_cnt, d); err != nil {
+				return nil, err
+			}
+			return postback, nil
+		})
+	}
+	ϟb.EndAtom()
+}
+
+var _ = replay.Replayer(&GlXMakeContextCurrent{}) // interface compliance check
+func (ϟa *GlXMakeContextCurrent) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟa, ϟs)
+	_ = ϟc
+	ϟb.BeginAtom(ϟi)
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Display)))
+	ϟb.Push(ϟa.Draw.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Read.value(ϟb, ϟa, ϟs))
+	ϟb.Push(ϟa.Ctx.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlXMakeContextCurrent)
+	ϟa.Mutate(ϟs)
+	ϟb.EndAtom()
+}
+
+var _ = replay.Replayer(&GlXSwapBuffers{}) // interface compliance check
+func (ϟa *GlXSwapBuffers) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
+	ϟc := getState(ϟa, ϟs)
+	_ = ϟc
+	ϟb.BeginAtom(ϟi)
+	ϟb.Push(value.VolatileCapturePointer(uint64(ϟa.Display)))
+	ϟb.Push(ϟa.Drawable.value(ϟb, ϟa, ϟs))
+	ϟb.CallNoPush(funcInfoGlXSwapBuffers)
+	ϟa.Mutate(ϟs)
 	ϟb.EndAtom()
 }
 
