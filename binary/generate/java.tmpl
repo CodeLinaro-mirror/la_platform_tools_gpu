@@ -12,60 +12,60 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "Enum"}}{{.Name}}Enum{{end}}
-{{define "ID"}}{{id .Name}}ID{{end}}
-{{define "IDBytes"}}{{id .Name}}IDBytes{{end}}
+{{define "Java.Enum"}}{{.Name}}Enum{{end}}
+{{define "Java.ID"}}{{JavaID .Name}}ID{{end}}
+{{define "Java.IDBytes"}}{{JavaID .Name}}IDBytes{{end}}
 
-{{define "Encoder"}}
-»public static void encode(Encoder e, {{class .Name}} o) throws IOException {
-{{range .Fields}}»»{{encode (print "o." (fieldname .Name)) .Type}}
+{{define "Java.Encoder"}}
+»public static void encode(Encoder e, {{JavaClass .Name}} o) throws IOException {
+{{range .Fields}}»»{{Encode (print "o." (JavaFieldName .Name)) .Type}}
 {{end}}»}{{end}}
 
-{{define "EncodeNative"}}e.{{lower .Type.Method}}({{.Name}});{{end}}
-{{define "EncodeRemap"}}{{.Name}}.encode(e);{{end}}
-{{define "EncodeCodeable"}}{{.Name}}.encode(e);{{end}}
-{{define "EncodePointer"}}e.object({{.Name}});{{end}}
-{{define "EncodeInterface"}}e.object({{.Name}});{{end}}
+{{define "Java.EncodeNative"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.EncodeRemap"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.EncodeCodeable"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.EncodePointer"}}e.object({{.Name}});{{end}}
+{{define "Java.EncodeInterface"}}e.object({{.Name}});{{end}}
 
-{{define "EncodeArray"}}e.int32({{.Name}}.length);
+{{define "Java.EncodeArray"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»»{{Encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "EncodeStaticArray"}}
+{{define "Java.EncodeStaticArray"}}
 »»for (int i = 0; i < {{.Type.Length}}; i++) {
-»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»»{{Encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "EncodeStream"}}{{end}}
+{{define "Java.EncodeStream"}}{{end}}
 
-{{define "EncodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.EncodeMap"}}TODO: Java map handling{{end}}
 
-{{define "Decoder"}}
-»public static void decode(Decoder d, {{class .Name}} o) throws IOException {
-{{range .Fields}}»»{{decode (print "o." (fieldname .Name)) .Type}}
+{{define "Java.Decoder"}}
+»public static void decode(Decoder d, {{JavaClass .Name}} o) throws IOException {
+{{range .Fields}}»»{{Decode (print "o." (JavaFieldName .Name)) .Type}}
 {{end}}»}{{end}}
 
-{{define "DecodeNative"}}{{.Name}} = d.{{lower .Type.Method}}();{{end}}
-{{define "DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
-{{define "DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "DecodePointer"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
-{{define "DecodeInterface"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
-{{define "DecodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.DecodeNative"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
+{{define "Java.DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
+{{define "Java.DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.DecodePointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.DecodeInterface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.DecodeMap"}}TODO: Java map handling{{end}}
 
-{{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
+{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.SubType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»»{{Decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "DecodeStaticArray"}}{{.Name}} = new {{storage .Type.SubType}}[{{.Type.Length}}];
+{{define "Java.DecodeStaticArray"}}{{.Name}} = new {{JavaStorage .Type.SubType}}[{{.Type.Length}}];
 »»for (int i = 0; i < {{.Type.Length}}; i++) {
-»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»»{{Decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "DecodeStream"}}{{end}}
+{{define "Java.DecodeStream"}}{{end}}
 
-{{define "File"}}/*
+{{define "Java.File"}}/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,21 +93,21 @@ import java.io.IOException;
 
 class ObjectFactory {
 »public enum Entries implements BinaryObjectCreator {{"{"}}{{range .Structs}}
-»»{{template "Enum" .}} {
+»»{{template "Java.GoEnum" .}} {
 »»»@Override public BinaryObject create() {
-»»»»return new {{class .Name}}();
+»»»»return new {{JavaClass .Name}}();
 »»»}
 »»},{{end}}
 »}
 {{range .Structs}}
-»public static byte[] {{template "IDBytes" .}} = { {{range .ID}}{{toS8 .}}, {{end}}{{"}"}};{{end}}
+»public static byte[] {{template "Java.GoIDBytes" .}} = { {{range .ID}}{{ToS8 .}}, {{end}}{{"}"}};{{end}}
 {{range .Structs}}
-»public static ObjectTypeID {{template "ID" .}} = new ObjectTypeID({{template "IDBytes" .}});{{end}}
+»public static ObjectTypeID {{template "Java.GoID" .}} = new ObjectTypeID({{template "Java.GoIDBytes" .}});{{end}}
 
 »static {{"{"}}{{range .Structs}}
-»»ObjectTypeID.register({{template "ID" .}}, Entries.{{template "Enum" .}});{{end}}
+»»ObjectTypeID.register({{template "Java.GoID" .}}, Entries.{{template "Java.GoEnum" .}});{{end}}
 »}{{range .Structs}}
-{{template "Encoder" .}}
-{{template "Decoder" .}}{{end}}
+{{template "Java.GoEncoder" .}}
+{{template "Java.GoDecoder" .}}{{end}}
 }
 {{end}}

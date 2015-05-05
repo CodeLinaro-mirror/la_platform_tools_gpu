@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//go:generate stringer -type=Kind
+
 // Package generate has support for generating encode and decode methods
 // for the binary package automatically.
 package generate
@@ -24,12 +26,21 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"text/template"
 	"unicode"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"golang.org/x/tools/go/types"
 )
+
+type Generator struct {
+	f *functions
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		f: newFunctions(),
+	}
+}
 
 type Style struct {
 	ClassPrefix  string
@@ -303,36 +314,4 @@ func Sort(structs []*Struct) {
 	for _, name := range names {
 		i = walk(name, byname, structs, i)
 	}
-}
-
-func getTemplate(t *template.Template, name string) *template.Template {
-	result := t.Lookup(name)
-	if result == nil {
-		panic(fmt.Errorf("Could not find template %s", name))
-	}
-	return result
-}
-
-type kindToTemplate map[Kind]*template.Template
-
-func getTemplateMap(t *template.Template, prefix string) kindToTemplate {
-	return kindToTemplate{
-		Native:      getTemplate(t, prefix+"Native"),
-		Remap:       getTemplate(t, prefix+"Remap"),
-		Codeable:    getTemplate(t, prefix+"Codeable"),
-		Pointer:     getTemplate(t, prefix+"Pointer"),
-		Interface:   getTemplate(t, prefix+"Interface"),
-		Array:       getTemplate(t, prefix+"Array"),
-		StaticArray: getTemplate(t, prefix+"StaticArray"),
-		Stream:      getTemplate(t, prefix+"Stream"),
-		Map:         getTemplate(t, prefix+"Map"),
-	}
-}
-
-func kindDispatch(table kindToTemplate, name string, t *Type) string {
-	b := &bytes.Buffer{}
-	if err := table[t.Kind].Execute(b, Field{name, t, false}); err != nil {
-		panic(err)
-	}
-	return b.String()
 }

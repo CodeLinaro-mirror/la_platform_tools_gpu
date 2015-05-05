@@ -25,24 +25,24 @@ const go_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
+{{define "Go.ID"}} {{.IDName}} = binary.ID{ {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } {{end}}
 
-{{define "Init"}} registry.Add((*{{.Name}})(nil).Class()){{end}}
+{{define "Go.Init"}} registry.Add((*{{.Name}})(nil).Class()){{end}}
 
-{{define "Class"}} type binaryClass{{.Name}} struct{}
+{{define "Go.Class"}} type binaryClass{{.Name}} struct{}
 func (*{{.Name}}) Class() binary.Class {
 	return (*binaryClass{{.Name}})(nil)
 }
 func doEncode{{.Name}}(e binary.Encoder, o *{{.Name}}) error {
-	{{range .Fields}}{{encode (print "o." .Name) .Type}}
+	{{range .Fields}}{{Encode (print "o." .Name) .Type}}
 {{end}} return nil
 }
 func doDecode{{.Name}}(d binary.Decoder, o *{{.Name}}) error {
-	{{range .Fields}}{{decode (print "o." .Name) .Type}}
+	{{range .Fields}}{{Decode (print "o." .Name) .Type}}
 {{end}} return nil
 }
 func doSkip{{.Name}}(d binary.Decoder) error {
-	{{range .Fields}}{{skip (print "_." .Name) .Type}}
+	{{range .Fields}}{{Skip (print "_." .Name) .Type}}
 {{end}} return nil
 }
 func (*binaryClass{{.Name}}) ID() binary.ID { return {{.IDName}} }
@@ -53,13 +53,13 @@ func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error
 func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
 {{end}}
 
-{{define "EncodeNative"}} if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{end}}
+{{define "Go.EncodeNative"}} if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{end}}
 
-{{define "EncodeRemap"}} if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{end}}
+{{define "Go.EncodeRemap"}} if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{end}}
 
-{{define "EncodeCodeable"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.EncodeCodeable"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
 
-{{define "EncodePointer"}} if {{.Name}} != nil {
+{{define "Go.EncodePointer"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
 				return err
 			}
@@ -67,7 +67,7 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			return err
 		} {{end}}
 
-{{define "EncodeInterface"}} if {{.Name}} != nil {
+{{define "Go.EncodeInterface"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
 				return err
 			}
@@ -75,22 +75,22 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			return err
 		} {{end}}
 
-{{define "EncodeArray"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
+{{define "Go.EncodeArray"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
 		}
 		{{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
 			return err
 		}{{else}}for i := range {{.Name}} {
-			{{encode (print .Name "[i]") .Type.SubType}}
+			{{Encode (print .Name "[i]") .Type.SubType}}
 		}{{end}}{{end}}
 
-{{define "EncodeStaticArray"}} {{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
+{{define "Go.EncodeStaticArray"}} {{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
 			return err
 		}{{else}}for i := range {{.Name}} {
-			{{encode (print .Name "[i]") .Type.SubType}}
+			{{Encode (print .Name "[i]") .Type.SubType}}
 		}{{end}}{{end}}
 
-{{define "EncodeStream"}}for _, o := range {{.Name}} {
+{{define "Go.EncodeStream"}}for _, o := range {{.Name}} {
 			if err := e.Object(o); err != nil {
 				return err
 			}
@@ -99,25 +99,25 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			return err
 		}{{end}}
 
-{{define "EncodeMap"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
+{{define "Go.EncodeMap"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
 		}
 		for k, v := range {{.Name}} {
-			{{encode "k" .Type.KeyType}}
-			{{encode "v" .Type.SubType}}
+			{{Encode "k" .Type.KeyType}}
+			{{Encode "v" .Type.SubType}}
 		} {{end}}
 
-{{define "DecodeNative"}} if obj, err := d.{{.Type.Method}}(); err != nil {
+{{define "Go.DecodeNative"}} if obj, err := d.{{.Type.Method}}(); err != nil {
 			return err
 		} else {
 			{{.Name}} = {{.Type.Name}}(obj)
 		} {{end}}
 
-{{define "DecodeRemap"}}{{template "DecodeNative" .}}{{end}}
+{{define "Go.DecodeRemap"}}{{template "Go.DecodeNative" .}}{{end}}
 
-{{define "DecodeCodeable"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.DecodeCodeable"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
 
-{{define "DecodePointer"}} if obj, err := d.Object(); err != nil {
+{{define "Go.DecodePointer"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
 			{{.Name}} = obj.({{.Type.Name}})
@@ -125,7 +125,7 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "DecodeInterface"}} if obj, err := d.Object(); err != nil {
+{{define "Go.DecodeInterface"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
 			{{.Name}} = obj.({{.Type.Name}})
@@ -133,24 +133,24 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "DecodeArray"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.DecodeArray"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
 			{{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
 				return err
 			}{{else}}for i := range {{.Name}} {
-				{{decode (print .Name "[i]") .Type.SubType}}
+				{{Decode (print .Name "[i]") .Type.SubType}}
 			}{{end}}
 		} {{end}}
 
-{{define "DecodeStaticArray"}} {{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
+{{define "Go.DecodeStaticArray"}} {{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
 				return err
 			}{{else}}for i := range {{.Name}} {
-				{{decode (print .Name "[i]") .Type.SubType}}
+				{{Decode (print .Name "[i]") .Type.SubType}}
 			}{{end}} {{end}}
 
-{{define "DecodeStream"}}for {
+{{define "Go.DecodeStream"}}for {
 			if obj, err := d.Object(); err != nil {
 				return err
 			} else if _, end := obj.(*objects.Terminator); end {
@@ -160,7 +160,7 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			}
 		} {{end}}
 
-{{define "DecodeMap"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.DecodeMap"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{.Name}} = make({{.Type.Name}}, count)
@@ -168,40 +168,40 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			for i := uint32(0); i < count; i++ {
 				var k {{.Type.KeyType.Name}}
 				var v {{.Type.SubType.Name}}
-				{{decode "k" .Type.KeyType}}
-				{{decode "v" .Type.SubType}}
+				{{Decode "k" .Type.KeyType}}
+				{{Decode "v" .Type.SubType}}
 				m[k] = v
 			}
 		} {{end}}
 
-{{define "SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil {
+{{define "Go.SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil {
 	return err
 } {{else}}if _,err := d.{{.Type.Method}}(); err != nil {
 		return err
 } {{end}} {{end}}
-{{define "SkipRemap"}}{{template "SkipNative" .}}{{end}}
-{{define "SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
-{{define "SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
-{{define "SkipInterface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "Go.SkipRemap"}}{{template "Go.SkipNative" .}}{{end}}
+{{define "Go.SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
+{{define "Go.SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
+{{define "Go.SkipInterface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 
-{{define "SkipArray"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.SkipArray"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			{{if .Type.Method}}if err := d.Skip(count); err != nil {
 				return err
 			}{{else}}for i := uint32(0); i < count; i++ {
-				{{skip (print .Name "[i]") .Type.SubType}}
+				{{Skip (print .Name "[i]") .Type.SubType}}
 			}{{end}}
 		} {{end}}
 
-{{define "SkipStaticArray"}} {{if .Type.Method}}if err := d.Skip({{.Type.Length}}); err != nil {
+{{define "Go.SkipStaticArray"}} {{if .Type.Method}}if err := d.Skip({{.Type.Length}}); err != nil {
 			return err
 		}{{else}}for i := uint32(0); i < {{.Type.Length}}; i++ {
-			{{skip (print .Name "[i]") .Type.SubType}}
+			{{Skip (print .Name "[i]") .Type.SubType}}
 		}{{end}} {{end}}
 
 
-{{define "SkipStream"}}for {
+{{define "Go.SkipStream"}}for {
 			if id, err := d.SkipObject(); err != nil {
 				return err
 			} else if id == objects.TerminatorID {
@@ -209,17 +209,17 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			}
 		} {{end}}
 
-{{define "SkipMap"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.SkipMap"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
 			for i := uint32(0); i < count; i++ {
-				{{skip "k" .Type.KeyType}}
-				{{skip "v" .Type.SubType}}
+				{{Skip "k" .Type.KeyType}}
+				{{Skip "v" .Type.SubType}}
 			}
 		} {{end}}
 
-{{define "File"}}
-{{header $.Generated}}
+{{define "Go.File"}}
+{{Header $.Generated}}
 
 package {{.Package}}
 
@@ -230,14 +230,14 @@ import (
 {{end}})
 
 func init() {
-	{{range .Structs}}{{template "Init" .}}
+	{{range .Structs}}{{template "Go.Init" .}}
 	{{end}} }
 
 var (
-{{range .Structs}} {{template "ID" .}}
+{{range .Structs}} {{template "Go.ID" .}}
 {{end}} )
 
-{{range .Structs}} {{template "Class" .}}
+{{range .Structs}} {{template "Go.Class" .}}
 {{end}}
 
 {{end}}
@@ -257,60 +257,60 @@ const java_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "Enum"}}{{.Name}}Enum{{end}}
-{{define "ID"}}{{id .Name}}ID{{end}}
-{{define "IDBytes"}}{{id .Name}}IDBytes{{end}}
+{{define "Java.Enum"}}{{.Name}}Enum{{end}}
+{{define "Java.ID"}}{{JavaID .Name}}ID{{end}}
+{{define "Java.IDBytes"}}{{JavaID .Name}}IDBytes{{end}}
 
-{{define "Encoder"}}
-»public static void encode(Encoder e, {{class .Name}} o) throws IOException {
-{{range .Fields}}»»{{encode (print "o." (fieldname .Name)) .Type}}
+{{define "Java.Encoder"}}
+»public static void encode(Encoder e, {{JavaClass .Name}} o) throws IOException {
+{{range .Fields}}»»{{Encode (print "o." (JavaFieldName .Name)) .Type}}
 {{end}}»}{{end}}
 
-{{define "EncodeNative"}}e.{{lower .Type.Method}}({{.Name}});{{end}}
-{{define "EncodeRemap"}}{{.Name}}.encode(e);{{end}}
-{{define "EncodeCodeable"}}{{.Name}}.encode(e);{{end}}
-{{define "EncodePointer"}}e.object({{.Name}});{{end}}
-{{define "EncodeInterface"}}e.object({{.Name}});{{end}}
+{{define "Java.EncodeNative"}}e.{{Lower .Type.Method}}({{.Name}});{{end}}
+{{define "Java.EncodeRemap"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.EncodeCodeable"}}{{.Name}}.encode(e);{{end}}
+{{define "Java.EncodePointer"}}e.object({{.Name}});{{end}}
+{{define "Java.EncodeInterface"}}e.object({{.Name}});{{end}}
 
-{{define "EncodeArray"}}e.int32({{.Name}}.length);
+{{define "Java.EncodeArray"}}e.int32({{.Name}}.length);
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»»{{Encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "EncodeStaticArray"}}
+{{define "Java.EncodeStaticArray"}}
 »»for (int i = 0; i < {{.Type.Length}}; i++) {
-»»»{{encode (print .Name "[i]") .Type.SubType}}
+»»»{{Encode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "EncodeStream"}}{{end}}
+{{define "Java.EncodeStream"}}{{end}}
 
-{{define "EncodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.EncodeMap"}}TODO: Java map handling{{end}}
 
-{{define "Decoder"}}
-»public static void decode(Decoder d, {{class .Name}} o) throws IOException {
-{{range .Fields}}»»{{decode (print "o." (fieldname .Name)) .Type}}
+{{define "Java.Decoder"}}
+»public static void decode(Decoder d, {{JavaClass .Name}} o) throws IOException {
+{{range .Fields}}»»{{Decode (print "o." (JavaFieldName .Name)) .Type}}
 {{end}}»}{{end}}
 
-{{define "DecodeNative"}}{{.Name}} = d.{{lower .Type.Method}}();{{end}}
-{{define "DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
-{{define "DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
-{{define "DecodePointer"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
-{{define "DecodeInterface"}}{{.Name}} = ({{storage .Type}})d.object();{{end}}
-{{define "DecodeMap"}}TODO: Java map handling{{end}}
+{{define "Java.DecodeNative"}}{{.Name}} = d.{{Lower .Type.Method}}();{{end}}
+{{define "Java.DecodeRemap"}}{{.Name}} = {{.Type.Name}}.decode(d);{{end}}
+{{define "Java.DecodeCodeable"}}{{.Name}} = new {{.Type.Name}}(d);{{end}}
+{{define "Java.DecodePointer"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.DecodeInterface"}}{{.Name}} = ({{JavaStorage .Type}})d.object();{{end}}
+{{define "Java.DecodeMap"}}TODO: Java map handling{{end}}
 
-{{define "DecodeArray"}}{{.Name}} = new {{storage .Type.SubType}}[d.int32()];
+{{define "Java.DecodeArray"}}{{.Name}} = new {{JavaStorage .Type.SubType}}[d.int32()];
 »»for (int i = 0; i < {{.Name}}.length; i++) {
-»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»»{{Decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "DecodeStaticArray"}}{{.Name}} = new {{storage .Type.SubType}}[{{.Type.Length}}];
+{{define "Java.DecodeStaticArray"}}{{.Name}} = new {{JavaStorage .Type.SubType}}[{{.Type.Length}}];
 »»for (int i = 0; i < {{.Type.Length}}; i++) {
-»»»{{decode (print .Name "[i]") .Type.SubType}}
+»»»{{Decode (print .Name "[i]") .Type.SubType}}
 »»}{{end}}
 
-{{define "DecodeStream"}}{{end}}
+{{define "Java.DecodeStream"}}{{end}}
 
-{{define "File"}}/*
+{{define "Java.File"}}/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -338,22 +338,22 @@ import java.io.IOException;
 
 class ObjectFactory {
 »public enum Entries implements BinaryObjectCreator {{"{"}}{{range .Structs}}
-»»{{template "Enum" .}} {
+»»{{template "Java.GoEnum" .}} {
 »»»@Override public BinaryObject create() {
-»»»»return new {{class .Name}}();
+»»»»return new {{JavaClass .Name}}();
 »»»}
 »»},{{end}}
 »}
 {{range .Structs}}
-»public static byte[] {{template "IDBytes" .}} = { {{range .ID}}{{toS8 .}}, {{end}}{{"}"}};{{end}}
+»public static byte[] {{template "Java.GoIDBytes" .}} = { {{range .ID}}{{ToS8 .}}, {{end}}{{"}"}};{{end}}
 {{range .Structs}}
-»public static ObjectTypeID {{template "ID" .}} = new ObjectTypeID({{template "IDBytes" .}});{{end}}
+»public static ObjectTypeID {{template "Java.GoID" .}} = new ObjectTypeID({{template "Java.GoIDBytes" .}});{{end}}
 
 »static {{"{"}}{{range .Structs}}
-»»ObjectTypeID.register({{template "ID" .}}, Entries.{{template "Enum" .}});{{end}}
+»»ObjectTypeID.register({{template "Java.GoID" .}}, Entries.{{template "Java.GoEnum" .}});{{end}}
 »}{{range .Structs}}
-{{template "Encoder" .}}
-{{template "Decoder" .}}{{end}}
+{{template "Java.GoEncoder" .}}
+{{template "Java.GoDecoder" .}}{{end}}
 }
 {{end}}
 `

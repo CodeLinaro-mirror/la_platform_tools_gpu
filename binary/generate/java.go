@@ -16,9 +16,7 @@ package generate
 
 import (
 	"bytes"
-	"fmt"
 	"strings"
-	"text/template"
 	"unicode"
 	"unicode/utf8"
 )
@@ -30,47 +28,7 @@ const (
 )
 
 var (
-	javaTemplates = template.Must(template.New("java.tmpl").Funcs(javaFuncs).Parse(java_tmpl))
-	javaFuncs     = template.FuncMap{
-		"encode": func(name string, t *Type) string {
-			return kindDispatch(javaEncodeMap, name, t)
-		},
-		"decode": func(name string, t *Type) string {
-			return kindDispatch(javaDecodeMap, name, t)
-		},
-		"lower": strings.ToLower,
-		"fieldname": func(s string) string {
-			r, n := utf8.DecodeRuneInString(s)
-			return fmt.Sprintf(memberPrefix+"%s%s", string(unicode.ToUpper(r)), s[n:])
-		},
-		"toS8": func(val byte) string { return fmt.Sprint(int8(val)) },
-		"storage": func(t *Type) string {
-			name := t.Name
-			if t.Kind == Pointer {
-				name = t.SubType.Name
-			}
-			if result, ok := javaTypeMap[name]; ok {
-				return result
-			}
-			return name
-		},
-		"id": func(name string) string {
-			return fmt.Sprintf(classPrefix+"%s", name)
-		},
-		"class": func(name string) string {
-			if strings.HasPrefix(name, "call") {
-				return fmt.Sprintf("Commands."+classPrefix+"%s.Call", name[4:])
-			}
-			if strings.HasPrefix(name, "result") {
-				return fmt.Sprintf("Commands."+classPrefix+"%s.Result", name[6:])
-			}
-			return fmt.Sprintf(classPrefix+"%s", name)
-		},
-	}
-	javaEncodeMap kindToTemplate
-	javaDecodeMap kindToTemplate
-	javaFile      *template.Template
-	javaTypeMap   = map[string]string{
+	javaTypeMap = map[string]string{
 		"int8":    "byte",
 		"uint8":   "byte",
 		"int16":   "short",
@@ -84,14 +42,39 @@ var (
 	}
 )
 
-func init() {
-	javaFile = getTemplate(javaTemplates, "File")
-	javaEncodeMap = getTemplateMap(javaTemplates, "Encode")
-	javaDecodeMap = getTemplateMap(javaTemplates, "Decode")
+func (f *functions) JavaFieldName(s string) string {
+	r, n := utf8.DecodeRuneInString(s)
+	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
+}
+
+func (f *functions) JavaStorage(t *Type) string {
+	name := t.Name
+	if t.Kind == Pointer {
+		name = t.SubType.Name
+	}
+	if result, ok := javaTypeMap[name]; ok {
+		return result
+	}
+	return name
+}
+
+func (f *functions) JavaID(name string) string {
+	return classPrefix + name
+}
+
+func (f *functions) JavaClass(name string) string {
+	if strings.HasPrefix(name, "call") {
+		return "Commands." + classPrefix + name[4:] + ".Call"
+	}
+	if strings.HasPrefix(name, "result") {
+		return "Commands." + classPrefix + name[6:] + "Result"
+	}
+	return classPrefix + name
 }
 
 // JavaFile generates the all the java code for a file with a set of structs.
-func JavaFile(file *File) ([]byte, error) {
+func (g *Generator) JavaFile(file *File) ([]byte, error) {
+	g.f.prefix = "Java."
 	f := *file
 	if f.MemberPrefix == "" {
 		f.MemberPrefix = "m"
@@ -100,10 +83,12 @@ func JavaFile(file *File) ([]byte, error) {
 		f.Indent = "    "
 	}
 	b := &bytes.Buffer{}
-	err := javaFile.Execute(b, &f)
+	if err := g.f.execute(g.f.prefix+"File", b, &f); err != nil {
+		return nil, err
+	}
 	s := b.String()
 	s = strings.Replace(s, indent, f.Indent, -1)
 	s = strings.Replace(s, memberPrefix, f.MemberPrefix, -1)
 	s = strings.Replace(s, classPrefix, f.ClassPrefix, -1)
-	return []byte(s), err
+	return []byte(s), nil
 }
