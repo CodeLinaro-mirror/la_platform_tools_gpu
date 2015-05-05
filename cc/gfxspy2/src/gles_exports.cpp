@@ -24,6 +24,8 @@
 #include <gapic/log.h>
 #include <gapic/target.h>  // STDCALL
 
+#include <memory>
+
 #include <string.h>
 
 using namespace gapii;
@@ -311,241 +313,255 @@ EXPORT void* STDCALL glXGetProcAddressARB(const char* name);
 
 namespace {
 
+std::unique_ptr<Spy> gSpy;  // Must be accessed via spy() below, gets destroyed with the library.
+
 // spy lazily constructs and returns the instance to the spy.
 Spy* spy() {
-    static Spy spy;
-    static bool initialized = false;
-    if (!initialized) {
+    static bool initializedOnce = false;
+    if (!initializedOnce) {
+        gSpy.reset(new Spy());
         GAPID_INFO("Registering spy symbols...\n");
-        spy.RegisterSymbol("eglInitialize", reinterpret_cast<void*>(eglInitialize));
-        spy.RegisterSymbol("eglCreateContext", reinterpret_cast<void*>(eglCreateContext));
-        spy.RegisterSymbol("eglMakeCurrent", reinterpret_cast<void*>(eglMakeCurrent));
-        spy.RegisterSymbol("eglSwapBuffers", reinterpret_cast<void*>(eglSwapBuffers));
-        spy.RegisterSymbol("eglQuerySurface", reinterpret_cast<void*>(eglQuerySurface));
-        spy.RegisterSymbol("glXCreateContext", reinterpret_cast<void*>(glXCreateContext));
-        spy.RegisterSymbol("glXCreateNewContext", reinterpret_cast<void*>(glXCreateNewContext));
-        spy.RegisterSymbol("glXMakeContextCurrent", reinterpret_cast<void*>(glXMakeContextCurrent));
-        spy.RegisterSymbol("glXSwapBuffers", reinterpret_cast<void*>(glXSwapBuffers));
-        spy.RegisterSymbol("wglCreateContext", reinterpret_cast<void*>(wglCreateContext));
-        spy.RegisterSymbol("wglCreateContextAttribsARB",
-                           reinterpret_cast<void*>(wglCreateContextAttribsARB));
-        spy.RegisterSymbol("wglMakeCurrent", reinterpret_cast<void*>(wglMakeCurrent));
-        spy.RegisterSymbol("wglSwapBuffers", reinterpret_cast<void*>(wglSwapBuffers));
-        spy.RegisterSymbol("CGLCreateContext", reinterpret_cast<void*>(CGLCreateContext));
-        spy.RegisterSymbol("CGLSetCurrentContext", reinterpret_cast<void*>(CGLSetCurrentContext));
-        spy.RegisterSymbol("glEnableClientState", reinterpret_cast<void*>(glEnableClientState));
-        spy.RegisterSymbol("glDisableClientState", reinterpret_cast<void*>(glDisableClientState));
-        spy.RegisterSymbol("glGetProgramBinaryOES", reinterpret_cast<void*>(glGetProgramBinaryOES));
-        spy.RegisterSymbol("glProgramBinaryOES", reinterpret_cast<void*>(glProgramBinaryOES));
-        spy.RegisterSymbol("glStartTilingQCOM", reinterpret_cast<void*>(glStartTilingQCOM));
-        spy.RegisterSymbol("glEndTilingQCOM", reinterpret_cast<void*>(glEndTilingQCOM));
-        spy.RegisterSymbol("glDiscardFramebufferEXT",
-                           reinterpret_cast<void*>(glDiscardFramebufferEXT));
-        spy.RegisterSymbol("glInsertEventMarkerEXT",
-                           reinterpret_cast<void*>(glInsertEventMarkerEXT));
-        spy.RegisterSymbol("glPushGroupMarkerEXT", reinterpret_cast<void*>(glPushGroupMarkerEXT));
-        spy.RegisterSymbol("glPopGroupMarkerEXT", reinterpret_cast<void*>(glPopGroupMarkerEXT));
-        spy.RegisterSymbol("glTexStorage1DEXT", reinterpret_cast<void*>(glTexStorage1DEXT));
-        spy.RegisterSymbol("glTexStorage2DEXT", reinterpret_cast<void*>(glTexStorage2DEXT));
-        spy.RegisterSymbol("glTexStorage3DEXT", reinterpret_cast<void*>(glTexStorage3DEXT));
-        spy.RegisterSymbol("glTextureStorage1DEXT", reinterpret_cast<void*>(glTextureStorage1DEXT));
-        spy.RegisterSymbol("glTextureStorage2DEXT", reinterpret_cast<void*>(glTextureStorage2DEXT));
-        spy.RegisterSymbol("glTextureStorage3DEXT", reinterpret_cast<void*>(glTextureStorage3DEXT));
-        spy.RegisterSymbol("glGenVertexArraysOES", reinterpret_cast<void*>(glGenVertexArraysOES));
-        spy.RegisterSymbol("glBindVertexArrayOES", reinterpret_cast<void*>(glBindVertexArrayOES));
-        spy.RegisterSymbol("glDeleteVertexArraysOES",
-                           reinterpret_cast<void*>(glDeleteVertexArraysOES));
-        spy.RegisterSymbol("glIsVertexArrayOES", reinterpret_cast<void*>(glIsVertexArrayOES));
-        spy.RegisterSymbol("glEGLImageTargetTexture2DOES",
-                           reinterpret_cast<void*>(glEGLImageTargetTexture2DOES));
-        spy.RegisterSymbol("glEGLImageTargetRenderbufferStorageOES",
-                           reinterpret_cast<void*>(glEGLImageTargetRenderbufferStorageOES));
-        spy.RegisterSymbol("glGetGraphicsResetStatusEXT",
-                           reinterpret_cast<void*>(glGetGraphicsResetStatusEXT));
-        spy.RegisterSymbol("glBindAttribLocation", reinterpret_cast<void*>(glBindAttribLocation));
-        spy.RegisterSymbol("glBlendFunc", reinterpret_cast<void*>(glBlendFunc));
-        spy.RegisterSymbol("glBlendFuncSeparate", reinterpret_cast<void*>(glBlendFuncSeparate));
-        spy.RegisterSymbol("glBlendEquation", reinterpret_cast<void*>(glBlendEquation));
-        spy.RegisterSymbol("glBlendEquationSeparate",
-                           reinterpret_cast<void*>(glBlendEquationSeparate));
-        spy.RegisterSymbol("glBlendColor", reinterpret_cast<void*>(glBlendColor));
-        spy.RegisterSymbol("glEnableVertexAttribArray",
-                           reinterpret_cast<void*>(glEnableVertexAttribArray));
-        spy.RegisterSymbol("glDisableVertexAttribArray",
-                           reinterpret_cast<void*>(glDisableVertexAttribArray));
-        spy.RegisterSymbol("glVertexAttribPointer", reinterpret_cast<void*>(glVertexAttribPointer));
-        spy.RegisterSymbol("glGetActiveAttrib", reinterpret_cast<void*>(glGetActiveAttrib));
-        spy.RegisterSymbol("glGetActiveUniform", reinterpret_cast<void*>(glGetActiveUniform));
-        spy.RegisterSymbol("glGetError", reinterpret_cast<void*>(glGetError));
-        spy.RegisterSymbol("glGetProgramiv", reinterpret_cast<void*>(glGetProgramiv));
-        spy.RegisterSymbol("glGetShaderiv", reinterpret_cast<void*>(glGetShaderiv));
-        spy.RegisterSymbol("glGetUniformLocation", reinterpret_cast<void*>(glGetUniformLocation));
-        spy.RegisterSymbol("glGetAttribLocation", reinterpret_cast<void*>(glGetAttribLocation));
-        spy.RegisterSymbol("glPixelStorei", reinterpret_cast<void*>(glPixelStorei));
-        spy.RegisterSymbol("glTexParameteri", reinterpret_cast<void*>(glTexParameteri));
-        spy.RegisterSymbol("glTexParameterf", reinterpret_cast<void*>(glTexParameterf));
-        spy.RegisterSymbol("glGetTexParameteriv", reinterpret_cast<void*>(glGetTexParameteriv));
-        spy.RegisterSymbol("glGetTexParameterfv", reinterpret_cast<void*>(glGetTexParameterfv));
-        spy.RegisterSymbol("glUniform1i", reinterpret_cast<void*>(glUniform1i));
-        spy.RegisterSymbol("glUniform2i", reinterpret_cast<void*>(glUniform2i));
-        spy.RegisterSymbol("glUniform3i", reinterpret_cast<void*>(glUniform3i));
-        spy.RegisterSymbol("glUniform4i", reinterpret_cast<void*>(glUniform4i));
-        spy.RegisterSymbol("glUniform1iv", reinterpret_cast<void*>(glUniform1iv));
-        spy.RegisterSymbol("glUniform2iv", reinterpret_cast<void*>(glUniform2iv));
-        spy.RegisterSymbol("glUniform3iv", reinterpret_cast<void*>(glUniform3iv));
-        spy.RegisterSymbol("glUniform4iv", reinterpret_cast<void*>(glUniform4iv));
-        spy.RegisterSymbol("glUniform1f", reinterpret_cast<void*>(glUniform1f));
-        spy.RegisterSymbol("glUniform2f", reinterpret_cast<void*>(glUniform2f));
-        spy.RegisterSymbol("glUniform3f", reinterpret_cast<void*>(glUniform3f));
-        spy.RegisterSymbol("glUniform4f", reinterpret_cast<void*>(glUniform4f));
-        spy.RegisterSymbol("glUniform1fv", reinterpret_cast<void*>(glUniform1fv));
-        spy.RegisterSymbol("glUniform2fv", reinterpret_cast<void*>(glUniform2fv));
-        spy.RegisterSymbol("glUniform3fv", reinterpret_cast<void*>(glUniform3fv));
-        spy.RegisterSymbol("glUniform4fv", reinterpret_cast<void*>(glUniform4fv));
-        spy.RegisterSymbol("glUniformMatrix2fv", reinterpret_cast<void*>(glUniformMatrix2fv));
-        spy.RegisterSymbol("glUniformMatrix3fv", reinterpret_cast<void*>(glUniformMatrix3fv));
-        spy.RegisterSymbol("glUniformMatrix4fv", reinterpret_cast<void*>(glUniformMatrix4fv));
-        spy.RegisterSymbol("glGetUniformfv", reinterpret_cast<void*>(glGetUniformfv));
-        spy.RegisterSymbol("glGetUniformiv", reinterpret_cast<void*>(glGetUniformiv));
-        spy.RegisterSymbol("glVertexAttrib1f", reinterpret_cast<void*>(glVertexAttrib1f));
-        spy.RegisterSymbol("glVertexAttrib2f", reinterpret_cast<void*>(glVertexAttrib2f));
-        spy.RegisterSymbol("glVertexAttrib3f", reinterpret_cast<void*>(glVertexAttrib3f));
-        spy.RegisterSymbol("glVertexAttrib4f", reinterpret_cast<void*>(glVertexAttrib4f));
-        spy.RegisterSymbol("glVertexAttrib1fv", reinterpret_cast<void*>(glVertexAttrib1fv));
-        spy.RegisterSymbol("glVertexAttrib2fv", reinterpret_cast<void*>(glVertexAttrib2fv));
-        spy.RegisterSymbol("glVertexAttrib3fv", reinterpret_cast<void*>(glVertexAttrib3fv));
-        spy.RegisterSymbol("glVertexAttrib4fv", reinterpret_cast<void*>(glVertexAttrib4fv));
-        spy.RegisterSymbol("glGetShaderPrecisionFormat",
-                           reinterpret_cast<void*>(glGetShaderPrecisionFormat));
-        spy.RegisterSymbol("glDepthMask", reinterpret_cast<void*>(glDepthMask));
-        spy.RegisterSymbol("glDepthFunc", reinterpret_cast<void*>(glDepthFunc));
-        spy.RegisterSymbol("glDepthRangef", reinterpret_cast<void*>(glDepthRangef));
-        spy.RegisterSymbol("glColorMask", reinterpret_cast<void*>(glColorMask));
-        spy.RegisterSymbol("glStencilMask", reinterpret_cast<void*>(glStencilMask));
-        spy.RegisterSymbol("glStencilMaskSeparate", reinterpret_cast<void*>(glStencilMaskSeparate));
-        spy.RegisterSymbol("glStencilFuncSeparate", reinterpret_cast<void*>(glStencilFuncSeparate));
-        spy.RegisterSymbol("glStencilOpSeparate", reinterpret_cast<void*>(glStencilOpSeparate));
-        spy.RegisterSymbol("glFrontFace", reinterpret_cast<void*>(glFrontFace));
-        spy.RegisterSymbol("glViewport", reinterpret_cast<void*>(glViewport));
-        spy.RegisterSymbol("glScissor", reinterpret_cast<void*>(glScissor));
-        spy.RegisterSymbol("glActiveTexture", reinterpret_cast<void*>(glActiveTexture));
-        spy.RegisterSymbol("glGenTextures", reinterpret_cast<void*>(glGenTextures));
-        spy.RegisterSymbol("glDeleteTextures", reinterpret_cast<void*>(glDeleteTextures));
-        spy.RegisterSymbol("glIsTexture", reinterpret_cast<void*>(glIsTexture));
-        spy.RegisterSymbol("glBindTexture", reinterpret_cast<void*>(glBindTexture));
-        spy.RegisterSymbol("glTexImage2D", reinterpret_cast<void*>(glTexImage2D));
-        spy.RegisterSymbol("glTexSubImage2D", reinterpret_cast<void*>(glTexSubImage2D));
-        spy.RegisterSymbol("glCopyTexImage2D", reinterpret_cast<void*>(glCopyTexImage2D));
-        spy.RegisterSymbol("glCopyTexSubImage2D", reinterpret_cast<void*>(glCopyTexSubImage2D));
-        spy.RegisterSymbol("glCompressedTexImage2D",
-                           reinterpret_cast<void*>(glCompressedTexImage2D));
-        spy.RegisterSymbol("glCompressedTexSubImage2D",
-                           reinterpret_cast<void*>(glCompressedTexSubImage2D));
-        spy.RegisterSymbol("glGenerateMipmap", reinterpret_cast<void*>(glGenerateMipmap));
-        spy.RegisterSymbol("glReadPixels", reinterpret_cast<void*>(glReadPixels));
-        spy.RegisterSymbol("glGenFramebuffers", reinterpret_cast<void*>(glGenFramebuffers));
-        spy.RegisterSymbol("glBindFramebuffer", reinterpret_cast<void*>(glBindFramebuffer));
-        spy.RegisterSymbol("glCheckFramebufferStatus",
-                           reinterpret_cast<void*>(glCheckFramebufferStatus));
-        spy.RegisterSymbol("glDeleteFramebuffers", reinterpret_cast<void*>(glDeleteFramebuffers));
-        spy.RegisterSymbol("glIsFramebuffer", reinterpret_cast<void*>(glIsFramebuffer));
-        spy.RegisterSymbol("glGenRenderbuffers", reinterpret_cast<void*>(glGenRenderbuffers));
-        spy.RegisterSymbol("glBindRenderbuffer", reinterpret_cast<void*>(glBindRenderbuffer));
-        spy.RegisterSymbol("glRenderbufferStorage", reinterpret_cast<void*>(glRenderbufferStorage));
-        spy.RegisterSymbol("glDeleteRenderbuffers", reinterpret_cast<void*>(glDeleteRenderbuffers));
-        spy.RegisterSymbol("glIsRenderbuffer", reinterpret_cast<void*>(glIsRenderbuffer));
-        spy.RegisterSymbol("glGetRenderbufferParameteriv",
-                           reinterpret_cast<void*>(glGetRenderbufferParameteriv));
-        spy.RegisterSymbol("glGenBuffers", reinterpret_cast<void*>(glGenBuffers));
-        spy.RegisterSymbol("glBindBuffer", reinterpret_cast<void*>(glBindBuffer));
-        spy.RegisterSymbol("glBufferData", reinterpret_cast<void*>(glBufferData));
-        spy.RegisterSymbol("glBufferSubData", reinterpret_cast<void*>(glBufferSubData));
-        spy.RegisterSymbol("glDeleteBuffers", reinterpret_cast<void*>(glDeleteBuffers));
-        spy.RegisterSymbol("glIsBuffer", reinterpret_cast<void*>(glIsBuffer));
-        spy.RegisterSymbol("glGetBufferParameteriv",
-                           reinterpret_cast<void*>(glGetBufferParameteriv));
-        spy.RegisterSymbol("glCreateShader", reinterpret_cast<void*>(glCreateShader));
-        spy.RegisterSymbol("glDeleteShader", reinterpret_cast<void*>(glDeleteShader));
-        spy.RegisterSymbol("glShaderSource", reinterpret_cast<void*>(glShaderSource));
-        spy.RegisterSymbol("glShaderBinary", reinterpret_cast<void*>(glShaderBinary));
-        spy.RegisterSymbol("glGetShaderInfoLog", reinterpret_cast<void*>(glGetShaderInfoLog));
-        spy.RegisterSymbol("glGetShaderSource", reinterpret_cast<void*>(glGetShaderSource));
-        spy.RegisterSymbol("glReleaseShaderCompiler",
-                           reinterpret_cast<void*>(glReleaseShaderCompiler));
-        spy.RegisterSymbol("glCompileShader", reinterpret_cast<void*>(glCompileShader));
-        spy.RegisterSymbol("glIsShader", reinterpret_cast<void*>(glIsShader));
-        spy.RegisterSymbol("glCreateProgram", reinterpret_cast<void*>(glCreateProgram));
-        spy.RegisterSymbol("glDeleteProgram", reinterpret_cast<void*>(glDeleteProgram));
-        spy.RegisterSymbol("glAttachShader", reinterpret_cast<void*>(glAttachShader));
-        spy.RegisterSymbol("glDetachShader", reinterpret_cast<void*>(glDetachShader));
-        spy.RegisterSymbol("glGetAttachedShaders", reinterpret_cast<void*>(glGetAttachedShaders));
-        spy.RegisterSymbol("glLinkProgram", reinterpret_cast<void*>(glLinkProgram));
-        spy.RegisterSymbol("glGetProgramInfoLog", reinterpret_cast<void*>(glGetProgramInfoLog));
-        spy.RegisterSymbol("glUseProgram", reinterpret_cast<void*>(glUseProgram));
-        spy.RegisterSymbol("glIsProgram", reinterpret_cast<void*>(glIsProgram));
-        spy.RegisterSymbol("glValidateProgram", reinterpret_cast<void*>(glValidateProgram));
-        spy.RegisterSymbol("glClearColor", reinterpret_cast<void*>(glClearColor));
-        spy.RegisterSymbol("glClearDepthf", reinterpret_cast<void*>(glClearDepthf));
-        spy.RegisterSymbol("glClearStencil", reinterpret_cast<void*>(glClearStencil));
-        spy.RegisterSymbol("glClear", reinterpret_cast<void*>(glClear));
-        spy.RegisterSymbol("glCullFace", reinterpret_cast<void*>(glCullFace));
-        spy.RegisterSymbol("glPolygonOffset", reinterpret_cast<void*>(glPolygonOffset));
-        spy.RegisterSymbol("glLineWidth", reinterpret_cast<void*>(glLineWidth));
-        spy.RegisterSymbol("glSampleCoverage", reinterpret_cast<void*>(glSampleCoverage));
-        spy.RegisterSymbol("glHint", reinterpret_cast<void*>(glHint));
-        spy.RegisterSymbol("glFramebufferRenderbuffer",
-                           reinterpret_cast<void*>(glFramebufferRenderbuffer));
-        spy.RegisterSymbol("glFramebufferTexture2D",
-                           reinterpret_cast<void*>(glFramebufferTexture2D));
-        spy.RegisterSymbol("glGetFramebufferAttachmentParameteriv",
-                           reinterpret_cast<void*>(glGetFramebufferAttachmentParameteriv));
-        spy.RegisterSymbol("glDrawElements", reinterpret_cast<void*>(glDrawElements));
-        spy.RegisterSymbol("glDrawArrays", reinterpret_cast<void*>(glDrawArrays));
-        spy.RegisterSymbol("glFlush", reinterpret_cast<void*>(glFlush));
-        spy.RegisterSymbol("glFinish", reinterpret_cast<void*>(glFinish));
-        spy.RegisterSymbol("glGetBooleanv", reinterpret_cast<void*>(glGetBooleanv));
-        spy.RegisterSymbol("glGetFloatv", reinterpret_cast<void*>(glGetFloatv));
-        spy.RegisterSymbol("glGetIntegerv", reinterpret_cast<void*>(glGetIntegerv));
-        spy.RegisterSymbol("glGetString", reinterpret_cast<void*>(glGetString));
-        spy.RegisterSymbol("glEnable", reinterpret_cast<void*>(glEnable));
-        spy.RegisterSymbol("glDisable", reinterpret_cast<void*>(glDisable));
-        spy.RegisterSymbol("glIsEnabled", reinterpret_cast<void*>(glIsEnabled));
-        spy.RegisterSymbol("glMapBufferRange", reinterpret_cast<void*>(glMapBufferRange));
-        spy.RegisterSymbol("glUnmapBuffer", reinterpret_cast<void*>(glUnmapBuffer));
-        spy.RegisterSymbol("glInvalidateFramebuffer",
-                           reinterpret_cast<void*>(glInvalidateFramebuffer));
-        spy.RegisterSymbol("glRenderbufferStorageMultisample",
-                           reinterpret_cast<void*>(glRenderbufferStorageMultisample));
-        spy.RegisterSymbol("glBlitFramebuffer", reinterpret_cast<void*>(glBlitFramebuffer));
-        spy.RegisterSymbol("glGenQueries", reinterpret_cast<void*>(glGenQueries));
-        spy.RegisterSymbol("glBeginQuery", reinterpret_cast<void*>(glBeginQuery));
-        spy.RegisterSymbol("glEndQuery", reinterpret_cast<void*>(glEndQuery));
-        spy.RegisterSymbol("glDeleteQueries", reinterpret_cast<void*>(glDeleteQueries));
-        spy.RegisterSymbol("glIsQuery", reinterpret_cast<void*>(glIsQuery));
-        spy.RegisterSymbol("glGetQueryiv", reinterpret_cast<void*>(glGetQueryiv));
-        spy.RegisterSymbol("glGetQueryObjectuiv", reinterpret_cast<void*>(glGetQueryObjectuiv));
-        spy.RegisterSymbol("glGenQueriesEXT", reinterpret_cast<void*>(glGenQueriesEXT));
-        spy.RegisterSymbol("glBeginQueryEXT", reinterpret_cast<void*>(glBeginQueryEXT));
-        spy.RegisterSymbol("glEndQueryEXT", reinterpret_cast<void*>(glEndQueryEXT));
-        spy.RegisterSymbol("glDeleteQueriesEXT", reinterpret_cast<void*>(glDeleteQueriesEXT));
-        spy.RegisterSymbol("glIsQueryEXT", reinterpret_cast<void*>(glIsQueryEXT));
-        spy.RegisterSymbol("glQueryCounterEXT", reinterpret_cast<void*>(glQueryCounterEXT));
-        spy.RegisterSymbol("glGetQueryivEXT", reinterpret_cast<void*>(glGetQueryivEXT));
-        spy.RegisterSymbol("glGetQueryObjectivEXT", reinterpret_cast<void*>(glGetQueryObjectivEXT));
-        spy.RegisterSymbol("glGetQueryObjectuivEXT",
-                           reinterpret_cast<void*>(glGetQueryObjectuivEXT));
-        spy.RegisterSymbol("glGetQueryObjecti64vEXT",
-                           reinterpret_cast<void*>(glGetQueryObjecti64vEXT));
-        spy.RegisterSymbol("glGetQueryObjectui64vEXT",
-                           reinterpret_cast<void*>(glGetQueryObjectui64vEXT));
-        spy.RegisterSymbol("eglGetProcAddress", reinterpret_cast<void*>(eglGetProcAddress));
-        spy.RegisterSymbol("wglGetProcAddress", reinterpret_cast<void*>(wglGetProcAddress));
-        spy.RegisterSymbol("glXGetProcAddress", reinterpret_cast<void*>(glXGetProcAddress));
-        spy.RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
-        initialized = true;
+        gSpy->RegisterSymbol("eglInitialize", reinterpret_cast<void*>(eglInitialize));
+        gSpy->RegisterSymbol("eglCreateContext", reinterpret_cast<void*>(eglCreateContext));
+        gSpy->RegisterSymbol("eglMakeCurrent", reinterpret_cast<void*>(eglMakeCurrent));
+        gSpy->RegisterSymbol("eglSwapBuffers", reinterpret_cast<void*>(eglSwapBuffers));
+        gSpy->RegisterSymbol("eglQuerySurface", reinterpret_cast<void*>(eglQuerySurface));
+        gSpy->RegisterSymbol("glXCreateContext", reinterpret_cast<void*>(glXCreateContext));
+        gSpy->RegisterSymbol("glXCreateNewContext", reinterpret_cast<void*>(glXCreateNewContext));
+        gSpy->RegisterSymbol("glXMakeContextCurrent",
+                             reinterpret_cast<void*>(glXMakeContextCurrent));
+        gSpy->RegisterSymbol("glXSwapBuffers", reinterpret_cast<void*>(glXSwapBuffers));
+        gSpy->RegisterSymbol("wglCreateContext", reinterpret_cast<void*>(wglCreateContext));
+        gSpy->RegisterSymbol("wglCreateContextAttribsARB",
+                             reinterpret_cast<void*>(wglCreateContextAttribsARB));
+        gSpy->RegisterSymbol("wglMakeCurrent", reinterpret_cast<void*>(wglMakeCurrent));
+        gSpy->RegisterSymbol("wglSwapBuffers", reinterpret_cast<void*>(wglSwapBuffers));
+        gSpy->RegisterSymbol("CGLCreateContext", reinterpret_cast<void*>(CGLCreateContext));
+        gSpy->RegisterSymbol("CGLSetCurrentContext", reinterpret_cast<void*>(CGLSetCurrentContext));
+        gSpy->RegisterSymbol("glEnableClientState", reinterpret_cast<void*>(glEnableClientState));
+        gSpy->RegisterSymbol("glDisableClientState", reinterpret_cast<void*>(glDisableClientState));
+        gSpy->RegisterSymbol("glGetProgramBinaryOES",
+                             reinterpret_cast<void*>(glGetProgramBinaryOES));
+        gSpy->RegisterSymbol("glProgramBinaryOES", reinterpret_cast<void*>(glProgramBinaryOES));
+        gSpy->RegisterSymbol("glStartTilingQCOM", reinterpret_cast<void*>(glStartTilingQCOM));
+        gSpy->RegisterSymbol("glEndTilingQCOM", reinterpret_cast<void*>(glEndTilingQCOM));
+        gSpy->RegisterSymbol("glDiscardFramebufferEXT",
+                             reinterpret_cast<void*>(glDiscardFramebufferEXT));
+        gSpy->RegisterSymbol("glInsertEventMarkerEXT",
+                             reinterpret_cast<void*>(glInsertEventMarkerEXT));
+        gSpy->RegisterSymbol("glPushGroupMarkerEXT", reinterpret_cast<void*>(glPushGroupMarkerEXT));
+        gSpy->RegisterSymbol("glPopGroupMarkerEXT", reinterpret_cast<void*>(glPopGroupMarkerEXT));
+        gSpy->RegisterSymbol("glTexStorage1DEXT", reinterpret_cast<void*>(glTexStorage1DEXT));
+        gSpy->RegisterSymbol("glTexStorage2DEXT", reinterpret_cast<void*>(glTexStorage2DEXT));
+        gSpy->RegisterSymbol("glTexStorage3DEXT", reinterpret_cast<void*>(glTexStorage3DEXT));
+        gSpy->RegisterSymbol("glTextureStorage1DEXT",
+                             reinterpret_cast<void*>(glTextureStorage1DEXT));
+        gSpy->RegisterSymbol("glTextureStorage2DEXT",
+                             reinterpret_cast<void*>(glTextureStorage2DEXT));
+        gSpy->RegisterSymbol("glTextureStorage3DEXT",
+                             reinterpret_cast<void*>(glTextureStorage3DEXT));
+        gSpy->RegisterSymbol("glGenVertexArraysOES", reinterpret_cast<void*>(glGenVertexArraysOES));
+        gSpy->RegisterSymbol("glBindVertexArrayOES", reinterpret_cast<void*>(glBindVertexArrayOES));
+        gSpy->RegisterSymbol("glDeleteVertexArraysOES",
+                             reinterpret_cast<void*>(glDeleteVertexArraysOES));
+        gSpy->RegisterSymbol("glIsVertexArrayOES", reinterpret_cast<void*>(glIsVertexArrayOES));
+        gSpy->RegisterSymbol("glEGLImageTargetTexture2DOES",
+                             reinterpret_cast<void*>(glEGLImageTargetTexture2DOES));
+        gSpy->RegisterSymbol("glEGLImageTargetRenderbufferStorageOES",
+                             reinterpret_cast<void*>(glEGLImageTargetRenderbufferStorageOES));
+        gSpy->RegisterSymbol("glGetGraphicsResetStatusEXT",
+                             reinterpret_cast<void*>(glGetGraphicsResetStatusEXT));
+        gSpy->RegisterSymbol("glBindAttribLocation", reinterpret_cast<void*>(glBindAttribLocation));
+        gSpy->RegisterSymbol("glBlendFunc", reinterpret_cast<void*>(glBlendFunc));
+        gSpy->RegisterSymbol("glBlendFuncSeparate", reinterpret_cast<void*>(glBlendFuncSeparate));
+        gSpy->RegisterSymbol("glBlendEquation", reinterpret_cast<void*>(glBlendEquation));
+        gSpy->RegisterSymbol("glBlendEquationSeparate",
+                             reinterpret_cast<void*>(glBlendEquationSeparate));
+        gSpy->RegisterSymbol("glBlendColor", reinterpret_cast<void*>(glBlendColor));
+        gSpy->RegisterSymbol("glEnableVertexAttribArray",
+                             reinterpret_cast<void*>(glEnableVertexAttribArray));
+        gSpy->RegisterSymbol("glDisableVertexAttribArray",
+                             reinterpret_cast<void*>(glDisableVertexAttribArray));
+        gSpy->RegisterSymbol("glVertexAttribPointer",
+                             reinterpret_cast<void*>(glVertexAttribPointer));
+        gSpy->RegisterSymbol("glGetActiveAttrib", reinterpret_cast<void*>(glGetActiveAttrib));
+        gSpy->RegisterSymbol("glGetActiveUniform", reinterpret_cast<void*>(glGetActiveUniform));
+        gSpy->RegisterSymbol("glGetError", reinterpret_cast<void*>(glGetError));
+        gSpy->RegisterSymbol("glGetProgramiv", reinterpret_cast<void*>(glGetProgramiv));
+        gSpy->RegisterSymbol("glGetShaderiv", reinterpret_cast<void*>(glGetShaderiv));
+        gSpy->RegisterSymbol("glGetUniformLocation", reinterpret_cast<void*>(glGetUniformLocation));
+        gSpy->RegisterSymbol("glGetAttribLocation", reinterpret_cast<void*>(glGetAttribLocation));
+        gSpy->RegisterSymbol("glPixelStorei", reinterpret_cast<void*>(glPixelStorei));
+        gSpy->RegisterSymbol("glTexParameteri", reinterpret_cast<void*>(glTexParameteri));
+        gSpy->RegisterSymbol("glTexParameterf", reinterpret_cast<void*>(glTexParameterf));
+        gSpy->RegisterSymbol("glGetTexParameteriv", reinterpret_cast<void*>(glGetTexParameteriv));
+        gSpy->RegisterSymbol("glGetTexParameterfv", reinterpret_cast<void*>(glGetTexParameterfv));
+        gSpy->RegisterSymbol("glUniform1i", reinterpret_cast<void*>(glUniform1i));
+        gSpy->RegisterSymbol("glUniform2i", reinterpret_cast<void*>(glUniform2i));
+        gSpy->RegisterSymbol("glUniform3i", reinterpret_cast<void*>(glUniform3i));
+        gSpy->RegisterSymbol("glUniform4i", reinterpret_cast<void*>(glUniform4i));
+        gSpy->RegisterSymbol("glUniform1iv", reinterpret_cast<void*>(glUniform1iv));
+        gSpy->RegisterSymbol("glUniform2iv", reinterpret_cast<void*>(glUniform2iv));
+        gSpy->RegisterSymbol("glUniform3iv", reinterpret_cast<void*>(glUniform3iv));
+        gSpy->RegisterSymbol("glUniform4iv", reinterpret_cast<void*>(glUniform4iv));
+        gSpy->RegisterSymbol("glUniform1f", reinterpret_cast<void*>(glUniform1f));
+        gSpy->RegisterSymbol("glUniform2f", reinterpret_cast<void*>(glUniform2f));
+        gSpy->RegisterSymbol("glUniform3f", reinterpret_cast<void*>(glUniform3f));
+        gSpy->RegisterSymbol("glUniform4f", reinterpret_cast<void*>(glUniform4f));
+        gSpy->RegisterSymbol("glUniform1fv", reinterpret_cast<void*>(glUniform1fv));
+        gSpy->RegisterSymbol("glUniform2fv", reinterpret_cast<void*>(glUniform2fv));
+        gSpy->RegisterSymbol("glUniform3fv", reinterpret_cast<void*>(glUniform3fv));
+        gSpy->RegisterSymbol("glUniform4fv", reinterpret_cast<void*>(glUniform4fv));
+        gSpy->RegisterSymbol("glUniformMatrix2fv", reinterpret_cast<void*>(glUniformMatrix2fv));
+        gSpy->RegisterSymbol("glUniformMatrix3fv", reinterpret_cast<void*>(glUniformMatrix3fv));
+        gSpy->RegisterSymbol("glUniformMatrix4fv", reinterpret_cast<void*>(glUniformMatrix4fv));
+        gSpy->RegisterSymbol("glGetUniformfv", reinterpret_cast<void*>(glGetUniformfv));
+        gSpy->RegisterSymbol("glGetUniformiv", reinterpret_cast<void*>(glGetUniformiv));
+        gSpy->RegisterSymbol("glVertexAttrib1f", reinterpret_cast<void*>(glVertexAttrib1f));
+        gSpy->RegisterSymbol("glVertexAttrib2f", reinterpret_cast<void*>(glVertexAttrib2f));
+        gSpy->RegisterSymbol("glVertexAttrib3f", reinterpret_cast<void*>(glVertexAttrib3f));
+        gSpy->RegisterSymbol("glVertexAttrib4f", reinterpret_cast<void*>(glVertexAttrib4f));
+        gSpy->RegisterSymbol("glVertexAttrib1fv", reinterpret_cast<void*>(glVertexAttrib1fv));
+        gSpy->RegisterSymbol("glVertexAttrib2fv", reinterpret_cast<void*>(glVertexAttrib2fv));
+        gSpy->RegisterSymbol("glVertexAttrib3fv", reinterpret_cast<void*>(glVertexAttrib3fv));
+        gSpy->RegisterSymbol("glVertexAttrib4fv", reinterpret_cast<void*>(glVertexAttrib4fv));
+        gSpy->RegisterSymbol("glGetShaderPrecisionFormat",
+                             reinterpret_cast<void*>(glGetShaderPrecisionFormat));
+        gSpy->RegisterSymbol("glDepthMask", reinterpret_cast<void*>(glDepthMask));
+        gSpy->RegisterSymbol("glDepthFunc", reinterpret_cast<void*>(glDepthFunc));
+        gSpy->RegisterSymbol("glDepthRangef", reinterpret_cast<void*>(glDepthRangef));
+        gSpy->RegisterSymbol("glColorMask", reinterpret_cast<void*>(glColorMask));
+        gSpy->RegisterSymbol("glStencilMask", reinterpret_cast<void*>(glStencilMask));
+        gSpy->RegisterSymbol("glStencilMaskSeparate",
+                             reinterpret_cast<void*>(glStencilMaskSeparate));
+        gSpy->RegisterSymbol("glStencilFuncSeparate",
+                             reinterpret_cast<void*>(glStencilFuncSeparate));
+        gSpy->RegisterSymbol("glStencilOpSeparate", reinterpret_cast<void*>(glStencilOpSeparate));
+        gSpy->RegisterSymbol("glFrontFace", reinterpret_cast<void*>(glFrontFace));
+        gSpy->RegisterSymbol("glViewport", reinterpret_cast<void*>(glViewport));
+        gSpy->RegisterSymbol("glScissor", reinterpret_cast<void*>(glScissor));
+        gSpy->RegisterSymbol("glActiveTexture", reinterpret_cast<void*>(glActiveTexture));
+        gSpy->RegisterSymbol("glGenTextures", reinterpret_cast<void*>(glGenTextures));
+        gSpy->RegisterSymbol("glDeleteTextures", reinterpret_cast<void*>(glDeleteTextures));
+        gSpy->RegisterSymbol("glIsTexture", reinterpret_cast<void*>(glIsTexture));
+        gSpy->RegisterSymbol("glBindTexture", reinterpret_cast<void*>(glBindTexture));
+        gSpy->RegisterSymbol("glTexImage2D", reinterpret_cast<void*>(glTexImage2D));
+        gSpy->RegisterSymbol("glTexSubImage2D", reinterpret_cast<void*>(glTexSubImage2D));
+        gSpy->RegisterSymbol("glCopyTexImage2D", reinterpret_cast<void*>(glCopyTexImage2D));
+        gSpy->RegisterSymbol("glCopyTexSubImage2D", reinterpret_cast<void*>(glCopyTexSubImage2D));
+        gSpy->RegisterSymbol("glCompressedTexImage2D",
+                             reinterpret_cast<void*>(glCompressedTexImage2D));
+        gSpy->RegisterSymbol("glCompressedTexSubImage2D",
+                             reinterpret_cast<void*>(glCompressedTexSubImage2D));
+        gSpy->RegisterSymbol("glGenerateMipmap", reinterpret_cast<void*>(glGenerateMipmap));
+        gSpy->RegisterSymbol("glReadPixels", reinterpret_cast<void*>(glReadPixels));
+        gSpy->RegisterSymbol("glGenFramebuffers", reinterpret_cast<void*>(glGenFramebuffers));
+        gSpy->RegisterSymbol("glBindFramebuffer", reinterpret_cast<void*>(glBindFramebuffer));
+        gSpy->RegisterSymbol("glCheckFramebufferStatus",
+                             reinterpret_cast<void*>(glCheckFramebufferStatus));
+        gSpy->RegisterSymbol("glDeleteFramebuffers", reinterpret_cast<void*>(glDeleteFramebuffers));
+        gSpy->RegisterSymbol("glIsFramebuffer", reinterpret_cast<void*>(glIsFramebuffer));
+        gSpy->RegisterSymbol("glGenRenderbuffers", reinterpret_cast<void*>(glGenRenderbuffers));
+        gSpy->RegisterSymbol("glBindRenderbuffer", reinterpret_cast<void*>(glBindRenderbuffer));
+        gSpy->RegisterSymbol("glRenderbufferStorage",
+                             reinterpret_cast<void*>(glRenderbufferStorage));
+        gSpy->RegisterSymbol("glDeleteRenderbuffers",
+                             reinterpret_cast<void*>(glDeleteRenderbuffers));
+        gSpy->RegisterSymbol("glIsRenderbuffer", reinterpret_cast<void*>(glIsRenderbuffer));
+        gSpy->RegisterSymbol("glGetRenderbufferParameteriv",
+                             reinterpret_cast<void*>(glGetRenderbufferParameteriv));
+        gSpy->RegisterSymbol("glGenBuffers", reinterpret_cast<void*>(glGenBuffers));
+        gSpy->RegisterSymbol("glBindBuffer", reinterpret_cast<void*>(glBindBuffer));
+        gSpy->RegisterSymbol("glBufferData", reinterpret_cast<void*>(glBufferData));
+        gSpy->RegisterSymbol("glBufferSubData", reinterpret_cast<void*>(glBufferSubData));
+        gSpy->RegisterSymbol("glDeleteBuffers", reinterpret_cast<void*>(glDeleteBuffers));
+        gSpy->RegisterSymbol("glIsBuffer", reinterpret_cast<void*>(glIsBuffer));
+        gSpy->RegisterSymbol("glGetBufferParameteriv",
+                             reinterpret_cast<void*>(glGetBufferParameteriv));
+        gSpy->RegisterSymbol("glCreateShader", reinterpret_cast<void*>(glCreateShader));
+        gSpy->RegisterSymbol("glDeleteShader", reinterpret_cast<void*>(glDeleteShader));
+        gSpy->RegisterSymbol("glShaderSource", reinterpret_cast<void*>(glShaderSource));
+        gSpy->RegisterSymbol("glShaderBinary", reinterpret_cast<void*>(glShaderBinary));
+        gSpy->RegisterSymbol("glGetShaderInfoLog", reinterpret_cast<void*>(glGetShaderInfoLog));
+        gSpy->RegisterSymbol("glGetShaderSource", reinterpret_cast<void*>(glGetShaderSource));
+        gSpy->RegisterSymbol("glReleaseShaderCompiler",
+                             reinterpret_cast<void*>(glReleaseShaderCompiler));
+        gSpy->RegisterSymbol("glCompileShader", reinterpret_cast<void*>(glCompileShader));
+        gSpy->RegisterSymbol("glIsShader", reinterpret_cast<void*>(glIsShader));
+        gSpy->RegisterSymbol("glCreateProgram", reinterpret_cast<void*>(glCreateProgram));
+        gSpy->RegisterSymbol("glDeleteProgram", reinterpret_cast<void*>(glDeleteProgram));
+        gSpy->RegisterSymbol("glAttachShader", reinterpret_cast<void*>(glAttachShader));
+        gSpy->RegisterSymbol("glDetachShader", reinterpret_cast<void*>(glDetachShader));
+        gSpy->RegisterSymbol("glGetAttachedShaders", reinterpret_cast<void*>(glGetAttachedShaders));
+        gSpy->RegisterSymbol("glLinkProgram", reinterpret_cast<void*>(glLinkProgram));
+        gSpy->RegisterSymbol("glGetProgramInfoLog", reinterpret_cast<void*>(glGetProgramInfoLog));
+        gSpy->RegisterSymbol("glUseProgram", reinterpret_cast<void*>(glUseProgram));
+        gSpy->RegisterSymbol("glIsProgram", reinterpret_cast<void*>(glIsProgram));
+        gSpy->RegisterSymbol("glValidateProgram", reinterpret_cast<void*>(glValidateProgram));
+        gSpy->RegisterSymbol("glClearColor", reinterpret_cast<void*>(glClearColor));
+        gSpy->RegisterSymbol("glClearDepthf", reinterpret_cast<void*>(glClearDepthf));
+        gSpy->RegisterSymbol("glClearStencil", reinterpret_cast<void*>(glClearStencil));
+        gSpy->RegisterSymbol("glClear", reinterpret_cast<void*>(glClear));
+        gSpy->RegisterSymbol("glCullFace", reinterpret_cast<void*>(glCullFace));
+        gSpy->RegisterSymbol("glPolygonOffset", reinterpret_cast<void*>(glPolygonOffset));
+        gSpy->RegisterSymbol("glLineWidth", reinterpret_cast<void*>(glLineWidth));
+        gSpy->RegisterSymbol("glSampleCoverage", reinterpret_cast<void*>(glSampleCoverage));
+        gSpy->RegisterSymbol("glHint", reinterpret_cast<void*>(glHint));
+        gSpy->RegisterSymbol("glFramebufferRenderbuffer",
+                             reinterpret_cast<void*>(glFramebufferRenderbuffer));
+        gSpy->RegisterSymbol("glFramebufferTexture2D",
+                             reinterpret_cast<void*>(glFramebufferTexture2D));
+        gSpy->RegisterSymbol("glGetFramebufferAttachmentParameteriv",
+                             reinterpret_cast<void*>(glGetFramebufferAttachmentParameteriv));
+        gSpy->RegisterSymbol("glDrawElements", reinterpret_cast<void*>(glDrawElements));
+        gSpy->RegisterSymbol("glDrawArrays", reinterpret_cast<void*>(glDrawArrays));
+        gSpy->RegisterSymbol("glFlush", reinterpret_cast<void*>(glFlush));
+        gSpy->RegisterSymbol("glFinish", reinterpret_cast<void*>(glFinish));
+        gSpy->RegisterSymbol("glGetBooleanv", reinterpret_cast<void*>(glGetBooleanv));
+        gSpy->RegisterSymbol("glGetFloatv", reinterpret_cast<void*>(glGetFloatv));
+        gSpy->RegisterSymbol("glGetIntegerv", reinterpret_cast<void*>(glGetIntegerv));
+        gSpy->RegisterSymbol("glGetString", reinterpret_cast<void*>(glGetString));
+        gSpy->RegisterSymbol("glEnable", reinterpret_cast<void*>(glEnable));
+        gSpy->RegisterSymbol("glDisable", reinterpret_cast<void*>(glDisable));
+        gSpy->RegisterSymbol("glIsEnabled", reinterpret_cast<void*>(glIsEnabled));
+        gSpy->RegisterSymbol("glMapBufferRange", reinterpret_cast<void*>(glMapBufferRange));
+        gSpy->RegisterSymbol("glUnmapBuffer", reinterpret_cast<void*>(glUnmapBuffer));
+        gSpy->RegisterSymbol("glInvalidateFramebuffer",
+                             reinterpret_cast<void*>(glInvalidateFramebuffer));
+        gSpy->RegisterSymbol("glRenderbufferStorageMultisample",
+                             reinterpret_cast<void*>(glRenderbufferStorageMultisample));
+        gSpy->RegisterSymbol("glBlitFramebuffer", reinterpret_cast<void*>(glBlitFramebuffer));
+        gSpy->RegisterSymbol("glGenQueries", reinterpret_cast<void*>(glGenQueries));
+        gSpy->RegisterSymbol("glBeginQuery", reinterpret_cast<void*>(glBeginQuery));
+        gSpy->RegisterSymbol("glEndQuery", reinterpret_cast<void*>(glEndQuery));
+        gSpy->RegisterSymbol("glDeleteQueries", reinterpret_cast<void*>(glDeleteQueries));
+        gSpy->RegisterSymbol("glIsQuery", reinterpret_cast<void*>(glIsQuery));
+        gSpy->RegisterSymbol("glGetQueryiv", reinterpret_cast<void*>(glGetQueryiv));
+        gSpy->RegisterSymbol("glGetQueryObjectuiv", reinterpret_cast<void*>(glGetQueryObjectuiv));
+        gSpy->RegisterSymbol("glGenQueriesEXT", reinterpret_cast<void*>(glGenQueriesEXT));
+        gSpy->RegisterSymbol("glBeginQueryEXT", reinterpret_cast<void*>(glBeginQueryEXT));
+        gSpy->RegisterSymbol("glEndQueryEXT", reinterpret_cast<void*>(glEndQueryEXT));
+        gSpy->RegisterSymbol("glDeleteQueriesEXT", reinterpret_cast<void*>(glDeleteQueriesEXT));
+        gSpy->RegisterSymbol("glIsQueryEXT", reinterpret_cast<void*>(glIsQueryEXT));
+        gSpy->RegisterSymbol("glQueryCounterEXT", reinterpret_cast<void*>(glQueryCounterEXT));
+        gSpy->RegisterSymbol("glGetQueryivEXT", reinterpret_cast<void*>(glGetQueryivEXT));
+        gSpy->RegisterSymbol("glGetQueryObjectivEXT",
+                             reinterpret_cast<void*>(glGetQueryObjectivEXT));
+        gSpy->RegisterSymbol("glGetQueryObjectuivEXT",
+                             reinterpret_cast<void*>(glGetQueryObjectuivEXT));
+        gSpy->RegisterSymbol("glGetQueryObjecti64vEXT",
+                             reinterpret_cast<void*>(glGetQueryObjecti64vEXT));
+        gSpy->RegisterSymbol("glGetQueryObjectui64vEXT",
+                             reinterpret_cast<void*>(glGetQueryObjectui64vEXT));
+        gSpy->RegisterSymbol("eglGetProcAddress", reinterpret_cast<void*>(eglGetProcAddress));
+        gSpy->RegisterSymbol("wglGetProcAddress", reinterpret_cast<void*>(wglGetProcAddress));
+        gSpy->RegisterSymbol("glXGetProcAddress", reinterpret_cast<void*>(glXGetProcAddress));
+        gSpy->RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
+        initializedOnce = true;
     }
-    return &spy;
+    return gSpy.get();
 }
+
 void* STDCALL GetSpyProcAddress(const char* name) {
     if (void* proc = spy()->LookupSymbol(name)) {
         return proc;
