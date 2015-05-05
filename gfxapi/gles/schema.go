@@ -224,6 +224,131 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Type: 8,
+		Name: "glXCreateContext",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "dpy",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "vis",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shareList",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "direct",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Pointer,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 9,
+		Name: "glXCreateNewContext",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "display",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "fbconfig",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "type",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "shared",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "direct",
+				Type: schema.Bool,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Pointer,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 10,
+		Name: "glXMakeContextCurrent",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "display",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "draw",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "read",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "ctx",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 11,
+		Name: "glXSwapBuffers",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "display",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "drawable",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     true,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 12,
 		Name: "wglCreateContext",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -243,7 +368,7 @@ func init() {
 		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 9,
+		Type: 13,
 		Name: "wglMakeCurrent",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -268,7 +393,7 @@ func init() {
 		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 10,
+		Type: 14,
 		Name: "wglSwapBuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -283,7 +408,7 @@ func init() {
 		DocumentationUrl: "[http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 11,
+		Type: 15,
 		Name: "CGLCreateContext",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -313,12 +438,12 @@ func init() {
 		DocumentationUrl: "[http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 12,
+		Type: 16,
 		Name: "glEnableClientState",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(43),
+				Type: s.getEnumInfo(42),
 				Out:  false,
 			},
 		},
@@ -328,12 +453,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 13,
+		Type: 17,
 		Name: "glDisableClientState",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(43),
+				Type: s.getEnumInfo(42),
 				Out:  false,
 			},
 		},
@@ -343,7 +468,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 14,
+		Type: 18,
 		Name: "glGetProgramBinaryOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -378,7 +503,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 15,
+		Type: 19,
 		Name: "glProgramBinaryOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -408,7 +533,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 16,
+		Type: 20,
 		Name: "glStartTilingQCOM",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -433,7 +558,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "preserveMask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -443,12 +568,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 17,
+		Type: 21,
 		Name: "glEndTilingQCOM",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "preserve_mask",
-				Type: s.getEnumInfo(86),
+				Type: s.getEnumInfo(85),
 				Out:  false,
 			},
 		},
@@ -458,7 +583,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 18,
+		Type: 22,
 		Name: "glDiscardFramebufferEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -483,7 +608,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 19,
+		Type: 23,
 		Name: "glInsertEventMarkerEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -503,7 +628,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 20,
+		Type: 24,
 		Name: "glPushGroupMarkerEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -523,7 +648,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type:             21,
+		Type:             25,
 		Name:             "glPopGroupMarkerEXT",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -532,7 +657,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 22,
+		Type: 26,
 		Name: "glTexStorage1DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -562,7 +687,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 23,
+		Type: 27,
 		Name: "glTexStorage2DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -597,7 +722,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 24,
+		Type: 28,
 		Name: "glTexStorage3DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -637,7 +762,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 25,
+		Type: 29,
 		Name: "glTextureStorage1DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -672,7 +797,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 26,
+		Type: 30,
 		Name: "glTextureStorage2DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -712,7 +837,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 27,
+		Type: 31,
 		Name: "glTextureStorage3DEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -757,7 +882,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 28,
+		Type: 32,
 		Name: "glGenVertexArraysOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -777,7 +902,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 29,
+		Type: 33,
 		Name: "glBindVertexArrayOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -792,7 +917,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 30,
+		Type: 34,
 		Name: "glDeleteVertexArraysOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -812,7 +937,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 31,
+		Type: 35,
 		Name: "glIsVertexArrayOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -832,8 +957,28 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 32,
+		Type: 36,
 		Name: "glEGLImageTargetTexture2DOES",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "target",
+				Type: s.getEnumInfo(72),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "image",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 37,
+		Name: "glEGLImageTargetRenderbufferStorageOES",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
@@ -852,32 +997,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 33,
-		Name: "glEGLImageTargetRenderbufferStorageOES",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "target",
-				Type: s.getEnumInfo(74),
-				Out:  false,
-			},
-			service.ParameterInfo{
-				Name: "image",
-				Type: schema.Pointer,
-				Out:  false,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Type: 34,
+		Type: 38,
 		Name: "glGetGraphicsResetStatusEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "result",
-				Type: s.getEnumInfo(75),
+				Type: s.getEnumInfo(74),
 				Out:  true,
 			},
 		},
@@ -887,7 +1012,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 35,
+		Type: 39,
 		Name: "glBindAttribLocation",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -912,17 +1037,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 36,
+		Type: 40,
 		Name: "glBlendFunc",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "src_factor",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 		},
@@ -932,27 +1057,27 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 37,
+		Type: 41,
 		Name: "glBlendFuncSeparate",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "src_factor_rgb",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor_rgb",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "src_factor_alpha",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "dst_factor_alpha",
-				Type: s.getEnumInfo(64),
+				Type: s.getEnumInfo(63),
 				Out:  false,
 			},
 		},
@@ -962,12 +1087,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 38,
+		Type: 42,
 		Name: "glBlendEquation",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "equation",
-				Type: s.getEnumInfo(69),
+				Type: s.getEnumInfo(68),
 				Out:  false,
 			},
 		},
@@ -977,17 +1102,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 39,
+		Type: 43,
 		Name: "glBlendEquationSeparate",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "rgb",
-				Type: s.getEnumInfo(69),
+				Type: s.getEnumInfo(68),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "alpha",
-				Type: s.getEnumInfo(69),
+				Type: s.getEnumInfo(68),
 				Out:  false,
 			},
 		},
@@ -997,7 +1122,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 40,
+		Type: 44,
 		Name: "glBlendColor",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1027,7 +1152,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 41,
+		Type: 45,
 		Name: "glEnableVertexAttribArray",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1042,7 +1167,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 42,
+		Type: 46,
 		Name: "glDisableVertexAttribArray",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1057,7 +1182,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 43,
+		Type: 47,
 		Name: "glVertexAttribPointer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1072,7 +1197,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(46),
+				Type: s.getEnumInfo(45),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1097,7 +1222,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 44,
+		Type: 48,
 		Name: "glGetActiveAttrib",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1127,7 +1252,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(47),
+				Type: s.getEnumInfo(46),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -1142,7 +1267,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 45,
+		Type: 49,
 		Name: "glGetActiveUniform",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1172,7 +1297,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(48),
+				Type: s.getEnumInfo(47),
 				Out:  true,
 			},
 			service.ParameterInfo{
@@ -1187,12 +1312,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 46,
+		Type: 50,
 		Name: "glGetError",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "result",
-				Type: s.getEnumInfo(49),
+				Type: s.getEnumInfo(48),
 				Out:  true,
 			},
 		},
@@ -1202,11 +1327,36 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 47,
+		Type: 51,
 		Name: "glGetProgramiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "program",
+				Type: schema.U32,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "parameter",
+				Type: s.getEnumInfo(52),
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "value",
+				Type: s.getArrayInfo(15),
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Type: 52,
+		Name: "glGetShaderiv",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "shader",
 				Type: schema.U32,
 				Out:  false,
 			},
@@ -1224,35 +1374,10 @@ func init() {
 		IsCommand:        true,
 		IsDrawCall:       false,
 		IsEndOfFrame:     false,
-		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Type: 48,
-		Name: "glGetShaderiv",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "shader",
-				Type: schema.U32,
-				Out:  false,
-			},
-			service.ParameterInfo{
-				Name: "parameter",
-				Type: s.getEnumInfo(54),
-				Out:  false,
-			},
-			service.ParameterInfo{
-				Name: "value",
-				Type: s.getArrayInfo(15),
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 49,
+		Type: 53,
 		Name: "glGetUniformLocation",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1277,7 +1402,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 50,
+		Type: 54,
 		Name: "glGetAttribLocation",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1302,12 +1427,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 51,
+		Type: 55,
 		Name: "glPixelStorei",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(55),
+				Type: s.getEnumInfo(54),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1322,7 +1447,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 52,
+		Type: 56,
 		Name: "glTexParameteri",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1332,7 +1457,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(60),
+				Type: s.getEnumInfo(59),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1347,7 +1472,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 53,
+		Type: 57,
 		Name: "glTexParameterf",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1357,7 +1482,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(60),
+				Type: s.getEnumInfo(59),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1372,7 +1497,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 54,
+		Type: 58,
 		Name: "glGetTexParameteriv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1382,7 +1507,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(60),
+				Type: s.getEnumInfo(59),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1397,7 +1522,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 55,
+		Type: 59,
 		Name: "glGetTexParameterfv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1407,7 +1532,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(60),
+				Type: s.getEnumInfo(59),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -1422,7 +1547,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 56,
+		Type: 60,
 		Name: "glUniform1i",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1442,7 +1567,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 57,
+		Type: 61,
 		Name: "glUniform2i",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1467,7 +1592,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 58,
+		Type: 62,
 		Name: "glUniform3i",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1497,7 +1622,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 59,
+		Type: 63,
 		Name: "glUniform4i",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1532,7 +1657,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 60,
+		Type: 64,
 		Name: "glUniform1iv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1557,7 +1682,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 61,
+		Type: 65,
 		Name: "glUniform2iv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1582,7 +1707,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 62,
+		Type: 66,
 		Name: "glUniform3iv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1607,7 +1732,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 63,
+		Type: 67,
 		Name: "glUniform4iv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1632,7 +1757,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 64,
+		Type: 68,
 		Name: "glUniform1f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1652,7 +1777,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 65,
+		Type: 69,
 		Name: "glUniform2f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1677,7 +1802,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 66,
+		Type: 70,
 		Name: "glUniform3f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1707,7 +1832,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 67,
+		Type: 71,
 		Name: "glUniform4f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1742,7 +1867,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 68,
+		Type: 72,
 		Name: "glUniform1fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1767,7 +1892,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 69,
+		Type: 73,
 		Name: "glUniform2fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1792,7 +1917,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 70,
+		Type: 74,
 		Name: "glUniform3fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1817,7 +1942,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 71,
+		Type: 75,
 		Name: "glUniform4fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1842,7 +1967,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 72,
+		Type: 76,
 		Name: "glUniformMatrix2fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1872,7 +1997,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 73,
+		Type: 77,
 		Name: "glUniformMatrix3fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1902,7 +2027,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 74,
+		Type: 78,
 		Name: "glUniformMatrix4fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1932,7 +2057,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 75,
+		Type: 79,
 		Name: "glGetUniformfv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1957,7 +2082,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 76,
+		Type: 80,
 		Name: "glGetUniformiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -1982,7 +2107,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 77,
+		Type: 81,
 		Name: "glVertexAttrib1f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2002,7 +2127,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 78,
+		Type: 82,
 		Name: "glVertexAttrib2f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2027,7 +2152,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 79,
+		Type: 83,
 		Name: "glVertexAttrib3f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2057,7 +2182,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 80,
+		Type: 84,
 		Name: "glVertexAttrib4f",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2092,7 +2217,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 81,
+		Type: 85,
 		Name: "glVertexAttrib1fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2112,7 +2237,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 82,
+		Type: 86,
 		Name: "glVertexAttrib2fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2132,7 +2257,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 83,
+		Type: 87,
 		Name: "glVertexAttrib3fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2152,7 +2277,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 84,
+		Type: 88,
 		Name: "glVertexAttrib4fv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2172,17 +2297,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 85,
+		Type: 89,
 		Name: "glGetShaderPrecisionFormat",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "shader_type",
-				Type: s.getEnumInfo(34),
+				Type: s.getEnumInfo(33),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "precision_type",
-				Type: s.getEnumInfo(65),
+				Type: s.getEnumInfo(64),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2202,7 +2327,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 86,
+		Type: 90,
 		Name: "glDepthMask",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2217,12 +2342,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 87,
+		Type: 91,
 		Name: "glDepthFunc",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "function",
-				Type: s.getEnumInfo(66),
+				Type: s.getEnumInfo(65),
 				Out:  false,
 			},
 		},
@@ -2232,7 +2357,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 88,
+		Type: 92,
 		Name: "glDepthRangef",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2252,7 +2377,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 89,
+		Type: 93,
 		Name: "glColorMask",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2282,7 +2407,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 90,
+		Type: 94,
 		Name: "glStencilMask",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2297,12 +2422,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 91,
+		Type: 95,
 		Name: "glStencilMaskSeparate",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(40),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2317,17 +2442,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 92,
+		Type: 96,
 		Name: "glStencilFuncSeparate",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(40),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "function",
-				Type: s.getEnumInfo(66),
+				Type: s.getEnumInfo(65),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -2347,27 +2472,27 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 93,
+		Type: 97,
 		Name: "glStencilOpSeparate",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "face",
-				Type: s.getEnumInfo(40),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_fail",
-				Type: s.getEnumInfo(67),
+				Type: s.getEnumInfo(66),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_pass_depth_fail",
-				Type: s.getEnumInfo(67),
+				Type: s.getEnumInfo(66),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "stencil_pass_depth_pass",
-				Type: s.getEnumInfo(67),
+				Type: s.getEnumInfo(66),
 				Out:  false,
 			},
 		},
@@ -2377,12 +2502,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 94,
+		Type: 98,
 		Name: "glFrontFace",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "orientation",
-				Type: s.getEnumInfo(68),
+				Type: s.getEnumInfo(67),
 				Out:  false,
 			},
 		},
@@ -2392,7 +2517,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 95,
+		Type: 99,
 		Name: "glViewport",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2422,7 +2547,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 96,
+		Type: 100,
 		Name: "glScissor",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2452,12 +2577,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 97,
+		Type: 101,
 		Name: "glActiveTexture",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "unit",
-				Type: s.getEnumInfo(32),
+				Type: s.getEnumInfo(31),
 				Out:  false,
 			},
 		},
@@ -2467,7 +2592,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 98,
+		Type: 102,
 		Name: "glGenTextures",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2487,7 +2612,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 99,
+		Type: 103,
 		Name: "glDeleteTextures",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2507,7 +2632,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 100,
+		Type: 104,
 		Name: "glIsTexture",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2527,7 +2652,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 101,
+		Type: 105,
 		Name: "glBindTexture",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2547,7 +2672,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 102,
+		Type: 106,
 		Name: "glTexImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2602,7 +2727,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 103,
+		Type: 107,
 		Name: "glTexSubImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2657,7 +2782,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 104,
+		Type: 108,
 		Name: "glCopyTexImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2707,7 +2832,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 105,
+		Type: 109,
 		Name: "glCopyTexSubImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2757,7 +2882,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 106,
+		Type: 110,
 		Name: "glCompressedTexImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2807,7 +2932,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 107,
+		Type: 111,
 		Name: "glCompressedTexSubImage2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2862,7 +2987,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 108,
+		Type: 112,
 		Name: "glGenerateMipmap",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2877,7 +3002,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 109,
+		Type: 113,
 		Name: "glReadPixels",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2922,7 +3047,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 110,
+		Type: 114,
 		Name: "glGenFramebuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2942,7 +3067,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 111,
+		Type: 115,
 		Name: "glBindFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2962,7 +3087,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 112,
+		Type: 116,
 		Name: "glCheckFramebufferStatus",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -2982,7 +3107,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 113,
+		Type: 117,
 		Name: "glDeleteFramebuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3002,7 +3127,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 114,
+		Type: 118,
 		Name: "glIsFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3022,7 +3147,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 115,
+		Type: 119,
 		Name: "glGenRenderbuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3042,7 +3167,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 116,
+		Type: 120,
 		Name: "glBindRenderbuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3062,7 +3187,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 117,
+		Type: 121,
 		Name: "glRenderbufferStorage",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3092,7 +3217,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 118,
+		Type: 122,
 		Name: "glDeleteRenderbuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3112,7 +3237,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 119,
+		Type: 123,
 		Name: "glIsRenderbuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3132,7 +3257,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 120,
+		Type: 124,
 		Name: "glGetRenderbufferParameteriv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3157,7 +3282,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 121,
+		Type: 125,
 		Name: "glGenBuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3177,12 +3302,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 122,
+		Type: 126,
 		Name: "glBindBuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(30),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3197,12 +3322,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 123,
+		Type: 127,
 		Name: "glBufferData",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(30),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3217,7 +3342,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "usage",
-				Type: s.getEnumInfo(33),
+				Type: s.getEnumInfo(32),
 				Out:  false,
 			},
 		},
@@ -3227,12 +3352,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 124,
+		Type: 128,
 		Name: "glBufferSubData",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(30),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3257,7 +3382,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 125,
+		Type: 129,
 		Name: "glDeleteBuffers",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3277,7 +3402,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 126,
+		Type: 130,
 		Name: "glIsBuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3297,17 +3422,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 127,
+		Type: 131,
 		Name: "glGetBufferParameteriv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(30),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(31),
+				Type: s.getEnumInfo(30),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3322,12 +3447,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 128,
+		Type: 132,
 		Name: "glCreateShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(34),
+				Type: s.getEnumInfo(33),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3342,7 +3467,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 129,
+		Type: 133,
 		Name: "glDeleteShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3357,7 +3482,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 130,
+		Type: 134,
 		Name: "glShaderSource",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3387,7 +3512,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 131,
+		Type: 135,
 		Name: "glShaderBinary",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3422,7 +3547,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 132,
+		Type: 136,
 		Name: "glGetShaderInfoLog",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3452,7 +3577,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 133,
+		Type: 137,
 		Name: "glGetShaderSource",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3482,7 +3607,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type:             134,
+		Type:             138,
 		Name:             "glReleaseShaderCompiler",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -3491,7 +3616,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 135,
+		Type: 139,
 		Name: "glCompileShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3506,7 +3631,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 136,
+		Type: 140,
 		Name: "glIsShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3526,7 +3651,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 137,
+		Type: 141,
 		Name: "glCreateProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3541,7 +3666,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 138,
+		Type: 142,
 		Name: "glDeleteProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3556,7 +3681,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 139,
+		Type: 143,
 		Name: "glAttachShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3576,7 +3701,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 140,
+		Type: 144,
 		Name: "glDetachShader",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3596,7 +3721,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 141,
+		Type: 145,
 		Name: "glGetAttachedShaders",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3626,7 +3751,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 142,
+		Type: 146,
 		Name: "glLinkProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3641,7 +3766,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 143,
+		Type: 147,
 		Name: "glGetProgramInfoLog",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3671,7 +3796,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 144,
+		Type: 148,
 		Name: "glUseProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3686,7 +3811,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 145,
+		Type: 149,
 		Name: "glIsProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3706,7 +3831,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 146,
+		Type: 150,
 		Name: "glValidateProgram",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3721,7 +3846,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 147,
+		Type: 151,
 		Name: "glClearColor",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3751,7 +3876,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 148,
+		Type: 152,
 		Name: "glClearDepthf",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3766,7 +3891,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 149,
+		Type: 153,
 		Name: "glClearStencil",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3781,12 +3906,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 150,
+		Type: 154,
 		Name: "glClear",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(87),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 		},
@@ -3796,12 +3921,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 151,
+		Type: 155,
 		Name: "glCullFace",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "mode",
-				Type: s.getEnumInfo(40),
+				Type: s.getEnumInfo(39),
 				Out:  false,
 			},
 		},
@@ -3811,7 +3936,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 152,
+		Type: 156,
 		Name: "glPolygonOffset",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3831,7 +3956,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 153,
+		Type: 157,
 		Name: "glLineWidth",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3846,7 +3971,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 154,
+		Type: 158,
 		Name: "glSampleCoverage",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3866,17 +3991,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 155,
+		Type: 159,
 		Name: "glHint",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(50),
+				Type: s.getEnumInfo(49),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "mode",
-				Type: s.getEnumInfo(51),
+				Type: s.getEnumInfo(50),
 				Out:  false,
 			},
 		},
@@ -3886,7 +4011,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 156,
+		Type: 160,
 		Name: "glFramebufferRenderbuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3916,7 +4041,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 157,
+		Type: 161,
 		Name: "glFramebufferTexture2D",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3951,7 +4076,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 158,
+		Type: 162,
 		Name: "glGetFramebufferAttachmentParameteriv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -3981,7 +4106,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 159,
+		Type: 163,
 		Name: "glDrawElements",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4011,7 +4136,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 160,
+		Type: 164,
 		Name: "glDrawArrays",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4036,7 +4161,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type:             161,
+		Type:             165,
 		Name:             "glFlush",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -4045,7 +4170,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type:             162,
+		Type:             166,
 		Name:             "glFinish",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -4054,12 +4179,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 163,
+		Type: 167,
 		Name: "glGetBooleanv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(38),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4074,12 +4199,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 164,
+		Type: 168,
 		Name: "glGetFloatv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(38),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4094,12 +4219,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 165,
+		Type: 169,
 		Name: "glGetIntegerv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(39),
+				Type: s.getEnumInfo(38),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4114,12 +4239,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 166,
+		Type: 170,
 		Name: "glGetString",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "param",
-				Type: s.getEnumInfo(45),
+				Type: s.getEnumInfo(44),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4134,12 +4259,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 167,
+		Type: 171,
 		Name: "glEnable",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(44),
+				Type: s.getEnumInfo(43),
 				Out:  false,
 			},
 		},
@@ -4149,12 +4274,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 168,
+		Type: 172,
 		Name: "glDisable",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(44),
+				Type: s.getEnumInfo(43),
 				Out:  false,
 			},
 		},
@@ -4164,12 +4289,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 169,
+		Type: 173,
 		Name: "glIsEnabled",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "capability",
-				Type: s.getEnumInfo(44),
+				Type: s.getEnumInfo(43),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4184,12 +4309,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 170,
+		Type: 174,
 		Name: "glMapBufferRange",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(70),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4204,7 +4329,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "access",
-				Type: s.getEnumInfo(88),
+				Type: s.getEnumInfo(87),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4219,12 +4344,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 171,
+		Type: 175,
 		Name: "glUnmapBuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(70),
+				Type: s.getEnumInfo(69),
 				Out:  false,
 			},
 		},
@@ -4234,7 +4359,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 172,
+		Type: 176,
 		Name: "glInvalidateFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4259,7 +4384,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 173,
+		Type: 177,
 		Name: "glRenderbufferStorageMultisample",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4294,7 +4419,7 @@ func init() {
 		DocumentationUrl: "[http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 174,
+		Type: 178,
 		Name: "glBlitFramebuffer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4339,12 +4464,12 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "mask",
-				Type: s.getEnumInfo(87),
+				Type: s.getEnumInfo(86),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "filter",
-				Type: s.getEnumInfo(61),
+				Type: s.getEnumInfo(60),
 				Out:  false,
 			},
 		},
@@ -4354,7 +4479,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 175,
+		Type: 179,
 		Name: "glGenQueries",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4374,12 +4499,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 176,
+		Type: 180,
 		Name: "glBeginQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4394,12 +4519,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 177,
+		Type: 181,
 		Name: "glEndQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4409,7 +4534,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 178,
+		Type: 182,
 		Name: "glDeleteQueries",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4429,7 +4554,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 179,
+		Type: 183,
 		Name: "glIsQuery",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4449,17 +4574,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 180,
+		Type: 184,
 		Name: "glGetQueryiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(79),
+				Type: s.getEnumInfo(78),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4474,7 +4599,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 181,
+		Type: 185,
 		Name: "glGetQueryObjectuiv",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4484,7 +4609,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4499,7 +4624,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 182,
+		Type: 186,
 		Name: "glGenQueriesEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4519,12 +4644,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 183,
+		Type: 187,
 		Name: "glBeginQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4539,12 +4664,12 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 184,
+		Type: 188,
 		Name: "glEndQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4554,7 +4679,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 185,
+		Type: 189,
 		Name: "glDeleteQueriesEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4574,7 +4699,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 186,
+		Type: 190,
 		Name: "glIsQueryEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4594,7 +4719,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 187,
+		Type: 191,
 		Name: "glQueryCounterEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4604,7 +4729,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 		},
@@ -4614,17 +4739,17 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 188,
+		Type: 192,
 		Name: "glGetQueryivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "target",
-				Type: s.getEnumInfo(85),
+				Type: s.getEnumInfo(84),
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(79),
+				Type: s.getEnumInfo(78),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4639,7 +4764,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 189,
+		Type: 193,
 		Name: "glGetQueryObjectivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4649,7 +4774,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4664,7 +4789,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 190,
+		Type: 194,
 		Name: "glGetQueryObjectuivEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4674,7 +4799,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4689,7 +4814,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 191,
+		Type: 195,
 		Name: "glGetQueryObjecti64vEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4699,7 +4824,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4714,7 +4839,7 @@ func init() {
 		DocumentationUrl: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 	})
 	schema.RegisterAtom(service.AtomInfo{
-		Type: 192,
+		Type: 196,
 		Name: "glGetQueryObjectui64vEXT",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -4724,7 +4849,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "parameter",
-				Type: s.getEnumInfo(82),
+				Type: s.getEnumInfo(81),
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -4784,7 +4909,7 @@ func init() {
 			},
 			&service.FieldInfo{
 				Name: "ActiveTextureUnit",
-				Type: s.getEnumInfo(32),
+				Type: s.getEnumInfo(31),
 			},
 			&service.FieldInfo{
 				Name: "Capabilities",
@@ -4796,7 +4921,7 @@ func init() {
 			},
 			&service.FieldInfo{
 				Name: "GenerateMipmapHint",
-				Type: s.getEnumInfo(51),
+				Type: s.getEnumInfo(50),
 			},
 			&service.FieldInfo{
 				Name: "PixelStorage",
@@ -4834,7 +4959,7 @@ func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
 	case 3:
 		e = service.CreateArrayInfo("CharBufferArray", service.TypeKindArray, schema.String)
 	case 4:
-		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(52))
+		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(51))
 	case 5:
 		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
 	case 6:
@@ -4896,9 +5021,9 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 0:
 		e = service.CreateMapInfo("AttributeLocation_CharBufferMap", service.TypeKindMap, schema.String, schema.U32)
 	case 1:
-		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(44), schema.Bool)
+		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
 	case 2:
-		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(30), schema.U32)
+		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(69), schema.U32)
 	case 3:
 		e = service.CreateMapInfo("BufferPtr_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
 	case 4:
@@ -4922,19 +5047,19 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	case 13:
 		e = service.CreateMapInfo("RenderbufferPtr_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
 	case 14:
-		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(55), schema.S32)
+		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(54), schema.S32)
 	case 15:
-		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(34), schema.U32)
+		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
 	case 16:
 		e = service.CreateMapInfo("ShaderPtr_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
 	case 17:
 		e = service.CreateMapInfo("TextureId_TextureTargetMap", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
 	case 18:
-		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(32), s.getMapInfo(17))
+		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(17))
 	case 19:
 		e = service.CreateMapInfo("TexturePtr_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
 	case 20:
-		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(40), schema.U32)
+		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(39), schema.U32)
 	case 21:
 		e = service.CreateMapInfo("Uniform_UniformLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(22))
 	case 22:
@@ -5542,22 +5667,6 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 		)
 	case 30:
 		e = service.CreateEnumInfo(
-			"BufferTarget",
-			service.TypeKindEnum,
-			[]service.EnumEntry{
-				service.EnumEntry{
-					Name:  "GL_ARRAY_BUFFER",
-					Value: 34962,
-				},
-				service.EnumEntry{
-					Name:  "GL_ELEMENT_ARRAY_BUFFER",
-					Value: 34963,
-				},
-			},
-			service.EnumInfoArray{},
-		)
-	case 31:
-		e = service.CreateEnumInfo(
 			"BufferParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{
@@ -5572,7 +5681,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 32:
+	case 31:
 		e = service.CreateEnumInfo(
 			"TextureUnit",
 			service.TypeKindEnum,
@@ -5708,7 +5817,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 33:
+	case 32:
 		e = service.CreateEnumInfo(
 			"BufferUsage",
 			service.TypeKindEnum,
@@ -5728,7 +5837,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 34:
+	case 33:
 		e = service.CreateEnumInfo(
 			"ShaderType",
 			service.TypeKindEnum,
@@ -5744,7 +5853,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 35:
+	case 34:
 		e = service.CreateEnumInfo(
 			"StateVariable_GLES_2_0",
 			service.TypeKindEnum,
@@ -6096,7 +6205,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 36:
+	case 35:
 		e = service.CreateEnumInfo(
 			"StateVariable_GLES_3_1",
 			service.TypeKindEnum,
@@ -6108,7 +6217,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 37:
+	case 36:
 		e = service.CreateEnumInfo(
 			"StateVariable_EXT_texture_filter_anisotropic",
 			service.TypeKindEnum,
@@ -6120,7 +6229,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 38:
+	case 37:
 		e = service.CreateEnumInfo(
 			"StateVariable_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -6132,19 +6241,19 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 39:
+	case 38:
 		e = service.CreateEnumInfo(
 			"StateVariable",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(34),
 				s.getEnumInfo(35),
 				s.getEnumInfo(36),
 				s.getEnumInfo(37),
-				s.getEnumInfo(38),
 			},
 		)
-	case 40:
+	case 39:
 		e = service.CreateEnumInfo(
 			"FaceMode",
 			service.TypeKindEnum,
@@ -6164,7 +6273,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 41:
+	case 40:
 		e = service.CreateEnumInfo(
 			"ArrayType_GLES_1_1",
 			service.TypeKindEnum,
@@ -6188,7 +6297,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 42:
+	case 41:
 		e = service.CreateEnumInfo(
 			"ArrayType_OES_point_size_array",
 			service.TypeKindEnum,
@@ -6200,17 +6309,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 43:
+	case 42:
 		e = service.CreateEnumInfo(
 			"ArrayType",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(40),
 				s.getEnumInfo(41),
-				s.getEnumInfo(42),
 			},
 		)
-	case 44:
+	case 43:
 		e = service.CreateEnumInfo(
 			"Capability",
 			service.TypeKindEnum,
@@ -6253,10 +6362,10 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 				},
 			},
 			service.EnumInfoArray{
-				s.getEnumInfo(43),
+				s.getEnumInfo(42),
 			},
 		)
-	case 45:
+	case 44:
 		e = service.CreateEnumInfo(
 			"StringConstant",
 			service.TypeKindEnum,
@@ -6280,7 +6389,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 46:
+	case 45:
 		e = service.CreateEnumInfo(
 			"VertexAttribType",
 			service.TypeKindEnum,
@@ -6315,7 +6424,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 				s.getEnumInfo(14),
 			},
 		)
-	case 47:
+	case 46:
 		e = service.CreateEnumInfo(
 			"ShaderAttribType",
 			service.TypeKindEnum,
@@ -6351,7 +6460,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 48:
+	case 47:
 		e = service.CreateEnumInfo(
 			"ShaderUniformType",
 			service.TypeKindEnum,
@@ -6427,7 +6536,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 49:
+	case 48:
 		e = service.CreateEnumInfo(
 			"Error",
 			service.TypeKindEnum,
@@ -6459,7 +6568,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 50:
+	case 49:
 		e = service.CreateEnumInfo(
 			"HintTarget",
 			service.TypeKindEnum,
@@ -6471,7 +6580,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 51:
+	case 50:
 		e = service.CreateEnumInfo(
 			"HintMode",
 			service.TypeKindEnum,
@@ -6491,7 +6600,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 52:
+	case 51:
 		e = service.CreateEnumInfo(
 			"DiscardFramebufferAttachment",
 			service.TypeKindEnum,
@@ -6511,7 +6620,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 53:
+	case 52:
 		e = service.CreateEnumInfo(
 			"ProgramParameter",
 			service.TypeKindEnum,
@@ -6555,7 +6664,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 54:
+	case 53:
 		e = service.CreateEnumInfo(
 			"ShaderParameter",
 			service.TypeKindEnum,
@@ -6583,7 +6692,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 55:
+	case 54:
 		e = service.CreateEnumInfo(
 			"PixelStoreParameter",
 			service.TypeKindEnum,
@@ -6599,7 +6708,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 56:
+	case 55:
 		e = service.CreateEnumInfo(
 			"TextureParameter_FilterMode",
 			service.TypeKindEnum,
@@ -6615,7 +6724,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 57:
+	case 56:
 		e = service.CreateEnumInfo(
 			"TextureParameter_WrapMode",
 			service.TypeKindEnum,
@@ -6631,7 +6740,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 58:
+	case 57:
 		e = service.CreateEnumInfo(
 			"TextureParameter_EXT_texture_filter_anisotropic",
 			service.TypeKindEnum,
@@ -6643,7 +6752,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 59:
+	case 58:
 		e = service.CreateEnumInfo(
 			"TextureParameter_SwizzleMode",
 			service.TypeKindEnum,
@@ -6667,19 +6776,19 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 60:
+	case 59:
 		e = service.CreateEnumInfo(
 			"TextureParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(55),
 				s.getEnumInfo(56),
-				s.getEnumInfo(57),
-				s.getEnumInfo(59),
 				s.getEnumInfo(58),
+				s.getEnumInfo(57),
 			},
 		)
-	case 61:
+	case 60:
 		e = service.CreateEnumInfo(
 			"TextureFilterMode",
 			service.TypeKindEnum,
@@ -6711,7 +6820,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 62:
+	case 61:
 		e = service.CreateEnumInfo(
 			"TextureWrapMode",
 			service.TypeKindEnum,
@@ -6731,7 +6840,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 63:
+	case 62:
 		e = service.CreateEnumInfo(
 			"TexelComponent",
 			service.TypeKindEnum,
@@ -6755,7 +6864,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 64:
+	case 63:
 		e = service.CreateEnumInfo(
 			"BlendFactor",
 			service.TypeKindEnum,
@@ -6823,7 +6932,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 65:
+	case 64:
 		e = service.CreateEnumInfo(
 			"PrecisionType",
 			service.TypeKindEnum,
@@ -6855,7 +6964,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 66:
+	case 65:
 		e = service.CreateEnumInfo(
 			"TestFunction",
 			service.TypeKindEnum,
@@ -6895,7 +7004,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 67:
+	case 66:
 		e = service.CreateEnumInfo(
 			"StencilAction",
 			service.TypeKindEnum,
@@ -6935,7 +7044,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 68:
+	case 67:
 		e = service.CreateEnumInfo(
 			"FaceOrientation",
 			service.TypeKindEnum,
@@ -6951,7 +7060,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 69:
+	case 68:
 		e = service.CreateEnumInfo(
 			"BlendEquation",
 			service.TypeKindEnum,
@@ -6971,9 +7080,9 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 70:
+	case 69:
 		e = service.CreateEnumInfo(
-			"MapBufferTarget",
+			"BufferTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{
 				service.EnumEntry{
@@ -7011,7 +7120,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 71:
+	case 70:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture_OES_EGL_image",
 			service.TypeKindEnum,
@@ -7023,7 +7132,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 72:
+	case 71:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture_OES_EGL_image_external",
 			service.TypeKindEnum,
@@ -7035,17 +7144,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 73:
+	case 72:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(70),
 				s.getEnumInfo(71),
-				s.getEnumInfo(72),
 			},
 		)
-	case 74:
+	case 73:
 		e = service.CreateEnumInfo(
 			"ImageTargetRenderbufferStorage",
 			service.TypeKindEnum,
@@ -7057,7 +7166,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 75:
+	case 74:
 		e = service.CreateEnumInfo(
 			"ResetStatus",
 			service.TypeKindEnum,
@@ -7081,7 +7190,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 76:
+	case 75:
 		e = service.CreateEnumInfo(
 			"TextureKind",
 			service.TypeKindEnum,
@@ -7101,7 +7210,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 77:
+	case 76:
 		e = service.CreateEnumInfo(
 			"QueryParameter_GLES_3",
 			service.TypeKindEnum,
@@ -7113,7 +7222,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 78:
+	case 77:
 		e = service.CreateEnumInfo(
 			"QueryParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -7125,17 +7234,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 79:
+	case 78:
 		e = service.CreateEnumInfo(
 			"QueryParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(76),
 				s.getEnumInfo(77),
-				s.getEnumInfo(78),
 			},
 		)
-	case 80:
+	case 79:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_GLES_3",
 			service.TypeKindEnum,
@@ -7151,24 +7260,24 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 81:
+	case 80:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{},
 		)
-	case 82:
+	case 81:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(79),
 				s.getEnumInfo(80),
-				s.getEnumInfo(81),
 			},
 		)
-	case 83:
+	case 82:
 		e = service.CreateEnumInfo(
 			"QueryTarget_GLES_3",
 			service.TypeKindEnum,
@@ -7188,7 +7297,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 84:
+	case 83:
 		e = service.CreateEnumInfo(
 			"QueryTarget_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
@@ -7204,17 +7313,17 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 85:
+	case 84:
 		e = service.CreateEnumInfo(
 			"QueryTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
 			service.EnumInfoArray{
+				s.getEnumInfo(82),
 				s.getEnumInfo(83),
-				s.getEnumInfo(84),
 			},
 		)
-	case 86:
+	case 85:
 		e = service.CreateEnumInfo(
 			"TilePreserveMaskQCOM",
 			service.TypeKindEnum,
@@ -7350,7 +7459,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 87:
+	case 86:
 		e = service.CreateEnumInfo(
 			"ClearMask",
 			service.TypeKindEnum,
@@ -7370,7 +7479,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			},
 			service.EnumInfoArray{},
 		)
-	case 88:
+	case 87:
 		e = service.CreateEnumInfo(
 			"MapBufferRangeAccess",
 			service.TypeKindEnum,
@@ -7528,7 +7637,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "Kind",
-					Type: s.getEnumInfo(76),
+					Type: s.getEnumInfo(75),
 				},
 				&service.FieldInfo{
 					Name: "Format",
@@ -7544,35 +7653,35 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "MagFilter",
-					Type: s.getEnumInfo(61),
+					Type: s.getEnumInfo(60),
 				},
 				&service.FieldInfo{
 					Name: "MinFilter",
-					Type: s.getEnumInfo(61),
+					Type: s.getEnumInfo(60),
 				},
 				&service.FieldInfo{
 					Name: "WrapS",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(61),
 				},
 				&service.FieldInfo{
 					Name: "WrapT",
-					Type: s.getEnumInfo(62),
+					Type: s.getEnumInfo(61),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleR",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleG",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleB",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "SwizzleA",
-					Type: s.getEnumInfo(63),
+					Type: s.getEnumInfo(62),
 				},
 				&service.FieldInfo{
 					Name: "MaxAnisotropy",
@@ -7646,7 +7755,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Usage",
-					Type: s.getEnumInfo(33),
+					Type: s.getEnumInfo(32),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7678,7 +7787,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(34),
+					Type: s.getEnumInfo(33),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7698,7 +7807,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(47),
+					Type: s.getEnumInfo(46),
 				},
 			},
 			service.ClassInfoArray{},
@@ -7946,7 +8055,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(48),
+					Type: s.getEnumInfo(47),
 				},
 				&service.FieldInfo{
 					Name: "Value",
@@ -8013,7 +8122,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Type",
-					Type: s.getEnumInfo(46),
+					Type: s.getEnumInfo(45),
 				},
 				&service.FieldInfo{
 					Name: "Normalized",
@@ -8048,27 +8157,27 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 			service.FieldInfoArray{
 				&service.FieldInfo{
 					Name: "SrcRgbBlendFactor",
-					Type: s.getEnumInfo(64),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "SrcAlphaBlendFactor",
-					Type: s.getEnumInfo(64),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "DstRgbBlendFactor",
-					Type: s.getEnumInfo(64),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "DstAlphaBlendFactor",
-					Type: s.getEnumInfo(64),
+					Type: s.getEnumInfo(63),
 				},
 				&service.FieldInfo{
 					Name: "BlendEquationRgb",
-					Type: s.getEnumInfo(69),
+					Type: s.getEnumInfo(68),
 				},
 				&service.FieldInfo{
 					Name: "BlendEquationAlpha",
-					Type: s.getEnumInfo(69),
+					Type: s.getEnumInfo(68),
 				},
 				&service.FieldInfo{
 					Name: "BlendColor",
@@ -8088,7 +8197,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "DepthTestFunction",
-					Type: s.getEnumInfo(66),
+					Type: s.getEnumInfo(65),
 				},
 				&service.FieldInfo{
 					Name: "DepthNear",
@@ -8128,11 +8237,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "FrontFace",
-					Type: s.getEnumInfo(68),
+					Type: s.getEnumInfo(67),
 				},
 				&service.FieldInfo{
 					Name: "CullFace",
-					Type: s.getEnumInfo(40),
+					Type: s.getEnumInfo(39),
 				},
 				&service.FieldInfo{
 					Name: "LineWidth",

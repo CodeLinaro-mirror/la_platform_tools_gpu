@@ -256,11 +256,6 @@ static const uint32_t GL_RENDERBUFFER_DEPTH_SIZE = 36180;
 static const uint32_t GL_RENDERBUFFER_STENCIL_SIZE = 36181;
 }
 
-namespace BufferTarget {
-static const uint32_t GL_ARRAY_BUFFER = 34962;
-static const uint32_t GL_ELEMENT_ARRAY_BUFFER = 34963;
-}
-
 namespace BufferParameter {
 static const uint32_t GL_BUFFER_SIZE = 34660;
 static const uint32_t GL_BUFFER_USAGE = 34661;
@@ -760,7 +755,7 @@ static const uint32_t GL_FUNC_SUBTRACT = 32778;
 static const uint32_t GL_FUNC_REVERSE_SUBTRACT = 32779;
 }
 
-namespace MapBufferTarget {
+namespace BufferTarget {
 static const uint32_t GL_ARRAY_BUFFER = 34962;
 static const uint32_t GL_COPY_READ_BUFFER = 36662;
 static const uint32_t GL_COPY_WRITE_BUFFER = 36663;
@@ -934,6 +929,10 @@ typedef void* EGLContext;
 typedef void* EGLDisplay;
 
 typedef void* EGLSurface;
+
+typedef void* GLXContext;
+
+typedef void* GLXDrawable;
 
 typedef void* HGLRC;
 

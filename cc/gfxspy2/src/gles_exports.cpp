@@ -57,6 +57,25 @@ EXPORT EGLBoolean STDCALL eglSwapBuffers(EGLDisplay display, const void* surface
     GAPID_INFO("eglSwapBuffers()");
     return spy()->eglSwapBuffers(display, surface);
 }
+EXPORT GLXContext STDCALL
+glXCreateContext(const void* dpy, const void* vis, GLXContext shareList, bool direct) {
+    GAPID_INFO("glXCreateContext()");
+    return spy()->glXCreateContext(dpy, vis, shareList, direct);
+}
+EXPORT GLXContext STDCALL glXCreateNewContext(const void* display, const void* fbconfig,
+                                              uint32_t type, GLXContext shared, bool direct) {
+    GAPID_INFO("glXCreateNewContext()");
+    return spy()->glXCreateNewContext(display, fbconfig, type, shared, direct);
+}
+EXPORT void STDCALL
+glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read, GLXContext ctx) {
+    GAPID_INFO("glXMakeContextCurrent()");
+    spy()->glXMakeContextCurrent(display, draw, read, ctx);
+}
+EXPORT void STDCALL glXSwapBuffers(const void* display, GLXDrawable drawable) {
+    GAPID_INFO("glXSwapBuffers()");
+    spy()->glXSwapBuffers(display, drawable);
+}
 EXPORT HGLRC STDCALL wglCreateContext(HDC hdc) {
     GAPID_INFO("wglCreateContext()");
     return spy()->wglCreateContext(hdc);
@@ -889,6 +908,18 @@ GFXPROC getProcAddress(const char* name) {
     }
     if (strcmp(name, "eglSwapBuffers") == 0) {
         return reinterpret_cast<GFXPROC>(eglSwapBuffers);
+    }
+    if (strcmp(name, "glXCreateContext") == 0) {
+        return reinterpret_cast<GFXPROC>(glXCreateContext);
+    }
+    if (strcmp(name, "glXCreateNewContext") == 0) {
+        return reinterpret_cast<GFXPROC>(glXCreateNewContext);
+    }
+    if (strcmp(name, "glXMakeContextCurrent") == 0) {
+        return reinterpret_cast<GFXPROC>(glXMakeContextCurrent);
+    }
+    if (strcmp(name, "glXSwapBuffers") == 0) {
+        return reinterpret_cast<GFXPROC>(glXSwapBuffers);
     }
     if (strcmp(name, "wglCreateContext") == 0) {
         return reinterpret_cast<GFXPROC>(wglCreateContext);

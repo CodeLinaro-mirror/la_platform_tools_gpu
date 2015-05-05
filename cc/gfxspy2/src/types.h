@@ -19,6 +19,8 @@
 
 #include <vector>
 
+#include <stdint.h>
+
 namespace gapii {
 
 class Memory {

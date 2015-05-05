@@ -84,4 +84,18 @@ CGLError Spy::CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLCo
     return GlesSpy::CGLCreateContext(pix, share, ctx);
 }
 
+GLXContext Spy::glXCreateContext(const void* display, const void* vis,
+                            GLXContext shareList, bool direct) {
+    // TODO: Fetch dimensions and formats from OS.
+    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8
+    return GlesSpy::glXCreateContext(display, vis, shareList, direct);
+}
+
+GLXContext Spy::glXCreateNewContext(const void* display, const void* fbconfig,
+                                    uint32_t type, GLXContext shared, bool direct) {
+    // TODO: Fetch dimensions and formats from OS.
+    init(256, 256, GL_RGBA8, GL_DEPTH_COMPONENT16, GL_STENCIL_INDEX8
+    return GlesSpy::glXCreateNewContext(display, fbconfig, type, shared, direct);
+}
+
 } // namespace gapii
