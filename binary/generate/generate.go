@@ -265,6 +265,16 @@ type sortEntry struct {
 	visited bool
 }
 
+func walkType(t *Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
+	if t == nil {
+		return i
+	}
+	i = walk(t.Name, byname, structs, i)
+	i = walkType(t.SubType, byname, structs, i)
+	i = walkType(t.KeyType, byname, structs, i)
+	return i
+}
+
 func walk(name string, byname map[string]*sortEntry, structs []*Struct, i int) int {
 	entry, found := byname[name]
 	if !found || entry.visited {
@@ -272,13 +282,7 @@ func walk(name string, byname map[string]*sortEntry, structs []*Struct, i int) i
 	}
 	entry.visited = true
 	for _, f := range entry.s.Fields {
-		i = walk(f.Type.Name, byname, structs, i)
-		if f.Type.SubType != nil {
-			i = walk(f.Type.SubType.Name, byname, structs, i)
-		}
-		if f.Type.KeyType != nil {
-			i = walk(f.Type.KeyType.Name, byname, structs, i)
-		}
+		i = walkType(f.Type, byname, structs, i)
 	}
 	structs[i] = entry.s
 	return i + 1

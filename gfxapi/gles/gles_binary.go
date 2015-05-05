@@ -210,31 +210,31 @@ func init() {
 	registry.Add((*GlViewport)(nil).Class())
 	registry.Add((*Rect)(nil).Class())
 	registry.Add((*RasterizerState)(nil).Class())
+	registry.Add((*VertexAttributeArray)(nil).Class())
 	registry.Add((*InternalState)(nil).Class())
-	registry.Add((*Objects)(nil).Class())
-	registry.Add((*Globals)(nil).Class())
-	registry.Add((*Init)(nil).Class())
-	registry.Add((*Vec2f)(nil).Class())
-	registry.Add((*Mat2f)(nil).Class())
-	registry.Add((*Vec3f)(nil).Class())
-	registry.Add((*Mat3f)(nil).Class())
-	registry.Add((*Vec4f)(nil).Class())
-	registry.Add((*Mat4f)(nil).Class())
+	registry.Add((*Renderbuffer)(nil).Class())
+	registry.Add((*Texture)(nil).Class())
+	registry.Add((*Shader)(nil).Class())
 	registry.Add((*VertexAttribute)(nil).Class())
+	registry.Add((*Vec2f)(nil).Class())
+	registry.Add((*Vec3f)(nil).Class())
+	registry.Add((*Vec4f)(nil).Class())
 	registry.Add((*Vec2i)(nil).Class())
 	registry.Add((*Vec3i)(nil).Class())
 	registry.Add((*Vec4i)(nil).Class())
+	registry.Add((*Mat2f)(nil).Class())
+	registry.Add((*Mat3f)(nil).Class())
+	registry.Add((*Mat4f)(nil).Class())
 	registry.Add((*UniformValue)(nil).Class())
 	registry.Add((*Uniform)(nil).Class())
 	registry.Add((*Program)(nil).Class())
+	registry.Add((*VertexArray)(nil).Class())
 	registry.Add((*Query)(nil).Class())
-	registry.Add((*Renderbuffer)(nil).Class())
-	registry.Add((*Shader)(nil).Class())
+	registry.Add((*Objects)(nil).Class())
+	registry.Add((*Globals)(nil).Class())
+	registry.Add((*Init)(nil).Class())
 	registry.Add((*StartTimer)(nil).Class())
 	registry.Add((*StopTimer)(nil).Class())
-	registry.Add((*Texture)(nil).Class())
-	registry.Add((*VertexArray)(nil).Class())
-	registry.Add((*VertexAttributeArray)(nil).Class())
 	registry.Add((*WglCreateContext)(nil).Class())
 	registry.Add((*WglMakeCurrent)(nil).Class())
 	registry.Add((*WglSwapBuffers)(nil).Class())
@@ -438,31 +438,31 @@ var (
 	binaryIDGlViewport                             = binary.ID{0x1d, 0x68, 0xb3, 0xfa, 0x74, 0x09, 0x49, 0xa3, 0x1b, 0x0b, 0x09, 0xb8, 0x99, 0x26, 0xa8, 0x86, 0x86, 0x5d, 0x49, 0xb1}
 	binaryIDRect                                   = binary.ID{0x14, 0xc0, 0x01, 0xd8, 0x95, 0xd6, 0x6b, 0xab, 0xce, 0x31, 0x74, 0x35, 0x6b, 0x11, 0x57, 0xb5, 0xc8, 0x6f, 0x52, 0xdc}
 	binaryIDRasterizerState                        = binary.ID{0x83, 0xef, 0x5b, 0xb5, 0xd4, 0xd5, 0x55, 0x96, 0x28, 0xf8, 0x5b, 0x5b, 0x40, 0xfe, 0x1e, 0xf9, 0x9a, 0x50, 0x8c, 0xcf}
+	binaryIDVertexAttributeArray                   = binary.ID{0x7e, 0xf1, 0x81, 0xca, 0x06, 0xda, 0xe3, 0xb7, 0x47, 0xe8, 0xdf, 0xb5, 0x8a, 0x82, 0x2c, 0xc1, 0x45, 0x5e, 0x1d, 0xc8}
 	binaryIDInternalState                          = binary.ID{0xc7, 0x77, 0xff, 0x0d, 0x4e, 0x44, 0xe9, 0x19, 0x10, 0xde, 0x48, 0x30, 0xfa, 0xf3, 0x5b, 0xf0, 0x93, 0x71, 0x49, 0x9e}
-	binaryIDObjects                                = binary.ID{0x3d, 0x62, 0xa0, 0x53, 0x6b, 0x38, 0xa5, 0xc3, 0x35, 0x5f, 0x8b, 0x1f, 0x9b, 0xfa, 0xdc, 0x6d, 0x86, 0x4d, 0xfb, 0x5d}
-	binaryIDGlobals                                = binary.ID{0x56, 0xab, 0x21, 0xc9, 0x98, 0x9d, 0x8a, 0xa4, 0xa5, 0x56, 0xfc, 0x8a, 0x6d, 0xae, 0x1a, 0xf9, 0xe9, 0xc3, 0xcf, 0x9e}
-	binaryIDInit                                   = binary.ID{0xbf, 0xaa, 0x6e, 0x05, 0xcd, 0x7c, 0x10, 0x32, 0x8f, 0xba, 0xf9, 0x35, 0xec, 0x2b, 0x34, 0x60, 0xa7, 0xb5, 0x9f, 0xd4}
-	binaryIDVec2f                                  = binary.ID{0x9a, 0x80, 0x74, 0xe4, 0x78, 0x9c, 0x6c, 0x16, 0xc7, 0xc6, 0x4e, 0x4c, 0x66, 0x6a, 0x86, 0x52, 0x06, 0x24, 0x41, 0x5d}
-	binaryIDMat2f                                  = binary.ID{0x8a, 0xda, 0xb2, 0x20, 0xfa, 0xe4, 0xf7, 0x80, 0x3a, 0x25, 0xf4, 0xbf, 0xbc, 0x97, 0xea, 0x48, 0x14, 0xed, 0xcb, 0x98}
-	binaryIDVec3f                                  = binary.ID{0x09, 0x06, 0xf7, 0xa9, 0xb3, 0xbf, 0x8f, 0x42, 0x96, 0xf4, 0xd6, 0xff, 0x4f, 0x93, 0x98, 0x44, 0x2e, 0xaf, 0x7b, 0x07}
-	binaryIDMat3f                                  = binary.ID{0x2c, 0xe7, 0xc3, 0x90, 0x92, 0x9b, 0xa6, 0xc1, 0x86, 0x6e, 0x89, 0xc7, 0x16, 0x6d, 0x9f, 0x83, 0x54, 0x64, 0x40, 0x3a}
-	binaryIDVec4f                                  = binary.ID{0x94, 0x20, 0x1e, 0xeb, 0xde, 0x5b, 0xa9, 0xe1, 0xd7, 0x73, 0xcd, 0x9e, 0x3b, 0x09, 0x01, 0x8a, 0x9a, 0x41, 0xe7, 0x4b}
-	binaryIDMat4f                                  = binary.ID{0x5c, 0x2f, 0x64, 0xb8, 0x4e, 0xf0, 0xa8, 0x30, 0x10, 0x31, 0x81, 0x75, 0xb7, 0x82, 0xf3, 0x8f, 0x70, 0x68, 0x83, 0xdc}
+	binaryIDRenderbuffer                           = binary.ID{0xea, 0xc8, 0x26, 0xcf, 0x71, 0xc6, 0x70, 0x46, 0x65, 0x8a, 0x99, 0x41, 0x86, 0xee, 0xbe, 0xc5, 0xd3, 0x9e, 0xcc, 0xf4}
+	binaryIDTexture                                = binary.ID{0xf4, 0x91, 0x73, 0x6b, 0x19, 0x3d, 0x03, 0x96, 0xaa, 0x7a, 0x57, 0xbd, 0x1b, 0x71, 0x3d, 0xab, 0x3f, 0x43, 0x07, 0x7e}
+	binaryIDShader                                 = binary.ID{0xa4, 0xf1, 0x58, 0xd5, 0xb7, 0xc0, 0x68, 0xe7, 0x27, 0xdb, 0xfa, 0x94, 0x26, 0xa0, 0x72, 0xda, 0xa4, 0xd6, 0x11, 0x73}
 	binaryIDVertexAttribute                        = binary.ID{0xfd, 0x98, 0xd6, 0x90, 0x60, 0x52, 0x6f, 0xa2, 0x9c, 0x21, 0xde, 0xa1, 0x72, 0xe6, 0x53, 0x6b, 0x3e, 0x76, 0x01, 0xd4}
+	binaryIDVec2f                                  = binary.ID{0x9a, 0x80, 0x74, 0xe4, 0x78, 0x9c, 0x6c, 0x16, 0xc7, 0xc6, 0x4e, 0x4c, 0x66, 0x6a, 0x86, 0x52, 0x06, 0x24, 0x41, 0x5d}
+	binaryIDVec3f                                  = binary.ID{0x09, 0x06, 0xf7, 0xa9, 0xb3, 0xbf, 0x8f, 0x42, 0x96, 0xf4, 0xd6, 0xff, 0x4f, 0x93, 0x98, 0x44, 0x2e, 0xaf, 0x7b, 0x07}
+	binaryIDVec4f                                  = binary.ID{0x94, 0x20, 0x1e, 0xeb, 0xde, 0x5b, 0xa9, 0xe1, 0xd7, 0x73, 0xcd, 0x9e, 0x3b, 0x09, 0x01, 0x8a, 0x9a, 0x41, 0xe7, 0x4b}
 	binaryIDVec2i                                  = binary.ID{0x76, 0x85, 0xad, 0x18, 0xef, 0x9b, 0x0e, 0xea, 0x49, 0x44, 0xf7, 0x89, 0x4e, 0xdb, 0x0d, 0x34, 0xbb, 0x27, 0xb8, 0x43}
 	binaryIDVec3i                                  = binary.ID{0xc5, 0x31, 0xeb, 0x05, 0xd1, 0xdf, 0x5c, 0xf7, 0xc0, 0x7a, 0x20, 0xc9, 0x91, 0xb0, 0xf0, 0x2e, 0x1e, 0x9d, 0x94, 0xd5}
 	binaryIDVec4i                                  = binary.ID{0x61, 0x00, 0x31, 0xa3, 0x7a, 0x91, 0x14, 0x17, 0x6e, 0xd2, 0xe2, 0x62, 0x30, 0x92, 0xce, 0x4e, 0x0c, 0x72, 0xd1, 0x9c}
+	binaryIDMat2f                                  = binary.ID{0x8a, 0xda, 0xb2, 0x20, 0xfa, 0xe4, 0xf7, 0x80, 0x3a, 0x25, 0xf4, 0xbf, 0xbc, 0x97, 0xea, 0x48, 0x14, 0xed, 0xcb, 0x98}
+	binaryIDMat3f                                  = binary.ID{0x2c, 0xe7, 0xc3, 0x90, 0x92, 0x9b, 0xa6, 0xc1, 0x86, 0x6e, 0x89, 0xc7, 0x16, 0x6d, 0x9f, 0x83, 0x54, 0x64, 0x40, 0x3a}
+	binaryIDMat4f                                  = binary.ID{0x5c, 0x2f, 0x64, 0xb8, 0x4e, 0xf0, 0xa8, 0x30, 0x10, 0x31, 0x81, 0x75, 0xb7, 0x82, 0xf3, 0x8f, 0x70, 0x68, 0x83, 0xdc}
 	binaryIDUniformValue                           = binary.ID{0xab, 0x2c, 0x54, 0x24, 0xdf, 0x48, 0x16, 0xcb, 0x4a, 0x5d, 0x7f, 0x47, 0x42, 0x4b, 0x4e, 0x3e, 0x5d, 0x0e, 0x54, 0x0c}
 	binaryIDUniform                                = binary.ID{0x92, 0x24, 0x45, 0xb8, 0x0b, 0xfa, 0x86, 0x62, 0xac, 0x08, 0xfd, 0xbc, 0xbc, 0x95, 0x50, 0x12, 0x22, 0x6e, 0xa5, 0x1d}
 	binaryIDProgram                                = binary.ID{0x36, 0x11, 0x4c, 0x04, 0x82, 0x9d, 0x5b, 0xdc, 0xed, 0xe9, 0xbd, 0xbb, 0x48, 0xf4, 0x09, 0x1a, 0x07, 0x3e, 0xab, 0x27}
+	binaryIDVertexArray                            = binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}
 	binaryIDQuery                                  = binary.ID{0x9e, 0x4e, 0xd0, 0x26, 0x26, 0xf8, 0x9d, 0x8e, 0xb5, 0x02, 0x2f, 0xde, 0x80, 0xb3, 0xe9, 0x09, 0xf5, 0x4c, 0x1e, 0xf2}
-	binaryIDRenderbuffer                           = binary.ID{0xea, 0xc8, 0x26, 0xcf, 0x71, 0xc6, 0x70, 0x46, 0x65, 0x8a, 0x99, 0x41, 0x86, 0xee, 0xbe, 0xc5, 0xd3, 0x9e, 0xcc, 0xf4}
-	binaryIDShader                                 = binary.ID{0xa4, 0xf1, 0x58, 0xd5, 0xb7, 0xc0, 0x68, 0xe7, 0x27, 0xdb, 0xfa, 0x94, 0x26, 0xa0, 0x72, 0xda, 0xa4, 0xd6, 0x11, 0x73}
+	binaryIDObjects                                = binary.ID{0x3d, 0x62, 0xa0, 0x53, 0x6b, 0x38, 0xa5, 0xc3, 0x35, 0x5f, 0x8b, 0x1f, 0x9b, 0xfa, 0xdc, 0x6d, 0x86, 0x4d, 0xfb, 0x5d}
+	binaryIDGlobals                                = binary.ID{0x56, 0xab, 0x21, 0xc9, 0x98, 0x9d, 0x8a, 0xa4, 0xa5, 0x56, 0xfc, 0x8a, 0x6d, 0xae, 0x1a, 0xf9, 0xe9, 0xc3, 0xcf, 0x9e}
+	binaryIDInit                                   = binary.ID{0xbf, 0xaa, 0x6e, 0x05, 0xcd, 0x7c, 0x10, 0x32, 0x8f, 0xba, 0xf9, 0x35, 0xec, 0x2b, 0x34, 0x60, 0xa7, 0xb5, 0x9f, 0xd4}
 	binaryIDStartTimer                             = binary.ID{0xf4, 0xb8, 0x48, 0xe0, 0x4f, 0x66, 0x6a, 0xfe, 0x2b, 0xe9, 0x9e, 0x64, 0x44, 0x2c, 0xa7, 0x48, 0x2c, 0x7b, 0xab, 0x8e}
 	binaryIDStopTimer                              = binary.ID{0xba, 0x7f, 0xdb, 0x0f, 0xf1, 0x96, 0xf7, 0xd5, 0x0f, 0x89, 0xb9, 0x92, 0x18, 0x5d, 0x11, 0x55, 0xdc, 0x11, 0xee, 0xe1}
-	binaryIDTexture                                = binary.ID{0xf4, 0x91, 0x73, 0x6b, 0x19, 0x3d, 0x03, 0x96, 0xaa, 0x7a, 0x57, 0xbd, 0x1b, 0x71, 0x3d, 0xab, 0x3f, 0x43, 0x07, 0x7e}
-	binaryIDVertexArray                            = binary.ID{0x8c, 0x9a, 0x34, 0xfe, 0x61, 0x2a, 0x2d, 0x57, 0x19, 0x43, 0x24, 0x95, 0xf6, 0x1e, 0x79, 0x97, 0x85, 0x3f, 0xee, 0xc4}
-	binaryIDVertexAttributeArray                   = binary.ID{0x7e, 0xf1, 0x81, 0xca, 0x06, 0xda, 0xe3, 0xb7, 0x47, 0xe8, 0xdf, 0xb5, 0x8a, 0x82, 0x2c, 0xc1, 0x45, 0x5e, 0x1d, 0xc8}
 	binaryIDWglCreateContext                       = binary.ID{0x88, 0x47, 0x7f, 0x7b, 0x9c, 0x52, 0x6a, 0x58, 0xf3, 0x6d, 0x87, 0xf5, 0xf5, 0x79, 0x6b, 0x73, 0x2d, 0xb6, 0xde, 0x12}
 	binaryIDWglMakeCurrent                         = binary.ID{0x0c, 0xc6, 0x8e, 0x49, 0x33, 0x9e, 0xc3, 0xed, 0xc4, 0x15, 0xa7, 0x53, 0xcb, 0xa5, 0x3a, 0xca, 0x41, 0xaf, 0xcd, 0xe5}
 	binaryIDWglSwapBuffers                         = binary.ID{0xfc, 0xce, 0x57, 0xaf, 0xe1, 0x83, 0x84, 0x7e, 0xab, 0x62, 0xf5, 0x8f, 0x55, 0x5f, 0x3d, 0x0b, 0x2a, 0xe7, 0x6b, 0x9f}
@@ -15781,6 +15781,124 @@ func (*binaryClassRasterizerState) DecodeTo(d binary.Decoder, obj binary.Object)
 }
 func (*binaryClassRasterizerState) Skip(d binary.Decoder) error { return doSkipRasterizerState(d) }
 
+type binaryClassVertexAttributeArray struct{}
+
+func (*VertexAttributeArray) Class() binary.Class {
+	return (*binaryClassVertexAttributeArray)(nil)
+}
+func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Enabled); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Size); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Normalized); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Stride); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Buffer)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Pointer)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Enabled = bool(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Size = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = VertexAttribType(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Normalized = bool(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Stride = int32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Buffer = BufferId(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Pointer = memory.Pointer(obj)
+	}
+	return nil
+}
+func doSkipVertexAttributeArray(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
+func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
+func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
+}
+func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexAttributeArray{}
+	return obj, doDecodeVertexAttributeArray(d, obj)
+}
+func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
+}
+func (*binaryClassVertexAttributeArray) Skip(d binary.Decoder) error {
+	return doSkipVertexAttributeArray(d)
+}
+
 type binaryClassInternalState struct{}
 
 func (*InternalState) Class() binary.Class {
@@ -15863,6 +15981,1686 @@ func (*binaryClassInternalState) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeInternalState(d, obj.(*InternalState))
 }
 func (*binaryClassInternalState) Skip(d binary.Decoder) error { return doSkipInternalState(d) }
+
+type binaryClassRenderbuffer struct{}
+
+func (*Renderbuffer) Class() binary.Class {
+	return (*binaryClassRenderbuffer)(nil)
+}
+func doEncodeRenderbuffer(e binary.Encoder, o *Renderbuffer) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Width); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Height); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Data); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Format)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Width = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Height = int32(obj)
+	}
+	if err := d.Value(&o.Data); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Format = RenderbufferFormat(obj)
+	}
+	return nil
+}
+func doSkipRenderbuffer(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassRenderbuffer) ID() binary.ID      { return binaryIDRenderbuffer }
+func (*binaryClassRenderbuffer) New() binary.Object { return &Renderbuffer{} }
+func (*binaryClassRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRenderbuffer(e, obj.(*Renderbuffer))
+}
+func (*binaryClassRenderbuffer) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Renderbuffer{}
+	return obj, doDecodeRenderbuffer(d, obj)
+}
+func (*binaryClassRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRenderbuffer(d, obj.(*Renderbuffer))
+}
+func (*binaryClassRenderbuffer) Skip(d binary.Decoder) error { return doSkipRenderbuffer(d) }
+
+type binaryClassTexture struct{}
+
+func (*Texture) Class() binary.Class {
+	return (*binaryClassTexture)(nil)
+}
+func doEncodeTexture(e binary.Encoder, o *Texture) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Kind)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Format)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.Texture2D))); err != nil {
+		return err
+	}
+	for k, v := range o.Texture2D {
+		if err := e.Int32(k); err != nil {
+			return err
+		}
+		if err := e.Value(&v); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.Cubemap))); err != nil {
+		return err
+	}
+	for k, v := range o.Cubemap {
+		if err := e.Int32(k); err != nil {
+			return err
+		}
+		if err := e.Value(&v); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(o.MagFilter)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.MinFilter)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.WrapS)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.WrapT)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SwizzleR)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SwizzleG)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SwizzleB)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.SwizzleA)); err != nil {
+		return err
+	}
+	if err := e.Float32(o.MaxAnisotropy); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeTexture(d binary.Decoder, o *Texture) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Kind = TextureKind(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Format = ImageTexelFormat(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Texture2D = make(Image_s32Map, count)
+		m := o.Texture2D
+		for i := uint32(0); i < count; i++ {
+			var k int32
+			var v Image
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				k = int32(obj)
+			}
+			if err := d.Value(&v); err != nil {
+				return err
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Cubemap = make(CubemapLevel_s32Map, count)
+		m := o.Cubemap
+		for i := uint32(0); i < count; i++ {
+			var k int32
+			var v CubemapLevel
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				k = int32(obj)
+			}
+			if err := d.Value(&v); err != nil {
+				return err
+			}
+			m[k] = v
+		}
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.MagFilter = TextureFilterMode(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.MinFilter = TextureFilterMode(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.WrapS = TextureWrapMode(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.WrapT = TextureWrapMode(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SwizzleR = TexelComponent(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SwizzleG = TexelComponent(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SwizzleB = TexelComponent(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.SwizzleA = TexelComponent(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.MaxAnisotropy = float32(obj)
+	}
+	return nil
+}
+func doSkipTexture(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+			if err := d.SkipValue((*Image)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+			if err := d.SkipValue((*CubemapLevel)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
+func (*binaryClassTexture) New() binary.Object { return &Texture{} }
+func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTexture(e, obj.(*Texture))
+}
+func (*binaryClassTexture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Texture{}
+	return obj, doDecodeTexture(d, obj)
+}
+func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTexture(d, obj.(*Texture))
+}
+func (*binaryClassTexture) Skip(d binary.Decoder) error { return doSkipTexture(d) }
+
+type binaryClassShader struct{}
+
+func (*Shader) Class() binary.Class {
+	return (*binaryClassShader)(nil)
+}
+func doEncodeShader(e binary.Encoder, o *Shader) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Binary); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Compiled); err != nil {
+		return err
+	}
+	if err := e.Bool(o.Deletable); err != nil {
+		return err
+	}
+	if err := e.String(o.InfoLog); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.Source))); err != nil {
+		return err
+	}
+	for i := range o.Source {
+		if err := e.String(o.Source[i]); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeShader(d binary.Decoder, o *Shader) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.Binary); err != nil {
+		return err
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Compiled = bool(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Deletable = bool(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.InfoLog = string(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Source = make([]string, count)
+		for i := range o.Source {
+			if obj, err := d.String(); err != nil {
+				return err
+			} else {
+				o.Source[i] = string(obj)
+			}
+		}
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = ShaderType(obj)
+	}
+	return nil
+}
+func doSkipShader(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipString(); err != nil {
+				return err
+			}
+		}
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassShader) ID() binary.ID      { return binaryIDShader }
+func (*binaryClassShader) New() binary.Object { return &Shader{} }
+func (*binaryClassShader) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeShader(e, obj.(*Shader))
+}
+func (*binaryClassShader) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Shader{}
+	return obj, doDecodeShader(d, obj)
+}
+func (*binaryClassShader) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeShader(d, obj.(*Shader))
+}
+func (*binaryClassShader) Skip(d binary.Decoder) error { return doSkipShader(d) }
+
+type binaryClassVertexAttribute struct{}
+
+func (*VertexAttribute) Class() binary.Class {
+	return (*binaryClassVertexAttribute)(nil)
+}
+func doEncodeVertexAttribute(e binary.Encoder, o *VertexAttribute) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.Int32(o.VectorCount); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.VectorCount = int32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = ShaderAttribType(obj)
+	}
+	return nil
+}
+func doSkipVertexAttribute(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVertexAttribute) ID() binary.ID      { return binaryIDVertexAttribute }
+func (*binaryClassVertexAttribute) New() binary.Object { return &VertexAttribute{} }
+func (*binaryClassVertexAttribute) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexAttribute(e, obj.(*VertexAttribute))
+}
+func (*binaryClassVertexAttribute) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexAttribute{}
+	return obj, doDecodeVertexAttribute(d, obj)
+}
+func (*binaryClassVertexAttribute) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexAttribute(d, obj.(*VertexAttribute))
+}
+func (*binaryClassVertexAttribute) Skip(d binary.Decoder) error { return doSkipVertexAttribute(d) }
+
+type binaryClassVec2f struct{}
+
+func (*Vec2f) Class() binary.Class {
+	return (*binaryClassVec2f)(nil)
+}
+func doEncodeVec2f(e binary.Encoder, o *Vec2f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Float32(o.X); err != nil {
+		return err
+	}
+	if err := e.Float32(o.Y); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2f(d binary.Decoder, o *Vec2f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.X = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Y = float32(obj)
+	}
+	return nil
+}
+func doSkipVec2f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2f) ID() binary.ID      { return binaryIDVec2f }
+func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
+func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2f(e, obj.(*Vec2f))
+}
+func (*binaryClassVec2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2f{}
+	return obj, doDecodeVec2f(d, obj)
+}
+func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2f(d, obj.(*Vec2f))
+}
+func (*binaryClassVec2f) Skip(d binary.Decoder) error { return doSkipVec2f(d) }
+
+type binaryClassVec3f struct{}
+
+func (*Vec3f) Class() binary.Class {
+	return (*binaryClassVec3f)(nil)
+}
+func doEncodeVec3f(e binary.Encoder, o *Vec3f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Float32(o.X); err != nil {
+		return err
+	}
+	if err := e.Float32(o.Y); err != nil {
+		return err
+	}
+	if err := e.Float32(o.Z); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3f(d binary.Decoder, o *Vec3f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.X = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Y = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Z = float32(obj)
+	}
+	return nil
+}
+func doSkipVec3f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3f) ID() binary.ID      { return binaryIDVec3f }
+func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
+func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3f(e, obj.(*Vec3f))
+}
+func (*binaryClassVec3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3f{}
+	return obj, doDecodeVec3f(d, obj)
+}
+func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3f(d, obj.(*Vec3f))
+}
+func (*binaryClassVec3f) Skip(d binary.Decoder) error { return doSkipVec3f(d) }
+
+type binaryClassVec4f struct{}
+
+func (*Vec4f) Class() binary.Class {
+	return (*binaryClassVec4f)(nil)
+}
+func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Float32(o.X); err != nil {
+		return err
+	}
+	if err := e.Float32(o.Y); err != nil {
+		return err
+	}
+	if err := e.Float32(o.Z); err != nil {
+		return err
+	}
+	if err := e.Float32(o.W); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.X = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Y = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.Z = float32(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.W = float32(obj)
+	}
+	return nil
+}
+func doSkipVec4f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
+func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
+func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4f(e, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4f{}
+	return obj, doDecodeVec4f(d, obj)
+}
+func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4f(d, obj.(*Vec4f))
+}
+func (*binaryClassVec4f) Skip(d binary.Decoder) error { return doSkipVec4f(d) }
+
+type binaryClassVec2i struct{}
+
+func (*Vec2i) Class() binary.Class {
+	return (*binaryClassVec2i)(nil)
+}
+func doEncodeVec2i(e binary.Encoder, o *Vec2i) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Int32(o.X); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Y); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec2i(d binary.Decoder, o *Vec2i) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.X = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Y = int32(obj)
+	}
+	return nil
+}
+func doSkipVec2i(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec2i) ID() binary.ID      { return binaryIDVec2i }
+func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
+func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec2i(e, obj.(*Vec2i))
+}
+func (*binaryClassVec2i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec2i{}
+	return obj, doDecodeVec2i(d, obj)
+}
+func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec2i(d, obj.(*Vec2i))
+}
+func (*binaryClassVec2i) Skip(d binary.Decoder) error { return doSkipVec2i(d) }
+
+type binaryClassVec3i struct{}
+
+func (*Vec3i) Class() binary.Class {
+	return (*binaryClassVec3i)(nil)
+}
+func doEncodeVec3i(e binary.Encoder, o *Vec3i) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Int32(o.X); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Y); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Z); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec3i(d binary.Decoder, o *Vec3i) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.X = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Y = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Z = int32(obj)
+	}
+	return nil
+}
+func doSkipVec3i(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec3i) ID() binary.ID      { return binaryIDVec3i }
+func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
+func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec3i(e, obj.(*Vec3i))
+}
+func (*binaryClassVec3i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec3i{}
+	return obj, doDecodeVec3i(d, obj)
+}
+func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec3i(d, obj.(*Vec3i))
+}
+func (*binaryClassVec3i) Skip(d binary.Decoder) error { return doSkipVec3i(d) }
+
+type binaryClassVec4i struct{}
+
+func (*Vec4i) Class() binary.Class {
+	return (*binaryClassVec4i)(nil)
+}
+func doEncodeVec4i(e binary.Encoder, o *Vec4i) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Int32(o.X); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Y); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Z); err != nil {
+		return err
+	}
+	if err := e.Int32(o.W); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVec4i(d binary.Decoder, o *Vec4i) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.X = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Y = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Z = int32(obj)
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.W = int32(obj)
+	}
+	return nil
+}
+func doSkipVec4i(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVec4i) ID() binary.ID      { return binaryIDVec4i }
+func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
+func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVec4i(e, obj.(*Vec4i))
+}
+func (*binaryClassVec4i) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Vec4i{}
+	return obj, doDecodeVec4i(d, obj)
+}
+func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVec4i(d, obj.(*Vec4i))
+}
+func (*binaryClassVec4i) Skip(d binary.Decoder) error { return doSkipVec4i(d) }
+
+type binaryClassMat2f struct{}
+
+func (*Mat2f) Class() binary.Class {
+	return (*binaryClassMat2f)(nil)
+}
+func doEncodeMat2f(e binary.Encoder, o *Mat2f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col1); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat2f(d binary.Decoder, o *Mat2f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col1); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat2f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat2f) ID() binary.ID      { return binaryIDMat2f }
+func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
+func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat2f(e, obj.(*Mat2f))
+}
+func (*binaryClassMat2f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat2f{}
+	return obj, doDecodeMat2f(d, obj)
+}
+func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat2f(d, obj.(*Mat2f))
+}
+func (*binaryClassMat2f) Skip(d binary.Decoder) error { return doSkipMat2f(d) }
+
+type binaryClassMat3f struct{}
+
+func (*Mat3f) Class() binary.Class {
+	return (*binaryClassMat3f)(nil)
+}
+func doEncodeMat3f(e binary.Encoder, o *Mat3f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col1); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col2); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat3f(d binary.Decoder, o *Mat3f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col1); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col2); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat3f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat3f) ID() binary.ID      { return binaryIDMat3f }
+func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
+func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat3f(e, obj.(*Mat3f))
+}
+func (*binaryClassMat3f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat3f{}
+	return obj, doDecodeMat3f(d, obj)
+}
+func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat3f(d, obj.(*Mat3f))
+}
+func (*binaryClassMat3f) Skip(d binary.Decoder) error { return doSkipMat3f(d) }
+
+type binaryClassMat4f struct{}
+
+func (*Mat4f) Class() binary.Class {
+	return (*binaryClassMat4f)(nil)
+}
+func doEncodeMat4f(e binary.Encoder, o *Mat4f) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col1); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col2); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Col3); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeMat4f(d binary.Decoder, o *Mat4f) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.Col0); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col1); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col2); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Col3); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipMat4f(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassMat4f) ID() binary.ID      { return binaryIDMat4f }
+func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
+func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeMat4f(e, obj.(*Mat4f))
+}
+func (*binaryClassMat4f) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Mat4f{}
+	return obj, doDecodeMat4f(d, obj)
+}
+func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeMat4f(d, obj.(*Mat4f))
+}
+func (*binaryClassMat4f) Skip(d binary.Decoder) error { return doSkipMat4f(d) }
+
+type binaryClassUniformValue struct{}
+
+func (*UniformValue) Class() binary.Class {
+	return (*binaryClassUniformValue)(nil)
+}
+func doEncodeUniformValue(e binary.Encoder, o *UniformValue) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Float32(o.F32); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec2f); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec3f); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec4f); err != nil {
+		return err
+	}
+	if err := e.Int32(o.S32); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec2i); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec3i); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Vec4i); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Mat2f); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Mat3f); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Mat4f); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeUniformValue(d binary.Decoder, o *UniformValue) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.Float32(); err != nil {
+		return err
+	} else {
+		o.F32 = float32(obj)
+	}
+	if err := d.Value(&o.Vec2f); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Vec3f); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Vec4f); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.S32 = int32(obj)
+	}
+	if err := d.Value(&o.Vec2i); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Vec3i); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Vec4i); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Mat2f); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Mat3f); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Mat4f); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipUniformValue(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Float32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec2i)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec3i)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Vec4i)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Mat2f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Mat3f)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Mat4f)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassUniformValue) ID() binary.ID      { return binaryIDUniformValue }
+func (*binaryClassUniformValue) New() binary.Object { return &UniformValue{} }
+func (*binaryClassUniformValue) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeUniformValue(e, obj.(*UniformValue))
+}
+func (*binaryClassUniformValue) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &UniformValue{}
+	return obj, doDecodeUniformValue(d, obj)
+}
+func (*binaryClassUniformValue) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeUniformValue(d, obj.(*UniformValue))
+}
+func (*binaryClassUniformValue) Skip(d binary.Decoder) error { return doSkipUniformValue(d) }
+
+type binaryClassUniform struct{}
+
+func (*Uniform) Class() binary.Class {
+	return (*binaryClassUniform)(nil)
+}
+func doEncodeUniform(e binary.Encoder, o *Uniform) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Type)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeUniform(d binary.Decoder, o *Uniform) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Type = ShaderUniformType(obj)
+	}
+	if err := d.Value(&o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipUniform(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*UniformValue)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassUniform) ID() binary.ID      { return binaryIDUniform }
+func (*binaryClassUniform) New() binary.Object { return &Uniform{} }
+func (*binaryClassUniform) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeUniform(e, obj.(*Uniform))
+}
+func (*binaryClassUniform) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Uniform{}
+	return obj, doDecodeUniform(d, obj)
+}
+func (*binaryClassUniform) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeUniform(d, obj.(*Uniform))
+}
+func (*binaryClassUniform) Skip(d binary.Decoder) error { return doSkipUniform(d) }
+
+type binaryClassProgram struct{}
+
+func (*Program) Class() binary.Class {
+	return (*binaryClassProgram)(nil)
+}
+func doEncodeProgram(e binary.Encoder, o *Program) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.Shaders))); err != nil {
+		return err
+	}
+	for k, v := range o.Shaders {
+		if err := e.Uint32(uint32(k)); err != nil {
+			return err
+		}
+		if err := e.Uint32(uint32(v)); err != nil {
+			return err
+		}
+	}
+	if err := e.Bool(o.Linked); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Binary); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(len(o.AttributeBindings))); err != nil {
+		return err
+	}
+	for k, v := range o.AttributeBindings {
+		if err := e.String(k); err != nil {
+			return err
+		}
+		if err := e.Uint32(uint32(v)); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.Attributes))); err != nil {
+		return err
+	}
+	for k, v := range o.Attributes {
+		if err := e.Int32(k); err != nil {
+			return err
+		}
+		if err := e.Value(&v); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.Uniforms))); err != nil {
+		return err
+	}
+	for k, v := range o.Uniforms {
+		if err := e.Int32(int32(k)); err != nil {
+			return err
+		}
+		if err := e.Value(&v); err != nil {
+			return err
+		}
+	}
+	if err := e.String(o.InfoLog); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeProgram(d binary.Decoder, o *Program) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Shaders = make(ShaderId_ShaderTypeMap, count)
+		m := o.Shaders
+		for i := uint32(0); i < count; i++ {
+			var k ShaderType
+			var v ShaderId
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				k = ShaderType(obj)
+			}
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				v = ShaderId(obj)
+			}
+			m[k] = v
+		}
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.Linked = bool(obj)
+	}
+	if err := d.Value(&o.Binary); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.AttributeBindings = make(AttributeLocation_CharBufferMap, count)
+		m := o.AttributeBindings
+		for i := uint32(0); i < count; i++ {
+			var k string
+			var v AttributeLocation
+			if obj, err := d.String(); err != nil {
+				return err
+			} else {
+				k = string(obj)
+			}
+			if obj, err := d.Uint32(); err != nil {
+				return err
+			} else {
+				v = AttributeLocation(obj)
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Attributes = make(VertexAttribute_s32Map, count)
+		m := o.Attributes
+		for i := uint32(0); i < count; i++ {
+			var k int32
+			var v VertexAttribute
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				k = int32(obj)
+			}
+			if err := d.Value(&v); err != nil {
+				return err
+			}
+			m[k] = v
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Uniforms = make(Uniform_UniformLocationMap, count)
+		m := o.Uniforms
+		for i := uint32(0); i < count; i++ {
+			var k UniformLocation
+			var v Uniform
+			if obj, err := d.Int32(); err != nil {
+				return err
+			} else {
+				k = UniformLocation(obj)
+			}
+			if err := d.Value(&v); err != nil {
+				return err
+			}
+			m[k] = v
+		}
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.InfoLog = string(obj)
+	}
+	return nil
+}
+func doSkipProgram(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
+		return err
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipString(); err != nil {
+				return err
+			}
+			if _, err := d.Uint32(); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+			if err := d.SkipValue((*VertexAttribute)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if _, err := d.Int32(); err != nil {
+				return err
+			}
+			if err := d.SkipValue((*Uniform)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassProgram) ID() binary.ID      { return binaryIDProgram }
+func (*binaryClassProgram) New() binary.Object { return &Program{} }
+func (*binaryClassProgram) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeProgram(e, obj.(*Program))
+}
+func (*binaryClassProgram) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Program{}
+	return obj, doDecodeProgram(d, obj)
+}
+func (*binaryClassProgram) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeProgram(d, obj.(*Program))
+}
+func (*binaryClassProgram) Skip(d binary.Decoder) error { return doSkipProgram(d) }
+
+type binaryClassVertexArray struct{}
+
+func (*VertexArray) Class() binary.Class {
+	return (*binaryClassVertexArray)(nil)
+}
+func doEncodeVertexArray(e binary.Encoder, o *VertexArray) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVertexArray(d binary.Decoder, o *VertexArray) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	return nil
+}
+func doSkipVertexArray(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVertexArray) ID() binary.ID      { return binaryIDVertexArray }
+func (*binaryClassVertexArray) New() binary.Object { return &VertexArray{} }
+func (*binaryClassVertexArray) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVertexArray(e, obj.(*VertexArray))
+}
+func (*binaryClassVertexArray) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &VertexArray{}
+	return obj, doDecodeVertexArray(d, obj)
+}
+func (*binaryClassVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVertexArray(d, obj.(*VertexArray))
+}
+func (*binaryClassVertexArray) Skip(d binary.Decoder) error { return doSkipVertexArray(d) }
+
+type binaryClassQuery struct{}
+
+func (*Query) Class() binary.Class {
+	return (*binaryClassQuery)(nil)
+}
+func doEncodeQuery(e binary.Encoder, o *Query) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeQuery(d binary.Decoder, o *Query) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	return nil
+}
+func doSkipQuery(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassQuery) ID() binary.ID      { return binaryIDQuery }
+func (*binaryClassQuery) New() binary.Object { return &Query{} }
+func (*binaryClassQuery) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeQuery(e, obj.(*Query))
+}
+func (*binaryClassQuery) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Query{}
+	return obj, doDecodeQuery(d, obj)
+}
+func (*binaryClassQuery) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeQuery(d, obj.(*Query))
+}
+func (*binaryClassQuery) Skip(d binary.Decoder) error { return doSkipQuery(d) }
 
 type binaryClassObjects struct{}
 
@@ -16861,1403 +18659,6 @@ func (*binaryClassInit) DecodeTo(d binary.Decoder, obj binary.Object) error {
 }
 func (*binaryClassInit) Skip(d binary.Decoder) error { return doSkipInit(d) }
 
-type binaryClassVec2f struct{}
-
-func (*Vec2f) Class() binary.Class {
-	return (*binaryClassVec2f)(nil)
-}
-func doEncodeVec2f(e binary.Encoder, o *Vec2f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec2f(d binary.Decoder, o *Vec2f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	return nil
-}
-func doSkipVec2f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec2f) ID() binary.ID      { return binaryIDVec2f }
-func (*binaryClassVec2f) New() binary.Object { return &Vec2f{} }
-func (*binaryClassVec2f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec2f(e, obj.(*Vec2f))
-}
-func (*binaryClassVec2f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec2f{}
-	return obj, doDecodeVec2f(d, obj)
-}
-func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec2f(d, obj.(*Vec2f))
-}
-func (*binaryClassVec2f) Skip(d binary.Decoder) error { return doSkipVec2f(d) }
-
-type binaryClassMat2f struct{}
-
-func (*Mat2f) Class() binary.Class {
-	return (*binaryClassMat2f)(nil)
-}
-func doEncodeMat2f(e binary.Encoder, o *Mat2f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat2f(d binary.Decoder, o *Mat2f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat2f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat2f) ID() binary.ID      { return binaryIDMat2f }
-func (*binaryClassMat2f) New() binary.Object { return &Mat2f{} }
-func (*binaryClassMat2f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat2f(e, obj.(*Mat2f))
-}
-func (*binaryClassMat2f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat2f{}
-	return obj, doDecodeMat2f(d, obj)
-}
-func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat2f(d, obj.(*Mat2f))
-}
-func (*binaryClassMat2f) Skip(d binary.Decoder) error { return doSkipMat2f(d) }
-
-type binaryClassVec3f struct{}
-
-func (*Vec3f) Class() binary.Class {
-	return (*binaryClassVec3f)(nil)
-}
-func doEncodeVec3f(e binary.Encoder, o *Vec3f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec3f(d binary.Decoder, o *Vec3f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Z = float32(obj)
-	}
-	return nil
-}
-func doSkipVec3f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec3f) ID() binary.ID      { return binaryIDVec3f }
-func (*binaryClassVec3f) New() binary.Object { return &Vec3f{} }
-func (*binaryClassVec3f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec3f(e, obj.(*Vec3f))
-}
-func (*binaryClassVec3f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec3f{}
-	return obj, doDecodeVec3f(d, obj)
-}
-func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec3f(d, obj.(*Vec3f))
-}
-func (*binaryClassVec3f) Skip(d binary.Decoder) error { return doSkipVec3f(d) }
-
-type binaryClassMat3f struct{}
-
-func (*Mat3f) Class() binary.Class {
-	return (*binaryClassMat3f)(nil)
-}
-func doEncodeMat3f(e binary.Encoder, o *Mat3f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col2); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat3f(d binary.Decoder, o *Mat3f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col2); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat3f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat3f) ID() binary.ID      { return binaryIDMat3f }
-func (*binaryClassMat3f) New() binary.Object { return &Mat3f{} }
-func (*binaryClassMat3f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat3f(e, obj.(*Mat3f))
-}
-func (*binaryClassMat3f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat3f{}
-	return obj, doDecodeMat3f(d, obj)
-}
-func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat3f(d, obj.(*Mat3f))
-}
-func (*binaryClassMat3f) Skip(d binary.Decoder) error { return doSkipMat3f(d) }
-
-type binaryClassVec4f struct{}
-
-func (*Vec4f) Class() binary.Class {
-	return (*binaryClassVec4f)(nil)
-}
-func doEncodeVec4f(e binary.Encoder, o *Vec4f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.X); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Float32(o.Z); err != nil {
-		return err
-	}
-	if err := e.Float32(o.W); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec4f(d binary.Decoder, o *Vec4f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.X = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Y = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.Z = float32(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.W = float32(obj)
-	}
-	return nil
-}
-func doSkipVec4f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec4f) ID() binary.ID      { return binaryIDVec4f }
-func (*binaryClassVec4f) New() binary.Object { return &Vec4f{} }
-func (*binaryClassVec4f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec4f(e, obj.(*Vec4f))
-}
-func (*binaryClassVec4f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec4f{}
-	return obj, doDecodeVec4f(d, obj)
-}
-func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec4f(d, obj.(*Vec4f))
-}
-func (*binaryClassVec4f) Skip(d binary.Decoder) error { return doSkipVec4f(d) }
-
-type binaryClassMat4f struct{}
-
-func (*Mat4f) Class() binary.Class {
-	return (*binaryClassMat4f)(nil)
-}
-func doEncodeMat4f(e binary.Encoder, o *Mat4f) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col2); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Col3); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeMat4f(d binary.Decoder, o *Mat4f) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Col0); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col1); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col2); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Col3); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipMat4f(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassMat4f) ID() binary.ID      { return binaryIDMat4f }
-func (*binaryClassMat4f) New() binary.Object { return &Mat4f{} }
-func (*binaryClassMat4f) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeMat4f(e, obj.(*Mat4f))
-}
-func (*binaryClassMat4f) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Mat4f{}
-	return obj, doDecodeMat4f(d, obj)
-}
-func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeMat4f(d, obj.(*Mat4f))
-}
-func (*binaryClassMat4f) Skip(d binary.Decoder) error { return doSkipMat4f(d) }
-
-type binaryClassVertexAttribute struct{}
-
-func (*VertexAttribute) Class() binary.Class {
-	return (*binaryClassVertexAttribute)(nil)
-}
-func doEncodeVertexAttribute(e binary.Encoder, o *VertexAttribute) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Int32(o.VectorCount); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVertexAttribute(d binary.Decoder, o *VertexAttribute) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.VectorCount = int32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Type = ShaderAttribType(obj)
-	}
-	return nil
-}
-func doSkipVertexAttribute(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVertexAttribute) ID() binary.ID      { return binaryIDVertexAttribute }
-func (*binaryClassVertexAttribute) New() binary.Object { return &VertexAttribute{} }
-func (*binaryClassVertexAttribute) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVertexAttribute(e, obj.(*VertexAttribute))
-}
-func (*binaryClassVertexAttribute) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &VertexAttribute{}
-	return obj, doDecodeVertexAttribute(d, obj)
-}
-func (*binaryClassVertexAttribute) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVertexAttribute(d, obj.(*VertexAttribute))
-}
-func (*binaryClassVertexAttribute) Skip(d binary.Decoder) error { return doSkipVertexAttribute(d) }
-
-type binaryClassVec2i struct{}
-
-func (*Vec2i) Class() binary.Class {
-	return (*binaryClassVec2i)(nil)
-}
-func doEncodeVec2i(e binary.Encoder, o *Vec2i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec2i(d binary.Decoder, o *Vec2i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	return nil
-}
-func doSkipVec2i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec2i) ID() binary.ID      { return binaryIDVec2i }
-func (*binaryClassVec2i) New() binary.Object { return &Vec2i{} }
-func (*binaryClassVec2i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec2i(e, obj.(*Vec2i))
-}
-func (*binaryClassVec2i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec2i{}
-	return obj, doDecodeVec2i(d, obj)
-}
-func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec2i(d, obj.(*Vec2i))
-}
-func (*binaryClassVec2i) Skip(d binary.Decoder) error { return doSkipVec2i(d) }
-
-type binaryClassVec3i struct{}
-
-func (*Vec3i) Class() binary.Class {
-	return (*binaryClassVec3i)(nil)
-}
-func doEncodeVec3i(e binary.Encoder, o *Vec3i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Z); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec3i(d binary.Decoder, o *Vec3i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Z = int32(obj)
-	}
-	return nil
-}
-func doSkipVec3i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec3i) ID() binary.ID      { return binaryIDVec3i }
-func (*binaryClassVec3i) New() binary.Object { return &Vec3i{} }
-func (*binaryClassVec3i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec3i(e, obj.(*Vec3i))
-}
-func (*binaryClassVec3i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec3i{}
-	return obj, doDecodeVec3i(d, obj)
-}
-func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec3i(d, obj.(*Vec3i))
-}
-func (*binaryClassVec3i) Skip(d binary.Decoder) error { return doSkipVec3i(d) }
-
-type binaryClassVec4i struct{}
-
-func (*Vec4i) Class() binary.Class {
-	return (*binaryClassVec4i)(nil)
-}
-func doEncodeVec4i(e binary.Encoder, o *Vec4i) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.X); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Y); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Z); err != nil {
-		return err
-	}
-	if err := e.Int32(o.W); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVec4i(d binary.Decoder, o *Vec4i) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.X = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Y = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Z = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.W = int32(obj)
-	}
-	return nil
-}
-func doSkipVec4i(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVec4i) ID() binary.ID      { return binaryIDVec4i }
-func (*binaryClassVec4i) New() binary.Object { return &Vec4i{} }
-func (*binaryClassVec4i) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVec4i(e, obj.(*Vec4i))
-}
-func (*binaryClassVec4i) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Vec4i{}
-	return obj, doDecodeVec4i(d, obj)
-}
-func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVec4i(d, obj.(*Vec4i))
-}
-func (*binaryClassVec4i) Skip(d binary.Decoder) error { return doSkipVec4i(d) }
-
-type binaryClassUniformValue struct{}
-
-func (*UniformValue) Class() binary.Class {
-	return (*binaryClassUniformValue)(nil)
-}
-func doEncodeUniformValue(e binary.Encoder, o *UniformValue) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.F32); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec2f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec3f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec4f); err != nil {
-		return err
-	}
-	if err := e.Int32(o.S32); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec2i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec3i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Vec4i); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat2f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat3f); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Mat4f); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUniformValue(d binary.Decoder, o *UniformValue) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.F32 = float32(obj)
-	}
-	if err := d.Value(&o.Vec2f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec3f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec4f); err != nil {
-		return err
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.S32 = int32(obj)
-	}
-	if err := d.Value(&o.Vec2i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec3i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Vec4i); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat2f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat3f); err != nil {
-		return err
-	}
-	if err := d.Value(&o.Mat4f); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipUniformValue(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4f)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec2i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec3i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Vec4i)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat2f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat3f)(nil)); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*Mat4f)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUniformValue) ID() binary.ID      { return binaryIDUniformValue }
-func (*binaryClassUniformValue) New() binary.Object { return &UniformValue{} }
-func (*binaryClassUniformValue) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUniformValue(e, obj.(*UniformValue))
-}
-func (*binaryClassUniformValue) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &UniformValue{}
-	return obj, doDecodeUniformValue(d, obj)
-}
-func (*binaryClassUniformValue) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUniformValue(d, obj.(*UniformValue))
-}
-func (*binaryClassUniformValue) Skip(d binary.Decoder) error { return doSkipUniformValue(d) }
-
-type binaryClassUniform struct{}
-
-func (*Uniform) Class() binary.Class {
-	return (*binaryClassUniform)(nil)
-}
-func doEncodeUniform(e binary.Encoder, o *Uniform) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Type)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeUniform(d binary.Decoder, o *Uniform) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Type = ShaderUniformType(obj)
-	}
-	if err := d.Value(&o.Value); err != nil {
-		return err
-	}
-	return nil
-}
-func doSkipUniform(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*UniformValue)(nil)); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassUniform) ID() binary.ID      { return binaryIDUniform }
-func (*binaryClassUniform) New() binary.Object { return &Uniform{} }
-func (*binaryClassUniform) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeUniform(e, obj.(*Uniform))
-}
-func (*binaryClassUniform) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Uniform{}
-	return obj, doDecodeUniform(d, obj)
-}
-func (*binaryClassUniform) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeUniform(d, obj.(*Uniform))
-}
-func (*binaryClassUniform) Skip(d binary.Decoder) error { return doSkipUniform(d) }
-
-type binaryClassProgram struct{}
-
-func (*Program) Class() binary.Class {
-	return (*binaryClassProgram)(nil)
-}
-func doEncodeProgram(e binary.Encoder, o *Program) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Shaders))); err != nil {
-		return err
-	}
-	for k, v := range o.Shaders {
-		if err := e.Uint32(uint32(k)); err != nil {
-			return err
-		}
-		if err := e.Uint32(uint32(v)); err != nil {
-			return err
-		}
-	}
-	if err := e.Bool(o.Linked); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Binary); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.AttributeBindings))); err != nil {
-		return err
-	}
-	for k, v := range o.AttributeBindings {
-		if err := e.String(k); err != nil {
-			return err
-		}
-		if err := e.Uint32(uint32(v)); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.Attributes))); err != nil {
-		return err
-	}
-	for k, v := range o.Attributes {
-		if err := e.Int32(k); err != nil {
-			return err
-		}
-		if err := e.Value(&v); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.Uniforms))); err != nil {
-		return err
-	}
-	for k, v := range o.Uniforms {
-		if err := e.Int32(int32(k)); err != nil {
-			return err
-		}
-		if err := e.Value(&v); err != nil {
-			return err
-		}
-	}
-	if err := e.String(o.InfoLog); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeProgram(d binary.Decoder, o *Program) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Shaders = make(ShaderId_ShaderTypeMap, count)
-		m := o.Shaders
-		for i := uint32(0); i < count; i++ {
-			var k ShaderType
-			var v ShaderId
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				k = ShaderType(obj)
-			}
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				v = ShaderId(obj)
-			}
-			m[k] = v
-		}
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Linked = bool(obj)
-	}
-	if err := d.Value(&o.Binary); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.AttributeBindings = make(AttributeLocation_CharBufferMap, count)
-		m := o.AttributeBindings
-		for i := uint32(0); i < count; i++ {
-			var k string
-			var v AttributeLocation
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				k = string(obj)
-			}
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				v = AttributeLocation(obj)
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Attributes = make(VertexAttribute_s32Map, count)
-		m := o.Attributes
-		for i := uint32(0); i < count; i++ {
-			var k int32
-			var v VertexAttribute
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				k = int32(obj)
-			}
-			if err := d.Value(&v); err != nil {
-				return err
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Uniforms = make(Uniform_UniformLocationMap, count)
-		m := o.Uniforms
-		for i := uint32(0); i < count; i++ {
-			var k UniformLocation
-			var v Uniform
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				k = UniformLocation(obj)
-			}
-			if err := d.Value(&v); err != nil {
-				return err
-			}
-			m[k] = v
-		}
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.InfoLog = string(obj)
-	}
-	return nil
-}
-func doSkipProgram(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-		}
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-			if err := d.SkipValue((*VertexAttribute)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-			if err := d.SkipValue((*Uniform)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassProgram) ID() binary.ID      { return binaryIDProgram }
-func (*binaryClassProgram) New() binary.Object { return &Program{} }
-func (*binaryClassProgram) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeProgram(e, obj.(*Program))
-}
-func (*binaryClassProgram) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Program{}
-	return obj, doDecodeProgram(d, obj)
-}
-func (*binaryClassProgram) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeProgram(d, obj.(*Program))
-}
-func (*binaryClassProgram) Skip(d binary.Decoder) error { return doSkipProgram(d) }
-
-type binaryClassQuery struct{}
-
-func (*Query) Class() binary.Class {
-	return (*binaryClassQuery)(nil)
-}
-func doEncodeQuery(e binary.Encoder, o *Query) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeQuery(d binary.Decoder, o *Query) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	return nil
-}
-func doSkipQuery(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassQuery) ID() binary.ID      { return binaryIDQuery }
-func (*binaryClassQuery) New() binary.Object { return &Query{} }
-func (*binaryClassQuery) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeQuery(e, obj.(*Query))
-}
-func (*binaryClassQuery) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Query{}
-	return obj, doDecodeQuery(d, obj)
-}
-func (*binaryClassQuery) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeQuery(d, obj.(*Query))
-}
-func (*binaryClassQuery) Skip(d binary.Decoder) error { return doSkipQuery(d) }
-
-type binaryClassRenderbuffer struct{}
-
-func (*Renderbuffer) Class() binary.Class {
-	return (*binaryClassRenderbuffer)(nil)
-}
-func doEncodeRenderbuffer(e binary.Encoder, o *Renderbuffer) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Width); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Height); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Data); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Format)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeRenderbuffer(d binary.Decoder, o *Renderbuffer) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Width = int32(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Height = int32(obj)
-	}
-	if err := d.Value(&o.Data); err != nil {
-		return err
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Format = RenderbufferFormat(obj)
-	}
-	return nil
-}
-func doSkipRenderbuffer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassRenderbuffer) ID() binary.ID      { return binaryIDRenderbuffer }
-func (*binaryClassRenderbuffer) New() binary.Object { return &Renderbuffer{} }
-func (*binaryClassRenderbuffer) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeRenderbuffer(e, obj.(*Renderbuffer))
-}
-func (*binaryClassRenderbuffer) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Renderbuffer{}
-	return obj, doDecodeRenderbuffer(d, obj)
-}
-func (*binaryClassRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeRenderbuffer(d, obj.(*Renderbuffer))
-}
-func (*binaryClassRenderbuffer) Skip(d binary.Decoder) error { return doSkipRenderbuffer(d) }
-
-type binaryClassShader struct{}
-
-func (*Shader) Class() binary.Class {
-	return (*binaryClassShader)(nil)
-}
-func doEncodeShader(e binary.Encoder, o *Shader) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Value(&o.Binary); err != nil {
-		return err
-	}
-	if err := e.Bool(o.Compiled); err != nil {
-		return err
-	}
-	if err := e.Bool(o.Deletable); err != nil {
-		return err
-	}
-	if err := e.String(o.InfoLog); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Source))); err != nil {
-		return err
-	}
-	for i := range o.Source {
-		if err := e.String(o.Source[i]); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(o.Type)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeShader(d binary.Decoder, o *Shader) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if err := d.Value(&o.Binary); err != nil {
-		return err
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Compiled = bool(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Deletable = bool(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.InfoLog = string(obj)
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Source = make([]string, count)
-		for i := range o.Source {
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				o.Source[i] = string(obj)
-			}
-		}
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Type = ShaderType(obj)
-	}
-	return nil
-}
-func doSkipShader(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if err := d.SkipValue((*memory.Memory)(nil)); err != nil {
-		return err
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-		}
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassShader) ID() binary.ID      { return binaryIDShader }
-func (*binaryClassShader) New() binary.Object { return &Shader{} }
-func (*binaryClassShader) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeShader(e, obj.(*Shader))
-}
-func (*binaryClassShader) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Shader{}
-	return obj, doDecodeShader(d, obj)
-}
-func (*binaryClassShader) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeShader(d, obj.(*Shader))
-}
-func (*binaryClassShader) Skip(d binary.Decoder) error { return doSkipShader(d) }
-
 type binaryClassStartTimer struct{}
 
 func (*StartTimer) Class() binary.Class {
@@ -18368,407 +18769,6 @@ func (*binaryClassStopTimer) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeStopTimer(d, obj.(*StopTimer))
 }
 func (*binaryClassStopTimer) Skip(d binary.Decoder) error { return doSkipStopTimer(d) }
-
-type binaryClassTexture struct{}
-
-func (*Texture) Class() binary.Class {
-	return (*binaryClassTexture)(nil)
-}
-func doEncodeTexture(e binary.Encoder, o *Texture) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Kind)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Format)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(len(o.Texture2D))); err != nil {
-		return err
-	}
-	for k, v := range o.Texture2D {
-		if err := e.Int32(k); err != nil {
-			return err
-		}
-		if err := e.Value(&v); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.Cubemap))); err != nil {
-		return err
-	}
-	for k, v := range o.Cubemap {
-		if err := e.Int32(k); err != nil {
-			return err
-		}
-		if err := e.Value(&v); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(o.MagFilter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.MinFilter)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.WrapS)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.WrapT)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.SwizzleR)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.SwizzleG)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.SwizzleB)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.SwizzleA)); err != nil {
-		return err
-	}
-	if err := e.Float32(o.MaxAnisotropy); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeTexture(d binary.Decoder, o *Texture) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Kind = TextureKind(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Format = ImageTexelFormat(obj)
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Texture2D = make(Image_s32Map, count)
-		m := o.Texture2D
-		for i := uint32(0); i < count; i++ {
-			var k int32
-			var v Image
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				k = int32(obj)
-			}
-			if err := d.Value(&v); err != nil {
-				return err
-			}
-			m[k] = v
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Cubemap = make(CubemapLevel_s32Map, count)
-		m := o.Cubemap
-		for i := uint32(0); i < count; i++ {
-			var k int32
-			var v CubemapLevel
-			if obj, err := d.Int32(); err != nil {
-				return err
-			} else {
-				k = int32(obj)
-			}
-			if err := d.Value(&v); err != nil {
-				return err
-			}
-			m[k] = v
-		}
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.MagFilter = TextureFilterMode(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.MinFilter = TextureFilterMode(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.WrapS = TextureWrapMode(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.WrapT = TextureWrapMode(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.SwizzleR = TexelComponent(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.SwizzleG = TexelComponent(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.SwizzleB = TexelComponent(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.SwizzleA = TexelComponent(obj)
-	}
-	if obj, err := d.Float32(); err != nil {
-		return err
-	} else {
-		o.MaxAnisotropy = float32(obj)
-	}
-	return nil
-}
-func doSkipTexture(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-			if err := d.SkipValue((*Image)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int32(); err != nil {
-				return err
-			}
-			if err := d.SkipValue((*CubemapLevel)(nil)); err != nil {
-				return err
-			}
-		}
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Float32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassTexture) ID() binary.ID      { return binaryIDTexture }
-func (*binaryClassTexture) New() binary.Object { return &Texture{} }
-func (*binaryClassTexture) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeTexture(e, obj.(*Texture))
-}
-func (*binaryClassTexture) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &Texture{}
-	return obj, doDecodeTexture(d, obj)
-}
-func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeTexture(d, obj.(*Texture))
-}
-func (*binaryClassTexture) Skip(d binary.Decoder) error { return doSkipTexture(d) }
-
-type binaryClassVertexArray struct{}
-
-func (*VertexArray) Class() binary.Class {
-	return (*binaryClassVertexArray)(nil)
-}
-func doEncodeVertexArray(e binary.Encoder, o *VertexArray) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVertexArray(d binary.Decoder, o *VertexArray) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	return nil
-}
-func doSkipVertexArray(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVertexArray) ID() binary.ID      { return binaryIDVertexArray }
-func (*binaryClassVertexArray) New() binary.Object { return &VertexArray{} }
-func (*binaryClassVertexArray) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVertexArray(e, obj.(*VertexArray))
-}
-func (*binaryClassVertexArray) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &VertexArray{}
-	return obj, doDecodeVertexArray(d, obj)
-}
-func (*binaryClassVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVertexArray(d, obj.(*VertexArray))
-}
-func (*binaryClassVertexArray) Skip(d binary.Decoder) error { return doSkipVertexArray(d) }
-
-type binaryClassVertexAttributeArray struct{}
-
-func (*VertexAttributeArray) Class() binary.Class {
-	return (*binaryClassVertexAttributeArray)(nil)
-}
-func doEncodeVertexAttributeArray(e binary.Encoder, o *VertexAttributeArray) error {
-	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
-		return err
-	}
-	if err := e.Bool(o.Enabled); err != nil {
-		return err
-	}
-	if err := e.Uint32(o.Size); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Type)); err != nil {
-		return err
-	}
-	if err := e.Bool(o.Normalized); err != nil {
-		return err
-	}
-	if err := e.Int32(o.Stride); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Buffer)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Pointer)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeVertexAttributeArray(d binary.Decoder, o *VertexAttributeArray) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.CreatedAt = atom.ID(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Enabled = bool(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Size = uint32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Type = VertexAttribType(obj)
-	}
-	if obj, err := d.Bool(); err != nil {
-		return err
-	} else {
-		o.Normalized = bool(obj)
-	}
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.Stride = int32(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Buffer = BufferId(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Pointer = memory.Pointer(obj)
-	}
-	return nil
-}
-func doSkipVertexAttributeArray(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Bool(); err != nil {
-		return err
-	}
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassVertexAttributeArray) ID() binary.ID      { return binaryIDVertexAttributeArray }
-func (*binaryClassVertexAttributeArray) New() binary.Object { return &VertexAttributeArray{} }
-func (*binaryClassVertexAttributeArray) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeVertexAttributeArray(e, obj.(*VertexAttributeArray))
-}
-func (*binaryClassVertexAttributeArray) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &VertexAttributeArray{}
-	return obj, doDecodeVertexAttributeArray(d, obj)
-}
-func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeVertexAttributeArray(d, obj.(*VertexAttributeArray))
-}
-func (*binaryClassVertexAttributeArray) Skip(d binary.Decoder) error {
-	return doSkipVertexAttributeArray(d)
-}
 
 type binaryClassWglCreateContext struct{}
 

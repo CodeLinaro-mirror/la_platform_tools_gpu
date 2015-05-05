@@ -12,6 +12,7 @@ import (
 
 func init() {
 	registry.Add((*ApiId)(nil).Class())
+	registry.Add((*FieldInfo)(nil).Class())
 	registry.Add((*StructInfo)(nil).Class())
 	registry.Add((*ApiSchema)(nil).Class())
 	registry.Add((*ArrayInfo)(nil).Class())
@@ -34,7 +35,6 @@ func init() {
 	registry.Add((*DeviceId)(nil).Class())
 	registry.Add((*EnumEntry)(nil).Class())
 	registry.Add((*EnumInfo)(nil).Class())
-	registry.Add((*FieldInfo)(nil).Class())
 	registry.Add((*Hierarchy)(nil).Class())
 	registry.Add((*HierarchyId)(nil).Class())
 	registry.Add((*ImageInfo)(nil).Class())
@@ -93,6 +93,7 @@ func init() {
 
 var (
 	binaryIDApiId                       = binary.ID{0x20, 0x75, 0x65, 0xf1, 0x82, 0xb1, 0xe1, 0x6a, 0xcd, 0x10, 0x7f, 0x7f, 0x04, 0xee, 0x90, 0x07, 0xa3, 0x62, 0xd1, 0x41}
+	binaryIDFieldInfo                   = binary.ID{0x16, 0xdb, 0x4c, 0x57, 0x0a, 0x1f, 0xf9, 0x33, 0x7c, 0x1f, 0x03, 0x0d, 0x2a, 0xce, 0x96, 0x7e, 0xba, 0xa8, 0x22, 0xa5}
 	binaryIDStructInfo                  = binary.ID{0xf1, 0xc3, 0x58, 0x5f, 0x37, 0xfd, 0xb2, 0x84, 0xef, 0x1a, 0xf5, 0x82, 0x3d, 0xc5, 0x5a, 0x34, 0x49, 0x12, 0xd4, 0xa8}
 	binaryIDApiSchema                   = binary.ID{0x81, 0xc2, 0x28, 0xff, 0x7b, 0xad, 0x6f, 0x74, 0x5e, 0x6c, 0xf7, 0xa3, 0x21, 0xb3, 0x12, 0x26, 0x5f, 0xa7, 0x75, 0x24}
 	binaryIDArrayInfo                   = binary.ID{0xf1, 0x0b, 0xb1, 0xbf, 0x10, 0xf9, 0x53, 0x4a, 0xf6, 0x5a, 0x6f, 0xc7, 0xcb, 0xa9, 0x47, 0xfd, 0xb1, 0x23, 0x5b, 0x1d}
@@ -115,7 +116,6 @@ var (
 	binaryIDDeviceId                    = binary.ID{0x9e, 0x5b, 0x14, 0x1f, 0xa6, 0x65, 0x62, 0x62, 0x15, 0x6a, 0x39, 0xd2, 0xa4, 0x64, 0x2f, 0x00, 0x49, 0x13, 0x64, 0x20}
 	binaryIDEnumEntry                   = binary.ID{0xea, 0x7f, 0xa3, 0xef, 0xb6, 0x4c, 0x5a, 0x85, 0xc9, 0x5f, 0xb5, 0xa1, 0x28, 0xfe, 0xb3, 0xa7, 0x53, 0xae, 0xb7, 0xd0}
 	binaryIDEnumInfo                    = binary.ID{0x70, 0x04, 0x71, 0x0b, 0x05, 0x2b, 0xf9, 0xd9, 0x95, 0x26, 0xe3, 0x68, 0x08, 0x97, 0x32, 0x6d, 0xb5, 0xd4, 0xfa, 0x9e}
-	binaryIDFieldInfo                   = binary.ID{0x16, 0xdb, 0x4c, 0x57, 0x0a, 0x1f, 0xf9, 0x33, 0x7c, 0x1f, 0x03, 0x0d, 0x2a, 0xce, 0x96, 0x7e, 0xba, 0xa8, 0x22, 0xa5}
 	binaryIDHierarchy                   = binary.ID{0x4a, 0x29, 0x6b, 0x6f, 0x37, 0xca, 0x76, 0x25, 0xbc, 0x89, 0x1a, 0xea, 0x80, 0x56, 0xa9, 0x66, 0x0e, 0x1a, 0x1a, 0x97}
 	binaryIDHierarchyId                 = binary.ID{0xfd, 0x20, 0x19, 0xa0, 0xb5, 0xac, 0x49, 0xc7, 0x7d, 0x6e, 0xf8, 0x32, 0x6b, 0x78, 0x9f, 0xd7, 0x6d, 0xf0, 0x2c, 0xaf}
 	binaryIDImageInfo                   = binary.ID{0x83, 0x55, 0x77, 0x9d, 0xe7, 0x6b, 0xed, 0xd5, 0xc5, 0x3c, 0x86, 0x42, 0xfe, 0xd6, 0x1a, 0x6d, 0x2b, 0xd0, 0xfb, 0x88}
@@ -210,6 +210,62 @@ func (*binaryClassApiId) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeApiId(d, obj.(*ApiId))
 }
 func (*binaryClassApiId) Skip(d binary.Decoder) error { return doSkipApiId(d) }
+
+type binaryClassFieldInfo struct{}
+
+func (*FieldInfo) Class() binary.Class {
+	return (*binaryClassFieldInfo)(nil)
+}
+func doEncodeFieldInfo(e binary.Encoder, o *FieldInfo) error {
+	if err := e.String(o.Name); err != nil {
+		return err
+	}
+	if o.Type != nil {
+		if err := e.Object(o.Type); err != nil {
+			return err
+		}
+	} else if err := e.Object(nil); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeFieldInfo(d binary.Decoder, o *FieldInfo) error {
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Name = string(obj)
+	}
+	if obj, err := d.Object(); err != nil {
+		return err
+	} else if obj != nil {
+		o.Type = obj.(TypeInfo)
+	} else {
+		o.Type = nil
+	}
+	return nil
+}
+func doSkipFieldInfo(d binary.Decoder) error {
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	if _, err := d.SkipObject(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassFieldInfo) ID() binary.ID      { return binaryIDFieldInfo }
+func (*binaryClassFieldInfo) New() binary.Object { return &FieldInfo{} }
+func (*binaryClassFieldInfo) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeFieldInfo(e, obj.(*FieldInfo))
+}
+func (*binaryClassFieldInfo) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &FieldInfo{}
+	return obj, doDecodeFieldInfo(d, obj)
+}
+func (*binaryClassFieldInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeFieldInfo(d, obj.(*FieldInfo))
+}
+func (*binaryClassFieldInfo) Skip(d binary.Decoder) error { return doSkipFieldInfo(d) }
 
 type binaryClassStructInfo struct{}
 
@@ -1644,62 +1700,6 @@ func (*binaryClassEnumInfo) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeEnumInfo(d, obj.(*EnumInfo))
 }
 func (*binaryClassEnumInfo) Skip(d binary.Decoder) error { return doSkipEnumInfo(d) }
-
-type binaryClassFieldInfo struct{}
-
-func (*FieldInfo) Class() binary.Class {
-	return (*binaryClassFieldInfo)(nil)
-}
-func doEncodeFieldInfo(e binary.Encoder, o *FieldInfo) error {
-	if err := e.String(o.Name); err != nil {
-		return err
-	}
-	if o.Type != nil {
-		if err := e.Object(o.Type); err != nil {
-			return err
-		}
-	} else if err := e.Object(nil); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeFieldInfo(d binary.Decoder, o *FieldInfo) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.Name = string(obj)
-	}
-	if obj, err := d.Object(); err != nil {
-		return err
-	} else if obj != nil {
-		o.Type = obj.(TypeInfo)
-	} else {
-		o.Type = nil
-	}
-	return nil
-}
-func doSkipFieldInfo(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if _, err := d.SkipObject(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassFieldInfo) ID() binary.ID      { return binaryIDFieldInfo }
-func (*binaryClassFieldInfo) New() binary.Object { return &FieldInfo{} }
-func (*binaryClassFieldInfo) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeFieldInfo(e, obj.(*FieldInfo))
-}
-func (*binaryClassFieldInfo) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &FieldInfo{}
-	return obj, doDecodeFieldInfo(d, obj)
-}
-func (*binaryClassFieldInfo) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeFieldInfo(d, obj.(*FieldInfo))
-}
-func (*binaryClassFieldInfo) Skip(d binary.Decoder) error { return doSkipFieldInfo(d) }
 
 type binaryClassHierarchy struct{}
 
