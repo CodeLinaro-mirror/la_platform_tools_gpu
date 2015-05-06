@@ -28,13 +28,15 @@ limitations under the License.
   #ifndef {{$guard}}
   #define {{$guard}}
 ¶
+  #include "types.h"
+¶
   #include <memory>
-  #include <stdint.h>
   #include <string>
   #include <unordered_map>
   #include <vector>
 ¶
-  #include "types.h"
+  #include <stdint.h>
+  #include <string.h>
 ¶
   namespace gapii {«
 ¶
@@ -69,13 +71,14 @@ limitations under the License.
     {{$key  := printf "ApiType%dDeclared" $.Name}}
     {{if not (Global $key)}}
       {{Global $key "true"}}
-      {{     if IsClass     $}}{{Macro "DeclareClass"     $}}
-      {{else if IsEnum      $}}{{Macro "DeclareEnum"      $}}
-      {{else if IsPseudonym $}}{{Macro "DeclarePseudonym" $}}
-      {{else if IsMap       $}}{{Macro "DeclareMap"       $}}
-      {{else if IsPointer   $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsBuffer    $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsArray     $}}{{Macro "DeclareType"      $.ValueType}}
+      {{     if IsClass       $}}{{Macro "DeclareClass"     $}}
+      {{else if IsEnum        $}}{{Macro "DeclareEnum"      $}}
+      {{else if IsPseudonym   $}}{{Macro "DeclarePseudonym" $}}
+      {{else if IsMap         $}}{{Macro "DeclareMap"       $}}
+      {{else if IsPointer     $}}{{Macro "DeclareType"      $.To}}
+      {{else if IsBuffer      $}}{{Macro "DeclareType"      $.To}}
+      {{else if IsArray       $}}{{Macro "DeclareType"      $.ValueType}}
+      {{else if IsStaticArray $}}{{Macro "DeclareType"      $.ValueType}}
       {{else}}{{Error "DeclareType does not support type '%T'" $}}
       {{end}}
 ¶
@@ -97,13 +100,21 @@ limitations under the License.
     {{Macro "DeclareType" (TypeOf $f)}}
   {{end}}
 
-  struct {{$.Name}} {
+  struct {{Macro "C++.Type" $}} {
     {{range $f := $.Fields}}
-      inline {{$.Name}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v) { m{{$f.Name}} = v; return *this; }
+      inline {{Macro "C++.Type" $}}& Set{{$f.Name}}({{Macro "C++.Type" $f}} v{{Macro "C++.ArrayPostfix" $f}}) {
+      {{if IsStaticArray $f.Type}}
+        {{$sa := Unpack $f.Type}}
+        memcpy(m{{$f.Name}}, v, sizeof({{Macro "C++.Type" $f}}) * {{$sa.Size}});
+      {{else}}
+        m{{$f.Name}} = v;
+      {{end}}
+        return *this;
+      }
     {{end}}
 ¶
     {{range $f := $.Fields}}
-      {{Macro "C++.Type" $f}} m{{$f.Name}};
+      {{Macro "C++.Type" $f}} m{{$f.Name}}{{Macro "C++.ArrayPostfix" $f}};
     {{end}}
   };
 {{end}}
@@ -136,7 +147,7 @@ limitations under the License.
 
   {{Macro "DeclareType" $.To}}
 
-  typedef {{Macro "C++.Type" $.To}} {{$.Name}};
+  typedef {{Macro "C++.Type" $.To}} {{Macro "C++.Type" $}};
 {{end}}
 
 
@@ -152,5 +163,5 @@ limitations under the License.
   {{Macro "DeclareType" $.KeyType}}
   {{Macro "DeclareType" $.ValueType}}
 
-  typedef std::unordered_map<{{Macro "C++.Type" $.KeyType}}, {{Macro "C++.Type" $.ValueType}}> {{$.Name}};
+  typedef std::unordered_map<{{Macro "C++.Type" $.KeyType}}, {{Macro "C++.Type" $.ValueType}}> {{Macro "C++.Type" $}};
 {{end}}

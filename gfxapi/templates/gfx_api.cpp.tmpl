@@ -15,7 +15,6 @@
  */}}
 
 {{/* ---- Includes ---- */}}
-{{Include "gfx_api_common.tmpl"}}
 {{Include "cpp_common.tmpl"    }}
 
 {{$ | Macro "gfx_api.cpp" | Format (Global "clang-format") | Write "gfx_api.cpp"}}
@@ -51,7 +50,7 @@
 ¶
   {{range $c := AllCommands $}}
     {{if not (GetAnnotation $c "synthetic")}}
-      {{template "FunctionPtrDecl" $c}}
+      {{template "C++.FunctionPtrDecl" $c}} = nullptr;
     {{end}}
   {{end}}
 ¶
@@ -61,18 +60,6 @@
   }  // namespace gfxapi
   }  // namespace gapir
 ¶
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ function-pointer variable extern for a given command.
--------------------------------------------------------------------------------
-*/}}
-{{define "FunctionPtrDecl"}}
-  {{AssertType $ "Function"}}
-
-  {{Macro "FunctionPtrType" $}} {{Macro "C++.MethodName" $}} = nullptr;
 {{end}}
 
 
@@ -109,7 +96,7 @@
     {{range $c := AllCommands $}}
       {{if not (GetAnnotation $c "synthetic")}}
         {{$name := Macro "C++.MethodName" $c}}
-        {{$name}} = reinterpret_cast<{{Macro "FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
+        {{$name}} = reinterpret_cast<{{Macro "C++.FunctionPtrType" $c}}>(gapic::GetGfxProcAddress("{{$name}}", false));
       {{end}}
     {{end}}
   }
@@ -131,7 +118,7 @@
         {{range $i, $p := $.CallParameters}}
           {{if $i}}, {{end}}§
           {{if $p.Output}}%p§
-          {{else        }}{{Macro "PrintfFormatCode" (TypeOf $p)}}§
+          {{else        }}{{Macro "C++.PrintfFormatCode" (TypeOf $p)}}§
           {{end}}
         {{end}}
         )\n"§
@@ -143,7 +130,7 @@
       if ({{$name}} != nullptr) {
         {{if not (IsVoid $.Return.Type)}}
           {{Macro "C++.ReturnType" $}} return_value = {{Macro "Call" $}};
-          GAPID_INFO("Returned: {{Macro "PrintfFormatCode" $.Return.Type}}\n", return_value);
+          GAPID_INFO("Returned: {{Macro "C++.PrintfFormatCode" $.Return.Type}}\n", return_value);
           if (pushReturn) {
             stack->push<{{Macro "C++.ReturnType" $}}>(return_value);
           }
@@ -168,4 +155,19 @@
     }
   }
 ¶
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to call the specified command
+-------------------------------------------------------------------------------
+*/}}
+{{define "Call"}}
+  {{AssertType $ "Function"}}
+
+  {{Macro "C++.MethodName" $}}(§
+    {{range $i, $p := $.CallParameters}}
+      {{if $i}}, {{end}}{{$p.Name}}§
+    {{end}})
 {{end}}

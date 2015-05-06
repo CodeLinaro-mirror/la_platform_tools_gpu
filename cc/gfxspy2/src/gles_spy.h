@@ -26,8 +26,11 @@
 #include <gapic/encoder.h>
 #include <gapic/log.h>
 
-#include <stdint.h>
+#include <memory>
+#include <string>
 #include <unordered_set>
+
+#include <stdint.h>
 
 namespace gapii {
 
@@ -348,7 +351,7 @@ inline void GlesSpy::observe(const void* base, uint64_t offset, uint64_t size) {
 }
 
 inline void GlesSpy::replayCreateRenderer(uint32_t id) {
-    GAPID_INFO("replayCreateRenderer");
+    GAPID_INFO("replayCreateRenderer()\n");
     mState.replayCreateRenderer(id);
 
     mEncoder->Uint16(0);  // Type ID -- TODO: mEncoder->Id(REPLAY_CREATE_RENDERER_ID);
@@ -356,7 +359,7 @@ inline void GlesSpy::replayCreateRenderer(uint32_t id) {
 }
 
 inline void GlesSpy::replayBindRenderer(uint32_t id) {
-    GAPID_INFO("replayBindRenderer");
+    GAPID_INFO("replayBindRenderer()\n");
     mState.replayBindRenderer(id);
 
     mEncoder->Uint16(1);  // Type ID -- TODO: mEncoder->Id(REPLAY_BIND_RENDERER_ID);
@@ -366,7 +369,7 @@ inline void GlesSpy::replayBindRenderer(uint32_t id) {
 inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t color_fmt,
                                     uint32_t depth_fmt, uint32_t stencil_fmt,
                                     bool resetViewportScissor) {
-    GAPID_INFO("backbufferInfo");
+    GAPID_INFO("backbufferInfo()\n");
     mState.backbufferInfo(width, height, color_fmt, depth_fmt, stencil_fmt, resetViewportScissor);
 
     mEncoder->Uint16(2);  // Type ID -- TODO: mEncoder->Id(BACKBUFFER_INFO_ID);
@@ -379,7 +382,7 @@ inline void GlesSpy::backbufferInfo(int32_t width, int32_t height, uint32_t colo
 }
 
 inline void GlesSpy::startTimer(uint8_t index) {
-    GAPID_INFO("startTimer");
+    GAPID_INFO("startTimer()\n");
     mState.startTimer(index);
 
     mEncoder->Uint16(3);  // Type ID -- TODO: mEncoder->Id(START_TIMER_ID);
@@ -387,7 +390,7 @@ inline void GlesSpy::startTimer(uint8_t index) {
 }
 
 inline uint64_t GlesSpy::stopTimer(uint8_t index) {
-    GAPID_INFO("stopTimer");
+    GAPID_INFO("stopTimer()\n");
     uint64_t result = 0;
     mState.stopTimer(index, result);
 
@@ -399,14 +402,14 @@ inline uint64_t GlesSpy::stopTimer(uint8_t index) {
 }
 
 inline void GlesSpy::flushPostBuffer() {
-    GAPID_INFO("flushPostBuffer");
+    GAPID_INFO("flushPostBuffer()\n");
     mState.flushPostBuffer();
 
     mEncoder->Uint16(5);  // Type ID -- TODO: mEncoder->Id(FLUSH_POST_BUFFER_ID);
 }
 
 inline EGLBoolean GlesSpy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
-    GAPID_INFO("eglInitialize");
+    GAPID_INFO("eglInitialize()\n");
     EGLBoolean result = mImports.eglInitialize(dpy, major, minor);
     mState.eglInitialize(dpy, major, minor, result);
 
@@ -421,7 +424,7 @@ inline EGLBoolean GlesSpy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* 
 
 inline EGLContext GlesSpy::eglCreateContext(EGLDisplay display, EGLConfig config,
                                             EGLContext share_context, const EGLint* attrib_list) {
-    GAPID_INFO("eglCreateContext");
+    GAPID_INFO("eglCreateContext()\n");
     EGLContext result = mImports.eglCreateContext(display, config, share_context, attrib_list);
     mState.eglCreateContext(display, config, share_context, attrib_list, result);
 
@@ -445,7 +448,7 @@ inline EGLContext GlesSpy::eglCreateContext(EGLDisplay display, EGLConfig config
 
 inline EGLBoolean GlesSpy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,
                                           EGLContext context) {
-    GAPID_INFO("eglMakeCurrent");
+    GAPID_INFO("eglMakeCurrent()\n");
     EGLBoolean result = mImports.eglMakeCurrent(display, draw, read, context);
     mState.eglMakeCurrent(display, draw, read, context, result);
 
@@ -460,7 +463,7 @@ inline EGLBoolean GlesSpy::eglMakeCurrent(EGLDisplay display, EGLSurface draw, E
 }
 
 inline EGLBoolean GlesSpy::eglSwapBuffers(EGLDisplay display, const void* surface) {
-    GAPID_INFO("eglSwapBuffers");
+    GAPID_INFO("eglSwapBuffers()\n");
     EGLBoolean result = mImports.eglSwapBuffers(display, surface);
     mState.eglSwapBuffers(display, surface, result);
 
@@ -474,7 +477,7 @@ inline EGLBoolean GlesSpy::eglSwapBuffers(EGLDisplay display, const void* surfac
 
 inline EGLBoolean GlesSpy::eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint attribute,
                                            EGLint* value) {
-    GAPID_INFO("eglQuerySurface");
+    GAPID_INFO("eglQuerySurface()\n");
     EGLBoolean result = mImports.eglQuerySurface(display, surface, attribute, value);
     mState.eglQuerySurface(display, surface, attribute, value, result);
 
@@ -490,7 +493,7 @@ inline EGLBoolean GlesSpy::eglQuerySurface(EGLDisplay display, EGLSurface surfac
 
 inline GLXContext GlesSpy::glXCreateContext(const void* dpy, const void* vis, GLXContext shareList,
                                             bool direct) {
-    GAPID_INFO("glXCreateContext");
+    GAPID_INFO("glXCreateContext()\n");
     GLXContext result = mImports.glXCreateContext(dpy, vis, shareList, direct);
     mState.glXCreateContext(dpy, vis, shareList, direct, result);
 
@@ -506,7 +509,7 @@ inline GLXContext GlesSpy::glXCreateContext(const void* dpy, const void* vis, GL
 
 inline GLXContext GlesSpy::glXCreateNewContext(const void* display, const void* fbconfig,
                                                uint32_t type, GLXContext shared, bool direct) {
-    GAPID_INFO("glXCreateNewContext");
+    GAPID_INFO("glXCreateNewContext()\n");
     GLXContext result = mImports.glXCreateNewContext(display, fbconfig, type, shared, direct);
     mState.glXCreateNewContext(display, fbconfig, type, shared, direct, result);
 
@@ -523,7 +526,7 @@ inline GLXContext GlesSpy::glXCreateNewContext(const void* display, const void* 
 
 inline void GlesSpy::glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read,
                                            GLXContext ctx) {
-    GAPID_INFO("glXMakeContextCurrent");
+    GAPID_INFO("glXMakeContextCurrent()\n");
     mImports.glXMakeContextCurrent(display, draw, read, ctx);
     mState.glXMakeContextCurrent(display, draw, read, ctx);
 
@@ -535,7 +538,7 @@ inline void GlesSpy::glXMakeContextCurrent(const void* display, GLXDrawable draw
 }
 
 inline void GlesSpy::glXSwapBuffers(const void* display, GLXDrawable drawable) {
-    GAPID_INFO("glXSwapBuffers");
+    GAPID_INFO("glXSwapBuffers()\n");
     mImports.glXSwapBuffers(display, drawable);
     mState.glXSwapBuffers(display, drawable);
 
@@ -545,7 +548,7 @@ inline void GlesSpy::glXSwapBuffers(const void* display, GLXDrawable drawable) {
 }
 
 inline HGLRC GlesSpy::wglCreateContext(HDC hdc) {
-    GAPID_INFO("wglCreateContext");
+    GAPID_INFO("wglCreateContext()\n");
     HGLRC result = mImports.wglCreateContext(hdc);
     mState.wglCreateContext(hdc, result);
 
@@ -558,7 +561,7 @@ inline HGLRC GlesSpy::wglCreateContext(HDC hdc) {
 
 inline HGLRC GlesSpy::wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext,
                                                  const int* attribList) {
-    GAPID_INFO("wglCreateContextAttribsARB");
+    GAPID_INFO("wglCreateContextAttribsARB()\n");
     HGLRC result = mImports.wglCreateContextAttribsARB(hdc, hShareContext, attribList);
     mState.wglCreateContextAttribsARB(hdc, hShareContext, attribList, result);
 
@@ -580,7 +583,7 @@ inline HGLRC GlesSpy::wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext,
 }
 
 inline BOOL GlesSpy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
-    GAPID_INFO("wglMakeCurrent");
+    GAPID_INFO("wglMakeCurrent()\n");
     BOOL result = mImports.wglMakeCurrent(hdc, hglrc);
     mState.wglMakeCurrent(hdc, hglrc, result);
 
@@ -593,7 +596,7 @@ inline BOOL GlesSpy::wglMakeCurrent(HDC hdc, HGLRC hglrc) {
 }
 
 inline void GlesSpy::wglSwapBuffers(HDC hdc) {
-    GAPID_INFO("wglSwapBuffers");
+    GAPID_INFO("wglSwapBuffers()\n");
     mImports.wglSwapBuffers(hdc);
     mState.wglSwapBuffers(hdc);
 
@@ -603,7 +606,7 @@ inline void GlesSpy::wglSwapBuffers(HDC hdc) {
 
 inline CGLError GlesSpy::CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share,
                                           CGLContextObj* ctx) {
-    GAPID_INFO("CGLCreateContext");
+    GAPID_INFO("CGLCreateContext()\n");
     CGLError result = mImports.CGLCreateContext(pix, share, ctx);
     mState.CGLCreateContext(pix, share, ctx, result);
 
@@ -617,7 +620,7 @@ inline CGLError GlesSpy::CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj s
 }
 
 inline CGLError GlesSpy::CGLSetCurrentContext(CGLContextObj ctx) {
-    GAPID_INFO("CGLSetCurrentContext");
+    GAPID_INFO("CGLSetCurrentContext()\n");
     CGLError result = mImports.CGLSetCurrentContext(ctx);
     mState.CGLSetCurrentContext(ctx, result);
 
@@ -629,7 +632,7 @@ inline CGLError GlesSpy::CGLSetCurrentContext(CGLContextObj ctx) {
 }
 
 inline void GlesSpy::glEnableClientState(uint32_t type) {
-    GAPID_INFO("glEnableClientState");
+    GAPID_INFO("glEnableClientState()\n");
     mImports.glEnableClientState(type);
     mState.glEnableClientState(type);
 
@@ -638,7 +641,7 @@ inline void GlesSpy::glEnableClientState(uint32_t type) {
 }
 
 inline void GlesSpy::glDisableClientState(uint32_t type) {
-    GAPID_INFO("glDisableClientState");
+    GAPID_INFO("glDisableClientState()\n");
     mImports.glDisableClientState(type);
     mState.glDisableClientState(type);
 
@@ -649,7 +652,7 @@ inline void GlesSpy::glDisableClientState(uint32_t type) {
 inline void GlesSpy::glGetProgramBinaryOES(ProgramId program, int32_t buffer_size,
                                            int32_t* bytes_written, uint32_t* binary_format,
                                            void* binary) {
-    GAPID_INFO("glGetProgramBinaryOES");
+    GAPID_INFO("glGetProgramBinaryOES()\n");
     mImports.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
     mState.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
 
@@ -663,7 +666,7 @@ inline void GlesSpy::glGetProgramBinaryOES(ProgramId program, int32_t buffer_siz
 
 inline void GlesSpy::glProgramBinaryOES(ProgramId program, uint32_t binary_format,
                                         const void* binary, int32_t binary_size) {
-    GAPID_INFO("glProgramBinaryOES");
+    GAPID_INFO("glProgramBinaryOES()\n");
     mImports.glProgramBinaryOES(program, binary_format, binary, binary_size);
     mState.glProgramBinaryOES(program, binary_format, binary, binary_size);
 
@@ -676,7 +679,7 @@ inline void GlesSpy::glProgramBinaryOES(ProgramId program, uint32_t binary_forma
 
 inline void GlesSpy::glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int32_t height,
                                        uint32_t preserveMask) {
-    GAPID_INFO("glStartTilingQCOM");
+    GAPID_INFO("glStartTilingQCOM()\n");
     mImports.glStartTilingQCOM(x, y, width, height, preserveMask);
     mState.glStartTilingQCOM(x, y, width, height, preserveMask);
 
@@ -689,7 +692,7 @@ inline void GlesSpy::glStartTilingQCOM(int32_t x, int32_t y, int32_t width, int3
 }
 
 inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
-    GAPID_INFO("glEndTilingQCOM");
+    GAPID_INFO("glEndTilingQCOM()\n");
     mImports.glEndTilingQCOM(preserve_mask);
     mState.glEndTilingQCOM(preserve_mask);
 
@@ -699,7 +702,7 @@ inline void GlesSpy::glEndTilingQCOM(uint32_t preserve_mask) {
 
 inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachments,
                                              const uint32_t* attachments) {
-    GAPID_INFO("glDiscardFramebufferEXT");
+    GAPID_INFO("glDiscardFramebufferEXT()\n");
     mImports.glDiscardFramebufferEXT(target, numAttachments, attachments);
     mState.glDiscardFramebufferEXT(target, numAttachments, attachments);
 
@@ -718,7 +721,7 @@ inline void GlesSpy::glDiscardFramebufferEXT(uint32_t target, int32_t numAttachm
 }
 
 inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, const char* marker) {
-    GAPID_INFO("glInsertEventMarkerEXT");
+    GAPID_INFO("glInsertEventMarkerEXT()\n");
     mImports.glInsertEventMarkerEXT(length, marker);
     mState.glInsertEventMarkerEXT(length, marker);
 
@@ -728,7 +731,7 @@ inline void GlesSpy::glInsertEventMarkerEXT(int32_t length, const char* marker) 
 }
 
 inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, const char* marker) {
-    GAPID_INFO("glPushGroupMarkerEXT");
+    GAPID_INFO("glPushGroupMarkerEXT()\n");
     mImports.glPushGroupMarkerEXT(length, marker);
     mState.glPushGroupMarkerEXT(length, marker);
 
@@ -738,7 +741,7 @@ inline void GlesSpy::glPushGroupMarkerEXT(int32_t length, const char* marker) {
 }
 
 inline void GlesSpy::glPopGroupMarkerEXT() {
-    GAPID_INFO("glPopGroupMarkerEXT");
+    GAPID_INFO("glPopGroupMarkerEXT()\n");
     mImports.glPopGroupMarkerEXT();
     mState.glPopGroupMarkerEXT();
 
@@ -747,7 +750,7 @@ inline void GlesSpy::glPopGroupMarkerEXT() {
 
 inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width) {
-    GAPID_INFO("glTexStorage1DEXT");
+    GAPID_INFO("glTexStorage1DEXT()\n");
     mImports.glTexStorage1DEXT(target, levels, format, width);
     mState.glTexStorage1DEXT(target, levels, format, width);
 
@@ -760,7 +763,7 @@ inline void GlesSpy::glTexStorage1DEXT(uint32_t target, int32_t levels, uint32_t
 
 inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height) {
-    GAPID_INFO("glTexStorage2DEXT");
+    GAPID_INFO("glTexStorage2DEXT()\n");
     mImports.glTexStorage2DEXT(target, levels, format, width, height);
     mState.glTexStorage2DEXT(target, levels, format, width, height);
 
@@ -774,7 +777,7 @@ inline void GlesSpy::glTexStorage2DEXT(uint32_t target, int32_t levels, uint32_t
 
 inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t format,
                                        int32_t width, int32_t height, int32_t depth) {
-    GAPID_INFO("glTexStorage3DEXT");
+    GAPID_INFO("glTexStorage3DEXT()\n");
     mImports.glTexStorage3DEXT(target, levels, format, width, height, depth);
     mState.glTexStorage3DEXT(target, levels, format, width, height, depth);
 
@@ -789,7 +792,7 @@ inline void GlesSpy::glTexStorage3DEXT(uint32_t target, int32_t levels, uint32_t
 
 inline void GlesSpy::glTextureStorage1DEXT(TextureId texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width) {
-    GAPID_INFO("glTextureStorage1DEXT");
+    GAPID_INFO("glTextureStorage1DEXT()\n");
     mImports.glTextureStorage1DEXT(texture, target, levels, format, width);
     mState.glTextureStorage1DEXT(texture, target, levels, format, width);
 
@@ -803,7 +806,7 @@ inline void GlesSpy::glTextureStorage1DEXT(TextureId texture, uint32_t target, i
 
 inline void GlesSpy::glTextureStorage2DEXT(TextureId texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width, int32_t height) {
-    GAPID_INFO("glTextureStorage2DEXT");
+    GAPID_INFO("glTextureStorage2DEXT()\n");
     mImports.glTextureStorage2DEXT(texture, target, levels, format, width, height);
     mState.glTextureStorage2DEXT(texture, target, levels, format, width, height);
 
@@ -819,7 +822,7 @@ inline void GlesSpy::glTextureStorage2DEXT(TextureId texture, uint32_t target, i
 inline void GlesSpy::glTextureStorage3DEXT(TextureId texture, uint32_t target, int32_t levels,
                                            uint32_t format, int32_t width, int32_t height,
                                            int32_t depth) {
-    GAPID_INFO("glTextureStorage3DEXT");
+    GAPID_INFO("glTextureStorage3DEXT()\n");
     mImports.glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
     mState.glTextureStorage3DEXT(texture, target, levels, format, width, height, depth);
 
@@ -834,7 +837,7 @@ inline void GlesSpy::glTextureStorage3DEXT(TextureId texture, uint32_t target, i
 }
 
 inline void GlesSpy::glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) {
-    GAPID_INFO("glGenVertexArraysOES");
+    GAPID_INFO("glGenVertexArraysOES()\n");
     mImports.glGenVertexArraysOES(count, arrays);
     mState.glGenVertexArraysOES(count, arrays);
 
@@ -852,7 +855,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, VertexArrayId* arrays) 
 }
 
 inline void GlesSpy::glBindVertexArrayOES(VertexArrayId array) {
-    GAPID_INFO("glBindVertexArrayOES");
+    GAPID_INFO("glBindVertexArrayOES()\n");
     mImports.glBindVertexArrayOES(array);
     mState.glBindVertexArrayOES(array);
 
@@ -861,7 +864,7 @@ inline void GlesSpy::glBindVertexArrayOES(VertexArrayId array) {
 }
 
 inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, const VertexArrayId* arrays) {
-    GAPID_INFO("glDeleteVertexArraysOES");
+    GAPID_INFO("glDeleteVertexArraysOES()\n");
     mImports.glDeleteVertexArraysOES(count, arrays);
     mState.glDeleteVertexArraysOES(count, arrays);
 
@@ -879,7 +882,7 @@ inline void GlesSpy::glDeleteVertexArraysOES(int32_t count, const VertexArrayId*
 }
 
 inline bool GlesSpy::glIsVertexArrayOES(VertexArrayId array) {
-    GAPID_INFO("glIsVertexArrayOES");
+    GAPID_INFO("glIsVertexArrayOES()\n");
     bool result = mImports.glIsVertexArrayOES(array);
     mState.glIsVertexArrayOES(array, result);
 
@@ -891,7 +894,7 @@ inline bool GlesSpy::glIsVertexArrayOES(VertexArrayId array) {
 }
 
 inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, ImageOES image) {
-    GAPID_INFO("glEGLImageTargetTexture2DOES");
+    GAPID_INFO("glEGLImageTargetTexture2DOES()\n");
     mImports.glEGLImageTargetTexture2DOES(target, image);
     mState.glEGLImageTargetTexture2DOES(target, image);
 
@@ -902,7 +905,7 @@ inline void GlesSpy::glEGLImageTargetTexture2DOES(uint32_t target, ImageOES imag
 }
 
 inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, TexturePointer image) {
-    GAPID_INFO("glEGLImageTargetRenderbufferStorageOES");
+    GAPID_INFO("glEGLImageTargetRenderbufferStorageOES()\n");
     mImports.glEGLImageTargetRenderbufferStorageOES(target, image);
     mState.glEGLImageTargetRenderbufferStorageOES(target, image);
 
@@ -913,7 +916,7 @@ inline void GlesSpy::glEGLImageTargetRenderbufferStorageOES(uint32_t target, Tex
 }
 
 inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
-    GAPID_INFO("glGetGraphicsResetStatusEXT");
+    GAPID_INFO("glGetGraphicsResetStatusEXT()\n");
     uint32_t result = mImports.glGetGraphicsResetStatusEXT();
     mState.glGetGraphicsResetStatusEXT(result);
 
@@ -925,7 +928,7 @@ inline uint32_t GlesSpy::glGetGraphicsResetStatusEXT() {
 
 inline void GlesSpy::glBindAttribLocation(ProgramId program, AttributeLocation location,
                                           const char* name) {
-    GAPID_INFO("glBindAttribLocation");
+    GAPID_INFO("glBindAttribLocation()\n");
     mImports.glBindAttribLocation(program, location, name);
     mState.glBindAttribLocation(program, location, name);
 
@@ -936,7 +939,7 @@ inline void GlesSpy::glBindAttribLocation(ProgramId program, AttributeLocation l
 }
 
 inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
-    GAPID_INFO("glBlendFunc");
+    GAPID_INFO("glBlendFunc()\n");
     mImports.glBlendFunc(src_factor, dst_factor);
     mState.glBlendFunc(src_factor, dst_factor);
 
@@ -947,7 +950,7 @@ inline void GlesSpy::glBlendFunc(uint32_t src_factor, uint32_t dst_factor) {
 
 inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_factor_rgb,
                                          uint32_t src_factor_alpha, uint32_t dst_factor_alpha) {
-    GAPID_INFO("glBlendFuncSeparate");
+    GAPID_INFO("glBlendFuncSeparate()\n");
     mImports.glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha,
                                  dst_factor_alpha);
     mState.glBlendFuncSeparate(src_factor_rgb, dst_factor_rgb, src_factor_alpha, dst_factor_alpha);
@@ -960,7 +963,7 @@ inline void GlesSpy::glBlendFuncSeparate(uint32_t src_factor_rgb, uint32_t dst_f
 }
 
 inline void GlesSpy::glBlendEquation(uint32_t equation) {
-    GAPID_INFO("glBlendEquation");
+    GAPID_INFO("glBlendEquation()\n");
     mImports.glBlendEquation(equation);
     mState.glBlendEquation(equation);
 
@@ -969,7 +972,7 @@ inline void GlesSpy::glBlendEquation(uint32_t equation) {
 }
 
 inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
-    GAPID_INFO("glBlendEquationSeparate");
+    GAPID_INFO("glBlendEquationSeparate()\n");
     mImports.glBlendEquationSeparate(rgb, alpha);
     mState.glBlendEquationSeparate(rgb, alpha);
 
@@ -979,7 +982,7 @@ inline void GlesSpy::glBlendEquationSeparate(uint32_t rgb, uint32_t alpha) {
 }
 
 inline void GlesSpy::glBlendColor(float red, float green, float blue, float alpha) {
-    GAPID_INFO("glBlendColor");
+    GAPID_INFO("glBlendColor()\n");
     mImports.glBlendColor(red, green, blue, alpha);
     mState.glBlendColor(red, green, blue, alpha);
 
@@ -991,7 +994,7 @@ inline void GlesSpy::glBlendColor(float red, float green, float blue, float alph
 }
 
 inline void GlesSpy::glEnableVertexAttribArray(AttributeLocation location) {
-    GAPID_INFO("glEnableVertexAttribArray");
+    GAPID_INFO("glEnableVertexAttribArray()\n");
     mImports.glEnableVertexAttribArray(location);
     mState.glEnableVertexAttribArray(location);
 
@@ -1000,7 +1003,7 @@ inline void GlesSpy::glEnableVertexAttribArray(AttributeLocation location) {
 }
 
 inline void GlesSpy::glDisableVertexAttribArray(AttributeLocation location) {
-    GAPID_INFO("glDisableVertexAttribArray");
+    GAPID_INFO("glDisableVertexAttribArray()\n");
     mImports.glDisableVertexAttribArray(location);
     mState.glDisableVertexAttribArray(location);
 
@@ -1010,7 +1013,7 @@ inline void GlesSpy::glDisableVertexAttribArray(AttributeLocation location) {
 
 inline void GlesSpy::glVertexAttribPointer(AttributeLocation location, int32_t size, uint32_t type,
                                            bool normalized, int32_t stride, VertexPointer data) {
-    GAPID_INFO("glVertexAttribPointer");
+    GAPID_INFO("glVertexAttribPointer()\n");
     mImports.glVertexAttribPointer(location, size, type, normalized, stride, data);
     mState.glVertexAttribPointer(location, size, type, normalized, stride, data);
 
@@ -1026,7 +1029,7 @@ inline void GlesSpy::glVertexAttribPointer(AttributeLocation location, int32_t s
 inline void GlesSpy::glGetActiveAttrib(ProgramId program, AttributeLocation location,
                                        int32_t buffer_size, int32_t* buffer_bytes_written,
                                        int32_t* vector_count, uint32_t* type, char* name) {
-    GAPID_INFO("glGetActiveAttrib");
+    GAPID_INFO("glGetActiveAttrib()\n");
     mImports.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
                                type, name);
     mState.glGetActiveAttrib(program, location, buffer_size, buffer_bytes_written, vector_count,
@@ -1045,7 +1048,7 @@ inline void GlesSpy::glGetActiveAttrib(ProgramId program, AttributeLocation loca
 inline void GlesSpy::glGetActiveUniform(ProgramId program, int32_t location, int32_t buffer_size,
                                         int32_t* buffer_bytes_written, int32_t* size,
                                         uint32_t* type, char* name) {
-    GAPID_INFO("glGetActiveUniform");
+    GAPID_INFO("glGetActiveUniform()\n");
     mImports.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
                                 name);
     mState.glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
@@ -1062,7 +1065,7 @@ inline void GlesSpy::glGetActiveUniform(ProgramId program, int32_t location, int
 }
 
 inline uint32_t GlesSpy::glGetError() {
-    GAPID_INFO("glGetError");
+    GAPID_INFO("glGetError()\n");
     uint32_t result = mImports.glGetError();
     mState.glGetError(result);
 
@@ -1073,7 +1076,7 @@ inline uint32_t GlesSpy::glGetError() {
 }
 
 inline void GlesSpy::glGetProgramiv(ProgramId program, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetProgramiv");
+    GAPID_INFO("glGetProgramiv()\n");
     mImports.glGetProgramiv(program, parameter, value);
     mState.glGetProgramiv(program, parameter, value);
 
@@ -1092,7 +1095,7 @@ inline void GlesSpy::glGetProgramiv(ProgramId program, uint32_t parameter, int32
 }
 
 inline void GlesSpy::glGetShaderiv(ShaderId shader, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetShaderiv");
+    GAPID_INFO("glGetShaderiv()\n");
     mImports.glGetShaderiv(shader, parameter, value);
     mState.glGetShaderiv(shader, parameter, value);
 
@@ -1111,7 +1114,7 @@ inline void GlesSpy::glGetShaderiv(ShaderId shader, uint32_t parameter, int32_t*
 }
 
 inline UniformLocation GlesSpy::glGetUniformLocation(ProgramId program, const char* name) {
-    GAPID_INFO("glGetUniformLocation");
+    GAPID_INFO("glGetUniformLocation()\n");
     UniformLocation result = mImports.glGetUniformLocation(program, name);
     mState.glGetUniformLocation(program, name, result);
 
@@ -1124,7 +1127,7 @@ inline UniformLocation GlesSpy::glGetUniformLocation(ProgramId program, const ch
 }
 
 inline AttributeLocation GlesSpy::glGetAttribLocation(ProgramId program, const char* name) {
-    GAPID_INFO("glGetAttribLocation");
+    GAPID_INFO("glGetAttribLocation()\n");
     AttributeLocation result = mImports.glGetAttribLocation(program, name);
     mState.glGetAttribLocation(program, name, result);
 
@@ -1137,7 +1140,7 @@ inline AttributeLocation GlesSpy::glGetAttribLocation(ProgramId program, const c
 }
 
 inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
-    GAPID_INFO("glPixelStorei");
+    GAPID_INFO("glPixelStorei()\n");
     mImports.glPixelStorei(parameter, value);
     mState.glPixelStorei(parameter, value);
 
@@ -1147,7 +1150,7 @@ inline void GlesSpy::glPixelStorei(uint32_t parameter, int32_t value) {
 }
 
 inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_t value) {
-    GAPID_INFO("glTexParameteri");
+    GAPID_INFO("glTexParameteri()\n");
     mImports.glTexParameteri(target, parameter, value);
     mState.glTexParameteri(target, parameter, value);
 
@@ -1158,7 +1161,7 @@ inline void GlesSpy::glTexParameteri(uint32_t target, uint32_t parameter, int32_
 }
 
 inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float value) {
-    GAPID_INFO("glTexParameterf");
+    GAPID_INFO("glTexParameterf()\n");
     mImports.glTexParameterf(target, parameter, value);
     mState.glTexParameterf(target, parameter, value);
 
@@ -1169,7 +1172,7 @@ inline void GlesSpy::glTexParameterf(uint32_t target, uint32_t parameter, float 
 }
 
 inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, int32_t* values) {
-    GAPID_INFO("glGetTexParameteriv");
+    GAPID_INFO("glGetTexParameteriv()\n");
     mImports.glGetTexParameteriv(target, parameter, values);
     mState.glGetTexParameteriv(target, parameter, values);
 
@@ -1188,7 +1191,7 @@ inline void GlesSpy::glGetTexParameteriv(uint32_t target, uint32_t parameter, in
 }
 
 inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, float* values) {
-    GAPID_INFO("glGetTexParameterfv");
+    GAPID_INFO("glGetTexParameterfv()\n");
     mImports.glGetTexParameterfv(target, parameter, values);
     mState.glGetTexParameterfv(target, parameter, values);
 
@@ -1207,7 +1210,7 @@ inline void GlesSpy::glGetTexParameterfv(uint32_t target, uint32_t parameter, fl
 }
 
 inline void GlesSpy::glUniform1i(UniformLocation location, int32_t value) {
-    GAPID_INFO("glUniform1i");
+    GAPID_INFO("glUniform1i()\n");
     mImports.glUniform1i(location, value);
     mState.glUniform1i(location, value);
 
@@ -1217,7 +1220,7 @@ inline void GlesSpy::glUniform1i(UniformLocation location, int32_t value) {
 }
 
 inline void GlesSpy::glUniform2i(UniformLocation location, int32_t value0, int32_t value1) {
-    GAPID_INFO("glUniform2i");
+    GAPID_INFO("glUniform2i()\n");
     mImports.glUniform2i(location, value0, value1);
     mState.glUniform2i(location, value0, value1);
 
@@ -1229,7 +1232,7 @@ inline void GlesSpy::glUniform2i(UniformLocation location, int32_t value0, int32
 
 inline void GlesSpy::glUniform3i(UniformLocation location, int32_t value0, int32_t value1,
                                  int32_t value2) {
-    GAPID_INFO("glUniform3i");
+    GAPID_INFO("glUniform3i()\n");
     mImports.glUniform3i(location, value0, value1, value2);
     mState.glUniform3i(location, value0, value1, value2);
 
@@ -1242,7 +1245,7 @@ inline void GlesSpy::glUniform3i(UniformLocation location, int32_t value0, int32
 
 inline void GlesSpy::glUniform4i(UniformLocation location, int32_t value0, int32_t value1,
                                  int32_t value2, int32_t value3) {
-    GAPID_INFO("glUniform4i");
+    GAPID_INFO("glUniform4i()\n");
     mImports.glUniform4i(location, value0, value1, value2, value3);
     mState.glUniform4i(location, value0, value1, value2, value3);
 
@@ -1255,7 +1258,7 @@ inline void GlesSpy::glUniform4i(UniformLocation location, int32_t value0, int32
 }
 
 inline void GlesSpy::glUniform1iv(UniformLocation location, int32_t count, const int32_t* value) {
-    GAPID_INFO("glUniform1iv");
+    GAPID_INFO("glUniform1iv()\n");
     mImports.glUniform1iv(location, count, value);
     mState.glUniform1iv(location, count, value);
 
@@ -1274,7 +1277,7 @@ inline void GlesSpy::glUniform1iv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform2iv(UniformLocation location, int32_t count, const int32_t* value) {
-    GAPID_INFO("glUniform2iv");
+    GAPID_INFO("glUniform2iv()\n");
     mImports.glUniform2iv(location, count, value);
     mState.glUniform2iv(location, count, value);
 
@@ -1293,7 +1296,7 @@ inline void GlesSpy::glUniform2iv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform3iv(UniformLocation location, int32_t count, const int32_t* value) {
-    GAPID_INFO("glUniform3iv");
+    GAPID_INFO("glUniform3iv()\n");
     mImports.glUniform3iv(location, count, value);
     mState.glUniform3iv(location, count, value);
 
@@ -1312,7 +1315,7 @@ inline void GlesSpy::glUniform3iv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform4iv(UniformLocation location, int32_t count, const int32_t* value) {
-    GAPID_INFO("glUniform4iv");
+    GAPID_INFO("glUniform4iv()\n");
     mImports.glUniform4iv(location, count, value);
     mState.glUniform4iv(location, count, value);
 
@@ -1331,7 +1334,7 @@ inline void GlesSpy::glUniform4iv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform1f(UniformLocation location, float value) {
-    GAPID_INFO("glUniform1f");
+    GAPID_INFO("glUniform1f()\n");
     mImports.glUniform1f(location, value);
     mState.glUniform1f(location, value);
 
@@ -1341,7 +1344,7 @@ inline void GlesSpy::glUniform1f(UniformLocation location, float value) {
 }
 
 inline void GlesSpy::glUniform2f(UniformLocation location, float value0, float value1) {
-    GAPID_INFO("glUniform2f");
+    GAPID_INFO("glUniform2f()\n");
     mImports.glUniform2f(location, value0, value1);
     mState.glUniform2f(location, value0, value1);
 
@@ -1353,7 +1356,7 @@ inline void GlesSpy::glUniform2f(UniformLocation location, float value0, float v
 
 inline void GlesSpy::glUniform3f(UniformLocation location, float value0, float value1,
                                  float value2) {
-    GAPID_INFO("glUniform3f");
+    GAPID_INFO("glUniform3f()\n");
     mImports.glUniform3f(location, value0, value1, value2);
     mState.glUniform3f(location, value0, value1, value2);
 
@@ -1366,7 +1369,7 @@ inline void GlesSpy::glUniform3f(UniformLocation location, float value0, float v
 
 inline void GlesSpy::glUniform4f(UniformLocation location, float value0, float value1, float value2,
                                  float value3) {
-    GAPID_INFO("glUniform4f");
+    GAPID_INFO("glUniform4f()\n");
     mImports.glUniform4f(location, value0, value1, value2, value3);
     mState.glUniform4f(location, value0, value1, value2, value3);
 
@@ -1379,7 +1382,7 @@ inline void GlesSpy::glUniform4f(UniformLocation location, float value0, float v
 }
 
 inline void GlesSpy::glUniform1fv(UniformLocation location, int32_t count, const float* value) {
-    GAPID_INFO("glUniform1fv");
+    GAPID_INFO("glUniform1fv()\n");
     mImports.glUniform1fv(location, count, value);
     mState.glUniform1fv(location, count, value);
 
@@ -1398,7 +1401,7 @@ inline void GlesSpy::glUniform1fv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform2fv(UniformLocation location, int32_t count, const float* value) {
-    GAPID_INFO("glUniform2fv");
+    GAPID_INFO("glUniform2fv()\n");
     mImports.glUniform2fv(location, count, value);
     mState.glUniform2fv(location, count, value);
 
@@ -1417,7 +1420,7 @@ inline void GlesSpy::glUniform2fv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform3fv(UniformLocation location, int32_t count, const float* value) {
-    GAPID_INFO("glUniform3fv");
+    GAPID_INFO("glUniform3fv()\n");
     mImports.glUniform3fv(location, count, value);
     mState.glUniform3fv(location, count, value);
 
@@ -1436,7 +1439,7 @@ inline void GlesSpy::glUniform3fv(UniformLocation location, int32_t count, const
 }
 
 inline void GlesSpy::glUniform4fv(UniformLocation location, int32_t count, const float* value) {
-    GAPID_INFO("glUniform4fv");
+    GAPID_INFO("glUniform4fv()\n");
     mImports.glUniform4fv(location, count, value);
     mState.glUniform4fv(location, count, value);
 
@@ -1456,7 +1459,7 @@ inline void GlesSpy::glUniform4fv(UniformLocation location, int32_t count, const
 
 inline void GlesSpy::glUniformMatrix2fv(UniformLocation location, int32_t count, bool transpose,
                                         const float* values) {
-    GAPID_INFO("glUniformMatrix2fv");
+    GAPID_INFO("glUniformMatrix2fv()\n");
     mImports.glUniformMatrix2fv(location, count, transpose, values);
     mState.glUniformMatrix2fv(location, count, transpose, values);
 
@@ -1477,7 +1480,7 @@ inline void GlesSpy::glUniformMatrix2fv(UniformLocation location, int32_t count,
 
 inline void GlesSpy::glUniformMatrix3fv(UniformLocation location, int32_t count, bool transpose,
                                         const float* values) {
-    GAPID_INFO("glUniformMatrix3fv");
+    GAPID_INFO("glUniformMatrix3fv()\n");
     mImports.glUniformMatrix3fv(location, count, transpose, values);
     mState.glUniformMatrix3fv(location, count, transpose, values);
 
@@ -1498,7 +1501,7 @@ inline void GlesSpy::glUniformMatrix3fv(UniformLocation location, int32_t count,
 
 inline void GlesSpy::glUniformMatrix4fv(UniformLocation location, int32_t count, bool transpose,
                                         const float* values) {
-    GAPID_INFO("glUniformMatrix4fv");
+    GAPID_INFO("glUniformMatrix4fv()\n");
     mImports.glUniformMatrix4fv(location, count, transpose, values);
     mState.glUniformMatrix4fv(location, count, transpose, values);
 
@@ -1519,7 +1522,7 @@ inline void GlesSpy::glUniformMatrix4fv(UniformLocation location, int32_t count,
 
 inline void GlesSpy::glGetUniformfv(ProgramId program, UniformLocation location,
                                     const float* values) {
-    GAPID_INFO("glGetUniformfv");
+    GAPID_INFO("glGetUniformfv()\n");
     mImports.glGetUniformfv(program, location, values);
     mState.glGetUniformfv(program, location, values);
 
@@ -1539,7 +1542,7 @@ inline void GlesSpy::glGetUniformfv(ProgramId program, UniformLocation location,
 
 inline void GlesSpy::glGetUniformiv(ProgramId program, UniformLocation location,
                                     const int32_t* values) {
-    GAPID_INFO("glGetUniformiv");
+    GAPID_INFO("glGetUniformiv()\n");
     mImports.glGetUniformiv(program, location, values);
     mState.glGetUniformiv(program, location, values);
 
@@ -1558,7 +1561,7 @@ inline void GlesSpy::glGetUniformiv(ProgramId program, UniformLocation location,
 }
 
 inline void GlesSpy::glVertexAttrib1f(AttributeLocation location, float value0) {
-    GAPID_INFO("glVertexAttrib1f");
+    GAPID_INFO("glVertexAttrib1f()\n");
     mImports.glVertexAttrib1f(location, value0);
     mState.glVertexAttrib1f(location, value0);
 
@@ -1568,7 +1571,7 @@ inline void GlesSpy::glVertexAttrib1f(AttributeLocation location, float value0) 
 }
 
 inline void GlesSpy::glVertexAttrib2f(AttributeLocation location, float value0, float value1) {
-    GAPID_INFO("glVertexAttrib2f");
+    GAPID_INFO("glVertexAttrib2f()\n");
     mImports.glVertexAttrib2f(location, value0, value1);
     mState.glVertexAttrib2f(location, value0, value1);
 
@@ -1580,7 +1583,7 @@ inline void GlesSpy::glVertexAttrib2f(AttributeLocation location, float value0, 
 
 inline void GlesSpy::glVertexAttrib3f(AttributeLocation location, float value0, float value1,
                                       float value2) {
-    GAPID_INFO("glVertexAttrib3f");
+    GAPID_INFO("glVertexAttrib3f()\n");
     mImports.glVertexAttrib3f(location, value0, value1, value2);
     mState.glVertexAttrib3f(location, value0, value1, value2);
 
@@ -1593,7 +1596,7 @@ inline void GlesSpy::glVertexAttrib3f(AttributeLocation location, float value0, 
 
 inline void GlesSpy::glVertexAttrib4f(AttributeLocation location, float value0, float value1,
                                       float value2, float value3) {
-    GAPID_INFO("glVertexAttrib4f");
+    GAPID_INFO("glVertexAttrib4f()\n");
     mImports.glVertexAttrib4f(location, value0, value1, value2, value3);
     mState.glVertexAttrib4f(location, value0, value1, value2, value3);
 
@@ -1606,7 +1609,7 @@ inline void GlesSpy::glVertexAttrib4f(AttributeLocation location, float value0, 
 }
 
 inline void GlesSpy::glVertexAttrib1fv(AttributeLocation location, const float* value) {
-    GAPID_INFO("glVertexAttrib1fv");
+    GAPID_INFO("glVertexAttrib1fv()\n");
     mImports.glVertexAttrib1fv(location, value);
     mState.glVertexAttrib1fv(location, value);
 
@@ -1624,7 +1627,7 @@ inline void GlesSpy::glVertexAttrib1fv(AttributeLocation location, const float* 
 }
 
 inline void GlesSpy::glVertexAttrib2fv(AttributeLocation location, const float* value) {
-    GAPID_INFO("glVertexAttrib2fv");
+    GAPID_INFO("glVertexAttrib2fv()\n");
     mImports.glVertexAttrib2fv(location, value);
     mState.glVertexAttrib2fv(location, value);
 
@@ -1642,7 +1645,7 @@ inline void GlesSpy::glVertexAttrib2fv(AttributeLocation location, const float* 
 }
 
 inline void GlesSpy::glVertexAttrib3fv(AttributeLocation location, const float* value) {
-    GAPID_INFO("glVertexAttrib3fv");
+    GAPID_INFO("glVertexAttrib3fv()\n");
     mImports.glVertexAttrib3fv(location, value);
     mState.glVertexAttrib3fv(location, value);
 
@@ -1660,7 +1663,7 @@ inline void GlesSpy::glVertexAttrib3fv(AttributeLocation location, const float* 
 }
 
 inline void GlesSpy::glVertexAttrib4fv(AttributeLocation location, const float* value) {
-    GAPID_INFO("glVertexAttrib4fv");
+    GAPID_INFO("glVertexAttrib4fv()\n");
     mImports.glVertexAttrib4fv(location, value);
     mState.glVertexAttrib4fv(location, value);
 
@@ -1679,7 +1682,7 @@ inline void GlesSpy::glVertexAttrib4fv(AttributeLocation location, const float* 
 
 inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t precision_type,
                                                 int32_t* range, int32_t* precision) {
-    GAPID_INFO("glGetShaderPrecisionFormat");
+    GAPID_INFO("glGetShaderPrecisionFormat()\n");
     mImports.glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
     mState.glGetShaderPrecisionFormat(shader_type, precision_type, range, precision);
 
@@ -1699,7 +1702,7 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
 }
 
 inline void GlesSpy::glDepthMask(bool enabled) {
-    GAPID_INFO("glDepthMask");
+    GAPID_INFO("glDepthMask()\n");
     mImports.glDepthMask(enabled);
     mState.glDepthMask(enabled);
 
@@ -1708,7 +1711,7 @@ inline void GlesSpy::glDepthMask(bool enabled) {
 }
 
 inline void GlesSpy::glDepthFunc(uint32_t function) {
-    GAPID_INFO("glDepthFunc");
+    GAPID_INFO("glDepthFunc()\n");
     mImports.glDepthFunc(function);
     mState.glDepthFunc(function);
 
@@ -1717,7 +1720,7 @@ inline void GlesSpy::glDepthFunc(uint32_t function) {
 }
 
 inline void GlesSpy::glDepthRangef(float near, float far) {
-    GAPID_INFO("glDepthRangef");
+    GAPID_INFO("glDepthRangef()\n");
     mImports.glDepthRangef(near, far);
     mState.glDepthRangef(near, far);
 
@@ -1727,7 +1730,7 @@ inline void GlesSpy::glDepthRangef(float near, float far) {
 }
 
 inline void GlesSpy::glColorMask(bool red, bool green, bool blue, bool alpha) {
-    GAPID_INFO("glColorMask");
+    GAPID_INFO("glColorMask()\n");
     mImports.glColorMask(red, green, blue, alpha);
     mState.glColorMask(red, green, blue, alpha);
 
@@ -1739,7 +1742,7 @@ inline void GlesSpy::glColorMask(bool red, bool green, bool blue, bool alpha) {
 }
 
 inline void GlesSpy::glStencilMask(uint32_t mask) {
-    GAPID_INFO("glStencilMask");
+    GAPID_INFO("glStencilMask()\n");
     mImports.glStencilMask(mask);
     mState.glStencilMask(mask);
 
@@ -1748,7 +1751,7 @@ inline void GlesSpy::glStencilMask(uint32_t mask) {
 }
 
 inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
-    GAPID_INFO("glStencilMaskSeparate");
+    GAPID_INFO("glStencilMaskSeparate()\n");
     mImports.glStencilMaskSeparate(face, mask);
     mState.glStencilMaskSeparate(face, mask);
 
@@ -1759,7 +1762,7 @@ inline void GlesSpy::glStencilMaskSeparate(uint32_t face, uint32_t mask) {
 
 inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
                                            int32_t reference_value, int32_t mask) {
-    GAPID_INFO("glStencilFuncSeparate");
+    GAPID_INFO("glStencilFuncSeparate()\n");
     mImports.glStencilFuncSeparate(face, function, reference_value, mask);
     mState.glStencilFuncSeparate(face, function, reference_value, mask);
 
@@ -1773,7 +1776,7 @@ inline void GlesSpy::glStencilFuncSeparate(uint32_t face, uint32_t function,
 inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
                                          uint32_t stencil_pass_depth_fail,
                                          uint32_t stencil_pass_depth_pass) {
-    GAPID_INFO("glStencilOpSeparate");
+    GAPID_INFO("glStencilOpSeparate()\n");
     mImports.glStencilOpSeparate(face, stencil_fail, stencil_pass_depth_fail,
                                  stencil_pass_depth_pass);
     mState.glStencilOpSeparate(face, stencil_fail, stencil_pass_depth_fail,
@@ -1787,7 +1790,7 @@ inline void GlesSpy::glStencilOpSeparate(uint32_t face, uint32_t stencil_fail,
 }
 
 inline void GlesSpy::glFrontFace(uint32_t orientation) {
-    GAPID_INFO("glFrontFace");
+    GAPID_INFO("glFrontFace()\n");
     mImports.glFrontFace(orientation);
     mState.glFrontFace(orientation);
 
@@ -1796,7 +1799,7 @@ inline void GlesSpy::glFrontFace(uint32_t orientation) {
 }
 
 inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t height) {
-    GAPID_INFO("glViewport");
+    GAPID_INFO("glViewport()\n");
     mImports.glViewport(x, y, width, height);
     mState.glViewport(x, y, width, height);
 
@@ -1808,7 +1811,7 @@ inline void GlesSpy::glViewport(int32_t x, int32_t y, int32_t width, int32_t hei
 }
 
 inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t height) {
-    GAPID_INFO("glScissor");
+    GAPID_INFO("glScissor()\n");
     mImports.glScissor(x, y, width, height);
     mState.glScissor(x, y, width, height);
 
@@ -1820,7 +1823,7 @@ inline void GlesSpy::glScissor(int32_t x, int32_t y, int32_t width, int32_t heig
 }
 
 inline void GlesSpy::glActiveTexture(uint32_t unit) {
-    GAPID_INFO("glActiveTexture");
+    GAPID_INFO("glActiveTexture()\n");
     mImports.glActiveTexture(unit);
     mState.glActiveTexture(unit);
 
@@ -1829,7 +1832,7 @@ inline void GlesSpy::glActiveTexture(uint32_t unit) {
 }
 
 inline void GlesSpy::glGenTextures(int32_t count, TextureId* textures) {
-    GAPID_INFO("glGenTextures");
+    GAPID_INFO("glGenTextures()\n");
     mImports.glGenTextures(count, textures);
     mState.glGenTextures(count, textures);
 
@@ -1847,7 +1850,7 @@ inline void GlesSpy::glGenTextures(int32_t count, TextureId* textures) {
 }
 
 inline void GlesSpy::glDeleteTextures(int32_t count, const TextureId* textures) {
-    GAPID_INFO("glDeleteTextures");
+    GAPID_INFO("glDeleteTextures()\n");
     mImports.glDeleteTextures(count, textures);
     mState.glDeleteTextures(count, textures);
 
@@ -1865,7 +1868,7 @@ inline void GlesSpy::glDeleteTextures(int32_t count, const TextureId* textures) 
 }
 
 inline bool GlesSpy::glIsTexture(TextureId texture) {
-    GAPID_INFO("glIsTexture");
+    GAPID_INFO("glIsTexture()\n");
     bool result = mImports.glIsTexture(texture);
     mState.glIsTexture(texture, result);
 
@@ -1877,7 +1880,7 @@ inline bool GlesSpy::glIsTexture(TextureId texture) {
 }
 
 inline void GlesSpy::glBindTexture(uint32_t target, TextureId texture) {
-    GAPID_INFO("glBindTexture");
+    GAPID_INFO("glBindTexture()\n");
     mImports.glBindTexture(target, texture);
     mState.glBindTexture(target, texture);
 
@@ -1889,7 +1892,7 @@ inline void GlesSpy::glBindTexture(uint32_t target, TextureId texture) {
 inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t internal_format,
                                   int32_t width, int32_t height, int32_t border, uint32_t format,
                                   uint32_t type, TexturePointer data) {
-    GAPID_INFO("glTexImage2D");
+    GAPID_INFO("glTexImage2D()\n");
     mImports.glTexImage2D(target, level, internal_format, width, height, border, format, type,
                           data);
     mState.glTexImage2D(target, level, internal_format, width, height, border, format, type, data);
@@ -1909,7 +1912,7 @@ inline void GlesSpy::glTexImage2D(uint32_t target, int32_t level, uint32_t inter
 inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                      int32_t yoffset, int32_t width, int32_t height,
                                      uint32_t format, uint32_t type, TexturePointer data) {
-    GAPID_INFO("glTexSubImage2D");
+    GAPID_INFO("glTexSubImage2D()\n");
     mImports.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
     mState.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, data);
 
@@ -1927,7 +1930,7 @@ inline void GlesSpy::glTexSubImage2D(uint32_t target, int32_t level, int32_t xof
 
 inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t format, int32_t x,
                                       int32_t y, int32_t width, int32_t height, int32_t border) {
-    GAPID_INFO("glCopyTexImage2D");
+    GAPID_INFO("glCopyTexImage2D()\n");
     mImports.glCopyTexImage2D(target, level, format, x, y, width, height, border);
     mState.glCopyTexImage2D(target, level, format, x, y, width, height, border);
 
@@ -1945,7 +1948,7 @@ inline void GlesSpy::glCopyTexImage2D(uint32_t target, int32_t level, uint32_t f
 inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t xoffset,
                                          int32_t yoffset, int32_t x, int32_t y, int32_t width,
                                          int32_t height) {
-    GAPID_INFO("glCopyTexSubImage2D");
+    GAPID_INFO("glCopyTexSubImage2D()\n");
     mImports.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
     mState.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
 
@@ -1963,7 +1966,7 @@ inline void GlesSpy::glCopyTexSubImage2D(uint32_t target, int32_t level, int32_t
 inline void GlesSpy::glCompressedTexImage2D(uint32_t target, int32_t level, uint32_t format,
                                             int32_t width, int32_t height, int32_t border,
                                             int32_t image_size, TexturePointer data) {
-    GAPID_INFO("glCompressedTexImage2D");
+    GAPID_INFO("glCompressedTexImage2D()\n");
     mImports.glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
     mState.glCompressedTexImage2D(target, level, format, width, height, border, image_size, data);
 
@@ -1982,7 +1985,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
                                                int32_t yoffset, int32_t width, int32_t height,
                                                uint32_t format, int32_t image_size,
                                                TexturePointer data) {
-    GAPID_INFO("glCompressedTexSubImage2D");
+    GAPID_INFO("glCompressedTexSubImage2D()\n");
     mImports.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
                                        image_size, data);
     mState.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format,
@@ -2001,7 +2004,7 @@ inline void GlesSpy::glCompressedTexSubImage2D(uint32_t target, int32_t level, i
 }
 
 inline void GlesSpy::glGenerateMipmap(uint32_t target) {
-    GAPID_INFO("glGenerateMipmap");
+    GAPID_INFO("glGenerateMipmap()\n");
     mImports.glGenerateMipmap(target);
     mState.glGenerateMipmap(target);
 
@@ -2011,7 +2014,7 @@ inline void GlesSpy::glGenerateMipmap(uint32_t target) {
 
 inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t height,
                                   uint32_t format, uint32_t type, void* data) {
-    GAPID_INFO("glReadPixels");
+    GAPID_INFO("glReadPixels()\n");
     mImports.glReadPixels(x, y, width, height, format, type, data);
     mState.glReadPixels(x, y, width, height, format, type, data);
 
@@ -2026,7 +2029,7 @@ inline void GlesSpy::glReadPixels(int32_t x, int32_t y, int32_t width, int32_t h
 }
 
 inline void GlesSpy::glGenFramebuffers(int32_t count, FramebufferId* framebuffers) {
-    GAPID_INFO("glGenFramebuffers");
+    GAPID_INFO("glGenFramebuffers()\n");
     mImports.glGenFramebuffers(count, framebuffers);
     mState.glGenFramebuffers(count, framebuffers);
 
@@ -2044,7 +2047,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, FramebufferId* framebuffer
 }
 
 inline void GlesSpy::glBindFramebuffer(uint32_t target, FramebufferId framebuffer) {
-    GAPID_INFO("glBindFramebuffer");
+    GAPID_INFO("glBindFramebuffer()\n");
     mImports.glBindFramebuffer(target, framebuffer);
     mState.glBindFramebuffer(target, framebuffer);
 
@@ -2054,7 +2057,7 @@ inline void GlesSpy::glBindFramebuffer(uint32_t target, FramebufferId framebuffe
 }
 
 inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
-    GAPID_INFO("glCheckFramebufferStatus");
+    GAPID_INFO("glCheckFramebufferStatus()\n");
     uint32_t result = mImports.glCheckFramebufferStatus(target);
     mState.glCheckFramebufferStatus(target, result);
 
@@ -2066,7 +2069,7 @@ inline uint32_t GlesSpy::glCheckFramebufferStatus(uint32_t target) {
 }
 
 inline void GlesSpy::glDeleteFramebuffers(int32_t count, const FramebufferId* framebuffers) {
-    GAPID_INFO("glDeleteFramebuffers");
+    GAPID_INFO("glDeleteFramebuffers()\n");
     mImports.glDeleteFramebuffers(count, framebuffers);
     mState.glDeleteFramebuffers(count, framebuffers);
 
@@ -2084,7 +2087,7 @@ inline void GlesSpy::glDeleteFramebuffers(int32_t count, const FramebufferId* fr
 }
 
 inline bool GlesSpy::glIsFramebuffer(FramebufferId framebuffer) {
-    GAPID_INFO("glIsFramebuffer");
+    GAPID_INFO("glIsFramebuffer()\n");
     bool result = mImports.glIsFramebuffer(framebuffer);
     mState.glIsFramebuffer(framebuffer, result);
 
@@ -2096,7 +2099,7 @@ inline bool GlesSpy::glIsFramebuffer(FramebufferId framebuffer) {
 }
 
 inline void GlesSpy::glGenRenderbuffers(int32_t count, RenderbufferId* renderbuffers) {
-    GAPID_INFO("glGenRenderbuffers");
+    GAPID_INFO("glGenRenderbuffers()\n");
     mImports.glGenRenderbuffers(count, renderbuffers);
     mState.glGenRenderbuffers(count, renderbuffers);
 
@@ -2114,7 +2117,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, RenderbufferId* renderbuf
 }
 
 inline void GlesSpy::glBindRenderbuffer(uint32_t target, RenderbufferId renderbuffer) {
-    GAPID_INFO("glBindRenderbuffer");
+    GAPID_INFO("glBindRenderbuffer()\n");
     mImports.glBindRenderbuffer(target, renderbuffer);
     mState.glBindRenderbuffer(target, renderbuffer);
 
@@ -2125,7 +2128,7 @@ inline void GlesSpy::glBindRenderbuffer(uint32_t target, RenderbufferId renderbu
 
 inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int32_t width,
                                            int32_t height) {
-    GAPID_INFO("glRenderbufferStorage");
+    GAPID_INFO("glRenderbufferStorage()\n");
     mImports.glRenderbufferStorage(target, format, width, height);
     mState.glRenderbufferStorage(target, format, width, height);
 
@@ -2137,7 +2140,7 @@ inline void GlesSpy::glRenderbufferStorage(uint32_t target, uint32_t format, int
 }
 
 inline void GlesSpy::glDeleteRenderbuffers(int32_t count, const RenderbufferId* renderbuffers) {
-    GAPID_INFO("glDeleteRenderbuffers");
+    GAPID_INFO("glDeleteRenderbuffers()\n");
     mImports.glDeleteRenderbuffers(count, renderbuffers);
     mState.glDeleteRenderbuffers(count, renderbuffers);
 
@@ -2155,7 +2158,7 @@ inline void GlesSpy::glDeleteRenderbuffers(int32_t count, const RenderbufferId* 
 }
 
 inline bool GlesSpy::glIsRenderbuffer(RenderbufferId renderbuffer) {
-    GAPID_INFO("glIsRenderbuffer");
+    GAPID_INFO("glIsRenderbuffer()\n");
     bool result = mImports.glIsRenderbuffer(renderbuffer);
     mState.glIsRenderbuffer(renderbuffer, result);
 
@@ -2168,7 +2171,7 @@ inline bool GlesSpy::glIsRenderbuffer(RenderbufferId renderbuffer) {
 
 inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t parameter,
                                                   int32_t* values) {
-    GAPID_INFO("glGetRenderbufferParameteriv");
+    GAPID_INFO("glGetRenderbufferParameteriv()\n");
     mImports.glGetRenderbufferParameteriv(target, parameter, values);
     mState.glGetRenderbufferParameteriv(target, parameter, values);
 
@@ -2187,7 +2190,7 @@ inline void GlesSpy::glGetRenderbufferParameteriv(uint32_t target, uint32_t para
 }
 
 inline void GlesSpy::glGenBuffers(int32_t count, BufferId* buffers) {
-    GAPID_INFO("glGenBuffers");
+    GAPID_INFO("glGenBuffers()\n");
     mImports.glGenBuffers(count, buffers);
     mState.glGenBuffers(count, buffers);
 
@@ -2205,7 +2208,7 @@ inline void GlesSpy::glGenBuffers(int32_t count, BufferId* buffers) {
 }
 
 inline void GlesSpy::glBindBuffer(uint32_t target, BufferId buffer) {
-    GAPID_INFO("glBindBuffer");
+    GAPID_INFO("glBindBuffer()\n");
     mImports.glBindBuffer(target, buffer);
     mState.glBindBuffer(target, buffer);
 
@@ -2216,7 +2219,7 @@ inline void GlesSpy::glBindBuffer(uint32_t target, BufferId buffer) {
 
 inline void GlesSpy::glBufferData(uint32_t target, int32_t size, BufferDataPointer data,
                                   uint32_t usage) {
-    GAPID_INFO("glBufferData");
+    GAPID_INFO("glBufferData()\n");
     mImports.glBufferData(target, size, data, usage);
     mState.glBufferData(target, size, data, usage);
 
@@ -2229,7 +2232,7 @@ inline void GlesSpy::glBufferData(uint32_t target, int32_t size, BufferDataPoint
 
 inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t size,
                                      const void* data) {
-    GAPID_INFO("glBufferSubData");
+    GAPID_INFO("glBufferSubData()\n");
     mImports.glBufferSubData(target, offset, size, data);
     mState.glBufferSubData(target, offset, size, data);
 
@@ -2241,7 +2244,7 @@ inline void GlesSpy::glBufferSubData(uint32_t target, int32_t offset, int32_t si
 }
 
 inline void GlesSpy::glDeleteBuffers(int32_t count, const BufferId* buffers) {
-    GAPID_INFO("glDeleteBuffers");
+    GAPID_INFO("glDeleteBuffers()\n");
     mImports.glDeleteBuffers(count, buffers);
     mState.glDeleteBuffers(count, buffers);
 
@@ -2259,7 +2262,7 @@ inline void GlesSpy::glDeleteBuffers(int32_t count, const BufferId* buffers) {
 }
 
 inline bool GlesSpy::glIsBuffer(BufferId buffer) {
-    GAPID_INFO("glIsBuffer");
+    GAPID_INFO("glIsBuffer()\n");
     bool result = mImports.glIsBuffer(buffer);
     mState.glIsBuffer(buffer, result);
 
@@ -2271,7 +2274,7 @@ inline bool GlesSpy::glIsBuffer(BufferId buffer) {
 }
 
 inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetBufferParameteriv");
+    GAPID_INFO("glGetBufferParameteriv()\n");
     mImports.glGetBufferParameteriv(target, parameter, value);
     mState.glGetBufferParameteriv(target, parameter, value);
 
@@ -2282,7 +2285,7 @@ inline void GlesSpy::glGetBufferParameteriv(uint32_t target, uint32_t parameter,
 }
 
 inline ShaderId GlesSpy::glCreateShader(uint32_t type) {
-    GAPID_INFO("glCreateShader");
+    GAPID_INFO("glCreateShader()\n");
     ShaderId result = mImports.glCreateShader(type);
     mState.glCreateShader(type, result);
 
@@ -2294,7 +2297,7 @@ inline ShaderId GlesSpy::glCreateShader(uint32_t type) {
 }
 
 inline void GlesSpy::glDeleteShader(ShaderId shader) {
-    GAPID_INFO("glDeleteShader");
+    GAPID_INFO("glDeleteShader()\n");
     mImports.glDeleteShader(shader);
     mState.glDeleteShader(shader);
 
@@ -2304,7 +2307,7 @@ inline void GlesSpy::glDeleteShader(ShaderId shader) {
 
 inline void GlesSpy::glShaderSource(ShaderId shader, int32_t count, const char** source,
                                     const int32_t* length) {
-    GAPID_INFO("glShaderSource");
+    GAPID_INFO("glShaderSource()\n");
     mImports.glShaderSource(shader, count, source, length);
     mState.glShaderSource(shader, count, source, length);
 
@@ -2333,7 +2336,7 @@ inline void GlesSpy::glShaderSource(ShaderId shader, int32_t count, const char**
 
 inline void GlesSpy::glShaderBinary(int32_t count, const ShaderId* shaders, uint32_t binary_format,
                                     const void* binary, int32_t binary_size) {
-    GAPID_INFO("glShaderBinary");
+    GAPID_INFO("glShaderBinary()\n");
     mImports.glShaderBinary(count, shaders, binary_format, binary, binary_size);
     mState.glShaderBinary(count, shaders, binary_format, binary, binary_size);
 
@@ -2355,7 +2358,7 @@ inline void GlesSpy::glShaderBinary(int32_t count, const ShaderId* shaders, uint
 
 inline void GlesSpy::glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
                                         int32_t* string_length_written, char* info) {
-    GAPID_INFO("glGetShaderInfoLog");
+    GAPID_INFO("glGetShaderInfoLog()\n");
     mImports.glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
     mState.glGetShaderInfoLog(shader, buffer_length, string_length_written, info);
 
@@ -2368,7 +2371,7 @@ inline void GlesSpy::glGetShaderInfoLog(ShaderId shader, int32_t buffer_length,
 
 inline void GlesSpy::glGetShaderSource(ShaderId shader, int32_t buffer_length,
                                        int32_t* string_length_written, char* source) {
-    GAPID_INFO("glGetShaderSource");
+    GAPID_INFO("glGetShaderSource()\n");
     mImports.glGetShaderSource(shader, buffer_length, string_length_written, source);
     mState.glGetShaderSource(shader, buffer_length, string_length_written, source);
 
@@ -2380,7 +2383,7 @@ inline void GlesSpy::glGetShaderSource(ShaderId shader, int32_t buffer_length,
 }
 
 inline void GlesSpy::glReleaseShaderCompiler() {
-    GAPID_INFO("glReleaseShaderCompiler");
+    GAPID_INFO("glReleaseShaderCompiler()\n");
     mImports.glReleaseShaderCompiler();
     mState.glReleaseShaderCompiler();
 
@@ -2388,7 +2391,7 @@ inline void GlesSpy::glReleaseShaderCompiler() {
 }
 
 inline void GlesSpy::glCompileShader(ShaderId shader) {
-    GAPID_INFO("glCompileShader");
+    GAPID_INFO("glCompileShader()\n");
     mImports.glCompileShader(shader);
     mState.glCompileShader(shader);
 
@@ -2397,7 +2400,7 @@ inline void GlesSpy::glCompileShader(ShaderId shader) {
 }
 
 inline bool GlesSpy::glIsShader(ShaderId shader) {
-    GAPID_INFO("glIsShader");
+    GAPID_INFO("glIsShader()\n");
     bool result = mImports.glIsShader(shader);
     mState.glIsShader(shader, result);
 
@@ -2409,7 +2412,7 @@ inline bool GlesSpy::glIsShader(ShaderId shader) {
 }
 
 inline ProgramId GlesSpy::glCreateProgram() {
-    GAPID_INFO("glCreateProgram");
+    GAPID_INFO("glCreateProgram()\n");
     ProgramId result = mImports.glCreateProgram();
     mState.glCreateProgram(result);
 
@@ -2420,7 +2423,7 @@ inline ProgramId GlesSpy::glCreateProgram() {
 }
 
 inline void GlesSpy::glDeleteProgram(ProgramId program) {
-    GAPID_INFO("glDeleteProgram");
+    GAPID_INFO("glDeleteProgram()\n");
     mImports.glDeleteProgram(program);
     mState.glDeleteProgram(program);
 
@@ -2429,7 +2432,7 @@ inline void GlesSpy::glDeleteProgram(ProgramId program) {
 }
 
 inline void GlesSpy::glAttachShader(ProgramId program, ShaderId shader) {
-    GAPID_INFO("glAttachShader");
+    GAPID_INFO("glAttachShader()\n");
     mImports.glAttachShader(program, shader);
     mState.glAttachShader(program, shader);
 
@@ -2439,7 +2442,7 @@ inline void GlesSpy::glAttachShader(ProgramId program, ShaderId shader) {
 }
 
 inline void GlesSpy::glDetachShader(ProgramId program, ShaderId shader) {
-    GAPID_INFO("glDetachShader");
+    GAPID_INFO("glDetachShader()\n");
     mImports.glDetachShader(program, shader);
     mState.glDetachShader(program, shader);
 
@@ -2450,7 +2453,7 @@ inline void GlesSpy::glDetachShader(ProgramId program, ShaderId shader) {
 
 inline void GlesSpy::glGetAttachedShaders(ProgramId program, int32_t buffer_length,
                                           int32_t* shaders_length_written, ShaderId* shaders) {
-    GAPID_INFO("glGetAttachedShaders");
+    GAPID_INFO("glGetAttachedShaders()\n");
     mImports.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
     mState.glGetAttachedShaders(program, buffer_length, shaders_length_written, shaders);
 
@@ -2470,7 +2473,7 @@ inline void GlesSpy::glGetAttachedShaders(ProgramId program, int32_t buffer_leng
 }
 
 inline void GlesSpy::glLinkProgram(ProgramId program) {
-    GAPID_INFO("glLinkProgram");
+    GAPID_INFO("glLinkProgram()\n");
     mImports.glLinkProgram(program);
     mState.glLinkProgram(program);
 
@@ -2480,7 +2483,7 @@ inline void GlesSpy::glLinkProgram(ProgramId program) {
 
 inline void GlesSpy::glGetProgramInfoLog(ProgramId program, int32_t buffer_length,
                                          int32_t* string_length_written, char* info) {
-    GAPID_INFO("glGetProgramInfoLog");
+    GAPID_INFO("glGetProgramInfoLog()\n");
     mImports.glGetProgramInfoLog(program, buffer_length, string_length_written, info);
     mState.glGetProgramInfoLog(program, buffer_length, string_length_written, info);
 
@@ -2492,7 +2495,7 @@ inline void GlesSpy::glGetProgramInfoLog(ProgramId program, int32_t buffer_lengt
 }
 
 inline void GlesSpy::glUseProgram(ProgramId program) {
-    GAPID_INFO("glUseProgram");
+    GAPID_INFO("glUseProgram()\n");
     mImports.glUseProgram(program);
     mState.glUseProgram(program);
 
@@ -2501,7 +2504,7 @@ inline void GlesSpy::glUseProgram(ProgramId program) {
 }
 
 inline bool GlesSpy::glIsProgram(ProgramId program) {
-    GAPID_INFO("glIsProgram");
+    GAPID_INFO("glIsProgram()\n");
     bool result = mImports.glIsProgram(program);
     mState.glIsProgram(program, result);
 
@@ -2513,7 +2516,7 @@ inline bool GlesSpy::glIsProgram(ProgramId program) {
 }
 
 inline void GlesSpy::glValidateProgram(ProgramId program) {
-    GAPID_INFO("glValidateProgram");
+    GAPID_INFO("glValidateProgram()\n");
     mImports.glValidateProgram(program);
     mState.glValidateProgram(program);
 
@@ -2522,7 +2525,7 @@ inline void GlesSpy::glValidateProgram(ProgramId program) {
 }
 
 inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
-    GAPID_INFO("glClearColor");
+    GAPID_INFO("glClearColor()\n");
     mImports.glClearColor(r, g, b, a);
     mState.glClearColor(r, g, b, a);
 
@@ -2534,7 +2537,7 @@ inline void GlesSpy::glClearColor(float r, float g, float b, float a) {
 }
 
 inline void GlesSpy::glClearDepthf(float depth) {
-    GAPID_INFO("glClearDepthf");
+    GAPID_INFO("glClearDepthf()\n");
     mImports.glClearDepthf(depth);
     mState.glClearDepthf(depth);
 
@@ -2543,7 +2546,7 @@ inline void GlesSpy::glClearDepthf(float depth) {
 }
 
 inline void GlesSpy::glClearStencil(int32_t stencil) {
-    GAPID_INFO("glClearStencil");
+    GAPID_INFO("glClearStencil()\n");
     mImports.glClearStencil(stencil);
     mState.glClearStencil(stencil);
 
@@ -2552,7 +2555,7 @@ inline void GlesSpy::glClearStencil(int32_t stencil) {
 }
 
 inline void GlesSpy::glClear(uint32_t mask) {
-    GAPID_INFO("glClear");
+    GAPID_INFO("glClear()\n");
     mImports.glClear(mask);
     mState.glClear(mask);
 
@@ -2561,7 +2564,7 @@ inline void GlesSpy::glClear(uint32_t mask) {
 }
 
 inline void GlesSpy::glCullFace(uint32_t mode) {
-    GAPID_INFO("glCullFace");
+    GAPID_INFO("glCullFace()\n");
     mImports.glCullFace(mode);
     mState.glCullFace(mode);
 
@@ -2570,7 +2573,7 @@ inline void GlesSpy::glCullFace(uint32_t mode) {
 }
 
 inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
-    GAPID_INFO("glPolygonOffset");
+    GAPID_INFO("glPolygonOffset()\n");
     mImports.glPolygonOffset(scale_factor, units);
     mState.glPolygonOffset(scale_factor, units);
 
@@ -2580,7 +2583,7 @@ inline void GlesSpy::glPolygonOffset(float scale_factor, float units) {
 }
 
 inline void GlesSpy::glLineWidth(float width) {
-    GAPID_INFO("glLineWidth");
+    GAPID_INFO("glLineWidth()\n");
     mImports.glLineWidth(width);
     mState.glLineWidth(width);
 
@@ -2589,7 +2592,7 @@ inline void GlesSpy::glLineWidth(float width) {
 }
 
 inline void GlesSpy::glSampleCoverage(float value, bool invert) {
-    GAPID_INFO("glSampleCoverage");
+    GAPID_INFO("glSampleCoverage()\n");
     mImports.glSampleCoverage(value, invert);
     mState.glSampleCoverage(value, invert);
 
@@ -2599,7 +2602,7 @@ inline void GlesSpy::glSampleCoverage(float value, bool invert) {
 }
 
 inline void GlesSpy::glHint(uint32_t target, uint32_t mode) {
-    GAPID_INFO("glHint");
+    GAPID_INFO("glHint()\n");
     mImports.glHint(target, mode);
     mState.glHint(target, mode);
 
@@ -2612,7 +2615,7 @@ inline void GlesSpy::glFramebufferRenderbuffer(uint32_t framebuffer_target,
                                                uint32_t framebuffer_attachment,
                                                uint32_t renderbuffer_target,
                                                RenderbufferId renderbuffer) {
-    GAPID_INFO("glFramebufferRenderbuffer");
+    GAPID_INFO("glFramebufferRenderbuffer()\n");
     mImports.glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
                                        renderbuffer_target, renderbuffer);
     mState.glFramebufferRenderbuffer(framebuffer_target, framebuffer_attachment,
@@ -2629,7 +2632,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
                                             uint32_t framebuffer_attachment,
                                             uint32_t texture_target, TextureId texture,
                                             int32_t level) {
-    GAPID_INFO("glFramebufferTexture2D");
+    GAPID_INFO("glFramebufferTexture2D()\n");
     mImports.glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
                                     texture, level);
     mState.glFramebufferTexture2D(framebuffer_target, framebuffer_attachment, texture_target,
@@ -2646,7 +2649,7 @@ inline void GlesSpy::glFramebufferTexture2D(uint32_t framebuffer_target,
 inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_target,
                                                            uint32_t attachment, uint32_t parameter,
                                                            int32_t* value) {
-    GAPID_INFO("glGetFramebufferAttachmentParameteriv");
+    GAPID_INFO("glGetFramebufferAttachmentParameteriv()\n");
     mImports.glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter,
                                                    value);
     mState.glGetFramebufferAttachmentParameteriv(framebuffer_target, attachment, parameter, value);
@@ -2669,7 +2672,7 @@ inline void GlesSpy::glGetFramebufferAttachmentParameteriv(uint32_t framebuffer_
 
 inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
                                     uint32_t indices_type, IndicesPointer indices) {
-    GAPID_INFO("glDrawElements");
+    GAPID_INFO("glDrawElements()\n");
     mImports.glDrawElements(draw_mode, element_count, indices_type, indices);
     mState.glDrawElements(draw_mode, element_count, indices_type, indices);
 
@@ -2681,7 +2684,7 @@ inline void GlesSpy::glDrawElements(uint32_t draw_mode, int32_t element_count,
 }
 
 inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32_t index_count) {
-    GAPID_INFO("glDrawArrays");
+    GAPID_INFO("glDrawArrays()\n");
     mImports.glDrawArrays(draw_mode, first_index, index_count);
     mState.glDrawArrays(draw_mode, first_index, index_count);
 
@@ -2692,7 +2695,7 @@ inline void GlesSpy::glDrawArrays(uint32_t draw_mode, int32_t first_index, int32
 }
 
 inline void GlesSpy::glFlush() {
-    GAPID_INFO("glFlush");
+    GAPID_INFO("glFlush()\n");
     mImports.glFlush();
     mState.glFlush();
 
@@ -2700,7 +2703,7 @@ inline void GlesSpy::glFlush() {
 }
 
 inline void GlesSpy::glFinish() {
-    GAPID_INFO("glFinish");
+    GAPID_INFO("glFinish()\n");
     mImports.glFinish();
     mState.glFinish();
 
@@ -2708,7 +2711,7 @@ inline void GlesSpy::glFinish() {
 }
 
 inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
-    GAPID_INFO("glGetBooleanv");
+    GAPID_INFO("glGetBooleanv()\n");
     mImports.glGetBooleanv(param, values);
     mState.glGetBooleanv(param, values);
 
@@ -2726,7 +2729,7 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
 }
 
 inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
-    GAPID_INFO("glGetFloatv");
+    GAPID_INFO("glGetFloatv()\n");
     mImports.glGetFloatv(param, values);
     mState.glGetFloatv(param, values);
 
@@ -2744,7 +2747,7 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
 }
 
 inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
-    GAPID_INFO("glGetIntegerv");
+    GAPID_INFO("glGetIntegerv()\n");
     mImports.glGetIntegerv(param, values);
     mState.glGetIntegerv(param, values);
 
@@ -2762,7 +2765,7 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
 }
 
 inline char* GlesSpy::glGetString(uint32_t param) {
-    GAPID_INFO("glGetString");
+    GAPID_INFO("glGetString()\n");
     char* result = mImports.glGetString(param);
     mState.glGetString(param, result);
 
@@ -2774,7 +2777,7 @@ inline char* GlesSpy::glGetString(uint32_t param) {
 }
 
 inline void GlesSpy::glEnable(uint32_t capability) {
-    GAPID_INFO("glEnable");
+    GAPID_INFO("glEnable()\n");
     mImports.glEnable(capability);
     mState.glEnable(capability);
 
@@ -2783,7 +2786,7 @@ inline void GlesSpy::glEnable(uint32_t capability) {
 }
 
 inline void GlesSpy::glDisable(uint32_t capability) {
-    GAPID_INFO("glDisable");
+    GAPID_INFO("glDisable()\n");
     mImports.glDisable(capability);
     mState.glDisable(capability);
 
@@ -2792,7 +2795,7 @@ inline void GlesSpy::glDisable(uint32_t capability) {
 }
 
 inline bool GlesSpy::glIsEnabled(uint32_t capability) {
-    GAPID_INFO("glIsEnabled");
+    GAPID_INFO("glIsEnabled()\n");
     bool result = mImports.glIsEnabled(capability);
     mState.glIsEnabled(capability, result);
 
@@ -2805,7 +2808,7 @@ inline bool GlesSpy::glIsEnabled(uint32_t capability) {
 
 inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t length,
                                        uint32_t access) {
-    GAPID_INFO("glMapBufferRange");
+    GAPID_INFO("glMapBufferRange()\n");
     void* result = mImports.glMapBufferRange(target, offset, length, access);
     mState.glMapBufferRange(target, offset, length, access, result);
 
@@ -2820,7 +2823,7 @@ inline void* GlesSpy::glMapBufferRange(uint32_t target, int32_t offset, int32_t 
 }
 
 inline void GlesSpy::glUnmapBuffer(uint32_t target) {
-    GAPID_INFO("glUnmapBuffer");
+    GAPID_INFO("glUnmapBuffer()\n");
     mImports.glUnmapBuffer(target);
     mState.glUnmapBuffer(target);
 
@@ -2830,7 +2833,7 @@ inline void GlesSpy::glUnmapBuffer(uint32_t target) {
 
 inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
                                              const uint32_t* attachments) {
-    GAPID_INFO("glInvalidateFramebuffer");
+    GAPID_INFO("glInvalidateFramebuffer()\n");
     mImports.glInvalidateFramebuffer(target, count, attachments);
     mState.glInvalidateFramebuffer(target, count, attachments);
 
@@ -2851,7 +2854,7 @@ inline void GlesSpy::glInvalidateFramebuffer(uint32_t target, int32_t count,
 inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t samples,
                                                       uint32_t format, int32_t width,
                                                       int32_t height) {
-    GAPID_INFO("glRenderbufferStorageMultisample");
+    GAPID_INFO("glRenderbufferStorageMultisample()\n");
     mImports.glRenderbufferStorageMultisample(target, samples, format, width, height);
     mState.glRenderbufferStorageMultisample(target, samples, format, width, height);
 
@@ -2867,7 +2870,7 @@ inline void GlesSpy::glRenderbufferStorageMultisample(uint32_t target, int32_t s
 inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                        int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1,
                                        uint32_t mask, uint32_t filter) {
-    GAPID_INFO("glBlitFramebuffer");
+    GAPID_INFO("glBlitFramebuffer()\n");
     mImports.glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask,
                                filter);
     mState.glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
@@ -2886,7 +2889,7 @@ inline void GlesSpy::glBlitFramebuffer(int32_t srcX0, int32_t srcY0, int32_t src
 }
 
 inline void GlesSpy::glGenQueries(int32_t count, QueryId* queries) {
-    GAPID_INFO("glGenQueries");
+    GAPID_INFO("glGenQueries()\n");
     mImports.glGenQueries(count, queries);
     mState.glGenQueries(count, queries);
 
@@ -2904,7 +2907,7 @@ inline void GlesSpy::glGenQueries(int32_t count, QueryId* queries) {
 }
 
 inline void GlesSpy::glBeginQuery(uint32_t target, QueryId query) {
-    GAPID_INFO("glBeginQuery");
+    GAPID_INFO("glBeginQuery()\n");
     mImports.glBeginQuery(target, query);
     mState.glBeginQuery(target, query);
 
@@ -2914,7 +2917,7 @@ inline void GlesSpy::glBeginQuery(uint32_t target, QueryId query) {
 }
 
 inline void GlesSpy::glEndQuery(uint32_t target) {
-    GAPID_INFO("glEndQuery");
+    GAPID_INFO("glEndQuery()\n");
     mImports.glEndQuery(target);
     mState.glEndQuery(target);
 
@@ -2923,7 +2926,7 @@ inline void GlesSpy::glEndQuery(uint32_t target) {
 }
 
 inline void GlesSpy::glDeleteQueries(int32_t count, const QueryId* queries) {
-    GAPID_INFO("glDeleteQueries");
+    GAPID_INFO("glDeleteQueries()\n");
     mImports.glDeleteQueries(count, queries);
     mState.glDeleteQueries(count, queries);
 
@@ -2941,7 +2944,7 @@ inline void GlesSpy::glDeleteQueries(int32_t count, const QueryId* queries) {
 }
 
 inline bool GlesSpy::glIsQuery(QueryId query) {
-    GAPID_INFO("glIsQuery");
+    GAPID_INFO("glIsQuery()\n");
     bool result = mImports.glIsQuery(query);
     mState.glIsQuery(query, result);
 
@@ -2953,7 +2956,7 @@ inline bool GlesSpy::glIsQuery(QueryId query) {
 }
 
 inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryiv");
+    GAPID_INFO("glGetQueryiv()\n");
     mImports.glGetQueryiv(target, parameter, value);
     mState.glGetQueryiv(target, parameter, value);
 
@@ -2964,7 +2967,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
 }
 
 inline void GlesSpy::glGetQueryObjectuiv(QueryId query, uint32_t parameter, uint32_t* value) {
-    GAPID_INFO("glGetQueryObjectuiv");
+    GAPID_INFO("glGetQueryObjectuiv()\n");
     mImports.glGetQueryObjectuiv(query, parameter, value);
     mState.glGetQueryObjectuiv(query, parameter, value);
 
@@ -2975,7 +2978,7 @@ inline void GlesSpy::glGetQueryObjectuiv(QueryId query, uint32_t parameter, uint
 }
 
 inline void GlesSpy::glGenQueriesEXT(int32_t count, QueryId* queries) {
-    GAPID_INFO("glGenQueriesEXT");
+    GAPID_INFO("glGenQueriesEXT()\n");
     mImports.glGenQueriesEXT(count, queries);
     mState.glGenQueriesEXT(count, queries);
 
@@ -2993,7 +2996,7 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, QueryId* queries) {
 }
 
 inline void GlesSpy::glBeginQueryEXT(uint32_t target, QueryId query) {
-    GAPID_INFO("glBeginQueryEXT");
+    GAPID_INFO("glBeginQueryEXT()\n");
     mImports.glBeginQueryEXT(target, query);
     mState.glBeginQueryEXT(target, query);
 
@@ -3003,7 +3006,7 @@ inline void GlesSpy::glBeginQueryEXT(uint32_t target, QueryId query) {
 }
 
 inline void GlesSpy::glEndQueryEXT(uint32_t target) {
-    GAPID_INFO("glEndQueryEXT");
+    GAPID_INFO("glEndQueryEXT()\n");
     mImports.glEndQueryEXT(target);
     mState.glEndQueryEXT(target);
 
@@ -3012,7 +3015,7 @@ inline void GlesSpy::glEndQueryEXT(uint32_t target) {
 }
 
 inline void GlesSpy::glDeleteQueriesEXT(int32_t count, const QueryId* queries) {
-    GAPID_INFO("glDeleteQueriesEXT");
+    GAPID_INFO("glDeleteQueriesEXT()\n");
     mImports.glDeleteQueriesEXT(count, queries);
     mState.glDeleteQueriesEXT(count, queries);
 
@@ -3030,7 +3033,7 @@ inline void GlesSpy::glDeleteQueriesEXT(int32_t count, const QueryId* queries) {
 }
 
 inline bool GlesSpy::glIsQueryEXT(QueryId query) {
-    GAPID_INFO("glIsQueryEXT");
+    GAPID_INFO("glIsQueryEXT()\n");
     bool result = mImports.glIsQueryEXT(query);
     mState.glIsQueryEXT(query, result);
 
@@ -3042,7 +3045,7 @@ inline bool GlesSpy::glIsQueryEXT(QueryId query) {
 }
 
 inline void GlesSpy::glQueryCounterEXT(QueryId query, uint32_t target) {
-    GAPID_INFO("glQueryCounterEXT");
+    GAPID_INFO("glQueryCounterEXT()\n");
     mImports.glQueryCounterEXT(query, target);
     mState.glQueryCounterEXT(query, target);
 
@@ -3052,7 +3055,7 @@ inline void GlesSpy::glQueryCounterEXT(QueryId query, uint32_t target) {
 }
 
 inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryivEXT");
+    GAPID_INFO("glGetQueryivEXT()\n");
     mImports.glGetQueryivEXT(target, parameter, value);
     mState.glGetQueryivEXT(target, parameter, value);
 
@@ -3063,7 +3066,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
 }
 
 inline void GlesSpy::glGetQueryObjectivEXT(QueryId query, uint32_t parameter, int32_t* value) {
-    GAPID_INFO("glGetQueryObjectivEXT");
+    GAPID_INFO("glGetQueryObjectivEXT()\n");
     mImports.glGetQueryObjectivEXT(query, parameter, value);
     mState.glGetQueryObjectivEXT(query, parameter, value);
 
@@ -3074,7 +3077,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(QueryId query, uint32_t parameter, in
 }
 
 inline void GlesSpy::glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, uint32_t* value) {
-    GAPID_INFO("glGetQueryObjectuivEXT");
+    GAPID_INFO("glGetQueryObjectuivEXT()\n");
     mImports.glGetQueryObjectuivEXT(query, parameter, value);
     mState.glGetQueryObjectuivEXT(query, parameter, value);
 
@@ -3085,7 +3088,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(QueryId query, uint32_t parameter, u
 }
 
 inline void GlesSpy::glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, int64_t* value) {
-    GAPID_INFO("glGetQueryObjecti64vEXT");
+    GAPID_INFO("glGetQueryObjecti64vEXT()\n");
     mImports.glGetQueryObjecti64vEXT(query, parameter, value);
     mState.glGetQueryObjecti64vEXT(query, parameter, value);
 
@@ -3096,7 +3099,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(QueryId query, uint32_t parameter, 
 }
 
 inline void GlesSpy::glGetQueryObjectui64vEXT(QueryId query, uint32_t parameter, uint64_t* value) {
-    GAPID_INFO("glGetQueryObjectui64vEXT");
+    GAPID_INFO("glGetQueryObjectui64vEXT()\n");
     mImports.glGetQueryObjectui64vEXT(query, parameter, value);
     mState.glGetQueryObjectui64vEXT(query, parameter, value);
 

@@ -46,9 +46,6 @@ Spy::Spy() {
     GlesSpy::init(encoder);
 }
 
-Spy::~Spy() {
-}
-
 EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
     EGLBoolean res = GlesSpy::eglInitialize(dpy, major, minor);
     if (res != 0) {
