@@ -17,23 +17,35 @@
 #include "../dl_loader.h"
 #include "../log.h"
 
-#include <stdlib.h>
-#include <string.h>
-
 namespace gapic {
 
 #define FRAMEWORK_ROOT "/System/Library/Frameworks/OpenGL.framework/"
 
-void* GetGfxProcAddress(const char *name) {
-    static DlLoader opengl(FRAMEWORK_ROOT "OpenGL");
-    if (void* proc = opengl.lookup(name)) { return proc; }
+void* GetGfxProcAddress(const char *name, bool bypassLocal) {
+   if (bypassLocal) {
+        static DlLoader opengl(FRAMEWORK_ROOT "OpenGL");
+        if (void* proc = opengl.lookup(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from OpenGL dlsym)", name, bypassLocal, proc);
+            return proc;
+        }
 
-    static DlLoader gl(FRAMEWORK_ROOT "Libraries/libGL.dylib");
-    if (void* proc = gl.lookup(name)) { return proc; }
+        static DlLoader libgl(FRAMEWORK_ROOT "Libraries/libGL.dylib");
+        if (void* proc = libgl.lookup(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGL dlsym)", name, bypassLocal, proc);
+            return proc;
+        }
 
-    static DlLoader glu(FRAMEWORK_ROOT "Libraries/libGLU.dylib");
-    if (void* proc = glu.lookup(name)) { return proc; }
+        static DlLoader libglu(FRAMEWORK_ROOT "Libraries/libGLU.dylib");
+        if (void* proc = libglu.lookup(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGLU dlsym)", name, bypassLocal, proc);
+            return proc;
+        }
+    } else {
+        static DlLoader local(nullptr);
+        return local.lookup(name);
+    }
 
+    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found", name, bypassLocal);
     return nullptr;
 }
 

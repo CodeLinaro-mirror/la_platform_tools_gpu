@@ -29,36 +29,43 @@ namespace gapic {
 #if TARGET_OS == GAPID_OS_WINDOWS
 
 DlLoader::DlLoader(const char* name) {
-  mLibrary = reinterpret_cast<void*>(LoadLibraryExA(name, NULL, 0));
-  if (mLibrary == nullptr) {
-    GAPID_FATAL("Can't load library %s: %d", name, GetLastError());
-  }
+    mLibrary = reinterpret_cast<void*>(LoadLibraryExA(name, NULL, 0));
+    if (mLibrary == nullptr) {
+        GAPID_FATAL("Can't load library %s: %d", name, GetLastError());
+    }
 }
 
 DlLoader::~DlLoader() {
-  FreeLibrary(reinterpret_cast<HMODULE>(mLibrary));
+    if (mLibrary != nullptr) {
+        FreeLibrary(reinterpret_cast<HMODULE>(mLibrary));
+    }
 }
 
 void* DlLoader::lookup(const char* name) {
-  return reinterpret_cast<void*>(
-      GetProcAddress(reinterpret_cast<HMODULE>(mLibrary), name));
+    return reinterpret_cast<void*>(GetProcAddress(reinterpret_cast<HMODULE>(mLibrary), name));
 }
 
 #else // if TARGET_OS == GAPID_OS_WINDOWS
 
 DlLoader::DlLoader(const char* name) {
-  mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
-  if (mLibrary == nullptr) {
-    GAPID_FATAL("Can't load library %s: %s", name, dlerror());
-  }
+    if (name == nullptr) {
+        mLibrary = nullptr;
+    } else {
+        mLibrary = dlopen(name, RTLD_NOW | RTLD_LOCAL);
+        if (mLibrary == nullptr) {
+            GAPID_FATAL("Can't load library %s: %s", name, dlerror());
+        }
+    }
 }
 
 DlLoader::~DlLoader() {
-  dlclose(mLibrary);
+    if (mLibrary != nullptr) {
+        dlclose(mLibrary);
+    }
 }
 
 void* DlLoader::lookup(const char* name) {
-  return dlsym(mLibrary, name);
+    return dlsym((mLibrary ? mLibrary : RTLD_DEFAULT), name);
 }
 
 #endif

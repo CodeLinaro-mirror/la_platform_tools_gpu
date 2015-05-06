@@ -14,19 +14,42 @@
  * limitations under the License.
  */
 
-#include <dlfcn.h>
-#include <stdlib.h>
-#include <string.h>
-
-extern "C" void (*glXGetProcAddress(const unsigned char*))(void);
+#include "../dl_loader.h"
+#include "../log.h"
 
 namespace gapic {
 
-void* GetGfxProcAddress(const char *name) {
-    void *p = reinterpret_cast<void*>(glXGetProcAddress(
-        reinterpret_cast<const unsigned char *>(name)));
+void* GetGfxProcAddress(const char *name, bool bypassLocal) {
+    typedef void* (*GPAPROC)(const char *name);
 
-    return p == nullptr ? dlsym(RTLD_DEFAULT, name) : p;
+    if (bypassLocal) {
+        static DlLoader libgl("libGL.so");
+        if (GPAPROC gpa = reinterpret_cast<GPAPROC>(libgl.lookup("glXGetProcAddress"))) {
+            if (void* proc = gpa(name)) {
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via libGL glXGetProcAddress)", name, bypassLocal, proc);
+                return proc;
+            }
+        }
+        if (void* proc = libgl.lookup(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from libGL dlsym)", name, bypassLocal, proc);
+            return proc;
+        }
+    } else {
+        static DlLoader local(nullptr);
+        if (GPAPROC gpa = reinterpret_cast<GPAPROC>(local.lookup("glXGetProcAddress"))) {
+            if (void* proc = gpa(name)) {
+                GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via local glXGetProcAddress)", name, bypassLocal, proc);
+                return proc;
+            }
+        }
+        if (void* proc = local.lookup(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from local dlsym)", name, bypassLocal, proc);
+            return proc;
+        }
+    }
+
+    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found", name, bypassLocal);
+    return nullptr;
 }
 
 }  // namespace gapic

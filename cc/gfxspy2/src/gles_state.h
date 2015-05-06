@@ -1328,8 +1328,7 @@ inline void GlesState::glUniformMatrix2fv(UniformLocation const location, int32_
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
-    l_uniform.mValue.mMat2f = Mat2f()
-                                      .SetCol0(Vec2f().SetX(values[0]).SetY(values[1]))
+    l_uniform.mValue.mMat2f = Mat2f().SetCol0(Vec2f().SetX(values[0]).SetY(values[1]))
                                       .SetCol1(Vec2f().SetX(values[0]).SetY(values[1]));
     l_program->mUniforms[location] = l_uniform;
 }
@@ -1343,8 +1342,7 @@ inline void GlesState::glUniformMatrix3fv(UniformLocation const location, int32_
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT3;
     l_uniform.mValue.mMat3f =
-            Mat3f()
-                    .SetCol0(Vec3f().SetX(values[0]).SetY(values[1]).SetZ(values[2]))
+            Mat3f().SetCol0(Vec3f().SetX(values[0]).SetY(values[1]).SetZ(values[2]))
                     .SetCol1(Vec3f().SetX(values[3]).SetY(values[4]).SetZ(values[5]))
                     .SetCol2(Vec3f().SetX(values[6]).SetY(values[7]).SetZ(values[8]));
     l_program->mUniforms[location] = l_uniform;
@@ -1358,18 +1356,14 @@ inline void GlesState::glUniformMatrix4fv(UniformLocation const location, int32_
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mValue.mMat4f =
-            Mat4f()
-                    .SetCol0(Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(
-                            values[3]))
-                    .SetCol1(Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(
-                            values[7]))
-                    .SetCol2(Vec4f()
-                                     .SetX(values[8])
+            Mat4f().SetCol0(Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(values[3]))
+                    .SetCol1(
+                            Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(values[7]))
+                    .SetCol2(Vec4f().SetX(values[8])
                                      .SetY(values[9])
                                      .SetZ(values[10])
                                      .SetW(values[11]))
-                    .SetCol3(Vec4f()
-                                     .SetX(values[12])
+                    .SetCol3(Vec4f().SetX(values[12])
                                      .SetY(values[13])
                                      .SetZ(values[14])
                                      .SetW(values[15]));
@@ -1562,8 +1556,7 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                     l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
             Image l_l =
-                    Image()
-                            .SetWidth(width)
+                    Image().SetWidth(width)
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
@@ -1586,8 +1579,7 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                                                  [TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
             Image l_l =
-                    Image()
-                            .SetWidth(width)
+                    Image().SetWidth(width)
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
@@ -1619,8 +1611,7 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                     l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
             Image l_l =
-                    Image()
-                            .SetWidth(width)
+                    Image().SetWidth(width)
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
@@ -1643,8 +1634,7 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                                                  [TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
             Image l_l =
-                    Image()
-                            .SetWidth(width)
+                    Image().SetWidth(width)
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
@@ -1684,8 +1674,7 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             TextureId l_id =
                     l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][TextureTarget::GL_TEXTURE_2D];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-            Image l_l = Image()
-                                .SetWidth(width)
+            Image l_l = Image().SetWidth(width)
                                 .SetHeight(height)
                                 .SetSize((uint32_t)(image_size))
                                 .SetFormat((uint32_t)(format));
@@ -1707,8 +1696,7 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
             TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
                                                  [TextureTarget::GL_TEXTURE_CUBE_MAP];
             std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
-            Image l_l = Image()
-                                .SetWidth(width)
+            Image l_l = Image().SetWidth(width)
                                 .SetHeight(height)
                                 .SetSize((uint32_t)(image_size))
                                 .SetFormat((uint32_t)(format));

@@ -20,6 +20,7 @@
 #include "gles_spy.h"
 
 #include <memory>
+#include <unordered_map>
 
 namespace gapii {
 
@@ -31,17 +32,26 @@ public:
     EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor);
     EGLBoolean eglMakeCurrent(EGLDisplay display, EGLSurface draw, EGLSurface read,
                               EGLContext context);
-
     BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc);
     CGLError CGLSetCurrentContext(CGLContextObj ctx);
     void glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read,
                                GLXContext ctx);
+
+    inline void RegisterSymbol(const std::string& name, void* symbol) {
+        mSymbols.emplace(name, symbol);
+    }
+    inline void* LookupSymbol(const std::string& name) const {
+        const auto symbol = mSymbols.find(name);
+        return (symbol == mSymbols.end()) ? nullptr : symbol->second;
+    }
+
 private:
     void backbufferInfo(int32_t width, int32_t height,
                         uint32_t color_fmt, uint32_t depth_fmt, uint32_t stencil_fmt,
                         bool resetViewportScissor);
 
     std::shared_ptr<gapic::Encoder> mEncoder;
+    std::unordered_map<std::string, void*> mSymbols;
 };
 
 } // namespace gapii

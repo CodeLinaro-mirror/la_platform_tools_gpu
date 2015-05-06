@@ -15,42 +15,46 @@
  */
 
 #include "../dl_loader.h"
-#include "../target.h" // snprintf
+#include "../log.h"
+#include "../target.h" // STDCALL
 
-#include <stdio.h>
 #include <string>
+#include <sstream>
+
 #include <windows.h>
 #include <wingdi.h>
 
 namespace {
 
-typedef void* (__stdcall *PFNWGLGETPROCADDRESS)(const char* name);
-
-std::string opengl32Path() {
+std::string systemOpengl32Path() {
     char sysdir[MAX_PATH];
     GetSystemDirectoryA(sysdir, MAX_PATH-1);
 
-    char dllpath[MAX_PATH];
-    snprintf(dllpath, MAX_PATH, "%s\\opengl32.dll", sysdir);
-    return std::string(dllpath);
+    std::stringstream path;
+    path << sysdir << "\\opengl32.dll";
+    return path.str();
 }
 
 } // anonymous namespace
 
 namespace gapic {
 
-void* GetGfxProcAddress(const char* name) {
-    static DlLoader opengl(opengl32Path().c_str());
+void* GetGfxProcAddress(const char* name, bool bypassLocal) {
+    typedef void* (*GPAPROC)(const char *name);
 
-    if (void* f = opengl.lookup(name)) {
-        return f;
+    static DlLoader opengl(bypassLocal ? systemOpengl32Path().c_str() : "opengl32.dll");
+    if (GPAPROC gpa = reinterpret_cast<GPAPROC>(opengl.lookup("wglGetProcAddress"))) {
+        if (void* proc = gpa(name)) {
+            GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (via opengl32 wglGetProcAddress)", name, bypassLocal, proc);
+            return proc;
+        }
+    }
+    if (void* proc = opengl.lookup(name)) {
+        GAPID_INFO("GetGfxProcAddress(%s, %d) -> 0x%x (from opengl32 symbol)", name, bypassLocal, proc);
+        return proc;
     }
 
-    auto gpa = reinterpret_cast<PFNWGLGETPROCADDRESS>(opengl.lookup("wglGetProcAddress"));
-    if (gpa != nullptr) {
-        return gpa(name);
-    }
-
+    GAPID_INFO("GetGfxProcAddress(%s, %d) -> not found", name, bypassLocal);
     return nullptr;
 }
 

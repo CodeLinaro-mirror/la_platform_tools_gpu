@@ -20,8 +20,9 @@
 namespace gapic {
 
 // GetGfxProcAddress returns the function pointer to the function with the given
-// name, or nullptr if the function was not found.
-void* GetGfxProcAddress(const char* name);
+// name, or nullptr if the function was not found. If bypassLocal is true, the
+// function resolution will bypass symbols loaded in the global context.
+void* GetGfxProcAddress(const char* name, bool bypassLocal);
 
 }  // namespace gapic
 

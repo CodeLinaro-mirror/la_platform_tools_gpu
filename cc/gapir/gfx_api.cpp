@@ -4076,333 +4076,367 @@ void Register(Interpreter* interpreter) {
     interpreter->registerFunction(Ids::GlGetQueryObjectui64vEXT, callGlGetQueryObjectui64vEXT);
 }
 void Initialize() {
-    eglInitialize = reinterpret_cast<PFNEGLINITIALIZE>(gapic::GetGfxProcAddress("eglInitialize"));
-    eglCreateContext =
-            reinterpret_cast<PFNEGLCREATECONTEXT>(gapic::GetGfxProcAddress("eglCreateContext"));
+    eglInitialize =
+            reinterpret_cast<PFNEGLINITIALIZE>(gapic::GetGfxProcAddress("eglInitialize", false));
+    eglCreateContext = reinterpret_cast<PFNEGLCREATECONTEXT>(
+            gapic::GetGfxProcAddress("eglCreateContext", false));
     eglMakeCurrent =
-            reinterpret_cast<PFNEGLMAKECURRENT>(gapic::GetGfxProcAddress("eglMakeCurrent"));
+            reinterpret_cast<PFNEGLMAKECURRENT>(gapic::GetGfxProcAddress("eglMakeCurrent", false));
     eglSwapBuffers =
-            reinterpret_cast<PFNEGLSWAPBUFFERS>(gapic::GetGfxProcAddress("eglSwapBuffers"));
-    eglQuerySurface =
-            reinterpret_cast<PFNEGLQUERYSURFACE>(gapic::GetGfxProcAddress("eglQuerySurface"));
-    glXCreateContext =
-            reinterpret_cast<PFNGLXCREATECONTEXT>(gapic::GetGfxProcAddress("glXCreateContext"));
+            reinterpret_cast<PFNEGLSWAPBUFFERS>(gapic::GetGfxProcAddress("eglSwapBuffers", false));
+    eglQuerySurface = reinterpret_cast<PFNEGLQUERYSURFACE>(
+            gapic::GetGfxProcAddress("eglQuerySurface", false));
+    glXCreateContext = reinterpret_cast<PFNGLXCREATECONTEXT>(
+            gapic::GetGfxProcAddress("glXCreateContext", false));
     glXCreateNewContext = reinterpret_cast<PFNGLXCREATENEWCONTEXT>(
-            gapic::GetGfxProcAddress("glXCreateNewContext"));
+            gapic::GetGfxProcAddress("glXCreateNewContext", false));
     glXMakeContextCurrent = reinterpret_cast<PFNGLXMAKECONTEXTCURRENT>(
-            gapic::GetGfxProcAddress("glXMakeContextCurrent"));
+            gapic::GetGfxProcAddress("glXMakeContextCurrent", false));
     glXSwapBuffers =
-            reinterpret_cast<PFNGLXSWAPBUFFERS>(gapic::GetGfxProcAddress("glXSwapBuffers"));
-    wglCreateContext =
-            reinterpret_cast<PFNWGLCREATECONTEXT>(gapic::GetGfxProcAddress("wglCreateContext"));
+            reinterpret_cast<PFNGLXSWAPBUFFERS>(gapic::GetGfxProcAddress("glXSwapBuffers", false));
+    wglCreateContext = reinterpret_cast<PFNWGLCREATECONTEXT>(
+            gapic::GetGfxProcAddress("wglCreateContext", false));
     wglCreateContextAttribsARB = reinterpret_cast<PFNWGLCREATECONTEXTATTRIBSARB>(
-            gapic::GetGfxProcAddress("wglCreateContextAttribsARB"));
+            gapic::GetGfxProcAddress("wglCreateContextAttribsARB", false));
     wglMakeCurrent =
-            reinterpret_cast<PFNWGLMAKECURRENT>(gapic::GetGfxProcAddress("wglMakeCurrent"));
+            reinterpret_cast<PFNWGLMAKECURRENT>(gapic::GetGfxProcAddress("wglMakeCurrent", false));
     wglSwapBuffers =
-            reinterpret_cast<PFNWGLSWAPBUFFERS>(gapic::GetGfxProcAddress("wglSwapBuffers"));
-    CGLCreateContext =
-            reinterpret_cast<PFNCGLCREATECONTEXT>(gapic::GetGfxProcAddress("CGLCreateContext"));
+            reinterpret_cast<PFNWGLSWAPBUFFERS>(gapic::GetGfxProcAddress("wglSwapBuffers", false));
+    CGLCreateContext = reinterpret_cast<PFNCGLCREATECONTEXT>(
+            gapic::GetGfxProcAddress("CGLCreateContext", false));
     CGLSetCurrentContext = reinterpret_cast<PFNCGLSETCURRENTCONTEXT>(
-            gapic::GetGfxProcAddress("CGLSetCurrentContext"));
+            gapic::GetGfxProcAddress("CGLSetCurrentContext", false));
     glEnableClientState = reinterpret_cast<PFNGLENABLECLIENTSTATE>(
-            gapic::GetGfxProcAddress("glEnableClientState"));
+            gapic::GetGfxProcAddress("glEnableClientState", false));
     glDisableClientState = reinterpret_cast<PFNGLDISABLECLIENTSTATE>(
-            gapic::GetGfxProcAddress("glDisableClientState"));
+            gapic::GetGfxProcAddress("glDisableClientState", false));
     glGetProgramBinaryOES = reinterpret_cast<PFNGLGETPROGRAMBINARYOES>(
-            gapic::GetGfxProcAddress("glGetProgramBinaryOES"));
-    glProgramBinaryOES =
-            reinterpret_cast<PFNGLPROGRAMBINARYOES>(gapic::GetGfxProcAddress("glProgramBinaryOES"));
-    glStartTilingQCOM =
-            reinterpret_cast<PFNGLSTARTTILINGQCOM>(gapic::GetGfxProcAddress("glStartTilingQCOM"));
-    glEndTilingQCOM =
-            reinterpret_cast<PFNGLENDTILINGQCOM>(gapic::GetGfxProcAddress("glEndTilingQCOM"));
+            gapic::GetGfxProcAddress("glGetProgramBinaryOES", false));
+    glProgramBinaryOES = reinterpret_cast<PFNGLPROGRAMBINARYOES>(
+            gapic::GetGfxProcAddress("glProgramBinaryOES", false));
+    glStartTilingQCOM = reinterpret_cast<PFNGLSTARTTILINGQCOM>(
+            gapic::GetGfxProcAddress("glStartTilingQCOM", false));
+    glEndTilingQCOM = reinterpret_cast<PFNGLENDTILINGQCOM>(
+            gapic::GetGfxProcAddress("glEndTilingQCOM", false));
     glDiscardFramebufferEXT = reinterpret_cast<PFNGLDISCARDFRAMEBUFFEREXT>(
-            gapic::GetGfxProcAddress("glDiscardFramebufferEXT"));
+            gapic::GetGfxProcAddress("glDiscardFramebufferEXT", false));
     glInsertEventMarkerEXT = reinterpret_cast<PFNGLINSERTEVENTMARKEREXT>(
-            gapic::GetGfxProcAddress("glInsertEventMarkerEXT"));
+            gapic::GetGfxProcAddress("glInsertEventMarkerEXT", false));
     glPushGroupMarkerEXT = reinterpret_cast<PFNGLPUSHGROUPMARKEREXT>(
-            gapic::GetGfxProcAddress("glPushGroupMarkerEXT"));
+            gapic::GetGfxProcAddress("glPushGroupMarkerEXT", false));
     glPopGroupMarkerEXT = reinterpret_cast<PFNGLPOPGROUPMARKEREXT>(
-            gapic::GetGfxProcAddress("glPopGroupMarkerEXT"));
-    glTexStorage1DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE1DEXT>(gapic::GetGfxProcAddress("glTexStorage1DEXT"));
-    glTexStorage2DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE2DEXT>(gapic::GetGfxProcAddress("glTexStorage2DEXT"));
-    glTexStorage3DEXT =
-            reinterpret_cast<PFNGLTEXSTORAGE3DEXT>(gapic::GetGfxProcAddress("glTexStorage3DEXT"));
+            gapic::GetGfxProcAddress("glPopGroupMarkerEXT", false));
+    glTexStorage1DEXT = reinterpret_cast<PFNGLTEXSTORAGE1DEXT>(
+            gapic::GetGfxProcAddress("glTexStorage1DEXT", false));
+    glTexStorage2DEXT = reinterpret_cast<PFNGLTEXSTORAGE2DEXT>(
+            gapic::GetGfxProcAddress("glTexStorage2DEXT", false));
+    glTexStorage3DEXT = reinterpret_cast<PFNGLTEXSTORAGE3DEXT>(
+            gapic::GetGfxProcAddress("glTexStorage3DEXT", false));
     glTextureStorage1DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE1DEXT>(
-            gapic::GetGfxProcAddress("glTextureStorage1DEXT"));
+            gapic::GetGfxProcAddress("glTextureStorage1DEXT", false));
     glTextureStorage2DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE2DEXT>(
-            gapic::GetGfxProcAddress("glTextureStorage2DEXT"));
+            gapic::GetGfxProcAddress("glTextureStorage2DEXT", false));
     glTextureStorage3DEXT = reinterpret_cast<PFNGLTEXTURESTORAGE3DEXT>(
-            gapic::GetGfxProcAddress("glTextureStorage3DEXT"));
+            gapic::GetGfxProcAddress("glTextureStorage3DEXT", false));
     glGenVertexArraysOES = reinterpret_cast<PFNGLGENVERTEXARRAYSOES>(
-            gapic::GetGfxProcAddress("glGenVertexArraysOES"));
+            gapic::GetGfxProcAddress("glGenVertexArraysOES", false));
     glBindVertexArrayOES = reinterpret_cast<PFNGLBINDVERTEXARRAYOES>(
-            gapic::GetGfxProcAddress("glBindVertexArrayOES"));
+            gapic::GetGfxProcAddress("glBindVertexArrayOES", false));
     glDeleteVertexArraysOES = reinterpret_cast<PFNGLDELETEVERTEXARRAYSOES>(
-            gapic::GetGfxProcAddress("glDeleteVertexArraysOES"));
-    glIsVertexArrayOES =
-            reinterpret_cast<PFNGLISVERTEXARRAYOES>(gapic::GetGfxProcAddress("glIsVertexArrayOES"));
+            gapic::GetGfxProcAddress("glDeleteVertexArraysOES", false));
+    glIsVertexArrayOES = reinterpret_cast<PFNGLISVERTEXARRAYOES>(
+            gapic::GetGfxProcAddress("glIsVertexArrayOES", false));
     glEGLImageTargetTexture2DOES = reinterpret_cast<PFNGLEGLIMAGETARGETTEXTURE2DOES>(
-            gapic::GetGfxProcAddress("glEGLImageTargetTexture2DOES"));
+            gapic::GetGfxProcAddress("glEGLImageTargetTexture2DOES", false));
     glEGLImageTargetRenderbufferStorageOES =
             reinterpret_cast<PFNGLEGLIMAGETARGETRENDERBUFFERSTORAGEOES>(
-                    gapic::GetGfxProcAddress("glEGLImageTargetRenderbufferStorageOES"));
+                    gapic::GetGfxProcAddress("glEGLImageTargetRenderbufferStorageOES", false));
     glGetGraphicsResetStatusEXT = reinterpret_cast<PFNGLGETGRAPHICSRESETSTATUSEXT>(
-            gapic::GetGfxProcAddress("glGetGraphicsResetStatusEXT"));
+            gapic::GetGfxProcAddress("glGetGraphicsResetStatusEXT", false));
     glBindAttribLocation = reinterpret_cast<PFNGLBINDATTRIBLOCATION>(
-            gapic::GetGfxProcAddress("glBindAttribLocation"));
-    glBlendFunc = reinterpret_cast<PFNGLBLENDFUNC>(gapic::GetGfxProcAddress("glBlendFunc"));
+            gapic::GetGfxProcAddress("glBindAttribLocation", false));
+    glBlendFunc = reinterpret_cast<PFNGLBLENDFUNC>(gapic::GetGfxProcAddress("glBlendFunc", false));
     glBlendFuncSeparate = reinterpret_cast<PFNGLBLENDFUNCSEPARATE>(
-            gapic::GetGfxProcAddress("glBlendFuncSeparate"));
-    glBlendEquation =
-            reinterpret_cast<PFNGLBLENDEQUATION>(gapic::GetGfxProcAddress("glBlendEquation"));
+            gapic::GetGfxProcAddress("glBlendFuncSeparate", false));
+    glBlendEquation = reinterpret_cast<PFNGLBLENDEQUATION>(
+            gapic::GetGfxProcAddress("glBlendEquation", false));
     glBlendEquationSeparate = reinterpret_cast<PFNGLBLENDEQUATIONSEPARATE>(
-            gapic::GetGfxProcAddress("glBlendEquationSeparate"));
-    glBlendColor = reinterpret_cast<PFNGLBLENDCOLOR>(gapic::GetGfxProcAddress("glBlendColor"));
+            gapic::GetGfxProcAddress("glBlendEquationSeparate", false));
+    glBlendColor =
+            reinterpret_cast<PFNGLBLENDCOLOR>(gapic::GetGfxProcAddress("glBlendColor", false));
     glEnableVertexAttribArray = reinterpret_cast<PFNGLENABLEVERTEXATTRIBARRAY>(
-            gapic::GetGfxProcAddress("glEnableVertexAttribArray"));
+            gapic::GetGfxProcAddress("glEnableVertexAttribArray", false));
     glDisableVertexAttribArray = reinterpret_cast<PFNGLDISABLEVERTEXATTRIBARRAY>(
-            gapic::GetGfxProcAddress("glDisableVertexAttribArray"));
+            gapic::GetGfxProcAddress("glDisableVertexAttribArray", false));
     glVertexAttribPointer = reinterpret_cast<PFNGLVERTEXATTRIBPOINTER>(
-            gapic::GetGfxProcAddress("glVertexAttribPointer"));
-    glGetActiveAttrib =
-            reinterpret_cast<PFNGLGETACTIVEATTRIB>(gapic::GetGfxProcAddress("glGetActiveAttrib"));
-    glGetActiveUniform =
-            reinterpret_cast<PFNGLGETACTIVEUNIFORM>(gapic::GetGfxProcAddress("glGetActiveUniform"));
-    glGetError = reinterpret_cast<PFNGLGETERROR>(gapic::GetGfxProcAddress("glGetError"));
+            gapic::GetGfxProcAddress("glVertexAttribPointer", false));
+    glGetActiveAttrib = reinterpret_cast<PFNGLGETACTIVEATTRIB>(
+            gapic::GetGfxProcAddress("glGetActiveAttrib", false));
+    glGetActiveUniform = reinterpret_cast<PFNGLGETACTIVEUNIFORM>(
+            gapic::GetGfxProcAddress("glGetActiveUniform", false));
+    glGetError = reinterpret_cast<PFNGLGETERROR>(gapic::GetGfxProcAddress("glGetError", false));
     glGetProgramiv =
-            reinterpret_cast<PFNGLGETPROGRAMIV>(gapic::GetGfxProcAddress("glGetProgramiv"));
-    glGetShaderiv = reinterpret_cast<PFNGLGETSHADERIV>(gapic::GetGfxProcAddress("glGetShaderiv"));
+            reinterpret_cast<PFNGLGETPROGRAMIV>(gapic::GetGfxProcAddress("glGetProgramiv", false));
+    glGetShaderiv =
+            reinterpret_cast<PFNGLGETSHADERIV>(gapic::GetGfxProcAddress("glGetShaderiv", false));
     glGetUniformLocation = reinterpret_cast<PFNGLGETUNIFORMLOCATION>(
-            gapic::GetGfxProcAddress("glGetUniformLocation"));
+            gapic::GetGfxProcAddress("glGetUniformLocation", false));
     glGetAttribLocation = reinterpret_cast<PFNGLGETATTRIBLOCATION>(
-            gapic::GetGfxProcAddress("glGetAttribLocation"));
-    glPixelStorei = reinterpret_cast<PFNGLPIXELSTOREI>(gapic::GetGfxProcAddress("glPixelStorei"));
-    glTexParameteri =
-            reinterpret_cast<PFNGLTEXPARAMETERI>(gapic::GetGfxProcAddress("glTexParameteri"));
-    glTexParameterf =
-            reinterpret_cast<PFNGLTEXPARAMETERF>(gapic::GetGfxProcAddress("glTexParameterf"));
+            gapic::GetGfxProcAddress("glGetAttribLocation", false));
+    glPixelStorei =
+            reinterpret_cast<PFNGLPIXELSTOREI>(gapic::GetGfxProcAddress("glPixelStorei", false));
+    glTexParameteri = reinterpret_cast<PFNGLTEXPARAMETERI>(
+            gapic::GetGfxProcAddress("glTexParameteri", false));
+    glTexParameterf = reinterpret_cast<PFNGLTEXPARAMETERF>(
+            gapic::GetGfxProcAddress("glTexParameterf", false));
     glGetTexParameteriv = reinterpret_cast<PFNGLGETTEXPARAMETERIV>(
-            gapic::GetGfxProcAddress("glGetTexParameteriv"));
+            gapic::GetGfxProcAddress("glGetTexParameteriv", false));
     glGetTexParameterfv = reinterpret_cast<PFNGLGETTEXPARAMETERFV>(
-            gapic::GetGfxProcAddress("glGetTexParameterfv"));
-    glUniform1i = reinterpret_cast<PFNGLUNIFORM1I>(gapic::GetGfxProcAddress("glUniform1i"));
-    glUniform2i = reinterpret_cast<PFNGLUNIFORM2I>(gapic::GetGfxProcAddress("glUniform2i"));
-    glUniform3i = reinterpret_cast<PFNGLUNIFORM3I>(gapic::GetGfxProcAddress("glUniform3i"));
-    glUniform4i = reinterpret_cast<PFNGLUNIFORM4I>(gapic::GetGfxProcAddress("glUniform4i"));
-    glUniform1iv = reinterpret_cast<PFNGLUNIFORM1IV>(gapic::GetGfxProcAddress("glUniform1iv"));
-    glUniform2iv = reinterpret_cast<PFNGLUNIFORM2IV>(gapic::GetGfxProcAddress("glUniform2iv"));
-    glUniform3iv = reinterpret_cast<PFNGLUNIFORM3IV>(gapic::GetGfxProcAddress("glUniform3iv"));
-    glUniform4iv = reinterpret_cast<PFNGLUNIFORM4IV>(gapic::GetGfxProcAddress("glUniform4iv"));
-    glUniform1f = reinterpret_cast<PFNGLUNIFORM1F>(gapic::GetGfxProcAddress("glUniform1f"));
-    glUniform2f = reinterpret_cast<PFNGLUNIFORM2F>(gapic::GetGfxProcAddress("glUniform2f"));
-    glUniform3f = reinterpret_cast<PFNGLUNIFORM3F>(gapic::GetGfxProcAddress("glUniform3f"));
-    glUniform4f = reinterpret_cast<PFNGLUNIFORM4F>(gapic::GetGfxProcAddress("glUniform4f"));
-    glUniform1fv = reinterpret_cast<PFNGLUNIFORM1FV>(gapic::GetGfxProcAddress("glUniform1fv"));
-    glUniform2fv = reinterpret_cast<PFNGLUNIFORM2FV>(gapic::GetGfxProcAddress("glUniform2fv"));
-    glUniform3fv = reinterpret_cast<PFNGLUNIFORM3FV>(gapic::GetGfxProcAddress("glUniform3fv"));
-    glUniform4fv = reinterpret_cast<PFNGLUNIFORM4FV>(gapic::GetGfxProcAddress("glUniform4fv"));
-    glUniformMatrix2fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX2FV>(gapic::GetGfxProcAddress("glUniformMatrix2fv"));
-    glUniformMatrix3fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX3FV>(gapic::GetGfxProcAddress("glUniformMatrix3fv"));
-    glUniformMatrix4fv =
-            reinterpret_cast<PFNGLUNIFORMMATRIX4FV>(gapic::GetGfxProcAddress("glUniformMatrix4fv"));
+            gapic::GetGfxProcAddress("glGetTexParameterfv", false));
+    glUniform1i = reinterpret_cast<PFNGLUNIFORM1I>(gapic::GetGfxProcAddress("glUniform1i", false));
+    glUniform2i = reinterpret_cast<PFNGLUNIFORM2I>(gapic::GetGfxProcAddress("glUniform2i", false));
+    glUniform3i = reinterpret_cast<PFNGLUNIFORM3I>(gapic::GetGfxProcAddress("glUniform3i", false));
+    glUniform4i = reinterpret_cast<PFNGLUNIFORM4I>(gapic::GetGfxProcAddress("glUniform4i", false));
+    glUniform1iv =
+            reinterpret_cast<PFNGLUNIFORM1IV>(gapic::GetGfxProcAddress("glUniform1iv", false));
+    glUniform2iv =
+            reinterpret_cast<PFNGLUNIFORM2IV>(gapic::GetGfxProcAddress("glUniform2iv", false));
+    glUniform3iv =
+            reinterpret_cast<PFNGLUNIFORM3IV>(gapic::GetGfxProcAddress("glUniform3iv", false));
+    glUniform4iv =
+            reinterpret_cast<PFNGLUNIFORM4IV>(gapic::GetGfxProcAddress("glUniform4iv", false));
+    glUniform1f = reinterpret_cast<PFNGLUNIFORM1F>(gapic::GetGfxProcAddress("glUniform1f", false));
+    glUniform2f = reinterpret_cast<PFNGLUNIFORM2F>(gapic::GetGfxProcAddress("glUniform2f", false));
+    glUniform3f = reinterpret_cast<PFNGLUNIFORM3F>(gapic::GetGfxProcAddress("glUniform3f", false));
+    glUniform4f = reinterpret_cast<PFNGLUNIFORM4F>(gapic::GetGfxProcAddress("glUniform4f", false));
+    glUniform1fv =
+            reinterpret_cast<PFNGLUNIFORM1FV>(gapic::GetGfxProcAddress("glUniform1fv", false));
+    glUniform2fv =
+            reinterpret_cast<PFNGLUNIFORM2FV>(gapic::GetGfxProcAddress("glUniform2fv", false));
+    glUniform3fv =
+            reinterpret_cast<PFNGLUNIFORM3FV>(gapic::GetGfxProcAddress("glUniform3fv", false));
+    glUniform4fv =
+            reinterpret_cast<PFNGLUNIFORM4FV>(gapic::GetGfxProcAddress("glUniform4fv", false));
+    glUniformMatrix2fv = reinterpret_cast<PFNGLUNIFORMMATRIX2FV>(
+            gapic::GetGfxProcAddress("glUniformMatrix2fv", false));
+    glUniformMatrix3fv = reinterpret_cast<PFNGLUNIFORMMATRIX3FV>(
+            gapic::GetGfxProcAddress("glUniformMatrix3fv", false));
+    glUniformMatrix4fv = reinterpret_cast<PFNGLUNIFORMMATRIX4FV>(
+            gapic::GetGfxProcAddress("glUniformMatrix4fv", false));
     glGetUniformfv =
-            reinterpret_cast<PFNGLGETUNIFORMFV>(gapic::GetGfxProcAddress("glGetUniformfv"));
+            reinterpret_cast<PFNGLGETUNIFORMFV>(gapic::GetGfxProcAddress("glGetUniformfv", false));
     glGetUniformiv =
-            reinterpret_cast<PFNGLGETUNIFORMIV>(gapic::GetGfxProcAddress("glGetUniformiv"));
-    glVertexAttrib1f =
-            reinterpret_cast<PFNGLVERTEXATTRIB1F>(gapic::GetGfxProcAddress("glVertexAttrib1f"));
-    glVertexAttrib2f =
-            reinterpret_cast<PFNGLVERTEXATTRIB2F>(gapic::GetGfxProcAddress("glVertexAttrib2f"));
-    glVertexAttrib3f =
-            reinterpret_cast<PFNGLVERTEXATTRIB3F>(gapic::GetGfxProcAddress("glVertexAttrib3f"));
-    glVertexAttrib4f =
-            reinterpret_cast<PFNGLVERTEXATTRIB4F>(gapic::GetGfxProcAddress("glVertexAttrib4f"));
-    glVertexAttrib1fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB1FV>(gapic::GetGfxProcAddress("glVertexAttrib1fv"));
-    glVertexAttrib2fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB2FV>(gapic::GetGfxProcAddress("glVertexAttrib2fv"));
-    glVertexAttrib3fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB3FV>(gapic::GetGfxProcAddress("glVertexAttrib3fv"));
-    glVertexAttrib4fv =
-            reinterpret_cast<PFNGLVERTEXATTRIB4FV>(gapic::GetGfxProcAddress("glVertexAttrib4fv"));
+            reinterpret_cast<PFNGLGETUNIFORMIV>(gapic::GetGfxProcAddress("glGetUniformiv", false));
+    glVertexAttrib1f = reinterpret_cast<PFNGLVERTEXATTRIB1F>(
+            gapic::GetGfxProcAddress("glVertexAttrib1f", false));
+    glVertexAttrib2f = reinterpret_cast<PFNGLVERTEXATTRIB2F>(
+            gapic::GetGfxProcAddress("glVertexAttrib2f", false));
+    glVertexAttrib3f = reinterpret_cast<PFNGLVERTEXATTRIB3F>(
+            gapic::GetGfxProcAddress("glVertexAttrib3f", false));
+    glVertexAttrib4f = reinterpret_cast<PFNGLVERTEXATTRIB4F>(
+            gapic::GetGfxProcAddress("glVertexAttrib4f", false));
+    glVertexAttrib1fv = reinterpret_cast<PFNGLVERTEXATTRIB1FV>(
+            gapic::GetGfxProcAddress("glVertexAttrib1fv", false));
+    glVertexAttrib2fv = reinterpret_cast<PFNGLVERTEXATTRIB2FV>(
+            gapic::GetGfxProcAddress("glVertexAttrib2fv", false));
+    glVertexAttrib3fv = reinterpret_cast<PFNGLVERTEXATTRIB3FV>(
+            gapic::GetGfxProcAddress("glVertexAttrib3fv", false));
+    glVertexAttrib4fv = reinterpret_cast<PFNGLVERTEXATTRIB4FV>(
+            gapic::GetGfxProcAddress("glVertexAttrib4fv", false));
     glGetShaderPrecisionFormat = reinterpret_cast<PFNGLGETSHADERPRECISIONFORMAT>(
-            gapic::GetGfxProcAddress("glGetShaderPrecisionFormat"));
-    glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(gapic::GetGfxProcAddress("glDepthMask"));
-    glDepthFunc = reinterpret_cast<PFNGLDEPTHFUNC>(gapic::GetGfxProcAddress("glDepthFunc"));
-    glDepthRangef = reinterpret_cast<PFNGLDEPTHRANGEF>(gapic::GetGfxProcAddress("glDepthRangef"));
-    glColorMask = reinterpret_cast<PFNGLCOLORMASK>(gapic::GetGfxProcAddress("glColorMask"));
-    glStencilMask = reinterpret_cast<PFNGLSTENCILMASK>(gapic::GetGfxProcAddress("glStencilMask"));
+            gapic::GetGfxProcAddress("glGetShaderPrecisionFormat", false));
+    glDepthMask = reinterpret_cast<PFNGLDEPTHMASK>(gapic::GetGfxProcAddress("glDepthMask", false));
+    glDepthFunc = reinterpret_cast<PFNGLDEPTHFUNC>(gapic::GetGfxProcAddress("glDepthFunc", false));
+    glDepthRangef =
+            reinterpret_cast<PFNGLDEPTHRANGEF>(gapic::GetGfxProcAddress("glDepthRangef", false));
+    glColorMask = reinterpret_cast<PFNGLCOLORMASK>(gapic::GetGfxProcAddress("glColorMask", false));
+    glStencilMask =
+            reinterpret_cast<PFNGLSTENCILMASK>(gapic::GetGfxProcAddress("glStencilMask", false));
     glStencilMaskSeparate = reinterpret_cast<PFNGLSTENCILMASKSEPARATE>(
-            gapic::GetGfxProcAddress("glStencilMaskSeparate"));
+            gapic::GetGfxProcAddress("glStencilMaskSeparate", false));
     glStencilFuncSeparate = reinterpret_cast<PFNGLSTENCILFUNCSEPARATE>(
-            gapic::GetGfxProcAddress("glStencilFuncSeparate"));
+            gapic::GetGfxProcAddress("glStencilFuncSeparate", false));
     glStencilOpSeparate = reinterpret_cast<PFNGLSTENCILOPSEPARATE>(
-            gapic::GetGfxProcAddress("glStencilOpSeparate"));
-    glFrontFace = reinterpret_cast<PFNGLFRONTFACE>(gapic::GetGfxProcAddress("glFrontFace"));
-    glViewport = reinterpret_cast<PFNGLVIEWPORT>(gapic::GetGfxProcAddress("glViewport"));
-    glScissor = reinterpret_cast<PFNGLSCISSOR>(gapic::GetGfxProcAddress("glScissor"));
-    glActiveTexture =
-            reinterpret_cast<PFNGLACTIVETEXTURE>(gapic::GetGfxProcAddress("glActiveTexture"));
-    glGenTextures = reinterpret_cast<PFNGLGENTEXTURES>(gapic::GetGfxProcAddress("glGenTextures"));
-    glDeleteTextures =
-            reinterpret_cast<PFNGLDELETETEXTURES>(gapic::GetGfxProcAddress("glDeleteTextures"));
-    glIsTexture = reinterpret_cast<PFNGLISTEXTURE>(gapic::GetGfxProcAddress("glIsTexture"));
-    glBindTexture = reinterpret_cast<PFNGLBINDTEXTURE>(gapic::GetGfxProcAddress("glBindTexture"));
-    glTexImage2D = reinterpret_cast<PFNGLTEXIMAGE2D>(gapic::GetGfxProcAddress("glTexImage2D"));
-    glTexSubImage2D =
-            reinterpret_cast<PFNGLTEXSUBIMAGE2D>(gapic::GetGfxProcAddress("glTexSubImage2D"));
-    glCopyTexImage2D =
-            reinterpret_cast<PFNGLCOPYTEXIMAGE2D>(gapic::GetGfxProcAddress("glCopyTexImage2D"));
+            gapic::GetGfxProcAddress("glStencilOpSeparate", false));
+    glFrontFace = reinterpret_cast<PFNGLFRONTFACE>(gapic::GetGfxProcAddress("glFrontFace", false));
+    glViewport = reinterpret_cast<PFNGLVIEWPORT>(gapic::GetGfxProcAddress("glViewport", false));
+    glScissor = reinterpret_cast<PFNGLSCISSOR>(gapic::GetGfxProcAddress("glScissor", false));
+    glActiveTexture = reinterpret_cast<PFNGLACTIVETEXTURE>(
+            gapic::GetGfxProcAddress("glActiveTexture", false));
+    glGenTextures =
+            reinterpret_cast<PFNGLGENTEXTURES>(gapic::GetGfxProcAddress("glGenTextures", false));
+    glDeleteTextures = reinterpret_cast<PFNGLDELETETEXTURES>(
+            gapic::GetGfxProcAddress("glDeleteTextures", false));
+    glIsTexture = reinterpret_cast<PFNGLISTEXTURE>(gapic::GetGfxProcAddress("glIsTexture", false));
+    glBindTexture =
+            reinterpret_cast<PFNGLBINDTEXTURE>(gapic::GetGfxProcAddress("glBindTexture", false));
+    glTexImage2D =
+            reinterpret_cast<PFNGLTEXIMAGE2D>(gapic::GetGfxProcAddress("glTexImage2D", false));
+    glTexSubImage2D = reinterpret_cast<PFNGLTEXSUBIMAGE2D>(
+            gapic::GetGfxProcAddress("glTexSubImage2D", false));
+    glCopyTexImage2D = reinterpret_cast<PFNGLCOPYTEXIMAGE2D>(
+            gapic::GetGfxProcAddress("glCopyTexImage2D", false));
     glCopyTexSubImage2D = reinterpret_cast<PFNGLCOPYTEXSUBIMAGE2D>(
-            gapic::GetGfxProcAddress("glCopyTexSubImage2D"));
+            gapic::GetGfxProcAddress("glCopyTexSubImage2D", false));
     glCompressedTexImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXIMAGE2D>(
-            gapic::GetGfxProcAddress("glCompressedTexImage2D"));
+            gapic::GetGfxProcAddress("glCompressedTexImage2D", false));
     glCompressedTexSubImage2D = reinterpret_cast<PFNGLCOMPRESSEDTEXSUBIMAGE2D>(
-            gapic::GetGfxProcAddress("glCompressedTexSubImage2D"));
-    glGenerateMipmap =
-            reinterpret_cast<PFNGLGENERATEMIPMAP>(gapic::GetGfxProcAddress("glGenerateMipmap"));
-    glReadPixels = reinterpret_cast<PFNGLREADPIXELS>(gapic::GetGfxProcAddress("glReadPixels"));
-    glGenFramebuffers =
-            reinterpret_cast<PFNGLGENFRAMEBUFFERS>(gapic::GetGfxProcAddress("glGenFramebuffers"));
-    glBindFramebuffer =
-            reinterpret_cast<PFNGLBINDFRAMEBUFFER>(gapic::GetGfxProcAddress("glBindFramebuffer"));
+            gapic::GetGfxProcAddress("glCompressedTexSubImage2D", false));
+    glGenerateMipmap = reinterpret_cast<PFNGLGENERATEMIPMAP>(
+            gapic::GetGfxProcAddress("glGenerateMipmap", false));
+    glReadPixels =
+            reinterpret_cast<PFNGLREADPIXELS>(gapic::GetGfxProcAddress("glReadPixels", false));
+    glGenFramebuffers = reinterpret_cast<PFNGLGENFRAMEBUFFERS>(
+            gapic::GetGfxProcAddress("glGenFramebuffers", false));
+    glBindFramebuffer = reinterpret_cast<PFNGLBINDFRAMEBUFFER>(
+            gapic::GetGfxProcAddress("glBindFramebuffer", false));
     glCheckFramebufferStatus = reinterpret_cast<PFNGLCHECKFRAMEBUFFERSTATUS>(
-            gapic::GetGfxProcAddress("glCheckFramebufferStatus"));
+            gapic::GetGfxProcAddress("glCheckFramebufferStatus", false));
     glDeleteFramebuffers = reinterpret_cast<PFNGLDELETEFRAMEBUFFERS>(
-            gapic::GetGfxProcAddress("glDeleteFramebuffers"));
-    glIsFramebuffer =
-            reinterpret_cast<PFNGLISFRAMEBUFFER>(gapic::GetGfxProcAddress("glIsFramebuffer"));
-    glGenRenderbuffers =
-            reinterpret_cast<PFNGLGENRENDERBUFFERS>(gapic::GetGfxProcAddress("glGenRenderbuffers"));
-    glBindRenderbuffer =
-            reinterpret_cast<PFNGLBINDRENDERBUFFER>(gapic::GetGfxProcAddress("glBindRenderbuffer"));
+            gapic::GetGfxProcAddress("glDeleteFramebuffers", false));
+    glIsFramebuffer = reinterpret_cast<PFNGLISFRAMEBUFFER>(
+            gapic::GetGfxProcAddress("glIsFramebuffer", false));
+    glGenRenderbuffers = reinterpret_cast<PFNGLGENRENDERBUFFERS>(
+            gapic::GetGfxProcAddress("glGenRenderbuffers", false));
+    glBindRenderbuffer = reinterpret_cast<PFNGLBINDRENDERBUFFER>(
+            gapic::GetGfxProcAddress("glBindRenderbuffer", false));
     glRenderbufferStorage = reinterpret_cast<PFNGLRENDERBUFFERSTORAGE>(
-            gapic::GetGfxProcAddress("glRenderbufferStorage"));
+            gapic::GetGfxProcAddress("glRenderbufferStorage", false));
     glDeleteRenderbuffers = reinterpret_cast<PFNGLDELETERENDERBUFFERS>(
-            gapic::GetGfxProcAddress("glDeleteRenderbuffers"));
-    glIsRenderbuffer =
-            reinterpret_cast<PFNGLISRENDERBUFFER>(gapic::GetGfxProcAddress("glIsRenderbuffer"));
+            gapic::GetGfxProcAddress("glDeleteRenderbuffers", false));
+    glIsRenderbuffer = reinterpret_cast<PFNGLISRENDERBUFFER>(
+            gapic::GetGfxProcAddress("glIsRenderbuffer", false));
     glGetRenderbufferParameteriv = reinterpret_cast<PFNGLGETRENDERBUFFERPARAMETERIV>(
-            gapic::GetGfxProcAddress("glGetRenderbufferParameteriv"));
-    glGenBuffers = reinterpret_cast<PFNGLGENBUFFERS>(gapic::GetGfxProcAddress("glGenBuffers"));
-    glBindBuffer = reinterpret_cast<PFNGLBINDBUFFER>(gapic::GetGfxProcAddress("glBindBuffer"));
-    glBufferData = reinterpret_cast<PFNGLBUFFERDATA>(gapic::GetGfxProcAddress("glBufferData"));
-    glBufferSubData =
-            reinterpret_cast<PFNGLBUFFERSUBDATA>(gapic::GetGfxProcAddress("glBufferSubData"));
-    glDeleteBuffers =
-            reinterpret_cast<PFNGLDELETEBUFFERS>(gapic::GetGfxProcAddress("glDeleteBuffers"));
-    glIsBuffer = reinterpret_cast<PFNGLISBUFFER>(gapic::GetGfxProcAddress("glIsBuffer"));
+            gapic::GetGfxProcAddress("glGetRenderbufferParameteriv", false));
+    glGenBuffers =
+            reinterpret_cast<PFNGLGENBUFFERS>(gapic::GetGfxProcAddress("glGenBuffers", false));
+    glBindBuffer =
+            reinterpret_cast<PFNGLBINDBUFFER>(gapic::GetGfxProcAddress("glBindBuffer", false));
+    glBufferData =
+            reinterpret_cast<PFNGLBUFFERDATA>(gapic::GetGfxProcAddress("glBufferData", false));
+    glBufferSubData = reinterpret_cast<PFNGLBUFFERSUBDATA>(
+            gapic::GetGfxProcAddress("glBufferSubData", false));
+    glDeleteBuffers = reinterpret_cast<PFNGLDELETEBUFFERS>(
+            gapic::GetGfxProcAddress("glDeleteBuffers", false));
+    glIsBuffer = reinterpret_cast<PFNGLISBUFFER>(gapic::GetGfxProcAddress("glIsBuffer", false));
     glGetBufferParameteriv = reinterpret_cast<PFNGLGETBUFFERPARAMETERIV>(
-            gapic::GetGfxProcAddress("glGetBufferParameteriv"));
+            gapic::GetGfxProcAddress("glGetBufferParameteriv", false));
     glCreateShader =
-            reinterpret_cast<PFNGLCREATESHADER>(gapic::GetGfxProcAddress("glCreateShader"));
+            reinterpret_cast<PFNGLCREATESHADER>(gapic::GetGfxProcAddress("glCreateShader", false));
     glDeleteShader =
-            reinterpret_cast<PFNGLDELETESHADER>(gapic::GetGfxProcAddress("glDeleteShader"));
+            reinterpret_cast<PFNGLDELETESHADER>(gapic::GetGfxProcAddress("glDeleteShader", false));
     glShaderSource =
-            reinterpret_cast<PFNGLSHADERSOURCE>(gapic::GetGfxProcAddress("glShaderSource"));
+            reinterpret_cast<PFNGLSHADERSOURCE>(gapic::GetGfxProcAddress("glShaderSource", false));
     glShaderBinary =
-            reinterpret_cast<PFNGLSHADERBINARY>(gapic::GetGfxProcAddress("glShaderBinary"));
-    glGetShaderInfoLog =
-            reinterpret_cast<PFNGLGETSHADERINFOLOG>(gapic::GetGfxProcAddress("glGetShaderInfoLog"));
-    glGetShaderSource =
-            reinterpret_cast<PFNGLGETSHADERSOURCE>(gapic::GetGfxProcAddress("glGetShaderSource"));
+            reinterpret_cast<PFNGLSHADERBINARY>(gapic::GetGfxProcAddress("glShaderBinary", false));
+    glGetShaderInfoLog = reinterpret_cast<PFNGLGETSHADERINFOLOG>(
+            gapic::GetGfxProcAddress("glGetShaderInfoLog", false));
+    glGetShaderSource = reinterpret_cast<PFNGLGETSHADERSOURCE>(
+            gapic::GetGfxProcAddress("glGetShaderSource", false));
     glReleaseShaderCompiler = reinterpret_cast<PFNGLRELEASESHADERCOMPILER>(
-            gapic::GetGfxProcAddress("glReleaseShaderCompiler"));
-    glCompileShader =
-            reinterpret_cast<PFNGLCOMPILESHADER>(gapic::GetGfxProcAddress("glCompileShader"));
-    glIsShader = reinterpret_cast<PFNGLISSHADER>(gapic::GetGfxProcAddress("glIsShader"));
-    glCreateProgram =
-            reinterpret_cast<PFNGLCREATEPROGRAM>(gapic::GetGfxProcAddress("glCreateProgram"));
-    glDeleteProgram =
-            reinterpret_cast<PFNGLDELETEPROGRAM>(gapic::GetGfxProcAddress("glDeleteProgram"));
+            gapic::GetGfxProcAddress("glReleaseShaderCompiler", false));
+    glCompileShader = reinterpret_cast<PFNGLCOMPILESHADER>(
+            gapic::GetGfxProcAddress("glCompileShader", false));
+    glIsShader = reinterpret_cast<PFNGLISSHADER>(gapic::GetGfxProcAddress("glIsShader", false));
+    glCreateProgram = reinterpret_cast<PFNGLCREATEPROGRAM>(
+            gapic::GetGfxProcAddress("glCreateProgram", false));
+    glDeleteProgram = reinterpret_cast<PFNGLDELETEPROGRAM>(
+            gapic::GetGfxProcAddress("glDeleteProgram", false));
     glAttachShader =
-            reinterpret_cast<PFNGLATTACHSHADER>(gapic::GetGfxProcAddress("glAttachShader"));
+            reinterpret_cast<PFNGLATTACHSHADER>(gapic::GetGfxProcAddress("glAttachShader", false));
     glDetachShader =
-            reinterpret_cast<PFNGLDETACHSHADER>(gapic::GetGfxProcAddress("glDetachShader"));
+            reinterpret_cast<PFNGLDETACHSHADER>(gapic::GetGfxProcAddress("glDetachShader", false));
     glGetAttachedShaders = reinterpret_cast<PFNGLGETATTACHEDSHADERS>(
-            gapic::GetGfxProcAddress("glGetAttachedShaders"));
-    glLinkProgram = reinterpret_cast<PFNGLLINKPROGRAM>(gapic::GetGfxProcAddress("glLinkProgram"));
+            gapic::GetGfxProcAddress("glGetAttachedShaders", false));
+    glLinkProgram =
+            reinterpret_cast<PFNGLLINKPROGRAM>(gapic::GetGfxProcAddress("glLinkProgram", false));
     glGetProgramInfoLog = reinterpret_cast<PFNGLGETPROGRAMINFOLOG>(
-            gapic::GetGfxProcAddress("glGetProgramInfoLog"));
-    glUseProgram = reinterpret_cast<PFNGLUSEPROGRAM>(gapic::GetGfxProcAddress("glUseProgram"));
-    glIsProgram = reinterpret_cast<PFNGLISPROGRAM>(gapic::GetGfxProcAddress("glIsProgram"));
-    glValidateProgram =
-            reinterpret_cast<PFNGLVALIDATEPROGRAM>(gapic::GetGfxProcAddress("glValidateProgram"));
-    glClearColor = reinterpret_cast<PFNGLCLEARCOLOR>(gapic::GetGfxProcAddress("glClearColor"));
-    glClearDepthf = reinterpret_cast<PFNGLCLEARDEPTHF>(gapic::GetGfxProcAddress("glClearDepthf"));
+            gapic::GetGfxProcAddress("glGetProgramInfoLog", false));
+    glUseProgram =
+            reinterpret_cast<PFNGLUSEPROGRAM>(gapic::GetGfxProcAddress("glUseProgram", false));
+    glIsProgram = reinterpret_cast<PFNGLISPROGRAM>(gapic::GetGfxProcAddress("glIsProgram", false));
+    glValidateProgram = reinterpret_cast<PFNGLVALIDATEPROGRAM>(
+            gapic::GetGfxProcAddress("glValidateProgram", false));
+    glClearColor =
+            reinterpret_cast<PFNGLCLEARCOLOR>(gapic::GetGfxProcAddress("glClearColor", false));
+    glClearDepthf =
+            reinterpret_cast<PFNGLCLEARDEPTHF>(gapic::GetGfxProcAddress("glClearDepthf", false));
     glClearStencil =
-            reinterpret_cast<PFNGLCLEARSTENCIL>(gapic::GetGfxProcAddress("glClearStencil"));
-    glClear = reinterpret_cast<PFNGLCLEAR>(gapic::GetGfxProcAddress("glClear"));
-    glCullFace = reinterpret_cast<PFNGLCULLFACE>(gapic::GetGfxProcAddress("glCullFace"));
-    glPolygonOffset =
-            reinterpret_cast<PFNGLPOLYGONOFFSET>(gapic::GetGfxProcAddress("glPolygonOffset"));
-    glLineWidth = reinterpret_cast<PFNGLLINEWIDTH>(gapic::GetGfxProcAddress("glLineWidth"));
-    glSampleCoverage =
-            reinterpret_cast<PFNGLSAMPLECOVERAGE>(gapic::GetGfxProcAddress("glSampleCoverage"));
-    glHint = reinterpret_cast<PFNGLHINT>(gapic::GetGfxProcAddress("glHint"));
+            reinterpret_cast<PFNGLCLEARSTENCIL>(gapic::GetGfxProcAddress("glClearStencil", false));
+    glClear = reinterpret_cast<PFNGLCLEAR>(gapic::GetGfxProcAddress("glClear", false));
+    glCullFace = reinterpret_cast<PFNGLCULLFACE>(gapic::GetGfxProcAddress("glCullFace", false));
+    glPolygonOffset = reinterpret_cast<PFNGLPOLYGONOFFSET>(
+            gapic::GetGfxProcAddress("glPolygonOffset", false));
+    glLineWidth = reinterpret_cast<PFNGLLINEWIDTH>(gapic::GetGfxProcAddress("glLineWidth", false));
+    glSampleCoverage = reinterpret_cast<PFNGLSAMPLECOVERAGE>(
+            gapic::GetGfxProcAddress("glSampleCoverage", false));
+    glHint = reinterpret_cast<PFNGLHINT>(gapic::GetGfxProcAddress("glHint", false));
     glFramebufferRenderbuffer = reinterpret_cast<PFNGLFRAMEBUFFERRENDERBUFFER>(
-            gapic::GetGfxProcAddress("glFramebufferRenderbuffer"));
+            gapic::GetGfxProcAddress("glFramebufferRenderbuffer", false));
     glFramebufferTexture2D = reinterpret_cast<PFNGLFRAMEBUFFERTEXTURE2D>(
-            gapic::GetGfxProcAddress("glFramebufferTexture2D"));
+            gapic::GetGfxProcAddress("glFramebufferTexture2D", false));
     glGetFramebufferAttachmentParameteriv =
             reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIV>(
-                    gapic::GetGfxProcAddress("glGetFramebufferAttachmentParameteriv"));
+                    gapic::GetGfxProcAddress("glGetFramebufferAttachmentParameteriv", false));
     glDrawElements =
-            reinterpret_cast<PFNGLDRAWELEMENTS>(gapic::GetGfxProcAddress("glDrawElements"));
-    glDrawArrays = reinterpret_cast<PFNGLDRAWARRAYS>(gapic::GetGfxProcAddress("glDrawArrays"));
-    glFlush = reinterpret_cast<PFNGLFLUSH>(gapic::GetGfxProcAddress("glFlush"));
-    glFinish = reinterpret_cast<PFNGLFINISH>(gapic::GetGfxProcAddress("glFinish"));
-    glGetBooleanv = reinterpret_cast<PFNGLGETBOOLEANV>(gapic::GetGfxProcAddress("glGetBooleanv"));
-    glGetFloatv = reinterpret_cast<PFNGLGETFLOATV>(gapic::GetGfxProcAddress("glGetFloatv"));
-    glGetIntegerv = reinterpret_cast<PFNGLGETINTEGERV>(gapic::GetGfxProcAddress("glGetIntegerv"));
-    glGetString = reinterpret_cast<PFNGLGETSTRING>(gapic::GetGfxProcAddress("glGetString"));
-    glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable"));
-    glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable"));
-    glIsEnabled = reinterpret_cast<PFNGLISENABLED>(gapic::GetGfxProcAddress("glIsEnabled"));
-    glMapBufferRange =
-            reinterpret_cast<PFNGLMAPBUFFERRANGE>(gapic::GetGfxProcAddress("glMapBufferRange"));
-    glUnmapBuffer = reinterpret_cast<PFNGLUNMAPBUFFER>(gapic::GetGfxProcAddress("glUnmapBuffer"));
+            reinterpret_cast<PFNGLDRAWELEMENTS>(gapic::GetGfxProcAddress("glDrawElements", false));
+    glDrawArrays =
+            reinterpret_cast<PFNGLDRAWARRAYS>(gapic::GetGfxProcAddress("glDrawArrays", false));
+    glFlush = reinterpret_cast<PFNGLFLUSH>(gapic::GetGfxProcAddress("glFlush", false));
+    glFinish = reinterpret_cast<PFNGLFINISH>(gapic::GetGfxProcAddress("glFinish", false));
+    glGetBooleanv =
+            reinterpret_cast<PFNGLGETBOOLEANV>(gapic::GetGfxProcAddress("glGetBooleanv", false));
+    glGetFloatv = reinterpret_cast<PFNGLGETFLOATV>(gapic::GetGfxProcAddress("glGetFloatv", false));
+    glGetIntegerv =
+            reinterpret_cast<PFNGLGETINTEGERV>(gapic::GetGfxProcAddress("glGetIntegerv", false));
+    glGetString = reinterpret_cast<PFNGLGETSTRING>(gapic::GetGfxProcAddress("glGetString", false));
+    glEnable = reinterpret_cast<PFNGLENABLE>(gapic::GetGfxProcAddress("glEnable", false));
+    glDisable = reinterpret_cast<PFNGLDISABLE>(gapic::GetGfxProcAddress("glDisable", false));
+    glIsEnabled = reinterpret_cast<PFNGLISENABLED>(gapic::GetGfxProcAddress("glIsEnabled", false));
+    glMapBufferRange = reinterpret_cast<PFNGLMAPBUFFERRANGE>(
+            gapic::GetGfxProcAddress("glMapBufferRange", false));
+    glUnmapBuffer =
+            reinterpret_cast<PFNGLUNMAPBUFFER>(gapic::GetGfxProcAddress("glUnmapBuffer", false));
     glInvalidateFramebuffer = reinterpret_cast<PFNGLINVALIDATEFRAMEBUFFER>(
-            gapic::GetGfxProcAddress("glInvalidateFramebuffer"));
+            gapic::GetGfxProcAddress("glInvalidateFramebuffer", false));
     glRenderbufferStorageMultisample = reinterpret_cast<PFNGLRENDERBUFFERSTORAGEMULTISAMPLE>(
-            gapic::GetGfxProcAddress("glRenderbufferStorageMultisample"));
-    glBlitFramebuffer =
-            reinterpret_cast<PFNGLBLITFRAMEBUFFER>(gapic::GetGfxProcAddress("glBlitFramebuffer"));
-    glGenQueries = reinterpret_cast<PFNGLGENQUERIES>(gapic::GetGfxProcAddress("glGenQueries"));
-    glBeginQuery = reinterpret_cast<PFNGLBEGINQUERY>(gapic::GetGfxProcAddress("glBeginQuery"));
-    glEndQuery = reinterpret_cast<PFNGLENDQUERY>(gapic::GetGfxProcAddress("glEndQuery"));
-    glDeleteQueries =
-            reinterpret_cast<PFNGLDELETEQUERIES>(gapic::GetGfxProcAddress("glDeleteQueries"));
-    glIsQuery = reinterpret_cast<PFNGLISQUERY>(gapic::GetGfxProcAddress("glIsQuery"));
-    glGetQueryiv = reinterpret_cast<PFNGLGETQUERYIV>(gapic::GetGfxProcAddress("glGetQueryiv"));
+            gapic::GetGfxProcAddress("glRenderbufferStorageMultisample", false));
+    glBlitFramebuffer = reinterpret_cast<PFNGLBLITFRAMEBUFFER>(
+            gapic::GetGfxProcAddress("glBlitFramebuffer", false));
+    glGenQueries =
+            reinterpret_cast<PFNGLGENQUERIES>(gapic::GetGfxProcAddress("glGenQueries", false));
+    glBeginQuery =
+            reinterpret_cast<PFNGLBEGINQUERY>(gapic::GetGfxProcAddress("glBeginQuery", false));
+    glEndQuery = reinterpret_cast<PFNGLENDQUERY>(gapic::GetGfxProcAddress("glEndQuery", false));
+    glDeleteQueries = reinterpret_cast<PFNGLDELETEQUERIES>(
+            gapic::GetGfxProcAddress("glDeleteQueries", false));
+    glIsQuery = reinterpret_cast<PFNGLISQUERY>(gapic::GetGfxProcAddress("glIsQuery", false));
+    glGetQueryiv =
+            reinterpret_cast<PFNGLGETQUERYIV>(gapic::GetGfxProcAddress("glGetQueryiv", false));
     glGetQueryObjectuiv = reinterpret_cast<PFNGLGETQUERYOBJECTUIV>(
-            gapic::GetGfxProcAddress("glGetQueryObjectuiv"));
-    glGenQueriesEXT =
-            reinterpret_cast<PFNGLGENQUERIESEXT>(gapic::GetGfxProcAddress("glGenQueriesEXT"));
-    glBeginQueryEXT =
-            reinterpret_cast<PFNGLBEGINQUERYEXT>(gapic::GetGfxProcAddress("glBeginQueryEXT"));
-    glEndQueryEXT = reinterpret_cast<PFNGLENDQUERYEXT>(gapic::GetGfxProcAddress("glEndQueryEXT"));
-    glDeleteQueriesEXT =
-            reinterpret_cast<PFNGLDELETEQUERIESEXT>(gapic::GetGfxProcAddress("glDeleteQueriesEXT"));
-    glIsQueryEXT = reinterpret_cast<PFNGLISQUERYEXT>(gapic::GetGfxProcAddress("glIsQueryEXT"));
-    glQueryCounterEXT =
-            reinterpret_cast<PFNGLQUERYCOUNTEREXT>(gapic::GetGfxProcAddress("glQueryCounterEXT"));
-    glGetQueryivEXT =
-            reinterpret_cast<PFNGLGETQUERYIVEXT>(gapic::GetGfxProcAddress("glGetQueryivEXT"));
+            gapic::GetGfxProcAddress("glGetQueryObjectuiv", false));
+    glGenQueriesEXT = reinterpret_cast<PFNGLGENQUERIESEXT>(
+            gapic::GetGfxProcAddress("glGenQueriesEXT", false));
+    glBeginQueryEXT = reinterpret_cast<PFNGLBEGINQUERYEXT>(
+            gapic::GetGfxProcAddress("glBeginQueryEXT", false));
+    glEndQueryEXT =
+            reinterpret_cast<PFNGLENDQUERYEXT>(gapic::GetGfxProcAddress("glEndQueryEXT", false));
+    glDeleteQueriesEXT = reinterpret_cast<PFNGLDELETEQUERIESEXT>(
+            gapic::GetGfxProcAddress("glDeleteQueriesEXT", false));
+    glIsQueryEXT =
+            reinterpret_cast<PFNGLISQUERYEXT>(gapic::GetGfxProcAddress("glIsQueryEXT", false));
+    glQueryCounterEXT = reinterpret_cast<PFNGLQUERYCOUNTEREXT>(
+            gapic::GetGfxProcAddress("glQueryCounterEXT", false));
+    glGetQueryivEXT = reinterpret_cast<PFNGLGETQUERYIVEXT>(
+            gapic::GetGfxProcAddress("glGetQueryivEXT", false));
     glGetQueryObjectivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTIVEXT>(
-            gapic::GetGfxProcAddress("glGetQueryObjectivEXT"));
+            gapic::GetGfxProcAddress("glGetQueryObjectivEXT", false));
     glGetQueryObjectuivEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUIVEXT>(
-            gapic::GetGfxProcAddress("glGetQueryObjectuivEXT"));
+            gapic::GetGfxProcAddress("glGetQueryObjectuivEXT", false));
     glGetQueryObjecti64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTI64VEXT>(
-            gapic::GetGfxProcAddress("glGetQueryObjecti64vEXT"));
+            gapic::GetGfxProcAddress("glGetQueryObjecti64vEXT", false));
     glGetQueryObjectui64vEXT = reinterpret_cast<PFNGLGETQUERYOBJECTUI64VEXT>(
-            gapic::GetGfxProcAddress("glGetQueryObjectui64vEXT"));
+            gapic::GetGfxProcAddress("glGetQueryObjectui64vEXT", false));
 }
 
 }  // namespace gfxapi
