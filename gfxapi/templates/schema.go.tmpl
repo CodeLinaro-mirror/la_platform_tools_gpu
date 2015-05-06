@@ -220,6 +220,7 @@ limitations under the License.
   {{AssertType $.Command "Function"}}
 
   service.AtomInfo{
+    Api:        service.ApiId{ID: binary.ID(apiID)},
     Type:       {{$.Index}},
     Name:       "{{$.Command.Name}}",
     Parameters: []service.ParameterInfo{

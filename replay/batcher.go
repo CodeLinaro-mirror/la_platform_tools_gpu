@@ -21,7 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/config"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/executor"
@@ -129,7 +129,7 @@ func (b *batcher) send(requests []Request) (err error) {
 
 	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment), b.device.ByteOrder())
 
-	adapter := adapter{handlers: postbackHandlers, builder: builder, state: state.New()}
+	adapter := adapter{handlers: postbackHandlers, builder: builder, state: &gfxapi.State{}}
 	transforms.Transform(atoms, &adapter)
 
 	if config.DebugReplay {
@@ -167,7 +167,7 @@ func (b *batcher) send(requests []Request) (err error) {
 type adapter struct {
 	handlers executor.PostbackHandlerMap
 	builder  *builder.Builder
-	state    *state.State
+	state    *gfxapi.State
 }
 
 func (w *adapter) Write(id atom.ID, a atom.Atom) {

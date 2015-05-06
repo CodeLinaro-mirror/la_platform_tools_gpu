@@ -58,8 +58,7 @@ type resultGetState struct {
 // Call GetHierarchy
 type callGetHierarchy struct {
 	binary.Generate
-	capture   CaptureId
-	contextId uint32
+	capture CaptureId
 }
 
 // Result GetHierarchy
@@ -85,11 +84,11 @@ type resultGetMemoryInfo struct {
 // Call GetFramebufferColor
 type callGetFramebufferColor struct {
 	binary.Generate
-	device    DeviceId
-	capture   CaptureId
-	contextId uint32
-	after     uint64
-	settings  RenderSettings
+	device   DeviceId
+	capture  CaptureId
+	api      ApiId
+	after    uint64
+	settings RenderSettings
 }
 
 // Result GetFramebufferColor
@@ -101,16 +100,47 @@ type resultGetFramebufferColor struct {
 // Call GetFramebufferDepth
 type callGetFramebufferDepth struct {
 	binary.Generate
-	device    DeviceId
-	capture   CaptureId
-	contextId uint32
-	after     uint64
+	device  DeviceId
+	capture CaptureId
+	api     ApiId
+	after   uint64
 }
 
 // Result GetFramebufferDepth
 type resultGetFramebufferDepth struct {
 	binary.Generate
 	value ImageInfoId
+}
+
+// Call GetTimingInfo
+type callGetTimingInfo struct {
+	binary.Generate
+	device  DeviceId
+	capture CaptureId
+	mask    TimingMask
+}
+
+// Result GetTimingInfo
+type resultGetTimingInfo struct {
+	binary.Generate
+	value TimingInfoId
+}
+
+// Call PrerenderFramebuffers
+type callPrerenderFramebuffers struct {
+	binary.Generate
+	device  DeviceId
+	capture CaptureId
+	api     ApiId
+	width   uint32
+	height  uint32
+	atomIds U64Array
+}
+
+// Result PrerenderFramebuffers
+type resultPrerenderFramebuffers struct {
+	binary.Generate
+	value BinaryId
 }
 
 // Call ReplaceAtom
@@ -126,37 +156,6 @@ type callReplaceAtom struct {
 type resultReplaceAtom struct {
 	binary.Generate
 	value CaptureId
-}
-
-// Call GetTimingInfo
-type callGetTimingInfo struct {
-	binary.Generate
-	device    DeviceId
-	capture   CaptureId
-	contextId uint32
-	mask      TimingMask
-}
-
-// Result GetTimingInfo
-type resultGetTimingInfo struct {
-	binary.Generate
-	value TimingInfoId
-}
-
-// Call PrerenderFramebuffers
-type callPrerenderFramebuffers struct {
-	binary.Generate
-	device  DeviceId
-	capture CaptureId
-	width   uint32
-	height  uint32
-	atomIds U64Array
-}
-
-// Result PrerenderFramebuffers
-type resultPrerenderFramebuffers struct {
-	binary.Generate
-	value BinaryId
 }
 
 // Call ResolveAtomStream

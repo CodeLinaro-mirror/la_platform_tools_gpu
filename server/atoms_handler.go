@@ -17,19 +17,14 @@ package server
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/builder"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
 
-const (
-	captureParamName = "capture"
-	contextParamName = "ctx"
-)
+const captureParamName = "capture"
 
 // AtomsHandler is an HTTP request handler that returns a human-readable description
 // of the atoms for a given capture and context.
@@ -74,16 +69,9 @@ func (h atomsHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	var contextID atom.ContextID
-	if ctx, err := strconv.ParseInt(req.URL.Query().Get(contextParamName), 10, 32); err == nil {
-		contextID = atom.ContextID(int(ctx))
-	}
-
 	res.Header().Add("Content-Type", "text/plain;charset=UTF-8")
 
 	for i, a := range atoms {
-		if a.ContextID() == contextID {
-			fmt.Fprintf(res, "%.6d %s\n", i, a)
-		}
+		fmt.Fprintf(res, "%.6d %s\n", i, a)
 	}
 }

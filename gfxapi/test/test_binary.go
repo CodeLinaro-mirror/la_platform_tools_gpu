@@ -6,7 +6,6 @@
 package test
 
 import (
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -64,53 +63,53 @@ func init() {
 }
 
 var (
-	binaryIDCmdArrayOfFloat           = binary.ID{0x9a, 0x1b, 0xa1, 0x9b, 0xf9, 0x11, 0x72, 0x55, 0xd3, 0xf6, 0x3b, 0x7d, 0xe0, 0x90, 0xd8, 0xa9, 0x96, 0xbd, 0x76, 0x94}
-	binaryIDCmdBool                   = binary.ID{0x6e, 0x9b, 0x44, 0x94, 0x2d, 0xa1, 0xa7, 0xba, 0x7e, 0xe6, 0x42, 0x71, 0x42, 0x65, 0x10, 0xdd, 0x18, 0x65, 0x66, 0x93}
-	binaryIDCmdF32                    = binary.ID{0x8a, 0xfb, 0x6f, 0x73, 0x14, 0x9a, 0xfb, 0xf7, 0xd0, 0xef, 0x4e, 0x45, 0x3b, 0xec, 0x98, 0xd2, 0x7e, 0x03, 0x79, 0x48}
-	binaryIDCmdF64                    = binary.ID{0xa4, 0x37, 0x35, 0x2d, 0x2f, 0xd5, 0xd9, 0xb0, 0xc4, 0xf2, 0x0d, 0x30, 0xf4, 0x05, 0x58, 0xb6, 0x58, 0x89, 0x81, 0x89}
-	binaryIDCmdPointer                = binary.ID{0x8f, 0x7d, 0x0a, 0x75, 0x08, 0xa5, 0xa4, 0x56, 0x91, 0x9a, 0xdd, 0x1f, 0xe4, 0x74, 0x0c, 0xd5, 0x5d, 0xcf, 0x37, 0x6e}
-	binaryIDCmdS16                    = binary.ID{0x1c, 0xc7, 0xa2, 0x15, 0xa4, 0x0f, 0xe0, 0x13, 0xdf, 0x83, 0x84, 0xde, 0xdb, 0x07, 0x02, 0x90, 0xe1, 0x14, 0x66, 0x60}
-	binaryIDCmdS32                    = binary.ID{0xa1, 0x24, 0x81, 0xb2, 0x81, 0x69, 0x99, 0x42, 0x2d, 0xda, 0x62, 0x22, 0xae, 0x66, 0x33, 0xff, 0x83, 0x56, 0x91, 0x1b}
-	binaryIDCmdS64                    = binary.ID{0x41, 0x59, 0x33, 0x5e, 0xf3, 0x14, 0x38, 0x1a, 0x7f, 0x80, 0xaf, 0x9a, 0x0a, 0x36, 0xb4, 0x54, 0x33, 0xbe, 0x87, 0x8c}
-	binaryIDCmdS8                     = binary.ID{0xde, 0x80, 0xe0, 0x50, 0x8b, 0x13, 0x6f, 0xd4, 0xa3, 0x98, 0x97, 0xa5, 0x47, 0x27, 0x42, 0x0f, 0xc0, 0x52, 0x84, 0xc6}
-	binaryIDCmdString                 = binary.ID{0x80, 0x56, 0xe0, 0x53, 0x1b, 0xf0, 0x89, 0x1b, 0xb0, 0x91, 0x6e, 0x24, 0x78, 0x6f, 0x9a, 0xd9, 0x43, 0xac, 0xe9, 0xb7}
-	binaryIDCmdU16                    = binary.ID{0x2f, 0xe0, 0x51, 0xf4, 0xbb, 0xef, 0xbb, 0x3e, 0x0e, 0xfb, 0x84, 0x71, 0x8b, 0x86, 0xef, 0xa7, 0x5a, 0x10, 0xbb, 0xa8}
-	binaryIDCmdU32                    = binary.ID{0x00, 0xc5, 0x12, 0xe7, 0xb5, 0x22, 0x83, 0x8e, 0xf1, 0xf6, 0xa2, 0xcf, 0xd8, 0x3e, 0x9d, 0x88, 0xc1, 0x72, 0xb9, 0x75}
-	binaryIDCmdU64                    = binary.ID{0x8f, 0xf7, 0x69, 0x8e, 0x5a, 0x97, 0x96, 0xa0, 0x18, 0xc7, 0x2a, 0x8c, 0xe6, 0xc0, 0x64, 0xfd, 0xe6, 0xd2, 0x3e, 0xa4}
-	binaryIDCmdU8                     = binary.ID{0xd3, 0x25, 0xde, 0x2d, 0x10, 0x69, 0x25, 0x68, 0x2c, 0x67, 0x5f, 0x44, 0x3a, 0x66, 0x8f, 0x6e, 0x6c, 0xc5, 0xa5, 0xe4}
-	binaryIDCmdVoid                   = binary.ID{0xa1, 0xa7, 0x4e, 0xcc, 0xca, 0xa7, 0xaa, 0x00, 0x15, 0xc0, 0x42, 0xbb, 0x6c, 0xf5, 0xbe, 0xef, 0xd9, 0xe6, 0x10, 0x7b}
-	binaryIDCmdVoid3Arrays            = binary.ID{0xb3, 0xc8, 0xe0, 0x1d, 0x8e, 0x19, 0x5c, 0x25, 0x96, 0xc6, 0xbc, 0x88, 0xaa, 0x7a, 0xeb, 0xcb, 0xd2, 0x42, 0x97, 0xac}
-	binaryIDCmdVoid3Remapped          = binary.ID{0x81, 0xf2, 0xaf, 0xca, 0x38, 0x09, 0x91, 0x64, 0x9f, 0xd3, 0x87, 0x24, 0x6b, 0xba, 0x0e, 0xc2, 0x41, 0x59, 0xc2, 0x15}
-	binaryIDCmdVoid3Strings           = binary.ID{0x98, 0x9f, 0x41, 0x15, 0x15, 0xc6, 0x29, 0xcd, 0x8f, 0xb9, 0x44, 0x71, 0x4d, 0xb7, 0x24, 0xde, 0x9f, 0xbb, 0x26, 0x30}
-	binaryIDCmdVoidArrayOfStrings     = binary.ID{0x08, 0xb1, 0xac, 0x6d, 0x11, 0xd7, 0x6b, 0x02, 0xe8, 0xaa, 0x62, 0x0a, 0xad, 0xa4, 0x00, 0x05, 0xcd, 0xc3, 0xa9, 0xac}
-	binaryIDCmdVoidBool               = binary.ID{0x3e, 0xa7, 0xb1, 0x7b, 0x14, 0xff, 0x46, 0x75, 0xd0, 0xc9, 0x34, 0x0a, 0xa9, 0x10, 0xa5, 0x4c, 0x88, 0xc2, 0x5e, 0xb6}
-	binaryIDCmdVoidF32                = binary.ID{0xbc, 0x24, 0x96, 0x6a, 0xed, 0xf2, 0x16, 0x40, 0x54, 0xbd, 0x1e, 0x9b, 0xbd, 0xae, 0xd4, 0xfb, 0xf5, 0xc2, 0xd5, 0x59}
-	binaryIDCmdVoidF64                = binary.ID{0x1b, 0xf1, 0xa3, 0xf0, 0xc8, 0xa3, 0x7e, 0x67, 0x74, 0x72, 0x8b, 0x45, 0x15, 0x27, 0x45, 0x91, 0x74, 0x3e, 0x53, 0xb9}
-	binaryIDCmdVoidOut3Remapped       = binary.ID{0x36, 0x1e, 0xd7, 0x57, 0x69, 0xfb, 0x85, 0xfa, 0x51, 0x6b, 0x3f, 0x3c, 0xb7, 0xa8, 0xd4, 0x0f, 0x1d, 0x54, 0x8f, 0x69}
-	binaryIDCmdVoidOut3Strings        = binary.ID{0x6a, 0xc6, 0xb4, 0xb6, 0x0e, 0x10, 0x62, 0xd9, 0xe7, 0x2b, 0x28, 0x49, 0x4f, 0x86, 0x8a, 0xaa, 0xfa, 0xeb, 0xaf, 0x38}
-	binaryIDCmdVoidOutArrayOfRemapped = binary.ID{0x27, 0x78, 0xb7, 0x79, 0x5e, 0x15, 0x28, 0xe0, 0x9d, 0x7f, 0xea, 0x47, 0x6a, 0xe4, 0x9c, 0x89, 0x6f, 0xc0, 0x05, 0x03}
-	binaryIDCmdVoidOutBool            = binary.ID{0x18, 0x2f, 0x7a, 0x13, 0x4a, 0xea, 0xc7, 0xc8, 0x88, 0x26, 0x1e, 0xc4, 0x6b, 0x3b, 0xe8, 0xae, 0x20, 0x8e, 0xfb, 0xda}
-	binaryIDCmdVoidOutF32             = binary.ID{0xf3, 0x28, 0x07, 0x60, 0xe5, 0xef, 0x9c, 0xed, 0x91, 0xae, 0x2a, 0xe1, 0xd3, 0x6a, 0x96, 0xd8, 0x83, 0x30, 0x27, 0x7b}
-	binaryIDCmdVoidOutF64             = binary.ID{0x5a, 0x35, 0xeb, 0x31, 0xdf, 0xc1, 0xae, 0x16, 0x6f, 0x1c, 0xcb, 0xc4, 0x8c, 0xbf, 0x7b, 0x40, 0xeb, 0xe0, 0xb6, 0x81}
-	binaryIDCmdVoidOutFixedSizeBuffer = binary.ID{0xd0, 0x1e, 0xf6, 0xdb, 0xe4, 0x49, 0x63, 0xa9, 0xf1, 0x36, 0xdb, 0xe9, 0xe5, 0xb5, 0xff, 0xdc, 0x0b, 0xbb, 0xfd, 0xd8}
-	binaryIDCmdVoidOutS16             = binary.ID{0x76, 0x49, 0xbd, 0xd2, 0x23, 0x5e, 0xdd, 0xf7, 0x75, 0x31, 0xf4, 0x97, 0xbf, 0xd8, 0xb7, 0x09, 0x9d, 0x3d, 0x5e, 0x73}
-	binaryIDCmdVoidOutS32             = binary.ID{0xa8, 0xaa, 0xd2, 0x25, 0x35, 0x9a, 0xc9, 0xd7, 0xf7, 0x25, 0xb9, 0xf3, 0x75, 0xa8, 0x4c, 0x31, 0x69, 0x49, 0x16, 0x0b}
-	binaryIDCmdVoidOutS64             = binary.ID{0x81, 0x54, 0x3c, 0x42, 0xf8, 0xb5, 0xf1, 0x8d, 0x6e, 0x96, 0xcd, 0xfc, 0x81, 0x83, 0x5f, 0x2e, 0x7c, 0x39, 0x12, 0x24}
-	binaryIDCmdVoidOutS8              = binary.ID{0x22, 0x73, 0x46, 0x13, 0x5a, 0xa9, 0x7c, 0xf6, 0x18, 0x7c, 0xce, 0x24, 0x95, 0xee, 0xa4, 0xc2, 0xf1, 0xa3, 0x45, 0x72}
-	binaryIDCmdVoidOutString          = binary.ID{0x76, 0x45, 0x93, 0xf8, 0xbe, 0x25, 0xe4, 0x8e, 0x4a, 0xe1, 0xd2, 0xca, 0x18, 0x0f, 0x35, 0xf3, 0x93, 0x45, 0x2d, 0x49}
-	binaryIDCmdVoidOutU16             = binary.ID{0x55, 0xba, 0xdb, 0x0f, 0x6c, 0xfd, 0x43, 0x6e, 0xad, 0x40, 0x1d, 0xe1, 0xb6, 0x1d, 0x01, 0x9b, 0x83, 0xf9, 0xf1, 0x87}
-	binaryIDCmdVoidOutU32             = binary.ID{0xf8, 0x55, 0xd7, 0x63, 0x6e, 0x31, 0xca, 0x47, 0x2c, 0x8b, 0xcf, 0xe8, 0x6a, 0x53, 0x98, 0x0d, 0x74, 0x57, 0xf6, 0x5c}
-	binaryIDCmdVoidOutU64             = binary.ID{0x16, 0x33, 0x37, 0x2b, 0xe8, 0xcf, 0x11, 0x8b, 0x47, 0x64, 0x70, 0x8b, 0x35, 0x5f, 0x97, 0xfe, 0x50, 0xa3, 0x10, 0x16}
-	binaryIDCmdVoidOutU8              = binary.ID{0x13, 0x4c, 0xf1, 0xd0, 0x50, 0xb4, 0x72, 0x48, 0xa0, 0xe3, 0x1f, 0x2a, 0x7f, 0x1b, 0x1e, 0xdd, 0xcf, 0x95, 0x66, 0x09}
-	binaryIDCmdVoidS16                = binary.ID{0xaa, 0xa1, 0xe9, 0xa2, 0x85, 0x71, 0x14, 0x27, 0x98, 0xd5, 0xb7, 0xfa, 0xc8, 0x14, 0x4c, 0x78, 0x0f, 0xce, 0xaa, 0xc6}
-	binaryIDCmdVoidS32                = binary.ID{0xa9, 0x2e, 0x14, 0x7d, 0xc0, 0x9f, 0x95, 0x17, 0x3d, 0xb6, 0x84, 0x17, 0xc0, 0x39, 0x75, 0x77, 0x6b, 0xe3, 0xd0, 0x8f}
-	binaryIDCmdVoidS64                = binary.ID{0xbe, 0x74, 0x21, 0xd5, 0x20, 0x7a, 0x73, 0x83, 0x40, 0x29, 0xc9, 0x15, 0xdd, 0x7a, 0xea, 0x5c, 0xa1, 0xf3, 0x99, 0xd7}
-	binaryIDCmdVoidS8                 = binary.ID{0xed, 0x9e, 0x9a, 0x54, 0x1f, 0x93, 0xdb, 0xd4, 0x88, 0xd8, 0xa4, 0x8c, 0x90, 0xf5, 0x3c, 0xc6, 0x3b, 0x7a, 0x0e, 0x53}
-	binaryIDCmdVoidString             = binary.ID{0xbc, 0x08, 0x91, 0x3d, 0xc8, 0x04, 0xee, 0x91, 0x45, 0x9e, 0xb7, 0x2d, 0x2a, 0x67, 0x3b, 0x74, 0x1b, 0x21, 0x29, 0x01}
-	binaryIDCmdVoidU16                = binary.ID{0xe4, 0x33, 0xe7, 0xab, 0xd8, 0xbd, 0x18, 0x9e, 0x46, 0x11, 0xce, 0xc1, 0x37, 0xa8, 0x67, 0x22, 0xb6, 0xe5, 0x43, 0x55}
-	binaryIDCmdVoidU32                = binary.ID{0x65, 0xf8, 0x15, 0x73, 0x98, 0x3f, 0x9f, 0x8a, 0xc0, 0x2b, 0xea, 0x3b, 0xca, 0xba, 0xf0, 0x3b, 0xd7, 0xd0, 0xa3, 0x15}
-	binaryIDCmdVoidU64                = binary.ID{0x4a, 0x91, 0xc7, 0x51, 0x2d, 0x25, 0xd5, 0x44, 0x17, 0x9f, 0x77, 0xfa, 0xf7, 0x8f, 0x04, 0xf3, 0x80, 0x0b, 0xc1, 0x10}
-	binaryIDCmdVoidU8                 = binary.ID{0xea, 0x84, 0xcd, 0x47, 0x5b, 0xba, 0xba, 0x3c, 0x07, 0xe1, 0x29, 0xb3, 0x28, 0x37, 0x18, 0x8a, 0xc6, 0xd9, 0xcc, 0xbc}
+	binaryIDCmdArrayOfFloat           = binary.ID{0x35, 0x9b, 0x5e, 0xce, 0x2f, 0x44, 0x83, 0x70, 0x25, 0x96, 0x74, 0x46, 0x35, 0x94, 0x9b, 0x00, 0xa0, 0xfb, 0xed, 0x40}
+	binaryIDCmdBool                   = binary.ID{0x47, 0x05, 0x7d, 0xd3, 0xe2, 0x8a, 0x35, 0xcd, 0x7e, 0x6c, 0xe1, 0x5a, 0x41, 0xea, 0xa1, 0xb4, 0x9a, 0x9a, 0xe1, 0x04}
+	binaryIDCmdF32                    = binary.ID{0xac, 0xeb, 0x50, 0x8b, 0x44, 0x00, 0xd5, 0x16, 0xf3, 0x81, 0xcf, 0xce, 0x60, 0x31, 0x86, 0x93, 0x31, 0x23, 0x08, 0xe2}
+	binaryIDCmdF64                    = binary.ID{0xba, 0xdf, 0x95, 0xa4, 0xbb, 0xa6, 0xbc, 0xfb, 0x3c, 0x77, 0x73, 0x5d, 0x02, 0x75, 0xb4, 0xf4, 0x4d, 0x3d, 0xd0, 0xd7}
+	binaryIDCmdPointer                = binary.ID{0x0a, 0xb5, 0xb1, 0x9b, 0xfa, 0x4d, 0xe7, 0x93, 0xba, 0xea, 0x72, 0x22, 0x89, 0x9d, 0x82, 0x82, 0xe8, 0x7f, 0xc2, 0x17}
+	binaryIDCmdS16                    = binary.ID{0x6d, 0xcf, 0x21, 0x7c, 0xaf, 0xea, 0xb4, 0x80, 0xc9, 0xb4, 0xbd, 0x61, 0x43, 0xcf, 0x6c, 0x56, 0x96, 0xd7, 0x55, 0x37}
+	binaryIDCmdS32                    = binary.ID{0xee, 0x00, 0xfd, 0x9c, 0xec, 0x69, 0x81, 0xd9, 0x3f, 0xb8, 0xb5, 0x7d, 0xfb, 0x99, 0xcb, 0xf6, 0x1c, 0x28, 0x4c, 0xea}
+	binaryIDCmdS64                    = binary.ID{0x25, 0x35, 0xa6, 0x38, 0x97, 0xde, 0x2c, 0xb2, 0x75, 0xaa, 0xe7, 0x89, 0x68, 0x6e, 0x20, 0xed, 0x23, 0x77, 0xbd, 0x23}
+	binaryIDCmdS8                     = binary.ID{0x12, 0x6b, 0x91, 0x16, 0x39, 0x64, 0xbc, 0x87, 0xc6, 0x72, 0xf1, 0x3e, 0xdb, 0xa6, 0x4b, 0x16, 0xde, 0xc9, 0x64, 0x45}
+	binaryIDCmdString                 = binary.ID{0x6c, 0x20, 0xe9, 0x15, 0x63, 0x82, 0x4a, 0xb2, 0xf6, 0x34, 0xc0, 0x83, 0x90, 0x2d, 0xa8, 0xc9, 0xcb, 0xde, 0xb6, 0x46}
+	binaryIDCmdU16                    = binary.ID{0x85, 0xce, 0xbe, 0x9c, 0xdc, 0xc5, 0xfa, 0x06, 0x16, 0xaf, 0xe7, 0x43, 0xc8, 0x25, 0x99, 0x30, 0xb9, 0x14, 0x35, 0x32}
+	binaryIDCmdU32                    = binary.ID{0x78, 0xa4, 0x3d, 0x15, 0x0a, 0x41, 0x0c, 0x46, 0x5e, 0x08, 0x4a, 0x9a, 0xab, 0xdc, 0xe5, 0xe0, 0x30, 0x23, 0xef, 0x57}
+	binaryIDCmdU64                    = binary.ID{0x96, 0x70, 0xfa, 0x99, 0x32, 0x0a, 0x92, 0x14, 0xfa, 0xc5, 0x08, 0xc3, 0x98, 0xff, 0x94, 0x31, 0xea, 0x8c, 0x38, 0xf4}
+	binaryIDCmdU8                     = binary.ID{0x25, 0x6f, 0x35, 0x1c, 0x91, 0xd6, 0xf3, 0xa6, 0x70, 0x81, 0xb2, 0xe0, 0xfa, 0x44, 0x2c, 0x17, 0xf2, 0x17, 0xac, 0x54}
+	binaryIDCmdVoid                   = binary.ID{0x05, 0xb2, 0x9c, 0xcc, 0x68, 0x65, 0x50, 0x68, 0xf3, 0x67, 0x28, 0xe9, 0xff, 0x48, 0x87, 0x75, 0x32, 0x24, 0x1e, 0xaf}
+	binaryIDCmdVoid3Arrays            = binary.ID{0x9a, 0xc2, 0xfd, 0xc3, 0x44, 0x20, 0x45, 0x50, 0xe5, 0x0f, 0x65, 0x18, 0x9f, 0x33, 0x43, 0xc0, 0xb1, 0x2c, 0x13, 0x5d}
+	binaryIDCmdVoid3Remapped          = binary.ID{0x58, 0xcd, 0x42, 0x62, 0x94, 0xae, 0xd5, 0x21, 0x91, 0x3b, 0xe3, 0x77, 0x7e, 0x68, 0x7f, 0x66, 0x3a, 0x43, 0x8b, 0xc9}
+	binaryIDCmdVoid3Strings           = binary.ID{0x76, 0xa6, 0x85, 0x68, 0x72, 0x46, 0x75, 0x5c, 0x4b, 0x1d, 0x15, 0x95, 0xbb, 0xdc, 0xbe, 0x23, 0xe0, 0xad, 0xdd, 0xfd}
+	binaryIDCmdVoidArrayOfStrings     = binary.ID{0x6e, 0x9e, 0x71, 0x70, 0x9b, 0xb7, 0x1d, 0xf5, 0xcd, 0xeb, 0xd8, 0xd2, 0xbc, 0x00, 0x16, 0x1c, 0x92, 0xb5, 0x9e, 0x26}
+	binaryIDCmdVoidBool               = binary.ID{0x00, 0xde, 0x06, 0xc9, 0x63, 0x41, 0x3a, 0x6b, 0x94, 0x85, 0x59, 0x7a, 0x3b, 0xf6, 0x93, 0xf7, 0x3b, 0x2c, 0xf9, 0x8c}
+	binaryIDCmdVoidF32                = binary.ID{0x2e, 0x14, 0x6d, 0x75, 0x60, 0xc4, 0xa0, 0x75, 0x83, 0x78, 0x35, 0xbc, 0x0d, 0x2d, 0xf7, 0xd3, 0xdb, 0x7d, 0xe8, 0xb1}
+	binaryIDCmdVoidF64                = binary.ID{0x59, 0xcb, 0x74, 0xb0, 0xd2, 0x3e, 0x74, 0xd1, 0xce, 0x39, 0x6e, 0xa9, 0x5e, 0xf5, 0x75, 0x02, 0x24, 0x23, 0x36, 0xb7}
+	binaryIDCmdVoidOut3Remapped       = binary.ID{0x4c, 0x62, 0xae, 0x94, 0x53, 0xd5, 0x34, 0xe7, 0x5a, 0xdb, 0x9f, 0xc3, 0x73, 0x93, 0xb2, 0xa9, 0xbc, 0x61, 0xf9, 0x0c}
+	binaryIDCmdVoidOut3Strings        = binary.ID{0x74, 0xba, 0x1c, 0xe6, 0x06, 0x73, 0x4c, 0x13, 0x4b, 0x54, 0x23, 0x3a, 0xee, 0x83, 0x32, 0xdf, 0x74, 0x19, 0x6e, 0xf5}
+	binaryIDCmdVoidOutArrayOfRemapped = binary.ID{0xf8, 0xa4, 0xee, 0xb5, 0x0e, 0x94, 0x45, 0x1a, 0xaf, 0xf7, 0x26, 0x26, 0x79, 0x32, 0x24, 0x2c, 0x37, 0xb9, 0x68, 0x6f}
+	binaryIDCmdVoidOutBool            = binary.ID{0x66, 0x14, 0x6f, 0xc3, 0x83, 0xfa, 0x7e, 0x34, 0xfd, 0xb0, 0x77, 0xf6, 0x96, 0xbe, 0xf1, 0x5b, 0x98, 0x77, 0xe1, 0xa7}
+	binaryIDCmdVoidOutF32             = binary.ID{0xb0, 0xe2, 0x3b, 0xc0, 0x28, 0x93, 0x76, 0x84, 0x7f, 0xf7, 0x96, 0xbe, 0xe4, 0xcb, 0xec, 0xeb, 0xfb, 0x35, 0x3e, 0x02}
+	binaryIDCmdVoidOutF64             = binary.ID{0x58, 0x7d, 0xf5, 0x3a, 0xa1, 0x4e, 0xf4, 0xb5, 0xa7, 0x30, 0x11, 0xeb, 0x5a, 0x68, 0xb2, 0xc6, 0xdd, 0xa2, 0x5d, 0xb9}
+	binaryIDCmdVoidOutFixedSizeBuffer = binary.ID{0xd2, 0x2a, 0x9e, 0x9b, 0x08, 0xa6, 0x0b, 0x11, 0x19, 0x87, 0x36, 0x17, 0xea, 0xdc, 0x49, 0x8a, 0x01, 0x88, 0x5c, 0x8f}
+	binaryIDCmdVoidOutS16             = binary.ID{0x38, 0xf0, 0x6e, 0xcf, 0x5b, 0x9b, 0xe3, 0xb7, 0x6d, 0x9b, 0x7b, 0x51, 0xbc, 0x94, 0x3d, 0xba, 0xfe, 0x6c, 0x8a, 0xbf}
+	binaryIDCmdVoidOutS32             = binary.ID{0x4b, 0xb3, 0x5a, 0x13, 0xc1, 0x6b, 0xcd, 0x01, 0xcd, 0xd0, 0x88, 0x89, 0xc8, 0x5e, 0x5e, 0x70, 0x44, 0xc4, 0x9a, 0x23}
+	binaryIDCmdVoidOutS64             = binary.ID{0x2f, 0xf0, 0x6c, 0x4c, 0xa3, 0x73, 0xa0, 0x26, 0x3c, 0x17, 0xf9, 0x17, 0xa6, 0x89, 0x23, 0xce, 0xc9, 0x7b, 0x37, 0xa4}
+	binaryIDCmdVoidOutS8              = binary.ID{0xc9, 0x3a, 0x05, 0x36, 0x35, 0x2d, 0x93, 0x76, 0xf4, 0x06, 0xa7, 0x28, 0xe9, 0xe5, 0xed, 0x4f, 0xdb, 0x45, 0xe8, 0x2b}
+	binaryIDCmdVoidOutString          = binary.ID{0xef, 0xa9, 0xd0, 0x00, 0x2e, 0x7d, 0xd2, 0xdf, 0xb0, 0x5b, 0x35, 0x51, 0xa7, 0x9f, 0x49, 0x3a, 0xbf, 0xa0, 0x3f, 0x00}
+	binaryIDCmdVoidOutU16             = binary.ID{0x4d, 0x5a, 0xb8, 0x48, 0x9e, 0x43, 0x34, 0x4a, 0x79, 0x5e, 0x86, 0xf2, 0xac, 0x38, 0x87, 0x13, 0xd5, 0xba, 0xbf, 0xc7}
+	binaryIDCmdVoidOutU32             = binary.ID{0x03, 0x91, 0xd1, 0x3f, 0x3f, 0x9e, 0xea, 0x33, 0x71, 0xff, 0x02, 0x0c, 0x70, 0x6a, 0x07, 0xbb, 0x2f, 0x32, 0xeb, 0x0b}
+	binaryIDCmdVoidOutU64             = binary.ID{0x81, 0x40, 0x56, 0x73, 0x6c, 0x01, 0x6c, 0x62, 0x23, 0x19, 0xc3, 0x24, 0xc7, 0xe0, 0xcd, 0x3b, 0xa4, 0x04, 0xb9, 0x3e}
+	binaryIDCmdVoidOutU8              = binary.ID{0x91, 0xe3, 0xf7, 0x1e, 0x4d, 0xa7, 0x2e, 0xce, 0x6d, 0x2e, 0x5b, 0xca, 0xd6, 0x16, 0xc6, 0xf3, 0xf4, 0x5a, 0x91, 0x27}
+	binaryIDCmdVoidS16                = binary.ID{0xf3, 0x1f, 0x79, 0x1e, 0xbd, 0xc5, 0xda, 0x5a, 0xb3, 0x62, 0x45, 0x34, 0x2b, 0x5b, 0xdd, 0xea, 0x68, 0x3f, 0x58, 0x57}
+	binaryIDCmdVoidS32                = binary.ID{0x45, 0xc2, 0x1f, 0x19, 0x69, 0xb2, 0x83, 0x0e, 0x67, 0x51, 0x74, 0x10, 0x09, 0xfd, 0xeb, 0x31, 0xcc, 0xf1, 0x52, 0x66}
+	binaryIDCmdVoidS64                = binary.ID{0x78, 0x68, 0x18, 0x4b, 0xbf, 0x77, 0xd8, 0x45, 0x30, 0x06, 0xc5, 0x44, 0xca, 0x8c, 0x1e, 0xf8, 0xee, 0x82, 0x85, 0x31}
+	binaryIDCmdVoidS8                 = binary.ID{0xfc, 0x01, 0x6b, 0x1c, 0x5f, 0x06, 0xe1, 0x1d, 0xf8, 0x15, 0x8d, 0x51, 0xa4, 0xcb, 0x44, 0x3d, 0xb1, 0xd1, 0x59, 0x61}
+	binaryIDCmdVoidString             = binary.ID{0xdb, 0x9c, 0xa9, 0x10, 0x3a, 0x69, 0x32, 0xac, 0xa3, 0x56, 0xbc, 0x07, 0x34, 0x29, 0xe4, 0x48, 0x42, 0xbe, 0xc3, 0x98}
+	binaryIDCmdVoidU16                = binary.ID{0x8b, 0x3f, 0xb3, 0x3b, 0xd4, 0xdf, 0xed, 0xf5, 0x51, 0xaa, 0x5a, 0x4c, 0x4d, 0x37, 0x12, 0xd7, 0xab, 0x01, 0x18, 0xd4}
+	binaryIDCmdVoidU32                = binary.ID{0xa9, 0xce, 0x14, 0x64, 0x4e, 0x49, 0xe5, 0x68, 0xc7, 0xfe, 0xb1, 0x8f, 0xbf, 0x8b, 0x51, 0x5e, 0xb7, 0x6c, 0x92, 0x26}
+	binaryIDCmdVoidU64                = binary.ID{0xf0, 0x94, 0xd4, 0x52, 0x67, 0x8b, 0x0b, 0xb6, 0xc9, 0x2c, 0x5a, 0xeb, 0xad, 0x86, 0x6e, 0x16, 0x39, 0x05, 0x36, 0x12}
+	binaryIDCmdVoidU8                 = binary.ID{0x37, 0x14, 0xbd, 0x49, 0x55, 0x6f, 0xbf, 0x7b, 0x5b, 0xa2, 0x72, 0x0a, 0xb8, 0x94, 0x3a, 0x21, 0x4c, 0xdb, 0xe3, 0x32}
 	binaryIDGlobals                   = binary.ID{0xc0, 0x56, 0xa7, 0xd5, 0x53, 0x88, 0xac, 0xaa, 0x75, 0x81, 0x46, 0x04, 0x13, 0xd4, 0xd3, 0x88, 0x43, 0x9c, 0xef, 0x61}
 )
 
@@ -120,9 +119,6 @@ func (*CmdArrayOfFloat) Class() binary.Class {
 	return (*binaryClassCmdArrayOfFloat)(nil)
 }
 func doEncodeCmdArrayOfFloat(e binary.Encoder, o *CmdArrayOfFloat) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.Result))); err != nil {
 		return err
 	}
@@ -134,11 +130,6 @@ func doEncodeCmdArrayOfFloat(e binary.Encoder, o *CmdArrayOfFloat) error {
 	return nil
 }
 func doDecodeCmdArrayOfFloat(d binary.Decoder, o *CmdArrayOfFloat) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -154,9 +145,6 @@ func doDecodeCmdArrayOfFloat(d binary.Decoder, o *CmdArrayOfFloat) error {
 	return nil
 }
 func doSkipCmdArrayOfFloat(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -188,20 +176,12 @@ func (*CmdBool) Class() binary.Class {
 	return (*binaryClassCmdBool)(nil)
 }
 func doEncodeCmdBool(e binary.Encoder, o *CmdBool) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdBool(d binary.Decoder, o *CmdBool) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -210,9 +190,6 @@ func doDecodeCmdBool(d binary.Decoder, o *CmdBool) error {
 	return nil
 }
 func doSkipCmdBool(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -238,20 +215,12 @@ func (*CmdF32) Class() binary.Class {
 	return (*binaryClassCmdF32)(nil)
 }
 func doEncodeCmdF32(e binary.Encoder, o *CmdF32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdF32(d binary.Decoder, o *CmdF32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -260,9 +229,6 @@ func doDecodeCmdF32(d binary.Decoder, o *CmdF32) error {
 	return nil
 }
 func doSkipCmdF32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -288,20 +254,12 @@ func (*CmdF64) Class() binary.Class {
 	return (*binaryClassCmdF64)(nil)
 }
 func doEncodeCmdF64(e binary.Encoder, o *CmdF64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdF64(d binary.Decoder, o *CmdF64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -310,9 +268,6 @@ func doDecodeCmdF64(d binary.Decoder, o *CmdF64) error {
 	return nil
 }
 func doSkipCmdF64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
@@ -338,20 +293,12 @@ func (*CmdPointer) Class() binary.Class {
 	return (*binaryClassCmdPointer)(nil)
 }
 func doEncodeCmdPointer(e binary.Encoder, o *CmdPointer) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint64(uint64(o.Result)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -360,9 +307,6 @@ func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) error {
 	return nil
 }
 func doSkipCmdPointer(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -388,20 +332,12 @@ func (*CmdS16) Class() binary.Class {
 	return (*binaryClassCmdS16)(nil)
 }
 func doEncodeCmdS16(e binary.Encoder, o *CmdS16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS16(d binary.Decoder, o *CmdS16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -410,9 +346,6 @@ func doDecodeCmdS16(d binary.Decoder, o *CmdS16) error {
 	return nil
 }
 func doSkipCmdS16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
@@ -438,20 +371,12 @@ func (*CmdS32) Class() binary.Class {
 	return (*binaryClassCmdS32)(nil)
 }
 func doEncodeCmdS32(e binary.Encoder, o *CmdS32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS32(d binary.Decoder, o *CmdS32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -460,9 +385,6 @@ func doDecodeCmdS32(d binary.Decoder, o *CmdS32) error {
 	return nil
 }
 func doSkipCmdS32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -488,20 +410,12 @@ func (*CmdS64) Class() binary.Class {
 	return (*binaryClassCmdS64)(nil)
 }
 func doEncodeCmdS64(e binary.Encoder, o *CmdS64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS64(d binary.Decoder, o *CmdS64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -510,9 +424,6 @@ func doDecodeCmdS64(d binary.Decoder, o *CmdS64) error {
 	return nil
 }
 func doSkipCmdS64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
@@ -538,20 +449,12 @@ func (*CmdS8) Class() binary.Class {
 	return (*binaryClassCmdS8)(nil)
 }
 func doEncodeCmdS8(e binary.Encoder, o *CmdS8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS8(d binary.Decoder, o *CmdS8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -560,9 +463,6 @@ func doDecodeCmdS8(d binary.Decoder, o *CmdS8) error {
 	return nil
 }
 func doSkipCmdS8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
@@ -588,20 +488,12 @@ func (*CmdString) Class() binary.Class {
 	return (*binaryClassCmdString)(nil)
 }
 func doEncodeCmdString(e binary.Encoder, o *CmdString) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.String(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdString(d binary.Decoder, o *CmdString) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -610,9 +502,6 @@ func doDecodeCmdString(d binary.Decoder, o *CmdString) error {
 	return nil
 }
 func doSkipCmdString(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -638,20 +527,12 @@ func (*CmdU16) Class() binary.Class {
 	return (*binaryClassCmdU16)(nil)
 }
 func doEncodeCmdU16(e binary.Encoder, o *CmdU16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU16(d binary.Decoder, o *CmdU16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -660,9 +541,6 @@ func doDecodeCmdU16(d binary.Decoder, o *CmdU16) error {
 	return nil
 }
 func doSkipCmdU16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -688,9 +566,6 @@ func (*CmdU32) Class() binary.Class {
 	return (*binaryClassCmdU32)(nil)
 }
 func doEncodeCmdU32(e binary.Encoder, o *CmdU32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(o.Result); err != nil {
 		return err
 	}
@@ -700,19 +575,11 @@ func doDecodeCmdU32(d binary.Decoder, o *CmdU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.InContext = atom.ContextID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
 		o.Result = uint32(obj)
 	}
 	return nil
 }
 func doSkipCmdU32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -738,20 +605,12 @@ func (*CmdU64) Class() binary.Class {
 	return (*binaryClassCmdU64)(nil)
 }
 func doEncodeCmdU64(e binary.Encoder, o *CmdU64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU64(d binary.Decoder, o *CmdU64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -760,9 +619,6 @@ func doDecodeCmdU64(d binary.Decoder, o *CmdU64) error {
 	return nil
 }
 func doSkipCmdU64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -788,20 +644,12 @@ func (*CmdU8) Class() binary.Class {
 	return (*binaryClassCmdU8)(nil)
 }
 func doEncodeCmdU8(e binary.Encoder, o *CmdU8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU8(d binary.Decoder, o *CmdU8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -810,9 +658,6 @@ func doDecodeCmdU8(d binary.Decoder, o *CmdU8) error {
 	return nil
 }
 func doSkipCmdU8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
@@ -838,23 +683,12 @@ func (*CmdVoid) Class() binary.Class {
 	return (*binaryClassCmdVoid)(nil)
 }
 func doEncodeCmdVoid(e binary.Encoder, o *CmdVoid) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	return nil
 }
 func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	return nil
 }
 func doSkipCmdVoid(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	return nil
 }
 func (*binaryClassCmdVoid) ID() binary.ID      { return binaryIDCmdVoid }
@@ -877,9 +711,6 @@ func (*CmdVoid3Arrays) Class() binary.Class {
 	return (*binaryClassCmdVoid3Arrays)(nil)
 }
 func doEncodeCmdVoid3Arrays(e binary.Encoder, o *CmdVoid3Arrays) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -907,11 +738,6 @@ func doEncodeCmdVoid3Arrays(e binary.Encoder, o *CmdVoid3Arrays) error {
 	return nil
 }
 func doDecodeCmdVoid3Arrays(d binary.Decoder, o *CmdVoid3Arrays) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -951,9 +777,6 @@ func doDecodeCmdVoid3Arrays(d binary.Decoder, o *CmdVoid3Arrays) error {
 	return nil
 }
 func doSkipCmdVoid3Arrays(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1003,9 +826,6 @@ func (*CmdVoid3Remapped) Class() binary.Class {
 	return (*binaryClassCmdVoid3Remapped)(nil)
 }
 func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(o.A)); err != nil {
 		return err
 	}
@@ -1018,11 +838,6 @@ func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) error {
 	return nil
 }
 func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1041,9 +856,6 @@ func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) error {
 	return nil
 }
 func doSkipCmdVoid3Remapped(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1075,9 +887,6 @@ func (*CmdVoid3Strings) Class() binary.Class {
 	return (*binaryClassCmdVoid3Strings)(nil)
 }
 func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
@@ -1090,11 +899,6 @@ func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) error {
 	return nil
 }
 func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1113,9 +917,6 @@ func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) error {
 	return nil
 }
 func doSkipCmdVoid3Strings(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -1147,9 +948,6 @@ func (*CmdVoidArrayOfStrings) Class() binary.Class {
 	return (*binaryClassCmdVoidArrayOfStrings)(nil)
 }
 func doEncodeCmdVoidArrayOfStrings(e binary.Encoder, o *CmdVoidArrayOfStrings) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -1161,11 +959,6 @@ func doEncodeCmdVoidArrayOfStrings(e binary.Encoder, o *CmdVoidArrayOfStrings) e
 	return nil
 }
 func doDecodeCmdVoidArrayOfStrings(d binary.Decoder, o *CmdVoidArrayOfStrings) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1181,9 +974,6 @@ func doDecodeCmdVoidArrayOfStrings(d binary.Decoder, o *CmdVoidArrayOfStrings) e
 	return nil
 }
 func doSkipCmdVoidArrayOfStrings(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1217,20 +1007,12 @@ func (*CmdVoidBool) Class() binary.Class {
 	return (*binaryClassCmdVoidBool)(nil)
 }
 func doEncodeCmdVoidBool(e binary.Encoder, o *CmdVoidBool) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Bool(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -1239,9 +1021,6 @@ func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) error {
 	return nil
 }
 func doSkipCmdVoidBool(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -1267,20 +1046,12 @@ func (*CmdVoidF32) Class() binary.Class {
 	return (*binaryClassCmdVoidF32)(nil)
 }
 func doEncodeCmdVoidF32(e binary.Encoder, o *CmdVoidF32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -1289,9 +1060,6 @@ func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) error {
 	return nil
 }
 func doSkipCmdVoidF32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -1317,20 +1085,12 @@ func (*CmdVoidF64) Class() binary.Class {
 	return (*binaryClassCmdVoidF64)(nil)
 }
 func doEncodeCmdVoidF64(e binary.Encoder, o *CmdVoidF64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -1339,9 +1099,6 @@ func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) error {
 	return nil
 }
 func doSkipCmdVoidF64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
@@ -1367,9 +1124,6 @@ func (*CmdVoidOut3Remapped) Class() binary.Class {
 	return (*binaryClassCmdVoidOut3Remapped)(nil)
 }
 func doEncodeCmdVoidOut3Remapped(e binary.Encoder, o *CmdVoidOut3Remapped) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(o.A)); err != nil {
 		return err
 	}
@@ -1382,11 +1136,6 @@ func doEncodeCmdVoidOut3Remapped(e binary.Encoder, o *CmdVoidOut3Remapped) error
 	return nil
 }
 func doDecodeCmdVoidOut3Remapped(d binary.Decoder, o *CmdVoidOut3Remapped) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1405,9 +1154,6 @@ func doDecodeCmdVoidOut3Remapped(d binary.Decoder, o *CmdVoidOut3Remapped) error
 	return nil
 }
 func doSkipCmdVoidOut3Remapped(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1441,9 +1187,6 @@ func (*CmdVoidOut3Strings) Class() binary.Class {
 	return (*binaryClassCmdVoidOut3Strings)(nil)
 }
 func doEncodeCmdVoidOut3Strings(e binary.Encoder, o *CmdVoidOut3Strings) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
@@ -1456,11 +1199,6 @@ func doEncodeCmdVoidOut3Strings(e binary.Encoder, o *CmdVoidOut3Strings) error {
 	return nil
 }
 func doDecodeCmdVoidOut3Strings(d binary.Decoder, o *CmdVoidOut3Strings) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1479,9 +1217,6 @@ func doDecodeCmdVoidOut3Strings(d binary.Decoder, o *CmdVoidOut3Strings) error {
 	return nil
 }
 func doSkipCmdVoidOut3Strings(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -1513,9 +1248,6 @@ func (*CmdVoidOutArrayOfRemapped) Class() binary.Class {
 	return (*binaryClassCmdVoidOutArrayOfRemapped)(nil)
 }
 func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRemapped) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(uint32(len(o.A))); err != nil {
 		return err
 	}
@@ -1527,11 +1259,6 @@ func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRem
 	return nil
 }
 func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRemapped) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1547,9 +1274,6 @@ func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRem
 	return nil
 }
 func doSkipCmdVoidOutArrayOfRemapped(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if count, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1583,20 +1307,12 @@ func (*CmdVoidOutBool) Class() binary.Class {
 	return (*binaryClassCmdVoidOutBool)(nil)
 }
 func doEncodeCmdVoidOutBool(e binary.Encoder, o *CmdVoidOutBool) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Bool(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutBool(d binary.Decoder, o *CmdVoidOutBool) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -1605,9 +1321,6 @@ func doDecodeCmdVoidOutBool(d binary.Decoder, o *CmdVoidOutBool) error {
 	return nil
 }
 func doSkipCmdVoidOutBool(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -1633,20 +1346,12 @@ func (*CmdVoidOutF32) Class() binary.Class {
 	return (*binaryClassCmdVoidOutF32)(nil)
 }
 func doEncodeCmdVoidOutF32(e binary.Encoder, o *CmdVoidOutF32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutF32(d binary.Decoder, o *CmdVoidOutF32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -1655,9 +1360,6 @@ func doDecodeCmdVoidOutF32(d binary.Decoder, o *CmdVoidOutF32) error {
 	return nil
 }
 func doSkipCmdVoidOutF32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -1683,20 +1385,12 @@ func (*CmdVoidOutF64) Class() binary.Class {
 	return (*binaryClassCmdVoidOutF64)(nil)
 }
 func doEncodeCmdVoidOutF64(e binary.Encoder, o *CmdVoidOutF64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Float64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutF64(d binary.Decoder, o *CmdVoidOutF64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -1705,9 +1399,6 @@ func doDecodeCmdVoidOutF64(d binary.Decoder, o *CmdVoidOutF64) error {
 	return nil
 }
 func doSkipCmdVoidOutF64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
@@ -1733,20 +1424,12 @@ func (*CmdVoidOutFixedSizeBuffer) Class() binary.Class {
 	return (*binaryClassCmdVoidOutFixedSizeBuffer)(nil)
 }
 func doEncodeCmdVoidOutFixedSizeBuffer(e binary.Encoder, o *CmdVoidOutFixedSizeBuffer) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint64(uint64(o.A)); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutFixedSizeBuffer(d binary.Decoder, o *CmdVoidOutFixedSizeBuffer) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -1755,9 +1438,6 @@ func doDecodeCmdVoidOutFixedSizeBuffer(d binary.Decoder, o *CmdVoidOutFixedSizeB
 	return nil
 }
 func doSkipCmdVoidOutFixedSizeBuffer(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -1785,20 +1465,12 @@ func (*CmdVoidOutS16) Class() binary.Class {
 	return (*binaryClassCmdVoidOutS16)(nil)
 }
 func doEncodeCmdVoidOutS16(e binary.Encoder, o *CmdVoidOutS16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutS16(d binary.Decoder, o *CmdVoidOutS16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -1807,9 +1479,6 @@ func doDecodeCmdVoidOutS16(d binary.Decoder, o *CmdVoidOutS16) error {
 	return nil
 }
 func doSkipCmdVoidOutS16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
@@ -1835,20 +1504,12 @@ func (*CmdVoidOutS32) Class() binary.Class {
 	return (*binaryClassCmdVoidOutS32)(nil)
 }
 func doEncodeCmdVoidOutS32(e binary.Encoder, o *CmdVoidOutS32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutS32(d binary.Decoder, o *CmdVoidOutS32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -1857,9 +1518,6 @@ func doDecodeCmdVoidOutS32(d binary.Decoder, o *CmdVoidOutS32) error {
 	return nil
 }
 func doSkipCmdVoidOutS32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -1885,20 +1543,12 @@ func (*CmdVoidOutS64) Class() binary.Class {
 	return (*binaryClassCmdVoidOutS64)(nil)
 }
 func doEncodeCmdVoidOutS64(e binary.Encoder, o *CmdVoidOutS64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutS64(d binary.Decoder, o *CmdVoidOutS64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -1907,9 +1557,6 @@ func doDecodeCmdVoidOutS64(d binary.Decoder, o *CmdVoidOutS64) error {
 	return nil
 }
 func doSkipCmdVoidOutS64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
@@ -1935,20 +1582,12 @@ func (*CmdVoidOutS8) Class() binary.Class {
 	return (*binaryClassCmdVoidOutS8)(nil)
 }
 func doEncodeCmdVoidOutS8(e binary.Encoder, o *CmdVoidOutS8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutS8(d binary.Decoder, o *CmdVoidOutS8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -1957,9 +1596,6 @@ func doDecodeCmdVoidOutS8(d binary.Decoder, o *CmdVoidOutS8) error {
 	return nil
 }
 func doSkipCmdVoidOutS8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
@@ -1985,20 +1621,12 @@ func (*CmdVoidOutString) Class() binary.Class {
 	return (*binaryClassCmdVoidOutString)(nil)
 }
 func doEncodeCmdVoidOutString(e binary.Encoder, o *CmdVoidOutString) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutString(d binary.Decoder, o *CmdVoidOutString) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -2007,9 +1635,6 @@ func doDecodeCmdVoidOutString(d binary.Decoder, o *CmdVoidOutString) error {
 	return nil
 }
 func doSkipCmdVoidOutString(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -2035,20 +1660,12 @@ func (*CmdVoidOutU16) Class() binary.Class {
 	return (*binaryClassCmdVoidOutU16)(nil)
 }
 func doEncodeCmdVoidOutU16(e binary.Encoder, o *CmdVoidOutU16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutU16(d binary.Decoder, o *CmdVoidOutU16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -2057,9 +1674,6 @@ func doDecodeCmdVoidOutU16(d binary.Decoder, o *CmdVoidOutU16) error {
 	return nil
 }
 func doSkipCmdVoidOutU16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -2085,9 +1699,6 @@ func (*CmdVoidOutU32) Class() binary.Class {
 	return (*binaryClassCmdVoidOutU32)(nil)
 }
 func doEncodeCmdVoidOutU32(e binary.Encoder, o *CmdVoidOutU32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(o.A); err != nil {
 		return err
 	}
@@ -2097,19 +1708,11 @@ func doDecodeCmdVoidOutU32(d binary.Decoder, o *CmdVoidOutU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.InContext = atom.ContextID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
 		o.A = uint32(obj)
 	}
 	return nil
 }
 func doSkipCmdVoidOutU32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2135,20 +1738,12 @@ func (*CmdVoidOutU64) Class() binary.Class {
 	return (*binaryClassCmdVoidOutU64)(nil)
 }
 func doEncodeCmdVoidOutU64(e binary.Encoder, o *CmdVoidOutU64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutU64(d binary.Decoder, o *CmdVoidOutU64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -2157,9 +1752,6 @@ func doDecodeCmdVoidOutU64(d binary.Decoder, o *CmdVoidOutU64) error {
 	return nil
 }
 func doSkipCmdVoidOutU64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -2185,20 +1777,12 @@ func (*CmdVoidOutU8) Class() binary.Class {
 	return (*binaryClassCmdVoidOutU8)(nil)
 }
 func doEncodeCmdVoidOutU8(e binary.Encoder, o *CmdVoidOutU8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutU8(d binary.Decoder, o *CmdVoidOutU8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -2207,9 +1791,6 @@ func doDecodeCmdVoidOutU8(d binary.Decoder, o *CmdVoidOutU8) error {
 	return nil
 }
 func doSkipCmdVoidOutU8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
@@ -2235,20 +1816,12 @@ func (*CmdVoidS16) Class() binary.Class {
 	return (*binaryClassCmdVoidS16)(nil)
 }
 func doEncodeCmdVoidS16(e binary.Encoder, o *CmdVoidS16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -2257,9 +1830,6 @@ func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) error {
 	return nil
 }
 func doSkipCmdVoidS16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
@@ -2285,20 +1855,12 @@ func (*CmdVoidS32) Class() binary.Class {
 	return (*binaryClassCmdVoidS32)(nil)
 }
 func doEncodeCmdVoidS32(e binary.Encoder, o *CmdVoidS32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -2307,9 +1869,6 @@ func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) error {
 	return nil
 }
 func doSkipCmdVoidS32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -2335,20 +1894,12 @@ func (*CmdVoidS64) Class() binary.Class {
 	return (*binaryClassCmdVoidS64)(nil)
 }
 func doEncodeCmdVoidS64(e binary.Encoder, o *CmdVoidS64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -2357,9 +1908,6 @@ func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) error {
 	return nil
 }
 func doSkipCmdVoidS64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
@@ -2385,20 +1933,12 @@ func (*CmdVoidS8) Class() binary.Class {
 	return (*binaryClassCmdVoidS8)(nil)
 }
 func doEncodeCmdVoidS8(e binary.Encoder, o *CmdVoidS8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Int8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -2407,9 +1947,6 @@ func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) error {
 	return nil
 }
 func doSkipCmdVoidS8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
@@ -2435,20 +1972,12 @@ func (*CmdVoidString) Class() binary.Class {
 	return (*binaryClassCmdVoidString)(nil)
 }
 func doEncodeCmdVoidString(e binary.Encoder, o *CmdVoidString) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -2457,9 +1986,6 @@ func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) error {
 	return nil
 }
 func doSkipCmdVoidString(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -2485,20 +2011,12 @@ func (*CmdVoidU16) Class() binary.Class {
 	return (*binaryClassCmdVoidU16)(nil)
 }
 func doEncodeCmdVoidU16(e binary.Encoder, o *CmdVoidU16) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -2507,9 +2025,6 @@ func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) error {
 	return nil
 }
 func doSkipCmdVoidU16(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -2535,9 +2050,6 @@ func (*CmdVoidU32) Class() binary.Class {
 	return (*binaryClassCmdVoidU32)(nil)
 }
 func doEncodeCmdVoidU32(e binary.Encoder, o *CmdVoidU32) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint32(o.A); err != nil {
 		return err
 	}
@@ -2547,19 +2059,11 @@ func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.InContext = atom.ContextID(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
 		o.A = uint32(obj)
 	}
 	return nil
 }
 func doSkipCmdVoidU32(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2585,20 +2089,12 @@ func (*CmdVoidU64) Class() binary.Class {
 	return (*binaryClassCmdVoidU64)(nil)
 }
 func doEncodeCmdVoidU64(e binary.Encoder, o *CmdVoidU64) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -2607,9 +2103,6 @@ func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) error {
 	return nil
 }
 func doSkipCmdVoidU64(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -2635,20 +2128,12 @@ func (*CmdVoidU8) Class() binary.Class {
 	return (*binaryClassCmdVoidU8)(nil)
 }
 func doEncodeCmdVoidU8(e binary.Encoder, o *CmdVoidU8) error {
-	if err := e.Uint32(uint32(o.InContext)); err != nil {
-		return err
-	}
 	if err := e.Uint8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) error {
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.InContext = atom.ContextID(obj)
-	}
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -2657,9 +2142,6 @@ func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) error {
 	return nil
 }
 func doSkipCmdVoidU8(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}

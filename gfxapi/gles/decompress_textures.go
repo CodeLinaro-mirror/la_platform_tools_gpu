@@ -24,7 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/image"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -39,9 +39,9 @@ import (
 //   GL_ETC1_RGB8_OES
 func decompressTextures(capture service.CaptureId, db database.Database, logger log.Logger) atom.Transformer {
 	logger = logger.Enter("decompressTextures")
-	s := state.New()
+	s := &gfxapi.State{}
 	return atom.Transform("DecompressTextures", func(id atom.ID, a atom.Atom, out atom.Writer) {
-		if err := s.Mutate(a); err != nil {
+		if err := a.Mutate(s); err != nil {
 			logger.Error("%v", err)
 		}
 
@@ -69,11 +69,9 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 			out.Write(id, &atom.Observation{
 				Range:      memory.Range{Base: address, Size: uint64(len(blob.Data))},
 				ResourceID: resourceID,
-				Context:    a.ContextID(),
 			})
 
 			out.Write(id, NewGlTexImage2D(
-				a.ContextID(),
 				a.Target,
 				a.Level,
 				TexelFormat_GL_RGBA,

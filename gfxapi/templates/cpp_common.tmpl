@@ -216,6 +216,18 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the name for the given local variable.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.LocalName"}}
+  {{AssertType $ "Local"}}
+
+  l_{{$.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits the C++ logic to execute the given statement.
   If the global "C++.StatementTypeOverride" is specified then this the macro
   with the specified name is called, otherwise the macro delegates to
@@ -237,7 +249,7 @@ limitations under the License.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.StatementDefault"}}
-  {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{$.Local.Name}} = {{Macro "C++.Read" $.Local.Value}};
+  {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{Macro "C++.LocalName" $.Local}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
   {{else if IsCopy         $}}{{Macro "C++.Copy" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
@@ -335,11 +347,12 @@ limitations under the License.
   {{AssertType $ "Iteration"}}
 
   {{if IsBinaryOp $.Iterable}}
-    {{Macro "C++.Range" "Name" $.Iterator.Name "Range" $.Iterable}} {
+    {{Macro "C++.Range" "Name" (Macro "C++.Read" $.Iterator) "Range" $.Iterable}} {
       {{Macro "C++.Block" $.Block}}
     }
   {{else}}
-    for ({{Macro "C++.Type" $.Iterable}}::iterator {{$.Iterator.Name}} = {{Macro "C++.Read" $.Iterable}}; {{$.Iterator.Name}} != {{Macro "C++.Read" $.Iterable}}.end(); ++{{$.Iterator.Name}}) {
+    {{$it := Macro "C++.LocalName" $.Iterator}}
+    for ({{Macro "C++.Type" $.Iterable}}::iterator {{$it}} = {{Macro "C++.Read" $.Iterable}}; {{$it}} != {{Macro "C++.Read" $.Iterable}}.end(); ++{{$it}}) {
       {{Macro "C++.Block" $.Block}}
     }
   {{end}}
@@ -359,13 +372,13 @@ limitations under the License.
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
   {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "C++.Read" $.Expression}})
   {{else if IsEnumEntry        $}}{{$.Enum.Name}}::{{$.Name}}
-  {{else if IsLocal            $}}{{$.Name}}
+  {{else if IsLocal            $}}{{Macro "C++.LocalName" $}}
   {{else if IsBitTest          $}}({{Macro "C++.Read" $.Bitfield}} & {{Macro "C++.Read" $.Bits}}) != 0
   {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
   {{else if IsCast             $}}{{Macro "C++.Cast" $}}
   {{else if IsCall             $}}{{Macro "C++.Call" $}}
   {{else if IsUnknown          $}}{{Macro "C++.Read" $.Inferred}}
-  {{else if IsObserved         $}}{{$.Parameter.Name}}
+  {{else if IsObserved         $}}{{Macro "C++.Read" $.Parameter}}
   {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}m{{$.Field.Name}}
   {{else if IsGlobal           $}}this->{{$.Name}}
   {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}

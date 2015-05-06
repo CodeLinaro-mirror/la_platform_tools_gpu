@@ -43,11 +43,10 @@ cmd array<DeviceId> GetDevices() { return ? }
 cmd BinaryId GetState(CaptureId capture, u64 after)
 { return ? }
 
-// GetHierarchy returns the atom hierarchy identifier for the given capture and
-// context. Currently there is only one hierarchy per capture context, but
-// this is likely to change in the future.
-cmd HierarchyId GetHierarchy(CaptureId capture,
-                             u32       contextId)
+// GetHierarchy returns the atom hierarchy identifier for the given capture.
+// Currently there is only one hierarchy per capture, but this is likely to
+// change in the future.
+cmd HierarchyId GetHierarchy(CaptureId capture)
 { return ? }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
@@ -57,24 +56,47 @@ cmd MemoryInfoId GetMemoryInfo(CaptureId capture, u64 after, MemoryRange rng)
 { return ? }
 
 // GetFramebufferColor returns the ImageInfo identifier describing the bound
-// color buffer for the given device, capture and context immediately following
-// the atom after. The provided RenderSettings structure can be used to adjust
-// maximum desired dimensions of the image, as well as applying debug
+// color buffer for the given device, capture and graphics API immediately
+// following the atom after. The provided RenderSettings structure can be used
+// to adjust maximum desired dimensions of the image, as well as applying debug
 // visualizations.
 cmd ImageInfoId GetFramebufferColor(DeviceId       device,
                                     CaptureId      capture,
-                                    u32            contextId,
+                                    ApiId          api,
                                     u64            after,
                                     RenderSettings settings)
 { return ? }
 
 // GetFramebufferDepth returns the ImageInfo identifier describing the bound
-// depth buffer for the given device, capture and context immediately following
-// the atom after.
+// depth buffer for the given device, capture and graphics API immediately
+// following the atom after.
 cmd ImageInfoId GetFramebufferDepth(DeviceId  device,
                                     CaptureId capture,
-                                    u32       contextId,
+                                    ApiId     api,
                                     u64       after)
+{ return ? }
+
+// GetTimingInfo performs timings of the given capture on the given device,
+// returning an identifier to the results.
+// This function is experimental and will change signature.
+cmd TimingInfoId GetTimingInfo(DeviceId   device,
+                               CaptureId  capture,
+                               TimingMask mask)
+{ return ? }
+
+// PrerenderFramebuffers renders the framebuffer contents after each of the
+// given atoms of interest in the given capture on the given device for the
+// given graphics API, resized to fit within the given dimensions while keeping
+// the respective framebuffers original aspect ratio. This function doesn't
+// return any data, as it is used to pre-populate the cache of framebuffer
+// thumbnails that later get queried by the client. This function is
+// experimental and may change signature.
+cmd BinaryId PrerenderFramebuffers(DeviceId   device,
+                                   CaptureId  capture,
+                                   ApiId      api,
+                                   u32        width,
+                                   u32        height,
+                                   array<u64> atomIds)
 { return ? }
 
 // ReplaceAtom creates and new capture based on an existing capture, but with
@@ -83,28 +105,6 @@ cmd CaptureId ReplaceAtom(CaptureId capture,
                           u64       atomId,
                           u16       atomType,
                           Binary    data)
-{ return ? }
-
-// GetTimingInfo performs timings of the given capture, context on the given
-// device, returning an identifier to the results. This function is experimental
-// and will change signature.
-cmd TimingInfoId GetTimingInfo(DeviceId   device,
-                               CaptureId  capture,
-                               u32        contextId,
-                               TimingMask mask)
-{ return ? }
-
-// PrerenderFramebuffers renders the framebuffer contents after each of the
-// given atoms of interest in the given capture on the given device, resized to
-// fit within the given dimensions while keeping the respective framebuffers
-// original aspect ratio. This function doesn't return any data, as it is used
-// to pre-populate the cache of framebuffer thumbnails that later get queried by
-// the client. This function is experimental and may change signature.
-cmd BinaryId PrerenderFramebuffers(DeviceId   device,
-                                   CaptureId  capture,
-                                   u32        width,
-                                   u32        height,
-                                   array<u64> atomIds)
 { return ? }
 
 cmd AtomStream         ResolveAtomStream(AtomStreamId id) { return ? }
@@ -132,8 +132,8 @@ class Device {
 class Capture {
   string              Name     // Name given to the capture. i.e. "KittyWorld"
   AtomStreamId        Atoms    // The identifier to the stream of atoms in this capture.
+  array<ApiId>        Apis     // List of graphics APIs used by this capture.
   SchemaId            Schema   // The schema used to decode types in this capture.
-  array<AtomContext>  Contexts // The contexts used by the capture.
 }
 
 // Binary holds a blob of data.
@@ -145,12 +145,6 @@ class Binary {
 // using the capture's schema.
 class AtomStream {
   array<u8> Data // Encoded atom stream.
-}
-
-// AtomContext holds the information about a single context in an AtomStream.
-class AtomContext {
-  u32   Id  // The context id.
-  ApiId Api // The context API.
 }
 
 // Hierarchy holds the root to an AtomGroup hierarchy.
@@ -338,6 +332,7 @@ class FieldInfo {
 
 // AtomInfo describes a single Atom type.
 class AtomInfo {
+  ApiId                 Api               // The graphics API that this Atom belongs to.
   u16                   Type              // The atom's unique type identifier.
   string                Name              // The name of the atom.
   array<ParameterInfo>  Parameters        // The list of atom parameters.

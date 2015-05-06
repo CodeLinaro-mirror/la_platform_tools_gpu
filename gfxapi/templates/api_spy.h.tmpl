@@ -49,9 +49,7 @@ limitations under the License.
     inline void init(std::shared_ptr<gapic::Encoder> encoder);
 ¶
     {{range $f := AllCommands $}}
-      {{if not (GetAnnotation $f "synthetic")}}
-        {{Macro "MethodDefinitions" $f}}
-      {{end}}
+      {{Macro "MethodDefinitions" $f}}
     {{end}}
 ¶
   «protected:»
@@ -59,14 +57,6 @@ limitations under the License.
     {{Macro "ApiClassnames.State"  }} mState;
 ¶
   «private:»
-    static const gapic::Id RESOURCE_ID;
-    static const gapic::Id OBSERVATION_ID;
-    {{range $f := AllCommands $}}
-      {{if not (GetAnnotation $f "synthetic")}}
-        static const gapic::Id {{Macro "ID" $f}};
-      {{end}}
-    {{end}}
-¶
     enum order {
       PRE_OBSERVE,
       POST_OBSERVE,
@@ -96,17 +86,14 @@ limitations under the License.
         mObserved.emplace(id);
     }
     mEncoder->Uint16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
-    mEncoder->Uint32(0); // TODO: ContextID
     mEncoder->Uint64(reinterpret_cast<uint64_t>(ptr));
     mEncoder->Uint64(size);
     mEncoder->Id(id);
   }
 ¶
   {{range $i, $f := AllCommands $}}
-    {{if not (GetAnnotation $f "synthetic")}}
-      {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
-      {{Macro "MethodImplementation" $f}}¶
-    {{end}}
+    {{Global "HACK_FUNCTION_INDEX_HACK" $i}}
+    {{Macro "MethodImplementation" $f}}¶
   {{end}}
 ¶
   »} // namespace gapii
@@ -149,22 +136,26 @@ limitations under the License.
   {{AssertType $ "Function"}}
 
   {{$name := Macro "C++.MethodName" $}}
-  {{$ret := not (IsVoid $.Return.Type)}}
-  {{$spyname := Global "SpyName"}}
+  {{$synthetic := GetAnnotation $ "synthetic"}}
+  {{$ret       := not (IsVoid $.Return.Type)}}
+  {{$spyname   := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
     GAPID_INFO("{{$name}}");
     {{$args := Macro "C++.CallArguments" $}}
     {{if $ret}}
-      {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
+      {{if $synthetic}}
+        {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
+      {{else}}
+        {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
+      {{end}}
       mState.{{$name}}({{if $args}}{{$args}}, {{end}}result);
     {{else}}
-      mImports.{{$name}}({{$args}});
+      {{if not $synthetic}}mImports.{{$name}}({{$args}});{{end}}
       mState.{{$name}}({{$args}});
     {{end}}
 ¶
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-    mEncoder->Uint32(0); // TODO: ContextID
 
     {{range $p := $.FullParameters}}
       {{if not $p.Output}}

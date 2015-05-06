@@ -69,9 +69,6 @@ private:
     // Register the callbacks for the interpreter (Gl functions, load resource, post resource)
     void registerCallbacks(Interpreter* interpreter);
 
-    // Initialize the context for replay
-    bool init(int width, int height, int depthSize, int stencilSize);
-
     // Post a chunk of data where the number of bytes is on the top of the stack (uint32_t) and the
     // address for the data is the second element on the stack (void*)
     bool postData(Stack* stack);
@@ -110,8 +107,11 @@ private:
     // An array of timers.
     gapic::Timer mTimers[MAX_TIMERS];
 
-    // The renderer for the given platform.
-    std::unique_ptr<Renderer> mRenderer;
+    // The constructed renderers.
+    std::unordered_map<uint32_t, Renderer*> mRenderers;
+
+    // The currently bound renderer.
+    Renderer* mBoundRenderer;
 
     // A buffer for data to be sent back to the server.
     std::unique_ptr<PostBuffer> mPostBuffer;

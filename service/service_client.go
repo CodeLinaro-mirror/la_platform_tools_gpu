@@ -61,9 +61,9 @@ func (c client) GetState(l log.Logger, capture CaptureId, after uint64) (res Bin
 	return
 }
 
-func (c client) GetHierarchy(l log.Logger, capture CaptureId, contextId uint32) (res HierarchyId, err error) {
+func (c client) GetHierarchy(l log.Logger, capture CaptureId) (res HierarchyId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetHierarchy{capture: capture, contextId: contextId}); err == nil {
+	if val, err = c.Send(&callGetHierarchy{capture: capture}); err == nil {
 		res = val.(*resultGetHierarchy).value
 	} else {
 		l.Error("RPC GetHierarchy failed with error: %v", err)
@@ -81,9 +81,9 @@ func (c client) GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng
 	return
 }
 
-func (c client) GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64, settings RenderSettings) (res ImageInfoId, err error) {
+func (c client) GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings) (res ImageInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetFramebufferColor{device: device, capture: capture, contextId: contextId, after: after, settings: settings}); err == nil {
+	if val, err = c.Send(&callGetFramebufferColor{device: device, capture: capture, api: api, after: after, settings: settings}); err == nil {
 		res = val.(*resultGetFramebufferColor).value
 	} else {
 		l.Error("RPC GetFramebufferColor failed with error: %v", err)
@@ -91,12 +91,32 @@ func (c client) GetFramebufferColor(l log.Logger, device DeviceId, capture Captu
 	return
 }
 
-func (c client) GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64) (res ImageInfoId, err error) {
+func (c client) GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64) (res ImageInfoId, err error) {
 	var val interface{}
-	if val, err = c.Send(&callGetFramebufferDepth{device: device, capture: capture, contextId: contextId, after: after}); err == nil {
+	if val, err = c.Send(&callGetFramebufferDepth{device: device, capture: capture, api: api, after: after}); err == nil {
 		res = val.(*resultGetFramebufferDepth).value
 	} else {
 		l.Error("RPC GetFramebufferDepth failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, mask TimingMask) (res TimingInfoId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, mask: mask}); err == nil {
+		res = val.(*resultGetTimingInfo).value
+	} else {
+		l.Error("RPC GetTimingInfo failed with error: %v", err)
+	}
+	return
+}
+
+func (c client) PrerenderFramebuffers(l log.Logger, device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array) (res BinaryId, err error) {
+	var val interface{}
+	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIds: atomIds}); err == nil {
+		res = val.(*resultPrerenderFramebuffers).value
+	} else {
+		l.Error("RPC PrerenderFramebuffers failed with error: %v", err)
 	}
 	return
 }
@@ -107,26 +127,6 @@ func (c client) ReplaceAtom(l log.Logger, capture CaptureId, atomId uint64, atom
 		res = val.(*resultReplaceAtom).value
 	} else {
 		l.Error("RPC ReplaceAtom failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, mask TimingMask) (res TimingInfoId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, contextId: contextId, mask: mask}); err == nil {
-		res = val.(*resultGetTimingInfo).value
-	} else {
-		l.Error("RPC GetTimingInfo failed with error: %v", err)
-	}
-	return
-}
-
-func (c client) PrerenderFramebuffers(l log.Logger, device DeviceId, capture CaptureId, width uint32, height uint32, atomIds U64Array) (res BinaryId, err error) {
-	var val interface{}
-	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, width: width, height: height, atomIds: atomIds}); err == nil {
-		res = val.(*resultPrerenderFramebuffers).value
-	} else {
-		l.Error("RPC PrerenderFramebuffers failed with error: %v", err)
 	}
 	return
 }

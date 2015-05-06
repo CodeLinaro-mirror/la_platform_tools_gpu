@@ -214,10 +214,6 @@ static void* real__CGLSelectDispatchFunction = nullptr;
 EXPORT void __attribute__((naked)) CGLSelectDispatchFunction() {
     asm("jmp *%%rax" : : "a"(real__CGLSelectDispatchFunction) : );
 }
-static void* real__CGLSetCurrentContext = nullptr;
-EXPORT void __attribute__((naked)) CGLSetCurrentContext() {
-    asm("jmp *%%rax" : : "a"(real__CGLSetCurrentContext) : );
-}
 static void* real__CGLSetFullScreen = nullptr;
 EXPORT void __attribute__((naked)) CGLSetFullScreen() {
     asm("jmp *%%rax" : : "a"(real__CGLSetFullScreen) : );
@@ -5177,7 +5173,6 @@ static void initExports() {
     real__CGLSelectDispatch = gapic::GetGfxProcAddress("CGLSelectDispatch");
     real__CGLSelectDispatchBounded = gapic::GetGfxProcAddress("CGLSelectDispatchBounded");
     real__CGLSelectDispatchFunction = gapic::GetGfxProcAddress("CGLSelectDispatchFunction");
-    real__CGLSetCurrentContext = gapic::GetGfxProcAddress("CGLSetCurrentContext");
     real__CGLSetFullScreen = gapic::GetGfxProcAddress("CGLSetFullScreen");
     real__CGLSetFullScreenOnDisplay = gapic::GetGfxProcAddress("CGLSetFullScreenOnDisplay");
     real__CGLSetGlobalOption = gapic::GetGfxProcAddress("CGLSetGlobalOption");

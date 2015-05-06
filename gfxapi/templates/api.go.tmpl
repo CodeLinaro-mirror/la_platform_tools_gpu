@@ -194,7 +194,6 @@ limitations under the License.
 
   type {{$name}} struct {
     binary.Generate
-    InContext atom.ContextID
     {{range $p := $.Command.FullParameters}}
       {{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}}
     {{end}}
@@ -221,8 +220,9 @@ limitations under the License.
     return strings.Join(parts, "")
   }
 
-  func (c *{{$name}}) ContextID() atom.ContextID {
-    return c.InContext
+
+  func (c *{{$name}}) API() gfxapi.API {
+    return api{}
   }
 
   func (c *{{$name}}) TypeID() atom.TypeID {
@@ -234,8 +234,6 @@ limitations under the License.
       {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
       {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
   }
-
-  func ({{$name}}) API() gfxapi.API { return API() }
 {{end}}
 
 
@@ -471,14 +469,20 @@ limitations under the License.
 {{define "API"}}
 
   {{template "Go.CommentHeader" "API"}}
+  var apiID = gfxapi.ID(binary.NewID([]byte("{{Global "API"}}")))
+
   type api struct {}
 
   func (api) Name() string {
     return "{{Global "API"}}"
   }
 
-  func (api) ID() service.ApiId {
-    return service.ApiId{ ID:binary.NewID([]byte("{{Global "API"}}")) }
+  func (api) ID() gfxapi.ID {
+    return apiID
+  }
+
+  func (api) GetFramebufferAttachmentSize(state *gfxapi.State, attachment gfxapi.FramebufferAttachment) (width uint32, height uint32, err error) {
+    return getState(state).getFramebufferAttachmentSize(attachment)
   }
 
   func API() gfxapi.API {
@@ -568,15 +572,13 @@ limitations under the License.
   {{AssertType $ "API"}}
 
   {{range $c := AllCommands $}}
-    {{$name       := Macro "Go.CmdName" $c}}
+    {{$name := Macro "Go.CmdName" $c}}
     func New{{$name}}(
-        contextID atom.ContextID,
         {{range $p := $c.FullParameters}}
           p{{Macro "Go.Public" $p.Name}} {{Macro "Go.Type" $p}},
         {{end}}
       ) *{{$name}} {
       return &{{$name}} {
-        InContext: contextID,
         {{range $p := $c.FullParameters}}
           {{Macro "Go.Public" $p.Name}}:p{{Macro "Go.Public" $p.Name}},§
         {{end}}

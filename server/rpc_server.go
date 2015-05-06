@@ -86,7 +86,11 @@ func (s rpcServer) GetDevices(logger log.Logger) (service.DeviceIdArray, error) 
 // immediately following the atom after.
 // The binary blob can be fetched with a call to ResolveBinary, and decoded
 // using the capture's schema.
-func (s rpcServer) GetState(logger log.Logger, captureID service.CaptureId, at uint64) (service.BinaryId, error) {
+func (s rpcServer) GetState(
+	logger log.Logger,
+	captureID service.CaptureId,
+	at uint64) (service.BinaryId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.GetState{
 		Capture: captureID,
 		After:   atom.ID(at),
@@ -94,19 +98,27 @@ func (s rpcServer) GetState(logger log.Logger, captureID service.CaptureId, at u
 	return service.BinaryId{ID: id}, err
 }
 
-// GetHierarchy returns the atom hierarchy identifier for the given capture and context.
-// Currently there is only one hierarchy per capture context, but this is likely to change in the future.
-func (s rpcServer) GetHierarchy(logger log.Logger, captureID service.CaptureId, ctxID uint32) (service.HierarchyId, error) {
+// GetHierarchy returns the atom hierarchy identifier for the given capture.
+// Currently there is only one hierarchy per capture, but this is likely to
+// change in the future.
+func (s rpcServer) GetHierarchy(
+	logger log.Logger,
+	captureID service.CaptureId) (service.HierarchyId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.GetHierarchy{
 		Capture: captureID,
-		Context: atom.ContextID(ctxID),
 	}, logger)
 	return service.HierarchyId{ID: id}, err
 }
 
 // GetMemoryInfo returns the MemoryInfo identifier describing the memory state
-// for the given capture, context and range, immediately following the atom after.
-func (s rpcServer) GetMemoryInfo(logger log.Logger, captureID service.CaptureId, after uint64, rng service.MemoryRange) (service.MemoryInfoId, error) {
+// for the given capture and memory range, immediately following the atom after.
+func (s rpcServer) GetMemoryInfo(
+	logger log.Logger,
+	captureID service.CaptureId,
+	after uint64,
+	rng service.MemoryRange) (service.MemoryInfoId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.GetMemoryInfo{
 		Capture: captureID,
 		After:   atom.ID(after),
@@ -115,34 +127,100 @@ func (s rpcServer) GetMemoryInfo(logger log.Logger, captureID service.CaptureId,
 	return service.MemoryInfoId{ID: id}, err
 }
 
-// GetFramebufferColor returns the ImageInfo identifier describing the bound color buffer for the given device,
-// capture and context immediately following the atom after. The provided RenderSettings structure can be used
-// to adjust maximum desired dimensions of the image, as well as applying debug visualizations.
-func (s rpcServer) GetFramebufferColor(logger log.Logger, deviceID service.DeviceId, captureID service.CaptureId, ctxID uint32, after uint64, settings service.RenderSettings) (service.ImageInfoId, error) {
+// GetFramebufferColor returns the ImageInfo identifier describing the bound
+// color buffer for the given device, capture and graphics API immediately
+// following the atom after. The provided RenderSettings structure can be used
+// to adjust maximum desired dimensions of the image, as well as applying debug
+// visualizations.
+func (s rpcServer) GetFramebufferColor(
+	logger log.Logger,
+	deviceID service.DeviceId,
+	captureID service.CaptureId,
+	apiID service.ApiId,
+	after uint64,
+	settings service.RenderSettings) (service.ImageInfoId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.GetFramebufferColor{
 		Device:   deviceID,
 		Capture:  captureID,
-		Context:  atom.ContextID(ctxID),
+		API:      apiID,
 		After:    atom.ID(after),
 		Settings: settings,
 	}, logger)
 	return service.ImageInfoId{ID: id}, err
 }
 
-// GetFramebufferDepth returns the ImageInfo identifier describing the bound depth buffer for the given device,
-// capture and context immediately following the atom after.
-func (s rpcServer) GetFramebufferDepth(logger log.Logger, deviceID service.DeviceId, captureID service.CaptureId, ctxID uint32, after uint64) (service.ImageInfoId, error) {
+// GetFramebufferDepth returns the ImageInfo identifier describing the bound
+// depth buffer for the given device, capture and graphics API immediately
+// following the atom after.
+func (s rpcServer) GetFramebufferDepth(
+	logger log.Logger,
+	deviceID service.DeviceId,
+	captureID service.CaptureId,
+	apiID service.ApiId,
+	after uint64) (service.ImageInfoId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.GetFramebufferDepth{
 		Device:  deviceID,
 		Capture: captureID,
-		Context: atom.ContextID(ctxID),
+		API:     apiID,
 		After:   atom.ID(after),
 	}, logger)
 	return service.ImageInfoId{ID: id}, err
 }
 
-// ReplaceAtom creates and new capture based on an existing capture, but with a single atom replaced.
-func (s rpcServer) ReplaceAtom(logger log.Logger, capture service.CaptureId, atomID uint64, atomType uint16, data service.Binary) (service.CaptureId, error) {
+// GetTimingInfo performs timings of the given capture on the given device and
+// capture, returning an identifier to the results.
+// This function is experimental and will change signature.
+func (s rpcServer) GetTimingInfo(
+	logger log.Logger,
+	deviceID service.DeviceId,
+	captureID service.CaptureId,
+	mask service.TimingMask) (service.TimingInfoId, error) {
+
+	id, err := s.Database.StoreRequest(&builder.GetTimingInfo{
+		Device:     deviceID,
+		Capture:    captureID,
+		TimingMask: mask,
+	}, logger)
+	return service.TimingInfoId{ID: id}, err
+}
+
+// PrerenderFramebuffers renders the framebuffer contents after each of the
+// given atoms of interest in the given capture on the given device, resized to
+// fit within the given dimensions while keeping the respective framebuffers
+// original aspect ratio. This function doesn't return any data, as it is used
+// to pre-populate the cache of framebuffer thumbnails that later get queried by
+// the client.
+// This function is experimental and may change signature.
+func (s rpcServer) PrerenderFramebuffers(
+	logger log.Logger,
+	deviceID service.DeviceId,
+	captureID service.CaptureId,
+	apiID service.ApiId,
+	width, height uint32,
+	atomIDs service.U64Array) (service.BinaryId, error) {
+
+	id, err := s.Database.StoreRequest(&builder.PrerenderFramebuffers{
+		Device:  deviceID,
+		Capture: captureID,
+		API:     apiID,
+		Width:   width,
+		Height:  height,
+		AtomIDs: atomIDs,
+	}, logger)
+	return service.BinaryId{ID: id}, err
+}
+
+// ReplaceAtom creates and new capture based on an existing capture, but with
+// a single atom replaced.
+func (s rpcServer) ReplaceAtom(
+	logger log.Logger,
+	capture service.CaptureId,
+	atomID uint64,
+	atomType uint16,
+	data service.Binary) (service.CaptureId, error) {
+
 	id, err := s.Database.StoreRequest(&builder.ReplaceAtom{
 		Capture: capture,
 		Atom:    atom.ID(atomID),
@@ -150,35 +228,6 @@ func (s rpcServer) ReplaceAtom(logger log.Logger, capture service.CaptureId, ato
 		Data:    data,
 	}, logger)
 	return service.CaptureId{ID: id}, err
-}
-
-// GetTimingInfo performs timings of the given capture, context on the given device,
-// returning an identifier to the results.
-// This function is experimental and will change signature.
-func (s rpcServer) GetTimingInfo(logger log.Logger, deviceID service.DeviceId, captureID service.CaptureId, ctxID uint32, mask service.TimingMask) (service.TimingInfoId, error) {
-	id, err := s.Database.StoreRequest(&builder.GetTimingInfo{
-		Device:     deviceID,
-		Capture:    captureID,
-		Context:    atom.ContextID(ctxID),
-		TimingMask: mask,
-	}, logger)
-	return service.TimingInfoId{ID: id}, err
-}
-
-// PrerenderFramebuffers renders the framebuffer contents after each of the given atoms of interest
-// in the given capture on the given device, resized to fit within the given dimensions while keeping
-// the respective framebuffers original aspect ratio. This function doesn't return any data, as it is
-// used to pre-populate the cache of framebuffer thumbnails that later get queried by the client.
-// This function is experimental and may change signature.
-func (s rpcServer) PrerenderFramebuffers(logger log.Logger, deviceID service.DeviceId, captureID service.CaptureId, width, height uint32, atomIDs service.U64Array) (service.BinaryId, error) {
-	id, err := s.Database.StoreRequest(&builder.PrerenderFramebuffers{
-		Device:  deviceID,
-		Capture: captureID,
-		Width:   width,
-		Height:  height,
-		AtomIDs: atomIDs,
-	}, logger)
-	return service.BinaryId{ID: id}, err
 }
 
 // ResolveAtomStream resolves the given id to a cached AtomStream or builds it on demand before returning it.

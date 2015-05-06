@@ -57,6 +57,11 @@ EXPORT EGLBoolean STDCALL eglSwapBuffers(EGLDisplay display, const void* surface
     GAPID_INFO("eglSwapBuffers()");
     return spy()->eglSwapBuffers(display, surface);
 }
+EXPORT EGLBoolean STDCALL
+eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint attribute, EGLint* value) {
+    GAPID_INFO("eglQuerySurface()");
+    return spy()->eglQuerySurface(display, surface, attribute, value);
+}
 EXPORT GLXContext STDCALL
 glXCreateContext(const void* dpy, const void* vis, GLXContext shareList, bool direct) {
     GAPID_INFO("glXCreateContext()");
@@ -80,6 +85,11 @@ EXPORT HGLRC STDCALL wglCreateContext(HDC hdc) {
     GAPID_INFO("wglCreateContext()");
     return spy()->wglCreateContext(hdc);
 }
+EXPORT HGLRC STDCALL
+wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext, const int* attribList) {
+    GAPID_INFO("wglCreateContextAttribsARB()");
+    return spy()->wglCreateContextAttribsARB(hdc, hShareContext, attribList);
+}
 EXPORT BOOL STDCALL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
     GAPID_INFO("wglMakeCurrent()");
     return spy()->wglMakeCurrent(hdc, hglrc);
@@ -89,9 +99,13 @@ EXPORT void STDCALL wglSwapBuffers(HDC hdc) {
     spy()->wglSwapBuffers(hdc);
 }
 EXPORT CGLError STDCALL
-CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj ctx) {
+CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj* ctx) {
     GAPID_INFO("CGLCreateContext()");
     return spy()->CGLCreateContext(pix, share, ctx);
+}
+EXPORT CGLError STDCALL CGLSetCurrentContext(CGLContextObj ctx) {
+    GAPID_INFO("CGLSetCurrentContext()");
+    return spy()->CGLSetCurrentContext(ctx);
 }
 EXPORT void STDCALL glEnableClientState(uint32_t type) {
     GAPID_INFO("glEnableClientState()");
@@ -909,6 +923,9 @@ GFXPROC getProcAddress(const char* name) {
     if (strcmp(name, "eglSwapBuffers") == 0) {
         return reinterpret_cast<GFXPROC>(eglSwapBuffers);
     }
+    if (strcmp(name, "eglQuerySurface") == 0) {
+        return reinterpret_cast<GFXPROC>(eglQuerySurface);
+    }
     if (strcmp(name, "glXCreateContext") == 0) {
         return reinterpret_cast<GFXPROC>(glXCreateContext);
     }
@@ -924,6 +941,9 @@ GFXPROC getProcAddress(const char* name) {
     if (strcmp(name, "wglCreateContext") == 0) {
         return reinterpret_cast<GFXPROC>(wglCreateContext);
     }
+    if (strcmp(name, "wglCreateContextAttribsARB") == 0) {
+        return reinterpret_cast<GFXPROC>(wglCreateContextAttribsARB);
+    }
     if (strcmp(name, "wglMakeCurrent") == 0) {
         return reinterpret_cast<GFXPROC>(wglMakeCurrent);
     }
@@ -932,6 +952,9 @@ GFXPROC getProcAddress(const char* name) {
     }
     if (strcmp(name, "CGLCreateContext") == 0) {
         return reinterpret_cast<GFXPROC>(CGLCreateContext);
+    }
+    if (strcmp(name, "CGLSetCurrentContext") == 0) {
+        return reinterpret_cast<GFXPROC>(CGLSetCurrentContext);
     }
     if (strcmp(name, "glEnableClientState") == 0) {
         return reinterpret_cast<GFXPROC>(glEnableClientState);

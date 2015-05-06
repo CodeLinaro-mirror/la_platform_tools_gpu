@@ -18,6 +18,7 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 )
 
 const AtomIDA = atom.TypeID(1)
@@ -27,37 +28,34 @@ const AtomIDC = atom.TypeID(3)
 type AtomA struct {
 	binary.Generate
 	ID        atom.ID
-	Context   atom.ContextID
 	AtomFlags atom.Flags
 }
 
-func (AtomA) TypeID() atom.TypeID          { return AtomIDA }
-func (a *AtomA) ContextID() atom.ContextID { return a.Context }
-func (a *AtomA) Info() string              { return "" }
-func (a *AtomA) Flags() atom.Flags         { return a.AtomFlags }
+func (a *AtomA) API() gfxapi.API            { return nil }
+func (a *AtomA) TypeID() atom.TypeID        { return AtomIDA }
+func (a *AtomA) Flags() atom.Flags          { return a.AtomFlags }
+func (a *AtomA) Mutate(*gfxapi.State) error { return nil }
 
 type AtomB struct {
 	binary.Generate
-	ID      atom.ID
-	Context atom.ContextID
-	Bool    bool
+	ID   atom.ID
+	Bool bool
 }
 
-func (AtomB) TypeID() atom.TypeID          { return AtomIDB }
-func (a *AtomB) ContextID() atom.ContextID { return a.Context }
-func (a *AtomB) Info() string              { return "" }
-func (a *AtomB) Flags() atom.Flags         { return 0 }
+func (a *AtomB) API() gfxapi.API            { return nil }
+func (a *AtomB) TypeID() atom.TypeID        { return AtomIDB }
+func (a *AtomB) Flags() atom.Flags          { return 0 }
+func (a *AtomB) Mutate(*gfxapi.State) error { return nil }
 
 type AtomC struct {
 	binary.Generate
-	Context atom.ContextID
-	String  string
+	String string
 }
 
-func (AtomC) TypeID() atom.TypeID          { return AtomIDC }
-func (a *AtomC) ContextID() atom.ContextID { return a.Context }
-func (a *AtomC) Info() string              { return "" }
-func (a *AtomC) Flags() atom.Flags         { return 0 }
+func (a *AtomC) API() gfxapi.API            { return nil }
+func (a *AtomC) TypeID() atom.TypeID        { return AtomIDC }
+func (a *AtomC) Flags() atom.Flags          { return 0 }
+func (a *AtomC) Mutate(*gfxapi.State) error { return nil }
 
 func init() {
 	atom.Register(atom.TypeInfo{ID: AtomIDA, New: func() atom.Atom { return &AtomA{} }})

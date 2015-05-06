@@ -20,7 +20,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
@@ -28,14 +28,14 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
-const (
-	cid atom.ContextID = 0
-)
-
 func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []atom.Atom, opcodes []interface{}, constants []byte) {
 	b := builder.New(ptrSize, ptrAlignment, endian.Little)
-	s := state.New()
-	s.Contexts[cid] = &State{}
+	s := &gfxapi.State{
+		APIs: map[gfxapi.API]interface{}{
+			api{}: &State{},
+		},
+	}
+
 	for i, a := range atoms {
 		replay.Replay(atom.ID(i), a, s, b, wantOutput)
 	}
@@ -60,7 +60,7 @@ func check(t *testing.T, ptrSize, ptrAlignment int, wantOutput bool, atoms []ato
 
 func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoid(cid),
+		NewCmdVoid(),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid.ID},
@@ -69,18 +69,18 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 
 func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidU8(cid, 20),
-		NewCmdVoidS8(cid, -20),
-		NewCmdVoidU16(cid, 200),
-		NewCmdVoidS16(cid, -200),
-		NewCmdVoidF32(cid, 1.0),
-		NewCmdVoidU32(cid, 2000),
-		NewCmdVoidS32(cid, -2000),
-		NewCmdVoidF64(cid, 1.0),
-		NewCmdVoidU64(cid, 20000),
-		NewCmdVoidS64(cid, -20000),
-		NewCmdVoidBool(cid, true),
-		NewCmdVoidString(cid, "hello"),
+		NewCmdVoidU8(20),
+		NewCmdVoidS8(-20),
+		NewCmdVoidU16(200),
+		NewCmdVoidS16(-200),
+		NewCmdVoidF32(1.0),
+		NewCmdVoidU32(2000),
+		NewCmdVoidS32(-2000),
+		NewCmdVoidF64(1.0),
+		NewCmdVoidU64(20000),
+		NewCmdVoidS64(-20000),
+		NewCmdVoidBool(true),
+		NewCmdVoidString("hello"),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint8, Value: 20},
@@ -134,7 +134,7 @@ func TestOperationsOpCall_SingleInputArg(t *testing.T) {
 
 func TestOperationsOpCall_3_Strings(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoid3Strings(cid, "hello", "world", "hello"),
+		NewCmdVoid3Strings("hello", "world", "hello"),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
@@ -149,7 +149,7 @@ func TestOperationsOpCall_3_Strings(t *testing.T) {
 
 func TestOperationsOpCall_3_Arrays(t *testing.T) {
 	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoid3Arrays(cid, S8Array{1, 2, 3}, StringArray{"hello", "world", ":D"}, BoolArray{true, false, true}),
+		NewCmdVoid3Arrays(S8Array{1, 2, 3}, StringArray{"hello", "world", ":D"}, BoolArray{true, false, true}),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00}, // a
@@ -175,7 +175,7 @@ func TestOperationsOpCall_3_Arrays(t *testing.T) {
 
 func TestOperationsOpCall_ArrayOfStrings_32bitOS(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidArrayOfStrings(cid, StringArray{"an", "array", "of", "strings"}),
+		NewCmdVoidArrayOfStrings(StringArray{"an", "array", "of", "strings"}),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
@@ -198,7 +198,7 @@ func TestOperationsOpCall_ArrayOfStrings_32bitOS(t *testing.T) {
 
 func TestOperationsOpCall_ArrayOfStrings_64bitOS(t *testing.T) {
 	check(t, 8 /* pointer size */, 8 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidArrayOfStrings(cid, StringArray{"an", "array", "of", "strings"}),
+		NewCmdVoidArrayOfStrings(StringArray{"an", "array", "of", "strings"}),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeConstantPointer, Value: 0x00},
@@ -221,17 +221,17 @@ func TestOperationsOpCall_ArrayOfStrings_64bitOS(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValue_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdU8(cid, 20),
-		NewCmdS8(cid, -20),
-		NewCmdU16(cid, 200),
-		NewCmdS16(cid, -200),
-		NewCmdF32(cid, 1.0),
-		NewCmdU32(cid, 2000),
-		NewCmdS32(cid, -2000),
-		NewCmdF64(cid, 1.0),
-		NewCmdU64(cid, 20000),
-		NewCmdS64(cid, -20000),
-		NewCmdBool(cid, true),
+		NewCmdU8(20),
+		NewCmdS8(-20),
+		NewCmdU16(200),
+		NewCmdS16(-200),
+		NewCmdF32(1.0),
+		NewCmdU32(2000),
+		NewCmdS32(-2000),
+		NewCmdF64(1.0),
+		NewCmdU64(20000),
+		NewCmdS64(-20000),
+		NewCmdBool(true),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
@@ -260,17 +260,17 @@ func TestOperationsOpCall_ReturnValue_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValue_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdU8(cid, 20),
-		NewCmdS8(cid, -20),
-		NewCmdU16(cid, 200),
-		NewCmdS16(cid, -200),
-		NewCmdF32(cid, 1.0),
-		NewCmdU32(cid, 2000),
-		NewCmdS32(cid, -2000),
-		NewCmdF64(cid, 1.0),
-		NewCmdU64(cid, 20000),
-		NewCmdS64(cid, -20000),
-		NewCmdBool(cid, true),
+		NewCmdU8(20),
+		NewCmdS8(-20),
+		NewCmdU16(200),
+		NewCmdS16(-200),
+		NewCmdF32(1.0),
+		NewCmdU32(2000),
+		NewCmdS32(-2000),
+		NewCmdF64(1.0),
+		NewCmdU64(20000),
+		NewCmdS64(-20000),
+		NewCmdBool(true),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdU8.ID}, opcode.StoreV{Address: 0},
@@ -342,7 +342,7 @@ func TestOperationsOpCall_ReturnValue_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValueString_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdString(cid, "hello"),
+		NewCmdString("hello"),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
@@ -353,7 +353,7 @@ func TestOperationsOpCall_ReturnValueString_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValueString_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdString(cid, "hello"),
+		NewCmdString("hello"),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdString.ID},
@@ -367,7 +367,7 @@ func TestOperationsOpCall_ReturnValueString_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValueArray_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdArrayOfFloat(cid, F32Array{1, 2, 3}),
+		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
@@ -378,7 +378,7 @@ func TestOperationsOpCall_ReturnValueArray_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValueArray_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdArrayOfFloat(cid, F32Array{1, 2, 3}),
+		NewCmdArrayOfFloat(F32Array{1, 2, 3}),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdArrayOfFloat.ID},
@@ -392,7 +392,7 @@ func TestOperationsOpCall_ReturnValueArray_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValuePointer_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdPointer(cid, 0x100),
+		NewCmdPointer(0x100),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
@@ -403,7 +403,7 @@ func TestOperationsOpCall_ReturnValuePointer_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_ReturnValuePointer_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdPointer(cid, 0x100),
+		NewCmdPointer(0x100),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.Call{PushReturn: true, FunctionID: funcInfoCmdPointer.ID},
@@ -417,18 +417,18 @@ func TestOperationsOpCall_ReturnValuePointer_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_SingleOutputArg_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidOutU8(cid, 20),
-		NewCmdVoidOutS8(cid, -20),
-		NewCmdVoidOutU16(cid, 200),
-		NewCmdVoidOutS16(cid, -200),
-		NewCmdVoidOutF32(cid, 1.0),
-		NewCmdVoidOutU32(cid, 2000),
-		NewCmdVoidOutS32(cid, -2000),
-		NewCmdVoidOutF64(cid, 1.0),
-		NewCmdVoidOutU64(cid, 20000),
-		NewCmdVoidOutS64(cid, -20000),
-		NewCmdVoidOutBool(cid, true),
-		NewCmdVoidOutString(cid, "hello"),
+		NewCmdVoidOutU8(20),
+		NewCmdVoidOutS8(-20),
+		NewCmdVoidOutU16(200),
+		NewCmdVoidOutS16(-200),
+		NewCmdVoidOutF32(1.0),
+		NewCmdVoidOutU32(2000),
+		NewCmdVoidOutS32(-2000),
+		NewCmdVoidOutF64(1.0),
+		NewCmdVoidOutU64(20000),
+		NewCmdVoidOutS64(-20000),
+		NewCmdVoidOutBool(true),
+		NewCmdVoidOutString("hello"),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
@@ -482,19 +482,19 @@ func TestOperationsOpCall_SingleOutputArg_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_SingleOutputArg_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdVoidOutU8(cid, 20),
-		NewCmdVoidOutS8(cid, -20),
-		NewCmdVoidOutU16(cid, 200),
-		NewCmdVoidOutS16(cid, -200),
-		NewCmdVoidOutF32(cid, 1.0),
-		NewCmdVoidOutU32(cid, 2000),
-		NewCmdVoidOutS32(cid, -2000),
-		NewCmdVoidOutF64(cid, 1.0),
-		NewCmdVoidOutU64(cid, 20000),
-		NewCmdVoidOutS64(cid, -20000),
-		NewCmdVoidOutBool(cid, true),
-		NewCmdVoidOutString(cid, "hello"),
-		NewCmdVoidOutFixedSizeBuffer(cid, 0xdeadbeef),
+		NewCmdVoidOutU8(20),
+		NewCmdVoidOutS8(-20),
+		NewCmdVoidOutU16(200),
+		NewCmdVoidOutS16(-200),
+		NewCmdVoidOutF32(1.0),
+		NewCmdVoidOutU32(2000),
+		NewCmdVoidOutS32(-2000),
+		NewCmdVoidOutF64(1.0),
+		NewCmdVoidOutU64(20000),
+		NewCmdVoidOutS64(-20000),
+		NewCmdVoidOutBool(true),
+		NewCmdVoidOutString("hello"),
+		NewCmdVoidOutFixedSizeBuffer(0xdeadbeef),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
@@ -591,7 +591,7 @@ func TestOperationsOpCall_SingleOutputArg_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_3OutputStrings_DontWantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidOut3Strings(cid, "hello", "world", "hello"),
+		NewCmdVoidOut3Strings("hello", "world", "hello"),
 	}, []interface{}{
 		// 0x00: a (byte[0x0f])
 		// 0x10: b (byte[0x1f])
@@ -606,7 +606,7 @@ func TestOperationsOpCall_3OutputStrings_DontWantOutput(t *testing.T) {
 
 func TestOperationsOpCall_3OutputStrings_WantOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, true /* wantOutput */, []atom.Atom{
-		NewCmdVoidOut3Strings(cid, "hello", "world", "hello"),
+		NewCmdVoidOut3Strings("hello", "world", "hello"),
 	}, []interface{}{
 		// 0x00: a (byte[0x0f])
 		// 0x10: b (byte[0x1f])
@@ -624,7 +624,7 @@ func TestOperationsOpCall_3OutputStrings_WantOutput(t *testing.T) {
 
 func TestOperationsOpCall_RemappedInputs(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoid3Remapped(cid, 0x10, 0x20, 0x10),
+		NewCmdVoid3Remapped(0x10, 0x20, 0x10),
 	}, []interface{}{
 		opcode.Label{Value: 0},
 		opcode.PushI{DataType: protocol.TypeUint32, Value: 0x10},
@@ -640,7 +640,7 @@ func TestOperationsOpCall_RemappedInputs(t *testing.T) {
 
 func TestOperationsOpCall_RemappedOutputs(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidOut3Remapped(cid, 0x10, 0x20, 0x10),
+		NewCmdVoidOut3Remapped(0x10, 0x20, 0x10),
 	}, []interface{}{
 		// TODO: Sub-optimal output - these could be written straight to the remapped slots.
 		// 0x00: id<0x10>
@@ -662,7 +662,7 @@ func TestOperationsOpCall_RemappedOutputs(t *testing.T) {
 
 func TestOperationsOpCall_RemappedArrayOutput(t *testing.T) {
 	check(t, 4 /* pointer size */, 4 /* pointer alignment */, false /* wantOutput */, []atom.Atom{
-		NewCmdVoidOutArrayOfRemapped(cid, RemappedArray{0x10, 0x20, 0x10, 0x30, 0x10}),
+		NewCmdVoidOutArrayOfRemapped(RemappedArray{0x10, 0x20, 0x10, 0x30, 0x10}),
 	}, []interface{}{
 		// 0x00: id<0x10>
 		// 0x04: id<0x20>

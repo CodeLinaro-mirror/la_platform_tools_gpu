@@ -44,7 +44,6 @@ type Generator interface {
 type Context struct {
 	DeviceID  service.DeviceId  // The identifier of the device being used for replay.
 	CaptureID service.CaptureId // The identifier of the capture that is being replayed.
-	ContextID atom.ContextID    // The identifier of the context that is being replayed.
 }
 
 // Config is a user-defined type used to describe the type of replay being

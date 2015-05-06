@@ -24,7 +24,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
-	"android.googlesource.com/platform/tools/gpu/gfxapi/state"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -45,9 +45,9 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	s := state.New()
+	s := &gfxapi.State{}
 	for _, a := range atoms[:request.After] {
-		if err := s.Mutate(a); err != nil {
+		if err := a.Mutate(s); err != nil {
 			return err
 		}
 	}

@@ -26,23 +26,20 @@ import (
 )
 
 var testList = atom.List{
-	&test.AtomA{Context: 0x10},
-	&test.AtomB{Context: 0x20, Bool: true},
-	&test.AtomC{Context: 0x10, String: "Pizza"},
+	&test.AtomA{},
+	&test.AtomB{Bool: true},
+	&test.AtomC{String: "Pizza"},
 }
 var testData = []byte{
 	0x01, // Atom 0: Type
 	0x00, // Atom 0: ID
-	0x10, // Atom 0: Context
 	0x00, // Atom 0: Flags
 
 	0x02, // Atom 1: Type
 	0x00, // Atom 1: ID
-	0x20, // Atom 1: Context
 	0x01, // Atom 1: Bool
 
 	0x03,                          // Atom 2: Type
-	0x10,                          // Atom 2: Context
 	0x05, 'P', 'i', 'z', 'z', 'a', // Atom 2: String
 
 	0xc0, 0xff, 0xff, // EOS
@@ -90,9 +87,9 @@ func max(a, b int) int {
 
 func TestAtomListWriteTo(t *testing.T) {
 	expected := writeRecordList{
-		writeRecord{0, &test.AtomA{Context: 0x10}},
-		writeRecord{1, &test.AtomB{Context: 0x20, Bool: true}},
-		writeRecord{2, &test.AtomC{Context: 0x10, String: "Pizza"}},
+		writeRecord{0, &test.AtomA{}},
+		writeRecord{1, &test.AtomB{Bool: true}},
+		writeRecord{2, &test.AtomC{String: "Pizza"}},
 	}
 	got := writeRecordList{}
 	testList.WriteTo(&got)

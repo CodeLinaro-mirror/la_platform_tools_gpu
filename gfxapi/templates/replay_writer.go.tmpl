@@ -115,8 +115,8 @@ limitations under the License.
 {{define "DeclareClassValue"}}
   {{AssertType $ "Class"}}
 
-  {{if not (or (GetAnnotation $ "internal") (GetAnnotation $ "Interface"))}}
-    func (c {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value {
+  {{if not (or (Macro "IsInternal" $) (GetAnnotation $ "Interface"))}}
+    func (c {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
       {{$union := GetAnnotation $ "union"}}
       {{range $i, $f := $.Fields}}
         {{/* TODO: Figure out proper handling of unions. */}}
@@ -144,7 +144,7 @@ limitations under the License.
 
   {{if not (GetAnnotation $ "replay_custom_value")}}
     {{$v := print (Macro "Go.Type" $.To) "(c)"}}
-    func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
+    func (c {{$.Name}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return {{Macro "Value" "Type" $.To "Name" $v}} }
   {{end}}
 {{end}}
 
@@ -157,8 +157,8 @@ limitations under the License.
 {{define "DeclareArrayValue"}}
   {{AssertType $ "Array" "StaticArray"}}
 
-  {{if not (or (GetAnnotation $.ValueType "internal") (IsAny $.ValueType))}}
-    func (arr {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *state.State) value.Pointer {
+  {{if not (or (Macro "IsInternal" $.ValueType) (IsAny $.ValueType))}}
+    func (arr {{Macro "Go.Type" $}}) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Pointer {
       if len(arr) > 0 {
         for _, e := range arr {
           {{Macro "PushInput" "Type" $.ValueType "Name" "e"}}
@@ -261,73 +261,77 @@ limitations under the License.
 {{define "DeclareCommandReplay"}}
   {{AssertType $ "Function"}}
 
-  {{$name := Macro "Go.CmdName" $}}
-  var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
-  {{if GetAnnotation $ "replay_custom"}}
-    func (ϟa *{{$name}}) defaultReplay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-  {{else}}
-    func (ϟa *{{$name}}) Replay(ϟi atom.ID, ϟs *state.State, ϟb *builder.Builder, postback bool) {
-  {{end}}
-  ϟc := {{if GetAnnotation $ "synthetic"}}&State{}{{else}}getState(ϟa, ϟs){{end}}
-  _ = ϟc
+  {{if not (GetAnnotation $ "no_replay")}}
 
-  ϟb.BeginAtom(ϟi)
-  {{/* Declare all the of local variables describing the array counts */}}
-  {{template "DefineArrayCounts" $}}
-
-  {{if len $.Outputs}}
-    {{/* Create a temporary buffer to hold all the output parameters */}}
-    outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{§
-      {{range $i, $p := $.Outputs}}
-        {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
-      {{end}}
-    })
-  {{end}}
-
-  {{/* Push all the parameters on the stack */}}
-  {{range $p := $.CallParameters}}
-    {{$type := TypeOf $p}}
-    {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-    {{if $p.Output}} ϟb.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
-    {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
+    {{$name := Macro "Go.CmdName" $}}
+    var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
+    {{if GetAnnotation $ "replay_custom"}}
+      func (ϟa *{{$name}}) defaultReplay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
+    {{else}}
+      func (ϟa *{{$name}}) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟb *builder.Builder, postback bool) {
     {{end}}
-  {{end}}
+    ϟc := getState(ϟs)
+    _ = ϟc
 
-  {{/* Call the function */}}
-  {{if not (IsVoid $.Return.Type)}}
-    ϟb.CallPush({{Macro "BuilderFunctionInfo" $}})
-    {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
-    {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
-  {{else}}
-    ϟb.CallNoPush({{Macro "BuilderFunctionInfo" $}})
-  {{end}}
+    ϟb.BeginAtom(ϟi)
+    {{/* Declare all the of local variables describing the array counts */}}
+    {{template "DefineArrayCounts" $}}
 
-  {{/* Simulate the call */}}
-  ϟa.Mutate(ϟs)
-
-  {{/* Remap outputs */}}
-  {{range $i, $p := $.Outputs}}
-    {{$type    := TypeOf $p}}
-    {{$name    := print "ϟa." (Macro "Go.Parameter" $p)}}
-    {{$pointer := print "outputs[" $i "]"}}
-    {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
-  {{end}}
-
-  {{if len $.Outputs}}
-  {{/* Post back the data, if it is wanted */}}
-    if postback {
-      ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
-        postback := {{Macro "CmdPostbacksName" $}}{}
-        {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
-        if err := postback.Decode({{$array_counts}}d); err != nil {
-          return nil, err
-        }
-        return postback, nil
+    {{if len $.Outputs}}
+      {{/* Create a temporary buffer to hold all the output parameters */}}
+      outputs, size := ϟb.AllocateTemporaryMemoryChunks([]uint64{§
+        {{range $i, $p := $.Outputs}}
+          {{if $i}},{{end}} {{Macro "ParameterSize" $p}} /* {{$p.Name}} */§
+        {{end}}
       })
+    {{end}}
+
+    {{/* Push all the parameters on the stack */}}
+    {{range $p := $.CallParameters}}
+      {{$type := TypeOf $p}}
+      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+      {{if $p.Output}} ϟb.Push(outputs[{{IndexOf $.Outputs $p}}]) // {{$p.Name}}
+      {{else        }} {{Macro "PushInput" "Type" $type "Name" $name}}
+      {{end}}
+    {{end}}
+
+    {{/* Call the function */}}
+    {{if not (IsVoid $.Return.Type)}}
+      ϟb.CallPush({{Macro "BuilderFunctionInfo" $}})
+      {{$destination := print "outputs[" (IndexOf $.Outputs $.Return) "]"}}
+      {{Macro "StoreReturn" "Type" $.Return.Type "Destination" $destination}}
+    {{else}}
+      ϟb.CallNoPush({{Macro "BuilderFunctionInfo" $}})
+    {{end}}
+
+    {{/* Simulate the call */}}
+    ϟa.Mutate(ϟs)
+
+    {{/* Remap outputs */}}
+    {{range $i, $p := $.Outputs}}
+      {{$type    := TypeOf $p}}
+      {{$name    := print "ϟa." (Macro "Go.Parameter" $p)}}
+      {{$pointer := print "outputs[" $i "]"}}
+      {{Macro "RemapOutput" "Pointer" $pointer "Type" $type "Name" $name}}
+    {{end}}
+
+    {{if len $.Outputs}}
+    {{/* Post back the data, if it is wanted */}}
+      if postback {
+        ϟb.Post(outputs[0], size, ϟi, func(d binary.Decoder) (interface{}, error) {
+          postback := {{Macro "CmdPostbacksName" $}}{}
+          {{$array_counts := Macro "ArrayCountsList" "Command" $ "Postfix" ", "}}
+          if err := postback.Decode({{$array_counts}}d); err != nil {
+            return nil, err
+          }
+          return postback, nil
+        })
+      }
+    {{end}}
+    ϟb.EndAtom()
     }
+
   {{end}}
-  ϟb.EndAtom()
-  }
 {{end}}
 
 
@@ -483,7 +487,7 @@ limitations under the License.
   {{range $p := $.FullParameters}}
     {{if $p.Output}}
       {{$count := GetArrayParamCount $p}}
-      {{if $count}}
+      {{if not (IsNil $count)}}
         {{Macro "ArrayCount" $p.Name}} := uint64({{Macro "Read" $count}})
       {{end}}
     {{end}}
@@ -507,7 +511,7 @@ limitations under the License.
   {{range $p := $.Command.FullParameters}}
     {{if $p.Output}}
       {{$count := GetArrayParamCount $p}}
-      {{if $count}}
+      {{if not (IsNil $count)}}
         {{Macro "ArrayCount" $p.Name}} {{$.Postfix}}
       {{end}}
     {{end}}
@@ -588,5 +592,19 @@ limitations under the License.
   {{else if IsF64         $}}protocol.TypeDouble
   {{else if IsVoid        $}}protocol.TypeVoid
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Returns a non-empty string if the type (or underlying) is marked internal.
+-------------------------------------------------------------------------------
+*/}}
+{{define "IsInternal"}}
+  {{AssertType $ "Type"}}
+
+  {{if GetAnnotation $ "internal"}}TRUE
+  {{else if IsPointer $}}{{Macro "IsInternal" $.To}}
   {{end}}
 {{end}}

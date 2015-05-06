@@ -35,6 +35,8 @@ struct GlesImports {
     typedef EGLBoolean(STDCALL *PFNEGLMAKECURRENT)(EGLDisplay display, EGLSurface draw,
                                                    EGLSurface read, EGLContext context);
     typedef EGLBoolean(STDCALL *PFNEGLSWAPBUFFERS)(EGLDisplay display, const void *surface);
+    typedef EGLBoolean(STDCALL *PFNEGLQUERYSURFACE)(EGLDisplay display, EGLSurface surface,
+                                                    EGLint attribute, EGLint *value);
     typedef GLXContext(STDCALL *PFNGLXCREATECONTEXT)(const void *dpy, const void *vis,
                                                      GLXContext shareList, bool direct);
     typedef GLXContext(STDCALL *PFNGLXCREATENEWCONTEXT)(const void *display, const void *fbconfig,
@@ -44,10 +46,13 @@ struct GlesImports {
                                                     GLXDrawable read, GLXContext ctx);
     typedef void(STDCALL *PFNGLXSWAPBUFFERS)(const void *display, GLXDrawable drawable);
     typedef HGLRC(STDCALL *PFNWGLCREATECONTEXT)(HDC hdc);
+    typedef HGLRC(STDCALL *PFNWGLCREATECONTEXTATTRIBSARB)(HDC hdc, HGLRC hShareContext,
+                                                          const int *attribList);
     typedef BOOL(STDCALL *PFNWGLMAKECURRENT)(HDC hdc, HGLRC hglrc);
     typedef void(STDCALL *PFNWGLSWAPBUFFERS)(HDC hdc);
     typedef CGLError(STDCALL *PFNCGLCREATECONTEXT)(CGLPixelFormatObj pix, CGLContextObj share,
-                                                   CGLContextObj ctx);
+                                                   CGLContextObj *ctx);
+    typedef CGLError(STDCALL *PFNCGLSETCURRENTCONTEXT)(CGLContextObj ctx);
     typedef void(STDCALL *PFNGLENABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLDISABLECLIENTSTATE)(uint32_t type);
     typedef void(STDCALL *PFNGLGETPROGRAMBINARYOES)(ProgramId program, int32_t buffer_size,
@@ -338,14 +343,17 @@ struct GlesImports {
     PFNEGLCREATECONTEXT eglCreateContext;
     PFNEGLMAKECURRENT eglMakeCurrent;
     PFNEGLSWAPBUFFERS eglSwapBuffers;
+    PFNEGLQUERYSURFACE eglQuerySurface;
     PFNGLXCREATECONTEXT glXCreateContext;
     PFNGLXCREATENEWCONTEXT glXCreateNewContext;
     PFNGLXMAKECONTEXTCURRENT glXMakeContextCurrent;
     PFNGLXSWAPBUFFERS glXSwapBuffers;
     PFNWGLCREATECONTEXT wglCreateContext;
+    PFNWGLCREATECONTEXTATTRIBSARB wglCreateContextAttribsARB;
     PFNWGLMAKECURRENT wglMakeCurrent;
     PFNWGLSWAPBUFFERS wglSwapBuffers;
     PFNCGLCREATECONTEXT CGLCreateContext;
+    PFNCGLSETCURRENTCONTEXT CGLSetCurrentContext;
     PFNGLENABLECLIENTSTATE glEnableClientState;
     PFNGLDISABLECLIENTSTATE glDisableClientState;
     PFNGLGETPROGRAMBINARYOES glGetProgramBinaryOES;

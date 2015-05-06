@@ -25,65 +25,13 @@ namespace gapir {
 namespace {
 
 const TCHAR* wndClassName = TEXT("replayd");
-int gDepthSize = 0;
-int gStencilSize = 0;
-
-HGLRC renderingContext = nullptr;
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    switch(message) {
-        case WM_CREATE: {
-            PIXELFORMATDESCRIPTOR pfd;
-            memset(&pfd, 0, sizeof(pfd));
-
-            pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-            pfd.nVersion = 1;
-            pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-            pfd.iPixelType = PFD_TYPE_RGBA;
-            pfd.cColorBits = 32;
-            pfd.cDepthBits = gDepthSize;
-            pfd.cStencilBits = gStencilSize;
-            pfd.cAlphaBits = 8;
-            pfd.iLayerType = PFD_MAIN_PLANE;
-
-            HDC deviceContext = GetDC(hWnd);
-
-            int pixelFormat;
-            pixelFormat = ChoosePixelFormat(deviceContext, &pfd);
-            SetPixelFormat(deviceContext, pixelFormat, &pfd);
-
-            renderingContext = wglCreateContext(deviceContext);
-            if (renderingContext == nullptr) {
-                GAPID_FATAL("Failed to create GL context. Error: %d", GetLastError());
-            }
-            if (!wglMakeCurrent(deviceContext, renderingContext)) {
-                GAPID_FATAL("Failed to attach GL context. Error: %d", GetLastError());
-            }
-            break;
-        }
-        case WM_DESTROY: {
-            HDC deviceContext = GetDC(hWnd);
-            if (!wglMakeCurrent(deviceContext, nullptr)) {
-                GAPID_FATAL("Failed to detach GL context. Error: %d", GetLastError());
-            }
-            if (!wglDeleteContext(renderingContext)) {
-                GAPID_FATAL("Failed to delete GL context. Error: %d", GetLastError());
-            }
-            renderingContext = nullptr;
-            break;
-        }
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
-}
 
 WNDCLASS registerWindowClass() {
     WNDCLASS wc;
     memset(&wc, 0, sizeof(wc));
 
     wc.style         = 0;
-    wc.lpfnWndProc   = WndProc;
+    wc.lpfnWndProc   = DefWindowProc;
     wc.hInstance     = GetModuleHandle(0);
     wc.hCursor       = LoadCursor(0, IDC_ARROW); // TODO: Needed?
     wc.hbrBackground = HBRUSH(COLOR_WINDOW + 1);
@@ -99,39 +47,153 @@ WNDCLASS registerWindowClass() {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height, int depthSize, int stencilSize);
+    RendererImpl();
     virtual ~RendererImpl() override;
 
+    virtual void setBackbuffer(int width, int height, int depthSize, int stencilSize);
+    virtual void bind() override;
+    virtual void unbind() override;
     virtual const char* name() override;
     virtual const char* extensions() override;
     virtual const char* vendor() override;
     virtual const char* version() override;
 
 private:
+    void reset();
+
+    int mWidth;
+    int mHeight;
+    int mDepthSize;
+    int mStencilSize;
+    bool mBound;
+
+    HGLRC mRenderingContext;
+    HDC mDeviceContext;
     HWND mWindow;
 };
 
-RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
-    if (renderingContext != 0) {
-        GAPID_FATAL("Renderer already created. Only one instance can be created at any given time.\n");
+RendererImpl::RendererImpl()
+        : mWidth(0)
+        , mHeight(0)
+        , mDepthSize(0)
+        , mStencilSize(0)
+        , mBound(false)
+        , mRenderingContext(nullptr)
+        , mDeviceContext(0)
+        , mWindow(0) {
+
+    // Initialize with a default target.
+    setBackbuffer(8, 8, 24, 8);
+}
+
+RendererImpl::~RendererImpl() {
+    reset();
+}
+
+void RendererImpl::reset() {
+    unbind();
+
+    if (mRenderingContext != nullptr) {
+        if (!wglDeleteContext(mRenderingContext)) {
+            GAPID_FATAL("Failed to delete GL context. Error: %d", GetLastError());
+        }
+        mRenderingContext = nullptr;
     }
-    gDepthSize = depthSize;
-    gStencilSize = stencilSize;
+
+    if (mDeviceContext != nullptr) {
+        // TODO: Does this need to be released?
+        mDeviceContext = nullptr;
+    }
+
+    if (mWindow != nullptr) {
+        if (!DestroyWindow(mWindow)) {
+            GAPID_FATAL("Failed to destroy window. Error: %d", GetLastError());
+        }
+        mWindow = nullptr;
+    }
+
+    mWidth = 0;
+    mHeight = 0;
+    mDepthSize = 0;
+    mStencilSize = 0;
+}
+
+void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stencilSize) {
+    if (mDeviceContext != nullptr &&
+        mWidth == width &&
+        mHeight == height &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+
+        return;
+    }
+
+    const bool wasBound = mBound;
+
+    reset();
 
     static WNDCLASS wc = registerWindowClass(); // Only needs to be done once per app life-time.
 
-    mWindow = CreateWindow(wndClassName, TEXT(""), WS_POPUP, 0, 0, width, height, 0, 0, GetModuleHandle(0), 0);
+    mWindow = CreateWindow(wndClassName, TEXT(""), WS_POPUP, 0, 0,
+            width, height, 0, 0, GetModuleHandle(0), 0);
     if (mWindow == 0) {
         GAPID_FATAL("Failed to create window. Error: %d", GetLastError());
     }
 
-    // Initialize the graphics API
-    gfxapi::Initialize();
+    PIXELFORMATDESCRIPTOR pfd;
+    memset(&pfd, 0, sizeof(pfd));
+
+    pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+    pfd.nVersion = 1;
+    pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+    pfd.iPixelType = PFD_TYPE_RGBA;
+    pfd.cColorBits = 32;
+    pfd.cDepthBits = depthSize;
+    pfd.cStencilBits = stencilSize;
+    pfd.cAlphaBits = 8;
+    pfd.iLayerType = PFD_MAIN_PLANE;
+
+    mDeviceContext = GetDC(mWindow);
+
+    int pixelFormat = ChoosePixelFormat(mDeviceContext, &pfd);
+    SetPixelFormat(mDeviceContext, pixelFormat, &pfd);
+
+    mRenderingContext = wglCreateContext(mDeviceContext);
+    if (mRenderingContext == nullptr) {
+        GAPID_FATAL("Failed to create GL context. Error: %d", GetLastError());
+    }
+
+    mWidth = width;
+    mHeight = height;
+    mDepthSize = depthSize;
+    mStencilSize = stencilSize;
+
+    if (wasBound) {
+        bind();
+    }
 }
 
-RendererImpl::~RendererImpl() {
-    if (!DestroyWindow(mWindow)) {
-        GAPID_FATAL("Failed to destroy window. Error: %d", GetLastError());
+void RendererImpl::bind() {
+    if (!mBound) {
+        if (!wglMakeCurrent(mDeviceContext, mRenderingContext)) {
+            GAPID_FATAL("Failed to attach GL context. Error: %d", GetLastError());
+        }
+
+        mBound = true;
+
+        // Initialize the graphics API
+        // TODO: Inefficient - consider moving the imports into this renderer
+        gfxapi::Initialize();
+    }
+}
+
+void RendererImpl::unbind() {
+    if (mBound) {
+        if (!wglMakeCurrent(mDeviceContext, nullptr)) {
+            GAPID_FATAL("Failed to detach GL context. Error: %d", GetLastError());
+        }
+
+        mBound = false;
     }
 }
 
@@ -157,8 +219,8 @@ const char* RendererImpl::version() {
 
 } // anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
+Renderer* Renderer::create() {
+    return new RendererImpl();
 }
 
 }  // namespace gapir

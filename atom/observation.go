@@ -18,6 +18,7 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -31,7 +32,6 @@ func init() {
 // was observed at capture time.
 type Observation struct {
 	binary.Generate
-	Context    ContextID    // The context on which the observation was made.
 	Range      memory.Range // The memory range that was observed.
 	ResourceID binary.ID    // The resource identifier holding the memory that was observed.
 }
@@ -43,6 +43,19 @@ func (a *Observation) String() string {
 }
 
 // Atom compliance
-func (a *Observation) TypeID() TypeID       { return TypeIDObservation }
-func (a *Observation) ContextID() ContextID { return a.Context }
-func (a *Observation) Flags() Flags         { return 0 }
+func (a *Observation) API() gfxapi.API {
+	return nil
+}
+
+func (a *Observation) TypeID() TypeID {
+	return TypeIDObservation
+}
+
+func (a *Observation) Flags() Flags {
+	return 0
+}
+
+func (a *Observation) Mutate(s *gfxapi.State) error {
+	s.Memory.Slice(a.Range).Write(memory.ResourceData(a.ResourceID, a.Range.Size))
+	return nil
+}

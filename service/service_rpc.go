@@ -15,13 +15,13 @@ type RPC interface {
 	GetCaptures(l log.Logger) (CaptureIdArray, error)
 	GetDevices(l log.Logger) (DeviceIdArray, error)
 	GetState(l log.Logger, capture CaptureId, after uint64) (BinaryId, error)
-	GetHierarchy(l log.Logger, capture CaptureId, contextId uint32) (HierarchyId, error)
+	GetHierarchy(l log.Logger, capture CaptureId) (HierarchyId, error)
 	GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng MemoryRange) (MemoryInfoId, error)
-	GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64, settings RenderSettings) (ImageInfoId, error)
-	GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, after uint64) (ImageInfoId, error)
+	GetFramebufferColor(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64, settings RenderSettings) (ImageInfoId, error)
+	GetFramebufferDepth(l log.Logger, device DeviceId, capture CaptureId, api ApiId, after uint64) (ImageInfoId, error)
+	GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, mask TimingMask) (TimingInfoId, error)
+	PrerenderFramebuffers(l log.Logger, device DeviceId, capture CaptureId, api ApiId, width uint32, height uint32, atomIds U64Array) (BinaryId, error)
 	ReplaceAtom(l log.Logger, capture CaptureId, atomId uint64, atomType uint16, data Binary) (CaptureId, error)
-	GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, contextId uint32, mask TimingMask) (TimingInfoId, error)
-	PrerenderFramebuffers(l log.Logger, device DeviceId, capture CaptureId, width uint32, height uint32, atomIds U64Array) (BinaryId, error)
 	ResolveAtomStream(l log.Logger, id AtomStreamId) (AtomStream, error)
 	ResolveBinary(l log.Logger, id BinaryId) (Binary, error)
 	ResolveCapture(l log.Logger, id CaptureId) (Capture, error)
@@ -93,11 +93,11 @@ type TimingInfoId struct {
 	ID binary.ID
 }
 
+// Array ApiIdArray
+type ApiIdArray []ApiId
+
 // Array ApiSchemaArray
 type ApiSchemaArray []ApiSchema
-
-// Array AtomContextArray
-type AtomContextArray []AtomContext
 
 // Array AtomGroupArray
 type AtomGroupArray []AtomGroup
@@ -208,10 +208,10 @@ type Device struct {
 // Class Capture
 type Capture struct {
 	binary.Generate
-	Name     string
-	Atoms    AtomStreamId
-	Schema   SchemaId
-	Contexts AtomContextArray
+	Name   string
+	Atoms  AtomStreamId
+	Apis   ApiIdArray
+	Schema SchemaId
 }
 
 // Class Binary
@@ -224,13 +224,6 @@ type Binary struct {
 type AtomStream struct {
 	binary.Generate
 	Data U8Array
-}
-
-// Class AtomContext
-type AtomContext struct {
-	binary.Generate
-	Id  uint32
-	Api ApiId
 }
 
 // Class Hierarchy
@@ -393,6 +386,7 @@ type FieldInfo struct {
 // Class AtomInfo
 type AtomInfo struct {
 	binary.Generate
+	Api              ApiId
 	Type             uint16
 	Name             string
 	Parameters       ParameterInfoArray

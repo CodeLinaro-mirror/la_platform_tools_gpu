@@ -27,21 +27,81 @@ namespace {
 
 class RendererImpl : public Renderer {
 public:
-    RendererImpl(int width, int height, int depthSize, int stencilSize);
+    RendererImpl();
     virtual ~RendererImpl() override;
 
+    virtual void setBackbuffer(int width, int height, int depthSize, int stencilSize);
+    virtual void bind() override;
+    virtual void unbind() override;
     virtual const char* name() override;
     virtual const char* extensions() override;
     virtual const char* vendor() override;
     virtual const char* version() override;
 
 private:
+    void reset();
+
+    int mWidth;
+    int mHeight;
+    int mDepthSize;
+    int mStencilSize;
+    bool mBound;
     NSWindow* mWindow;
     NSOpenGLContext* mContext;
 };
 
-RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize) {
+RendererImpl::RendererImpl()
+        : mWidth(0)
+        , mHeight(0)
+        , mDepthSize(0)
+        , mStencilSize(0)
+        , mBound(false)
+        , mWindow(nullptr)
+        , mContext(nullptr) {
+
+    // Initialize with a default target.
+    setBackbuffer(8, 8, 24, 8);
+}
+
+RendererImpl::~RendererImpl() {
+    reset();
+}
+
+void RendererImpl::reset() {
+    unbind();
+
+    if (mWindow != nullptr) {
+        [mWindow close];
+        [mWindow release];
+        mWindow = nullptr;
+    }
+
+    if (mContext != nullptr) {
+        [mContext release];
+        mContext = nullptr;
+    }
+
+    mWidth = 0;
+    mHeight = 0;
+    mDepthSize = 0;
+    mStencilSize = 0;
+}
+
+void RendererImpl::setBackbuffer(int width, int height, int depthSize, int stencilSize) {
+    if (mContext != nullptr &&
+        mWidth == width &&
+        mHeight == height &&
+        mDepthSize == depthSize &&
+        mStencilSize == stencilSize) {
+
+        return;
+    }
+
+    const bool wasBound = mBound;
+
     [NSApplication sharedApplication];
+
+    reset();
 
     NSRect rect = NSMakeRect(0, 0, width, height);
 
@@ -52,7 +112,7 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
         defer:NO
     ];
     if (mWindow == nullptr) {
-        GAPID_FATAL("Unable to create NSWindow");
+        GAPID_FATAL("Unable to create NSWindow\n");
     }
 
     NSOpenGLPixelFormatAttribute attributes[] = {
@@ -67,26 +127,42 @@ RendererImpl::RendererImpl(int width, int height, int depthSize, int stencilSize
 
     NSOpenGLPixelFormat* format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
     if (format == nullptr) {
-        GAPID_FATAL("Unable to create NSOpenGLPixelFormat");
+        GAPID_FATAL("Unable to create NSOpenGLPixelFormat\n");
     }
 
     mContext = [[NSOpenGLContext alloc] initWithFormat:format shareContext:nil];
     if (mContext == nullptr) {
-        GAPID_FATAL("Unable to create NSOpenGLContext");
+        GAPID_FATAL("Unable to create NSOpenGLContext\n");
     }
 
     [mContext setView:[mWindow contentView]];
-    [mContext makeCurrentContext];
 
-    // Initialize the graphics API
-    gfxapi::Initialize();
+    mWidth = width;
+    mHeight = height;
+    mDepthSize = depthSize;
+    mStencilSize = stencilSize;
+
+    if (wasBound) {
+        bind();
+    }
 }
 
-RendererImpl::~RendererImpl() {
-    [NSOpenGLContext clearCurrentContext];
-    [mContext release];
-    [mWindow close];
-    [mWindow release];
+void RendererImpl::bind() {
+    if (!mBound) {
+        [mContext makeCurrentContext];
+        mBound = true;
+
+        // Initialize the graphics API
+        // TODO: Inefficient - consider moving the imports into this renderer
+        gfxapi::Initialize();
+    }
+}
+
+void RendererImpl::unbind() {
+    if (mBound) {
+        [NSOpenGLContext clearCurrentContext];
+        mBound = false;
+    }
 }
 
 const char* RendererImpl::name() {
@@ -111,8 +187,8 @@ const char* RendererImpl::version() {
 
 } // anonymous namespace
 
-std::unique_ptr<Renderer> Renderer::create(int width, int height, int depthSize, int stencilSize) {
-    return std::unique_ptr<Renderer>(new RendererImpl(width, height, depthSize, stencilSize));
+Renderer* Renderer::create() {
+    return new RendererImpl();
 }
 
 }  // namespace gapir

@@ -27,24 +27,6 @@ import (
 
 // build writes to out an empty Binary resource after processing the given PrerenderFramebuffers request.
 func (request *PrerenderFramebuffers) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, db, logger)
-	if err != nil {
-		return err
-	}
-
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
-	if err != nil {
-		return err
-	}
-
-	atomIDsByContext := make(map[atom.ContextID][]atom.ID)
-	for _, id := range request.AtomIDs {
-		if id < uint64(len(atoms)) {
-			ctx := atoms[id].ContextID()
-			atomIDsByContext[ctx] = append(atomIDsByContext[ctx], atom.ID(id))
-		}
-	}
-
 	renderSettings := service.RenderSettings{
 		MaxWidth:  request.Width,
 		MaxHeight: request.Height,
@@ -52,33 +34,31 @@ func (request *PrerenderFramebuffers) build(db database.Database, logger log.Log
 	}
 
 	var wg sync.WaitGroup
-	for contextID, atomIDs := range atomIDsByContext {
-		var binaryIDs []binary.ID
-		for _, atomID := range atomIDs {
-			if imageInfoID, err := db.StoreRequest(&GetFramebufferColor{
-				Capture:  request.Capture,
-				Context:  contextID,
-				Device:   request.Device,
-				After:    atomID,
-				Settings: renderSettings,
-			}, logger); err == nil {
-				var imageInfo service.ImageInfo
-				if err = db.Load(imageInfoID, logger, &imageInfo); err == nil {
-					binaryIDs = append(binaryIDs, imageInfo.Data.ID)
-				}
-			}
-		}
+	for _, atomID := range request.AtomIDs {
+		imageInfoID, err := db.StoreRequest(&GetFramebufferColor{
+			Capture:  request.Capture,
+			Device:   request.Device,
+			API:      request.API,
+			After:    atom.ID(atomID),
+			Settings: renderSettings,
+		}, logger)
 
-		wg.Add(len(binaryIDs))
-		for _, binaryID := range binaryIDs {
-			go func(id binary.ID) {
+		if err == nil {
+			wg.Add(1)
+
+			go func() {
 				defer wg.Done()
-				var dummy service.Binary
-				db.Load(id, logger, &dummy)
-			}(binaryID)
+
+				var imageInfo service.ImageInfo
+				if err := db.Load(imageInfoID, logger, &imageInfo); err == nil {
+					var dummy service.Binary
+					db.Load(imageInfo.Data.ID, logger, &dummy)
+				}
+			}()
 		}
-		wg.Wait()
 	}
+
+	wg.Wait()
 
 	store.CopyResource(out, &service.Binary{})
 	return nil

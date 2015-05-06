@@ -43,9 +43,6 @@ func (request *GetHierarchy) build(db database.Database, logger log.Logger, out 
 	var frameIndex, drawIndex int
 	var frameStartID, drawStartID atom.ID
 	for i, a := range atoms {
-		if a.ContextID() != request.Context {
-			continue
-		}
 		endID := atom.ID(i + 1) // Increment by one, since atom.Range's end is non-inclusive.
 		if a.Flags().IsEndOfFrame() {
 			root.SubGroups.Add(frameStartID, endID, fmt.Sprintf("Frame %d", frameIndex))
