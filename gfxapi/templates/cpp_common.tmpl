@@ -10,6 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
+{{Include "common.tmpl"}}
 
 
 {{/*
@@ -566,24 +567,6 @@ limitations under the License.
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the C++ global method name for the given method or function.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.MethodName"}}
-  {{AssertType $ "Function"}}
-
-  {{if $p := Global "prefix"}}
-    {{$p}}{{if $.Owner}}{{Title $.Owner.Typename}}{{end}}{{Title $.Name}}
-  {{else}}
-    {{if $.Owner}}{{$.Owner.Typename}}{{Title $.Name}}
-    {{else}}{{$.Name}}
-    {{end}}
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
   Emits the C++ name of an enum type.
 -------------------------------------------------------------------------------
 */}}
@@ -650,7 +633,7 @@ limitations under the License.
 {{define "C++.FunctionPtrType"}}
   {{AssertType $ "Function"}}
 
-  PFN{{Macro "C++.MethodName" $ | Upper}}
+  PFN{{Macro "CmdName" $ | Upper}}
 {{end}}
 
 
@@ -674,5 +657,5 @@ limitations under the License.
 {{define "C++.FunctionPtrDecl"}}
   {{AssertType $ "Function"}}
 
-  {{Macro "C++.FunctionPtrType" $}} {{Macro "C++.MethodName" $}}
+  {{Macro "C++.FunctionPtrType" $}} {{Macro "CmdName" $}}
 {{end}}

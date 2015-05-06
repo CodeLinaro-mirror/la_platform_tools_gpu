@@ -1600,283 +1600,283 @@ func API() gfxapi.API {
 func init() {
 	gfxapi.Register(API())
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoid",
+		Name: "cmd_void",
 		Docs: "[]",
 		ID:   0,
 		New:  func() atom.Atom { return &CmdVoid{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidU8",
+		Name: "cmd_void_u8",
 		Docs: "[]",
 		ID:   1,
 		New:  func() atom.Atom { return &CmdVoidU8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidS8",
+		Name: "cmd_void_s8",
 		Docs: "[]",
 		ID:   2,
 		New:  func() atom.Atom { return &CmdVoidS8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidU16",
+		Name: "cmd_void_u16",
 		Docs: "[]",
 		ID:   3,
 		New:  func() atom.Atom { return &CmdVoidU16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidS16",
+		Name: "cmd_void_s16",
 		Docs: "[]",
 		ID:   4,
 		New:  func() atom.Atom { return &CmdVoidS16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidF32",
+		Name: "cmd_void_f32",
 		Docs: "[]",
 		ID:   5,
 		New:  func() atom.Atom { return &CmdVoidF32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidU32",
+		Name: "cmd_void_u32",
 		Docs: "[]",
 		ID:   6,
 		New:  func() atom.Atom { return &CmdVoidU32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidS32",
+		Name: "cmd_void_s32",
 		Docs: "[]",
 		ID:   7,
 		New:  func() atom.Atom { return &CmdVoidS32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidF64",
+		Name: "cmd_void_f64",
 		Docs: "[]",
 		ID:   8,
 		New:  func() atom.Atom { return &CmdVoidF64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidU64",
+		Name: "cmd_void_u64",
 		Docs: "[]",
 		ID:   9,
 		New:  func() atom.Atom { return &CmdVoidU64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidS64",
+		Name: "cmd_void_s64",
 		Docs: "[]",
 		ID:   10,
 		New:  func() atom.Atom { return &CmdVoidS64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidBool",
+		Name: "cmd_void_bool",
 		Docs: "[]",
 		ID:   11,
 		New:  func() atom.Atom { return &CmdVoidBool{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidString",
+		Name: "cmd_void_string",
 		Docs: "[]",
 		ID:   12,
 		New:  func() atom.Atom { return &CmdVoidString{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoid3Strings",
+		Name: "cmd_void_3_strings",
 		Docs: "[]",
 		ID:   13,
 		New:  func() atom.Atom { return &CmdVoid3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoid3Arrays",
+		Name: "cmd_void_3_arrays",
 		Docs: "[]",
 		ID:   14,
 		New:  func() atom.Atom { return &CmdVoid3Arrays{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidArrayOfStrings",
+		Name: "cmd_void_array_of_strings",
 		Docs: "[]",
 		ID:   15,
 		New:  func() atom.Atom { return &CmdVoidArrayOfStrings{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdU8",
+		Name: "cmd_u8",
 		Docs: "[]",
 		ID:   16,
 		New:  func() atom.Atom { return &CmdU8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdS8",
+		Name: "cmd_s8",
 		Docs: "[]",
 		ID:   17,
 		New:  func() atom.Atom { return &CmdS8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdU16",
+		Name: "cmd_u16",
 		Docs: "[]",
 		ID:   18,
 		New:  func() atom.Atom { return &CmdU16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdS16",
+		Name: "cmd_s16",
 		Docs: "[]",
 		ID:   19,
 		New:  func() atom.Atom { return &CmdS16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdF32",
+		Name: "cmd_f32",
 		Docs: "[]",
 		ID:   20,
 		New:  func() atom.Atom { return &CmdF32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdU32",
+		Name: "cmd_u32",
 		Docs: "[]",
 		ID:   21,
 		New:  func() atom.Atom { return &CmdU32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdS32",
+		Name: "cmd_s32",
 		Docs: "[]",
 		ID:   22,
 		New:  func() atom.Atom { return &CmdS32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdF64",
+		Name: "cmd_f64",
 		Docs: "[]",
 		ID:   23,
 		New:  func() atom.Atom { return &CmdF64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdU64",
+		Name: "cmd_u64",
 		Docs: "[]",
 		ID:   24,
 		New:  func() atom.Atom { return &CmdU64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdS64",
+		Name: "cmd_s64",
 		Docs: "[]",
 		ID:   25,
 		New:  func() atom.Atom { return &CmdS64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdBool",
+		Name: "cmd_bool",
 		Docs: "[]",
 		ID:   26,
 		New:  func() atom.Atom { return &CmdBool{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdString",
+		Name: "cmd_string",
 		Docs: "[]",
 		ID:   27,
 		New:  func() atom.Atom { return &CmdString{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdArrayOfFloat",
+		Name: "cmd_array_of_float",
 		Docs: "[]",
 		ID:   28,
 		New:  func() atom.Atom { return &CmdArrayOfFloat{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdPointer",
+		Name: "cmd_pointer",
 		Docs: "[]",
 		ID:   29,
 		New:  func() atom.Atom { return &CmdPointer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutU8",
+		Name: "cmd_void_out_u8",
 		Docs: "[]",
 		ID:   30,
 		New:  func() atom.Atom { return &CmdVoidOutU8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutS8",
+		Name: "cmd_void_out_s8",
 		Docs: "[]",
 		ID:   31,
 		New:  func() atom.Atom { return &CmdVoidOutS8{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutU16",
+		Name: "cmd_void_out_u16",
 		Docs: "[]",
 		ID:   32,
 		New:  func() atom.Atom { return &CmdVoidOutU16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutS16",
+		Name: "cmd_void_out_s16",
 		Docs: "[]",
 		ID:   33,
 		New:  func() atom.Atom { return &CmdVoidOutS16{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutF32",
+		Name: "cmd_void_out_f32",
 		Docs: "[]",
 		ID:   34,
 		New:  func() atom.Atom { return &CmdVoidOutF32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutU32",
+		Name: "cmd_void_out_u32",
 		Docs: "[]",
 		ID:   35,
 		New:  func() atom.Atom { return &CmdVoidOutU32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutS32",
+		Name: "cmd_void_out_s32",
 		Docs: "[]",
 		ID:   36,
 		New:  func() atom.Atom { return &CmdVoidOutS32{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutF64",
+		Name: "cmd_void_out_f64",
 		Docs: "[]",
 		ID:   37,
 		New:  func() atom.Atom { return &CmdVoidOutF64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutU64",
+		Name: "cmd_void_out_u64",
 		Docs: "[]",
 		ID:   38,
 		New:  func() atom.Atom { return &CmdVoidOutU64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutS64",
+		Name: "cmd_void_out_s64",
 		Docs: "[]",
 		ID:   39,
 		New:  func() atom.Atom { return &CmdVoidOutS64{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutBool",
+		Name: "cmd_void_out_bool",
 		Docs: "[]",
 		ID:   40,
 		New:  func() atom.Atom { return &CmdVoidOutBool{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutString",
+		Name: "cmd_void_out_string",
 		Docs: "[]",
 		ID:   41,
 		New:  func() atom.Atom { return &CmdVoidOutString{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutFixedSizeBuffer",
+		Name: "cmd_void_out_fixed_size_buffer",
 		Docs: "[]",
 		ID:   42,
 		New:  func() atom.Atom { return &CmdVoidOutFixedSizeBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOut3Strings",
+		Name: "cmd_void_out_3_strings",
 		Docs: "[]",
 		ID:   43,
 		New:  func() atom.Atom { return &CmdVoidOut3Strings{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoid3Remapped",
+		Name: "cmd_void_3_remapped",
 		Docs: "[]",
 		ID:   44,
 		New:  func() atom.Atom { return &CmdVoid3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOut3Remapped",
+		Name: "cmd_void_out_3_remapped",
 		Docs: "[]",
 		ID:   45,
 		New:  func() atom.Atom { return &CmdVoidOut3Remapped{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "CmdVoidOutArrayOfRemapped",
+		Name: "cmd_void_out_array_of_remapped",
 		Docs: "[]",
 		ID:   46,
 		New:  func() atom.Atom { return &CmdVoidOutArrayOfRemapped{} },

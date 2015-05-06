@@ -28,7 +28,7 @@ limitations under the License.
   {{$opengl32_exports := Strings (Macro "OpenGL32Exports") | SplitOn "\n"}}
 
   {{/* This is the list of functions that the spy exports. */}}
-  {{$api_exports := (ForEach (AllCommands $) "C++.MethodName") | Strings "wglGetProcAddress"}}
+  {{$api_exports := (ForEach (AllCommands $) "CmdName") | Strings "wglGetProcAddress"}}
 
   {{/* This is list of functions we need to export. */}}
   {{$exports := $opengl32_exports | FilterOut $api_exports}}

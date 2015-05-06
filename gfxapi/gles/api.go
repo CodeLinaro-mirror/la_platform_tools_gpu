@@ -12902,115 +12902,115 @@ func API() gfxapi.API {
 func init() {
 	gfxapi.Register(API())
 	atom.Register(atom.TypeInfo{
-		Name: "ReplayCreateRenderer",
+		Name: "replayCreateRenderer",
 		Docs: "[]",
 		ID:   0,
 		New:  func() atom.Atom { return &ReplayCreateRenderer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "ReplayBindRenderer",
+		Name: "replayBindRenderer",
 		Docs: "[]",
 		ID:   1,
 		New:  func() atom.Atom { return &ReplayBindRenderer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "BackbufferInfo",
+		Name: "backbufferInfo",
 		Docs: "[]",
 		ID:   2,
 		New:  func() atom.Atom { return &BackbufferInfo{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "StartTimer",
+		Name: "startTimer",
 		Docs: "[]",
 		ID:   3,
 		New:  func() atom.Atom { return &StartTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "StopTimer",
+		Name: "stopTimer",
 		Docs: "[]",
 		ID:   4,
 		New:  func() atom.Atom { return &StopTimer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "FlushPostBuffer",
+		Name: "flushPostBuffer",
 		Docs: "[]",
 		ID:   5,
 		New:  func() atom.Atom { return &FlushPostBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "EglInitialize",
+		Name: "eglInitialize",
 		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml]",
 		ID:   6,
 		New:  func() atom.Atom { return &EglInitialize{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "EglCreateContext",
+		Name: "eglCreateContext",
 		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml]",
 		ID:   7,
 		New:  func() atom.Atom { return &EglCreateContext{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "EglMakeCurrent",
+		Name: "eglMakeCurrent",
 		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglMakeCurrent.xhtml]",
 		ID:   8,
 		New:  func() atom.Atom { return &EglMakeCurrent{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "EglSwapBuffers",
+		Name: "eglSwapBuffers",
 		Docs: "[http://www.khronos.org/registry/egl/sdk/docs/man/html/eglSwapBuffers.xhtml]",
 		ID:   9,
 		New:  func() atom.Atom { return &EglSwapBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "EglQuerySurface",
+		Name: "eglQuerySurface",
 		Docs: "[]",
 		ID:   10,
 		New:  func() atom.Atom { return &EglQuerySurface{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlXCreateContext",
+		Name: "glXCreateContext",
 		Docs: "[]",
 		ID:   11,
 		New:  func() atom.Atom { return &GlXCreateContext{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlXCreateNewContext",
+		Name: "glXCreateNewContext",
 		Docs: "[]",
 		ID:   12,
 		New:  func() atom.Atom { return &GlXCreateNewContext{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlXMakeContextCurrent",
+		Name: "glXMakeContextCurrent",
 		Docs: "[]",
 		ID:   13,
 		New:  func() atom.Atom { return &GlXMakeContextCurrent{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlXSwapBuffers",
+		Name: "glXSwapBuffers",
 		Docs: "[]",
 		ID:   14,
 		New:  func() atom.Atom { return &GlXSwapBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "WglCreateContext",
+		Name: "wglCreateContext",
 		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx]",
 		ID:   15,
 		New:  func() atom.Atom { return &WglCreateContext{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "WglCreateContextAttribsARB",
+		Name: "wglCreateContextAttribsARB",
 		Docs: "[http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt]",
 		ID:   16,
 		New:  func() atom.Atom { return &WglCreateContextAttribsARB{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "WglMakeCurrent",
+		Name: "wglMakeCurrent",
 		Docs: "[http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx]",
 		ID:   17,
 		New:  func() atom.Atom { return &WglMakeCurrent{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "WglSwapBuffers",
+		Name: "wglSwapBuffers",
 		Docs: "[http://msdn.microsoft.com/en-us/library/dd369060(v=vs.85)]",
 		ID:   18,
 		New:  func() atom.Atom { return &WglSwapBuffers{} },
@@ -13028,1087 +13028,1087 @@ func init() {
 		New:  func() atom.Atom { return &CGLSetCurrentContext{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEnableClientState",
+		Name: "glEnableClientState",
 		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 		ID:   21,
 		New:  func() atom.Atom { return &GlEnableClientState{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDisableClientState",
+		Name: "glDisableClientState",
 		Docs: "[http://www.khronos.org/opengles/sdk/1.1/docs/man/glEnableClientState.xml]",
 		ID:   22,
 		New:  func() atom.Atom { return &GlDisableClientState{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetProgramBinaryOES",
+		Name: "glGetProgramBinaryOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 		ID:   23,
 		New:  func() atom.Atom { return &GlGetProgramBinaryOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlProgramBinaryOES",
+		Name: "glProgramBinaryOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt]",
 		ID:   24,
 		New:  func() atom.Atom { return &GlProgramBinaryOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlStartTilingQCOM",
+		Name: "glStartTilingQCOM",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 		ID:   25,
 		New:  func() atom.Atom { return &GlStartTilingQCOM{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEndTilingQCOM",
+		Name: "glEndTilingQCOM",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/QCOM/QCOM_tiled_rendering.txt]",
 		ID:   26,
 		New:  func() atom.Atom { return &GlEndTilingQCOM{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDiscardFramebufferEXT",
+		Name: "glDiscardFramebufferEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt]",
 		ID:   27,
 		New:  func() atom.Atom { return &GlDiscardFramebufferEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlInsertEventMarkerEXT",
+		Name: "glInsertEventMarkerEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   28,
 		New:  func() atom.Atom { return &GlInsertEventMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlPushGroupMarkerEXT",
+		Name: "glPushGroupMarkerEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   29,
 		New:  func() atom.Atom { return &GlPushGroupMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlPopGroupMarkerEXT",
+		Name: "glPopGroupMarkerEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_debug_marker.txt]",
 		ID:   30,
 		New:  func() atom.Atom { return &GlPopGroupMarkerEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexStorage1DEXT",
+		Name: "glTexStorage1DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   31,
 		New:  func() atom.Atom { return &GlTexStorage1DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexStorage2DEXT",
+		Name: "glTexStorage2DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   32,
 		New:  func() atom.Atom { return &GlTexStorage2DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexStorage3DEXT",
+		Name: "glTexStorage3DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   33,
 		New:  func() atom.Atom { return &GlTexStorage3DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTextureStorage1DEXT",
+		Name: "glTextureStorage1DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   34,
 		New:  func() atom.Atom { return &GlTextureStorage1DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTextureStorage2DEXT",
+		Name: "glTextureStorage2DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   35,
 		New:  func() atom.Atom { return &GlTextureStorage2DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTextureStorage3DEXT",
+		Name: "glTextureStorage3DEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_texture_storage.txt]",
 		ID:   36,
 		New:  func() atom.Atom { return &GlTextureStorage3DEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenVertexArraysOES",
+		Name: "glGenVertexArraysOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   37,
 		New:  func() atom.Atom { return &GlGenVertexArraysOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindVertexArrayOES",
+		Name: "glBindVertexArrayOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   38,
 		New:  func() atom.Atom { return &GlBindVertexArrayOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteVertexArraysOES",
+		Name: "glDeleteVertexArraysOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   39,
 		New:  func() atom.Atom { return &GlDeleteVertexArraysOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsVertexArrayOES",
+		Name: "glIsVertexArrayOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt]",
 		ID:   40,
 		New:  func() atom.Atom { return &GlIsVertexArrayOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEGLImageTargetTexture2DOES",
+		Name: "glEGLImageTargetTexture2DOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
 		ID:   41,
 		New:  func() atom.Atom { return &GlEGLImageTargetTexture2DOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEGLImageTargetRenderbufferStorageOES",
+		Name: "glEGLImageTargetRenderbufferStorageOES",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/OES/OES_EGL_image.txt]",
 		ID:   42,
 		New:  func() atom.Atom { return &GlEGLImageTargetRenderbufferStorageOES{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetGraphicsResetStatusEXT",
+		Name: "glGetGraphicsResetStatusEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt]",
 		ID:   43,
 		New:  func() atom.Atom { return &GlGetGraphicsResetStatusEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindAttribLocation",
+		Name: "glBindAttribLocation",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml]",
 		ID:   44,
 		New:  func() atom.Atom { return &GlBindAttribLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlendFunc",
+		Name: "glBlendFunc",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml]",
 		ID:   45,
 		New:  func() atom.Atom { return &GlBlendFunc{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlendFuncSeparate",
+		Name: "glBlendFuncSeparate",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFuncSeparate.xml]",
 		ID:   46,
 		New:  func() atom.Atom { return &GlBlendFuncSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlendEquation",
+		Name: "glBlendEquation",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquation.xml]",
 		ID:   47,
 		New:  func() atom.Atom { return &GlBlendEquation{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlendEquationSeparate",
+		Name: "glBlendEquationSeparate",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendEquationSeparate.xml]",
 		ID:   48,
 		New:  func() atom.Atom { return &GlBlendEquationSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlendColor",
+		Name: "glBlendColor",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendColor.xml]",
 		ID:   49,
 		New:  func() atom.Atom { return &GlBlendColor{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEnableVertexAttribArray",
+		Name: "glEnableVertexAttribArray",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnableVertexAttribArray.xml]",
 		ID:   50,
 		New:  func() atom.Atom { return &GlEnableVertexAttribArray{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDisableVertexAttribArray",
+		Name: "glDisableVertexAttribArray",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisableVertexAttribArray.xml]",
 		ID:   51,
 		New:  func() atom.Atom { return &GlDisableVertexAttribArray{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttribPointer",
+		Name: "glVertexAttribPointer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttribPointer.xml]",
 		ID:   52,
 		New:  func() atom.Atom { return &GlVertexAttribPointer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetActiveAttrib",
+		Name: "glGetActiveAttrib",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveAttrib.xml]",
 		ID:   53,
 		New:  func() atom.Atom { return &GlGetActiveAttrib{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetActiveUniform",
+		Name: "glGetActiveUniform",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml]",
 		ID:   54,
 		New:  func() atom.Atom { return &GlGetActiveUniform{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetError",
+		Name: "glGetError",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml]",
 		ID:   55,
 		New:  func() atom.Atom { return &GlGetError{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetProgramiv",
+		Name: "glGetProgramiv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml]",
 		ID:   56,
 		New:  func() atom.Atom { return &GlGetProgramiv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetShaderiv",
+		Name: "glGetShaderiv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml]",
 		ID:   57,
 		New:  func() atom.Atom { return &GlGetShaderiv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetUniformLocation",
+		Name: "glGetUniformLocation",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniformLocation.xml]",
 		ID:   58,
 		New:  func() atom.Atom { return &GlGetUniformLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetAttribLocation",
+		Name: "glGetAttribLocation",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttribLocation.xml]",
 		ID:   59,
 		New:  func() atom.Atom { return &GlGetAttribLocation{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlPixelStorei",
+		Name: "glPixelStorei",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml]",
 		ID:   60,
 		New:  func() atom.Atom { return &GlPixelStorei{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexParameteri",
+		Name: "glTexParameteri",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 		ID:   61,
 		New:  func() atom.Atom { return &GlTexParameteri{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexParameterf",
+		Name: "glTexParameterf",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexParameter.xml]",
 		ID:   62,
 		New:  func() atom.Atom { return &GlTexParameterf{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetTexParameteriv",
+		Name: "glGetTexParameteriv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 		ID:   63,
 		New:  func() atom.Atom { return &GlGetTexParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetTexParameterfv",
+		Name: "glGetTexParameterfv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml]",
 		ID:   64,
 		New:  func() atom.Atom { return &GlGetTexParameterfv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform1i",
+		Name: "glUniform1i",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   65,
 		New:  func() atom.Atom { return &GlUniform1i{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform2i",
+		Name: "glUniform2i",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   66,
 		New:  func() atom.Atom { return &GlUniform2i{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform3i",
+		Name: "glUniform3i",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   67,
 		New:  func() atom.Atom { return &GlUniform3i{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform4i",
+		Name: "glUniform4i",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   68,
 		New:  func() atom.Atom { return &GlUniform4i{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform1iv",
+		Name: "glUniform1iv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   69,
 		New:  func() atom.Atom { return &GlUniform1iv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform2iv",
+		Name: "glUniform2iv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   70,
 		New:  func() atom.Atom { return &GlUniform2iv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform3iv",
+		Name: "glUniform3iv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   71,
 		New:  func() atom.Atom { return &GlUniform3iv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform4iv",
+		Name: "glUniform4iv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   72,
 		New:  func() atom.Atom { return &GlUniform4iv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform1f",
+		Name: "glUniform1f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   73,
 		New:  func() atom.Atom { return &GlUniform1f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform2f",
+		Name: "glUniform2f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   74,
 		New:  func() atom.Atom { return &GlUniform2f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform3f",
+		Name: "glUniform3f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   75,
 		New:  func() atom.Atom { return &GlUniform3f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform4f",
+		Name: "glUniform4f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   76,
 		New:  func() atom.Atom { return &GlUniform4f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform1fv",
+		Name: "glUniform1fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   77,
 		New:  func() atom.Atom { return &GlUniform1fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform2fv",
+		Name: "glUniform2fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   78,
 		New:  func() atom.Atom { return &GlUniform2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform3fv",
+		Name: "glUniform3fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   79,
 		New:  func() atom.Atom { return &GlUniform3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniform4fv",
+		Name: "glUniform4fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   80,
 		New:  func() atom.Atom { return &GlUniform4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniformMatrix2fv",
+		Name: "glUniformMatrix2fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   81,
 		New:  func() atom.Atom { return &GlUniformMatrix2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniformMatrix3fv",
+		Name: "glUniformMatrix3fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   82,
 		New:  func() atom.Atom { return &GlUniformMatrix3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUniformMatrix4fv",
+		Name: "glUniformMatrix4fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUniform.xml]",
 		ID:   83,
 		New:  func() atom.Atom { return &GlUniformMatrix4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetUniformfv",
+		Name: "glGetUniformfv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 		ID:   84,
 		New:  func() atom.Atom { return &GlGetUniformfv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetUniformiv",
+		Name: "glGetUniformiv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetUniform.xml]",
 		ID:   85,
 		New:  func() atom.Atom { return &GlGetUniformiv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib1f",
+		Name: "glVertexAttrib1f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   86,
 		New:  func() atom.Atom { return &GlVertexAttrib1f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib2f",
+		Name: "glVertexAttrib2f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   87,
 		New:  func() atom.Atom { return &GlVertexAttrib2f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib3f",
+		Name: "glVertexAttrib3f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   88,
 		New:  func() atom.Atom { return &GlVertexAttrib3f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib4f",
+		Name: "glVertexAttrib4f",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   89,
 		New:  func() atom.Atom { return &GlVertexAttrib4f{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib1fv",
+		Name: "glVertexAttrib1fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   90,
 		New:  func() atom.Atom { return &GlVertexAttrib1fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib2fv",
+		Name: "glVertexAttrib2fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   91,
 		New:  func() atom.Atom { return &GlVertexAttrib2fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib3fv",
+		Name: "glVertexAttrib3fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   92,
 		New:  func() atom.Atom { return &GlVertexAttrib3fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlVertexAttrib4fv",
+		Name: "glVertexAttrib4fv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glVertexAttrib.xml]",
 		ID:   93,
 		New:  func() atom.Atom { return &GlVertexAttrib4fv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetShaderPrecisionFormat",
+		Name: "glGetShaderPrecisionFormat",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml]",
 		ID:   94,
 		New:  func() atom.Atom { return &GlGetShaderPrecisionFormat{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDepthMask",
+		Name: "glDepthMask",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml]",
 		ID:   95,
 		New:  func() atom.Atom { return &GlDepthMask{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDepthFunc",
+		Name: "glDepthFunc",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthFunc.xml]",
 		ID:   96,
 		New:  func() atom.Atom { return &GlDepthFunc{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDepthRangef",
+		Name: "glDepthRangef",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthRangef.xml]",
 		ID:   97,
 		New:  func() atom.Atom { return &GlDepthRangef{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlColorMask",
+		Name: "glColorMask",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glColorMask.xml]",
 		ID:   98,
 		New:  func() atom.Atom { return &GlColorMask{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlStencilMask",
+		Name: "glStencilMask",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMask.xml]",
 		ID:   99,
 		New:  func() atom.Atom { return &GlStencilMask{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlStencilMaskSeparate",
+		Name: "glStencilMaskSeparate",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilMaskSeparate.xml]",
 		ID:   100,
 		New:  func() atom.Atom { return &GlStencilMaskSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlStencilFuncSeparate",
+		Name: "glStencilFuncSeparate",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilFuncSeparate.xml]",
 		ID:   101,
 		New:  func() atom.Atom { return &GlStencilFuncSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlStencilOpSeparate",
+		Name: "glStencilOpSeparate",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glStencilOpSeparate.xml]",
 		ID:   102,
 		New:  func() atom.Atom { return &GlStencilOpSeparate{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlFrontFace",
+		Name: "glFrontFace",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFrontFace.xml]",
 		ID:   103,
 		New:  func() atom.Atom { return &GlFrontFace{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlViewport",
+		Name: "glViewport",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glViewport.xml]",
 		ID:   104,
 		New:  func() atom.Atom { return &GlViewport{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlScissor",
+		Name: "glScissor",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glScissor.xml]",
 		ID:   105,
 		New:  func() atom.Atom { return &GlScissor{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlActiveTexture",
+		Name: "glActiveTexture",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glActiveTexture.xml]",
 		ID:   106,
 		New:  func() atom.Atom { return &GlActiveTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenTextures",
+		Name: "glGenTextures",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml]",
 		ID:   107,
 		New:  func() atom.Atom { return &GlGenTextures{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteTextures",
+		Name: "glDeleteTextures",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteTextures.xml]",
 		ID:   108,
 		New:  func() atom.Atom { return &GlDeleteTextures{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsTexture",
+		Name: "glIsTexture",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsTexture.xml]",
 		ID:   109,
 		New:  func() atom.Atom { return &GlIsTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindTexture",
+		Name: "glBindTexture",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindTexture.xml]",
 		ID:   110,
 		New:  func() atom.Atom { return &GlBindTexture{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexImage2D",
+		Name: "glTexImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexImage2D.xml]",
 		ID:   111,
 		New:  func() atom.Atom { return &GlTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlTexSubImage2D",
+		Name: "glTexSubImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glTexSubImage2D.xml]",
 		ID:   112,
 		New:  func() atom.Atom { return &GlTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCopyTexImage2D",
+		Name: "glCopyTexImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexImage2D.xml]",
 		ID:   113,
 		New:  func() atom.Atom { return &GlCopyTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCopyTexSubImage2D",
+		Name: "glCopyTexSubImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCopyTexSubImage2D.xml]",
 		ID:   114,
 		New:  func() atom.Atom { return &GlCopyTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCompressedTexImage2D",
+		Name: "glCompressedTexImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexImage2D.xml]",
 		ID:   115,
 		New:  func() atom.Atom { return &GlCompressedTexImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCompressedTexSubImage2D",
+		Name: "glCompressedTexSubImage2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompressedTexSubImage2D.xml]",
 		ID:   116,
 		New:  func() atom.Atom { return &GlCompressedTexSubImage2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenerateMipmap",
+		Name: "glGenerateMipmap",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenerateMipmap.xml]",
 		ID:   117,
 		New:  func() atom.Atom { return &GlGenerateMipmap{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlReadPixels",
+		Name: "glReadPixels",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReadPixels.xml]",
 		ID:   118,
 		New:  func() atom.Atom { return &GlReadPixels{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenFramebuffers",
+		Name: "glGenFramebuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml]",
 		ID:   119,
 		New:  func() atom.Atom { return &GlGenFramebuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindFramebuffer",
+		Name: "glBindFramebuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindFramebuffer.xml]",
 		ID:   120,
 		New:  func() atom.Atom { return &GlBindFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCheckFramebufferStatus",
+		Name: "glCheckFramebufferStatus",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCheckFramebufferStatus.xml]",
 		ID:   121,
 		New:  func() atom.Atom { return &GlCheckFramebufferStatus{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteFramebuffers",
+		Name: "glDeleteFramebuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteFramebuffers.xml]",
 		ID:   122,
 		New:  func() atom.Atom { return &GlDeleteFramebuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsFramebuffer",
+		Name: "glIsFramebuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsFramebuffer.xml]",
 		ID:   123,
 		New:  func() atom.Atom { return &GlIsFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenRenderbuffers",
+		Name: "glGenRenderbuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml]",
 		ID:   124,
 		New:  func() atom.Atom { return &GlGenRenderbuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindRenderbuffer",
+		Name: "glBindRenderbuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindRenderbuffer.xml]",
 		ID:   125,
 		New:  func() atom.Atom { return &GlBindRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlRenderbufferStorage",
+		Name: "glRenderbufferStorage",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glRenderbufferStorage.xml]",
 		ID:   126,
 		New:  func() atom.Atom { return &GlRenderbufferStorage{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteRenderbuffers",
+		Name: "glDeleteRenderbuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteRenderbuffers.xml]",
 		ID:   127,
 		New:  func() atom.Atom { return &GlDeleteRenderbuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsRenderbuffer",
+		Name: "glIsRenderbuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsRenderbuffer.xml]",
 		ID:   128,
 		New:  func() atom.Atom { return &GlIsRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetRenderbufferParameteriv",
+		Name: "glGetRenderbufferParameteriv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml]",
 		ID:   129,
 		New:  func() atom.Atom { return &GlGetRenderbufferParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenBuffers",
+		Name: "glGenBuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml]",
 		ID:   130,
 		New:  func() atom.Atom { return &GlGenBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBindBuffer",
+		Name: "glBindBuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindBuffer.xml]",
 		ID:   131,
 		New:  func() atom.Atom { return &GlBindBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBufferData",
+		Name: "glBufferData",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferData.xml]",
 		ID:   132,
 		New:  func() atom.Atom { return &GlBufferData{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBufferSubData",
+		Name: "glBufferSubData",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBufferSubData.xml]",
 		ID:   133,
 		New:  func() atom.Atom { return &GlBufferSubData{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteBuffers",
+		Name: "glDeleteBuffers",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteBuffers.xml]",
 		ID:   134,
 		New:  func() atom.Atom { return &GlDeleteBuffers{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsBuffer",
+		Name: "glIsBuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsBuffer.xml]",
 		ID:   135,
 		New:  func() atom.Atom { return &GlIsBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetBufferParameteriv",
+		Name: "glGetBufferParameteriv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml]",
 		ID:   136,
 		New:  func() atom.Atom { return &GlGetBufferParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCreateShader",
+		Name: "glCreateShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateShader.xml]",
 		ID:   137,
 		New:  func() atom.Atom { return &GlCreateShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteShader",
+		Name: "glDeleteShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteShader.xml]",
 		ID:   138,
 		New:  func() atom.Atom { return &GlDeleteShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlShaderSource",
+		Name: "glShaderSource",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderSource.xml]",
 		ID:   139,
 		New:  func() atom.Atom { return &GlShaderSource{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlShaderBinary",
+		Name: "glShaderBinary",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glShaderBinary.xml]",
 		ID:   140,
 		New:  func() atom.Atom { return &GlShaderBinary{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetShaderInfoLog",
+		Name: "glGetShaderInfoLog",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml]",
 		ID:   141,
 		New:  func() atom.Atom { return &GlGetShaderInfoLog{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetShaderSource",
+		Name: "glGetShaderSource",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml]",
 		ID:   142,
 		New:  func() atom.Atom { return &GlGetShaderSource{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlReleaseShaderCompiler",
+		Name: "glReleaseShaderCompiler",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml]",
 		ID:   143,
 		New:  func() atom.Atom { return &GlReleaseShaderCompiler{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCompileShader",
+		Name: "glCompileShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCompileShader.xml]",
 		ID:   144,
 		New:  func() atom.Atom { return &GlCompileShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsShader",
+		Name: "glIsShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsShader.xml]",
 		ID:   145,
 		New:  func() atom.Atom { return &GlIsShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCreateProgram",
+		Name: "glCreateProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCreateProgram.xml]",
 		ID:   146,
 		New:  func() atom.Atom { return &GlCreateProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteProgram",
+		Name: "glDeleteProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDeleteProgram.xml]",
 		ID:   147,
 		New:  func() atom.Atom { return &GlDeleteProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlAttachShader",
+		Name: "glAttachShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glAttachShader.xml]",
 		ID:   148,
 		New:  func() atom.Atom { return &GlAttachShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDetachShader",
+		Name: "glDetachShader",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDetachShader.xml]",
 		ID:   149,
 		New:  func() atom.Atom { return &GlDetachShader{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetAttachedShaders",
+		Name: "glGetAttachedShaders",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml]",
 		ID:   150,
 		New:  func() atom.Atom { return &GlGetAttachedShaders{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlLinkProgram",
+		Name: "glLinkProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml]",
 		ID:   151,
 		New:  func() atom.Atom { return &GlLinkProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetProgramInfoLog",
+		Name: "glGetProgramInfoLog",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml]",
 		ID:   152,
 		New:  func() atom.Atom { return &GlGetProgramInfoLog{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUseProgram",
+		Name: "glUseProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml]",
 		ID:   153,
 		New:  func() atom.Atom { return &GlUseProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsProgram",
+		Name: "glIsProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsProgram.xml]",
 		ID:   154,
 		New:  func() atom.Atom { return &GlIsProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlValidateProgram",
+		Name: "glValidateProgram",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glValidateProgram.xml]",
 		ID:   155,
 		New:  func() atom.Atom { return &GlValidateProgram{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlClearColor",
+		Name: "glClearColor",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearColor.xml]",
 		ID:   156,
 		New:  func() atom.Atom { return &GlClearColor{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlClearDepthf",
+		Name: "glClearDepthf",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearDepthf.xml]",
 		ID:   157,
 		New:  func() atom.Atom { return &GlClearDepthf{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlClearStencil",
+		Name: "glClearStencil",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClearStencil.xml]",
 		ID:   158,
 		New:  func() atom.Atom { return &GlClearStencil{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlClear",
+		Name: "glClear",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glClear.xml]",
 		ID:   159,
 		New:  func() atom.Atom { return &GlClear{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlCullFace",
+		Name: "glCullFace",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glCullFace.xml]",
 		ID:   160,
 		New:  func() atom.Atom { return &GlCullFace{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlPolygonOffset",
+		Name: "glPolygonOffset",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPolygonOffset.xml]",
 		ID:   161,
 		New:  func() atom.Atom { return &GlPolygonOffset{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlLineWidth",
+		Name: "glLineWidth",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLineWidth.xml]",
 		ID:   162,
 		New:  func() atom.Atom { return &GlLineWidth{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlSampleCoverage",
+		Name: "glSampleCoverage",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glSampleCoverage.xml]",
 		ID:   163,
 		New:  func() atom.Atom { return &GlSampleCoverage{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlHint",
+		Name: "glHint",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glHint.xml]",
 		ID:   164,
 		New:  func() atom.Atom { return &GlHint{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlFramebufferRenderbuffer",
+		Name: "glFramebufferRenderbuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferRenderbuffer.xml]",
 		ID:   165,
 		New:  func() atom.Atom { return &GlFramebufferRenderbuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlFramebufferTexture2D",
+		Name: "glFramebufferTexture2D",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFramebufferTexture2D.xml]",
 		ID:   166,
 		New:  func() atom.Atom { return &GlFramebufferTexture2D{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetFramebufferAttachmentParameteriv",
+		Name: "glGetFramebufferAttachmentParameteriv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetFramebufferAttachmentParameteriv.xml]",
 		ID:   167,
 		New:  func() atom.Atom { return &GlGetFramebufferAttachmentParameteriv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDrawElements",
+		Name: "glDrawElements",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawElements.xml]",
 		ID:   168,
 		New:  func() atom.Atom { return &GlDrawElements{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDrawArrays",
+		Name: "glDrawArrays",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDrawArrays.xml]",
 		ID:   169,
 		New:  func() atom.Atom { return &GlDrawArrays{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlFlush",
+		Name: "glFlush",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFlush.xml]",
 		ID:   170,
 		New:  func() atom.Atom { return &GlFlush{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlFinish",
+		Name: "glFinish",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glFinish.xml]",
 		ID:   171,
 		New:  func() atom.Atom { return &GlFinish{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetBooleanv",
+		Name: "glGetBooleanv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   172,
 		New:  func() atom.Atom { return &GlGetBooleanv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetFloatv",
+		Name: "glGetFloatv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   173,
 		New:  func() atom.Atom { return &GlGetFloatv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetIntegerv",
+		Name: "glGetIntegerv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml]",
 		ID:   174,
 		New:  func() atom.Atom { return &GlGetIntegerv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetString",
+		Name: "glGetString",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml]",
 		ID:   175,
 		New:  func() atom.Atom { return &GlGetString{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEnable",
+		Name: "glEnable",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glEnable.xml]",
 		ID:   176,
 		New:  func() atom.Atom { return &GlEnable{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDisable",
+		Name: "glDisable",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDisable.xml]",
 		ID:   177,
 		New:  func() atom.Atom { return &GlDisable{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsEnabled",
+		Name: "glIsEnabled",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man/xhtml/glIsEnabled.xml]",
 		ID:   178,
 		New:  func() atom.Atom { return &GlIsEnabled{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlMapBufferRange",
+		Name: "glMapBufferRange",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 		ID:   179,
 		New:  func() atom.Atom { return &GlMapBufferRange{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlUnmapBuffer",
+		Name: "glUnmapBuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml]",
 		ID:   180,
 		New:  func() atom.Atom { return &GlUnmapBuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlInvalidateFramebuffer",
+		Name: "glInvalidateFramebuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glInvalidateFramebuffer.xhtml]",
 		ID:   181,
 		New:  func() atom.Atom { return &GlInvalidateFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlRenderbufferStorageMultisample",
+		Name: "glRenderbufferStorageMultisample",
 		Docs: "[http://www.opengl.org/registry/specs/EXT/framebuffer_multisample.txt]",
 		ID:   182,
 		New:  func() atom.Atom { return &GlRenderbufferStorageMultisample{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBlitFramebuffer",
+		Name: "glBlitFramebuffer",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBlitFramebuffer.xhtml]",
 		ID:   183,
 		New:  func() atom.Atom { return &GlBlitFramebuffer{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenQueries",
+		Name: "glGenQueries",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml]",
 		ID:   184,
 		New:  func() atom.Atom { return &GlGenQueries{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBeginQuery",
+		Name: "glBeginQuery",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glBeginQuery.xhtml]",
 		ID:   185,
 		New:  func() atom.Atom { return &GlBeginQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEndQuery",
+		Name: "glEndQuery",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glEndQuery.xhtml]",
 		ID:   186,
 		New:  func() atom.Atom { return &GlEndQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteQueries",
+		Name: "glDeleteQueries",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glDeleteQueries.xhtml]",
 		ID:   187,
 		New:  func() atom.Atom { return &GlDeleteQueries{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsQuery",
+		Name: "glIsQuery",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glIsQuery.xhtml]",
 		ID:   188,
 		New:  func() atom.Atom { return &GlIsQuery{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryiv",
+		Name: "glGetQueryiv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml]",
 		ID:   189,
 		New:  func() atom.Atom { return &GlGetQueryiv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryObjectuiv",
+		Name: "glGetQueryObjectuiv",
 		Docs: "[http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml]",
 		ID:   190,
 		New:  func() atom.Atom { return &GlGetQueryObjectuiv{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGenQueriesEXT",
+		Name: "glGenQueriesEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   191,
 		New:  func() atom.Atom { return &GlGenQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlBeginQueryEXT",
+		Name: "glBeginQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   192,
 		New:  func() atom.Atom { return &GlBeginQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlEndQueryEXT",
+		Name: "glEndQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   193,
 		New:  func() atom.Atom { return &GlEndQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlDeleteQueriesEXT",
+		Name: "glDeleteQueriesEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   194,
 		New:  func() atom.Atom { return &GlDeleteQueriesEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlIsQueryEXT",
+		Name: "glIsQueryEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   195,
 		New:  func() atom.Atom { return &GlIsQueryEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlQueryCounterEXT",
+		Name: "glQueryCounterEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   196,
 		New:  func() atom.Atom { return &GlQueryCounterEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryivEXT",
+		Name: "glGetQueryivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   197,
 		New:  func() atom.Atom { return &GlGetQueryivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryObjectivEXT",
+		Name: "glGetQueryObjectivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   198,
 		New:  func() atom.Atom { return &GlGetQueryObjectivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryObjectuivEXT",
+		Name: "glGetQueryObjectuivEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   199,
 		New:  func() atom.Atom { return &GlGetQueryObjectuivEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryObjecti64vEXT",
+		Name: "glGetQueryObjecti64vEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   200,
 		New:  func() atom.Atom { return &GlGetQueryObjecti64vEXT{} },
 	})
 	atom.Register(atom.TypeInfo{
-		Name: "GlGetQueryObjectui64vEXT",
+		Name: "glGetQueryObjectui64vEXT",
 		Docs: "[http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt]",
 		ID:   201,
 		New:  func() atom.Atom { return &GlGetQueryObjectui64vEXT{} },
