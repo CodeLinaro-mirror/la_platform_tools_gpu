@@ -32,6 +32,8 @@ limitations under the License.
   #include <gapic/log.h>
   #include <gapic/target.h> // STDCALL
 ¶
+  #include <memory>
+¶
   #include <string.h>
 ¶
   using namespace gapii;
@@ -52,27 +54,29 @@ limitations under the License.
 ¶
   namespace {«
 ¶
+  std::unique_ptr<Spy> gSpy; // Must be accessed via spy() below, gets destroyed with the library.
+¶
   // spy lazily constructs and returns the instance to the spy.
   Spy* spy() {
-    static Spy spy;
-    static bool initialized = false;
-    if (!initialized) {
+    static bool initializedOnce = false;
+    if (!initializedOnce) {
+      gSpy.reset(new Spy());
       GAPID_INFO("Registering spy symbols...\n");
       {{range $i, $c := AllCommands $}}
         {{$name := Macro "C++.MethodName" $c}}
         {{if not (GetAnnotation $c "synthetic")}}
-          spy.RegisterSymbol("{{$name}}", reinterpret_cast<void*>({{$name}}));
+          gSpy->RegisterSymbol("{{$name}}", reinterpret_cast<void*>({{$name}}));
         {{end}}
       {{end}}
-      spy.RegisterSymbol("eglGetProcAddress",    reinterpret_cast<void*>(eglGetProcAddress));
-      spy.RegisterSymbol("wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress));
-      spy.RegisterSymbol("glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress));
-      spy.RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
-      initialized = true;
+      gSpy->RegisterSymbol("eglGetProcAddress",    reinterpret_cast<void*>(eglGetProcAddress));
+      gSpy->RegisterSymbol("wglGetProcAddress",    reinterpret_cast<void*>(wglGetProcAddress));
+      gSpy->RegisterSymbol("glXGetProcAddress",    reinterpret_cast<void*>(glXGetProcAddress));
+      gSpy->RegisterSymbol("glXGetProcAddressARB", reinterpret_cast<void*>(glXGetProcAddressARB));
+      initializedOnce = true;
     }
-    return &spy;
+    return gSpy.get();
   }
-
+¶
   void* STDCALL GetSpyProcAddress(const char* name) {
     if (void* proc = spy()->LookupSymbol(name)) {
       return proc;
