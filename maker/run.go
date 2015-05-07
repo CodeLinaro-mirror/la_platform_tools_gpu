@@ -66,8 +66,20 @@ func Run() {
 	// Prepare the active path
 	targets := flag.Args()
 	meta := List("")
-	for _, name := range targets {
-		meta.DependsOn(EntityOf(name))
+	for _, match := range targets {
+		e := FindPathEntity(match)
+		if e != nil {
+			meta.DependsOn(e)
+		} else {
+			// not an exact entry, so fuzzy search time
+			entities := FindEntities(match)
+			if len(entities) == 0 {
+				log.Fatalf("no entities match for %q", match)
+			}
+			for _, e := range entities {
+				meta.DependsOn(e)
+			}
+		}
 	}
 	// Perform the requested action
 	switch *do {
