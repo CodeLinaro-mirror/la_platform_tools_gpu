@@ -1,0 +1,171 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// The fab command is used to build the gpu project.
+package main
+
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+	"strings"
+
+	"android.googlesource.com/platform/tools/gpu/build"
+	. "android.googlesource.com/platform/tools/gpu/maker"
+)
+
+func main() { Run() }
+
+const (
+	GPURoot = "android.googlesource.com/platform/tools/gpu"
+)
+
+var (
+	glespath   = GPUPath("gfxapi/gles")
+	gapirpath  = GPUPath("cc/gapir")
+	spypath    = GPUPath("cc/gfxspy2/src")
+	spywinpath = GPUPath("cc/gfxspy2/src/windows")
+	spyosxpath = GPUPath("cc/gfxspy2/src/osx")
+	testpath   = GPUPath("gfxapi/test")
+	glesapi    = GPUPath("gfxapi/gles/gles.api")
+	testapi    = GPUPath("gfxapi/test/gfxapi_test.api")
+	javacore   = filepath.Join(GoPath, "../base/rpclib/src/main/java/com/android/tools/rpclib/rpccore/")
+	javarpc    = filepath.Join(GoPath, "../adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
+
+	Tools struct {
+		Embed    Entity
+		Rpcapi   Entity
+		Apic     Entity
+		Codergen Entity
+	}
+
+	Apps struct {
+		Gapis Entity
+		Gapir Entity
+	}
+)
+
+func init() {
+	Register(func() {
+		// Install rules for the build tools
+		Tools.Embed = GoInstall(GPURoot + "/tools/embed")
+		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
+		Tools.Apic = GoInstall(GPURoot + "/api/apic")
+		Tools.Codergen = GoInstall(GPURoot + "/binary/codergen")
+		List("tools").DependsStruct(Tools)
+		// All the embed rules
+		embedRPC := Embed(GPUPath("rpc/generate"))
+		embedCopyright := Embed(GPUPath("tools/copyright"))
+		embedBinary := Embed(GPUPath("binary/generate"))
+		Creator(Tools.Rpcapi).DependsOn(embedCopyright, embedRPC)
+		Creator(Tools.Apic).DependsOn(embedCopyright)
+		Creator(Tools.Codergen).DependsOn(embedCopyright, embedBinary)
+		// All the rpc rules
+		servicerpc := File(GPUPath("service/service.api"))
+		RpcApiGo(File(GPUPath("rpc/test/rpc_test.api")))
+		RpcApiGo(servicerpc)
+		// All the apic rules
+		Apic(glespath, glesapi, GPUPath("gfxapi/templates/api.go.tmpl"))
+		Apic(glespath, glesapi, GPUPath("gfxapi/templates/replay_writer.go.tmpl"))
+		Apic(glespath, glesapi, GPUPath("gfxapi/templates/schema.go.tmpl"))
+		Apic(glespath, glesapi, GPUPath("gfxapi/templates/state_mutator.go.tmpl"))
+		Apic(gapirpath, glesapi, GPUPath("gfxapi/templates/gfx_api.cpp.tmpl"))
+		Apic(gapirpath, glesapi, GPUPath("gfxapi/templates/gfx_api.h.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_exports.cpp.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_imports.cpp.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_imports.h.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_spy.h.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_state.h.tmpl"))
+		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_types.h.tmpl"))
+		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_exports.def.tmpl"))
+		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_resolve.cpp.tmpl"))
+		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_x64.asm.tmpl"))
+		Apic(spyosxpath, glesapi, GPUPath("gfxapi/templates/opengl_framework_exports.cpp.tmpl"))
+		Apic(testpath, testapi, GPUPath("gfxapi/templates/api.go.tmpl"))
+		Apic(testpath, testapi, GPUPath("gfxapi/templates/replay_writer.go.tmpl"))
+		Apic(testpath, testapi, GPUPath("gfxapi/templates/schema.go.tmpl"))
+		Apic(testpath, testapi, GPUPath("gfxapi/templates/state_mutator.go.tmpl"))
+		// The codergen rule
+		Codergen("codergen", "--go", GPURoot+"/...")
+		// The java code generation rules
+		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")
+		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
+		List("java").DependsOn("javacoders", "javarpc")
+		// The native code rules
+		Apps.Gapir = Virtual("gapir")
+		GoRun(GPUPath("cc/build.go"),
+			"--runtests",
+			"--targets="+build.HostOS+",android-arm",
+		).Creates(Apps.Gapir)
+		// The testing rules
+		gotest := GoTest(GPURoot + "/...")
+		Creator(gotest).DependsOn("codergen", Apps.Gapir)
+		List("test").DependsOn(gotest)
+		// The main binary rules
+		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
+		Creator(Apps.Gapis).DependsOn("codergen")
+		List("apps").DependsStruct(Apps)
+		// Application launchers
+		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
+		// The default rules
+		List(Default).DependsOn("apps", "test")
+	})
+}
+
+func GPUPath(path string) string {
+	return filepath.Join(GoPath, "src", GPURoot, path)
+}
+
+func Embed(path string) Entity {
+	out := File(filepath.Join(path, "embed.go"))
+	args := []string{"--out", out.Name()}
+	files := FilesOf(path, func(i os.FileInfo) bool { return !strings.HasSuffix(i.Name(), ".go") })
+	for _, f := range files {
+		args = append(args, f.Name())
+	}
+	s := Command(Tools.Embed, args...).Creates(out)
+	for _, f := range files {
+		s.DependsOn(f)
+	}
+	List("embed").DependsOn(out)
+	return out
+}
+
+func RpcApiGo(api Entity) {
+	out := File(strings.TrimSuffix(api.Name(), ".api") + "_rpc.go")
+	RpcApi("--go", DirOf(api).Name(), api).Creates(out)
+	List("rpcapi").DependsOn(out)
+}
+
+func RpcApi(language string, path string, api Entity) *Step {
+	return Command(Tools.Rpcapi, "--dir", path, language, api.Name()).DependsOn(api)
+}
+
+func Apic(path string, api string, template string) {
+	dst := Dir(path)
+	a := File(api)
+	t := File(template)
+	deps := File(DepsPath(fmt.Sprintf("%v_%v.deps", filepath.Base(api), filepath.Base(template))))
+	s := Command(Tools.Apic,
+		"template",
+		"--dir", dst.Name(),
+		"--deps", deps.Name(),
+		a.Name(), t.Name()).DependsOn(a, t, dst)
+	s.UseDepsFile(deps)
+	List("apic").DependsOn(deps)
+}
+
+func Codergen(name string, args ...string) {
+	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic")
+}

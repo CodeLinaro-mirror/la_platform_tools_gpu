@@ -1,0 +1,92 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package maker
+
+import (
+	"bytes"
+	"fmt"
+	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+var (
+	// EnvVars holds the environment overrides used when spawning external commands.
+	EnvVars = map[string][]string{}
+)
+
+// Command builds and returns a new Step that runs the specified external binary
+// with the supplied arguments. The newly created Step will be made to depend on
+// the binary.
+func Command(binary Entity, args ...string) *Step {
+	return NewStep(func(step *Step) error {
+		cmd := exec.Command(binary.Name(), args...)
+		var output bytes.Buffer
+		if Config.Verbose > 1 {
+			cmd.Stdout = &output
+			cmd.Stderr = &output
+		} else {
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+		}
+
+		cmd.Env = getEnvVars()
+		cmd.Dir = Config.RootPath
+		if Config.Verbose > 0 {
+			log.Printf("-> %s", strings.Join(cmd.Args, " "))
+		}
+		if Config.Verbose > 1 {
+			log.Printf("Working directory: %v", cmd.Dir)
+			log.Printf("Environment:")
+			for _, v := range cmd.Env {
+				log.Printf("• %s", v)
+			}
+		}
+		return cmd.Run()
+	}).DependsOn(binary)
+}
+
+type envVar struct {
+	key, value string
+}
+
+func getEnvVars() []string {
+	env := map[string]envVar{}
+	for _, pair := range os.Environ() {
+		v := strings.LastIndex(pair, "=")
+		key, value := pair[:v], pair[v+1:]
+		env[strings.ToUpper(key)] = envVar{key, value}
+	}
+
+	sep := fmt.Sprintf("%c", filepath.ListSeparator)
+
+	for key, values := range EnvVars {
+		keyUpper := strings.ToUpper(key)
+		if existing, found := env[keyUpper]; found {
+			values = append(values, existing.value)
+			env[keyUpper] = envVar{existing.key, strings.Join(values, sep)}
+		} else {
+			env[keyUpper] = envVar{key, strings.Join(values, sep)}
+		}
+	}
+
+	vars := []string{}
+	for _, v := range env {
+		vars = append(vars, v.key+"="+v.value)
+	}
+	return vars
+}
