@@ -107,7 +107,7 @@ func init() {
 		GoRun(GPUPath("cc/build.go"),
 			"--runtests",
 			"--targets="+build.HostOS+",android-arm",
-		).Creates(Apps.Gapir)
+		).Creates(Apps.Gapir).DependsOn("codergen")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
 		Creator(gotest).DependsOn("codergen", Apps.Gapir)
@@ -118,6 +118,8 @@ func init() {
 		List("apps").DependsStruct(Apps)
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
+		// Utilties
+		GoRun(GPUPath("tools/clean_generated/main.go"), GPUPath("")).Creates(Virtual("clean_gpu"))
 		// The default rules
 		List(Default).DependsOn("apps", "test")
 	})
