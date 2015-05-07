@@ -6,7 +6,6 @@ package gles
 
 import (
 	"fmt"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -956,22 +955,11 @@ type ReplayCreateRenderer struct {
 }
 
 func (c *ReplayCreateRenderer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "replayCreateRenderer(",
-		fmt.Sprintf("id:%v", c.Id),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("replayCreateRenderer(id: %v)", c.Id)
 }
-func (c *ReplayCreateRenderer) API() gfxapi.API {
-	return api{}
-}
-func (c *ReplayCreateRenderer) TypeID() atom.TypeID {
-	return 0
-}
-func (c *ReplayCreateRenderer) Flags() atom.Flags {
-	return 0
-}
+func (c *ReplayCreateRenderer) API() gfxapi.API     { return api{} }
+func (c *ReplayCreateRenderer) TypeID() atom.TypeID { return 0 }
+func (c *ReplayCreateRenderer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // ReplayBindRenderer
@@ -982,22 +970,11 @@ type ReplayBindRenderer struct {
 }
 
 func (c *ReplayBindRenderer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "replayBindRenderer(",
-		fmt.Sprintf("id:%v", c.Id),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("replayBindRenderer(id: %v)", c.Id)
 }
-func (c *ReplayBindRenderer) API() gfxapi.API {
-	return api{}
-}
-func (c *ReplayBindRenderer) TypeID() atom.TypeID {
-	return 1
-}
-func (c *ReplayBindRenderer) Flags() atom.Flags {
-	return 0
-}
+func (c *ReplayBindRenderer) API() gfxapi.API     { return api{} }
+func (c *ReplayBindRenderer) TypeID() atom.TypeID { return 1 }
+func (c *ReplayBindRenderer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // BackbufferInfo
@@ -1013,32 +990,11 @@ type BackbufferInfo struct {
 }
 
 func (c *BackbufferInfo) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "backbufferInfo(",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		c.ColorFmt.String(),
-		", ",
-		c.DepthFmt.String(),
-		", ",
-		c.StencilFmt.String(),
-		", ",
-		fmt.Sprintf("resetViewportScissor:%v", c.ResetViewportScissor),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("backbufferInfo(width: %v, height: %v, color_fmt: %v, depth_fmt: %v, stencil_fmt: %v, resetViewportScissor: %v)", c.Width, c.Height, c.ColorFmt, c.DepthFmt, c.StencilFmt, c.ResetViewportScissor)
 }
-func (c *BackbufferInfo) API() gfxapi.API {
-	return api{}
-}
-func (c *BackbufferInfo) TypeID() atom.TypeID {
-	return 2
-}
-func (c *BackbufferInfo) Flags() atom.Flags {
-	return 0
-}
+func (c *BackbufferInfo) API() gfxapi.API     { return api{} }
+func (c *BackbufferInfo) TypeID() atom.TypeID { return 2 }
+func (c *BackbufferInfo) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // StartTimer
@@ -1049,22 +1005,11 @@ type StartTimer struct {
 }
 
 func (c *StartTimer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "startTimer(",
-		fmt.Sprintf("index:%v", c.Index),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("startTimer(index: %v)", c.Index)
 }
-func (c *StartTimer) API() gfxapi.API {
-	return api{}
-}
-func (c *StartTimer) TypeID() atom.TypeID {
-	return 3
-}
-func (c *StartTimer) Flags() atom.Flags {
-	return 0
-}
+func (c *StartTimer) API() gfxapi.API     { return api{} }
+func (c *StartTimer) TypeID() atom.TypeID { return 3 }
+func (c *StartTimer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // StopTimer
@@ -1076,23 +1021,11 @@ type StopTimer struct {
 }
 
 func (c *StopTimer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "stopTimer(",
-		fmt.Sprintf("index:%v", c.Index),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("stopTimer(index: %v) → %v", c.Index, c.Result)
 }
-func (c *StopTimer) API() gfxapi.API {
-	return api{}
-}
-func (c *StopTimer) TypeID() atom.TypeID {
-	return 4
-}
-func (c *StopTimer) Flags() atom.Flags {
-	return 0
-}
+func (c *StopTimer) API() gfxapi.API     { return api{} }
+func (c *StopTimer) TypeID() atom.TypeID { return 4 }
+func (c *StopTimer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // FlushPostBuffer
@@ -1102,20 +1035,11 @@ type FlushPostBuffer struct {
 }
 
 func (c *FlushPostBuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "flushPostBuffer(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("flushPostBuffer()")
 }
-func (c *FlushPostBuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *FlushPostBuffer) TypeID() atom.TypeID {
-	return 5
-}
-func (c *FlushPostBuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *FlushPostBuffer) API() gfxapi.API     { return api{} }
+func (c *FlushPostBuffer) TypeID() atom.TypeID { return 5 }
+func (c *FlushPostBuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglInitialize
@@ -1129,27 +1053,11 @@ type EglInitialize struct {
 }
 
 func (c *EglInitialize) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "eglInitialize(",
-		fmt.Sprintf("dpy:%v", c.Dpy),
-		", ",
-		fmt.Sprintf("major:%v", c.Major),
-		", ",
-		fmt.Sprintf("minor:%v", c.Minor),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("eglInitialize(dpy: %v, major: %v, minor: %v) → %v", c.Dpy, c.Major, c.Minor, c.Result)
 }
-func (c *EglInitialize) API() gfxapi.API {
-	return api{}
-}
-func (c *EglInitialize) TypeID() atom.TypeID {
-	return 6
-}
-func (c *EglInitialize) Flags() atom.Flags {
-	return 0
-}
+func (c *EglInitialize) API() gfxapi.API     { return api{} }
+func (c *EglInitialize) TypeID() atom.TypeID { return 6 }
+func (c *EglInitialize) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglCreateContext
@@ -1164,29 +1072,11 @@ type EglCreateContext struct {
 }
 
 func (c *EglCreateContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "eglCreateContext(",
-		fmt.Sprintf("display:%v", c.Display),
-		", ",
-		fmt.Sprintf("config:%v", c.Config),
-		", ",
-		fmt.Sprintf("share_context:%v", c.ShareContext),
-		", ",
-		fmt.Sprintf("%v", c.AttribList),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("eglCreateContext(display: %v, config: %v, share_context: %v, attrib_list: %v) → %v", c.Display, c.Config, c.ShareContext, c.AttribList, c.Result)
 }
-func (c *EglCreateContext) API() gfxapi.API {
-	return api{}
-}
-func (c *EglCreateContext) TypeID() atom.TypeID {
-	return 7
-}
-func (c *EglCreateContext) Flags() atom.Flags {
-	return 0
-}
+func (c *EglCreateContext) API() gfxapi.API     { return api{} }
+func (c *EglCreateContext) TypeID() atom.TypeID { return 7 }
+func (c *EglCreateContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglMakeCurrent
@@ -1201,29 +1091,11 @@ type EglMakeCurrent struct {
 }
 
 func (c *EglMakeCurrent) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "eglMakeCurrent(",
-		fmt.Sprintf("display:%v", c.Display),
-		", ",
-		fmt.Sprintf("draw:%v", c.Draw),
-		", ",
-		fmt.Sprintf("read:%v", c.Read),
-		", ",
-		fmt.Sprintf("context:%v", c.Context),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("eglMakeCurrent(display: %v, draw: %v, read: %v, context: %v) → %v", c.Display, c.Draw, c.Read, c.Context, c.Result)
 }
-func (c *EglMakeCurrent) API() gfxapi.API {
-	return api{}
-}
-func (c *EglMakeCurrent) TypeID() atom.TypeID {
-	return 8
-}
-func (c *EglMakeCurrent) Flags() atom.Flags {
-	return 0
-}
+func (c *EglMakeCurrent) API() gfxapi.API     { return api{} }
+func (c *EglMakeCurrent) TypeID() atom.TypeID { return 8 }
+func (c *EglMakeCurrent) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglSwapBuffers
@@ -1236,25 +1108,11 @@ type EglSwapBuffers struct {
 }
 
 func (c *EglSwapBuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "eglSwapBuffers(",
-		fmt.Sprintf("display:%v", c.Display),
-		", ",
-		fmt.Sprintf("0x%x", c.Surface),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("eglSwapBuffers(display: %v, surface: 0x%x) → %v", c.Display, c.Surface, c.Result)
 }
-func (c *EglSwapBuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *EglSwapBuffers) TypeID() atom.TypeID {
-	return 9
-}
-func (c *EglSwapBuffers) Flags() atom.Flags {
-	return 0 | atom.EndOfFrame
-}
+func (c *EglSwapBuffers) API() gfxapi.API     { return api{} }
+func (c *EglSwapBuffers) TypeID() atom.TypeID { return 9 }
+func (c *EglSwapBuffers) Flags() atom.Flags   { return 0 | atom.EndOfFrame }
 
 ////////////////////////////////////////////////////////////////////////////////
 // EglQuerySurface
@@ -1269,29 +1127,11 @@ type EglQuerySurface struct {
 }
 
 func (c *EglQuerySurface) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "eglQuerySurface(",
-		fmt.Sprintf("display:%v", c.Display),
-		", ",
-		fmt.Sprintf("surface:%v", c.Surface),
-		", ",
-		fmt.Sprintf("attribute:%v", c.Attribute),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("eglQuerySurface(display: %v, surface: %v, attribute: %v, value: %v) → %v", c.Display, c.Surface, c.Attribute, c.Value, c.Result)
 }
-func (c *EglQuerySurface) API() gfxapi.API {
-	return api{}
-}
-func (c *EglQuerySurface) TypeID() atom.TypeID {
-	return 10
-}
-func (c *EglQuerySurface) Flags() atom.Flags {
-	return 0
-}
+func (c *EglQuerySurface) API() gfxapi.API     { return api{} }
+func (c *EglQuerySurface) TypeID() atom.TypeID { return 10 }
+func (c *EglQuerySurface) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlXCreateContext
@@ -1306,29 +1146,11 @@ type GlXCreateContext struct {
 }
 
 func (c *GlXCreateContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glXCreateContext(",
-		fmt.Sprintf("0x%x", c.Dpy),
-		", ",
-		fmt.Sprintf("0x%x", c.Vis),
-		", ",
-		fmt.Sprintf("shareList:%v", c.ShareList),
-		", ",
-		fmt.Sprintf("direct:%v", c.Direct),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glXCreateContext(dpy: 0x%x, vis: 0x%x, shareList: %v, direct: %v) → %v", c.Dpy, c.Vis, c.ShareList, c.Direct, c.Result)
 }
-func (c *GlXCreateContext) API() gfxapi.API {
-	return api{}
-}
-func (c *GlXCreateContext) TypeID() atom.TypeID {
-	return 11
-}
-func (c *GlXCreateContext) Flags() atom.Flags {
-	return 0
-}
+func (c *GlXCreateContext) API() gfxapi.API     { return api{} }
+func (c *GlXCreateContext) TypeID() atom.TypeID { return 11 }
+func (c *GlXCreateContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlXCreateNewContext
@@ -1344,31 +1166,11 @@ type GlXCreateNewContext struct {
 }
 
 func (c *GlXCreateNewContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glXCreateNewContext(",
-		fmt.Sprintf("0x%x", c.Display),
-		", ",
-		fmt.Sprintf("0x%x", c.Fbconfig),
-		", ",
-		fmt.Sprintf("type:%v", c.Type),
-		", ",
-		fmt.Sprintf("shared:%v", c.Shared),
-		", ",
-		fmt.Sprintf("direct:%v", c.Direct),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glXCreateNewContext(display: 0x%x, fbconfig: 0x%x, type: %v, shared: %v, direct: %v) → %v", c.Display, c.Fbconfig, c.Type, c.Shared, c.Direct, c.Result)
 }
-func (c *GlXCreateNewContext) API() gfxapi.API {
-	return api{}
-}
-func (c *GlXCreateNewContext) TypeID() atom.TypeID {
-	return 12
-}
-func (c *GlXCreateNewContext) Flags() atom.Flags {
-	return 0
-}
+func (c *GlXCreateNewContext) API() gfxapi.API     { return api{} }
+func (c *GlXCreateNewContext) TypeID() atom.TypeID { return 12 }
+func (c *GlXCreateNewContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlXMakeContextCurrent
@@ -1382,28 +1184,11 @@ type GlXMakeContextCurrent struct {
 }
 
 func (c *GlXMakeContextCurrent) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glXMakeContextCurrent(",
-		fmt.Sprintf("0x%x", c.Display),
-		", ",
-		fmt.Sprintf("draw:%v", c.Draw),
-		", ",
-		fmt.Sprintf("read:%v", c.Read),
-		", ",
-		fmt.Sprintf("ctx:%v", c.Ctx),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glXMakeContextCurrent(display: 0x%x, draw: %v, read: %v, ctx: %v)", c.Display, c.Draw, c.Read, c.Ctx)
 }
-func (c *GlXMakeContextCurrent) API() gfxapi.API {
-	return api{}
-}
-func (c *GlXMakeContextCurrent) TypeID() atom.TypeID {
-	return 13
-}
-func (c *GlXMakeContextCurrent) Flags() atom.Flags {
-	return 0
-}
+func (c *GlXMakeContextCurrent) API() gfxapi.API     { return api{} }
+func (c *GlXMakeContextCurrent) TypeID() atom.TypeID { return 13 }
+func (c *GlXMakeContextCurrent) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlXSwapBuffers
@@ -1415,24 +1200,11 @@ type GlXSwapBuffers struct {
 }
 
 func (c *GlXSwapBuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glXSwapBuffers(",
-		fmt.Sprintf("0x%x", c.Display),
-		", ",
-		fmt.Sprintf("drawable:%v", c.Drawable),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glXSwapBuffers(display: 0x%x, drawable: %v)", c.Display, c.Drawable)
 }
-func (c *GlXSwapBuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlXSwapBuffers) TypeID() atom.TypeID {
-	return 14
-}
-func (c *GlXSwapBuffers) Flags() atom.Flags {
-	return 0 | atom.EndOfFrame
-}
+func (c *GlXSwapBuffers) API() gfxapi.API     { return api{} }
+func (c *GlXSwapBuffers) TypeID() atom.TypeID { return 14 }
+func (c *GlXSwapBuffers) Flags() atom.Flags   { return 0 | atom.EndOfFrame }
 
 ////////////////////////////////////////////////////////////////////////////////
 // WglCreateContext
@@ -1444,23 +1216,11 @@ type WglCreateContext struct {
 }
 
 func (c *WglCreateContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "wglCreateContext(",
-		fmt.Sprintf("hdc:%v", c.Hdc),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("wglCreateContext(hdc: %v) → %v", c.Hdc, c.Result)
 }
-func (c *WglCreateContext) API() gfxapi.API {
-	return api{}
-}
-func (c *WglCreateContext) TypeID() atom.TypeID {
-	return 15
-}
-func (c *WglCreateContext) Flags() atom.Flags {
-	return 0
-}
+func (c *WglCreateContext) API() gfxapi.API     { return api{} }
+func (c *WglCreateContext) TypeID() atom.TypeID { return 15 }
+func (c *WglCreateContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // WglCreateContextAttribsARB
@@ -1474,27 +1234,11 @@ type WglCreateContextAttribsARB struct {
 }
 
 func (c *WglCreateContextAttribsARB) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "wglCreateContextAttribsARB(",
-		fmt.Sprintf("hdc:%v", c.Hdc),
-		", ",
-		fmt.Sprintf("hShareContext:%v", c.HShareContext),
-		", ",
-		fmt.Sprintf("%v", c.AttribList),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("wglCreateContextAttribsARB(hdc: %v, hShareContext: %v, attribList: %v) → %v", c.Hdc, c.HShareContext, c.AttribList, c.Result)
 }
-func (c *WglCreateContextAttribsARB) API() gfxapi.API {
-	return api{}
-}
-func (c *WglCreateContextAttribsARB) TypeID() atom.TypeID {
-	return 16
-}
-func (c *WglCreateContextAttribsARB) Flags() atom.Flags {
-	return 0
-}
+func (c *WglCreateContextAttribsARB) API() gfxapi.API     { return api{} }
+func (c *WglCreateContextAttribsARB) TypeID() atom.TypeID { return 16 }
+func (c *WglCreateContextAttribsARB) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // WglMakeCurrent
@@ -1507,25 +1251,11 @@ type WglMakeCurrent struct {
 }
 
 func (c *WglMakeCurrent) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "wglMakeCurrent(",
-		fmt.Sprintf("hdc:%v", c.Hdc),
-		", ",
-		fmt.Sprintf("hglrc:%v", c.Hglrc),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("wglMakeCurrent(hdc: %v, hglrc: %v) → %v", c.Hdc, c.Hglrc, c.Result)
 }
-func (c *WglMakeCurrent) API() gfxapi.API {
-	return api{}
-}
-func (c *WglMakeCurrent) TypeID() atom.TypeID {
-	return 17
-}
-func (c *WglMakeCurrent) Flags() atom.Flags {
-	return 0
-}
+func (c *WglMakeCurrent) API() gfxapi.API     { return api{} }
+func (c *WglMakeCurrent) TypeID() atom.TypeID { return 17 }
+func (c *WglMakeCurrent) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // WglSwapBuffers
@@ -1536,22 +1266,11 @@ type WglSwapBuffers struct {
 }
 
 func (c *WglSwapBuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "wglSwapBuffers(",
-		fmt.Sprintf("hdc:%v", c.Hdc),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("wglSwapBuffers(hdc: %v)", c.Hdc)
 }
-func (c *WglSwapBuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *WglSwapBuffers) TypeID() atom.TypeID {
-	return 18
-}
-func (c *WglSwapBuffers) Flags() atom.Flags {
-	return 0 | atom.EndOfFrame
-}
+func (c *WglSwapBuffers) API() gfxapi.API     { return api{} }
+func (c *WglSwapBuffers) TypeID() atom.TypeID { return 18 }
+func (c *WglSwapBuffers) Flags() atom.Flags   { return 0 | atom.EndOfFrame }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CGLCreateContext
@@ -1565,27 +1284,11 @@ type CGLCreateContext struct {
 }
 
 func (c *CGLCreateContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "CGLCreateContext(",
-		fmt.Sprintf("pix:%v", c.Pix),
-		", ",
-		fmt.Sprintf("share:%v", c.Share),
-		", ",
-		fmt.Sprintf("ctx:%v", c.Ctx),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("CGLCreateContext(pix: %v, share: %v, ctx: %v) → %v", c.Pix, c.Share, c.Ctx, c.Result)
 }
-func (c *CGLCreateContext) API() gfxapi.API {
-	return api{}
-}
-func (c *CGLCreateContext) TypeID() atom.TypeID {
-	return 19
-}
-func (c *CGLCreateContext) Flags() atom.Flags {
-	return 0
-}
+func (c *CGLCreateContext) API() gfxapi.API     { return api{} }
+func (c *CGLCreateContext) TypeID() atom.TypeID { return 19 }
+func (c *CGLCreateContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CGLSetCurrentContext
@@ -1597,23 +1300,11 @@ type CGLSetCurrentContext struct {
 }
 
 func (c *CGLSetCurrentContext) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "CGLSetCurrentContext(",
-		fmt.Sprintf("ctx:%v", c.Ctx),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("CGLSetCurrentContext(ctx: %v) → %v", c.Ctx, c.Result)
 }
-func (c *CGLSetCurrentContext) API() gfxapi.API {
-	return api{}
-}
-func (c *CGLSetCurrentContext) TypeID() atom.TypeID {
-	return 20
-}
-func (c *CGLSetCurrentContext) Flags() atom.Flags {
-	return 0
-}
+func (c *CGLSetCurrentContext) API() gfxapi.API     { return api{} }
+func (c *CGLSetCurrentContext) TypeID() atom.TypeID { return 20 }
+func (c *CGLSetCurrentContext) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableClientState
@@ -1624,22 +1315,11 @@ type GlEnableClientState struct {
 }
 
 func (c *GlEnableClientState) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEnableClientState(",
-		c.Type.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEnableClientState(type: %v)", c.Type)
 }
-func (c *GlEnableClientState) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEnableClientState) TypeID() atom.TypeID {
-	return 21
-}
-func (c *GlEnableClientState) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEnableClientState) API() gfxapi.API     { return api{} }
+func (c *GlEnableClientState) TypeID() atom.TypeID { return 21 }
+func (c *GlEnableClientState) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableClientState
@@ -1650,22 +1330,11 @@ type GlDisableClientState struct {
 }
 
 func (c *GlDisableClientState) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDisableClientState(",
-		c.Type.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDisableClientState(type: %v)", c.Type)
 }
-func (c *GlDisableClientState) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDisableClientState) TypeID() atom.TypeID {
-	return 22
-}
-func (c *GlDisableClientState) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDisableClientState) API() gfxapi.API     { return api{} }
+func (c *GlDisableClientState) TypeID() atom.TypeID { return 22 }
+func (c *GlDisableClientState) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramBinaryOES
@@ -1680,30 +1349,11 @@ type GlGetProgramBinaryOES struct {
 }
 
 func (c *GlGetProgramBinaryOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetProgramBinaryOES(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("buffer_size:%v", c.BufferSize),
-		", ",
-		fmt.Sprintf("bytes_written:%v", c.BytesWritten),
-		", ",
-		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
-		", ",
-		fmt.Sprintf("0x%x", c.Binary),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetProgramBinaryOES(program: %v, buffer_size: %v, bytes_written: %v, binary_format: %v, binary: 0x%x)", c.Program, c.BufferSize, c.BytesWritten, c.BinaryFormat, c.Binary)
 }
-func (c *GlGetProgramBinaryOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID {
-	return 23
-}
-func (c *GlGetProgramBinaryOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetProgramBinaryOES) API() gfxapi.API     { return api{} }
+func (c *GlGetProgramBinaryOES) TypeID() atom.TypeID { return 23 }
+func (c *GlGetProgramBinaryOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlProgramBinaryOES
@@ -1717,28 +1367,11 @@ type GlProgramBinaryOES struct {
 }
 
 func (c *GlProgramBinaryOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glProgramBinaryOES(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
-		", ",
-		fmt.Sprintf("0x%x", c.Binary),
-		", ",
-		fmt.Sprintf("binary_size:%v", c.BinarySize),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glProgramBinaryOES(program: %v, binary_format: %v, binary: 0x%x, binary_size: %v)", c.Program, c.BinaryFormat, c.Binary, c.BinarySize)
 }
-func (c *GlProgramBinaryOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlProgramBinaryOES) TypeID() atom.TypeID {
-	return 24
-}
-func (c *GlProgramBinaryOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlProgramBinaryOES) API() gfxapi.API     { return api{} }
+func (c *GlProgramBinaryOES) TypeID() atom.TypeID { return 24 }
+func (c *GlProgramBinaryOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStartTilingQCOM
@@ -1753,30 +1386,11 @@ type GlStartTilingQCOM struct {
 }
 
 func (c *GlStartTilingQCOM) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glStartTilingQCOM(",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		c.PreserveMask.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glStartTilingQCOM(x: %v, y: %v, width: %v, height: %v, preserveMask: %v)", c.X, c.Y, c.Width, c.Height, c.PreserveMask)
 }
-func (c *GlStartTilingQCOM) API() gfxapi.API {
-	return api{}
-}
-func (c *GlStartTilingQCOM) TypeID() atom.TypeID {
-	return 25
-}
-func (c *GlStartTilingQCOM) Flags() atom.Flags {
-	return 0
-}
+func (c *GlStartTilingQCOM) API() gfxapi.API     { return api{} }
+func (c *GlStartTilingQCOM) TypeID() atom.TypeID { return 25 }
+func (c *GlStartTilingQCOM) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndTilingQCOM
@@ -1787,22 +1401,11 @@ type GlEndTilingQCOM struct {
 }
 
 func (c *GlEndTilingQCOM) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEndTilingQCOM(",
-		c.PreserveMask.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEndTilingQCOM(preserve_mask: %v)", c.PreserveMask)
 }
-func (c *GlEndTilingQCOM) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEndTilingQCOM) TypeID() atom.TypeID {
-	return 26
-}
-func (c *GlEndTilingQCOM) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEndTilingQCOM) API() gfxapi.API     { return api{} }
+func (c *GlEndTilingQCOM) TypeID() atom.TypeID { return 26 }
+func (c *GlEndTilingQCOM) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDiscardFramebufferEXT
@@ -1815,26 +1418,11 @@ type GlDiscardFramebufferEXT struct {
 }
 
 func (c *GlDiscardFramebufferEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDiscardFramebufferEXT(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("numAttachments:%v", c.NumAttachments),
-		", ",
-		fmt.Sprintf("%v", c.Attachments),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDiscardFramebufferEXT(target: %v, numAttachments: %v, attachments: %v)", c.Target, c.NumAttachments, c.Attachments)
 }
-func (c *GlDiscardFramebufferEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID {
-	return 27
-}
-func (c *GlDiscardFramebufferEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDiscardFramebufferEXT) API() gfxapi.API     { return api{} }
+func (c *GlDiscardFramebufferEXT) TypeID() atom.TypeID { return 27 }
+func (c *GlDiscardFramebufferEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInsertEventMarkerEXT
@@ -1846,24 +1434,11 @@ type GlInsertEventMarkerEXT struct {
 }
 
 func (c *GlInsertEventMarkerEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glInsertEventMarkerEXT(",
-		fmt.Sprintf("length:%v", c.Length),
-		", ",
-		fmt.Sprintf("marker:%v", c.Marker),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glInsertEventMarkerEXT(length: %v, marker: %v)", c.Length, c.Marker)
 }
-func (c *GlInsertEventMarkerEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID {
-	return 28
-}
-func (c *GlInsertEventMarkerEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlInsertEventMarkerEXT) API() gfxapi.API     { return api{} }
+func (c *GlInsertEventMarkerEXT) TypeID() atom.TypeID { return 28 }
+func (c *GlInsertEventMarkerEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPushGroupMarkerEXT
@@ -1875,24 +1450,11 @@ type GlPushGroupMarkerEXT struct {
 }
 
 func (c *GlPushGroupMarkerEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glPushGroupMarkerEXT(",
-		fmt.Sprintf("length:%v", c.Length),
-		", ",
-		fmt.Sprintf("marker:%v", c.Marker),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glPushGroupMarkerEXT(length: %v, marker: %v)", c.Length, c.Marker)
 }
-func (c *GlPushGroupMarkerEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID {
-	return 29
-}
-func (c *GlPushGroupMarkerEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlPushGroupMarkerEXT) API() gfxapi.API     { return api{} }
+func (c *GlPushGroupMarkerEXT) TypeID() atom.TypeID { return 29 }
+func (c *GlPushGroupMarkerEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPopGroupMarkerEXT
@@ -1902,20 +1464,11 @@ type GlPopGroupMarkerEXT struct {
 }
 
 func (c *GlPopGroupMarkerEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glPopGroupMarkerEXT(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glPopGroupMarkerEXT()")
 }
-func (c *GlPopGroupMarkerEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID {
-	return 30
-}
-func (c *GlPopGroupMarkerEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlPopGroupMarkerEXT) API() gfxapi.API     { return api{} }
+func (c *GlPopGroupMarkerEXT) TypeID() atom.TypeID { return 30 }
+func (c *GlPopGroupMarkerEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage1DEXT
@@ -1929,28 +1482,11 @@ type GlTexStorage1DEXT struct {
 }
 
 func (c *GlTexStorage1DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexStorage1DEXT(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexStorage1DEXT(target: %v, levels: %v, format: %v, width: %v)", c.Target, c.Levels, c.Format, c.Width)
 }
-func (c *GlTexStorage1DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexStorage1DEXT) TypeID() atom.TypeID {
-	return 31
-}
-func (c *GlTexStorage1DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexStorage1DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTexStorage1DEXT) TypeID() atom.TypeID { return 31 }
+func (c *GlTexStorage1DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage2DEXT
@@ -1965,30 +1501,11 @@ type GlTexStorage2DEXT struct {
 }
 
 func (c *GlTexStorage2DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexStorage2DEXT(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexStorage2DEXT(target: %v, levels: %v, format: %v, width: %v, height: %v)", c.Target, c.Levels, c.Format, c.Width, c.Height)
 }
-func (c *GlTexStorage2DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexStorage2DEXT) TypeID() atom.TypeID {
-	return 32
-}
-func (c *GlTexStorage2DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexStorage2DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTexStorage2DEXT) TypeID() atom.TypeID { return 32 }
+func (c *GlTexStorage2DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexStorage3DEXT
@@ -2004,32 +1521,11 @@ type GlTexStorage3DEXT struct {
 }
 
 func (c *GlTexStorage3DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexStorage3DEXT(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		fmt.Sprintf("depth:%v", c.Depth),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexStorage3DEXT(target: %v, levels: %v, format: %v, width: %v, height: %v, depth: %v)", c.Target, c.Levels, c.Format, c.Width, c.Height, c.Depth)
 }
-func (c *GlTexStorage3DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexStorage3DEXT) TypeID() atom.TypeID {
-	return 33
-}
-func (c *GlTexStorage3DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexStorage3DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTexStorage3DEXT) TypeID() atom.TypeID { return 33 }
+func (c *GlTexStorage3DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage1DEXT
@@ -2044,30 +1540,11 @@ type GlTextureStorage1DEXT struct {
 }
 
 func (c *GlTextureStorage1DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTextureStorage1DEXT(",
-		fmt.Sprintf("texture:%v", c.Texture),
-		", ",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTextureStorage1DEXT(texture: %v, target: %v, levels: %v, format: %v, width: %v)", c.Texture, c.Target, c.Levels, c.Format, c.Width)
 }
-func (c *GlTextureStorage1DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID {
-	return 34
-}
-func (c *GlTextureStorage1DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTextureStorage1DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTextureStorage1DEXT) TypeID() atom.TypeID { return 34 }
+func (c *GlTextureStorage1DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage2DEXT
@@ -2083,32 +1560,11 @@ type GlTextureStorage2DEXT struct {
 }
 
 func (c *GlTextureStorage2DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTextureStorage2DEXT(",
-		fmt.Sprintf("texture:%v", c.Texture),
-		", ",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTextureStorage2DEXT(texture: %v, target: %v, levels: %v, format: %v, width: %v, height: %v)", c.Texture, c.Target, c.Levels, c.Format, c.Width, c.Height)
 }
-func (c *GlTextureStorage2DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID {
-	return 35
-}
-func (c *GlTextureStorage2DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTextureStorage2DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTextureStorage2DEXT) TypeID() atom.TypeID { return 35 }
+func (c *GlTextureStorage2DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTextureStorage3DEXT
@@ -2125,34 +1581,11 @@ type GlTextureStorage3DEXT struct {
 }
 
 func (c *GlTextureStorage3DEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTextureStorage3DEXT(",
-		fmt.Sprintf("texture:%v", c.Texture),
-		", ",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("levels:%v", c.Levels),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		fmt.Sprintf("depth:%v", c.Depth),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTextureStorage3DEXT(texture: %v, target: %v, levels: %v, format: %v, width: %v, height: %v, depth: %v)", c.Texture, c.Target, c.Levels, c.Format, c.Width, c.Height, c.Depth)
 }
-func (c *GlTextureStorage3DEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID {
-	return 36
-}
-func (c *GlTextureStorage3DEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTextureStorage3DEXT) API() gfxapi.API     { return api{} }
+func (c *GlTextureStorage3DEXT) TypeID() atom.TypeID { return 36 }
+func (c *GlTextureStorage3DEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenVertexArraysOES
@@ -2164,24 +1597,11 @@ type GlGenVertexArraysOES struct {
 }
 
 func (c *GlGenVertexArraysOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenVertexArraysOES(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Arrays),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenVertexArraysOES(count: %v, arrays: %v)", c.Count, c.Arrays)
 }
-func (c *GlGenVertexArraysOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenVertexArraysOES) TypeID() atom.TypeID {
-	return 37
-}
-func (c *GlGenVertexArraysOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenVertexArraysOES) API() gfxapi.API     { return api{} }
+func (c *GlGenVertexArraysOES) TypeID() atom.TypeID { return 37 }
+func (c *GlGenVertexArraysOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindVertexArrayOES
@@ -2192,22 +1612,11 @@ type GlBindVertexArrayOES struct {
 }
 
 func (c *GlBindVertexArrayOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindVertexArrayOES(",
-		fmt.Sprintf("array:%v", c.Array),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindVertexArrayOES(array: %v)", c.Array)
 }
-func (c *GlBindVertexArrayOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindVertexArrayOES) TypeID() atom.TypeID {
-	return 38
-}
-func (c *GlBindVertexArrayOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindVertexArrayOES) API() gfxapi.API     { return api{} }
+func (c *GlBindVertexArrayOES) TypeID() atom.TypeID { return 38 }
+func (c *GlBindVertexArrayOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteVertexArraysOES
@@ -2219,24 +1628,11 @@ type GlDeleteVertexArraysOES struct {
 }
 
 func (c *GlDeleteVertexArraysOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteVertexArraysOES(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Arrays),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteVertexArraysOES(count: %v, arrays: %v)", c.Count, c.Arrays)
 }
-func (c *GlDeleteVertexArraysOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID {
-	return 39
-}
-func (c *GlDeleteVertexArraysOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteVertexArraysOES) API() gfxapi.API     { return api{} }
+func (c *GlDeleteVertexArraysOES) TypeID() atom.TypeID { return 39 }
+func (c *GlDeleteVertexArraysOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsVertexArrayOES
@@ -2248,23 +1644,11 @@ type GlIsVertexArrayOES struct {
 }
 
 func (c *GlIsVertexArrayOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsVertexArrayOES(",
-		fmt.Sprintf("array:%v", c.Array),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsVertexArrayOES(array: %v) → %v", c.Array, c.Result)
 }
-func (c *GlIsVertexArrayOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsVertexArrayOES) TypeID() atom.TypeID {
-	return 40
-}
-func (c *GlIsVertexArrayOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsVertexArrayOES) API() gfxapi.API     { return api{} }
+func (c *GlIsVertexArrayOES) TypeID() atom.TypeID { return 40 }
+func (c *GlIsVertexArrayOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetTexture2DOES
@@ -2276,24 +1660,11 @@ type GlEGLImageTargetTexture2DOES struct {
 }
 
 func (c *GlEGLImageTargetTexture2DOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEGLImageTargetTexture2DOES(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("image:%v", c.Image),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEGLImageTargetTexture2DOES(target: %v, image: %v)", c.Target, c.Image)
 }
-func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID {
-	return 41
-}
-func (c *GlEGLImageTargetTexture2DOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEGLImageTargetTexture2DOES) API() gfxapi.API     { return api{} }
+func (c *GlEGLImageTargetTexture2DOES) TypeID() atom.TypeID { return 41 }
+func (c *GlEGLImageTargetTexture2DOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEGLImageTargetRenderbufferStorageOES
@@ -2305,24 +1676,11 @@ type GlEGLImageTargetRenderbufferStorageOES struct {
 }
 
 func (c *GlEGLImageTargetRenderbufferStorageOES) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEGLImageTargetRenderbufferStorageOES(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("image:%v", c.Image),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEGLImageTargetRenderbufferStorageOES(target: %v, image: %v)", c.Target, c.Image)
 }
-func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID {
-	return 42
-}
-func (c *GlEGLImageTargetRenderbufferStorageOES) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEGLImageTargetRenderbufferStorageOES) API() gfxapi.API     { return api{} }
+func (c *GlEGLImageTargetRenderbufferStorageOES) TypeID() atom.TypeID { return 42 }
+func (c *GlEGLImageTargetRenderbufferStorageOES) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetGraphicsResetStatusEXT
@@ -2333,21 +1691,11 @@ type GlGetGraphicsResetStatusEXT struct {
 }
 
 func (c *GlGetGraphicsResetStatusEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetGraphicsResetStatusEXT(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetGraphicsResetStatusEXT() → %v", c.Result)
 }
-func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID {
-	return 43
-}
-func (c *GlGetGraphicsResetStatusEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetGraphicsResetStatusEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetGraphicsResetStatusEXT) TypeID() atom.TypeID { return 43 }
+func (c *GlGetGraphicsResetStatusEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindAttribLocation
@@ -2360,26 +1708,11 @@ type GlBindAttribLocation struct {
 }
 
 func (c *GlBindAttribLocation) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindAttribLocation(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("name:%v", c.Name),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindAttribLocation(program: %v, location: %v, name: %v)", c.Program, c.Location, c.Name)
 }
-func (c *GlBindAttribLocation) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindAttribLocation) TypeID() atom.TypeID {
-	return 44
-}
-func (c *GlBindAttribLocation) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindAttribLocation) API() gfxapi.API     { return api{} }
+func (c *GlBindAttribLocation) TypeID() atom.TypeID { return 44 }
+func (c *GlBindAttribLocation) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFunc
@@ -2391,24 +1724,11 @@ type GlBlendFunc struct {
 }
 
 func (c *GlBlendFunc) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlendFunc(",
-		c.SrcFactor.String(),
-		", ",
-		c.DstFactor.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlendFunc(src_factor: %v, dst_factor: %v)", c.SrcFactor, c.DstFactor)
 }
-func (c *GlBlendFunc) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlendFunc) TypeID() atom.TypeID {
-	return 45
-}
-func (c *GlBlendFunc) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlendFunc) API() gfxapi.API     { return api{} }
+func (c *GlBlendFunc) TypeID() atom.TypeID { return 45 }
+func (c *GlBlendFunc) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendFuncSeparate
@@ -2422,28 +1742,11 @@ type GlBlendFuncSeparate struct {
 }
 
 func (c *GlBlendFuncSeparate) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlendFuncSeparate(",
-		c.SrcFactorRgb.String(),
-		", ",
-		c.DstFactorRgb.String(),
-		", ",
-		c.SrcFactorAlpha.String(),
-		", ",
-		c.DstFactorAlpha.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlendFuncSeparate(src_factor_rgb: %v, dst_factor_rgb: %v, src_factor_alpha: %v, dst_factor_alpha: %v)", c.SrcFactorRgb, c.DstFactorRgb, c.SrcFactorAlpha, c.DstFactorAlpha)
 }
-func (c *GlBlendFuncSeparate) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlendFuncSeparate) TypeID() atom.TypeID {
-	return 46
-}
-func (c *GlBlendFuncSeparate) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlendFuncSeparate) API() gfxapi.API     { return api{} }
+func (c *GlBlendFuncSeparate) TypeID() atom.TypeID { return 46 }
+func (c *GlBlendFuncSeparate) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquation
@@ -2454,22 +1757,11 @@ type GlBlendEquation struct {
 }
 
 func (c *GlBlendEquation) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlendEquation(",
-		c.Equation.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlendEquation(equation: %v)", c.Equation)
 }
-func (c *GlBlendEquation) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlendEquation) TypeID() atom.TypeID {
-	return 47
-}
-func (c *GlBlendEquation) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlendEquation) API() gfxapi.API     { return api{} }
+func (c *GlBlendEquation) TypeID() atom.TypeID { return 47 }
+func (c *GlBlendEquation) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendEquationSeparate
@@ -2481,24 +1773,11 @@ type GlBlendEquationSeparate struct {
 }
 
 func (c *GlBlendEquationSeparate) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlendEquationSeparate(",
-		c.Rgb.String(),
-		", ",
-		c.Alpha.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlendEquationSeparate(rgb: %v, alpha: %v)", c.Rgb, c.Alpha)
 }
-func (c *GlBlendEquationSeparate) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlendEquationSeparate) TypeID() atom.TypeID {
-	return 48
-}
-func (c *GlBlendEquationSeparate) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlendEquationSeparate) API() gfxapi.API     { return api{} }
+func (c *GlBlendEquationSeparate) TypeID() atom.TypeID { return 48 }
+func (c *GlBlendEquationSeparate) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlendColor
@@ -2512,28 +1791,11 @@ type GlBlendColor struct {
 }
 
 func (c *GlBlendColor) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlendColor(",
-		fmt.Sprintf("red:%v", c.Red),
-		", ",
-		fmt.Sprintf("green:%v", c.Green),
-		", ",
-		fmt.Sprintf("blue:%v", c.Blue),
-		", ",
-		fmt.Sprintf("alpha:%v", c.Alpha),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlendColor(red: %v, green: %v, blue: %v, alpha: %v)", c.Red, c.Green, c.Blue, c.Alpha)
 }
-func (c *GlBlendColor) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlendColor) TypeID() atom.TypeID {
-	return 49
-}
-func (c *GlBlendColor) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlendColor) API() gfxapi.API     { return api{} }
+func (c *GlBlendColor) TypeID() atom.TypeID { return 49 }
+func (c *GlBlendColor) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnableVertexAttribArray
@@ -2544,22 +1806,11 @@ type GlEnableVertexAttribArray struct {
 }
 
 func (c *GlEnableVertexAttribArray) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEnableVertexAttribArray(",
-		fmt.Sprintf("location:%v", c.Location),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEnableVertexAttribArray(location: %v)", c.Location)
 }
-func (c *GlEnableVertexAttribArray) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID {
-	return 50
-}
-func (c *GlEnableVertexAttribArray) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEnableVertexAttribArray) API() gfxapi.API     { return api{} }
+func (c *GlEnableVertexAttribArray) TypeID() atom.TypeID { return 50 }
+func (c *GlEnableVertexAttribArray) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisableVertexAttribArray
@@ -2570,22 +1821,11 @@ type GlDisableVertexAttribArray struct {
 }
 
 func (c *GlDisableVertexAttribArray) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDisableVertexAttribArray(",
-		fmt.Sprintf("location:%v", c.Location),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDisableVertexAttribArray(location: %v)", c.Location)
 }
-func (c *GlDisableVertexAttribArray) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID {
-	return 51
-}
-func (c *GlDisableVertexAttribArray) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDisableVertexAttribArray) API() gfxapi.API     { return api{} }
+func (c *GlDisableVertexAttribArray) TypeID() atom.TypeID { return 51 }
+func (c *GlDisableVertexAttribArray) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttribPointer
@@ -2601,32 +1841,11 @@ type GlVertexAttribPointer struct {
 }
 
 func (c *GlVertexAttribPointer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttribPointer(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("size:%v", c.Size),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("normalized:%v", c.Normalized),
-		", ",
-		fmt.Sprintf("stride:%v", c.Stride),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttribPointer(location: %v, size: %v, type: %v, normalized: %v, stride: %v, data: %v)", c.Location, c.Size, c.Type, c.Normalized, c.Stride, c.Data)
 }
-func (c *GlVertexAttribPointer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttribPointer) TypeID() atom.TypeID {
-	return 52
-}
-func (c *GlVertexAttribPointer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttribPointer) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttribPointer) TypeID() atom.TypeID { return 52 }
+func (c *GlVertexAttribPointer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveAttrib
@@ -2643,34 +1862,11 @@ type GlGetActiveAttrib struct {
 }
 
 func (c *GlGetActiveAttrib) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetActiveAttrib(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("buffer_size:%v", c.BufferSize),
-		", ",
-		fmt.Sprintf("buffer_bytes_written:%v", c.BufferBytesWritten),
-		", ",
-		fmt.Sprintf("vector_count:%v", c.VectorCount),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("name:%v", c.Name),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetActiveAttrib(program: %v, location: %v, buffer_size: %v, buffer_bytes_written: %v, vector_count: %v, type: %v, name: %v)", c.Program, c.Location, c.BufferSize, c.BufferBytesWritten, c.VectorCount, c.Type, c.Name)
 }
-func (c *GlGetActiveAttrib) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetActiveAttrib) TypeID() atom.TypeID {
-	return 53
-}
-func (c *GlGetActiveAttrib) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetActiveAttrib) API() gfxapi.API     { return api{} }
+func (c *GlGetActiveAttrib) TypeID() atom.TypeID { return 53 }
+func (c *GlGetActiveAttrib) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetActiveUniform
@@ -2687,34 +1883,11 @@ type GlGetActiveUniform struct {
 }
 
 func (c *GlGetActiveUniform) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetActiveUniform(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("buffer_size:%v", c.BufferSize),
-		", ",
-		fmt.Sprintf("buffer_bytes_written:%v", c.BufferBytesWritten),
-		", ",
-		fmt.Sprintf("size:%v", c.Size),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("name:%v", c.Name),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetActiveUniform(program: %v, location: %v, buffer_size: %v, buffer_bytes_written: %v, size: %v, type: %v, name: %v)", c.Program, c.Location, c.BufferSize, c.BufferBytesWritten, c.Size, c.Type, c.Name)
 }
-func (c *GlGetActiveUniform) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetActiveUniform) TypeID() atom.TypeID {
-	return 54
-}
-func (c *GlGetActiveUniform) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetActiveUniform) API() gfxapi.API     { return api{} }
+func (c *GlGetActiveUniform) TypeID() atom.TypeID { return 54 }
+func (c *GlGetActiveUniform) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetError
@@ -2725,21 +1898,11 @@ type GlGetError struct {
 }
 
 func (c *GlGetError) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetError(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetError() → %v", c.Result)
 }
-func (c *GlGetError) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetError) TypeID() atom.TypeID {
-	return 55
-}
-func (c *GlGetError) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetError) API() gfxapi.API     { return api{} }
+func (c *GlGetError) TypeID() atom.TypeID { return 55 }
+func (c *GlGetError) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramiv
@@ -2752,26 +1915,11 @@ type GlGetProgramiv struct {
 }
 
 func (c *GlGetProgramiv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetProgramiv(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetProgramiv(program: %v, parameter: %v, value: %v)", c.Program, c.Parameter, c.Value)
 }
-func (c *GlGetProgramiv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetProgramiv) TypeID() atom.TypeID {
-	return 56
-}
-func (c *GlGetProgramiv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetProgramiv) API() gfxapi.API     { return api{} }
+func (c *GlGetProgramiv) TypeID() atom.TypeID { return 56 }
+func (c *GlGetProgramiv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderiv
@@ -2784,26 +1932,11 @@ type GlGetShaderiv struct {
 }
 
 func (c *GlGetShaderiv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetShaderiv(",
-		fmt.Sprintf("shader:%v", c.Shader),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetShaderiv(shader: %v, parameter: %v, value: %v)", c.Shader, c.Parameter, c.Value)
 }
-func (c *GlGetShaderiv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetShaderiv) TypeID() atom.TypeID {
-	return 57
-}
-func (c *GlGetShaderiv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetShaderiv) API() gfxapi.API     { return api{} }
+func (c *GlGetShaderiv) TypeID() atom.TypeID { return 57 }
+func (c *GlGetShaderiv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformLocation
@@ -2816,25 +1949,11 @@ type GlGetUniformLocation struct {
 }
 
 func (c *GlGetUniformLocation) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetUniformLocation(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("name:%v", c.Name),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetUniformLocation(program: %v, name: %v) → %v", c.Program, c.Name, c.Result)
 }
-func (c *GlGetUniformLocation) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetUniformLocation) TypeID() atom.TypeID {
-	return 58
-}
-func (c *GlGetUniformLocation) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetUniformLocation) API() gfxapi.API     { return api{} }
+func (c *GlGetUniformLocation) TypeID() atom.TypeID { return 58 }
+func (c *GlGetUniformLocation) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttribLocation
@@ -2847,25 +1966,11 @@ type GlGetAttribLocation struct {
 }
 
 func (c *GlGetAttribLocation) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetAttribLocation(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("name:%v", c.Name),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetAttribLocation(program: %v, name: %v) → %v", c.Program, c.Name, c.Result)
 }
-func (c *GlGetAttribLocation) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetAttribLocation) TypeID() atom.TypeID {
-	return 59
-}
-func (c *GlGetAttribLocation) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetAttribLocation) API() gfxapi.API     { return api{} }
+func (c *GlGetAttribLocation) TypeID() atom.TypeID { return 59 }
+func (c *GlGetAttribLocation) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPixelStorei
@@ -2877,24 +1982,11 @@ type GlPixelStorei struct {
 }
 
 func (c *GlPixelStorei) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glPixelStorei(",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glPixelStorei(parameter: %v, value: %v)", c.Parameter, c.Value)
 }
-func (c *GlPixelStorei) API() gfxapi.API {
-	return api{}
-}
-func (c *GlPixelStorei) TypeID() atom.TypeID {
-	return 60
-}
-func (c *GlPixelStorei) Flags() atom.Flags {
-	return 0
-}
+func (c *GlPixelStorei) API() gfxapi.API     { return api{} }
+func (c *GlPixelStorei) TypeID() atom.TypeID { return 60 }
+func (c *GlPixelStorei) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameteri
@@ -2907,26 +1999,11 @@ type GlTexParameteri struct {
 }
 
 func (c *GlTexParameteri) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexParameteri(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexParameteri(target: %v, parameter: %v, value: %v)", c.Target, c.Parameter, c.Value)
 }
-func (c *GlTexParameteri) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexParameteri) TypeID() atom.TypeID {
-	return 61
-}
-func (c *GlTexParameteri) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexParameteri) API() gfxapi.API     { return api{} }
+func (c *GlTexParameteri) TypeID() atom.TypeID { return 61 }
+func (c *GlTexParameteri) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexParameterf
@@ -2939,26 +2016,11 @@ type GlTexParameterf struct {
 }
 
 func (c *GlTexParameterf) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexParameterf(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexParameterf(target: %v, parameter: %v, value: %v)", c.Target, c.Parameter, c.Value)
 }
-func (c *GlTexParameterf) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexParameterf) TypeID() atom.TypeID {
-	return 62
-}
-func (c *GlTexParameterf) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexParameterf) API() gfxapi.API     { return api{} }
+func (c *GlTexParameterf) TypeID() atom.TypeID { return 62 }
+func (c *GlTexParameterf) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameteriv
@@ -2971,26 +2033,11 @@ type GlGetTexParameteriv struct {
 }
 
 func (c *GlGetTexParameteriv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetTexParameteriv(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetTexParameteriv(target: %v, parameter: %v, values: %v)", c.Target, c.Parameter, c.Values)
 }
-func (c *GlGetTexParameteriv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetTexParameteriv) TypeID() atom.TypeID {
-	return 63
-}
-func (c *GlGetTexParameteriv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetTexParameteriv) API() gfxapi.API     { return api{} }
+func (c *GlGetTexParameteriv) TypeID() atom.TypeID { return 63 }
+func (c *GlGetTexParameteriv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetTexParameterfv
@@ -3003,26 +2050,11 @@ type GlGetTexParameterfv struct {
 }
 
 func (c *GlGetTexParameterfv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetTexParameterfv(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetTexParameterfv(target: %v, parameter: %v, values: %v)", c.Target, c.Parameter, c.Values)
 }
-func (c *GlGetTexParameterfv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetTexParameterfv) TypeID() atom.TypeID {
-	return 64
-}
-func (c *GlGetTexParameterfv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetTexParameterfv) API() gfxapi.API     { return api{} }
+func (c *GlGetTexParameterfv) TypeID() atom.TypeID { return 64 }
+func (c *GlGetTexParameterfv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1i
@@ -3034,24 +2066,11 @@ type GlUniform1i struct {
 }
 
 func (c *GlUniform1i) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform1i(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform1i(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlUniform1i) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform1i) TypeID() atom.TypeID {
-	return 65
-}
-func (c *GlUniform1i) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform1i) API() gfxapi.API     { return api{} }
+func (c *GlUniform1i) TypeID() atom.TypeID { return 65 }
+func (c *GlUniform1i) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2i
@@ -3064,26 +2083,11 @@ type GlUniform2i struct {
 }
 
 func (c *GlUniform2i) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform2i(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform2i(location: %v, value0: %v, value1: %v)", c.Location, c.Value0, c.Value1)
 }
-func (c *GlUniform2i) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform2i) TypeID() atom.TypeID {
-	return 66
-}
-func (c *GlUniform2i) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform2i) API() gfxapi.API     { return api{} }
+func (c *GlUniform2i) TypeID() atom.TypeID { return 66 }
+func (c *GlUniform2i) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3i
@@ -3097,28 +2101,11 @@ type GlUniform3i struct {
 }
 
 func (c *GlUniform3i) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform3i(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform3i(location: %v, value0: %v, value1: %v, value2: %v)", c.Location, c.Value0, c.Value1, c.Value2)
 }
-func (c *GlUniform3i) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform3i) TypeID() atom.TypeID {
-	return 67
-}
-func (c *GlUniform3i) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform3i) API() gfxapi.API     { return api{} }
+func (c *GlUniform3i) TypeID() atom.TypeID { return 67 }
+func (c *GlUniform3i) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4i
@@ -3133,30 +2120,11 @@ type GlUniform4i struct {
 }
 
 func (c *GlUniform4i) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform4i(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-		", ",
-		fmt.Sprintf("value3:%v", c.Value3),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform4i(location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", c.Location, c.Value0, c.Value1, c.Value2, c.Value3)
 }
-func (c *GlUniform4i) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform4i) TypeID() atom.TypeID {
-	return 68
-}
-func (c *GlUniform4i) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform4i) API() gfxapi.API     { return api{} }
+func (c *GlUniform4i) TypeID() atom.TypeID { return 68 }
+func (c *GlUniform4i) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1iv
@@ -3169,26 +2137,11 @@ type GlUniform1iv struct {
 }
 
 func (c *GlUniform1iv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform1iv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform1iv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform1iv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform1iv) TypeID() atom.TypeID {
-	return 69
-}
-func (c *GlUniform1iv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform1iv) API() gfxapi.API     { return api{} }
+func (c *GlUniform1iv) TypeID() atom.TypeID { return 69 }
+func (c *GlUniform1iv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2iv
@@ -3201,26 +2154,11 @@ type GlUniform2iv struct {
 }
 
 func (c *GlUniform2iv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform2iv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform2iv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform2iv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform2iv) TypeID() atom.TypeID {
-	return 70
-}
-func (c *GlUniform2iv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform2iv) API() gfxapi.API     { return api{} }
+func (c *GlUniform2iv) TypeID() atom.TypeID { return 70 }
+func (c *GlUniform2iv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3iv
@@ -3233,26 +2171,11 @@ type GlUniform3iv struct {
 }
 
 func (c *GlUniform3iv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform3iv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform3iv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform3iv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform3iv) TypeID() atom.TypeID {
-	return 71
-}
-func (c *GlUniform3iv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform3iv) API() gfxapi.API     { return api{} }
+func (c *GlUniform3iv) TypeID() atom.TypeID { return 71 }
+func (c *GlUniform3iv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4iv
@@ -3265,26 +2188,11 @@ type GlUniform4iv struct {
 }
 
 func (c *GlUniform4iv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform4iv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform4iv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform4iv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform4iv) TypeID() atom.TypeID {
-	return 72
-}
-func (c *GlUniform4iv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform4iv) API() gfxapi.API     { return api{} }
+func (c *GlUniform4iv) TypeID() atom.TypeID { return 72 }
+func (c *GlUniform4iv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1f
@@ -3296,24 +2204,11 @@ type GlUniform1f struct {
 }
 
 func (c *GlUniform1f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform1f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform1f(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlUniform1f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform1f) TypeID() atom.TypeID {
-	return 73
-}
-func (c *GlUniform1f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform1f) API() gfxapi.API     { return api{} }
+func (c *GlUniform1f) TypeID() atom.TypeID { return 73 }
+func (c *GlUniform1f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2f
@@ -3326,26 +2221,11 @@ type GlUniform2f struct {
 }
 
 func (c *GlUniform2f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform2f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform2f(location: %v, value0: %v, value1: %v)", c.Location, c.Value0, c.Value1)
 }
-func (c *GlUniform2f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform2f) TypeID() atom.TypeID {
-	return 74
-}
-func (c *GlUniform2f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform2f) API() gfxapi.API     { return api{} }
+func (c *GlUniform2f) TypeID() atom.TypeID { return 74 }
+func (c *GlUniform2f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3f
@@ -3359,28 +2239,11 @@ type GlUniform3f struct {
 }
 
 func (c *GlUniform3f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform3f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform3f(location: %v, value0: %v, value1: %v, value2: %v)", c.Location, c.Value0, c.Value1, c.Value2)
 }
-func (c *GlUniform3f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform3f) TypeID() atom.TypeID {
-	return 75
-}
-func (c *GlUniform3f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform3f) API() gfxapi.API     { return api{} }
+func (c *GlUniform3f) TypeID() atom.TypeID { return 75 }
+func (c *GlUniform3f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4f
@@ -3395,30 +2258,11 @@ type GlUniform4f struct {
 }
 
 func (c *GlUniform4f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform4f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-		", ",
-		fmt.Sprintf("value3:%v", c.Value3),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform4f(location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", c.Location, c.Value0, c.Value1, c.Value2, c.Value3)
 }
-func (c *GlUniform4f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform4f) TypeID() atom.TypeID {
-	return 76
-}
-func (c *GlUniform4f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform4f) API() gfxapi.API     { return api{} }
+func (c *GlUniform4f) TypeID() atom.TypeID { return 76 }
+func (c *GlUniform4f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform1fv
@@ -3431,26 +2275,11 @@ type GlUniform1fv struct {
 }
 
 func (c *GlUniform1fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform1fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform1fv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform1fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform1fv) TypeID() atom.TypeID {
-	return 77
-}
-func (c *GlUniform1fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform1fv) API() gfxapi.API     { return api{} }
+func (c *GlUniform1fv) TypeID() atom.TypeID { return 77 }
+func (c *GlUniform1fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform2fv
@@ -3463,26 +2292,11 @@ type GlUniform2fv struct {
 }
 
 func (c *GlUniform2fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform2fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform2fv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform2fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform2fv) TypeID() atom.TypeID {
-	return 78
-}
-func (c *GlUniform2fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform2fv) API() gfxapi.API     { return api{} }
+func (c *GlUniform2fv) TypeID() atom.TypeID { return 78 }
+func (c *GlUniform2fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform3fv
@@ -3495,26 +2309,11 @@ type GlUniform3fv struct {
 }
 
 func (c *GlUniform3fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform3fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform3fv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform3fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform3fv) TypeID() atom.TypeID {
-	return 79
-}
-func (c *GlUniform3fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform3fv) API() gfxapi.API     { return api{} }
+func (c *GlUniform3fv) TypeID() atom.TypeID { return 79 }
+func (c *GlUniform3fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniform4fv
@@ -3527,26 +2326,11 @@ type GlUniform4fv struct {
 }
 
 func (c *GlUniform4fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniform4fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniform4fv(location: %v, count: %v, value: %v)", c.Location, c.Count, c.Value)
 }
-func (c *GlUniform4fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniform4fv) TypeID() atom.TypeID {
-	return 80
-}
-func (c *GlUniform4fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniform4fv) API() gfxapi.API     { return api{} }
+func (c *GlUniform4fv) TypeID() atom.TypeID { return 80 }
+func (c *GlUniform4fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix2fv
@@ -3560,28 +2344,11 @@ type GlUniformMatrix2fv struct {
 }
 
 func (c *GlUniformMatrix2fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniformMatrix2fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("transpose:%v", c.Transpose),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniformMatrix2fv(location: %v, count: %v, transpose: %v, values: %v)", c.Location, c.Count, c.Transpose, c.Values)
 }
-func (c *GlUniformMatrix2fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniformMatrix2fv) TypeID() atom.TypeID {
-	return 81
-}
-func (c *GlUniformMatrix2fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniformMatrix2fv) API() gfxapi.API     { return api{} }
+func (c *GlUniformMatrix2fv) TypeID() atom.TypeID { return 81 }
+func (c *GlUniformMatrix2fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix3fv
@@ -3595,28 +2362,11 @@ type GlUniformMatrix3fv struct {
 }
 
 func (c *GlUniformMatrix3fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniformMatrix3fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("transpose:%v", c.Transpose),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniformMatrix3fv(location: %v, count: %v, transpose: %v, values: %v)", c.Location, c.Count, c.Transpose, c.Values)
 }
-func (c *GlUniformMatrix3fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniformMatrix3fv) TypeID() atom.TypeID {
-	return 82
-}
-func (c *GlUniformMatrix3fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniformMatrix3fv) API() gfxapi.API     { return api{} }
+func (c *GlUniformMatrix3fv) TypeID() atom.TypeID { return 82 }
+func (c *GlUniformMatrix3fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUniformMatrix4fv
@@ -3630,28 +2380,11 @@ type GlUniformMatrix4fv struct {
 }
 
 func (c *GlUniformMatrix4fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUniformMatrix4fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("transpose:%v", c.Transpose),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUniformMatrix4fv(location: %v, count: %v, transpose: %v, values: %v)", c.Location, c.Count, c.Transpose, c.Values)
 }
-func (c *GlUniformMatrix4fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUniformMatrix4fv) TypeID() atom.TypeID {
-	return 83
-}
-func (c *GlUniformMatrix4fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUniformMatrix4fv) API() gfxapi.API     { return api{} }
+func (c *GlUniformMatrix4fv) TypeID() atom.TypeID { return 83 }
+func (c *GlUniformMatrix4fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformfv
@@ -3664,26 +2397,11 @@ type GlGetUniformfv struct {
 }
 
 func (c *GlGetUniformfv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetUniformfv(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetUniformfv(program: %v, location: %v, values: %v)", c.Program, c.Location, c.Values)
 }
-func (c *GlGetUniformfv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetUniformfv) TypeID() atom.TypeID {
-	return 84
-}
-func (c *GlGetUniformfv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetUniformfv) API() gfxapi.API     { return api{} }
+func (c *GlGetUniformfv) TypeID() atom.TypeID { return 84 }
+func (c *GlGetUniformfv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetUniformiv
@@ -3696,26 +2414,11 @@ type GlGetUniformiv struct {
 }
 
 func (c *GlGetUniformiv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetUniformiv(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetUniformiv(program: %v, location: %v, values: %v)", c.Program, c.Location, c.Values)
 }
-func (c *GlGetUniformiv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetUniformiv) TypeID() atom.TypeID {
-	return 85
-}
-func (c *GlGetUniformiv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetUniformiv) API() gfxapi.API     { return api{} }
+func (c *GlGetUniformiv) TypeID() atom.TypeID { return 85 }
+func (c *GlGetUniformiv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1f
@@ -3727,24 +2430,11 @@ type GlVertexAttrib1f struct {
 }
 
 func (c *GlVertexAttrib1f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib1f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib1f(location: %v, value0: %v)", c.Location, c.Value0)
 }
-func (c *GlVertexAttrib1f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib1f) TypeID() atom.TypeID {
-	return 86
-}
-func (c *GlVertexAttrib1f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib1f) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib1f) TypeID() atom.TypeID { return 86 }
+func (c *GlVertexAttrib1f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2f
@@ -3757,26 +2447,11 @@ type GlVertexAttrib2f struct {
 }
 
 func (c *GlVertexAttrib2f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib2f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib2f(location: %v, value0: %v, value1: %v)", c.Location, c.Value0, c.Value1)
 }
-func (c *GlVertexAttrib2f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib2f) TypeID() atom.TypeID {
-	return 87
-}
-func (c *GlVertexAttrib2f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib2f) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib2f) TypeID() atom.TypeID { return 87 }
+func (c *GlVertexAttrib2f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3f
@@ -3790,28 +2465,11 @@ type GlVertexAttrib3f struct {
 }
 
 func (c *GlVertexAttrib3f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib3f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib3f(location: %v, value0: %v, value1: %v, value2: %v)", c.Location, c.Value0, c.Value1, c.Value2)
 }
-func (c *GlVertexAttrib3f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib3f) TypeID() atom.TypeID {
-	return 88
-}
-func (c *GlVertexAttrib3f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib3f) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib3f) TypeID() atom.TypeID { return 88 }
+func (c *GlVertexAttrib3f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4f
@@ -3826,30 +2484,11 @@ type GlVertexAttrib4f struct {
 }
 
 func (c *GlVertexAttrib4f) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib4f(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("value0:%v", c.Value0),
-		", ",
-		fmt.Sprintf("value1:%v", c.Value1),
-		", ",
-		fmt.Sprintf("value2:%v", c.Value2),
-		", ",
-		fmt.Sprintf("value3:%v", c.Value3),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib4f(location: %v, value0: %v, value1: %v, value2: %v, value3: %v)", c.Location, c.Value0, c.Value1, c.Value2, c.Value3)
 }
-func (c *GlVertexAttrib4f) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib4f) TypeID() atom.TypeID {
-	return 89
-}
-func (c *GlVertexAttrib4f) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib4f) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib4f) TypeID() atom.TypeID { return 89 }
+func (c *GlVertexAttrib4f) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib1fv
@@ -3861,24 +2500,11 @@ type GlVertexAttrib1fv struct {
 }
 
 func (c *GlVertexAttrib1fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib1fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib1fv(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlVertexAttrib1fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib1fv) TypeID() atom.TypeID {
-	return 90
-}
-func (c *GlVertexAttrib1fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib1fv) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib1fv) TypeID() atom.TypeID { return 90 }
+func (c *GlVertexAttrib1fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib2fv
@@ -3890,24 +2516,11 @@ type GlVertexAttrib2fv struct {
 }
 
 func (c *GlVertexAttrib2fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib2fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib2fv(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlVertexAttrib2fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib2fv) TypeID() atom.TypeID {
-	return 91
-}
-func (c *GlVertexAttrib2fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib2fv) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib2fv) TypeID() atom.TypeID { return 91 }
+func (c *GlVertexAttrib2fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib3fv
@@ -3919,24 +2532,11 @@ type GlVertexAttrib3fv struct {
 }
 
 func (c *GlVertexAttrib3fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib3fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib3fv(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlVertexAttrib3fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib3fv) TypeID() atom.TypeID {
-	return 92
-}
-func (c *GlVertexAttrib3fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib3fv) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib3fv) TypeID() atom.TypeID { return 92 }
+func (c *GlVertexAttrib3fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlVertexAttrib4fv
@@ -3948,24 +2548,11 @@ type GlVertexAttrib4fv struct {
 }
 
 func (c *GlVertexAttrib4fv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glVertexAttrib4fv(",
-		fmt.Sprintf("location:%v", c.Location),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glVertexAttrib4fv(location: %v, value: %v)", c.Location, c.Value)
 }
-func (c *GlVertexAttrib4fv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlVertexAttrib4fv) TypeID() atom.TypeID {
-	return 93
-}
-func (c *GlVertexAttrib4fv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlVertexAttrib4fv) API() gfxapi.API     { return api{} }
+func (c *GlVertexAttrib4fv) TypeID() atom.TypeID { return 93 }
+func (c *GlVertexAttrib4fv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderPrecisionFormat
@@ -3979,28 +2566,11 @@ type GlGetShaderPrecisionFormat struct {
 }
 
 func (c *GlGetShaderPrecisionFormat) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetShaderPrecisionFormat(",
-		c.ShaderType.String(),
-		", ",
-		c.PrecisionType.String(),
-		", ",
-		fmt.Sprintf("%v", c.Range),
-		", ",
-		fmt.Sprintf("precision:%v", c.Precision),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetShaderPrecisionFormat(shader_type: %v, precision_type: %v, range: %v, precision: %v)", c.ShaderType, c.PrecisionType, c.Range, c.Precision)
 }
-func (c *GlGetShaderPrecisionFormat) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID {
-	return 94
-}
-func (c *GlGetShaderPrecisionFormat) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetShaderPrecisionFormat) API() gfxapi.API     { return api{} }
+func (c *GlGetShaderPrecisionFormat) TypeID() atom.TypeID { return 94 }
+func (c *GlGetShaderPrecisionFormat) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthMask
@@ -4011,22 +2581,11 @@ type GlDepthMask struct {
 }
 
 func (c *GlDepthMask) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDepthMask(",
-		fmt.Sprintf("enabled:%v", c.Enabled),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDepthMask(enabled: %v)", c.Enabled)
 }
-func (c *GlDepthMask) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDepthMask) TypeID() atom.TypeID {
-	return 95
-}
-func (c *GlDepthMask) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDepthMask) API() gfxapi.API     { return api{} }
+func (c *GlDepthMask) TypeID() atom.TypeID { return 95 }
+func (c *GlDepthMask) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthFunc
@@ -4037,22 +2596,11 @@ type GlDepthFunc struct {
 }
 
 func (c *GlDepthFunc) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDepthFunc(",
-		c.Function.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDepthFunc(function: %v)", c.Function)
 }
-func (c *GlDepthFunc) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDepthFunc) TypeID() atom.TypeID {
-	return 96
-}
-func (c *GlDepthFunc) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDepthFunc) API() gfxapi.API     { return api{} }
+func (c *GlDepthFunc) TypeID() atom.TypeID { return 96 }
+func (c *GlDepthFunc) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDepthRangef
@@ -4064,24 +2612,11 @@ type GlDepthRangef struct {
 }
 
 func (c *GlDepthRangef) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDepthRangef(",
-		fmt.Sprintf("near:%v", c.Near),
-		", ",
-		fmt.Sprintf("far:%v", c.Far),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDepthRangef(near: %v, far: %v)", c.Near, c.Far)
 }
-func (c *GlDepthRangef) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDepthRangef) TypeID() atom.TypeID {
-	return 97
-}
-func (c *GlDepthRangef) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDepthRangef) API() gfxapi.API     { return api{} }
+func (c *GlDepthRangef) TypeID() atom.TypeID { return 97 }
+func (c *GlDepthRangef) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlColorMask
@@ -4095,28 +2630,11 @@ type GlColorMask struct {
 }
 
 func (c *GlColorMask) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glColorMask(",
-		fmt.Sprintf("red:%v", c.Red),
-		", ",
-		fmt.Sprintf("green:%v", c.Green),
-		", ",
-		fmt.Sprintf("blue:%v", c.Blue),
-		", ",
-		fmt.Sprintf("alpha:%v", c.Alpha),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glColorMask(red: %v, green: %v, blue: %v, alpha: %v)", c.Red, c.Green, c.Blue, c.Alpha)
 }
-func (c *GlColorMask) API() gfxapi.API {
-	return api{}
-}
-func (c *GlColorMask) TypeID() atom.TypeID {
-	return 98
-}
-func (c *GlColorMask) Flags() atom.Flags {
-	return 0
-}
+func (c *GlColorMask) API() gfxapi.API     { return api{} }
+func (c *GlColorMask) TypeID() atom.TypeID { return 98 }
+func (c *GlColorMask) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMask
@@ -4127,22 +2645,11 @@ type GlStencilMask struct {
 }
 
 func (c *GlStencilMask) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glStencilMask(",
-		fmt.Sprintf("mask:%v", c.Mask),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glStencilMask(mask: %v)", c.Mask)
 }
-func (c *GlStencilMask) API() gfxapi.API {
-	return api{}
-}
-func (c *GlStencilMask) TypeID() atom.TypeID {
-	return 99
-}
-func (c *GlStencilMask) Flags() atom.Flags {
-	return 0
-}
+func (c *GlStencilMask) API() gfxapi.API     { return api{} }
+func (c *GlStencilMask) TypeID() atom.TypeID { return 99 }
+func (c *GlStencilMask) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilMaskSeparate
@@ -4154,24 +2661,11 @@ type GlStencilMaskSeparate struct {
 }
 
 func (c *GlStencilMaskSeparate) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glStencilMaskSeparate(",
-		c.Face.String(),
-		", ",
-		fmt.Sprintf("mask:%v", c.Mask),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glStencilMaskSeparate(face: %v, mask: %v)", c.Face, c.Mask)
 }
-func (c *GlStencilMaskSeparate) API() gfxapi.API {
-	return api{}
-}
-func (c *GlStencilMaskSeparate) TypeID() atom.TypeID {
-	return 100
-}
-func (c *GlStencilMaskSeparate) Flags() atom.Flags {
-	return 0
-}
+func (c *GlStencilMaskSeparate) API() gfxapi.API     { return api{} }
+func (c *GlStencilMaskSeparate) TypeID() atom.TypeID { return 100 }
+func (c *GlStencilMaskSeparate) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilFuncSeparate
@@ -4185,28 +2679,11 @@ type GlStencilFuncSeparate struct {
 }
 
 func (c *GlStencilFuncSeparate) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glStencilFuncSeparate(",
-		c.Face.String(),
-		", ",
-		c.Function.String(),
-		", ",
-		fmt.Sprintf("reference_value:%v", c.ReferenceValue),
-		", ",
-		fmt.Sprintf("mask:%v", c.Mask),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glStencilFuncSeparate(face: %v, function: %v, reference_value: %v, mask: %v)", c.Face, c.Function, c.ReferenceValue, c.Mask)
 }
-func (c *GlStencilFuncSeparate) API() gfxapi.API {
-	return api{}
-}
-func (c *GlStencilFuncSeparate) TypeID() atom.TypeID {
-	return 101
-}
-func (c *GlStencilFuncSeparate) Flags() atom.Flags {
-	return 0
-}
+func (c *GlStencilFuncSeparate) API() gfxapi.API     { return api{} }
+func (c *GlStencilFuncSeparate) TypeID() atom.TypeID { return 101 }
+func (c *GlStencilFuncSeparate) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlStencilOpSeparate
@@ -4220,28 +2697,11 @@ type GlStencilOpSeparate struct {
 }
 
 func (c *GlStencilOpSeparate) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glStencilOpSeparate(",
-		c.Face.String(),
-		", ",
-		c.StencilFail.String(),
-		", ",
-		c.StencilPassDepthFail.String(),
-		", ",
-		c.StencilPassDepthPass.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glStencilOpSeparate(face: %v, stencil_fail: %v, stencil_pass_depth_fail: %v, stencil_pass_depth_pass: %v)", c.Face, c.StencilFail, c.StencilPassDepthFail, c.StencilPassDepthPass)
 }
-func (c *GlStencilOpSeparate) API() gfxapi.API {
-	return api{}
-}
-func (c *GlStencilOpSeparate) TypeID() atom.TypeID {
-	return 102
-}
-func (c *GlStencilOpSeparate) Flags() atom.Flags {
-	return 0
-}
+func (c *GlStencilOpSeparate) API() gfxapi.API     { return api{} }
+func (c *GlStencilOpSeparate) TypeID() atom.TypeID { return 102 }
+func (c *GlStencilOpSeparate) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFrontFace
@@ -4252,22 +2712,11 @@ type GlFrontFace struct {
 }
 
 func (c *GlFrontFace) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glFrontFace(",
-		c.Orientation.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glFrontFace(orientation: %v)", c.Orientation)
 }
-func (c *GlFrontFace) API() gfxapi.API {
-	return api{}
-}
-func (c *GlFrontFace) TypeID() atom.TypeID {
-	return 103
-}
-func (c *GlFrontFace) Flags() atom.Flags {
-	return 0
-}
+func (c *GlFrontFace) API() gfxapi.API     { return api{} }
+func (c *GlFrontFace) TypeID() atom.TypeID { return 103 }
+func (c *GlFrontFace) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlViewport
@@ -4281,28 +2730,11 @@ type GlViewport struct {
 }
 
 func (c *GlViewport) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glViewport(",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glViewport(x: %v, y: %v, width: %v, height: %v)", c.X, c.Y, c.Width, c.Height)
 }
-func (c *GlViewport) API() gfxapi.API {
-	return api{}
-}
-func (c *GlViewport) TypeID() atom.TypeID {
-	return 104
-}
-func (c *GlViewport) Flags() atom.Flags {
-	return 0
-}
+func (c *GlViewport) API() gfxapi.API     { return api{} }
+func (c *GlViewport) TypeID() atom.TypeID { return 104 }
+func (c *GlViewport) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlScissor
@@ -4316,28 +2748,11 @@ type GlScissor struct {
 }
 
 func (c *GlScissor) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glScissor(",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glScissor(x: %v, y: %v, width: %v, height: %v)", c.X, c.Y, c.Width, c.Height)
 }
-func (c *GlScissor) API() gfxapi.API {
-	return api{}
-}
-func (c *GlScissor) TypeID() atom.TypeID {
-	return 105
-}
-func (c *GlScissor) Flags() atom.Flags {
-	return 0
-}
+func (c *GlScissor) API() gfxapi.API     { return api{} }
+func (c *GlScissor) TypeID() atom.TypeID { return 105 }
+func (c *GlScissor) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlActiveTexture
@@ -4348,22 +2763,11 @@ type GlActiveTexture struct {
 }
 
 func (c *GlActiveTexture) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glActiveTexture(",
-		c.Unit.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glActiveTexture(unit: %v)", c.Unit)
 }
-func (c *GlActiveTexture) API() gfxapi.API {
-	return api{}
-}
-func (c *GlActiveTexture) TypeID() atom.TypeID {
-	return 106
-}
-func (c *GlActiveTexture) Flags() atom.Flags {
-	return 0
-}
+func (c *GlActiveTexture) API() gfxapi.API     { return api{} }
+func (c *GlActiveTexture) TypeID() atom.TypeID { return 106 }
+func (c *GlActiveTexture) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenTextures
@@ -4375,24 +2779,11 @@ type GlGenTextures struct {
 }
 
 func (c *GlGenTextures) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenTextures(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Textures),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenTextures(count: %v, textures: %v)", c.Count, c.Textures)
 }
-func (c *GlGenTextures) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenTextures) TypeID() atom.TypeID {
-	return 107
-}
-func (c *GlGenTextures) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenTextures) API() gfxapi.API     { return api{} }
+func (c *GlGenTextures) TypeID() atom.TypeID { return 107 }
+func (c *GlGenTextures) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteTextures
@@ -4404,24 +2795,11 @@ type GlDeleteTextures struct {
 }
 
 func (c *GlDeleteTextures) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteTextures(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Textures),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteTextures(count: %v, textures: %v)", c.Count, c.Textures)
 }
-func (c *GlDeleteTextures) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteTextures) TypeID() atom.TypeID {
-	return 108
-}
-func (c *GlDeleteTextures) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteTextures) API() gfxapi.API     { return api{} }
+func (c *GlDeleteTextures) TypeID() atom.TypeID { return 108 }
+func (c *GlDeleteTextures) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsTexture
@@ -4433,23 +2811,11 @@ type GlIsTexture struct {
 }
 
 func (c *GlIsTexture) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsTexture(",
-		fmt.Sprintf("texture:%v", c.Texture),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsTexture(texture: %v) → %v", c.Texture, c.Result)
 }
-func (c *GlIsTexture) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsTexture) TypeID() atom.TypeID {
-	return 109
-}
-func (c *GlIsTexture) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsTexture) API() gfxapi.API     { return api{} }
+func (c *GlIsTexture) TypeID() atom.TypeID { return 109 }
+func (c *GlIsTexture) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindTexture
@@ -4461,24 +2827,11 @@ type GlBindTexture struct {
 }
 
 func (c *GlBindTexture) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindTexture(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("texture:%v", c.Texture),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindTexture(target: %v, texture: %v)", c.Target, c.Texture)
 }
-func (c *GlBindTexture) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindTexture) TypeID() atom.TypeID {
-	return 110
-}
-func (c *GlBindTexture) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindTexture) API() gfxapi.API     { return api{} }
+func (c *GlBindTexture) TypeID() atom.TypeID { return 110 }
+func (c *GlBindTexture) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexImage2D
@@ -4497,38 +2850,11 @@ type GlTexImage2D struct {
 }
 
 func (c *GlTexImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		c.InternalFormat.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		fmt.Sprintf("border:%v", c.Border),
-		", ",
-		c.Format.String(),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexImage2D(target: %v, level: %v, internal_format: %v, width: %v, height: %v, border: %v, format: %v, type: %v, data: %v)", c.Target, c.Level, c.InternalFormat, c.Width, c.Height, c.Border, c.Format, c.Type, c.Data)
 }
-func (c *GlTexImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexImage2D) TypeID() atom.TypeID {
-	return 111
-}
-func (c *GlTexImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexImage2D) API() gfxapi.API     { return api{} }
+func (c *GlTexImage2D) TypeID() atom.TypeID { return 111 }
+func (c *GlTexImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlTexSubImage2D
@@ -4547,38 +2873,11 @@ type GlTexSubImage2D struct {
 }
 
 func (c *GlTexSubImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glTexSubImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		fmt.Sprintf("xoffset:%v", c.Xoffset),
-		", ",
-		fmt.Sprintf("yoffset:%v", c.Yoffset),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		c.Format.String(),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glTexSubImage2D(target: %v, level: %v, xoffset: %v, yoffset: %v, width: %v, height: %v, format: %v, type: %v, data: %v)", c.Target, c.Level, c.Xoffset, c.Yoffset, c.Width, c.Height, c.Format, c.Type, c.Data)
 }
-func (c *GlTexSubImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlTexSubImage2D) TypeID() atom.TypeID {
-	return 112
-}
-func (c *GlTexSubImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlTexSubImage2D) API() gfxapi.API     { return api{} }
+func (c *GlTexSubImage2D) TypeID() atom.TypeID { return 112 }
+func (c *GlTexSubImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexImage2D
@@ -4596,36 +2895,11 @@ type GlCopyTexImage2D struct {
 }
 
 func (c *GlCopyTexImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCopyTexImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		fmt.Sprintf("border:%v", c.Border),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCopyTexImage2D(target: %v, level: %v, format: %v, x: %v, y: %v, width: %v, height: %v, border: %v)", c.Target, c.Level, c.Format, c.X, c.Y, c.Width, c.Height, c.Border)
 }
-func (c *GlCopyTexImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCopyTexImage2D) TypeID() atom.TypeID {
-	return 113
-}
-func (c *GlCopyTexImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCopyTexImage2D) API() gfxapi.API     { return api{} }
+func (c *GlCopyTexImage2D) TypeID() atom.TypeID { return 113 }
+func (c *GlCopyTexImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCopyTexSubImage2D
@@ -4643,36 +2917,11 @@ type GlCopyTexSubImage2D struct {
 }
 
 func (c *GlCopyTexSubImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCopyTexSubImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		fmt.Sprintf("xoffset:%v", c.Xoffset),
-		", ",
-		fmt.Sprintf("yoffset:%v", c.Yoffset),
-		", ",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCopyTexSubImage2D(target: %v, level: %v, xoffset: %v, yoffset: %v, x: %v, y: %v, width: %v, height: %v)", c.Target, c.Level, c.Xoffset, c.Yoffset, c.X, c.Y, c.Width, c.Height)
 }
-func (c *GlCopyTexSubImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID {
-	return 114
-}
-func (c *GlCopyTexSubImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCopyTexSubImage2D) API() gfxapi.API     { return api{} }
+func (c *GlCopyTexSubImage2D) TypeID() atom.TypeID { return 114 }
+func (c *GlCopyTexSubImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexImage2D
@@ -4690,36 +2939,11 @@ type GlCompressedTexImage2D struct {
 }
 
 func (c *GlCompressedTexImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCompressedTexImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		fmt.Sprintf("border:%v", c.Border),
-		", ",
-		fmt.Sprintf("image_size:%v", c.ImageSize),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCompressedTexImage2D(target: %v, level: %v, format: %v, width: %v, height: %v, border: %v, image_size: %v, data: %v)", c.Target, c.Level, c.Format, c.Width, c.Height, c.Border, c.ImageSize, c.Data)
 }
-func (c *GlCompressedTexImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCompressedTexImage2D) TypeID() atom.TypeID {
-	return 115
-}
-func (c *GlCompressedTexImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCompressedTexImage2D) API() gfxapi.API     { return api{} }
+func (c *GlCompressedTexImage2D) TypeID() atom.TypeID { return 115 }
+func (c *GlCompressedTexImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompressedTexSubImage2D
@@ -4738,38 +2962,11 @@ type GlCompressedTexSubImage2D struct {
 }
 
 func (c *GlCompressedTexSubImage2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCompressedTexSubImage2D(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-		", ",
-		fmt.Sprintf("xoffset:%v", c.Xoffset),
-		", ",
-		fmt.Sprintf("yoffset:%v", c.Yoffset),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("image_size:%v", c.ImageSize),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCompressedTexSubImage2D(target: %v, level: %v, xoffset: %v, yoffset: %v, width: %v, height: %v, format: %v, image_size: %v, data: %v)", c.Target, c.Level, c.Xoffset, c.Yoffset, c.Width, c.Height, c.Format, c.ImageSize, c.Data)
 }
-func (c *GlCompressedTexSubImage2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID {
-	return 116
-}
-func (c *GlCompressedTexSubImage2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCompressedTexSubImage2D) API() gfxapi.API     { return api{} }
+func (c *GlCompressedTexSubImage2D) TypeID() atom.TypeID { return 116 }
+func (c *GlCompressedTexSubImage2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenerateMipmap
@@ -4780,22 +2977,11 @@ type GlGenerateMipmap struct {
 }
 
 func (c *GlGenerateMipmap) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenerateMipmap(",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenerateMipmap(target: %v)", c.Target)
 }
-func (c *GlGenerateMipmap) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenerateMipmap) TypeID() atom.TypeID {
-	return 117
-}
-func (c *GlGenerateMipmap) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenerateMipmap) API() gfxapi.API     { return api{} }
+func (c *GlGenerateMipmap) TypeID() atom.TypeID { return 117 }
+func (c *GlGenerateMipmap) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReadPixels
@@ -4812,34 +2998,11 @@ type GlReadPixels struct {
 }
 
 func (c *GlReadPixels) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glReadPixels(",
-		fmt.Sprintf("x:%v", c.X),
-		", ",
-		fmt.Sprintf("y:%v", c.Y),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-		", ",
-		c.Format.String(),
-		", ",
-		c.Type.String(),
-		", ",
-		fmt.Sprintf("0x%x", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glReadPixels(x: %v, y: %v, width: %v, height: %v, format: %v, type: %v, data: 0x%x)", c.X, c.Y, c.Width, c.Height, c.Format, c.Type, c.Data)
 }
-func (c *GlReadPixels) API() gfxapi.API {
-	return api{}
-}
-func (c *GlReadPixels) TypeID() atom.TypeID {
-	return 118
-}
-func (c *GlReadPixels) Flags() atom.Flags {
-	return 0
-}
+func (c *GlReadPixels) API() gfxapi.API     { return api{} }
+func (c *GlReadPixels) TypeID() atom.TypeID { return 118 }
+func (c *GlReadPixels) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenFramebuffers
@@ -4851,24 +3014,11 @@ type GlGenFramebuffers struct {
 }
 
 func (c *GlGenFramebuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenFramebuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Framebuffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenFramebuffers(count: %v, framebuffers: %v)", c.Count, c.Framebuffers)
 }
-func (c *GlGenFramebuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenFramebuffers) TypeID() atom.TypeID {
-	return 119
-}
-func (c *GlGenFramebuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenFramebuffers) API() gfxapi.API     { return api{} }
+func (c *GlGenFramebuffers) TypeID() atom.TypeID { return 119 }
+func (c *GlGenFramebuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindFramebuffer
@@ -4880,24 +3030,11 @@ type GlBindFramebuffer struct {
 }
 
 func (c *GlBindFramebuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindFramebuffer(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("framebuffer:%v", c.Framebuffer),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindFramebuffer(target: %v, framebuffer: %v)", c.Target, c.Framebuffer)
 }
-func (c *GlBindFramebuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindFramebuffer) TypeID() atom.TypeID {
-	return 120
-}
-func (c *GlBindFramebuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindFramebuffer) API() gfxapi.API     { return api{} }
+func (c *GlBindFramebuffer) TypeID() atom.TypeID { return 120 }
+func (c *GlBindFramebuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCheckFramebufferStatus
@@ -4909,23 +3046,11 @@ type GlCheckFramebufferStatus struct {
 }
 
 func (c *GlCheckFramebufferStatus) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCheckFramebufferStatus(",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCheckFramebufferStatus(target: %v) → %v", c.Target, c.Result)
 }
-func (c *GlCheckFramebufferStatus) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID {
-	return 121
-}
-func (c *GlCheckFramebufferStatus) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCheckFramebufferStatus) API() gfxapi.API     { return api{} }
+func (c *GlCheckFramebufferStatus) TypeID() atom.TypeID { return 121 }
+func (c *GlCheckFramebufferStatus) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteFramebuffers
@@ -4937,24 +3062,11 @@ type GlDeleteFramebuffers struct {
 }
 
 func (c *GlDeleteFramebuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteFramebuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Framebuffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteFramebuffers(count: %v, framebuffers: %v)", c.Count, c.Framebuffers)
 }
-func (c *GlDeleteFramebuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteFramebuffers) TypeID() atom.TypeID {
-	return 122
-}
-func (c *GlDeleteFramebuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteFramebuffers) API() gfxapi.API     { return api{} }
+func (c *GlDeleteFramebuffers) TypeID() atom.TypeID { return 122 }
+func (c *GlDeleteFramebuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsFramebuffer
@@ -4966,23 +3078,11 @@ type GlIsFramebuffer struct {
 }
 
 func (c *GlIsFramebuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsFramebuffer(",
-		fmt.Sprintf("framebuffer:%v", c.Framebuffer),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsFramebuffer(framebuffer: %v) → %v", c.Framebuffer, c.Result)
 }
-func (c *GlIsFramebuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsFramebuffer) TypeID() atom.TypeID {
-	return 123
-}
-func (c *GlIsFramebuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsFramebuffer) API() gfxapi.API     { return api{} }
+func (c *GlIsFramebuffer) TypeID() atom.TypeID { return 123 }
+func (c *GlIsFramebuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenRenderbuffers
@@ -4994,24 +3094,11 @@ type GlGenRenderbuffers struct {
 }
 
 func (c *GlGenRenderbuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenRenderbuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Renderbuffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenRenderbuffers(count: %v, renderbuffers: %v)", c.Count, c.Renderbuffers)
 }
-func (c *GlGenRenderbuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenRenderbuffers) TypeID() atom.TypeID {
-	return 124
-}
-func (c *GlGenRenderbuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenRenderbuffers) API() gfxapi.API     { return api{} }
+func (c *GlGenRenderbuffers) TypeID() atom.TypeID { return 124 }
+func (c *GlGenRenderbuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindRenderbuffer
@@ -5023,24 +3110,11 @@ type GlBindRenderbuffer struct {
 }
 
 func (c *GlBindRenderbuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindRenderbuffer(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindRenderbuffer(target: %v, renderbuffer: %v)", c.Target, c.Renderbuffer)
 }
-func (c *GlBindRenderbuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindRenderbuffer) TypeID() atom.TypeID {
-	return 125
-}
-func (c *GlBindRenderbuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindRenderbuffer) API() gfxapi.API     { return api{} }
+func (c *GlBindRenderbuffer) TypeID() atom.TypeID { return 125 }
+func (c *GlBindRenderbuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorage
@@ -5054,28 +3128,11 @@ type GlRenderbufferStorage struct {
 }
 
 func (c *GlRenderbufferStorage) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glRenderbufferStorage(",
-		c.Target.String(),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glRenderbufferStorage(target: %v, format: %v, width: %v, height: %v)", c.Target, c.Format, c.Width, c.Height)
 }
-func (c *GlRenderbufferStorage) API() gfxapi.API {
-	return api{}
-}
-func (c *GlRenderbufferStorage) TypeID() atom.TypeID {
-	return 126
-}
-func (c *GlRenderbufferStorage) Flags() atom.Flags {
-	return 0
-}
+func (c *GlRenderbufferStorage) API() gfxapi.API     { return api{} }
+func (c *GlRenderbufferStorage) TypeID() atom.TypeID { return 126 }
+func (c *GlRenderbufferStorage) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteRenderbuffers
@@ -5087,24 +3144,11 @@ type GlDeleteRenderbuffers struct {
 }
 
 func (c *GlDeleteRenderbuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteRenderbuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Renderbuffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteRenderbuffers(count: %v, renderbuffers: %v)", c.Count, c.Renderbuffers)
 }
-func (c *GlDeleteRenderbuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID {
-	return 127
-}
-func (c *GlDeleteRenderbuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteRenderbuffers) API() gfxapi.API     { return api{} }
+func (c *GlDeleteRenderbuffers) TypeID() atom.TypeID { return 127 }
+func (c *GlDeleteRenderbuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsRenderbuffer
@@ -5116,23 +3160,11 @@ type GlIsRenderbuffer struct {
 }
 
 func (c *GlIsRenderbuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsRenderbuffer(",
-		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsRenderbuffer(renderbuffer: %v) → %v", c.Renderbuffer, c.Result)
 }
-func (c *GlIsRenderbuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsRenderbuffer) TypeID() atom.TypeID {
-	return 128
-}
-func (c *GlIsRenderbuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsRenderbuffer) API() gfxapi.API     { return api{} }
+func (c *GlIsRenderbuffer) TypeID() atom.TypeID { return 128 }
+func (c *GlIsRenderbuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetRenderbufferParameteriv
@@ -5145,26 +3177,11 @@ type GlGetRenderbufferParameteriv struct {
 }
 
 func (c *GlGetRenderbufferParameteriv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetRenderbufferParameteriv(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetRenderbufferParameteriv(target: %v, parameter: %v, values: %v)", c.Target, c.Parameter, c.Values)
 }
-func (c *GlGetRenderbufferParameteriv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID {
-	return 129
-}
-func (c *GlGetRenderbufferParameteriv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetRenderbufferParameteriv) API() gfxapi.API     { return api{} }
+func (c *GlGetRenderbufferParameteriv) TypeID() atom.TypeID { return 129 }
+func (c *GlGetRenderbufferParameteriv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenBuffers
@@ -5176,24 +3193,11 @@ type GlGenBuffers struct {
 }
 
 func (c *GlGenBuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenBuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Buffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenBuffers(count: %v, buffers: %v)", c.Count, c.Buffers)
 }
-func (c *GlGenBuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenBuffers) TypeID() atom.TypeID {
-	return 130
-}
-func (c *GlGenBuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenBuffers) API() gfxapi.API     { return api{} }
+func (c *GlGenBuffers) TypeID() atom.TypeID { return 130 }
+func (c *GlGenBuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBindBuffer
@@ -5205,24 +3209,11 @@ type GlBindBuffer struct {
 }
 
 func (c *GlBindBuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBindBuffer(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("buffer:%v", c.Buffer),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBindBuffer(target: %v, buffer: %v)", c.Target, c.Buffer)
 }
-func (c *GlBindBuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBindBuffer) TypeID() atom.TypeID {
-	return 131
-}
-func (c *GlBindBuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBindBuffer) API() gfxapi.API     { return api{} }
+func (c *GlBindBuffer) TypeID() atom.TypeID { return 131 }
+func (c *GlBindBuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferData
@@ -5236,28 +3227,11 @@ type GlBufferData struct {
 }
 
 func (c *GlBufferData) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBufferData(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("size:%v", c.Size),
-		", ",
-		fmt.Sprintf("data:%v", c.Data),
-		", ",
-		c.Usage.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBufferData(target: %v, size: %v, data: %v, usage: %v)", c.Target, c.Size, c.Data, c.Usage)
 }
-func (c *GlBufferData) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBufferData) TypeID() atom.TypeID {
-	return 132
-}
-func (c *GlBufferData) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBufferData) API() gfxapi.API     { return api{} }
+func (c *GlBufferData) TypeID() atom.TypeID { return 132 }
+func (c *GlBufferData) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBufferSubData
@@ -5271,28 +3245,11 @@ type GlBufferSubData struct {
 }
 
 func (c *GlBufferSubData) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBufferSubData(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("offset:%v", c.Offset),
-		", ",
-		fmt.Sprintf("size:%v", c.Size),
-		", ",
-		fmt.Sprintf("0x%x", c.Data),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBufferSubData(target: %v, offset: %v, size: %v, data: 0x%x)", c.Target, c.Offset, c.Size, c.Data)
 }
-func (c *GlBufferSubData) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBufferSubData) TypeID() atom.TypeID {
-	return 133
-}
-func (c *GlBufferSubData) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBufferSubData) API() gfxapi.API     { return api{} }
+func (c *GlBufferSubData) TypeID() atom.TypeID { return 133 }
+func (c *GlBufferSubData) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteBuffers
@@ -5304,24 +3261,11 @@ type GlDeleteBuffers struct {
 }
 
 func (c *GlDeleteBuffers) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteBuffers(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Buffers),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteBuffers(count: %v, buffers: %v)", c.Count, c.Buffers)
 }
-func (c *GlDeleteBuffers) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteBuffers) TypeID() atom.TypeID {
-	return 134
-}
-func (c *GlDeleteBuffers) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteBuffers) API() gfxapi.API     { return api{} }
+func (c *GlDeleteBuffers) TypeID() atom.TypeID { return 134 }
+func (c *GlDeleteBuffers) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsBuffer
@@ -5333,23 +3277,11 @@ type GlIsBuffer struct {
 }
 
 func (c *GlIsBuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsBuffer(",
-		fmt.Sprintf("buffer:%v", c.Buffer),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsBuffer(buffer: %v) → %v", c.Buffer, c.Result)
 }
-func (c *GlIsBuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsBuffer) TypeID() atom.TypeID {
-	return 135
-}
-func (c *GlIsBuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsBuffer) API() gfxapi.API     { return api{} }
+func (c *GlIsBuffer) TypeID() atom.TypeID { return 135 }
+func (c *GlIsBuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBufferParameteriv
@@ -5362,26 +3294,11 @@ type GlGetBufferParameteriv struct {
 }
 
 func (c *GlGetBufferParameteriv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetBufferParameteriv(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetBufferParameteriv(target: %v, parameter: %v, value: %v)", c.Target, c.Parameter, c.Value)
 }
-func (c *GlGetBufferParameteriv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetBufferParameteriv) TypeID() atom.TypeID {
-	return 136
-}
-func (c *GlGetBufferParameteriv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetBufferParameteriv) API() gfxapi.API     { return api{} }
+func (c *GlGetBufferParameteriv) TypeID() atom.TypeID { return 136 }
+func (c *GlGetBufferParameteriv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateShader
@@ -5393,23 +3310,11 @@ type GlCreateShader struct {
 }
 
 func (c *GlCreateShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCreateShader(",
-		c.Type.String(),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCreateShader(type: %v) → %v", c.Type, c.Result)
 }
-func (c *GlCreateShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCreateShader) TypeID() atom.TypeID {
-	return 137
-}
-func (c *GlCreateShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCreateShader) API() gfxapi.API     { return api{} }
+func (c *GlCreateShader) TypeID() atom.TypeID { return 137 }
+func (c *GlCreateShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteShader
@@ -5420,22 +3325,11 @@ type GlDeleteShader struct {
 }
 
 func (c *GlDeleteShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteShader(",
-		fmt.Sprintf("shader:%v", c.Shader),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteShader(shader: %v)", c.Shader)
 }
-func (c *GlDeleteShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteShader) TypeID() atom.TypeID {
-	return 138
-}
-func (c *GlDeleteShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteShader) API() gfxapi.API     { return api{} }
+func (c *GlDeleteShader) TypeID() atom.TypeID { return 138 }
+func (c *GlDeleteShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderSource
@@ -5449,28 +3343,11 @@ type GlShaderSource struct {
 }
 
 func (c *GlShaderSource) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glShaderSource(",
-		fmt.Sprintf("shader:%v", c.Shader),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Source),
-		", ",
-		fmt.Sprintf("%v", c.Length),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glShaderSource(shader: %v, count: %v, source: %v, length: %v)", c.Shader, c.Count, c.Source, c.Length)
 }
-func (c *GlShaderSource) API() gfxapi.API {
-	return api{}
-}
-func (c *GlShaderSource) TypeID() atom.TypeID {
-	return 139
-}
-func (c *GlShaderSource) Flags() atom.Flags {
-	return 0
-}
+func (c *GlShaderSource) API() gfxapi.API     { return api{} }
+func (c *GlShaderSource) TypeID() atom.TypeID { return 139 }
+func (c *GlShaderSource) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlShaderBinary
@@ -5485,30 +3362,11 @@ type GlShaderBinary struct {
 }
 
 func (c *GlShaderBinary) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glShaderBinary(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Shaders),
-		", ",
-		fmt.Sprintf("binary_format:%v", c.BinaryFormat),
-		", ",
-		fmt.Sprintf("0x%x", c.Binary),
-		", ",
-		fmt.Sprintf("binary_size:%v", c.BinarySize),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glShaderBinary(count: %v, shaders: %v, binary_format: %v, binary: 0x%x, binary_size: %v)", c.Count, c.Shaders, c.BinaryFormat, c.Binary, c.BinarySize)
 }
-func (c *GlShaderBinary) API() gfxapi.API {
-	return api{}
-}
-func (c *GlShaderBinary) TypeID() atom.TypeID {
-	return 140
-}
-func (c *GlShaderBinary) Flags() atom.Flags {
-	return 0
-}
+func (c *GlShaderBinary) API() gfxapi.API     { return api{} }
+func (c *GlShaderBinary) TypeID() atom.TypeID { return 140 }
+func (c *GlShaderBinary) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderInfoLog
@@ -5522,28 +3380,11 @@ type GlGetShaderInfoLog struct {
 }
 
 func (c *GlGetShaderInfoLog) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetShaderInfoLog(",
-		fmt.Sprintf("shader:%v", c.Shader),
-		", ",
-		fmt.Sprintf("buffer_length:%v", c.BufferLength),
-		", ",
-		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
-		", ",
-		fmt.Sprintf("info:%v", c.Info),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetShaderInfoLog(shader: %v, buffer_length: %v, string_length_written: %v, info: %v)", c.Shader, c.BufferLength, c.StringLengthWritten, c.Info)
 }
-func (c *GlGetShaderInfoLog) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetShaderInfoLog) TypeID() atom.TypeID {
-	return 141
-}
-func (c *GlGetShaderInfoLog) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetShaderInfoLog) API() gfxapi.API     { return api{} }
+func (c *GlGetShaderInfoLog) TypeID() atom.TypeID { return 141 }
+func (c *GlGetShaderInfoLog) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetShaderSource
@@ -5557,28 +3398,11 @@ type GlGetShaderSource struct {
 }
 
 func (c *GlGetShaderSource) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetShaderSource(",
-		fmt.Sprintf("shader:%v", c.Shader),
-		", ",
-		fmt.Sprintf("buffer_length:%v", c.BufferLength),
-		", ",
-		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
-		", ",
-		fmt.Sprintf("source:%v", c.Source),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetShaderSource(shader: %v, buffer_length: %v, string_length_written: %v, source: %v)", c.Shader, c.BufferLength, c.StringLengthWritten, c.Source)
 }
-func (c *GlGetShaderSource) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetShaderSource) TypeID() atom.TypeID {
-	return 142
-}
-func (c *GlGetShaderSource) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetShaderSource) API() gfxapi.API     { return api{} }
+func (c *GlGetShaderSource) TypeID() atom.TypeID { return 142 }
+func (c *GlGetShaderSource) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlReleaseShaderCompiler
@@ -5588,20 +3412,11 @@ type GlReleaseShaderCompiler struct {
 }
 
 func (c *GlReleaseShaderCompiler) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glReleaseShaderCompiler(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glReleaseShaderCompiler()")
 }
-func (c *GlReleaseShaderCompiler) API() gfxapi.API {
-	return api{}
-}
-func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID {
-	return 143
-}
-func (c *GlReleaseShaderCompiler) Flags() atom.Flags {
-	return 0
-}
+func (c *GlReleaseShaderCompiler) API() gfxapi.API     { return api{} }
+func (c *GlReleaseShaderCompiler) TypeID() atom.TypeID { return 143 }
+func (c *GlReleaseShaderCompiler) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCompileShader
@@ -5612,22 +3427,11 @@ type GlCompileShader struct {
 }
 
 func (c *GlCompileShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCompileShader(",
-		fmt.Sprintf("shader:%v", c.Shader),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCompileShader(shader: %v)", c.Shader)
 }
-func (c *GlCompileShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCompileShader) TypeID() atom.TypeID {
-	return 144
-}
-func (c *GlCompileShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCompileShader) API() gfxapi.API     { return api{} }
+func (c *GlCompileShader) TypeID() atom.TypeID { return 144 }
+func (c *GlCompileShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsShader
@@ -5639,23 +3443,11 @@ type GlIsShader struct {
 }
 
 func (c *GlIsShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsShader(",
-		fmt.Sprintf("shader:%v", c.Shader),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsShader(shader: %v) → %v", c.Shader, c.Result)
 }
-func (c *GlIsShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsShader) TypeID() atom.TypeID {
-	return 145
-}
-func (c *GlIsShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsShader) API() gfxapi.API     { return api{} }
+func (c *GlIsShader) TypeID() atom.TypeID { return 145 }
+func (c *GlIsShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCreateProgram
@@ -5666,21 +3458,11 @@ type GlCreateProgram struct {
 }
 
 func (c *GlCreateProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCreateProgram(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCreateProgram() → %v", c.Result)
 }
-func (c *GlCreateProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCreateProgram) TypeID() atom.TypeID {
-	return 146
-}
-func (c *GlCreateProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCreateProgram) API() gfxapi.API     { return api{} }
+func (c *GlCreateProgram) TypeID() atom.TypeID { return 146 }
+func (c *GlCreateProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteProgram
@@ -5691,22 +3473,11 @@ type GlDeleteProgram struct {
 }
 
 func (c *GlDeleteProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteProgram(",
-		fmt.Sprintf("program:%v", c.Program),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteProgram(program: %v)", c.Program)
 }
-func (c *GlDeleteProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteProgram) TypeID() atom.TypeID {
-	return 147
-}
-func (c *GlDeleteProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteProgram) API() gfxapi.API     { return api{} }
+func (c *GlDeleteProgram) TypeID() atom.TypeID { return 147 }
+func (c *GlDeleteProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlAttachShader
@@ -5718,24 +3489,11 @@ type GlAttachShader struct {
 }
 
 func (c *GlAttachShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glAttachShader(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("shader:%v", c.Shader),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glAttachShader(program: %v, shader: %v)", c.Program, c.Shader)
 }
-func (c *GlAttachShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlAttachShader) TypeID() atom.TypeID {
-	return 148
-}
-func (c *GlAttachShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlAttachShader) API() gfxapi.API     { return api{} }
+func (c *GlAttachShader) TypeID() atom.TypeID { return 148 }
+func (c *GlAttachShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDetachShader
@@ -5747,24 +3505,11 @@ type GlDetachShader struct {
 }
 
 func (c *GlDetachShader) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDetachShader(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("shader:%v", c.Shader),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDetachShader(program: %v, shader: %v)", c.Program, c.Shader)
 }
-func (c *GlDetachShader) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDetachShader) TypeID() atom.TypeID {
-	return 149
-}
-func (c *GlDetachShader) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDetachShader) API() gfxapi.API     { return api{} }
+func (c *GlDetachShader) TypeID() atom.TypeID { return 149 }
+func (c *GlDetachShader) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetAttachedShaders
@@ -5778,28 +3523,11 @@ type GlGetAttachedShaders struct {
 }
 
 func (c *GlGetAttachedShaders) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetAttachedShaders(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("buffer_length:%v", c.BufferLength),
-		", ",
-		fmt.Sprintf("shaders_length_written:%v", c.ShadersLengthWritten),
-		", ",
-		fmt.Sprintf("%v", c.Shaders),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetAttachedShaders(program: %v, buffer_length: %v, shaders_length_written: %v, shaders: %v)", c.Program, c.BufferLength, c.ShadersLengthWritten, c.Shaders)
 }
-func (c *GlGetAttachedShaders) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetAttachedShaders) TypeID() atom.TypeID {
-	return 150
-}
-func (c *GlGetAttachedShaders) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetAttachedShaders) API() gfxapi.API     { return api{} }
+func (c *GlGetAttachedShaders) TypeID() atom.TypeID { return 150 }
+func (c *GlGetAttachedShaders) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLinkProgram
@@ -5810,22 +3538,11 @@ type GlLinkProgram struct {
 }
 
 func (c *GlLinkProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glLinkProgram(",
-		fmt.Sprintf("program:%v", c.Program),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glLinkProgram(program: %v)", c.Program)
 }
-func (c *GlLinkProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlLinkProgram) TypeID() atom.TypeID {
-	return 151
-}
-func (c *GlLinkProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlLinkProgram) API() gfxapi.API     { return api{} }
+func (c *GlLinkProgram) TypeID() atom.TypeID { return 151 }
+func (c *GlLinkProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetProgramInfoLog
@@ -5839,28 +3556,11 @@ type GlGetProgramInfoLog struct {
 }
 
 func (c *GlGetProgramInfoLog) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetProgramInfoLog(",
-		fmt.Sprintf("program:%v", c.Program),
-		", ",
-		fmt.Sprintf("buffer_length:%v", c.BufferLength),
-		", ",
-		fmt.Sprintf("string_length_written:%v", c.StringLengthWritten),
-		", ",
-		fmt.Sprintf("info:%v", c.Info),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetProgramInfoLog(program: %v, buffer_length: %v, string_length_written: %v, info: %v)", c.Program, c.BufferLength, c.StringLengthWritten, c.Info)
 }
-func (c *GlGetProgramInfoLog) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetProgramInfoLog) TypeID() atom.TypeID {
-	return 152
-}
-func (c *GlGetProgramInfoLog) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetProgramInfoLog) API() gfxapi.API     { return api{} }
+func (c *GlGetProgramInfoLog) TypeID() atom.TypeID { return 152 }
+func (c *GlGetProgramInfoLog) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUseProgram
@@ -5871,22 +3571,11 @@ type GlUseProgram struct {
 }
 
 func (c *GlUseProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUseProgram(",
-		fmt.Sprintf("program:%v", c.Program),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUseProgram(program: %v)", c.Program)
 }
-func (c *GlUseProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUseProgram) TypeID() atom.TypeID {
-	return 153
-}
-func (c *GlUseProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUseProgram) API() gfxapi.API     { return api{} }
+func (c *GlUseProgram) TypeID() atom.TypeID { return 153 }
+func (c *GlUseProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsProgram
@@ -5898,23 +3587,11 @@ type GlIsProgram struct {
 }
 
 func (c *GlIsProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsProgram(",
-		fmt.Sprintf("program:%v", c.Program),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsProgram(program: %v) → %v", c.Program, c.Result)
 }
-func (c *GlIsProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsProgram) TypeID() atom.TypeID {
-	return 154
-}
-func (c *GlIsProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsProgram) API() gfxapi.API     { return api{} }
+func (c *GlIsProgram) TypeID() atom.TypeID { return 154 }
+func (c *GlIsProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlValidateProgram
@@ -5925,22 +3602,11 @@ type GlValidateProgram struct {
 }
 
 func (c *GlValidateProgram) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glValidateProgram(",
-		fmt.Sprintf("program:%v", c.Program),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glValidateProgram(program: %v)", c.Program)
 }
-func (c *GlValidateProgram) API() gfxapi.API {
-	return api{}
-}
-func (c *GlValidateProgram) TypeID() atom.TypeID {
-	return 155
-}
-func (c *GlValidateProgram) Flags() atom.Flags {
-	return 0
-}
+func (c *GlValidateProgram) API() gfxapi.API     { return api{} }
+func (c *GlValidateProgram) TypeID() atom.TypeID { return 155 }
+func (c *GlValidateProgram) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearColor
@@ -5954,28 +3620,11 @@ type GlClearColor struct {
 }
 
 func (c *GlClearColor) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glClearColor(",
-		fmt.Sprintf("r:%v", c.R),
-		", ",
-		fmt.Sprintf("g:%v", c.G),
-		", ",
-		fmt.Sprintf("b:%v", c.B),
-		", ",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glClearColor(r: %v, g: %v, b: %v, a: %v)", c.R, c.G, c.B, c.A)
 }
-func (c *GlClearColor) API() gfxapi.API {
-	return api{}
-}
-func (c *GlClearColor) TypeID() atom.TypeID {
-	return 156
-}
-func (c *GlClearColor) Flags() atom.Flags {
-	return 0
-}
+func (c *GlClearColor) API() gfxapi.API     { return api{} }
+func (c *GlClearColor) TypeID() atom.TypeID { return 156 }
+func (c *GlClearColor) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearDepthf
@@ -5986,22 +3635,11 @@ type GlClearDepthf struct {
 }
 
 func (c *GlClearDepthf) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glClearDepthf(",
-		fmt.Sprintf("depth:%v", c.Depth),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glClearDepthf(depth: %v)", c.Depth)
 }
-func (c *GlClearDepthf) API() gfxapi.API {
-	return api{}
-}
-func (c *GlClearDepthf) TypeID() atom.TypeID {
-	return 157
-}
-func (c *GlClearDepthf) Flags() atom.Flags {
-	return 0
-}
+func (c *GlClearDepthf) API() gfxapi.API     { return api{} }
+func (c *GlClearDepthf) TypeID() atom.TypeID { return 157 }
+func (c *GlClearDepthf) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClearStencil
@@ -6012,22 +3650,11 @@ type GlClearStencil struct {
 }
 
 func (c *GlClearStencil) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glClearStencil(",
-		fmt.Sprintf("stencil:%v", c.Stencil),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glClearStencil(stencil: %v)", c.Stencil)
 }
-func (c *GlClearStencil) API() gfxapi.API {
-	return api{}
-}
-func (c *GlClearStencil) TypeID() atom.TypeID {
-	return 158
-}
-func (c *GlClearStencil) Flags() atom.Flags {
-	return 0
-}
+func (c *GlClearStencil) API() gfxapi.API     { return api{} }
+func (c *GlClearStencil) TypeID() atom.TypeID { return 158 }
+func (c *GlClearStencil) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlClear
@@ -6038,22 +3665,11 @@ type GlClear struct {
 }
 
 func (c *GlClear) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glClear(",
-		c.Mask.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glClear(mask: %v)", c.Mask)
 }
-func (c *GlClear) API() gfxapi.API {
-	return api{}
-}
-func (c *GlClear) TypeID() atom.TypeID {
-	return 159
-}
-func (c *GlClear) Flags() atom.Flags {
-	return 0
-}
+func (c *GlClear) API() gfxapi.API     { return api{} }
+func (c *GlClear) TypeID() atom.TypeID { return 159 }
+func (c *GlClear) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlCullFace
@@ -6064,22 +3680,11 @@ type GlCullFace struct {
 }
 
 func (c *GlCullFace) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glCullFace(",
-		c.Mode.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glCullFace(mode: %v)", c.Mode)
 }
-func (c *GlCullFace) API() gfxapi.API {
-	return api{}
-}
-func (c *GlCullFace) TypeID() atom.TypeID {
-	return 160
-}
-func (c *GlCullFace) Flags() atom.Flags {
-	return 0
-}
+func (c *GlCullFace) API() gfxapi.API     { return api{} }
+func (c *GlCullFace) TypeID() atom.TypeID { return 160 }
+func (c *GlCullFace) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlPolygonOffset
@@ -6091,24 +3696,11 @@ type GlPolygonOffset struct {
 }
 
 func (c *GlPolygonOffset) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glPolygonOffset(",
-		fmt.Sprintf("scale_factor:%v", c.ScaleFactor),
-		", ",
-		fmt.Sprintf("units:%v", c.Units),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glPolygonOffset(scale_factor: %v, units: %v)", c.ScaleFactor, c.Units)
 }
-func (c *GlPolygonOffset) API() gfxapi.API {
-	return api{}
-}
-func (c *GlPolygonOffset) TypeID() atom.TypeID {
-	return 161
-}
-func (c *GlPolygonOffset) Flags() atom.Flags {
-	return 0
-}
+func (c *GlPolygonOffset) API() gfxapi.API     { return api{} }
+func (c *GlPolygonOffset) TypeID() atom.TypeID { return 161 }
+func (c *GlPolygonOffset) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlLineWidth
@@ -6119,22 +3711,11 @@ type GlLineWidth struct {
 }
 
 func (c *GlLineWidth) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glLineWidth(",
-		fmt.Sprintf("width:%v", c.Width),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glLineWidth(width: %v)", c.Width)
 }
-func (c *GlLineWidth) API() gfxapi.API {
-	return api{}
-}
-func (c *GlLineWidth) TypeID() atom.TypeID {
-	return 162
-}
-func (c *GlLineWidth) Flags() atom.Flags {
-	return 0
-}
+func (c *GlLineWidth) API() gfxapi.API     { return api{} }
+func (c *GlLineWidth) TypeID() atom.TypeID { return 162 }
+func (c *GlLineWidth) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlSampleCoverage
@@ -6146,24 +3727,11 @@ type GlSampleCoverage struct {
 }
 
 func (c *GlSampleCoverage) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glSampleCoverage(",
-		fmt.Sprintf("value:%v", c.Value),
-		", ",
-		fmt.Sprintf("invert:%v", c.Invert),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glSampleCoverage(value: %v, invert: %v)", c.Value, c.Invert)
 }
-func (c *GlSampleCoverage) API() gfxapi.API {
-	return api{}
-}
-func (c *GlSampleCoverage) TypeID() atom.TypeID {
-	return 163
-}
-func (c *GlSampleCoverage) Flags() atom.Flags {
-	return 0
-}
+func (c *GlSampleCoverage) API() gfxapi.API     { return api{} }
+func (c *GlSampleCoverage) TypeID() atom.TypeID { return 163 }
+func (c *GlSampleCoverage) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlHint
@@ -6175,24 +3743,11 @@ type GlHint struct {
 }
 
 func (c *GlHint) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glHint(",
-		c.Target.String(),
-		", ",
-		c.Mode.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glHint(target: %v, mode: %v)", c.Target, c.Mode)
 }
-func (c *GlHint) API() gfxapi.API {
-	return api{}
-}
-func (c *GlHint) TypeID() atom.TypeID {
-	return 164
-}
-func (c *GlHint) Flags() atom.Flags {
-	return 0
-}
+func (c *GlHint) API() gfxapi.API     { return api{} }
+func (c *GlHint) TypeID() atom.TypeID { return 164 }
+func (c *GlHint) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferRenderbuffer
@@ -6206,28 +3761,11 @@ type GlFramebufferRenderbuffer struct {
 }
 
 func (c *GlFramebufferRenderbuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glFramebufferRenderbuffer(",
-		c.FramebufferTarget.String(),
-		", ",
-		c.FramebufferAttachment.String(),
-		", ",
-		c.RenderbufferTarget.String(),
-		", ",
-		fmt.Sprintf("renderbuffer:%v", c.Renderbuffer),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glFramebufferRenderbuffer(framebuffer_target: %v, framebuffer_attachment: %v, renderbuffer_target: %v, renderbuffer: %v)", c.FramebufferTarget, c.FramebufferAttachment, c.RenderbufferTarget, c.Renderbuffer)
 }
-func (c *GlFramebufferRenderbuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID {
-	return 165
-}
-func (c *GlFramebufferRenderbuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlFramebufferRenderbuffer) API() gfxapi.API     { return api{} }
+func (c *GlFramebufferRenderbuffer) TypeID() atom.TypeID { return 165 }
+func (c *GlFramebufferRenderbuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFramebufferTexture2D
@@ -6242,30 +3780,11 @@ type GlFramebufferTexture2D struct {
 }
 
 func (c *GlFramebufferTexture2D) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glFramebufferTexture2D(",
-		c.FramebufferTarget.String(),
-		", ",
-		c.FramebufferAttachment.String(),
-		", ",
-		c.TextureTarget.String(),
-		", ",
-		fmt.Sprintf("texture:%v", c.Texture),
-		", ",
-		fmt.Sprintf("level:%v", c.Level),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glFramebufferTexture2D(framebuffer_target: %v, framebuffer_attachment: %v, texture_target: %v, texture: %v, level: %v)", c.FramebufferTarget, c.FramebufferAttachment, c.TextureTarget, c.Texture, c.Level)
 }
-func (c *GlFramebufferTexture2D) API() gfxapi.API {
-	return api{}
-}
-func (c *GlFramebufferTexture2D) TypeID() atom.TypeID {
-	return 166
-}
-func (c *GlFramebufferTexture2D) Flags() atom.Flags {
-	return 0
-}
+func (c *GlFramebufferTexture2D) API() gfxapi.API     { return api{} }
+func (c *GlFramebufferTexture2D) TypeID() atom.TypeID { return 166 }
+func (c *GlFramebufferTexture2D) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFramebufferAttachmentParameteriv
@@ -6279,28 +3798,11 @@ type GlGetFramebufferAttachmentParameteriv struct {
 }
 
 func (c *GlGetFramebufferAttachmentParameteriv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetFramebufferAttachmentParameteriv(",
-		c.FramebufferTarget.String(),
-		", ",
-		c.Attachment.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetFramebufferAttachmentParameteriv(framebuffer_target: %v, attachment: %v, parameter: %v, value: %v)", c.FramebufferTarget, c.Attachment, c.Parameter, c.Value)
 }
-func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID {
-	return 167
-}
-func (c *GlGetFramebufferAttachmentParameteriv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetFramebufferAttachmentParameteriv) API() gfxapi.API     { return api{} }
+func (c *GlGetFramebufferAttachmentParameteriv) TypeID() atom.TypeID { return 167 }
+func (c *GlGetFramebufferAttachmentParameteriv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawElements
@@ -6314,28 +3816,11 @@ type GlDrawElements struct {
 }
 
 func (c *GlDrawElements) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDrawElements(",
-		c.DrawMode.String(),
-		", ",
-		fmt.Sprintf("element_count:%v", c.ElementCount),
-		", ",
-		c.IndicesType.String(),
-		", ",
-		fmt.Sprintf("indices:%v", c.Indices),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDrawElements(draw_mode: %v, element_count: %v, indices_type: %v, indices: %v)", c.DrawMode, c.ElementCount, c.IndicesType, c.Indices)
 }
-func (c *GlDrawElements) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDrawElements) TypeID() atom.TypeID {
-	return 168
-}
-func (c *GlDrawElements) Flags() atom.Flags {
-	return 0 | atom.DrawCall
-}
+func (c *GlDrawElements) API() gfxapi.API     { return api{} }
+func (c *GlDrawElements) TypeID() atom.TypeID { return 168 }
+func (c *GlDrawElements) Flags() atom.Flags   { return 0 | atom.DrawCall }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDrawArrays
@@ -6348,26 +3833,11 @@ type GlDrawArrays struct {
 }
 
 func (c *GlDrawArrays) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDrawArrays(",
-		c.DrawMode.String(),
-		", ",
-		fmt.Sprintf("first_index:%v", c.FirstIndex),
-		", ",
-		fmt.Sprintf("index_count:%v", c.IndexCount),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDrawArrays(draw_mode: %v, first_index: %v, index_count: %v)", c.DrawMode, c.FirstIndex, c.IndexCount)
 }
-func (c *GlDrawArrays) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDrawArrays) TypeID() atom.TypeID {
-	return 169
-}
-func (c *GlDrawArrays) Flags() atom.Flags {
-	return 0 | atom.DrawCall
-}
+func (c *GlDrawArrays) API() gfxapi.API     { return api{} }
+func (c *GlDrawArrays) TypeID() atom.TypeID { return 169 }
+func (c *GlDrawArrays) Flags() atom.Flags   { return 0 | atom.DrawCall }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFlush
@@ -6377,20 +3847,11 @@ type GlFlush struct {
 }
 
 func (c *GlFlush) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glFlush(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glFlush()")
 }
-func (c *GlFlush) API() gfxapi.API {
-	return api{}
-}
-func (c *GlFlush) TypeID() atom.TypeID {
-	return 170
-}
-func (c *GlFlush) Flags() atom.Flags {
-	return 0
-}
+func (c *GlFlush) API() gfxapi.API     { return api{} }
+func (c *GlFlush) TypeID() atom.TypeID { return 170 }
+func (c *GlFlush) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlFinish
@@ -6400,20 +3861,11 @@ type GlFinish struct {
 }
 
 func (c *GlFinish) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glFinish(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glFinish()")
 }
-func (c *GlFinish) API() gfxapi.API {
-	return api{}
-}
-func (c *GlFinish) TypeID() atom.TypeID {
-	return 171
-}
-func (c *GlFinish) Flags() atom.Flags {
-	return 0
-}
+func (c *GlFinish) API() gfxapi.API     { return api{} }
+func (c *GlFinish) TypeID() atom.TypeID { return 171 }
+func (c *GlFinish) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetBooleanv
@@ -6425,24 +3877,11 @@ type GlGetBooleanv struct {
 }
 
 func (c *GlGetBooleanv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetBooleanv(",
-		c.Param.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetBooleanv(param: %v, values: %v)", c.Param, c.Values)
 }
-func (c *GlGetBooleanv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetBooleanv) TypeID() atom.TypeID {
-	return 172
-}
-func (c *GlGetBooleanv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetBooleanv) API() gfxapi.API     { return api{} }
+func (c *GlGetBooleanv) TypeID() atom.TypeID { return 172 }
+func (c *GlGetBooleanv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetFloatv
@@ -6454,24 +3893,11 @@ type GlGetFloatv struct {
 }
 
 func (c *GlGetFloatv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetFloatv(",
-		c.Param.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetFloatv(param: %v, values: %v)", c.Param, c.Values)
 }
-func (c *GlGetFloatv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetFloatv) TypeID() atom.TypeID {
-	return 173
-}
-func (c *GlGetFloatv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetFloatv) API() gfxapi.API     { return api{} }
+func (c *GlGetFloatv) TypeID() atom.TypeID { return 173 }
+func (c *GlGetFloatv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetIntegerv
@@ -6483,24 +3909,11 @@ type GlGetIntegerv struct {
 }
 
 func (c *GlGetIntegerv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetIntegerv(",
-		c.Param.String(),
-		", ",
-		fmt.Sprintf("%v", c.Values),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetIntegerv(param: %v, values: %v)", c.Param, c.Values)
 }
-func (c *GlGetIntegerv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetIntegerv) TypeID() atom.TypeID {
-	return 174
-}
-func (c *GlGetIntegerv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetIntegerv) API() gfxapi.API     { return api{} }
+func (c *GlGetIntegerv) TypeID() atom.TypeID { return 174 }
+func (c *GlGetIntegerv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetString
@@ -6512,23 +3925,11 @@ type GlGetString struct {
 }
 
 func (c *GlGetString) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetString(",
-		c.Param.String(),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetString(param: %v) → %v", c.Param, c.Result)
 }
-func (c *GlGetString) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetString) TypeID() atom.TypeID {
-	return 175
-}
-func (c *GlGetString) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetString) API() gfxapi.API     { return api{} }
+func (c *GlGetString) TypeID() atom.TypeID { return 175 }
+func (c *GlGetString) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEnable
@@ -6539,22 +3940,11 @@ type GlEnable struct {
 }
 
 func (c *GlEnable) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEnable(",
-		c.Capability.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEnable(capability: %v)", c.Capability)
 }
-func (c *GlEnable) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEnable) TypeID() atom.TypeID {
-	return 176
-}
-func (c *GlEnable) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEnable) API() gfxapi.API     { return api{} }
+func (c *GlEnable) TypeID() atom.TypeID { return 176 }
+func (c *GlEnable) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDisable
@@ -6565,22 +3955,11 @@ type GlDisable struct {
 }
 
 func (c *GlDisable) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDisable(",
-		c.Capability.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDisable(capability: %v)", c.Capability)
 }
-func (c *GlDisable) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDisable) TypeID() atom.TypeID {
-	return 177
-}
-func (c *GlDisable) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDisable) API() gfxapi.API     { return api{} }
+func (c *GlDisable) TypeID() atom.TypeID { return 177 }
+func (c *GlDisable) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsEnabled
@@ -6592,23 +3971,11 @@ type GlIsEnabled struct {
 }
 
 func (c *GlIsEnabled) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsEnabled(",
-		c.Capability.String(),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsEnabled(capability: %v) → %v", c.Capability, c.Result)
 }
-func (c *GlIsEnabled) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsEnabled) TypeID() atom.TypeID {
-	return 178
-}
-func (c *GlIsEnabled) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsEnabled) API() gfxapi.API     { return api{} }
+func (c *GlIsEnabled) TypeID() atom.TypeID { return 178 }
+func (c *GlIsEnabled) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlMapBufferRange
@@ -6623,29 +3990,11 @@ type GlMapBufferRange struct {
 }
 
 func (c *GlMapBufferRange) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glMapBufferRange(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("offset:%v", c.Offset),
-		", ",
-		fmt.Sprintf("length:%v", c.Length),
-		", ",
-		c.Access.String(),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glMapBufferRange(target: %v, offset: %v, length: %v, access: %v) → %v", c.Target, c.Offset, c.Length, c.Access, c.Result)
 }
-func (c *GlMapBufferRange) API() gfxapi.API {
-	return api{}
-}
-func (c *GlMapBufferRange) TypeID() atom.TypeID {
-	return 179
-}
-func (c *GlMapBufferRange) Flags() atom.Flags {
-	return 0
-}
+func (c *GlMapBufferRange) API() gfxapi.API     { return api{} }
+func (c *GlMapBufferRange) TypeID() atom.TypeID { return 179 }
+func (c *GlMapBufferRange) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlUnmapBuffer
@@ -6656,22 +4005,11 @@ type GlUnmapBuffer struct {
 }
 
 func (c *GlUnmapBuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glUnmapBuffer(",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glUnmapBuffer(target: %v)", c.Target)
 }
-func (c *GlUnmapBuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlUnmapBuffer) TypeID() atom.TypeID {
-	return 180
-}
-func (c *GlUnmapBuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlUnmapBuffer) API() gfxapi.API     { return api{} }
+func (c *GlUnmapBuffer) TypeID() atom.TypeID { return 180 }
+func (c *GlUnmapBuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlInvalidateFramebuffer
@@ -6684,26 +4022,11 @@ type GlInvalidateFramebuffer struct {
 }
 
 func (c *GlInvalidateFramebuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glInvalidateFramebuffer(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Attachments),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glInvalidateFramebuffer(target: %v, count: %v, attachments: %v)", c.Target, c.Count, c.Attachments)
 }
-func (c *GlInvalidateFramebuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID {
-	return 181
-}
-func (c *GlInvalidateFramebuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlInvalidateFramebuffer) API() gfxapi.API     { return api{} }
+func (c *GlInvalidateFramebuffer) TypeID() atom.TypeID { return 181 }
+func (c *GlInvalidateFramebuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlRenderbufferStorageMultisample
@@ -6718,30 +4041,11 @@ type GlRenderbufferStorageMultisample struct {
 }
 
 func (c *GlRenderbufferStorageMultisample) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glRenderbufferStorageMultisample(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("samples:%v", c.Samples),
-		", ",
-		c.Format.String(),
-		", ",
-		fmt.Sprintf("width:%v", c.Width),
-		", ",
-		fmt.Sprintf("height:%v", c.Height),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glRenderbufferStorageMultisample(target: %v, samples: %v, format: %v, width: %v, height: %v)", c.Target, c.Samples, c.Format, c.Width, c.Height)
 }
-func (c *GlRenderbufferStorageMultisample) API() gfxapi.API {
-	return api{}
-}
-func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID {
-	return 182
-}
-func (c *GlRenderbufferStorageMultisample) Flags() atom.Flags {
-	return 0
-}
+func (c *GlRenderbufferStorageMultisample) API() gfxapi.API     { return api{} }
+func (c *GlRenderbufferStorageMultisample) TypeID() atom.TypeID { return 182 }
+func (c *GlRenderbufferStorageMultisample) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBlitFramebuffer
@@ -6761,40 +4065,11 @@ type GlBlitFramebuffer struct {
 }
 
 func (c *GlBlitFramebuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBlitFramebuffer(",
-		fmt.Sprintf("srcX0:%v", c.SrcX0),
-		", ",
-		fmt.Sprintf("srcY0:%v", c.SrcY0),
-		", ",
-		fmt.Sprintf("srcX1:%v", c.SrcX1),
-		", ",
-		fmt.Sprintf("srcY1:%v", c.SrcY1),
-		", ",
-		fmt.Sprintf("dstX0:%v", c.DstX0),
-		", ",
-		fmt.Sprintf("dstY0:%v", c.DstY0),
-		", ",
-		fmt.Sprintf("dstX1:%v", c.DstX1),
-		", ",
-		fmt.Sprintf("dstY1:%v", c.DstY1),
-		", ",
-		c.Mask.String(),
-		", ",
-		c.Filter.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBlitFramebuffer(srcX0: %v, srcY0: %v, srcX1: %v, srcY1: %v, dstX0: %v, dstY0: %v, dstX1: %v, dstY1: %v, mask: %v, filter: %v)", c.SrcX0, c.SrcY0, c.SrcX1, c.SrcY1, c.DstX0, c.DstY0, c.DstX1, c.DstY1, c.Mask, c.Filter)
 }
-func (c *GlBlitFramebuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBlitFramebuffer) TypeID() atom.TypeID {
-	return 183
-}
-func (c *GlBlitFramebuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBlitFramebuffer) API() gfxapi.API     { return api{} }
+func (c *GlBlitFramebuffer) TypeID() atom.TypeID { return 183 }
+func (c *GlBlitFramebuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueries
@@ -6806,24 +4081,11 @@ type GlGenQueries struct {
 }
 
 func (c *GlGenQueries) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenQueries(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Queries),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenQueries(count: %v, queries: %v)", c.Count, c.Queries)
 }
-func (c *GlGenQueries) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenQueries) TypeID() atom.TypeID {
-	return 184
-}
-func (c *GlGenQueries) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenQueries) API() gfxapi.API     { return api{} }
+func (c *GlGenQueries) TypeID() atom.TypeID { return 184 }
+func (c *GlGenQueries) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQuery
@@ -6835,24 +4097,11 @@ type GlBeginQuery struct {
 }
 
 func (c *GlBeginQuery) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBeginQuery(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("query:%v", c.Query),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBeginQuery(target: %v, query: %v)", c.Target, c.Query)
 }
-func (c *GlBeginQuery) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBeginQuery) TypeID() atom.TypeID {
-	return 185
-}
-func (c *GlBeginQuery) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBeginQuery) API() gfxapi.API     { return api{} }
+func (c *GlBeginQuery) TypeID() atom.TypeID { return 185 }
+func (c *GlBeginQuery) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQuery
@@ -6863,22 +4112,11 @@ type GlEndQuery struct {
 }
 
 func (c *GlEndQuery) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEndQuery(",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEndQuery(target: %v)", c.Target)
 }
-func (c *GlEndQuery) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEndQuery) TypeID() atom.TypeID {
-	return 186
-}
-func (c *GlEndQuery) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEndQuery) API() gfxapi.API     { return api{} }
+func (c *GlEndQuery) TypeID() atom.TypeID { return 186 }
+func (c *GlEndQuery) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueries
@@ -6890,24 +4128,11 @@ type GlDeleteQueries struct {
 }
 
 func (c *GlDeleteQueries) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteQueries(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Queries),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteQueries(count: %v, queries: %v)", c.Count, c.Queries)
 }
-func (c *GlDeleteQueries) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteQueries) TypeID() atom.TypeID {
-	return 187
-}
-func (c *GlDeleteQueries) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteQueries) API() gfxapi.API     { return api{} }
+func (c *GlDeleteQueries) TypeID() atom.TypeID { return 187 }
+func (c *GlDeleteQueries) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQuery
@@ -6919,23 +4144,11 @@ type GlIsQuery struct {
 }
 
 func (c *GlIsQuery) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsQuery(",
-		fmt.Sprintf("query:%v", c.Query),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsQuery(query: %v) → %v", c.Query, c.Result)
 }
-func (c *GlIsQuery) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsQuery) TypeID() atom.TypeID {
-	return 188
-}
-func (c *GlIsQuery) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsQuery) API() gfxapi.API     { return api{} }
+func (c *GlIsQuery) TypeID() atom.TypeID { return 188 }
+func (c *GlIsQuery) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryiv
@@ -6948,26 +4161,11 @@ type GlGetQueryiv struct {
 }
 
 func (c *GlGetQueryiv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryiv(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryiv(target: %v, parameter: %v, value: %v)", c.Target, c.Parameter, c.Value)
 }
-func (c *GlGetQueryiv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryiv) TypeID() atom.TypeID {
-	return 189
-}
-func (c *GlGetQueryiv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryiv) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryiv) TypeID() atom.TypeID { return 189 }
+func (c *GlGetQueryiv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuiv
@@ -6980,26 +4178,11 @@ type GlGetQueryObjectuiv struct {
 }
 
 func (c *GlGetQueryObjectuiv) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryObjectuiv(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryObjectuiv(query: %v, parameter: %v, value: %v)", c.Query, c.Parameter, c.Value)
 }
-func (c *GlGetQueryObjectuiv) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID {
-	return 190
-}
-func (c *GlGetQueryObjectuiv) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryObjectuiv) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryObjectuiv) TypeID() atom.TypeID { return 190 }
+func (c *GlGetQueryObjectuiv) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGenQueriesEXT
@@ -7011,24 +4194,11 @@ type GlGenQueriesEXT struct {
 }
 
 func (c *GlGenQueriesEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGenQueriesEXT(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Queries),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGenQueriesEXT(count: %v, queries: %v)", c.Count, c.Queries)
 }
-func (c *GlGenQueriesEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGenQueriesEXT) TypeID() atom.TypeID {
-	return 191
-}
-func (c *GlGenQueriesEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGenQueriesEXT) API() gfxapi.API     { return api{} }
+func (c *GlGenQueriesEXT) TypeID() atom.TypeID { return 191 }
+func (c *GlGenQueriesEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlBeginQueryEXT
@@ -7040,24 +4210,11 @@ type GlBeginQueryEXT struct {
 }
 
 func (c *GlBeginQueryEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glBeginQueryEXT(",
-		c.Target.String(),
-		", ",
-		fmt.Sprintf("query:%v", c.Query),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glBeginQueryEXT(target: %v, query: %v)", c.Target, c.Query)
 }
-func (c *GlBeginQueryEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlBeginQueryEXT) TypeID() atom.TypeID {
-	return 192
-}
-func (c *GlBeginQueryEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlBeginQueryEXT) API() gfxapi.API     { return api{} }
+func (c *GlBeginQueryEXT) TypeID() atom.TypeID { return 192 }
+func (c *GlBeginQueryEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlEndQueryEXT
@@ -7068,22 +4225,11 @@ type GlEndQueryEXT struct {
 }
 
 func (c *GlEndQueryEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glEndQueryEXT(",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glEndQueryEXT(target: %v)", c.Target)
 }
-func (c *GlEndQueryEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlEndQueryEXT) TypeID() atom.TypeID {
-	return 193
-}
-func (c *GlEndQueryEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlEndQueryEXT) API() gfxapi.API     { return api{} }
+func (c *GlEndQueryEXT) TypeID() atom.TypeID { return 193 }
+func (c *GlEndQueryEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlDeleteQueriesEXT
@@ -7095,24 +4241,11 @@ type GlDeleteQueriesEXT struct {
 }
 
 func (c *GlDeleteQueriesEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glDeleteQueriesEXT(",
-		fmt.Sprintf("count:%v", c.Count),
-		", ",
-		fmt.Sprintf("%v", c.Queries),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glDeleteQueriesEXT(count: %v, queries: %v)", c.Count, c.Queries)
 }
-func (c *GlDeleteQueriesEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID {
-	return 194
-}
-func (c *GlDeleteQueriesEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlDeleteQueriesEXT) API() gfxapi.API     { return api{} }
+func (c *GlDeleteQueriesEXT) TypeID() atom.TypeID { return 194 }
+func (c *GlDeleteQueriesEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlIsQueryEXT
@@ -7124,23 +4257,11 @@ type GlIsQueryEXT struct {
 }
 
 func (c *GlIsQueryEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glIsQueryEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-	)
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glIsQueryEXT(query: %v) → %v", c.Query, c.Result)
 }
-func (c *GlIsQueryEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlIsQueryEXT) TypeID() atom.TypeID {
-	return 195
-}
-func (c *GlIsQueryEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlIsQueryEXT) API() gfxapi.API     { return api{} }
+func (c *GlIsQueryEXT) TypeID() atom.TypeID { return 195 }
+func (c *GlIsQueryEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlQueryCounterEXT
@@ -7152,24 +4273,11 @@ type GlQueryCounterEXT struct {
 }
 
 func (c *GlQueryCounterEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glQueryCounterEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Target.String(),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glQueryCounterEXT(query: %v, target: %v)", c.Query, c.Target)
 }
-func (c *GlQueryCounterEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlQueryCounterEXT) TypeID() atom.TypeID {
-	return 196
-}
-func (c *GlQueryCounterEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlQueryCounterEXT) API() gfxapi.API     { return api{} }
+func (c *GlQueryCounterEXT) TypeID() atom.TypeID { return 196 }
+func (c *GlQueryCounterEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryivEXT
@@ -7182,26 +4290,11 @@ type GlGetQueryivEXT struct {
 }
 
 func (c *GlGetQueryivEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryivEXT(",
-		c.Target.String(),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryivEXT(target: %v, parameter: %v, value: %v)", c.Target, c.Parameter, c.Value)
 }
-func (c *GlGetQueryivEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryivEXT) TypeID() atom.TypeID {
-	return 197
-}
-func (c *GlGetQueryivEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryivEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryivEXT) TypeID() atom.TypeID { return 197 }
+func (c *GlGetQueryivEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectivEXT
@@ -7214,26 +4307,11 @@ type GlGetQueryObjectivEXT struct {
 }
 
 func (c *GlGetQueryObjectivEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryObjectivEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryObjectivEXT(query: %v, parameter: %v, value: %v)", c.Query, c.Parameter, c.Value)
 }
-func (c *GlGetQueryObjectivEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID {
-	return 198
-}
-func (c *GlGetQueryObjectivEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryObjectivEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryObjectivEXT) TypeID() atom.TypeID { return 198 }
+func (c *GlGetQueryObjectivEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectuivEXT
@@ -7246,26 +4324,11 @@ type GlGetQueryObjectuivEXT struct {
 }
 
 func (c *GlGetQueryObjectuivEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryObjectuivEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryObjectuivEXT(query: %v, parameter: %v, value: %v)", c.Query, c.Parameter, c.Value)
 }
-func (c *GlGetQueryObjectuivEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID {
-	return 199
-}
-func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryObjectuivEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryObjectuivEXT) TypeID() atom.TypeID { return 199 }
+func (c *GlGetQueryObjectuivEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjecti64vEXT
@@ -7278,26 +4341,11 @@ type GlGetQueryObjecti64vEXT struct {
 }
 
 func (c *GlGetQueryObjecti64vEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryObjecti64vEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryObjecti64vEXT(query: %v, parameter: %v, value: %v)", c.Query, c.Parameter, c.Value)
 }
-func (c *GlGetQueryObjecti64vEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID {
-	return 200
-}
-func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryObjecti64vEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryObjecti64vEXT) TypeID() atom.TypeID { return 200 }
+func (c *GlGetQueryObjecti64vEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // GlGetQueryObjectui64vEXT
@@ -7310,26 +4358,11 @@ type GlGetQueryObjectui64vEXT struct {
 }
 
 func (c *GlGetQueryObjectui64vEXT) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "glGetQueryObjectui64vEXT(",
-		fmt.Sprintf("query:%v", c.Query),
-		", ",
-		c.Parameter.String(),
-		", ",
-		fmt.Sprintf("value:%v", c.Value),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("glGetQueryObjectui64vEXT(query: %v, parameter: %v, value: %v)", c.Query, c.Parameter, c.Value)
 }
-func (c *GlGetQueryObjectui64vEXT) API() gfxapi.API {
-	return api{}
-}
-func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID {
-	return 201
-}
-func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags {
-	return 0
-}
+func (c *GlGetQueryObjectui64vEXT) API() gfxapi.API     { return api{} }
+func (c *GlGetQueryObjectui64vEXT) TypeID() atom.TypeID { return 201 }
+func (c *GlGetQueryObjectui64vEXT) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // class Color

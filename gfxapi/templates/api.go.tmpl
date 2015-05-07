@@ -189,6 +189,7 @@ limitations under the License.
 {{define "CommandEntry"}}
   {{AssertType $.Command "Function"}}
   {{$name := Macro "Go.CmdName" $.Command}}
+  {{$ret  := not (IsVoid $.Command.Return.Type)}}
   {{template "Go.CommentHeader" $name}}
 
   type {{$name}} struct {
@@ -199,39 +200,25 @@ limitations under the License.
   }
 
   func (c *{{$name}}) String() string {
-    parts := make([]string, 0, 32)
-    parts = append(parts, "{{Macro "CmdName" $.Command}}(",
-    {{range $i, $p := $.Command.CallParameters}}
-      {{$type := TypeOf $p}}
-      {{$field := Macro "Go.Parameter" $p}}
-      {{if $i}}", ",{{end}}
-      {{if      IsArray       $type}}fmt.Sprintf("%v", c.{{$field}}),
-      {{else if IsPointer     $type}}fmt.Sprintf("0x%x", c.{{$field}}),
-      {{else if IsEnum        $type}}c.{{$field}}.String(),
-      {{else                       }}fmt.Sprintf("{{$p.Name}}:%v", c.{{$field}}),
+    return fmt.Sprintf("{{Macro "CmdName" $.Command}}(§
+      {{range $i, $p := $.Command.CallParameters}}
+        {{if $i}}, §{{end}}
+        {{$p.Name}}: {{if IsPointer (TypeOf $p)}}0x%x{{else}}%v{{end}}§
       {{end}}
-    {{end}}
+      ){{if $ret}} → %v{{end}}",§
+      {{range $i, $p := $.Command.CallParameters}}
+        c.{{Macro "Go.Parameter" $p}}, §
+      {{end}}
+      {{if $ret}}c.Result§{{end}}
     )
-    parts = append(parts, ")")
-    {{if not (IsVoid $.Command.Return.Type)}}
-      parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-    {{end}}
-    return strings.Join(parts, "")
   }
 
 
-  func (c *{{$name}}) API() gfxapi.API {
-    return api{}
-  }
-
-  func (c *{{$name}}) TypeID() atom.TypeID {
-    return {{$.Index}}
-  }
-
-  func (c *{{$name}}) Flags() atom.Flags {
-    return 0
-      {{if GetAnnotation $.Command "DrawCall"}}§| atom.DrawCall{{end}}
-      {{if GetAnnotation $.Command "EndOfFrame"}}§| atom.EndOfFrame{{end}}
+  func (c *{{$name}}) API() gfxapi.API { return api{} }
+  func (c *{{$name}}) TypeID() atom.TypeID { return {{$.Index}} }
+  func (c *{{$name}}) Flags() atom.Flags { return 0 §
+      {{if GetAnnotation $.Command "DrawCall"}}| atom.DrawCall §{{end}}
+      {{if GetAnnotation $.Command "EndOfFrame"}}| atom.EndOfFrame §{{end}}
   }
 {{end}}
 
