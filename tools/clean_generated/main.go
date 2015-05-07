@@ -46,29 +46,39 @@ func run() error {
 		fmt.Print(usage_footer)
 	}
 	flag.Parse()
-	return filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
+	paths := flag.Args()
+	if len(paths) == 0 {
+		paths = []string{"."}
+	}
+	for _, path := range paths {
+		err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if info.IsDir() {
+				return nil
+			}
+			if copyright.FindExtension(filepath.Ext(path)) == nil {
+				return nil
+			}
+			file, err := ioutil.ReadFile(path)
+			if err != nil {
+				return err
+			}
+			if copyright.MatchGenerated(file) == 0 {
+				return nil
+			}
+			fmt.Printf("rm %s\n", path)
+			if !*noactions {
+				os.Remove(path)
+			}
+			return nil
+		})
 		if err != nil {
 			return err
 		}
-		if info.IsDir() {
-			return nil
-		}
-		if copyright.FindExtension(filepath.Ext(path)) == nil {
-			return nil
-		}
-		file, err := ioutil.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		if copyright.MatchGenerated(file) == 0 {
-			return nil
-		}
-		fmt.Printf("rm %s\n", path)
-		if !*noactions {
-			os.Remove(path)
-		}
-		return nil
-	})
+	}
+	return nil
 }
 
 func main() {
