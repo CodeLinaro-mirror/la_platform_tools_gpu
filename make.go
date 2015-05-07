@@ -130,7 +130,9 @@ func GPUPath(path string) string {
 func Embed(path string) Entity {
 	out := File(filepath.Join(path, "embed.go"))
 	args := []string{"--out", out.Name()}
-	files := FilesOf(path, func(i os.FileInfo) bool { return !strings.HasSuffix(i.Name(), ".go") })
+	files := FilesOf(path, func(i os.FileInfo) bool {
+		return !i.IsDir() && !strings.HasSuffix(i.Name(), ".go")
+	})
 	for _, f := range files {
 		args = append(args, f.Name())
 	}
