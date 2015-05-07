@@ -17,6 +17,7 @@ package maker
 import (
 	"log"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -60,24 +61,59 @@ func FindEntity(name string) Entity {
 	return e
 }
 
+// FindPathEntity tries to look up an entity by name.
+// If an exact match cannot be found, then the name is treated as a path, and
+// the absolute path is looked up instead.
+// If that also does not match, it returns nil.
+func FindPathEntity(name string) Entity {
+	if e := FindEntity(name); e != nil {
+		return e
+	}
+	if abs, err := filepath.Abs(name); err == nil {
+		if e := FindEntity(abs); e != nil {
+			return e
+		}
+	}
+	return nil
+}
+
+// FindEntities tries to find all entities who's names match the supplied
+// string. The string is treated as a set of characters that must occur in the
+// entities name in the same order, and all entities for which that is true are
+// returned.
+func FindEntities(match string) []Entity {
+	matches := []Entity{}
+	for name, e := range entities {
+		if fuzzyMatch(name, match) {
+			matches = append(matches, e)
+		}
+	}
+	return matches
+}
+
+func fuzzyMatch(s, match string) bool {
+	for _, r := range match {
+		i := strings.IndexRune(s, r)
+		if i < 0 {
+			return false
+		}
+		s = s[i+1:]
+	}
+	return true
+}
+
 // EntityOf tries to find an entity for the supplied value.
 // If the value is an entity, it will be returned directly. If the value is a
-// string that matches an existing entity, that entity will be returned.
-// If it is a relative path that when resolved mathes an existing file entity,
-// then the file is returned.
+// string it will use FindPathEntity to look it up.
+// It is an error for v to not match an existing entity.
 func EntityOf(v interface{}) Entity {
 	switch v := v.(type) {
 	case string:
-		if e := FindEntity(v); e != nil {
-			return e
+		e := FindPathEntity(v)
+		if e == nil {
+			log.Fatalf("no such entity %s", v)
 		}
-		if abs, err := filepath.Abs(v); err == nil {
-			if e := FindEntity(abs); e != nil {
-				return e
-			}
-		}
-		log.Fatalf("no such entity %s", v)
-		return nil
+		return e
 	case Entity:
 		return v
 	default:
