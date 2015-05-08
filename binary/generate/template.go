@@ -56,7 +56,7 @@ func newFunctions() *functions {
 }
 
 func (f *functions) getTemplate(action string, t *Type) *template.Template {
-	name := f.prefix + action + t.Kind.String()
+	name := fmt.Sprint(f.prefix, action, t.Kind)
 	result := f.templates.Lookup(name)
 	if result == nil {
 		panic(fmt.Errorf("Could not find template %s", name))
