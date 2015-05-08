@@ -25,10 +25,8 @@ import (
 // the dst entity.
 // The step will depend on the src, and the existance of the directory dst is
 // inside.
-func CopyFile(dst, src interface{}) Entity {
-	out := File(dst)
-	NewStep(copyFile).Creates(out).DependsOn(File(src), DirOf(out))
-	return out
+func CopyFile(dst, src Entity) {
+	NewStep(copyFile).Creates(dst).DependsOn(src, DirOf(dst))
 }
 
 func copyFile(s *Step) error {

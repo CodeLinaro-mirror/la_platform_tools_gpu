@@ -18,7 +18,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/build"
@@ -32,16 +31,17 @@ const (
 )
 
 var (
-	glespath   = GPUPath("gfxapi/gles")
-	gapirpath  = GPUPath("cc/gapir")
-	spypath    = GPUPath("cc/gfxspy2/src")
-	spywinpath = GPUPath("cc/gfxspy2/src/windows")
-	spyosxpath = GPUPath("cc/gfxspy2/src/osx")
-	testpath   = GPUPath("gfxapi/test")
-	glesapi    = GPUPath("gfxapi/gles/gles.api")
-	testapi    = GPUPath("gfxapi/test/gfxapi_test.api")
-	javacore   = filepath.Join(GoPath, "../base/rpclib/src/main/java/com/android/tools/rpclib/rpccore/")
-	javarpc    = filepath.Join(GoPath, "../adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
+	glespath   = Path(gpusrc, "gfxapi/gles")
+	gapirpath  = Path(gpusrc, "cc/gapir")
+	spypath    = Path(gpusrc, "cc/gfxspy2/src")
+	spywinpath = Path(gpusrc, "cc/gfxspy2/src/windows")
+	spyosxpath = Path(gpusrc, "cc/gfxspy2/src/osx")
+	testpath   = Path(gpusrc, "gfxapi/test")
+	glesapi    = Path(gpusrc, "gfxapi/gles/gles.api")
+	testapi    = Path(gpusrc, "gfxapi/test/gfxapi_test.api")
+	javacore   = Path(Paths.Root, "../base/rpclib/src/main/java/com/android/tools/rpclib/rpccore/")
+	javarpc    = Path(Paths.Root, "../adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
+	gpusrc     = GoSrcPath(GPURoot)
 
 	Tools struct {
 		Embed    Entity
@@ -67,42 +67,42 @@ func init() {
 		Tools.Stringer = GoInstall("golang.org/x/tools/cmd/stringer")
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
-		embedRPC := Embed(GPUPath("rpc/generate"))
-		embedCopyright := Embed(GPUPath("tools/copyright"))
-		embedBinary := Embed(GPUPath("binary/generate"))
+		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
+		embedCopyright := Embed(Path(gpusrc, "tools/copyright"))
+		embedBinary := Embed(Path(gpusrc, "binary/generate"))
 		Creator(Tools.Rpcapi).DependsOn(embedCopyright, embedRPC)
 		Creator(Tools.Apic).DependsOn(embedCopyright)
 		Creator(Tools.Codergen).DependsOn(embedCopyright, embedBinary)
 		// All the rpc rules
-		servicerpc := File(GPUPath("service/service.api"))
-		RpcApiGo(File(GPUPath("rpc/test/rpc_test.api")))
+		servicerpc := File(gpusrc, "service/service.api")
+		RpcApiGo(File(gpusrc, "rpc/test/rpc_test.api"))
 		RpcApiGo(servicerpc)
 		// All the apic rules
-		Apic(glespath, glesapi, GPUPath("gfxapi/templates/api.go.tmpl"))
-		Apic(glespath, glesapi, GPUPath("gfxapi/templates/replay_writer.go.tmpl"))
-		Apic(glespath, glesapi, GPUPath("gfxapi/templates/schema.go.tmpl"))
-		Apic(glespath, glesapi, GPUPath("gfxapi/templates/state_mutator.go.tmpl"))
-		Apic(gapirpath, glesapi, GPUPath("gfxapi/templates/gfx_api.cpp.tmpl"))
-		Apic(gapirpath, glesapi, GPUPath("gfxapi/templates/gfx_api.h.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_exports.cpp.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_imports.cpp.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_imports.h.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_spy.h.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_state.h.tmpl"))
-		Apic(spypath, glesapi, GPUPath("gfxapi/templates/api_types.h.tmpl"))
-		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_exports.def.tmpl"))
-		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_resolve.cpp.tmpl"))
-		Apic(spywinpath, glesapi, GPUPath("gfxapi/templates/opengl32_x64.asm.tmpl"))
-		Apic(spyosxpath, glesapi, GPUPath("gfxapi/templates/opengl_framework_exports.cpp.tmpl"))
-		Apic(testpath, testapi, GPUPath("gfxapi/templates/api.go.tmpl"))
-		Apic(testpath, testapi, GPUPath("gfxapi/templates/replay_writer.go.tmpl"))
-		Apic(testpath, testapi, GPUPath("gfxapi/templates/schema.go.tmpl"))
-		Apic(testpath, testapi, GPUPath("gfxapi/templates/state_mutator.go.tmpl"))
+		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/api.go.tmpl"))
+		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/replay_writer.go.tmpl"))
+		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
+		Apic(glespath, glesapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
+		Apic(gapirpath, glesapi, Path(gpusrc, "gfxapi/templates/gfx_api.cpp.tmpl"))
+		Apic(gapirpath, glesapi, Path(gpusrc, "gfxapi/templates/gfx_api.h.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_exports.cpp.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.cpp.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.h.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_spy.h.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_state.h.tmpl"))
+		Apic(spypath, glesapi, Path(gpusrc, "gfxapi/templates/api_types.h.tmpl"))
+		Apic(spywinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_exports.def.tmpl"))
+		Apic(spywinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_resolve.cpp.tmpl"))
+		Apic(spywinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_x64.asm.tmpl"))
+		Apic(spyosxpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl_framework_exports.cpp.tmpl"))
+		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/api.go.tmpl"))
+		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/replay_writer.go.tmpl"))
+		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
+		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
 		Codergen("codergen", "--go", GPURoot+"/...")
 		// Enum string rules
-		Stringer(GPUPath("binary/generate"), "Kind")
-		Stringer(GPUPath("log"), "Kind")
+		Stringer(Path(gpusrc, "binary/generate"), "Kind")
+		Stringer(Path(gpusrc, "log"), "Kind")
 		// The java code generation rules
 		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
@@ -111,7 +111,7 @@ func init() {
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen", "stringer")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
-		GoRun(GPUPath("cc/build.go"),
+		GoRun(Path(gpusrc, "cc/build.go"),
 			"--runtests",
 			"--targets="+build.HostOS+",android-arm",
 		).Creates(Apps.Gapir).DependsOn("code")
@@ -126,18 +126,14 @@ func init() {
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
 		// Utilties
-		GoRun(GPUPath("tools/clean_generated/main.go"), GPUPath("")).Creates(Virtual("clean_gpu"))
+		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
 		// The default rules
 		List(Default).DependsOn("apps", "test")
 	})
 }
 
-func GPUPath(path string) string {
-	return filepath.Join(GoPath, "src", GPURoot, path)
-}
-
 func Embed(path string) Entity {
-	out := File(filepath.Join(path, "embed.go"))
+	out := File(path, "embed.go")
 	args := []string{"--out", out.Name()}
 	files := FilesOf(path, func(i os.FileInfo) bool {
 		return !i.IsDir() && !strings.HasSuffix(i.Name(), ".go")
@@ -167,7 +163,9 @@ func Apic(path string, api string, template string) {
 	dst := Dir(path)
 	a := File(api)
 	t := File(template)
-	deps := File(DepsPath(fmt.Sprintf("%v_%v.deps", filepath.Base(api), filepath.Base(template))))
+	_, apiname := PathSplit(api)
+	_, templatename := PathSplit(template)
+	deps := File(Paths.Deps, fmt.Sprintf("%v_%v.deps", apiname, templatename))
 	s := Command(Tools.Apic,
 		"template",
 		"--dir", dst.Name(),
@@ -182,9 +180,9 @@ func Codergen(name string, args ...string) {
 }
 
 func Stringer(path, name string) {
-	r := Config.RootPath
-	defer func() { Config.RootPath = r }()
-	Config.RootPath = path
+	r := Paths.Root
+	defer func() { Paths.Root = r }()
+	Paths.Root = path
 	e := Virtual("")
 	Command(Tools.Stringer, "--type", name).Creates(e)
 	List("stringer").DependsOn(e)

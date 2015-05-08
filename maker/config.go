@@ -14,7 +14,11 @@
 
 package maker
 
-import "path/filepath"
+import (
+	"log"
+	"os"
+	"path/filepath"
+)
 
 var (
 	// Config holds the current configuration of the maker system.
@@ -25,19 +29,38 @@ var (
 		TargetArchitecture string
 		// TargetOS is the OS to build for.
 		TargetOS string
-		// RootPath is the root directory to work in.
-		RootPath string
 		// DisableParallel turns of all parallel build support.
 		DisableParallel bool
 	}
+	// Paths holds the set of path roots for the build.
+	Paths struct {
+		// The root path of the build
+		Root string
+		// The dependancy cache directory
+		Deps string
+		// The application data directory.
+		Data string
+		// The application binary directory.
+		Bin string
+	}
+	//GoPath is the GOPATH environment setting
+	GoPath []string
+	goTool Entity
 )
 
-// DepsPath joins the supplied path to the dependancy cache directory.
-func DepsPath(path string) string {
-	return filepath.Join(Config.RootPath, "deps", path)
-}
-
-// DataPath joins the supplied path to the application data directory.
-func DataPath(path string) string {
-	return filepath.Join(Config.RootPath, "data", path)
+func init() {
+	GoPath = filepath.SplitList(os.Getenv("GOPATH"))
+	if len(GoPath) == 0 {
+		log.Fatalf("GOPATH %q not valid", os.Getenv("GOPATH"))
+	}
+	root, err := OSPath(GoPath[0])
+	if err != nil {
+		log.Fatalf("GOPATH %s not valid", GoPath[0])
+	}
+	Paths.Root = root
+	Paths.Deps = Path(root, "deps")
+	Paths.Data = Path(root, "data")
+	Paths.Bin = Path(root, "bin")
+	EnvVars["PATH"] = []string{Paths.Bin}
+	goTool = FindTool("go")
 }

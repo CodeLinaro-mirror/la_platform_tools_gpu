@@ -16,7 +16,6 @@ package maker
 
 import (
 	"log"
-	"path/filepath"
 	"strings"
 	"time"
 )
@@ -69,7 +68,7 @@ func FindPathEntity(name string) Entity {
 	if e := FindEntity(name); e != nil {
 		return e
 	}
-	if abs, err := filepath.Abs(name); err == nil {
+	if abs, err := OSPath(name); err == nil {
 		if e := FindEntity(abs); e != nil {
 			return e
 		}
