@@ -50,7 +50,7 @@ extern "C" {«
   __attribute__((constructor))
   static void initExports() {
     {{range $f := $expose}}
-      real__{{$f}} = gapic::GetGfxProcAddress("{{$f}}");
+      real__{{$f}} = gapic::GetGfxProcAddress("{{$f}}", true);
     {{end}}
   }
 »} // extern "C"
