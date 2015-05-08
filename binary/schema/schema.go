@@ -1,0 +1,44 @@
+// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Package schema implements rtti for the binary system.
+package schema
+
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+)
+
+// Type represents the common iterface to all type objects in the schema.
+type Type interface {
+	binary.Object
+	String() string
+	Encode(e binary.Encoder, value interface{}) error
+	Decode(d binary.Decoder) (interface{}, error)
+	Skip(d binary.Decoder) error
+}
+
+type schema interface {
+	Schema() *Class
+}
+
+// Lookup looks up a Class by the given type id.
+// If there is no match, it will return nil.
+func Lookup(id binary.ID) *Class {
+	s, ok := registry.Lookup(id).(schema)
+	if ok {
+		return s.Schema()
+	}
+	return nil
+}
