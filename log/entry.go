@@ -48,16 +48,3 @@ const (
 	Warning
 	Error
 )
-
-func (k Kind) String() string {
-	switch k {
-	case Info:
-		return "Info"
-	case Warning:
-		return "Warning"
-	case Error:
-		return "Error"
-	default:
-		return "Unknown log kind"
-	}
-}

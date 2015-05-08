@@ -48,6 +48,7 @@ var (
 		Rpcapi   Entity
 		Apic     Entity
 		Codergen Entity
+		Stringer Entity
 	}
 
 	Apps struct {
@@ -63,6 +64,7 @@ func init() {
 		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
 		Tools.Apic = GoInstall(GPURoot + "/api/apic")
 		Tools.Codergen = GoInstall(GPURoot + "/binary/codergen")
+		Tools.Stringer = GoInstall("golang.org/x/tools/cmd/stringer")
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
 		embedRPC := Embed(GPUPath("rpc/generate"))
@@ -98,23 +100,28 @@ func init() {
 		Apic(testpath, testapi, GPUPath("gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
 		Codergen("codergen", "--go", GPURoot+"/...")
+		// Enum string rules
+		Stringer(GPUPath("binary/generate"), "Kind")
+		Stringer(GPUPath("log"), "Kind")
 		// The java code generation rules
 		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
 		List("java").DependsOn("javacoders", "javarpc")
+		//
+		List("code").DependsOn("embed", "rpcapi", "apic", "codergen", "stringer")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
 		GoRun(GPUPath("cc/build.go"),
 			"--runtests",
 			"--targets="+build.HostOS+",android-arm",
-		).Creates(Apps.Gapir).DependsOn("codergen")
+		).Creates(Apps.Gapir).DependsOn("code")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
-		Creator(gotest).DependsOn("codergen", Apps.Gapir)
+		Creator(gotest).DependsOn("code", Apps.Gapir)
 		List("test").DependsOn(gotest)
 		// The main binary rules
 		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
-		Creator(Apps.Gapis).DependsOn("codergen")
+		Creator(Apps.Gapis).DependsOn("code")
 		List("apps").DependsStruct(Apps)
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
@@ -172,4 +179,13 @@ func Apic(path string, api string, template string) {
 
 func Codergen(name string, args ...string) {
 	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic")
+}
+
+func Stringer(path, name string) {
+	r := Config.RootPath
+	defer func() { Config.RootPath = r }()
+	Config.RootPath = path
+	e := Virtual("")
+	Command(Tools.Stringer, "--type", name).Creates(e)
+	List("stringer").DependsOn(e)
 }
