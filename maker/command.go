@@ -33,6 +33,7 @@ var (
 // with the supplied arguments. The newly created Step will be made to depend on
 // the binary.
 func Command(binary Entity, args ...string) *Step {
+	wd := Config.RootPath
 	return NewStep(func(step *Step) error {
 		cmd := exec.Command(binary.Name(), args...)
 		var output bytes.Buffer
@@ -45,7 +46,7 @@ func Command(binary Entity, args ...string) *Step {
 		}
 
 		cmd.Env = getEnvVars()
-		cmd.Dir = Config.RootPath
+		cmd.Dir = wd
 		if Config.Verbose > 0 {
 			log.Printf("-> %s", strings.Join(cmd.Args, " "))
 		}
