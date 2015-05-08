@@ -6,7 +6,6 @@ package test
 
 import (
 	"fmt"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
@@ -52,20 +51,11 @@ type CmdVoid struct {
 }
 
 func (c *CmdVoid) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void(")
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void()")
 }
-func (c *CmdVoid) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoid) TypeID() atom.TypeID {
-	return 0
-}
-func (c *CmdVoid) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoid) API() gfxapi.API     { return api{} }
+func (c *CmdVoid) TypeID() atom.TypeID { return 0 }
+func (c *CmdVoid) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU8
@@ -76,22 +66,11 @@ type CmdVoidU8 struct {
 }
 
 func (c *CmdVoidU8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_u8(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_u8(a: %v)", c.A)
 }
-func (c *CmdVoidU8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidU8) TypeID() atom.TypeID {
-	return 1
-}
-func (c *CmdVoidU8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidU8) API() gfxapi.API     { return api{} }
+func (c *CmdVoidU8) TypeID() atom.TypeID { return 1 }
+func (c *CmdVoidU8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS8
@@ -102,22 +81,11 @@ type CmdVoidS8 struct {
 }
 
 func (c *CmdVoidS8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_s8(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_s8(a: %v)", c.A)
 }
-func (c *CmdVoidS8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidS8) TypeID() atom.TypeID {
-	return 2
-}
-func (c *CmdVoidS8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidS8) API() gfxapi.API     { return api{} }
+func (c *CmdVoidS8) TypeID() atom.TypeID { return 2 }
+func (c *CmdVoidS8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU16
@@ -128,22 +96,11 @@ type CmdVoidU16 struct {
 }
 
 func (c *CmdVoidU16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_u16(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_u16(a: %v)", c.A)
 }
-func (c *CmdVoidU16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidU16) TypeID() atom.TypeID {
-	return 3
-}
-func (c *CmdVoidU16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidU16) API() gfxapi.API     { return api{} }
+func (c *CmdVoidU16) TypeID() atom.TypeID { return 3 }
+func (c *CmdVoidU16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS16
@@ -154,22 +111,11 @@ type CmdVoidS16 struct {
 }
 
 func (c *CmdVoidS16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_s16(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_s16(a: %v)", c.A)
 }
-func (c *CmdVoidS16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidS16) TypeID() atom.TypeID {
-	return 4
-}
-func (c *CmdVoidS16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidS16) API() gfxapi.API     { return api{} }
+func (c *CmdVoidS16) TypeID() atom.TypeID { return 4 }
+func (c *CmdVoidS16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF32
@@ -180,22 +126,11 @@ type CmdVoidF32 struct {
 }
 
 func (c *CmdVoidF32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_f32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_f32(a: %v)", c.A)
 }
-func (c *CmdVoidF32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidF32) TypeID() atom.TypeID {
-	return 5
-}
-func (c *CmdVoidF32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidF32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidF32) TypeID() atom.TypeID { return 5 }
+func (c *CmdVoidF32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU32
@@ -206,22 +141,11 @@ type CmdVoidU32 struct {
 }
 
 func (c *CmdVoidU32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_u32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_u32(a: %v)", c.A)
 }
-func (c *CmdVoidU32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidU32) TypeID() atom.TypeID {
-	return 6
-}
-func (c *CmdVoidU32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidU32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidU32) TypeID() atom.TypeID { return 6 }
+func (c *CmdVoidU32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS32
@@ -232,22 +156,11 @@ type CmdVoidS32 struct {
 }
 
 func (c *CmdVoidS32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_s32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_s32(a: %v)", c.A)
 }
-func (c *CmdVoidS32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidS32) TypeID() atom.TypeID {
-	return 7
-}
-func (c *CmdVoidS32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidS32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidS32) TypeID() atom.TypeID { return 7 }
+func (c *CmdVoidS32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidF64
@@ -258,22 +171,11 @@ type CmdVoidF64 struct {
 }
 
 func (c *CmdVoidF64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_f64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_f64(a: %v)", c.A)
 }
-func (c *CmdVoidF64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidF64) TypeID() atom.TypeID {
-	return 8
-}
-func (c *CmdVoidF64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidF64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidF64) TypeID() atom.TypeID { return 8 }
+func (c *CmdVoidF64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidU64
@@ -284,22 +186,11 @@ type CmdVoidU64 struct {
 }
 
 func (c *CmdVoidU64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_u64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_u64(a: %v)", c.A)
 }
-func (c *CmdVoidU64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidU64) TypeID() atom.TypeID {
-	return 9
-}
-func (c *CmdVoidU64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidU64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidU64) TypeID() atom.TypeID { return 9 }
+func (c *CmdVoidU64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidS64
@@ -310,22 +201,11 @@ type CmdVoidS64 struct {
 }
 
 func (c *CmdVoidS64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_s64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_s64(a: %v)", c.A)
 }
-func (c *CmdVoidS64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidS64) TypeID() atom.TypeID {
-	return 10
-}
-func (c *CmdVoidS64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidS64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidS64) TypeID() atom.TypeID { return 10 }
+func (c *CmdVoidS64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidBool
@@ -336,22 +216,11 @@ type CmdVoidBool struct {
 }
 
 func (c *CmdVoidBool) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_bool(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_bool(a: %v)", c.A)
 }
-func (c *CmdVoidBool) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidBool) TypeID() atom.TypeID {
-	return 11
-}
-func (c *CmdVoidBool) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidBool) API() gfxapi.API     { return api{} }
+func (c *CmdVoidBool) TypeID() atom.TypeID { return 11 }
+func (c *CmdVoidBool) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidString
@@ -362,22 +231,11 @@ type CmdVoidString struct {
 }
 
 func (c *CmdVoidString) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_string(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_string(a: %v)", c.A)
 }
-func (c *CmdVoidString) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidString) TypeID() atom.TypeID {
-	return 12
-}
-func (c *CmdVoidString) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidString) API() gfxapi.API     { return api{} }
+func (c *CmdVoidString) TypeID() atom.TypeID { return 12 }
+func (c *CmdVoidString) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Strings
@@ -390,26 +248,11 @@ type CmdVoid3Strings struct {
 }
 
 func (c *CmdVoid3Strings) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_3_strings(",
-		fmt.Sprintf("a:%v", c.A),
-		", ",
-		fmt.Sprintf("b:%v", c.B),
-		", ",
-		fmt.Sprintf("c:%v", c.C),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_3_strings(a: %v, b: %v, c: %v)", c.A, c.B, c.C)
 }
-func (c *CmdVoid3Strings) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoid3Strings) TypeID() atom.TypeID {
-	return 13
-}
-func (c *CmdVoid3Strings) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoid3Strings) API() gfxapi.API     { return api{} }
+func (c *CmdVoid3Strings) TypeID() atom.TypeID { return 13 }
+func (c *CmdVoid3Strings) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Arrays
@@ -422,26 +265,11 @@ type CmdVoid3Arrays struct {
 }
 
 func (c *CmdVoid3Arrays) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_3_arrays(",
-		fmt.Sprintf("%v", c.A),
-		", ",
-		fmt.Sprintf("%v", c.B),
-		", ",
-		fmt.Sprintf("%v", c.C),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_3_arrays(a: %v, b: %v, c: %v)", c.A, c.B, c.C)
 }
-func (c *CmdVoid3Arrays) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoid3Arrays) TypeID() atom.TypeID {
-	return 14
-}
-func (c *CmdVoid3Arrays) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoid3Arrays) API() gfxapi.API     { return api{} }
+func (c *CmdVoid3Arrays) TypeID() atom.TypeID { return 14 }
+func (c *CmdVoid3Arrays) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidArrayOfStrings
@@ -452,22 +280,11 @@ type CmdVoidArrayOfStrings struct {
 }
 
 func (c *CmdVoidArrayOfStrings) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_array_of_strings(",
-		fmt.Sprintf("%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_array_of_strings(a: %v)", c.A)
 }
-func (c *CmdVoidArrayOfStrings) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidArrayOfStrings) TypeID() atom.TypeID {
-	return 15
-}
-func (c *CmdVoidArrayOfStrings) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidArrayOfStrings) API() gfxapi.API     { return api{} }
+func (c *CmdVoidArrayOfStrings) TypeID() atom.TypeID { return 15 }
+func (c *CmdVoidArrayOfStrings) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU8
@@ -478,21 +295,11 @@ type CmdU8 struct {
 }
 
 func (c *CmdU8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_u8(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_u8() → %v", c.Result)
 }
-func (c *CmdU8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdU8) TypeID() atom.TypeID {
-	return 16
-}
-func (c *CmdU8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdU8) API() gfxapi.API     { return api{} }
+func (c *CmdU8) TypeID() atom.TypeID { return 16 }
+func (c *CmdU8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS8
@@ -503,21 +310,11 @@ type CmdS8 struct {
 }
 
 func (c *CmdS8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_s8(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_s8() → %v", c.Result)
 }
-func (c *CmdS8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdS8) TypeID() atom.TypeID {
-	return 17
-}
-func (c *CmdS8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdS8) API() gfxapi.API     { return api{} }
+func (c *CmdS8) TypeID() atom.TypeID { return 17 }
+func (c *CmdS8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU16
@@ -528,21 +325,11 @@ type CmdU16 struct {
 }
 
 func (c *CmdU16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_u16(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_u16() → %v", c.Result)
 }
-func (c *CmdU16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdU16) TypeID() atom.TypeID {
-	return 18
-}
-func (c *CmdU16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdU16) API() gfxapi.API     { return api{} }
+func (c *CmdU16) TypeID() atom.TypeID { return 18 }
+func (c *CmdU16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS16
@@ -553,21 +340,11 @@ type CmdS16 struct {
 }
 
 func (c *CmdS16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_s16(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_s16() → %v", c.Result)
 }
-func (c *CmdS16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdS16) TypeID() atom.TypeID {
-	return 19
-}
-func (c *CmdS16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdS16) API() gfxapi.API     { return api{} }
+func (c *CmdS16) TypeID() atom.TypeID { return 19 }
+func (c *CmdS16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF32
@@ -578,21 +355,11 @@ type CmdF32 struct {
 }
 
 func (c *CmdF32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_f32(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_f32() → %v", c.Result)
 }
-func (c *CmdF32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdF32) TypeID() atom.TypeID {
-	return 20
-}
-func (c *CmdF32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdF32) API() gfxapi.API     { return api{} }
+func (c *CmdF32) TypeID() atom.TypeID { return 20 }
+func (c *CmdF32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU32
@@ -603,21 +370,11 @@ type CmdU32 struct {
 }
 
 func (c *CmdU32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_u32(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_u32() → %v", c.Result)
 }
-func (c *CmdU32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdU32) TypeID() atom.TypeID {
-	return 21
-}
-func (c *CmdU32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdU32) API() gfxapi.API     { return api{} }
+func (c *CmdU32) TypeID() atom.TypeID { return 21 }
+func (c *CmdU32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS32
@@ -628,21 +385,11 @@ type CmdS32 struct {
 }
 
 func (c *CmdS32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_s32(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_s32() → %v", c.Result)
 }
-func (c *CmdS32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdS32) TypeID() atom.TypeID {
-	return 22
-}
-func (c *CmdS32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdS32) API() gfxapi.API     { return api{} }
+func (c *CmdS32) TypeID() atom.TypeID { return 22 }
+func (c *CmdS32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdF64
@@ -653,21 +400,11 @@ type CmdF64 struct {
 }
 
 func (c *CmdF64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_f64(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_f64() → %v", c.Result)
 }
-func (c *CmdF64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdF64) TypeID() atom.TypeID {
-	return 23
-}
-func (c *CmdF64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdF64) API() gfxapi.API     { return api{} }
+func (c *CmdF64) TypeID() atom.TypeID { return 23 }
+func (c *CmdF64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdU64
@@ -678,21 +415,11 @@ type CmdU64 struct {
 }
 
 func (c *CmdU64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_u64(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_u64() → %v", c.Result)
 }
-func (c *CmdU64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdU64) TypeID() atom.TypeID {
-	return 24
-}
-func (c *CmdU64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdU64) API() gfxapi.API     { return api{} }
+func (c *CmdU64) TypeID() atom.TypeID { return 24 }
+func (c *CmdU64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdS64
@@ -703,21 +430,11 @@ type CmdS64 struct {
 }
 
 func (c *CmdS64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_s64(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_s64() → %v", c.Result)
 }
-func (c *CmdS64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdS64) TypeID() atom.TypeID {
-	return 25
-}
-func (c *CmdS64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdS64) API() gfxapi.API     { return api{} }
+func (c *CmdS64) TypeID() atom.TypeID { return 25 }
+func (c *CmdS64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdBool
@@ -728,21 +445,11 @@ type CmdBool struct {
 }
 
 func (c *CmdBool) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_bool(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_bool() → %v", c.Result)
 }
-func (c *CmdBool) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdBool) TypeID() atom.TypeID {
-	return 26
-}
-func (c *CmdBool) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdBool) API() gfxapi.API     { return api{} }
+func (c *CmdBool) TypeID() atom.TypeID { return 26 }
+func (c *CmdBool) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdString
@@ -753,21 +460,11 @@ type CmdString struct {
 }
 
 func (c *CmdString) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_string(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_string() → %v", c.Result)
 }
-func (c *CmdString) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdString) TypeID() atom.TypeID {
-	return 27
-}
-func (c *CmdString) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdString) API() gfxapi.API     { return api{} }
+func (c *CmdString) TypeID() atom.TypeID { return 27 }
+func (c *CmdString) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdArrayOfFloat
@@ -778,21 +475,11 @@ type CmdArrayOfFloat struct {
 }
 
 func (c *CmdArrayOfFloat) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_array_of_float(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_array_of_float() → %v", c.Result)
 }
-func (c *CmdArrayOfFloat) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdArrayOfFloat) TypeID() atom.TypeID {
-	return 28
-}
-func (c *CmdArrayOfFloat) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdArrayOfFloat) API() gfxapi.API     { return api{} }
+func (c *CmdArrayOfFloat) TypeID() atom.TypeID { return 28 }
+func (c *CmdArrayOfFloat) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdPointer
@@ -803,21 +490,11 @@ type CmdPointer struct {
 }
 
 func (c *CmdPointer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_pointer(")
-	parts = append(parts, ")")
-	parts = append(parts, fmt.Sprintf(" → %v", c.Result))
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_pointer() → %v", c.Result)
 }
-func (c *CmdPointer) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdPointer) TypeID() atom.TypeID {
-	return 29
-}
-func (c *CmdPointer) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdPointer) API() gfxapi.API     { return api{} }
+func (c *CmdPointer) TypeID() atom.TypeID { return 29 }
+func (c *CmdPointer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU8
@@ -828,22 +505,11 @@ type CmdVoidOutU8 struct {
 }
 
 func (c *CmdVoidOutU8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_u8(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_u8(a: %v)", c.A)
 }
-func (c *CmdVoidOutU8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutU8) TypeID() atom.TypeID {
-	return 30
-}
-func (c *CmdVoidOutU8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutU8) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutU8) TypeID() atom.TypeID { return 30 }
+func (c *CmdVoidOutU8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS8
@@ -854,22 +520,11 @@ type CmdVoidOutS8 struct {
 }
 
 func (c *CmdVoidOutS8) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_s8(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_s8(a: %v)", c.A)
 }
-func (c *CmdVoidOutS8) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutS8) TypeID() atom.TypeID {
-	return 31
-}
-func (c *CmdVoidOutS8) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutS8) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutS8) TypeID() atom.TypeID { return 31 }
+func (c *CmdVoidOutS8) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU16
@@ -880,22 +535,11 @@ type CmdVoidOutU16 struct {
 }
 
 func (c *CmdVoidOutU16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_u16(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_u16(a: %v)", c.A)
 }
-func (c *CmdVoidOutU16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutU16) TypeID() atom.TypeID {
-	return 32
-}
-func (c *CmdVoidOutU16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutU16) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutU16) TypeID() atom.TypeID { return 32 }
+func (c *CmdVoidOutU16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS16
@@ -906,22 +550,11 @@ type CmdVoidOutS16 struct {
 }
 
 func (c *CmdVoidOutS16) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_s16(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_s16(a: %v)", c.A)
 }
-func (c *CmdVoidOutS16) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutS16) TypeID() atom.TypeID {
-	return 33
-}
-func (c *CmdVoidOutS16) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutS16) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutS16) TypeID() atom.TypeID { return 33 }
+func (c *CmdVoidOutS16) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF32
@@ -932,22 +565,11 @@ type CmdVoidOutF32 struct {
 }
 
 func (c *CmdVoidOutF32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_f32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_f32(a: %v)", c.A)
 }
-func (c *CmdVoidOutF32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutF32) TypeID() atom.TypeID {
-	return 34
-}
-func (c *CmdVoidOutF32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutF32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutF32) TypeID() atom.TypeID { return 34 }
+func (c *CmdVoidOutF32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU32
@@ -958,22 +580,11 @@ type CmdVoidOutU32 struct {
 }
 
 func (c *CmdVoidOutU32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_u32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_u32(a: %v)", c.A)
 }
-func (c *CmdVoidOutU32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutU32) TypeID() atom.TypeID {
-	return 35
-}
-func (c *CmdVoidOutU32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutU32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutU32) TypeID() atom.TypeID { return 35 }
+func (c *CmdVoidOutU32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS32
@@ -984,22 +595,11 @@ type CmdVoidOutS32 struct {
 }
 
 func (c *CmdVoidOutS32) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_s32(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_s32(a: %v)", c.A)
 }
-func (c *CmdVoidOutS32) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutS32) TypeID() atom.TypeID {
-	return 36
-}
-func (c *CmdVoidOutS32) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutS32) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutS32) TypeID() atom.TypeID { return 36 }
+func (c *CmdVoidOutS32) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutF64
@@ -1010,22 +610,11 @@ type CmdVoidOutF64 struct {
 }
 
 func (c *CmdVoidOutF64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_f64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_f64(a: %v)", c.A)
 }
-func (c *CmdVoidOutF64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutF64) TypeID() atom.TypeID {
-	return 37
-}
-func (c *CmdVoidOutF64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutF64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutF64) TypeID() atom.TypeID { return 37 }
+func (c *CmdVoidOutF64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutU64
@@ -1036,22 +625,11 @@ type CmdVoidOutU64 struct {
 }
 
 func (c *CmdVoidOutU64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_u64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_u64(a: %v)", c.A)
 }
-func (c *CmdVoidOutU64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutU64) TypeID() atom.TypeID {
-	return 38
-}
-func (c *CmdVoidOutU64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutU64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutU64) TypeID() atom.TypeID { return 38 }
+func (c *CmdVoidOutU64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutS64
@@ -1062,22 +640,11 @@ type CmdVoidOutS64 struct {
 }
 
 func (c *CmdVoidOutS64) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_s64(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_s64(a: %v)", c.A)
 }
-func (c *CmdVoidOutS64) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutS64) TypeID() atom.TypeID {
-	return 39
-}
-func (c *CmdVoidOutS64) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutS64) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutS64) TypeID() atom.TypeID { return 39 }
+func (c *CmdVoidOutS64) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutBool
@@ -1088,22 +655,11 @@ type CmdVoidOutBool struct {
 }
 
 func (c *CmdVoidOutBool) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_bool(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_bool(a: %v)", c.A)
 }
-func (c *CmdVoidOutBool) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutBool) TypeID() atom.TypeID {
-	return 40
-}
-func (c *CmdVoidOutBool) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutBool) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutBool) TypeID() atom.TypeID { return 40 }
+func (c *CmdVoidOutBool) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutString
@@ -1114,22 +670,11 @@ type CmdVoidOutString struct {
 }
 
 func (c *CmdVoidOutString) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_string(",
-		fmt.Sprintf("a:%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_string(a: %v)", c.A)
 }
-func (c *CmdVoidOutString) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutString) TypeID() atom.TypeID {
-	return 41
-}
-func (c *CmdVoidOutString) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutString) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutString) TypeID() atom.TypeID { return 41 }
+func (c *CmdVoidOutString) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutFixedSizeBuffer
@@ -1140,22 +685,11 @@ type CmdVoidOutFixedSizeBuffer struct {
 }
 
 func (c *CmdVoidOutFixedSizeBuffer) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_fixed_size_buffer(",
-		fmt.Sprintf("0x%x", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_fixed_size_buffer(a: 0x%x)", c.A)
 }
-func (c *CmdVoidOutFixedSizeBuffer) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutFixedSizeBuffer) TypeID() atom.TypeID {
-	return 42
-}
-func (c *CmdVoidOutFixedSizeBuffer) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutFixedSizeBuffer) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutFixedSizeBuffer) TypeID() atom.TypeID { return 42 }
+func (c *CmdVoidOutFixedSizeBuffer) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Strings
@@ -1168,26 +702,11 @@ type CmdVoidOut3Strings struct {
 }
 
 func (c *CmdVoidOut3Strings) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_3_strings(",
-		fmt.Sprintf("a:%v", c.A),
-		", ",
-		fmt.Sprintf("b:%v", c.B),
-		", ",
-		fmt.Sprintf("c:%v", c.C),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_3_strings(a: %v, b: %v, c: %v)", c.A, c.B, c.C)
 }
-func (c *CmdVoidOut3Strings) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOut3Strings) TypeID() atom.TypeID {
-	return 43
-}
-func (c *CmdVoidOut3Strings) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOut3Strings) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOut3Strings) TypeID() atom.TypeID { return 43 }
+func (c *CmdVoidOut3Strings) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoid3Remapped
@@ -1200,26 +719,11 @@ type CmdVoid3Remapped struct {
 }
 
 func (c *CmdVoid3Remapped) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_3_remapped(",
-		fmt.Sprintf("a:%v", c.A),
-		", ",
-		fmt.Sprintf("b:%v", c.B),
-		", ",
-		fmt.Sprintf("c:%v", c.C),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_3_remapped(a: %v, b: %v, c: %v)", c.A, c.B, c.C)
 }
-func (c *CmdVoid3Remapped) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoid3Remapped) TypeID() atom.TypeID {
-	return 44
-}
-func (c *CmdVoid3Remapped) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoid3Remapped) API() gfxapi.API     { return api{} }
+func (c *CmdVoid3Remapped) TypeID() atom.TypeID { return 44 }
+func (c *CmdVoid3Remapped) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOut3Remapped
@@ -1232,26 +736,11 @@ type CmdVoidOut3Remapped struct {
 }
 
 func (c *CmdVoidOut3Remapped) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_3_remapped(",
-		fmt.Sprintf("a:%v", c.A),
-		", ",
-		fmt.Sprintf("b:%v", c.B),
-		", ",
-		fmt.Sprintf("c:%v", c.C),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_3_remapped(a: %v, b: %v, c: %v)", c.A, c.B, c.C)
 }
-func (c *CmdVoidOut3Remapped) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOut3Remapped) TypeID() atom.TypeID {
-	return 45
-}
-func (c *CmdVoidOut3Remapped) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOut3Remapped) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOut3Remapped) TypeID() atom.TypeID { return 45 }
+func (c *CmdVoidOut3Remapped) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // CmdVoidOutArrayOfRemapped
@@ -1262,22 +751,11 @@ type CmdVoidOutArrayOfRemapped struct {
 }
 
 func (c *CmdVoidOutArrayOfRemapped) String() string {
-	parts := make([]string, 0, 32)
-	parts = append(parts, "cmd_void_out_array_of_remapped(",
-		fmt.Sprintf("%v", c.A),
-	)
-	parts = append(parts, ")")
-	return strings.Join(parts, "")
+	return fmt.Sprintf("cmd_void_out_array_of_remapped(a: %v)", c.A)
 }
-func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API {
-	return api{}
-}
-func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID {
-	return 46
-}
-func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags {
-	return 0
-}
+func (c *CmdVoidOutArrayOfRemapped) API() gfxapi.API     { return api{} }
+func (c *CmdVoidOutArrayOfRemapped) TypeID() atom.TypeID { return 46 }
+func (c *CmdVoidOutArrayOfRemapped) Flags() atom.Flags   { return 0 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
