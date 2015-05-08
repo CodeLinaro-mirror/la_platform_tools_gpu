@@ -123,13 +123,10 @@ func make_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 	t := type_(ctx, g.Arguments[0])
 
 	var size semantic.Expression
-	ctx.with(semantic.Int32Type, func() {
+	ctx.with(semantic.Uint64Type, func() {
 		size = expression(ctx, in.Arguments[0])
 	})
-	st := size.ExpressionType()
-	if !equal(st, semantic.Int32Type) && !equal(st, semantic.Uint32Type) {
-		ctx.errorf(in, "type %s not valid making slice", typename(st))
-	}
+	size = castToU64(ctx, in.Arguments[0], size)
 	out := &semantic.Make{AST: in, Type: getSliceType(ctx, in, t), Size: size}
 	ctx.mappings[in] = out
 	return out
@@ -147,7 +144,7 @@ func clone(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 	slice := expression(ctx, in.Arguments[0])
 	st, ok := slice.ExpressionType().(*semantic.Slice)
 	if !ok {
-		ctx.errorf(in, "%s only works on slice types, %v", g.Name.Value, typename(slice.ExpressionType()))
+		ctx.errorf(in, "%s only works on slice types, got type %v", g.Name.Value, typename(slice.ExpressionType()))
 		return invalid{}
 	}
 	out := &semantic.Clone{AST: in, Slice: slice, Type: st}
@@ -166,7 +163,7 @@ func read(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 	}
 	slice := expression(ctx, in.Arguments[0])
 	if _, ok := slice.ExpressionType().(*semantic.Slice); !ok {
-		ctx.errorf(in, "%s only works on slice types, %v", g.Name.Value, typename(slice.ExpressionType()))
+		ctx.errorf(in, "%s only works on slice types, got type %v", g.Name.Value, typename(slice.ExpressionType()))
 		return invalid{}
 	}
 	out := &semantic.Read{AST: in, Slice: slice}
@@ -185,7 +182,7 @@ func write(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 	}
 	slice := expression(ctx, in.Arguments[0])
 	if _, ok := slice.ExpressionType().(*semantic.Slice); !ok {
-		ctx.errorf(in, "%s only works on slice types, %v", g.Name.Value, typename(slice.ExpressionType()))
+		ctx.errorf(in, "%s only works on slice types, got type %v", g.Name.Value, typename(slice.ExpressionType()))
 		return invalid{}
 	}
 	out := &semantic.Write{AST: in, Slice: slice}
@@ -202,10 +199,10 @@ func copy_(ctx *context, in *ast.Call, g *ast.Generic) semantic.Expression {
 		ctx.errorf(in, "wrong number of arguments to %s, expected 2 got %v", g.Name.Value, len(in.Arguments))
 		return invalid{}
 	}
-	src := expression(ctx, in.Arguments[0])
+	src := expression(ctx, in.Arguments[1])
 	srct, ok := src.ExpressionType().(*semantic.Slice)
 	if !ok {
-		ctx.errorf(in, "%s only works on slice types, %v", g.Name.Value, typename(src.ExpressionType()))
+		ctx.errorf(in, "%s only works on slice types, got type %v", g.Name.Value, typename(src.ExpressionType()))
 		return invalid{}
 	}
 	dst := expression(ctx, in.Arguments[0])

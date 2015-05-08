@@ -20,7 +20,7 @@ type RPC interface {
 	ResolveResource(l log.Logger, r ResourceId) (Resource, error)
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
-	GetListNodeChainArray(l log.Logger) (ListNodeArray, error)
+	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
 	GetBase(l log.Logger) (Base, error)
 	GetDerived(l log.Logger) (Base, error)
 }
@@ -31,8 +31,14 @@ type ResourceId struct {
 	ID binary.ID
 }
 
-// Array ListNodePointerSlice
-type ListNodeArray []*ListNode
+// Array Baseˢ
+type BaseArray []Base
+
+// Array ListNodeˢ
+type ListNodeArray []ListNode
+
+// Array ListNodeᵖˢ
+type ListNodePtrArray []*ListNode
 
 // Enum Enum
 type Enum int

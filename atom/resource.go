@@ -18,7 +18,9 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 const TypeIDResource TypeID = 0xfffd
@@ -27,32 +29,22 @@ func init() {
 	Register(TypeInfo{ID: TypeIDResource, New: func() Atom { return &Resource{} }})
 }
 
-// Resource is an Atom that embeds a blob of memory into the stream. These atoms
-// are typically only used for .gfxtrace files as they are stripped from the
-// stream on import and placed into the database.
+// Resource is an Atom that embeds a blob of memory into the atom stream. These
+// atoms are typically only used for .gfxtrace files as they are stripped from
+// the stream on import and their resources are placed into the database.
 type Resource struct {
 	binary.Generate
-	ResourceID binary.ID // The resource identifier holding the memory that was observed.
-	Data       []byte    // The resource data
+	ID   binary.ID // The resource identifier holding the memory that was observed.
+	Data []byte    // The resource data
 }
 
 func (a *Resource) String() string {
-	return fmt.Sprintf("ResID: %s - 0x%x bytes", a.ResourceID, len(a.Data))
+	return fmt.Sprintf("ID: %s - 0x%x bytes", a.ID, len(a.Data))
 }
 
 // Atom compliance
-func (a *Resource) API() gfxapi.API {
-	return nil
-}
-
-func (a *Resource) TypeID() TypeID {
-	return TypeIDResource
-}
-
-func (a *Resource) Flags() Flags {
-	return 0
-}
-
-func (a *Resource) Mutate(s *gfxapi.State) error {
-	return nil
-}
+func (a *Resource) API() gfxapi.API                                                 { return nil }
+func (a *Resource) TypeID() TypeID                                                  { return TypeIDResource }
+func (a *Resource) Flags() Flags                                                    { return 0 }
+func (a *Resource) Observations() *Observations                                     { return &Observations{} }
+func (a *Resource) Mutate(s *gfxapi.State, d database.Database, l log.Logger) error { return nil }

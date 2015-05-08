@@ -24,11 +24,11 @@
 */}}
 {{define "C++.Type"}}
   {{if not (IsType $)}}{{Macro "C++.Type" (TypeOf $)}}
-  {{else if IsPseudonym   $}}{{Global "prefix"}}{{$.Name}}
   {{else if IsVoid        $}}void
   {{else if IsBool        $}}bool
   {{else if IsInt         $}}int
   {{else if IsUint        $}}uint
+  {{else if IsChar        $}}char
   {{else if IsU8          $}}uint8_t
   {{else if IsS8          $}}int8_t
   {{else if IsU16         $}}uint16_t
@@ -39,23 +39,49 @@
   {{else if IsF64         $}}double
   {{else if IsU64         $}}uint64_t
   {{else if IsS64         $}}int64_t
-  {{else if IsMap         $}}{{$.Name}}
-  {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
-  {{else if IsPointer     $}}{{if $.Array}}void*{{else}}{{Macro "C++.Type" $.To}}*{{end}}
-  {{else if IsString      $}}char*
   {{else if IsEnum        $}}{{Macro "C++.EnumType" $}}
-  {{else if IsArray       $}}{{Macro "C++.Type" $.ValueType}}*
+  {{else if IsReference   $}}std::shared_ptr<{{Macro "C++.Type" $.To}}>
+  {{else if IsString      $}}std::string
   {{else if IsStaticArray $}}{{Macro "C++.Type" $.ValueType}}
-  {{else if IsBuffer      $}}
-    {{if $.Array}}
-      {{if IsU8 $.To}}Memory
-      {{else if IsChar $.To}}std::string
-      {{else}}std::vector<{{Macro "C++.Type" $.To}}>
-      {{end}}
-    {{else}}std::shared_ptr<{{Macro "C++.Type" $.To}}>
-    {{end}}
+  {{else if IsSlice       $}}Slice<{{if IsVoid $.To}}uint8_t{{else}}{{Macro "C++.Type" $.To}}{{end}}>
+  {{else if IsPointer     $}}{{Macro "C++.Type" $.To}}*
   {{else if IsAny         $}}auto
-  {{else}}{{Error "C++.Type passed unsupported type (%T): %s" $ $.Name}}
+  {{else}}{{Macro "C++.TypeName" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a typename that can be used for string concatenation for the given type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.TypeName"}}
+  {{if not (IsType $)}}{{Macro "C++.TypeName" (TypeOf $)}}
+  {{else if IsPseudonym   $}}{{$.Name}}
+  {{else if IsClass       $}}{{Global "prefix"}}{{$.Name}}
+  {{else if IsEnum        $}}{{Global "prefix"}}{{$.Name}}
+  {{else if IsMap         $}}{{Macro "C++.TypeName" $.KeyType}}To{{Macro "C++.TypeName" $.ValueType}}
+  {{else if IsVoid        $}}Void
+  {{else if IsBool        $}}Bool
+  {{else if IsInt         $}}Int
+  {{else if IsUint        $}}Uint
+  {{else if IsChar        $}}Char
+  {{else if IsU8          $}}U8
+  {{else if IsS8          $}}S8
+  {{else if IsU16         $}}U16
+  {{else if IsS16         $}}S16
+  {{else if IsF32         $}}F32
+  {{else if IsU32         $}}U32
+  {{else if IsS32         $}}S32
+  {{else if IsF64         $}}F64
+  {{else if IsU64         $}}U64
+  {{else if IsS64         $}}S64
+  {{else if IsString      $}}String
+  {{else if IsReference   $}}{{Macro "C++.TypeName" $.To}}Ref
+  {{else if IsSlice       $}}{{Macro "C++.TypeName" $.To}}Slice
+  {{else if IsPointer     $}}{{Macro "C++.TypeName" $.To}}Ptr
+  {{else}}{{Error "C++.TypeName passed unsupported type (%T): %s" $ $.Name}}
   {{end}}
 {{end}}
 
@@ -67,25 +93,25 @@
 */}}
 {{define "C++.Null"}}
   {{AssertType $ "Type"}}
-  {{     if IsPointer       $}}nullptr
-  {{else if IsArray         $}}nullptr
-  {{else if IsBool          $}}false
-  {{else if IsInt           $}}0
-  {{else if IsUint          $}}0
-  {{else if IsS8            $}}0
-  {{else if IsU8            $}}0
-  {{else if IsS16           $}}0
-  {{else if IsU16           $}}0
-  {{else if IsS32           $}}0
-  {{else if IsU32           $}}0
-  {{else if IsF32           $}}0
-  {{else if IsS64           $}}0
-  {{else if IsU64           $}}0
-  {{else if IsF64           $}}0
-  {{else if IsEnum          $}}0
-  {{else if IsString        $}}""
-  {{else if IsPseudonym     $}}{{Macro "C++.Null" $.To}}
-  {{else if IsClass         $}}{{Macro "C++.Type" $}}()
+  {{     if IsBool       $}}false
+  {{else if IsInt        $}}0
+  {{else if IsUint       $}}0
+  {{else if IsS8         $}}0
+  {{else if IsU8         $}}0
+  {{else if IsS16        $}}0
+  {{else if IsU16        $}}0
+  {{else if IsS32        $}}0
+  {{else if IsU32        $}}0
+  {{else if IsF32        $}}0
+  {{else if IsS64        $}}0
+  {{else if IsU64        $}}0
+  {{else if IsF64        $}}0
+  {{else if IsEnum       $}}0
+  {{else if IsString     $}}""
+  {{else if IsPseudonym  $}}{{Macro "C++.Null" $.To}}
+  {{else if IsClass      $}}{{Macro "C++.Type" $}}()
+  {{else if IsPointer    $}}nullptr
+  {{else if IsReference  $}}{{Macro "C++.Type" $}}()
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
   {{end}}
 {{end}}
@@ -153,25 +179,18 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the C++ type for the given parameter.
+  Emits the C++ type for use as a parameter for the given parameter or type.
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.ParameterType"}}
-  {{AssertType $ "Parameter"}}
+  {{AssertType $ "Type" "Parameter"}}
 
-  {{$ty := TypeOf $}}
-  {{if IsAny $ty}}
-    {{Macro "C++.ParameterTypeAny" $}}
-  {{else}}
-    {{$isRef := or (IsArray $ty) (IsString $ty) (IsPointer $ty)}}
-
-    {{/* Prefix const for read-only reference parameters. */}}
-    {{if and (not $.Output) $isRef}}const {{end}}§
-
-    {{Macro "C++.Type" $ty}}§
-
-    {{/* Postfix reference for non-reference output parameters. */}}
-    {{if and $.Output (not $isRef)}}*{{end}}
+  {{     if IsParameter $}}{{Macro "C++.ParameterType" (TypeOf $)}}
+  {{else if IsPseudonym $}}{{Macro "C++.ParameterType" $.To}}
+  {{else if IsPointer   $}}{{Macro "C++.ParameterType" $.To}}*
+  {{else if IsString    $}}char*
+  {{else if IsAny       $}}{{Macro "C++.ParameterTypeAny" $}}
+  {{else                 }}{{Macro "C++.Type" $}}
   {{end}}
 {{end}}
 
@@ -201,8 +220,7 @@
 {{define "C++.ReturnType"}}
   {{AssertType $ "Function"}}
 
-  {{$ty := TypeOf $.Return}}
-  {{Macro "C++.Type" $ty}}
+  {{Macro "C++.ParameterType" $.Return}}
 {{end}}
 
 
@@ -234,16 +252,16 @@
 {{/*
 -------------------------------------------------------------------------------
   Emits the C++ logic to execute the given statement.
-  If the global "C++.StatementTypeOverride" is specified then this the macro
-  with the specified name is called, otherwise the macro delegates to
-  "C++.StatementDefault".
+  If the global "C++.Statement.Override" is specified then this the macro with
+  the specified name is called, otherwise the macro delegates to
+  "C++.Statement.Default".
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Statement"}}
-  {{if $override := Global "C++.StatementTypeOverride"}}
+  {{if $override := Global "C++.Statement.Override"}}
     {{Macro $override $}}
   {{else}}
-    {{Macro "C++.StatementDefault" $}}
+    {{Macro "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 
@@ -253,10 +271,9 @@
   Emits the C++ logic to execute the given statement.
 -------------------------------------------------------------------------------
 */}}
-{{define "C++.StatementDefault"}}
+{{define "C++.Statement.Default"}}
   {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{Macro "C++.LocalName" $.Local}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
-  {{else if IsCopy         $}}{{Macro "C++.Copy" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
   {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
   {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
@@ -280,7 +297,10 @@
   {{else if IsIteration $}}{{Macro "C++.Iteration" $}}
   {{else if IsCall      $}}{{Macro "C++.Call" $}};
   {{else if IsAssert    $}}
-  {{else                 }}{{Error "unsupported statement %T: %v" $ $}}
+  {{else if IsRead      $}}read({{Macro "C++.Read" $.Slice}});
+  {{else if IsWrite     $}}write({{Macro "C++.Read" $.Slice}});
+  {{else if IsCopy      $}}copy({{Macro "C++.Read" $.Dst}}, {{Macro "C++.Read" $.Src}});
+  {{else                 }}{{Error "unsupported statement %T: %+v" $ $}}
   {{end}}
 {{end}}
 
@@ -293,41 +313,7 @@
 {{define "C++.Assign"}}
   {{AssertType $ "Assign"}}
 
-  {{if IsArray (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
-  {{else if IsBuffer (TypeOf $.LHS)}}{{Macro "C++.ArrayAssign" $}}
-  {{else                     }}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
-  {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ logic to copy from Src to Dst
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.Copy"}}
-  {{AssertType $ "Copy"}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ logic to perform an assignment between two arrays.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.ArrayAssign"}}
-  {{AssertType $ "Assign"}}
-
-  {{AssertType (TypeOf $.LHS) "Array" "Buffer"}}
-  {{AssertType (TypeOf $.RHS) "Array" "Buffer"}}
-
-  {{$lhs   := Macro "C++.Read" $.LHS}}
-  {{$rhs   := Macro "C++.Read" $.RHS}}
-  {{$count := Macro "C++.Read" (GetArrayParamCount $.RHS)}}
-  {{$lhs}}.resize({{$count}});
-  for (int32_t i = 0, c = {{$count}}; i < c; i++) {
-    {{$lhs}}[i] = {{$rhs}}[i];
-  }
+  {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
 {{end}}
 
 
@@ -373,7 +359,7 @@
   {{     if IsBoolValue        $}}{{$}}
   {{else if IsNumericValue     $}}{{$}}
   {{else if IsStringValue      $}}{{printf "%q" $}}
-  {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
+  {{else if IsParameter        $}}{{$.Name}}
   {{else if IsBinaryOp         $}}{{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}}
   {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "C++.Read" $.Expression}})
   {{else if IsEnumEntry        $}}{{Macro "C++.EnumName" $.Enum}}::{{Macro "C++.EnumEntryName" $}}
@@ -386,15 +372,18 @@
   {{else if IsObserved         $}}{{Macro "C++.Read" $.Parameter}}
   {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}m{{$.Field.Name}}
   {{else if IsGlobal           $}}this->{{$.Name}}
-  {{else if IsParameter        $}}{{Macro "C++.ReadParameter" $}}
-  {{else if IsArrayIndex       $}}{{Macro "C++.Read" $.Array}}[{{Macro "C++.Read" $.Index}}]
   {{else if IsMapIndex         $}}{{Macro "C++.Read" $.Map}}[{{Macro "C++.Read" $.Index}}]
   {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
   {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
   {{else if IsNull             $}}{{Macro "C++.Null" $.Type}}
-  {{else if IsClassInitializer $}}
-    {{Macro "C++.Type" $}}(){{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
+  {{else if IsCreate           $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>((new {{Macro "C++.Type" $ty.To}}()){{Macro "C++.InitializeFields" $.Initializer}})
+  {{else if IsClassInitializer $}}{{Macro "C++.Type" $}}(){{Macro "C++.InitializeFields" $}}
+  {{else if IsSliceIndex       $}}{{Macro "C++.Read" $.Slice  }}[{{Macro "C++.Read" $.Index}}]
+  {{else if IsSliceRange       $}}slice({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
+  {{else if IsPointerRange     $}}slice({{Macro "C++.Read" $.Pointer}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
+  {{else if IsClone            $}}clone({{Macro "C++.Read" $.Slice}})
+  {{else if IsMake             $}}make<{{Macro "C++.Type" ($.Type | Unpack).To}}>({{Macro "C++.Read" $.Size}})
   {{else if IsSelect           $}}/* clang-format off */
     /* switch({{Macro "C++.Read" $.Value}}) */»
     {{range $c := $.Choices}}
@@ -404,9 +393,19 @@
       {{end}}) ? ({{Macro "C++.Read" $c.Expression}}) :
     {{end}}
     /* default: */ {{Macro "C++.Null" $.Type}}« /* clang-format on */
-
   {{else}}{{Error "macro C++.Read called with unsupported type: %T" $}}
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a chain of 'fluent' set calls, initializing the target class.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.InitializeFields"}}
+  {{AssertType $ "ClassInitializer"}}
+  {{range $f := $.Fields}}.Set{{$f.Field.Name}}({{Macro "C++.Read" $f.Value}}){{end}}
 {{end}}
 
 
@@ -416,7 +415,7 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "C++.Dereference"}}
-  {{Macro "C++.Read" $}}{{if or (IsPointer (TypeOf $)) (IsBuffer (TypeOf $))}}->{{else}}.{{end}}
+  {{Macro "C++.Read" $}}{{if or (IsReference (TypeOf $))}}->{{else}}.{{end}}
 {{end}}
 
 
@@ -452,10 +451,20 @@
 */}}
 {{define "C++.Cast"}}
   {{AssertType $ "Cast"}}
-  {{$src_ty := TypeOf $.Object}}
-  {{$src_fp := or (IsF32 $src_ty) (IsF64 $src_ty)}}
 
-  ({{Macro "C++.Type" $.Type}})({{Macro "C++.Read" $.Object}})
+  {{$src_ty := $.Object | TypeOf | Underlying | Unpack}}
+  {{$dst_ty := $.Type | Underlying}}
+  {{$src    := Macro "C++.Read" $.Object}}
+
+  {{/* T[] -> T* */}}{{if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
+    {{$src}}.begin()
+  {{/* char[] -> string */}}{{else if and (IsSlice $src_ty) (IsString $dst_ty)}}
+    string({{$src}})
+  {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
+    slice({{$src}})
+  {{else}}
+    ({{Macro "C++.Type" $.Type}})({{$src}})
+  {{end}}
 {{end}}
 
 
@@ -485,24 +494,6 @@
   {{if $is_map_delete}}{{Macro "C++.Read" $.Target.Object}}.erase({{Macro "C++.ReadList" $.Arguments}})
   {{else             }}{{Macro "C++.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
   {{end}}
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ logic to read the given parameter, de-referencing if the
-  parameter is an output and its type is not a pointer, array or string.
--------------------------------------------------------------------------------
-*/}}
-{{define "C++.ReadParameter"}}
-  {{AssertType $ "Parameter"}}
-
-  {{$ty       := TypeOf $}}
-  {{$isResult := eq $.Name $.Function.Return.Name}}
-  {{$deref    := not (or (IsPointer $ty) (IsArray $ty) (IsString $ty) $isResult)}}
-  {{/* HACK: Avoid dereferencing nullptrs.
-       Remove when we change outputs to be explicit pointer types.*/}}
-  {{$.Name}}{{if and $.Output $deref}}? (*{{$.Name}}) : {{Macro "C++.Type" $ty}}{}{{end}}
 {{end}}
 
 
@@ -612,7 +603,6 @@
   {{AssertType $ "Type"}}
 
   {{     if IsPseudonym     $}}{{Macro "C++.PrintfFormatCode" $.To}}
-  {{else if IsArray         $}}%p
   {{else if IsPointer       $}}%p
   {{else if IsClass         $}}%p
   {{else if IsString        $}}%s

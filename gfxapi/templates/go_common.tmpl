@@ -35,33 +35,27 @@
   {{if not (IsType $)}}{{Macro "Go.Type" (TypeOf $)}}
   {{else if IsAny           $}}interface{}
   {{else if IsPseudonym     $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsArray         $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsStaticArray   $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsMap           $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsClass         $}}{{Macro "Go.QualifiedName" $}}
   {{else if IsEnum          $}}{{Macro "Go.QualifiedName" $}}
-  {{else if IsPointer       $}}{{if $.Array}}memory.Pointer{{else}}*{{Macro "Go.Type" $.To}}{{end}}
+  {{else if IsPointer       $}}{{Macro "Go.QualifiedName" $}}
+  {{else if IsSlice         $}}{{Macro "Go.QualifiedName" $}}
+  {{else if IsReference     $}}(*{{Macro "Go.Type" $.To}})
   {{else if IsBool          $}}bool
   {{else if IsInt           $}}int64
   {{else if IsUint          $}}uint64
-  {{else if IsS8            $}}int8
+  {{else if IsChar          $}}byte
   {{else if IsU8            $}}uint8
-  {{else if IsS16           $}}int16
+  {{else if IsS8            $}}int8
   {{else if IsU16           $}}uint16
-  {{else if IsS32           $}}int32
-  {{else if IsU32           $}}uint32
+  {{else if IsS16           $}}int16
   {{else if IsF32           $}}float32
-  {{else if IsS64           $}}int64
-  {{else if IsU64           $}}uint64
+  {{else if IsU32           $}}uint32
+  {{else if IsS32           $}}int32
   {{else if IsF64           $}}float64
-  {{else if IsBuffer      $}}
-    {{if $.Array}}
-      {{if IsU8 $.To}}memory.Memory
-      {{else if IsChar $.To}}string
-      {{else}}[]{{Macro "Go.Type" $.To}}
-      {{end}}
-    {{else}}*{{Macro "Go.Type" $.To}}
-    {{end}}
+  {{else if IsU64           $}}uint64
+  {{else if IsS64           $}}int64
   {{else if IsString        $}}string
   {{else if IsVoid          $}}void
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
@@ -76,8 +70,8 @@
 */}}
 {{define "Go.Null"}}
   {{AssertType $ "Type"}}
-  {{     if IsPointer       $}}{{if $.Array}}memory.Pointer(0){{else}}nil{{end}}
-  {{else if IsArray         $}}nil
+  {{     if IsPointer       $}}{{Macro "Go.Type" $}}{}
+  {{else if IsReference     $}}{{Macro "Go.Type" $}}(nil)
   {{else if IsBool          $}}false
   {{else if IsInt           $}}int(0)
   {{else if IsUint          $}}uint(0)
@@ -100,40 +94,112 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the logic to decode the specified variable.
+  Emits the logic to decode the specified type and variable name.
+  ErrHandler can control what should happen if there's a decode error. By
+  default ErrHandler is set to "return err".
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Decode"}}
-  {{AssertType $.Type "Type"}}
-  {{AssertType $.Name "string"}}
+  {{AssertType $.Type       "Type"        }}
+  {{AssertType $.Name       "string"      }}
+  {{AssertType $.ErrHandler "string" "nil"}}
 
-  {{     if IsPseudonym     $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsArray         $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsStaticArray   $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsMap           $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsClass         $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsPointer       $.Type}}
-    {{if $.Type.Array}}if v, err := d.Uint64();  err == nil { {{$.Name}} = memory.Pointer(v) } else { return err }
-    {{else}}if err := {{$.Name}}.Decode(d); err != nil { return err }{{end}}
-  {{else if IsBuffer        $.Type}}if err := {{$.Name}}.Decode(d); err != nil { return err }
-  {{else if IsEnum          $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { return err }
-  {{else if IsBool          $.Type}}if v, err := d.Bool();    err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsInt           $.Type}}if v, err := d.Int64();   err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsUint          $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsS8            $.Type}}if v, err := d.Int8();    err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsU8            $.Type}}if v, err := d.Uint8();   err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsS16           $.Type}}if v, err := d.Int16();   err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsU16           $.Type}}if v, err := d.Uint16();  err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsS32           $.Type}}if v, err := d.Int32();   err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsU32           $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsF32           $.Type}}if v, err := d.Float32(); err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsS64           $.Type}}if v, err := d.Int64();   err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsU64           $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsF64           $.Type}}if v, err := d.Float64(); err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsString        $.Type}}if v, err := d.String();  err == nil { {{$.Name}} = v } else { return err }
-  {{else if IsAny           $.Type}}/* TODO */
-  {{else if IsVoid          $.Type}}
-  {{else}}{{Error "macro Decode '%v' called with unsupported type: %v" $.Name $.Type.Name}}
+  {{     if not $.ErrHandler}}{{Macro "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
+  {{else if IsStaticArray $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsMap         $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsClass       $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsPointer     $.Type}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+  {{else if IsPseudonym   $.Type}}
+    {{$ty := $.Type.To}}
+    {{     if IsStaticArray $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+    {{else if IsMap         $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+    {{else if IsClass       $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+    {{else if IsPointer     $ty}}if err := d.Value(&{{$.Name}}); err != nil { {{$.ErrHandler}} }
+    {{else}}{{Macro "Go.DecodePOD" "Type" $ty "Name" $.Name "ErrHandler" $.ErrHandler "Cast" $.Type}}
+    {{end}}
+  {{else}}{{Macro "Go.DecodePOD" "Type" $.Type "Name" $.Name "ErrHandler" $.ErrHandler}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to decode the specified Plain-Old-Data type and variable name.
+  ErrHandler can control what should happen if there's a decode error. By
+  default ErrHandler is set to "return err".
+  Cast can be used to cast the value type before assigment to Name.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.DecodePOD_cast"}}{{if $}}{{Macro "Go.Type" $}}(v){{else}}v{{end}}{{end}}
+{{define "Go.DecodePOD"}}
+  {{AssertType $.Type       "Type"        }}
+  {{AssertType $.Name       "string"      }}
+  {{AssertType $.ErrHandler "string" "nil"}}
+  {{AssertType $.Cast       "Type"   "nil"}}
+
+  {{$v        := Macro "Go.DecodePOD_cast" $.Cast}}
+  {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
+
+  {{     if IsEnum        $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$.Type.Name}}(v) } else { {{$.ErrHandler}} }
+  {{else if IsBool        $.Type}}if v, err := d.Bool();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsChar        $.Type}}if v, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU8          $.Type}}if v, err := d.Uint8();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS8          $.Type}}if v, err := d.Int8();    err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU16         $.Type}}if v, err := d.Uint16();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS16         $.Type}}if v, err := d.Int16();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF32         $.Type}}if v, err := d.Float32(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU32         $.Type}}if v, err := d.Uint32();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS32         $.Type}}if v, err := d.Int32();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsF64         $.Type}}if v, err := d.Float64(); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsU64         $.Type}}if v, err := d.Uint64();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsS64         $.Type}}if v, err := d.Int64();   err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsString      $.Type}}if v, err := d.String();  err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsInt         $.Type}}if v, err := binary.ReadInt(d,  {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsUint        $.Type}}if v, err := binary.ReadUint(d, {{$int_size}}); err == nil { {{$.Name}} = {{$v}} } else { {{$.ErrHandler}} }
+  {{else if IsVoid        $.Type}}
+  {{else}}{{Error "macro Go.DecodePOD '%v' called with unsupported type: %v" $.Name $.Type.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to encode the specified type and variable name.
+  ErrHandler can control what should happen if there's a encode error. By
+  default ErrHandler is set to "return err".
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Encode"}}
+  {{AssertType $.Type       "Type"        }}
+  {{AssertType $.Name       "string"      }}
+  {{AssertType $.ErrHandler "string" "nil"}}
+
+  {{$ty       := $.Type | Underlying}}
+  {{$int_size := "ϟs.Architecture.IntegerSize*8"}}
+
+  {{     if not $.ErrHandler}}{{Macro "Go.Decode" "Type" $.Type "Name" $.Name "ErrHandler" "return err"}}
+  {{else if IsStaticArray $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
+  {{else if IsMap         $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
+  {{else if IsClass       $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
+  {{else if IsPointer     $ty}}if err := e.Value(&{{$.Name}});           err != nil { {{$.ErrHandler}} }
+  {{else if IsEnum        $ty}}if err := e.Uint32(uint32({{$.Name}}));   err != nil { {{$.ErrHandler}} }
+  {{else if IsBool        $ty}}if err := e.Bool(bool({{$.Name}}));       err != nil { {{$.ErrHandler}} }
+  {{else if IsChar        $ty}}if err := e.Uint8(uint8({{$.Name}}));     err != nil { {{$.ErrHandler}} }
+  {{else if IsU8          $ty}}if err := e.Uint8(uint8({{$.Name}}));     err != nil { {{$.ErrHandler}} }
+  {{else if IsS8          $ty}}if err := e.Int8(int8({{$.Name}}));       err != nil { {{$.ErrHandler}} }
+  {{else if IsU16         $ty}}if err := e.Uint16(uint16({{$.Name}}));   err != nil { {{$.ErrHandler}} }
+  {{else if IsS16         $ty}}if err := e.Int16(int16({{$.Name}}));     err != nil { {{$.ErrHandler}} }
+  {{else if IsF32         $ty}}if err := e.Float32(float32({{$.Name}})); err != nil { {{$.ErrHandler}} }
+  {{else if IsU32         $ty}}if err := e.Uint32(uint32({{$.Name}}));   err != nil { {{$.ErrHandler}} }
+  {{else if IsS32         $ty}}if err := e.Int32(int32({{$.Name}}));     err != nil { {{$.ErrHandler}} }
+  {{else if IsF64         $ty}}if err := e.Float64(float64({{$.Name}})); err != nil { {{$.ErrHandler}} }
+  {{else if IsU64         $ty}}if err := e.Uint64(uint64({{$.Name}}));   err != nil { {{$.ErrHandler}} }
+  {{else if IsS64         $ty}}if err := e.Int64(int64({{$.Name}}));     err != nil { {{$.ErrHandler}} }
+  {{else if IsString      $ty}}if err := e.String(string({{$.Name}}));   err != nil { {{$.ErrHandler}} }
+  {{else if IsInt         $ty}}if err := binary.WriteInt(e,  {{$int_size}},  int64({{$.Name}})); err != nil { {{$.ErrHandler}} }
+  {{else if IsUint        $ty}}if err := binary.WriteUint(e, {{$int_size}}, uint64({{$.Name}})); err != nil { {{$.ErrHandler}} }
+  {{else if IsVoid        $ty}}
+  {{else}}{{Error "macro Go.Encode '%v' called with unsupported type: %v" $.Name $.Type.Name}}
   {{end}}
 {{end}}
 
@@ -183,6 +249,349 @@
   {{AssertType $ "Function"}}
 
   {{Macro "Go.Public" (Macro "CmdName" $)}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits all the statements in the given block
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Block"}}
+  {{ForEach $.Statements "Go.Statement" | JoinWith "\n"}}
+  {{/* Assign each local variable of the block to a blank identifier, in case it hasn't been used. */}}
+  {{if $locals := ForEach $.Statements "Go.LocalNames"}}
+    {{ForEach $locals "Go.Blank" | JoinWith ", "}} = {{$locals | JoinWith ", "}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Go logic to execute the given statement.
+  If the global "Go.Statement.Override" is specified then this the macro with
+  the specified name is called, otherwise the macro delegates to
+  "Go.Statement.Default".
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Statement"}}
+  {{if $override := Global "Go.Statement.Override"}}
+    {{Macro $override $}}
+  {{else}}
+    {{Macro "Go.Statement.Default" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Go logic to execute the given statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Statement.Default"}}
+  {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Go.Read" $.Local.Value}} {{Macro "Go.TypeComment" (TypeOf $.Local)}}
+  {{else if IsAssert       $}}
+  {{else if IsAssign       $}}{{Macro "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
+  {{else if IsMapAssign    $}}{{Macro "Go.MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
+  {{else if IsCopy         $}}{{Macro "Go.Copy" $}}
+  {{else if IsReturn       $}}{{Macro "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
+  {{else if IsIteration    $}}{{Macro "Go.Iteration" $}}
+  {{else if IsCall         $}}{{Macro "Go.Call" $}}
+  {{else if IsRead         $}}
+  {{else if IsWrite        $}}
+  {{else if IsBranch       $}}if {{Macro "Go.Read" $.Condition}} {
+    {{Macro "Go.Block" $.True}}
+    {{if len $.False.Statements}}
+    } else {
+      {{Macro "Go.Block" $.False}}
+    {{end}}
+    }
+  {{else if IsSwitch $}}
+    switch {{Macro "Go.Read" $.Value}} {
+      {{range $c := $.Cases}}
+        case {{range $i, $cond := $c.Conditions}}§
+          {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
+          {{end}}:
+            {{Macro "Go.Block" $c.Block}}
+      {{end}}
+      default:
+        // TODO: better unmatched handling
+        v := {{Macro "Go.Read" $.Value}}
+        fmt.Printf("Error: Missing switch case handler for value %T %v", v, v)
+    }
+  {{else}}{{Error "unsupported statement %T: %v" $ $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute an iteration statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Range"}}
+  {{AssertType $.Name "string"}}
+  {{AssertType $.Range "BinaryOp"}}
+  for {{$.Name}} := {{Macro "Go.Type" $.Range.RHS}}({{Macro "Go.Read" $.Range.LHS}}); {{$.Name}} < {{Macro "Go.Read" $.Range.RHS}}; {{$.Name}}++
+{{end}}
+
+{{define "Go.Iteration"}}
+  {{AssertType $ "Iteration"}}
+  {{     if IsBinaryOp $.Iterable}}
+    {{Macro "Go.Range" "Name" $.Iterator.Name "Range" $.Iterable}} {
+      {{Macro "Go.Block" $.Block}}
+    }
+  {{else}}
+    for _, {{$.Iterator.Name}} := range {{Macro "Go.Read" $.Iterable}}.Range() {
+      {{Macro "Go.Block" $.Block}}
+    }
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute a call statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Call"}}
+  {{AssertType $ "Call"}}
+  {{$args := ForEach $.Arguments "Go.Read" | JoinWith ", "}}
+  {{if $.Target.Object}}
+    {{Macro "Go.Read" $.Target.Object}}.{{$.Target.Function.Name}}({{$args}})
+  {{else}}
+    externs{ϟs, ϟd, ϟl}.{{$.Target.Function.Name}}({{$args}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to assign the RHS to the LHS
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Assign"}}
+  {{if IsSliceIndex $.LHS}}
+    {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
+    {{Macro "Go.Read" $.LHS.Slice}}.Index({{Macro "Go.Read" $.LHS.Index}}, ϟs).Write({{Macro "Go.Read" $.RHS}}, ϟs)
+  {{else}}
+    {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to copy from Src to Dst
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Copy"}}
+  {{AssertType $ "Copy"}}
+  {{Macro "Go.Read" $.Dst}}.Copy({{Macro "Go.Read" $.Src}}, ϟs, ϟd, ϟl)
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to assign a value to a map index
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.MapAssign"}}
+  {{if eq $.Operator "="}}{{Macro "Go.Read" $.To.Map}}[{{Macro "Go.Read" $.To.Index}}] = {{Macro "Go.Read" $.Value}}
+  {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Go logic to read the value of the specified expression.
+  If the global "Go.Read.Override" is specified then this the macro with the
+  specified name is called, otherwise the macro delegates to "Go.Read.Default".
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Read"}}
+  {{if $override := Global "Go.Read.Override"}}
+    {{Macro $override $}}
+  {{else}}
+    {{Macro "Go.Read.Default" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the Go logic to execute the given statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Read.Default"}}
+  {{     if IsBoolValue        $}}{{$}}
+  {{else if IsNumericValue     $}}{{Macro "Go.Type" $}}({{$}})
+  {{else if IsUnaryOp          $}}{{$.Operator}}({{Macro "Go.Read" $.Expression}})
+  {{else if IsStringValue      $}}{{printf "%q" $}}
+  {{else if IsEnumEntry        $}}{{$.Enum.Name}}_{{$.Name}}
+  {{else if IsLocal            $}}{{$.Name}}
+  {{else if IsBitTest          $}}(({{Macro "Go.Read" $.Bits}}) & ({{Macro "Go.Read" $.Bitfield}}) != 0)
+  {{else if IsBinaryOp         $}}({{Macro "Go.Read" $.LHS}}) {{$.Operator}} ({{Macro "Go.Read" $.RHS}})
+  {{else if IsCast             $}}{{Macro "Go.Cast" $}}
+  {{else if IsCall             $}}{{Macro "Go.Call" $}}
+  {{else if IsUnknown          $}}{{Global "Go.InferredExpression" "1"}}{{Macro "Go.Read" $.Inferred}}{{Global "Go.InferredExpression" ""}}
+  {{else if IsObserved         $}}{{Macro "Go.ReadParameter" $.Parameter}}
+  {{else if IsMember           $}}{{Macro "Go.Read" $.Object}}.{{Macro "Go.Public" $.Field.Name}}
+  {{else if IsGlobal           $}}ϟc.{{Title $.Name}}
+  {{else if IsParameter        $}}{{Macro "Go.ReadParameter" $}}
+  {{else if IsMapIndex         $}}{{Macro "Go.Read" $.Map}}.Get({{Macro "Go.Read" $.Index}})
+  {{else if IsMapContains      $}}{{Macro "Go.Read" $.Map}}.Contains({{Macro "Go.Read" $.Key}})
+  {{else if IsLength           $}}{{Macro "Go.Type" $.Type}}({{Macro "Go.ReadLength" $.Object}})
+  {{else if IsNull             $}}{{Macro "Go.Null" $.Type}}
+  {{else if IsNew              $}}new {{Macro "Go.Type" $.Type}}
+  {{else if IsSliceIndex       $}}{{Macro "Go.Read" $.Slice  }}.Index({{Macro "Go.Read" $.Index}}, ϟs).Read(ϟs, ϟd, ϟl)
+  {{else if IsSliceRange       $}}{{Macro "Go.Read" $.Slice  }}.Slice({{Macro "Go.Read" $.Range.LHS}}, {{Macro "Go.Read" $.Range.RHS}}, ϟs)
+  {{else if IsPointerRange     $}}{{Macro "Go.Read" $.Pointer}}.Slice({{Macro "Go.Read" $.Range.LHS}}, {{Macro "Go.Read" $.Range.RHS}}, ϟs)
+  {{else if IsClone            $}}{{Macro "Go.Read" $.Slice  }}.Clone(ϟs)
+  {{else if IsMake             $}}Make{{Macro "Go.Type" $.Type}}({{Macro "Go.Read" $.Size}}, ϟs)
+  {{else if IsSelect           $}}
+    func() (result {{Macro "Go.Type" $}}) {
+      switch {{Macro "Go.Read" $.Value}} {
+        {{range $c := $.Choices}}
+          case {{range $i, $cond := $c.Conditions}}§
+            {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
+            {{end}}:
+              return {{Macro "Go.Read" $c.Expression}}
+        {{end}}
+      default:
+        // TODO: better unmatched handling
+        panic(fmt.Errorf("Unmatched switch(%v) in atom %T", {{Macro "Go.Read" $.Value}}, ϟa))
+        return result
+      }
+    }()
+  {{else if IsClassInitializer $}}func(){{Macro "Go.Type" $}}{
+    s := {{Macro "Go.Type" $}}{}
+    s.Init()
+    {{range $f := $.Fields}}
+      s.{{$f.Field.Name}} = {{Macro "Go.Read" $f.Value}}
+    {{end}}
+    return s
+  }()
+  {{else if IsCreate $}}func(){{Macro "Go.Type" $}}{
+    s := &{{Macro "Go.Type" (Unpack $.Type).To}}{}
+    s.Init()
+    {{range $f := $.Initializer.Fields}}
+      s.{{$f.Field.Name}} = {{Macro "Go.Read" $f.Value}}
+    {{end}}
+    return s
+  }()
+  {{else}}{{Error "macro Go.Read called with unsupported type: %T" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to cast a value to another type
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Cast"}}
+  {{AssertType $ "Cast"}}
+
+  {{$src_ty := $.Object | TypeOf | Underlying | Unpack}}
+  {{$dst_ty := $.Type | Underlying}}
+  {{$src    := Macro "Go.Read" $.Object}}
+
+  {{/* T* -> number */}}{{if and (IsPointer $src_ty) (IsNumericType $dst_ty)}}
+    {{Macro "Go.Type" $.Type}}({{$src}}.Address)
+  {{/* T[] -> T* */}}{{else if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
+    {{Macro "Go.Type" $.Type}}({{$src}}.Index(0, ϟs))
+  {{/* char[] -> string */}}{{else if and (IsSlice $src_ty) (IsString $dst_ty)}}
+    string({{$src}}.Read(ϟs, ϟd, ϟl))
+  {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
+    Make{{Macro "Go.Type" $.Type}}FromString({{$src}}, ϟs)
+  {{else}}
+    {{Macro "Go.Type" $.Type}}({{$src}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to read the value of the specified expression
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.ReadParameter"}}
+  {{AssertType $ "Parameter"}}
+
+  ϟa.{{Macro "Go.Public" $.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a comment displaying the specified type
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.TypeComment"}}
+  {{AssertType $ "Type"}}
+
+  // {{$.Name}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to read the length of the specified expression
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.ReadLength"}}
+  len({{Macro "Go.Read" $}})
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  If the given statement is a local variable declaration, return its name.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.LocalNames"}}
+  {{if IsDeclareLocal $}}{{$.Local.Name}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits a Go blank identifier, _.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Blank"}}_{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the size in bytes of the specified type as a uint64
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.SizeOf"}}
+  {{AssertType $ "Type"}}
+
+  {{     if IsPseudonym $}}{{Macro "Go.SizeOf" $.To}}
+  {{else if IsVoid      $}}uint64(1)
+  {{else if IsBool      $}}uint64(1)
+  {{else if IsChar      $}}uint64(1)
+  {{else if IsU8        $}}uint64(1)
+  {{else if IsS8        $}}uint64(1)
+  {{else if IsU16       $}}uint64(2)
+  {{else if IsS16       $}}uint64(2)
+  {{else if IsF32       $}}uint64(4)
+  {{else if IsU32       $}}uint64(4)
+  {{else if IsS32       $}}uint64(4)
+  {{else if IsF64       $}}uint64(8)
+  {{else if IsU64       $}}uint64(8)
+  {{else if IsS64       $}}uint64(8)
+  {{else if IsEnum      $}}uint64(4)
+  {{else if IsString    $}}uint64(ϟs.Architecture.PointerSize)
+  {{else if IsPointer   $}}uint64(ϟs.Architecture.PointerSize)
+  {{else if IsInt       $}}uint64(ϟs.Architecture.IntegerSize)
+  {{else if IsUint      $}}uint64(ϟs.Architecture.IntegerSize)
+  {{else                 }}{{Error "macro Go.SizeOf called with unsupported type: %v" $}}
+  {{end}}
 {{end}}
 
 

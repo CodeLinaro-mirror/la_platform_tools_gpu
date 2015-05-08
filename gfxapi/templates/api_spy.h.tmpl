@@ -52,6 +52,8 @@
 ¶
   class {{$spyname}} {
   «public:»
+    inline {{$spyname}}();
+¶
     inline void init(std::shared_ptr<gapic::Encoder> encoder);
 ¶
     {{range $f := AllCommands $}}
@@ -74,11 +76,12 @@
     std::shared_ptr<gapic::Encoder> mEncoder;
   };
 ¶
+  inline {{$spyname}}::{{$spyname}}()
+    : mState(std::bind(&GlesSpy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {}
+¶
   // Inline methods
   inline void {{$spyname}}::init(std::shared_ptr<gapic::Encoder> encoder) {
     mEncoder = encoder;
-    mState.read = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    mState.write = std::bind(&{{$spyname}}::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mImports.Resolve();
   }
 ¶
@@ -164,42 +167,13 @@
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
 
     {{range $p := $.FullParameters}}
-      {{if not $p.Output}}
-        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" (Macro "C++.ReadParameter" $p)}}
-      {{end}}
-    {{end}}
-
-    {{range $p := $.FullParameters}}
-      {{if $p.Output}}
-        {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" (Macro "C++.ReadParameter" $p)}}
-      {{end}}
+      {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $p.Name}}
     {{end}}
 
     {{if $ret}}¶
       return result;
     {{end}}
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ expression for the number of elements in the provided array
-  parameter.
--------------------------------------------------------------------------------
-*/}}
-{{define "ArrayParamCount"}}
-  {{AssertType $ "Parameter"}}
-
-  {{if eq $.Function.Return.Name $.Name}}
-    {{$cnt_expr := GetAnnotation $.Function "ReturnSize"}}
-    {{if IsNil $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
-    {{Macro "C++.Read" (index $cnt_expr.Arguments 0)}}
-  {{else}}
-    {{$cnt_expr := GetArrayParamCount $}}
-    {{if IsNil $cnt_expr}}{{Error "Unable to determine array parameter count for: %s.%s" $.Function.Name $.Name}}{{end}}
-    {{Macro "C++.Read" $cnt_expr}}
-  {{end}}
 {{end}}
 
 
@@ -230,17 +204,6 @@
   {{else if IsPointer     $.Type}}mEncoder->Uint64(reinterpret_cast<uint64_t>({{$.Name}}));
   {{else if IsString      $.Type}}mEncoder->String({{$.Name}});
   {{else if IsEnum        $.Type}}mEncoder->Uint32(static_cast<uint32_t>({{$.Name}}));
-  {{else if IsArray       $.Type}}
-    if ({{$.Name}} != nullptr) { // TODO: This check should not be necessary!
-      int32_t count_ = {{Macro "ArrayParamCount" $.Parameter}};
-      mEncoder->Uint32(count_);
-      for (int i = 0; i < count_; i++) {
-        {{$el := print $.Name "[i]"}}
-        {{Macro "Encode" "Type" $.Type.ValueType "Name" $el "Parameter" $.Parameter}}
-      }
-    } else {
-      mEncoder->Uint32(0);
-    }
   {{else if IsStaticArray $.Type}}
     for (int i = 0; i < {{$.Type.Size}}; i++) {
       {{Macro "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}
@@ -250,9 +213,7 @@
     {{range $f := $.Type.Fields}}
       {{Macro "Encode" "Type" $f.Type "Name" (print $.Name ".m" $f.Name) "Parameter" $.Parameter}}
     {{end}}
-  {{/* TODO: Store arrays as resources
-  {{else if IsArray       $.Type}}mEncoder->U64(reinterpret_cast<uint64_t>({{$.Name}}))
-  */}}{{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
+  {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
   {{end}}
 {{end}}
 

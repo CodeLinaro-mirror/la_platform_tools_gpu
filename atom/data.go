@@ -12,44 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package memory
+package atom
 
 import (
-	"fmt"
+	"bytes"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-type resourceData struct {
-	resId binary.ID
-	size  uint64
-}
-
-func (r resourceData) Get(db database.Database, logger log.Logger) ([]byte, error) {
-	binary := store.Blob{}
-	if err := db.Load(r.resId, logger, &binary); err != nil {
-		return nil, err
+// Data encodes and stores the value v to the database d, returning the
+// memory range and new resource identifier. Data can be used to as a helper
+// to AddRead and AddWrite methods on atoms.
+func Data(a device.Architecture, d database.Database, l log.Logger, at memory.Pointer, v ...interface{}) (memory.Range, binary.ID) {
+	buf := &bytes.Buffer{}
+	w := endian.Writer(buf, a.ByteOrder)
+	if err := memory.Write(w, a, v); err != nil {
+		panic(err)
 	}
-	if r.size != uint64(len(binary.Data)) {
-		return nil, fmt.Errorf("Loaded resource is unexpected size. Expected 0x%x, got 0x%x for resource %v",
-			r.size, len(binary.Data), r.resId)
+	id, err := d.Store(&store.Blob{Data: buf.Bytes()}, l)
+	if err != nil {
+		panic(err)
 	}
-	return binary.Data, nil
-}
-
-func (r resourceData) Slice(rng Range) DataSlicer {
-	return slice(r, rng)
-}
-
-func (r resourceData) Size() uint64 {
-	return r.size
-}
-
-// ResourceData returns a DataSlicer that wraps a resource. resId is the
-// identifier of the resource and size is the size in bytes of the resource.
-func ResourceData(resId binary.ID, size uint64) DataSlicer {
-	return resourceData{resId, size}
+	return at.Range(uint64(len(buf.Bytes()))), id
 }

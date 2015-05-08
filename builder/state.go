@@ -30,13 +30,13 @@ import (
 )
 
 // build writes to out the Binary resource resulting from the given GetState request.
-func (request *GetState) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, db, logger)
+func (request *GetState) build(d database.Database, l log.Logger, out binary.Object) error {
+	capture, err := loadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
 		return err
 	}
@@ -45,9 +45,9 @@ func (request *GetState) build(db database.Database, logger log.Logger, out bina
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	s := &gfxapi.State{}
+	s := gfxapi.NewState()
 	for _, a := range atoms[:request.After] {
-		if err := a.Mutate(s); err != nil {
+		if err := a.Mutate(s, d, l); err != nil {
 			return err
 		}
 	}

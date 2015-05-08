@@ -17,7 +17,9 @@ package atom
 
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 )
 
 // Atom is the interface implemented by all objects that describe an single
@@ -40,8 +42,11 @@ type Atom interface {
 	// Flags returns the flags of the atom.
 	Flags() Flags
 
+	// Observations returns all the memory observations made by the atom.
+	Observations() *Observations
+
 	// Mutate mutates the State using the atom.
-	Mutate(*gfxapi.State) error
+	Mutate(*gfxapi.State, database.Database, log.Logger) error
 }
 
 // ID is the index of an atom in an atom stream.

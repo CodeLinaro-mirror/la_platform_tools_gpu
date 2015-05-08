@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/_experimental/client/schema"
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 	"github.com/google/gxui"
@@ -87,20 +87,6 @@ func createAtomControls(t gxui.Theme, appCtx *ApplicationContext, id atom.ID) gx
 	ll.AddChild(CreateLabel(t, fmt.Sprintf("%.6d ", id), LINE_NUMBER_COLOR, active))
 
 	switch {
-	case a.Info.Type == uint16(atom.TypeIDObservation):
-		b := t.CreateButton()
-		b.SetMargin(math.Spacing{})
-		//b.SetPadding(math.Spacing{})
-
-		// TODO: This is filthy. Reconsider.
-		start, size := a.Arguments[0].(memory.Pointer), a.Arguments[1].(uint64)
-
-		ll.AddChild(CreateLabel(t, "Observation: ", MEMORY_OBSERVATION_COLOR, active))
-		b.AddChild(CreateLabel(t, fmt.Sprintf("[0x%x - 0x%x]", start, start+memory.Pointer(size)), MEMORY_OBSERVATION_COLOR, true))
-		b.OnClick(func(gxui.MouseEvent) {
-			appCtx.SelectAddress(start)
-		})
-		ll.AddChild(b)
 	case a.Info.IsCommand:
 		if active {
 			//appCtx.OnTimingInfoUpdated(func() {

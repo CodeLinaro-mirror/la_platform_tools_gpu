@@ -12,16 +12,95 @@ import (
 
 func init() {
 	s := schemaBuilder{
-		arrays:       make(map[int]*service.ArrayInfo),
 		staticArrays: make(map[int]*service.StaticArrayInfo),
 		maps:         make(map[int]*service.MapInfo),
 		enums:        make(map[int]*service.EnumInfo),
 		structs:      make(map[int]*service.StructInfo),
 		classes:      make(map[int]*service.ClassInfo),
 	}
+	_ = s
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 0,
+		Name: "cmd_clone",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "src",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "cnt",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 1,
+		Name: "cmd_make",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "cnt",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 2,
+		Name: "cmd_copy",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "src",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "cnt",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 3,
+		Name: "cmd_charslice_to_string",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "s",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "len",
+				Type: schema.U32,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:              service.ApiId{ID: binary.ID(apiID)},
-		Type:             0,
+		Type:             4,
 		Name:             "cmd_void",
 		Parameters:       []service.ParameterInfo{},
 		IsCommand:        true,
@@ -31,7 +110,55 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 1,
+		Type: 5,
+		Name: "cmd_unknown_ret",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "result",
+				Type: schema.Int,
+				Out:  true,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 6,
+		Name: "cmd_unknown_write_ptr",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "p",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 7,
+		Name: "cmd_unknown_write_slice",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 8,
 		Name: "cmd_void_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -47,7 +174,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 2,
+		Type: 9,
 		Name: "cmd_void_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -63,7 +190,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 3,
+		Type: 10,
 		Name: "cmd_void_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -79,7 +206,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 4,
+		Type: 11,
 		Name: "cmd_void_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -95,7 +222,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 5,
+		Type: 12,
 		Name: "cmd_void_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -111,7 +238,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 6,
+		Type: 13,
 		Name: "cmd_void_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -127,7 +254,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 7,
+		Type: 14,
 		Name: "cmd_void_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -143,7 +270,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 8,
+		Type: 15,
 		Name: "cmd_void_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -159,7 +286,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 9,
+		Type: 16,
 		Name: "cmd_void_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -175,7 +302,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 10,
+		Type: 17,
 		Name: "cmd_void_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -191,7 +318,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 11,
+		Type: 18,
 		Name: "cmd_void_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -207,7 +334,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 12,
+		Type: 19,
 		Name: "cmd_void_string",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -223,7 +350,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 13,
+		Type: 20,
 		Name: "cmd_void_3_strings",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -249,22 +376,22 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 14,
-		Name: "cmd_void_3_arrays",
+		Type: 21,
+		Name: "cmd_void_3_in_arrays",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "a",
-				Type: s.getArrayInfo(3),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "b",
-				Type: s.getArrayInfo(4),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "c",
-				Type: s.getArrayInfo(0),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -275,12 +402,12 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 15,
-		Name: "cmd_void_array_of_strings",
+		Type: 22,
+		Name: "cmd_void_read_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "a",
-				Type: s.getArrayInfo(4),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -291,7 +418,395 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 16,
+		Type: 23,
+		Name: "cmd_void_read_s8",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 24,
+		Name: "cmd_void_read_u16",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 25,
+		Name: "cmd_void_read_s16",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 26,
+		Name: "cmd_void_read_f32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 27,
+		Name: "cmd_void_read_u32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 28,
+		Name: "cmd_void_read_s32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 29,
+		Name: "cmd_void_read_f64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 30,
+		Name: "cmd_void_read_u64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 31,
+		Name: "cmd_void_read_s64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 32,
+		Name: "cmd_void_read_bool",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 33,
+		Name: "cmd_void_read_ptrs",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "b",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "c",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 34,
+		Name: "cmd_void_write_u8",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 35,
+		Name: "cmd_void_write_s8",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 36,
+		Name: "cmd_void_write_u16",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 37,
+		Name: "cmd_void_write_s16",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 38,
+		Name: "cmd_void_write_f32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 39,
+		Name: "cmd_void_write_u32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 40,
+		Name: "cmd_void_write_s32",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 41,
+		Name: "cmd_void_write_f64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 42,
+		Name: "cmd_void_write_u64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 43,
+		Name: "cmd_void_write_s64",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 44,
+		Name: "cmd_void_write_bool",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 45,
+		Name: "cmd_void_write_ptrs",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "b",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+			service.ParameterInfo{
+				Name: "c",
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 46,
 		Name: "cmd_u8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -307,7 +822,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 17,
+		Type: 47,
 		Name: "cmd_s8",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -323,7 +838,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 18,
+		Type: 48,
 		Name: "cmd_u16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -339,7 +854,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 19,
+		Type: 49,
 		Name: "cmd_s16",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -355,7 +870,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 20,
+		Type: 50,
 		Name: "cmd_f32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -371,7 +886,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 21,
+		Type: 51,
 		Name: "cmd_u32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -387,7 +902,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 22,
+		Type: 52,
 		Name: "cmd_s32",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -403,7 +918,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 23,
+		Type: 53,
 		Name: "cmd_f64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -419,7 +934,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 24,
+		Type: 54,
 		Name: "cmd_u64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -435,7 +950,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 25,
+		Type: 55,
 		Name: "cmd_s64",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -451,7 +966,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 26,
+		Type: 56,
 		Name: "cmd_bool",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -467,7 +982,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 27,
+		Type: 57,
 		Name: "cmd_string",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -483,23 +998,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 28,
-		Name: "cmd_array_of_float",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "result",
-				Type: s.getArrayInfo(1),
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 29,
+		Type: 58,
 		Name: "cmd_pointer",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -515,241 +1014,7 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 30,
-		Name: "cmd_void_out_u8",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.U8,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 31,
-		Name: "cmd_void_out_s8",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.S8,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 32,
-		Name: "cmd_void_out_u16",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.U16,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 33,
-		Name: "cmd_void_out_s16",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.S16,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 34,
-		Name: "cmd_void_out_f32",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.Float,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 35,
-		Name: "cmd_void_out_u32",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.U32,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 36,
-		Name: "cmd_void_out_s32",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.S32,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 37,
-		Name: "cmd_void_out_f64",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.Double,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 38,
-		Name: "cmd_void_out_u64",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.U64,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 39,
-		Name: "cmd_void_out_s64",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.S64,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 40,
-		Name: "cmd_void_out_bool",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.Bool,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 41,
-		Name: "cmd_void_out_string",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.String,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 42,
-		Name: "cmd_void_out_fixed_size_buffer",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.Pointer,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 43,
-		Name: "cmd_void_out_3_strings",
-		Parameters: []service.ParameterInfo{
-			service.ParameterInfo{
-				Name: "a",
-				Type: schema.String,
-				Out:  true,
-			},
-			service.ParameterInfo{
-				Name: "b",
-				Type: schema.String,
-				Out:  true,
-			},
-			service.ParameterInfo{
-				Name: "c",
-				Type: schema.String,
-				Out:  true,
-			},
-		},
-		IsCommand:        true,
-		IsDrawCall:       false,
-		IsEndOfFrame:     false,
-		DocumentationUrl: "[]",
-	})
-	schema.RegisterAtom(service.AtomInfo{
-		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 44,
+		Type: 59,
 		Name: "cmd_void_3_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
@@ -775,23 +1040,13 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 45,
-		Name: "cmd_void_out_3_remapped",
+		Type: 60,
+		Name: "cmd_void_in_array_of_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "a",
-				Type: schema.U32,
-				Out:  true,
-			},
-			service.ParameterInfo{
-				Name: "b",
-				Type: schema.U32,
-				Out:  true,
-			},
-			service.ParameterInfo{
-				Name: "c",
-				Type: schema.U32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -801,13 +1056,29 @@ func init() {
 	})
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
-		Type: 46,
+		Type: 61,
 		Name: "cmd_void_out_array_of_remapped",
 		Parameters: []service.ParameterInfo{
 			service.ParameterInfo{
 				Name: "a",
-				Type: s.getArrayInfo(2),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
+			},
+		},
+		IsCommand:        true,
+		IsDrawCall:       false,
+		IsEndOfFrame:     false,
+		DocumentationUrl: "[]",
+	})
+	schema.RegisterAtom(service.AtomInfo{
+		Api:  service.ApiId{ID: binary.ID(apiID)},
+		Type: 62,
+		Name: "cmd_void_out_array_of_unknown_remapped",
+		Parameters: []service.ParameterInfo{
+			service.ParameterInfo{
+				Name: "a",
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -816,14 +1087,22 @@ func init() {
 		DocumentationUrl: "[]",
 	})
 	schema.RegisterAPI(api{}, service.StructInfo{
-		Name:   "state",
-		Kind:   service.TypeKindStruct,
-		Fields: service.FieldInfoArray{},
+		Name: "state",
+		Kind: service.TypeKindStruct,
+		Fields: service.FieldInfoPtrArray{
+			&service.FieldInfo{
+				Name: "buf",
+				Type: schema.Int, /* TODO: Slice */
+			},
+			&service.FieldInfo{
+				Name: "str",
+				Type: schema.String,
+			},
+		},
 	})
 }
 
 type schemaBuilder struct {
-	arrays       map[int]*service.ArrayInfo
 	staticArrays map[int]*service.StaticArrayInfo
 	maps         map[int]*service.MapInfo
 	enums        map[int]*service.EnumInfo
@@ -831,26 +1110,6 @@ type schemaBuilder struct {
 	classes      map[int]*service.ClassInfo
 }
 
-func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
-	e, f := s.arrays[id]
-	if f {
-		return e
-	}
-	switch id {
-	case 0:
-		e = service.CreateArrayInfo("BoolArray", service.TypeKindArray, schema.Bool)
-	case 1:
-		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
-	case 2:
-		e = service.CreateArrayInfo("RemappedArray", service.TypeKindArray, schema.U32)
-	case 3:
-		e = service.CreateArrayInfo("S8Array", service.TypeKindArray, schema.S8)
-	case 4:
-		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
-	}
-	s.arrays[id] = e
-	return e
-}
 func (s schemaBuilder) getStaticArrayInfo(id int) *service.StaticArrayInfo {
 	e, f := s.staticArrays[id]
 	if f {
@@ -891,7 +1150,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 		e = service.CreateClassInfo(
 			"Tester",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "A",
 					Type: s.getClassInfo(-1),
@@ -901,19 +1160,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getClassInfo(1),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	case 1:
 		e = service.CreateClassInfo(
 			"Included",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "S",
 					Type: schema.String,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	}
 	s.classes[id] = e

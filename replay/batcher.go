@@ -127,10 +127,16 @@ func (b *batcher) send(requests []Request) (err error) {
 		}
 	}
 
-	builder := builder.New(int(td.PointerSize), int(td.PointerAlignment), b.device.ByteOrder())
+	architecture := b.device.Info().Architecture()
 
-	adapter := adapter{handlers: postbackHandlers, builder: builder, state: &gfxapi.State{}}
-	transforms.Transform(atoms, &adapter)
+	builder := builder.New(architecture)
+
+	transforms.Transform(atoms, &adapter{
+		state:   gfxapi.NewState(),
+		db:      b.persistentDb,
+		logger:  b.logger,
+		builder: builder,
+	})
 
 	if config.DebugReplay {
 		b.logger.Infof("Building payload...")
@@ -158,19 +164,19 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.persistentDb,
 		b.logger,
 		postbackHandlers,
-		b.device.ByteOrder(),
+		architecture,
 	)
 }
 
 // adapter conforms to the the atom Writer interface, performing replay writes
 // on each atom.
 type adapter struct {
-	handlers executor.PostbackHandlerMap
-	builder  *builder.Builder
-	state    *gfxapi.State
+	state   *gfxapi.State
+	db      database.Database
+	logger  log.Logger
+	builder *builder.Builder
 }
 
 func (w *adapter) Write(id atom.ID, a atom.Atom) {
-	_, postback := w.handlers[id]
-	Replay(id, a, w.state, w.builder, postback)
+	Replay(id, a, w.state, w.db, w.logger, w.builder)
 }

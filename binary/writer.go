@@ -14,6 +14,8 @@
 
 package binary
 
+import "fmt"
+
 // Writer provides methods for encoding values.
 type Writer interface {
 	// Data writes the data bytes in their entirety.
@@ -42,4 +44,36 @@ type Writer interface {
 	Float64(float64) error
 	// String encodes a string to the Writer.
 	String(string) error
+}
+
+// WriteUint writes the unsigned integer v of either 8, 16, 32 or 64 bits to w.
+func WriteUint(w Writer, bits int, v uint64) error {
+	switch bits {
+	case 8:
+		return w.Uint8(uint8(v))
+	case 16:
+		return w.Uint16(uint16(v))
+	case 32:
+		return w.Uint32(uint32(v))
+	case 64:
+		return w.Uint64(uint64(v))
+	default:
+		return fmt.Errorf("Unsupported integer bit count %v", bits)
+	}
+}
+
+// WriteInt writes the signed integer v of either 8, 16, 32 or 64 bits to w.
+func WriteInt(w Writer, bits int, v int64) error {
+	switch bits {
+	case 8:
+		return w.Int8(int8(v))
+	case 16:
+		return w.Int16(int16(v))
+	case 32:
+		return w.Int32(int32(v))
+	case 64:
+		return w.Int64(int64(v))
+	default:
+		return fmt.Errorf("Unsupported integer bit count %v", bits)
+	}
 }

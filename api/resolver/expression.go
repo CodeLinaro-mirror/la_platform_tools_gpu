@@ -241,48 +241,65 @@ func member(ctx *context, in *ast.Member) semantic.Expression {
 	return out
 }
 
+func castToU64(ctx *context, in ast.Node, expr semantic.Expression) semantic.Expression {
+	ty := expr.ExpressionType()
+	if equal(ty, semantic.Uint64Type) {
+		return expr
+	}
+	if !castable(ty, semantic.Uint64Type) {
+		ctx.errorf(in, "cannot cast %s to u64", typename(ty))
+	}
+	return &semantic.Cast{Object: expr, Type: semantic.Uint64Type}
+}
+
 func index(ctx *context, in *ast.Index) semantic.Expression {
 	object := expression(ctx, in.Object)
 	at := baseType(object.ExpressionType())
 	var index semantic.Expression
+
 	switch at := at.(type) {
 	case *semantic.Pointer:
-		ctx.with(semantic.Int32Type, func() {
+		ctx.with(semantic.Uint64Type, func() {
 			index = expression(ctx, in.Index)
 		})
 		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
-			out := &semantic.PointerRange{AST: in, Pointer: object, Type: getSliceType(ctx, in, at.To), Range: bop}
+			// pointer[a:b]
+			bop.LHS = castToU64(ctx, bop.AST.LHS, bop.LHS)
+			bop.RHS = castToU64(ctx, bop.AST.RHS, bop.RHS)
+			out := &semantic.PointerRange{AST: in, Pointer: object, Type: at.Slice, Range: bop}
 			ctx.mappings[in] = out
 			return out
 		}
-		if n, ok := index.(semantic.Int32Value); ok && n == 0 {
+		if n, ok := index.(semantic.Uint64Value); ok && n == 0 {
+			// pointer[0]
 			// TODO: clean up the magical 0 index on pointers
 			r := &semantic.BinaryOp{LHS: n, Operator: ast.OpSlice, RHS: n + 1}
-			st := getSliceType(ctx, in, at.To)
-			slice := &semantic.PointerRange{AST: in, Pointer: object, Type: st, Range: r}
-			out := &semantic.SliceIndex{AST: in, Slice: slice, Type: st, Index: n}
+			slice := &semantic.PointerRange{AST: in, Pointer: object, Type: at.Slice, Range: r}
+			out := &semantic.SliceIndex{AST: in, Slice: slice, Type: at.Slice, Index: n}
 			ctx.mappings[in] = out
 			return out
 		}
 		ctx.errorf(in, "type %s not valid slicing pointer", typename(index.ExpressionType()))
 		return invalid{}
 	case *semantic.Slice:
-		ctx.with(semantic.Int32Type, func() {
+		ctx.with(semantic.Uint64Type, func() {
 			index = expression(ctx, in.Index)
 		})
 		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
+			// slice[a:b]
+			bop.LHS = castToU64(ctx, bop.AST.LHS, bop.LHS)
+			bop.RHS = castToU64(ctx, bop.AST.RHS, bop.RHS)
 			out := &semantic.SliceRange{AST: in, Slice: object, Type: at, Range: bop}
 			ctx.mappings[in] = out
 			return out
 		}
-		it := index.ExpressionType()
-		if !equal(it, semantic.Int32Type) && !equal(it, semantic.Uint32Type) {
-			ctx.errorf(in, "type %s not valid indexing slice", typename(it))
-		}
+		// slice[a]
+		index = castToU64(ctx, in, index)
 		out := &semantic.SliceIndex{AST: in, Slice: object, Type: at, Index: index}
 		ctx.mappings[in] = out
 		return out
 	case *semantic.Map:
+		// map[k]
 		ctx.with(at.KeyType, func() {
 			index = expression(ctx, in.Index)
 		})

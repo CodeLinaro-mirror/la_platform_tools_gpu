@@ -54,6 +54,9 @@ var (
 		semantic.Choice{},
 		semantic.ClassInitializer{},
 		semantic.Class{},
+		semantic.Clone{},
+		semantic.Copy{},
+		semantic.Create{},
 		semantic.DeclareLocal{},
 		semantic.EnumEntry{},
 		semantic.Enum{},
@@ -63,24 +66,32 @@ var (
 		semantic.Iteration{},
 		semantic.Length{},
 		semantic.Local{},
+		semantic.Make{},
 		semantic.MapAssign{},
 		semantic.MapContains{},
 		semantic.MapIndex{},
 		semantic.Map{},
 		semantic.Member{},
+		semantic.New{},
 		semantic.Null{},
 		semantic.Observed{},
 		semantic.Parameter{},
+		semantic.PointerRange{},
 		semantic.Pointer{},
 		semantic.Pseudonym{},
+		semantic.Read{},
 		semantic.Reference{},
 		semantic.Return{},
-		semantic.Slice{},
 		semantic.Select{},
+		semantic.SliceIndex{},
+		semantic.SliceRange{},
+		semantic.Slice{},
+		semantic.Slice{},
 		semantic.StaticArray{},
 		semantic.Switch{},
 		semantic.UnaryOp{},
 		semantic.Unknown{},
+		semantic.Write{},
 		// node interface types
 		(*semantic.Annotated)(nil),
 		(*semantic.Expression)(nil),
@@ -133,7 +144,7 @@ func (*Functions) TypeOf(v interface{}) (semantic.Type, error) {
 	}
 }
 
-// Returns true if v is one of the primitive numeric types.
+// Returns true if v is one of the primitive numeric value types.
 func (*Functions) IsNumericValue(v interface{}) bool {
 	switch v.(type) {
 	case semantic.Int8Value,
@@ -146,6 +157,28 @@ func (*Functions) IsNumericValue(v interface{}) bool {
 		semantic.Uint64Value,
 		semantic.Float32Value,
 		semantic.Float64Value:
+		return true
+	default:
+		return false
+	}
+}
+
+// Returns true if t is one of the primitive numeric types.
+func (*Functions) IsNumericType(t interface{}) bool {
+	if _, builtin := t.(*semantic.Builtin); !builtin {
+		return false
+	}
+	switch t {
+	case semantic.Int8Type,
+		semantic.Uint8Type,
+		semantic.Int16Type,
+		semantic.Uint16Type,
+		semantic.Int32Type,
+		semantic.Uint32Type,
+		semantic.Int64Type,
+		semantic.Uint64Type,
+		semantic.Float32Type,
+		semantic.Float64Type:
 		return true
 	default:
 		return false
@@ -174,16 +207,19 @@ func isTypeTest(t reflect.Type) func(v interface{}) bool {
 // Asserts that the type of v is in the list of expected types
 func (*Functions) AssertType(v interface{}, expected ...string) (string, error) {
 	got := baseType(v)
-	if got == nil {
-		return "", fmt.Errorf("Calling AssertType with nil value")
-	}
 	matched := 0
 	for _, e := range expected {
+		if e == "nil" {
+			if v == nil {
+				matched++
+			}
+			continue
+		}
 		et, found := nodeTypes[e]
 		if !found {
 			return "", fmt.Errorf("%s is not a valid type", e)
 		}
-		if got.AssignableTo(et) {
+		if got != nil && got.AssignableTo(et) {
 			matched++
 		}
 	}

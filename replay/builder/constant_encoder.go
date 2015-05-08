@@ -21,6 +21,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
@@ -32,14 +33,14 @@ type constantEncoder struct {
 	alignment   uint64
 }
 
-func newConstantEncoder(alignment int, byteOrder endian.ByteOrder) *constantEncoder {
+func newConstantEncoder(device device.Architecture) *constantEncoder {
 	buffer := &bytes.Buffer{}
-	encoder := flat.Encoder(endian.Writer(buffer, byteOrder))
+	encoder := flat.Encoder(endian.Writer(buffer, device.ByteOrder))
 	return &constantEncoder{
 		encoder:     encoder,
 		buffer:      buffer,
 		constantMap: make(map[binary.ID]uint64),
-		alignment:   uint64(alignment),
+		alignment:   uint64(device.PointerAlignment),
 	}
 }
 

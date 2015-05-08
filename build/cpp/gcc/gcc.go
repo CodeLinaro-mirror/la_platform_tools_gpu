@@ -117,6 +117,7 @@ func compile(input build.File, output build.File, cfg cpp.Config, env build.Envi
 		"-fPIC",
 		"-fvisibility=hidden",
 		"-fvisibility-inlines-hidden",
+		// "-fcolor-diagnostics", clang-only
 		"-MMD", "-MF", depfile.Absolute(), // Generate dependency file
 	}, cfg.CompilerArgs...)
 	for _, isp := range cfg.IncludeSearchPaths {
