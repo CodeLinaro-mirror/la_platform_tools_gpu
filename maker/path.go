@@ -19,10 +19,15 @@ import (
 	"strings"
 )
 
+// Path returns the '/' delimited file-path formed from the joined path
+// segments, without correcting non-forward slash delimiters found in any path
+// segment.
 func Path(path ...string) string {
 	return strings.Join(path, "/")
 }
 
+// OSPath returns the OS delimited file-path formed from the joined path
+// segments.
 func OSPath(path ...string) (string, error) {
 	ospath := filepath.FromSlash(Path(path...))
 	abs, err := filepath.Abs(ospath)
@@ -30,6 +35,12 @@ func OSPath(path ...string) (string, error) {
 		return abs, err
 	}
 	return filepath.Clean(abs), nil
+}
+
+// CommonPath returns the '/' delimited file-path formed from the joined path
+// segments, correcting non-forward slash delimiters found in any path segment.
+func CommonPath(path ...string) string {
+	return filepath.ToSlash(Path(path...))
 }
 
 func PathSplit(path ...string) (dir, base string) {

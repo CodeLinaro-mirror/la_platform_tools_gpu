@@ -110,7 +110,7 @@ func Run() {
 			}
 		} else {
 			fmt.Printf("active dependancy graph is:\n")
-			dumper{}.dump(meta, 1)
+			dumper{}.dump(meta, nil)
 		}
 	case "clean":
 		log.Fatalf("Clean not yet supported")
@@ -121,7 +121,7 @@ func Run() {
 
 type dumper map[*Step]struct{}
 
-func (d dumper) dump(s *Step, depth int) {
+func (d dumper) dump(s *Step, seen []*Step) {
 	if s == nil {
 		fmt.Println()
 		return
@@ -129,15 +129,24 @@ func (d dumper) dump(s *Step, depth int) {
 	fmt.Printf(" [%d]", len(s.inputs))
 	if _, done := d[s]; done {
 		fmt.Println(" - already seen")
+		for i := range seen {
+			if seen[i] == s {
+				err := "Error: Cyclic dependency chain found:\n"
+				for i := range seen {
+					err += fmt.Sprintf("  [%d]: %v\n", i, seen[i])
+				}
+				panic(err)
+			}
+		}
 		return
 	}
 	fmt.Println()
 	d[s] = struct{}{}
 	for i, e := range s.inputs {
-		for i := 0; i < depth; i++ {
+		for i := 0; i < len(seen); i++ {
 			fmt.Print("  ")
 		}
 		fmt.Printf("(%d) %s", i+1, e)
-		d.dump(Creator(e), depth+1)
+		d.dump(Creator(e), append(seen, s))
 	}
 }
