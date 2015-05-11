@@ -14,34 +14,13 @@
 
 package maker
 
-import (
-	"os"
-	"path/filepath"
-)
-
-var (
-	goTool Entity
-)
-
-var (
-	//GoPath is the GOPATH environment setting
-	GoPath string
-)
-
-func init() {
-	GoPath = os.Getenv("GOPATH")
-	goTool = FindTool("go")
-	Config.RootPath = GoPath
-	EnvVars["PATH"] = []string{filepath.Join(GoPath, "bin")}
-}
-
 // GoInstall builds a new Step that runs "go install" on the supplied module.
 // It will return the resulting binary entity.
 // The step will depend on the go tool, and will be set to always run if
 // depended on.
 func GoInstall(module string) Entity {
-	name := filepath.Base(module)
-	dst := File(GoBinPath(name + HostExecutableExtension))
+	_, name := PathSplit(module)
+	dst := File(Paths.Bin, name+HostExecutableExtension)
 	if Creator(dst) == nil {
 		Command(goTool, "install", module).Creates(dst).AlwaysRun()
 	}
@@ -64,11 +43,6 @@ func GoRun(gofile string, args ...string) *Step {
 
 // GoSrcPath returns the full path to a file or directory inside the GoPath.
 func GoSrcPath(path string) string {
-	return filepath.Join(GoPath, "src", path)
-}
-
-// GoBinPath returns the full path to a file or directory inside the go binary
-// directory.
-func GoBinPath(path string) string {
-	return filepath.Join(GoPath, "bin", path)
+	// TODO: search GoPath
+	return Path(GoPath[0], "src", path)
 }
