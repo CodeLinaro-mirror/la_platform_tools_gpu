@@ -18,52 +18,38 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
 	"time"
 )
 
-// File returns an Entity that represents a file.
-// The entities name will be the absolute path of the file.
-// If path is an entity already, it will be tested to make sure it is a file and
-// returned.
-// If it is a string, the the entity map will be checked for a matching file
+// File returns an Entity that represents a file. The entities name will be the
+// absolute path of the file. The entity map will be checked for a matching file
 // entry and if one is not found, a new one will be added and returned.
-func File(path interface{}) *file {
-	switch path := path.(type) {
-	case string:
-		abs, err := filepath.Abs(path)
-		if err != nil {
-			log.Fatalf("%s", err)
-		}
-		e := FindEntity(abs)
-		if e != nil {
-			f, is := e.(*file)
-			if !is {
-				log.Fatalf("%s is not a file entity (%T)", abs, e)
-			}
-			return f
-		}
-		f := &file{abs: abs}
-		f.stat, _ = os.Stat(f.abs)
-		AddEntity(f)
-		return f
-	case *file:
-		return path
-	default:
-		log.Fatalf("cannot convert from %T to file entity", path)
-		return nil
+func File(path ...string) *file {
+	abs, err := OSPath(path...)
+	if err != nil {
+		log.Fatalf("%s", err)
 	}
+	e := FindEntity(abs)
+	if e != nil {
+		f, is := e.(*file)
+		if !is {
+			log.Fatalf("%s is not a file entity (%T)", abs, e)
+		}
+		return f
+	}
+	f := &file{abs: abs}
+	f.stat, _ = os.Stat(f.abs)
+	AddEntity(f)
+	return f
 }
 
-// Dir returns an Entity that represents a directory.
-// The entities name will be the absolute path of the directory.
-// If path is an entity already, it will be tested to make sure it is a
-// directory and returned.
-// If it is a string, the the entity map will be checked for a matching directory
-// entry and if one is not found, a new one will be added and returned.
+// Dir returns an Entity that represents a directory. The entities name will be
+// the absolute path of the directory. The entity map will be checked for a
+// matching directory entry and if one is not found, a new one will be added and
+// returned.
 // It also adds the rules to create the directory if needed.
-func Dir(path interface{}) *file {
-	d := File(path)
+func Dir(path ...string) *file {
+	d := File(path...)
 	if Creator(d) == nil {
 		NewStep(makeDir).Creates(d)
 	}
@@ -85,13 +71,13 @@ func DirOf(path interface{}) *file {
 
 // FilesOf reads the list of files in path, filters them with the supplied
 // filter and returns the set of file entities that matched.
-func FilesOf(path interface{}, filter func(os.FileInfo) bool) []*file {
+func FilesOf(path string, filter func(os.FileInfo) bool) []*file {
 	dir := Dir(path)
 	infos, _ := ioutil.ReadDir(dir.Name())
 	files := []*file{}
 	for _, i := range infos {
 		if filter(i) {
-			files = append(files, File(filepath.Join(dir.Name(), i.Name())))
+			files = append(files, File(dir.Name(), i.Name()))
 		}
 	}
 	return files
@@ -138,7 +124,7 @@ func (f *file) NeedsUpdate(t time.Time) bool {
 func (f *file) Updated() { f.stat, _ = os.Stat(f.abs) }
 
 func dirOf(name string) *file {
-	path := filepath.Dir(name)
+	path, _ := PathSplit(name)
 	if len(path) == 0 {
 		return nil
 	}
