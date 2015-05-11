@@ -136,7 +136,7 @@ func Embed(path string) Entity {
 	out := File(path, "embed.go")
 	args := []string{"--out", out.Name()}
 	files := FilesOf(path, func(i os.FileInfo) bool {
-		return !i.IsDir() && !strings.HasSuffix(i.Name(), ".go") && !strings.HasSuffix(i.Name(), ".mk")
+		return !i.IsDir() && !strings.HasSuffix(i.Name(), ".go") && !strings.HasSuffix(i.Name(), ".md")
 	})
 	for _, f := range files {
 		args = append(args, f.Name())
