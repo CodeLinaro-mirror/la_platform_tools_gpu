@@ -53,10 +53,10 @@ func init() {
 	if len(GoPath) == 0 {
 		log.Fatalf("GOPATH %q not valid", os.Getenv("GOPATH"))
 	}
-	root, err := OSPath(GoPath[0])
-	if err != nil {
-		log.Fatalf("GOPATH %s not valid", GoPath[0])
+	for i := range GoPath {
+		GoPath[i] = CommonPath(GoPath[i])
 	}
+	root := GoPath[0]
 	Paths.Root = root
 	Paths.Deps = Path(root, "deps")
 	Paths.Data = Path(root, "data")
