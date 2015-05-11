@@ -582,8 +582,8 @@ limitations under the License.
   {{else if IsPointer     $}}protocol.TypeAbsolutePointer
   {{else if IsEnum        $}}protocol.TypeUint32
   {{else if IsBool        $}}protocol.TypeBool
-  {{else if IsInt         $}}protocol.TypeInt32
-  {{else if IsUint        $}}protocol.TypeUint32
+  {{else if IsInt         $}}protocol.TypeInt64
+  {{else if IsUint        $}}protocol.TypeUint64
   {{else if IsS8          $}}protocol.TypeInt8
   {{else if IsU8          $}}protocol.TypeUint8
   {{else if IsS16         $}}protocol.TypeInt16
