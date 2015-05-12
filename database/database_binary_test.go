@@ -8,6 +8,7 @@ package database
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -58,6 +59,15 @@ func (*binaryClasstestRequest) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodetestRequest(d, obj.(*testRequest))
 }
 func (*binaryClasstestRequest) Skip(d binary.Decoder) error { return doSkiptestRequest(d) }
+func (*binaryClasstestRequest) Schema() *schema.Class       { return schematestRequest }
+
+var schematestRequest = &schema.Class{
+	TypeID: binaryIDtestRequest,
+	Name:   "testRequest",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+	},
+}
 
 type binaryClasstestResource struct{}
 
@@ -137,3 +147,14 @@ func (*binaryClasstestResource) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodetestResource(d, obj.(*testResource))
 }
 func (*binaryClasstestResource) Skip(d binary.Decoder) error { return doSkiptestResource(d) }
+func (*binaryClasstestResource) Schema() *schema.Class       { return schematestResource }
+
+var schematestResource = &schema.Class{
+	TypeID: binaryIDtestResource,
+	Name:   "testResource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Int", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Array", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+	},
+}

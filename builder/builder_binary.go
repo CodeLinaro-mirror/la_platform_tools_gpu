@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
@@ -123,6 +124,19 @@ func (*binaryClassGetFramebufferColor) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferColor) Skip(d binary.Decoder) error {
 	return doSkipGetFramebufferColor(d)
 }
+func (*binaryClassGetFramebufferColor) Schema() *schema.Class { return schemaGetFramebufferColor }
+
+var schemaGetFramebufferColor = &schema.Class{
+	TypeID: binaryIDGetFramebufferColor,
+	Name:   "GetFramebufferColor",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Settings", Type: &schema.Struct{Name: "service.RenderSettings"}},
+	},
+}
 
 type binaryClassGetFramebufferDepth struct{}
 
@@ -191,6 +205,18 @@ func (*binaryClassGetFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGetFramebufferDepth) Skip(d binary.Decoder) error {
 	return doSkipGetFramebufferDepth(d)
 }
+func (*binaryClassGetFramebufferDepth) Schema() *schema.Class { return schemaGetFramebufferDepth }
+
+var schemaGetFramebufferDepth = &schema.Class{
+	TypeID: binaryIDGetFramebufferDepth,
+	Name:   "GetFramebufferDepth",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGetHierarchy struct{}
 
@@ -228,6 +254,15 @@ func (*binaryClassGetHierarchy) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGetHierarchy(d, obj.(*GetHierarchy))
 }
 func (*binaryClassGetHierarchy) Skip(d binary.Decoder) error { return doSkipGetHierarchy(d) }
+func (*binaryClassGetHierarchy) Schema() *schema.Class       { return schemaGetHierarchy }
+
+var schemaGetHierarchy = &schema.Class{
+	TypeID: binaryIDGetHierarchy,
+	Name:   "GetHierarchy",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+	},
+}
 
 type binaryClassGetMemoryInfo struct{}
 
@@ -285,6 +320,17 @@ func (*binaryClassGetMemoryInfo) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGetMemoryInfo(d, obj.(*GetMemoryInfo))
 }
 func (*binaryClassGetMemoryInfo) Skip(d binary.Decoder) error { return doSkipGetMemoryInfo(d) }
+func (*binaryClassGetMemoryInfo) Schema() *schema.Class       { return schemaGetMemoryInfo }
+
+var schemaGetMemoryInfo = &schema.Class{
+	TypeID: binaryIDGetMemoryInfo,
+	Name:   "GetMemoryInfo",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
+	},
+}
 
 type binaryClassGetState struct{}
 
@@ -333,6 +379,16 @@ func (*binaryClassGetState) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeGetState(d, obj.(*GetState))
 }
 func (*binaryClassGetState) Skip(d binary.Decoder) error { return doSkipGetState(d) }
+func (*binaryClassGetState) Schema() *schema.Class       { return schemaGetState }
+
+var schemaGetState = &schema.Class{
+	TypeID: binaryIDGetState,
+	Name:   "GetState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGetTimingInfo struct{}
 
@@ -390,6 +446,17 @@ func (*binaryClassGetTimingInfo) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGetTimingInfo(d, obj.(*GetTimingInfo))
 }
 func (*binaryClassGetTimingInfo) Skip(d binary.Decoder) error { return doSkipGetTimingInfo(d) }
+func (*binaryClassGetTimingInfo) Schema() *schema.Class       { return schemaGetTimingInfo }
+
+var schemaGetTimingInfo = &schema.Class{
+	TypeID: binaryIDGetTimingInfo,
+	Name:   "GetTimingInfo",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "TimingMask", Type: &schema.Primitive{Name: "service.TimingMask", Method: schema.Int32}},
+	},
+}
 
 type binaryClassPrerenderFramebuffers struct{}
 
@@ -498,6 +565,20 @@ func (*binaryClassPrerenderFramebuffers) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassPrerenderFramebuffers) Skip(d binary.Decoder) error {
 	return doSkipPrerenderFramebuffers(d)
 }
+func (*binaryClassPrerenderFramebuffers) Schema() *schema.Class { return schemaPrerenderFramebuffers }
+
+var schemaPrerenderFramebuffers = &schema.Class{
+	TypeID: binaryIDPrerenderFramebuffers,
+	Name:   "PrerenderFramebuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		schema.Field{Declared: "AtomIDs", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "uint64", Method: schema.Uint64}}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassRenderFramebufferColor struct{}
 
@@ -599,6 +680,21 @@ func (*binaryClassRenderFramebufferColor) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferColor) Skip(d binary.Decoder) error {
 	return doSkipRenderFramebufferColor(d)
 }
+func (*binaryClassRenderFramebufferColor) Schema() *schema.Class { return schemaRenderFramebufferColor }
+
+var schemaRenderFramebufferColor = &schema.Class{
+	TypeID: binaryIDRenderFramebufferColor,
+	Name:   "RenderFramebufferColor",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Wireframe", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassRenderFramebufferDepth struct{}
 
@@ -689,6 +785,20 @@ func (*binaryClassRenderFramebufferDepth) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassRenderFramebufferDepth) Skip(d binary.Decoder) error {
 	return doSkipRenderFramebufferDepth(d)
 }
+func (*binaryClassRenderFramebufferDepth) Schema() *schema.Class { return schemaRenderFramebufferDepth }
+
+var schemaRenderFramebufferDepth = &schema.Class{
+	TypeID: binaryIDRenderFramebufferDepth,
+	Name:   "RenderFramebufferDepth",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Device", Type: &schema.Struct{Name: "service.DeviceId"}},
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "API", Type: &schema.Struct{Name: "service.ApiId"}},
+		schema.Field{Declared: "After", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "FramebufferWidth", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "FramebufferHeight", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassReplaceAtom struct{}
 
@@ -757,6 +867,18 @@ func (*binaryClassReplaceAtom) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeReplaceAtom(d, obj.(*ReplaceAtom))
 }
 func (*binaryClassReplaceAtom) Skip(d binary.Decoder) error { return doSkipReplaceAtom(d) }
+func (*binaryClassReplaceAtom) Schema() *schema.Class       { return schemaReplaceAtom }
+
+var schemaReplaceAtom = &schema.Class{
+	TypeID: binaryIDReplaceAtom,
+	Name:   "ReplaceAtom",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+		schema.Field{Declared: "Atom", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "atom.TypeID", Method: schema.Uint16}},
+		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "service.Binary"}},
+	},
+}
 
 type binaryClassatomFramebufferDimensions struct{}
 
@@ -820,6 +942,19 @@ func (*binaryClassatomFramebufferDimensions) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassatomFramebufferDimensions) Skip(d binary.Decoder) error {
 	return doSkipatomFramebufferDimensions(d)
 }
+func (*binaryClassatomFramebufferDimensions) Schema() *schema.Class {
+	return schemaatomFramebufferDimensions
+}
+
+var schemaatomFramebufferDimensions = &schema.Class{
+	TypeID: binaryIDatomFramebufferDimensions,
+	Name:   "atomFramebufferDimensions",
+	Fields: []schema.Field{
+		schema.Field{Declared: "From", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClasscaptureFramebufferDimensions struct{}
 
@@ -881,6 +1016,17 @@ func (*binaryClasscaptureFramebufferDimensions) DecodeTo(d binary.Decoder, obj b
 func (*binaryClasscaptureFramebufferDimensions) Skip(d binary.Decoder) error {
 	return doSkipcaptureFramebufferDimensions(d)
 }
+func (*binaryClasscaptureFramebufferDimensions) Schema() *schema.Class {
+	return schemacaptureFramebufferDimensions
+}
+
+var schemacaptureFramebufferDimensions = &schema.Class{
+	TypeID: binaryIDcaptureFramebufferDimensions,
+	Name:   "captureFramebufferDimensions",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Dimensions", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "atomFramebufferDimensions"}}},
+	},
+}
 
 type binaryClasscaptures struct{}
 
@@ -936,6 +1082,15 @@ func (*binaryClasscaptures) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodecaptures(d, obj.(*captures))
 }
 func (*binaryClasscaptures) Skip(d binary.Decoder) error { return doSkipcaptures(d) }
+func (*binaryClasscaptures) Schema() *schema.Class       { return schemacaptures }
+
+var schemacaptures = &schema.Class{
+	TypeID: binaryIDcaptures,
+	Name:   "captures",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ids", Type: &schema.Slice{Alias: "service.CaptureIdArray", ValueType: &schema.Struct{Name: "service.CaptureId"}}},
+	},
+}
 
 type binaryClassgetCaptureFramebufferDimensions struct{}
 
@@ -978,4 +1133,15 @@ func (*binaryClassgetCaptureFramebufferDimensions) DecodeTo(d binary.Decoder, ob
 }
 func (*binaryClassgetCaptureFramebufferDimensions) Skip(d binary.Decoder) error {
 	return doSkipgetCaptureFramebufferDimensions(d)
+}
+func (*binaryClassgetCaptureFramebufferDimensions) Schema() *schema.Class {
+	return schemagetCaptureFramebufferDimensions
+}
+
+var schemagetCaptureFramebufferDimensions = &schema.Class{
+	TypeID: binaryIDgetCaptureFramebufferDimensions,
+	Name:   "getCaptureFramebufferDimensions",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capture", Type: &schema.Struct{Name: "service.CaptureId"}},
+	},
 }

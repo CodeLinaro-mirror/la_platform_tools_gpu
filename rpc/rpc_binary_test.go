@@ -8,6 +8,7 @@ package rpc
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -60,6 +61,15 @@ func (*binaryClassdelay) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodedelay(d, obj.(*delay))
 }
 func (*binaryClassdelay) Skip(d binary.Decoder) error { return doSkipdelay(d) }
+func (*binaryClassdelay) Schema() *schema.Class       { return schemadelay }
+
+var schemadelay = &schema.Class{
+	TypeID: binaryIDdelay,
+	Name:   "delay",
+	Fields: []schema.Field{
+		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassrequest struct{}
 
@@ -99,6 +109,15 @@ func (*binaryClassrequest) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecoderequest(d, obj.(*request))
 }
 func (*binaryClassrequest) Skip(d binary.Decoder) error { return doSkiprequest(d) }
+func (*binaryClassrequest) Schema() *schema.Class       { return schemarequest }
+
+var schemarequest = &schema.Class{
+	TypeID: binaryIDrequest,
+	Name:   "request",
+	Fields: []schema.Field{
+		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassresponse struct{}
 
@@ -138,3 +157,12 @@ func (*binaryClassresponse) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecoderesponse(d, obj.(*response))
 }
 func (*binaryClassresponse) Skip(d binary.Decoder) error { return doSkipresponse(d) }
+func (*binaryClassresponse) Schema() *schema.Class       { return schemaresponse }
+
+var schemaresponse = &schema.Class{
+	TypeID: binaryIDresponse,
+	Name:   "response",
+	Fields: []schema.Field{
+		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}

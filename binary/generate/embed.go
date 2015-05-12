@@ -51,6 +51,14 @@ func (*binaryClass{{.Name}}) Encode(e binary.Encoder, obj binary.Object) error {
 func (*binaryClass{{.Name}}) Decode(d binary.Decoder) (binary.Object, error) {obj := &{{.Name}}{}; return obj, doDecode{{.Name}}(d, obj) }
 func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error {return doDecode{{.Name}}(d, obj.(*{{.Name}})) }
 func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
+func (*binaryClass{{.Name}}) Schema() *{{SchemaPrefix}}Class { return schema{{.Name}} }
+var schema{{.Name}} = &{{SchemaPrefix}}Class{
+	TypeID: {{.IDName}},
+	Name: "{{.Name}}",
+	Fields: []{{SchemaPrefix}}Field{
+		{{range .Fields}}{{SchemaPrefix}}Field{ Declared:"{{.Name}}", Type:{{Schema .Type}} },
+	{{end}} },
+}
 {{end}}
 
 {{define "Go.EncodePrimitive"}}{{/*
@@ -208,6 +216,15 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 				{{Skip "v" .Type.ValueType}}
 			}
 		} {{end}}
+
+{{define "Go.SchemaPrimitive"}}&{{SchemaPrefix}}Primitive{ Name: "{{.Name}}", Method: {{SchemaPrefix}}{{.Method}} }{{end}}
+{{define "Go.SchemaStruct"}}&{{SchemaPrefix}}Struct{Name: "{{.Name}}"}{{end}}
+{{define "Go.SchemaPointer"}}&{{SchemaPrefix}}Pointer{ Type: {{Schema .Type}} }{{end}}
+{{define "Go.SchemaInterface"}}&{{SchemaPrefix}}Interface{ Name: "{{.Name}}"}{{end}}
+{{define "Go.SchemaSlice"}}&{{SchemaPrefix}}Slice{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}} }{{end}}
+{{define "Go.SchemaArray"}}&{{SchemaPrefix}}Array{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}}, Size: {{.Size}} }{{end}}
+{{define "Go.SchemaStream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}} }{{end}}
+{{define "Go.SchemaMap"}}&{{SchemaPrefix}}Map{Alias: "{{.Alias}}", KeyType: {{Schema .KeyType}}, ValueType: {{Schema .ValueType}} }{{end}}
 
 {{define "Go.File"}}
 {{Header $.Generated}}

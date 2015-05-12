@@ -8,6 +8,7 @@ package protocol
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -69,6 +70,16 @@ func (*binaryClassResourceInfo) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeResourceInfo(d, obj.(*ResourceInfo))
 }
 func (*binaryClassResourceInfo) Skip(d binary.Decoder) error { return doSkipResourceInfo(d) }
+func (*binaryClassResourceInfo) Schema() *schema.Class       { return schemaResourceInfo }
+
+var schemaResourceInfo = &schema.Class{
+	TypeID: binaryIDResourceInfo,
+	Name:   "ResourceInfo",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassPayload struct{}
 
@@ -188,3 +199,16 @@ func (*binaryClassPayload) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodePayload(d, obj.(*Payload))
 }
 func (*binaryClassPayload) Skip(d binary.Decoder) error { return doSkipPayload(d) }
+func (*binaryClassPayload) Schema() *schema.Class       { return schemaPayload }
+
+var schemaPayload = &schema.Class{
+	TypeID: binaryIDPayload,
+	Name:   "Payload",
+	Fields: []schema.Field{
+		schema.Field{Declared: "StackSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "VolatileMemorySize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Constants", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		schema.Field{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo"}}},
+		schema.Field{Declared: "Opcodes", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}

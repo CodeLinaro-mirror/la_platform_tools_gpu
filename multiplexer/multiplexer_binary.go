@@ -8,6 +8,7 @@ package multiplexer
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -60,6 +61,15 @@ func (*binaryClassmsgCloseChannel) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodemsgCloseChannel(d, obj.(*msgCloseChannel))
 }
 func (*binaryClassmsgCloseChannel) Skip(d binary.Decoder) error { return doSkipmsgCloseChannel(d) }
+func (*binaryClassmsgCloseChannel) Schema() *schema.Class       { return schemamsgCloseChannel }
+
+var schemamsgCloseChannel = &schema.Class{
+	TypeID: binaryIDmsgCloseChannel,
+	Name:   "msgCloseChannel",
+	Fields: []schema.Field{
+		schema.Field{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassmsgData struct{}
 
@@ -120,6 +130,16 @@ func (*binaryClassmsgData) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodemsgData(d, obj.(*msgData))
 }
 func (*binaryClassmsgData) Skip(d binary.Decoder) error { return doSkipmsgData(d) }
+func (*binaryClassmsgData) Schema() *schema.Class       { return schemamsgData }
+
+var schemamsgData = &schema.Class{
+	TypeID: binaryIDmsgData,
+	Name:   "msgData",
+	Fields: []schema.Field{
+		schema.Field{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		schema.Field{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}
 
 type binaryClassmsgOpenChannel struct{}
 
@@ -159,3 +179,12 @@ func (*binaryClassmsgOpenChannel) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodemsgOpenChannel(d, obj.(*msgOpenChannel))
 }
 func (*binaryClassmsgOpenChannel) Skip(d binary.Decoder) error { return doSkipmsgOpenChannel(d) }
+func (*binaryClassmsgOpenChannel) Schema() *schema.Class       { return schemamsgOpenChannel }
+
+var schemamsgOpenChannel = &schema.Class{
+	TypeID: binaryIDmsgOpenChannel,
+	Name:   "msgOpenChannel",
+	Fields: []schema.Field{
+		schema.Field{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+	},
+}
