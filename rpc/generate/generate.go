@@ -18,11 +18,11 @@ package generate
 import (
 	"fmt"
 	"path/filepath"
-	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/template"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	binary "android.googlesource.com/platform/tools/gpu/binary/generate"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func loader(filename string) ([]byte, error) {
@@ -33,116 +33,51 @@ func loader(filename string) ([]byte, error) {
 	return []byte(s), nil
 }
 
-func fromType(from semantic.Type) *binary.Type {
-	native := ""
+func fromType(from semantic.Type) schema.Type {
 	switch from {
 	case semantic.BoolType:
-		native = "Bool"
+		return &schema.Primitive{Name: "bool", Method: schema.Bool}
 	case semantic.IntType:
-		native = "Int"
+		return &schema.Primitive{Name: "int", Method: schema.Int32}
 	case semantic.UintType:
-		native = "Uint"
+		return &schema.Primitive{Name: "uint", Method: schema.Uint32}
 	case semantic.Int8Type:
-		native = "Int8"
+		return &schema.Primitive{Name: "int8", Method: schema.Int8}
 	case semantic.Uint8Type:
-		native = "Uint8"
+		return &schema.Primitive{Name: "uint8", Method: schema.Uint8}
 	case semantic.Int16Type:
-		native = "Int16"
+		return &schema.Primitive{Name: "int16", Method: schema.Int16}
 	case semantic.Uint16Type:
-		native = "Uint16"
+		return &schema.Primitive{Name: "uint16", Method: schema.Uint16}
 	case semantic.Int32Type:
-		native = "Int32"
+		return &schema.Primitive{Name: "int32", Method: schema.Int32}
 	case semantic.Uint32Type:
-		native = "Uint32"
+		return &schema.Primitive{Name: "uint32", Method: schema.Uint32}
 	case semantic.Float32Type:
-		native = "Float32"
+		return &schema.Primitive{Name: "float32", Method: schema.Float32}
 	case semantic.Float64Type:
-		native = "Float64"
+		return &schema.Primitive{Name: "float64", Method: schema.Float64}
 	case semantic.Int64Type:
-		native = "Int64"
+		return &schema.Primitive{Name: "int64", Method: schema.Int64}
 	case semantic.Uint64Type:
-		native = "Uint64"
+		return &schema.Primitive{Name: "uint64", Method: schema.Uint64}
 	case semantic.StringType:
-		native = "String"
-	}
-	if native != "" {
-		return &binary.Type{
-			Name:   strings.ToLower(native),
-			Kind:   binary.Native,
-			Method: native,
-		}
+		return &schema.Primitive{Name: "string", Method: schema.String}
 	}
 	switch from := from.(type) {
 	case *semantic.Enum:
-		return &binary.Type{
-			Name:   from.Typename(),
-			Kind:   binary.Remap,
-			Method: "Int32",
-			Native: "int32",
-		}
+		return &schema.Primitive{Name: from.Typename(), Method: schema.Int32}
 	case *semantic.Pointer:
-		t := &binary.Type{
-			Kind:    binary.Pointer,
-			SubType: fromType(from.To),
-		}
-		if t.SubType.Kind != binary.Interface {
-			t.Name = fmt.Sprintf("*%s", t.SubType.Name)
-		} else {
-			t.Name = t.SubType.Name
-		}
-		return t
+		return &schema.Pointer{Type: fromType(from.To)}
 	case *semantic.Array:
-		t := &binary.Type{
-			Kind:    binary.Array,
-			SubType: fromType(from.ValueType),
-		}
-		name := t.SubType.Name
-		switch t.SubType.Kind {
-		case binary.Pointer:
-			name = t.SubType.SubType.Name
-		case binary.Native:
-			name = t.SubType.Method
-			switch name {
-			case "Uint8":
-				name = "U8"
-			case "Int8":
-				name = "S8"
-			case "Uint16":
-				name = "U16"
-			case "Int16":
-				name = "S16"
-			case "Uint32":
-				name = "U32"
-			case "Int32":
-				name = "S32"
-			case "Uint64":
-				name = "U64"
-			case "Int64":
-				name = "S64"
-			case "Float32":
-				name = "F32"
-			case "Float64":
-				name = "F64"
-			}
-		}
-		t.Name = fmt.Sprintf("%sArray", name)
-		return t
+		return &schema.Slice{ValueType: fromType(from.ValueType)}
 	case *semantic.Class:
 		if from.GetAnnotation("Interface") != nil {
-			return &binary.Type{
-				Name: from.Typename(),
-				Kind: binary.Interface,
-			}
+			return &schema.Interface{Name: from.Typename()}
 		}
-		return &binary.Type{
-			Name: from.Typename(),
-			Kind: binary.Codeable,
-		}
+		return &schema.Struct{Name: from.Typename()}
 	default:
-		return &binary.Type{
-			Name: from.Typename(),
-			Kind: binary.Codeable,
-		}
+		return &schema.Struct{Name: from.Typename()}
 	}
 }
 
@@ -151,9 +86,9 @@ func addFields(s *binary.Struct, c *semantic.Class) {
 		addFields(s, e)
 	}
 	for _, decl := range c.Fields {
-		f := binary.Field{
-			Name: decl.Name,
-			Type: fromType(decl.Type),
+		f := schema.Field{
+			Declared: decl.Name,
+			Type:     fromType(decl.Type),
 		}
 		s.Fields = append(s.Fields, f)
 	}

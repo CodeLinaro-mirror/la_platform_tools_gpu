@@ -16,9 +16,12 @@ package generate
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 const (
@@ -47,15 +50,31 @@ func (f *functions) JavaFieldName(s string) string {
 	return memberPrefix + string(unicode.ToUpper(r)) + s[n:]
 }
 
-func (f *functions) JavaStorage(t *Type) string {
-	name := t.Name
-	if t.Kind == Pointer {
-		name = t.SubType.Name
+func (f *functions) JavaStorage(t schema.Type) string {
+	switch t := t.(type) {
+	case *schema.Primitive:
+		name := t.Name
+		if result, ok := javaTypeMap[name]; ok {
+			return result
+		}
+		return name
+	case *schema.Struct:
+		panic(fmt.Errorf("Struct types not handled"))
+	case *schema.Interface:
+		panic(fmt.Errorf("Interface types not handled"))
+	case *schema.Pointer:
+		return f.JavaStorage(t.Type)
+	case *schema.Array:
+		panic(fmt.Errorf("Array types not handled"))
+	case *schema.Slice:
+		panic(fmt.Errorf("Slice types not handled"))
+	case *schema.Stream:
+		panic(fmt.Errorf("Stream types not handled"))
+	case *schema.Map:
+		panic(fmt.Errorf("Map types not handled"))
+	default:
+		panic(fmt.Errorf("Unknown value type %T", t))
 	}
-	if result, ok := javaTypeMap[name]; ok {
-		return result
-	}
-	return name
 }
 
 func (f *functions) JavaID(name string) string {

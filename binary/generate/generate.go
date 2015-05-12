@@ -27,6 +27,7 @@ import (
 	"unicode"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"golang.org/x/tools/go/types"
 )
 
@@ -63,63 +64,9 @@ type File struct {
 // Signature includes the package, name and name and type of all the fields.
 // Any change to the Signature will cause the ID to change.
 type Struct struct {
-	Name      string    // The simple name of the type.
-	IDName    string    // The name to give the ID of the type.
-	Package   string    // The package name the struct belongs to.
-	Fields    []Field   // Descriptions of the fields of the struct.
-	Signature string    // The full string type signature of the Struct.
-	ID        binary.ID // The unique type identifier for the Struct.
-}
-
-// Kind describes the basic nature of a type.
-type Kind int
-
-const (
-	// Native is the kind for primitive types with corresponding direct methods on
-	// Encoder and Decoder
-	Native Kind = iota
-	// Remap is the kind for a type declared as alias to a primitive type.
-	// For example: type U32 uint32.
-	Remap
-	// Codeable is the kind for a direct in place struct.
-	Codeable
-	// Pointer is the kind for a pointer to a struct type. If the struct instance
-	// has equality (==) with a previously encoded object, then this struct will
-	// be encoded as a reference to the first encoded object.
-	Pointer
-	// Array is the kind for an in place slice, with a dynamic length.
-	Array
-	// StaticArray is the kind for an in place array, with a fixed length.
-	StaticArray
-	// Stream is the kind for an in place slice, with a Terminator.
-	Stream
-	// Interface is the kind for an object boxed in an binary.Object interface
-	// (or superset of). If the object has equality (==) with a previously
-	// encoded object, then this object may be encoded as a reference to the
-	// first encoded object.
-	Interface
-	// Map is the kind for a key value map.
-	Map
-)
-
-// Field holds a description of a single Struct member.
-type Field struct {
-	// Name is the true field name.
-	Name      string // The name the field was given.
-	Type      *Type  // A description of the type of the field.
-	Anonymous bool   // Whether the field was anonymous.
-}
-
-// Type is used to describe fields of a struct.
-type Type struct {
-	Name       string // The name of the type.
-	Native     string // The go native name of the type.
-	Kind       Kind   // The types basic Kind.
-	KeyType    *Type  // If the type is a Map, holds the key type.
-	SubType    *Type  // If the type is an Array, Map, Pointer or StaticArray, holds the element type.
-	Length     int    // If the type is a StaticArray, holds the fixed array size.
-	Method     string // The encode/decode method to use.
-	SkipMethod string // The skip method to use.
+	schema.Class
+	IDName    string // The name to give the ID of the type.
+	Signature string // The full string type signature of the Struct.
 }
 
 type tag string
@@ -145,7 +92,7 @@ func (t tag) Flag(name string) bool {
 // fields of that struct to the Struct information.
 func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struct {
 	t := n.Type().Underlying().(*types.Struct)
-	s := &Struct{Name: n.Name()}
+	s := &Struct{Class: schema.Class{Name: n.Name()}}
 	s.Package = pkg.Name()
 	tagged := false
 	for i := 0; i < t.NumFields(); i++ {
@@ -158,11 +105,12 @@ func FromTypename(pkg *types.Package, n *types.TypeName, imports Imports) *Struc
 			s.IDName = tag.Get("id")
 			continue
 		}
-		f := Field{}
-		f.Name = decl.Name()
+		f := schema.Field{}
+		if !decl.Anonymous() {
+			f.Declared = decl.Name()
+		}
 		f.Type = fromType(pkg, decl.Type(), tag, imports)
 		delete(imports, pkg.Path())
-		f.Anonymous = decl.Anonymous()
 		s.Fields = append(s.Fields, f)
 	}
 	if !tagged {
@@ -180,11 +128,11 @@ func (s *Struct) UpdateID() {
 		if i != 0 {
 			fmt.Fprint(b, ",")
 		}
-		fmt.Fprintf(b, " %s:%s", f.Name, f.Type.Name)
+		fmt.Fprintf(b, " %s:%s", f.Name(), f.Type)
 	}
 	fmt.Fprint(b, " }")
 	s.Signature = b.String()
-	s.ID = binary.NewID([]byte(s.Signature))
+	s.TypeID = binary.NewID([]byte(s.Signature))
 	if s.IDName == "" {
 		s.IDName = "binaryID" + s.Name
 	}
@@ -197,76 +145,66 @@ func spaceToUnderscore(r rune) rune {
 	return r
 }
 
-// fromType creates a appropriate Type object from a types.Type.
-func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) *Type {
-	t := &Type{Name: strings.Map(spaceToUnderscore, path.Base(types.TypeString(pkg, from)))}
+// fromType creates a appropriate schema.Type object from a types.Type.
+func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) schema.Type {
+	alias := ""
+	name := strings.Map(spaceToUnderscore, path.Base(types.TypeString(pkg, from)))
 	if named, isNamed := from.(*types.Named); isNamed {
+		alias = name
 		from = from.Underlying()
 		p := named.Obj().Pkg()
 		if p != nil {
 			imports[p.Path()] = struct{}{}
 		}
 	}
-	t.Native = strings.Map(spaceToUnderscore, from.String())
+	gotype := strings.Map(spaceToUnderscore, from.String())
 	switch from := from.(type) {
 	case *types.Basic:
-		t.Kind = Native
 		switch from.Kind() {
 		case types.Int:
-			t.Native = "int32"
+			return &schema.Primitive{Name: name, Method: schema.Int32}
 		case types.Byte:
-			t.Native = "uint8"
-		case types.String:
-			t.SkipMethod = "SkipString"
-		}
-		t.Method = strings.Title(t.Native)
-		if t.Native != t.Name {
-			t.Kind = Remap
+			return &schema.Primitive{Name: name, Method: schema.Uint8}
+		case types.Rune:
+			return &schema.Primitive{Name: name, Method: schema.Int32}
+		default:
+			m, err := schema.ParseMethod(strings.Title(gotype))
+			if err != nil {
+				panic(err)
+			}
+			return &schema.Primitive{Name: name, Method: m}
 		}
 	case *types.Pointer:
-		t.Kind = Pointer
-		t.SubType = fromType(pkg, from.Elem(), tag, imports)
+		return &schema.Pointer{Type: fromType(pkg, from.Elem(), tag, imports)}
 	case *types.Interface:
-		t.Kind = Interface
+		return &schema.Interface{Name: name}
 	case *types.Slice:
+		vt := fromType(pkg, from.Elem(), "", imports)
 		if tag.Flag("stream") {
-			t.Kind = Stream
-		} else {
-			t.Kind = Array
+			return &schema.Stream{Alias: alias, ValueType: vt}
 		}
-		t.SubType = fromType(pkg, from.Elem(), "", imports)
-		switch elem := from.Elem().(type) {
-		case *types.Basic:
-			switch elem.Kind() {
-			case types.Byte:
-				t.Method = "Data"
-			}
-		}
+		return &schema.Slice{Alias: alias, ValueType: vt}
 	case *types.Array:
-		t.Kind = StaticArray
-		t.Length = int(from.Len())
-		switch elem := from.Elem().(type) {
-		case *types.Basic:
-			switch elem.Kind() {
-			case types.Byte:
-				if from.Len() == binary.IDSize {
-					t.Kind = Native
-					t.SkipMethod = "SkipID"
-					t.Method = "ID"
-				}
+		length := uint32(from.Len())
+		if elem, ok := from.Elem().(*types.Basic); ok {
+			if elem.Kind() == types.Byte && length == binary.IDSize {
+				return &schema.Primitive{Name: name, Method: schema.ID}
 			}
 		}
-		if t.Kind == StaticArray {
-			t.SubType = fromType(pkg, from.Elem(), "", imports)
+		return &schema.Array{
+			Alias:     alias,
+			ValueType: fromType(pkg, from.Elem(), "", imports),
+			Size:      length,
 		}
 	case *types.Map:
-		t.Kind = Map
-		t.KeyType = fromType(pkg, from.Key(), "", imports)
-		t.SubType = fromType(pkg, from.Elem(), "", imports)
+		return &schema.Map{
+			Alias:     alias,
+			KeyType:   fromType(pkg, from.Key(), "", imports),
+			ValueType: fromType(pkg, from.Elem(), "", imports),
+		}
 	default:
-		t.Kind = Codeable
+		return &schema.Struct{Name: name}
 	}
-	return t
 }
 
 type sortEntry struct {
@@ -274,13 +212,25 @@ type sortEntry struct {
 	visited bool
 }
 
-func walkType(t *Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
-	if t == nil {
-		return i
+func walkType(t schema.Type, byname map[string]*sortEntry, structs []*Struct, i int) int {
+	switch t := t.(type) {
+	case *schema.Primitive:
+	case *schema.Struct:
+		i = walk(t.Name, byname, structs, i)
+	case *schema.Interface:
+		i = walk(t.Name, byname, structs, i)
+	case *schema.Pointer:
+		i = walkType(t.Type, byname, structs, i)
+	case *schema.Array:
+		i = walkType(t.ValueType, byname, structs, i)
+	case *schema.Slice:
+		i = walkType(t.ValueType, byname, structs, i)
+	case *schema.Stream:
+		i = walkType(t.ValueType, byname, structs, i)
+	case *schema.Map:
+		i = walkType(t.KeyType, byname, structs, i)
+		i = walkType(t.ValueType, byname, structs, i)
 	}
-	i = walk(t.Name, byname, structs, i)
-	i = walkType(t.SubType, byname, structs, i)
-	i = walkType(t.KeyType, byname, structs, i)
 	return i
 }
 

@@ -14,10 +14,31 @@
 
 package objects
 
-import "android.googlesource.com/platform/tools/gpu/binary"
+import (
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/binary/registry"
+)
 
 // Terminator is an object with no payload who's purpose is to mark the end of a
 // an object stream.
-type Terminator struct {
-	binary.Generate `id:"TerminatorID"`
+type Terminator struct{}
+
+func init() {
+	registry.Add((*Terminator)(nil).Class())
 }
+
+var (
+	TerminatorID = binary.ID{0x01}
+)
+
+type binaryClassTerminator struct{}
+
+func (*Terminator) Class() binary.Class                                         { return (*binaryClassTerminator)(nil) }
+func (*binaryClassTerminator) ID() binary.ID                                    { return TerminatorID }
+func (*binaryClassTerminator) New() binary.Object                               { return (*Terminator)(nil) }
+func (*binaryClassTerminator) Encode(e binary.Encoder, obj binary.Object) error { return nil }
+func (*binaryClassTerminator) Decode(d binary.Decoder) (binary.Object, error) {
+	return (*Terminator)(nil), nil
+}
+func (*binaryClassTerminator) DecodeTo(d binary.Decoder, obj binary.Object) error { return nil }
+func (*binaryClassTerminator) Skip(d binary.Decoder) error                        { return nil }

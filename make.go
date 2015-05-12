@@ -102,7 +102,6 @@ func init() {
 		Codergen("codergen", "--go", GPURoot+"/...")
 		// Enum string rules
 		Stringer(Path(gpusrc, "binary/schema"), "Method")
-		Stringer(Path(gpusrc, "binary/generate"), "Kind")
 		Stringer(Path(gpusrc, "log"), "Kind")
 		// The java code generation rules
 		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")

@@ -53,11 +53,14 @@ func (*binaryClass{{.Name}}) DecodeTo(d binary.Decoder, obj binary.Object) error
 func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}}(d) }
 {{end}}
 
-{{define "Go.EncodeNative"}} if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{end}}
+{{define "Go.EncodePrimitive"}}{{/*
+*/}}{{if eq .Type.Native .Type.Name}}{{/*
+*/}}if err := e.{{.Type.Method}}({{.Name}}); err != nil { return err } {{/*
+*/}}{{else}}{{/*
+*/}}if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{/*
+*/}}{{end}}{{end}}
 
-{{define "Go.EncodeRemap"}} if err := e.{{.Type.Method}}({{.Type.Native}}({{.Name}})); err != nil { return err } {{end}}
-
-{{define "Go.EncodeCodeable"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.EncodeStruct"}} if err := e.Value(&{{.Name}}); err != nil { return err } {{end}}
 
 {{define "Go.EncodePointer"}} if {{.Name}} != nil {
 			if err := e.Object({{.Name}}); err != nil {
@@ -75,20 +78,17 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			return err
 		} {{end}}
 
-{{define "Go.EncodeArray"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
+{{define "Go.EncodeSlice"}} if err := e.Uint32(uint32(len({{.Name}}))); err != nil {
 			return err
 		}
-		{{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
-			return err
-		}{{else}}for i := range {{.Name}} {
-			{{Encode (print .Name "[i]") .Type.SubType}}
-		}{{end}}{{end}}
+		{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := e.Data({{.Name}}); err != nil { return err} {{else}}{{/*
+		*/}} for i := range {{.Name}} {
+			{{Encode (print .Name "[i]") .Type.ValueType}}
+		}{{end}} {{end}}
 
-{{define "Go.EncodeStaticArray"}} {{if .Type.Method}}if err := e.{{.Type.Method}}({{.Name}}); err != nil {
-			return err
-		}{{else}}for i := range {{.Name}} {
-			{{Encode (print .Name "[i]") .Type.SubType}}
-		}{{end}}{{end}}
+{{define "Go.EncodeArray"}} for i := range {{.Name}} {
+			{{Encode (print .Name "[i]") .Type.ValueType}}
+		}{{end}}
 
 {{define "Go.EncodeStream"}}for _, o := range {{.Name}} {
 			if err := e.Object(o); err != nil {
@@ -104,23 +104,21 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 		}
 		for k, v := range {{.Name}} {
 			{{Encode "k" .Type.KeyType}}
-			{{Encode "v" .Type.SubType}}
+			{{Encode "v" .Type.ValueType}}
 		} {{end}}
 
-{{define "Go.DecodeNative"}} if obj, err := d.{{.Type.Method}}(); err != nil {
+{{define "Go.DecodePrimitive"}} if obj, err := d.{{.Type.Method}}(); err != nil {
 			return err
 		} else {
 			{{.Name}} = {{.Type.Name}}(obj)
 		} {{end}}
 
-{{define "Go.DecodeRemap"}}{{template "Go.DecodeNative" .}}{{end}}
-
-{{define "Go.DecodeCodeable"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
+{{define "Go.DecodeStruct"}} if err := d.Value(&{{.Name}}); err != nil { return err } {{end}}
 
 {{define "Go.DecodePointer"}} if obj, err := d.Object(); err != nil {
 			return err
 		} else if obj != nil {
-			{{.Name}} = obj.({{.Type.Name}})
+			{{.Name}} = obj.({{.Type}})
 		} else {
 			{{.Name}} = nil
 		} {{end}}
@@ -133,22 +131,19 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			{{.Name}} = nil
 		} {{end}}
 
-{{define "Go.DecodeArray"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.DecodeSlice"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
-			{{.Name}} = make({{.Type.Name}}, count)
-			{{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
-				return err
-			}{{else}}for i := range {{.Name}} {
-				{{Decode (print .Name "[i]") .Type.SubType}}
+			{{.Name}} = make({{.Type}}, count)
+			{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Data({{.Name}}); err != nil { return err} {{else}}{{/*
+			*/}} for i := range {{.Name}} {
+				{{Decode (print .Name "[i]") .Type.ValueType}}
 			}{{end}}
 		} {{end}}
 
-{{define "Go.DecodeStaticArray"}} {{if .Type.Method}}if err := d.{{.Type.Method}}({{.Name}}); err != nil {
-				return err
-			}{{else}}for i := range {{.Name}} {
-				{{Decode (print .Name "[i]") .Type.SubType}}
-			}{{end}} {{end}}
+{{define "Go.DecodeArray"}} for i := range {{.Name}} {
+				{{Decode (print .Name "[i]") .Type.ValueType}}
+			}{{end}}
 
 {{define "Go.DecodeStream"}}for {
 			if obj, err := d.Object(); err != nil {
@@ -156,49 +151,45 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 			} else if _, end := obj.(*objects.Terminator); end {
 				break
 			} else {
-				{{.Name}} = append({{.Name}}, obj.({{.Type.SubType.Name}}))
+				{{.Name}} = append({{.Name}}, obj.({{.Type.ValueType.Name}}))
 			}
 		} {{end}}
 
 {{define "Go.DecodeMap"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
-			{{.Name}} = make({{.Type.Name}}, count)
+			{{.Name}} = make({{.Type}}, count)
 			m := {{.Name}}
 			for i := uint32(0); i < count; i++ {
-				var k {{.Type.KeyType.Name}}
-				var v {{.Type.SubType.Name}}
+				var k {{.Type.KeyType}}
+				var v {{.Type.ValueType}}
 				{{Decode "k" .Type.KeyType}}
-				{{Decode "v" .Type.SubType}}
+				{{Decode "v" .Type.ValueType}}
 				m[k] = v
 			}
 		} {{end}}
 
-{{define "Go.SkipNative"}}{{if .Type.SkipMethod}}if err := d.Skip{{.Type.Method}}(); err != nil {
+{{define "Go.SkipPrimitive"}}{{if .Type.Method.Skippable}}if err := d.Skip{{.Type.Method}}(); err != nil {
 	return err
 } {{else}}if _,err := d.{{.Type.Method}}(); err != nil {
 		return err
 } {{end}} {{end}}
-{{define "Go.SkipRemap"}}{{template "Go.SkipNative" .}}{{end}}
-{{define "Go.SkipCodeable"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
+{{define "Go.SkipStruct"}} if err := d.SkipValue((*{{.Type.Name}})(nil)); err != nil { return err } {{end}}
 {{define "Go.SkipPointer"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 {{define "Go.SkipInterface"}} if _, err := d.SkipObject(); err != nil { return err } {{end}}
 
-{{define "Go.SkipArray"}} if count, err := d.Uint32(); err != nil {
+{{define "Go.SkipSlice"}} if count, err := d.Uint32(); err != nil {
 			return err
 		} else {
-			{{if .Type.Method}}if err := d.Skip(count); err != nil {
-				return err
-			}{{else}}for i := uint32(0); i < count; i++ {
-				{{Skip (print .Name "[i]") .Type.SubType}}
+			{{$vt := print .Type.ValueType}}{{if or (eq $vt "uint8") (eq $vt "byte")}} if err := d.Skip(count); err != nil { return err} {{else}}{{/*
+			*/}} for i := uint32(0); i < count; i++ {
+				{{Skip (print .Name "[i]") .Type.ValueType}}
 			}{{end}}
 		} {{end}}
 
-{{define "Go.SkipStaticArray"}} {{if .Type.Method}}if err := d.Skip({{.Type.Length}}); err != nil {
-			return err
-		}{{else}}for i := uint32(0); i < {{.Type.Length}}; i++ {
-			{{Skip (print .Name "[i]") .Type.SubType}}
-		}{{end}} {{end}}
+{{define "Go.SkipArray"}}for i := uint32(0); i < {{.Type.Length}}; i++ {
+			{{Skip (print .Name "[i]") .Type.ValueType}}
+		}{{end}}
 
 
 {{define "Go.SkipStream"}}for {
@@ -214,7 +205,7 @@ func (*binaryClass{{.Name}}) Skip(d binary.Decoder) error {return doSkip{{.Name}
 		} else {
 			for i := uint32(0); i < count; i++ {
 				{{Skip "k" .Type.KeyType}}
-				{{Skip "v" .Type.SubType}}
+				{{Skip "v" .Type.ValueType}}
 			}
 		} {{end}}
 

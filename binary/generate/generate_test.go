@@ -19,36 +19,42 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
+	"reflect"
 	"testing"
+
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
-var fields = []Field{
-	{Name: "u8", Type: &Type{Name: "uint8", Kind: Native, Method: "Uint8"}},
-	{Name: "u16", Type: &Type{Name: "uint16", Kind: Native, Method: "Uint16"}},
-	{Name: "u32", Type: &Type{Name: "uint32", Kind: Native, Method: "Uint32"}},
-	{Name: "u64", Type: &Type{Name: "uint64", Kind: Native, Method: "Uint64"}},
-	{Name: "i8", Type: &Type{Name: "int8", Kind: Native, Method: "Int8"}},
-	{Name: "i16", Type: &Type{Name: "int16", Kind: Native, Method: "Int16"}},
-	{Name: "i32", Type: &Type{Name: "int32", Kind: Native, Method: "Int32"}},
-	{Name: "i64", Type: &Type{Name: "int64", Kind: Native, Method: "Int64"}},
-	{Name: "f32", Type: &Type{Name: "float32", Kind: Native, Method: "Float32"}},
-	{Name: "f64", Type: &Type{Name: "float64", Kind: Native, Method: "Float64"}},
-	{Name: "bool", Type: &Type{Name: "bool", Kind: Native, Method: "Bool"}},
-	{Name: "byte", Type: &Type{Name: "byte", Native: "uint8", Kind: Remap, Method: "Uint8"}},
-	{Name: "int", Type: &Type{Name: "int", Native: "int32", Kind: Remap, Method: "Int32"}},
-	{Name: "str", Type: &Type{Name: "string", Kind: Native, Method: "String", SkipMethod: "SkipString"}},
-	{Name: "codeable", Type: &Type{Name: "struct{}", Kind: Codeable}},
-	{Name: "pointer", Type: &Type{Name: "*struct{}", Kind: Pointer}},
-	{Name: "slice", Type: &Type{Name: "[]struct{}", Kind: Array}},
-	{Name: "stream", Type: &Type{Name: "[]struct{}", Kind: Stream}},
-	{Name: "object", Type: &Type{Name: "interface{}", Kind: Interface}},
-	{Name: "dict", Type: &Type{Name: "map[string]struct{}", Kind: Map}},
-	{Name: "data", Type: &Type{Name: "[]byte", Kind: Array, Method: "Data"}},
-	{Name: "id", Type: &Type{Name: "binary.ID", Native: "[20]byte", Kind: Native, Method: "ID", SkipMethod: "SkipID"}},
-	{Name: "array", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}},
-	{Name: "", Type: &Type{Name: "Other", Native: "[10]int", Kind: StaticArray}, Anonymous: true},
-}
-
+var (
+	structType = &schema.Struct{Name: "objects.Terminator"}
+	fields     = []schema.Field{
+		{Declared: "u8", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		{Declared: "u16", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+		{Declared: "u32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "u64", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "i8", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+		{Declared: "i16", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
+		{Declared: "i32", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "i64", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+		{Declared: "f32", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "f64", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+		{Declared: "bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "byte", Type: &schema.Primitive{Name: "byte", Method: schema.Uint8}},
+		{Declared: "int", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "codeable", Type: structType},
+		{Declared: "pointer", Type: &schema.Pointer{Type: structType}},
+		{Declared: "object", Type: &schema.Interface{Name: "binary.Object"}},
+		{Declared: "slice", Type: &schema.Slice{ValueType: structType}},
+		{Declared: "alias", Type: &schema.Slice{Alias: "Other", ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}}},
+		{Declared: "stream", Type: &schema.Stream{ValueType: structType}},
+		{Declared: "array", Type: &schema.Array{ValueType: &schema.Primitive{Name: "int", Method: schema.Int32}, Size: 10}},
+		{Declared: "dict", Type: &schema.Map{KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: structType}},
+		{Declared: "data", Type: &schema.Slice{ValueType: &schema.Primitive{Name: "uint8", Method: schema.Uint8}}},
+		{Declared: "id", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "", Type: structType},
+	}
+)
 var loader *Loader
 var testId int
 
@@ -61,6 +67,7 @@ func parseStructs(source string) []*Struct {
 	testId++
 	fakeFile := fmt.Sprintf(`
 	package fake
+	import "android.googlesource.com/platform/tools/gpu/binary/objects"
 	import "android.googlesource.com/platform/tools/gpu/binary"
 	%s`, source)
 	name := fmt.Sprintf("fake_%d.go", testId)
@@ -101,7 +108,7 @@ func TestStableID(t *testing.T) {
 	source := "type MyStruct struct {binary.Generate}"
 	a := parseStruct(t, "MyStruct", source)
 	b := parseStruct(t, "MyStruct", source)
-	if a.ID != b.ID {
+	if a.TypeID != b.TypeID {
 		t.Errorf("ID was not stable")
 	}
 }
@@ -109,7 +116,7 @@ func TestStableID(t *testing.T) {
 func TestNameAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
 	b := parseStruct(t, "YourStruct", "type YourStruct struct {binary.Generate}")
-	if a.ID == b.ID {
+	if a.TypeID == b.TypeID {
 		t.Errorf("Name change did not change ID")
 	}
 }
@@ -117,7 +124,7 @@ func TestNameAffectsID(t *testing.T) {
 func TestFieldCountAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate}")
-	if a.ID == b.ID {
+	if a.TypeID == b.TypeID {
 		t.Errorf("Field count did not change ID")
 	}
 }
@@ -125,7 +132,7 @@ func TestFieldCountAffectsID(t *testing.T) {
 func TestFieldNameAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; b int}")
-	if a.ID == b.ID {
+	if a.TypeID == b.TypeID {
 		t.Errorf("Field name did not change ID")
 	}
 }
@@ -133,19 +140,19 @@ func TestFieldNameAffectsID(t *testing.T) {
 func TestFieldTypeAffectsID(t *testing.T) {
 	a := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a int}")
 	b := parseStruct(t, "MyStruct", "type MyStruct struct {binary.Generate; a byte}")
-	if a.ID == b.ID {
+	if a.TypeID == b.TypeID {
 		t.Errorf("Field type did not change ID")
 	}
 }
 
 func TestTypes(t *testing.T) {
-	prefix := "type Other [10]int\n"
+	prefix := "type Other []int\n"
 	source := &bytes.Buffer{}
 	fmt.Fprintln(source, prefix)
 	fmt.Fprint(source, "type MyStruct struct {binary.Generate;\n")
 	for _, f := range fields {
-		fmt.Fprintf(source, "  %s %s", f.Name, f.Type.Name)
-		if f.Type.Kind == Stream {
+		fmt.Fprintf(source, "  %s %s", f.Declared, f.Type)
+		if _, isstream := f.Type.(*schema.Stream); isstream {
 			fmt.Fprint(source, " `stream:\"true\"`")
 		}
 		fmt.Fprintln(source)
@@ -157,34 +164,14 @@ func TestTypes(t *testing.T) {
 	}
 	for i, got := range s.Fields {
 		expected := fields[i]
-		if expected.Name == "" {
-			expected.Name = expected.Type.Name
+		if got.Declared != expected.Declared {
+			t.Errorf("Got field %s, expected %s", got.Declared, expected.Declared)
 		}
-		if got.Name != expected.Name {
-			t.Errorf("Got field %s, expected %s", got.Name, expected.Name)
+		if reflect.TypeOf(got.Type) != reflect.TypeOf(expected.Type) {
+			t.Errorf("Got field type %T, expected %T for %s", got.Type, expected.Type, expected.Name())
 		}
-		if got.Type.Kind != expected.Type.Kind {
-			t.Errorf("Got field kind %d, expected %d for %s %s",
-				got.Type.Kind, expected.Type.Kind, expected.Name, expected.Type.Name)
-		}
-		native := expected.Type.Native
-		if len(native) == 0 {
-			native = expected.Type.Name
-		}
-		if got.Type.Native != native {
-			t.Errorf("Got field native type %s, expected %s for %s %s",
-				got.Type.Native, native, expected.Name, expected.Type.Name)
-		}
-		if got.Type.Method != expected.Type.Method {
-			t.Errorf("Got encoder method %s, expected %s for %s %s",
-				got.Type.Method, expected.Type.Method, expected.Name, expected.Type.Name)
-		}
-		if got.Type.SkipMethod != expected.Type.SkipMethod {
-			t.Errorf("Got decoder skip method %s, expected %s for %s %s",
-				got.Type.SkipMethod, expected.Type.SkipMethod, expected.Name, expected.Type.Name)
-		}
-		if got.Anonymous != expected.Anonymous {
-			t.Errorf("Got anonymous %v, expected %v for %s %s", got.Anonymous, expected.Anonymous, expected.Name, expected.Type.Name)
+		if got.Type.String() != expected.Type.String() {
+			t.Errorf("Got field type %s, expected %s for %s", got.Type, expected.Type, expected.Name())
 		}
 	}
 }
