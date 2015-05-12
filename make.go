@@ -113,7 +113,7 @@ func init() {
 		Apps.Gapir = Virtual("gapir")
 		GoRun(Path(gpusrc, "cc/build.go"),
 			"--runtests",
-			"--targets="+build.HostOS+",android-arm",
+			"--targets="+build.HostOS+",android-arm,android-arm64",
 		).Creates(Apps.Gapir).DependsOn("code")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
