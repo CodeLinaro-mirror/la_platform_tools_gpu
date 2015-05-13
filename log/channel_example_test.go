@@ -22,7 +22,7 @@ import (
 
 func sayHelloTo(l log.Logger, name string) {
 	l = l.Enter("sayHello")
-	l.Info("Hello %s!", name)
+	l.Infof("Hello %s!", name)
 }
 
 func Example_Channel() {

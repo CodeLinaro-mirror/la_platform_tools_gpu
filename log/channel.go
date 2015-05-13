@@ -44,7 +44,7 @@ type channel struct {
 	out     chan<- interface{}
 }
 
-func (c *channel) Info(msg string, args ...interface{}) {
+func (c *channel) Infof(msg string, args ...interface{}) {
 	c.out <- Entry{
 		Kind:      Info,
 		Message:   fmt.Sprintf(msg, args...),
@@ -54,7 +54,7 @@ func (c *channel) Info(msg string, args ...interface{}) {
 	}
 }
 
-func (c *channel) Warning(msg string, args ...interface{}) {
+func (c *channel) Warningf(msg string, args ...interface{}) {
 	c.out <- Entry{
 		Kind:      Warning,
 		Message:   fmt.Sprintf(msg, args...),
@@ -64,7 +64,7 @@ func (c *channel) Warning(msg string, args ...interface{}) {
 	}
 }
 
-func (c *channel) Error(msg string, args ...interface{}) {
+func (c *channel) Errorf(msg string, args ...interface{}) {
 	c.out <- Entry{
 		Kind:      Error,
 		Message:   fmt.Sprintf(msg, args...),

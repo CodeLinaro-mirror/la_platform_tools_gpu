@@ -31,29 +31,29 @@ func (s *Splitter) Add(l Logger) {
 }
 
 // Info will call Info with the same arguments on all logs passed to Add.
-func (s *Splitter) Info(msg string, args ...interface{}) {
+func (s *Splitter) Infof(msg string, args ...interface{}) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		l.Info(msg, args...)
+		l.Infof(msg, args...)
 	}
 }
 
 // Warning will call Warning with the same arguments on all logs passed to Add.
-func (s *Splitter) Warning(msg string, args ...interface{}) {
+func (s *Splitter) Warningf(msg string, args ...interface{}) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		l.Warning(msg, args...)
+		l.Warningf(msg, args...)
 	}
 }
 
 // Error will call Error with the same arguments on all logs passed to Add.
-func (s *Splitter) Error(msg string, args ...interface{}) {
+func (s *Splitter) Errorf(msg string, args ...interface{}) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	for _, l := range s.listeners {
-		l.Error(msg, args...)
+		l.Errorf(msg, args...)
 	}
 }
 

@@ -218,11 +218,11 @@ func (s *smallArchive) compaction(l log.Logger) error {
 		cleanupFun := func() {
 			err := compacting.Close()
 			if err != nil && l != nil {
-				l.Warning("Failed to close compacting file")
+				l.Warningf("Failed to close compacting file")
 			}
 			err = os.Remove(fn)
 			if err != nil && l != nil {
-				l.Warning("Failed to remove compacting file")
+				l.Warningf("Failed to remove compacting file")
 			}
 		}
 
@@ -315,19 +315,19 @@ func (s *smallArchive) compaction(l log.Logger) error {
 
 			if config.DebugDatabaseStores && l != nil {
 				l = l.Enter("Compaction")
-				l.Info("After compacting Waste %v Size %v", s.waste, s.size)
-				l.Info("Write records to disk %v", afterWriteRecords.Sub(beforeWriteRecords))
-				l.Info("Num concurrent inserts %v size of inserts %v", numInserts, sizeInserts)
-				l.Info("Sync with worker %v", startSyncPart.Sub(afterWriteRecords))
-				l.Info("Catchup time %v", afterCatchup.Sub(startSyncPart))
-				l.Info("Flush to disk %v", afterFlush.Sub(beforeFlush))
-				l.Info("Flip and open %v", afterAll.Sub(afterCatchup))
-				l.Info("Total sync part %v", afterAll.Sub(startSyncPart))
-				l.Info("Total time %v", afterAll.Sub(beforeWriteRecords))
+				l.Infof("After compacting Waste %v Size %v", s.waste, s.size)
+				l.Infof("Write records to disk %v", afterWriteRecords.Sub(beforeWriteRecords))
+				l.Infof("Num concurrent inserts %v size of inserts %v", numInserts, sizeInserts)
+				l.Infof("Sync with worker %v", startSyncPart.Sub(afterWriteRecords))
+				l.Infof("Catchup time %v", afterCatchup.Sub(startSyncPart))
+				l.Infof("Flush to disk %v", afterFlush.Sub(beforeFlush))
+				l.Infof("Flip and open %v", afterAll.Sub(afterCatchup))
+				l.Infof("Total sync part %v", afterAll.Sub(startSyncPart))
+				l.Infof("Total time %v", afterAll.Sub(beforeWriteRecords))
 
-				l.Info("didFirstInsertPath %v", didFirstInsertPath)
-				l.Info("didSecondInsertPath %v", didSecondInsertPath)
-				l.Info("didThirdInsertPath %v", didThirdInsertPath)
+				l.Infof("didFirstInsertPath %v", didFirstInsertPath)
+				l.Infof("didSecondInsertPath %v", didSecondInsertPath)
+				l.Infof("didThirdInsertPath %v", didThirdInsertPath)
 			}
 		}
 
@@ -352,7 +352,7 @@ func (s *smallArchive) compaction(l log.Logger) error {
 	}()
 
 	if config.DebugDatabaseStores && l != nil {
-		l.Info("Compacting copy %v records: %v", len(recordsCopyArray), afterCopyRecords.Sub(beforeCopyRecords))
+		l.Infof("Compacting copy %v records: %v", len(recordsCopyArray), afterCopyRecords.Sub(beforeCopyRecords))
 	}
 
 	return err
@@ -363,10 +363,10 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 	if logger != nil {
 		logger = logger.Enter("SmallArchive.Store")
 		if config.DebugDatabaseStores {
-			logger.Info("id: %s size: %d waste %v total_size %v", id, len(data), s.waste, s.size)
+			logger.Infof("id: %s size: %d waste %v total_size %v", id, len(data), s.waste, s.size)
 		}
 		if len(data) > (1 << 16) {
-			logger.Warning("Store of non-small record in SmallArchive: %v bytes", len(data))
+			logger.Warningf("Store of non-small record in SmallArchive: %v bytes", len(data))
 		}
 	}
 
@@ -396,7 +396,7 @@ func (s *smallArchive) Store(id binary.ID, _ binary.Object, data []byte, logger 
 
 		if s.size > s.compactionSize && !s.compacting && s.waste*3 > s.compactionSize {
 			if config.DebugDatabaseStores && logger != nil {
-				logger.Info("Small archive starting a compaction. Size %v Waste %v",
+				logger.Infof("Small archive starting a compaction. Size %v Waste %v",
 					s.size, s.waste)
 			}
 			s.compaction(logger)
@@ -415,14 +415,14 @@ func (s *smallArchive) Load(id binary.ID, logger log.Logger, out binary.Object) 
 	if logger != nil {
 		logger = logger.Enter("SmallArchive.Load")
 		if config.DebugDatabaseStores {
-			logger.Info("Loading from archive: %s", id)
+			logger.Infof("Loading from archive: %s", id)
 		}
 		defer func() {
 			if config.DebugDatabaseStores {
-				logger.Info("↪ size: %d, err: %v", size, err)
+				logger.Infof("↪ size: %d, err: %v", size, err)
 			}
 			if err := recover(); err != nil {
-				logger.Error("Panic when loading %v: %v", id, err)
+				logger.Errorf("Panic when loading %v: %v", id, err)
 				panic(err)
 			}
 		}()

@@ -404,7 +404,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, error) {
 	logger = logger.Enter("Build")
 	if config.DebugReplayBuilder {
-		logger.Info("Instruction count: %d", len(b.instructions))
+		logger.Infof("Instruction count: %d", len(b.instructions))
 	}
 
 	vml := b.layoutVolatileMemory(logger)
@@ -431,11 +431,11 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 	}
 
 	if config.DebugReplayBuilder {
-		logger.Info("Stack size:           0x%x", payload.StackSize)
-		logger.Info("Volatile memory size: 0x%x", payload.VolatileMemorySize)
-		logger.Info("Constant memory size: 0x%x", len(payload.Constants))
-		logger.Info("Opcodes size:         0x%x", len(payload.Opcodes))
-		logger.Info("Resource count:         %d", len(payload.Resources))
+		logger.Infof("Stack size:           0x%x", payload.StackSize)
+		logger.Infof("Volatile memory size: 0x%x", payload.VolatileMemorySize)
+		logger.Infof("Constant memory size: 0x%x", len(payload.Constants))
+		logger.Infof("Opcodes size:         0x%x", len(payload.Opcodes))
+		logger.Infof("Resource count:         %d", len(payload.Resources))
 	}
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
@@ -492,12 +492,12 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 	}
 
 	if config.DebugReplayBuilder {
-		logger.Info("Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
-		logger.Info("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
-		logger.Info("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
-		logger.Info("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
+		logger.Infof("Volatile memory layout: [0x%x, 0x%x]", 0, size-1)
+		logger.Infof("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
+		logger.Infof("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
+		logger.Infof("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
 		for _, m := range b.observedRanges {
-			logger.Info("    Block:   %v", m)
+			logger.Infof("    Block:   %v", m)
 		}
 	}
 

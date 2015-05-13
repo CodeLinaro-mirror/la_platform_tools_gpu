@@ -66,7 +66,7 @@ func (b *batcher) run() {
 		}
 		// Batch formed. Trigger the replay.
 		if err := b.send(requests); err != nil {
-			b.logger.Error("%v", err)
+			b.logger.Errorf("%v", err)
 		}
 	}
 }
@@ -121,9 +121,9 @@ func (b *batcher) send(requests []Request) (err error) {
 		b.logger)
 
 	if config.DebugReplay {
-		b.logger.Info("Replaying %d atoms using transform chain:", len(atoms))
+		b.logger.Infof("Replaying %d atoms using transform chain:", len(atoms))
 		for i, t := range transforms {
-			b.logger.Info("(%d) %#v", i, t)
+			b.logger.Infof("(%d) %#v", i, t)
 		}
 	}
 
@@ -133,7 +133,7 @@ func (b *batcher) send(requests []Request) (err error) {
 	transforms.Transform(atoms, &adapter)
 
 	if config.DebugReplay {
-		b.logger.Info("Building payload...")
+		b.logger.Infof("Building payload...")
 	}
 
 	payload, decoder, err := builder.Build(b.logger)
@@ -148,7 +148,7 @@ func (b *batcher) send(requests []Request) (err error) {
 	defer connection.Close()
 
 	if config.DebugReplay {
-		b.logger.Info("Sending payload to %v.", td.Name)
+		b.logger.Infof("Sending payload to %v.", td.Name)
 	}
 
 	return executor.Execute(

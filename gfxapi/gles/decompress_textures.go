@@ -42,7 +42,7 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 	s := &gfxapi.State{}
 	return atom.Transform("DecompressTextures", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s); err != nil {
-			logger.Error("%v", err)
+			logger.Errorf("%v", err)
 		}
 
 		switch a := a.(type) {

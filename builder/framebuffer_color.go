@@ -80,7 +80,7 @@ func (request *RenderFramebufferColor) build(mgr *replay.Manager, db database.Da
 
 	img := <-query.QueryColorBuffer(ctx, mgr, request.After, request.Width, request.Height, request.Wireframe)
 	if img.Error != nil {
-		logger.Error("%v", img.Error)
+		logger.Errorf("%v", img.Error)
 		return img.Error
 	}
 

@@ -34,20 +34,20 @@ func ParseDepFile(file build.File, env build.Environment) (deps build.FileSet, d
 
 	f, err := ioutil.ReadFile(file.Absolute())
 	if err != nil {
-		env.Logger.Error("Could not read dependencies from '%s': %v", file, err)
+		env.Logger.Errorf("Could not read dependencies from '%s': %v", file, err)
 		return build.FileSet{}, false
 	}
 
 	deps, err = parseDeps(string(f))
 	if err != nil {
-		env.Logger.Error("Could not parse dependencies from '%s': %v", file, err)
+		env.Logger.Errorf("Could not parse dependencies from '%s': %v", file, err)
 		return build.FileSet{}, false
 	}
 
 	valid := true
 	for _, dep := range deps {
 		if !dep.Exists() {
-			env.Logger.Info("'%v' has missing dependency '%s'", file, dep)
+			env.Logger.Infof("'%v' has missing dependency '%s'", file, dep)
 			valid = false
 		}
 	}

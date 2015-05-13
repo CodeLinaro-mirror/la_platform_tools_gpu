@@ -76,7 +76,7 @@ func (request *RenderFramebufferDepth) build(mgr *replay.Manager, db database.Da
 
 	img := <-query.QueryDepthBuffer(ctx, mgr, request.After)
 	if img.Error != nil {
-		logger.Error("%v", img.Error)
+		logger.Errorf("%v", img.Error)
 		return img.Error
 	}
 

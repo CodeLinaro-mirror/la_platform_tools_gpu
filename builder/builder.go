@@ -62,7 +62,7 @@ type standaloneRequest interface {
 // BuildResource builds the output of the given request and writes it to the given out.
 func (b *builder) BuildResource(request interface{}, db database.Database, logger log.Logger, out binary.Object) error {
 	if logger != nil {
-		logger.Info("Building resource: %T %v", request, request)
+		logger.Infof("Building resource: %T %v", request, request)
 	}
 
 	switch ty := request.(type) {
@@ -281,7 +281,7 @@ func (request *getCaptureFramebufferDimensions) build(db database.Database, logg
 			api := a.API()
 			width, height, err := api.GetFramebufferAttachmentSize(s, gfxapi.FramebufferAttachmentColor)
 			if err != nil {
-				logger.Warning("GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
+				logger.Warningf("GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {

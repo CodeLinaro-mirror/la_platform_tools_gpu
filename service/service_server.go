@@ -20,10 +20,10 @@ func BindServer(r io.Reader, w io.Writer, mtu int, l log.Logger, server RPC) {
 		l := l.Fork().Enter(fmt.Sprintf("%v", in))
 		defer func() {
 			if err := recover(); err == nil {
-				l.Info("↪ %v", res)
+				l.Infof("↪ %v", res)
 			} else {
 				msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-				l.Error(msg)
+				l.Errorf(msg)
 				res = rpc.NewError(msg)
 			}
 		}()
