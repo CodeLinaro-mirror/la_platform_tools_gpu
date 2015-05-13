@@ -73,7 +73,7 @@ func parseStructs(source string) []*Struct {
 	name := fmt.Sprintf("fake_%d.go", testId)
 	loader.ScanFile(name, fakeFile)
 	if err := loader.Process(); err != nil {
-		log.Fatalf("Process failed:", err)
+		log.Fatal("Process failed:", err)
 	}
 	dir := loader.GetDir(name)
 	return dir.Module.Output.Structs
