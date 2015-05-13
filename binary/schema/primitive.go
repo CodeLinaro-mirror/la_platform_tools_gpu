@@ -93,7 +93,6 @@ func (p *Primitive) Encode(e binary.Encoder, value interface{}) error {
 	default:
 		return fmt.Errorf("Unknown encode method %q", p.Method)
 	}
-	return nil
 }
 
 func (p *Primitive) Decode(d binary.Decoder) (interface{}, error) {

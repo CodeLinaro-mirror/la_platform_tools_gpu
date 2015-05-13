@@ -140,7 +140,7 @@ Got:      %# x`, e.name, e.data, b.Bytes())
 			got := result[0]
 			err := result[1]
 			if !err.IsNil() {
-				t.Errorf("%v %d gave unexpected error: %v", i, err)
+				t.Errorf("%v %d gave unexpected error: %v", e.name, i, err)
 			}
 			if !reflect.DeepEqual(expected.Interface(), got.Interface()) {
 				t.Errorf("%v %d gave unexpected value. Expected: %v, got: %v", e.name, i, expected.Interface(), got.Interface())

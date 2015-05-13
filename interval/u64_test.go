@@ -319,10 +319,10 @@ func TestIntersect(t *testing.T) {
 	} {
 		o, c := Intersect(&test.list, test.with)
 		if o != test.offset {
-			t.Fatalf("[%d] wrong offset, expected %s got %s", n, test.offset, o)
+			t.Fatalf("[%d] wrong offset, expected %d got %d", n, test.offset, o)
 		}
 		if c != test.count {
-			t.Fatalf("[%d] wrong count, expected %s got %s", n, test.count, c)
+			t.Fatalf("[%d] wrong count, expected %d got %d", n, test.count, c)
 		}
 	}
 }
