@@ -34,7 +34,7 @@ func main() {
 	switch len(matches) {
 	case 1:
 		c := matches[0]
-		commands.Log("Running %q\n", c.Name)
+		commands.Logf("Running %q\n", c.Name)
 		c.Flags.Parse(args[1:])
 		c.Run(c.Flags)
 	case 0:

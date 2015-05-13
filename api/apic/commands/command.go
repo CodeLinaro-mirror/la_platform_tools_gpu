@@ -90,7 +90,7 @@ func Usage(message string, args ...interface{}) {
 }
 
 // Log prints message with the formatting args to stdout.
-func Log(message string, args ...interface{}) {
+func Logf(message string, args ...interface{}) {
 	if *verbose {
 		fmt.Fprintf(os.Stdout, message, args...)
 	}
