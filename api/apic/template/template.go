@@ -68,7 +68,7 @@ func writeDeps() error {
 	if len(*deps) == 0 {
 		return nil
 	}
-	commands.Log("Write deps to %v\n", *deps)
+	commands.Logf("Write deps to %v\n", *deps)
 	file, err := os.Create(*deps)
 	if err != nil {
 		return err
@@ -97,14 +97,14 @@ func (f *Functions) Include(templates ...string) error {
 			t = filepath.Join(dir, t)
 		}
 		if f.templates.Lookup(t) == nil {
-			commands.Log("Reading template %q\n", t)
+			commands.Logf("Reading template %q\n", t)
 			inputDep(t)
 			tmplData, err := f.loader(t)
 			commands.MaybeError(t, err)
 			tmpl, err := f.templates.New(t).Parse(string(tmplData))
 			commands.MaybeError(t, err)
 			f.active = tmpl
-			commands.Log("Executing template %q\n", f.active.Name())
+			commands.Logf("Executing template %q\n", f.active.Name())
 			var buf bytes.Buffer
 			commands.MaybeError(f.active.Name(), f.active.Execute(&buf, f.api))
 		}
@@ -117,7 +117,7 @@ func (f *Functions) Include(templates ...string) error {
 // The filename is relative to the output directory.
 func (f *Functions) Write(fileName string, value string) (string, error) {
 	outputPath := filepath.Join(f.basePath, fileName)
-	commands.Log("Writing output to %q\n", outputPath)
+	commands.Logf("Writing output to %q\n", outputPath)
 	outputDep(outputPath)
 	return "", ioutil.WriteFile(outputPath, []byte(value), 0666)
 }
@@ -137,11 +137,11 @@ func doTemplate(flags flag.FlagSet) {
 		commands.Usage("Missing template file\n")
 	}
 	mainTemplate := args[1]
-	commands.Log("Reading api file %q\n", apiName)
+	commands.Logf("Reading api file %q\n", apiName)
 	inputDep(apiName)
 	info, err := ioutil.ReadFile(apiName)
 	commands.MaybeError(apiName, err)
-	commands.Log("Compiling api file %q\n", apiName)
+	commands.Logf("Compiling api file %q\n", apiName)
 	parsed, errs := parser.Parse(string(info[:]))
 	commands.CheckErrors(apiName, errs)
 	compiled, errs, _ := resolver.Resolve(parsed)

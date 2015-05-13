@@ -51,7 +51,7 @@ func doValidate(flags flag.FlagSet) {
 	for _, apiName := range args {
 		info, err := ioutil.ReadFile(apiName)
 		commands.MaybeError(apiName, err)
-		commands.Log("Validating api file %q\n", apiName)
+		commands.Logf("Validating api file %q\n", apiName)
 		parsed, errs := parser.Parse(string(info[:]))
 		commands.CheckErrors(apiName, errs)
 		compiled, errs, _ := resolver.Resolve(parsed)

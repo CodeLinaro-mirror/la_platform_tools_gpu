@@ -45,14 +45,14 @@ func doReflow(flags flag.FlagSet) {
 	for _, apiName := range args {
 		info, err := ioutil.ReadFile(apiName)
 		commands.MaybeError(apiName, err)
-		commands.Log("Compiling api file %q\n", apiName)
+		commands.Logf("Compiling api file %q\n", apiName)
 		parsed, errs := parser.Parse(string(info[:]))
 		commands.CheckErrors(apiName, errs)
 		compiled, errs, _ := resolver.Resolve(parsed)
 		commands.CheckErrors(apiName, errs)
-		commands.Log("Reflowing api %s\n", apiName)
+		commands.Logf("Reflowing api %s\n", apiName)
 
-		commands.Log("Writing output to %q\n", apiName)
+		commands.Logf("Writing output to %q\n", apiName)
 		w, err := os.Create(apiName)
 		commands.MaybeError(apiName, err)
 		out := bufio.NewWriter(w)

@@ -37,7 +37,7 @@ const (
 
 // Reflow does the primitive reflow, but no language specific handling.
 func (f *Functions) Reflow(indentSize int, value string) string {
-	commands.Log("Reflowing string\n")
+	commands.Logf("Reflowing string\n")
 	result, err := reflow(value, indentSize)
 	commands.MaybeError(f.active.Name(), err)
 	return string(result)
@@ -47,7 +47,7 @@ const goIndent = 2 // Required by go style guide
 
 // GoFmt reflows the string as if it were go code using the standard go fmt library.
 func (f *Functions) GoFmt(value string) string {
-	commands.Log("Reflowing go code\n")
+	commands.Logf("Reflowing go code\n")
 	result, err := reflow(value, goIndent)
 	commands.MaybeError(f.active.Name(), err)
 	opt := &imports.Options{
@@ -58,7 +58,7 @@ func (f *Functions) GoFmt(value string) string {
 	}
 	formatted, err := imports.Process(f.active.Name(), result, opt)
 	if err != nil {
-		commands.Log("GoFmt failed with %s\n", err)
+		commands.Logf("GoFmt failed with %s\n", err)
 		return string(result)
 	}
 	return string(formatted)
@@ -70,50 +70,50 @@ func (f *Functions) Format(command stringList, value string) string {
 		commands.MaybeError(f.active.Name(), fmt.Errorf("Invalid Format command"))
 	}
 	binary := command[0]
-	commands.Log("Reflowing code with %s\n", binary)
+	commands.Logf("Reflowing code with %s\n", binary)
 	// indent level is arbitrary, because we expect the external formatter to redo it anyway
 	result, err := reflow(value, 4)
 	commands.MaybeError(f.active.Name(), err)
 
 	_, err = exec.LookPath(binary)
 	if err != nil {
-		commands.Log("Could not find external formatter %s\n", binary)
+		commands.Logf("Could not find external formatter %s\n", binary)
 		return string(result)
 	}
 	cmd := exec.Command(binary, command[1:]...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		commands.Log("Reformat out pipe failed: %s\n", err)
+		commands.Logf("Reformat out pipe failed: %s\n", err)
 		return string(result)
 	}
 	stdin, err := cmd.StdinPipe()
 	if err != nil {
-		commands.Log("Reformat in pipe failed: %s\n", err)
+		commands.Logf("Reformat in pipe failed: %s\n", err)
 		return string(result)
 	}
 	err = cmd.Start()
 	if err != nil {
-		commands.Log("Reformat start failed: %s\n", err)
+		commands.Logf("Reformat start failed: %s\n", err)
 		return string(result)
 	}
 	_, err = stdin.Write(result)
 	if err != nil {
-		commands.Log("Reformat write failed: %s\n", err)
+		commands.Logf("Reformat write failed: %s\n", err)
 		return string(result)
 	}
 	err = stdin.Close()
 	if err != nil {
-		commands.Log("Reformat close failed: %s\n", err)
+		commands.Logf("Reformat close failed: %s\n", err)
 		return string(result)
 	}
 	formatted, err := ioutil.ReadAll(stdout)
 	if err != nil {
-		commands.Log("Reformat read: %s\n", err)
+		commands.Logf("Reformat read: %s\n", err)
 		return string(result)
 	}
 	err = cmd.Wait()
 	if err != nil {
-		commands.Log("Reformat wait failed: %s\n", err)
+		commands.Logf("Reformat wait failed: %s\n", err)
 		return string(result)
 	}
 	return string(formatted)
