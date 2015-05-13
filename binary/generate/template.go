@@ -32,6 +32,7 @@ type functions struct {
 	funcs     template.FuncMap
 	active    *template.Template
 	prefix    string
+	schema    string
 	writer    io.Writer
 }
 
@@ -94,6 +95,14 @@ func (f *functions) Decode(name string, t schema.Type) (string, error) {
 
 func (f *functions) Skip(name string, t schema.Type) (string, error) {
 	return "", f.getTemplate("Skip", t).Execute(f.writer, field{name, t})
+}
+
+func (f *functions) Schema(t schema.Type) (string, error) {
+	return "", f.getTemplate("Schema", t).Execute(f.writer, t)
+}
+
+func (f *functions) SchemaPrefix() string {
+	return f.schema
 }
 
 func (f *functions) Header(tool string) (string, error) {

@@ -8,6 +8,7 @@ package database
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -84,3 +85,14 @@ func (*binaryClassmetadata) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodemetadata(d, obj.(*metadata))
 }
 func (*binaryClassmetadata) Skip(d binary.Decoder) error { return doSkipmetadata(d) }
+func (*binaryClassmetadata) Schema() *schema.Class       { return schemametadata }
+
+var schemametadata = &schema.Class{
+	TypeID: binaryIDmetadata,
+	Name:   "metadata",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "metaType", Method: schema.Int32}},
+		schema.Field{Declared: "LinkTo", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		schema.Field{Declared: "Request", Type: &schema.Interface{Name: "binary.Object"}},
+	},
+}

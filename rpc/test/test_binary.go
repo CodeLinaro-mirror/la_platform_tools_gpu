@@ -8,6 +8,7 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -123,6 +124,16 @@ func (*binaryClassDerived) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeDerived(d, obj.(*Derived))
 }
 func (*binaryClassDerived) Skip(d binary.Decoder) error { return doSkipDerived(d) }
+func (*binaryClassDerived) Schema() *schema.Class       { return schemaDerived }
+
+var schemaDerived = &schema.Class{
+	TypeID: binaryIDDerived,
+	Name:   "Derived",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+	},
+}
 
 type binaryClassListNode struct{}
 
@@ -179,6 +190,16 @@ func (*binaryClassListNode) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeListNode(d, obj.(*ListNode))
 }
 func (*binaryClassListNode) Skip(d binary.Decoder) error { return doSkipListNode(d) }
+func (*binaryClassListNode) Schema() *schema.Class       { return schemaListNode }
+
+var schemaListNode = &schema.Class{
+	TypeID: binaryIDListNode,
+	Name:   "ListNode",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+	},
+}
 
 type binaryClassResource struct{}
 
@@ -240,6 +261,17 @@ func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeResource(d, obj.(*Resource))
 }
 func (*binaryClassResource) Skip(d binary.Decoder) error { return doSkipResource(d) }
+func (*binaryClassResource) Schema() *schema.Class       { return schemaResource }
+
+var schemaResource = &schema.Class{
+	TypeID: binaryIDResource,
+	Name:   "Resource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassResourceId struct{}
 
@@ -279,6 +311,15 @@ func (*binaryClassResourceId) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeResourceId(d, obj.(*ResourceId))
 }
 func (*binaryClassResourceId) Skip(d binary.Decoder) error { return doSkipResourceId(d) }
+func (*binaryClassResourceId) Schema() *schema.Class       { return schemaResourceId }
+
+var schemaResourceId = &schema.Class{
+	TypeID: binaryIDResourceId,
+	Name:   "ResourceId",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+	},
+}
 
 type binaryClassStruct struct{}
 
@@ -340,6 +381,17 @@ func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeStruct(d, obj.(*Struct))
 }
 func (*binaryClassStruct) Skip(d binary.Decoder) error { return doSkipStruct(d) }
+func (*binaryClassStruct) Schema() *schema.Class       { return schemaStruct }
+
+var schemaStruct = &schema.Class{
+	TypeID: binaryIDStruct,
+	Name:   "Struct",
+	Fields: []schema.Field{
+		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+	},
+}
 
 type binaryClasscallAdd struct{}
 
@@ -390,6 +442,16 @@ func (*binaryClasscallAdd) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodecallAdd(d, obj.(*callAdd))
 }
 func (*binaryClasscallAdd) Skip(d binary.Decoder) error { return doSkipcallAdd(d) }
+func (*binaryClasscallAdd) Schema() *schema.Class       { return schemacallAdd }
+
+var schemacallAdd = &schema.Class{
+	TypeID: binaryIDcallAdd,
+	Name:   "callAdd",
+	Fields: []schema.Field{
+		schema.Field{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClasscallEnumToString struct{}
 
@@ -429,6 +491,15 @@ func (*binaryClasscallEnumToString) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodecallEnumToString(d, obj.(*callEnumToString))
 }
 func (*binaryClasscallEnumToString) Skip(d binary.Decoder) error { return doSkipcallEnumToString(d) }
+func (*binaryClasscallEnumToString) Schema() *schema.Class       { return schemacallEnumToString }
+
+var schemacallEnumToString = &schema.Class{
+	TypeID: binaryIDcallEnumToString,
+	Name:   "callEnumToString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+	},
+}
 
 type binaryClasscallGetBase struct{}
 
@@ -457,6 +528,13 @@ func (*binaryClasscallGetBase) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodecallGetBase(d, obj.(*callGetBase))
 }
 func (*binaryClasscallGetBase) Skip(d binary.Decoder) error { return doSkipcallGetBase(d) }
+func (*binaryClasscallGetBase) Schema() *schema.Class       { return schemacallGetBase }
+
+var schemacallGetBase = &schema.Class{
+	TypeID: binaryIDcallGetBase,
+	Name:   "callGetBase",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallGetDerived struct{}
 
@@ -485,6 +563,13 @@ func (*binaryClasscallGetDerived) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodecallGetDerived(d, obj.(*callGetDerived))
 }
 func (*binaryClasscallGetDerived) Skip(d binary.Decoder) error { return doSkipcallGetDerived(d) }
+func (*binaryClasscallGetDerived) Schema() *schema.Class       { return schemacallGetDerived }
+
+var schemacallGetDerived = &schema.Class{
+	TypeID: binaryIDcallGetDerived,
+	Name:   "callGetDerived",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallGetListNodeChain struct{}
 
@@ -514,6 +599,13 @@ func (*binaryClasscallGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.Ob
 }
 func (*binaryClasscallGetListNodeChain) Skip(d binary.Decoder) error {
 	return doSkipcallGetListNodeChain(d)
+}
+func (*binaryClasscallGetListNodeChain) Schema() *schema.Class { return schemacallGetListNodeChain }
+
+var schemacallGetListNodeChain = &schema.Class{
+	TypeID: binaryIDcallGetListNodeChain,
+	Name:   "callGetListNodeChain",
+	Fields: []schema.Field{},
 }
 
 type binaryClasscallGetListNodeChainArray struct{}
@@ -545,6 +637,15 @@ func (*binaryClasscallGetListNodeChainArray) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClasscallGetListNodeChainArray) Skip(d binary.Decoder) error {
 	return doSkipcallGetListNodeChainArray(d)
 }
+func (*binaryClasscallGetListNodeChainArray) Schema() *schema.Class {
+	return schemacallGetListNodeChainArray
+}
+
+var schemacallGetListNodeChainArray = &schema.Class{
+	TypeID: binaryIDcallGetListNodeChainArray,
+	Name:   "callGetListNodeChainArray",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallGetResource struct{}
 
@@ -573,6 +674,13 @@ func (*binaryClasscallGetResource) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodecallGetResource(d, obj.(*callGetResource))
 }
 func (*binaryClasscallGetResource) Skip(d binary.Decoder) error { return doSkipcallGetResource(d) }
+func (*binaryClasscallGetResource) Schema() *schema.Class       { return schemacallGetResource }
+
+var schemacallGetResource = &schema.Class{
+	TypeID: binaryIDcallGetResource,
+	Name:   "callGetResource",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallGetSingleListNode struct{}
 
@@ -603,6 +711,13 @@ func (*binaryClasscallGetSingleListNode) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClasscallGetSingleListNode) Skip(d binary.Decoder) error {
 	return doSkipcallGetSingleListNode(d)
 }
+func (*binaryClasscallGetSingleListNode) Schema() *schema.Class { return schemacallGetSingleListNode }
+
+var schemacallGetSingleListNode = &schema.Class{
+	TypeID: binaryIDcallGetSingleListNode,
+	Name:   "callGetSingleListNode",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallGetStruct struct{}
 
@@ -631,6 +746,13 @@ func (*binaryClasscallGetStruct) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodecallGetStruct(d, obj.(*callGetStruct))
 }
 func (*binaryClasscallGetStruct) Skip(d binary.Decoder) error { return doSkipcallGetStruct(d) }
+func (*binaryClasscallGetStruct) Schema() *schema.Class       { return schemacallGetStruct }
+
+var schemacallGetStruct = &schema.Class{
+	TypeID: binaryIDcallGetStruct,
+	Name:   "callGetStruct",
+	Fields: []schema.Field{},
+}
 
 type binaryClasscallResolveResource struct{}
 
@@ -670,6 +792,15 @@ func (*binaryClasscallResolveResource) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClasscallResolveResource) Skip(d binary.Decoder) error {
 	return doSkipcallResolveResource(d)
 }
+func (*binaryClasscallResolveResource) Schema() *schema.Class { return schemacallResolveResource }
+
+var schemacallResolveResource = &schema.Class{
+	TypeID: binaryIDcallResolveResource,
+	Name:   "callResolveResource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+	},
+}
 
 type binaryClasscallSetStruct struct{}
 
@@ -707,6 +838,15 @@ func (*binaryClasscallSetStruct) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodecallSetStruct(d, obj.(*callSetStruct))
 }
 func (*binaryClasscallSetStruct) Skip(d binary.Decoder) error { return doSkipcallSetStruct(d) }
+func (*binaryClasscallSetStruct) Schema() *schema.Class       { return schemacallSetStruct }
+
+var schemacallSetStruct = &schema.Class{
+	TypeID: binaryIDcallSetStruct,
+	Name:   "callSetStruct",
+	Fields: []schema.Field{
+		schema.Field{Declared: "s", Type: &schema.Struct{Name: "Struct"}},
+	},
+}
 
 type binaryClasscallUseResource struct{}
 
@@ -744,6 +884,15 @@ func (*binaryClasscallUseResource) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodecallUseResource(d, obj.(*callUseResource))
 }
 func (*binaryClasscallUseResource) Skip(d binary.Decoder) error { return doSkipcallUseResource(d) }
+func (*binaryClasscallUseResource) Schema() *schema.Class       { return schemacallUseResource }
+
+var schemacallUseResource = &schema.Class{
+	TypeID: binaryIDcallUseResource,
+	Name:   "callUseResource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+	},
+}
 
 type binaryClassresultAdd struct{}
 
@@ -783,6 +932,15 @@ func (*binaryClassresultAdd) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecoderesultAdd(d, obj.(*resultAdd))
 }
 func (*binaryClassresultAdd) Skip(d binary.Decoder) error { return doSkipresultAdd(d) }
+func (*binaryClassresultAdd) Schema() *schema.Class       { return schemaresultAdd }
+
+var schemaresultAdd = &schema.Class{
+	TypeID: binaryIDresultAdd,
+	Name:   "resultAdd",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassresultEnumToString struct{}
 
@@ -822,6 +980,15 @@ func (*binaryClassresultEnumToString) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecoderesultEnumToString(d, obj.(*resultEnumToString))
 }
 func (*binaryClassresultEnumToString) Skip(d binary.Decoder) error { return doSkipresultEnumToString(d) }
+func (*binaryClassresultEnumToString) Schema() *schema.Class       { return schemaresultEnumToString }
+
+var schemaresultEnumToString = &schema.Class{
+	TypeID: binaryIDresultEnumToString,
+	Name:   "resultEnumToString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassresultGetBase struct{}
 
@@ -867,6 +1034,15 @@ func (*binaryClassresultGetBase) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecoderesultGetBase(d, obj.(*resultGetBase))
 }
 func (*binaryClassresultGetBase) Skip(d binary.Decoder) error { return doSkipresultGetBase(d) }
+func (*binaryClassresultGetBase) Schema() *schema.Class       { return schemaresultGetBase }
+
+var schemaresultGetBase = &schema.Class{
+	TypeID: binaryIDresultGetBase,
+	Name:   "resultGetBase",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Interface{Name: "Base"}},
+	},
+}
 
 type binaryClassresultGetDerived struct{}
 
@@ -912,6 +1088,15 @@ func (*binaryClassresultGetDerived) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecoderesultGetDerived(d, obj.(*resultGetDerived))
 }
 func (*binaryClassresultGetDerived) Skip(d binary.Decoder) error { return doSkipresultGetDerived(d) }
+func (*binaryClassresultGetDerived) Schema() *schema.Class       { return schemaresultGetDerived }
+
+var schemaresultGetDerived = &schema.Class{
+	TypeID: binaryIDresultGetDerived,
+	Name:   "resultGetDerived",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Interface{Name: "Base"}},
+	},
+}
 
 type binaryClassresultGetListNodeChain struct{}
 
@@ -958,6 +1143,15 @@ func (*binaryClassresultGetListNodeChain) DecodeTo(d binary.Decoder, obj binary.
 }
 func (*binaryClassresultGetListNodeChain) Skip(d binary.Decoder) error {
 	return doSkipresultGetListNodeChain(d)
+}
+func (*binaryClassresultGetListNodeChain) Schema() *schema.Class { return schemaresultGetListNodeChain }
+
+var schemaresultGetListNodeChain = &schema.Class{
+	TypeID: binaryIDresultGetListNodeChain,
+	Name:   "resultGetListNodeChain",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+	},
 }
 
 type binaryClassresultGetListNodeChainArray struct{}
@@ -1028,6 +1222,17 @@ func (*binaryClassresultGetListNodeChainArray) DecodeTo(d binary.Decoder, obj bi
 func (*binaryClassresultGetListNodeChainArray) Skip(d binary.Decoder) error {
 	return doSkipresultGetListNodeChainArray(d)
 }
+func (*binaryClassresultGetListNodeChainArray) Schema() *schema.Class {
+	return schemaresultGetListNodeChainArray
+}
+
+var schemaresultGetListNodeChainArray = &schema.Class{
+	TypeID: binaryIDresultGetListNodeChainArray,
+	Name:   "resultGetListNodeChainArray",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Slice{Alias: "ListNodeArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}}},
+	},
+}
 
 type binaryClassresultGetResource struct{}
 
@@ -1065,6 +1270,15 @@ func (*binaryClassresultGetResource) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecoderesultGetResource(d, obj.(*resultGetResource))
 }
 func (*binaryClassresultGetResource) Skip(d binary.Decoder) error { return doSkipresultGetResource(d) }
+func (*binaryClassresultGetResource) Schema() *schema.Class       { return schemaresultGetResource }
+
+var schemaresultGetResource = &schema.Class{
+	TypeID: binaryIDresultGetResource,
+	Name:   "resultGetResource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Struct{Name: "ResourceId"}},
+	},
+}
 
 type binaryClassresultGetSingleListNode struct{}
 
@@ -1112,6 +1326,17 @@ func (*binaryClassresultGetSingleListNode) DecodeTo(d binary.Decoder, obj binary
 func (*binaryClassresultGetSingleListNode) Skip(d binary.Decoder) error {
 	return doSkipresultGetSingleListNode(d)
 }
+func (*binaryClassresultGetSingleListNode) Schema() *schema.Class {
+	return schemaresultGetSingleListNode
+}
+
+var schemaresultGetSingleListNode = &schema.Class{
+	TypeID: binaryIDresultGetSingleListNode,
+	Name:   "resultGetSingleListNode",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+	},
+}
 
 type binaryClassresultGetStruct struct{}
 
@@ -1149,6 +1374,15 @@ func (*binaryClassresultGetStruct) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecoderesultGetStruct(d, obj.(*resultGetStruct))
 }
 func (*binaryClassresultGetStruct) Skip(d binary.Decoder) error { return doSkipresultGetStruct(d) }
+func (*binaryClassresultGetStruct) Schema() *schema.Class       { return schemaresultGetStruct }
+
+var schemaresultGetStruct = &schema.Class{
+	TypeID: binaryIDresultGetStruct,
+	Name:   "resultGetStruct",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Struct"}},
+	},
+}
 
 type binaryClassresultResolveResource struct{}
 
@@ -1188,6 +1422,15 @@ func (*binaryClassresultResolveResource) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassresultResolveResource) Skip(d binary.Decoder) error {
 	return doSkipresultResolveResource(d)
 }
+func (*binaryClassresultResolveResource) Schema() *schema.Class { return schemaresultResolveResource }
+
+var schemaresultResolveResource = &schema.Class{
+	TypeID: binaryIDresultResolveResource,
+	Name:   "resultResolveResource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Resource"}},
+	},
+}
 
 type binaryClassresultSetStruct struct{}
 
@@ -1216,6 +1459,13 @@ func (*binaryClassresultSetStruct) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecoderesultSetStruct(d, obj.(*resultSetStruct))
 }
 func (*binaryClassresultSetStruct) Skip(d binary.Decoder) error { return doSkipresultSetStruct(d) }
+func (*binaryClassresultSetStruct) Schema() *schema.Class       { return schemaresultSetStruct }
+
+var schemaresultSetStruct = &schema.Class{
+	TypeID: binaryIDresultSetStruct,
+	Name:   "resultSetStruct",
+	Fields: []schema.Field{},
+}
 
 type binaryClassresultUseResource struct{}
 
@@ -1244,3 +1494,10 @@ func (*binaryClassresultUseResource) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecoderesultUseResource(d, obj.(*resultUseResource))
 }
 func (*binaryClassresultUseResource) Skip(d binary.Decoder) error { return doSkipresultUseResource(d) }
+func (*binaryClassresultUseResource) Schema() *schema.Class       { return schemaresultUseResource }
+
+var schemaresultUseResource = &schema.Class{
+	TypeID: binaryIDresultUseResource,
+	Name:   "resultUseResource",
+	Fields: []schema.Field{},
+}

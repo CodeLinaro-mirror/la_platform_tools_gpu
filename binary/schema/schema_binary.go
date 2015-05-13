@@ -102,6 +102,17 @@ func (*binaryClassArray) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeArray(d, obj.(*Array))
 }
 func (*binaryClassArray) Skip(d binary.Decoder) error { return doSkipArray(d) }
+func (*binaryClassArray) Schema() *Class              { return schemaArray }
+
+var schemaArray = &Class{
+	TypeID: binaryIDArray,
+	Name:   "Array",
+	Fields: []Field{
+		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+		Field{Declared: "Size", Type: &Primitive{Name: "uint32", Method: Uint32}},
+	},
+}
 
 type binaryClassField struct{}
 
@@ -158,6 +169,16 @@ func (*binaryClassField) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeField(d, obj.(*Field))
 }
 func (*binaryClassField) Skip(d binary.Decoder) error { return doSkipField(d) }
+func (*binaryClassField) Schema() *Class              { return schemaField }
+
+var schemaField = &Class{
+	TypeID: binaryIDField,
+	Name:   "Field",
+	Fields: []Field{
+		Field{Declared: "Declared", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
+	},
+}
 
 type binaryClassClass struct{}
 
@@ -246,6 +267,18 @@ func (*binaryClassClass) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeClass(d, obj.(*Class))
 }
 func (*binaryClassClass) Skip(d binary.Decoder) error { return doSkipClass(d) }
+func (*binaryClassClass) Schema() *Class              { return schemaClass }
+
+var schemaClass = &Class{
+	TypeID: binaryIDClass,
+	Name:   "Class",
+	Fields: []Field{
+		Field{Declared: "TypeID", Type: &Primitive{Name: "binary.ID", Method: ID}},
+		Field{Declared: "Package", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "Fields", Type: &Slice{Alias: "", ValueType: &Struct{Name: "Field"}}},
+	},
+}
 
 type binaryClassInterface struct{}
 
@@ -285,6 +318,15 @@ func (*binaryClassInterface) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeInterface(d, obj.(*Interface))
 }
 func (*binaryClassInterface) Skip(d binary.Decoder) error { return doSkipInterface(d) }
+func (*binaryClassInterface) Schema() *Class              { return schemaInterface }
+
+var schemaInterface = &Class{
+	TypeID: binaryIDInterface,
+	Name:   "Interface",
+	Fields: []Field{
+		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+	},
+}
 
 type binaryClassMap struct{}
 
@@ -358,6 +400,17 @@ func (*binaryClassMap) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeMap(d, obj.(*Map))
 }
 func (*binaryClassMap) Skip(d binary.Decoder) error { return doSkipMap(d) }
+func (*binaryClassMap) Schema() *Class              { return schemaMap }
+
+var schemaMap = &Class{
+	TypeID: binaryIDMap,
+	Name:   "Map",
+	Fields: []Field{
+		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "KeyType", Type: &Interface{Name: "Type"}},
+		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+	},
+}
 
 type binaryClassPointer struct{}
 
@@ -403,6 +456,15 @@ func (*binaryClassPointer) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodePointer(d, obj.(*Pointer))
 }
 func (*binaryClassPointer) Skip(d binary.Decoder) error { return doSkipPointer(d) }
+func (*binaryClassPointer) Schema() *Class              { return schemaPointer }
+
+var schemaPointer = &Class{
+	TypeID: binaryIDPointer,
+	Name:   "Pointer",
+	Fields: []Field{
+		Field{Declared: "Type", Type: &Interface{Name: "Type"}},
+	},
+}
 
 type binaryClassPrimitive struct{}
 
@@ -453,6 +515,16 @@ func (*binaryClassPrimitive) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodePrimitive(d, obj.(*Primitive))
 }
 func (*binaryClassPrimitive) Skip(d binary.Decoder) error { return doSkipPrimitive(d) }
+func (*binaryClassPrimitive) Schema() *Class              { return schemaPrimitive }
+
+var schemaPrimitive = &Class{
+	TypeID: binaryIDPrimitive,
+	Name:   "Primitive",
+	Fields: []Field{
+		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "Method", Type: &Primitive{Name: "Method", Method: Int32}},
+	},
+}
 
 type binaryClassSlice struct{}
 
@@ -509,6 +581,16 @@ func (*binaryClassSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeSlice(d, obj.(*Slice))
 }
 func (*binaryClassSlice) Skip(d binary.Decoder) error { return doSkipSlice(d) }
+func (*binaryClassSlice) Schema() *Class              { return schemaSlice }
+
+var schemaSlice = &Class{
+	TypeID: binaryIDSlice,
+	Name:   "Slice",
+	Fields: []Field{
+		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+	},
+}
 
 type binaryClassStream struct{}
 
@@ -565,6 +647,16 @@ func (*binaryClassStream) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeStream(d, obj.(*Stream))
 }
 func (*binaryClassStream) Skip(d binary.Decoder) error { return doSkipStream(d) }
+func (*binaryClassStream) Schema() *Class              { return schemaStream }
+
+var schemaStream = &Class{
+	TypeID: binaryIDStream,
+	Name:   "Stream",
+	Fields: []Field{
+		Field{Declared: "Alias", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "ValueType", Type: &Interface{Name: "Type"}},
+	},
+}
 
 type binaryClassStruct struct{}
 
@@ -615,3 +707,13 @@ func (*binaryClassStruct) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeStruct(d, obj.(*Struct))
 }
 func (*binaryClassStruct) Skip(d binary.Decoder) error { return doSkipStruct(d) }
+func (*binaryClassStruct) Schema() *Class              { return schemaStruct }
+
+var schemaStruct = &Class{
+	TypeID: binaryIDStruct,
+	Name:   "Struct",
+	Fields: []Field{
+		Field{Declared: "Name", Type: &Primitive{Name: "string", Method: String}},
+		Field{Declared: "ID", Type: &Primitive{Name: "binary.ID", Method: ID}},
+	},
+}

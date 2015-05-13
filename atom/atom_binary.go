@@ -8,6 +8,7 @@ package atom
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -74,6 +75,16 @@ func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeRange(d, obj.(*Range))
 }
 func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
+func (*binaryClassRange) Schema() *schema.Class       { return schemaRange }
+
+var schemaRange = &schema.Class{
+	TypeID: binaryIDRange,
+	Name:   "Range",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
+		schema.Field{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGroup struct{}
 
@@ -149,6 +160,17 @@ func (*binaryClassGroup) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGroup(d, obj.(*Group))
 }
 func (*binaryClassGroup) Skip(d binary.Decoder) error { return doSkipGroup(d) }
+func (*binaryClassGroup) Schema() *schema.Class       { return schemaGroup }
+
+var schemaGroup = &schema.Class{
+	TypeID: binaryIDGroup,
+	Name:   "Group",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "Range"}},
+		schema.Field{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Name: "Group"}}},
+	},
+}
 
 type binaryClassObservation struct{}
 
@@ -197,6 +219,16 @@ func (*binaryClassObservation) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeObservation(d, obj.(*Observation))
 }
 func (*binaryClassObservation) Skip(d binary.Decoder) error { return doSkipObservation(d) }
+func (*binaryClassObservation) Schema() *schema.Class       { return schemaObservation }
+
+var schemaObservation = &schema.Class{
+	TypeID: binaryIDObservation,
+	Name:   "Observation",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
+		schema.Field{Declared: "ResourceID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+	},
+}
 
 type binaryClassResource struct{}
 
@@ -257,3 +289,13 @@ func (*binaryClassResource) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeResource(d, obj.(*Resource))
 }
 func (*binaryClassResource) Skip(d binary.Decoder) error { return doSkipResource(d) }
+func (*binaryClassResource) Schema() *schema.Class       { return schemaResource }
+
+var schemaResource = &schema.Class{
+	TypeID: binaryIDResource,
+	Name:   "Resource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ResourceID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}

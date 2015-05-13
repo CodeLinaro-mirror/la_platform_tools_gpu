@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -72,6 +73,16 @@ func (*binaryClassAtomA) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomA(d, obj.(*AtomA))
 }
 func (*binaryClassAtomA) Skip(d binary.Decoder) error { return doSkipAtomA(d) }
+func (*binaryClassAtomA) Schema() *schema.Class       { return schemaAtomA }
+
+var schemaAtomA = &schema.Class{
+	TypeID: binaryIDAtomA,
+	Name:   "AtomA",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "AtomFlags", Type: &schema.Primitive{Name: "atom.Flags", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassAtomB struct{}
 
@@ -122,6 +133,16 @@ func (*binaryClassAtomB) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomB(d, obj.(*AtomB))
 }
 func (*binaryClassAtomB) Skip(d binary.Decoder) error { return doSkipAtomB(d) }
+func (*binaryClassAtomB) Schema() *schema.Class       { return schemaAtomB }
+
+var schemaAtomB = &schema.Class{
+	TypeID: binaryIDAtomB,
+	Name:   "AtomB",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Bool", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassAtomC struct{}
 
@@ -161,3 +182,12 @@ func (*binaryClassAtomC) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeAtomC(d, obj.(*AtomC))
 }
 func (*binaryClassAtomC) Skip(d binary.Decoder) error { return doSkipAtomC(d) }
+func (*binaryClassAtomC) Schema() *schema.Class       { return schemaAtomC }
+
+var schemaAtomC = &schema.Class{
+	TypeID: binaryIDAtomC,
+	Name:   "AtomC",
+	Fields: []schema.Field{
+		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}

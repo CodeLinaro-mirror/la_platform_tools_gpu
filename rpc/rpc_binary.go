@@ -8,6 +8,7 @@ package rpc
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -56,3 +57,12 @@ func (*binaryClassError) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeError(d, obj.(*Error))
 }
 func (*binaryClassError) Skip(d binary.Decoder) error { return doSkipError(d) }
+func (*binaryClassError) Schema() *schema.Class       { return schemaError }
+
+var schemaError = &schema.Class{
+	TypeID: binaryIDError,
+	Name:   "Error",
+	Fields: []schema.Field{
+		schema.Field{Declared: "message", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}

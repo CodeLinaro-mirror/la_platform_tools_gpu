@@ -8,6 +8,7 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -58,6 +59,15 @@ func (*binaryClassTypeA) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTypeA(d, obj.(*TypeA))
 }
 func (*binaryClassTypeA) Skip(d binary.Decoder) error { return doSkipTypeA(d) }
+func (*binaryClassTypeA) Schema() *schema.Class       { return schemaTypeA }
+
+var schemaTypeA = &schema.Class{
+	TypeID: binaryIDTypeA,
+	Name:   "TypeA",
+	Fields: []schema.Field{
+		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassTypeB struct{}
 
@@ -97,3 +107,12 @@ func (*binaryClassTypeB) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTypeB(d, obj.(*TypeB))
 }
 func (*binaryClassTypeB) Skip(d binary.Decoder) error { return doSkipTypeB(d) }
+func (*binaryClassTypeB) Schema() *schema.Class       { return schemaTypeB }
+
+var schemaTypeB = &schema.Class{
+	TypeID: binaryIDTypeB,
+	Name:   "TypeB",
+	Fields: []schema.Field{
+		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}

@@ -8,6 +8,7 @@ package memory
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -67,3 +68,13 @@ func (*binaryClassRange) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeRange(d, obj.(*Range))
 }
 func (*binaryClassRange) Skip(d binary.Decoder) error { return doSkipRange(d) }
+func (*binaryClassRange) Schema() *schema.Class       { return schemaRange }
+
+var schemaRange = &schema.Class{
+	TypeID: binaryIDRange,
+	Name:   "Range",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}

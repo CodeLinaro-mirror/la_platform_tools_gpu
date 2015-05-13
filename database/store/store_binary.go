@@ -8,6 +8,7 @@ package store
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
 func init() {
@@ -68,6 +69,15 @@ func (*binaryClassBlob) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeBlob(d, obj.(*Blob))
 }
 func (*binaryClassBlob) Skip(d binary.Decoder) error { return doSkipBlob(d) }
+func (*binaryClassBlob) Schema() *schema.Class       { return schemaBlob }
+
+var schemaBlob = &schema.Class{
+	TypeID: binaryIDBlob,
+	Name:   "Blob",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}
 
 type binaryClasskeyValue struct{}
 
@@ -128,3 +138,13 @@ func (*binaryClasskeyValue) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodekeyValue(d, obj.(*keyValue))
 }
 func (*binaryClasskeyValue) Skip(d binary.Decoder) error { return doSkipkeyValue(d) }
+func (*binaryClasskeyValue) Schema() *schema.Class       { return schemakeyValue }
+
+var schemakeyValue = &schema.Class{
+	TypeID: binaryIDkeyValue,
+	Name:   "keyValue",
+	Fields: []schema.Field{
+		schema.Field{Declared: "id", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		schema.Field{Declared: "buffer", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+	},
+}

@@ -9,6 +9,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -579,6 +580,20 @@ func (*binaryClassBackbufferInfo) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeBackbufferInfo(d, obj.(*BackbufferInfo))
 }
 func (*binaryClassBackbufferInfo) Skip(d binary.Decoder) error { return doSkipBackbufferInfo(d) }
+func (*binaryClassBackbufferInfo) Schema() *schema.Class       { return schemaBackbufferInfo }
+
+var schemaBackbufferInfo = &schema.Class{
+	TypeID: binaryIDBackbufferInfo,
+	Name:   "BackbufferInfo",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "ColorFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "DepthFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "StencilFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassColor struct{}
 
@@ -662,6 +677,19 @@ func (*binaryClassColor) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeColor(d, obj.(*Color))
 }
 func (*binaryClassColor) Skip(d binary.Decoder) error { return doSkipColor(d) }
+func (*binaryClassColor) Schema() *schema.Class       { return schemaColor }
+
+var schemaColor = &schema.Class{
+	TypeID: binaryIDColor,
+	Name:   "Color",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassBlendState struct{}
 
@@ -776,6 +804,22 @@ func (*binaryClassBlendState) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeBlendState(d, obj.(*BlendState))
 }
 func (*binaryClassBlendState) Skip(d binary.Decoder) error { return doSkipBlendState(d) }
+func (*binaryClassBlendState) Schema() *schema.Class       { return schemaBlendState }
+
+var schemaBlendState = &schema.Class{
+	TypeID: binaryIDBlendState,
+	Name:   "BlendState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		schema.Field{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		schema.Field{Declared: "BlendColor", Type: &schema.Struct{Name: "Color"}},
+	},
+}
 
 type binaryClassBuffer struct{}
 
@@ -846,6 +890,18 @@ func (*binaryClassBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeBuffer(d, obj.(*Buffer))
 }
 func (*binaryClassBuffer) Skip(d binary.Decoder) error { return doSkipBuffer(d) }
+func (*binaryClassBuffer) Schema() *schema.Class       { return schemaBuffer }
+
+var schemaBuffer = &schema.Class{
+	TypeID: binaryIDBuffer,
+	Name:   "Buffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "memory.Memory"}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCGLCreateContext struct{}
 
@@ -918,6 +974,18 @@ func (*binaryClassCGLCreateContext) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeCGLCreateContext(d, obj.(*CGLCreateContext))
 }
 func (*binaryClassCGLCreateContext) Skip(d binary.Decoder) error { return doSkipCGLCreateContext(d) }
+func (*binaryClassCGLCreateContext) Schema() *schema.Class       { return schemaCGLCreateContext }
+
+var schemaCGLCreateContext = &schema.Class{
+	TypeID: binaryIDCGLCreateContext,
+	Name:   "CGLCreateContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Pix", Type: &schema.Primitive{Name: "CGLPixelFormatObj", Method: schema.Uint64}},
+		schema.Field{Declared: "Share", Type: &schema.Primitive{Name: "CGLContextObj", Method: schema.Uint64}},
+		schema.Field{Declared: "Ctx", Type: &schema.Primitive{Name: "CGLContextObj", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+	},
+}
 
 type binaryClassCGLSetCurrentContext struct{}
 
@@ -969,6 +1037,16 @@ func (*binaryClassCGLSetCurrentContext) DecodeTo(d binary.Decoder, obj binary.Ob
 }
 func (*binaryClassCGLSetCurrentContext) Skip(d binary.Decoder) error {
 	return doSkipCGLSetCurrentContext(d)
+}
+func (*binaryClassCGLSetCurrentContext) Schema() *schema.Class { return schemaCGLSetCurrentContext }
+
+var schemaCGLSetCurrentContext = &schema.Class{
+	TypeID: binaryIDCGLSetCurrentContext,
+	Name:   "CGLSetCurrentContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Ctx", Type: &schema.Primitive{Name: "CGLContextObj", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+	},
 }
 
 type binaryClassClearState struct{}
@@ -1040,6 +1118,18 @@ func (*binaryClassClearState) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeClearState(d, obj.(*ClearState))
 }
 func (*binaryClassClearState) Skip(d binary.Decoder) error { return doSkipClearState(d) }
+func (*binaryClassClearState) Schema() *schema.Class       { return schemaClearState }
+
+var schemaClearState = &schema.Class{
+	TypeID: binaryIDClearState,
+	Name:   "ClearState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "ClearColor", Type: &schema.Struct{Name: "Color"}},
+		schema.Field{Declared: "ClearDepth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "ClearStencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassRect struct{}
 
@@ -1123,6 +1213,19 @@ func (*binaryClassRect) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeRect(d, obj.(*Rect))
 }
 func (*binaryClassRect) Skip(d binary.Decoder) error { return doSkipRect(d) }
+func (*binaryClassRect) Schema() *schema.Class       { return schemaRect }
+
+var schemaRect = &schema.Class{
+	TypeID: binaryIDRect,
+	Name:   "Rect",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassRasterizerState struct{}
 
@@ -1389,6 +1492,33 @@ func (*binaryClassRasterizerState) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeRasterizerState(d, obj.(*RasterizerState))
 }
 func (*binaryClassRasterizerState) Skip(d binary.Decoder) error { return doSkipRasterizerState(d) }
+func (*binaryClassRasterizerState) Schema() *schema.Class       { return schemaRasterizerState }
+
+var schemaRasterizerState = &schema.Class{
+	TypeID: binaryIDRasterizerState,
+	Name:   "RasterizerState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		schema.Field{Declared: "DepthNear", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "DepthFar", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "StencilMask", Type: &schema.Map{Alias: "U32_FaceModeMap", KeyType: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+		schema.Field{Declared: "Viewport", Type: &schema.Struct{Name: "Rect"}},
+		schema.Field{Declared: "Scissor", Type: &schema.Struct{Name: "Rect"}},
+		schema.Field{Declared: "FrontFace", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
+		schema.Field{Declared: "CullFace", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		schema.Field{Declared: "LineWidth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "PolygonOffsetFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "PolygonOffsetUnits", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "SampleCoverageValue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "SampleCoverageInvert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassVertexAttributeArray struct{}
 
@@ -1507,6 +1637,22 @@ func (*binaryClassVertexAttributeArray) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassVertexAttributeArray) Skip(d binary.Decoder) error {
 	return doSkipVertexAttributeArray(d)
 }
+func (*binaryClassVertexAttributeArray) Schema() *schema.Class { return schemaVertexAttributeArray }
+
+var schemaVertexAttributeArray = &schema.Class{
+	TypeID: binaryIDVertexAttributeArray,
+	Name:   "VertexAttributeArray",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		schema.Field{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		schema.Field{Declared: "Pointer", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassRenderbuffer struct{}
 
@@ -1588,6 +1734,19 @@ func (*binaryClassRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeRenderbuffer(d, obj.(*Renderbuffer))
 }
 func (*binaryClassRenderbuffer) Skip(d binary.Decoder) error { return doSkipRenderbuffer(d) }
+func (*binaryClassRenderbuffer) Schema() *schema.Class       { return schemaRenderbuffer }
+
+var schemaRenderbuffer = &schema.Class{
+	TypeID: binaryIDRenderbuffer,
+	Name:   "Renderbuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "memory.Memory"}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassImage struct{}
 
@@ -1680,6 +1839,20 @@ func (*binaryClassImage) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeImage(d, obj.(*Image))
 }
 func (*binaryClassImage) Skip(d binary.Decoder) error { return doSkipImage(d) }
+func (*binaryClassImage) Schema() *schema.Class       { return schemaImage }
+
+var schemaImage = &schema.Class{
+	TypeID: binaryIDImage,
+	Name:   "Image",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "memory.Memory"}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCubemapLevel struct{}
 
@@ -1761,6 +1934,16 @@ func (*binaryClassCubemapLevel) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeCubemapLevel(d, obj.(*CubemapLevel))
 }
 func (*binaryClassCubemapLevel) Skip(d binary.Decoder) error { return doSkipCubemapLevel(d) }
+func (*binaryClassCubemapLevel) Schema() *schema.Class       { return schemaCubemapLevel }
+
+var schemaCubemapLevel = &schema.Class{
+	TypeID: binaryIDCubemapLevel,
+	Name:   "CubemapLevel",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Faces", Type: &schema.Map{Alias: "Image_CubeMapImageTargetMap", KeyType: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image"}}},
+	},
+}
 
 type binaryClassTexture struct{}
 
@@ -2005,6 +2188,28 @@ func (*binaryClassTexture) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeTexture(d, obj.(*Texture))
 }
 func (*binaryClassTexture) Skip(d binary.Decoder) error { return doSkipTexture(d) }
+func (*binaryClassTexture) Schema() *schema.Class       { return schemaTexture }
+
+var schemaTexture = &schema.Class{
+	TypeID: binaryIDTexture,
+	Name:   "Texture",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Texture2D", Type: &schema.Map{Alias: "Image_s32Map", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Image"}}},
+		schema.Field{Declared: "Cubemap", Type: &schema.Map{Alias: "CubemapLevel_s32Map", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "CubemapLevel"}}},
+		schema.Field{Declared: "MagFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		schema.Field{Declared: "MinFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		schema.Field{Declared: "WrapS", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
+		schema.Field{Declared: "WrapT", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
+		schema.Field{Declared: "SwizzleR", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		schema.Field{Declared: "SwizzleG", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		schema.Field{Declared: "SwizzleB", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		schema.Field{Declared: "SwizzleA", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		schema.Field{Declared: "MaxAnisotropy", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassFramebufferAttachmentInfo struct{}
 
@@ -2090,6 +2295,21 @@ func (*binaryClassFramebufferAttachmentInfo) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassFramebufferAttachmentInfo) Skip(d binary.Decoder) error {
 	return doSkipFramebufferAttachmentInfo(d)
 }
+func (*binaryClassFramebufferAttachmentInfo) Schema() *schema.Class {
+	return schemaFramebufferAttachmentInfo
+}
+
+var schemaFramebufferAttachmentInfo = &schema.Class{
+	TypeID: binaryIDFramebufferAttachmentInfo,
+	Name:   "FramebufferAttachmentInfo",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32}},
+		schema.Field{Declared: "TextureLevel", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "CubeMapFace", Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassFramebuffer struct{}
 
@@ -2171,6 +2391,16 @@ func (*binaryClassFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeFramebuffer(d, obj.(*Framebuffer))
 }
 func (*binaryClassFramebuffer) Skip(d binary.Decoder) error { return doSkipFramebuffer(d) }
+func (*binaryClassFramebuffer) Schema() *schema.Class       { return schemaFramebuffer }
+
+var schemaFramebuffer = &schema.Class{
+	TypeID: binaryIDFramebuffer,
+	Name:   "Framebuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Attachments", Type: &schema.Map{Alias: "FramebufferAttachmentInfo_FramebufferAttachmentMap", KeyType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo"}}},
+	},
+}
 
 type binaryClassShader struct{}
 
@@ -2292,6 +2522,21 @@ func (*binaryClassShader) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeShader(d, obj.(*Shader))
 }
 func (*binaryClassShader) Skip(d binary.Decoder) error { return doSkipShader(d) }
+func (*binaryClassShader) Schema() *schema.Class       { return schemaShader }
+
+var schemaShader = &schema.Class{
+	TypeID: binaryIDShader,
+	Name:   "Shader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "memory.Memory"}},
+		schema.Field{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "InfoLog", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Source", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassVertexAttribute struct{}
 
@@ -2364,6 +2609,18 @@ func (*binaryClassVertexAttribute) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeVertexAttribute(d, obj.(*VertexAttribute))
 }
 func (*binaryClassVertexAttribute) Skip(d binary.Decoder) error { return doSkipVertexAttribute(d) }
+func (*binaryClassVertexAttribute) Schema() *schema.Class       { return schemaVertexAttribute }
+
+var schemaVertexAttribute = &schema.Class{
+	TypeID: binaryIDVertexAttribute,
+	Name:   "VertexAttribute",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassVec2f struct{}
 
@@ -2425,6 +2682,17 @@ func (*binaryClassVec2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec2f(d, obj.(*Vec2f))
 }
 func (*binaryClassVec2f) Skip(d binary.Decoder) error { return doSkipVec2f(d) }
+func (*binaryClassVec2f) Schema() *schema.Class       { return schemaVec2f }
+
+var schemaVec2f = &schema.Class{
+	TypeID: binaryIDVec2f,
+	Name:   "Vec2f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassVec3f struct{}
 
@@ -2497,6 +2765,18 @@ func (*binaryClassVec3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec3f(d, obj.(*Vec3f))
 }
 func (*binaryClassVec3f) Skip(d binary.Decoder) error { return doSkipVec3f(d) }
+func (*binaryClassVec3f) Schema() *schema.Class       { return schemaVec3f }
+
+var schemaVec3f = &schema.Class{
+	TypeID: binaryIDVec3f,
+	Name:   "Vec3f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassVec4f struct{}
 
@@ -2580,6 +2860,19 @@ func (*binaryClassVec4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec4f(d, obj.(*Vec4f))
 }
 func (*binaryClassVec4f) Skip(d binary.Decoder) error { return doSkipVec4f(d) }
+func (*binaryClassVec4f) Schema() *schema.Class       { return schemaVec4f }
+
+var schemaVec4f = &schema.Class{
+	TypeID: binaryIDVec4f,
+	Name:   "Vec4f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "W", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassVec2i struct{}
 
@@ -2641,6 +2934,17 @@ func (*binaryClassVec2i) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec2i(d, obj.(*Vec2i))
 }
 func (*binaryClassVec2i) Skip(d binary.Decoder) error { return doSkipVec2i(d) }
+func (*binaryClassVec2i) Schema() *schema.Class       { return schemaVec2i }
+
+var schemaVec2i = &schema.Class{
+	TypeID: binaryIDVec2i,
+	Name:   "Vec2i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassVec3i struct{}
 
@@ -2713,6 +3017,18 @@ func (*binaryClassVec3i) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec3i(d, obj.(*Vec3i))
 }
 func (*binaryClassVec3i) Skip(d binary.Decoder) error { return doSkipVec3i(d) }
+func (*binaryClassVec3i) Schema() *schema.Class       { return schemaVec3i }
+
+var schemaVec3i = &schema.Class{
+	TypeID: binaryIDVec3i,
+	Name:   "Vec3i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassVec4i struct{}
 
@@ -2796,6 +3112,19 @@ func (*binaryClassVec4i) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeVec4i(d, obj.(*Vec4i))
 }
 func (*binaryClassVec4i) Skip(d binary.Decoder) error { return doSkipVec4i(d) }
+func (*binaryClassVec4i) Schema() *schema.Class       { return schemaVec4i }
+
+var schemaVec4i = &schema.Class{
+	TypeID: binaryIDVec4i,
+	Name:   "Vec4i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "W", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassMat2f struct{}
 
@@ -2853,6 +3182,17 @@ func (*binaryClassMat2f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeMat2f(d, obj.(*Mat2f))
 }
 func (*binaryClassMat2f) Skip(d binary.Decoder) error { return doSkipMat2f(d) }
+func (*binaryClassMat2f) Schema() *schema.Class       { return schemaMat2f }
+
+var schemaMat2f = &schema.Class{
+	TypeID: binaryIDMat2f,
+	Name:   "Mat2f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec2f"}},
+		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec2f"}},
+	},
+}
 
 type binaryClassMat3f struct{}
 
@@ -2919,6 +3259,18 @@ func (*binaryClassMat3f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeMat3f(d, obj.(*Mat3f))
 }
 func (*binaryClassMat3f) Skip(d binary.Decoder) error { return doSkipMat3f(d) }
+func (*binaryClassMat3f) Schema() *schema.Class       { return schemaMat3f }
+
+var schemaMat3f = &schema.Class{
+	TypeID: binaryIDMat3f,
+	Name:   "Mat3f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec3f"}},
+		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec3f"}},
+		schema.Field{Declared: "Col2", Type: &schema.Struct{Name: "Vec3f"}},
+	},
+}
 
 type binaryClassMat4f struct{}
 
@@ -2994,6 +3346,19 @@ func (*binaryClassMat4f) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeMat4f(d, obj.(*Mat4f))
 }
 func (*binaryClassMat4f) Skip(d binary.Decoder) error { return doSkipMat4f(d) }
+func (*binaryClassMat4f) Schema() *schema.Class       { return schemaMat4f }
+
+var schemaMat4f = &schema.Class{
+	TypeID: binaryIDMat4f,
+	Name:   "Mat4f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec4f"}},
+		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec4f"}},
+		schema.Field{Declared: "Col2", Type: &schema.Struct{Name: "Vec4f"}},
+		schema.Field{Declared: "Col3", Type: &schema.Struct{Name: "Vec4f"}},
+	},
+}
 
 type binaryClassUniformValue struct{}
 
@@ -3136,6 +3501,26 @@ func (*binaryClassUniformValue) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeUniformValue(d, obj.(*UniformValue))
 }
 func (*binaryClassUniformValue) Skip(d binary.Decoder) error { return doSkipUniformValue(d) }
+func (*binaryClassUniformValue) Schema() *schema.Class       { return schemaUniformValue }
+
+var schemaUniformValue = &schema.Class{
+	TypeID: binaryIDUniformValue,
+	Name:   "UniformValue",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "F32", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Vec2f", Type: &schema.Struct{Name: "Vec2f"}},
+		schema.Field{Declared: "Vec3f", Type: &schema.Struct{Name: "Vec3f"}},
+		schema.Field{Declared: "Vec4f", Type: &schema.Struct{Name: "Vec4f"}},
+		schema.Field{Declared: "S32", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Vec2i", Type: &schema.Struct{Name: "Vec2i"}},
+		schema.Field{Declared: "Vec3i", Type: &schema.Struct{Name: "Vec3i"}},
+		schema.Field{Declared: "Vec4i", Type: &schema.Struct{Name: "Vec4i"}},
+		schema.Field{Declared: "Mat2f", Type: &schema.Struct{Name: "Mat2f"}},
+		schema.Field{Declared: "Mat3f", Type: &schema.Struct{Name: "Mat3f"}},
+		schema.Field{Declared: "Mat4f", Type: &schema.Struct{Name: "Mat4f"}},
+	},
+}
 
 type binaryClassUniform struct{}
 
@@ -3206,6 +3591,18 @@ func (*binaryClassUniform) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeUniform(d, obj.(*Uniform))
 }
 func (*binaryClassUniform) Skip(d binary.Decoder) error { return doSkipUniform(d) }
+func (*binaryClassUniform) Schema() *schema.Class       { return schemaUniform }
+
+var schemaUniform = &schema.Class{
+	TypeID: binaryIDUniform,
+	Name:   "Uniform",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "UniformValue"}},
+	},
+}
 
 type binaryClassProgram struct{}
 
@@ -3448,6 +3845,22 @@ func (*binaryClassProgram) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeProgram(d, obj.(*Program))
 }
 func (*binaryClassProgram) Skip(d binary.Decoder) error { return doSkipProgram(d) }
+func (*binaryClassProgram) Schema() *schema.Class       { return schemaProgram }
+
+var schemaProgram = &schema.Class{
+	TypeID: binaryIDProgram,
+	Name:   "Program",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderId_ShaderTypeMap", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
+		schema.Field{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "memory.Memory"}},
+		schema.Field{Declared: "AttributeBindings", Type: &schema.Map{Alias: "AttributeLocation_CharBufferMap", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
+		schema.Field{Declared: "Attributes", Type: &schema.Map{Alias: "VertexAttribute_s32Map", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "VertexAttribute"}}},
+		schema.Field{Declared: "Uniforms", Type: &schema.Map{Alias: "Uniform_UniformLocationMap", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Uniform"}}},
+		schema.Field{Declared: "InfoLog", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassVertexArray struct{}
 
@@ -3487,6 +3900,15 @@ func (*binaryClassVertexArray) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeVertexArray(d, obj.(*VertexArray))
 }
 func (*binaryClassVertexArray) Skip(d binary.Decoder) error { return doSkipVertexArray(d) }
+func (*binaryClassVertexArray) Schema() *schema.Class       { return schemaVertexArray }
+
+var schemaVertexArray = &schema.Class{
+	TypeID: binaryIDVertexArray,
+	Name:   "VertexArray",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassQuery struct{}
 
@@ -3526,6 +3948,15 @@ func (*binaryClassQuery) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeQuery(d, obj.(*Query))
 }
 func (*binaryClassQuery) Skip(d binary.Decoder) error { return doSkipQuery(d) }
+func (*binaryClassQuery) Schema() *schema.Class       { return schemaQuery }
+
+var schemaQuery = &schema.Class{
+	TypeID: binaryIDQuery,
+	Name:   "Query",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassObjects struct{}
 
@@ -3965,6 +4396,23 @@ func (*binaryClassObjects) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeObjects(d, obj.(*Objects))
 }
 func (*binaryClassObjects) Skip(d binary.Decoder) error { return doSkipObjects(d) }
+func (*binaryClassObjects) Schema() *schema.Class       { return schemaObjects }
+
+var schemaObjects = &schema.Class{
+	TypeID: binaryIDObjects,
+	Name:   "Objects",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferPtr_RenderbufferIdMap", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Renderbuffer"}}}},
+		schema.Field{Declared: "Textures", Type: &schema.Map{Alias: "TexturePtr_TextureIdMap", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Texture"}}}},
+		schema.Field{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferPtr_FramebufferIdMap", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Framebuffer"}}}},
+		schema.Field{Declared: "Buffers", Type: &schema.Map{Alias: "BufferPtr_BufferIdMap", KeyType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Buffer"}}}},
+		schema.Field{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderPtr_ShaderIdMap", KeyType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Shader"}}}},
+		schema.Field{Declared: "Programs", Type: &schema.Map{Alias: "ProgramPtr_ProgramIdMap", KeyType: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Program"}}}},
+		schema.Field{Declared: "VertexArrays", Type: &schema.Map{Alias: "VertexArrayPtr_VertexArrayIdMap", KeyType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexArray"}}}},
+		schema.Field{Declared: "Queries", Type: &schema.Map{Alias: "QueryPtr_QueryIdMap", KeyType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Query"}}}},
+	},
+}
 
 type binaryClassContext struct{}
 
@@ -4442,6 +4890,31 @@ func (*binaryClassContext) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeContext(d, obj.(*Context))
 }
 func (*binaryClassContext) Skip(d binary.Decoder) error { return doSkipContext(d) }
+func (*binaryClassContext) Schema() *schema.Class       { return schemaContext }
+
+var schemaContext = &schema.Class{
+	TypeID: binaryIDContext,
+	Name:   "Context",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		schema.Field{Declared: "Blending", Type: &schema.Struct{Name: "BlendState"}},
+		schema.Field{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState"}},
+		schema.Field{Declared: "Clearing", Type: &schema.Struct{Name: "ClearState"}},
+		schema.Field{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "FramebufferId_FramebufferTargetMap", KeyType: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
+		schema.Field{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "RenderbufferId_RenderbufferTargetMap", KeyType: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
+		schema.Field{Declared: "BoundBuffers", Type: &schema.Map{Alias: "BufferId_BufferTargetMap", KeyType: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
+		schema.Field{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+		schema.Field{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "VertexAttributeArrayPtr_AttributeLocationMap", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray"}}}},
+		schema.Field{Declared: "TextureUnits", Type: &schema.Map{Alias: "TextureId_TextureTargetMap_TextureUnitMap", KeyType: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "TextureId_TextureTargetMap", KeyType: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
+		schema.Field{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
+		schema.Field{Declared: "Capabilities", Type: &schema.Map{Alias: "Bool_CapabilityMap", KeyType: &schema.Primitive{Name: "Capability", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+		schema.Field{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
+		schema.Field{Declared: "PixelStorage", Type: &schema.Map{Alias: "S32_PixelStoreParameterMap", KeyType: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+		schema.Field{Declared: "Instances", Type: &schema.Struct{Name: "Objects"}},
+	},
+}
 
 type binaryClassEglCreateContext struct{}
 
@@ -4543,6 +5016,19 @@ func (*binaryClassEglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeEglCreateContext(d, obj.(*EglCreateContext))
 }
 func (*binaryClassEglCreateContext) Skip(d binary.Decoder) error { return doSkipEglCreateContext(d) }
+func (*binaryClassEglCreateContext) Schema() *schema.Class       { return schemaEglCreateContext }
+
+var schemaEglCreateContext = &schema.Class{
+	TypeID: binaryIDEglCreateContext,
+	Name:   "EglCreateContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "EGLDisplay", Method: schema.Uint64}},
+		schema.Field{Declared: "Config", Type: &schema.Primitive{Name: "EGLConfig", Method: schema.Uint64}},
+		schema.Field{Declared: "ShareContext", Type: &schema.Primitive{Name: "EGLContext", Method: schema.Uint64}},
+		schema.Field{Declared: "AttribList", Type: &schema.Slice{Alias: "EGLintArray", ValueType: &schema.Primitive{Name: "EGLint", Method: schema.Int64}}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLContext", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassEglInitialize struct{}
 
@@ -4615,6 +5101,18 @@ func (*binaryClassEglInitialize) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeEglInitialize(d, obj.(*EglInitialize))
 }
 func (*binaryClassEglInitialize) Skip(d binary.Decoder) error { return doSkipEglInitialize(d) }
+func (*binaryClassEglInitialize) Schema() *schema.Class       { return schemaEglInitialize }
+
+var schemaEglInitialize = &schema.Class{
+	TypeID: binaryIDEglInitialize,
+	Name:   "EglInitialize",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Dpy", Type: &schema.Primitive{Name: "EGLDisplay", Method: schema.Uint64}},
+		schema.Field{Declared: "Major", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
+		schema.Field{Declared: "Minor", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+	},
+}
 
 type binaryClassEglMakeCurrent struct{}
 
@@ -4698,6 +5196,19 @@ func (*binaryClassEglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeEglMakeCurrent(d, obj.(*EglMakeCurrent))
 }
 func (*binaryClassEglMakeCurrent) Skip(d binary.Decoder) error { return doSkipEglMakeCurrent(d) }
+func (*binaryClassEglMakeCurrent) Schema() *schema.Class       { return schemaEglMakeCurrent }
+
+var schemaEglMakeCurrent = &schema.Class{
+	TypeID: binaryIDEglMakeCurrent,
+	Name:   "EglMakeCurrent",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "EGLDisplay", Method: schema.Uint64}},
+		schema.Field{Declared: "Draw", Type: &schema.Primitive{Name: "EGLSurface", Method: schema.Uint64}},
+		schema.Field{Declared: "Read", Type: &schema.Primitive{Name: "EGLSurface", Method: schema.Uint64}},
+		schema.Field{Declared: "Context", Type: &schema.Primitive{Name: "EGLContext", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+	},
+}
 
 type binaryClassEglQuerySurface struct{}
 
@@ -4781,6 +5292,19 @@ func (*binaryClassEglQuerySurface) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeEglQuerySurface(d, obj.(*EglQuerySurface))
 }
 func (*binaryClassEglQuerySurface) Skip(d binary.Decoder) error { return doSkipEglQuerySurface(d) }
+func (*binaryClassEglQuerySurface) Schema() *schema.Class       { return schemaEglQuerySurface }
+
+var schemaEglQuerySurface = &schema.Class{
+	TypeID: binaryIDEglQuerySurface,
+	Name:   "EglQuerySurface",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "EGLDisplay", Method: schema.Uint64}},
+		schema.Field{Declared: "Surface", Type: &schema.Primitive{Name: "EGLSurface", Method: schema.Uint64}},
+		schema.Field{Declared: "Attribute", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+	},
+}
 
 type binaryClassEglSwapBuffers struct{}
 
@@ -4842,6 +5366,17 @@ func (*binaryClassEglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeEglSwapBuffers(d, obj.(*EglSwapBuffers))
 }
 func (*binaryClassEglSwapBuffers) Skip(d binary.Decoder) error { return doSkipEglSwapBuffers(d) }
+func (*binaryClassEglSwapBuffers) Schema() *schema.Class       { return schemaEglSwapBuffers }
+
+var schemaEglSwapBuffers = &schema.Class{
+	TypeID: binaryIDEglSwapBuffers,
+	Name:   "EglSwapBuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "EGLDisplay", Method: schema.Uint64}},
+		schema.Field{Declared: "Surface", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+	},
+}
 
 type binaryClassFlushPostBuffer struct{}
 
@@ -4870,6 +5405,13 @@ func (*binaryClassFlushPostBuffer) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeFlushPostBuffer(d, obj.(*FlushPostBuffer))
 }
 func (*binaryClassFlushPostBuffer) Skip(d binary.Decoder) error { return doSkipFlushPostBuffer(d) }
+func (*binaryClassFlushPostBuffer) Schema() *schema.Class       { return schemaFlushPostBuffer }
+
+var schemaFlushPostBuffer = &schema.Class{
+	TypeID: binaryIDFlushPostBuffer,
+	Name:   "FlushPostBuffer",
+	Fields: []schema.Field{},
+}
 
 type binaryClassGlActiveTexture struct{}
 
@@ -4909,6 +5451,15 @@ func (*binaryClassGlActiveTexture) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlActiveTexture(d, obj.(*GlActiveTexture))
 }
 func (*binaryClassGlActiveTexture) Skip(d binary.Decoder) error { return doSkipGlActiveTexture(d) }
+func (*binaryClassGlActiveTexture) Schema() *schema.Class       { return schemaGlActiveTexture }
+
+var schemaGlActiveTexture = &schema.Class{
+	TypeID: binaryIDGlActiveTexture,
+	Name:   "GlActiveTexture",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Unit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlAttachShader struct{}
 
@@ -4959,6 +5510,16 @@ func (*binaryClassGlAttachShader) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlAttachShader(d, obj.(*GlAttachShader))
 }
 func (*binaryClassGlAttachShader) Skip(d binary.Decoder) error { return doSkipGlAttachShader(d) }
+func (*binaryClassGlAttachShader) Schema() *schema.Class       { return schemaGlAttachShader }
+
+var schemaGlAttachShader = &schema.Class{
+	TypeID: binaryIDGlAttachShader,
+	Name:   "GlAttachShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBeginQuery struct{}
 
@@ -5009,6 +5570,16 @@ func (*binaryClassGlBeginQuery) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlBeginQuery(d, obj.(*GlBeginQuery))
 }
 func (*binaryClassGlBeginQuery) Skip(d binary.Decoder) error { return doSkipGlBeginQuery(d) }
+func (*binaryClassGlBeginQuery) Schema() *schema.Class       { return schemaGlBeginQuery }
+
+var schemaGlBeginQuery = &schema.Class{
+	TypeID: binaryIDGlBeginQuery,
+	Name:   "GlBeginQuery",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBeginQueryEXT struct{}
 
@@ -5059,6 +5630,16 @@ func (*binaryClassGlBeginQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlBeginQueryEXT(d, obj.(*GlBeginQueryEXT))
 }
 func (*binaryClassGlBeginQueryEXT) Skip(d binary.Decoder) error { return doSkipGlBeginQueryEXT(d) }
+func (*binaryClassGlBeginQueryEXT) Schema() *schema.Class       { return schemaGlBeginQueryEXT }
+
+var schemaGlBeginQueryEXT = &schema.Class{
+	TypeID: binaryIDGlBeginQueryEXT,
+	Name:   "GlBeginQueryEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBindAttribLocation struct{}
 
@@ -5122,6 +5703,17 @@ func (*binaryClassGlBindAttribLocation) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassGlBindAttribLocation) Skip(d binary.Decoder) error {
 	return doSkipGlBindAttribLocation(d)
 }
+func (*binaryClassGlBindAttribLocation) Schema() *schema.Class { return schemaGlBindAttribLocation }
+
+var schemaGlBindAttribLocation = &schema.Class{
+	TypeID: binaryIDGlBindAttribLocation,
+	Name:   "GlBindAttribLocation",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlBindBuffer struct{}
 
@@ -5172,6 +5764,16 @@ func (*binaryClassGlBindBuffer) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlBindBuffer(d, obj.(*GlBindBuffer))
 }
 func (*binaryClassGlBindBuffer) Skip(d binary.Decoder) error { return doSkipGlBindBuffer(d) }
+func (*binaryClassGlBindBuffer) Schema() *schema.Class       { return schemaGlBindBuffer }
+
+var schemaGlBindBuffer = &schema.Class{
+	TypeID: binaryIDGlBindBuffer,
+	Name:   "GlBindBuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBindFramebuffer struct{}
 
@@ -5222,6 +5824,16 @@ func (*binaryClassGlBindFramebuffer) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlBindFramebuffer(d, obj.(*GlBindFramebuffer))
 }
 func (*binaryClassGlBindFramebuffer) Skip(d binary.Decoder) error { return doSkipGlBindFramebuffer(d) }
+func (*binaryClassGlBindFramebuffer) Schema() *schema.Class       { return schemaGlBindFramebuffer }
+
+var schemaGlBindFramebuffer = &schema.Class{
+	TypeID: binaryIDGlBindFramebuffer,
+	Name:   "GlBindFramebuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBindRenderbuffer struct{}
 
@@ -5272,6 +5884,16 @@ func (*binaryClassGlBindRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlBindRenderbuffer(d, obj.(*GlBindRenderbuffer))
 }
 func (*binaryClassGlBindRenderbuffer) Skip(d binary.Decoder) error { return doSkipGlBindRenderbuffer(d) }
+func (*binaryClassGlBindRenderbuffer) Schema() *schema.Class       { return schemaGlBindRenderbuffer }
+
+var schemaGlBindRenderbuffer = &schema.Class{
+	TypeID: binaryIDGlBindRenderbuffer,
+	Name:   "GlBindRenderbuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBindTexture struct{}
 
@@ -5322,6 +5944,16 @@ func (*binaryClassGlBindTexture) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlBindTexture(d, obj.(*GlBindTexture))
 }
 func (*binaryClassGlBindTexture) Skip(d binary.Decoder) error { return doSkipGlBindTexture(d) }
+func (*binaryClassGlBindTexture) Schema() *schema.Class       { return schemaGlBindTexture }
+
+var schemaGlBindTexture = &schema.Class{
+	TypeID: binaryIDGlBindTexture,
+	Name:   "GlBindTexture",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBindVertexArrayOES struct{}
 
@@ -5362,6 +5994,15 @@ func (*binaryClassGlBindVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Ob
 }
 func (*binaryClassGlBindVertexArrayOES) Skip(d binary.Decoder) error {
 	return doSkipGlBindVertexArrayOES(d)
+}
+func (*binaryClassGlBindVertexArrayOES) Schema() *schema.Class { return schemaGlBindVertexArrayOES }
+
+var schemaGlBindVertexArrayOES = &schema.Class{
+	TypeID: binaryIDGlBindVertexArrayOES,
+	Name:   "GlBindVertexArrayOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlBlendColor struct{}
@@ -5435,6 +6076,18 @@ func (*binaryClassGlBlendColor) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlBlendColor(d, obj.(*GlBlendColor))
 }
 func (*binaryClassGlBlendColor) Skip(d binary.Decoder) error { return doSkipGlBlendColor(d) }
+func (*binaryClassGlBlendColor) Schema() *schema.Class       { return schemaGlBlendColor }
+
+var schemaGlBlendColor = &schema.Class{
+	TypeID: binaryIDGlBlendColor,
+	Name:   "GlBlendColor",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlBlendEquation struct{}
 
@@ -5474,6 +6127,15 @@ func (*binaryClassGlBlendEquation) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlBlendEquation(d, obj.(*GlBlendEquation))
 }
 func (*binaryClassGlBlendEquation) Skip(d binary.Decoder) error { return doSkipGlBlendEquation(d) }
+func (*binaryClassGlBlendEquation) Schema() *schema.Class       { return schemaGlBlendEquation }
+
+var schemaGlBlendEquation = &schema.Class{
+	TypeID: binaryIDGlBlendEquation,
+	Name:   "GlBlendEquation",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Equation", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBlendEquationSeparate struct{}
 
@@ -5526,6 +6188,18 @@ func (*binaryClassGlBlendEquationSeparate) DecodeTo(d binary.Decoder, obj binary
 func (*binaryClassGlBlendEquationSeparate) Skip(d binary.Decoder) error {
 	return doSkipGlBlendEquationSeparate(d)
 }
+func (*binaryClassGlBlendEquationSeparate) Schema() *schema.Class {
+	return schemaGlBlendEquationSeparate
+}
+
+var schemaGlBlendEquationSeparate = &schema.Class{
+	TypeID: binaryIDGlBlendEquationSeparate,
+	Name:   "GlBlendEquationSeparate",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Rgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBlendFunc struct{}
 
@@ -5576,6 +6250,16 @@ func (*binaryClassGlBlendFunc) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlBlendFunc(d, obj.(*GlBlendFunc))
 }
 func (*binaryClassGlBlendFunc) Skip(d binary.Decoder) error { return doSkipGlBlendFunc(d) }
+func (*binaryClassGlBlendFunc) Schema() *schema.Class       { return schemaGlBlendFunc }
+
+var schemaGlBlendFunc = &schema.Class{
+	TypeID: binaryIDGlBlendFunc,
+	Name:   "GlBlendFunc",
+	Fields: []schema.Field{
+		schema.Field{Declared: "SrcFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "DstFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBlendFuncSeparate struct{}
 
@@ -5649,6 +6333,18 @@ func (*binaryClassGlBlendFuncSeparate) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlBlendFuncSeparate) Skip(d binary.Decoder) error {
 	return doSkipGlBlendFuncSeparate(d)
+}
+func (*binaryClassGlBlendFuncSeparate) Schema() *schema.Class { return schemaGlBlendFuncSeparate }
+
+var schemaGlBlendFuncSeparate = &schema.Class{
+	TypeID: binaryIDGlBlendFuncSeparate,
+	Name:   "GlBlendFuncSeparate",
+	Fields: []schema.Field{
+		schema.Field{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		schema.Field{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlBlitFramebuffer struct{}
@@ -5788,6 +6484,24 @@ func (*binaryClassGlBlitFramebuffer) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlBlitFramebuffer(d, obj.(*GlBlitFramebuffer))
 }
 func (*binaryClassGlBlitFramebuffer) Skip(d binary.Decoder) error { return doSkipGlBlitFramebuffer(d) }
+func (*binaryClassGlBlitFramebuffer) Schema() *schema.Class       { return schemaGlBlitFramebuffer }
+
+var schemaGlBlitFramebuffer = &schema.Class{
+	TypeID: binaryIDGlBlitFramebuffer,
+	Name:   "GlBlitFramebuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "SrcX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "SrcY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "SrcX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "SrcY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "DstX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "DstY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "DstX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "DstY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
+		schema.Field{Declared: "Filter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBufferData struct{}
 
@@ -5860,6 +6574,18 @@ func (*binaryClassGlBufferData) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlBufferData(d, obj.(*GlBufferData))
 }
 func (*binaryClassGlBufferData) Skip(d binary.Decoder) error { return doSkipGlBufferData(d) }
+func (*binaryClassGlBufferData) Schema() *schema.Class       { return schemaGlBufferData }
+
+var schemaGlBufferData = &schema.Class{
+	TypeID: binaryIDGlBufferData,
+	Name:   "GlBufferData",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "BufferDataPointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlBufferSubData struct{}
 
@@ -5932,6 +6658,18 @@ func (*binaryClassGlBufferSubData) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlBufferSubData(d, obj.(*GlBufferSubData))
 }
 func (*binaryClassGlBufferSubData) Skip(d binary.Decoder) error { return doSkipGlBufferSubData(d) }
+func (*binaryClassGlBufferSubData) Schema() *schema.Class       { return schemaGlBufferSubData }
+
+var schemaGlBufferSubData = &schema.Class{
+	TypeID: binaryIDGlBufferSubData,
+	Name:   "GlBufferSubData",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlCheckFramebufferStatus struct{}
 
@@ -5984,6 +6722,18 @@ func (*binaryClassGlCheckFramebufferStatus) DecodeTo(d binary.Decoder, obj binar
 func (*binaryClassGlCheckFramebufferStatus) Skip(d binary.Decoder) error {
 	return doSkipGlCheckFramebufferStatus(d)
 }
+func (*binaryClassGlCheckFramebufferStatus) Schema() *schema.Class {
+	return schemaGlCheckFramebufferStatus
+}
+
+var schemaGlCheckFramebufferStatus = &schema.Class{
+	TypeID: binaryIDGlCheckFramebufferStatus,
+	Name:   "GlCheckFramebufferStatus",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlClear struct{}
 
@@ -6023,6 +6773,15 @@ func (*binaryClassGlClear) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlClear(d, obj.(*GlClear))
 }
 func (*binaryClassGlClear) Skip(d binary.Decoder) error { return doSkipGlClear(d) }
+func (*binaryClassGlClear) Schema() *schema.Class       { return schemaGlClear }
+
+var schemaGlClear = &schema.Class{
+	TypeID: binaryIDGlClear,
+	Name:   "GlClear",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlClearColor struct{}
 
@@ -6095,6 +6854,18 @@ func (*binaryClassGlClearColor) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlClearColor(d, obj.(*GlClearColor))
 }
 func (*binaryClassGlClearColor) Skip(d binary.Decoder) error { return doSkipGlClearColor(d) }
+func (*binaryClassGlClearColor) Schema() *schema.Class       { return schemaGlClearColor }
+
+var schemaGlClearColor = &schema.Class{
+	TypeID: binaryIDGlClearColor,
+	Name:   "GlClearColor",
+	Fields: []schema.Field{
+		schema.Field{Declared: "R", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "G", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlClearDepthf struct{}
 
@@ -6134,6 +6905,15 @@ func (*binaryClassGlClearDepthf) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlClearDepthf(d, obj.(*GlClearDepthf))
 }
 func (*binaryClassGlClearDepthf) Skip(d binary.Decoder) error { return doSkipGlClearDepthf(d) }
+func (*binaryClassGlClearDepthf) Schema() *schema.Class       { return schemaGlClearDepthf }
+
+var schemaGlClearDepthf = &schema.Class{
+	TypeID: binaryIDGlClearDepthf,
+	Name:   "GlClearDepthf",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlClearStencil struct{}
 
@@ -6173,6 +6953,15 @@ func (*binaryClassGlClearStencil) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlClearStencil(d, obj.(*GlClearStencil))
 }
 func (*binaryClassGlClearStencil) Skip(d binary.Decoder) error { return doSkipGlClearStencil(d) }
+func (*binaryClassGlClearStencil) Schema() *schema.Class       { return schemaGlClearStencil }
+
+var schemaGlClearStencil = &schema.Class{
+	TypeID: binaryIDGlClearStencil,
+	Name:   "GlClearStencil",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Stencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlColorMask struct{}
 
@@ -6245,6 +7034,18 @@ func (*binaryClassGlColorMask) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlColorMask(d, obj.(*GlColorMask))
 }
 func (*binaryClassGlColorMask) Skip(d binary.Decoder) error { return doSkipGlColorMask(d) }
+func (*binaryClassGlColorMask) Schema() *schema.Class       { return schemaGlColorMask }
+
+var schemaGlColorMask = &schema.Class{
+	TypeID: binaryIDGlColorMask,
+	Name:   "GlColorMask",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlCompileShader struct{}
 
@@ -6284,6 +7085,15 @@ func (*binaryClassGlCompileShader) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlCompileShader(d, obj.(*GlCompileShader))
 }
 func (*binaryClassGlCompileShader) Skip(d binary.Decoder) error { return doSkipGlCompileShader(d) }
+func (*binaryClassGlCompileShader) Schema() *schema.Class       { return schemaGlCompileShader }
+
+var schemaGlCompileShader = &schema.Class{
+	TypeID: binaryIDGlCompileShader,
+	Name:   "GlCompileShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlCompressedTexImage2D struct{}
 
@@ -6401,6 +7211,22 @@ func (*binaryClassGlCompressedTexImage2D) DecodeTo(d binary.Decoder, obj binary.
 }
 func (*binaryClassGlCompressedTexImage2D) Skip(d binary.Decoder) error {
 	return doSkipGlCompressedTexImage2D(d)
+}
+func (*binaryClassGlCompressedTexImage2D) Schema() *schema.Class { return schemaGlCompressedTexImage2D }
+
+var schemaGlCompressedTexImage2D = &schema.Class{
+	TypeID: binaryIDGlCompressedTexImage2D,
+	Name:   "GlCompressedTexImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "TexturePointer", Method: schema.Uint64}},
+	},
 }
 
 type binaryClassGlCompressedTexSubImage2D struct{}
@@ -6531,6 +7357,25 @@ func (*binaryClassGlCompressedTexSubImage2D) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassGlCompressedTexSubImage2D) Skip(d binary.Decoder) error {
 	return doSkipGlCompressedTexSubImage2D(d)
 }
+func (*binaryClassGlCompressedTexSubImage2D) Schema() *schema.Class {
+	return schemaGlCompressedTexSubImage2D
+}
+
+var schemaGlCompressedTexSubImage2D = &schema.Class{
+	TypeID: binaryIDGlCompressedTexSubImage2D,
+	Name:   "GlCompressedTexSubImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "TexturePointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlCopyTexImage2D struct{}
 
@@ -6647,6 +7492,22 @@ func (*binaryClassGlCopyTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlCopyTexImage2D(d, obj.(*GlCopyTexImage2D))
 }
 func (*binaryClassGlCopyTexImage2D) Skip(d binary.Decoder) error { return doSkipGlCopyTexImage2D(d) }
+func (*binaryClassGlCopyTexImage2D) Schema() *schema.Class       { return schemaGlCopyTexImage2D }
+
+var schemaGlCopyTexImage2D = &schema.Class{
+	TypeID: binaryIDGlCopyTexImage2D,
+	Name:   "GlCopyTexImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlCopyTexSubImage2D struct{}
 
@@ -6765,6 +7626,22 @@ func (*binaryClassGlCopyTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGlCopyTexSubImage2D) Skip(d binary.Decoder) error {
 	return doSkipGlCopyTexSubImage2D(d)
 }
+func (*binaryClassGlCopyTexSubImage2D) Schema() *schema.Class { return schemaGlCopyTexSubImage2D }
+
+var schemaGlCopyTexSubImage2D = &schema.Class{
+	TypeID: binaryIDGlCopyTexSubImage2D,
+	Name:   "GlCopyTexSubImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlCreateProgram struct{}
 
@@ -6804,6 +7681,15 @@ func (*binaryClassGlCreateProgram) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlCreateProgram(d, obj.(*GlCreateProgram))
 }
 func (*binaryClassGlCreateProgram) Skip(d binary.Decoder) error { return doSkipGlCreateProgram(d) }
+func (*binaryClassGlCreateProgram) Schema() *schema.Class       { return schemaGlCreateProgram }
+
+var schemaGlCreateProgram = &schema.Class{
+	TypeID: binaryIDGlCreateProgram,
+	Name:   "GlCreateProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlCreateShader struct{}
 
@@ -6854,6 +7740,16 @@ func (*binaryClassGlCreateShader) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlCreateShader(d, obj.(*GlCreateShader))
 }
 func (*binaryClassGlCreateShader) Skip(d binary.Decoder) error { return doSkipGlCreateShader(d) }
+func (*binaryClassGlCreateShader) Schema() *schema.Class       { return schemaGlCreateShader }
+
+var schemaGlCreateShader = &schema.Class{
+	TypeID: binaryIDGlCreateShader,
+	Name:   "GlCreateShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlCullFace struct{}
 
@@ -6893,6 +7789,15 @@ func (*binaryClassGlCullFace) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlCullFace(d, obj.(*GlCullFace))
 }
 func (*binaryClassGlCullFace) Skip(d binary.Decoder) error { return doSkipGlCullFace(d) }
+func (*binaryClassGlCullFace) Schema() *schema.Class       { return schemaGlCullFace }
+
+var schemaGlCullFace = &schema.Class{
+	TypeID: binaryIDGlCullFace,
+	Name:   "GlCullFace",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Mode", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDeleteBuffers struct{}
 
@@ -6961,6 +7866,16 @@ func (*binaryClassGlDeleteBuffers) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlDeleteBuffers(d, obj.(*GlDeleteBuffers))
 }
 func (*binaryClassGlDeleteBuffers) Skip(d binary.Decoder) error { return doSkipGlDeleteBuffers(d) }
+func (*binaryClassGlDeleteBuffers) Schema() *schema.Class       { return schemaGlDeleteBuffers }
+
+var schemaGlDeleteBuffers = &schema.Class{
+	TypeID: binaryIDGlDeleteBuffers,
+	Name:   "GlDeleteBuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Buffers", Type: &schema.Slice{Alias: "BufferIdArray", ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteFramebuffers struct{}
 
@@ -7031,6 +7946,16 @@ func (*binaryClassGlDeleteFramebuffers) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassGlDeleteFramebuffers) Skip(d binary.Decoder) error {
 	return doSkipGlDeleteFramebuffers(d)
 }
+func (*binaryClassGlDeleteFramebuffers) Schema() *schema.Class { return schemaGlDeleteFramebuffers }
+
+var schemaGlDeleteFramebuffers = &schema.Class{
+	TypeID: binaryIDGlDeleteFramebuffers,
+	Name:   "GlDeleteFramebuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Framebuffers", Type: &schema.Slice{Alias: "FramebufferIdArray", ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteProgram struct{}
 
@@ -7070,6 +7995,15 @@ func (*binaryClassGlDeleteProgram) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlDeleteProgram(d, obj.(*GlDeleteProgram))
 }
 func (*binaryClassGlDeleteProgram) Skip(d binary.Decoder) error { return doSkipGlDeleteProgram(d) }
+func (*binaryClassGlDeleteProgram) Schema() *schema.Class       { return schemaGlDeleteProgram }
+
+var schemaGlDeleteProgram = &schema.Class{
+	TypeID: binaryIDGlDeleteProgram,
+	Name:   "GlDeleteProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDeleteQueries struct{}
 
@@ -7138,6 +8072,16 @@ func (*binaryClassGlDeleteQueries) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlDeleteQueries(d, obj.(*GlDeleteQueries))
 }
 func (*binaryClassGlDeleteQueries) Skip(d binary.Decoder) error { return doSkipGlDeleteQueries(d) }
+func (*binaryClassGlDeleteQueries) Schema() *schema.Class       { return schemaGlDeleteQueries }
+
+var schemaGlDeleteQueries = &schema.Class{
+	TypeID: binaryIDGlDeleteQueries,
+	Name:   "GlDeleteQueries",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Queries", Type: &schema.Slice{Alias: "QueryIdArray", ValueType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteQueriesEXT struct{}
 
@@ -7206,6 +8150,16 @@ func (*binaryClassGlDeleteQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlDeleteQueriesEXT(d, obj.(*GlDeleteQueriesEXT))
 }
 func (*binaryClassGlDeleteQueriesEXT) Skip(d binary.Decoder) error { return doSkipGlDeleteQueriesEXT(d) }
+func (*binaryClassGlDeleteQueriesEXT) Schema() *schema.Class       { return schemaGlDeleteQueriesEXT }
+
+var schemaGlDeleteQueriesEXT = &schema.Class{
+	TypeID: binaryIDGlDeleteQueriesEXT,
+	Name:   "GlDeleteQueriesEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Queries", Type: &schema.Slice{Alias: "QueryIdArray", ValueType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteRenderbuffers struct{}
 
@@ -7276,6 +8230,16 @@ func (*binaryClassGlDeleteRenderbuffers) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlDeleteRenderbuffers) Skip(d binary.Decoder) error {
 	return doSkipGlDeleteRenderbuffers(d)
 }
+func (*binaryClassGlDeleteRenderbuffers) Schema() *schema.Class { return schemaGlDeleteRenderbuffers }
+
+var schemaGlDeleteRenderbuffers = &schema.Class{
+	TypeID: binaryIDGlDeleteRenderbuffers,
+	Name:   "GlDeleteRenderbuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Renderbuffers", Type: &schema.Slice{Alias: "RenderbufferIdArray", ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteShader struct{}
 
@@ -7315,6 +8279,15 @@ func (*binaryClassGlDeleteShader) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlDeleteShader(d, obj.(*GlDeleteShader))
 }
 func (*binaryClassGlDeleteShader) Skip(d binary.Decoder) error { return doSkipGlDeleteShader(d) }
+func (*binaryClassGlDeleteShader) Schema() *schema.Class       { return schemaGlDeleteShader }
+
+var schemaGlDeleteShader = &schema.Class{
+	TypeID: binaryIDGlDeleteShader,
+	Name:   "GlDeleteShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDeleteTextures struct{}
 
@@ -7383,6 +8356,16 @@ func (*binaryClassGlDeleteTextures) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlDeleteTextures(d, obj.(*GlDeleteTextures))
 }
 func (*binaryClassGlDeleteTextures) Skip(d binary.Decoder) error { return doSkipGlDeleteTextures(d) }
+func (*binaryClassGlDeleteTextures) Schema() *schema.Class       { return schemaGlDeleteTextures }
+
+var schemaGlDeleteTextures = &schema.Class{
+	TypeID: binaryIDGlDeleteTextures,
+	Name:   "GlDeleteTextures",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Textures", Type: &schema.Slice{Alias: "TextureIdArray", ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDeleteVertexArraysOES struct{}
 
@@ -7453,6 +8436,18 @@ func (*binaryClassGlDeleteVertexArraysOES) DecodeTo(d binary.Decoder, obj binary
 func (*binaryClassGlDeleteVertexArraysOES) Skip(d binary.Decoder) error {
 	return doSkipGlDeleteVertexArraysOES(d)
 }
+func (*binaryClassGlDeleteVertexArraysOES) Schema() *schema.Class {
+	return schemaGlDeleteVertexArraysOES
+}
+
+var schemaGlDeleteVertexArraysOES = &schema.Class{
+	TypeID: binaryIDGlDeleteVertexArraysOES,
+	Name:   "GlDeleteVertexArraysOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Arrays", Type: &schema.Slice{Alias: "VertexArrayIdArray", ValueType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDepthFunc struct{}
 
@@ -7492,6 +8487,15 @@ func (*binaryClassGlDepthFunc) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlDepthFunc(d, obj.(*GlDepthFunc))
 }
 func (*binaryClassGlDepthFunc) Skip(d binary.Decoder) error { return doSkipGlDepthFunc(d) }
+func (*binaryClassGlDepthFunc) Schema() *schema.Class       { return schemaGlDepthFunc }
+
+var schemaGlDepthFunc = &schema.Class{
+	TypeID: binaryIDGlDepthFunc,
+	Name:   "GlDepthFunc",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDepthMask struct{}
 
@@ -7531,6 +8535,15 @@ func (*binaryClassGlDepthMask) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlDepthMask(d, obj.(*GlDepthMask))
 }
 func (*binaryClassGlDepthMask) Skip(d binary.Decoder) error { return doSkipGlDepthMask(d) }
+func (*binaryClassGlDepthMask) Schema() *schema.Class       { return schemaGlDepthMask }
+
+var schemaGlDepthMask = &schema.Class{
+	TypeID: binaryIDGlDepthMask,
+	Name:   "GlDepthMask",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlDepthRangef struct{}
 
@@ -7581,6 +8594,16 @@ func (*binaryClassGlDepthRangef) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlDepthRangef(d, obj.(*GlDepthRangef))
 }
 func (*binaryClassGlDepthRangef) Skip(d binary.Decoder) error { return doSkipGlDepthRangef(d) }
+func (*binaryClassGlDepthRangef) Schema() *schema.Class       { return schemaGlDepthRangef }
+
+var schemaGlDepthRangef = &schema.Class{
+	TypeID: binaryIDGlDepthRangef,
+	Name:   "GlDepthRangef",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Near", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Far", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlDetachShader struct{}
 
@@ -7631,6 +8654,16 @@ func (*binaryClassGlDetachShader) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlDetachShader(d, obj.(*GlDetachShader))
 }
 func (*binaryClassGlDetachShader) Skip(d binary.Decoder) error { return doSkipGlDetachShader(d) }
+func (*binaryClassGlDetachShader) Schema() *schema.Class       { return schemaGlDetachShader }
+
+var schemaGlDetachShader = &schema.Class{
+	TypeID: binaryIDGlDetachShader,
+	Name:   "GlDetachShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDisable struct{}
 
@@ -7670,6 +8703,15 @@ func (*binaryClassGlDisable) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeGlDisable(d, obj.(*GlDisable))
 }
 func (*binaryClassGlDisable) Skip(d binary.Decoder) error { return doSkipGlDisable(d) }
+func (*binaryClassGlDisable) Schema() *schema.Class       { return schemaGlDisable }
+
+var schemaGlDisable = &schema.Class{
+	TypeID: binaryIDGlDisable,
+	Name:   "GlDisable",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlDisableClientState struct{}
 
@@ -7710,6 +8752,15 @@ func (*binaryClassGlDisableClientState) DecodeTo(d binary.Decoder, obj binary.Ob
 }
 func (*binaryClassGlDisableClientState) Skip(d binary.Decoder) error {
 	return doSkipGlDisableClientState(d)
+}
+func (*binaryClassGlDisableClientState) Schema() *schema.Class { return schemaGlDisableClientState }
+
+var schemaGlDisableClientState = &schema.Class{
+	TypeID: binaryIDGlDisableClientState,
+	Name:   "GlDisableClientState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlDisableVertexAttribArray struct{}
@@ -7755,6 +8806,17 @@ func (*binaryClassGlDisableVertexAttribArray) DecodeTo(d binary.Decoder, obj bin
 }
 func (*binaryClassGlDisableVertexAttribArray) Skip(d binary.Decoder) error {
 	return doSkipGlDisableVertexAttribArray(d)
+}
+func (*binaryClassGlDisableVertexAttribArray) Schema() *schema.Class {
+	return schemaGlDisableVertexAttribArray
+}
+
+var schemaGlDisableVertexAttribArray = &schema.Class{
+	TypeID: binaryIDGlDisableVertexAttribArray,
+	Name:   "GlDisableVertexAttribArray",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlDiscardFramebufferEXT struct{}
@@ -7837,6 +8899,19 @@ func (*binaryClassGlDiscardFramebufferEXT) DecodeTo(d binary.Decoder, obj binary
 func (*binaryClassGlDiscardFramebufferEXT) Skip(d binary.Decoder) error {
 	return doSkipGlDiscardFramebufferEXT(d)
 }
+func (*binaryClassGlDiscardFramebufferEXT) Schema() *schema.Class {
+	return schemaGlDiscardFramebufferEXT
+}
+
+var schemaGlDiscardFramebufferEXT = &schema.Class{
+	TypeID: binaryIDGlDiscardFramebufferEXT,
+	Name:   "GlDiscardFramebufferEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "NumAttachments", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Attachments", Type: &schema.Slice{Alias: "DiscardFramebufferAttachmentArray", ValueType: &schema.Primitive{Name: "DiscardFramebufferAttachment", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlDrawArrays struct{}
 
@@ -7898,6 +8973,17 @@ func (*binaryClassGlDrawArrays) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlDrawArrays(d, obj.(*GlDrawArrays))
 }
 func (*binaryClassGlDrawArrays) Skip(d binary.Decoder) error { return doSkipGlDrawArrays(d) }
+func (*binaryClassGlDrawArrays) Schema() *schema.Class       { return schemaGlDrawArrays }
+
+var schemaGlDrawArrays = &schema.Class{
+	TypeID: binaryIDGlDrawArrays,
+	Name:   "GlDrawArrays",
+	Fields: []schema.Field{
+		schema.Field{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		schema.Field{Declared: "FirstIndex", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "IndexCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlDrawElements struct{}
 
@@ -7970,6 +9056,18 @@ func (*binaryClassGlDrawElements) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlDrawElements(d, obj.(*GlDrawElements))
 }
 func (*binaryClassGlDrawElements) Skip(d binary.Decoder) error { return doSkipGlDrawElements(d) }
+func (*binaryClassGlDrawElements) Schema() *schema.Class       { return schemaGlDrawElements }
+
+var schemaGlDrawElements = &schema.Class{
+	TypeID: binaryIDGlDrawElements,
+	Name:   "GlDrawElements",
+	Fields: []schema.Field{
+		schema.Field{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		schema.Field{Declared: "ElementCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "IndicesType", Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32}},
+		schema.Field{Declared: "Indices", Type: &schema.Primitive{Name: "IndicesPointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlEGLImageTargetRenderbufferStorageOES struct{}
 
@@ -8025,6 +9123,18 @@ func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) DecodeTo(d binary.Deco
 }
 func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Skip(d binary.Decoder) error {
 	return doSkipGlEGLImageTargetRenderbufferStorageOES(d)
+}
+func (*binaryClassGlEGLImageTargetRenderbufferStorageOES) Schema() *schema.Class {
+	return schemaGlEGLImageTargetRenderbufferStorageOES
+}
+
+var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Class{
+	TypeID: binaryIDGlEGLImageTargetRenderbufferStorageOES,
+	Name:   "GlEGLImageTargetRenderbufferStorageOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32}},
+		schema.Field{Declared: "Image", Type: &schema.Primitive{Name: "TexturePointer", Method: schema.Uint64}},
+	},
 }
 
 type binaryClassGlEGLImageTargetTexture2DOES struct{}
@@ -8082,6 +9192,18 @@ func (*binaryClassGlEGLImageTargetTexture2DOES) DecodeTo(d binary.Decoder, obj b
 func (*binaryClassGlEGLImageTargetTexture2DOES) Skip(d binary.Decoder) error {
 	return doSkipGlEGLImageTargetTexture2DOES(d)
 }
+func (*binaryClassGlEGLImageTargetTexture2DOES) Schema() *schema.Class {
+	return schemaGlEGLImageTargetTexture2DOES
+}
+
+var schemaGlEGLImageTargetTexture2DOES = &schema.Class{
+	TypeID: binaryIDGlEGLImageTargetTexture2DOES,
+	Name:   "GlEGLImageTargetTexture2DOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32}},
+		schema.Field{Declared: "Image", Type: &schema.Primitive{Name: "ImageOES", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlEnable struct{}
 
@@ -8121,6 +9243,15 @@ func (*binaryClassGlEnable) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeGlEnable(d, obj.(*GlEnable))
 }
 func (*binaryClassGlEnable) Skip(d binary.Decoder) error { return doSkipGlEnable(d) }
+func (*binaryClassGlEnable) Schema() *schema.Class       { return schemaGlEnable }
+
+var schemaGlEnable = &schema.Class{
+	TypeID: binaryIDGlEnable,
+	Name:   "GlEnable",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlEnableClientState struct{}
 
@@ -8161,6 +9292,15 @@ func (*binaryClassGlEnableClientState) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlEnableClientState) Skip(d binary.Decoder) error {
 	return doSkipGlEnableClientState(d)
+}
+func (*binaryClassGlEnableClientState) Schema() *schema.Class { return schemaGlEnableClientState }
+
+var schemaGlEnableClientState = &schema.Class{
+	TypeID: binaryIDGlEnableClientState,
+	Name:   "GlEnableClientState",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlEnableVertexAttribArray struct{}
@@ -8203,6 +9343,17 @@ func (*binaryClassGlEnableVertexAttribArray) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassGlEnableVertexAttribArray) Skip(d binary.Decoder) error {
 	return doSkipGlEnableVertexAttribArray(d)
 }
+func (*binaryClassGlEnableVertexAttribArray) Schema() *schema.Class {
+	return schemaGlEnableVertexAttribArray
+}
+
+var schemaGlEnableVertexAttribArray = &schema.Class{
+	TypeID: binaryIDGlEnableVertexAttribArray,
+	Name:   "GlEnableVertexAttribArray",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlEndQuery struct{}
 
@@ -8242,6 +9393,15 @@ func (*binaryClassGlEndQuery) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlEndQuery(d, obj.(*GlEndQuery))
 }
 func (*binaryClassGlEndQuery) Skip(d binary.Decoder) error { return doSkipGlEndQuery(d) }
+func (*binaryClassGlEndQuery) Schema() *schema.Class       { return schemaGlEndQuery }
+
+var schemaGlEndQuery = &schema.Class{
+	TypeID: binaryIDGlEndQuery,
+	Name:   "GlEndQuery",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlEndQueryEXT struct{}
 
@@ -8281,6 +9441,15 @@ func (*binaryClassGlEndQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlEndQueryEXT(d, obj.(*GlEndQueryEXT))
 }
 func (*binaryClassGlEndQueryEXT) Skip(d binary.Decoder) error { return doSkipGlEndQueryEXT(d) }
+func (*binaryClassGlEndQueryEXT) Schema() *schema.Class       { return schemaGlEndQueryEXT }
+
+var schemaGlEndQueryEXT = &schema.Class{
+	TypeID: binaryIDGlEndQueryEXT,
+	Name:   "GlEndQueryEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlEndTilingQCOM struct{}
 
@@ -8320,6 +9489,15 @@ func (*binaryClassGlEndTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlEndTilingQCOM(d, obj.(*GlEndTilingQCOM))
 }
 func (*binaryClassGlEndTilingQCOM) Skip(d binary.Decoder) error { return doSkipGlEndTilingQCOM(d) }
+func (*binaryClassGlEndTilingQCOM) Schema() *schema.Class       { return schemaGlEndTilingQCOM }
+
+var schemaGlEndTilingQCOM = &schema.Class{
+	TypeID: binaryIDGlEndTilingQCOM,
+	Name:   "GlEndTilingQCOM",
+	Fields: []schema.Field{
+		schema.Field{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlFinish struct{}
 
@@ -8348,6 +9526,13 @@ func (*binaryClassGlFinish) DecodeTo(d binary.Decoder, obj binary.Object) error 
 	return doDecodeGlFinish(d, obj.(*GlFinish))
 }
 func (*binaryClassGlFinish) Skip(d binary.Decoder) error { return doSkipGlFinish(d) }
+func (*binaryClassGlFinish) Schema() *schema.Class       { return schemaGlFinish }
+
+var schemaGlFinish = &schema.Class{
+	TypeID: binaryIDGlFinish,
+	Name:   "GlFinish",
+	Fields: []schema.Field{},
+}
 
 type binaryClassGlFlush struct{}
 
@@ -8376,6 +9561,13 @@ func (*binaryClassGlFlush) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlFlush(d, obj.(*GlFlush))
 }
 func (*binaryClassGlFlush) Skip(d binary.Decoder) error { return doSkipGlFlush(d) }
+func (*binaryClassGlFlush) Schema() *schema.Class       { return schemaGlFlush }
+
+var schemaGlFlush = &schema.Class{
+	TypeID: binaryIDGlFlush,
+	Name:   "GlFlush",
+	Fields: []schema.Field{},
+}
 
 type binaryClassGlFramebufferRenderbuffer struct{}
 
@@ -8449,6 +9641,20 @@ func (*binaryClassGlFramebufferRenderbuffer) DecodeTo(d binary.Decoder, obj bina
 }
 func (*binaryClassGlFramebufferRenderbuffer) Skip(d binary.Decoder) error {
 	return doSkipGlFramebufferRenderbuffer(d)
+}
+func (*binaryClassGlFramebufferRenderbuffer) Schema() *schema.Class {
+	return schemaGlFramebufferRenderbuffer
+}
+
+var schemaGlFramebufferRenderbuffer = &schema.Class{
+	TypeID: binaryIDGlFramebufferRenderbuffer,
+	Name:   "GlFramebufferRenderbuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		schema.Field{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlFramebufferTexture2D struct{}
@@ -8535,6 +9741,19 @@ func (*binaryClassGlFramebufferTexture2D) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassGlFramebufferTexture2D) Skip(d binary.Decoder) error {
 	return doSkipGlFramebufferTexture2D(d)
 }
+func (*binaryClassGlFramebufferTexture2D) Schema() *schema.Class { return schemaGlFramebufferTexture2D }
+
+var schemaGlFramebufferTexture2D = &schema.Class{
+	TypeID: binaryIDGlFramebufferTexture2D,
+	Name:   "GlFramebufferTexture2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		schema.Field{Declared: "TextureTarget", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlFrontFace struct{}
 
@@ -8574,6 +9793,15 @@ func (*binaryClassGlFrontFace) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlFrontFace(d, obj.(*GlFrontFace))
 }
 func (*binaryClassGlFrontFace) Skip(d binary.Decoder) error { return doSkipGlFrontFace(d) }
+func (*binaryClassGlFrontFace) Schema() *schema.Class       { return schemaGlFrontFace }
+
+var schemaGlFrontFace = &schema.Class{
+	TypeID: binaryIDGlFrontFace,
+	Name:   "GlFrontFace",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Orientation", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlGenBuffers struct{}
 
@@ -8642,6 +9870,16 @@ func (*binaryClassGlGenBuffers) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlGenBuffers(d, obj.(*GlGenBuffers))
 }
 func (*binaryClassGlGenBuffers) Skip(d binary.Decoder) error { return doSkipGlGenBuffers(d) }
+func (*binaryClassGlGenBuffers) Schema() *schema.Class       { return schemaGlGenBuffers }
+
+var schemaGlGenBuffers = &schema.Class{
+	TypeID: binaryIDGlGenBuffers,
+	Name:   "GlGenBuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Buffers", Type: &schema.Slice{Alias: "BufferIdArray", ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenFramebuffers struct{}
 
@@ -8710,6 +9948,16 @@ func (*binaryClassGlGenFramebuffers) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlGenFramebuffers(d, obj.(*GlGenFramebuffers))
 }
 func (*binaryClassGlGenFramebuffers) Skip(d binary.Decoder) error { return doSkipGlGenFramebuffers(d) }
+func (*binaryClassGlGenFramebuffers) Schema() *schema.Class       { return schemaGlGenFramebuffers }
+
+var schemaGlGenFramebuffers = &schema.Class{
+	TypeID: binaryIDGlGenFramebuffers,
+	Name:   "GlGenFramebuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Framebuffers", Type: &schema.Slice{Alias: "FramebufferIdArray", ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenQueries struct{}
 
@@ -8778,6 +10026,16 @@ func (*binaryClassGlGenQueries) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlGenQueries(d, obj.(*GlGenQueries))
 }
 func (*binaryClassGlGenQueries) Skip(d binary.Decoder) error { return doSkipGlGenQueries(d) }
+func (*binaryClassGlGenQueries) Schema() *schema.Class       { return schemaGlGenQueries }
+
+var schemaGlGenQueries = &schema.Class{
+	TypeID: binaryIDGlGenQueries,
+	Name:   "GlGenQueries",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Queries", Type: &schema.Slice{Alias: "QueryIdArray", ValueType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenQueriesEXT struct{}
 
@@ -8846,6 +10104,16 @@ func (*binaryClassGlGenQueriesEXT) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlGenQueriesEXT(d, obj.(*GlGenQueriesEXT))
 }
 func (*binaryClassGlGenQueriesEXT) Skip(d binary.Decoder) error { return doSkipGlGenQueriesEXT(d) }
+func (*binaryClassGlGenQueriesEXT) Schema() *schema.Class       { return schemaGlGenQueriesEXT }
+
+var schemaGlGenQueriesEXT = &schema.Class{
+	TypeID: binaryIDGlGenQueriesEXT,
+	Name:   "GlGenQueriesEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Queries", Type: &schema.Slice{Alias: "QueryIdArray", ValueType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenRenderbuffers struct{}
 
@@ -8914,6 +10182,16 @@ func (*binaryClassGlGenRenderbuffers) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlGenRenderbuffers(d, obj.(*GlGenRenderbuffers))
 }
 func (*binaryClassGlGenRenderbuffers) Skip(d binary.Decoder) error { return doSkipGlGenRenderbuffers(d) }
+func (*binaryClassGlGenRenderbuffers) Schema() *schema.Class       { return schemaGlGenRenderbuffers }
+
+var schemaGlGenRenderbuffers = &schema.Class{
+	TypeID: binaryIDGlGenRenderbuffers,
+	Name:   "GlGenRenderbuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Renderbuffers", Type: &schema.Slice{Alias: "RenderbufferIdArray", ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenTextures struct{}
 
@@ -8982,6 +10260,16 @@ func (*binaryClassGlGenTextures) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlGenTextures(d, obj.(*GlGenTextures))
 }
 func (*binaryClassGlGenTextures) Skip(d binary.Decoder) error { return doSkipGlGenTextures(d) }
+func (*binaryClassGlGenTextures) Schema() *schema.Class       { return schemaGlGenTextures }
+
+var schemaGlGenTextures = &schema.Class{
+	TypeID: binaryIDGlGenTextures,
+	Name:   "GlGenTextures",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Textures", Type: &schema.Slice{Alias: "TextureIdArray", ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenVertexArraysOES struct{}
 
@@ -9052,6 +10340,16 @@ func (*binaryClassGlGenVertexArraysOES) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassGlGenVertexArraysOES) Skip(d binary.Decoder) error {
 	return doSkipGlGenVertexArraysOES(d)
 }
+func (*binaryClassGlGenVertexArraysOES) Schema() *schema.Class { return schemaGlGenVertexArraysOES }
+
+var schemaGlGenVertexArraysOES = &schema.Class{
+	TypeID: binaryIDGlGenVertexArraysOES,
+	Name:   "GlGenVertexArraysOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Arrays", Type: &schema.Slice{Alias: "VertexArrayIdArray", ValueType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGenerateMipmap struct{}
 
@@ -9091,6 +10389,15 @@ func (*binaryClassGlGenerateMipmap) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlGenerateMipmap(d, obj.(*GlGenerateMipmap))
 }
 func (*binaryClassGlGenerateMipmap) Skip(d binary.Decoder) error { return doSkipGlGenerateMipmap(d) }
+func (*binaryClassGlGenerateMipmap) Schema() *schema.Class       { return schemaGlGenerateMipmap }
+
+var schemaGlGenerateMipmap = &schema.Class{
+	TypeID: binaryIDGlGenerateMipmap,
+	Name:   "GlGenerateMipmap",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlGetActiveAttrib struct{}
 
@@ -9196,6 +10503,21 @@ func (*binaryClassGlGetActiveAttrib) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlGetActiveAttrib(d, obj.(*GlGetActiveAttrib))
 }
 func (*binaryClassGlGetActiveAttrib) Skip(d binary.Decoder) error { return doSkipGlGetActiveAttrib(d) }
+func (*binaryClassGlGetActiveAttrib) Schema() *schema.Class       { return schemaGlGetActiveAttrib }
+
+var schemaGlGetActiveAttrib = &schema.Class{
+	TypeID: binaryIDGlGetActiveAttrib,
+	Name:   "GlGetActiveAttrib",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "BufferBytesWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlGetActiveUniform struct{}
 
@@ -9301,6 +10623,21 @@ func (*binaryClassGlGetActiveUniform) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlGetActiveUniform(d, obj.(*GlGetActiveUniform))
 }
 func (*binaryClassGlGetActiveUniform) Skip(d binary.Decoder) error { return doSkipGlGetActiveUniform(d) }
+func (*binaryClassGlGetActiveUniform) Schema() *schema.Class       { return schemaGlGetActiveUniform }
+
+var schemaGlGetActiveUniform = &schema.Class{
+	TypeID: binaryIDGlGetActiveUniform,
+	Name:   "GlGetActiveUniform",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "BufferBytesWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlGetAttachedShaders struct{}
 
@@ -9393,6 +10730,18 @@ func (*binaryClassGlGetAttachedShaders) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassGlGetAttachedShaders) Skip(d binary.Decoder) error {
 	return doSkipGlGetAttachedShaders(d)
 }
+func (*binaryClassGlGetAttachedShaders) Schema() *schema.Class { return schemaGlGetAttachedShaders }
+
+var schemaGlGetAttachedShaders = &schema.Class{
+	TypeID: binaryIDGlGetAttachedShaders,
+	Name:   "GlGetAttachedShaders",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "ShadersLengthWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Shaders", Type: &schema.Slice{Alias: "ShaderIdArray", ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlGetAttribLocation struct{}
 
@@ -9455,6 +10804,17 @@ func (*binaryClassGlGetAttribLocation) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlGetAttribLocation) Skip(d binary.Decoder) error {
 	return doSkipGlGetAttribLocation(d)
+}
+func (*binaryClassGlGetAttribLocation) Schema() *schema.Class { return schemaGlGetAttribLocation }
+
+var schemaGlGetAttribLocation = &schema.Class{
+	TypeID: binaryIDGlGetAttribLocation,
+	Name:   "GlGetAttribLocation",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlGetBooleanv struct{}
@@ -9524,6 +10884,16 @@ func (*binaryClassGlGetBooleanv) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlGetBooleanv(d, obj.(*GlGetBooleanv))
 }
 func (*binaryClassGlGetBooleanv) Skip(d binary.Decoder) error { return doSkipGlGetBooleanv(d) }
+func (*binaryClassGlGetBooleanv) Schema() *schema.Class       { return schemaGlGetBooleanv }
+
+var schemaGlGetBooleanv = &schema.Class{
+	TypeID: binaryIDGlGetBooleanv,
+	Name:   "GlGetBooleanv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "BoolArray", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+	},
+}
 
 type binaryClassGlGetBufferParameteriv struct{}
 
@@ -9587,6 +10957,17 @@ func (*binaryClassGlGetBufferParameteriv) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassGlGetBufferParameteriv) Skip(d binary.Decoder) error {
 	return doSkipGlGetBufferParameteriv(d)
 }
+func (*binaryClassGlGetBufferParameteriv) Schema() *schema.Class { return schemaGlGetBufferParameteriv }
+
+var schemaGlGetBufferParameteriv = &schema.Class{
+	TypeID: binaryIDGlGetBufferParameteriv,
+	Name:   "GlGetBufferParameteriv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlGetError struct{}
 
@@ -9626,6 +11007,15 @@ func (*binaryClassGlGetError) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlGetError(d, obj.(*GlGetError))
 }
 func (*binaryClassGlGetError) Skip(d binary.Decoder) error { return doSkipGlGetError(d) }
+func (*binaryClassGlGetError) Schema() *schema.Class       { return schemaGlGetError }
+
+var schemaGlGetError = &schema.Class{
+	TypeID: binaryIDGlGetError,
+	Name:   "GlGetError",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "Error", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlGetFloatv struct{}
 
@@ -9694,6 +11084,16 @@ func (*binaryClassGlGetFloatv) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlGetFloatv(d, obj.(*GlGetFloatv))
 }
 func (*binaryClassGlGetFloatv) Skip(d binary.Decoder) error { return doSkipGlGetFloatv(d) }
+func (*binaryClassGlGetFloatv) Schema() *schema.Class       { return schemaGlGetFloatv }
+
+var schemaGlGetFloatv = &schema.Class{
+	TypeID: binaryIDGlGetFloatv,
+	Name:   "GlGetFloatv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlGetFramebufferAttachmentParameteriv struct{}
 
@@ -9790,6 +11190,20 @@ func (*binaryClassGlGetFramebufferAttachmentParameteriv) DecodeTo(d binary.Decod
 func (*binaryClassGlGetFramebufferAttachmentParameteriv) Skip(d binary.Decoder) error {
 	return doSkipGlGetFramebufferAttachmentParameteriv(d)
 }
+func (*binaryClassGlGetFramebufferAttachmentParameteriv) Schema() *schema.Class {
+	return schemaGlGetFramebufferAttachmentParameteriv
+}
+
+var schemaGlGetFramebufferAttachmentParameteriv = &schema.Class{
+	TypeID: binaryIDGlGetFramebufferAttachmentParameteriv,
+	Name:   "GlGetFramebufferAttachmentParameteriv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Attachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetGraphicsResetStatusEXT struct{}
 
@@ -9834,6 +11248,17 @@ func (*binaryClassGlGetGraphicsResetStatusEXT) DecodeTo(d binary.Decoder, obj bi
 }
 func (*binaryClassGlGetGraphicsResetStatusEXT) Skip(d binary.Decoder) error {
 	return doSkipGlGetGraphicsResetStatusEXT(d)
+}
+func (*binaryClassGlGetGraphicsResetStatusEXT) Schema() *schema.Class {
+	return schemaGlGetGraphicsResetStatusEXT
+}
+
+var schemaGlGetGraphicsResetStatusEXT = &schema.Class{
+	TypeID: binaryIDGlGetGraphicsResetStatusEXT,
+	Name:   "GlGetGraphicsResetStatusEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlGetIntegerv struct{}
@@ -9903,6 +11328,16 @@ func (*binaryClassGlGetIntegerv) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlGetIntegerv(d, obj.(*GlGetIntegerv))
 }
 func (*binaryClassGlGetIntegerv) Skip(d binary.Decoder) error { return doSkipGlGetIntegerv(d) }
+func (*binaryClassGlGetIntegerv) Schema() *schema.Class       { return schemaGlGetIntegerv }
+
+var schemaGlGetIntegerv = &schema.Class{
+	TypeID: binaryIDGlGetIntegerv,
+	Name:   "GlGetIntegerv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetProgramBinaryOES struct{}
 
@@ -9988,6 +11423,19 @@ func (*binaryClassGlGetProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlGetProgramBinaryOES) Skip(d binary.Decoder) error {
 	return doSkipGlGetProgramBinaryOES(d)
 }
+func (*binaryClassGlGetProgramBinaryOES) Schema() *schema.Class { return schemaGlGetProgramBinaryOES }
+
+var schemaGlGetProgramBinaryOES = &schema.Class{
+	TypeID: binaryIDGlGetProgramBinaryOES,
+	Name:   "GlGetProgramBinaryOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "BytesWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Binary", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlGetProgramInfoLog struct{}
 
@@ -10061,6 +11509,18 @@ func (*binaryClassGlGetProgramInfoLog) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlGetProgramInfoLog) Skip(d binary.Decoder) error {
 	return doSkipGlGetProgramInfoLog(d)
+}
+func (*binaryClassGlGetProgramInfoLog) Schema() *schema.Class { return schemaGlGetProgramInfoLog }
+
+var schemaGlGetProgramInfoLog = &schema.Class{
+	TypeID: binaryIDGlGetProgramInfoLog,
+	Name:   "GlGetProgramInfoLog",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "StringLengthWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Info", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
 }
 
 type binaryClassGlGetProgramiv struct{}
@@ -10141,6 +11601,17 @@ func (*binaryClassGlGetProgramiv) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlGetProgramiv(d, obj.(*GlGetProgramiv))
 }
 func (*binaryClassGlGetProgramiv) Skip(d binary.Decoder) error { return doSkipGlGetProgramiv(d) }
+func (*binaryClassGlGetProgramiv) Schema() *schema.Class       { return schemaGlGetProgramiv }
+
+var schemaGlGetProgramiv = &schema.Class{
+	TypeID: binaryIDGlGetProgramiv,
+	Name:   "GlGetProgramiv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetQueryObjecti64vEXT struct{}
 
@@ -10203,6 +11674,19 @@ func (*binaryClassGlGetQueryObjecti64vEXT) DecodeTo(d binary.Decoder, obj binary
 }
 func (*binaryClassGlGetQueryObjecti64vEXT) Skip(d binary.Decoder) error {
 	return doSkipGlGetQueryObjecti64vEXT(d)
+}
+func (*binaryClassGlGetQueryObjecti64vEXT) Schema() *schema.Class {
+	return schemaGlGetQueryObjecti64vEXT
+}
+
+var schemaGlGetQueryObjecti64vEXT = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjecti64vEXT,
+	Name:   "GlGetQueryObjecti64vEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
 }
 
 type binaryClassGlGetQueryObjectivEXT struct{}
@@ -10267,6 +11751,17 @@ func (*binaryClassGlGetQueryObjectivEXT) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlGetQueryObjectivEXT) Skip(d binary.Decoder) error {
 	return doSkipGlGetQueryObjectivEXT(d)
 }
+func (*binaryClassGlGetQueryObjectivEXT) Schema() *schema.Class { return schemaGlGetQueryObjectivEXT }
+
+var schemaGlGetQueryObjectivEXT = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjectivEXT,
+	Name:   "GlGetQueryObjectivEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlGetQueryObjectui64vEXT struct{}
 
@@ -10329,6 +11824,19 @@ func (*binaryClassGlGetQueryObjectui64vEXT) DecodeTo(d binary.Decoder, obj binar
 }
 func (*binaryClassGlGetQueryObjectui64vEXT) Skip(d binary.Decoder) error {
 	return doSkipGlGetQueryObjectui64vEXT(d)
+}
+func (*binaryClassGlGetQueryObjectui64vEXT) Schema() *schema.Class {
+	return schemaGlGetQueryObjectui64vEXT
+}
+
+var schemaGlGetQueryObjectui64vEXT = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjectui64vEXT,
+	Name:   "GlGetQueryObjectui64vEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
 }
 
 type binaryClassGlGetQueryObjectuiv struct{}
@@ -10393,6 +11901,17 @@ func (*binaryClassGlGetQueryObjectuiv) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGlGetQueryObjectuiv) Skip(d binary.Decoder) error {
 	return doSkipGlGetQueryObjectuiv(d)
 }
+func (*binaryClassGlGetQueryObjectuiv) Schema() *schema.Class { return schemaGlGetQueryObjectuiv }
+
+var schemaGlGetQueryObjectuiv = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjectuiv,
+	Name:   "GlGetQueryObjectuiv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlGetQueryObjectuivEXT struct{}
 
@@ -10456,6 +11975,17 @@ func (*binaryClassGlGetQueryObjectuivEXT) DecodeTo(d binary.Decoder, obj binary.
 func (*binaryClassGlGetQueryObjectuivEXT) Skip(d binary.Decoder) error {
 	return doSkipGlGetQueryObjectuivEXT(d)
 }
+func (*binaryClassGlGetQueryObjectuivEXT) Schema() *schema.Class { return schemaGlGetQueryObjectuivEXT }
+
+var schemaGlGetQueryObjectuivEXT = &schema.Class{
+	TypeID: binaryIDGlGetQueryObjectuivEXT,
+	Name:   "GlGetQueryObjectuivEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlGetQueryiv struct{}
 
@@ -10517,6 +12047,17 @@ func (*binaryClassGlGetQueryiv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlGetQueryiv(d, obj.(*GlGetQueryiv))
 }
 func (*binaryClassGlGetQueryiv) Skip(d binary.Decoder) error { return doSkipGlGetQueryiv(d) }
+func (*binaryClassGlGetQueryiv) Schema() *schema.Class       { return schemaGlGetQueryiv }
+
+var schemaGlGetQueryiv = &schema.Class{
+	TypeID: binaryIDGlGetQueryiv,
+	Name:   "GlGetQueryiv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlGetQueryivEXT struct{}
 
@@ -10578,6 +12119,17 @@ func (*binaryClassGlGetQueryivEXT) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlGetQueryivEXT(d, obj.(*GlGetQueryivEXT))
 }
 func (*binaryClassGlGetQueryivEXT) Skip(d binary.Decoder) error { return doSkipGlGetQueryivEXT(d) }
+func (*binaryClassGlGetQueryivEXT) Schema() *schema.Class       { return schemaGlGetQueryivEXT }
+
+var schemaGlGetQueryivEXT = &schema.Class{
+	TypeID: binaryIDGlGetQueryivEXT,
+	Name:   "GlGetQueryivEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlGetRenderbufferParameteriv struct{}
 
@@ -10663,6 +12215,19 @@ func (*binaryClassGlGetRenderbufferParameteriv) DecodeTo(d binary.Decoder, obj b
 func (*binaryClassGlGetRenderbufferParameteriv) Skip(d binary.Decoder) error {
 	return doSkipGlGetRenderbufferParameteriv(d)
 }
+func (*binaryClassGlGetRenderbufferParameteriv) Schema() *schema.Class {
+	return schemaGlGetRenderbufferParameteriv
+}
+
+var schemaGlGetRenderbufferParameteriv = &schema.Class{
+	TypeID: binaryIDGlGetRenderbufferParameteriv,
+	Name:   "GlGetRenderbufferParameteriv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetShaderInfoLog struct{}
 
@@ -10735,6 +12300,18 @@ func (*binaryClassGlGetShaderInfoLog) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlGetShaderInfoLog(d, obj.(*GlGetShaderInfoLog))
 }
 func (*binaryClassGlGetShaderInfoLog) Skip(d binary.Decoder) error { return doSkipGlGetShaderInfoLog(d) }
+func (*binaryClassGlGetShaderInfoLog) Schema() *schema.Class       { return schemaGlGetShaderInfoLog }
+
+var schemaGlGetShaderInfoLog = &schema.Class{
+	TypeID: binaryIDGlGetShaderInfoLog,
+	Name:   "GlGetShaderInfoLog",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "StringLengthWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Info", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlGetShaderPrecisionFormat struct{}
 
@@ -10831,6 +12408,20 @@ func (*binaryClassGlGetShaderPrecisionFormat) DecodeTo(d binary.Decoder, obj bin
 func (*binaryClassGlGetShaderPrecisionFormat) Skip(d binary.Decoder) error {
 	return doSkipGlGetShaderPrecisionFormat(d)
 }
+func (*binaryClassGlGetShaderPrecisionFormat) Schema() *schema.Class {
+	return schemaGlGetShaderPrecisionFormat
+}
+
+var schemaGlGetShaderPrecisionFormat = &schema.Class{
+	TypeID: binaryIDGlGetShaderPrecisionFormat,
+	Name:   "GlGetShaderPrecisionFormat",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ShaderType", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		schema.Field{Declared: "PrecisionType", Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32}},
+		schema.Field{Declared: "Range", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+		schema.Field{Declared: "Precision", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlGetShaderSource struct{}
 
@@ -10903,6 +12494,18 @@ func (*binaryClassGlGetShaderSource) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlGetShaderSource(d, obj.(*GlGetShaderSource))
 }
 func (*binaryClassGlGetShaderSource) Skip(d binary.Decoder) error { return doSkipGlGetShaderSource(d) }
+func (*binaryClassGlGetShaderSource) Schema() *schema.Class       { return schemaGlGetShaderSource }
+
+var schemaGlGetShaderSource = &schema.Class{
+	TypeID: binaryIDGlGetShaderSource,
+	Name:   "GlGetShaderSource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "StringLengthWritten", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Source", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlGetShaderiv struct{}
 
@@ -10982,6 +12585,17 @@ func (*binaryClassGlGetShaderiv) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlGetShaderiv(d, obj.(*GlGetShaderiv))
 }
 func (*binaryClassGlGetShaderiv) Skip(d binary.Decoder) error { return doSkipGlGetShaderiv(d) }
+func (*binaryClassGlGetShaderiv) Schema() *schema.Class       { return schemaGlGetShaderiv }
+
+var schemaGlGetShaderiv = &schema.Class{
+	TypeID: binaryIDGlGetShaderiv,
+	Name:   "GlGetShaderiv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetString struct{}
 
@@ -11032,6 +12646,16 @@ func (*binaryClassGlGetString) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlGetString(d, obj.(*GlGetString))
 }
 func (*binaryClassGlGetString) Skip(d binary.Decoder) error { return doSkipGlGetString(d) }
+func (*binaryClassGlGetString) Schema() *schema.Class       { return schemaGlGetString }
+
+var schemaGlGetString = &schema.Class{
+	TypeID: binaryIDGlGetString,
+	Name:   "GlGetString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlGetTexParameterfv struct{}
 
@@ -11112,6 +12736,17 @@ func (*binaryClassGlGetTexParameterfv) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlGetTexParameterfv) Skip(d binary.Decoder) error {
 	return doSkipGlGetTexParameterfv(d)
+}
+func (*binaryClassGlGetTexParameterfv) Schema() *schema.Class { return schemaGlGetTexParameterfv }
+
+var schemaGlGetTexParameterfv = &schema.Class{
+	TypeID: binaryIDGlGetTexParameterfv,
+	Name:   "GlGetTexParameterfv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
 }
 
 type binaryClassGlGetTexParameteriv struct{}
@@ -11194,6 +12829,17 @@ func (*binaryClassGlGetTexParameteriv) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGlGetTexParameteriv) Skip(d binary.Decoder) error {
 	return doSkipGlGetTexParameteriv(d)
 }
+func (*binaryClassGlGetTexParameteriv) Schema() *schema.Class { return schemaGlGetTexParameteriv }
+
+var schemaGlGetTexParameteriv = &schema.Class{
+	TypeID: binaryIDGlGetTexParameteriv,
+	Name:   "GlGetTexParameteriv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlGetUniformLocation struct{}
 
@@ -11256,6 +12902,17 @@ func (*binaryClassGlGetUniformLocation) DecodeTo(d binary.Decoder, obj binary.Ob
 }
 func (*binaryClassGlGetUniformLocation) Skip(d binary.Decoder) error {
 	return doSkipGlGetUniformLocation(d)
+}
+func (*binaryClassGlGetUniformLocation) Schema() *schema.Class { return schemaGlGetUniformLocation }
+
+var schemaGlGetUniformLocation = &schema.Class{
+	TypeID: binaryIDGlGetUniformLocation,
+	Name:   "GlGetUniformLocation",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+	},
 }
 
 type binaryClassGlGetUniformfv struct{}
@@ -11336,6 +12993,17 @@ func (*binaryClassGlGetUniformfv) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlGetUniformfv(d, obj.(*GlGetUniformfv))
 }
 func (*binaryClassGlGetUniformfv) Skip(d binary.Decoder) error { return doSkipGlGetUniformfv(d) }
+func (*binaryClassGlGetUniformfv) Schema() *schema.Class       { return schemaGlGetUniformfv }
+
+var schemaGlGetUniformfv = &schema.Class{
+	TypeID: binaryIDGlGetUniformfv,
+	Name:   "GlGetUniformfv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlGetUniformiv struct{}
 
@@ -11415,6 +13083,17 @@ func (*binaryClassGlGetUniformiv) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlGetUniformiv(d, obj.(*GlGetUniformiv))
 }
 func (*binaryClassGlGetUniformiv) Skip(d binary.Decoder) error { return doSkipGlGetUniformiv(d) }
+func (*binaryClassGlGetUniformiv) Schema() *schema.Class       { return schemaGlGetUniformiv }
+
+var schemaGlGetUniformiv = &schema.Class{
+	TypeID: binaryIDGlGetUniformiv,
+	Name:   "GlGetUniformiv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlHint struct{}
 
@@ -11465,6 +13144,16 @@ func (*binaryClassGlHint) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlHint(d, obj.(*GlHint))
 }
 func (*binaryClassGlHint) Skip(d binary.Decoder) error { return doSkipGlHint(d) }
+func (*binaryClassGlHint) Schema() *schema.Class       { return schemaGlHint }
+
+var schemaGlHint = &schema.Class{
+	TypeID: binaryIDGlHint,
+	Name:   "GlHint",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Mode", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlInsertEventMarkerEXT struct{}
 
@@ -11516,6 +13205,16 @@ func (*binaryClassGlInsertEventMarkerEXT) DecodeTo(d binary.Decoder, obj binary.
 }
 func (*binaryClassGlInsertEventMarkerEXT) Skip(d binary.Decoder) error {
 	return doSkipGlInsertEventMarkerEXT(d)
+}
+func (*binaryClassGlInsertEventMarkerEXT) Schema() *schema.Class { return schemaGlInsertEventMarkerEXT }
+
+var schemaGlInsertEventMarkerEXT = &schema.Class{
+	TypeID: binaryIDGlInsertEventMarkerEXT,
+	Name:   "GlInsertEventMarkerEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
 }
 
 type binaryClassGlInvalidateFramebuffer struct{}
@@ -11598,6 +13297,19 @@ func (*binaryClassGlInvalidateFramebuffer) DecodeTo(d binary.Decoder, obj binary
 func (*binaryClassGlInvalidateFramebuffer) Skip(d binary.Decoder) error {
 	return doSkipGlInvalidateFramebuffer(d)
 }
+func (*binaryClassGlInvalidateFramebuffer) Schema() *schema.Class {
+	return schemaGlInvalidateFramebuffer
+}
+
+var schemaGlInvalidateFramebuffer = &schema.Class{
+	TypeID: binaryIDGlInvalidateFramebuffer,
+	Name:   "GlInvalidateFramebuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Attachments", Type: &schema.Slice{Alias: "FramebufferAttachmentArray", ValueType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassGlIsBuffer struct{}
 
@@ -11648,6 +13360,16 @@ func (*binaryClassGlIsBuffer) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlIsBuffer(d, obj.(*GlIsBuffer))
 }
 func (*binaryClassGlIsBuffer) Skip(d binary.Decoder) error { return doSkipGlIsBuffer(d) }
+func (*binaryClassGlIsBuffer) Schema() *schema.Class       { return schemaGlIsBuffer }
+
+var schemaGlIsBuffer = &schema.Class{
+	TypeID: binaryIDGlIsBuffer,
+	Name:   "GlIsBuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsEnabled struct{}
 
@@ -11698,6 +13420,16 @@ func (*binaryClassGlIsEnabled) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlIsEnabled(d, obj.(*GlIsEnabled))
 }
 func (*binaryClassGlIsEnabled) Skip(d binary.Decoder) error { return doSkipGlIsEnabled(d) }
+func (*binaryClassGlIsEnabled) Schema() *schema.Class       { return schemaGlIsEnabled }
+
+var schemaGlIsEnabled = &schema.Class{
+	TypeID: binaryIDGlIsEnabled,
+	Name:   "GlIsEnabled",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsFramebuffer struct{}
 
@@ -11748,6 +13480,16 @@ func (*binaryClassGlIsFramebuffer) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlIsFramebuffer(d, obj.(*GlIsFramebuffer))
 }
 func (*binaryClassGlIsFramebuffer) Skip(d binary.Decoder) error { return doSkipGlIsFramebuffer(d) }
+func (*binaryClassGlIsFramebuffer) Schema() *schema.Class       { return schemaGlIsFramebuffer }
+
+var schemaGlIsFramebuffer = &schema.Class{
+	TypeID: binaryIDGlIsFramebuffer,
+	Name:   "GlIsFramebuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsProgram struct{}
 
@@ -11798,6 +13540,16 @@ func (*binaryClassGlIsProgram) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlIsProgram(d, obj.(*GlIsProgram))
 }
 func (*binaryClassGlIsProgram) Skip(d binary.Decoder) error { return doSkipGlIsProgram(d) }
+func (*binaryClassGlIsProgram) Schema() *schema.Class       { return schemaGlIsProgram }
+
+var schemaGlIsProgram = &schema.Class{
+	TypeID: binaryIDGlIsProgram,
+	Name:   "GlIsProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsQuery struct{}
 
@@ -11848,6 +13600,16 @@ func (*binaryClassGlIsQuery) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeGlIsQuery(d, obj.(*GlIsQuery))
 }
 func (*binaryClassGlIsQuery) Skip(d binary.Decoder) error { return doSkipGlIsQuery(d) }
+func (*binaryClassGlIsQuery) Schema() *schema.Class       { return schemaGlIsQuery }
+
+var schemaGlIsQuery = &schema.Class{
+	TypeID: binaryIDGlIsQuery,
+	Name:   "GlIsQuery",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsQueryEXT struct{}
 
@@ -11898,6 +13660,16 @@ func (*binaryClassGlIsQueryEXT) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlIsQueryEXT(d, obj.(*GlIsQueryEXT))
 }
 func (*binaryClassGlIsQueryEXT) Skip(d binary.Decoder) error { return doSkipGlIsQueryEXT(d) }
+func (*binaryClassGlIsQueryEXT) Schema() *schema.Class       { return schemaGlIsQueryEXT }
+
+var schemaGlIsQueryEXT = &schema.Class{
+	TypeID: binaryIDGlIsQueryEXT,
+	Name:   "GlIsQueryEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsRenderbuffer struct{}
 
@@ -11948,6 +13720,16 @@ func (*binaryClassGlIsRenderbuffer) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlIsRenderbuffer(d, obj.(*GlIsRenderbuffer))
 }
 func (*binaryClassGlIsRenderbuffer) Skip(d binary.Decoder) error { return doSkipGlIsRenderbuffer(d) }
+func (*binaryClassGlIsRenderbuffer) Schema() *schema.Class       { return schemaGlIsRenderbuffer }
+
+var schemaGlIsRenderbuffer = &schema.Class{
+	TypeID: binaryIDGlIsRenderbuffer,
+	Name:   "GlIsRenderbuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsShader struct{}
 
@@ -11998,6 +13780,16 @@ func (*binaryClassGlIsShader) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlIsShader(d, obj.(*GlIsShader))
 }
 func (*binaryClassGlIsShader) Skip(d binary.Decoder) error { return doSkipGlIsShader(d) }
+func (*binaryClassGlIsShader) Schema() *schema.Class       { return schemaGlIsShader }
+
+var schemaGlIsShader = &schema.Class{
+	TypeID: binaryIDGlIsShader,
+	Name:   "GlIsShader",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsTexture struct{}
 
@@ -12048,6 +13840,16 @@ func (*binaryClassGlIsTexture) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlIsTexture(d, obj.(*GlIsTexture))
 }
 func (*binaryClassGlIsTexture) Skip(d binary.Decoder) error { return doSkipGlIsTexture(d) }
+func (*binaryClassGlIsTexture) Schema() *schema.Class       { return schemaGlIsTexture }
+
+var schemaGlIsTexture = &schema.Class{
+	TypeID: binaryIDGlIsTexture,
+	Name:   "GlIsTexture",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlIsVertexArrayOES struct{}
 
@@ -12098,6 +13900,16 @@ func (*binaryClassGlIsVertexArrayOES) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlIsVertexArrayOES(d, obj.(*GlIsVertexArrayOES))
 }
 func (*binaryClassGlIsVertexArrayOES) Skip(d binary.Decoder) error { return doSkipGlIsVertexArrayOES(d) }
+func (*binaryClassGlIsVertexArrayOES) Schema() *schema.Class       { return schemaGlIsVertexArrayOES }
+
+var schemaGlIsVertexArrayOES = &schema.Class{
+	TypeID: binaryIDGlIsVertexArrayOES,
+	Name:   "GlIsVertexArrayOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlLineWidth struct{}
 
@@ -12137,6 +13949,15 @@ func (*binaryClassGlLineWidth) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlLineWidth(d, obj.(*GlLineWidth))
 }
 func (*binaryClassGlLineWidth) Skip(d binary.Decoder) error { return doSkipGlLineWidth(d) }
+func (*binaryClassGlLineWidth) Schema() *schema.Class       { return schemaGlLineWidth }
+
+var schemaGlLineWidth = &schema.Class{
+	TypeID: binaryIDGlLineWidth,
+	Name:   "GlLineWidth",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlLinkProgram struct{}
 
@@ -12176,6 +13997,15 @@ func (*binaryClassGlLinkProgram) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlLinkProgram(d, obj.(*GlLinkProgram))
 }
 func (*binaryClassGlLinkProgram) Skip(d binary.Decoder) error { return doSkipGlLinkProgram(d) }
+func (*binaryClassGlLinkProgram) Schema() *schema.Class       { return schemaGlLinkProgram }
+
+var schemaGlLinkProgram = &schema.Class{
+	TypeID: binaryIDGlLinkProgram,
+	Name:   "GlLinkProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlMapBufferRange struct{}
 
@@ -12259,6 +14089,19 @@ func (*binaryClassGlMapBufferRange) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlMapBufferRange(d, obj.(*GlMapBufferRange))
 }
 func (*binaryClassGlMapBufferRange) Skip(d binary.Decoder) error { return doSkipGlMapBufferRange(d) }
+func (*binaryClassGlMapBufferRange) Schema() *schema.Class       { return schemaGlMapBufferRange }
+
+var schemaGlMapBufferRange = &schema.Class{
+	TypeID: binaryIDGlMapBufferRange,
+	Name:   "GlMapBufferRange",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Access", Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlPixelStorei struct{}
 
@@ -12309,6 +14152,16 @@ func (*binaryClassGlPixelStorei) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlPixelStorei(d, obj.(*GlPixelStorei))
 }
 func (*binaryClassGlPixelStorei) Skip(d binary.Decoder) error { return doSkipGlPixelStorei(d) }
+func (*binaryClassGlPixelStorei) Schema() *schema.Class       { return schemaGlPixelStorei }
+
+var schemaGlPixelStorei = &schema.Class{
+	TypeID: binaryIDGlPixelStorei,
+	Name:   "GlPixelStorei",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlPolygonOffset struct{}
 
@@ -12359,6 +14212,16 @@ func (*binaryClassGlPolygonOffset) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlPolygonOffset(d, obj.(*GlPolygonOffset))
 }
 func (*binaryClassGlPolygonOffset) Skip(d binary.Decoder) error { return doSkipGlPolygonOffset(d) }
+func (*binaryClassGlPolygonOffset) Schema() *schema.Class       { return schemaGlPolygonOffset }
+
+var schemaGlPolygonOffset = &schema.Class{
+	TypeID: binaryIDGlPolygonOffset,
+	Name:   "GlPolygonOffset",
+	Fields: []schema.Field{
+		schema.Field{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Units", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlPopGroupMarkerEXT struct{}
 
@@ -12388,6 +14251,13 @@ func (*binaryClassGlPopGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlPopGroupMarkerEXT) Skip(d binary.Decoder) error {
 	return doSkipGlPopGroupMarkerEXT(d)
+}
+func (*binaryClassGlPopGroupMarkerEXT) Schema() *schema.Class { return schemaGlPopGroupMarkerEXT }
+
+var schemaGlPopGroupMarkerEXT = &schema.Class{
+	TypeID: binaryIDGlPopGroupMarkerEXT,
+	Name:   "GlPopGroupMarkerEXT",
+	Fields: []schema.Field{},
 }
 
 type binaryClassGlProgramBinaryOES struct{}
@@ -12461,6 +14331,18 @@ func (*binaryClassGlProgramBinaryOES) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlProgramBinaryOES(d, obj.(*GlProgramBinaryOES))
 }
 func (*binaryClassGlProgramBinaryOES) Skip(d binary.Decoder) error { return doSkipGlProgramBinaryOES(d) }
+func (*binaryClassGlProgramBinaryOES) Schema() *schema.Class       { return schemaGlProgramBinaryOES }
+
+var schemaGlProgramBinaryOES = &schema.Class{
+	TypeID: binaryIDGlProgramBinaryOES,
+	Name:   "GlProgramBinaryOES",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		schema.Field{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Binary", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlPushGroupMarkerEXT struct{}
 
@@ -12513,6 +14395,16 @@ func (*binaryClassGlPushGroupMarkerEXT) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassGlPushGroupMarkerEXT) Skip(d binary.Decoder) error {
 	return doSkipGlPushGroupMarkerEXT(d)
 }
+func (*binaryClassGlPushGroupMarkerEXT) Schema() *schema.Class { return schemaGlPushGroupMarkerEXT }
+
+var schemaGlPushGroupMarkerEXT = &schema.Class{
+	TypeID: binaryIDGlPushGroupMarkerEXT,
+	Name:   "GlPushGroupMarkerEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassGlQueryCounterEXT struct{}
 
@@ -12563,6 +14455,16 @@ func (*binaryClassGlQueryCounterEXT) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlQueryCounterEXT(d, obj.(*GlQueryCounterEXT))
 }
 func (*binaryClassGlQueryCounterEXT) Skip(d binary.Decoder) error { return doSkipGlQueryCounterEXT(d) }
+func (*binaryClassGlQueryCounterEXT) Schema() *schema.Class       { return schemaGlQueryCounterEXT }
+
+var schemaGlQueryCounterEXT = &schema.Class{
+	TypeID: binaryIDGlQueryCounterEXT,
+	Name:   "GlQueryCounterEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlReadPixels struct{}
 
@@ -12668,6 +14570,21 @@ func (*binaryClassGlReadPixels) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlReadPixels(d, obj.(*GlReadPixels))
 }
 func (*binaryClassGlReadPixels) Skip(d binary.Decoder) error { return doSkipGlReadPixels(d) }
+func (*binaryClassGlReadPixels) Schema() *schema.Class       { return schemaGlReadPixels }
+
+var schemaGlReadPixels = &schema.Class{
+	TypeID: binaryIDGlReadPixels,
+	Name:   "GlReadPixels",
+	Fields: []schema.Field{
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlReleaseShaderCompiler struct{}
 
@@ -12697,6 +14614,15 @@ func (*binaryClassGlReleaseShaderCompiler) DecodeTo(d binary.Decoder, obj binary
 }
 func (*binaryClassGlReleaseShaderCompiler) Skip(d binary.Decoder) error {
 	return doSkipGlReleaseShaderCompiler(d)
+}
+func (*binaryClassGlReleaseShaderCompiler) Schema() *schema.Class {
+	return schemaGlReleaseShaderCompiler
+}
+
+var schemaGlReleaseShaderCompiler = &schema.Class{
+	TypeID: binaryIDGlReleaseShaderCompiler,
+	Name:   "GlReleaseShaderCompiler",
+	Fields: []schema.Field{},
 }
 
 type binaryClassGlRenderbufferStorage struct{}
@@ -12771,6 +14697,18 @@ func (*binaryClassGlRenderbufferStorage) DecodeTo(d binary.Decoder, obj binary.O
 }
 func (*binaryClassGlRenderbufferStorage) Skip(d binary.Decoder) error {
 	return doSkipGlRenderbufferStorage(d)
+}
+func (*binaryClassGlRenderbufferStorage) Schema() *schema.Class { return schemaGlRenderbufferStorage }
+
+var schemaGlRenderbufferStorage = &schema.Class{
+	TypeID: binaryIDGlRenderbufferStorage,
+	Name:   "GlRenderbufferStorage",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
 }
 
 type binaryClassGlRenderbufferStorageMultisample struct{}
@@ -12861,6 +14799,21 @@ func (*binaryClassGlRenderbufferStorageMultisample) DecodeTo(d binary.Decoder, o
 func (*binaryClassGlRenderbufferStorageMultisample) Skip(d binary.Decoder) error {
 	return doSkipGlRenderbufferStorageMultisample(d)
 }
+func (*binaryClassGlRenderbufferStorageMultisample) Schema() *schema.Class {
+	return schemaGlRenderbufferStorageMultisample
+}
+
+var schemaGlRenderbufferStorageMultisample = &schema.Class{
+	TypeID: binaryIDGlRenderbufferStorageMultisample,
+	Name:   "GlRenderbufferStorageMultisample",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Samples", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlSampleCoverage struct{}
 
@@ -12911,6 +14864,16 @@ func (*binaryClassGlSampleCoverage) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlSampleCoverage(d, obj.(*GlSampleCoverage))
 }
 func (*binaryClassGlSampleCoverage) Skip(d binary.Decoder) error { return doSkipGlSampleCoverage(d) }
+func (*binaryClassGlSampleCoverage) Schema() *schema.Class       { return schemaGlSampleCoverage }
+
+var schemaGlSampleCoverage = &schema.Class{
+	TypeID: binaryIDGlSampleCoverage,
+	Name:   "GlSampleCoverage",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Invert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassGlScissor struct{}
 
@@ -12983,6 +14946,18 @@ func (*binaryClassGlScissor) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeGlScissor(d, obj.(*GlScissor))
 }
 func (*binaryClassGlScissor) Skip(d binary.Decoder) error { return doSkipGlScissor(d) }
+func (*binaryClassGlScissor) Schema() *schema.Class       { return schemaGlScissor }
+
+var schemaGlScissor = &schema.Class{
+	TypeID: binaryIDGlScissor,
+	Name:   "GlScissor",
+	Fields: []schema.Field{
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlShaderBinary struct{}
 
@@ -13084,6 +15059,19 @@ func (*binaryClassGlShaderBinary) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlShaderBinary(d, obj.(*GlShaderBinary))
 }
 func (*binaryClassGlShaderBinary) Skip(d binary.Decoder) error { return doSkipGlShaderBinary(d) }
+func (*binaryClassGlShaderBinary) Schema() *schema.Class       { return schemaGlShaderBinary }
+
+var schemaGlShaderBinary = &schema.Class{
+	TypeID: binaryIDGlShaderBinary,
+	Name:   "GlShaderBinary",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Shaders", Type: &schema.Slice{Alias: "ShaderIdArray", ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
+		schema.Field{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Binary", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlShaderSource struct{}
 
@@ -13192,6 +15180,18 @@ func (*binaryClassGlShaderSource) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlShaderSource(d, obj.(*GlShaderSource))
 }
 func (*binaryClassGlShaderSource) Skip(d binary.Decoder) error { return doSkipGlShaderSource(d) }
+func (*binaryClassGlShaderSource) Schema() *schema.Class       { return schemaGlShaderSource }
+
+var schemaGlShaderSource = &schema.Class{
+	TypeID: binaryIDGlShaderSource,
+	Name:   "GlShaderSource",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Source", Type: &schema.Slice{Alias: "StringArray", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+		schema.Field{Declared: "Length", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlStartTilingQCOM struct{}
 
@@ -13275,6 +15275,19 @@ func (*binaryClassGlStartTilingQCOM) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlStartTilingQCOM(d, obj.(*GlStartTilingQCOM))
 }
 func (*binaryClassGlStartTilingQCOM) Skip(d binary.Decoder) error { return doSkipGlStartTilingQCOM(d) }
+func (*binaryClassGlStartTilingQCOM) Schema() *schema.Class       { return schemaGlStartTilingQCOM }
+
+var schemaGlStartTilingQCOM = &schema.Class{
+	TypeID: binaryIDGlStartTilingQCOM,
+	Name:   "GlStartTilingQCOM",
+	Fields: []schema.Field{
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlStencilFuncSeparate struct{}
 
@@ -13349,6 +15362,18 @@ func (*binaryClassGlStencilFuncSeparate) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlStencilFuncSeparate) Skip(d binary.Decoder) error {
 	return doSkipGlStencilFuncSeparate(d)
 }
+func (*binaryClassGlStencilFuncSeparate) Schema() *schema.Class { return schemaGlStencilFuncSeparate }
+
+var schemaGlStencilFuncSeparate = &schema.Class{
+	TypeID: binaryIDGlStencilFuncSeparate,
+	Name:   "GlStencilFuncSeparate",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		schema.Field{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		schema.Field{Declared: "ReferenceValue", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlStencilMask struct{}
 
@@ -13388,6 +15413,15 @@ func (*binaryClassGlStencilMask) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlStencilMask(d, obj.(*GlStencilMask))
 }
 func (*binaryClassGlStencilMask) Skip(d binary.Decoder) error { return doSkipGlStencilMask(d) }
+func (*binaryClassGlStencilMask) Schema() *schema.Class       { return schemaGlStencilMask }
+
+var schemaGlStencilMask = &schema.Class{
+	TypeID: binaryIDGlStencilMask,
+	Name:   "GlStencilMask",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlStencilMaskSeparate struct{}
 
@@ -13439,6 +15473,16 @@ func (*binaryClassGlStencilMaskSeparate) DecodeTo(d binary.Decoder, obj binary.O
 }
 func (*binaryClassGlStencilMaskSeparate) Skip(d binary.Decoder) error {
 	return doSkipGlStencilMaskSeparate(d)
+}
+func (*binaryClassGlStencilMaskSeparate) Schema() *schema.Class { return schemaGlStencilMaskSeparate }
+
+var schemaGlStencilMaskSeparate = &schema.Class{
+	TypeID: binaryIDGlStencilMaskSeparate,
+	Name:   "GlStencilMaskSeparate",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlStencilOpSeparate struct{}
@@ -13513,6 +15557,18 @@ func (*binaryClassGlStencilOpSeparate) DecodeTo(d binary.Decoder, obj binary.Obj
 }
 func (*binaryClassGlStencilOpSeparate) Skip(d binary.Decoder) error {
 	return doSkipGlStencilOpSeparate(d)
+}
+func (*binaryClassGlStencilOpSeparate) Schema() *schema.Class { return schemaGlStencilOpSeparate }
+
+var schemaGlStencilOpSeparate = &schema.Class{
+	TypeID: binaryIDGlStencilOpSeparate,
+	Name:   "GlStencilOpSeparate",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		schema.Field{Declared: "StencilFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		schema.Field{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		schema.Field{Declared: "StencilPassDepthPass", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+	},
 }
 
 type binaryClassGlTexImage2D struct{}
@@ -13641,6 +15697,23 @@ func (*binaryClassGlTexImage2D) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlTexImage2D(d, obj.(*GlTexImage2D))
 }
 func (*binaryClassGlTexImage2D) Skip(d binary.Decoder) error { return doSkipGlTexImage2D(d) }
+func (*binaryClassGlTexImage2D) Schema() *schema.Class       { return schemaGlTexImage2D }
+
+var schemaGlTexImage2D = &schema.Class{
+	TypeID: binaryIDGlTexImage2D,
+	Name:   "GlTexImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "InternalFormat", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "TexturePointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlTexParameterf struct{}
 
@@ -13702,6 +15775,17 @@ func (*binaryClassGlTexParameterf) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlTexParameterf(d, obj.(*GlTexParameterf))
 }
 func (*binaryClassGlTexParameterf) Skip(d binary.Decoder) error { return doSkipGlTexParameterf(d) }
+func (*binaryClassGlTexParameterf) Schema() *schema.Class       { return schemaGlTexParameterf }
+
+var schemaGlTexParameterf = &schema.Class{
+	TypeID: binaryIDGlTexParameterf,
+	Name:   "GlTexParameterf",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlTexParameteri struct{}
 
@@ -13763,6 +15847,17 @@ func (*binaryClassGlTexParameteri) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlTexParameteri(d, obj.(*GlTexParameteri))
 }
 func (*binaryClassGlTexParameteri) Skip(d binary.Decoder) error { return doSkipGlTexParameteri(d) }
+func (*binaryClassGlTexParameteri) Schema() *schema.Class       { return schemaGlTexParameteri }
+
+var schemaGlTexParameteri = &schema.Class{
+	TypeID: binaryIDGlTexParameteri,
+	Name:   "GlTexParameteri",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlTexStorage1DEXT struct{}
 
@@ -13835,6 +15930,18 @@ func (*binaryClassGlTexStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlTexStorage1DEXT(d, obj.(*GlTexStorage1DEXT))
 }
 func (*binaryClassGlTexStorage1DEXT) Skip(d binary.Decoder) error { return doSkipGlTexStorage1DEXT(d) }
+func (*binaryClassGlTexStorage1DEXT) Schema() *schema.Class       { return schemaGlTexStorage1DEXT }
+
+var schemaGlTexStorage1DEXT = &schema.Class{
+	TypeID: binaryIDGlTexStorage1DEXT,
+	Name:   "GlTexStorage1DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlTexStorage2DEXT struct{}
 
@@ -13918,6 +16025,19 @@ func (*binaryClassGlTexStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlTexStorage2DEXT(d, obj.(*GlTexStorage2DEXT))
 }
 func (*binaryClassGlTexStorage2DEXT) Skip(d binary.Decoder) error { return doSkipGlTexStorage2DEXT(d) }
+func (*binaryClassGlTexStorage2DEXT) Schema() *schema.Class       { return schemaGlTexStorage2DEXT }
+
+var schemaGlTexStorage2DEXT = &schema.Class{
+	TypeID: binaryIDGlTexStorage2DEXT,
+	Name:   "GlTexStorage2DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlTexStorage3DEXT struct{}
 
@@ -14012,6 +16132,20 @@ func (*binaryClassGlTexStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlTexStorage3DEXT(d, obj.(*GlTexStorage3DEXT))
 }
 func (*binaryClassGlTexStorage3DEXT) Skip(d binary.Decoder) error { return doSkipGlTexStorage3DEXT(d) }
+func (*binaryClassGlTexStorage3DEXT) Schema() *schema.Class       { return schemaGlTexStorage3DEXT }
+
+var schemaGlTexStorage3DEXT = &schema.Class{
+	TypeID: binaryIDGlTexStorage3DEXT,
+	Name:   "GlTexStorage3DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlTexSubImage2D struct{}
 
@@ -14139,6 +16273,23 @@ func (*binaryClassGlTexSubImage2D) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeGlTexSubImage2D(d, obj.(*GlTexSubImage2D))
 }
 func (*binaryClassGlTexSubImage2D) Skip(d binary.Decoder) error { return doSkipGlTexSubImage2D(d) }
+func (*binaryClassGlTexSubImage2D) Schema() *schema.Class       { return schemaGlTexSubImage2D }
+
+var schemaGlTexSubImage2D = &schema.Class{
+	TypeID: binaryIDGlTexSubImage2D,
+	Name:   "GlTexSubImage2D",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "TexturePointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlTextureStorage1DEXT struct{}
 
@@ -14223,6 +16374,19 @@ func (*binaryClassGlTextureStorage1DEXT) DecodeTo(d binary.Decoder, obj binary.O
 }
 func (*binaryClassGlTextureStorage1DEXT) Skip(d binary.Decoder) error {
 	return doSkipGlTextureStorage1DEXT(d)
+}
+func (*binaryClassGlTextureStorage1DEXT) Schema() *schema.Class { return schemaGlTextureStorage1DEXT }
+
+var schemaGlTextureStorage1DEXT = &schema.Class{
+	TypeID: binaryIDGlTextureStorage1DEXT,
+	Name:   "GlTextureStorage1DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
 }
 
 type binaryClassGlTextureStorage2DEXT struct{}
@@ -14319,6 +16483,20 @@ func (*binaryClassGlTextureStorage2DEXT) DecodeTo(d binary.Decoder, obj binary.O
 }
 func (*binaryClassGlTextureStorage2DEXT) Skip(d binary.Decoder) error {
 	return doSkipGlTextureStorage2DEXT(d)
+}
+func (*binaryClassGlTextureStorage2DEXT) Schema() *schema.Class { return schemaGlTextureStorage2DEXT }
+
+var schemaGlTextureStorage2DEXT = &schema.Class{
+	TypeID: binaryIDGlTextureStorage2DEXT,
+	Name:   "GlTextureStorage2DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
 }
 
 type binaryClassGlTextureStorage3DEXT struct{}
@@ -14427,6 +16605,21 @@ func (*binaryClassGlTextureStorage3DEXT) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlTextureStorage3DEXT) Skip(d binary.Decoder) error {
 	return doSkipGlTextureStorage3DEXT(d)
 }
+func (*binaryClassGlTextureStorage3DEXT) Schema() *schema.Class { return schemaGlTextureStorage3DEXT }
+
+var schemaGlTextureStorage3DEXT = &schema.Class{
+	TypeID: binaryIDGlTextureStorage3DEXT,
+	Name:   "GlTextureStorage3DEXT",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlUniform1f struct{}
 
@@ -14477,6 +16670,16 @@ func (*binaryClassGlUniform1f) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform1f(d, obj.(*GlUniform1f))
 }
 func (*binaryClassGlUniform1f) Skip(d binary.Decoder) error { return doSkipGlUniform1f(d) }
+func (*binaryClassGlUniform1f) Schema() *schema.Class       { return schemaGlUniform1f }
+
+var schemaGlUniform1f = &schema.Class{
+	TypeID: binaryIDGlUniform1f,
+	Name:   "GlUniform1f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlUniform1fv struct{}
 
@@ -14556,6 +16759,17 @@ func (*binaryClassGlUniform1fv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform1fv(d, obj.(*GlUniform1fv))
 }
 func (*binaryClassGlUniform1fv) Skip(d binary.Decoder) error { return doSkipGlUniform1fv(d) }
+func (*binaryClassGlUniform1fv) Schema() *schema.Class       { return schemaGlUniform1fv }
+
+var schemaGlUniform1fv = &schema.Class{
+	TypeID: binaryIDGlUniform1fv,
+	Name:   "GlUniform1fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniform1i struct{}
 
@@ -14606,6 +16820,16 @@ func (*binaryClassGlUniform1i) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform1i(d, obj.(*GlUniform1i))
 }
 func (*binaryClassGlUniform1i) Skip(d binary.Decoder) error { return doSkipGlUniform1i(d) }
+func (*binaryClassGlUniform1i) Schema() *schema.Class       { return schemaGlUniform1i }
+
+var schemaGlUniform1i = &schema.Class{
+	TypeID: binaryIDGlUniform1i,
+	Name:   "GlUniform1i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlUniform1iv struct{}
 
@@ -14685,6 +16909,17 @@ func (*binaryClassGlUniform1iv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform1iv(d, obj.(*GlUniform1iv))
 }
 func (*binaryClassGlUniform1iv) Skip(d binary.Decoder) error { return doSkipGlUniform1iv(d) }
+func (*binaryClassGlUniform1iv) Schema() *schema.Class       { return schemaGlUniform1iv }
+
+var schemaGlUniform1iv = &schema.Class{
+	TypeID: binaryIDGlUniform1iv,
+	Name:   "GlUniform1iv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlUniform2f struct{}
 
@@ -14746,6 +16981,17 @@ func (*binaryClassGlUniform2f) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform2f(d, obj.(*GlUniform2f))
 }
 func (*binaryClassGlUniform2f) Skip(d binary.Decoder) error { return doSkipGlUniform2f(d) }
+func (*binaryClassGlUniform2f) Schema() *schema.Class       { return schemaGlUniform2f }
+
+var schemaGlUniform2f = &schema.Class{
+	TypeID: binaryIDGlUniform2f,
+	Name:   "GlUniform2f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlUniform2fv struct{}
 
@@ -14825,6 +17071,17 @@ func (*binaryClassGlUniform2fv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform2fv(d, obj.(*GlUniform2fv))
 }
 func (*binaryClassGlUniform2fv) Skip(d binary.Decoder) error { return doSkipGlUniform2fv(d) }
+func (*binaryClassGlUniform2fv) Schema() *schema.Class       { return schemaGlUniform2fv }
+
+var schemaGlUniform2fv = &schema.Class{
+	TypeID: binaryIDGlUniform2fv,
+	Name:   "GlUniform2fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniform2i struct{}
 
@@ -14886,6 +17143,17 @@ func (*binaryClassGlUniform2i) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform2i(d, obj.(*GlUniform2i))
 }
 func (*binaryClassGlUniform2i) Skip(d binary.Decoder) error { return doSkipGlUniform2i(d) }
+func (*binaryClassGlUniform2i) Schema() *schema.Class       { return schemaGlUniform2i }
+
+var schemaGlUniform2i = &schema.Class{
+	TypeID: binaryIDGlUniform2i,
+	Name:   "GlUniform2i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlUniform2iv struct{}
 
@@ -14965,6 +17233,17 @@ func (*binaryClassGlUniform2iv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform2iv(d, obj.(*GlUniform2iv))
 }
 func (*binaryClassGlUniform2iv) Skip(d binary.Decoder) error { return doSkipGlUniform2iv(d) }
+func (*binaryClassGlUniform2iv) Schema() *schema.Class       { return schemaGlUniform2iv }
+
+var schemaGlUniform2iv = &schema.Class{
+	TypeID: binaryIDGlUniform2iv,
+	Name:   "GlUniform2iv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlUniform3f struct{}
 
@@ -15037,6 +17316,18 @@ func (*binaryClassGlUniform3f) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform3f(d, obj.(*GlUniform3f))
 }
 func (*binaryClassGlUniform3f) Skip(d binary.Decoder) error { return doSkipGlUniform3f(d) }
+func (*binaryClassGlUniform3f) Schema() *schema.Class       { return schemaGlUniform3f }
+
+var schemaGlUniform3f = &schema.Class{
+	TypeID: binaryIDGlUniform3f,
+	Name:   "GlUniform3f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlUniform3fv struct{}
 
@@ -15116,6 +17407,17 @@ func (*binaryClassGlUniform3fv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform3fv(d, obj.(*GlUniform3fv))
 }
 func (*binaryClassGlUniform3fv) Skip(d binary.Decoder) error { return doSkipGlUniform3fv(d) }
+func (*binaryClassGlUniform3fv) Schema() *schema.Class       { return schemaGlUniform3fv }
+
+var schemaGlUniform3fv = &schema.Class{
+	TypeID: binaryIDGlUniform3fv,
+	Name:   "GlUniform3fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniform3i struct{}
 
@@ -15188,6 +17490,18 @@ func (*binaryClassGlUniform3i) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform3i(d, obj.(*GlUniform3i))
 }
 func (*binaryClassGlUniform3i) Skip(d binary.Decoder) error { return doSkipGlUniform3i(d) }
+func (*binaryClassGlUniform3i) Schema() *schema.Class       { return schemaGlUniform3i }
+
+var schemaGlUniform3i = &schema.Class{
+	TypeID: binaryIDGlUniform3i,
+	Name:   "GlUniform3i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlUniform3iv struct{}
 
@@ -15267,6 +17581,17 @@ func (*binaryClassGlUniform3iv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform3iv(d, obj.(*GlUniform3iv))
 }
 func (*binaryClassGlUniform3iv) Skip(d binary.Decoder) error { return doSkipGlUniform3iv(d) }
+func (*binaryClassGlUniform3iv) Schema() *schema.Class       { return schemaGlUniform3iv }
+
+var schemaGlUniform3iv = &schema.Class{
+	TypeID: binaryIDGlUniform3iv,
+	Name:   "GlUniform3iv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlUniform4f struct{}
 
@@ -15350,6 +17675,19 @@ func (*binaryClassGlUniform4f) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform4f(d, obj.(*GlUniform4f))
 }
 func (*binaryClassGlUniform4f) Skip(d binary.Decoder) error { return doSkipGlUniform4f(d) }
+func (*binaryClassGlUniform4f) Schema() *schema.Class       { return schemaGlUniform4f }
+
+var schemaGlUniform4f = &schema.Class{
+	TypeID: binaryIDGlUniform4f,
+	Name:   "GlUniform4f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlUniform4fv struct{}
 
@@ -15429,6 +17767,17 @@ func (*binaryClassGlUniform4fv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform4fv(d, obj.(*GlUniform4fv))
 }
 func (*binaryClassGlUniform4fv) Skip(d binary.Decoder) error { return doSkipGlUniform4fv(d) }
+func (*binaryClassGlUniform4fv) Schema() *schema.Class       { return schemaGlUniform4fv }
+
+var schemaGlUniform4fv = &schema.Class{
+	TypeID: binaryIDGlUniform4fv,
+	Name:   "GlUniform4fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniform4i struct{}
 
@@ -15512,6 +17861,19 @@ func (*binaryClassGlUniform4i) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeGlUniform4i(d, obj.(*GlUniform4i))
 }
 func (*binaryClassGlUniform4i) Skip(d binary.Decoder) error { return doSkipGlUniform4i(d) }
+func (*binaryClassGlUniform4i) Schema() *schema.Class       { return schemaGlUniform4i }
+
+var schemaGlUniform4i = &schema.Class{
+	TypeID: binaryIDGlUniform4i,
+	Name:   "GlUniform4i",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlUniform4iv struct{}
 
@@ -15591,6 +17953,17 @@ func (*binaryClassGlUniform4iv) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUniform4iv(d, obj.(*GlUniform4iv))
 }
 func (*binaryClassGlUniform4iv) Skip(d binary.Decoder) error { return doSkipGlUniform4iv(d) }
+func (*binaryClassGlUniform4iv) Schema() *schema.Class       { return schemaGlUniform4iv }
+
+var schemaGlUniform4iv = &schema.Class{
+	TypeID: binaryIDGlUniform4iv,
+	Name:   "GlUniform4iv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "S32Array", ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+	},
+}
 
 type binaryClassGlUniformMatrix2fv struct{}
 
@@ -15681,6 +18054,18 @@ func (*binaryClassGlUniformMatrix2fv) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlUniformMatrix2fv(d, obj.(*GlUniformMatrix2fv))
 }
 func (*binaryClassGlUniformMatrix2fv) Skip(d binary.Decoder) error { return doSkipGlUniformMatrix2fv(d) }
+func (*binaryClassGlUniformMatrix2fv) Schema() *schema.Class       { return schemaGlUniformMatrix2fv }
+
+var schemaGlUniformMatrix2fv = &schema.Class{
+	TypeID: binaryIDGlUniformMatrix2fv,
+	Name:   "GlUniformMatrix2fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniformMatrix3fv struct{}
 
@@ -15771,6 +18156,18 @@ func (*binaryClassGlUniformMatrix3fv) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlUniformMatrix3fv(d, obj.(*GlUniformMatrix3fv))
 }
 func (*binaryClassGlUniformMatrix3fv) Skip(d binary.Decoder) error { return doSkipGlUniformMatrix3fv(d) }
+func (*binaryClassGlUniformMatrix3fv) Schema() *schema.Class       { return schemaGlUniformMatrix3fv }
+
+var schemaGlUniformMatrix3fv = &schema.Class{
+	TypeID: binaryIDGlUniformMatrix3fv,
+	Name:   "GlUniformMatrix3fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUniformMatrix4fv struct{}
 
@@ -15861,6 +18258,18 @@ func (*binaryClassGlUniformMatrix4fv) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeGlUniformMatrix4fv(d, obj.(*GlUniformMatrix4fv))
 }
 func (*binaryClassGlUniformMatrix4fv) Skip(d binary.Decoder) error { return doSkipGlUniformMatrix4fv(d) }
+func (*binaryClassGlUniformMatrix4fv) Schema() *schema.Class       { return schemaGlUniformMatrix4fv }
+
+var schemaGlUniformMatrix4fv = &schema.Class{
+	TypeID: binaryIDGlUniformMatrix4fv,
+	Name:   "GlUniformMatrix4fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Values", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlUnmapBuffer struct{}
 
@@ -15900,6 +18309,15 @@ func (*binaryClassGlUnmapBuffer) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeGlUnmapBuffer(d, obj.(*GlUnmapBuffer))
 }
 func (*binaryClassGlUnmapBuffer) Skip(d binary.Decoder) error { return doSkipGlUnmapBuffer(d) }
+func (*binaryClassGlUnmapBuffer) Schema() *schema.Class       { return schemaGlUnmapBuffer }
+
+var schemaGlUnmapBuffer = &schema.Class{
+	TypeID: binaryIDGlUnmapBuffer,
+	Name:   "GlUnmapBuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlUseProgram struct{}
 
@@ -15939,6 +18357,15 @@ func (*binaryClassGlUseProgram) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeGlUseProgram(d, obj.(*GlUseProgram))
 }
 func (*binaryClassGlUseProgram) Skip(d binary.Decoder) error { return doSkipGlUseProgram(d) }
+func (*binaryClassGlUseProgram) Schema() *schema.Class       { return schemaGlUseProgram }
+
+var schemaGlUseProgram = &schema.Class{
+	TypeID: binaryIDGlUseProgram,
+	Name:   "GlUseProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlValidateProgram struct{}
 
@@ -15978,6 +18405,15 @@ func (*binaryClassGlValidateProgram) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlValidateProgram(d, obj.(*GlValidateProgram))
 }
 func (*binaryClassGlValidateProgram) Skip(d binary.Decoder) error { return doSkipGlValidateProgram(d) }
+func (*binaryClassGlValidateProgram) Schema() *schema.Class       { return schemaGlValidateProgram }
+
+var schemaGlValidateProgram = &schema.Class{
+	TypeID: binaryIDGlValidateProgram,
+	Name:   "GlValidateProgram",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassGlVertexAttrib1f struct{}
 
@@ -16028,6 +18464,16 @@ func (*binaryClassGlVertexAttrib1f) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlVertexAttrib1f(d, obj.(*GlVertexAttrib1f))
 }
 func (*binaryClassGlVertexAttrib1f) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib1f(d) }
+func (*binaryClassGlVertexAttrib1f) Schema() *schema.Class       { return schemaGlVertexAttrib1f }
+
+var schemaGlVertexAttrib1f = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib1f,
+	Name:   "GlVertexAttrib1f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlVertexAttrib1fv struct{}
 
@@ -16096,6 +18542,16 @@ func (*binaryClassGlVertexAttrib1fv) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlVertexAttrib1fv(d, obj.(*GlVertexAttrib1fv))
 }
 func (*binaryClassGlVertexAttrib1fv) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib1fv(d) }
+func (*binaryClassGlVertexAttrib1fv) Schema() *schema.Class       { return schemaGlVertexAttrib1fv }
+
+var schemaGlVertexAttrib1fv = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib1fv,
+	Name:   "GlVertexAttrib1fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlVertexAttrib2f struct{}
 
@@ -16157,6 +18613,17 @@ func (*binaryClassGlVertexAttrib2f) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlVertexAttrib2f(d, obj.(*GlVertexAttrib2f))
 }
 func (*binaryClassGlVertexAttrib2f) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib2f(d) }
+func (*binaryClassGlVertexAttrib2f) Schema() *schema.Class       { return schemaGlVertexAttrib2f }
+
+var schemaGlVertexAttrib2f = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib2f,
+	Name:   "GlVertexAttrib2f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlVertexAttrib2fv struct{}
 
@@ -16225,6 +18692,16 @@ func (*binaryClassGlVertexAttrib2fv) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlVertexAttrib2fv(d, obj.(*GlVertexAttrib2fv))
 }
 func (*binaryClassGlVertexAttrib2fv) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib2fv(d) }
+func (*binaryClassGlVertexAttrib2fv) Schema() *schema.Class       { return schemaGlVertexAttrib2fv }
+
+var schemaGlVertexAttrib2fv = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib2fv,
+	Name:   "GlVertexAttrib2fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlVertexAttrib3f struct{}
 
@@ -16297,6 +18774,18 @@ func (*binaryClassGlVertexAttrib3f) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlVertexAttrib3f(d, obj.(*GlVertexAttrib3f))
 }
 func (*binaryClassGlVertexAttrib3f) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib3f(d) }
+func (*binaryClassGlVertexAttrib3f) Schema() *schema.Class       { return schemaGlVertexAttrib3f }
+
+var schemaGlVertexAttrib3f = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib3f,
+	Name:   "GlVertexAttrib3f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlVertexAttrib3fv struct{}
 
@@ -16365,6 +18854,16 @@ func (*binaryClassGlVertexAttrib3fv) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlVertexAttrib3fv(d, obj.(*GlVertexAttrib3fv))
 }
 func (*binaryClassGlVertexAttrib3fv) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib3fv(d) }
+func (*binaryClassGlVertexAttrib3fv) Schema() *schema.Class       { return schemaGlVertexAttrib3fv }
+
+var schemaGlVertexAttrib3fv = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib3fv,
+	Name:   "GlVertexAttrib3fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlVertexAttrib4f struct{}
 
@@ -16448,6 +18947,19 @@ func (*binaryClassGlVertexAttrib4f) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlVertexAttrib4f(d, obj.(*GlVertexAttrib4f))
 }
 func (*binaryClassGlVertexAttrib4f) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib4f(d) }
+func (*binaryClassGlVertexAttrib4f) Schema() *schema.Class       { return schemaGlVertexAttrib4f }
+
+var schemaGlVertexAttrib4f = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib4f,
+	Name:   "GlVertexAttrib4f",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassGlVertexAttrib4fv struct{}
 
@@ -16516,6 +19028,16 @@ func (*binaryClassGlVertexAttrib4fv) DecodeTo(d binary.Decoder, obj binary.Objec
 	return doDecodeGlVertexAttrib4fv(d, obj.(*GlVertexAttrib4fv))
 }
 func (*binaryClassGlVertexAttrib4fv) Skip(d binary.Decoder) error { return doSkipGlVertexAttrib4fv(d) }
+func (*binaryClassGlVertexAttrib4fv) Schema() *schema.Class       { return schemaGlVertexAttrib4fv }
+
+var schemaGlVertexAttrib4fv = &schema.Class{
+	TypeID: binaryIDGlVertexAttrib4fv,
+	Name:   "GlVertexAttrib4fv",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Value", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassGlVertexAttribPointer struct{}
 
@@ -16612,6 +19134,20 @@ func (*binaryClassGlVertexAttribPointer) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlVertexAttribPointer) Skip(d binary.Decoder) error {
 	return doSkipGlVertexAttribPointer(d)
 }
+func (*binaryClassGlVertexAttribPointer) Schema() *schema.Class { return schemaGlVertexAttribPointer }
+
+var schemaGlVertexAttribPointer = &schema.Class{
+	TypeID: binaryIDGlVertexAttribPointer,
+	Name:   "GlVertexAttribPointer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		schema.Field{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Data", Type: &schema.Primitive{Name: "VertexPointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlViewport struct{}
 
@@ -16684,6 +19220,18 @@ func (*binaryClassGlViewport) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeGlViewport(d, obj.(*GlViewport))
 }
 func (*binaryClassGlViewport) Skip(d binary.Decoder) error { return doSkipGlViewport(d) }
+func (*binaryClassGlViewport) Schema() *schema.Class       { return schemaGlViewport }
+
+var schemaGlViewport = &schema.Class{
+	TypeID: binaryIDGlViewport,
+	Name:   "GlViewport",
+	Fields: []schema.Field{
+		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassGlXCreateContext struct{}
 
@@ -16767,6 +19315,19 @@ func (*binaryClassGlXCreateContext) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeGlXCreateContext(d, obj.(*GlXCreateContext))
 }
 func (*binaryClassGlXCreateContext) Skip(d binary.Decoder) error { return doSkipGlXCreateContext(d) }
+func (*binaryClassGlXCreateContext) Schema() *schema.Class       { return schemaGlXCreateContext }
+
+var schemaGlXCreateContext = &schema.Class{
+	TypeID: binaryIDGlXCreateContext,
+	Name:   "GlXCreateContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Dpy", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Vis", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "ShareList", Type: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}},
+		schema.Field{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlXCreateNewContext struct{}
 
@@ -16863,6 +19424,20 @@ func (*binaryClassGlXCreateNewContext) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassGlXCreateNewContext) Skip(d binary.Decoder) error {
 	return doSkipGlXCreateNewContext(d)
 }
+func (*binaryClassGlXCreateNewContext) Schema() *schema.Class { return schemaGlXCreateNewContext }
+
+var schemaGlXCreateNewContext = &schema.Class{
+	TypeID: binaryIDGlXCreateNewContext,
+	Name:   "GlXCreateNewContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Fbconfig", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Shared", Type: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}},
+		schema.Field{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlXMakeContextCurrent struct{}
 
@@ -16937,6 +19512,18 @@ func (*binaryClassGlXMakeContextCurrent) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassGlXMakeContextCurrent) Skip(d binary.Decoder) error {
 	return doSkipGlXMakeContextCurrent(d)
 }
+func (*binaryClassGlXMakeContextCurrent) Schema() *schema.Class { return schemaGlXMakeContextCurrent }
+
+var schemaGlXMakeContextCurrent = &schema.Class{
+	TypeID: binaryIDGlXMakeContextCurrent,
+	Name:   "GlXMakeContextCurrent",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Draw", Type: &schema.Primitive{Name: "GLXDrawable", Method: schema.Uint64}},
+		schema.Field{Declared: "Read", Type: &schema.Primitive{Name: "GLXDrawable", Method: schema.Uint64}},
+		schema.Field{Declared: "Ctx", Type: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlXSwapBuffers struct{}
 
@@ -16987,6 +19574,16 @@ func (*binaryClassGlXSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeGlXSwapBuffers(d, obj.(*GlXSwapBuffers))
 }
 func (*binaryClassGlXSwapBuffers) Skip(d binary.Decoder) error { return doSkipGlXSwapBuffers(d) }
+func (*binaryClassGlXSwapBuffers) Schema() *schema.Class       { return schemaGlXSwapBuffers }
+
+var schemaGlXSwapBuffers = &schema.Class{
+	TypeID: binaryIDGlXSwapBuffers,
+	Name:   "GlXSwapBuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Display", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Drawable", Type: &schema.Primitive{Name: "GLXDrawable", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassGlobals struct{}
 
@@ -17287,6 +19884,21 @@ func (*binaryClassGlobals) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlobals(d, obj.(*Globals))
 }
 func (*binaryClassGlobals) Skip(d binary.Decoder) error { return doSkipGlobals(d) }
+func (*binaryClassGlobals) Schema() *schema.Class       { return schemaGlobals }
+
+var schemaGlobals = &schema.Class{
+	TypeID: binaryIDGlobals,
+	Name:   "Globals",
+	Fields: []schema.Field{
+		schema.Field{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		schema.Field{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
+		schema.Field{Declared: "Contexts", Type: &schema.Map{Alias: "ContextPtr_ThreadIDMap", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		schema.Field{Declared: "EGLContexts", Type: &schema.Map{Alias: "ContextPtr_EGLContextMap", KeyType: &schema.Primitive{Name: "EGLContext", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		schema.Field{Declared: "GLXContexts", Type: &schema.Map{Alias: "ContextPtr_GLXContextMap", KeyType: &schema.Primitive{Name: "GLXContext", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		schema.Field{Declared: "WGLContexts", Type: &schema.Map{Alias: "ContextPtr_HGLRCMap", KeyType: &schema.Primitive{Name: "HGLRC", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		schema.Field{Declared: "CGLContexts", Type: &schema.Map{Alias: "ContextPtr_CGLContextObjMap", KeyType: &schema.Primitive{Name: "CGLContextObj", Method: schema.Uint64}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+	},
+}
 
 type binaryClassReplayBindRenderer struct{}
 
@@ -17326,6 +19938,15 @@ func (*binaryClassReplayBindRenderer) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeReplayBindRenderer(d, obj.(*ReplayBindRenderer))
 }
 func (*binaryClassReplayBindRenderer) Skip(d binary.Decoder) error { return doSkipReplayBindRenderer(d) }
+func (*binaryClassReplayBindRenderer) Schema() *schema.Class       { return schemaReplayBindRenderer }
+
+var schemaReplayBindRenderer = &schema.Class{
+	TypeID: binaryIDReplayBindRenderer,
+	Name:   "ReplayBindRenderer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassReplayCreateRenderer struct{}
 
@@ -17367,6 +19988,15 @@ func (*binaryClassReplayCreateRenderer) DecodeTo(d binary.Decoder, obj binary.Ob
 func (*binaryClassReplayCreateRenderer) Skip(d binary.Decoder) error {
 	return doSkipReplayCreateRenderer(d)
 }
+func (*binaryClassReplayCreateRenderer) Schema() *schema.Class { return schemaReplayCreateRenderer }
+
+var schemaReplayCreateRenderer = &schema.Class{
+	TypeID: binaryIDReplayCreateRenderer,
+	Name:   "ReplayCreateRenderer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassStartTimer struct{}
 
@@ -17406,6 +20036,15 @@ func (*binaryClassStartTimer) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeStartTimer(d, obj.(*StartTimer))
 }
 func (*binaryClassStartTimer) Skip(d binary.Decoder) error { return doSkipStartTimer(d) }
+func (*binaryClassStartTimer) Schema() *schema.Class       { return schemaStartTimer }
+
+var schemaStartTimer = &schema.Class{
+	TypeID: binaryIDStartTimer,
+	Name:   "StartTimer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
 
 type binaryClassStopTimer struct{}
 
@@ -17456,6 +20095,16 @@ func (*binaryClassStopTimer) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeStopTimer(d, obj.(*StopTimer))
 }
 func (*binaryClassStopTimer) Skip(d binary.Decoder) error { return doSkipStopTimer(d) }
+func (*binaryClassStopTimer) Schema() *schema.Class       { return schemaStopTimer }
+
+var schemaStopTimer = &schema.Class{
+	TypeID: binaryIDStopTimer,
+	Name:   "StopTimer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassWglCreateContext struct{}
 
@@ -17506,6 +20155,16 @@ func (*binaryClassWglCreateContext) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeWglCreateContext(d, obj.(*WglCreateContext))
 }
 func (*binaryClassWglCreateContext) Skip(d binary.Decoder) error { return doSkipWglCreateContext(d) }
+func (*binaryClassWglCreateContext) Schema() *schema.Class       { return schemaWglCreateContext }
+
+var schemaWglCreateContext = &schema.Class{
+	TypeID: binaryIDWglCreateContext,
+	Name:   "WglCreateContext",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Hdc", Type: &schema.Primitive{Name: "HDC", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "HGLRC", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassWglCreateContextAttribsARB struct{}
 
@@ -17602,6 +20261,20 @@ func (*binaryClassWglCreateContextAttribsARB) DecodeTo(d binary.Decoder, obj bin
 func (*binaryClassWglCreateContextAttribsARB) Skip(d binary.Decoder) error {
 	return doSkipWglCreateContextAttribsARB(d)
 }
+func (*binaryClassWglCreateContextAttribsARB) Schema() *schema.Class {
+	return schemaWglCreateContextAttribsARB
+}
+
+var schemaWglCreateContextAttribsARB = &schema.Class{
+	TypeID: binaryIDWglCreateContextAttribsARB,
+	Name:   "WglCreateContextAttribsARB",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Hdc", Type: &schema.Primitive{Name: "HDC", Method: schema.Uint64}},
+		schema.Field{Declared: "HShareContext", Type: &schema.Primitive{Name: "HGLRC", Method: schema.Uint64}},
+		schema.Field{Declared: "AttribList", Type: &schema.Slice{Alias: "IntArray", ValueType: &schema.Primitive{Name: "int64", Method: schema.Int64}}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "HGLRC", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassWglMakeCurrent struct{}
 
@@ -17663,6 +20336,17 @@ func (*binaryClassWglMakeCurrent) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeWglMakeCurrent(d, obj.(*WglMakeCurrent))
 }
 func (*binaryClassWglMakeCurrent) Skip(d binary.Decoder) error { return doSkipWglMakeCurrent(d) }
+func (*binaryClassWglMakeCurrent) Schema() *schema.Class       { return schemaWglMakeCurrent }
+
+var schemaWglMakeCurrent = &schema.Class{
+	TypeID: binaryIDWglMakeCurrent,
+	Name:   "WglMakeCurrent",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Hdc", Type: &schema.Primitive{Name: "HDC", Method: schema.Uint64}},
+		schema.Field{Declared: "Hglrc", Type: &schema.Primitive{Name: "HGLRC", Method: schema.Uint64}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "BOOL", Method: schema.Int64}},
+	},
+}
 
 type binaryClassWglSwapBuffers struct{}
 
@@ -17702,3 +20386,12 @@ func (*binaryClassWglSwapBuffers) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeWglSwapBuffers(d, obj.(*WglSwapBuffers))
 }
 func (*binaryClassWglSwapBuffers) Skip(d binary.Decoder) error { return doSkipWglSwapBuffers(d) }
+func (*binaryClassWglSwapBuffers) Schema() *schema.Class       { return schemaWglSwapBuffers }
+
+var schemaWglSwapBuffers = &schema.Class{
+	TypeID: binaryIDWglSwapBuffers,
+	Name:   "WglSwapBuffers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Hdc", Type: &schema.Primitive{Name: "HDC", Method: schema.Uint64}},
+	},
+}

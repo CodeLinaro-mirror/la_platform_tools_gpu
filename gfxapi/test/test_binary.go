@@ -8,6 +8,7 @@ package test
 import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
@@ -169,6 +170,15 @@ func (*binaryClassCmdArrayOfFloat) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeCmdArrayOfFloat(d, obj.(*CmdArrayOfFloat))
 }
 func (*binaryClassCmdArrayOfFloat) Skip(d binary.Decoder) error { return doSkipCmdArrayOfFloat(d) }
+func (*binaryClassCmdArrayOfFloat) Schema() *schema.Class       { return schemaCmdArrayOfFloat }
+
+var schemaCmdArrayOfFloat = &schema.Class{
+	TypeID: binaryIDCmdArrayOfFloat,
+	Name:   "CmdArrayOfFloat",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+	},
+}
 
 type binaryClassCmdBool struct{}
 
@@ -208,6 +218,15 @@ func (*binaryClassCmdBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdBool(d, obj.(*CmdBool))
 }
 func (*binaryClassCmdBool) Skip(d binary.Decoder) error { return doSkipCmdBool(d) }
+func (*binaryClassCmdBool) Schema() *schema.Class       { return schemaCmdBool }
+
+var schemaCmdBool = &schema.Class{
+	TypeID: binaryIDCmdBool,
+	Name:   "CmdBool",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassCmdF32 struct{}
 
@@ -247,6 +266,15 @@ func (*binaryClassCmdF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdF32(d, obj.(*CmdF32))
 }
 func (*binaryClassCmdF32) Skip(d binary.Decoder) error { return doSkipCmdF32(d) }
+func (*binaryClassCmdF32) Schema() *schema.Class       { return schemaCmdF32 }
+
+var schemaCmdF32 = &schema.Class{
+	TypeID: binaryIDCmdF32,
+	Name:   "CmdF32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassCmdF64 struct{}
 
@@ -286,6 +314,15 @@ func (*binaryClassCmdF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdF64(d, obj.(*CmdF64))
 }
 func (*binaryClassCmdF64) Skip(d binary.Decoder) error { return doSkipCmdF64(d) }
+func (*binaryClassCmdF64) Schema() *schema.Class       { return schemaCmdF64 }
+
+var schemaCmdF64 = &schema.Class{
+	TypeID: binaryIDCmdF64,
+	Name:   "CmdF64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
+}
 
 type binaryClassCmdPointer struct{}
 
@@ -325,6 +362,15 @@ func (*binaryClassCmdPointer) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdPointer(d, obj.(*CmdPointer))
 }
 func (*binaryClassCmdPointer) Skip(d binary.Decoder) error { return doSkipCmdPointer(d) }
+func (*binaryClassCmdPointer) Schema() *schema.Class       { return schemaCmdPointer }
+
+var schemaCmdPointer = &schema.Class{
+	TypeID: binaryIDCmdPointer,
+	Name:   "CmdPointer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassCmdS16 struct{}
 
@@ -364,6 +410,15 @@ func (*binaryClassCmdS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdS16(d, obj.(*CmdS16))
 }
 func (*binaryClassCmdS16) Skip(d binary.Decoder) error { return doSkipCmdS16(d) }
+func (*binaryClassCmdS16) Schema() *schema.Class       { return schemaCmdS16 }
+
+var schemaCmdS16 = &schema.Class{
+	TypeID: binaryIDCmdS16,
+	Name:   "CmdS16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
+	},
+}
 
 type binaryClassCmdS32 struct{}
 
@@ -403,6 +458,15 @@ func (*binaryClassCmdS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdS32(d, obj.(*CmdS32))
 }
 func (*binaryClassCmdS32) Skip(d binary.Decoder) error { return doSkipCmdS32(d) }
+func (*binaryClassCmdS32) Schema() *schema.Class       { return schemaCmdS32 }
+
+var schemaCmdS32 = &schema.Class{
+	TypeID: binaryIDCmdS32,
+	Name:   "CmdS32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassCmdS64 struct{}
 
@@ -442,6 +506,15 @@ func (*binaryClassCmdS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdS64(d, obj.(*CmdS64))
 }
 func (*binaryClassCmdS64) Skip(d binary.Decoder) error { return doSkipCmdS64(d) }
+func (*binaryClassCmdS64) Schema() *schema.Class       { return schemaCmdS64 }
+
+var schemaCmdS64 = &schema.Class{
+	TypeID: binaryIDCmdS64,
+	Name:   "CmdS64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
 
 type binaryClassCmdS8 struct{}
 
@@ -481,6 +554,15 @@ func (*binaryClassCmdS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdS8(d, obj.(*CmdS8))
 }
 func (*binaryClassCmdS8) Skip(d binary.Decoder) error { return doSkipCmdS8(d) }
+func (*binaryClassCmdS8) Schema() *schema.Class       { return schemaCmdS8 }
+
+var schemaCmdS8 = &schema.Class{
+	TypeID: binaryIDCmdS8,
+	Name:   "CmdS8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+	},
+}
 
 type binaryClassCmdString struct{}
 
@@ -520,6 +602,15 @@ func (*binaryClassCmdString) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeCmdString(d, obj.(*CmdString))
 }
 func (*binaryClassCmdString) Skip(d binary.Decoder) error { return doSkipCmdString(d) }
+func (*binaryClassCmdString) Schema() *schema.Class       { return schemaCmdString }
+
+var schemaCmdString = &schema.Class{
+	TypeID: binaryIDCmdString,
+	Name:   "CmdString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassCmdU16 struct{}
 
@@ -559,6 +650,15 @@ func (*binaryClassCmdU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdU16(d, obj.(*CmdU16))
 }
 func (*binaryClassCmdU16) Skip(d binary.Decoder) error { return doSkipCmdU16(d) }
+func (*binaryClassCmdU16) Schema() *schema.Class       { return schemaCmdU16 }
+
+var schemaCmdU16 = &schema.Class{
+	TypeID: binaryIDCmdU16,
+	Name:   "CmdU16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+	},
+}
 
 type binaryClassCmdU32 struct{}
 
@@ -598,6 +698,15 @@ func (*binaryClassCmdU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdU32(d, obj.(*CmdU32))
 }
 func (*binaryClassCmdU32) Skip(d binary.Decoder) error { return doSkipCmdU32(d) }
+func (*binaryClassCmdU32) Schema() *schema.Class       { return schemaCmdU32 }
+
+var schemaCmdU32 = &schema.Class{
+	TypeID: binaryIDCmdU32,
+	Name:   "CmdU32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCmdU64 struct{}
 
@@ -637,6 +746,15 @@ func (*binaryClassCmdU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdU64(d, obj.(*CmdU64))
 }
 func (*binaryClassCmdU64) Skip(d binary.Decoder) error { return doSkipCmdU64(d) }
+func (*binaryClassCmdU64) Schema() *schema.Class       { return schemaCmdU64 }
+
+var schemaCmdU64 = &schema.Class{
+	TypeID: binaryIDCmdU64,
+	Name:   "CmdU64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassCmdU8 struct{}
 
@@ -676,6 +794,15 @@ func (*binaryClassCmdU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdU8(d, obj.(*CmdU8))
 }
 func (*binaryClassCmdU8) Skip(d binary.Decoder) error { return doSkipCmdU8(d) }
+func (*binaryClassCmdU8) Schema() *schema.Class       { return schemaCmdU8 }
+
+var schemaCmdU8 = &schema.Class{
+	TypeID: binaryIDCmdU8,
+	Name:   "CmdU8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
 
 type binaryClassCmdVoid struct{}
 
@@ -704,6 +831,13 @@ func (*binaryClassCmdVoid) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeCmdVoid(d, obj.(*CmdVoid))
 }
 func (*binaryClassCmdVoid) Skip(d binary.Decoder) error { return doSkipCmdVoid(d) }
+func (*binaryClassCmdVoid) Schema() *schema.Class       { return schemaCmdVoid }
+
+var schemaCmdVoid = &schema.Class{
+	TypeID: binaryIDCmdVoid,
+	Name:   "CmdVoid",
+	Fields: []schema.Field{},
+}
 
 type binaryClassCmdVoid3Arrays struct{}
 
@@ -819,6 +953,17 @@ func (*binaryClassCmdVoid3Arrays) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeCmdVoid3Arrays(d, obj.(*CmdVoid3Arrays))
 }
 func (*binaryClassCmdVoid3Arrays) Skip(d binary.Decoder) error { return doSkipCmdVoid3Arrays(d) }
+func (*binaryClassCmdVoid3Arrays) Schema() *schema.Class       { return schemaCmdVoid3Arrays }
+
+var schemaCmdVoid3Arrays = &schema.Class{
+	TypeID: binaryIDCmdVoid3Arrays,
+	Name:   "CmdVoid3Arrays",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "S8Array", ValueType: &schema.Primitive{Name: "int8", Method: schema.Int8}}},
+		schema.Field{Declared: "B", Type: &schema.Slice{Alias: "StringArray", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+		schema.Field{Declared: "C", Type: &schema.Slice{Alias: "BoolArray", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+	},
+}
 
 type binaryClassCmdVoid3Remapped struct{}
 
@@ -880,6 +1025,17 @@ func (*binaryClassCmdVoid3Remapped) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeCmdVoid3Remapped(d, obj.(*CmdVoid3Remapped))
 }
 func (*binaryClassCmdVoid3Remapped) Skip(d binary.Decoder) error { return doSkipCmdVoid3Remapped(d) }
+func (*binaryClassCmdVoid3Remapped) Schema() *schema.Class       { return schemaCmdVoid3Remapped }
+
+var schemaCmdVoid3Remapped = &schema.Class{
+	TypeID: binaryIDCmdVoid3Remapped,
+	Name:   "CmdVoid3Remapped",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCmdVoid3Strings struct{}
 
@@ -941,6 +1097,17 @@ func (*binaryClassCmdVoid3Strings) DecodeTo(d binary.Decoder, obj binary.Object)
 	return doDecodeCmdVoid3Strings(d, obj.(*CmdVoid3Strings))
 }
 func (*binaryClassCmdVoid3Strings) Skip(d binary.Decoder) error { return doSkipCmdVoid3Strings(d) }
+func (*binaryClassCmdVoid3Strings) Schema() *schema.Class       { return schemaCmdVoid3Strings }
+
+var schemaCmdVoid3Strings = &schema.Class{
+	TypeID: binaryIDCmdVoid3Strings,
+	Name:   "CmdVoid3Strings",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassCmdVoidArrayOfStrings struct{}
 
@@ -1000,6 +1167,15 @@ func (*binaryClassCmdVoidArrayOfStrings) DecodeTo(d binary.Decoder, obj binary.O
 func (*binaryClassCmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
 	return doSkipCmdVoidArrayOfStrings(d)
 }
+func (*binaryClassCmdVoidArrayOfStrings) Schema() *schema.Class { return schemaCmdVoidArrayOfStrings }
+
+var schemaCmdVoidArrayOfStrings = &schema.Class{
+	TypeID: binaryIDCmdVoidArrayOfStrings,
+	Name:   "CmdVoidArrayOfStrings",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "StringArray", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
+	},
+}
 
 type binaryClassCmdVoidBool struct{}
 
@@ -1039,6 +1215,15 @@ func (*binaryClassCmdVoidBool) DecodeTo(d binary.Decoder, obj binary.Object) err
 	return doDecodeCmdVoidBool(d, obj.(*CmdVoidBool))
 }
 func (*binaryClassCmdVoidBool) Skip(d binary.Decoder) error { return doSkipCmdVoidBool(d) }
+func (*binaryClassCmdVoidBool) Schema() *schema.Class       { return schemaCmdVoidBool }
+
+var schemaCmdVoidBool = &schema.Class{
+	TypeID: binaryIDCmdVoidBool,
+	Name:   "CmdVoidBool",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassCmdVoidF32 struct{}
 
@@ -1078,6 +1263,15 @@ func (*binaryClassCmdVoidF32) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidF32(d, obj.(*CmdVoidF32))
 }
 func (*binaryClassCmdVoidF32) Skip(d binary.Decoder) error { return doSkipCmdVoidF32(d) }
+func (*binaryClassCmdVoidF32) Schema() *schema.Class       { return schemaCmdVoidF32 }
+
+var schemaCmdVoidF32 = &schema.Class{
+	TypeID: binaryIDCmdVoidF32,
+	Name:   "CmdVoidF32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassCmdVoidF64 struct{}
 
@@ -1117,6 +1311,15 @@ func (*binaryClassCmdVoidF64) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidF64(d, obj.(*CmdVoidF64))
 }
 func (*binaryClassCmdVoidF64) Skip(d binary.Decoder) error { return doSkipCmdVoidF64(d) }
+func (*binaryClassCmdVoidF64) Schema() *schema.Class       { return schemaCmdVoidF64 }
+
+var schemaCmdVoidF64 = &schema.Class{
+	TypeID: binaryIDCmdVoidF64,
+	Name:   "CmdVoidF64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
+}
 
 type binaryClassCmdVoidOut3Remapped struct{}
 
@@ -1180,6 +1383,17 @@ func (*binaryClassCmdVoidOut3Remapped) DecodeTo(d binary.Decoder, obj binary.Obj
 func (*binaryClassCmdVoidOut3Remapped) Skip(d binary.Decoder) error {
 	return doSkipCmdVoidOut3Remapped(d)
 }
+func (*binaryClassCmdVoidOut3Remapped) Schema() *schema.Class { return schemaCmdVoidOut3Remapped }
+
+var schemaCmdVoidOut3Remapped = &schema.Class{
+	TypeID: binaryIDCmdVoidOut3Remapped,
+	Name:   "CmdVoidOut3Remapped",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCmdVoidOut3Strings struct{}
 
@@ -1241,6 +1455,17 @@ func (*binaryClassCmdVoidOut3Strings) DecodeTo(d binary.Decoder, obj binary.Obje
 	return doDecodeCmdVoidOut3Strings(d, obj.(*CmdVoidOut3Strings))
 }
 func (*binaryClassCmdVoidOut3Strings) Skip(d binary.Decoder) error { return doSkipCmdVoidOut3Strings(d) }
+func (*binaryClassCmdVoidOut3Strings) Schema() *schema.Class       { return schemaCmdVoidOut3Strings }
+
+var schemaCmdVoidOut3Strings = &schema.Class{
+	TypeID: binaryIDCmdVoidOut3Strings,
+	Name:   "CmdVoidOut3Strings",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassCmdVoidOutArrayOfRemapped struct{}
 
@@ -1300,6 +1525,17 @@ func (*binaryClassCmdVoidOutArrayOfRemapped) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassCmdVoidOutArrayOfRemapped) Skip(d binary.Decoder) error {
 	return doSkipCmdVoidOutArrayOfRemapped(d)
 }
+func (*binaryClassCmdVoidOutArrayOfRemapped) Schema() *schema.Class {
+	return schemaCmdVoidOutArrayOfRemapped
+}
+
+var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
+	TypeID: binaryIDCmdVoidOutArrayOfRemapped,
+	Name:   "CmdVoidOutArrayOfRemapped",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "RemappedArray", ValueType: &schema.Primitive{Name: "remapped", Method: schema.Uint32}}},
+	},
+}
 
 type binaryClassCmdVoidOutBool struct{}
 
@@ -1339,6 +1575,15 @@ func (*binaryClassCmdVoidOutBool) DecodeTo(d binary.Decoder, obj binary.Object) 
 	return doDecodeCmdVoidOutBool(d, obj.(*CmdVoidOutBool))
 }
 func (*binaryClassCmdVoidOutBool) Skip(d binary.Decoder) error { return doSkipCmdVoidOutBool(d) }
+func (*binaryClassCmdVoidOutBool) Schema() *schema.Class       { return schemaCmdVoidOutBool }
+
+var schemaCmdVoidOutBool = &schema.Class{
+	TypeID: binaryIDCmdVoidOutBool,
+	Name:   "CmdVoidOutBool",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassCmdVoidOutF32 struct{}
 
@@ -1378,6 +1623,15 @@ func (*binaryClassCmdVoidOutF32) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutF32(d, obj.(*CmdVoidOutF32))
 }
 func (*binaryClassCmdVoidOutF32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF32(d) }
+func (*binaryClassCmdVoidOutF32) Schema() *schema.Class       { return schemaCmdVoidOutF32 }
+
+var schemaCmdVoidOutF32 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutF32,
+	Name:   "CmdVoidOutF32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+	},
+}
 
 type binaryClassCmdVoidOutF64 struct{}
 
@@ -1417,6 +1671,15 @@ func (*binaryClassCmdVoidOutF64) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutF64(d, obj.(*CmdVoidOutF64))
 }
 func (*binaryClassCmdVoidOutF64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF64(d) }
+func (*binaryClassCmdVoidOutF64) Schema() *schema.Class       { return schemaCmdVoidOutF64 }
+
+var schemaCmdVoidOutF64 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutF64,
+	Name:   "CmdVoidOutF64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
+}
 
 type binaryClassCmdVoidOutFixedSizeBuffer struct{}
 
@@ -1458,6 +1721,17 @@ func (*binaryClassCmdVoidOutFixedSizeBuffer) DecodeTo(d binary.Decoder, obj bina
 func (*binaryClassCmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
 	return doSkipCmdVoidOutFixedSizeBuffer(d)
 }
+func (*binaryClassCmdVoidOutFixedSizeBuffer) Schema() *schema.Class {
+	return schemaCmdVoidOutFixedSizeBuffer
+}
+
+var schemaCmdVoidOutFixedSizeBuffer = &schema.Class{
+	TypeID: binaryIDCmdVoidOutFixedSizeBuffer,
+	Name:   "CmdVoidOutFixedSizeBuffer",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassCmdVoidOutS16 struct{}
 
@@ -1497,6 +1771,15 @@ func (*binaryClassCmdVoidOutS16) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutS16(d, obj.(*CmdVoidOutS16))
 }
 func (*binaryClassCmdVoidOutS16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS16(d) }
+func (*binaryClassCmdVoidOutS16) Schema() *schema.Class       { return schemaCmdVoidOutS16 }
+
+var schemaCmdVoidOutS16 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutS16,
+	Name:   "CmdVoidOutS16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
+	},
+}
 
 type binaryClassCmdVoidOutS32 struct{}
 
@@ -1536,6 +1819,15 @@ func (*binaryClassCmdVoidOutS32) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutS32(d, obj.(*CmdVoidOutS32))
 }
 func (*binaryClassCmdVoidOutS32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS32(d) }
+func (*binaryClassCmdVoidOutS32) Schema() *schema.Class       { return schemaCmdVoidOutS32 }
+
+var schemaCmdVoidOutS32 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutS32,
+	Name:   "CmdVoidOutS32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassCmdVoidOutS64 struct{}
 
@@ -1575,6 +1867,15 @@ func (*binaryClassCmdVoidOutS64) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutS64(d, obj.(*CmdVoidOutS64))
 }
 func (*binaryClassCmdVoidOutS64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS64(d) }
+func (*binaryClassCmdVoidOutS64) Schema() *schema.Class       { return schemaCmdVoidOutS64 }
+
+var schemaCmdVoidOutS64 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutS64,
+	Name:   "CmdVoidOutS64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
 
 type binaryClassCmdVoidOutS8 struct{}
 
@@ -1614,6 +1915,15 @@ func (*binaryClassCmdVoidOutS8) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeCmdVoidOutS8(d, obj.(*CmdVoidOutS8))
 }
 func (*binaryClassCmdVoidOutS8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS8(d) }
+func (*binaryClassCmdVoidOutS8) Schema() *schema.Class       { return schemaCmdVoidOutS8 }
+
+var schemaCmdVoidOutS8 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutS8,
+	Name:   "CmdVoidOutS8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+	},
+}
 
 type binaryClassCmdVoidOutString struct{}
 
@@ -1653,6 +1963,15 @@ func (*binaryClassCmdVoidOutString) DecodeTo(d binary.Decoder, obj binary.Object
 	return doDecodeCmdVoidOutString(d, obj.(*CmdVoidOutString))
 }
 func (*binaryClassCmdVoidOutString) Skip(d binary.Decoder) error { return doSkipCmdVoidOutString(d) }
+func (*binaryClassCmdVoidOutString) Schema() *schema.Class       { return schemaCmdVoidOutString }
+
+var schemaCmdVoidOutString = &schema.Class{
+	TypeID: binaryIDCmdVoidOutString,
+	Name:   "CmdVoidOutString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassCmdVoidOutU16 struct{}
 
@@ -1692,6 +2011,15 @@ func (*binaryClassCmdVoidOutU16) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutU16(d, obj.(*CmdVoidOutU16))
 }
 func (*binaryClassCmdVoidOutU16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU16(d) }
+func (*binaryClassCmdVoidOutU16) Schema() *schema.Class       { return schemaCmdVoidOutU16 }
+
+var schemaCmdVoidOutU16 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutU16,
+	Name:   "CmdVoidOutU16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+	},
+}
 
 type binaryClassCmdVoidOutU32 struct{}
 
@@ -1731,6 +2059,15 @@ func (*binaryClassCmdVoidOutU32) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutU32(d, obj.(*CmdVoidOutU32))
 }
 func (*binaryClassCmdVoidOutU32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU32(d) }
+func (*binaryClassCmdVoidOutU32) Schema() *schema.Class       { return schemaCmdVoidOutU32 }
+
+var schemaCmdVoidOutU32 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutU32,
+	Name:   "CmdVoidOutU32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCmdVoidOutU64 struct{}
 
@@ -1770,6 +2107,15 @@ func (*binaryClassCmdVoidOutU64) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidOutU64(d, obj.(*CmdVoidOutU64))
 }
 func (*binaryClassCmdVoidOutU64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU64(d) }
+func (*binaryClassCmdVoidOutU64) Schema() *schema.Class       { return schemaCmdVoidOutU64 }
+
+var schemaCmdVoidOutU64 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutU64,
+	Name:   "CmdVoidOutU64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassCmdVoidOutU8 struct{}
 
@@ -1809,6 +2155,15 @@ func (*binaryClassCmdVoidOutU8) DecodeTo(d binary.Decoder, obj binary.Object) er
 	return doDecodeCmdVoidOutU8(d, obj.(*CmdVoidOutU8))
 }
 func (*binaryClassCmdVoidOutU8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU8(d) }
+func (*binaryClassCmdVoidOutU8) Schema() *schema.Class       { return schemaCmdVoidOutU8 }
+
+var schemaCmdVoidOutU8 = &schema.Class{
+	TypeID: binaryIDCmdVoidOutU8,
+	Name:   "CmdVoidOutU8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
 
 type binaryClassCmdVoidS16 struct{}
 
@@ -1848,6 +2203,15 @@ func (*binaryClassCmdVoidS16) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidS16(d, obj.(*CmdVoidS16))
 }
 func (*binaryClassCmdVoidS16) Skip(d binary.Decoder) error { return doSkipCmdVoidS16(d) }
+func (*binaryClassCmdVoidS16) Schema() *schema.Class       { return schemaCmdVoidS16 }
+
+var schemaCmdVoidS16 = &schema.Class{
+	TypeID: binaryIDCmdVoidS16,
+	Name:   "CmdVoidS16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
+	},
+}
 
 type binaryClassCmdVoidS32 struct{}
 
@@ -1887,6 +2251,15 @@ func (*binaryClassCmdVoidS32) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidS32(d, obj.(*CmdVoidS32))
 }
 func (*binaryClassCmdVoidS32) Skip(d binary.Decoder) error { return doSkipCmdVoidS32(d) }
+func (*binaryClassCmdVoidS32) Schema() *schema.Class       { return schemaCmdVoidS32 }
+
+var schemaCmdVoidS32 = &schema.Class{
+	TypeID: binaryIDCmdVoidS32,
+	Name:   "CmdVoidS32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+	},
+}
 
 type binaryClassCmdVoidS64 struct{}
 
@@ -1926,6 +2299,15 @@ func (*binaryClassCmdVoidS64) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidS64(d, obj.(*CmdVoidS64))
 }
 func (*binaryClassCmdVoidS64) Skip(d binary.Decoder) error { return doSkipCmdVoidS64(d) }
+func (*binaryClassCmdVoidS64) Schema() *schema.Class       { return schemaCmdVoidS64 }
+
+var schemaCmdVoidS64 = &schema.Class{
+	TypeID: binaryIDCmdVoidS64,
+	Name:   "CmdVoidS64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
 
 type binaryClassCmdVoidS8 struct{}
 
@@ -1965,6 +2347,15 @@ func (*binaryClassCmdVoidS8) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeCmdVoidS8(d, obj.(*CmdVoidS8))
 }
 func (*binaryClassCmdVoidS8) Skip(d binary.Decoder) error { return doSkipCmdVoidS8(d) }
+func (*binaryClassCmdVoidS8) Schema() *schema.Class       { return schemaCmdVoidS8 }
+
+var schemaCmdVoidS8 = &schema.Class{
+	TypeID: binaryIDCmdVoidS8,
+	Name:   "CmdVoidS8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
+	},
+}
 
 type binaryClassCmdVoidString struct{}
 
@@ -2004,6 +2395,15 @@ func (*binaryClassCmdVoidString) DecodeTo(d binary.Decoder, obj binary.Object) e
 	return doDecodeCmdVoidString(d, obj.(*CmdVoidString))
 }
 func (*binaryClassCmdVoidString) Skip(d binary.Decoder) error { return doSkipCmdVoidString(d) }
+func (*binaryClassCmdVoidString) Schema() *schema.Class       { return schemaCmdVoidString }
+
+var schemaCmdVoidString = &schema.Class{
+	TypeID: binaryIDCmdVoidString,
+	Name:   "CmdVoidString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
 
 type binaryClassCmdVoidU16 struct{}
 
@@ -2043,6 +2443,15 @@ func (*binaryClassCmdVoidU16) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidU16(d, obj.(*CmdVoidU16))
 }
 func (*binaryClassCmdVoidU16) Skip(d binary.Decoder) error { return doSkipCmdVoidU16(d) }
+func (*binaryClassCmdVoidU16) Schema() *schema.Class       { return schemaCmdVoidU16 }
+
+var schemaCmdVoidU16 = &schema.Class{
+	TypeID: binaryIDCmdVoidU16,
+	Name:   "CmdVoidU16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
+	},
+}
 
 type binaryClassCmdVoidU32 struct{}
 
@@ -2082,6 +2491,15 @@ func (*binaryClassCmdVoidU32) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidU32(d, obj.(*CmdVoidU32))
 }
 func (*binaryClassCmdVoidU32) Skip(d binary.Decoder) error { return doSkipCmdVoidU32(d) }
+func (*binaryClassCmdVoidU32) Schema() *schema.Class       { return schemaCmdVoidU32 }
+
+var schemaCmdVoidU32 = &schema.Class{
+	TypeID: binaryIDCmdVoidU32,
+	Name:   "CmdVoidU32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
 
 type binaryClassCmdVoidU64 struct{}
 
@@ -2121,6 +2539,15 @@ func (*binaryClassCmdVoidU64) DecodeTo(d binary.Decoder, obj binary.Object) erro
 	return doDecodeCmdVoidU64(d, obj.(*CmdVoidU64))
 }
 func (*binaryClassCmdVoidU64) Skip(d binary.Decoder) error { return doSkipCmdVoidU64(d) }
+func (*binaryClassCmdVoidU64) Schema() *schema.Class       { return schemaCmdVoidU64 }
+
+var schemaCmdVoidU64 = &schema.Class{
+	TypeID: binaryIDCmdVoidU64,
+	Name:   "CmdVoidU64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+	},
+}
 
 type binaryClassCmdVoidU8 struct{}
 
@@ -2160,6 +2587,15 @@ func (*binaryClassCmdVoidU8) DecodeTo(d binary.Decoder, obj binary.Object) error
 	return doDecodeCmdVoidU8(d, obj.(*CmdVoidU8))
 }
 func (*binaryClassCmdVoidU8) Skip(d binary.Decoder) error { return doSkipCmdVoidU8(d) }
+func (*binaryClassCmdVoidU8) Schema() *schema.Class       { return schemaCmdVoidU8 }
+
+var schemaCmdVoidU8 = &schema.Class{
+	TypeID: binaryIDCmdVoidU8,
+	Name:   "CmdVoidU8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
 
 type binaryClassGlobals struct{}
 
@@ -2188,3 +2624,10 @@ func (*binaryClassGlobals) DecodeTo(d binary.Decoder, obj binary.Object) error {
 	return doDecodeGlobals(d, obj.(*Globals))
 }
 func (*binaryClassGlobals) Skip(d binary.Decoder) error { return doSkipGlobals(d) }
+func (*binaryClassGlobals) Schema() *schema.Class       { return schemaGlobals }
+
+var schemaGlobals = &schema.Class{
+	TypeID: binaryIDGlobals,
+	Name:   "Globals",
+	Fields: []schema.Field{},
+}

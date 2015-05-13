@@ -23,6 +23,11 @@ import (
 // GoFile generates the all the go code for a file with a set of structs.
 func (g *Generator) GoFile(file *File) ([]byte, error) {
 	g.f.prefix = "Go."
+	if file.Package == "schema" {
+		g.f.schema = ""
+	} else {
+		g.f.schema = "schema."
+	}
 	b := &bytes.Buffer{}
 	if err := g.f.execute(g.f.prefix+"File", b, file); err != nil {
 		return nil, err
