@@ -112,8 +112,8 @@ func (d *database) SetBuilder(b builder) {
 func (d *database) StoreLink(to, id binary.ID, logger log.Logger) (err error) {
 	logger = logger.Enter("Database.StoreLink")
 	if config.DebugDatabase {
-		logger.Info("(to: %v, id: %v)", to, id)
-		defer func() { logger.Info("↪ err: %v", err) }()
+		logger.Infof("(to: %v, id: %v)", to, id)
+		defer func() { logger.Infof("↪ err: %v", err) }()
 	}
 
 	if to == id {
@@ -157,7 +157,7 @@ func (d *database) store(r binary.Object, logger log.Logger, metaType metaType, 
 func (d *database) storeDerived(r binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.storeDerived")
 	if config.DebugDatabase {
-		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
 	}
 	return d.store(r, logger, metaTypeDerived, d.derivedStore)
 }
@@ -165,7 +165,7 @@ func (d *database) storeDerived(r binary.Object, logger log.Logger) (id binary.I
 func (d *database) Store(r binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.Store")
 	if config.DebugDatabase {
-		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
 	}
 	return d.store(r, logger, metaTypeData, d.dataStore)
 }
@@ -173,8 +173,8 @@ func (d *database) Store(r binary.Object, logger log.Logger) (id binary.ID, err 
 func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Database.StoreRequest")
 	if config.DebugDatabase {
-		logger.Info("(%+v)", request)
-		defer func() { logger.Info("↪ id: %v, err: %v", id, err) }()
+		logger.Infof("(%+v)", request)
+		defer func() { logger.Infof("↪ id: %v, err: %v", id, err) }()
 	}
 
 	buf := &bytes.Buffer{}
@@ -196,7 +196,7 @@ func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id bi
 	if err == nil && metadata.Type == metaTypeLink {
 		// TODO: Check request data matches
 		if config.DebugDatabase {
-			logger.Info("Resource already built")
+			logger.Infof("Resource already built")
 		}
 		return requestId, nil
 	}
@@ -214,8 +214,8 @@ func (d *database) StoreRequest(request binary.Object, logger log.Logger) (id bi
 func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
 	logger = logger.Enter("Database.Load")
 	if config.DebugDatabase {
-		logger.Info("(id: %v)", id)
-		defer func() { logger.Info("↪ err: %v", err) }()
+		logger.Infof("(id: %v)", id)
+		defer func() { logger.Infof("↪ err: %v", err) }()
 	}
 
 	d.mutex.Lock()
@@ -246,7 +246,7 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 		return err
 	}
 	if config.DebugDatabase {
-		logger.Info("Metadata: %+v", metadata)
+		logger.Infof("Metadata: %+v", metadata)
 	}
 
 	switch metadata.Type {
@@ -254,7 +254,7 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 		return d.Load(metadata.LinkTo, logger, out)
 	case metaTypeLazy:
 		if config.DebugDatabase {
-			logger.Info("Recreating resource")
+			logger.Infof("Recreating resource")
 		}
 
 		// Begin building of the resource
@@ -282,7 +282,7 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 		return err
 	default:
 		err := fmt.Errorf("Unknown metadata type %v", metadata.Type)
-		logger.Error("%v", err)
+		logger.Errorf("%v", err)
 		return err
 	}
 }
@@ -290,8 +290,8 @@ func (d *database) Load(id binary.ID, logger log.Logger, out binary.Object) (err
 func (d *database) Contains(id binary.ID, logger log.Logger) (res bool) {
 	logger = logger.Enter("Database.Contains")
 	if config.DebugDatabase {
-		logger.Info("(id: %v)", id)
-		defer func() { logger.Info("↪ %v", res) }()
+		logger.Infof("(id: %v)", id)
+		defer func() { logger.Infof("↪ %v", res) }()
 	}
 	return d.metaStore.Contains(id)
 }

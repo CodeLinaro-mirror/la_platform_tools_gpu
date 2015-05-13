@@ -46,7 +46,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		// Check the RPC header
 		var h [4]byte
 		if err := d.Data(h[:]); err != nil || h != header {
-			logger.Error("%v", ErrInvalidHeader)
+			logger.Errorf("%v", ErrInvalidHeader)
 			e.Object(ErrInvalidHeader)
 			return
 		}
@@ -54,7 +54,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 		// Decode the call
 		val, err := d.Object()
 		if err != nil {
-			logger.Error("Error decoding call: %v", err)
+			logger.Errorf("Error decoding call: %v", err)
 			e.Object(NewError("Failed to decode call. Reason: %v", err))
 			return
 		}
@@ -64,7 +64,7 @@ func Serve(logger log.Logger, r io.Reader, w io.Writer, mtu int, handler Handler
 
 		// Encode the call result
 		if err := e.Object(res); err != nil {
-			logger.Error("Error encoding result for %T: %v", val, err)
+			logger.Errorf("Error encoding result for %T: %v", val, err)
 			e.Object(NewError("Failed to encode call result. Reason: %v", err))
 			return
 		}

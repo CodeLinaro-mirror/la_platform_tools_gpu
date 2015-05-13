@@ -82,7 +82,7 @@ func (t *transient) dropLocked(id binary.ID, logger log.Logger) {
 // Store a resource in the transient store. If the store gets large purge old info.
 func (t *transient) Store(r binary.Object, logger log.Logger) (id binary.ID, err error) {
 	logger = logger.Enter("Transient.Store")
-	defer func() { logger.Info("↪ id: %v, err: %v total_size: %v", id, err, t.size) }()
+	defer func() { logger.Infof("↪ id: %v, err: %v total_size: %v", id, err, t.size) }()
 
 	buf := &bytes.Buffer{}
 	enc := cyclic.Encoder(vle.Writer(buf))
@@ -132,8 +132,8 @@ func (t *transient) Store(r binary.Object, logger log.Logger) (id binary.ID, err
 // underlying store. If in the transient store, drop it and return it.
 func (t *transient) Load(id binary.ID, logger log.Logger, out binary.Object) (err error) {
 	logger = logger.Enter("Transient.Load")
-	logger.Info("(id: %v total_size: %v)", id, t.size)
-	defer func() { logger.Info("↪ err: %v total_size: %v", err, t.size) }()
+	logger.Infof("(id: %v total_size: %v)", id, t.size)
+	defer func() { logger.Infof("↪ err: %v total_size: %v", err, t.size) }()
 
 	t.mutex.Lock()
 	if entry, ok := t.entries[id]; ok {

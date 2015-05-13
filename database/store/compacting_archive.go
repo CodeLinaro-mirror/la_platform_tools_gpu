@@ -280,7 +280,7 @@ func CreateCompactingArchive(path string) Store {
 func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, logger log.Logger) (err error) {
 	if logger != nil {
 		logger = logger.Enter("Archive.Store")
-		logger.Info("id: %s size: %d", id, len(data))
+		logger.Infof("id: %s size: %d", id, len(data))
 	}
 	s.worker <- func() {
 		if prevRecord, ok := s.records[id]; ok {
@@ -316,7 +316,7 @@ func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, lo
 
 		if s.size > s.compactionSize && !s.compacting && s.waste*3 > s.compactionSize {
 			if logger != nil {
-				logger.Info("Archive starting a compaction. Size %v Waste %v",
+				logger.Infof("Archive starting a compaction. Size %v Waste %v",
 					s.size, s.waste)
 			}
 			s.compaction(logger)
@@ -327,7 +327,7 @@ func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, lo
 			kv := keyValue{id: id, buffer: data}
 			s.insertCh <- kv
 			if logger != nil {
-				logger.Info("Insert sent to compactor. Size %v", len(data))
+				logger.Infof("Insert sent to compactor. Size %v", len(data))
 			}
 		}
 	}
@@ -337,11 +337,11 @@ func (s *compactingArchive) Store(id binary.ID, _ binary.Object, data []byte, lo
 func (s *compactingArchive) Load(id binary.ID, logger log.Logger, out binary.Object) (size int, err error) {
 	if logger != nil {
 		logger = logger.Enter("Archive.Load")
-		logger.Info("Loading from archive: %s", id)
+		logger.Infof("Loading from archive: %s", id)
 		defer func() {
-			logger.Info("↪ size: %d, err: %v", size, err)
+			logger.Infof("↪ size: %d, err: %v", size, err)
 			if err := recover(); err != nil {
-				logger.Error("Panic when loading %v: %v", id, err)
+				logger.Errorf("Panic when loading %v: %v", id, err)
 				panic(err)
 			}
 		}()
@@ -418,7 +418,7 @@ func (s *compactingArchive) Delete(id binary.ID, logger log.Logger) {
 				kv := keyValue{id: id, buffer: empty}
 				s.insertCh <- kv
 				if logger != nil {
-					logger.Info("Delete sent to compactor.")
+					logger.Infof("Delete sent to compactor.")
 				}
 			}
 		}
@@ -551,19 +551,19 @@ func (s *compactingArchive) compaction(l log.Logger) error {
 		cleanupFun := func() {
 			err := dcompacting.Close()
 			if err != nil && l != nil {
-				l.Warning("Failed to close compacting data file")
+				l.Warningf("Failed to close compacting data file")
 			}
 			err = icompacting.Close()
 			if err != nil && l != nil {
-				l.Warning("Failed to close compacting index file")
+				l.Warningf("Failed to close compacting index file")
 			}
 			err = os.Remove(cdFn)
 			if err != nil && l != nil {
-				l.Warning("Failed to remove compacting data file")
+				l.Warningf("Failed to remove compacting data file")
 			}
 			err = os.Remove(ciFn)
 			if err != nil && l != nil {
-				l.Warning("Failed to remove compacting index file")
+				l.Warningf("Failed to remove compacting index file")
 			}
 		}
 
@@ -699,19 +699,19 @@ func (s *compactingArchive) compaction(l log.Logger) error {
 
 			if l != nil {
 				l = l.Enter("Compaction")
-				l.Info("After compacting Waste %v Size %v", s.waste, s.size)
-				l.Info("Write records to disk %v", afterWriteRecords.Sub(beforeWriteRecords))
-				l.Info("Num concurrent inserts %v size of inserts %v", numInserts, sizeInserts)
-				l.Info("Sync with worker %v", startSyncPart.Sub(afterWriteRecords))
-				l.Info("Catchup time %v", afterCatchup.Sub(startSyncPart))
-				l.Info("Flush to disk %v", afterFlush.Sub(beforeFlush))
-				l.Info("Flip and open %v", afterAll.Sub(afterCatchup))
-				l.Info("Total sync part %v", afterAll.Sub(startSyncPart))
-				l.Info("Total time %v", afterAll.Sub(beforeWriteRecords))
+				l.Infof("After compacting Waste %v Size %v", s.waste, s.size)
+				l.Infof("Write records to disk %v", afterWriteRecords.Sub(beforeWriteRecords))
+				l.Infof("Num concurrent inserts %v size of inserts %v", numInserts, sizeInserts)
+				l.Infof("Sync with worker %v", startSyncPart.Sub(afterWriteRecords))
+				l.Infof("Catchup time %v", afterCatchup.Sub(startSyncPart))
+				l.Infof("Flush to disk %v", afterFlush.Sub(beforeFlush))
+				l.Infof("Flip and open %v", afterAll.Sub(afterCatchup))
+				l.Infof("Total sync part %v", afterAll.Sub(startSyncPart))
+				l.Infof("Total time %v", afterAll.Sub(beforeWriteRecords))
 
-				l.Info("didFirstInsertPath %v", didFirstInsertPath)
-				l.Info("didSecondInsertPath %v", didSecondInsertPath)
-				l.Info("didThirdInsertPath %v", didThirdInsertPath)
+				l.Infof("didFirstInsertPath %v", didFirstInsertPath)
+				l.Infof("didSecondInsertPath %v", didSecondInsertPath)
+				l.Infof("didThirdInsertPath %v", didThirdInsertPath)
 			}
 		}
 
@@ -736,7 +736,7 @@ func (s *compactingArchive) compaction(l log.Logger) error {
 	}()
 
 	if l != nil {
-		l.Info("Compacting copy %v records: %v", len(recordsCopyArray), afterCopyRecords.Sub(beforeCopyRecords))
+		l.Infof("Compacting copy %v records: %v", len(recordsCopyArray), afterCopyRecords.Sub(beforeCopyRecords))
 	}
 
 	return err

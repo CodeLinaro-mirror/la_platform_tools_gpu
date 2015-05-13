@@ -251,7 +251,7 @@ func linkApk(inputs build.FileSet, output build.File, cfg cpp.Config, env build.
 
 	log := func(msg string, args ...interface{}) {}
 	if env.Verbose {
-		log = env.Logger.Info
+		log = env.Logger.Infof
 	}
 
 	// Create an intermediate directory to hold the files going into the apk.

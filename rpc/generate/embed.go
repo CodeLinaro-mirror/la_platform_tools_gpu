@@ -513,7 +513,7 @@ func (h {{$.Name}}) Valid() bool {
         if val, err = c.Send(&{{Macro "CallName" $c}}{ {{Macro "Arguments" $c}} }); err == nil {
           res = val.(*{{Macro "ResultName" $c}}).value
         } else {
-          l.Error("RPC {{$c.Name}} failed with error: %v", err)
+          l.Errorf("RPC {{$c.Name}} failed with error: %v", err)
         }
         return
       }
@@ -553,10 +553,10 @@ func (h {{$.Name}}) Valid() bool {
       l := l.Fork().Enter(fmt.Sprintf("%v", in))
       defer func() {
         if err := recover(); err == nil {
-          l.Info("↪ %v", res)
+          l.Infof("↪ %v", res)
         } else {
           msg := fmt.Sprintf("Panic: %v\n%v", err, string(debug.Stack()))
-          l.Error(msg)
+          l.Errorf(msg)
           res = rpc.NewError(msg)
         }
       }()

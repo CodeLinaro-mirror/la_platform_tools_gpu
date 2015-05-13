@@ -87,7 +87,7 @@ func (s unboundedArchive) Store(id binary.ID, _ binary.Object, data []byte, logg
 	if logger != nil {
 		logger = logger.Enter("unboundedArchive.Store")
 		if config.DebugDatabaseStores {
-			logger.Info("id: %s size: %d", id, len(data))
+			logger.Infof("id: %s size: %d", id, len(data))
 		}
 	}
 	s.worker <- func() {
@@ -124,14 +124,14 @@ func (s unboundedArchive) Load(id binary.ID, logger log.Logger, out binary.Objec
 	if logger != nil {
 		logger = logger.Enter("unboundedArchive.Load")
 		if config.DebugDatabaseStores {
-			logger.Info("Loading from unboundedArchive: %s", id)
+			logger.Infof("Loading from unboundedArchive: %s", id)
 		}
 		defer func() {
 			if config.DebugDatabaseStores {
-				logger.Info("↪ size: %d, err: %v", size, err)
+				logger.Infof("↪ size: %d, err: %v", size, err)
 			}
 			if err := recover(); err != nil {
-				logger.Error("Panic when loading %v: %v", id, err)
+				logger.Errorf("Panic when loading %v: %v", id, err)
 				panic(err)
 			}
 		}()

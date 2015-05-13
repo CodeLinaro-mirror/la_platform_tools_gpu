@@ -197,7 +197,7 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 		}
 	}
 	if env.Verbose {
-		logger.Info("%s %v", path, args)
+		logger.Infof("%s %v", path, args)
 	}
 
 	cmd := exec.Command(path, args...)
@@ -208,13 +208,13 @@ func (f File) ExecAt(env Environment, wd File, args ...string) error {
 	err := cmd.Run()
 	switch {
 	case err != nil:
-		logger.Error("\n\n%s\n--- %s failed: %v ---", string(buffer.Bytes()), f.Name(), err)
+		logger.Errorf("\n\n%s\n--- %s failed: %v ---", string(buffer.Bytes()), f.Name(), err)
 
 	case env.Verbose:
 		if msg := string(buffer.Bytes()); msg != "" {
-			logger.Info("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
+			logger.Infof("\n%s\n--- %s succeeded ---", string(buffer.Bytes()), f.Name())
 		} else {
-			logger.Info("%s succeeded", f.Name())
+			logger.Infof("%s succeeded", f.Name())
 		}
 	}
 	return err

@@ -162,7 +162,7 @@ func Compile(sources build.FileSet, cfg Config, env build.Environment) (build.Fi
 			objects[i] = object
 			wg.Done()
 			if env.Verbose {
-				env.Logger.Info("%s is up-to-date", object)
+				env.Logger.Infof("%s is up-to-date", object)
 			}
 		}
 	}
@@ -195,7 +195,7 @@ func StaticLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bui
 		return output, cfg.Toolchain.Archiver(objects, output, cfg, env)
 	} else {
 		if env.Verbose {
-			env.Logger.Info("%s is up-to-date", output)
+			env.Logger.Infof("%s is up-to-date", output)
 		}
 		return output, nil
 	}
@@ -234,7 +234,7 @@ func DynamicLibrary(inputs build.FileSet, cfg Config, env build.Environment) (bu
 		return output, cfg.Toolchain.DllLinker(objects, output, cfg, env)
 	} else {
 		if env.Verbose {
-			env.Logger.Info("%s is up-to-date", output)
+			env.Logger.Infof("%s is up-to-date", output)
 		}
 		return output, nil
 	}
@@ -273,7 +273,7 @@ func Executable(inputs build.FileSet, cfg Config, env build.Environment) (build.
 		return output, cfg.Toolchain.ExeLinker(objects, output, cfg, env)
 	} else {
 		if env.Verbose {
-			env.Logger.Info("%s is up-to-date", output)
+			env.Logger.Infof("%s is up-to-date", output)
 		}
 		return output, nil
 	}

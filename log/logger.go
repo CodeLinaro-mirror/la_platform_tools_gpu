@@ -19,15 +19,15 @@ package log
 type Logger interface {
 	// Info writes an information message to the logger. These message types are intented to be used
 	// for non-critial, expected events. Arguments are handled in the manner of fmt.Printf.
-	Info(msg string, args ...interface{})
+	Infof(msg string, args ...interface{})
 
 	// Warning writes a warning message to the logger. This is intented to be used for unexpected but
 	// non-critical events. Arguments are handled in the manner of fmt.Printf.
-	Warning(msg string, args ...interface{})
+	Warningf(msg string, args ...interface{})
 
 	// Error writes an error message to the logger. This is intented to be used for unexpected and
 	// critical error events. Arguments are handled in the manner of fmt.Printf.
-	Error(msg string, args ...interface{})
+	Errorf(msg string, args ...interface{})
 
 	// Enter creates a new logger scoped within the existing logger. This can be used to produce
 	// hierarchical log messages.

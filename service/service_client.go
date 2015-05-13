@@ -26,7 +26,7 @@ func (c client) Import(l log.Logger, name string, Data U8Array) (res CaptureId, 
 	if val, err = c.Send(&callImport{name: name, Data: Data}); err == nil {
 		res = val.(*resultImport).value
 	} else {
-		l.Error("RPC Import failed with error: %v", err)
+		l.Errorf("RPC Import failed with error: %v", err)
 	}
 	return
 }
@@ -36,7 +36,7 @@ func (c client) GetCaptures(l log.Logger) (res CaptureIdArray, err error) {
 	if val, err = c.Send(&callGetCaptures{}); err == nil {
 		res = val.(*resultGetCaptures).value
 	} else {
-		l.Error("RPC GetCaptures failed with error: %v", err)
+		l.Errorf("RPC GetCaptures failed with error: %v", err)
 	}
 	return
 }
@@ -46,7 +46,7 @@ func (c client) GetDevices(l log.Logger) (res DeviceIdArray, err error) {
 	if val, err = c.Send(&callGetDevices{}); err == nil {
 		res = val.(*resultGetDevices).value
 	} else {
-		l.Error("RPC GetDevices failed with error: %v", err)
+		l.Errorf("RPC GetDevices failed with error: %v", err)
 	}
 	return
 }
@@ -56,7 +56,7 @@ func (c client) GetState(l log.Logger, capture CaptureId, after uint64) (res Bin
 	if val, err = c.Send(&callGetState{capture: capture, after: after}); err == nil {
 		res = val.(*resultGetState).value
 	} else {
-		l.Error("RPC GetState failed with error: %v", err)
+		l.Errorf("RPC GetState failed with error: %v", err)
 	}
 	return
 }
@@ -66,7 +66,7 @@ func (c client) GetHierarchy(l log.Logger, capture CaptureId) (res HierarchyId, 
 	if val, err = c.Send(&callGetHierarchy{capture: capture}); err == nil {
 		res = val.(*resultGetHierarchy).value
 	} else {
-		l.Error("RPC GetHierarchy failed with error: %v", err)
+		l.Errorf("RPC GetHierarchy failed with error: %v", err)
 	}
 	return
 }
@@ -76,7 +76,7 @@ func (c client) GetMemoryInfo(l log.Logger, capture CaptureId, after uint64, rng
 	if val, err = c.Send(&callGetMemoryInfo{capture: capture, after: after, rng: rng}); err == nil {
 		res = val.(*resultGetMemoryInfo).value
 	} else {
-		l.Error("RPC GetMemoryInfo failed with error: %v", err)
+		l.Errorf("RPC GetMemoryInfo failed with error: %v", err)
 	}
 	return
 }
@@ -86,7 +86,7 @@ func (c client) GetFramebufferColor(l log.Logger, device DeviceId, capture Captu
 	if val, err = c.Send(&callGetFramebufferColor{device: device, capture: capture, api: api, after: after, settings: settings}); err == nil {
 		res = val.(*resultGetFramebufferColor).value
 	} else {
-		l.Error("RPC GetFramebufferColor failed with error: %v", err)
+		l.Errorf("RPC GetFramebufferColor failed with error: %v", err)
 	}
 	return
 }
@@ -96,7 +96,7 @@ func (c client) GetFramebufferDepth(l log.Logger, device DeviceId, capture Captu
 	if val, err = c.Send(&callGetFramebufferDepth{device: device, capture: capture, api: api, after: after}); err == nil {
 		res = val.(*resultGetFramebufferDepth).value
 	} else {
-		l.Error("RPC GetFramebufferDepth failed with error: %v", err)
+		l.Errorf("RPC GetFramebufferDepth failed with error: %v", err)
 	}
 	return
 }
@@ -106,7 +106,7 @@ func (c client) GetTimingInfo(l log.Logger, device DeviceId, capture CaptureId, 
 	if val, err = c.Send(&callGetTimingInfo{device: device, capture: capture, mask: mask}); err == nil {
 		res = val.(*resultGetTimingInfo).value
 	} else {
-		l.Error("RPC GetTimingInfo failed with error: %v", err)
+		l.Errorf("RPC GetTimingInfo failed with error: %v", err)
 	}
 	return
 }
@@ -116,7 +116,7 @@ func (c client) PrerenderFramebuffers(l log.Logger, device DeviceId, capture Cap
 	if val, err = c.Send(&callPrerenderFramebuffers{device: device, capture: capture, api: api, width: width, height: height, atomIds: atomIds}); err == nil {
 		res = val.(*resultPrerenderFramebuffers).value
 	} else {
-		l.Error("RPC PrerenderFramebuffers failed with error: %v", err)
+		l.Errorf("RPC PrerenderFramebuffers failed with error: %v", err)
 	}
 	return
 }
@@ -126,7 +126,7 @@ func (c client) ReplaceAtom(l log.Logger, capture CaptureId, atomId uint64, atom
 	if val, err = c.Send(&callReplaceAtom{capture: capture, atomId: atomId, atomType: atomType, data: data}); err == nil {
 		res = val.(*resultReplaceAtom).value
 	} else {
-		l.Error("RPC ReplaceAtom failed with error: %v", err)
+		l.Errorf("RPC ReplaceAtom failed with error: %v", err)
 	}
 	return
 }
@@ -136,7 +136,7 @@ func (c client) ResolveAtomStream(l log.Logger, id AtomStreamId) (res AtomStream
 	if val, err = c.Send(&callResolveAtomStream{id: id}); err == nil {
 		res = val.(*resultResolveAtomStream).value
 	} else {
-		l.Error("RPC ResolveAtomStream failed with error: %v", err)
+		l.Errorf("RPC ResolveAtomStream failed with error: %v", err)
 	}
 	return
 }
@@ -146,7 +146,7 @@ func (c client) ResolveBinary(l log.Logger, id BinaryId) (res Binary, err error)
 	if val, err = c.Send(&callResolveBinary{id: id}); err == nil {
 		res = val.(*resultResolveBinary).value
 	} else {
-		l.Error("RPC ResolveBinary failed with error: %v", err)
+		l.Errorf("RPC ResolveBinary failed with error: %v", err)
 	}
 	return
 }
@@ -156,7 +156,7 @@ func (c client) ResolveCapture(l log.Logger, id CaptureId) (res Capture, err err
 	if val, err = c.Send(&callResolveCapture{id: id}); err == nil {
 		res = val.(*resultResolveCapture).value
 	} else {
-		l.Error("RPC ResolveCapture failed with error: %v", err)
+		l.Errorf("RPC ResolveCapture failed with error: %v", err)
 	}
 	return
 }
@@ -166,7 +166,7 @@ func (c client) ResolveDevice(l log.Logger, id DeviceId) (res Device, err error)
 	if val, err = c.Send(&callResolveDevice{id: id}); err == nil {
 		res = val.(*resultResolveDevice).value
 	} else {
-		l.Error("RPC ResolveDevice failed with error: %v", err)
+		l.Errorf("RPC ResolveDevice failed with error: %v", err)
 	}
 	return
 }
@@ -176,7 +176,7 @@ func (c client) ResolveHierarchy(l log.Logger, id HierarchyId) (res Hierarchy, e
 	if val, err = c.Send(&callResolveHierarchy{id: id}); err == nil {
 		res = val.(*resultResolveHierarchy).value
 	} else {
-		l.Error("RPC ResolveHierarchy failed with error: %v", err)
+		l.Errorf("RPC ResolveHierarchy failed with error: %v", err)
 	}
 	return
 }
@@ -186,7 +186,7 @@ func (c client) ResolveImageInfo(l log.Logger, id ImageInfoId) (res ImageInfo, e
 	if val, err = c.Send(&callResolveImageInfo{id: id}); err == nil {
 		res = val.(*resultResolveImageInfo).value
 	} else {
-		l.Error("RPC ResolveImageInfo failed with error: %v", err)
+		l.Errorf("RPC ResolveImageInfo failed with error: %v", err)
 	}
 	return
 }
@@ -196,7 +196,7 @@ func (c client) ResolveMemoryInfo(l log.Logger, id MemoryInfoId) (res MemoryInfo
 	if val, err = c.Send(&callResolveMemoryInfo{id: id}); err == nil {
 		res = val.(*resultResolveMemoryInfo).value
 	} else {
-		l.Error("RPC ResolveMemoryInfo failed with error: %v", err)
+		l.Errorf("RPC ResolveMemoryInfo failed with error: %v", err)
 	}
 	return
 }
@@ -206,7 +206,7 @@ func (c client) ResolveSchema(l log.Logger, id SchemaId) (res Schema, err error)
 	if val, err = c.Send(&callResolveSchema{id: id}); err == nil {
 		res = val.(*resultResolveSchema).value
 	} else {
-		l.Error("RPC ResolveSchema failed with error: %v", err)
+		l.Errorf("RPC ResolveSchema failed with error: %v", err)
 	}
 	return
 }
@@ -216,7 +216,7 @@ func (c client) ResolveTimingInfo(l log.Logger, id TimingInfoId) (res TimingInfo
 	if val, err = c.Send(&callResolveTimingInfo{id: id}); err == nil {
 		res = val.(*resultResolveTimingInfo).value
 	} else {
-		l.Error("RPC ResolveTimingInfo failed with error: %v", err)
+		l.Errorf("RPC ResolveTimingInfo failed with error: %v", err)
 	}
 	return
 }

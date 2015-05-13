@@ -99,7 +99,7 @@ func run() int {
 			for t := range buildTargets {
 				available = append(available, t)
 			}
-			logger.Error("Unknown target '%s'. Available targets: %v", targetName, available)
+			logger.Errorf("Unknown target '%s'. Available targets: %v", targetName, available)
 			return 1
 		}
 	}
@@ -125,11 +125,11 @@ func run() int {
 	for i := range targets {
 		targetName := targetNames[i]
 		if err := errors[i]; err != nil {
-			logger.Error("Target %v failed with error: %v", targetName, err)
+			logger.Errorf("Target %v failed with error: %v", targetName, err)
 			failed = true
 		} else {
 			if *verbose {
-				logger.Info("Target %v succeeded", targetName)
+				logger.Infof("Target %v succeeded", targetName)
 			}
 		}
 	}
@@ -171,7 +171,7 @@ func (t Target) Build(env build.Environment) error {
 	rootLogger := env.Logger
 	begin := func(name string) log.Logger {
 		if env.Verbose {
-			rootLogger.Info("Building %s", name)
+			rootLogger.Infof("Building %s", name)
 		}
 		return rootLogger.Enter(name)
 	}
@@ -276,9 +276,9 @@ func (t Target) Build(env build.Environment) error {
 	if t.Replayd.OS == build.HostOS {
 		src, dst := replayd, BinRoot.Join(replayd.Name())
 		env.Logger = rootLogger
-		env.Logger.Info("Copying %s -> %s", src, dst)
+		env.Logger.Infof("Copying %s -> %s", src, dst)
 		if err := src.CopyTo(dst); err != nil {
-			env.Logger.Error("Copy failed: %v", err)
+			env.Logger.Errorf("Copy failed: %v", err)
 		}
 	}
 

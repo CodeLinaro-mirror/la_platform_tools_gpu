@@ -19,13 +19,13 @@ package log
 type Nop struct{}
 
 // Info does nothing
-func (Nop) Info(msg string, args ...interface{}) {}
+func (Nop) Infof(msg string, args ...interface{}) {}
 
 // Warning does nothing
-func (Nop) Warning(msg string, args ...interface{}) {}
+func (Nop) Warningf(msg string, args ...interface{}) {}
 
 // Error does nothing
-func (Nop) Error(msg string, args ...interface{}) {}
+func (Nop) Errorf(msg string, args ...interface{}) {}
 
 // Enter returns the same Nop implementation of Logger
 func (Nop) Enter(name string) Logger { return Nop{} }

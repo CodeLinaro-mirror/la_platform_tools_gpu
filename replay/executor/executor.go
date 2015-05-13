@@ -101,7 +101,7 @@ func (r executor) execute() error {
 			handler(postback.Data, postback.Error)
 			delete(r.handlers, postback.ID)
 		} else {
-			r.logger.Warning("No handler registered for postback id 0x%x (%T)",
+			r.logger.Warningf("No handler registered for postback id 0x%x (%T)",
 				postback.ID, postback.Data)
 		}
 	}

@@ -36,19 +36,19 @@ func wireframe(db database.Database, logger log.Logger) atom.Transformer {
 	s := &gfxapi.State{}
 	return atom.Transform("Wireframe", func(id atom.ID, a atom.Atom, out atom.Writer) {
 		if err := a.Mutate(s); err != nil {
-			logger.Error("%v", err)
+			logger.Errorf("%v", err)
 		}
 
 		if a.Flags().IsDrawCall() {
 			c := getContext(s)
 			indices, drawMode, err := getIndices(id, a, db, c, &s.Memory, logger)
 			if err != nil {
-				logger.Error(err.Error())
+				logger.Errorf(err.Error())
 				return
 			}
 			indices, drawMode, err = makeWireframe(indices, drawMode)
 			if err != nil {
-				logger.Error(err.Error())
+				logger.Errorf(err.Error())
 				return
 			}
 
