@@ -23,6 +23,7 @@ import (
 )
 
 const generatedPrefix = "generated"
+const externalPrefix = "external"
 
 var (
 	current   = Info{Year: "2015"}
@@ -39,7 +40,7 @@ var (
 		},
 		{
 			Name:       "api",
-			License:    "aosp_c",
+			License:    "aosp_cpp",
 			Extensions: []string{".api"},
 		},
 		{
@@ -48,6 +49,7 @@ var (
 			Extensions: []string{".tmpl"},
 		},
 	}
+	External  = []*regexp.Regexp{}
 	Generated = []*regexp.Regexp{}
 	Normal    = []*regexp.Regexp{}
 )
@@ -74,7 +76,9 @@ func init() {
 	}
 	for name, _ := range embedded {
 		re := Regexp(name, Info{}, true)
-		if strings.HasPrefix(name, generatedPrefix) {
+		if strings.HasPrefix(name, externalPrefix) {
+			External = append(External, re)
+		} else if strings.HasPrefix(name, generatedPrefix) {
 			Generated = append(Generated, re)
 		} else {
 			Normal = append(Normal, re)
@@ -166,6 +170,10 @@ func (l *Language) MatchOld(file []byte) int {
 
 func MatchNormal(file []byte) int {
 	return match(file, Normal)
+}
+
+func MatchExternal(file []byte) int {
+	return match(file, External)
 }
 
 func MatchGenerated(file []byte) int {

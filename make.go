@@ -127,6 +127,7 @@ func init() {
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
 		// Utilties
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
+		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
 		// The default rules
 		List(Default).DependsOn("apps", "test")
 	})

@@ -32,6 +32,8 @@ usage: copyright [options]
 options:`
 	noactions = flag.Bool("n", false,
 		"don't perform any actions, just print information")
+	noold = flag.Bool("o", false,
+		"don't update the copyright if it's just old")
 	usage_footer = `
 The search is rooted at the current working directory.
 It will attempt to fix incorrect copyright headers unless you specify the
@@ -69,36 +71,52 @@ func run() error {
 		fmt.Print(usage_footer)
 	}
 	flag.Parse()
-	return filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
+	paths := flag.Args()
+	if len(paths) == 0 {
+		paths = []string{"."}
+	}
+	for _, path := range paths {
+		err := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			if info.IsDir() {
+				return nil
+			}
+			extension := filepath.Ext(path)
+			l := copyright.FindExtension(extension)
+			if l == nil {
+				return nil
+			}
+			file, err := ioutil.ReadFile(path)
+			if err != nil {
+				return err
+			}
+			if i := l.MatchCurrent(file); i > 0 {
+				return nil
+			}
+			if i := copyright.MatchExternal(file); i > 0 {
+				return nil
+			}
+			if i := copyright.MatchGenerated(file); i > 0 {
+				return nil
+			}
+			if i := l.MatchOld(file); i > 0 {
+				if !*noold {
+					return update(path, "out of date", l.Emit, file[i:])
+				}
+				return nil
+			}
+			if i := copyright.MatchNormal(file); i > 0 {
+				return update(path, "invalid", l.Emit, file[i:])
+			}
+			return update(path, "missing", l.Emit, file)
+		})
 		if err != nil {
 			return err
 		}
-		if info.IsDir() {
-			return nil
-		}
-		extension := filepath.Ext(path)
-		l := copyright.FindExtension(extension)
-		if l == nil {
-			return nil
-		}
-		file, err := ioutil.ReadFile(path)
-		if err != nil {
-			return err
-		}
-		if i := l.MatchCurrent(file); i > 0 {
-			return nil
-		}
-		if i := copyright.MatchGenerated(file); i > 0 {
-			return nil
-		}
-		if i := l.MatchOld(file); i > 0 {
-			return update(path, "out of date", l.Emit, file[i:])
-		}
-		if i := copyright.MatchNormal(file); i > 0 {
-			return update(path, "invalid", l.Emit, file[i:])
-		}
-		return update(path, "missing", l.Emit, file)
-	})
+	}
+	return nil
 }
 
 func main() {
