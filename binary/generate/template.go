@@ -23,6 +23,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
@@ -55,8 +56,9 @@ func newFunctions() *functions {
 	return f
 }
 
-func (f *functions) getTemplate(action string, t *Type) *template.Template {
-	name := fmt.Sprint(f.prefix, action, t.Kind)
+func (f *functions) getTemplate(action string, t schema.Type) *template.Template {
+	kind := reflect.TypeOf(t).Elem().Name()
+	name := fmt.Sprint(f.prefix, action, kind)
 	result := f.templates.Lookup(name)
 	if result == nil {
 		panic(fmt.Errorf("Could not find template %s", name))
@@ -77,16 +79,21 @@ func (f *functions) execute(name string, w io.Writer, data interface{}) error {
 	return t.Execute(w, data)
 }
 
-func (f *functions) Encode(name string, t *Type) (string, error) {
-	return "", f.getTemplate("Encode", t).Execute(f.writer, Field{name, t, false})
+type field struct {
+	Name string
+	Type interface{}
 }
 
-func (f *functions) Decode(name string, t *Type) (string, error) {
-	return "", f.getTemplate("Decode", t).Execute(f.writer, Field{name, t, false})
+func (f *functions) Encode(name string, t schema.Type) (string, error) {
+	return "", f.getTemplate("Encode", t).Execute(f.writer, field{name, t})
 }
 
-func (f *functions) Skip(name string, t *Type) (string, error) {
-	return "", f.getTemplate("Skip", t).Execute(f.writer, Field{name, t, false})
+func (f *functions) Decode(name string, t schema.Type) (string, error) {
+	return "", f.getTemplate("Decode", t).Execute(f.writer, field{name, t})
+}
+
+func (f *functions) Skip(name string, t schema.Type) (string, error) {
+	return "", f.getTemplate("Skip", t).Execute(f.writer, field{name, t})
 }
 
 func (f *functions) Header(tool string) (string, error) {
