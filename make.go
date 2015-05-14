@@ -54,6 +54,7 @@ var (
 	Apps struct {
 		Gapis Entity
 		Gapir Entity
+		Gapid Entity
 	}
 )
 
@@ -122,9 +123,12 @@ func init() {
 		// The main binary rules
 		Apps.Gapis = GoInstall(GPURoot + "/server/gapis")
 		Creator(Apps.Gapis).DependsOn("code")
+		Apps.Gapid = GoInstall(GPURoot + "/_experimental/client/gapid")
+		Creator(Apps.Gapid).DependsOn("codergen")
 		List("apps").DependsStruct(Apps)
 		// Application launchers
 		Command(Apps.Gapis).Creates(Virtual("gapis")).DependsOn(Apps.Gapir)
+		Command(Apps.Gapid, "--gxuidebug").Creates(Virtual("gapid")).DependsOn(Apps.Gapis, Apps.Gapir)
 		// Utilties
 		GoRun(Path(gpusrc, "tools/clean_generated/main.go"), gpusrc).Creates(Virtual("clean_gpu"))
 		GoRun(Path(gpusrc, "tools/copyright/copyright/main.go"), "-o", gpusrc).Creates(Virtual("copyright")).DependsOn(embedCopyright)
