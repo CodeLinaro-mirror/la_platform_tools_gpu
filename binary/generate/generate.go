@@ -170,7 +170,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) sch
 		default:
 			m, err := schema.ParseMethod(strings.Title(gotype))
 			if err != nil {
-				panic(err)
+				return &schema.Primitive{Name: fmt.Sprintf("%s_bad_%s", name, gotype), Method: schema.String}
 			}
 			return &schema.Primitive{Name: name, Method: m}
 		}
