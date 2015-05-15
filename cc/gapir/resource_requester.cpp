@@ -46,6 +46,11 @@ bool ResourceRequester::get(const ResourceList& resources,
     return gazer.getResources(query, target, querySize);
 }
 
+bool ResourceRequester::getUncached(const ResourceId& id, const ServerConnection& gazer,
+                                    void* target, uint32_t size) {
+    return get(id, gazer, target, size);
+}
+
 bool ResourceRequester::prefetch(const ResourceList& resources,
                                  const ServerConnection& gazer, void* buffer, uint32_t size) {
     return true;

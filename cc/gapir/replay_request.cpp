@@ -37,8 +37,8 @@ std::unique_ptr<ReplayRequest> ReplayRequest::create(const ServerConnection& gaz
     memoryManager->setReplayDataSize(gazer.replayLength());
 
     // Request the replay data from the gazer connection
-    if (!resourceProvider->get(gazer.replayId(), gazer, memoryManager->getReplayAddress(),
-                               gazer.replayLength())) {
+    if (!resourceProvider->getUncached(gazer.replayId(), gazer, memoryManager->getReplayAddress(),
+                                       gazer.replayLength())) {
         GAPID_WARNING("Can't load replay request: %s\n", gazer.replayId().c_str());
         return nullptr;
     }

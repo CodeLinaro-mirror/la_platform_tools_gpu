@@ -19,6 +19,8 @@
 
 #include "resource_provider.h"
 
+#include <gapic/archive.h>
+
 #include <memory>
 #include <string>
 
@@ -32,10 +34,14 @@ public:
     static std::unique_ptr<ResourceProvider> create(
             std::unique_ptr<ResourceProvider> fallbackProvider, const std::string& path);
 
-    // If the requested resource is on the disk and it's size match with the requested size then
-    // load it from disk. Otherwise request it from the fall back provider and save it to disk.
+    // If the requested resource is on the disk and its size matches the requested size then load
+    // it from the archive. Otherwise request it from the fall back provider and save it to disk.
     bool get(const ResourceId& id, const ServerConnection& gazer, void* target,
              uint32_t size) override;
+
+    // Forwards the get request to the fallback provider without caching its result.
+    bool getUncached(const ResourceId& id, const ServerConnection& gazer, void* target,
+                     uint32_t size) override;
 
     // Prefetch the resources because it is significantly faster to request multiple resource form
     // the underlying provider (resource requester) than requesting each resource one by one.
@@ -45,17 +51,16 @@ public:
 private:
     ResourceDiskCache(std::unique_ptr<ResourceProvider> fallbackProvider, const std::string& path);
 
-    // Fetch the resources from the underlying resource provider and saves them into the disk cache.
-    // When fetching multiply resources it calculates the offset of the resources in the response
-    // got from the fall back provider to save the correct data for each resource
+    // Fetch the resources from the underlying resource provider and save them into the disk cache.
+    // When fetching multiple resources, write them in-order contiguously to the given buffer and
+    // return the total size.
     bool fetch(const ServerConnection& gazer, void* buffer, uint32_t size, const ResourceList& query);
 
-    // Fall back resource provider for the cases when the requested resource is not in the disk
-    // cache
+    // Fall back resource provider for the cases when the requested resource is not in the disk cache.
     std::unique_ptr<ResourceProvider> mFallbackProvider;
 
-    // The base path of the disk cache
-    const std::string mPath;
+    // Disk-backed archive holding the cached resources.
+    gapic::Archive mArchive;
 };
 
 }  // namespace gapir

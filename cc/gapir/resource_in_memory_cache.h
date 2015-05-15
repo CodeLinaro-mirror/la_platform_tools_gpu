@@ -48,6 +48,10 @@ public:
     bool get(const ResourceId& id, const ServerConnection& gazer, void* target,
              uint32_t size) override;
 
+    // Forwards the get request to the fallback provider without caching its result.
+    bool getUncached(const ResourceId& id, const ServerConnection& gazer, void* target,
+                     uint32_t size) override;
+
     // No prefetching is done for this provider because of the limited size of the in memory cache
     // and because there is no performance gain if we fetch multiple resources at the same time
     // compared to the case when we fetch them one by one. The prefetch request is forwarded to the

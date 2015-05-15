@@ -63,6 +63,7 @@
 #endif
 
 #ifdef _MSC_VER // MSVC
+#   define ftruncate _chsize
 #   define snprintf _snprintf
 #endif // _MSC_VER
 

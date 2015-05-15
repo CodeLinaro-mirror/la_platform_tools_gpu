@@ -33,6 +33,8 @@ public:
     // Request the resource from the ServerConnection with a GET request
     bool get(const ResourceId& id, const ServerConnection& gazer,
              void* target, uint32_t size) override;
+    bool getUncached(const ResourceId& id, const ServerConnection& gazer,
+                     void* target, uint32_t size) override;
 
     // Request all of the requested resources from the ServerConnection with a single GET request
     bool get(const ResourceList& resources, const ServerConnection& gazer,
