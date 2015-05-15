@@ -17,10 +17,11 @@
 #ifndef GAPIR_RESOURCE_PROVIDER_H
 #define GAPIR_RESOURCE_PROVIDER_H
 
-#include <stdint.h>
 #include <string>
 #include <utility>
 #include <vector>
+
+#include <stdint.h>
 
 namespace gapir {
 
@@ -46,6 +47,10 @@ public:
                      void* target, uint32_t size) = 0;
     virtual bool get(const ResourceList& resources, const ServerConnection& gazer,
                      void* target, uint32_t size);
+
+    // Same as get but prevents resource caching, i.e. forward to fallback on caching providers.
+    virtual bool getUncached(const ResourceId& id, const ServerConnection& gazer,
+                             void* target, uint32_t size) = 0;
 
     // Prefetches the resources for resource providers where prefetching is available.
     // The resources vector have to contain (resource id, resource size) pairs and buffer should

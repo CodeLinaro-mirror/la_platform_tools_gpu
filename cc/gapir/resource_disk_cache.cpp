@@ -79,34 +79,29 @@ std::unique_ptr<ResourceProvider> ResourceDiskCache::create(
 
 ResourceDiskCache::ResourceDiskCache(std::unique_ptr<ResourceProvider> fallbackProvider,
                                      const std::string& path) :
-        mFallbackProvider(std::move(fallbackProvider)), mPath(path) {
+        mFallbackProvider(std::move(fallbackProvider)), mArchive(path + "resources") {
 }
 
 bool ResourceDiskCache::get(const ResourceId& id, const ServerConnection& gazer, void* target,
                             uint32_t size) {
-    const std::string filepath(mPath + id);
-    if (FILE* fi = fopen(filepath.c_str(), "rb")) {
-        // Resource already in the disk cache. Load it from disk
-        const size_t length = fread(target, 1, size, fi);
-        fclose(fi);
-        // Check the amount of data read from the disk against the amount of data requested
-        if (length == size) {
-            return true;
-        }
+    // Try loading the resource from the archive.
+    if (mArchive.read(id, target, size)) {
+        return true;
     }
 
-    // Fetch the resource from the fall back provider if it isn't in the disk cache or the size
-    // doesn't match with the requested size (mostly corrupted writes)
+    // Fetch the resource from the fall back provider if it's not in the archive or if its size
+    // doesn't match the requested size.
     if (mFallbackProvider->get(id, gazer, target, size)) {
-        // Save the resource to the disk if possible
-        if (FILE* fo = fopen(filepath.c_str(), "wb")) {
-            fwrite(target, size, 1, fo);
-            fclose(fo);
-        }
+        // Try saving the resource to the archive and return success.
+        mArchive.write(id, target, size);
         return true;
-    } else {
-        return false;
     }
+    return false;
+}
+
+bool ResourceDiskCache::getUncached(const ResourceId& id, const ServerConnection& gazer,
+                                   void* target, uint32_t size) {
+    return mFallbackProvider->getUncached(id, gazer, target, size);
 }
 
 bool ResourceDiskCache::prefetch(const ResourceList& resources,
@@ -117,11 +112,10 @@ bool ResourceDiskCache::prefetch(const ResourceList& resources,
     // Batch the resource requests into batches where the sum size of each batch fit into the size
     // of the buffer available for prefetching
     for (const auto& res : resources) {
-        const std::string filepath(mPath + res.first);
-        // Check if the resource is already in the disk cache
-        if (FILE* fi = fopen(filepath.c_str(), "rb")) {
-            fclose(fi);
-        } else if (res.second > size) {
+        // Check if the resource is already in the archive.
+        if (mArchive.contains(res.first)) continue;
+
+        if (res.second > size) {
             GAPID_WARNING("Can't prefetch resource because of limited buffer size");
         } else {
             // If next resource not fit into this batch then fetch the current batch
@@ -129,11 +123,9 @@ bool ResourceDiskCache::prefetch(const ResourceList& resources,
                 if (!fetch(gazer, buffer, size, query)) {
                     return false;
                 }
-
                 query.clear();
                 querySumSize = 0;
             }
-
             query.push_back(res);
             querySumSize += res.second;
         }
@@ -155,13 +147,9 @@ bool ResourceDiskCache::fetch(const ServerConnection& gazer,
         return false;
     }
 
-    // Save each resources to the disk from the correct offset
+    // Save each resources to the archive from the correct buffer offset.
     for (size_t i = 0, offset = 0; i < query.size(); ++i) {
-        const std::string filepath(mPath + query[i].first);
-        if (FILE* fo = fopen(filepath.c_str(), "wb")) {
-            fwrite(static_cast<uint8_t*>(buffer) + offset, query[i].second, 1, fo);
-            fclose(fo);
-        }
+        mArchive.write(query[i].first, static_cast<uint8_t*>(buffer) + offset, query[i].second);
         offset += query[i].second;
     }
     return true;

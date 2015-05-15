@@ -70,6 +70,11 @@ bool ResourceInMemoryCache::get(const ResourceId& id, const ServerConnection& ga
     }
 }
 
+bool ResourceInMemoryCache::getUncached(const ResourceId& id, const ServerConnection& gazer,
+                                   void* target, uint32_t size) {
+    return mFallbackProvider->getUncached(id, gazer, target, size);
+}
+
 bool ResourceInMemoryCache::prefetch(const ResourceList& resources,
                                      const ServerConnection& gazer, void* buffer, uint32_t size) {
     // Filter out the resources from the prefetch request which are already in cache before

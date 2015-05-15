@@ -37,6 +37,11 @@ public:
 
     MOCK_METHOD4(prefetch, bool(const ResourceList& resources,
                                 const ServerConnection& gazer, void* buffer, uint32_t size));
+
+    inline bool getUncached(const ResourceId& id, const ServerConnection& gazer, void* target,
+                            uint32_t size) override {
+        return get(id, gazer, target, size);
+    }
 };
 
 }  // namespace test

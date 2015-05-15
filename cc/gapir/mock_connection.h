@@ -22,8 +22,11 @@
 #include <gmock/gmock.h>
 
 #include <memory>
-#include <cstring>
 #include <queue>
+#include <string>
+#include <vector>
+
+#include <string.h>
 
 namespace gapir {
 namespace test {
@@ -42,7 +45,7 @@ public:
         if (size > in.size() - read_pos) {
             size = in.size() - read_pos;
         }
-        std::memcpy(data, &in[read_pos], size);
+        memcpy(data, &in[read_pos], size);
         read_pos += size;
         return size;
     }
