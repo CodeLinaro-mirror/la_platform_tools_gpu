@@ -23,13 +23,6 @@ type Block struct {
 	Statements []Node     // the set of statements this block represents
 }
 
-// Assert represents a runtime assertion.
-// Assertions are also used to infer required behavior from the expressions.
-type Assert struct {
-	AST       *ast.Assert // the underlying syntax node this was built from
-	Condition Expression  // the condition is being asserted must be true
-}
-
 // Branch represents the basic conditional execution statement.
 // If Condition is true we use the True block, otherwise the False block.
 type Branch struct {
@@ -70,15 +63,6 @@ type Assign struct {
 	LHS      Expression  // the expression that gives the location to store into
 	Operator string      // the assignment operator being applied
 	RHS      Expression  // the value to store
-}
-
-// Copy is the special form of assign that copies data between slices. One of
-// LHS or RHS may be missing, and if both are present the upper bound on one may
-// be inferred from the other.
-type Copy struct {
-	AST *ast.Assign // the underlying syntax node this was built from
-	Dst *Slice      // the slice to copy to
-	Src *Slice      // the slice to copy from
 }
 
 // MapAssign represents assigning to a map index expression.

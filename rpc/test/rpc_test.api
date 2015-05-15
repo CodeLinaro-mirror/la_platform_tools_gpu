@@ -21,7 +21,7 @@ cmd void                  UseResource(ResourceId r)     {}
 cmd Resource              ResolveResource(ResourceId r) { return ? }
 cmd ListNode*             GetSingleListNode()           { return ? }
 cmd ListNode*             GetListNodeChain()            { return ? }
-cmd array<ListNode*>      GetListNodeChainArray()       { return ? }
+cmd ListNode*[]           GetListNodeChainArray()       { return ? }
 cmd Base*                 GetBase()                     { return ? }
 cmd Base*                 GetDerived()                  { return ? }
 
@@ -57,4 +57,3 @@ class Base {
 class Derived : Base {
   Enum Enum
 }
-

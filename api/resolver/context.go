@@ -48,7 +48,7 @@ func (ctx *context) errorf(at interface{}, message string, args ...interface{}) 
 		}
 	}
 	ctx.errors.Add(nil, nil, "Error at node with nil CST field in %T", at)
-
+	ctx.errors.Add(nil, nil, message, args...)
 }
 
 func (ctx *context) icef(at ast.Node, message string, args ...interface{}) {

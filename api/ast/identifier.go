@@ -22,16 +22,24 @@ type Identifier struct {
 	Value string      // the identifier
 }
 
+func (t Identifier) Fragment() parse.Fragment { return t.CST }
+
+// Generic represents a identifier modified by type arguments. It looks like:
+// «identifier ! ( arg | <arg {, arg} )>»
+type Generic struct {
+	CST       *parse.Branch // underlying parse structure for this node
+	Name      *Identifier   // the generic identifier.
+	Arguments []Node        // the type arguments to the generic.
+}
+
+func (t Generic) Fragment() parse.Fragment { return t.CST }
+
 const (
 	// Keyword strings represent places in the syntax where a word has special
 	// meaning.
 	KeywordAPI       = "api"
 	KeywordAlias     = "alias"
-	KeywordArray     = "array"
-	KeywordAs        = "as"
-	KeywordAssert    = "assert"
 	KeywordBitfield  = "bitfield"
-	KeywordBuffer    = "buffer"
 	KeywordCase      = "case"
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
@@ -44,13 +52,9 @@ const (
 	KeywordImport    = "import"
 	KeywordIn        = "in"
 	KeywordInout     = "inout"
-	KeywordLength    = "len"
 	KeywordMacro     = "macro"
-	KeywordMap       = "map"
-	KeywordNew       = "new"
 	KeywordNull      = "null"
 	KeywordOut       = "out"
-	KeywordPointer   = "ptr"
 	KeywordReturn    = "return"
 	KeywordPseudonym = "type"
 	KeywordSwitch    = "switch"

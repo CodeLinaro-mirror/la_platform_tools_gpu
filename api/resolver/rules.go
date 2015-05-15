@@ -20,22 +20,8 @@ func implicit(lhs semantic.Type, rhs semantic.Type) bool {
 	if lhs == semantic.AnyType {
 		return true
 	}
-	// TODO: buffer<char> = string ; this should probably not be allowed
-	if buf, isbuf := lhs.(*semantic.Buffer); isbuf && buf.To == semantic.CharType && rhs == semantic.StringType {
+	if slice, isslice := lhs.(*semantic.Slice); isslice && slice.To == semantic.CharType && rhs == semantic.StringType {
 		return true
-	}
-	// TODO: buffer<T> = T[] ; this should probably not be allowed
-	if buf, isbuf := lhs.(*semantic.Buffer); isbuf {
-		if ptr, isptr := rhs.(*semantic.Pointer); isptr {
-			if buf.Array == ptr.Array && assignable(buf.To, ptr.To) {
-				return true
-			}
-		}
-		if arr, isarr := rhs.(*semantic.Array); isarr {
-			if buf.Array && assignable(buf.To, arr.ValueType) {
-				return true
-			}
-		}
 	}
 	return false
 }
@@ -50,7 +36,15 @@ func assignable(lhs semantic.Type, rhs semantic.Type) bool {
 	if implicit(lhs, rhs) {
 		return true
 	}
-	return implicit(rhs, lhs)
+	if implicit(rhs, lhs) {
+		return true
+	}
+	toPointer, toIsPointer := baseType(lhs).(*semantic.Pointer)
+	fromSlice, fromIsSlice := baseType(rhs).(*semantic.Slice)
+	if fromIsSlice && toIsPointer {
+		return equal(fromSlice.To, toPointer.To)
+	}
+	return false
 }
 
 func comparable(lhs semantic.Type, rhs semantic.Type) bool {
@@ -122,6 +116,11 @@ func castable(from semantic.Type, to semantic.Type) bool {
 	}
 	if fromIsNumber && toIsNumber {
 		return true // any numeric conversion
+	}
+	fromPointer, fromIsPointer := fromBase.(*semantic.Pointer)
+	toPointer, toIsPointer := toBase.(*semantic.Pointer)
+	if fromIsPointer && toIsPointer {
+		return fromPointer.To == semantic.VoidType || toPointer.To == semantic.VoidType
 	}
 	return false
 }

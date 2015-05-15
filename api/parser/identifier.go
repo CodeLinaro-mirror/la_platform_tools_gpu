@@ -40,6 +40,39 @@ func requireIdentifier(p *parse.Parser, cst *parse.Branch) *ast.Identifier {
 	return n
 }
 
+// name '!' ( type | '(' type [ ',' type ] ')' )
+func generic(p *parse.Parser, cst *parse.Branch) *ast.Generic {
+	i := identifier(p, cst)
+	if i == nil {
+		return nil
+	}
+	g := &ast.Generic{Name: i}
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		g.CST = cst
+		if operator(ast.OpGeneric, p, cst) {
+			if operator(ast.OpListStart, p, cst) {
+				for !operator(ast.OpListEnd, p, cst) {
+					if len(g.Arguments) > 0 {
+						requireOperator(ast.OpListSeparator, p, cst)
+					}
+					g.Arguments = append(g.Arguments, requireTypeRef(p, cst))
+				}
+			} else {
+				g.Arguments = append(g.Arguments, requireTypeRef(p, cst))
+			}
+		}
+	})
+	return g
+}
+
+func requireGeneric(p *parse.Parser, cst *parse.Branch) *ast.Generic {
+	n := generic(p, cst)
+	if n == nil {
+		p.Expected("generic identifier")
+	}
+	return n
+}
+
 func peekKeyword(k string, p *parse.Parser) bool {
 	if !p.AlphaNumeric() {
 		return false

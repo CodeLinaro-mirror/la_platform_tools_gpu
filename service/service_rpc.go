@@ -93,52 +93,52 @@ type TimingInfoId struct {
 	ID binary.ID
 }
 
-// Array ApiIdArray
+// Array ApiIdSlice
 type ApiIdArray []ApiId
 
-// Array ApiSchemaArray
+// Array ApiSchemaSlice
 type ApiSchemaArray []ApiSchema
 
-// Array AtomGroupArray
+// Array AtomGroupSlice
 type AtomGroupArray []AtomGroup
 
-// Array AtomInfoArray
+// Array AtomInfoSlice
 type AtomInfoArray []AtomInfo
 
-// Array AtomRangeTimerArray
+// Array AtomRangeTimerSlice
 type AtomRangeTimerArray []AtomRangeTimer
 
-// Array AtomTimerArray
+// Array AtomTimerSlice
 type AtomTimerArray []AtomTimer
 
-// Array CaptureIdArray
+// Array CaptureIdSlice
 type CaptureIdArray []CaptureId
 
-// Array ClassInfoRefArray
+// Array ClassInfoPointerSlice
 type ClassInfoArray []*ClassInfo
 
-// Array DeviceIdArray
+// Array DeviceIdSlice
 type DeviceIdArray []DeviceId
 
-// Array EnumEntryArray
+// Array EnumEntrySlice
 type EnumEntryArray []EnumEntry
 
-// Array EnumInfoRefArray
+// Array EnumInfoPointerSlice
 type EnumInfoArray []*EnumInfo
 
-// Array FieldInfoRefArray
+// Array FieldInfoPointerSlice
 type FieldInfoArray []*FieldInfo
 
-// Array MemoryRangeArray
+// Array MemoryRangeSlice
 type MemoryRangeArray []MemoryRange
 
-// Array ParameterInfoArray
+// Array ParameterInfoSlice
 type ParameterInfoArray []ParameterInfo
 
-// Array U64Array
+// Array U64Slice
 type U64Array []uint64
 
-// Array U8Array
+// Array U8Slice
 type U8Array []uint8
 
 // Enum ImageFormat

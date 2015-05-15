@@ -196,52 +196,52 @@ func (h TimingInfoId) Valid() bool {
 }
 
 func (a ApiIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiIdArray", len(a))
+	fmt.Fprintf(f, "[%d]ApiIdSlice", len(a))
 }
 func (a ApiSchemaArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiSchemaArray", len(a))
+	fmt.Fprintf(f, "[%d]ApiSchemaSlice", len(a))
 }
 func (a AtomGroupArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomGroupArray", len(a))
+	fmt.Fprintf(f, "[%d]AtomGroupSlice", len(a))
 }
 func (a AtomInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomInfoArray", len(a))
+	fmt.Fprintf(f, "[%d]AtomInfoSlice", len(a))
 }
 func (a AtomRangeTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomRangeTimerArray", len(a))
+	fmt.Fprintf(f, "[%d]AtomRangeTimerSlice", len(a))
 }
 func (a AtomTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomTimerArray", len(a))
+	fmt.Fprintf(f, "[%d]AtomTimerSlice", len(a))
 }
 func (a CaptureIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]CaptureIdArray", len(a))
+	fmt.Fprintf(f, "[%d]CaptureIdSlice", len(a))
 }
 func (a ClassInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ClassInfoRefArray", len(a))
+	fmt.Fprintf(f, "[%d]ClassInfoPointerSlice", len(a))
 }
 func (a DeviceIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]DeviceIdArray", len(a))
+	fmt.Fprintf(f, "[%d]DeviceIdSlice", len(a))
 }
 func (a EnumEntryArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumEntryArray", len(a))
+	fmt.Fprintf(f, "[%d]EnumEntrySlice", len(a))
 }
 func (a EnumInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumInfoRefArray", len(a))
+	fmt.Fprintf(f, "[%d]EnumInfoPointerSlice", len(a))
 }
 func (a FieldInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]FieldInfoRefArray", len(a))
+	fmt.Fprintf(f, "[%d]FieldInfoPointerSlice", len(a))
 }
 func (a MemoryRangeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]MemoryRangeArray", len(a))
+	fmt.Fprintf(f, "[%d]MemoryRangeSlice", len(a))
 }
 func (a ParameterInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ParameterInfoArray", len(a))
+	fmt.Fprintf(f, "[%d]ParameterInfoSlice", len(a))
 }
 func (a U64Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U64Array", len(a))
+	fmt.Fprintf(f, "[%d]U64Slice", len(a))
 }
 func (a U8Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U8Array", len(a))
+	fmt.Fprintf(f, "[%d]U8Slice", len(a))
 }
 
 func (i ImageFormat) String() string {

@@ -135,14 +135,14 @@ func pseudonym(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Pseu
 	return s
 }
 
-// lhs_type { extend_type }
+// generic { extend_type }
 func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
-	ref := typeRefLHS(p, cst)
-	if ref == nil {
+	var ref ast.Node
+	if ref = generic(p, cst); ref == nil {
 		return nil
 	}
-	if id, isid := ref.(*ast.Identifier); isid && peekOperator(ast.OpMember, p) {
-		t := &ast.Imported{From: id}
+	if id, isid := ref.(*ast.Generic); isid && peekOperator(ast.OpMember, p) {
+		t := &ast.Imported{From: id.Name}
 		p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 			t.CST = cst
 			requireOperator(ast.OpMember, p, cst)
@@ -160,18 +160,7 @@ func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return ref
 }
 
-// generic_type | identifier
-func typeRefLHS(p *parse.Parser, cst *parse.Branch) ast.Node {
-	if g := genericType(p, cst); g != nil {
-		return g
-	}
-	if i := identifier(p, cst); i != nil {
-		return i
-	}
-	return nil
-}
-
-// lhs_type ( pointer_type | static_array_type )
+// generic ( pointer_type | static_array_type )
 func extendTypeRef(p *parse.Parser, cst *parse.Branch, ref ast.Node) ast.Node {
 	if e := pointerType(p, cst, ref); e != nil {
 		return e
@@ -190,45 +179,16 @@ func requireTypeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return t
 }
 
-// ( 'array' | 'map' | 'buffer' | 'ptr' ) '<' type { ',' type } '>'
-func genericType(p *parse.Parser, cst *parse.Branch) *ast.GenericType {
-	found := false
-	for _, word := range []string{ast.KeywordArray, ast.KeywordMap, ast.KeywordBuffer, ast.KeywordPointer} {
-		if peekKeyword(word, p) {
-			found = true
-			break
-		}
-	}
-	if !found {
-		return nil
-	}
-	t := &ast.GenericType{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		t.CST = cst
-		t.Generic = requireIdentifier(p, cst)
-		requireOperator(ast.OpMetaStart, p, cst)
-		for {
-			t.Args = append(t.Args, requireTypeRef(p, cst))
-			if !operator(ast.OpListSeparator, p, cst) {
-				break
-			}
-		}
-		requireOperator(ast.OpMetaEnd, p, cst)
-	})
-	return t
-}
-
 // lhs_type '*'
 func pointerType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.PointerType {
 	if !peekOperator(ast.OpPointer, p) {
 		return nil
 	}
-	t := &ast.PointerType{}
+	t := &ast.PointerType{To: ref}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		t.CST = cst
 		requireOperator(ast.OpPointer, p, cst)
 	})
-	t.To = ref
 	return t
 }
 
@@ -237,7 +197,7 @@ func indexedType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.IndexedT
 	if !peekOperator(ast.OpIndexStart, p) {
 		return nil
 	}
-	t := &ast.IndexedType{}
+	t := &ast.IndexedType{ValueType: ref}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		t.CST = cst
 		requireOperator(ast.OpIndexStart, p, cst)
@@ -246,6 +206,5 @@ func indexedType(p *parse.Parser, cst *parse.Branch, ref ast.Node) *ast.IndexedT
 		}
 		requireOperator(ast.OpIndexEnd, p, cst)
 	})
-	t.ValueType = ref
 	return t
 }

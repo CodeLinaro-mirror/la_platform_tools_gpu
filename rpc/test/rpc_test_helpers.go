@@ -95,7 +95,7 @@ func (h ResourceId) Valid() bool {
 }
 
 func (a ListNodeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ListNodeRefArray", len(a))
+	fmt.Fprintf(f, "[%d]ListNodePointerSlice", len(a))
 }
 
 func (i Enum) String() string {

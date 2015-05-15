@@ -26,21 +26,7 @@ type Class struct {
 	Fields      []*Field      // the fields of the class
 }
 
-// ClassInitializer represents a class literal declaration, of the form
-// «name { field_initializers }»
-type ClassInitializer struct {
-	CST    *parse.Branch       // underlying parse structure for this node
-	Class  *Identifier         // the name of the class instantiate
-	Fields []*FieldInitializer // the initializers for the class fields
-}
-
-// New represents an expression that allocates a new class instance and returns
-// a pointer to it. It takes a class initializer to specify both the type and
-// the initial value for the instance.
-type New struct {
-	CST              *parse.Branch // underlying parse structure for this node
-	ClassInitializer *ClassInitializer
-}
+func (t Class) Fragment() parse.Fragment { return t.CST }
 
 // Field represents a field of a class or api, with the structure
 // «type name = expression»
@@ -52,20 +38,7 @@ type Field struct {
 	Default     Node          // the default value expression for the field
 }
 
-// FieldInitializer is used as part of a ClassInitializer to specify the value a
-// single field should have.
-type FieldInitializer struct {
-	CST   *parse.Branch // underlying parse structure for this node
-	Name  *Identifier   // the name of the field
-	Value Node          // the value the field should be given
-}
-
-// Cast represents a type coercion expression, of the form «expression "as" type»
-type Cast struct {
-	CST    *parse.Branch // underlying parse structure for this node
-	Object Node          // the value to force the type of
-	Type   Node          // the type it should be coerced to
-}
+func (t Field) Fragment() parse.Fragment { return t.CST }
 
 // EnumEntry represents a single value in an enumerated type.
 type EnumEntry struct {
@@ -74,6 +47,8 @@ type EnumEntry struct {
 	Name  *Identifier   // the name this entry is given
 	Value *Number       // the value of this entry
 }
+
+func (t EnumEntry) Fragment() parse.Fragment { return t.CST }
 
 // Enum represents an enumerated type declaration, of the form
 // «"enum" name { entries }» where entries is a comma separated list of «name = value»
@@ -86,29 +61,7 @@ type Enum struct {
 	Extends     []*Identifier // deprecated list of enums this extends
 }
 
-// Member represents an expressions that access members of objects.
-// Always of the form «object.name» where object is an expression.
-type Member struct {
-	CST    *parse.Branch // underlying parse structure for this node
-	Object Node          // the object to get a member of
-	Name   *Identifier   // the name of the member to get
-}
-
-// Index represents any expression of the form «object[index]»
-// Used for arrays, maps and bitfields.
-type Index struct {
-	CST    *parse.Branch // underlying parse structure for this node
-	Object Node          // the object to index
-	Index  Node          // the index to lookup
-}
-
-// GenericType represents a generic type declaration, which looks
-// like «"array|map|buffer"<type {, type}>»
-type GenericType struct {
-	CST     *parse.Branch // underlying parse structure for this node
-	Generic *Identifier   // the generic identifier.
-	Args    []Node        // the type arguments to the generic.
-}
+func (t Enum) Fragment() parse.Fragment { return t.CST }
 
 // IndexedType represents a type declaration with an indexing suffix,
 // which looks like «type[index]»
@@ -118,11 +71,15 @@ type IndexedType struct {
 	Index     Node          // the index of the type
 }
 
+func (t IndexedType) Fragment() parse.Fragment { return t.CST }
+
 // PointerType represents a pointer type declaration, of the form «type*»
 type PointerType struct {
 	CST *parse.Branch // underlying parse structure for this node
 	To  Node          // the underlying type this pointer points to
 }
+
+func (t PointerType) Fragment() parse.Fragment { return t.CST }
 
 // Alias represents a weak type alias, with structure «"alias" type name».
 // An alias does not declare a new type, just a reusable name for a common type.
@@ -133,6 +90,8 @@ type Alias struct {
 	To          Node          // the type it is an alias for
 }
 
+func (t Alias) Fragment() parse.Fragment { return t.CST }
+
 // Pseudonym declares a new type in terms of another type.
 // Has the form «"type" type name»
 // Pseydonyms are proper types, but the underlying type can be discovered.
@@ -142,6 +101,8 @@ type Pseudonym struct {
 	Name        *Identifier   // the name of the type
 	To          Node          // the underlying type
 }
+
+func (t Pseudonym) Fragment() parse.Fragment { return t.CST }
 
 // Imported represents an imported type name.
 type Imported struct {

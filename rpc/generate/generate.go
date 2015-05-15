@@ -69,8 +69,8 @@ func fromType(from semantic.Type) schema.Type {
 		return &schema.Primitive{Name: from.Typename(), Method: schema.Int32}
 	case *semantic.Pointer:
 		return &schema.Pointer{Type: fromType(from.To)}
-	case *semantic.Array:
-		return &schema.Slice{ValueType: fromType(from.ValueType)}
+	case *semantic.Slice:
+		return &schema.Slice{ValueType: fromType(from.To)}
 	case *semantic.Class:
 		if from.GetAnnotation("Interface") != nil {
 			return &schema.Interface{Name: from.Typename()}

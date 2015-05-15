@@ -31,7 +31,7 @@ type ResourceId struct {
 	ID binary.ID
 }
 
-// Array ListNodeRefArray
+// Array ListNodePointerSlice
 type ListNodeArray []*ListNode
 
 // Enum Enum

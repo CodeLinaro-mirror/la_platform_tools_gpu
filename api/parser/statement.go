@@ -35,11 +35,8 @@ func requireBlock(p *parse.Parser, cst *parse.Branch) *ast.Block {
 	return block
 }
 
-// ( assert | branch | iteration | return | expression ) [ declare_local | assign ]
+// ( branch | iteration | return | expression ) [ declare_local | assign ]
 func requireStatement(p *parse.Parser, cst *parse.Branch) ast.Node {
-	if g := assert(p, cst); g != nil {
-		return g
-	}
 	if g := branch(p, cst); g != nil {
 		return g
 	}
@@ -59,20 +56,6 @@ func requireStatement(p *parse.Parser, cst *parse.Branch) ast.Node {
 	return e
 }
 
-// 'assert' simple_expresssion
-func assert(p *parse.Parser, cst *parse.Branch) *ast.Assert {
-	if !peekKeyword(ast.KeywordAssert, p) {
-		return nil
-	}
-	s := &ast.Assert{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		s.CST = cst
-		requireKeyword(ast.KeywordAssert, p, cst)
-		s.Condition = requireSimpleExpression(p, cst)
-	})
-	return s
-}
-
 // 'if' expression block [ 'else' block ]
 func branch(p *parse.Parser, cst *parse.Branch) *ast.Branch {
 	if !peekKeyword(ast.KeywordIf, p) {
@@ -82,7 +65,7 @@ func branch(p *parse.Parser, cst *parse.Branch) *ast.Branch {
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		s.CST = cst
 		requireKeyword(ast.KeywordIf, p, cst)
-		s.Condition = requireSimpleExpression(p, cst)
+		s.Condition = requireExpression(p, cst)
 		s.True = requireBlock(p, cst)
 		if keyword(ast.KeywordElse, p, cst) != nil {
 			s.False = requireBlock(p, cst)
@@ -91,7 +74,7 @@ func branch(p *parse.Parser, cst *parse.Branch) *ast.Branch {
 	return s
 }
 
-// 'for' identifier 'in' simple_expresion block
+// 'for' identifier 'in' expresion block
 func iteration(p *parse.Parser, cst *parse.Branch) *ast.Iteration {
 	if !peekKeyword(ast.KeywordFor, p) {
 		return nil
@@ -102,7 +85,7 @@ func iteration(p *parse.Parser, cst *parse.Branch) *ast.Iteration {
 		requireKeyword(ast.KeywordFor, p, cst)
 		s.Variable = requireIdentifier(p, cst)
 		requireKeyword(ast.KeywordIn, p, cst)
-		s.Iterable = requireSimpleExpression(p, cst)
+		s.Iterable = requireExpression(p, cst)
 		s.Block = requireBlock(p, cst)
 	})
 	return s
@@ -110,11 +93,11 @@ func iteration(p *parse.Parser, cst *parse.Branch) *ast.Iteration {
 
 // lhs ':=' expression
 func declareLocal(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.DeclareLocal {
-	l, ok := lhs.(*ast.Identifier)
-	if !ok || !peekOperator(ast.OpDeclare, p) {
+	l, ok := lhs.(*ast.Generic)
+	if !ok || len(l.Arguments) > 0 || !peekOperator(ast.OpDeclare, p) {
 		return nil
 	}
-	s := &ast.DeclareLocal{Name: l}
+	s := &ast.DeclareLocal{Name: l.Name}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		s.CST = cst
 		requireOperator(ast.OpDeclare, p, cst)

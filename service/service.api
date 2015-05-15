@@ -25,16 +25,16 @@
 
 // Import imports capture data emitted by the graphics spy, returning the new
 // capture identifier.
-cmd CaptureId Import(string name, array<u8> Data) { return ? }
+cmd CaptureId Import(string name, u8[] Data) { return ? }
 
 // GetCaptures returns the full list of capture identifiers avaliable on the
 // server.
-cmd array<CaptureId> GetCaptures() { return ? }
+cmd CaptureId[] GetCaptures() { return ? }
 
 // GetDevices returns the full list of replay devices avaliable to the server.
 // These include local replay devices and any connected Android devices.
 // This list may change over time, as devices are connected and disconnected.
-cmd array<DeviceId> GetDevices() { return ? }
+cmd DeviceId[] GetDevices() { return ? }
 
 // GetState returns an identifier to a binary blob containing the graphics state
 // immediately following the atom after.
@@ -96,7 +96,7 @@ cmd BinaryId PrerenderFramebuffers(DeviceId   device,
                                    ApiId      api,
                                    u32        width,
                                    u32        height,
-                                   array<u64> atomIds)
+                                   u64[]      atomIds)
 { return ? }
 
 // ReplaceAtom creates and new capture based on an existing capture, but with
@@ -132,19 +132,19 @@ class Device {
 class Capture {
   string              Name     // Name given to the capture. i.e. "KittyWorld"
   AtomStreamId        Atoms    // The identifier to the stream of atoms in this capture.
-  array<ApiId>        Apis     // List of graphics APIs used by this capture.
+  ApiId[]             Apis     // List of graphics APIs used by this capture.
   SchemaId            Schema   // The schema used to decode types in this capture.
 }
 
 // Binary holds a blob of data.
 class Binary {
-  array<u8> Data
+  u8[] Data
 }
 
 // AtomStream holds a stream of atoms in binary form. The atoms can be unpacked
 // using the capture's schema.
 class AtomStream {
-  array<u8> Data // Encoded atom stream.
+  u8[] Data // Encoded atom stream.
 }
 
 // Hierarchy holds the root to an AtomGroup hierarchy.
@@ -158,7 +158,7 @@ class Hierarchy {
 class AtomGroup {
   string            Name      // Name of this group.
   AtomRange         Range     // The span of atoms this group covers.
-  array<AtomGroup>  SubGroups // The list of sub-groups within this group.
+  AtomGroup[]       SubGroups // The list of sub-groups within this group.
 }
 
 // AtomRange describes a span of atoms in an AtomStream.
@@ -170,10 +170,10 @@ class AtomRange {
 // MemoryInfo describes the state of a range of memory at a specific point in
 // the atom stream. This structure is likely to change in the future.
 class MemoryInfo {
-  array<u8>           Data    // The memory values for the span.
-  array<MemoryRange>  Stale   // The data ranges that have been observed but not current.
-  array<MemoryRange>  Current // The data ranges that were written to just before the observation.
-  array<MemoryRange>  Unknown // The data ranges that have never been observed.
+  u8[]           Data    // The memory values for the span.
+  MemoryRange[]  Stale   // The data ranges that have been observed but not current.
+  MemoryRange[]  Current // The data ranges that were written to just before the observation.
+  MemoryRange[]  Unknown // The data ranges that have never been observed.
 }
 
 // MemoryRange describes a range of memory.
@@ -208,9 +208,9 @@ bitfield TimingMask {
 // TimingInfo holds the results of a resolved GetTimingInfo request.
 // This is experimental and will change in the near future.
 class TimingInfo {
-  array<AtomTimer>      PerCommand  // The timing results of each command.
-  array<AtomRangeTimer> PerDrawCall // The timing results of each draw call.
-  array<AtomRangeTimer> PerFrame    // The timing results of each frame.
+  AtomTimer[]      PerCommand  // The timing results of each command.
+  AtomRangeTimer[] PerDrawCall // The timing results of each draw call.
+  AtomRangeTimer[] PerFrame    // The timing results of each frame.
 }
 
 // AtomTimer holds the timing information for a single atom.
@@ -240,8 +240,8 @@ class RenderSettings {
 // types stored within the AtomStream and state. Clients use the Schema to know
 // how to interpret these types.
 class Schema {
-  array<AtomInfo>  Atoms // The schema description of all atoms in all APIs.
-  array<ApiSchema> Apis  // The per-API schema descriptions.
+  AtomInfo[]  Atoms // The schema description of all atoms in all APIs.
+  ApiSchema[] Apis  // The per-API schema descriptions.
 }
 
 // ApiSchema describes the schema used by a single graphics API.
@@ -303,8 +303,8 @@ class MapInfo : TypeInfo {
 
 // EnumInfo describes an enum type.
 class EnumInfo : TypeInfo {
-  array<EnumEntry>  Entries // The list of enum entries.
-  array<EnumInfo*>  Extends // The list of enums this enum extends from. Will be removed.
+  EnumEntry[]  Entries // The list of enum entries.
+  EnumInfo*[]  Extends // The list of enums this enum extends from. Will be removed.
 }
 
 // EnumEntry describes a single name-value entry in an enum.
@@ -315,13 +315,13 @@ class EnumEntry {
 
 // StructInfo describes the body of a single struct type.
 class StructInfo : TypeInfo {
-  array<FieldInfo*> Fields // The list of fields in the struct.
+  FieldInfo*[] Fields // The list of fields in the struct.
 }
 
 // ClassInfo describes the body of a single class type.
 class ClassInfo : TypeInfo {
-  array<FieldInfo*> Fields  // The list of fields in the class.
-  array<ClassInfo*> Extends // The list of classes this enum classes from. Likely to be removed.
+  FieldInfo*[] Fields  // The list of fields in the class.
+  ClassInfo*[] Extends // The list of classes this enum classes from. Likely to be removed.
 }
 
 // FieldInfo describes a single field entry in a class or struct.
@@ -335,7 +335,7 @@ class AtomInfo {
   ApiId                 Api               // The graphics API that this Atom belongs to.
   u16                   Type              // The atom's unique type identifier.
   string                Name              // The name of the atom.
-  array<ParameterInfo>  Parameters        // The list of atom parameters.
+  ParameterInfo[]       Parameters        // The list of atom parameters.
   bool                  IsCommand         // True if the atom represents an API command.
   bool                  IsDrawCall        // True if the atom represents a draw call.
   bool                  IsEndOfFrame      // True if the atom represents the end of a frame.

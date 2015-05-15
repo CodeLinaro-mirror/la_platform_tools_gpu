@@ -27,11 +27,11 @@ type API struct {
 	Functions    []*Function    // the global functions
 	Methods      []*Function    // the method functions
 	Globals      []*Global      // the global variables
-	Arrays       []*Array       // the array types used
 	StaticArrays []*StaticArray // the fixed size array types used
 	Maps         []*Map         // the map types used
 	Pointers     []*Pointer     // the pointer types used
-	Buffers      []*Buffer      // the buffer types used
+	Slices       []*Slice       // the pointer types used
+	References   []*Reference   // the reference types used
 	Signatures   []*Signature   // the function signature types used
 	Members                     // a map of name to member for top level symbols
 }

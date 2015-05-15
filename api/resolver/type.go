@@ -25,14 +25,26 @@ import (
 
 func type_(ctx *context, in interface{}) semantic.Type {
 	switch in := in.(type) {
-	case *ast.Identifier:
-		return simpleType(ctx, in)
-	case *ast.GenericType:
+	case *ast.Generic:
 		return genericType(ctx, in)
 	case *ast.IndexedType:
-		return indexedType(ctx, in)
+		of := type_(ctx, in.ValueType)
+		if in.Index == nil {
+			return getSliceType(ctx, in, of)
+		}
+		size := uint32(0)
+		ctx.with(semantic.Uint32Type, func() {
+			e := expression(ctx, in.Index)
+			if n, ok := e.(semantic.Uint32Value); ok {
+				size = uint32(n)
+			} else {
+				ctx.errorf(in.Index, "Array dimension must be a constant number, got %T", e)
+			}
+		})
+		return getStaticArrayType(ctx, in, of, size)
 	case *ast.PointerType:
-		return pointerType(ctx, in)
+		to := type_(ctx, in.To)
+		return getPointerType(ctx, in, to)
 	case *ast.Imported:
 		return importedType(ctx, in)
 	case ast.Node:
@@ -44,7 +56,33 @@ func type_(ctx *context, in interface{}) semantic.Type {
 	}
 }
 
-func simpleType(ctx *context, in *ast.Identifier) semantic.Type {
+func genericType(ctx *context, in *ast.Generic) semantic.Type {
+	switch in.Name.Value {
+	case "map":
+		if len(in.Arguments) != 2 {
+			ctx.errorf(in, "Map requires 2 args, got %d", len(in.Arguments))
+			return semantic.VoidType
+		}
+		kt := type_(ctx, in.Arguments[0])
+		vt := type_(ctx, in.Arguments[1])
+		return getMapType(ctx, in, kt, vt)
+	case "ref":
+		if len(in.Arguments) != 1 {
+			ctx.errorf(in, "Ref requires 1 arg, got %d", len(in.Arguments))
+			return semantic.VoidType
+		}
+		vt := type_(ctx, in.Arguments[0])
+		return getRefType(ctx, in, vt)
+	default:
+		if len(in.Arguments) != 0 {
+			ctx.errorf(in, "Type %s is not parameterised, got %d", in.Name, len(in.Arguments))
+			return semantic.VoidType
+		}
+		return getSimpleType(ctx, in.Name)
+	}
+}
+
+func getSimpleType(ctx *context, in *ast.Identifier) semantic.Type {
 	name := in.Value
 	out := ctx.findType(in, name)
 	if out == nil {
@@ -61,23 +99,17 @@ func simpleType(ctx *context, in *ast.Identifier) semantic.Type {
 	return out
 }
 
-func mapType(ctx *context, in *ast.GenericType) semantic.Type {
-	if len(in.Args) != 2 {
-		ctx.errorf(in, "Map requires 2 args, got %d", len(in.Args))
-		return semantic.VoidType
-	}
-	kt := type_(ctx, in.Args[0])
-	vt := type_(ctx, in.Args[1])
+func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
 	name := strings.Title(vt.Typename()) + "_" + kt.Typename() + "Map"
 	for _, m := range ctx.api.Maps {
 		if m.Name == name {
 			if !equal(kt, m.KeyType) {
-				ctx.icef(in, "Map %s found with non matching key, got %s expected %s", name, typename(m.KeyType), typename(kt))
+				ctx.icef(at, "Map %s found with non matching key, got %s expected %s", name, typename(m.KeyType), typename(kt))
 			}
 			if !equal(vt, m.ValueType) {
-				ctx.icef(in, "Map %s found with non matching value, got %s expected %s", name, typename(m.ValueType), typename(vt))
+				ctx.icef(at, "Map %s found with non matching value, got %s expected %s", name, typename(m.ValueType), typename(vt))
 			}
-			ctx.mappings[in] = m
+			ctx.mappings[at] = m
 			return m
 		}
 	}
@@ -87,133 +119,36 @@ func mapType(ctx *context, in *ast.GenericType) semantic.Type {
 		ValueType: vt,
 		Members:   semantic.Members{},
 	}
-	for _, f := range []*semantic.Function{
-		&semantic.Function{Name: "Get",
-			FullParameters: []*semantic.Parameter{{},
-				{Name: "key", Type: kt},
-				{Name: "value", Type: vt},
-				{Type: vt},
-			},
-		},
-		&semantic.Function{Name: "Delete",
-			FullParameters: []*semantic.Parameter{{},
-				{Name: "key", Type: kt},
-			},
-		},
-		&semantic.Function{Name: "Range",
-			FullParameters: []*semantic.Parameter{{},
-				{Type: semantic.AnyType},
-			},
-		},
-	} {
-		f.Owner = out
-		f.This = f.FullParameters[0]
-		f.This.Name = "self"
-		f.This.Type = out
-		last := f.FullParameters[len(f.FullParameters)-1]
-		if last.Name == "" {
-			f.Return = f.FullParameters[len(f.FullParameters)-1]
-			f.Return.Output = true
-			f.Outputs = append(f.Outputs, f.Return)
-		} else {
-			f.Return = &semantic.Parameter{Type: semantic.VoidType}
-		}
-		out.Members[f.Name] = f
-	}
 	ctx.api.Maps = append(ctx.api.Maps, out)
-	ctx.mappings[in] = out
+	ctx.mappings[at] = out
 	return out
 }
 
-func getArrayType(ctx *context, at ast.Node, of semantic.Type) *semantic.Array {
-	name := strings.Title(of.Typename()) + "Array"
-	for _, a := range ctx.api.Arrays {
+func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32) *semantic.StaticArray {
+	name := fmt.Sprintf("%sStaticArray_%d", of.Typename(), size)
+	for _, a := range ctx.api.StaticArrays {
 		if a.Name == name {
-			if !equal(of, a.ValueType) {
-				ctx.icef(at, "Array %s found with non matching value, got %s expected %s", name, typename(a.ValueType), typename(of))
+			if !equal(a.ValueType, of) {
+				ctx.icef(at, "Static array %s found with non matching value, got %s expected %s",
+					a.Name, typename(a.ValueType), typename(of))
 			}
 			ctx.mappings[at] = a
 			return a
 		}
 	}
-	out := &semantic.Array{
+	out := &semantic.StaticArray{
 		Name:      name,
 		ValueType: of,
+		Size:      size,
 	}
-	ctx.api.Arrays = append(ctx.api.Arrays, out)
+	ctx.api.StaticArrays = append(ctx.api.StaticArrays, out)
 	ctx.mappings[at] = out
 	return out
 }
 
-func arrayType(ctx *context, in *ast.GenericType) semantic.Type {
-	if len(in.Args) != 1 {
-		ctx.errorf(in, "Array requires 1 arg, got %d", len(in.Args))
-		return semantic.VoidType
-	}
-	return getArrayType(ctx, in, type_(ctx, in.Args[0]))
-}
-
-func genericType(ctx *context, in *ast.GenericType) semantic.Type {
-	switch in.Generic.Value {
-	case ast.KeywordArray:
-		return arrayType(ctx, in)
-	case ast.KeywordMap:
-		return mapType(ctx, in)
-	case ast.KeywordBuffer:
-		if len(in.Args) != 1 {
-			ctx.errorf(in, "Buffer requires 1 arg, got %d", len(in.Args))
-			return semantic.VoidType
-		}
-		return getBufferType(ctx, in, type_(ctx, in.Args[0]), true)
-	case ast.KeywordPointer:
-		if len(in.Args) != 1 {
-			ctx.errorf(in, "Pointer requires 1 arg, got %d", len(in.Args))
-			return semantic.VoidType
-		}
-		return getBufferType(ctx, in, type_(ctx, in.Args[0]), false)
-	default:
-		ctx.icef(in, "Generic type %s not handled", in.Generic.Value)
-		return semantic.VoidType
-	}
-}
-
-func indexedType(ctx *context, in *ast.IndexedType) semantic.Type {
-	if in.Index == nil {
-		return getPointerType(ctx, in, type_(ctx, in.ValueType), true)
-	}
-	out := &semantic.StaticArray{ValueType: type_(ctx, in.ValueType)}
-	ctx.with(semantic.Uint32Type, func() {
-		e := expression(ctx, in.Index)
-		if n, ok := e.(semantic.Uint32Value); ok {
-			out.Size = uint32(n)
-		} else {
-			ctx.errorf(in, "Array dimension must be a constant number, got %T", e)
-		}
-	})
-	out.Name = fmt.Sprintf("%sStaticArray_%d", out.ValueType.Typename(), out.Size)
-	for _, a := range ctx.api.StaticArrays {
-		if a.Name == out.Name {
-			if !equal(out.ValueType, a.ValueType) {
-				ctx.icef(in, "Static array %s found with non matching value, got %s expected %s",
-					out.Name, typename(a.ValueType), typename(out.ValueType))
-			}
-			ctx.mappings[in] = a
-			return a
-		}
-	}
-
-	ctx.api.StaticArrays = append(ctx.api.StaticArrays, out)
-	ctx.mappings[in] = out
-	return out
-}
-
-func getPointerType(ctx *context, at ast.Node, to semantic.Type, array bool) *semantic.Pointer {
+func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Pointer {
 	name := strings.Title(to.Typename())
-	if array {
-		name += "Array"
-	} else {
-		name += "Ref"
-	}
+	name += "Pointer"
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {
 			if !equal(to, p.To) {
@@ -224,46 +159,54 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type, array bool) *se
 		}
 	}
 	out := &semantic.Pointer{
-		Name:  name,
-		To:    to,
-		Array: array,
+		Name: name,
+		To:   to,
 	}
 	ctx.api.Pointers = append(ctx.api.Pointers, out)
 	ctx.mappings[at] = out
 	return out
 }
 
-func getBufferType(ctx *context, at ast.Node, to semantic.Type, array bool) *semantic.Buffer {
+func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference {
 	name := strings.Title(to.Typename())
-	if array {
-		name += "Buffer"
-	} else {
-		name += "Ptr"
-	}
-	for _, b := range ctx.api.Buffers {
-		if b.Name == name {
-			if !equal(to, b.To) {
-				ctx.icef(at, "Buffer %s found with non matching value, got %s expected %s", name, typename(b.To), typename(to))
+	name += "Ref"
+	for _, p := range ctx.api.References {
+		if p.Name == name {
+			if !equal(to, p.To) {
+				ctx.icef(at, "ref %s found with non matching value, got %s expected %s", name, typename(p.To), typename(to))
 			}
-			ctx.mappings[at] = b
-			return b
+			ctx.mappings[at] = p
+			return p
 		}
 	}
-	out := &semantic.Buffer{
-		Name:  name,
-		To:    to,
-		Array: array,
+	out := &semantic.Reference{
+		Name: name,
+		To:   to,
 	}
-	if to != semantic.CharType && to != semantic.Uint8Type {
-		out.FakeArray = getArrayType(ctx, at, to)
-	}
-	ctx.api.Buffers = append(ctx.api.Buffers, out)
+	ctx.api.References = append(ctx.api.References, out)
 	ctx.mappings[at] = out
 	return out
 }
 
-func pointerType(ctx *context, in *ast.PointerType) *semantic.Pointer {
-	return getPointerType(ctx, in, type_(ctx, in.To), false)
+func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
+	name := strings.Title(to.Typename())
+	name += "Slice"
+	for _, s := range ctx.api.Slices {
+		if s.Name == name {
+			if !equal(to, s.To) {
+				ctx.icef(at, "Slice %s found with non matching value, got %s expected %s", name, typename(s.To), typename(to))
+			}
+			ctx.mappings[at] = s
+			return s
+		}
+	}
+	out := &semantic.Slice{
+		Name: name,
+		To:   to,
+	}
+	ctx.api.Slices = append(ctx.api.Slices, out)
+	ctx.mappings[at] = out
+	return out
 }
 
 func enum(ctx *context, out *semantic.Enum) {
