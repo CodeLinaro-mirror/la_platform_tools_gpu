@@ -67,7 +67,7 @@ func scan(entry string, loader *generate.Loader) error {
 			if !info.IsDir() {
 				return nil
 			}
-			if filepath.Base(path)[0] == '.' {
+			if filepath.Base(path)[0] == '.' || filepath.Base(path)[0] == '_' {
 				return filepath.SkipDir
 			}
 			name := pkg.ImportPath + strings.TrimPrefix(path, pkg.Dir)
