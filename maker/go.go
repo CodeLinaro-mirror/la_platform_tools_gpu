@@ -14,6 +14,17 @@
 
 package maker
 
+import "sync"
+
+var golock sync.Mutex
+
+// GoCommand runs "go" with the specified arguments.
+func GoCommand(args ...string) *Step {
+	golock.Lock()
+	defer golock.Unlock()
+	return Command(goTool, args...)
+}
+
 // GoInstall builds a new Step that runs "go install" on the supplied module.
 // It will return the resulting binary entity.
 // The step will depend on the go tool, and will be set to always run if
@@ -22,7 +33,7 @@ func GoInstall(module string) Entity {
 	_, name := PathSplit(module)
 	dst := File(Paths.Bin, name+HostExecutableExtension)
 	if Creator(dst) == nil {
-		Command(goTool, "install", module).Creates(dst).AlwaysRun()
+		GoCommand("install", module).Creates(dst).AlwaysRun()
 	}
 	return dst
 }
@@ -31,14 +42,14 @@ func GoInstall(module string) Entity {
 // It returns a virtual entity that represents the test output.
 func GoTest(module string) Entity {
 	test := Virtual("")
-	Command(goTool, "test", module).Creates(test)
+	GoCommand("test", module).Creates(test)
 	return test
 }
 
 // GoRun returns a Step that runs "go run" with the supplied go file
 // and arguments.
 func GoRun(gofile string, args ...string) *Step {
-	return Command(goTool, append([]string{"run", gofile}, args...)...)
+	return GoCommand(append([]string{"run", gofile}, args...)...)
 }
 
 // GoSrcPath returns the full path to a file or directory inside the GoPath.
