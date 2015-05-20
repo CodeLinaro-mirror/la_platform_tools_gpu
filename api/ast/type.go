@@ -75,8 +75,9 @@ func (t IndexedType) Fragment() parse.Fragment { return t.CST }
 
 // PointerType represents a pointer type declaration, of the form «type*»
 type PointerType struct {
-	CST *parse.Branch // underlying parse structure for this node
-	To  Node          // the underlying type this pointer points to
+	CST   *parse.Branch // underlying parse structure for this node
+	To    Node          // the underlying type this pointer points to
+	Const bool          // wether the pointer type has the const modifier applied
 }
 
 func (t PointerType) Fragment() parse.Fragment { return t.CST }

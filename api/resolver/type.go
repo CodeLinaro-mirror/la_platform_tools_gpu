@@ -44,7 +44,7 @@ func type_(ctx *context, in interface{}) semantic.Type {
 		return getStaticArrayType(ctx, in, of, size)
 	case *ast.PointerType:
 		to := type_(ctx, in.To)
-		return getPointerType(ctx, in, to)
+		return getPointerType(ctx, in, to, in.Const)
 	case *ast.Imported:
 		return importedType(ctx, in)
 	case ast.Node:
@@ -146,8 +146,11 @@ func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32
 	return out
 }
 
-func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Pointer {
+func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) *semantic.Pointer {
 	name := strings.Title(to.Typename())
+	if constant {
+		name += "Const"
+	}
 	name += "Pointer"
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {
@@ -159,8 +162,9 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type) *semantic.Point
 		}
 	}
 	out := &semantic.Pointer{
-		Name: name,
-		To:   to,
+		Name:  name,
+		To:    to,
+		Const: constant,
 	}
 	ctx.api.Pointers = append(ctx.api.Pointers, out)
 	ctx.mappings[at] = out

@@ -43,6 +43,7 @@ const (
 	KeywordCase      = "case"
 	KeywordClass     = "class"
 	KeywordCmd       = "cmd"
+	KeywordConst     = "const"
 	KeywordElse      = "else"
 	KeywordEnum      = "enum"
 	KeywordExtern    = "extern"

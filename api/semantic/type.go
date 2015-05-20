@@ -192,8 +192,9 @@ func (t Map) Typename() string { return t.Name }
 
 // Pointer represents an api pointer type declaration, of the form To*
 type Pointer struct {
-	Name string // the full type name
-	To   Type   // the type this is a pointer to
+	Name  string // the full type name
+	To    Type   // the type this is a pointer to
+	Const bool   // wether the pointer was declared with the const attribute
 }
 
 func (t Pointer) Typename() string { return t.Name }
