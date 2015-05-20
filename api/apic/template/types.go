@@ -125,6 +125,8 @@ func (*Functions) TypeOf(v interface{}) (semantic.Type, error) {
 		return semantic.VoidType, nil
 	}
 	switch e := v.(type) {
+	case semantic.Type:
+		return e, nil
 	case *semantic.Field:
 		return e.Type, nil
 	case semantic.Expression:
