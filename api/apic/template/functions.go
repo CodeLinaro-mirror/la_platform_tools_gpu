@@ -18,6 +18,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"io"
 	"path/filepath"
 	"reflect"
 	"regexp"
@@ -35,6 +36,7 @@ type Functions struct {
 	funcs     template.FuncMap
 	globals   globalMap
 	active    *template.Template
+	writer    io.Writer
 	basePath  string
 	apiFile   string
 	api       *semantic.API
@@ -146,15 +148,24 @@ func (f *Functions) Log(s string, args ...interface{}) string {
 	return ""
 }
 
-func (*Functions) buildArgs(base map[string]interface{}, values ...interface{}) (map[string]interface{}, error) {
-	data := make(map[string]interface{}, len(values)/2)
+func (*Functions) buildArgs(values ...interface{}) (map[string]interface{}, error) {
+	var base map[string]interface{}
+	i := 0
+	if len(values) > 0 {
+		var ok bool
+		if base, ok = values[0].(map[string]interface{}); ok {
+			i = 1
+		}
+	}
+	pairs := (len(values) - i) / 2
+	if (len(values)-i)%2 != 0 {
+		return nil, errors.New("bad argument count, must be in pairs")
+	}
+	data := make(map[string]interface{}, pairs+len(base))
 	for k, v := range base {
 		data[k] = v
 	}
-	if len(values)%2 != 0 {
-		return nil, errors.New("bad argument count to macro, must be in pairs")
-	}
-	for i := 0; i < len(values)-1; i += 2 {
+	for ; i < len(values)-1; i += 2 {
 		switch k := values[i].(type) {
 		case string:
 			data[k] = values[i+1]
@@ -165,11 +176,14 @@ func (*Functions) buildArgs(base map[string]interface{}, values ...interface{}) 
 	return data, nil
 }
 
-// Macro invokes the template macro with the specified name and returns the
-// template output as a string. If no arguments are passed then $ will be nil
-// for the called macro. If a single argument is passed then $ will be the value
-// of that argument. If more than one argument is passed then arguments is used
-// as name-value pairs, where name is a field on $. For example:
+// Args builds a template argument object from a list of arguments.
+// If no arguments are passed then the result will be nil.
+// If a single argument is passed then the result will be the value
+// of that argument.
+// If the first argument is a map, it is assumed to be a base argument set to
+// be augmented.
+// Remaining arguments must come in name-value pairs.
+// For example:
 //  {{define "SingleParameterMacro"}}
 //      $ is: {{$}}
 //  {{end}}
@@ -178,33 +192,104 @@ func (*Functions) buildArgs(base map[string]interface{}, values ...interface{}) 
 //      $.ArgA is: {{$.ArgA}}, $.ArgB is: {{$.ArgB}}
 //  {{end}}
 //
-//  {{Macro "SingleParameterMacro"}}
+//  {{template "SingleParameterMacro" (Args)}}
 //  {{/* Returns "$ is: nil" */}}
 //
-//  {{Macro "SingleParameterMacro" 42}}
+//  {{template "SingleParameterMacro" (Args 42)}}
 //  {{/* Returns "$ is: 42" */}}
 //
-//  {{Macro "MultipleParameterMacro" "ArgA" 4 "ArgB" 2}}
+//  {{template "MultipleParameterMacro" (Args "ArgA" 4 "ArgB" 2)}}
 //  {{/* Returns "$.ArgA is: 4, $.ArgB is: 2" */}}
-func (f *Functions) Macro(name string, arguments ...interface{}) (string, error) {
-	var arg interface{}
+func (f *Functions) Args(arguments ...interface{}) (interface{}, error) {
 	switch len(arguments) {
 	case 0:
-		arg = nil
+		return nil, nil
 	case 1:
-		arg = arguments[0]
+		return arguments[0], nil
 	default:
-		inherit, ok := arguments[0].(map[string]interface{})
-		if ok {
-			arguments = arguments[1:]
-		}
-		data, err := f.buildArgs(inherit, arguments...)
-		if err != nil {
-			return "", err
-		}
-		arg = data
+		return f.buildArgs(arguments...)
 	}
-	var buf bytes.Buffer
-	err := f.templates.ExecuteTemplate(&buf, name, arg)
+}
+
+// Macro invokes the template macro with the specified name and returns the
+// template output as a string. See Args for how the arguments are processed.
+func (f *Functions) Macro(name string, arguments ...interface{}) (string, error) {
+	arg, err := f.Args(arguments...)
+	if err != nil {
+		return "", err
+	}
+	t := f.templates.Lookup(name)
+	if t == nil {
+		return "", fmt.Errorf("Cannot find template %s", name)
+	}
+	buf := &bytes.Buffer{}
+	err = f.execute(t, buf, arg)
 	return strings.TrimSpace(buf.String()), err
+}
+
+// Template invokes the template with the specified name writing the output to
+// the current output writer. See Args for how the arguments are processed.
+func (f *Functions) Template(name string, arguments ...interface{}) (string, error) {
+	arg, err := f.Args(arguments...)
+	if err != nil {
+		return "", err
+	}
+	t := f.templates.Lookup(name)
+	if t == nil {
+		return "", fmt.Errorf("Cannot find template %s", name)
+	}
+	return "", f.execute(t, nil, arg)
+}
+
+func nodename(node interface{}) string {
+	if node == nil {
+		return "Nil"
+	}
+	nt := reflect.TypeOf(node)
+	if nt.Kind() == reflect.Ptr {
+		nt = nt.Elem()
+	}
+	return nt.Name()
+}
+
+// Node dispatches to the template that matches the node best.
+// if the node is a Type or Expression then the type semantic.Type name is tried,
+// then the class of type (the name of the semantic class that represents the type).
+// The actual name of the node type is then tried, and if none of those matches,
+// the "Default" template is used if present.
+// If no possible template could be matched, and error is generated.
+// eg: {{Node "TypeName" $}} where $ is a boolean and expression would try
+//   "TypeName#Bool"
+//   "TypeName.Builtin"
+//   "TypeName.BinaryOp"
+//   "TypeName_Default"
+// See Args for how the arguments are processed, in addition the Node arg will
+// be added in and have the value of node, and if the node had a type
+// discovered, the Type arg will be added in as well.
+func (f *Functions) Node(prefix string, node interface{}, arguments ...interface{}) (string, error) {
+	// Collect the arguments to the template
+	args, err := f.buildArgs(arguments...)
+	if err != nil {
+		return "", err
+	}
+	args["Node"] = node
+	try := make([]string, 0, 4)
+	ty, err := f.TypeOf(node)
+	if node != nil && err == nil {
+		args["Type"] = ty
+		try = append(try,
+			prefix+"#"+ty.Typename(),
+			prefix+"."+nodename(ty),
+		)
+	}
+	if node != ty {
+		try = append(try, prefix+"."+nodename(node))
+	}
+	try = append(try, prefix+"_Default")
+	for _, name := range try {
+		if tmpl := f.templates.Lookup(name); tmpl != nil {
+			return "", f.execute(tmpl, nil, args)
+		}
+	}
+	return "", fmt.Errorf(`Cannot find templates "%s"`, strings.Join(try, `","`))
 }

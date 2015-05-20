@@ -18,9 +18,11 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"text/template"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
@@ -84,13 +86,26 @@ func writeDeps() error {
 	return file.Close()
 }
 
+func (f *Functions) execute(active *template.Template, writer io.Writer, data interface{}) error {
+	olda := f.active
+	oldw := f.writer
+	f.active = active
+	if writer != nil {
+		f.writer = writer
+	}
+	defer func() {
+		f.active = olda
+		f.writer = oldw
+	}()
+	return f.active.Execute(f.writer, data)
+}
+
 // Include loads each of the templates and executes their main bodies.
 // The filenames are relative to the template doing the include.
 func (f *Functions) Include(templates ...string) error {
-	original := f.active
 	dir := ""
-	if original != nil {
-		dir = filepath.Dir(original.Name())
+	if f.active != nil {
+		dir = filepath.Dir(f.active.Name())
 	}
 	for _, t := range templates {
 		if dir != "" {
@@ -103,13 +118,11 @@ func (f *Functions) Include(templates ...string) error {
 			commands.MaybeError(t, err)
 			tmpl, err := f.templates.New(t).Parse(string(tmplData))
 			commands.MaybeError(t, err)
-			f.active = tmpl
-			commands.Logf("Executing template %q\n", f.active.Name())
+			commands.Logf("Executing template %q\n", tmpl.Name())
 			var buf bytes.Buffer
-			commands.MaybeError(f.active.Name(), f.active.Execute(&buf, f.api))
+			commands.MaybeError(tmpl.Name(), f.execute(tmpl, &buf, f.api))
 		}
 	}
-	f.active = original
 	return nil
 }
 
