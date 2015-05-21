@@ -104,14 +104,13 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 	ctx.mappings[in] = out
 }
 
-func method(ctx *context, in *ast.Function) {
-	out := &semantic.Function{AST: in, Name: in.Name.Value}
+func method(ctx *context, out *semantic.Function) {
 	functionSignature(ctx, out)
 	t := out.This.Type
 	switch t := t.(type) {
 	case *semantic.Pointer:
 		if class, ok := t.To.(*semantic.Class); !ok {
-			ctx.errorf(in, "expected this as a reference to a class, got %s[%T]", typename(t.To), t.To)
+			ctx.errorf(out.AST, "expected this as a reference to a class, got %s[%T]", typename(t.To), t.To)
 		} else {
 			class.Methods = append(class.Methods, out)
 			class.Members[out.Name] = out
@@ -126,9 +125,9 @@ func method(ctx *context, in *ast.Function) {
 		t.Members[out.Name] = out
 		functionBody(ctx, t, out)
 	default:
-		ctx.errorf(in, "invalid type for this , got %s[%T]", typename(t), t)
+		ctx.errorf(out.AST, "invalid type for this , got %s[%T]", typename(t), t)
 	}
-	ctx.mappings[in] = out
+	ctx.mappings[out.AST] = out
 }
 
 func getSignature(ctx *context, at ast.Node, r semantic.Type, args []semantic.Type) *semantic.Signature {

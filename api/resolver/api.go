@@ -21,90 +21,88 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
-func api(ctx *context, out *semantic.API) {
-	in := out.AST
-	macros := []*macroStub{}
-	ctx.with(semantic.VoidType, func() {
-		// Build and register the high level semantic objects
-		out.Enums = make([]*semantic.Enum, len(in.Enums))
-		for i, e := range in.Enums {
-			out.Enums[i] = &semantic.Enum{AST: e, Name: e.Name.Value}
-			ctx.addType(out.Enums[i])
+func apiNames(ctx *context, in *ast.API) {
+	// Build and register the high level semantic objects
+	for _, e := range in.Enums {
+		n := &semantic.Enum{AST: e, Name: e.Name.Value}
+		ctx.api.Enums = append(ctx.api.Enums, n)
+		ctx.addType(n)
+	}
+	for _, c := range in.Classes {
+		n := &semantic.Class{AST: c, Name: c.Name.Value, Members: semantic.Members{}}
+		ctx.api.Classes = append(ctx.api.Classes, n)
+		ctx.addType(n)
+	}
+	for _, p := range in.Pseudonyms {
+		n := &semantic.Pseudonym{AST: p, Name: p.Name.Value, Members: semantic.Members{}}
+		ctx.api.Pseudonyms = append(ctx.api.Pseudonyms, n)
+		ctx.addType(n)
+	}
+	for _, m := range in.Macros {
+		stub := &macroStub{}
+		ctx.macros = append(ctx.macros, stub)
+		stub.function = &semantic.Function{AST: m, Name: m.Name.Value}
+		ctx.add(stub.function.Name, stub)
+	}
+	for _, e := range in.Externs {
+		n := &semantic.Function{AST: e, Name: e.Name.Value}
+		ctx.api.Externs = append(ctx.api.Externs, n)
+		ctx.api.Members[n.Name] = n
+	}
+	for _, m := range in.Commands {
+		f := &semantic.Function{AST: m, Name: m.Name.Value}
+		if !m.Parameters[0].This {
+			ctx.api.Functions = append(ctx.api.Functions, f)
+			ctx.api.Members[f.Name] = f
+		} else {
+			ctx.api.Methods = append(ctx.api.Methods, f)
 		}
-		out.Classes = make([]*semantic.Class, len(in.Classes))
-		for i, c := range in.Classes {
-			out.Classes[i] = &semantic.Class{AST: c, Name: c.Name.Value, Members: semantic.Members{}}
-			ctx.addType(out.Classes[i])
-		}
-		out.Pseudonyms = make([]*semantic.Pseudonym, len(in.Pseudonyms))
-		for i, p := range in.Pseudonyms {
-			out.Pseudonyms[i] = &semantic.Pseudonym{AST: p, Name: p.Name.Value, Members: semantic.Members{}}
-			ctx.addType(out.Pseudonyms[i])
-		}
-		macros = make([]*macroStub, len(in.Macros))
-		for i, m := range in.Macros {
-			stub := &macroStub{}
-			macros[i] = stub
-			stub.function = &semantic.Function{AST: m, Name: m.Name.Value}
-			ctx.add(stub.function.Name, stub)
-		}
-		out.Externs = make([]*semantic.Function, len(in.Externs))
-		for i, e := range in.Externs {
-			out.Externs[i] = &semantic.Function{AST: e, Name: e.Name.Value}
-			out.Members[out.Externs[i].Name] = out.Externs[i]
-		}
-		for _, m := range in.Commands {
-			if !m.Parameters[0].This {
-				f := &semantic.Function{AST: m, Name: m.Name.Value}
-				out.Functions = append(out.Functions, f)
-				out.Members[f.Name] = f
-			}
-		}
-		out.Globals = make([]*semantic.Global, len(in.Fields))
-		for i, f := range in.Fields {
-			out.Globals[i] = &semantic.Global{AST: f, Name: f.Name.Value}
-			out.Members[out.Globals[i].Name] = out.Globals[i]
-		}
-		for name, member := range out.Members {
-			ctx.add(name, member)
-		}
-		// Add all the alias remaps
-		for _, a := range in.Aliases {
-			ctx.addType(&Alias{AST: a, Name: a.Name.Value})
-		}
-		// Now resolve all the references
-		for _, e := range out.Enums {
-			enum(ctx, e)
-		}
-		for _, g := range out.Globals {
-			global(ctx, g)
-		}
-		for _, p := range out.Pseudonyms {
-			pseudonym(ctx, p)
-		}
-		for _, m := range macros {
-			functionSignature(ctx, m.function)
-			m.scope = ctx.scope
-		}
-		for _, e := range out.Externs {
-			functionSignature(ctx, e)
-			functionBody(ctx, nil, e)
-		}
-		for _, c := range out.Classes {
-			class(ctx, c)
-		}
-		for _, f := range out.Functions {
-			functionSignature(ctx, f)
-			functionBody(ctx, nil, f)
-		}
-		for _, m := range in.Commands {
-			if m.Parameters[0].This {
-				method(ctx, m)
-			}
-		}
-	})
-	sort.Sort(arraysByName(out.Arrays))
-	sort.Sort(mapsByName(out.Maps))
+	}
+	for _, f := range in.Fields {
+		n := &semantic.Global{AST: f, Name: f.Name.Value}
+		ctx.api.Globals = append(ctx.api.Globals, n)
+		ctx.api.Members[n.Name] = n
+	}
+	// Add all the alias remaps
+	for _, a := range in.Aliases {
+		ctx.addType(&Alias{AST: a, Name: a.Name.Value})
+	}
+}
+
+func resolve(ctx *context) {
+	for name, member := range ctx.api.Members {
+		ctx.add(name, member)
+	}
+	// Now resolve all the references
+	for _, e := range ctx.api.Enums {
+		enum(ctx, e)
+	}
+	for _, g := range ctx.api.Globals {
+		global(ctx, g)
+	}
+	for _, p := range ctx.api.Pseudonyms {
+		pseudonym(ctx, p)
+	}
+	for _, m := range ctx.macros {
+		functionSignature(ctx, m.function)
+		m.scope = ctx.scope
+	}
+	for _, e := range ctx.api.Externs {
+		functionSignature(ctx, e)
+		functionBody(ctx, nil, e)
+	}
+	for _, c := range ctx.api.Classes {
+		class(ctx, c)
+	}
+	for _, f := range ctx.api.Functions {
+		functionSignature(ctx, f)
+		functionBody(ctx, nil, f)
+	}
+	for _, m := range ctx.api.Methods {
+		method(ctx, m)
+	}
+	sort.Sort(arraysByName(ctx.api.Arrays))
+	sort.Sort(mapsByName(ctx.api.Maps))
 }
 
 func annotations(ctx *context, in ast.Annotations) semantic.Annotations {

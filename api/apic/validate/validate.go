@@ -21,11 +21,10 @@ package validate
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 
+	"android.googlesource.com/platform/tools/gpu/api"
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
-	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 	"android.googlesource.com/platform/tools/gpu/parse"
@@ -48,15 +47,11 @@ func doValidate(flags flag.FlagSet) {
 	if len(args) < 1 {
 		commands.Usage("Missing api file\n")
 	}
+	mappings := resolver.ASTToSemantic{}
 	for _, apiName := range args {
-		info, err := ioutil.ReadFile(apiName)
-		commands.MaybeError(apiName, err)
+		compiled, errs := api.Resolve(apiName, mappings)
+		commands.CheckErrors(apiName, errs)
 		commands.Logf("Validating api file %q\n", apiName)
-		parsed, errs := parser.Parse(string(info[:]))
-		commands.CheckErrors(apiName, errs)
-		compiled, errs, _ := resolver.Resolve(parsed)
-		commands.CheckErrors(apiName, errs)
-
 		errors := Validate(apiName, compiled)
 		for _, err := range errors {
 			fmt.Fprintf(os.Stderr, "%s\n", err.Error())

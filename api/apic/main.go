@@ -18,7 +18,6 @@ import (
 	"flag"
 
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
-	_ "android.googlesource.com/platform/tools/gpu/api/apic/reflow"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/template"
 	_ "android.googlesource.com/platform/tools/gpu/api/apic/validate"
 )

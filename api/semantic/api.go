@@ -20,12 +20,12 @@ import "android.googlesource.com/platform/tools/gpu/api/ast"
 
 // API is the root of the ASG, and holds a fully resolved api.
 type API struct {
-	AST          *ast.API       // the underlying syntax node this was built from
 	Enums        []*Enum        // the set of enums
 	Classes      []*Class       // the set of classes
 	Pseudonyms   []*Pseudonym   // the set of pseudo types
 	Externs      []*Function    // the external function references
 	Functions    []*Function    // the global functions
+	Methods      []*Function    // the method functions
 	Globals      []*Global      // the global variables
 	Arrays       []*Array       // the array types used
 	StaticArrays []*StaticArray // the fixed size array types used

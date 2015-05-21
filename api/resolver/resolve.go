@@ -26,21 +26,20 @@ import (
 // ASTToSemantic is a relational map of AST nodes to semantic nodes.
 type ASTToSemantic map[ast.Node]semantic.Node
 
-// Resolve takes a valid ast as produced by the parser and converts it to the
+// Resolve takes valid asts as produced by the parser and converts them to the
 // semantic graph form.
-// If the ast is not fully valid (ie there were parse errors) then the results
-// are undefined, and may include null pointer access.
+// If the asts are not fully valid (ie there were parse errors) then the results
+// are undefined.
 // If there are semantic problems with the ast, Resolve will return the set of
 // errors it finds, and the returned graph may be incomplete/invalid.
-func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList, ASTToSemantic) {
+func Resolve(includes []*ast.API, imports map[string]*semantic.API, mappings ASTToSemantic) (*semantic.API, parse.ErrorList) {
 	ctx := &context{
 		api: &semantic.API{
-			AST:     compiled,
 			Members: semantic.Members{},
 		},
 		types:    map[string]semantic.Type{},
 		scope:    &scope{entries: map[string][]semantic.Node{}},
-		mappings: make(ASTToSemantic),
+		mappings: mappings,
 	}
 	func() {
 		defer func() {
@@ -49,11 +48,19 @@ func Resolve(compiled *ast.API) (*semantic.API, parse.ErrorList, ASTToSemantic) 
 				panic(err)
 			}
 		}()
+		for name, i := range imports {
+			ctx.api.Members[name] = i
+		}
 		// Register all the built in symbols
 		for _, t := range semantic.BuiltinTypes {
 			ctx.addType(t)
 		}
-		api(ctx, ctx.api)
+		ctx.with(semantic.VoidType, func() {
+			for _, api := range includes {
+				apiNames(ctx, api)
+			}
+			resolve(ctx)
+		})
 	}()
-	return ctx.api, ctx.errors, ctx.mappings
+	return ctx.api, ctx.errors
 }

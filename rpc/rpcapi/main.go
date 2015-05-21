@@ -19,12 +19,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/api"
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
-	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/rpc/generate"
 )
@@ -54,17 +53,10 @@ func run() error {
 		c[0].Flags.Set("dir", *dir)
 	}
 	apiName := flag.Args()[0]
-	info, err := ioutil.ReadFile(apiName)
-	if err != nil {
-		return err
-	}
-	parsed, errs := parser.Parse(string(info[:]))
-	if err != nil {
-		return err
-	}
-	compiled, errs, _ := resolver.Resolve(parsed)
+	mappings := resolver.ASTToSemantic{}
+	compiled, errs := api.Resolve(apiName, mappings)
 	if len(errs) > 0 {
-		return errs[0]
+		return errs
 	}
 	f := generate.Init(apiName, compiled)
 	if len(errs) > 0 {

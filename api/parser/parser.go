@@ -26,7 +26,7 @@ import (
 // If the string is not syntactically valid, it will also return the
 // errors encountered. If errors are returned, the ast returned will be
 // the incomplete tree so far, and may not be structurally valid.
-func Parse(data string) (*ast.API, []parse.Error) {
+func Parse(data string) (*ast.API, parse.ErrorList) {
 	var api *ast.API
 	parser := func(p *parse.Parser, cst *parse.Branch) {
 		api = requireAPI(p, cst)

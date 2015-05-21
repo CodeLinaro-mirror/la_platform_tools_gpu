@@ -41,6 +41,13 @@ type Error struct {
 // ErrorList is a convenience type for managing lists of errors.
 type ErrorList []Error
 
+func (errs ErrorList) Error() string {
+	if len(errs) == 0 {
+		return ""
+	}
+	return fmt.Sprintf("%d errors, first error was: %v", len(errs), errs[0])
+}
+
 func (err Error) Error() string {
 	return err.Message
 }

@@ -22,6 +22,7 @@ import "android.googlesource.com/platform/tools/gpu/parse"
 // It holds the set of top level AST nodes, grouped by type.
 type API struct {
 	CST        *parse.Branch // underlying parse structure for this node
+	Imports    []*Import     // api files imported with the "import" keyword
 	Macros     []*Function   // functions declared with the "macro" keyword
 	Externs    []*Function   // functions declared with the "extern" keyword
 	Commands   []*Function   // functions declared with the "cmd" keyword
@@ -32,7 +33,7 @@ type API struct {
 	Fields     []*Field      // variables declared at the global scope
 }
 
-// Annotation is the AST node that represents «@name(arguments) constructs»
+// Annotation is the AST node that represents «@name(arguments)» constructs
 type Annotation struct {
 	CST       *parse.Branch // underlying parse structure for this node
 	Name      *Identifier   // the name part (between the @ and the brackets)
@@ -46,3 +47,11 @@ type Annotations []*Annotation
 // Invalid is used when an error was encountered in the parsing, but we want to
 // keep going. If there are no errors, this will never be in the tree.
 type Invalid struct{}
+
+// Import is the AST node that represents «import name "path"» constructs
+type Import struct {
+	CST         *parse.Branch // underlying parse structure for this node
+	Annotations Annotations   // the annotations applied to the import
+	Name        *Identifier   // the name to import an api file as
+	Path        *String       // the relative path to the api file
+}

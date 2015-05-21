@@ -27,6 +27,7 @@ type context struct {
 	errors   parse.ErrorList
 	api      *semantic.API
 	types    map[string]semantic.Type
+	macros   []*macroStub
 	scope    *scope
 	nextId   uint64
 	mappings ASTToSemantic
