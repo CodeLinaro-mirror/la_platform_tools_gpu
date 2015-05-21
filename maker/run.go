@@ -69,7 +69,9 @@ func Run() {
 	for _, match := range targets {
 		e := FindPathEntity(match)
 		if e != nil {
-			meta.DependsOn(e)
+			if Creator(e) != nil {
+				meta.DependsOn(e)
+			}
 		} else {
 			// not an exact entry, so fuzzy search time
 			entities := FindEntities(match)
@@ -77,7 +79,9 @@ func Run() {
 				log.Fatalf("no entities match for %q", match)
 			}
 			for _, e := range entities {
-				meta.DependsOn(e)
+				if Creator(e) != nil {
+					meta.DependsOn(e)
+				}
 			}
 		}
 	}
