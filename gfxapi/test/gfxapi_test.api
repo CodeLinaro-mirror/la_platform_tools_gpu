@@ -12,9 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-alias void[] pointer
 
-@replay_remap type u32 remapped
+import "gfxapi_test_include.api"
+import imported "gfxapi_test_import.api"
+
+class Tester {
+  imported.Imported A
+	Included B
+}
 
 cmd void cmd_void() {}
 

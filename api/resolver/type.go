@@ -33,6 +33,8 @@ func type_(ctx *context, in interface{}) semantic.Type {
 		return indexedType(ctx, in)
 	case *ast.PointerType:
 		return pointerType(ctx, in)
+	case *ast.Imported:
+		return importedType(ctx, in)
 	case ast.Node:
 		ctx.errorf(in, "Unhandled typeref %T found", in)
 		return semantic.VoidType
@@ -360,6 +362,20 @@ func pseudonym(ctx *context, out *semantic.Pseudonym) {
 	out.Docs = findDocumentation(in.CST)
 	out.Annotations = annotations(ctx, in.Annotations)
 	out.To = type_(ctx, in.To)
+}
+
+func importedType(ctx *context, in *ast.Imported) semantic.Type {
+	api, ok := ctx.get(in, in.From.Value).(*semantic.API)
+	if !ok {
+		ctx.errorf(in, "%s not an imported api", in.From.Value)
+		return nil
+	}
+	t, ok := api.Member(in.Name.Value).(semantic.Type)
+	if !ok {
+		ctx.errorf(in, "%s not a type in %s", in.Name.Value, in.From.Value)
+		return nil
+	}
+	return t
 }
 
 func typename(e semantic.Type) string {

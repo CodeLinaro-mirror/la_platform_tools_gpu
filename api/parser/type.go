@@ -141,6 +141,15 @@ func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if ref == nil {
 		return nil
 	}
+	if id, isid := ref.(*ast.Identifier); isid && peekOperator(ast.OpMember, p) {
+		t := &ast.Imported{From: id}
+		p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+			t.CST = cst
+			requireOperator(ast.OpMember, p, cst)
+			t.Name = requireIdentifier(p, cst)
+		})
+		ref = t
+	}
 	for {
 		if t := extendTypeRef(p, cst, ref); t != nil {
 			ref = t

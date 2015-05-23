@@ -142,3 +142,12 @@ type Pseudonym struct {
 	Name        *Identifier   // the name of the type
 	To          Node          // the underlying type
 }
+
+// Imported represents an imported type name.
+type Imported struct {
+	CST  *parse.Branch // underlying parse structure for this node
+	From *Identifier   // the import this name is from
+	Name *Identifier   // the name being imported
+}
+
+func (t Imported) Fragment() parse.Fragment { return t.CST }

@@ -17,7 +17,10 @@ package test
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
 type State struct {
@@ -32,3 +35,11 @@ func (s *State) getFramebufferAttachmentSize(att gfxapi.FramebufferAttachment) (
 func (i remapped) remap(a atom.Atom, s *gfxapi.State) (interface{}, bool) {
 	return i, true
 }
+
+type Imported struct {
+	binary.Generate
+	Value uint32
+}
+
+func (Imported) Init()                                                                 {}
+func (Imported) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value { return nil }

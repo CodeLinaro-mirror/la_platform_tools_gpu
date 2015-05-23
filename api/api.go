@@ -78,11 +78,16 @@ func (p *Processor) Resolve(apiname string, mappings resolver.ASTToSemantic) (*s
 	if err != nil {
 		return nil, parse.ErrorList{parse.Error{Message: err.Error()}}
 	}
+	wd, name := filepath.Split(absname)
+	return p.resolve(wd, name, mappings)
+}
+
+func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*semantic.API, parse.ErrorList) {
+	absname := filepath.Join(wd, name)
 	if api, ok := p.Resolved[absname]; ok {
 		return api, nil
 	}
 	// Parse all the includes
-	wd, name := filepath.Split(absname)
 	includes := map[string]*ast.API{}
 	errs := p.include(includes, wd, name)
 	if len(errs) > 0 {
@@ -111,7 +116,7 @@ func (p *Processor) Resolve(apiname string, mappings resolver.ASTToSemantic) (*s
 					Message: fmt.Sprintf("Duplicate import %s", i.Name.Value)},
 				}
 			}
-			api, errs := Resolve(i.Path.Value, mappings)
+			api, errs := p.resolve(wd, i.Path.Value, mappings)
 			if len(errs) > 0 {
 				return nil, errs
 			}
