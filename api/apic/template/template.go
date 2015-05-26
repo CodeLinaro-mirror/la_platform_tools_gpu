@@ -24,8 +24,8 @@ import (
 	"path/filepath"
 	"text/template"
 
+	"android.googlesource.com/platform/tools/gpu/api"
 	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
-	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
@@ -152,12 +152,10 @@ func doTemplate(flags flag.FlagSet) {
 	mainTemplate := args[1]
 	commands.Logf("Reading api file %q\n", apiName)
 	inputDep(apiName)
-	info, err := ioutil.ReadFile(apiName)
-	commands.MaybeError(apiName, err)
+
 	commands.Logf("Compiling api file %q\n", apiName)
-	parsed, errs := parser.Parse(string(info[:]))
-	commands.CheckErrors(apiName, errs)
-	compiled, errs, _ := resolver.Resolve(parsed)
+	mappings := resolver.ASTToSemantic{}
+	compiled, errs := api.Resolve(apiName, mappings)
 	commands.CheckErrors(apiName, errs)
 	f := NewFunctions(apiName, compiled, ioutil.ReadFile, nil)
 	commands.MaybeError(mainTemplate, f.Include(mainTemplate))

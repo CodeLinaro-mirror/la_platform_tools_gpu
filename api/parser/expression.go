@@ -127,17 +127,8 @@ func literal(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if l := keyword(ast.KeywordFalse, p, cst); l != nil {
 		return &ast.Bool{CST: l, Value: false}
 	}
-	if p.Rune(ast.Quote) {
-		n := &ast.String{}
-		p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
-			n.CST = l
-			p.SeekRune(ast.Quote)
-			p.Rune(ast.Quote)
-			l.SetToken(p.Consume())
-			v := l.Token().String()
-			n.Value = v[1 : len(v)-1]
-		})
-		return n
+	if s := string_(p, cst); s != nil {
+		return s
 	}
 	if peekOperator(ast.OpUnknown, p) {
 		n := &ast.Unknown{}
@@ -151,6 +142,31 @@ func literal(p *parse.Parser, cst *parse.Branch) ast.Node {
 		return n
 	}
 	return nil
+}
+
+// '"' string '"'
+func string_(p *parse.Parser, cst *parse.Branch) *ast.String {
+	if !p.Rune(ast.Quote) {
+		return nil
+	}
+	n := &ast.String{}
+	p.ParseLeaf(cst, func(p *parse.Parser, l *parse.Leaf) {
+		n.CST = l
+		p.SeekRune(ast.Quote)
+		p.Rune(ast.Quote)
+		l.SetToken(p.Consume())
+		v := l.Token().String()
+		n.Value = v[1 : len(v)-1]
+	})
+	return n
+}
+
+func requireString(p *parse.Parser, cst *parse.Branch) *ast.String {
+	s := string_(p, cst)
+	if s == nil {
+		p.Expected("string")
+	}
+	return s
 }
 
 // standard numeric formats

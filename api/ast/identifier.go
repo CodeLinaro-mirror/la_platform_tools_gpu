@@ -41,6 +41,7 @@ const (
 	KeywordFalse     = "false"
 	KeywordFor       = "for"
 	KeywordIf        = "if"
+	KeywordImport    = "import"
 	KeywordIn        = "in"
 	KeywordInout     = "inout"
 	KeywordLength    = "len"

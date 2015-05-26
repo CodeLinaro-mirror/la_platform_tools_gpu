@@ -19,15 +19,18 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// { macro | extern | enum | alias | pseudonym | class | command | field }
+// { import | macro | extern | enum | alias | pseudonym | class | command | field }
 func requireAPI(p *parse.Parser, cst *parse.Branch) *ast.API {
 	api := &ast.API{}
 	api.CST = cst
+
 	annotations := &ast.Annotations{}
 	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 		for !p.IsEOF() {
 			parseAnnotations(annotations, p, cst)
-			if m := macro(p, cst, annotations); m != nil {
+			if i := import_(p, cst, annotations); i != nil {
+				api.Imports = append(api.Imports, i)
+			} else if m := macro(p, cst, annotations); m != nil {
 				api.Macros = append(api.Macros, m)
 			} else if e := extern(p, cst, annotations); e != nil {
 				api.Externs = append(api.Externs, e)
@@ -80,4 +83,20 @@ func consumeAnnotations(dst *ast.Annotations, src *ast.Annotations) {
 	l := append(*dst, (*src)...)
 	*src = (*src)[0:0]
 	*dst = l
+}
+
+// { annotation } 'import' [ identifier ] '"' path '""'
+func import_(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Import {
+	if !peekKeyword(ast.KeywordImport, p) {
+		return nil
+	}
+	i := &ast.Import{}
+	consumeAnnotations(&i.Annotations, a)
+	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+		i.CST = cst
+		requireKeyword(ast.KeywordImport, p, cst)
+		i.Name = identifier(p, cst)
+		i.Path = requireString(p, cst)
+	})
+	return i
 }

@@ -17,6 +17,7 @@ package validate
 import (
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
@@ -31,7 +32,7 @@ func compile(t *testing.T, source string) *semantic.API {
 		return nil
 	}
 
-	compiled, errs, _ := resolver.Resolve(parsed)
+	compiled, errs := resolver.Resolve([]*ast.API{parsed}, nil, resolver.ASTToSemantic{})
 	for _, err := range errs {
 		t.Error(err.Error())
 	}
