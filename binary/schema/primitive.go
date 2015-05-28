@@ -40,6 +40,31 @@ const (
 	String
 )
 
+var (
+	methodToString = map[Method]string{
+		ID:      "ID",
+		Bool:    "Bool",
+		Int8:    "Int8",
+		Uint8:   "Uint8",
+		Int16:   "Int16",
+		Uint16:  "Uint16",
+		Int32:   "Int32",
+		Uint32:  "Uint32",
+		Int64:   "Int64",
+		Uint64:  "Uint64",
+		Float32: "Float32",
+		Float64: "Float64",
+		String:  "String",
+	}
+	stringToMethod = map[string]Method{}
+)
+
+func init() {
+	for m, s := range methodToString {
+		stringToMethod[s] = m
+	}
+}
+
 // Primitive is the kind for primitive types with corresponding direct methods on
 // Encoder and Decoder
 type Primitive struct {
@@ -168,17 +193,22 @@ func (p *Primitive) Skip(d binary.Decoder) error {
 // This will convert a string to a Method, or return an error if the string was
 // not a valid method name.
 func ParseMethod(s string) (Method, error) {
-	for i := 0; i+1 < len(_Method_index); i++ {
-		if s == _Method_name[_Method_index[i]:_Method_index[i+1]] {
-			return Method(i), nil
-		}
+	if m, ok := stringToMethod[s]; ok {
+		return m, nil
 	}
 	return 0, fmt.Errorf("Invalid Method name %s", s)
+}
+
+func (m Method) String() string {
+	if s, ok := methodToString[m]; ok {
+		return s
+	}
+	return fmt.Sprintf("Method(%d)", m)
 }
 
 // Skippable returns true if the method has a complimentary skip method on the
 // decoder interface. If this is not true, the normal decoding method is used
 // during skipping.
-func (i Method) Skippable() bool {
-	return i == ID || i == String
+func (m Method) Skippable() bool {
+	return m == ID || m == String
 }
