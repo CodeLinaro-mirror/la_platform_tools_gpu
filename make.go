@@ -115,9 +115,13 @@ func init() {
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen", "stringer")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
+		cctargets := build.HostOS
+		if os.Getenv("ANDROID_NDK_ROOT") != "" {
+			cctargets += ",android-arm,android-arm64"
+		}
 		GoRun(Path(gpusrc, "cc/build.go"),
 			"--runtests",
-			"--targets="+build.HostOS+",android-arm,android-arm64",
+			"--targets="+cctargets,
 		).Creates(Apps.Gapir).DependsOn("code")
 		// The testing rules
 		gotest := GoTest(GPURoot + "/...")
