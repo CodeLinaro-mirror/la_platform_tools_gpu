@@ -315,12 +315,12 @@ func importedType(ctx *context, in *ast.Imported) semantic.Type {
 	api, ok := ctx.get(in, in.From.Value).(*semantic.API)
 	if !ok {
 		ctx.errorf(in, "%s not an imported api", in.From.Value)
-		return nil
+		return semantic.VoidType
 	}
 	t, ok := api.Member(in.Name.Value).(semantic.Type)
 	if !ok {
 		ctx.errorf(in, "%s not a type in %s", in.Name.Value, in.From.Value)
-		return nil
+		return semantic.VoidType
 	}
 	return t
 }
