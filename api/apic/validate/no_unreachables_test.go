@@ -17,6 +17,7 @@ package validate
 import (
 	"testing"
 
+	"android.googlesource.com/platform/tools/gpu/api/apic/commands"
 	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/parser"
 	"android.googlesource.com/platform/tools/gpu/api/resolver"
@@ -25,21 +26,9 @@ import (
 
 func compile(t *testing.T, source string) *semantic.API {
 	parsed, errs := parser.Parse(source)
-	for _, err := range errs {
-		t.Error(err.Error())
-	}
-	if len(errs) > 0 {
-		return nil
-	}
-
+	commands.CheckErrors(source, errs)
 	compiled, errs := resolver.Resolve([]*ast.API{parsed}, nil, resolver.ASTToSemantic{})
-	for _, err := range errs {
-		t.Error(err.Error())
-	}
-	if len(errs) > 0 {
-		return nil
-	}
-
+	commands.CheckErrors(source, errs)
 	return compiled
 }
 
@@ -136,7 +125,7 @@ func TestSimpleUnreachable(t *testing.T) {
 
 		{`s32 x = 0
       cmd void f() {
-        a := 5 as u32
+        a := as!u32(5)
         if (a > 4) { x = 1 } else { x = 2 }
         if (a > 5) { x = 1 } else { x = 2 }
         if (a > 6) { x = 1 } else { x = 2 }
@@ -154,7 +143,7 @@ func TestSimpleUnreachable(t *testing.T) {
 
 		{`s32 x = 0
       cmd void f() {
-        a := 5 as u32
+        a := as!u32(5)
         if (a >= 4) { x = 1 } else { x = 2 }
         if (a >= 5) { x = 1 } else { x = 2 }
         if (a >= 6) { x = 1 } else { x = 2 }
@@ -172,7 +161,7 @@ func TestSimpleUnreachable(t *testing.T) {
 
 		{`s32 x = 0
       cmd void f() {
-        a := 5 as u32
+        a := as!u32(5)
         if (a < 4) { x = 1 } else { x = 2 }
         if (a < 5) { x = 1 } else { x = 2 }
         if (a < 6) { x = 1 } else { x = 2 }
@@ -190,7 +179,7 @@ func TestSimpleUnreachable(t *testing.T) {
 
 		{`s32 x = 0
       cmd void f() {
-        a := 5 as u32
+        a := as!u32(5)
         if (a <= 4) { x = 1 } else { x = 2 }
         if (a <= 5) { x = 1 } else { x = 2 }
         if (a <= 6) { x = 1 } else { x = 2 }
@@ -208,7 +197,7 @@ func TestSimpleUnreachable(t *testing.T) {
 
 		{`s32 x = 0
       cmd void f() {
-        a := 5 as u32
+        a := as!u32(5)
         if (a == 4) { x = 1 } else { x = 2 }
         if (a == 5) { x = 1 } else { x = 2 }
         if (a == 6) { x = 1 } else { x = 2 }

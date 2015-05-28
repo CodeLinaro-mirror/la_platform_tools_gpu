@@ -19,36 +19,20 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
-// lhs { extend } [class_initializer]
+// lhs { extend }
 func requireExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	lhs := requireLHSExpression(p, cst)
 	for {
 		if e := extendExpression(p, cst, lhs); e != nil {
 			lhs = e
 		} else {
-			if l, ok := lhs.(*ast.Identifier); ok && peekOperator(ast.OpBlockStart, p) {
-				lhs = requireClassInitializer(p, cst, l)
-			}
 			break
 		}
 	}
 	return lhs
 }
 
-// lhs { extend }
-func requireSimpleExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
-	lhs := requireLHSExpression(p, cst)
-	for {
-		if e := extendExpression(p, cst, lhs); e != nil {
-			lhs = e
-		} else {
-			break
-		}
-	}
-	return lhs
-}
-
-// ( group | switch | new | length | literal | unary_op | identifier)
+// ( group | switch | literal | unary_op | generic)
 func requireLHSExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if g := group(p, cst); g != nil {
 		return g
@@ -56,34 +40,25 @@ func requireLHSExpression(p *parse.Parser, cst *parse.Branch) ast.Node {
 	if s := switch_(p, cst); s != nil {
 		return s
 	}
-	if n := new(p, cst); n != nil {
-		return n
-	}
-	if l := length(p, cst); l != nil {
-		return l
-	}
 	if l := literal(p, cst); l != nil {
 		return l
 	}
 	if u := unaryOp(p, cst); u != nil {
 		return u
 	}
-	if i := identifier(p, cst); i != nil {
-		return i
+	if g := generic(p, cst); g != nil {
+		return g
 	}
 	p.Expected("expression")
 	return &ast.Invalid{}
 }
 
-// lhs (index | call | cast | binary_op | member)
+// lhs (index | call | binary_op | member)
 func extendExpression(p *parse.Parser, cst *parse.Branch, lhs ast.Node) ast.Node {
 	if i := index(p, cst, lhs); i != nil {
 		return i
 	}
 	if c := call(p, cst, lhs); c != nil {
-		return c
-	}
-	if c := cast(p, cst, lhs); c != nil {
 		return c
 	}
 	if e := binaryOp(p, cst, lhs); e != nil {
@@ -93,27 +68,6 @@ func extendExpression(p *parse.Parser, cst *parse.Branch, lhs ast.Node) ast.Node
 		return m
 	}
 	return nil
-}
-
-// classname '{' { fieldname : expression [ ',' ] } '}'
-func requireClassInitializer(p *parse.Parser, cst *parse.Branch, class *ast.Identifier) *ast.ClassInitializer {
-	e := &ast.ClassInitializer{Class: class}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		e.CST = cst
-		requireOperator(ast.OpBlockStart, p, cst)
-		for !operator(ast.OpBlockEnd, p, cst) {
-			p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-				entry := &ast.FieldInitializer{}
-				entry.CST = cst
-				entry.Name = requireIdentifier(p, cst)
-				requireOperator(ast.OpInitialise, p, cst)
-				entry.Value = requireExpression(p, cst)
-				operator(ast.OpListSeparator, p, cst)
-				e.Fields = append(e.Fields, entry)
-			})
-		}
-	})
-	return e
 }
 
 // 'null' | 'true' | 'false' | '"' string '"' | '?' | number
@@ -235,37 +189,6 @@ func switch_(p *parse.Parser, cst *parse.Branch) *ast.Switch {
 	return e
 }
 
-// 'new' class_initializer
-func new(p *parse.Parser, cst *parse.Branch) *ast.New {
-	if !peekKeyword(ast.KeywordNew, p) {
-		return nil
-	}
-	e := &ast.New{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		e.CST = cst
-		requireKeyword(ast.KeywordNew, p, cst)
-		class := requireIdentifier(p, cst)
-		e.ClassInitializer = requireClassInitializer(p, cst, class)
-	})
-	return e
-}
-
-// 'len' '(' expression ')'
-func length(p *parse.Parser, cst *parse.Branch) *ast.Length {
-	if !peekKeyword(ast.KeywordLength, p) {
-		return nil
-	}
-	s := &ast.Length{}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		s.CST = cst
-		requireKeyword(ast.KeywordLength, p, cst)
-		requireOperator(ast.OpListStart, p, cst)
-		s.Object = requireExpression(p, cst)
-		requireOperator(ast.OpListEnd, p, cst)
-	})
-	return s
-}
-
 // lhs '[' expression [ ':' [ expression ] ] ']'
 func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 	if !peekOperator(ast.OpIndexStart, p) {
@@ -281,7 +204,7 @@ func index(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Index {
 			if !peekOperator(ast.OpIndexEnd, p) {
 				p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
 					n.CST = cst
-					n.RHS = requireSimpleExpression(p, cst)
+					n.RHS = requireExpression(p, cst)
 				})
 			}
 			e.Index = n
@@ -301,25 +224,21 @@ func call(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Call {
 		e.CST = cst
 		requireOperator(ast.OpListStart, p, cst)
 		for !operator(ast.OpListEnd, p, cst) {
-			if len(e.Arguments) > 0 {
-				requireOperator(ast.OpListSeparator, p, cst)
+			arg := requireExpression(p, cst)
+			if i, ok := arg.(*ast.Generic); ok && operator(ast.OpInitialise, p, cst) {
+				n := &ast.NamedArg{Name: i.Name}
+				p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
+					n.CST = cst
+					n.Value = requireExpression(p, cst)
+				})
+				arg = n
 			}
-			e.Arguments = append(e.Arguments, requireExpression(p, cst))
+			e.Arguments = append(e.Arguments, arg)
+			if operator(ast.OpListEnd, p, cst) {
+				break
+			}
+			requireOperator(ast.OpListSeparator, p, cst)
 		}
-	})
-	return e
-}
-
-// lhs 'as' type
-func cast(p *parse.Parser, cst *parse.Branch, lhs ast.Node) *ast.Cast {
-	if !peekKeyword(ast.KeywordAs, p) {
-		return nil
-	}
-	e := &ast.Cast{Object: lhs}
-	p.ParseBranch(cst, func(p *parse.Parser, cst *parse.Branch) {
-		e.CST = cst
-		requireKeyword(ast.KeywordAs, p, cst)
-		e.Type = requireTypeRef(p, cst)
 	})
 	return e
 }

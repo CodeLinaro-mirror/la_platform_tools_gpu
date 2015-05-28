@@ -67,8 +67,6 @@ func body(ctx *context, in []ast.Node, owner semantic.Node) *semantic.Return {
 
 func statement(ctx *context, in ast.Node) semantic.Node {
 	switch in := in.(type) {
-	case *ast.Assert:
-		return assert(ctx, in)
 	case *ast.Assign:
 		return assign(ctx, in)
 	case *ast.DeclareLocal:
@@ -89,47 +87,13 @@ func statement(ctx *context, in ast.Node) semantic.Node {
 	case *ast.Return:
 		ctx.errorf(in, "unexpected return")
 		return invalid{}
+	case *ast.Generic:
+		ctx.errorf(in.Name, "unexpected identifier %s", in.Name.Value)
+		return invalid{}
 	default:
-		ctx.errorf(in, "not a statement")
+		ctx.errorf(in, "not a statement (%T)", in)
 		return invalid{}
 	}
-}
-
-func assert(ctx *context, in *ast.Assert) *semantic.Assert {
-	out := &semantic.Assert{AST: in}
-	out.Condition = expression(ctx, in.Condition)
-	t := out.Condition.ExpressionType()
-	if !equal(t, semantic.BoolType) {
-		ctx.errorf(in, "assert expression must be a bool, got %s", typename(t))
-	}
-	ctx.mappings[in] = out
-	return out
-}
-
-func sliceAssign(ctx *context, in *ast.Assign, lhs semantic.Expression, rhs semantic.Expression) semantic.Node {
-	ls, isls := lhs.(*semantic.Slice)
-	rs, isrs := rhs.(*semantic.Slice)
-	if !(isls || isrs) {
-		// no slices involved, not a slice assign
-		return nil
-	}
-	out := &semantic.Copy{AST: in, Dst: ls, Src: rs}
-	if !isls {
-		// read expression
-		if _, ignore := lhs.(*semantic.Ignore); !ignore {
-			ctx.errorf(in, "invalid slice assignment to %s", typename(lhs.ExpressionType()))
-		}
-	} else if !isrs {
-		// write expression
-		if _, ignore := rhs.(*semantic.Ignore); !ignore {
-			ctx.errorf(in, "invalid slice assignment from %s", typename(rhs.ExpressionType()))
-		}
-		return out
-	} else {
-		// full copy expression
-		// TODO: infer upper bound
-	}
-	return out
 }
 
 func assign(ctx *context, in *ast.Assign) semantic.Node {
@@ -138,20 +102,18 @@ func assign(ctx *context, in *ast.Assign) semantic.Node {
 	ctx.with(lhs.ExpressionType(), func() {
 		rhs = expression(ctx, in.RHS)
 	})
-	out := sliceAssign(ctx, in, lhs, rhs)
-	if out == nil {
-		inferUnknown(ctx, lhs, rhs)
-		lt := lhs.ExpressionType()
-		rt := rhs.ExpressionType()
-		if !assignable(lt, rt) {
-			ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
-		}
-		switch lhs := lhs.(type) {
-		case *semantic.MapIndex:
-			out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
-		default:
-			out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
-		}
+	var out semantic.Node
+	inferUnknown(ctx, lhs, rhs)
+	lt := lhs.ExpressionType()
+	rt := rhs.ExpressionType()
+	if !assignable(lt, rt) {
+		ctx.errorf(in, "cannot assign %s to %s", typename(rt), typename(lt))
+	}
+	switch lhs := lhs.(type) {
+	case *semantic.MapIndex:
+		out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
+	default:
+		out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
 	}
 	ctx.mappings[in] = out
 	return out

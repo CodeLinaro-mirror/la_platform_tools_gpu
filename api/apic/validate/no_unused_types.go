@@ -46,9 +46,9 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 		}
 		used[t] = true
 		switch t := t.(type) {
-		case *semantic.Array:
-			markUsed(t.ValueType)
-		case *semantic.Buffer:
+		case *semantic.Reference:
+			markUsed(t.To)
+		case *semantic.Slice:
 			markUsed(t.To)
 		case *semantic.Map:
 			markUsed(t.ValueType)
@@ -78,8 +78,6 @@ func noUnusedTypes(apiName string, api *semantic.API) []error {
 		case *semantic.BinaryOp:
 			traverseExpression(e.LHS)
 			traverseExpression(e.RHS)
-		case *semantic.New:
-			markUsed(e.Type)
 		case *semantic.ClassInitializer:
 			markUsed(e.Class)
 			// TODO: Insert more expression cases

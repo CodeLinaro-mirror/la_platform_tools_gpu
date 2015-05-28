@@ -43,16 +43,14 @@ func expression(ctx *context, in ast.Node) semantic.Expression {
 		return index(ctx, in)
 	case *ast.Identifier:
 		return identifier(ctx, in)
-	case *ast.ClassInitializer:
-		return classInitializer(ctx, in)
-	case *ast.New:
-		return new(ctx, in)
+	case *ast.Generic:
+		id := identifier(ctx, in.Name)
+		if len(in.Arguments) > 0 {
+			ctx.errorf(in, "identifier %s does not support type arguments", in.Name.Value)
+		}
+		return id
 	case *ast.Group:
 		return expression(ctx, in.Expression)
-	case *ast.Cast:
-		return cast(ctx, in)
-	case *ast.Length:
-		return length(ctx, in)
 	case *ast.Unknown:
 		return &semantic.Unknown{AST: in}
 	case *ast.Number:
@@ -70,6 +68,12 @@ func expression(ctx *context, in ast.Node) semantic.Expression {
 }
 
 func call(ctx *context, in *ast.Call) semantic.Expression {
+	if b := internalCall(ctx, in); b != nil {
+		return b
+	}
+	if c := classCall(ctx, in); c != nil {
+		return c
+	}
 	target := expression(ctx, in.Target)
 	switch target := target.(type) {
 	case *macroStub:
@@ -237,57 +241,56 @@ func member(ctx *context, in *ast.Member) semantic.Expression {
 	return out
 }
 
-func arrayIndex(ctx *context, in *ast.Index, object semantic.Expression, valueType semantic.Type) semantic.Expression {
-	var index semantic.Expression
-	ctx.with(semantic.Int32Type, func() {
-		index = expression(ctx, in.Index)
-	})
-	if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
-		// slice operator indexing
-		out := &semantic.Slice{
-			AST:   in,
-			Array: object,
-			Lower: bop.LHS,
-			Upper: bop.RHS,
-		}
-		ctx.mappings[in] = out
-		return out
-	}
-	// Normal array indexing
-	out := &semantic.ArrayIndex{AST: in, Array: object, Index: index}
-	it := index.ExpressionType()
-	if !equal(it, semantic.Int32Type) && !equal(it, semantic.Uint32Type) {
-		ctx.errorf(in, "type %s not valid indexing array", typename(it))
-	}
-	out.ValueType = valueType
-	ctx.mappings[in] = out
-	return out
-}
-
 func index(ctx *context, in *ast.Index) semantic.Expression {
 	object := expression(ctx, in.Object)
 	at := baseType(object.ExpressionType())
+	var index semantic.Expression
 	switch at := at.(type) {
-	case *semantic.Array:
-		return arrayIndex(ctx, in, object, at.ValueType)
 	case *semantic.Pointer:
-		if at.Array {
-			return arrayIndex(ctx, in, object, at.To)
-		}
-	case *semantic.Buffer:
-		if at.Array {
-			return arrayIndex(ctx, in, object, at.To)
-		}
-	case *semantic.Map:
-		out := &semantic.MapIndex{AST: in, Map: object}
-		ctx.with(at.KeyType, func() {
-			out.Index = expression(ctx, in.Index)
+		ctx.with(semantic.Int32Type, func() {
+			index = expression(ctx, in.Index)
 		})
-		it := out.Index.ExpressionType()
+		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
+			out := &semantic.PointerRange{AST: in, Pointer: object, Type: getSliceType(ctx, in, at.To), Range: bop}
+			ctx.mappings[in] = out
+			return out
+		}
+		if n, ok := index.(semantic.Int32Value); ok && n == 0 {
+			// TODO: clean up the magical 0 index on pointers
+			r := &semantic.BinaryOp{LHS: n, Operator: ast.OpSlice, RHS: n + 1}
+			st := getSliceType(ctx, in, at.To)
+			slice := &semantic.PointerRange{AST: in, Pointer: object, Type: st, Range: r}
+			out := &semantic.SliceIndex{AST: in, Slice: slice, Type: st, Index: n}
+			ctx.mappings[in] = out
+			return out
+		}
+		ctx.errorf(in, "type %s not valid slicing pointer", typename(index.ExpressionType()))
+		return invalid{}
+	case *semantic.Slice:
+		ctx.with(semantic.Int32Type, func() {
+			index = expression(ctx, in.Index)
+		})
+		if bop, ok := index.(*semantic.BinaryOp); ok && bop.Operator == ast.OpSlice {
+			out := &semantic.SliceRange{AST: in, Slice: object, Type: at, Range: bop}
+			ctx.mappings[in] = out
+			return out
+		}
+		it := index.ExpressionType()
+		if !equal(it, semantic.Int32Type) && !equal(it, semantic.Uint32Type) {
+			ctx.errorf(in, "type %s not valid indexing slice", typename(it))
+		}
+		out := &semantic.SliceIndex{AST: in, Slice: object, Type: at, Index: index}
+		ctx.mappings[in] = out
+		return out
+	case *semantic.Map:
+		ctx.with(at.KeyType, func() {
+			index = expression(ctx, in.Index)
+		})
+		it := index.ExpressionType()
 		if !comparable(it, at.KeyType) {
 			ctx.errorf(in, "type %s not valid indexing map", typename(it))
 		}
-		out.ValueType = at.ValueType
+		out := &semantic.MapIndex{AST: in, Map: object, Type: at, Index: index}
 		ctx.mappings[in] = out
 		return out
 	}
@@ -311,106 +314,66 @@ func identifier(ctx *context, in *ast.Identifier) semantic.Expression {
 	}
 }
 
-func classInitializer(ctx *context, in *ast.ClassInitializer) *semantic.ClassInitializer {
-	out := &semantic.ClassInitializer{AST: in}
-	t := type_(ctx, in.Class)
+func classCall(ctx *context, in *ast.Call) semantic.Expression {
+	g, ok := in.Target.(*ast.Generic)
+	if !ok {
+		return nil
+	}
+	t := ctx.findType(in, g.Name.Value)
 	class, ok := t.(*semantic.Class)
 	if !ok {
-		ctx.errorf(in.Class, "non class entry %s in extension list", typename(t))
+		return nil
+	}
+	return classInitializer(ctx, class, in)
+}
+
+func classInitializer(ctx *context, class *semantic.Class, in *ast.Call) *semantic.ClassInitializer {
+	out := &semantic.ClassInitializer{AST: in, Class: class}
+	ctx.mappings[in] = out
+	if len(in.Arguments) == 0 {
 		return out
 	}
-	out.Class = class
-	for _, f := range in.Fields {
-		out.Fields = append(out.Fields, fieldInitializer(ctx, out.Class, f))
+	if _, named := in.Arguments[0].(*ast.NamedArg); named {
+		for _, a := range in.Arguments {
+			n, ok := a.(*ast.NamedArg)
+			if !ok {
+				ctx.errorf(a, "class %s has no field %s", class.Name, n.Name.Value)
+				return out
+			}
+			m := class.Member(n.Name.Value)
+			if m == nil {
+				ctx.errorf(n.Name, "class %s has no field %s", class.Name, n.Name.Value)
+				return out
+			}
+			f, ok := m.(*semantic.Field)
+			if !ok {
+				ctx.errorf(n.Name, "member %s of class %s is not a field [%T]", n.Name.Value, class.Name, m)
+				return out
+			}
+			ctx.mappings[n.Name] = f
+			out.Fields = append(out.Fields, fieldInitializer(ctx, class, f, n.Value))
+		}
+		return out
 	}
-	ctx.mappings[in] = out
+	if len(in.Arguments) > len(class.Fields) {
+		ctx.errorf(in, "too many arguments to class %s constructor, expected %d got %d", class.Name, len(class.Fields), len(in.Arguments))
+		return out
+	}
+	for i, a := range in.Arguments {
+		out.Fields = append(out.Fields, fieldInitializer(ctx, class, class.Fields[i], a))
+	}
 	return out
 }
 
-func fieldInitializer(ctx *context, class *semantic.Class, in *ast.FieldInitializer) *semantic.FieldInitializer {
-	out := &semantic.FieldInitializer{AST: in}
-	m := class.Member(in.Name.Value)
-	if m == nil {
-		ctx.errorf(in.Name, "class %s has no field %s", class.Name, in.Name.Value)
-		return out
-	}
-	field, ok := m.(*semantic.Field)
-	if !ok {
-		ctx.errorf(in.Name, "member %s of class %s is not a field [%T]", in.Name.Value, class.Name, m)
-		return out
-	}
-	ctx.mappings[in.Name] = field
-	out.Field = field
+func fieldInitializer(ctx *context, class *semantic.Class, field *semantic.Field, in ast.Node) *semantic.FieldInitializer {
+	out := &semantic.FieldInitializer{AST: in, Field: field}
 	ctx.with(field.Type, func() {
-		out.Value = expression(ctx, in.Value)
+		out.Value = expression(ctx, in)
 	})
-	ft := out.Field.Type
+	ft := field.Type
 	vt := out.Value.ExpressionType()
 	if !assignable(ft, vt) {
-		ctx.errorf(in, "field %s cannot assign %s to %s", out.Field.Name, typename(vt), typename(ft))
-	}
-	ctx.mappings[in] = out
-	return out
-}
-
-func new(ctx *context, in *ast.New) *semantic.New {
-	out := &semantic.New{AST: in}
-	out.Initializer = classInitializer(ctx, in.ClassInitializer)
-	out.Type = getBufferType(ctx, in, out.Initializer.Class, false)
-	ctx.mappings[in] = out
-	return out
-}
-
-func cast(ctx *context, in *ast.Cast) semantic.Expression {
-	t := type_(ctx, in.Type)
-	var obj semantic.Expression
-	ctx.with(t, func() {
-		obj = expression(ctx, in.Object)
-	})
-	if equal(t, obj.ExpressionType()) {
-		ctx.mappings[in] = obj
-		return obj
-	}
-	out := &semantic.Cast{AST: in, Object: obj, Type: t}
-	if !castable(obj.ExpressionType(), out.Type) {
-		ctx.errorf(in, "cannot cast from %s to %s", typename(obj.ExpressionType()), typename(out.Type))
-	}
-	ctx.mappings[in] = out
-	return out
-}
-
-func length(ctx *context, in *ast.Length) *semantic.Length {
-	out := &semantic.Length{AST: in}
-	out.Object = expression(ctx, in.Object)
-	at := out.Object.ExpressionType()
-	if at == nil {
-		ctx.errorf(in, "condition was not valid")
-		return out
-	}
-	ok := false
-	ty := baseType(at)
-	switch ty := ty.(type) {
-	case *semantic.Array:
-		ok = true
-	case *semantic.Map:
-		ok = true
-	case *semantic.Pointer:
-		ok = ty.Array
-	case *semantic.Builtin:
-		if ty == semantic.StringType {
-			ok = true
-		}
-	}
-	if !ok {
-		ctx.errorf(in, "len cannot work out length of type %s", typename(at))
-		return out
-	}
-	infer := baseType(ctx.scope.inferType)
-	switch infer {
-	case semantic.Int32Type, semantic.Uint32Type, semantic.Int64Type, semantic.Uint64Type:
-		out.Type = infer
-	default:
-		out.Type = semantic.Int32Type
+		ctx.errorf(in, "field %s cannot assign %s to %s", field.Name, typename(vt), typename(ft))
 	}
 	ctx.mappings[in] = out
 	return out

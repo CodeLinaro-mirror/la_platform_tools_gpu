@@ -33,12 +33,16 @@ type API struct {
 	Fields     []*Field      // variables declared at the global scope
 }
 
-// Annotation is the AST node that represents «@name(arguments)» constructs
+func (t API) Fragment() parse.Fragment { return t.CST }
+
+// Annotation is the AST node that represents «@name(arguments) constructs»
 type Annotation struct {
 	CST       *parse.Branch // underlying parse structure for this node
 	Name      *Identifier   // the name part (between the @ and the brackets)
 	Arguments []Node        // the list of arguments (the bit in brackets)
 }
+
+func (t Annotation) Fragment() parse.Fragment { return t.CST }
 
 // Annotations represents the set of Annotation objects that apply to another
 // AST node.
@@ -48,6 +52,8 @@ type Annotations []*Annotation
 // keep going. If there are no errors, this will never be in the tree.
 type Invalid struct{}
 
+func (t Invalid) Fragment() parse.Fragment { return nil }
+
 // Import is the AST node that represents «import name "path"» constructs
 type Import struct {
 	CST         *parse.Branch // underlying parse structure for this node
@@ -55,3 +61,5 @@ type Import struct {
 	Name        *Identifier   // the name to import an api file as
 	Path        *String       // the relative path to the api file
 }
+
+func (t Import) Fragment() parse.Fragment { return t.CST }

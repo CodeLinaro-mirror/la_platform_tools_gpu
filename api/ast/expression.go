@@ -23,6 +23,8 @@ type Block struct {
 	Statements []Node        // The set of statements that make up the block
 }
 
+func (t Block) Fragment() parse.Fragment { return t.CST }
+
 // Branch represents an «"if" condition { trueblock } "else" { falseblock }» structure.
 type Branch struct {
 	CST       *parse.Branch // underlying parse structure for this node
@@ -31,6 +33,8 @@ type Branch struct {
 	False     *Block        // the block to use if condition is false
 }
 
+func (t Branch) Fragment() parse.Fragment { return t.CST }
+
 // Iteration represents a «"for" variable "in" iterable { block }» structure.
 type Iteration struct {
 	CST      *parse.Branch // underlying parse structure for this node
@@ -38,6 +42,8 @@ type Iteration struct {
 	Iterable Node          // the expression that produces the iterable to loop over
 	Block    *Block        // the block to run once per item in the iterable
 }
+
+func (t Iteration) Fragment() parse.Fragment { return t.CST }
 
 // Switch represents a «"switch" value { cases }» structure.
 // The first matching case is selected.
@@ -49,6 +55,8 @@ type Switch struct {
 	Cases []*Case       // the set of cases to match the value with
 }
 
+func (t Switch) Fragment() parse.Fragment { return t.CST }
+
 // Case represents a «"case" conditions: block» structure within a switch statement.
 // The conditions are a comma separated list of expressions the switch statement
 // value will be compared against.
@@ -58,11 +66,15 @@ type Case struct {
 	Block      *Block        // the block to run if this case is selected
 }
 
+func (t Case) Fragment() parse.Fragment { return t.CST }
+
 // Group represents the «(expression)» construct, a single parenthesized expression.
 type Group struct {
 	CST        *parse.Branch // underlying parse structure for this node
 	Expression Node          // the expression within the parentheses
 }
+
+func (t Group) Fragment() parse.Fragment { return t.CST }
 
 // DeclareLocal represents a «name := value» statement that declares a new
 // immutable local variable with the specified value and inferred type.
@@ -71,6 +83,8 @@ type DeclareLocal struct {
 	Name *Identifier   // the name to give the new local
 	RHS  Node          // the value to store in that local
 }
+
+func (t DeclareLocal) Fragment() parse.Fragment { return t.CST }
 
 // Assign represents a «location {,+,-}= value» statement that assigns a value to
 // an existing mutable location.
@@ -81,20 +95,7 @@ type Assign struct {
 	RHS      Node          // the value to store
 }
 
-// Assert represents the «"assert" condition» statement.
-// Used mostly to express the pre-conditions of api commands, such as acceptable
-// values for parameters that cannot be expressed in the type system.
-type Assert struct {
-	CST       *parse.Branch // underlying parse structure for this node.
-	Condition Node          // the condition to check, should be true
-}
-
-// Length represents the «"len"(value)» construct, were value should be an
-// expresssion that returns an object of array, string or map type.
-type Length struct {
-	CST    *parse.Branch // underlying parse structure for this node.
-	Object Node          // the object to query the length of
-}
+func (t Assign) Fragment() parse.Fragment { return t.CST }
 
 // Return represents the «"return" value» construct, that assigns the value to
 // the result slot of the function.
@@ -102,3 +103,25 @@ type Return struct {
 	CST   *parse.Branch // underlying parse structure for this node.
 	Value Node          // the value to return
 }
+
+func (t Return) Fragment() parse.Fragment { return t.CST }
+
+// Member represents an expressions that access members of objects.
+// Always of the form «object.name» where object is an expression.
+type Member struct {
+	CST    *parse.Branch // underlying parse structure for this node
+	Object Node          // the object to get a member of
+	Name   *Identifier   // the name of the member to get
+}
+
+func (t Member) Fragment() parse.Fragment { return t.CST }
+
+// Index represents any expression of the form «object[index]»
+// Used for arrays, maps and bitfields.
+type Index struct {
+	CST    *parse.Branch // underlying parse structure for this node
+	Object Node          // the object to index
+	Index  Node          // the index to lookup
+}
+
+func (t Index) Fragment() parse.Fragment { return t.CST }

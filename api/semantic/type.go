@@ -78,9 +78,9 @@ func (f *Field) ExpressionType() Type { return f.Type }
 // ClassInitializer represents an expression that can assign values to multiple
 // fields of a class.
 type ClassInitializer struct {
-	AST    *ast.ClassInitializer // the underlying syntax node this was built from
-	Class  *Class                // the class to initialize
-	Fields []*FieldInitializer   // the set of field assignments
+	AST    *ast.Call           // the underlying syntax node this was built from
+	Class  *Class              // the class to initialize
+	Fields []*FieldInitializer // the set of field assignments
 }
 
 // ExpressionType implements Expression returning the class type being initialized.
@@ -94,32 +94,10 @@ func (c *ClassInitializer) ExpressionType() Type {
 
 // FieldInitializer
 type FieldInitializer struct {
-	AST   *ast.FieldInitializer // the underlying syntax node this was built from
-	Field *Field                // the field to assign to
-	Value Expression            // the value to assign
+	AST   ast.Node   // the underlying syntax node this was built from
+	Field *Field     // the field to assign to
+	Value Expression // the value to assign
 }
-
-// New represents an expression that allocates a new class instance.
-type New struct {
-	AST         *ast.New          // the underlying syntax node this was built from
-	Initializer *ClassInitializer // The initialization for the new instance
-	Type        Type              // The pointer type returned from the new
-}
-
-// ExpressionType implements Expression returning a pointer to the class type being initialized.
-func (n *New) ExpressionType() Type { return n.Type }
-
-// Cast represents a type coercion expression.
-// It reports it's type as the one specified, rather than the expression it
-// wraps.
-type Cast struct {
-	AST    *ast.Cast  // the underlying syntax node this was built from
-	Object Expression // the actual expression being wrapped
-	Type   Type       // the type to coerce the expression to
-}
-
-// ExpressionType implements Expression returning the type being cast to.
-func (c *Cast) ExpressionType() Type { return c.Type }
 
 // Enum represents the api enum construct.
 type Enum struct {
@@ -190,16 +168,8 @@ func (t Pseudonym) Member(name string) Node {
 	return m
 }
 
-// Array represents an array type declaration.
-type Array struct {
-	Name      string // the full name of the array type
-	ValueType Type   // the value type stored in the array
-}
-
-func (t Array) Typename() string        { return t.Name }
-func (t Array) Member(name string) Node { return nil }
-
-// StaticArray represents a multi-dimensional fixed size array type.
+// StaticArray represents a multi-dimensional fixed size array type, of the
+// form T[8]
 type StaticArray struct {
 	Name      string // the full type name
 	ValueType Type   // the storage type of the elements
@@ -209,7 +179,8 @@ type StaticArray struct {
 func (t StaticArray) Typename() string        { return t.Name }
 func (t StaticArray) Member(name string) Node { return nil }
 
-// Map represents an api map type declaration.
+// Map represents an api map type declaration, of the form
+// map!(KeyType, ValueType)
 type Map struct {
 	Name      string // the full type name
 	KeyType   Type   // the type used as an indexing key
@@ -219,34 +190,35 @@ type Map struct {
 
 func (t Map) Typename() string { return t.Name }
 
-// Pointer represents an api pointer type declaration.
+// Pointer represents an api pointer type declaration, of the form To*
 type Pointer struct {
-	Name  string // the full type name
-	To    Type   // the type this is a pointer to
-	Array bool   // points to multiple elements, rather than one
+	Name string // the full type name
+	To   Type   // the type this is a pointer to
 }
 
 func (t Pointer) Typename() string { return t.Name }
 func (t Pointer) Member(name string) Node {
-	if t.Array {
-		return nil
-	}
 	return t.To.Member(name)
 }
 
-// Buffer represents a state pointer type declaration.
-type Buffer struct {
-	Name      string // the full type name
-	To        Type   // the type this is a pointer to
-	Array     bool   // points to multiple elements, rather than one
-	FakeArray *Array // TODO:Remove - Hold a fake array for now as a schema compatibility measure
+// Slice represents an api slice type declaration, of the form To[]
+type Slice struct {
+	Name string // the full type name
+	To   Type   // the type this is a slice of
 }
 
-func (t Buffer) Typename() string { return t.Name }
-func (t Buffer) Member(name string) Node {
-	if t.Array {
-		return nil
-	}
+func (t Slice) Typename() string        { return t.Name }
+func (t Slice) Member(name string) Node { return nil }
+
+// Reference represents an api reference type declaration, of the form
+// ref!To
+type Reference struct {
+	Name string // the full type name
+	To   Type   // the type this is a reference to
+}
+
+func (t Reference) Typename() string { return t.Name }
+func (t Reference) Member(name string) Node {
 	return t.To.Member(name)
 }
 

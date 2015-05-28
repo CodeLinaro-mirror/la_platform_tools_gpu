@@ -36,8 +36,6 @@ const (
 	OpListStart     = "("
 	OpListSeparator = ","
 	OpListEnd       = ")"
-	OpMetaStart     = "<"
-	OpMetaEnd       = ">"
 	OpAssign        = "="
 	OpAssignPlus    = "+="
 	OpAssignMinus   = "-="
@@ -62,6 +60,7 @@ const (
 	OpRange         = ".."
 	OpNot           = "!"
 	OpIn            = "in"
+	OpGeneric       = "!"
 )
 
 var (
@@ -77,6 +76,8 @@ type UnaryOp struct {
 	Expression Node          // the expression the operator is being applied to
 }
 
+func (t UnaryOp) Fragment() parse.Fragment { return t.CST }
+
 // BinaryOp represents any binary operation applied to two expressions.
 type BinaryOp struct {
 	CST      *parse.Branch // underlying parse structure for this node
@@ -84,6 +85,8 @@ type BinaryOp struct {
 	Operator string        // the operator being applied
 	RHS      Node          // the expression on the right of the operator
 }
+
+func (t BinaryOp) Fragment() parse.Fragment { return t.CST }
 
 func init() {
 	for _, op := range []string{
@@ -96,8 +99,6 @@ func init() {
 		OpListStart,
 		OpListSeparator,
 		OpListEnd,
-		OpMetaStart,
-		OpMetaEnd,
 		OpAssign,
 		OpAssignPlus,
 		OpAssignMinus,
@@ -107,6 +108,7 @@ func init() {
 		OpAnnotation,
 		OpInitialise,
 		OpPointer,
+		OpGeneric,
 	} {
 		Operators = append(Operators, op)
 	}

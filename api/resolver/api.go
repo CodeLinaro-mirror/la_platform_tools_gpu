@@ -104,7 +104,7 @@ func resolve(ctx *context) {
 	for _, m := range ctx.api.Methods {
 		method(ctx, m)
 	}
-	sort.Sort(arraysByName(ctx.api.Arrays))
+	sort.Sort(slicesByName(ctx.api.Slices))
 	sort.Sort(mapsByName(ctx.api.Maps))
 }
 
@@ -155,12 +155,12 @@ type Alias struct {
 func (t Alias) Typename() string                 { return t.Name }
 func (t Alias) Member(name string) semantic.Node { return nil }
 
-// arraysByName is used to sort the array list by name for generated code stability
-type arraysByName []*semantic.Array
+// slicesByName is used to sort the slice list by name for generated code stability
+type slicesByName []*semantic.Slice
 
-func (a arraysByName) Len() int           { return len(a) }
-func (a arraysByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a arraysByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
+func (a slicesByName) Len() int           { return len(a) }
+func (a slicesByName) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a slicesByName) Less(i, j int) bool { return a[i].Name < a[j].Name }
 
 // mapsByName is used to sort the map list by name for generated code stability
 type mapsByName []*semantic.Map

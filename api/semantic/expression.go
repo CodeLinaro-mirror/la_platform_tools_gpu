@@ -103,39 +103,54 @@ type Member struct {
 // ExpressionType implements Expression returning the type of the field.
 func (m *Member) ExpressionType() Type { return m.Field.Type }
 
-// ArrayIndex represents using the indexing operator on an array type.
-type ArrayIndex struct {
-	AST       *ast.Index // the underlying syntax node this was built from
-	ValueType Type       // the value type of the array being indexed
-	Array     Expression // the expression that returns the array to be indexed
-	Index     Expression // the index to use on the array
-}
-
-// ExpressionType implements Expression returning the value type of the array.
-func (i *ArrayIndex) ExpressionType() Type { return i.ValueType }
-
-// Slice represents using the slicing operator on an array type.
-type Slice struct {
-	AST   *ast.Index // the underlying syntax node this was built from
-	Array Expression // the expression that returns the array to be indexed
-	Lower Expression // the inclusive lower bound to slice at
-	Upper Expression // the non-inclusive upper bound to slice at
+// PointerRange represents using the indexing operator on a pointer type with a
+// range expression.
+type PointerRange struct {
+	AST     *ast.Index // the underlying syntax node this was built from
+	Type    *Slice     // the slice type returned.
+	Pointer Expression // the expression that returns the pointer to be indexed
+	Range   *BinaryOp  // the range to use on the slice
 }
 
 // ExpressionType implements Expression.
-// It returns VoidType as slices are only valid in Copy assignments.
-func (i *Slice) ExpressionType() Type { return VoidType }
+// It returns the same slice type being sliced.
+func (i *PointerRange) ExpressionType() Type { return i.Type }
+
+// SliceRange represents using the indexing operator on a slice type with a
+// range expression.
+type SliceRange struct {
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Slice     // the slice type
+	Slice Expression // the expression that returns the array to be indexed
+	Range *BinaryOp  // the range to use on the slice
+}
+
+// ExpressionType implements Expression.
+// It returns the same slice type being sliced.
+func (i *SliceRange) ExpressionType() Type { return i.Type }
+
+// SliceIndex represents using the indexing operator on a slice type.
+type SliceIndex struct {
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Slice     // the slice type
+	Slice Expression // the expression that returns the slice to be indexed
+	Index Expression // the index to use on the slice
+}
+
+// ExpressionType implements Expression.
+// It returns the value type of the slice.
+func (i *SliceIndex) ExpressionType() Type { return i.Type.To }
 
 // MapIndex represents using the indexing operator on a map type.
 type MapIndex struct {
-	AST       *ast.Index // the underlying syntax node this was built from
-	ValueType Type       // the value type of the array being indexed
-	Map       Expression // the expression that returns the map to be indexed
-	Index     Expression // the index to use on the map
+	AST   *ast.Index // the underlying syntax node this was built from
+	Type  *Map       // the value type of the array being indexed
+	Map   Expression // the expression that returns the map to be indexed
+	Index Expression // the index to use on the map
 }
 
 // ExpressionType implements Expression returning the value type of the map.
-func (i *MapIndex) ExpressionType() Type { return i.ValueType }
+func (i *MapIndex) ExpressionType() Type { return i.Type.ValueType }
 
 // Unknown represents a value that cannot be predicted.
 // These values are non-deterministic with regard to the API specification and
@@ -174,20 +189,6 @@ type Null struct {
 // ExpressionType implements Expression with the inferred type of the null.
 func (n Null) ExpressionType() Type {
 	return n.Type
-}
-
-// Represents a length of object expression.
-// Object must be of either Array, Map or string type.
-// The length expression is allowed to be of any numeric type
-type Length struct {
-	AST    *ast.Length // the underlying syntax node this was built from
-	Object Expression  // the object go get the length of
-	Type   Type        // the resolved type of the length operation
-}
-
-// ExpressionType implements Expression
-func (l Length) ExpressionType() Type {
-	return l.Type
 }
 
 // Int8Value is an int8 that implements Expression so it can be in the semantic graph

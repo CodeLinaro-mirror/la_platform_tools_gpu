@@ -97,20 +97,28 @@ func findUnknown(ctx *context, rhs semantic.Node) *semantic.Unknown {
 // observed outputs.
 func lhsToObserved(ctx *context, lhs semantic.Node) semantic.Expression {
 	switch lhs := lhs.(type) {
-	case *semantic.ArrayIndex:
-		o := lhsToObserved(ctx, lhs.Array)
+	case *semantic.SliceIndex:
+		o := lhsToObserved(ctx, lhs.Slice)
 		if o == nil {
 			return nil
 		}
-		return &semantic.ArrayIndex{Array: o, Index: lhs.Index, ValueType: lhs.ValueType}
+		return &semantic.SliceIndex{Slice: o, Index: lhs.Index, Type: lhs.Type}
+	case *semantic.PointerRange:
+		o := lhsToObserved(ctx, lhs.Pointer)
+		if o == nil {
+			return nil
+		}
+		return &semantic.PointerRange{Pointer: o, Range: lhs.Range, Type: lhs.Type}
 	case *semantic.MapIndex:
 		o := lhsToObserved(ctx, lhs.Map)
 		if o == nil {
 			return nil
 		}
-		return &semantic.MapIndex{Map: o, Index: lhs.Index, ValueType: lhs.ValueType}
+		return &semantic.MapIndex{Map: o, Index: lhs.Index, Type: lhs.Type}
 	case *semantic.Parameter:
 		return &semantic.Observed{Parameter: lhs}
+	case *semantic.Local:
+		return lhsToObserved(ctx, lhs.Value)
 	default:
 		ctx.errorf(lhs, "Cannot infer unknown from %T", lhs)
 		return nil

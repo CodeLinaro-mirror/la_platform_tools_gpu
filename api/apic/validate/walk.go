@@ -27,47 +27,13 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 
 	switch n := n.(type) {
 	case *semantic.API:
-		for _, c := range n.Enums {
+		for _, c := range n.Members {
 			walk(c, v)
 		}
-		for _, c := range n.Classes {
-			walk(c, v)
-		}
-		for _, c := range n.Pseudonyms {
-			walk(c, v)
-		}
-		for _, c := range n.Externs {
-			walk(c, v)
-		}
-		for _, c := range n.Functions {
-			walk(c, v)
-		}
-		for _, c := range n.Globals {
-			walk(c, v)
-		}
-		for _, c := range n.Arrays {
-			walk(c, v)
-		}
-		for _, c := range n.StaticArrays {
-			walk(c, v)
-		}
-		for _, c := range n.Maps {
-			walk(c, v)
-		}
-		for _, c := range n.Pointers {
-			walk(c, v)
-		}
-		for _, c := range n.Buffers {
-			walk(c, v)
-		}
-		for _, c := range n.Signatures {
-			walk(c, v)
-		}
-
-	case *semantic.Array:
-		walk(n.ValueType, v)
-	case *semantic.ArrayIndex:
-		walk(n.Array, v)
+	case *semantic.Slice:
+		walk(n.To, v)
+	case *semantic.SliceIndex:
+		walk(n.Slice, v)
 		walk(n.Index, v)
 	case *semantic.Assert:
 		walk(n.Condition, v)
@@ -93,7 +59,7 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 			walk(n.False, v)
 		}
 	case *semantic.Builtin:
-	case *semantic.Buffer:
+	case *semantic.Reference:
 		walk(n.To, v)
 	case *semantic.Call:
 		walk(n.Type, v)
@@ -202,11 +168,6 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 	case *semantic.Member:
 		walk(n.Object, v)
 		walk(n.Field, v)
-	case *semantic.New:
-		walk(n.Type, v)
-		if n.Initializer != nil {
-			walk(n.Initializer, v)
-		}
 	case *semantic.Pointer:
 		walk(n.To, v)
 	case *semantic.Return:
@@ -228,7 +189,24 @@ func walk(n semantic.Node, v func(semantic.Node) bool) {
 	case semantic.Uint32Value:
 	case semantic.Uint64Value:
 	case *semantic.Unknown:
-
+	case *semantic.Clone:
+		walk(n.Slice, v)
+	case *semantic.Copy:
+		walk(n.Src, v)
+		walk(n.Dst, v)
+	case *semantic.Create:
+	case *semantic.Ignore:
+	case *semantic.Make:
+		walk(n.Size, v)
+	case semantic.Null:
+	case *semantic.PointerRange:
+		walk(n.Pointer, v)
+	case *semantic.Read:
+		walk(n.Slice, v)
+	case *semantic.SliceRange:
+		walk(n.Slice, v)
+	case *semantic.Write:
+		walk(n.Slice, v)
 	default:
 		panic(fmt.Errorf("Unsupported semantic node type %T", n))
 	}

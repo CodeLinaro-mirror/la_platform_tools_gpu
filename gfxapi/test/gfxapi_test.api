@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import "gfxapi_test_include.api"
 import imported "gfxapi_test_import.api"
 
@@ -47,12 +46,12 @@ cmd void cmd_void_3_strings(string a, string b, string c) {}
 ////////////////////////////////////////////////////////////////
 // Array inputs
 ////////////////////////////////////////////////////////////////
-cmd void cmd_void_3_arrays(array<s8> a, array<string> b, array<bool> c) {}
+cmd void cmd_void_3_arrays(s8[] a, string[] b, bool[] c) {}
 
 ////////////////////////////////////////////////////////////////
 // Array of strings as input
 ////////////////////////////////////////////////////////////////
-cmd void cmd_void_array_of_strings(array<string> a) {}
+cmd void cmd_void_array_of_strings(string[] a) {}
 
 ////////////////////////////////////////////////////////////////
 // Commands with a return value
@@ -70,11 +69,11 @@ cmd s64  cmd_s64()  { return 0 }
 cmd bool cmd_bool() { return false }
 
 @ReturnSize(10)
-cmd string     cmd_string()         { return "" }
+cmd string cmd_string()         { return "" }
 @ReturnSize(10)
-cmd array<f32> cmd_array_of_float() { return ? }
+cmd f32[]  cmd_array_of_float() { return ? }
 @ReturnSize(10)
-cmd pointer    cmd_pointer()        { return ? }
+cmd void[] cmd_pointer()        { return ? }
 
 ////////////////////////////////////////////////////////////////
 // Commands with a single output argument
@@ -91,16 +90,16 @@ cmd void cmd_void_out_u64(out u64 a)       {}
 cmd void cmd_void_out_s64(out s64 a)       {}
 cmd void cmd_void_out_bool(out bool a)     {}
 
-cmd void cmd_void_out_string(out string a)             { assert len(a) >= 10 }
-cmd void cmd_void_out_fixed_size_buffer(out pointer a) { assert len(a) >= 10 }
+cmd void cmd_void_out_string(out string a)            { write(as!char[](a)[0:10]) }
+cmd void cmd_void_out_fixed_size_buffer(out void[] a) { write(a[0:10]) }
 
 ////////////////////////////////////////////////////////////////
 // Commands with more than one output
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_out_3_strings(out string a, out string b, out string c) {
-	assert len(a) >= 0x0f
-	assert len(b) >= 0x1f
-	assert len(c) >= 0x2f
+	write(as!char[](a)[0:0x0f])
+	write(as!char[](b)[0:0x1f])
+	write(as!char[](c)[0:0x2f])
 }
 
 ////////////////////////////////////////////////////////////////
@@ -113,4 +112,4 @@ cmd void cmd_void_3_remapped(remapped a, remapped b, remapped c) {}
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_out_3_remapped(out remapped a, out remapped b, out remapped c) {}
 
-cmd void cmd_void_out_array_of_remapped(out array<remapped> a) { assert len(a) >= 5 }
+cmd void cmd_void_out_array_of_remapped(out remapped[] a) { write(a[0:5]) }

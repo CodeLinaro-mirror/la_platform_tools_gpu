@@ -52,7 +52,7 @@ const rpc_go_tmpl = `{{/*
     {{end}}
   {{end}}
 ¶
-  {{range $_, $a := $.api.Arrays}}
+  {{range $_, $a := $.api.Slices}}
     {{Macro (print "Array" $.role) $a}}
   {{end}}
 ¶
@@ -333,18 +333,18 @@ func (h {{$.Name}}) Valid() bool {
 -------------------------------------------------------------------------------
 */}}
 {{define "Array"}}
-  {{AssertType $ "Array"}}
+  {{AssertType $ "Slice"}}
 
   // Array {{$.Name}}
-  type {{Macro "Type" $}} []{{Macro "Type" $.ValueType}}
+  type {{Macro "Type" $}} []{{Macro "Type" $.To}}
 {{end}}
 
 {{define "ArrayExtra"}}
-  {{AssertType $ "Array"}}
+  {{AssertType $ "Slice"}}
 {{end}}
 
 {{define "ArrayHelpers"}}
-  {{AssertType $ "Array"}}
+  {{AssertType $ "Slice"}}
 
   func (a {{Macro "Type" $}}) Format(f fmt.State, c rune) {
     fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
@@ -1256,16 +1256,12 @@ const rpc_common_go_tmpl = `{{/*
 {{define "Type"}}
   {{AssertType $ "Type"}}
 
-  {{     if IsArray                $}}{{Macro "ArrayType" $.ValueType}}
+  {{     if IsSlice                $}}{{Macro "ArrayType" $.To}}
   {{else if GetAnnotation $ "handle"}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsAny                  $}}interface{}
   {{else if IsMap                  $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsClass                $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsPointer              $}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Typename}}
-  {{else if IsBuffer               $}}
-    {{if $.Array}}{{Macro "ArrayType" $.To}}
-    {{else}}{{if not (GetAnnotation $.To "Interface")}}*{{end}}{{Macro "Go.RPC.QualifiedName" $.To.Typename}}
-    {{end}}
   {{else if IsEnum                 $}}{{Macro "Go.RPC.QualifiedName" $.Name}}
   {{else if IsBool                 $}}bool
   {{else if IsS8                   $}}int8
