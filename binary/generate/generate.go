@@ -57,6 +57,7 @@ type File struct {
 	Path       string
 	Directives map[string]string
 	Structs    []*Struct
+	Constants  schema.Constants
 	Imports    Imports
 	Style
 }
