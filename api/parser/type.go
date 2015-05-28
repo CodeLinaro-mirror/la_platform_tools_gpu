@@ -139,8 +139,10 @@ func pseudonym(p *parse.Parser, cst *parse.Branch, a *ast.Annotations) *ast.Pseu
 func typeRef(p *parse.Parser, cst *parse.Branch) ast.Node {
 	var ref ast.Node
 	preconst := keyword(ast.KeywordConst, p, cst) != nil
-	if ref = generic(p, cst); ref == nil {
+	if g := generic(p, cst); g == nil {
 		return nil
+	} else {
+		ref = g
 	}
 	if id, isid := ref.(*ast.Generic); isid && peekOperator(ast.OpMember, p) {
 		t := &ast.Imported{From: id.Name}
