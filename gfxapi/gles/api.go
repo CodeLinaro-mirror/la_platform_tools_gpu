@@ -12738,27 +12738,6 @@ const (
 	DrawMode_GL_TRIANGLES      = DrawMode(4)
 )
 
-func (v DrawMode) String() string {
-	switch v {
-	case 2:
-		return "GL_LINE_LOOP"
-	case 3:
-		return "GL_LINE_STRIP"
-	case 1:
-		return "GL_LINES"
-	case 0:
-		return "GL_POINTS"
-	case 6:
-		return "GL_TRIANGLE_FAN"
-	case 5:
-		return "GL_TRIANGLE_STRIP"
-	case 4:
-		return "GL_TRIANGLES"
-	default:
-		return fmt.Sprintf("DrawMode<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum IndicesType
 ////////////////////////////////////////////////////////////////////////////////
@@ -12770,19 +12749,6 @@ const (
 	IndicesType_GL_UNSIGNED_INT   = IndicesType(5125)
 )
 
-func (v IndicesType) String() string {
-	switch v {
-	case 5121:
-		return "GL_UNSIGNED_BYTE"
-	case 5123:
-		return "GL_UNSIGNED_SHORT"
-	case 5125:
-		return "GL_UNSIGNED_INT"
-	default:
-		return fmt.Sprintf("IndicesType<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureTarget_GLES_1_1
 ////////////////////////////////////////////////////////////////////////////////
@@ -12791,15 +12757,6 @@ type TextureTarget_GLES_1_1 uint32
 const (
 	TextureTarget_GLES_1_1_GL_TEXTURE_2D = TextureTarget_GLES_1_1(3553)
 )
-
-func (v TextureTarget_GLES_1_1) String() string {
-	switch v {
-	case 3553:
-		return "GL_TEXTURE_2D"
-	default:
-		return fmt.Sprintf("TextureTarget_GLES_1_1<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureTarget_GLES_2_0
@@ -12810,15 +12767,6 @@ const (
 	TextureTarget_GLES_2_0_GL_TEXTURE_CUBE_MAP = TextureTarget_GLES_2_0(34067)
 )
 
-func (v TextureTarget_GLES_2_0) String() string {
-	switch v {
-	case 34067:
-		return "GL_TEXTURE_CUBE_MAP"
-	default:
-		return fmt.Sprintf("TextureTarget_GLES_2_0<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureTarget_OES_EGL_image_external
 ////////////////////////////////////////////////////////////////////////////////
@@ -12827,15 +12775,6 @@ type TextureTarget_OES_EGL_image_external uint32
 const (
 	TextureTarget_OES_EGL_image_external_GL_TEXTURE_EXTERNAL_OES = TextureTarget_OES_EGL_image_external(36197)
 )
-
-func (v TextureTarget_OES_EGL_image_external) String() string {
-	switch v {
-	case 36197:
-		return "GL_TEXTURE_EXTERNAL_OES"
-	default:
-		return fmt.Sprintf("TextureTarget_OES_EGL_image_external<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureTarget
@@ -12859,22 +12798,6 @@ const (
 	TextureTarget_GL_TEXTURE_EXTERNAL_OES = TextureTarget(36197)
 )
 
-func (v TextureTarget) String() string {
-	switch v {
-	// TextureTarget_GLES_1_1
-	case 3553:
-		return "GL_TEXTURE_2D"
-	// TextureTarget_GLES_2_0
-	case 34067:
-		return "GL_TEXTURE_CUBE_MAP"
-	// TextureTarget_OES_EGL_image_external
-	case 36197:
-		return "GL_TEXTURE_EXTERNAL_OES"
-	default:
-		return fmt.Sprintf("TextureTarget<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum CubeMapImageTarget
 ////////////////////////////////////////////////////////////////////////////////
@@ -12889,25 +12812,6 @@ const (
 	CubeMapImageTarget_GL_TEXTURE_CUBE_MAP_POSITIVE_Z = CubeMapImageTarget(34073)
 )
 
-func (v CubeMapImageTarget) String() string {
-	switch v {
-	case 34070:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_X"
-	case 34072:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y"
-	case 34074:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
-	case 34069:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_X"
-	case 34071:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_Y"
-	case 34073:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_Z"
-	default:
-		return fmt.Sprintf("CubeMapImageTarget<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum Texture2DImageTarget
 ////////////////////////////////////////////////////////////////////////////////
@@ -12916,15 +12820,6 @@ type Texture2DImageTarget uint32
 const (
 	Texture2DImageTarget_GL_TEXTURE_2D = Texture2DImageTarget(3553)
 )
-
-func (v Texture2DImageTarget) String() string {
-	switch v {
-	case 3553:
-		return "GL_TEXTURE_2D"
-	default:
-		return fmt.Sprintf("Texture2DImageTarget<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureImageTarget
@@ -12948,29 +12843,6 @@ const (
 	TextureImageTarget_GL_TEXTURE_2D = TextureImageTarget(3553)
 )
 
-func (v TextureImageTarget) String() string {
-	switch v {
-	// CubeMapImageTarget
-	case 34070:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_X"
-	case 34072:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Y"
-	case 34074:
-		return "GL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
-	case 34069:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_X"
-	case 34071:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_Y"
-	case 34073:
-		return "GL_TEXTURE_CUBE_MAP_POSITIVE_Z"
-	// Texture2DImageTarget
-	case 3553:
-		return "GL_TEXTURE_2D"
-	default:
-		return fmt.Sprintf("TextureImageTarget<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum BaseTexelFormat
 ////////////////////////////////////////////////////////////////////////////////
@@ -12981,19 +12853,6 @@ const (
 	BaseTexelFormat_GL_RGB   = BaseTexelFormat(6407)
 	BaseTexelFormat_GL_RGBA  = BaseTexelFormat(6408)
 )
-
-func (v BaseTexelFormat) String() string {
-	switch v {
-	case 6406:
-		return "GL_ALPHA"
-	case 6407:
-		return "GL_RGB"
-	case 6408:
-		return "GL_RGBA"
-	default:
-		return fmt.Sprintf("BaseTexelFormat<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TexelFormat_GLES_1_1
@@ -13012,24 +12871,6 @@ const (
 	TexelFormat_GLES_1_1_GL_RGBA  = TexelFormat_GLES_1_1(6408)
 )
 
-func (v TexelFormat_GLES_1_1) String() string {
-	switch v {
-	case 6409:
-		return "GL_LUMINANCE"
-	case 6410:
-		return "GL_LUMINANCE_ALPHA"
-	// BaseTexelFormat
-	case 6406:
-		return "GL_ALPHA"
-	case 6407:
-		return "GL_RGB"
-	case 6408:
-		return "GL_RGBA"
-	default:
-		return fmt.Sprintf("TexelFormat_GLES_1_1<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TexelFormat_GLES_3_0
 ////////////////////////////////////////////////////////////////////////////////
@@ -13047,33 +12888,6 @@ const (
 	TexelFormat_GLES_3_0_GL_DEPTH_STENCIL     = TexelFormat_GLES_3_0(34041)
 	TexelFormat_GLES_3_0_GL_DEPTH24_STENCIL8  = TexelFormat_GLES_3_0(35056)
 )
-
-func (v TexelFormat_GLES_3_0) String() string {
-	switch v {
-	case 6403:
-		return "GL_RED"
-	case 36244:
-		return "GL_RED_INTEGER"
-	case 33319:
-		return "GL_RG"
-	case 33320:
-		return "GL_RG_INTEGER"
-	case 36248:
-		return "GL_RGB_INTEGER"
-	case 36249:
-		return "GL_RGBA_INTEGER"
-	case 6402:
-		return "GL_DEPTH_COMPONENT"
-	case 33189:
-		return "GL_DEPTH_COMPONENT16"
-	case 34041:
-		return "GL_DEPTH_STENCIL"
-	case 35056:
-		return "GL_DEPTH24_STENCIL8"
-	default:
-		return fmt.Sprintf("TexelFormat_GLES_3_0<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TexelFormat
@@ -13109,46 +12923,6 @@ const (
 	TexelFormat_GL_DEPTH24_STENCIL8  = TexelFormat(35056)
 )
 
-func (v TexelFormat) String() string {
-	switch v {
-	// TexelFormat_GLES_1_1
-	case 6409:
-		return "GL_LUMINANCE"
-	case 6410:
-		return "GL_LUMINANCE_ALPHA"
-	// BaseTexelFormat
-	case 6406:
-		return "GL_ALPHA"
-	case 6407:
-		return "GL_RGB"
-	case 6408:
-		return "GL_RGBA"
-	// TexelFormat_GLES_3_0
-	case 6403:
-		return "GL_RED"
-	case 36244:
-		return "GL_RED_INTEGER"
-	case 33319:
-		return "GL_RG"
-	case 33320:
-		return "GL_RG_INTEGER"
-	case 36248:
-		return "GL_RGB_INTEGER"
-	case 36249:
-		return "GL_RGBA_INTEGER"
-	case 6402:
-		return "GL_DEPTH_COMPONENT"
-	case 33189:
-		return "GL_DEPTH_COMPONENT16"
-	case 34041:
-		return "GL_DEPTH_STENCIL"
-	case 35056:
-		return "GL_DEPTH24_STENCIL8"
-	default:
-		return fmt.Sprintf("TexelFormat<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum RenderbufferFormat
 ////////////////////////////////////////////////////////////////////////////////
@@ -13163,25 +12937,6 @@ const (
 	RenderbufferFormat_GL_STENCIL_INDEX8    = RenderbufferFormat(36168)
 )
 
-func (v RenderbufferFormat) String() string {
-	switch v {
-	case 32854:
-		return "GL_RGBA4"
-	case 32855:
-		return "GL_RGB5_A1"
-	case 36194:
-		return "GL_RGB565"
-	case 32856:
-		return "GL_RGBA8"
-	case 33189:
-		return "GL_DEPTH_COMPONENT16"
-	case 36168:
-		return "GL_STENCIL_INDEX8"
-	default:
-		return fmt.Sprintf("RenderbufferFormat<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum Type_ARB_half_float_vertex
 ////////////////////////////////////////////////////////////////////////////////
@@ -13190,15 +12945,6 @@ type Type_ARB_half_float_vertex uint32
 const (
 	Type_ARB_half_float_vertex_GL_ARB_half_float_vertex = Type_ARB_half_float_vertex(5131)
 )
-
-func (v Type_ARB_half_float_vertex) String() string {
-	switch v {
-	case 5131:
-		return "GL_ARB_half_float_vertex"
-	default:
-		return fmt.Sprintf("Type_ARB_half_float_vertex<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum Type_OES_vertex_half_float
@@ -13209,15 +12955,6 @@ const (
 	Type_OES_vertex_half_float_GL_HALF_FLOAT_OES = Type_OES_vertex_half_float(36193)
 )
 
-func (v Type_OES_vertex_half_float) String() string {
-	switch v {
-	case 36193:
-		return "GL_HALF_FLOAT_OES"
-	default:
-		return fmt.Sprintf("Type_OES_vertex_half_float<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
 ////////////////////////////////////////////////////////////////////////////////
@@ -13226,15 +12963,6 @@ type CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture uint32
 const (
 	CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_GL_ETC1_RGB8_OES = CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(36196)
 )
-
-func (v CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) String() string {
-	switch v {
-	case 36196:
-		return "GL_ETC1_RGB8_OES"
-	default:
-		return fmt.Sprintf("CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum CompressedTexelFormat_AMD_compressed_ATC_texture
@@ -13246,19 +12974,6 @@ const (
 	CompressedTexelFormat_AMD_compressed_ATC_texture_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = CompressedTexelFormat_AMD_compressed_ATC_texture(35987)
 	CompressedTexelFormat_AMD_compressed_ATC_texture_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = CompressedTexelFormat_AMD_compressed_ATC_texture(34798)
 )
-
-func (v CompressedTexelFormat_AMD_compressed_ATC_texture) String() string {
-	switch v {
-	case 35986:
-		return "GL_ATC_RGB_AMD"
-	case 35987:
-		return "GL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
-	case 34798:
-		return "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD"
-	default:
-		return fmt.Sprintf("CompressedTexelFormat_AMD_compressed_ATC_texture<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum CompressedTexelFormat
@@ -13278,23 +12993,6 @@ const (
 	CompressedTexelFormat_GL_ATC_RGBA_EXPLICIT_ALPHA_AMD     = CompressedTexelFormat(35987)
 	CompressedTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = CompressedTexelFormat(34798)
 )
-
-func (v CompressedTexelFormat) String() string {
-	switch v {
-	// CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
-	case 36196:
-		return "GL_ETC1_RGB8_OES"
-	// CompressedTexelFormat_AMD_compressed_ATC_texture
-	case 35986:
-		return "GL_ATC_RGB_AMD"
-	case 35987:
-		return "GL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
-	case 34798:
-		return "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD"
-	default:
-		return fmt.Sprintf("CompressedTexelFormat<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ImageTexelFormat
@@ -13348,58 +13046,6 @@ const (
 	ImageTexelFormat_GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD = ImageTexelFormat(34798)
 )
 
-func (v ImageTexelFormat) String() string {
-	switch v {
-	// TexelFormat
-	// TexelFormat_GLES_1_1
-	case 6409:
-		return "GL_LUMINANCE"
-	case 6410:
-		return "GL_LUMINANCE_ALPHA"
-	// BaseTexelFormat
-	case 6406:
-		return "GL_ALPHA"
-	case 6407:
-		return "GL_RGB"
-	case 6408:
-		return "GL_RGBA"
-	// TexelFormat_GLES_3_0
-	case 6403:
-		return "GL_RED"
-	case 36244:
-		return "GL_RED_INTEGER"
-	case 33319:
-		return "GL_RG"
-	case 33320:
-		return "GL_RG_INTEGER"
-	case 36248:
-		return "GL_RGB_INTEGER"
-	case 36249:
-		return "GL_RGBA_INTEGER"
-	case 6402:
-		return "GL_DEPTH_COMPONENT"
-	case 33189:
-		return "GL_DEPTH_COMPONENT16"
-	case 34041:
-		return "GL_DEPTH_STENCIL"
-	case 35056:
-		return "GL_DEPTH24_STENCIL8"
-	// CompressedTexelFormat
-	// CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture
-	case 36196:
-		return "GL_ETC1_RGB8_OES"
-	// CompressedTexelFormat_AMD_compressed_ATC_texture
-	case 35986:
-		return "GL_ATC_RGB_AMD"
-	case 35987:
-		return "GL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
-	case 34798:
-		return "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD"
-	default:
-		return fmt.Sprintf("ImageTexelFormat<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TexelType
 ////////////////////////////////////////////////////////////////////////////////
@@ -13416,29 +13062,6 @@ const (
 	TexelType_GL_UNSIGNED_INT_24_8      = TexelType(34042)
 )
 
-func (v TexelType) String() string {
-	switch v {
-	case 5121:
-		return "GL_UNSIGNED_BYTE"
-	case 5123:
-		return "GL_UNSIGNED_SHORT"
-	case 5125:
-		return "GL_UNSIGNED_INT"
-	case 5126:
-		return "GL_FLOAT"
-	case 32819:
-		return "GL_UNSIGNED_SHORT_4_4_4_4"
-	case 32820:
-		return "GL_UNSIGNED_SHORT_5_5_5_1"
-	case 33635:
-		return "GL_UNSIGNED_SHORT_5_6_5"
-	case 34042:
-		return "GL_UNSIGNED_INT_24_8"
-	default:
-		return fmt.Sprintf("TexelType<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferAttachment
 ////////////////////////////////////////////////////////////////////////////////
@@ -13449,19 +13072,6 @@ const (
 	FramebufferAttachment_GL_DEPTH_ATTACHMENT   = FramebufferAttachment(36096)
 	FramebufferAttachment_GL_STENCIL_ATTACHMENT = FramebufferAttachment(36128)
 )
-
-func (v FramebufferAttachment) String() string {
-	switch v {
-	case 36064:
-		return "GL_COLOR_ATTACHMENT0"
-	case 36096:
-		return "GL_DEPTH_ATTACHMENT"
-	case 36128:
-		return "GL_STENCIL_ATTACHMENT"
-	default:
-		return fmt.Sprintf("FramebufferAttachment<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferAttachmentType
@@ -13474,19 +13084,6 @@ const (
 	FramebufferAttachmentType_GL_TEXTURE      = FramebufferAttachmentType(5890)
 )
 
-func (v FramebufferAttachmentType) String() string {
-	switch v {
-	case 0:
-		return "GL_NONE"
-	case 36161:
-		return "GL_RENDERBUFFER"
-	case 5890:
-		return "GL_TEXTURE"
-	default:
-		return fmt.Sprintf("FramebufferAttachmentType<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferTarget_GLES_2_0
 ////////////////////////////////////////////////////////////////////////////////
@@ -13495,15 +13092,6 @@ type FramebufferTarget_GLES_2_0 uint32
 const (
 	FramebufferTarget_GLES_2_0_GL_FRAMEBUFFER = FramebufferTarget_GLES_2_0(36160)
 )
-
-func (v FramebufferTarget_GLES_2_0) String() string {
-	switch v {
-	case 36160:
-		return "GL_FRAMEBUFFER"
-	default:
-		return fmt.Sprintf("FramebufferTarget_GLES_2_0<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferTarget_GLES_3_1
@@ -13514,17 +13102,6 @@ const (
 	FramebufferTarget_GLES_3_1_GL_READ_FRAMEBUFFER = FramebufferTarget_GLES_3_1(36008)
 	FramebufferTarget_GLES_3_1_GL_DRAW_FRAMEBUFFER = FramebufferTarget_GLES_3_1(36009)
 )
-
-func (v FramebufferTarget_GLES_3_1) String() string {
-	switch v {
-	case 36008:
-		return "GL_READ_FRAMEBUFFER"
-	case 36009:
-		return "GL_DRAW_FRAMEBUFFER"
-	default:
-		return fmt.Sprintf("FramebufferTarget_GLES_3_1<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferTarget
@@ -13544,21 +13121,6 @@ const (
 	FramebufferTarget_GL_DRAW_FRAMEBUFFER = FramebufferTarget(36009)
 )
 
-func (v FramebufferTarget) String() string {
-	switch v {
-	// FramebufferTarget_GLES_2_0
-	case 36160:
-		return "GL_FRAMEBUFFER"
-	// FramebufferTarget_GLES_3_1
-	case 36008:
-		return "GL_READ_FRAMEBUFFER"
-	case 36009:
-		return "GL_DRAW_FRAMEBUFFER"
-	default:
-		return fmt.Sprintf("FramebufferTarget<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferAttachmentParameter
 ////////////////////////////////////////////////////////////////////////////////
@@ -13570,21 +13132,6 @@ const (
 	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         = FramebufferAttachmentParameter(36050)
 	FramebufferAttachmentParameter_GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = FramebufferAttachmentParameter(36051)
 )
-
-func (v FramebufferAttachmentParameter) String() string {
-	switch v {
-	case 36048:
-		return "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE"
-	case 36049:
-		return "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME"
-	case 36050:
-		return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL"
-	case 36051:
-		return "GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE"
-	default:
-		return fmt.Sprintf("FramebufferAttachmentParameter<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum FramebufferStatus
@@ -13599,23 +13146,6 @@ const (
 	FramebufferStatus_GL_FRAMEBUFFER_UNSUPPORTED                   = FramebufferStatus(36061)
 )
 
-func (v FramebufferStatus) String() string {
-	switch v {
-	case 36053:
-		return "GL_FRAMEBUFFER_COMPLETE"
-	case 36054:
-		return "GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT"
-	case 36055:
-		return "GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT"
-	case 36057:
-		return "GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS"
-	case 36061:
-		return "GL_FRAMEBUFFER_UNSUPPORTED"
-	default:
-		return fmt.Sprintf("FramebufferStatus<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum RenderbufferTarget
 ////////////////////////////////////////////////////////////////////////////////
@@ -13624,15 +13154,6 @@ type RenderbufferTarget uint32
 const (
 	RenderbufferTarget_GL_RENDERBUFFER = RenderbufferTarget(36161)
 )
-
-func (v RenderbufferTarget) String() string {
-	switch v {
-	case 36161:
-		return "GL_RENDERBUFFER"
-	default:
-		return fmt.Sprintf("RenderbufferTarget<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum RenderbufferParameter
@@ -13651,31 +13172,6 @@ const (
 	RenderbufferParameter_GL_RENDERBUFFER_STENCIL_SIZE    = RenderbufferParameter(36181)
 )
 
-func (v RenderbufferParameter) String() string {
-	switch v {
-	case 36162:
-		return "GL_RENDERBUFFER_WIDTH"
-	case 36163:
-		return "GL_RENDERBUFFER_HEIGHT"
-	case 36164:
-		return "GL_RENDERBUFFER_INTERNAL_FORMAT"
-	case 36176:
-		return "GL_RENDERBUFFER_RED_SIZE"
-	case 36177:
-		return "GL_RENDERBUFFER_GREEN_SIZE"
-	case 36178:
-		return "GL_RENDERBUFFER_BLUE_SIZE"
-	case 36179:
-		return "GL_RENDERBUFFER_ALPHA_SIZE"
-	case 36180:
-		return "GL_RENDERBUFFER_DEPTH_SIZE"
-	case 36181:
-		return "GL_RENDERBUFFER_STENCIL_SIZE"
-	default:
-		return fmt.Sprintf("RenderbufferParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum BufferParameter
 ////////////////////////////////////////////////////////////////////////////////
@@ -13685,17 +13181,6 @@ const (
 	BufferParameter_GL_BUFFER_SIZE  = BufferParameter(34660)
 	BufferParameter_GL_BUFFER_USAGE = BufferParameter(34661)
 )
-
-func (v BufferParameter) String() string {
-	switch v {
-	case 34660:
-		return "GL_BUFFER_SIZE"
-	case 34661:
-		return "GL_BUFFER_USAGE"
-	default:
-		return fmt.Sprintf("BufferParameter<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureUnit
@@ -13737,77 +13222,6 @@ const (
 	TextureUnit_GL_TEXTURE31 = TextureUnit(34015)
 )
 
-func (v TextureUnit) String() string {
-	switch v {
-	case 33984:
-		return "GL_TEXTURE0"
-	case 33985:
-		return "GL_TEXTURE1"
-	case 33986:
-		return "GL_TEXTURE2"
-	case 33987:
-		return "GL_TEXTURE3"
-	case 33988:
-		return "GL_TEXTURE4"
-	case 33989:
-		return "GL_TEXTURE5"
-	case 33990:
-		return "GL_TEXTURE6"
-	case 33991:
-		return "GL_TEXTURE7"
-	case 33992:
-		return "GL_TEXTURE8"
-	case 33993:
-		return "GL_TEXTURE9"
-	case 33994:
-		return "GL_TEXTURE10"
-	case 33995:
-		return "GL_TEXTURE11"
-	case 33996:
-		return "GL_TEXTURE12"
-	case 33997:
-		return "GL_TEXTURE13"
-	case 33998:
-		return "GL_TEXTURE14"
-	case 33999:
-		return "GL_TEXTURE15"
-	case 34000:
-		return "GL_TEXTURE16"
-	case 34001:
-		return "GL_TEXTURE17"
-	case 34002:
-		return "GL_TEXTURE18"
-	case 34003:
-		return "GL_TEXTURE19"
-	case 34004:
-		return "GL_TEXTURE20"
-	case 34005:
-		return "GL_TEXTURE21"
-	case 34006:
-		return "GL_TEXTURE22"
-	case 34007:
-		return "GL_TEXTURE23"
-	case 34008:
-		return "GL_TEXTURE24"
-	case 34009:
-		return "GL_TEXTURE25"
-	case 34010:
-		return "GL_TEXTURE26"
-	case 34011:
-		return "GL_TEXTURE27"
-	case 34012:
-		return "GL_TEXTURE28"
-	case 34013:
-		return "GL_TEXTURE29"
-	case 34014:
-		return "GL_TEXTURE30"
-	case 34015:
-		return "GL_TEXTURE31"
-	default:
-		return fmt.Sprintf("TextureUnit<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum BufferUsage
 ////////////////////////////////////////////////////////////////////////////////
@@ -13819,19 +13233,6 @@ const (
 	BufferUsage_GL_STREAM_DRAW  = BufferUsage(35040)
 )
 
-func (v BufferUsage) String() string {
-	switch v {
-	case 35048:
-		return "GL_DYNAMIC_DRAW"
-	case 35044:
-		return "GL_STATIC_DRAW"
-	case 35040:
-		return "GL_STREAM_DRAW"
-	default:
-		return fmt.Sprintf("BufferUsage<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ShaderType
 ////////////////////////////////////////////////////////////////////////////////
@@ -13841,17 +13242,6 @@ const (
 	ShaderType_GL_VERTEX_SHADER   = ShaderType(35633)
 	ShaderType_GL_FRAGMENT_SHADER = ShaderType(35632)
 )
-
-func (v ShaderType) String() string {
-	switch v {
-	case 35633:
-		return "GL_VERTEX_SHADER"
-	case 35632:
-		return "GL_FRAGMENT_SHADER"
-	default:
-		return fmt.Sprintf("ShaderType<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum StateVariable_GLES_2_0
@@ -13947,185 +13337,6 @@ const (
 	StateVariable_GLES_2_0_GL_VIEWPORT                         = StateVariable_GLES_2_0(2978)
 )
 
-func (v StateVariable_GLES_2_0) String() string {
-	switch v {
-	case 34016:
-		return "GL_ACTIVE_TEXTURE"
-	case 33902:
-		return "GL_ALIASED_LINE_WIDTH_RANGE"
-	case 33901:
-		return "GL_ALIASED_POINT_SIZE_RANGE"
-	case 3413:
-		return "GL_ALPHA_BITS"
-	case 34964:
-		return "GL_ARRAY_BUFFER_BINDING"
-	case 3042:
-		return "GL_BLEND"
-	case 32773:
-		return "GL_BLEND_COLOR"
-	case 32970:
-		return "GL_BLEND_DST_ALPHA"
-	case 32968:
-		return "GL_BLEND_DST_RGB"
-	case 34877:
-		return "GL_BLEND_EQUATION_ALPHA"
-	case 32777:
-		return "GL_BLEND_EQUATION_RGB"
-	case 32971:
-		return "GL_BLEND_SRC_ALPHA"
-	case 32969:
-		return "GL_BLEND_SRC_RGB"
-	case 3412:
-		return "GL_BLUE_BITS"
-	case 3106:
-		return "GL_COLOR_CLEAR_VALUE"
-	case 3107:
-		return "GL_COLOR_WRITEMASK"
-	case 34467:
-		return "GL_COMPRESSED_TEXTURE_FORMATS"
-	case 2884:
-		return "GL_CULL_FACE"
-	case 2885:
-		return "GL_CULL_FACE_MODE"
-	case 35725:
-		return "GL_CURRENT_PROGRAM"
-	case 3414:
-		return "GL_DEPTH_BITS"
-	case 2931:
-		return "GL_DEPTH_CLEAR_VALUE"
-	case 2932:
-		return "GL_DEPTH_FUNC"
-	case 2928:
-		return "GL_DEPTH_RANGE"
-	case 2929:
-		return "GL_DEPTH_TEST"
-	case 2930:
-		return "GL_DEPTH_WRITEMASK"
-	case 3024:
-		return "GL_DITHER"
-	case 34965:
-		return "GL_ELEMENT_ARRAY_BUFFER_BINDING"
-	case 36006:
-		return "GL_FRAMEBUFFER_BINDING"
-	case 2886:
-		return "GL_FRONT_FACE"
-	case 33170:
-		return "GL_GENERATE_MIPMAP_HINT"
-	case 3411:
-		return "GL_GREEN_BITS"
-	case 35739:
-		return "GL_IMPLEMENTATION_COLOR_READ_FORMAT"
-	case 35738:
-		return "GL_IMPLEMENTATION_COLOR_READ_TYPE"
-	case 2849:
-		return "GL_LINE_WIDTH"
-	case 35661:
-		return "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS"
-	case 34076:
-		return "GL_MAX_CUBE_MAP_TEXTURE_SIZE"
-	case 36349:
-		return "GL_MAX_FRAGMENT_UNIFORM_VECTORS"
-	case 34024:
-		return "GL_MAX_RENDERBUFFER_SIZE"
-	case 34930:
-		return "GL_MAX_TEXTURE_IMAGE_UNITS"
-	case 3379:
-		return "GL_MAX_TEXTURE_SIZE"
-	case 36348:
-		return "GL_MAX_VARYING_VECTORS"
-	case 34921:
-		return "GL_MAX_VERTEX_ATTRIBS"
-	case 35660:
-		return "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS"
-	case 36347:
-		return "GL_MAX_VERTEX_UNIFORM_VECTORS"
-	case 3386:
-		return "GL_MAX_VIEWPORT_DIMS"
-	case 34466:
-		return "GL_NUM_COMPRESSED_TEXTURE_FORMATS"
-	case 36345:
-		return "GL_NUM_SHADER_BINARY_FORMATS"
-	case 3333:
-		return "GL_PACK_ALIGNMENT"
-	case 32824:
-		return "GL_POLYGON_OFFSET_FACTOR"
-	case 32823:
-		return "GL_POLYGON_OFFSET_FILL"
-	case 10752:
-		return "GL_POLYGON_OFFSET_UNITS"
-	case 3410:
-		return "GL_RED_BITS"
-	case 36007:
-		return "GL_RENDERBUFFER_BINDING"
-	case 32926:
-		return "GL_SAMPLE_ALPHA_TO_COVERAGE"
-	case 32936:
-		return "GL_SAMPLE_BUFFERS"
-	case 32928:
-		return "GL_SAMPLE_COVERAGE"
-	case 32939:
-		return "GL_SAMPLE_COVERAGE_INVERT"
-	case 32938:
-		return "GL_SAMPLE_COVERAGE_VALUE"
-	case 32937:
-		return "GL_SAMPLES"
-	case 3088:
-		return "GL_SCISSOR_BOX"
-	case 3089:
-		return "GL_SCISSOR_TEST"
-	case 36344:
-		return "GL_SHADER_BINARY_FORMATS"
-	case 36346:
-		return "GL_SHADER_COMPILER"
-	case 34817:
-		return "GL_STENCIL_BACK_FAIL"
-	case 34816:
-		return "GL_STENCIL_BACK_FUNC"
-	case 34818:
-		return "GL_STENCIL_BACK_PASS_DEPTH_FAIL"
-	case 34819:
-		return "GL_STENCIL_BACK_PASS_DEPTH_PASS"
-	case 36003:
-		return "GL_STENCIL_BACK_REF"
-	case 36004:
-		return "GL_STENCIL_BACK_VALUE_MASK"
-	case 36005:
-		return "GL_STENCIL_BACK_WRITEMASK"
-	case 3415:
-		return "GL_STENCIL_BITS"
-	case 2961:
-		return "GL_STENCIL_CLEAR_VALUE"
-	case 2964:
-		return "GL_STENCIL_FAIL"
-	case 2962:
-		return "GL_STENCIL_FUNC"
-	case 2965:
-		return "GL_STENCIL_PASS_DEPTH_FAIL"
-	case 2966:
-		return "GL_STENCIL_PASS_DEPTH_PASS"
-	case 2967:
-		return "GL_STENCIL_REF"
-	case 2960:
-		return "GL_STENCIL_TEST"
-	case 2963:
-		return "GL_STENCIL_VALUE_MASK"
-	case 2968:
-		return "GL_STENCIL_WRITEMASK"
-	case 3408:
-		return "GL_SUBPIXEL_BITS"
-	case 32873:
-		return "GL_TEXTURE_BINDING_2D"
-	case 34068:
-		return "GL_TEXTURE_BINDING_CUBE_MAP"
-	case 3317:
-		return "GL_UNPACK_ALIGNMENT"
-	case 2978:
-		return "GL_VIEWPORT"
-	default:
-		return fmt.Sprintf("StateVariable_GLES_2_0<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum StateVariable_GLES_3_1
 ////////////////////////////////////////////////////////////////////////////////
@@ -14134,15 +13345,6 @@ type StateVariable_GLES_3_1 uint32
 const (
 	StateVariable_GLES_3_1_GL_READ_FRAMEBUFFER_BINDING = StateVariable_GLES_3_1(36010)
 )
-
-func (v StateVariable_GLES_3_1) String() string {
-	switch v {
-	case 36010:
-		return "GL_READ_FRAMEBUFFER_BINDING"
-	default:
-		return fmt.Sprintf("StateVariable_GLES_3_1<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum StateVariable_EXT_texture_filter_anisotropic
@@ -14153,15 +13355,6 @@ const (
 	StateVariable_EXT_texture_filter_anisotropic_GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = StateVariable_EXT_texture_filter_anisotropic(34047)
 )
 
-func (v StateVariable_EXT_texture_filter_anisotropic) String() string {
-	switch v {
-	case 34047:
-		return "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
-	default:
-		return fmt.Sprintf("StateVariable_EXT_texture_filter_anisotropic<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum StateVariable_EXT_disjoint_timer_query
 ////////////////////////////////////////////////////////////////////////////////
@@ -14170,15 +13363,6 @@ type StateVariable_EXT_disjoint_timer_query uint32
 const (
 	StateVariable_EXT_disjoint_timer_query_GL_GPU_DISJOINT_EXT = StateVariable_EXT_disjoint_timer_query(36795)
 )
-
-func (v StateVariable_EXT_disjoint_timer_query) String() string {
-	switch v {
-	case 36795:
-		return "GL_GPU_DISJOINT_EXT"
-	default:
-		return fmt.Sprintf("StateVariable_EXT_disjoint_timer_query<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum StateVariable
@@ -14292,195 +13476,6 @@ const (
 	StateVariable_GL_GPU_DISJOINT_EXT = StateVariable(36795)
 )
 
-func (v StateVariable) String() string {
-	switch v {
-	// StateVariable_GLES_2_0
-	case 34016:
-		return "GL_ACTIVE_TEXTURE"
-	case 33902:
-		return "GL_ALIASED_LINE_WIDTH_RANGE"
-	case 33901:
-		return "GL_ALIASED_POINT_SIZE_RANGE"
-	case 3413:
-		return "GL_ALPHA_BITS"
-	case 34964:
-		return "GL_ARRAY_BUFFER_BINDING"
-	case 3042:
-		return "GL_BLEND"
-	case 32773:
-		return "GL_BLEND_COLOR"
-	case 32970:
-		return "GL_BLEND_DST_ALPHA"
-	case 32968:
-		return "GL_BLEND_DST_RGB"
-	case 34877:
-		return "GL_BLEND_EQUATION_ALPHA"
-	case 32777:
-		return "GL_BLEND_EQUATION_RGB"
-	case 32971:
-		return "GL_BLEND_SRC_ALPHA"
-	case 32969:
-		return "GL_BLEND_SRC_RGB"
-	case 3412:
-		return "GL_BLUE_BITS"
-	case 3106:
-		return "GL_COLOR_CLEAR_VALUE"
-	case 3107:
-		return "GL_COLOR_WRITEMASK"
-	case 34467:
-		return "GL_COMPRESSED_TEXTURE_FORMATS"
-	case 2884:
-		return "GL_CULL_FACE"
-	case 2885:
-		return "GL_CULL_FACE_MODE"
-	case 35725:
-		return "GL_CURRENT_PROGRAM"
-	case 3414:
-		return "GL_DEPTH_BITS"
-	case 2931:
-		return "GL_DEPTH_CLEAR_VALUE"
-	case 2932:
-		return "GL_DEPTH_FUNC"
-	case 2928:
-		return "GL_DEPTH_RANGE"
-	case 2929:
-		return "GL_DEPTH_TEST"
-	case 2930:
-		return "GL_DEPTH_WRITEMASK"
-	case 3024:
-		return "GL_DITHER"
-	case 34965:
-		return "GL_ELEMENT_ARRAY_BUFFER_BINDING"
-	case 36006:
-		return "GL_FRAMEBUFFER_BINDING"
-	case 2886:
-		return "GL_FRONT_FACE"
-	case 33170:
-		return "GL_GENERATE_MIPMAP_HINT"
-	case 3411:
-		return "GL_GREEN_BITS"
-	case 35739:
-		return "GL_IMPLEMENTATION_COLOR_READ_FORMAT"
-	case 35738:
-		return "GL_IMPLEMENTATION_COLOR_READ_TYPE"
-	case 2849:
-		return "GL_LINE_WIDTH"
-	case 35661:
-		return "GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS"
-	case 34076:
-		return "GL_MAX_CUBE_MAP_TEXTURE_SIZE"
-	case 36349:
-		return "GL_MAX_FRAGMENT_UNIFORM_VECTORS"
-	case 34024:
-		return "GL_MAX_RENDERBUFFER_SIZE"
-	case 34930:
-		return "GL_MAX_TEXTURE_IMAGE_UNITS"
-	case 3379:
-		return "GL_MAX_TEXTURE_SIZE"
-	case 36348:
-		return "GL_MAX_VARYING_VECTORS"
-	case 34921:
-		return "GL_MAX_VERTEX_ATTRIBS"
-	case 35660:
-		return "GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS"
-	case 36347:
-		return "GL_MAX_VERTEX_UNIFORM_VECTORS"
-	case 3386:
-		return "GL_MAX_VIEWPORT_DIMS"
-	case 34466:
-		return "GL_NUM_COMPRESSED_TEXTURE_FORMATS"
-	case 36345:
-		return "GL_NUM_SHADER_BINARY_FORMATS"
-	case 3333:
-		return "GL_PACK_ALIGNMENT"
-	case 32824:
-		return "GL_POLYGON_OFFSET_FACTOR"
-	case 32823:
-		return "GL_POLYGON_OFFSET_FILL"
-	case 10752:
-		return "GL_POLYGON_OFFSET_UNITS"
-	case 3410:
-		return "GL_RED_BITS"
-	case 36007:
-		return "GL_RENDERBUFFER_BINDING"
-	case 32926:
-		return "GL_SAMPLE_ALPHA_TO_COVERAGE"
-	case 32936:
-		return "GL_SAMPLE_BUFFERS"
-	case 32928:
-		return "GL_SAMPLE_COVERAGE"
-	case 32939:
-		return "GL_SAMPLE_COVERAGE_INVERT"
-	case 32938:
-		return "GL_SAMPLE_COVERAGE_VALUE"
-	case 32937:
-		return "GL_SAMPLES"
-	case 3088:
-		return "GL_SCISSOR_BOX"
-	case 3089:
-		return "GL_SCISSOR_TEST"
-	case 36344:
-		return "GL_SHADER_BINARY_FORMATS"
-	case 36346:
-		return "GL_SHADER_COMPILER"
-	case 34817:
-		return "GL_STENCIL_BACK_FAIL"
-	case 34816:
-		return "GL_STENCIL_BACK_FUNC"
-	case 34818:
-		return "GL_STENCIL_BACK_PASS_DEPTH_FAIL"
-	case 34819:
-		return "GL_STENCIL_BACK_PASS_DEPTH_PASS"
-	case 36003:
-		return "GL_STENCIL_BACK_REF"
-	case 36004:
-		return "GL_STENCIL_BACK_VALUE_MASK"
-	case 36005:
-		return "GL_STENCIL_BACK_WRITEMASK"
-	case 3415:
-		return "GL_STENCIL_BITS"
-	case 2961:
-		return "GL_STENCIL_CLEAR_VALUE"
-	case 2964:
-		return "GL_STENCIL_FAIL"
-	case 2962:
-		return "GL_STENCIL_FUNC"
-	case 2965:
-		return "GL_STENCIL_PASS_DEPTH_FAIL"
-	case 2966:
-		return "GL_STENCIL_PASS_DEPTH_PASS"
-	case 2967:
-		return "GL_STENCIL_REF"
-	case 2960:
-		return "GL_STENCIL_TEST"
-	case 2963:
-		return "GL_STENCIL_VALUE_MASK"
-	case 2968:
-		return "GL_STENCIL_WRITEMASK"
-	case 3408:
-		return "GL_SUBPIXEL_BITS"
-	case 32873:
-		return "GL_TEXTURE_BINDING_2D"
-	case 34068:
-		return "GL_TEXTURE_BINDING_CUBE_MAP"
-	case 3317:
-		return "GL_UNPACK_ALIGNMENT"
-	case 2978:
-		return "GL_VIEWPORT"
-	// StateVariable_GLES_3_1
-	case 36010:
-		return "GL_READ_FRAMEBUFFER_BINDING"
-	// StateVariable_EXT_texture_filter_anisotropic
-	case 34047:
-		return "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
-	// StateVariable_EXT_disjoint_timer_query
-	case 36795:
-		return "GL_GPU_DISJOINT_EXT"
-	default:
-		return fmt.Sprintf("StateVariable<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum FaceMode
 ////////////////////////////////////////////////////////////////////////////////
@@ -14491,19 +13486,6 @@ const (
 	FaceMode_GL_BACK           = FaceMode(1029)
 	FaceMode_GL_FRONT_AND_BACK = FaceMode(1032)
 )
-
-func (v FaceMode) String() string {
-	switch v {
-	case 1028:
-		return "GL_FRONT"
-	case 1029:
-		return "GL_BACK"
-	case 1032:
-		return "GL_FRONT_AND_BACK"
-	default:
-		return fmt.Sprintf("FaceMode<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ArrayType_GLES_1_1
@@ -14517,21 +13499,6 @@ const (
 	ArrayType_GLES_1_1_GL_TEXTURE_COORD_ARRAY = ArrayType_GLES_1_1(32888)
 )
 
-func (v ArrayType_GLES_1_1) String() string {
-	switch v {
-	case 32884:
-		return "GL_VERTEX_ARRAY"
-	case 32885:
-		return "GL_NORMAL_ARRAY"
-	case 32886:
-		return "GL_COLOR_ARRAY"
-	case 32888:
-		return "GL_TEXTURE_COORD_ARRAY"
-	default:
-		return fmt.Sprintf("ArrayType_GLES_1_1<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ArrayType_OES_point_size_array
 ////////////////////////////////////////////////////////////////////////////////
@@ -14540,15 +13507,6 @@ type ArrayType_OES_point_size_array uint32
 const (
 	ArrayType_OES_point_size_array_GL_POINT_SIZE_ARRAY_OES = ArrayType_OES_point_size_array(35740)
 )
-
-func (v ArrayType_OES_point_size_array) String() string {
-	switch v {
-	case 35740:
-		return "GL_POINT_SIZE_ARRAY_OES"
-	default:
-		return fmt.Sprintf("ArrayType_OES_point_size_array<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ArrayType
@@ -14569,25 +13527,6 @@ const (
 const (
 	ArrayType_GL_POINT_SIZE_ARRAY_OES = ArrayType(35740)
 )
-
-func (v ArrayType) String() string {
-	switch v {
-	// ArrayType_GLES_1_1
-	case 32884:
-		return "GL_VERTEX_ARRAY"
-	case 32885:
-		return "GL_NORMAL_ARRAY"
-	case 32886:
-		return "GL_COLOR_ARRAY"
-	case 32888:
-		return "GL_TEXTURE_COORD_ARRAY"
-	// ArrayType_OES_point_size_array
-	case 35740:
-		return "GL_POINT_SIZE_ARRAY_OES"
-	default:
-		return fmt.Sprintf("ArrayType<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum Capability
@@ -14622,44 +13561,6 @@ const (
 	Capability_GL_POINT_SIZE_ARRAY_OES = Capability(35740)
 )
 
-func (v Capability) String() string {
-	switch v {
-	case 3042:
-		return "GL_BLEND"
-	case 2884:
-		return "GL_CULL_FACE"
-	case 2929:
-		return "GL_DEPTH_TEST"
-	case 3024:
-		return "GL_DITHER"
-	case 32823:
-		return "GL_POLYGON_OFFSET_FILL"
-	case 32926:
-		return "GL_SAMPLE_ALPHA_TO_COVERAGE"
-	case 32928:
-		return "GL_SAMPLE_COVERAGE"
-	case 3089:
-		return "GL_SCISSOR_TEST"
-	case 2960:
-		return "GL_STENCIL_TEST"
-	// ArrayType
-	// ArrayType_GLES_1_1
-	case 32884:
-		return "GL_VERTEX_ARRAY"
-	case 32885:
-		return "GL_NORMAL_ARRAY"
-	case 32886:
-		return "GL_COLOR_ARRAY"
-	case 32888:
-		return "GL_TEXTURE_COORD_ARRAY"
-	// ArrayType_OES_point_size_array
-	case 35740:
-		return "GL_POINT_SIZE_ARRAY_OES"
-	default:
-		return fmt.Sprintf("Capability<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum StringConstant
 ////////////////////////////////////////////////////////////////////////////////
@@ -14671,21 +13572,6 @@ const (
 	StringConstant_GL_VENDOR     = StringConstant(7936)
 	StringConstant_GL_VERSION    = StringConstant(7938)
 )
-
-func (v StringConstant) String() string {
-	switch v {
-	case 7939:
-		return "GL_EXTENSIONS"
-	case 7937:
-		return "GL_RENDERER"
-	case 7936:
-		return "GL_VENDOR"
-	case 7938:
-		return "GL_VERSION"
-	default:
-		return fmt.Sprintf("StringConstant<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum VertexAttribType
@@ -14711,31 +13597,6 @@ const (
 	VertexAttribType_GL_ARB_half_float_vertex = VertexAttribType(5131)
 )
 
-func (v VertexAttribType) String() string {
-	switch v {
-	case 5120:
-		return "GL_BYTE"
-	case 5132:
-		return "GL_FIXED"
-	case 5126:
-		return "GL_FLOAT"
-	case 5122:
-		return "GL_SHORT"
-	case 5121:
-		return "GL_UNSIGNED_BYTE"
-	case 5123:
-		return "GL_UNSIGNED_SHORT"
-	// Type_OES_vertex_half_float
-	case 36193:
-		return "GL_HALF_FLOAT_OES"
-	// Type_ARB_half_float_vertex
-	case 5131:
-		return "GL_ARB_half_float_vertex"
-	default:
-		return fmt.Sprintf("VertexAttribType<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ShaderAttribType
 ////////////////////////////////////////////////////////////////////////////////
@@ -14750,27 +13611,6 @@ const (
 	ShaderAttribType_GL_FLOAT_MAT3 = ShaderAttribType(35675)
 	ShaderAttribType_GL_FLOAT_MAT4 = ShaderAttribType(35676)
 )
-
-func (v ShaderAttribType) String() string {
-	switch v {
-	case 5126:
-		return "GL_FLOAT"
-	case 35664:
-		return "GL_FLOAT_VEC2"
-	case 35665:
-		return "GL_FLOAT_VEC3"
-	case 35666:
-		return "GL_FLOAT_VEC4"
-	case 35674:
-		return "GL_FLOAT_MAT2"
-	case 35675:
-		return "GL_FLOAT_MAT3"
-	case 35676:
-		return "GL_FLOAT_MAT4"
-	default:
-		return fmt.Sprintf("ShaderAttribType<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ShaderUniformType
@@ -14797,47 +13637,6 @@ const (
 	ShaderUniformType_GL_SAMPLER_CUBE = ShaderUniformType(35680)
 )
 
-func (v ShaderUniformType) String() string {
-	switch v {
-	case 5126:
-		return "GL_FLOAT"
-	case 35664:
-		return "GL_FLOAT_VEC2"
-	case 35665:
-		return "GL_FLOAT_VEC3"
-	case 35666:
-		return "GL_FLOAT_VEC4"
-	case 5124:
-		return "GL_INT"
-	case 35667:
-		return "GL_INT_VEC2"
-	case 35668:
-		return "GL_INT_VEC3"
-	case 35669:
-		return "GL_INT_VEC4"
-	case 35670:
-		return "GL_BOOL"
-	case 35671:
-		return "GL_BOOL_VEC2"
-	case 35672:
-		return "GL_BOOL_VEC3"
-	case 35673:
-		return "GL_BOOL_VEC4"
-	case 35674:
-		return "GL_FLOAT_MAT2"
-	case 35675:
-		return "GL_FLOAT_MAT3"
-	case 35676:
-		return "GL_FLOAT_MAT4"
-	case 35678:
-		return "GL_SAMPLER_2D"
-	case 35680:
-		return "GL_SAMPLER_CUBE"
-	default:
-		return fmt.Sprintf("ShaderUniformType<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum Error
 ////////////////////////////////////////////////////////////////////////////////
@@ -14852,25 +13651,6 @@ const (
 	Error_GL_OUT_OF_MEMORY                 = Error(1285)
 )
 
-func (v Error) String() string {
-	switch v {
-	case 0:
-		return "GL_NO_ERROR"
-	case 1280:
-		return "GL_INVALID_ENUM"
-	case 1281:
-		return "GL_INVALID_VALUE"
-	case 1282:
-		return "GL_INVALID_OPERATION"
-	case 1286:
-		return "GL_INVALID_FRAMEBUFFER_OPERATION"
-	case 1285:
-		return "GL_OUT_OF_MEMORY"
-	default:
-		return fmt.Sprintf("Error<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum HintTarget
 ////////////////////////////////////////////////////////////////////////////////
@@ -14879,15 +13659,6 @@ type HintTarget uint32
 const (
 	HintTarget_GL_GENERATE_MIPMAP_HINT = HintTarget(33170)
 )
-
-func (v HintTarget) String() string {
-	switch v {
-	case 33170:
-		return "GL_GENERATE_MIPMAP_HINT"
-	default:
-		return fmt.Sprintf("HintTarget<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum HintMode
@@ -14900,19 +13671,6 @@ const (
 	HintMode_GL_NICEST    = HintMode(4354)
 )
 
-func (v HintMode) String() string {
-	switch v {
-	case 4352:
-		return "GL_DONT_CARE"
-	case 4353:
-		return "GL_FASTEST"
-	case 4354:
-		return "GL_NICEST"
-	default:
-		return fmt.Sprintf("HintMode<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum DiscardFramebufferAttachment
 ////////////////////////////////////////////////////////////////////////////////
@@ -14923,19 +13681,6 @@ const (
 	DiscardFramebufferAttachment_GL_DEPTH_EXT   = DiscardFramebufferAttachment(6145)
 	DiscardFramebufferAttachment_GL_STENCIL_EXT = DiscardFramebufferAttachment(6146)
 )
-
-func (v DiscardFramebufferAttachment) String() string {
-	switch v {
-	case 6144:
-		return "GL_COLOR_EXT"
-	case 6145:
-		return "GL_DEPTH_EXT"
-	case 6146:
-		return "GL_STENCIL_EXT"
-	default:
-		return fmt.Sprintf("DiscardFramebufferAttachment<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ProgramParameter
@@ -14954,31 +13699,6 @@ const (
 	ProgramParameter_GL_ACTIVE_UNIFORM_MAX_LENGTH   = ProgramParameter(35719)
 )
 
-func (v ProgramParameter) String() string {
-	switch v {
-	case 35712:
-		return "GL_DELETE_STATUS"
-	case 35714:
-		return "GL_LINK_STATUS"
-	case 35715:
-		return "GL_VALIDATE_STATUS"
-	case 35716:
-		return "GL_INFO_LOG_LENGTH"
-	case 35717:
-		return "GL_ATTACHED_SHADERS"
-	case 35721:
-		return "GL_ACTIVE_ATTRIBUTES"
-	case 35722:
-		return "GL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
-	case 35718:
-		return "GL_ACTIVE_UNIFORMS"
-	case 35719:
-		return "GL_ACTIVE_UNIFORM_MAX_LENGTH"
-	default:
-		return fmt.Sprintf("ProgramParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ShaderParameter
 ////////////////////////////////////////////////////////////////////////////////
@@ -14992,23 +13712,6 @@ const (
 	ShaderParameter_GL_SHADER_SOURCE_LENGTH = ShaderParameter(35720)
 )
 
-func (v ShaderParameter) String() string {
-	switch v {
-	case 35663:
-		return "GL_SHADER_TYPE"
-	case 35712:
-		return "GL_DELETE_STATUS"
-	case 35713:
-		return "GL_COMPILE_STATUS"
-	case 35716:
-		return "GL_INFO_LOG_LENGTH"
-	case 35720:
-		return "GL_SHADER_SOURCE_LENGTH"
-	default:
-		return fmt.Sprintf("ShaderParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum PixelStoreParameter
 ////////////////////////////////////////////////////////////////////////////////
@@ -15018,17 +13721,6 @@ const (
 	PixelStoreParameter_GL_PACK_ALIGNMENT   = PixelStoreParameter(3333)
 	PixelStoreParameter_GL_UNPACK_ALIGNMENT = PixelStoreParameter(3317)
 )
-
-func (v PixelStoreParameter) String() string {
-	switch v {
-	case 3333:
-		return "GL_PACK_ALIGNMENT"
-	case 3317:
-		return "GL_UNPACK_ALIGNMENT"
-	default:
-		return fmt.Sprintf("PixelStoreParameter<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureParameter_FilterMode
@@ -15040,17 +13732,6 @@ const (
 	TextureParameter_FilterMode_GL_TEXTURE_MAG_FILTER = TextureParameter_FilterMode(10240)
 )
 
-func (v TextureParameter_FilterMode) String() string {
-	switch v {
-	case 10241:
-		return "GL_TEXTURE_MIN_FILTER"
-	case 10240:
-		return "GL_TEXTURE_MAG_FILTER"
-	default:
-		return fmt.Sprintf("TextureParameter_FilterMode<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureParameter_WrapMode
 ////////////////////////////////////////////////////////////////////////////////
@@ -15061,17 +13742,6 @@ const (
 	TextureParameter_WrapMode_GL_TEXTURE_WRAP_T = TextureParameter_WrapMode(10243)
 )
 
-func (v TextureParameter_WrapMode) String() string {
-	switch v {
-	case 10242:
-		return "GL_TEXTURE_WRAP_S"
-	case 10243:
-		return "GL_TEXTURE_WRAP_T"
-	default:
-		return fmt.Sprintf("TextureParameter_WrapMode<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureParameter_EXT_texture_filter_anisotropic
 ////////////////////////////////////////////////////////////////////////////////
@@ -15080,15 +13750,6 @@ type TextureParameter_EXT_texture_filter_anisotropic uint32
 const (
 	TextureParameter_EXT_texture_filter_anisotropic_GL_TEXTURE_MAX_ANISOTROPY_EXT = TextureParameter_EXT_texture_filter_anisotropic(34046)
 )
-
-func (v TextureParameter_EXT_texture_filter_anisotropic) String() string {
-	switch v {
-	case 34046:
-		return "GL_TEXTURE_MAX_ANISOTROPY_EXT"
-	default:
-		return fmt.Sprintf("TextureParameter_EXT_texture_filter_anisotropic<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureParameter_SwizzleMode
@@ -15101,21 +13762,6 @@ const (
 	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_B = TextureParameter_SwizzleMode(36420)
 	TextureParameter_SwizzleMode_GL_TEXTURE_SWIZZLE_A = TextureParameter_SwizzleMode(36421)
 )
-
-func (v TextureParameter_SwizzleMode) String() string {
-	switch v {
-	case 36418:
-		return "GL_TEXTURE_SWIZZLE_R"
-	case 36419:
-		return "GL_TEXTURE_SWIZZLE_G"
-	case 36420:
-		return "GL_TEXTURE_SWIZZLE_B"
-	case 36421:
-		return "GL_TEXTURE_SWIZZLE_A"
-	default:
-		return fmt.Sprintf("TextureParameter_SwizzleMode<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureParameter
@@ -15149,35 +13795,6 @@ const (
 	TextureParameter_GL_TEXTURE_MAX_ANISOTROPY_EXT = TextureParameter(34046)
 )
 
-func (v TextureParameter) String() string {
-	switch v {
-	// TextureParameter_FilterMode
-	case 10241:
-		return "GL_TEXTURE_MIN_FILTER"
-	case 10240:
-		return "GL_TEXTURE_MAG_FILTER"
-	// TextureParameter_WrapMode
-	case 10242:
-		return "GL_TEXTURE_WRAP_S"
-	case 10243:
-		return "GL_TEXTURE_WRAP_T"
-	// TextureParameter_SwizzleMode
-	case 36418:
-		return "GL_TEXTURE_SWIZZLE_R"
-	case 36419:
-		return "GL_TEXTURE_SWIZZLE_G"
-	case 36420:
-		return "GL_TEXTURE_SWIZZLE_B"
-	case 36421:
-		return "GL_TEXTURE_SWIZZLE_A"
-	// TextureParameter_EXT_texture_filter_anisotropic
-	case 34046:
-		return "GL_TEXTURE_MAX_ANISOTROPY_EXT"
-	default:
-		return fmt.Sprintf("TextureParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureFilterMode
 ////////////////////////////////////////////////////////////////////////////////
@@ -15192,25 +13809,6 @@ const (
 	TextureFilterMode_GL_LINEAR_MIPMAP_LINEAR   = TextureFilterMode(9987)
 )
 
-func (v TextureFilterMode) String() string {
-	switch v {
-	case 9728:
-		return "GL_NEAREST"
-	case 9729:
-		return "GL_LINEAR"
-	case 9984:
-		return "GL_NEAREST_MIPMAP_NEAREST"
-	case 9985:
-		return "GL_LINEAR_MIPMAP_NEAREST"
-	case 9986:
-		return "GL_NEAREST_MIPMAP_LINEAR"
-	case 9987:
-		return "GL_LINEAR_MIPMAP_LINEAR"
-	default:
-		return fmt.Sprintf("TextureFilterMode<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureWrapMode
 ////////////////////////////////////////////////////////////////////////////////
@@ -15221,19 +13819,6 @@ const (
 	TextureWrapMode_GL_MIRRORED_REPEAT = TextureWrapMode(33648)
 	TextureWrapMode_GL_REPEAT          = TextureWrapMode(10497)
 )
-
-func (v TextureWrapMode) String() string {
-	switch v {
-	case 33071:
-		return "GL_CLAMP_TO_EDGE"
-	case 33648:
-		return "GL_MIRRORED_REPEAT"
-	case 10497:
-		return "GL_REPEAT"
-	default:
-		return fmt.Sprintf("TextureWrapMode<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TexelComponent
@@ -15246,21 +13831,6 @@ const (
 	TexelComponent_GL_BLUE  = TexelComponent(6405)
 	TexelComponent_GL_ALPHA = TexelComponent(6406)
 )
-
-func (v TexelComponent) String() string {
-	switch v {
-	case 6403:
-		return "GL_RED"
-	case 6404:
-		return "GL_GREEN"
-	case 6405:
-		return "GL_BLUE"
-	case 6406:
-		return "GL_ALPHA"
-	default:
-		return fmt.Sprintf("TexelComponent<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum BlendFactor
@@ -15285,43 +13855,6 @@ const (
 	BlendFactor_GL_SRC_ALPHA_SATURATE       = BlendFactor(776)
 )
 
-func (v BlendFactor) String() string {
-	switch v {
-	case 0:
-		return "GL_ZERO"
-	case 1:
-		return "GL_ONE"
-	case 768:
-		return "GL_SRC_COLOR"
-	case 769:
-		return "GL_ONE_MINUS_SRC_COLOR"
-	case 774:
-		return "GL_DST_COLOR"
-	case 775:
-		return "GL_ONE_MINUS_DST_COLOR"
-	case 770:
-		return "GL_SRC_ALPHA"
-	case 771:
-		return "GL_ONE_MINUS_SRC_ALPHA"
-	case 772:
-		return "GL_DST_ALPHA"
-	case 773:
-		return "GL_ONE_MINUS_DST_ALPHA"
-	case 32769:
-		return "GL_CONSTANT_COLOR"
-	case 32770:
-		return "GL_ONE_MINUS_CONSTANT_COLOR"
-	case 32771:
-		return "GL_CONSTANT_ALPHA"
-	case 32772:
-		return "GL_ONE_MINUS_CONSTANT_ALPHA"
-	case 776:
-		return "GL_SRC_ALPHA_SATURATE"
-	default:
-		return fmt.Sprintf("BlendFactor<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum PrecisionType
 ////////////////////////////////////////////////////////////////////////////////
@@ -15335,25 +13868,6 @@ const (
 	PrecisionType_GL_MEDIUM_INT   = PrecisionType(36340)
 	PrecisionType_GL_HIGH_INT     = PrecisionType(36341)
 )
-
-func (v PrecisionType) String() string {
-	switch v {
-	case 36336:
-		return "GL_LOW_FLOAT"
-	case 36337:
-		return "GL_MEDIUM_FLOAT"
-	case 36338:
-		return "GL_HIGH_FLOAT"
-	case 36339:
-		return "GL_LOW_INT"
-	case 36340:
-		return "GL_MEDIUM_INT"
-	case 36341:
-		return "GL_HIGH_INT"
-	default:
-		return fmt.Sprintf("PrecisionType<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TestFunction
@@ -15371,29 +13885,6 @@ const (
 	TestFunction_GL_ALWAYS   = TestFunction(519)
 )
 
-func (v TestFunction) String() string {
-	switch v {
-	case 512:
-		return "GL_NEVER"
-	case 513:
-		return "GL_LESS"
-	case 514:
-		return "GL_EQUAL"
-	case 515:
-		return "GL_LEQUAL"
-	case 516:
-		return "GL_GREATER"
-	case 517:
-		return "GL_NOTEQUAL"
-	case 518:
-		return "GL_GEQUAL"
-	case 519:
-		return "GL_ALWAYS"
-	default:
-		return fmt.Sprintf("TestFunction<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum StencilAction
 ////////////////////////////////////////////////////////////////////////////////
@@ -15410,29 +13901,6 @@ const (
 	StencilAction_GL_INVERT    = StencilAction(5386)
 )
 
-func (v StencilAction) String() string {
-	switch v {
-	case 7680:
-		return "GL_KEEP"
-	case 0:
-		return "GL_ZERO"
-	case 7681:
-		return "GL_REPLACE"
-	case 7682:
-		return "GL_INCR"
-	case 34055:
-		return "GL_INCR_WRAP"
-	case 7683:
-		return "GL_DECR"
-	case 34056:
-		return "GL_DECR_WRAP"
-	case 5386:
-		return "GL_INVERT"
-	default:
-		return fmt.Sprintf("StencilAction<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum FaceOrientation
 ////////////////////////////////////////////////////////////////////////////////
@@ -15442,17 +13910,6 @@ const (
 	FaceOrientation_GL_CW  = FaceOrientation(2304)
 	FaceOrientation_GL_CCW = FaceOrientation(2305)
 )
-
-func (v FaceOrientation) String() string {
-	switch v {
-	case 2304:
-		return "GL_CW"
-	case 2305:
-		return "GL_CCW"
-	default:
-		return fmt.Sprintf("FaceOrientation<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum BlendEquation
@@ -15464,19 +13921,6 @@ const (
 	BlendEquation_GL_FUNC_SUBTRACT         = BlendEquation(32778)
 	BlendEquation_GL_FUNC_REVERSE_SUBTRACT = BlendEquation(32779)
 )
-
-func (v BlendEquation) String() string {
-	switch v {
-	case 32774:
-		return "GL_FUNC_ADD"
-	case 32778:
-		return "GL_FUNC_SUBTRACT"
-	case 32779:
-		return "GL_FUNC_REVERSE_SUBTRACT"
-	default:
-		return fmt.Sprintf("BlendEquation<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum BufferTarget
@@ -15494,29 +13938,6 @@ const (
 	BufferTarget_GL_UNIFORM_BUFFER            = BufferTarget(35345)
 )
 
-func (v BufferTarget) String() string {
-	switch v {
-	case 34962:
-		return "GL_ARRAY_BUFFER"
-	case 36662:
-		return "GL_COPY_READ_BUFFER"
-	case 36663:
-		return "GL_COPY_WRITE_BUFFER"
-	case 34963:
-		return "GL_ELEMENT_ARRAY_BUFFER"
-	case 35051:
-		return "GL_PIXEL_PACK_BUFFER"
-	case 35052:
-		return "GL_PIXEL_UNPACK_BUFFER"
-	case 35982:
-		return "GL_TRANSFORM_FEEDBACK_BUFFER"
-	case 35345:
-		return "GL_UNIFORM_BUFFER"
-	default:
-		return fmt.Sprintf("BufferTarget<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ImageTargetTexture_OES_EGL_image
 ////////////////////////////////////////////////////////////////////////////////
@@ -15526,15 +13947,6 @@ const (
 	ImageTargetTexture_OES_EGL_image_GL_TEXTURE_2D = ImageTargetTexture_OES_EGL_image(3553)
 )
 
-func (v ImageTargetTexture_OES_EGL_image) String() string {
-	switch v {
-	case 3553:
-		return "GL_TEXTURE_2D"
-	default:
-		return fmt.Sprintf("ImageTargetTexture_OES_EGL_image<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ImageTargetTexture_OES_EGL_image_external
 ////////////////////////////////////////////////////////////////////////////////
@@ -15543,15 +13955,6 @@ type ImageTargetTexture_OES_EGL_image_external uint32
 const (
 	ImageTargetTexture_OES_EGL_image_external_GL_TEXTURE_EXTERNAL_OES = ImageTargetTexture_OES_EGL_image_external(36197)
 )
-
-func (v ImageTargetTexture_OES_EGL_image_external) String() string {
-	switch v {
-	case 36197:
-		return "GL_TEXTURE_EXTERNAL_OES"
-	default:
-		return fmt.Sprintf("ImageTargetTexture_OES_EGL_image_external<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ImageTargetTexture
@@ -15570,19 +13973,6 @@ const (
 	ImageTargetTexture_GL_TEXTURE_EXTERNAL_OES = ImageTargetTexture(36197)
 )
 
-func (v ImageTargetTexture) String() string {
-	switch v {
-	// ImageTargetTexture_OES_EGL_image
-	case 3553:
-		return "GL_TEXTURE_2D"
-	// ImageTargetTexture_OES_EGL_image_external
-	case 36197:
-		return "GL_TEXTURE_EXTERNAL_OES"
-	default:
-		return fmt.Sprintf("ImageTargetTexture<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ImageTargetRenderbufferStorage
 ////////////////////////////////////////////////////////////////////////////////
@@ -15591,15 +13981,6 @@ type ImageTargetRenderbufferStorage uint32
 const (
 	ImageTargetRenderbufferStorage_GL_RENDERBUFFER_OES = ImageTargetRenderbufferStorage(36161)
 )
-
-func (v ImageTargetRenderbufferStorage) String() string {
-	switch v {
-	case 36161:
-		return "GL_RENDERBUFFER_OES"
-	default:
-		return fmt.Sprintf("ImageTargetRenderbufferStorage<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum ResetStatus
@@ -15613,21 +13994,6 @@ const (
 	ResetStatus_GL_UNKNOWN_CONTEXT_RESET_EXT  = ResetStatus(33365)
 )
 
-func (v ResetStatus) String() string {
-	switch v {
-	case 0:
-		return "GL_NO_ERROR"
-	case 33363:
-		return "GL_GUILTY_CONTEXT_RESET_EXT"
-	case 33364:
-		return "GL_INNOCENT_CONTEXT_RESET_EXT"
-	case 33365:
-		return "GL_UNKNOWN_CONTEXT_RESET_EXT"
-	default:
-		return fmt.Sprintf("ResetStatus<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum TextureKind
 ////////////////////////////////////////////////////////////////////////////////
@@ -15639,19 +14005,6 @@ const (
 	TextureKind_CUBEMAP   = TextureKind(2)
 )
 
-func (v TextureKind) String() string {
-	switch v {
-	case 0:
-		return "UNDEFINED"
-	case 1:
-		return "TEXTURE2D"
-	case 2:
-		return "CUBEMAP"
-	default:
-		return fmt.Sprintf("TextureKind<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryParameter_GLES_3
 ////////////////////////////////////////////////////////////////////////////////
@@ -15661,15 +14014,6 @@ const (
 	QueryParameter_GLES_3_GL_CURRENT_QUERY = QueryParameter_GLES_3(34917)
 )
 
-func (v QueryParameter_GLES_3) String() string {
-	switch v {
-	case 34917:
-		return "GL_CURRENT_QUERY"
-	default:
-		return fmt.Sprintf("QueryParameter_GLES_3<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryParameter_EXT_disjoint_timer_query
 ////////////////////////////////////////////////////////////////////////////////
@@ -15678,15 +14022,6 @@ type QueryParameter_EXT_disjoint_timer_query uint32
 const (
 	QueryParameter_EXT_disjoint_timer_query_GL_QUERY_COUNTER_BITS_EXT = QueryParameter_EXT_disjoint_timer_query(34916)
 )
-
-func (v QueryParameter_EXT_disjoint_timer_query) String() string {
-	switch v {
-	case 34916:
-		return "GL_QUERY_COUNTER_BITS_EXT"
-	default:
-		return fmt.Sprintf("QueryParameter_EXT_disjoint_timer_query<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryParameter
@@ -15705,19 +14040,6 @@ const (
 	QueryParameter_GL_QUERY_COUNTER_BITS_EXT = QueryParameter(34916)
 )
 
-func (v QueryParameter) String() string {
-	switch v {
-	// QueryParameter_GLES_3
-	case 34917:
-		return "GL_CURRENT_QUERY"
-	// QueryParameter_EXT_disjoint_timer_query
-	case 34916:
-		return "GL_QUERY_COUNTER_BITS_EXT"
-	default:
-		return fmt.Sprintf("QueryParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryObjectParameter_GLES_3
 ////////////////////////////////////////////////////////////////////////////////
@@ -15728,30 +14050,12 @@ const (
 	QueryObjectParameter_GLES_3_GL_QUERY_RESULT_AVAILABLE = QueryObjectParameter_GLES_3(34919)
 )
 
-func (v QueryObjectParameter_GLES_3) String() string {
-	switch v {
-	case 34918:
-		return "GL_QUERY_RESULT"
-	case 34919:
-		return "GL_QUERY_RESULT_AVAILABLE"
-	default:
-		return fmt.Sprintf("QueryObjectParameter_GLES_3<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryObjectParameter_EXT_disjoint_timer_query
 ////////////////////////////////////////////////////////////////////////////////
 type QueryObjectParameter_EXT_disjoint_timer_query uint32
 
 const ()
-
-func (v QueryObjectParameter_EXT_disjoint_timer_query) String() string {
-	switch v {
-	default:
-		return fmt.Sprintf("QueryObjectParameter_EXT_disjoint_timer_query<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryObjectParameter
@@ -15769,19 +14073,6 @@ const (
 // QueryObjectParameter_EXT_disjoint_timer_query
 const ()
 
-func (v QueryObjectParameter) String() string {
-	switch v {
-	// QueryObjectParameter_GLES_3
-	case 34918:
-		return "GL_QUERY_RESULT"
-	case 34919:
-		return "GL_QUERY_RESULT_AVAILABLE"
-	// QueryObjectParameter_EXT_disjoint_timer_query
-	default:
-		return fmt.Sprintf("QueryObjectParameter<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryTarget_GLES_3
 ////////////////////////////////////////////////////////////////////////////////
@@ -15793,19 +14084,6 @@ const (
 	QueryTarget_GLES_3_GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN = QueryTarget_GLES_3(35976)
 )
 
-func (v QueryTarget_GLES_3) String() string {
-	switch v {
-	case 35887:
-		return "GL_ANY_SAMPLES_PASSED"
-	case 36202:
-		return "GL_ANY_SAMPLES_PASSED_CONSERVATIVE"
-	case 35976:
-		return "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN"
-	default:
-		return fmt.Sprintf("QueryTarget_GLES_3<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryTarget_EXT_disjoint_timer_query
 ////////////////////////////////////////////////////////////////////////////////
@@ -15815,17 +14093,6 @@ const (
 	QueryTarget_EXT_disjoint_timer_query_GL_TIME_ELAPSED_EXT = QueryTarget_EXT_disjoint_timer_query(35007)
 	QueryTarget_EXT_disjoint_timer_query_GL_TIMESTAMP_EXT    = QueryTarget_EXT_disjoint_timer_query(36392)
 )
-
-func (v QueryTarget_EXT_disjoint_timer_query) String() string {
-	switch v {
-	case 35007:
-		return "GL_TIME_ELAPSED_EXT"
-	case 36392:
-		return "GL_TIMESTAMP_EXT"
-	default:
-		return fmt.Sprintf("QueryTarget_EXT_disjoint_timer_query<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum QueryTarget
@@ -15846,25 +14113,6 @@ const (
 	QueryTarget_GL_TIME_ELAPSED_EXT = QueryTarget(35007)
 	QueryTarget_GL_TIMESTAMP_EXT    = QueryTarget(36392)
 )
-
-func (v QueryTarget) String() string {
-	switch v {
-	// QueryTarget_GLES_3
-	case 35887:
-		return "GL_ANY_SAMPLES_PASSED"
-	case 36202:
-		return "GL_ANY_SAMPLES_PASSED_CONSERVATIVE"
-	case 35976:
-		return "GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN"
-	// QueryTarget_EXT_disjoint_timer_query
-	case 35007:
-		return "GL_TIME_ELAPSED_EXT"
-	case 36392:
-		return "GL_TIMESTAMP_EXT"
-	default:
-		return fmt.Sprintf("QueryTarget<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum TilePreserveMaskQCOM
@@ -15906,77 +14154,6 @@ const (
 	TilePreserveMaskQCOM_GL_MULTISAMPLE_BUFFER_BIT7_QCOM = TilePreserveMaskQCOM(2147483648)
 )
 
-func (v TilePreserveMaskQCOM) String() string {
-	switch v {
-	case 1:
-		return "GL_COLOR_BUFFER_BIT0_QCOM"
-	case 2:
-		return "GL_COLOR_BUFFER_BIT1_QCOM"
-	case 4:
-		return "GL_COLOR_BUFFER_BIT2_QCOM"
-	case 8:
-		return "GL_COLOR_BUFFER_BIT3_QCOM"
-	case 16:
-		return "GL_COLOR_BUFFER_BIT4_QCOM"
-	case 32:
-		return "GL_COLOR_BUFFER_BIT5_QCOM"
-	case 64:
-		return "GL_COLOR_BUFFER_BIT6_QCOM"
-	case 128:
-		return "GL_COLOR_BUFFER_BIT7_QCOM"
-	case 256:
-		return "GL_DEPTH_BUFFER_BIT0_QCOM"
-	case 512:
-		return "GL_DEPTH_BUFFER_BIT1_QCOM"
-	case 1024:
-		return "GL_DEPTH_BUFFER_BIT2_QCOM"
-	case 2048:
-		return "GL_DEPTH_BUFFER_BIT3_QCOM"
-	case 4096:
-		return "GL_DEPTH_BUFFER_BIT4_QCOM"
-	case 8192:
-		return "GL_DEPTH_BUFFER_BIT5_QCOM"
-	case 16384:
-		return "GL_DEPTH_BUFFER_BIT6_QCOM"
-	case 32768:
-		return "GL_DEPTH_BUFFER_BIT7_QCOM"
-	case 65536:
-		return "GL_STENCIL_BUFFER_BIT0_QCOM"
-	case 131072:
-		return "GL_STENCIL_BUFFER_BIT1_QCOM"
-	case 262144:
-		return "GL_STENCIL_BUFFER_BIT2_QCOM"
-	case 524288:
-		return "GL_STENCIL_BUFFER_BIT3_QCOM"
-	case 1048576:
-		return "GL_STENCIL_BUFFER_BIT4_QCOM"
-	case 2097152:
-		return "GL_STENCIL_BUFFER_BIT5_QCOM"
-	case 4194304:
-		return "GL_STENCIL_BUFFER_BIT6_QCOM"
-	case 8388608:
-		return "GL_STENCIL_BUFFER_BIT7_QCOM"
-	case 16777216:
-		return "GL_MULTISAMPLE_BUFFER_BIT0_QCOM"
-	case 33554432:
-		return "GL_MULTISAMPLE_BUFFER_BIT1_QCOM"
-	case 67108864:
-		return "GL_MULTISAMPLE_BUFFER_BIT2_QCOM"
-	case 134217728:
-		return "GL_MULTISAMPLE_BUFFER_BIT3_QCOM"
-	case 268435456:
-		return "GL_MULTISAMPLE_BUFFER_BIT4_QCOM"
-	case 536870912:
-		return "GL_MULTISAMPLE_BUFFER_BIT5_QCOM"
-	case 1073741824:
-		return "GL_MULTISAMPLE_BUFFER_BIT6_QCOM"
-	case 2147483648:
-		return "GL_MULTISAMPLE_BUFFER_BIT7_QCOM"
-	default:
-		return fmt.Sprintf("TilePreserveMaskQCOM<0x%.4x>", uint32(v))
-	}
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 // enum ClearMask
 ////////////////////////////////////////////////////////////////////////////////
@@ -15987,19 +14164,6 @@ const (
 	ClearMask_GL_DEPTH_BUFFER_BIT   = ClearMask(256)
 	ClearMask_GL_STENCIL_BUFFER_BIT = ClearMask(1024)
 )
-
-func (v ClearMask) String() string {
-	switch v {
-	case 16384:
-		return "GL_COLOR_BUFFER_BIT"
-	case 256:
-		return "GL_DEPTH_BUFFER_BIT"
-	case 1024:
-		return "GL_STENCIL_BUFFER_BIT"
-	default:
-		return fmt.Sprintf("ClearMask<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // enum MapBufferRangeAccess
@@ -16014,25 +14178,6 @@ const (
 	MapBufferRangeAccess_GL_MAP_FLUSH_EXPLICIT_BIT    = MapBufferRangeAccess(16)
 	MapBufferRangeAccess_GL_MAP_UNSYNCHRONIZED_BIT    = MapBufferRangeAccess(32)
 )
-
-func (v MapBufferRangeAccess) String() string {
-	switch v {
-	case 1:
-		return "GL_MAP_READ_BIT"
-	case 2:
-		return "GL_MAP_WRITE_BIT"
-	case 4:
-		return "GL_MAP_INVALIDATE_RANGE_BIT"
-	case 8:
-		return "GL_MAP_INVALIDATE_BUFFER_BIT"
-	case 16:
-		return "GL_MAP_FLUSH_EXPLICIT_BIT"
-	case 32:
-		return "GL_MAP_UNSYNCHRONIZED_BIT"
-	default:
-		return fmt.Sprintf("MapBufferRangeAccess<0x%.4x>", uint32(v))
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals

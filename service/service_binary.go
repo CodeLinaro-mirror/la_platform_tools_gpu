@@ -6,6 +6,8 @@
 package service
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -5137,4 +5139,97 @@ var schemaresultResolveTimingInfo = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "value", Type: &schema.Struct{Name: "TimingInfo"}},
 	},
+}
+
+const _ImageFormat_name = "RGBA8Float32"
+
+var _ImageFormat_map = map[ImageFormat]string{
+	0: _ImageFormat_name[0:5],
+	1: _ImageFormat_name[5:12],
+}
+
+func (v ImageFormat) String() string {
+	if s, ok := _ImageFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageFormat(%v)", v)
+}
+
+func (v *ImageFormat) Parse(s string) error {
+	for k, t := range _ImageFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageFormat", s)
+}
+
+const _TimingMask_name = "TimingPerCommandTimingPerDrawCallTimingPerFrame"
+
+var _TimingMask_map = map[TimingMask]string{
+	1: _TimingMask_name[0:16],
+	2: _TimingMask_name[16:33],
+	4: _TimingMask_name[33:47],
+}
+
+func (v TimingMask) String() string {
+	if s, ok := _TimingMask_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TimingMask(%v)", v)
+}
+
+func (v *TimingMask) Parse(s string) error {
+	for k, t := range _TimingMask_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TimingMask", s)
+}
+
+const _TypeKind_name = "BoolS8U8S16U16S32U32F32S64U64F64StringEnumStructClassArrayStaticArrayMapPointerMemoryAnyID"
+
+var _TypeKind_map = map[TypeKind]string{
+	0:  _TypeKind_name[0:4],
+	1:  _TypeKind_name[4:6],
+	2:  _TypeKind_name[6:8],
+	3:  _TypeKind_name[8:11],
+	4:  _TypeKind_name[11:14],
+	5:  _TypeKind_name[14:17],
+	6:  _TypeKind_name[17:20],
+	7:  _TypeKind_name[20:23],
+	8:  _TypeKind_name[23:26],
+	9:  _TypeKind_name[26:29],
+	10: _TypeKind_name[29:32],
+	11: _TypeKind_name[32:38],
+	12: _TypeKind_name[38:42],
+	14: _TypeKind_name[42:48],
+	15: _TypeKind_name[48:53],
+	16: _TypeKind_name[53:58],
+	17: _TypeKind_name[58:69],
+	18: _TypeKind_name[69:72],
+	19: _TypeKind_name[72:79],
+	20: _TypeKind_name[79:85],
+	21: _TypeKind_name[85:88],
+	22: _TypeKind_name[88:90],
+}
+
+func (v TypeKind) String() string {
+	if s, ok := _TypeKind_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TypeKind(%v)", v)
+}
+
+func (v *TypeKind) Parse(s string) error {
+	for k, t := range _TypeKind_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TypeKind", s)
 }

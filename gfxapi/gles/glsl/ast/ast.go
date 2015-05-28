@@ -43,6 +43,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/parse"
 )
 
+// binary: ignore
+
 type Language uint8
 
 // Constants identifying various sub-languages.

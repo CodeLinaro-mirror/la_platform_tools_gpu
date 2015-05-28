@@ -24,6 +24,8 @@ import (
 // Method denotes the encoding/decoding method a primitive type will use.
 type Method int
 
+// binary: Method.String = false
+
 const (
 	ID Method = iota
 	Bool

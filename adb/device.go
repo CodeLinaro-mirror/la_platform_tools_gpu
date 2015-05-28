@@ -23,6 +23,9 @@ import (
 // DeviceState represents the last queried state of an Android device.
 type DeviceState int
 
+// binary: DeviceState#Offline = offline
+// binary: DeviceState#Online = device
+// binary: DeviceState#Unauthorized = unauthorized
 const (
 	Offline DeviceState = iota
 	Online
@@ -103,7 +106,7 @@ func parseDevices(out string) ([]*Device, error) {
 			continue
 		case 2:
 			state := DeviceState(0)
-			if err := state.parse(fields[1]); err != nil {
+			if err := state.Parse(fields[1]); err != nil {
 				return nil, err
 			}
 			device := &Device{
@@ -116,19 +119,4 @@ func parseDevices(out string) ([]*Device, error) {
 		}
 	}
 	return devices, nil
-}
-
-func (s *DeviceState) parse(str string) error {
-	switch str {
-	case "offline":
-		*s = Offline
-		return nil
-	case "unauthorized":
-		*s = Unauthorized
-		return nil
-	case "device":
-		*s = Online
-		return nil
-	}
-	return fmt.Errorf("Unknown device state '%s'", str)
 }

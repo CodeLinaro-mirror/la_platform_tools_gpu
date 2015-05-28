@@ -104,18 +104,6 @@ func (a ListNodePtrArray) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]ListNodeᵖˢ", len(a))
 }
 
-func (i Enum) String() string {
-	switch i {
-	case EnumOne:
-		return "Enum.One"
-	case EnumTwo:
-		return "Enum.Two"
-	case EnumThree:
-		return "Enum.Three"
-	default:
-		return fmt.Sprintf("Enum: Unknown value %d", i)
-	}
-}
 func (i Enum) IsOne() bool   { return i == EnumOne }
 func (i Enum) IsTwo() bool   { return i == EnumTwo }
 func (i Enum) IsThree() bool { return i == EnumThree }
