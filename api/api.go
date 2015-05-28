@@ -39,7 +39,10 @@ type Processor struct {
 // DefaultProcessor is the Processor used in the package level functions.
 // Most applications will not need multiple instances of a Processor, and can
 // just use this one.
-var DefaultProcessor Processor
+var DefaultProcessor = Processor{
+	Parsed:   map[string]*ast.API{},
+	Resolved: map[string]*semantic.API{},
+}
 
 // Parse parses the api file with the DefaultProcessor.
 // See Processor.Parse for details.
@@ -85,8 +88,14 @@ func (p *Processor) Resolve(apiname string, mappings resolver.ASTToSemantic) (*s
 func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*semantic.API, parse.ErrorList) {
 	absname := filepath.Join(wd, name)
 	if api, ok := p.Resolved[absname]; ok {
+		if api == nil { // reentry detected
+			return nil, parse.ErrorList{parse.Error{
+				Message: fmt.Sprintf("Recursive import %s", absname)},
+			}
+		}
 		return api, nil
 	}
+	p.Resolved[absname] = nil // mark to prevent reentry
 	// Parse all the includes
 	includes := map[string]*ast.API{}
 	errs := p.include(includes, wd, name)
@@ -124,7 +133,11 @@ func (p *Processor) resolve(wd, name string, mappings resolver.ASTToSemantic) (*
 		}
 	}
 	// Now resolve the api set as a single unit
-	return resolver.Resolve(list, imports, mappings)
+	api, errs := resolver.Resolve(list, imports, mappings)
+	if len(errs) == 0 {
+		p.Resolved[absname] = api
+	}
+	return api, errs
 }
 
 func (p *Processor) include(includes map[string]*ast.API, wd string, apiname string) parse.ErrorList {
