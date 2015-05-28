@@ -81,6 +81,15 @@ var funcInfoCmdVoid3Remapped = builder.FunctionInfo{ID: 44, ReturnType: protocol
 var funcInfoCmdVoidOut3Remapped = builder.FunctionInfo{ID: 45, ReturnType: protocol.TypeVoid, Parameters: 3}
 var funcInfoCmdVoidOutArrayOfRemapped = builder.FunctionInfo{ID: 46, ReturnType: protocol.TypeVoid, Parameters: 1}
 
+func (c Tester) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	ϟb.Push(c.A.value(ϟb, ϟa, ϟs))
+	ϟb.Push(c.B.value(ϟb, ϟa, ϟs))
+	return ϟb.Buffer(1 + 1)
+}
+func (c Included) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
+	ϟb.Push(ϟb.String(c.S))
+	return ϟb.Buffer(0 + 1)
+}
 func (c remapped) value(ϟb *builder.Builder, ϟa atom.Atom, ϟs *gfxapi.State) value.Value {
 	return value.U32(uint32(c))
 }

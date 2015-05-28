@@ -887,6 +887,34 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 		return e
 	}
 	switch id {
+	case 0:
+		e = service.CreateClassInfo(
+			"Tester",
+			service.TypeKindClass,
+			service.FieldInfoArray{
+				&service.FieldInfo{
+					Name: "A",
+					Type: s.getClassInfo(-1),
+				},
+				&service.FieldInfo{
+					Name: "B",
+					Type: s.getClassInfo(1),
+				},
+			},
+			service.ClassInfoArray{},
+		)
+	case 1:
+		e = service.CreateClassInfo(
+			"Included",
+			service.TypeKindClass,
+			service.FieldInfoArray{
+				&service.FieldInfo{
+					Name: "S",
+					Type: schema.String,
+				},
+			},
+			service.ClassInfoArray{},
+		)
 	}
 	s.classes[id] = e
 	return e

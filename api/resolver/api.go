@@ -26,16 +26,19 @@ func apiNames(ctx *context, in *ast.API) {
 	for _, e := range in.Enums {
 		n := &semantic.Enum{AST: e, Name: e.Name.Value}
 		ctx.api.Enums = append(ctx.api.Enums, n)
+		ctx.api.Members[n.Name] = n
 		ctx.addType(n)
 	}
 	for _, c := range in.Classes {
 		n := &semantic.Class{AST: c, Name: c.Name.Value, Members: semantic.Members{}}
 		ctx.api.Classes = append(ctx.api.Classes, n)
+		ctx.api.Members[n.Name] = n
 		ctx.addType(n)
 	}
 	for _, p := range in.Pseudonyms {
 		n := &semantic.Pseudonym{AST: p, Name: p.Name.Value, Members: semantic.Members{}}
 		ctx.api.Pseudonyms = append(ctx.api.Pseudonyms, n)
+		ctx.api.Members[n.Name] = n
 		ctx.addType(n)
 	}
 	for _, m := range in.Macros {

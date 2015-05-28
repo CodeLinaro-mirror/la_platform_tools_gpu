@@ -6,6 +6,7 @@
 package test
 
 import (
+	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -61,6 +62,9 @@ func init() {
 	registry.Add((*CmdVoidU64)(nil).Class())
 	registry.Add((*CmdVoidU8)(nil).Class())
 	registry.Add((*Globals)(nil).Class())
+	registry.Add((*Imported)(nil).Class())
+	registry.Add((*Included)(nil).Class())
+	registry.Add((*Tester)(nil).Class())
 }
 
 var (
@@ -112,6 +116,9 @@ var (
 	binaryIDCmdVoidU64                = binary.ID{0xf0, 0x94, 0xd4, 0x52, 0x67, 0x8b, 0x0b, 0xb6, 0xc9, 0x2c, 0x5a, 0xeb, 0xad, 0x86, 0x6e, 0x16, 0x39, 0x05, 0x36, 0x12}
 	binaryIDCmdVoidU8                 = binary.ID{0x37, 0x14, 0xbd, 0x49, 0x55, 0x6f, 0xbf, 0x7b, 0x5b, 0xa2, 0x72, 0x0a, 0xb8, 0x94, 0x3a, 0x21, 0x4c, 0xdb, 0xe3, 0x32}
 	binaryIDGlobals                   = binary.ID{0xc0, 0x56, 0xa7, 0xd5, 0x53, 0x88, 0xac, 0xaa, 0x75, 0x81, 0x46, 0x04, 0x13, 0xd4, 0xd3, 0x88, 0x43, 0x9c, 0xef, 0x61}
+	binaryIDImported                  = binary.ID{0xdf, 0xef, 0xfd, 0x6d, 0x61, 0x4d, 0x78, 0xcf, 0x04, 0x14, 0xfb, 0xd3, 0x19, 0x00, 0x92, 0xa8, 0x23, 0xd1, 0x4a, 0xf4}
+	binaryIDIncluded                  = binary.ID{0xc1, 0xa7, 0xc7, 0xd9, 0xf3, 0x7c, 0x57, 0xbc, 0x60, 0xb0, 0x48, 0x00, 0x29, 0xfa, 0x2f, 0x9c, 0xda, 0xf9, 0x49, 0x02}
+	binaryIDTester                    = binary.ID{0xbd, 0x19, 0x4d, 0xd3, 0x5a, 0x62, 0xbb, 0x36, 0x7d, 0x71, 0xc9, 0xf2, 0xfd, 0xc8, 0xb0, 0xc1, 0xc6, 0x2e, 0xe1, 0xd6}
 )
 
 type binaryClassCmdArrayOfFloat struct{}
@@ -2630,4 +2637,180 @@ var schemaGlobals = &schema.Class{
 	TypeID: binaryIDGlobals,
 	Name:   "Globals",
 	Fields: []schema.Field{},
+}
+
+type binaryClassImported struct{}
+
+func (*Imported) Class() binary.Class {
+	return (*binaryClassImported)(nil)
+}
+func doEncodeImported(e binary.Encoder, o *Imported) error {
+	if err := e.Uint32(o.Value); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeImported(d binary.Decoder, o *Imported) error {
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Value = uint32(obj)
+	}
+	return nil
+}
+func doSkipImported(d binary.Decoder) error {
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassImported) ID() binary.ID      { return binaryIDImported }
+func (*binaryClassImported) New() binary.Object { return &Imported{} }
+func (*binaryClassImported) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeImported(e, obj.(*Imported))
+}
+func (*binaryClassImported) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Imported{}
+	return obj, doDecodeImported(d, obj)
+}
+func (*binaryClassImported) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeImported(d, obj.(*Imported))
+}
+func (*binaryClassImported) Skip(d binary.Decoder) error { return doSkipImported(d) }
+func (*binaryClassImported) Schema() *schema.Class       { return schemaImported }
+
+var schemaImported = &schema.Class{
+	TypeID: binaryIDImported,
+	Name:   "Imported",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassIncluded struct{}
+
+func (*Included) Class() binary.Class {
+	return (*binaryClassIncluded)(nil)
+}
+func doEncodeIncluded(e binary.Encoder, o *Included) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.String(o.S); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIncluded(d binary.Decoder, o *Included) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.S = string(obj)
+	}
+	return nil
+}
+func doSkipIncluded(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIncluded) ID() binary.ID      { return binaryIDIncluded }
+func (*binaryClassIncluded) New() binary.Object { return &Included{} }
+func (*binaryClassIncluded) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIncluded(e, obj.(*Included))
+}
+func (*binaryClassIncluded) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Included{}
+	return obj, doDecodeIncluded(d, obj)
+}
+func (*binaryClassIncluded) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIncluded(d, obj.(*Included))
+}
+func (*binaryClassIncluded) Skip(d binary.Decoder) error { return doSkipIncluded(d) }
+func (*binaryClassIncluded) Schema() *schema.Class       { return schemaIncluded }
+
+var schemaIncluded = &schema.Class{
+	TypeID: binaryIDIncluded,
+	Name:   "Included",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "S", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
+}
+
+type binaryClassTester struct{}
+
+func (*Tester) Class() binary.Class {
+	return (*binaryClassTester)(nil)
+}
+func doEncodeTester(e binary.Encoder, o *Tester) error {
+	if err := e.Uint64(uint64(o.CreatedAt)); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	if err := e.Value(&o.B); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeTester(d binary.Decoder, o *Tester) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.CreatedAt = atom.ID(obj)
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	if err := d.Value(&o.B); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipTester(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Imported)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Included)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassTester) ID() binary.ID      { return binaryIDTester }
+func (*binaryClassTester) New() binary.Object { return &Tester{} }
+func (*binaryClassTester) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeTester(e, obj.(*Tester))
+}
+func (*binaryClassTester) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Tester{}
+	return obj, doDecodeTester(d, obj)
+}
+func (*binaryClassTester) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeTester(d, obj.(*Tester))
+}
+func (*binaryClassTester) Skip(d binary.Decoder) error { return doSkipTester(d) }
+func (*binaryClassTester) Schema() *schema.Class       { return schemaTester }
+
+var schemaTester = &schema.Class{
+	TypeID: binaryIDTester,
+	Name:   "Tester",
+	Fields: []schema.Field{
+		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Imported"}},
+		schema.Field{Declared: "B", Type: &schema.Struct{Name: "Included"}},
+	},
 }
