@@ -16,6 +16,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -23,6 +24,8 @@ import (
 	"android.googlesource.com/platform/tools/gpu/build"
 	. "android.googlesource.com/platform/tools/gpu/maker"
 )
+
+var noapic = flag.Bool("noapic", false, "Disable apic code generation")
 
 func main() { Run() }
 
@@ -165,6 +168,10 @@ func RpcApi(language string, path string, api Entity) *Step {
 }
 
 func Apic(path string, api string, template string) {
+	if *noapic {
+		List("apic").DependsOn(Tools.Apic)
+		return
+	}
 	dst := Dir(path)
 	a := File(api)
 	t := File(template)
