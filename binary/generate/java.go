@@ -24,12 +24,6 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
 )
 
-const (
-	indent       = "»"
-	classPrefix  = "⊹"
-	memberPrefix = "∍"
-)
-
 var (
 	javaTypeMap = map[string]string{
 		"int8":    "byte",

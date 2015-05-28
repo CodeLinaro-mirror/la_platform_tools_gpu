@@ -31,6 +31,12 @@ import (
 	"golang.org/x/tools/go/types"
 )
 
+const (
+	indent       = "»"
+	classPrefix  = "⊹"
+	memberPrefix = "∍"
+)
+
 type Generator struct {
 	f *functions
 }

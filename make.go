@@ -39,6 +39,7 @@ var (
 	gapiipath    = Path(gpusrc, "cc/gapii")
 	gapiiwinpath = Path(gpusrc, "cc/gapii/windows")
 	gapiiosxpath = Path(gpusrc, "cc/gapii/osx")
+	cppcoder     = Path(gpusrc, "cc/gapic/coder")
 	testpath     = Path(gpusrc, "gfxapi/test")
 	glesapi      = Path(gpusrc, "gfxapi/gles/gles.api")
 	testapi      = Path(gpusrc, "gfxapi/test/gfxapi_test.api")
@@ -101,11 +102,10 @@ func init() {
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
-		Codergen("codergen", "--go", GPURoot+"/...")
+		Codergen("codergen", "--go", "--java", javacore, "-cpp", cppcoder, GPURoot+"/...")
 		// The java code generation rules
-		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
-		List("java").DependsOn("javacoders", "javarpc")
+		List("java").DependsOn("codergen", "javarpc")
 		//
 		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
