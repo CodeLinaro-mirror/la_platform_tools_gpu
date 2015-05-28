@@ -138,6 +138,9 @@ func output(gen *generate.Generator, file *generate.File) error {
 	if len(file.Structs) == 0 {
 		return nil
 	}
+	if _, ignored := file.Directives["ignore"]; ignored {
+		return nil
+	}
 	generate.Sort(file.Structs)
 	if *golang {
 		entry := Entry{

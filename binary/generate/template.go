@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"reflect"
+	"strconv"
 	"strings"
 	"text/template"
 	"unicode"
@@ -34,6 +35,7 @@ type functions struct {
 	prefix    string
 	schema    string
 	writer    io.Writer
+	File      *File
 }
 
 func newFunctions() *functions {
@@ -116,4 +118,18 @@ func (f *functions) Lower(s string) string {
 
 func (f *functions) ToS8(val byte) string {
 	return fmt.Sprint(int8(val))
+}
+
+func (f *functions) Directive(name string, notset interface{}) interface{} {
+	d, ok := f.File.Directives[name]
+	if !ok {
+		return notset
+	}
+	if _, isbool := notset.(bool); isbool {
+		//coerce the string to bool
+		if b, err := strconv.ParseBool(d); err == nil {
+			return b
+		}
+	}
+	return d
 }
