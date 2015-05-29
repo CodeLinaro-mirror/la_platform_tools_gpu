@@ -16,33 +16,42 @@ package replay
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 )
 
 // Replayer is the interface that wraps the basic Replay method.
 type Replayer interface {
 	// Replay issues replay operations to the replay builder b for the given atom
-	// with identifier id, and graphics API state s. If the replay action will
+	// with identifier i, and graphics API state s. If the replay action will
 	// have an effect on the graphics driver state, then the call to Replay should
-	// also apply the corresponding changes to the state s. If postback is true
-	// then the replay instructions should include postback of all outputs of the
-	// action.
-	Replay(id atom.ID, s *gfxapi.State, b *builder.Builder, postback bool)
+	// also apply the corresponding changes to the state s.
+	Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder)
 }
 
 // Replay issues replay operations to the replay builder b for the given atom a
-// with identifier id, and graphics API state s. If replaying the Atom will have
+// with identifier i, and graphics API state s. If replaying the Atom will have
 // an effect on the graphics driver state, then the call to Replay will also
-// apply the corresponding changes to the state s. If postback is true then
-// the replay instructions should include postback of all outputs of the Atom.
-func Replay(id atom.ID, a atom.Atom, s *gfxapi.State, b *builder.Builder, postback bool) {
+// apply the corresponding changes to the state s.
+func Replay(
+	i atom.ID,
+	a atom.Atom,
+	s *gfxapi.State,
+	d database.Database,
+	l log.Logger,
+	b *builder.Builder) {
+
+	b.BeginAtom(i)
+
 	switch a := a.(type) {
-	case *atom.Observation:
-		b.Observation(a.Range, a.ResourceID)
 	case Replayer:
-		a.Replay(id, s, b, postback)
+		a.Replay(i, s, d, l, b)
+
 	default:
-		a.Mutate(s)
+		a.Mutate(s, d, l)
 	}
+
+	b.EndAtom()
 }

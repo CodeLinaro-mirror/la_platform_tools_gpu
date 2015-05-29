@@ -37,9 +37,6 @@ func max(a, b uint64) uint64 {
 	}
 }
 
-// Pointer is the type representing a memory pointer.
-type Pointer uint64
-
 // Range represents a region of memory.
 type Range struct {
 	binary.Generate
@@ -63,6 +60,13 @@ func (i Range) Contains(p Pointer) bool {
 	return i.First() <= p && p <= i.Last()
 }
 
+// Overlaps returns true if other overlaps this memory range.
+func (i Range) Overlaps(other Range) bool {
+	a, b := i.Span(), other.Span()
+	s, e := max(a.Start, b.Start), min(a.End, b.End)
+	return s < e
+}
+
 // Intersect returns the Range that is common between this Range and other.
 // If the two memory ranges do not intersect, then this function panics.
 func (i Range) Intersect(other Range) Range {
@@ -81,7 +85,12 @@ func (i Range) First() Pointer {
 
 // Last returns a Pointer to the last byte in the Range.
 func (i Range) Last() Pointer {
-	return i.Base + Pointer(i.Size-1)
+	return i.End() - 1
+}
+
+// End returns a Pointer to one byte beyond the end of the Range.
+func (i Range) End() Pointer {
+	return i.Base + Pointer(i.Size)
 }
 
 // Span returns the Range as a U64Span.
@@ -93,5 +102,5 @@ func (i Range) Span() interval.U64Span {
 }
 
 func (i Range) String() string {
-	return fmt.Sprintf("[0x%.16x-0x%.16x]", i.First(), i.Last())
+	return fmt.Sprintf("[%v-%v]", i.First(), i.Last())
 }

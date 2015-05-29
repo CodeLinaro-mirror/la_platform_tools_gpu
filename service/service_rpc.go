@@ -93,52 +93,64 @@ type TimingInfoId struct {
 	ID binary.ID
 }
 
-// Array ApiIdSlice
+// Array ApiIdˢ
 type ApiIdArray []ApiId
 
-// Array ApiSchemaSlice
+// Array ApiSchemaˢ
 type ApiSchemaArray []ApiSchema
 
-// Array AtomGroupSlice
+// Array AtomGroupˢ
 type AtomGroupArray []AtomGroup
 
-// Array AtomInfoSlice
+// Array AtomInfoˢ
 type AtomInfoArray []AtomInfo
 
-// Array AtomRangeTimerSlice
+// Array AtomRangeTimerˢ
 type AtomRangeTimerArray []AtomRangeTimer
 
-// Array AtomTimerSlice
+// Array AtomTimerˢ
 type AtomTimerArray []AtomTimer
 
-// Array CaptureIdSlice
+// Array CaptureIdˢ
 type CaptureIdArray []CaptureId
 
-// Array ClassInfoPointerSlice
-type ClassInfoArray []*ClassInfo
+// Array ClassInfoˢ
+type ClassInfoArray []ClassInfo
 
-// Array DeviceIdSlice
+// Array ClassInfoᵖˢ
+type ClassInfoPtrArray []*ClassInfo
+
+// Array DeviceIdˢ
 type DeviceIdArray []DeviceId
 
-// Array EnumEntrySlice
+// Array EnumEntryˢ
 type EnumEntryArray []EnumEntry
 
-// Array EnumInfoPointerSlice
-type EnumInfoArray []*EnumInfo
+// Array EnumInfoˢ
+type EnumInfoArray []EnumInfo
 
-// Array FieldInfoPointerSlice
-type FieldInfoArray []*FieldInfo
+// Array EnumInfoᵖˢ
+type EnumInfoPtrArray []*EnumInfo
 
-// Array MemoryRangeSlice
+// Array FieldInfoˢ
+type FieldInfoArray []FieldInfo
+
+// Array FieldInfoᵖˢ
+type FieldInfoPtrArray []*FieldInfo
+
+// Array MemoryRangeˢ
 type MemoryRangeArray []MemoryRange
 
-// Array ParameterInfoSlice
+// Array ParameterInfoˢ
 type ParameterInfoArray []ParameterInfo
 
-// Array U64Slice
+// Array TypeInfoˢ
+type TypeInfoArray []TypeInfo
+
+// Array U64ˢ
 type U64Array []uint64
 
-// Array U8Slice
+// Array U8ˢ
 type U8Array []uint8
 
 // Enum ImageFormat
@@ -349,7 +361,7 @@ type EnumInfo struct {
 	Name    string
 	Kind    TypeKind
 	Entries EnumEntryArray
-	Extends EnumInfoArray
+	Extends EnumInfoPtrArray
 }
 
 // Class EnumEntry
@@ -364,7 +376,7 @@ type StructInfo struct {
 	binary.Generate
 	Name   string
 	Kind   TypeKind
-	Fields FieldInfoArray
+	Fields FieldInfoPtrArray
 }
 
 // Class ClassInfo
@@ -372,8 +384,8 @@ type ClassInfo struct {
 	binary.Generate
 	Name    string
 	Kind    TypeKind
-	Fields  FieldInfoArray
-	Extends ClassInfoArray
+	Fields  FieldInfoPtrArray
+	Extends ClassInfoPtrArray
 }
 
 // Class FieldInfo

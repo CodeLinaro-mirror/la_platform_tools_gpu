@@ -1,0 +1,91 @@
+/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef GAPII_SLICE_H
+#define GAPII_SLICE_H
+
+#include "pool.h"
+
+#include <memory>
+#include <stdint.h>
+
+namespace gapii {
+
+template<typename T>
+class Slice {
+public:
+    inline Slice();
+    inline Slice(T* base, uint64_t count, const std::shared_ptr<Pool>& pool);
+
+    inline Slice<T> operator()(uint64_t start, uint64_t end) const;
+    inline T&       operator[](uint64_t index) const;
+
+    // Returns the number of elements in the slice.
+    inline uint64_t count() const;
+
+    // Returns the size of the slice in bytes.
+    inline uint64_t size() const;
+
+    // Support for range-based for looping
+    inline T* begin() const;
+    inline T* end() const;
+
+private:
+    T* mBase;
+    uint64_t mCount;
+    std::shared_ptr<Pool> mPool;
+};
+
+template<typename T>
+inline Slice<T>::Slice() : mBase(nullptr), mCount(0) {}
+
+template<typename T>
+inline Slice<T>::Slice(T* base, uint64_t count, const std::shared_ptr<Pool>& pool)
+    : mBase(base), mCount(0), mPool(pool) {}
+
+template<typename T>
+inline Slice<T> Slice<T>::operator()(uint64_t start, uint64_t end) const {
+    return Slice<T>(mBase+start, end-start, mPool);
+}
+
+template<typename T>
+inline T& Slice<T>::operator[](uint64_t index) const {
+    return mBase[index];
+}
+
+template<typename T>
+inline uint64_t Slice<T>::count() const {
+    return mCount;
+}
+
+template<typename T>
+inline uint64_t Slice<T>::size() const {
+    return mCount * sizeof(T);
+}
+
+template<typename T>
+inline T* Slice<T>::begin() const {
+    return mBase;
+}
+
+template<typename T>
+inline T* Slice<T>::end() const {
+    return mBase + mCount;
+}
+
+}  // namespace gapii
+
+#endif // GAPII_SLICE_H

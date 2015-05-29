@@ -16,7 +16,9 @@ package gles
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
@@ -96,38 +98,38 @@ func (i UniformLocation) remap(a atom.Atom, s *gfxapi.State) (key interface{}, r
 
 func (i IndicesPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	if getContext(s).BoundBuffers[BufferTarget_GL_ELEMENT_ARRAY_BUFFER] != 0 {
-		return value.AbsolutePointer(i)
+		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i)
+		return value.VolatileCapturePointer(i.Address)
 	}
 }
 
 func (i VertexPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
 	if getContext(s).BoundBuffers[BufferTarget_GL_ARRAY_BUFFER] != 0 {
-		return value.AbsolutePointer(i)
+		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i)
+		return value.VolatileCapturePointer(i.Address)
 	}
 }
 
 func (i TexturePointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if i == 0 {
-		return value.AbsolutePointer(i)
+	if i.Address == 0 {
+		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i)
+		return value.VolatileCapturePointer(i.Address)
 	}
 }
 
 func (i BufferDataPointer) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	if i == 0 {
-		return value.AbsolutePointer(i)
+	if i.Address == 0 {
+		return value.AbsolutePointer(i.Address)
 	} else {
-		return value.VolatileCapturePointer(i)
+		return value.VolatileCapturePointer(i.Address)
 	}
 }
 
 func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.Value {
-	return value.AbsolutePointer(i)
+	return value.AbsolutePointer(i.Address)
 }
 
 // AttributeLocations cannot be remapped like UniformLocations as the VertexAttributeArrays are
@@ -136,87 +138,77 @@ func (i ImageOES) value(b *builder.Builder, a atom.Atom, s *gfxapi.State) value.
 // TODO: This implementation currently calls glLinkProgram for every call to glGetAttribLocation!
 //       This is obviously not ideal, and we should be doing this once at glLinkProgram once the
 //       spy emits location hinting information.
-func (ω *GlGetAttribLocation) Replay(id atom.ID, s *gfxapi.State, b *builder.Builder, wantOutput bool) {
+func (ω *GlGetAttribLocation) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
 	if ω.Result >= 0 {
-		NewGlBindAttribLocation(ω.Program, ω.Result, ω.Name).Replay(id, s, b, false)
-		NewGlLinkProgram(ω.Program).Replay(id, s, b, false)
+		NewGlBindAttribLocation(ω.Program, ω.Result, ω.Name).Replay(i, s, d, l, b)
+		NewGlLinkProgram(ω.Program).Replay(i, s, d, l, b)
 	}
 }
 
-func (ω *EglCreateContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.EGLContexts[ω.Result].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *EglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).EGLContexts[ω.Result].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *EglMakeCurrent) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	if ω.Context != 0 {
-		ctxID := uint32(s.EGLContexts[ω.Context].Identifier)
-		NewReplayBindRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *EglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	if ω.Context.Address != 0 {
+		ctxID := uint32(getState(s).EGLContexts[ω.Context].Identifier)
+		NewReplayBindRenderer(ctxID).Replay(i, s, d, l, b)
 	}
 }
 
-func (ω *WglCreateContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.WGLContexts[ω.Result].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *WglCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).WGLContexts[ω.Result].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *WglCreateContextAttribsARB) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.WGLContexts[ω.Result].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *WglCreateContextAttribsARB) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).WGLContexts[ω.Result].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *WglMakeCurrent) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	if ω.Hglrc != 0 {
-		s := getState(gs)
-		ctxID := uint32(s.WGLContexts[ω.Hglrc].Identifier)
-		NewReplayBindRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *WglMakeCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	if ω.Hglrc.Address != 0 {
+		ctxID := uint32(getState(s).WGLContexts[ω.Hglrc].Identifier)
+		NewReplayBindRenderer(ctxID).Replay(i, s, d, l, b)
 	}
 }
 
-func (ω *CGLCreateContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.CGLContexts[ω.Ctx].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *CGLCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).CGLContexts[ω.Ctx.Read(s, d, l)].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *CGLSetCurrentContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	if ω.Ctx != 0 {
-		ctxID := uint32(s.CGLContexts[ω.Ctx].Identifier)
-		NewReplayBindRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *CGLSetCurrentContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	if ω.Ctx.Address != 0 {
+		ctxID := uint32(getState(s).CGLContexts[ω.Ctx].Identifier)
+		NewReplayBindRenderer(ctxID).Replay(i, s, d, l, b)
 	}
 }
 
-func (ω *GlXCreateContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.GLXContexts[ω.Result].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *GlXCreateContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).GLXContexts[ω.Result].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *GlXCreateNewContext) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	s := getState(gs)
-	ctxID := uint32(s.GLXContexts[ω.Result].Identifier)
-	NewReplayCreateRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *GlXCreateNewContext) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	ctxID := uint32(getState(s).GLXContexts[ω.Result].Identifier)
+	NewReplayCreateRenderer(ctxID).Replay(i, s, d, l, b)
 }
 
-func (ω *GlXMakeContextCurrent) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
-	ω.Mutate(gs)
-	if ω.Ctx != 0 {
-		s := getState(gs)
-		ctxID := uint32(s.GLXContexts[ω.Ctx].Identifier)
-		NewReplayBindRenderer(ctxID).Replay(id, gs, b, false)
+func (ω *GlXMakeContextCurrent) Replay(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
+	ω.Mutate(s, d, l)
+	if ω.Ctx.Address != 0 {
+		ctxID := uint32(getState(s).GLXContexts[ω.Ctx].Identifier)
+		NewReplayBindRenderer(ctxID).Replay(i, s, d, l, b)
 	}
 }

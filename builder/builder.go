@@ -92,20 +92,23 @@ func extractResources(atoms atom.List, db database.Database, logger log.Logger) 
 			if id, err := db.Store(&blob, logger); err != nil {
 				return nil, err
 			} else {
-				idmap[a.ResourceID] = id
+				idmap[a.ID] = id
 			}
-
-		case *atom.Observation:
-			id := a.ResourceID
-			if remapped, ok := idmap[id]; ok { // Avoid a db link and remap ids here.
-				id = remapped
-			}
-			out = append(out, &atom.Observation{
-				Range:      a.Range,
-				ResourceID: id,
-			})
 
 		default:
+			// Replace resource IDs from identifiers generated at capture time to
+			// direct database identifiers. This avoids a database link indirection.
+			observations := a.Observations()
+			for i, r := range observations.Reads {
+				if id, found := idmap[r.ID]; found {
+					observations.Reads[i].ID = id
+				}
+			}
+			for i, w := range observations.Writes {
+				if id, found := idmap[w.ID]; found {
+					observations.Writes[i].ID = id
+				}
+			}
 			out = append(out, a)
 		}
 	}
@@ -258,13 +261,13 @@ func uniformScale(width, height, maxWidth, maxHeight uint32) (w, h uint32) {
 }
 
 // build writes to out the captureFramebufferDimensions resource resulting from the given getCaptureFramebufferDimensions request.
-func (request *getCaptureFramebufferDimensions) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, db, logger)
+func (request *getCaptureFramebufferDimensions) build(d database.Database, l log.Logger, out binary.Object) error {
+	capture, err := loadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
 		return err
 	}
@@ -272,16 +275,16 @@ func (request *getCaptureFramebufferDimensions) build(db database.Database, logg
 	var captureFbDims captureFramebufferDimensions
 	var currentDims *atomFramebufferDimensions
 
-	s := &gfxapi.State{}
+	s := gfxapi.NewState()
 	for i, a := range atoms {
-		if err := a.Mutate(s); err != nil {
+		if err := a.Mutate(s, d, l); err != nil {
 			return err
 		}
 		if currentDims == nil || a.Flags().IsDrawCall() || a.Flags().IsEndOfFrame() {
 			api := a.API()
 			width, height, err := api.GetFramebufferAttachmentSize(s, gfxapi.FramebufferAttachmentColor)
 			if err != nil {
-				logger.Warningf("GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
+				l.Warningf("GetFramebufferAttachmentSize at atom %d %T gave error: %v", i, a, err)
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {

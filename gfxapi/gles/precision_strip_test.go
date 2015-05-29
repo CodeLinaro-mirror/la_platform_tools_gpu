@@ -19,8 +19,14 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/device"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 type mockWriter struct {
@@ -32,35 +38,76 @@ func (m *mockWriter) Write(id atom.ID, a atom.Atom) {
 }
 
 func runTest(t *testing.T, src string, expected string) {
-	s := precisionStrip()
-	tree, err := glsl.Parse(expected, ast.LangVertexShader)
-	if len(err) > 0 {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	if tree, err := glsl.Parse(expected, ast.LangVertexShader); len(err) == 0 {
+		expected = fmt.Sprint(glsl.Formatter(tree))
+	} else {
 		t.Errorf("Unexpected error parsing the expected output: %s.", err[0])
 	}
-	expected = fmt.Sprint(glsl.Formatter(tree))
 
-	mw := &mockWriter{}
-
-	s.Transform(0, NewGlShaderSource(0, 1, []string{src}, nil), mw)
-
-	if len(mw.atoms) != 1 {
-		t.Error("Unexpected number of Write calls: got %d, expected 1.", len(mw.atoms))
+	in := []atom.Atom{
+		NewEglCreateContext(0, 0, 0, 0, 0),
+		NewEglMakeCurrent(0, 0, 0, 0, 0),
+		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, 0x10),
+		NewGlShaderSource(0x10, 1, 0x100000, 0x100010).
+			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
+			AddRead(atom.Data(a, d, l, 0x100010, int32(len(src)))).
+			AddRead(atom.Data(a, d, l, 0x100020, src)),
 	}
 
-	cmd, ok := mw.atoms[0].(*GlShaderSource)
-	if !ok {
-		t.Errorf("Received wrong kind of atom: got `%T`, expected `%T`.",
-			mw.atoms[0], &GlShaderSource{})
+	mw := &mockWriter{}
+	ps := precisionStrip(d, l)
+	for _, a := range in {
+		ps.Transform(atom.NoID, a, mw)
+	}
+
+	var cmd *GlShaderSource
+	for _, a := range mw.atoms {
+		if a, ok := a.(*GlShaderSource); ok {
+			cmd = a
+			break
+		}
+	}
+
+	if cmd == nil {
+		t.Error("Transform did not produce a glShaderSource atom. Atoms produced:")
+		for i, a := range mw.atoms {
+			t.Errorf("%d %T", i, a)
+		}
 		return
 	}
 
 	if cmd.Count != 1 {
-		t.Errorf("Unexpected number of lines: got %d, expected 1.", cmd.Count)
+		t.Errorf("Unexpected number of sources: got %d, expected 1.", cmd.Count)
 		return
 	}
-	if cmd.Source[0] != expected {
-		t.Errorf("Received unexpected string: got `%s`, expected `%s`.",
-			cmd.Source[0], expected)
+
+	s := gfxapi.NewState()
+	for _, a := range mw.atoms {
+		a.Mutate(s, d, l)
+	}
+
+	srcPtr := cmd.Source.Read(s, d, l) // 0'th glShaderSource string pointer
+
+	got, err := s.MemoryDecoder(srcPtr.Unbounded(s), d, l).String()
+	ok := true
+	if err != nil {
+		t.Errorf("Failed read transformed source at %v: %v", srcPtr, err)
+		ok = false
+	}
+	if got != expected {
+		t.Errorf("Received unexpected string at %v: got `%s`, expected `%s`.", srcPtr, got, expected)
+		ok = false
+	}
+	if !ok {
+		t.Errorf("Application memory pool writes:\n%v", s.Memory[memory.ApplicationPool])
 	}
 }
 
@@ -109,7 +156,8 @@ func TestStripConversion(t *testing.T) {
 }
 
 func TestStripPassthrough(t *testing.T) {
-	s := precisionStrip()
+	d, l := database.Database(nil), log.Testing(t)
+	s := precisionStrip(d, l)
 	mw := &mockWriter{}
 	a := &GlGetError{}
 

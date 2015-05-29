@@ -98,7 +98,7 @@ CGLError Spy::CGLSetCurrentContext(CGLContextObj ctx) {
     return err;
 }
 
-void Spy::glXMakeContextCurrent(const void* display, GLXDrawable draw, GLXDrawable read,
+void Spy::glXMakeContextCurrent(void* display, GLXDrawable draw, GLXDrawable read,
                                 GLXContext ctx) {
     using namespace RenderbufferFormat;
     GlesSpy::glXMakeContextCurrent(display, draw, read, ctx);

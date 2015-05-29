@@ -34,7 +34,7 @@ var testResourceId = ResourceId{ID: binary.NewID([]byte("Test resource id"))}
 var testResource = Resource{Int: 10, Float: 20, String: "30"}
 var testSingleListNode = CreateListNode("Single ListNode", nil)
 var testListNodeChain = CreateListNode("ListNodeA", CreateListNode("ListNodeB", CreateListNode("ListNodeC", nil)))
-var testListNodeChainArray = ListNodeArray{
+var testListNodeChainArray = ListNodePtrArray{
 	testListNodeChain, testListNodeChain, testListNodeChain,
 }
 
@@ -91,7 +91,7 @@ func (s *server) GetListNodeChain(logger log.Logger) (*ListNode, error) {
 	return testListNodeChain, s.err
 }
 
-func (s *server) GetListNodeChainArray(logger log.Logger) (ListNodeArray, error) {
+func (s *server) GetListNodeChainArray(logger log.Logger) (ListNodePtrArray, error) {
 	s.calls = append(s.calls, "GetListNodeChainArray()")
 	return testListNodeChainArray, s.err
 }

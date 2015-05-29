@@ -30,13 +30,13 @@
 
   func init() {
     s := schemaBuilder{
-      arrays:       make(map[int]*service.ArrayInfo),
       staticArrays: make(map[int]*service.StaticArrayInfo),
       maps:         make(map[int]*service.MapInfo),
       enums:        make(map[int]*service.EnumInfo),
       structs:      make(map[int]*service.StructInfo),
       classes:      make(map[int]*service.ClassInfo),
     }
+    _ = s
 
     {{range $i, $c := AllCommands $}}
       schema.RegisterAtom({{Macro "Command" "Command" $c "Index" $i}})
@@ -44,21 +44,19 @@
     schema.RegisterAPI(api{}, service.StructInfo{
       Name:   "state",
       Kind:   service.TypeKindStruct,
-      Fields: service.FieldInfoArray{
+      Fields: service.FieldInfoPtrArray{
         {{Macro "Globals" $}}
       },
     })
   }
 
   type schemaBuilder struct {
-    arrays       map[int]*service.ArrayInfo
     staticArrays map[int]*service.StaticArrayInfo
     maps         map[int]*service.MapInfo
     enums        map[int]*service.EnumInfo
     structs      map[int]*service.StructInfo
     classes      map[int]*service.ClassInfo
   }
-  {{Macro "GetInfo" "Type" "Array"       "Map" "arrays"       "List" $.Arrays      }}
   {{Macro "GetInfo" "Type" "StaticArray" "Map" "staticArrays" "List" $.StaticArrays}}
   {{Macro "GetInfo" "Type" "Map"         "Map" "maps"         "List" $.Maps        }}
   {{Macro "GetInfo" "Type" "Enum"        "Map" "enums"        "List" $.Enums       }}
@@ -148,7 +146,7 @@
         },
       {{end}}
     },
-    service.EnumInfoArray {
+    service.EnumInfoPtrArray {
       {{range $v := $.Extends}}
         s.getEnumInfo({{IndexOf $api.Enums $v}}),
       {{end}}
@@ -169,10 +167,10 @@
   service.CreateClassInfo(
     "{{$.Name}}",
     service.TypeKindClass,
-    service.FieldInfoArray{
+    service.FieldInfoPtrArray{
       {{Macro "Fields" $}}
     },
-    service.ClassInfoArray {
+    service.ClassInfoPtrArray {
       {{range $v := $.Extends}}
         s.getClassInfo({{IndexOf $api.Classes $v}}),
       {{end}}
@@ -251,24 +249,6 @@
 */}}
 {{define "FixedAtoms"}}
   service.AtomInfo{
-    Type:       uint16(atom.TypeIDObservation),
-    Name:       "MemoryObservation",
-    Parameters: service.ParameterInfoArray{
-      service.ParameterInfo{
-        Name: "Pointer",
-        Type: s.pointerInfo,
-      },
-      service.ParameterInfo{
-        Name: "Size",
-        Type: s.u64Info,
-      },
-      service.ParameterInfo{
-        Name: "ResourceID",
-        Type: s.idInfo,
-      },
-    },
-  },
-  service.AtomInfo{
     Type: uint16(atom.TypeIDEos),
     Name: "EndOfStream",
   },
@@ -283,12 +263,13 @@
 {{define "TypeInfo"}}§
   {{$api := Global "api"}}
   {{     if IsPseudonym     $}}{{Macro "TypeInfo" $.To}}
-  {{else if IsArray         $}}s.getArrayInfo({{IndexOf $api.Arrays $}})
+  {{else if IsSlice         $}}schema.Int /* TODO: Slice */
   {{else if IsStaticArray   $}}s.getStaticArrayInfo({{IndexOf $api.StaticArrays $}})
   {{else if IsMap           $}}s.getMapInfo({{IndexOf $api.Maps $}})
   {{else if IsEnum          $}}s.getEnumInfo({{IndexOf $api.Enums $}})
   {{else if IsClass         $}}s.getClassInfo({{IndexOf $api.Classes $}})
-  {{else if IsPointer       $}}{{if $.Array}}schema.Pointer{{else}}s.getClassInfo({{IndexOf $api.Classes $.To}}){{end}}
+  {{else if IsPointer       $}}schema.Pointer
+  {{else if IsReference     $}}schema.Int /* TODO: Reference */
   {{else if IsBool          $}}schema.Bool
   {{else if IsInt           $}}schema.Int
   {{else if IsUint          $}}schema.Uint
@@ -302,13 +283,6 @@
   {{else if IsS64           $}}schema.S64
   {{else if IsU64           $}}schema.U64
   {{else if IsF64           $}}schema.Double
-  {{else if IsBuffer        $}}
-    {{if $.Array}}
-      {{if IsChar $.To}}schema.String
-      {{else if IsU8 $.To}}schema.Memory
-      {{else}}s.getArrayInfo({{IndexOf $api.Arrays $.FakeArray}})
-      {{end}}
-    {{else}}s.getClassInfo({{IndexOf $api.Classes $.To}}){{end}}
   {{else if IsString        $}}schema.String
   {{else if IsAny           $}}schema.Any
   {{else}}{{Error "macro TypeInfo called with unsupported type: %v" $.Name}}

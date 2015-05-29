@@ -17,7 +17,6 @@ package builder
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 
@@ -26,6 +25,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/config"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/interval"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
@@ -74,13 +74,11 @@ type Builder struct {
 	heap, temp      allocator
 	resourceIDToIdx map[binary.ID]uint32
 	resources       []protocol.ResourceInfo
-	observedRanges  memory.RangeList
+	mappedMemory    memory.RangeList
 	instructions    []asm.Instruction
 	decoders        []idPostDecoder
 	stack           []stackItem
-	ptrSize         int
-	ptrAlignment    int
-	byteOrder       endian.ByteOrder
+	architecture    device.Architecture
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -91,20 +89,17 @@ type Builder struct {
 }
 
 // New returns a newly constructed Builder configured to replay on a target
-// architecture that has a pointer size of ptrSize bytes and and alignment of
-// ptrAlignment bytes, with byte ordering that matches byteOrder.
-func New(ptrSize, ptrAlignment int, byteOrder endian.ByteOrder) *Builder {
+// with the specified Architecture.
+func New(architecture device.Architecture) *Builder {
 	return &Builder{
-		constantMemory:  newConstantEncoder(ptrAlignment, byteOrder),
-		heap:            allocator{alignment: uint64(ptrAlignment)},
-		temp:            allocator{alignment: uint64(ptrAlignment)},
+		constantMemory:  newConstantEncoder(architecture),
+		heap:            allocator{alignment: uint64(architecture.PointerAlignment)},
+		temp:            allocator{alignment: uint64(architecture.PointerAlignment)},
 		resourceIDToIdx: map[binary.ID]uint32{},
 		resources:       []protocol.ResourceInfo{},
-		observedRanges:  memory.RangeList{},
+		mappedMemory:    memory.RangeList{},
 		instructions:    []asm.Instruction{},
-		ptrSize:         ptrSize,
-		ptrAlignment:    ptrAlignment,
-		byteOrder:       byteOrder,
+		architecture:    architecture,
 		Remappings:      make(map[interface{}]value.Pointer),
 	}
 }
@@ -125,16 +120,9 @@ func (b *Builder) removeInstruction(at int) {
 	}
 }
 
-// PointerSize returns the size of a pointer in bytes for the target replay
-// architecture.
-func (b *Builder) PointerSize() int {
-	return b.ptrSize
-}
-
-// PointerAlignment returns the required alignment of a pointer in bytes for the
-// replay target architecture.
-func (b *Builder) PointerAlignment() int {
-	return b.ptrAlignment
+// Architecture returns the architecture for the target replay device.
+func (b *Builder) Architecture() device.Architecture {
+	return b.architecture
 }
 
 // AllocateMemory allocates and returns a pointer to a block of memory in the
@@ -159,16 +147,17 @@ func (b *Builder) AllocateTemporaryMemory(size uint64) value.Pointer {
 // allocation block will be freed on the next call to EndAtom, upon which
 // reading or writing to this memory will result in undefined behavior.
 func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Pointer, size uint64) {
+	alignment := uint64(b.architecture.PointerAlignment)
 	ptrs = make([]value.Pointer, len(sizes))
 	for _, s := range sizes {
-		size = align(size, uint64(b.PointerAlignment()))
+		size = align(size, alignment)
 		size += s
 	}
 	base := b.AllocateTemporaryMemory(size)
 	offset := uint64(0)
 	for i, s := range sizes {
 		ptrs[i] = base.Offset(offset)
-		offset += align(s, uint64(b.PointerAlignment()))
+		offset += align(s, alignment)
 	}
 	return ptrs, size
 }
@@ -184,17 +173,22 @@ func (b *Builder) BeginAtom(id atom.ID) {
 }
 
 // EndAtom should be called after emitting the commands to replay a single atom.
-// EndAtom frees all allocated temporary memory, and asserts the stack should be
-// empty.
+// EndAtom frees all allocated temporary memory and clears the stack.
 func (b *Builder) EndAtom() {
 	b.temp.reset()
-	if len(b.stack) > 0 {
-		msg := "Stack not empty at end of function:\n"
-		for i, e := range b.stack {
-			msg += fmt.Sprintf("(%d) %s %#v", i, e.ty.String(), b.instructions[e.idx])
+	c := len(b.stack)
+	// Change calls that push an unused return value to discard the value.
+	for _, i := range b.stack {
+		if call, ok := b.instructions[i.idx].(asm.Call); ok && call.PushReturn {
+			call.PushReturn = false
+			b.instructions[i.idx] = call
+			c--
 		}
-		panic(errors.New(msg))
 	}
+	if c > 0 {
+		b.instructions = append(b.instructions, asm.Pop{Count: uint32(c)})
+	}
+	b.stack = b.stack[:0]
 }
 
 // Buffer returns a pointer to a block of memory in holding the count number of
@@ -203,6 +197,7 @@ func (b *Builder) EndAtom() {
 // address-space, otherwise the buffer will be built in the temporary
 // address-space.
 func (b *Builder) Buffer(count int) value.Pointer {
+	pointerSize := b.architecture.PointerSize
 	dynamic := false
 	size := 0
 
@@ -223,7 +218,7 @@ func (b *Builder) Buffer(count int) value.Pointer {
 			dynamic = true
 		}
 
-		size += ty.Size(b.PointerSize())
+		size += ty.Size(pointerSize)
 	}
 
 	if dynamic {
@@ -233,7 +228,7 @@ func (b *Builder) Buffer(count int) value.Pointer {
 		offset := size
 		for i := 0; i < count; i++ {
 			e := b.stack[len(b.stack)-1]
-			offset -= e.ty.Size(b.PointerSize())
+			offset -= e.ty.Size(pointerSize)
 			b.Store(buf.Offset(uint64(offset)))
 		}
 		return buf
@@ -257,34 +252,20 @@ func (b *Builder) String(s string) value.Pointer {
 	return b.constantMemory.writeString(s)
 }
 
-// CallPush will invoke the function f, popping all parameter values previously
-// pushed to the stack with Push, starting with the first parameter. After
-// invoking the function the return value of the function will be pushed on to
-// the stack. If f has a void return type then CallPush will panic.
-func (b *Builder) CallPush(f FunctionInfo) {
-	if f.ReturnType == protocol.TypeVoid {
-		panic("CallPush called with a void returning function")
-	}
+// Call will invoke the function f, popping all parameter values previously
+// pushed to the stack with Push, starting with the first parameter. If f has
+// a non-void return type, after invoking the function the return value of the
+// function will be pushed on to the stack.
+func (b *Builder) Call(f FunctionInfo) {
 	for i := 0; i < f.Parameters; i++ {
 		b.popStack()
 	}
-	b.pushStack(f.ReturnType)
-	b.instructions = append(b.instructions, asm.Call{
-		PushReturn: true,
-		FunctionID: f.ID,
-	})
-}
-
-// CallNoPush will invoke the function f, popping all parameter values
-// previously pushed to the stack with Push, starting with the first parameter.
-// Unlike CallPush the return value of the function will not be pushed on to the
-// stack and functions with void return types are accepted.
-func (b *Builder) CallNoPush(f FunctionInfo) {
-	for i := 0; i < f.Parameters; i++ {
-		b.popStack()
+	push := f.ReturnType != protocol.TypeVoid
+	if push {
+		b.pushStack(f.ReturnType)
 	}
 	b.instructions = append(b.instructions, asm.Call{
-		PushReturn: false,
+		PushReturn: push,
 		FunctionID: f.ID,
 	})
 }
@@ -379,9 +360,14 @@ func (b *Builder) Pop(count uint32) {
 	})
 }
 
-// Observation fills the memory range in capture address-space rng with the data
+// MapMemory adds rng as a memory range that needs allocating for replay.
+func (b *Builder) MapMemory(rng memory.Range) {
+	interval.Merge(&b.mappedMemory, rng.Span(), true)
+}
+
+// Write fills the memory range in capture address-space rng with the data
 // of resourceID.
-func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
+func (b *Builder) Write(rng memory.Range, resourceID binary.ID) {
 	idx, found := b.resourceIDToIdx[resourceID]
 	if !found {
 		idx = uint32(len(b.resources))
@@ -395,7 +381,7 @@ func (b *Builder) Observation(rng memory.Range, resourceID binary.ID) {
 		Index:       idx,
 		Destination: rng.Base,
 	})
-	interval.Merge(&b.observedRanges, rng.Span(), true)
+	b.MapMemory(rng)
 }
 
 // Build compiles the replay instructions, returning a Payload that can be
@@ -409,8 +395,10 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 
 	vml := b.layoutVolatileMemory(logger)
 
+	byteOrder := b.architecture.ByteOrder
+
 	opcodes := &bytes.Buffer{}
-	e := flat.Encoder(endian.Writer(opcodes, b.byteOrder))
+	e := flat.Encoder(endian.Writer(opcodes, byteOrder))
 	id := uint32(0)
 	for _, i := range b.instructions {
 		if label, ok := i.(asm.Label); ok {
@@ -439,7 +427,7 @@ func (b *Builder) Build(logger log.Logger) (protocol.Payload, ResponseDecoder, e
 	}
 
 	responseDecoder := func(r io.Reader) <-chan Postback {
-		d := flat.Decoder(endian.Reader(r, b.byteOrder))
+		d := flat.Decoder(endian.Reader(r, byteOrder))
 		c := make(chan Postback, 8)
 		go func() {
 			for _, p := range b.decoders {
@@ -478,17 +466,17 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 	remapBase := tempBase + b.temp.size
 
 	remapped := allocator{alignment: b.heap.alignment}
-	remappedBases := make([]uint64, len(b.observedRanges))
-	for i, m := range b.observedRanges {
+	remappedBases := make([]uint64, len(b.mappedMemory))
+	for i, m := range b.mappedMemory {
 		remappedBases[i] = remapBase + remapped.alloc(m.Size)
 	}
 
 	size := remapBase + remapped.size
 	vml := &volatileMemoryLayout{
-		observedRanges: b.observedRanges,
-		tempBase:       tempBase,
-		remappedBases:  remappedBases,
-		size:           size,
+		mappedMemory:  b.mappedMemory,
+		tempBase:      tempBase,
+		remappedBases: remappedBases,
+		size:          size,
 	}
 
 	if config.DebugReplayBuilder {
@@ -496,7 +484,7 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 		logger.Infof("  Heap:      [0x%x, 0x%x]", 0, tempBase-1)
 		logger.Infof("  Temporary: [0x%x, 0x%x]", tempBase, remapBase-1)
 		logger.Infof("  Remapped:  [0x%x, 0x%x]", remapBase, size-1)
-		for _, m := range b.observedRanges {
+		for _, m := range b.mappedMemory {
 			logger.Infof("    Block:   %v", m)
 		}
 	}
@@ -505,11 +493,10 @@ func (b *Builder) layoutVolatileMemory(logger log.Logger) *volatileMemoryLayout 
 }
 
 type volatileMemoryLayout struct {
-	observedRanges memory.RangeList // Observed captured memory ranges.
-
-	tempBase      uint64   // Base address of the temp space.
-	remappedBases []uint64 // Base address for each remapped entry in observedRanges.
-	size          uint64   // Total size of volatile memory.
+	mappedMemory  memory.RangeList // Mapped memory ranges.
+	tempBase      uint64           // Base address of the temp space.
+	remappedBases []uint64         // Base address for each remapped entry in mappedMemory.
+	size          uint64           // Total size of volatile memory.
 }
 
 // TranslateTemporaryPointer implements the PointerResolver interface method in
@@ -521,10 +508,10 @@ func (l volatileMemoryLayout) TranslateTemporaryPointer(offset uint64) (uint64, 
 // TranslateCapturePointer implements the PointerResolver interface method in
 // the replay/value package.
 func (l volatileMemoryLayout) TranslateCapturePointer(offset uint64) (uint64, error) {
-	bufferIdx := interval.IndexOf(&l.observedRanges, offset)
+	bufferIdx := interval.IndexOf(&l.mappedMemory, offset)
 	if bufferIdx < 0 {
 		return 0, fmt.Errorf("Pointer 0x%x was not found in the observed memory ranges", offset)
 	}
-	bufferStart := l.observedRanges[bufferIdx].First()
+	bufferStart := l.mappedMemory[bufferIdx].First()
 	return l.remappedBases[bufferIdx] + offset - uint64(bufferStart), nil
 }

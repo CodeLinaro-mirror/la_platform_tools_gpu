@@ -17,8 +17,8 @@
 #ifndef GAPIC_ID_H
 #define GAPIC_ID_H
 
-#include <stdint.h>
 #include <functional>
+#include <stdint.h>
 
 namespace gapic {
 

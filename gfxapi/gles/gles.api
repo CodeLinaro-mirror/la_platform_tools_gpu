@@ -181,10 +181,7 @@ class Image {
 }
 
 @internal
-@Interface class FramebufferAttachable{}
-
-@internal
-class Renderbuffer : FramebufferAttachable {
+class Renderbuffer {
     s32                Width
     s32                Height
     u8[]               Data
@@ -192,7 +189,7 @@ class Renderbuffer : FramebufferAttachable {
 }
 
 @internal
-class Texture : FramebufferAttachable {
+class Texture {
     TextureKind             Kind
     ImageTexelFormat        Format
     map!(s32, Image)        Texture2D
@@ -235,12 +232,12 @@ class Buffer {
 
 @internal
 class Shader {
-    u8[]              Binary
-    bool              Compiled = false
-    bool              Deletable = false
-    char[]            InfoLog
-    map!(s32, char[]) Source
-    ShaderType        Type
+    u8[]       Binary
+    bool       Compiled = false
+    bool       Deletable = false
+    char[]     InfoLog
+    string     Source
+    ShaderType Type
 }
 
 @internal
@@ -584,14 +581,13 @@ map!(EGLContext, ref!Context) EGLContexts
 
 @no_replay
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
-cmd EGLBoolean eglInitialize(EGLDisplay dpy, out EGLint major, out EGLint minor) {
-    major = ?
-    minor = ?
+cmd EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
+    major[0] = ?
+    minor[0] = ?
     return ?
 }
 
 @no_replay
-@ReturnSize(0)
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglCreateContext.xhtml
 cmd EGLContext eglCreateContext(EGLDisplay    display,
                                 EGLConfig     config,
@@ -620,8 +616,8 @@ cmd EGLBoolean eglSwapBuffers(EGLDisplay display, void* surface) {
 }
 
 @no_replay
-cmd EGLBoolean eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint attribute, out EGLint value) {
-    value = ?
+cmd EGLBoolean eglQuerySurface(EGLDisplay display, EGLSurface surface, EGLint attribute, EGLint* value) {
+    value[0] = ?
     return ?
 }
 
@@ -634,7 +630,6 @@ type void* GLXDrawable
 map!(GLXContext, ref!Context) GLXContexts
 
 @no_replay
-@ReturnSize(0)
 cmd GLXContext glXCreateContext(void* dpy, void* vis, GLXContext shareList, bool direct) {
     context := as!GLXContext(?)
     GLXContexts[context] = CreateContext()
@@ -642,7 +637,6 @@ cmd GLXContext glXCreateContext(void* dpy, void* vis, GLXContext shareList, bool
 }
 
 @no_replay
-@ReturnSize(0)
 cmd GLXContext glXCreateNewContext(void* display, void* fbconfig, u32 type, GLXContext shared, bool direct) {
     context := as!GLXContext(?)
     GLXContexts[context] = CreateContext()
@@ -669,7 +663,6 @@ type int   BOOL
 map!(HGLRC, ref!Context) WGLContexts
 
 @no_replay
-@ReturnSize(0)
 ///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374379(v=vs.85).aspx
 cmd HGLRC wglCreateContext(HDC hdc) {
     context := as!HGLRC(?)
@@ -678,7 +671,6 @@ cmd HGLRC wglCreateContext(HDC hdc) {
 }
 
 @no_replay
-@ReturnSize(0)
 ///http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt
 cmd HGLRC wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext, int* attribList) {
     context := as!HGLRC(?)
@@ -687,7 +679,6 @@ cmd HGLRC wglCreateContextAttribsARB(HDC hdc, HGLRC hShareContext, int* attribLi
 }
 
 @no_replay
-@ReturnSize(0)
 ///http://msdn.microsoft.com/en-us/library/windows/desktop/dd374387(v=vs.85).aspx
 cmd BOOL wglMakeCurrent(HDC hdc, HGLRC hglrc) {
     SetContext(WGLContexts[hglrc])
@@ -710,10 +701,10 @@ map!(CGLContextObj, ref!Context) CGLContexts
 
 @no_replay
 ///http://developer.apple.com/library/mac/documentation/GraphicsImaging/Reference/CGL_OpenGL/index.html#//apple_ref/c/func/CGLCreateContext
-cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, out CGLContextObj ctx) {
+cmd CGLError CGLCreateContext(CGLPixelFormatObj pix, CGLContextObj share, CGLContextObj* ctx) {
     context := as!CGLContextObj(?)
     CGLContexts[context] = CreateContext()
-    ctx = context
+    ctx[0] = context
     return ?
 }
 
@@ -747,12 +738,13 @@ cmd void glDisableClientState(ArrayType type) {
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
 cmd void glGetProgramBinaryOES(ProgramId   program,
                                s32         buffer_size,
-                               out s32     bytes_written,
-                               out u32     binary_format,
-                               out void*   binary) {
-    bytes_written = ?
-    binary_format = ?
-    binary = ?
+                               s32*        bytes_written,
+                               u32*        binary_format,
+                               void*       binary) {
+    l := as!s32(?)
+    bytes_written[0] = l
+    binary_format[0] = ?
+    write(binary[0:l])
 }
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_get_program_binary.txt
@@ -821,7 +813,7 @@ cmd void glTextureStorage3DEXT(TextureId texture, TextureTarget target, s32 leve
 // OES_vertex_array_object
 
 ///http://www.khronos.org/registry/gles/extensions/OES/OES_vertex_array_object.txt
-cmd void glGenVertexArraysOES(s32 count, inout VertexArrayId* arrays) {
+cmd void glGenVertexArraysOES(s32 count, VertexArrayId* arrays) {
     a := arrays[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -882,21 +874,21 @@ cmd void glReadnPixelsEXT(s32 x,
                           enum format,
                           enum type,
                           s32 buffer_size,
-                          out void* data) {
+                          void* data) {
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd void glGetnUniformfvEXT(u32             program,
                             UniformLocation location,
                             s32             buffer_size,
-                            inout f32*      params) {
+                            f32*            params) {
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_robustness.txt
 cmd void glGetnUniformivEXT(u32             program,
                             UniformLocation location,
                             s32             buffer_size,
-                            inout s32*      params) {
+                            s32*            params) {
 }
 */
 
@@ -905,11 +897,10 @@ cmd void glGetnUniformivEXT(u32             program,
 /////////////////////////////////////////////////////////////////
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBindAttribLocation.xml
-cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, char* name) {
+cmd void glBindAttribLocation(ProgramId program, AttributeLocation location, string name) {
     ctx := GetContext()
     p := ctx.Instances.Programs[program]
-    s := as!string(name[0:strlen(name)])
-    p.AttributeBindings[s] = location
+    p.AttributeBindings[name] = location
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glBlendFunc.xml
@@ -993,16 +984,10 @@ cmd void glVertexAttribPointer(AttributeLocation location,
 cmd void glGetActiveAttrib(ProgramId            program,
                            AttributeLocation    location,
                            s32                  buffer_size,
-                           out s32              buffer_bytes_written,
-                           out s32              vector_count,
-                           out ShaderAttribType type,
-                           out string           name) {
-    assert(len(name) >= buffer_size) // TODO: We need to examine the shader to build the vertex attributes map at link time
-    // a := program.VertexAttributes[location]
-    buffer_bytes_written = ? // min(buffer_size, strlen(a.Name))
-    vector_count         = ? // a.VectorCount
-    type                 = ? // a.Type
-    name                 = ? // a.Name
+                           s32*                 buffer_bytes_written,
+                           s32*                 vector_count,
+                           ShaderAttribType*    type,
+                           char*                name) {
 }
 
 // TODO: This method cannot use UniformLocation as the location type
@@ -1012,16 +997,10 @@ cmd void glGetActiveAttrib(ProgramId            program,
 cmd void glGetActiveUniform(ProgramId             program,
                             s32                   location,
                             s32                   buffer_size,
-                            out s32               buffer_bytes_written,
-                            out s32               size,
-                            out ShaderUniformType type,
-                            out string            name) {
-    assert(len(name) >= buffer_size) // TODO: We need to examine the shader to build the uniforms map at link time
-    // a := program.Uniforms[location]
-    buffer_bytes_written = ? // min(buffer_size, strlen(a.Name))
-    size                 = ? // a.VectorCount
-    type                 = ? // a.Type
-    name                 = ? // a.Name
+                            s32*                  buffer_bytes_written,
+                            s32*                  size,
+                            ShaderUniformType*    type,
+                            char*                 name) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetError.xml
@@ -1030,12 +1009,12 @@ cmd Error glGetError() {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgram.xml
-cmd void glGetProgramiv(ProgramId program, ProgramParameter parameter, inout s32* value) {
-    value = ?
+cmd void glGetProgramiv(ProgramId program, ProgramParameter parameter, s32* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderiv.xml
-cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, inout s32* value) {
+cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, s32* value) {
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
     value[0] = switch (parameter) {
@@ -1043,7 +1022,7 @@ cmd void glGetShaderiv(ShaderId shader, ShaderParameter parameter, inout s32* va
       case GL_DELETE_STATUS:        switch (s.Deletable) { case true: 1 case false: 0 }
       case GL_COMPILE_STATUS:       switch (s.Compiled)  { case true: 1 case false: 0 }
       case GL_INFO_LOG_LENGTH:      as!s32(strlen(s.InfoLog))
-      case GL_SHADER_SOURCE_LENGTH: as!s32(strlen(s.Source[0])) // FIXME: concatenate all shaders sources.
+      case GL_SHADER_SOURCE_LENGTH: as!s32(strlen(s.Source))
     }
 }
 
@@ -1108,7 +1087,7 @@ cmd void glTexParameterf(TextureTarget    target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
 cmd void glGetTexParameteriv(TextureTarget    target,
                              TextureParameter parameter,
-                             inout s32*       values) {
+                             s32*             values) {
     ctx := GetContext()
     id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
     t  := ctx.Instances.Textures[id]
@@ -1128,7 +1107,7 @@ cmd void glGetTexParameteriv(TextureTarget    target,
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetTexParameter.xml
 cmd void glGetTexParameterfv(TextureTarget    target,
                              TextureParameter parameter,
-                             inout f32*       values) {
+                             f32*             values) {
     ctx := GetContext()
     id := ctx.TextureUnits[ctx.ActiveTextureUnit][target]
     t  := ctx.Instances.Textures[id]
@@ -1416,8 +1395,9 @@ cmd void glVertexAttrib4fv(AttributeLocation location, f32* value) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderPrecisionFormat.xml
-cmd void glGetShaderPrecisionFormat(ShaderType shader_type, PrecisionType precision_type, inout s32* range, out s32 precision) {
-    read(range[0:2])
+cmd void glGetShaderPrecisionFormat(ShaderType shader_type, PrecisionType precision_type, s32* range, s32* precision) {
+    write(range[0:2])
+    precision[0] = ?
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glDepthMask.xml
@@ -1510,7 +1490,7 @@ cmd void glActiveTexture(TextureUnit unit) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenTextures.xml
-cmd void glGenTextures(s32 count, inout TextureId* textures) {
+cmd void glGenTextures(s32 count, TextureId* textures) {
     t := textures[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1758,12 +1738,12 @@ cmd void glReadPixels(s32              x,
                       s32              height,
                       BaseTexelFormat  format,
                       TexelType        type,
-                      out void*        data) {
-    write(as!u8*(data)[0:imageSize(as!u32(width), as!u32(height), as!TexelFormat(format), type)])
+                      void*            data) {
+    write(data[0:imageSize(as!u32(width), as!u32(height), as!TexelFormat(format), type)])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenFramebuffers.xml
-cmd void glGenFramebuffers(s32 count, inout FramebufferId* framebuffers) {
+cmd void glGenFramebuffers(s32 count, FramebufferId* framebuffers) {
     f := framebuffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1808,7 +1788,7 @@ cmd bool glIsFramebuffer(FramebufferId framebuffer) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenRenderbuffers.xml
-cmd void glGenRenderbuffers(s32 count, inout RenderbufferId* renderbuffers) {
+cmd void glGenRenderbuffers(s32 count, RenderbufferId* renderbuffers) {
     r := renderbuffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1858,7 +1838,7 @@ cmd bool glIsRenderbuffer(RenderbufferId renderbuffer) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetRenderbufferParameteriv.xml
 cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
                                       RenderbufferParameter parameter,
-                                      inout s32*            values) {
+                                      s32*                  values) {
     ctx := GetContext()
     id := ctx.BoundRenderbuffers[target]
     rb := ctx.Instances.Renderbuffers[id]
@@ -1877,7 +1857,7 @@ cmd void glGetRenderbufferParameteriv(RenderbufferTarget    target,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGenBuffers.xml
-cmd void glGenBuffers(s32 count, inout BufferId* buffers) {
+cmd void glGenBuffers(s32 count, BufferId* buffers) {
     b := buffers[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -1902,7 +1882,7 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
     id := ctx.BoundBuffers[target]
     b  := ctx.Instances.Buffers[id]
     if data != null {
-        copy(b.Data, data[0:size])
+        copy(b.Data, as!u8*(data)[0:size])
     }
     b.Size = size
     b.Usage = usage
@@ -1932,11 +1912,11 @@ cmd bool glIsBuffer(BufferId buffer) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetBufferParameteriv.xml
 cmd void glGetBufferParameteriv(BufferTarget    target,
                                 BufferParameter parameter,
-                                out s32         value) {
+                                s32*            value) {
     ctx := GetContext()
     id := ctx.BoundBuffers[target]
     b  := ctx.Instances.Buffers[id]
-    value = switch (parameter) {
+    value[0] = switch (parameter) {
       case GL_BUFFER_SIZE:  as!s32(b.Size)
       case GL_BUFFER_USAGE: as!s32(b.Usage)
     }
@@ -1972,7 +1952,9 @@ cmd void glShaderSource(ShaderId shader, s32 count, char** source, s32* length) 
             case true:  strlen(sources[i])
             case false: as!u32(lengths[i])
         }
-        s.Source[i] = clone(sources[i][0:l])
+        // TODO: We should have a newline between sources to avoid unintentional
+        // concatenation. The language currently does not support string literals.
+        s.Source += as!string(sources[i][0:l])
     }
 }
 
@@ -1988,28 +1970,27 @@ cmd void glShaderBinary(s32             count,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderInfoLog.xml
-cmd void glGetShaderInfoLog(ShaderId   shader,
-                            s32        buffer_length,
-                            out s32    string_length_written,
-                            out string info) {
-    assert(len(info) >= buffer_length)
+cmd void glGetShaderInfoLog(ShaderId  shader,
+                            s32       buffer_length,
+                            s32*      string_length_written,
+                            char*     info) {
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
-    string_length_written = min(buffer_length, as!s32(strlen(s.InfoLog)))
-    copy(as!char[](info)[0:string_length_written], s.InfoLog[0:string_length_written])
+    l := min(buffer_length, as!s32(strlen(s.InfoLog)))
+    string_length_written[0] = l
+    copy(info[0:l], s.InfoLog[0:l])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml
 cmd void glGetShaderSource(ShaderId   shader,
                            s32        buffer_length,
-                           out s32    string_length_written,
-                           out string source) {
-    assert(len(source) >= buffer_length)
+                           s32*       string_length_written,
+                           char*      source) {
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
-    // TODO: Concatenate shader.Source[] instead of using shader.Source[0].
-    string_length_written = min(buffer_length, as!s32(strlen(s.Source[0])))
-    copy(as!char[](source)[0:string_length_written], s.Source[0:string_length_written])
+    l := min(buffer_length, as!s32(strlen(s.Source)))
+    string_length_written[0] = l
+    copy(source[0:l], as!char[](s.Source)[0:l])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml
@@ -2060,12 +2041,18 @@ cmd void glDetachShader(ProgramId program, ShaderId shader) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetAttachedShaders.xml
 cmd void glGetAttachedShaders(ProgramId             program,
                               s32                   buffer_length,
-                              out s32               shaders_length_written,
-                              inout ShaderId*       shaders) {
+                              s32*                  shaders_length_written,
+                              ShaderId*             shaders) {
     ctx := GetContext()
     p := ctx.Instances.Programs[program]
-    shaders_length_written = min(buffer_length, len(p.Shaders))
-    copy(shaders[0:shaders_length_written], p.Shaders)
+    l := min(buffer_length, len(p.Shaders))
+    shaders_length_written[0] = l
+    // TODO: Requires language support.
+    // for i, k, v in p.Shaders {
+    //     if i < l {
+    //         shaders[i] = v
+    //     }
+    // }
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glLinkProgram.xml
@@ -2079,13 +2066,13 @@ cmd void glLinkProgram(ProgramId program) {
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetProgramInfoLog.xml
 cmd void glGetProgramInfoLog(ProgramId  program,
                              s32        buffer_length,
-                             out s32    string_length_written,
-                             out string info) {
-    assert(len(info) >= buffer_length)
+                             s32*       string_length_written,
+                             char*      info) {
     ctx := GetContext()
     p := ctx.Instances.Programs[program]
-    string_length_written = min(buffer_length, as!s32(strlen(p.InfoLog)))
-    copy(as!char[](info), p.InfoLog[0:string_length_written])
+    l := min(buffer_length, as!s32(strlen(p.InfoLog)))
+    string_length_written[0] = l
+    copy(info[0:l], p.InfoLog[0:l])
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml
@@ -2230,7 +2217,7 @@ cmd void glFramebufferTexture2D(FramebufferTarget     framebuffer_target,
 cmd void glGetFramebufferAttachmentParameteriv(FramebufferTarget              framebuffer_target,
                                                FramebufferAttachment          attachment,
                                                FramebufferAttachmentParameter parameter,
-                                               inout s32*                     value) {
+                                               s32*                           value) {
     ctx := GetContext()
     target := switch (framebuffer_target) {
         case GL_FRAMEBUFFER:      as!FramebufferTarget(GL_DRAW_FRAMEBUFFER)
@@ -2259,7 +2246,7 @@ macro void ReadVertexArrays(ref!Context ctx, u32 first_index, u32 last_index) {
             }
             for v in (first_index .. (last_index + 1)) {
                 offset := elstride * v
-                _ = arr.Pointer[offset:offset+elsize]
+                read(arr.Pointer[offset:offset+elsize])
             }
         }
     }
@@ -2291,8 +2278,8 @@ cmd void glDrawElements(DrawMode       draw_mode,
         offset := as!u32(as!u64(indices))
 
         // Read the vertices
-        first := minIndex(index_data, indices_type, offset, count)
-        last  := maxIndex(index_data, indices_type, offset, count)
+        first := minIndex(as!u8*(index_data), indices_type, offset, count)
+        last  := maxIndex(as!u8*(index_data), indices_type, offset, count)
         ReadVertexArrays(ctx, first, last)
 
         // No need to read the indices - they're already in a GPU-side buffer.
@@ -2306,7 +2293,7 @@ cmd void glDrawElements(DrawMode       draw_mode,
         ReadVertexArrays(ctx, first, last)
 
         // Read the indices
-        _ = index_data[0:(as!u32(element_count)) * IndexSize(indices_type)]
+        read(index_data[0:(as!u32(element_count)) * IndexSize(indices_type)])
     }
 }
 
@@ -2327,7 +2314,7 @@ cmd void glFinish() {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
-cmd void glGetBooleanv(StateVariable param, inout bool* values) {
+cmd void glGetBooleanv(StateVariable param, bool* values) {
     v := values[0:stateVariableSize(param)]
     ctx := GetContext()
     switch (param) {
@@ -2372,7 +2359,7 @@ cmd void glGetBooleanv(StateVariable param, inout bool* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
-cmd void glGetFloatv(StateVariable param, inout f32* values) {
+cmd void glGetFloatv(StateVariable param, f32* values) {
     v := values[0:stateVariableSize(param)]
     ctx := GetContext()
     switch (param) {
@@ -2413,7 +2400,7 @@ cmd void glGetFloatv(StateVariable param, inout f32* values) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGet.xml
-cmd void glGetIntegerv(StateVariable param, inout s32* values) {
+cmd void glGetIntegerv(StateVariable param, s32* values) {
     v := values[0:stateVariableSize(param)]
     ctx := GetContext()
     switch (param) {
@@ -2551,10 +2538,12 @@ cmd void glGetIntegerv(StateVariable param, inout s32* values) {
         v[0] = ?
       case GL_SAMPLES:
         v[0] = ?
+      /*
       case GL_SHADER_BINARY_FORMATS:
-        values = ?  /* list of length GL_NUM_SHADER_BINARY_FORMATS */
+        values = ?  // list of length GL_NUM_SHADER_BINARY_FORMATS
       case GL_COMPRESSED_TEXTURE_FORMATS:
-        values = ?  /* list of length GL_NUM_COMPRESSED_TEXTURE_FORMATS */
+        values = ?  // list of length GL_NUM_COMPRESSED_TEXTURE_FORMATS
+      */
       case GL_STENCIL_BITS:
         v[0] = ?
       case GL_SUBPIXEL_BITS: {
@@ -2586,12 +2575,11 @@ cmd void glGetIntegerv(StateVariable param, inout s32* values) {
       // GL_STENCIL_VALUE_MASK
 
       // TODO: all the values returned by glGetFloatv and glGetBooleanv can
-      // be returned here with a type conversion: "_most_ f32ing-point values
+      // be returned here with a type conversion: "_most_ floating-point values
       // are rounded to the nearest integer value".
     }
 }
 
-@ReturnSize(256)
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetString.xml
 cmd char* glGetString(StringConstant param) {
     return null
@@ -2651,7 +2639,6 @@ cmd ClientWaitSyncSignal glClientWaitSync(SyncObject sync, SyncFlags flags, s32 
 }
 */
 
-@ReturnSize(length)
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glMapBufferRange.xhtml
 cmd void* glMapBufferRange(BufferTarget target, s32 offset, s32 length, MapBufferRangeAccess access) {
     return ?
@@ -2689,7 +2676,7 @@ cmd void glBlitFramebuffer(s32               srcX0,
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glGenQueries.xhtml
-cmd void glGenQueries(s32 count, inout QueryId* queries) {
+cmd void glGenQueries(s32 count, QueryId* queries) {
     q := queries[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -2723,19 +2710,19 @@ cmd bool glIsQuery(QueryId query) {
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryiv.xhtml
-cmd void glGetQueryiv(QueryTarget target, QueryParameter parameter, out s32 value) {
-    value = ?
+cmd void glGetQueryiv(QueryTarget target, QueryParameter parameter, s32* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man3/html/glGetQueryObjectuiv.xhtml
-cmd void glGetQueryObjectuiv(QueryId query, QueryObjectParameter parameter, out u32 value) {
-    value = ?
+cmd void glGetQueryObjectuiv(QueryId query, QueryObjectParameter parameter, u32* value) {
+    value[0] = ?
 }
 
 // EXT_disjoint_timer_query
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGenQueriesEXT(s32 count, inout QueryId* queries) {
+cmd void glGenQueriesEXT(s32 count, QueryId* queries) {
     q := queries[0:count]
     ctx := GetContext()
     for i in (0 .. count) {
@@ -2773,26 +2760,26 @@ cmd void glQueryCounterEXT(QueryId query, QueryTarget target) {
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGetQueryivEXT(QueryTarget target, QueryParameter parameter, out s32 value) {
-    value = ?
+cmd void glGetQueryivEXT(QueryTarget target, QueryParameter parameter, s32* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGetQueryObjectivEXT(QueryId query, QueryObjectParameter parameter, out s32 value) {
-    value = ?
+cmd void glGetQueryObjectivEXT(QueryId query, QueryObjectParameter parameter, s32* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGetQueryObjectuivEXT(QueryId query, QueryObjectParameter parameter, out u32 value) {
-    value = ?
+cmd void glGetQueryObjectuivEXT(QueryId query, QueryObjectParameter parameter, u32* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGetQueryObjecti64vEXT(QueryId query, QueryObjectParameter parameter, out s64 value) {
-    value = ?
+cmd void glGetQueryObjecti64vEXT(QueryId query, QueryObjectParameter parameter, s64* value) {
+    value[0] = ?
 }
 
 ///http://www.khronos.org/registry/gles/extensions/EXT/EXT_disjoint_timer_query.txt
-cmd void glGetQueryObjectui64vEXT(QueryId query, QueryObjectParameter parameter, out u64 value) {
-    value = ?
+cmd void glGetQueryObjectui64vEXT(QueryId query, QueryObjectParameter parameter, u64* value) {
+    value[0] = ?
 }

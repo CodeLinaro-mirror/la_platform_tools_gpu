@@ -15,7 +15,7 @@
  */}}
 
 {{Global "module" ""}}
-{{Include "go_common.tmpl" "expression_evaluator.go.tmpl"}}
+{{Include "go_common.tmpl"}}
 {{$ | Macro "state_mutator.go" | GoFmt | Write "state_mutator.go"}}
 
 {{define "state_mutator.go"}}
@@ -23,10 +23,11 @@
 
   import (
     "fmt"
-    "log"
 
     "android.googlesource.com/platform/tools/gpu/atom"
+    "android.googlesource.com/platform/tools/gpu/database"
     "android.googlesource.com/platform/tools/gpu/gfxapi"
+    "android.googlesource.com/platform/tools/gpu/log"
     "android.googlesource.com/platform/tools/gpu/memory"
   )
 
@@ -46,25 +47,12 @@
   }
 ¶
   {{range $c := AllCommands $}}
-    func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State) error {
+    func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
       ϟc := getState(ϟs)
-      ϟo := {{Macro "Go.CmdName" $c}}{}
-      {{/* Construct slices large enough to hold all simulated output */}}
-      {{range $p := $c.FullParameters}}
-        {{$count := GetArrayParamCount $p}}
-        {{if and ($count) ($p.Output) (IsArray $p.Type)}}
-          ϟo.{{Macro "Go.Public" $p.Name}} = make({{$p.Type.Typename}}, {{Macro "Read" $count}})
-        {{end}}
-      {{end}}
-      {{if $limit := GetAnnotation $c "ReturnSize"}}
-        {{if IsArray $c.Return.Type}}
-          ϟo.{{Macro "Go.Public" $c.Return.Name}} = make({{$c.Return.Type.Typename}}, {{Macro "Read" (index $limit.Arguments 0)}})
-        {{end}}
-      {{end}}
-      {{Macro "Block" $c.Block}}
-      if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-        log.Printf("Applying {{Macro "CmdName" $c}} expected %v got %v", ϟa, ϟo)
-      }
+      _ = ϟc
+      ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+      {{Macro "Go.Block" $c.Block}}
+      ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
       return nil
     }
   {{end}}

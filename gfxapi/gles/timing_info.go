@@ -46,6 +46,7 @@ func (t *timingInfoTransform) startTimer(fromId atom.ID, index uint8, out atom.W
 }
 
 func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.TimingMask, out atom.Writer) {
+	/* TODO
 	fromID := t.timerStartId[index]
 	stopTimerId := t.postback(func(data interface{}, err error) {
 		if err != nil {
@@ -74,6 +75,7 @@ func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.
 		}
 	})
 	out.Write(stopTimerId, NewStopTimer(index, 0))
+	*/
 	delete(t.timerStartId, index)
 
 	switch mask {

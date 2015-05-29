@@ -19,11 +19,17 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
 func TestConstantEncoderCache(t *testing.T) {
-	c := newConstantEncoder(4, endian.Little)
+	c := newConstantEncoder(device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	})
 
 	addr1 := c.writeValues(value.U32(0x1234), value.S16(-1))
 	addr2 := c.writeValues(value.U32(0x1234), value.S16(-1))
@@ -34,7 +40,12 @@ func TestConstantEncoderCache(t *testing.T) {
 }
 
 func TestConstantEncoderAlignment(t *testing.T) {
-	c := newConstantEncoder(8, endian.Little)
+	c := newConstantEncoder(device.Architecture{
+		PointerAlignment: 8,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	})
 
 	c.writeValues(value.U32(0x1234))
 	c.writeValues(value.S16(-1))

@@ -16,14 +16,16 @@ func init() {
 	registry.Add((*Range)(nil).Class())
 	registry.Add((*Group)(nil).Class())
 	registry.Add((*Observation)(nil).Class())
+	registry.Add((*Observations)(nil).Class())
 	registry.Add((*Resource)(nil).Class())
 }
 
 var (
-	binaryIDRange       = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
-	binaryIDGroup       = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
-	binaryIDObservation = binary.ID{0x13, 0xd2, 0xf1, 0x8d, 0x80, 0x44, 0x62, 0x8c, 0x9f, 0x37, 0x28, 0xce, 0xc3, 0x13, 0x8b, 0xdf, 0x48, 0x50, 0xec, 0x49}
-	binaryIDResource    = binary.ID{0xb8, 0x93, 0xdf, 0x90, 0x52, 0x2e, 0x33, 0x0b, 0x84, 0x00, 0x06, 0x1e, 0xca, 0x2d, 0xb0, 0x0a, 0xd6, 0x7c, 0x65, 0x25}
+	binaryIDRange        = binary.ID{0x6f, 0xbb, 0x0f, 0x69, 0x4c, 0x19, 0xdb, 0x86, 0x34, 0x4f, 0x63, 0xc3, 0x04, 0xaf, 0x06, 0x89, 0xda, 0x0f, 0xb3, 0x0a}
+	binaryIDGroup        = binary.ID{0x1d, 0x80, 0xcc, 0xfa, 0xe5, 0xba, 0x0e, 0x88, 0x3f, 0x11, 0x3b, 0xd5, 0x07, 0x16, 0x56, 0x13, 0xf5, 0x43, 0x42, 0xeb}
+	binaryIDObservation  = binary.ID{0xf4, 0xbd, 0xbf, 0xe0, 0x82, 0x78, 0xa4, 0xbd, 0x55, 0xac, 0xeb, 0x1e, 0x0b, 0xde, 0xe5, 0x27, 0x1a, 0xd8, 0x84, 0x0f}
+	binaryIDObservations = binary.ID{0x61, 0xdf, 0xaa, 0x12, 0x4f, 0x53, 0x1a, 0x54, 0x92, 0x4e, 0x90, 0xc4, 0x05, 0x7c, 0xf4, 0x5f, 0x00, 0xcb, 0x62, 0xe9}
+	binaryIDResource     = binary.ID{0xdd, 0xe2, 0x00, 0x18, 0x25, 0x45, 0x71, 0xb9, 0xdb, 0x6f, 0xed, 0x39, 0xdd, 0x8e, 0x71, 0x4b, 0xf6, 0x76, 0x26, 0xce}
 )
 
 type binaryClassRange struct{}
@@ -181,7 +183,7 @@ func doEncodeObservation(e binary.Encoder, o *Observation) error {
 	if err := e.Value(&o.Range); err != nil {
 		return err
 	}
-	if err := e.ID(o.ResourceID); err != nil {
+	if err := e.ID(o.ID); err != nil {
 		return err
 	}
 	return nil
@@ -193,7 +195,7 @@ func doDecodeObservation(d binary.Decoder, o *Observation) error {
 	if obj, err := d.ID(); err != nil {
 		return err
 	} else {
-		o.ResourceID = binary.ID(obj)
+		o.ID = binary.ID(obj)
 	}
 	return nil
 }
@@ -226,7 +228,99 @@ var schemaObservation = &schema.Class{
 	Name:   "Observation",
 	Fields: []schema.Field{
 		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
-		schema.Field{Declared: "ResourceID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+	},
+}
+
+type binaryClassObservations struct{}
+
+func (*Observations) Class() binary.Class {
+	return (*binaryClassObservations)(nil)
+}
+func doEncodeObservations(e binary.Encoder, o *Observations) error {
+	if err := e.Uint32(uint32(len(o.Reads))); err != nil {
+		return err
+	}
+	for i := range o.Reads {
+		if err := e.Value(&o.Reads[i]); err != nil {
+			return err
+		}
+	}
+	if err := e.Uint32(uint32(len(o.Writes))); err != nil {
+		return err
+	}
+	for i := range o.Writes {
+		if err := e.Value(&o.Writes[i]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+func doDecodeObservations(d binary.Decoder, o *Observations) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Reads = make([]Observation, count)
+		for i := range o.Reads {
+			if err := d.Value(&o.Reads[i]); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Writes = make([]Observation, count)
+		for i := range o.Writes {
+			if err := d.Value(&o.Writes[i]); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func doSkipObservations(d binary.Decoder) error {
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*Observation)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	if count, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		for i := uint32(0); i < count; i++ {
+			if err := d.SkipValue((*Observation)(nil)); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func (*binaryClassObservations) ID() binary.ID      { return binaryIDObservations }
+func (*binaryClassObservations) New() binary.Object { return &Observations{} }
+func (*binaryClassObservations) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeObservations(e, obj.(*Observations))
+}
+func (*binaryClassObservations) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Observations{}
+	return obj, doDecodeObservations(d, obj)
+}
+func (*binaryClassObservations) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeObservations(d, obj.(*Observations))
+}
+func (*binaryClassObservations) Skip(d binary.Decoder) error { return doSkipObservations(d) }
+func (*binaryClassObservations) Schema() *schema.Class       { return schemaObservations }
+
+var schemaObservations = &schema.Class{
+	TypeID: binaryIDObservations,
+	Name:   "Observations",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
+		schema.Field{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
 	},
 }
 
@@ -236,7 +330,7 @@ func (*Resource) Class() binary.Class {
 	return (*binaryClassResource)(nil)
 }
 func doEncodeResource(e binary.Encoder, o *Resource) error {
-	if err := e.ID(o.ResourceID); err != nil {
+	if err := e.ID(o.ID); err != nil {
 		return err
 	}
 	if err := e.Uint32(uint32(len(o.Data))); err != nil {
@@ -251,7 +345,7 @@ func doDecodeResource(d binary.Decoder, o *Resource) error {
 	if obj, err := d.ID(); err != nil {
 		return err
 	} else {
-		o.ResourceID = binary.ID(obj)
+		o.ID = binary.ID(obj)
 	}
 	if count, err := d.Uint32(); err != nil {
 		return err
@@ -295,7 +389,7 @@ var schemaResource = &schema.Class{
 	TypeID: binaryIDResource,
 	Name:   "Resource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ResourceID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }

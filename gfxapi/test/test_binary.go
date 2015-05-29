@@ -14,10 +14,19 @@ import (
 )
 
 func init() {
-	registry.Add((*CmdArrayOfFloat)(nil).Class())
+	registry.Add((*Boolˢ)(nil).Class())
+	registry.Add((*Boolᵖ)(nil).Class())
+	registry.Add((*Charˢ)(nil).Class())
+	registry.Add((*Charᵖ)(nil).Class())
 	registry.Add((*CmdBool)(nil).Class())
+	registry.Add((*CmdCharsliceToString)(nil).Class())
+	registry.Add((*U8ᵖ)(nil).Class())
+	registry.Add((*CmdClone)(nil).Class())
+	registry.Add((*CmdCopy)(nil).Class())
 	registry.Add((*CmdF32)(nil).Class())
 	registry.Add((*CmdF64)(nil).Class())
+	registry.Add((*CmdMake)(nil).Class())
+	registry.Add((*Voidᵖ)(nil).Class())
 	registry.Add((*CmdPointer)(nil).Class())
 	registry.Add((*CmdS16)(nil).Class())
 	registry.Add((*CmdS32)(nil).Class())
@@ -28,30 +37,43 @@ func init() {
 	registry.Add((*CmdU32)(nil).Class())
 	registry.Add((*CmdU64)(nil).Class())
 	registry.Add((*CmdU8)(nil).Class())
+	registry.Add((*CmdUnknownRet)(nil).Class())
+	registry.Add((*Intᵖ)(nil).Class())
+	registry.Add((*CmdUnknownWritePtr)(nil).Class())
+	registry.Add((*CmdUnknownWriteSlice)(nil).Class())
 	registry.Add((*CmdVoid)(nil).Class())
-	registry.Add((*CmdVoid3Arrays)(nil).Class())
+	registry.Add((*U8ᵖᵖ)(nil).Class())
+	registry.Add((*CmdVoid3InArrays)(nil).Class())
 	registry.Add((*CmdVoid3Remapped)(nil).Class())
 	registry.Add((*CmdVoid3Strings)(nil).Class())
-	registry.Add((*CmdVoidArrayOfStrings)(nil).Class())
 	registry.Add((*CmdVoidBool)(nil).Class())
 	registry.Add((*CmdVoidF32)(nil).Class())
 	registry.Add((*CmdVoidF64)(nil).Class())
-	registry.Add((*CmdVoidOut3Remapped)(nil).Class())
-	registry.Add((*CmdVoidOut3Strings)(nil).Class())
+	registry.Add((*Remappedᵖ)(nil).Class())
+	registry.Add((*CmdVoidInArrayOfRemapped)(nil).Class())
 	registry.Add((*CmdVoidOutArrayOfRemapped)(nil).Class())
-	registry.Add((*CmdVoidOutBool)(nil).Class())
-	registry.Add((*CmdVoidOutF32)(nil).Class())
-	registry.Add((*CmdVoidOutF64)(nil).Class())
-	registry.Add((*CmdVoidOutFixedSizeBuffer)(nil).Class())
-	registry.Add((*CmdVoidOutS16)(nil).Class())
-	registry.Add((*CmdVoidOutS32)(nil).Class())
-	registry.Add((*CmdVoidOutS64)(nil).Class())
-	registry.Add((*CmdVoidOutS8)(nil).Class())
-	registry.Add((*CmdVoidOutString)(nil).Class())
-	registry.Add((*CmdVoidOutU16)(nil).Class())
-	registry.Add((*CmdVoidOutU32)(nil).Class())
-	registry.Add((*CmdVoidOutU64)(nil).Class())
-	registry.Add((*CmdVoidOutU8)(nil).Class())
+	registry.Add((*CmdVoidOutArrayOfUnknownRemapped)(nil).Class())
+	registry.Add((*CmdVoidReadBool)(nil).Class())
+	registry.Add((*F32ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadF32)(nil).Class())
+	registry.Add((*F64ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadF64)(nil).Class())
+	registry.Add((*U16ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadPtrs)(nil).Class())
+	registry.Add((*S16ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadS16)(nil).Class())
+	registry.Add((*S32ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadS32)(nil).Class())
+	registry.Add((*S64ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadS64)(nil).Class())
+	registry.Add((*S8ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadS8)(nil).Class())
+	registry.Add((*CmdVoidReadU16)(nil).Class())
+	registry.Add((*U32ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadU32)(nil).Class())
+	registry.Add((*U64ᵖ)(nil).Class())
+	registry.Add((*CmdVoidReadU64)(nil).Class())
+	registry.Add((*CmdVoidReadU8)(nil).Class())
 	registry.Add((*CmdVoidS16)(nil).Class())
 	registry.Add((*CmdVoidS32)(nil).Class())
 	registry.Add((*CmdVoidS64)(nil).Class())
@@ -61,129 +83,425 @@ func init() {
 	registry.Add((*CmdVoidU32)(nil).Class())
 	registry.Add((*CmdVoidU64)(nil).Class())
 	registry.Add((*CmdVoidU8)(nil).Class())
+	registry.Add((*CmdVoidWriteBool)(nil).Class())
+	registry.Add((*CmdVoidWriteF32)(nil).Class())
+	registry.Add((*CmdVoidWriteF64)(nil).Class())
+	registry.Add((*CmdVoidWritePtrs)(nil).Class())
+	registry.Add((*CmdVoidWriteS16)(nil).Class())
+	registry.Add((*CmdVoidWriteS32)(nil).Class())
+	registry.Add((*CmdVoidWriteS64)(nil).Class())
+	registry.Add((*CmdVoidWriteS8)(nil).Class())
+	registry.Add((*CmdVoidWriteU16)(nil).Class())
+	registry.Add((*CmdVoidWriteU32)(nil).Class())
+	registry.Add((*CmdVoidWriteU64)(nil).Class())
+	registry.Add((*CmdVoidWriteU8)(nil).Class())
+	registry.Add((*F32ˢ)(nil).Class())
+	registry.Add((*F64ˢ)(nil).Class())
+	registry.Add((*U8ˢ)(nil).Class())
 	registry.Add((*Globals)(nil).Class())
 	registry.Add((*Imported)(nil).Class())
 	registry.Add((*Included)(nil).Class())
+	registry.Add((*Intˢ)(nil).Class())
+	registry.Add((*Remappedˢ)(nil).Class())
+	registry.Add((*S16ˢ)(nil).Class())
+	registry.Add((*S32ˢ)(nil).Class())
+	registry.Add((*S64ˢ)(nil).Class())
+	registry.Add((*S8ˢ)(nil).Class())
 	registry.Add((*Tester)(nil).Class())
+	registry.Add((*U16ˢ)(nil).Class())
+	registry.Add((*U32ˢ)(nil).Class())
+	registry.Add((*U64ˢ)(nil).Class())
+	registry.Add((*U8ᵖˢ)(nil).Class())
+	registry.Add((*Voidˢ)(nil).Class())
 }
 
 var (
-	binaryIDCmdArrayOfFloat           = binary.ID{0x35, 0x9b, 0x5e, 0xce, 0x2f, 0x44, 0x83, 0x70, 0x25, 0x96, 0x74, 0x46, 0x35, 0x94, 0x9b, 0x00, 0xa0, 0xfb, 0xed, 0x40}
-	binaryIDCmdBool                   = binary.ID{0x47, 0x05, 0x7d, 0xd3, 0xe2, 0x8a, 0x35, 0xcd, 0x7e, 0x6c, 0xe1, 0x5a, 0x41, 0xea, 0xa1, 0xb4, 0x9a, 0x9a, 0xe1, 0x04}
-	binaryIDCmdF32                    = binary.ID{0xac, 0xeb, 0x50, 0x8b, 0x44, 0x00, 0xd5, 0x16, 0xf3, 0x81, 0xcf, 0xce, 0x60, 0x31, 0x86, 0x93, 0x31, 0x23, 0x08, 0xe2}
-	binaryIDCmdF64                    = binary.ID{0xba, 0xdf, 0x95, 0xa4, 0xbb, 0xa6, 0xbc, 0xfb, 0x3c, 0x77, 0x73, 0x5d, 0x02, 0x75, 0xb4, 0xf4, 0x4d, 0x3d, 0xd0, 0xd7}
-	binaryIDCmdPointer                = binary.ID{0x0a, 0xb5, 0xb1, 0x9b, 0xfa, 0x4d, 0xe7, 0x93, 0xba, 0xea, 0x72, 0x22, 0x89, 0x9d, 0x82, 0x82, 0xe8, 0x7f, 0xc2, 0x17}
-	binaryIDCmdS16                    = binary.ID{0x6d, 0xcf, 0x21, 0x7c, 0xaf, 0xea, 0xb4, 0x80, 0xc9, 0xb4, 0xbd, 0x61, 0x43, 0xcf, 0x6c, 0x56, 0x96, 0xd7, 0x55, 0x37}
-	binaryIDCmdS32                    = binary.ID{0xee, 0x00, 0xfd, 0x9c, 0xec, 0x69, 0x81, 0xd9, 0x3f, 0xb8, 0xb5, 0x7d, 0xfb, 0x99, 0xcb, 0xf6, 0x1c, 0x28, 0x4c, 0xea}
-	binaryIDCmdS64                    = binary.ID{0x25, 0x35, 0xa6, 0x38, 0x97, 0xde, 0x2c, 0xb2, 0x75, 0xaa, 0xe7, 0x89, 0x68, 0x6e, 0x20, 0xed, 0x23, 0x77, 0xbd, 0x23}
-	binaryIDCmdS8                     = binary.ID{0x12, 0x6b, 0x91, 0x16, 0x39, 0x64, 0xbc, 0x87, 0xc6, 0x72, 0xf1, 0x3e, 0xdb, 0xa6, 0x4b, 0x16, 0xde, 0xc9, 0x64, 0x45}
-	binaryIDCmdString                 = binary.ID{0x6c, 0x20, 0xe9, 0x15, 0x63, 0x82, 0x4a, 0xb2, 0xf6, 0x34, 0xc0, 0x83, 0x90, 0x2d, 0xa8, 0xc9, 0xcb, 0xde, 0xb6, 0x46}
-	binaryIDCmdU16                    = binary.ID{0x85, 0xce, 0xbe, 0x9c, 0xdc, 0xc5, 0xfa, 0x06, 0x16, 0xaf, 0xe7, 0x43, 0xc8, 0x25, 0x99, 0x30, 0xb9, 0x14, 0x35, 0x32}
-	binaryIDCmdU32                    = binary.ID{0x78, 0xa4, 0x3d, 0x15, 0x0a, 0x41, 0x0c, 0x46, 0x5e, 0x08, 0x4a, 0x9a, 0xab, 0xdc, 0xe5, 0xe0, 0x30, 0x23, 0xef, 0x57}
-	binaryIDCmdU64                    = binary.ID{0x96, 0x70, 0xfa, 0x99, 0x32, 0x0a, 0x92, 0x14, 0xfa, 0xc5, 0x08, 0xc3, 0x98, 0xff, 0x94, 0x31, 0xea, 0x8c, 0x38, 0xf4}
-	binaryIDCmdU8                     = binary.ID{0x25, 0x6f, 0x35, 0x1c, 0x91, 0xd6, 0xf3, 0xa6, 0x70, 0x81, 0xb2, 0xe0, 0xfa, 0x44, 0x2c, 0x17, 0xf2, 0x17, 0xac, 0x54}
-	binaryIDCmdVoid                   = binary.ID{0x05, 0xb2, 0x9c, 0xcc, 0x68, 0x65, 0x50, 0x68, 0xf3, 0x67, 0x28, 0xe9, 0xff, 0x48, 0x87, 0x75, 0x32, 0x24, 0x1e, 0xaf}
-	binaryIDCmdVoid3Arrays            = binary.ID{0x9a, 0xc2, 0xfd, 0xc3, 0x44, 0x20, 0x45, 0x50, 0xe5, 0x0f, 0x65, 0x18, 0x9f, 0x33, 0x43, 0xc0, 0xb1, 0x2c, 0x13, 0x5d}
-	binaryIDCmdVoid3Remapped          = binary.ID{0x58, 0xcd, 0x42, 0x62, 0x94, 0xae, 0xd5, 0x21, 0x91, 0x3b, 0xe3, 0x77, 0x7e, 0x68, 0x7f, 0x66, 0x3a, 0x43, 0x8b, 0xc9}
-	binaryIDCmdVoid3Strings           = binary.ID{0x76, 0xa6, 0x85, 0x68, 0x72, 0x46, 0x75, 0x5c, 0x4b, 0x1d, 0x15, 0x95, 0xbb, 0xdc, 0xbe, 0x23, 0xe0, 0xad, 0xdd, 0xfd}
-	binaryIDCmdVoidArrayOfStrings     = binary.ID{0x6e, 0x9e, 0x71, 0x70, 0x9b, 0xb7, 0x1d, 0xf5, 0xcd, 0xeb, 0xd8, 0xd2, 0xbc, 0x00, 0x16, 0x1c, 0x92, 0xb5, 0x9e, 0x26}
-	binaryIDCmdVoidBool               = binary.ID{0x00, 0xde, 0x06, 0xc9, 0x63, 0x41, 0x3a, 0x6b, 0x94, 0x85, 0x59, 0x7a, 0x3b, 0xf6, 0x93, 0xf7, 0x3b, 0x2c, 0xf9, 0x8c}
-	binaryIDCmdVoidF32                = binary.ID{0x2e, 0x14, 0x6d, 0x75, 0x60, 0xc4, 0xa0, 0x75, 0x83, 0x78, 0x35, 0xbc, 0x0d, 0x2d, 0xf7, 0xd3, 0xdb, 0x7d, 0xe8, 0xb1}
-	binaryIDCmdVoidF64                = binary.ID{0x59, 0xcb, 0x74, 0xb0, 0xd2, 0x3e, 0x74, 0xd1, 0xce, 0x39, 0x6e, 0xa9, 0x5e, 0xf5, 0x75, 0x02, 0x24, 0x23, 0x36, 0xb7}
-	binaryIDCmdVoidOut3Remapped       = binary.ID{0x4c, 0x62, 0xae, 0x94, 0x53, 0xd5, 0x34, 0xe7, 0x5a, 0xdb, 0x9f, 0xc3, 0x73, 0x93, 0xb2, 0xa9, 0xbc, 0x61, 0xf9, 0x0c}
-	binaryIDCmdVoidOut3Strings        = binary.ID{0x74, 0xba, 0x1c, 0xe6, 0x06, 0x73, 0x4c, 0x13, 0x4b, 0x54, 0x23, 0x3a, 0xee, 0x83, 0x32, 0xdf, 0x74, 0x19, 0x6e, 0xf5}
-	binaryIDCmdVoidOutArrayOfRemapped = binary.ID{0xf8, 0xa4, 0xee, 0xb5, 0x0e, 0x94, 0x45, 0x1a, 0xaf, 0xf7, 0x26, 0x26, 0x79, 0x32, 0x24, 0x2c, 0x37, 0xb9, 0x68, 0x6f}
-	binaryIDCmdVoidOutBool            = binary.ID{0x66, 0x14, 0x6f, 0xc3, 0x83, 0xfa, 0x7e, 0x34, 0xfd, 0xb0, 0x77, 0xf6, 0x96, 0xbe, 0xf1, 0x5b, 0x98, 0x77, 0xe1, 0xa7}
-	binaryIDCmdVoidOutF32             = binary.ID{0xb0, 0xe2, 0x3b, 0xc0, 0x28, 0x93, 0x76, 0x84, 0x7f, 0xf7, 0x96, 0xbe, 0xe4, 0xcb, 0xec, 0xeb, 0xfb, 0x35, 0x3e, 0x02}
-	binaryIDCmdVoidOutF64             = binary.ID{0x58, 0x7d, 0xf5, 0x3a, 0xa1, 0x4e, 0xf4, 0xb5, 0xa7, 0x30, 0x11, 0xeb, 0x5a, 0x68, 0xb2, 0xc6, 0xdd, 0xa2, 0x5d, 0xb9}
-	binaryIDCmdVoidOutFixedSizeBuffer = binary.ID{0xd2, 0x2a, 0x9e, 0x9b, 0x08, 0xa6, 0x0b, 0x11, 0x19, 0x87, 0x36, 0x17, 0xea, 0xdc, 0x49, 0x8a, 0x01, 0x88, 0x5c, 0x8f}
-	binaryIDCmdVoidOutS16             = binary.ID{0x38, 0xf0, 0x6e, 0xcf, 0x5b, 0x9b, 0xe3, 0xb7, 0x6d, 0x9b, 0x7b, 0x51, 0xbc, 0x94, 0x3d, 0xba, 0xfe, 0x6c, 0x8a, 0xbf}
-	binaryIDCmdVoidOutS32             = binary.ID{0x4b, 0xb3, 0x5a, 0x13, 0xc1, 0x6b, 0xcd, 0x01, 0xcd, 0xd0, 0x88, 0x89, 0xc8, 0x5e, 0x5e, 0x70, 0x44, 0xc4, 0x9a, 0x23}
-	binaryIDCmdVoidOutS64             = binary.ID{0x2f, 0xf0, 0x6c, 0x4c, 0xa3, 0x73, 0xa0, 0x26, 0x3c, 0x17, 0xf9, 0x17, 0xa6, 0x89, 0x23, 0xce, 0xc9, 0x7b, 0x37, 0xa4}
-	binaryIDCmdVoidOutS8              = binary.ID{0xc9, 0x3a, 0x05, 0x36, 0x35, 0x2d, 0x93, 0x76, 0xf4, 0x06, 0xa7, 0x28, 0xe9, 0xe5, 0xed, 0x4f, 0xdb, 0x45, 0xe8, 0x2b}
-	binaryIDCmdVoidOutString          = binary.ID{0xef, 0xa9, 0xd0, 0x00, 0x2e, 0x7d, 0xd2, 0xdf, 0xb0, 0x5b, 0x35, 0x51, 0xa7, 0x9f, 0x49, 0x3a, 0xbf, 0xa0, 0x3f, 0x00}
-	binaryIDCmdVoidOutU16             = binary.ID{0x4d, 0x5a, 0xb8, 0x48, 0x9e, 0x43, 0x34, 0x4a, 0x79, 0x5e, 0x86, 0xf2, 0xac, 0x38, 0x87, 0x13, 0xd5, 0xba, 0xbf, 0xc7}
-	binaryIDCmdVoidOutU32             = binary.ID{0x03, 0x91, 0xd1, 0x3f, 0x3f, 0x9e, 0xea, 0x33, 0x71, 0xff, 0x02, 0x0c, 0x70, 0x6a, 0x07, 0xbb, 0x2f, 0x32, 0xeb, 0x0b}
-	binaryIDCmdVoidOutU64             = binary.ID{0x81, 0x40, 0x56, 0x73, 0x6c, 0x01, 0x6c, 0x62, 0x23, 0x19, 0xc3, 0x24, 0xc7, 0xe0, 0xcd, 0x3b, 0xa4, 0x04, 0xb9, 0x3e}
-	binaryIDCmdVoidOutU8              = binary.ID{0x91, 0xe3, 0xf7, 0x1e, 0x4d, 0xa7, 0x2e, 0xce, 0x6d, 0x2e, 0x5b, 0xca, 0xd6, 0x16, 0xc6, 0xf3, 0xf4, 0x5a, 0x91, 0x27}
-	binaryIDCmdVoidS16                = binary.ID{0xf3, 0x1f, 0x79, 0x1e, 0xbd, 0xc5, 0xda, 0x5a, 0xb3, 0x62, 0x45, 0x34, 0x2b, 0x5b, 0xdd, 0xea, 0x68, 0x3f, 0x58, 0x57}
-	binaryIDCmdVoidS32                = binary.ID{0x45, 0xc2, 0x1f, 0x19, 0x69, 0xb2, 0x83, 0x0e, 0x67, 0x51, 0x74, 0x10, 0x09, 0xfd, 0xeb, 0x31, 0xcc, 0xf1, 0x52, 0x66}
-	binaryIDCmdVoidS64                = binary.ID{0x78, 0x68, 0x18, 0x4b, 0xbf, 0x77, 0xd8, 0x45, 0x30, 0x06, 0xc5, 0x44, 0xca, 0x8c, 0x1e, 0xf8, 0xee, 0x82, 0x85, 0x31}
-	binaryIDCmdVoidS8                 = binary.ID{0xfc, 0x01, 0x6b, 0x1c, 0x5f, 0x06, 0xe1, 0x1d, 0xf8, 0x15, 0x8d, 0x51, 0xa4, 0xcb, 0x44, 0x3d, 0xb1, 0xd1, 0x59, 0x61}
-	binaryIDCmdVoidString             = binary.ID{0xdb, 0x9c, 0xa9, 0x10, 0x3a, 0x69, 0x32, 0xac, 0xa3, 0x56, 0xbc, 0x07, 0x34, 0x29, 0xe4, 0x48, 0x42, 0xbe, 0xc3, 0x98}
-	binaryIDCmdVoidU16                = binary.ID{0x8b, 0x3f, 0xb3, 0x3b, 0xd4, 0xdf, 0xed, 0xf5, 0x51, 0xaa, 0x5a, 0x4c, 0x4d, 0x37, 0x12, 0xd7, 0xab, 0x01, 0x18, 0xd4}
-	binaryIDCmdVoidU32                = binary.ID{0xa9, 0xce, 0x14, 0x64, 0x4e, 0x49, 0xe5, 0x68, 0xc7, 0xfe, 0xb1, 0x8f, 0xbf, 0x8b, 0x51, 0x5e, 0xb7, 0x6c, 0x92, 0x26}
-	binaryIDCmdVoidU64                = binary.ID{0xf0, 0x94, 0xd4, 0x52, 0x67, 0x8b, 0x0b, 0xb6, 0xc9, 0x2c, 0x5a, 0xeb, 0xad, 0x86, 0x6e, 0x16, 0x39, 0x05, 0x36, 0x12}
-	binaryIDCmdVoidU8                 = binary.ID{0x37, 0x14, 0xbd, 0x49, 0x55, 0x6f, 0xbf, 0x7b, 0x5b, 0xa2, 0x72, 0x0a, 0xb8, 0x94, 0x3a, 0x21, 0x4c, 0xdb, 0xe3, 0x32}
-	binaryIDGlobals                   = binary.ID{0xc0, 0x56, 0xa7, 0xd5, 0x53, 0x88, 0xac, 0xaa, 0x75, 0x81, 0x46, 0x04, 0x13, 0xd4, 0xd3, 0x88, 0x43, 0x9c, 0xef, 0x61}
-	binaryIDImported                  = binary.ID{0xdf, 0xef, 0xfd, 0x6d, 0x61, 0x4d, 0x78, 0xcf, 0x04, 0x14, 0xfb, 0xd3, 0x19, 0x00, 0x92, 0xa8, 0x23, 0xd1, 0x4a, 0xf4}
-	binaryIDIncluded                  = binary.ID{0xc1, 0xa7, 0xc7, 0xd9, 0xf3, 0x7c, 0x57, 0xbc, 0x60, 0xb0, 0x48, 0x00, 0x29, 0xfa, 0x2f, 0x9c, 0xda, 0xf9, 0x49, 0x02}
-	binaryIDTester                    = binary.ID{0xbd, 0x19, 0x4d, 0xd3, 0x5a, 0x62, 0xbb, 0x36, 0x7d, 0x71, 0xc9, 0xf2, 0xfd, 0xc8, 0xb0, 0xc1, 0xc6, 0x2e, 0xe1, 0xd6}
+	binaryIDBoolˢ                            = binary.ID{0x57, 0xbe, 0xc5, 0xcb, 0x57, 0x68, 0xc1, 0x3a, 0x6f, 0xf1, 0xe4, 0x17, 0x5d, 0x7d, 0x3a, 0xac, 0xc7, 0xf0, 0x55, 0x28}
+	binaryIDBoolᵖ                            = binary.ID{0x5d, 0x1a, 0xc1, 0x43, 0xe5, 0x22, 0xa0, 0x0d, 0x01, 0xf5, 0x15, 0xd5, 0xb7, 0xe6, 0x74, 0xa5, 0xfa, 0x62, 0x3e, 0x0a}
+	binaryIDCharˢ                            = binary.ID{0xc3, 0xfa, 0x01, 0xb8, 0x39, 0x25, 0x6e, 0xee, 0x19, 0x67, 0xb8, 0x9f, 0x4d, 0x42, 0x73, 0xcd, 0x70, 0x0f, 0x94, 0x0f}
+	binaryIDCharᵖ                            = binary.ID{0x1f, 0x6c, 0x0a, 0xf7, 0xe7, 0x85, 0x27, 0x3a, 0x09, 0xe5, 0xdb, 0x03, 0xad, 0xa2, 0x81, 0x57, 0x7f, 0x5a, 0xb5, 0x9a}
+	binaryIDCmdBool                          = binary.ID{0x80, 0x77, 0xdf, 0x53, 0x3b, 0x89, 0xeb, 0x5f, 0x66, 0xfc, 0xe7, 0xd8, 0x38, 0x69, 0x06, 0x15, 0x7e, 0x0d, 0xcb, 0x23}
+	binaryIDCmdCharsliceToString             = binary.ID{0xfb, 0x14, 0x26, 0x02, 0x76, 0xf5, 0x73, 0x16, 0x1b, 0xbf, 0x84, 0xcb, 0xc4, 0xcc, 0x64, 0xe2, 0x42, 0x12, 0xe3, 0x91}
+	binaryIDU8ᵖ                              = binary.ID{0x69, 0xb3, 0xa1, 0x27, 0x68, 0x15, 0x43, 0x23, 0xf5, 0xf4, 0xa5, 0xf6, 0xcf, 0xc0, 0xd3, 0x33, 0x7d, 0x5e, 0x9d, 0x0c}
+	binaryIDCmdClone                         = binary.ID{0xf5, 0xe7, 0xb0, 0xe1, 0x8f, 0x78, 0x0d, 0x00, 0xa4, 0x8f, 0x00, 0xdf, 0x40, 0x33, 0xbf, 0x99, 0xf7, 0xaf, 0xd9, 0x9d}
+	binaryIDCmdCopy                          = binary.ID{0x7b, 0xb5, 0xeb, 0x22, 0xa4, 0xee, 0x4e, 0x5d, 0xed, 0xce, 0xc2, 0x1e, 0x47, 0x65, 0x8c, 0x7a, 0x77, 0x8f, 0xf4, 0x49}
+	binaryIDCmdF32                           = binary.ID{0x52, 0x80, 0xf1, 0x18, 0x77, 0xaf, 0x25, 0x7f, 0x13, 0x7a, 0x5b, 0x34, 0x79, 0x84, 0x76, 0x61, 0x45, 0x5f, 0xca, 0xb1}
+	binaryIDCmdF64                           = binary.ID{0x7a, 0xdc, 0xfc, 0x11, 0x05, 0x35, 0x69, 0xee, 0x47, 0x5b, 0x98, 0x9f, 0x38, 0x83, 0x2b, 0xa6, 0x1c, 0x31, 0x98, 0x89}
+	binaryIDCmdMake                          = binary.ID{0x15, 0x38, 0x00, 0x1e, 0xc3, 0x22, 0xd3, 0xd8, 0x1e, 0xa5, 0x30, 0xd6, 0x50, 0x04, 0x98, 0xda, 0xb1, 0x18, 0x71, 0x12}
+	binaryIDVoidᵖ                            = binary.ID{0xdf, 0xa6, 0x57, 0xea, 0xf6, 0xce, 0x58, 0x3f, 0x19, 0xe1, 0xab, 0xd5, 0xa3, 0xc5, 0x9b, 0xa2, 0x9e, 0xd1, 0x60, 0x3c}
+	binaryIDCmdPointer                       = binary.ID{0xf9, 0x00, 0xe9, 0xab, 0x79, 0x5c, 0x88, 0xb7, 0xb6, 0x4e, 0xaf, 0x04, 0x12, 0x0a, 0xf9, 0xa1, 0xa7, 0xd1, 0xb5, 0x8d}
+	binaryIDCmdS16                           = binary.ID{0xe8, 0x57, 0x2b, 0x7c, 0x6b, 0x9d, 0x63, 0x08, 0xd2, 0x27, 0x98, 0xd4, 0x9e, 0x5c, 0xd0, 0x7f, 0x9e, 0x7c, 0x96, 0x86}
+	binaryIDCmdS32                           = binary.ID{0x08, 0xf9, 0xd9, 0x7a, 0x65, 0x69, 0x0e, 0x37, 0xa8, 0x82, 0x10, 0xf9, 0x68, 0xfb, 0x4a, 0xaa, 0x3a, 0x12, 0x59, 0xaa}
+	binaryIDCmdS64                           = binary.ID{0x95, 0xcd, 0x41, 0x0e, 0x54, 0x5d, 0x34, 0x9f, 0xa5, 0x3f, 0x9a, 0x5d, 0x0f, 0xb6, 0x75, 0x6a, 0x30, 0xb3, 0x03, 0xcd}
+	binaryIDCmdS8                            = binary.ID{0xa7, 0xb1, 0x9e, 0xdc, 0x20, 0x5a, 0x8e, 0x2c, 0x2d, 0x4f, 0xda, 0xe8, 0xd0, 0x8e, 0xc9, 0x89, 0x35, 0x68, 0x67, 0x67}
+	binaryIDCmdString                        = binary.ID{0x76, 0x54, 0x94, 0xc8, 0x96, 0x02, 0xc5, 0x03, 0x45, 0xb6, 0x1a, 0xaa, 0x44, 0xd7, 0x0c, 0x2d, 0xb3, 0x8e, 0x89, 0x77}
+	binaryIDCmdU16                           = binary.ID{0xbe, 0x5a, 0x77, 0xd3, 0xd8, 0x90, 0xb6, 0xed, 0xa1, 0x0d, 0xb6, 0xe7, 0xdf, 0x09, 0xf8, 0x5d, 0x5b, 0x0a, 0xed, 0x7a}
+	binaryIDCmdU32                           = binary.ID{0x6f, 0xa9, 0x12, 0x58, 0x71, 0x99, 0x90, 0xa5, 0x2f, 0x44, 0xc6, 0x4d, 0x06, 0x12, 0x39, 0x7a, 0x11, 0xa9, 0x3f, 0x5b}
+	binaryIDCmdU64                           = binary.ID{0xd1, 0x18, 0xc7, 0x32, 0xbc, 0x47, 0x41, 0x1e, 0x66, 0x25, 0xcb, 0x8c, 0x7f, 0xb4, 0xea, 0x40, 0x3c, 0xf5, 0x26, 0xa7}
+	binaryIDCmdU8                            = binary.ID{0xd9, 0x12, 0x70, 0xc3, 0x2a, 0x8a, 0xd9, 0x18, 0x6a, 0x7f, 0x6b, 0x78, 0xf3, 0x3c, 0x25, 0x6b, 0x64, 0x1c, 0x34, 0x59}
+	binaryIDCmdUnknownRet                    = binary.ID{0x81, 0x0d, 0x10, 0xd6, 0x99, 0xc6, 0x87, 0x5c, 0x7a, 0x6c, 0x0c, 0xb7, 0xb2, 0x94, 0xde, 0xac, 0x83, 0x1a, 0x51, 0x66}
+	binaryIDIntᵖ                             = binary.ID{0x0a, 0xb4, 0xd5, 0xf9, 0x12, 0x8a, 0xcb, 0x74, 0xb2, 0x99, 0xe1, 0x65, 0x12, 0x7f, 0xf8, 0x2a, 0x0d, 0xe6, 0x88, 0xb2}
+	binaryIDCmdUnknownWritePtr               = binary.ID{0x7c, 0x73, 0xd0, 0x88, 0x6d, 0x32, 0xaa, 0xaa, 0xd1, 0x0c, 0x40, 0x1f, 0xb4, 0x51, 0x8c, 0x92, 0x57, 0x29, 0xfb, 0x64}
+	binaryIDCmdUnknownWriteSlice             = binary.ID{0xcd, 0x54, 0xda, 0x41, 0x77, 0xb4, 0x11, 0xda, 0xd2, 0xa2, 0x07, 0xa3, 0xa4, 0x09, 0x60, 0xb9, 0xcf, 0x79, 0x58, 0x45}
+	binaryIDCmdVoid                          = binary.ID{0x2c, 0xee, 0x70, 0x13, 0xcb, 0xa0, 0x04, 0xc6, 0x11, 0xec, 0x73, 0xcb, 0xa9, 0xa2, 0x90, 0xcd, 0x6d, 0xa0, 0xf9, 0xee}
+	binaryIDU8ᵖᵖ                             = binary.ID{0x09, 0x3a, 0xf3, 0x79, 0xeb, 0x41, 0x93, 0x31, 0xdd, 0x0d, 0x12, 0xd8, 0x43, 0x15, 0xc2, 0x21, 0x54, 0x71, 0x89, 0x7b}
+	binaryIDCmdVoid3InArrays                 = binary.ID{0xaa, 0xa2, 0xdf, 0x5e, 0x35, 0x9a, 0x51, 0x86, 0x68, 0x13, 0x12, 0xeb, 0x68, 0x06, 0x87, 0x6c, 0x51, 0x41, 0x44, 0xf3}
+	binaryIDCmdVoid3Remapped                 = binary.ID{0xf1, 0x71, 0xe4, 0x75, 0x43, 0x55, 0xd7, 0x1e, 0xc0, 0xf2, 0x91, 0x7c, 0xd3, 0xdd, 0xce, 0xa2, 0xd4, 0x96, 0x4f, 0x10}
+	binaryIDCmdVoid3Strings                  = binary.ID{0xb1, 0x4b, 0x88, 0x77, 0x9a, 0xef, 0x0b, 0xfc, 0x89, 0x45, 0xcb, 0x32, 0x64, 0xe3, 0x22, 0x0d, 0x4a, 0x5d, 0x1a, 0xde}
+	binaryIDCmdVoidBool                      = binary.ID{0x7a, 0xbd, 0xdc, 0xa2, 0x3d, 0xcb, 0xe4, 0x70, 0xc0, 0x5a, 0xbe, 0xdd, 0x60, 0xb9, 0xb7, 0x25, 0xff, 0x64, 0xd7, 0x25}
+	binaryIDCmdVoidF32                       = binary.ID{0x0c, 0x94, 0xea, 0xe1, 0x42, 0x48, 0x79, 0x78, 0x3d, 0x58, 0x8e, 0xe8, 0x4a, 0xa8, 0x98, 0xad, 0x6e, 0xa0, 0x2c, 0xdd}
+	binaryIDCmdVoidF64                       = binary.ID{0x31, 0xd6, 0x0f, 0x82, 0x30, 0x87, 0x4e, 0x3c, 0x16, 0x92, 0x95, 0x86, 0xcf, 0x9e, 0xce, 0x87, 0xe7, 0x42, 0xe9, 0xce}
+	binaryIDRemappedᵖ                        = binary.ID{0x07, 0x53, 0x5a, 0xe5, 0x2b, 0xae, 0x08, 0x1f, 0xe6, 0x6d, 0xe8, 0x5e, 0x7b, 0xf2, 0x18, 0x0d, 0xe9, 0x16, 0x7a, 0xb4}
+	binaryIDCmdVoidInArrayOfRemapped         = binary.ID{0x0f, 0x5a, 0x24, 0x88, 0xe9, 0x4f, 0xa6, 0x76, 0xfb, 0xf1, 0x57, 0xd6, 0xdb, 0x95, 0x90, 0x56, 0xe2, 0x26, 0x0f, 0xd6}
+	binaryIDCmdVoidOutArrayOfRemapped        = binary.ID{0xc6, 0x57, 0xfb, 0xf5, 0x45, 0x1e, 0x87, 0xac, 0x6d, 0x51, 0x31, 0x70, 0xb7, 0x70, 0xca, 0xcf, 0xdd, 0xba, 0x9b, 0xa0}
+	binaryIDCmdVoidOutArrayOfUnknownRemapped = binary.ID{0x7a, 0x99, 0x6a, 0x41, 0xd7, 0x91, 0x51, 0x79, 0xaa, 0xec, 0x9b, 0xe1, 0xca, 0x0f, 0x6a, 0x58, 0xa3, 0x0a, 0x44, 0xcc}
+	binaryIDCmdVoidReadBool                  = binary.ID{0xe3, 0x72, 0xa1, 0x28, 0x51, 0x4e, 0x08, 0xac, 0xf6, 0xa1, 0x21, 0x8f, 0x7b, 0x7c, 0x1b, 0xd3, 0x7c, 0x2f, 0xcb, 0x43}
+	binaryIDF32ᵖ                             = binary.ID{0x00, 0x1d, 0x52, 0xa8, 0x6c, 0xbd, 0x31, 0x24, 0x8b, 0xd8, 0x77, 0xf1, 0xe4, 0x65, 0xe5, 0x0e, 0x5f, 0xa0, 0xa0, 0xef}
+	binaryIDCmdVoidReadF32                   = binary.ID{0x9f, 0xbf, 0x8b, 0x12, 0x64, 0x78, 0xea, 0x3a, 0xfd, 0x33, 0xb3, 0x4a, 0x72, 0xae, 0x82, 0x58, 0x56, 0xeb, 0x6c, 0x15}
+	binaryIDF64ᵖ                             = binary.ID{0x54, 0xb3, 0x8f, 0xc5, 0xd8, 0xe8, 0x4c, 0xa5, 0x75, 0x19, 0xff, 0x39, 0x5c, 0x40, 0xc6, 0x4f, 0xac, 0xf6, 0xfa, 0x16}
+	binaryIDCmdVoidReadF64                   = binary.ID{0x76, 0x50, 0xaa, 0x83, 0x23, 0x22, 0xf5, 0xb4, 0xb7, 0xa8, 0xc6, 0xa9, 0x45, 0x2a, 0x54, 0xd1, 0xe5, 0x61, 0x04, 0xd0}
+	binaryIDU16ᵖ                             = binary.ID{0xd9, 0x3e, 0xe1, 0x20, 0xd0, 0x57, 0x8e, 0x72, 0x21, 0xa6, 0x72, 0xef, 0x6f, 0x87, 0x51, 0xff, 0xbc, 0x12, 0x51, 0xe5}
+	binaryIDCmdVoidReadPtrs                  = binary.ID{0x42, 0x7f, 0x5e, 0x10, 0xa6, 0x0d, 0xdb, 0x58, 0x65, 0x6e, 0x07, 0x84, 0x54, 0xe1, 0x18, 0x17, 0x9f, 0x6e, 0x17, 0xdf}
+	binaryIDS16ᵖ                             = binary.ID{0x86, 0x53, 0xff, 0xb6, 0x38, 0x31, 0x0b, 0x93, 0xdb, 0xe4, 0x8f, 0x14, 0xf0, 0x3c, 0xde, 0x39, 0x33, 0xa0, 0x26, 0x6a}
+	binaryIDCmdVoidReadS16                   = binary.ID{0xfc, 0x45, 0xde, 0x7b, 0xea, 0x09, 0x25, 0xcb, 0x5b, 0xa8, 0x7c, 0xbb, 0x18, 0xb9, 0xbe, 0x80, 0xb8, 0x10, 0x0c, 0xbb}
+	binaryIDS32ᵖ                             = binary.ID{0x10, 0xb0, 0xee, 0xaf, 0xbb, 0xc6, 0xe3, 0x7c, 0xe5, 0xc1, 0xe4, 0x13, 0xbd, 0xf1, 0x58, 0x34, 0x9a, 0xa1, 0xdf, 0xc8}
+	binaryIDCmdVoidReadS32                   = binary.ID{0x3c, 0xe0, 0x13, 0x74, 0xd1, 0x2b, 0x6b, 0xac, 0xda, 0x6a, 0x20, 0xf5, 0xf3, 0x65, 0xb3, 0xec, 0x2b, 0x69, 0x74, 0x66}
+	binaryIDS64ᵖ                             = binary.ID{0xa2, 0x70, 0x81, 0x6c, 0x50, 0x79, 0x3e, 0xb4, 0x74, 0xb4, 0x09, 0x98, 0xf4, 0x5b, 0xf3, 0xff, 0x93, 0x49, 0x34, 0x54}
+	binaryIDCmdVoidReadS64                   = binary.ID{0xb9, 0x0f, 0xa8, 0x30, 0x7e, 0xe2, 0x16, 0x18, 0x96, 0xf9, 0xb3, 0xa7, 0x34, 0xcb, 0xae, 0xe9, 0xcb, 0xdd, 0xaa, 0xcb}
+	binaryIDS8ᵖ                              = binary.ID{0x47, 0xf5, 0xa4, 0x30, 0x2a, 0x3f, 0x54, 0xec, 0x35, 0x99, 0x11, 0x7c, 0x99, 0xe1, 0xea, 0x24, 0x0a, 0x6b, 0x0a, 0x33}
+	binaryIDCmdVoidReadS8                    = binary.ID{0xc2, 0xe8, 0x40, 0xb9, 0x52, 0xe6, 0x15, 0xcc, 0xa4, 0x36, 0x25, 0x41, 0xbd, 0x51, 0x0b, 0xa3, 0xda, 0x06, 0x4f, 0x67}
+	binaryIDCmdVoidReadU16                   = binary.ID{0x27, 0xdd, 0x62, 0x6e, 0x9c, 0xe9, 0xd1, 0x80, 0xe0, 0x36, 0x43, 0x92, 0xde, 0x6d, 0x8b, 0xbb, 0x54, 0xce, 0x3d, 0xc5}
+	binaryIDU32ᵖ                             = binary.ID{0x89, 0x6a, 0x59, 0x0e, 0xdf, 0xa8, 0xd6, 0x44, 0xc8, 0x10, 0x50, 0xcf, 0xbb, 0x6a, 0x7f, 0xa5, 0x31, 0x06, 0x36, 0x7d}
+	binaryIDCmdVoidReadU32                   = binary.ID{0x0c, 0xb1, 0x77, 0xb4, 0xa5, 0x94, 0xdc, 0xf4, 0xaa, 0x7a, 0x7c, 0xec, 0x20, 0x7a, 0x9f, 0x71, 0x6e, 0x5a, 0xa4, 0x1b}
+	binaryIDU64ᵖ                             = binary.ID{0x0d, 0xfc, 0x3b, 0xd9, 0x4f, 0xe7, 0x95, 0xa7, 0xfb, 0x6d, 0x06, 0x88, 0xf1, 0x81, 0x69, 0xc9, 0x22, 0x76, 0x2a, 0x40}
+	binaryIDCmdVoidReadU64                   = binary.ID{0xc8, 0x5f, 0x76, 0xcd, 0x34, 0xdd, 0xdf, 0xd6, 0x22, 0xf3, 0xc9, 0x98, 0x66, 0xc6, 0x4f, 0x40, 0x66, 0xc6, 0x1e, 0xf4}
+	binaryIDCmdVoidReadU8                    = binary.ID{0xcc, 0x0f, 0xa2, 0xea, 0x39, 0xe7, 0x92, 0x39, 0x91, 0xd2, 0xef, 0x30, 0xd3, 0x88, 0x5c, 0xf3, 0x9e, 0xcd, 0xae, 0x0b}
+	binaryIDCmdVoidS16                       = binary.ID{0xa3, 0xc4, 0xdd, 0x66, 0xb1, 0xc1, 0x1c, 0xff, 0x19, 0xc1, 0xca, 0xe5, 0x4b, 0x2c, 0xf0, 0x7c, 0x0c, 0xe4, 0x6e, 0x1e}
+	binaryIDCmdVoidS32                       = binary.ID{0xf5, 0xec, 0x9f, 0x45, 0x63, 0x9d, 0x52, 0xc9, 0xf0, 0xee, 0xd2, 0xdd, 0xfa, 0x2c, 0x23, 0x8f, 0x3d, 0x4d, 0xae, 0x59}
+	binaryIDCmdVoidS64                       = binary.ID{0x59, 0x01, 0x30, 0xea, 0xcc, 0xef, 0xfb, 0x2d, 0x6f, 0xa0, 0xc7, 0xd7, 0xa1, 0xb1, 0xc1, 0x88, 0xe0, 0x07, 0xe7, 0xc2}
+	binaryIDCmdVoidS8                        = binary.ID{0xfb, 0xbe, 0x03, 0x68, 0xcf, 0x75, 0xb8, 0xe5, 0x33, 0x85, 0x9e, 0xf8, 0xd7, 0x4b, 0x77, 0x19, 0x48, 0xd1, 0xcf, 0x0e}
+	binaryIDCmdVoidString                    = binary.ID{0x1e, 0x22, 0x42, 0x97, 0xd4, 0x39, 0xd9, 0xa4, 0xb0, 0x3d, 0xab, 0xfe, 0x6a, 0xe0, 0x47, 0x07, 0x35, 0x5d, 0xdd, 0xdd}
+	binaryIDCmdVoidU16                       = binary.ID{0x4a, 0x7a, 0xfa, 0xff, 0x54, 0xac, 0xdd, 0x40, 0x6d, 0x24, 0x1d, 0xd0, 0x67, 0x01, 0x64, 0xd4, 0xcd, 0x05, 0x23, 0x5a}
+	binaryIDCmdVoidU32                       = binary.ID{0xf3, 0xc0, 0xa0, 0x77, 0x91, 0xbd, 0x8a, 0x65, 0xea, 0xa1, 0x5c, 0xa9, 0xe9, 0xb5, 0xa1, 0xaf, 0x04, 0xaf, 0x04, 0x94}
+	binaryIDCmdVoidU64                       = binary.ID{0x24, 0x52, 0x3d, 0xb3, 0x1b, 0x21, 0x91, 0x44, 0xbf, 0x3d, 0x9d, 0xed, 0xa5, 0x9b, 0x26, 0xb6, 0x4b, 0xdf, 0x3c, 0x28}
+	binaryIDCmdVoidU8                        = binary.ID{0xf3, 0x7c, 0xbb, 0x45, 0x0c, 0x89, 0xb5, 0x81, 0x17, 0xeb, 0x9c, 0x8c, 0x7c, 0xaa, 0x77, 0x22, 0x3b, 0x49, 0xf8, 0xf8}
+	binaryIDCmdVoidWriteBool                 = binary.ID{0x07, 0xf0, 0x82, 0xc6, 0x81, 0xbd, 0x9b, 0x8c, 0x31, 0xec, 0xb8, 0x0c, 0x8d, 0xd5, 0xf3, 0x49, 0x36, 0x5e, 0xa2, 0x3a}
+	binaryIDCmdVoidWriteF32                  = binary.ID{0xea, 0x88, 0xdd, 0x4c, 0xf8, 0xee, 0xe0, 0x06, 0xa9, 0x3e, 0x1d, 0xe1, 0xd2, 0xa7, 0x10, 0xe3, 0xff, 0x58, 0xb9, 0x89}
+	binaryIDCmdVoidWriteF64                  = binary.ID{0xa7, 0x61, 0xe0, 0x2e, 0x06, 0x3d, 0x77, 0x3c, 0x5a, 0x8b, 0xda, 0x93, 0x3a, 0x2e, 0xd0, 0xe8, 0x3c, 0xf9, 0x81, 0xdf}
+	binaryIDCmdVoidWritePtrs                 = binary.ID{0xdd, 0xf3, 0xc8, 0x3b, 0x54, 0x11, 0xf0, 0xf0, 0x90, 0xf9, 0x97, 0xff, 0xd9, 0xb5, 0x7e, 0x56, 0x28, 0x3a, 0x51, 0x4c}
+	binaryIDCmdVoidWriteS16                  = binary.ID{0x0f, 0xe7, 0xea, 0x46, 0x08, 0x92, 0x57, 0x03, 0xef, 0x7b, 0x45, 0x7b, 0xde, 0x6c, 0xa7, 0x24, 0xa9, 0x74, 0xc5, 0x67}
+	binaryIDCmdVoidWriteS32                  = binary.ID{0x51, 0x30, 0xfd, 0x79, 0xde, 0x83, 0xf7, 0x0b, 0x81, 0xf0, 0xd0, 0xd9, 0xdd, 0x68, 0x05, 0x45, 0x03, 0x11, 0x98, 0xd6}
+	binaryIDCmdVoidWriteS64                  = binary.ID{0x97, 0x30, 0x8e, 0xf8, 0xd3, 0x02, 0x5a, 0x6f, 0xaa, 0xb3, 0x97, 0x0d, 0x19, 0x92, 0xb7, 0x4f, 0xd6, 0x13, 0x5e, 0x5e}
+	binaryIDCmdVoidWriteS8                   = binary.ID{0x83, 0x14, 0x2a, 0x12, 0x17, 0xd8, 0x5f, 0xe8, 0x0b, 0x1f, 0x6e, 0x35, 0x3b, 0xc4, 0x3c, 0x61, 0x72, 0xc5, 0xb0, 0x5b}
+	binaryIDCmdVoidWriteU16                  = binary.ID{0x5a, 0xd8, 0x81, 0x7f, 0x59, 0x0a, 0xb3, 0x4a, 0x1b, 0xc7, 0xe9, 0xb9, 0xca, 0x41, 0xf0, 0x9b, 0xac, 0x34, 0x4b, 0xb5}
+	binaryIDCmdVoidWriteU32                  = binary.ID{0x38, 0x33, 0x9f, 0x07, 0x02, 0xa2, 0xc0, 0xaa, 0x5a, 0x0f, 0x7e, 0xff, 0x3b, 0xaf, 0xa3, 0xfa, 0x47, 0xe4, 0xde, 0x20}
+	binaryIDCmdVoidWriteU64                  = binary.ID{0x72, 0x75, 0x15, 0x1a, 0x4f, 0x55, 0x04, 0x34, 0xc5, 0xe8, 0x1a, 0x0d, 0xe4, 0xea, 0x02, 0xd7, 0xc7, 0xdd, 0xf0, 0xfc}
+	binaryIDCmdVoidWriteU8                   = binary.ID{0x95, 0xb5, 0x2c, 0x8d, 0x91, 0xe2, 0x72, 0xcf, 0x9c, 0x02, 0xf9, 0x02, 0x2a, 0x4e, 0x75, 0x1a, 0x41, 0xdb, 0x18, 0x49}
+	binaryIDF32ˢ                             = binary.ID{0xf8, 0xe6, 0xb5, 0x95, 0xd1, 0x7d, 0xeb, 0xf0, 0x4a, 0x4f, 0x87, 0x52, 0x9d, 0xa2, 0x2c, 0x8b, 0x7b, 0x38, 0x0a, 0x38}
+	binaryIDF64ˢ                             = binary.ID{0xa2, 0xde, 0x6b, 0x7d, 0x7c, 0x50, 0xf2, 0x96, 0x3c, 0xba, 0x2f, 0x97, 0xde, 0x90, 0x0f, 0xdb, 0xf4, 0x4a, 0xa0, 0x1d}
+	binaryIDU8ˢ                              = binary.ID{0xa6, 0x1d, 0x0e, 0xdc, 0x15, 0xf0, 0x7d, 0x6a, 0xc9, 0xc1, 0xb1, 0xbd, 0xbc, 0xa9, 0x47, 0x38, 0xb3, 0x59, 0xc5, 0xc7}
+	binaryIDGlobals                          = binary.ID{0x9a, 0x1e, 0x0e, 0x21, 0xec, 0xe3, 0xd8, 0x04, 0x11, 0x06, 0x33, 0x62, 0xe7, 0x81, 0x4b, 0xe0, 0x42, 0xd4, 0x66, 0x86}
+	binaryIDImported                         = binary.ID{0xdf, 0xef, 0xfd, 0x6d, 0x61, 0x4d, 0x78, 0xcf, 0x04, 0x14, 0xfb, 0xd3, 0x19, 0x00, 0x92, 0xa8, 0x23, 0xd1, 0x4a, 0xf4}
+	binaryIDIncluded                         = binary.ID{0xc1, 0xa7, 0xc7, 0xd9, 0xf3, 0x7c, 0x57, 0xbc, 0x60, 0xb0, 0x48, 0x00, 0x29, 0xfa, 0x2f, 0x9c, 0xda, 0xf9, 0x49, 0x02}
+	binaryIDIntˢ                             = binary.ID{0x9e, 0x35, 0xe5, 0x46, 0x67, 0x60, 0x3a, 0x5b, 0xc0, 0x8e, 0x65, 0x93, 0xb6, 0x47, 0xb2, 0x03, 0x1e, 0xce, 0x3b, 0x43}
+	binaryIDRemappedˢ                        = binary.ID{0xce, 0x33, 0xb7, 0x76, 0x01, 0x0b, 0xa8, 0x96, 0xe3, 0xd3, 0x62, 0x84, 0xd3, 0x69, 0x9a, 0xec, 0x7a, 0x18, 0x7c, 0xec}
+	binaryIDS16ˢ                             = binary.ID{0x5a, 0xdc, 0xb7, 0xb4, 0xa2, 0x4a, 0xd2, 0x09, 0xe7, 0x71, 0x23, 0x52, 0xce, 0xfe, 0x2f, 0x89, 0x97, 0x66, 0xf0, 0xcf}
+	binaryIDS32ˢ                             = binary.ID{0x8e, 0xf3, 0xae, 0xe9, 0xcb, 0x95, 0x8e, 0xd1, 0xfe, 0x58, 0xe9, 0xb7, 0x7d, 0x28, 0x6d, 0x4f, 0x8f, 0xd1, 0x98, 0xfb}
+	binaryIDS64ˢ                             = binary.ID{0x68, 0x67, 0x96, 0x59, 0x3d, 0x30, 0x9a, 0x97, 0xd5, 0x5f, 0x25, 0xbf, 0x7c, 0x72, 0x3d, 0xd4, 0xba, 0x77, 0x9b, 0x90}
+	binaryIDS8ˢ                              = binary.ID{0x6f, 0xc0, 0x49, 0xd3, 0x7d, 0x5d, 0xec, 0x75, 0xd5, 0xb2, 0xb9, 0x5f, 0xf2, 0xf1, 0x5a, 0xfe, 0x75, 0xa3, 0x69, 0x8b}
+	binaryIDTester                           = binary.ID{0xbd, 0x19, 0x4d, 0xd3, 0x5a, 0x62, 0xbb, 0x36, 0x7d, 0x71, 0xc9, 0xf2, 0xfd, 0xc8, 0xb0, 0xc1, 0xc6, 0x2e, 0xe1, 0xd6}
+	binaryIDU16ˢ                             = binary.ID{0x8e, 0x0c, 0x8f, 0x4e, 0x66, 0xc0, 0x00, 0x11, 0x4d, 0x2b, 0x25, 0xc7, 0xa9, 0x68, 0x15, 0x79, 0xd9, 0x79, 0x52, 0x7b}
+	binaryIDU32ˢ                             = binary.ID{0x9d, 0x85, 0xba, 0x7d, 0xb2, 0xb7, 0x1d, 0x1b, 0x59, 0x27, 0x0b, 0x61, 0xc3, 0x73, 0x26, 0x66, 0xe2, 0x8d, 0x3d, 0xca}
+	binaryIDU64ˢ                             = binary.ID{0xc8, 0x21, 0x63, 0x96, 0xba, 0xef, 0x4e, 0xe6, 0xaf, 0xbe, 0xd8, 0xb8, 0x6d, 0xd0, 0x8d, 0x10, 0x76, 0x14, 0x21, 0xdf}
+	binaryIDU8ᵖˢ                             = binary.ID{0xed, 0x27, 0xd7, 0x78, 0xe1, 0xa8, 0x19, 0x3e, 0x1f, 0x95, 0xf2, 0x9a, 0xfa, 0xa3, 0x83, 0xcc, 0xe2, 0xe2, 0x83, 0xa7}
+	binaryIDVoidˢ                            = binary.ID{0xe3, 0xfe, 0x0f, 0x4c, 0x55, 0x49, 0x0d, 0x75, 0xe8, 0x00, 0x97, 0x83, 0x04, 0x90, 0x1a, 0xf6, 0x67, 0x69, 0xb3, 0x81}
 )
 
-type binaryClassCmdArrayOfFloat struct{}
+type binaryClassBoolˢ struct{}
 
-func (*CmdArrayOfFloat) Class() binary.Class {
-	return (*binaryClassCmdArrayOfFloat)(nil)
+func (*Boolˢ) Class() binary.Class {
+	return (*binaryClassBoolˢ)(nil)
 }
-func doEncodeCmdArrayOfFloat(e binary.Encoder, o *CmdArrayOfFloat) error {
-	if err := e.Uint32(uint32(len(o.Result))); err != nil {
+func doEncodeBoolˢ(e binary.Encoder, o *Boolˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
 		return err
 	}
-	for i := range o.Result {
-		if err := e.Float32(o.Result[i]); err != nil {
-			return err
-		}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
 	}
 	return nil
 }
-func doDecodeCmdArrayOfFloat(d binary.Decoder, o *CmdArrayOfFloat) error {
-	if count, err := d.Uint32(); err != nil {
+func doDecodeBoolˢ(d binary.Decoder, o *Boolˢ) error {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.Result = make(F32Array, count)
-		for i := range o.Result {
-			if obj, err := d.Float32(); err != nil {
-				return err
-			} else {
-				o.Result[i] = float32(obj)
-			}
-		}
+		o.Root = memory.Pointer(obj)
 	}
-	return nil
-}
-func doSkipCmdArrayOfFloat(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Float32(); err != nil {
-				return err
-			}
-		}
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
-func (*binaryClassCmdArrayOfFloat) ID() binary.ID      { return binaryIDCmdArrayOfFloat }
-func (*binaryClassCmdArrayOfFloat) New() binary.Object { return &CmdArrayOfFloat{} }
-func (*binaryClassCmdArrayOfFloat) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdArrayOfFloat(e, obj.(*CmdArrayOfFloat))
+func doSkipBoolˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
 }
-func (*binaryClassCmdArrayOfFloat) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdArrayOfFloat{}
-	return obj, doDecodeCmdArrayOfFloat(d, obj)
+func (*binaryClassBoolˢ) ID() binary.ID      { return binaryIDBoolˢ }
+func (*binaryClassBoolˢ) New() binary.Object { return &Boolˢ{} }
+func (*binaryClassBoolˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBoolˢ(e, obj.(*Boolˢ))
 }
-func (*binaryClassCmdArrayOfFloat) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdArrayOfFloat(d, obj.(*CmdArrayOfFloat))
+func (*binaryClassBoolˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Boolˢ{}
+	return obj, doDecodeBoolˢ(d, obj)
 }
-func (*binaryClassCmdArrayOfFloat) Skip(d binary.Decoder) error { return doSkipCmdArrayOfFloat(d) }
-func (*binaryClassCmdArrayOfFloat) Schema() *schema.Class       { return schemaCmdArrayOfFloat }
+func (*binaryClassBoolˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBoolˢ(d, obj.(*Boolˢ))
+}
+func (*binaryClassBoolˢ) Skip(d binary.Decoder) error { return doSkipBoolˢ(d) }
+func (*binaryClassBoolˢ) Schema() *schema.Class       { return schemaBoolˢ }
 
-var schemaCmdArrayOfFloat = &schema.Class{
-	TypeID: binaryIDCmdArrayOfFloat,
-	Name:   "CmdArrayOfFloat",
+var schemaBoolˢ = &schema.Class{
+	TypeID: binaryIDBoolˢ,
+	Name:   "Boolˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Result", Type: &schema.Slice{Alias: "F32Array", ValueType: &schema.Primitive{Name: "float32", Method: schema.Float32}}},
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassBoolᵖ struct{}
+
+func (*Boolᵖ) Class() binary.Class {
+	return (*binaryClassBoolᵖ)(nil)
+}
+func doEncodeBoolᵖ(e binary.Encoder, o *Boolᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeBoolᵖ(d binary.Decoder, o *Boolᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipBoolᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassBoolᵖ) ID() binary.ID      { return binaryIDBoolᵖ }
+func (*binaryClassBoolᵖ) New() binary.Object { return &Boolᵖ{} }
+func (*binaryClassBoolᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeBoolᵖ(e, obj.(*Boolᵖ))
+}
+func (*binaryClassBoolᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Boolᵖ{}
+	return obj, doDecodeBoolᵖ(d, obj)
+}
+func (*binaryClassBoolᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeBoolᵖ(d, obj.(*Boolᵖ))
+}
+func (*binaryClassBoolᵖ) Skip(d binary.Decoder) error { return doSkipBoolᵖ(d) }
+func (*binaryClassBoolᵖ) Schema() *schema.Class       { return schemaBoolᵖ }
+
+var schemaBoolᵖ = &schema.Class{
+	TypeID: binaryIDBoolᵖ,
+	Name:   "Boolᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCharˢ struct{}
+
+func (*Charˢ) Class() binary.Class {
+	return (*binaryClassCharˢ)(nil)
+}
+func doEncodeCharˢ(e binary.Encoder, o *Charˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCharˢ(d binary.Decoder, o *Charˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCharˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCharˢ) ID() binary.ID      { return binaryIDCharˢ }
+func (*binaryClassCharˢ) New() binary.Object { return &Charˢ{} }
+func (*binaryClassCharˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCharˢ(e, obj.(*Charˢ))
+}
+func (*binaryClassCharˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Charˢ{}
+	return obj, doDecodeCharˢ(d, obj)
+}
+func (*binaryClassCharˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCharˢ(d, obj.(*Charˢ))
+}
+func (*binaryClassCharˢ) Skip(d binary.Decoder) error { return doSkipCharˢ(d) }
+func (*binaryClassCharˢ) Schema() *schema.Class       { return schemaCharˢ }
+
+var schemaCharˢ = &schema.Class{
+	TypeID: binaryIDCharˢ,
+	Name:   "Charˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCharᵖ struct{}
+
+func (*Charᵖ) Class() binary.Class {
+	return (*binaryClassCharᵖ)(nil)
+}
+func doEncodeCharᵖ(e binary.Encoder, o *Charᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCharᵖ(d binary.Decoder, o *Charᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCharᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCharᵖ) ID() binary.ID      { return binaryIDCharᵖ }
+func (*binaryClassCharᵖ) New() binary.Object { return &Charᵖ{} }
+func (*binaryClassCharᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCharᵖ(e, obj.(*Charᵖ))
+}
+func (*binaryClassCharᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Charᵖ{}
+	return obj, doDecodeCharᵖ(d, obj)
+}
+func (*binaryClassCharᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCharᵖ(d, obj.(*Charᵖ))
+}
+func (*binaryClassCharᵖ) Skip(d binary.Decoder) error { return doSkipCharᵖ(d) }
+func (*binaryClassCharᵖ) Schema() *schema.Class       { return schemaCharᵖ }
+
+var schemaCharᵖ = &schema.Class{
+	TypeID: binaryIDCharᵖ,
+	Name:   "Charᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -193,12 +511,18 @@ func (*CmdBool) Class() binary.Class {
 	return (*binaryClassCmdBool)(nil)
 }
 func doEncodeCmdBool(e binary.Encoder, o *CmdBool) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Bool(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdBool(d binary.Decoder, o *CmdBool) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -207,6 +531,9 @@ func doDecodeCmdBool(d binary.Decoder, o *CmdBool) error {
 	return nil
 }
 func doSkipCmdBool(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -231,7 +558,274 @@ var schemaCmdBool = &schema.Class{
 	TypeID: binaryIDCmdBool,
 	Name:   "CmdBool",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
+
+type binaryClassCmdCharsliceToString struct{}
+
+func (*CmdCharsliceToString) Class() binary.Class {
+	return (*binaryClassCmdCharsliceToString)(nil)
+}
+func doEncodeCmdCharsliceToString(e binary.Encoder, o *CmdCharsliceToString) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.S); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Len); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdCharsliceToString(d binary.Decoder, o *CmdCharsliceToString) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.S); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Len = uint32(obj)
+	}
+	return nil
+}
+func doSkipCmdCharsliceToString(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Charᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdCharsliceToString) ID() binary.ID      { return binaryIDCmdCharsliceToString }
+func (*binaryClassCmdCharsliceToString) New() binary.Object { return &CmdCharsliceToString{} }
+func (*binaryClassCmdCharsliceToString) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdCharsliceToString(e, obj.(*CmdCharsliceToString))
+}
+func (*binaryClassCmdCharsliceToString) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdCharsliceToString{}
+	return obj, doDecodeCmdCharsliceToString(d, obj)
+}
+func (*binaryClassCmdCharsliceToString) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdCharsliceToString(d, obj.(*CmdCharsliceToString))
+}
+func (*binaryClassCmdCharsliceToString) Skip(d binary.Decoder) error {
+	return doSkipCmdCharsliceToString(d)
+}
+func (*binaryClassCmdCharsliceToString) Schema() *schema.Class { return schemaCmdCharsliceToString }
+
+var schemaCmdCharsliceToString = &schema.Class{
+	TypeID: binaryIDCmdCharsliceToString,
+	Name:   "CmdCharsliceToString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
+		schema.Field{Declared: "Len", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassU8ᵖ struct{}
+
+func (*U8ᵖ) Class() binary.Class {
+	return (*binaryClassU8ᵖ)(nil)
+}
+func doEncodeU8ᵖ(e binary.Encoder, o *U8ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU8ᵖ(d binary.Decoder, o *U8ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU8ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU8ᵖ) ID() binary.ID      { return binaryIDU8ᵖ }
+func (*binaryClassU8ᵖ) New() binary.Object { return &U8ᵖ{} }
+func (*binaryClassU8ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU8ᵖ(e, obj.(*U8ᵖ))
+}
+func (*binaryClassU8ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U8ᵖ{}
+	return obj, doDecodeU8ᵖ(d, obj)
+}
+func (*binaryClassU8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU8ᵖ(d, obj.(*U8ᵖ))
+}
+func (*binaryClassU8ᵖ) Skip(d binary.Decoder) error { return doSkipU8ᵖ(d) }
+func (*binaryClassU8ᵖ) Schema() *schema.Class       { return schemaU8ᵖ }
+
+var schemaU8ᵖ = &schema.Class{
+	TypeID: binaryIDU8ᵖ,
+	Name:   "U8ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdClone struct{}
+
+func (*CmdClone) Class() binary.Class {
+	return (*binaryClassCmdClone)(nil)
+}
+func doEncodeCmdClone(e binary.Encoder, o *CmdClone) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Src); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Cnt); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdClone(d binary.Decoder, o *CmdClone) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Src); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Cnt = uint32(obj)
+	}
+	return nil
+}
+func doSkipCmdClone(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdClone) ID() binary.ID      { return binaryIDCmdClone }
+func (*binaryClassCmdClone) New() binary.Object { return &CmdClone{} }
+func (*binaryClassCmdClone) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdClone(e, obj.(*CmdClone))
+}
+func (*binaryClassCmdClone) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdClone{}
+	return obj, doDecodeCmdClone(d, obj)
+}
+func (*binaryClassCmdClone) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdClone(d, obj.(*CmdClone))
+}
+func (*binaryClassCmdClone) Skip(d binary.Decoder) error { return doSkipCmdClone(d) }
+func (*binaryClassCmdClone) Schema() *schema.Class       { return schemaCmdClone }
+
+var schemaCmdClone = &schema.Class{
+	TypeID: binaryIDCmdClone,
+	Name:   "CmdClone",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
+		schema.Field{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdCopy struct{}
+
+func (*CmdCopy) Class() binary.Class {
+	return (*binaryClassCmdCopy)(nil)
+}
+func doEncodeCmdCopy(e binary.Encoder, o *CmdCopy) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Src); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Cnt); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdCopy(d binary.Decoder, o *CmdCopy) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.Src); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Cnt = uint32(obj)
+	}
+	return nil
+}
+func doSkipCmdCopy(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdCopy) ID() binary.ID      { return binaryIDCmdCopy }
+func (*binaryClassCmdCopy) New() binary.Object { return &CmdCopy{} }
+func (*binaryClassCmdCopy) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdCopy(e, obj.(*CmdCopy))
+}
+func (*binaryClassCmdCopy) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdCopy{}
+	return obj, doDecodeCmdCopy(d, obj)
+}
+func (*binaryClassCmdCopy) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdCopy(d, obj.(*CmdCopy))
+}
+func (*binaryClassCmdCopy) Skip(d binary.Decoder) error { return doSkipCmdCopy(d) }
+func (*binaryClassCmdCopy) Schema() *schema.Class       { return schemaCmdCopy }
+
+var schemaCmdCopy = &schema.Class{
+	TypeID: binaryIDCmdCopy,
+	Name:   "CmdCopy",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Src", Type: &schema.Struct{Name: "U8ᵖ"}},
+		schema.Field{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -241,12 +835,18 @@ func (*CmdF32) Class() binary.Class {
 	return (*binaryClassCmdF32)(nil)
 }
 func doEncodeCmdF32(e binary.Encoder, o *CmdF32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Float32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdF32(d binary.Decoder, o *CmdF32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -255,6 +855,9 @@ func doDecodeCmdF32(d binary.Decoder, o *CmdF32) error {
 	return nil
 }
 func doSkipCmdF32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -279,6 +882,7 @@ var schemaCmdF32 = &schema.Class{
 	TypeID: binaryIDCmdF32,
 	Name:   "CmdF32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -289,12 +893,18 @@ func (*CmdF64) Class() binary.Class {
 	return (*binaryClassCmdF64)(nil)
 }
 func doEncodeCmdF64(e binary.Encoder, o *CmdF64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Float64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdF64(d binary.Decoder, o *CmdF64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -303,6 +913,9 @@ func doDecodeCmdF64(d binary.Decoder, o *CmdF64) error {
 	return nil
 }
 func doSkipCmdF64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
@@ -327,7 +940,126 @@ var schemaCmdF64 = &schema.Class{
 	TypeID: binaryIDCmdF64,
 	Name:   "CmdF64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
+}
+
+type binaryClassCmdMake struct{}
+
+func (*CmdMake) Class() binary.Class {
+	return (*binaryClassCmdMake)(nil)
+}
+func doEncodeCmdMake(e binary.Encoder, o *CmdMake) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.Cnt); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdMake(d binary.Decoder, o *CmdMake) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Cnt = uint32(obj)
+	}
+	return nil
+}
+func doSkipCmdMake(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdMake) ID() binary.ID      { return binaryIDCmdMake }
+func (*binaryClassCmdMake) New() binary.Object { return &CmdMake{} }
+func (*binaryClassCmdMake) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdMake(e, obj.(*CmdMake))
+}
+func (*binaryClassCmdMake) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdMake{}
+	return obj, doDecodeCmdMake(d, obj)
+}
+func (*binaryClassCmdMake) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdMake(d, obj.(*CmdMake))
+}
+func (*binaryClassCmdMake) Skip(d binary.Decoder) error { return doSkipCmdMake(d) }
+func (*binaryClassCmdMake) Schema() *schema.Class       { return schemaCmdMake }
+
+var schemaCmdMake = &schema.Class{
+	TypeID: binaryIDCmdMake,
+	Name:   "CmdMake",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Cnt", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVoidᵖ struct{}
+
+func (*Voidᵖ) Class() binary.Class {
+	return (*binaryClassVoidᵖ)(nil)
+}
+func doEncodeVoidᵖ(e binary.Encoder, o *Voidᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVoidᵖ(d binary.Decoder, o *Voidᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVoidᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVoidᵖ) ID() binary.ID      { return binaryIDVoidᵖ }
+func (*binaryClassVoidᵖ) New() binary.Object { return &Voidᵖ{} }
+func (*binaryClassVoidᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVoidᵖ(e, obj.(*Voidᵖ))
+}
+func (*binaryClassVoidᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Voidᵖ{}
+	return obj, doDecodeVoidᵖ(d, obj)
+}
+func (*binaryClassVoidᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVoidᵖ(d, obj.(*Voidᵖ))
+}
+func (*binaryClassVoidᵖ) Skip(d binary.Decoder) error { return doSkipVoidᵖ(d) }
+func (*binaryClassVoidᵖ) Schema() *schema.Class       { return schemaVoidᵖ }
+
+var schemaVoidᵖ = &schema.Class{
+	TypeID: binaryIDVoidᵖ,
+	Name:   "Voidᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -337,21 +1069,28 @@ func (*CmdPointer) Class() binary.Class {
 	return (*binaryClassCmdPointer)(nil)
 }
 func doEncodeCmdPointer(e binary.Encoder, o *CmdPointer) error {
-	if err := e.Uint64(uint64(o.Result)); err != nil {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdPointer(d binary.Decoder, o *CmdPointer) error {
-	if obj, err := d.Uint64(); err != nil {
+	if err := d.Value(&o.observations); err != nil {
 		return err
-	} else {
-		o.Result = memory.Pointer(obj)
+	}
+	if err := d.Value(&o.Result); err != nil {
+		return err
 	}
 	return nil
 }
 func doSkipCmdPointer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Voidᵖ)(nil)); err != nil {
 		return err
 	}
 	return nil
@@ -375,7 +1114,8 @@ var schemaCmdPointer = &schema.Class{
 	TypeID: binaryIDCmdPointer,
 	Name:   "CmdPointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
 	},
 }
 
@@ -385,12 +1125,18 @@ func (*CmdS16) Class() binary.Class {
 	return (*binaryClassCmdS16)(nil)
 }
 func doEncodeCmdS16(e binary.Encoder, o *CmdS16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS16(d binary.Decoder, o *CmdS16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -399,6 +1145,9 @@ func doDecodeCmdS16(d binary.Decoder, o *CmdS16) error {
 	return nil
 }
 func doSkipCmdS16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
@@ -423,6 +1172,7 @@ var schemaCmdS16 = &schema.Class{
 	TypeID: binaryIDCmdS16,
 	Name:   "CmdS16",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -433,12 +1183,18 @@ func (*CmdS32) Class() binary.Class {
 	return (*binaryClassCmdS32)(nil)
 }
 func doEncodeCmdS32(e binary.Encoder, o *CmdS32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS32(d binary.Decoder, o *CmdS32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -447,6 +1203,9 @@ func doDecodeCmdS32(d binary.Decoder, o *CmdS32) error {
 	return nil
 }
 func doSkipCmdS32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -471,6 +1230,7 @@ var schemaCmdS32 = &schema.Class{
 	TypeID: binaryIDCmdS32,
 	Name:   "CmdS32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -481,12 +1241,18 @@ func (*CmdS64) Class() binary.Class {
 	return (*binaryClassCmdS64)(nil)
 }
 func doEncodeCmdS64(e binary.Encoder, o *CmdS64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS64(d binary.Decoder, o *CmdS64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -495,6 +1261,9 @@ func doDecodeCmdS64(d binary.Decoder, o *CmdS64) error {
 	return nil
 }
 func doSkipCmdS64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
@@ -519,6 +1288,7 @@ var schemaCmdS64 = &schema.Class{
 	TypeID: binaryIDCmdS64,
 	Name:   "CmdS64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -529,12 +1299,18 @@ func (*CmdS8) Class() binary.Class {
 	return (*binaryClassCmdS8)(nil)
 }
 func doEncodeCmdS8(e binary.Encoder, o *CmdS8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdS8(d binary.Decoder, o *CmdS8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -543,6 +1319,9 @@ func doDecodeCmdS8(d binary.Decoder, o *CmdS8) error {
 	return nil
 }
 func doSkipCmdS8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
@@ -567,6 +1346,7 @@ var schemaCmdS8 = &schema.Class{
 	TypeID: binaryIDCmdS8,
 	Name:   "CmdS8",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -577,12 +1357,18 @@ func (*CmdString) Class() binary.Class {
 	return (*binaryClassCmdString)(nil)
 }
 func doEncodeCmdString(e binary.Encoder, o *CmdString) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.String(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdString(d binary.Decoder, o *CmdString) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -591,6 +1377,9 @@ func doDecodeCmdString(d binary.Decoder, o *CmdString) error {
 	return nil
 }
 func doSkipCmdString(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -615,6 +1404,7 @@ var schemaCmdString = &schema.Class{
 	TypeID: binaryIDCmdString,
 	Name:   "CmdString",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -625,12 +1415,18 @@ func (*CmdU16) Class() binary.Class {
 	return (*binaryClassCmdU16)(nil)
 }
 func doEncodeCmdU16(e binary.Encoder, o *CmdU16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint16(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU16(d binary.Decoder, o *CmdU16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -639,6 +1435,9 @@ func doDecodeCmdU16(d binary.Decoder, o *CmdU16) error {
 	return nil
 }
 func doSkipCmdU16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -663,6 +1462,7 @@ var schemaCmdU16 = &schema.Class{
 	TypeID: binaryIDCmdU16,
 	Name:   "CmdU16",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -673,12 +1473,18 @@ func (*CmdU32) Class() binary.Class {
 	return (*binaryClassCmdU32)(nil)
 }
 func doEncodeCmdU32(e binary.Encoder, o *CmdU32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint32(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU32(d binary.Decoder, o *CmdU32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -687,6 +1493,9 @@ func doDecodeCmdU32(d binary.Decoder, o *CmdU32) error {
 	return nil
 }
 func doSkipCmdU32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -711,6 +1520,7 @@ var schemaCmdU32 = &schema.Class{
 	TypeID: binaryIDCmdU32,
 	Name:   "CmdU32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -721,12 +1531,18 @@ func (*CmdU64) Class() binary.Class {
 	return (*binaryClassCmdU64)(nil)
 }
 func doEncodeCmdU64(e binary.Encoder, o *CmdU64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint64(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU64(d binary.Decoder, o *CmdU64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -735,6 +1551,9 @@ func doDecodeCmdU64(d binary.Decoder, o *CmdU64) error {
 	return nil
 }
 func doSkipCmdU64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -759,6 +1578,7 @@ var schemaCmdU64 = &schema.Class{
 	TypeID: binaryIDCmdU64,
 	Name:   "CmdU64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -769,12 +1589,18 @@ func (*CmdU8) Class() binary.Class {
 	return (*binaryClassCmdU8)(nil)
 }
 func doEncodeCmdU8(e binary.Encoder, o *CmdU8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint8(o.Result); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdU8(d binary.Decoder, o *CmdU8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -783,6 +1609,9 @@ func doDecodeCmdU8(d binary.Decoder, o *CmdU8) error {
 	return nil
 }
 func doSkipCmdU8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
@@ -807,7 +1636,240 @@ var schemaCmdU8 = &schema.Class{
 	TypeID: binaryIDCmdU8,
 	Name:   "CmdU8",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassCmdUnknownRet struct{}
+
+func (*CmdUnknownRet) Class() binary.Class {
+	return (*binaryClassCmdUnknownRet)(nil)
+}
+func doEncodeCmdUnknownRet(e binary.Encoder, o *CmdUnknownRet) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Int64(o.Result); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdUnknownRet(d binary.Decoder, o *CmdUnknownRet) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Int64(); err != nil {
+		return err
+	} else {
+		o.Result = int64(obj)
+	}
+	return nil
+}
+func doSkipCmdUnknownRet(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int64(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdUnknownRet) ID() binary.ID      { return binaryIDCmdUnknownRet }
+func (*binaryClassCmdUnknownRet) New() binary.Object { return &CmdUnknownRet{} }
+func (*binaryClassCmdUnknownRet) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdUnknownRet(e, obj.(*CmdUnknownRet))
+}
+func (*binaryClassCmdUnknownRet) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdUnknownRet{}
+	return obj, doDecodeCmdUnknownRet(d, obj)
+}
+func (*binaryClassCmdUnknownRet) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdUnknownRet(d, obj.(*CmdUnknownRet))
+}
+func (*binaryClassCmdUnknownRet) Skip(d binary.Decoder) error { return doSkipCmdUnknownRet(d) }
+func (*binaryClassCmdUnknownRet) Schema() *schema.Class       { return schemaCmdUnknownRet }
+
+var schemaCmdUnknownRet = &schema.Class{
+	TypeID: binaryIDCmdUnknownRet,
+	Name:   "CmdUnknownRet",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
+	},
+}
+
+type binaryClassIntᵖ struct{}
+
+func (*Intᵖ) Class() binary.Class {
+	return (*binaryClassIntᵖ)(nil)
+}
+func doEncodeIntᵖ(e binary.Encoder, o *Intᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIntᵖ(d binary.Decoder, o *Intᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipIntᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIntᵖ) ID() binary.ID      { return binaryIDIntᵖ }
+func (*binaryClassIntᵖ) New() binary.Object { return &Intᵖ{} }
+func (*binaryClassIntᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIntᵖ(e, obj.(*Intᵖ))
+}
+func (*binaryClassIntᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Intᵖ{}
+	return obj, doDecodeIntᵖ(d, obj)
+}
+func (*binaryClassIntᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIntᵖ(d, obj.(*Intᵖ))
+}
+func (*binaryClassIntᵖ) Skip(d binary.Decoder) error { return doSkipIntᵖ(d) }
+func (*binaryClassIntᵖ) Schema() *schema.Class       { return schemaIntᵖ }
+
+var schemaIntᵖ = &schema.Class{
+	TypeID: binaryIDIntᵖ,
+	Name:   "Intᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdUnknownWritePtr struct{}
+
+func (*CmdUnknownWritePtr) Class() binary.Class {
+	return (*binaryClassCmdUnknownWritePtr)(nil)
+}
+func doEncodeCmdUnknownWritePtr(e binary.Encoder, o *CmdUnknownWritePtr) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.P); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdUnknownWritePtr(d binary.Decoder, o *CmdUnknownWritePtr) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.P); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdUnknownWritePtr(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Intᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdUnknownWritePtr) ID() binary.ID      { return binaryIDCmdUnknownWritePtr }
+func (*binaryClassCmdUnknownWritePtr) New() binary.Object { return &CmdUnknownWritePtr{} }
+func (*binaryClassCmdUnknownWritePtr) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdUnknownWritePtr(e, obj.(*CmdUnknownWritePtr))
+}
+func (*binaryClassCmdUnknownWritePtr) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdUnknownWritePtr{}
+	return obj, doDecodeCmdUnknownWritePtr(d, obj)
+}
+func (*binaryClassCmdUnknownWritePtr) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdUnknownWritePtr(d, obj.(*CmdUnknownWritePtr))
+}
+func (*binaryClassCmdUnknownWritePtr) Skip(d binary.Decoder) error { return doSkipCmdUnknownWritePtr(d) }
+func (*binaryClassCmdUnknownWritePtr) Schema() *schema.Class       { return schemaCmdUnknownWritePtr }
+
+var schemaCmdUnknownWritePtr = &schema.Class{
+	TypeID: binaryIDCmdUnknownWritePtr,
+	Name:   "CmdUnknownWritePtr",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "P", Type: &schema.Struct{Name: "Intᵖ"}},
+	},
+}
+
+type binaryClassCmdUnknownWriteSlice struct{}
+
+func (*CmdUnknownWriteSlice) Class() binary.Class {
+	return (*binaryClassCmdUnknownWriteSlice)(nil)
+}
+func doEncodeCmdUnknownWriteSlice(e binary.Encoder, o *CmdUnknownWriteSlice) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdUnknownWriteSlice(d binary.Decoder, o *CmdUnknownWriteSlice) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdUnknownWriteSlice(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Intᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdUnknownWriteSlice) ID() binary.ID      { return binaryIDCmdUnknownWriteSlice }
+func (*binaryClassCmdUnknownWriteSlice) New() binary.Object { return &CmdUnknownWriteSlice{} }
+func (*binaryClassCmdUnknownWriteSlice) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdUnknownWriteSlice(e, obj.(*CmdUnknownWriteSlice))
+}
+func (*binaryClassCmdUnknownWriteSlice) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdUnknownWriteSlice{}
+	return obj, doDecodeCmdUnknownWriteSlice(d, obj)
+}
+func (*binaryClassCmdUnknownWriteSlice) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdUnknownWriteSlice(d, obj.(*CmdUnknownWriteSlice))
+}
+func (*binaryClassCmdUnknownWriteSlice) Skip(d binary.Decoder) error {
+	return doSkipCmdUnknownWriteSlice(d)
+}
+func (*binaryClassCmdUnknownWriteSlice) Schema() *schema.Class { return schemaCmdUnknownWriteSlice }
+
+var schemaCmdUnknownWriteSlice = &schema.Class{
+	TypeID: binaryIDCmdUnknownWriteSlice,
+	Name:   "CmdUnknownWriteSlice",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Intᵖ"}},
 	},
 }
 
@@ -817,12 +1879,21 @@ func (*CmdVoid) Class() binary.Class {
 	return (*binaryClassCmdVoid)(nil)
 }
 func doEncodeCmdVoid(e binary.Encoder, o *CmdVoid) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeCmdVoid(d binary.Decoder, o *CmdVoid) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	return nil
 }
 func doSkipCmdVoid(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	return nil
 }
 func (*binaryClassCmdVoid) ID() binary.ID      { return binaryIDCmdVoid }
@@ -843,132 +1914,144 @@ func (*binaryClassCmdVoid) Schema() *schema.Class       { return schemaCmdVoid }
 var schemaCmdVoid = &schema.Class{
 	TypeID: binaryIDCmdVoid,
 	Name:   "CmdVoid",
-	Fields: []schema.Field{},
-}
-
-type binaryClassCmdVoid3Arrays struct{}
-
-func (*CmdVoid3Arrays) Class() binary.Class {
-	return (*binaryClassCmdVoid3Arrays)(nil)
-}
-func doEncodeCmdVoid3Arrays(e binary.Encoder, o *CmdVoid3Arrays) error {
-	if err := e.Uint32(uint32(len(o.A))); err != nil {
-		return err
-	}
-	for i := range o.A {
-		if err := e.Int8(o.A[i]); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.B))); err != nil {
-		return err
-	}
-	for i := range o.B {
-		if err := e.String(o.B[i]); err != nil {
-			return err
-		}
-	}
-	if err := e.Uint32(uint32(len(o.C))); err != nil {
-		return err
-	}
-	for i := range o.C {
-		if err := e.Bool(o.C[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeCmdVoid3Arrays(d binary.Decoder, o *CmdVoid3Arrays) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.A = make(S8Array, count)
-		for i := range o.A {
-			if obj, err := d.Int8(); err != nil {
-				return err
-			} else {
-				o.A[i] = int8(obj)
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.B = make(StringArray, count)
-		for i := range o.B {
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				o.B[i] = string(obj)
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.C = make(BoolArray, count)
-		for i := range o.C {
-			if obj, err := d.Bool(); err != nil {
-				return err
-			} else {
-				o.C[i] = bool(obj)
-			}
-		}
-	}
-	return nil
-}
-func doSkipCmdVoid3Arrays(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Int8(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-		}
-	}
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Bool(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassCmdVoid3Arrays) ID() binary.ID      { return binaryIDCmdVoid3Arrays }
-func (*binaryClassCmdVoid3Arrays) New() binary.Object { return &CmdVoid3Arrays{} }
-func (*binaryClassCmdVoid3Arrays) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoid3Arrays(e, obj.(*CmdVoid3Arrays))
-}
-func (*binaryClassCmdVoid3Arrays) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoid3Arrays{}
-	return obj, doDecodeCmdVoid3Arrays(d, obj)
-}
-func (*binaryClassCmdVoid3Arrays) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoid3Arrays(d, obj.(*CmdVoid3Arrays))
-}
-func (*binaryClassCmdVoid3Arrays) Skip(d binary.Decoder) error { return doSkipCmdVoid3Arrays(d) }
-func (*binaryClassCmdVoid3Arrays) Schema() *schema.Class       { return schemaCmdVoid3Arrays }
-
-var schemaCmdVoid3Arrays = &schema.Class{
-	TypeID: binaryIDCmdVoid3Arrays,
-	Name:   "CmdVoid3Arrays",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "S8Array", ValueType: &schema.Primitive{Name: "int8", Method: schema.Int8}}},
-		schema.Field{Declared: "B", Type: &schema.Slice{Alias: "StringArray", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
-		schema.Field{Declared: "C", Type: &schema.Slice{Alias: "BoolArray", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+	},
+}
+
+type binaryClassU8ᵖᵖ struct{}
+
+func (*U8ᵖᵖ) Class() binary.Class {
+	return (*binaryClassU8ᵖᵖ)(nil)
+}
+func doEncodeU8ᵖᵖ(e binary.Encoder, o *U8ᵖᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU8ᵖᵖ(d binary.Decoder, o *U8ᵖᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU8ᵖᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU8ᵖᵖ) ID() binary.ID      { return binaryIDU8ᵖᵖ }
+func (*binaryClassU8ᵖᵖ) New() binary.Object { return &U8ᵖᵖ{} }
+func (*binaryClassU8ᵖᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU8ᵖᵖ(e, obj.(*U8ᵖᵖ))
+}
+func (*binaryClassU8ᵖᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U8ᵖᵖ{}
+	return obj, doDecodeU8ᵖᵖ(d, obj)
+}
+func (*binaryClassU8ᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU8ᵖᵖ(d, obj.(*U8ᵖᵖ))
+}
+func (*binaryClassU8ᵖᵖ) Skip(d binary.Decoder) error { return doSkipU8ᵖᵖ(d) }
+func (*binaryClassU8ᵖᵖ) Schema() *schema.Class       { return schemaU8ᵖᵖ }
+
+var schemaU8ᵖᵖ = &schema.Class{
+	TypeID: binaryIDU8ᵖᵖ,
+	Name:   "U8ᵖᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoid3InArrays struct{}
+
+func (*CmdVoid3InArrays) Class() binary.Class {
+	return (*binaryClassCmdVoid3InArrays)(nil)
+}
+func doEncodeCmdVoid3InArrays(e binary.Encoder, o *CmdVoid3InArrays) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	if err := e.Value(&o.B); err != nil {
+		return err
+	}
+	if err := e.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoid3InArrays(d binary.Decoder, o *CmdVoid3InArrays) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	if err := d.Value(&o.B); err != nil {
+		return err
+	}
+	if err := d.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoid3InArrays(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Intᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoid3InArrays) ID() binary.ID      { return binaryIDCmdVoid3InArrays }
+func (*binaryClassCmdVoid3InArrays) New() binary.Object { return &CmdVoid3InArrays{} }
+func (*binaryClassCmdVoid3InArrays) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoid3InArrays(e, obj.(*CmdVoid3InArrays))
+}
+func (*binaryClassCmdVoid3InArrays) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoid3InArrays{}
+	return obj, doDecodeCmdVoid3InArrays(d, obj)
+}
+func (*binaryClassCmdVoid3InArrays) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoid3InArrays(d, obj.(*CmdVoid3InArrays))
+}
+func (*binaryClassCmdVoid3InArrays) Skip(d binary.Decoder) error { return doSkipCmdVoid3InArrays(d) }
+func (*binaryClassCmdVoid3InArrays) Schema() *schema.Class       { return schemaCmdVoid3InArrays }
+
+var schemaCmdVoid3InArrays = &schema.Class{
+	TypeID: binaryIDCmdVoid3InArrays,
+	Name:   "CmdVoid3InArrays",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
+		schema.Field{Declared: "B", Type: &schema.Struct{Name: "U8ᵖᵖ"}},
+		schema.Field{Declared: "C", Type: &schema.Struct{Name: "Intᵖ"}},
 	},
 }
 
@@ -978,6 +2061,9 @@ func (*CmdVoid3Remapped) Class() binary.Class {
 	return (*binaryClassCmdVoid3Remapped)(nil)
 }
 func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint32(uint32(o.A)); err != nil {
 		return err
 	}
@@ -990,6 +2076,9 @@ func doEncodeCmdVoid3Remapped(e binary.Encoder, o *CmdVoid3Remapped) error {
 	return nil
 }
 func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -1008,6 +2097,9 @@ func doDecodeCmdVoid3Remapped(d binary.Decoder, o *CmdVoid3Remapped) error {
 	return nil
 }
 func doSkipCmdVoid3Remapped(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -1038,6 +2130,7 @@ var schemaCmdVoid3Remapped = &schema.Class{
 	TypeID: binaryIDCmdVoid3Remapped,
 	Name:   "CmdVoid3Remapped",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
@@ -1050,6 +2143,9 @@ func (*CmdVoid3Strings) Class() binary.Class {
 	return (*binaryClassCmdVoid3Strings)(nil)
 }
 func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
@@ -1062,6 +2158,9 @@ func doEncodeCmdVoid3Strings(e binary.Encoder, o *CmdVoid3Strings) error {
 	return nil
 }
 func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -1080,6 +2179,9 @@ func doDecodeCmdVoid3Strings(d binary.Decoder, o *CmdVoid3Strings) error {
 	return nil
 }
 func doSkipCmdVoid3Strings(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -1110,77 +2212,10 @@ var schemaCmdVoid3Strings = &schema.Class{
 	TypeID: binaryIDCmdVoid3Strings,
 	Name:   "CmdVoid3Strings",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassCmdVoidArrayOfStrings struct{}
-
-func (*CmdVoidArrayOfStrings) Class() binary.Class {
-	return (*binaryClassCmdVoidArrayOfStrings)(nil)
-}
-func doEncodeCmdVoidArrayOfStrings(e binary.Encoder, o *CmdVoidArrayOfStrings) error {
-	if err := e.Uint32(uint32(len(o.A))); err != nil {
-		return err
-	}
-	for i := range o.A {
-		if err := e.String(o.A[i]); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-func doDecodeCmdVoidArrayOfStrings(d binary.Decoder, o *CmdVoidArrayOfStrings) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.A = make(StringArray, count)
-		for i := range o.A {
-			if obj, err := d.String(); err != nil {
-				return err
-			} else {
-				o.A[i] = string(obj)
-			}
-		}
-	}
-	return nil
-}
-func doSkipCmdVoidArrayOfStrings(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if err := d.SkipString(); err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-func (*binaryClassCmdVoidArrayOfStrings) ID() binary.ID      { return binaryIDCmdVoidArrayOfStrings }
-func (*binaryClassCmdVoidArrayOfStrings) New() binary.Object { return &CmdVoidArrayOfStrings{} }
-func (*binaryClassCmdVoidArrayOfStrings) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidArrayOfStrings(e, obj.(*CmdVoidArrayOfStrings))
-}
-func (*binaryClassCmdVoidArrayOfStrings) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidArrayOfStrings{}
-	return obj, doDecodeCmdVoidArrayOfStrings(d, obj)
-}
-func (*binaryClassCmdVoidArrayOfStrings) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidArrayOfStrings(d, obj.(*CmdVoidArrayOfStrings))
-}
-func (*binaryClassCmdVoidArrayOfStrings) Skip(d binary.Decoder) error {
-	return doSkipCmdVoidArrayOfStrings(d)
-}
-func (*binaryClassCmdVoidArrayOfStrings) Schema() *schema.Class { return schemaCmdVoidArrayOfStrings }
-
-var schemaCmdVoidArrayOfStrings = &schema.Class{
-	TypeID: binaryIDCmdVoidArrayOfStrings,
-	Name:   "CmdVoidArrayOfStrings",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "StringArray", ValueType: &schema.Primitive{Name: "string", Method: schema.String}}},
 	},
 }
 
@@ -1190,12 +2225,18 @@ func (*CmdVoidBool) Class() binary.Class {
 	return (*binaryClassCmdVoidBool)(nil)
 }
 func doEncodeCmdVoidBool(e binary.Encoder, o *CmdVoidBool) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Bool(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Bool(); err != nil {
 		return err
 	} else {
@@ -1204,6 +2245,9 @@ func doDecodeCmdVoidBool(d binary.Decoder, o *CmdVoidBool) error {
 	return nil
 }
 func doSkipCmdVoidBool(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Bool(); err != nil {
 		return err
 	}
@@ -1228,6 +2272,7 @@ var schemaCmdVoidBool = &schema.Class{
 	TypeID: binaryIDCmdVoidBool,
 	Name:   "CmdVoidBool",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
@@ -1238,12 +2283,18 @@ func (*CmdVoidF32) Class() binary.Class {
 	return (*binaryClassCmdVoidF32)(nil)
 }
 func doEncodeCmdVoidF32(e binary.Encoder, o *CmdVoidF32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Float32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Float32(); err != nil {
 		return err
 	} else {
@@ -1252,6 +2303,9 @@ func doDecodeCmdVoidF32(d binary.Decoder, o *CmdVoidF32) error {
 	return nil
 }
 func doSkipCmdVoidF32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Float32(); err != nil {
 		return err
 	}
@@ -1276,6 +2330,7 @@ var schemaCmdVoidF32 = &schema.Class{
 	TypeID: binaryIDCmdVoidF32,
 	Name:   "CmdVoidF32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
@@ -1286,12 +2341,18 @@ func (*CmdVoidF64) Class() binary.Class {
 	return (*binaryClassCmdVoidF64)(nil)
 }
 func doEncodeCmdVoidF64(e binary.Encoder, o *CmdVoidF64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Float64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Float64(); err != nil {
 		return err
 	} else {
@@ -1300,6 +2361,9 @@ func doDecodeCmdVoidF64(d binary.Decoder, o *CmdVoidF64) error {
 	return nil
 }
 func doSkipCmdVoidF64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Float64(); err != nil {
 		return err
 	}
@@ -1324,50 +2388,40 @@ var schemaCmdVoidF64 = &schema.Class{
 	TypeID: binaryIDCmdVoidF64,
 	Name:   "CmdVoidF64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
 	},
 }
 
-type binaryClassCmdVoidOut3Remapped struct{}
+type binaryClassRemappedᵖ struct{}
 
-func (*CmdVoidOut3Remapped) Class() binary.Class {
-	return (*binaryClassCmdVoidOut3Remapped)(nil)
+func (*Remappedᵖ) Class() binary.Class {
+	return (*binaryClassRemappedᵖ)(nil)
 }
-func doEncodeCmdVoidOut3Remapped(e binary.Encoder, o *CmdVoidOut3Remapped) error {
-	if err := e.Uint32(uint32(o.A)); err != nil {
+func doEncodeRemappedᵖ(e binary.Encoder, o *Remappedᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
 		return err
 	}
-	if err := e.Uint32(uint32(o.B)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.C)); err != nil {
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOut3Remapped(d binary.Decoder, o *CmdVoidOut3Remapped) error {
-	if obj, err := d.Uint32(); err != nil {
+func doDecodeRemappedᵖ(d binary.Decoder, o *Remappedᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.A = remapped(obj)
+		o.Address = memory.Pointer(obj)
 	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.B = remapped(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.C = remapped(obj)
+		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
-func doSkipCmdVoidOut3Remapped(d binary.Decoder) error {
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
+func doSkipRemappedᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
 		return err
 	}
 	if _, err := d.Uint32(); err != nil {
@@ -1375,102 +2429,87 @@ func doSkipCmdVoidOut3Remapped(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Remapped) ID() binary.ID      { return binaryIDCmdVoidOut3Remapped }
-func (*binaryClassCmdVoidOut3Remapped) New() binary.Object { return &CmdVoidOut3Remapped{} }
-func (*binaryClassCmdVoidOut3Remapped) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOut3Remapped(e, obj.(*CmdVoidOut3Remapped))
+func (*binaryClassRemappedᵖ) ID() binary.ID      { return binaryIDRemappedᵖ }
+func (*binaryClassRemappedᵖ) New() binary.Object { return &Remappedᵖ{} }
+func (*binaryClassRemappedᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRemappedᵖ(e, obj.(*Remappedᵖ))
 }
-func (*binaryClassCmdVoidOut3Remapped) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOut3Remapped{}
-	return obj, doDecodeCmdVoidOut3Remapped(d, obj)
+func (*binaryClassRemappedᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Remappedᵖ{}
+	return obj, doDecodeRemappedᵖ(d, obj)
 }
-func (*binaryClassCmdVoidOut3Remapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOut3Remapped(d, obj.(*CmdVoidOut3Remapped))
+func (*binaryClassRemappedᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRemappedᵖ(d, obj.(*Remappedᵖ))
 }
-func (*binaryClassCmdVoidOut3Remapped) Skip(d binary.Decoder) error {
-	return doSkipCmdVoidOut3Remapped(d)
-}
-func (*binaryClassCmdVoidOut3Remapped) Schema() *schema.Class { return schemaCmdVoidOut3Remapped }
+func (*binaryClassRemappedᵖ) Skip(d binary.Decoder) error { return doSkipRemappedᵖ(d) }
+func (*binaryClassRemappedᵖ) Schema() *schema.Class       { return schemaRemappedᵖ }
 
-var schemaCmdVoidOut3Remapped = &schema.Class{
-	TypeID: binaryIDCmdVoidOut3Remapped,
-	Name:   "CmdVoidOut3Remapped",
+var schemaRemappedᵖ = &schema.Class{
+	TypeID: binaryIDRemappedᵖ,
+	Name:   "Remappedᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
-		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
-		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
-type binaryClassCmdVoidOut3Strings struct{}
+type binaryClassCmdVoidInArrayOfRemapped struct{}
 
-func (*CmdVoidOut3Strings) Class() binary.Class {
-	return (*binaryClassCmdVoidOut3Strings)(nil)
+func (*CmdVoidInArrayOfRemapped) Class() binary.Class {
+	return (*binaryClassCmdVoidInArrayOfRemapped)(nil)
 }
-func doEncodeCmdVoidOut3Strings(e binary.Encoder, o *CmdVoidOut3Strings) error {
-	if err := e.String(o.A); err != nil {
+func doEncodeCmdVoidInArrayOfRemapped(e binary.Encoder, o *CmdVoidInArrayOfRemapped) error {
+	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := e.String(o.B); err != nil {
-		return err
-	}
-	if err := e.String(o.C); err != nil {
+	if err := e.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOut3Strings(d binary.Decoder, o *CmdVoidOut3Strings) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.A = string(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.B = string(obj)
-	}
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.C = string(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOut3Strings(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
+func doDecodeCmdVoidInArrayOfRemapped(d binary.Decoder, o *CmdVoidInArrayOfRemapped) error {
+	if err := d.Value(&o.observations); err != nil {
 		return err
 	}
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	if err := d.SkipString(); err != nil {
+	if err := d.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOut3Strings) ID() binary.ID      { return binaryIDCmdVoidOut3Strings }
-func (*binaryClassCmdVoidOut3Strings) New() binary.Object { return &CmdVoidOut3Strings{} }
-func (*binaryClassCmdVoidOut3Strings) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOut3Strings(e, obj.(*CmdVoidOut3Strings))
+func doSkipCmdVoidInArrayOfRemapped(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Remappedᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
 }
-func (*binaryClassCmdVoidOut3Strings) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOut3Strings{}
-	return obj, doDecodeCmdVoidOut3Strings(d, obj)
+func (*binaryClassCmdVoidInArrayOfRemapped) ID() binary.ID      { return binaryIDCmdVoidInArrayOfRemapped }
+func (*binaryClassCmdVoidInArrayOfRemapped) New() binary.Object { return &CmdVoidInArrayOfRemapped{} }
+func (*binaryClassCmdVoidInArrayOfRemapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidInArrayOfRemapped(e, obj.(*CmdVoidInArrayOfRemapped))
 }
-func (*binaryClassCmdVoidOut3Strings) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOut3Strings(d, obj.(*CmdVoidOut3Strings))
+func (*binaryClassCmdVoidInArrayOfRemapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidInArrayOfRemapped{}
+	return obj, doDecodeCmdVoidInArrayOfRemapped(d, obj)
 }
-func (*binaryClassCmdVoidOut3Strings) Skip(d binary.Decoder) error { return doSkipCmdVoidOut3Strings(d) }
-func (*binaryClassCmdVoidOut3Strings) Schema() *schema.Class       { return schemaCmdVoidOut3Strings }
+func (*binaryClassCmdVoidInArrayOfRemapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidInArrayOfRemapped(d, obj.(*CmdVoidInArrayOfRemapped))
+}
+func (*binaryClassCmdVoidInArrayOfRemapped) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidInArrayOfRemapped(d)
+}
+func (*binaryClassCmdVoidInArrayOfRemapped) Schema() *schema.Class {
+	return schemaCmdVoidInArrayOfRemapped
+}
 
-var schemaCmdVoidOut3Strings = &schema.Class{
-	TypeID: binaryIDCmdVoidOut3Strings,
-	Name:   "CmdVoidOut3Strings",
+var schemaCmdVoidInArrayOfRemapped = &schema.Class{
+	TypeID: binaryIDCmdVoidInArrayOfRemapped,
+	Name:   "CmdVoidInArrayOfRemapped",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "C", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
 	},
 }
 
@@ -1480,40 +2519,29 @@ func (*CmdVoidOutArrayOfRemapped) Class() binary.Class {
 	return (*binaryClassCmdVoidOutArrayOfRemapped)(nil)
 }
 func doEncodeCmdVoidOutArrayOfRemapped(e binary.Encoder, o *CmdVoidOutArrayOfRemapped) error {
-	if err := e.Uint32(uint32(len(o.A))); err != nil {
+	if err := e.Value(&o.observations); err != nil {
 		return err
 	}
-	for i := range o.A {
-		if err := e.Uint32(uint32(o.A[i])); err != nil {
-			return err
-		}
+	if err := e.Value(&o.A); err != nil {
+		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidOutArrayOfRemapped(d binary.Decoder, o *CmdVoidOutArrayOfRemapped) error {
-	if count, err := d.Uint32(); err != nil {
+	if err := d.Value(&o.observations); err != nil {
 		return err
-	} else {
-		o.A = make(RemappedArray, count)
-		for i := range o.A {
-			if obj, err := d.Uint32(); err != nil {
-				return err
-			} else {
-				o.A[i] = remapped(obj)
-			}
-		}
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
 	}
 	return nil
 }
 func doSkipCmdVoidOutArrayOfRemapped(d binary.Decoder) error {
-	if count, err := d.Uint32(); err != nil {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
 		return err
-	} else {
-		for i := uint32(0); i < count; i++ {
-			if _, err := d.Uint32(); err != nil {
-				return err
-			}
-		}
+	}
+	if err := d.SkipValue((*Remappedᵖ)(nil)); err != nil {
+		return err
 	}
 	return nil
 }
@@ -1540,635 +2568,1304 @@ var schemaCmdVoidOutArrayOfRemapped = &schema.Class{
 	TypeID: binaryIDCmdVoidOutArrayOfRemapped,
 	Name:   "CmdVoidOutArrayOfRemapped",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Slice{Alias: "RemappedArray", ValueType: &schema.Primitive{Name: "remapped", Method: schema.Uint32}}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
 	},
 }
 
-type binaryClassCmdVoidOutBool struct{}
+type binaryClassCmdVoidOutArrayOfUnknownRemapped struct{}
 
-func (*CmdVoidOutBool) Class() binary.Class {
-	return (*binaryClassCmdVoidOutBool)(nil)
+func (*CmdVoidOutArrayOfUnknownRemapped) Class() binary.Class {
+	return (*binaryClassCmdVoidOutArrayOfUnknownRemapped)(nil)
 }
-func doEncodeCmdVoidOutBool(e binary.Encoder, o *CmdVoidOutBool) error {
-	if err := e.Bool(o.A); err != nil {
+func doEncodeCmdVoidOutArrayOfUnknownRemapped(e binary.Encoder, o *CmdVoidOutArrayOfUnknownRemapped) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOutBool(d binary.Decoder, o *CmdVoidOutBool) error {
-	if obj, err := d.Bool(); err != nil {
+func doDecodeCmdVoidOutArrayOfUnknownRemapped(d binary.Decoder, o *CmdVoidOutArrayOfUnknownRemapped) error {
+	if err := d.Value(&o.observations); err != nil {
 		return err
-	} else {
-		o.A = bool(obj)
 	}
-	return nil
-}
-func doSkipCmdVoidOutBool(d binary.Decoder) error {
-	if _, err := d.Bool(); err != nil {
+	if err := d.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutBool) ID() binary.ID      { return binaryIDCmdVoidOutBool }
-func (*binaryClassCmdVoidOutBool) New() binary.Object { return &CmdVoidOutBool{} }
-func (*binaryClassCmdVoidOutBool) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutBool(e, obj.(*CmdVoidOutBool))
+func doSkipCmdVoidOutArrayOfUnknownRemapped(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Remappedᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
 }
-func (*binaryClassCmdVoidOutBool) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutBool{}
-	return obj, doDecodeCmdVoidOutBool(d, obj)
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) ID() binary.ID {
+	return binaryIDCmdVoidOutArrayOfUnknownRemapped
 }
-func (*binaryClassCmdVoidOutBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutBool(d, obj.(*CmdVoidOutBool))
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) New() binary.Object {
+	return &CmdVoidOutArrayOfUnknownRemapped{}
 }
-func (*binaryClassCmdVoidOutBool) Skip(d binary.Decoder) error { return doSkipCmdVoidOutBool(d) }
-func (*binaryClassCmdVoidOutBool) Schema() *schema.Class       { return schemaCmdVoidOutBool }
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidOutArrayOfUnknownRemapped(e, obj.(*CmdVoidOutArrayOfUnknownRemapped))
+}
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidOutArrayOfUnknownRemapped{}
+	return obj, doDecodeCmdVoidOutArrayOfUnknownRemapped(d, obj)
+}
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidOutArrayOfUnknownRemapped(d, obj.(*CmdVoidOutArrayOfUnknownRemapped))
+}
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidOutArrayOfUnknownRemapped(d)
+}
+func (*binaryClassCmdVoidOutArrayOfUnknownRemapped) Schema() *schema.Class {
+	return schemaCmdVoidOutArrayOfUnknownRemapped
+}
 
-var schemaCmdVoidOutBool = &schema.Class{
-	TypeID: binaryIDCmdVoidOutBool,
-	Name:   "CmdVoidOutBool",
+var schemaCmdVoidOutArrayOfUnknownRemapped = &schema.Class{
+	TypeID: binaryIDCmdVoidOutArrayOfUnknownRemapped,
+	Name:   "CmdVoidOutArrayOfUnknownRemapped",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Remappedᵖ"}},
 	},
 }
 
-type binaryClassCmdVoidOutF32 struct{}
+type binaryClassCmdVoidReadBool struct{}
 
-func (*CmdVoidOutF32) Class() binary.Class {
-	return (*binaryClassCmdVoidOutF32)(nil)
+func (*CmdVoidReadBool) Class() binary.Class {
+	return (*binaryClassCmdVoidReadBool)(nil)
 }
-func doEncodeCmdVoidOutF32(e binary.Encoder, o *CmdVoidOutF32) error {
-	if err := e.Float32(o.A); err != nil {
+func doEncodeCmdVoidReadBool(e binary.Encoder, o *CmdVoidReadBool) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOutF32(d binary.Decoder, o *CmdVoidOutF32) error {
-	if obj, err := d.Float32(); err != nil {
+func doDecodeCmdVoidReadBool(d binary.Decoder, o *CmdVoidReadBool) error {
+	if err := d.Value(&o.observations); err != nil {
 		return err
-	} else {
-		o.A = float32(obj)
 	}
-	return nil
-}
-func doSkipCmdVoidOutF32(d binary.Decoder) error {
-	if _, err := d.Float32(); err != nil {
+	if err := d.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutF32) ID() binary.ID      { return binaryIDCmdVoidOutF32 }
-func (*binaryClassCmdVoidOutF32) New() binary.Object { return &CmdVoidOutF32{} }
-func (*binaryClassCmdVoidOutF32) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutF32(e, obj.(*CmdVoidOutF32))
+func doSkipCmdVoidReadBool(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Boolᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
 }
-func (*binaryClassCmdVoidOutF32) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutF32{}
-	return obj, doDecodeCmdVoidOutF32(d, obj)
+func (*binaryClassCmdVoidReadBool) ID() binary.ID      { return binaryIDCmdVoidReadBool }
+func (*binaryClassCmdVoidReadBool) New() binary.Object { return &CmdVoidReadBool{} }
+func (*binaryClassCmdVoidReadBool) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadBool(e, obj.(*CmdVoidReadBool))
 }
-func (*binaryClassCmdVoidOutF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutF32(d, obj.(*CmdVoidOutF32))
+func (*binaryClassCmdVoidReadBool) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadBool{}
+	return obj, doDecodeCmdVoidReadBool(d, obj)
 }
-func (*binaryClassCmdVoidOutF32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF32(d) }
-func (*binaryClassCmdVoidOutF32) Schema() *schema.Class       { return schemaCmdVoidOutF32 }
+func (*binaryClassCmdVoidReadBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadBool(d, obj.(*CmdVoidReadBool))
+}
+func (*binaryClassCmdVoidReadBool) Skip(d binary.Decoder) error { return doSkipCmdVoidReadBool(d) }
+func (*binaryClassCmdVoidReadBool) Schema() *schema.Class       { return schemaCmdVoidReadBool }
 
-var schemaCmdVoidOutF32 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutF32,
-	Name:   "CmdVoidOutF32",
+var schemaCmdVoidReadBool = &schema.Class{
+	TypeID: binaryIDCmdVoidReadBool,
+	Name:   "CmdVoidReadBool",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
 	},
 }
 
-type binaryClassCmdVoidOutF64 struct{}
+type binaryClassF32ᵖ struct{}
 
-func (*CmdVoidOutF64) Class() binary.Class {
-	return (*binaryClassCmdVoidOutF64)(nil)
+func (*F32ᵖ) Class() binary.Class {
+	return (*binaryClassF32ᵖ)(nil)
 }
-func doEncodeCmdVoidOutF64(e binary.Encoder, o *CmdVoidOutF64) error {
-	if err := e.Float64(o.A); err != nil {
+func doEncodeF32ᵖ(e binary.Encoder, o *F32ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOutF64(d binary.Decoder, o *CmdVoidOutF64) error {
-	if obj, err := d.Float64(); err != nil {
-		return err
-	} else {
-		o.A = float64(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutF64(d binary.Decoder) error {
-	if _, err := d.Float64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutF64) ID() binary.ID      { return binaryIDCmdVoidOutF64 }
-func (*binaryClassCmdVoidOutF64) New() binary.Object { return &CmdVoidOutF64{} }
-func (*binaryClassCmdVoidOutF64) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutF64(e, obj.(*CmdVoidOutF64))
-}
-func (*binaryClassCmdVoidOutF64) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutF64{}
-	return obj, doDecodeCmdVoidOutF64(d, obj)
-}
-func (*binaryClassCmdVoidOutF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutF64(d, obj.(*CmdVoidOutF64))
-}
-func (*binaryClassCmdVoidOutF64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutF64(d) }
-func (*binaryClassCmdVoidOutF64) Schema() *schema.Class       { return schemaCmdVoidOutF64 }
-
-var schemaCmdVoidOutF64 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutF64,
-	Name:   "CmdVoidOutF64",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
-	},
-}
-
-type binaryClassCmdVoidOutFixedSizeBuffer struct{}
-
-func (*CmdVoidOutFixedSizeBuffer) Class() binary.Class {
-	return (*binaryClassCmdVoidOutFixedSizeBuffer)(nil)
-}
-func doEncodeCmdVoidOutFixedSizeBuffer(e binary.Encoder, o *CmdVoidOutFixedSizeBuffer) error {
-	if err := e.Uint64(uint64(o.A)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutFixedSizeBuffer(d binary.Decoder, o *CmdVoidOutFixedSizeBuffer) error {
+func doDecodeF32ᵖ(d binary.Decoder, o *F32ᵖ) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.A = memory.Pointer(obj)
+		o.Address = memory.Pointer(obj)
 	}
-	return nil
-}
-func doSkipCmdVoidOutFixedSizeBuffer(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutFixedSizeBuffer) ID() binary.ID      { return binaryIDCmdVoidOutFixedSizeBuffer }
-func (*binaryClassCmdVoidOutFixedSizeBuffer) New() binary.Object { return &CmdVoidOutFixedSizeBuffer{} }
-func (*binaryClassCmdVoidOutFixedSizeBuffer) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutFixedSizeBuffer(e, obj.(*CmdVoidOutFixedSizeBuffer))
-}
-func (*binaryClassCmdVoidOutFixedSizeBuffer) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutFixedSizeBuffer{}
-	return obj, doDecodeCmdVoidOutFixedSizeBuffer(d, obj)
-}
-func (*binaryClassCmdVoidOutFixedSizeBuffer) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutFixedSizeBuffer(d, obj.(*CmdVoidOutFixedSizeBuffer))
-}
-func (*binaryClassCmdVoidOutFixedSizeBuffer) Skip(d binary.Decoder) error {
-	return doSkipCmdVoidOutFixedSizeBuffer(d)
-}
-func (*binaryClassCmdVoidOutFixedSizeBuffer) Schema() *schema.Class {
-	return schemaCmdVoidOutFixedSizeBuffer
-}
-
-var schemaCmdVoidOutFixedSizeBuffer = &schema.Class{
-	TypeID: binaryIDCmdVoidOutFixedSizeBuffer,
-	Name:   "CmdVoidOutFixedSizeBuffer",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-	},
-}
-
-type binaryClassCmdVoidOutS16 struct{}
-
-func (*CmdVoidOutS16) Class() binary.Class {
-	return (*binaryClassCmdVoidOutS16)(nil)
-}
-func doEncodeCmdVoidOutS16(e binary.Encoder, o *CmdVoidOutS16) error {
-	if err := e.Int16(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutS16(d binary.Decoder, o *CmdVoidOutS16) error {
-	if obj, err := d.Int16(); err != nil {
-		return err
-	} else {
-		o.A = int16(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutS16(d binary.Decoder) error {
-	if _, err := d.Int16(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutS16) ID() binary.ID      { return binaryIDCmdVoidOutS16 }
-func (*binaryClassCmdVoidOutS16) New() binary.Object { return &CmdVoidOutS16{} }
-func (*binaryClassCmdVoidOutS16) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutS16(e, obj.(*CmdVoidOutS16))
-}
-func (*binaryClassCmdVoidOutS16) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutS16{}
-	return obj, doDecodeCmdVoidOutS16(d, obj)
-}
-func (*binaryClassCmdVoidOutS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutS16(d, obj.(*CmdVoidOutS16))
-}
-func (*binaryClassCmdVoidOutS16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS16(d) }
-func (*binaryClassCmdVoidOutS16) Schema() *schema.Class       { return schemaCmdVoidOutS16 }
-
-var schemaCmdVoidOutS16 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutS16,
-	Name:   "CmdVoidOutS16",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
-	},
-}
-
-type binaryClassCmdVoidOutS32 struct{}
-
-func (*CmdVoidOutS32) Class() binary.Class {
-	return (*binaryClassCmdVoidOutS32)(nil)
-}
-func doEncodeCmdVoidOutS32(e binary.Encoder, o *CmdVoidOutS32) error {
-	if err := e.Int32(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutS32(d binary.Decoder, o *CmdVoidOutS32) error {
-	if obj, err := d.Int32(); err != nil {
-		return err
-	} else {
-		o.A = int32(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutS32(d binary.Decoder) error {
-	if _, err := d.Int32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutS32) ID() binary.ID      { return binaryIDCmdVoidOutS32 }
-func (*binaryClassCmdVoidOutS32) New() binary.Object { return &CmdVoidOutS32{} }
-func (*binaryClassCmdVoidOutS32) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutS32(e, obj.(*CmdVoidOutS32))
-}
-func (*binaryClassCmdVoidOutS32) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutS32{}
-	return obj, doDecodeCmdVoidOutS32(d, obj)
-}
-func (*binaryClassCmdVoidOutS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutS32(d, obj.(*CmdVoidOutS32))
-}
-func (*binaryClassCmdVoidOutS32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS32(d) }
-func (*binaryClassCmdVoidOutS32) Schema() *schema.Class       { return schemaCmdVoidOutS32 }
-
-var schemaCmdVoidOutS32 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutS32,
-	Name:   "CmdVoidOutS32",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-	},
-}
-
-type binaryClassCmdVoidOutS64 struct{}
-
-func (*CmdVoidOutS64) Class() binary.Class {
-	return (*binaryClassCmdVoidOutS64)(nil)
-}
-func doEncodeCmdVoidOutS64(e binary.Encoder, o *CmdVoidOutS64) error {
-	if err := e.Int64(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutS64(d binary.Decoder, o *CmdVoidOutS64) error {
-	if obj, err := d.Int64(); err != nil {
-		return err
-	} else {
-		o.A = int64(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutS64(d binary.Decoder) error {
-	if _, err := d.Int64(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutS64) ID() binary.ID      { return binaryIDCmdVoidOutS64 }
-func (*binaryClassCmdVoidOutS64) New() binary.Object { return &CmdVoidOutS64{} }
-func (*binaryClassCmdVoidOutS64) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutS64(e, obj.(*CmdVoidOutS64))
-}
-func (*binaryClassCmdVoidOutS64) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutS64{}
-	return obj, doDecodeCmdVoidOutS64(d, obj)
-}
-func (*binaryClassCmdVoidOutS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutS64(d, obj.(*CmdVoidOutS64))
-}
-func (*binaryClassCmdVoidOutS64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS64(d) }
-func (*binaryClassCmdVoidOutS64) Schema() *schema.Class       { return schemaCmdVoidOutS64 }
-
-var schemaCmdVoidOutS64 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutS64,
-	Name:   "CmdVoidOutS64",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
-	},
-}
-
-type binaryClassCmdVoidOutS8 struct{}
-
-func (*CmdVoidOutS8) Class() binary.Class {
-	return (*binaryClassCmdVoidOutS8)(nil)
-}
-func doEncodeCmdVoidOutS8(e binary.Encoder, o *CmdVoidOutS8) error {
-	if err := e.Int8(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutS8(d binary.Decoder, o *CmdVoidOutS8) error {
-	if obj, err := d.Int8(); err != nil {
-		return err
-	} else {
-		o.A = int8(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutS8(d binary.Decoder) error {
-	if _, err := d.Int8(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutS8) ID() binary.ID      { return binaryIDCmdVoidOutS8 }
-func (*binaryClassCmdVoidOutS8) New() binary.Object { return &CmdVoidOutS8{} }
-func (*binaryClassCmdVoidOutS8) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutS8(e, obj.(*CmdVoidOutS8))
-}
-func (*binaryClassCmdVoidOutS8) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutS8{}
-	return obj, doDecodeCmdVoidOutS8(d, obj)
-}
-func (*binaryClassCmdVoidOutS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutS8(d, obj.(*CmdVoidOutS8))
-}
-func (*binaryClassCmdVoidOutS8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutS8(d) }
-func (*binaryClassCmdVoidOutS8) Schema() *schema.Class       { return schemaCmdVoidOutS8 }
-
-var schemaCmdVoidOutS8 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutS8,
-	Name:   "CmdVoidOutS8",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
-	},
-}
-
-type binaryClassCmdVoidOutString struct{}
-
-func (*CmdVoidOutString) Class() binary.Class {
-	return (*binaryClassCmdVoidOutString)(nil)
-}
-func doEncodeCmdVoidOutString(e binary.Encoder, o *CmdVoidOutString) error {
-	if err := e.String(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutString(d binary.Decoder, o *CmdVoidOutString) error {
-	if obj, err := d.String(); err != nil {
-		return err
-	} else {
-		o.A = string(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutString(d binary.Decoder) error {
-	if err := d.SkipString(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutString) ID() binary.ID      { return binaryIDCmdVoidOutString }
-func (*binaryClassCmdVoidOutString) New() binary.Object { return &CmdVoidOutString{} }
-func (*binaryClassCmdVoidOutString) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutString(e, obj.(*CmdVoidOutString))
-}
-func (*binaryClassCmdVoidOutString) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutString{}
-	return obj, doDecodeCmdVoidOutString(d, obj)
-}
-func (*binaryClassCmdVoidOutString) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutString(d, obj.(*CmdVoidOutString))
-}
-func (*binaryClassCmdVoidOutString) Skip(d binary.Decoder) error { return doSkipCmdVoidOutString(d) }
-func (*binaryClassCmdVoidOutString) Schema() *schema.Class       { return schemaCmdVoidOutString }
-
-var schemaCmdVoidOutString = &schema.Class{
-	TypeID: binaryIDCmdVoidOutString,
-	Name:   "CmdVoidOutString",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-	},
-}
-
-type binaryClassCmdVoidOutU16 struct{}
-
-func (*CmdVoidOutU16) Class() binary.Class {
-	return (*binaryClassCmdVoidOutU16)(nil)
-}
-func doEncodeCmdVoidOutU16(e binary.Encoder, o *CmdVoidOutU16) error {
-	if err := e.Uint16(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutU16(d binary.Decoder, o *CmdVoidOutU16) error {
-	if obj, err := d.Uint16(); err != nil {
-		return err
-	} else {
-		o.A = uint16(obj)
-	}
-	return nil
-}
-func doSkipCmdVoidOutU16(d binary.Decoder) error {
-	if _, err := d.Uint16(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassCmdVoidOutU16) ID() binary.ID      { return binaryIDCmdVoidOutU16 }
-func (*binaryClassCmdVoidOutU16) New() binary.Object { return &CmdVoidOutU16{} }
-func (*binaryClassCmdVoidOutU16) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutU16(e, obj.(*CmdVoidOutU16))
-}
-func (*binaryClassCmdVoidOutU16) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutU16{}
-	return obj, doDecodeCmdVoidOutU16(d, obj)
-}
-func (*binaryClassCmdVoidOutU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutU16(d, obj.(*CmdVoidOutU16))
-}
-func (*binaryClassCmdVoidOutU16) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU16(d) }
-func (*binaryClassCmdVoidOutU16) Schema() *schema.Class       { return schemaCmdVoidOutU16 }
-
-var schemaCmdVoidOutU16 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutU16,
-	Name:   "CmdVoidOutU16",
-	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
-	},
-}
-
-type binaryClassCmdVoidOutU32 struct{}
-
-func (*CmdVoidOutU32) Class() binary.Class {
-	return (*binaryClassCmdVoidOutU32)(nil)
-}
-func doEncodeCmdVoidOutU32(e binary.Encoder, o *CmdVoidOutU32) error {
-	if err := e.Uint32(o.A); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeCmdVoidOutU32(d binary.Decoder, o *CmdVoidOutU32) error {
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
-		o.A = uint32(obj)
+		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
-func doSkipCmdVoidOutU32(d binary.Decoder) error {
+func doSkipF32ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU32) ID() binary.ID      { return binaryIDCmdVoidOutU32 }
-func (*binaryClassCmdVoidOutU32) New() binary.Object { return &CmdVoidOutU32{} }
-func (*binaryClassCmdVoidOutU32) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutU32(e, obj.(*CmdVoidOutU32))
+func (*binaryClassF32ᵖ) ID() binary.ID      { return binaryIDF32ᵖ }
+func (*binaryClassF32ᵖ) New() binary.Object { return &F32ᵖ{} }
+func (*binaryClassF32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF32ᵖ(e, obj.(*F32ᵖ))
 }
-func (*binaryClassCmdVoidOutU32) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutU32{}
-	return obj, doDecodeCmdVoidOutU32(d, obj)
+func (*binaryClassF32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F32ᵖ{}
+	return obj, doDecodeF32ᵖ(d, obj)
 }
-func (*binaryClassCmdVoidOutU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutU32(d, obj.(*CmdVoidOutU32))
+func (*binaryClassF32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF32ᵖ(d, obj.(*F32ᵖ))
 }
-func (*binaryClassCmdVoidOutU32) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU32(d) }
-func (*binaryClassCmdVoidOutU32) Schema() *schema.Class       { return schemaCmdVoidOutU32 }
+func (*binaryClassF32ᵖ) Skip(d binary.Decoder) error { return doSkipF32ᵖ(d) }
+func (*binaryClassF32ᵖ) Schema() *schema.Class       { return schemaF32ᵖ }
 
-var schemaCmdVoidOutU32 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutU32,
-	Name:   "CmdVoidOutU32",
+var schemaF32ᵖ = &schema.Class{
+	TypeID: binaryIDF32ᵖ,
+	Name:   "F32ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
-type binaryClassCmdVoidOutU64 struct{}
+type binaryClassCmdVoidReadF32 struct{}
 
-func (*CmdVoidOutU64) Class() binary.Class {
-	return (*binaryClassCmdVoidOutU64)(nil)
+func (*CmdVoidReadF32) Class() binary.Class {
+	return (*binaryClassCmdVoidReadF32)(nil)
 }
-func doEncodeCmdVoidOutU64(e binary.Encoder, o *CmdVoidOutU64) error {
-	if err := e.Uint64(o.A); err != nil {
+func doEncodeCmdVoidReadF32(e binary.Encoder, o *CmdVoidReadF32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOutU64(d binary.Decoder, o *CmdVoidOutU64) error {
+func doDecodeCmdVoidReadF32(d binary.Decoder, o *CmdVoidReadF32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadF32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadF32) ID() binary.ID      { return binaryIDCmdVoidReadF32 }
+func (*binaryClassCmdVoidReadF32) New() binary.Object { return &CmdVoidReadF32{} }
+func (*binaryClassCmdVoidReadF32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadF32(e, obj.(*CmdVoidReadF32))
+}
+func (*binaryClassCmdVoidReadF32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadF32{}
+	return obj, doDecodeCmdVoidReadF32(d, obj)
+}
+func (*binaryClassCmdVoidReadF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadF32(d, obj.(*CmdVoidReadF32))
+}
+func (*binaryClassCmdVoidReadF32) Skip(d binary.Decoder) error { return doSkipCmdVoidReadF32(d) }
+func (*binaryClassCmdVoidReadF32) Schema() *schema.Class       { return schemaCmdVoidReadF32 }
+
+var schemaCmdVoidReadF32 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadF32,
+	Name:   "CmdVoidReadF32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+	},
+}
+
+type binaryClassF64ᵖ struct{}
+
+func (*F64ᵖ) Class() binary.Class {
+	return (*binaryClassF64ᵖ)(nil)
+}
+func doEncodeF64ᵖ(e binary.Encoder, o *F64ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeF64ᵖ(d binary.Decoder, o *F64ᵖ) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.A = uint64(obj)
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
-func doSkipCmdVoidOutU64(d binary.Decoder) error {
+func doSkipF64ᵖ(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU64) ID() binary.ID      { return binaryIDCmdVoidOutU64 }
-func (*binaryClassCmdVoidOutU64) New() binary.Object { return &CmdVoidOutU64{} }
-func (*binaryClassCmdVoidOutU64) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutU64(e, obj.(*CmdVoidOutU64))
+func (*binaryClassF64ᵖ) ID() binary.ID      { return binaryIDF64ᵖ }
+func (*binaryClassF64ᵖ) New() binary.Object { return &F64ᵖ{} }
+func (*binaryClassF64ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF64ᵖ(e, obj.(*F64ᵖ))
 }
-func (*binaryClassCmdVoidOutU64) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutU64{}
-	return obj, doDecodeCmdVoidOutU64(d, obj)
+func (*binaryClassF64ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F64ᵖ{}
+	return obj, doDecodeF64ᵖ(d, obj)
 }
-func (*binaryClassCmdVoidOutU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutU64(d, obj.(*CmdVoidOutU64))
+func (*binaryClassF64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF64ᵖ(d, obj.(*F64ᵖ))
 }
-func (*binaryClassCmdVoidOutU64) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU64(d) }
-func (*binaryClassCmdVoidOutU64) Schema() *schema.Class       { return schemaCmdVoidOutU64 }
+func (*binaryClassF64ᵖ) Skip(d binary.Decoder) error { return doSkipF64ᵖ(d) }
+func (*binaryClassF64ᵖ) Schema() *schema.Class       { return schemaF64ᵖ }
 
-var schemaCmdVoidOutU64 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutU64,
-	Name:   "CmdVoidOutU64",
+var schemaF64ᵖ = &schema.Class{
+	TypeID: binaryIDF64ᵖ,
+	Name:   "F64ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
-type binaryClassCmdVoidOutU8 struct{}
+type binaryClassCmdVoidReadF64 struct{}
 
-func (*CmdVoidOutU8) Class() binary.Class {
-	return (*binaryClassCmdVoidOutU8)(nil)
+func (*CmdVoidReadF64) Class() binary.Class {
+	return (*binaryClassCmdVoidReadF64)(nil)
 }
-func doEncodeCmdVoidOutU8(e binary.Encoder, o *CmdVoidOutU8) error {
-	if err := e.Uint8(o.A); err != nil {
+func doEncodeCmdVoidReadF64(e binary.Encoder, o *CmdVoidReadF64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
 		return err
 	}
 	return nil
 }
-func doDecodeCmdVoidOutU8(d binary.Decoder, o *CmdVoidOutU8) error {
-	if obj, err := d.Uint8(); err != nil {
+func doDecodeCmdVoidReadF64(d binary.Decoder, o *CmdVoidReadF64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadF64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadF64) ID() binary.ID      { return binaryIDCmdVoidReadF64 }
+func (*binaryClassCmdVoidReadF64) New() binary.Object { return &CmdVoidReadF64{} }
+func (*binaryClassCmdVoidReadF64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadF64(e, obj.(*CmdVoidReadF64))
+}
+func (*binaryClassCmdVoidReadF64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadF64{}
+	return obj, doDecodeCmdVoidReadF64(d, obj)
+}
+func (*binaryClassCmdVoidReadF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadF64(d, obj.(*CmdVoidReadF64))
+}
+func (*binaryClassCmdVoidReadF64) Skip(d binary.Decoder) error { return doSkipCmdVoidReadF64(d) }
+func (*binaryClassCmdVoidReadF64) Schema() *schema.Class       { return schemaCmdVoidReadF64 }
+
+var schemaCmdVoidReadF64 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadF64,
+	Name:   "CmdVoidReadF64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
+	},
+}
+
+type binaryClassU16ᵖ struct{}
+
+func (*U16ᵖ) Class() binary.Class {
+	return (*binaryClassU16ᵖ)(nil)
+}
+func doEncodeU16ᵖ(e binary.Encoder, o *U16ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ᵖ(d binary.Decoder, o *U16ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
-		o.A = uint8(obj)
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
 	}
 	return nil
 }
-func doSkipCmdVoidOutU8(d binary.Decoder) error {
-	if _, err := d.Uint8(); err != nil {
+func doSkipU16ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
 		return err
 	}
 	return nil
 }
-func (*binaryClassCmdVoidOutU8) ID() binary.ID      { return binaryIDCmdVoidOutU8 }
-func (*binaryClassCmdVoidOutU8) New() binary.Object { return &CmdVoidOutU8{} }
-func (*binaryClassCmdVoidOutU8) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeCmdVoidOutU8(e, obj.(*CmdVoidOutU8))
+func (*binaryClassU16ᵖ) ID() binary.ID      { return binaryIDU16ᵖ }
+func (*binaryClassU16ᵖ) New() binary.Object { return &U16ᵖ{} }
+func (*binaryClassU16ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ᵖ(e, obj.(*U16ᵖ))
 }
-func (*binaryClassCmdVoidOutU8) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &CmdVoidOutU8{}
-	return obj, doDecodeCmdVoidOutU8(d, obj)
+func (*binaryClassU16ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ᵖ{}
+	return obj, doDecodeU16ᵖ(d, obj)
 }
-func (*binaryClassCmdVoidOutU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeCmdVoidOutU8(d, obj.(*CmdVoidOutU8))
+func (*binaryClassU16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ᵖ(d, obj.(*U16ᵖ))
 }
-func (*binaryClassCmdVoidOutU8) Skip(d binary.Decoder) error { return doSkipCmdVoidOutU8(d) }
-func (*binaryClassCmdVoidOutU8) Schema() *schema.Class       { return schemaCmdVoidOutU8 }
+func (*binaryClassU16ᵖ) Skip(d binary.Decoder) error { return doSkipU16ᵖ(d) }
+func (*binaryClassU16ᵖ) Schema() *schema.Class       { return schemaU16ᵖ }
 
-var schemaCmdVoidOutU8 = &schema.Class{
-	TypeID: binaryIDCmdVoidOutU8,
-	Name:   "CmdVoidOutU8",
+var schemaU16ᵖ = &schema.Class{
+	TypeID: binaryIDU16ᵖ,
+	Name:   "U16ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadPtrs struct{}
+
+func (*CmdVoidReadPtrs) Class() binary.Class {
+	return (*binaryClassCmdVoidReadPtrs)(nil)
+}
+func doEncodeCmdVoidReadPtrs(e binary.Encoder, o *CmdVoidReadPtrs) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	if err := e.Value(&o.B); err != nil {
+		return err
+	}
+	if err := e.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadPtrs(d binary.Decoder, o *CmdVoidReadPtrs) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	if err := d.Value(&o.B); err != nil {
+		return err
+	}
+	if err := d.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadPtrs(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Boolᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadPtrs) ID() binary.ID      { return binaryIDCmdVoidReadPtrs }
+func (*binaryClassCmdVoidReadPtrs) New() binary.Object { return &CmdVoidReadPtrs{} }
+func (*binaryClassCmdVoidReadPtrs) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadPtrs(e, obj.(*CmdVoidReadPtrs))
+}
+func (*binaryClassCmdVoidReadPtrs) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadPtrs{}
+	return obj, doDecodeCmdVoidReadPtrs(d, obj)
+}
+func (*binaryClassCmdVoidReadPtrs) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadPtrs(d, obj.(*CmdVoidReadPtrs))
+}
+func (*binaryClassCmdVoidReadPtrs) Skip(d binary.Decoder) error { return doSkipCmdVoidReadPtrs(d) }
+func (*binaryClassCmdVoidReadPtrs) Schema() *schema.Class       { return schemaCmdVoidReadPtrs }
+
+var schemaCmdVoidReadPtrs = &schema.Class{
+	TypeID: binaryIDCmdVoidReadPtrs,
+	Name:   "CmdVoidReadPtrs",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+		schema.Field{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ"}},
+		schema.Field{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ"}},
+	},
+}
+
+type binaryClassS16ᵖ struct{}
+
+func (*S16ᵖ) Class() binary.Class {
+	return (*binaryClassS16ᵖ)(nil)
+}
+func doEncodeS16ᵖ(e binary.Encoder, o *S16ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS16ᵖ(d binary.Decoder, o *S16ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS16ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS16ᵖ) ID() binary.ID      { return binaryIDS16ᵖ }
+func (*binaryClassS16ᵖ) New() binary.Object { return &S16ᵖ{} }
+func (*binaryClassS16ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS16ᵖ(e, obj.(*S16ᵖ))
+}
+func (*binaryClassS16ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S16ᵖ{}
+	return obj, doDecodeS16ᵖ(d, obj)
+}
+func (*binaryClassS16ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS16ᵖ(d, obj.(*S16ᵖ))
+}
+func (*binaryClassS16ᵖ) Skip(d binary.Decoder) error { return doSkipS16ᵖ(d) }
+func (*binaryClassS16ᵖ) Schema() *schema.Class       { return schemaS16ᵖ }
+
+var schemaS16ᵖ = &schema.Class{
+	TypeID: binaryIDS16ᵖ,
+	Name:   "S16ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadS16 struct{}
+
+func (*CmdVoidReadS16) Class() binary.Class {
+	return (*binaryClassCmdVoidReadS16)(nil)
+}
+func doEncodeCmdVoidReadS16(e binary.Encoder, o *CmdVoidReadS16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadS16(d binary.Decoder, o *CmdVoidReadS16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadS16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S16ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadS16) ID() binary.ID      { return binaryIDCmdVoidReadS16 }
+func (*binaryClassCmdVoidReadS16) New() binary.Object { return &CmdVoidReadS16{} }
+func (*binaryClassCmdVoidReadS16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadS16(e, obj.(*CmdVoidReadS16))
+}
+func (*binaryClassCmdVoidReadS16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadS16{}
+	return obj, doDecodeCmdVoidReadS16(d, obj)
+}
+func (*binaryClassCmdVoidReadS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadS16(d, obj.(*CmdVoidReadS16))
+}
+func (*binaryClassCmdVoidReadS16) Skip(d binary.Decoder) error { return doSkipCmdVoidReadS16(d) }
+func (*binaryClassCmdVoidReadS16) Schema() *schema.Class       { return schemaCmdVoidReadS16 }
+
+var schemaCmdVoidReadS16 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadS16,
+	Name:   "CmdVoidReadS16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
+	},
+}
+
+type binaryClassS32ᵖ struct{}
+
+func (*S32ᵖ) Class() binary.Class {
+	return (*binaryClassS32ᵖ)(nil)
+}
+func doEncodeS32ᵖ(e binary.Encoder, o *S32ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS32ᵖ(d binary.Decoder, o *S32ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS32ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS32ᵖ) ID() binary.ID      { return binaryIDS32ᵖ }
+func (*binaryClassS32ᵖ) New() binary.Object { return &S32ᵖ{} }
+func (*binaryClassS32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS32ᵖ(e, obj.(*S32ᵖ))
+}
+func (*binaryClassS32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S32ᵖ{}
+	return obj, doDecodeS32ᵖ(d, obj)
+}
+func (*binaryClassS32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS32ᵖ(d, obj.(*S32ᵖ))
+}
+func (*binaryClassS32ᵖ) Skip(d binary.Decoder) error { return doSkipS32ᵖ(d) }
+func (*binaryClassS32ᵖ) Schema() *schema.Class       { return schemaS32ᵖ }
+
+var schemaS32ᵖ = &schema.Class{
+	TypeID: binaryIDS32ᵖ,
+	Name:   "S32ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadS32 struct{}
+
+func (*CmdVoidReadS32) Class() binary.Class {
+	return (*binaryClassCmdVoidReadS32)(nil)
+}
+func doEncodeCmdVoidReadS32(e binary.Encoder, o *CmdVoidReadS32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadS32(d binary.Decoder, o *CmdVoidReadS32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadS32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadS32) ID() binary.ID      { return binaryIDCmdVoidReadS32 }
+func (*binaryClassCmdVoidReadS32) New() binary.Object { return &CmdVoidReadS32{} }
+func (*binaryClassCmdVoidReadS32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadS32(e, obj.(*CmdVoidReadS32))
+}
+func (*binaryClassCmdVoidReadS32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadS32{}
+	return obj, doDecodeCmdVoidReadS32(d, obj)
+}
+func (*binaryClassCmdVoidReadS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadS32(d, obj.(*CmdVoidReadS32))
+}
+func (*binaryClassCmdVoidReadS32) Skip(d binary.Decoder) error { return doSkipCmdVoidReadS32(d) }
+func (*binaryClassCmdVoidReadS32) Schema() *schema.Class       { return schemaCmdVoidReadS32 }
+
+var schemaCmdVoidReadS32 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadS32,
+	Name:   "CmdVoidReadS32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
+	},
+}
+
+type binaryClassS64ᵖ struct{}
+
+func (*S64ᵖ) Class() binary.Class {
+	return (*binaryClassS64ᵖ)(nil)
+}
+func doEncodeS64ᵖ(e binary.Encoder, o *S64ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS64ᵖ(d binary.Decoder, o *S64ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS64ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS64ᵖ) ID() binary.ID      { return binaryIDS64ᵖ }
+func (*binaryClassS64ᵖ) New() binary.Object { return &S64ᵖ{} }
+func (*binaryClassS64ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS64ᵖ(e, obj.(*S64ᵖ))
+}
+func (*binaryClassS64ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S64ᵖ{}
+	return obj, doDecodeS64ᵖ(d, obj)
+}
+func (*binaryClassS64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS64ᵖ(d, obj.(*S64ᵖ))
+}
+func (*binaryClassS64ᵖ) Skip(d binary.Decoder) error { return doSkipS64ᵖ(d) }
+func (*binaryClassS64ᵖ) Schema() *schema.Class       { return schemaS64ᵖ }
+
+var schemaS64ᵖ = &schema.Class{
+	TypeID: binaryIDS64ᵖ,
+	Name:   "S64ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadS64 struct{}
+
+func (*CmdVoidReadS64) Class() binary.Class {
+	return (*binaryClassCmdVoidReadS64)(nil)
+}
+func doEncodeCmdVoidReadS64(e binary.Encoder, o *CmdVoidReadS64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadS64(d binary.Decoder, o *CmdVoidReadS64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadS64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadS64) ID() binary.ID      { return binaryIDCmdVoidReadS64 }
+func (*binaryClassCmdVoidReadS64) New() binary.Object { return &CmdVoidReadS64{} }
+func (*binaryClassCmdVoidReadS64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadS64(e, obj.(*CmdVoidReadS64))
+}
+func (*binaryClassCmdVoidReadS64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadS64{}
+	return obj, doDecodeCmdVoidReadS64(d, obj)
+}
+func (*binaryClassCmdVoidReadS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadS64(d, obj.(*CmdVoidReadS64))
+}
+func (*binaryClassCmdVoidReadS64) Skip(d binary.Decoder) error { return doSkipCmdVoidReadS64(d) }
+func (*binaryClassCmdVoidReadS64) Schema() *schema.Class       { return schemaCmdVoidReadS64 }
+
+var schemaCmdVoidReadS64 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadS64,
+	Name:   "CmdVoidReadS64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
+	},
+}
+
+type binaryClassS8ᵖ struct{}
+
+func (*S8ᵖ) Class() binary.Class {
+	return (*binaryClassS8ᵖ)(nil)
+}
+func doEncodeS8ᵖ(e binary.Encoder, o *S8ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS8ᵖ(d binary.Decoder, o *S8ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS8ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS8ᵖ) ID() binary.ID      { return binaryIDS8ᵖ }
+func (*binaryClassS8ᵖ) New() binary.Object { return &S8ᵖ{} }
+func (*binaryClassS8ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS8ᵖ(e, obj.(*S8ᵖ))
+}
+func (*binaryClassS8ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S8ᵖ{}
+	return obj, doDecodeS8ᵖ(d, obj)
+}
+func (*binaryClassS8ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS8ᵖ(d, obj.(*S8ᵖ))
+}
+func (*binaryClassS8ᵖ) Skip(d binary.Decoder) error { return doSkipS8ᵖ(d) }
+func (*binaryClassS8ᵖ) Schema() *schema.Class       { return schemaS8ᵖ }
+
+var schemaS8ᵖ = &schema.Class{
+	TypeID: binaryIDS8ᵖ,
+	Name:   "S8ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadS8 struct{}
+
+func (*CmdVoidReadS8) Class() binary.Class {
+	return (*binaryClassCmdVoidReadS8)(nil)
+}
+func doEncodeCmdVoidReadS8(e binary.Encoder, o *CmdVoidReadS8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadS8(d binary.Decoder, o *CmdVoidReadS8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadS8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S8ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadS8) ID() binary.ID      { return binaryIDCmdVoidReadS8 }
+func (*binaryClassCmdVoidReadS8) New() binary.Object { return &CmdVoidReadS8{} }
+func (*binaryClassCmdVoidReadS8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadS8(e, obj.(*CmdVoidReadS8))
+}
+func (*binaryClassCmdVoidReadS8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadS8{}
+	return obj, doDecodeCmdVoidReadS8(d, obj)
+}
+func (*binaryClassCmdVoidReadS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadS8(d, obj.(*CmdVoidReadS8))
+}
+func (*binaryClassCmdVoidReadS8) Skip(d binary.Decoder) error { return doSkipCmdVoidReadS8(d) }
+func (*binaryClassCmdVoidReadS8) Schema() *schema.Class       { return schemaCmdVoidReadS8 }
+
+var schemaCmdVoidReadS8 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadS8,
+	Name:   "CmdVoidReadS8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidReadU16 struct{}
+
+func (*CmdVoidReadU16) Class() binary.Class {
+	return (*binaryClassCmdVoidReadU16)(nil)
+}
+func doEncodeCmdVoidReadU16(e binary.Encoder, o *CmdVoidReadU16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadU16(d binary.Decoder, o *CmdVoidReadU16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadU16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadU16) ID() binary.ID      { return binaryIDCmdVoidReadU16 }
+func (*binaryClassCmdVoidReadU16) New() binary.Object { return &CmdVoidReadU16{} }
+func (*binaryClassCmdVoidReadU16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadU16(e, obj.(*CmdVoidReadU16))
+}
+func (*binaryClassCmdVoidReadU16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadU16{}
+	return obj, doDecodeCmdVoidReadU16(d, obj)
+}
+func (*binaryClassCmdVoidReadU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadU16(d, obj.(*CmdVoidReadU16))
+}
+func (*binaryClassCmdVoidReadU16) Skip(d binary.Decoder) error { return doSkipCmdVoidReadU16(d) }
+func (*binaryClassCmdVoidReadU16) Schema() *schema.Class       { return schemaCmdVoidReadU16 }
+
+var schemaCmdVoidReadU16 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadU16,
+	Name:   "CmdVoidReadU16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
+	},
+}
+
+type binaryClassU32ᵖ struct{}
+
+func (*U32ᵖ) Class() binary.Class {
+	return (*binaryClassU32ᵖ)(nil)
+}
+func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU32ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
+func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
+func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ᵖ{}
+	return obj, doDecodeU32ᵖ(d, obj)
+}
+func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
+}
+func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
+func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
+
+var schemaU32ᵖ = &schema.Class{
+	TypeID: binaryIDU32ᵖ,
+	Name:   "U32ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadU32 struct{}
+
+func (*CmdVoidReadU32) Class() binary.Class {
+	return (*binaryClassCmdVoidReadU32)(nil)
+}
+func doEncodeCmdVoidReadU32(e binary.Encoder, o *CmdVoidReadU32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadU32(d binary.Decoder, o *CmdVoidReadU32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadU32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadU32) ID() binary.ID      { return binaryIDCmdVoidReadU32 }
+func (*binaryClassCmdVoidReadU32) New() binary.Object { return &CmdVoidReadU32{} }
+func (*binaryClassCmdVoidReadU32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadU32(e, obj.(*CmdVoidReadU32))
+}
+func (*binaryClassCmdVoidReadU32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadU32{}
+	return obj, doDecodeCmdVoidReadU32(d, obj)
+}
+func (*binaryClassCmdVoidReadU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadU32(d, obj.(*CmdVoidReadU32))
+}
+func (*binaryClassCmdVoidReadU32) Skip(d binary.Decoder) error { return doSkipCmdVoidReadU32(d) }
+func (*binaryClassCmdVoidReadU32) Schema() *schema.Class       { return schemaCmdVoidReadU32 }
+
+var schemaCmdVoidReadU32 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadU32,
+	Name:   "CmdVoidReadU32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
+	},
+}
+
+type binaryClassU64ᵖ struct{}
+
+func (*U64ᵖ) Class() binary.Class {
+	return (*binaryClassU64ᵖ)(nil)
+}
+func doEncodeU64ᵖ(e binary.Encoder, o *U64ᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU64ᵖ(d binary.Decoder, o *U64ᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU64ᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU64ᵖ) ID() binary.ID      { return binaryIDU64ᵖ }
+func (*binaryClassU64ᵖ) New() binary.Object { return &U64ᵖ{} }
+func (*binaryClassU64ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU64ᵖ(e, obj.(*U64ᵖ))
+}
+func (*binaryClassU64ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U64ᵖ{}
+	return obj, doDecodeU64ᵖ(d, obj)
+}
+func (*binaryClassU64ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU64ᵖ(d, obj.(*U64ᵖ))
+}
+func (*binaryClassU64ᵖ) Skip(d binary.Decoder) error { return doSkipU64ᵖ(d) }
+func (*binaryClassU64ᵖ) Schema() *schema.Class       { return schemaU64ᵖ }
+
+var schemaU64ᵖ = &schema.Class{
+	TypeID: binaryIDU64ᵖ,
+	Name:   "U64ᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCmdVoidReadU64 struct{}
+
+func (*CmdVoidReadU64) Class() binary.Class {
+	return (*binaryClassCmdVoidReadU64)(nil)
+}
+func doEncodeCmdVoidReadU64(e binary.Encoder, o *CmdVoidReadU64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadU64(d binary.Decoder, o *CmdVoidReadU64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadU64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadU64) ID() binary.ID      { return binaryIDCmdVoidReadU64 }
+func (*binaryClassCmdVoidReadU64) New() binary.Object { return &CmdVoidReadU64{} }
+func (*binaryClassCmdVoidReadU64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadU64(e, obj.(*CmdVoidReadU64))
+}
+func (*binaryClassCmdVoidReadU64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadU64{}
+	return obj, doDecodeCmdVoidReadU64(d, obj)
+}
+func (*binaryClassCmdVoidReadU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadU64(d, obj.(*CmdVoidReadU64))
+}
+func (*binaryClassCmdVoidReadU64) Skip(d binary.Decoder) error { return doSkipCmdVoidReadU64(d) }
+func (*binaryClassCmdVoidReadU64) Schema() *schema.Class       { return schemaCmdVoidReadU64 }
+
+var schemaCmdVoidReadU64 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadU64,
+	Name:   "CmdVoidReadU64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidReadU8 struct{}
+
+func (*CmdVoidReadU8) Class() binary.Class {
+	return (*binaryClassCmdVoidReadU8)(nil)
+}
+func doEncodeCmdVoidReadU8(e binary.Encoder, o *CmdVoidReadU8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidReadU8(d binary.Decoder, o *CmdVoidReadU8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidReadU8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidReadU8) ID() binary.ID      { return binaryIDCmdVoidReadU8 }
+func (*binaryClassCmdVoidReadU8) New() binary.Object { return &CmdVoidReadU8{} }
+func (*binaryClassCmdVoidReadU8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidReadU8(e, obj.(*CmdVoidReadU8))
+}
+func (*binaryClassCmdVoidReadU8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidReadU8{}
+	return obj, doDecodeCmdVoidReadU8(d, obj)
+}
+func (*binaryClassCmdVoidReadU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidReadU8(d, obj.(*CmdVoidReadU8))
+}
+func (*binaryClassCmdVoidReadU8) Skip(d binary.Decoder) error { return doSkipCmdVoidReadU8(d) }
+func (*binaryClassCmdVoidReadU8) Schema() *schema.Class       { return schemaCmdVoidReadU8 }
+
+var schemaCmdVoidReadU8 = &schema.Class{
+	TypeID: binaryIDCmdVoidReadU8,
+	Name:   "CmdVoidReadU8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
 	},
 }
 
@@ -2178,12 +3875,18 @@ func (*CmdVoidS16) Class() binary.Class {
 	return (*binaryClassCmdVoidS16)(nil)
 }
 func doEncodeCmdVoidS16(e binary.Encoder, o *CmdVoidS16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int16(); err != nil {
 		return err
 	} else {
@@ -2192,6 +3895,9 @@ func doDecodeCmdVoidS16(d binary.Decoder, o *CmdVoidS16) error {
 	return nil
 }
 func doSkipCmdVoidS16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int16(); err != nil {
 		return err
 	}
@@ -2216,6 +3922,7 @@ var schemaCmdVoidS16 = &schema.Class{
 	TypeID: binaryIDCmdVoidS16,
 	Name:   "CmdVoidS16",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int16", Method: schema.Int16}},
 	},
 }
@@ -2226,12 +3933,18 @@ func (*CmdVoidS32) Class() binary.Class {
 	return (*binaryClassCmdVoidS32)(nil)
 }
 func doEncodeCmdVoidS32(e binary.Encoder, o *CmdVoidS32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int32(); err != nil {
 		return err
 	} else {
@@ -2240,6 +3953,9 @@ func doDecodeCmdVoidS32(d binary.Decoder, o *CmdVoidS32) error {
 	return nil
 }
 func doSkipCmdVoidS32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int32(); err != nil {
 		return err
 	}
@@ -2264,6 +3980,7 @@ var schemaCmdVoidS32 = &schema.Class{
 	TypeID: binaryIDCmdVoidS32,
 	Name:   "CmdVoidS32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
@@ -2274,12 +3991,18 @@ func (*CmdVoidS64) Class() binary.Class {
 	return (*binaryClassCmdVoidS64)(nil)
 }
 func doEncodeCmdVoidS64(e binary.Encoder, o *CmdVoidS64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int64(); err != nil {
 		return err
 	} else {
@@ -2288,6 +4011,9 @@ func doDecodeCmdVoidS64(d binary.Decoder, o *CmdVoidS64) error {
 	return nil
 }
 func doSkipCmdVoidS64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int64(); err != nil {
 		return err
 	}
@@ -2312,6 +4038,7 @@ var schemaCmdVoidS64 = &schema.Class{
 	TypeID: binaryIDCmdVoidS64,
 	Name:   "CmdVoidS64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int64", Method: schema.Int64}},
 	},
 }
@@ -2322,12 +4049,18 @@ func (*CmdVoidS8) Class() binary.Class {
 	return (*binaryClassCmdVoidS8)(nil)
 }
 func doEncodeCmdVoidS8(e binary.Encoder, o *CmdVoidS8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Int8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Int8(); err != nil {
 		return err
 	} else {
@@ -2336,6 +4069,9 @@ func doDecodeCmdVoidS8(d binary.Decoder, o *CmdVoidS8) error {
 	return nil
 }
 func doSkipCmdVoidS8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Int8(); err != nil {
 		return err
 	}
@@ -2360,6 +4096,7 @@ var schemaCmdVoidS8 = &schema.Class{
 	TypeID: binaryIDCmdVoidS8,
 	Name:   "CmdVoidS8",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "int8", Method: schema.Int8}},
 	},
 }
@@ -2370,12 +4107,18 @@ func (*CmdVoidString) Class() binary.Class {
 	return (*binaryClassCmdVoidString)(nil)
 }
 func doEncodeCmdVoidString(e binary.Encoder, o *CmdVoidString) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.String(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.String(); err != nil {
 		return err
 	} else {
@@ -2384,6 +4127,9 @@ func doDecodeCmdVoidString(d binary.Decoder, o *CmdVoidString) error {
 	return nil
 }
 func doSkipCmdVoidString(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if err := d.SkipString(); err != nil {
 		return err
 	}
@@ -2408,6 +4154,7 @@ var schemaCmdVoidString = &schema.Class{
 	TypeID: binaryIDCmdVoidString,
 	Name:   "CmdVoidString",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
@@ -2418,12 +4165,18 @@ func (*CmdVoidU16) Class() binary.Class {
 	return (*binaryClassCmdVoidU16)(nil)
 }
 func doEncodeCmdVoidU16(e binary.Encoder, o *CmdVoidU16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint16(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint16(); err != nil {
 		return err
 	} else {
@@ -2432,6 +4185,9 @@ func doDecodeCmdVoidU16(d binary.Decoder, o *CmdVoidU16) error {
 	return nil
 }
 func doSkipCmdVoidU16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint16(); err != nil {
 		return err
 	}
@@ -2456,6 +4212,7 @@ var schemaCmdVoidU16 = &schema.Class{
 	TypeID: binaryIDCmdVoidU16,
 	Name:   "CmdVoidU16",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint16", Method: schema.Uint16}},
 	},
 }
@@ -2466,12 +4223,18 @@ func (*CmdVoidU32) Class() binary.Class {
 	return (*binaryClassCmdVoidU32)(nil)
 }
 func doEncodeCmdVoidU32(e binary.Encoder, o *CmdVoidU32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint32(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint32(); err != nil {
 		return err
 	} else {
@@ -2480,6 +4243,9 @@ func doDecodeCmdVoidU32(d binary.Decoder, o *CmdVoidU32) error {
 	return nil
 }
 func doSkipCmdVoidU32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint32(); err != nil {
 		return err
 	}
@@ -2504,6 +4270,7 @@ var schemaCmdVoidU32 = &schema.Class{
 	TypeID: binaryIDCmdVoidU32,
 	Name:   "CmdVoidU32",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
@@ -2514,12 +4281,18 @@ func (*CmdVoidU64) Class() binary.Class {
 	return (*binaryClassCmdVoidU64)(nil)
 }
 func doEncodeCmdVoidU64(e binary.Encoder, o *CmdVoidU64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint64(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -2528,6 +4301,9 @@ func doDecodeCmdVoidU64(d binary.Decoder, o *CmdVoidU64) error {
 	return nil
 }
 func doSkipCmdVoidU64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -2552,6 +4328,7 @@ var schemaCmdVoidU64 = &schema.Class{
 	TypeID: binaryIDCmdVoidU64,
 	Name:   "CmdVoidU64",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
@@ -2562,12 +4339,18 @@ func (*CmdVoidU8) Class() binary.Class {
 	return (*binaryClassCmdVoidU8)(nil)
 }
 func doEncodeCmdVoidU8(e binary.Encoder, o *CmdVoidU8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
 	if err := e.Uint8(o.A); err != nil {
 		return err
 	}
 	return nil
 }
 func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
 	if obj, err := d.Uint8(); err != nil {
 		return err
 	} else {
@@ -2576,6 +4359,9 @@ func doDecodeCmdVoidU8(d binary.Decoder, o *CmdVoidU8) error {
 	return nil
 }
 func doSkipCmdVoidU8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
 	if _, err := d.Uint8(); err != nil {
 		return err
 	}
@@ -2600,7 +4386,952 @@ var schemaCmdVoidU8 = &schema.Class{
 	TypeID: binaryIDCmdVoidU8,
 	Name:   "CmdVoidU8",
 	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+	},
+}
+
+type binaryClassCmdVoidWriteBool struct{}
+
+func (*CmdVoidWriteBool) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteBool)(nil)
+}
+func doEncodeCmdVoidWriteBool(e binary.Encoder, o *CmdVoidWriteBool) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteBool(d binary.Decoder, o *CmdVoidWriteBool) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteBool(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Boolᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteBool) ID() binary.ID      { return binaryIDCmdVoidWriteBool }
+func (*binaryClassCmdVoidWriteBool) New() binary.Object { return &CmdVoidWriteBool{} }
+func (*binaryClassCmdVoidWriteBool) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteBool(e, obj.(*CmdVoidWriteBool))
+}
+func (*binaryClassCmdVoidWriteBool) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteBool{}
+	return obj, doDecodeCmdVoidWriteBool(d, obj)
+}
+func (*binaryClassCmdVoidWriteBool) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteBool(d, obj.(*CmdVoidWriteBool))
+}
+func (*binaryClassCmdVoidWriteBool) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteBool(d) }
+func (*binaryClassCmdVoidWriteBool) Schema() *schema.Class       { return schemaCmdVoidWriteBool }
+
+var schemaCmdVoidWriteBool = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteBool,
+	Name:   "CmdVoidWriteBool",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Boolᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteF32 struct{}
+
+func (*CmdVoidWriteF32) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteF32)(nil)
+}
+func doEncodeCmdVoidWriteF32(e binary.Encoder, o *CmdVoidWriteF32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteF32(d binary.Decoder, o *CmdVoidWriteF32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteF32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteF32) ID() binary.ID      { return binaryIDCmdVoidWriteF32 }
+func (*binaryClassCmdVoidWriteF32) New() binary.Object { return &CmdVoidWriteF32{} }
+func (*binaryClassCmdVoidWriteF32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteF32(e, obj.(*CmdVoidWriteF32))
+}
+func (*binaryClassCmdVoidWriteF32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteF32{}
+	return obj, doDecodeCmdVoidWriteF32(d, obj)
+}
+func (*binaryClassCmdVoidWriteF32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteF32(d, obj.(*CmdVoidWriteF32))
+}
+func (*binaryClassCmdVoidWriteF32) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteF32(d) }
+func (*binaryClassCmdVoidWriteF32) Schema() *schema.Class       { return schemaCmdVoidWriteF32 }
+
+var schemaCmdVoidWriteF32 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteF32,
+	Name:   "CmdVoidWriteF32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteF64 struct{}
+
+func (*CmdVoidWriteF64) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteF64)(nil)
+}
+func doEncodeCmdVoidWriteF64(e binary.Encoder, o *CmdVoidWriteF64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteF64(d binary.Decoder, o *CmdVoidWriteF64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteF64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteF64) ID() binary.ID      { return binaryIDCmdVoidWriteF64 }
+func (*binaryClassCmdVoidWriteF64) New() binary.Object { return &CmdVoidWriteF64{} }
+func (*binaryClassCmdVoidWriteF64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteF64(e, obj.(*CmdVoidWriteF64))
+}
+func (*binaryClassCmdVoidWriteF64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteF64{}
+	return obj, doDecodeCmdVoidWriteF64(d, obj)
+}
+func (*binaryClassCmdVoidWriteF64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteF64(d, obj.(*CmdVoidWriteF64))
+}
+func (*binaryClassCmdVoidWriteF64) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteF64(d) }
+func (*binaryClassCmdVoidWriteF64) Schema() *schema.Class       { return schemaCmdVoidWriteF64 }
+
+var schemaCmdVoidWriteF64 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteF64,
+	Name:   "CmdVoidWriteF64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F64ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWritePtrs struct{}
+
+func (*CmdVoidWritePtrs) Class() binary.Class {
+	return (*binaryClassCmdVoidWritePtrs)(nil)
+}
+func doEncodeCmdVoidWritePtrs(e binary.Encoder, o *CmdVoidWritePtrs) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	if err := e.Value(&o.B); err != nil {
+		return err
+	}
+	if err := e.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWritePtrs(d binary.Decoder, o *CmdVoidWritePtrs) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	if err := d.Value(&o.B); err != nil {
+		return err
+	}
+	if err := d.Value(&o.C); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWritePtrs(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*F32ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ᵖ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Boolᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWritePtrs) ID() binary.ID      { return binaryIDCmdVoidWritePtrs }
+func (*binaryClassCmdVoidWritePtrs) New() binary.Object { return &CmdVoidWritePtrs{} }
+func (*binaryClassCmdVoidWritePtrs) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWritePtrs(e, obj.(*CmdVoidWritePtrs))
+}
+func (*binaryClassCmdVoidWritePtrs) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWritePtrs{}
+	return obj, doDecodeCmdVoidWritePtrs(d, obj)
+}
+func (*binaryClassCmdVoidWritePtrs) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWritePtrs(d, obj.(*CmdVoidWritePtrs))
+}
+func (*binaryClassCmdVoidWritePtrs) Skip(d binary.Decoder) error { return doSkipCmdVoidWritePtrs(d) }
+func (*binaryClassCmdVoidWritePtrs) Schema() *schema.Class       { return schemaCmdVoidWritePtrs }
+
+var schemaCmdVoidWritePtrs = &schema.Class{
+	TypeID: binaryIDCmdVoidWritePtrs,
+	Name:   "CmdVoidWritePtrs",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "F32ᵖ"}},
+		schema.Field{Declared: "B", Type: &schema.Struct{Name: "U16ᵖ"}},
+		schema.Field{Declared: "C", Type: &schema.Struct{Name: "Boolᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteS16 struct{}
+
+func (*CmdVoidWriteS16) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteS16)(nil)
+}
+func doEncodeCmdVoidWriteS16(e binary.Encoder, o *CmdVoidWriteS16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteS16(d binary.Decoder, o *CmdVoidWriteS16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteS16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S16ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteS16) ID() binary.ID      { return binaryIDCmdVoidWriteS16 }
+func (*binaryClassCmdVoidWriteS16) New() binary.Object { return &CmdVoidWriteS16{} }
+func (*binaryClassCmdVoidWriteS16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteS16(e, obj.(*CmdVoidWriteS16))
+}
+func (*binaryClassCmdVoidWriteS16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteS16{}
+	return obj, doDecodeCmdVoidWriteS16(d, obj)
+}
+func (*binaryClassCmdVoidWriteS16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteS16(d, obj.(*CmdVoidWriteS16))
+}
+func (*binaryClassCmdVoidWriteS16) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteS16(d) }
+func (*binaryClassCmdVoidWriteS16) Schema() *schema.Class       { return schemaCmdVoidWriteS16 }
+
+var schemaCmdVoidWriteS16 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteS16,
+	Name:   "CmdVoidWriteS16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S16ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteS32 struct{}
+
+func (*CmdVoidWriteS32) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteS32)(nil)
+}
+func doEncodeCmdVoidWriteS32(e binary.Encoder, o *CmdVoidWriteS32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteS32(d binary.Decoder, o *CmdVoidWriteS32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteS32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteS32) ID() binary.ID      { return binaryIDCmdVoidWriteS32 }
+func (*binaryClassCmdVoidWriteS32) New() binary.Object { return &CmdVoidWriteS32{} }
+func (*binaryClassCmdVoidWriteS32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteS32(e, obj.(*CmdVoidWriteS32))
+}
+func (*binaryClassCmdVoidWriteS32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteS32{}
+	return obj, doDecodeCmdVoidWriteS32(d, obj)
+}
+func (*binaryClassCmdVoidWriteS32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteS32(d, obj.(*CmdVoidWriteS32))
+}
+func (*binaryClassCmdVoidWriteS32) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteS32(d) }
+func (*binaryClassCmdVoidWriteS32) Schema() *schema.Class       { return schemaCmdVoidWriteS32 }
+
+var schemaCmdVoidWriteS32 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteS32,
+	Name:   "CmdVoidWriteS32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S32ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteS64 struct{}
+
+func (*CmdVoidWriteS64) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteS64)(nil)
+}
+func doEncodeCmdVoidWriteS64(e binary.Encoder, o *CmdVoidWriteS64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteS64(d binary.Decoder, o *CmdVoidWriteS64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteS64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteS64) ID() binary.ID      { return binaryIDCmdVoidWriteS64 }
+func (*binaryClassCmdVoidWriteS64) New() binary.Object { return &CmdVoidWriteS64{} }
+func (*binaryClassCmdVoidWriteS64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteS64(e, obj.(*CmdVoidWriteS64))
+}
+func (*binaryClassCmdVoidWriteS64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteS64{}
+	return obj, doDecodeCmdVoidWriteS64(d, obj)
+}
+func (*binaryClassCmdVoidWriteS64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteS64(d, obj.(*CmdVoidWriteS64))
+}
+func (*binaryClassCmdVoidWriteS64) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteS64(d) }
+func (*binaryClassCmdVoidWriteS64) Schema() *schema.Class       { return schemaCmdVoidWriteS64 }
+
+var schemaCmdVoidWriteS64 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteS64,
+	Name:   "CmdVoidWriteS64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S64ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteS8 struct{}
+
+func (*CmdVoidWriteS8) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteS8)(nil)
+}
+func doEncodeCmdVoidWriteS8(e binary.Encoder, o *CmdVoidWriteS8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteS8(d binary.Decoder, o *CmdVoidWriteS8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteS8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*S8ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteS8) ID() binary.ID      { return binaryIDCmdVoidWriteS8 }
+func (*binaryClassCmdVoidWriteS8) New() binary.Object { return &CmdVoidWriteS8{} }
+func (*binaryClassCmdVoidWriteS8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteS8(e, obj.(*CmdVoidWriteS8))
+}
+func (*binaryClassCmdVoidWriteS8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteS8{}
+	return obj, doDecodeCmdVoidWriteS8(d, obj)
+}
+func (*binaryClassCmdVoidWriteS8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteS8(d, obj.(*CmdVoidWriteS8))
+}
+func (*binaryClassCmdVoidWriteS8) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteS8(d) }
+func (*binaryClassCmdVoidWriteS8) Schema() *schema.Class       { return schemaCmdVoidWriteS8 }
+
+var schemaCmdVoidWriteS8 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteS8,
+	Name:   "CmdVoidWriteS8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "S8ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteU16 struct{}
+
+func (*CmdVoidWriteU16) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteU16)(nil)
+}
+func doEncodeCmdVoidWriteU16(e binary.Encoder, o *CmdVoidWriteU16) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteU16(d binary.Decoder, o *CmdVoidWriteU16) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteU16(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U16ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteU16) ID() binary.ID      { return binaryIDCmdVoidWriteU16 }
+func (*binaryClassCmdVoidWriteU16) New() binary.Object { return &CmdVoidWriteU16{} }
+func (*binaryClassCmdVoidWriteU16) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteU16(e, obj.(*CmdVoidWriteU16))
+}
+func (*binaryClassCmdVoidWriteU16) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteU16{}
+	return obj, doDecodeCmdVoidWriteU16(d, obj)
+}
+func (*binaryClassCmdVoidWriteU16) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteU16(d, obj.(*CmdVoidWriteU16))
+}
+func (*binaryClassCmdVoidWriteU16) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteU16(d) }
+func (*binaryClassCmdVoidWriteU16) Schema() *schema.Class       { return schemaCmdVoidWriteU16 }
+
+var schemaCmdVoidWriteU16 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteU16,
+	Name:   "CmdVoidWriteU16",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteU32 struct{}
+
+func (*CmdVoidWriteU32) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteU32)(nil)
+}
+func doEncodeCmdVoidWriteU32(e binary.Encoder, o *CmdVoidWriteU32) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteU32(d binary.Decoder, o *CmdVoidWriteU32) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteU32(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U32ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteU32) ID() binary.ID      { return binaryIDCmdVoidWriteU32 }
+func (*binaryClassCmdVoidWriteU32) New() binary.Object { return &CmdVoidWriteU32{} }
+func (*binaryClassCmdVoidWriteU32) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteU32(e, obj.(*CmdVoidWriteU32))
+}
+func (*binaryClassCmdVoidWriteU32) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteU32{}
+	return obj, doDecodeCmdVoidWriteU32(d, obj)
+}
+func (*binaryClassCmdVoidWriteU32) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteU32(d, obj.(*CmdVoidWriteU32))
+}
+func (*binaryClassCmdVoidWriteU32) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteU32(d) }
+func (*binaryClassCmdVoidWriteU32) Schema() *schema.Class       { return schemaCmdVoidWriteU32 }
+
+var schemaCmdVoidWriteU32 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteU32,
+	Name:   "CmdVoidWriteU32",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U32ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteU64 struct{}
+
+func (*CmdVoidWriteU64) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteU64)(nil)
+}
+func doEncodeCmdVoidWriteU64(e binary.Encoder, o *CmdVoidWriteU64) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteU64(d binary.Decoder, o *CmdVoidWriteU64) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteU64(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U64ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteU64) ID() binary.ID      { return binaryIDCmdVoidWriteU64 }
+func (*binaryClassCmdVoidWriteU64) New() binary.Object { return &CmdVoidWriteU64{} }
+func (*binaryClassCmdVoidWriteU64) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteU64(e, obj.(*CmdVoidWriteU64))
+}
+func (*binaryClassCmdVoidWriteU64) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteU64{}
+	return obj, doDecodeCmdVoidWriteU64(d, obj)
+}
+func (*binaryClassCmdVoidWriteU64) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteU64(d, obj.(*CmdVoidWriteU64))
+}
+func (*binaryClassCmdVoidWriteU64) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteU64(d) }
+func (*binaryClassCmdVoidWriteU64) Schema() *schema.Class       { return schemaCmdVoidWriteU64 }
+
+var schemaCmdVoidWriteU64 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteU64,
+	Name:   "CmdVoidWriteU64",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U64ᵖ"}},
+	},
+}
+
+type binaryClassCmdVoidWriteU8 struct{}
+
+func (*CmdVoidWriteU8) Class() binary.Class {
+	return (*binaryClassCmdVoidWriteU8)(nil)
+}
+func doEncodeCmdVoidWriteU8(e binary.Encoder, o *CmdVoidWriteU8) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidWriteU8(d binary.Decoder, o *CmdVoidWriteU8) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdVoidWriteU8(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidWriteU8) ID() binary.ID      { return binaryIDCmdVoidWriteU8 }
+func (*binaryClassCmdVoidWriteU8) New() binary.Object { return &CmdVoidWriteU8{} }
+func (*binaryClassCmdVoidWriteU8) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidWriteU8(e, obj.(*CmdVoidWriteU8))
+}
+func (*binaryClassCmdVoidWriteU8) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidWriteU8{}
+	return obj, doDecodeCmdVoidWriteU8(d, obj)
+}
+func (*binaryClassCmdVoidWriteU8) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidWriteU8(d, obj.(*CmdVoidWriteU8))
+}
+func (*binaryClassCmdVoidWriteU8) Skip(d binary.Decoder) error { return doSkipCmdVoidWriteU8(d) }
+func (*binaryClassCmdVoidWriteU8) Schema() *schema.Class       { return schemaCmdVoidWriteU8 }
+
+var schemaCmdVoidWriteU8 = &schema.Class{
+	TypeID: binaryIDCmdVoidWriteU8,
+	Name:   "CmdVoidWriteU8",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
+	},
+}
+
+type binaryClassF32ˢ struct{}
+
+func (*F32ˢ) Class() binary.Class {
+	return (*binaryClassF32ˢ)(nil)
+}
+func doEncodeF32ˢ(e binary.Encoder, o *F32ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeF32ˢ(d binary.Decoder, o *F32ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipF32ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassF32ˢ) ID() binary.ID      { return binaryIDF32ˢ }
+func (*binaryClassF32ˢ) New() binary.Object { return &F32ˢ{} }
+func (*binaryClassF32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF32ˢ(e, obj.(*F32ˢ))
+}
+func (*binaryClassF32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F32ˢ{}
+	return obj, doDecodeF32ˢ(d, obj)
+}
+func (*binaryClassF32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF32ˢ(d, obj.(*F32ˢ))
+}
+func (*binaryClassF32ˢ) Skip(d binary.Decoder) error { return doSkipF32ˢ(d) }
+func (*binaryClassF32ˢ) Schema() *schema.Class       { return schemaF32ˢ }
+
+var schemaF32ˢ = &schema.Class{
+	TypeID: binaryIDF32ˢ,
+	Name:   "F32ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassF64ˢ struct{}
+
+func (*F64ˢ) Class() binary.Class {
+	return (*binaryClassF64ˢ)(nil)
+}
+func doEncodeF64ˢ(e binary.Encoder, o *F64ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeF64ˢ(d binary.Decoder, o *F64ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipF64ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassF64ˢ) ID() binary.ID      { return binaryIDF64ˢ }
+func (*binaryClassF64ˢ) New() binary.Object { return &F64ˢ{} }
+func (*binaryClassF64ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeF64ˢ(e, obj.(*F64ˢ))
+}
+func (*binaryClassF64ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &F64ˢ{}
+	return obj, doDecodeF64ˢ(d, obj)
+}
+func (*binaryClassF64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeF64ˢ(d, obj.(*F64ˢ))
+}
+func (*binaryClassF64ˢ) Skip(d binary.Decoder) error { return doSkipF64ˢ(d) }
+func (*binaryClassF64ˢ) Schema() *schema.Class       { return schemaF64ˢ }
+
+var schemaF64ˢ = &schema.Class{
+	TypeID: binaryIDF64ˢ,
+	Name:   "F64ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassU8ˢ struct{}
+
+func (*U8ˢ) Class() binary.Class {
+	return (*binaryClassU8ˢ)(nil)
+}
+func doEncodeU8ˢ(e binary.Encoder, o *U8ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU8ˢ(d binary.Decoder, o *U8ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU8ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU8ˢ) ID() binary.ID      { return binaryIDU8ˢ }
+func (*binaryClassU8ˢ) New() binary.Object { return &U8ˢ{} }
+func (*binaryClassU8ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU8ˢ(e, obj.(*U8ˢ))
+}
+func (*binaryClassU8ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U8ˢ{}
+	return obj, doDecodeU8ˢ(d, obj)
+}
+func (*binaryClassU8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU8ˢ(d, obj.(*U8ˢ))
+}
+func (*binaryClassU8ˢ) Skip(d binary.Decoder) error { return doSkipU8ˢ(d) }
+func (*binaryClassU8ˢ) Schema() *schema.Class       { return schemaU8ˢ }
+
+var schemaU8ˢ = &schema.Class{
+	TypeID: binaryIDU8ˢ,
+	Name:   "U8ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2610,12 +5341,32 @@ func (*Globals) Class() binary.Class {
 	return (*binaryClassGlobals)(nil)
 }
 func doEncodeGlobals(e binary.Encoder, o *Globals) error {
+	if err := e.Value(&o.Buf); err != nil {
+		return err
+	}
+	if err := e.String(o.Str); err != nil {
+		return err
+	}
 	return nil
 }
 func doDecodeGlobals(d binary.Decoder, o *Globals) error {
+	if err := d.Value(&o.Buf); err != nil {
+		return err
+	}
+	if obj, err := d.String(); err != nil {
+		return err
+	} else {
+		o.Str = string(obj)
+	}
 	return nil
 }
 func doSkipGlobals(d binary.Decoder) error {
+	if err := d.SkipValue((*U8ˢ)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipString(); err != nil {
+		return err
+	}
 	return nil
 }
 func (*binaryClassGlobals) ID() binary.ID      { return binaryIDGlobals }
@@ -2636,7 +5387,10 @@ func (*binaryClassGlobals) Schema() *schema.Class       { return schemaGlobals }
 var schemaGlobals = &schema.Class{
 	TypeID: binaryIDGlobals,
 	Name:   "Globals",
-	Fields: []schema.Field{},
+	Fields: []schema.Field{
+		schema.Field{Declared: "Buf", Type: &schema.Struct{Name: "U8ˢ"}},
+		schema.Field{Declared: "Str", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+	},
 }
 
 type binaryClassImported struct{}
@@ -2747,6 +5501,510 @@ var schemaIncluded = &schema.Class{
 	},
 }
 
+type binaryClassIntˢ struct{}
+
+func (*Intˢ) Class() binary.Class {
+	return (*binaryClassIntˢ)(nil)
+}
+func doEncodeIntˢ(e binary.Encoder, o *Intˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeIntˢ(d binary.Decoder, o *Intˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipIntˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassIntˢ) ID() binary.ID      { return binaryIDIntˢ }
+func (*binaryClassIntˢ) New() binary.Object { return &Intˢ{} }
+func (*binaryClassIntˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeIntˢ(e, obj.(*Intˢ))
+}
+func (*binaryClassIntˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Intˢ{}
+	return obj, doDecodeIntˢ(d, obj)
+}
+func (*binaryClassIntˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeIntˢ(d, obj.(*Intˢ))
+}
+func (*binaryClassIntˢ) Skip(d binary.Decoder) error { return doSkipIntˢ(d) }
+func (*binaryClassIntˢ) Schema() *schema.Class       { return schemaIntˢ }
+
+var schemaIntˢ = &schema.Class{
+	TypeID: binaryIDIntˢ,
+	Name:   "Intˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassRemappedˢ struct{}
+
+func (*Remappedˢ) Class() binary.Class {
+	return (*binaryClassRemappedˢ)(nil)
+}
+func doEncodeRemappedˢ(e binary.Encoder, o *Remappedˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeRemappedˢ(d binary.Decoder, o *Remappedˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipRemappedˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassRemappedˢ) ID() binary.ID      { return binaryIDRemappedˢ }
+func (*binaryClassRemappedˢ) New() binary.Object { return &Remappedˢ{} }
+func (*binaryClassRemappedˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeRemappedˢ(e, obj.(*Remappedˢ))
+}
+func (*binaryClassRemappedˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Remappedˢ{}
+	return obj, doDecodeRemappedˢ(d, obj)
+}
+func (*binaryClassRemappedˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeRemappedˢ(d, obj.(*Remappedˢ))
+}
+func (*binaryClassRemappedˢ) Skip(d binary.Decoder) error { return doSkipRemappedˢ(d) }
+func (*binaryClassRemappedˢ) Schema() *schema.Class       { return schemaRemappedˢ }
+
+var schemaRemappedˢ = &schema.Class{
+	TypeID: binaryIDRemappedˢ,
+	Name:   "Remappedˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassS16ˢ struct{}
+
+func (*S16ˢ) Class() binary.Class {
+	return (*binaryClassS16ˢ)(nil)
+}
+func doEncodeS16ˢ(e binary.Encoder, o *S16ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS16ˢ(d binary.Decoder, o *S16ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS16ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS16ˢ) ID() binary.ID      { return binaryIDS16ˢ }
+func (*binaryClassS16ˢ) New() binary.Object { return &S16ˢ{} }
+func (*binaryClassS16ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS16ˢ(e, obj.(*S16ˢ))
+}
+func (*binaryClassS16ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S16ˢ{}
+	return obj, doDecodeS16ˢ(d, obj)
+}
+func (*binaryClassS16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS16ˢ(d, obj.(*S16ˢ))
+}
+func (*binaryClassS16ˢ) Skip(d binary.Decoder) error { return doSkipS16ˢ(d) }
+func (*binaryClassS16ˢ) Schema() *schema.Class       { return schemaS16ˢ }
+
+var schemaS16ˢ = &schema.Class{
+	TypeID: binaryIDS16ˢ,
+	Name:   "S16ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassS32ˢ struct{}
+
+func (*S32ˢ) Class() binary.Class {
+	return (*binaryClassS32ˢ)(nil)
+}
+func doEncodeS32ˢ(e binary.Encoder, o *S32ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS32ˢ(d binary.Decoder, o *S32ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS32ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS32ˢ) ID() binary.ID      { return binaryIDS32ˢ }
+func (*binaryClassS32ˢ) New() binary.Object { return &S32ˢ{} }
+func (*binaryClassS32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS32ˢ(e, obj.(*S32ˢ))
+}
+func (*binaryClassS32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S32ˢ{}
+	return obj, doDecodeS32ˢ(d, obj)
+}
+func (*binaryClassS32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS32ˢ(d, obj.(*S32ˢ))
+}
+func (*binaryClassS32ˢ) Skip(d binary.Decoder) error { return doSkipS32ˢ(d) }
+func (*binaryClassS32ˢ) Schema() *schema.Class       { return schemaS32ˢ }
+
+var schemaS32ˢ = &schema.Class{
+	TypeID: binaryIDS32ˢ,
+	Name:   "S32ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassS64ˢ struct{}
+
+func (*S64ˢ) Class() binary.Class {
+	return (*binaryClassS64ˢ)(nil)
+}
+func doEncodeS64ˢ(e binary.Encoder, o *S64ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS64ˢ(d binary.Decoder, o *S64ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS64ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS64ˢ) ID() binary.ID      { return binaryIDS64ˢ }
+func (*binaryClassS64ˢ) New() binary.Object { return &S64ˢ{} }
+func (*binaryClassS64ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS64ˢ(e, obj.(*S64ˢ))
+}
+func (*binaryClassS64ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S64ˢ{}
+	return obj, doDecodeS64ˢ(d, obj)
+}
+func (*binaryClassS64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS64ˢ(d, obj.(*S64ˢ))
+}
+func (*binaryClassS64ˢ) Skip(d binary.Decoder) error { return doSkipS64ˢ(d) }
+func (*binaryClassS64ˢ) Schema() *schema.Class       { return schemaS64ˢ }
+
+var schemaS64ˢ = &schema.Class{
+	TypeID: binaryIDS64ˢ,
+	Name:   "S64ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassS8ˢ struct{}
+
+func (*S8ˢ) Class() binary.Class {
+	return (*binaryClassS8ˢ)(nil)
+}
+func doEncodeS8ˢ(e binary.Encoder, o *S8ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeS8ˢ(d binary.Decoder, o *S8ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipS8ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassS8ˢ) ID() binary.ID      { return binaryIDS8ˢ }
+func (*binaryClassS8ˢ) New() binary.Object { return &S8ˢ{} }
+func (*binaryClassS8ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeS8ˢ(e, obj.(*S8ˢ))
+}
+func (*binaryClassS8ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &S8ˢ{}
+	return obj, doDecodeS8ˢ(d, obj)
+}
+func (*binaryClassS8ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeS8ˢ(d, obj.(*S8ˢ))
+}
+func (*binaryClassS8ˢ) Skip(d binary.Decoder) error { return doSkipS8ˢ(d) }
+func (*binaryClassS8ˢ) Schema() *schema.Class       { return schemaS8ˢ }
+
+var schemaS8ˢ = &schema.Class{
+	TypeID: binaryIDS8ˢ,
+	Name:   "S8ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
 type binaryClassTester struct{}
 
 func (*Tester) Class() binary.Class {
@@ -2812,5 +6070,425 @@ var schemaTester = &schema.Class{
 		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Imported"}},
 		schema.Field{Declared: "B", Type: &schema.Struct{Name: "Included"}},
+	},
+}
+
+type binaryClassU16ˢ struct{}
+
+func (*U16ˢ) Class() binary.Class {
+	return (*binaryClassU16ˢ)(nil)
+}
+func doEncodeU16ˢ(e binary.Encoder, o *U16ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU16ˢ(d binary.Decoder, o *U16ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU16ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU16ˢ) ID() binary.ID      { return binaryIDU16ˢ }
+func (*binaryClassU16ˢ) New() binary.Object { return &U16ˢ{} }
+func (*binaryClassU16ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU16ˢ(e, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U16ˢ{}
+	return obj, doDecodeU16ˢ(d, obj)
+}
+func (*binaryClassU16ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU16ˢ(d, obj.(*U16ˢ))
+}
+func (*binaryClassU16ˢ) Skip(d binary.Decoder) error { return doSkipU16ˢ(d) }
+func (*binaryClassU16ˢ) Schema() *schema.Class       { return schemaU16ˢ }
+
+var schemaU16ˢ = &schema.Class{
+	TypeID: binaryIDU16ˢ,
+	Name:   "U16ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassU32ˢ struct{}
+
+func (*U32ˢ) Class() binary.Class {
+	return (*binaryClassU32ˢ)(nil)
+}
+func doEncodeU32ˢ(e binary.Encoder, o *U32ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU32ˢ(d binary.Decoder, o *U32ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU32ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU32ˢ) ID() binary.ID      { return binaryIDU32ˢ }
+func (*binaryClassU32ˢ) New() binary.Object { return &U32ˢ{} }
+func (*binaryClassU32ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ˢ(e, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ˢ{}
+	return obj, doDecodeU32ˢ(d, obj)
+}
+func (*binaryClassU32ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ˢ(d, obj.(*U32ˢ))
+}
+func (*binaryClassU32ˢ) Skip(d binary.Decoder) error { return doSkipU32ˢ(d) }
+func (*binaryClassU32ˢ) Schema() *schema.Class       { return schemaU32ˢ }
+
+var schemaU32ˢ = &schema.Class{
+	TypeID: binaryIDU32ˢ,
+	Name:   "U32ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassU64ˢ struct{}
+
+func (*U64ˢ) Class() binary.Class {
+	return (*binaryClassU64ˢ)(nil)
+}
+func doEncodeU64ˢ(e binary.Encoder, o *U64ˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU64ˢ(d binary.Decoder, o *U64ˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU64ˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU64ˢ) ID() binary.ID      { return binaryIDU64ˢ }
+func (*binaryClassU64ˢ) New() binary.Object { return &U64ˢ{} }
+func (*binaryClassU64ˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU64ˢ(e, obj.(*U64ˢ))
+}
+func (*binaryClassU64ˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U64ˢ{}
+	return obj, doDecodeU64ˢ(d, obj)
+}
+func (*binaryClassU64ˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU64ˢ(d, obj.(*U64ˢ))
+}
+func (*binaryClassU64ˢ) Skip(d binary.Decoder) error { return doSkipU64ˢ(d) }
+func (*binaryClassU64ˢ) Schema() *schema.Class       { return schemaU64ˢ }
+
+var schemaU64ˢ = &schema.Class{
+	TypeID: binaryIDU64ˢ,
+	Name:   "U64ˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassU8ᵖˢ struct{}
+
+func (*U8ᵖˢ) Class() binary.Class {
+	return (*binaryClassU8ᵖˢ)(nil)
+}
+func doEncodeU8ᵖˢ(e binary.Encoder, o *U8ᵖˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeU8ᵖˢ(d binary.Decoder, o *U8ᵖˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipU8ᵖˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassU8ᵖˢ) ID() binary.ID      { return binaryIDU8ᵖˢ }
+func (*binaryClassU8ᵖˢ) New() binary.Object { return &U8ᵖˢ{} }
+func (*binaryClassU8ᵖˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU8ᵖˢ(e, obj.(*U8ᵖˢ))
+}
+func (*binaryClassU8ᵖˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U8ᵖˢ{}
+	return obj, doDecodeU8ᵖˢ(d, obj)
+}
+func (*binaryClassU8ᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU8ᵖˢ(d, obj.(*U8ᵖˢ))
+}
+func (*binaryClassU8ᵖˢ) Skip(d binary.Decoder) error { return doSkipU8ᵖˢ(d) }
+func (*binaryClassU8ᵖˢ) Schema() *schema.Class       { return schemaU8ᵖˢ }
+
+var schemaU8ᵖˢ = &schema.Class{
+	TypeID: binaryIDU8ᵖˢ,
+	Name:   "U8ᵖˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassVoidˢ struct{}
+
+func (*Voidˢ) Class() binary.Class {
+	return (*binaryClassVoidˢ)(nil)
+}
+func doEncodeVoidˢ(e binary.Encoder, o *Voidˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeVoidˢ(d binary.Decoder, o *Voidˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipVoidˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassVoidˢ) ID() binary.ID      { return binaryIDVoidˢ }
+func (*binaryClassVoidˢ) New() binary.Object { return &Voidˢ{} }
+func (*binaryClassVoidˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeVoidˢ(e, obj.(*Voidˢ))
+}
+func (*binaryClassVoidˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Voidˢ{}
+	return obj, doDecodeVoidˢ(d, obj)
+}
+func (*binaryClassVoidˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeVoidˢ(d, obj.(*Voidˢ))
+}
+func (*binaryClassVoidˢ) Skip(d binary.Decoder) error { return doSkipVoidˢ(d) }
+func (*binaryClassVoidˢ) Schema() *schema.Class       { return schemaVoidˢ }
+
+var schemaVoidˢ = &schema.Class{
+	TypeID: binaryIDVoidˢ,
+	Name:   "Voidˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }

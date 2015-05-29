@@ -28,13 +28,13 @@ import (
 )
 
 // build writes to out the MemoryInfo resource resulting from the given GetMemoryInfo request.
-func (request *GetMemoryInfo) build(db database.Database, logger log.Logger, out binary.Object) error {
-	capture, err := loadCapture(request.Capture, db, logger)
+func (request *GetMemoryInfo) build(d database.Database, l log.Logger, out binary.Object) error {
+	capture, err := loadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
 	}
 
-	atoms, err := loadAtoms(capture.Atoms, db, logger)
+	atoms, err := loadAtoms(capture.Atoms, d, l)
 	if err != nil {
 		return err
 	}
@@ -43,15 +43,15 @@ func (request *GetMemoryInfo) build(db database.Database, logger log.Logger, out
 		return fmt.Errorf("After (%d) parameter is out of bounds. [0-%d]", request.After, len(atoms))
 	}
 
-	s := &gfxapi.State{}
+	s := gfxapi.NewState()
 	for _, a := range atoms[:request.After] {
-		if err := a.Mutate(s); err != nil {
+		if err := a.Mutate(s, d, l); err != nil {
 			return err
 		}
 	}
 
-	// TODO: Stale, Unknown
-	data, err := s.Memory.Slice(request.Range).Get(db, logger)
+	// TODO: Pool, Stale, Unknown
+	data, err := s.Memory[memory.ApplicationPool].Slice(request.Range).Get(d, l)
 	if err != nil {
 		return err
 	}

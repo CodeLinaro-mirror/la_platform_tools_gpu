@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package utils
+package database
 
 import (
 	"bytes"
@@ -21,42 +21,41 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/cyclic"
 	"android.googlesource.com/platform/tools/gpu/binary/vle"
-	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
-type inMemoryDatabase struct {
+type inMemory struct {
 	links   map[binary.ID]binary.ID
 	entries map[binary.ID]binary.Object
 }
 
-// NewInMemoryDatabase returns a partial implementation of Database, keeping
-// all entries in-memory.
-func NewInMemoryDatabase() database.Database {
-	return &inMemoryDatabase{
+// InMemory returns a partial implementation of Database, keeping all entries
+// in-memory.
+func InMemory() Database {
+	return &inMemory{
 		links:   make(map[binary.ID]binary.ID),
 		entries: make(map[binary.ID]binary.Object),
 	}
 }
 
-func (d *inMemoryDatabase) StoreLink(to, id binary.ID, _ log.Logger) error {
+func (d *inMemory) StoreLink(to, id binary.ID, _ log.Logger) error {
 	d.links[id] = to
 	return nil
 }
 
-func (d *inMemoryDatabase) StoreRequest(request binary.Object, _ log.Logger) (binary.ID, error) {
-	panic("StoreRequest() not supported by the inMemoryDatabase")
+func (d *inMemory) StoreRequest(request binary.Object, _ log.Logger) (binary.ID, error) {
+	panic("StoreRequest() not supported by the InMemory database")
 	return binary.ID{}, nil
 }
 
-func (d *inMemoryDatabase) Store(o binary.Object, _ log.Logger) (binary.ID, error) {
+func (d *inMemory) Store(o binary.Object, _ log.Logger) (binary.ID, error) {
 	id := hash(o)
 	d.entries[id] = o
 	return id, nil
 }
 
-func (d *inMemoryDatabase) Load(id binary.ID, l log.Logger, out binary.Object) error {
+func (d *inMemory) Load(id binary.ID, l log.Logger, out binary.Object) error {
 	if link, found := d.links[id]; found {
 		return d.Load(link, l, out)
 	}
@@ -67,7 +66,7 @@ func (d *inMemoryDatabase) Load(id binary.ID, l log.Logger, out binary.Object) e
 	return fmt.Errorf("Resource '%v' not found", id)
 }
 
-func (d *inMemoryDatabase) Contains(id binary.ID, _ log.Logger) bool {
+func (d *inMemory) Contains(id binary.ID, _ log.Logger) bool {
 	if _, found := d.links[id]; found {
 		return true
 	}
@@ -77,11 +76,11 @@ func (d *inMemoryDatabase) Contains(id binary.ID, _ log.Logger) bool {
 	return false
 }
 
-func (d *inMemoryDatabase) Captures() (map[string]binary.ID, error) {
-	panic("Captures() not supported by the inMemoryDatabase")
+func (d *inMemory) Captures() (map[string]binary.ID, error) {
+	panic("Captures() not supported by the InMemory database")
 }
 
-func (d *inMemoryDatabase) Close() {}
+func (d *inMemory) Close() {}
 
 func hash(o binary.Object) binary.ID {
 	b := bytes.Buffer{}

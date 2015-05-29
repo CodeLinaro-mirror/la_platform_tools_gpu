@@ -5,10 +5,10 @@
 package test
 
 import (
-	"log"
-	"reflect"
-
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 func getState(s *gfxapi.State) *State {
@@ -26,395 +26,521 @@ func getState(s *gfxapi.State) *State {
 	}
 }
 
-func (ϟa *CmdVoid) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdClone) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoid{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Buf = ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs).Clone(ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidU8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdMake) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidU8{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_u8 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Buf = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidS8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdCopy) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidS8{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_s8 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Buf.Copy(ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs), ϟs, ϟd, ϟl)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidU16) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdCharsliceToString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidU16{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_u16 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Str = string(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.Len), ϟs).Read(ϟs, ϟd, ϟl))
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidS16) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoid) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidS16{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_s16 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidF32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdUnknownRet) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidF32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_f32 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Result = ϟa.Result
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidU32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdUnknownWritePtr) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidU32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_u32 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidS32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdUnknownWriteSlice) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidS32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_s32 expected %v got %v", ϟa, ϟo)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	count := int32(5)                                        // s32
+	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Intˢ
+	for i := int32(int32(0)); i < count; i++ {
+		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // int
+		slice.Index(uint64(i), ϟs).Write(unknown, ϟs)
+		_ = unknown
 	}
+	_, _ = count, slice
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidF64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidF64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_f64 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidU64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidU64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_u64 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidS64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidS64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_s64 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidBool) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidBool{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_bool expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidString) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidString{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_string expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoid3Strings) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoid3Strings{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_3_strings expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoid3Arrays) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoid3Arrays{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_3_arrays expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidArrayOfStrings) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidArrayOfStrings{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_array_of_strings expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdU8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdU8{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoid3Strings) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoid3InArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Buf = MakeU8ˢ(uint64(10), ϟs)
+	ϟc.Buf.Copy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟs, ϟd, ϟl)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u8
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s8
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u16
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s16
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f32
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u32
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s32
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f64
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u64
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s64
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // bool
+	_ = x
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidReadPtrs) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f32
+	y := ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u16
+	z := ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // bool
+	_, _, _ = x, y, z
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint8(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int8(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int16(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint32(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float64(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint64(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int64(1), ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWriteBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(true, ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdVoidWritePtrs) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(10), ϟs)
+	ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(20), ϟs)
+	ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(false, ϟs)
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = uint8(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_u8 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdS8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdS8{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = int8(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_s8 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdU16) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdU16{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = uint16(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_u16 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdS16) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdS16{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = int16(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_s16 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdF32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdF32{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = float32(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_f32 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdU32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdU32{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = uint32(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_u32 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdS32) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdS32{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = int32(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_s32 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdF64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdF64{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = float64(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_f64 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdU64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdU64{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = uint64(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_u64 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdS64) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdS64{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = int64(0)
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_s64 expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdBool) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdBool{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = false
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_bool expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdString) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdString{}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ""
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_string expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdArrayOfFloat) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdArrayOfFloat{}
-	ϟo.Result = make(F32Array, int32(10))
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.Result = ϟa.Result
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_array_of_float expected %v got %v", ϟa, ϟo)
-	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdPointer) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoid3Remapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdPointer{}
-	ϟa.Result = ϟa.Result
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_pointer expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidOutU8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidInArrayOfRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutU8{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_u8 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidOutS8) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidOutArrayOfRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutS8{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_s8 expected %v got %v", ϟa, ϟo)
-	}
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
-func (ϟa *CmdVoidOutU16) Mutate(ϟs *gfxapi.State) error {
+func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutU16{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_u16 expected %v got %v", ϟa, ϟo)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	count := int32(5)                                        // s32
+	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Remappedˢ
+	for i := int32(int32(0)); i < count; i++ {
+		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // remapped
+		slice.Index(uint64(i), ϟs).Write(unknown, ϟs)
+		_ = unknown
 	}
-	return nil
-}
-func (ϟa *CmdVoidOutS16) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutS16{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_s16 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutF32) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutF32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_f32 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutU32) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutU32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_u32 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutS32) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutS32{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_s32 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutF64) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutF64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_f64 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutU64) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutU64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_u64 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutS64) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutS64{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_s64 expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutBool) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutBool{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_bool expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutString) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutString{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_string expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutFixedSizeBuffer) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutFixedSizeBuffer{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_fixed_size_buffer expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOut3Strings) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOut3Strings{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_3_strings expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoid3Remapped) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoid3Remapped{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_3_remapped expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOut3Remapped) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOut3Remapped{}
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_3_remapped expected %v got %v", ϟa, ϟo)
-	}
-	return nil
-}
-func (ϟa *CmdVoidOutArrayOfRemapped) Mutate(ϟs *gfxapi.State) error {
-	ϟc := getState(ϟs)
-	ϟo := CmdVoidOutArrayOfRemapped{}
-	ϟo.A = make(RemappedArray, int32(5))
-	if ϟc.ValidateOutput && !reflect.DeepEqual(ϟa, ϟo) {
-		log.Printf("Applying cmd_void_out_array_of_remapped expected %v got %v", ϟa, ϟo)
-	}
+	_, _ = count, slice
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }

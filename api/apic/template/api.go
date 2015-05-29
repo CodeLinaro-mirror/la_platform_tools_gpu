@@ -17,7 +17,6 @@ package template
 import (
 	"fmt"
 
-	"android.googlesource.com/platform/tools/gpu/api/ast"
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
@@ -50,37 +49,6 @@ func (f *Functions) Underlying(ty semantic.Type) semantic.Type {
 			return ty
 		}
 	}
-}
-
-// GetArrayParamCount returns the inferred array size for param as a semantic
-// expression. If the array size cannot be inferred, then GetArrayParamCount
-// returns nil.
-func (*Functions) GetArrayParamCount(param *semantic.Parameter) interface{} {
-	f := param.Function
-	for _, s := range f.Block.Statements {
-		assert, ok := s.(*semantic.Assert)
-		if !ok {
-			continue
-		}
-		binary, ok := assert.Condition.(*semantic.BinaryOp)
-		if !ok {
-			continue
-		}
-		if length, ok := binary.LHS.(*semantic.Length); ok {
-			if binary.Operator == ast.OpGE || binary.Operator == ast.OpEQ {
-				if p, ok := length.Object.(*semantic.Parameter); ok && p == param {
-					return binary.RHS
-				}
-			}
-		} else if length, ok := binary.RHS.(*semantic.Length); ok {
-			if binary.Operator == ast.OpLE || binary.Operator == ast.OpEQ {
-				if p, ok := length.Object.(*semantic.Parameter); ok && p == param {
-					return binary.LHS
-				}
-			}
-		}
-	}
-	return nil
 }
 
 // AllCommands returns a list of all cmd entries for a given API, regardless
