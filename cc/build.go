@@ -48,7 +48,7 @@ var (
 	BinRoot      = build.RepoRoot.Path.Join("tools", "gpu", "bin")
 	CCRoot       = GPURoot.Join("cc")
 	GapicRoot    = CCRoot.Join("gapic")
-	GapiiRoot    = CCRoot.Join("gfxspy2", "src")
+	GapiiRoot    = CCRoot.Join("gapii")
 	GapirRoot    = CCRoot.Join("gapir")
 	ReplaydRoot  = CCRoot.Join("replayd")
 	GmockRoot    = ExternalRoot.Join("gmock")
