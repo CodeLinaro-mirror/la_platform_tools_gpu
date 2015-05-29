@@ -26,6 +26,7 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/generate"
@@ -142,6 +143,9 @@ func output(gen *generate.Generator, file *generate.File) error {
 		return nil
 	}
 	generate.Sort(file.Structs)
+	for _, c := range file.Constants {
+		sort.Sort(c.(sort.Interface))
+	}
 	if *golang {
 		entry := Entry{
 			File:      *file,
