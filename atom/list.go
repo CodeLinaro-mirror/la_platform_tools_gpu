@@ -39,9 +39,11 @@ func (l *List) Clone() List {
 	return c
 }
 
-// Add adds a to the end of the atom list.
-func (l *List) Add(a Atom) {
-	*l = append(*l, a)
+// Add appends a to the end of the atom list, returning the id of the last added
+// atom.
+func (l *List) Add(a ...Atom) ID {
+	*l = append(*l, a...)
+	return ID(len(*l) - 1)
 }
 
 // Add adds a to the list before the atom at id.

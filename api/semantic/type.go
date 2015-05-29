@@ -195,6 +195,7 @@ type Pointer struct {
 	Name  string // the full type name
 	To    Type   // the type this is a pointer to
 	Const bool   // wether the pointer was declared with the const attribute
+	Slice *Slice // The complementary slice type for this pointer.
 }
 
 func (t Pointer) Typename() string { return t.Name }
@@ -204,8 +205,9 @@ func (t Pointer) Member(name string) Node {
 
 // Slice represents an api slice type declaration, of the form To[]
 type Slice struct {
-	Name string // the full type name
-	To   Type   // the type this is a slice of
+	Name    string   // the full type name
+	To      Type     // The type this is a slice of
+	Pointer *Pointer // The complementary pointer type for this slice.
 }
 
 func (t Slice) Typename() string        { return t.Name }

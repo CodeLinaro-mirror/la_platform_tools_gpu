@@ -43,24 +43,16 @@ type readFramebufferDepth struct {
 	database        database.Database
 }
 
-func (a readFramebufferDepth) API() gfxapi.API {
-	return nil
-}
+func (a readFramebufferDepth) API() gfxapi.API                                           { return nil }
+func (a readFramebufferDepth) TypeID() atom.TypeID                                       { return 0 }
+func (a readFramebufferDepth) Flags() atom.Flags                                         { return 0 }
+func (a readFramebufferDepth) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
+func (a readFramebufferDepth) Observations() *atom.Observations                          { return &atom.Observations{} }
 
-func (a readFramebufferDepth) TypeID() atom.TypeID {
-	return 0
-}
-
-func (a readFramebufferDepth) Flags() atom.Flags {
-	return 0
-}
-
-func (a readFramebufferDepth) Mutate(*gfxapi.State) error {
-	return nil
-}
-
-func (a readFramebufferDepth) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
+func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
 	defer b.EndAtom()
+
+	arch := gs.Architecture
 
 	s := getState(gs)
 	c := s.getContext()
@@ -160,28 +152,31 @@ func (a readFramebufferDepth) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 	} {
 		capability := cap
 		if c.Capabilities[capability] {
-			replayNoPost(id, gs, b, NewGlDisable(capability))
+			replayNoPost(i, gs, d, l, b, NewGlDisable(capability))
 			undoList = append(undoList, NewGlEnable(capability))
 		}
 	}
 	if !c.VertexAttributeArrays[aScreenCoordsLocation].Enabled {
-		replayNoPost(id, gs, b, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
+		replayNoPost(i, gs, d, l, b, NewGlEnableVertexAttribArray(aScreenCoordsLocation))
 		undoList = append(undoList, NewGlDisableVertexAttribArray(aScreenCoordsLocation))
 	}
 
-	replayNoPost(id, gs, b,
+	replayNoPost(i, gs, d, l, b,
 		// Setup new framebuffer/renderbuffer.
-		NewGlGenFramebuffers(1, FramebufferIdArray{framebufferID}),
+		NewGlGenFramebuffers(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 		NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
-		NewGlGenRenderbuffers(1, RenderbufferIdArray{renderbufferID}),
+		NewGlGenRenderbuffers(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
 		NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
 		NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
 		NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
 
 		// Setup depth texture.
-		NewGlGenTextures(1, TextureIdArray{textureID}),
+		NewGlGenTextures(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
 		NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, textureID),
-		NewGlTexImage2D(TextureImageTarget_GL_TEXTURE_2D, 0, TexelFormat_GL_DEPTH24_STENCIL8, outW, outH, 0, TexelFormat_GL_DEPTH_STENCIL, TexelType_GL_UNSIGNED_INT_24_8, TexturePointer(0)),
+		NewGlTexImage2D(TextureImageTarget_GL_TEXTURE_2D, 0, TexelFormat_GL_DEPTH24_STENCIL8, outW, outH, 0, TexelFormat_GL_DEPTH_STENCIL, TexelType_GL_UNSIGNED_INT_24_8, 0),
 		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MIN_FILTER, int32(TextureFilterMode_GL_NEAREST)),
 		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_MAG_FILTER, int32(TextureFilterMode_GL_NEAREST)),
 		NewGlTexParameteri(TextureTarget_GL_TEXTURE_2D, TextureParameter_GL_TEXTURE_WRAP_S, int32(TextureWrapMode_GL_CLAMP_TO_EDGE)),
@@ -198,10 +193,12 @@ func (a readFramebufferDepth) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 		// Render depth texture to framebuffer color attachment.
 		NewGlClear(ClearMask_GL_COLOR_BUFFER_BIT),
 		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, vertexShaderID),
-		NewGlShaderSource(vertexShaderID, 1, StringArray{vertexShaderSource}, S32Array{int32(len(vertexShaderSource))}),
+		NewGlShaderSource(vertexShaderID, 1, memory.Tmp.Base+4, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, int32(len(vertexShaderSource)), vertexShaderSource)),
 		NewGlCompileShader(vertexShaderID),
 		NewGlCreateShader(ShaderType_GL_FRAGMENT_SHADER, fragmentShaderID),
-		NewGlShaderSource(fragmentShaderID, 1, StringArray{fragmentShaderSource}, S32Array{int32(len(fragmentShaderSource))}),
+		NewGlShaderSource(fragmentShaderID, 1, memory.Tmp.Base+4, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, int32(len(fragmentShaderSource)), fragmentShaderSource)),
 		NewGlCompileShader(fragmentShaderID),
 		NewGlCreateProgram(programID),
 		NewGlAttachShader(programID, vertexShaderID),
@@ -214,18 +211,18 @@ func (a readFramebufferDepth) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 		NewGlUniform1i(uTextureLocation, origActiveTextureUnit),
 		NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, 0),
 		NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, 0),
-		NewGlVertexAttribPointer(aScreenCoordsLocation, 2, VertexAttribType_GL_FLOAT, false, 0, VertexPointer(positionsAddr)),
-		&atom.Observation{Range: memory.Range{Base: positionsAddr, Size: 8 * 4}, ResourceID: positionsDataId},
-		&atom.Observation{Range: memory.Range{Base: indicesAddr, Size: 4}, ResourceID: indicesDataId},
-		NewGlDrawElements(DrawMode_GL_TRIANGLE_STRIP, 4, IndicesType_GL_UNSIGNED_BYTE, IndicesPointer(indicesAddr)),
+		NewGlVertexAttribPointer(aScreenCoordsLocation, 2, VertexAttribType_GL_FLOAT, false, 0, positionsAddr),
+		NewGlDrawElements(DrawMode_GL_TRIANGLE_STRIP, 4, IndicesType_GL_UNSIGNED_BYTE, indicesAddr).
+			AddRead(positionsAddr.Range(8*4), positionsDataId).
+			AddRead(indicesAddr.Range(4), indicesDataId),
 	)
 
-	postColorData(id, c, gs, b, outW, outH)
+	postColorData(i, c, gs, d, l, b, outW, outH)
 
 	// Restore conditionally changed state.
-	replayNoPost(id, gs, b, undoList...)
+	replayNoPost(i, gs, d, l, b, undoList...)
 
-	replayNoPost(id, gs, b,
+	replayNoPost(i, gs, d, l, b,
 		// Restore buffer/vertexAttrib state.
 		NewGlBindBuffer(BufferTarget_GL_ELEMENT_ARRAY_BUFFER, origElementArrayBufferID),
 		NewGlBindBuffer(BufferTarget_GL_ARRAY_BUFFER, origArrayBufferID),
@@ -234,14 +231,17 @@ func (a readFramebufferDepth) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 
 		// Restore texture state.
 		NewGlBindTexture(TextureTarget_GL_TEXTURE_2D, origTextureID),
-		NewGlDeleteTextures(1, TextureIdArray{textureID}),
+		NewGlDeleteTextures(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, textureID)),
 
 		// Restore framebuffer/renderbuffer state.
 		NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
 		NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
 		NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
-		NewGlDeleteRenderbuffers(1, RenderbufferIdArray{renderbufferID}),
-		NewGlDeleteFramebuffers(1, FramebufferIdArray{framebufferID}),
+		NewGlDeleteRenderbuffers(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
+		NewGlDeleteFramebuffers(1, memory.Tmp.Base).
+			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 	)
 }
 
@@ -252,24 +252,16 @@ type readFramebufferColor struct {
 	width, height   uint32
 }
 
-func (a readFramebufferColor) API() gfxapi.API {
-	return nil
-}
+func (a readFramebufferColor) API() gfxapi.API                                           { return nil }
+func (a readFramebufferColor) TypeID() atom.TypeID                                       { return 0 }
+func (a readFramebufferColor) Flags() atom.Flags                                         { return 0 }
+func (a readFramebufferColor) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
+func (a readFramebufferColor) Observations() *atom.Observations                          { return &atom.Observations{} }
 
-func (a readFramebufferColor) TypeID() atom.TypeID {
-	return 0
-}
-
-func (a readFramebufferColor) Flags() atom.Flags {
-	return 0
-}
-
-func (a readFramebufferColor) Mutate(*gfxapi.State) error {
-	return nil
-}
-
-func (a readFramebufferColor) Replay(id atom.ID, gs *gfxapi.State, b *builder.Builder, wantOutput bool) {
+func (a readFramebufferColor) Replay(i atom.ID, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) {
 	defer b.EndAtom()
+
+	arch := gs.Architecture
 
 	s := getState(gs)
 	c := s.getContext()
@@ -294,12 +286,14 @@ func (a readFramebufferColor) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 	framebufferID := FramebufferId(newUnusedID(func(x uint32) bool { _, ok := c.Instances.Framebuffers[FramebufferId(x)]; return ok }))
 
 	if inW == outW && inH == outH {
-		postColorData(id, c, gs, b, outW, outH)
+		postColorData(i, c, gs, d, l, b, outW, outH)
 	} else {
-		replayNoPost(id, gs, b,
-			NewGlGenFramebuffers(1, FramebufferIdArray{framebufferID}),
+		replayNoPost(i, gs, d, l, b,
+			NewGlGenFramebuffers(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, framebufferID),
-			NewGlGenRenderbuffers(1, RenderbufferIdArray{renderbufferID}),
+			NewGlGenRenderbuffers(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
 			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
 			NewGlRenderbufferStorage(RenderbufferTarget_GL_RENDERBUFFER, RenderbufferFormat_GL_RGBA8, outW, outH),
 			NewGlFramebufferRenderbuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, FramebufferAttachment_GL_COLOR_ATTACHMENT0, RenderbufferTarget_GL_RENDERBUFFER, renderbufferID),
@@ -307,23 +301,25 @@ func (a readFramebufferColor) Replay(id atom.ID, gs *gfxapi.State, b *builder.Bu
 			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, framebufferID),
 		)
 
-		postColorData(id, c, gs, b, outW, outH)
+		postColorData(i, c, gs, d, l, b, outW, outH)
 
-		replayNoPost(id, gs, b,
+		replayNoPost(i, gs, d, l, b,
 			NewGlBindRenderbuffer(RenderbufferTarget_GL_RENDERBUFFER, origRenderbufferID),
 			NewGlBindFramebuffer(FramebufferTarget_GL_READ_FRAMEBUFFER, origReadFramebufferID),
 			NewGlBindFramebuffer(FramebufferTarget_GL_DRAW_FRAMEBUFFER, origDrawFramebufferID),
-			NewGlDeleteRenderbuffers(1, RenderbufferIdArray{renderbufferID}),
-			NewGlDeleteFramebuffers(1, FramebufferIdArray{framebufferID}),
+			NewGlDeleteRenderbuffers(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, renderbufferID)),
+			NewGlDeleteFramebuffers(1, memory.Tmp.Base).
+				AddRead(atom.Data(arch, d, l, memory.Tmp.Base, framebufferID)),
 		)
 	}
 }
 
-func postColorData(id atom.ID, c *Context, gs *gfxapi.State, b *builder.Builder, width, height int32) {
+func postColorData(i atom.ID, c *Context, gs *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, width, height int32) {
 	origPackAlignment := c.PixelStorage[PixelStoreParameter_GL_PACK_ALIGNMENT]
 	if origPackAlignment != 1 {
-		replayNoPost(id, gs, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1))
-		defer replayNoPost(id, gs, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment))
+		replayNoPost(i, gs, d, l, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, 1))
+		defer replayNoPost(i, gs, d, l, b, NewGlPixelStorei(PixelStoreParameter_GL_PACK_ALIGNMENT, origPackAlignment))
 	}
 
 	imageSize := uint64(width * height * 4)
@@ -337,9 +333,8 @@ func postColorData(id atom.ID, c *Context, gs *gfxapi.State, b *builder.Builder,
 	b.Push(value.U32(TexelFormat_GL_RGBA))
 	b.Push(value.U32(TexelType_GL_UNSIGNED_BYTE))
 	b.Push(addr)
-	b.CallNoPush(funcInfoGlReadPixels)
-
-	b.Post(addr, imageSize, id,
+	b.Call(funcInfoGlReadPixels)
+	b.Post(addr, imageSize, i,
 		func(d binary.Decoder) (interface{}, error) {
 			buf := make([]byte, imageSize)
 			err := d.Data(buf)
@@ -348,9 +343,9 @@ func postColorData(id atom.ID, c *Context, gs *gfxapi.State, b *builder.Builder,
 	)
 }
 
-func replayNoPost(id atom.ID, s *gfxapi.State, b *builder.Builder, atoms ...atom.Atom) {
+func replayNoPost(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder, atoms ...atom.Atom) {
 	for _, a := range atoms {
-		replay.Replay(id, a, s, b, false)
+		replay.Replay(i, a, s, d, l, b)
 	}
 }
 

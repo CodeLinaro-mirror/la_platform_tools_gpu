@@ -20,7 +20,67 @@ class Tester {
 	Included B
 }
 
+////////////////////////////////////////////////////////////////
+// Intrinsics tests
+////////////////////////////////////////////////////////////////
+u8[]   buf
+string str
+
+cmd void cmd_clone(u8* src, u32 cnt) {
+  buf = clone(src[0:cnt])
+}
+
+cmd void cmd_make(u32 cnt) {
+  buf = make!u8(cnt)
+}
+
+cmd void cmd_copy(u8* src, u32 cnt) {
+  copy(buf, src[0:cnt])
+}
+
+cmd void cmd_charslice_to_string(char* s, u32 len) {
+  str = as!string(s[0:len])
+}
+
+////////////////////////////////////////////////////////////////
+// Void, no args
+////////////////////////////////////////////////////////////////
 cmd void cmd_void() {}
+
+////////////////////////////////////////////////////////////////
+// Unknown tests
+////////////////////////////////////////////////////////////////
+// TODO: These do not currently compile
+// int unk
+//
+// cmd int cmd_unknown_ret() {
+//   i := ?
+//   unk = i
+//   return i
+// }
+//
+// cmd void cmd_unknown_ptr(int* p) {
+//   i := ?
+//   unk = i
+//   p[0] = i
+// }
+
+cmd int cmd_unknown_ret() {
+  return ?
+}
+
+cmd void cmd_unknown_write_ptr(int* p) {
+  p[0] = ?
+}
+
+cmd void cmd_unknown_write_slice(int* a) {
+  count := 5
+  slice := a[0:count]
+  for i in (0 .. count) {
+    unknown := as!int(?)
+    slice[i] = unknown
+  }
+}
 
 ////////////////////////////////////////////////////////////////
 // Commands with a single input argument
@@ -44,72 +104,94 @@ cmd void cmd_void_string(string a) {}
 cmd void cmd_void_3_strings(string a, string b, string c) {}
 
 ////////////////////////////////////////////////////////////////
-// Array inputs
+// Commands with input arrays
 ////////////////////////////////////////////////////////////////
-cmd void cmd_void_3_arrays(s8[] a, string[] b, bool[] c) {}
+cmd void cmd_void_3_in_arrays(u8* a, u8** b, int* c) {
+  buf = make!u8(10)
+	copy(buf, a[5:25]) // only 10 elements should be copied
+	read(b[5:15])
+	read(c[5:15])
+}
 
 ////////////////////////////////////////////////////////////////
-// Array of strings as input
+// Commands with a single pointer element read
 ////////////////////////////////////////////////////////////////
-cmd void cmd_void_array_of_strings(string[] a) {}
+cmd void cmd_void_read_u8(u8* a)     { x := a[0] }
+cmd void cmd_void_read_s8(s8* a)     { x := a[0] }
+cmd void cmd_void_read_u16(u16* a)   { x := a[0] }
+cmd void cmd_void_read_s16(s16* a)   { x := a[0] }
+cmd void cmd_void_read_f32(f32* a)   { x := a[0] }
+cmd void cmd_void_read_u32(u32* a)   { x := a[0] }
+cmd void cmd_void_read_s32(s32* a)   { x := a[0] }
+cmd void cmd_void_read_f64(f64* a)   { x := a[0] }
+cmd void cmd_void_read_u64(u64* a)   { x := a[0] }
+cmd void cmd_void_read_s64(s64* a)   { x := a[0] }
+cmd void cmd_void_read_bool(bool* a) { x := a[0] }
+
+////////////////////////////////////////////////////////////////
+// Commands with multiple pointer element reads
+////////////////////////////////////////////////////////////////
+cmd void cmd_void_read_ptrs(f32* a, u16* b, bool* c) {
+  x := a[0]
+  y := b[0]
+  z := c[0]
+}
+
+////////////////////////////////////////////////////////////////
+// Commands with a single pointer element write
+////////////////////////////////////////////////////////////////
+cmd void cmd_void_write_u8(u8* a)     { a[0] = 1 }
+cmd void cmd_void_write_s8(s8* a)     { a[0] = 1 }
+cmd void cmd_void_write_u16(u16* a)   { a[0] = 1 }
+cmd void cmd_void_write_s16(s16* a)   { a[0] = 1 }
+cmd void cmd_void_write_f32(f32* a)   { a[0] = 1 }
+cmd void cmd_void_write_u32(u32* a)   { a[0] = 1 }
+cmd void cmd_void_write_s32(s32* a)   { a[0] = 1 }
+cmd void cmd_void_write_f64(f64* a)   { a[0] = 1 }
+cmd void cmd_void_write_u64(u64* a)   { a[0] = 1 }
+cmd void cmd_void_write_s64(s64* a)   { a[0] = 1 }
+cmd void cmd_void_write_bool(bool* a) { a[0] = true }
+
+////////////////////////////////////////////////////////////////
+// Commands with multiple pointer element writes
+////////////////////////////////////////////////////////////////
+cmd void cmd_void_write_ptrs(f32* a, u16* b, bool* c) {
+  a[0] = 10
+  b[0] = 20
+  c[0] = false
+}
 
 ////////////////////////////////////////////////////////////////
 // Commands with a return value
 ////////////////////////////////////////////////////////////////
-cmd u8   cmd_u8()   { return 0 }
-cmd s8   cmd_s8()   { return 0 }
-cmd u16  cmd_u16()  { return 0 }
-cmd s16  cmd_s16()  { return 0 }
-cmd f32  cmd_f32()  { return 0 }
-cmd u32  cmd_u32()  { return 0 }
-cmd s32  cmd_s32()  { return 0 }
-cmd f64  cmd_f64()  { return 0 }
-cmd u64  cmd_u64()  { return 0 }
-cmd s64  cmd_s64()  { return 0 }
-cmd bool cmd_bool() { return false }
-
-@ReturnSize(10)
-cmd string cmd_string()         { return "" }
-@ReturnSize(10)
-cmd f32[]  cmd_array_of_float() { return ? }
-@ReturnSize(10)
-cmd void[] cmd_pointer()        { return ? }
-
-////////////////////////////////////////////////////////////////
-// Commands with a single output argument
-////////////////////////////////////////////////////////////////
-cmd void cmd_void_out_u8(out u8 a)         {}
-cmd void cmd_void_out_s8(out s8 a)         {}
-cmd void cmd_void_out_u16(out u16 a)       {}
-cmd void cmd_void_out_s16(out s16 a)       {}
-cmd void cmd_void_out_f32(out f32 a)       {}
-cmd void cmd_void_out_u32(out u32 a)       {}
-cmd void cmd_void_out_s32(out s32 a)       {}
-cmd void cmd_void_out_f64(out f64 a)       {}
-cmd void cmd_void_out_u64(out u64 a)       {}
-cmd void cmd_void_out_s64(out s64 a)       {}
-cmd void cmd_void_out_bool(out bool a)     {}
-
-cmd void cmd_void_out_string(out string a)            { write(as!char[](a)[0:10]) }
-cmd void cmd_void_out_fixed_size_buffer(out void[] a) { write(a[0:10]) }
-
-////////////////////////////////////////////////////////////////
-// Commands with more than one output
-////////////////////////////////////////////////////////////////
-cmd void cmd_void_out_3_strings(out string a, out string b, out string c) {
-	write(as!char[](a)[0:0x0f])
-	write(as!char[](b)[0:0x1f])
-	write(as!char[](c)[0:0x2f])
-}
+cmd u8     cmd_u8()      { return 0 }
+cmd s8     cmd_s8()      { return 0 }
+cmd u16    cmd_u16()     { return 0 }
+cmd s16    cmd_s16()     { return 0 }
+cmd f32    cmd_f32()     { return 0 }
+cmd u32    cmd_u32()     { return 0 }
+cmd s32    cmd_s32()     { return 0 }
+cmd f64    cmd_f64()     { return 0 }
+cmd u64    cmd_u64()     { return 0 }
+cmd s64    cmd_s64()     { return 0 }
+cmd bool   cmd_bool()    { return false }
+cmd string cmd_string()  { return "" }
+cmd void*  cmd_pointer() { return ? }
 
 ////////////////////////////////////////////////////////////////
 // Commands with remapped input arguments
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_3_remapped(remapped a, remapped b, remapped c) {}
 
-////////////////////////////////////////////////////////////////
-// Commands with remapped output arguments
-////////////////////////////////////////////////////////////////
-cmd void cmd_void_out_3_remapped(out remapped a, out remapped b, out remapped c) {}
+cmd void cmd_void_in_array_of_remapped(remapped* a) { read(a[0:5]) }
 
-cmd void cmd_void_out_array_of_remapped(out remapped[] a) { write(a[0:5]) }
+cmd void cmd_void_out_array_of_remapped(remapped* a) { write(a[0:5]) }
+
+cmd void cmd_void_out_array_of_unknown_remapped(remapped* a) {
+  count := 5
+  slice := a[0:count]
+  for i in (0 .. count) {
+    unknown := as!remapped(?)
+    slice[i] = unknown
+  }
+}

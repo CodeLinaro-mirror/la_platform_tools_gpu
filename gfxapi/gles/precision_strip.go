@@ -18,35 +18,36 @@ import (
 	"fmt"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles/glsl/ast"
+	"android.googlesource.com/platform/tools/gpu/log"
+	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
 // precisionStrip returns a transform that removes all precision specifiers from
 // shader programs.
-func precisionStrip() atom.Transformer {
+func precisionStrip(d database.Database, l log.Logger) atom.Transformer {
+	s := gfxapi.NewState()
 	return atom.Transform("PrecisionStrip", func(id atom.ID, a atom.Atom, out atom.Writer) {
+		a.Mutate(s, d, l)
 		if cmd, ok := a.(*GlShaderSource); ok {
-			var src string
+			shader := getContext(s).Instances.Shaders.Get(cmd.Shader)
 
-			for _, s := range cmd.Source {
-				src = src + s
-			}
-
-			tree, err := glsl.Parse(src, ast.LangVertexShader)
+			tree, err := glsl.Parse(shader.Source, ast.LangVertexShader)
 			if len(err) > 0 {
-				panic(fmt.Errorf("Failed to parse shader '%s': %s", src, err[0]))
+				panic(fmt.Errorf("Failed to parse shader '%s': %s", shader.Source, err[0]))
 			}
 
 			precisionStripVisit(tree)
 
-			src = fmt.Sprint(glsl.Formatter(tree))
+			src := fmt.Sprint(glsl.Formatter(tree))
 
-			out.Write(id, &GlShaderSource{
-				Shader: cmd.Shader,
-				Count:  1,
-				Source: []string{src},
-			})
+			out.Write(id,
+				NewGlShaderSource(cmd.Shader, 1, memory.Tmp.Base, 0).
+					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+8, src)).
+					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+0, memory.Tmp.Base+8)))
 		} else {
 			out.Write(id, a)
 		}

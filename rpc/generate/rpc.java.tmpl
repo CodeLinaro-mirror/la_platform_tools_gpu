@@ -62,7 +62,7 @@
   {{AssertType $ "Type"}}
 
   {{if GetAnnotation $ "handle"}}{{Macro "QualifiedName" $}}
-  {{else if IsArray       $}}{{Macro "Type" $.ValueType}}[]
+  {{else if IsSlice       $}}{{Macro "Type" $.ValueType}}[]
   {{else if IsMap         $}}{{Macro "QualifiedName" $}}
   {{else if IsClass       $}}{{Macro "QualifiedName" $}}
   {{else if IsPointer     $}}{{Macro "QualifiedName" $.To}}

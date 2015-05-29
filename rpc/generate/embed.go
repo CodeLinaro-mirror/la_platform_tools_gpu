@@ -305,6 +305,7 @@ const rpc_go_tmpl = `{{/*
   {{Macro "AllFields" "Class" $ "Macro" "DefineClassFieldAccessor"}}
 {{end}}
 
+
 {{/*
 -------------------------------------------------------------------------------
   Emits the encoder of a handle.
@@ -326,6 +327,7 @@ func (h {{$.Name}}) Valid() bool {
   return h.ID.Valid()
 }
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
@@ -350,6 +352,7 @@ func (h {{$.Name}}) Valid() bool {
     fmt.Fprintf(f, "[%d]{{$.Name}}", len(a))
   }
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
@@ -388,6 +391,7 @@ func (h {{$.Name}}) Valid() bool {
     func (i {{$.Name}}) Is{{$e.Name}}() bool { return i == {{$.Name}}{{$e.Name}} }
   {{end}}
 {{end}}
+
 
 {{/*
 -------------------------------------------------------------------------------
@@ -650,7 +654,7 @@ const rpc_java_tmpl = `{{/*
   {{AssertType $ "Type"}}
 
   {{if GetAnnotation $ "handle"}}{{Macro "QualifiedName" $}}
-  {{else if IsArray       $}}{{Macro "Type" $.ValueType}}[]
+  {{else if IsSlice       $}}{{Macro "Type" $.ValueType}}[]
   {{else if IsMap         $}}{{Macro "QualifiedName" $}}
   {{else if IsClass       $}}{{Macro "QualifiedName" $}}
   {{else if IsPointer     $}}{{Macro "QualifiedName" $.To}}
@@ -1298,7 +1302,7 @@ const rpc_common_go_tmpl = `{{/*
   {{else if IsU64     $}}{{Macro "Go.RPC.QualifiedName" "U64Array"}}
   {{else if IsF64     $}}{{Macro "Go.RPC.QualifiedName" "F64Array"}}
   {{else if IsString  $}}{{Macro "Go.RPC.QualifiedName" "StringArray"}}
-  {{else if IsPointer $}}{{Macro "Type" $.To}}Array
+  {{else if IsPointer $}}{{Macro "Type" $.To}}PtrArray
   {{else                }}{{Macro "Type" $}}Array
   {{end}}
 {{end}}

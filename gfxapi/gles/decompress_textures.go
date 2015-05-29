@@ -37,39 +37,35 @@ import (
 //   GL_ATC_RGB_AMD
 //   GL_ATC_RGBA_EXPLICIT_ALPHA_AMD
 //   GL_ETC1_RGB8_OES
-func decompressTextures(capture service.CaptureId, db database.Database, logger log.Logger) atom.Transformer {
-	logger = logger.Enter("decompressTextures")
-	s := &gfxapi.State{}
+func decompressTextures(capture service.CaptureId, d database.Database, l log.Logger) atom.Transformer {
+	l = l.Enter("decompressTextures")
+	s := gfxapi.NewState()
 	return atom.Transform("DecompressTextures", func(id atom.ID, a atom.Atom, out atom.Writer) {
-		if err := a.Mutate(s); err != nil {
-			logger.Errorf("%v", err)
+		if err := a.Mutate(s, d, l); err != nil {
+			l.Errorf("%v", err)
 		}
 
 		switch a := a.(type) {
 		case *GlCompressedTexImage2D:
 			resourceID := calcTextureID(capture, id, a)
 			var blob store.Blob
-			if db.Load(resourceID, logger, &blob) != nil {
-				decompressed, err := decompress(db, logger, a, &s.Memory)
+			if d.Load(resourceID, l, &blob) != nil {
+				decompressed, err := decompress(d, l, a, s.Memory[memory.ApplicationPool])
 				if err != nil {
 					panic(err)
 				}
 				blob = store.Blob{Data: decompressed}
-				decompressedID, err := db.Store(&blob, logger)
+				decompressedID, err := d.Store(&blob, l)
 				if err != nil {
 					panic(err)
 				}
-				err = db.StoreLink(decompressedID, resourceID, logger)
+				err = d.StoreLink(decompressedID, resourceID, l)
 				if err != nil {
 					panic(err)
 				}
 			}
 
 			address := memory.Pointer(0xF000000000000000)
-			out.Write(id, &atom.Observation{
-				Range:      memory.Range{Base: address, Size: uint64(len(blob.Data))},
-				ResourceID: resourceID,
-			})
 
 			out.Write(id, NewGlTexImage2D(
 				a.Target,
@@ -80,8 +76,8 @@ func decompressTextures(capture service.CaptureId, db database.Database, logger 
 				a.Border,
 				TexelFormat_GL_RGBA,
 				TexelType_GL_UNSIGNED_BYTE,
-				TexturePointer(address),
-			))
+				address,
+			).AddRead(address.Range(uint64(len(blob.Data))), resourceID))
 
 		default:
 			out.Write(id, a)
@@ -98,10 +94,9 @@ func calcTextureID(capture service.CaptureId, id atom.ID, a atom.Atom) binary.ID
 	return binary.NewID(buf.Bytes())
 }
 
-func decompress(db database.Database, logger log.Logger, a *GlCompressedTexImage2D, m *memory.Memory) ([]byte, error) {
-	pointer := memory.Pointer(a.Data)
+func decompress(d database.Database, l log.Logger, a *GlCompressedTexImage2D, m *memory.Pool) ([]byte, error) {
 	compressedSize := uint64(a.ImageSize)
-	compressed, err := m.Slice(memory.Range{Base: pointer, Size: compressedSize}).Get(db, logger)
+	compressed, err := m.Slice(memory.Range{Base: a.Data.Address, Size: compressedSize}).Get(d, l)
 	if err != nil {
 		panic(err)
 	}

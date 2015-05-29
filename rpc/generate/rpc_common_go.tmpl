@@ -133,7 +133,7 @@
   {{else if IsU64     $}}{{Macro "Go.RPC.QualifiedName" "U64Array"}}
   {{else if IsF64     $}}{{Macro "Go.RPC.QualifiedName" "F64Array"}}
   {{else if IsString  $}}{{Macro "Go.RPC.QualifiedName" "StringArray"}}
-  {{else if IsPointer $}}{{Macro "Type" $.To}}Array
+  {{else if IsPointer $}}{{Macro "Type" $.To}}PtrArray
   {{else                }}{{Macro "Type" $}}Array
   {{end}}
 {{end}}

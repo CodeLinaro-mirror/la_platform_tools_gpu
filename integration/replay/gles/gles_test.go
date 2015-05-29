@@ -15,18 +15,14 @@
 package gles
 
 import (
-	"bytes"
-	eb "encoding/binary"
 	"flag"
-	"fmt"
 	"image"
 	"testing"
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/atom"
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/database"
-	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/gfxapi/gles"
 	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
@@ -68,87 +64,50 @@ func checkColorBuffer(t *testing.T, ctx *replay.Context, mgr *replay.Manager, w,
 	}
 }
 
-type atoms atom.List
-
-func (l *atoms) add(atoms ...atom.Atom) atom.ID {
-	*l = append(*l, atoms...)
-	return atom.ID(len(*l) - 1)
-}
-
-func (l *atoms) data(db database.Database, logger log.Logger, data ...interface{}) memory.Pointer {
-	buf := &bytes.Buffer{}
-	w := endian.Writer(buf, eb.LittleEndian)
-	for _, d := range data {
-		switch d := d.(type) {
-		case float32:
-			w.Float32(d)
-		default:
-			panic(fmt.Errorf("Unsupported data type %T", d))
-		}
-	}
-
-	blob := &store.Blob{Data: buf.Bytes()}
-	id, err := db.Store(blob, logger)
-	if err != nil {
-		panic(err)
-	}
-
-	ptr := memory.Pointer(0x100000)
-	l.add(&atom.Observation{
-		ResourceID: id,
-		Range: memory.Range{
-			Base: ptr,
-			Size: uint64(len(buf.Bytes())),
-		},
-	})
-
-	return ptr
-}
-
-func initContext(width, height uint32) atoms {
-	eglDisplay := gles.EGLDisplay(0x1000)
-	eglConfig := gles.EGLConfig(0x2000)
-	eglShareContext := gles.EGLContext(0)
-	eglAttribList := gles.EGLintArray{}
-	eglSurface := gles.EGLSurface(0x3000)
-	eglContext := gles.EGLContext(0x5000)
+func initContext(a device.Architecture, d database.Database, l log.Logger, width, height uint32) atom.List {
+	eglDisplay := memory.Pointer(0x1000)
+	eglConfig := memory.Pointer(0x2000)
+	eglShareContext := memory.Pointer(0)
+	eglAttribList := []gles.EGLint{0}
+	eglSurface := memory.Pointer(0x3000)
+	eglContext := memory.Pointer(0x5000)
 	eglTrue := gles.EGLBoolean(1)
 	color := gles.RenderbufferFormat_GL_RGB565
 	depth := gles.RenderbufferFormat_GL_DEPTH_COMPONENT16
 	stencil := gles.RenderbufferFormat_GL_STENCIL_INDEX8
-	return atoms{
-		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, eglAttribList, eglContext),
+	return atom.List{
+		gles.NewEglCreateContext(eglDisplay, eglConfig, eglShareContext, 0x1000000, eglContext).
+			AddRead(atom.Data(a, d, l, 0x1000000, eglAttribList)),
 		gles.NewEglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext, eglTrue),
 		gles.NewBackbufferInfo(int32(width), int32(height), color, depth, stencil, true /* resetViewportScissor */),
 	}
 }
 
 func TestClear(t *testing.T) {
-	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
+	d, l := database.InMemory(), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
 	w, h := uint32(64), uint32(64)
-	atoms := initContext(w, h)
-	red := atoms.add(
+	atoms := initContext(device.Info().Architecture(), d, l, w, h)
+	red := atoms.Add(
 		gles.NewGlClearColor(1.0, 0.0, 0.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
-	green := atoms.add(
+	green := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
-	blue := atoms.add(
+	blue := atoms.Add(
 		gles.NewGlClearColor(0.0, 0.0, 1.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
-	black := atoms.add(
+	black := atoms.Add(
 		gles.NewGlClearColor(0.0, 0.0, 0.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
 
-	mgr := replay.New(db, logger)
-	device := utils.FindLocalDevice(t, mgr)
-
 	ctx := &replay.Context{
-		CaptureID: utils.StoreCapture(t, atom.List(atoms), db, logger),
+		CaptureID: utils.StoreCapture(t, atom.List(atoms), d, l),
 		DeviceID:  device.ID(),
 	}
 
@@ -159,7 +118,10 @@ func TestClear(t *testing.T) {
 }
 
 func TestDrawTriangle(t *testing.T) {
-	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
+	d, l := database.InMemory(), log.Testing(t)
+	mgr := replay.New(d, l)
+	device := utils.FindLocalDevice(t, mgr)
+	a := device.Info().Architecture()
 	w, h := uint32(64), uint32(64)
 	vs, fs := gles.ShaderId(0x10), gles.ShaderId(0x20)
 	program := gles.ProgramId(0x30)
@@ -175,24 +137,28 @@ func TestDrawTriangle(t *testing.T) {
 		void main() {
 			gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 		}`
-	atoms := initContext(w, h)
-	vertices := gles.VertexPointer(
-		atoms.data(db, logger,
-			float32(+0.0), float32(-0.5),
-			float32(-0.5), float32(+0.5),
-			float32(+0.5), float32(+0.5),
-		),
-	)
-	clear := atoms.add(
+	atoms := initContext(a, d, l, w, h)
+	vertices := []float32{
+		+0.0, -0.5,
+		-0.5, +0.5,
+		+0.5, +0.5,
+	}
+	clear := atoms.Add(
 		gles.NewGlClearColor(0.0, 1.0, 0.0, 1.0),
 		gles.NewGlClear(gles.ClearMask_GL_COLOR_BUFFER_BIT),
 	)
-	triangle := atoms.add(
+	triangle := atoms.Add(
 		gles.NewGlCreateShader(gles.ShaderType_GL_VERTEX_SHADER, vs),
-		gles.NewGlShaderSource(vs, 1, gles.StringArray{vsSource}, gles.S32Array{int32(len(vsSource))}),
+		gles.NewGlShaderSource(vs, 1, 0x100000, 0x100010).
+			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
+			AddRead(atom.Data(a, d, l, 0x100010, int32(len(vsSource)))).
+			AddRead(atom.Data(a, d, l, 0x100020, vsSource)),
 		gles.NewGlCompileShader(vs),
 		gles.NewGlCreateShader(gles.ShaderType_GL_FRAGMENT_SHADER, fs),
-		gles.NewGlShaderSource(fs, 1, gles.StringArray{fsSource}, gles.S32Array{int32(len(fsSource))}),
+		gles.NewGlShaderSource(fs, 1, 0x100000, 0x100010).
+			AddRead(atom.Data(a, d, l, 0x100000, memory.Pointer(0x100020))).
+			AddRead(atom.Data(a, d, l, 0x100010, int32(len(fsSource)))).
+			AddRead(atom.Data(a, d, l, 0x100020, fsSource)),
 		gles.NewGlCompileShader(fs),
 		gles.NewGlCreateProgram(program),
 		gles.NewGlAttachShader(program, vs),
@@ -201,14 +167,13 @@ func TestDrawTriangle(t *testing.T) {
 		gles.NewGlUseProgram(program),
 		gles.NewGlGetAttribLocation(program, "position", position),
 		gles.NewGlEnableVertexAttribArray(position),
-		gles.NewGlVertexAttribPointer(position, 2, gles.VertexAttribType_GL_FLOAT, false, 0, vertices),
+		gles.NewGlVertexAttribPointer(position, 2, gles.VertexAttribType_GL_FLOAT, false, 0, 0x100000).
+			AddRead(atom.Data(a, d, l, 0x100000, vertices)),
 		gles.NewGlDrawArrays(gles.DrawMode_GL_TRIANGLES, 0, 3),
 	)
-	mgr := replay.New(db, logger)
-	device := utils.FindLocalDevice(t, mgr)
 
 	ctx := &replay.Context{
-		CaptureID: utils.StoreCapture(t, atom.List(atoms), db, logger),
+		CaptureID: utils.StoreCapture(t, atom.List(atoms), d, l),
 		DeviceID:  device.ID(),
 	}
 

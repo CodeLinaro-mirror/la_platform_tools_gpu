@@ -19,19 +19,18 @@
 #ifndef GAPII_GLES_STATE_H
 #define GAPII_GLES_STATE_H
 
+#include "state_base.h"
 #include "gles_types.h"
 
 #include <gapic/encoder.h>
-
-#include <functional>
 
 #include <stdint.h>
 
 namespace gapii {
 
-class GlesState {
+class GlesState : public StateBase {
 public:
-    typedef std::function<void(void* ptr, uint64_t offset, uint64_t size)> ObserveFunc;
+    inline GlesState(ObserveFunc observe);
 
     inline void replayCreateRenderer(uint32_t const id);
     inline void replayBindRenderer(uint32_t const id);
@@ -41,50 +40,44 @@ public:
     inline void startTimer(uint8_t const index);
     inline void stopTimer(uint8_t const index, uint64_t const result);
     inline void flushPostBuffer();
-    inline void eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor,
+    inline void eglInitialize(void* const dpy, int* const major, int* const minor,
                               EGLBoolean const result);
-    inline void eglCreateContext(EGLDisplay const display, EGLConfig const config,
-                                 EGLContext const share_context, const EGLint* const attrib_list,
-                                 EGLContext const result);
-    inline void eglMakeCurrent(EGLDisplay const display, EGLSurface const draw,
-                               EGLSurface const read, EGLContext const context,
-                               EGLBoolean const result);
-    inline void eglSwapBuffers(EGLDisplay const display, const void* const surface,
-                               EGLBoolean const result);
-    inline void eglQuerySurface(EGLDisplay const display, EGLSurface const surface,
-                                EGLint const attribute, EGLint* const value,
-                                EGLBoolean const result);
-    inline void glXCreateContext(const void* const dpy, const void* const vis,
-                                 GLXContext const shareList, bool const direct,
-                                 GLXContext const result);
-    inline void glXCreateNewContext(const void* const display, const void* const fbconfig,
-                                    uint32_t const type, GLXContext const shared, bool const direct,
-                                    GLXContext const result);
-    inline void glXMakeContextCurrent(const void* const display, GLXDrawable const draw,
-                                      GLXDrawable const read, GLXContext const ctx);
-    inline void glXSwapBuffers(const void* const display, GLXDrawable const drawable);
-    inline void wglCreateContext(HDC const hdc, HGLRC const result);
-    inline void wglCreateContextAttribsARB(HDC const hdc, HGLRC const hShareContext,
-                                           const int* const attribList, HGLRC const result);
-    inline void wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result);
-    inline void wglSwapBuffers(HDC const hdc);
-    inline void CGLCreateContext(CGLPixelFormatObj const pix, CGLContextObj const share,
-                                 CGLContextObj* const ctx, CGLError const result);
-    inline void CGLSetCurrentContext(CGLContextObj const ctx, CGLError const result);
+    inline void eglCreateContext(void* const display, void* const config, void* const share_context,
+                                 int* const attrib_list, EGLContext const result);
+    inline void eglMakeCurrent(void* const display, void* const draw, void* const read,
+                               void* const context, EGLBoolean const result);
+    inline void eglSwapBuffers(void* const display, void* const surface, EGLBoolean const result);
+    inline void eglQuerySurface(void* const display, void* const surface, int const attribute,
+                                int* const value, EGLBoolean const result);
+    inline void glXCreateContext(void* const dpy, void* const vis, void* const shareList,
+                                 bool const direct, GLXContext const result);
+    inline void glXCreateNewContext(void* const display, void* const fbconfig, uint32_t const type,
+                                    void* const shared, bool const direct, GLXContext const result);
+    inline void glXMakeContextCurrent(void* const display, void* const draw, void* const read,
+                                      void* const ctx);
+    inline void glXSwapBuffers(void* const display, void* const drawable);
+    inline void wglCreateContext(void* const hdc, HGLRC const result);
+    inline void wglCreateContextAttribsARB(void* const hdc, void* const hShareContext,
+                                           int* const attribList, HGLRC const result);
+    inline void wglMakeCurrent(void* const hdc, void* const hglrc, BOOL const result);
+    inline void wglSwapBuffers(void* const hdc);
+    inline void CGLCreateContext(void* const pix, void* const share, void** const ctx,
+                                 CGLError const result);
+    inline void CGLSetCurrentContext(void* const ctx, CGLError const result);
     inline void glEnableClientState(uint32_t const type);
     inline void glDisableClientState(uint32_t const type);
-    inline void glGetProgramBinaryOES(ProgramId const program, int32_t const buffer_size,
+    inline void glGetProgramBinaryOES(uint32_t const program, int32_t const buffer_size,
                                       int32_t* const bytes_written, uint32_t* const binary_format,
                                       void* const binary);
-    inline void glProgramBinaryOES(ProgramId const program, uint32_t const binary_format,
-                                   const void* const binary, int32_t const binary_size);
+    inline void glProgramBinaryOES(uint32_t const program, uint32_t const binary_format,
+                                   void* const binary, int32_t const binary_size);
     inline void glStartTilingQCOM(int32_t const x, int32_t const y, int32_t const width,
                                   int32_t const height, uint32_t const preserveMask);
     inline void glEndTilingQCOM(uint32_t const preserve_mask);
     inline void glDiscardFramebufferEXT(uint32_t const target, int32_t const numAttachments,
-                                        const uint32_t* const attachments);
-    inline void glInsertEventMarkerEXT(int32_t const length, const char* const marker);
-    inline void glPushGroupMarkerEXT(int32_t const length, const char* const marker);
+                                        uint32_t* const attachments);
+    inline void glInsertEventMarkerEXT(int32_t const length, char* const marker);
+    inline void glPushGroupMarkerEXT(int32_t const length, char* const marker);
     inline void glPopGroupMarkerEXT();
     inline void glTexStorage1DEXT(uint32_t const target, int32_t const levels,
                                   uint32_t const format, int32_t const width);
@@ -93,26 +86,25 @@ public:
     inline void glTexStorage3DEXT(uint32_t const target, int32_t const levels,
                                   uint32_t const format, int32_t const width, int32_t const height,
                                   int32_t const depth);
-    inline void glTextureStorage1DEXT(TextureId const texture, uint32_t const target,
+    inline void glTextureStorage1DEXT(uint32_t const texture, uint32_t const target,
                                       int32_t const levels, uint32_t const format,
                                       int32_t const width);
-    inline void glTextureStorage2DEXT(TextureId const texture, uint32_t const target,
+    inline void glTextureStorage2DEXT(uint32_t const texture, uint32_t const target,
                                       int32_t const levels, uint32_t const format,
                                       int32_t const width, int32_t const height);
-    inline void glTextureStorage3DEXT(TextureId const texture, uint32_t const target,
+    inline void glTextureStorage3DEXT(uint32_t const texture, uint32_t const target,
                                       int32_t const levels, uint32_t const format,
                                       int32_t const width, int32_t const height,
                                       int32_t const depth);
-    inline void glGenVertexArraysOES(int32_t const count, VertexArrayId* const arrays);
-    inline void glBindVertexArrayOES(VertexArrayId const array);
-    inline void glDeleteVertexArraysOES(int32_t const count, const VertexArrayId* const arrays);
-    inline void glIsVertexArrayOES(VertexArrayId const array, bool const result);
-    inline void glEGLImageTargetTexture2DOES(uint32_t const target, ImageOES const image);
-    inline void glEGLImageTargetRenderbufferStorageOES(uint32_t const target,
-                                                       TexturePointer const image);
+    inline void glGenVertexArraysOES(int32_t const count, uint32_t* const arrays);
+    inline void glBindVertexArrayOES(uint32_t const array);
+    inline void glDeleteVertexArraysOES(int32_t const count, uint32_t* const arrays);
+    inline void glIsVertexArrayOES(uint32_t const array, bool const result);
+    inline void glEGLImageTargetTexture2DOES(uint32_t const target, void* const image);
+    inline void glEGLImageTargetRenderbufferStorageOES(uint32_t const target, void* const image);
     inline void glGetGraphicsResetStatusEXT(uint32_t const result);
-    inline void glBindAttribLocation(ProgramId const program, AttributeLocation const location,
-                                     const char* const name);
+    inline void glBindAttribLocation(uint32_t const program, uint32_t const location,
+                                     char* const name);
     inline void glBlendFunc(uint32_t const src_factor, uint32_t const dst_factor);
     inline void glBlendFuncSeparate(uint32_t const src_factor_rgb, uint32_t const dst_factor_rgb,
                                     uint32_t const src_factor_alpha,
@@ -121,26 +113,26 @@ public:
     inline void glBlendEquationSeparate(uint32_t const rgb, uint32_t const alpha);
     inline void glBlendColor(float const red, float const green, float const blue,
                              float const alpha);
-    inline void glEnableVertexAttribArray(AttributeLocation const location);
-    inline void glDisableVertexAttribArray(AttributeLocation const location);
-    inline void glVertexAttribPointer(AttributeLocation const location, int32_t const size,
+    inline void glEnableVertexAttribArray(uint32_t const location);
+    inline void glDisableVertexAttribArray(uint32_t const location);
+    inline void glVertexAttribPointer(uint32_t const location, int32_t const size,
                                       uint32_t const type, bool const normalized,
-                                      int32_t const stride, VertexPointer const data);
-    inline void glGetActiveAttrib(ProgramId const program, AttributeLocation const location,
+                                      int32_t const stride, void* const data);
+    inline void glGetActiveAttrib(uint32_t const program, uint32_t const location,
                                   int32_t const buffer_size, int32_t* const buffer_bytes_written,
                                   int32_t* const vector_count, uint32_t* const type,
                                   char* const name);
-    inline void glGetActiveUniform(ProgramId const program, int32_t const location,
+    inline void glGetActiveUniform(uint32_t const program, int32_t const location,
                                    int32_t const buffer_size, int32_t* const buffer_bytes_written,
                                    int32_t* const size, uint32_t* const type, char* const name);
     inline void glGetError(uint32_t const result);
-    inline void glGetProgramiv(ProgramId const program, uint32_t const parameter,
+    inline void glGetProgramiv(uint32_t const program, uint32_t const parameter,
                                int32_t* const value);
-    inline void glGetShaderiv(ShaderId const shader, uint32_t const parameter,
+    inline void glGetShaderiv(uint32_t const shader, uint32_t const parameter,
                               int32_t* const value);
-    inline void glGetUniformLocation(ProgramId const program, const char* const name,
+    inline void glGetUniformLocation(uint32_t const program, char* const name,
                                      UniformLocation const result);
-    inline void glGetAttribLocation(ProgramId const program, const char* const name,
+    inline void glGetAttribLocation(uint32_t const program, char* const name,
                                     AttributeLocation const result);
     inline void glPixelStorei(uint32_t const parameter, int32_t const value);
     inline void glTexParameteri(uint32_t const target, uint32_t const parameter,
@@ -150,56 +142,45 @@ public:
                                     int32_t* const values);
     inline void glGetTexParameterfv(uint32_t const target, uint32_t const parameter,
                                     float* const values);
-    inline void glUniform1i(UniformLocation const location, int32_t const value);
-    inline void glUniform2i(UniformLocation const location, int32_t const value0,
-                            int32_t const value1);
-    inline void glUniform3i(UniformLocation const location, int32_t const value0,
-                            int32_t const value1, int32_t const value2);
-    inline void glUniform4i(UniformLocation const location, int32_t const value0,
-                            int32_t const value1, int32_t const value2, int32_t const value3);
-    inline void glUniform1iv(UniformLocation const location, int32_t const count,
-                             const int32_t* const value);
-    inline void glUniform2iv(UniformLocation const location, int32_t const count,
-                             const int32_t* const value);
-    inline void glUniform3iv(UniformLocation const location, int32_t const count,
-                             const int32_t* const value);
-    inline void glUniform4iv(UniformLocation const location, int32_t const count,
-                             const int32_t* const value);
-    inline void glUniform1f(UniformLocation const location, float const value);
-    inline void glUniform2f(UniformLocation const location, float const value0, float const value1);
-    inline void glUniform3f(UniformLocation const location, float const value0, float const value1,
+    inline void glUniform1i(int32_t const location, int32_t const value);
+    inline void glUniform2i(int32_t const location, int32_t const value0, int32_t const value1);
+    inline void glUniform3i(int32_t const location, int32_t const value0, int32_t const value1,
+                            int32_t const value2);
+    inline void glUniform4i(int32_t const location, int32_t const value0, int32_t const value1,
+                            int32_t const value2, int32_t const value3);
+    inline void glUniform1iv(int32_t const location, int32_t const count, int32_t* const value);
+    inline void glUniform2iv(int32_t const location, int32_t const count, int32_t* const value);
+    inline void glUniform3iv(int32_t const location, int32_t const count, int32_t* const value);
+    inline void glUniform4iv(int32_t const location, int32_t const count, int32_t* const value);
+    inline void glUniform1f(int32_t const location, float const value);
+    inline void glUniform2f(int32_t const location, float const value0, float const value1);
+    inline void glUniform3f(int32_t const location, float const value0, float const value1,
                             float const value2);
-    inline void glUniform4f(UniformLocation const location, float const value0, float const value1,
+    inline void glUniform4f(int32_t const location, float const value0, float const value1,
                             float const value2, float const value3);
-    inline void glUniform1fv(UniformLocation const location, int32_t const count,
-                             const float* const value);
-    inline void glUniform2fv(UniformLocation const location, int32_t const count,
-                             const float* const value);
-    inline void glUniform3fv(UniformLocation const location, int32_t const count,
-                             const float* const value);
-    inline void glUniform4fv(UniformLocation const location, int32_t const count,
-                             const float* const value);
-    inline void glUniformMatrix2fv(UniformLocation const location, int32_t const count,
-                                   bool const transpose, const float* const values);
-    inline void glUniformMatrix3fv(UniformLocation const location, int32_t const count,
-                                   bool const transpose, const float* const values);
-    inline void glUniformMatrix4fv(UniformLocation const location, int32_t const count,
-                                   bool const transpose, const float* const values);
-    inline void glGetUniformfv(ProgramId const program, UniformLocation const location,
-                               const float* const values);
-    inline void glGetUniformiv(ProgramId const program, UniformLocation const location,
-                               const int32_t* const values);
-    inline void glVertexAttrib1f(AttributeLocation const location, float const value0);
-    inline void glVertexAttrib2f(AttributeLocation const location, float const value0,
-                                 float const value1);
-    inline void glVertexAttrib3f(AttributeLocation const location, float const value0,
-                                 float const value1, float const value2);
-    inline void glVertexAttrib4f(AttributeLocation const location, float const value0,
-                                 float const value1, float const value2, float const value3);
-    inline void glVertexAttrib1fv(AttributeLocation const location, const float* const value);
-    inline void glVertexAttrib2fv(AttributeLocation const location, const float* const value);
-    inline void glVertexAttrib3fv(AttributeLocation const location, const float* const value);
-    inline void glVertexAttrib4fv(AttributeLocation const location, const float* const value);
+    inline void glUniform1fv(int32_t const location, int32_t const count, float* const value);
+    inline void glUniform2fv(int32_t const location, int32_t const count, float* const value);
+    inline void glUniform3fv(int32_t const location, int32_t const count, float* const value);
+    inline void glUniform4fv(int32_t const location, int32_t const count, float* const value);
+    inline void glUniformMatrix2fv(int32_t const location, int32_t const count,
+                                   bool const transpose, float* const values);
+    inline void glUniformMatrix3fv(int32_t const location, int32_t const count,
+                                   bool const transpose, float* const values);
+    inline void glUniformMatrix4fv(int32_t const location, int32_t const count,
+                                   bool const transpose, float* const values);
+    inline void glGetUniformfv(uint32_t const program, int32_t const location, float* const values);
+    inline void glGetUniformiv(uint32_t const program, int32_t const location,
+                               int32_t* const values);
+    inline void glVertexAttrib1f(uint32_t const location, float const value0);
+    inline void glVertexAttrib2f(uint32_t const location, float const value0, float const value1);
+    inline void glVertexAttrib3f(uint32_t const location, float const value0, float const value1,
+                                 float const value2);
+    inline void glVertexAttrib4f(uint32_t const location, float const value0, float const value1,
+                                 float const value2, float const value3);
+    inline void glVertexAttrib1fv(uint32_t const location, float* const value);
+    inline void glVertexAttrib2fv(uint32_t const location, float* const value);
+    inline void glVertexAttrib3fv(uint32_t const location, float* const value);
+    inline void glVertexAttrib4fv(uint32_t const location, float* const value);
     inline void glGetShaderPrecisionFormat(uint32_t const shader_type,
                                            uint32_t const precision_type, int32_t* const range,
                                            int32_t* const precision);
@@ -220,18 +201,17 @@ public:
     inline void glScissor(int32_t const x, int32_t const y, int32_t const width,
                           int32_t const height);
     inline void glActiveTexture(uint32_t const unit);
-    inline void glGenTextures(int32_t const count, TextureId* const textures);
-    inline void glDeleteTextures(int32_t const count, const TextureId* const textures);
-    inline void glIsTexture(TextureId const texture, bool const result);
-    inline void glBindTexture(uint32_t const target, TextureId const texture);
+    inline void glGenTextures(int32_t const count, uint32_t* const textures);
+    inline void glDeleteTextures(int32_t const count, uint32_t* const textures);
+    inline void glIsTexture(uint32_t const texture, bool const result);
+    inline void glBindTexture(uint32_t const target, uint32_t const texture);
     inline void glTexImage2D(uint32_t const target, int32_t const level,
                              uint32_t const internal_format, int32_t const width,
                              int32_t const height, int32_t const border, uint32_t const format,
-                             uint32_t const type, TexturePointer const data);
+                             uint32_t const type, void* const data);
     inline void glTexSubImage2D(uint32_t const target, int32_t const level, int32_t const xoffset,
                                 int32_t const yoffset, int32_t const width, int32_t const height,
-                                uint32_t const format, uint32_t const type,
-                                TexturePointer const data);
+                                uint32_t const format, uint32_t const type, void* const data);
     inline void glCopyTexImage2D(uint32_t const target, int32_t const level, uint32_t const format,
                                  int32_t const x, int32_t const y, int32_t const width,
                                  int32_t const height, int32_t const border);
@@ -241,67 +221,66 @@ public:
     inline void glCompressedTexImage2D(uint32_t const target, int32_t const level,
                                        uint32_t const format, int32_t const width,
                                        int32_t const height, int32_t const border,
-                                       int32_t const image_size, TexturePointer const data);
+                                       int32_t const image_size, void* const data);
     inline void glCompressedTexSubImage2D(uint32_t const target, int32_t const level,
                                           int32_t const xoffset, int32_t const yoffset,
                                           int32_t const width, int32_t const height,
                                           uint32_t const format, int32_t const image_size,
-                                          TexturePointer const data);
+                                          void* const data);
     inline void glGenerateMipmap(uint32_t const target);
     inline void glReadPixels(int32_t const x, int32_t const y, int32_t const width,
                              int32_t const height, uint32_t const format, uint32_t const type,
                              void* const data);
-    inline void glGenFramebuffers(int32_t const count, FramebufferId* const framebuffers);
-    inline void glBindFramebuffer(uint32_t const target, FramebufferId const framebuffer);
+    inline void glGenFramebuffers(int32_t const count, uint32_t* const framebuffers);
+    inline void glBindFramebuffer(uint32_t const target, uint32_t const framebuffer);
     inline void glCheckFramebufferStatus(uint32_t const target, uint32_t const result);
-    inline void glDeleteFramebuffers(int32_t const count, const FramebufferId* const framebuffers);
-    inline void glIsFramebuffer(FramebufferId const framebuffer, bool const result);
-    inline void glGenRenderbuffers(int32_t const count, RenderbufferId* const renderbuffers);
-    inline void glBindRenderbuffer(uint32_t const target, RenderbufferId const renderbuffer);
+    inline void glDeleteFramebuffers(int32_t const count, uint32_t* const framebuffers);
+    inline void glIsFramebuffer(uint32_t const framebuffer, bool const result);
+    inline void glGenRenderbuffers(int32_t const count, uint32_t* const renderbuffers);
+    inline void glBindRenderbuffer(uint32_t const target, uint32_t const renderbuffer);
     inline void glRenderbufferStorage(uint32_t const target, uint32_t const format,
                                       int32_t const width, int32_t const height);
-    inline void glDeleteRenderbuffers(int32_t const count,
-                                      const RenderbufferId* const renderbuffers);
-    inline void glIsRenderbuffer(RenderbufferId const renderbuffer, bool const result);
+    inline void glDeleteRenderbuffers(int32_t const count, uint32_t* const renderbuffers);
+    inline void glIsRenderbuffer(uint32_t const renderbuffer, bool const result);
     inline void glGetRenderbufferParameteriv(uint32_t const target, uint32_t const parameter,
                                              int32_t* const values);
-    inline void glGenBuffers(int32_t const count, BufferId* const buffers);
-    inline void glBindBuffer(uint32_t const target, BufferId const buffer);
-    inline void glBufferData(uint32_t const target, int32_t const size,
-                             BufferDataPointer const data, uint32_t const usage);
+    inline void glGenBuffers(int32_t const count, uint32_t* const buffers);
+    inline void glBindBuffer(uint32_t const target, uint32_t const buffer);
+    inline void glBufferData(uint32_t const target, int32_t const size, void* const data,
+                             uint32_t const usage);
     inline void glBufferSubData(uint32_t const target, int32_t const offset, int32_t const size,
-                                const void* const data);
-    inline void glDeleteBuffers(int32_t const count, const BufferId* const buffers);
-    inline void glIsBuffer(BufferId const buffer, bool const result);
+                                void* const data);
+    inline void glDeleteBuffers(int32_t const count, uint32_t* const buffers);
+    inline void glIsBuffer(uint32_t const buffer, bool const result);
     inline void glGetBufferParameteriv(uint32_t const target, uint32_t const parameter,
                                        int32_t* const value);
     inline void glCreateShader(uint32_t const type, ShaderId const result);
-    inline void glDeleteShader(ShaderId const shader);
-    inline void glShaderSource(ShaderId const shader, int32_t const count,
-                               const char** const source, const int32_t* const length);
-    inline void glShaderBinary(int32_t const count, const ShaderId* const shaders,
-                               uint32_t const binary_format, const void* const binary,
+    inline void glDeleteShader(uint32_t const shader);
+    inline void glShaderSource(uint32_t const shader, int32_t const count, char** const source,
+                               int32_t* const length);
+    inline void glShaderBinary(int32_t const count, uint32_t* const shaders,
+                               uint32_t const binary_format, void* const binary,
                                int32_t const binary_size);
-    inline void glGetShaderInfoLog(ShaderId const shader, int32_t const buffer_length,
+    inline void glGetShaderInfoLog(uint32_t const shader, int32_t const buffer_length,
                                    int32_t* const string_length_written, char* const info);
-    inline void glGetShaderSource(ShaderId const shader, int32_t const buffer_length,
+    inline void glGetShaderSource(uint32_t const shader, int32_t const buffer_length,
                                   int32_t* const string_length_written, char* const source);
     inline void glReleaseShaderCompiler();
-    inline void glCompileShader(ShaderId const shader);
-    inline void glIsShader(ShaderId const shader, bool const result);
+    inline void glCompileShader(uint32_t const shader);
+    inline void glIsShader(uint32_t const shader, bool const result);
     inline void glCreateProgram(ProgramId const result);
-    inline void glDeleteProgram(ProgramId const program);
-    inline void glAttachShader(ProgramId const program, ShaderId const shader);
-    inline void glDetachShader(ProgramId const program, ShaderId const shader);
-    inline void glGetAttachedShaders(ProgramId const program, int32_t const buffer_length,
+    inline void glDeleteProgram(uint32_t const program);
+    inline void glAttachShader(uint32_t const program, uint32_t const shader);
+    inline void glDetachShader(uint32_t const program, uint32_t const shader);
+    inline void glGetAttachedShaders(uint32_t const program, int32_t const buffer_length,
                                      int32_t* const shaders_length_written,
-                                     ShaderId* const shaders);
-    inline void glLinkProgram(ProgramId const program);
-    inline void glGetProgramInfoLog(ProgramId const program, int32_t const buffer_length,
+                                     uint32_t* const shaders);
+    inline void glLinkProgram(uint32_t const program);
+    inline void glGetProgramInfoLog(uint32_t const program, int32_t const buffer_length,
                                     int32_t* const string_length_written, char* const info);
-    inline void glUseProgram(ProgramId const program);
-    inline void glIsProgram(ProgramId const program, bool const result);
-    inline void glValidateProgram(ProgramId const program);
+    inline void glUseProgram(uint32_t const program);
+    inline void glIsProgram(uint32_t const program, bool const result);
+    inline void glValidateProgram(uint32_t const program);
     inline void glClearColor(float const r, float const g, float const b, float const a);
     inline void glClearDepthf(float const depth);
     inline void glClearStencil(int32_t const stencil);
@@ -314,17 +293,17 @@ public:
     inline void glFramebufferRenderbuffer(uint32_t const framebuffer_target,
                                           uint32_t const framebuffer_attachment,
                                           uint32_t const renderbuffer_target,
-                                          RenderbufferId const renderbuffer);
+                                          uint32_t const renderbuffer);
     inline void glFramebufferTexture2D(uint32_t const framebuffer_target,
                                        uint32_t const framebuffer_attachment,
-                                       uint32_t const texture_target, TextureId const texture,
+                                       uint32_t const texture_target, uint32_t const texture,
                                        int32_t const level);
     inline void glGetFramebufferAttachmentParameteriv(uint32_t const framebuffer_target,
                                                       uint32_t const attachment,
                                                       uint32_t const parameter,
                                                       int32_t* const value);
     inline void glDrawElements(uint32_t const draw_mode, int32_t const element_count,
-                               uint32_t const indices_type, IndicesPointer const indices);
+                               uint32_t const indices_type, void* const indices);
     inline void glDrawArrays(uint32_t const draw_mode, int32_t const first_index,
                              int32_t const index_count);
     inline void glFlush();
@@ -340,7 +319,7 @@ public:
                                  uint32_t const access, void* const result);
     inline void glUnmapBuffer(uint32_t const target);
     inline void glInvalidateFramebuffer(uint32_t const target, int32_t const count,
-                                        const uint32_t* const attachments);
+                                        uint32_t* const attachments);
     inline void glRenderbufferStorageMultisample(uint32_t const target, int32_t const samples,
                                                  uint32_t const format, int32_t const width,
                                                  int32_t const height);
@@ -348,44 +327,43 @@ public:
                                   int32_t const srcY1, int32_t const dstX0, int32_t const dstY0,
                                   int32_t const dstX1, int32_t const dstY1, uint32_t const mask,
                                   uint32_t const filter);
-    inline void glGenQueries(int32_t const count, QueryId* const queries);
-    inline void glBeginQuery(uint32_t const target, QueryId const query);
+    inline void glGenQueries(int32_t const count, uint32_t* const queries);
+    inline void glBeginQuery(uint32_t const target, uint32_t const query);
     inline void glEndQuery(uint32_t const target);
-    inline void glDeleteQueries(int32_t const count, const QueryId* const queries);
-    inline void glIsQuery(QueryId const query, bool const result);
+    inline void glDeleteQueries(int32_t const count, uint32_t* const queries);
+    inline void glIsQuery(uint32_t const query, bool const result);
     inline void glGetQueryiv(uint32_t const target, uint32_t const parameter, int32_t* const value);
-    inline void glGetQueryObjectuiv(QueryId const query, uint32_t const parameter,
+    inline void glGetQueryObjectuiv(uint32_t const query, uint32_t const parameter,
                                     uint32_t* const value);
-    inline void glGenQueriesEXT(int32_t const count, QueryId* const queries);
-    inline void glBeginQueryEXT(uint32_t const target, QueryId const query);
+    inline void glGenQueriesEXT(int32_t const count, uint32_t* const queries);
+    inline void glBeginQueryEXT(uint32_t const target, uint32_t const query);
     inline void glEndQueryEXT(uint32_t const target);
-    inline void glDeleteQueriesEXT(int32_t const count, const QueryId* const queries);
-    inline void glIsQueryEXT(QueryId const query, bool const result);
-    inline void glQueryCounterEXT(QueryId const query, uint32_t const target);
+    inline void glDeleteQueriesEXT(int32_t const count, uint32_t* const queries);
+    inline void glIsQueryEXT(uint32_t const query, bool const result);
+    inline void glQueryCounterEXT(uint32_t const query, uint32_t const target);
     inline void glGetQueryivEXT(uint32_t const target, uint32_t const parameter,
                                 int32_t* const value);
-    inline void glGetQueryObjectivEXT(QueryId const query, uint32_t const parameter,
+    inline void glGetQueryObjectivEXT(uint32_t const query, uint32_t const parameter,
                                       int32_t* const value);
-    inline void glGetQueryObjectuivEXT(QueryId const query, uint32_t const parameter,
+    inline void glGetQueryObjectuivEXT(uint32_t const query, uint32_t const parameter,
                                        uint32_t* const value);
-    inline void glGetQueryObjecti64vEXT(QueryId const query, uint32_t const parameter,
+    inline void glGetQueryObjecti64vEXT(uint32_t const query, uint32_t const parameter,
                                         int64_t* const value);
-    inline void glGetQueryObjectui64vEXT(QueryId const query, uint32_t const parameter,
+    inline void glGetQueryObjectui64vEXT(uint32_t const query, uint32_t const parameter,
                                          uint64_t* const value);
-
-    ObserveFunc read;
-    ObserveFunc write;
 
     ContextID NextContextID;
     ThreadID CurrentThread;
-    ContextPtr_ThreadIDMap Contexts;
-    ContextPtr_EGLContextMap EGLContexts;
-    ContextPtr_GLXContextMap GLXContexts;
-    ContextPtr_HGLRCMap WGLContexts;
-    ContextPtr_CGLContextObjMap CGLContexts;
+    ThreadIDToContextRef Contexts;
+    EGLContextToContextRef EGLContexts;
+    GLXContextToContextRef GLXContexts;
+    HGLRCToContextRef WGLContexts;
+    CGLContextObjToContextRef CGLContexts;
 
 #include "gles_state_externs.inl"
 };
+
+inline GlesState::GlesState(ObserveFunc observe) : StateBase(observe) {}
 
 inline void GlesState::replayCreateRenderer(uint32_t const id) {}
 
@@ -430,33 +408,35 @@ inline void GlesState::stopTimer(uint8_t const index, uint64_t const result) { r
 
 inline void GlesState::flushPostBuffer() {}
 
-inline void GlesState::eglInitialize(EGLDisplay const dpy, EGLint* const major, EGLint* const minor,
+inline void GlesState::eglInitialize(void* const dpy, int* const major, int* const minor,
                                      EGLBoolean const result) {
+    slice(major, 0, 1)[0] = slice(major, 0, 1)[0];
+    slice(minor, 0, 1)[0] = slice(minor, 0, 1)[0];
     return;
 }
 
-inline void GlesState::eglCreateContext(EGLDisplay const display, EGLConfig const config,
-                                        EGLContext const share_context,
-                                        const EGLint* const attrib_list, EGLContext const result) {
+inline void GlesState::eglCreateContext(void* const display, void* const config,
+                                        void* const share_context, int* const attrib_list,
+                                        EGLContext const result) {
     EGLContext l_context = (EGLContext)(result);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -481,54 +461,53 @@ inline void GlesState::eglCreateContext(EGLDisplay const display, EGLConfig cons
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_1_result = l_ctx;
     this->EGLContexts[l_context] = l_CreateContext_1_result;
     return;
 }
 
-inline void GlesState::eglMakeCurrent(EGLDisplay const display, EGLSurface const draw,
-                                      EGLSurface const read, EGLContext const context,
-                                      EGLBoolean const result) {
+inline void GlesState::eglMakeCurrent(void* const display, void* const draw, void* const read,
+                                      void* const context, EGLBoolean const result) {
     std::shared_ptr<Context> l_SetContext_2_context = this->EGLContexts[context];
     this->Contexts[this->CurrentThread] = l_SetContext_2_context;
     return;
 }
 
-inline void GlesState::eglSwapBuffers(EGLDisplay const display, const void* const surface,
+inline void GlesState::eglSwapBuffers(void* const display, void* const surface,
                                       EGLBoolean const result) {
     return;
 }
 
-inline void GlesState::eglQuerySurface(EGLDisplay const display, EGLSurface const surface,
-                                       EGLint const attribute, EGLint* const value,
+inline void GlesState::eglQuerySurface(void* const display, void* const surface,
+                                       int const attribute, int* const value,
                                        EGLBoolean const result) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
     return;
 }
 
-inline void GlesState::glXCreateContext(const void* const dpy, const void* const vis,
-                                        GLXContext const shareList, bool const direct,
-                                        GLXContext const result) {
+inline void GlesState::glXCreateContext(void* const dpy, void* const vis, void* const shareList,
+                                        bool const direct, GLXContext const result) {
     GLXContext l_context = (GLXContext)(result);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -553,35 +532,35 @@ inline void GlesState::glXCreateContext(const void* const dpy, const void* const
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_3_result = l_ctx;
     this->GLXContexts[l_context] = l_CreateContext_3_result;
     return;
 }
 
-inline void GlesState::glXCreateNewContext(const void* const display, const void* const fbconfig,
-                                           uint32_t const type, GLXContext const shared,
+inline void GlesState::glXCreateNewContext(void* const display, void* const fbconfig,
+                                           uint32_t const type, void* const shared,
                                            bool const direct, GLXContext const result) {
     GLXContext l_context = (GLXContext)(result);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -606,41 +585,41 @@ inline void GlesState::glXCreateNewContext(const void* const display, const void
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_4_result = l_ctx;
     this->GLXContexts[l_context] = l_CreateContext_4_result;
     return;
 }
 
-inline void GlesState::glXMakeContextCurrent(const void* const display, GLXDrawable const draw,
-                                             GLXDrawable const read, GLXContext const ctx) {
+inline void GlesState::glXMakeContextCurrent(void* const display, void* const draw,
+                                             void* const read, void* const ctx) {
     std::shared_ptr<Context> l_SetContext_5_context = this->GLXContexts[ctx];
     this->Contexts[this->CurrentThread] = l_SetContext_5_context;
 }
 
-inline void GlesState::glXSwapBuffers(const void* const display, GLXDrawable const drawable) {}
+inline void GlesState::glXSwapBuffers(void* const display, void* const drawable) {}
 
-inline void GlesState::wglCreateContext(HDC const hdc, HGLRC const result) {
+inline void GlesState::wglCreateContext(void* const hdc, HGLRC const result) {
     HGLRC l_context = (HGLRC)(result);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -665,34 +644,34 @@ inline void GlesState::wglCreateContext(HDC const hdc, HGLRC const result) {
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_6_result = l_ctx;
     this->WGLContexts[l_context] = l_CreateContext_6_result;
     return;
 }
 
-inline void GlesState::wglCreateContextAttribsARB(HDC const hdc, HGLRC const hShareContext,
-                                                  const int* const attribList, HGLRC const result) {
+inline void GlesState::wglCreateContextAttribsARB(void* const hdc, void* const hShareContext,
+                                                  int* const attribList, HGLRC const result) {
     HGLRC l_context = (HGLRC)(result);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -717,42 +696,42 @@ inline void GlesState::wglCreateContextAttribsARB(HDC const hdc, HGLRC const hSh
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_7_result = l_ctx;
     this->WGLContexts[l_context] = l_CreateContext_7_result;
     return;
 }
 
-inline void GlesState::wglMakeCurrent(HDC const hdc, HGLRC const hglrc, BOOL const result) {
+inline void GlesState::wglMakeCurrent(void* const hdc, void* const hglrc, BOOL const result) {
     std::shared_ptr<Context> l_SetContext_8_context = this->WGLContexts[hglrc];
     this->Contexts[this->CurrentThread] = l_SetContext_8_context;
     return;
 }
 
-inline void GlesState::wglSwapBuffers(HDC const hdc) {}
+inline void GlesState::wglSwapBuffers(void* const hdc) {}
 
-inline void GlesState::CGLCreateContext(CGLPixelFormatObj const pix, CGLContextObj const share,
-                                        CGLContextObj* const ctx, CGLError const result) {
-    CGLContextObj l_context = (CGLContextObj)(ctx ? (*ctx) : CGLContextObj{});
+inline void GlesState::CGLCreateContext(void* const pix, void* const share, void** const ctx,
+                                        CGLError const result) {
+    CGLContextObj l_context = (CGLContextObj)(slice(ctx, 0, 1)[0]);
     ContextID l_identifier = this->NextContextID;
     this->NextContextID = this->NextContextID + (ContextID)(1);
-    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>(new Context());
+    std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
     l_ctx->mIdentifier = l_identifier;
-    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>(new Buffer());
-    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>(new Texture());
+    l_ctx->mInstances.mBuffers[(BufferId)(0)] = std::shared_ptr<Buffer>((new Buffer()));
+    l_ctx->mInstances.mTextures[(TextureId)(0)] = std::shared_ptr<Texture>((new Texture()));
     l_ctx->mInstances.mRenderbuffers[(RenderbufferId)(0)] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     RenderbufferId l_color_id = (RenderbufferId)(4294967295);
     RenderbufferId l_depth_id = (RenderbufferId)(4294967294);
     RenderbufferId l_stencil_id = (RenderbufferId)(4294967293);
     l_ctx->mInstances.mRenderbuffers[l_color_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_depth_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     l_ctx->mInstances.mRenderbuffers[l_stencil_id] =
-            std::shared_ptr<Renderbuffer>(new Renderbuffer());
-    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>(new Framebuffer());
+            std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+    std::shared_ptr<Framebuffer> l_backbuffer = std::shared_ptr<Framebuffer>((new Framebuffer()));
     l_backbuffer->mAttachments[FramebufferAttachment::GL_COLOR_ATTACHMENT0] =
             FramebufferAttachmentInfo()
                     .SetObject((uint32_t)(l_color_id))
@@ -777,14 +756,15 @@ inline void GlesState::CGLCreateContext(CGLPixelFormatObj const pix, CGLContextO
     l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT] = 4;
     for (int32_t l_i = 0; l_i < 64; ++l_i) {
         l_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)] =
-                std::shared_ptr<VertexAttributeArray>(new VertexAttributeArray());
+                std::shared_ptr<VertexAttributeArray>((new VertexAttributeArray()));
     }
     std::shared_ptr<Context> l_CreateContext_9_result = l_ctx;
     this->CGLContexts[l_context] = l_CreateContext_9_result;
+    slice(ctx, 0, 1)[0] = l_context;
     return;
 }
 
-inline void GlesState::CGLSetCurrentContext(CGLContextObj const ctx, CGLError const result) {
+inline void GlesState::CGLSetCurrentContext(void* const ctx, CGLError const result) {
     std::shared_ptr<Context> l_SetContext_10_context = this->CGLContexts[ctx];
     this->Contexts[this->CurrentThread] = l_SetContext_10_context;
     return;
@@ -804,12 +784,17 @@ inline void GlesState::glDisableClientState(uint32_t const type) {
     l_ctx->mCapabilities[(uint32_t)(type)] = false;
 }
 
-inline void GlesState::glGetProgramBinaryOES(ProgramId const program, int32_t const buffer_size,
+inline void GlesState::glGetProgramBinaryOES(uint32_t const program, int32_t const buffer_size,
                                              int32_t* const bytes_written,
-                                             uint32_t* const binary_format, void* const binary) {}
+                                             uint32_t* const binary_format, void* const binary) {
+    int32_t l_l = (int32_t)(slice(bytes_written, 0, 1)[0]);
+    slice(bytes_written, 0, 1)[0] = l_l;
+    slice(binary_format, 0, 1)[0] = slice(binary_format, 0, 1)[0];
+    write(slice(binary, (uint64_t)(0), (uint64_t)(l_l)));
+}
 
-inline void GlesState::glProgramBinaryOES(ProgramId const program, uint32_t const binary_format,
-                                          const void* const binary, int32_t const binary_size) {}
+inline void GlesState::glProgramBinaryOES(uint32_t const program, uint32_t const binary_format,
+                                          void* const binary, int32_t const binary_size) {}
 
 inline void GlesState::glStartTilingQCOM(int32_t const x, int32_t const y, int32_t const width,
                                          int32_t const height, uint32_t const preserveMask) {}
@@ -817,11 +802,11 @@ inline void GlesState::glStartTilingQCOM(int32_t const x, int32_t const y, int32
 inline void GlesState::glEndTilingQCOM(uint32_t const preserve_mask) {}
 
 inline void GlesState::glDiscardFramebufferEXT(uint32_t const target, int32_t const numAttachments,
-                                               const uint32_t* const attachments) {}
+                                               uint32_t* const attachments) {}
 
-inline void GlesState::glInsertEventMarkerEXT(int32_t const length, const char* const marker) {}
+inline void GlesState::glInsertEventMarkerEXT(int32_t const length, char* const marker) {}
 
-inline void GlesState::glPushGroupMarkerEXT(int32_t const length, const char* const marker) {}
+inline void GlesState::glPushGroupMarkerEXT(int32_t const length, char* const marker) {}
 
 inline void GlesState::glPopGroupMarkerEXT() {}
 
@@ -836,66 +821,68 @@ inline void GlesState::glTexStorage3DEXT(uint32_t const target, int32_t const le
                                          uint32_t const format, int32_t const width,
                                          int32_t const height, int32_t const depth) {}
 
-inline void GlesState::glTextureStorage1DEXT(TextureId const texture, uint32_t const target,
+inline void GlesState::glTextureStorage1DEXT(uint32_t const texture, uint32_t const target,
                                              int32_t const levels, uint32_t const format,
                                              int32_t const width) {}
 
-inline void GlesState::glTextureStorage2DEXT(TextureId const texture, uint32_t const target,
+inline void GlesState::glTextureStorage2DEXT(uint32_t const texture, uint32_t const target,
                                              int32_t const levels, uint32_t const format,
                                              int32_t const width, int32_t const height) {}
 
-inline void GlesState::glTextureStorage3DEXT(TextureId const texture, uint32_t const target,
+inline void GlesState::glTextureStorage3DEXT(uint32_t const texture, uint32_t const target,
                                              int32_t const levels, uint32_t const format,
                                              int32_t const width, int32_t const height,
                                              int32_t const depth) {}
 
-inline void GlesState::glGenVertexArraysOES(int32_t const count, VertexArrayId* const arrays) {
+inline void GlesState::glGenVertexArraysOES(int32_t const count, uint32_t* const arrays) {
+    Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_13_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_13_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        VertexArrayId l_id = (VertexArrayId)(arrays[l_i]);
-        l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>(new VertexArray());
+        VertexArrayId l_id =
+                (VertexArrayId)(slice(arrays, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mVertexArrays[l_id] = std::shared_ptr<VertexArray>((new VertexArray()));
+        l_a[(uint64_t)(l_i)] = l_id;
     }
 }
 
-inline void GlesState::glBindVertexArrayOES(VertexArrayId const array) {
+inline void GlesState::glBindVertexArrayOES(uint32_t const array) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_14_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_14_result;
     if (!(l_ctx->mInstances.mVertexArrays.count(array) > 0)) {
-        l_ctx->mInstances.mVertexArrays[array] = std::shared_ptr<VertexArray>(new VertexArray());
+        l_ctx->mInstances.mVertexArrays[array] = std::shared_ptr<VertexArray>((new VertexArray()));
     }
     l_ctx->mBoundVertexArray = array;
 }
 
-inline void GlesState::glDeleteVertexArraysOES(int32_t const count,
-                                               const VertexArrayId* const arrays) {
+inline void GlesState::glDeleteVertexArraysOES(int32_t const count, uint32_t* const arrays) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_15_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_15_result;
+    Slice<VertexArrayId> l_a = slice(arrays, (uint64_t)(0), (uint64_t)(count));
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mVertexArrays.erase(arrays[l_i]);
+        l_ctx->mInstances.mVertexArrays[l_a[(uint64_t)(l_i)]] = std::shared_ptr<VertexArray>();
     }
 }
 
-inline void GlesState::glIsVertexArrayOES(VertexArrayId const array, bool const result) {
+inline void GlesState::glIsVertexArrayOES(uint32_t const array, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_16_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_16_result;
     return;
 }
 
-inline void GlesState::glEGLImageTargetTexture2DOES(uint32_t const target, ImageOES const image) {}
+inline void GlesState::glEGLImageTargetTexture2DOES(uint32_t const target, void* const image) {}
 
 inline void GlesState::glEGLImageTargetRenderbufferStorageOES(uint32_t const target,
-                                                              TexturePointer const image) {}
+                                                              void* const image) {}
 
 inline void GlesState::glGetGraphicsResetStatusEXT(uint32_t const result) { return; }
 
-inline void GlesState::glBindAttribLocation(ProgramId const program,
-                                            AttributeLocation const location,
-                                            const char* const name) {
+inline void GlesState::glBindAttribLocation(uint32_t const program, uint32_t const location,
+                                            char* const name) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_17_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_17_result;
@@ -951,23 +938,23 @@ inline void GlesState::glBlendColor(float const red, float const green, float co
             Color().SetRed(red).SetGreen(green).SetBlue(blue).SetAlpha(alpha);
 }
 
-inline void GlesState::glEnableVertexAttribArray(AttributeLocation const location) {
+inline void GlesState::glEnableVertexAttribArray(uint32_t const location) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_23_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_23_result;
     l_ctx->mVertexAttributeArrays[location]->mEnabled = true;
 }
 
-inline void GlesState::glDisableVertexAttribArray(AttributeLocation const location) {
+inline void GlesState::glDisableVertexAttribArray(uint32_t const location) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_24_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_24_result;
     l_ctx->mVertexAttributeArrays[location]->mEnabled = false;
 }
 
-inline void GlesState::glVertexAttribPointer(AttributeLocation const location, int32_t const size,
+inline void GlesState::glVertexAttribPointer(uint32_t const location, int32_t const size,
                                              uint32_t const type, bool const normalized,
-                                             int32_t const stride, VertexPointer const data) {
+                                             int32_t const stride, void* const data) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_25_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_25_result;
@@ -976,40 +963,69 @@ inline void GlesState::glVertexAttribPointer(AttributeLocation const location, i
     l_a->mType = type;
     l_a->mNormalized = normalized;
     l_a->mStride = stride;
-    l_a->mPointer = (void*)(data);
+    l_a->mPointer = data;
     l_a->mBuffer = l_ctx->mBoundBuffers[BufferTarget::GL_ARRAY_BUFFER];
 }
 
-inline void GlesState::glGetActiveAttrib(ProgramId const program, AttributeLocation const location,
+inline void GlesState::glGetActiveAttrib(uint32_t const program, uint32_t const location,
                                          int32_t const buffer_size,
                                          int32_t* const buffer_bytes_written,
                                          int32_t* const vector_count, uint32_t* const type,
                                          char* const name) {}
 
-inline void GlesState::glGetActiveUniform(ProgramId const program, int32_t const location,
+inline void GlesState::glGetActiveUniform(uint32_t const program, int32_t const location,
                                           int32_t const buffer_size,
                                           int32_t* const buffer_bytes_written, int32_t* const size,
                                           uint32_t* const type, char* const name) {}
 
 inline void GlesState::glGetError(uint32_t const result) { return; }
 
-inline void GlesState::glGetProgramiv(ProgramId const program, uint32_t const parameter,
-                                      int32_t* const value) {}
+inline void GlesState::glGetProgramiv(uint32_t const program, uint32_t const parameter,
+                                      int32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
-inline void GlesState::glGetShaderiv(ShaderId const shader, uint32_t const parameter,
+inline void GlesState::glGetShaderiv(uint32_t const shader, uint32_t const parameter,
                                      int32_t* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_26_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_26_result;
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
+    slice(value, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case ShaderParameter::GL_SHADER_TYPE: */(((parameter) == (ShaderParameter::GL_SHADER_TYPE))) ? ((int32_t)(l_s->mType)) :
+        /* case ShaderParameter::GL_DELETE_STATUS: */(((parameter) == (ShaderParameter::GL_DELETE_STATUS))) ? (/* clang-format off */
+        /* switch(l_s->mDeletable) */
+            /* case true: */(((l_s->mDeletable) == (true))) ? (1) :
+            /* case false: */(((l_s->mDeletable) == (false))) ? (0) :
+            /* default: */ 0 /* clang-format on */)
+                            :
+                            /* case ShaderParameter::GL_COMPILE_STATUS: */ (
+                                    ((parameter) == (ShaderParameter::GL_COMPILE_STATUS)))
+                                    ? (/* clang-format off */
+        /* switch(l_s->mCompiled) */
+            /* case true: */(((l_s->mCompiled) == (true))) ? (1) :
+            /* case false: */(((l_s->mCompiled) == (false))) ? (0) :
+            /* default: */ 0 /* clang-format on */)
+                                    :
+                                    /* case ShaderParameter::GL_INFO_LOG_LENGTH: */ (
+                                            ((parameter) == (ShaderParameter::GL_INFO_LOG_LENGTH)))
+                                            ? ((int32_t)(strlen(l_s->mInfoLog)))
+                                            :
+                                            /* case ShaderParameter::GL_SHADER_SOURCE_LENGTH: */ (
+                                                    ((parameter) ==
+                                                     (ShaderParameter::GL_SHADER_SOURCE_LENGTH)))
+                                                    ? ((int32_t)(strlen(l_s->mSource)))
+                                                    :
+                                                    /* default: */ 0 /* clang-format on */;
 }
 
-inline void GlesState::glGetUniformLocation(ProgramId const program, const char* const name,
+inline void GlesState::glGetUniformLocation(uint32_t const program, char* const name,
                                             UniformLocation const result) {
     return;
 }
 
-inline void GlesState::glGetAttribLocation(ProgramId const program, const char* const name,
+inline void GlesState::glGetAttribLocation(uint32_t const program, char* const name,
                                            AttributeLocation const result) {
     return;
 }
@@ -1122,6 +1138,18 @@ inline void GlesState::glGetTexParameteriv(uint32_t const target, uint32_t const
     std::shared_ptr<Context> l_ctx = l_GetContext_30_result;
     TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
     std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
+    slice(values, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case TextureParameter::GL_TEXTURE_MAG_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MAG_FILTER))) ? ((int32_t)(l_t->mMagFilter)) :
+        /* case TextureParameter::GL_TEXTURE_MIN_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MIN_FILTER))) ? ((int32_t)(l_t->mMinFilter)) :
+        /* case TextureParameter::GL_TEXTURE_WRAP_S: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_S))) ? ((int32_t)(l_t->mWrapS)) :
+        /* case TextureParameter::GL_TEXTURE_WRAP_T: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_T))) ? ((int32_t)(l_t->mWrapT)) :
+        /* case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? ((int32_t)(l_t->mMaxAnisotropy)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_R))) ? ((int32_t)(l_t->mSwizzleR)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_G))) ? ((int32_t)(l_t->mSwizzleG)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_B))) ? ((int32_t)(l_t->mSwizzleB)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_A))) ? ((int32_t)(l_t->mSwizzleA)) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glGetTexParameterfv(uint32_t const target, uint32_t const parameter,
@@ -1131,9 +1159,21 @@ inline void GlesState::glGetTexParameterfv(uint32_t const target, uint32_t const
     std::shared_ptr<Context> l_ctx = l_GetContext_31_result;
     TextureId l_id = l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target];
     std::shared_ptr<Texture> l_t = l_ctx->mInstances.mTextures[l_id];
+    slice(values, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case TextureParameter::GL_TEXTURE_MAG_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MAG_FILTER))) ? ((float)(l_t->mMagFilter)) :
+        /* case TextureParameter::GL_TEXTURE_MIN_FILTER: */(((parameter) == (TextureParameter::GL_TEXTURE_MIN_FILTER))) ? ((float)(l_t->mMinFilter)) :
+        /* case TextureParameter::GL_TEXTURE_WRAP_S: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_S))) ? ((float)(l_t->mWrapS)) :
+        /* case TextureParameter::GL_TEXTURE_WRAP_T: */(((parameter) == (TextureParameter::GL_TEXTURE_WRAP_T))) ? ((float)(l_t->mWrapT)) :
+        /* case TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT: */(((parameter) == (TextureParameter::GL_TEXTURE_MAX_ANISOTROPY_EXT))) ? (l_t->mMaxAnisotropy) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_R: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_R))) ? ((float)(l_t->mSwizzleR)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_G: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_G))) ? ((float)(l_t->mSwizzleG)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_B: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_B))) ? ((float)(l_t->mSwizzleB)) :
+        /* case TextureParameter::GL_TEXTURE_SWIZZLE_A: */(((parameter) == (TextureParameter::GL_TEXTURE_SWIZZLE_A))) ? ((float)(l_t->mSwizzleA)) :
+        /* default: */ 0 /* clang-format on */;
 }
 
-inline void GlesState::glUniform1i(UniformLocation const location, int32_t const value) {
+inline void GlesState::glUniform1i(int32_t const location, int32_t const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_32_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_32_result;
@@ -1144,7 +1184,7 @@ inline void GlesState::glUniform1i(UniformLocation const location, int32_t const
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform2i(UniformLocation const location, int32_t const value0,
+inline void GlesState::glUniform2i(int32_t const location, int32_t const value0,
                                    int32_t const value1) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_33_result = l_context;
@@ -1156,7 +1196,7 @@ inline void GlesState::glUniform2i(UniformLocation const location, int32_t const
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform3i(UniformLocation const location, int32_t const value0,
+inline void GlesState::glUniform3i(int32_t const location, int32_t const value0,
                                    int32_t const value1, int32_t const value2) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_34_result = l_context;
@@ -1168,7 +1208,7 @@ inline void GlesState::glUniform3i(UniformLocation const location, int32_t const
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform4i(UniformLocation const location, int32_t const value0,
+inline void GlesState::glUniform4i(int32_t const location, int32_t const value0,
                                    int32_t const value1, int32_t const value2,
                                    int32_t const value3) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
@@ -1181,55 +1221,58 @@ inline void GlesState::glUniform4i(UniformLocation const location, int32_t const
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform1iv(UniformLocation const location, int32_t const count,
-                                    const int32_t* const value) {
+inline void GlesState::glUniform1iv(int32_t const location, int32_t const count,
+                                    int32_t* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_36_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_36_result;
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_INT;
-    l_uniform.mValue.mS32 = value[0];
+    l_uniform.mValue.mS32 = slice(value, 0, 1)[0];
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform2iv(UniformLocation const location, int32_t const count,
-                                    const int32_t* const value) {
+inline void GlesState::glUniform2iv(int32_t const location, int32_t const count,
+                                    int32_t* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_37_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_37_result;
+    Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 2));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_INT_VEC2;
-    l_uniform.mValue.mVec2i = Vec2i().SetX(value[0]).SetY(value[1]);
+    l_uniform.mValue.mVec2i = Vec2i().SetX(l_v[0]).SetY(l_v[1]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform3iv(UniformLocation const location, int32_t const count,
-                                    const int32_t* const value) {
+inline void GlesState::glUniform3iv(int32_t const location, int32_t const count,
+                                    int32_t* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_38_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_38_result;
+    Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 3));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_INT_VEC3;
-    l_uniform.mValue.mVec3i = Vec3i().SetX(value[0]).SetY(value[1]).SetZ(value[2]);
+    l_uniform.mValue.mVec3i = Vec3i().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform4iv(UniformLocation const location, int32_t const count,
-                                    const int32_t* const value) {
+inline void GlesState::glUniform4iv(int32_t const location, int32_t const count,
+                                    int32_t* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_39_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_39_result;
+    Slice<int32_t> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 4));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_INT_VEC4;
-    l_uniform.mValue.mVec4i = Vec4i().SetX(value[0]).SetY(value[1]).SetZ(value[2]).SetW(value[3]);
+    l_uniform.mValue.mVec4i = Vec4i().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]).SetW(l_v[3]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform1f(UniformLocation const location, float const value) {
+inline void GlesState::glUniform1f(int32_t const location, float const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_40_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_40_result;
@@ -1240,8 +1283,7 @@ inline void GlesState::glUniform1f(UniformLocation const location, float const v
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform2f(UniformLocation const location, float const value0,
-                                   float const value1) {
+inline void GlesState::glUniform2f(int32_t const location, float const value0, float const value1) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_41_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_41_result;
@@ -1252,8 +1294,8 @@ inline void GlesState::glUniform2f(UniformLocation const location, float const v
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform3f(UniformLocation const location, float const value0,
-                                   float const value1, float const value2) {
+inline void GlesState::glUniform3f(int32_t const location, float const value0, float const value1,
+                                   float const value2) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_42_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_42_result;
@@ -1264,8 +1306,8 @@ inline void GlesState::glUniform3f(UniformLocation const location, float const v
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform4f(UniformLocation const location, float const value0,
-                                   float const value1, float const value2, float const value3) {
+inline void GlesState::glUniform4f(int32_t const location, float const value0, float const value1,
+                                   float const value2, float const value3) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_43_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_43_result;
@@ -1276,143 +1318,146 @@ inline void GlesState::glUniform4f(UniformLocation const location, float const v
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform1fv(UniformLocation const location, int32_t const count,
-                                    const float* const value) {
+inline void GlesState::glUniform1fv(int32_t const location, int32_t const count,
+                                    float* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_44_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_44_result;
+    Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT;
-    l_uniform.mValue.mF32 = value[0];
+    l_uniform.mValue.mF32 = l_v[0];
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform2fv(UniformLocation const location, int32_t const count,
-                                    const float* const value) {
+inline void GlesState::glUniform2fv(int32_t const location, int32_t const count,
+                                    float* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_45_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_45_result;
+    Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 2));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC2;
-    l_uniform.mValue.mVec2f = Vec2f().SetX(value[0]).SetY(value[1]);
+    l_uniform.mValue.mVec2f = Vec2f().SetX(l_v[0]).SetY(l_v[1]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform3fv(UniformLocation const location, int32_t const count,
-                                    const float* const value) {
+inline void GlesState::glUniform3fv(int32_t const location, int32_t const count,
+                                    float* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_46_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_46_result;
+    Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 3));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC3;
-    l_uniform.mValue.mVec3f = Vec3f().SetX(value[0]).SetY(value[1]).SetZ(value[2]);
+    l_uniform.mValue.mVec3f = Vec3f().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniform4fv(UniformLocation const location, int32_t const count,
-                                    const float* const value) {
+inline void GlesState::glUniform4fv(int32_t const location, int32_t const count,
+                                    float* const value) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_47_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_47_result;
+    Slice<float> l_v = slice(value, (uint64_t)(0), (uint64_t)(count * 4));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_VEC4;
-    l_uniform.mValue.mVec4f = Vec4f().SetX(value[0]).SetY(value[1]).SetZ(value[2]).SetW(value[3]);
+    l_uniform.mValue.mVec4f = Vec4f().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]).SetW(l_v[3]);
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniformMatrix2fv(UniformLocation const location, int32_t const count,
-                                          bool const transpose, const float* const values) {
+inline void GlesState::glUniformMatrix2fv(int32_t const location, int32_t const count,
+                                          bool const transpose, float* const values) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_48_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_48_result;
+    Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 4));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT2;
     l_uniform.mValue.mMat2f = Mat2f()
-                                      .SetCol0(Vec2f().SetX(values[0]).SetY(values[1]))
-                                      .SetCol1(Vec2f().SetX(values[0]).SetY(values[1]));
+                                      .SetCol0(Vec2f().SetX(l_v[0]).SetY(l_v[1]))
+                                      .SetCol1(Vec2f().SetX(l_v[3]).SetY(l_v[4]));
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniformMatrix3fv(UniformLocation const location, int32_t const count,
-                                          bool const transpose, const float* const values) {
+inline void GlesState::glUniformMatrix3fv(int32_t const location, int32_t const count,
+                                          bool const transpose, float* const values) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_49_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_49_result;
+    Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 9));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mType = ShaderUniformType::GL_FLOAT_MAT3;
-    l_uniform.mValue.mMat3f =
-            Mat3f()
-                    .SetCol0(Vec3f().SetX(values[0]).SetY(values[1]).SetZ(values[2]))
-                    .SetCol1(Vec3f().SetX(values[3]).SetY(values[4]).SetZ(values[5]))
-                    .SetCol2(Vec3f().SetX(values[6]).SetY(values[7]).SetZ(values[8]));
+    l_uniform.mValue.mMat3f = Mat3f()
+                                      .SetCol0(Vec3f().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]))
+                                      .SetCol1(Vec3f().SetX(l_v[3]).SetY(l_v[4]).SetZ(l_v[5]))
+                                      .SetCol2(Vec3f().SetX(l_v[6]).SetY(l_v[7]).SetZ(l_v[8]));
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glUniformMatrix4fv(UniformLocation const location, int32_t const count,
-                                          bool const transpose, const float* const values) {
+inline void GlesState::glUniformMatrix4fv(int32_t const location, int32_t const count,
+                                          bool const transpose, float* const values) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_50_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_50_result;
+    Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(count * 16));
     std::shared_ptr<Program> l_program = l_ctx->mInstances.mPrograms[l_ctx->mBoundProgram];
     Uniform l_uniform = l_program->mUniforms[location];
     l_uniform.mValue.mMat4f =
             Mat4f()
-                    .SetCol0(Vec4f().SetX(values[0]).SetY(values[1]).SetZ(values[2]).SetW(
-                            values[3]))
-                    .SetCol1(Vec4f().SetX(values[4]).SetY(values[5]).SetZ(values[6]).SetW(
-                            values[7]))
-                    .SetCol2(Vec4f()
-                                     .SetX(values[8])
-                                     .SetY(values[9])
-                                     .SetZ(values[10])
-                                     .SetW(values[11]))
-                    .SetCol3(Vec4f()
-                                     .SetX(values[12])
-                                     .SetY(values[13])
-                                     .SetZ(values[14])
-                                     .SetW(values[15]));
+                    .SetCol0(Vec4f().SetX(l_v[0]).SetY(l_v[1]).SetZ(l_v[2]).SetW(l_v[3]))
+                    .SetCol1(Vec4f().SetX(l_v[4]).SetY(l_v[5]).SetZ(l_v[6]).SetW(l_v[7]))
+                    .SetCol2(Vec4f().SetX(l_v[8]).SetY(l_v[9]).SetZ(l_v[10]).SetW(l_v[11]))
+                    .SetCol3(Vec4f().SetX(l_v[12]).SetY(l_v[13]).SetZ(l_v[14]).SetW(l_v[15]));
     l_program->mUniforms[location] = l_uniform;
 }
 
-inline void GlesState::glGetUniformfv(ProgramId const program, UniformLocation const location,
-                                      const float* const values) {}
+inline void GlesState::glGetUniformfv(uint32_t const program, int32_t const location,
+                                      float* const values) {}
 
-inline void GlesState::glGetUniformiv(ProgramId const program, UniformLocation const location,
-                                      const int32_t* const values) {}
+inline void GlesState::glGetUniformiv(uint32_t const program, int32_t const location,
+                                      int32_t* const values) {}
 
-inline void GlesState::glVertexAttrib1f(AttributeLocation const location, float const value0) {}
+inline void GlesState::glVertexAttrib1f(uint32_t const location, float const value0) {}
 
-inline void GlesState::glVertexAttrib2f(AttributeLocation const location, float const value0,
+inline void GlesState::glVertexAttrib2f(uint32_t const location, float const value0,
                                         float const value1) {}
 
-inline void GlesState::glVertexAttrib3f(AttributeLocation const location, float const value0,
+inline void GlesState::glVertexAttrib3f(uint32_t const location, float const value0,
                                         float const value1, float const value2) {}
 
-inline void GlesState::glVertexAttrib4f(AttributeLocation const location, float const value0,
+inline void GlesState::glVertexAttrib4f(uint32_t const location, float const value0,
                                         float const value1, float const value2,
                                         float const value3) {}
 
-inline void GlesState::glVertexAttrib1fv(AttributeLocation const location,
-                                         const float* const value) {}
+inline void GlesState::glVertexAttrib1fv(uint32_t const location, float* const value) {
+    read(slice(value, 0, 1));
+}
 
-inline void GlesState::glVertexAttrib2fv(AttributeLocation const location,
-                                         const float* const value) {}
+inline void GlesState::glVertexAttrib2fv(uint32_t const location, float* const value) {
+    read(slice(value, 0, 2));
+}
 
-inline void GlesState::glVertexAttrib3fv(AttributeLocation const location,
-                                         const float* const value) {}
+inline void GlesState::glVertexAttrib3fv(uint32_t const location, float* const value) {
+    read(slice(value, 0, 3));
+}
 
-inline void GlesState::glVertexAttrib4fv(AttributeLocation const location,
-                                         const float* const value) {}
+inline void GlesState::glVertexAttrib4fv(uint32_t const location, float* const value) {
+    read(slice(value, 0, 4));
+}
 
 inline void GlesState::glGetShaderPrecisionFormat(uint32_t const shader_type,
                                                   uint32_t const precision_type,
-                                                  int32_t* const range, int32_t* const precision) {}
+                                                  int32_t* const range, int32_t* const precision) {
+    write(slice(range, 0, 2));
+    slice(precision, 0, 1)[0] = slice(precision, 0, 1)[0];
+}
 
 inline void GlesState::glDepthMask(bool const enabled) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
@@ -1516,38 +1561,42 @@ inline void GlesState::glActiveTexture(uint32_t const unit) {
     }
 }
 
-inline void GlesState::glGenTextures(int32_t const count, TextureId* const textures) {
+inline void GlesState::glGenTextures(int32_t const count, uint32_t* const textures) {
+    Slice<TextureId> l_t = slice(textures, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_61_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_61_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        TextureId l_id = (TextureId)(textures[l_i]);
-        l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>(new Texture());
+        TextureId l_id =
+                (TextureId)(slice(textures, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>((new Texture()));
+        l_t[(uint64_t)(l_i)] = l_id;
     }
 }
 
-inline void GlesState::glDeleteTextures(int32_t const count, const TextureId* const textures) {
+inline void GlesState::glDeleteTextures(int32_t const count, uint32_t* const textures) {
+    Slice<TextureId> l_t = slice(textures, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_62_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_62_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mTextures.erase(textures[l_i]);
+        l_ctx->mInstances.mTextures[l_t[(uint64_t)(l_i)]] = std::shared_ptr<Texture>();
     }
 }
 
-inline void GlesState::glIsTexture(TextureId const texture, bool const result) {
+inline void GlesState::glIsTexture(uint32_t const texture, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_63_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_63_result;
     return;
 }
 
-inline void GlesState::glBindTexture(uint32_t const target, TextureId const texture) {
+inline void GlesState::glBindTexture(uint32_t const target, uint32_t const texture) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_64_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_64_result;
     if (!(l_ctx->mInstances.mTextures.count(texture) > 0)) {
-        l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>(new Texture());
+        l_ctx->mInstances.mTextures[texture] = std::shared_ptr<Texture>((new Texture()));
     }
     l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][target] = texture;
 }
@@ -1555,8 +1604,7 @@ inline void GlesState::glBindTexture(uint32_t const target, TextureId const text
 inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                                     uint32_t const internal_format, int32_t const width,
                                     int32_t const height, int32_t const border,
-                                    uint32_t const format, uint32_t const type,
-                                    TexturePointer const data) {
+                                    uint32_t const format, uint32_t const type, void* const data) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_65_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_65_result;
@@ -1571,9 +1619,13 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
-                data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+            if (data != nullptr) {
+                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
+                    l_l.mData =
+                            clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
+                }
+            } else {
+                l_l.mData = make<uint8_t>((uint64_t)(l_l.mSize));
             }
             l_t->mTexture2D[level] = l_l;
             l_t->mKind = TextureKind::TEXTURE2D;
@@ -1595,9 +1647,13 @@ inline void GlesState::glTexImage2D(uint32_t const target, int32_t const level,
                             .SetHeight(height)
                             .SetSize(imageSize((uint32_t)(width), (uint32_t)(height), format, type))
                             .SetFormat((uint32_t)(format));
-            if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
-                data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+            if (data != nullptr) {
+                if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0)) {
+                    l_l.mData =
+                            clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
+                }
+            } else {
+                l_l.mData = make<uint8_t>((uint64_t)(l_l.mSize));
             }
             CubemapLevel l_cube = l_t->mCubemap[level];
             l_cube.mFaces[(uint32_t)(target)] = l_l;
@@ -1613,7 +1669,7 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                                        int32_t const xoffset, int32_t const yoffset,
                                        int32_t const width, int32_t const height,
                                        uint32_t const format, uint32_t const type,
-                                       TexturePointer const data) {
+                                       void* const data) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_66_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_66_result;
@@ -1630,7 +1686,7 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                             .SetFormat((uint32_t)(format));
             if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                 data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+                l_l.mData = clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
             }
             l_t->mTexture2D[level] = l_l;
             l_t->mKind = TextureKind::TEXTURE2D;
@@ -1654,7 +1710,7 @@ inline void GlesState::glTexSubImage2D(uint32_t const target, int32_t const leve
                             .SetFormat((uint32_t)(format));
             if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                 data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+                l_l.mData = clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
             }
             CubemapLevel l_cube = l_t->mCubemap[level];
             l_cube.mFaces[(uint32_t)(target)] = l_l;
@@ -1679,7 +1735,7 @@ inline void GlesState::glCopyTexSubImage2D(uint32_t const target, int32_t const 
 inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t const level,
                                               uint32_t const format, int32_t const width,
                                               int32_t const height, int32_t const border,
-                                              int32_t const image_size, TexturePointer const data) {
+                                              int32_t const image_size, void* const data) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_67_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_67_result;
@@ -1695,7 +1751,7 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
                                 .SetFormat((uint32_t)(format));
             if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                 data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+                l_l.mData = clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
             }
             l_t->mTexture2D[level] = l_l;
             l_t->mKind = TextureKind::TEXTURE2D;
@@ -1718,7 +1774,7 @@ inline void GlesState::glCompressedTexImage2D(uint32_t const target, int32_t con
                                 .SetFormat((uint32_t)(format));
             if (l_ctx->mBoundBuffers[BufferTarget::GL_PIXEL_UNPACK_BUFFER] == (BufferId)(0) &&
                 data != nullptr) {
-                memcpy(l_l.mData, data, l_l.mSize);
+                l_l.mData = clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(l_l.mSize)));
             }
             CubemapLevel l_cube = l_t->mCubemap[level];
             l_cube.mFaces[(uint32_t)(target)] = l_l;
@@ -1734,31 +1790,37 @@ inline void GlesState::glCompressedTexSubImage2D(uint32_t const target, int32_t 
                                                  int32_t const xoffset, int32_t const yoffset,
                                                  int32_t const width, int32_t const height,
                                                  uint32_t const format, int32_t const image_size,
-                                                 TexturePointer const data) {}
+                                                 void* const data) {}
 
 inline void GlesState::glGenerateMipmap(uint32_t const target) {}
 
 inline void GlesState::glReadPixels(int32_t const x, int32_t const y, int32_t const width,
                                     int32_t const height, uint32_t const format,
-                                    uint32_t const type, void* const data) {}
+                                    uint32_t const type, void* const data) {
+    write(slice(data, (uint64_t)(0), (uint64_t)(imageSize((uint32_t)(width), (uint32_t)(height),
+                                                          (uint32_t)(format), type))));
+}
 
-inline void GlesState::glGenFramebuffers(int32_t const count, FramebufferId* const framebuffers) {
+inline void GlesState::glGenFramebuffers(int32_t const count, uint32_t* const framebuffers) {
+    Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_68_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_68_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        FramebufferId l_id = (FramebufferId)(framebuffers[l_i]);
-        l_ctx->mInstances.mFramebuffers[l_id] = std::shared_ptr<Framebuffer>(new Framebuffer());
+        FramebufferId l_id = (FramebufferId)(
+                slice(framebuffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mFramebuffers[l_id] = std::shared_ptr<Framebuffer>((new Framebuffer()));
+        l_f[(uint64_t)(l_i)] = l_id;
     }
 }
 
-inline void GlesState::glBindFramebuffer(uint32_t const target, FramebufferId const framebuffer) {
+inline void GlesState::glBindFramebuffer(uint32_t const target, uint32_t const framebuffer) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_69_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_69_result;
     if (!(l_ctx->mInstances.mFramebuffers.count(framebuffer) > 0)) {
         l_ctx->mInstances.mFramebuffers[framebuffer] =
-                std::shared_ptr<Framebuffer>(new Framebuffer());
+                std::shared_ptr<Framebuffer>((new Framebuffer()));
     }
     if (target == FramebufferTarget::GL_FRAMEBUFFER) {
         l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER] = framebuffer;
@@ -1772,42 +1834,44 @@ inline void GlesState::glCheckFramebufferStatus(uint32_t const target, uint32_t 
     return;
 }
 
-inline void GlesState::glDeleteFramebuffers(int32_t const count,
-                                            const FramebufferId* const framebuffers) {
+inline void GlesState::glDeleteFramebuffers(int32_t const count, uint32_t* const framebuffers) {
+    Slice<FramebufferId> l_f = slice(framebuffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_70_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_70_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mFramebuffers.erase(framebuffers[l_i]);
+        l_ctx->mInstances.mFramebuffers[l_f[(uint64_t)(l_i)]] = std::shared_ptr<Framebuffer>();
     }
 }
 
-inline void GlesState::glIsFramebuffer(FramebufferId const framebuffer, bool const result) {
+inline void GlesState::glIsFramebuffer(uint32_t const framebuffer, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_71_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_71_result;
     return;
 }
 
-inline void GlesState::glGenRenderbuffers(int32_t const count,
-                                          RenderbufferId* const renderbuffers) {
+inline void GlesState::glGenRenderbuffers(int32_t const count, uint32_t* const renderbuffers) {
+    Slice<RenderbufferId> l_r = slice(renderbuffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_72_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_72_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        RenderbufferId l_id = (RenderbufferId)(renderbuffers[l_i]);
-        l_ctx->mInstances.mRenderbuffers[l_id] = std::shared_ptr<Renderbuffer>(new Renderbuffer());
+        RenderbufferId l_id = (RenderbufferId)(
+                slice(renderbuffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mRenderbuffers[l_id] =
+                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
+        l_r[(uint64_t)(l_i)] = l_id;
     }
 }
 
-inline void GlesState::glBindRenderbuffer(uint32_t const target,
-                                          RenderbufferId const renderbuffer) {
+inline void GlesState::glBindRenderbuffer(uint32_t const target, uint32_t const renderbuffer) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_73_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_73_result;
     if (!(l_ctx->mInstances.mRenderbuffers.count(renderbuffer) > 0)) {
         l_ctx->mInstances.mRenderbuffers[renderbuffer] =
-                std::shared_ptr<Renderbuffer>(new Renderbuffer());
+                std::shared_ptr<Renderbuffer>((new Renderbuffer()));
     }
     l_ctx->mBoundRenderbuffers[target] = renderbuffer;
 }
@@ -1824,17 +1888,17 @@ inline void GlesState::glRenderbufferStorage(uint32_t const target, uint32_t con
     l_rb->mHeight = height;
 }
 
-inline void GlesState::glDeleteRenderbuffers(int32_t const count,
-                                             const RenderbufferId* const renderbuffers) {
+inline void GlesState::glDeleteRenderbuffers(int32_t const count, uint32_t* const renderbuffers) {
+    Slice<RenderbufferId> l_r = slice(renderbuffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_75_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_75_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mRenderbuffers.erase(renderbuffers[l_i]);
+        l_ctx->mInstances.mRenderbuffers[l_r[(uint64_t)(l_i)]] = std::shared_ptr<Renderbuffer>();
     }
 }
 
-inline void GlesState::glIsRenderbuffer(RenderbufferId const renderbuffer, bool const result) {
+inline void GlesState::glIsRenderbuffer(uint32_t const renderbuffer, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_76_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_76_result;
@@ -1848,55 +1912,67 @@ inline void GlesState::glGetRenderbufferParameteriv(uint32_t const target, uint3
     std::shared_ptr<Context> l_ctx = l_GetContext_77_result;
     RenderbufferId l_id = l_ctx->mBoundRenderbuffers[target];
     std::shared_ptr<Renderbuffer> l_rb = l_ctx->mInstances.mRenderbuffers[l_id];
+    slice(values, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case RenderbufferParameter::GL_RENDERBUFFER_WIDTH: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_WIDTH))) ? (l_rb->mWidth) :
+        /* case RenderbufferParameter::GL_RENDERBUFFER_HEIGHT: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_HEIGHT))) ? (l_rb->mHeight) :
+        /* case RenderbufferParameter::GL_RENDERBUFFER_INTERNAL_FORMAT: */(((parameter) == (RenderbufferParameter::GL_RENDERBUFFER_INTERNAL_FORMAT))) ? ((int32_t)(l_rb->mFormat)) :
+        /* default: */ 0 /* clang-format on */;
 }
 
-inline void GlesState::glGenBuffers(int32_t const count, BufferId* const buffers) {
+inline void GlesState::glGenBuffers(int32_t const count, uint32_t* const buffers) {
+    Slice<BufferId> l_b = slice(buffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_78_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_78_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        BufferId l_id = (BufferId)(buffers[l_i]);
-        l_ctx->mInstances.mBuffers[l_id] = std::shared_ptr<Buffer>(new Buffer());
+        BufferId l_id =
+                (BufferId)(slice(buffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mBuffers[l_id] = std::shared_ptr<Buffer>((new Buffer()));
+        l_b[(uint64_t)(l_i)] = l_id;
     }
 }
 
-inline void GlesState::glBindBuffer(uint32_t const target, BufferId const buffer) {
+inline void GlesState::glBindBuffer(uint32_t const target, uint32_t const buffer) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_79_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_79_result;
     if (!(l_ctx->mInstances.mBuffers.count(buffer) > 0)) {
-        l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>(new Buffer());
+        l_ctx->mInstances.mBuffers[buffer] = std::shared_ptr<Buffer>((new Buffer()));
     }
     l_ctx->mBoundBuffers[target] = buffer;
 }
 
-inline void GlesState::glBufferData(uint32_t const target, int32_t const size,
-                                    BufferDataPointer const data, uint32_t const usage) {
+inline void GlesState::glBufferData(uint32_t const target, int32_t const size, void* const data,
+                                    uint32_t const usage) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_80_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_80_result;
     BufferId l_id = l_ctx->mBoundBuffers[target];
     std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
     if (data != nullptr) {
-        memcpy(l_b->mData, data, (uint32_t)(size));
+        copy(l_b->mData, slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(size)));
     }
     l_b->mSize = size;
     l_b->mUsage = usage;
 }
 
 inline void GlesState::glBufferSubData(uint32_t const target, int32_t const offset,
-                                       int32_t const size, const void* const data) {}
+                                       int32_t const size, void* const data) {
+    read(slice(data, (uint64_t)(0), (uint64_t)(size)));
+}
 
-inline void GlesState::glDeleteBuffers(int32_t const count, const BufferId* const buffers) {
+inline void GlesState::glDeleteBuffers(int32_t const count, uint32_t* const buffers) {
+    Slice<BufferId> l_b = slice(buffers, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_81_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_81_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mBuffers.erase(buffers[l_i]);
+        l_ctx->mInstances.mBuffers[l_b[(uint64_t)(l_i)]] = std::shared_ptr<Buffer>();
     }
 }
 
-inline void GlesState::glIsBuffer(BufferId const buffer, bool const result) {
+inline void GlesState::glIsBuffer(uint32_t const buffer, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_82_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_82_result;
@@ -1910,6 +1986,11 @@ inline void GlesState::glGetBufferParameteriv(uint32_t const target, uint32_t co
     std::shared_ptr<Context> l_ctx = l_GetContext_83_result;
     BufferId l_id = l_ctx->mBoundBuffers[target];
     std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
+    slice(value, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case BufferParameter::GL_BUFFER_SIZE: */(((parameter) == (BufferParameter::GL_BUFFER_SIZE))) ? (l_b->mSize) :
+        /* case BufferParameter::GL_BUFFER_USAGE: */(((parameter) == (BufferParameter::GL_BUFFER_USAGE))) ? ((int32_t)(l_b->mUsage)) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glCreateShader(uint32_t const type, ShaderId const result) {
@@ -1917,75 +1998,89 @@ inline void GlesState::glCreateShader(uint32_t const type, ShaderId const result
     std::shared_ptr<Context> l_GetContext_84_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_84_result;
     ShaderId l_id = (ShaderId)(result);
-    l_ctx->mInstances.mShaders[l_id] = std::shared_ptr<Shader>(new Shader());
+    l_ctx->mInstances.mShaders[l_id] = std::shared_ptr<Shader>((new Shader()));
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[l_id];
     l_s->mType = type;
     return;
 }
 
-inline void GlesState::glDeleteShader(ShaderId const shader) {
+inline void GlesState::glDeleteShader(uint32_t const shader) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_85_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_85_result;
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
     l_s->mDeletable = true;
-    l_ctx->mInstances.mShaders.erase(shader);
+    l_ctx->mInstances.mShaders[shader] = std::shared_ptr<Shader>();
 }
 
-inline void GlesState::glShaderSource(ShaderId const shader, int32_t const count,
-                                      const char** const source, const int32_t* const length) {
+inline void GlesState::glShaderSource(uint32_t const shader, int32_t const count,
+                                      char** const source, int32_t* const length) {
+    Slice<char*> l_sources = slice(source, (uint64_t)(0), (uint64_t)(count));
+    Slice<int32_t> l_lengths = slice(length, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_86_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_86_result;
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-    l_s->mSource.resize(count);
-    for (int32_t i = 0, c = count; i < c; i++) {
-        l_s->mSource[i] = source[i];
+    for (int32_t l_i = 0; l_i < count; ++l_i) {
+        uint32_t l_l = /* clang-format off */
+        /* switch(length == nullptr || l_lengths[(uint64_t)(l_i)] < 0) */
+            /* case true: */(((length == nullptr || l_lengths[(uint64_t)(l_i)] < 0) == (true))) ? (strlen(l_sources[(uint64_t)(l_i)])) :
+            /* case false: */(((length == nullptr || l_lengths[(uint64_t)(l_i)] < 0) == (false))) ? ((uint32_t)(l_lengths[(uint64_t)(l_i)])) :
+            /* default: */ 0 /* clang-format on */;
+        l_s->mSource += string(slice(l_sources[(uint64_t)(l_i)], (uint64_t)(0), (uint64_t)(l_l)));
     }
 }
 
-inline void GlesState::glShaderBinary(int32_t const count, const ShaderId* const shaders,
-                                      uint32_t const binary_format, const void* const binary,
+inline void GlesState::glShaderBinary(int32_t const count, uint32_t* const shaders,
+                                      uint32_t const binary_format, void* const binary,
                                       int32_t const binary_size) {
     for (int32_t l_i = 0; l_i < count; ++l_i) {
     }
 }
 
-inline void GlesState::glGetShaderInfoLog(ShaderId const shader, int32_t const buffer_length,
+inline void GlesState::glGetShaderInfoLog(uint32_t const shader, int32_t const buffer_length,
                                           int32_t* const string_length_written, char* const info) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_87_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_87_result;
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
     int32_t l_min_88_a = buffer_length;
-    int32_t l_min_88_b = strlen(l_s->mInfoLog);
+    int32_t l_min_88_b = (int32_t)(strlen(l_s->mInfoLog));
     int32_t l_min_88_result = /* clang-format off */
     /* switch(l_min_88_a < l_min_88_b) */
         /* case true: */(((l_min_88_a < l_min_88_b) == (true))) ? (l_min_88_a) :
         /* case false: */(((l_min_88_a < l_min_88_b) == (false))) ? (l_min_88_b) :
         /* default: */ 0 /* clang-format on */;
+    int32_t l_l = l_min_88_result;
+    slice(string_length_written, 0, 1)[0] = l_l;
+    copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
+         slice(l_s->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
 }
 
-inline void GlesState::glGetShaderSource(ShaderId const shader, int32_t const buffer_length,
+inline void GlesState::glGetShaderSource(uint32_t const shader, int32_t const buffer_length,
                                          int32_t* const string_length_written, char* const source) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_89_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_89_result;
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
     int32_t l_min_90_a = buffer_length;
-    int32_t l_min_90_b = strlen(l_s->mSource[0]);
+    int32_t l_min_90_b = (int32_t)(strlen(l_s->mSource));
     int32_t l_min_90_result = /* clang-format off */
     /* switch(l_min_90_a < l_min_90_b) */
         /* case true: */(((l_min_90_a < l_min_90_b) == (true))) ? (l_min_90_a) :
         /* case false: */(((l_min_90_a < l_min_90_b) == (false))) ? (l_min_90_b) :
         /* default: */ 0 /* clang-format on */;
+    int32_t l_l = l_min_90_result;
+    slice(string_length_written, 0, 1)[0] = l_l;
+    copy(slice(source, (uint64_t)(0), (uint64_t)(l_l)),
+         slice(slice(l_s->mSource), (uint64_t)(0), (uint64_t)(l_l)));
 }
 
 inline void GlesState::glReleaseShaderCompiler() {}
 
-inline void GlesState::glCompileShader(ShaderId const shader) {}
+inline void GlesState::glCompileShader(uint32_t const shader) {}
 
-inline void GlesState::glIsShader(ShaderId const shader, bool const result) {
+inline void GlesState::glIsShader(uint32_t const shader, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_91_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_91_result;
@@ -1997,18 +2092,18 @@ inline void GlesState::glCreateProgram(ProgramId const result) {
     std::shared_ptr<Context> l_GetContext_92_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_92_result;
     ProgramId l_id = (ProgramId)(result);
-    l_ctx->mInstances.mPrograms[l_id] = std::shared_ptr<Program>(new Program());
+    l_ctx->mInstances.mPrograms[l_id] = std::shared_ptr<Program>((new Program()));
     return;
 }
 
-inline void GlesState::glDeleteProgram(ProgramId const program) {
+inline void GlesState::glDeleteProgram(uint32_t const program) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_93_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_93_result;
-    l_ctx->mInstances.mPrograms.erase(program);
+    l_ctx->mInstances.mPrograms[program] = std::shared_ptr<Program>();
 }
 
-inline void GlesState::glAttachShader(ProgramId const program, ShaderId const shader) {
+inline void GlesState::glAttachShader(uint32_t const program, uint32_t const shader) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_94_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_94_result;
@@ -2017,18 +2112,18 @@ inline void GlesState::glAttachShader(ProgramId const program, ShaderId const sh
     l_p->mShaders[l_s->mType] = shader;
 }
 
-inline void GlesState::glDetachShader(ProgramId const program, ShaderId const shader) {
+inline void GlesState::glDetachShader(uint32_t const program, uint32_t const shader) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_95_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_95_result;
     std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
     std::shared_ptr<Shader> l_s = l_ctx->mInstances.mShaders[shader];
-    l_p->mShaders.erase(l_s->mType);
+    l_p->mShaders[l_s->mType] = 0;
 }
 
-inline void GlesState::glGetAttachedShaders(ProgramId const program, int32_t const buffer_length,
+inline void GlesState::glGetAttachedShaders(uint32_t const program, int32_t const buffer_length,
                                             int32_t* const shaders_length_written,
-                                            ShaderId* const shaders) {
+                                            uint32_t* const shaders) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_96_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_96_result;
@@ -2040,40 +2135,46 @@ inline void GlesState::glGetAttachedShaders(ProgramId const program, int32_t con
         /* case true: */(((l_min_97_a < l_min_97_b) == (true))) ? (l_min_97_a) :
         /* case false: */(((l_min_97_a < l_min_97_b) == (false))) ? (l_min_97_b) :
         /* default: */ 0 /* clang-format on */;
+    int32_t l_l = l_min_97_result;
+    slice(shaders_length_written, 0, 1)[0] = l_l;
 }
 
-inline void GlesState::glLinkProgram(ProgramId const program) {}
+inline void GlesState::glLinkProgram(uint32_t const program) {}
 
-inline void GlesState::glGetProgramInfoLog(ProgramId const program, int32_t const buffer_length,
+inline void GlesState::glGetProgramInfoLog(uint32_t const program, int32_t const buffer_length,
                                            int32_t* const string_length_written, char* const info) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_98_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_98_result;
     std::shared_ptr<Program> l_p = l_ctx->mInstances.mPrograms[program];
     int32_t l_min_99_a = buffer_length;
-    int32_t l_min_99_b = strlen(l_p->mInfoLog);
+    int32_t l_min_99_b = (int32_t)(strlen(l_p->mInfoLog));
     int32_t l_min_99_result = /* clang-format off */
     /* switch(l_min_99_a < l_min_99_b) */
         /* case true: */(((l_min_99_a < l_min_99_b) == (true))) ? (l_min_99_a) :
         /* case false: */(((l_min_99_a < l_min_99_b) == (false))) ? (l_min_99_b) :
         /* default: */ 0 /* clang-format on */;
+    int32_t l_l = l_min_99_result;
+    slice(string_length_written, 0, 1)[0] = l_l;
+    copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
+         slice(l_p->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
 }
 
-inline void GlesState::glUseProgram(ProgramId const program) {
+inline void GlesState::glUseProgram(uint32_t const program) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_100_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_100_result;
     l_ctx->mBoundProgram = program;
 }
 
-inline void GlesState::glIsProgram(ProgramId const program, bool const result) {
+inline void GlesState::glIsProgram(uint32_t const program, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_101_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_101_result;
     return;
 }
 
-inline void GlesState::glValidateProgram(ProgramId const program) {}
+inline void GlesState::glValidateProgram(uint32_t const program) {}
 
 inline void GlesState::glClearColor(float const r, float const g, float const b, float const a) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
@@ -2141,7 +2242,7 @@ inline void GlesState::glHint(uint32_t const target, uint32_t const mode) {
 inline void GlesState::glFramebufferRenderbuffer(uint32_t const framebuffer_target,
                                                  uint32_t const framebuffer_attachment,
                                                  uint32_t const renderbuffer_target,
-                                                 RenderbufferId const renderbuffer) {
+                                                 uint32_t const renderbuffer) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_110_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_110_result;
@@ -2167,8 +2268,8 @@ inline void GlesState::glFramebufferRenderbuffer(uint32_t const framebuffer_targ
 
 inline void GlesState::glFramebufferTexture2D(uint32_t const framebuffer_target,
                                               uint32_t const framebuffer_attachment,
-                                              uint32_t const texture_target,
-                                              TextureId const texture, int32_t const level) {
+                                              uint32_t const texture_target, uint32_t const texture,
+                                              int32_t const level) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_111_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_111_result;
@@ -2220,98 +2321,146 @@ inline void GlesState::glGetFramebufferAttachmentParameteriv(uint32_t const fram
     FramebufferId l_framebufferId = l_ctx->mBoundFramebuffers[l_target];
     std::shared_ptr<Framebuffer> l_framebuffer = l_ctx->mInstances.mFramebuffers[l_framebufferId];
     FramebufferAttachmentInfo l_a = l_framebuffer->mAttachments[attachment];
+    slice(value, 0, 1)[0] = /* clang-format off */
+    /* switch(parameter) */
+        /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE))) ? ((int32_t)(l_a.mType)) :
+        /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME))) ? ((int32_t)(l_a.mObject)) :
+        /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL))) ? (l_a.mTextureLevel) :
+        /* case FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: */(((parameter) == (FramebufferAttachmentParameter::GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE))) ? ((int32_t)(l_a.mCubeMapFace)) :
+        /* default: */ 0 /* clang-format on */;
 }
 
 inline void GlesState::glDrawElements(uint32_t const draw_mode, int32_t const element_count,
-                                      uint32_t const indices_type, IndicesPointer const indices) {
+                                      uint32_t const indices_type, void* const indices) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_113_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_113_result;
+    uint32_t l_count = (uint32_t)(element_count);
     BufferId l_id = l_ctx->mBoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER];
-    void* l_index_data = /* clang-format off */
-    /* switch(l_id != (BufferId)(0)) */
-        /* case true: */(((l_id != (BufferId)(0)) == (true))) ? (memoryOffset(l_ctx->mInstances.mBuffers[l_id]->mData, (uint64_t)(indices))) :
-        /* case false: */(((l_id != (BufferId)(0)) == (false))) ? ((void*)(indices)) :
-        /* default: */ nullptr /* clang-format on */;
-    uint32_t l_IndexSize_114_indices_type = indices_type;
-    uint32_t l_IndexSize_114_result = /* clang-format off */
-    /* switch(l_IndexSize_114_indices_type) */
-        /* case IndicesType::GL_UNSIGNED_BYTE: */(((l_IndexSize_114_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
-        /* case IndicesType::GL_UNSIGNED_SHORT: */(((l_IndexSize_114_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
-        /* case IndicesType::GL_UNSIGNED_INT: */(((l_IndexSize_114_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
-        /* default: */ 0 /* clang-format on */;
-    read(l_index_data, 0, (uint32_t)(element_count)*l_IndexSize_114_result);
-    uint32_t l_first = minIndex(l_index_data, indices_type, (uint32_t)(element_count));
-    uint32_t l_last = maxIndex(l_index_data, indices_type, (uint32_t)(element_count));
-    std::shared_ptr<Context> l_ReadVertexArrays_115_ctx = l_ctx;
-    uint32_t l_ReadVertexArrays_115_first_index = l_first;
-    uint32_t l_ReadVertexArrays_115_last_index = l_last;
-    for (int32_t l_i = 0; l_i < l_ReadVertexArrays_115_ctx->mVertexAttributeArrays.size(); ++l_i) {
-        std::shared_ptr<VertexAttributeArray> l_arr =
-                l_ReadVertexArrays_115_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
-        if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-            uint32_t l_vertexAttribTypeSize_116_t = l_arr->mType;
-            uint32_t l_vertexAttribTypeSize_116_result = /* clang-format off */
-            /* switch(l_vertexAttribTypeSize_116_t) */
-                /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
-                /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_116_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
-                /* default: */ 0 /* clang-format on */;
-            uint32_t l_elsize = l_vertexAttribTypeSize_116_result * l_arr->mSize;
-            uint32_t l_elstride = /* clang-format off */
-            /* switch(l_arr->mStride == 0) */
-                /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
-                /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
-                /* default: */ 0 /* clang-format on */;
-            for (uint32_t l_v = l_ReadVertexArrays_115_first_index;
-                 l_v < l_ReadVertexArrays_115_last_index + 1; ++l_v) {
-                uint32_t l_offset = l_elstride * l_v;
-                read(l_arr->mPointer, l_offset, l_elsize);
+    if (l_id != (BufferId)(0)) {
+        Slice<uint8_t> l_index_data = l_ctx->mInstances.mBuffers[l_id]->mData;
+        uint32_t l_offset = (uint32_t)((uint64_t)(indices));
+        uint32_t l_first = minIndex(l_index_data.begin(), indices_type, l_offset, l_count);
+        uint32_t l_last = maxIndex(l_index_data.begin(), indices_type, l_offset, l_count);
+        std::shared_ptr<Context> l_ReadVertexArrays_114_ctx = l_ctx;
+        uint32_t l_ReadVertexArrays_114_first_index = l_first;
+        uint32_t l_ReadVertexArrays_114_last_index = l_last;
+        for (int32_t l_i = 0; l_i < l_ReadVertexArrays_114_ctx->mVertexAttributeArrays.size();
+             ++l_i) {
+            std::shared_ptr<VertexAttributeArray> l_arr =
+                    l_ReadVertexArrays_114_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
+            if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
+                uint32_t l_vertexAttribTypeSize_115_t = l_arr->mType;
+                uint32_t l_vertexAttribTypeSize_115_result = /* clang-format off */
+                /* switch(l_vertexAttribTypeSize_115_t) */
+                    /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                    /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                    /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                    /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_115_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                    /* default: */ 0 /* clang-format on */;
+                uint32_t l_elsize = l_vertexAttribTypeSize_115_result * l_arr->mSize;
+                uint32_t l_elstride = /* clang-format off */
+                /* switch(l_arr->mStride == 0) */
+                    /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
+                    /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
+                    /* default: */ 0 /* clang-format on */;
+                for (uint32_t l_v = l_ReadVertexArrays_114_first_index;
+                     l_v < l_ReadVertexArrays_114_last_index + 1; ++l_v) {
+                    uint32_t l_offset = l_elstride * l_v;
+                    read(slice(l_arr->mPointer, (uint64_t)(l_offset),
+                               (uint64_t)(l_offset + l_elsize)));
+                }
             }
         }
+    } else {
+        uint8_t* l_index_data = (uint8_t*)(indices);
+        uint32_t l_first = minIndex(l_index_data, indices_type, 0, l_count);
+        uint32_t l_last = maxIndex(l_index_data, indices_type, 0, l_count);
+        std::shared_ptr<Context> l_ReadVertexArrays_116_ctx = l_ctx;
+        uint32_t l_ReadVertexArrays_116_first_index = l_first;
+        uint32_t l_ReadVertexArrays_116_last_index = l_last;
+        for (int32_t l_i = 0; l_i < l_ReadVertexArrays_116_ctx->mVertexAttributeArrays.size();
+             ++l_i) {
+            std::shared_ptr<VertexAttributeArray> l_arr =
+                    l_ReadVertexArrays_116_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
+            if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
+                uint32_t l_vertexAttribTypeSize_117_t = l_arr->mType;
+                uint32_t l_vertexAttribTypeSize_117_result = /* clang-format off */
+                /* switch(l_vertexAttribTypeSize_117_t) */
+                    /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                    /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                    /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                    /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                    /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                    /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_117_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+                    /* default: */ 0 /* clang-format on */;
+                uint32_t l_elsize = l_vertexAttribTypeSize_117_result * l_arr->mSize;
+                uint32_t l_elstride = /* clang-format off */
+                /* switch(l_arr->mStride == 0) */
+                    /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
+                    /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
+                    /* default: */ 0 /* clang-format on */;
+                for (uint32_t l_v = l_ReadVertexArrays_116_first_index;
+                     l_v < l_ReadVertexArrays_116_last_index + 1; ++l_v) {
+                    uint32_t l_offset = l_elstride * l_v;
+                    read(slice(l_arr->mPointer, (uint64_t)(l_offset),
+                               (uint64_t)(l_offset + l_elsize)));
+                }
+            }
+        }
+        uint32_t l_IndexSize_118_indices_type = indices_type;
+        uint32_t l_IndexSize_118_result = /* clang-format off */
+        /* switch(l_IndexSize_118_indices_type) */
+            /* case IndicesType::GL_UNSIGNED_BYTE: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_BYTE))) ? (1) :
+            /* case IndicesType::GL_UNSIGNED_SHORT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_SHORT))) ? (2) :
+            /* case IndicesType::GL_UNSIGNED_INT: */(((l_IndexSize_118_indices_type) == (IndicesType::GL_UNSIGNED_INT))) ? (4) :
+            /* default: */ 0 /* clang-format on */;
+        read(slice(l_index_data, (uint64_t)(0),
+                   (uint64_t)((uint32_t)(element_count)*l_IndexSize_118_result)));
     }
 }
 
 inline void GlesState::glDrawArrays(uint32_t const draw_mode, int32_t const first_index,
                                     int32_t const index_count) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_117_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_117_result;
+    std::shared_ptr<Context> l_GetContext_119_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_119_result;
     int32_t l_last_index = first_index + index_count - 1;
-    std::shared_ptr<Context> l_ReadVertexArrays_118_ctx = l_ctx;
-    uint32_t l_ReadVertexArrays_118_first_index = (uint32_t)(first_index);
-    uint32_t l_ReadVertexArrays_118_last_index = (uint32_t)(l_last_index);
-    for (int32_t l_i = 0; l_i < l_ReadVertexArrays_118_ctx->mVertexAttributeArrays.size(); ++l_i) {
+    std::shared_ptr<Context> l_ReadVertexArrays_120_ctx = l_ctx;
+    uint32_t l_ReadVertexArrays_120_first_index = (uint32_t)(first_index);
+    uint32_t l_ReadVertexArrays_120_last_index = (uint32_t)(l_last_index);
+    for (int32_t l_i = 0; l_i < l_ReadVertexArrays_120_ctx->mVertexAttributeArrays.size(); ++l_i) {
         std::shared_ptr<VertexAttributeArray> l_arr =
-                l_ReadVertexArrays_118_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
+                l_ReadVertexArrays_120_ctx->mVertexAttributeArrays[(AttributeLocation)(l_i)];
         if (l_arr->mEnabled && l_arr->mBuffer == (BufferId)(0)) {
-            uint32_t l_vertexAttribTypeSize_119_t = l_arr->mType;
-            uint32_t l_vertexAttribTypeSize_119_result = /* clang-format off */
-            /* switch(l_vertexAttribTypeSize_119_t) */
-                /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_BYTE))) ? (1) :
-                /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
-                /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_SHORT))) ? (2) :
-                /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
-                /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_FIXED))) ? (4) :
-                /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
-                /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
-                /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_119_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
+            uint32_t l_vertexAttribTypeSize_121_t = l_arr->mType;
+            uint32_t l_vertexAttribTypeSize_121_result = /* clang-format off */
+            /* switch(l_vertexAttribTypeSize_121_t) */
+                /* case VertexAttribType::GL_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_UNSIGNED_BYTE: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_BYTE))) ? (1) :
+                /* case VertexAttribType::GL_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_UNSIGNED_SHORT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_UNSIGNED_SHORT))) ? (2) :
+                /* case VertexAttribType::GL_FIXED: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FIXED))) ? (4) :
+                /* case VertexAttribType::GL_FLOAT: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_FLOAT))) ? (4) :
+                /* case VertexAttribType::GL_ARB_half_float_vertex: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_ARB_half_float_vertex))) ? (2) :
+                /* case VertexAttribType::GL_HALF_FLOAT_OES: */(((l_vertexAttribTypeSize_121_t) == (VertexAttribType::GL_HALF_FLOAT_OES))) ? (2) :
                 /* default: */ 0 /* clang-format on */;
-            uint32_t l_elsize = l_vertexAttribTypeSize_119_result * l_arr->mSize;
+            uint32_t l_elsize = l_vertexAttribTypeSize_121_result * l_arr->mSize;
             uint32_t l_elstride = /* clang-format off */
             /* switch(l_arr->mStride == 0) */
                 /* case true: */(((l_arr->mStride == 0) == (true))) ? (l_elsize) :
                 /* case false: */(((l_arr->mStride == 0) == (false))) ? ((uint32_t)(l_arr->mStride)) :
                 /* default: */ 0 /* clang-format on */;
-            for (uint32_t l_v = l_ReadVertexArrays_118_first_index;
-                 l_v < l_ReadVertexArrays_118_last_index + 1; ++l_v) {
+            for (uint32_t l_v = l_ReadVertexArrays_120_first_index;
+                 l_v < l_ReadVertexArrays_120_last_index + 1; ++l_v) {
                 uint32_t l_offset = l_elstride * l_v;
-                read(l_arr->mPointer, l_offset, l_elsize);
+                read(slice(l_arr->mPointer, (uint64_t)(l_offset), (uint64_t)(l_offset + l_elsize)));
             }
         }
     }
@@ -2322,264 +2471,360 @@ inline void GlesState::glFlush() {}
 inline void GlesState::glFinish() {}
 
 inline void GlesState::glGetBooleanv(uint32_t const param, bool* const values) {
+    Slice<bool> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_120_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_120_result;
+    std::shared_ptr<Context> l_GetContext_122_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_122_result;
     switch (param) {
         case StateVariable::GL_BLEND: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_BLEND];
             break;
         }
         case StateVariable::GL_CULL_FACE: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_CULL_FACE];
             break;
         }
         case StateVariable::GL_DEPTH_TEST: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_DEPTH_TEST];
             break;
         }
         case StateVariable::GL_DITHER: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_DITHER];
             break;
         }
         case StateVariable::GL_POLYGON_OFFSET_FILL: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_POLYGON_OFFSET_FILL];
             break;
         }
         case StateVariable::GL_SAMPLE_ALPHA_TO_COVERAGE: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_SAMPLE_ALPHA_TO_COVERAGE];
             break;
         }
         case StateVariable::GL_SAMPLE_COVERAGE: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_SAMPLE_COVERAGE];
             break;
         }
         case StateVariable::GL_SCISSOR_TEST: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_SCISSOR_TEST];
             break;
         }
         case StateVariable::GL_STENCIL_TEST: {
+            l_v[0] = l_ctx->mCapabilities[Capability::GL_STENCIL_TEST];
             break;
         }
         case StateVariable::GL_DEPTH_WRITEMASK: {
+            l_v[0] = l_ctx->mRasterizing.mDepthMask;
             break;
         }
         case StateVariable::GL_COLOR_WRITEMASK: {
+            l_v[0] = l_ctx->mRasterizing.mColorMaskRed;
+            l_v[1] = l_ctx->mRasterizing.mColorMaskGreen;
+            l_v[2] = l_ctx->mRasterizing.mColorMaskBlue;
+            l_v[3] = l_ctx->mRasterizing.mColorMaskAlpha;
             break;
         }
         case StateVariable::GL_SAMPLE_COVERAGE_INVERT: {
+            l_v[0] = l_ctx->mRasterizing.mSampleCoverageInvert;
             break;
         }
         case StateVariable::GL_SHADER_COMPILER: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
     }
 }
 
 inline void GlesState::glGetFloatv(uint32_t const param, float* const values) {
+    Slice<float> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_121_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_121_result;
+    std::shared_ptr<Context> l_GetContext_123_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_123_result;
     switch (param) {
         case StateVariable::GL_DEPTH_RANGE: {
+            l_v[0] = l_ctx->mRasterizing.mDepthNear;
+            l_v[1] = l_ctx->mRasterizing.mDepthFar;
             break;
         }
         case StateVariable::GL_LINE_WIDTH: {
+            l_v[0] = l_ctx->mRasterizing.mLineWidth;
             break;
         }
         case StateVariable::GL_POLYGON_OFFSET_FACTOR: {
+            l_v[0] = l_ctx->mRasterizing.mPolygonOffsetFactor;
             break;
         }
         case StateVariable::GL_POLYGON_OFFSET_UNITS: {
+            l_v[0] = l_ctx->mRasterizing.mPolygonOffsetUnits;
             break;
         }
         case StateVariable::GL_SAMPLE_COVERAGE_VALUE: {
+            l_v[0] = l_ctx->mRasterizing.mSampleCoverageValue;
             break;
         }
         case StateVariable::GL_COLOR_CLEAR_VALUE: {
+            l_v[0] = l_ctx->mClearing.mClearColor.mRed;
+            l_v[1] = l_ctx->mClearing.mClearColor.mGreen;
+            l_v[2] = l_ctx->mClearing.mClearColor.mBlue;
+            l_v[3] = l_ctx->mClearing.mClearColor.mAlpha;
             break;
         }
         case StateVariable::GL_DEPTH_CLEAR_VALUE: {
+            l_v[0] = l_ctx->mClearing.mClearDepth;
             break;
         }
         case StateVariable::GL_ALIASED_LINE_WIDTH_RANGE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
+            l_v[1] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1];
             break;
         }
         case StateVariable::GL_ALIASED_POINT_SIZE_RANGE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
+            l_v[1] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1];
             break;
         }
         case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
     }
 }
 
 inline void GlesState::glGetIntegerv(uint32_t const param, int32_t* const values) {
+    Slice<int32_t> l_v = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_122_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_122_result;
+    std::shared_ptr<Context> l_GetContext_124_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_124_result;
     switch (param) {
         case StateVariable::GL_ACTIVE_TEXTURE: {
+            l_v[0] = (int32_t)(l_ctx->mActiveTextureUnit);
             break;
         }
         case StateVariable::GL_ARRAY_BUFFER_BINDING: {
+            l_v[0] = (int32_t)(l_ctx->mBoundBuffers[BufferTarget::GL_ARRAY_BUFFER]);
             break;
         }
         case StateVariable::GL_ELEMENT_ARRAY_BUFFER_BINDING: {
+            l_v[0] = (int32_t)(l_ctx->mBoundBuffers[BufferTarget::GL_ELEMENT_ARRAY_BUFFER]);
             break;
         }
         case StateVariable::GL_BLEND_SRC_ALPHA: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mSrcAlphaBlendFactor);
             break;
         }
         case StateVariable::GL_BLEND_SRC_RGB: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mSrcRgbBlendFactor);
             break;
         }
         case StateVariable::GL_BLEND_DST_ALPHA: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mDstAlphaBlendFactor);
             break;
         }
         case StateVariable::GL_BLEND_DST_RGB: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mDstRgbBlendFactor);
             break;
         }
         case StateVariable::GL_BLEND_EQUATION_RGB: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mBlendEquationRgb);
             break;
         }
         case StateVariable::GL_BLEND_EQUATION_ALPHA: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mBlendEquationAlpha);
             break;
         }
         case StateVariable::GL_BLEND_COLOR: {
+            l_v[0] = (int32_t)(l_ctx->mBlending.mBlendColor.mRed);
+            l_v[1] = (int32_t)(l_ctx->mBlending.mBlendColor.mGreen);
+            l_v[2] = (int32_t)(l_ctx->mBlending.mBlendColor.mBlue);
+            l_v[3] = (int32_t)(l_ctx->mBlending.mBlendColor.mAlpha);
             break;
         }
         case StateVariable::GL_DEPTH_FUNC: {
+            l_v[0] = (int32_t)(l_ctx->mRasterizing.mDepthTestFunction);
             break;
         }
         case StateVariable::GL_DEPTH_CLEAR_VALUE: {
+            l_v[0] = (int32_t)(l_ctx->mClearing.mClearDepth);
             break;
         }
         case StateVariable::GL_STENCIL_WRITEMASK: {
+            l_v[0] = (int32_t)(l_ctx->mRasterizing.mStencilMask[FaceMode::GL_FRONT]);
             break;
         }
         case StateVariable::GL_STENCIL_BACK_WRITEMASK: {
+            l_v[0] = (int32_t)(l_ctx->mRasterizing.mStencilMask[FaceMode::GL_BACK]);
             break;
         }
         case StateVariable::GL_VIEWPORT: {
+            l_v[0] = l_ctx->mRasterizing.mViewport.mX;
+            l_v[1] = l_ctx->mRasterizing.mViewport.mY;
+            l_v[2] = l_ctx->mRasterizing.mViewport.mWidth;
+            l_v[3] = l_ctx->mRasterizing.mViewport.mHeight;
             break;
         }
         case StateVariable::GL_SCISSOR_BOX: {
+            l_v[0] = l_ctx->mRasterizing.mScissor.mX;
+            l_v[1] = l_ctx->mRasterizing.mScissor.mY;
+            l_v[2] = l_ctx->mRasterizing.mScissor.mWidth;
+            l_v[3] = l_ctx->mRasterizing.mScissor.mHeight;
             break;
         }
         case StateVariable::GL_FRONT_FACE: {
+            l_v[0] = (int32_t)(l_ctx->mRasterizing.mFrontFace);
             break;
         }
         case StateVariable::GL_CULL_FACE_MODE: {
+            l_v[0] = (int32_t)(l_ctx->mRasterizing.mCullFace);
             break;
         }
         case StateVariable::GL_STENCIL_CLEAR_VALUE: {
+            l_v[0] = l_ctx->mClearing.mClearStencil;
             break;
         }
         case StateVariable::GL_FRAMEBUFFER_BINDING: {
+            l_v[0] = (int32_t)(l_ctx->mBoundFramebuffers[FramebufferTarget::GL_FRAMEBUFFER]);
             break;
         }
         case StateVariable::GL_READ_FRAMEBUFFER_BINDING: {
+            l_v[0] = (int32_t)(l_ctx->mBoundFramebuffers[FramebufferTarget::GL_READ_FRAMEBUFFER]);
             break;
         }
         case StateVariable::GL_RENDERBUFFER_BINDING: {
+            l_v[0] = (int32_t)(l_ctx->mBoundRenderbuffers[RenderbufferTarget::GL_RENDERBUFFER]);
             break;
         }
         case StateVariable::GL_CURRENT_PROGRAM: {
+            l_v[0] = (int32_t)(l_ctx->mBoundProgram);
             break;
         }
         case StateVariable::GL_TEXTURE_BINDING_2D: {
+            l_v[0] = (int32_t)(
+                    l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit][TextureTarget::GL_TEXTURE_2D]);
             break;
         }
         case StateVariable::GL_TEXTURE_BINDING_CUBE_MAP: {
+            l_v[0] = (int32_t)(l_ctx->mTextureUnits[l_ctx->mActiveTextureUnit]
+                                                   [TextureTarget::GL_TEXTURE_CUBE_MAP]);
             break;
         }
         case StateVariable::GL_GENERATE_MIPMAP_HINT: {
+            l_v[0] = (int32_t)(l_ctx->mGenerateMipmapHint);
             break;
         }
         case StateVariable::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_RENDERBUFFER_SIZE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_TEXTURE_IMAGE_UNITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_TEXTURE_SIZE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_VARYING_VECTORS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_VERTEX_ATTRIBS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_VERTEX_UNIFORM_VECTORS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_VIEWPORT_DIMS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
+            l_v[1] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1];
             break;
         }
         case StateVariable::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_NUM_SHADER_BINARY_FORMATS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_PACK_ALIGNMENT: {
+            l_v[0] = l_ctx->mPixelStorage[PixelStoreParameter::GL_PACK_ALIGNMENT];
             break;
         }
         case StateVariable::GL_UNPACK_ALIGNMENT: {
+            l_v[0] = l_ctx->mPixelStorage[PixelStoreParameter::GL_UNPACK_ALIGNMENT];
             break;
         }
         case StateVariable::GL_ALPHA_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_BLUE_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_GREEN_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_RED_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_DEPTH_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_SAMPLE_BUFFERS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_SAMPLES: {
-            break;
-        }
-        case StateVariable::GL_SHADER_BINARY_FORMATS: {
-            break;
-        }
-        case StateVariable::GL_COMPRESSED_TEXTURE_FORMATS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_STENCIL_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_SUBPIXEL_BITS: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
         case StateVariable::GL_GPU_DISJOINT_EXT: {
+            l_v[0] = slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
             break;
         }
     }
@@ -2589,22 +2834,22 @@ inline void GlesState::glGetString(uint32_t const param, char* const result) { r
 
 inline void GlesState::glEnable(uint32_t const capability) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_123_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_123_result;
+    std::shared_ptr<Context> l_GetContext_125_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_125_result;
     l_ctx->mCapabilities[capability] = true;
 }
 
 inline void GlesState::glDisable(uint32_t const capability) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_124_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_124_result;
+    std::shared_ptr<Context> l_GetContext_126_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_126_result;
     l_ctx->mCapabilities[capability] = false;
 }
 
 inline void GlesState::glIsEnabled(uint32_t const capability, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_125_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_125_result;
+    std::shared_ptr<Context> l_GetContext_127_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_127_result;
     return;
 }
 
@@ -2617,7 +2862,7 @@ inline void GlesState::glMapBufferRange(uint32_t const target, int32_t const off
 inline void GlesState::glUnmapBuffer(uint32_t const target) {}
 
 inline void GlesState::glInvalidateFramebuffer(uint32_t const target, int32_t const count,
-                                               const uint32_t* const attachments) {}
+                                               uint32_t* const attachments) {}
 
 inline void GlesState::glRenderbufferStorageMultisample(uint32_t const target,
                                                         int32_t const samples,
@@ -2630,88 +2875,108 @@ inline void GlesState::glBlitFramebuffer(int32_t const srcX0, int32_t const srcY
                                          int32_t const dstX1, int32_t const dstY1,
                                          uint32_t const mask, uint32_t const filter) {}
 
-inline void GlesState::glGenQueries(int32_t const count, QueryId* const queries) {
-    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_126_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_126_result;
-    for (int32_t l_i = 0; l_i < count; ++l_i) {
-        QueryId l_id = (QueryId)(queries[l_i]);
-        l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>(new Query());
-    }
-}
-
-inline void GlesState::glBeginQuery(uint32_t const target, QueryId const query) {}
-
-inline void GlesState::glEndQuery(uint32_t const target) {}
-
-inline void GlesState::glDeleteQueries(int32_t const count, const QueryId* const queries) {
-    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_127_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_127_result;
-    for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mQueries.erase(queries[l_i]);
-    }
-}
-
-inline void GlesState::glIsQuery(QueryId const query, bool const result) {
+inline void GlesState::glGenQueries(int32_t const count, uint32_t* const queries) {
+    Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_128_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_128_result;
-    return;
+    for (int32_t l_i = 0; l_i < count; ++l_i) {
+        QueryId l_id = (QueryId)(slice(queries, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
+        l_q[(uint64_t)(l_i)] = l_id;
+    }
 }
 
-inline void GlesState::glGetQueryiv(uint32_t const target, uint32_t const parameter,
-                                    int32_t* const value) {}
+inline void GlesState::glBeginQuery(uint32_t const target, uint32_t const query) {}
 
-inline void GlesState::glGetQueryObjectuiv(QueryId const query, uint32_t const parameter,
-                                           uint32_t* const value) {}
+inline void GlesState::glEndQuery(uint32_t const target) {}
 
-inline void GlesState::glGenQueriesEXT(int32_t const count, QueryId* const queries) {
+inline void GlesState::glDeleteQueries(int32_t const count, uint32_t* const queries) {
+    Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_129_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_129_result;
     for (int32_t l_i = 0; l_i < count; ++l_i) {
-        QueryId l_id = (QueryId)(queries[l_i]);
-        l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>(new Query());
+        l_ctx->mInstances.mQueries[l_q[(uint64_t)(l_i)]] = std::shared_ptr<Query>();
     }
 }
 
-inline void GlesState::glBeginQueryEXT(uint32_t const target, QueryId const query) {}
-
-inline void GlesState::glEndQueryEXT(uint32_t const target) {}
-
-inline void GlesState::glDeleteQueriesEXT(int32_t const count, const QueryId* const queries) {
+inline void GlesState::glIsQuery(uint32_t const query, bool const result) {
     std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
     std::shared_ptr<Context> l_GetContext_130_result = l_context;
     std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
-    for (int32_t l_i = 0; l_i < count; ++l_i) {
-        l_ctx->mInstances.mQueries.erase(queries[l_i]);
-    }
-}
-
-inline void GlesState::glIsQueryEXT(QueryId const query, bool const result) {
-    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
-    std::shared_ptr<Context> l_GetContext_131_result = l_context;
-    std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
     return;
 }
 
-inline void GlesState::glQueryCounterEXT(QueryId const query, uint32_t const target) {}
+inline void GlesState::glGetQueryiv(uint32_t const target, uint32_t const parameter,
+                                    int32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
+
+inline void GlesState::glGetQueryObjectuiv(uint32_t const query, uint32_t const parameter,
+                                           uint32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
+
+inline void GlesState::glGenQueriesEXT(int32_t const count, uint32_t* const queries) {
+    Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
+    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+    std::shared_ptr<Context> l_GetContext_131_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_131_result;
+    for (int32_t l_i = 0; l_i < count; ++l_i) {
+        QueryId l_id = (QueryId)(slice(queries, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
+        l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
+        l_q[(uint64_t)(l_i)] = l_id;
+    }
+}
+
+inline void GlesState::glBeginQueryEXT(uint32_t const target, uint32_t const query) {}
+
+inline void GlesState::glEndQueryEXT(uint32_t const target) {}
+
+inline void GlesState::glDeleteQueriesEXT(int32_t const count, uint32_t* const queries) {
+    Slice<QueryId> l_q = slice(queries, (uint64_t)(0), (uint64_t)(count));
+    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+    std::shared_ptr<Context> l_GetContext_132_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_132_result;
+    for (int32_t l_i = 0; l_i < count; ++l_i) {
+        l_ctx->mInstances.mQueries[l_q[(uint64_t)(l_i)]] = std::shared_ptr<Query>();
+    }
+}
+
+inline void GlesState::glIsQueryEXT(uint32_t const query, bool const result) {
+    std::shared_ptr<Context> l_context = this->Contexts[this->CurrentThread];
+    std::shared_ptr<Context> l_GetContext_133_result = l_context;
+    std::shared_ptr<Context> l_ctx = l_GetContext_133_result;
+    return;
+}
+
+inline void GlesState::glQueryCounterEXT(uint32_t const query, uint32_t const target) {}
 
 inline void GlesState::glGetQueryivEXT(uint32_t const target, uint32_t const parameter,
-                                       int32_t* const value) {}
+                                       int32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
-inline void GlesState::glGetQueryObjectivEXT(QueryId const query, uint32_t const parameter,
-                                             int32_t* const value) {}
+inline void GlesState::glGetQueryObjectivEXT(uint32_t const query, uint32_t const parameter,
+                                             int32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
-inline void GlesState::glGetQueryObjectuivEXT(QueryId const query, uint32_t const parameter,
-                                              uint32_t* const value) {}
+inline void GlesState::glGetQueryObjectuivEXT(uint32_t const query, uint32_t const parameter,
+                                              uint32_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
-inline void GlesState::glGetQueryObjecti64vEXT(QueryId const query, uint32_t const parameter,
-                                               int64_t* const value) {}
+inline void GlesState::glGetQueryObjecti64vEXT(uint32_t const query, uint32_t const parameter,
+                                               int64_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
-inline void GlesState::glGetQueryObjectui64vEXT(QueryId const query, uint32_t const parameter,
-                                                uint64_t* const value) {}
+inline void GlesState::glGetQueryObjectui64vEXT(uint32_t const query, uint32_t const parameter,
+                                                uint64_t* const value) {
+    slice(value, 0, 1)[0] = slice(value, 0, 1)[0];
+}
 
 }  // namespace gapii
 

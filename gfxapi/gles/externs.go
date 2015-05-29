@@ -17,33 +17,63 @@ package gles
 import (
 	"fmt"
 
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/memory"
 )
 
-func read(memory.Pointer, uint32, uint32)  {} // TEMP
-func write(memory.Pointer, uint32, uint32) {} // TEMP
-
-func minIndex(pointer memory.Pointer, ty IndicesType, element_count uint32) uint32 {
-	return 0 // TEMP
+type externs struct {
+	s *gfxapi.State
+	d database.Database
+	l log.Logger
 }
 
-func maxIndex(pointer memory.Pointer, ty IndicesType, element_count uint32) uint32 {
-	return 0 // TEMP
+func (e externs) minIndex(indices interface{}, ty IndicesType, offset, count uint32) uint32 {
+	return 0 /* TEMP */
 }
 
-func memoryOffset(m memory.Memory, by uint64) memory.Pointer {
-	return 0 // TEMP
+func (e externs) maxIndex(indices interface{}, ty IndicesType, offset, count uint32) uint32 {
+	return 0 /* TEMP */
 }
 
-func strlen(str string) int32 {
-	return int32(len(str))
+type unbounded interface {
+	Unbounded(ϟs *gfxapi.State) memory.Slice
 }
 
-func substr(str string, start, end int32) string {
+func (e externs) strlen(str interface{}) uint32 {
+	switch str := str.(type) {
+	case string:
+		return uint32(len(str))
+
+	case unbounded:
+		d := e.s.MemoryDecoder(str.Unbounded(e.s), e.d, e.l)
+		c := uint32(0)
+		for {
+			if b, err := d.Uint8(); err == nil {
+				if b == 0 {
+					return c
+				}
+			} else {
+				panic(err)
+			}
+			c++
+		}
+
+	default:
+		panic(fmt.Errorf("Unsupported type %T", str))
+	}
+}
+
+func (e externs) substr(str string, start, end int32) string {
 	return str[start:end]
 }
 
-func stateVariableSize(v StateVariable) int32 {
+func (e externs) imageSize(width, height uint32, f TexelFormat, ty TexelType) uint32 {
+	return imageSize(width, height, f, ty)
+}
+
+func (e externs) stateVariableSize(v StateVariable) int32 {
 	switch v {
 	case StateVariable_GL_ACTIVE_TEXTURE:
 		return 1

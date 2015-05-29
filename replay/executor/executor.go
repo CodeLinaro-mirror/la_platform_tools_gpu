@@ -27,6 +27,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
 	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/database/store"
+	"android.googlesource.com/platform/tools/gpu/device"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay/builder"
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
@@ -39,13 +40,13 @@ var ErrNoPostback = errors.New("No postback received")
 type PostbackHandlerMap map[atom.ID]func(data interface{}, err error)
 
 type executor struct {
-	payload    protocol.Payload
-	decoder    builder.ResponseDecoder
-	connection io.ReadWriteCloser
-	database   database.Database
-	logger     log.Logger
-	handlers   PostbackHandlerMap
-	byteOrder  endian.ByteOrder
+	payload      protocol.Payload
+	decoder      builder.ResponseDecoder
+	connection   io.ReadWriteCloser
+	database     database.Database
+	logger       log.Logger
+	handlers     PostbackHandlerMap
+	architecture device.Architecture
 }
 
 // Execute sends the replay payload for execution on the target replay device
@@ -60,23 +61,23 @@ func Execute(
 	database database.Database,
 	logger log.Logger,
 	handlers PostbackHandlerMap,
-	byteOrder endian.ByteOrder) error {
+	architecture device.Architecture) error {
 
 	return executor{
-		payload:    payload,
-		decoder:    decoder,
-		connection: connection,
-		database:   database,
-		logger:     logger,
-		handlers:   handlers,
-		byteOrder:  byteOrder,
+		payload:      payload,
+		decoder:      decoder,
+		connection:   connection,
+		database:     database,
+		logger:       logger,
+		handlers:     handlers,
+		architecture: architecture,
 	}.execute()
 }
 
 func (r executor) execute() error {
 	// Encode the payload
 	buf := &bytes.Buffer{}
-	e := flat.Encoder(endian.Writer(buf, r.byteOrder))
+	e := flat.Encoder(endian.Writer(buf, r.architecture.ByteOrder))
 	if err := e.Value(&r.payload); err != nil {
 		return err
 	}
@@ -118,8 +119,8 @@ func (r executor) execute() error {
 func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint32, postbacks io.WriteCloser) error {
 	connection := r.connection
 	defer connection.Close()
-	e := flat.Encoder(endian.Writer(connection, r.byteOrder))
-	d := flat.Decoder(endian.Reader(connection, r.byteOrder))
+	e := flat.Encoder(endian.Writer(connection, r.architecture.ByteOrder))
+	d := flat.Decoder(endian.Reader(connection, r.architecture.ByteOrder))
 
 	if err := e.Uint8(uint8(protocol.ConnectionTypeReplay)); err != nil {
 		return err
@@ -158,7 +159,7 @@ func (r executor) handleReplayCommunication(replayID binary.ID, replaySize uint3
 }
 
 func (r executor) handleDataResponse(postbacks io.Writer) error {
-	d := flat.Decoder(endian.Reader(r.connection, r.byteOrder))
+	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
 	n, err := d.Uint32()
 	if err != nil {
@@ -175,7 +176,7 @@ func (r executor) handleDataResponse(postbacks io.Writer) error {
 
 func (r executor) handleGetData() error {
 	logger := r.logger.Enter("handleGetData")
-	d := flat.Decoder(endian.Reader(r.connection, r.byteOrder))
+	d := flat.Decoder(endian.Reader(r.connection, r.architecture.ByteOrder))
 
 	resourceCount, err := d.Uint32()
 	if err != nil {

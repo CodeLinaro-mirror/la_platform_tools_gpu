@@ -113,8 +113,9 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 	}
 	defer connection.Close()
 
-	enc := flat.Encoder(endian.Writer(connection, d.ByteOrder()))
-	dec := flat.Decoder(endian.Reader(connection, d.ByteOrder()))
+	// Endianness has yet to be discovered - we use Little for the hand-shaking.
+	enc := flat.Encoder(endian.Writer(connection, endian.Little))
+	dec := flat.Decoder(endian.Reader(connection, endian.Little))
 
 	if err := enc.Uint8(uint8(protocol.ConnectionTypeDeviceInfo)); err != nil {
 		return err
@@ -138,6 +139,9 @@ func loadDeviceConfig(d Device, db database.Database, logger log.Logger) error {
 		if err != nil {
 			return err
 		}
+
+		// TODO: Integer size
+		// TODO: Endianness
 
 		td.MaxMemorySize, err = dec.Uint64()
 		if err != nil {

@@ -12,13 +12,13 @@ import (
 
 func init() {
 	s := schemaBuilder{
-		arrays:       make(map[int]*service.ArrayInfo),
 		staticArrays: make(map[int]*service.StaticArrayInfo),
 		maps:         make(map[int]*service.MapInfo),
 		enums:        make(map[int]*service.EnumInfo),
 		structs:      make(map[int]*service.StructInfo),
 		classes:      make(map[int]*service.ClassInfo),
 	}
+	_ = s
 	schema.RegisterAtom(service.AtomInfo{
 		Api:  service.ApiId{ID: binary.ID(apiID)},
 		Type: 0,
@@ -151,13 +151,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "major",
-				Type: schema.Int,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "minor",
-				Type: schema.Int,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "result",
@@ -192,7 +192,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attrib_list",
-				Type: s.getArrayInfo(6),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -290,8 +290,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.Int,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "result",
@@ -471,7 +471,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attribList",
-				Type: s.getArrayInfo(11),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -545,7 +545,7 @@ func init() {
 			service.ParameterInfo{
 				Name: "ctx",
 				Type: schema.Pointer,
-				Out:  true,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "result",
@@ -628,18 +628,18 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "bytes_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "binary_format",
-				Type: schema.U32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "binary",
 				Type: schema.Pointer,
-				Out:  true,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -747,7 +747,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attachments",
-				Type: s.getArrayInfo(5),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -1051,8 +1051,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(24),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1088,7 +1088,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "arrays",
-				Type: s.getArrayInfo(24),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -1417,23 +1417,23 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffer_bytes_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "vector_count",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(46),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "name",
-				Type: schema.String,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1463,23 +1463,23 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffer_bytes_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "size",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "type",
-				Type: s.getEnumInfo(47),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "name",
-				Type: schema.String,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1520,8 +1520,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1546,8 +1546,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1697,8 +1697,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1723,8 +1723,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -1863,7 +1863,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -1889,7 +1889,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -1915,7 +1915,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -1941,7 +1941,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2081,7 +2081,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2107,7 +2107,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2133,7 +2133,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2159,7 +2159,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2190,7 +2190,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2221,7 +2221,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2252,7 +2252,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2278,7 +2278,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2304,7 +2304,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2439,7 +2439,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2460,7 +2460,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2481,7 +2481,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2502,7 +2502,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(7),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -2528,13 +2528,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "range",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "precision",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -2831,8 +2831,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(22),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -2852,7 +2852,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "textures",
-				Type: s.getArrayInfo(22),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -3278,7 +3278,7 @@ func init() {
 			service.ParameterInfo{
 				Name: "data",
 				Type: schema.Pointer,
-				Out:  true,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3298,8 +3298,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(10),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3361,7 +3361,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "framebuffers",
-				Type: s.getArrayInfo(10),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -3403,8 +3403,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(16),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3476,7 +3476,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "renderbuffers",
-				Type: s.getArrayInfo(16),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -3523,8 +3523,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3544,8 +3544,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffers",
-				Type: s.getArrayInfo(2),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3648,7 +3648,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "buffers",
-				Type: s.getArrayInfo(2),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -3695,8 +3695,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3758,12 +3758,12 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "source",
-				Type: s.getArrayInfo(20),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "length",
-				Type: s.getArrayInfo(17),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -3784,7 +3784,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(19),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 			service.ParameterInfo{
@@ -3825,13 +3825,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "string_length_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "info",
-				Type: schema.String,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -3856,13 +3856,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "string_length_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "source",
-				Type: schema.String,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4008,13 +4008,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "shaders_length_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "shaders",
-				Type: s.getArrayInfo(19),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4055,13 +4055,13 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "string_length_written",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 			service.ParameterInfo{
 				Name: "info",
-				Type: schema.String,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4385,8 +4385,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4483,8 +4483,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(0),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4504,8 +4504,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(7),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4525,8 +4525,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "values",
-				Type: s.getArrayInfo(17),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4546,7 +4546,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "result",
-				Type: schema.String,
+				Type: schema.Pointer,
 				Out:  true,
 			},
 		},
@@ -4677,7 +4677,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "attachments",
-				Type: s.getArrayInfo(9),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -4795,8 +4795,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(14),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4853,7 +4853,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(14),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -4900,8 +4900,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4926,8 +4926,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.U32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -4947,8 +4947,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(14),
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5005,7 +5005,7 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "queries",
-				Type: s.getArrayInfo(14),
+				Type: schema.Pointer,
 				Out:  false,
 			},
 		},
@@ -5073,8 +5073,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5099,8 +5099,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.S32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5125,8 +5125,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.U32,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5151,8 +5151,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.S64,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5177,8 +5177,8 @@ func init() {
 			},
 			service.ParameterInfo{
 				Name: "value",
-				Type: schema.U64,
-				Out:  true,
+				Type: schema.Pointer,
+				Out:  false,
 			},
 		},
 		IsCommand:        true,
@@ -5189,7 +5189,7 @@ func init() {
 	schema.RegisterAPI(api{}, service.StructInfo{
 		Name: "state",
 		Kind: service.TypeKindStruct,
-		Fields: service.FieldInfoArray{
+		Fields: service.FieldInfoPtrArray{
 			&service.FieldInfo{
 				Name: "NextContextID",
 				Type: schema.U32,
@@ -5200,30 +5200,29 @@ func init() {
 			},
 			&service.FieldInfo{
 				Name: "Contexts",
-				Type: s.getMapInfo(8),
+				Type: s.getMapInfo(27),
 			},
 			&service.FieldInfo{
 				Name: "EGLContexts",
-				Type: s.getMapInfo(5),
-			},
-			&service.FieldInfo{
-				Name: "GLXContexts",
 				Type: s.getMapInfo(6),
 			},
 			&service.FieldInfo{
+				Name: "GLXContexts",
+				Type: s.getMapInfo(11),
+			},
+			&service.FieldInfo{
 				Name: "WGLContexts",
-				Type: s.getMapInfo(7),
+				Type: s.getMapInfo(12),
 			},
 			&service.FieldInfo{
 				Name: "CGLContexts",
-				Type: s.getMapInfo(4),
+				Type: s.getMapInfo(3),
 			},
 		},
 	})
 }
 
 type schemaBuilder struct {
-	arrays       map[int]*service.ArrayInfo
 	staticArrays map[int]*service.StaticArrayInfo
 	maps         map[int]*service.MapInfo
 	enums        map[int]*service.EnumInfo
@@ -5231,68 +5230,6 @@ type schemaBuilder struct {
 	classes      map[int]*service.ClassInfo
 }
 
-func (s schemaBuilder) getArrayInfo(id int) *service.ArrayInfo {
-	e, f := s.arrays[id]
-	if f {
-		return e
-	}
-	switch id {
-	case 0:
-		e = service.CreateArrayInfo("BoolArray", service.TypeKindArray, schema.Bool)
-	case 1:
-		e = service.CreateArrayInfo("BufferArray", service.TypeKindArray, s.getClassInfo(9))
-	case 2:
-		e = service.CreateArrayInfo("BufferIdArray", service.TypeKindArray, schema.U32)
-	case 3:
-		e = service.CreateArrayInfo("CharBufferArray", service.TypeKindArray, schema.String)
-	case 4:
-		e = service.CreateArrayInfo("ContextArray", service.TypeKindArray, s.getClassInfo(31))
-	case 5:
-		e = service.CreateArrayInfo("DiscardFramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(51))
-	case 6:
-		e = service.CreateArrayInfo("EGLintArray", service.TypeKindArray, schema.Int)
-	case 7:
-		e = service.CreateArrayInfo("F32Array", service.TypeKindArray, schema.Float)
-	case 8:
-		e = service.CreateArrayInfo("FramebufferArray", service.TypeKindArray, s.getClassInfo(8))
-	case 9:
-		e = service.CreateArrayInfo("FramebufferAttachmentArray", service.TypeKindArray, s.getEnumInfo(21))
-	case 10:
-		e = service.CreateArrayInfo("FramebufferIdArray", service.TypeKindArray, schema.U32)
-	case 11:
-		e = service.CreateArrayInfo("IntArray", service.TypeKindArray, schema.Int)
-	case 12:
-		e = service.CreateArrayInfo("ProgramArray", service.TypeKindArray, s.getClassInfo(23))
-	case 13:
-		e = service.CreateArrayInfo("QueryArray", service.TypeKindArray, s.getClassInfo(26))
-	case 14:
-		e = service.CreateArrayInfo("QueryIdArray", service.TypeKindArray, schema.U32)
-	case 15:
-		e = service.CreateArrayInfo("RenderbufferArray", service.TypeKindArray, s.getClassInfo(4))
-	case 16:
-		e = service.CreateArrayInfo("RenderbufferIdArray", service.TypeKindArray, schema.U32)
-	case 17:
-		e = service.CreateArrayInfo("S32Array", service.TypeKindArray, schema.S32)
-	case 18:
-		e = service.CreateArrayInfo("ShaderArray", service.TypeKindArray, s.getClassInfo(10))
-	case 19:
-		e = service.CreateArrayInfo("ShaderIdArray", service.TypeKindArray, schema.U32)
-	case 20:
-		e = service.CreateArrayInfo("StringArray", service.TypeKindArray, schema.String)
-	case 21:
-		e = service.CreateArrayInfo("TextureArray", service.TypeKindArray, s.getClassInfo(5))
-	case 22:
-		e = service.CreateArrayInfo("TextureIdArray", service.TypeKindArray, schema.U32)
-	case 23:
-		e = service.CreateArrayInfo("VertexArrayArray", service.TypeKindArray, s.getClassInfo(24))
-	case 24:
-		e = service.CreateArrayInfo("VertexArrayIdArray", service.TypeKindArray, schema.U32)
-	case 25:
-		e = service.CreateArrayInfo("VertexAttributeArrayArray", service.TypeKindArray, s.getClassInfo(25))
-	}
-	s.arrays[id] = e
-	return e
-}
 func (s schemaBuilder) getStaticArrayInfo(id int) *service.StaticArrayInfo {
 	e, f := s.staticArrays[id]
 	if f {
@@ -5310,65 +5247,65 @@ func (s schemaBuilder) getMapInfo(id int) *service.MapInfo {
 	}
 	switch id {
 	case 0:
-		e = service.CreateMapInfo("AttributeLocation_CharBufferMap", service.TypeKindMap, schema.String, schema.U32)
+		e = service.CreateMapInfo("AttributeLocationːVertexAttributeArrayʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 1:
-		e = service.CreateMapInfo("Bool_CapabilityMap", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
+		e = service.CreateMapInfo("BufferIdːBufferʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 2:
-		e = service.CreateMapInfo("BufferId_BufferTargetMap", service.TypeKindMap, s.getEnumInfo(69), schema.U32)
+		e = service.CreateMapInfo("BufferTargetːBufferIdᵐ", service.TypeKindMap, s.getEnumInfo(69), schema.U32)
 	case 3:
-		e = service.CreateMapInfo("BufferPtr_BufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(9))
+		e = service.CreateMapInfo("CGLContextObjːContextʳᵐ", service.TypeKindMap, schema.Pointer, schema.Int /* TODO: Reference */)
 	case 4:
-		e = service.CreateMapInfo("ContextPtr_CGLContextObjMap", service.TypeKindMap, schema.Pointer, s.getClassInfo(31))
+		e = service.CreateMapInfo("Capabilityːboolᵐ", service.TypeKindMap, s.getEnumInfo(43), schema.Bool)
 	case 5:
-		e = service.CreateMapInfo("ContextPtr_EGLContextMap", service.TypeKindMap, schema.Pointer, s.getClassInfo(31))
+		e = service.CreateMapInfo("CubeMapImageTargetːImageᵐ", service.TypeKindMap, s.getEnumInfo(6), s.getClassInfo(2))
 	case 6:
-		e = service.CreateMapInfo("ContextPtr_GLXContextMap", service.TypeKindMap, schema.Pointer, s.getClassInfo(31))
+		e = service.CreateMapInfo("EGLContextːContextʳᵐ", service.TypeKindMap, schema.Pointer, schema.Int /* TODO: Reference */)
 	case 7:
-		e = service.CreateMapInfo("ContextPtr_HGLRCMap", service.TypeKindMap, schema.Pointer, s.getClassInfo(31))
+		e = service.CreateMapInfo("FaceModeːu32ᵐ", service.TypeKindMap, s.getEnumInfo(39), schema.U32)
 	case 8:
-		e = service.CreateMapInfo("ContextPtr_ThreadIDMap", service.TypeKindMap, schema.U32, s.getClassInfo(31))
+		e = service.CreateMapInfo("FramebufferAttachmentːFramebufferAttachmentInfoᵐ", service.TypeKindMap, s.getEnumInfo(21), s.getClassInfo(6))
 	case 9:
-		e = service.CreateMapInfo("CubemapLevel_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(6))
+		e = service.CreateMapInfo("FramebufferIdːFramebufferʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 10:
-		e = service.CreateMapInfo("FramebufferAttachmentInfo_FramebufferAttachmentMap", service.TypeKindMap, s.getEnumInfo(21), s.getClassInfo(7))
+		e = service.CreateMapInfo("FramebufferTargetːFramebufferIdᵐ", service.TypeKindMap, s.getEnumInfo(25), schema.U32)
 	case 11:
-		e = service.CreateMapInfo("FramebufferId_FramebufferTargetMap", service.TypeKindMap, s.getEnumInfo(25), schema.U32)
+		e = service.CreateMapInfo("GLXContextːContextʳᵐ", service.TypeKindMap, schema.Pointer, schema.Int /* TODO: Reference */)
 	case 12:
-		e = service.CreateMapInfo("FramebufferPtr_FramebufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(8))
+		e = service.CreateMapInfo("HGLRCːContextʳᵐ", service.TypeKindMap, schema.Pointer, schema.Int /* TODO: Reference */)
 	case 13:
-		e = service.CreateMapInfo("Image_CubeMapImageTargetMap", service.TypeKindMap, s.getEnumInfo(6), s.getClassInfo(2))
+		e = service.CreateMapInfo("PixelStoreParameterːs32ᵐ", service.TypeKindMap, s.getEnumInfo(54), schema.S32)
 	case 14:
-		e = service.CreateMapInfo("Image_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(2))
+		e = service.CreateMapInfo("ProgramIdːProgramʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 15:
-		e = service.CreateMapInfo("ProgramPtr_ProgramIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(23))
+		e = service.CreateMapInfo("QueryIdːQueryʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 16:
-		e = service.CreateMapInfo("QueryPtr_QueryIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(26))
+		e = service.CreateMapInfo("RenderbufferIdːRenderbufferʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 17:
-		e = service.CreateMapInfo("RenderbufferId_RenderbufferTargetMap", service.TypeKindMap, s.getEnumInfo(28), schema.U32)
+		e = service.CreateMapInfo("RenderbufferTargetːRenderbufferIdᵐ", service.TypeKindMap, s.getEnumInfo(28), schema.U32)
 	case 18:
-		e = service.CreateMapInfo("RenderbufferPtr_RenderbufferIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(4))
+		e = service.CreateMapInfo("S32ːCubemapLevelᵐ", service.TypeKindMap, schema.S32, s.getClassInfo(5))
 	case 19:
-		e = service.CreateMapInfo("S32_PixelStoreParameterMap", service.TypeKindMap, s.getEnumInfo(54), schema.S32)
+		e = service.CreateMapInfo("S32ːImageᵐ", service.TypeKindMap, schema.S32, s.getClassInfo(2))
 	case 20:
-		e = service.CreateMapInfo("ShaderId_ShaderTypeMap", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
+		e = service.CreateMapInfo("S32ːVertexAttributeᵐ", service.TypeKindMap, schema.S32, s.getClassInfo(10))
 	case 21:
-		e = service.CreateMapInfo("ShaderPtr_ShaderIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(10))
+		e = service.CreateMapInfo("ShaderIdːShaderʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 22:
-		e = service.CreateMapInfo("TextureId_TextureTargetMap", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
+		e = service.CreateMapInfo("ShaderTypeːShaderIdᵐ", service.TypeKindMap, s.getEnumInfo(33), schema.U32)
 	case 23:
-		e = service.CreateMapInfo("TextureId_TextureTargetMap_TextureUnitMap", service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(22))
+		e = service.CreateMapInfo("StringːAttributeLocationᵐ", service.TypeKindMap, schema.String, schema.U32)
 	case 24:
-		e = service.CreateMapInfo("TexturePtr_TextureIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(5))
+		e = service.CreateMapInfo("TextureIdːTextureʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 25:
-		e = service.CreateMapInfo("U32_FaceModeMap", service.TypeKindMap, s.getEnumInfo(39), schema.U32)
+		e = service.CreateMapInfo("TextureTargetːTextureIdᵐ", service.TypeKindMap, s.getEnumInfo(5), schema.U32)
 	case 26:
-		e = service.CreateMapInfo("Uniform_UniformLocationMap", service.TypeKindMap, schema.S32, s.getClassInfo(22))
+		e = service.CreateMapInfo("TextureUnitːTextureTargetːTextureIdᵐᵐ", service.TypeKindMap, s.getEnumInfo(31), s.getMapInfo(25))
 	case 27:
-		e = service.CreateMapInfo("VertexArrayPtr_VertexArrayIdMap", service.TypeKindMap, schema.U32, s.getClassInfo(24))
+		e = service.CreateMapInfo("ThreadIDːContextʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	case 28:
-		e = service.CreateMapInfo("VertexAttributeArrayPtr_AttributeLocationMap", service.TypeKindMap, schema.U32, s.getClassInfo(25))
+		e = service.CreateMapInfo("UniformLocationːUniformᵐ", service.TypeKindMap, schema.S32, s.getClassInfo(21))
 	case 29:
-		e = service.CreateMapInfo("VertexAttribute_s32Map", service.TypeKindMap, schema.S32, s.getClassInfo(11))
+		e = service.CreateMapInfo("VertexArrayIdːVertexArrayʳᵐ", service.TypeKindMap, schema.U32, schema.Int /* TODO: Reference */)
 	}
 	s.maps[id] = e
 	return e
@@ -5413,7 +5350,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 4,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 1:
 		e = service.CreateEnumInfo(
@@ -5433,7 +5370,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5125,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 2:
 		e = service.CreateEnumInfo(
@@ -5445,7 +5382,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 3553,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 3:
 		e = service.CreateEnumInfo(
@@ -5457,7 +5394,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34067,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 4:
 		e = service.CreateEnumInfo(
@@ -5469,14 +5406,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36197,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 5:
 		e = service.CreateEnumInfo(
 			"TextureTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(2),
 				s.getEnumInfo(3),
 				s.getEnumInfo(4),
@@ -5512,7 +5449,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34073,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 7:
 		e = service.CreateEnumInfo(
@@ -5524,14 +5461,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 3553,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 8:
 		e = service.CreateEnumInfo(
 			"TextureImageTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(6),
 				s.getEnumInfo(7),
 			},
@@ -5554,7 +5491,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 6408,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 10:
 		e = service.CreateEnumInfo(
@@ -5570,7 +5507,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 6410,
 				},
 			},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(9),
 			},
 		)
@@ -5620,14 +5557,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35056,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 12:
 		e = service.CreateEnumInfo(
 			"TexelFormat",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(10),
 				s.getEnumInfo(11),
 			},
@@ -5662,7 +5599,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36168,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 14:
 		e = service.CreateEnumInfo(
@@ -5674,7 +5611,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5131,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 15:
 		e = service.CreateEnumInfo(
@@ -5686,7 +5623,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36193,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 16:
 		e = service.CreateEnumInfo(
@@ -5698,7 +5635,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36196,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 17:
 		e = service.CreateEnumInfo(
@@ -5718,14 +5655,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34798,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 18:
 		e = service.CreateEnumInfo(
 			"CompressedTexelFormat",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(16),
 				s.getEnumInfo(17),
 			},
@@ -5735,7 +5672,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 			"ImageTexelFormat",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(12),
 				s.getEnumInfo(18),
 			},
@@ -5778,7 +5715,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34042,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 21:
 		e = service.CreateEnumInfo(
@@ -5798,7 +5735,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36128,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 22:
 		e = service.CreateEnumInfo(
@@ -5818,7 +5755,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5890,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 23:
 		e = service.CreateEnumInfo(
@@ -5830,7 +5767,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36160,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 24:
 		e = service.CreateEnumInfo(
@@ -5846,14 +5783,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36009,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 25:
 		e = service.CreateEnumInfo(
 			"FramebufferTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(23),
 				s.getEnumInfo(24),
 			},
@@ -5880,7 +5817,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36051,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 27:
 		e = service.CreateEnumInfo(
@@ -5908,7 +5845,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36061,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 28:
 		e = service.CreateEnumInfo(
@@ -5920,7 +5857,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36161,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 29:
 		e = service.CreateEnumInfo(
@@ -5964,7 +5901,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36181,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 30:
 		e = service.CreateEnumInfo(
@@ -5980,7 +5917,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34661,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 31:
 		e = service.CreateEnumInfo(
@@ -6116,7 +6053,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34015,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 32:
 		e = service.CreateEnumInfo(
@@ -6136,7 +6073,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35040,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 33:
 		e = service.CreateEnumInfo(
@@ -6152,7 +6089,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35632,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 34:
 		e = service.CreateEnumInfo(
@@ -6504,7 +6441,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 2978,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 35:
 		e = service.CreateEnumInfo(
@@ -6516,7 +6453,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36010,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 36:
 		e = service.CreateEnumInfo(
@@ -6528,7 +6465,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34047,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 37:
 		e = service.CreateEnumInfo(
@@ -6540,14 +6477,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36795,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 38:
 		e = service.CreateEnumInfo(
 			"StateVariable",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(34),
 				s.getEnumInfo(35),
 				s.getEnumInfo(36),
@@ -6572,7 +6509,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 1032,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 40:
 		e = service.CreateEnumInfo(
@@ -6596,7 +6533,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 32888,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 41:
 		e = service.CreateEnumInfo(
@@ -6608,14 +6545,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35740,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 42:
 		e = service.CreateEnumInfo(
 			"ArrayType",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(40),
 				s.getEnumInfo(41),
 			},
@@ -6662,7 +6599,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 2960,
 				},
 			},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(42),
 			},
 		)
@@ -6688,7 +6625,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 7938,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 45:
 		e = service.CreateEnumInfo(
@@ -6720,7 +6657,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5123,
 				},
 			},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(15),
 				s.getEnumInfo(14),
 			},
@@ -6759,7 +6696,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35676,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 47:
 		e = service.CreateEnumInfo(
@@ -6835,7 +6772,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35680,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 48:
 		e = service.CreateEnumInfo(
@@ -6867,7 +6804,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 1285,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 49:
 		e = service.CreateEnumInfo(
@@ -6879,7 +6816,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 33170,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 50:
 		e = service.CreateEnumInfo(
@@ -6899,7 +6836,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 4354,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 51:
 		e = service.CreateEnumInfo(
@@ -6919,7 +6856,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 6146,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 52:
 		e = service.CreateEnumInfo(
@@ -6963,7 +6900,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35719,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 53:
 		e = service.CreateEnumInfo(
@@ -6991,7 +6928,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35720,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 54:
 		e = service.CreateEnumInfo(
@@ -7007,7 +6944,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 3317,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 55:
 		e = service.CreateEnumInfo(
@@ -7023,7 +6960,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 10240,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 56:
 		e = service.CreateEnumInfo(
@@ -7039,7 +6976,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 10243,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 57:
 		e = service.CreateEnumInfo(
@@ -7051,7 +6988,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34046,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 58:
 		e = service.CreateEnumInfo(
@@ -7075,14 +7012,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36421,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 59:
 		e = service.CreateEnumInfo(
 			"TextureParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(55),
 				s.getEnumInfo(56),
 				s.getEnumInfo(58),
@@ -7119,7 +7056,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 9987,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 61:
 		e = service.CreateEnumInfo(
@@ -7139,7 +7076,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 10497,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 62:
 		e = service.CreateEnumInfo(
@@ -7163,7 +7100,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 6406,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 63:
 		e = service.CreateEnumInfo(
@@ -7231,7 +7168,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 776,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 64:
 		e = service.CreateEnumInfo(
@@ -7263,7 +7200,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36341,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 65:
 		e = service.CreateEnumInfo(
@@ -7303,7 +7240,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 519,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 66:
 		e = service.CreateEnumInfo(
@@ -7343,7 +7280,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 5386,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 67:
 		e = service.CreateEnumInfo(
@@ -7359,7 +7296,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 2305,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 68:
 		e = service.CreateEnumInfo(
@@ -7379,7 +7316,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 32779,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 69:
 		e = service.CreateEnumInfo(
@@ -7419,7 +7356,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35345,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 70:
 		e = service.CreateEnumInfo(
@@ -7431,7 +7368,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 3553,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 71:
 		e = service.CreateEnumInfo(
@@ -7443,14 +7380,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36197,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 72:
 		e = service.CreateEnumInfo(
 			"ImageTargetTexture",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(70),
 				s.getEnumInfo(71),
 			},
@@ -7465,7 +7402,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36161,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 74:
 		e = service.CreateEnumInfo(
@@ -7489,7 +7426,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 33365,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 75:
 		e = service.CreateEnumInfo(
@@ -7509,7 +7446,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 2,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 76:
 		e = service.CreateEnumInfo(
@@ -7521,7 +7458,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34917,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 77:
 		e = service.CreateEnumInfo(
@@ -7533,14 +7470,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34916,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 78:
 		e = service.CreateEnumInfo(
 			"QueryParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(76),
 				s.getEnumInfo(77),
 			},
@@ -7559,21 +7496,21 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 34919,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 80:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter_EXT_disjoint_timer_query",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 81:
 		e = service.CreateEnumInfo(
 			"QueryObjectParameter",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(79),
 				s.getEnumInfo(80),
 			},
@@ -7596,7 +7533,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 35976,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 83:
 		e = service.CreateEnumInfo(
@@ -7612,14 +7549,14 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 36392,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 84:
 		e = service.CreateEnumInfo(
 			"QueryTarget",
 			service.TypeKindEnum,
 			[]service.EnumEntry{},
-			service.EnumInfoArray{
+			service.EnumInfoPtrArray{
 				s.getEnumInfo(82),
 				s.getEnumInfo(83),
 			},
@@ -7758,7 +7695,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 2147483648,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 86:
 		e = service.CreateEnumInfo(
@@ -7778,7 +7715,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 1024,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	case 87:
 		e = service.CreateEnumInfo(
@@ -7810,7 +7747,7 @@ func (s schemaBuilder) getEnumInfo(id int) *service.EnumInfo {
 					Value: 32,
 				},
 			},
-			service.EnumInfoArray{},
+			service.EnumInfoPtrArray{},
 		)
 	}
 	s.enums[id] = e
@@ -7826,7 +7763,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 		e = service.CreateClassInfo(
 			"Color",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Red",
 					Type: schema.Float,
@@ -7844,13 +7781,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Float,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	case 1:
 		e = service.CreateClassInfo(
 			"Rect",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.S32,
@@ -7868,13 +7805,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.S32,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	case 2:
 		e = service.CreateClassInfo(
 			"Image",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Width",
 					Type: schema.S32,
@@ -7885,7 +7822,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Data",
-					Type: schema.Memory,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "Size",
@@ -7896,20 +7833,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getEnumInfo(19),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	case 3:
 		e = service.CreateClassInfo(
-			"FramebufferAttachable",
-			service.TypeKindClass,
-			service.FieldInfoArray{},
-			service.ClassInfoArray{},
-		)
-	case 4:
-		e = service.CreateClassInfo(
 			"Renderbuffer",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Width",
 					Type: schema.S32,
@@ -7920,22 +7850,20 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Data",
-					Type: schema.Memory,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "Format",
 					Type: s.getEnumInfo(13),
 				},
 			},
-			service.ClassInfoArray{
-				s.getClassInfo(3),
-			},
+			service.ClassInfoPtrArray{},
 		)
-	case 5:
+	case 4:
 		e = service.CreateClassInfo(
 			"Texture",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Kind",
 					Type: s.getEnumInfo(75),
@@ -7946,11 +7874,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Texture2D",
-					Type: s.getMapInfo(14),
+					Type: s.getMapInfo(19),
 				},
 				&service.FieldInfo{
 					Name: "Cubemap",
-					Type: s.getMapInfo(9),
+					Type: s.getMapInfo(18),
 				},
 				&service.FieldInfo{
 					Name: "MagFilter",
@@ -7989,27 +7917,25 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Float,
 				},
 			},
-			service.ClassInfoArray{
-				s.getClassInfo(3),
-			},
+			service.ClassInfoPtrArray{},
 		)
-	case 6:
+	case 5:
 		e = service.CreateClassInfo(
 			"CubemapLevel",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Faces",
-					Type: s.getMapInfo(13),
+					Type: s.getMapInfo(5),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 7:
+	case 6:
 		e = service.CreateClassInfo(
 			"FramebufferAttachmentInfo",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Object",
 					Type: schema.U32,
@@ -8027,28 +7953,28 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getEnumInfo(6),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 8:
+	case 7:
 		e = service.CreateClassInfo(
 			"Framebuffer",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Attachments",
-					Type: s.getMapInfo(10),
+					Type: s.getMapInfo(8),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 9:
+	case 8:
 		e = service.CreateClassInfo(
 			"Buffer",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Data",
-					Type: schema.Memory,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "Size",
@@ -8059,16 +7985,16 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getEnumInfo(32),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 10:
+	case 9:
 		e = service.CreateClassInfo(
 			"Shader",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Binary",
-					Type: schema.Memory,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "Compiled",
@@ -8080,27 +8006,27 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "InfoLog",
-					Type: schema.String,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "Source",
-					Type: s.getArrayInfo(3),
+					Type: schema.String,
 				},
 				&service.FieldInfo{
 					Name: "Type",
 					Type: s.getEnumInfo(33),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 11:
+	case 10:
 		e = service.CreateClassInfo(
 			"VertexAttribute",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Name",
-					Type: schema.String,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "VectorCount",
@@ -8111,13 +8037,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getEnumInfo(46),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 12:
+	case 11:
 		e = service.CreateClassInfo(
 			"Vec2i",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.S32,
@@ -8127,13 +8053,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.S32,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 13:
+	case 12:
 		e = service.CreateClassInfo(
 			"Vec3i",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.S32,
@@ -8147,13 +8073,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.S32,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 14:
+	case 13:
 		e = service.CreateClassInfo(
 			"Vec4i",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.S32,
@@ -8171,13 +8097,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.S32,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 15:
+	case 14:
 		e = service.CreateClassInfo(
 			"Vec2f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.Float,
@@ -8187,13 +8113,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Float,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 16:
+	case 15:
 		e = service.CreateClassInfo(
 			"Vec3f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.Float,
@@ -8207,13 +8133,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Float,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 17:
+	case 16:
 		e = service.CreateClassInfo(
 			"Vec4f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "X",
 					Type: schema.Float,
@@ -8231,88 +8157,88 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Float,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 18:
+	case 17:
 		e = service.CreateClassInfo(
 			"Mat2f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Col0",
-					Type: s.getClassInfo(15),
+					Type: s.getClassInfo(14),
 				},
 				&service.FieldInfo{
 					Name: "Col1",
-					Type: s.getClassInfo(15),
+					Type: s.getClassInfo(14),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 19:
+	case 18:
 		e = service.CreateClassInfo(
 			"Mat3f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Col0",
-					Type: s.getClassInfo(16),
+					Type: s.getClassInfo(15),
 				},
 				&service.FieldInfo{
 					Name: "Col1",
-					Type: s.getClassInfo(16),
+					Type: s.getClassInfo(15),
 				},
 				&service.FieldInfo{
 					Name: "Col2",
-					Type: s.getClassInfo(16),
+					Type: s.getClassInfo(15),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 20:
+	case 19:
 		e = service.CreateClassInfo(
 			"Mat4f",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Col0",
-					Type: s.getClassInfo(17),
+					Type: s.getClassInfo(16),
 				},
 				&service.FieldInfo{
 					Name: "Col1",
-					Type: s.getClassInfo(17),
+					Type: s.getClassInfo(16),
 				},
 				&service.FieldInfo{
 					Name: "Col2",
-					Type: s.getClassInfo(17),
+					Type: s.getClassInfo(16),
 				},
 				&service.FieldInfo{
 					Name: "Col3",
-					Type: s.getClassInfo(17),
+					Type: s.getClassInfo(16),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 21:
+	case 20:
 		e = service.CreateClassInfo(
 			"UniformValue",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "F32",
 					Type: schema.Float,
 				},
 				&service.FieldInfo{
 					Name: "Vec2f",
-					Type: s.getClassInfo(15),
+					Type: s.getClassInfo(14),
 				},
 				&service.FieldInfo{
 					Name: "Vec3f",
-					Type: s.getClassInfo(16),
+					Type: s.getClassInfo(15),
 				},
 				&service.FieldInfo{
 					Name: "Vec4f",
-					Type: s.getClassInfo(17),
+					Type: s.getClassInfo(16),
 				},
 				&service.FieldInfo{
 					Name: "S32",
@@ -8320,36 +8246,36 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Vec2i",
-					Type: s.getClassInfo(12),
+					Type: s.getClassInfo(11),
 				},
 				&service.FieldInfo{
 					Name: "Vec3i",
-					Type: s.getClassInfo(13),
+					Type: s.getClassInfo(12),
 				},
 				&service.FieldInfo{
 					Name: "Vec4i",
-					Type: s.getClassInfo(14),
+					Type: s.getClassInfo(13),
 				},
 				&service.FieldInfo{
 					Name: "Mat2f",
-					Type: s.getClassInfo(18),
+					Type: s.getClassInfo(17),
 				},
 				&service.FieldInfo{
 					Name: "Mat3f",
-					Type: s.getClassInfo(19),
+					Type: s.getClassInfo(18),
 				},
 				&service.FieldInfo{
 					Name: "Mat4f",
-					Type: s.getClassInfo(20),
+					Type: s.getClassInfo(19),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 22:
+	case 21:
 		e = service.CreateClassInfo(
 			"Uniform",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Name",
 					Type: schema.String,
@@ -8360,19 +8286,19 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Value",
-					Type: s.getClassInfo(21),
+					Type: s.getClassInfo(20),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 23:
+	case 22:
 		e = service.CreateClassInfo(
 			"Program",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Shaders",
-					Type: s.getMapInfo(20),
+					Type: s.getMapInfo(22),
 				},
 				&service.FieldInfo{
 					Name: "Linked",
@@ -8380,39 +8306,39 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Binary",
-					Type: schema.Memory,
+					Type: schema.Int, /* TODO: Slice */
 				},
 				&service.FieldInfo{
 					Name: "AttributeBindings",
-					Type: s.getMapInfo(0),
+					Type: s.getMapInfo(23),
 				},
 				&service.FieldInfo{
 					Name: "Attributes",
-					Type: s.getMapInfo(29),
+					Type: s.getMapInfo(20),
 				},
 				&service.FieldInfo{
 					Name: "Uniforms",
-					Type: s.getMapInfo(26),
+					Type: s.getMapInfo(28),
 				},
 				&service.FieldInfo{
 					Name: "InfoLog",
-					Type: schema.String,
+					Type: schema.Int, /* TODO: Slice */
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 24:
+	case 23:
 		e = service.CreateClassInfo(
 			"VertexArray",
 			service.TypeKindClass,
-			service.FieldInfoArray{},
-			service.ClassInfoArray{},
+			service.FieldInfoPtrArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 25:
+	case 24:
 		e = service.CreateClassInfo(
 			"VertexAttributeArray",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Enabled",
 					Type: schema.Bool,
@@ -8442,20 +8368,20 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Pointer,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 26:
+	case 25:
 		e = service.CreateClassInfo(
 			"Query",
 			service.TypeKindClass,
-			service.FieldInfoArray{},
-			service.ClassInfoArray{},
+			service.FieldInfoPtrArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 27:
+	case 26:
 		e = service.CreateClassInfo(
 			"BlendState",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "SrcRgbBlendFactor",
 					Type: s.getEnumInfo(63),
@@ -8485,13 +8411,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: s.getClassInfo(0),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 28:
+	case 27:
 		e = service.CreateClassInfo(
 			"RasterizerState",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "DepthMask",
 					Type: schema.Bool,
@@ -8526,7 +8452,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "StencilMask",
-					Type: s.getMapInfo(25),
+					Type: s.getMapInfo(7),
 				},
 				&service.FieldInfo{
 					Name: "Viewport",
@@ -8565,13 +8491,13 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.Bool,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 29:
+	case 28:
 		e = service.CreateClassInfo(
 			"ClearState",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "ClearColor",
 					Type: s.getClassInfo(0),
@@ -8585,16 +8511,16 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 					Type: schema.S32,
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 30:
+	case 29:
 		e = service.CreateClassInfo(
 			"Objects",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Renderbuffers",
-					Type: s.getMapInfo(18),
+					Type: s.getMapInfo(16),
 				},
 				&service.FieldInfo{
 					Name: "Textures",
@@ -8602,11 +8528,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Framebuffers",
-					Type: s.getMapInfo(12),
+					Type: s.getMapInfo(9),
 				},
 				&service.FieldInfo{
 					Name: "Buffers",
-					Type: s.getMapInfo(3),
+					Type: s.getMapInfo(1),
 				},
 				&service.FieldInfo{
 					Name: "Shaders",
@@ -8614,43 +8540,43 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Programs",
-					Type: s.getMapInfo(15),
+					Type: s.getMapInfo(14),
 				},
 				&service.FieldInfo{
 					Name: "VertexArrays",
-					Type: s.getMapInfo(27),
+					Type: s.getMapInfo(29),
 				},
 				&service.FieldInfo{
 					Name: "Queries",
-					Type: s.getMapInfo(16),
+					Type: s.getMapInfo(15),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
-	case 31:
+	case 30:
 		e = service.CreateClassInfo(
 			"Context",
 			service.TypeKindClass,
-			service.FieldInfoArray{
+			service.FieldInfoPtrArray{
 				&service.FieldInfo{
 					Name: "Identifier",
 					Type: schema.U32,
 				},
 				&service.FieldInfo{
 					Name: "Blending",
-					Type: s.getClassInfo(27),
+					Type: s.getClassInfo(26),
 				},
 				&service.FieldInfo{
 					Name: "Rasterizing",
-					Type: s.getClassInfo(28),
+					Type: s.getClassInfo(27),
 				},
 				&service.FieldInfo{
 					Name: "Clearing",
-					Type: s.getClassInfo(29),
+					Type: s.getClassInfo(28),
 				},
 				&service.FieldInfo{
 					Name: "BoundFramebuffers",
-					Type: s.getMapInfo(11),
+					Type: s.getMapInfo(10),
 				},
 				&service.FieldInfo{
 					Name: "BoundRenderbuffers",
@@ -8670,11 +8596,11 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "VertexAttributeArrays",
-					Type: s.getMapInfo(28),
+					Type: s.getMapInfo(0),
 				},
 				&service.FieldInfo{
 					Name: "TextureUnits",
-					Type: s.getMapInfo(23),
+					Type: s.getMapInfo(26),
 				},
 				&service.FieldInfo{
 					Name: "ActiveTextureUnit",
@@ -8682,7 +8608,7 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "Capabilities",
-					Type: s.getMapInfo(1),
+					Type: s.getMapInfo(4),
 				},
 				&service.FieldInfo{
 					Name: "GenerateMipmapHint",
@@ -8690,14 +8616,14 @@ func (s schemaBuilder) getClassInfo(id int) *service.ClassInfo {
 				},
 				&service.FieldInfo{
 					Name: "PixelStorage",
-					Type: s.getMapInfo(19),
+					Type: s.getMapInfo(13),
 				},
 				&service.FieldInfo{
 					Name: "Instances",
-					Type: s.getClassInfo(30),
+					Type: s.getClassInfo(29),
 				},
 			},
-			service.ClassInfoArray{},
+			service.ClassInfoPtrArray{},
 		)
 	}
 	s.classes[id] = e

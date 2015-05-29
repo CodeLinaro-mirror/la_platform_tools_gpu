@@ -94,8 +94,14 @@ func (h ResourceId) Valid() bool {
 	return h.ID.Valid()
 }
 
+func (a BaseArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]Baseˢ", len(a))
+}
 func (a ListNodeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ListNodePointerSlice", len(a))
+	fmt.Fprintf(f, "[%d]ListNodeˢ", len(a))
+}
+func (a ListNodePtrArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]ListNodeᵖˢ", len(a))
 }
 
 func (i Enum) String() string {

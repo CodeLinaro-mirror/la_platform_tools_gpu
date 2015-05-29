@@ -19,8 +19,8 @@
 {{Include "cpp_common.tmpl"    }}
 
 {{/* ---- Overrides ---- */}}
-{{Global "C++.EnumTypeOverride"      "uint32_t" }}
-{{Global "C++.StatementTypeOverride" "Statement"}}
+{{Global "C++.EnumTypeOverride"   "uint32_t" }}
+{{Global "C++.Statement.Override" "Statement"}}
 
 {{$filename := print (Global "API") "_state.h" }}
 {{$ | Macro "State" | Format (Global "clang-format") | Write $filename}}
@@ -34,26 +34,22 @@
   #ifndef {{$guard}}
   #define {{$guard}}
 ¶
+  #include "state_base.h"
   #include "{{Global "API"}}_types.h"
 ¶
   #include <gapic/encoder.h>
-¶
-  #include <functional>
 ¶
   #include <stdint.h>
 ¶
   namespace gapii {«
 ¶
-  class {{$classname}} {
+  class {{$classname}} : public StateBase {
   «public:»
-    typedef std::function<void(void* ptr, uint64_t offset, uint64_t size)> ObserveFunc;
+    inline {{$classname}}(ObserveFunc observe);
 ¶
     {{range $c := AllCommands $}}
       inline void {{Macro "CmdName" $c}}({{Macro "Parameters" $c}});
     {{end}}
-¶
-    ObserveFunc read;
-    ObserveFunc write;
 ¶
     {{range $g := $.Globals}}
       {{Macro "C++.Type" $g}} {{$g.Name}};
@@ -61,6 +57,8 @@
 ¶
     #include "{{Global "API"}}_state_externs.inl"
   };
+¶
+    inline {{$classname}}::{{$classname}}(ObserveFunc observe) : StateBase(observe) {}
 ¶
   {{range $c := AllCommands $}}
     inline void {{$classname}}::{{Macro "CmdName" $c}}({{Macro "Parameters" $c}}) {
@@ -99,24 +97,10 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{     if IsAssign    $}}{{if not (Macro "IsOutput" $.LHS)}}{{Macro "C++.StatementDefault" $}}{{end}}
-  {{else if IsMapAssign $}}{{if not (Macro "IsOutput" $.To )}}{{Macro "C++.StatementDefault" $}}{{end}}
+  {{     if IsAssign    $}}{{Macro "C++.Statement.Default" $}}
+  {{else if IsMapAssign $}}{{Macro "C++.Statement.Default" $}}
   {{else if IsReturn    $}}return;
-  {{else                 }}{{Macro "C++.StatementDefault" $}}
+  {{else                 }}{{Macro "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 
-
-{{/*
--------------------------------------------------------------------------------
-  Emits a non-empty string if the expression refers to a (or part of) an output
-  parameter.
--------------------------------------------------------------------------------
-*/}}
-{{define "IsOutput"}}
-  {{if      IsParameter  $}}{{if $.Output}}TRUE{{end}}
-  {{else if IsArrayIndex $}}{{Macro "IsOutput" $.Array}}
-  {{else if IsMapIndex   $}}{{Macro "IsOutput" $.Map}}
-  {{/* {{else if IsMember     $}}{{Macro "IsOutput" $.Object}} */}} {{/* TODO: Check to see if this a pointer - if so, this may not mutate the output */}}
-  {{end}}
-{{end}}

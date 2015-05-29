@@ -17,23 +17,10 @@ package schema
 import (
 	"sort"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/gfxapi"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
-
-func init() {
-	RegisterAtom(service.AtomInfo{
-		Type: uint16(atom.TypeIDObservation),
-		Name: "Observation",
-		Parameters: service.ParameterInfoArray{
-			service.ParameterInfo{Name: "Base", Type: Pointer},
-			service.ParameterInfo{Name: "Size", Type: U64},
-			service.ParameterInfo{Name: "ResourceID", Type: ID},
-		},
-	})
-}
 
 var schema service.Schema
 var atomsNeedSorting = false

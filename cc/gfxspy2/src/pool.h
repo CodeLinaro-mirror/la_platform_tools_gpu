@@ -14,22 +14,43 @@
  * limitations under the License.
  */
 
-#ifndef GAPII_TYPES_H
-#define GAPII_TYPES_H
+#ifndef GAPII_POOL_H
+#define GAPII_POOL_H
 
-#include <vector>
-
+#include <memory>
 #include <stdint.h>
 
 namespace gapii {
 
-class Memory {
+class Pool {
 public:
-    std::vector<uint8_t> data;
+    static std::shared_ptr<Pool> create(uint64_t size);
+
+    ~Pool();
+
+    // size returns the size of this pool in bytes.
+    inline uint64_t size() const;
+
+    // Pointer to first byte in the pool.
+    inline void* base() const;
+
+private:
+    Pool(uint64_t size);
+    Pool(const Pool&) = delete;
+    Pool& operator=(const Pool&) = delete;
+
+    void*    mData;
+    uint64_t mSize;
 };
 
-class Any {};
+inline uint64_t Pool::size() const {
+    return mSize;
+}
+
+inline void* Pool::base() const {
+    return mData;
+}
 
 }  // namespace gapii
 
-#endif  // GAPII_TYPES_H
+#endif // GAPII_POOL_H

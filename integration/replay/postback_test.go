@@ -19,7 +19,7 @@ import (
 	"testing"
 
 	"android.googlesource.com/platform/tools/gpu/binary"
-	"android.googlesource.com/platform/tools/gpu/binary/endian"
+	"android.googlesource.com/platform/tools/gpu/database"
 	"android.googlesource.com/platform/tools/gpu/integration/replay/utils"
 	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
@@ -29,10 +29,11 @@ import (
 )
 
 func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.PostbackHandlerMap) {
-	db, logger := utils.NewInMemoryDatabase(), log.Testing(t)
+	d, l := database.InMemory(), log.Testing(t)
 
-	mgr := replay.New(db, logger)
+	mgr := replay.New(d, l)
 	device := utils.FindLocalDevice(t, mgr)
+	arch := device.Info().Architecture()
 
 	connection, err := device.Connect()
 	if err != nil {
@@ -40,17 +41,16 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 		return
 	}
 
-	info := device.Info()
-	b := builder.New(int(info.PointerSize), int(info.PointerAlignment), device.ByteOrder())
+	b := builder.New(arch)
 
 	f(b)
 
-	payload, decoder, err := b.Build(logger)
+	payload, decoder, err := b.Build(l)
 	if err != nil {
 		t.Errorf("Build failed with error: %v", err)
 	}
 
-	err = executor.Execute(payload, decoder, connection, db, logger, handlers, endian.Little)
+	err = executor.Execute(payload, decoder, connection, d, l, handlers, arch)
 	if err != nil {
 		t.Errorf("Executor failed with error: %v", err)
 	}

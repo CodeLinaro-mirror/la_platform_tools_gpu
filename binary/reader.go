@@ -14,9 +14,11 @@
 
 package binary
 
+import "fmt"
+
 // Reader provides methods for decoding values.
 type Reader interface {
-	// Data writes the data bytes in their entirety.
+	// Data reads the data bytes in their entirety.
 	Data([]byte) error
 	// Skip jumps past count bytes.
 	Skip(count uint32) error
@@ -46,4 +48,46 @@ type Reader interface {
 	String() (string, error)
 	// SkipString skips over a single string from the Reader.
 	SkipString() error
+}
+
+// ReadUint reads an unsigned integer of either 8, 16, 32 or 64 bits from r,
+// returning the result as a uint64.
+func ReadUint(r Reader, bits int) (uint64, error) {
+	switch bits {
+	case 8:
+		v, err := r.Uint8()
+		return uint64(v), err
+	case 16:
+		v, err := r.Uint16()
+		return uint64(v), err
+	case 32:
+		v, err := r.Uint32()
+		return uint64(v), err
+	case 64:
+		v, err := r.Uint64()
+		return v, err
+	default:
+		return 0, fmt.Errorf("Unsupported integer bit count %v", bits)
+	}
+}
+
+// ReadInt reads a signed integer of either 8, 16, 32 or 64 bits from r,
+// returning the result as a int64.
+func ReadInt(r Reader, bits int) (int64, error) {
+	switch bits {
+	case 8:
+		v, err := r.Int8()
+		return int64(v), err
+	case 16:
+		v, err := r.Int16()
+		return int64(v), err
+	case 32:
+		v, err := r.Int32()
+		return int64(v), err
+	case 64:
+		v, err := r.Int64()
+		return v, err
+	default:
+		return 0, fmt.Errorf("Unsupported integer bit count %v", bits)
+	}
 }

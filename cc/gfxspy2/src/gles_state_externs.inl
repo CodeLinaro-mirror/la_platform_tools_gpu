@@ -14,78 +14,76 @@
  * limitations under the License.
  */
 
-inline int32_t strlen(const char* s) {
-    if (s == nullptr) {
-        return 0;
-    }
-    int32_t i = 0;
-    while (s[i] != 0) { i++; }
-    return i;
-}
-
 inline int32_t strlen(const std::string& s) {
     return s.length();
 }
 
-inline void memcpy(Memory& m, void* ptr, uint32_t s) {
-    if (m.data.size() < s) {
-        m.data.resize(s);
+inline int32_t strlen(const char* p) {
+    if (p == nullptr) {
+        return 0;
     }
-    const uint8_t* p = reinterpret_cast<const uint8_t*>(ptr);
-    for (uint32_t i = 0; i < s; i++) {
-        m.data[i] = p[i];
+    int32_t i = 0;
+    while (p[i] != 0) { i++; }
+    return i;
+}
+
+inline int32_t strlen(const Slice<char>& s) {
+    int32_t i = 0;
+    for (char c : s) {
+        if (c == 0) {
+            break;
+        }
+        i++;
     }
-    read(ptr, 0, s);
+    return i;
 }
 
 template<typename T> T inline min(T a, T b) { return (a < b) ? a : b; }
 template<typename T> T inline max(T a, T b) { return (a > b) ? a : b; }
 
-inline uint32_t minIndex(const void* pointer, uint32_t indices_type, uint32_t element_count) {
+inline uint32_t minIndex(const uint8_t* indices, uint32_t indices_type, uint32_t offset, uint32_t count) {
     uint32_t v = ~(uint32_t)0;
     switch (indices_type) {
         case gapii::IndicesType::GL_UNSIGNED_BYTE: {
-            const uint8_t* p = reinterpret_cast<const uint8_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = min<uint32_t>(v, p[i]); }
+            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_SHORT: {
-            const uint16_t* p = reinterpret_cast<const uint16_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = min<uint32_t>(v, p[i]); }
+            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_INT: {
-            const uint32_t* p = reinterpret_cast<const uint32_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = min<uint32_t>(v, p[i]); }
+            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = min<uint32_t>(v, p[offset+i]); }
             break;
         }
     }
     return v;
 }
 
-inline uint32_t maxIndex(const void* pointer, uint32_t indices_type, uint32_t element_count) {
+inline uint32_t maxIndex(const uint8_t* indices, uint32_t indices_type, uint32_t offset, uint32_t count) {
     uint32_t v = 0;
     switch (indices_type) {
         case gapii::IndicesType::GL_UNSIGNED_BYTE: {
-            const uint8_t* p = reinterpret_cast<const uint8_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = max<uint32_t>(v, p[i]); }
+            const uint8_t* p = reinterpret_cast<const uint8_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_SHORT: {
-            const uint16_t* p = reinterpret_cast<const uint16_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = max<uint32_t>(v, p[i]); }
+            const uint16_t* p = reinterpret_cast<const uint16_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
         case gapii::IndicesType::GL_UNSIGNED_INT: {
-            const uint32_t* p = reinterpret_cast<const uint32_t*>(pointer);
-            for (uint32_t i = 0; i < element_count; i++) { v = max<uint32_t>(v, p[i]); }
+            const uint32_t* p = reinterpret_cast<const uint32_t*>(&indices[0]);
+            for (uint32_t i = 0; i < count; i++) { v = max<uint32_t>(v, p[offset+i]); }
             break;
         }
     }
     return v;
 }
-
-inline void* memoryOffset(Memory& m, uint64_t by) { return &m.data[by]; }
 
 inline int stateVariableSize(uint32_t v) {
     switch (v) {

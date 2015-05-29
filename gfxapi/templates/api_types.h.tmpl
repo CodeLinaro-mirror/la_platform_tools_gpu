@@ -31,7 +31,7 @@
   #ifndef {{$guard}}
   #define {{$guard}}
 ¶
-  #include "types.h"
+  #include "slice.h"
 ¶
   #include <memory>
   #include <string>
@@ -76,12 +76,13 @@
       {{Global $key "true"}}
       {{     if IsClass       $}}{{Macro "DeclareClass"     $}}
       {{else if IsEnum        $}}{{Macro "DeclareEnum"      $}}
-      {{else if IsPseudonym   $}}{{Macro "DeclarePseudonym" $}}
       {{else if IsMap         $}}{{Macro "DeclareMap"       $}}
+      {{else if IsPseudonym   $}}{{Macro "DeclarePseudonym" $}}
       {{else if IsPointer     $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsBuffer      $}}{{Macro "DeclareType"      $.To}}
-      {{else if IsArray       $}}{{Macro "DeclareType"      $.ValueType}}
+      {{else if IsReference   $}}{{Macro "DeclareType"      $.To}}
       {{else if IsStaticArray $}}{{Macro "DeclareType"      $.ValueType}}
+      {{else if IsReference   $}}
+      {{else if IsSlice       $}}
       {{else}}{{Error "DeclareType does not support type '%T'" $}}
       {{end}}
 ¶

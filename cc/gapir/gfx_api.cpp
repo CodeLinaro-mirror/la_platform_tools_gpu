@@ -14,16 +14,16 @@ namespace gfxapi {
 namespace {
 
 bool callEglInitialize(Stack* stack, bool pushReturn) {
-    EGLint* minor = stack->pop<EGLint*>();
-    EGLint* major = stack->pop<EGLint*>();
-    EGLDisplay dpy = stack->pop<EGLDisplay>();
+    int* minor = stack->pop<int*>();
+    int* major = stack->pop<int*>();
+    void* dpy = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("eglInitialize(%p, %p, %p)\n", dpy, major, minor);
         if (eglInitialize != nullptr) {
-            EGLBoolean return_value = eglInitialize(dpy, major, minor);
+            int return_value = eglInitialize(dpy, major, minor);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<EGLBoolean>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglInitialize\n");
@@ -36,18 +36,18 @@ bool callEglInitialize(Stack* stack, bool pushReturn) {
 }
 
 bool callEglCreateContext(Stack* stack, bool pushReturn) {
-    const EGLint* attrib_list = stack->pop<const EGLint*>();
-    EGLContext share_context = stack->pop<EGLContext>();
-    EGLConfig config = stack->pop<EGLConfig>();
-    EGLDisplay display = stack->pop<EGLDisplay>();
+    int* attrib_list = stack->pop<int*>();
+    void* share_context = stack->pop<void*>();
+    void* config = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("eglCreateContext(%p, %p, %p, %p)\n", display, config, share_context,
                    attrib_list);
         if (eglCreateContext != nullptr) {
-            EGLContext return_value = eglCreateContext(display, config, share_context, attrib_list);
+            void* return_value = eglCreateContext(display, config, share_context, attrib_list);
             GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
-                stack->push<EGLContext>(return_value);
+                stack->push<void*>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglCreateContext\n");
@@ -60,17 +60,17 @@ bool callEglCreateContext(Stack* stack, bool pushReturn) {
 }
 
 bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
-    EGLContext context = stack->pop<EGLContext>();
-    EGLSurface read = stack->pop<EGLSurface>();
-    EGLSurface draw = stack->pop<EGLSurface>();
-    EGLDisplay display = stack->pop<EGLDisplay>();
+    void* context = stack->pop<void*>();
+    void* read = stack->pop<void*>();
+    void* draw = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("eglMakeCurrent(%p, %p, %p, %p)\n", display, draw, read, context);
         if (eglMakeCurrent != nullptr) {
-            EGLBoolean return_value = eglMakeCurrent(display, draw, read, context);
+            int return_value = eglMakeCurrent(display, draw, read, context);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<EGLBoolean>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglMakeCurrent\n");
@@ -83,15 +83,15 @@ bool callEglMakeCurrent(Stack* stack, bool pushReturn) {
 }
 
 bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
-    const void* surface = stack->pop<const void*>();
-    EGLDisplay display = stack->pop<EGLDisplay>();
+    void* surface = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("eglSwapBuffers(%p, %p)\n", display, surface);
         if (eglSwapBuffers != nullptr) {
-            EGLBoolean return_value = eglSwapBuffers(display, surface);
+            int return_value = eglSwapBuffers(display, surface);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<EGLBoolean>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglSwapBuffers\n");
@@ -104,17 +104,17 @@ bool callEglSwapBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callEglQuerySurface(Stack* stack, bool pushReturn) {
-    EGLint* value = stack->pop<EGLint*>();
-    EGLint attribute = stack->pop<EGLint>();
-    EGLSurface surface = stack->pop<EGLSurface>();
-    EGLDisplay display = stack->pop<EGLDisplay>();
+    int* value = stack->pop<int*>();
+    int attribute = stack->pop<int>();
+    void* surface = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("eglQuerySurface(%p, %p, %d, %p)\n", display, surface, attribute, value);
         if (eglQuerySurface != nullptr) {
-            EGLBoolean return_value = eglQuerySurface(display, surface, attribute, value);
+            int return_value = eglQuerySurface(display, surface, attribute, value);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<EGLBoolean>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function eglQuerySurface\n");
@@ -128,16 +128,16 @@ bool callEglQuerySurface(Stack* stack, bool pushReturn) {
 
 bool callGlXCreateContext(Stack* stack, bool pushReturn) {
     bool direct = stack->pop<bool>();
-    GLXContext shareList = stack->pop<GLXContext>();
-    const void* vis = stack->pop<const void*>();
-    const void* dpy = stack->pop<const void*>();
+    void* shareList = stack->pop<void*>();
+    void* vis = stack->pop<void*>();
+    void* dpy = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("glXCreateContext(%p, %p, %p, %d)\n", dpy, vis, shareList, direct);
         if (glXCreateContext != nullptr) {
-            GLXContext return_value = glXCreateContext(dpy, vis, shareList, direct);
+            void* return_value = glXCreateContext(dpy, vis, shareList, direct);
             GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
-                stack->push<GLXContext>(return_value);
+                stack->push<void*>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXCreateContext\n");
@@ -151,18 +151,18 @@ bool callGlXCreateContext(Stack* stack, bool pushReturn) {
 
 bool callGlXCreateNewContext(Stack* stack, bool pushReturn) {
     bool direct = stack->pop<bool>();
-    GLXContext shared = stack->pop<GLXContext>();
+    void* shared = stack->pop<void*>();
     uint32_t type = stack->pop<uint32_t>();
-    const void* fbconfig = stack->pop<const void*>();
-    const void* display = stack->pop<const void*>();
+    void* fbconfig = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("glXCreateNewContext(%p, %p, %u, %p, %d)\n", display, fbconfig, type, shared,
                    direct);
         if (glXCreateNewContext != nullptr) {
-            GLXContext return_value = glXCreateNewContext(display, fbconfig, type, shared, direct);
+            void* return_value = glXCreateNewContext(display, fbconfig, type, shared, direct);
             GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
-                stack->push<GLXContext>(return_value);
+                stack->push<void*>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glXCreateNewContext\n");
@@ -175,10 +175,10 @@ bool callGlXCreateNewContext(Stack* stack, bool pushReturn) {
 }
 
 bool callGlXMakeContextCurrent(Stack* stack, bool pushReturn) {
-    GLXContext ctx = stack->pop<GLXContext>();
-    GLXDrawable read = stack->pop<GLXDrawable>();
-    GLXDrawable draw = stack->pop<GLXDrawable>();
-    const void* display = stack->pop<const void*>();
+    void* ctx = stack->pop<void*>();
+    void* read = stack->pop<void*>();
+    void* draw = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("glXMakeContextCurrent(%p, %p, %p, %p)\n", display, draw, read, ctx);
         if (glXMakeContextCurrent != nullptr) {
@@ -194,8 +194,8 @@ bool callGlXMakeContextCurrent(Stack* stack, bool pushReturn) {
 }
 
 bool callGlXSwapBuffers(Stack* stack, bool pushReturn) {
-    GLXDrawable drawable = stack->pop<GLXDrawable>();
-    const void* display = stack->pop<const void*>();
+    void* drawable = stack->pop<void*>();
+    void* display = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("glXSwapBuffers(%p, %p)\n", display, drawable);
         if (glXSwapBuffers != nullptr) {
@@ -211,14 +211,14 @@ bool callGlXSwapBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callWglCreateContext(Stack* stack, bool pushReturn) {
-    HDC hdc = stack->pop<HDC>();
+    void* hdc = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("wglCreateContext(%p)\n", hdc);
         if (wglCreateContext != nullptr) {
-            HGLRC return_value = wglCreateContext(hdc);
+            void* return_value = wglCreateContext(hdc);
             GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
-                stack->push<HGLRC>(return_value);
+                stack->push<void*>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglCreateContext\n");
@@ -231,16 +231,16 @@ bool callWglCreateContext(Stack* stack, bool pushReturn) {
 }
 
 bool callWglCreateContextAttribsARB(Stack* stack, bool pushReturn) {
-    const int* attribList = stack->pop<const int*>();
-    HGLRC hShareContext = stack->pop<HGLRC>();
-    HDC hdc = stack->pop<HDC>();
+    int* attribList = stack->pop<int*>();
+    void* hShareContext = stack->pop<void*>();
+    void* hdc = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("wglCreateContextAttribsARB(%p, %p, %p)\n", hdc, hShareContext, attribList);
         if (wglCreateContextAttribsARB != nullptr) {
-            HGLRC return_value = wglCreateContextAttribsARB(hdc, hShareContext, attribList);
+            void* return_value = wglCreateContextAttribsARB(hdc, hShareContext, attribList);
             GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
-                stack->push<HGLRC>(return_value);
+                stack->push<void*>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglCreateContextAttribsARB\n");
@@ -253,15 +253,15 @@ bool callWglCreateContextAttribsARB(Stack* stack, bool pushReturn) {
 }
 
 bool callWglMakeCurrent(Stack* stack, bool pushReturn) {
-    HGLRC hglrc = stack->pop<HGLRC>();
-    HDC hdc = stack->pop<HDC>();
+    void* hglrc = stack->pop<void*>();
+    void* hdc = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("wglMakeCurrent(%p, %p)\n", hdc, hglrc);
         if (wglMakeCurrent != nullptr) {
-            BOOL return_value = wglMakeCurrent(hdc, hglrc);
+            int return_value = wglMakeCurrent(hdc, hglrc);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<BOOL>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function wglMakeCurrent\n");
@@ -274,7 +274,7 @@ bool callWglMakeCurrent(Stack* stack, bool pushReturn) {
 }
 
 bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
-    HDC hdc = stack->pop<HDC>();
+    void* hdc = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("wglSwapBuffers(%p)\n", hdc);
         if (wglSwapBuffers != nullptr) {
@@ -290,16 +290,16 @@ bool callWglSwapBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callCGLCreateContext(Stack* stack, bool pushReturn) {
-    CGLContextObj* ctx = stack->pop<CGLContextObj*>();
-    CGLContextObj share = stack->pop<CGLContextObj>();
-    CGLPixelFormatObj pix = stack->pop<CGLPixelFormatObj>();
+    void** ctx = stack->pop<void**>();
+    void* share = stack->pop<void*>();
+    void* pix = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("CGLCreateContext(%p, %p, %p)\n", pix, share, ctx);
         if (CGLCreateContext != nullptr) {
-            CGLError return_value = CGLCreateContext(pix, share, ctx);
+            int return_value = CGLCreateContext(pix, share, ctx);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<CGLError>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLCreateContext\n");
@@ -312,14 +312,14 @@ bool callCGLCreateContext(Stack* stack, bool pushReturn) {
 }
 
 bool callCGLSetCurrentContext(Stack* stack, bool pushReturn) {
-    CGLContextObj ctx = stack->pop<CGLContextObj>();
+    void* ctx = stack->pop<void*>();
     if (stack->isValid()) {
         GAPID_INFO("CGLSetCurrentContext(%p)\n", ctx);
         if (CGLSetCurrentContext != nullptr) {
-            CGLError return_value = CGLSetCurrentContext(ctx);
+            int return_value = CGLSetCurrentContext(ctx);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<CGLError>(return_value);
+                stack->push<int>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function CGLSetCurrentContext\n");
@@ -368,7 +368,7 @@ bool callGlGetProgramBinaryOES(Stack* stack, bool pushReturn) {
     uint32_t* binary_format = stack->pop<uint32_t*>();
     int32_t* bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetProgramBinaryOES(%u, %d, %p, %p, %p)\n", program, buffer_size,
                    bytes_written, binary_format, binary);
@@ -386,9 +386,9 @@ bool callGlGetProgramBinaryOES(Stack* stack, bool pushReturn) {
 
 bool callGlProgramBinaryOES(Stack* stack, bool pushReturn) {
     int32_t binary_size = stack->pop<int32_t>();
-    const void* binary = stack->pop<const void*>();
+    void* binary = stack->pop<void*>();
     uint32_t binary_format = stack->pop<uint32_t>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glProgramBinaryOES(%u, %u, %p, %d)\n", program, binary_format, binary,
                    binary_size);
@@ -441,8 +441,7 @@ bool callGlEndTilingQCOM(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
-    const DiscardFramebufferAttachment* attachments =
-            stack->pop<const DiscardFramebufferAttachment*>();
+    DiscardFramebufferAttachment* attachments = stack->pop<DiscardFramebufferAttachment*>();
     int32_t numAttachments = stack->pop<int32_t>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
@@ -460,7 +459,7 @@ bool callGlDiscardFramebufferEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
-    const char* marker = stack->pop<const char*>();
+    char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glInsertEventMarkerEXT(%d, %s)\n", length, marker);
@@ -477,7 +476,7 @@ bool callGlInsertEventMarkerEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlPushGroupMarkerEXT(Stack* stack, bool pushReturn) {
-    const char* marker = stack->pop<const char*>();
+    char* marker = stack->pop<char*>();
     int32_t length = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glPushGroupMarkerEXT(%d, %s)\n", length, marker);
@@ -575,7 +574,7 @@ bool callGlTextureStorage1DEXT(Stack* stack, bool pushReturn) {
     TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage1DEXT(%u, %u, %d, %u, %d)\n", texture, target, levels, format,
                    width);
@@ -597,7 +596,7 @@ bool callGlTextureStorage2DEXT(Stack* stack, bool pushReturn) {
     TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage2DEXT(%u, %u, %d, %u, %d, %d)\n", texture, target, levels,
                    format, width, height);
@@ -620,7 +619,7 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
     TexelFormat format = stack->pop<TexelFormat>();
     int32_t levels = stack->pop<int32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glTextureStorage3DEXT(%u, %u, %d, %u, %d, %d, %d)\n", texture, target, levels,
                    format, width, height, depth);
@@ -637,7 +636,7 @@ bool callGlTextureStorage3DEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
-    VertexArrayId* arrays = stack->pop<VertexArrayId*>();
+    uint32_t* arrays = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenVertexArraysOES(%d, %p)\n", count, arrays);
@@ -654,7 +653,7 @@ bool callGlGenVertexArraysOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindVertexArrayOES(Stack* stack, bool pushReturn) {
-    VertexArrayId array = stack->pop<VertexArrayId>();
+    uint32_t array = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glBindVertexArrayOES(%u)\n", array);
         if (glBindVertexArrayOES != nullptr) {
@@ -670,7 +669,7 @@ bool callGlBindVertexArrayOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
-    const VertexArrayId* arrays = stack->pop<const VertexArrayId*>();
+    uint32_t* arrays = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteVertexArraysOES(%d, %p)\n", count, arrays);
@@ -687,7 +686,7 @@ bool callGlDeleteVertexArraysOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
-    VertexArrayId array = stack->pop<VertexArrayId>();
+    uint32_t array = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsVertexArrayOES(%u)\n", array);
         if (glIsVertexArrayOES != nullptr) {
@@ -707,7 +706,7 @@ bool callGlIsVertexArrayOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
-    ImageOES image = stack->pop<ImageOES>();
+    void* image = stack->pop<void*>();
     ImageTargetTexture target = stack->pop<ImageTargetTexture>();
     if (stack->isValid()) {
         GAPID_INFO("glEGLImageTargetTexture2DOES(%u, %p)\n", target, image);
@@ -724,7 +723,7 @@ bool callGlEGLImageTargetTexture2DOES(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEGLImageTargetRenderbufferStorageOES(Stack* stack, bool pushReturn) {
-    TexturePointer image = stack->pop<TexturePointer>();
+    void* image = stack->pop<void*>();
     ImageTargetRenderbufferStorage target = stack->pop<ImageTargetRenderbufferStorage>();
     if (stack->isValid()) {
         GAPID_INFO("glEGLImageTargetRenderbufferStorageOES(%u, %p)\n", target, image);
@@ -762,9 +761,9 @@ bool callGlGetGraphicsResetStatusEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindAttribLocation(Stack* stack, bool pushReturn) {
-    const char* name = stack->pop<const char*>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
-    ProgramId program = stack->pop<ProgramId>();
+    char* name = stack->pop<char*>();
+    uint32_t location = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glBindAttribLocation(%u, %u, %s)\n", program, location, name);
         if (glBindAttribLocation != nullptr) {
@@ -869,7 +868,7 @@ bool callGlBlendColor(Stack* stack, bool pushReturn) {
 }
 
 bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glEnableVertexAttribArray(%u)\n", location);
         if (glEnableVertexAttribArray != nullptr) {
@@ -885,7 +884,7 @@ bool callGlEnableVertexAttribArray(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDisableVertexAttribArray(%u)\n", location);
         if (glDisableVertexAttribArray != nullptr) {
@@ -901,12 +900,12 @@ bool callGlDisableVertexAttribArray(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttribPointer(Stack* stack, bool pushReturn) {
-    VertexPointer data = stack->pop<VertexPointer>();
+    void* data = stack->pop<void*>();
     int32_t stride = stack->pop<int32_t>();
     bool normalized = stack->pop<bool>();
     VertexAttribType type = stack->pop<VertexAttribType>();
     int32_t size = stack->pop<int32_t>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttribPointer(%u, %d, %u, %d, %d, %p)\n", location, size, type,
                    normalized, stride, data);
@@ -928,8 +927,8 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
     int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t location = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetActiveAttrib(%u, %u, %d, %p, %p, %p, %p)\n", program, location,
                    buffer_size, buffer_bytes_written, vector_count, type, name);
@@ -953,7 +952,7 @@ bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetActiveUniform(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
                    buffer_size, buffer_bytes_written, size, type, name);
@@ -992,7 +991,7 @@ bool callGlGetError(Stack* stack, bool pushReturn) {
 bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
     ProgramParameter parameter = stack->pop<ProgramParameter>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetProgramiv(%u, %u, %p)\n", program, parameter, value);
         if (glGetProgramiv != nullptr) {
@@ -1010,7 +1009,7 @@ bool callGlGetProgramiv(Stack* stack, bool pushReturn) {
 bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
     ShaderParameter parameter = stack->pop<ShaderParameter>();
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetShaderiv(%u, %u, %p)\n", shader, parameter, value);
         if (glGetShaderiv != nullptr) {
@@ -1026,15 +1025,15 @@ bool callGlGetShaderiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
-    const char* name = stack->pop<const char*>();
-    ProgramId program = stack->pop<ProgramId>();
+    char* name = stack->pop<char*>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetUniformLocation(%u, %s)\n", program, name);
         if (glGetUniformLocation != nullptr) {
-            UniformLocation return_value = glGetUniformLocation(program, name);
+            int32_t return_value = glGetUniformLocation(program, name);
             GAPID_INFO("Returned: %d\n", return_value);
             if (pushReturn) {
-                stack->push<UniformLocation>(return_value);
+                stack->push<int32_t>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetUniformLocation\n");
@@ -1047,15 +1046,15 @@ bool callGlGetUniformLocation(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetAttribLocation(Stack* stack, bool pushReturn) {
-    const char* name = stack->pop<const char*>();
-    ProgramId program = stack->pop<ProgramId>();
+    char* name = stack->pop<char*>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetAttribLocation(%u, %s)\n", program, name);
         if (glGetAttribLocation != nullptr) {
-            AttributeLocation return_value = glGetAttribLocation(program, name);
+            uint32_t return_value = glGetAttribLocation(program, name);
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<AttributeLocation>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetAttribLocation\n");
@@ -1158,7 +1157,7 @@ bool callGlGetTexParameterfv(Stack* stack, bool pushReturn) {
 
 bool callGlUniform1i(Stack* stack, bool pushReturn) {
     int32_t value = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform1i(%d, %d)\n", location, value);
         if (glUniform1i != nullptr) {
@@ -1176,7 +1175,7 @@ bool callGlUniform1i(Stack* stack, bool pushReturn) {
 bool callGlUniform2i(Stack* stack, bool pushReturn) {
     int32_t value1 = stack->pop<int32_t>();
     int32_t value0 = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform2i(%d, %d, %d)\n", location, value0, value1);
         if (glUniform2i != nullptr) {
@@ -1195,7 +1194,7 @@ bool callGlUniform3i(Stack* stack, bool pushReturn) {
     int32_t value2 = stack->pop<int32_t>();
     int32_t value1 = stack->pop<int32_t>();
     int32_t value0 = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform3i(%d, %d, %d, %d)\n", location, value0, value1, value2);
         if (glUniform3i != nullptr) {
@@ -1215,7 +1214,7 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
     int32_t value2 = stack->pop<int32_t>();
     int32_t value1 = stack->pop<int32_t>();
     int32_t value0 = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform4i(%d, %d, %d, %d, %d)\n", location, value0, value1, value2, value3);
         if (glUniform4i != nullptr) {
@@ -1231,9 +1230,9 @@ bool callGlUniform4i(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1iv(Stack* stack, bool pushReturn) {
-    const int32_t* value = stack->pop<const int32_t*>();
+    int32_t* value = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform1iv(%d, %d, %p)\n", location, count, value);
         if (glUniform1iv != nullptr) {
@@ -1249,9 +1248,9 @@ bool callGlUniform1iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2iv(Stack* stack, bool pushReturn) {
-    const int32_t* value = stack->pop<const int32_t*>();
+    int32_t* value = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform2iv(%d, %d, %p)\n", location, count, value);
         if (glUniform2iv != nullptr) {
@@ -1267,9 +1266,9 @@ bool callGlUniform2iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3iv(Stack* stack, bool pushReturn) {
-    const int32_t* value = stack->pop<const int32_t*>();
+    int32_t* value = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform3iv(%d, %d, %p)\n", location, count, value);
         if (glUniform3iv != nullptr) {
@@ -1285,9 +1284,9 @@ bool callGlUniform3iv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4iv(Stack* stack, bool pushReturn) {
-    const int32_t* value = stack->pop<const int32_t*>();
+    int32_t* value = stack->pop<int32_t*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform4iv(%d, %d, %p)\n", location, count, value);
         if (glUniform4iv != nullptr) {
@@ -1304,7 +1303,7 @@ bool callGlUniform4iv(Stack* stack, bool pushReturn) {
 
 bool callGlUniform1f(Stack* stack, bool pushReturn) {
     float value = stack->pop<float>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform1f(%d, %f)\n", location, value);
         if (glUniform1f != nullptr) {
@@ -1322,7 +1321,7 @@ bool callGlUniform1f(Stack* stack, bool pushReturn) {
 bool callGlUniform2f(Stack* stack, bool pushReturn) {
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform2f(%d, %f, %f)\n", location, value0, value1);
         if (glUniform2f != nullptr) {
@@ -1341,7 +1340,7 @@ bool callGlUniform3f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform3f(%d, %f, %f, %f)\n", location, value0, value1, value2);
         if (glUniform3f != nullptr) {
@@ -1361,7 +1360,7 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform4f(%d, %f, %f, %f, %f)\n", location, value0, value1, value2, value3);
         if (glUniform4f != nullptr) {
@@ -1377,9 +1376,9 @@ bool callGlUniform4f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform1fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
+    float* value = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform1fv(%d, %d, %p)\n", location, count, value);
         if (glUniform1fv != nullptr) {
@@ -1395,9 +1394,9 @@ bool callGlUniform1fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform2fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
+    float* value = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform2fv(%d, %d, %p)\n", location, count, value);
         if (glUniform2fv != nullptr) {
@@ -1413,9 +1412,9 @@ bool callGlUniform2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform3fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
+    float* value = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform3fv(%d, %d, %p)\n", location, count, value);
         if (glUniform3fv != nullptr) {
@@ -1431,9 +1430,9 @@ bool callGlUniform3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniform4fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
+    float* value = stack->pop<float*>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniform4fv(%d, %d, %p)\n", location, count, value);
         if (glUniform4fv != nullptr) {
@@ -1449,10 +1448,10 @@ bool callGlUniform4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
-    const float* values = stack->pop<const float*>();
+    float* values = stack->pop<float*>();
     bool transpose = stack->pop<bool>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix2fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix2fv != nullptr) {
@@ -1468,10 +1467,10 @@ bool callGlUniformMatrix2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
-    const float* values = stack->pop<const float*>();
+    float* values = stack->pop<float*>();
     bool transpose = stack->pop<bool>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix3fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix3fv != nullptr) {
@@ -1487,10 +1486,10 @@ bool callGlUniformMatrix3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
-    const float* values = stack->pop<const float*>();
+    float* values = stack->pop<float*>();
     bool transpose = stack->pop<bool>();
     int32_t count = stack->pop<int32_t>();
-    UniformLocation location = stack->pop<UniformLocation>();
+    int32_t location = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUniformMatrix4fv(%d, %d, %d, %p)\n", location, count, transpose, values);
         if (glUniformMatrix4fv != nullptr) {
@@ -1506,9 +1505,9 @@ bool callGlUniformMatrix4fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetUniformfv(Stack* stack, bool pushReturn) {
-    const float* values = stack->pop<const float*>();
-    UniformLocation location = stack->pop<UniformLocation>();
-    ProgramId program = stack->pop<ProgramId>();
+    float* values = stack->pop<float*>();
+    int32_t location = stack->pop<int32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetUniformfv(%u, %d, %p)\n", program, location, values);
         if (glGetUniformfv != nullptr) {
@@ -1524,9 +1523,9 @@ bool callGlGetUniformfv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
-    const int32_t* values = stack->pop<const int32_t*>();
-    UniformLocation location = stack->pop<UniformLocation>();
-    ProgramId program = stack->pop<ProgramId>();
+    int32_t* values = stack->pop<int32_t*>();
+    int32_t location = stack->pop<int32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetUniformiv(%u, %d, %p)\n", program, location, values);
         if (glGetUniformiv != nullptr) {
@@ -1543,7 +1542,7 @@ bool callGlGetUniformiv(Stack* stack, bool pushReturn) {
 
 bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
     float value0 = stack->pop<float>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib1f(%u, %f)\n", location, value0);
         if (glVertexAttrib1f != nullptr) {
@@ -1561,7 +1560,7 @@ bool callGlVertexAttrib1f(Stack* stack, bool pushReturn) {
 bool callGlVertexAttrib2f(Stack* stack, bool pushReturn) {
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib2f(%u, %f, %f)\n", location, value0, value1);
         if (glVertexAttrib2f != nullptr) {
@@ -1580,7 +1579,7 @@ bool callGlVertexAttrib3f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib3f(%u, %f, %f, %f)\n", location, value0, value1, value2);
         if (glVertexAttrib3f != nullptr) {
@@ -1600,7 +1599,7 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
     float value2 = stack->pop<float>();
     float value1 = stack->pop<float>();
     float value0 = stack->pop<float>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib4f(%u, %f, %f, %f, %f)\n", location, value0, value1, value2,
                    value3);
@@ -1617,8 +1616,8 @@ bool callGlVertexAttrib4f(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    float* value = stack->pop<float*>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib1fv(%u, %p)\n", location, value);
         if (glVertexAttrib1fv != nullptr) {
@@ -1634,8 +1633,8 @@ bool callGlVertexAttrib1fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    float* value = stack->pop<float*>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib2fv(%u, %p)\n", location, value);
         if (glVertexAttrib2fv != nullptr) {
@@ -1651,8 +1650,8 @@ bool callGlVertexAttrib2fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    float* value = stack->pop<float*>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib3fv(%u, %p)\n", location, value);
         if (glVertexAttrib3fv != nullptr) {
@@ -1668,8 +1667,8 @@ bool callGlVertexAttrib3fv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlVertexAttrib4fv(Stack* stack, bool pushReturn) {
-    const float* value = stack->pop<const float*>();
-    AttributeLocation location = stack->pop<AttributeLocation>();
+    float* value = stack->pop<float*>();
+    uint32_t location = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glVertexAttrib4fv(%u, %p)\n", location, value);
         if (glVertexAttrib4fv != nullptr) {
@@ -1917,7 +1916,7 @@ bool callGlActiveTexture(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenTextures(Stack* stack, bool pushReturn) {
-    TextureId* textures = stack->pop<TextureId*>();
+    uint32_t* textures = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenTextures(%d, %p)\n", count, textures);
@@ -1934,7 +1933,7 @@ bool callGlGenTextures(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
-    const TextureId* textures = stack->pop<const TextureId*>();
+    uint32_t* textures = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteTextures(%d, %p)\n", count, textures);
@@ -1951,7 +1950,7 @@ bool callGlDeleteTextures(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsTexture(Stack* stack, bool pushReturn) {
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsTexture(%u)\n", texture);
         if (glIsTexture != nullptr) {
@@ -1971,7 +1970,7 @@ bool callGlIsTexture(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindTexture(Stack* stack, bool pushReturn) {
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     TextureTarget target = stack->pop<TextureTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBindTexture(%u, %u)\n", target, texture);
@@ -1988,7 +1987,7 @@ bool callGlBindTexture(Stack* stack, bool pushReturn) {
 }
 
 bool callGlTexImage2D(Stack* stack, bool pushReturn) {
-    TexturePointer data = stack->pop<TexturePointer>();
+    void* data = stack->pop<void*>();
     TexelType type = stack->pop<TexelType>();
     TexelFormat format = stack->pop<TexelFormat>();
     int32_t border = stack->pop<int32_t>();
@@ -2013,7 +2012,7 @@ bool callGlTexImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlTexSubImage2D(Stack* stack, bool pushReturn) {
-    TexturePointer data = stack->pop<TexturePointer>();
+    void* data = stack->pop<void*>();
     TexelType type = stack->pop<TexelType>();
     TexelFormat format = stack->pop<TexelFormat>();
     int32_t height = stack->pop<int32_t>();
@@ -2086,7 +2085,7 @@ bool callGlCopyTexSubImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
-    TexturePointer data = stack->pop<TexturePointer>();
+    void* data = stack->pop<void*>();
     int32_t image_size = stack->pop<int32_t>();
     int32_t border = stack->pop<int32_t>();
     int32_t height = stack->pop<int32_t>();
@@ -2110,7 +2109,7 @@ bool callGlCompressedTexImage2D(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCompressedTexSubImage2D(Stack* stack, bool pushReturn) {
-    TexturePointer data = stack->pop<TexturePointer>();
+    void* data = stack->pop<void*>();
     int32_t image_size = stack->pop<int32_t>();
     CompressedTexelFormat format = stack->pop<CompressedTexelFormat>();
     int32_t height = stack->pop<int32_t>();
@@ -2175,7 +2174,7 @@ bool callGlReadPixels(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
-    FramebufferId* framebuffers = stack->pop<FramebufferId*>();
+    uint32_t* framebuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenFramebuffers(%d, %p)\n", count, framebuffers);
@@ -2192,7 +2191,7 @@ bool callGlGenFramebuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindFramebuffer(Stack* stack, bool pushReturn) {
-    FramebufferId framebuffer = stack->pop<FramebufferId>();
+    uint32_t framebuffer = stack->pop<uint32_t>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBindFramebuffer(%u, %u)\n", target, framebuffer);
@@ -2229,7 +2228,7 @@ bool callGlCheckFramebufferStatus(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
-    const FramebufferId* framebuffers = stack->pop<const FramebufferId*>();
+    uint32_t* framebuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteFramebuffers(%d, %p)\n", count, framebuffers);
@@ -2246,7 +2245,7 @@ bool callGlDeleteFramebuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
-    FramebufferId framebuffer = stack->pop<FramebufferId>();
+    uint32_t framebuffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsFramebuffer(%u)\n", framebuffer);
         if (glIsFramebuffer != nullptr) {
@@ -2266,7 +2265,7 @@ bool callGlIsFramebuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
-    RenderbufferId* renderbuffers = stack->pop<RenderbufferId*>();
+    uint32_t* renderbuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenRenderbuffers(%d, %p)\n", count, renderbuffers);
@@ -2283,7 +2282,7 @@ bool callGlGenRenderbuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindRenderbuffer(Stack* stack, bool pushReturn) {
-    RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
+    uint32_t renderbuffer = stack->pop<uint32_t>();
     RenderbufferTarget target = stack->pop<RenderbufferTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBindRenderbuffer(%u, %u)\n", target, renderbuffer);
@@ -2319,7 +2318,7 @@ bool callGlRenderbufferStorage(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
-    const RenderbufferId* renderbuffers = stack->pop<const RenderbufferId*>();
+    uint32_t* renderbuffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteRenderbuffers(%d, %p)\n", count, renderbuffers);
@@ -2336,7 +2335,7 @@ bool callGlDeleteRenderbuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsRenderbuffer(Stack* stack, bool pushReturn) {
-    RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
+    uint32_t renderbuffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsRenderbuffer(%u)\n", renderbuffer);
         if (glIsRenderbuffer != nullptr) {
@@ -2374,7 +2373,7 @@ bool callGlGetRenderbufferParameteriv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenBuffers(Stack* stack, bool pushReturn) {
-    BufferId* buffers = stack->pop<BufferId*>();
+    uint32_t* buffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenBuffers(%d, %p)\n", count, buffers);
@@ -2391,7 +2390,7 @@ bool callGlGenBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBindBuffer(Stack* stack, bool pushReturn) {
-    BufferId buffer = stack->pop<BufferId>();
+    uint32_t buffer = stack->pop<uint32_t>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBindBuffer(%u, %u)\n", target, buffer);
@@ -2409,7 +2408,7 @@ bool callGlBindBuffer(Stack* stack, bool pushReturn) {
 
 bool callGlBufferData(Stack* stack, bool pushReturn) {
     BufferUsage usage = stack->pop<BufferUsage>();
-    BufferDataPointer data = stack->pop<BufferDataPointer>();
+    void* data = stack->pop<void*>();
     int32_t size = stack->pop<int32_t>();
     BufferTarget target = stack->pop<BufferTarget>();
     if (stack->isValid()) {
@@ -2427,7 +2426,7 @@ bool callGlBufferData(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBufferSubData(Stack* stack, bool pushReturn) {
-    const void* data = stack->pop<const void*>();
+    void* data = stack->pop<void*>();
     int32_t size = stack->pop<int32_t>();
     int32_t offset = stack->pop<int32_t>();
     BufferTarget target = stack->pop<BufferTarget>();
@@ -2446,7 +2445,7 @@ bool callGlBufferSubData(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
-    const BufferId* buffers = stack->pop<const BufferId*>();
+    uint32_t* buffers = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteBuffers(%d, %p)\n", count, buffers);
@@ -2463,7 +2462,7 @@ bool callGlDeleteBuffers(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsBuffer(Stack* stack, bool pushReturn) {
-    BufferId buffer = stack->pop<BufferId>();
+    uint32_t buffer = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsBuffer(%u)\n", buffer);
         if (glIsBuffer != nullptr) {
@@ -2505,10 +2504,10 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glCreateShader(%u)\n", type);
         if (glCreateShader != nullptr) {
-            ShaderId return_value = glCreateShader(type);
+            uint32_t return_value = glCreateShader(type);
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<ShaderId>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateShader\n");
@@ -2521,7 +2520,7 @@ bool callGlCreateShader(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteShader(Stack* stack, bool pushReturn) {
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteShader(%u)\n", shader);
         if (glDeleteShader != nullptr) {
@@ -2537,10 +2536,10 @@ bool callGlDeleteShader(Stack* stack, bool pushReturn) {
 }
 
 bool callGlShaderSource(Stack* stack, bool pushReturn) {
-    const int32_t* length = stack->pop<const int32_t*>();
-    const char** source = stack->pop<const char**>();
+    int32_t* length = stack->pop<int32_t*>();
+    char** source = stack->pop<char**>();
     int32_t count = stack->pop<int32_t>();
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glShaderSource(%u, %d, %p, %p)\n", shader, count, source, length);
         if (glShaderSource != nullptr) {
@@ -2557,9 +2556,9 @@ bool callGlShaderSource(Stack* stack, bool pushReturn) {
 
 bool callGlShaderBinary(Stack* stack, bool pushReturn) {
     int32_t binary_size = stack->pop<int32_t>();
-    const void* binary = stack->pop<const void*>();
+    void* binary = stack->pop<void*>();
     uint32_t binary_format = stack->pop<uint32_t>();
-    const ShaderId* shaders = stack->pop<const ShaderId*>();
+    uint32_t* shaders = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glShaderBinary(%d, %p, %u, %p, %d)\n", count, shaders, binary_format, binary,
@@ -2580,7 +2579,7 @@ bool callGlGetShaderInfoLog(Stack* stack, bool pushReturn) {
     char* info = stack->pop<char*>();
     int32_t* string_length_written = stack->pop<int32_t*>();
     int32_t buffer_length = stack->pop<int32_t>();
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetShaderInfoLog(%u, %d, %p, %p)\n", shader, buffer_length,
                    string_length_written, info);
@@ -2600,7 +2599,7 @@ bool callGlGetShaderSource(Stack* stack, bool pushReturn) {
     char* source = stack->pop<char*>();
     int32_t* string_length_written = stack->pop<int32_t*>();
     int32_t buffer_length = stack->pop<int32_t>();
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetShaderSource(%u, %d, %p, %p)\n", shader, buffer_length,
                    string_length_written, source);
@@ -2632,7 +2631,7 @@ bool callGlReleaseShaderCompiler(Stack* stack, bool pushReturn) {
 }
 
 bool callGlCompileShader(Stack* stack, bool pushReturn) {
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glCompileShader(%u)\n", shader);
         if (glCompileShader != nullptr) {
@@ -2648,7 +2647,7 @@ bool callGlCompileShader(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsShader(Stack* stack, bool pushReturn) {
-    ShaderId shader = stack->pop<ShaderId>();
+    uint32_t shader = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsShader(%u)\n", shader);
         if (glIsShader != nullptr) {
@@ -2671,10 +2670,10 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
     if (stack->isValid()) {
         GAPID_INFO("glCreateProgram()\n");
         if (glCreateProgram != nullptr) {
-            ProgramId return_value = glCreateProgram();
+            uint32_t return_value = glCreateProgram();
             GAPID_INFO("Returned: %u\n", return_value);
             if (pushReturn) {
-                stack->push<ProgramId>(return_value);
+                stack->push<uint32_t>(return_value);
             }
         } else {
             GAPID_WARNING("Attempted to call unsupported function glCreateProgram\n");
@@ -2687,7 +2686,7 @@ bool callGlCreateProgram(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteProgram(Stack* stack, bool pushReturn) {
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteProgram(%u)\n", program);
         if (glDeleteProgram != nullptr) {
@@ -2703,8 +2702,8 @@ bool callGlDeleteProgram(Stack* stack, bool pushReturn) {
 }
 
 bool callGlAttachShader(Stack* stack, bool pushReturn) {
-    ShaderId shader = stack->pop<ShaderId>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t shader = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glAttachShader(%u, %u)\n", program, shader);
         if (glAttachShader != nullptr) {
@@ -2720,8 +2719,8 @@ bool callGlAttachShader(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDetachShader(Stack* stack, bool pushReturn) {
-    ShaderId shader = stack->pop<ShaderId>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t shader = stack->pop<uint32_t>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDetachShader(%u, %u)\n", program, shader);
         if (glDetachShader != nullptr) {
@@ -2737,10 +2736,10 @@ bool callGlDetachShader(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
-    ShaderId* shaders = stack->pop<ShaderId*>();
+    uint32_t* shaders = stack->pop<uint32_t*>();
     int32_t* shaders_length_written = stack->pop<int32_t*>();
     int32_t buffer_length = stack->pop<int32_t>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetAttachedShaders(%u, %d, %p, %p)\n", program, buffer_length,
                    shaders_length_written, shaders);
@@ -2757,7 +2756,7 @@ bool callGlGetAttachedShaders(Stack* stack, bool pushReturn) {
 }
 
 bool callGlLinkProgram(Stack* stack, bool pushReturn) {
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glLinkProgram(%u)\n", program);
         if (glLinkProgram != nullptr) {
@@ -2776,7 +2775,7 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
     char* info = stack->pop<char*>();
     int32_t* string_length_written = stack->pop<int32_t*>();
     int32_t buffer_length = stack->pop<int32_t>();
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetProgramInfoLog(%u, %d, %p, %p)\n", program, buffer_length,
                    string_length_written, info);
@@ -2793,7 +2792,7 @@ bool callGlGetProgramInfoLog(Stack* stack, bool pushReturn) {
 }
 
 bool callGlUseProgram(Stack* stack, bool pushReturn) {
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glUseProgram(%u)\n", program);
         if (glUseProgram != nullptr) {
@@ -2809,7 +2808,7 @@ bool callGlUseProgram(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsProgram(Stack* stack, bool pushReturn) {
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsProgram(%u)\n", program);
         if (glIsProgram != nullptr) {
@@ -2829,7 +2828,7 @@ bool callGlIsProgram(Stack* stack, bool pushReturn) {
 }
 
 bool callGlValidateProgram(Stack* stack, bool pushReturn) {
-    ProgramId program = stack->pop<ProgramId>();
+    uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glValidateProgram(%u)\n", program);
         if (glValidateProgram != nullptr) {
@@ -2995,7 +2994,7 @@ bool callGlHint(Stack* stack, bool pushReturn) {
 }
 
 bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
-    RenderbufferId renderbuffer = stack->pop<RenderbufferId>();
+    uint32_t renderbuffer = stack->pop<uint32_t>();
     RenderbufferTarget renderbuffer_target = stack->pop<RenderbufferTarget>();
     FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
     FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
@@ -3017,7 +3016,7 @@ bool callGlFramebufferRenderbuffer(Stack* stack, bool pushReturn) {
 
 bool callGlFramebufferTexture2D(Stack* stack, bool pushReturn) {
     int32_t level = stack->pop<int32_t>();
-    TextureId texture = stack->pop<TextureId>();
+    uint32_t texture = stack->pop<uint32_t>();
     TextureImageTarget texture_target = stack->pop<TextureImageTarget>();
     FramebufferAttachment framebuffer_attachment = stack->pop<FramebufferAttachment>();
     FramebufferTarget framebuffer_target = stack->pop<FramebufferTarget>();
@@ -3060,7 +3059,7 @@ bool callGlGetFramebufferAttachmentParameteriv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDrawElements(Stack* stack, bool pushReturn) {
-    IndicesPointer indices = stack->pop<IndicesPointer>();
+    void* indices = stack->pop<void*>();
     IndicesType indices_type = stack->pop<IndicesType>();
     int32_t element_count = stack->pop<int32_t>();
     DrawMode draw_mode = stack->pop<DrawMode>();
@@ -3184,7 +3183,7 @@ bool callGlGetString(Stack* stack, bool pushReturn) {
         GAPID_INFO("glGetString(%u)\n", param);
         if (glGetString != nullptr) {
             char* return_value = glGetString(param);
-            GAPID_INFO("Returned: %s\n", return_value);
+            GAPID_INFO("Returned: %p\n", return_value);
             if (pushReturn) {
                 stack->push<char*>(return_value);
             }
@@ -3290,7 +3289,7 @@ bool callGlUnmapBuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlInvalidateFramebuffer(Stack* stack, bool pushReturn) {
-    const FramebufferAttachment* attachments = stack->pop<const FramebufferAttachment*>();
+    FramebufferAttachment* attachments = stack->pop<FramebufferAttachment*>();
     int32_t count = stack->pop<int32_t>();
     FramebufferTarget target = stack->pop<FramebufferTarget>();
     if (stack->isValid()) {
@@ -3356,7 +3355,7 @@ bool callGlBlitFramebuffer(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenQueries(Stack* stack, bool pushReturn) {
-    QueryId* queries = stack->pop<QueryId*>();
+    uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenQueries(%d, %p)\n", count, queries);
@@ -3373,7 +3372,7 @@ bool callGlGenQueries(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBeginQuery(Stack* stack, bool pushReturn) {
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBeginQuery(%u, %u)\n", target, query);
@@ -3406,7 +3405,7 @@ bool callGlEndQuery(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
-    const QueryId* queries = stack->pop<const QueryId*>();
+    uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteQueries(%d, %p)\n", count, queries);
@@ -3423,7 +3422,7 @@ bool callGlDeleteQueries(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsQuery(Stack* stack, bool pushReturn) {
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsQuery(%u)\n", query);
         if (glIsQuery != nullptr) {
@@ -3463,7 +3462,7 @@ bool callGlGetQueryiv(Stack* stack, bool pushReturn) {
 bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectuiv(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuiv != nullptr) {
@@ -3479,7 +3478,7 @@ bool callGlGetQueryObjectuiv(Stack* stack, bool pushReturn) {
 }
 
 bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
-    QueryId* queries = stack->pop<QueryId*>();
+    uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGenQueriesEXT(%d, %p)\n", count, queries);
@@ -3496,7 +3495,7 @@ bool callGlGenQueriesEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlBeginQueryEXT(Stack* stack, bool pushReturn) {
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     QueryTarget target = stack->pop<QueryTarget>();
     if (stack->isValid()) {
         GAPID_INFO("glBeginQueryEXT(%u, %u)\n", target, query);
@@ -3529,7 +3528,7 @@ bool callGlEndQueryEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
-    const QueryId* queries = stack->pop<const QueryId*>();
+    uint32_t* queries = stack->pop<uint32_t*>();
     int32_t count = stack->pop<int32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glDeleteQueriesEXT(%d, %p)\n", count, queries);
@@ -3546,7 +3545,7 @@ bool callGlDeleteQueriesEXT(Stack* stack, bool pushReturn) {
 }
 
 bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glIsQueryEXT(%u)\n", query);
         if (glIsQueryEXT != nullptr) {
@@ -3567,7 +3566,7 @@ bool callGlIsQueryEXT(Stack* stack, bool pushReturn) {
 
 bool callGlQueryCounterEXT(Stack* stack, bool pushReturn) {
     QueryTarget target = stack->pop<QueryTarget>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glQueryCounterEXT(%u, %u)\n", query, target);
         if (glQueryCounterEXT != nullptr) {
@@ -3603,7 +3602,7 @@ bool callGlGetQueryivEXT(Stack* stack, bool pushReturn) {
 bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
     int32_t* value = stack->pop<int32_t*>();
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectivEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectivEXT != nullptr) {
@@ -3621,7 +3620,7 @@ bool callGlGetQueryObjectivEXT(Stack* stack, bool pushReturn) {
 bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
     uint32_t* value = stack->pop<uint32_t*>();
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectuivEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectuivEXT != nullptr) {
@@ -3639,7 +3638,7 @@ bool callGlGetQueryObjectuivEXT(Stack* stack, bool pushReturn) {
 bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
     int64_t* value = stack->pop<int64_t*>();
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjecti64vEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjecti64vEXT != nullptr) {
@@ -3657,7 +3656,7 @@ bool callGlGetQueryObjecti64vEXT(Stack* stack, bool pushReturn) {
 bool callGlGetQueryObjectui64vEXT(Stack* stack, bool pushReturn) {
     uint64_t* value = stack->pop<uint64_t*>();
     QueryObjectParameter parameter = stack->pop<QueryObjectParameter>();
-    QueryId query = stack->pop<QueryId>();
+    uint32_t query = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetQueryObjectui64vEXT(%u, %u, %p)\n", query, parameter, value);
         if (glGetQueryObjectui64vEXT != nullptr) {

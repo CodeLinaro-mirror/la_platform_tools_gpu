@@ -20,9 +20,6 @@ func implicit(lhs semantic.Type, rhs semantic.Type) bool {
 	if lhs == semantic.AnyType {
 		return true
 	}
-	if slice, isslice := lhs.(*semantic.Slice); isslice && slice.To == semantic.CharType && rhs == semantic.StringType {
-		return true
-	}
 	return false
 }
 
@@ -38,11 +35,6 @@ func assignable(lhs semantic.Type, rhs semantic.Type) bool {
 	}
 	if implicit(rhs, lhs) {
 		return true
-	}
-	toPointer, toIsPointer := baseType(lhs).(*semantic.Pointer)
-	fromSlice, fromIsSlice := baseType(rhs).(*semantic.Slice)
-	if fromIsSlice && toIsPointer {
-		return equal(fromSlice.To, toPointer.To)
 	}
 	return false
 }
@@ -119,8 +111,19 @@ func castable(from semantic.Type, to semantic.Type) bool {
 	}
 	fromPointer, fromIsPointer := fromBase.(*semantic.Pointer)
 	toPointer, toIsPointer := toBase.(*semantic.Pointer)
-	if fromIsPointer && toIsPointer {
+	if fromIsPointer && toIsPointer { // A* -> B*
 		return fromPointer.To == semantic.VoidType || toPointer.To == semantic.VoidType
+	}
+	fromSlice, fromIsSlice := baseType(from).(*semantic.Slice)
+	toSlice, toIsSlice := baseType(to).(*semantic.Slice)
+	if fromIsSlice && toIsPointer && fromSlice.To == toPointer.To { // T[] -> T*
+		return equal(fromSlice.To, toPointer.To)
+	}
+	if fromIsSlice && fromSlice.To == semantic.CharType && to == semantic.StringType { // char[] -> string
+		return true
+	}
+	if toIsSlice && toSlice.To == semantic.CharType && from == semantic.StringType { // string -> char[]
+		return true
 	}
 	return false
 }

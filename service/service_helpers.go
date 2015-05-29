@@ -196,52 +196,64 @@ func (h TimingInfoId) Valid() bool {
 }
 
 func (a ApiIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiIdSlice", len(a))
+	fmt.Fprintf(f, "[%d]ApiIdˢ", len(a))
 }
 func (a ApiSchemaArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ApiSchemaSlice", len(a))
+	fmt.Fprintf(f, "[%d]ApiSchemaˢ", len(a))
 }
 func (a AtomGroupArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomGroupSlice", len(a))
+	fmt.Fprintf(f, "[%d]AtomGroupˢ", len(a))
 }
 func (a AtomInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomInfoSlice", len(a))
+	fmt.Fprintf(f, "[%d]AtomInfoˢ", len(a))
 }
 func (a AtomRangeTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomRangeTimerSlice", len(a))
+	fmt.Fprintf(f, "[%d]AtomRangeTimerˢ", len(a))
 }
 func (a AtomTimerArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]AtomTimerSlice", len(a))
+	fmt.Fprintf(f, "[%d]AtomTimerˢ", len(a))
 }
 func (a CaptureIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]CaptureIdSlice", len(a))
+	fmt.Fprintf(f, "[%d]CaptureIdˢ", len(a))
 }
 func (a ClassInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ClassInfoPointerSlice", len(a))
+	fmt.Fprintf(f, "[%d]ClassInfoˢ", len(a))
+}
+func (a ClassInfoPtrArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]ClassInfoᵖˢ", len(a))
 }
 func (a DeviceIdArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]DeviceIdSlice", len(a))
+	fmt.Fprintf(f, "[%d]DeviceIdˢ", len(a))
 }
 func (a EnumEntryArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumEntrySlice", len(a))
+	fmt.Fprintf(f, "[%d]EnumEntryˢ", len(a))
 }
 func (a EnumInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]EnumInfoPointerSlice", len(a))
+	fmt.Fprintf(f, "[%d]EnumInfoˢ", len(a))
+}
+func (a EnumInfoPtrArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]EnumInfoᵖˢ", len(a))
 }
 func (a FieldInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]FieldInfoPointerSlice", len(a))
+	fmt.Fprintf(f, "[%d]FieldInfoˢ", len(a))
+}
+func (a FieldInfoPtrArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]FieldInfoᵖˢ", len(a))
 }
 func (a MemoryRangeArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]MemoryRangeSlice", len(a))
+	fmt.Fprintf(f, "[%d]MemoryRangeˢ", len(a))
 }
 func (a ParameterInfoArray) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]ParameterInfoSlice", len(a))
+	fmt.Fprintf(f, "[%d]ParameterInfoˢ", len(a))
+}
+func (a TypeInfoArray) Format(f fmt.State, c rune) {
+	fmt.Fprintf(f, "[%d]TypeInfoˢ", len(a))
 }
 func (a U64Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U64Slice", len(a))
+	fmt.Fprintf(f, "[%d]U64ˢ", len(a))
 }
 func (a U8Array) Format(f fmt.State, c rune) {
-	fmt.Fprintf(f, "[%d]U8Slice", len(a))
+	fmt.Fprintf(f, "[%d]U8ˢ", len(a))
 }
 
 func (i ImageFormat) String() string {
@@ -646,7 +658,7 @@ func CreateEnumInfo(
 	Name string,
 	Kind TypeKind,
 	Entries EnumEntryArray,
-	Extends EnumInfoArray,
+	Extends EnumInfoPtrArray,
 ) *EnumInfo {
 	return &EnumInfo{
 		Name:    Name,
@@ -656,10 +668,10 @@ func CreateEnumInfo(
 	}
 }
 
-func (c *EnumInfo) GetName() string            { return c.Name }
-func (c *EnumInfo) GetKind() TypeKind          { return c.Kind }
-func (c *EnumInfo) GetEntries() EnumEntryArray { return c.Entries }
-func (c *EnumInfo) GetExtends() EnumInfoArray  { return c.Extends }
+func (c *EnumInfo) GetName() string              { return c.Name }
+func (c *EnumInfo) GetKind() TypeKind            { return c.Kind }
+func (c *EnumInfo) GetEntries() EnumEntryArray   { return c.Entries }
+func (c *EnumInfo) GetExtends() EnumInfoPtrArray { return c.Extends }
 
 func CreateEnumEntry(
 	Name string,
@@ -677,7 +689,7 @@ func (c *EnumEntry) GetValue() uint32 { return c.Value }
 func CreateStructInfo(
 	Name string,
 	Kind TypeKind,
-	Fields FieldInfoArray,
+	Fields FieldInfoPtrArray,
 ) *StructInfo {
 	return &StructInfo{
 		Name:   Name,
@@ -686,15 +698,15 @@ func CreateStructInfo(
 	}
 }
 
-func (c *StructInfo) GetName() string           { return c.Name }
-func (c *StructInfo) GetKind() TypeKind         { return c.Kind }
-func (c *StructInfo) GetFields() FieldInfoArray { return c.Fields }
+func (c *StructInfo) GetName() string              { return c.Name }
+func (c *StructInfo) GetKind() TypeKind            { return c.Kind }
+func (c *StructInfo) GetFields() FieldInfoPtrArray { return c.Fields }
 
 func CreateClassInfo(
 	Name string,
 	Kind TypeKind,
-	Fields FieldInfoArray,
-	Extends ClassInfoArray,
+	Fields FieldInfoPtrArray,
+	Extends ClassInfoPtrArray,
 ) *ClassInfo {
 	return &ClassInfo{
 		Name:    Name,
@@ -704,10 +716,10 @@ func CreateClassInfo(
 	}
 }
 
-func (c *ClassInfo) GetName() string            { return c.Name }
-func (c *ClassInfo) GetKind() TypeKind          { return c.Kind }
-func (c *ClassInfo) GetFields() FieldInfoArray  { return c.Fields }
-func (c *ClassInfo) GetExtends() ClassInfoArray { return c.Extends }
+func (c *ClassInfo) GetName() string               { return c.Name }
+func (c *ClassInfo) GetKind() TypeKind             { return c.Kind }
+func (c *ClassInfo) GetFields() FieldInfoPtrArray  { return c.Fields }
+func (c *ClassInfo) GetExtends() ClassInfoPtrArray { return c.Extends }
 
 func CreateFieldInfo(
 	Name string,
