@@ -53,9 +53,9 @@ func (f *functions) JavaStorage(t schema.Type) string {
 		}
 		return name
 	case *schema.Struct:
-		panic(fmt.Errorf("Struct types not handled"))
+		return t.Name
 	case *schema.Interface:
-		panic(fmt.Errorf("Interface types not handled"))
+		return t.Name
 	case *schema.Pointer:
 		return f.JavaStorage(t.Type)
 	case *schema.Array:
@@ -80,7 +80,7 @@ func (f *functions) JavaClass(name string) string {
 		return "Commands." + classPrefix + name[4:] + ".Call"
 	}
 	if strings.HasPrefix(name, "result") {
-		return "Commands." + classPrefix + name[6:] + "Result"
+		return "Commands." + classPrefix + name[6:] + ".Result"
 	}
 	return classPrefix + name
 }
@@ -89,12 +89,6 @@ func (f *functions) JavaClass(name string) string {
 func (g *Generator) JavaFile(file *File) ([]byte, error) {
 	g.f.prefix = "Java."
 	f := *file
-	if f.MemberPrefix == "" {
-		f.MemberPrefix = "m"
-	}
-	if f.Indent == "" {
-		f.Indent = "    "
-	}
 	b := &bytes.Buffer{}
 	if err := g.f.execute(g.f.prefix+"File", b, &f); err != nil {
 		return nil, err

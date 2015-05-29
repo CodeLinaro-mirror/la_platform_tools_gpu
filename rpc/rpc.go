@@ -18,6 +18,11 @@
 // merge in-flight requests onto a single stream.
 package rpc
 
+// binary: java.source = base/rpclib/src/main/java
+// binary: java.package = com.android.tools.rpclib.rpccore
+// binary: java.class_prefix = Rpc
+// binary: java.member_prefix = m
+
 import (
 	"fmt"
 

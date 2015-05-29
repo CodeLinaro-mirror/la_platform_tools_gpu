@@ -240,7 +240,7 @@ func (v *{{$name}}) Parse(s string) error {
 {{end}}{{end}}
 
 {{define "Go.File"}}
-{{Header $.Generated}}
+{{$.Copyright}}
 
 package {{.Package}}
 

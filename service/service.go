@@ -16,3 +16,8 @@
 //
 // It is not the actual implementation of the service functionality.
 package service
+
+// binary: java.source = adt/idea/android/src
+// binary: java.package = com.android.tools.idea.editors.gfxtrace.rpc
+// binary: java.indent = "  "
+// binary: java.member_prefix = my
