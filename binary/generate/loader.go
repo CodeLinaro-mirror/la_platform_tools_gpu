@@ -23,6 +23,7 @@ import (
 	"go/parser"
 	"go/token"
 	"path/filepath"
+	"regexp"
 
 	"golang.org/x/tools/go/gcimporter"
 	"golang.org/x/tools/go/types"
@@ -30,8 +31,10 @@ import (
 
 // Source holds a file a filename content pair as consumed by go/parser.ParseFile.
 type Source struct {
-	Filename string      // The filename for this source
-	Content  interface{} // The content of this source, see ParseFiles for details.
+	Filename   string            // The filename for this source
+	Content    interface{}       // The content of this source, see ParseFiles for details.
+	AST        *ast.File         // The parsed syntax tree
+	Directives map[string]string // the set of comment overrides
 }
 
 // Module represents a resolvable module. Under normal go layout conditions a
@@ -102,7 +105,7 @@ func (l *Loader) ScanFile(filename, source string) {
 	dir := l.GetDir(filename)
 	dir.Scan = true
 	dir.loaded = true
-	dir.Module.Sources = append(dir.Module.Sources, Source{filename, source})
+	dir.Module.Sources = append(dir.Module.Sources, Source{Filename: filename, Content: source})
 }
 
 // ScanPackage marks the directory specified by the import path as needing to be
@@ -148,7 +151,7 @@ func (l *Loader) process(dir *Directory) error {
 			return err
 		}
 		l.config.Packages[dir.ImportPath] = dir.Module.Types
-		l.scan(dir, &dir.Module)
+		l.scan(dir, &dir.Module, false)
 	}
 	if dir.Scan && !dir.Test.processed && len(dir.Test.Sources) > 0 {
 		dir.Test.processed = true
@@ -159,8 +162,7 @@ func (l *Loader) process(dir *Directory) error {
 		if err := l.typeCheck(dir, &dir.Test); err != nil {
 			return err
 		}
-		l.scan(dir, &dir.Test)
-		dir.Test.Output.IsTest = true
+		l.scan(dir, &dir.Test, true)
 	}
 	return nil
 }
@@ -175,22 +177,39 @@ func (l *Loader) load(dir *Directory) {
 	dir.ImportPath = imp.ImportPath
 	dir.Dir = imp.Dir
 	for _, filename := range imp.GoFiles {
-		dir.Module.Sources = append(dir.Module.Sources, Source{filepath.Join(dir.Dir, filename), nil})
+		dir.Module.Sources = append(dir.Module.Sources, Source{Filename: filepath.Join(dir.Dir, filename)})
 	}
 	if dir.Scan {
 		for _, filename := range imp.TestGoFiles {
-			dir.Test.Sources = append(dir.Test.Sources, Source{filepath.Join(dir.Dir, filename), nil})
+			dir.Test.Sources = append(dir.Test.Sources, Source{Filename: filepath.Join(dir.Dir, filename)})
 		}
 	}
 }
 
+var directive = regexp.MustCompile(`binary: *([^= ]+) *(= *(.+))? *`)
+
 func (l *Loader) parse(module *Module) error {
-	for _, src := range module.Sources {
-		file, err := parser.ParseFile(l.FileSet, src.Filename, src.Content, 0)
+	for i := range module.Sources {
+		src := &module.Sources[i]
+		file, err := parser.ParseFile(l.FileSet, src.Filename, src.Content, parser.ParseComments)
 		if err != nil {
 			return err
 		}
+		src.AST = file
 		module.Files = append(module.Files, file)
+		src.Directives = make(map[string]string)
+		for _, group := range file.Comments {
+			for _, comment := range group.List {
+				if matches := directive.FindStringSubmatch(comment.Text); len(matches) >= 1 {
+					k := matches[1]
+					v := matches[3]
+					if matches[2] == "" {
+						v = "true"
+					}
+					src.Directives[k] = v
+				}
+			}
+		}
 	}
 	return nil
 }
@@ -201,47 +220,46 @@ func (l *Loader) typeCheck(dir *Directory, module *Module) error {
 	return err
 }
 
-func (l *Loader) scan(dir *Directory, module *Module) error {
+func (l *Loader) scan(dir *Directory, module *Module, isTest bool) error {
 	module.Output = &File{
-		Package: dir.Name,
-		Path:    dir.Dir,
-		Import:  dir.ImportPath,
-		Imports: make(map[string]struct{}),
+		Package:    dir.Name,
+		Path:       dir.Dir,
+		Import:     dir.ImportPath,
+		Imports:    make(map[string]struct{}),
+		Directives: make(map[string]string),
+		IsTest:     isTest,
 	}
-	for _, name := range filterStructs(module.Types) {
-		filename := l.FileSet.File(name.Pos()).Name()
-		found := false
-		for _, f := range module.Sources {
-			if f.Filename == filename {
-				found = true
+	scope := module.Types.Scope()
+	for _, name := range scope.Names() {
+		obj := scope.Lookup(name)
+		f := l.FileSet.File(obj.Pos())
+		filename := f.Name()
+		var source *Source
+		for i := range module.Sources {
+			if module.Sources[i].Filename == filename {
+				source = &module.Sources[i]
 				break
 			}
 		}
-		if !found {
+		if source == nil {
 			continue
 		}
-		s := FromTypename(module.Types, name, module.Output.Imports)
-		if s != nil {
-			module.Output.Structs = append(module.Output.Structs, s)
-		}
-	}
-	return nil
-}
-
-func filterStructs(pkg *types.Package) []*types.TypeName {
-	result := []*types.TypeName{}
-	scope := pkg.Scope()
-	for _, name := range scope.Names() {
-		obj := scope.Lookup(name)
 		if n, ok := obj.(*types.TypeName); ok {
 			if t, ok := n.Type().(*types.Named); ok {
 				if _, ok := t.Underlying().(*types.Struct); ok {
-					result = append(result, n)
+					if s := FromTypename(module.Types, n, module.Output.Imports); s != nil {
+						module.Output.Structs = append(module.Output.Structs, s)
+					}
 				}
 			}
 		}
 	}
-	return result
+	for _, s := range module.Sources {
+		for k, v := range s.Directives {
+			module.Output.Directives[k] = v
+		}
+	}
+	return nil
 }
 
 func (l *Loader) importer(pkgs map[string]*types.Package, importPath string) (*types.Package, error) {
