@@ -29,6 +29,8 @@ func (g *Generator) GoFile(file *File) ([]byte, error) {
 		g.f.schema = "schema."
 	}
 	b := &bytes.Buffer{}
+	g.f.File = file
+	defer func() { g.f.File = nil }()
 	if err := g.f.execute(g.f.prefix+"File", b, file); err != nil {
 		return nil, err
 	}

@@ -50,13 +50,14 @@ type Style struct {
 type Imports map[string]struct{}
 
 type File struct {
-	Generated string
-	Package   string
-	Import    string
-	IsTest    bool
-	Path      string
-	Structs   []*Struct
-	Imports   Imports
+	Generated  string
+	Package    string
+	Import     string
+	IsTest     bool
+	Path       string
+	Directives map[string]string
+	Structs    []*Struct
+	Imports    Imports
 	Style
 }
 
