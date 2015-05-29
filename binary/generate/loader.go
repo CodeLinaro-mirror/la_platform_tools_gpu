@@ -24,7 +24,11 @@ import (
 	"go/token"
 	"path/filepath"
 	"regexp"
+	"strings"
 
+	"android.googlesource.com/platform/tools/gpu/binary/schema"
+
+	"golang.org/x/tools/go/exact"
 	"golang.org/x/tools/go/gcimporter"
 	"golang.org/x/tools/go/types"
 )
@@ -253,6 +257,15 @@ func (l *Loader) scan(dir *Directory, module *Module, isTest bool) error {
 				}
 			}
 		}
+		if c, ok := obj.(*types.Const); ok && c.Exported() {
+			if t, ok := c.Type().(*types.Named); ok {
+				if t.Obj().Pkg() == obj.Pkg() {
+					if _, ok := c.Type().Underlying().(*types.Basic); ok {
+						l.addConst(module, source, c)
+					}
+				}
+			}
+		}
 	}
 	for _, s := range module.Sources {
 		for k, v := range s.Directives {
@@ -260,6 +273,65 @@ func (l *Loader) scan(dir *Directory, module *Module, isTest bool) error {
 		}
 	}
 	return nil
+}
+
+func (l *Loader) addConst(module *Module, source *Source, c *types.Const) {
+	t := fromType(module.Types, c.Type(), "", module.Output.Imports)
+	name := c.Name()
+	name = strings.TrimPrefix(name, t.String())
+	name = strings.Trim(name, "_")
+	if p, ok := t.(*schema.Primitive); ok {
+		switch p.Method {
+		case schema.Int8:
+			v, _ := exact.Int64Val(c.Val())
+			schema.Int8Constant{
+				Name:  name,
+				Value: int8(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Uint8:
+			v, _ := exact.Uint64Val(c.Val())
+			schema.Uint8Constant{
+				Name:  name,
+				Value: uint8(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Int16:
+			v, _ := exact.Int64Val(c.Val())
+			schema.Int16Constant{
+				Name:  name,
+				Value: int16(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Uint16:
+			v, _ := exact.Uint64Val(c.Val())
+			schema.Uint16Constant{
+				Name:  name,
+				Value: uint16(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Int32:
+			v, _ := exact.Int64Val(c.Val())
+			schema.Int32Constant{
+				Name:  name,
+				Value: int32(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Uint32:
+			v, _ := exact.Uint64Val(c.Val())
+			schema.Uint32Constant{
+				Name:  name,
+				Value: uint32(v),
+			}.Add(&module.Output.Constants, t)
+		case schema.Int64:
+			v, _ := exact.Int64Val(c.Val())
+			schema.Int64Constant{
+				Name:  name,
+				Value: v,
+			}.Add(&module.Output.Constants, t)
+		case schema.Uint64:
+			v, _ := exact.Uint64Val(c.Val())
+			schema.Uint64Constant{
+				Name:  name,
+				Value: v,
+			}.Add(&module.Output.Constants, t)
+		}
+	}
 }
 
 func (l *Loader) importer(pkgs map[string]*types.Package, importPath string) (*types.Package, error) {
