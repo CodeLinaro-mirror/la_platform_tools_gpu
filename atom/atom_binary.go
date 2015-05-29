@@ -6,6 +6,8 @@
 package atom
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -392,4 +394,76 @@ var schemaResource = &schema.Class{
 		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
+}
+
+const _Flags_name = "DrawCallEndOfFrame"
+
+var _Flags_map = map[Flags]string{
+	1: _Flags_name[0:8],
+	2: _Flags_name[8:18],
+}
+
+func (v Flags) String() string {
+	if s, ok := _Flags_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Flags(%v)", v)
+}
+
+func (v *Flags) Parse(s string) error {
+	for k, t := range _Flags_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Flags", s)
+}
+
+const _ID_name = "NoID"
+
+var _ID_map = map[ID]string{
+	18446744073709551615: _ID_name[0:4],
+}
+
+func (v ID) String() string {
+	if s, ok := _ID_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ID(%v)", v)
+}
+
+func (v *ID) Parse(s string) error {
+	for k, t := range _ID_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ID", s)
+}
+
+const _TypeID_name = "ResourceObservationEos"
+
+var _TypeID_map = map[TypeID]string{
+	65533: _TypeID_name[0:8],
+	65534: _TypeID_name[8:19],
+	65535: _TypeID_name[19:22],
+}
+
+func (v TypeID) String() string {
+	if s, ok := _TypeID_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TypeID(%v)", v)
+}
+
+func (v *TypeID) Parse(s string) error {
+	for k, t := range _TypeID_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TypeID", s)
 }

@@ -6,6 +6,8 @@
 package protocol
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -211,4 +213,89 @@ var schemaPayload = &schema.Class{
 		schema.Field{Declared: "Resources", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "ResourceInfo"}}},
 		schema.Field{Declared: "Opcodes", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
+}
+
+const _ConnectionType_name = "DeviceInfoReplay"
+
+var _ConnectionType_map = map[ConnectionType]string{
+	0: _ConnectionType_name[0:10],
+	1: _ConnectionType_name[10:16],
+}
+
+func (v ConnectionType) String() string {
+	if s, ok := _ConnectionType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ConnectionType(%v)", v)
+}
+
+func (v *ConnectionType) Parse(s string) error {
+	for k, t := range _ConnectionType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ConnectionType", s)
+}
+
+const _MessageType_name = "GetPost"
+
+var _MessageType_map = map[MessageType]string{
+	0: _MessageType_name[0:3],
+	1: _MessageType_name[3:7],
+}
+
+func (v MessageType) String() string {
+	if s, ok := _MessageType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("MessageType(%v)", v)
+}
+
+func (v *MessageType) Parse(s string) error {
+	for k, t := range _MessageType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in MessageType", s)
+}
+
+const _Type_name = "BoolInt8Int16Int32Int64Uint8Uint16Uint32Uint64FloatDoubleAbsolutePointerConstantPointerVolatilePointerVoid"
+
+var _Type_map = map[Type]string{
+	0:          _Type_name[0:4],
+	1:          _Type_name[4:8],
+	2:          _Type_name[8:13],
+	3:          _Type_name[13:18],
+	4:          _Type_name[18:23],
+	5:          _Type_name[23:28],
+	6:          _Type_name[28:34],
+	7:          _Type_name[34:40],
+	8:          _Type_name[40:46],
+	9:          _Type_name[46:51],
+	10:         _Type_name[51:57],
+	11:         _Type_name[57:72],
+	12:         _Type_name[72:87],
+	13:         _Type_name[87:102],
+	4294967295: _Type_name[102:106],
+}
+
+func (v Type) String() string {
+	if s, ok := _Type_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Type(%v)", v)
+}
+
+func (v *Type) Parse(s string) error {
+	for k, t := range _Type_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Type", s)
 }

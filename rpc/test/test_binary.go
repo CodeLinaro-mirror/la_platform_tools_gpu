@@ -6,6 +6,8 @@
 package test
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -1500,4 +1502,29 @@ var schemaresultUseResource = &schema.Class{
 	TypeID: binaryIDresultUseResource,
 	Name:   "resultUseResource",
 	Fields: []schema.Field{},
+}
+
+const _Enum_name = "OneTwoThree"
+
+var _Enum_map = map[Enum]string{
+	1: _Enum_name[0:3],
+	2: _Enum_name[3:6],
+	3: _Enum_name[6:11],
+}
+
+func (v Enum) String() string {
+	if s, ok := _Enum_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Enum(%v)", v)
+}
+
+func (v *Enum) Parse(s string) error {
+	for k, t := range _Enum_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Enum", s)
 }

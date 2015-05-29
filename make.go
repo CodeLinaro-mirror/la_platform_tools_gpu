@@ -51,7 +51,6 @@ var (
 		Rpcapi   Entity
 		Apic     Entity
 		Codergen Entity
-		Stringer Entity
 	}
 
 	Apps struct {
@@ -68,7 +67,6 @@ func init() {
 		Tools.Rpcapi = GoInstall(GPURoot + "/rpc/rpcapi")
 		Tools.Apic = GoInstall(GPURoot + "/api/apic")
 		Tools.Codergen = GoInstall(GPURoot + "/binary/codergen")
-		Tools.Stringer = GoInstall("golang.org/x/tools/cmd/stringer")
 		List("tools").DependsStruct(Tools)
 		// All the embed rules
 		embedRPC := Embed(Path(gpusrc, "rpc/generate"))
@@ -104,15 +102,12 @@ func init() {
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
 		Codergen("codergen", "--go", GPURoot+"/...")
-		// Enum string rules
-		Stringer(Path(gpusrc, "adb"), "DeviceState")
-		Stringer(Path(gpusrc, "log"), "Kind")
 		// The java code generation rules
 		Codergen("javacoders", "--java", javacore, GPURoot+"/rpc/...")
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
 		List("java").DependsOn("javacoders", "javarpc")
 		//
-		List("code").DependsOn("embed", "rpcapi", "apic", "codergen", "stringer")
+		List("code").DependsOn("embed", "rpcapi", "apic", "codergen")
 		// The native code rules
 		Apps.Gapir = Virtual("gapir")
 		cctargets := build.HostOS
@@ -193,13 +188,4 @@ func Apic(path string, api string, template string) {
 
 func Codergen(name string, args ...string) {
 	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic")
-}
-
-func Stringer(path, name string) {
-	r := Paths.Root
-	defer func() { Paths.Root = r }()
-	Paths.Root = path
-	e := Virtual("")
-	Command(Tools.Stringer, "--type", name).Creates(e)
-	List("stringer").DependsOn(e)
 }

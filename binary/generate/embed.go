@@ -228,6 +228,30 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 {{define "Go.SchemaStream"}}&{{SchemaPrefix}}Stream{Alias: "{{.Alias}}", ValueType: {{Schema .ValueType}} }{{end}}
 {{define "Go.SchemaMap"}}&{{SchemaPrefix}}Map{Alias: "{{.Alias}}", KeyType: {{Schema .KeyType}}, ValueType: {{Schema .ValueType}} }{{end}}
 
+{{define "Go.Constants"}}{{if Directive (print .Type ".String") true}}{{$name := print .Type}}{{$c := Counter "Go.Constants"}}
+const _{{$name}}_name = "{{range .Values}}{{.Name}}{{end}}"
+var _{{$name}}_map = map[{{.Type}}]string{ {{$c.Set 0}}{{range .Values}}
+	{{.Value}}: _{{$name}}_name[{{$c}}:{{$c.AddLen .Name}}{{$c}}],{{end}}
+}
+
+func (v {{$name}}) String() string {
+	if s, ok := _{{$name}}_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("{{$name}}(%v)", v)
+}
+
+func (v *{{$name}}) Parse(s string) error {
+	for k, t := range _{{$name}}_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in {{$name}}", s)
+}
+{{end}}{{end}}
+
 {{define "Go.File"}}
 {{Header $.Generated}}
 
@@ -250,6 +274,8 @@ var (
 {{range .Structs}} {{template "Go.Class" .}}
 {{end}}
 
+{{range .Constants}}{{template "Go.Constants" .}}
+{{end}}
 {{end}}
 `
 const java_tmpl_file = `java.tmpl`

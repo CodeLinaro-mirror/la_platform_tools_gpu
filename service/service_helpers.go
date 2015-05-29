@@ -256,105 +256,33 @@ func (a U8Array) Format(f fmt.State, c rune) {
 	fmt.Fprintf(f, "[%d]U8ˢ", len(a))
 }
 
-func (i ImageFormat) String() string {
-	switch i {
-	case ImageFormatRGBA8:
-		return "ImageFormat.RGBA8"
-	case ImageFormatFloat32:
-		return "ImageFormat.Float32"
-	default:
-		return fmt.Sprintf("ImageFormat: Unknown value %d", i)
-	}
-}
-func (i ImageFormat) IsRGBA8() bool   { return i == ImageFormatRGBA8 }
-func (i ImageFormat) IsFloat32() bool { return i == ImageFormatFloat32 }
-func (i TimingMask) String() string {
-	switch i {
-	case TimingMaskTimingPerCommand:
-		return "TimingMask.TimingPerCommand"
-	case TimingMaskTimingPerDrawCall:
-		return "TimingMask.TimingPerDrawCall"
-	case TimingMaskTimingPerFrame:
-		return "TimingMask.TimingPerFrame"
-	default:
-		return fmt.Sprintf("TimingMask: Unknown value %d", i)
-	}
-}
+func (i ImageFormat) IsRGBA8() bool            { return i == ImageFormatRGBA8 }
+func (i ImageFormat) IsFloat32() bool          { return i == ImageFormatFloat32 }
 func (i TimingMask) IsTimingPerCommand() bool  { return i == TimingMaskTimingPerCommand }
 func (i TimingMask) IsTimingPerDrawCall() bool { return i == TimingMaskTimingPerDrawCall }
 func (i TimingMask) IsTimingPerFrame() bool    { return i == TimingMaskTimingPerFrame }
-func (i TypeKind) String() string {
-	switch i {
-	case TypeKindBool:
-		return "TypeKind.Bool"
-	case TypeKindS8:
-		return "TypeKind.S8"
-	case TypeKindU8:
-		return "TypeKind.U8"
-	case TypeKindS16:
-		return "TypeKind.S16"
-	case TypeKindU16:
-		return "TypeKind.U16"
-	case TypeKindS32:
-		return "TypeKind.S32"
-	case TypeKindU32:
-		return "TypeKind.U32"
-	case TypeKindF32:
-		return "TypeKind.F32"
-	case TypeKindS64:
-		return "TypeKind.S64"
-	case TypeKindU64:
-		return "TypeKind.U64"
-	case TypeKindF64:
-		return "TypeKind.F64"
-	case TypeKindString:
-		return "TypeKind.String"
-	case TypeKindEnum:
-		return "TypeKind.Enum"
-	case TypeKindStruct:
-		return "TypeKind.Struct"
-	case TypeKindClass:
-		return "TypeKind.Class"
-	case TypeKindArray:
-		return "TypeKind.Array"
-	case TypeKindStaticArray:
-		return "TypeKind.StaticArray"
-	case TypeKindMap:
-		return "TypeKind.Map"
-	case TypeKindPointer:
-		return "TypeKind.Pointer"
-	case TypeKindMemory:
-		return "TypeKind.Memory"
-	case TypeKindAny:
-		return "TypeKind.Any"
-	case TypeKindID:
-		return "TypeKind.ID"
-	default:
-		return fmt.Sprintf("TypeKind: Unknown value %d", i)
-	}
-}
-func (i TypeKind) IsBool() bool        { return i == TypeKindBool }
-func (i TypeKind) IsS8() bool          { return i == TypeKindS8 }
-func (i TypeKind) IsU8() bool          { return i == TypeKindU8 }
-func (i TypeKind) IsS16() bool         { return i == TypeKindS16 }
-func (i TypeKind) IsU16() bool         { return i == TypeKindU16 }
-func (i TypeKind) IsS32() bool         { return i == TypeKindS32 }
-func (i TypeKind) IsU32() bool         { return i == TypeKindU32 }
-func (i TypeKind) IsF32() bool         { return i == TypeKindF32 }
-func (i TypeKind) IsS64() bool         { return i == TypeKindS64 }
-func (i TypeKind) IsU64() bool         { return i == TypeKindU64 }
-func (i TypeKind) IsF64() bool         { return i == TypeKindF64 }
-func (i TypeKind) IsString() bool      { return i == TypeKindString }
-func (i TypeKind) IsEnum() bool        { return i == TypeKindEnum }
-func (i TypeKind) IsStruct() bool      { return i == TypeKindStruct }
-func (i TypeKind) IsClass() bool       { return i == TypeKindClass }
-func (i TypeKind) IsArray() bool       { return i == TypeKindArray }
-func (i TypeKind) IsStaticArray() bool { return i == TypeKindStaticArray }
-func (i TypeKind) IsMap() bool         { return i == TypeKindMap }
-func (i TypeKind) IsPointer() bool     { return i == TypeKindPointer }
-func (i TypeKind) IsMemory() bool      { return i == TypeKindMemory }
-func (i TypeKind) IsAny() bool         { return i == TypeKindAny }
-func (i TypeKind) IsID() bool          { return i == TypeKindID }
+func (i TypeKind) IsBool() bool                { return i == TypeKindBool }
+func (i TypeKind) IsS8() bool                  { return i == TypeKindS8 }
+func (i TypeKind) IsU8() bool                  { return i == TypeKindU8 }
+func (i TypeKind) IsS16() bool                 { return i == TypeKindS16 }
+func (i TypeKind) IsU16() bool                 { return i == TypeKindU16 }
+func (i TypeKind) IsS32() bool                 { return i == TypeKindS32 }
+func (i TypeKind) IsU32() bool                 { return i == TypeKindU32 }
+func (i TypeKind) IsF32() bool                 { return i == TypeKindF32 }
+func (i TypeKind) IsS64() bool                 { return i == TypeKindS64 }
+func (i TypeKind) IsU64() bool                 { return i == TypeKindU64 }
+func (i TypeKind) IsF64() bool                 { return i == TypeKindF64 }
+func (i TypeKind) IsString() bool              { return i == TypeKindString }
+func (i TypeKind) IsEnum() bool                { return i == TypeKindEnum }
+func (i TypeKind) IsStruct() bool              { return i == TypeKindStruct }
+func (i TypeKind) IsClass() bool               { return i == TypeKindClass }
+func (i TypeKind) IsArray() bool               { return i == TypeKindArray }
+func (i TypeKind) IsStaticArray() bool         { return i == TypeKindStaticArray }
+func (i TypeKind) IsMap() bool                 { return i == TypeKindMap }
+func (i TypeKind) IsPointer() bool             { return i == TypeKindPointer }
+func (i TypeKind) IsMemory() bool              { return i == TypeKindMemory }
+func (i TypeKind) IsAny() bool                 { return i == TypeKindAny }
+func (i TypeKind) IsID() bool                  { return i == TypeKindID }
 
 func CreateDevice(
 	Name string,

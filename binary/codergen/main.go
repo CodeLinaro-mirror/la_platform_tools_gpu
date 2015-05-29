@@ -136,7 +136,7 @@ func run() error {
 }
 
 func output(gen *generate.Generator, file *generate.File) error {
-	if len(file.Structs) == 0 {
+	if len(file.Structs) == 0 && len(file.Constants) == 0 {
 		return nil
 	}
 	if _, ignored := file.Directives["ignore"]; ignored {

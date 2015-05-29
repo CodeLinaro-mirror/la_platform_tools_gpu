@@ -6,6 +6,8 @@
 package gles
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
@@ -25749,4 +25751,2516 @@ var schemaWglSwapBuffers = &schema.Class{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
 	},
+}
+
+const _ArrayType_GLES_1_1_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAY"
+
+var _ArrayType_GLES_1_1_map = map[ArrayType_GLES_1_1]string{
+	32884: _ArrayType_GLES_1_1_name[0:15],
+	32885: _ArrayType_GLES_1_1_name[15:30],
+	32886: _ArrayType_GLES_1_1_name[30:44],
+	32888: _ArrayType_GLES_1_1_name[44:66],
+}
+
+func (v ArrayType_GLES_1_1) String() string {
+	if s, ok := _ArrayType_GLES_1_1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ArrayType_GLES_1_1(%v)", v)
+}
+
+func (v *ArrayType_GLES_1_1) Parse(s string) error {
+	for k, t := range _ArrayType_GLES_1_1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ArrayType_GLES_1_1", s)
+}
+
+const _ArrayType_name = "GL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_POINT_SIZE_ARRAY_OES"
+
+var _ArrayType_map = map[ArrayType]string{
+	32884: _ArrayType_name[0:15],
+	32885: _ArrayType_name[15:30],
+	32886: _ArrayType_name[30:44],
+	32888: _ArrayType_name[44:66],
+	35740: _ArrayType_name[66:89],
+}
+
+func (v ArrayType) String() string {
+	if s, ok := _ArrayType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ArrayType(%v)", v)
+}
+
+func (v *ArrayType) Parse(s string) error {
+	for k, t := range _ArrayType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ArrayType", s)
+}
+
+const _ArrayType_OES_point_size_array_name = "GL_POINT_SIZE_ARRAY_OES"
+
+var _ArrayType_OES_point_size_array_map = map[ArrayType_OES_point_size_array]string{
+	35740: _ArrayType_OES_point_size_array_name[0:23],
+}
+
+func (v ArrayType_OES_point_size_array) String() string {
+	if s, ok := _ArrayType_OES_point_size_array_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ArrayType_OES_point_size_array(%v)", v)
+}
+
+func (v *ArrayType_OES_point_size_array) Parse(s string) error {
+	for k, t := range _ArrayType_OES_point_size_array_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ArrayType_OES_point_size_array", s)
+}
+
+const _BaseTexelFormat_name = "GL_ALPHAGL_RGBGL_RGBA"
+
+var _BaseTexelFormat_map = map[BaseTexelFormat]string{
+	6406: _BaseTexelFormat_name[0:8],
+	6407: _BaseTexelFormat_name[8:14],
+	6408: _BaseTexelFormat_name[14:21],
+}
+
+func (v BaseTexelFormat) String() string {
+	if s, ok := _BaseTexelFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BaseTexelFormat(%v)", v)
+}
+
+func (v *BaseTexelFormat) Parse(s string) error {
+	for k, t := range _BaseTexelFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BaseTexelFormat", s)
+}
+
+const _BlendEquation_name = "GL_FUNC_ADDGL_FUNC_SUBTRACTGL_FUNC_REVERSE_SUBTRACT"
+
+var _BlendEquation_map = map[BlendEquation]string{
+	32774: _BlendEquation_name[0:11],
+	32778: _BlendEquation_name[11:27],
+	32779: _BlendEquation_name[27:51],
+}
+
+func (v BlendEquation) String() string {
+	if s, ok := _BlendEquation_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BlendEquation(%v)", v)
+}
+
+func (v *BlendEquation) Parse(s string) error {
+	for k, t := range _BlendEquation_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BlendEquation", s)
+}
+
+const _BlendFactor_name = "GL_ZEROGL_ONEGL_SRC_COLORGL_ONE_MINUS_SRC_COLORGL_SRC_ALPHAGL_ONE_MINUS_SRC_ALPHAGL_DST_ALPHAGL_ONE_MINUS_DST_ALPHAGL_DST_COLORGL_ONE_MINUS_DST_COLORGL_SRC_ALPHA_SATURATEGL_CONSTANT_COLORGL_ONE_MINUS_CONSTANT_COLORGL_CONSTANT_ALPHAGL_ONE_MINUS_CONSTANT_ALPHA"
+
+var _BlendFactor_map = map[BlendFactor]string{
+	0:     _BlendFactor_name[0:7],
+	1:     _BlendFactor_name[7:13],
+	768:   _BlendFactor_name[13:25],
+	769:   _BlendFactor_name[25:47],
+	770:   _BlendFactor_name[47:59],
+	771:   _BlendFactor_name[59:81],
+	772:   _BlendFactor_name[81:93],
+	773:   _BlendFactor_name[93:115],
+	774:   _BlendFactor_name[115:127],
+	775:   _BlendFactor_name[127:149],
+	776:   _BlendFactor_name[149:170],
+	32769: _BlendFactor_name[170:187],
+	32770: _BlendFactor_name[187:214],
+	32771: _BlendFactor_name[214:231],
+	32772: _BlendFactor_name[231:258],
+}
+
+func (v BlendFactor) String() string {
+	if s, ok := _BlendFactor_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BlendFactor(%v)", v)
+}
+
+func (v *BlendFactor) Parse(s string) error {
+	for k, t := range _BlendFactor_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BlendFactor", s)
+}
+
+const _BufferParameter_name = "GL_BUFFER_SIZEGL_BUFFER_USAGE"
+
+var _BufferParameter_map = map[BufferParameter]string{
+	34660: _BufferParameter_name[0:14],
+	34661: _BufferParameter_name[14:29],
+}
+
+func (v BufferParameter) String() string {
+	if s, ok := _BufferParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BufferParameter(%v)", v)
+}
+
+func (v *BufferParameter) Parse(s string) error {
+	for k, t := range _BufferParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BufferParameter", s)
+}
+
+const _BufferTarget_name = "GL_ARRAY_BUFFERGL_ELEMENT_ARRAY_BUFFERGL_PIXEL_PACK_BUFFERGL_PIXEL_UNPACK_BUFFERGL_UNIFORM_BUFFERGL_TRANSFORM_FEEDBACK_BUFFERGL_COPY_READ_BUFFERGL_COPY_WRITE_BUFFER"
+
+var _BufferTarget_map = map[BufferTarget]string{
+	34962: _BufferTarget_name[0:15],
+	34963: _BufferTarget_name[15:38],
+	35051: _BufferTarget_name[38:58],
+	35052: _BufferTarget_name[58:80],
+	35345: _BufferTarget_name[80:97],
+	35982: _BufferTarget_name[97:125],
+	36662: _BufferTarget_name[125:144],
+	36663: _BufferTarget_name[144:164],
+}
+
+func (v BufferTarget) String() string {
+	if s, ok := _BufferTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BufferTarget(%v)", v)
+}
+
+func (v *BufferTarget) Parse(s string) error {
+	for k, t := range _BufferTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BufferTarget", s)
+}
+
+const _BufferUsage_name = "GL_STREAM_DRAWGL_STATIC_DRAWGL_DYNAMIC_DRAW"
+
+var _BufferUsage_map = map[BufferUsage]string{
+	35040: _BufferUsage_name[0:14],
+	35044: _BufferUsage_name[14:28],
+	35048: _BufferUsage_name[28:43],
+}
+
+func (v BufferUsage) String() string {
+	if s, ok := _BufferUsage_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("BufferUsage(%v)", v)
+}
+
+func (v *BufferUsage) Parse(s string) error {
+	for k, t := range _BufferUsage_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in BufferUsage", s)
+}
+
+const _Capability_name = "GL_CULL_FACEGL_DEPTH_TESTGL_STENCIL_TESTGL_DITHERGL_BLENDGL_SCISSOR_TESTGL_POLYGON_OFFSET_FILLGL_VERTEX_ARRAYGL_NORMAL_ARRAYGL_COLOR_ARRAYGL_TEXTURE_COORD_ARRAYGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_POINT_SIZE_ARRAY_OES"
+
+var _Capability_map = map[Capability]string{
+	2884:  _Capability_name[0:12],
+	2929:  _Capability_name[12:25],
+	2960:  _Capability_name[25:40],
+	3024:  _Capability_name[40:49],
+	3042:  _Capability_name[49:57],
+	3089:  _Capability_name[57:72],
+	32823: _Capability_name[72:94],
+	32884: _Capability_name[94:109],
+	32885: _Capability_name[109:124],
+	32886: _Capability_name[124:138],
+	32888: _Capability_name[138:160],
+	32926: _Capability_name[160:187],
+	32928: _Capability_name[187:205],
+	35740: _Capability_name[205:228],
+}
+
+func (v Capability) String() string {
+	if s, ok := _Capability_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Capability(%v)", v)
+}
+
+func (v *Capability) Parse(s string) error {
+	for k, t := range _Capability_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Capability", s)
+}
+
+const _ClearMask_name = "GL_DEPTH_BUFFER_BITGL_STENCIL_BUFFER_BITGL_COLOR_BUFFER_BIT"
+
+var _ClearMask_map = map[ClearMask]string{
+	256:   _ClearMask_name[0:19],
+	1024:  _ClearMask_name[19:40],
+	16384: _ClearMask_name[40:59],
+}
+
+func (v ClearMask) String() string {
+	if s, ok := _ClearMask_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ClearMask(%v)", v)
+}
+
+func (v *ClearMask) Parse(s string) error {
+	for k, t := range _ClearMask_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ClearMask", s)
+}
+
+const _CompressedTexelFormat_AMD_compressed_ATC_texture_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMD"
+
+var _CompressedTexelFormat_AMD_compressed_ATC_texture_map = map[CompressedTexelFormat_AMD_compressed_ATC_texture]string{
+	34798: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[0:34],
+	35986: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[34:48],
+	35987: _CompressedTexelFormat_AMD_compressed_ATC_texture_name[48:78],
+}
+
+func (v CompressedTexelFormat_AMD_compressed_ATC_texture) String() string {
+	if s, ok := _CompressedTexelFormat_AMD_compressed_ATC_texture_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_AMD_compressed_ATC_texture(%v)", v)
+}
+
+func (v *CompressedTexelFormat_AMD_compressed_ATC_texture) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_AMD_compressed_ATC_texture_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_AMD_compressed_ATC_texture", s)
+}
+
+const _CompressedTexelFormat_name = "GL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OES"
+
+var _CompressedTexelFormat_map = map[CompressedTexelFormat]string{
+	34798: _CompressedTexelFormat_name[0:34],
+	35986: _CompressedTexelFormat_name[34:48],
+	35987: _CompressedTexelFormat_name[48:78],
+	36196: _CompressedTexelFormat_name[78:94],
+}
+
+func (v CompressedTexelFormat) String() string {
+	if s, ok := _CompressedTexelFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat(%v)", v)
+}
+
+func (v *CompressedTexelFormat) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat", s)
+}
+
+const _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name = "GL_ETC1_RGB8_OES"
+
+var _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map = map[CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture]string{
+	36196: _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_name[0:16],
+}
+
+func (v CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) String() string {
+	if s, ok := _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(%v)", v)
+}
+
+func (v *CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) Parse(s string) error {
+	for k, t := range _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture", s)
+}
+
+const _CubeMapImageTarget_name = "GL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
+
+var _CubeMapImageTarget_map = map[CubeMapImageTarget]string{
+	34069: _CubeMapImageTarget_name[0:30],
+	34070: _CubeMapImageTarget_name[30:60],
+	34071: _CubeMapImageTarget_name[60:90],
+	34072: _CubeMapImageTarget_name[90:120],
+	34073: _CubeMapImageTarget_name[120:150],
+	34074: _CubeMapImageTarget_name[150:180],
+}
+
+func (v CubeMapImageTarget) String() string {
+	if s, ok := _CubeMapImageTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("CubeMapImageTarget(%v)", v)
+}
+
+func (v *CubeMapImageTarget) Parse(s string) error {
+	for k, t := range _CubeMapImageTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in CubeMapImageTarget", s)
+}
+
+const _DiscardFramebufferAttachment_name = "GL_COLOR_EXTGL_DEPTH_EXTGL_STENCIL_EXT"
+
+var _DiscardFramebufferAttachment_map = map[DiscardFramebufferAttachment]string{
+	6144: _DiscardFramebufferAttachment_name[0:12],
+	6145: _DiscardFramebufferAttachment_name[12:24],
+	6146: _DiscardFramebufferAttachment_name[24:38],
+}
+
+func (v DiscardFramebufferAttachment) String() string {
+	if s, ok := _DiscardFramebufferAttachment_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("DiscardFramebufferAttachment(%v)", v)
+}
+
+func (v *DiscardFramebufferAttachment) Parse(s string) error {
+	for k, t := range _DiscardFramebufferAttachment_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in DiscardFramebufferAttachment", s)
+}
+
+const _DrawMode_name = "GL_POINTSGL_LINESGL_LINE_LOOPGL_LINE_STRIPGL_TRIANGLESGL_TRIANGLE_STRIPGL_TRIANGLE_FAN"
+
+var _DrawMode_map = map[DrawMode]string{
+	0: _DrawMode_name[0:9],
+	1: _DrawMode_name[9:17],
+	2: _DrawMode_name[17:29],
+	3: _DrawMode_name[29:42],
+	4: _DrawMode_name[42:54],
+	5: _DrawMode_name[54:71],
+	6: _DrawMode_name[71:86],
+}
+
+func (v DrawMode) String() string {
+	if s, ok := _DrawMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("DrawMode(%v)", v)
+}
+
+func (v *DrawMode) Parse(s string) error {
+	for k, t := range _DrawMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in DrawMode", s)
+}
+
+const _Error_name = "GL_NO_ERRORGL_INVALID_ENUMGL_INVALID_VALUEGL_INVALID_OPERATIONGL_OUT_OF_MEMORYGL_INVALID_FRAMEBUFFER_OPERATION"
+
+var _Error_map = map[Error]string{
+	0:    _Error_name[0:11],
+	1280: _Error_name[11:26],
+	1281: _Error_name[26:42],
+	1282: _Error_name[42:62],
+	1285: _Error_name[62:78],
+	1286: _Error_name[78:110],
+}
+
+func (v Error) String() string {
+	if s, ok := _Error_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Error(%v)", v)
+}
+
+func (v *Error) Parse(s string) error {
+	for k, t := range _Error_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Error", s)
+}
+
+const _FaceMode_name = "GL_FRONTGL_BACKGL_FRONT_AND_BACK"
+
+var _FaceMode_map = map[FaceMode]string{
+	1028: _FaceMode_name[0:8],
+	1029: _FaceMode_name[8:15],
+	1032: _FaceMode_name[15:32],
+}
+
+func (v FaceMode) String() string {
+	if s, ok := _FaceMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FaceMode(%v)", v)
+}
+
+func (v *FaceMode) Parse(s string) error {
+	for k, t := range _FaceMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FaceMode", s)
+}
+
+const _FaceOrientation_name = "GL_CWGL_CCW"
+
+var _FaceOrientation_map = map[FaceOrientation]string{
+	2304: _FaceOrientation_name[0:5],
+	2305: _FaceOrientation_name[5:11],
+}
+
+func (v FaceOrientation) String() string {
+	if s, ok := _FaceOrientation_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FaceOrientation(%v)", v)
+}
+
+func (v *FaceOrientation) Parse(s string) error {
+	for k, t := range _FaceOrientation_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FaceOrientation", s)
+}
+
+const _FramebufferAttachmentParameter_name = "GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPEGL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAMEGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVELGL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE"
+
+var _FramebufferAttachmentParameter_map = map[FramebufferAttachmentParameter]string{
+	36048: _FramebufferAttachmentParameter_name[0:37],
+	36049: _FramebufferAttachmentParameter_name[37:74],
+	36050: _FramebufferAttachmentParameter_name[74:113],
+	36051: _FramebufferAttachmentParameter_name[113:160],
+}
+
+func (v FramebufferAttachmentParameter) String() string {
+	if s, ok := _FramebufferAttachmentParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferAttachmentParameter(%v)", v)
+}
+
+func (v *FramebufferAttachmentParameter) Parse(s string) error {
+	for k, t := range _FramebufferAttachmentParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferAttachmentParameter", s)
+}
+
+const _FramebufferAttachmentType_name = "GL_NONEGL_TEXTUREGL_RENDERBUFFER"
+
+var _FramebufferAttachmentType_map = map[FramebufferAttachmentType]string{
+	0:     _FramebufferAttachmentType_name[0:7],
+	5890:  _FramebufferAttachmentType_name[7:17],
+	36161: _FramebufferAttachmentType_name[17:32],
+}
+
+func (v FramebufferAttachmentType) String() string {
+	if s, ok := _FramebufferAttachmentType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferAttachmentType(%v)", v)
+}
+
+func (v *FramebufferAttachmentType) Parse(s string) error {
+	for k, t := range _FramebufferAttachmentType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferAttachmentType", s)
+}
+
+const _FramebufferAttachment_name = "GL_COLOR_ATTACHMENT0GL_DEPTH_ATTACHMENTGL_STENCIL_ATTACHMENT"
+
+var _FramebufferAttachment_map = map[FramebufferAttachment]string{
+	36064: _FramebufferAttachment_name[0:20],
+	36096: _FramebufferAttachment_name[20:39],
+	36128: _FramebufferAttachment_name[39:60],
+}
+
+func (v FramebufferAttachment) String() string {
+	if s, ok := _FramebufferAttachment_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferAttachment(%v)", v)
+}
+
+func (v *FramebufferAttachment) Parse(s string) error {
+	for k, t := range _FramebufferAttachment_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferAttachment", s)
+}
+
+const _FramebufferStatus_name = "GL_FRAMEBUFFER_COMPLETEGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENTGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONSGL_FRAMEBUFFER_UNSUPPORTED"
+
+var _FramebufferStatus_map = map[FramebufferStatus]string{
+	36053: _FramebufferStatus_name[0:23],
+	36054: _FramebufferStatus_name[23:59],
+	36055: _FramebufferStatus_name[59:103],
+	36057: _FramebufferStatus_name[103:139],
+	36061: _FramebufferStatus_name[139:165],
+}
+
+func (v FramebufferStatus) String() string {
+	if s, ok := _FramebufferStatus_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferStatus(%v)", v)
+}
+
+func (v *FramebufferStatus) Parse(s string) error {
+	for k, t := range _FramebufferStatus_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferStatus", s)
+}
+
+const _FramebufferTarget_GLES_2_0_name = "GL_FRAMEBUFFER"
+
+var _FramebufferTarget_GLES_2_0_map = map[FramebufferTarget_GLES_2_0]string{
+	36160: _FramebufferTarget_GLES_2_0_name[0:14],
+}
+
+func (v FramebufferTarget_GLES_2_0) String() string {
+	if s, ok := _FramebufferTarget_GLES_2_0_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferTarget_GLES_2_0(%v)", v)
+}
+
+func (v *FramebufferTarget_GLES_2_0) Parse(s string) error {
+	for k, t := range _FramebufferTarget_GLES_2_0_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferTarget_GLES_2_0", s)
+}
+
+const _FramebufferTarget_GLES_3_1_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFER"
+
+var _FramebufferTarget_GLES_3_1_map = map[FramebufferTarget_GLES_3_1]string{
+	36008: _FramebufferTarget_GLES_3_1_name[0:19],
+	36009: _FramebufferTarget_GLES_3_1_name[19:38],
+}
+
+func (v FramebufferTarget_GLES_3_1) String() string {
+	if s, ok := _FramebufferTarget_GLES_3_1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferTarget_GLES_3_1(%v)", v)
+}
+
+func (v *FramebufferTarget_GLES_3_1) Parse(s string) error {
+	for k, t := range _FramebufferTarget_GLES_3_1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferTarget_GLES_3_1", s)
+}
+
+const _FramebufferTarget_name = "GL_READ_FRAMEBUFFERGL_DRAW_FRAMEBUFFERGL_FRAMEBUFFER"
+
+var _FramebufferTarget_map = map[FramebufferTarget]string{
+	36008: _FramebufferTarget_name[0:19],
+	36009: _FramebufferTarget_name[19:38],
+	36160: _FramebufferTarget_name[38:52],
+}
+
+func (v FramebufferTarget) String() string {
+	if s, ok := _FramebufferTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("FramebufferTarget(%v)", v)
+}
+
+func (v *FramebufferTarget) Parse(s string) error {
+	for k, t := range _FramebufferTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in FramebufferTarget", s)
+}
+
+const _HintMode_name = "GL_DONT_CAREGL_FASTESTGL_NICEST"
+
+var _HintMode_map = map[HintMode]string{
+	4352: _HintMode_name[0:12],
+	4353: _HintMode_name[12:22],
+	4354: _HintMode_name[22:31],
+}
+
+func (v HintMode) String() string {
+	if s, ok := _HintMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("HintMode(%v)", v)
+}
+
+func (v *HintMode) Parse(s string) error {
+	for k, t := range _HintMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in HintMode", s)
+}
+
+const _HintTarget_name = "GL_GENERATE_MIPMAP_HINT"
+
+var _HintTarget_map = map[HintTarget]string{
+	33170: _HintTarget_name[0:23],
+}
+
+func (v HintTarget) String() string {
+	if s, ok := _HintTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("HintTarget(%v)", v)
+}
+
+func (v *HintTarget) Parse(s string) error {
+	for k, t := range _HintTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in HintTarget", s)
+}
+
+const _ImageTargetRenderbufferStorage_name = "GL_RENDERBUFFER_OES"
+
+var _ImageTargetRenderbufferStorage_map = map[ImageTargetRenderbufferStorage]string{
+	36161: _ImageTargetRenderbufferStorage_name[0:19],
+}
+
+func (v ImageTargetRenderbufferStorage) String() string {
+	if s, ok := _ImageTargetRenderbufferStorage_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageTargetRenderbufferStorage(%v)", v)
+}
+
+func (v *ImageTargetRenderbufferStorage) Parse(s string) error {
+	for k, t := range _ImageTargetRenderbufferStorage_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageTargetRenderbufferStorage", s)
+}
+
+const _ImageTargetTexture_name = "GL_TEXTURE_2DGL_TEXTURE_EXTERNAL_OES"
+
+var _ImageTargetTexture_map = map[ImageTargetTexture]string{
+	3553:  _ImageTargetTexture_name[0:13],
+	36197: _ImageTargetTexture_name[13:36],
+}
+
+func (v ImageTargetTexture) String() string {
+	if s, ok := _ImageTargetTexture_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageTargetTexture(%v)", v)
+}
+
+func (v *ImageTargetTexture) Parse(s string) error {
+	for k, t := range _ImageTargetTexture_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageTargetTexture", s)
+}
+
+const _ImageTargetTexture_OES_EGL_image_name = "GL_TEXTURE_2D"
+
+var _ImageTargetTexture_OES_EGL_image_map = map[ImageTargetTexture_OES_EGL_image]string{
+	3553: _ImageTargetTexture_OES_EGL_image_name[0:13],
+}
+
+func (v ImageTargetTexture_OES_EGL_image) String() string {
+	if s, ok := _ImageTargetTexture_OES_EGL_image_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image(%v)", v)
+}
+
+func (v *ImageTargetTexture_OES_EGL_image) Parse(s string) error {
+	for k, t := range _ImageTargetTexture_OES_EGL_image_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageTargetTexture_OES_EGL_image", s)
+}
+
+const _ImageTargetTexture_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
+
+var _ImageTargetTexture_OES_EGL_image_external_map = map[ImageTargetTexture_OES_EGL_image_external]string{
+	36197: _ImageTargetTexture_OES_EGL_image_external_name[0:23],
+}
+
+func (v ImageTargetTexture_OES_EGL_image_external) String() string {
+	if s, ok := _ImageTargetTexture_OES_EGL_image_external_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image_external(%v)", v)
+}
+
+func (v *ImageTargetTexture_OES_EGL_image_external) Parse(s string) error {
+	for k, t := range _ImageTargetTexture_OES_EGL_image_external_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageTargetTexture_OES_EGL_image_external", s)
+}
+
+const _ImageTexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_ATC_RGBA_INTERPOLATED_ALPHA_AMDGL_DEPTH24_STENCIL8GL_ATC_RGB_AMDGL_ATC_RGBA_EXPLICIT_ALPHA_AMDGL_ETC1_RGB8_OESGL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
+
+var _ImageTexelFormat_map = map[ImageTexelFormat]string{
+	6402:  _ImageTexelFormat_name[0:18],
+	6403:  _ImageTexelFormat_name[18:24],
+	6406:  _ImageTexelFormat_name[24:32],
+	6407:  _ImageTexelFormat_name[32:38],
+	6408:  _ImageTexelFormat_name[38:45],
+	6409:  _ImageTexelFormat_name[45:57],
+	6410:  _ImageTexelFormat_name[57:75],
+	33189: _ImageTexelFormat_name[75:95],
+	33319: _ImageTexelFormat_name[95:100],
+	33320: _ImageTexelFormat_name[100:113],
+	34041: _ImageTexelFormat_name[113:129],
+	34798: _ImageTexelFormat_name[129:163],
+	35056: _ImageTexelFormat_name[163:182],
+	35986: _ImageTexelFormat_name[182:196],
+	35987: _ImageTexelFormat_name[196:226],
+	36196: _ImageTexelFormat_name[226:242],
+	36244: _ImageTexelFormat_name[242:256],
+	36248: _ImageTexelFormat_name[256:270],
+	36249: _ImageTexelFormat_name[270:285],
+}
+
+func (v ImageTexelFormat) String() string {
+	if s, ok := _ImageTexelFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ImageTexelFormat(%v)", v)
+}
+
+func (v *ImageTexelFormat) Parse(s string) error {
+	for k, t := range _ImageTexelFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ImageTexelFormat", s)
+}
+
+const _IndicesType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INT"
+
+var _IndicesType_map = map[IndicesType]string{
+	5121: _IndicesType_name[0:16],
+	5123: _IndicesType_name[16:33],
+	5125: _IndicesType_name[33:48],
+}
+
+func (v IndicesType) String() string {
+	if s, ok := _IndicesType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("IndicesType(%v)", v)
+}
+
+func (v *IndicesType) Parse(s string) error {
+	for k, t := range _IndicesType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in IndicesType", s)
+}
+
+const _MapBufferRangeAccess_name = "GL_MAP_READ_BITGL_MAP_WRITE_BITGL_MAP_INVALIDATE_RANGE_BITGL_MAP_INVALIDATE_BUFFER_BITGL_MAP_FLUSH_EXPLICIT_BITGL_MAP_UNSYNCHRONIZED_BIT"
+
+var _MapBufferRangeAccess_map = map[MapBufferRangeAccess]string{
+	1:  _MapBufferRangeAccess_name[0:15],
+	2:  _MapBufferRangeAccess_name[15:31],
+	4:  _MapBufferRangeAccess_name[31:58],
+	8:  _MapBufferRangeAccess_name[58:86],
+	16: _MapBufferRangeAccess_name[86:111],
+	32: _MapBufferRangeAccess_name[111:136],
+}
+
+func (v MapBufferRangeAccess) String() string {
+	if s, ok := _MapBufferRangeAccess_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("MapBufferRangeAccess(%v)", v)
+}
+
+func (v *MapBufferRangeAccess) Parse(s string) error {
+	for k, t := range _MapBufferRangeAccess_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in MapBufferRangeAccess", s)
+}
+
+const _PixelStoreParameter_name = "GL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENT"
+
+var _PixelStoreParameter_map = map[PixelStoreParameter]string{
+	3317: _PixelStoreParameter_name[0:19],
+	3333: _PixelStoreParameter_name[19:36],
+}
+
+func (v PixelStoreParameter) String() string {
+	if s, ok := _PixelStoreParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("PixelStoreParameter(%v)", v)
+}
+
+func (v *PixelStoreParameter) Parse(s string) error {
+	for k, t := range _PixelStoreParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in PixelStoreParameter", s)
+}
+
+const _PrecisionType_name = "GL_LOW_FLOATGL_MEDIUM_FLOATGL_HIGH_FLOATGL_LOW_INTGL_MEDIUM_INTGL_HIGH_INT"
+
+var _PrecisionType_map = map[PrecisionType]string{
+	36336: _PrecisionType_name[0:12],
+	36337: _PrecisionType_name[12:27],
+	36338: _PrecisionType_name[27:40],
+	36339: _PrecisionType_name[40:50],
+	36340: _PrecisionType_name[50:63],
+	36341: _PrecisionType_name[63:74],
+}
+
+func (v PrecisionType) String() string {
+	if s, ok := _PrecisionType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("PrecisionType(%v)", v)
+}
+
+func (v *PrecisionType) Parse(s string) error {
+	for k, t := range _PrecisionType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in PrecisionType", s)
+}
+
+const _ProgramParameter_name = "GL_DELETE_STATUSGL_LINK_STATUSGL_VALIDATE_STATUSGL_INFO_LOG_LENGTHGL_ATTACHED_SHADERSGL_ACTIVE_UNIFORMSGL_ACTIVE_UNIFORM_MAX_LENGTHGL_ACTIVE_ATTRIBUTESGL_ACTIVE_ATTRIBUTE_MAX_LENGTH"
+
+var _ProgramParameter_map = map[ProgramParameter]string{
+	35712: _ProgramParameter_name[0:16],
+	35714: _ProgramParameter_name[16:30],
+	35715: _ProgramParameter_name[30:48],
+	35716: _ProgramParameter_name[48:66],
+	35717: _ProgramParameter_name[66:85],
+	35718: _ProgramParameter_name[85:103],
+	35719: _ProgramParameter_name[103:131],
+	35721: _ProgramParameter_name[131:151],
+	35722: _ProgramParameter_name[151:181],
+}
+
+func (v ProgramParameter) String() string {
+	if s, ok := _ProgramParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ProgramParameter(%v)", v)
+}
+
+func (v *ProgramParameter) Parse(s string) error {
+	for k, t := range _ProgramParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ProgramParameter", s)
+}
+
+const _QueryObjectParameter_GLES_3_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
+
+var _QueryObjectParameter_GLES_3_map = map[QueryObjectParameter_GLES_3]string{
+	34918: _QueryObjectParameter_GLES_3_name[0:15],
+	34919: _QueryObjectParameter_GLES_3_name[15:40],
+}
+
+func (v QueryObjectParameter_GLES_3) String() string {
+	if s, ok := _QueryObjectParameter_GLES_3_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryObjectParameter_GLES_3(%v)", v)
+}
+
+func (v *QueryObjectParameter_GLES_3) Parse(s string) error {
+	for k, t := range _QueryObjectParameter_GLES_3_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryObjectParameter_GLES_3", s)
+}
+
+const _QueryObjectParameter_name = "GL_QUERY_RESULTGL_QUERY_RESULT_AVAILABLE"
+
+var _QueryObjectParameter_map = map[QueryObjectParameter]string{
+	34918: _QueryObjectParameter_name[0:15],
+	34919: _QueryObjectParameter_name[15:40],
+}
+
+func (v QueryObjectParameter) String() string {
+	if s, ok := _QueryObjectParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryObjectParameter(%v)", v)
+}
+
+func (v *QueryObjectParameter) Parse(s string) error {
+	for k, t := range _QueryObjectParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryObjectParameter", s)
+}
+
+const _QueryParameter_EXT_disjoint_timer_query_name = "GL_QUERY_COUNTER_BITS_EXT"
+
+var _QueryParameter_EXT_disjoint_timer_query_map = map[QueryParameter_EXT_disjoint_timer_query]string{
+	34916: _QueryParameter_EXT_disjoint_timer_query_name[0:25],
+}
+
+func (v QueryParameter_EXT_disjoint_timer_query) String() string {
+	if s, ok := _QueryParameter_EXT_disjoint_timer_query_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryParameter_EXT_disjoint_timer_query(%v)", v)
+}
+
+func (v *QueryParameter_EXT_disjoint_timer_query) Parse(s string) error {
+	for k, t := range _QueryParameter_EXT_disjoint_timer_query_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryParameter_EXT_disjoint_timer_query", s)
+}
+
+const _QueryParameter_GLES_3_name = "GL_CURRENT_QUERY"
+
+var _QueryParameter_GLES_3_map = map[QueryParameter_GLES_3]string{
+	34917: _QueryParameter_GLES_3_name[0:16],
+}
+
+func (v QueryParameter_GLES_3) String() string {
+	if s, ok := _QueryParameter_GLES_3_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryParameter_GLES_3(%v)", v)
+}
+
+func (v *QueryParameter_GLES_3) Parse(s string) error {
+	for k, t := range _QueryParameter_GLES_3_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryParameter_GLES_3", s)
+}
+
+const _QueryParameter_name = "GL_QUERY_COUNTER_BITS_EXTGL_CURRENT_QUERY"
+
+var _QueryParameter_map = map[QueryParameter]string{
+	34916: _QueryParameter_name[0:25],
+	34917: _QueryParameter_name[25:41],
+}
+
+func (v QueryParameter) String() string {
+	if s, ok := _QueryParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryParameter(%v)", v)
+}
+
+func (v *QueryParameter) Parse(s string) error {
+	for k, t := range _QueryParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryParameter", s)
+}
+
+const _QueryTarget_EXT_disjoint_timer_query_name = "GL_TIME_ELAPSED_EXTGL_TIMESTAMP_EXT"
+
+var _QueryTarget_EXT_disjoint_timer_query_map = map[QueryTarget_EXT_disjoint_timer_query]string{
+	35007: _QueryTarget_EXT_disjoint_timer_query_name[0:19],
+	36392: _QueryTarget_EXT_disjoint_timer_query_name[19:35],
+}
+
+func (v QueryTarget_EXT_disjoint_timer_query) String() string {
+	if s, ok := _QueryTarget_EXT_disjoint_timer_query_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryTarget_EXT_disjoint_timer_query(%v)", v)
+}
+
+func (v *QueryTarget_EXT_disjoint_timer_query) Parse(s string) error {
+	for k, t := range _QueryTarget_EXT_disjoint_timer_query_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryTarget_EXT_disjoint_timer_query", s)
+}
+
+const _QueryTarget_GLES_3_name = "GL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVE"
+
+var _QueryTarget_GLES_3_map = map[QueryTarget_GLES_3]string{
+	35887: _QueryTarget_GLES_3_name[0:21],
+	35976: _QueryTarget_GLES_3_name[21:61],
+	36202: _QueryTarget_GLES_3_name[61:95],
+}
+
+func (v QueryTarget_GLES_3) String() string {
+	if s, ok := _QueryTarget_GLES_3_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryTarget_GLES_3(%v)", v)
+}
+
+func (v *QueryTarget_GLES_3) Parse(s string) error {
+	for k, t := range _QueryTarget_GLES_3_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryTarget_GLES_3", s)
+}
+
+const _QueryTarget_name = "GL_TIME_ELAPSED_EXTGL_ANY_SAMPLES_PASSEDGL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTENGL_ANY_SAMPLES_PASSED_CONSERVATIVEGL_TIMESTAMP_EXT"
+
+var _QueryTarget_map = map[QueryTarget]string{
+	35007: _QueryTarget_name[0:19],
+	35887: _QueryTarget_name[19:40],
+	35976: _QueryTarget_name[40:80],
+	36202: _QueryTarget_name[80:114],
+	36392: _QueryTarget_name[114:130],
+}
+
+func (v QueryTarget) String() string {
+	if s, ok := _QueryTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("QueryTarget(%v)", v)
+}
+
+func (v *QueryTarget) Parse(s string) error {
+	for k, t := range _QueryTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in QueryTarget", s)
+}
+
+const _RenderbufferFormat_name = "GL_RGBA4GL_RGB5_A1GL_RGBA8GL_DEPTH_COMPONENT16GL_STENCIL_INDEX8GL_RGB565"
+
+var _RenderbufferFormat_map = map[RenderbufferFormat]string{
+	32854: _RenderbufferFormat_name[0:8],
+	32855: _RenderbufferFormat_name[8:18],
+	32856: _RenderbufferFormat_name[18:26],
+	33189: _RenderbufferFormat_name[26:46],
+	36168: _RenderbufferFormat_name[46:63],
+	36194: _RenderbufferFormat_name[63:72],
+}
+
+func (v RenderbufferFormat) String() string {
+	if s, ok := _RenderbufferFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("RenderbufferFormat(%v)", v)
+}
+
+func (v *RenderbufferFormat) Parse(s string) error {
+	for k, t := range _RenderbufferFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in RenderbufferFormat", s)
+}
+
+const _RenderbufferParameter_name = "GL_RENDERBUFFER_WIDTHGL_RENDERBUFFER_HEIGHTGL_RENDERBUFFER_INTERNAL_FORMATGL_RENDERBUFFER_RED_SIZEGL_RENDERBUFFER_GREEN_SIZEGL_RENDERBUFFER_BLUE_SIZEGL_RENDERBUFFER_ALPHA_SIZEGL_RENDERBUFFER_DEPTH_SIZEGL_RENDERBUFFER_STENCIL_SIZE"
+
+var _RenderbufferParameter_map = map[RenderbufferParameter]string{
+	36162: _RenderbufferParameter_name[0:21],
+	36163: _RenderbufferParameter_name[21:43],
+	36164: _RenderbufferParameter_name[43:74],
+	36176: _RenderbufferParameter_name[74:98],
+	36177: _RenderbufferParameter_name[98:124],
+	36178: _RenderbufferParameter_name[124:149],
+	36179: _RenderbufferParameter_name[149:175],
+	36180: _RenderbufferParameter_name[175:201],
+	36181: _RenderbufferParameter_name[201:229],
+}
+
+func (v RenderbufferParameter) String() string {
+	if s, ok := _RenderbufferParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("RenderbufferParameter(%v)", v)
+}
+
+func (v *RenderbufferParameter) Parse(s string) error {
+	for k, t := range _RenderbufferParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in RenderbufferParameter", s)
+}
+
+const _RenderbufferTarget_name = "GL_RENDERBUFFER"
+
+var _RenderbufferTarget_map = map[RenderbufferTarget]string{
+	36161: _RenderbufferTarget_name[0:15],
+}
+
+func (v RenderbufferTarget) String() string {
+	if s, ok := _RenderbufferTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("RenderbufferTarget(%v)", v)
+}
+
+func (v *RenderbufferTarget) Parse(s string) error {
+	for k, t := range _RenderbufferTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in RenderbufferTarget", s)
+}
+
+const _ResetStatus_name = "GL_NO_ERRORGL_GUILTY_CONTEXT_RESET_EXTGL_INNOCENT_CONTEXT_RESET_EXTGL_UNKNOWN_CONTEXT_RESET_EXT"
+
+var _ResetStatus_map = map[ResetStatus]string{
+	0:     _ResetStatus_name[0:11],
+	33363: _ResetStatus_name[11:38],
+	33364: _ResetStatus_name[38:67],
+	33365: _ResetStatus_name[67:95],
+}
+
+func (v ResetStatus) String() string {
+	if s, ok := _ResetStatus_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ResetStatus(%v)", v)
+}
+
+func (v *ResetStatus) Parse(s string) error {
+	for k, t := range _ResetStatus_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ResetStatus", s)
+}
+
+const _ShaderAttribType_name = "GL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4"
+
+var _ShaderAttribType_map = map[ShaderAttribType]string{
+	5126:  _ShaderAttribType_name[0:8],
+	35664: _ShaderAttribType_name[8:21],
+	35665: _ShaderAttribType_name[21:34],
+	35666: _ShaderAttribType_name[34:47],
+	35674: _ShaderAttribType_name[47:60],
+	35675: _ShaderAttribType_name[60:73],
+	35676: _ShaderAttribType_name[73:86],
+}
+
+func (v ShaderAttribType) String() string {
+	if s, ok := _ShaderAttribType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ShaderAttribType(%v)", v)
+}
+
+func (v *ShaderAttribType) Parse(s string) error {
+	for k, t := range _ShaderAttribType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ShaderAttribType", s)
+}
+
+const _ShaderParameter_name = "GL_SHADER_TYPEGL_DELETE_STATUSGL_COMPILE_STATUSGL_INFO_LOG_LENGTHGL_SHADER_SOURCE_LENGTH"
+
+var _ShaderParameter_map = map[ShaderParameter]string{
+	35663: _ShaderParameter_name[0:14],
+	35712: _ShaderParameter_name[14:30],
+	35713: _ShaderParameter_name[30:47],
+	35716: _ShaderParameter_name[47:65],
+	35720: _ShaderParameter_name[65:88],
+}
+
+func (v ShaderParameter) String() string {
+	if s, ok := _ShaderParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ShaderParameter(%v)", v)
+}
+
+func (v *ShaderParameter) Parse(s string) error {
+	for k, t := range _ShaderParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ShaderParameter", s)
+}
+
+const _ShaderType_name = "GL_FRAGMENT_SHADERGL_VERTEX_SHADER"
+
+var _ShaderType_map = map[ShaderType]string{
+	35632: _ShaderType_name[0:18],
+	35633: _ShaderType_name[18:34],
+}
+
+func (v ShaderType) String() string {
+	if s, ok := _ShaderType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ShaderType(%v)", v)
+}
+
+func (v *ShaderType) Parse(s string) error {
+	for k, t := range _ShaderType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ShaderType", s)
+}
+
+const _ShaderUniformType_name = "GL_INTGL_FLOATGL_FLOAT_VEC2GL_FLOAT_VEC3GL_FLOAT_VEC4GL_INT_VEC2GL_INT_VEC3GL_INT_VEC4GL_BOOLGL_BOOL_VEC2GL_BOOL_VEC3GL_BOOL_VEC4GL_FLOAT_MAT2GL_FLOAT_MAT3GL_FLOAT_MAT4GL_SAMPLER_2DGL_SAMPLER_CUBE"
+
+var _ShaderUniformType_map = map[ShaderUniformType]string{
+	5124:  _ShaderUniformType_name[0:6],
+	5126:  _ShaderUniformType_name[6:14],
+	35664: _ShaderUniformType_name[14:27],
+	35665: _ShaderUniformType_name[27:40],
+	35666: _ShaderUniformType_name[40:53],
+	35667: _ShaderUniformType_name[53:64],
+	35668: _ShaderUniformType_name[64:75],
+	35669: _ShaderUniformType_name[75:86],
+	35670: _ShaderUniformType_name[86:93],
+	35671: _ShaderUniformType_name[93:105],
+	35672: _ShaderUniformType_name[105:117],
+	35673: _ShaderUniformType_name[117:129],
+	35674: _ShaderUniformType_name[129:142],
+	35675: _ShaderUniformType_name[142:155],
+	35676: _ShaderUniformType_name[155:168],
+	35678: _ShaderUniformType_name[168:181],
+	35680: _ShaderUniformType_name[181:196],
+}
+
+func (v ShaderUniformType) String() string {
+	if s, ok := _ShaderUniformType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("ShaderUniformType(%v)", v)
+}
+
+func (v *ShaderUniformType) Parse(s string) error {
+	for k, t := range _ShaderUniformType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in ShaderUniformType", s)
+}
+
+const _StateVariable_EXT_disjoint_timer_query_name = "GL_GPU_DISJOINT_EXT"
+
+var _StateVariable_EXT_disjoint_timer_query_map = map[StateVariable_EXT_disjoint_timer_query]string{
+	36795: _StateVariable_EXT_disjoint_timer_query_name[0:19],
+}
+
+func (v StateVariable_EXT_disjoint_timer_query) String() string {
+	if s, ok := _StateVariable_EXT_disjoint_timer_query_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StateVariable_EXT_disjoint_timer_query(%v)", v)
+}
+
+func (v *StateVariable_EXT_disjoint_timer_query) Parse(s string) error {
+	for k, t := range _StateVariable_EXT_disjoint_timer_query_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StateVariable_EXT_disjoint_timer_query", s)
+}
+
+const _StateVariable_EXT_texture_filter_anisotropic_name = "GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT"
+
+var _StateVariable_EXT_texture_filter_anisotropic_map = map[StateVariable_EXT_texture_filter_anisotropic]string{
+	34047: _StateVariable_EXT_texture_filter_anisotropic_name[0:33],
+}
+
+func (v StateVariable_EXT_texture_filter_anisotropic) String() string {
+	if s, ok := _StateVariable_EXT_texture_filter_anisotropic_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StateVariable_EXT_texture_filter_anisotropic(%v)", v)
+}
+
+func (v *StateVariable_EXT_texture_filter_anisotropic) Parse(s string) error {
+	for k, t := range _StateVariable_EXT_texture_filter_anisotropic_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StateVariable_EXT_texture_filter_anisotropic", s)
+}
+
+const _StateVariable_GLES_2_0_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORS"
+
+var _StateVariable_GLES_2_0_map = map[StateVariable_GLES_2_0]string{
+	2849:  _StateVariable_GLES_2_0_name[0:13],
+	2884:  _StateVariable_GLES_2_0_name[13:25],
+	2885:  _StateVariable_GLES_2_0_name[25:42],
+	2886:  _StateVariable_GLES_2_0_name[42:55],
+	2928:  _StateVariable_GLES_2_0_name[55:69],
+	2929:  _StateVariable_GLES_2_0_name[69:82],
+	2930:  _StateVariable_GLES_2_0_name[82:100],
+	2931:  _StateVariable_GLES_2_0_name[100:120],
+	2932:  _StateVariable_GLES_2_0_name[120:133],
+	2960:  _StateVariable_GLES_2_0_name[133:148],
+	2961:  _StateVariable_GLES_2_0_name[148:170],
+	2962:  _StateVariable_GLES_2_0_name[170:185],
+	2963:  _StateVariable_GLES_2_0_name[185:206],
+	2964:  _StateVariable_GLES_2_0_name[206:221],
+	2965:  _StateVariable_GLES_2_0_name[221:247],
+	2966:  _StateVariable_GLES_2_0_name[247:273],
+	2967:  _StateVariable_GLES_2_0_name[273:287],
+	2968:  _StateVariable_GLES_2_0_name[287:307],
+	2978:  _StateVariable_GLES_2_0_name[307:318],
+	3024:  _StateVariable_GLES_2_0_name[318:327],
+	3042:  _StateVariable_GLES_2_0_name[327:335],
+	3088:  _StateVariable_GLES_2_0_name[335:349],
+	3089:  _StateVariable_GLES_2_0_name[349:364],
+	3106:  _StateVariable_GLES_2_0_name[364:384],
+	3107:  _StateVariable_GLES_2_0_name[384:402],
+	3317:  _StateVariable_GLES_2_0_name[402:421],
+	3333:  _StateVariable_GLES_2_0_name[421:438],
+	3379:  _StateVariable_GLES_2_0_name[438:457],
+	3386:  _StateVariable_GLES_2_0_name[457:477],
+	3408:  _StateVariable_GLES_2_0_name[477:493],
+	3410:  _StateVariable_GLES_2_0_name[493:504],
+	3411:  _StateVariable_GLES_2_0_name[504:517],
+	3412:  _StateVariable_GLES_2_0_name[517:529],
+	3413:  _StateVariable_GLES_2_0_name[529:542],
+	3414:  _StateVariable_GLES_2_0_name[542:555],
+	3415:  _StateVariable_GLES_2_0_name[555:570],
+	10752: _StateVariable_GLES_2_0_name[570:593],
+	32773: _StateVariable_GLES_2_0_name[593:607],
+	32777: _StateVariable_GLES_2_0_name[607:628],
+	32823: _StateVariable_GLES_2_0_name[628:650],
+	32824: _StateVariable_GLES_2_0_name[650:674],
+	32873: _StateVariable_GLES_2_0_name[674:695],
+	32926: _StateVariable_GLES_2_0_name[695:722],
+	32928: _StateVariable_GLES_2_0_name[722:740],
+	32936: _StateVariable_GLES_2_0_name[740:757],
+	32937: _StateVariable_GLES_2_0_name[757:767],
+	32938: _StateVariable_GLES_2_0_name[767:791],
+	32939: _StateVariable_GLES_2_0_name[791:816],
+	32968: _StateVariable_GLES_2_0_name[816:832],
+	32969: _StateVariable_GLES_2_0_name[832:848],
+	32970: _StateVariable_GLES_2_0_name[848:866],
+	32971: _StateVariable_GLES_2_0_name[866:884],
+	33170: _StateVariable_GLES_2_0_name[884:907],
+	33901: _StateVariable_GLES_2_0_name[907:934],
+	33902: _StateVariable_GLES_2_0_name[934:961],
+	34016: _StateVariable_GLES_2_0_name[961:978],
+	34024: _StateVariable_GLES_2_0_name[978:1002],
+	34068: _StateVariable_GLES_2_0_name[1002:1029],
+	34076: _StateVariable_GLES_2_0_name[1029:1057],
+	34466: _StateVariable_GLES_2_0_name[1057:1090],
+	34467: _StateVariable_GLES_2_0_name[1090:1119],
+	34816: _StateVariable_GLES_2_0_name[1119:1139],
+	34817: _StateVariable_GLES_2_0_name[1139:1159],
+	34818: _StateVariable_GLES_2_0_name[1159:1190],
+	34819: _StateVariable_GLES_2_0_name[1190:1221],
+	34877: _StateVariable_GLES_2_0_name[1221:1244],
+	34921: _StateVariable_GLES_2_0_name[1244:1265],
+	34930: _StateVariable_GLES_2_0_name[1265:1291],
+	34964: _StateVariable_GLES_2_0_name[1291:1314],
+	34965: _StateVariable_GLES_2_0_name[1314:1345],
+	35660: _StateVariable_GLES_2_0_name[1345:1378],
+	35661: _StateVariable_GLES_2_0_name[1378:1413],
+	35725: _StateVariable_GLES_2_0_name[1413:1431],
+	35738: _StateVariable_GLES_2_0_name[1431:1464],
+	35739: _StateVariable_GLES_2_0_name[1464:1499],
+	36003: _StateVariable_GLES_2_0_name[1499:1518],
+	36004: _StateVariable_GLES_2_0_name[1518:1544],
+	36005: _StateVariable_GLES_2_0_name[1544:1569],
+	36006: _StateVariable_GLES_2_0_name[1569:1591],
+	36007: _StateVariable_GLES_2_0_name[1591:1614],
+	36344: _StateVariable_GLES_2_0_name[1614:1638],
+	36345: _StateVariable_GLES_2_0_name[1638:1666],
+	36346: _StateVariable_GLES_2_0_name[1666:1684],
+	36347: _StateVariable_GLES_2_0_name[1684:1713],
+	36348: _StateVariable_GLES_2_0_name[1713:1735],
+	36349: _StateVariable_GLES_2_0_name[1735:1766],
+}
+
+func (v StateVariable_GLES_2_0) String() string {
+	if s, ok := _StateVariable_GLES_2_0_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StateVariable_GLES_2_0(%v)", v)
+}
+
+func (v *StateVariable_GLES_2_0) Parse(s string) error {
+	for k, t := range _StateVariable_GLES_2_0_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StateVariable_GLES_2_0", s)
+}
+
+const _StateVariable_GLES_3_1_name = "GL_READ_FRAMEBUFFER_BINDING"
+
+var _StateVariable_GLES_3_1_map = map[StateVariable_GLES_3_1]string{
+	36010: _StateVariable_GLES_3_1_name[0:27],
+}
+
+func (v StateVariable_GLES_3_1) String() string {
+	if s, ok := _StateVariable_GLES_3_1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StateVariable_GLES_3_1(%v)", v)
+}
+
+func (v *StateVariable_GLES_3_1) Parse(s string) error {
+	for k, t := range _StateVariable_GLES_3_1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StateVariable_GLES_3_1", s)
+}
+
+const _StateVariable_name = "GL_LINE_WIDTHGL_CULL_FACEGL_CULL_FACE_MODEGL_FRONT_FACEGL_DEPTH_RANGEGL_DEPTH_TESTGL_DEPTH_WRITEMASKGL_DEPTH_CLEAR_VALUEGL_DEPTH_FUNCGL_STENCIL_TESTGL_STENCIL_CLEAR_VALUEGL_STENCIL_FUNCGL_STENCIL_VALUE_MASKGL_STENCIL_FAILGL_STENCIL_PASS_DEPTH_FAILGL_STENCIL_PASS_DEPTH_PASSGL_STENCIL_REFGL_STENCIL_WRITEMASKGL_VIEWPORTGL_DITHERGL_BLENDGL_SCISSOR_BOXGL_SCISSOR_TESTGL_COLOR_CLEAR_VALUEGL_COLOR_WRITEMASKGL_UNPACK_ALIGNMENTGL_PACK_ALIGNMENTGL_MAX_TEXTURE_SIZEGL_MAX_VIEWPORT_DIMSGL_SUBPIXEL_BITSGL_RED_BITSGL_GREEN_BITSGL_BLUE_BITSGL_ALPHA_BITSGL_DEPTH_BITSGL_STENCIL_BITSGL_POLYGON_OFFSET_UNITSGL_BLEND_COLORGL_BLEND_EQUATION_RGBGL_POLYGON_OFFSET_FILLGL_POLYGON_OFFSET_FACTORGL_TEXTURE_BINDING_2DGL_SAMPLE_ALPHA_TO_COVERAGEGL_SAMPLE_COVERAGEGL_SAMPLE_BUFFERSGL_SAMPLESGL_SAMPLE_COVERAGE_VALUEGL_SAMPLE_COVERAGE_INVERTGL_BLEND_DST_RGBGL_BLEND_SRC_RGBGL_BLEND_DST_ALPHAGL_BLEND_SRC_ALPHAGL_GENERATE_MIPMAP_HINTGL_ALIASED_POINT_SIZE_RANGEGL_ALIASED_LINE_WIDTH_RANGEGL_ACTIVE_TEXTUREGL_MAX_RENDERBUFFER_SIZEGL_MAX_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_BINDING_CUBE_MAPGL_MAX_CUBE_MAP_TEXTURE_SIZEGL_NUM_COMPRESSED_TEXTURE_FORMATSGL_COMPRESSED_TEXTURE_FORMATSGL_STENCIL_BACK_FUNCGL_STENCIL_BACK_FAILGL_STENCIL_BACK_PASS_DEPTH_FAILGL_STENCIL_BACK_PASS_DEPTH_PASSGL_BLEND_EQUATION_ALPHAGL_MAX_VERTEX_ATTRIBSGL_MAX_TEXTURE_IMAGE_UNITSGL_ARRAY_BUFFER_BINDINGGL_ELEMENT_ARRAY_BUFFER_BINDINGGL_MAX_VERTEX_TEXTURE_IMAGE_UNITSGL_MAX_COMBINED_TEXTURE_IMAGE_UNITSGL_CURRENT_PROGRAMGL_IMPLEMENTATION_COLOR_READ_TYPEGL_IMPLEMENTATION_COLOR_READ_FORMATGL_STENCIL_BACK_REFGL_STENCIL_BACK_VALUE_MASKGL_STENCIL_BACK_WRITEMASKGL_FRAMEBUFFER_BINDINGGL_RENDERBUFFER_BINDINGGL_READ_FRAMEBUFFER_BINDINGGL_SHADER_BINARY_FORMATSGL_NUM_SHADER_BINARY_FORMATSGL_SHADER_COMPILERGL_MAX_VERTEX_UNIFORM_VECTORSGL_MAX_VARYING_VECTORSGL_MAX_FRAGMENT_UNIFORM_VECTORSGL_GPU_DISJOINT_EXT"
+
+var _StateVariable_map = map[StateVariable]string{
+	2849:  _StateVariable_name[0:13],
+	2884:  _StateVariable_name[13:25],
+	2885:  _StateVariable_name[25:42],
+	2886:  _StateVariable_name[42:55],
+	2928:  _StateVariable_name[55:69],
+	2929:  _StateVariable_name[69:82],
+	2930:  _StateVariable_name[82:100],
+	2931:  _StateVariable_name[100:120],
+	2932:  _StateVariable_name[120:133],
+	2960:  _StateVariable_name[133:148],
+	2961:  _StateVariable_name[148:170],
+	2962:  _StateVariable_name[170:185],
+	2963:  _StateVariable_name[185:206],
+	2964:  _StateVariable_name[206:221],
+	2965:  _StateVariable_name[221:247],
+	2966:  _StateVariable_name[247:273],
+	2967:  _StateVariable_name[273:287],
+	2968:  _StateVariable_name[287:307],
+	2978:  _StateVariable_name[307:318],
+	3024:  _StateVariable_name[318:327],
+	3042:  _StateVariable_name[327:335],
+	3088:  _StateVariable_name[335:349],
+	3089:  _StateVariable_name[349:364],
+	3106:  _StateVariable_name[364:384],
+	3107:  _StateVariable_name[384:402],
+	3317:  _StateVariable_name[402:421],
+	3333:  _StateVariable_name[421:438],
+	3379:  _StateVariable_name[438:457],
+	3386:  _StateVariable_name[457:477],
+	3408:  _StateVariable_name[477:493],
+	3410:  _StateVariable_name[493:504],
+	3411:  _StateVariable_name[504:517],
+	3412:  _StateVariable_name[517:529],
+	3413:  _StateVariable_name[529:542],
+	3414:  _StateVariable_name[542:555],
+	3415:  _StateVariable_name[555:570],
+	10752: _StateVariable_name[570:593],
+	32773: _StateVariable_name[593:607],
+	32777: _StateVariable_name[607:628],
+	32823: _StateVariable_name[628:650],
+	32824: _StateVariable_name[650:674],
+	32873: _StateVariable_name[674:695],
+	32926: _StateVariable_name[695:722],
+	32928: _StateVariable_name[722:740],
+	32936: _StateVariable_name[740:757],
+	32937: _StateVariable_name[757:767],
+	32938: _StateVariable_name[767:791],
+	32939: _StateVariable_name[791:816],
+	32968: _StateVariable_name[816:832],
+	32969: _StateVariable_name[832:848],
+	32970: _StateVariable_name[848:866],
+	32971: _StateVariable_name[866:884],
+	33170: _StateVariable_name[884:907],
+	33901: _StateVariable_name[907:934],
+	33902: _StateVariable_name[934:961],
+	34016: _StateVariable_name[961:978],
+	34024: _StateVariable_name[978:1002],
+	34047: _StateVariable_name[1002:1035],
+	34068: _StateVariable_name[1035:1062],
+	34076: _StateVariable_name[1062:1090],
+	34466: _StateVariable_name[1090:1123],
+	34467: _StateVariable_name[1123:1152],
+	34816: _StateVariable_name[1152:1172],
+	34817: _StateVariable_name[1172:1192],
+	34818: _StateVariable_name[1192:1223],
+	34819: _StateVariable_name[1223:1254],
+	34877: _StateVariable_name[1254:1277],
+	34921: _StateVariable_name[1277:1298],
+	34930: _StateVariable_name[1298:1324],
+	34964: _StateVariable_name[1324:1347],
+	34965: _StateVariable_name[1347:1378],
+	35660: _StateVariable_name[1378:1411],
+	35661: _StateVariable_name[1411:1446],
+	35725: _StateVariable_name[1446:1464],
+	35738: _StateVariable_name[1464:1497],
+	35739: _StateVariable_name[1497:1532],
+	36003: _StateVariable_name[1532:1551],
+	36004: _StateVariable_name[1551:1577],
+	36005: _StateVariable_name[1577:1602],
+	36006: _StateVariable_name[1602:1624],
+	36007: _StateVariable_name[1624:1647],
+	36010: _StateVariable_name[1647:1674],
+	36344: _StateVariable_name[1674:1698],
+	36345: _StateVariable_name[1698:1726],
+	36346: _StateVariable_name[1726:1744],
+	36347: _StateVariable_name[1744:1773],
+	36348: _StateVariable_name[1773:1795],
+	36349: _StateVariable_name[1795:1826],
+	36795: _StateVariable_name[1826:1845],
+}
+
+func (v StateVariable) String() string {
+	if s, ok := _StateVariable_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StateVariable(%v)", v)
+}
+
+func (v *StateVariable) Parse(s string) error {
+	for k, t := range _StateVariable_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StateVariable", s)
+}
+
+const _StencilAction_name = "GL_ZEROGL_INVERTGL_KEEPGL_REPLACEGL_INCRGL_DECRGL_INCR_WRAPGL_DECR_WRAP"
+
+var _StencilAction_map = map[StencilAction]string{
+	0:     _StencilAction_name[0:7],
+	5386:  _StencilAction_name[7:16],
+	7680:  _StencilAction_name[16:23],
+	7681:  _StencilAction_name[23:33],
+	7682:  _StencilAction_name[33:40],
+	7683:  _StencilAction_name[40:47],
+	34055: _StencilAction_name[47:59],
+	34056: _StencilAction_name[59:71],
+}
+
+func (v StencilAction) String() string {
+	if s, ok := _StencilAction_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StencilAction(%v)", v)
+}
+
+func (v *StencilAction) Parse(s string) error {
+	for k, t := range _StencilAction_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StencilAction", s)
+}
+
+const _StringConstant_name = "GL_VENDORGL_RENDERERGL_VERSIONGL_EXTENSIONS"
+
+var _StringConstant_map = map[StringConstant]string{
+	7936: _StringConstant_name[0:9],
+	7937: _StringConstant_name[9:20],
+	7938: _StringConstant_name[20:30],
+	7939: _StringConstant_name[30:43],
+}
+
+func (v StringConstant) String() string {
+	if s, ok := _StringConstant_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("StringConstant(%v)", v)
+}
+
+func (v *StringConstant) Parse(s string) error {
+	for k, t := range _StringConstant_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in StringConstant", s)
+}
+
+const _TestFunction_name = "GL_NEVERGL_LESSGL_EQUALGL_LEQUALGL_GREATERGL_NOTEQUALGL_GEQUALGL_ALWAYS"
+
+var _TestFunction_map = map[TestFunction]string{
+	512: _TestFunction_name[0:8],
+	513: _TestFunction_name[8:15],
+	514: _TestFunction_name[15:23],
+	515: _TestFunction_name[23:32],
+	516: _TestFunction_name[32:42],
+	517: _TestFunction_name[42:53],
+	518: _TestFunction_name[53:62],
+	519: _TestFunction_name[62:71],
+}
+
+func (v TestFunction) String() string {
+	if s, ok := _TestFunction_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TestFunction(%v)", v)
+}
+
+func (v *TestFunction) Parse(s string) error {
+	for k, t := range _TestFunction_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TestFunction", s)
+}
+
+const _TexelComponent_name = "GL_REDGL_GREENGL_BLUEGL_ALPHA"
+
+var _TexelComponent_map = map[TexelComponent]string{
+	6403: _TexelComponent_name[0:6],
+	6404: _TexelComponent_name[6:14],
+	6405: _TexelComponent_name[14:21],
+	6406: _TexelComponent_name[21:29],
+}
+
+func (v TexelComponent) String() string {
+	if s, ok := _TexelComponent_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TexelComponent(%v)", v)
+}
+
+func (v *TexelComponent) Parse(s string) error {
+	for k, t := range _TexelComponent_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TexelComponent", s)
+}
+
+const _TexelFormat_GLES_1_1_name = "GL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHA"
+
+var _TexelFormat_GLES_1_1_map = map[TexelFormat_GLES_1_1]string{
+	6406: _TexelFormat_GLES_1_1_name[0:8],
+	6407: _TexelFormat_GLES_1_1_name[8:14],
+	6408: _TexelFormat_GLES_1_1_name[14:21],
+	6409: _TexelFormat_GLES_1_1_name[21:33],
+	6410: _TexelFormat_GLES_1_1_name[33:51],
+}
+
+func (v TexelFormat_GLES_1_1) String() string {
+	if s, ok := _TexelFormat_GLES_1_1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TexelFormat_GLES_1_1(%v)", v)
+}
+
+func (v *TexelFormat_GLES_1_1) Parse(s string) error {
+	for k, t := range _TexelFormat_GLES_1_1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TexelFormat_GLES_1_1", s)
+}
+
+const _TexelFormat_GLES_3_0_name = "GL_DEPTH_COMPONENTGL_REDGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
+
+var _TexelFormat_GLES_3_0_map = map[TexelFormat_GLES_3_0]string{
+	6402:  _TexelFormat_GLES_3_0_name[0:18],
+	6403:  _TexelFormat_GLES_3_0_name[18:24],
+	33189: _TexelFormat_GLES_3_0_name[24:44],
+	33319: _TexelFormat_GLES_3_0_name[44:49],
+	33320: _TexelFormat_GLES_3_0_name[49:62],
+	34041: _TexelFormat_GLES_3_0_name[62:78],
+	35056: _TexelFormat_GLES_3_0_name[78:97],
+	36244: _TexelFormat_GLES_3_0_name[97:111],
+	36248: _TexelFormat_GLES_3_0_name[111:125],
+	36249: _TexelFormat_GLES_3_0_name[125:140],
+}
+
+func (v TexelFormat_GLES_3_0) String() string {
+	if s, ok := _TexelFormat_GLES_3_0_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TexelFormat_GLES_3_0(%v)", v)
+}
+
+func (v *TexelFormat_GLES_3_0) Parse(s string) error {
+	for k, t := range _TexelFormat_GLES_3_0_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TexelFormat_GLES_3_0", s)
+}
+
+const _TexelFormat_name = "GL_DEPTH_COMPONENTGL_REDGL_ALPHAGL_RGBGL_RGBAGL_LUMINANCEGL_LUMINANCE_ALPHAGL_DEPTH_COMPONENT16GL_RGGL_RG_INTEGERGL_DEPTH_STENCILGL_DEPTH24_STENCIL8GL_RED_INTEGERGL_RGB_INTEGERGL_RGBA_INTEGER"
+
+var _TexelFormat_map = map[TexelFormat]string{
+	6402:  _TexelFormat_name[0:18],
+	6403:  _TexelFormat_name[18:24],
+	6406:  _TexelFormat_name[24:32],
+	6407:  _TexelFormat_name[32:38],
+	6408:  _TexelFormat_name[38:45],
+	6409:  _TexelFormat_name[45:57],
+	6410:  _TexelFormat_name[57:75],
+	33189: _TexelFormat_name[75:95],
+	33319: _TexelFormat_name[95:100],
+	33320: _TexelFormat_name[100:113],
+	34041: _TexelFormat_name[113:129],
+	35056: _TexelFormat_name[129:148],
+	36244: _TexelFormat_name[148:162],
+	36248: _TexelFormat_name[162:176],
+	36249: _TexelFormat_name[176:191],
+}
+
+func (v TexelFormat) String() string {
+	if s, ok := _TexelFormat_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TexelFormat(%v)", v)
+}
+
+func (v *TexelFormat) Parse(s string) error {
+	for k, t := range _TexelFormat_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TexelFormat", s)
+}
+
+const _TexelType_name = "GL_UNSIGNED_BYTEGL_UNSIGNED_SHORTGL_UNSIGNED_INTGL_FLOATGL_UNSIGNED_SHORT_4_4_4_4GL_UNSIGNED_SHORT_5_5_5_1GL_UNSIGNED_SHORT_5_6_5GL_UNSIGNED_INT_24_8"
+
+var _TexelType_map = map[TexelType]string{
+	5121:  _TexelType_name[0:16],
+	5123:  _TexelType_name[16:33],
+	5125:  _TexelType_name[33:48],
+	5126:  _TexelType_name[48:56],
+	32819: _TexelType_name[56:81],
+	32820: _TexelType_name[81:106],
+	33635: _TexelType_name[106:129],
+	34042: _TexelType_name[129:149],
+}
+
+func (v TexelType) String() string {
+	if s, ok := _TexelType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TexelType(%v)", v)
+}
+
+func (v *TexelType) Parse(s string) error {
+	for k, t := range _TexelType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TexelType", s)
+}
+
+const _Texture2DImageTarget_name = "GL_TEXTURE_2D"
+
+var _Texture2DImageTarget_map = map[Texture2DImageTarget]string{
+	3553: _Texture2DImageTarget_name[0:13],
+}
+
+func (v Texture2DImageTarget) String() string {
+	if s, ok := _Texture2DImageTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Texture2DImageTarget(%v)", v)
+}
+
+func (v *Texture2DImageTarget) Parse(s string) error {
+	for k, t := range _Texture2DImageTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Texture2DImageTarget", s)
+}
+
+const _TextureFilterMode_name = "GL_NEARESTGL_LINEARGL_NEAREST_MIPMAP_NEARESTGL_LINEAR_MIPMAP_NEARESTGL_NEAREST_MIPMAP_LINEARGL_LINEAR_MIPMAP_LINEAR"
+
+var _TextureFilterMode_map = map[TextureFilterMode]string{
+	9728: _TextureFilterMode_name[0:10],
+	9729: _TextureFilterMode_name[10:19],
+	9984: _TextureFilterMode_name[19:44],
+	9985: _TextureFilterMode_name[44:68],
+	9986: _TextureFilterMode_name[68:92],
+	9987: _TextureFilterMode_name[92:115],
+}
+
+func (v TextureFilterMode) String() string {
+	if s, ok := _TextureFilterMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureFilterMode(%v)", v)
+}
+
+func (v *TextureFilterMode) Parse(s string) error {
+	for k, t := range _TextureFilterMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureFilterMode", s)
+}
+
+const _TextureImageTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAP_POSITIVE_XGL_TEXTURE_CUBE_MAP_NEGATIVE_XGL_TEXTURE_CUBE_MAP_POSITIVE_YGL_TEXTURE_CUBE_MAP_NEGATIVE_YGL_TEXTURE_CUBE_MAP_POSITIVE_ZGL_TEXTURE_CUBE_MAP_NEGATIVE_Z"
+
+var _TextureImageTarget_map = map[TextureImageTarget]string{
+	3553:  _TextureImageTarget_name[0:13],
+	34069: _TextureImageTarget_name[13:43],
+	34070: _TextureImageTarget_name[43:73],
+	34071: _TextureImageTarget_name[73:103],
+	34072: _TextureImageTarget_name[103:133],
+	34073: _TextureImageTarget_name[133:163],
+	34074: _TextureImageTarget_name[163:193],
+}
+
+func (v TextureImageTarget) String() string {
+	if s, ok := _TextureImageTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureImageTarget(%v)", v)
+}
+
+func (v *TextureImageTarget) Parse(s string) error {
+	for k, t := range _TextureImageTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureImageTarget", s)
+}
+
+const _TextureKind_name = "UNDEFINEDTEXTURE2DCUBEMAP"
+
+var _TextureKind_map = map[TextureKind]string{
+	0: _TextureKind_name[0:9],
+	1: _TextureKind_name[9:18],
+	2: _TextureKind_name[18:25],
+}
+
+func (v TextureKind) String() string {
+	if s, ok := _TextureKind_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureKind(%v)", v)
+}
+
+func (v *TextureKind) Parse(s string) error {
+	for k, t := range _TextureKind_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureKind", s)
+}
+
+const _TextureParameter_EXT_texture_filter_anisotropic_name = "GL_TEXTURE_MAX_ANISOTROPY_EXT"
+
+var _TextureParameter_EXT_texture_filter_anisotropic_map = map[TextureParameter_EXT_texture_filter_anisotropic]string{
+	34046: _TextureParameter_EXT_texture_filter_anisotropic_name[0:29],
+}
+
+func (v TextureParameter_EXT_texture_filter_anisotropic) String() string {
+	if s, ok := _TextureParameter_EXT_texture_filter_anisotropic_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureParameter_EXT_texture_filter_anisotropic(%v)", v)
+}
+
+func (v *TextureParameter_EXT_texture_filter_anisotropic) Parse(s string) error {
+	for k, t := range _TextureParameter_EXT_texture_filter_anisotropic_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureParameter_EXT_texture_filter_anisotropic", s)
+}
+
+const _TextureParameter_FilterMode_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTER"
+
+var _TextureParameter_FilterMode_map = map[TextureParameter_FilterMode]string{
+	10240: _TextureParameter_FilterMode_name[0:21],
+	10241: _TextureParameter_FilterMode_name[21:42],
+}
+
+func (v TextureParameter_FilterMode) String() string {
+	if s, ok := _TextureParameter_FilterMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureParameter_FilterMode(%v)", v)
+}
+
+func (v *TextureParameter_FilterMode) Parse(s string) error {
+	for k, t := range _TextureParameter_FilterMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureParameter_FilterMode", s)
+}
+
+const _TextureParameter_name = "GL_TEXTURE_MAG_FILTERGL_TEXTURE_MIN_FILTERGL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_TGL_TEXTURE_MAX_ANISOTROPY_EXTGL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
+
+var _TextureParameter_map = map[TextureParameter]string{
+	10240: _TextureParameter_name[0:21],
+	10241: _TextureParameter_name[21:42],
+	10242: _TextureParameter_name[42:59],
+	10243: _TextureParameter_name[59:76],
+	34046: _TextureParameter_name[76:105],
+	36418: _TextureParameter_name[105:125],
+	36419: _TextureParameter_name[125:145],
+	36420: _TextureParameter_name[145:165],
+	36421: _TextureParameter_name[165:185],
+}
+
+func (v TextureParameter) String() string {
+	if s, ok := _TextureParameter_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureParameter(%v)", v)
+}
+
+func (v *TextureParameter) Parse(s string) error {
+	for k, t := range _TextureParameter_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureParameter", s)
+}
+
+const _TextureParameter_SwizzleMode_name = "GL_TEXTURE_SWIZZLE_RGL_TEXTURE_SWIZZLE_GGL_TEXTURE_SWIZZLE_BGL_TEXTURE_SWIZZLE_A"
+
+var _TextureParameter_SwizzleMode_map = map[TextureParameter_SwizzleMode]string{
+	36418: _TextureParameter_SwizzleMode_name[0:20],
+	36419: _TextureParameter_SwizzleMode_name[20:40],
+	36420: _TextureParameter_SwizzleMode_name[40:60],
+	36421: _TextureParameter_SwizzleMode_name[60:80],
+}
+
+func (v TextureParameter_SwizzleMode) String() string {
+	if s, ok := _TextureParameter_SwizzleMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureParameter_SwizzleMode(%v)", v)
+}
+
+func (v *TextureParameter_SwizzleMode) Parse(s string) error {
+	for k, t := range _TextureParameter_SwizzleMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureParameter_SwizzleMode", s)
+}
+
+const _TextureParameter_WrapMode_name = "GL_TEXTURE_WRAP_SGL_TEXTURE_WRAP_T"
+
+var _TextureParameter_WrapMode_map = map[TextureParameter_WrapMode]string{
+	10242: _TextureParameter_WrapMode_name[0:17],
+	10243: _TextureParameter_WrapMode_name[17:34],
+}
+
+func (v TextureParameter_WrapMode) String() string {
+	if s, ok := _TextureParameter_WrapMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureParameter_WrapMode(%v)", v)
+}
+
+func (v *TextureParameter_WrapMode) Parse(s string) error {
+	for k, t := range _TextureParameter_WrapMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureParameter_WrapMode", s)
+}
+
+const _TextureTarget_GLES_1_1_name = "GL_TEXTURE_2D"
+
+var _TextureTarget_GLES_1_1_map = map[TextureTarget_GLES_1_1]string{
+	3553: _TextureTarget_GLES_1_1_name[0:13],
+}
+
+func (v TextureTarget_GLES_1_1) String() string {
+	if s, ok := _TextureTarget_GLES_1_1_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureTarget_GLES_1_1(%v)", v)
+}
+
+func (v *TextureTarget_GLES_1_1) Parse(s string) error {
+	for k, t := range _TextureTarget_GLES_1_1_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureTarget_GLES_1_1", s)
+}
+
+const _TextureTarget_GLES_2_0_name = "GL_TEXTURE_CUBE_MAP"
+
+var _TextureTarget_GLES_2_0_map = map[TextureTarget_GLES_2_0]string{
+	34067: _TextureTarget_GLES_2_0_name[0:19],
+}
+
+func (v TextureTarget_GLES_2_0) String() string {
+	if s, ok := _TextureTarget_GLES_2_0_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureTarget_GLES_2_0(%v)", v)
+}
+
+func (v *TextureTarget_GLES_2_0) Parse(s string) error {
+	for k, t := range _TextureTarget_GLES_2_0_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureTarget_GLES_2_0", s)
+}
+
+const _TextureTarget_name = "GL_TEXTURE_2DGL_TEXTURE_CUBE_MAPGL_TEXTURE_EXTERNAL_OES"
+
+var _TextureTarget_map = map[TextureTarget]string{
+	3553:  _TextureTarget_name[0:13],
+	34067: _TextureTarget_name[13:32],
+	36197: _TextureTarget_name[32:55],
+}
+
+func (v TextureTarget) String() string {
+	if s, ok := _TextureTarget_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureTarget(%v)", v)
+}
+
+func (v *TextureTarget) Parse(s string) error {
+	for k, t := range _TextureTarget_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureTarget", s)
+}
+
+const _TextureTarget_OES_EGL_image_external_name = "GL_TEXTURE_EXTERNAL_OES"
+
+var _TextureTarget_OES_EGL_image_external_map = map[TextureTarget_OES_EGL_image_external]string{
+	36197: _TextureTarget_OES_EGL_image_external_name[0:23],
+}
+
+func (v TextureTarget_OES_EGL_image_external) String() string {
+	if s, ok := _TextureTarget_OES_EGL_image_external_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureTarget_OES_EGL_image_external(%v)", v)
+}
+
+func (v *TextureTarget_OES_EGL_image_external) Parse(s string) error {
+	for k, t := range _TextureTarget_OES_EGL_image_external_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureTarget_OES_EGL_image_external", s)
+}
+
+const _TextureUnit_name = "GL_TEXTURE0GL_TEXTURE1GL_TEXTURE2GL_TEXTURE3GL_TEXTURE4GL_TEXTURE5GL_TEXTURE6GL_TEXTURE7GL_TEXTURE8GL_TEXTURE9GL_TEXTURE10GL_TEXTURE11GL_TEXTURE12GL_TEXTURE13GL_TEXTURE14GL_TEXTURE15GL_TEXTURE16GL_TEXTURE17GL_TEXTURE18GL_TEXTURE19GL_TEXTURE20GL_TEXTURE21GL_TEXTURE22GL_TEXTURE23GL_TEXTURE24GL_TEXTURE25GL_TEXTURE26GL_TEXTURE27GL_TEXTURE28GL_TEXTURE29GL_TEXTURE30GL_TEXTURE31"
+
+var _TextureUnit_map = map[TextureUnit]string{
+	33984: _TextureUnit_name[0:11],
+	33985: _TextureUnit_name[11:22],
+	33986: _TextureUnit_name[22:33],
+	33987: _TextureUnit_name[33:44],
+	33988: _TextureUnit_name[44:55],
+	33989: _TextureUnit_name[55:66],
+	33990: _TextureUnit_name[66:77],
+	33991: _TextureUnit_name[77:88],
+	33992: _TextureUnit_name[88:99],
+	33993: _TextureUnit_name[99:110],
+	33994: _TextureUnit_name[110:122],
+	33995: _TextureUnit_name[122:134],
+	33996: _TextureUnit_name[134:146],
+	33997: _TextureUnit_name[146:158],
+	33998: _TextureUnit_name[158:170],
+	33999: _TextureUnit_name[170:182],
+	34000: _TextureUnit_name[182:194],
+	34001: _TextureUnit_name[194:206],
+	34002: _TextureUnit_name[206:218],
+	34003: _TextureUnit_name[218:230],
+	34004: _TextureUnit_name[230:242],
+	34005: _TextureUnit_name[242:254],
+	34006: _TextureUnit_name[254:266],
+	34007: _TextureUnit_name[266:278],
+	34008: _TextureUnit_name[278:290],
+	34009: _TextureUnit_name[290:302],
+	34010: _TextureUnit_name[302:314],
+	34011: _TextureUnit_name[314:326],
+	34012: _TextureUnit_name[326:338],
+	34013: _TextureUnit_name[338:350],
+	34014: _TextureUnit_name[350:362],
+	34015: _TextureUnit_name[362:374],
+}
+
+func (v TextureUnit) String() string {
+	if s, ok := _TextureUnit_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureUnit(%v)", v)
+}
+
+func (v *TextureUnit) Parse(s string) error {
+	for k, t := range _TextureUnit_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureUnit", s)
+}
+
+const _TextureWrapMode_name = "GL_REPEATGL_CLAMP_TO_EDGEGL_MIRRORED_REPEAT"
+
+var _TextureWrapMode_map = map[TextureWrapMode]string{
+	10497: _TextureWrapMode_name[0:9],
+	33071: _TextureWrapMode_name[9:25],
+	33648: _TextureWrapMode_name[25:43],
+}
+
+func (v TextureWrapMode) String() string {
+	if s, ok := _TextureWrapMode_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TextureWrapMode(%v)", v)
+}
+
+func (v *TextureWrapMode) Parse(s string) error {
+	for k, t := range _TextureWrapMode_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TextureWrapMode", s)
+}
+
+const _TilePreserveMaskQCOM_name = "GL_COLOR_BUFFER_BIT0_QCOMGL_COLOR_BUFFER_BIT1_QCOMGL_COLOR_BUFFER_BIT2_QCOMGL_COLOR_BUFFER_BIT3_QCOMGL_COLOR_BUFFER_BIT4_QCOMGL_COLOR_BUFFER_BIT5_QCOMGL_COLOR_BUFFER_BIT6_QCOMGL_COLOR_BUFFER_BIT7_QCOMGL_DEPTH_BUFFER_BIT0_QCOMGL_DEPTH_BUFFER_BIT1_QCOMGL_DEPTH_BUFFER_BIT2_QCOMGL_DEPTH_BUFFER_BIT3_QCOMGL_DEPTH_BUFFER_BIT4_QCOMGL_DEPTH_BUFFER_BIT5_QCOMGL_DEPTH_BUFFER_BIT6_QCOMGL_DEPTH_BUFFER_BIT7_QCOMGL_STENCIL_BUFFER_BIT0_QCOMGL_STENCIL_BUFFER_BIT1_QCOMGL_STENCIL_BUFFER_BIT2_QCOMGL_STENCIL_BUFFER_BIT3_QCOMGL_STENCIL_BUFFER_BIT4_QCOMGL_STENCIL_BUFFER_BIT5_QCOMGL_STENCIL_BUFFER_BIT6_QCOMGL_STENCIL_BUFFER_BIT7_QCOMGL_MULTISAMPLE_BUFFER_BIT0_QCOMGL_MULTISAMPLE_BUFFER_BIT1_QCOMGL_MULTISAMPLE_BUFFER_BIT2_QCOMGL_MULTISAMPLE_BUFFER_BIT3_QCOMGL_MULTISAMPLE_BUFFER_BIT4_QCOMGL_MULTISAMPLE_BUFFER_BIT5_QCOMGL_MULTISAMPLE_BUFFER_BIT6_QCOMGL_MULTISAMPLE_BUFFER_BIT7_QCOM"
+
+var _TilePreserveMaskQCOM_map = map[TilePreserveMaskQCOM]string{
+	1:          _TilePreserveMaskQCOM_name[0:25],
+	2:          _TilePreserveMaskQCOM_name[25:50],
+	4:          _TilePreserveMaskQCOM_name[50:75],
+	8:          _TilePreserveMaskQCOM_name[75:100],
+	16:         _TilePreserveMaskQCOM_name[100:125],
+	32:         _TilePreserveMaskQCOM_name[125:150],
+	64:         _TilePreserveMaskQCOM_name[150:175],
+	128:        _TilePreserveMaskQCOM_name[175:200],
+	256:        _TilePreserveMaskQCOM_name[200:225],
+	512:        _TilePreserveMaskQCOM_name[225:250],
+	1024:       _TilePreserveMaskQCOM_name[250:275],
+	2048:       _TilePreserveMaskQCOM_name[275:300],
+	4096:       _TilePreserveMaskQCOM_name[300:325],
+	8192:       _TilePreserveMaskQCOM_name[325:350],
+	16384:      _TilePreserveMaskQCOM_name[350:375],
+	32768:      _TilePreserveMaskQCOM_name[375:400],
+	65536:      _TilePreserveMaskQCOM_name[400:427],
+	131072:     _TilePreserveMaskQCOM_name[427:454],
+	262144:     _TilePreserveMaskQCOM_name[454:481],
+	524288:     _TilePreserveMaskQCOM_name[481:508],
+	1048576:    _TilePreserveMaskQCOM_name[508:535],
+	2097152:    _TilePreserveMaskQCOM_name[535:562],
+	4194304:    _TilePreserveMaskQCOM_name[562:589],
+	8388608:    _TilePreserveMaskQCOM_name[589:616],
+	16777216:   _TilePreserveMaskQCOM_name[616:647],
+	33554432:   _TilePreserveMaskQCOM_name[647:678],
+	67108864:   _TilePreserveMaskQCOM_name[678:709],
+	134217728:  _TilePreserveMaskQCOM_name[709:740],
+	268435456:  _TilePreserveMaskQCOM_name[740:771],
+	536870912:  _TilePreserveMaskQCOM_name[771:802],
+	1073741824: _TilePreserveMaskQCOM_name[802:833],
+	2147483648: _TilePreserveMaskQCOM_name[833:864],
+}
+
+func (v TilePreserveMaskQCOM) String() string {
+	if s, ok := _TilePreserveMaskQCOM_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("TilePreserveMaskQCOM(%v)", v)
+}
+
+func (v *TilePreserveMaskQCOM) Parse(s string) error {
+	for k, t := range _TilePreserveMaskQCOM_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in TilePreserveMaskQCOM", s)
+}
+
+const _Type_ARB_half_float_vertex_name = "GL_ARB_half_float_vertex"
+
+var _Type_ARB_half_float_vertex_map = map[Type_ARB_half_float_vertex]string{
+	5131: _Type_ARB_half_float_vertex_name[0:24],
+}
+
+func (v Type_ARB_half_float_vertex) String() string {
+	if s, ok := _Type_ARB_half_float_vertex_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Type_ARB_half_float_vertex(%v)", v)
+}
+
+func (v *Type_ARB_half_float_vertex) Parse(s string) error {
+	for k, t := range _Type_ARB_half_float_vertex_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Type_ARB_half_float_vertex", s)
+}
+
+const _Type_OES_vertex_half_float_name = "GL_HALF_FLOAT_OES"
+
+var _Type_OES_vertex_half_float_map = map[Type_OES_vertex_half_float]string{
+	36193: _Type_OES_vertex_half_float_name[0:17],
+}
+
+func (v Type_OES_vertex_half_float) String() string {
+	if s, ok := _Type_OES_vertex_half_float_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("Type_OES_vertex_half_float(%v)", v)
+}
+
+func (v *Type_OES_vertex_half_float) Parse(s string) error {
+	for k, t := range _Type_OES_vertex_half_float_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in Type_OES_vertex_half_float", s)
+}
+
+const _VertexAttribType_name = "GL_BYTEGL_UNSIGNED_BYTEGL_SHORTGL_UNSIGNED_SHORTGL_FLOATGL_ARB_half_float_vertexGL_FIXEDGL_HALF_FLOAT_OES"
+
+var _VertexAttribType_map = map[VertexAttribType]string{
+	5120:  _VertexAttribType_name[0:7],
+	5121:  _VertexAttribType_name[7:23],
+	5122:  _VertexAttribType_name[23:31],
+	5123:  _VertexAttribType_name[31:48],
+	5126:  _VertexAttribType_name[48:56],
+	5131:  _VertexAttribType_name[56:80],
+	5132:  _VertexAttribType_name[80:88],
+	36193: _VertexAttribType_name[88:105],
+}
+
+func (v VertexAttribType) String() string {
+	if s, ok := _VertexAttribType_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("VertexAttribType(%v)", v)
+}
+
+func (v *VertexAttribType) Parse(s string) error {
+	for k, t := range _VertexAttribType_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in VertexAttribType", s)
 }

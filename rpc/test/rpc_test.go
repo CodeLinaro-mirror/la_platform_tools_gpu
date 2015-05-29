@@ -152,7 +152,7 @@ func TestCallEnumToString(t *testing.T) {
 	client, server := create()
 	res, err := client.EnumToString(log.Nop{}, EnumOne)
 	verifyCalls(t, server, err, fmt.Sprintf("EnumToString(%v)", EnumOne))
-	verifyResult(t, "Enum.One", res)
+	verifyResult(t, "One", res)
 }
 
 func TestCallGetStruct(t *testing.T) {

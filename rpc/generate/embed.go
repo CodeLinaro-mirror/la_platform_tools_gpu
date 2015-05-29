@@ -379,14 +379,6 @@ func (h {{$.Name}}) Valid() bool {
 {{define "EnumHelpers"}}
   {{AssertType $ "Enum"}}
 
-  func (i {{$.Name}}) String() string {
-    switch i {
-      {{range $_, $e := $.Entries}}
-        case {{$.Name}}{{$e.Name}}: return "{{$.Name}}.{{$e.Name}}"
-      {{end}}
-      default: return fmt.Sprintf("{{$.Name}}: Unknown value %d", i)
-    }
-  }
   {{range $_, $e := $.Entries}}
     func (i {{$.Name}}) Is{{$e.Name}}() bool { return i == {{$.Name}}{{$e.Name}} }
   {{end}}

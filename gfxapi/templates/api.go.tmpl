@@ -640,13 +640,6 @@
   type {{$.Name}} uint32
 
   {{Macro "EnumConstants" "Enum" $ "Name" $.Name}}
-
-  func (v {{$.Name}}) String() string {
-    switch v {
-    {{Macro "EnumStringCases" $}}
-    default: return fmt.Sprintf("{{$.Name}}<0x%.4x>", uint32(v))
-    }
-  }
 {{end}}
 
 
