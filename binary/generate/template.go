@@ -36,12 +36,30 @@ type functions struct {
 	schema    string
 	writer    io.Writer
 	File      *File
+	counters  map[string]*counter
+}
+
+type counter int
+
+func (c *counter) Set(value int) string {
+	*c = counter(value)
+	return ""
+}
+
+func (c *counter) AddLen(value string) string {
+	*c += counter(len(value))
+	return ""
+}
+
+func (c *counter) String() string {
+	return fmt.Sprint(*c)
 }
 
 func newFunctions() *functions {
 	f := &functions{
 		templates: template.New("FunctionHolder"),
 		funcs:     template.FuncMap{},
+		counters:  map[string]*counter{},
 	}
 	v := reflect.ValueOf(f)
 	t := v.Type()
@@ -132,4 +150,13 @@ func (f *functions) Directive(name string, notset interface{}) interface{} {
 		}
 	}
 	return d
+}
+
+func (f *functions) Counter(name string) *counter {
+	c, ok := f.counters[name]
+	if !ok {
+		c = new(counter)
+		f.counters[name] = c
+	}
+	return c
 }
