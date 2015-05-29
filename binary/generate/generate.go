@@ -155,7 +155,7 @@ func fromType(pkg *types.Package, from types.Type, tag tag, imports Imports) sch
 		alias = name
 		from = from.Underlying()
 		p := named.Obj().Pkg()
-		if p != nil {
+		if p != nil && p != pkg {
 			imports[p.Path()] = struct{}{}
 		}
 	}
