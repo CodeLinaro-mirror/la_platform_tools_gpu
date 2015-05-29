@@ -443,12 +443,11 @@ func (v *ID) Parse(s string) error {
 	return fmt.Errorf("%s not in ID", s)
 }
 
-const _TypeID_name = "ResourceObservationEos"
+const _TypeID_name = "ResourceEos"
 
 var _TypeID_map = map[TypeID]string{
 	65533: _TypeID_name[0:8],
-	65534: _TypeID_name[8:19],
-	65535: _TypeID_name[19:22],
+	65535: _TypeID_name[8:11],
 }
 
 func (v TypeID) String() string {

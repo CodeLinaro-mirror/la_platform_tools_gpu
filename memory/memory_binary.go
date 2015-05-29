@@ -6,6 +6,8 @@
 package memory
 
 import (
+	"fmt"
+
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/registry"
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
@@ -77,4 +79,27 @@ var schemaRange = &schema.Class{
 		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "Pointer", Method: schema.Uint64}},
 		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
+}
+
+const _PoolID_name = "ApplicationPool"
+
+var _PoolID_map = map[PoolID]string{
+	0: _PoolID_name[0:15],
+}
+
+func (v PoolID) String() string {
+	if s, ok := _PoolID_map[v]; ok {
+		return s
+	}
+	return fmt.Sprintf("PoolID(%v)", v)
+}
+
+func (v *PoolID) Parse(s string) error {
+	for k, t := range _PoolID_map {
+		if s == t {
+			*v = k
+			return nil
+		}
+	}
+	return fmt.Errorf("%s not in PoolID", s)
 }
