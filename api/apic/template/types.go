@@ -60,6 +60,7 @@ var (
 		semantic.DeclareLocal{},
 		semantic.EnumEntry{},
 		semantic.Enum{},
+		semantic.Fence{},
 		semantic.Field{},
 		semantic.Function{},
 		semantic.Global{},
