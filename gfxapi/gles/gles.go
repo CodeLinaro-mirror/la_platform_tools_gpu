@@ -14,3 +14,5 @@
 
 // Package gles implementes the API interface for the OpenGL ES graphics library.
 package gles
+
+// binary: cpp = gles
