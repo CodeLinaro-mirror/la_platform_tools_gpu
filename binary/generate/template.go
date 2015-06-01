@@ -74,6 +74,7 @@ func newFunctions() *functions {
 	f.templates.Funcs(f.funcs)
 	template.Must(f.templates.New("go.tmpl").Parse(string(go_tmpl)))
 	template.Must(f.templates.New("java.tmpl").Parse(string(java_tmpl)))
+	template.Must(f.templates.New("cpp.tmpl").Parse(string(cpp_tmpl)))
 	return f
 }
 

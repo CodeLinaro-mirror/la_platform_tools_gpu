@@ -6,10 +6,82 @@
 package generate
 
 var embedded = map[string]string{
+	cpp_tmpl_file:  cpp_tmpl,
 	go_tmpl_file:   go_tmpl,
 	java_tmpl_file: java_tmpl,
 }
 
+const cpp_tmpl_file = `cpp.tmpl`
+const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+{{define "Cpp.Constructor"}}»»{{.Name}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{CppStorage $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
+»»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
+
+{{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
+»»»static gapic::Id ID{ { {{range .ID}}{{printf "0x%2.2x" .}}, {{end}} } };
+»»»return ID;
+»»}{{end}}
+
+{{define "Cpp.Encoder"}}»»virtual void Encode(Encoder* e) const {
+{{range .Fields}}»»»{{Encode (print "this->m" .Name) .Type}}
+{{end}}»»}{{end}}
+
+{{define "Cpp.EncodePrimitive"}}e->{{.Type.Method}}({{.Name}});{{end}}
+{{define "Cpp.EncodeStruct"}}e->Value(&{{.Name}});{{end}}
+{{define "Cpp.EncodePointer"}}e->object({{.Name}});{{end}}
+{{define "Cpp.EncodeInterface"}}e->object({{.Name}});{{end}}
+
+{{define "Cpp.EncodeSlice"}}e->Int32({{.Name}}.size());
+»»»for (int i = 0; i < {{.Name}}.size(); i++) {
+»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»}{{end}}
+
+{{define "Cpp.EncodeArray"}}
+»»»for (int i = 0; i < {{.Type.Length}}; i++) {
+»»»»{{Encode (print .Name "[i]") .Type.ValueType}}
+»»»}{{end}}
+
+{{define "Cpp.EncodeStream"}}{{end}}
+
+{{define "Cpp.EncodeMap"}}{{end}}
+
+{{define "Cpp.File"}}{{Header $.Generated}}
+
+namespace gapic {
+
+class Encodable;
+class Encoder;
+
+namespace coder {
+namespace {{.Package}} {
+{{range .Structs}}»class {{.Name}}: public Encodable {
+»public:
+{{template "Cpp.Constructor" .}}
+{{template "Cpp.ID" .}}
+{{template "Cpp.Encoder" .}}
+
+{{range .Fields}}»»{{CppStorage .Type}} m{{.Name}};
+{{end}}»};
+
+{{end}}
+
+} // namespace {{.Package}}
+} // namespace coder
+} // namespace gapic
+{{end}}
+`
 const go_tmpl_file = `go.tmpl`
 const go_tmpl = `{{/*
  * Copyright (C) 2015 The Android Open Source Project
@@ -348,23 +420,7 @@ const java_tmpl = `{{/*
 
 {{define "Java.DecodeStream"}}{{end}}
 
-{{define "Java.File"}}/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * THIS WILL BE REMOVED ONCE THE CODE GENERATOR IS INTEGRATED INTO THE BUILD.
- */
+{{define "Java.File"}}{{Header $.Generated}}
 package {{.Package}};
 
 import com.android.tools.rpclib.binary.BinaryObject;

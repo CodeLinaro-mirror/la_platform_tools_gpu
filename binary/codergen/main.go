@@ -38,6 +38,7 @@ var (
 	forceSource = flag.Bool("s", false, "force source only")
 	golang      = flag.Bool("go", false, "generate go code")
 	java        = flag.String("java", "", "the path to generate files in")
+	cpp         = flag.String("cpp", "", "the path to generate files in")
 )
 
 const usage = `codergen: A tool to generate coders for go structs.
@@ -161,18 +162,30 @@ func output(gen *generate.Generator, file *generate.File) error {
 			return err
 		}
 	}
-	if *java != "" && !file.IsTest {
+	javaPackage, doJava := file.Directives["java"]
+	if *java != "" && !file.IsTest && doJava {
+		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
 		entry := Entry{
 			File:      *file,
-			Output:    filepath.Join(*java, "ObjectFactory.java"),
+			Output:    filepath.Join(*java, pkgPath, "ObjectFactory.java"),
 			Generator: gen.JavaFile,
 		}
 		entry.File.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
 		entry.File.ClassPrefix = strings.Title(file.Package)
-		i := strings.LastIndex(*java, "/com/")
-		if i >= 0 {
-			entry.File.Package = strings.Replace((*java)[i+1:], "/", ".", -1)
+		entry.File.Package = javaPackage
+		if err := entry.Generate(); err != nil {
+			return err
 		}
+	}
+	cppNamespace, doCpp := file.Directives["cpp"]
+	if *cpp != "" && !file.IsTest && doCpp {
+		entry := Entry{
+			File:      *file,
+			Output:    filepath.Join(*cpp, cppNamespace+".h"),
+			Generator: gen.CppFile,
+		}
+		entry.File.Package = cppNamespace
+		entry.File.Generated = fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp))
 		if err := entry.Generate(); err != nil {
 			return err
 		}
