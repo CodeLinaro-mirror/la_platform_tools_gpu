@@ -322,22 +322,22 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 		},
 		expected: expected{
 			//   ┌────┬────┬────┬────┬────╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗
-			// a │0x00│0x01│0x02│0x03│0x04║0x05│0x06│0x07│0x08│0x09│0x0a│0x0b│0x0c│0x0d│0x0e║
-			//   └────┴────┴────┴────┴────╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝
-			//   ┌────┬────┬────┬────┬────╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗
 			// b │0x10│0x14│0x18│0x1c│0x20║0x24│0x28│0x2c│0x30│0x34│0x38│0x3c│0x40│0x44│0x48║
 			//   └────┴────┴────┴────┴────╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝
 			//   ┌────┬────┬────┬────┬────╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗
 			// c │0x50│0x58│0x60│0x68│0x70║0x78│0x80│0x88│0x90│0x98│0xa0│0xa8│0xb0│0xb8│0xc0║
 			//   └────┴────┴────┴────┴────╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝
-			resources: []binary.ID{aID, bID, cID},
+			//   ┌────┬────┬────┬────┬────╔════╤════╤════╤════╤════╤════╤════╤════╤════╤════╗
+			// a │0x00│0x01│0x02│0x03│0x04║0x05│0x06│0x07│0x08│0x09│0x0a│0x0b│0x0c│0x0d│0x0e║
+			//   └────┴────┴────┴────┴────╚════╧════╧════╧════╧════╧════╧════╧════╧════╧════╝
+			resources: []binary.ID{bID, cID, aID},
 			opcodes: []interface{}{
 				opcode.Label{Value: 0},
-				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x5},
-				opcode.Resource{ID: 0},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x24},
-				opcode.Resource{ID: 1},
+				opcode.Resource{ID: 0},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x78},
+				opcode.Resource{ID: 1},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x5},
 				opcode.Resource{ID: 2},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},

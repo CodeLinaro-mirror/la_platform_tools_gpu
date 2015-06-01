@@ -390,9 +390,9 @@ func (ϟa *CmdVoid3InArrays) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.Buf = MakeU8ˢ(uint64(10), ϟs)
-	ϟc.Buf.replayCopy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	ϟa.B.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
 	ϟa.C.Slice(uint64(5), uint64(15), ϟs).onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+	ϟc.Buf.replayCopy(ϟa.A.Slice(uint64(5), uint64(25), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟb.Push(ϟa.A.value())
 	ϟb.Push(ϟa.B.value())

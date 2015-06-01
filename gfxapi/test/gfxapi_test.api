@@ -108,9 +108,9 @@ cmd void cmd_void_3_strings(string a, string b, string c) {}
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_3_in_arrays(u8* a, u8** b, int* c) {
   buf = make!u8(10)
-	copy(buf, a[5:25]) // only 10 elements should be copied
-	read(b[5:15])
+  read(b[5:15])
 	read(c[5:15])
+	copy(buf, a[5:25]) // only 10 elements should be copied
 }
 
 ////////////////////////////////////////////////////////////////
