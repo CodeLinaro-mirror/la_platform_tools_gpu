@@ -56,7 +56,10 @@ func (s rpcServer) ListenAndServe(addr string, mtu int, logger log.Logger) error
 func (s rpcServer) Import(logger log.Logger, name string, data service.U8Array) (service.CaptureId, error) {
 	atoms := atom.List{}
 	if err := atoms.Decode(cyclic.Decoder(vle.Reader(bytes.NewBuffer(data)))); err != nil {
-		return service.CaptureId{}, err
+		if len(atoms) == 0 {
+			return service.CaptureId{}, err
+		}
+		logger.Warningf("Decode of capture errored after decoding %d atoms: %v", len(atoms), err)
 	}
 	id, err := builder.ImportCapture(name, atoms, s.Database, logger)
 	if err != nil {
