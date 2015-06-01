@@ -1950,9 +1950,11 @@ inline void GlesState::glBufferData(uint32_t const target, int32_t const size, v
     std::shared_ptr<Context> l_ctx = l_GetContext_80_result;
     BufferId l_id = l_ctx->mBoundBuffers[target];
     std::shared_ptr<Buffer> l_b = l_ctx->mInstances.mBuffers[l_id];
-    if (data != nullptr) {
-        copy(l_b->mData, slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(size)));
-    }
+    l_b->mData = /* clang-format off */
+    /* switch(data != nullptr) */
+        /* case true: */(((data != nullptr) == (true))) ? (clone(slice((uint8_t*)(data), (uint64_t)(0), (uint64_t)(size)))) :
+        /* case false: */(((data != nullptr) == (false))) ? (make<uint8_t>((uint64_t)(size))) :
+        /* default: */ Slice<uint8_t>() /* clang-format on */;
     l_b->mSize = size;
     l_b->mUsage = usage;
 }

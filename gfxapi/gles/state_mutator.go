@@ -2622,9 +2622,18 @@ func (ϟa *GlBufferData) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl lo
 	ctx := GetContext_80_result                  // Contextʳ
 	id := ctx.BoundBuffers.Get(ϟa.Target)        // BufferId
 	b := ctx.Instances.Buffers.Get(id)           // Bufferʳ
-	if (ϟa.Data) != (BufferDataPointer(Voidᵖ{})) {
-		b.Data.Copy(U8ᵖ(ϟa.Data).Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs), ϟs, ϟd, ϟl)
-	}
+	b.Data = func() (result U8ˢ) {
+		switch (ϟa.Data) != (BufferDataPointer(Voidᵖ{})) {
+		case true:
+			return U8ᵖ(ϟa.Data).Slice(uint64(int32(0)), uint64(ϟa.Size), ϟs).Clone(ϟs)
+		case false:
+			return MakeU8ˢ(uint64(ϟa.Size), ϟs)
+		default:
+			// TODO: better unmatched handling
+			panic(fmt.Errorf("Unmatched switch(%v) in atom %T", (ϟa.Data) != (BufferDataPointer(Voidᵖ{})), ϟa))
+			return result
+		}
+	}()
 	b.Size = ϟa.Size
 	b.Usage = ϟa.Usage
 	_, _, _, _, _ = context, GetContext_80_result, ctx, id, b
