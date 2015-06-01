@@ -23,7 +23,6 @@ import (
 	"time"
 
 	"android.googlesource.com/platform/tools/gpu/adb"
-	"android.googlesource.com/platform/tools/gpu/binary/vle"
 	"github.com/google/gxui"
 	"github.com/google/gxui/math"
 )
@@ -32,7 +31,7 @@ var (
 	spyport = flag.Int("i", 9286, "gapii TCP port to connect to")
 )
 
-func CreateLaunchAndroidDialog(theme gxui.Theme, status func(s string), launched func()) {
+func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...interface{}), launched func()) {
 	window := theme.CreateWindow(500, 800, "Launch Android application...")
 
 	overlay := theme.CreateBubbleOverlay()
@@ -67,16 +66,16 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, status func(s string), launched
 					if category == "android.intent.category.LAUNCHER" {
 						dev := pkg.Device
 						go func() {
-							status("Disabling SELinux enforcing...")
+							updateStatus("Disabling SELinux enforcing...")
 							dev.SetSELinuxEnforcing(false)
 
-							status("Setting LD_PRELOAD...")
+							updateStatus("Setting LD_PRELOAD...")
 							pkg.SetWrapProperties("LD_PRELOAD=/data/spy.so")
 
-							status("Forwarding port...")
+							updateStatus("Forwarding port...")
 							dev.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
 
-							status("Starting activity...")
+							updateStatus("Starting activity...")
 							dev.StartActivity(action)
 
 							launched()
@@ -131,9 +130,9 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	status := theme.CreateLabel()
 	top.AddChild(status)
 
-	updateStatus := func(s string) {
+	updateStatus := func(s string, args ...interface{}) {
 		theme.Driver().Call(func() {
-			status.SetText(s)
+			status.SetText(fmt.Sprintf(s, args...))
 		})
 	}
 
@@ -154,26 +153,15 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 	window.AddChild(layout)
 
 	var clickSubscription gxui.EventSubscription
-
-	clickSubscription = button.OnClick(func(gxui.MouseEvent) {
-		clickSubscription.Unlisten()
+	capture := func() {
 		stop := make(signal)
+
+		clickSubscription.Unlisten()
 		button.SetText("Stop")
-		button.OnClick(func(gxui.MouseEvent) { stop.raise() })
+		clickSubscription = button.OnClick(func(gxui.MouseEvent) { stop.raise() })
 
-		updates := make(chan tcUpdate, 8)
-		go takeCapture(appCtx, stop, updates)
 		go func() {
-			var data []byte
-			for update := range updates {
-				updateStatus(update.msg)
-				if update.data != nil {
-					data = update.data
-					break
-				}
-			}
-
-			if data != nil {
+			if data := takeCapture(appCtx, stop, updateStatus); data != nil {
 				updateStatus("Importing...")
 				id, err := appCtx.Rpc().Import(appCtx.Logger(), name.Text(), data)
 				if err != nil {
@@ -188,6 +176,11 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 				})
 			}
 		}()
+	}
+
+	clickSubscription = button.OnClick(func(gxui.MouseEvent) { capture() })
+	launch.OnClick(func(ev gxui.MouseEvent) {
+		CreateLaunchAndroidDialog(theme, updateStatus, capture)
 	})
 }
 
@@ -208,25 +201,43 @@ type tcUpdate struct {
 	data []byte
 }
 
-func takeCapture(appCtx *ApplicationContext, stop signal, updates chan tcUpdate) {
+func takeCapture(appCtx *ApplicationContext, stop signal, updateStatus func(string, ...interface{})) []byte {
 	var conn net.Conn
 	var err error
 
-	updates <- tcUpdate{msg: fmt.Sprintf("Waiting for connection to localhost:%d...", *spyport)}
+	updateStatus("Waiting for connection to localhost:%d...", *spyport)
 
 waiting:
 	for {
+		if stop.signaled() {
+			return nil
+		}
 		time.Sleep(500 * time.Millisecond)
 		conn, err = net.Dial("tcp", fmt.Sprintf("localhost:%d", *spyport))
 		if err == nil {
 			buf := &bytes.Buffer{}
 			bytesWritten := int64(0)
 			for {
-				n, err := io.CopyN(buf, conn, 1024*32)
+				if stop.signaled() {
+					conn.Close()
+					return buf.Bytes()
+				}
+
+				conn.SetReadDeadline(time.Now().Add(time.Millisecond * 100)) // Allow for stop event and UI refreshes.
+				n, err := io.CopyN(buf, conn, 1024*64)
+
+				if err, neterr := err.(net.Error); neterr {
+					if err.Temporary() || err.Timeout() {
+						bytesWritten += n
+						updateStatus("Capturing...\n%v bytes", bytesWritten)
+						continue
+					}
+				}
+
 				switch err {
 				case nil:
 					bytesWritten += n
-					updates <- tcUpdate{msg: fmt.Sprintf("Capturing...\n%v bytes", bytesWritten)}
+					updateStatus("Capturing...\n%v bytes", bytesWritten)
 
 				case io.EOF:
 					if len(buf.Bytes()) == 0 {
@@ -236,22 +247,16 @@ waiting:
 						continue waiting
 					}
 
-					vle.Writer(buf).Uint16(0xffff) // EOS
-					updates <- tcUpdate{msg: "Done", data: buf.Bytes()}
-					close(updates)
-					return
+					updateStatus("Done")
+					return buf.Bytes()
 
 				default:
-					updates <- tcUpdate{msg: fmt.Sprintf("Connection error: %v", err)}
-					close(updates)
-					return
+					updateStatus("Connection error: %v", err)
+					return buf.Bytes()
 				}
 			}
 		}
-		if stop.signaled() {
-			return
-		}
 	}
-	defer conn.Close()
 
+	return nil
 }
