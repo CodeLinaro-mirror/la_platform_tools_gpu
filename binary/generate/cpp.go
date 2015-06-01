@@ -59,7 +59,7 @@ func (f *functions) CppStorage(t schema.Type) string {
 	case *schema.Stream:
 		return f.CppStorage(t.ValueType) + "*"
 	case *schema.Map:
-		panic(fmt.Errorf("map types not handled <%s, %s>", f.CppStorage(t.KeyType), f.CppStorage(t.ValueType)))
+		return fmt.Sprintf("std::unordered_map<%s,%s>*", f.CppStorage(t.KeyType), f.CppStorage(t.ValueType))
 	default:
 		panic(fmt.Errorf("Unknown value type %T", t))
 	}
