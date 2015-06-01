@@ -45,6 +45,11 @@ func Visit(node Node, visitor func(Node)) {
 	case *BinaryOp:
 		visitor(n.LHS)
 		visitor(n.RHS)
+	case *BitTest:
+		visitor(n.Bitfield)
+		visitor(n.Bits)
+	case *UnaryOp:
+		visitor(n.Expression)
 	case *Branch:
 		visitor(n.Condition)
 		visitor(n.True)
