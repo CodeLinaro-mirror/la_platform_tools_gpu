@@ -41,14 +41,31 @@ type scope struct {
 }
 
 func (ctx *context) errorf(at interface{}, message string, args ...interface{}) {
-	if at, _ := at.(ast.Node); at != nil && !reflect.ValueOf(at).IsNil() {
-		if n := at.Fragment(); n != nil {
-			ctx.errors.Add(nil, n, message, args...)
-			return
+	n, ok := at.(ast.Node)
+	var f parse.Fragment
+	if !ok {
+		v := reflect.ValueOf(at)
+		if v.Kind() == reflect.Ptr {
+			v = v.Elem()
+		}
+		if v.Kind() == reflect.Struct {
+			a := v.FieldByName("AST")
+			if a.IsValid() {
+				n, ok = a.Interface().(ast.Node)
+			}
 		}
 	}
-	ctx.errors.Add(nil, nil, "Error at node with nil CST field in %T", at)
-	ctx.errors.Add(nil, nil, message, args...)
+	if !ok {
+		ctx.errors.Add(nil, nil, "Error non node %T", at)
+	} else if n == nil || reflect.ValueOf(n).IsNil() {
+		ctx.errors.Add(nil, nil, "Error nil node %T", at)
+	} else {
+		f = n.Fragment()
+		if f == nil {
+			ctx.errors.Add(nil, nil, "Error at %T node with nil fragment", at)
+		}
+	}
+	ctx.errors.Add(nil, f, message, args...)
 }
 
 func (ctx *context) icef(at ast.Node, message string, args ...interface{}) {
