@@ -148,7 +148,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 			} else if _, end := obj.(*objects.Terminator); end {
 				break
 			} else {
-				{{.Name}} = append({{.Name}}, obj.({{.Type.ValueType.Name}}))
+				{{.Name}} = append({{.Name}}, obj.({{.Type.ValueType}}))
 			}
 		} {{end}}
 
