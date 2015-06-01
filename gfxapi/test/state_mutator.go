@@ -78,16 +78,16 @@ func (ϟa *CmdUnknownRet) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ϟa.Result
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *CmdUnknownWritePtr) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(ϟa.P.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl), ϟs)
 	return nil
 }
 func (ϟa *CmdUnknownWriteSlice) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -96,13 +96,13 @@ func (ϟa *CmdUnknownWriteSlice) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	count := int32(5)                                        // s32
 	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Intˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
 		unknown := int64(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // int
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟs)
 		_ = unknown
 	}
 	_, _ = count, slice
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *CmdVoidU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -205,13 +205,26 @@ func (ϟa *CmdVoid3InArrays) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟ
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
+func (ϟa *CmdVoidInArrayOfPointers) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	slice := ϟa.A.Slice(uint64(int32(0)), uint64(ϟa.Count), ϟs) // Charᵖˢ
+	for i := int32(int32(0)); i < ϟa.Count; i++ {
+		x := slice.Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl).Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // char
+		_ = x
+	}
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = slice
+	return nil
+}
 func (ϟa *CmdVoidReadU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u8
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -219,8 +232,8 @@ func (ϟa *CmdVoidReadS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl l
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s8
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -228,8 +241,8 @@ func (ϟa *CmdVoidReadU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u16
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -237,8 +250,8 @@ func (ϟa *CmdVoidReadS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s16
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -246,8 +259,8 @@ func (ϟa *CmdVoidReadF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f32
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -255,8 +268,8 @@ func (ϟa *CmdVoidReadU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u32
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -264,8 +277,8 @@ func (ϟa *CmdVoidReadS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s32
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -273,8 +286,8 @@ func (ϟa *CmdVoidReadF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f64
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -282,8 +295,8 @@ func (ϟa *CmdVoidReadU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u64
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -291,8 +304,8 @@ func (ϟa *CmdVoidReadS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl 
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // s64
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -300,8 +313,8 @@ func (ϟa *CmdVoidReadBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // bool
-	_ = x
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_ = x
 	return nil
 }
 func (ϟa *CmdVoidReadPtrs) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -311,106 +324,106 @@ func (ϟa *CmdVoidReadPtrs) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl
 	x := ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // f32
 	y := ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // u16
 	z := ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Read(ϟs, ϟd, ϟl) // bool
-	_, _, _ = x, y, z
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	_, _, _ = x, y, z
 	return nil
 }
 func (ϟa *CmdVoidWriteU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint8(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint8(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteS8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int8(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int8(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteU16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteS16) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int16(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int16(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteF32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteU32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint32(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint32(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteS32) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int32(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteF64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float64(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float64(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteU64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint64(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint64(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteS64) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int64(1), ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(int64(1), ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWriteBool) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(true, ϟs)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(true, ϟs)
 	return nil
 }
 func (ϟa *CmdVoidWritePtrs) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	ϟa.A.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(float32(10), ϟs)
 	ϟa.B.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(uint16(20), ϟs)
 	ϟa.C.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).Write(false, ϟs)
-	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }
 func (ϟa *CmdU8) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -513,8 +526,8 @@ func (ϟa *CmdPointer) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-	ϟa.Result = ϟa.Result
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Result = ϟa.Result
 	return nil
 }
 func (ϟa *CmdVoid3Remapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
@@ -544,12 +557,20 @@ func (ϟa *CmdVoidOutArrayOfUnknownRemapped) Mutate(ϟs *gfxapi.State, ϟd datab
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	count := int32(5)                                        // s32
 	slice := ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs) // Remappedˢ
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	for i := int32(int32(0)); i < count; i++ {
 		unknown := remapped(ϟa.A.Slice(uint64(int32(0)), uint64(count), ϟs).Index(uint64(i), ϟs).Read(ϟs, ϟd, ϟl)) // remapped
 		slice.Index(uint64(i), ϟs).Write(unknown, ϟs)
 		_ = unknown
 	}
 	_, _ = count, slice
+	return nil
+}
+func (ϟa *CmdRemapped) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	ϟa.Result = ϟa.Result
 	return nil
 }

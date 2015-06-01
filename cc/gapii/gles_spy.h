@@ -319,8 +319,8 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
     int result = mImports.eglInitialize(dpy, major, minor);
 
     do {
-        write(slice(major, 0, 1), 0, read(slice(major, 0, 1), 0));
-        write(slice(minor, 0, 1), 0, read(slice(minor, 0, 1), 0));
+        write(slice(major, 0, 1), 0, slice(major, 0, 1)[0]);
+        write(slice(minor, 0, 1), 0, slice(minor, 0, 1)[0]);
         break;
     } while (false);
 
@@ -459,7 +459,7 @@ inline int GlesSpy::eglQuerySurface(void* display, void* surface, int attribute,
     int result = mImports.eglQuerySurface(display, surface, attribute, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
         break;
     } while (false);
 
@@ -832,7 +832,7 @@ inline int GlesSpy::CGLCreateContext(void* pix, void* share, void** ctx) {
     int result = mImports.CGLCreateContext(pix, share, ctx);
 
     do {
-        CGLContextObj l_context = (CGLContextObj)(read(slice(ctx, 0, 1), 0));
+        CGLContextObj l_context = (CGLContextObj)(slice(ctx, 0, 1)[0]);
         ContextID l_identifier = this->NextContextID;
         this->NextContextID = this->NextContextID + (ContextID)(1);
         std::shared_ptr<Context> l_ctx = std::shared_ptr<Context>((new Context()));
@@ -955,9 +955,9 @@ inline void GlesSpy::glGetProgramBinaryOES(uint32_t program, int32_t buffer_size
     mImports.glGetProgramBinaryOES(program, buffer_size, bytes_written, binary_format, binary);
 
     do {
-        int32_t l_l = (int32_t)(read(slice(bytes_written, 0, 1), 0));
+        int32_t l_l = (int32_t)(slice(bytes_written, 0, 1)[0]);
         write(slice(bytes_written, 0, 1), 0, l_l);
-        write(slice(binary_format, 0, 1), 0, read(slice(binary_format, 0, 1), 0));
+        write(slice(binary_format, 0, 1), 0, slice(binary_format, 0, 1)[0]);
         write(slice(binary, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
 
@@ -1189,7 +1189,7 @@ inline void GlesSpy::glGenVertexArraysOES(int32_t count, uint32_t* arrays) {
         std::shared_ptr<Context> l_ctx = l_GetContext_12_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             VertexArrayId l_id = (VertexArrayId)(
-                    read(slice(arrays, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+                    slice(arrays, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mVertexArrays[l_id] =
                     std::shared_ptr<VertexArray>((new VertexArray()));
             write(l_a, (uint64_t)(l_i), l_id);
@@ -1496,10 +1496,10 @@ inline void GlesSpy::glGetActiveAttrib(uint32_t program, uint32_t location, int3
                                type, name);
 
     do {
-        int32_t l_l = (int32_t)(read(slice(buffer_bytes_written, 0, 1), 0));
+        int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
         write(slice(buffer_bytes_written, 0, 1), 0, l_l);
-        write(slice(vector_count, 0, 1), 0, (int32_t)(read(slice(vector_count, 0, 1), 0)));
-        write(slice(type, 0, 1), 0, (uint32_t)(read(slice(type, 0, 1), 0)));
+        write(slice(vector_count, 0, 1), 0, (int32_t)(slice(vector_count, 0, 1)[0]));
+        write(slice(type, 0, 1), 0, (uint32_t)(slice(type, 0, 1)[0]));
         write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
 
@@ -1526,10 +1526,10 @@ inline void GlesSpy::glGetActiveUniform(uint32_t program, int32_t location, int3
                                 type, name);
 
     do {
-        int32_t l_l = (int32_t)(read(slice(buffer_bytes_written, 0, 1), 0));
+        int32_t l_l = (int32_t)(slice(buffer_bytes_written, 0, 1)[0]);
         write(slice(buffer_bytes_written, 0, 1), 0, l_l);
-        write(slice(vector_count, 0, 1), 0, (int32_t)(read(slice(vector_count, 0, 1), 0)));
-        write(slice(type, 0, 1), 0, (uint32_t)(read(slice(type, 0, 1), 0)));
+        write(slice(vector_count, 0, 1), 0, (int32_t)(slice(vector_count, 0, 1)[0]));
+        write(slice(type, 0, 1), 0, (uint32_t)(slice(type, 0, 1)[0]));
         write(slice(name, (uint64_t)(0), (uint64_t)(l_l)));
     } while (false);
 
@@ -1568,7 +1568,7 @@ inline void GlesSpy::glGetProgramiv(uint32_t program, uint32_t parameter, int32_
     mImports.glGetProgramiv(program, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(50);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAMIV_ID);
@@ -2489,7 +2489,7 @@ inline void GlesSpy::glGetShaderPrecisionFormat(uint32_t shader_type, uint32_t p
 
     do {
         write(slice(range, 0, 2));
-        write(slice(precision, 0, 1), 0, read(slice(precision, 0, 1), 0));
+        write(slice(precision, 0, 1), 0, slice(precision, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(88);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_PRECISION_FORMAT_ID);
@@ -2739,8 +2739,8 @@ inline void GlesSpy::glGenTextures(int32_t count, uint32_t* textures) {
         std::shared_ptr<Context> l_GetContext_60_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_60_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
-            TextureId l_id = (TextureId)(
-                    read(slice(textures, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+            TextureId l_id =
+                    (TextureId)(slice(textures, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mTextures[l_id] = std::shared_ptr<Texture>((new Texture()));
             write(l_t, (uint64_t)(l_i), l_id);
         }
@@ -3154,7 +3154,7 @@ inline void GlesSpy::glGenFramebuffers(int32_t count, uint32_t* framebuffers) {
         std::shared_ptr<Context> l_ctx = l_GetContext_67_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             FramebufferId l_id = (FramebufferId)(
-                    read(slice(framebuffers, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+                    slice(framebuffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mFramebuffers[l_id] =
                     std::shared_ptr<Framebuffer>((new Framebuffer()));
             write(l_f, (uint64_t)(l_i), l_id);
@@ -3262,7 +3262,7 @@ inline void GlesSpy::glGenRenderbuffers(int32_t count, uint32_t* renderbuffers) 
         std::shared_ptr<Context> l_ctx = l_GetContext_71_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
             RenderbufferId l_id = (RenderbufferId)(
-                    read(slice(renderbuffers, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+                    slice(renderbuffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mRenderbuffers[l_id] =
                     std::shared_ptr<Renderbuffer>((new Renderbuffer()));
             write(l_r, (uint64_t)(l_i), l_id);
@@ -3399,8 +3399,8 @@ inline void GlesSpy::glGenBuffers(int32_t count, uint32_t* buffers) {
         std::shared_ptr<Context> l_GetContext_77_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_77_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
-            BufferId l_id = (BufferId)(
-                    read(slice(buffers, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+            BufferId l_id =
+                    (BufferId)(slice(buffers, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mBuffers[l_id] = std::shared_ptr<Buffer>((new Buffer()));
             write(l_b, (uint64_t)(l_i), l_id);
         }
@@ -4479,12 +4479,12 @@ inline void GlesSpy::glGetBooleanv(uint32_t param, bool* values) {
             }
             case StateVariable::GL_SHADER_COMPILER: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
         }
@@ -4541,21 +4541,21 @@ inline void GlesSpy::glGetFloatv(uint32_t param, float* values) {
             }
             case StateVariable::GL_ALIASED_LINE_WIDTH_RANGE: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 write(l_v, 1,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 1));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1]);
                 break;
             }
             case StateVariable::GL_ALIASED_POINT_SIZE_RANGE: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 write(l_v, 1,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 1));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1]);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
         }
@@ -4699,81 +4699,81 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             }
             case StateVariable::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_RENDERBUFFER_SIZE: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_IMAGE_UNITS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_SIZE: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VARYING_VECTORS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_ATTRIBS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_UNIFORM_VECTORS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VIEWPORT_DIMS: {
                 auto l_max_width =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 auto l_max_height =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 1);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[1];
                 write(l_v, 0, l_max_width);
                 write(l_v, 1, l_max_height);
                 break;
             }
             case StateVariable::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_NUM_SHADER_BINARY_FORMATS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
@@ -4787,68 +4787,68 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
             }
             case StateVariable::GL_ALPHA_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_BLUE_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_GREEN_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_RED_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_DEPTH_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_SAMPLE_BUFFERS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_SAMPLES: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_STENCIL_BITS: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_SUBPIXEL_BITS: {
                 auto l_result =
-                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                        slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0];
                 write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_IMPLEMENTATION_COLOR_READ_TYPE: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
             case StateVariable::GL_GPU_DISJOINT_EXT: {
                 write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                      slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param)))[0]);
                 break;
             }
         }
@@ -5031,8 +5031,8 @@ inline void GlesSpy::glGenQueries(int32_t count, uint32_t* queries) {
         std::shared_ptr<Context> l_GetContext_127_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_127_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
-            QueryId l_id = (QueryId)(
-                    read(slice(queries, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+            QueryId l_id =
+                    (QueryId)(slice(queries, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
             write(l_q, (uint64_t)(l_i), l_id);
         }
@@ -5115,7 +5115,7 @@ inline void GlesSpy::glGetQueryiv(uint32_t target, uint32_t parameter, int32_t* 
     mImports.glGetQueryiv(target, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(183);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_ID);
@@ -5131,7 +5131,7 @@ inline void GlesSpy::glGetQueryObjectuiv(uint32_t query, uint32_t parameter, uin
     mImports.glGetQueryObjectuiv(query, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(184);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_ID);
@@ -5152,8 +5152,8 @@ inline void GlesSpy::glGenQueriesEXT(int32_t count, uint32_t* queries) {
         std::shared_ptr<Context> l_GetContext_130_result = l_context;
         std::shared_ptr<Context> l_ctx = l_GetContext_130_result;
         for (int32_t l_i = 0; l_i < count; ++l_i) {
-            QueryId l_id = (QueryId)(
-                    read(slice(queries, (uint64_t)(0), (uint64_t)(count)), (uint64_t)(l_i)));
+            QueryId l_id =
+                    (QueryId)(slice(queries, (uint64_t)(0), (uint64_t)(count))[(uint64_t)(l_i)]);
             l_ctx->mInstances.mQueries[l_id] = std::shared_ptr<Query>((new Query()));
             write(l_q, (uint64_t)(l_i), l_id);
         }
@@ -5249,7 +5249,7 @@ inline void GlesSpy::glGetQueryivEXT(uint32_t target, uint32_t parameter, int32_
     mImports.glGetQueryivEXT(target, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(191);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERYIV_E_X_T_ID);
@@ -5265,7 +5265,7 @@ inline void GlesSpy::glGetQueryObjectivEXT(uint32_t query, uint32_t parameter, i
     mImports.glGetQueryObjectivEXT(query, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(192);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTIV_E_X_T_ID);
@@ -5281,7 +5281,7 @@ inline void GlesSpy::glGetQueryObjectuivEXT(uint32_t query, uint32_t parameter, 
     mImports.glGetQueryObjectuivEXT(query, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(193);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUIV_E_X_T_ID);
@@ -5297,7 +5297,7 @@ inline void GlesSpy::glGetQueryObjecti64vEXT(uint32_t query, uint32_t parameter,
     mImports.glGetQueryObjecti64vEXT(query, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(194);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTI64V_E_X_T_ID);
@@ -5313,7 +5313,7 @@ inline void GlesSpy::glGetQueryObjectui64vEXT(uint32_t query, uint32_t parameter
     mImports.glGetQueryObjectui64vEXT(query, parameter, value);
 
     do {
-        write(slice(value, 0, 1), 0, read(slice(value, 0, 1), 0));
+        write(slice(value, 0, 1), 0, slice(value, 0, 1)[0]);
     } while (false);
 
     mEncoder->Uint16(195);  // Type ID -- TODO: mEncoder->Id(GL_GET_QUERY_OBJECTUI64V_E_X_T_ID);

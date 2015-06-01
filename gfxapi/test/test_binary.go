@@ -18,6 +18,8 @@ func init() {
 	registry.Add((*Boolᵖ)(nil).Class())
 	registry.Add((*Charˢ)(nil).Class())
 	registry.Add((*Charᵖ)(nil).Class())
+	registry.Add((*Charᵖˢ)(nil).Class())
+	registry.Add((*Charᵖᵖ)(nil).Class())
 	registry.Add((*CmdBool)(nil).Class())
 	registry.Add((*CmdCharptrToString)(nil).Class())
 	registry.Add((*CmdCharsliceToString)(nil).Class())
@@ -29,6 +31,7 @@ func init() {
 	registry.Add((*CmdMake)(nil).Class())
 	registry.Add((*Voidᵖ)(nil).Class())
 	registry.Add((*CmdPointer)(nil).Class())
+	registry.Add((*CmdRemapped)(nil).Class())
 	registry.Add((*CmdS16)(nil).Class())
 	registry.Add((*CmdS32)(nil).Class())
 	registry.Add((*CmdS64)(nil).Class())
@@ -43,13 +46,14 @@ func init() {
 	registry.Add((*CmdUnknownWritePtr)(nil).Class())
 	registry.Add((*CmdUnknownWriteSlice)(nil).Class())
 	registry.Add((*CmdVoid)(nil).Class())
-	registry.Add((*U8ᵖᵖ)(nil).Class())
+	registry.Add((*U32ᵖ)(nil).Class())
 	registry.Add((*CmdVoid3InArrays)(nil).Class())
 	registry.Add((*CmdVoid3Remapped)(nil).Class())
 	registry.Add((*CmdVoid3Strings)(nil).Class())
 	registry.Add((*CmdVoidBool)(nil).Class())
 	registry.Add((*CmdVoidF32)(nil).Class())
 	registry.Add((*CmdVoidF64)(nil).Class())
+	registry.Add((*CmdVoidInArrayOfPointers)(nil).Class())
 	registry.Add((*Remappedᵖ)(nil).Class())
 	registry.Add((*CmdVoidInArrayOfRemapped)(nil).Class())
 	registry.Add((*CmdVoidOutArrayOfRemapped)(nil).Class())
@@ -70,7 +74,6 @@ func init() {
 	registry.Add((*S8ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadS8)(nil).Class())
 	registry.Add((*CmdVoidReadU16)(nil).Class())
-	registry.Add((*U32ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadU32)(nil).Class())
 	registry.Add((*U64ᵖ)(nil).Class())
 	registry.Add((*CmdVoidReadU64)(nil).Class())
@@ -112,7 +115,6 @@ func init() {
 	registry.Add((*U16ˢ)(nil).Class())
 	registry.Add((*U32ˢ)(nil).Class())
 	registry.Add((*U64ˢ)(nil).Class())
-	registry.Add((*U8ᵖˢ)(nil).Class())
 	registry.Add((*Voidˢ)(nil).Class())
 }
 
@@ -121,6 +123,8 @@ var (
 	binaryIDBoolᵖ                            = binary.ID{0x5d, 0x1a, 0xc1, 0x43, 0xe5, 0x22, 0xa0, 0x0d, 0x01, 0xf5, 0x15, 0xd5, 0xb7, 0xe6, 0x74, 0xa5, 0xfa, 0x62, 0x3e, 0x0a}
 	binaryIDCharˢ                            = binary.ID{0xc3, 0xfa, 0x01, 0xb8, 0x39, 0x25, 0x6e, 0xee, 0x19, 0x67, 0xb8, 0x9f, 0x4d, 0x42, 0x73, 0xcd, 0x70, 0x0f, 0x94, 0x0f}
 	binaryIDCharᵖ                            = binary.ID{0x1f, 0x6c, 0x0a, 0xf7, 0xe7, 0x85, 0x27, 0x3a, 0x09, 0xe5, 0xdb, 0x03, 0xad, 0xa2, 0x81, 0x57, 0x7f, 0x5a, 0xb5, 0x9a}
+	binaryIDCharᵖˢ                           = binary.ID{0xf9, 0x77, 0x27, 0x5a, 0x2f, 0xc1, 0xce, 0x70, 0x76, 0x50, 0x1d, 0xbf, 0xce, 0xb9, 0x33, 0xc3, 0x45, 0x63, 0x99, 0x5c}
+	binaryIDCharᵖᵖ                           = binary.ID{0xaa, 0x7a, 0x0c, 0x33, 0x7a, 0xc3, 0xdd, 0xf7, 0x79, 0x2f, 0x6c, 0x63, 0x8e, 0x36, 0xe9, 0x75, 0xea, 0x87, 0xaf, 0x03}
 	binaryIDCmdBool                          = binary.ID{0x80, 0x77, 0xdf, 0x53, 0x3b, 0x89, 0xeb, 0x5f, 0x66, 0xfc, 0xe7, 0xd8, 0x38, 0x69, 0x06, 0x15, 0x7e, 0x0d, 0xcb, 0x23}
 	binaryIDCmdCharptrToString               = binary.ID{0xdf, 0x31, 0x80, 0x37, 0xc7, 0x34, 0x4e, 0x03, 0xe2, 0xb9, 0x46, 0xc3, 0xe3, 0x1c, 0x71, 0xed, 0xe6, 0x40, 0xd9, 0x47}
 	binaryIDCmdCharsliceToString             = binary.ID{0xfb, 0x14, 0x26, 0x02, 0x76, 0xf5, 0x73, 0x16, 0x1b, 0xbf, 0x84, 0xcb, 0xc4, 0xcc, 0x64, 0xe2, 0x42, 0x12, 0xe3, 0x91}
@@ -132,6 +136,7 @@ var (
 	binaryIDCmdMake                          = binary.ID{0x15, 0x38, 0x00, 0x1e, 0xc3, 0x22, 0xd3, 0xd8, 0x1e, 0xa5, 0x30, 0xd6, 0x50, 0x04, 0x98, 0xda, 0xb1, 0x18, 0x71, 0x12}
 	binaryIDVoidᵖ                            = binary.ID{0xdf, 0xa6, 0x57, 0xea, 0xf6, 0xce, 0x58, 0x3f, 0x19, 0xe1, 0xab, 0xd5, 0xa3, 0xc5, 0x9b, 0xa2, 0x9e, 0xd1, 0x60, 0x3c}
 	binaryIDCmdPointer                       = binary.ID{0xf9, 0x00, 0xe9, 0xab, 0x79, 0x5c, 0x88, 0xb7, 0xb6, 0x4e, 0xaf, 0x04, 0x12, 0x0a, 0xf9, 0xa1, 0xa7, 0xd1, 0xb5, 0x8d}
+	binaryIDCmdRemapped                      = binary.ID{0x22, 0x98, 0x76, 0xdd, 0x98, 0xda, 0x72, 0xbe, 0x68, 0xd6, 0x1e, 0xa7, 0x33, 0x03, 0xc0, 0xae, 0x76, 0xde, 0x7d, 0x96}
 	binaryIDCmdS16                           = binary.ID{0xe8, 0x57, 0x2b, 0x7c, 0x6b, 0x9d, 0x63, 0x08, 0xd2, 0x27, 0x98, 0xd4, 0x9e, 0x5c, 0xd0, 0x7f, 0x9e, 0x7c, 0x96, 0x86}
 	binaryIDCmdS32                           = binary.ID{0x08, 0xf9, 0xd9, 0x7a, 0x65, 0x69, 0x0e, 0x37, 0xa8, 0x82, 0x10, 0xf9, 0x68, 0xfb, 0x4a, 0xaa, 0x3a, 0x12, 0x59, 0xaa}
 	binaryIDCmdS64                           = binary.ID{0x95, 0xcd, 0x41, 0x0e, 0x54, 0x5d, 0x34, 0x9f, 0xa5, 0x3f, 0x9a, 0x5d, 0x0f, 0xb6, 0x75, 0x6a, 0x30, 0xb3, 0x03, 0xcd}
@@ -146,13 +151,14 @@ var (
 	binaryIDCmdUnknownWritePtr               = binary.ID{0x7c, 0x73, 0xd0, 0x88, 0x6d, 0x32, 0xaa, 0xaa, 0xd1, 0x0c, 0x40, 0x1f, 0xb4, 0x51, 0x8c, 0x92, 0x57, 0x29, 0xfb, 0x64}
 	binaryIDCmdUnknownWriteSlice             = binary.ID{0xcd, 0x54, 0xda, 0x41, 0x77, 0xb4, 0x11, 0xda, 0xd2, 0xa2, 0x07, 0xa3, 0xa4, 0x09, 0x60, 0xb9, 0xcf, 0x79, 0x58, 0x45}
 	binaryIDCmdVoid                          = binary.ID{0x2c, 0xee, 0x70, 0x13, 0xcb, 0xa0, 0x04, 0xc6, 0x11, 0xec, 0x73, 0xcb, 0xa9, 0xa2, 0x90, 0xcd, 0x6d, 0xa0, 0xf9, 0xee}
-	binaryIDU8ᵖᵖ                             = binary.ID{0x09, 0x3a, 0xf3, 0x79, 0xeb, 0x41, 0x93, 0x31, 0xdd, 0x0d, 0x12, 0xd8, 0x43, 0x15, 0xc2, 0x21, 0x54, 0x71, 0x89, 0x7b}
-	binaryIDCmdVoid3InArrays                 = binary.ID{0xaa, 0xa2, 0xdf, 0x5e, 0x35, 0x9a, 0x51, 0x86, 0x68, 0x13, 0x12, 0xeb, 0x68, 0x06, 0x87, 0x6c, 0x51, 0x41, 0x44, 0xf3}
+	binaryIDU32ᵖ                             = binary.ID{0x89, 0x6a, 0x59, 0x0e, 0xdf, 0xa8, 0xd6, 0x44, 0xc8, 0x10, 0x50, 0xcf, 0xbb, 0x6a, 0x7f, 0xa5, 0x31, 0x06, 0x36, 0x7d}
+	binaryIDCmdVoid3InArrays                 = binary.ID{0x48, 0xf3, 0x0c, 0x6e, 0x4e, 0xf4, 0xf0, 0x3c, 0x0f, 0x39, 0x60, 0x2e, 0xd6, 0xaa, 0xb1, 0x17, 0x52, 0xcd, 0x39, 0x22}
 	binaryIDCmdVoid3Remapped                 = binary.ID{0xf1, 0x71, 0xe4, 0x75, 0x43, 0x55, 0xd7, 0x1e, 0xc0, 0xf2, 0x91, 0x7c, 0xd3, 0xdd, 0xce, 0xa2, 0xd4, 0x96, 0x4f, 0x10}
 	binaryIDCmdVoid3Strings                  = binary.ID{0xb1, 0x4b, 0x88, 0x77, 0x9a, 0xef, 0x0b, 0xfc, 0x89, 0x45, 0xcb, 0x32, 0x64, 0xe3, 0x22, 0x0d, 0x4a, 0x5d, 0x1a, 0xde}
 	binaryIDCmdVoidBool                      = binary.ID{0x7a, 0xbd, 0xdc, 0xa2, 0x3d, 0xcb, 0xe4, 0x70, 0xc0, 0x5a, 0xbe, 0xdd, 0x60, 0xb9, 0xb7, 0x25, 0xff, 0x64, 0xd7, 0x25}
 	binaryIDCmdVoidF32                       = binary.ID{0x0c, 0x94, 0xea, 0xe1, 0x42, 0x48, 0x79, 0x78, 0x3d, 0x58, 0x8e, 0xe8, 0x4a, 0xa8, 0x98, 0xad, 0x6e, 0xa0, 0x2c, 0xdd}
 	binaryIDCmdVoidF64                       = binary.ID{0x31, 0xd6, 0x0f, 0x82, 0x30, 0x87, 0x4e, 0x3c, 0x16, 0x92, 0x95, 0x86, 0xcf, 0x9e, 0xce, 0x87, 0xe7, 0x42, 0xe9, 0xce}
+	binaryIDCmdVoidInArrayOfPointers         = binary.ID{0xfe, 0xbc, 0x8b, 0x57, 0xd5, 0xfd, 0xa2, 0xdc, 0x46, 0x9c, 0x5a, 0x3b, 0xc1, 0x9c, 0x09, 0xee, 0x38, 0x38, 0xaf, 0x3f}
 	binaryIDRemappedᵖ                        = binary.ID{0x07, 0x53, 0x5a, 0xe5, 0x2b, 0xae, 0x08, 0x1f, 0xe6, 0x6d, 0xe8, 0x5e, 0x7b, 0xf2, 0x18, 0x0d, 0xe9, 0x16, 0x7a, 0xb4}
 	binaryIDCmdVoidInArrayOfRemapped         = binary.ID{0x0f, 0x5a, 0x24, 0x88, 0xe9, 0x4f, 0xa6, 0x76, 0xfb, 0xf1, 0x57, 0xd6, 0xdb, 0x95, 0x90, 0x56, 0xe2, 0x26, 0x0f, 0xd6}
 	binaryIDCmdVoidOutArrayOfRemapped        = binary.ID{0xc6, 0x57, 0xfb, 0xf5, 0x45, 0x1e, 0x87, 0xac, 0x6d, 0x51, 0x31, 0x70, 0xb7, 0x70, 0xca, 0xcf, 0xdd, 0xba, 0x9b, 0xa0}
@@ -173,7 +179,6 @@ var (
 	binaryIDS8ᵖ                              = binary.ID{0x47, 0xf5, 0xa4, 0x30, 0x2a, 0x3f, 0x54, 0xec, 0x35, 0x99, 0x11, 0x7c, 0x99, 0xe1, 0xea, 0x24, 0x0a, 0x6b, 0x0a, 0x33}
 	binaryIDCmdVoidReadS8                    = binary.ID{0xc2, 0xe8, 0x40, 0xb9, 0x52, 0xe6, 0x15, 0xcc, 0xa4, 0x36, 0x25, 0x41, 0xbd, 0x51, 0x0b, 0xa3, 0xda, 0x06, 0x4f, 0x67}
 	binaryIDCmdVoidReadU16                   = binary.ID{0x27, 0xdd, 0x62, 0x6e, 0x9c, 0xe9, 0xd1, 0x80, 0xe0, 0x36, 0x43, 0x92, 0xde, 0x6d, 0x8b, 0xbb, 0x54, 0xce, 0x3d, 0xc5}
-	binaryIDU32ᵖ                             = binary.ID{0x89, 0x6a, 0x59, 0x0e, 0xdf, 0xa8, 0xd6, 0x44, 0xc8, 0x10, 0x50, 0xcf, 0xbb, 0x6a, 0x7f, 0xa5, 0x31, 0x06, 0x36, 0x7d}
 	binaryIDCmdVoidReadU32                   = binary.ID{0x0c, 0xb1, 0x77, 0xb4, 0xa5, 0x94, 0xdc, 0xf4, 0xaa, 0x7a, 0x7c, 0xec, 0x20, 0x7a, 0x9f, 0x71, 0x6e, 0x5a, 0xa4, 0x1b}
 	binaryIDU64ᵖ                             = binary.ID{0x0d, 0xfc, 0x3b, 0xd9, 0x4f, 0xe7, 0x95, 0xa7, 0xfb, 0x6d, 0x06, 0x88, 0xf1, 0x81, 0x69, 0xc9, 0x22, 0x76, 0x2a, 0x40}
 	binaryIDCmdVoidReadU64                   = binary.ID{0xc8, 0x5f, 0x76, 0xcd, 0x34, 0xdd, 0xdf, 0xd6, 0x22, 0xf3, 0xc9, 0x98, 0x66, 0xc6, 0x4f, 0x40, 0x66, 0xc6, 0x1e, 0xf4}
@@ -215,7 +220,6 @@ var (
 	binaryIDU16ˢ                             = binary.ID{0x8e, 0x0c, 0x8f, 0x4e, 0x66, 0xc0, 0x00, 0x11, 0x4d, 0x2b, 0x25, 0xc7, 0xa9, 0x68, 0x15, 0x79, 0xd9, 0x79, 0x52, 0x7b}
 	binaryIDU32ˢ                             = binary.ID{0x9d, 0x85, 0xba, 0x7d, 0xb2, 0xb7, 0x1d, 0x1b, 0x59, 0x27, 0x0b, 0x61, 0xc3, 0x73, 0x26, 0x66, 0xe2, 0x8d, 0x3d, 0xca}
 	binaryIDU64ˢ                             = binary.ID{0xc8, 0x21, 0x63, 0x96, 0xba, 0xef, 0x4e, 0xe6, 0xaf, 0xbe, 0xd8, 0xb8, 0x6d, 0xd0, 0x8d, 0x10, 0x76, 0x14, 0x21, 0xdf}
-	binaryIDU8ᵖˢ                             = binary.ID{0xed, 0x27, 0xd7, 0x78, 0xe1, 0xa8, 0x19, 0x3e, 0x1f, 0x95, 0xf2, 0x9a, 0xfa, 0xa3, 0x83, 0xcc, 0xe2, 0xe2, 0x83, 0xa7}
 	binaryIDVoidˢ                            = binary.ID{0xe3, 0xfe, 0x0f, 0x4c, 0x55, 0x49, 0x0d, 0x75, 0xe8, 0x00, 0x97, 0x83, 0x04, 0x90, 0x1a, 0xf6, 0x67, 0x69, 0xb3, 0x81}
 )
 
@@ -501,6 +505,150 @@ func (*binaryClassCharᵖ) Schema() *schema.Class       { return schemaCharᵖ }
 var schemaCharᵖ = &schema.Class{
 	TypeID: binaryIDCharᵖ,
 	Name:   "Charᵖ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCharᵖˢ struct{}
+
+func (*Charᵖˢ) Class() binary.Class {
+	return (*binaryClassCharᵖˢ)(nil)
+}
+func doEncodeCharᵖˢ(e binary.Encoder, o *Charᵖˢ) error {
+	if err := e.Uint64(uint64(o.Root)); err != nil {
+		return err
+	}
+	if err := e.Uint64(uint64(o.Base)); err != nil {
+		return err
+	}
+	if err := e.Uint64(o.Count); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCharᵖˢ(d binary.Decoder, o *Charᵖˢ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Root = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Base = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Count = uint64(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCharᵖˢ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCharᵖˢ) ID() binary.ID      { return binaryIDCharᵖˢ }
+func (*binaryClassCharᵖˢ) New() binary.Object { return &Charᵖˢ{} }
+func (*binaryClassCharᵖˢ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCharᵖˢ(e, obj.(*Charᵖˢ))
+}
+func (*binaryClassCharᵖˢ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Charᵖˢ{}
+	return obj, doDecodeCharᵖˢ(d, obj)
+}
+func (*binaryClassCharᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCharᵖˢ(d, obj.(*Charᵖˢ))
+}
+func (*binaryClassCharᵖˢ) Skip(d binary.Decoder) error { return doSkipCharᵖˢ(d) }
+func (*binaryClassCharᵖˢ) Schema() *schema.Class       { return schemaCharᵖˢ }
+
+var schemaCharᵖˢ = &schema.Class{
+	TypeID: binaryIDCharᵖˢ,
+	Name:   "Charᵖˢ",
+	Fields: []schema.Field{
+		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+	},
+}
+
+type binaryClassCharᵖᵖ struct{}
+
+func (*Charᵖᵖ) Class() binary.Class {
+	return (*binaryClassCharᵖᵖ)(nil)
+}
+func doEncodeCharᵖᵖ(e binary.Encoder, o *Charᵖᵖ) error {
+	if err := e.Uint64(uint64(o.Address)); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Pool)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCharᵖᵖ(d binary.Decoder, o *Charᵖᵖ) error {
+	if obj, err := d.Uint64(); err != nil {
+		return err
+	} else {
+		o.Address = memory.Pointer(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Pool = memory.PoolID(obj)
+	}
+	return nil
+}
+func doSkipCharᵖᵖ(d binary.Decoder) error {
+	if _, err := d.Uint64(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCharᵖᵖ) ID() binary.ID      { return binaryIDCharᵖᵖ }
+func (*binaryClassCharᵖᵖ) New() binary.Object { return &Charᵖᵖ{} }
+func (*binaryClassCharᵖᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCharᵖᵖ(e, obj.(*Charᵖᵖ))
+}
+func (*binaryClassCharᵖᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Charᵖᵖ{}
+	return obj, doDecodeCharᵖᵖ(d, obj)
+}
+func (*binaryClassCharᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCharᵖᵖ(d, obj.(*Charᵖᵖ))
+}
+func (*binaryClassCharᵖᵖ) Skip(d binary.Decoder) error { return doSkipCharᵖᵖ(d) }
+func (*binaryClassCharᵖᵖ) Schema() *schema.Class       { return schemaCharᵖᵖ }
+
+var schemaCharᵖᵖ = &schema.Class{
+	TypeID: binaryIDCharᵖᵖ,
+	Name:   "Charᵖᵖ",
 	Fields: []schema.Field{
 		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -1174,6 +1322,64 @@ var schemaCmdPointer = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
+	},
+}
+
+type binaryClassCmdRemapped struct{}
+
+func (*CmdRemapped) Class() binary.Class {
+	return (*binaryClassCmdRemapped)(nil)
+}
+func doEncodeCmdRemapped(e binary.Encoder, o *CmdRemapped) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(uint32(o.Result)); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdRemapped(d binary.Decoder, o *CmdRemapped) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.Result = remapped(obj)
+	}
+	return nil
+}
+func doSkipCmdRemapped(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdRemapped) ID() binary.ID      { return binaryIDCmdRemapped }
+func (*binaryClassCmdRemapped) New() binary.Object { return &CmdRemapped{} }
+func (*binaryClassCmdRemapped) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdRemapped(e, obj.(*CmdRemapped))
+}
+func (*binaryClassCmdRemapped) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdRemapped{}
+	return obj, doDecodeCmdRemapped(d, obj)
+}
+func (*binaryClassCmdRemapped) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdRemapped(d, obj.(*CmdRemapped))
+}
+func (*binaryClassCmdRemapped) Skip(d binary.Decoder) error { return doSkipCmdRemapped(d) }
+func (*binaryClassCmdRemapped) Schema() *schema.Class       { return schemaCmdRemapped }
+
+var schemaCmdRemapped = &schema.Class{
+	TypeID: binaryIDCmdRemapped,
+	Name:   "CmdRemapped",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "remapped", Method: schema.Uint32}},
 	},
 }
 
@@ -1977,12 +2183,12 @@ var schemaCmdVoid = &schema.Class{
 	},
 }
 
-type binaryClassU8ᵖᵖ struct{}
+type binaryClassU32ᵖ struct{}
 
-func (*U8ᵖᵖ) Class() binary.Class {
-	return (*binaryClassU8ᵖᵖ)(nil)
+func (*U32ᵖ) Class() binary.Class {
+	return (*binaryClassU32ᵖ)(nil)
 }
-func doEncodeU8ᵖᵖ(e binary.Encoder, o *U8ᵖᵖ) error {
+func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
 	if err := e.Uint64(uint64(o.Address)); err != nil {
 		return err
 	}
@@ -1991,7 +2197,7 @@ func doEncodeU8ᵖᵖ(e binary.Encoder, o *U8ᵖᵖ) error {
 	}
 	return nil
 }
-func doDecodeU8ᵖᵖ(d binary.Decoder, o *U8ᵖᵖ) error {
+func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
 	if obj, err := d.Uint64(); err != nil {
 		return err
 	} else {
@@ -2004,7 +2210,7 @@ func doDecodeU8ᵖᵖ(d binary.Decoder, o *U8ᵖᵖ) error {
 	}
 	return nil
 }
-func doSkipU8ᵖᵖ(d binary.Decoder) error {
+func doSkipU32ᵖ(d binary.Decoder) error {
 	if _, err := d.Uint64(); err != nil {
 		return err
 	}
@@ -2013,24 +2219,24 @@ func doSkipU8ᵖᵖ(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassU8ᵖᵖ) ID() binary.ID      { return binaryIDU8ᵖᵖ }
-func (*binaryClassU8ᵖᵖ) New() binary.Object { return &U8ᵖᵖ{} }
-func (*binaryClassU8ᵖᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU8ᵖᵖ(e, obj.(*U8ᵖᵖ))
+func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
+func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
+func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
 }
-func (*binaryClassU8ᵖᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U8ᵖᵖ{}
-	return obj, doDecodeU8ᵖᵖ(d, obj)
+func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &U32ᵖ{}
+	return obj, doDecodeU32ᵖ(d, obj)
 }
-func (*binaryClassU8ᵖᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU8ᵖᵖ(d, obj.(*U8ᵖᵖ))
+func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
 }
-func (*binaryClassU8ᵖᵖ) Skip(d binary.Decoder) error { return doSkipU8ᵖᵖ(d) }
-func (*binaryClassU8ᵖᵖ) Schema() *schema.Class       { return schemaU8ᵖᵖ }
+func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
+func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
 
-var schemaU8ᵖᵖ = &schema.Class{
-	TypeID: binaryIDU8ᵖᵖ,
-	Name:   "U8ᵖᵖ",
+var schemaU32ᵖ = &schema.Class{
+	TypeID: binaryIDU32ᵖ,
+	Name:   "U32ᵖ",
 	Fields: []schema.Field{
 		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
@@ -2079,7 +2285,7 @@ func doSkipCmdVoid3InArrays(d binary.Decoder) error {
 	if err := d.SkipValue((*U8ᵖ)(nil)); err != nil {
 		return err
 	}
-	if err := d.SkipValue((*U8ᵖᵖ)(nil)); err != nil {
+	if err := d.SkipValue((*U32ᵖ)(nil)); err != nil {
 		return err
 	}
 	if err := d.SkipValue((*Intᵖ)(nil)); err != nil {
@@ -2108,7 +2314,7 @@ var schemaCmdVoid3InArrays = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U8ᵖ"}},
-		schema.Field{Declared: "B", Type: &schema.Struct{Name: "U8ᵖᵖ"}},
+		schema.Field{Declared: "B", Type: &schema.Struct{Name: "U32ᵖ"}},
 		schema.Field{Declared: "C", Type: &schema.Struct{Name: "Intᵖ"}},
 	},
 }
@@ -2448,6 +2654,78 @@ var schemaCmdVoidF64 = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float64", Method: schema.Float64}},
+	},
+}
+
+type binaryClassCmdVoidInArrayOfPointers struct{}
+
+func (*CmdVoidInArrayOfPointers) Class() binary.Class {
+	return (*binaryClassCmdVoidInArrayOfPointers)(nil)
+}
+func doEncodeCmdVoidInArrayOfPointers(e binary.Encoder, o *CmdVoidInArrayOfPointers) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.A); err != nil {
+		return err
+	}
+	if err := e.Int32(o.Count); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdVoidInArrayOfPointers(d binary.Decoder, o *CmdVoidInArrayOfPointers) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.A); err != nil {
+		return err
+	}
+	if obj, err := d.Int32(); err != nil {
+		return err
+	} else {
+		o.Count = int32(obj)
+	}
+	return nil
+}
+func doSkipCmdVoidInArrayOfPointers(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Charᵖᵖ)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Int32(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdVoidInArrayOfPointers) ID() binary.ID      { return binaryIDCmdVoidInArrayOfPointers }
+func (*binaryClassCmdVoidInArrayOfPointers) New() binary.Object { return &CmdVoidInArrayOfPointers{} }
+func (*binaryClassCmdVoidInArrayOfPointers) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdVoidInArrayOfPointers(e, obj.(*CmdVoidInArrayOfPointers))
+}
+func (*binaryClassCmdVoidInArrayOfPointers) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdVoidInArrayOfPointers{}
+	return obj, doDecodeCmdVoidInArrayOfPointers(d, obj)
+}
+func (*binaryClassCmdVoidInArrayOfPointers) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdVoidInArrayOfPointers(d, obj.(*CmdVoidInArrayOfPointers))
+}
+func (*binaryClassCmdVoidInArrayOfPointers) Skip(d binary.Decoder) error {
+	return doSkipCmdVoidInArrayOfPointers(d)
+}
+func (*binaryClassCmdVoidInArrayOfPointers) Schema() *schema.Class {
+	return schemaCmdVoidInArrayOfPointers
+}
+
+var schemaCmdVoidInArrayOfPointers = &schema.Class{
+	TypeID: binaryIDCmdVoidInArrayOfPointers,
+	Name:   "CmdVoidInArrayOfPointers",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "A", Type: &schema.Struct{Name: "Charᵖᵖ"}},
+		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -3636,66 +3914,6 @@ var schemaCmdVoidReadU16 = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "A", Type: &schema.Struct{Name: "U16ᵖ"}},
-	},
-}
-
-type binaryClassU32ᵖ struct{}
-
-func (*U32ᵖ) Class() binary.Class {
-	return (*binaryClassU32ᵖ)(nil)
-}
-func doEncodeU32ᵖ(e binary.Encoder, o *U32ᵖ) error {
-	if err := e.Uint64(uint64(o.Address)); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU32ᵖ(d binary.Decoder, o *U32ᵖ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Address = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU32ᵖ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU32ᵖ) ID() binary.ID      { return binaryIDU32ᵖ }
-func (*binaryClassU32ᵖ) New() binary.Object { return &U32ᵖ{} }
-func (*binaryClassU32ᵖ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU32ᵖ(e, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U32ᵖ{}
-	return obj, doDecodeU32ᵖ(d, obj)
-}
-func (*binaryClassU32ᵖ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU32ᵖ(d, obj.(*U32ᵖ))
-}
-func (*binaryClassU32ᵖ) Skip(d binary.Decoder) error { return doSkipU32ᵖ(d) }
-func (*binaryClassU32ᵖ) Schema() *schema.Class       { return schemaU32ᵖ }
-
-var schemaU32ᵖ = &schema.Class{
-	TypeID: binaryIDU32ᵖ,
-	Name:   "U32ᵖ",
-	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6375,90 +6593,6 @@ func (*binaryClassU64ˢ) Schema() *schema.Class       { return schemaU64ˢ }
 var schemaU64ˢ = &schema.Class{
 	TypeID: binaryIDU64ˢ,
 	Name:   "U64ˢ",
-	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
-	},
-}
-
-type binaryClassU8ᵖˢ struct{}
-
-func (*U8ᵖˢ) Class() binary.Class {
-	return (*binaryClassU8ᵖˢ)(nil)
-}
-func doEncodeU8ᵖˢ(e binary.Encoder, o *U8ᵖˢ) error {
-	if err := e.Uint64(uint64(o.Root)); err != nil {
-		return err
-	}
-	if err := e.Uint64(uint64(o.Base)); err != nil {
-		return err
-	}
-	if err := e.Uint64(o.Count); err != nil {
-		return err
-	}
-	if err := e.Uint32(uint32(o.Pool)); err != nil {
-		return err
-	}
-	return nil
-}
-func doDecodeU8ᵖˢ(d binary.Decoder, o *U8ᵖˢ) error {
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Root = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Base = memory.Pointer(obj)
-	}
-	if obj, err := d.Uint64(); err != nil {
-		return err
-	} else {
-		o.Count = uint64(obj)
-	}
-	if obj, err := d.Uint32(); err != nil {
-		return err
-	} else {
-		o.Pool = memory.PoolID(obj)
-	}
-	return nil
-}
-func doSkipU8ᵖˢ(d binary.Decoder) error {
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint64(); err != nil {
-		return err
-	}
-	if _, err := d.Uint32(); err != nil {
-		return err
-	}
-	return nil
-}
-func (*binaryClassU8ᵖˢ) ID() binary.ID      { return binaryIDU8ᵖˢ }
-func (*binaryClassU8ᵖˢ) New() binary.Object { return &U8ᵖˢ{} }
-func (*binaryClassU8ᵖˢ) Encode(e binary.Encoder, obj binary.Object) error {
-	return doEncodeU8ᵖˢ(e, obj.(*U8ᵖˢ))
-}
-func (*binaryClassU8ᵖˢ) Decode(d binary.Decoder) (binary.Object, error) {
-	obj := &U8ᵖˢ{}
-	return obj, doDecodeU8ᵖˢ(d, obj)
-}
-func (*binaryClassU8ᵖˢ) DecodeTo(d binary.Decoder, obj binary.Object) error {
-	return doDecodeU8ᵖˢ(d, obj.(*U8ᵖˢ))
-}
-func (*binaryClassU8ᵖˢ) Skip(d binary.Decoder) error { return doSkipU8ᵖˢ(d) }
-func (*binaryClassU8ᵖˢ) Schema() *schema.Class       { return schemaU8ᵖˢ }
-
-var schemaU8ᵖˢ = &schema.Class{
-	TypeID: binaryIDU8ᵖˢ,
-	Name:   "U8ᵖˢ",
 	Fields: []schema.Field{
 		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
 		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},

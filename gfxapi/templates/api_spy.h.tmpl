@@ -210,14 +210,15 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Emits the logic to execute the given statement without mutating outputs.
+  Override for the C++.Statement macro. Returns are translated to break;
+  all other statements are delegated to "C++.Statement.Default".
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{     if IsAssign    $}}{{Macro "C++.Statement.Default" $}}
-  {{else if IsMapAssign $}}{{Macro "C++.Statement.Default" $}}
-  {{else if IsReturn    $}}break;
-  {{else                 }}{{Macro "C++.Statement.Default" $}}
+  {{if IsReturn $}}
+    break;
+  {{else}}
+    {{Macro "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 
