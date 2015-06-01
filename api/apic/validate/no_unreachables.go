@@ -27,11 +27,11 @@ func noUnreachables(api *semantic.API) []parse.Error {
 		parameters: make(map[*semantic.Parameter]limits.Limits),
 		errors:     &errors{},
 	}
-	walk(api, ctx.traverse)
+	semantic.Visit(api, ctx.traverse)
 	return *ctx.errors
 }
 
-func (ctx *context) traverse(n semantic.Node) bool {
+func (ctx *context) traverse(n semantic.Node) {
 	switch n := n.(type) {
 	case *semantic.Function:
 		ctx := ctx.clone()
@@ -39,17 +39,14 @@ func (ctx *context) traverse(n semantic.Node) bool {
 			ctx.parameters[p] = limits.Unbound(p.ExpressionType())
 		}
 		if n.Block != nil {
-			walk(n.Block, ctx.traverse)
+			semantic.Visit(n.Block, ctx.traverse)
 		}
-		return false
 
 	case *semantic.Assert:
 		*ctx = *ctx.setTrue(n.Condition)
-		return false
 
 	case *semantic.DeclareLocal:
 		ctx.locals[n.Local] = ctx.limits(n.Local.Value)
-		return false
 
 	case *semantic.Branch:
 		limit := ctx.limits(n.Condition)
@@ -57,7 +54,7 @@ func (ctx *context) traverse(n semantic.Node) bool {
 			if limit == limits.False {
 				ctx.errors.add(n.True.AST.CST, "Unreachable block")
 			} else {
-				walk(n.True, ctx.clone().setTrue(n.Condition).traverse)
+				semantic.Visit(n.True, ctx.clone().setTrue(n.Condition).traverse)
 			}
 		}
 
@@ -65,13 +62,12 @@ func (ctx *context) traverse(n semantic.Node) bool {
 			if limit == limits.True {
 				ctx.errors.add(n.False.AST.CST, "Unreachable block")
 			} else {
-				walk(n.False, ctx.clone().setFalse(n.Condition).traverse)
+				semantic.Visit(n.False, ctx.clone().setFalse(n.Condition).traverse)
 			}
 		}
-		return false
 
 	default:
-		return true
+		semantic.Visit(n, ctx.traverse)
 	}
 }
 
