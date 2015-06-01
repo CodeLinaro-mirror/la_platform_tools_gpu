@@ -19,9 +19,9 @@ func init() {
 }
 
 var (
-	binaryIDAtomA = binary.ID{0x38, 0x1e, 0xef, 0x73, 0x50, 0xa0, 0x48, 0x6d, 0xa3, 0x1d, 0x8e, 0xb6, 0x5e, 0x47, 0xb7, 0xbf, 0x7b, 0xc8, 0x06, 0x33}
-	binaryIDAtomB = binary.ID{0x32, 0x6a, 0x98, 0x0f, 0x59, 0xd2, 0x52, 0x34, 0x9c, 0xc2, 0x75, 0x25, 0x62, 0xb8, 0xb3, 0x0b, 0x48, 0x54, 0x3c, 0x85}
-	binaryIDAtomC = binary.ID{0x02, 0x32, 0xdd, 0xd7, 0x4d, 0x7e, 0xbf, 0x43, 0x41, 0x47, 0xbb, 0xcb, 0xd8, 0xed, 0xd4, 0xd8, 0xb4, 0x42, 0xf9, 0xd5}
+	AtomAID = binary.ID{0x38, 0x1e, 0xef, 0x73, 0x50, 0xa0, 0x48, 0x6d, 0xa3, 0x1d, 0x8e, 0xb6, 0x5e, 0x47, 0xb7, 0xbf, 0x7b, 0xc8, 0x06, 0x33}
+	AtomBID = binary.ID{0x32, 0x6a, 0x98, 0x0f, 0x59, 0xd2, 0x52, 0x34, 0x9c, 0xc2, 0x75, 0x25, 0x62, 0xb8, 0xb3, 0x0b, 0x48, 0x54, 0x3c, 0x85}
+	AtomCID = binary.ID{0x02, 0x32, 0xdd, 0xd7, 0x4d, 0x7e, 0xbf, 0x43, 0x41, 0x47, 0xbb, 0xcb, 0xd8, 0xed, 0xd4, 0xd8, 0xb4, 0x42, 0xf9, 0xd5}
 )
 
 type binaryClassAtomA struct{}
@@ -60,7 +60,7 @@ func doSkipAtomA(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomA) ID() binary.ID      { return binaryIDAtomA }
+func (*binaryClassAtomA) ID() binary.ID      { return AtomAID }
 func (*binaryClassAtomA) New() binary.Object { return &AtomA{} }
 func (*binaryClassAtomA) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomA(e, obj.(*AtomA))
@@ -76,7 +76,7 @@ func (*binaryClassAtomA) Skip(d binary.Decoder) error { return doSkipAtomA(d) }
 func (*binaryClassAtomA) Schema() *schema.Class       { return schemaAtomA }
 
 var schemaAtomA = &schema.Class{
-	TypeID: binaryIDAtomA,
+	TypeID: AtomAID,
 	Name:   "AtomA",
 	Fields: []schema.Field{
 		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
@@ -120,7 +120,7 @@ func doSkipAtomB(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomB) ID() binary.ID      { return binaryIDAtomB }
+func (*binaryClassAtomB) ID() binary.ID      { return AtomBID }
 func (*binaryClassAtomB) New() binary.Object { return &AtomB{} }
 func (*binaryClassAtomB) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomB(e, obj.(*AtomB))
@@ -136,7 +136,7 @@ func (*binaryClassAtomB) Skip(d binary.Decoder) error { return doSkipAtomB(d) }
 func (*binaryClassAtomB) Schema() *schema.Class       { return schemaAtomB }
 
 var schemaAtomB = &schema.Class{
-	TypeID: binaryIDAtomB,
+	TypeID: AtomBID,
 	Name:   "AtomB",
 	Fields: []schema.Field{
 		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
@@ -169,7 +169,7 @@ func doSkipAtomC(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassAtomC) ID() binary.ID      { return binaryIDAtomC }
+func (*binaryClassAtomC) ID() binary.ID      { return AtomCID }
 func (*binaryClassAtomC) New() binary.Object { return &AtomC{} }
 func (*binaryClassAtomC) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeAtomC(e, obj.(*AtomC))
@@ -185,7 +185,7 @@ func (*binaryClassAtomC) Skip(d binary.Decoder) error { return doSkipAtomC(d) }
 func (*binaryClassAtomC) Schema() *schema.Class       { return schemaAtomC }
 
 var schemaAtomC = &schema.Class{
-	TypeID: binaryIDAtomC,
+	TypeID: AtomCID,
 	Name:   "AtomC",
 	Fields: []schema.Field{
 		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},

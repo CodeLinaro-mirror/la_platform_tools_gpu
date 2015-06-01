@@ -28,9 +28,9 @@ const AtomIDB = atom.TypeID(2)
 const AtomIDC = atom.TypeID(3)
 
 type AtomA struct {
-	binary.Generate
-	ID        atom.ID
-	AtomFlags atom.Flags
+	binary.Generate `id:"AtomAID"`
+	ID              atom.ID
+	AtomFlags       atom.Flags
 }
 
 func (a *AtomA) API() gfxapi.API                                           { return nil }
@@ -40,9 +40,9 @@ func (a *AtomA) Observations() *atom.Observations                          { ret
 func (a *AtomA) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 
 type AtomB struct {
-	binary.Generate
-	ID   atom.ID
-	Bool bool
+	binary.Generate `id:"AtomBID"`
+	ID              atom.ID
+	Bool            bool
 }
 
 func (a *AtomB) API() gfxapi.API                                           { return nil }
@@ -52,8 +52,8 @@ func (a *AtomB) Observations() *atom.Observations                          { ret
 func (a *AtomB) Mutate(*gfxapi.State, database.Database, log.Logger) error { return nil }
 
 type AtomC struct {
-	binary.Generate
-	String string
+	binary.Generate `id:"AtomCID"`
+	String          string
 }
 
 func (a *AtomC) API() gfxapi.API                                           { return nil }
