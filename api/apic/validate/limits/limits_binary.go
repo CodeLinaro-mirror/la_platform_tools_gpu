@@ -24,7 +24,7 @@ func (v boolLimit) String() string {
 	if s, ok := _boolLimit_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("boolLimit(%v)", v)
+	return fmt.Sprintf("boolLimit(%d)", v)
 }
 
 func (v *boolLimit) Parse(s string) error {

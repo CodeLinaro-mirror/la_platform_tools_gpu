@@ -91,7 +91,7 @@ func (v PoolID) String() string {
 	if s, ok := _PoolID_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("PoolID(%v)", v)
+	return fmt.Sprintf("PoolID(%d)", v)
 }
 
 func (v *PoolID) Parse(s string) error {

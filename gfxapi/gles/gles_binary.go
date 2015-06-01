@@ -25766,7 +25766,7 @@ func (v ArrayType_GLES_1_1) String() string {
 	if s, ok := _ArrayType_GLES_1_1_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ArrayType_GLES_1_1(%v)", v)
+	return fmt.Sprintf("ArrayType_GLES_1_1(%d)", v)
 }
 
 func (v *ArrayType_GLES_1_1) Parse(s string) error {
@@ -25793,7 +25793,7 @@ func (v ArrayType) String() string {
 	if s, ok := _ArrayType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ArrayType(%v)", v)
+	return fmt.Sprintf("ArrayType(%d)", v)
 }
 
 func (v *ArrayType) Parse(s string) error {
@@ -25816,7 +25816,7 @@ func (v ArrayType_OES_point_size_array) String() string {
 	if s, ok := _ArrayType_OES_point_size_array_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ArrayType_OES_point_size_array(%v)", v)
+	return fmt.Sprintf("ArrayType_OES_point_size_array(%d)", v)
 }
 
 func (v *ArrayType_OES_point_size_array) Parse(s string) error {
@@ -25841,7 +25841,7 @@ func (v BaseTexelFormat) String() string {
 	if s, ok := _BaseTexelFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BaseTexelFormat(%v)", v)
+	return fmt.Sprintf("BaseTexelFormat(%d)", v)
 }
 
 func (v *BaseTexelFormat) Parse(s string) error {
@@ -25866,7 +25866,7 @@ func (v BlendEquation) String() string {
 	if s, ok := _BlendEquation_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BlendEquation(%v)", v)
+	return fmt.Sprintf("BlendEquation(%d)", v)
 }
 
 func (v *BlendEquation) Parse(s string) error {
@@ -25903,7 +25903,7 @@ func (v BlendFactor) String() string {
 	if s, ok := _BlendFactor_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BlendFactor(%v)", v)
+	return fmt.Sprintf("BlendFactor(%d)", v)
 }
 
 func (v *BlendFactor) Parse(s string) error {
@@ -25927,7 +25927,7 @@ func (v BufferParameter) String() string {
 	if s, ok := _BufferParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BufferParameter(%v)", v)
+	return fmt.Sprintf("BufferParameter(%d)", v)
 }
 
 func (v *BufferParameter) Parse(s string) error {
@@ -25957,7 +25957,7 @@ func (v BufferTarget) String() string {
 	if s, ok := _BufferTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BufferTarget(%v)", v)
+	return fmt.Sprintf("BufferTarget(%d)", v)
 }
 
 func (v *BufferTarget) Parse(s string) error {
@@ -25982,7 +25982,7 @@ func (v BufferUsage) String() string {
 	if s, ok := _BufferUsage_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("BufferUsage(%v)", v)
+	return fmt.Sprintf("BufferUsage(%d)", v)
 }
 
 func (v *BufferUsage) Parse(s string) error {
@@ -26018,7 +26018,7 @@ func (v Capability) String() string {
 	if s, ok := _Capability_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Capability(%v)", v)
+	return fmt.Sprintf("Capability(%d)", v)
 }
 
 func (v *Capability) Parse(s string) error {
@@ -26043,7 +26043,7 @@ func (v ClearMask) String() string {
 	if s, ok := _ClearMask_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ClearMask(%v)", v)
+	return fmt.Sprintf("ClearMask(%d)", v)
 }
 
 func (v *ClearMask) Parse(s string) error {
@@ -26068,7 +26068,7 @@ func (v CompressedTexelFormat_AMD_compressed_ATC_texture) String() string {
 	if s, ok := _CompressedTexelFormat_AMD_compressed_ATC_texture_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CompressedTexelFormat_AMD_compressed_ATC_texture(%v)", v)
+	return fmt.Sprintf("CompressedTexelFormat_AMD_compressed_ATC_texture(%d)", v)
 }
 
 func (v *CompressedTexelFormat_AMD_compressed_ATC_texture) Parse(s string) error {
@@ -26094,7 +26094,7 @@ func (v CompressedTexelFormat) String() string {
 	if s, ok := _CompressedTexelFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CompressedTexelFormat(%v)", v)
+	return fmt.Sprintf("CompressedTexelFormat(%d)", v)
 }
 
 func (v *CompressedTexelFormat) Parse(s string) error {
@@ -26117,7 +26117,7 @@ func (v CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) String() string 
 	if s, ok := _CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(%v)", v)
+	return fmt.Sprintf("CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture(%d)", v)
 }
 
 func (v *CompressedTexelFormat_OES_compressed_ETC1_RGB8_texture) Parse(s string) error {
@@ -26145,7 +26145,7 @@ func (v CubeMapImageTarget) String() string {
 	if s, ok := _CubeMapImageTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("CubeMapImageTarget(%v)", v)
+	return fmt.Sprintf("CubeMapImageTarget(%d)", v)
 }
 
 func (v *CubeMapImageTarget) Parse(s string) error {
@@ -26170,7 +26170,7 @@ func (v DiscardFramebufferAttachment) String() string {
 	if s, ok := _DiscardFramebufferAttachment_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("DiscardFramebufferAttachment(%v)", v)
+	return fmt.Sprintf("DiscardFramebufferAttachment(%d)", v)
 }
 
 func (v *DiscardFramebufferAttachment) Parse(s string) error {
@@ -26199,7 +26199,7 @@ func (v DrawMode) String() string {
 	if s, ok := _DrawMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("DrawMode(%v)", v)
+	return fmt.Sprintf("DrawMode(%d)", v)
 }
 
 func (v *DrawMode) Parse(s string) error {
@@ -26227,7 +26227,7 @@ func (v Error) String() string {
 	if s, ok := _Error_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Error(%v)", v)
+	return fmt.Sprintf("Error(%d)", v)
 }
 
 func (v *Error) Parse(s string) error {
@@ -26252,7 +26252,7 @@ func (v FaceMode) String() string {
 	if s, ok := _FaceMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FaceMode(%v)", v)
+	return fmt.Sprintf("FaceMode(%d)", v)
 }
 
 func (v *FaceMode) Parse(s string) error {
@@ -26276,7 +26276,7 @@ func (v FaceOrientation) String() string {
 	if s, ok := _FaceOrientation_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FaceOrientation(%v)", v)
+	return fmt.Sprintf("FaceOrientation(%d)", v)
 }
 
 func (v *FaceOrientation) Parse(s string) error {
@@ -26302,7 +26302,7 @@ func (v FramebufferAttachmentParameter) String() string {
 	if s, ok := _FramebufferAttachmentParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferAttachmentParameter(%v)", v)
+	return fmt.Sprintf("FramebufferAttachmentParameter(%d)", v)
 }
 
 func (v *FramebufferAttachmentParameter) Parse(s string) error {
@@ -26327,7 +26327,7 @@ func (v FramebufferAttachmentType) String() string {
 	if s, ok := _FramebufferAttachmentType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferAttachmentType(%v)", v)
+	return fmt.Sprintf("FramebufferAttachmentType(%d)", v)
 }
 
 func (v *FramebufferAttachmentType) Parse(s string) error {
@@ -26352,7 +26352,7 @@ func (v FramebufferAttachment) String() string {
 	if s, ok := _FramebufferAttachment_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferAttachment(%v)", v)
+	return fmt.Sprintf("FramebufferAttachment(%d)", v)
 }
 
 func (v *FramebufferAttachment) Parse(s string) error {
@@ -26379,7 +26379,7 @@ func (v FramebufferStatus) String() string {
 	if s, ok := _FramebufferStatus_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferStatus(%v)", v)
+	return fmt.Sprintf("FramebufferStatus(%d)", v)
 }
 
 func (v *FramebufferStatus) Parse(s string) error {
@@ -26402,7 +26402,7 @@ func (v FramebufferTarget_GLES_2_0) String() string {
 	if s, ok := _FramebufferTarget_GLES_2_0_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferTarget_GLES_2_0(%v)", v)
+	return fmt.Sprintf("FramebufferTarget_GLES_2_0(%d)", v)
 }
 
 func (v *FramebufferTarget_GLES_2_0) Parse(s string) error {
@@ -26426,7 +26426,7 @@ func (v FramebufferTarget_GLES_3_1) String() string {
 	if s, ok := _FramebufferTarget_GLES_3_1_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferTarget_GLES_3_1(%v)", v)
+	return fmt.Sprintf("FramebufferTarget_GLES_3_1(%d)", v)
 }
 
 func (v *FramebufferTarget_GLES_3_1) Parse(s string) error {
@@ -26451,7 +26451,7 @@ func (v FramebufferTarget) String() string {
 	if s, ok := _FramebufferTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferTarget(%v)", v)
+	return fmt.Sprintf("FramebufferTarget(%d)", v)
 }
 
 func (v *FramebufferTarget) Parse(s string) error {
@@ -26476,7 +26476,7 @@ func (v HintMode) String() string {
 	if s, ok := _HintMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("HintMode(%v)", v)
+	return fmt.Sprintf("HintMode(%d)", v)
 }
 
 func (v *HintMode) Parse(s string) error {
@@ -26499,7 +26499,7 @@ func (v HintTarget) String() string {
 	if s, ok := _HintTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("HintTarget(%v)", v)
+	return fmt.Sprintf("HintTarget(%d)", v)
 }
 
 func (v *HintTarget) Parse(s string) error {
@@ -26522,7 +26522,7 @@ func (v ImageTargetRenderbufferStorage) String() string {
 	if s, ok := _ImageTargetRenderbufferStorage_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageTargetRenderbufferStorage(%v)", v)
+	return fmt.Sprintf("ImageTargetRenderbufferStorage(%d)", v)
 }
 
 func (v *ImageTargetRenderbufferStorage) Parse(s string) error {
@@ -26546,7 +26546,7 @@ func (v ImageTargetTexture) String() string {
 	if s, ok := _ImageTargetTexture_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageTargetTexture(%v)", v)
+	return fmt.Sprintf("ImageTargetTexture(%d)", v)
 }
 
 func (v *ImageTargetTexture) Parse(s string) error {
@@ -26569,7 +26569,7 @@ func (v ImageTargetTexture_OES_EGL_image) String() string {
 	if s, ok := _ImageTargetTexture_OES_EGL_image_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image(%v)", v)
+	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image(%d)", v)
 }
 
 func (v *ImageTargetTexture_OES_EGL_image) Parse(s string) error {
@@ -26592,7 +26592,7 @@ func (v ImageTargetTexture_OES_EGL_image_external) String() string {
 	if s, ok := _ImageTargetTexture_OES_EGL_image_external_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image_external(%v)", v)
+	return fmt.Sprintf("ImageTargetTexture_OES_EGL_image_external(%d)", v)
 }
 
 func (v *ImageTargetTexture_OES_EGL_image_external) Parse(s string) error {
@@ -26633,7 +26633,7 @@ func (v ImageTexelFormat) String() string {
 	if s, ok := _ImageTexelFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageTexelFormat(%v)", v)
+	return fmt.Sprintf("ImageTexelFormat(%d)", v)
 }
 
 func (v *ImageTexelFormat) Parse(s string) error {
@@ -26658,7 +26658,7 @@ func (v IndicesType) String() string {
 	if s, ok := _IndicesType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("IndicesType(%v)", v)
+	return fmt.Sprintf("IndicesType(%d)", v)
 }
 
 func (v *IndicesType) Parse(s string) error {
@@ -26686,7 +26686,7 @@ func (v MapBufferRangeAccess) String() string {
 	if s, ok := _MapBufferRangeAccess_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("MapBufferRangeAccess(%v)", v)
+	return fmt.Sprintf("MapBufferRangeAccess(%d)", v)
 }
 
 func (v *MapBufferRangeAccess) Parse(s string) error {
@@ -26710,7 +26710,7 @@ func (v PixelStoreParameter) String() string {
 	if s, ok := _PixelStoreParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("PixelStoreParameter(%v)", v)
+	return fmt.Sprintf("PixelStoreParameter(%d)", v)
 }
 
 func (v *PixelStoreParameter) Parse(s string) error {
@@ -26738,7 +26738,7 @@ func (v PrecisionType) String() string {
 	if s, ok := _PrecisionType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("PrecisionType(%v)", v)
+	return fmt.Sprintf("PrecisionType(%d)", v)
 }
 
 func (v *PrecisionType) Parse(s string) error {
@@ -26769,7 +26769,7 @@ func (v ProgramParameter) String() string {
 	if s, ok := _ProgramParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ProgramParameter(%v)", v)
+	return fmt.Sprintf("ProgramParameter(%d)", v)
 }
 
 func (v *ProgramParameter) Parse(s string) error {
@@ -26793,7 +26793,7 @@ func (v QueryObjectParameter_GLES_3) String() string {
 	if s, ok := _QueryObjectParameter_GLES_3_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryObjectParameter_GLES_3(%v)", v)
+	return fmt.Sprintf("QueryObjectParameter_GLES_3(%d)", v)
 }
 
 func (v *QueryObjectParameter_GLES_3) Parse(s string) error {
@@ -26817,7 +26817,7 @@ func (v QueryObjectParameter) String() string {
 	if s, ok := _QueryObjectParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryObjectParameter(%v)", v)
+	return fmt.Sprintf("QueryObjectParameter(%d)", v)
 }
 
 func (v *QueryObjectParameter) Parse(s string) error {
@@ -26840,7 +26840,7 @@ func (v QueryParameter_EXT_disjoint_timer_query) String() string {
 	if s, ok := _QueryParameter_EXT_disjoint_timer_query_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryParameter_EXT_disjoint_timer_query(%v)", v)
+	return fmt.Sprintf("QueryParameter_EXT_disjoint_timer_query(%d)", v)
 }
 
 func (v *QueryParameter_EXT_disjoint_timer_query) Parse(s string) error {
@@ -26863,7 +26863,7 @@ func (v QueryParameter_GLES_3) String() string {
 	if s, ok := _QueryParameter_GLES_3_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryParameter_GLES_3(%v)", v)
+	return fmt.Sprintf("QueryParameter_GLES_3(%d)", v)
 }
 
 func (v *QueryParameter_GLES_3) Parse(s string) error {
@@ -26887,7 +26887,7 @@ func (v QueryParameter) String() string {
 	if s, ok := _QueryParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryParameter(%v)", v)
+	return fmt.Sprintf("QueryParameter(%d)", v)
 }
 
 func (v *QueryParameter) Parse(s string) error {
@@ -26911,7 +26911,7 @@ func (v QueryTarget_EXT_disjoint_timer_query) String() string {
 	if s, ok := _QueryTarget_EXT_disjoint_timer_query_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryTarget_EXT_disjoint_timer_query(%v)", v)
+	return fmt.Sprintf("QueryTarget_EXT_disjoint_timer_query(%d)", v)
 }
 
 func (v *QueryTarget_EXT_disjoint_timer_query) Parse(s string) error {
@@ -26936,7 +26936,7 @@ func (v QueryTarget_GLES_3) String() string {
 	if s, ok := _QueryTarget_GLES_3_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryTarget_GLES_3(%v)", v)
+	return fmt.Sprintf("QueryTarget_GLES_3(%d)", v)
 }
 
 func (v *QueryTarget_GLES_3) Parse(s string) error {
@@ -26963,7 +26963,7 @@ func (v QueryTarget) String() string {
 	if s, ok := _QueryTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("QueryTarget(%v)", v)
+	return fmt.Sprintf("QueryTarget(%d)", v)
 }
 
 func (v *QueryTarget) Parse(s string) error {
@@ -26991,7 +26991,7 @@ func (v RenderbufferFormat) String() string {
 	if s, ok := _RenderbufferFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("RenderbufferFormat(%v)", v)
+	return fmt.Sprintf("RenderbufferFormat(%d)", v)
 }
 
 func (v *RenderbufferFormat) Parse(s string) error {
@@ -27022,7 +27022,7 @@ func (v RenderbufferParameter) String() string {
 	if s, ok := _RenderbufferParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("RenderbufferParameter(%v)", v)
+	return fmt.Sprintf("RenderbufferParameter(%d)", v)
 }
 
 func (v *RenderbufferParameter) Parse(s string) error {
@@ -27045,7 +27045,7 @@ func (v RenderbufferTarget) String() string {
 	if s, ok := _RenderbufferTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("RenderbufferTarget(%v)", v)
+	return fmt.Sprintf("RenderbufferTarget(%d)", v)
 }
 
 func (v *RenderbufferTarget) Parse(s string) error {
@@ -27071,7 +27071,7 @@ func (v ResetStatus) String() string {
 	if s, ok := _ResetStatus_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ResetStatus(%v)", v)
+	return fmt.Sprintf("ResetStatus(%d)", v)
 }
 
 func (v *ResetStatus) Parse(s string) error {
@@ -27100,7 +27100,7 @@ func (v ShaderAttribType) String() string {
 	if s, ok := _ShaderAttribType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ShaderAttribType(%v)", v)
+	return fmt.Sprintf("ShaderAttribType(%d)", v)
 }
 
 func (v *ShaderAttribType) Parse(s string) error {
@@ -27127,7 +27127,7 @@ func (v ShaderParameter) String() string {
 	if s, ok := _ShaderParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ShaderParameter(%v)", v)
+	return fmt.Sprintf("ShaderParameter(%d)", v)
 }
 
 func (v *ShaderParameter) Parse(s string) error {
@@ -27151,7 +27151,7 @@ func (v ShaderType) String() string {
 	if s, ok := _ShaderType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ShaderType(%v)", v)
+	return fmt.Sprintf("ShaderType(%d)", v)
 }
 
 func (v *ShaderType) Parse(s string) error {
@@ -27190,7 +27190,7 @@ func (v ShaderUniformType) String() string {
 	if s, ok := _ShaderUniformType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ShaderUniformType(%v)", v)
+	return fmt.Sprintf("ShaderUniformType(%d)", v)
 }
 
 func (v *ShaderUniformType) Parse(s string) error {
@@ -27213,7 +27213,7 @@ func (v StateVariable_EXT_disjoint_timer_query) String() string {
 	if s, ok := _StateVariable_EXT_disjoint_timer_query_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StateVariable_EXT_disjoint_timer_query(%v)", v)
+	return fmt.Sprintf("StateVariable_EXT_disjoint_timer_query(%d)", v)
 }
 
 func (v *StateVariable_EXT_disjoint_timer_query) Parse(s string) error {
@@ -27236,7 +27236,7 @@ func (v StateVariable_EXT_texture_filter_anisotropic) String() string {
 	if s, ok := _StateVariable_EXT_texture_filter_anisotropic_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StateVariable_EXT_texture_filter_anisotropic(%v)", v)
+	return fmt.Sprintf("StateVariable_EXT_texture_filter_anisotropic(%d)", v)
 }
 
 func (v *StateVariable_EXT_texture_filter_anisotropic) Parse(s string) error {
@@ -27344,7 +27344,7 @@ func (v StateVariable_GLES_2_0) String() string {
 	if s, ok := _StateVariable_GLES_2_0_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StateVariable_GLES_2_0(%v)", v)
+	return fmt.Sprintf("StateVariable_GLES_2_0(%d)", v)
 }
 
 func (v *StateVariable_GLES_2_0) Parse(s string) error {
@@ -27367,7 +27367,7 @@ func (v StateVariable_GLES_3_1) String() string {
 	if s, ok := _StateVariable_GLES_3_1_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StateVariable_GLES_3_1(%v)", v)
+	return fmt.Sprintf("StateVariable_GLES_3_1(%d)", v)
 }
 
 func (v *StateVariable_GLES_3_1) Parse(s string) error {
@@ -27478,7 +27478,7 @@ func (v StateVariable) String() string {
 	if s, ok := _StateVariable_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StateVariable(%v)", v)
+	return fmt.Sprintf("StateVariable(%d)", v)
 }
 
 func (v *StateVariable) Parse(s string) error {
@@ -27508,7 +27508,7 @@ func (v StencilAction) String() string {
 	if s, ok := _StencilAction_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StencilAction(%v)", v)
+	return fmt.Sprintf("StencilAction(%d)", v)
 }
 
 func (v *StencilAction) Parse(s string) error {
@@ -27534,7 +27534,7 @@ func (v StringConstant) String() string {
 	if s, ok := _StringConstant_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("StringConstant(%v)", v)
+	return fmt.Sprintf("StringConstant(%d)", v)
 }
 
 func (v *StringConstant) Parse(s string) error {
@@ -27564,7 +27564,7 @@ func (v TestFunction) String() string {
 	if s, ok := _TestFunction_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TestFunction(%v)", v)
+	return fmt.Sprintf("TestFunction(%d)", v)
 }
 
 func (v *TestFunction) Parse(s string) error {
@@ -27590,7 +27590,7 @@ func (v TexelComponent) String() string {
 	if s, ok := _TexelComponent_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TexelComponent(%v)", v)
+	return fmt.Sprintf("TexelComponent(%d)", v)
 }
 
 func (v *TexelComponent) Parse(s string) error {
@@ -27617,7 +27617,7 @@ func (v TexelFormat_GLES_1_1) String() string {
 	if s, ok := _TexelFormat_GLES_1_1_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TexelFormat_GLES_1_1(%v)", v)
+	return fmt.Sprintf("TexelFormat_GLES_1_1(%d)", v)
 }
 
 func (v *TexelFormat_GLES_1_1) Parse(s string) error {
@@ -27649,7 +27649,7 @@ func (v TexelFormat_GLES_3_0) String() string {
 	if s, ok := _TexelFormat_GLES_3_0_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TexelFormat_GLES_3_0(%v)", v)
+	return fmt.Sprintf("TexelFormat_GLES_3_0(%d)", v)
 }
 
 func (v *TexelFormat_GLES_3_0) Parse(s string) error {
@@ -27686,7 +27686,7 @@ func (v TexelFormat) String() string {
 	if s, ok := _TexelFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TexelFormat(%v)", v)
+	return fmt.Sprintf("TexelFormat(%d)", v)
 }
 
 func (v *TexelFormat) Parse(s string) error {
@@ -27716,7 +27716,7 @@ func (v TexelType) String() string {
 	if s, ok := _TexelType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TexelType(%v)", v)
+	return fmt.Sprintf("TexelType(%d)", v)
 }
 
 func (v *TexelType) Parse(s string) error {
@@ -27739,7 +27739,7 @@ func (v Texture2DImageTarget) String() string {
 	if s, ok := _Texture2DImageTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Texture2DImageTarget(%v)", v)
+	return fmt.Sprintf("Texture2DImageTarget(%d)", v)
 }
 
 func (v *Texture2DImageTarget) Parse(s string) error {
@@ -27767,7 +27767,7 @@ func (v TextureFilterMode) String() string {
 	if s, ok := _TextureFilterMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureFilterMode(%v)", v)
+	return fmt.Sprintf("TextureFilterMode(%d)", v)
 }
 
 func (v *TextureFilterMode) Parse(s string) error {
@@ -27796,7 +27796,7 @@ func (v TextureImageTarget) String() string {
 	if s, ok := _TextureImageTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureImageTarget(%v)", v)
+	return fmt.Sprintf("TextureImageTarget(%d)", v)
 }
 
 func (v *TextureImageTarget) Parse(s string) error {
@@ -27821,7 +27821,7 @@ func (v TextureKind) String() string {
 	if s, ok := _TextureKind_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureKind(%v)", v)
+	return fmt.Sprintf("TextureKind(%d)", v)
 }
 
 func (v *TextureKind) Parse(s string) error {
@@ -27844,7 +27844,7 @@ func (v TextureParameter_EXT_texture_filter_anisotropic) String() string {
 	if s, ok := _TextureParameter_EXT_texture_filter_anisotropic_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureParameter_EXT_texture_filter_anisotropic(%v)", v)
+	return fmt.Sprintf("TextureParameter_EXT_texture_filter_anisotropic(%d)", v)
 }
 
 func (v *TextureParameter_EXT_texture_filter_anisotropic) Parse(s string) error {
@@ -27868,7 +27868,7 @@ func (v TextureParameter_FilterMode) String() string {
 	if s, ok := _TextureParameter_FilterMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureParameter_FilterMode(%v)", v)
+	return fmt.Sprintf("TextureParameter_FilterMode(%d)", v)
 }
 
 func (v *TextureParameter_FilterMode) Parse(s string) error {
@@ -27899,7 +27899,7 @@ func (v TextureParameter) String() string {
 	if s, ok := _TextureParameter_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureParameter(%v)", v)
+	return fmt.Sprintf("TextureParameter(%d)", v)
 }
 
 func (v *TextureParameter) Parse(s string) error {
@@ -27925,7 +27925,7 @@ func (v TextureParameter_SwizzleMode) String() string {
 	if s, ok := _TextureParameter_SwizzleMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureParameter_SwizzleMode(%v)", v)
+	return fmt.Sprintf("TextureParameter_SwizzleMode(%d)", v)
 }
 
 func (v *TextureParameter_SwizzleMode) Parse(s string) error {
@@ -27949,7 +27949,7 @@ func (v TextureParameter_WrapMode) String() string {
 	if s, ok := _TextureParameter_WrapMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureParameter_WrapMode(%v)", v)
+	return fmt.Sprintf("TextureParameter_WrapMode(%d)", v)
 }
 
 func (v *TextureParameter_WrapMode) Parse(s string) error {
@@ -27972,7 +27972,7 @@ func (v TextureTarget_GLES_1_1) String() string {
 	if s, ok := _TextureTarget_GLES_1_1_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureTarget_GLES_1_1(%v)", v)
+	return fmt.Sprintf("TextureTarget_GLES_1_1(%d)", v)
 }
 
 func (v *TextureTarget_GLES_1_1) Parse(s string) error {
@@ -27995,7 +27995,7 @@ func (v TextureTarget_GLES_2_0) String() string {
 	if s, ok := _TextureTarget_GLES_2_0_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureTarget_GLES_2_0(%v)", v)
+	return fmt.Sprintf("TextureTarget_GLES_2_0(%d)", v)
 }
 
 func (v *TextureTarget_GLES_2_0) Parse(s string) error {
@@ -28020,7 +28020,7 @@ func (v TextureTarget) String() string {
 	if s, ok := _TextureTarget_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureTarget(%v)", v)
+	return fmt.Sprintf("TextureTarget(%d)", v)
 }
 
 func (v *TextureTarget) Parse(s string) error {
@@ -28043,7 +28043,7 @@ func (v TextureTarget_OES_EGL_image_external) String() string {
 	if s, ok := _TextureTarget_OES_EGL_image_external_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureTarget_OES_EGL_image_external(%v)", v)
+	return fmt.Sprintf("TextureTarget_OES_EGL_image_external(%d)", v)
 }
 
 func (v *TextureTarget_OES_EGL_image_external) Parse(s string) error {
@@ -28097,7 +28097,7 @@ func (v TextureUnit) String() string {
 	if s, ok := _TextureUnit_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureUnit(%v)", v)
+	return fmt.Sprintf("TextureUnit(%d)", v)
 }
 
 func (v *TextureUnit) Parse(s string) error {
@@ -28122,7 +28122,7 @@ func (v TextureWrapMode) String() string {
 	if s, ok := _TextureWrapMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TextureWrapMode(%v)", v)
+	return fmt.Sprintf("TextureWrapMode(%d)", v)
 }
 
 func (v *TextureWrapMode) Parse(s string) error {
@@ -28176,7 +28176,7 @@ func (v TilePreserveMaskQCOM) String() string {
 	if s, ok := _TilePreserveMaskQCOM_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TilePreserveMaskQCOM(%v)", v)
+	return fmt.Sprintf("TilePreserveMaskQCOM(%d)", v)
 }
 
 func (v *TilePreserveMaskQCOM) Parse(s string) error {
@@ -28199,7 +28199,7 @@ func (v Type_ARB_half_float_vertex) String() string {
 	if s, ok := _Type_ARB_half_float_vertex_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Type_ARB_half_float_vertex(%v)", v)
+	return fmt.Sprintf("Type_ARB_half_float_vertex(%d)", v)
 }
 
 func (v *Type_ARB_half_float_vertex) Parse(s string) error {
@@ -28222,7 +28222,7 @@ func (v Type_OES_vertex_half_float) String() string {
 	if s, ok := _Type_OES_vertex_half_float_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Type_OES_vertex_half_float(%v)", v)
+	return fmt.Sprintf("Type_OES_vertex_half_float(%d)", v)
 }
 
 func (v *Type_OES_vertex_half_float) Parse(s string) error {
@@ -28252,7 +28252,7 @@ func (v VertexAttribType) String() string {
 	if s, ok := _VertexAttribType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("VertexAttribType(%v)", v)
+	return fmt.Sprintf("VertexAttribType(%d)", v)
 }
 
 func (v *VertexAttribType) Parse(s string) error {

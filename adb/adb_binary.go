@@ -24,7 +24,7 @@ func (v DeviceState) String() string {
 	if s, ok := _DeviceState_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("DeviceState(%v)", v)
+	return fmt.Sprintf("DeviceState(%d)", v)
 }
 
 func (v *DeviceState) Parse(s string) error {

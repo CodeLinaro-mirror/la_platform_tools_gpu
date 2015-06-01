@@ -226,7 +226,7 @@ func (v ConnectionType) String() string {
 	if s, ok := _ConnectionType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ConnectionType(%v)", v)
+	return fmt.Sprintf("ConnectionType(%d)", v)
 }
 
 func (v *ConnectionType) Parse(s string) error {
@@ -250,7 +250,7 @@ func (v MessageType) String() string {
 	if s, ok := _MessageType_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("MessageType(%v)", v)
+	return fmt.Sprintf("MessageType(%d)", v)
 }
 
 func (v *MessageType) Parse(s string) error {
@@ -287,7 +287,7 @@ func (v Type) String() string {
 	if s, ok := _Type_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Type(%v)", v)
+	return fmt.Sprintf("Type(%d)", v)
 }
 
 func (v *Type) Parse(s string) error {

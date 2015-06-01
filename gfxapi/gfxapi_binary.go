@@ -24,7 +24,7 @@ func (v FramebufferAttachment) String() string {
 	if s, ok := _FramebufferAttachment_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("FramebufferAttachment(%v)", v)
+	return fmt.Sprintf("FramebufferAttachment(%d)", v)
 }
 
 func (v *FramebufferAttachment) Parse(s string) error {

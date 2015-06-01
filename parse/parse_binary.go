@@ -27,7 +27,7 @@ func (v NumberKind) String() string {
 	if s, ok := _NumberKind_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("NumberKind(%v)", v)
+	return fmt.Sprintf("NumberKind(%d)", v)
 }
 
 func (v *NumberKind) Parse(s string) error {
@@ -51,7 +51,7 @@ func (v SkipMode) String() string {
 	if s, ok := _SkipMode_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("SkipMode(%v)", v)
+	return fmt.Sprintf("SkipMode(%d)", v)
 }
 
 func (v *SkipMode) Parse(s string) error {
