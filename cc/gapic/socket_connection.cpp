@@ -42,6 +42,10 @@
 namespace gapic {
 namespace {
 
+#if TARGET_OS == GAPID_OS_WINDOWS
+int gWinsockUsageCount = 0;
+#endif  // TARGET_OS == GAPID_OS_WINDOWS
+
 void close(int fd) {
 #if TARGET_OS == GAPID_OS_WINDOWS
     ::closesocket(fd);
@@ -249,17 +253,21 @@ std::unique_ptr<Connection> SocketConnection::createPipe(const char* pipename, b
 
 SocketConnection::NetworkInitializer::NetworkInitializer() {
 #if TARGET_OS == GAPID_OS_WINDOWS
-    WSADATA wsaData;
-    int wsaInitRes = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
-    if (wsaInitRes != 0) {
-        GAPID_FATAL("WSAStartup failed with error code: %d\n", wsaInitRes);
+    if (gWinsockUsageCount++ == 0) {
+        WSADATA wsaData;
+        int wsaInitRes = ::WSAStartup(MAKEWORD(2, 2), &wsaData);
+        if (wsaInitRes != 0) {
+            GAPID_FATAL("WSAStartup failed with error code: %d\n", wsaInitRes);
+        }
     }
 #endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
 SocketConnection::NetworkInitializer::~NetworkInitializer() {
 #if TARGET_OS == GAPID_OS_WINDOWS
-    ::WSACleanup();
+    if (--gWinsockUsageCount == 0) {
+        ::WSACleanup();
+    }
 #endif  // TARGET_OS == GAPID_OS_WINDOWS
 }
 
