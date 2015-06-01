@@ -1881,8 +1881,9 @@ cmd void glBufferData(BufferTarget target, s32 size, BufferDataPointer data, Buf
     ctx := GetContext()
     id := ctx.BoundBuffers[target]
     b  := ctx.Instances.Buffers[id]
-    if data != null {
-        copy(b.Data, as!u8*(data)[0:size])
+    b.Data = switch(data != null) {
+        case true:  clone(as!u8*(data)[0:size])
+        case false: make!u8(size)
     }
     b.Size = size
     b.Usage = usage
