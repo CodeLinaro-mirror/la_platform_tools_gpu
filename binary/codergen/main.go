@@ -30,6 +30,7 @@ import (
 	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/binary/generate"
+	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
 var (
@@ -153,7 +154,11 @@ func output(gen *generate.Generator, file *generate.File) error {
 			Output:    file.Package + "_binary.go",
 			Generator: gen.GoFile,
 		}
-		entry.File.Generated = fmt.Sprintf("codergen -go")
+		entry.File.Copyright = copyright.Build(
+			"generated_by", copyright.Info{
+				Tool: "codergen -go",
+				Year: "2015",
+			})
 		if file.IsTest {
 			entry.Output = file.Package + "_binary_test.go"
 		}
@@ -162,17 +167,29 @@ func output(gen *generate.Generator, file *generate.File) error {
 			return err
 		}
 	}
-	javaPackage, doJava := file.Directives["java"]
+	javaPackage, doJava := file.Directives["java.package"]
 	if *java != "" && !file.IsTest && doJava {
+		source, _ := file.Directives["java.source"]
+		indent, _ := file.Directives["java.indent"]
+		member, _ := file.Directives["java.member_prefix"]
+		class, _ := file.Directives["java.class_prefix"]
 		pkgPath := strings.Replace(javaPackage, ".", "/", -1)
 		entry := Entry{
 			File:      *file,
-			Output:    filepath.Join(*java, pkgPath, "ObjectFactory.java"),
+			Output:    filepath.Join(*java, source, pkgPath, "ObjectFactory.java"),
 			Generator: gen.JavaFile,
 		}
-		entry.File.Generated = fmt.Sprintf("codergen -java=%s", filepath.Base(*java))
-		entry.File.ClassPrefix = strings.Title(file.Package)
+		entry.File.Copyright = copyright.Build(
+			"generated_aosp_java", copyright.Info{
+				Year: "2015",
+			})
 		entry.File.Package = javaPackage
+		entry.File.Indent = strings.Trim(indent, `"`)
+		if entry.File.Indent == "" {
+			entry.File.Indent = "    "
+		}
+		entry.File.MemberPrefix = member
+		entry.File.ClassPrefix = class
 		if err := entry.Generate(); err != nil {
 			return err
 		}
@@ -185,7 +202,11 @@ func output(gen *generate.Generator, file *generate.File) error {
 			Generator: gen.CppFile,
 		}
 		entry.File.Package = cppNamespace
-		entry.File.Generated = fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp))
+		entry.File.Copyright = copyright.Build(
+			"generated_by", copyright.Info{
+				Tool: fmt.Sprintf("codergen -cpp=%s", filepath.Base(*cpp)),
+				Year: "2015",
+			})
 		if err := entry.Generate(); err != nil {
 			return err
 		}

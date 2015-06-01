@@ -43,8 +43,8 @@ var (
 	testpath     = Path(gpusrc, "gfxapi/test")
 	glesapi      = Path(gpusrc, "gfxapi/gles/gles.api")
 	testapi      = Path(gpusrc, "gfxapi/test/gfxapi_test.api")
-	javacore     = Path(Paths.Root, "../base/rpclib/src/main/java/com/android/tools/rpclib/rpccore/")
-	javarpc      = Path(Paths.Root, "../adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
+	javabase     = Path(Paths.Root, "../")
+	javarpc      = Path(javabase, "adt/idea/android/src/com/android/tools/idea/editors/gfxtrace/rpc")
 	gpusrc       = GoSrcPath(GPURoot)
 
 	Tools struct {
@@ -102,7 +102,7 @@ func init() {
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
-		Codergen("codergen", "--go", "--java", javacore, "-cpp", cppcoder, GPURoot+"/...")
+		Codergen("codergen", "-v", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
 		// The java code generation rules
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
 		List("java").DependsOn("codergen", "javarpc")

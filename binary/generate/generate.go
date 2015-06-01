@@ -56,7 +56,7 @@ type Style struct {
 type Imports map[string]struct{}
 
 type File struct {
-	Generated  string
+	Copyright  string
 	Package    string
 	Import     string
 	IsTest     bool
