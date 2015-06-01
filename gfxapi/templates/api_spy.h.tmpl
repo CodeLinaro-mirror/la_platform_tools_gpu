@@ -19,8 +19,8 @@
 {{Include "cpp_common.tmpl"    }}
 
 {{/* ---- Overrides ---- */}}
-{{Global "C++.EnumTypeOverride" "uint32_t"}}
-{{Global "C++.ExternPrefix"     "mState." }}
+{{Global "C++.EnumTypeOverride"   "uint32_t"}}
+{{Global "C++.Statement.Override" "Statement"}}
 
 {{$filename := print (Global "API") "_spy.h" }}
 {{Global "SpyName" (print (Title (Global "API")) "Spy")}}
@@ -36,24 +36,19 @@
   #define {{$guard}}
 ¶
   #include "{{Global "API"}}_imports.h"
-  #include "{{Global "API"}}_state.h"
   #include "{{Global "API"}}_types.h"
 ¶
-  #include <gapic/encoder.h>
+  #include "spy_base.h"
+¶
   #include <gapic/log.h>
 ¶
   #include <memory>
   #include <string>
-  #include <unordered_set>
-¶
-  #include <stdint.h>
 ¶
   namespace gapii {«
 ¶
-  class {{$spyname}} {
+  class {{$spyname}} : public SpyBase {
   «public:»
-    inline {{$spyname}}();
-¶
     inline void init(std::shared_ptr<gapic::Encoder> encoder);
 ¶
     {{range $f := AllCommands $}}
@@ -62,42 +57,19 @@
 ¶
   «protected:»
     {{Macro "ApiClassnames.Imports"}} mImports;
-    {{Macro "ApiClassnames.State"  }} mState;
 ¶
-  «private:»
-    enum order {
-      PRE_OBSERVE,
-      POST_OBSERVE,
-    };
+    // Globals
+    {{range $g := $.Globals}}
+      {{Macro "C++.Type" $g}} {{$g.Name}};
+    {{end}}
 ¶
-    inline void observe(const void* base, uint64_t offset, uint64_t size);
-¶
-    std::unordered_set<gapic::Id> mObserved;
-    std::shared_ptr<gapic::Encoder> mEncoder;
+    #include "{{Global "API"}}_state_externs.inl"
   };
-¶
-  inline {{$spyname}}::{{$spyname}}()
-    : mState(std::bind(&GlesSpy::observe, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {}
 ¶
   // Inline methods
   inline void {{$spyname}}::init(std::shared_ptr<gapic::Encoder> encoder) {
-    mEncoder = encoder;
+    SpyBase::init(encoder);
     mImports.Resolve();
-  }
-¶
-  inline void {{$spyname}}::observe(const void* base, uint64_t offset, uint64_t size) {
-    const void* ptr = reinterpret_cast<const uint8_t*>(base) + offset;
-    gapic::Id id = gapic::Id::Hash(ptr, size);
-    if (mObserved.count(id) == 0) {
-        mEncoder->Uint16(0xfffd); // Type ID -- TODO: mEncoder->Id(RESOURCE_ID);
-        mEncoder->Id(id);
-        mEncoder->Data(ptr, static_cast<int32_t>(size));
-        mObserved.emplace(id);
-    }
-    mEncoder->Uint16(0xfffe); // Type ID -- TODO: mEncoder->Id(OBSERVATION_ID);
-    mEncoder->Uint64(reinterpret_cast<uint64_t>(ptr));
-    mEncoder->Uint64(size);
-    mEncoder->Id(id);
   }
 ¶
   {{range $i, $f := AllCommands $}}
@@ -144,36 +116,52 @@
 {{define "MethodImplementation"}}
   {{AssertType $ "Function"}}
 
-  {{$name := Macro "CmdName" $}}
-  {{$synthetic := GetAnnotation $ "synthetic"}}
-  {{$ret       := not (IsVoid $.Return.Type)}}
-  {{$spyname   := Global "SpyName"}}
+  {{$name    := Macro "CmdName" $}}
+  {{$spyname := Global "SpyName"}}
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
     GAPID_INFO("{{$name}}()\n");
-    {{$args := Macro "C++.CallArguments" $}}
-    {{if $ret}}
-      {{if $synthetic}}
-        {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
-      {{else}}
-        {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{Macro "C++.CallArguments" $}});
-      {{end}}
-      mState.{{$name}}({{if $args}}{{$args}}, {{end}}result);
-    {{else}}
-      {{if not $synthetic}}mImports.{{$name}}({{$args}});{{end}}
-      mState.{{$name}}({{$args}});
-    {{end}}
+
+    {{Macro "CallImport" $}} {{/* TODO: Call this between all API reads and writes*/}}
+¶
+    do {
+      {{Macro "C++.Block" $.Block}}
+    } while(false);
 ¶
     mEncoder->Uint16({{Global "HACK_FUNCTION_INDEX_HACK"}}); // Type ID -- TODO: mEncoder->Id({{Macro "ID" $}});
-
+    encodeObservations();
     {{range $p := $.FullParameters}}
       {{Macro "Encode" "Parameter" $p "Type" (TypeOf $p) "Name" $p.Name}}
     {{end}}
 
-    {{if $ret}}¶
+    {{if not (IsVoid $.Return.Type)}}¶
       return result;
     {{end}}
   }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to call the imported (real driver) function.
+-------------------------------------------------------------------------------
+*/}}
+{{define "CallImport"}}
+  {{AssertType $ "Function"}}
+
+  {{$name      := Macro "CmdName" $}}
+  {{$args      := Macro "C++.CallArguments" $}}
+  {{$synthetic := GetAnnotation $ "synthetic"}}
+
+  {{if not (IsVoid $.Return.Type)}}
+    {{if $synthetic}}
+      {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
+    {{else}}
+      {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{$args}});
+    {{end}}
+  {{else}}
+    {{if not $synthetic}}mImports.{{$name}}({{$args}});{{end}}
+  {{end}}
 {{end}}
 
 
@@ -201,9 +189,11 @@
   {{else if IsS64         $.Type}}mEncoder->Int64({{$.Name}});
   {{else if IsInt         $.Type}}mEncoder->Int64({{$.Name}});
   {{else if IsUint        $.Type}}mEncoder->Uint64({{$.Name}});
-  {{else if IsPointer     $.Type}}mEncoder->Uint64(reinterpret_cast<uint64_t>({{$.Name}}));
   {{else if IsString      $.Type}}mEncoder->String({{$.Name}});
   {{else if IsEnum        $.Type}}mEncoder->Uint32(static_cast<uint32_t>({{$.Name}}));
+  {{else if IsPointer     $.Type}}
+    mEncoder->Uint64(reinterpret_cast<uint64_t>({{$.Name}}));
+    mEncoder->Uint32(0); // PoolID
   {{else if IsStaticArray $.Type}}
     for (int i = 0; i < {{$.Type.Size}}; i++) {
       {{Macro "Encode" "Type" $.Type.ValueType "Name" (print $.Name "[i]") "Parameter" $.Parameter}}
@@ -214,6 +204,20 @@
       {{Macro "Encode" "Type" $f.Type "Name" (print $.Name ".m" $f.Name) "Parameter" $.Parameter}}
     {{end}}
   {{else}}{{Error "Encode passed unsupported type: %s" $.Type.Name}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute the given statement without mutating outputs.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Statement"}}
+  {{     if IsAssign    $}}{{Macro "C++.Statement.Default" $}}
+  {{else if IsMapAssign $}}{{Macro "C++.Statement.Default" $}}
+  {{else if IsReturn    $}}break;
+  {{else                 }}{{Macro "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 

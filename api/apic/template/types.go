@@ -83,6 +83,7 @@ var (
 		semantic.Reference{},
 		semantic.Return{},
 		semantic.Select{},
+		semantic.SliceAssign{},
 		semantic.SliceIndex{},
 		semantic.SliceRange{},
 		semantic.Slice{},

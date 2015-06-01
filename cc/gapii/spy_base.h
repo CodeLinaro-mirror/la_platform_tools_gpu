@@ -1,0 +1,192 @@
+/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef GAPII_SPY_BASE_H
+#define GAPII_SPY_BASE_H
+
+#include "slice.h"
+
+#include <gapic/encoder.h>
+
+#include <stdint.h>
+
+#include <memory>
+#include <string>
+#include <unordered_set>
+#include <vector>
+
+namespace gapii {
+
+class SpyBase {
+public:
+    void init(std::shared_ptr<gapic::Encoder> encoder);
+
+protected:
+    // Observation is a single read or write memory observation.
+    struct Observation {
+        // encode writes this observation to the encoder e.
+        void encode(gapic::Encoder* e) const;
+
+        const void*     mBase; // Base address of the observation.
+        const uint64_t  mSize; // Number of bytes of the observation.
+        const gapic::Id mId;   // The resource identifier of the observation.
+    };
+
+    typedef std::unordered_set<gapic::Id> IdSet;
+    typedef std::vector<Observation> ObservationList;
+    typedef std::shared_ptr<gapic::Encoder> EncoderSPtr;
+
+    // read is called to make a read memory observation of size bytes, starting at base.
+    void read(void* base, uint64_t size);
+
+    // write is called to make a write memory observation of size bytes, starting at base.
+    void write(void* base, uint64_t size);
+
+    // encodeObservations encodes all read and write observations to the encoder, and clears the
+    // read and write lists.
+    void encodeObservations();
+
+    template <typename T>
+    inline void read(const Slice<T>& slice);
+
+    // Read reads and returns the i'th element from the slice src.
+    template <typename T>
+    inline T read(const Slice<T>& src, uint64_t i);
+
+    template <typename T>
+    inline void write(const Slice<T>& slice);
+
+    // Writes a value to i'th element in the slice dst.
+    template <typename T>
+    inline void write(const Slice<T>& dst, uint64_t i, T value);
+
+    template <typename T>
+    inline void copy(const Slice<T>& dst, const Slice<T>& src);
+
+    template<typename T>
+    inline Slice<T> clone(const Slice<T>& src);
+
+    template<typename T>
+    inline Slice<T> make(uint64_t count) const;
+
+    template<typename T>
+    inline Slice<T> slice(T* src, uint64_t s, uint64_t e) const;
+
+    inline Slice<uint8_t> slice(void* src, uint64_t s, uint64_t e) const;
+
+    inline Slice<char> slice(const std::string& src) const;
+
+    template<typename T>
+    inline Slice<T> slice(const Slice<T>& src, uint64_t s, uint64_t e) const;
+
+    inline std::string string(const Slice<char>& slice) const;
+
+    ObservationList mReads;  // The list of read observations made by the spy.
+    ObservationList mWrites; // The list of write observations made by the spy.
+    IdSet mResources;        // The list of observations that have already been encoded.
+    EncoderSPtr mEncoder;    // The output stream encoder.
+
+private:
+    Observation observe(void* base, uint64_t size);
+};
+
+template <typename T>
+inline void SpyBase::read(const Slice<T>& slice) {
+    if (slice.isApplicationPool()) {
+        return read(slice.begin(), slice.count() * sizeof(T));
+    }
+}
+
+template<typename T>
+inline T SpyBase::read(const Slice<T>& src, uint64_t index) {
+    T& elem = src[index];
+    if (src.isApplicationPool()) {
+        read(&elem, sizeof(T));
+    }
+    return elem;
+}
+
+template <typename T>
+inline void SpyBase::write(const Slice<T>& slice) {
+    if (slice.isApplicationPool()) {
+        return write(slice.begin(), slice.count() * sizeof(T));
+    }
+}
+
+template<typename T>
+inline void SpyBase::write(const Slice<T>& dst, uint64_t index, T value) {
+    if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
+        dst[index] = value;
+    } else {
+        write(&dst[index], sizeof(T));
+    }
+}
+
+template <typename T>
+inline void SpyBase::copy(const Slice<T>& dst, const Slice<T>& src) {
+    read(src);
+    if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
+        uint64_t c = (src.count() < dst.count()) ? src.count() : dst.count();
+        for (uint64_t i = 0; i < c; i++) {
+          dst[i] = src[i];
+        }
+    }
+    write(dst);
+}
+
+template<typename T>
+inline Slice<T> SpyBase::clone(const Slice<T>& src) {
+    Slice<T> dst = make<T>(src.count());
+    copy(dst, src);
+    return dst;
+}
+
+template<typename T>
+inline Slice<T> SpyBase::make(uint64_t count) const {
+    auto pool = Pool::create(count * sizeof(T));
+    return Slice<T>(reinterpret_cast<T*>(pool->base()), count, pool);
+}
+
+template<typename T>
+inline Slice<T> SpyBase::slice(T* src, uint64_t s, uint64_t e) const {
+    // TODO: Find the pool containing src
+    return Slice<T>(src+s, e-s, std::shared_ptr<Pool>());
+}
+
+inline Slice<uint8_t> SpyBase::slice(void* src, uint64_t s, uint64_t e) const {
+    return slice(reinterpret_cast<uint8_t*>(src), s, e);
+}
+
+inline Slice<char> SpyBase::slice(const std::string& src) const {
+    Slice<char> dst = make<char>(src.length());
+    for (uint64_t i = 0; i < src.length(); i++) {
+        dst[i] = src[i];
+    }
+    return dst;
+}
+
+template<typename T>
+inline Slice<T> SpyBase::slice(const Slice<T>& src, uint64_t s, uint64_t e) const {
+    return src(s, e);
+}
+
+inline std::string SpyBase::string(const Slice<char>& slice) const {
+    return std::string(slice.begin(), slice.end());
+}
+
+}  // namespace gapii
+
+#endif // GAPII_SPY_BASE_H

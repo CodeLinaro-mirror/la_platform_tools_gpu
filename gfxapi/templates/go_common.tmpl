@@ -292,7 +292,8 @@
   {{     if IsDeclareLocal $}}{{$.Local.Name}} := {{Macro "Go.Read" $.Local.Value}} {{Macro "Go.TypeComment" (TypeOf $.Local)}}
   {{else if IsAssert       $}}
   {{else if IsAssign       $}}{{Macro "Go.Assign" "LHS" $.LHS "Operator" $.Operator "RHS" $.RHS}}
-  {{else if IsMapAssign    $}}{{Macro "Go.MapAssign" "To" $.To "Operator" $.Operator "Value" $.Value}}
+  {{else if IsMapAssign    $}}{{Macro "Go.MapAssign" $}}
+  {{else if IsSliceAssign  $}}{{Macro "Go.SliceAssign" $}}
   {{else if IsCopy         $}}{{Macro "Go.Copy" $}}
   {{else if IsReturn       $}}{{Macro "Go.Assign" "LHS" $.Function.Return "Operator" "=" "RHS" $.Value}}
   {{else if IsIteration    $}}{{Macro "Go.Iteration" $}}
@@ -371,12 +372,7 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.Assign"}}
-  {{if IsSliceIndex $.LHS}}
-    {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
-    {{Macro "Go.Read" $.LHS.Slice}}.Index({{Macro "Go.Read" $.LHS.Index}}, ϟs).Write({{Macro "Go.Read" $.RHS}}, ϟs)
-  {{else}}
-    {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
-  {{end}}
+  {{Macro "Go.Read" $.LHS}} {{$.Operator}} {{Macro "Go.Read" $.RHS}}
 {{end}}
 
 
@@ -397,8 +393,21 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.MapAssign"}}
+  {{AssertType $ "MapAssign"}}
   {{if eq $.Operator "="}}{{Macro "Go.Read" $.To.Map}}[{{Macro "Go.Read" $.To.Index}}] = {{Macro "Go.Read" $.Value}}
   {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to assign a value to a slice index
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.SliceAssign"}}
+  {{AssertType $ "SliceAssign"}}
+  {{if eq $.Operator "="}}{{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).Write({{Macro "Go.Read" $.Value}}, ϟs)
+  {{else}}{{Error "Unsupported SliceAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
 

@@ -91,7 +91,6 @@ func init() {
 		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.cpp.tmpl"))
 		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_imports.h.tmpl"))
 		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_spy.h.tmpl"))
-		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_state.h.tmpl"))
 		Apic(gapiipath, glesapi, Path(gpusrc, "gfxapi/templates/api_types.h.tmpl"))
 		Apic(gapiiwinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_exports.def.tmpl"))
 		Apic(gapiiwinpath, glesapi, Path(gpusrc, "gfxapi/templates/opengl32_resolve.cpp.tmpl"))

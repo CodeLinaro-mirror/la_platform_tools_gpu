@@ -30,14 +30,21 @@ public:
     inline Slice();
     inline Slice(T* base, uint64_t count, const std::shared_ptr<Pool>& pool);
 
-    inline Slice<T> operator()(uint64_t start, uint64_t end) const;
-    inline T&       operator[](uint64_t index) const;
-
     // Returns the number of elements in the slice.
     inline uint64_t count() const;
 
     // Returns the size of the slice in bytes.
     inline uint64_t size() const;
+
+    // Returns true if this is a slice on the application pool (external memory).
+    inline bool isApplicationPool() const;
+
+    // Returns a new subset slice from this slice.
+    inline Slice<T> operator()(uint64_t start, uint64_t end) const;
+
+    // Returns a reference to a single element in the slice.
+    // Care must be taken to not mutate data in the application pool.
+    inline T& operator[](uint64_t index) const;
 
     // Support for range-based for looping
     inline T* begin() const;
@@ -57,16 +64,6 @@ inline Slice<T>::Slice(T* base, uint64_t count, const std::shared_ptr<Pool>& poo
     : mBase(base), mCount(0), mPool(pool) {}
 
 template<typename T>
-inline Slice<T> Slice<T>::operator()(uint64_t start, uint64_t end) const {
-    return Slice<T>(mBase+start, end-start, mPool);
-}
-
-template<typename T>
-inline T& Slice<T>::operator[](uint64_t index) const {
-    return mBase[index];
-}
-
-template<typename T>
 inline uint64_t Slice<T>::count() const {
     return mCount;
 }
@@ -74,6 +71,21 @@ inline uint64_t Slice<T>::count() const {
 template<typename T>
 inline uint64_t Slice<T>::size() const {
     return mCount * sizeof(T);
+}
+
+template<typename T>
+inline bool Slice<T>::isApplicationPool() const {
+    return mPool.get() == nullptr;
+}
+
+template<typename T>
+inline Slice<T> Slice<T>::operator()(uint64_t start, uint64_t end) const {
+    return Slice<T>(mBase+start, end-start, mPool);
+}
+
+template<typename T>
+inline T& Slice<T>::operator[](uint64_t index) const {
+    return mBase[index];
 }
 
 template<typename T>
