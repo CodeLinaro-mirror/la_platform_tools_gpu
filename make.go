@@ -102,7 +102,7 @@ func init() {
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/schema.go.tmpl"))
 		Apic(testpath, testapi, Path(gpusrc, "gfxapi/templates/state_mutator.go.tmpl"))
 		// The codergen rule
-		Codergen("codergen", "-v", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
+		Codergen("codergen", "--go", "--java", javabase, "-cpp", cppcoder, GPURoot+"/...")
 		// The java code generation rules
 		RpcApi("--java", javarpc, servicerpc).Creates(Virtual("javarpc"))
 		List("java").DependsOn("codergen", "javarpc")
