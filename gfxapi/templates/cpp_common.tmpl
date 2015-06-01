@@ -110,6 +110,7 @@
   {{else if IsString     $}}""
   {{else if IsPseudonym  $}}{{Macro "C++.Null" $.To}}
   {{else if IsClass      $}}{{Macro "C++.Type" $}}()
+  {{else if IsSlice      $}}{{Macro "C++.Type" $}}()
   {{else if IsPointer    $}}nullptr
   {{else if IsReference  $}}{{Macro "C++.Type" $}}()
   {{else}}{{Error "macro Type called with unsupported type: %s" $.Name}}
