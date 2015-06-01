@@ -24,13 +24,13 @@ import (
 )
 
 type TypeA struct {
-	binary.Generate
-	data string
+	binary.Generate `id:"TypeAID"`
+	data            string
 }
 
 type TypeB struct {
-	binary.Generate
-	data string
+	binary.Generate `id:"TypeBID"`
+	data            string
 }
 
 type BadType struct {

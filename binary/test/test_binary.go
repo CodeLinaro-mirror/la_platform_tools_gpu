@@ -17,8 +17,8 @@ func init() {
 }
 
 var (
-	binaryIDTypeA = binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}
-	binaryIDTypeB = binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}
+	TypeAID = binary.ID{0xa4, 0xbe, 0x00, 0x04, 0x4c, 0x84, 0x76, 0x86, 0xdc, 0x77, 0x63, 0x6d, 0x19, 0xdd, 0x63, 0x33, 0x17, 0x38, 0xbf, 0x24}
+	TypeBID = binary.ID{0x73, 0xbd, 0xff, 0x55, 0x9c, 0xc4, 0x5b, 0xe3, 0xaf, 0x72, 0xfd, 0xb6, 0x97, 0xfb, 0x0e, 0xe1, 0x8d, 0x19, 0xa9, 0x67}
 )
 
 type binaryClassTypeA struct{}
@@ -46,7 +46,7 @@ func doSkipTypeA(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTypeA) ID() binary.ID      { return binaryIDTypeA }
+func (*binaryClassTypeA) ID() binary.ID      { return TypeAID }
 func (*binaryClassTypeA) New() binary.Object { return &TypeA{} }
 func (*binaryClassTypeA) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTypeA(e, obj.(*TypeA))
@@ -62,7 +62,7 @@ func (*binaryClassTypeA) Skip(d binary.Decoder) error { return doSkipTypeA(d) }
 func (*binaryClassTypeA) Schema() *schema.Class       { return schemaTypeA }
 
 var schemaTypeA = &schema.Class{
-	TypeID: binaryIDTypeA,
+	TypeID: TypeAID,
 	Name:   "TypeA",
 	Fields: []schema.Field{
 		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
@@ -94,7 +94,7 @@ func doSkipTypeB(d binary.Decoder) error {
 	}
 	return nil
 }
-func (*binaryClassTypeB) ID() binary.ID      { return binaryIDTypeB }
+func (*binaryClassTypeB) ID() binary.ID      { return TypeBID }
 func (*binaryClassTypeB) New() binary.Object { return &TypeB{} }
 func (*binaryClassTypeB) Encode(e binary.Encoder, obj binary.Object) error {
 	return doEncodeTypeB(e, obj.(*TypeB))
@@ -110,7 +110,7 @@ func (*binaryClassTypeB) Skip(d binary.Decoder) error { return doSkipTypeB(d) }
 func (*binaryClassTypeB) Schema() *schema.Class       { return schemaTypeB }
 
 var schemaTypeB = &schema.Class{
-	TypeID: binaryIDTypeB,
+	TypeID: TypeBID,
 	Name:   "TypeB",
 	Fields: []schema.Field{
 		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
