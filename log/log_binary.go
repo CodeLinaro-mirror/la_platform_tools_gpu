@@ -24,7 +24,7 @@ func (v Kind) String() string {
 	if s, ok := _Kind_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Kind(%v)", v)
+	return fmt.Sprintf("Kind(%d)", v)
 }
 
 func (v *Kind) Parse(s string) error {

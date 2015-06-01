@@ -407,7 +407,7 @@ func (v Flags) String() string {
 	if s, ok := _Flags_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Flags(%v)", v)
+	return fmt.Sprintf("Flags(%d)", v)
 }
 
 func (v *Flags) Parse(s string) error {
@@ -430,7 +430,7 @@ func (v ID) String() string {
 	if s, ok := _ID_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ID(%v)", v)
+	return fmt.Sprintf("ID(%d)", v)
 }
 
 func (v *ID) Parse(s string) error {
@@ -454,7 +454,7 @@ func (v TypeID) String() string {
 	if s, ok := _TypeID_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TypeID(%v)", v)
+	return fmt.Sprintf("TypeID(%d)", v)
 }
 
 func (v *TypeID) Parse(s string) error {

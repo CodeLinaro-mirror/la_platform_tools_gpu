@@ -310,7 +310,7 @@ func (v {{$name}}) String() string {
 	if s, ok := _{{$name}}_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("{{$name}}(%v)", v)
+	return fmt.Sprintf("{{$name}}(%d)", v)
 }
 
 func (v *{{$name}}) Parse(s string) error {

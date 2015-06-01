@@ -5152,7 +5152,7 @@ func (v ImageFormat) String() string {
 	if s, ok := _ImageFormat_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("ImageFormat(%v)", v)
+	return fmt.Sprintf("ImageFormat(%d)", v)
 }
 
 func (v *ImageFormat) Parse(s string) error {
@@ -5177,7 +5177,7 @@ func (v TimingMask) String() string {
 	if s, ok := _TimingMask_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TimingMask(%v)", v)
+	return fmt.Sprintf("TimingMask(%d)", v)
 }
 
 func (v *TimingMask) Parse(s string) error {
@@ -5221,7 +5221,7 @@ func (v TypeKind) String() string {
 	if s, ok := _TypeKind_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("TypeKind(%v)", v)
+	return fmt.Sprintf("TypeKind(%d)", v)
 }
 
 func (v *TypeKind) Parse(s string) error {

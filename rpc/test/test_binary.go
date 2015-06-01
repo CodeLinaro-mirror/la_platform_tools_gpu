@@ -1516,7 +1516,7 @@ func (v Enum) String() string {
 	if s, ok := _Enum_map[v]; ok {
 		return s
 	}
-	return fmt.Sprintf("Enum(%v)", v)
+	return fmt.Sprintf("Enum(%d)", v)
 }
 
 func (v *Enum) Parse(s string) error {
