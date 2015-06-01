@@ -25,7 +25,6 @@ import (
 	"unicode/utf8"
 
 	"android.googlesource.com/platform/tools/gpu/binary/schema"
-	"android.googlesource.com/platform/tools/gpu/tools/copyright"
 )
 
 type functions struct {
@@ -126,13 +125,8 @@ func (f *functions) SchemaPrefix() string {
 	return f.schema
 }
 
-func (f *functions) Header(tool string) (string, error) {
-	_, err := io.WriteString(f.writer, copyright.Build("generated_by", copyright.Info{Tool: tool}))
-	return "", err
-}
-
-func (f *functions) Lower(s string) string {
-	return strings.ToLower(s)
+func (f *functions) Lower(s interface{}) string {
+	return strings.ToLower(fmt.Sprint(s))
 }
 
 func (f *functions) ToS8(val byte) string {
