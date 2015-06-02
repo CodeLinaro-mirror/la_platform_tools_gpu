@@ -14,15 +14,11 @@
 
 package maker
 
-import "sync"
-
-var golock sync.Mutex
+const GoPkgResources = "go_packages"
 
 // GoCommand runs "go" with the specified arguments.
 func GoCommand(args ...string) *Step {
-	golock.Lock()
-	defer golock.Unlock()
-	return Command(goTool, args...)
+	return Command(goTool, args...).Access(GoPkgResources)
 }
 
 // GoInstall builds a new Step that runs "go install" on the supplied module.

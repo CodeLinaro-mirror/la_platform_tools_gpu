@@ -186,5 +186,5 @@ func Apic(path string, api string, template string) {
 }
 
 func Codergen(name string, args ...string) {
-	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic")
+	Command(Tools.Codergen, args...).Creates(Virtual(name)).DependsOn("rpcapi", "apic").Access(GoPkgResources)
 }

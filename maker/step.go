@@ -30,13 +30,14 @@ import (
 // and may depend on many entities.
 // It is an error to have a cycle in the build graph.
 type Step struct {
-	inputs  []Entity
-	outputs []Entity
-	always  bool
-	action  func(*Step) error
-	once    sync.Once
-	done    chan struct{}
-	err     error
+	inputs   []Entity
+	outputs  []Entity
+	always   bool
+	action   func(*Step) error
+	once     sync.Once
+	done     chan struct{}
+	err      error
+	accesses []string
 }
 
 var (
@@ -63,6 +64,9 @@ func NewStep(a func(*Step) error) *Step {
 	s := &Step{
 		action: a,
 		done:   make(chan struct{}),
+	}
+	if Config.DisableParallel {
+		s.Access("single_thread")
 	}
 	for _, h := range stepHooks {
 		h(s)
@@ -97,6 +101,16 @@ func (s *Step) DependsOn(in ...interface{}) *Step {
 	}
 	for _, h := range stepHooks {
 		h(s)
+	}
+	return s
+}
+
+// Access adds the supplied shared resource names to the list of resources
+// accessed by this step.
+func (s *Step) Access(v ...string) *Step {
+	s.accesses = append(s.accesses, v...)
+	for _, name := range v {
+		addLock(name)
 	}
 	return s
 }
@@ -181,11 +195,7 @@ func (s *Step) updateInputs() {
 		dep := Creator(e)
 		if dep != nil {
 			deps = append(deps, dep)
-			if Config.DisableParallel {
-				dep.start()
-			} else {
-				go dep.start()
-			}
+			go dep.start()
 		}
 	}
 	// Wait for all inputs to be ready
@@ -236,7 +246,7 @@ func (s *Step) start() {
 	s.once.Do(func() {
 		s.updateInputs()
 		if s.err == nil && s.shouldRun() {
-			s.run()
+			withLocks(s.accesses, s.run)
 		}
 		// Signal we are complete
 		close(s.done)
