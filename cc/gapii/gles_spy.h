@@ -3751,9 +3751,9 @@ inline void GlesSpy::glGetShaderInfoLog(uint32_t shader, int32_t buffer_length,
             /* case false: */(((l_min_88_a < l_min_88_b) == (false))) ? (l_min_88_b) :
             /* default: */ 0 /* clang-format on */;
         int32_t l_l = l_min_88_result;
-        write(slice(string_length_written, 0, 1), 0, l_l);
         copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
              slice(l_s->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
+        write(slice(string_length_written, 0, 1), 0, l_l);
     } while (false);
 
     mEncoder->Uint16(141);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_INFO_LOG_ID);
@@ -3784,9 +3784,9 @@ inline void GlesSpy::glGetShaderSource(uint32_t shader, int32_t buffer_length,
             /* case false: */(((l_min_90_a < l_min_90_b) == (false))) ? (l_min_90_b) :
             /* default: */ 0 /* clang-format on */;
         int32_t l_l = l_min_90_result;
-        write(slice(string_length_written, 0, 1), 0, l_l);
         copy(slice(source, (uint64_t)(0), (uint64_t)(l_l)),
              slice(slice(l_s->mSource), (uint64_t)(0), (uint64_t)(l_l)));
+        write(slice(string_length_written, 0, 1), 0, l_l);
     } while (false);
 
     mEncoder->Uint16(142);  // Type ID -- TODO: mEncoder->Id(GL_GET_SHADER_SOURCE_ID);
@@ -3976,9 +3976,9 @@ inline void GlesSpy::glGetProgramInfoLog(uint32_t program, int32_t buffer_length
             /* case false: */(((l_min_99_a < l_min_99_b) == (false))) ? (l_min_99_b) :
             /* default: */ 0 /* clang-format on */;
         int32_t l_l = l_min_99_result;
-        write(slice(string_length_written, 0, 1), 0, l_l);
         copy(slice(info, (uint64_t)(0), (uint64_t)(l_l)),
              slice(l_p->mInfoLog, (uint64_t)(0), (uint64_t)(l_l)));
+        write(slice(string_length_written, 0, 1), 0, l_l);
     } while (false);
 
     mEncoder->Uint16(152);  // Type ID -- TODO: mEncoder->Id(GL_GET_PROGRAM_INFO_LOG_ID);
@@ -4792,43 +4792,51 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                 break;
             }
             case StateVariable::GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_RENDERBUFFER_SIZE: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_IMAGE_UNITS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_TEXTURE_SIZE: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VARYING_VECTORS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_ATTRIBS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS: {
@@ -4837,25 +4845,30 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                 break;
             }
             case StateVariable::GL_MAX_VERTEX_UNIFORM_VECTORS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_MAX_VIEWPORT_DIMS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
-                write(l_v, 1,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 1));
+                auto l_max_width =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                auto l_max_height =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 1);
+                write(l_v, 0, l_max_width);
+                write(l_v, 1, l_max_height);
                 break;
             }
             case StateVariable::GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_NUM_SHADER_BINARY_FORMATS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_PACK_ALIGNMENT: {
@@ -4907,8 +4920,9 @@ inline void GlesSpy::glGetIntegerv(uint32_t param, int32_t* values) {
                 break;
             }
             case StateVariable::GL_SUBPIXEL_BITS: {
-                write(l_v, 0,
-                      read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0));
+                auto l_result =
+                        read(slice(values, (uint64_t)(0), (uint64_t)(stateVariableSize(param))), 0);
+                write(l_v, 0, l_result);
                 break;
             }
             case StateVariable::GL_IMPLEMENTATION_COLOR_READ_FORMAT: {

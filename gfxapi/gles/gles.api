@@ -1978,8 +1978,8 @@ cmd void glGetShaderInfoLog(ShaderId  shader,
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
     l := min(buffer_length, as!s32(strlen(s.InfoLog)))
-    string_length_written[0] = l
     copy(info[0:l], s.InfoLog[0:l])
+    string_length_written[0] = l
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetShaderSource.xml
@@ -1990,8 +1990,8 @@ cmd void glGetShaderSource(ShaderId   shader,
     ctx := GetContext()
     s := ctx.Instances.Shaders[shader]
     l := min(buffer_length, as!s32(strlen(s.Source)))
-    string_length_written[0] = l
     copy(source[0:l], as!char[](s.Source)[0:l])
+    string_length_written[0] = l
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glReleaseShaderCompiler.xml
@@ -2072,8 +2072,8 @@ cmd void glGetProgramInfoLog(ProgramId  program,
     ctx := GetContext()
     p := ctx.Instances.Programs[program]
     l := min(buffer_length, as!s32(strlen(p.InfoLog)))
-    string_length_written[0] = l
     copy(info[0:l], p.InfoLog[0:l])
+    string_length_written[0] = l
 }
 
 ///http://www.khronos.org/opengles/sdk/docs/man/xhtml/glUseProgram.xml
@@ -2470,56 +2470,69 @@ cmd void glGetIntegerv(StateVariable param, s32* values) {
       case GL_GENERATE_MIPMAP_HINT:
         v[0] = as!s32(ctx.GenerateMipmapHint)
       case GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS: {
-        v[0] = ?
-        assert(v[0] > 7)
+        result := ?
+        assert(result > 7)
+        v[0] = result
       }
       case GL_MAX_CUBE_MAP_TEXTURE_SIZE: {
-        v[0] = ?
-        assert(v[0] > 15)
+        result := ?
+        assert(result > 15)
+        v[0] = result
       }
       case GL_MAX_FRAGMENT_UNIFORM_VECTORS: {
-        v[0] = ?
-        assert(v[0] > 15)
+        result := ?
+        assert(result > 15)
+        v[0] = result
       }
       case GL_MAX_RENDERBUFFER_SIZE: {
-        v[0] = ?
-        assert(v[0] > 0)
+        result := ?
+        assert(result > 0)
+        v[0] = result
       }
       case GL_MAX_TEXTURE_IMAGE_UNITS: {
-        v[0] = ?
-        assert(v[0] > 7)
+        result := ?
+        assert(result > 7)
+        v[0] = result
       }
       case GL_MAX_TEXTURE_SIZE: {
-        v[0] = ?
-        assert(v[0] > 63)
+        result := ?
+        assert(result > 63)
+        v[0] = result
       }
       case GL_MAX_VARYING_VECTORS: {
-        v[0] = ?
-        assert(v[0] > 7)
+        result := ?
+        assert(result > 7)
+        v[0] = result
       }
       case GL_MAX_VERTEX_ATTRIBS: {
-        v[0] = ?
-        assert(v[0] > 7)
+        result := ?
+        assert(result > 7)
+        v[0] = result
       }
       case GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
         v[0] = ?
       case GL_MAX_VERTEX_UNIFORM_VECTORS: {
-        v[0] = ?
-        assert(v[0] > 127)
+        result := ?
+        assert(result > 127)
+        v[0] = result
       }
       case GL_MAX_VIEWPORT_DIMS: {
-        v[0] = ?  /* max width */
-        assert(v[0] > ctx.Rasterizing.Viewport.Width-1)
-        v[1] = ?  /* max height */
-        assert(v[1] > ctx.Rasterizing.Viewport.Height-1)
+        max_width := ?
+        max_height := ?
+        assert(max_width > ctx.Rasterizing.Viewport.Width-1)
+        assert(max_height > ctx.Rasterizing.Viewport.Height-1)
+        v[0] =  max_width
+        v[1] =  max_height
       }
       case GL_NUM_COMPRESSED_TEXTURE_FORMATS: {
-        v[0] = ?
-        assert(v[0] > -1)
+        result := ?
+        assert(result > -1)
+        v[0] = result
       }
       case GL_NUM_SHADER_BINARY_FORMATS: {
-        v[0] = ?
-        assert(v[0] > -1)
+        result := ?
+        assert(result > -1)
+        v[0] = result
       }
       case GL_PACK_ALIGNMENT:
         v[0] = ctx.PixelStorage[GL_PACK_ALIGNMENT]
@@ -2548,8 +2561,9 @@ cmd void glGetIntegerv(StateVariable param, s32* values) {
       case GL_STENCIL_BITS:
         v[0] = ?
       case GL_SUBPIXEL_BITS: {
-        v[0] = ?
-        assert(v[0] > 3)
+        result := ?
+        assert(result > 3)
+        v[0] = result
       }
       case GL_IMPLEMENTATION_COLOR_READ_FORMAT:
         v[0] = ?

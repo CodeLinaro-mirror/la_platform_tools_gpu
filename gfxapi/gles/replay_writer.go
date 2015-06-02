@@ -3519,8 +3519,8 @@ func (ϟa *GlGetShaderInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databa
 		}
 	}() // s32
 	l := min_88_result // s32
-	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	ϟa.Info.Slice(uint64(int32(0)), uint64(l), ϟs).replayCopy(s.InfoLog.Slice(uint64(int32(0)), uint64(l), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	_, _, _, _, _, _, _, _ = context, GetContext_87_result, ctx, s, min_88_a, min_88_b, min_88_result, l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
@@ -3560,8 +3560,8 @@ func (ϟa *GlGetShaderSource) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd databas
 		}
 	}() // s32
 	l := min_90_result // s32
-	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	ϟa.Source.Slice(uint64(int32(0)), uint64(l), ϟs).replayCopy(MakeCharˢFromString(s.Source, ϟs).Slice(uint64(int32(0)), uint64(l), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	_, _, _, _, _, _, _, _ = context, GetContext_89_result, ctx, s, min_90_a, min_90_b, min_90_result, l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Shader.remap(ϟa, ϟs); remap {
@@ -3804,8 +3804,8 @@ func (ϟa *GlGetProgramInfoLog) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd datab
 		}
 	}() // s32
 	l := min_99_result // s32
-	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	ϟa.Info.Slice(uint64(int32(0)), uint64(l), ϟs).replayCopy(p.InfoLog.Slice(uint64(int32(0)), uint64(l), ϟs), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+	ϟa.StringLengthWritten.Slice(uint64(0), uint64(1), ϟs).Index(uint64(0), ϟs).replayWrite(l, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	_, _, _, _, _, _, _, _ = context, GetContext_98_result, ctx, p, min_99_a, min_99_b, min_99_result, l
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	if key, remap := ϟa.Program.remap(ϟa, ϟs); remap {
@@ -4646,32 +4646,57 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case StateVariable_GL_GENERATE_MIPMAP_HINT:
 		v.Index(uint64(0), ϟs).replayWrite(int32(ctx.GenerateMipmapHint), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	case StateVariable_GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_CUBE_MAP_TEXTURE_SIZE:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_FRAGMENT_UNIFORM_VECTORS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_RENDERBUFFER_SIZE:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_TEXTURE_IMAGE_UNITS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_TEXTURE_SIZE:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_VARYING_VECTORS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_VERTEX_ATTRIBS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS:
 		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	case StateVariable_GL_MAX_VERTEX_UNIFORM_VECTORS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_MAX_VIEWPORT_DIMS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
-		v.Index(uint64(1), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		max_width := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)  // any
+		max_height := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(1), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(max_width, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		v.Index(uint64(1), ϟs).replayWrite(max_height, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_, _ = max_width, max_height
 	case StateVariable_GL_NUM_COMPRESSED_TEXTURE_FORMATS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_NUM_SHADER_BINARY_FORMATS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_PACK_ALIGNMENT:
 		v.Index(uint64(0), ϟs).replayWrite(ctx.PixelStorage.Get(PixelStoreParameter_GL_PACK_ALIGNMENT), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	case StateVariable_GL_UNPACK_ALIGNMENT:
@@ -4693,7 +4718,9 @@ func (ϟa *GlGetIntegerv) Replay(ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Da
 	case StateVariable_GL_STENCIL_BITS:
 		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	case StateVariable_GL_SUBPIXEL_BITS:
-		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		result := ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb) // any
+		v.Index(uint64(0), ϟs).replayWrite(result, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+		_ = result
 	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_FORMAT:
 		v.Index(uint64(0), ϟs).replayWrite(ϟa.Values.Slice(uint64(int32(0)), uint64(externs{ϟs, ϟd, ϟl}.stateVariableSize(ϟa.Param)), ϟs).Index(uint64(0), ϟs).replayMap(ϟa, ϟs, ϟd, ϟl, ϟb), ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
 	case StateVariable_GL_IMPLEMENTATION_COLOR_READ_TYPE:
