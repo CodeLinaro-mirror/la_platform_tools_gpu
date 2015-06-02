@@ -94,3 +94,7 @@ type Return struct {
 	Function *Function   // the function this statement returns from
 	Value    Expression  // the value to be returned
 }
+
+// Fence is a marker to indicate a safe point between the last read and the first write.
+// It can be used to generate safe forwarding calls.
+type Fence struct{}

@@ -300,6 +300,7 @@
   {{else if IsCall         $}}{{Macro "Go.Call" $}}
   {{else if IsRead         $}}
   {{else if IsWrite        $}}
+  {{else if IsFence        $}}
   {{else if IsBranch       $}}if {{Macro "Go.Read" $.Condition}} {
     {{Macro "Go.Block" $.True}}
     {{if len $.False.Statements}}

@@ -96,6 +96,7 @@ func functionBody(ctx *context, owner semantic.Type, out *semantic.Function) {
 			}
 			out.Annotations = annotations(ctx, in.Annotations)
 			out.Block = block(ctx, in.Block, out)
+			addFence(ctx, out.Block)
 		})
 	}
 	if len(out.Docs) == 0 {

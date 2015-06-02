@@ -28,6 +28,9 @@ func Visit(node Node, visitor func(Node)) {
 	case *SliceIndex:
 		visitor(n.Slice)
 		visitor(n.Index)
+	case *SliceAssign:
+		visitor(n.To)
+		visitor(n.Value)
 	case *Assert:
 		visitor(n.Condition)
 	case *Assign:
@@ -111,6 +114,7 @@ func Visit(node Node, visitor func(Node)) {
 		for _, m := range n.Methods {
 			visitor(m)
 		}
+	case *Fence:
 	case *Field:
 		visitor(n.Type)
 		if n.Default != nil {
@@ -177,6 +181,7 @@ func Visit(node Node, visitor func(Node)) {
 		for _, c := range n.Choices {
 			visitor(c)
 		}
+	case StringValue:
 	case *Switch:
 		visitor(n.Value)
 		for _, c := range n.Cases {
