@@ -19,24 +19,24 @@ import "android.googlesource.com/platform/tools/gpu/atom"
 // Injector is an implementation of Transformer that can inject atoms into the
 // atom stream.
 type Injector struct {
-	injections map[atom.ID][]atomAtomID
+	injections map[atom.ID][]atom.Atom
 }
 
 // Inject emits the atom a with identifier id after the atom with identifier
 // after.
-func (t *Injector) Inject(after atom.ID, id atom.ID, a atom.Atom) {
+func (t *Injector) Inject(after atom.ID, a atom.Atom) {
 	if t.injections == nil {
-		t.injections = make(map[atom.ID][]atomAtomID)
+		t.injections = make(map[atom.ID][]atom.Atom)
 	}
-	t.injections[after] = append(t.injections[after], atomAtomID{a, id})
+	t.injections[after] = append(t.injections[after], a)
 }
 
 func (t *Injector) Transform(id atom.ID, a atom.Atom, out atom.Writer) {
 	out.Write(id, a)
 
 	if r, ok := t.injections[id]; ok {
-		for _, i := range r {
-			out.Write(i.id, i.atom)
+		for _, injection := range r {
+			out.Write(atom.NoID, injection)
 		}
 		delete(t.injections, id)
 	}

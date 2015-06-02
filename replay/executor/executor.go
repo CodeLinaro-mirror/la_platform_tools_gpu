@@ -17,11 +17,9 @@ package executor
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"io"
 
-	"android.googlesource.com/platform/tools/gpu/atom"
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/binary/endian"
 	"android.googlesource.com/platform/tools/gpu/binary/flat"
@@ -33,19 +31,12 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/protocol"
 )
 
-// ErrNoPostback is returned when a data for a postback could not be retrieved.
-// This can be due to a connection problem or a decode error.
-var ErrNoPostback = errors.New("No postback received")
-
-type PostbackHandlerMap map[atom.ID]func(data interface{}, err error)
-
 type executor struct {
 	payload      protocol.Payload
 	decoder      builder.ResponseDecoder
 	connection   io.ReadWriteCloser
 	database     database.Database
 	logger       log.Logger
-	handlers     PostbackHandlerMap
 	architecture device.Architecture
 }
 
@@ -60,7 +51,6 @@ func Execute(
 	connection io.ReadWriteCloser,
 	database database.Database,
 	logger log.Logger,
-	handlers PostbackHandlerMap,
 	architecture device.Architecture) error {
 
 	return executor{
@@ -69,7 +59,6 @@ func Execute(
 		connection:   connection,
 		database:     database,
 		logger:       logger,
-		handlers:     handlers,
 		architecture: architecture,
 	}.execute()
 }
@@ -97,21 +86,7 @@ func (r executor) execute() error {
 	}()
 
 	// Decode and handle postbacks as they are received
-	for postback := range r.decoder(responseR) {
-		if handler, found := r.handlers[postback.ID]; found {
-			handler(postback.Data, postback.Error)
-			delete(r.handlers, postback.ID)
-		} else {
-			r.logger.Warningf("No handler registered for postback id 0x%x (%T)",
-				postback.ID, postback.Data)
-		}
-	}
-
-	// Report missing postbacks as errors
-	for id, handler := range r.handlers {
-		handler(nil, ErrNoPostback)
-		delete(r.handlers, id)
-	}
+	r.decoder(responseR, nil)
 
 	return <-comErr
 }

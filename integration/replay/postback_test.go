@@ -28,7 +28,7 @@ import (
 	"android.googlesource.com/platform/tools/gpu/replay/value"
 )
 
-func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.PostbackHandlerMap) {
+func doReplay(t *testing.T, f func(*builder.Builder)) {
 	d, l := database.InMemory(), log.Testing(t)
 
 	mgr := replay.New(d, l)
@@ -50,23 +50,9 @@ func doReplay(t *testing.T, f func(*builder.Builder), handlers executor.Postback
 		t.Errorf("Build failed with error: %v", err)
 	}
 
-	err = executor.Execute(payload, decoder, connection, d, l, handlers, arch)
+	err = executor.Execute(payload, decoder, connection, d, l, arch)
 	if err != nil {
 		t.Errorf("Executor failed with error: %v", err)
-	}
-}
-
-func checkPostback(t *testing.T, expected interface{}, then ...func()) func(data interface{}, err error) {
-	return func(data interface{}, err error) {
-		if err != nil {
-			t.Errorf("Postback returned error: %v", err)
-		}
-		if !reflect.DeepEqual(expected, data) {
-			t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
-		}
-		for _, f := range then {
-			f()
-		}
 	}
 }
 
@@ -77,12 +63,23 @@ func TestPostbackString(t *testing.T) {
 
 	doReplay(t, func(b *builder.Builder) {
 		ptr := b.String(expected)
-		b.Post(ptr, uint64(len(expected)), 0, func(d binary.Decoder) (interface{}, error) {
-			buf := make([]byte, len(expected))
-			return buf, d.Data(buf)
+		b.Post(ptr, uint64(len(expected)), func(d binary.Decoder, err error) error {
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			data := make([]byte, len(expected))
+			err = d.Data(data)
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			if expected != string(data) {
+				t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
+			}
+			close(done)
+			return err
 		})
-	}, executor.PostbackHandlerMap{
-		0: checkPostback(t, []byte(expected), func() { close(done) }),
 	})
 
 	<-done
@@ -95,19 +92,61 @@ func TestMultiPostback(t *testing.T) {
 		ptr := b.AllocateTemporaryMemory(8)
 		b.Push(value.Bool(false))
 		b.Store(ptr)
-		b.Post(ptr, 1, 100, func(d binary.Decoder) (interface{}, error) { return d.Bool() })
+		b.Post(ptr, 1, func(d binary.Decoder, err error) error {
+			expected := false
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			data, err := d.Bool()
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			if !reflect.DeepEqual(expected, data) {
+				t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
+			}
+			return err
+		})
 
 		b.Push(value.Bool(true))
 		b.Store(ptr)
-		b.Post(ptr, 1, 200, func(d binary.Decoder) (interface{}, error) { return d.Bool() })
+		b.Post(ptr, 1, func(d binary.Decoder, err error) error {
+			expected := true
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			data, err := d.Bool()
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			if !reflect.DeepEqual(expected, data) {
+				t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
+			}
+			return err
+		})
 
 		b.Push(value.F64(123.456))
 		b.Store(ptr)
-		b.Post(ptr, 8, 300, func(d binary.Decoder) (interface{}, error) { return d.Float64() })
-	}, executor.PostbackHandlerMap{
-		100: checkPostback(t, false),
-		200: checkPostback(t, true),
-		300: checkPostback(t, 123.456, func() { close(done) }),
+		b.Post(ptr, 8, func(d binary.Decoder, err error) error {
+			expected := float64(123.456)
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			data, err := d.Float64()
+			if err != nil {
+				t.Errorf("Postback returned error: %v", err)
+				return err
+			}
+			if !reflect.DeepEqual(expected, data) {
+				t.Errorf("Postback data was not as expected. Expected: %v. Got: %v", expected, data)
+			}
+			close(done)
+			return err
+		})
 	})
 
 	<-done

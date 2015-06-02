@@ -33,7 +33,6 @@ type Generator interface {
 		ctx Context,
 		cfg Config,
 		requests []Request,
-		postback Postback,
 		device *service.Device,
 		db database.Database,
 		logger log.Logger) atom.Transforms
@@ -59,14 +58,3 @@ type Config interface{}
 // to insert a postback of the currently bound render-target content at a
 // specific atom.
 type Request interface{}
-
-// Postback registers handler to be called with the postback data for the atom
-// with the returned identifier. The returned atom identifier is unique,
-// enforcing at most one postback handler per atom.
-type Postback func(handler PostbackHandler) atom.ID
-
-// PostbackHandler is a callback for an atom's postback data.
-// If the postback was successful then data holds the postback data, and err is
-// nil. If the postback failed to decode or was missing then data will be nil
-// and err will be the error raised.
-type PostbackHandler func(data interface{}, err error)

@@ -16,11 +16,15 @@ package gles
 
 import (
 	"android.googlesource.com/platform/tools/gpu/atom"
+	"android.googlesource.com/platform/tools/gpu/binary"
+	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/gfxapi"
+	"android.googlesource.com/platform/tools/gpu/log"
 	"android.googlesource.com/platform/tools/gpu/replay"
+	"android.googlesource.com/platform/tools/gpu/replay/builder"
+	"android.googlesource.com/platform/tools/gpu/replay/value"
 	"android.googlesource.com/platform/tools/gpu/service"
 )
-
-const transientID = atom.ID(0xffffffffffffffff)
 
 const (
 	commandThreadTimer uint8 = iota
@@ -33,7 +37,6 @@ const (
 type timingInfoTransform struct {
 	timingInfo   service.TimingInfo
 	out          chan<- replay.CallTiming
-	postback     replay.Postback
 	perCommand   bool
 	perDrawCall  bool
 	perFrame     bool
@@ -41,49 +44,57 @@ type timingInfoTransform struct {
 }
 
 func (t *timingInfoTransform) startTimer(fromId atom.ID, index uint8, out atom.Writer) {
-	out.Write(transientID, NewStartTimer(index))
+	out.Write(atom.NoID, NewStartTimer(index))
 	t.timerStartId[index] = fromId
 }
 
 func (t *timingInfoTransform) stopTimer(toID atom.ID, index uint8, mask service.TimingMask, out atom.Writer) {
-	/* TODO
 	fromID := t.timerStartId[index]
-	stopTimerId := t.postback(func(data interface{}, err error) {
-		if err != nil {
-			t.out <- replay.CallTiming{Error: err}
-			return
-		}
-		val := data.(StopTimer_Postback)
-		switch mask {
-		case service.TimingMaskTimingPerCommand:
-			t.timingInfo.PerCommand = append(t.timingInfo.PerCommand, service.AtomTimer{
-				AtomId:      uint64(toID),
-				Nanoseconds: val.Result,
-			})
-		case service.TimingMaskTimingPerDrawCall:
-			t.timingInfo.PerDrawCall = append(t.timingInfo.PerDrawCall, service.AtomRangeTimer{
-				FromAtomId:  uint64(fromID),
-				ToAtomId:    uint64(toID),
-				Nanoseconds: val.Result,
-			})
-		case service.TimingMaskTimingPerFrame:
-			t.timingInfo.PerFrame = append(t.timingInfo.PerFrame, service.AtomRangeTimer{
-				FromAtomId:  uint64(fromID),
-				ToAtomId:    uint64(toID),
-				Nanoseconds: val.Result,
-			})
-		}
-	})
-	out.Write(stopTimerId, NewStopTimer(index, 0))
-	*/
 	delete(t.timerStartId, index)
+
+	out.Write(toID, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+		NewStopTimer(index, 0).Replay(i, s, d, l, b) // returns a uint64 on the stack
+		b.Store(value.VolatileTemporaryPointer(0))
+		b.Post(value.VolatileTemporaryPointer(0), 8, func(d binary.Decoder, err error) error {
+			var nanoseconds uint64
+			if err == nil {
+				nanoseconds, err = d.Uint64()
+			}
+			if err != nil {
+				t.out <- replay.CallTiming{Error: err}
+				return err
+			}
+
+			switch mask {
+			case service.TimingMaskTimingPerCommand:
+				t.timingInfo.PerCommand = append(t.timingInfo.PerCommand, service.AtomTimer{
+					AtomId:      uint64(toID),
+					Nanoseconds: nanoseconds,
+				})
+			case service.TimingMaskTimingPerDrawCall:
+				t.timingInfo.PerDrawCall = append(t.timingInfo.PerDrawCall, service.AtomRangeTimer{
+					FromAtomId:  uint64(fromID),
+					ToAtomId:    uint64(toID),
+					Nanoseconds: nanoseconds,
+				})
+			case service.TimingMaskTimingPerFrame:
+				t.timingInfo.PerFrame = append(t.timingInfo.PerFrame, service.AtomRangeTimer{
+					FromAtomId:  uint64(fromID),
+					ToAtomId:    uint64(toID),
+					Nanoseconds: nanoseconds,
+				})
+			}
+			return err
+		})
+		return nil
+	}))
 
 	switch mask {
 	case service.TimingMaskTimingPerFrame:
-		out.Write(transientID, NewFlushPostBuffer())
+		out.Write(toID, NewFlushPostBuffer())
 	case service.TimingMaskTimingPerDrawCall:
 		if !t.perFrame {
-			out.Write(transientID, NewFlushPostBuffer())
+			out.Write(toID, NewFlushPostBuffer())
 		}
 	}
 }
@@ -122,8 +133,15 @@ func (t *timingInfoTransform) Flush(out atom.Writer) {
 		t.stopTimer(id, frameThreadTimer, service.TimingMaskTimingPerFrame, out)
 	}
 
-	t.postback(func(interface{}, error) {
-		t.out <- replay.CallTiming{TimingInfo: t.timingInfo}
-		close(t.out)
-	})
+	out.Write(id, replay.Custom(func(i atom.ID, s *gfxapi.State, d database.Database, l log.Logger, b *builder.Builder) error {
+		b.Post(value.VolatileTemporaryPointer(0), 0, func(d binary.Decoder, err error) error {
+			if err == nil {
+				t.out <- replay.CallTiming{TimingInfo: t.timingInfo}
+			} else {
+				t.out <- replay.CallTiming{Error: err}
+			}
+			return err
+		})
+		return nil
+	}))
 }

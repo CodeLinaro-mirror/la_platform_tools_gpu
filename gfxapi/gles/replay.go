@@ -68,7 +68,6 @@ func (a api) ReplayTransforms(
 	ctx replay.Context,
 	config replay.Config,
 	requests []replay.Request,
-	postback replay.Postback,
 	device *service.Device,
 	db database.Database,
 	logger log.Logger) atom.Transforms {
@@ -91,40 +90,16 @@ func (a api) ReplayTransforms(
 		case colorBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
-			injector.Inject(
-				req.after,
-				postback(func(data interface{}, err error) {
-					if err == nil {
-						req.out <- replay.Image{Data: data.([]byte)}
-					} else {
-						req.out <- replay.Image{Error: err}
-					}
-				}), readFramebufferColor{
-					width:  req.width,
-					height: req.height,
-				},
-			)
+			injector.Inject(req.after, readFramebufferColor(req.width, req.height, req.out))
 
 		case depthBufferRequest:
 			earlyTerminator.Add(req.after)
 			skipDrawCalls.Draw(req.after)
-			injector.Inject(
-				req.after,
-				postback(func(data interface{}, err error) {
-					if err == nil {
-						req.out <- replay.Image{Data: data.([]byte)}
-					} else {
-						req.out <- replay.Image{Error: err}
-					}
-				}), readFramebufferDepth{
-					database: db,
-				},
-			)
+			injector.Inject(req.after, readFramebufferDepth(req.out))
 
 		case timeCallsRequest:
 			profiling = true
 			transforms.Add(&timingInfoTransform{
-				postback:     postback,
 				out:          req.out,
 				perCommand:   (req.mask & service.TimingMaskTimingPerCommand) != 0,
 				perDrawCall:  (req.mask & service.TimingMaskTimingPerDrawCall) != 0,
