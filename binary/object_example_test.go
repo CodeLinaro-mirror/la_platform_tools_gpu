@@ -39,6 +39,10 @@ func (*ExampleClass) ID() binary.ID {
 	return ExampleID
 }
 
+func (*ExampleClass) New() binary.Object {
+	return &ExampleObject{}
+}
+
 func (*ExampleClass) Encode(e binary.Encoder, obj binary.Object) error {
 	o := obj.(*ExampleObject)
 	return e.String(o.Data)
