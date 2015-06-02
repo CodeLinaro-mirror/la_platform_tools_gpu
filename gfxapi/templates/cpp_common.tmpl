@@ -276,6 +276,7 @@
   {{     if IsDeclareLocal $}}{{Macro "C++.Type" (TypeOf $.Local)}} {{Macro "C++.LocalName" $.Local}} = {{Macro "C++.Read" $.Local.Value}};
   {{else if IsAssign       $}}{{Macro "C++.Assign" $}}
   {{else if IsMapAssign    $}}{{Macro "C++.MapAssign" $}}
+  {{else if IsSliceAssign  $}}{{Macro "C++.SliceAssign" $}}
   {{else if IsReturn       $}}return {{Macro "C++.Read" $.Value}};
   {{else if IsBranch       $}}if ({{Macro "C++.Read" $.Condition}}) {
       {{Macro "C++.Block" $.True}}
@@ -313,7 +314,6 @@
 */}}
 {{define "C++.Assign"}}
   {{AssertType $ "Assign"}}
-
   {{Macro "C++.Read" $.LHS}} {{$.Operator}} {{Macro "C++.Read" $.RHS}};
 {{end}}
 
@@ -325,8 +325,19 @@
 */}}
 {{define "C++.MapAssign"}}
   {{AssertType $ "MapAssign"}}
-
   {{Macro "C++.Read" $.To.Map}}[{{Macro "C++.Read" $.To.Index}}] {{$.Operator}} {{Macro "C++.Read" $.Value}};
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to perform a slice assign statement.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.SliceAssign"}}
+  {{AssertType $ "SliceAssign"}}
+  {{if eq $.Operator "="}}write({{Macro "C++.Read" $.To.Slice}}, {{Macro "C++.Read" $.To.Index}}, {{Macro "C++.Read" $.Value}});
+  {{else}}{{Error "Unsupported MapAssign operator %s" $.Operator}}{{end}}
 {{end}}
 
 
@@ -380,7 +391,7 @@
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
   {{else if IsCreate           $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>((new {{Macro "C++.Type" $ty.To}}()){{Macro "C++.InitializeFields" $.Initializer}})
   {{else if IsClassInitializer $}}{{Macro "C++.Type" $}}(){{Macro "C++.InitializeFields" $}}
-  {{else if IsSliceIndex       $}}{{Macro "C++.Read" $.Slice  }}[{{Macro "C++.Read" $.Index}}]
+  {{else if IsSliceIndex       $}}read({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Index}})
   {{else if IsSliceRange       $}}slice({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsPointerRange     $}}slice({{Macro "C++.Read" $.Pointer}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsClone            $}}clone({{Macro "C++.Read" $.Slice}})
@@ -479,7 +490,7 @@
 
   {{if $.Target.Object}}{{Macro "C++.MethodCall" $}}
   {{else}}{{/* extern */}}
-    {{Global "C++.ExternPrefix"}}{{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
+    {{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
   {{end}}
 {{end}}
 
@@ -550,11 +561,6 @@
   ////////////////////////////////////////////////////////////////////////////////
   // {{.}}
   ////////////////////////////////////////////////////////////////////////////////
-{{end}}
-
-{{/* Defaults */}}
-{{if not (Global "C++.ExternPrefix")}}
-  {{Global "C++.ExternPrefix" ""}}
 {{end}}
 
 {{$clang_style := "{BasedOnStyle: Google, AccessModifierOffset: -4, ColumnLimit: 100, ContinuationIndentWidth: 8, IndentWidth: 4}"}}

@@ -73,6 +73,14 @@ type MapAssign struct {
 	Value    Expression  // the value to set in the map
 }
 
+// SliceAssign represents assigning to a slice index expression.
+type SliceAssign struct {
+	AST      *ast.Assign // the underlying syntax node this was built from
+	To       *SliceIndex // the slice index to assign to
+	Operator string      // the assignment operator being applied
+	Value    Expression  // the value to set in the slice
+}
+
 // DeclareLocal represents a local variable declaration statement.
 // Variables cannot be modified after declaration.
 type DeclareLocal struct {

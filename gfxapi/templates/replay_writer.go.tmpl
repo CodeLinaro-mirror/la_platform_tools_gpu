@@ -288,14 +288,9 @@
     {{Macro "Go.Read" $.Slice}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
   {{else if IsCopy $}}
     {{Macro "Go.Read" $.Dst}}.replayCopy({{Macro "Go.Read" $.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
-  {{else if IsAssign $}}
-    {{if IsSliceIndex $.LHS}}
-      {{$lhs := $.LHS | Unpack}}
-      {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
-      {{Macro "Go.Read" $lhs.Slice}}.Index({{Macro "Go.Read" $lhs.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.RHS}}, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
-    {{else}}
-      {{Macro "Go.Statement.Default" $}}
-    {{end}}
+  {{else if IsSliceAssign $}}
+    {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
+    {{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
   {{else}}
     {{Macro "Go.Statement.Default" $}}
   {{end}}

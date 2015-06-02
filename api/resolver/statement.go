@@ -112,6 +112,8 @@ func assign(ctx *context, in *ast.Assign) semantic.Node {
 	switch lhs := lhs.(type) {
 	case *semantic.MapIndex:
 		out = &semantic.MapAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
+	case *semantic.SliceIndex:
+		out = &semantic.SliceAssign{AST: in, To: lhs, Value: rhs, Operator: in.Operator}
 	default:
 		out = &semantic.Assign{AST: in, LHS: lhs, Operator: in.Operator, RHS: rhs}
 	}
