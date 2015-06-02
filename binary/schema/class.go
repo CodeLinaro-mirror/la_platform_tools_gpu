@@ -42,6 +42,8 @@ func (c *Class) ID() binary.ID {
 	return c.TypeID
 }
 
+func (c *Class) New() binary.Object { return &Object{class: c} }
+
 func (c *Class) Encode(e binary.Encoder, object binary.Object) error {
 	o := object.(*Object)
 	for i, f := range c.Fields {

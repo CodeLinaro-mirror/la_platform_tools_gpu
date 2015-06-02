@@ -30,6 +30,9 @@ type Class interface {
 	// fields causes it's id to change.
 	ID() ID
 
+	// New can be used to build a new default initialized instance of the type.
+	New() Object
+
 	// Encode writes the supplied object to the supplied Encoder.
 	// The object must be a type the Class understands, the implementation is
 	// allowed to panic if it is not.
