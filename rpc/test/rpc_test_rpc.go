@@ -21,8 +21,6 @@ type RPC interface {
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
 	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
-	GetBase(l log.Logger) (Base, error)
-	GetDerived(l log.Logger) (Base, error)
 }
 
 // Handle ResourceId
@@ -30,9 +28,6 @@ type ResourceId struct {
 	binary.Generate
 	ID binary.ID
 }
-
-// Array Baseˢ
-type BaseArray []Base
 
 // Array ListNodeˢ
 type ListNodeArray []ListNode
@@ -76,11 +71,4 @@ type ListNode struct {
 	binary.Generate
 	Name string
 	Next *ListNode
-}
-
-// Class Derived
-type Derived struct {
-	binary.Generate
-	Name string
-	Enum Enum
 }

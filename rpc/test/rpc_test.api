@@ -22,8 +22,6 @@ cmd Resource              ResolveResource(ResourceId r) { return ? }
 cmd ListNode*             GetSingleListNode()           { return ? }
 cmd ListNode*             GetListNodeChain()            { return ? }
 cmd ListNode*[]           GetListNodeChainArray()       { return ? }
-cmd Base*                 GetBase()                     { return ? }
-cmd Base*                 GetDerived()                  { return ? }
 
 @handle type string ResourceId
 class Resource {
@@ -52,8 +50,4 @@ class ListNode {
 @Interface
 class Base {
   string Name
-}
-
-class Derived : Base {
-  Enum Enum
 }

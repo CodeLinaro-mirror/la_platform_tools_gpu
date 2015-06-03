@@ -39,9 +39,6 @@ var testListNodeChainArray = ListNodePtrArray{
 	testListNodeChain, testListNodeChain, testListNodeChain,
 }
 
-var testBase Base = CreateDerived("BASE", EnumThree)
-var testDerived = CreateDerived("DERIVED", EnumThree)
-
 type server struct {
 	calls []string
 	err   error
@@ -97,17 +94,7 @@ func (s *server) GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error) {
 	return testListNodeChainArray, s.err
 }
 
-func (s *server) GetBase(l log.Logger) (Base, error) {
-	s.calls = append(s.calls, "GetBase()")
-	return testBase, s.err
-}
-
-func (s *server) GetDerived(l log.Logger) (Base, error) {
-	s.calls = append(s.calls, "GetDerived()")
-	return testDerived, s.err
-}
-
-func create(t *testing.T) (Client, *server) {
+func create(t *testing.T) (RPC, *server) {
 	l := log.Testing(t).Enter("Server")
 	mtu := 64
 	s2c, c2s := ringbuffer.New(64), ringbuffer.New(64)
@@ -212,20 +199,6 @@ func TestCallGetListNodeChainArray(t *testing.T) {
 	if !reflect.DeepEqual(res[0], res[1]) || !reflect.DeepEqual(res[1], res[2]) {
 		t.Errorf("Array values differ")
 	}
-}
-
-func TestCallGetBase(t *testing.T) {
-	client, server := create(t)
-	res, err := client.GetBase(log.Testing(t))
-	verifyCalls(t, server, err, "GetBase()")
-	verifyResult(t, testBase, res)
-}
-
-func TestCallGetDerived(t *testing.T) {
-	client, server := create(t)
-	res, err := client.GetDerived(log.Testing(t))
-	verifyCalls(t, server, err, "GetDerived()")
-	verifyResult(t, testDerived, res)
 }
 
 // TODO: Test errors

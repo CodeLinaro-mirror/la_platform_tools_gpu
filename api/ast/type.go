@@ -17,12 +17,11 @@ package ast
 import "android.googlesource.com/platform/tools/gpu/parse"
 
 // Class represents a class type declaration of the form
-// «"class" name : extension_list { fields }»
+// «"class" name { fields }»
 type Class struct {
 	CST         *parse.Branch // underlying parse structure for this node
 	Annotations Annotations   // the annotations applied to the class
 	Name        *Identifier   // the name of the class
-	Extends     []*Identifier // the set of class names it extends
 	Fields      []*Field      // the fields of the class
 }
 

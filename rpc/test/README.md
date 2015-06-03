@@ -26,20 +26,6 @@ type Base interface {
 
 Interface Base
 
-#### type BaseArray
-
-```go
-type BaseArray []Base
-```
-
-Array Baseˢ
-
-#### func (BaseArray) Format
-
-```go
-func (a BaseArray) Format(f fmt.State, c rune)
-```
-
 #### type Client
 
 ```go
@@ -64,45 +50,6 @@ func NewClient(m *multiplexer.Multiplexer, n *registry.Namespace) Client
 NewClient creates a new rpc client object that uses the multiplexer m for
 communication the namespace n for decoding objects. If n is nil then the global
 namespace is used.
-
-#### type Derived
-
-```go
-type Derived struct {
-	binary.Generate
-	Name string
-	Enum Enum
-}
-```
-
-Class Derived
-
-#### func  CreateDerived
-
-```go
-func CreateDerived(
-	Name string,
-	Enum Enum,
-) *Derived
-```
-
-#### func (*Derived) Class
-
-```go
-func (*Derived) Class() binary.Class
-```
-
-#### func (*Derived) GetEnum
-
-```go
-func (c *Derived) GetEnum() Enum
-```
-
-#### func (*Derived) GetName
-
-```go
-func (c *Derived) GetName() string
-```
 
 #### type Enum
 
@@ -231,8 +178,6 @@ type RPC interface {
 	GetSingleListNode(l log.Logger) (*ListNode, error)
 	GetListNodeChain(l log.Logger) (*ListNode, error)
 	GetListNodeChainArray(l log.Logger) (ListNodePtrArray, error)
-	GetBase(l log.Logger) (Base, error)
-	GetDerived(l log.Logger) (Base, error)
 }
 ```
 

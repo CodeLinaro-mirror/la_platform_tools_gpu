@@ -175,7 +175,7 @@ func switch_(p *parse.Parser, cst *parse.Branch) *ast.Switch {
 				entry := &ast.Case{}
 				entry.CST = cst
 				requireKeyword(ast.KeywordCase, p, cst)
-				for !operator(ast.OpExtends, p, cst) {
+				for !operator(ast.OpInitialise, p, cst) {
 					if len(entry.Conditions) > 0 {
 						requireOperator(ast.OpListSeparator, p, cst)
 					}
