@@ -266,44 +266,102 @@ func createAtomGroupControls(t gxui.Theme, appCtx *ApplicationContext, g atom.Gr
 	return layout
 }
 
-type cmdAdapterItem struct {
-	depth  uint
+type cmdNode interface {
+	atomRange() atom.Range
+}
+
+type observationsItem struct {
+	atomID atom.ID
+	index  int
+}
+
+func (i observationsItem) atomRange() atom.Range {
+	return atom.Range{Start: i.atomID, End: i.atomID + 1}
+}
+
+type hierarchyItem atom.Range
+
+func (i hierarchyItem) atomRange() atom.Range {
+	return atom.Range(i)
+}
+
+type observationsNode struct {
+	appCtx *ApplicationContext
 	atomID atom.ID
 }
 
-type CommandAdapterNode struct {
+func (n observationsNode) Count() int {
+	atom := n.appCtx.Atoms()[n.atomID]
+	return len(atom.Observations.Reads) + len(atom.Observations.Writes)
+}
+
+func (n observationsNode) NodeAt(index int) gxui.TreeNode {
+	return nil
+}
+
+func (n observationsNode) ItemAt(index int) gxui.AdapterItem {
+	return observationsItem{n.atomID, index}
+}
+
+func (n observationsNode) ItemIndex(item gxui.AdapterItem) int {
+	return item.(observationsItem).index
+}
+
+func (n observationsNode) Create(theme gxui.Theme, index int) gxui.Control {
+	atom := n.appCtx.Atoms()[n.atomID]
+	var r memory.Range
+	var c gxui.Color
+	if index < len(atom.Observations.Reads) {
+		r = atom.Observations.Reads[index].Range
+		c = gxui.Green
+	} else {
+		index -= len(atom.Observations.Reads)
+		r = atom.Observations.Writes[index].Range
+		c = gxui.Red
+	}
+
+	b := theme.CreateButton()
+	b.SetMargin(math.Spacing{})
+	b.AddChild(CreateLabel(theme, r.String(), c, true))
+	b.OnClick(func(gxui.MouseEvent) { n.appCtx.SelectAddress(r.Base) })
+	return b
+}
+
+type hierarchyNode struct {
 	appCtx *ApplicationContext
 	group  atom.Group
 	depth  uint
 }
 
-func (n CommandAdapterNode) Count() int {
+func (n hierarchyNode) Count() int {
 	return int(n.group.Count())
 }
 
-func (n CommandAdapterNode) NodeAt(index int) gxui.TreeNode {
-	_, subgroup := n.group.Index(uint64(index))
-	if subgroup != nil {
-		return &CommandAdapterNode{
+func (n hierarchyNode) NodeAt(index int) gxui.TreeNode {
+	if id, subgroup := n.group.Index(uint64(index)); subgroup != nil {
+		return &hierarchyNode{
 			appCtx: n.appCtx,
 			group:  *subgroup,
 			depth:  n.depth + 1,
 		}
 	} else {
-		return nil
+		return observationsNode{n.appCtx, id}
 	}
 }
 
-func (n CommandAdapterNode) ItemAt(index int) gxui.AdapterItem {
-	atomID, _ := n.group.Index(uint64(index))
-	return cmdAdapterItem{n.depth, atomID}
+func (n hierarchyNode) ItemAt(index int) gxui.AdapterItem {
+	if id, group := n.group.Index(uint64(index)); group == nil {
+		return hierarchyItem{Start: id, End: id + 1}
+	} else {
+		return hierarchyItem(group.Range)
+	}
 }
 
-func (n CommandAdapterNode) ItemIndex(item gxui.AdapterItem) int {
-	return int(n.group.IndexOf(item.(cmdAdapterItem).atomID))
+func (n hierarchyNode) ItemIndex(item gxui.AdapterItem) int {
+	return int(n.group.IndexOf(item.(cmdNode).atomRange().Start))
 }
 
-func (n CommandAdapterNode) Create(theme gxui.Theme, index int) gxui.Control {
+func (n hierarchyNode) Create(theme gxui.Theme, index int) gxui.Control {
 	id, subgroup := n.group.Index(uint64(index))
 	if subgroup != nil {
 		return createAtomGroupControls(theme, n.appCtx, *subgroup)
@@ -314,13 +372,13 @@ func (n CommandAdapterNode) Create(theme gxui.Theme, index int) gxui.Control {
 
 type CommandAdapter struct {
 	gxui.AdapterBase
-	CommandAdapterNode
+	hierarchyNode
 	appCtx *ApplicationContext
 }
 
 func CreateCommandAdapter(appCtx *ApplicationContext) *CommandAdapter {
 	a := &CommandAdapter{
-		CommandAdapterNode: CommandAdapterNode{appCtx: appCtx},
+		hierarchyNode: hierarchyNode{appCtx: appCtx},
 	}
 	return a
 }
@@ -334,34 +392,11 @@ func (a CommandAdapter) AtomRange(item gxui.AdapterItem) atom.Range {
 	if item == nil {
 		return atom.Range{}
 	}
-	cai := item.(cmdAdapterItem)
-	depth, atomID := cai.depth, cai.atomID
-	g := a.group
-	for {
-		idx := g.SubGroups.IndexOf(atomID)
-		if idx < 0 {
-			return atom.Range{Start: atomID, End: atomID + 1}
-		} else {
-			g = g.SubGroups[idx]
-		}
-		if depth == 0 {
-			return g.Range
-		}
-		depth--
-	}
+	return item.(cmdNode).atomRange()
 }
 
 func (a CommandAdapter) Item(id atom.ID) gxui.AdapterItem {
-	depth := uint(0)
-	g := a.group
-	for {
-		idx := g.SubGroups.IndexOf(id)
-		if idx < 0 {
-			return cmdAdapterItem{depth, id}
-		}
-		g = g.SubGroups[idx]
-		depth++
-	}
+	return hierarchyItem{Start: id, End: id + 1}
 }
 
 // gxui.TreeAdapter compliance

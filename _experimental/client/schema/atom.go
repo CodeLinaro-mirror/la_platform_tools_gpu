@@ -21,8 +21,9 @@ import (
 
 // Atom is a schema-typed Atom value.
 type Atom struct {
-	Info      service.AtomInfo
-	Arguments []interface{}
+	Info         service.AtomInfo
+	Observations Observations
+	Arguments    []interface{}
 }
 
 // Pack encodes the Atom to the encoder e.

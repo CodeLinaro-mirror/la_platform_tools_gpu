@@ -23,6 +23,10 @@ import (
 func UnpackAtom(d binary.Decoder, i service.AtomInfo) (Atom, error) {
 	a := Atom{Info: i}
 
+	if err := a.Observations.Decode(d); err != nil {
+		return Atom{}, err
+	}
+
 	for _, p := range i.Parameters {
 		arg, err := ReadType(p.Type, d)
 		if err != nil {

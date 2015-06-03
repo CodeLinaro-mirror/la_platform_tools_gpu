@@ -54,6 +54,7 @@ func DecodeAtoms(stream service.AtomStream, schema service.Schema) ([]Atom, erro
 		if err != nil {
 			return nil, fmt.Errorf("(%d) Error unpacking atom: %v", i, err)
 		}
+
 		atoms = append(atoms, atom)
 	}
 	return atoms, nil
