@@ -178,5 +178,5 @@ func TestDrawTriangle(t *testing.T) {
 	}
 
 	checkColorBuffer(t, ctx, mgr, w, h, 0.0, "solid-green", clear)
-	checkColorBuffer(t, ctx, mgr, w, h, 0.1, "triangle", triangle)
+	checkColorBuffer(t, ctx, mgr, w, h, 0.01, "triangle", triangle)
 }
