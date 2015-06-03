@@ -90,7 +90,7 @@ func (g Group) Count() uint64 {
 	return count
 }
 
-// Index returns the item with the specified index. If the item refers directly
+// Index returns the item at the specified index. If the item refers directly
 // to an atom identifier then the atom identifier is returned in baseAtomID and
 // subgroup is assigned nil.
 // If the item is a sub-group then baseAtomID is returned as the lowest atom
@@ -113,8 +113,8 @@ func (g Group) Index(index uint64) (baseAtomID ID, subgroup *Group) {
 	return base + ID(index), nil
 }
 
-// IndexOf returns the item index that refers directly to, or contains the given
-// atom identifer.
+// IndexOf returns the item index that ID refers directly to, or contains the
+// given atom identifer.
 func (g Group) IndexOf(atomID ID) uint64 {
 	index := uint64(0)
 	base := g.Range.First()
