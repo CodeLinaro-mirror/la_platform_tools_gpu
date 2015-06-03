@@ -70,8 +70,7 @@ func compareImages(t *testing.T, expected, got image.Image) float64 {
 	sqrErr := float64(0)
 	for y := 0; y < s.Y; y++ {
 		for x := 0; x < s.X; x++ {
-			e := expected.At(x, y)
-			g := got.At(x, y)
+			e, g := expected.At(x, y), got.At(x, y)
 			er, eg, eb, ea := e.RGBA()
 			gr, gg, gb, ga := g.RGBA()
 			sqrErr += sqr((float64(er) - float64(gr)) / 0xffff)
