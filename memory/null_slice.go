@@ -19,6 +19,7 @@ import (
 
 	"android.googlesource.com/platform/tools/gpu/binary"
 	"android.googlesource.com/platform/tools/gpu/database"
+	"android.googlesource.com/platform/tools/gpu/database/store"
 	"android.googlesource.com/platform/tools/gpu/log"
 )
 
@@ -29,7 +30,7 @@ func (s nullSlice) Get(database.Database, log.Logger) ([]byte, error) {
 }
 
 func (s nullSlice) ResourceID(d database.Database, l log.Logger) (binary.ID, error) {
-	panic("nullSlice.ResourceID currently not implemented")
+	return d.Store(&store.Blob{Data: make([]byte, s)}, l)
 }
 
 func (s nullSlice) Size() uint64 {
