@@ -948,17 +948,17 @@ bool callGlGetActiveAttrib(Stack* stack, bool pushReturn) {
 bool callGlGetActiveUniform(Stack* stack, bool pushReturn) {
     char* name = stack->pop<char*>();
     ShaderUniformType* type = stack->pop<ShaderUniformType*>();
-    int32_t* size = stack->pop<int32_t*>();
+    int32_t* vector_count = stack->pop<int32_t*>();
     int32_t* buffer_bytes_written = stack->pop<int32_t*>();
     int32_t buffer_size = stack->pop<int32_t>();
     int32_t location = stack->pop<int32_t>();
     uint32_t program = stack->pop<uint32_t>();
     if (stack->isValid()) {
         GAPID_INFO("glGetActiveUniform(%u, %d, %d, %p, %p, %p, %p)\n", program, location,
-                   buffer_size, buffer_bytes_written, size, type, name);
+                   buffer_size, buffer_bytes_written, vector_count, type, name);
         if (glGetActiveUniform != nullptr) {
-            glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
-                               name);
+            glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
+                               type, name);
         } else {
             GAPID_WARNING("Attempted to call unsupported function glGetActiveUniform\n");
         }

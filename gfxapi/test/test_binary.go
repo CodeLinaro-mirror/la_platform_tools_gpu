@@ -19,6 +19,7 @@ func init() {
 	registry.Add((*Charˢ)(nil).Class())
 	registry.Add((*Charᵖ)(nil).Class())
 	registry.Add((*CmdBool)(nil).Class())
+	registry.Add((*CmdCharptrToString)(nil).Class())
 	registry.Add((*CmdCharsliceToString)(nil).Class())
 	registry.Add((*U8ᵖ)(nil).Class())
 	registry.Add((*CmdClone)(nil).Class())
@@ -121,6 +122,7 @@ var (
 	binaryIDCharˢ                            = binary.ID{0xc3, 0xfa, 0x01, 0xb8, 0x39, 0x25, 0x6e, 0xee, 0x19, 0x67, 0xb8, 0x9f, 0x4d, 0x42, 0x73, 0xcd, 0x70, 0x0f, 0x94, 0x0f}
 	binaryIDCharᵖ                            = binary.ID{0x1f, 0x6c, 0x0a, 0xf7, 0xe7, 0x85, 0x27, 0x3a, 0x09, 0xe5, 0xdb, 0x03, 0xad, 0xa2, 0x81, 0x57, 0x7f, 0x5a, 0xb5, 0x9a}
 	binaryIDCmdBool                          = binary.ID{0x80, 0x77, 0xdf, 0x53, 0x3b, 0x89, 0xeb, 0x5f, 0x66, 0xfc, 0xe7, 0xd8, 0x38, 0x69, 0x06, 0x15, 0x7e, 0x0d, 0xcb, 0x23}
+	binaryIDCmdCharptrToString               = binary.ID{0xdf, 0x31, 0x80, 0x37, 0xc7, 0x34, 0x4e, 0x03, 0xe2, 0xb9, 0x46, 0xc3, 0xe3, 0x1c, 0x71, 0xed, 0xe6, 0x40, 0xd9, 0x47}
 	binaryIDCmdCharsliceToString             = binary.ID{0xfb, 0x14, 0x26, 0x02, 0x76, 0xf5, 0x73, 0x16, 0x1b, 0xbf, 0x84, 0xcb, 0xc4, 0xcc, 0x64, 0xe2, 0x42, 0x12, 0xe3, 0x91}
 	binaryIDU8ᵖ                              = binary.ID{0x69, 0xb3, 0xa1, 0x27, 0x68, 0x15, 0x43, 0x23, 0xf5, 0xf4, 0xa5, 0xf6, 0xcf, 0xc0, 0xd3, 0x33, 0x7d, 0x5e, 0x9d, 0x0c}
 	binaryIDCmdClone                         = binary.ID{0xf5, 0xe7, 0xb0, 0xe1, 0x8f, 0x78, 0x0d, 0x00, 0xa4, 0x8f, 0x00, 0xdf, 0x40, 0x33, 0xbf, 0x99, 0xf7, 0xaf, 0xd9, 0x9d}
@@ -560,6 +562,62 @@ var schemaCmdBool = &schema.Class{
 	Fields: []schema.Field{
 		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
+
+type binaryClassCmdCharptrToString struct{}
+
+func (*CmdCharptrToString) Class() binary.Class {
+	return (*binaryClassCmdCharptrToString)(nil)
+}
+func doEncodeCmdCharptrToString(e binary.Encoder, o *CmdCharptrToString) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Value(&o.S); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeCmdCharptrToString(d binary.Decoder, o *CmdCharptrToString) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := d.Value(&o.S); err != nil {
+		return err
+	}
+	return nil
+}
+func doSkipCmdCharptrToString(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if err := d.SkipValue((*Charᵖ)(nil)); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassCmdCharptrToString) ID() binary.ID      { return binaryIDCmdCharptrToString }
+func (*binaryClassCmdCharptrToString) New() binary.Object { return &CmdCharptrToString{} }
+func (*binaryClassCmdCharptrToString) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeCmdCharptrToString(e, obj.(*CmdCharptrToString))
+}
+func (*binaryClassCmdCharptrToString) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &CmdCharptrToString{}
+	return obj, doDecodeCmdCharptrToString(d, obj)
+}
+func (*binaryClassCmdCharptrToString) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeCmdCharptrToString(d, obj.(*CmdCharptrToString))
+}
+func (*binaryClassCmdCharptrToString) Skip(d binary.Decoder) error { return doSkipCmdCharptrToString(d) }
+func (*binaryClassCmdCharptrToString) Schema() *schema.Class       { return schemaCmdCharptrToString }
+
+var schemaCmdCharptrToString = &schema.Class{
+	TypeID: binaryIDCmdCharptrToString,
+	Name:   "CmdCharptrToString",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "S", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 

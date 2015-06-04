@@ -41,30 +41,6 @@ type unbounded interface {
 	Unbounded(ϟs *gfxapi.State) memory.Slice
 }
 
-func (e externs) strlen(str interface{}) uint32 {
-	switch str := str.(type) {
-	case string:
-		return uint32(len(str))
-
-	case unbounded:
-		d := e.s.MemoryDecoder(str.Unbounded(e.s), e.d, e.l)
-		c := uint32(0)
-		for {
-			if b, err := d.Uint8(); err == nil {
-				if b == 0 {
-					return c
-				}
-			} else {
-				panic(err)
-			}
-			c++
-		}
-
-	default:
-		panic(fmt.Errorf("Unsupported type %T", str))
-	}
-}
-
 func (e externs) substr(str string, start, end int32) string {
 	return str[start:end]
 }

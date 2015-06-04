@@ -1009,7 +1009,8 @@ typedef void(STDCALL *PFNGLGETACTIVEATTRIB)(uint32_t program, uint32_t location,
                                             char *name);
 typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, int32_t location,
                                              int32_t buffer_size, int32_t *buffer_bytes_written,
-                                             int32_t *size, ShaderUniformType *type, char *name);
+                                             int32_t *vector_count, ShaderUniformType *type,
+                                             char *name);
 typedef Error(STDCALL *PFNGLGETERROR)();
 typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, ProgramParameter parameter,
                                          int32_t *value);

@@ -46,6 +46,7 @@ func (ϟa *CmdCopy) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Log
 	ϟc := getState(ϟs)
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Buf = MakeU8ˢ(uint64(ϟa.Cnt), ϟs)
 	ϟc.Buf.Copy(ϟa.Src.Slice(uint64(uint32(0)), uint64(ϟa.Cnt), ϟs), ϟs, ϟd, ϟl)
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
@@ -55,6 +56,14 @@ func (ϟa *CmdCharsliceToString) Mutate(ϟs *gfxapi.State, ϟd database.Database
 	_ = ϟc
 	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
 	ϟc.Str = string(ϟa.S.Slice(uint64(uint32(0)), uint64(ϟa.Len), ϟs).Read(ϟs, ϟd, ϟl))
+	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+	return nil
+}
+func (ϟa *CmdCharptrToString) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
+	ϟc := getState(ϟs)
+	_ = ϟc
+	ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+	ϟc.Str = string(ϟa.S.StringSlice(ϟs, ϟd, ϟl, false).Read(ϟs, ϟd, ϟl))
 	ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
 	return nil
 }

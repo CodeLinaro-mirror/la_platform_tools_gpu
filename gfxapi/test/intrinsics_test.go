@@ -74,14 +74,21 @@ func TestCopy(t *testing.T) {
 func TestCharsliceToString(t *testing.T) {
 	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
 	expected := "ħęľĺő ŵōřŀď"
-	for _, a := range []atom.Atom{
-		NewCmdCharsliceToString(0x1234, uint32(len(expected))).
-			AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)),
-	} {
-		a.Mutate(s, d, l)
+	NewCmdCharsliceToString(0x1234, uint32(len(expected))).
+		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
+		Mutate(s, d, l)
+	if got := getState(s).Str; got != expected {
+		t.Errorf("Data was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
-	got := getState(s).Str
-	if got != expected {
+}
+
+func TestCharptrToString(t *testing.T) {
+	s, d, l := gfxapi.NewState(), database.InMemory(), log.Testing(t)
+	expected := "ħęľĺő ŵōřŀď"
+	NewCmdCharptrToString(0x1234).
+		AddRead(atom.Data(s.Architecture, d, l, 0x1234, expected)).
+		Mutate(s, d, l)
+	if got := getState(s).Str; got != expected {
 		t.Errorf("Data was not as expected.\nGot:      '%s'\nExpected: '%s'", got, expected)
 	}
 }
