@@ -91,8 +91,8 @@ var schemametadata = &schema.Class{
 	TypeID: binaryIDmetadata,
 	Name:   "metadata",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "metaType", Method: schema.Int32}},
-		schema.Field{Declared: "LinkTo", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-		schema.Field{Declared: "Request", Type: &schema.Interface{Name: "binary.Object"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "metaType", Method: schema.Int32}},
+		{Declared: "LinkTo", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Request", Type: &schema.Interface{Name: "binary.Object"}},
 	},
 }

@@ -703,11 +703,11 @@ var schemaArchitecture = &schema.Class{
 	TypeID: binaryIDArchitecture,
 	Name:   "Architecture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -819,13 +819,13 @@ var schemaBackbufferInfo = &schema.Class{
 	TypeID: binaryIDBackbufferInfo,
 	Name:   "BackbufferInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "ColorFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "DepthFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "StencilFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "ColorFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "DepthFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "StencilFmt", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "ResetViewportScissor", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -917,11 +917,11 @@ var schemaColor = &schema.Class{
 	TypeID: binaryIDColor,
 	Name:   "Color",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -1044,14 +1044,14 @@ var schemaBlendState = &schema.Class{
 	TypeID: binaryIDBlendState,
 	Name:   "BlendState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
-		schema.Field{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
-		schema.Field{Declared: "BlendColor", Type: &schema.Struct{Name: "Color"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "SrcRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "SrcAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "DstRgbBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "DstAlphaBlendFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "BlendEquationRgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "BlendEquationAlpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "BlendColor", Type: &schema.Struct{Name: "Color"}},
 	},
 }
 
@@ -1132,10 +1132,10 @@ var schemaBoolˢ = &schema.Class{
 	TypeID: binaryIDBoolˢ,
 	Name:   "Boolˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1194,8 +1194,8 @@ var schemaBoolᵖ = &schema.Class{
 	TypeID: binaryIDBoolᵖ,
 	Name:   "Boolᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1276,10 +1276,10 @@ var schemaU8ˢ = &schema.Class{
 	TypeID: binaryIDU8ˢ,
 	Name:   "U8ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1358,10 +1358,10 @@ var schemaBuffer = &schema.Class{
 	TypeID: binaryIDBuffer,
 	Name:   "Buffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
 	},
 }
 
@@ -1420,8 +1420,8 @@ var schemaBufferDataPointer = &schema.Class{
 	TypeID: binaryIDBufferDataPointer,
 	Name:   "BufferDataPointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1502,10 +1502,10 @@ var schemaBufferIdˢ = &schema.Class{
 	TypeID: binaryIDBufferIdˢ,
 	Name:   "BufferIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1564,8 +1564,8 @@ var schemaBufferIdᵖ = &schema.Class{
 	TypeID: binaryIDBufferIdᵖ,
 	Name:   "BufferIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1624,8 +1624,8 @@ var schemaCGLContextObj = &schema.Class{
 	TypeID: binaryIDCGLContextObj,
 	Name:   "CGLContextObj",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1706,10 +1706,10 @@ var schemaCGLContextObjˢ = &schema.Class{
 	TypeID: binaryIDCGLContextObjˢ,
 	Name:   "CGLContextObjˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1768,8 +1768,8 @@ var schemaCGLContextObjᵖ = &schema.Class{
 	TypeID: binaryIDCGLContextObjᵖ,
 	Name:   "CGLContextObjᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1828,8 +1828,8 @@ var schemaCGLPixelFormatObj = &schema.Class{
 	TypeID: binaryIDCGLPixelFormatObj,
 	Name:   "CGLPixelFormatObj",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -1913,11 +1913,11 @@ var schemaCGLCreateContext = &schema.Class{
 	TypeID: binaryIDCGLCreateContext,
 	Name:   "CGLCreateContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Pix", Type: &schema.Struct{Name: "CGLPixelFormatObj"}},
-		schema.Field{Declared: "Share", Type: &schema.Struct{Name: "CGLContextObj"}},
-		schema.Field{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObjᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Pix", Type: &schema.Struct{Name: "CGLPixelFormatObj"}},
+		{Declared: "Share", Type: &schema.Struct{Name: "CGLContextObj"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObjᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
 	},
 }
 
@@ -1985,9 +1985,9 @@ var schemaCGLSetCurrentContext = &schema.Class{
 	TypeID: binaryIDCGLSetCurrentContext,
 	Name:   "CGLSetCurrentContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "CGLContextObj"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "CGLError", Method: schema.Int64}},
 	},
 }
 
@@ -2068,10 +2068,10 @@ var schemaCharˢ = &schema.Class{
 	TypeID: binaryIDCharˢ,
 	Name:   "Charˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2130,8 +2130,8 @@ var schemaCharᵖ = &schema.Class{
 	TypeID: binaryIDCharᵖ,
 	Name:   "Charᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2212,10 +2212,10 @@ var schemaCharᵖˢ = &schema.Class{
 	TypeID: binaryIDCharᵖˢ,
 	Name:   "Charᵖˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2274,8 +2274,8 @@ var schemaCharᵖᵖ = &schema.Class{
 	TypeID: binaryIDCharᵖᵖ,
 	Name:   "Charᵖᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2354,10 +2354,10 @@ var schemaClearState = &schema.Class{
 	TypeID: binaryIDClearState,
 	Name:   "ClearState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "ClearColor", Type: &schema.Struct{Name: "Color"}},
-		schema.Field{Declared: "ClearDepth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "ClearStencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "ClearColor", Type: &schema.Struct{Name: "Color"}},
+		{Declared: "ClearDepth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "ClearStencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -2449,11 +2449,11 @@ var schemaRect = &schema.Class{
 	TypeID: binaryIDRect,
 	Name:   "Rect",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -2728,25 +2728,25 @@ var schemaRasterizerState = &schema.Class{
 	TypeID: binaryIDRasterizerState,
 	Name:   "RasterizerState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
-		schema.Field{Declared: "DepthNear", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "DepthFar", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "StencilMask", Type: &schema.Map{Alias: "FaceModeːu32ᵐ", KeyType: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
-		schema.Field{Declared: "Viewport", Type: &schema.Struct{Name: "Rect"}},
-		schema.Field{Declared: "Scissor", Type: &schema.Struct{Name: "Rect"}},
-		schema.Field{Declared: "FrontFace", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
-		schema.Field{Declared: "CullFace", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		schema.Field{Declared: "LineWidth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "PolygonOffsetFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "PolygonOffsetUnits", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "SampleCoverageValue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "SampleCoverageInvert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "DepthMask", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "DepthTestFunction", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "DepthNear", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "DepthFar", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "ColorMaskRed", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "ColorMaskGreen", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "ColorMaskBlue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "ColorMaskAlpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "StencilMask", Type: &schema.Map{Alias: "FaceModeːu32ᵐ", KeyType: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "uint32", Method: schema.Uint32}}},
+		{Declared: "Viewport", Type: &schema.Struct{Name: "Rect"}},
+		{Declared: "Scissor", Type: &schema.Struct{Name: "Rect"}},
+		{Declared: "FrontFace", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
+		{Declared: "CullFace", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "LineWidth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "PolygonOffsetFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "PolygonOffsetUnits", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "SampleCoverageValue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "SampleCoverageInvert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -2805,8 +2805,8 @@ var schemaVertexPointer = &schema.Class{
 	TypeID: binaryIDVertexPointer,
 	Name:   "VertexPointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -2931,14 +2931,14 @@ var schemaVertexAttributeArray = &schema.Class{
 	TypeID: binaryIDVertexAttributeArray,
 	Name:   "VertexAttributeArray",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
-		schema.Field{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
-		schema.Field{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		{Declared: "Pointer", Type: &schema.Struct{Name: "VertexPointer"}},
 	},
 }
 
@@ -3028,11 +3028,11 @@ var schemaRenderbuffer = &schema.Class{
 	TypeID: binaryIDRenderbuffer,
 	Name:   "Renderbuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
 	},
 }
 
@@ -3133,12 +3133,12 @@ var schemaImage = &schema.Class{
 	TypeID: binaryIDImage,
 	Name:   "Image",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
 	},
 }
 
@@ -3228,8 +3228,8 @@ var schemaCubemapLevel = &schema.Class{
 	TypeID: binaryIDCubemapLevel,
 	Name:   "CubemapLevel",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Faces", Type: &schema.Map{Alias: "CubeMapImageTargetːImageᵐ", KeyType: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image"}}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Faces", Type: &schema.Map{Alias: "CubeMapImageTargetːImageᵐ", KeyType: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "Image"}}},
 	},
 }
 
@@ -3482,20 +3482,20 @@ var schemaTexture = &schema.Class{
 	TypeID: binaryIDTexture,
 	Name:   "Texture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Texture2D", Type: &schema.Map{Alias: "S32ːImageᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Image"}}},
-		schema.Field{Declared: "Cubemap", Type: &schema.Map{Alias: "S32ːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "CubemapLevel"}}},
-		schema.Field{Declared: "MagFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
-		schema.Field{Declared: "MinFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
-		schema.Field{Declared: "WrapS", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
-		schema.Field{Declared: "WrapT", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
-		schema.Field{Declared: "SwizzleR", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		schema.Field{Declared: "SwizzleG", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		schema.Field{Declared: "SwizzleB", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		schema.Field{Declared: "SwizzleA", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
-		schema.Field{Declared: "MaxAnisotropy", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Kind", Type: &schema.Primitive{Name: "TextureKind", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "ImageTexelFormat", Method: schema.Uint32}},
+		{Declared: "Texture2D", Type: &schema.Map{Alias: "S32ːImageᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Image"}}},
+		{Declared: "Cubemap", Type: &schema.Map{Alias: "S32ːCubemapLevelᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "CubemapLevel"}}},
+		{Declared: "MagFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		{Declared: "MinFilter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		{Declared: "WrapS", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
+		{Declared: "WrapT", Type: &schema.Primitive{Name: "TextureWrapMode", Method: schema.Uint32}},
+		{Declared: "SwizzleR", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		{Declared: "SwizzleG", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		{Declared: "SwizzleB", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		{Declared: "SwizzleA", Type: &schema.Primitive{Name: "TexelComponent", Method: schema.Uint32}},
+		{Declared: "MaxAnisotropy", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -3591,11 +3591,11 @@ var schemaFramebufferAttachmentInfo = &schema.Class{
 	TypeID: binaryIDFramebufferAttachmentInfo,
 	Name:   "FramebufferAttachmentInfo",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32}},
-		schema.Field{Declared: "TextureLevel", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "CubeMapFace", Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Object", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "FramebufferAttachmentType", Method: schema.Uint32}},
+		{Declared: "TextureLevel", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CubeMapFace", Type: &schema.Primitive{Name: "CubeMapImageTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -3685,8 +3685,8 @@ var schemaFramebuffer = &schema.Class{
 	TypeID: binaryIDFramebuffer,
 	Name:   "Framebuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Attachments", Type: &schema.Map{Alias: "FramebufferAttachmentːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo"}}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Attachments", Type: &schema.Map{Alias: "FramebufferAttachmentːFramebufferAttachmentInfoᵐ", KeyType: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}, ValueType: &schema.Struct{Name: "FramebufferAttachmentInfo"}}},
 	},
 }
 
@@ -3796,13 +3796,13 @@ var schemaShader = &schema.Class{
 	TypeID: binaryIDShader,
 	Name:   "Shader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ"}},
-		schema.Field{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ"}},
-		schema.Field{Declared: "Source", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "Compiled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Deletable", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ"}},
+		{Declared: "Source", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
 	},
 }
 
@@ -3881,10 +3881,10 @@ var schemaVertexAttribute = &schema.Class{
 	TypeID: binaryIDVertexAttribute,
 	Name:   "VertexAttribute",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Name", Type: &schema.Struct{Name: "Charˢ"}},
-		schema.Field{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Name", Type: &schema.Struct{Name: "Charˢ"}},
+		{Declared: "VectorCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderAttribType", Method: schema.Uint32}},
 	},
 }
 
@@ -3954,9 +3954,9 @@ var schemaVec2f = &schema.Class{
 	TypeID: binaryIDVec2f,
 	Name:   "Vec2f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -4037,10 +4037,10 @@ var schemaVec3f = &schema.Class{
 	TypeID: binaryIDVec3f,
 	Name:   "Vec3f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -4132,11 +4132,11 @@ var schemaVec4f = &schema.Class{
 	TypeID: binaryIDVec4f,
 	Name:   "Vec4f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "W", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "W", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -4206,9 +4206,9 @@ var schemaVec2i = &schema.Class{
 	TypeID: binaryIDVec2i,
 	Name:   "Vec2i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -4289,10 +4289,10 @@ var schemaVec3i = &schema.Class{
 	TypeID: binaryIDVec3i,
 	Name:   "Vec3i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -4384,11 +4384,11 @@ var schemaVec4i = &schema.Class{
 	TypeID: binaryIDVec4i,
 	Name:   "Vec4i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "W", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Z", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "W", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -4454,9 +4454,9 @@ var schemaMat2f = &schema.Class{
 	TypeID: binaryIDMat2f,
 	Name:   "Mat2f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec2f"}},
-		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec2f"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Col0", Type: &schema.Struct{Name: "Vec2f"}},
+		{Declared: "Col1", Type: &schema.Struct{Name: "Vec2f"}},
 	},
 }
 
@@ -4531,10 +4531,10 @@ var schemaMat3f = &schema.Class{
 	TypeID: binaryIDMat3f,
 	Name:   "Mat3f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec3f"}},
-		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec3f"}},
-		schema.Field{Declared: "Col2", Type: &schema.Struct{Name: "Vec3f"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Col0", Type: &schema.Struct{Name: "Vec3f"}},
+		{Declared: "Col1", Type: &schema.Struct{Name: "Vec3f"}},
+		{Declared: "Col2", Type: &schema.Struct{Name: "Vec3f"}},
 	},
 }
 
@@ -4618,11 +4618,11 @@ var schemaMat4f = &schema.Class{
 	TypeID: binaryIDMat4f,
 	Name:   "Mat4f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Col0", Type: &schema.Struct{Name: "Vec4f"}},
-		schema.Field{Declared: "Col1", Type: &schema.Struct{Name: "Vec4f"}},
-		schema.Field{Declared: "Col2", Type: &schema.Struct{Name: "Vec4f"}},
-		schema.Field{Declared: "Col3", Type: &schema.Struct{Name: "Vec4f"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Col0", Type: &schema.Struct{Name: "Vec4f"}},
+		{Declared: "Col1", Type: &schema.Struct{Name: "Vec4f"}},
+		{Declared: "Col2", Type: &schema.Struct{Name: "Vec4f"}},
+		{Declared: "Col3", Type: &schema.Struct{Name: "Vec4f"}},
 	},
 }
 
@@ -4773,18 +4773,18 @@ var schemaUniformValue = &schema.Class{
 	TypeID: binaryIDUniformValue,
 	Name:   "UniformValue",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "F32", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Vec2f", Type: &schema.Struct{Name: "Vec2f"}},
-		schema.Field{Declared: "Vec3f", Type: &schema.Struct{Name: "Vec3f"}},
-		schema.Field{Declared: "Vec4f", Type: &schema.Struct{Name: "Vec4f"}},
-		schema.Field{Declared: "S32", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Vec2i", Type: &schema.Struct{Name: "Vec2i"}},
-		schema.Field{Declared: "Vec3i", Type: &schema.Struct{Name: "Vec3i"}},
-		schema.Field{Declared: "Vec4i", Type: &schema.Struct{Name: "Vec4i"}},
-		schema.Field{Declared: "Mat2f", Type: &schema.Struct{Name: "Mat2f"}},
-		schema.Field{Declared: "Mat3f", Type: &schema.Struct{Name: "Mat3f"}},
-		schema.Field{Declared: "Mat4f", Type: &schema.Struct{Name: "Mat4f"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "F32", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Vec2f", Type: &schema.Struct{Name: "Vec2f"}},
+		{Declared: "Vec3f", Type: &schema.Struct{Name: "Vec3f"}},
+		{Declared: "Vec4f", Type: &schema.Struct{Name: "Vec4f"}},
+		{Declared: "S32", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Vec2i", Type: &schema.Struct{Name: "Vec2i"}},
+		{Declared: "Vec3i", Type: &schema.Struct{Name: "Vec3i"}},
+		{Declared: "Vec4i", Type: &schema.Struct{Name: "Vec4i"}},
+		{Declared: "Mat2f", Type: &schema.Struct{Name: "Mat2f"}},
+		{Declared: "Mat3f", Type: &schema.Struct{Name: "Mat3f"}},
+		{Declared: "Mat4f", Type: &schema.Struct{Name: "Mat4f"}},
 	},
 }
 
@@ -4863,10 +4863,10 @@ var schemaUniform = &schema.Class{
 	TypeID: binaryIDUniform,
 	Name:   "Uniform",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "UniformValue"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderUniformType", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "UniformValue"}},
 	},
 }
 
@@ -5115,14 +5115,14 @@ var schemaProgram = &schema.Class{
 	TypeID: binaryIDProgram,
 	Name:   "Program",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderTypeːShaderIdᵐ", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
-		schema.Field{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ"}},
-		schema.Field{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
-		schema.Field{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "VertexAttribute"}}},
-		schema.Field{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Uniform"}}},
-		schema.Field{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderTypeːShaderIdᵐ", KeyType: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}}},
+		{Declared: "Linked", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Binary", Type: &schema.Struct{Name: "U8ˢ"}},
+		{Declared: "AttributeBindings", Type: &schema.Map{Alias: "StringːAttributeLocationᵐ", KeyType: &schema.Primitive{Name: "string", Method: schema.String}, ValueType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}}},
+		{Declared: "Attributes", Type: &schema.Map{Alias: "S32ːVertexAttributeᵐ", KeyType: &schema.Primitive{Name: "int32", Method: schema.Int32}, ValueType: &schema.Struct{Name: "VertexAttribute"}}},
+		{Declared: "Uniforms", Type: &schema.Map{Alias: "UniformLocationːUniformᵐ", KeyType: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}, ValueType: &schema.Struct{Name: "Uniform"}}},
+		{Declared: "InfoLog", Type: &schema.Struct{Name: "Charˢ"}},
 	},
 }
 
@@ -5170,7 +5170,7 @@ var schemaVertexArray = &schema.Class{
 	TypeID: binaryIDVertexArray,
 	Name:   "VertexArray",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
 }
 
@@ -5218,7 +5218,7 @@ var schemaQuery = &schema.Class{
 	TypeID: binaryIDQuery,
 	Name:   "Query",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
 	},
 }
 
@@ -5666,15 +5666,15 @@ var schemaObjects = &schema.Class{
 	TypeID: binaryIDObjects,
 	Name:   "Objects",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Renderbuffer"}}}},
-		schema.Field{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Texture"}}}},
-		schema.Field{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Framebuffer"}}}},
-		schema.Field{Declared: "Buffers", Type: &schema.Map{Alias: "BufferIdːBufferʳᵐ", KeyType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Buffer"}}}},
-		schema.Field{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderIdːShaderʳᵐ", KeyType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Shader"}}}},
-		schema.Field{Declared: "Programs", Type: &schema.Map{Alias: "ProgramIdːProgramʳᵐ", KeyType: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Program"}}}},
-		schema.Field{Declared: "VertexArrays", Type: &schema.Map{Alias: "VertexArrayIdːVertexArrayʳᵐ", KeyType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexArray"}}}},
-		schema.Field{Declared: "Queries", Type: &schema.Map{Alias: "QueryIdːQueryʳᵐ", KeyType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Query"}}}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Renderbuffers", Type: &schema.Map{Alias: "RenderbufferIdːRenderbufferʳᵐ", KeyType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Renderbuffer"}}}},
+		{Declared: "Textures", Type: &schema.Map{Alias: "TextureIdːTextureʳᵐ", KeyType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Texture"}}}},
+		{Declared: "Framebuffers", Type: &schema.Map{Alias: "FramebufferIdːFramebufferʳᵐ", KeyType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Framebuffer"}}}},
+		{Declared: "Buffers", Type: &schema.Map{Alias: "BufferIdːBufferʳᵐ", KeyType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Buffer"}}}},
+		{Declared: "Shaders", Type: &schema.Map{Alias: "ShaderIdːShaderʳᵐ", KeyType: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Shader"}}}},
+		{Declared: "Programs", Type: &schema.Map{Alias: "ProgramIdːProgramʳᵐ", KeyType: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Program"}}}},
+		{Declared: "VertexArrays", Type: &schema.Map{Alias: "VertexArrayIdːVertexArrayʳᵐ", KeyType: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexArray"}}}},
+		{Declared: "Queries", Type: &schema.Map{Alias: "QueryIdːQueryʳᵐ", KeyType: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Query"}}}},
 	},
 }
 
@@ -6160,23 +6160,23 @@ var schemaContext = &schema.Class{
 	TypeID: binaryIDContext,
 	Name:   "Context",
 	Fields: []schema.Field{
-		schema.Field{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
-		schema.Field{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
-		schema.Field{Declared: "Blending", Type: &schema.Struct{Name: "BlendState"}},
-		schema.Field{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState"}},
-		schema.Field{Declared: "Clearing", Type: &schema.Struct{Name: "ClearState"}},
-		schema.Field{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "FramebufferTargetːFramebufferIdᵐ", KeyType: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
-		schema.Field{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "RenderbufferTargetːRenderbufferIdᵐ", KeyType: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
-		schema.Field{Declared: "BoundBuffers", Type: &schema.Map{Alias: "BufferTargetːBufferIdᵐ", KeyType: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
-		schema.Field{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		schema.Field{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray"}}}},
-		schema.Field{Declared: "TextureUnits", Type: &schema.Map{Alias: "TextureUnitːTextureTargetːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "TextureTargetːTextureIdᵐ", KeyType: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
-		schema.Field{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
-		schema.Field{Declared: "Capabilities", Type: &schema.Map{Alias: "Capabilityːboolᵐ", KeyType: &schema.Primitive{Name: "Capability", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
-		schema.Field{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
-		schema.Field{Declared: "PixelStorage", Type: &schema.Map{Alias: "PixelStoreParameterːs32ᵐ", KeyType: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
-		schema.Field{Declared: "Instances", Type: &schema.Struct{Name: "Objects"}},
+		{Declared: "CreatedAt", Type: &schema.Primitive{Name: "atom.ID", Method: schema.Uint64}},
+		{Declared: "Identifier", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		{Declared: "Blending", Type: &schema.Struct{Name: "BlendState"}},
+		{Declared: "Rasterizing", Type: &schema.Struct{Name: "RasterizerState"}},
+		{Declared: "Clearing", Type: &schema.Struct{Name: "ClearState"}},
+		{Declared: "BoundFramebuffers", Type: &schema.Map{Alias: "FramebufferTargetːFramebufferIdᵐ", KeyType: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}}},
+		{Declared: "BoundRenderbuffers", Type: &schema.Map{Alias: "RenderbufferTargetːRenderbufferIdᵐ", KeyType: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}}},
+		{Declared: "BoundBuffers", Type: &schema.Map{Alias: "BufferTargetːBufferIdᵐ", KeyType: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}}},
+		{Declared: "BoundProgram", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "BoundVertexArray", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+		{Declared: "VertexAttributeArrays", Type: &schema.Map{Alias: "AttributeLocationːVertexAttributeArrayʳᵐ", KeyType: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "VertexAttributeArray"}}}},
+		{Declared: "TextureUnits", Type: &schema.Map{Alias: "TextureUnitːTextureTargetːTextureIdᵐᵐ", KeyType: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}, ValueType: &schema.Map{Alias: "TextureTargetːTextureIdᵐ", KeyType: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}}}},
+		{Declared: "ActiveTextureUnit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
+		{Declared: "Capabilities", Type: &schema.Map{Alias: "Capabilityːboolᵐ", KeyType: &schema.Primitive{Name: "Capability", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+		{Declared: "GenerateMipmapHint", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
+		{Declared: "PixelStorage", Type: &schema.Map{Alias: "PixelStoreParameterːs32ᵐ", KeyType: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}, ValueType: &schema.Primitive{Name: "int32", Method: schema.Int32}}},
+		{Declared: "Instances", Type: &schema.Struct{Name: "Objects"}},
 	},
 }
 
@@ -6265,10 +6265,10 @@ var schemaDiscardFramebufferAttachmentˢ = &schema.Class{
 	TypeID: binaryIDDiscardFramebufferAttachmentˢ,
 	Name:   "DiscardFramebufferAttachmentˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6335,8 +6335,8 @@ var schemaDiscardFramebufferAttachmentᵖ = &schema.Class{
 	TypeID: binaryIDDiscardFramebufferAttachmentᵖ,
 	Name:   "DiscardFramebufferAttachmentᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6395,8 +6395,8 @@ var schemaEGLConfig = &schema.Class{
 	TypeID: binaryIDEGLConfig,
 	Name:   "EGLConfig",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6455,8 +6455,8 @@ var schemaEGLContext = &schema.Class{
 	TypeID: binaryIDEGLContext,
 	Name:   "EGLContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6515,8 +6515,8 @@ var schemaEGLDisplay = &schema.Class{
 	TypeID: binaryIDEGLDisplay,
 	Name:   "EGLDisplay",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6575,8 +6575,8 @@ var schemaEGLSurface = &schema.Class{
 	TypeID: binaryIDEGLSurface,
 	Name:   "EGLSurface",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6657,10 +6657,10 @@ var schemaEGLintˢ = &schema.Class{
 	TypeID: binaryIDEGLintˢ,
 	Name:   "EGLintˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6719,8 +6719,8 @@ var schemaEGLintᵖ = &schema.Class{
 	TypeID: binaryIDEGLintᵖ,
 	Name:   "EGLintᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -6811,12 +6811,12 @@ var schemaEglCreateContext = &schema.Class{
 	TypeID: binaryIDEglCreateContext,
 	Name:   "EglCreateContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
-		schema.Field{Declared: "Config", Type: &schema.Struct{Name: "EGLConfig"}},
-		schema.Field{Declared: "ShareContext", Type: &schema.Struct{Name: "EGLContext"}},
-		schema.Field{Declared: "AttribList", Type: &schema.Struct{Name: "EGLintᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "EGLContext"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
+		{Declared: "Config", Type: &schema.Struct{Name: "EGLConfig"}},
+		{Declared: "ShareContext", Type: &schema.Struct{Name: "EGLContext"}},
+		{Declared: "AttribList", Type: &schema.Struct{Name: "EGLintᵖ"}},
+		{Declared: "Result", Type: &schema.Struct{Name: "EGLContext"}},
 	},
 }
 
@@ -6900,11 +6900,11 @@ var schemaEglInitialize = &schema.Class{
 	TypeID: binaryIDEglInitialize,
 	Name:   "EglInitialize",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Dpy", Type: &schema.Struct{Name: "EGLDisplay"}},
-		schema.Field{Declared: "Major", Type: &schema.Struct{Name: "EGLintᵖ"}},
-		schema.Field{Declared: "Minor", Type: &schema.Struct{Name: "EGLintᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Dpy", Type: &schema.Struct{Name: "EGLDisplay"}},
+		{Declared: "Major", Type: &schema.Struct{Name: "EGLintᵖ"}},
+		{Declared: "Minor", Type: &schema.Struct{Name: "EGLintᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
 
@@ -6997,12 +6997,12 @@ var schemaEglMakeCurrent = &schema.Class{
 	TypeID: binaryIDEglMakeCurrent,
 	Name:   "EglMakeCurrent",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
-		schema.Field{Declared: "Draw", Type: &schema.Struct{Name: "EGLSurface"}},
-		schema.Field{Declared: "Read", Type: &schema.Struct{Name: "EGLSurface"}},
-		schema.Field{Declared: "Context", Type: &schema.Struct{Name: "EGLContext"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
+		{Declared: "Draw", Type: &schema.Struct{Name: "EGLSurface"}},
+		{Declared: "Read", Type: &schema.Struct{Name: "EGLSurface"}},
+		{Declared: "Context", Type: &schema.Struct{Name: "EGLContext"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
 
@@ -7097,12 +7097,12 @@ var schemaEglQuerySurface = &schema.Class{
 	TypeID: binaryIDEglQuerySurface,
 	Name:   "EglQuerySurface",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
-		schema.Field{Declared: "Surface", Type: &schema.Struct{Name: "EGLSurface"}},
-		schema.Field{Declared: "Attribute", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "EGLintᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
+		{Declared: "Surface", Type: &schema.Struct{Name: "EGLSurface"}},
+		{Declared: "Attribute", Type: &schema.Primitive{Name: "EGLint", Method: schema.Int64}},
+		{Declared: "Value", Type: &schema.Struct{Name: "EGLintᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
 
@@ -7161,8 +7161,8 @@ var schemaVoidᵖ = &schema.Class{
 	TypeID: binaryIDVoidᵖ,
 	Name:   "Voidᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7237,10 +7237,10 @@ var schemaEglSwapBuffers = &schema.Class{
 	TypeID: binaryIDEglSwapBuffers,
 	Name:   "EglSwapBuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
-		schema.Field{Declared: "Surface", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "EGLDisplay"}},
+		{Declared: "Surface", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "EGLBoolean", Method: schema.Int64}},
 	},
 }
 
@@ -7321,10 +7321,10 @@ var schemaF32ˢ = &schema.Class{
 	TypeID: binaryIDF32ˢ,
 	Name:   "F32ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7383,8 +7383,8 @@ var schemaF32ᵖ = &schema.Class{
 	TypeID: binaryIDF32ᵖ,
 	Name:   "F32ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7430,7 +7430,7 @@ var schemaFlushPostBuffer = &schema.Class{
 	TypeID: binaryIDFlushPostBuffer,
 	Name:   "FlushPostBuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
 }
 
@@ -7515,10 +7515,10 @@ var schemaFramebufferAttachmentˢ = &schema.Class{
 	TypeID: binaryIDFramebufferAttachmentˢ,
 	Name:   "FramebufferAttachmentˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7581,8 +7581,8 @@ var schemaFramebufferAttachmentᵖ = &schema.Class{
 	TypeID: binaryIDFramebufferAttachmentᵖ,
 	Name:   "FramebufferAttachmentᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7663,10 +7663,10 @@ var schemaFramebufferIdˢ = &schema.Class{
 	TypeID: binaryIDFramebufferIdˢ,
 	Name:   "FramebufferIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7725,8 +7725,8 @@ var schemaFramebufferIdᵖ = &schema.Class{
 	TypeID: binaryIDFramebufferIdᵖ,
 	Name:   "FramebufferIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7785,8 +7785,8 @@ var schemaGLXContext = &schema.Class{
 	TypeID: binaryIDGLXContext,
 	Name:   "GLXContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7845,8 +7845,8 @@ var schemaGLXDrawable = &schema.Class{
 	TypeID: binaryIDGLXDrawable,
 	Name:   "GLXDrawable",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -7903,8 +7903,8 @@ var schemaGlActiveTexture = &schema.Class{
 	TypeID: binaryIDGlActiveTexture,
 	Name:   "GlActiveTexture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Unit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Unit", Type: &schema.Primitive{Name: "TextureUnit", Method: schema.Uint32}},
 	},
 }
 
@@ -7972,9 +7972,9 @@ var schemaGlAttachShader = &schema.Class{
 	TypeID: binaryIDGlAttachShader,
 	Name:   "GlAttachShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
 
@@ -8042,9 +8042,9 @@ var schemaGlBeginQuery = &schema.Class{
 	TypeID: binaryIDGlBeginQuery,
 	Name:   "GlBeginQuery",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
 }
 
@@ -8112,9 +8112,9 @@ var schemaGlBeginQueryEXT = &schema.Class{
 	TypeID: binaryIDGlBeginQueryEXT,
 	Name:   "GlBeginQueryEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
 	},
 }
 
@@ -8195,10 +8195,10 @@ var schemaGlBindAttribLocation = &schema.Class{
 	TypeID: binaryIDGlBindAttribLocation,
 	Name:   "GlBindAttribLocation",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -8266,9 +8266,9 @@ var schemaGlBindBuffer = &schema.Class{
 	TypeID: binaryIDGlBindBuffer,
 	Name:   "GlBindBuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
 	},
 }
 
@@ -8336,9 +8336,9 @@ var schemaGlBindFramebuffer = &schema.Class{
 	TypeID: binaryIDGlBindFramebuffer,
 	Name:   "GlBindFramebuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
 	},
 }
 
@@ -8406,9 +8406,9 @@ var schemaGlBindRenderbuffer = &schema.Class{
 	TypeID: binaryIDGlBindRenderbuffer,
 	Name:   "GlBindRenderbuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 	},
 }
 
@@ -8476,9 +8476,9 @@ var schemaGlBindTexture = &schema.Class{
 	TypeID: binaryIDGlBindTexture,
 	Name:   "GlBindTexture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
 	},
 }
 
@@ -8537,8 +8537,8 @@ var schemaGlBindVertexArrayOES = &schema.Class{
 	TypeID: binaryIDGlBindVertexArrayOES,
 	Name:   "GlBindVertexArrayOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
 	},
 }
 
@@ -8628,11 +8628,11 @@ var schemaGlBlendColor = &schema.Class{
 	TypeID: binaryIDGlBlendColor,
 	Name:   "GlBlendColor",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -8689,8 +8689,8 @@ var schemaGlBlendEquation = &schema.Class{
 	TypeID: binaryIDGlBlendEquation,
 	Name:   "GlBlendEquation",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Equation", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Equation", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
 	},
 }
 
@@ -8762,9 +8762,9 @@ var schemaGlBlendEquationSeparate = &schema.Class{
 	TypeID: binaryIDGlBlendEquationSeparate,
 	Name:   "GlBlendEquationSeparate",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Rgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
-		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Rgb", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "BlendEquation", Method: schema.Uint32}},
 	},
 }
 
@@ -8832,9 +8832,9 @@ var schemaGlBlendFunc = &schema.Class{
 	TypeID: binaryIDGlBlendFunc,
 	Name:   "GlBlendFunc",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "SrcFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "DstFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "SrcFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "DstFactor", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
 	},
 }
 
@@ -8926,11 +8926,11 @@ var schemaGlBlendFuncSeparate = &schema.Class{
 	TypeID: binaryIDGlBlendFuncSeparate,
 	Name:   "GlBlendFuncSeparate",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
-		schema.Field{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "SrcFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "DstFactorRgb", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "SrcFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
+		{Declared: "DstFactorAlpha", Type: &schema.Primitive{Name: "BlendFactor", Method: schema.Uint32}},
 	},
 }
 
@@ -9086,17 +9086,17 @@ var schemaGlBlitFramebuffer = &schema.Class{
 	TypeID: binaryIDGlBlitFramebuffer,
 	Name:   "GlBlitFramebuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "SrcX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "SrcY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "SrcX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "SrcY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "DstX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "DstY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "DstX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "DstY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
-		schema.Field{Declared: "Filter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "SrcX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "SrcY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "SrcX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "SrcY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "DstX0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "DstY0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "DstX1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "DstY1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
+		{Declared: "Filter", Type: &schema.Primitive{Name: "TextureFilterMode", Method: schema.Uint32}},
 	},
 }
 
@@ -9184,11 +9184,11 @@ var schemaGlBufferData = &schema.Class{
 	TypeID: binaryIDGlBufferData,
 	Name:   "GlBufferData",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "BufferDataPointer"}},
-		schema.Field{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "BufferDataPointer"}},
+		{Declared: "Usage", Type: &schema.Primitive{Name: "BufferUsage", Method: schema.Uint32}},
 	},
 }
 
@@ -9276,11 +9276,11 @@ var schemaGlBufferSubData = &schema.Class{
 	TypeID: binaryIDGlBufferSubData,
 	Name:   "GlBufferSubData",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ"}},
 	},
 }
 
@@ -9352,9 +9352,9 @@ var schemaGlCheckFramebufferStatus = &schema.Class{
 	TypeID: binaryIDGlCheckFramebufferStatus,
 	Name:   "GlCheckFramebufferStatus",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "FramebufferStatus", Method: schema.Uint32}},
 	},
 }
 
@@ -9411,8 +9411,8 @@ var schemaGlClear = &schema.Class{
 	TypeID: binaryIDGlClear,
 	Name:   "GlClear",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "ClearMask", Method: schema.Uint32}},
 	},
 }
 
@@ -9502,11 +9502,11 @@ var schemaGlClearColor = &schema.Class{
 	TypeID: binaryIDGlClearColor,
 	Name:   "GlClearColor",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "R", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "G", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "B", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "R", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "G", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "B", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "A", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -9563,8 +9563,8 @@ var schemaGlClearDepthf = &schema.Class{
 	TypeID: binaryIDGlClearDepthf,
 	Name:   "GlClearDepthf",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -9621,8 +9621,8 @@ var schemaGlClearStencil = &schema.Class{
 	TypeID: binaryIDGlClearStencil,
 	Name:   "GlClearStencil",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Stencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Stencil", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -9712,11 +9712,11 @@ var schemaGlColorMask = &schema.Class{
 	TypeID: binaryIDGlColorMask,
 	Name:   "GlColorMask",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Red", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Green", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Blue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Alpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Red", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Green", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Blue", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Alpha", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -9773,8 +9773,8 @@ var schemaGlCompileShader = &schema.Class{
 	TypeID: binaryIDGlCompileShader,
 	Name:   "GlCompileShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
 
@@ -9833,8 +9833,8 @@ var schemaTexturePointer = &schema.Class{
 	TypeID: binaryIDTexturePointer,
 	Name:   "TexturePointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -9968,15 +9968,15 @@ var schemaGlCompressedTexImage2D = &schema.Class{
 	TypeID: binaryIDGlCompressedTexImage2D,
 	Name:   "GlCompressedTexImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
 	},
 }
 
@@ -10123,16 +10123,16 @@ var schemaGlCompressedTexSubImage2D = &schema.Class{
 	TypeID: binaryIDGlCompressedTexSubImage2D,
 	Name:   "GlCompressedTexSubImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "CompressedTexelFormat", Method: schema.Uint32}},
+		{Declared: "ImageSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
 	},
 }
 
@@ -10266,15 +10266,15 @@ var schemaGlCopyTexImage2D = &schema.Class{
 	TypeID: binaryIDGlCopyTexImage2D,
 	Name:   "GlCopyTexImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -10410,15 +10410,15 @@ var schemaGlCopyTexSubImage2D = &schema.Class{
 	TypeID: binaryIDGlCopyTexSubImage2D,
 	Name:   "GlCopyTexSubImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -10475,8 +10475,8 @@ var schemaGlCreateProgram = &schema.Class{
 	TypeID: binaryIDGlCreateProgram,
 	Name:   "GlCreateProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
 
@@ -10544,9 +10544,9 @@ var schemaGlCreateShader = &schema.Class{
 	TypeID: binaryIDGlCreateShader,
 	Name:   "GlCreateShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
 
@@ -10603,8 +10603,8 @@ var schemaGlCullFace = &schema.Class{
 	TypeID: binaryIDGlCullFace,
 	Name:   "GlCullFace",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Mode", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
 	},
 }
 
@@ -10670,9 +10670,9 @@ var schemaGlDeleteBuffers = &schema.Class{
 	TypeID: binaryIDGlDeleteBuffers,
 	Name:   "GlDeleteBuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Buffers", Type: &schema.Struct{Name: "BufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Buffers", Type: &schema.Struct{Name: "BufferIdᵖ"}},
 	},
 }
 
@@ -10740,9 +10740,9 @@ var schemaGlDeleteFramebuffers = &schema.Class{
 	TypeID: binaryIDGlDeleteFramebuffers,
 	Name:   "GlDeleteFramebuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Framebuffers", Type: &schema.Struct{Name: "FramebufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Name: "FramebufferIdᵖ"}},
 	},
 }
 
@@ -10799,8 +10799,8 @@ var schemaGlDeleteProgram = &schema.Class{
 	TypeID: binaryIDGlDeleteProgram,
 	Name:   "GlDeleteProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
 
@@ -10859,8 +10859,8 @@ var schemaQueryIdᵖ = &schema.Class{
 	TypeID: binaryIDQueryIdᵖ,
 	Name:   "QueryIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -10926,9 +10926,9 @@ var schemaGlDeleteQueries = &schema.Class{
 	TypeID: binaryIDGlDeleteQueries,
 	Name:   "GlDeleteQueries",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
 	},
 }
 
@@ -10994,9 +10994,9 @@ var schemaGlDeleteQueriesEXT = &schema.Class{
 	TypeID: binaryIDGlDeleteQueriesEXT,
 	Name:   "GlDeleteQueriesEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
 	},
 }
 
@@ -11055,8 +11055,8 @@ var schemaRenderbufferIdᵖ = &schema.Class{
 	TypeID: binaryIDRenderbufferIdᵖ,
 	Name:   "RenderbufferIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -11124,9 +11124,9 @@ var schemaGlDeleteRenderbuffers = &schema.Class{
 	TypeID: binaryIDGlDeleteRenderbuffers,
 	Name:   "GlDeleteRenderbuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Renderbuffers", Type: &schema.Struct{Name: "RenderbufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Name: "RenderbufferIdᵖ"}},
 	},
 }
 
@@ -11183,8 +11183,8 @@ var schemaGlDeleteShader = &schema.Class{
 	TypeID: binaryIDGlDeleteShader,
 	Name:   "GlDeleteShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
 
@@ -11243,8 +11243,8 @@ var schemaTextureIdᵖ = &schema.Class{
 	TypeID: binaryIDTextureIdᵖ,
 	Name:   "TextureIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -11310,9 +11310,9 @@ var schemaGlDeleteTextures = &schema.Class{
 	TypeID: binaryIDGlDeleteTextures,
 	Name:   "GlDeleteTextures",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Textures", Type: &schema.Struct{Name: "TextureIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Textures", Type: &schema.Struct{Name: "TextureIdᵖ"}},
 	},
 }
 
@@ -11371,8 +11371,8 @@ var schemaVertexArrayIdᵖ = &schema.Class{
 	TypeID: binaryIDVertexArrayIdᵖ,
 	Name:   "VertexArrayIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -11442,9 +11442,9 @@ var schemaGlDeleteVertexArraysOES = &schema.Class{
 	TypeID: binaryIDGlDeleteVertexArraysOES,
 	Name:   "GlDeleteVertexArraysOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
 	},
 }
 
@@ -11501,8 +11501,8 @@ var schemaGlDepthFunc = &schema.Class{
 	TypeID: binaryIDGlDepthFunc,
 	Name:   "GlDepthFunc",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
 	},
 }
 
@@ -11559,8 +11559,8 @@ var schemaGlDepthMask = &schema.Class{
 	TypeID: binaryIDGlDepthMask,
 	Name:   "GlDepthMask",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Enabled", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -11628,9 +11628,9 @@ var schemaGlDepthRangef = &schema.Class{
 	TypeID: binaryIDGlDepthRangef,
 	Name:   "GlDepthRangef",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Near", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Far", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Near", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Far", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -11698,9 +11698,9 @@ var schemaGlDetachShader = &schema.Class{
 	TypeID: binaryIDGlDetachShader,
 	Name:   "GlDetachShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
 	},
 }
 
@@ -11757,8 +11757,8 @@ var schemaGlDisable = &schema.Class{
 	TypeID: binaryIDGlDisable,
 	Name:   "GlDisable",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
 	},
 }
 
@@ -11817,8 +11817,8 @@ var schemaGlDisableClientState = &schema.Class{
 	TypeID: binaryIDGlDisableClientState,
 	Name:   "GlDisableClientState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
 	},
 }
 
@@ -11883,8 +11883,8 @@ var schemaGlDisableVertexAttribArray = &schema.Class{
 	TypeID: binaryIDGlDisableVertexAttribArray,
 	Name:   "GlDisableVertexAttribArray",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
 }
 
@@ -11965,10 +11965,10 @@ var schemaGlDiscardFramebufferEXT = &schema.Class{
 	TypeID: binaryIDGlDiscardFramebufferEXT,
 	Name:   "GlDiscardFramebufferEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "NumAttachments", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Attachments", Type: &schema.Struct{Name: "DiscardFramebufferAttachmentᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "NumAttachments", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Attachments", Type: &schema.Struct{Name: "DiscardFramebufferAttachmentᵖ"}},
 	},
 }
 
@@ -12047,10 +12047,10 @@ var schemaGlDrawArrays = &schema.Class{
 	TypeID: binaryIDGlDrawArrays,
 	Name:   "GlDrawArrays",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
-		schema.Field{Declared: "FirstIndex", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "IndexCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		{Declared: "FirstIndex", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "IndexCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -12109,8 +12109,8 @@ var schemaIndicesPointer = &schema.Class{
 	TypeID: binaryIDIndicesPointer,
 	Name:   "IndicesPointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -12198,11 +12198,11 @@ var schemaGlDrawElements = &schema.Class{
 	TypeID: binaryIDGlDrawElements,
 	Name:   "GlDrawElements",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
-		schema.Field{Declared: "ElementCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "IndicesType", Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32}},
-		schema.Field{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "DrawMode", Type: &schema.Primitive{Name: "DrawMode", Method: schema.Uint32}},
+		{Declared: "ElementCount", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "IndicesType", Type: &schema.Primitive{Name: "IndicesType", Method: schema.Uint32}},
+		{Declared: "Indices", Type: &schema.Struct{Name: "IndicesPointer"}},
 	},
 }
 
@@ -12276,9 +12276,9 @@ var schemaGlEGLImageTargetRenderbufferStorageOES = &schema.Class{
 	TypeID: binaryIDGlEGLImageTargetRenderbufferStorageOES,
 	Name:   "GlEGLImageTargetRenderbufferStorageOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32}},
-		schema.Field{Declared: "Image", Type: &schema.Struct{Name: "TexturePointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetRenderbufferStorage", Method: schema.Uint32}},
+		{Declared: "Image", Type: &schema.Struct{Name: "TexturePointer"}},
 	},
 }
 
@@ -12337,8 +12337,8 @@ var schemaImageOES = &schema.Class{
 	TypeID: binaryIDImageOES,
 	Name:   "ImageOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -12412,9 +12412,9 @@ var schemaGlEGLImageTargetTexture2DOES = &schema.Class{
 	TypeID: binaryIDGlEGLImageTargetTexture2DOES,
 	Name:   "GlEGLImageTargetTexture2DOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32}},
-		schema.Field{Declared: "Image", Type: &schema.Struct{Name: "ImageOES"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "ImageTargetTexture", Method: schema.Uint32}},
+		{Declared: "Image", Type: &schema.Struct{Name: "ImageOES"}},
 	},
 }
 
@@ -12471,8 +12471,8 @@ var schemaGlEnable = &schema.Class{
 	TypeID: binaryIDGlEnable,
 	Name:   "GlEnable",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
 	},
 }
 
@@ -12531,8 +12531,8 @@ var schemaGlEnableClientState = &schema.Class{
 	TypeID: binaryIDGlEnableClientState,
 	Name:   "GlEnableClientState",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "ArrayType", Method: schema.Uint32}},
 	},
 }
 
@@ -12593,8 +12593,8 @@ var schemaGlEnableVertexAttribArray = &schema.Class{
 	TypeID: binaryIDGlEnableVertexAttribArray,
 	Name:   "GlEnableVertexAttribArray",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
 }
 
@@ -12651,8 +12651,8 @@ var schemaGlEndQuery = &schema.Class{
 	TypeID: binaryIDGlEndQuery,
 	Name:   "GlEndQuery",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -12709,8 +12709,8 @@ var schemaGlEndQueryEXT = &schema.Class{
 	TypeID: binaryIDGlEndQueryEXT,
 	Name:   "GlEndQueryEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -12767,8 +12767,8 @@ var schemaGlEndTilingQCOM = &schema.Class{
 	TypeID: binaryIDGlEndTilingQCOM,
 	Name:   "GlEndTilingQCOM",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
 	},
 }
 
@@ -12814,7 +12814,7 @@ var schemaGlFinish = &schema.Class{
 	TypeID: binaryIDGlFinish,
 	Name:   "GlFinish",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
 }
 
@@ -12860,7 +12860,7 @@ var schemaGlFlush = &schema.Class{
 	TypeID: binaryIDGlFlush,
 	Name:   "GlFlush",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
 }
 
@@ -12954,11 +12954,11 @@ var schemaGlFramebufferRenderbuffer = &schema.Class{
 	TypeID: binaryIDGlFramebufferRenderbuffer,
 	Name:   "GlFramebufferRenderbuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		schema.Field{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		{Declared: "RenderbufferTarget", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
 	},
 }
 
@@ -13061,12 +13061,12 @@ var schemaGlFramebufferTexture2D = &schema.Class{
 	TypeID: binaryIDGlFramebufferTexture2D,
 	Name:   "GlFramebufferTexture2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		schema.Field{Declared: "TextureTarget", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "FramebufferAttachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		{Declared: "TextureTarget", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -13123,8 +13123,8 @@ var schemaGlFrontFace = &schema.Class{
 	TypeID: binaryIDGlFrontFace,
 	Name:   "GlFrontFace",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Orientation", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Orientation", Type: &schema.Primitive{Name: "FaceOrientation", Method: schema.Uint32}},
 	},
 }
 
@@ -13190,9 +13190,9 @@ var schemaGlGenBuffers = &schema.Class{
 	TypeID: binaryIDGlGenBuffers,
 	Name:   "GlGenBuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Buffers", Type: &schema.Struct{Name: "BufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Buffers", Type: &schema.Struct{Name: "BufferIdᵖ"}},
 	},
 }
 
@@ -13258,9 +13258,9 @@ var schemaGlGenFramebuffers = &schema.Class{
 	TypeID: binaryIDGlGenFramebuffers,
 	Name:   "GlGenFramebuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Framebuffers", Type: &schema.Struct{Name: "FramebufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Framebuffers", Type: &schema.Struct{Name: "FramebufferIdᵖ"}},
 	},
 }
 
@@ -13326,9 +13326,9 @@ var schemaGlGenQueries = &schema.Class{
 	TypeID: binaryIDGlGenQueries,
 	Name:   "GlGenQueries",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
 	},
 }
 
@@ -13394,9 +13394,9 @@ var schemaGlGenQueriesEXT = &schema.Class{
 	TypeID: binaryIDGlGenQueriesEXT,
 	Name:   "GlGenQueriesEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Queries", Type: &schema.Struct{Name: "QueryIdᵖ"}},
 	},
 }
 
@@ -13462,9 +13462,9 @@ var schemaGlGenRenderbuffers = &schema.Class{
 	TypeID: binaryIDGlGenRenderbuffers,
 	Name:   "GlGenRenderbuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Renderbuffers", Type: &schema.Struct{Name: "RenderbufferIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Renderbuffers", Type: &schema.Struct{Name: "RenderbufferIdᵖ"}},
 	},
 }
 
@@ -13530,9 +13530,9 @@ var schemaGlGenTextures = &schema.Class{
 	TypeID: binaryIDGlGenTextures,
 	Name:   "GlGenTextures",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Textures", Type: &schema.Struct{Name: "TextureIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Textures", Type: &schema.Struct{Name: "TextureIdᵖ"}},
 	},
 }
 
@@ -13600,9 +13600,9 @@ var schemaGlGenVertexArraysOES = &schema.Class{
 	TypeID: binaryIDGlGenVertexArraysOES,
 	Name:   "GlGenVertexArraysOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Arrays", Type: &schema.Struct{Name: "VertexArrayIdᵖ"}},
 	},
 }
 
@@ -13659,8 +13659,8 @@ var schemaGlGenerateMipmap = &schema.Class{
 	TypeID: binaryIDGlGenerateMipmap,
 	Name:   "GlGenerateMipmap",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -13719,8 +13719,8 @@ var schemaS32ᵖ = &schema.Class{
 	TypeID: binaryIDS32ᵖ,
 	Name:   "S32ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -13781,8 +13781,8 @@ var schemaShaderAttribTypeᵖ = &schema.Class{
 	TypeID: binaryIDShaderAttribTypeᵖ,
 	Name:   "ShaderAttribTypeᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -13897,14 +13897,14 @@ var schemaGlGetActiveAttrib = &schema.Class{
 	TypeID: binaryIDGlGetActiveAttrib,
 	Name:   "GlGetActiveAttrib",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Type", Type: &schema.Struct{Name: "ShaderAttribTypeᵖ"}},
-		schema.Field{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Type", Type: &schema.Struct{Name: "ShaderAttribTypeᵖ"}},
+		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -13965,8 +13965,8 @@ var schemaShaderUniformTypeᵖ = &schema.Class{
 	TypeID: binaryIDShaderUniformTypeᵖ,
 	Name:   "ShaderUniformTypeᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14081,14 +14081,14 @@ var schemaGlGetActiveUniform = &schema.Class{
 	TypeID: binaryIDGlGetActiveUniform,
 	Name:   "GlGetActiveUniform",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Type", Type: &schema.Struct{Name: "ShaderUniformTypeᵖ"}},
-		schema.Field{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "BufferBytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "VectorCount", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Type", Type: &schema.Struct{Name: "ShaderUniformTypeᵖ"}},
+		{Declared: "Name", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -14147,8 +14147,8 @@ var schemaShaderIdᵖ = &schema.Class{
 	TypeID: binaryIDShaderIdᵖ,
 	Name:   "ShaderIdᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14236,11 +14236,11 @@ var schemaGlGetAttachedShaders = &schema.Class{
 	TypeID: binaryIDGlGetAttachedShaders,
 	Name:   "GlGetAttachedShaders",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "ShadersLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Shaders", Type: &schema.Struct{Name: "ShaderIdᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "ShadersLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Shaders", Type: &schema.Struct{Name: "ShaderIdᵖ"}},
 	},
 }
 
@@ -14321,10 +14321,10 @@ var schemaGlGetAttribLocation = &schema.Class{
 	TypeID: binaryIDGlGetAttribLocation,
 	Name:   "GlGetAttribLocation",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
 	},
 }
 
@@ -14390,9 +14390,9 @@ var schemaGlGetBooleanv = &schema.Class{
 	TypeID: binaryIDGlGetBooleanv,
 	Name:   "GlGetBooleanv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "Boolᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "Boolᵖ"}},
 	},
 }
 
@@ -14471,10 +14471,10 @@ var schemaGlGetBufferParameteriv = &schema.Class{
 	TypeID: binaryIDGlGetBufferParameteriv,
 	Name:   "GlGetBufferParameteriv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "BufferParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -14531,8 +14531,8 @@ var schemaGlGetError = &schema.Class{
 	TypeID: binaryIDGlGetError,
 	Name:   "GlGetError",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "Error", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "Error", Method: schema.Uint32}},
 	},
 }
 
@@ -14598,9 +14598,9 @@ var schemaGlGetFloatv = &schema.Class{
 	TypeID: binaryIDGlGetFloatv,
 	Name:   "GlGetFloatv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -14696,11 +14696,11 @@ var schemaGlGetFramebufferAttachmentParameteriv = &schema.Class{
 	TypeID: binaryIDGlGetFramebufferAttachmentParameteriv,
 	Name:   "GlGetFramebufferAttachmentParameteriv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Attachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "FramebufferTarget", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Attachment", Type: &schema.Primitive{Name: "FramebufferAttachment", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "FramebufferAttachmentParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -14765,8 +14765,8 @@ var schemaGlGetGraphicsResetStatusEXT = &schema.Class{
 	TypeID: binaryIDGlGetGraphicsResetStatusEXT,
 	Name:   "GlGetGraphicsResetStatusEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "ResetStatus", Method: schema.Uint32}},
 	},
 }
 
@@ -14832,9 +14832,9 @@ var schemaGlGetIntegerv = &schema.Class{
 	TypeID: binaryIDGlGetIntegerv,
 	Name:   "GlGetIntegerv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "StateVariable", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -14893,8 +14893,8 @@ var schemaU32ᵖ = &schema.Class{
 	TypeID: binaryIDU32ᵖ,
 	Name:   "U32ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -14991,12 +14991,12 @@ var schemaGlGetProgramBinaryOES = &schema.Class{
 	TypeID: binaryIDGlGetProgramBinaryOES,
 	Name:   "GlGetProgramBinaryOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "BytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "BinaryFormat", Type: &schema.Struct{Name: "U32ᵖ"}},
-		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "BufferSize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "BytesWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "BinaryFormat", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
 	},
 }
 
@@ -15084,11 +15084,11 @@ var schemaGlGetProgramInfoLog = &schema.Class{
 	TypeID: binaryIDGlGetProgramInfoLog,
 	Name:   "GlGetProgramInfoLog",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Info", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Info", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -15165,10 +15165,10 @@ var schemaGlGetProgramiv = &schema.Class{
 	TypeID: binaryIDGlGetProgramiv,
 	Name:   "GlGetProgramiv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "ProgramParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -15227,8 +15227,8 @@ var schemaS64ᵖ = &schema.Class{
 	TypeID: binaryIDS64ᵖ,
 	Name:   "S64ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15309,10 +15309,10 @@ var schemaGlGetQueryObjecti64vEXT = &schema.Class{
 	TypeID: binaryIDGlGetQueryObjecti64vEXT,
 	Name:   "GlGetQueryObjecti64vEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S64ᵖ"}},
 	},
 }
 
@@ -15391,10 +15391,10 @@ var schemaGlGetQueryObjectivEXT = &schema.Class{
 	TypeID: binaryIDGlGetQueryObjectivEXT,
 	Name:   "GlGetQueryObjectivEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -15453,8 +15453,8 @@ var schemaU64ᵖ = &schema.Class{
 	TypeID: binaryIDU64ᵖ,
 	Name:   "U64ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -15535,10 +15535,10 @@ var schemaGlGetQueryObjectui64vEXT = &schema.Class{
 	TypeID: binaryIDGlGetQueryObjectui64vEXT,
 	Name:   "GlGetQueryObjectui64vEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "U64ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U64ᵖ"}},
 	},
 }
 
@@ -15617,10 +15617,10 @@ var schemaGlGetQueryObjectuiv = &schema.Class{
 	TypeID: binaryIDGlGetQueryObjectuiv,
 	Name:   "GlGetQueryObjectuiv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ"}},
 	},
 }
 
@@ -15699,10 +15699,10 @@ var schemaGlGetQueryObjectuivEXT = &schema.Class{
 	TypeID: binaryIDGlGetQueryObjectuivEXT,
 	Name:   "GlGetQueryObjectuivEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryObjectParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "U32ᵖ"}},
 	},
 }
 
@@ -15779,10 +15779,10 @@ var schemaGlGetQueryiv = &schema.Class{
 	TypeID: binaryIDGlGetQueryiv,
 	Name:   "GlGetQueryiv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -15859,10 +15859,10 @@ var schemaGlGetQueryivEXT = &schema.Class{
 	TypeID: binaryIDGlGetQueryivEXT,
 	Name:   "GlGetQueryivEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "QueryParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -15947,10 +15947,10 @@ var schemaGlGetRenderbufferParameteriv = &schema.Class{
 	TypeID: binaryIDGlGetRenderbufferParameteriv,
 	Name:   "GlGetRenderbufferParameteriv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "RenderbufferParameter", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -16036,11 +16036,11 @@ var schemaGlGetShaderInfoLog = &schema.Class{
 	TypeID: binaryIDGlGetShaderInfoLog,
 	Name:   "GlGetShaderInfoLog",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Info", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Info", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -16134,11 +16134,11 @@ var schemaGlGetShaderPrecisionFormat = &schema.Class{
 	TypeID: binaryIDGlGetShaderPrecisionFormat,
 	Name:   "GlGetShaderPrecisionFormat",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "ShaderType", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
-		schema.Field{Declared: "PrecisionType", Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32}},
-		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Precision", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "ShaderType", Type: &schema.Primitive{Name: "ShaderType", Method: schema.Uint32}},
+		{Declared: "PrecisionType", Type: &schema.Primitive{Name: "PrecisionType", Method: schema.Uint32}},
+		{Declared: "Range", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Precision", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -16224,11 +16224,11 @@ var schemaGlGetShaderSource = &schema.Class{
 	TypeID: binaryIDGlGetShaderSource,
 	Name:   "GlGetShaderSource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		schema.Field{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
-		schema.Field{Declared: "Source", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "BufferLength", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "StringLengthWritten", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "Source", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -16305,10 +16305,10 @@ var schemaGlGetShaderiv = &schema.Class{
 	TypeID: binaryIDGlGetShaderiv,
 	Name:   "GlGetShaderiv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "ShaderParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -16374,9 +16374,9 @@ var schemaGlGetString = &schema.Class{
 	TypeID: binaryIDGlGetString,
 	Name:   "GlGetString",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Param", Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "Charᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Param", Type: &schema.Primitive{Name: "StringConstant", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Struct{Name: "Charᵖ"}},
 	},
 }
 
@@ -16455,10 +16455,10 @@ var schemaGlGetTexParameterfv = &schema.Class{
 	TypeID: binaryIDGlGetTexParameterfv,
 	Name:   "GlGetTexParameterfv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -16537,10 +16537,10 @@ var schemaGlGetTexParameteriv = &schema.Class{
 	TypeID: binaryIDGlGetTexParameteriv,
 	Name:   "GlGetTexParameteriv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -16621,10 +16621,10 @@ var schemaGlGetUniformLocation = &schema.Class{
 	TypeID: binaryIDGlGetUniformLocation,
 	Name:   "GlGetUniformLocation",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
 	},
 }
 
@@ -16701,10 +16701,10 @@ var schemaGlGetUniformfv = &schema.Class{
 	TypeID: binaryIDGlGetUniformfv,
 	Name:   "GlGetUniformfv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -16781,10 +16781,10 @@ var schemaGlGetUniformiv = &schema.Class{
 	TypeID: binaryIDGlGetUniformiv,
 	Name:   "GlGetUniformiv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Values", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -16852,9 +16852,9 @@ var schemaGlHint = &schema.Class{
 	TypeID: binaryIDGlHint,
 	Name:   "GlHint",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Mode", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "HintTarget", Method: schema.Uint32}},
+		{Declared: "Mode", Type: &schema.Primitive{Name: "HintMode", Method: schema.Uint32}},
 	},
 }
 
@@ -16924,9 +16924,9 @@ var schemaGlInsertEventMarkerEXT = &schema.Class{
 	TypeID: binaryIDGlInsertEventMarkerEXT,
 	Name:   "GlInsertEventMarkerEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -17007,10 +17007,10 @@ var schemaGlInvalidateFramebuffer = &schema.Class{
 	TypeID: binaryIDGlInvalidateFramebuffer,
 	Name:   "GlInvalidateFramebuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Attachments", Type: &schema.Struct{Name: "FramebufferAttachmentᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "FramebufferTarget", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Attachments", Type: &schema.Struct{Name: "FramebufferAttachmentᵖ"}},
 	},
 }
 
@@ -17078,9 +17078,9 @@ var schemaGlIsBuffer = &schema.Class{
 	TypeID: binaryIDGlIsBuffer,
 	Name:   "GlIsBuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Buffer", Type: &schema.Primitive{Name: "BufferId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17148,9 +17148,9 @@ var schemaGlIsEnabled = &schema.Class{
 	TypeID: binaryIDGlIsEnabled,
 	Name:   "GlIsEnabled",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Capability", Type: &schema.Primitive{Name: "Capability", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17218,9 +17218,9 @@ var schemaGlIsFramebuffer = &schema.Class{
 	TypeID: binaryIDGlIsFramebuffer,
 	Name:   "GlIsFramebuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Framebuffer", Type: &schema.Primitive{Name: "FramebufferId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17288,9 +17288,9 @@ var schemaGlIsProgram = &schema.Class{
 	TypeID: binaryIDGlIsProgram,
 	Name:   "GlIsProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17358,9 +17358,9 @@ var schemaGlIsQuery = &schema.Class{
 	TypeID: binaryIDGlIsQuery,
 	Name:   "GlIsQuery",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17428,9 +17428,9 @@ var schemaGlIsQueryEXT = &schema.Class{
 	TypeID: binaryIDGlIsQueryEXT,
 	Name:   "GlIsQueryEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17498,9 +17498,9 @@ var schemaGlIsRenderbuffer = &schema.Class{
 	TypeID: binaryIDGlIsRenderbuffer,
 	Name:   "GlIsRenderbuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Renderbuffer", Type: &schema.Primitive{Name: "RenderbufferId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17568,9 +17568,9 @@ var schemaGlIsShader = &schema.Class{
 	TypeID: binaryIDGlIsShader,
 	Name:   "GlIsShader",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17638,9 +17638,9 @@ var schemaGlIsTexture = &schema.Class{
 	TypeID: binaryIDGlIsTexture,
 	Name:   "GlIsTexture",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17708,9 +17708,9 @@ var schemaGlIsVertexArrayOES = &schema.Class{
 	TypeID: binaryIDGlIsVertexArrayOES,
 	Name:   "GlIsVertexArrayOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Array", Type: &schema.Primitive{Name: "VertexArrayId", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -17767,8 +17767,8 @@ var schemaGlLineWidth = &schema.Class{
 	TypeID: binaryIDGlLineWidth,
 	Name:   "GlLineWidth",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -17825,8 +17825,8 @@ var schemaGlLinkProgram = &schema.Class{
 	TypeID: binaryIDGlLinkProgram,
 	Name:   "GlLinkProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
 
@@ -17925,12 +17925,12 @@ var schemaGlMapBufferRange = &schema.Class{
 	TypeID: binaryIDGlMapBufferRange,
 	Name:   "GlMapBufferRange",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Access", Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "Offset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Access", Type: &schema.Primitive{Name: "MapBufferRangeAccess", Method: schema.Uint32}},
+		{Declared: "Result", Type: &schema.Struct{Name: "Voidᵖ"}},
 	},
 }
 
@@ -17998,9 +17998,9 @@ var schemaGlPixelStorei = &schema.Class{
 	TypeID: binaryIDGlPixelStorei,
 	Name:   "GlPixelStorei",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "PixelStoreParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -18068,9 +18068,9 @@ var schemaGlPolygonOffset = &schema.Class{
 	TypeID: binaryIDGlPolygonOffset,
 	Name:   "GlPolygonOffset",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Units", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "ScaleFactor", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Units", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -18118,7 +18118,7 @@ var schemaGlPopGroupMarkerEXT = &schema.Class{
 	TypeID: binaryIDGlPopGroupMarkerEXT,
 	Name:   "GlPopGroupMarkerEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
 }
 
@@ -18206,11 +18206,11 @@ var schemaGlProgramBinaryOES = &schema.Class{
 	TypeID: binaryIDGlProgramBinaryOES,
 	Name:   "GlProgramBinaryOES",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
-		schema.Field{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -18280,9 +18280,9 @@ var schemaGlPushGroupMarkerEXT = &schema.Class{
 	TypeID: binaryIDGlPushGroupMarkerEXT,
 	Name:   "GlPushGroupMarkerEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Length", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Marker", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -18350,9 +18350,9 @@ var schemaGlQueryCounterEXT = &schema.Class{
 	TypeID: binaryIDGlQueryCounterEXT,
 	Name:   "GlQueryCounterEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Query", Type: &schema.Primitive{Name: "QueryId", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "QueryTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -18473,14 +18473,14 @@ var schemaGlReadPixels = &schema.Class{
 	TypeID: binaryIDGlReadPixels,
 	Name:   "GlReadPixels",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "BaseTexelFormat", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "Voidᵖ"}},
 	},
 }
 
@@ -18530,7 +18530,7 @@ var schemaGlReleaseShaderCompiler = &schema.Class{
 	TypeID: binaryIDGlReleaseShaderCompiler,
 	Name:   "GlReleaseShaderCompiler",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
 	},
 }
 
@@ -18622,11 +18622,11 @@ var schemaGlRenderbufferStorage = &schema.Class{
 	TypeID: binaryIDGlRenderbufferStorage,
 	Name:   "GlRenderbufferStorage",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -18735,12 +18735,12 @@ var schemaGlRenderbufferStorageMultisample = &schema.Class{
 	TypeID: binaryIDGlRenderbufferStorageMultisample,
 	Name:   "GlRenderbufferStorageMultisample",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Samples", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "RenderbufferTarget", Method: schema.Uint32}},
+		{Declared: "Samples", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "RenderbufferFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -18808,9 +18808,9 @@ var schemaGlSampleCoverage = &schema.Class{
 	TypeID: binaryIDGlSampleCoverage,
 	Name:   "GlSampleCoverage",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Invert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Invert", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
 	},
 }
 
@@ -18900,11 +18900,11 @@ var schemaGlScissor = &schema.Class{
 	TypeID: binaryIDGlScissor,
 	Name:   "GlScissor",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -19001,12 +19001,12 @@ var schemaGlShaderBinary = &schema.Class{
 	TypeID: binaryIDGlShaderBinary,
 	Name:   "GlShaderBinary",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Shaders", Type: &schema.Struct{Name: "ShaderIdᵖ"}},
-		schema.Field{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Shaders", Type: &schema.Struct{Name: "ShaderIdᵖ"}},
+		{Declared: "BinaryFormat", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Binary", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "BinarySize", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -19092,11 +19092,11 @@ var schemaGlShaderSource = &schema.Class{
 	TypeID: binaryIDGlShaderSource,
 	Name:   "GlShaderSource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Source", Type: &schema.Struct{Name: "Charᵖᵖ"}},
-		schema.Field{Declared: "Length", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Shader", Type: &schema.Primitive{Name: "ShaderId", Method: schema.Uint32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Source", Type: &schema.Struct{Name: "Charᵖᵖ"}},
+		{Declared: "Length", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -19197,12 +19197,12 @@ var schemaGlStartTilingQCOM = &schema.Class{
 	TypeID: binaryIDGlStartTilingQCOM,
 	Name:   "GlStartTilingQCOM",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "PreserveMask", Type: &schema.Primitive{Name: "TilePreserveMaskQCOM", Method: schema.Uint32}},
 	},
 }
 
@@ -19294,11 +19294,11 @@ var schemaGlStencilFuncSeparate = &schema.Class{
 	TypeID: binaryIDGlStencilFuncSeparate,
 	Name:   "GlStencilFuncSeparate",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		schema.Field{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
-		schema.Field{Declared: "ReferenceValue", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "Function", Type: &schema.Primitive{Name: "TestFunction", Method: schema.Uint32}},
+		{Declared: "ReferenceValue", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -19355,8 +19355,8 @@ var schemaGlStencilMask = &schema.Class{
 	TypeID: binaryIDGlStencilMask,
 	Name:   "GlStencilMask",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -19426,9 +19426,9 @@ var schemaGlStencilMaskSeparate = &schema.Class{
 	TypeID: binaryIDGlStencilMaskSeparate,
 	Name:   "GlStencilMaskSeparate",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		schema.Field{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "Mask", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -19520,11 +19520,11 @@ var schemaGlStencilOpSeparate = &schema.Class{
 	TypeID: binaryIDGlStencilOpSeparate,
 	Name:   "GlStencilOpSeparate",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
-		schema.Field{Declared: "StencilFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
-		schema.Field{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
-		schema.Field{Declared: "StencilPassDepthPass", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Face", Type: &schema.Primitive{Name: "FaceMode", Method: schema.Uint32}},
+		{Declared: "StencilFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		{Declared: "StencilPassDepthFail", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
+		{Declared: "StencilPassDepthPass", Type: &schema.Primitive{Name: "StencilAction", Method: schema.Uint32}},
 	},
 }
 
@@ -19667,16 +19667,16 @@ var schemaGlTexImage2D = &schema.Class{
 	TypeID: binaryIDGlTexImage2D,
 	Name:   "GlTexImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "InternalFormat", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "InternalFormat", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Border", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
 	},
 }
 
@@ -19755,10 +19755,10 @@ var schemaGlTexParameterf = &schema.Class{
 	TypeID: binaryIDGlTexParameterf,
 	Name:   "GlTexParameterf",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -19837,10 +19837,10 @@ var schemaGlTexParameteri = &schema.Class{
 	TypeID: binaryIDGlTexParameteri,
 	Name:   "GlTexParameteri",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Parameter", Type: &schema.Primitive{Name: "TextureParameter", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -19930,11 +19930,11 @@ var schemaGlTexStorage1DEXT = &schema.Class{
 	TypeID: binaryIDGlTexStorage1DEXT,
 	Name:   "GlTexStorage1DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20035,12 +20035,12 @@ var schemaGlTexStorage2DEXT = &schema.Class{
 	TypeID: binaryIDGlTexStorage2DEXT,
 	Name:   "GlTexStorage2DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20152,13 +20152,13 @@ var schemaGlTexStorage3DEXT = &schema.Class{
 	TypeID: binaryIDGlTexStorage3DEXT,
 	Name:   "GlTexStorage3DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20301,16 +20301,16 @@ var schemaGlTexSubImage2D = &schema.Class{
 	TypeID: binaryIDGlTexSubImage2D,
 	Name:   "GlTexSubImage2D",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureImageTarget", Method: schema.Uint32}},
+		{Declared: "Level", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Xoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Yoffset", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "TexelType", Method: schema.Uint32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "TexturePointer"}},
 	},
 }
 
@@ -20413,12 +20413,12 @@ var schemaGlTextureStorage1DEXT = &schema.Class{
 	TypeID: binaryIDGlTextureStorage1DEXT,
 	Name:   "GlTextureStorage1DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20532,13 +20532,13 @@ var schemaGlTextureStorage2DEXT = &schema.Class{
 	TypeID: binaryIDGlTextureStorage2DEXT,
 	Name:   "GlTextureStorage2DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20663,14 +20663,14 @@ var schemaGlTextureStorage3DEXT = &schema.Class{
 	TypeID: binaryIDGlTextureStorage3DEXT,
 	Name:   "GlTextureStorage3DEXT",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
-		schema.Field{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Texture", Type: &schema.Primitive{Name: "TextureId", Method: schema.Uint32}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "TextureTarget", Method: schema.Uint32}},
+		{Declared: "Levels", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Format", Type: &schema.Primitive{Name: "TexelFormat", Method: schema.Uint32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Depth", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20738,9 +20738,9 @@ var schemaGlUniform1f = &schema.Class{
 	TypeID: binaryIDGlUniform1f,
 	Name:   "GlUniform1f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -20817,10 +20817,10 @@ var schemaGlUniform1fv = &schema.Class{
 	TypeID: binaryIDGlUniform1fv,
 	Name:   "GlUniform1fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -20888,9 +20888,9 @@ var schemaGlUniform1i = &schema.Class{
 	TypeID: binaryIDGlUniform1i,
 	Name:   "GlUniform1i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -20967,10 +20967,10 @@ var schemaGlUniform1iv = &schema.Class{
 	TypeID: binaryIDGlUniform1iv,
 	Name:   "GlUniform1iv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -21049,10 +21049,10 @@ var schemaGlUniform2f = &schema.Class{
 	TypeID: binaryIDGlUniform2f,
 	Name:   "GlUniform2f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -21129,10 +21129,10 @@ var schemaGlUniform2fv = &schema.Class{
 	TypeID: binaryIDGlUniform2fv,
 	Name:   "GlUniform2fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -21211,10 +21211,10 @@ var schemaGlUniform2i = &schema.Class{
 	TypeID: binaryIDGlUniform2i,
 	Name:   "GlUniform2i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -21291,10 +21291,10 @@ var schemaGlUniform2iv = &schema.Class{
 	TypeID: binaryIDGlUniform2iv,
 	Name:   "GlUniform2iv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -21384,11 +21384,11 @@ var schemaGlUniform3f = &schema.Class{
 	TypeID: binaryIDGlUniform3f,
 	Name:   "GlUniform3f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -21465,10 +21465,10 @@ var schemaGlUniform3fv = &schema.Class{
 	TypeID: binaryIDGlUniform3fv,
 	Name:   "GlUniform3fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -21558,11 +21558,11 @@ var schemaGlUniform3i = &schema.Class{
 	TypeID: binaryIDGlUniform3i,
 	Name:   "GlUniform3i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -21639,10 +21639,10 @@ var schemaGlUniform3iv = &schema.Class{
 	TypeID: binaryIDGlUniform3iv,
 	Name:   "GlUniform3iv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -21743,12 +21743,12 @@ var schemaGlUniform4f = &schema.Class{
 	TypeID: binaryIDGlUniform4f,
 	Name:   "GlUniform4f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -21825,10 +21825,10 @@ var schemaGlUniform4fv = &schema.Class{
 	TypeID: binaryIDGlUniform4fv,
 	Name:   "GlUniform4fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -21929,12 +21929,12 @@ var schemaGlUniform4i = &schema.Class{
 	TypeID: binaryIDGlUniform4i,
 	Name:   "GlUniform4i",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -22011,10 +22011,10 @@ var schemaGlUniform4iv = &schema.Class{
 	TypeID: binaryIDGlUniform4iv,
 	Name:   "GlUniform4iv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "S32ᵖ"}},
 	},
 }
 
@@ -22102,11 +22102,11 @@ var schemaGlUniformMatrix2fv = &schema.Class{
 	TypeID: binaryIDGlUniformMatrix2fv,
 	Name:   "GlUniformMatrix2fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -22194,11 +22194,11 @@ var schemaGlUniformMatrix3fv = &schema.Class{
 	TypeID: binaryIDGlUniformMatrix3fv,
 	Name:   "GlUniformMatrix3fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -22286,11 +22286,11 @@ var schemaGlUniformMatrix4fv = &schema.Class{
 	TypeID: binaryIDGlUniformMatrix4fv,
 	Name:   "GlUniformMatrix4fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "UniformLocation", Method: schema.Int32}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Transpose", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Values", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -22347,8 +22347,8 @@ var schemaGlUnmapBuffer = &schema.Class{
 	TypeID: binaryIDGlUnmapBuffer,
 	Name:   "GlUnmapBuffer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Target", Type: &schema.Primitive{Name: "BufferTarget", Method: schema.Uint32}},
 	},
 }
 
@@ -22405,8 +22405,8 @@ var schemaGlUseProgram = &schema.Class{
 	TypeID: binaryIDGlUseProgram,
 	Name:   "GlUseProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
 
@@ -22463,8 +22463,8 @@ var schemaGlValidateProgram = &schema.Class{
 	TypeID: binaryIDGlValidateProgram,
 	Name:   "GlValidateProgram",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Program", Type: &schema.Primitive{Name: "ProgramId", Method: schema.Uint32}},
 	},
 }
 
@@ -22532,9 +22532,9 @@ var schemaGlVertexAttrib1f = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib1f,
 	Name:   "GlVertexAttrib1f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -22600,9 +22600,9 @@ var schemaGlVertexAttrib1fv = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib1fv,
 	Name:   "GlVertexAttrib1fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -22681,10 +22681,10 @@ var schemaGlVertexAttrib2f = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib2f,
 	Name:   "GlVertexAttrib2f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -22750,9 +22750,9 @@ var schemaGlVertexAttrib2fv = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib2fv,
 	Name:   "GlVertexAttrib2fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -22842,11 +22842,11 @@ var schemaGlVertexAttrib3f = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib3f,
 	Name:   "GlVertexAttrib3f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -22912,9 +22912,9 @@ var schemaGlVertexAttrib3fv = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib3fv,
 	Name:   "GlVertexAttrib3fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -23015,12 +23015,12 @@ var schemaGlVertexAttrib4f = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib4f,
 	Name:   "GlVertexAttrib4f",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value0", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value1", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value2", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "Value3", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
 	},
 }
 
@@ -23086,9 +23086,9 @@ var schemaGlVertexAttrib4fv = &schema.Class{
 	TypeID: binaryIDGlVertexAttrib4fv,
 	Name:   "GlVertexAttrib4fv",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Value", Type: &schema.Struct{Name: "F32ᵖ"}},
 	},
 }
 
@@ -23200,13 +23200,13 @@ var schemaGlVertexAttribPointer = &schema.Class{
 	TypeID: binaryIDGlVertexAttribPointer,
 	Name:   "GlVertexAttribPointer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
-		schema.Field{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
-		schema.Field{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Data", Type: &schema.Struct{Name: "VertexPointer"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Location", Type: &schema.Primitive{Name: "AttributeLocation", Method: schema.Uint32}},
+		{Declared: "Size", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "VertexAttribType", Method: schema.Uint32}},
+		{Declared: "Normalized", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Stride", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Data", Type: &schema.Struct{Name: "VertexPointer"}},
 	},
 }
 
@@ -23296,11 +23296,11 @@ var schemaGlViewport = &schema.Class{
 	TypeID: binaryIDGlViewport,
 	Name:   "GlViewport",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
-		schema.Field{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "X", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Y", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Width", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
+		{Declared: "Height", Type: &schema.Primitive{Name: "int32", Method: schema.Int32}},
 	},
 }
 
@@ -23393,12 +23393,12 @@ var schemaGlXCreateContext = &schema.Class{
 	TypeID: binaryIDGlXCreateContext,
 	Name:   "GlXCreateContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Dpy", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Vis", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "ShareList", Type: &schema.Struct{Name: "GLXContext"}},
-		schema.Field{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Dpy", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Vis", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "ShareList", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Struct{Name: "GLXContext"}},
 	},
 }
 
@@ -23504,13 +23504,13 @@ var schemaGlXCreateNewContext = &schema.Class{
 	TypeID: binaryIDGlXCreateNewContext,
 	Name:   "GlXCreateNewContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Fbconfig", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Type", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Shared", Type: &schema.Struct{Name: "GLXContext"}},
-		schema.Field{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Fbconfig", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Type", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Shared", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "Direct", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+		{Declared: "Result", Type: &schema.Struct{Name: "GLXContext"}},
 	},
 }
 
@@ -23594,11 +23594,11 @@ var schemaGlXMakeContextCurrent = &schema.Class{
 	TypeID: binaryIDGlXMakeContextCurrent,
 	Name:   "GlXMakeContextCurrent",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Draw", Type: &schema.Struct{Name: "GLXDrawable"}},
-		schema.Field{Declared: "Read", Type: &schema.Struct{Name: "GLXDrawable"}},
-		schema.Field{Declared: "Ctx", Type: &schema.Struct{Name: "GLXContext"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Draw", Type: &schema.Struct{Name: "GLXDrawable"}},
+		{Declared: "Read", Type: &schema.Struct{Name: "GLXDrawable"}},
+		{Declared: "Ctx", Type: &schema.Struct{Name: "GLXContext"}},
 	},
 }
 
@@ -23662,9 +23662,9 @@ var schemaGlXSwapBuffers = &schema.Class{
 	TypeID: binaryIDGlXSwapBuffers,
 	Name:   "GlXSwapBuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
-		schema.Field{Declared: "Drawable", Type: &schema.Struct{Name: "GLXDrawable"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Display", Type: &schema.Struct{Name: "Voidᵖ"}},
+		{Declared: "Drawable", Type: &schema.Struct{Name: "GLXDrawable"}},
 	},
 }
 
@@ -23723,8 +23723,8 @@ var schemaHGLRC = &schema.Class{
 	TypeID: binaryIDHGLRC,
 	Name:   "HGLRC",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24025,13 +24025,13 @@ var schemaGlobals = &schema.Class{
 	TypeID: binaryIDGlobals,
 	Name:   "Globals",
 	Fields: []schema.Field{
-		schema.Field{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
-		schema.Field{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
-		schema.Field{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
-		schema.Field{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Name: "EGLContext"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
-		schema.Field{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Name: "GLXContext"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
-		schema.Field{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Name: "HGLRC"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
-		schema.Field{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Name: "CGLContextObj"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		{Declared: "NextContextID", Type: &schema.Primitive{Name: "ContextID", Method: schema.Uint32}},
+		{Declared: "CurrentThread", Type: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}},
+		{Declared: "Contexts", Type: &schema.Map{Alias: "ThreadIDːContextʳᵐ", KeyType: &schema.Primitive{Name: "ThreadID", Method: schema.Uint32}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		{Declared: "EGLContexts", Type: &schema.Map{Alias: "EGLContextːContextʳᵐ", KeyType: &schema.Struct{Name: "EGLContext"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		{Declared: "GLXContexts", Type: &schema.Map{Alias: "GLXContextːContextʳᵐ", KeyType: &schema.Struct{Name: "GLXContext"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		{Declared: "WGLContexts", Type: &schema.Map{Alias: "HGLRCːContextʳᵐ", KeyType: &schema.Struct{Name: "HGLRC"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
+		{Declared: "CGLContexts", Type: &schema.Map{Alias: "CGLContextObjːContextʳᵐ", KeyType: &schema.Struct{Name: "CGLContextObj"}, ValueType: &schema.Pointer{Type: &schema.Struct{Name: "Context"}}}},
 	},
 }
 
@@ -24090,8 +24090,8 @@ var schemaHDC = &schema.Class{
 	TypeID: binaryIDHDC,
 	Name:   "HDC",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24172,10 +24172,10 @@ var schemaIntˢ = &schema.Class{
 	TypeID: binaryIDIntˢ,
 	Name:   "Intˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24234,8 +24234,8 @@ var schemaIntᵖ = &schema.Class{
 	TypeID: binaryIDIntᵖ,
 	Name:   "Intᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24316,10 +24316,10 @@ var schemaQueryIdˢ = &schema.Class{
 	TypeID: binaryIDQueryIdˢ,
 	Name:   "QueryIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24400,10 +24400,10 @@ var schemaRenderbufferIdˢ = &schema.Class{
 	TypeID: binaryIDRenderbufferIdˢ,
 	Name:   "RenderbufferIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24460,8 +24460,8 @@ var schemaReplayBindRenderer = &schema.Class{
 	TypeID: binaryIDReplayBindRenderer,
 	Name:   "ReplayBindRenderer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -24520,8 +24520,8 @@ var schemaReplayCreateRenderer = &schema.Class{
 	TypeID: binaryIDReplayCreateRenderer,
 	Name:   "ReplayCreateRenderer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Id", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -24602,10 +24602,10 @@ var schemaS32ˢ = &schema.Class{
 	TypeID: binaryIDS32ˢ,
 	Name:   "S32ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24686,10 +24686,10 @@ var schemaS64ˢ = &schema.Class{
 	TypeID: binaryIDS64ˢ,
 	Name:   "S64ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24770,10 +24770,10 @@ var schemaShaderAttribTypeˢ = &schema.Class{
 	TypeID: binaryIDShaderAttribTypeˢ,
 	Name:   "ShaderAttribTypeˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24854,10 +24854,10 @@ var schemaShaderIdˢ = &schema.Class{
 	TypeID: binaryIDShaderIdˢ,
 	Name:   "ShaderIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -24940,10 +24940,10 @@ var schemaShaderUniformTypeˢ = &schema.Class{
 	TypeID: binaryIDShaderUniformTypeˢ,
 	Name:   "ShaderUniformTypeˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25000,8 +25000,8 @@ var schemaStartTimer = &schema.Class{
 	TypeID: binaryIDStartTimer,
 	Name:   "StartTimer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
 	},
 }
 
@@ -25069,9 +25069,9 @@ var schemaStopTimer = &schema.Class{
 	TypeID: binaryIDStopTimer,
 	Name:   "StopTimer",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Index", Type: &schema.Primitive{Name: "uint8", Method: schema.Uint8}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
 	},
 }
 
@@ -25152,10 +25152,10 @@ var schemaTextureIdˢ = &schema.Class{
 	TypeID: binaryIDTextureIdˢ,
 	Name:   "TextureIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25236,10 +25236,10 @@ var schemaU32ˢ = &schema.Class{
 	TypeID: binaryIDU32ˢ,
 	Name:   "U32ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25320,10 +25320,10 @@ var schemaU64ˢ = &schema.Class{
 	TypeID: binaryIDU64ˢ,
 	Name:   "U64ˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25382,8 +25382,8 @@ var schemaU8ᵖ = &schema.Class{
 	TypeID: binaryIDU8ᵖ,
 	Name:   "U8ᵖ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Address", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25464,10 +25464,10 @@ var schemaVertexArrayIdˢ = &schema.Class{
 	TypeID: binaryIDVertexArrayIdˢ,
 	Name:   "VertexArrayIdˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25548,10 +25548,10 @@ var schemaVoidˢ = &schema.Class{
 	TypeID: binaryIDVoidˢ,
 	Name:   "Voidˢ",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
-		schema.Field{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
-		schema.Field{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
+		{Declared: "Root", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Base", Type: &schema.Primitive{Name: "memory.Pointer", Method: schema.Uint64}},
+		{Declared: "Count", Type: &schema.Primitive{Name: "uint64", Method: schema.Uint64}},
+		{Declared: "Pool", Type: &schema.Primitive{Name: "memory.PoolID", Method: schema.Uint32}},
 	},
 }
 
@@ -25615,9 +25615,9 @@ var schemaWglCreateContext = &schema.Class{
 	TypeID: binaryIDWglCreateContext,
 	Name:   "WglCreateContext",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "HGLRC"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
+		{Declared: "Result", Type: &schema.Struct{Name: "HGLRC"}},
 	},
 }
 
@@ -25707,11 +25707,11 @@ var schemaWglCreateContextAttribsARB = &schema.Class{
 	TypeID: binaryIDWglCreateContextAttribsARB,
 	Name:   "WglCreateContextAttribsARB",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
-		schema.Field{Declared: "HShareContext", Type: &schema.Struct{Name: "HGLRC"}},
-		schema.Field{Declared: "AttribList", Type: &schema.Struct{Name: "Intᵖ"}},
-		schema.Field{Declared: "Result", Type: &schema.Struct{Name: "HGLRC"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
+		{Declared: "HShareContext", Type: &schema.Struct{Name: "HGLRC"}},
+		{Declared: "AttribList", Type: &schema.Struct{Name: "Intᵖ"}},
+		{Declared: "Result", Type: &schema.Struct{Name: "HGLRC"}},
 	},
 }
 
@@ -25786,10 +25786,10 @@ var schemaWglMakeCurrent = &schema.Class{
 	TypeID: binaryIDWglMakeCurrent,
 	Name:   "WglMakeCurrent",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
-		schema.Field{Declared: "Hglrc", Type: &schema.Struct{Name: "HGLRC"}},
-		schema.Field{Declared: "Result", Type: &schema.Primitive{Name: "BOOL", Method: schema.Int64}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
+		{Declared: "Hglrc", Type: &schema.Struct{Name: "HGLRC"}},
+		{Declared: "Result", Type: &schema.Primitive{Name: "BOOL", Method: schema.Int64}},
 	},
 }
 
@@ -25844,8 +25844,8 @@ var schemaWglSwapBuffers = &schema.Class{
 	TypeID: binaryIDWglSwapBuffers,
 	Name:   "WglSwapBuffers",
 	Fields: []schema.Field{
-		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
-		schema.Field{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
+		{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		{Declared: "Hdc", Type: &schema.Struct{Name: "HDC"}},
 	},
 }
 

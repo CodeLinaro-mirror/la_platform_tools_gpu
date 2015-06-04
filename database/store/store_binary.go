@@ -75,7 +75,7 @@ var schemaBlob = &schema.Class{
 	TypeID: binaryIDBlob,
 	Name:   "Blob",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }
 
@@ -144,7 +144,7 @@ var schemakeyValue = &schema.Class{
 	TypeID: binaryIDkeyValue,
 	Name:   "keyValue",
 	Fields: []schema.Field{
-		schema.Field{Declared: "id", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-		schema.Field{Declared: "buffer", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "id", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "buffer", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }

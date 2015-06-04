@@ -45,7 +45,7 @@ var schema{{.Name}} = &{{SchemaPrefix}}Class{
 	TypeID: {{.IDName}},
 	Name: "{{.Name}}",
 	Fields: []{{SchemaPrefix}}Field{
-		{{range .Fields}}{{SchemaPrefix}}Field{ Declared:"{{.Name}}", Type:{{Schema .Type}} },
+		{{range .Fields}}{ Declared:"{{.Name}}", Type:{{Schema .Type}} },
 	{{end}} },
 }
 {{end}}
@@ -250,13 +250,13 @@ import (
 	{{range $imp, $v := .Imports}}"{{$imp}}"
 {{end}})
 
-func init() {
+{{if len .Structs}}func init() {
 	{{range .Structs}}{{template "Go.Init" .}}
 	{{end}} }
 
 var (
 {{range .Structs}} {{template "Go.ID" .}}
-{{end}} )
+{{end}} ){{end}}
 
 {{range .Structs}} {{template "Go.Class" .}}
 {{end}}

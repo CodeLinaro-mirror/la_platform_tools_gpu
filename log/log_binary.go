@@ -7,11 +7,6 @@ package log
 
 import "fmt"
 
-func init() {
-}
-
-var ()
-
 const _Kind_name = "InfoWarningError"
 
 var _Kind_map = map[Kind]string{

@@ -7,11 +7,6 @@ package adb
 
 import "fmt"
 
-func init() {
-}
-
-var ()
-
 const _DeviceState_name = "offlinedeviceunauthorized"
 
 var _DeviceState_map = map[DeviceState]string{

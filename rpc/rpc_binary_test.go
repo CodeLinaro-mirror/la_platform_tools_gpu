@@ -67,7 +67,7 @@ var schemadelay = &schema.Class{
 	TypeID: binaryIDdelay,
 	Name:   "delay",
 	Fields: []schema.Field{
-		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -115,7 +115,7 @@ var schemarequest = &schema.Class{
 	TypeID: binaryIDrequest,
 	Name:   "request",
 	Fields: []schema.Field{
-		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -163,6 +163,6 @@ var schemaresponse = &schema.Class{
 	TypeID: binaryIDresponse,
 	Name:   "response",
 	Fields: []schema.Field{
-		schema.Field{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "data", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }

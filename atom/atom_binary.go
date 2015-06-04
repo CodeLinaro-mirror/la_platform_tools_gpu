@@ -85,8 +85,8 @@ var schemaRange = &schema.Class{
 	TypeID: binaryIDRange,
 	Name:   "Range",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
-		schema.Field{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
+		{Declared: "Start", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
+		{Declared: "End", Type: &schema.Primitive{Name: "ID", Method: schema.Uint64}},
 	},
 }
 
@@ -170,9 +170,9 @@ var schemaGroup = &schema.Class{
 	TypeID: binaryIDGroup,
 	Name:   "Group",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "Range"}},
-		schema.Field{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Name: "Group"}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Range", Type: &schema.Struct{Name: "Range"}},
+		{Declared: "SubGroups", Type: &schema.Slice{Alias: "GroupList", ValueType: &schema.Struct{Name: "Group"}}},
 	},
 }
 
@@ -229,8 +229,8 @@ var schemaObservation = &schema.Class{
 	TypeID: binaryIDObservation,
 	Name:   "Observation",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Range", Type: &schema.Struct{Name: "memory.Range"}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -321,8 +321,8 @@ var schemaObservations = &schema.Class{
 	TypeID: binaryIDObservations,
 	Name:   "Observations",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
-		schema.Field{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
+		{Declared: "Reads", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
+		{Declared: "Writes", Type: &schema.Slice{Alias: "", ValueType: &schema.Struct{Name: "Observation"}}},
 	},
 }
 
@@ -391,8 +391,8 @@ var schemaResource = &schema.Class{
 	TypeID: binaryIDResource,
 	Name:   "Resource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
-		schema.Field{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "Data", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }
 

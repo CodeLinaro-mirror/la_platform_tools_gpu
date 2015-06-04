@@ -7,11 +7,6 @@ package gfxapi
 
 import "fmt"
 
-func init() {
-}
-
-var ()
-
 const _FramebufferAttachment_name = "ColorDepthStencil"
 
 var _FramebufferAttachment_map = map[FramebufferAttachment]string{

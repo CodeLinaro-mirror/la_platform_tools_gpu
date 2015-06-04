@@ -67,7 +67,7 @@ var schemamsgCloseChannel = &schema.Class{
 	TypeID: binaryIDmsgCloseChannel,
 	Name:   "msgCloseChannel",
 	Fields: []schema.Field{
-		schema.Field{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }
 
@@ -136,8 +136,8 @@ var schemamsgData = &schema.Class{
 	TypeID: binaryIDmsgData,
 	Name:   "msgData",
 	Fields: []schema.Field{
-		schema.Field{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
-		schema.Field{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
+		{Declared: "c", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		{Declared: "d", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "byte", Method: schema.Uint8}}},
 	},
 }
 
@@ -185,6 +185,6 @@ var schemamsgOpenChannel = &schema.Class{
 	TypeID: binaryIDmsgOpenChannel,
 	Name:   "msgOpenChannel",
 	Fields: []schema.Field{
-		schema.Field{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
+		{Declared: "channelId", Type: &schema.Primitive{Name: "channelId", Method: schema.Uint32}},
 	},
 }

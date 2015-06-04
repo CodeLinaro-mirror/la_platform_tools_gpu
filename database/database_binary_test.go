@@ -65,7 +65,7 @@ var schematestRequest = &schema.Class{
 	TypeID: binaryIDtestRequest,
 	Name:   "testRequest",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Id", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "Id", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
 	},
 }
 
@@ -153,8 +153,8 @@ var schematestResource = &schema.Class{
 	TypeID: binaryIDtestResource,
 	Name:   "testResource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Int", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
-		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Array", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
+		{Declared: "Int", Type: &schema.Primitive{Name: "int", Method: schema.Int32}},
+		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Array", Type: &schema.Slice{Alias: "", ValueType: &schema.Primitive{Name: "bool", Method: schema.Bool}}},
 	},
 }

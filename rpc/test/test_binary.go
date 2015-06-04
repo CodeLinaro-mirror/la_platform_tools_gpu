@@ -132,8 +132,8 @@ var schemaDerived = &schema.Class{
 	TypeID: binaryIDDerived,
 	Name:   "Derived",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
 }
 
@@ -198,8 +198,8 @@ var schemaListNode = &schema.Class{
 	TypeID: binaryIDListNode,
 	Name:   "ListNode",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "Name", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Next", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
 	},
 }
 
@@ -269,9 +269,9 @@ var schemaResource = &schema.Class{
 	TypeID: binaryIDResource,
 	Name:   "Resource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
-		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "Int", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Float", Type: &schema.Primitive{Name: "float32", Method: schema.Float32}},
+		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -319,7 +319,7 @@ var schemaResourceId = &schema.Class{
 	TypeID: binaryIDResourceId,
 	Name:   "ResourceId",
 	Fields: []schema.Field{
-		schema.Field{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
+		{Declared: "ID", Type: &schema.Primitive{Name: "binary.ID", Method: schema.ID}},
 	},
 }
 
@@ -389,9 +389,9 @@ var schemaStruct = &schema.Class{
 	TypeID: binaryIDStruct,
 	Name:   "Struct",
 	Fields: []schema.Field{
-		schema.Field{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
-		schema.Field{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+		{Declared: "String", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "U32", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "Enum", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
 }
 
@@ -450,8 +450,8 @@ var schemacallAdd = &schema.Class{
 	TypeID: binaryIDcallAdd,
 	Name:   "callAdd",
 	Fields: []schema.Field{
-		schema.Field{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
-		schema.Field{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "a", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "b", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -499,7 +499,7 @@ var schemacallEnumToString = &schema.Class{
 	TypeID: binaryIDcallEnumToString,
 	Name:   "callEnumToString",
 	Fields: []schema.Field{
-		schema.Field{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
+		{Declared: "e", Type: &schema.Primitive{Name: "Enum", Method: schema.Int32}},
 	},
 }
 
@@ -800,7 +800,7 @@ var schemacallResolveResource = &schema.Class{
 	TypeID: binaryIDcallResolveResource,
 	Name:   "callResolveResource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
 	},
 }
 
@@ -846,7 +846,7 @@ var schemacallSetStruct = &schema.Class{
 	TypeID: binaryIDcallSetStruct,
 	Name:   "callSetStruct",
 	Fields: []schema.Field{
-		schema.Field{Declared: "s", Type: &schema.Struct{Name: "Struct"}},
+		{Declared: "s", Type: &schema.Struct{Name: "Struct"}},
 	},
 }
 
@@ -892,7 +892,7 @@ var schemacallUseResource = &schema.Class{
 	TypeID: binaryIDcallUseResource,
 	Name:   "callUseResource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "r", Type: &schema.Struct{Name: "ResourceId"}},
 	},
 }
 
@@ -940,7 +940,7 @@ var schemaresultAdd = &schema.Class{
 	TypeID: binaryIDresultAdd,
 	Name:   "resultAdd",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		{Declared: "value", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
 	},
 }
 
@@ -988,7 +988,7 @@ var schemaresultEnumToString = &schema.Class{
 	TypeID: binaryIDresultEnumToString,
 	Name:   "resultEnumToString",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
+		{Declared: "value", Type: &schema.Primitive{Name: "string", Method: schema.String}},
 	},
 }
 
@@ -1042,7 +1042,7 @@ var schemaresultGetBase = &schema.Class{
 	TypeID: binaryIDresultGetBase,
 	Name:   "resultGetBase",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Interface{Name: "Base"}},
+		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
 	},
 }
 
@@ -1096,7 +1096,7 @@ var schemaresultGetDerived = &schema.Class{
 	TypeID: binaryIDresultGetDerived,
 	Name:   "resultGetDerived",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Interface{Name: "Base"}},
+		{Declared: "value", Type: &schema.Interface{Name: "Base"}},
 	},
 }
 
@@ -1152,7 +1152,7 @@ var schemaresultGetListNodeChain = &schema.Class{
 	TypeID: binaryIDresultGetListNodeChain,
 	Name:   "resultGetListNodeChain",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
 	},
 }
 
@@ -1232,7 +1232,7 @@ var schemaresultGetListNodeChainArray = &schema.Class{
 	TypeID: binaryIDresultGetListNodeChainArray,
 	Name:   "resultGetListNodeChainArray",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Slice{Alias: "ListNodePtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}}},
+		{Declared: "value", Type: &schema.Slice{Alias: "ListNodePtrArray", ValueType: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}}},
 	},
 }
 
@@ -1278,7 +1278,7 @@ var schemaresultGetResource = &schema.Class{
 	TypeID: binaryIDresultGetResource,
 	Name:   "resultGetResource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "ResourceId"}},
+		{Declared: "value", Type: &schema.Struct{Name: "ResourceId"}},
 	},
 }
 
@@ -1336,7 +1336,7 @@ var schemaresultGetSingleListNode = &schema.Class{
 	TypeID: binaryIDresultGetSingleListNode,
 	Name:   "resultGetSingleListNode",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
+		{Declared: "value", Type: &schema.Pointer{Type: &schema.Struct{Name: "ListNode"}}},
 	},
 }
 
@@ -1382,7 +1382,7 @@ var schemaresultGetStruct = &schema.Class{
 	TypeID: binaryIDresultGetStruct,
 	Name:   "resultGetStruct",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Struct"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Struct"}},
 	},
 }
 
@@ -1430,7 +1430,7 @@ var schemaresultResolveResource = &schema.Class{
 	TypeID: binaryIDresultResolveResource,
 	Name:   "resultResolveResource",
 	Fields: []schema.Field{
-		schema.Field{Declared: "value", Type: &schema.Struct{Name: "Resource"}},
+		{Declared: "value", Type: &schema.Struct{Name: "Resource"}},
 	},
 }
 
