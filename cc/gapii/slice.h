@@ -61,7 +61,7 @@ inline Slice<T>::Slice() : mBase(nullptr), mCount(0) {}
 
 template<typename T>
 inline Slice<T>::Slice(T* base, uint64_t count, const std::shared_ptr<Pool>& pool)
-    : mBase(base), mCount(0), mPool(pool) {}
+    : mBase(base), mCount(count), mPool(pool) {}
 
 template<typename T>
 inline uint64_t Slice<T>::count() const {
