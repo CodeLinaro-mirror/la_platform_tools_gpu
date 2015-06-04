@@ -14,30 +14,6 @@
  * limitations under the License.
  */
 
-inline int32_t strlen(const std::string& s) {
-    return s.length();
-}
-
-inline int32_t strlen(const char* p) {
-    if (p == nullptr) {
-        return 0;
-    }
-    int32_t i = 0;
-    while (p[i] != 0) { i++; }
-    return i;
-}
-
-inline int32_t strlen(const Slice<char>& s) {
-    int32_t i = 0;
-    for (char c : s) {
-        if (c == 0) {
-            break;
-        }
-        i++;
-    }
-    return i;
-}
-
 template<typename T> T inline min(T a, T b) { return (a < b) ? a : b; }
 template<typename T> T inline max(T a, T b) { return (a > b) ? a : b; }
 

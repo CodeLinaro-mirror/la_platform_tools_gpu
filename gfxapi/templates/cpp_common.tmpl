@@ -387,12 +387,12 @@
   {{else if IsGlobal           $}}this->{{$.Name}}
   {{else if IsMapIndex         $}}{{Macro "C++.Read" $.Map}}[{{Macro "C++.Read" $.Index}}]
   {{else if IsMapContains      $}}{{Macro "C++.Read" $.Map}}.count({{Macro "C++.Read" $.Key}}) > 0
-  {{else if IsLength           $}}{{Macro "C++.Read" $.Object}}.size()
+  {{else if IsLength           $}}{{Macro "C++.Type" $.Type}}(({{Macro "C++.ReadLength" "Type" (TypeOf $.Object) "Value" $.Object}}))
   {{else if IsNull             $}}{{Macro "C++.Null" $.Type}}
   {{else if IsNew              $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>(new {{Macro "C++.Type" $ty.To}}())
   {{else if IsCreate           $}}{{$ty := Unpack $.Type}}std::shared_ptr<{{Macro "C++.Type" $ty.To}}>((new {{Macro "C++.Type" $ty.To}}()){{Macro "C++.InitializeFields" $.Initializer}})
   {{else if IsClassInitializer $}}{{Macro "C++.Type" $}}(){{Macro "C++.InitializeFields" $}}
-  {{else if IsSliceIndex       $}}read({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Index}})
+  {{else if IsSliceIndex       $}}{{Macro "C++.SliceIndex" $}}
   {{else if IsSliceRange       $}}slice({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsPointerRange     $}}slice({{Macro "C++.Read" $.Pointer}}, {{Macro "C++.Read" $.Range.LHS}}, {{Macro "C++.Read" $.Range.RHS}})
   {{else if IsClone            $}}clone({{Macro "C++.Read" $.Slice}})
@@ -471,12 +471,33 @@
 
   {{/* T[] -> T* */}}{{if and (IsSlice $src_ty) (IsPointer $dst_ty)}}
     {{$src}}.begin()
+  {{/* char* -> string */}}{{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
+    string({{$src}})
   {{/* char[] -> string */}}{{else if and (IsSlice $src_ty) (IsString $dst_ty)}}
     string({{$src}})
   {{/* string[] -> char[] */}}{{else if and (IsString $src_ty) (IsSlice $dst_ty)}}
     slice({{$src}})
   {{else}}
     ({{Macro "C++.Type" $.Type}})({{$src}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to read the length of the specified expression by
+  Value and Type.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.ReadLength"}}
+  {{AssertType $.Type "Type"}}
+
+  {{$ty := Unpack $.Type}}
+  {{     if IsPseudonym   $ty}}{{Macro "C++.ReadLength" "Type" $ty.To "Value" $.Value}}
+  {{else if IsSlice       $ty}}{{Macro "C++.Read" $.Value}}.count()
+  {{else if IsString      $ty}}{{Macro "C++.Read" $.Value}}.size()
+  {{else if IsMap         $ty}}{{Macro "C++.Read" $.Value}}.size()
+  {{else                     }}{{Error "macro C++.ReadLength called with unsupported type: %v" $.Type}}
   {{end}}
 {{end}}
 
@@ -492,6 +513,22 @@
   {{if $.Target.Object}}{{Macro "C++.MethodCall" $}}
   {{else}}{{/* extern */}}
     {{$.Target.Function.Name}}({{Macro "C++.ReadList" $.Arguments}})
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the C++ logic to execute a slice index operation.
+-------------------------------------------------------------------------------
+*/}}
+{{define "C++.SliceIndex"}}
+  {{AssertType $ "SliceIndex"}}
+
+  {{if Global "C++.InferredExpression"}}
+    {{Macro "C++.Read" $.Slice}}[{{Macro "C++.Read" $.Index}}]
+  {{else}}
+    read({{Macro "C++.Read" $.Slice}}, {{Macro "C++.Read" $.Index}})
   {{end}}
 {{end}}
 

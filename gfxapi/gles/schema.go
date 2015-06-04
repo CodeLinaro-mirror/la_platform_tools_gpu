@@ -1467,7 +1467,7 @@ func init() {
 				Out:  false,
 			},
 			service.ParameterInfo{
-				Name: "size",
+				Name: "vector_count",
 				Type: schema.Pointer,
 				Out:  false,
 			},

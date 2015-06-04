@@ -3632,17 +3632,17 @@ namespace gles {
 
     class GlGetActiveUniform: public Encodable {
     public:
-        GlGetActiveUniform(atom.Observations observations, ProgramId Program, int32_t Location, int32_t BufferSize, S32ᵖ BufferBytesWritten, S32ᵖ Size, ShaderUniformTypeᵖ Type, Charᵖ Name) :
+        GlGetActiveUniform(atom.Observations observations, ProgramId Program, int32_t Location, int32_t BufferSize, S32ᵖ BufferBytesWritten, S32ᵖ VectorCount, ShaderUniformTypeᵖ Type, Charᵖ Name) :
             mobservations(observations),
             mProgram(Program),
             mLocation(Location),
             mBufferSize(BufferSize),
             mBufferBytesWritten(BufferBytesWritten),
-            mSize(Size),
+            mVectorCount(VectorCount),
             mType(Type),
             mName(Name) {}
         virtual const gapic::Id& Id() const {
-            static gapic::Id ID{ { 0xc5, 0x84, 0xd2, 0x9b, 0x13, 0x62, 0x24, 0x78, 0xdb, 0x59, 0x18, 0xa7, 0xca, 0xcf, 0xab, 0xf1, 0x12, 0xf3, 0x1c, 0xcd,  } };
+            static gapic::Id ID{ { 0x6e, 0xac, 0x3c, 0x92, 0xee, 0x19, 0x7e, 0x39, 0x44, 0x04, 0x5d, 0xec, 0xb0, 0xa2, 0xdc, 0x94, 0x6e, 0x5b, 0x05, 0x3c,  } };
             return ID;
         }
         virtual void Encode(Encoder* e) const {
@@ -3651,7 +3651,7 @@ namespace gles {
             e->Int32(this->mLocation);
             e->Int32(this->mBufferSize);
             e->Value(&this->mBufferBytesWritten);
-            e->Value(&this->mSize);
+            e->Value(&this->mVectorCount);
             e->Value(&this->mType);
             e->Value(&this->mName);
         }
@@ -3661,7 +3661,7 @@ namespace gles {
         int32_t mLocation;
         int32_t mBufferSize;
         S32ᵖ mBufferBytesWritten;
-        S32ᵖ mSize;
+        S32ᵖ mVectorCount;
         ShaderUniformTypeᵖ mType;
         Charᵖ mName;
     };

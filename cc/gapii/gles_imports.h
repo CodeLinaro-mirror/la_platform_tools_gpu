@@ -102,7 +102,7 @@ struct GlesImports {
                                                 int32_t *vector_count, uint32_t *type, char *name);
     typedef void(STDCALL *PFNGLGETACTIVEUNIFORM)(uint32_t program, int32_t location,
                                                  int32_t buffer_size, int32_t *buffer_bytes_written,
-                                                 int32_t *size, uint32_t *type, char *name);
+                                                 int32_t *vector_count, uint32_t *type, char *name);
     typedef uint32_t(STDCALL *PFNGLGETERROR)();
     typedef void(STDCALL *PFNGLGETPROGRAMIV)(uint32_t program, uint32_t parameter, int32_t *value);
     typedef void(STDCALL *PFNGLGETSHADERIV)(uint32_t shader, uint32_t parameter, int32_t *value);

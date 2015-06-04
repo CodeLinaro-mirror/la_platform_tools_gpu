@@ -119,6 +119,7 @@
   {{$ptr_ty     := Macro "Go.Type"   $                     }}
   {{$el_ty      := Macro "Go.Type"   $p.To                 }}
   {{$el_is_void := IsVoid    ($p.To | Underlying | Unpack) }}
+  {{$el_is_char := IsChar    ($p.To | Underlying | Unpack) }}
   {{$el_is_ptr  := IsPointer ($p.To | Underlying | Unpack) }}
 
   // {{$ptr_ty}} is a pointer to a {{$el_ty}} element.
@@ -137,11 +138,6 @@
   // New{{$ptr_ty}} returns a {{$ptr_ty}} that points to addr in the application pool.
   func New{{$ptr_ty}}(addr memory.Pointer) {{$ptr_ty}} {
     return {{$ptr_ty}}{Address: addr, Pool: memory.ApplicationPool}
-  }
-
-  // Unbounded returns a new unbounded memory.Slice based at p.
-  func (p {{$ptr_ty}}) Unbounded(ϟs *gfxapi.State) memory.Slice {
-    return ϟs.Memory[p.Pool].At(p.Address)
   }
 
   // ElementSize returns the size in bytes of an element that {{$ptr_ty}} points to.
@@ -166,6 +162,24 @@
     // Write writes value to the {{$el_ty}} element at the pointer.
     func (p {{$ptr_ty}}) Write(value {{$el_ty}}, ϟs *gfxapi.State) {
       p.Slice(0, 1, ϟs).Write([]{{$el_ty}}{value}, ϟs)
+    }
+  {{end}}
+
+  {{if $el_is_char}}
+    // StringSlice returns a slice starting at p and ending at the first 0 byte null-terminator.
+    // If incNullTerm is true then the null-terminator is included in the slice.
+    func (p {{$ptr_ty}}) StringSlice(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, incNullTerm bool) {{$slice_ty}} {
+      i, d := uint64(0), ϟs.MemoryDecoder(ϟs.Memory[p.Pool].At(p.Address), ϟd, ϟl)
+      for {
+        if b, _ := d.Uint8(); b == 0 {
+          if incNullTerm {
+            return p.Slice(0, i + 1, ϟs)
+          } else {
+            return p.Slice(0, i, ϟs)
+          }
+        }
+        i++
+      }
     }
   {{end}}
 

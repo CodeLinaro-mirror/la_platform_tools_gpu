@@ -98,8 +98,8 @@ EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32
                                       int32_t* buffer_bytes_written, int32_t* vector_count,
                                       uint32_t* type, char* name);
 EXPORT void STDCALL glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
-                                       int32_t* buffer_bytes_written, int32_t* size, uint32_t* type,
-                                       char* name);
+                                       int32_t* buffer_bytes_written, int32_t* vector_count,
+                                       uint32_t* type, char* name);
 EXPORT uint32_t STDCALL glGetError();
 EXPORT void STDCALL glGetProgramiv(uint32_t program, uint32_t parameter, int32_t* value);
 EXPORT void STDCALL glGetShaderiv(uint32_t shader, uint32_t parameter, int32_t* value);
@@ -771,11 +771,11 @@ EXPORT void STDCALL glGetActiveAttrib(uint32_t program, uint32_t location, int32
                              type, name);
 }
 EXPORT void STDCALL glGetActiveUniform(uint32_t program, int32_t location, int32_t buffer_size,
-                                       int32_t* buffer_bytes_written, int32_t* size, uint32_t* type,
-                                       char* name) {
+                                       int32_t* buffer_bytes_written, int32_t* vector_count,
+                                       uint32_t* type, char* name) {
     GAPID_INFO("glGetActiveUniform()\n");
-    spy()->glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, size, type,
-                              name);
+    spy()->glGetActiveUniform(program, location, buffer_size, buffer_bytes_written, vector_count,
+                              type, name);
 }
 EXPORT uint32_t STDCALL glGetError() {
     GAPID_INFO("glGetError()\n");
