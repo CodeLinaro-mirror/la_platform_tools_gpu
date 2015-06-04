@@ -29,6 +29,15 @@ namespace {
 const uint32_t EGL_WIDTH  = 0x3057;
 const uint32_t EGL_HEIGHT = 0x3056;
 
+bool isLittleEndian() {
+    union {
+        uint32_t i;
+        char c[4];
+    } u;
+    u.i = 0x01020304;
+    return u.c[0] == 4;
+}
+
 } // anonymous namespace
 
 namespace gapii {
@@ -42,8 +51,8 @@ Spy::Spy() {
     auto writer = ConnectionWriter::listenSocket("127.0.0.1", "9286");
 #endif
     auto encoder = std::shared_ptr<gapic::Encoder>(new gapic::Encoder(writer));
-    mEncoder = encoder;
     GlesSpy::init(encoder);
+    GlesSpy::architecture(alignof(void*), sizeof(void*), sizeof(int), isLittleEndian());
 }
 
 EGLBoolean Spy::eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
