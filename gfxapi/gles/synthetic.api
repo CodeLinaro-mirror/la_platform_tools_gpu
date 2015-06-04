@@ -1,0 +1,77 @@
+// Copyright (C) 2015 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// architecture is used to describe the architecture of the device used to make
+// the capture.
+@synthetic @no_replay @no_mutate
+cmd void architecture(u32  pointer_alignment,
+                      u32  pointer_size,
+                      u32  integer_size,
+                      bool little_endian) {}
+
+// replayCreateRenderer constructs a GLES renderer for replay without making it active.
+@synthetic
+cmd void replayCreateRenderer(u32 id) {}
+
+// replayBindRenderer makes the renderer constructed with replayCreateRenderer active.
+@synthetic
+cmd void replayBindRenderer(u32 id) {}
+
+@synthetic
+cmd void backbufferInfo(s32                width,
+                        s32                height,
+                        RenderbufferFormat color_fmt,
+                        RenderbufferFormat depth_fmt,
+                        RenderbufferFormat stencil_fmt,
+                        bool               resetViewportScissor) {
+    ctx := GetContext()
+    backbuffer := ctx.Instances.Framebuffers[0]
+
+    color_id     := as!RenderbufferId(backbuffer.Attachments[GL_COLOR_ATTACHMENT0].Object)
+    color_buffer := ctx.Instances.Renderbuffers[color_id]
+
+    depth_id     := as!RenderbufferId(backbuffer.Attachments[GL_DEPTH_ATTACHMENT].Object)
+    depth_buffer := ctx.Instances.Renderbuffers[depth_id]
+
+    stencil_id     := as!RenderbufferId(backbuffer.Attachments[GL_STENCIL_ATTACHMENT].Object)
+    stencil_buffer := ctx.Instances.Renderbuffers[stencil_id]
+
+    color_buffer.Width    = width
+    color_buffer.Height   = height
+    color_buffer.Format   = color_fmt
+
+    depth_buffer.Width    = width
+    depth_buffer.Height   = height
+    depth_buffer.Format   = depth_fmt
+
+    stencil_buffer.Width  = width
+    stencil_buffer.Height = height
+    stencil_buffer.Format = stencil_fmt
+
+    if resetViewportScissor {
+        ctx.Rasterizing.Scissor.Width   = width
+        ctx.Rasterizing.Scissor.Height  = height
+        ctx.Rasterizing.Viewport.Width  = width
+        ctx.Rasterizing.Viewport.Height = height
+    }
+}
+
+@synthetic
+cmd void startTimer(u8 index) {}
+
+@synthetic
+cmd u64 stopTimer(u8 index) { return ? } // Time returned in nanoseconds
+
+@synthetic
+cmd void flushPostBuffer() {}

@@ -12,6 +12,33 @@ class Encoder;
 
 namespace coder {
 namespace gles {
+    class Architecture: public Encodable {
+    public:
+        Architecture(atom.Observations observations, uint32_t PointerAlignment, uint32_t PointerSize, uint32_t IntegerSize, bool LittleEndian) :
+            mobservations(observations),
+            mPointerAlignment(PointerAlignment),
+            mPointerSize(PointerSize),
+            mIntegerSize(IntegerSize),
+            mLittleEndian(LittleEndian) {}
+        virtual const gapic::Id& Id() const {
+            static gapic::Id ID{ { 0x14, 0x53, 0xe8, 0x31, 0x7d, 0x20, 0x5f, 0xbd, 0xad, 0x68, 0x48, 0x67, 0xeb, 0xf6, 0x1c, 0x4f, 0xe8, 0xfc, 0x0e, 0x01,  } };
+            return ID;
+        }
+        virtual void Encode(Encoder* e) const {
+            e->Value(&this->mobservations);
+            e->Uint32(this->mPointerAlignment);
+            e->Uint32(this->mPointerSize);
+            e->Uint32(this->mIntegerSize);
+            e->Bool(this->mLittleEndian);
+        }
+
+        atom.Observations mobservations;
+        uint32_t mPointerAlignment;
+        uint32_t mPointerSize;
+        uint32_t mIntegerSize;
+        bool mLittleEndian;
+    };
+
     class BackbufferInfo: public Encodable {
     public:
         BackbufferInfo(atom.Observations observations, int32_t Width, int32_t Height, RenderbufferFormat ColorFmt, RenderbufferFormat DepthFmt, RenderbufferFormat StencilFmt, bool ResetViewportScissor) :

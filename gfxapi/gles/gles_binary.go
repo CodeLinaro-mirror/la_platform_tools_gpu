@@ -16,6 +16,7 @@ import (
 )
 
 func init() {
+	registry.Add((*Architecture)(nil).Class())
 	registry.Add((*BackbufferInfo)(nil).Class())
 	registry.Add((*Color)(nil).Class())
 	registry.Add((*BlendState)(nil).Class())
@@ -316,6 +317,7 @@ func init() {
 }
 
 var (
+	binaryIDArchitecture                           = binary.ID{0x14, 0x53, 0xe8, 0x31, 0x7d, 0x20, 0x5f, 0xbd, 0xad, 0x68, 0x48, 0x67, 0xeb, 0xf6, 0x1c, 0x4f, 0xe8, 0xfc, 0x0e, 0x01}
 	binaryIDBackbufferInfo                         = binary.ID{0x44, 0xeb, 0x57, 0x06, 0xf9, 0xfd, 0x06, 0xab, 0xc2, 0xa7, 0xdc, 0xa2, 0xba, 0xd0, 0xe3, 0x8f, 0x76, 0x7c, 0x81, 0x0f}
 	binaryIDColor                                  = binary.ID{0xe7, 0x31, 0x0f, 0x05, 0x26, 0x27, 0x37, 0x3a, 0xc4, 0xbb, 0x59, 0xea, 0xc0, 0x41, 0xb0, 0xa7, 0x8f, 0x15, 0x58, 0xb4}
 	binaryIDBlendState                             = binary.ID{0x29, 0x77, 0xc4, 0x8b, 0x77, 0xa3, 0x4d, 0x9c, 0x4d, 0x61, 0x12, 0xcf, 0x1f, 0x04, 0x1a, 0x82, 0x82, 0x33, 0xb3, 0xf2}
@@ -614,6 +616,100 @@ var (
 	binaryIDWglMakeCurrent                         = binary.ID{0x86, 0xd3, 0x02, 0xb5, 0xf6, 0x1b, 0x7f, 0x3e, 0xb1, 0x23, 0x36, 0x2b, 0x9d, 0xa2, 0x13, 0xa6, 0xf6, 0xbc, 0xb3, 0x8a}
 	binaryIDWglSwapBuffers                         = binary.ID{0xa1, 0x23, 0xcd, 0xfc, 0xb1, 0x9b, 0xcf, 0x24, 0x77, 0xab, 0x3b, 0xb0, 0x75, 0x58, 0x9b, 0x35, 0x54, 0x11, 0x3f, 0xc8}
 )
+
+type binaryClassArchitecture struct{}
+
+func (*Architecture) Class() binary.Class {
+	return (*binaryClassArchitecture)(nil)
+}
+func doEncodeArchitecture(e binary.Encoder, o *Architecture) error {
+	if err := e.Value(&o.observations); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.PointerAlignment); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.PointerSize); err != nil {
+		return err
+	}
+	if err := e.Uint32(o.IntegerSize); err != nil {
+		return err
+	}
+	if err := e.Bool(o.LittleEndian); err != nil {
+		return err
+	}
+	return nil
+}
+func doDecodeArchitecture(d binary.Decoder, o *Architecture) error {
+	if err := d.Value(&o.observations); err != nil {
+		return err
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.PointerAlignment = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.PointerSize = uint32(obj)
+	}
+	if obj, err := d.Uint32(); err != nil {
+		return err
+	} else {
+		o.IntegerSize = uint32(obj)
+	}
+	if obj, err := d.Bool(); err != nil {
+		return err
+	} else {
+		o.LittleEndian = bool(obj)
+	}
+	return nil
+}
+func doSkipArchitecture(d binary.Decoder) error {
+	if err := d.SkipValue((*atom.Observations)(nil)); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Uint32(); err != nil {
+		return err
+	}
+	if _, err := d.Bool(); err != nil {
+		return err
+	}
+	return nil
+}
+func (*binaryClassArchitecture) ID() binary.ID      { return binaryIDArchitecture }
+func (*binaryClassArchitecture) New() binary.Object { return &Architecture{} }
+func (*binaryClassArchitecture) Encode(e binary.Encoder, obj binary.Object) error {
+	return doEncodeArchitecture(e, obj.(*Architecture))
+}
+func (*binaryClassArchitecture) Decode(d binary.Decoder) (binary.Object, error) {
+	obj := &Architecture{}
+	return obj, doDecodeArchitecture(d, obj)
+}
+func (*binaryClassArchitecture) DecodeTo(d binary.Decoder, obj binary.Object) error {
+	return doDecodeArchitecture(d, obj.(*Architecture))
+}
+func (*binaryClassArchitecture) Skip(d binary.Decoder) error { return doSkipArchitecture(d) }
+func (*binaryClassArchitecture) Schema() *schema.Class       { return schemaArchitecture }
+
+var schemaArchitecture = &schema.Class{
+	TypeID: binaryIDArchitecture,
+	Name:   "Architecture",
+	Fields: []schema.Field{
+		schema.Field{Declared: "observations", Type: &schema.Struct{Name: "atom.Observations"}},
+		schema.Field{Declared: "PointerAlignment", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "PointerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "IntegerSize", Type: &schema.Primitive{Name: "uint32", Method: schema.Uint32}},
+		schema.Field{Declared: "LittleEndian", Type: &schema.Primitive{Name: "bool", Method: schema.Bool}},
+	},
+}
 
 type binaryClassBackbufferInfo struct{}
 
