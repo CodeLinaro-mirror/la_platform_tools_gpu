@@ -96,7 +96,7 @@
     {{$name := Macro "Go.CmdName" $}}
     var _ = replay.Replayer(&{{$name}}{}) // interface compliance check
     func (ϟa *{{$name}}) {{if GetAnnotation $ "replay_custom"}}default{{end}}Replay(§
-        ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+        ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
     ϟc := getState(ϟs)
     ϟp := &postCall{}
     _ = ϟc
@@ -120,6 +120,8 @@
 
     {{/* Perform post-call actions*/}}
     ϟp.exec()
+
+    return nil
   }
   {{end}}
 {{end}}

@@ -79,6 +79,7 @@ type Builder struct {
 	decoders        []idPostDecoder
 	stack           []stackItem
 	architecture    device.Architecture
+	inAtom          bool
 
 	// Remappings is a map of a arbitrary keys to pointers. Typically, this is
 	// used as a map of observed values to values that are only known at replay
@@ -164,6 +165,10 @@ func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Po
 
 // BeginAtom should be called before building any replay instructions.
 func (b *Builder) BeginAtom(id atom.ID) {
+	if b.inAtom {
+		panic("BeginAtom called while already building an atom")
+	}
+	b.inAtom = true
 	if id <= 0x3ffffff { // Labels have 26 bit values.
 		b.instructions = append(b.instructions, asm.Label{
 			Value: uint32(id),
@@ -171,9 +176,13 @@ func (b *Builder) BeginAtom(id atom.ID) {
 	}
 }
 
-// EndAtom should be called after emitting the commands to replay a single atom.
-// EndAtom frees all temporary allocated memory and clears the stack.
-func (b *Builder) EndAtom() {
+// CommitAtom should be called after emitting the commands to replay a single atom.
+// CommitAtom frees all temporary allocated memory and clears the stack.
+func (b *Builder) CommitAtom() {
+	if !b.inAtom {
+		panic("CommitAtom called without a call to BeginAtom")
+	}
+	b.inAtom = false
 	b.temp.reset()
 	pop := uint32(len(b.stack))
 	// Optimise the instructions.
@@ -204,6 +213,27 @@ func (b *Builder) EndAtom() {
 		b.instructions = append(b.instructions, asm.Pop{Count: pop})
 	}
 	b.stack = b.stack[:0]
+}
+
+// RevertAtom reverts all the instructions since the last call to BeginAtom.
+func (b *Builder) RevertAtom() {
+	if !b.inAtom {
+		panic("RevertAtom called without a call to BeginAtom")
+	}
+	b.inAtom = false
+	// TODO: Revert calls to: AllocateMemory, Buffer, String, MapMemory, Write.
+	b.temp.reset()
+	b.stack = b.stack[:0]
+	for {
+		i := b.instructions[len(b.instructions)-1]
+		b.instructions = b.instructions[:len(b.instructions)-1]
+		switch i.(type) {
+		case asm.Post:
+			b.decoders = b.decoders[:len(b.decoders)-1]
+		case asm.Label:
+			return
+		}
+	}
 }
 
 // Buffer returns a pointer to a block of memory in holding the count number of

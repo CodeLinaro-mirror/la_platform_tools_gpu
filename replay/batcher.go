@@ -177,6 +177,11 @@ type adapter struct {
 	builder *builder.Builder
 }
 
-func (w *adapter) Write(id atom.ID, a atom.Atom) {
-	Replay(id, a, w.state, w.db, w.logger, w.builder)
+func (w *adapter) Write(i atom.ID, a atom.Atom) {
+	w.builder.BeginAtom(i)
+	if Replay(i, a, w.state, w.db, w.logger, w.builder) == nil {
+		w.builder.CommitAtom()
+	} else {
+		w.builder.RevertAtom()
+	}
 }
