@@ -192,17 +192,13 @@ func (a readFramebufferDepth) Replay(i atom.ID, gs *gfxapi.State, d database.Dat
 
 		// Render depth texture to framebuffer color attachment.
 		NewGlClear(ClearMask_GL_COLOR_BUFFER_BIT),
-		NewGlCreateShader(ShaderType_GL_VERTEX_SHADER, vertexShaderID),
-		NewGlShaderSource(vertexShaderID, 1, memory.Tmp.Base+4, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, int32(len(vertexShaderSource)), vertexShaderSource)),
-		NewGlCompileShader(vertexShaderID),
-		NewGlCreateShader(ShaderType_GL_FRAGMENT_SHADER, fragmentShaderID),
-		NewGlShaderSource(fragmentShaderID, 1, memory.Tmp.Base+4, memory.Tmp.Base).
-			AddRead(atom.Data(arch, d, l, memory.Tmp.Base, int32(len(fragmentShaderSource)), fragmentShaderSource)),
-		NewGlCompileShader(fragmentShaderID),
-		NewGlCreateProgram(programID),
-		NewGlAttachShader(programID, vertexShaderID),
-		NewGlAttachShader(programID, fragmentShaderID),
+	)
+
+	// Create the shader program
+	replayNoPost(i, gs, d, l, b,
+		NewProgram(arch, d, l, vertexShaderID, fragmentShaderID, programID, vertexShaderSource, fragmentShaderSource)...)
+
+	replayNoPost(i, gs, d, l, b,
 		NewGlBindAttribLocation(programID, aScreenCoordsLocation, "aScreenCoords"),
 		NewGlLinkProgram(programID),
 		NewGlUseProgram(programID),
