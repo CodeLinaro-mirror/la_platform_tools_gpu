@@ -25,56 +25,56 @@ import (
 
 func (i BufferId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Buffers[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i FramebufferId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Framebuffers[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i RenderbufferId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Renderbuffers[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i ProgramId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Programs[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i ShaderId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Shaders[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i TextureId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Textures[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i VertexArrayId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.VertexArrays[i]
+		key, remap = i, true
 	}
 	return
 }
 
 func (i QueryId) remap(a atom.Atom, s *gfxapi.State) (key interface{}, remap bool) {
 	if i != 0 {
-		key, remap = getContext(s).Instances.Queries[i]
+		key, remap = i, true
 	}
 	return
 }
