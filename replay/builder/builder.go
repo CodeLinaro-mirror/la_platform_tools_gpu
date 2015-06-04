@@ -164,29 +164,44 @@ func (b *Builder) AllocateTemporaryMemoryChunks(sizes []uint64) (ptrs []value.Po
 
 // BeginAtom should be called before building any replay instructions.
 func (b *Builder) BeginAtom(id atom.ID) {
-	if id > 0x3ffffff {
-		id = 0x3ffffff // Labels have 26 bit values.
+	if id <= 0x3ffffff { // Labels have 26 bit values.
+		b.instructions = append(b.instructions, asm.Label{
+			Value: uint32(id),
+		})
 	}
-	b.instructions = append(b.instructions, asm.Label{
-		Value: uint32(id),
-	})
 }
 
 // EndAtom should be called after emitting the commands to replay a single atom.
-// EndAtom frees all allocated temporary memory and clears the stack.
+// EndAtom frees all temporary allocated memory and clears the stack.
 func (b *Builder) EndAtom() {
 	b.temp.reset()
-	c := len(b.stack)
-	// Change calls that push an unused return value to discard the value.
-	for _, i := range b.stack {
-		if call, ok := b.instructions[i.idx].(asm.Call); ok && call.PushReturn {
-			call.PushReturn = false
-			b.instructions[i.idx] = call
-			c--
+	pop := uint32(len(b.stack))
+	// Optimise the instructions.
+	for si := len(b.stack) - 1; si >= 0; si-- {
+		s := b.stack[si]
+		switch i := b.instructions[s.idx].(type) {
+		case asm.Call: // Change calls that push an unused return value to discard the value.
+			if i.PushReturn {
+				i.PushReturn = false
+				b.instructions[s.idx] = i
+				pop--
+			}
+		case asm.Clone, asm.Push, asm.Load: // Remove unused clones, pushes, loads
+			b.instructions[s.idx] = asm.Nop{}
+			pop--
 		}
 	}
-	if c > 0 {
-		b.instructions = append(b.instructions, asm.Pop{Count: uint32(c)})
+	// Trim trailing no-ops
+	for len(b.instructions) > 0 {
+		if _, nop := b.instructions[len(b.instructions)-1].(asm.Nop); nop {
+			b.instructions = b.instructions[:len(b.instructions)-1]
+		} else {
+			break
+		}
+	}
+	// Pop any remaining stack values
+	if pop > 0 {
+		b.instructions = append(b.instructions, asm.Pop{Count: pop})
 	}
 	b.stack = b.stack[:0]
 }
@@ -283,7 +298,10 @@ func (b *Builder) Copy(size uint64) {
 // Clone makes a copy of the n-th element from the top of the stack and pushes
 // the copy to the top of the stack.
 func (b *Builder) Clone(index int) {
-	b.pushStack(b.stack[len(b.stack)-1-index].ty)
+	sidx := len(b.stack) - 1 - index
+	// Change ownership of the top stack value to the clone instruction.
+	b.stack[sidx].idx = len(b.instructions)
+	b.pushStack(b.stack[sidx].ty)
 	b.instructions = append(b.instructions, asm.Clone{
 		Index: index,
 	})
