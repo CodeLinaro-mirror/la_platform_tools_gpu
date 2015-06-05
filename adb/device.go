@@ -32,6 +32,10 @@ const (
 	Unauthorized
 )
 
+// ErrDeviceNotRooted is returned by Device.Root when the device is running a
+// production build as is not 'rooted'.
+var ErrDeviceNotRooted = errors.New("Device is not rooted")
+
 // Device represents an attached Android device.
 type Device struct {
 	Serial string
@@ -45,6 +49,25 @@ func (d *Device) Command(path string, args ...string) *Cmd {
 		Path:   path,
 		Args:   args,
 		Device: d,
+	}
+}
+
+// Root restarts adb as root. If the device is running a production build then
+// Root will return ErrDeviceNotRooted.
+func (d *Device) Root() error {
+	cmd := Cmd{Args: []string{"root"}}
+	res, err := cmd.Call()
+	switch strings.TrimSpace(res) {
+	case "adbd cannot run as root in production builds":
+		return ErrDeviceNotRooted
+	case "restarting adbd as root", "adbd is already running as root":
+		return err
+	default:
+		if err == nil {
+			return errors.New(res)
+		} else {
+			return err
+		}
 	}
 }
 
@@ -85,7 +108,8 @@ func Devices() ([]*Device, error) {
 	if adb == "" {
 		return nil, ErrADBNotFound
 	}
-	if out, err := run("devices"); err == nil {
+	cmd := Cmd{Args: []string{"devices"}}
+	if out, err := cmd.Call(); err == nil {
 		return parseDevices(out)
 	} else {
 		return nil, err

@@ -17,6 +17,7 @@ package adb
 import (
 	"errors"
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -52,7 +53,7 @@ type Action struct {
 }
 
 // Actions returns all the actions supported by the specified package.
-func (p *InstalledPackage) Actions() ([]Action, error) {
+func (p *InstalledPackage) Actions() ([]*Action, error) {
 	str, err := p.Device.Command("dumpsys", "package", p.Name).Call()
 	if err != nil {
 		return nil, err
@@ -73,7 +74,7 @@ func (p *InstalledPackage) wrapPropName() string {
 	return name
 }
 
-// InstalledPackages returns the list of installed packages on the device
+// InstalledPackages returns the sorted list of installed packages on the device.
 func (d *Device) InstalledPackages() ([]*InstalledPackage, error) {
 	str, err := d.Command("pm", "list", "packages", "-f").Call()
 	if err != nil {
@@ -82,9 +83,15 @@ func (d *Device) InstalledPackages() ([]*InstalledPackage, error) {
 	return parsePackages(str, d)
 }
 
-func parsePackages(str string, device *Device) ([]*InstalledPackage, error) {
+type pkgList []*InstalledPackage
+
+func (l pkgList) Len() int           { return len(l) }
+func (l pkgList) Less(i, j int) bool { return l[i].Name < l[j].Name }
+func (l pkgList) Swap(i, j int)      { l[i], l[j] = l[j], l[i] }
+
+func parsePackages(str string, device *Device) (pkgList, error) {
 	lines := strings.Split(str, "\n")
-	packages := make([]*InstalledPackage, 0, len(lines))
+	packages := make(pkgList, 0, len(lines))
 	for _, line := range lines {
 		line = strings.TrimRight(line, "\r")
 		segments := strings.SplitAfter(line, "package:")
@@ -102,6 +109,7 @@ func parsePackages(str string, device *Device) ([]*InstalledPackage, error) {
 		}
 		packages = append(packages, pkg)
 	}
+	sort.Sort(packages)
 	return packages, nil
 }
 
@@ -154,8 +162,8 @@ func unquote(s string) string {
 }
 
 // Currently parses only the non-data actions.
-func parseActions(str string) ([]Action, error) {
-	actions := []Action{}
+func parseActions(str string) ([]*Action, error) {
+	actions := []*Action{}
 	for _, root := range parseTabbedTree(str).children {
 		if root.text == "Activity Resolver Table:" {
 			for _, node := range root.children {
@@ -177,13 +185,14 @@ func parseActions(str string) ([]Action, error) {
 	return actions, nil
 }
 
-func parseAction(node *treeNode) (Action, error) {
-	action := Action{}
+func parseAction(node *treeNode) (*Action, error) {
+	action := &Action{}
 
 	// 43178558 com.google.foo/.FooActivity filter 431d7db8
+	// 43178558 com.google.foo/.FooActivity
 	fields := strings.Fields(node.text)
-	if len(fields) != 4 || fields[2] != "filter" {
-		return action, fmt.Errorf("Could not parse component: '%v'", node.children[0].text)
+	if len(fields) < 2 {
+		return action, fmt.Errorf("Could not parse component: '%v'", node.text)
 	}
 
 	action.Component = fields[1]

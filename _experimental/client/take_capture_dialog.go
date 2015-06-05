@@ -31,13 +31,20 @@ var (
 	spyport = flag.Int("i", 9286, "gapii TCP port to connect to")
 )
 
-func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...interface{}), launched func()) {
+type launchItem struct {
+	pkg    *adb.InstalledPackage
+	action *adb.Action
+}
+
+func (i launchItem) String() string { return i.pkg.Name }
+
+func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...interface{}), capture func()) {
+	driver := theme.Driver()
 	window := theme.CreateWindow(500, 800, "Launch Android application...")
 
 	overlay := theme.CreateBubbleOverlay()
 
 	deviceAdapter := gxui.CreateDefaultAdapter()
-	packageAdapter := gxui.CreateDefaultAdapter()
 
 	devices, _ := adb.Devices()
 	deviceAdapter.SetItems(devices)
@@ -47,43 +54,77 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...in
 	deviceList.SetBubbleOverlay(overlay)
 
 	packageList := theme.CreateList()
-	packageList.SetAdapter(packageAdapter)
 
 	deviceList.OnSelectionChanged(func(sel gxui.AdapterItem) {
 		device := sel.(*adb.Device)
-		pkgs, _ := device.InstalledPackages()
-		packageAdapter.SetItems(pkgs)
-		packageAdapter.SetSize(math.Size{W: math.MaxSize.W, H: 16})
+		adapter := gxui.CreateDefaultAdapter()
+		adapter.SetSize(math.Size{W: math.MaxSize.W, H: 16})
+		packageList.SetAdapter(adapter)
+		go func() (err error) {
+			defer func() {
+				if err != nil {
+					driver.Call(func() { adapter.SetItems(err) })
+				}
+			}()
+
+			items := []launchItem{}
+			err = device.Root()
+			switch err {
+			case nil:
+			case adb.ErrDeviceNotRooted:
+				return err
+			default:
+				return fmt.Errorf("Failed to restart ADB as root: %v", err)
+			}
+			packages, err := device.InstalledPackages()
+			if err != nil {
+				return fmt.Errorf(fmt.Sprintf("Could not get list of installed packages: %v", err))
+			}
+			for _, pkg := range packages {
+				actions, _ := pkg.Actions()
+				for _, action := range actions {
+					launcher := false
+					for _, category := range action.Categories {
+						if category == "android.intent.category.LAUNCHER" {
+							launcher = true
+							break
+						}
+					}
+					if launcher {
+						driver.CallSync(func() {
+							items = append(items, launchItem{pkg, action})
+							adapter.SetItems(items)
+						})
+						break
+					}
+				}
+			}
+			return nil
+		}()
 	})
 
 	packageList.OnDoubleClick(func(gxui.MouseEvent) {
 		if sel := packageList.Selected(); sel != nil {
-			pkg := sel.(*adb.InstalledPackage)
+			if item, ok := sel.(launchItem); ok {
+				go func() {
+					driver.Call(window.Close)
 
-			actions, _ := pkg.Actions()
-			for _, action := range actions {
-				for _, category := range action.Categories {
-					if category == "android.intent.category.LAUNCHER" {
-						dev := pkg.Device
-						go func() {
-							updateStatus("Disabling SELinux enforcing...")
-							dev.SetSELinuxEnforcing(false)
+					pkg, dev := item.pkg, item.pkg.Device
 
-							updateStatus("Setting LD_PRELOAD...")
-							pkg.SetWrapProperties("LD_PRELOAD=/data/spy.so")
+					updateStatus("Disabling SELinux enforcing...")
+					dev.SetSELinuxEnforcing(false)
 
-							updateStatus("Forwarding port...")
-							dev.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
+					updateStatus("Setting LD_PRELOAD...")
+					pkg.SetWrapProperties("LD_PRELOAD=/data/spy.so")
 
-							updateStatus("Starting activity...")
-							dev.StartActivity(action)
+					updateStatus("Forwarding port...")
+					dev.Forward(adb.TCPPort(*spyport), adb.NamedAbstractSocket("gfxspy"))
 
-							launched()
-						}()
-						window.Close()
-						return
-					}
-				}
+					updateStatus("Starting activity...")
+					dev.StartActivity(*item.action)
+
+					capture()
+				}()
 			}
 		}
 	})
@@ -91,9 +132,9 @@ func CreateLaunchAndroidDialog(theme gxui.Theme, updateStatus func(string, ...in
 	layout := theme.CreateLinearLayout()
 	layout.AddChild(deviceList)
 	layout.AddChild(packageList)
-	layout.AddChild(overlay)
 
 	window.AddChild(layout)
+	window.AddChild(overlay)
 
 	if len(devices) > 0 {
 		deviceList.Select(devices[0])
@@ -136,10 +177,6 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 		})
 	}
 
-	launch.OnClick(func(ev gxui.MouseEvent) {
-		CreateLaunchAndroidDialog(theme, updateStatus, func() { button.Click(ev) })
-	})
-
 	bottom := theme.CreateLinearLayout()
 	bottom.SetDirection(gxui.RightToLeft)
 	bottom.AddChild(button)
@@ -158,7 +195,10 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 		clickSubscription.Unlisten()
 		button.SetText("Stop")
-		clickSubscription = button.OnClick(func(gxui.MouseEvent) { stop.raise() })
+		clickSubscription = button.OnClick(func(gxui.MouseEvent) {
+			clickSubscription.Unlisten()
+			stop.raise()
+		})
 
 		go func() {
 			if data := takeCapture(appCtx, stop, updateStatus); data != nil {
@@ -174,6 +214,13 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 				theme.Driver().Call(func() {
 					window.Close()
 				})
+			} else {
+				theme.Driver().Call(func() {
+					button.SetText("Close")
+					button.OnClick(func(gxui.MouseEvent) {
+						window.Close()
+					})
+				})
 			}
 		}()
 	}
@@ -186,7 +233,9 @@ func CreateTakeCaptureDialog(appCtx *ApplicationContext) {
 
 type signal chan struct{}
 
-func (s signal) raise() { close(s) }
+func (s signal) raise() {
+	close(s)
+}
 func (s signal) signaled() bool {
 	select {
 	case <-s:
