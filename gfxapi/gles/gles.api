@@ -522,8 +522,12 @@ map!(EGLContext, ref!Context) EGLContexts
 @no_replay
 ///http://www.khronos.org/registry/egl/sdk/docs/man/html/eglInitialize.xhtml
 cmd EGLBoolean eglInitialize(EGLDisplay dpy, EGLint* major, EGLint* minor) {
-    major[0] = ?
-    minor[0] = ?
+    if major != null {
+        major[0] = ?
+    }
+    if major != null {
+        minor[0] = ?
+    }
     return ?
 }
 

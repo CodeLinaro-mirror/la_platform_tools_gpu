@@ -321,8 +321,12 @@ inline int GlesSpy::eglInitialize(void* dpy, int* major, int* minor) {
 
     do {
         result = mImports.eglInitialize(dpy, major, minor);
-        write(slice(major, 0, 1), 0, slice(major, 0, 1)[0]);
-        write(slice(minor, 0, 1), 0, slice(minor, 0, 1)[0]);
+        if (major != nullptr) {
+            write(slice(major, 0, 1), 0, slice(major, 0, 1)[0]);
+        }
+        if (major != nullptr) {
+            write(slice(minor, 0, 1), 0, slice(minor, 0, 1)[0]);
+        }
         break;
     } while (false);
 
