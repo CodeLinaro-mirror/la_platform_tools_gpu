@@ -15,3 +15,5 @@
 // Package memory contains types used for representing and simulating memory
 // observed in the capture.
 package memory
+
+// binary: cpp = memory
