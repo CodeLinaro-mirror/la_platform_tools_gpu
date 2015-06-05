@@ -26,7 +26,7 @@ const cpp_tmpl = `// Copyright (C) 2014 The Android Open Source Project
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-{{define "Cpp.Constructor"}}»»{{.Name}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{CppStorage $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
+{{define "Cpp.Constructor"}}»»{{FixupName .Name}}({{range $index, $field := .Fields}}{{if $index}}, {{end}}{{CppStorage $field.Type}} {{$field.Name}}{{end}}) {{range $index, $field := .Fields}}{{if $index}},{{else}}:{{end}}
 »»»m{{.Name}}({{.Name}}){{end}} {}{{end}}
 
 {{define "Cpp.ID"}}»»virtual const gapic::Id& Id() const {
@@ -66,7 +66,7 @@ class Encoder;
 
 namespace coder {
 namespace {{.Package}} {
-{{range .Structs}}»class {{.Name}}: public Encodable {
+{{range .Structs}}»class {{FixupName .Name}}: public Encodable {
 »public:
 {{template "Cpp.Constructor" .}}
 {{template "Cpp.ID" .}}
