@@ -44,9 +44,9 @@ func (request *GetMemoryInfo) build(d database.Database, l log.Logger, out binar
 	}
 
 	s := gfxapi.NewState()
-	for _, a := range atoms[:request.After] {
+	for i, a := range atoms[:request.After] {
 		if err := a.Mutate(s, d, l); err != nil {
-			return err
+			l.Warningf("Atom %d %v: %v", i, a, err)
 		}
 	}
 
