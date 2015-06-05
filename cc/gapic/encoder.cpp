@@ -126,6 +126,11 @@ void Encoder::Int64(int64_t v) {
     Uint64((v < 0) ? ~uv : uv);
 }
 
+void Encoder::Pointer(const void* p) {
+    Uint64(reinterpret_cast<uintptr_t>(p));
+    Uint32(0); // Pool-id
+}
+
 void Encoder::String(const char* v) {
     uint32_t len = v != nullptr ? static_cast<uint32_t>(strlen(v)) : 0;
     Uint32(len);
