@@ -23,6 +23,16 @@ import (
 	"android.googlesource.com/platform/tools/gpu/api/semantic"
 )
 
+const (
+	RefSuffix     = "ʳ"
+	SliceSuffix   = "ˢ"
+	ConstSuffix   = "ᶜ"
+	PointerSuffix = "ᵖ"
+	ArraySuffix   = "ᵃ"
+	MapSuffix     = "ᵐ"
+	TypeInfix     = "ː"
+)
+
 func type_(ctx *context, in interface{}) semantic.Type {
 	switch in := in.(type) {
 	case *ast.Generic:
@@ -100,7 +110,7 @@ func getSimpleType(ctx *context, in *ast.Identifier) semantic.Type {
 }
 
 func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
-	name := fmt.Sprintf("%sː%sᵐ", strings.Title(kt.Typename()), vt.Typename())
+	name := fmt.Sprintf("%s%s%s%s", strings.Title(kt.Typename()), TypeInfix, vt.Typename(), MapSuffix)
 	for _, m := range ctx.api.Maps {
 		if m.Name == name {
 			if !equal(kt, m.KeyType) {
@@ -125,7 +135,7 @@ func getMapType(ctx *context, at ast.Node, kt, vt semantic.Type) *semantic.Map {
 }
 
 func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32) *semantic.StaticArray {
-	name := fmt.Sprintf("%sː%dᵃ", strings.Title(of.Typename()), size)
+	name := fmt.Sprintf("%s%s%d%s", strings.Title(of.Typename()), TypeInfix, size, ArraySuffix)
 	for _, a := range ctx.api.StaticArrays {
 		if a.Name == name {
 			if !equal(a.ValueType, of) {
@@ -147,7 +157,7 @@ func getStaticArrayType(ctx *context, at ast.Node, of semantic.Type, size uint32
 }
 
 func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference {
-	name := strings.Title(to.Typename()) + "ʳ"
+	name := strings.Title(to.Typename()) + RefSuffix
 	for _, p := range ctx.api.References {
 		if p.Name == name {
 			if !equal(to, p.To) {
@@ -169,9 +179,9 @@ func getRefType(ctx *context, at ast.Node, to semantic.Type) *semantic.Reference
 func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) *semantic.Pointer {
 	name := strings.Title(to.Typename())
 	if constant {
-		name += "ᶜ"
+		name += ConstSuffix
 	}
-	name += "ᵖ"
+	name += PointerSuffix
 	for _, p := range ctx.api.Pointers {
 		if p.Name == name {
 			if !equal(to, p.To) {
@@ -195,7 +205,7 @@ func getPointerType(ctx *context, at ast.Node, to semantic.Type, constant bool) 
 }
 
 func getSliceType(ctx *context, at ast.Node, to semantic.Type) *semantic.Slice {
-	name := strings.Title(to.Typename()) + "ˢ"
+	name := strings.Title(to.Typename()) + SliceSuffix
 	for _, s := range ctx.api.Slices {
 		if s.Name == name {
 			if !equal(to, s.To) {
