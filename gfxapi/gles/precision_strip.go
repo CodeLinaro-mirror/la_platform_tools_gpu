@@ -30,26 +30,26 @@ import (
 // shader programs.
 func precisionStrip(d database.Database, l log.Logger) atom.Transformer {
 	s := gfxapi.NewState()
-	return atom.Transform("PrecisionStrip", func(id atom.ID, a atom.Atom, out atom.Writer) {
+	return atom.Transform("PrecisionStrip", func(i atom.ID, a atom.Atom, out atom.Writer) {
 		a.Mutate(s, d, l)
 		if cmd, ok := a.(*GlShaderSource); ok {
 			shader := getContext(s).Instances.Shaders.Get(cmd.Shader)
 
 			tree, err := glsl.Parse(shader.Source, ast.LangVertexShader)
 			if len(err) > 0 {
-				panic(fmt.Errorf("Failed to parse shader '%s': %s", shader.Source, err[0]))
+				panic(fmt.Errorf("Failed to parse shader source at atom %d '%s': %s", i, shader.Source, err[0]))
 			}
 
 			precisionStripVisit(tree)
 
 			src := fmt.Sprint(glsl.Formatter(tree))
 
-			out.Write(id,
+			out.Write(i,
 				NewGlShaderSource(cmd.Shader, 1, memory.Tmp.Base, 0).
 					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+8, src)).
 					AddRead(atom.Data(s.Architecture, d, l, memory.Tmp.Base+0, memory.Tmp.Base+8)))
 		} else {
-			out.Write(id, a)
+			out.Write(i, a)
 		}
 	})
 }
