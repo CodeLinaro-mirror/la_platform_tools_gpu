@@ -313,26 +313,9 @@
   {{else if IsCall         $}}{{Macro "Go.Call" $}}
   {{else if IsRead         $}}
   {{else if IsWrite        $}}
-  {{else if IsFence        $}}ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-  {{else if IsBranch       $}}if {{Macro "Go.Read" $.Condition}} {
-    {{Macro "Go.Block" $.True}}
-    {{if len $.False.Statements}}
-    } else {
-      {{Macro "Go.Block" $.False}}
-    {{end}}
-    }
-  {{else if IsSwitch $}}
-    switch {{Macro "Go.Read" $.Value}} {
-      {{range $c := $.Cases}}
-        case {{range $i, $cond := $c.Conditions}}§
-          {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
-          {{end}}:
-            {{Macro "Go.Block" $c.Block}}
-      {{end}}
-      default:
-        v := {{Macro "Go.Read" $.Value}}
-        return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
-    }
+  {{else if IsFence        $}}{{Macro "Go.Fence" $}}
+  {{else if IsBranch       $}}{{Macro "Go.Branch" $}}
+  {{else if IsSwitch       $}}{{Macro "Go.Switch" $}}
   {{else}}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
 {{end}}
@@ -376,6 +359,56 @@
   {{else}}
     externs{ϟs, ϟd, ϟl}.{{$.Target.Function.Name}}({{$args}})
   {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute a fence statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Fence"}}
+  {{AssertType $ "Fence"}}
+  ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+  {{if not (IsNil $.Statement)}}{{Macro "Go.Statement" $.Statement}}{{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute a branch statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Branch"}}
+  {{AssertType $ "Branch"}}
+  if {{Macro "Go.Read" $.Condition}} {
+    {{Macro "Go.Block" $.True}}
+  {{if len $.False.Statements}}
+  } else {
+    {{Macro "Go.Block" $.False}}
+  {{end}}
+  }
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  Emits the logic to execute a switch statement
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.Switch"}}
+  {{AssertType $ "Switch"}}
+  switch {{Macro "Go.Read" $.Value}} {
+    {{range $c := $.Cases}}
+      case {{range $i, $cond := $c.Conditions}}§
+        {{if $i}}, {{end}}{{Macro "Go.Read" $cond}}§
+        {{end}}:
+          {{Macro "Go.Block" $c.Block}}
+    {{end}}
+    default:
+      v := {{Macro "Go.Read" $.Value}}
+      return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
+  }
 {{end}}
 
 
@@ -584,7 +617,9 @@
 -------------------------------------------------------------------------------
 */}}
 {{define "Go.LocalNames"}}
-  {{if IsDeclareLocal $}}{{$.Local.Name}}{{end}}
+  {{if IsDeclareLocal $}}{{$.Local.Name}}
+  {{else if IsFence $}}{{Macro "Go.LocalNames" $.Statement}}
+  {{end}}
 {{end}}
 
 

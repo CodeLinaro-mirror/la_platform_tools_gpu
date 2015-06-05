@@ -95,6 +95,16 @@ type Return struct {
 	Value    Expression  // the value to be returned
 }
 
-// Fence is a marker to indicate a safe point between the last read and the first write.
-// It can be used to generate safe forwarding calls.
-type Fence struct{}
+// Fence is a marker to indicate the point between all statements to be
+// executed before (pre-fence) the call to the API function and all statements
+// to be executed after (post-fence) the call to the API function.
+//
+// The Statement member is the first statement that is classified as post-fence,
+// but may be nil if the fence is being added at the end of a function that has
+// no post operations.
+//
+// Note that some statements are classified as both pre-fence and post-fence,
+// and require logic to be executed either side of the API function call.
+type Fence struct {
+	Statement Node
+}

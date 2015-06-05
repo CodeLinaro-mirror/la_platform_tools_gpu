@@ -253,41 +253,71 @@
   {{else if IsWrite $}}
     {{Macro "Go.Read" $.Slice}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsCopy $}}
-    {{Macro "Go.Read" $.Dst}}.replayCopy({{Macro "Go.Read" $.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{Error "Copy statement found outside of a Fence"}}
   {{else if IsSliceAssign $}}
     {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
     {{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsFence $}}
-    {{$c := Global "CurrentCommand"}}
-    {{AssertType $c "Function"}}
-
-    {{/* Push all the parameters on the stack */}}
-    {{range $p := $c.CallParameters}}
-      {{$type := TypeOf $p}}
-      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-      {{Macro "PushInput" "Type" $type "Name" $name}}
-    {{end}}
-
-    {{/* Call the function */}}
-    ϟb.Call({{Macro "BuilderFunctionInfo" $c}})
-
-    {{/* Store the return value into a remapping table, if required.*/}}
-    {{$rty := TypeOf $c.Return}}
-    {{if (GetAnnotation $rty "replay_remap")}}
-      if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
-        if ptr, found := ϟb.Remappings[key]; !found {
-          ptr = ϟb.AllocateMemory({{Macro "Go.SizeOf" $rty}})
-          ϟb.Clone(0)
-          ϟb.Store(ptr)
-          ϟb.Remappings[key] = ptr
-        }
-      }
-    {{end}}
-
-    {{/* Apply the write memory observations */}}
-    {{Macro "Go.Statement.Default" $}}
+    {{Macro "Fence" $}}
+  {{else if IsReturn $}}{{/* no-op */}}
   {{else}}
     {{Macro "Go.Statement.Default" $}}
+  {{end}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
+  An override for the "Go.Fence" macro.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Fence"}}
+  {{AssertType $ "Fence"}}
+
+  {{$c := Global "CurrentCommand"}}
+  {{AssertType $c "Function"}}
+
+  {{if not (IsNil $.Statement)}}
+    {{if IsCopy $.Statement}}
+      {{/* Apply the fenced-copy read */}}
+      ϟdst, ϟsrc := {{Macro "Go.Read" $.Statement.Dst}}.Copy({{Macro "Go.Read" $.Statement.Src}}, ϟs, ϟd, ϟl)
+      ϟsrc.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{end}}
+  {{end}}
+
+  {{/* Push all the parameters on the stack */}}
+  {{range $p := $c.CallParameters}}
+    {{$type := TypeOf $p}}
+    {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+    {{Macro "PushInput" "Type" $type "Name" $name}}
+  {{end}}
+
+  {{/* Call the function */}}
+  ϟb.Call({{Macro "BuilderFunctionInfo" $c}})
+
+  {{/* Store the return value into a remapping table, if required */}}
+  {{$rty := TypeOf $c.Return}}
+  {{if (GetAnnotation $rty "replay_remap")}}
+    if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
+      if ptr, found := ϟb.Remappings[key]; !found {
+        ptr = ϟb.AllocateMemory({{Macro "Go.SizeOf" $rty}})
+        ϟb.Clone(0)
+        ϟb.Store(ptr)
+        ϟb.Remappings[key] = ptr
+      }
+    }
+  {{end}}
+
+  {{/* Merge the observed writes into the application pool */}}
+  ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+
+  {{/* Perform the fenced statement */}}
+  {{if not (IsNil $.Statement)}}
+    {{if IsCopy $.Statement}}
+      ϟdst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
+    {{else}}
+      {{Macro "Go.Statement" $.Statement}}
+    {{end}}
   {{end}}
 {{end}}
 
@@ -443,12 +473,6 @@
     func (s {{$slice_ty}}) replayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) []{{$el_ty}} {
       s.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
       return s.Read(ϟs, ϟd, ϟl)
-    }
-
-    func (dst {{$slice_ty}}) replayCopy(src {{$slice_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
-      dst, src = dst.Copy(src, ϟs, ϟd, ϟl)
-      src.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-      dst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     }
   {{end}}
 {{end}}
