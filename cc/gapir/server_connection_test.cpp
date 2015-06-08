@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-#include "mock_connection.h"
 #include "server_connection.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -44,18 +45,18 @@ const std::string replayId = "ABCDE";
 class ServerConnectionTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection = new MockConnection();
+        mConnection = new gapic::test::MockConnection();
         mServerConnection = createServerConnection(mConnection, replayId, 0);
     }
 
-    MockConnection* mConnection;
+    gapic::test::MockConnection* mConnection;
     std::unique_ptr<ServerConnection> mServerConnection;
     std::vector<uint8_t> mBuffer;
 };
 }  // anonymous namespace
 
 TEST(ServerConnectionTestStatic, Create) {
-    auto connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     uint32_t replayLength = 0x56003412;
     pushString(&connection->in, replayId);
     pushUint32(&connection->in, replayLength);
@@ -68,7 +69,7 @@ TEST(ServerConnectionTestStatic, Create) {
 }
 
 TEST(ServerConnectionTestStatic, CreateErrorReadReplayId) {
-    auto connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     pushUint8(&connection->in, 'A');
     // Replay id read failed
     auto svrConnection = ServerConnection::create(std::unique_ptr<gapic::Connection>(connection));

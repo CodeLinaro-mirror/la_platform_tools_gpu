@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef GAPIR_MOCK_CONNECTION_H
-#define GAPIR_MOCK_CONNECTION_H
+#ifndef GAPIC_MOCK_CONNECTION_H
+#define GAPIC_MOCK_CONNECTION_H
 
 #include <gapic/connection.h>
 
@@ -28,10 +28,10 @@
 
 #include <string.h>
 
-namespace gapir {
+namespace gapic {
 namespace test {
 
-class MockConnection : public gapic::Connection {
+class MockConnection : public Connection {
 public:
     MockConnection() : read_pos(0), out_limit(-1) {}
     virtual size_t send(const void* data, size_t size) {
@@ -68,6 +68,6 @@ public:
 };
 
 }  // namespace test
-}  // namespace gapir
+}  // namespace gapic
 
-#endif  // GAPIR_MOCK_CONNECTION_H
+#endif  // GAPIC_MOCK_CONNECTION_H

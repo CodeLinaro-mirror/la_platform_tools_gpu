@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-#include "mock_connection.h"
 #include "resource_provider.h"
 #include "resource_requester.h"
 #include "server_connection.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -41,12 +42,12 @@ namespace {
 class ResourceRequesterTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection = new MockConnection();
+        mConnection = new gapic::test::MockConnection();
         mServer = createServerConnection(mConnection, "", 0);
         mResourceProvider = ResourceRequester::create();
     }
 
-    MockConnection* mConnection;
+    gapic::test::MockConnection* mConnection;
     std::unique_ptr<ServerConnection> mServer;
     std::unique_ptr<ResourceProvider> mResourceProvider;
     std::vector<uint8_t> mBuffer;

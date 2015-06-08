@@ -15,7 +15,6 @@
  */
 
 #include "mock_connection.h"
-#include "test_utilities.h"
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -30,7 +29,7 @@ using ::testing::StrictMock;
 using ::testing::WithArg;
 using ::testing::ElementsAre;
 
-namespace gapir {
+namespace gapic {
 namespace test {
 namespace {
 
@@ -44,6 +43,24 @@ protected:
 
     std::unique_ptr<MockConnection> mConnection;
 };
+
+void pushBytes(std::vector<uint8_t>* buf, const std::vector<uint8_t>& v) {
+  buf->insert(buf->end(), v.begin(), v.end());
+}
+
+void pushString(std::vector<uint8_t>* buf, const std::string& str) {
+  for(char c : str) {
+      buf->push_back(c);
+  }
+  buf->push_back(0);
+}
+
+void pushString(std::vector<uint8_t>* buf, const char* str) {
+  for(char c = *str; c != 0; str++, c = *str) {
+      buf->push_back(c);
+  }
+  buf->push_back(0);
+}
 
 }  // anonymous namespace
 
@@ -84,4 +101,4 @@ TEST_F(ConnectionTest, ReadStringError) {
 }
 
 }  // namespace test
-}  // namespace gapir
+}  // namespace gapic

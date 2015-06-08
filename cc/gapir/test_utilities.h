@@ -29,10 +29,17 @@
 #include <utility>
 #include <vector>
 
+namespace gapic {
+namespace test {
+
+class MockConnection;
+
+}  // namespace test
+}  // namespace gapir
+
 namespace gapir {
 
 class ServerConnection;
-class MockConnection;
 
 namespace test {
 
@@ -64,12 +71,12 @@ std::vector<uint8_t> createReplayData(uint32_t stackSize, uint32_t volatileMemor
                                       const ResourceProvider::ResourceList& resources,
                                       const std::vector<uint32_t>& instructions);
 
-std::unique_ptr<ServerConnection> createServerConnection(MockConnection* connection,
-                                                       const std::string& replayId,
-                                                       uint32_t replayLength);
+std::unique_ptr<ServerConnection> createServerConnection(gapic::test::MockConnection* connection,
+                                                         const std::string& replayId,
+                                                         uint32_t replayLength);
 
 std::unique_ptr<ServerConnection> createServerConnection(const std::string& replayId,
-                                                       uint32_t replayLength);
+                                                         uint32_t replayLength);
 
 }  // namespace test
 }  // namespace gapir

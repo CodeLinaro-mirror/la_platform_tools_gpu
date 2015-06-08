@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-#include "mock_connection.h"
 #include "server_connection.h"
 #include "server_listener.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -42,19 +43,19 @@ const uint64_t MAX_MEMORY_SIZE = 1024;
 class ServerListenerTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        mConnection = new MockConnection();
+        mConnection = new gapic::test::MockConnection();
         mServerListener.reset(
             new ServerListener(std::unique_ptr<gapic::Connection>(mConnection), MAX_MEMORY_SIZE));
     }
 
-    MockConnection* mConnection;
+    gapic::test::MockConnection* mConnection;
     std::unique_ptr<ServerListener> mServerListener;
 };
 
 }  // anonymous namespace
 
 TEST_F(ServerListenerTest, AcceptConnection) {
-    auto clientConnection = new MockConnection();
+    auto clientConnection = new gapic::test::MockConnection();
     mConnection->connections.push(clientConnection);
     pushUint8(&clientConnection->in, ServerListener::REPLAY_REQUEST);
     pushString(&clientConnection->in, "");
@@ -68,8 +69,8 @@ TEST_F(ServerListenerTest, AcceptConnectionErrorAccept) {
 
 TEST_F(ServerListenerTest, AcceptConnectionErrorServerConnection) {
     std::string replayId = "Replay2";
-    auto clientConnection1 = new MockConnection();
-    auto clientConnection2 = new MockConnection();
+    auto clientConnection1 = new gapic::test::MockConnection();
+    auto clientConnection2 = new gapic::test::MockConnection();
     mConnection->connections.push(clientConnection1);
     mConnection->connections.push(clientConnection2);
     pushUint8(&clientConnection1->in, ServerListener::REPLAY_REQUEST);

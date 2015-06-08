@@ -15,12 +15,13 @@
  */
 
 #include "memory_manager.h"
-#include "mock_connection.h"
 #include "mock_resource_provider.h"
 #include "replay_request.h"
 #include "server_connection.h"
 #include "server_listener.h"
 #include "test_utilities.h"
+
+#include <gapic/mock_connection.h>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -59,7 +60,7 @@ TEST(ReplayRequestTestStatic, Create) {
     auto replayData = createReplayData(stackSize, volatileMemorySize, constantMemory, resources,
                                        instructionList);
 
-    auto connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     std::unique_ptr<StrictMock<MockResourceProvider>> resourceProvider(
             new StrictMock<MockResourceProvider>());
     pushString(&connection->in, replayId);
@@ -90,7 +91,7 @@ TEST(ReplayRequestTestStatic, Create) {
 
 TEST(ReplayRequestTestStatic, CreateErrorGet) {
     uint32_t replayLength = 255;
-    MockConnection* connection = new MockConnection();
+    auto connection = new gapic::test::MockConnection();
     std::unique_ptr<StrictMock<MockResourceProvider>> resourceProvider(
             new StrictMock<MockResourceProvider>());
 
