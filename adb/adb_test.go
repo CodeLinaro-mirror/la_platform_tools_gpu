@@ -193,7 +193,7 @@ Activity Resolver Table:
 		for j := 0; j < count; j++ {
 			var got, expected *Action
 			if j < len(actions) {
-				got = &actions[j]
+				got = actions[j]
 			}
 			if j < len(c.a) {
 				expected = &c.a[j]

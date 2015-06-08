@@ -22,11 +22,17 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 
 	"android.googlesource.com/platform/tools/gpu/build"
 )
 
+// ErrADBNotFound is returned when the ADB executable is not found.
 var ErrADBNotFound = errors.New("ADB command not found on PATH")
+
+// ErrDeviceUnauthorized is returned by ADB commands when the device has not
+// authorized ADB debugging. Check the confirmation dialog on the device.
+var ErrDeviceUnauthorized = errors.New("Device unauthorized")
 
 // The path to the adb executable, or an empty string if the adb executable was
 // not found.
@@ -53,30 +59,15 @@ func init() {
 	}
 }
 
-func run(args ...string) (string, error) {
-	buf := &bytes.Buffer{}
-	cmd := exec.Command(adb, args...)
-	cmd.Stdout = buf
-	err := cmd.Run()
-	return string(buf.Bytes()), err
-}
-
 // Cmd represents a command that can be run on an Android device.
 type Cmd struct {
-	// Path is the path of the command to run.
+	// Path is the path of the command to run on the device.
 	//
-	// This is the only field that must be set to a non-zero
-	// value. If Path is relative, it is evaluated relative
-	// to Dir.
+	// If the string is empty, the command is treated as a ADB command for Device.
 	Path string
 
 	// Args holds the command line arguments to pass to the command.
 	Args []string
-
-	// Dir specifies the working directory of the command.
-	// If Dir is the empty string, Run runs the command in the
-	// calling process's current directory.
-	Dir string
 
 	// The device this command should be run on. If nil, then any one of the
 	// attached devices will execute the command.
@@ -101,7 +92,10 @@ func (c *Cmd) Run() error {
 	if c.Device != nil {
 		args = append(args, "-s", c.Device.Serial)
 	}
-	args = append(append(args, "shell", c.Path), c.Args...)
+	if c.Path != "" {
+		args = append(args, "shell", c.Path)
+	}
+	args = append(args, c.Args...)
 	cmd := exec.Command(adb, args...)
 	cmd.Stdout = c.Stdout
 	cmd.Stderr = c.Stderr
@@ -115,12 +109,22 @@ func (c *Cmd) Run() error {
 func (c *Cmd) Call() (string, error) {
 	clone := *c // Don't change c's Stdout
 
-	buf := &bytes.Buffer{}
+	stdout := &bytes.Buffer{}
 	if clone.Stdout != nil {
-		clone.Stdout = io.MultiWriter(clone.Stdout, buf)
+		clone.Stdout = io.MultiWriter(clone.Stdout, stdout)
 	} else {
-		clone.Stdout = buf
+		clone.Stdout = stdout
+	}
+
+	stderr := &bytes.Buffer{}
+	if clone.Stdout != nil {
+		clone.Stderr = io.MultiWriter(clone.Stdout, stderr)
+	} else {
+		clone.Stderr = stderr
 	}
 	err := clone.Run()
-	return string(buf.Bytes()), err
+	if err != nil && strings.Contains(stderr.String(), "error: device unauthorized.") {
+		err = ErrDeviceUnauthorized
+	}
+	return stdout.String(), err
 }

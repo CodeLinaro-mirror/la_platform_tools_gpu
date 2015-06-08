@@ -45,6 +45,10 @@ func (p NamedAbstractSocket) adbForwardString() string {
 
 // Forward will forward the specified device Port to the specified local Port.
 func (d *Device) Forward(local, device Port) error {
-	_, err := run("-s", d.Serial, "forward", local.adbForwardString(), device.adbForwardString())
+	cmd := Cmd{Args: []string{
+		"-s", d.Serial,
+		"forward", local.adbForwardString(), device.adbForwardString(),
+	}}
+	_, err := cmd.Call()
 	return err
 }
