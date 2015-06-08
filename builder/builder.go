@@ -262,6 +262,12 @@ func uniformScale(width, height, maxWidth, maxHeight uint32) (w, h uint32) {
 
 // build writes to out the captureFramebufferDimensions resource resulting from the given getCaptureFramebufferDimensions request.
 func (request *getCaptureFramebufferDimensions) build(d database.Database, l log.Logger, out binary.Object) error {
+	var id atom.ID
+	defer func() {
+		if err := recover(); err != nil {
+			panic(fmt.Errorf("Panic at atom %d: %v", id, err))
+		}
+	}()
 	capture, err := loadCapture(request.Capture, d, l)
 	if err != nil {
 		return err
@@ -277,6 +283,7 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 
 	s := gfxapi.NewState()
 	for i, a := range atoms {
+		id = atom.ID(i)
 		if err := a.Mutate(s, d, l); err != nil {
 			return err
 		}
@@ -288,7 +295,7 @@ func (request *getCaptureFramebufferDimensions) build(d database.Database, l log
 				continue
 			}
 			if currentDims == nil || width != currentDims.Width || height != currentDims.Height {
-				currentDims = &atomFramebufferDimensions{From: atom.ID(i), Width: width, Height: height}
+				currentDims = &atomFramebufferDimensions{From: id, Width: width, Height: height}
 				captureFbDims.Dimensions = append(captureFbDims.Dimensions, *currentDims)
 			}
 		}
