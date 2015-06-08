@@ -111,11 +111,21 @@ cmd void cmd_void_3_strings(string a, string b, string c) {}
 ////////////////////////////////////////////////////////////////
 // Commands with input arrays
 ////////////////////////////////////////////////////////////////
-cmd void cmd_void_3_in_arrays(u8* a, u8** b, int* c) {
+cmd void cmd_void_3_in_arrays(u8* a, u32* b, int* c) {
   buf = make!u8(10)
   read(b[5:15])
 	read(c[5:15])
 	copy(buf, a[5:25]) // only 10 elements should be copied
+}
+
+////////////////////////////////////////////////////////////////
+// Commands with input of arrays of pointers
+////////////////////////////////////////////////////////////////
+cmd void cmd_void_in_array_of_pointers(char** a, s32 count) {
+  slice := a[0:count]
+  for i in (0 .. count) {
+    x := slice[i][0]
+  }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -184,7 +194,7 @@ cmd string cmd_string()  { return "" }
 cmd void*  cmd_pointer() { return ? }
 
 ////////////////////////////////////////////////////////////////
-// Commands with remapped input arguments
+// Commands with remapped arguments
 ////////////////////////////////////////////////////////////////
 cmd void cmd_void_3_remapped(remapped a, remapped b, remapped c) {}
 
@@ -200,3 +210,5 @@ cmd void cmd_void_out_array_of_unknown_remapped(remapped* a) {
     slice[i] = unknown
   }
 }
+
+cmd remapped cmd_remapped() { return ? }

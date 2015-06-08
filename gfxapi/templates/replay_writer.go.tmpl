@@ -25,6 +25,7 @@
     "fmt"
     "io"
     "io/ioutil"
+    "strings"
 
     "android.googlesource.com/platform/tools/gpu/atom"
     "android.googlesource.com/platform/tools/gpu/binary"
@@ -39,18 +40,6 @@
   {{Global "Go.Statement.Override" "Statement"}}
   {{Global "Go.Read.Override"      "Read"}}
 
-  type postCall []func()
-
-  func (p *postCall) add(f func()) {
-    *p = append(*p, f)
-  }
-
-  func (p *postCall) exec() {
-    for _, f := range *p {
-      f()
-    }
-  }
-
   func loadRemap(ϟb *builder.Builder, key interface{}, val value.Value) {
     if ptr, found := ϟb.Remappings[key]; found {
       ϟb.Load(val.Type(), ptr)
@@ -58,15 +47,6 @@
       ptr = ϟb.AllocateMemory(uint64(val.Type().Size(ϟb.Architecture().PointerSize)))
       ϟb.Push(val) // We have an input to an unknown id, use the unmapped value.
       ϟb.Clone(0)
-      ϟb.Store(ptr)
-      ϟb.Remappings[key] = ptr
-    }
-  }
-
-  func storeRemap(ϟb *builder.Builder, key interface{}, val value.Pointer, ty protocol.Type) {
-    if ptr, found := ϟb.Remappings[key]; !found {
-      ptr = ϟb.AllocateMemory(uint64(ty.Size(ϟb.Architecture().PointerSize)))
-      ϟb.Load(ty, val)
       ϟb.Store(ptr)
       ϟb.Remappings[key] = ptr
     }
@@ -98,28 +78,12 @@
     func (ϟa *{{$name}}) {{if GetAnnotation $ "replay_custom"}}default{{end}}Replay(§
         ϟi atom.ID, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) error {
     ϟc := getState(ϟs)
-    ϟp := &postCall{}
     _ = ϟc
 
-    ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+    {{Global "CurrentCommand" $}}
 
     {{/* Simulate the call */}}
-    {{Macro "Go.Block" $.Block}}
-
-    ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
-
-    {{/* Push all the parameters on the stack */}}
-    {{range $p := $.CallParameters}}
-      {{$type := TypeOf $p}}
-      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
-      {{Macro "PushInput" "Type" $type "Name" $name}}
-    {{end}}
-
-    {{/* Call the function */}}
-    ϟb.Call({{Macro "BuilderFunctionInfo" $}})
-
-    {{/* Perform post-call actions*/}}
-    ϟp.exec()
+    {{Macro "Go.CommandLogic" $}}
 
     return nil
   }
@@ -287,12 +251,41 @@
   {{if IsRead $}}
     {{Macro "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsWrite $}}
-    {{Macro "Go.Read" $.Slice}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+    {{Macro "Go.Read" $.Slice}}.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsCopy $}}
-    {{Macro "Go.Read" $.Dst}}.replayCopy({{Macro "Go.Read" $.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+    {{Macro "Go.Read" $.Dst}}.replayCopy({{Macro "Go.Read" $.Src}}, ϟa, ϟs, ϟd, ϟl, ϟb)
   {{else if IsSliceAssign $}}
     {{if ne $.Operator "="}}{{Error "Compound assignments to pointers are not supported (%s)" $.Operator}}{{end}}
-    {{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+    {{Macro "Go.Read" $.To.Slice}}.Index({{Macro "Go.Read" $.To.Index}}, ϟs).replayWrite({{Macro "Go.Read" $.Value}}, ϟa, ϟs, ϟd, ϟl, ϟb)
+  {{else if IsFence $}}
+    {{$c := Global "CurrentCommand"}}
+    {{AssertType $c "Function"}}
+
+    {{/* Push all the parameters on the stack */}}
+    {{range $p := $c.CallParameters}}
+      {{$type := TypeOf $p}}
+      {{$name := print "ϟa." (Macro "Go.Parameter" $p)}}
+      {{Macro "PushInput" "Type" $type "Name" $name}}
+    {{end}}
+
+    {{/* Call the function */}}
+    ϟb.Call({{Macro "BuilderFunctionInfo" $c}})
+
+    {{/* Store the return value into a remapping table, if required.*/}}
+    {{$rty := TypeOf $c.Return}}
+    {{if (GetAnnotation $rty "replay_remap")}}
+      if key, remap := ϟa.Result.remap(ϟa, ϟs); remap {
+        if ptr, found := ϟb.Remappings[key]; !found {
+          ptr = ϟb.AllocateMemory({{Macro "Go.SizeOf" $rty}})
+          ϟb.Clone(0)
+          ϟb.Store(ptr)
+          ϟb.Remappings[key] = ptr
+        }
+      }
+    {{end}}
+
+    {{/* Apply the write memory observations */}}
+    {{Macro "Go.Statement.Default" $}}
   {{else}}
     {{Macro "Go.Statement.Default" $}}
   {{end}}
@@ -312,6 +305,22 @@
     {{else}}
       replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
     {{end}}
+  {{else if IsCast $}}
+    {{$src_ty := $.Object | TypeOf | Underlying | Unpack}}
+    {{$dst_ty := $.Type | Underlying}}
+    {{$src    := Macro "Go.Read" $.Object}}
+
+    {{/* char[] -> string */}}
+    {{if and (IsSlice $src_ty) (IsString $dst_ty)}}
+      string({{$src}}.replayRead(ϟa, ϟs, ϟd, ϟl, ϟb))
+    {{/* char* -> string */}}
+    {{else if and (IsPointer $src_ty) (IsString $dst_ty)}}
+      strings.TrimRight(string({{$src}}.StringSlice(ϟs, ϟd, ϟl, true).replayRead(ϟa, ϟs, ϟd, ϟl, ϟb)), "\x00")
+    {{else}}
+      {{Macro "Go.Cast" $}}
+    {{end}}
+  {{else if IsClone $}}
+    {{Macro "Go.Read" $.Slice}}.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb).Clone(ϟs)
   {{else}}
     {{Macro "Go.Read.Default" $}}
   {{end}}
@@ -343,9 +352,9 @@
       return p.Read(ϟs, ϟd, ϟl)
     }
 
-    func (p {{$ptr_ty}}) replayWrite(value {{$el_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder, ϟp *postCall) {
+    func (p {{$ptr_ty}}) replayWrite(value {{$el_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
       p.Write(value, ϟs)
-      p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+      p.Slice(0, 1, ϟs).onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     }
   {{end}}
 
@@ -373,7 +382,7 @@
   {{$el_ty      := Macro "Go.Type" $s.To               }}
   {{$el_is_void := IsVoid ($s.To | Underlying | Unpack)}}
 
-  func (s {{$slice_ty}}) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
+  func (s {{$slice_ty}}) onReplayRead(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
     if s.Pool == memory.ApplicationPool {
       s.replayMap(ϟa, ϟs, ϟd, ϟl, ϟb)
       {{if (GetAnnotation $s.To "replay_remap")}}
@@ -387,27 +396,40 @@
           ϟb.Store(ptr)
           ptr += step
         }
+      {{else if IsPointer ($s.To | Underlying)}}
+        ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
+        for _, v := range s.Read(ϟs, ϟd, ϟl) {
+          ϟb.Push({{Macro "Value" "Type" $s.To "Name" "v"}})
+          ϟb.Store(ptr)
+          ptr += step
+        }
       {{else}}
         ϟb.Write(s.Range(ϟs), s.ResourceID(ϟs, ϟd, ϟl))
       {{end}}
     }
+    return s
   }
 
-  func (s {{$slice_ty}}) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder, ϟp *postCall) {
+  func (s {{$slice_ty}}) onReplayWrite(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {{$slice_ty}} {
     if s.Pool == memory.ApplicationPool {
       ϟb.MapMemory(s.Root.Range(uint64(s.Range(ϟs).End() - s.Root)))
       {{if (GetAnnotation $s.To "replay_remap")}}
-        ϟp.add(func() {
-          ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(s.ElementSize(ϟs))
-          for _, v := range s.Read(ϟs, ϟd, ϟl) {
-            if key, remap := v.remap(ϟa, ϟs); remap {
-              storeRemap(ϟb, key, ptr, {{Macro "BuilderType" $s.To}})
+        size := s.ElementSize(ϟs)
+        ptr, step := value.VolatileCapturePointer(s.Base), value.VolatileCapturePointer(size)
+        for _, v := range s.Read(ϟs, ϟd, ϟl) {
+          if key, remap := v.remap(ϟa, ϟs); remap {
+            if _, found := ϟb.Remappings[key]; !found {
+              dst := ϟb.AllocateMemory(size)
+              ϟb.Load({{Macro "BuilderType" $s.To}}, ptr)
+              ϟb.Store(dst)
+              ϟb.Remappings[key] = dst
             }
-            ptr += step
           }
-        })
+          ptr += step
+        }
       {{end}}
     }
+    return s
   }
 
   func (s {{$slice_ty}}) replayMap(ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
@@ -423,10 +445,10 @@
       return s.Read(ϟs, ϟd, ϟl)
     }
 
-    func (dst {{$slice_ty}}) replayCopy(src {{$slice_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder, ϟp *postCall) {
+    func (dst {{$slice_ty}}) replayCopy(src {{$slice_ty}}, ϟa atom.Atom, ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger, ϟb *builder.Builder) {
       dst, src = dst.Copy(src, ϟs, ϟd, ϟl)
       src.onReplayRead(ϟa, ϟs, ϟd, ϟl, ϟb)
-      dst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb, ϟp)
+      dst.onReplayWrite(ϟa, ϟs, ϟd, ϟl, ϟb)
     }
   {{end}}
 {{end}}

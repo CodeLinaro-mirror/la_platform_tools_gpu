@@ -51,9 +51,7 @@
       func (ϟa *{{Macro "Go.CmdName" $c}}) Mutate(ϟs *gfxapi.State, ϟd database.Database, ϟl log.Logger) error {
         ϟc := getState(ϟs)
         _ = ϟc
-        ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
-        {{Macro "Go.Block" $c.Block}}
-        ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
+        {{Macro "Go.CommandLogic" $c}}
         return nil
       }
     {{end}}

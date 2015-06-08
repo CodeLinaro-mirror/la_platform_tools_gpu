@@ -50,5 +50,4 @@ func Replay(
 	default:
 		return a.Mutate(s, d, l)
 	}
-
 }

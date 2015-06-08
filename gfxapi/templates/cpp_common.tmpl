@@ -381,7 +381,7 @@
   {{else if IsBinaryOp         $}}({{Macro "C++.Read" $.LHS}}) {{$.Operator}} ({{Macro "C++.Read" $.RHS}})
   {{else if IsCast             $}}{{Macro "C++.Cast" $}}
   {{else if IsCall             $}}{{Macro "C++.Call" $}}
-  {{else if IsUnknown          $}}{{Macro "C++.Read" $.Inferred}}
+  {{else if IsUnknown          $}}{{Global "C++.InferredExpression" "1"}}{{Macro "C++.Read" $.Inferred}}{{Global "C++.InferredExpression" ""}}
   {{else if IsObserved         $}}{{Macro "C++.Read" $.Parameter}}
   {{else if IsMember           $}}{{Macro "C++.Dereference" $.Object}}m{{$.Field.Name}}
   {{else if IsGlobal           $}}this->{{$.Name}}

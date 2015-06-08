@@ -16,86 +16,79 @@ package resolver
 
 import "android.googlesource.com/platform/tools/gpu/api/semantic"
 
+type order int
+
+const (
+	pre  = order(1)
+	post = order(2)
+)
+
+func (o order) pre() bool  { return (o & pre) != 0 }
+func (o order) post() bool { return (o & post) != 0 }
+
 type fenceTracker struct {
-	ctx  *context
-	post bool
+	ctx    *context
+	orders map[semantic.Node]order
 }
 
 func addFence(ctx *context, block *semantic.Block) {
-	t := fenceTracker{ctx: ctx}
-	if !t.boundary(block) {
+	t := fenceTracker{ctx: ctx, orders: map[semantic.Node]order{}}
+	t.order(block)
+	if !t.insertFence(block) {
 		block.Statements = append(block.Statements, &semantic.Fence{})
 	}
 }
 
-func (t *fenceTracker) scan(n semantic.Node) {
+func (t *fenceTracker) order(n semantic.Node) order {
+	o := order(0)
+	switch n := n.(type) {
+	case *semantic.Read:
+		o |= pre
+	case *semantic.Unknown:
+		o |= post
+	case *semantic.Write:
+		o |= post | t.order(n.Slice)
+	case *semantic.Copy:
+		o |= pre | t.order(n.Src)
+	case *semantic.SliceIndex:
+		o |= pre | t.order(n.Index) | t.order(n.Slice)
+	case *semantic.SliceAssign:
+		o |= post | t.order(n.Value)
+	default:
+		semantic.Visit(n, func(c semantic.Node) { o |= t.order(c) })
+	}
+	t.orders[n] = o
+	return o
+}
+
+func (t *fenceTracker) insertFence(n semantic.Node) (inserted bool) {
 	switch n := n.(type) {
 	case *semantic.Block:
 		for i := 0; i < len(n.Statements); i++ {
 			s := n.Statements[i]
-			if t.boundary(s) {
-				// first post operation detected, insert fence marker here
-				n.Statements = append(n.Statements, nil)
-				copy(n.Statements[i+1:], n.Statements[i:])
-				n.Statements[i] = &semantic.Fence{}
-				// step past the newly inserted fence
-				i++
-				// Continue calling boundary() on later statements to detect post-after-pre errors.
+			o := t.orders[s]
+			switch {
+			case inserted:
+				if o.pre() {
+					t.ctx.errorf(s, "pre-statement after fence")
+					return true
+				}
+			case o.post():
+				if !o.pre() || !t.insertFence(s) {
+					// first post operation detected, insert fence marker here
+					n.Statements = append(n.Statements, nil)
+					copy(n.Statements[i+1:], n.Statements[i:])
+					n.Statements[i] = &semantic.Fence{}
+					i++ // step past the newly inserted fence
+					inserted = true
+				}
 			}
 		}
-	case *semantic.Branch:
-		t.scan(n.Condition)
-		if t.boundary(n.True) {
-			t.ctx.errorf(n.True, "pre-post boundary in true condition")
-		}
-		if n.False != nil {
-			if t.boundary(n.False) {
-				t.ctx.errorf(n.False, "pre-post boundary in condition")
-			}
-		}
-	case *semantic.Select, *semantic.Switch, *semantic.Iteration:
-		ct := *t
-		semantic.Visit(n, t.scan)
-		if ct.post && !t.post {
-			t.post = true
-			t.ctx.errorf(n, "pre-post boundary in %T", n)
-		}
-	case *semantic.Copy:
-		semantic.Visit(n, t.scan)
-		if t.post {
-			t.ctx.errorf(n, "copy after fence")
-		}
-		t.post = true
-	case *semantic.Read:
-		semantic.Visit(n, t.scan)
-		if t.post {
-			t.ctx.errorf(n, "read after fence")
-		}
-	case *semantic.Unknown:
-		t.post = true
-	case *semantic.Write:
-		semantic.Visit(n, t.scan)
-		t.post = true
-	case *semantic.SliceIndex:
-		semantic.Visit(n, t.scan)
-		if t.post {
-			t.ctx.errorf(n, "slice index after fence")
-		}
-	case *semantic.SliceAssign:
-		semantic.Visit(n.To, t.scan)
-		t.scan(n.Value)
-		t.post = true
-	default:
-		semantic.Visit(n, t.scan)
-	}
-}
-
-func (t *fenceTracker) boundary(n semantic.Node) bool {
-	ct := *t
-	ct.scan(n)
-	if ct.post && !t.post {
-		t.post = true
+		return inserted
+	case *semantic.Iteration, *semantic.Switch, *semantic.Branch:
+		t.ctx.errorf(n, "fence not permitted in %T", n)
 		return true
+	default:
+		return false
 	}
-	return false
 }

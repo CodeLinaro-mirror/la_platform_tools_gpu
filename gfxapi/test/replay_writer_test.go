@@ -155,6 +155,145 @@ func TestOperationsOpCall_NoIn_NoOut(t *testing.T) {
 	})
 }
 
+func TestOperationsOpCall_Clone(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 7, 8, 9})
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdClone(0x100000, 5).AddRead(rng, id),
+		},
+		expected: expected{
+			resources: []binary.ID{id},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.Resource{ID: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdClone.ID},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_Make(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdMake(5),
+		},
+		expected: expected{
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdMake.ID},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_Copy(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 7, 8, 9})
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdCopy(0x100000, 5).AddRead(rng, id),
+		},
+		expected: expected{
+			resources: []binary.ID{id},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.Resource{ID: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdCopy.ID},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_CharSliceToString(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	rng, id := atom.Data(a, d, l, 0x100000, []uint8{5, 6, 0, 8, 9})
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdCharsliceToString(0x100000, 5).AddRead(rng, id),
+		},
+		expected: expected{
+			resources: []binary.ID{id},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.Resource{ID: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdCharsliceToString.ID},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_CharPtrToString(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	_, id := atom.Data(a, d, l, 0x100000, []uint8{'g', 'o', 'o', 'd', 0})
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdCharptrToString(0x100000).
+				AddRead(atom.Data(a, d, l, 0x100000, []uint8{'g', 'o', 'o', 'd', 0, 'd', 'a', 'y'})),
+		},
+		expected: expected{
+			resources: []binary.ID{id},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.Resource{ID: 0},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0},
+				opcode.Call{FunctionID: funcInfoCmdCharptrToString.ID},
+			},
+		},
+	})
+}
+
 func TestOperationsOpCall_Unknowns(t *testing.T) {
 	d, l := database.InMemory(), log.Testing(t)
 	a := device.Architecture{
@@ -309,7 +448,7 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 	aRng, aID := atom.Data(a, d, l, 0x40000+5* /* sizeof(u8)  */ 1, []uint8{
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
-	bRng, bID := atom.Data(a, d, l, 0x50000+5* /* sizeof(u8*) */ 4, []memory.Pointer{
+	bRng, bID := atom.Data(a, d, l, 0x50000+5* /* sizeof(u32) */ 4, []uint32{
 		5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	})
 	cRng, cID := atom.Data(a, d, l, 0x60000+5* /* sizeof(int) */ 8, []int{
@@ -346,6 +485,71 @@ func TestOperationsOpCall_3_In_Arrays(t *testing.T) {
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x10},
 				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x50},
 				opcode.Call{PushReturn: false, FunctionID: funcInfoCmdVoid3InArrays.ID},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_InArrayOfPointers(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+	aRng, aID := atom.Data(a, d, l, 0x100000, []uint8{10})
+	bRng, bID := atom.Data(a, d, l, 0x200000, []uint8{20})
+	cRng, cID := atom.Data(a, d, l, 0x300000, []uint8{40})
+
+	pRng, pID := atom.Data(a, d, l, 0x500000, []memory.Pointer{
+		0x300000, 0x200000, 0x100000, 0x200000, 0x300000,
+	})
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdVoidInArrayOfPointers(0x500000, 5).
+				AddRead(aRng, aID). // 0x100000: 0x00
+				AddRead(bRng, bID). // 0x200000: 0x04
+				AddRead(cRng, cID). // 0x300000: 0x08
+				AddRead(pRng, pID), // 0x500000: 0x0c, 0x10, 0x14, 0x18, 0x1c
+		},
+		expected: expected{
+			resources: []binary.ID{cID, bID, aID},
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+
+				// TODO: Collate sequential reads / writes to reduce 5 Resource opcodes
+				// to one.
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x0c},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.Resource{ID: 0},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.StoreV{Address: 0x10},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.Resource{ID: 1},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
+				opcode.StoreV{Address: 0x14},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x00},
+				opcode.Resource{ID: 2},
+
+				// TODO: Resource loads below are redundant
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.StoreV{Address: 0x18},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x04},
+				opcode.Resource{ID: 1},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.StoreV{Address: 0x1c},
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x08},
+				opcode.Resource{ID: 0},
+
+				opcode.PushI{DataType: protocol.TypeVolatilePointer, Value: 0x0c},
+				opcode.PushI{DataType: protocol.TypeInt32, Value: 5},
+				opcode.Call{FunctionID: funcInfoCmdVoidInArrayOfPointers.ID},
 			},
 		},
 	})
@@ -829,6 +1033,44 @@ func TestOperationsOpCall_OutArrayOfUnknownRemapped(t *testing.T) {
 				// param[3] --> remap[2]
 				opcode.LoadV{DataType: protocol.TypeUint32, Address: pbase + 4*3},
 				opcode.StoreV{Address: tbase + 4*2},
+			},
+		},
+	})
+}
+
+func TestOperationsOpCall_Remapped(t *testing.T) {
+	d, l := database.InMemory(), log.Testing(t)
+	a := device.Architecture{
+		PointerAlignment: 4,
+		PointerSize:      4,
+		IntegerSize:      4,
+		ByteOrder:        endian.Little,
+	}
+
+	check(t, a, d, l, test{
+		atoms: []atom.Atom{
+			NewCmdRemapped(200),
+			NewCmdVoid3Remapped(100, 200, 300),
+		},
+		expected: expected{
+			opcodes: []interface{}{
+				opcode.Label{Value: 0},
+
+				opcode.Call{PushReturn: true, FunctionID: funcInfoCmdRemapped.ID},
+				opcode.StoreV{Address: 0x0},
+
+				opcode.Label{Value: 1},
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 100},
+				opcode.Clone{Index: 0},
+				opcode.StoreV{Address: 0x4},
+
+				opcode.LoadV{DataType: protocol.TypeUint32, Address: 0x00},
+
+				opcode.PushI{DataType: protocol.TypeUint32, Value: 300},
+				opcode.Clone{Index: 0},
+				opcode.StoreV{Address: 0x8},
+
+				opcode.Call{FunctionID: funcInfoCmdVoid3Remapped.ID},
 			},
 		},
 	})

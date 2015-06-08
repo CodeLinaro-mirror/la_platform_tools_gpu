@@ -254,6 +254,19 @@
 
 {{/*
 -------------------------------------------------------------------------------
+  Emits the Go logic to simulate the given command.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Go.CommandLogic"}}
+  {{AssertType $ "Function"}}
+
+  ϟa.observations.ApplyReads(ϟs.Memory[memory.ApplicationPool])
+  {{Macro "Go.Block" $.Block}}
+{{end}}
+
+
+{{/*
+-------------------------------------------------------------------------------
   Emits all the statements in the given block
 -------------------------------------------------------------------------------
 */}}
@@ -300,7 +313,7 @@
   {{else if IsCall         $}}{{Macro "Go.Call" $}}
   {{else if IsRead         $}}
   {{else if IsWrite        $}}
-  {{else if IsFence        $}}
+  {{else if IsFence        $}}ϟa.observations.ApplyWrites(ϟs.Memory[memory.ApplicationPool])
   {{else if IsBranch       $}}if {{Macro "Go.Read" $.Condition}} {
     {{Macro "Go.Block" $.True}}
     {{if len $.False.Statements}}
@@ -317,9 +330,8 @@
             {{Macro "Go.Block" $c.Block}}
       {{end}}
       default:
-        // TODO: better unmatched handling
         v := {{Macro "Go.Read" $.Value}}
-        fmt.Printf("Error: Missing switch case handler for value %T %v", v, v)
+        return fmt.Errorf("Missing switch case handler for value %T %v", v, v)
     }
   {{else}}{{Error "unsupported statement %T: %v" $ $}}
   {{end}}
