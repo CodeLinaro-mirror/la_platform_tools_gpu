@@ -302,7 +302,7 @@
   {{else if IsRead      $}}read({{Macro "C++.Read" $.Slice}});
   {{else if IsWrite     $}}write({{Macro "C++.Read" $.Slice}});
   {{else if IsCopy      $}}copy({{Macro "C++.Read" $.Dst}}, {{Macro "C++.Read" $.Src}});
-  {{else if IsFence     $}}
+  {{else if IsFence     $}}{{if not (IsNil $.Statement)}}{{Macro "C++.Statement" $.Statement}}{{end}}
   {{else                 }}{{Error "unsupported statement %T: %+v" $ $}}
   {{end}}
 {{end}}

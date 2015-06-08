@@ -76,9 +76,12 @@ protected:
     inline void write(const Slice<T>& dst, uint64_t i, T value);
 
     // copy copies N elements from src to dst, where N is the smaller of src.count() and
-    // dst.count(). src is observed as a read operation and dst is observed as a write operation.
+    // dst.count().
+    // copy observes the sub-slice of src as a read operation.
+    // The sub-slice of dst is returned so that the write observation can be made after the call to
+    // the imported function.
     template <typename T>
-    inline void copy(const Slice<T>& dst, const Slice<T>& src);
+    inline Slice<T> copy(const Slice<T>& dst, const Slice<T>& src);
 
     // clone observes src as a read operation and returns a copy of src in a new Pool.
     template<typename T>
@@ -155,7 +158,7 @@ inline void SpyBase::write(const Slice<T>& dst, uint64_t index, T value) {
 }
 
 template <typename T>
-inline void SpyBase::copy(const Slice<T>& dst, const Slice<T>& src) {
+inline Slice<T> SpyBase::copy(const Slice<T>& dst, const Slice<T>& src) {
     read(src);
     if (!dst.isApplicationPool()) { // The spy must not mutate data in the application pool.
         uint64_t c = (src.count() < dst.count()) ? src.count() : dst.count();
@@ -163,7 +166,7 @@ inline void SpyBase::copy(const Slice<T>& dst, const Slice<T>& src) {
           dst[i] = src[i];
         }
     }
-    write(dst);
+    return dst;
 }
 
 template<typename T>

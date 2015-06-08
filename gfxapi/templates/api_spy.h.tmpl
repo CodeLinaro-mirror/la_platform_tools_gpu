@@ -121,10 +121,12 @@
 
   inline {{Macro "C++.ReturnType" $}} {{$spyname}}::{{$name}}({{Macro "C++.CallParameters" $}}) {
     GAPID_INFO("{{$name}}()\n");
-
-    {{Macro "CallImport" $}} {{/* TODO: Call this between all API reads and writes*/}}
+    {{if not (IsVoid $.Return.Type)}}¶
+      {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
+    {{end}}
 ¶
     do {
+      {{Global "CurrentCommand" $}}
       {{Macro "C++.Block" $.Block}}
     } while(false);
 ¶
@@ -138,30 +140,6 @@
       return result;
     {{end}}
   }
-{{end}}
-
-
-{{/*
--------------------------------------------------------------------------------
-  Emits the C++ logic to call the imported (real driver) function.
--------------------------------------------------------------------------------
-*/}}
-{{define "CallImport"}}
-  {{AssertType $ "Function"}}
-
-  {{$name      := Macro "CmdName" $}}
-  {{$args      := Macro "C++.CallArguments" $}}
-  {{$synthetic := GetAnnotation $ "synthetic"}}
-
-  {{if not (IsVoid $.Return.Type)}}
-    {{if $synthetic}}
-      {{Macro "C++.ReturnType" $}} result = {{Macro "C++.Null" (TypeOf $.Return)}};
-    {{else}}
-      {{Macro "C++.ReturnType" $}} result = mImports.{{$name}}({{$args}});
-    {{end}}
-  {{else}}
-    {{if not $synthetic}}mImports.{{$name}}({{$args}});{{end}}
-  {{end}}
 {{end}}
 
 
@@ -210,15 +188,46 @@
 
 {{/*
 -------------------------------------------------------------------------------
-  Override for the C++.Statement macro. Returns are translated to break;
-  all other statements are delegated to "C++.Statement.Default".
+  Override for the "C++.Statement" macro.
 -------------------------------------------------------------------------------
 */}}
 {{define "Statement"}}
-  {{if IsReturn $}}
-    break;
-  {{else}}
-    {{Macro "C++.Statement.Default" $}}
+  {{     if IsReturn $}}break;
+  {{else if IsFence  $}}{{Macro "Fence" $}}
+  {{else if IsCopy   $}}{{Error "Copy statement found outside of a Fence"}}
+  {{else              }}{{Macro "C++.Statement.Default" $}}
   {{end}}
 {{end}}
 
+
+{{/*
+-------------------------------------------------------------------------------
+  An override for the "C++.Fence" macro.
+-------------------------------------------------------------------------------
+*/}}
+{{define "Fence"}}
+  {{AssertType $ "Fence"}}
+
+  {{$c := Global "CurrentCommand"}}
+  {{AssertType $c "Function"}}
+
+  {{if not (IsNil $.Statement)}}
+    {{if IsCopy $.Statement}}
+      {{/* Apply the fenced-copy read */}}
+      {{Macro "C++.Type" $.Statement.Dst}} copy__dst__ = copy({{Macro "C++.Read" $.Statement.Dst}}, {{Macro "C++.Read" $.Statement.Src}});
+    {{end}}
+  {{end}}
+
+  {{if not (GetAnnotation $c "synthetic")}}
+    {{if not (IsVoid $c.Return.Type)}}result = {{end}}mImports.{{Macro "CmdName" $c}}({{Macro "C++.CallArguments" $c}});
+  {{end}}
+
+  {{/* Perform the fenced statement */}}
+  {{if not (IsNil $.Statement)}}
+    {{if IsCopy $.Statement}}
+      write(copy__dst__);
+    {{else}}
+      {{Macro "C++.Statement" $.Statement}}
+    {{end}}
+  {{end}}
+{{end}}
