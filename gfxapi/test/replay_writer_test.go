@@ -68,7 +68,10 @@ func check(t *testing.T, a device.Architecture, d database.Database, l log.Logge
 					panic(err)
 				}
 			}()
-			replay.Replay(atom.ID(i), a, s, d, l, b)
+			id := atom.ID(i)
+			b.BeginAtom(id)
+			replay.Replay(id, a, s, d, l, b)
+			b.CommitAtom()
 		}()
 	}
 
